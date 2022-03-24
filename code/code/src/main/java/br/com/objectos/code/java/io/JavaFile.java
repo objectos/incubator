@@ -1,0 +1,129 @@
+/*
+ * Copyright (C) 2014-2022 Objectos Software LTDA.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package br.com.objectos.code.java.io;
+
+import br.com.objectos.code.annotations.Ignore;
+import br.com.objectos.code.java.declaration.PackageName;
+import br.com.objectos.code.java.declaration.TypeCode;
+import br.com.objectos.code.java.type.NamedClass;
+import br.com.objectos.core.io.Charsets;
+import br.com.objectos.core.io.Write;
+import br.com.objectos.core.list.MutableList;
+import br.com.objectos.core.object.Checks;
+import br.com.objectos.fs.Directory;
+import br.com.objectos.fs.RegularFile;
+import java.io.IOException;
+import java.io.Writer;
+import javax.annotation.processing.Filer;
+import javax.tools.JavaFileObject;
+
+public final class JavaFile {
+
+  private final PackageName packageName;
+  private final TypeCode typeCode;
+
+  public JavaFile(PackageName packageName, TypeCode typeCode) {
+    this.packageName = packageName;
+    this.typeCode = typeCode;
+  }
+
+  private JavaFile(Builder builder) {
+    packageName = builder.packageName;
+    typeCode = builder.types.getOnly();
+  }
+
+  @Ignore("AggregatorGenProcessor")
+  public static Builder builder() {
+    return new Builder();
+  }
+
+  public static JavaFile javaFile(PackageName packageName, TypeCode type) {
+    Checks.checkNotNull(packageName, "packageName == null");
+    Checks.checkNotNull(type, "type == null");
+    Builder b = builder();
+    b.setPackage(packageName);
+    b.addType(type);
+    return b.build();
+  }
+
+  public final NamedClass className() {
+    return typeCode.className(packageName);
+  }
+
+  /**
+   * Returns this file simple name. It is the file name without the .java
+   * extension.
+   *
+   * @return this file simple name
+   */
+  public final String simpleName() {
+    return typeCode.simpleName();
+  }
+
+  @Override
+  public final String toString() {
+    ImportSet importSet = ImportSet.forPackage(packageName);
+    CodeWriter writer = CodeWriter.forJavaFile(importSet);
+    typeCode.acceptCodeWriter(writer);
+    return writer.toJavaFile();
+  }
+
+  public final void writeTo(Directory directory) throws IOException {
+    NamedClass className = className();
+
+    RegularFile file = className.createSourceFile(directory);
+
+    file.truncate();
+
+    Write.string(file, Charsets.utf8(), toString());
+  }
+
+  public final void writeTo(Filer filer) throws IOException {
+    NamedClass className = className();
+    JavaFileObject object = filer.createSourceFile(className.toString());
+    Writer writer = object.openWriter();
+    try {
+      writer.write(toString());
+    } finally {
+      writer.close();
+    }
+  }
+
+  public static class Builder {
+
+    private PackageName packageName = PackageName.unnamed();
+
+    private final MutableList<TypeCode> types = MutableList.create();
+
+    private Builder() {}
+
+    public final Builder addType(TypeCode type) {
+      types.addWithNullMessage(type, "type == null");
+      return this;
+    }
+
+    public final JavaFile build() {
+      return new JavaFile(this);
+    }
+
+    public final Builder setPackage(PackageName packageName) {
+      this.packageName = Checks.checkNotNull(packageName, "packageName == null");
+      return this;
+    }
+
+  }
+
+}

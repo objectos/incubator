@@ -1,0 +1,227 @@
+/*
+ * Copyright (C) 2014-2022 Objectos Software LTDA.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/*
+. * Copyright (C) 2014-2020 Objectos Software LTDA.
+ *
+ * This file is part of the ObjectosCode project.
+ *
+ * ObjectosCode is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * ObjectosCode is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with ObjectosCode.  If not, see <https://www.gnu.org/licenses/>.
+ */
+package br.com.objectos.code.java.declaration;
+
+import br.com.objectos.code.annotations.Ignore;
+import br.com.objectos.code.java.io.JavaFile;
+import br.com.objectos.code.java.io.JavaFileCodeElement;
+import br.com.objectos.code.java.type.NamedClass;
+import br.com.objectos.code.java.type.NamedClassOrPackage;
+import br.com.objectos.code.model.element.ProcessingPackage;
+import br.com.objectos.core.object.Checks;
+import br.com.objectos.fs.Directory;
+import br.com.objectos.fs.ResolvedPath;
+import java.io.IOException;
+import javax.lang.model.SourceVersion;
+
+public class PackageName implements NamedClassOrPackage, JavaFileCodeElement {
+
+  private static final PackageName UNNAMED = new PackageName("");
+
+  private final String canonicalName;
+
+  private PackageName(String canonicalName) {
+    this.canonicalName = canonicalName;
+  }
+
+  public static PackageName _package(PackageName parent, String child) {
+    return parent.nestedPackage(child);
+  }
+
+  public static PackageName _package(String packageName) {
+    return named(packageName);
+  }
+
+  @Ignore("AggregatorGenProcessor")
+  public static PackageName named(String packageName) {
+    Checks.checkNotNull(packageName, "packageName == null");
+    Checks.checkArgument(
+        SourceVersion.isName(packageName),
+        packageName, " is not a valid package name"
+    );
+    return new PackageName(packageName);
+  }
+
+  @Ignore("AggregatorGenProcessor")
+  public static PackageName of(Class<?> type) {
+    Checks.checkNotNull(type, "type == null");
+    return of(type.getPackage());
+  }
+
+  @Ignore("AggregatorGenProcessor")
+  public static PackageName of(Package pkg) {
+    Checks.checkNotNull(pkg, "pkg == null");
+    return ofCanonicalName(pkg.getName());
+  }
+
+  @Ignore("AggregatorGenProcessor")
+  public static PackageName of(ProcessingPackage pkg) {
+    Checks.checkNotNull(pkg, "pkg == null");
+    return ofCanonicalName(pkg.getCanonicalName());
+  }
+
+  public static PackageName pn(PackageName parent, String child) {
+    return _package(parent, child);
+  }
+
+  public static PackageName pn(String packageName) {
+    return _package(packageName);
+  }
+
+  @Ignore("AggregatorGenProcessor")
+  public static PackageName unnamed() {
+    return UNNAMED;
+  }
+
+  private static PackageName ofCanonicalName(String name) {
+    if (name.equals("")) {
+      return UNNAMED;
+    }
+
+    return new PackageName(name);
+  }
+
+  @Override
+  public final void acceptJavaFileBuilder(JavaFile.Builder builder) {
+    builder.setPackage(this);
+  }
+
+  @Override
+  public final Directory createSourceDirectory(Directory directory) throws IOException {
+    Checks.checkNotNull(directory, "directory == null");
+
+    int length;
+    length = canonicalName.length();
+
+    Directory result;
+    result = directory;
+
+    StringBuilder partBuilder;
+    partBuilder = new StringBuilder(length);
+
+    for (int i = 0; i < length; i++) {
+      char c;
+      c = canonicalName.charAt(i);
+
+      if (c != '.') {
+        partBuilder.append(c);
+
+        continue;
+      }
+
+      result = createJavaPackageDirectory0(result, partBuilder);
+    }
+
+    if (partBuilder.length() > 0) {
+      result = createJavaPackageDirectory0(result, partBuilder);
+    }
+
+    return result;
+  }
+
+  @Override
+  public final boolean equals(Object obj) {
+    if (!(obj instanceof PackageName)) {
+      return false;
+    }
+    PackageName that = (PackageName) obj;
+    return canonicalName.equals(that.canonicalName);
+  }
+
+  public final String getCanonicalName() {
+    return canonicalName;
+  }
+
+  @Override
+  public final PackageName getPackage() {
+    return this;
+  }
+
+  public final String getSimpleName() {
+    int lastIndex = canonicalName.lastIndexOf('.');
+    return lastIndex < 0 ? canonicalName : canonicalName.substring(lastIndex + 1);
+  }
+
+  @Override
+  public final int hashCode() {
+    return canonicalName.hashCode();
+  }
+
+  public final boolean is(String name) {
+    return canonicalName.equals(name);
+  }
+
+  public final boolean isUnnamed() {
+    return is("");
+  }
+
+  @Override
+  public final NamedClass nestedClass(String simpleName) {
+    return NamedClass.of(this, simpleName);
+  }
+
+  public final PackageName nestedPackage(String child) {
+    Checks.checkNotNull(child, "child == null");
+    String newPackage = canonicalName + "." + child;
+    Checks.checkArgument(
+        SourceVersion.isName(newPackage),
+        newPackage, " is not a valid package name"
+    );
+    return new PackageName(newPackage);
+  }
+
+  @Override
+  public final String toString() {
+    return canonicalName;
+  }
+
+  private Directory createJavaPackageDirectory0(
+      Directory result, StringBuilder partBuilder) throws IOException {
+    String part;
+    part = partBuilder.toString();
+
+    partBuilder.setLength(0);
+
+    Checks.checkArgument(
+        SourceVersion.isIdentifier(part),
+        part, " is not a valid Java identifier"
+    );
+
+    ResolvedPath resolved;
+    resolved = result.resolve(part);
+
+    return resolved.toDirectoryCreateIfNotFound();
+  }
+
+}

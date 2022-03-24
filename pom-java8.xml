@@ -72,6 +72,7 @@
 	</developers>
 
 	<modules>
+		<module>code/pom-java8.xml</module>
 		<module>concurrent/pom-java8.xml</module>
 		<module>core/pom-java8.xml</module>
 		<module>fs/pom-java8.xml</module>

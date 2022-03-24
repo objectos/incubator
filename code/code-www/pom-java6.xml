@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<!--
+
+    Copyright (C) 2014-2020 Objectos Software LTDA.
+
+    This file is part of the ObjectosCode project.
+
+    ObjectosCode is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as
+    published by the Free Software Foundation, either version 3 of the
+    License, or (at your option) any later version.
+
+    ObjectosCode is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with ObjectosCode.  If not, see <https://www.gnu.org/licenses/>.
+
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>br.com.objectos.code</groupId>
+		<artifactId>code-parent</artifactId>
+		<version>0.30.0-SNAPSHOT</version>
+	</parent>
+
+	<groupId>br.com.objectos.code</groupId>
+	<artifactId>code-www</artifactId>
+	<name>ObjectosCode www</name>
+
+	<properties>
+		<java.version>1.8</java.version>
+
+		<objectos.be.version>0.1.0-SNAPSHOT</objectos.be.version>
+		<objectos.metainf.version>0.21.0-SNAPSHOT</objectos.metainf.version>
+	</properties>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>br.com.objectos.be</groupId>
+				<artifactId>be-maven-plugin</artifactId>
+				<version>${objectos.be.version}</version>
+			</plugin>
+		</plugins>
+	</build>
+
+	<dependencies>
+		<dependency>
+			<groupId>br.com.objectos.be</groupId>
+			<artifactId>be</artifactId>
+			<version>${objectos.be.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>br.com.objectos.be</groupId>
+			<artifactId>be-processor</artifactId>
+			<version>${objectos.be.version}</version>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>br.com.objectos.metainf</groupId>
+			<artifactId>metainf-annotations</artifactId>
+			<version>${objectos.metainf.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>br.com.objectos.metainf</groupId>
+			<artifactId>metainf-processor</artifactId>
+			<version>${objectos.metainf.version}</version>
+			<optional>true</optional>
+		</dependency>		
+	</dependencies>
+
+</project>
