@@ -1,0 +1,9 @@
+@java.lang.Override
+public void configure(br.com.objectos.http.server.Configuration configuration) {
+  runtime = configuration.runtime();
+  configuration
+      .route("/mirror/:filename")
+      .fixedPart("mirror")
+      .catchAllPart()
+      .onGet(this::___get___);
+}

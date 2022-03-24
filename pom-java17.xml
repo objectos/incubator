@@ -77,6 +77,7 @@
 		<module>core/pom-java17.xml</module>
 		<module>fs/pom-java17.xml</module>
 		<module>git/pom-java17.xml</module>
+		<module>http/pom-java17.xml</module>
 		<module>latest/pom-java17.xml</module>
 	</modules>
 

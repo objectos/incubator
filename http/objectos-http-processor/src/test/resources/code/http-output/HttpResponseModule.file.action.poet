@@ -1,0 +1,4 @@
+private br.com.objectos.http.server.Response ___file___(br.com.objectos.http.server.Request request) {
+  java.lang.String filename = request.getString(0);
+  return new br.com.objectos.http.server.FileResponse(file(filename));
+}

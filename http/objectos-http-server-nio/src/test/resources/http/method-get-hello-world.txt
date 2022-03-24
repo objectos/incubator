@@ -1,0 +1,5 @@
+GET /hello-world.txt HTTP/1.1
+User-Agent: Java/1.8.0_102
+Host: localhost:8080
+Accept: text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2
+Connection: keep-alive

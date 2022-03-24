@@ -1,0 +1,28 @@
+@javax.annotation.Generated("br.com.objectos.http.processor.ModuleProcessor")
+public final class HttpMirrorModule extends br.com.objectos.testing.way.MirrorModule implements br.com.objectos.http.server.HttpModule {
+  private br.com.objectos.http.server.HttpRuntime runtime;
+
+  HttpMirrorModule() {
+    super();
+  }
+
+  @java.lang.Override
+  public void configure(br.com.objectos.http.server.Configuration configuration) {
+    runtime = configuration.runtime();
+    configuration
+        .route("/mirror/:filename")
+        .fixedPart("mirror")
+        .catchAllPart()
+        .onGet(this::___get___);
+  }
+
+  @java.lang.Override
+  br.com.objectos.http.server.HttpRuntime runtime() {
+    return runtime;
+  }
+
+  private br.com.objectos.http.server.Response ___get___(br.com.objectos.http.server.Request request) {
+    java.lang.String filename = request.getString(0);
+    return get(filename);
+  }
+}

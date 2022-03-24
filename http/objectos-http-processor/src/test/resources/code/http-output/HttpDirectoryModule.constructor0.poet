@@ -1,0 +1,3 @@
+public Constructor(br.com.objectos.comuns.io.Directory directory) {
+  super(directory);
+}
