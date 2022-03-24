@@ -88,4 +88,8 @@
 		</developer>
 	</developers>
 
+	<modules>
+		<module>latest/pom-java17.xml</module>
+	</modules>
+
 </project>

@@ -1,0 +1,4 @@
+br.com.objectos.latest.processor.ConcreteClassProcessor
+br.com.objectos.latest.processor.ConcreteInterfaceProcessor
+br.com.objectos.latest.processor.SingletonProcessor
+br.com.objectos.latest.processor.TemplateProcessor
