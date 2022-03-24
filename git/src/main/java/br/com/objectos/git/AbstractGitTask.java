@@ -1,0 +1,155 @@
+/*
+ * Copyright (C) 2020-2022 Objectos Software LTDA.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package br.com.objectos.git;
+
+import br.com.objectos.core.object.Checks;
+import br.com.objectos.core.object.ToString;
+import br.com.objectos.core.object.ToStringObject;
+import br.com.objectos.logging.Event1;
+import br.com.objectos.logging.Logger;
+import java.util.concurrent.ExecutionException;
+
+abstract class AbstractGitTask<V> implements GitTask<V>, ResultConsumer, ToStringObject {
+
+  private static final byte _RESULT = 1;
+
+  private static final byte _SET_INPUT = 2;
+
+  private static final byte _STOP = 0;
+
+  private static final byte _TASK = 3;
+
+  private static final byte _WAIT_TASK_LOCK = 4;
+
+  GitCommand<?> command;
+
+  final GitEngine engine;
+
+  private Throwable error;
+
+  private Object result;
+
+  private byte state = _WAIT_TASK_LOCK;
+
+  private AbstractGitEngineTask task;
+
+  AbstractGitTask(GitEngine engine) {
+    this.engine = engine;
+  }
+
+  @Override
+  public final void consumeResult(Throwable error, Object result) {
+    this.error = error;
+
+    this.result = result;
+  }
+
+  @Override
+  public final void executeOne() {
+    state = execute();
+  }
+
+  @SuppressWarnings("unchecked")
+  @Override
+  public final V getResult() throws IllegalStateException, ExecutionException {
+    Checks.checkState(state == _STOP, "task is active");
+
+    if (error != null) {
+      throw new ExecutionException(error);
+    }
+
+    if (result != null) {
+      return (V) result;
+    }
+
+    throw new AssertionError("No result was produced");
+  }
+
+  @Override
+  public final boolean isActive() {
+    return state != _STOP;
+  }
+
+  @Override
+  public final String toString() {
+    return ToString.toString(this);
+  }
+
+  void executeFinally() {}
+
+  abstract AbstractGitEngineTask executeSetInputImpl();
+
+  final <V1> void log(Event1<V1> event, V1 v1) {
+    Logger logger;
+    logger = engine.getLogger();
+
+    logger.log(event, v1);
+  }
+
+  final void setCommand(GitCommand<?> origin) {
+    this.command = origin;
+  }
+
+  private byte execute() {
+    switch (state) {
+      case _RESULT:
+        return executeResult();
+      case _SET_INPUT:
+        return executeSetInput();
+      case _TASK:
+        return executeTask();
+      case _WAIT_TASK_LOCK:
+        return executeWaitTaskLock();
+      default:
+        throw new UnsupportedOperationException("Implement me: state=" + state);
+    }
+  }
+
+  private byte executeResult() {
+    task.acceptResultConsumer(this);
+
+    executeFinally();
+
+    engine.unlock(this);
+
+    return _STOP;
+  }
+
+  private byte executeSetInput() {
+    task = executeSetInputImpl();
+
+    return _TASK;
+  }
+
+  private byte executeTask() {
+    if (task.isActive()) {
+      task.executeOne();
+
+      return _TASK;
+    } else {
+      return _RESULT;
+    }
+  }
+
+  private byte executeWaitTaskLock() {
+    if (engine.tryLock(this)) {
+      return _SET_INPUT;
+    } else {
+      return _WAIT_TASK_LOCK;
+    }
+  }
+
+}

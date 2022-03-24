@@ -75,6 +75,7 @@
 		<module>concurrent/pom-java7.xml</module>
 		<module>core/pom-java7.xml</module>
 		<module>fs/pom-java7.xml</module>
+		<module>git/pom-java7.xml</module>
 		<module>latest/pom-java7.xml</module>
 	</modules>
 
