@@ -80,6 +80,7 @@
 		<module>html/pom-java17.xml</module>
 		<module>http/pom-java17.xml</module>
 		<module>latest/pom-java17.xml</module>
+		<module>mojo/pom-java17.xml</module>
 	</modules>
 
 </project>

@@ -1,0 +1,12 @@
+<factorypath>
+    <factorypathentry kind="VARJAR" id="M2_REPO/br/com/objectos/objectos-code/4.0.0-SNAPSHOT/objectos-code-4.0.0-SNAPSHOT.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/br/com/objectos/objectos-code-annotations/4.0.0-SNAPSHOT/objectos-code-annotations-4.0.0-SNAPSHOT.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/br/com/objectos/objectos-code-boot/4.0.0-SNAPSHOT/objectos-code-boot-4.0.0-SNAPSHOT.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/br/com/objectos/objectos-collections-base/4.0.0-SNAPSHOT/objectos-collections-base-4.0.0-SNAPSHOT.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/br/com/objectos/objectos-collections-list/4.0.0-SNAPSHOT/objectos-collections-list-4.0.0-SNAPSHOT.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/br/com/objectos/objectos-collections-map/4.0.0-SNAPSHOT/objectos-collections-map-4.0.0-SNAPSHOT.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/br/com/objectos/objectos-collections-set/4.0.0-SNAPSHOT/objectos-collections-set-4.0.0-SNAPSHOT.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/br/com/objectos/objectos-core-array/4.0.0-SNAPSHOT/objectos-core-array-4.0.0-SNAPSHOT.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/br/com/objectos/objectos-core-io/4.0.0-SNAPSHOT/objectos-core-io-4.0.0-SNAPSHOT.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/br/com/objectos/objectos-core-object/4.0.0-SNAPSHOT/objectos-core-object-4.0.0-SNAPSHOT.jar" enabled="true" runInBatchMode="false"/>
+</factorypath>
