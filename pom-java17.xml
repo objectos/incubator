@@ -72,6 +72,7 @@
 	</developers>
 
 	<modules>
+		<module>concurrent/pom-java17.xml</module>
 		<module>core/pom-java17.xml</module>
 		<module>fs/pom-java17.xml</module>
 		<module>latest/pom-java17.xml</module>
