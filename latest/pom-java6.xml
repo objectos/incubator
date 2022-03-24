@@ -23,36 +23,19 @@
 	<parent>
 		<groupId>br.com.objectos</groupId>
 		<artifactId>incubator</artifactId>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 		<version>0.1.0-jdk6-SNAPSHOT</version>
-
-		<relativePath />
+		<relativePath>../pom-java6.xml</relativePath>
 	</parent>
 
 	<artifactId>latest</artifactId>
-	
+
 	<name>${project.groupId}:${project.artifactId}</name>
 
 	<description>
 	A set of Java annotation processors that generates code and helps the creation of 
 	Java-release-specific JARs.
 	</description>
-	
+
 	<inceptionYear>2020</inceptionYear>
 
 	<build>

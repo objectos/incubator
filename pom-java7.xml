@@ -23,24 +23,7 @@
 	<parent>
 		<groupId>br.com.objectos</groupId>
 		<artifactId>objectos</artifactId>
-
-
-
-
-
-
-
-
-
-
-
-
-
 		<version>0.1.0-jdk7-SNAPSHOT</version>
-
-
-
-
 		<relativePath>../br.com.objectos.objectos/pom-java7.xml</relativePath>
 	</parent>
 
@@ -89,6 +72,7 @@
 	</developers>
 
 	<modules>
+		<module>core/pom-java7.xml</module>
 		<module>latest/pom-java7.xml</module>
 	</modules>
 
