@@ -77,6 +77,7 @@
 		<module>core/pom-java6.xml</module>
 		<module>fs/pom-java6.xml</module>
 		<module>git/pom-java6.xml</module>
+		<module>html/pom-java6.xml</module>
 		<module>http/pom-java6.xml</module>
 		<module>latest/pom-java6.xml</module>
 	</modules>
