@@ -73,6 +73,7 @@
 
 	<modules>
 		<module>core/pom-java11.xml</module>
+		<module>fs/pom-java11.xml</module>
 		<module>latest/pom-java11.xml</module>
 	</modules>
 
