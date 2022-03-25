@@ -1,0 +1,15 @@
+Return-Path: <tc00-sender@example.com>
+X-Original-To: foo@localhost
+Delivered-To: foo@localhost
+Received: from 127.0.0.1 (localhost [127.0.0.1])
+        by localhost (Postfix) with ESMTP id B111620B6C
+        for <foo@localhost>; Tue, 13 Oct 2020 09:03:18 -0300 (-03)
+Subject: Test case 00
+Message-Id: <20201013120327.B111620B6C@localhost>
+Date: Tue, 13 Oct 2020 09:03:18 -0300 (-03)
+From: tc00-sender@example.com
+
+1) no SSL / no TLS
+2) single recipient (TO:)
+3) text only
+4) ?

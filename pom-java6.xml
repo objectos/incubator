@@ -84,6 +84,7 @@
 		<module>mojo/pom-java6.xml</module>
 		<module>mysql/pom-java6.xml</module>
 		<module>office/pom-java6.xml</module>
+		<module>smtp/pom-java6.xml</module>
 		<module>ssg/pom-java6.xml</module>
 	</modules>
 

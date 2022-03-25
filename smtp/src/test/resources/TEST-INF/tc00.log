@@ -1,0 +1,37 @@
+Connected to localhost
+220 localhost ESMTP Postfix
+ehlo 127.0.0.1
+250-localhost
+250-PIPELINING
+250-SIZE 10240000
+250-VRFY
+250-ETRN
+250-ENHANCEDSTATUSCODES
+250-8BITMIME
+250-DSN
+250-SMTPUTF8
+250 CHUNKING
+MAIL FROM:<tc00-sender@example.com>
+250 2.1.0 Ok
+RCPT TO:<foo@localhost>
+250 2.1.5 Ok
+DATA
+354 End data with <CR><LF>.<CR><LF>
+Date: Wed, 21 Oct 2020 02:36:23 -0300 (BRT)
+From: tc00-sender@example.com
+To: tc00-receiver@example.com
+Message-ID: <1176164144.0.1603258583357@localhost>
+Subject: Test case 00
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
+
+1) no SSL / no TLS
+2) single recipient (TO:)
+3) text only
+4) ?
+.
+250 2.0.0 Ok: queued as B111620B6C
+QUIT 
+221 2.0.0 Bye
+Connection closed by foreign host
