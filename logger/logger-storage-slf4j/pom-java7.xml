@@ -94,7 +94,6 @@
 		<dependency>
 			<groupId>br.com.objectos</groupId>
 			<artifactId>logger-storage</artifactId>
-			<version>${project.version}</version>
 		</dependency>
 
 		<dependency>
