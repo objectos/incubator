@@ -82,6 +82,7 @@
 		<module>http/pom-java7.xml</module>
 		<module>latest/pom-java7.xml</module>
 		<module>mojo/pom-java7.xml</module>
+		<module>ssg/pom-java7.xml</module>
 	</modules>
 
 </project>
