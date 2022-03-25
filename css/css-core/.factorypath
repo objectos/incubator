@@ -1,0 +1,6 @@
+<factorypath>
+	<factorypathentry kind="VARJAR" id="M2_REPO/br/com/objectos/objectos-css-boot/4.0.0-SNAPSHOT/objectos-css-boot-4.0.0-SNAPSHOT.jar" enabled="true" runInBatchMode="false"/>
+
+    <factorypathentry kind="VARJAR" id="M2_REPO/br/com/objectos/objectos-code/4.0.0-SNAPSHOT/objectos-code-4.0.0-SNAPSHOT.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/br/com/objectos/objectos-code-annotations/4.0.0-SNAPSHOT/objectos-code-annotations-4.0.0-SNAPSHOT.jar" enabled="true" runInBatchMode="false"/>
+</factorypath>
