@@ -81,6 +81,7 @@
 		<module>html/pom-java6.xml</module>
 		<module>http/pom-java6.xml</module>
 		<module>latest/pom-java6.xml</module>
+		<module>logger/pom-java6.xml</module>
 		<module>mojo/pom-java6.xml</module>
 		<module>mysql/pom-java6.xml</module>
 		<module>office/pom-java6.xml</module>
