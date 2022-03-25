@@ -83,6 +83,7 @@
 		<module>latest/pom-java8.xml</module>
 		<module>mojo/pom-java8.xml</module>
 		<module>mysql/pom-java8.xml</module>
+		<module>office/pom-java8.xml</module>
 		<module>ssg/pom-java8.xml</module>
 	</modules>
 
