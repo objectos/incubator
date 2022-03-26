@@ -20,6 +20,8 @@ import br.com.objectos.be.site.AbstractSite;
 public class DocsSite extends AbstractSite {
 
   @Override
-  protected final void configure() {}
+  protected final void configure() {
+    addDirectory("docs", new Tester());
+  }
 
 }
