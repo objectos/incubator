@@ -39,16 +39,19 @@ public abstract class SiteDirectory {
   protected SiteDirectory() {}
 
   public final StringBuilder hrefBuilder() {
+    StringBuilder href;
+
     if (parent != null) {
-      StringBuilder href;
       href = parent.hrefBuilder();
-
-      acceptHrefBuilder(href, name);
-
-      return href;
     } else {
-      return dsl.hrefBuilder();
+      href = dsl.hrefBuilder();
     }
+
+    if (name != null) {
+      acceptHrefBuilder(href, name);
+    }
+
+    return href;
   }
 
   protected void acceptHrefBuilder(StringBuilder href, String name) {
@@ -191,6 +194,12 @@ public abstract class SiteDirectory {
     this.name = name;
   }
 
+  final void setParent(SiteDirectory parent) {
+    Checks.checkState(this.parent == null, "parent was already set");
+
+    this.parent = Checks.checkNotNull(parent, "parent == null");
+  }
+
   private String safeHref(String fileName) {
     // TODO do not allow: absolute, subdir, path navigation
 
@@ -200,12 +209,6 @@ public abstract class SiteDirectory {
     builder.append(fileName);
 
     return builder.toString();
-  }
-
-  private void setParent(SiteDirectory parent) {
-    Checks.checkState(this.parent == null, "parent was already set");
-
-    this.parent = Checks.checkNotNull(parent, "parent == null");
   }
 
 }
