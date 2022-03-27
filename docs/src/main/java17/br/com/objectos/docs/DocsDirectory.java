@@ -15,13 +15,15 @@
  */
 package br.com.objectos.docs;
 
-import br.com.objectos.be.site.AbstractSite;
+import br.com.objectos.be.site.SiteDirectory;
 
-public class DocsSite extends AbstractSite {
+public final class DocsDirectory extends SiteDirectory {
 
   @Override
   protected final void configure() {
-    addDirectory("docs", new DocsDirectory());
+    putInstance(new TopNavbar());
+
+    addPage("index.html", new Index());
   }
 
 }
