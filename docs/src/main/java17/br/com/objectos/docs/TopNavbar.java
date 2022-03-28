@@ -17,15 +17,20 @@ package br.com.objectos.docs;
 
 import br.com.objectos.be.site.SiteFragment;
 import br.com.objectos.css.Css;
+import br.com.objectos.css.select.ClassSelector;
 import br.com.objectos.css.select.IdSelector;
 import br.com.objectos.css.sheet.AbstractStyleSheet;
 import br.com.objectos.css.sheet.StyleSheet;
 
 final class TopNavbar extends SiteFragment {
 
-  private static final IdSelector _BACKGROUND = Css.randomHash(3);
+  private static final ClassSelector _CURRENT = Css.randomDot(3);
 
   private static final IdSelector _HEADER = Css.randomHash(3);
+
+  private static final IdSelector _HEADER1 = Css.randomHash(3);
+
+  private static final IdSelector _HEADER2 = Css.randomHash(3);
 
   private static final IdSelector _MENU_BTN = Css.randomHash(3);
 
@@ -35,20 +40,31 @@ final class TopNavbar extends SiteFragment {
     @Override
     protected final void definition() {
       style(
-        _BACKGROUND,
+        _CURRENT,
 
-        backgroundColor(Colors.GRAY0),
-        borderBottom(Spacing.PX, solid, Colors.GRAY2),
-        height(Spacing.V16)
+        color(Colors.INDIGO5)
       );
 
       style(
-        _HEADER,
+        _HEADER1,
 
         alignItems(center),
+        backgroundColor(Colors.GRAY0),
+        borderBottom(Spacing.PX, solid, Colors.GRAY2),
         display(flex),
-        height(pct(100)),
-        padding(Spacing.V0, Spacing.V04)
+        height(Spacing.V16),
+        padding(Spacing.V0, Spacing.V06)
+      );
+
+      style(
+        _HEADER2,
+
+        backgroundColor(white),
+        bottom(zero()),
+        padding(Spacing.V06),
+        position(absolute),
+        top(Spacing.V16),
+        width(pct(100))
       );
 
       style(
@@ -63,7 +79,7 @@ final class TopNavbar extends SiteFragment {
 
         display(inlineBlock),
         height(Spacing.V04),
-        margin(zero(), Spacing.V02),
+        marginRight(Spacing.V02),
         width(Spacing.V04)
       );
     }
@@ -77,11 +93,11 @@ final class TopNavbar extends SiteFragment {
 
   @Override
   protected final void definition() {
-    div(
-      _BACKGROUND,
+    header(
+      _HEADER,
 
-      header(
-        _HEADER,
+      div(
+        _HEADER1,
 
         button(
           _MENU_BTN,
@@ -98,6 +114,20 @@ final class TopNavbar extends SiteFragment {
           ),
 
           span(title)
+        )
+      ),
+
+      div(
+        _HEADER2,
+
+        nav(
+          a(
+            _CURRENT,
+
+            href(Index.class),
+
+            div("Home")
+          )
         )
       )
     );
