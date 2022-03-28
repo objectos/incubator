@@ -103,42 +103,35 @@ final class TopNavbar extends SiteFragment {
   final String js
       = """
         /* TopNavbar.java */
+        function onClick(id, listener) {
+          const el = document.getElementById(id);
+
+          el.addEventListener("click", listener);
+        }
+
+        function setStyle(id, propName, value) {
+          const el = document.getElementById(id);
+
+          el.style[propName] = value;
+        }
+
         function menuCloseClicked(event) {
-          event.preventDefault();
-
-          const body = document.getElementById("{body}");
-          const menuClose = document.getElementById("{menuClose}");
-          const menuOpen = document.getElementById("{menuOpen}");
-          const header2 = document.getElementById("{header2}");
-
-          body.style.overflowY = "auto";
-          menuClose.style.display = "none";
-          menuOpen.style.display = "flex";
-          header2.style.display = "none";
+          setStyle("{body}", "overflowY", "auto");
+          setStyle("{menuClose}", "display", "none");
+          setStyle("{menuOpen}", "display", "flex");
+          setStyle("{header2}", "display", "none");
         }
 
         function menuOpenClicked(event) {
-          event.preventDefault();
-
-          const body = document.getElementById("{body}");
-          const menuClose = document.getElementById("{menuClose}");
-          const menuOpen = document.getElementById("{menuOpen}");
-          const header2 = document.getElementById("{header2}");
-
-          body.style.overflowY = "hidden";
-          menuClose.style.display = "flex";
-          menuOpen.style.display = "none";
-          header2.style.display = "block";
+          setStyle("{body}", "overflowY", "hidden");
+          setStyle("{menuClose}", "display", "flex");
+          setStyle("{menuOpen}", "display", "none");
+          setStyle("{header2}", "display", "block");
         }
 
         function domLoaded() {
-          const menuClose = document.getElementById("{menuClose}");
-
-          menuClose.addEventListener("click", menuCloseClicked);
-
-          const menuOpen = document.getElementById("{menuOpen}");
-
-          menuOpen.addEventListener("click", menuOpenClicked);
+          onClick("{menuClose}", menuCloseClicked);
+          onClick("{menuOpen}", menuOpenClicked);
         }
 
         window.addEventListener('DOMContentLoaded', domLoaded);
