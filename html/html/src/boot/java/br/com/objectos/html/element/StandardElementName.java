@@ -109,6 +109,8 @@ public enum StandardElementName implements ElementName {
 
   SAMP(ElementKind.NORMAL, "samp"),
 
+  SCRIPT(ElementKind.NORMAL, "script"),
+
   SECTION(ElementKind.NORMAL, "section"),
 
   SELECT(ElementKind.NORMAL, "select"),

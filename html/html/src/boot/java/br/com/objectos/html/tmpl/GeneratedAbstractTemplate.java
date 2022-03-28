@@ -6,6 +6,7 @@ import br.com.objectos.html.attribute.StandardAttributeName.Accesskey;
 import br.com.objectos.html.attribute.StandardAttributeName.Action;
 import br.com.objectos.html.attribute.StandardAttributeName.AlignmentBaseline;
 import br.com.objectos.html.attribute.StandardAttributeName.Alt;
+import br.com.objectos.html.attribute.StandardAttributeName.Async;
 import br.com.objectos.html.attribute.StandardAttributeName.Autocomplete;
 import br.com.objectos.html.attribute.StandardAttributeName.Autofocus;
 import br.com.objectos.html.attribute.StandardAttributeName.BaselineShift;
@@ -22,6 +23,7 @@ import br.com.objectos.html.attribute.StandardAttributeName.Contenteditable;
 import br.com.objectos.html.attribute.StandardAttributeName.Crossorigin;
 import br.com.objectos.html.attribute.StandardAttributeName.Cursor;
 import br.com.objectos.html.attribute.StandardAttributeName.D;
+import br.com.objectos.html.attribute.StandardAttributeName.Defer;
 import br.com.objectos.html.attribute.StandardAttributeName.Dir;
 import br.com.objectos.html.attribute.StandardAttributeName.Direction;
 import br.com.objectos.html.attribute.StandardAttributeName.Dirname;
@@ -53,6 +55,7 @@ import br.com.objectos.html.attribute.StandardAttributeName.Href;
 import br.com.objectos.html.attribute.StandardAttributeName.HttpEquiv;
 import br.com.objectos.html.attribute.StandardAttributeName.Id;
 import br.com.objectos.html.attribute.StandardAttributeName.ImageRendering;
+import br.com.objectos.html.attribute.StandardAttributeName.Integrity;
 import br.com.objectos.html.attribute.StandardAttributeName.Lang;
 import br.com.objectos.html.attribute.StandardAttributeName.LetterSpacing;
 import br.com.objectos.html.attribute.StandardAttributeName.LightingColor;
@@ -67,6 +70,7 @@ import br.com.objectos.html.attribute.StandardAttributeName.Method;
 import br.com.objectos.html.attribute.StandardAttributeName.Minlength;
 import br.com.objectos.html.attribute.StandardAttributeName.Multiple;
 import br.com.objectos.html.attribute.StandardAttributeName.Name;
+import br.com.objectos.html.attribute.StandardAttributeName.Nomodule;
 import br.com.objectos.html.attribute.StandardAttributeName.Onafterprint;
 import br.com.objectos.html.attribute.StandardAttributeName.Onbeforeprint;
 import br.com.objectos.html.attribute.StandardAttributeName.Onbeforeunload;
@@ -188,6 +192,7 @@ import br.com.objectos.html.spi.type.PathValue;
 import br.com.objectos.html.spi.type.PreValue;
 import br.com.objectos.html.spi.type.ProgressValue;
 import br.com.objectos.html.spi.type.SampValue;
+import br.com.objectos.html.spi.type.ScriptValue;
 import br.com.objectos.html.spi.type.SectionValue;
 import br.com.objectos.html.spi.type.SelectValue;
 import br.com.objectos.html.spi.type.SmallValue;
@@ -584,6 +589,14 @@ abstract class GeneratedAbstractTemplate {
     return addStandardElement(StandardElementName.SAMP, text);
   }
 
+  public final ElementName script(ScriptValue... values) {
+    return addStandardElement(StandardElementName.SCRIPT, values);
+  }
+
+  public final ElementName script(String text) {
+    return addStandardElement(StandardElementName.SCRIPT, text);
+  }
+
   public final ElementName section(SectionValue... values) {
     return addStandardElement(StandardElementName.SECTION, values);
   }
@@ -756,6 +769,10 @@ abstract class GeneratedAbstractTemplate {
     return addStandardAttribute(StandardAttributeName.ALT, value);
   }
 
+  public final Async async() {
+    return addStandardAttribute(StandardAttributeName.ASYNC);
+  }
+
   public final Autocomplete autocomplete(String value) {
     return addStandardAttribute(StandardAttributeName.AUTOCOMPLETE, value);
   }
@@ -818,6 +835,10 @@ abstract class GeneratedAbstractTemplate {
 
   public final D d(String value) {
     return addStandardAttribute(StandardAttributeName.D, value);
+  }
+
+  public final Defer defer() {
+    return addStandardAttribute(StandardAttributeName.DEFER);
   }
 
   public final Dir dir(String value) {
@@ -948,6 +969,10 @@ abstract class GeneratedAbstractTemplate {
     return addStandardAttribute(StandardAttributeName.IMAGERENDERING, value);
   }
 
+  public final Integrity integrity(String value) {
+    return addStandardAttribute(StandardAttributeName.INTEGRITY, value);
+  }
+
   public final Lang lang(String value) {
     return addStandardAttribute(StandardAttributeName.LANG, value);
   }
@@ -1002,6 +1027,10 @@ abstract class GeneratedAbstractTemplate {
 
   public final Name name(String value) {
     return addStandardAttribute(StandardAttributeName.NAME, value);
+  }
+
+  public final Nomodule nomodule() {
+    return addStandardAttribute(StandardAttributeName.NOMODULE);
   }
 
   public final Onafterprint onafterprint(String value) {
