@@ -32,7 +32,9 @@ final class TopNavbar extends SiteFragment {
 
   private static final IdSelector _HEADER2 = Css.randomHash(3);
 
-  private static final IdSelector _MENU_BTN = Css.randomHash(3);
+  private static final IdSelector _MENU_CLOSE = Css.randomHash(3);
+
+  private static final IdSelector _MENU_OPEN = Css.randomHash(3);
 
   private static final IdSelector _MENU_SVG = Css.randomHash(3);
 
@@ -61,6 +63,7 @@ final class TopNavbar extends SiteFragment {
 
         backgroundColor(white),
         bottom(zero()),
+        display(none),
         padding(Spacing.V06),
         position(absolute),
         top(Spacing.V16),
@@ -68,10 +71,22 @@ final class TopNavbar extends SiteFragment {
       );
 
       style(
-        _MENU_BTN,
+        _MENU_CLOSE,
+
+        display(none)
+      );
+
+      style(
+        _MENU_OPEN,
+
+        display(flex)
+      );
+
+      style(
+        _MENU_CLOSE, or(), _MENU_OPEN,
 
         alignItems(center),
-        display(flex)
+        outline(none)
       );
 
       style(
@@ -84,6 +99,55 @@ final class TopNavbar extends SiteFragment {
       );
     }
   };
+
+  final String js
+      = """
+        /* TopNavbar.java */
+        function menuCloseClicked(event) {
+          event.preventDefault();
+
+          const body = document.getElementById("{body}");
+          const menuClose = document.getElementById("{menuClose}");
+          const menuOpen = document.getElementById("{menuOpen}");
+          const header2 = document.getElementById("{header2}");
+
+          body.style.overflowY = "auto";
+          menuClose.style.display = "none";
+          menuOpen.style.display = "flex";
+          header2.style.display = "none";
+        }
+
+        function menuOpenClicked(event) {
+          event.preventDefault();
+
+          const body = document.getElementById("{body}");
+          const menuClose = document.getElementById("{menuClose}");
+          const menuOpen = document.getElementById("{menuOpen}");
+          const header2 = document.getElementById("{header2}");
+
+          body.style.overflowY = "hidden";
+          menuClose.style.display = "flex";
+          menuOpen.style.display = "none";
+          header2.style.display = "block";
+        }
+
+        function domLoaded() {
+          const menuClose = document.getElementById("{menuClose}");
+
+          menuClose.addEventListener("click", menuCloseClicked);
+
+          const menuOpen = document.getElementById("{menuOpen}");
+
+          menuOpen.addEventListener("click", menuOpenClicked);
+        }
+
+        window.addEventListener('DOMContentLoaded', domLoaded);
+        """
+        .replace("\n", "")
+        .replace("{body}", Index._BODY.id())
+        .replace("{header2}", _HEADER2.id())
+        .replace("{menuClose}", _MENU_CLOSE.id())
+        .replace("{menuOpen}", _MENU_OPEN.id());
 
   private String title;
 
@@ -100,7 +164,28 @@ final class TopNavbar extends SiteFragment {
         _HEADER1,
 
         button(
-          _MENU_BTN,
+          _MENU_CLOSE,
+
+          type("button"),
+
+          svg(
+            _MENU_SVG,
+
+            xmlns("http://www.w3.org/2000/svg"), viewBox("0 0 20 20"), fill("currentColor"),
+            path(
+              fillRule("evenodd"),
+              d("M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"),
+              clipRule("evenodd")
+            )
+          ),
+
+          span(title)
+        ),
+
+        button(
+          _MENU_OPEN,
+
+          type("button"),
 
           svg(
             _MENU_SVG,

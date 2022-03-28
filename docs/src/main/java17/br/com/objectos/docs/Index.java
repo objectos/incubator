@@ -16,12 +16,16 @@
 package br.com.objectos.docs;
 
 import br.com.objectos.be.site.SitePage;
+import br.com.objectos.css.Css;
 import br.com.objectos.css.framework.reset.Reset;
+import br.com.objectos.css.select.IdSelector;
 import br.com.objectos.css.sheet.AbstractStyleSheet;
 import br.com.objectos.css.sheet.StyleSheet;
 import br.com.objectos.http.media.ImageType;
 
 final class Index extends SitePage {
+
+  static final IdSelector _BODY = Css.randomHash(3);
 
   private TopNavbar topNavbar;
 
@@ -72,6 +76,8 @@ final class Index extends SitePage {
         f(this::head0)
       ),
       body(
+        _BODY,
+
         f(topNavbar),
 
         f(this::bd)
@@ -84,6 +90,8 @@ final class Index extends SitePage {
     meta(httpEquiv("x-ua-compatible"), content("ie=edge"));
     meta(name("viewport"), content("width=device-width, initial-scale=1, shrink-to-fit=no"));
     link(rel("shortcut icon"), type(ImageType.ICON.qualifiedName()), href("/favicon.ico"));
+
+    script(raw(topNavbar.js));
 
     StyleSheet styleSheet;
     styleSheet = styleSheet();
@@ -105,8 +113,7 @@ final class Index extends SitePage {
         style(
           body,
 
-          height(pct(100)),
-          overflowY(hidden)
+          height(pct(100))
         );
 
         style(
