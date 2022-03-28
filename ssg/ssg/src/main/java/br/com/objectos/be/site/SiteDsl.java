@@ -17,6 +17,7 @@ package br.com.objectos.be.site;
 
 import br.com.objectos.be.resource.BaseUrl;
 import br.com.objectos.core.io.InputStreamSource;
+import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.css.sheet.StyleSheet;
 import br.com.objectos.html.tmpl.Template;
 import br.com.objectos.http.media.MediaType;
@@ -40,6 +41,10 @@ public interface SiteDsl {
   BaseUrl getBaseUrl();
 
   DirectoryDsl getDirectoryDsl(BaseUrl baseUrl);
+
+  <T> T getInstance(Class<? extends T> key);
+
+  <T> ImmutableList<T> getInstancesByType(Class<? extends T> type);
 
   void install();
 

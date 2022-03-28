@@ -44,7 +44,12 @@ public class ProductionStageTest extends AbstractSiteProdTest {
         "<link rel=\"stylesheet\" href=\"/css/styles.css\">",
         "</head>",
         "<body>",
-        "<nav><header><a href=\"/index.html\"><h1>objectos</h1></a></header></nav>",
+        "<nav>",
+        "<ul>",
+        "<li><a href=\"/index.html\">Home</a></li>",
+        "<li><a href=\"/blog/index.html\">Blog</a></li>",
+        "</ul>",
+        "</nav>",
         "<ul><li><a href=\"/index.html\"></a></li></ul>",
         "</body>",
         "</html>"

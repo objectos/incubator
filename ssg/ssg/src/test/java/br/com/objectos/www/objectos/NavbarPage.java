@@ -15,32 +15,10 @@
  */
 package br.com.objectos.www.objectos;
 
-import br.com.objectos.be.site.SitePage;
-import br.com.objectos.www.objectos.css.CssDirectory;
+import br.com.objectos.be.site.HasHref;
 
-final class Index extends SitePage implements NavbarPage {
+public interface NavbarPage extends HasHref {
 
-  @Override
-  public final String navbarTitle() {
-    return "Home";
-  }
-
-  @Override
-  protected final void definition() {
-    Navbar navbar;
-    navbar = getInstance(Navbar.class);
-
-    html(
-      head(
-        link(CssDirectory.STYLES)
-      ),
-      body(
-        f(navbar),
-        ul(
-          li(a(href(Index.class)))
-        )
-      )
-    );
-  }
+  String navbarTitle();
 
 }

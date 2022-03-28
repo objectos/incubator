@@ -16,12 +16,25 @@
 package br.com.objectos.www.objectos;
 
 import br.com.objectos.be.site.AbstractSite;
+import br.com.objectos.core.list.ImmutableList;
 
 public final class ObjectosSite extends AbstractSite {
 
   @Override
   protected final void configure() {
     addDirectory(new RootDirectory());
+
+    configureNavbar();
+  }
+
+  private void configureNavbar() {
+    ImmutableList<NavbarPage> pages;
+    pages = getInstancesByType(NavbarPage.class);
+
+    Navbar navbar;
+    navbar = getInstance(Navbar.class);
+
+    navbar.setPages(pages);
   }
 
 }

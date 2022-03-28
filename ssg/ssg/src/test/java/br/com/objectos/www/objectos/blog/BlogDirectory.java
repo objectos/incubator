@@ -13,34 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package br.com.objectos.www.objectos;
+package br.com.objectos.www.objectos.blog;
 
-import br.com.objectos.be.site.SitePage;
-import br.com.objectos.www.objectos.css.CssDirectory;
+import br.com.objectos.be.site.SiteDirectory;
 
-final class Index extends SitePage implements NavbarPage {
-
-  @Override
-  public final String navbarTitle() {
-    return "Home";
-  }
+public class BlogDirectory extends SiteDirectory {
 
   @Override
-  protected final void definition() {
-    Navbar navbar;
-    navbar = getInstance(Navbar.class);
-
-    html(
-      head(
-        link(CssDirectory.STYLES)
-      ),
-      body(
-        f(navbar),
-        ul(
-          li(a(href(Index.class)))
-        )
-      )
-    );
+  protected final void configure() {
+    addPage("index.html", new BlogHome());
   }
 
 }

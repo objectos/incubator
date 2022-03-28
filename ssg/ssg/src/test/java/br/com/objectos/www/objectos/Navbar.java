@@ -16,16 +16,41 @@
 package br.com.objectos.www.objectos;
 
 import br.com.objectos.be.site.SiteFragment;
+import br.com.objectos.core.list.ImmutableList;
+import br.com.objectos.core.object.Checks;
+import br.com.objectos.html.spi.type.UlValue;
 
 public class Navbar extends SiteFragment {
+
+  private ImmutableList<NavbarPage> pages;
 
   @Override
   protected final void definition() {
     nav(
-      header(
-        a(href(Index.class), h1("objectos"))
+      ul(
+        items()
       )
     );
+  }
+
+  final void setPages(ImmutableList<NavbarPage> pages) {
+    this.pages = Checks.checkNotNull(pages, "pages == null");
+  }
+
+  private UlValue[] items() {
+    UlValue[] lis;
+    lis = new UlValue[pages.size()];
+
+    for (int i = 0; i < lis.length; i++) {
+      NavbarPage page;
+      page = pages.get(i);
+
+      lis[i] = li(
+        a(href(page), t(page.navbarTitle()))
+      );
+    }
+
+    return lis;
   }
 
 }

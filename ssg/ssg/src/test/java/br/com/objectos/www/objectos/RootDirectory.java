@@ -16,6 +16,7 @@
 package br.com.objectos.www.objectos;
 
 import br.com.objectos.be.site.SiteDirectory;
+import br.com.objectos.www.objectos.blog.BlogDirectory;
 import br.com.objectos.www.objectos.css.CssDirectory;
 
 public final class RootDirectory extends SiteDirectory {
@@ -28,6 +29,7 @@ public final class RootDirectory extends SiteDirectory {
 
     addPage("index.html", new Index());
 
+    addDirectory("blog", new BlogDirectory());
     addDirectory("css", new CssDirectory());
 
     putInstance(new Navbar());

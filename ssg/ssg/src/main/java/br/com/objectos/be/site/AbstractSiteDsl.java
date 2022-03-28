@@ -59,23 +59,7 @@ public abstract class AbstractSiteDsl implements SiteDsl {
   }
 
   @Override
-  public final void install() {
-    for (SiteDirectory directory : directories) {
-      directory.render(this);
-    }
-  }
-
-  @Override
-  public boolean isDevelopment() {
-    return false;
-  }
-
-  @Override
-  public boolean isProduction() {
-    return false;
-  }
-
-  final <T> T getInstance(Class<? extends T> key) {
+  public final <T> T getInstance(Class<? extends T> key) {
     if (objectMap.containsKey(key)) {
       Object instance;
       instance = objectMap.get(key);
@@ -89,8 +73,9 @@ public abstract class AbstractSiteDsl implements SiteDsl {
     }
   }
 
+  @Override
   @SuppressWarnings("unchecked")
-  final <T> ImmutableList<T> getInstancesByType(Class<? extends T> type) {
+  public final <T> ImmutableList<T> getInstancesByType(Class<? extends T> type) {
     ImmutableList<?> result;
     result = byTypeMap.get(type);
 
@@ -110,6 +95,23 @@ public abstract class AbstractSiteDsl implements SiteDsl {
     }
 
     return (ImmutableList<T>) result;
+  }
+
+  @Override
+  public final void install() {
+    for (SiteDirectory directory : directories) {
+      directory.render(this);
+    }
+  }
+
+  @Override
+  public boolean isDevelopment() {
+    return false;
+  }
+
+  @Override
+  public boolean isProduction() {
+    return false;
   }
 
   final StringBuilder hrefBuilder() {

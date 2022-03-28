@@ -16,6 +16,7 @@
 package br.com.objectos.be.site;
 
 import br.com.objectos.be.resource.BaseUrl;
+import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.core.object.Checks;
 
 public abstract class AbstractSite implements Site {
@@ -57,6 +58,14 @@ public abstract class AbstractSite implements Site {
     BaseUrl baseUrl = dsl().getBaseUrl();
 
     return baseUrl.getChild(path);
+  }
+
+  protected final <T> T getInstance(Class<? extends T> key) {
+    return dsl.getInstance(key);
+  }
+
+  protected final <T> ImmutableList<T> getInstancesByType(Class<? extends T> type) {
+    return dsl.getInstancesByType(type);
   }
 
   protected final void install(BaseUrl baseUrl, Directory directory) {
