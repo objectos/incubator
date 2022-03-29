@@ -27,6 +27,10 @@ public abstract class DocsPage extends SitePage {
 
   static final IdSelector _BODY = Css.randomHash(3);
 
+  private static final IdSelector _BD = Css.randomHash(3);
+
+  private static final IdSelector _SHELL = Css.randomHash(3);
+
   private TopNavbar topNavbar;
 
   protected abstract void bd();
@@ -46,9 +50,17 @@ public abstract class DocsPage extends SitePage {
       body(
         _BODY,
 
-        f(topNavbar),
+        div(
+          _SHELL,
 
-        f(this::bd)
+          f(topNavbar),
+
+          div(
+            _BD,
+
+            f(this::bd)
+          )
+        )
       )
     );
   }
@@ -79,7 +91,7 @@ public abstract class DocsPage extends SitePage {
         install(topNavbar.css);
 
         style(
-          body,
+          body, or(), html,
 
           height(pct(100))
         );
@@ -87,13 +99,30 @@ public abstract class DocsPage extends SitePage {
         style(
           main,
 
-          padding(Spacing.V0, Spacing.V04)
+          height(pct(100)),
+          padding(Spacing.V0, Spacing.V04),
+          overflowY(auto)
         );
 
         style(
           p,
 
           marginBottom(Spacing.V05)
+        );
+
+        style(
+          _BD,
+
+          height(pct(100)),
+          overflowY(hidden)
+        );
+
+        style(
+          _SHELL,
+
+          display(flex),
+          flexDirection(column),
+          height(pct(100))
         );
       }
     };
