@@ -16,46 +16,30 @@
 package br.com.objectos.docs;
 
 import br.com.objectos.be.site.SiteFragment;
-import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.core.object.Checks;
 import br.com.objectos.css.Css;
-import br.com.objectos.css.select.ClassSelector;
 import br.com.objectos.css.select.IdSelector;
 import br.com.objectos.css.sheet.AbstractStyleSheet;
 import br.com.objectos.css.sheet.StyleSheet;
 import br.com.objectos.html.element.ElementName;
-import br.com.objectos.html.spi.type.AValue;
-import br.com.objectos.html.spi.type.NavValue;
 
-final class TopNavbar extends SiteFragment {
+final class ShellHeader extends SiteFragment {
 
-  private static final ClassSelector _CURRENT = Css.randomDot(3);
+  static final IdSelector _MENU_CLOSE = Css.randomHash(3);
+
+  static final IdSelector _MENU_OPEN = Css.randomHash(3);
 
   private static final IdSelector _HEADER = Css.randomHash(3);
 
   private static final IdSelector _HEADER1 = Css.randomHash(3);
 
-  private static final IdSelector _HEADER2 = Css.randomHash(3);
-
   private static final IdSelector _LOGO = Css.randomHash(3);
 
-  private static final IdSelector _MENU_CLOSE = Css.randomHash(3);
-
-  private static final IdSelector _MENU_OPEN = Css.randomHash(3);
-
   private static final IdSelector _MENU_SVG = Css.randomHash(3);
-
-  private static final ClassSelector _NAV_LINK = Css.randomDot(3);
 
   final StyleSheet css = new AbstractStyleSheet() {
     @Override
     protected final void definition() {
-      style(
-        _CURRENT,
-
-        color(Colors.INDIGO5)
-      );
-
       style(
         _HEADER1,
 
@@ -65,18 +49,6 @@ final class TopNavbar extends SiteFragment {
         display(flex),
         height(Spacing.V16),
         padding(Spacing.V0, Spacing.V06)
-      );
-
-      style(
-        _HEADER2,
-
-        backgroundColor(white),
-        bottom(zero()),
-        display(none),
-        padding(Spacing.V06),
-        position(absolute),
-        top(Spacing.V16),
-        width(pct(100))
       );
 
       style(
@@ -113,12 +85,6 @@ final class TopNavbar extends SiteFragment {
         width(Spacing.V04)
       );
 
-      style(
-        _NAV_LINK,
-
-        lineHeight(Spacing.V10)
-      );
-
       media(
         screen, minWidth(Breakpoint.LG),
 
@@ -146,48 +112,6 @@ final class TopNavbar extends SiteFragment {
       );
     }
   };
-
-  final String js
-      = """
-        /* TopNavbar.java */
-        function onClick(id, listener) {
-          const el = document.getElementById(id);
-
-          el.addEventListener("click", listener);
-        }
-
-        function setStyle(id, propName, value) {
-          const el = document.getElementById(id);
-
-          el.style[propName] = value;
-        }
-
-        function menuCloseClicked(event) {
-          setStyle("{body}", "overflowY", "auto");
-          setStyle("{menuClose}", "display", "none");
-          setStyle("{menuOpen}", "display", "flex");
-          setStyle("{header2}", "display", "none");
-        }
-
-        function menuOpenClicked(event) {
-          setStyle("{body}", "overflowY", "hidden");
-          setStyle("{menuClose}", "display", "flex");
-          setStyle("{menuOpen}", "display", "none");
-          setStyle("{header2}", "display", "block");
-        }
-
-        function domLoaded() {
-          onClick("{menuClose}", menuCloseClicked);
-          onClick("{menuOpen}", menuOpenClicked);
-        }
-
-        window.addEventListener('DOMContentLoaded', domLoaded);
-        """
-        .replace("\n", "")
-        .replace("{body}", Index._BODY.id())
-        .replace("{header2}", _HEADER2.id())
-        .replace("{menuClose}", _MENU_CLOSE.id())
-        .replace("{menuOpen}", _MENU_OPEN.id());
 
   private DocsPage current;
 
@@ -238,14 +162,6 @@ final class TopNavbar extends SiteFragment {
             )
           )
         )
-      ),
-
-      div(
-        _HEADER2,
-
-        nav(
-          navItems()
-        )
       )
     );
   }
@@ -269,32 +185,6 @@ final class TopNavbar extends SiteFragment {
 
       span(current.topNavbarTitle())
     );
-  }
-
-  private NavValue[] navItems() {
-    ImmutableList<DocsPage> pages;
-    pages = getInstancesByType(DocsPage.class);
-
-    NavValue[] items;
-    items = new NavValue[pages.size()];
-
-    for (int i = 0; i < items.length; i++) {
-      DocsPage page;
-      page = pages.get(i);
-
-      AValue isCurrent;
-      isCurrent = noop();
-
-      if (page == current) {
-        isCurrent = _CURRENT;
-      }
-
-      items[i] = a(
-        _NAV_LINK, isCurrent, href(page), div(page.topNavbarTitle())
-      );
-    }
-
-    return items;
   }
 
 }

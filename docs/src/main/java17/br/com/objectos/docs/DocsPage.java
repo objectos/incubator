@@ -31,15 +31,15 @@ public abstract class DocsPage extends SitePage {
 
   private static final IdSelector _SHELL = Css.randomHash(3);
 
-  private TopNavbar topNavbar;
+  private Shell shell;
 
   protected abstract void bd();
 
   @Override
   protected final void definition() {
-    topNavbar = getInstance(TopNavbar.class);
+    shell = getInstance(Shell.class);
 
-    topNavbar.setCurrent(this);
+    shell.setCurrent(this);
 
     doctype();
     html(
@@ -50,17 +50,7 @@ public abstract class DocsPage extends SitePage {
       body(
         _BODY,
 
-        div(
-          _SHELL,
-
-          f(topNavbar),
-
-          div(
-            _BD,
-
-            f(this::bd)
-          )
-        )
+        f(shell)
       )
     );
   }
@@ -71,7 +61,7 @@ public abstract class DocsPage extends SitePage {
     meta(name("viewport"), content("width=device-width, initial-scale=1, shrink-to-fit=no"));
     link(rel("shortcut icon"), type(ImageType.ICON.qualifiedName()), href("/favicon.ico"));
 
-    script(raw(topNavbar.js));
+    script(raw(shell.js));
 
     StyleSheet styleSheet;
     styleSheet = styleSheet();
@@ -88,7 +78,7 @@ public abstract class DocsPage extends SitePage {
       protected final void definition() {
         install(new Reset());
 
-        install(topNavbar.css);
+        install(shell.css);
 
         style(
           body, or(), html,
