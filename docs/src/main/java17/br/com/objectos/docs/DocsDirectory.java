@@ -24,6 +24,7 @@ public final class DocsDirectory extends SiteDirectory {
     putInstance(new TopNavbar());
 
     addPage("index.html", new Index());
+    addPage("getting-started.html", new GettingStarted());
   }
 
 }

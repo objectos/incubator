@@ -15,7 +15,7 @@
  */
 package br.com.objectos.docs;
 
-final class Index extends DocsPage {
+final class GettingStarted extends DocsPage {
 
   @Override
   protected final void bd() {
@@ -54,7 +54,7 @@ final class Index extends DocsPage {
 
   @Override
   protected final String topNavbarTitle() {
-    return "Home";
+    return "Getting Started";
   }
 
 }

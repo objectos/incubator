@@ -16,11 +16,16 @@
 package br.com.objectos.docs;
 
 import br.com.objectos.be.site.SiteFragment;
+import br.com.objectos.core.list.ImmutableList;
+import br.com.objectos.core.object.Checks;
 import br.com.objectos.css.Css;
 import br.com.objectos.css.select.ClassSelector;
 import br.com.objectos.css.select.IdSelector;
 import br.com.objectos.css.sheet.AbstractStyleSheet;
 import br.com.objectos.css.sheet.StyleSheet;
+import br.com.objectos.html.element.ElementName;
+import br.com.objectos.html.spi.type.AValue;
+import br.com.objectos.html.spi.type.NavValue;
 
 final class TopNavbar extends SiteFragment {
 
@@ -37,6 +42,8 @@ final class TopNavbar extends SiteFragment {
   private static final IdSelector _MENU_OPEN = Css.randomHash(3);
 
   private static final IdSelector _MENU_SVG = Css.randomHash(3);
+
+  private static final ClassSelector _NAV_LINK = Css.randomDot(3);
 
   final StyleSheet css = new AbstractStyleSheet() {
     @Override
@@ -97,6 +104,12 @@ final class TopNavbar extends SiteFragment {
         marginRight(Spacing.V02),
         width(Spacing.V04)
       );
+
+      style(
+        _NAV_LINK,
+
+        lineHeight(Spacing.V10)
+      );
     }
   };
 
@@ -142,10 +155,10 @@ final class TopNavbar extends SiteFragment {
         .replace("{menuClose}", _MENU_CLOSE.id())
         .replace("{menuOpen}", _MENU_OPEN.id());
 
-  private String title;
+  private DocsPage current;
 
-  public final void setTitle(String title) {
-    this.title = title;
+  public final void setCurrent(DocsPage page) {
+    current = Checks.checkNotNull(page, "page == null");
   }
 
   @Override
@@ -156,42 +169,16 @@ final class TopNavbar extends SiteFragment {
       div(
         _HEADER1,
 
-        button(
+        menuBtn(
           _MENU_CLOSE,
 
-          type("button"),
-
-          svg(
-            _MENU_SVG,
-
-            xmlns("http://www.w3.org/2000/svg"), viewBox("0 0 20 20"), fill("currentColor"),
-            path(
-              fillRule("evenodd"),
-              d("M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"),
-              clipRule("evenodd")
-            )
-          ),
-
-          span(title)
+          "M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
         ),
 
-        button(
+        menuBtn(
           _MENU_OPEN,
 
-          type("button"),
-
-          svg(
-            _MENU_SVG,
-
-            xmlns("http://www.w3.org/2000/svg"), viewBox("0 0 20 20"), fill("currentColor"),
-            path(
-              fillRule("evenodd"),
-              d("M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"),
-              clipRule("evenodd")
-            )
-          ),
-
-          span(title)
+          "M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
         )
       ),
 
@@ -199,16 +186,57 @@ final class TopNavbar extends SiteFragment {
         _HEADER2,
 
         nav(
-          a(
-            _CURRENT,
-
-            href(Index.class),
-
-            div("Home")
-          )
+          navItems()
         )
       )
     );
+  }
+
+  private ElementName menuBtn(IdSelector id, String pathd) {
+    return button(
+      id,
+
+      type("button"),
+
+      svg(
+        _MENU_SVG,
+
+        xmlns("http://www.w3.org/2000/svg"), viewBox("0 0 20 20"), fill("currentColor"),
+        path(
+          fillRule("evenodd"),
+          d(pathd),
+          clipRule("evenodd")
+        )
+      ),
+
+      span(current.topNavbarTitle())
+    );
+  }
+
+  private NavValue[] navItems() {
+    ImmutableList<DocsPage> pages;
+    pages = getInstancesByType(DocsPage.class);
+
+    NavValue[] items;
+    items = new NavValue[pages.size()];
+
+    for (int i = 0; i < items.length; i++) {
+      DocsPage page;
+      page = pages.get(i);
+
+      AValue isCurrent;
+      isCurrent = noop();
+
+      if (page == current) {
+        isCurrent = _CURRENT;
+      }
+
+      items[i] = a(
+        _NAV_LINK, isCurrent, href(page), div(page.topNavbarTitle())
+      );
+    }
+
+    return items;
   }
 
 }
