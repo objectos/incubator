@@ -214,8 +214,15 @@ public abstract class DocsPage extends SitePage {
 
           bottom(unset),
           display(block),
+          flex(l(0), l(0), px(230)),
           position(staticKw),
           top(unset)
+        ),
+
+        style(
+          _UI_MAIN,
+
+          flexGrow(1)
         )
       );
     }
