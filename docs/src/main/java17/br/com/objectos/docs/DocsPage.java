@@ -44,6 +44,8 @@ public abstract class DocsPage extends SitePage {
 
   private static final IdSelector _UI = Css.randomHash(3);
 
+  private static final IdSelector _UI_AREA = Css.randomHash(3);
+
   private static final IdSelector _UI_CONTENTS = Css.randomHash(3);
 
   private static final IdSelector _UI_LEFTDRAWER = Css.randomHash(3);
@@ -118,18 +120,6 @@ public abstract class DocsPage extends SitePage {
       );
 
       style(
-        _UI_LEFTDRAWER,
-
-        backgroundColor(white),
-        bottom(zero()),
-        display(none),
-        padding(Spacing.V06),
-        position(absolute),
-        top(Spacing.V16),
-        width(pct(100))
-      );
-
-      style(
         _NAV_LINK,
 
         lineHeight(Spacing.V10)
@@ -145,10 +135,22 @@ public abstract class DocsPage extends SitePage {
       );
 
       style(
-        _UI_CONTENTS,
+        _UI_AREA,
 
         height(pct(100)),
         overflowY(auto)
+      );
+
+      style(
+        _UI_LEFTDRAWER,
+
+        backgroundColor(white),
+        bottom(zero()),
+        display(none),
+        padding(Spacing.V06),
+        position(absolute),
+        top(Spacing.V16),
+        width(pct(100))
       );
 
       style(
@@ -185,6 +187,21 @@ public abstract class DocsPage extends SitePage {
           _MENU_CLOSE, or(), _MENU_OPEN,
 
           display(none)
+        ),
+
+        style(
+          _UI_AREA,
+
+          display(flex)
+        ),
+
+        style(
+          _UI_LEFTDRAWER,
+
+          bottom(unset),
+          display(block),
+          position(staticKw),
+          top(unset)
         )
       );
     }
@@ -225,7 +242,6 @@ public abstract class DocsPage extends SitePage {
         window.addEventListener('DOMContentLoaded', domLoaded);
         """
         .replace("\n", "")
-        .replace("{body}", _UI.id())
         .replace("{leftPanel}", _UI_LEFTDRAWER.id())
         .replace("{menuClose}", _MENU_CLOSE.id())
         .replace("{menuOpen}", _MENU_OPEN.id());
@@ -244,11 +260,19 @@ public abstract class DocsPage extends SitePage {
         f(this::uiTopBar),
 
         div(
-          _UI_CONTENTS,
+          _UI_AREA,
 
-          f(this::uiLeftDrawer),
+          div(
+            _UI_LEFTDRAWER,
 
-          f(this::uiContents)
+            f(this::uiLeftDrawer)
+          ),
+
+          div(
+            _UI_CONTENTS,
+
+            f(this::uiContents)
+          )
         )
       )
     );
@@ -321,12 +345,8 @@ public abstract class DocsPage extends SitePage {
   }
 
   private void uiLeftDrawer() {
-    div(
-      _UI_LEFTDRAWER,
-
-      nav(
-        navItems()
-      )
+    nav(
+      navItems()
     );
   }
 
