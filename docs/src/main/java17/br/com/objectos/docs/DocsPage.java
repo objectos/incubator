@@ -206,7 +206,8 @@ public abstract class DocsPage extends SitePage {
         style(
           _UI_AREA,
 
-          display(flex)
+          display(flex),
+          overflowY(hidden)
         ),
 
         style(
@@ -222,7 +223,8 @@ public abstract class DocsPage extends SitePage {
         style(
           _UI_MAIN,
 
-          flexGrow(1)
+          flexGrow(1),
+          overflowY(auto)
         )
       );
     }
