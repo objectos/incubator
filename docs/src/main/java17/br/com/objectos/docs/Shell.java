@@ -93,7 +93,7 @@ final class Shell extends SiteFragment {
         })();
         """
         .replace("\n", "")
-        .replace("{body}", Index._BODY.id())
+        //.replace("{body}", Index._BODY.id())
         .replace("{leftPanel}", ShellLeftPanel._ID.id())
         .replace("{menuClose}", ShellHeader._MENU_CLOSE.id())
         .replace("{menuOpen}", ShellHeader._MENU_OPEN.id());
