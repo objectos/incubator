@@ -46,9 +46,9 @@ public abstract class DocsPage extends SitePage {
 
   private static final IdSelector _UI_AREA = Css.randomHash(3);
 
-  private static final IdSelector _UI_CONTENTS = Css.randomHash(3);
-
   private static final IdSelector _UI_LEFTDRAWER = Css.randomHash(3);
+
+  private static final IdSelector _UI_MAIN = Css.randomHash(3);
 
   private static final IdSelector _UI_TOPBAR = Css.randomHash(3);
 
@@ -60,17 +60,9 @@ public abstract class DocsPage extends SitePage {
       install(reset);
 
       style(
-        body, or(), html,
+        html,
 
         height(pct(100))
-      );
-
-      style(
-        main,
-
-        height(pct(100)),
-        padding(Spacing.V0, Spacing.V04),
-        overflowY(auto)
       );
 
       style(
@@ -151,6 +143,28 @@ public abstract class DocsPage extends SitePage {
         position(absolute),
         top(Spacing.V16),
         width(pct(100))
+      );
+
+      style(
+        _UI_MAIN,
+
+        padding(Spacing.V06)
+      );
+
+      style(
+        _UI_MAIN, sp(), header, sp(), h1,
+
+        fontSize(FontSize.XL4),
+        fontWeight(bold)
+      );
+
+      style(
+        _UI_MAIN, sp(), header, sp(), p,
+
+        fontSize(FontSize.XL2),
+        fontWeight(300),
+        lineHeight(1.2),
+        marginTop(Spacing.V03)
       );
 
       style(
@@ -268,10 +282,10 @@ public abstract class DocsPage extends SitePage {
             f(this::uiLeftDrawer)
           ),
 
-          div(
-            _UI_CONTENTS,
+          main(
+            _UI_MAIN,
 
-            f(this::uiContents)
+            f(this::uiMain)
           )
         )
       )
@@ -293,9 +307,9 @@ public abstract class DocsPage extends SitePage {
     );
   }
 
-  protected abstract String topNavbarTitle();
+  protected abstract String topBarTitle();
 
-  protected abstract void uiContents();
+  protected abstract void uiMain();
 
   private ElementName menuBtn(IdSelector id, String pathd) {
     return button(
@@ -314,7 +328,7 @@ public abstract class DocsPage extends SitePage {
         )
       ),
 
-      span(topNavbarTitle())
+      span(topBarTitle())
     );
   }
 
@@ -337,7 +351,7 @@ public abstract class DocsPage extends SitePage {
       }
 
       items[i] = a(
-        _NAV_LINK, isCurrent, href(page), div(page.topNavbarTitle())
+        _NAV_LINK, isCurrent, href(page), div(page.topBarTitle())
       );
     }
 
