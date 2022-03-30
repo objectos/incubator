@@ -21,19 +21,6 @@ public final class DocsDirectory extends SiteDirectory {
 
   @Override
   protected final void configure() {
-    ShellHeader header;
-    header = new ShellHeader();
-
-    ShellLeftPanel leftPanel;
-    leftPanel = new ShellLeftPanel();
-
-    Shell shell;
-    shell = new Shell(header, leftPanel);
-
-    putInstance(header);
-    putInstance(leftPanel);
-    putInstance(shell);
-
     addPage("index.html", new Index());
     addPage("getting-started.html", new GettingStarted());
   }

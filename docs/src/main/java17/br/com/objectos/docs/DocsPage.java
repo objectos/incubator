@@ -16,17 +16,21 @@
 package br.com.objectos.docs;
 
 import br.com.objectos.be.site.SitePage;
+import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.css.Css;
 import br.com.objectos.css.framework.reset.Reset;
+import br.com.objectos.css.select.ClassSelector;
 import br.com.objectos.css.select.IdSelector;
 import br.com.objectos.css.sheet.AbstractStyleSheet;
 import br.com.objectos.css.sheet.StyleSheet;
 import br.com.objectos.html.element.ElementName;
+import br.com.objectos.html.spi.type.AValue;
+import br.com.objectos.html.spi.type.NavValue;
 import br.com.objectos.http.media.ImageType;
 
 public abstract class DocsPage extends SitePage {
 
-  private static final IdSelector _BD = Css.randomHash(3);
+  private static final ClassSelector _CURRENT = Css.randomDot(3);
 
   private static final IdSelector _LOGO = Css.randomHash(3);
 
@@ -36,7 +40,13 @@ public abstract class DocsPage extends SitePage {
 
   private static final IdSelector _MENU_SVG = Css.randomHash(3);
 
+  private static final ClassSelector _NAV_LINK = Css.randomDot(3);
+
   private static final IdSelector _UI = Css.randomHash(3);
+
+  private static final IdSelector _UI_CONTENTS = Css.randomHash(3);
+
+  private static final IdSelector _UI_LEFTDRAWER = Css.randomHash(3);
 
   private static final IdSelector _UI_TOPBAR = Css.randomHash(3);
 
@@ -65,13 +75,6 @@ public abstract class DocsPage extends SitePage {
         p,
 
         marginBottom(Spacing.V05)
-      );
-
-      style(
-        _BD,
-
-        height(pct(100)),
-        overflowY(hidden)
       );
 
       style(
@@ -109,6 +112,30 @@ public abstract class DocsPage extends SitePage {
       );
 
       style(
+        _CURRENT,
+
+        color(Colors.INDIGO5)
+      );
+
+      style(
+        _UI_LEFTDRAWER,
+
+        backgroundColor(white),
+        bottom(zero()),
+        display(none),
+        padding(Spacing.V06),
+        position(absolute),
+        top(Spacing.V16),
+        width(pct(100))
+      );
+
+      style(
+        _NAV_LINK,
+
+        lineHeight(Spacing.V10)
+      );
+
+      style(
         _UI,
 
         display(flex),
@@ -118,13 +145,20 @@ public abstract class DocsPage extends SitePage {
       );
 
       style(
+        _UI_CONTENTS,
+
+        height(pct(100)),
+        overflowY(auto)
+      );
+
+      style(
         _UI_TOPBAR,
 
         alignItems(center),
         backgroundColor(Colors.GRAY0),
         borderBottom(Spacing.PX, solid, Colors.GRAY2),
         display(flex),
-        height(Spacing.V16),
+        flex(l(0), l(0), Spacing.V16),
         padding(Spacing.V0, Spacing.V06)
       );
 
@@ -156,7 +190,45 @@ public abstract class DocsPage extends SitePage {
     }
   };
 
-  protected abstract void bd();
+  private final String js
+      = """
+        /* DocsPage.java */
+        function onClick(id, listener) {
+          const el = document.getElementById(id);
+
+          el.addEventListener("click", listener);
+        }
+
+        function setStyle(id, propName, value) {
+          const el = document.getElementById(id);
+
+          el.style[propName] = value;
+        }
+
+        function menuCloseClicked(event) {
+          setStyle("{menuClose}", "display", null);
+          setStyle("{menuOpen}", "display", null);
+          setStyle("{leftPanel}", "display", null);
+        }
+
+        function menuOpenClicked(event) {
+          setStyle("{menuClose}", "display", "flex");
+          setStyle("{menuOpen}", "display", "none");
+          setStyle("{leftPanel}", "display", "block");
+        }
+
+        function domLoaded() {
+          onClick("{menuClose}", menuCloseClicked);
+          onClick("{menuOpen}", menuOpenClicked);
+        }
+
+        window.addEventListener('DOMContentLoaded', domLoaded);
+        """
+        .replace("\n", "")
+        .replace("{body}", _UI.id())
+        .replace("{leftPanel}", _UI_LEFTDRAWER.id())
+        .replace("{menuClose}", _MENU_CLOSE.id())
+        .replace("{menuOpen}", _MENU_OPEN.id());
 
   @Override
   protected final void definition() {
@@ -169,7 +241,15 @@ public abstract class DocsPage extends SitePage {
       body(
         _UI,
 
-        f(this::uiTopBar)
+        f(this::uiTopBar),
+
+        div(
+          _UI_CONTENTS,
+
+          f(this::uiLeftDrawer),
+
+          f(this::uiContents)
+        )
       )
     );
   }
@@ -181,7 +261,7 @@ public abstract class DocsPage extends SitePage {
     link(rel("shortcut icon"), type(ImageType.ICON.qualifiedName()), href("/favicon.ico"));
 
     script(
-      raw("")
+      raw(js)
     );
 
     style(
@@ -189,43 +269,9 @@ public abstract class DocsPage extends SitePage {
     );
   }
 
-  protected StyleSheet styleSheet() {
-    return new AbstractStyleSheet() {
-      @Override
-      protected final void definition() {
-        install(new Reset());
-
-        style(
-          body, or(), html,
-
-          height(pct(100))
-        );
-
-        style(
-          main,
-
-          height(pct(100)),
-          padding(Spacing.V0, Spacing.V04),
-          overflowY(auto)
-        );
-
-        style(
-          p,
-
-          marginBottom(Spacing.V05)
-        );
-
-        style(
-          _BD,
-
-          height(pct(100)),
-          overflowY(hidden)
-        );
-      }
-    };
-  }
-
   protected abstract String topNavbarTitle();
+
+  protected abstract void uiContents();
 
   private ElementName menuBtn(IdSelector id, String pathd) {
     return button(
@@ -245,6 +291,42 @@ public abstract class DocsPage extends SitePage {
       ),
 
       span(topNavbarTitle())
+    );
+  }
+
+  private NavValue[] navItems() {
+    ImmutableList<DocsPage> pages;
+    pages = getInstancesByType(DocsPage.class);
+
+    NavValue[] items;
+    items = new NavValue[pages.size()];
+
+    for (int i = 0; i < items.length; i++) {
+      DocsPage page;
+      page = pages.get(i);
+
+      AValue isCurrent;
+      isCurrent = noop();
+
+      if (page == this) {
+        isCurrent = _CURRENT;
+      }
+
+      items[i] = a(
+        _NAV_LINK, isCurrent, href(page), div(page.topNavbarTitle())
+      );
+    }
+
+    return items;
+  }
+
+  private void uiLeftDrawer() {
+    div(
+      _UI_LEFTDRAWER,
+
+      nav(
+        navItems()
+      )
     );
   }
 

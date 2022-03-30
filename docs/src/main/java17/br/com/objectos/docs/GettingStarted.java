@@ -18,7 +18,7 @@ package br.com.objectos.docs;
 final class GettingStarted extends DocsPage {
 
   @Override
-  protected final void bd() {
+  protected final void uiContents() {
     main(
       p("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vel sem vel metus faucibus porttitor vel quis velit. Pellentesque consequat semper nisl, eu viverra metus blandit vitae. Quisque est magna, vulputate ut tempor quis, hendrerit sed sem. Etiam mattis, mauris eget vestibulum egestas, ligula metus venenatis nibh, pharetra lacinia neque nibh ut neque. Quisque turpis diam, convallis ut purus ultricies, mollis ultrices nibh. Aenean egestas sem sollicitudin dictum posuere. Maecenas urna felis, tincidunt sit amet bibendum quis, molestie ut massa. Morbi nec lobortis nibh. Praesent sit amet eleifend nunc, et ultricies sem."),
 
