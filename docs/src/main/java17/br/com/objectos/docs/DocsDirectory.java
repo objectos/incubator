@@ -21,6 +21,8 @@ public final class DocsDirectory extends SiteDirectory {
 
   @Override
   protected final void configure() {
+    putInstance(new LeftDrawer());
+
     addPage("index.html", new Index());
     addPage("getting-started.html", new GettingStarted());
   }

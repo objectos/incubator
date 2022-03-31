@@ -16,21 +16,15 @@
 package br.com.objectos.docs;
 
 import br.com.objectos.be.site.SitePage;
-import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.css.Css;
 import br.com.objectos.css.framework.reset.Reset;
-import br.com.objectos.css.select.ClassSelector;
 import br.com.objectos.css.select.IdSelector;
 import br.com.objectos.css.sheet.AbstractStyleSheet;
 import br.com.objectos.css.sheet.StyleSheet;
 import br.com.objectos.html.element.ElementName;
-import br.com.objectos.html.spi.type.AValue;
-import br.com.objectos.html.spi.type.NavValue;
 import br.com.objectos.http.media.ImageType;
 
 public abstract class DocsPage extends SitePage {
-
-  private static final ClassSelector _CURRENT = Css.randomDot(3);
 
   private static final IdSelector _LOGO = Css.randomHash(3);
 
@@ -39,8 +33,6 @@ public abstract class DocsPage extends SitePage {
   private static final IdSelector _MENU_OPEN = Css.randomHash(3);
 
   private static final IdSelector _MENU_SVG = Css.randomHash(3);
-
-  private static final ClassSelector _NAV_LINK = Css.randomDot(3);
 
   private static final IdSelector _UI = Css.randomHash(3);
 
@@ -103,18 +95,6 @@ public abstract class DocsPage extends SitePage {
         height(Spacing.V04),
         marginRight(Spacing.V02),
         width(Spacing.V04)
-      );
-
-      style(
-        _CURRENT,
-
-        color(Colors.INDIGO5)
-      );
-
-      style(
-        _NAV_LINK,
-
-        lineHeight(Spacing.V10)
       );
 
       style(
@@ -271,6 +251,11 @@ public abstract class DocsPage extends SitePage {
 
   @Override
   protected final void definition() {
+    LeftDrawer leftDrawer;
+    leftDrawer = getInstance(LeftDrawer.class);
+
+    leftDrawer.setCurrent(this);
+
     doctype();
     html(
       lang("en"),
@@ -288,7 +273,7 @@ public abstract class DocsPage extends SitePage {
           div(
             _UI_LEFTDRAWER,
 
-            f(this::uiLeftDrawer)
+            f(leftDrawer)
           ),
 
           main(
@@ -311,8 +296,12 @@ public abstract class DocsPage extends SitePage {
       raw(js)
     );
 
+    LeftDrawer leftDrawer;
+    leftDrawer = getInstance(LeftDrawer.class);
+
     style(
-      raw(css.printMinified())
+      raw(css.printMinified()),
+      raw(leftDrawer.css())
     );
   }
 
@@ -338,38 +327,6 @@ public abstract class DocsPage extends SitePage {
       ),
 
       span(topBarTitle())
-    );
-  }
-
-  private NavValue[] navItems() {
-    ImmutableList<DocsPage> pages;
-    pages = getInstancesByType(DocsPage.class);
-
-    NavValue[] items;
-    items = new NavValue[pages.size()];
-
-    for (int i = 0; i < items.length; i++) {
-      DocsPage page;
-      page = pages.get(i);
-
-      AValue isCurrent;
-      isCurrent = noop();
-
-      if (page == this) {
-        isCurrent = _CURRENT;
-      }
-
-      items[i] = a(
-        _NAV_LINK, isCurrent, href(page), div(page.topBarTitle())
-      );
-    }
-
-    return items;
-  }
-
-  private void uiLeftDrawer() {
-    nav(
-      navItems()
     );
   }
 
