@@ -22,6 +22,7 @@ import br.com.objectos.css.select.ClassSelector;
 import br.com.objectos.css.select.IdSelector;
 import br.com.objectos.css.sheet.AbstractStyleSheet;
 import br.com.objectos.css.sheet.StyleSheet;
+import br.com.objectos.html.spi.type.StyleValue;
 import br.com.objectos.http.media.ImageType;
 
 public abstract class DocsPage extends SitePage {
@@ -44,7 +45,9 @@ public abstract class DocsPage extends SitePage {
 
   private static final IdSelector _UI_MAIN = Css.randomHash(3);
 
-  private static final IdSelector _UI_TOPBAR = Css.randomHash(3);
+  private static final IdSelector _UI_TOPBAR0 = Css.randomHash(3);
+
+  private static final IdSelector _UI_TOPBAR1 = Css.randomHash(3);
 
   private final StyleSheet css = new AbstractStyleSheet() {
     private final Reset reset = new Reset();
@@ -56,22 +59,6 @@ public abstract class DocsPage extends SitePage {
       style(
         html,
 
-        fontFamily(
-          fontFamily(keyword("ui-sans-serif")),
-          fontFamily(keyword("system-ui")),
-          fontFamily(keyword("-apple-system")),
-          fontFamily(keyword("BlinkMacSystemFont")),
-          fontFamily(l("Segoe UI")),
-          fontFamily(keyword("Roboto")),
-          fontFamily(l("Helvetica Neue")),
-          fontFamily(keyword("Arial")),
-          fontFamily(l("Liberation Sans")),
-          fontFamily(sansSerif),
-          fontFamily(l("Apple Color Emoji")),
-          fontFamily(l("Segoe UI Emoji")),
-          fontFamily(l("Segoe UI Symbol")),
-          fontFamily(l("Noto Color Emoji"))
-        ),
         height(pct(100))
       );
 
@@ -160,29 +147,40 @@ public abstract class DocsPage extends SitePage {
       );
 
       style(
+        _UI_MAIN, sp(), header,
+
+        padding(Spacing.V12, Spacing.V0)
+      );
+
+      style(
         _UI_MAIN, sp(), header, sp(), h1,
 
-        fontSize(FontSize.XL4),
-        fontWeight(bold)
+        fontSize(px(40)),
+        fontWeight(600),
+        letterSpacing(px(-0.5)),
+        lineHeight(px(48)),
+        marginBottom(Spacing.V04)
       );
 
       style(
-        _UI_MAIN, sp(), header, sp(), p,
-
-        fontSize(FontSize.XL2),
-        fontWeight(300),
-        lineHeight(1.2),
-        marginTop(Spacing.V03)
-      );
-
-      style(
-        _UI_TOPBAR,
+        _UI_TOPBAR0,
 
         alignItems(center),
         borderBottom(Spacing.PX, solid, Colors.GRAY4),
         display(flex),
         flex(l(0), l(0), Spacing.V12),
         padding(Spacing.V0, Spacing.V04)
+      );
+
+      style(
+        _UI_TOPBAR1,
+
+        backgroundColor(Colors.GRAY0),
+        fontSize(FontSize.SM),
+        fontWeight(500),
+        letterSpacing(px(1.5)),
+        padding(Spacing.V06, Spacing.V04),
+        textTransform(uppercase)
       );
 
       media(
@@ -328,8 +326,13 @@ public abstract class DocsPage extends SitePage {
 
     style(
       raw(css.printMinified()),
-      raw(leftDrawer.css())
+      raw(leftDrawer.css()),
+      pageStyle()
     );
+  }
+
+  protected StyleValue pageStyle() {
+    return noop();
   }
 
   protected abstract String topBarTitle();
@@ -338,7 +341,15 @@ public abstract class DocsPage extends SitePage {
 
   private void uiTopBar() {
     header(
-      _UI_TOPBAR,
+      f(this::uiTopBar0),
+
+      f(this::uiTopBar1)
+    );
+  }
+
+  private void uiTopBar0() {
+    div(
+      _UI_TOPBAR0,
 
       button(
         _MENU_CLOSE,
@@ -400,6 +411,14 @@ public abstract class DocsPage extends SitePage {
           )
         )
       )
+    );
+  }
+
+  private void uiTopBar1() {
+    div(
+      _UI_TOPBAR1,
+
+      t("Documentation")
     );
   }
 

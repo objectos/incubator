@@ -25,11 +25,11 @@ final class Index extends DocsPage {
   @Override
   protected final void uiMain() {
     header(
-      h1("Documentation"),
+      h1("Build Java applications with Objectos"),
 
       p("""
-        Explore guides, tutorials and references on everything Objectos.
-        """)
+        Explore our guides, tutorials and references to get you started with Objectos.
+        We hope to serve developers of all experience levels.""")
     );
   }
 

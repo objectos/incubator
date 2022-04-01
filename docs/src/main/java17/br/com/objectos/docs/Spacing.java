@@ -41,7 +41,7 @@ public final class Spacing {
 
   public static final Length V10 = Length.rem(2.5);
 
-  public static final Length V12 = Length.rem(3);
+  public static final Length V12 = Length.rem(3); // 48px
 
   public static final Length V16 = Length.rem(4);
 
