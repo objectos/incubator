@@ -18,6 +18,7 @@ package br.com.objectos.docs;
 import br.com.objectos.be.site.SitePage;
 import br.com.objectos.css.Css;
 import br.com.objectos.css.framework.reset.Reset;
+import br.com.objectos.css.select.ClassSelector;
 import br.com.objectos.css.select.IdSelector;
 import br.com.objectos.css.sheet.AbstractStyleSheet;
 import br.com.objectos.css.sheet.StyleSheet;
@@ -27,11 +28,13 @@ public abstract class DocsPage extends SitePage {
 
   private static final IdSelector _LOGO = Css.randomHash(3);
 
+  private static final ClassSelector _MENU_BTN = Css.randomDot(3);
+
   private static final IdSelector _MENU_CLOSE = Css.randomHash(3);
 
   private static final IdSelector _MENU_OPEN = Css.randomHash(3);
 
-  private static final IdSelector _MENU_SVG = Css.randomHash(3);
+  private static final ClassSelector _MENU_SVG = Css.randomDot(3);
 
   private static final IdSelector _UI = Css.randomHash(3);
 
@@ -76,28 +79,34 @@ public abstract class DocsPage extends SitePage {
       );
 
       style(
-        _MENU_CLOSE, or(), _MENU_OPEN,
+        _MENU_BTN,
 
         alignItems(center),
-        marginRight(Spacing.V04),
+        height(pct(100)),
+        marginRight(Spacing.V02),
+        padding(px(4)),
         outline(none)
       );
 
       style(
         _MENU_OPEN,
 
-        alignItems(center),
-        display(flex),
-        height(pct(100))
+        display(flex)
+      );
+
+      style(
+        _MENU_BTN, HOVER, sp(), _MENU_SVG,
+
+        backgroundColor(Colors.GRAY1)
       );
 
       style(
         _MENU_SVG,
 
-        display(inlineBlock),
-        height(Spacing.V04),
-        marginRight(Spacing.V02),
-        width(Spacing.V04)
+        borderRadius(pct(50)),
+        height(px(40)),
+        padding(px(8)),
+        width(px(40))
       );
 
       style(
@@ -157,7 +166,7 @@ public abstract class DocsPage extends SitePage {
         borderBottom(Spacing.PX, solid, Colors.GRAY4),
         display(flex),
         flex(l(0), l(0), Spacing.V12),
-        padding(Spacing.V0, Spacing.V06)
+        padding(Spacing.V0, Spacing.V04)
       );
 
       media(
@@ -317,32 +326,44 @@ public abstract class DocsPage extends SitePage {
 
       button(
         _MENU_CLOSE,
+        _MENU_BTN,
 
         type("button"),
 
-        svg(
-          xmlns("http://www.w3.org/2000/svg"), viewBox("0 0 24 24"), height("24"), width("24"),
-          path(
-            d("M0 0h24v24H0z"), fill("none")
-          ),
-          path(
-            d("M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z")
+        div(
+          _MENU_SVG,
+
+          svg(
+
+            xmlns("http://www.w3.org/2000/svg"), viewBox("0 0 24 24"), height("24"), width("24"),
+            path(
+              d("M0 0h24v24H0z"), fill("none")
+            ),
+            path(
+              d("M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z")
+            )
           )
         )
       ),
 
       button(
         _MENU_OPEN,
+        _MENU_BTN,
 
         type("button"),
 
-        svg(
-          xmlns("http://www.w3.org/2000/svg"), viewBox("0 0 24 24"), height("24"), width("24"),
-          path(
-            d("M0 0h24v24H0z"), fill("none")
-          ),
-          path(
-            d("M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z")
+        div(
+          _MENU_SVG,
+
+          svg(
+
+            xmlns("http://www.w3.org/2000/svg"), viewBox("0 0 24 24"), height("24"), width("24"),
+            path(
+              d("M0 0h24v24H0z"), fill("none")
+            ),
+            path(
+              d("M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z")
+            )
           )
         )
       ),
