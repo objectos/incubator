@@ -25,13 +25,13 @@ public final class Spacing {
 
   public static final LengthOrPercentageValue V0 = Zero.INSTANCE;
 
-  public static final Length V01 = Length.rem(0.25);
+  public static final Length V01 = Length.rem(0.25); // 4px
 
-  public static final Length V02 = Length.rem(0.5);
+  public static final Length V02 = Length.rem(0.5); // 8px
 
-  public static final Length V03 = Length.rem(0.75);
+  public static final Length V03 = Length.rem(0.75); // 12px
 
-  public static final Length V04 = Length.rem(1);
+  public static final Length V04 = Length.rem(1); // 16px
 
   public static final Length V05 = Length.rem(1.25);
 
