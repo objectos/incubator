@@ -22,7 +22,6 @@ import br.com.objectos.css.select.ClassSelector;
 import br.com.objectos.css.select.IdSelector;
 import br.com.objectos.css.sheet.AbstractStyleSheet;
 import br.com.objectos.css.sheet.StyleSheet;
-import br.com.objectos.html.spi.type.StyleValue;
 import br.com.objectos.http.media.ImageType;
 
 public abstract class DocsPage extends SitePage {
@@ -324,15 +323,17 @@ public abstract class DocsPage extends SitePage {
     LeftDrawer leftDrawer;
     leftDrawer = getInstance(LeftDrawer.class);
 
+    StyleSheet pageCss = pageStyleSheet();
+
     style(
       raw(css.printMinified()),
       raw(leftDrawer.css()),
-      pageStyle()
+      pageCss != null ? raw(pageCss.printMinified()) : noop()
     );
   }
 
-  protected StyleValue pageStyle() {
-    return noop();
+  protected StyleSheet pageStyleSheet() {
+    return null;
   }
 
   protected abstract String topBarTitle();

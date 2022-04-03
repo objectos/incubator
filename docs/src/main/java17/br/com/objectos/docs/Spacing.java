@@ -35,7 +35,7 @@ public final class Spacing {
 
   public static final Length V05 = Length.rem(1.25);
 
-  public static final Length V06 = Length.rem(1.5);
+  public static final Length V06 = Length.rem(1.5); // 24px
 
   public static final Length V08 = Length.rem(2);
 

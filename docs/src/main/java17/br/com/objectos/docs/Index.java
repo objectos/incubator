@@ -15,7 +15,61 @@
  */
 package br.com.objectos.docs;
 
+import br.com.objectos.css.Css;
+import br.com.objectos.css.select.ClassSelector;
+import br.com.objectos.css.select.IdSelector;
+import br.com.objectos.css.sheet.AbstractStyleSheet;
+import br.com.objectos.css.sheet.StyleSheet;
+
 final class Index extends DocsPage {
+
+  private static final ClassSelector _BLOCK = Css.randomDot(3);
+
+  private static final IdSelector _PRIMARY = Css.randomHash(3);
+
+  private final StyleSheet css = new AbstractStyleSheet() {
+    @Override
+    protected final void definition() {
+      style(
+        _BLOCK,
+
+        padding(Spacing.V06)
+      );
+
+      style(
+        _BLOCK, sp(), a, HOVER,
+
+        textDecoration(underline)
+      );
+
+      style(
+        _BLOCK, sp(), div,
+
+        marginBottom(Spacing.V04)
+      );
+
+      style(
+        _BLOCK, sp(), h2,
+
+        fontSize(FontSize.XL2),
+        fontWeight(500),
+        letterSpacing(px(-0.25)),
+        marginBottom(Spacing.V04)
+      );
+
+      style(
+        _PRIMARY,
+
+        backgroundColor(Colors.INDIGO6),
+        color(white)
+      );
+    }
+  };
+
+  @Override
+  protected final StyleSheet pageStyleSheet() {
+    return css;
+  }
 
   @Override
   protected final String topBarTitle() {
@@ -25,11 +79,29 @@ final class Index extends DocsPage {
   @Override
   protected final void uiMain() {
     header(
-      h1("Build Java applications with Objectos"),
+      h1("Develop Java applications with Objectos"),
 
       p("""
-        Explore our guides, tutorials and references to get you started with Objectos.
-        We hope to serve developers of all experience levels.""")
+        Explore our tutorials, guides and reference materials to get you
+        started with Objectos. Please note this site is under construction:
+        our goal is for developers of all experience levels to find what they need.""")
+    );
+
+    section(
+      div(
+        _BLOCK,
+        _PRIMARY,
+
+        h2("Get Started"),
+
+        div(
+          a(href("#"), t("Quick start"))
+        ),
+
+        div(
+          a(href("#"), t("Overview"))
+        )
+      )
     );
   }
 
