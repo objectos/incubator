@@ -32,303 +32,323 @@ public class MarkdownBeAnnotatedTypeMethodTest {
   @Test
   public void blockquote() {
     Util.assertHasLines(
-        generate(
-            "a",
-            "",
-            "> hi"
-        ),
+      generate(
+        "a",
+        "",
+        "> hi"
+      ),
 
-        "void unnamed() {",
-        "  p(",
-        "      t(\"a\")",
-        "  );",
-        "  blockquote(",
-        "      p(",
-        "          t(\"hi\")",
-        "      )",
-        "  );",
-        "}"
+      "void unnamed() {",
+      "  p(",
+      "      t(\"a\")",
+      "  );",
+      "  blockquote(",
+      "      p(",
+      "          t(\"hi\")",
+      "      )",
+      "  );",
+      "}"
     );
   }
 
   @Test
   public void em() {
     Util.assertHasLines(
-        generate(
-            "first _second_ third"
-        ),
+      generate(
+        "first _second_ third"
+      ),
 
-        "void unnamed() {",
-        "  p(",
-        "      t(\"first \"),",
-        "      em(",
-        "          t(\"second\")",
-        "      ),",
-        "      t(\" third\")",
-        "  );",
-        "}"
+      "void unnamed() {",
+      "  p(",
+      "      t(\"first \"),",
+      "      em(",
+      "          t(\"second\")",
+      "      ),",
+      "      t(\" third\")",
+      "  );",
+      "}"
     );
   }
 
   @Test
   public void generate0() {
     Util.assertHasLines(
-        generate(
-            "[a link](https://example.com)"
-        ),
+      generate(
+        "[a link](https://example.com)"
+      ),
 
-        "void unnamed() {",
-        "  p(",
-        "      a(",
-        "          href(\"https://example.com\"),",
-        "          t(\"a link\")",
-        "      )",
-        "  );",
-        "}"
+      "void unnamed() {",
+      "  p(",
+      "      a(",
+      "          href(\"https://example.com\"),",
+      "          t(\"a link\")",
+      "      )",
+      "  );",
+      "}"
     );
 
     Util.assertHasLines(
-        generate(
-            "- Java16",
-            "- Java11",
-            "- Java8",
-            "- Java7",
-            "- Java6"
-        ),
+      generate(
+        "- Java16",
+        "- Java11",
+        "- Java8",
+        "- Java7",
+        "- Java6"
+      ),
 
-        "void unnamed() {",
-        "  ul(",
-        "      li(",
-        "          t(\"Java16\")",
-        "      ),",
-        "      li(",
-        "          t(\"Java11\")",
-        "      ),",
-        "      li(",
-        "          t(\"Java8\")",
-        "      ),",
-        "      li(",
-        "          t(\"Java7\")",
-        "      ),",
-        "      li(",
-        "          t(\"Java6\")",
-        "      )",
-        "  );",
-        "}"
+      "void unnamed() {",
+      "  ul(",
+      "      li(",
+      "          t(\"Java16\")",
+      "      ),",
+      "      li(",
+      "          t(\"Java11\")",
+      "      ),",
+      "      li(",
+      "          t(\"Java8\")",
+      "      ),",
+      "      li(",
+      "          t(\"Java7\")",
+      "      ),",
+      "      li(",
+      "          t(\"Java6\")",
+      "      )",
+      "  );",
+      "}"
     );
 
     Util.assertHasLines(
-        generate(
-            "```",
-            "mvn --help",
-            "```",
-            "",
-            "the command `mvn` is used..."
-        ),
+      generate(
+        "```",
+        "mvn --help",
+        "```",
+        "",
+        "the command `mvn` is used..."
+      ),
 
-        "void unnamed() {",
-        "  pre(",
-        "      code(",
-        "          t(\"mvn --help\\n\")",
-        "      )",
-        "  );",
-        "  p(",
-        "      t(\"the command \"),",
-        "      code(\"mvn\"),",
-        "      t(\" is used...\")",
-        "  );",
-        "}"
+      "void unnamed() {",
+      "  pre(",
+      "      code(",
+      "          t(\"mvn --help\\n\")",
+      "      )",
+      "  );",
+      "  p(",
+      "      t(\"the command \"),",
+      "      code(\"mvn\"),",
+      "      t(\" is used...\")",
+      "  );",
+      "}"
     );
 
     Util.assertHasLines(
-        generate(
-            "- versions",
-            "    - Java16",
-            "    - Java11",
-            "- vendors",
-            "    - OpenJDK",
-            "    - Oracle"
-        ),
+      generate(
+        "- versions",
+        "    - Java16",
+        "    - Java11",
+        "- vendors",
+        "    - OpenJDK",
+        "    - Oracle"
+      ),
 
-        "void unnamed() {",
-        "  ul(",
-        "      li(",
-        "          t(\"versions\"), ul(",
-        "              li(",
-        "                  t(\"Java16\")",
-        "              ),",
-        "              li(",
-        "                  t(\"Java11\")",
-        "              )",
-        "          )",
-        "      ),",
-        "      li(",
-        "          t(\"vendors\"), ul(",
-        "              li(",
-        "                  t(\"OpenJDK\")",
-        "              ),",
-        "              li(",
-        "                  t(\"Oracle\")",
-        "              )",
-        "          )",
-        "      )",
-        "  );",
-        "}"
+      "void unnamed() {",
+      "  ul(",
+      "      li(",
+      "          t(\"versions\"), ul(",
+      "              li(",
+      "                  t(\"Java16\")",
+      "              ),",
+      "              li(",
+      "                  t(\"Java11\")",
+      "              )",
+      "          )",
+      "      ),",
+      "      li(",
+      "          t(\"vendors\"), ul(",
+      "              li(",
+      "                  t(\"OpenJDK\")",
+      "              ),",
+      "              li(",
+      "                  t(\"Oracle\")",
+      "              )",
+      "          )",
+      "      )",
+      "  );",
+      "}"
     );
   }
 
   @Test
   public void h() {
     Util.assertHasLines(
-        generate(
-            "# Heading 1"
-        ),
+      generate(
+        "# Heading 1"
+      ),
 
-        "void unnamed() {",
-        "  h1(",
-        "      t(\"Heading 1\")",
-        "  );",
-        "}"
+      "void unnamed() {",
+      "  h1(",
+      "      t(\"Heading 1\")",
+      "  );",
+      "}"
     );
 
     Util.assertHasLines(
-        generate(
-            "# Heading 1{#custom-id}"
-        ),
+      generate(
+        "# Heading 1{#custom-id}"
+      ),
 
-        "void unnamed() {",
-        "  h1(",
-        "      id(\"custom-id\"),",
-        "      t(\"Heading 1\")",
-        "  );",
-        "}"
+      "void unnamed() {",
+      "  h1(",
+      "      id(\"custom-id\"),",
+      "      t(\"Heading 1\")",
+      "  );",
+      "}"
     );
   }
 
   @Test
   public void img() {
     Util.assertHasLines(
-        generate(
-            "![alt text](file.jpg)",
-            "![alt text](file.jpg \"A title\")"
-        ),
+      generate(
+        "![alt text](file.jpg)",
+        "![alt text](file.jpg \"A title\")"
+      ),
 
-        "void unnamed() {",
-        "  p(",
-        "      img(",
-        "          src(\"file.jpg\"),",
-        "          alt(\"alt text\")",
-        "      ), t(\"\\n\"),",
-        "      img(",
-        "          src(\"file.jpg\"),",
-        "          title(\"A title\"),",
-        "          alt(\"alt text\")",
-        "      )",
-        "  );",
-        "}"
+      "void unnamed() {",
+      "  p(",
+      "      img(",
+      "          src(\"file.jpg\"),",
+      "          alt(\"alt text\")",
+      "      ), t(\"\\n\"),",
+      "      img(",
+      "          src(\"file.jpg\"),",
+      "          title(\"A title\"),",
+      "          alt(\"alt text\")",
+      "      )",
+      "  );",
+      "}"
     );
   }
 
   @Test
   public void link() {
     Util.assertHasLines(
-        generate(
-            "[normal](https://example.com)",
-            "^^1^^"
-        ),
+      generate(
+        "[normal](https://example.com)",
+        "^^1^^"
+      ),
 
-        "void unnamed() {",
-        "  p(",
-        "      a(",
-        "          href(\"https://example.com\"),",
-        "          t(\"normal\")",
-        "      ), t(\"\\n\"),",
-        "      a(",
-        "          id(\"fn1-ret\"), href(\"#fn1\"), sup(\"[1]\")",
-        "      )",
-        "  );",
-        "}"
+      "void unnamed() {",
+      "  p(",
+      "      a(",
+      "          href(\"https://example.com\"),",
+      "          t(\"normal\")",
+      "      ), t(\"\\n\"),",
+      "      a(",
+      "          id(\"fn1-ret\"), href(\"#fn1\"), sup(\"[1]\")",
+      "      )",
+      "  );",
+      "}"
     );
   }
 
   @Test
   public void ol() {
     Util.assertHasLines(
-        generate(
-            "1. Introduction",
-            "    1. Motivation",
-            "    1. Caveats",
-            "1. Part 1",
-            "1. Part 2"
-        ),
+      generate(
+        "1. Introduction",
+        "    1. Motivation",
+        "    1. Caveats",
+        "1. Part 1",
+        "1. Part 2"
+      ),
 
-        "void unnamed() {",
-        "  ol(",
-        "      li(",
-        "          t(\"Introduction\"), ol(",
-        "              li(",
-        "                  t(\"Motivation\")",
-        "              ),",
-        "              li(",
-        "                  t(\"Caveats\")",
-        "              )",
-        "          )",
-        "      ),",
-        "      li(",
-        "          t(\"Part 1\")",
-        "      ),",
-        "      li(",
-        "          t(\"Part 2\")",
-        "      )",
-        "  );",
-        "}"
+      "void unnamed() {",
+      "  ol(",
+      "      li(",
+      "          t(\"Introduction\"), ol(",
+      "              li(",
+      "                  t(\"Motivation\")",
+      "              ),",
+      "              li(",
+      "                  t(\"Caveats\")",
+      "              )",
+      "          )",
+      "      ),",
+      "      li(",
+      "          t(\"Part 1\")",
+      "      ),",
+      "      li(",
+      "          t(\"Part 2\")",
+      "      )",
+      "  );",
+      "}"
+    );
+  }
+
+  @Test
+  public void preCode() {
+    Util.assertHasLines(
+      generate(
+        "```xml",
+        "<foo></foo>",
+        "```"
+      ),
+
+      "void unnamed() {",
+      "  pre(",
+      "      code(",
+      "          _class(\"language-xml\"),",
+      "          t(\"<foo></foo>\\n\")",
+      "      )",
+      "  );",
+      "}"
     );
   }
 
   @Test
   public void self() {
     Util.assertHasLines(
-        generate(
-            "```self",
-            "m0",
-            "```"
-        ),
+      generate(
+        "```self",
+        "m0",
+        "```"
+      ),
 
-        "void unnamed() {",
-        "  m0();",
-        "}"
+      "void unnamed() {",
+      "  m0();",
+      "}"
     );
     Util.assertHasLines(
-        generate(
-            "```self",
-            "m0",
-            "m1",
-            "```"
-        ),
+      generate(
+        "```self",
+        "m0",
+        "m1",
+        "```"
+      ),
 
-        "void unnamed() {",
-        "  m0();",
-        "  m1();",
-        "}"
+      "void unnamed() {",
+      "  m0();",
+      "  m1();",
+      "}"
     );
   }
 
   @Test
   public void strong() {
     Util.assertHasLines(
-        generate(
-            "first __second__ third"
-        ),
+      generate(
+        "first __second__ third"
+      ),
 
-        "void unnamed() {",
-        "  p(",
-        "      t(\"first \"),",
-        "      strong(",
-        "          t(\"second\")",
-        "      ),",
-        "      t(\" third\")",
-        "  );",
-        "}"
+      "void unnamed() {",
+      "  p(",
+      "      t(\"first \"),",
+      "      strong(",
+      "          t(\"second\")",
+      "      ),",
+      "      t(\" third\")",
+      "  );",
+      "}"
     );
   }
 
@@ -337,7 +357,7 @@ public class MarkdownBeAnnotatedTypeMethodTest {
 
     MethodCode result;
     result = method.generate0(
-        LineSeparator.join(lines)
+      LineSeparator.join(lines)
     );
 
     return result.toString();

@@ -37,6 +37,7 @@ import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.core.list.MutableList;
 import br.com.objectos.core.object.Checks;
 import br.com.objectos.core.set.ImmutableSet;
+import java.util.List;
 import org.commonmark.node.BlockQuote;
 import org.commonmark.node.BulletList;
 import org.commonmark.node.Code;
@@ -93,7 +94,7 @@ class MarkdownMethod implements Visitor {
 
   private static final Parser PARSER = Parser.builder()
       .extensions(
-          ImmutableList.of(FootnoteExtension.INSTANCE)
+        ImmutableList.of(FootnoteExtension.INSTANCE)
       )
       .build();
 
@@ -153,17 +154,17 @@ class MarkdownMethod implements Visitor {
     comment = processingMethod.getDocComment();
 
     return Java.javaFile(
-        packageName,
+      packageName,
 
-        Java._class(
-            MarkdownMethodProcessor.GENERATED,
+      Java._class(
+        MarkdownMethodProcessor.GENERATED,
 
-            Java.id(declaringType.getSimpleName() + "_" + processingMethod.getName()),
+        Java.id(declaringType.getSimpleName() + "_" + processingMethod.getName()),
 
-            Java._extends(TypeNames.AbstractFragment),
+        Java._extends(TypeNames.AbstractFragment),
 
-            generate0(comment)
-        )
+        generate0(comment)
+      )
     );
   }
 
@@ -178,7 +179,7 @@ class MarkdownMethod implements Visitor {
     arguments.add(Java.nl());
 
     addToMethodOrArguments(
-        invoke("blockquote", popToArguments())
+      invoke("blockquote", popToArguments())
     );
   }
 
@@ -190,11 +191,11 @@ class MarkdownMethod implements Visitor {
   @Override
   public final void visit(Code code) {
     arguments.add(
-        Java.nl()
+      Java.nl()
     );
 
     arguments.add(
-        invoke("code", l(code.getLiteral()))
+      invoke("code", l(code.getLiteral()))
     );
   }
 
@@ -223,15 +224,15 @@ class MarkdownMethod implements Visitor {
       arguments.add(Java.nl());
 
       arguments.add(
-          invoke("id", l(id + "-ret"))
+        invoke("id", l(id + "-ret"))
       );
 
       arguments.add(
-          invoke("href", l("#" + id))
+        invoke("href", l("#" + id))
       );
 
       arguments.add(
-          invoke("sup", l('[' + l + ']'))
+        invoke("sup", l('[' + l + ']'))
       );
 
       arguments.add(Java.nl());
@@ -242,7 +243,7 @@ class MarkdownMethod implements Visitor {
       arguments.add(Java.nl());
 
       arguments.add(
-          invoke("a", anchorArgs)
+        invoke("a", anchorArgs)
       );
     } else {
       defaultAction(customNode);
@@ -276,7 +277,7 @@ class MarkdownMethod implements Visitor {
     arguments.add(Java.nl());
 
     arguments.add(
-        invoke("em", args)
+      invoke("em", args)
     );
   }
 
@@ -302,20 +303,31 @@ class MarkdownMethod implements Visitor {
         }
 
         addToMethodOrArguments(
-            invoke(methodName)
+          invoke(methodName)
         );
       }
     } else {
+      List<ArgumentsElement> args;
+      args = MutableList.create();
+
+      if (!info.isEmpty()) {
+        args.add(nl());
+
+        args.add(invoke("_class", l("language-" + info)));
+      }
+
+      args.add(nl());
+
+      args.add(invoke("t", l(fencedCodeBlock.getLiteral())));
+
+      args.add(nl());
+
       addToMethodOrArguments(
-          invoke("pre",
-              nl(),
-              invoke("code",
-                  nl(),
-                  invoke("t", l(fencedCodeBlock.getLiteral())),
-                  nl()
-              ),
-              nl()
-          )
+        invoke("pre",
+          nl(),
+          invoke("code", args),
+          nl()
+        )
       );
     }
   }
@@ -359,7 +371,7 @@ class MarkdownMethod implements Visitor {
     arguments.add(Java.nl());
 
     addToMethodOrArguments(
-        invoke(methodName, popToArguments())
+      invoke(methodName, popToArguments())
     );
   }
 
@@ -380,7 +392,7 @@ class MarkdownMethod implements Visitor {
     arguments.add(Java.nl());
 
     arguments.add(
-        invoke("src", l(image.getDestination()))
+      invoke("src", l(image.getDestination()))
     );
 
     String title;
@@ -390,7 +402,7 @@ class MarkdownMethod implements Visitor {
       arguments.add(Java.nl());
 
       arguments.add(
-          invoke("title", l(title))
+        invoke("title", l(title))
       );
     }
 
@@ -404,7 +416,7 @@ class MarkdownMethod implements Visitor {
     arguments.add(Java.nl());
 
     arguments.add(
-        invoke("img", imgArgs)
+      invoke("img", imgArgs)
     );
   }
 
@@ -420,7 +432,7 @@ class MarkdownMethod implements Visitor {
     arguments.add(Java.nl());
 
     arguments.add(
-        invoke("href", l(link.getDestination()))
+      invoke("href", l(link.getDestination()))
     );
 
     visitChildren(link);
@@ -433,7 +445,7 @@ class MarkdownMethod implements Visitor {
     arguments.add(Java.nl());
 
     arguments.add(
-        invoke("a", anchorArgs)
+      invoke("a", anchorArgs)
     );
   }
 
@@ -466,7 +478,7 @@ class MarkdownMethod implements Visitor {
     arguments.add(Java.nl());
 
     arguments.add(
-        invoke("li", liArgs)
+      invoke("li", liArgs)
     );
   }
 
@@ -486,7 +498,7 @@ class MarkdownMethod implements Visitor {
         arguments.add(Java.nl());
 
         addToMethodOrArguments(
-            invoke("p", popToArguments())
+          invoke("p", popToArguments())
         );
         break;
       case _LI_TIGHT:
@@ -498,7 +510,7 @@ class MarkdownMethod implements Visitor {
   @Override
   public final void visit(SoftLineBreak softLineBreak) {
     arguments.add(
-        invoke("t", l("\n"))
+      invoke("t", l("\n"))
     );
   }
 
@@ -516,14 +528,14 @@ class MarkdownMethod implements Visitor {
     arguments.add(Java.nl());
 
     arguments.add(
-        invoke("strong", args)
+      invoke("strong", args)
     );
   }
 
   @Override
   public final void visit(Text t) {
     arguments.add(
-        Java.nl()
+      Java.nl()
     );
 
     String text;
@@ -573,7 +585,7 @@ class MarkdownMethod implements Visitor {
       }
 
       arguments.add(
-          invoke(methodName, l(text))
+        invoke(methodName, l(text))
       );
 
       return;
@@ -601,7 +613,7 @@ class MarkdownMethod implements Visitor {
 
     if (openingBrace < 0) {
       arguments.add(
-          invoke("t", l(text))
+        invoke("t", l(text))
       );
 
       return;
@@ -611,17 +623,17 @@ class MarkdownMethod implements Visitor {
     id = new String(charArray, openingBrace + 2, closingBrace - openingBrace - 2);
 
     arguments.add(
-        invoke("id", l(id))
+      invoke("id", l(id))
     );
 
     arguments.add(
-        Java.nl()
+      Java.nl()
     );
 
     text = new String(charArray, 0, openingBrace);
 
     arguments.add(
-        invoke("t", l(text))
+      invoke("t", l(text))
     );
   }
 
@@ -674,7 +686,7 @@ class MarkdownMethod implements Visitor {
     listArgs = popToArguments();
 
     addToMethodOrArguments(
-        invoke(tag, listArgs)
+      invoke(tag, listArgs)
     );
   }
 
