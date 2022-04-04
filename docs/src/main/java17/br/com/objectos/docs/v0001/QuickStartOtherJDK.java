@@ -13,20 +13,37 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package br.com.objectos.docs;
+package br.com.objectos.docs.v0001;
 
-import br.com.objectos.be.site.SiteDirectory;
-import br.com.objectos.docs.v0001.V0001Directory;
+import br.com.objectos.docs.DocsPage;
 
-public final class DocsDirectory extends SiteDirectory {
+final class QuickStartOtherJDK extends DocsPage {
 
   @Override
-  protected final void configure() {
-    putInstance(new LeftDrawer());
+  protected final ThisStyleSheet thisStyleSheet() {
+    return new ThisStyleSheet() {
+      @Override
+      protected final void definition() {
+        super.definition();
 
-    addPage("index.html", new Index());
+        styleTable();
+      }
+    };
+  }
 
-    addDirectory("latest", new V0001Directory());
+  @Override
+  protected final String topBarTitle() {
+    return null;
+  }
+
+  @Override
+  protected final void uiMain() {
+    header(
+      h1("I don't see my JDK listed in the supported versions")
+    );
+
+    p("""
+      Ensure you are reading the latest version of the documentation.""");
   }
 
 }

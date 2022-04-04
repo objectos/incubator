@@ -17,6 +17,7 @@ package br.com.objectos.docs;
 
 import br.com.objectos.be.site.SiteFragment;
 import br.com.objectos.core.list.ImmutableList;
+import br.com.objectos.core.list.MutableList;
 import br.com.objectos.css.Css;
 import br.com.objectos.css.select.ClassSelector;
 import br.com.objectos.css.sheet.AbstractStyleSheet;
@@ -68,12 +69,19 @@ public final class LeftDrawer extends SiteFragment {
     ImmutableList<DocsPage> pages;
     pages = getInstancesByType(DocsPage.class);
 
-    NavValue[] items;
-    items = new NavValue[pages.size()];
+    MutableList<NavValue> items;
+    items = new MutableList<>();
 
-    for (int i = 0; i < items.length; i++) {
+    for (int i = 0; i < pages.size(); i++) {
       DocsPage page;
       page = pages.get(i);
+
+      String title;
+      title = page.topBarTitle();
+
+      if (title == null) {
+        continue;
+      }
 
       AValue isCurrent;
       isCurrent = noop();
@@ -82,12 +90,14 @@ public final class LeftDrawer extends SiteFragment {
         isCurrent = _CURRENT;
       }
 
-      items[i] = a(
-        _NAV_LINK, isCurrent, href(page), div(page.topBarTitle())
+      items.add(
+        a(
+          _NAV_LINK, isCurrent, href(page), div(title)
+        )
       );
     }
 
-    return items;
+    return items.toArray(NavValue[]::new);
   }
 
 }

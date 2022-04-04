@@ -18,8 +18,7 @@ package br.com.objectos.docs;
 import br.com.objectos.css.Css;
 import br.com.objectos.css.select.ClassSelector;
 import br.com.objectos.css.select.IdSelector;
-import br.com.objectos.css.sheet.AbstractStyleSheet;
-import br.com.objectos.css.sheet.StyleSheet;
+import br.com.objectos.docs.v0001.V0001Directory;
 
 final class Index extends DocsPage {
 
@@ -27,48 +26,48 @@ final class Index extends DocsPage {
 
   private static final IdSelector _PRIMARY = Css.randomHash(3);
 
-  private final StyleSheet css = new AbstractStyleSheet() {
-    @Override
-    protected final void definition() {
-      style(
-        _BLOCK,
-
-        padding(Spacing.V06)
-      );
-
-      style(
-        _BLOCK, sp(), a, HOVER,
-
-        textDecoration(underline)
-      );
-
-      style(
-        _BLOCK, sp(), div,
-
-        marginBottom(Spacing.V04)
-      );
-
-      style(
-        _BLOCK, sp(), h2,
-
-        fontSize(FontSize.XL2),
-        fontWeight(500),
-        letterSpacing(px(-0.25)),
-        marginBottom(Spacing.V04)
-      );
-
-      style(
-        _PRIMARY,
-
-        backgroundColor(Colors.INDIGO6),
-        color(white)
-      );
-    }
-  };
-
   @Override
-  protected final StyleSheet pageStyleSheet() {
-    return css;
+  protected final ThisStyleSheet thisStyleSheet() {
+    return new ThisStyleSheet() {
+      @Override
+      protected final void definition() {
+        super.definition();
+
+        style(
+          _BLOCK,
+
+          padding(Spacing.V06)
+        );
+
+        style(
+          _BLOCK, sp(), a, HOVER,
+
+          textDecoration(underline)
+        );
+
+        style(
+          _BLOCK, sp(), div,
+
+          marginBottom(Spacing.V04)
+        );
+
+        style(
+          _BLOCK, sp(), h2,
+
+          fontSize(FontSize.XL2),
+          fontWeight(500),
+          letterSpacing(px(-0.25)),
+          marginBottom(Spacing.V04)
+        );
+
+        style(
+          _PRIMARY,
+
+          backgroundColor(Colors.INDIGO6),
+          color(white)
+        );
+      }
+    };
   }
 
   @Override
@@ -95,7 +94,7 @@ final class Index extends DocsPage {
         h2("Get Started"),
 
         div(
-          a(href("#"), t("Quick start"))
+          a(href(V0001Directory.QUICK_START), t("Quick start"))
         ),
 
         div(

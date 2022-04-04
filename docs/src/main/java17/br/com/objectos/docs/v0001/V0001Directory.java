@@ -13,20 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package br.com.objectos.docs;
+package br.com.objectos.docs.v0001;
 
+import br.com.objectos.be.site.HasHref;
 import br.com.objectos.be.site.SiteDirectory;
-import br.com.objectos.docs.v0001.V0001Directory;
 
-public final class DocsDirectory extends SiteDirectory {
+public final class V0001Directory extends SiteDirectory {
+
+  public static final Class<? extends HasHref> QUICK_START = QuickStart.class;
 
   @Override
   protected final void configure() {
-    putInstance(new LeftDrawer());
-
-    addPage("index.html", new Index());
-
-    addDirectory("latest", new V0001Directory());
+    addPage("quick-start.html", new QuickStart());
+    addPage("quick-start-other-jdk.html", new QuickStartOtherJDK());
   }
 
 }

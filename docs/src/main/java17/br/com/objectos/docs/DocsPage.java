@@ -48,192 +48,6 @@ public abstract class DocsPage extends SitePage {
 
   private static final IdSelector _UI_TOPBAR1 = Css.randomHash(3);
 
-  private final StyleSheet css = new AbstractStyleSheet() {
-    private final Reset reset = new Reset();
-
-    @Override
-    protected final void definition() {
-      install(reset);
-
-      style(
-        html,
-
-        height(pct(100))
-      );
-
-      style(
-        p,
-
-        marginBottom(Spacing.V05)
-      );
-
-      style(
-        _LOGO,
-
-        height(px(24)),
-        width(auto)
-      );
-
-      style(
-        _MENU_CLOSE,
-
-        display(none)
-      );
-
-      style(
-        _MENU_BTN,
-
-        alignItems(center),
-        height(pct(100)),
-        marginLeft(px(-8)),
-        padding(Spacing.V01),
-        outline(none)
-      );
-
-      style(
-        _MENU_OPEN,
-
-        display(flex)
-      );
-
-      style(
-        _MENU_BTN, HOVER, sp(), _MENU_SVG,
-
-        backgroundColor(Colors.GRAY1)
-      );
-
-      style(
-        _MENU_SVG,
-
-        borderRadius(pct(50)),
-        height(px(40)),
-        padding(px(8)),
-        width(px(40))
-      );
-
-      style(
-        _UI,
-
-        display(flex),
-        flexDirection(column),
-        height(pct(100)),
-        overflow(hidden)
-      );
-
-      style(
-        _UI_AREA,
-
-        height(pct(100)),
-        overflowY(auto)
-      );
-
-      style(
-        _UI_LEFTDRAWER,
-
-        backgroundColor(white),
-        bottom(zero()),
-        display(none),
-        padding(Spacing.V06),
-        position(absolute),
-        top(Spacing.V16),
-        width(pct(100))
-      );
-
-      style(
-        _UI_MAIN,
-
-        padding(Spacing.V04)
-      );
-
-      style(
-        _UI_MAIN, sp(), header,
-
-        padding(Spacing.V12, Spacing.V0)
-      );
-
-      style(
-        _UI_MAIN, sp(), header, sp(), h1,
-
-        fontSize(px(40)),
-        fontWeight(600),
-        letterSpacing(px(-0.5)),
-        lineHeight(px(48)),
-        marginBottom(Spacing.V04)
-      );
-
-      style(
-        _UI_TOPBAR0,
-
-        alignItems(center),
-        borderBottom(Spacing.PX, solid, Colors.GRAY4),
-        display(flex),
-        flex(l(0), l(0), Spacing.V12),
-        padding(Spacing.V0, Spacing.V04)
-      );
-
-      style(
-        _UI_TOPBAR1,
-
-        backgroundColor(Colors.GRAY0),
-        fontSize(FontSize.SM),
-        fontWeight(500),
-        letterSpacing(px(1.5)),
-        padding(Spacing.V06, Spacing.V04),
-        textTransform(uppercase)
-      );
-
-      media(
-        screen, minWidth(Breakpoint.LG),
-
-        style(
-          _LOGO,
-
-          alignItems(center),
-          display(flex),
-          height(pct(100))
-        ),
-
-        style(
-          _LOGO, sp(), svg,
-
-          height(px(24)),
-          width(auto),
-          marginTop(px(5))
-        ),
-
-        style(
-          _MENU_CLOSE, or(), _MENU_OPEN,
-
-          display(none)
-        ),
-
-        style(
-          _UI_AREA,
-
-          display(flex),
-          overflowY(hidden)
-        ),
-
-        style(
-          _UI_LEFTDRAWER,
-
-          bottom(unset),
-          display(block),
-          flex(l(0), l(0), px(230)),
-          position(staticKw),
-          top(unset)
-        ),
-
-        style(
-          _UI_MAIN,
-
-          flexGrow(1),
-          overflowY(auto)
-        )
-      );
-    }
-  };
-
   private final String js
       = """
         /* DocsPage.java */
@@ -268,10 +82,10 @@ public abstract class DocsPage extends SitePage {
 
         window.addEventListener('DOMContentLoaded', domLoaded);
         """
-        .replace("\n", "")
-        .replace("{leftPanel}", _UI_LEFTDRAWER.id())
-        .replace("{menuClose}", _MENU_CLOSE.id())
-        .replace("{menuOpen}", _MENU_OPEN.id());
+          .replace("\n", "")
+          .replace("{leftPanel}", _UI_LEFTDRAWER.id())
+          .replace("{menuClose}", _MENU_CLOSE.id())
+          .replace("{menuOpen}", _MENU_OPEN.id());
 
   @Override
   protected final void definition() {
@@ -323,17 +137,17 @@ public abstract class DocsPage extends SitePage {
     LeftDrawer leftDrawer;
     leftDrawer = getInstance(LeftDrawer.class);
 
-    StyleSheet pageCss = pageStyleSheet();
+    StyleSheet css;
+    css = thisStyleSheet();
 
     style(
       raw(css.printMinified()),
-      raw(leftDrawer.css()),
-      pageCss != null ? raw(pageCss.printMinified()) : noop()
+      raw(leftDrawer.css())
     );
   }
 
-  protected StyleSheet pageStyleSheet() {
-    return null;
+  protected ThisStyleSheet thisStyleSheet() {
+    return new ThisStyleSheet();
   }
 
   protected abstract String topBarTitle();
@@ -421,6 +235,264 @@ public abstract class DocsPage extends SitePage {
 
       t("Documentation")
     );
+  }
+
+  protected static class ThisStyleSheet extends AbstractStyleSheet {
+    private final Reset reset = new Reset();
+
+    @Override
+    protected void definition() {
+      install(reset);
+
+      style(
+        html,
+
+        height(pct(100))
+      );
+
+      style(
+        _LOGO,
+
+        height(px(24)),
+        width(auto)
+      );
+
+      style(
+        _MENU_CLOSE,
+
+        display(none)
+      );
+
+      style(
+        _MENU_BTN,
+
+        alignItems(center),
+        height(pct(100)),
+        marginLeft(px(-8)),
+        padding(Spacing.V01),
+        outline(none)
+      );
+
+      style(
+        _MENU_OPEN,
+
+        display(flex)
+      );
+
+      style(
+        _MENU_BTN, HOVER, sp(), _MENU_SVG,
+
+        backgroundColor(Colors.GRAY1)
+      );
+
+      style(
+        _MENU_SVG,
+
+        borderRadius(pct(50)),
+        height(px(40)),
+        padding(px(8)),
+        width(px(40))
+      );
+
+      style(
+        _UI,
+
+        display(flex),
+        flexDirection(column),
+        height(pct(100)),
+        overflow(hidden)
+      );
+
+      style(
+        _UI_AREA,
+
+        height(pct(100)),
+        overflowY(auto)
+      );
+
+      style(
+        _UI_LEFTDRAWER,
+
+        backgroundColor(white),
+        bottom(zero()),
+        display(none),
+        padding(Spacing.V06),
+        position(absolute),
+        top(Spacing.V16),
+        width(pct(100))
+      );
+
+      style(
+        _UI_MAIN,
+
+        padding(Spacing.V04)
+      );
+
+      style(
+        _UI_MAIN, sp(), a,
+
+        color(Colors.INDIGO6)
+      );
+
+      style(
+        _UI_MAIN, sp(), a, HOVER,
+
+        textDecoration(underline)
+      );
+
+      style(
+        _UI_MAIN, sp(), header,
+
+        padding(Spacing.V12, Spacing.V0)
+      );
+
+      style(
+        _UI_MAIN, sp(), header, sp(), h1,
+
+        fontSize(px(40)),
+        fontWeight(600),
+        letterSpacing(px(-0.5)),
+        lineHeight(px(48)),
+        marginBottom(Spacing.V04)
+      );
+
+      style(
+        _UI_MAIN, sp(), h2,
+
+        fontSize(FontSize.XL2),
+        fontWeight(600),
+        marginBottom(Spacing.V04),
+        marginTop(Spacing.V14)
+      );
+
+      style(
+        _UI_MAIN, sp(), p,
+
+        margin(Spacing.V04, zero())
+      );
+
+      style(
+        _UI_TOPBAR0,
+
+        alignItems(center),
+        borderBottom(Spacing.PX, solid, Colors.GRAY4),
+        display(flex),
+        flex(l(0), l(0), Spacing.V12),
+        padding(Spacing.V0, Spacing.V04)
+      );
+
+      style(
+        _UI_TOPBAR1,
+
+        backgroundColor(Colors.GRAY0),
+        fontSize(FontSize.SM),
+        fontWeight(500),
+        letterSpacing(px(1.5)),
+        padding(Spacing.V06, Spacing.V04),
+        textTransform(uppercase)
+      );
+
+      media(
+        screen, minWidth(Breakpoint.LG),
+
+        style(
+          _LOGO,
+
+          alignItems(center),
+          display(flex),
+          height(pct(100))
+        ),
+
+        style(
+          _LOGO, sp(), svg,
+
+          height(px(24)),
+          width(auto),
+          marginTop(px(5))
+        ),
+
+        style(
+          _MENU_CLOSE, or(), _MENU_OPEN,
+
+          display(none)
+        ),
+
+        style(
+          _UI_AREA,
+
+          display(flex),
+          overflowY(hidden)
+        ),
+
+        style(
+          _UI_LEFTDRAWER,
+
+          bottom(unset),
+          display(block),
+          flex(l(0), l(0), px(230)),
+          position(staticKw),
+          top(unset)
+        ),
+
+        style(
+          _UI_MAIN,
+
+          flexGrow(1),
+          overflowY(auto)
+        )
+      );
+    }
+
+    protected final void styleTable() {
+      style(
+        _UI_MAIN, sp(), table,
+
+        borderTop(px(1), solid, Colors.GRAY4),
+        marginBottom(Spacing.V08),
+        width(pct(100))
+      );
+
+      style(
+        _UI_MAIN, sp(), table, sp(), td,
+
+        padding(Spacing.V04)
+      );
+
+      style(
+        _UI_MAIN, sp(), table, sp(), tr,
+
+        borderBottom(px(1), solid, Colors.GRAY4)
+      );
+
+      style(
+        _UI_MAIN, sp(), tbody,
+
+        fontSize(FontSize.SM)
+      );
+
+      style(
+        _UI_MAIN, sp(), thead, sp(), th,
+
+        backgroundColor(Colors.GRAY2),
+        padding(Spacing.V04),
+        textAlign(left)
+      );
+    }
+
+    protected final void styleUl() {
+      style(
+        _UI_MAIN, sp(), ul,
+
+        listStyle(disc, inside),
+        paddingLeft(Spacing.V10)
+      );
+
+      style(
+        _UI_MAIN, sp(), li,
+
+        margin(Spacing.V03, zero())
+      );
+    }
   }
 
 }
