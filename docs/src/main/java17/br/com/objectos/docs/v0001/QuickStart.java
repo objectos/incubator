@@ -58,7 +58,9 @@ abstract class QuickStart extends DocsPage {
 
       f(this::article1),
 
-      f(this::article2)
+      f(this::article2),
+
+      f(this::article3)
     );
   }
 
@@ -189,5 +191,20 @@ in the `dependencies` section of your project's POM file, like so:
   //@formatter:on
   @Markdown
   abstract void article2();
+
+//@formatter:off
+  /**
+
+## Where to go from here
+
+This is the first public version of the Objectos suite of libraries.
+Our goal is to, in time, allow you to build Java web applications.
+For now, you can learn more about Objectos by browsing the documentation of
+the available components.
+
+   */
+  //@formatter:on
+  @Markdown
+  abstract void article3();
 
 }

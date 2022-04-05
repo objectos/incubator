@@ -320,6 +320,33 @@ public abstract class DocsPage extends SitePage {
       install(reset);
 
       style(
+        article, sp(), a,
+
+        color(Colors.INDIGO6)
+      );
+
+      style(
+        article, sp(), a, HOVER,
+
+        textDecoration(underline)
+      );
+
+      style(
+        article, sp(), h2,
+
+        fontSize(FontSize.XL2),
+        fontWeight(600),
+        marginBottom(Spacing.V04),
+        marginTop(Spacing.V14)
+      );
+
+      style(
+        article, sp(), p,
+
+        margin(Spacing.V04, zero())
+      );
+
+      style(
         html,
 
         height(pct(100))
@@ -404,18 +431,6 @@ public abstract class DocsPage extends SitePage {
       );
 
       style(
-        _UI_MAIN, sp(), a,
-
-        color(Colors.INDIGO6)
-      );
-
-      style(
-        _UI_MAIN, sp(), a, HOVER,
-
-        textDecoration(underline)
-      );
-
-      style(
         _UI_MAIN, sp(), header,
 
         padding(Spacing.V12, Spacing.V0)
@@ -429,21 +444,6 @@ public abstract class DocsPage extends SitePage {
         letterSpacing(px(-0.5)),
         lineHeight(px(48)),
         marginBottom(Spacing.V04)
-      );
-
-      style(
-        _UI_MAIN, sp(), h2,
-
-        fontSize(FontSize.XL2),
-        fontWeight(600),
-        marginBottom(Spacing.V04),
-        marginTop(Spacing.V14)
-      );
-
-      style(
-        _UI_MAIN, sp(), p,
-
-        margin(Spacing.V04, zero())
       );
 
       style(
