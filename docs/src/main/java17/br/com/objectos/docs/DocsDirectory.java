@@ -24,6 +24,9 @@ public final class DocsDirectory extends SiteDirectory {
   protected final void configure() {
     putInstance(new LeftDrawer());
 
+    addResource("prism.css");
+    addResource("prism.js");
+
     addPage("index.html", new Index());
 
     addDirectory("latest", new V0001Directory());

@@ -15,9 +15,12 @@
  */
 package br.com.objectos.docs.v0001;
 
+import br.com.objectos.be.annotations.Be;
+import br.com.objectos.be.annotations.Markdown;
 import br.com.objectos.docs.DocsPage;
 
-final class QuickStart extends DocsPage {
+@Be
+abstract class QuickStart extends DocsPage {
 
   @Override
   protected final ThisStyleSheet thisStyleSheet() {
@@ -26,9 +29,11 @@ final class QuickStart extends DocsPage {
       protected final void definition() {
         super.definition();
 
-        styleTable();
+        articleCode();
 
-        styleUl();
+        articleTable();
+
+        articleUl();
       }
     };
   }
@@ -40,14 +45,55 @@ final class QuickStart extends DocsPage {
 
   @Override
   protected final void uiMain() {
-    header(
-      h1("Objectos Quick Start")
+    article(
+      header(
+        h1("Objectos Quick Start")
+      ),
+
+      p("""
+        Get started with Objectos. Learn how to add the Objectos dependencies to an existing
+        Maven project."""),
+
+      f(this::article0),
+
+      f(this::article1)
     );
+  }
 
-    p("""
-      Get started with Objectos. Learn how to add the Objectos dependencies to an existing
-      Maven project.""");
+  //@formatter:off
+  /**
 
+## Import the Objectos BOM POM
+
+Now that you have chosen the Objectos version, the next step is to import
+the Objectos BOM POM.
+
+You do so by declaring it in the `dependencyManagement` section of your
+project's POM file.
+
+*```xml
+*<properties>
+*    <objectos.version>version chosen in the previous section</objectos.version>
+*</properties>
+*
+*<dependencyManagement>
+*    <dependencies>
+*        <dependency>
+*            <groupId>br.com.objectos</groupId>
+*            <artifactId>bom</artifactId>
+*            <version>${objectos.version}</version>
+*            <type>pom</type>
+*            <scope>import</scope>
+*        </dependency>
+*    </dependencies>
+*</dependencyManagement>
+*```
+   */
+  //@formatter:on
+  @Markdown
+  abstract void article1();
+
+  private void article0() {
     h2("Choose the Objectos version");
 
     p("""

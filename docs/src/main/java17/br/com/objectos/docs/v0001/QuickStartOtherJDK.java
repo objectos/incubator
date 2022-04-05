@@ -26,7 +26,7 @@ final class QuickStartOtherJDK extends DocsPage {
       protected final void definition() {
         super.definition();
 
-        styleTable();
+        articleTable();
       }
     };
   }

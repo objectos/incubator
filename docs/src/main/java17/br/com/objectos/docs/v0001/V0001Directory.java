@@ -20,11 +20,11 @@ import br.com.objectos.be.site.SiteDirectory;
 
 public final class V0001Directory extends SiteDirectory {
 
-  public static final Class<? extends HasHref> QUICK_START = QuickStart.class;
+  public static final Class<? extends HasHref> QUICK_START = MarkdownQuickStart.class;
 
   @Override
   protected final void configure() {
-    addPage("quick-start.html", new QuickStart());
+    addPage("quick-start.html", new MarkdownQuickStart());
     addPage("quick-start-other-jdk.html", new QuickStartOtherJDK());
   }
 

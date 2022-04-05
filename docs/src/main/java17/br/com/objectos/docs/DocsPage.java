@@ -129,7 +129,9 @@ public abstract class DocsPage extends SitePage {
     meta(httpEquiv("x-ua-compatible"), content("ie=edge"));
     meta(name("viewport"), content("width=device-width, initial-scale=1, shrink-to-fit=no"));
     link(rel("shortcut icon"), type(ImageType.ICON.qualifiedName()), href("/favicon.ico"));
+    link(href("/docs/prism.css"), rel("stylesheet"));
 
+    script(src("/docs/prism.js"));
     script(
       raw(js)
     );
@@ -239,6 +241,79 @@ public abstract class DocsPage extends SitePage {
 
   protected static class ThisStyleSheet extends AbstractStyleSheet {
     private final Reset reset = new Reset();
+
+    protected final void articleCode() {
+      style(
+        article, sp(), p, sp(), code,
+
+        backgroundColor(Colors.GRAY1),
+        border(px(1), solid, Colors.GRAY3),
+        color(Colors.GRAY9),
+        fontSize(FontSize.SM),
+        fontWeight(500),
+        lineHeight(FontSize.SM),
+        padding(Spacing.PX, Spacing.V01)
+      );
+
+      style(
+        article, sp(), code, attr("class", startsWith("language-")),
+
+        fontSize(FontSize.SM),
+        fontWeight(500),
+        lineHeight(FontSize.SM)
+      );
+    }
+
+    protected final void articleTable() {
+      style(
+        article, sp(), table,
+
+        borderTop(px(1), solid, Colors.GRAY4),
+        marginBottom(Spacing.V08),
+        width(pct(100))
+      );
+
+      style(
+        article, sp(), tbody,
+
+        fontSize(FontSize.SM)
+      );
+
+      style(
+        article, sp(), td,
+
+        padding(Spacing.V04)
+      );
+
+      style(
+        article, sp(), th,
+
+        backgroundColor(Colors.GRAY2),
+        padding(Spacing.V04),
+        textAlign(left)
+      );
+
+      style(
+        article, sp(), tr,
+
+        borderBottom(px(1), solid, Colors.GRAY4)
+      );
+    }
+
+    protected final void articleUl() {
+      style(
+        article, sp(), ul,
+
+        listStyle(disc, inside),
+        paddingLeft(Spacing.V10)
+      );
+
+      style(
+        article, sp(), li,
+
+        margin(Spacing.V03, zero())
+      );
+    }
 
     @Override
     protected void definition() {
@@ -440,57 +515,6 @@ public abstract class DocsPage extends SitePage {
           flexGrow(1),
           overflowY(auto)
         )
-      );
-    }
-
-    protected final void styleTable() {
-      style(
-        _UI_MAIN, sp(), table,
-
-        borderTop(px(1), solid, Colors.GRAY4),
-        marginBottom(Spacing.V08),
-        width(pct(100))
-      );
-
-      style(
-        _UI_MAIN, sp(), table, sp(), td,
-
-        padding(Spacing.V04)
-      );
-
-      style(
-        _UI_MAIN, sp(), table, sp(), tr,
-
-        borderBottom(px(1), solid, Colors.GRAY4)
-      );
-
-      style(
-        _UI_MAIN, sp(), tbody,
-
-        fontSize(FontSize.SM)
-      );
-
-      style(
-        _UI_MAIN, sp(), thead, sp(), th,
-
-        backgroundColor(Colors.GRAY2),
-        padding(Spacing.V04),
-        textAlign(left)
-      );
-    }
-
-    protected final void styleUl() {
-      style(
-        _UI_MAIN, sp(), ul,
-
-        listStyle(disc, inside),
-        paddingLeft(Spacing.V10)
-      );
-
-      style(
-        _UI_MAIN, sp(), li,
-
-        margin(Spacing.V03, zero())
       );
     }
   }
