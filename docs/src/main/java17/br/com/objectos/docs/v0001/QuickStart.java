@@ -56,68 +56,44 @@ abstract class QuickStart extends DocsPage {
 
       f(this::article0),
 
-      f(this::article1)
+      f(this::article1),
+
+      f(this::article2)
     );
   }
 
   //@formatter:off
   /**
 
-## Import the Objectos BOM POM
+## Choose the Objectos version
 
-Now that you have chosen the Objectos version, the next step is to import
-the Objectos BOM POM.
+Objectos version 0.1.0 is compatible with following JDK versions:
 
-You do so by declaring it in the `dependencyManagement` section of your
-project's POM file.
+- JDK 17+
+- JDK 11
+- JDK 8
+- JDK 7
+- JDK 6
 
-*```xml
-*<properties>
-*    <objectos.version>version chosen in the previous section</objectos.version>
-*</properties>
-*
-*<dependencyManagement>
-*    <dependencies>
-*        <dependency>
-*            <groupId>br.com.objectos</groupId>
-*            <artifactId>bom</artifactId>
-*            <version>${objectos.version}</version>
-*            <type>pom</type>
-*            <scope>import</scope>
-*        </dependency>
-*    </dependencies>
-*</dependencyManagement>
-*```
+Objectos provides different binaries for each of the supported JDK versions.
+Therefore, prior to adding Objectos to your project, you must choose
+the proper Objectos version. The choice depends on the JDK version
+your application will be running on.
+
+Use the table below and choose the Objectos version based on the JDK version
+that better represents your environment. Please note that for new projects
+we highly recommend that you use the latest available JDK.
+
+```self
+article0Table
+```
+
    */
   //@formatter:on
   @Markdown
-  abstract void article1();
+  abstract void article0();
 
-  private void article0() {
-    h2("Choose the Objectos version");
-
-    p("""
-      Objectos version 0.1.0 is compatible with following JDK versions:""");
-
-    ul(
-      li("JDK 17+"),
-      li("JDK 11"),
-      li("JDK 8"),
-      li("JDK 7"),
-      li("JDK 6")
-    );
-
-    p("""
-      Objectos provides different binaries for each of the supported JDK versions.
-      Therefore, prior to adding Objectos to your project, you must choose
-      the proper Objectos version. The choice depends on the JDK version
-      your application will be running on.""");
-
-    p("""
-      Use the table below and choose the Objectos version based on the JDK version
-      that better represents your environment. Please note that for new projects
-      we highly recommend that you use the latest available JDK.""");
-
+  final void article0Table() {
     table(
       thead(
         tr(
@@ -153,10 +129,65 @@ project's POM file.
         )
       )
     );
-
-    //    p(t("Please "),
-    //      a(href(QuickStartOtherJDK.class), t("refer to this document")),
-    //      t(" if you don't see your JDK listed."));
   }
+
+ //@formatter:off
+/**
+
+## Import the Objectos BOM POM
+
+Now that you have chosen the Objectos version, the next step is to import
+the Objectos BOM POM.
+
+You do so by declaring it in the `dependencyManagement` section of your
+project's POM file.
+
+*```xml
+*<properties>
+*    <objectos.version>version chosen in the previous section</objectos.version>
+*</properties>
+*
+*<dependencyManagement>
+*    <dependencies>
+*        <dependency>
+*            <groupId>br.com.objectos</groupId>
+*            <artifactId>bom</artifactId>
+*            <version>${objectos.version}</version>
+*            <type>pom</type>
+*            <scope>import</scope>
+*        </dependency>
+*    </dependencies>
+*</dependencyManagement>
+*```
+ */
+//@formatter:on
+  @Markdown
+  abstract void article1();
+
+  //@formatter:off
+  /**
+
+## Use Objectos components
+
+The next step is to add Objectos components to your project.
+Since you have the Objectos POM imported, you do not need to specify the version
+for each of the added component.
+
+For instance, to add Objectos Logging to your project, you would declare it
+in the `dependencies` section of your project's POM file, like so:
+
+*```xml
+*<dependencies>
+*    <dependency>
+*        <groupId>br.com.objectos</groupId>
+*        <artifactId>logging</artifactId>
+*    </dependency>
+*</dependencies>
+*```
+
+   */
+  //@formatter:on
+  @Markdown
+  abstract void article2();
 
 }
