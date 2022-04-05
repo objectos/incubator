@@ -487,6 +487,8 @@ abstract class GeneratedStyleSheet {
 
   protected static final TypeSelector samp = Css.samp;
 
+  protected static final TypeSelector script = Css.script;
+
   protected static final TypeSelector section = Css.section;
 
   protected static final TypeSelector select = Css.select;
