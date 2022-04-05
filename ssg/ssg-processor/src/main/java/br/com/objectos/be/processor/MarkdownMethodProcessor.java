@@ -18,14 +18,19 @@ package br.com.objectos.be.processor;
 import static br.com.objectos.code.java.Java.annotation;
 import static br.com.objectos.code.java.Java.l;
 
+import br.com.objectos.be.annotations.Be;
 import br.com.objectos.be.annotations.Markdown;
 import br.com.objectos.code.annotations.Generated;
 import br.com.objectos.code.annotations.Services;
 import br.com.objectos.code.java.declaration.AnnotationCode;
 import br.com.objectos.code.java.io.JavaFile;
+import br.com.objectos.code.model.element.ProcessingAnnotation;
 import br.com.objectos.code.model.element.ProcessingMethod;
+import br.com.objectos.code.model.element.ProcessingType;
 import br.com.objectos.code.processing.AbstractProcessingRoundProcessor;
 import br.com.objectos.code.processing.ProcessingRound;
+import br.com.objectos.code.processing.type.PDeclaredType;
+import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.core.set.ImmutableSet;
 import java.util.Set;
 import javax.annotation.processing.Processor;
@@ -34,8 +39,8 @@ import javax.annotation.processing.Processor;
 public final class MarkdownMethodProcessor extends AbstractProcessingRoundProcessor {
 
   static final AnnotationCode GENERATED = annotation(
-      Generated.class,
-      l(MarkdownMethodProcessor.class.getCanonicalName())
+    Generated.class,
+    l(MarkdownMethodProcessor.class.getCanonicalName())
   );
 
   @Override
@@ -56,6 +61,24 @@ public final class MarkdownMethodProcessor extends AbstractProcessingRoundProces
   }
 
   private void process0(ProcessingRound round, ProcessingMethod m) {
+    ProcessingType declaringType;
+    declaringType = m.getDeclaringType();
+
+    ImmutableList<ProcessingAnnotation> annotations;
+    annotations = declaringType.getDirectlyPresentAnnotations();
+
+    for (int i = 0; i < annotations.size(); i++) {
+      ProcessingAnnotation a;
+      a = annotations.get(i);
+
+      PDeclaredType type;
+      type = a.getType();
+
+      if (type.isInstanceOf(Be.class)) {
+        return;
+      }
+    }
+
     MarkdownMethod method;
     method = new MarkdownMethod(m);
 
