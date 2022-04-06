@@ -103,16 +103,16 @@ public abstract class DocsPage extends SitePage {
       body(
         _UI,
 
+        div(
+          _UI_LEFTDRAWER,
+
+          f(leftDrawer)
+        ),
+
         f(this::uiTopBar),
 
         div(
           _UI_AREA,
-
-          div(
-            _UI_LEFTDRAWER,
-
-            f(leftDrawer)
-          ),
 
           main(
             _UI_MAIN,
@@ -420,7 +420,7 @@ public abstract class DocsPage extends SitePage {
         display(none),
         padding(Spacing.V06),
         position(absolute),
-        top(Spacing.V16),
+        top(zero()),
         width(pct(100))
       );
 
