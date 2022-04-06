@@ -13,30 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package br.com.objectos.docs;
+package objectos.docs;
 
-import br.com.objectos.be.site.HasHref;
-import br.com.objectos.be.site.SiteDirectory;
-import br.com.objectos.docs.ui.LeftDrawer;
-import br.com.objectos.docs.ui.TopBar;
-import br.com.objectos.docs.v0001.V0001Directory;
+import br.com.objectos.be.site.AbstractSite;
 
-public final class DocsDirectory extends SiteDirectory {
-
-  public static final Class<? extends HasHref> INDEX = Index.class;
+public class DocsSite extends AbstractSite {
 
   @Override
   protected final void configure() {
-    putInstance(new LeftDrawer());
-    putInstance(new TopBar());
-    putInstance(new StringBuilder());
-
-    addResource("prism.css");
-    addResource("prism.js");
-
-    addPage("index.html", new Index());
-
-    addDirectory("latest", new V0001Directory());
+    addDirectory("docs", new DocsDirectory());
   }
 
 }

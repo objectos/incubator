@@ -13,15 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package br.com.objectos.docs;
+package objectos.docs.v0001;
 
-import br.com.objectos.be.site.AbstractSite;
+import br.com.objectos.be.site.HasHref;
+import br.com.objectos.be.site.SiteDirectory;
 
-public class DocsSite extends AbstractSite {
+public final class V0001Directory extends SiteDirectory {
+
+  public static final Class<? extends HasHref> QUICK_START = MarkdownQuickStart.class;
 
   @Override
   protected final void configure() {
-    addDirectory("docs", new DocsDirectory());
+    addPage("quick-start.html", new MarkdownQuickStart());
+    addPage("quick-start-other-jdk.html", new QuickStartOtherJDK());
   }
 
 }

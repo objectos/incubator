@@ -13,10 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package br.com.objectos.docs.ui;
+package objectos.docs.ui;
 
-interface DocsPageJs {
+interface DocsPageCss {
 
-  String js();
+  String css();
 
 }

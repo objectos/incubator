@@ -13,19 +13,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package br.com.objectos.docs.v0001;
+package objectos.docs;
 
 import br.com.objectos.be.site.HasHref;
 import br.com.objectos.be.site.SiteDirectory;
+import objectos.docs.ui.LeftDrawer;
+import objectos.docs.ui.TopBar;
+import objectos.docs.v0001.V0001Directory;
 
-public final class V0001Directory extends SiteDirectory {
+public final class DocsDirectory extends SiteDirectory {
 
-  public static final Class<? extends HasHref> QUICK_START = MarkdownQuickStart.class;
+  public static final Class<? extends HasHref> INDEX = Index.class;
 
   @Override
   protected final void configure() {
-    addPage("quick-start.html", new MarkdownQuickStart());
-    addPage("quick-start-other-jdk.html", new QuickStartOtherJDK());
+    putInstance(new LeftDrawer());
+    putInstance(new TopBar());
+    putInstance(new StringBuilder());
+
+    addResource("prism.css");
+    addResource("prism.js");
+
+    addPage("index.html", new Index());
+
+    addDirectory("latest", new V0001Directory());
   }
 
 }

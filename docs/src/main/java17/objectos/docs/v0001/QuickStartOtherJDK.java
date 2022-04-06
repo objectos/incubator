@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package br.com.objectos.docs.v0001;
+package objectos.docs.v0001;
 
-import br.com.objectos.docs.ui.DocsPage;
+import objectos.docs.ui.DocsPage;
 
 final class QuickStartOtherJDK extends DocsPage {
 

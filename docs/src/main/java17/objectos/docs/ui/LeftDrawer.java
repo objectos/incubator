@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package br.com.objectos.docs.ui;
+package objectos.docs.ui;
 
 import br.com.objectos.be.site.SiteFragment;
 import br.com.objectos.core.list.ImmutableList;
@@ -23,11 +23,11 @@ import br.com.objectos.css.select.ClassSelector;
 import br.com.objectos.css.select.IdSelector;
 import br.com.objectos.css.sheet.AbstractStyleSheet;
 import br.com.objectos.css.sheet.StyleSheet;
-import br.com.objectos.docs.Breakpoint;
-import br.com.objectos.docs.Colors;
-import br.com.objectos.docs.Spacing;
 import br.com.objectos.html.spi.type.AValue;
 import br.com.objectos.html.spi.type.NavValue;
+import objectos.docs.Breakpoint;
+import objectos.docs.Colors;
+import objectos.docs.Spacing;
 
 public final class LeftDrawer extends SiteFragment implements DocsPageCss {
 

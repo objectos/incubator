@@ -13,13 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package br.com.objectos.docs;
+package objectos.docs;
 
 import br.com.objectos.css.Css;
 import br.com.objectos.css.select.ClassSelector;
 import br.com.objectos.css.select.IdSelector;
-import br.com.objectos.docs.ui.DocsPage;
-import br.com.objectos.docs.v0001.V0001Directory;
+import objectos.docs.ui.DocsPage;
+import objectos.docs.v0001.V0001Directory;
 
 final class Index extends DocsPage {
 
