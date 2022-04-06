@@ -79,6 +79,7 @@ public final class LeftDrawer extends SiteFragment implements DocsPageCss {
           bottom(unset),
           display(block),
           flex(l(0), l(0), px(230)),
+          overflowY(scroll),
           position(staticKw),
           top(unset)
         )

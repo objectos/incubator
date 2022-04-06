@@ -24,7 +24,6 @@ import br.com.objectos.css.sheet.StyleSheet;
 import objectos.docs.Breakpoint;
 import objectos.docs.Colors;
 import objectos.docs.DocsDirectory;
-import objectos.docs.FontSize;
 import objectos.docs.Spacing;
 
 public final class TopBar extends SiteFragment implements DocsPageCss, DocsPageJs {
@@ -40,8 +39,6 @@ public final class TopBar extends SiteFragment implements DocsPageCss, DocsPageJ
   private static final ClassSelector _SVG = Css.randomDot(3);
 
   private static final IdSelector _UI_TOPBAR0 = Css.randomHash(3);
-
-  private static final IdSelector _UI_TOPBAR1 = Css.randomHash(3);
 
   private final StyleSheet css = new AbstractStyleSheet() {
     @Override
@@ -107,17 +104,6 @@ public final class TopBar extends SiteFragment implements DocsPageCss, DocsPageJ
       );
 
       style(
-        _UI_TOPBAR1,
-
-        backgroundColor(Colors.GRAY0),
-        fontSize(FontSize.SM),
-        fontWeight(500),
-        letterSpacing(px(1.5)),
-        padding(Spacing.V06, Spacing.V04),
-        textTransform(uppercase)
-      );
-
-      style(
         body, DocsPage._LEFT_DRAWER_OPEN, sp(), _BTN_CLOSE,
 
         display(flex)
@@ -133,23 +119,19 @@ public final class TopBar extends SiteFragment implements DocsPageCss, DocsPageJ
         screen, minWidth(Breakpoint.LG),
 
         style(
-          _LOGO,
-
-          alignItems(center),
-          display(flex),
-          height(pct(100))
-        ),
-
-        style(
-          _LOGO, sp(), svg,
-
-          height(px(24)),
-          width(auto),
-          marginTop(px(5))
-        ),
-
-        style(
           _BTN_CLOSE, or(), _BTN_OPEN,
+
+          display(none)
+        ),
+
+        style(
+          _UI_TOPBAR0,
+
+          padding(Spacing.V0, Spacing.V06)
+        ),
+
+        style(
+          body, DocsPage._LEFT_DRAWER_OPEN, sp(), _BTN_CLOSE,
 
           display(none)
         )
@@ -184,14 +166,6 @@ public final class TopBar extends SiteFragment implements DocsPageCss, DocsPageJ
   @Override
   protected final void definition() {
     header(
-      f(this::uiTopBar0),
-
-      f(this::uiTopBar1)
-    );
-  }
-
-  private void uiTopBar0() {
-    div(
       _UI_TOPBAR0,
 
       button(
@@ -254,14 +228,6 @@ public final class TopBar extends SiteFragment implements DocsPageCss, DocsPageJ
           )
         )
       )
-    );
-  }
-
-  private void uiTopBar1() {
-    div(
-      _UI_TOPBAR1,
-
-      t("Documentation")
     );
   }
 
