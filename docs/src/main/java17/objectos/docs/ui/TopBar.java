@@ -29,15 +29,15 @@ import objectos.docs.Spacing;
 
 public final class TopBar extends SiteFragment implements DocsPageCss, DocsPageJs {
 
+  private static final ClassSelector _BTN = Css.randomDot(3);
+
+  private static final IdSelector _BTN_CLOSE = Css.randomHash(3);
+
+  private static final IdSelector _BTN_OPEN = Css.randomHash(3);
+
   private static final IdSelector _LOGO = Css.randomHash(3);
 
-  private static final ClassSelector _MENU_BTN = Css.randomDot(3);
-
-  private static final IdSelector _MENU_CLOSE = Css.randomHash(3);
-
-  private static final IdSelector _MENU_OPEN = Css.randomHash(3);
-
-  private static final ClassSelector _MENU_SVG = Css.randomDot(3);
+  private static final ClassSelector _SVG = Css.randomDot(3);
 
   private static final IdSelector _UI_TOPBAR0 = Css.randomHash(3);
 
@@ -47,20 +47,7 @@ public final class TopBar extends SiteFragment implements DocsPageCss, DocsPageJ
     @Override
     protected final void definition() {
       style(
-        _LOGO,
-
-        height(px(24)),
-        width(auto)
-      );
-
-      style(
-        _MENU_CLOSE,
-
-        display(none)
-      );
-
-      style(
-        _MENU_BTN,
+        _BTN,
 
         alignItems(center),
         height(pct(100)),
@@ -70,19 +57,38 @@ public final class TopBar extends SiteFragment implements DocsPageCss, DocsPageJ
       );
 
       style(
-        _MENU_OPEN,
+        _BTN, FOCUS,
 
-        display(flex)
+        outline(none)
       );
 
       style(
-        _MENU_BTN, HOVER, sp(), _MENU_SVG,
+        _BTN, HOVER, sp(), _SVG,
 
         backgroundColor(Colors.GRAY1)
       );
 
       style(
-        _MENU_SVG,
+        _BTN_CLOSE,
+
+        display(none)
+      );
+
+      style(
+        _BTN_OPEN,
+
+        display(flex)
+      );
+
+      style(
+        _LOGO,
+
+        height(px(24)),
+        width(auto)
+      );
+
+      style(
+        _SVG,
 
         borderRadius(pct(50)),
         height(px(40)),
@@ -111,6 +117,18 @@ public final class TopBar extends SiteFragment implements DocsPageCss, DocsPageJ
         textTransform(uppercase)
       );
 
+      style(
+        body, DocsPage._LEFT_DRAWER_OPEN, sp(), _BTN_CLOSE,
+
+        display(flex)
+      );
+
+      style(
+        body, DocsPage._LEFT_DRAWER_OPEN, sp(), _BTN_OPEN,
+
+        display(none)
+      );
+
       media(
         screen, minWidth(Breakpoint.LG),
 
@@ -131,7 +149,7 @@ public final class TopBar extends SiteFragment implements DocsPageCss, DocsPageJ
         ),
 
         style(
-          _MENU_CLOSE, or(), _MENU_OPEN,
+          _BTN_CLOSE, or(), _BTN_OPEN,
 
           display(none)
         )
@@ -148,15 +166,18 @@ public final class TopBar extends SiteFragment implements DocsPageCss, DocsPageJ
   public final String js() {
     return """
            window.addEventListener("DOMContentLoaded", () => {
-             const open = document.getElementById("{open}");
+             const c = document.getElementById("{close}");
+             const o = document.getElementById("{open}");
 
-             open.onclick = () => {
-               toggleClass(ui, "{toggle}");
-             };
+             const click = () => toggleClass(ui, "{toggle}");
+
+             c.onclick = click;
+             o.onclick = click;
            });
            """
         .replace("\n", "")
-        .replace("{open}", _MENU_OPEN.id())
+        .replace("{close}", _BTN_CLOSE.id())
+        .replace("{open}", _BTN_OPEN.id())
         .replace("{toggle}", DocsPage._LEFT_DRAWER_OPEN.className());
   }
 
@@ -174,13 +195,13 @@ public final class TopBar extends SiteFragment implements DocsPageCss, DocsPageJ
       _UI_TOPBAR0,
 
       button(
-        _MENU_CLOSE,
-        _MENU_BTN,
+        _BTN_CLOSE,
+        _BTN,
 
         type("button"),
 
         div(
-          _MENU_SVG,
+          _SVG,
 
           svg(
 
@@ -196,13 +217,13 @@ public final class TopBar extends SiteFragment implements DocsPageCss, DocsPageJ
       ),
 
       button(
-        _MENU_OPEN,
-        _MENU_BTN,
+        _BTN_OPEN,
+        _BTN,
 
         type("button"),
 
         div(
-          _MENU_SVG,
+          _SVG,
 
           svg(
 

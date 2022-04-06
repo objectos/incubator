@@ -81,7 +81,7 @@
 				<artifactId>ssg-maven-plugin</artifactId>
 				<version>${project.version}</version>
 				<configuration>
-					<siteClass>br.com.objectos.docs.DocsSite</siteClass>
+					<siteClass>objectos.docs.DocsSite</siteClass>
 				</configuration>
 			</plugin>
 			<plugin>

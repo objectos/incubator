@@ -60,7 +60,7 @@ public final class LeftDrawer extends SiteFragment implements DocsPageCss {
         display(none),
         padding(Spacing.V06),
         position(absolute),
-        top(Spacing.V16),
+        top(Spacing.V12),
         width(pct(100))
       );
 
