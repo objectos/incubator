@@ -13,15 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package br.com.objectos.docs;
+package br.com.objectos.docs.ui;
 
-import br.com.objectos.be.site.AbstractSite;
+interface DocsPageJs {
 
-public class DocsSite extends AbstractSite {
-
-  @Override
-  protected final void configure() {
-    addDirectory("docs", new DocsDirectory());
-  }
+  String js();
 
 }

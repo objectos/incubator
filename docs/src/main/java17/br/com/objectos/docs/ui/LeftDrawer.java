@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2022-2022 Objectos Software LTDA.
+ * Copyright (C) 2022 Objectos Software LTDA.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,23 +13,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package br.com.objectos.docs;
+package br.com.objectos.docs.ui;
 
 import br.com.objectos.be.site.SiteFragment;
 import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.core.list.MutableList;
 import br.com.objectos.css.Css;
 import br.com.objectos.css.select.ClassSelector;
+import br.com.objectos.css.select.IdSelector;
 import br.com.objectos.css.sheet.AbstractStyleSheet;
 import br.com.objectos.css.sheet.StyleSheet;
+import br.com.objectos.docs.Breakpoint;
+import br.com.objectos.docs.Colors;
+import br.com.objectos.docs.Spacing;
 import br.com.objectos.html.spi.type.AValue;
 import br.com.objectos.html.spi.type.NavValue;
 
-public final class LeftDrawer extends SiteFragment {
+public final class LeftDrawer extends SiteFragment implements DocsPageCss {
 
   private static final ClassSelector _CURRENT = Css.randomDot(3);
 
   private static final ClassSelector _NAV_LINK = Css.randomDot(3);
+
+  private static final IdSelector _UI_LEFTDRAWER = Css.randomHash(3);
 
   private final StyleSheet css = new AbstractStyleSheet() {
     @Override
@@ -45,24 +51,61 @@ public final class LeftDrawer extends SiteFragment {
 
         lineHeight(Spacing.V10)
       );
+
+      style(
+        _UI_LEFTDRAWER,
+
+        backgroundColor(white),
+        bottom(zero()),
+        display(none),
+        padding(Spacing.V06),
+        position(absolute),
+        top(Spacing.V16),
+        width(pct(100))
+      );
+
+      style(
+        body, DocsPage._LEFT_DRAWER_OPEN, sp(), _UI_LEFTDRAWER,
+
+        display(block)
+      );
+
+      media(
+        screen, minWidth(Breakpoint.LG),
+
+        style(
+          _UI_LEFTDRAWER,
+
+          bottom(unset),
+          display(block),
+          flex(l(0), l(0), px(230)),
+          position(staticKw),
+          top(unset)
+        )
+      );
     }
   };
 
   private DocsPage current;
 
   @Override
-  protected final void definition() {
-    nav(
-      navItems()
-    );
-  }
-
-  final String css() {
+  public final String css() {
     return css.printMinified();
   }
 
-  final void setCurrent(DocsPage current) {
+  public final void setCurrent(DocsPage current) {
     this.current = current;
+  }
+
+  @Override
+  protected final void definition() {
+    div(
+      _UI_LEFTDRAWER,
+
+      nav(
+        navItems()
+      )
+    );
   }
 
   private NavValue[] navItems() {

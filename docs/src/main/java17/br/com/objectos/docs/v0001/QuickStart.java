@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2022-2022 Objectos Software LTDA.
+ * Copyright (C) 2022 Objectos Software LTDA.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,10 +17,15 @@ package br.com.objectos.docs.v0001;
 
 import br.com.objectos.be.annotations.Be;
 import br.com.objectos.be.annotations.Markdown;
-import br.com.objectos.docs.DocsPage;
+import br.com.objectos.docs.ui.DocsPage;
 
 @Be
 abstract class QuickStart extends DocsPage {
+
+  @Override
+  public final String topBarTitle() {
+    return null;
+  }
 
   @Override
   protected final ThisStyleSheet thisStyleSheet() {
@@ -36,11 +41,6 @@ abstract class QuickStart extends DocsPage {
         articleUl();
       }
     };
-  }
-
-  @Override
-  protected final String topBarTitle() {
-    return null;
   }
 
   @Override

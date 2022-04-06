@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2022-2022 Objectos Software LTDA.
+ * Copyright (C) 2022 Objectos Software LTDA.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@ package br.com.objectos.docs;
 import br.com.objectos.css.Css;
 import br.com.objectos.css.select.ClassSelector;
 import br.com.objectos.css.select.IdSelector;
+import br.com.objectos.docs.ui.DocsPage;
 import br.com.objectos.docs.v0001.V0001Directory;
 
 final class Index extends DocsPage {
@@ -25,6 +26,11 @@ final class Index extends DocsPage {
   private static final ClassSelector _BLOCK = Css.randomDot(3);
 
   private static final IdSelector _PRIMARY = Css.randomHash(3);
+
+  @Override
+  public final String topBarTitle() {
+    return "Home";
+  }
 
   @Override
   protected final ThisStyleSheet thisStyleSheet() {
@@ -68,11 +74,6 @@ final class Index extends DocsPage {
         );
       }
     };
-  }
-
-  @Override
-  protected final String topBarTitle() {
-    return "Home";
   }
 
   @Override

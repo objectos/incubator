@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2022-2022 Objectos Software LTDA.
+ * Copyright (C) 2022 Objectos Software LTDA.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,14 +15,21 @@
  */
 package br.com.objectos.docs;
 
+import br.com.objectos.be.site.HasHref;
 import br.com.objectos.be.site.SiteDirectory;
+import br.com.objectos.docs.ui.LeftDrawer;
+import br.com.objectos.docs.ui.TopBar;
 import br.com.objectos.docs.v0001.V0001Directory;
 
 public final class DocsDirectory extends SiteDirectory {
 
+  public static final Class<? extends HasHref> INDEX = Index.class;
+
   @Override
   protected final void configure() {
     putInstance(new LeftDrawer());
+    putInstance(new TopBar());
+    putInstance(new StringBuilder());
 
     addResource("prism.css");
     addResource("prism.js");
