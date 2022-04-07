@@ -25,9 +25,6 @@ import br.com.objectos.css.sheet.AbstractStyleSheet;
 import br.com.objectos.css.sheet.StyleSheet;
 import br.com.objectos.html.spi.type.AValue;
 import br.com.objectos.html.spi.type.NavValue;
-import objectos.docs.Breakpoint;
-import objectos.docs.Colors;
-import objectos.docs.Spacing;
 
 public final class LeftDrawer extends SiteFragment implements DocsPageCss {
 

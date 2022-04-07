@@ -23,7 +23,7 @@ import objectos.docs.v0001.V0001Directory;
 
 public final class DocsDirectory extends SiteDirectory {
 
-  public static final Class<? extends HasHref> INDEX = Index.class;
+  public static final Class<? extends HasHref> INDEX = V0001Directory.INDEX;
 
   @Override
   protected final void configure() {

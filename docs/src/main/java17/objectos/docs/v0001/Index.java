@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package objectos.docs;
+package objectos.docs.v0001;
 
 import br.com.objectos.css.Css;
 import br.com.objectos.css.select.ClassSelector;
@@ -22,7 +22,6 @@ import objectos.docs.ui.Colors;
 import objectos.docs.ui.DocsPage;
 import objectos.docs.ui.FontSize;
 import objectos.docs.ui.Spacing;
-import objectos.docs.v0001.V0001Directory;
 
 final class Index extends DocsPage {
 

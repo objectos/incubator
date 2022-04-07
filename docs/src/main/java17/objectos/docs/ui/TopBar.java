@@ -21,10 +21,7 @@ import br.com.objectos.css.select.ClassSelector;
 import br.com.objectos.css.select.IdSelector;
 import br.com.objectos.css.sheet.AbstractStyleSheet;
 import br.com.objectos.css.sheet.StyleSheet;
-import objectos.docs.Breakpoint;
-import objectos.docs.Colors;
 import objectos.docs.DocsDirectory;
-import objectos.docs.Spacing;
 
 public final class TopBar extends SiteFragment implements DocsPageCss, DocsPageJs {
 

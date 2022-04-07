@@ -13,22 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package objectos.docs;
+package objectos.docs.ui;
 
-import br.com.objectos.css.parser.sheet.Length;
+public abstract class ArticlePage extends DocsPage {
 
-public final class Breakpoint {
+  protected ArticlePage() {}
 
-  public static final Length LG = Length.px(1024);
+  @Override
+  public String topBarTitle() {
+    return null;
+  }
 
-  public static final Length MD = Length.px(768);
+  protected abstract void contents();
 
-  public static final Length SM = Length.px(640);
-
-  public static final Length XL = Length.px(1280);
-
-  public static final Length XXL = Length.px(1536);
-
-  private Breakpoint() {}
+  @Override
+  protected final void uiMain() {
+    article(
+      f(this::contents)
+    );
+  }
 
 }

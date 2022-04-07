@@ -24,10 +24,6 @@ import br.com.objectos.css.select.IdSelector;
 import br.com.objectos.css.sheet.AbstractStyleSheet;
 import br.com.objectos.css.sheet.StyleSheet;
 import br.com.objectos.http.media.ImageType;
-import objectos.docs.Breakpoint;
-import objectos.docs.Colors;
-import objectos.docs.FontSize;
-import objectos.docs.Spacing;
 
 public abstract class DocsPage extends SitePage {
 
@@ -240,12 +236,28 @@ public abstract class DocsPage extends SitePage {
       );
 
       style(
+        article, sp(), h1,
+
+        fontSize(px(40)),
+        fontWeight(600),
+        letterSpacing(px(-0.5)),
+        lineHeight(px(48)),
+        marginBottom(Spacing.V04)
+      );
+
+      style(
         article, sp(), h2,
 
         fontSize(FontSize.XL2),
         fontWeight(600),
         marginBottom(Spacing.V04),
         marginTop(Spacing.V14)
+      );
+
+      style(
+        article, sp(), header,
+
+        padding(Spacing.V12, Spacing.V0)
       );
 
       style(
@@ -280,22 +292,6 @@ public abstract class DocsPage extends SitePage {
         _UI_MAIN,
 
         padding(Spacing.V04)
-      );
-
-      style(
-        _UI_MAIN, sp(), header,
-
-        padding(Spacing.V12, Spacing.V0)
-      );
-
-      style(
-        _UI_MAIN, sp(), header, sp(), h1,
-
-        fontSize(px(40)),
-        fontWeight(600),
-        letterSpacing(px(-0.5)),
-        lineHeight(px(48)),
-        marginBottom(Spacing.V04)
       );
 
       media(

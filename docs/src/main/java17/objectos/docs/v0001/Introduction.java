@@ -15,21 +15,32 @@
  */
 package objectos.docs.v0001;
 
-import br.com.objectos.be.site.HasHref;
-import br.com.objectos.be.site.SiteDirectory;
+import br.com.objectos.be.annotations.Be;
+import br.com.objectos.be.annotations.Markdown;
+import objectos.docs.ui.ArticlePage;
 
-public final class V0001Directory extends SiteDirectory {
-
-  public static final Class<? extends HasHref> INDEX = Index.class;
-
-  public static final Class<? extends HasHref> QUICK_START = MarkdownQuickStart.class;
+@Be
+abstract class Introduction extends ArticlePage {
 
   @Override
-  protected final void configure() {
-    addPage("index.html", new Index());
-    addPage("introduction.html", new MarkdownIntroduction());
-    addPage("quick-start.html", new MarkdownQuickStart());
-    addPage("quick-start-other-jdk.html", new QuickStartOtherJDK());
+  public final String topBarTitle() {
+    return "Introduction";
   }
+
+//@formatter:off
+  /**
+
+# Documentation for Objectos developers
+
+This is the first public version of the Objectos suite of libraries.
+Our goal is to, in time, allow you to build Java web applications.
+For now, you can learn more about Objectos by browsing the documentation of
+the available components.
+
+   */
+  //@formatter:on
+  @Markdown
+  @Override
+  protected abstract void contents();
 
 }

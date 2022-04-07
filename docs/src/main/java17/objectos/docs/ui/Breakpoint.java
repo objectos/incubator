@@ -13,23 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package objectos.docs.v0001;
+package objectos.docs.ui;
 
-import br.com.objectos.be.site.HasHref;
-import br.com.objectos.be.site.SiteDirectory;
+import br.com.objectos.css.parser.sheet.Length;
 
-public final class V0001Directory extends SiteDirectory {
+public final class Breakpoint {
 
-  public static final Class<? extends HasHref> INDEX = Index.class;
+  public static final Length LG = Length.px(1024);
 
-  public static final Class<? extends HasHref> QUICK_START = MarkdownQuickStart.class;
+  public static final Length MD = Length.px(768);
 
-  @Override
-  protected final void configure() {
-    addPage("index.html", new Index());
-    addPage("introduction.html", new MarkdownIntroduction());
-    addPage("quick-start.html", new MarkdownQuickStart());
-    addPage("quick-start-other-jdk.html", new QuickStartOtherJDK());
-  }
+  public static final Length SM = Length.px(640);
+
+  public static final Length XL = Length.px(1280);
+
+  public static final Length XXL = Length.px(1536);
+
+  private Breakpoint() {}
 
 }
