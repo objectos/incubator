@@ -13,37 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package objectos.docs.v0001;
+package objectos.docs.intro;
 
-import objectos.docs.ui.DocsPage;
+import objectos.docs.ui.ArticlePage;
 
-final class QuickStartOtherJDK extends DocsPage {
-
-  @Override
-  public final String topBarTitle() {
-    return null;
-  }
+final class Index extends ArticlePage {
 
   @Override
-  protected final ThisStyleSheet thisStyleSheet() {
-    return new ThisStyleSheet() {
-      @Override
-      protected final void definition() {
-        super.definition();
-
-        articleTable();
-      }
-    };
-  }
-
-  @Override
-  protected final void uiMain() {
-    header(
-      h1("I don't see my JDK listed in the supported versions")
-    );
-
-    p("""
-      Ensure you are reading the latest version of the documentation.""");
+  protected final void contents() {
+    h1("Get started with Objectos");
   }
 
 }

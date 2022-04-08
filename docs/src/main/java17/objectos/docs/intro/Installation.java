@@ -13,18 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package objectos.docs.v0001;
+package objectos.docs.intro;
 
-import br.com.objectos.be.annotations.Be;
-import br.com.objectos.be.annotations.Markdown;
-import objectos.docs.ui.DocsPage;
+import objectos.docs.ui.ArticlePage;
 
-@Be
-abstract class QuickStart extends DocsPage {
+final class Installation extends ArticlePage {
 
   @Override
   public final String topBarTitle() {
     return null;
+  }
+
+  @Override
+  protected final void contents() {
+    h1("Objectos Quick Start");
+
+    p("""
+      Get started with Objectos. Learn how to add the Objectos dependencies to an existing
+      Maven project.""");
   }
 
   @Override
@@ -41,27 +47,6 @@ abstract class QuickStart extends DocsPage {
         articleUl();
       }
     };
-  }
-
-  @Override
-  protected final void uiMain() {
-    article(
-      header(
-        h1("Objectos Quick Start")
-      ),
-
-      p("""
-        Get started with Objectos. Learn how to add the Objectos dependencies to an existing
-        Maven project."""),
-
-      f(this::article0),
-
-      f(this::article1),
-
-      f(this::article2),
-
-      f(this::article3)
-    );
   }
 
   //@formatter:off
@@ -92,8 +77,7 @@ article0Table
 
    */
   //@formatter:on
-  @Markdown
-  abstract void article0();
+  final void article0() {}
 
   final void article0Table() {
     table(
@@ -163,8 +147,7 @@ project's POM file.
 *```
  */
 //@formatter:on
-  @Markdown
-  abstract void article1();
+  final void article1() {}
 
   //@formatter:off
   /**
@@ -189,8 +172,7 @@ in the `dependencies` section of your project's POM file, like so:
 
    */
   //@formatter:on
-  @Markdown
-  abstract void article2();
+  final void article2() {}
 
 //@formatter:off
   /**
@@ -204,7 +186,6 @@ the available components.
 
    */
   //@formatter:on
-  @Markdown
-  abstract void article3();
+  final void article3() {}
 
 }

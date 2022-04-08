@@ -25,7 +25,7 @@ public final class FontSize {
 
   public static final Length SM = Length.rem(0.875);
 
-  public static final Length XL = Length.rem(1.25);
+  public static final Length XL = Length.rem(1.25); // 20px
 
   public static final Length XL2 = Length.rem(1.5); // 24px
 

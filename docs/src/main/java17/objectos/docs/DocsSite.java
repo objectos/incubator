@@ -21,7 +21,7 @@ public class DocsSite extends AbstractSite {
 
   @Override
   protected final void configure() {
-    addDirectory("docs", new DocsDirectory());
+    addDirectory("docs", new Docs());
   }
 
 }

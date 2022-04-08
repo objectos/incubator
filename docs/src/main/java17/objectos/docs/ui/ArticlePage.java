@@ -15,6 +15,9 @@
  */
 package objectos.docs.ui;
 
+import br.com.objectos.be.site.HasHref;
+import br.com.objectos.html.element.ElementName;
+
 public abstract class ArticlePage extends DocsPage {
 
   protected ArticlePage() {}
@@ -22,6 +25,14 @@ public abstract class ArticlePage extends DocsPage {
   @Override
   public String topBarTitle() {
     return null;
+  }
+
+  protected final ElementName a(Class<? extends HasHref> href, String t) {
+    return a(
+      href(href),
+
+      t(t)
+    );
   }
 
   protected abstract void contents();

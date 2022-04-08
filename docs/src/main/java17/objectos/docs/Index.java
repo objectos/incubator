@@ -15,20 +15,10 @@
  */
 package objectos.docs;
 
-import br.com.objectos.css.Css;
-import br.com.objectos.css.select.ClassSelector;
-import br.com.objectos.css.select.IdSelector;
-import objectos.docs.ui.Colors;
-import objectos.docs.ui.DocsPage;
-import objectos.docs.ui.FontSize;
-import objectos.docs.ui.Spacing;
-import objectos.docs.v0001.V0001Directory;
+import objectos.docs.intro.Intro;
+import objectos.docs.ui.ArticlePage;
 
-final class Index extends DocsPage {
-
-  private static final ClassSelector _BLOCK = Css.randomDot(3);
-
-  private static final IdSelector _PRIMARY = Css.randomHash(3);
+final class Index extends ArticlePage {
 
   @Override
   public final String topBarTitle() {
@@ -36,73 +26,27 @@ final class Index extends DocsPage {
   }
 
   @Override
-  protected final ThisStyleSheet thisStyleSheet() {
-    return new ThisStyleSheet() {
-      @Override
-      protected final void definition() {
-        super.definition();
+  protected final void contents() {
+    h1("Documentation for Objectos developers");
 
-        style(
-          _BLOCK,
-
-          padding(Spacing.V06)
-        );
-
-        style(
-          _BLOCK, sp(), a, HOVER,
-
-          textDecoration(underline)
-        );
-
-        style(
-          _BLOCK, sp(), div,
-
-          marginBottom(Spacing.V04)
-        );
-
-        style(
-          _BLOCK, sp(), h2,
-
-          fontSize(FontSize.XL2),
-          fontWeight(500),
-          letterSpacing(px(-0.25)),
-          marginBottom(Spacing.V04)
-        );
-
-        style(
-          _PRIMARY,
-
-          backgroundColor(Colors.INDIGO6),
-          color(white)
-        );
-      }
-    };
-  }
-
-  @Override
-  protected final void uiMain() {
-    header(
-      h1("Develop Java applications with Objectos"),
-
-      p("""
-        Explore our tutorials, guides and reference materials to get you
-        started with Objectos. Please note this site is under construction:
-        our goal is for developers of all experience levels to find what they need.""")
-    );
+    p("""
+      Welcome to the Objectos documentation.
+      Here you will find tutorials, topic guides, how-to guides and
+      the reference manuals of individual libraries.""");
 
     section(
+      h2("First steps"),
+
+      p("""
+        Start here if you are new to Objectos."""),
+
       div(
-        _BLOCK,
-        _PRIMARY,
+        h3("From scratch"),
 
-        h2("Get Started"),
+        ul(
+          li(a(Intro.OVERVIEW, "Overview")),
 
-        div(
-          a(href(V0001Directory.QUICK_START), t("Quick start"))
-        ),
-
-        div(
-          a(href("#"), t("Overview"))
+          li(a(Intro.INSTALLATION, "Installation"))
         )
       )
     );

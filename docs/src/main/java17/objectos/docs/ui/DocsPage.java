@@ -224,6 +224,14 @@ public abstract class DocsPage extends SitePage {
       install(reset);
 
       style(
+        html,
+
+        fontFamily(
+          fontFamily(sansSerif)
+        )
+      );
+
+      style(
         article, sp(), a,
 
         color(Colors.INDIGO6)
@@ -252,6 +260,16 @@ public abstract class DocsPage extends SitePage {
         fontWeight(600),
         marginBottom(Spacing.V04),
         marginTop(Spacing.V14)
+      );
+
+      style(
+        article, sp(), h3,
+
+        fontSize(FontSize.XL),
+        fontWeight(500),
+        letterSpacing(px(-0.25)),
+        marginBottom(Spacing.V04),
+        marginTop(Spacing.V08)
       );
 
       style(

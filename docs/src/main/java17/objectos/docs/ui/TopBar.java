@@ -21,7 +21,7 @@ import br.com.objectos.css.select.ClassSelector;
 import br.com.objectos.css.select.IdSelector;
 import br.com.objectos.css.sheet.AbstractStyleSheet;
 import br.com.objectos.css.sheet.StyleSheet;
-import objectos.docs.DocsDirectory;
+import objectos.docs.Docs;
 
 public final class TopBar extends SiteFragment implements DocsPageCss, DocsPageJs {
 
@@ -212,7 +212,7 @@ public final class TopBar extends SiteFragment implements DocsPageCss, DocsPageJ
       a(
         _LOGO,
 
-        href(DocsDirectory.INDEX),
+        href(Docs.INDEX),
 
         svg(
           xmlns("http://www.w3.org/2000/svg"),

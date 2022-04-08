@@ -13,34 +13,37 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package objectos.docs.v0001;
+package objectos.docs.intro;
 
-import br.com.objectos.be.annotations.Be;
-import br.com.objectos.be.annotations.Markdown;
-import objectos.docs.ui.ArticlePage;
+import objectos.docs.ui.DocsPage;
 
-@Be
-abstract class Introduction extends ArticlePage {
+final class QuickStartOtherJDK extends DocsPage {
 
   @Override
   public final String topBarTitle() {
-    return "Introduction";
+    return null;
   }
 
-//@formatter:off
-  /**
-
-# Documentation for Objectos developers
-
-This is the first public version of the Objectos suite of libraries.
-Our goal is to, in time, allow you to build Java web applications.
-For now, you can learn more about Objectos by browsing the documentation of
-the available components.
-
-   */
-  //@formatter:on
-  @Markdown
   @Override
-  protected abstract void contents();
+  protected final ThisStyleSheet thisStyleSheet() {
+    return new ThisStyleSheet() {
+      @Override
+      protected final void definition() {
+        super.definition();
+
+        articleTable();
+      }
+    };
+  }
+
+  @Override
+  protected final void uiMain() {
+    header(
+      h1("I don't see my JDK listed in the supported versions")
+    );
+
+    p("""
+      Ensure you are reading the latest version of the documentation.""");
+  }
 
 }
