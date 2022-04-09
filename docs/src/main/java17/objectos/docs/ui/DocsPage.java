@@ -208,7 +208,7 @@ public abstract class DocsPage extends SitePage {
       style(
         article, sp(), ul,
 
-        listStyle(disc, inside),
+        listStyle(disc),
         paddingLeft(Spacing.V10)
       );
 
