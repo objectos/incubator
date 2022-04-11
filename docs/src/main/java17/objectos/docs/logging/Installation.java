@@ -15,14 +15,33 @@
  */
 package objectos.docs.logging;
 
-import br.com.objectos.be.site.SiteDirectory;
+import objectos.docs.intro.IntroDir;
+import objectos.docs.ui.ArticlePage;
 
-public final class LoggingDir extends SiteDirectory {
+final class Installation extends ArticlePage {
 
   @Override
-  protected final void configure() {
-    addPage("index.html", new Index());
-    addPage("install.html", new Installation());
+  protected final void contents() {
+    h1("Installation");
+
+    p(
+      t("Import the Objectos BOM POM by following "),
+      a(IntroDir.INSTALLATION, "this document"),
+      t("."));
+
+    p(
+      t("Next, add the Objectos Logging dependency to your project's "),
+      code("pom.xml"),
+      t(":"));
+
+    codeXml(
+      """
+      <dependencies>
+          <dependency>
+              <groupId>br.com.objectos</groupId>
+              <artifactId>logging</artifactId>
+          </dependency>
+      </dependencies>""");
   }
 
 }

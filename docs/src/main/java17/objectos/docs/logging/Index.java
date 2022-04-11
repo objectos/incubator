@@ -24,8 +24,14 @@ final class Index extends ArticlePage {
     h1("Objectos Logging");
 
     p("""
-      Objectos provides a type-safe logging API for Java applications.
-      A "Hello world" would look like so:""");
+      Objectos Logging provides a logging API for Java applications.
+      You define logging events and you log them instead of string messages.
+      Events can be paramaterized making log method invocations type-safe.""");
+
+    h2("Hello world");
+
+    p("""
+      """);
 
     codeJava(
       """
@@ -33,20 +39,17 @@ final class Index extends ArticlePage {
 
       public class HelloWorld {
         public static void main(String[] args) {
-          var say = Events.info(HelloWorld.class, "SAY", String.class);
+          var helloWorld = Events.info(HelloWorld.class, "HELLO_WORLD");
 
           var logger = new NoopLogger() {
-            public <T> void log(Event1<T> event, T arg) {
-              if (event == say) {
-                // the cast to string is not necessary.
-                // It is here just to show it is a safe cast
-                // since `say` is parameterized Event1<String>
-                System.out.println((String) arg);
+            public void log(Event0 event) {
+              if (event == helloWorld) {
+                System.out.println("Hello world!");
               }
             }
           };
 
-          logger.log(say, "Hello world!");
+          logger.log(helloWorld);
         }
       }""");
 

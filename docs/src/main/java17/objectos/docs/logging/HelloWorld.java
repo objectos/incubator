@@ -15,25 +15,22 @@
  */
 package objectos.docs.logging;
 
-import br.com.objectos.logging.Event1;
+import br.com.objectos.logging.Event0;
 import br.com.objectos.logging.Events;
 import br.com.objectos.logging.NoopLogger;
 
 public class HelloWorld {
   public static void main(String[] args) {
-    var say = Events.info(HelloWorld.class, "SAY", String.class);
+    var helloWorld = Events.info(HelloWorld.class, "HELLO_WORLD");
 
     var logger = new NoopLogger() {
-      public <T> void log(Event1<T> event, T arg) {
-        if (event == say) {
-          // the cast to string is not necessary.
-          // It is here just to show it is a safe cast
-          // since `say` is parameterized Event1<String>
-          System.out.println((String) arg);
+      public void log(Event0 event) {
+        if (event == helloWorld) {
+          System.out.println("Hello world!");
         }
       }
     };
 
-    logger.log(say, "Hello world!");
+    logger.log(helloWorld);
   }
 }
