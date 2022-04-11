@@ -35,6 +35,15 @@ public abstract class ArticlePage extends DocsPage {
     );
   }
 
+  protected final void codeXml(String xml) {
+    pre(
+      code(
+        _class("language-xml"),
+        t(xml)
+      )
+    );
+  }
+
   protected abstract void contents();
 
   @Override

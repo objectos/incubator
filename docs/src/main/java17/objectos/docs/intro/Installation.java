@@ -26,11 +26,65 @@ final class Installation extends ArticlePage {
 
   @Override
   protected final void contents() {
-    h1("Objectos Quick Start");
+    h1("Installation");
 
     p("""
-      Get started with Objectos. Learn how to add the Objectos dependencies to an existing
-      Maven project.""");
+      In order to get started with Objectos you need to have it installed in your system.
+      As of the current release adding Objectos to an existing Maven project is the
+      only supported installation method.""");
+
+    h2("System requirements");
+
+    p("""
+      Objectos requires JDK 17 or later.""");
+
+    h2("Import the Objectos BOM POM");
+
+    p(t("""
+        Using the Objectos BOM POM is the recommended way of managing the Objectos'
+        dependencies. You can import it in your existing Maven project by declaring it
+        in the\040"""),
+      code("dependencyManagement"),
+      t("""
+        \040section of your project's POM file like so:"""));
+
+    codeXml(
+      """
+      <dependencyManagement>
+          <dependencies>
+              <dependency>
+                  <groupId>br.com.objectos</groupId>
+                  <artifactId>bom</artifactId>
+                  <version>0.1.0</version>
+                  <type>pom</type>
+                  <scope>import</scope>
+              </dependency>
+          </dependencies>
+      </dependencyManagement>""");
+
+    h2("Use Objectos components");
+
+    p("""
+      The next step is to add Objectos components to your project.
+      Since you have the Objectos BOM imported you do not need to specify the version
+      for each of the added components.""");
+
+    p(
+      t("""
+        For instance, to add Objectos Logging to your project, you would declare it
+        in the\040"""),
+      code("dependencies"),
+      t("""
+        \040section of your projects's POM file like so:"""));
+
+    codeXml(
+      """
+      <dependencies>
+          <dependency>
+              <groupId>br.com.objectos</groupId>
+              <artifactId>logging</artifactId>
+          </dependency>
+      </dependencies>""");
   }
 
   @Override
@@ -41,151 +95,8 @@ final class Installation extends ArticlePage {
         super.definition();
 
         articleCode();
-
-        articleTable();
-
-        articleUl();
       }
     };
   }
-
-  //@formatter:off
-  /**
-
-## Choose the Objectos version
-
-Objectos version 0.1.0 is compatible with following JDK versions:
-
-- JDK 17+
-- JDK 11
-- JDK 8
-- JDK 7
-- JDK 6
-
-Objectos provides different binaries for each of the supported JDK versions.
-Therefore, prior to adding Objectos to your project, you must choose
-the proper Objectos version. The choice depends on the JDK version
-your application will be running on.
-
-Use the table below and choose the Objectos version based on the JDK version
-that better represents your environment. Please note that for new projects
-we highly recommend that you use the latest available JDK.
-
-```self
-article0Table
-```
-
-   */
-  //@formatter:on
-  final void article0() {}
-
-  final void article0Table() {
-    table(
-      thead(
-        tr(
-          th("Your JDK version"),
-          th("Use this Objectos version")
-        )
-      ),
-
-      tbody(
-        tr(
-          td("JDK 18"),
-          td(code("0.1.0-jdk17"))
-        ),
-        tr(
-          td("JDK 17"),
-          td(code("0.1.0-jdk17"))
-        ),
-        tr(
-          td("JDK 11"),
-          td(code("0.1.0-jdk11"))
-        ),
-        tr(
-          td("JDK 8"),
-          td(code("0.1.0-jdk8"))
-        ),
-        tr(
-          td("JDK 7"),
-          td(code("0.1.0-jdk7"))
-        ),
-        tr(
-          td("JDK 6"),
-          td(code("0.1.0-jdk6"))
-        )
-      )
-    );
-  }
-
- //@formatter:off
-/**
-
-## Import the Objectos BOM POM
-
-Now that you have chosen the Objectos version, the next step is to import
-the Objectos BOM POM.
-
-You do so by declaring it in the `dependencyManagement` section of your
-project's POM file.
-
-*```xml
-*<properties>
-*    <objectos.version>version chosen in the previous section</objectos.version>
-*</properties>
-*
-*<dependencyManagement>
-*    <dependencies>
-*        <dependency>
-*            <groupId>br.com.objectos</groupId>
-*            <artifactId>bom</artifactId>
-*            <version>${objectos.version}</version>
-*            <type>pom</type>
-*            <scope>import</scope>
-*        </dependency>
-*    </dependencies>
-*</dependencyManagement>
-*```
- */
-//@formatter:on
-  final void article1() {}
-
-  //@formatter:off
-  /**
-
-## Use Objectos components
-
-The next step is to add Objectos components to your project.
-Since you have the Objectos POM imported, you do not need to specify the version
-for each of the added component.
-
-For instance, to add Objectos Logging to your project, you would declare it
-in the `dependencies` section of your project's POM file, like so:
-
-*```xml
-*<dependencies>
-*    <dependency>
-*        <groupId>br.com.objectos</groupId>
-*        <artifactId>logging</artifactId>
-*    </dependency>
-*</dependencies>
-*```
-
-   */
-  //@formatter:on
-  final void article2() {}
-
-//@formatter:off
-  /**
-
-## Where to go from here
-
-This is the first public version of the Objectos suite of libraries.
-Our goal is to, in time, allow you to build Java web applications.
-For now, you can learn more about Objectos by browsing the documentation of
-the available components.
-
-   */
-  //@formatter:on
-  final void article3() {}
 
 }

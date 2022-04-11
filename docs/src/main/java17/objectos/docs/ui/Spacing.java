@@ -63,6 +63,8 @@ public final class Spacing {
 
   public static final Length V64 = Length.rem(16);
 
+  public static final Length V72 = Length.rem(18); // 288px
+
   private Spacing() {}
 
 }
