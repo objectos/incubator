@@ -39,7 +39,7 @@ final class Overview extends ArticlePage {
     p("""
       One can safely say Objectos is under construction.""");
 
-    h2("Facts");
+    h2("Design principles");
 
     p("""
       Here we present some facts about the Objectos suite of Java libraries.
@@ -71,10 +71,10 @@ final class Overview extends ArticlePage {
     h3("CPU and memory cost-concious");
 
     p("""
-      We are not performance experts.""");
+      We do not claim to know how to write performant software.""");
 
     p("""
-      We believe that applications should be able to run in appropriately
+      With that said, we believe that applications should be able to run in appropriately
       sized servers. US dollar or Euro based prices for cloud computing can
       be costly to small and medium sized businesses in countries with a
       currency like the Brazilian Real.""");
@@ -105,7 +105,7 @@ final class Overview extends ArticlePage {
 
     p("""
       We have learned the hard way that a project does not exist without proper
-      documentation. We will work, to the best of our abilities""");
+      documentation. Therefore, we will work to the best of our abilities to provide it.""");
 
     h3("We eat our own dog food");
 

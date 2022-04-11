@@ -244,6 +244,13 @@ public abstract class DocsPage extends SitePage {
       );
 
       style(
+        article, sp(), blockquote,
+
+        fontStyle(italic),
+        paddingLeft(Spacing.V10)
+      );
+
+      style(
         article, sp(), h1,
 
         fontSize(px(40)),
