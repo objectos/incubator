@@ -85,6 +85,22 @@ final class Installation extends ArticlePage {
               <artifactId>logging</artifactId>
           </dependency>
       </dependencies>""");
+
+    p(
+      t("""
+        If your application is modular, you should also add the\040"""),
+      code("requires"),
+      t("""
+        \040directive to your\040"""),
+      code("module-info.java"),
+      t("""
+        \040file like so:"""));
+
+    codeJava(
+      """
+      module my.module {
+        requires objectos.logging;
+      }""");
   }
 
   @Override
