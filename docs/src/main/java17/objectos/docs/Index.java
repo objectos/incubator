@@ -15,7 +15,7 @@
  */
 package objectos.docs;
 
-import objectos.docs.intro.Intro;
+import objectos.docs.intro.IntroDir;
 import objectos.docs.ui.ArticlePage;
 
 final class Index extends ArticlePage {
@@ -44,9 +44,9 @@ final class Index extends ArticlePage {
         h3("From scratch"),
 
         ul(
-          li(a(Intro.OVERVIEW, "Overview")),
+          li(a(IntroDir.OVERVIEW, "Overview")),
 
-          li(a(Intro.INSTALLATION, "Installation"))
+          li(a(IntroDir.INSTALLATION, "Installation"))
         )
       )
     );

@@ -18,7 +18,7 @@ package objectos.docs.intro;
 import br.com.objectos.be.site.HasHref;
 import br.com.objectos.be.site.SiteDirectory;
 
-public final class Intro extends SiteDirectory {
+public final class IntroDir extends SiteDirectory {
 
   public static final Class<? extends HasHref> INSTALLATION = Installation.class;
 
