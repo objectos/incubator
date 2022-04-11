@@ -44,6 +44,15 @@ public abstract class ArticlePage extends DocsPage {
     );
   }
 
+  protected final void codeShell(String shell) {
+    pre(
+      code(
+        _class("language-shell"),
+        t(shell)
+      )
+    );
+  }
+
   protected final void codeXml(String xml) {
     pre(
       code(

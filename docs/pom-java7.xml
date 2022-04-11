@@ -111,6 +111,10 @@
 	<dependencies>
 		<dependency>
 			<groupId>br.com.objectos</groupId>
+			<artifactId>logging</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>br.com.objectos</groupId>
 			<artifactId>ssg</artifactId>
 		</dependency>
 

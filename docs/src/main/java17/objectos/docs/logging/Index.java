@@ -31,21 +31,29 @@ final class Index extends ArticlePage {
       """
       import objectos.logging.*;
 
-      public class Example {
-        private static final Event1<String> SAY
-          = Events.info(Example.class, String.class);
+      public class HelloWorld {
+        public static void main(String[] args) {
+          var say = Events.info(HelloWorld.class, "SAY", String.class);
 
-        private final Logger logger;
+          var logger = new NoopLogger() {
+            public <T> void log(Event1<T> event, T arg) {
+              if (event == say) {
+                // the cast to string is not necessary.
+                // It is here just to show it is a safe cast
+                // since `say` is parameterized Event1<String>
+                System.out.println((String) arg);
+              }
+            }
+          };
 
-        Example(Logger logger) {
-          this.logger = logger;
+          logger.log(say, "Hello world!");
         }
+      }""");
 
-        public final void sayHello() {
-          logger.log(SAY, "Hello world!");
-        }
-      }
-      """);
+    p("""
+      When run this Java program will output:""");
+
+    codeShell("Hello world!");
 
     h2("Maven coordinates");
 
