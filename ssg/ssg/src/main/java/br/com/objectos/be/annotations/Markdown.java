@@ -22,5 +22,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
 @Retention(RUNTIME)
-@Target(ElementType.METHOD)
+@Target(
+  {ElementType.METHOD, ElementType.TYPE}
+)
 public @interface Markdown {}

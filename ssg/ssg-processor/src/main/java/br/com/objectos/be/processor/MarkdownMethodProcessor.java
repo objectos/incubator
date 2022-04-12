@@ -57,7 +57,7 @@ public final class MarkdownMethodProcessor extends AbstractProcessingRoundProces
       process0(round, m);
     }
 
-    return round.claimTheseAnnotations();
+    return round.allowOtherProcessors();
   }
 
   private void process0(ProcessingRound round, ProcessingMethod m) {
