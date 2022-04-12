@@ -35,39 +35,28 @@ public abstract class ArticlePage extends DocsPage {
     );
   }
 
-  protected final void codeJava(String java) {
-    pre(
-      code(
-        _class("language-java"),
-        t(java)
-      )
-    );
-  }
+  @Override
+  protected final ThisStyleSheet thisStyleSheet() {
+    return new ThisStyleSheet() {
+      @Override
+      protected final void definition() {
+        super.definition();
 
-  protected final void codeShell(String shell) {
-    pre(
-      code(
-        _class("language-shell"),
-        t(shell)
-      )
-    );
+        articleCode();
+      }
+    };
   }
-
-  protected final void codeXml(String xml) {
-    pre(
-      code(
-        _class("language-xml"),
-        t(xml)
-      )
-    );
-  }
-
-  protected abstract void contents();
 
   @Override
-  protected final void uiMain() {
+  protected void uiMain() {
+    Md md;
+    md = getInstance(Md.class);
+
+    String html;
+    html = md.render(this);
+
     article(
-      f(this::contents)
+      raw(html)
     );
   }
 

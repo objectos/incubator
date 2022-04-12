@@ -13,17 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package objectos.docs.intro;
+package objectos.docs.ui;
 
-import br.com.objectos.be.annotations.Markdown;
-import objectos.docs.ui.ArticlePage;
+public interface Locator {
 
-//@formatter:off
-/**
+  <T> T getInstance(Class<? extends T> key);
 
-# Get started with Objectos
-
-*/
-//@formatter:on
-@Markdown
-final class Index extends ArticlePage {}
+}

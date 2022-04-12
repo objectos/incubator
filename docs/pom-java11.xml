@@ -119,6 +119,11 @@
 		</dependency>
 
 		<dependency>
+			<groupId>org.commonmark</groupId>
+			<artifactId>commonmark</artifactId>
+			<version>0.18.0</version>
+		</dependency>
+		<dependency>
 			<groupId>org.openjdk.nashorn</groupId>
 			<artifactId>nashorn-core</artifactId>
 			<version>15.3</version>

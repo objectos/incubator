@@ -22,7 +22,8 @@ public final class LoggingDir extends SiteDirectory {
   @Override
   protected final void configure() {
     addPage("index.html", new Index());
-    addPage("install.html", new Installation());
+    addPage("install.html", new Install());
+    addPage("hello-world.html", new HelloWorld());
   }
 
 }

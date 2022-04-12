@@ -15,63 +15,64 @@
  */
 package objectos.docs.logging;
 
+import br.com.objectos.be.annotations.Markdown;
 import objectos.docs.ui.ArticlePage;
 
-final class Index extends ArticlePage {
+//@formatter:off
+/**
 
-  @Override
-  protected final void contents() {
-    h1("Objectos Logging");
+# Objectos Logging
 
-    p("""
-      Objectos Logging provides a logging API for Java applications.
-      You define logging events and you log them instead of string messages.
-      Events can be paramaterized making log method invocations type-safe.""");
+Objectos Logging provides a logging API for Java applications.
+You define logging events and you log them instead of string messages.
+Events can be paramaterized making log method invocations type-safe.
 
-    h2("Hello world");
+## Hello world
 
-    p("""
-      """);
+p("""
+  """);
 
-    codeJava(
-      """
-      import objectos.logging.*;
+codeJava(
+  """
+  import objectos.logging.*;
 
-      public class HelloWorld {
-        public static void main(String[] args) {
-          var helloWorld = Events.info(HelloWorld.class, "HELLO_WORLD");
+  public class HelloWorld {
+    public static void main(String[] args) {
+      var helloWorld = Events.info(HelloWorld.class, "HELLO_WORLD");
 
-          var logger = new NoopLogger() {
-            public void log(Event0 event) {
-              if (event == helloWorld) {
-                System.out.println("Hello world!");
-              }
-            }
-          };
-
-          logger.log(helloWorld);
+      var logger = new NoopLogger() {
+        public void log(Event0 event) {
+          if (event == helloWorld) {
+            System.out.println("Hello world!");
+          }
         }
-      }""");
+      };
 
-    p("""
-      When run this Java program will output:""");
+      logger.log(helloWorld);
+    }
+  }""");
 
-    codeShell("Hello world!");
+p("""
+  When run this Java program will output:""");
 
-    h2("Maven coordinates");
+codeShell("Hello world!");
 
-    p("""
-      The following coordinates assume you have the Objectos BOM POM imported in your
-      project:""");
+h2("Maven coordinates");
 
-    codeXml(
-      """
-      <dependencies>
-          <dependency>
-              <groupId>br.com.objectos</groupId>
-              <artifactId>logging</artifactId>
-          </dependency>
-      </dependencies>""");
-  }
+p("""
+  The following coordinates assume you have the Objectos BOM POM imported in your
+  project:""");
 
-}
+codeXml(
+  """
+  <dependencies>
+      <dependency>
+          <groupId>br.com.objectos</groupId>
+          <artifactId>logging</artifactId>
+      </dependency>
+  </dependencies>""");
+
+*/
+//@formatter:on
+@Markdown
+final class Index extends ArticlePage {}

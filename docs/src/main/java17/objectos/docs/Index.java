@@ -21,32 +21,29 @@ import objectos.docs.ui.ArticlePage;
 final class Index extends ArticlePage {
 
   @Override
-  public final String topBarTitle() {
-    return null;
-  }
-
-  @Override
-  protected final void contents() {
-    h1("Documentation for Objectos developers");
-
-    p("""
-      Welcome to the Objectos documentation.
-      Here you will find tutorials, topic guides, how-to guides and
-      the reference manuals of individual libraries.""");
-
-    section(
-      h2("First steps"),
+  protected final void uiMain() {
+    article(
+      h1("Documentation for Objectos developers"),
 
       p("""
-        Start here if you are new to Objectos."""),
+        Welcome to the Objectos documentation.
+        Here you will find tutorials, topic guides, how-to guides and
+        the reference manuals of individual libraries."""),
 
-      div(
-        h3("From scratch"),
+      section(
+        h2("First steps"),
 
-        ul(
-          li(a(IntroDir.OVERVIEW, "Overview")),
+        p("""
+          Start here if you are new to Objectos."""),
 
-          li(a(IntroDir.INSTALLATION, "Installation"))
+        div(
+          h3("From scratch"),
+
+          ul(
+            li(a(IntroDir.OVERVIEW, "Overview")),
+
+            li(a(IntroDir.INSTALLATION, "Installation"))
+          )
         )
       )
     );

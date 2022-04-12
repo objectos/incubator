@@ -15,104 +15,70 @@
  */
 package objectos.docs.intro;
 
+import br.com.objectos.be.annotations.Markdown;
 import objectos.docs.ui.ArticlePage;
 
-final class Installation extends ArticlePage {
+//@formatter:off
+/**
 
-  @Override
-  public final String topBarTitle() {
-    return null;
-  }
+# Installation
 
-  @Override
-  protected final void contents() {
-    h1("Installation");
+In order to get started with Objectos you need to have it installed in your system.
+As of the current release adding Objectos to an existing Maven project is the
+only supported installation method.
 
-    p("""
-      In order to get started with Objectos you need to have it installed in your system.
-      As of the current release adding Objectos to an existing Maven project is the
-      only supported installation method.""");
+## System requirements
 
-    h2("System requirements");
+Objectos requires JDK 17 or later.
 
-    p("""
-      Objectos requires JDK 17 or later.""");
+## Import the Objectos BOM POM"
 
-    h2("Import the Objectos BOM POM");
+Using the Objectos BOM POM is the recommended way of managing the Objectos'
+dependencies. You can import it in your existing Maven project by declaring it
+in the `dependencyManagement` section of your project's POM file like so:
 
-    p(t("""
-        Using the Objectos BOM POM is the recommended way of managing the Objectos'
-        dependencies. You can import it in your existing Maven project by declaring it
-        in the\040"""),
-      code("dependencyManagement"),
-      t("""
-        \040section of your project's POM file like so:"""));
+*```xml
+*<dependencyManagement>
+*    <dependencies>
+*        <dependency>
+*            <groupId>br.com.objectos</groupId>
+*            <artifactId>bom</artifactId>
+*            <version>0.1.0</version>
+*            <type>pom</type>
+*            <scope>import</scope>
+*        </dependency>
+*    </dependencies>
+*</dependencyManagement>
+*```
 
-    codeXml(
-      """
-      <dependencyManagement>
-          <dependencies>
-              <dependency>
-                  <groupId>br.com.objectos</groupId>
-                  <artifactId>bom</artifactId>
-                  <version>0.1.0</version>
-                  <type>pom</type>
-                  <scope>import</scope>
-              </dependency>
-          </dependencies>
-      </dependencyManagement>""");
+## Use Objectos components
 
-    h2("Use Objectos components");
+The next step is to add Objectos components to your project.
+Since you have the Objectos BOM imported you do not need to specify the version
+for each of the added components.
 
-    p("""
-      The next step is to add Objectos components to your project.
-      Since you have the Objectos BOM imported you do not need to specify the version
-      for each of the added components.""");
+For instance, to add Objectos Logging to your project, you would declare it
+in the `dependencies` section of your projects's POM file like so:"""));
 
-    p(
-      t("""
-        For instance, to add Objectos Logging to your project, you would declare it
-        in the\040"""),
-      code("dependencies"),
-      t("""
-        \040section of your projects's POM file like so:"""));
+*```xml
+*<dependencies>
+*    <dependency>
+*        <groupId>br.com.objectos</groupId>
+*        <artifactId>logging</artifactId>
+*    </dependency>
+*</dependencies>
+*```
 
-    codeXml(
-      """
-      <dependencies>
-          <dependency>
-              <groupId>br.com.objectos</groupId>
-              <artifactId>logging</artifactId>
-          </dependency>
-      </dependencies>""");
+If your application is modular, you should also add the `requires`
+directive to your `module-info.java` file like so:
 
-    p(
-      t("""
-        If your application is modular, you should also add the\040"""),
-      code("requires"),
-      t("""
-        \040directive to your\040"""),
-      code("module-info.java"),
-      t("""
-        \040file like so:"""));
-
-    codeJava(
-      """
-      module my.module {
-        requires objectos.logging;
-      }""");
-  }
-
-  @Override
-  protected final ThisStyleSheet thisStyleSheet() {
-    return new ThisStyleSheet() {
-      @Override
-      protected final void definition() {
-        super.definition();
-
-        articleCode();
-      }
-    };
-  }
-
+```java
+module my.module {
+  requires objectos.logging;
 }
+```
+
+*/
+//@formatter:on
+@Markdown
+final class Installation extends ArticlePage {}

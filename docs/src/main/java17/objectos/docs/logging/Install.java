@@ -15,33 +15,28 @@
  */
 package objectos.docs.logging;
 
-import objectos.docs.intro.IntroDir;
+import br.com.objectos.be.annotations.Markdown;
 import objectos.docs.ui.ArticlePage;
 
-final class Installation extends ArticlePage {
+//@formatter:off
+/**
 
-  @Override
-  protected final void contents() {
-    h1("Installation");
+# Installation
 
-    p(
-      t("Import the Objectos BOM POM by following "),
-      a(IntroDir.INSTALLATION, "this document"),
-      t("."));
+Import the Objectos BOM POM by following [this document](href:intro.Installation).
 
-    p(
-      t("Next, add the Objectos Logging dependency to your project's "),
-      code("pom.xml"),
-      t(":"));
+Next, add the Objectos Logging dependency to your project's `pom.xml`:
 
-    codeXml(
-      """
-      <dependencies>
-          <dependency>
-              <groupId>br.com.objectos</groupId>
-              <artifactId>logging</artifactId>
-          </dependency>
-      </dependencies>""");
-  }
+*```xml
+*<dependencies>
+*    <dependency>
+*        <groupId>br.com.objectos</groupId>
+*        <artifactId>logging</artifactId>
+*    </dependency>
+*</dependencies>
+*```
 
-}
+*/
+//@formatter:on
+@Markdown
+final class Install extends ArticlePage {}
