@@ -7,6 +7,10 @@
  */
 package br.com.objectos.code.model.element;
 
+import static br.com.objectos.tools.Tools.compilationUnit;
+import static br.com.objectos.tools.Tools.javac;
+import static br.com.objectos.tools.Tools.patchModuleWithTestClasses;
+import static br.com.objectos.tools.Tools.processor;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
@@ -17,6 +21,8 @@ import br.com.objectos.code.java.declaration.TypeModifier;
 import br.com.objectos.code.java.type.NamedClass;
 import br.com.objectos.code.java.type.NamedTypeParameter;
 import br.com.objectos.code.model.AbstractCodeModelTest;
+import br.com.objectos.code.processing.AbstractProcessingRoundProcessor;
+import br.com.objectos.code.processing.ProcessingRound;
 import br.com.objectos.code.testing.InheritedAnnotation;
 import br.com.objectos.code.testing.NonInheritedAnnotation;
 import br.com.objectos.code.util.Marker1;
@@ -25,12 +31,14 @@ import br.com.objectos.code.util.TypeAnnotation;
 import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.core.list.MutableList;
 import br.com.objectos.core.set.ImmutableSet;
+import br.com.objectos.tools.Compilation;
 import java.io.Closeable;
 import java.io.InputStream;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
+import java.util.Set;
 import javax.lang.model.element.ElementKind;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -43,16 +51,16 @@ public class ProcessingTypeTest extends AbstractCodeModelTest {
     outer = query(ProcessingTypeTest.class);
 
     assertEquals(
-        outer.getBinaryName(),
-        ProcessingTypeTest.class.getCanonicalName()
+      outer.getBinaryName(),
+      ProcessingTypeTest.class.getCanonicalName()
     );
 
     ProcessingType subject;
     subject = query(getBinaryNameSubject.class);
 
     assertEquals(
-        subject.getBinaryName(),
-        outer.getBinaryName() + "$" + subject.getSimpleName()
+      subject.getBinaryName(),
+      outer.getBinaryName() + "$" + subject.getSimpleName()
     );
   }
 
@@ -62,24 +70,24 @@ public class ProcessingTypeTest extends AbstractCodeModelTest {
     hello = query(GetCanonicalNameSubject.Hello.class);
 
     assertEquals(
-        hello.getCanonicalName(),
-        ProcessingTypeTest.class.getCanonicalName() + ".GetCanonicalNameParent.Hello"
+      hello.getCanonicalName(),
+      ProcessingTypeTest.class.getCanonicalName() + ".GetCanonicalNameParent.Hello"
     );
 
     ProcessingType string;
     string = query(String.class);
 
     assertEquals(
-        string.getCanonicalName(),
-        "java.lang.String"
+      string.getCanonicalName(),
+      "java.lang.String"
     );
 
     ProcessingType mapEntry;
     mapEntry = query(Map.Entry.class);
 
     assertEquals(
-        mapEntry.getCanonicalName(),
-        "java.util.Map.Entry"
+      mapEntry.getCanonicalName(),
+      "java.util.Map.Entry"
     );
   }
 
@@ -257,11 +265,11 @@ public class ProcessingTypeTest extends AbstractCodeModelTest {
     subject = query(AnnotationsSubject.class);
 
     assertNotNull(
-        subject.getDirectlyPresentAnnotation(Marker1.class)
+      subject.getDirectlyPresentAnnotation(Marker1.class)
     );
 
     assertNotNull(
-        subject.getDirectlyPresentAnnotation(Marker2.class.getCanonicalName())
+      subject.getDirectlyPresentAnnotation(Marker2.class.getCanonicalName())
     );
 
     try {
@@ -305,11 +313,11 @@ public class ProcessingTypeTest extends AbstractCodeModelTest {
     subject = query(AnnotationsSubject.class);
 
     assertNotNull(
-        subject.getDirectlyPresentOrInheritedAnnotation(Marker1.class)
+      subject.getDirectlyPresentOrInheritedAnnotation(Marker1.class)
     );
 
     assertNotNull(
-        subject.getDirectlyPresentOrInheritedAnnotation(InheritedAnnotation.class)
+      subject.getDirectlyPresentOrInheritedAnnotation(InheritedAnnotation.class)
     );
 
     try {
@@ -342,6 +350,62 @@ public class ProcessingTypeTest extends AbstractCodeModelTest {
   }
 
   @Test
+  public void getDocComment() {
+    class ThisProcessor extends AbstractProcessingRoundProcessor {
+      private final MutableList<String> comments = MutableList.create();
+
+      @Override
+      public final Set<String> getSupportedAnnotationTypes() {
+        return supportedAnnotationTypes(TypeAnnotation.class);
+      }
+
+      @Override
+      protected final boolean process(ProcessingRound round) {
+        ImmutableSet<ProcessingType> types;
+        types = round.getAnnotatedTypes();
+
+        for (ProcessingType type : types) {
+          process0(round, type);
+        }
+
+        return round.claimTheseAnnotations();
+      }
+
+      private void process0(ProcessingRound round, ProcessingType type) {
+        comments.add(type.getDocComment());
+      }
+    }
+
+    ThisProcessor thisProcessor;
+    thisProcessor = new ThisProcessor();
+
+    Compilation compilation;
+    compilation = javac(
+      processor(thisProcessor),
+
+      patchModuleWithTestClasses("br.com.objectos.code"),
+
+      compilationUnit(
+        "package testing;",
+        "/**",
+        " * standard formatted Javadoc comment",
+        " */",
+        "@br.com.objectos.code.util.TypeAnnotation",
+        "class Subject {}"
+      )
+    );
+
+    compilation.assertWasSuccessful();
+
+    ImmutableList<String> result;
+    result = thisProcessor.comments.toImmutableList();
+
+    assertEquals(result.size(), 1);
+
+    assertEquals(result.get(0), " standard formatted Javadoc comment\n");
+  }
+
+  @Test
   public void getModifiers() {
     ProcessingType subject0;
     subject0 = query(ModifiersSubject0.class);
@@ -371,16 +435,16 @@ public class ProcessingTypeTest extends AbstractCodeModelTest {
     subject = query(GetNameSubject.class);
 
     assertEquals(
-        subject.getName().getCanonicalName(),
-        GetNameSubject.class.getCanonicalName()
+      subject.getName().getCanonicalName(),
+      GetNameSubject.class.getCanonicalName()
     );
 
     ProcessingType inner;
     inner = query(GetNameSubject.Inner.class);
 
     assertEquals(
-        inner.getName().getCanonicalName(),
-        GetNameSubject.Inner.class.getCanonicalName()
+      inner.getName().getCanonicalName(),
+      GetNameSubject.Inner.class.getCanonicalName()
     );
   }
 
@@ -390,8 +454,8 @@ public class ProcessingTypeTest extends AbstractCodeModelTest {
     subject = query(GetSimpleNameSubject.class);
 
     assertEquals(
-        subject.getSimpleName(),
-        GetSimpleNameSubject.class.getSimpleName()
+      subject.getSimpleName(),
+      GetSimpleNameSubject.class.getSimpleName()
     );
   }
 
@@ -401,12 +465,12 @@ public class ProcessingTypeTest extends AbstractCodeModelTest {
     query = query(Generic.class);
 
     assertEquals(
-        query.getTypeParameters(),
-        ImmutableList.of(
-            NamedTypeParameter.named("U"),
-            NamedTypeParameter.named("B").addBound(InputStream.class),
-            NamedTypeParameter.named("I").addBound(InputStream.class).addBound(Closeable.class)
-        )
+      query.getTypeParameters(),
+      ImmutableList.of(
+        NamedTypeParameter.named("U"),
+        NamedTypeParameter.named("B").addBound(InputStream.class),
+        NamedTypeParameter.named("I").addBound(InputStream.class).addBound(Closeable.class)
+      )
     );
   }
 

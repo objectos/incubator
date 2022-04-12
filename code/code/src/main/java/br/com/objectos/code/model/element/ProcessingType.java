@@ -133,6 +133,10 @@ public class ProcessingType extends ProcessingElement<TypeElement>
     return getDirectlyPresentOrInheritedAnnotationsImpl(element);
   }
 
+  public final String getDocComment() {
+    return getDocComment0();
+  }
+
   @Override
   public final ImmutableSet<TypeModifier> getModifiers() {
     return getModifiersImpl();
