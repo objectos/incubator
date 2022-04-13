@@ -16,16 +16,14 @@
 package objectos.docs.ui;
 
 import br.com.objectos.be.site.HasHref;
+import br.com.objectos.core.list.MutableList;
+import br.com.objectos.css.sheet.StyleSheet;
 import br.com.objectos.html.element.ElementName;
+import objectos.docs.style.ArticleCss;
 
 public abstract class ArticlePage extends DocsPage {
 
   protected ArticlePage() {}
-
-  @Override
-  public String topBarTitle() {
-    return null;
-  }
 
   protected final ElementName a(Class<? extends HasHref> href, String t) {
     return a(
@@ -36,19 +34,17 @@ public abstract class ArticlePage extends DocsPage {
   }
 
   @Override
-  protected final ThisStyleSheet thisStyleSheet() {
-    return new ThisStyleSheet() {
-      @Override
-      protected final void definition() {
-        super.definition();
+  protected MutableList<StyleSheet> styleSheets() {
+    MutableList<StyleSheet> list;
+    list = super.styleSheets();
 
-        articleCode();
-      }
-    };
+    list.add(new ArticleCss());
+
+    return list;
   }
 
   @Override
-  protected void uiMain() {
+  protected void main0() {
     Md md;
     md = getInstance(Md.class);
 

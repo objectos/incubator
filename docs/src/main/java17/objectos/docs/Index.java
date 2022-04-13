@@ -21,7 +21,7 @@ import objectos.docs.ui.ArticlePage;
 final class Index extends ArticlePage {
 
   @Override
-  protected final void uiMain() {
+  protected final void main0() {
     article(
       h1("Documentation for Objectos developers"),
 

@@ -13,10 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package objectos.docs.ui;
+package objectos.docs.style;
 
-interface DocsPageJs {
+import br.com.objectos.css.sheet.AbstractStyleSheet;
 
-  String js();
+public final class ContainerCss extends AbstractStyleSheet {
+
+  @Override
+  protected final void definition() {
+    style(
+      body,
+
+      maxWidth(Breakpoint.MD),
+      padding(Spacing.V04)
+    );
+  }
 
 }

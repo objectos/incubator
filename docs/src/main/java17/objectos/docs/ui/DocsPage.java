@@ -16,49 +16,16 @@
 package objectos.docs.ui;
 
 import br.com.objectos.be.site.SitePage;
-import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.css.Css;
-import br.com.objectos.css.framework.reset.Reset;
-import br.com.objectos.css.select.ClassSelector;
-import br.com.objectos.css.select.IdSelector;
-import br.com.objectos.css.sheet.AbstractStyleSheet;
+import br.com.objectos.core.list.MutableList;
 import br.com.objectos.css.sheet.StyleSheet;
 import br.com.objectos.http.media.ImageType;
+import objectos.docs.style.ContainerCss;
+import objectos.docs.style.ResetCss;
 
 public abstract class DocsPage extends SitePage {
 
-  static final ClassSelector _LEFT_DRAWER_OPEN = Css.randomDot(3);
-
-  private static final IdSelector _UI = Css.randomHash(3);
-
-  private static final IdSelector _UI_AREA = Css.randomHash(3);
-
-  private static final IdSelector _UI_MAIN = Css.randomHash(3);
-
-  private final String js
-      = """
-        /* DocsPage.java */
-        const ui = "{ui}";
-
-        const toggleClass = (id, cl) => {
-          const el = document.getElementById(id);
-
-          el.classList.toggle(cl);
-        };
-        """
-          .replace("\n", "")
-          .replace("{ui}", _UI.id());
-
-  public abstract String topBarTitle();
-
   @Override
   protected final void definition() {
-    var leftDrawer = getInstance(LeftDrawer.class);
-
-    leftDrawer.setCurrent(this);
-
-    var topBar = getInstance(TopBar.class);
-
     doctype();
     html(
       lang("en"),
@@ -66,20 +33,8 @@ public abstract class DocsPage extends SitePage {
         f(this::head0)
       ),
       body(
-        _UI,
-
-        f(topBar),
-
-        div(
-          _UI_AREA,
-
-          f(leftDrawer),
-
-          main(
-            _UI_MAIN,
-
-            f(this::uiMain)
-          )
+        main(
+          f(this::main0)
         )
       )
     );
@@ -90,253 +45,41 @@ public abstract class DocsPage extends SitePage {
     meta(httpEquiv("x-ua-compatible"), content("ie=edge"));
     meta(name("viewport"), content("width=device-width, initial-scale=1, shrink-to-fit=no"));
     link(rel("shortcut icon"), type(ImageType.ICON.qualifiedName()), href("/favicon.ico"));
-    link(href("/docs/prism.css"), rel("stylesheet"));
 
-    script(src("/docs/prism.js"));
+    StringBuilder css;
+    css = getInstance(StringBuilder.class);
 
-    StringBuilder sb;
-    sb = getInstance(StringBuilder.class);
+    css.setLength(0);
 
-    sb.setLength(0);
+    MutableList<StyleSheet> sheets;
+    sheets = styleSheets();
 
-    sb.append(js);
+    for (int i = 0; i < sheets.size(); i++) {
+      StyleSheet sheet;
+      sheet = sheets.get(i);
 
-    ImmutableList<DocsPageJs> jsProviders;
-    jsProviders = getInstancesByType(DocsPageJs.class);
+      String minified;
+      minified = sheet.printMinified();
 
-    for (int i = 0; i < jsProviders.size(); i++) {
-      DocsPageJs p;
-      p = jsProviders.get(i);
-
-      sb.append(p.js());
-    }
-
-    script(
-      raw(sb.toString())
-    );
-
-    sb.setLength(0);
-
-    StyleSheet styleSheet;
-    styleSheet = thisStyleSheet();
-
-    sb.append(styleSheet.printMinified());
-
-    ImmutableList<DocsPageCss> cssProviders;
-    cssProviders = getInstancesByType(DocsPageCss.class);
-
-    for (int i = 0; i < cssProviders.size(); i++) {
-      DocsPageCss p;
-      p = cssProviders.get(i);
-
-      sb.append(p.css());
+      css.append(minified);
     }
 
     style(
-      raw(sb.toString())
+      raw(css.toString())
     );
   }
 
-  protected ThisStyleSheet thisStyleSheet() {
-    return new ThisStyleSheet();
-  }
+  protected abstract void main0();
 
-  protected abstract void uiMain();
+  protected MutableList<StyleSheet> styleSheets() {
+    MutableList<StyleSheet> list;
+    list = new MutableList<>();
 
-  protected static class ThisStyleSheet extends AbstractStyleSheet {
-    private final Reset reset = new Reset();
+    list.add(new ResetCss());
 
-    protected final void articleCode() {
-      style(
-        article, sp(), p, sp(), code,
+    list.add(new ContainerCss());
 
-        backgroundColor(Colors.GRAY1),
-        border(px(1), solid, Colors.GRAY3),
-        color(Colors.GRAY9),
-        fontSize(FontSize.SM),
-        fontWeight(500),
-        lineHeight(FontSize.SM),
-        padding(Spacing.PX, Spacing.V01)
-      );
-
-      style(
-        article, sp(), code, attr("class", startsWith("language-")),
-
-        fontSize(FontSize.SM),
-        fontWeight(500),
-        lineHeight(FontSize.SM)
-      );
-    }
-
-    protected final void articleTable() {
-      style(
-        article, sp(), table,
-
-        borderTop(px(1), solid, Colors.GRAY4),
-        marginBottom(Spacing.V08),
-        width(pct(100))
-      );
-
-      style(
-        article, sp(), tbody,
-
-        fontSize(FontSize.SM)
-      );
-
-      style(
-        article, sp(), td,
-
-        padding(Spacing.V04)
-      );
-
-      style(
-        article, sp(), th,
-
-        backgroundColor(Colors.GRAY2),
-        padding(Spacing.V04),
-        textAlign(left)
-      );
-
-      style(
-        article, sp(), tr,
-
-        borderBottom(px(1), solid, Colors.GRAY4)
-      );
-    }
-
-    protected final void articleUl() {
-      style(
-        article, sp(), ul,
-
-        listStyle(disc),
-        paddingLeft(Spacing.V10)
-      );
-
-      style(
-        article, sp(), li,
-
-        margin(Spacing.V03, zero())
-      );
-    }
-
-    @Override
-    protected void definition() {
-      install(reset);
-
-      style(
-        html,
-
-        fontFamily(
-          fontFamily(sansSerif)
-        )
-      );
-
-      style(
-        article, sp(), a,
-
-        color(Colors.INDIGO6)
-      );
-
-      style(
-        article, sp(), a, HOVER,
-
-        textDecoration(underline)
-      );
-
-      style(
-        article, sp(), blockquote,
-
-        fontStyle(italic),
-        paddingLeft(Spacing.V10)
-      );
-
-      style(
-        article, sp(), h1,
-
-        fontSize(px(40)),
-        fontWeight(600),
-        letterSpacing(px(-0.5)),
-        lineHeight(px(48)),
-        marginBottom(Spacing.V04)
-      );
-
-      style(
-        article, sp(), h2,
-
-        fontSize(FontSize.XL2),
-        fontWeight(600),
-        marginBottom(Spacing.V04),
-        marginTop(Spacing.V14)
-      );
-
-      style(
-        article, sp(), h3,
-
-        fontSize(FontSize.XL),
-        fontWeight(500),
-        letterSpacing(px(-0.25)),
-        marginBottom(Spacing.V04),
-        marginTop(Spacing.V08)
-      );
-
-      style(
-        article, sp(), header,
-
-        padding(Spacing.V12, Spacing.V0)
-      );
-
-      style(
-        article, sp(), p,
-
-        margin(Spacing.V04, zero())
-      );
-
-      style(
-        html,
-
-        height(pct(100))
-      );
-
-      style(
-        _UI,
-
-        display(flex),
-        flexDirection(column),
-        height(pct(100)),
-        overflow(hidden)
-      );
-
-      style(
-        _UI_AREA,
-
-        height(pct(100)),
-        overflowY(auto)
-      );
-
-      style(
-        _UI_MAIN,
-
-        padding(Spacing.V04)
-      );
-
-      media(
-        screen, minWidth(Breakpoint.LG),
-
-        style(
-          _UI_AREA,
-
-          display(flex),
-          overflowY(hidden)
-        ),
-
-        style(
-          _UI_MAIN,
-
-          flexGrow(1),
-          overflowY(auto)
-        )
-      );
-    }
+    return list;
   }
 
 }

@@ -58,7 +58,7 @@ Since you have the Objectos BOM imported you do not need to specify the version
 for each of the added components.
 
 For instance, to add Objectos Logging to your project, you would declare it
-in the `dependencies` section of your projects's POM file like so:"""));
+in the `dependencies` section of your projects's POM file like so:
 
 *```xml
 *<dependencies>

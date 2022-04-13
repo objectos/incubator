@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package objectos.docs.ui;
+package objectos.docs.style;
 
 import br.com.objectos.css.parser.sheet.Length;
 

@@ -19,9 +19,7 @@ import br.com.objectos.be.site.HasHref;
 import br.com.objectos.be.site.SiteDirectory;
 import objectos.docs.intro.IntroDir;
 import objectos.docs.logging.LoggingDir;
-import objectos.docs.ui.LeftDrawer;
 import objectos.docs.ui.Md;
-import objectos.docs.ui.TopBar;
 
 public final class Docs extends SiteDirectory {
 
@@ -29,13 +27,8 @@ public final class Docs extends SiteDirectory {
 
   @Override
   protected final void configure() {
-    putInstance(new LeftDrawer());
-    putInstance(new TopBar());
-    putInstance(new StringBuilder());
     putInstance(new Md(this::locator));
-
-    addResource("prism.css");
-    addResource("prism.js");
+    putInstance(new StringBuilder());
 
     addPage("index.html", new Index());
 
