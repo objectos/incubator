@@ -15,15 +15,23 @@
  */
 package objectos.docs.logging;
 
-import br.com.objectos.be.site.SiteDirectory;
+import br.com.objectos.be.annotations.Markdown;
+import objectos.docs.ui.ArticlePage;
 
-public final class LoggingDir extends SiteDirectory {
+//@formatter:off
+/**
 
-  @Override
-  protected final void configure() {
-    addPage("index.html", new Index());
-    addPage("get-started.html", new GetStarted());
-    addPage("introduction.html", new Introduction());
-  }
+# Events
 
-}
+Developers need to log events that take place during a program execution.
+Following is a non-exhaustive list of of reasons for logging:
+
+- error reporting;
+
+
+## Creating events
+
+ */
+//@formatter:on
+@Markdown
+final class Events extends ArticlePage {}

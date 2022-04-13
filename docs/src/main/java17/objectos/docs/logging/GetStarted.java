@@ -114,17 +114,23 @@ Hello world!
 ## 5. Verify type-safety
 
 Log event instances are parameterized. In our example, the `HELLO` event requires that
-you pass a `String` argument to the `log` method:
+you pass a `String` argument to the `log` method. The following examples will
+fail to compile:
 
 ```java
-// the following statement compiles fine
-logger.log(HELLO, "world!");
+// compilation error: arg required
+logger.log(HELLO);
 
-// the following statements fail to compile
-logger.log(HELLO); // arg required
-logger.log(HELLO, Boolean.TRUE); // not String
-logger.log(HELLO, "world", "!"); // only 1 string allowed
+// compilation error: arg is not a String
+logger.log(HELLO, Boolean.TRUE);
+
+// compilation error: too many args
+logger.log(HELLO, "world", "!");
 ```
+
+## Where to go from here
+
+
 
 */
 //@formatter:on
