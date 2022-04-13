@@ -26,4 +26,11 @@ import objectos.docs.ui.ArticlePage;
 */
 //@formatter:on
 @Markdown
-final class Index extends ArticlePage {}
+final class Index extends ArticlePage {
+  @Override
+  protected final void register() {
+    nextPage = Overview.class;
+
+    titleText = "Get started with Objectos";
+  }
+}

@@ -19,6 +19,8 @@ import br.com.objectos.be.site.HasHref;
 import br.com.objectos.be.site.SiteDirectory;
 import objectos.docs.intro.IntroDir;
 import objectos.docs.logging.LoggingDir;
+import objectos.docs.ui.PageSwitcher;
+import objectos.docs.ui.Locator;
 import objectos.docs.ui.Md;
 
 public final class Docs extends SiteDirectory {
@@ -27,13 +29,24 @@ public final class Docs extends SiteDirectory {
 
   @Override
   protected final void configure() {
-    putInstance(new Md(this::locator));
+    Locator l = this::locator;
+
+    putInstance(new Md(l));
     putInstance(new StringBuilder());
 
-    addPage("index.html", new Index());
+    Index index = new Index();
+
+    addPage("index.html", index);
 
     addDirectory("intro", new IntroDir());
     addDirectory("logging", new LoggingDir());
+
+    PageSwitcher switcher;
+    switcher = new PageSwitcher(l);
+
+    switcher.load(index);
+
+    putInstance(switcher);
   }
 
   private <T> T locator(Class<? extends T> key) {

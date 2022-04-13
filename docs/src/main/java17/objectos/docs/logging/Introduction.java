@@ -38,4 +38,11 @@ or a mail server.
  */
 // @formatter:on
 @Markdown
-final class Introduction extends ArticlePage {}
+final class Introduction extends ArticlePage {
+  @Override
+  protected final void register() {
+    nextPage = null;
+
+    titleText = "Introduction";
+  }
+}

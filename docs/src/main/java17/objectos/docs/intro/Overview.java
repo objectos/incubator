@@ -97,4 +97,11 @@ Objectos is open-source software licensed under the
 */
 //@formatter:on
 @Markdown
-final class Overview extends ArticlePage {}
+final class Overview extends ArticlePage {
+  @Override
+  protected final void register() {
+    nextPage = Installation.class;
+
+    titleText = "Overview";
+  }
+}

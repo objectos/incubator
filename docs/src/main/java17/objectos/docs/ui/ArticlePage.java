@@ -23,7 +23,19 @@ import objectos.docs.style.ArticleCss;
 
 public abstract class ArticlePage extends DocsPage {
 
+  protected Class<? extends ArticlePage> nextPage;
+
+  protected String titleText = "";
+
   protected ArticlePage() {}
+
+  public final Class<? extends ArticlePage> nextPage() {
+    return nextPage;
+  }
+
+  public final String titleText() {
+    return titleText;
+  }
 
   protected final ElementName a(Class<? extends HasHref> href, String t) {
     return a(
@@ -31,16 +43,6 @@ public abstract class ArticlePage extends DocsPage {
 
       t(t)
     );
-  }
-
-  @Override
-  protected MutableList<StyleSheet> styleSheets() {
-    MutableList<StyleSheet> list;
-    list = super.styleSheets();
-
-    list.add(new ArticleCss());
-
-    return list;
   }
 
   @Override
@@ -54,6 +56,25 @@ public abstract class ArticlePage extends DocsPage {
     article(
       raw(html)
     );
+
+    PageSwitcher ps;
+    ps = getInstance(PageSwitcher.class);
+
+    ps.set(this);
+
+    nav(
+      f(ps)
+    );
+  }
+
+  @Override
+  protected MutableList<StyleSheet> styleSheets() {
+    MutableList<StyleSheet> list;
+    list = super.styleSheets();
+
+    list.add(new ArticleCss());
+
+    return list;
   }
 
 }

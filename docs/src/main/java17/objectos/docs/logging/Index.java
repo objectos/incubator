@@ -75,4 +75,11 @@ codeXml(
 */
 //@formatter:on
 @Markdown
-final class Index extends ArticlePage {}
+final class Index extends ArticlePage {
+  @Override
+  protected void register() {
+    nextPage = GetStarted.class;
+
+    titleText = "Overview";
+  }
+}

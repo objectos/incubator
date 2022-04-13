@@ -151,4 +151,11 @@ final class GetStarted extends ArticlePage {
 
     logger.log(HELLO, "world!");
   }
+
+  @Override
+  protected final void register() {
+    nextPage = Introduction.class;
+
+    titleText = "Get started";
+  }
 }
