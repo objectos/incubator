@@ -20,9 +20,11 @@ import br.com.objectos.www.objectos.css.CssDirectory;
 
 final class Index extends SitePage implements NavbarPage {
 
+  private String navbarTitle;
+
   @Override
   public final String navbarTitle() {
-    return "Home";
+    return navbarTitle;
   }
 
   @Override
@@ -41,6 +43,11 @@ final class Index extends SitePage implements NavbarPage {
         )
       )
     );
+  }
+
+  @Override
+  protected final void register() {
+    navbarTitle = "Home";
   }
 
 }

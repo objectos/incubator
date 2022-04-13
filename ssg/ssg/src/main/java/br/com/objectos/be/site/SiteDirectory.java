@@ -75,9 +75,7 @@ public abstract class SiteDirectory {
   protected final void addPage(String fileName, SitePage page) {
     pages.addWithNullMessage(page, "page == null");
 
-    page.setDirectory(this);
-
-    page.setFileName(fileName);
+    page.register(this, fileName);
 
     dsl.put(page);
   }

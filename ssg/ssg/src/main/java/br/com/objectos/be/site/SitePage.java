@@ -71,6 +71,8 @@ public abstract class SitePage extends AbstractTemplate implements HasHref {
     directory.putInstance(value);
   }
 
+  protected void register() {}
+
   protected void renderSitePage() {
     String href;
     href = getHref();
@@ -78,16 +80,15 @@ public abstract class SitePage extends AbstractTemplate implements HasHref {
     directory.addTemplate(href, this);
   }
 
-  final void setDirectory(SiteDirectory directory) {
+  final void register(SiteDirectory directory, String fileName) {
     Checks.checkState(this.directory == null, "directory was already set");
-
-    this.directory = directory;
-  }
-
-  final void setFileName(String fileName) {
     Checks.checkState(this.fileName == null, "fileName was already set");
 
+    this.directory = directory;
+
     this.fileName = Checks.checkNotNull(fileName, "fileName == null");
+
+    register();
   }
 
 }
