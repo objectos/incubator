@@ -33,7 +33,7 @@ public final class Spacing {
 
   public static final Length V04 = Length.rem(1); // 16px
 
-  public static final Length V05 = Length.rem(1.25);
+  public static final Length V05 = Length.rem(1.25); // 20px
 
   public static final Length V06 = Length.rem(1.5); // 24px
 
@@ -49,7 +49,7 @@ public final class Spacing {
 
   public static final Length V16 = Length.rem(4);
 
-  public static final Length V20 = Length.rem(5);
+  public static final Length V20 = Length.rem(5); // 80px
 
   public static final Length V24 = Length.rem(6);
 

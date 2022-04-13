@@ -16,7 +16,7 @@
 package objectos.docs.intro;
 
 import br.com.objectos.be.annotations.Markdown;
-import objectos.docs.ui.ArticlePage;
+import objectos.docs.ui.DocsPage;
 
 //@formatter:off
 /**
@@ -97,7 +97,7 @@ Objectos is open-source software licensed under the
 */
 //@formatter:on
 @Markdown
-final class Overview extends ArticlePage {
+final class Overview extends DocsPage {
   @Override
   protected final void register() {
     nextPage = Installation.class;

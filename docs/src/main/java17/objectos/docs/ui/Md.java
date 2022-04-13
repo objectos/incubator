@@ -47,8 +47,8 @@ public final class Md {
         .build();
   }
 
-  public final String render(ArticlePage page) {
-    Class<? extends ArticlePage> pageClass;
+  public final String render(DocsPage page) {
+    Class<? extends DocsPage> pageClass;
     pageClass = null;
 
     try {

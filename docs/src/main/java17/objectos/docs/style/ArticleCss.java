@@ -70,7 +70,7 @@ public final class ArticleCss extends AbstractStyleSheet {
     style(
       article, sp(), a,
 
-      color(Colors.INDIGO6)
+      color(Colors.BLUE8)
     );
 
     style(

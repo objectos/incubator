@@ -16,18 +16,12 @@
 package objectos.docs;
 
 import objectos.docs.intro.IntroDir;
-import objectos.docs.ui.ArticlePage;
-import objectos.docs.ui.PageSwitcher;
+import objectos.docs.ui.DocsPage;
 
-final class Index extends ArticlePage {
+final class Index extends DocsPage {
 
   @Override
   protected final void main0() {
-    PageSwitcher ps;
-    ps = getInstance(PageSwitcher.class);
-
-    ps.set(this);
-
     article(
       h1("Documentation for Objectos developers"),
 
@@ -52,10 +46,6 @@ final class Index extends ArticlePage {
           )
         )
       )
-    );
-
-    nav(
-      f(ps)
     );
   }
 

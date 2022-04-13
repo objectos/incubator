@@ -27,6 +27,16 @@ public final class ContainerCss extends AbstractStyleSheet {
       maxWidth(Breakpoint.MD),
       padding(Spacing.V04)
     );
+
+    media(
+      screen, minWidth(Breakpoint.MD),
+
+      style(
+        body,
+
+        padding(Spacing.V06)
+      )
+    );
   }
 
 }

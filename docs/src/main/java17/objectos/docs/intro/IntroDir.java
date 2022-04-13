@@ -17,11 +17,11 @@ package objectos.docs.intro;
 
 import br.com.objectos.be.site.HasHref;
 import br.com.objectos.be.site.SiteDirectory;
-import objectos.docs.ui.ArticlePage;
+import objectos.docs.ui.DocsPage;
 
 public final class IntroDir extends SiteDirectory {
 
-  public static final Class<? extends ArticlePage> INDEX = Index.class;
+  public static final Class<? extends DocsPage> INDEX = Index.class;
 
   public static final Class<? extends HasHref> INSTALLATION = Installation.class;
 

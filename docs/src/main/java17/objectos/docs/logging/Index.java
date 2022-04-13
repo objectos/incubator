@@ -16,7 +16,7 @@
 package objectos.docs.logging;
 
 import br.com.objectos.be.annotations.Markdown;
-import objectos.docs.ui.ArticlePage;
+import objectos.docs.ui.DocsPage;
 
 //@formatter:off
 /**
@@ -75,7 +75,7 @@ codeXml(
 */
 //@formatter:on
 @Markdown
-final class Index extends ArticlePage {
+final class Index extends DocsPage {
   @Override
   protected void register() {
     nextPage = GetStarted.class;

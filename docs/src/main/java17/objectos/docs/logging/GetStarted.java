@@ -19,7 +19,7 @@ import br.com.objectos.be.annotations.Markdown;
 import br.com.objectos.logging.Event1;
 import br.com.objectos.logging.Events;
 import br.com.objectos.logging.NoopLogger;
-import objectos.docs.ui.ArticlePage;
+import objectos.docs.ui.DocsPage;
 
 //@formatter:off
 /**
@@ -135,7 +135,7 @@ logger.log(HELLO, "world", "!");
 */
 //@formatter:on
 @Markdown
-final class GetStarted extends ArticlePage {
+final class GetStarted extends DocsPage {
   static final Event1<String> HELLO
       = Events.info(GetStarted.class, "HELLO", String.class);
 

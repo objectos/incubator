@@ -15,14 +15,51 @@
  */
 package objectos.docs.ui;
 
+import br.com.objectos.be.site.HasHref;
 import br.com.objectos.be.site.SitePage;
 import br.com.objectos.core.list.MutableList;
 import br.com.objectos.css.sheet.StyleSheet;
+import br.com.objectos.html.element.ElementName;
 import br.com.objectos.http.media.ImageType;
+import objectos.docs.style.ArticleCss;
 import objectos.docs.style.ContainerCss;
+import objectos.docs.style.PageSwitcherCss;
 import objectos.docs.style.ResetCss;
 
 public abstract class DocsPage extends SitePage {
+
+  protected Class<? extends DocsPage> nextPage;
+
+  protected String titleText = "";
+
+  public final Class<? extends DocsPage> nextPage() {
+    return nextPage;
+  }
+
+  public final String titleText() {
+    return titleText;
+  }
+
+  protected final ElementName a(Class<? extends HasHref> href, String t) {
+    return a(
+      href(href),
+
+      t(t)
+    );
+  }
+
+  protected void body0() {
+    main(
+      f(this::main0)
+    );
+
+    PageSwitcher ps;
+    ps = getInstance(PageSwitcher.class);
+
+    ps.set(this);
+
+    f(ps);
+  }
 
   @Override
   protected final void definition() {
@@ -33,9 +70,7 @@ public abstract class DocsPage extends SitePage {
         f(this::head0)
       ),
       body(
-        main(
-          f(this::main0)
-        )
+        f(this::body0)
       )
     );
   }
@@ -69,7 +104,17 @@ public abstract class DocsPage extends SitePage {
     );
   }
 
-  protected abstract void main0();
+  protected void main0() {
+    Md md;
+    md = getInstance(Md.class);
+
+    String html;
+    html = md.render(this);
+
+    article(
+      raw(html)
+    );
+  }
 
   protected MutableList<StyleSheet> styleSheets() {
     MutableList<StyleSheet> list;
@@ -78,6 +123,10 @@ public abstract class DocsPage extends SitePage {
     list.add(new ResetCss());
 
     list.add(new ContainerCss());
+
+    list.add(new ArticleCss());
+
+    list.add(new PageSwitcherCss());
 
     return list;
   }

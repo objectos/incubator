@@ -16,7 +16,7 @@
 package objectos.docs.logging;
 
 import br.com.objectos.be.annotations.Markdown;
-import objectos.docs.ui.ArticlePage;
+import objectos.docs.ui.DocsPage;
 
 // @formatter:off
 /**
@@ -38,7 +38,7 @@ or a mail server.
  */
 // @formatter:on
 @Markdown
-final class Introduction extends ArticlePage {
+final class Introduction extends DocsPage {
   @Override
   protected final void register() {
     nextPage = null;

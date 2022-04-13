@@ -16,7 +16,7 @@
 package objectos.docs.intro;
 
 import br.com.objectos.be.annotations.Markdown;
-import objectos.docs.ui.ArticlePage;
+import objectos.docs.ui.DocsPage;
 
 //@formatter:off
 /**
@@ -26,7 +26,7 @@ import objectos.docs.ui.ArticlePage;
 */
 //@formatter:on
 @Markdown
-final class Index extends ArticlePage {
+final class Index extends DocsPage {
   @Override
   protected final void register() {
     nextPage = Overview.class;

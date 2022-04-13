@@ -17,7 +17,7 @@ package objectos.docs.intro;
 
 import br.com.objectos.be.annotations.Markdown;
 import objectos.docs.logging.LoggingDir;
-import objectos.docs.ui.ArticlePage;
+import objectos.docs.ui.DocsPage;
 
 //@formatter:off
 /**
@@ -82,7 +82,7 @@ module my.module {
 */
 //@formatter:on
 @Markdown
-final class Installation extends ArticlePage {
+final class Installation extends DocsPage {
   @Override
   protected final void register() {
     nextPage = LoggingDir.INDEX;

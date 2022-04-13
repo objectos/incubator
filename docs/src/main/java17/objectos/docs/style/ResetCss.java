@@ -30,6 +30,13 @@ public final class ResetCss extends AbstractStyleSheet {
     );
 
     style(
+      a,
+
+      color(inherit),
+      textDecoration(inherit)
+    );
+
+    style(
       body,
 
       margin(zero(), auto),
