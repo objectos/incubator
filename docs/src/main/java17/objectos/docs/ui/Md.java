@@ -44,6 +44,7 @@ public final class Md {
 
     renderer = HtmlRenderer.builder()
         .attributeProviderFactory(new HrefChecker())
+        .nodeRendererFactory(ctx -> new SyntaxXmlRenderer(ctx))
         .build();
   }
 
@@ -66,13 +67,17 @@ public final class Md {
       String string;
       string = Read.string(resource, Charsets.utf8());
 
-      Node document;
-      document = parser.parse(string);
-
-      return renderer.render(document);
+      return render(string);
     } catch (Exception e) {
       throw new RenderException("pageClass=" + pageClass, e);
     }
+  }
+
+  final String render(String string) {
+    Node document;
+    document = parser.parse(string);
+
+    return renderer.render(document);
   }
 
   private class HrefChecker implements AttributeProvider, AttributeProviderFactory {
@@ -83,7 +88,7 @@ public final class Md {
 
     @SuppressWarnings("unchecked")
     @Override
-    public void setAttributes(Node node, String tagName, Map<String, String> attributes) {
+    public final void setAttributes(Node node, String tagName, Map<String, String> attributes) {
       if (!(node instanceof Link)) {
         return;
       }

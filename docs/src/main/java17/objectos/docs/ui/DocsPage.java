@@ -25,6 +25,8 @@ import objectos.docs.style.ArticleCss;
 import objectos.docs.style.ContainerCss;
 import objectos.docs.style.PageSwitcherCss;
 import objectos.docs.style.ResetCss;
+import objectos.docs.style.SyntaxCss;
+import objectos.docs.style.SyntaxXmlCss;
 
 public abstract class DocsPage extends SitePage {
 
@@ -127,6 +129,10 @@ public abstract class DocsPage extends SitePage {
     list.add(new ArticleCss());
 
     list.add(new PageSwitcherCss());
+
+    list.add(new SyntaxCss());
+
+    list.add(new SyntaxXmlCss());
 
     return list;
   }
