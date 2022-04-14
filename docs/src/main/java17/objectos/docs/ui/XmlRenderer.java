@@ -15,10 +15,10 @@
  */
 package objectos.docs.ui;
 
-import objectos.docs.style.SyntaxXmlCss;
-import org.commonmark.renderer.html.HtmlNodeRendererContext;
+import objectos.docs.style.XmlCss;
+import org.commonmark.renderer.html.HtmlWriter;
 
-final class SyntaxXmlRenderer extends AbstractSyntaxRenderer {
+final class XmlRenderer extends LanguageRenderer {
 
   private static final byte _ELEMENT_CONTENT = 0;
 
@@ -36,12 +36,12 @@ final class SyntaxXmlRenderer extends AbstractSyntaxRenderer {
 
   private final StringBuilder stringBuilder = new StringBuilder();
 
-  SyntaxXmlRenderer(HtmlNodeRendererContext context) {
-    super(context);
+  XmlRenderer(HtmlWriter html) {
+    super(html);
   }
 
   @Override
-  final void render(String literal) {
+  public final void render(String info, String literal) {
     length = literal.length();
 
     state = _ELEMENT_CONTENT;
@@ -51,11 +51,6 @@ final class SyntaxXmlRenderer extends AbstractSyntaxRenderer {
 
       state = execute0();
     }
-  }
-
-  @Override
-  final boolean shouldRender(String info) {
-    return info.equals("xml");
   }
 
   private byte execute0() {
@@ -76,7 +71,7 @@ final class SyntaxXmlRenderer extends AbstractSyntaxRenderer {
       String t;
       t = makeString();
 
-      span(SyntaxXmlCss._TEXT, t);
+      span(XmlCss._TEXT, t);
 
       stringBuilder.append(c);
 
@@ -93,9 +88,9 @@ final class SyntaxXmlRenderer extends AbstractSyntaxRenderer {
       String tagName;
       tagName = makeString();
 
-      span(SyntaxXmlCss._TAG_NAME, tagName);
+      span(XmlCss._TAG_NAME, tagName);
 
-      span(SyntaxXmlCss._SYMBOL, c);
+      span(XmlCss._SYMBOL, c);
 
       return _ELEMENT_CONTENT;
     }
@@ -122,7 +117,7 @@ final class SyntaxXmlRenderer extends AbstractSyntaxRenderer {
         String symbol;
         symbol = makeString();
 
-        span(SyntaxXmlCss._SYMBOL, symbol);
+        span(XmlCss._SYMBOL, symbol);
 
         stringBuilder.append(c);
 

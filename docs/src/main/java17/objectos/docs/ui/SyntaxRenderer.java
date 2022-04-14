@@ -15,12 +15,9 @@
  */
 package objectos.docs.ui;
 
-import br.com.objectos.css.select.ClassSelector;
 import java.util.Collections;
-import java.util.LinkedHashMap;
-import java.util.Map;
 import java.util.Set;
-import objectos.docs.style.SyntaxCss;
+import java.util.function.Function;
 import org.commonmark.node.FencedCodeBlock;
 import org.commonmark.node.Node;
 import org.commonmark.renderer.NodeRenderer;
@@ -28,15 +25,11 @@ import org.commonmark.renderer.html.CoreHtmlNodeRenderer;
 import org.commonmark.renderer.html.HtmlNodeRendererContext;
 import org.commonmark.renderer.html.HtmlWriter;
 
-abstract class AbstractSyntaxRenderer implements NodeRenderer {
-
-  private final Map<String, String> attrs = new LinkedHashMap<>();
+final class SyntaxRenderer implements NodeRenderer {
 
   private final HtmlNodeRendererContext context;
 
-  private HtmlWriter html;
-
-  AbstractSyntaxRenderer(HtmlNodeRendererContext context) {
+  SyntaxRenderer(HtmlNodeRendererContext context) {
     this.context = context;
   }
 
@@ -53,27 +46,12 @@ abstract class AbstractSyntaxRenderer implements NodeRenderer {
     String info;
     info = b.getInfo();
 
-    if (shouldRender(info)) {
-      html = context.getWriter();
+    if (info.startsWith("java")) {
+      render(b, JavaRenderer::new);
+    }
 
-      html.line();
-
-      attrs.clear();
-      attrs.put("class", SyntaxCss._PRE.className());
-      html.tag("pre", attrs);
-
-      html.tag("code");
-
-      String literal;
-      literal = b.getLiteral();
-
-      literal = literal.trim();
-
-      render(literal);
-
-      html.tag("/code");
-      html.tag("/pre");
-      html.line();
+    else if (info.startsWith("xml")) {
+      render(b, XmlRenderer::new);
     }
 
     else {
@@ -84,26 +62,14 @@ abstract class AbstractSyntaxRenderer implements NodeRenderer {
     }
   }
 
-  protected final void span(ClassSelector clazz, char c) {
-    span(clazz, Character.toString(c));
+  private void render(FencedCodeBlock b, Function<HtmlWriter, LanguageRenderer> constructor) {
+    HtmlWriter html;
+    html = context.getWriter();
+
+    LanguageRenderer renderer;
+    renderer = constructor.apply(html);
+
+    renderer.render(b);
   }
-
-  protected final void span(ClassSelector clazz, String s) {
-    attrs.clear();
-
-    attrs.put("class", clazz.className());
-
-    html.tag("span", attrs);
-    html.text(s);
-    html.tag("/span");
-  }
-
-  protected final void text(String s) {
-    html.text(s);
-  }
-
-  abstract void render(String literal);
-
-  abstract boolean shouldRender(String info);
 
 }

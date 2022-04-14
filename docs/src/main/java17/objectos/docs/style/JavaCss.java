@@ -19,20 +19,46 @@ import br.com.objectos.css.Css;
 import br.com.objectos.css.select.ClassSelector;
 import br.com.objectos.css.sheet.AbstractStyleSheet;
 
-public final class SyntaxXmlCss extends AbstractStyleSheet {
+public final class JavaCss extends AbstractStyleSheet {
 
-  public static final ClassSelector _SYMBOL = Css.randomDot(3);
+  public static final ClassSelector _ANNOTATION = Css.randomDot(3);
 
-  public static final ClassSelector _TAG_NAME = Css.randomDot(3);
+  public static final ClassSelector _COMMENT = Css.randomDot(3);
 
-  public static final ClassSelector _TEXT = Css.randomDot(3);
+  public static final ClassSelector _IDENTIFIER = Css.randomDot(3);
+
+  public static final ClassSelector _KEYWORD = Css.randomDot(3);
+
+  public static final ClassSelector _STRING = Css.randomDot(3);
+
+  public static final ClassSelector _TOKEN = Css.randomDot(3);
+
+  public static final ClassSelector _WS = Css.randomDot(3);
 
   @Override
   protected final void definition() {
     style(
-      _SYMBOL, or(), _TAG_NAME,
+      _ANNOTATION,
+
+      color(Colors.PINK8)
+    );
+
+    style(
+      _COMMENT,
+
+      color(Colors.GRAPE8)
+    );
+
+    style(
+      _KEYWORD,
 
       color(Colors.INDIGO7)
+    );
+
+    style(
+      _STRING,
+
+      color(Colors.GREEN9)
     );
   }
 

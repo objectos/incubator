@@ -44,7 +44,7 @@ public final class Md {
 
     renderer = HtmlRenderer.builder()
         .attributeProviderFactory(new HrefChecker())
-        .nodeRendererFactory(ctx -> new SyntaxXmlRenderer(ctx))
+        .nodeRendererFactory(ctx -> new SyntaxRenderer(ctx))
         .build();
   }
 
