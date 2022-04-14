@@ -41,6 +41,12 @@ public final class ArticleCss extends AbstractStyleSheet {
     );
 
     style(
+      article, sp(), h1, plus(), p,
+
+      marginTop(Spacing.V07)
+    );
+
+    style(
       article, sp(), h2,
 
       fontSize(FontSize.XL2),
@@ -94,11 +100,10 @@ public final class ArticleCss extends AbstractStyleSheet {
     );
 
     style(
-      article, sp(), code, attr("class", startsWith("language-")),
+      article, sp(), pre, gt(), code,
 
       fontSize(FontSize.SM),
-      fontWeight(500),
-      lineHeight(FontSize.SM)
+      fontWeight(500)
     );
 
     // lists

@@ -25,18 +25,20 @@ import objectos.docs.ui.DocsPage;
 # Installation
 
 In order to get started with Objectos you need to have it installed in your system.
-As of the current release adding Objectos to an existing Maven project is the
-only supported installation method.
+
+As of the current release there is only one supported installation method:
+
+- add Objectos to an existing Maven project.
 
 ## System requirements
 
 Objectos requires JDK 17 or later.
 
-## Import the Objectos BOM POM"
+## Import the Objectos BOM POM
 
-Using the Objectos BOM POM is the recommended way of managing the Objectos'
-dependencies. You can import it in your existing Maven project by declaring it
-in the `dependencyManagement` section of your project's POM file like so:
+Using the Objectos BOM POM is the recommended way of adding Objectos to your
+project. You can import it by declaring it in the `dependencyManagement`
+section of your project's POM file like so:
 
 *```xml
 *<dependencyManagement>
