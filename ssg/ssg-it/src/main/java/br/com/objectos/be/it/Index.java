@@ -15,10 +15,15 @@
  */
 package br.com.objectos.be.it;
 
-import br.com.objectos.be.annotations.Be;
+import br.com.objectos.be.annotations.Markdown;
 import br.com.objectos.html.tmpl.AbstractTemplate;
 
-@Be
+/**
+ * # Hello world
+ *
+ * a paragraph
+ */
+@Markdown
 abstract class Index extends AbstractTemplate {
 
   Index() {

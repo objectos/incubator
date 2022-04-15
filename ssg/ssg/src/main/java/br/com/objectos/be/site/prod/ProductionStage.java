@@ -15,21 +15,14 @@
  */
 package br.com.objectos.be.site.prod;
 
-import br.com.objectos.be.resource.BaseUrl;
-import br.com.objectos.be.resource.GenericResource;
-import br.com.objectos.be.resource.RelativeBaseUrl;
-import br.com.objectos.be.resource.Resources;
 import br.com.objectos.be.site.AbstractSiteDsl;
-import br.com.objectos.be.site.DirectoryDsl;
 import br.com.objectos.core.io.Charsets;
 import br.com.objectos.core.io.InputStreamSource;
 import br.com.objectos.core.io.Read;
-import br.com.objectos.core.io.Resource;
 import br.com.objectos.core.io.Write;
 import br.com.objectos.core.object.Checks;
 import br.com.objectos.css.sheet.StyleSheet;
 import br.com.objectos.fs.Directory;
-import br.com.objectos.fs.LocalFs;
 import br.com.objectos.fs.RegularFile;
 import br.com.objectos.html.tmpl.Template;
 import br.com.objectos.http.media.MediaType;
@@ -90,17 +83,6 @@ public class ProductionStage extends AbstractSiteDsl {
   }
 
   @Override
-  public final BaseUrl getBaseUrl() {
-    return RelativeBaseUrl.root();
-  }
-
-  @Override
-  public final DirectoryDsl getDirectoryDsl(BaseUrl baseUrl) {
-    Checks.checkNotNull(baseUrl, "baseUrl == null");
-    return new ThisModuleDsl(baseUrl);
-  }
-
-  @Override
   public final boolean isProduction() {
     return true;
   }
@@ -119,94 +101,6 @@ public class ProductionStage extends AbstractSiteDsl {
     } catch (IOException e) {
       throw new UncheckedIOException(e);
     }
-  }
-
-  private class ThisModuleDsl extends DirectoryDsl {
-
-    ThisModuleDsl(BaseUrl baseUrl) {
-      super(baseUrl);
-    }
-
-    @Override
-    public final void addResource(Class<?> contextClass, String resourceName) {
-      try {
-        Resource resource;
-        resource = Resource.getResource(contextClass, resourceName);
-
-        RegularFile src;
-        src = LocalFs.getRegularFile(resource);
-
-        byte[] data;
-        data = Read.byteArray(src);
-
-        Directory parent;
-        parent = baseUrl.getDirectory(target);
-
-        String fileName;
-        fileName = src.getName();
-
-        RegularFile dest;
-        dest = parent.getOrCreateRegularFile(fileName);
-
-        dest.truncate();
-
-        Write.byteArray(dest, data);
-      } catch (IOException e) {
-        throw new UncheckedIOException(e);
-      }
-    }
-
-    @Override
-    public final void addResource(GenericResource resource) {
-      try {
-        Directory parent;
-        parent = baseUrl.getDirectory(target);
-
-        String fileName;
-        fileName = resource.filename();
-
-        RegularFile dest;
-        dest = parent.getOrCreateRegularFile(fileName);
-
-        dest.truncate();
-
-        Write.byteArray(dest, resource.readAllBytes());
-      } catch (IOException e) {
-        throw new UncheckedIOException(e);
-      }
-    }
-
-    @Override
-    public final void addStyleSheet(StyleSheet sheet) {
-      write(Resources.getFilename(sheet), sheet.printMinified());
-    }
-
-    @Override
-    public final void addTemplate(Template template) {
-      write(Resources.getFilename(template), template.printMinified());
-    }
-
-    @Override
-    protected final DirectoryDsl newInstance(BaseUrl baseUrl) {
-      return new ThisModuleDsl(baseUrl);
-    }
-
-    private void write(String filename, String text) {
-      try {
-        Directory parent;
-        parent = baseUrl.getDirectory(target);
-
-        RegularFile file;
-        file = parent.getOrCreateRegularFile(filename);
-
-        file.truncate();
-
-        Write.string(file, Charsets.utf8(), text);
-      } catch (IOException e) {
-        throw new UncheckedIOException(e);
-      }
-    }
-
   }
 
 }

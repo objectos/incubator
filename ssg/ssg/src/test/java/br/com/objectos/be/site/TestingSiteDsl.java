@@ -15,7 +15,6 @@
  */
 package br.com.objectos.be.site;
 
-import br.com.objectos.be.resource.BaseUrl;
 import br.com.objectos.core.io.InputStreamSource;
 import br.com.objectos.css.sheet.StyleSheet;
 import br.com.objectos.html.tmpl.Template;
@@ -38,16 +37,6 @@ final class TestingSiteDsl extends AbstractSiteDsl {
   @Override
   public final String getBaseHref() {
     return "";
-  }
-
-  @Override
-  public BaseUrl getBaseUrl() {
-    return null;
-  }
-
-  @Override
-  public DirectoryDsl getDirectoryDsl(BaseUrl baseUrl) {
-    return null;
   }
 
 }

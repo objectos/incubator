@@ -15,7 +15,6 @@
  */
 package br.com.objectos.be.site;
 
-import br.com.objectos.be.resource.BaseUrl;
 import br.com.objectos.core.io.InputStreamSource;
 import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.css.sheet.StyleSheet;
@@ -37,10 +36,6 @@ public interface SiteDsl {
   void addTemplate(String fullPath, Template template);
 
   String getBaseHref();
-
-  BaseUrl getBaseUrl();
-
-  DirectoryDsl getDirectoryDsl(BaseUrl baseUrl);
 
   <T> T getInstance(Class<? extends T> key);
 
