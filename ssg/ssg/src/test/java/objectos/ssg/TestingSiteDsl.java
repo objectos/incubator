@@ -19,18 +19,29 @@ import br.com.objectos.core.io.InputStreamSource;
 import br.com.objectos.css.sheet.StyleSheet;
 import br.com.objectos.html.tmpl.Template;
 import br.com.objectos.http.media.MediaType;
+import java.util.HashMap;
 import java.util.IdentityHashMap;
 import java.util.Map;
 
 class TestingSiteDsl extends AbstractSiteDsl {
 
+  private final Map<String, MediaType> mediaTypes = new HashMap<>();
+
+  private final Map<String, InputStreamSource> resources = new HashMap<>();
+
   private final Map<Template, String> templatePaths = new IdentityHashMap<>();
 
   @Override
-  public void addResource(String fullPath, InputStreamSource resource) {}
+  public final void addResource(String fullPath, InputStreamSource resource) {
+    addResource(fullPath, resource, null);
+  }
 
   @Override
-  public void addResource(String fullPath, InputStreamSource resource, MediaType mediaType) {}
+  public final void addResource(String fullPath, InputStreamSource resource, MediaType mediaType) {
+    resources.put(fullPath, resource);
+
+    mediaTypes.put(fullPath, mediaType);
+  }
 
   @Override
   public void addStyleSheet(String fullPath, StyleSheet styleSheet) {}
@@ -41,6 +52,8 @@ class TestingSiteDsl extends AbstractSiteDsl {
   }
 
   public final void clear() {
+    resources.clear();
+
     templatePaths.clear();
   }
 
@@ -49,8 +62,16 @@ class TestingSiteDsl extends AbstractSiteDsl {
     return "";
   }
 
+  public final MediaType mediaType(String path) {
+    return mediaTypes.get(path);
+  }
+
   public final String path(SitePage page) {
     return templatePaths.get(page);
+  }
+
+  public final InputStreamSource resource(String path) {
+    return resources.get(path);
   }
 
 }

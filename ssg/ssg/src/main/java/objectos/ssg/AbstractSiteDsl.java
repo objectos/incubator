@@ -15,10 +15,13 @@
  */
 package objectos.ssg;
 
+import br.com.objectos.core.io.InputStreamSource;
+import br.com.objectos.core.io.Resource;
 import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.core.list.MutableList;
 import br.com.objectos.core.map.MutableMap;
 import br.com.objectos.core.object.Checks;
+import br.com.objectos.http.media.MediaType;
 import java.io.IOException;
 import java.util.IdentityHashMap;
 import java.util.LinkedHashMap;
@@ -231,20 +234,62 @@ public abstract class AbstractSiteDsl implements SiteDsl {
       putHref(page, fileName);
     }
 
+    @Override
+    public final void addResource(String resourceName) {
+      Class<? extends SiteDirectory> directoryClass;
+      directoryClass = directory.getClass();
+
+      Resource resource;
+      resource = Resource.getResource(directoryClass, resourceName);
+
+      addResource0(resourceName, resource);
+    }
+
+    @Override
+    public final void addResource(String path, InputStreamSource resource) {
+      Checks.checkNotNull(path, "path == null");
+      Checks.checkNotNull(resource, "resource == null");
+
+      addResource0(path, resource);
+    }
+
+    @Override
+    public final void addResource(String path, InputStreamSource resource, MediaType mediaType) {
+      Checks.checkNotNull(path, "path == null");
+      Checks.checkNotNull(resource, "resource == null");
+      Checks.checkNotNull(mediaType, "mediaType == null");
+
+      String href;
+      href = safeHref(path);
+
+      AbstractSiteDsl.this.addResource(href, resource, mediaType);
+    }
+
+    protected void addResource0(String path, InputStreamSource resource) {
+      String href;
+      href = safeHref(path);
+
+      AbstractSiteDsl.this.addResource(href, resource);
+    }
+
     final void configure() {
       directory.configure(this);
     }
 
     private void putHref(HasHref o, String name) {
-      validateName(name);
-
       String href;
-      href = directoryHref + name;
+      href = safeHref(name);
 
       Class<? extends HasHref> key;
       key = o.getClass();
 
       hrefMap.put(key, href);
+    }
+
+    private String safeHref(String name) {
+      validateName(name);
+
+      return directoryHref + name;
     }
   }
 

@@ -17,6 +17,8 @@ package objectos.ssg;
 
 import static org.testng.Assert.assertEquals;
 
+import br.com.objectos.core.io.Resource;
+import br.com.objectos.http.media.TextType;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -33,7 +35,7 @@ public class SiteDirectoryTest {
     dsl.clear();
   }
 
-  @Test(description = "addPage")
+  @Test
   public void addPage() {
     class Root extends SiteDirectory {
       @Override
@@ -59,6 +61,41 @@ public class SiteDirectoryTest {
 
     assertEquals(dsl.path(page0), "/index.html");
     assertEquals(dsl.path(page1), "/docs/index.html");
+  }
+
+  @Test
+  public void addResource() {
+    class Root extends SiteDirectory {
+      @Override
+      protected final void configure() {
+        addResource("5x2.jpg");
+        addResource("sub/foo.jpg", r("5x2.jpg"));
+        addResource("sub/foo.txt", r("5x2.jpg"), TextType.PLAIN);
+      }
+
+      private Resource r(String resourceName) {
+        return Resource.getResource(getClass(), resourceName);
+      }
+    }
+
+    run(new AbstractSite() {
+      @Override
+      protected final void configure() {
+        addDirectory(new Root());
+      }
+    });
+
+    Resource r;
+    r = Resource.getResource(getClass(), "5x2.jpg");
+
+    assertEquals(dsl.resource("/5x2.jpg"), r);
+    assertEquals(dsl.mediaType("/5x2.jpg"), null);
+
+    assertEquals(dsl.resource("/sub/foo.jpg"), r);
+    assertEquals(dsl.mediaType("/sub/foo.jpg"), null);
+
+    assertEquals(dsl.resource("/sub/foo.txt"), r);
+    assertEquals(dsl.mediaType("/sub/foo.txt"), TextType.PLAIN);
   }
 
   private void run(AbstractSite site) {

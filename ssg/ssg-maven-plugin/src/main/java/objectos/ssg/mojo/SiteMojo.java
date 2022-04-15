@@ -63,15 +63,17 @@ public class SiteMojo extends AbstractSiteMojo {
 
       ProductionStage stage;
       stage = new ProductionStage(
-          baseHref == null ? "" : baseHref,
+        baseHref == null ? "" : baseHref,
 
-          target
+        target
       );
 
       Site site;
       site = getSiteInstance(classRealm);
 
       stage.addSite(site);
+
+      stage.render();
     } catch (IOException e) {
       throw new MojoExecutionException(e.getMessage(), e);
     }

@@ -160,6 +160,8 @@ public class ServeMojo extends AbstractSiteMojo {
     if (site != null) {
       stage.addSite(site);
 
+      stage.render();
+
       server.reconfigure(stage);
 
       logger.info("Reload success: " + new Date());

@@ -53,38 +53,15 @@ public abstract class SiteDirectory {
   }
 
   protected final void addResource(String resourceName) {
-    //    Resource resource;
-    //    resource = Resource.getResource(getClass(), resourceName);
-    //
-    //    String href;
-    //    href = safeHref(resourceName);
-    //
-    //    dsl.addResource(href, resource);
+    cfg().addResource(resourceName);
   }
 
   protected final void addResource(String path, InputStreamSource resource) {
-    //    Checks.checkNotNull(path, "path == null");
-    //    Checks.checkNotNull(resource, "resource == null");
-    //
-    //    String href;
-    //    href = safeHref(path);
-    //
-    //    dsl.addResource(href, resource);
+    cfg().addResource(path, resource);
   }
 
   protected final void addResource(String path, InputStreamSource resource, MediaType mediaType) {
-    //    Checks.checkNotNull(path, "path == null");
-    //    Checks.checkNotNull(resource, "resource == null");
-    //    Checks.checkNotNull(mediaType, "mediaType == null");
-    //
-    //    String href;
-    //    href = safeHref(path);
-    //
-    //    dsl.addResource(href, resource, mediaType);
-  }
-
-  protected final void addResource(String resourceName, MediaType mediaType) {
-    throw new UnsupportedOperationException("Implement me");
+    cfg().addResource(path, resource, mediaType);
   }
 
   protected final void addStyleSheet(String fileName, SiteStyleSheet sheet) {
@@ -128,6 +105,12 @@ public abstract class SiteDirectory {
   public static interface Configuration {
 
     void addPage(String fileName, SitePage page);
+
+    void addResource(String resourceName);
+
+    void addResource(String path, InputStreamSource resource);
+
+    void addResource(String path, InputStreamSource resource, MediaType mediaType);
 
   }
 
