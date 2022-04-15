@@ -24,6 +24,8 @@ import org.testng.annotations.Test;
 
 public class SiteDirectoryTest {
 
+  private final Css0 css0 = new Css0();
+
   private final TestingSiteDsl dsl = new TestingSiteDsl();
 
   private final Page0 page0 = new Page0();
@@ -59,8 +61,8 @@ public class SiteDirectoryTest {
       }
     });
 
-    assertEquals(dsl.path(page0), "/index.html");
-    assertEquals(dsl.path(page1), "/docs/index.html");
+    assertEquals(dsl.templatePath(page0), "/index.html");
+    assertEquals(dsl.templatePath(page1), "/docs/index.html");
   }
 
   @Test
@@ -96,6 +98,25 @@ public class SiteDirectoryTest {
 
     assertEquals(dsl.resource("/sub/foo.txt"), r);
     assertEquals(dsl.mediaType("/sub/foo.txt"), TextType.PLAIN);
+  }
+
+  @Test
+  public void addStyleSheet() {
+    class Root extends SiteDirectory {
+      @Override
+      protected final void configure() {
+        addStyleSheet("foo.css", css0);
+      }
+    }
+
+    run(new AbstractSite() {
+      @Override
+      protected final void configure() {
+        addDirectory(new Root());
+      }
+    });
+
+    assertEquals(dsl.styleSheetPath(css0), "/foo.css");
   }
 
   private void run(AbstractSite site) {

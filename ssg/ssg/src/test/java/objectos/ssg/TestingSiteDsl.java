@@ -29,6 +29,8 @@ class TestingSiteDsl extends AbstractSiteDsl {
 
   private final Map<String, InputStreamSource> resources = new HashMap<>();
 
+  private final Map<StyleSheet, String> sheetPaths = new IdentityHashMap<>();
+
   private final Map<Template, String> templatePaths = new IdentityHashMap<>();
 
   @Override
@@ -44,7 +46,9 @@ class TestingSiteDsl extends AbstractSiteDsl {
   }
 
   @Override
-  public void addStyleSheet(String fullPath, StyleSheet styleSheet) {}
+  public final void addStyleSheet(String fullPath, StyleSheet styleSheet) {
+    sheetPaths.put(styleSheet, fullPath);
+  }
 
   @Override
   public final void addTemplate(String fullPath, Template template) {
@@ -52,7 +56,11 @@ class TestingSiteDsl extends AbstractSiteDsl {
   }
 
   public final void clear() {
+    mediaTypes.clear();
+
     resources.clear();
+
+    sheetPaths.clear();
 
     templatePaths.clear();
   }
@@ -66,12 +74,16 @@ class TestingSiteDsl extends AbstractSiteDsl {
     return mediaTypes.get(path);
   }
 
-  public final String path(SitePage page) {
-    return templatePaths.get(page);
-  }
-
   public final InputStreamSource resource(String path) {
     return resources.get(path);
+  }
+
+  public final String styleSheetPath(SiteStyleSheet sheet) {
+    return sheetPaths.get(sheet);
+  }
+
+  public final String templatePath(SitePage page) {
+    return templatePaths.get(page);
   }
 
 }

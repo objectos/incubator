@@ -21,6 +21,8 @@ import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.core.list.MutableList;
 import br.com.objectos.core.map.MutableMap;
 import br.com.objectos.core.object.Checks;
+import br.com.objectos.css.sheet.StyleSheet;
+import br.com.objectos.html.tmpl.Template;
 import br.com.objectos.http.media.MediaType;
 import java.io.IOException;
 import java.util.IdentityHashMap;
@@ -134,11 +136,11 @@ public abstract class AbstractSiteDsl implements SiteDsl {
       Object v;
       v = entry.getValue();
 
-      if (v instanceof SitePage p) {
-        addTemplate(href, p);
+      if (v instanceof Template t) {
+        addTemplate(href, t);
       }
 
-      else if (v instanceof SiteStyleSheet s) {
+      else if (v instanceof StyleSheet s) {
         addStyleSheet(href, s);
       }
 
@@ -263,6 +265,16 @@ public abstract class AbstractSiteDsl implements SiteDsl {
       href = safeHref(path);
 
       AbstractSiteDsl.this.addResource(href, resource, mediaType);
+    }
+
+    @Override
+    public final void addStyleSheet(String fileName, SiteStyleSheet sheet) {
+      Checks.checkNotNull(fileName, "fileName == null");
+      Checks.checkNotNull(sheet, "sheet == null");
+
+      put(sheet);
+
+      putHref(sheet, fileName);
     }
 
     protected void addResource0(String path, InputStreamSource resource) {

@@ -65,7 +65,7 @@ public abstract class SiteDirectory {
   }
 
   protected final void addStyleSheet(String fileName, SiteStyleSheet sheet) {
-    throw new UnsupportedOperationException("Implement me");
+    cfg().addStyleSheet(fileName, sheet);
   }
 
   protected abstract void configure();
@@ -111,6 +111,8 @@ public abstract class SiteDirectory {
     void addResource(String path, InputStreamSource resource);
 
     void addResource(String path, InputStreamSource resource, MediaType mediaType);
+
+    void addStyleSheet(String fileName, SiteStyleSheet sheet);
 
   }
 
