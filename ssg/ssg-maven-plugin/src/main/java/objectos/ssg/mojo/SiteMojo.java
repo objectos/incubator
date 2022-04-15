@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package br.com.objectos.be.maven.plugin;
+package objectos.ssg.mojo;
 
 import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.LocalFs;
@@ -32,7 +32,7 @@ import org.apache.maven.plugins.annotations.ResolutionScope;
 import org.codehaus.plexus.classworlds.realm.ClassRealm;
 
 @Mojo(name = "site", requiresDependencyResolution = ResolutionScope.TEST, requiresReports = true)
-public class SiteMojo extends AbstractBeMojo {
+public class SiteMojo extends AbstractSiteMojo {
 
   @Parameter(defaultValue = "", required = false)
   private String baseHref;

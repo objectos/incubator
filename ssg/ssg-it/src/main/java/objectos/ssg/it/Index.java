@@ -13,12 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package br.com.objectos.be.maven.plugin;
+package objectos.ssg.it;
 
-public enum Method {
+import br.com.objectos.html.tmpl.AbstractTemplate;
+import objectos.ssg.Markdown;
 
-  NEXT,
+/**
+ * # Hello world
+ *
+ * a paragraph
+ */
+@Markdown
+abstract class Index extends AbstractTemplate {
 
-  POLL;
+  Index() {
+    System.setProperty("objectos.be.it.tc01", "Hello!");
+  }
+
+  @Override
+  protected final void definition() {
+    doctype();
+    html();
+  }
 
 }

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package br.com.objectos.be.maven.plugin;
+package objectos.ssg.mojo;
 
 import java.io.File;
 import java.net.MalformedURLException;
@@ -30,7 +30,7 @@ import org.apache.maven.plugin.descriptor.PluginDescriptor;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.codehaus.plexus.classworlds.realm.ClassRealm;
 
-abstract class AbstractBeMojo extends AbstractMojo {
+abstract class AbstractSiteMojo extends AbstractMojo {
 
   @Parameter(defaultValue = "${mojo}", readonly = true)
   private MojoExecution mojoExecution;

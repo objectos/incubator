@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package br.com.objectos.be.maven.plugin;
+package objectos.ssg.mojo;
 
 import br.com.objectos.http.server.MutableHttpServer;
 import br.com.objectos.http.server.jetty.JettyHttpServerBuilder;
@@ -38,7 +38,7 @@ import org.apache.maven.plugins.annotations.ResolutionScope;
 import org.codehaus.plexus.classworlds.realm.ClassRealm;
 
 @Mojo(name = "serve", requiresDependencyResolution = ResolutionScope.TEST)
-public class ServeMojo extends AbstractBeMojo {
+public class ServeMojo extends AbstractSiteMojo {
 
   @Parameter(defaultValue = "true", readonly = true)
   private boolean joinExecution;

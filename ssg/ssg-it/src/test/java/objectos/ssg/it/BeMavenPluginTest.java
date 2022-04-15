@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package br.com.objectos.be.it;
+package objectos.ssg.it;
 
 import static br.com.objectos.mojo.Mojo.plugin;
 import static org.testng.Assert.assertEquals;

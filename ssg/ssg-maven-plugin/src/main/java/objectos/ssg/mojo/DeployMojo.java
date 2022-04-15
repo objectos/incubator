@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package br.com.objectos.be.maven.plugin;
+package objectos.ssg.mojo;
 
 import java.io.File;
 import javax.inject.Inject;
@@ -33,7 +33,7 @@ import org.eclipse.aether.transport.wagon.WagonProvider;
     defaultPhase = LifecyclePhase.SITE_DEPLOY,
     requiresReports = true
 )
-public class DeployMojo extends AbstractBeMojo {
+public class DeployMojo extends AbstractSiteMojo {
 
   @Parameter(
       property = "siteOutputDirectory",
