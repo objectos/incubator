@@ -13,15 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package br.com.objectos.be.processor;
+package objectos.ssg.processor;
 
-import br.com.objectos.code.testng.AbstractCodeTestNgTest;
+import static org.testng.Assert.assertEquals;
 
-public abstract class AbstractBeProcessorTest extends AbstractCodeTestNgTest {
+public class Util {
 
-  @Override
-  public final String getModuleName() {
-    return "br.com.objectos.be.processor";
+  public static void assertHasLines(String contents, String... expected) {
+    String[] split = contents.split("\n");
+
+    assertEquals(split, expected);
   }
 
 }

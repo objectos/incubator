@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package br.com.objectos.be.processor;
+package objectos.ssg.processor;
 
 import static br.com.objectos.tools.Tools.compilationUnit;
 import static br.com.objectos.tools.Tools.javac;

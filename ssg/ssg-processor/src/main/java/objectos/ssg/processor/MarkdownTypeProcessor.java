@@ -13,30 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package br.com.objectos.be.processor;
+package objectos.ssg.processor;
 
-import static br.com.objectos.code.java.Java.annotation;
-import static br.com.objectos.code.java.Java.l;
-
-import br.com.objectos.code.annotations.Generated;
 import br.com.objectos.code.annotations.Services;
-import br.com.objectos.code.java.declaration.AnnotationCode;
-import br.com.objectos.code.java.io.JavaFile;
-import br.com.objectos.code.model.element.ProcessingMethod;
+import br.com.objectos.code.model.element.ProcessingType;
 import br.com.objectos.code.processing.AbstractProcessingRoundProcessor;
 import br.com.objectos.code.processing.ProcessingRound;
 import br.com.objectos.core.set.ImmutableSet;
+import java.io.IOException;
 import java.util.Set;
 import javax.annotation.processing.Processor;
 import objectos.ssg.Markdown;
 
 @Services(Processor.class)
-public final class MarkdownMethodProcessor extends AbstractProcessingRoundProcessor {
-
-  static final AnnotationCode GENERATED = annotation(
-    Generated.class,
-    l(MarkdownMethodProcessor.class.getCanonicalName())
-  );
+public final class MarkdownTypeProcessor extends AbstractProcessingRoundProcessor {
 
   @Override
   public final Set<String> getSupportedAnnotationTypes() {
@@ -45,26 +35,31 @@ public final class MarkdownMethodProcessor extends AbstractProcessingRoundProces
 
   @Override
   protected final boolean process(ProcessingRound round) {
-    ImmutableSet<ProcessingMethod> methods;
-    methods = round.getAnnotatedMethods();
+    ImmutableSet<ProcessingType> types;
+    types = round.getAnnotatedTypes();
 
-    for (ProcessingMethod m : methods) {
-      process0(round, m);
+    for (ProcessingType type : types) {
+      process0(round, type);
     }
 
     return round.allowOtherProcessors();
   }
 
-  private void process0(ProcessingRound round, ProcessingMethod m) {
-    MarkdownMethod method;
-    method = new MarkdownMethod(m);
-
-    JavaFile f;
-    f = method.generateJavaFile();
-
+  private void process0(ProcessingRound round, ProcessingType type) {
     try {
-      round.writeJavaFile(f);
-    } catch (Exception e) {
+      String canonicalName;
+      canonicalName = type.getCanonicalName();
+
+      String resourceName;
+      resourceName = canonicalName.replace('.', '/');
+
+      resourceName = resourceName + ".md";
+
+      String contents;
+      contents = type.getDocComment();
+
+      round.writeResource(resourceName, contents);
+    } catch (IOException e) {
       round.printMessageError(e);
     }
   }

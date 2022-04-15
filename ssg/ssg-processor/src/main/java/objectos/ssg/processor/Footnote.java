@@ -13,16 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package br.com.objectos.be.processor;
+package objectos.ssg.processor;
 
-import static org.testng.Assert.assertEquals;
+import org.commonmark.node.CustomNode;
+import org.commonmark.node.Delimited;
 
-public class Util {
+final class Footnote extends CustomNode implements Delimited {
 
-  public static void assertHasLines(String contents, String... expected) {
-    String[] split = contents.split("\n");
+  @Override
+  public final String getClosingDelimiter() {
+    return "]";
+  }
 
-    assertEquals(split, expected);
+  @Override
+  public final String getOpeningDelimiter() {
+    return "[^";
   }
 
 }

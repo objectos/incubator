@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package br.com.objectos.be.processor;
+package objectos.ssg.processor;
 
 import static br.com.objectos.tools.Tools.compilationUnit;
 import static br.com.objectos.tools.Tools.javac;
@@ -73,7 +73,7 @@ public class BeTest {
       "import br.com.objectos.code.annotations.Generated;",
       "import br.com.objectos.html.tmpl.AbstractFragment;",
       "",
-      "@Generated(\"br.com.objectos.be.processor.MarkdownMethodProcessor\")",
+      "@Generated(\"objectos.ssg.processor.MarkdownMethodProcessor\")",
       "class TestCase04_article0 extends AbstractFragment {",
       "",
       "  @Override",

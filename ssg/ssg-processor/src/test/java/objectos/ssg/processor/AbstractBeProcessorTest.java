@@ -13,21 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package br.com.objectos.be.processor;
+package objectos.ssg.processor;
 
-import org.commonmark.node.CustomNode;
-import org.commonmark.node.Delimited;
+import br.com.objectos.code.testng.AbstractCodeTestNgTest;
 
-final class Footnote extends CustomNode implements Delimited {
-
-  @Override
-  public final String getClosingDelimiter() {
-    return "]";
-  }
+public abstract class AbstractBeProcessorTest extends AbstractCodeTestNgTest {
 
   @Override
-  public final String getOpeningDelimiter() {
-    return "[^";
+  public final String getModuleName() {
+    return "br.com.objectos.be.processor";
   }
 
 }
