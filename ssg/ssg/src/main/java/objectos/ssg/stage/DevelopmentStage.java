@@ -13,9 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package br.com.objectos.be.site.dev;
+package objectos.ssg.stage;
 
-import br.com.objectos.be.site.AbstractSiteDsl;
 import br.com.objectos.core.io.InputStreamSource;
 import br.com.objectos.core.list.MutableList;
 import br.com.objectos.css.sheet.StyleSheet;
@@ -30,6 +29,7 @@ import br.com.objectos.http.server.HttpModuleDsl;
 import br.com.objectos.http.server.HttpServerBuilder;
 import br.com.objectos.http.server.Method;
 import br.com.objectos.http.server.MutableHttpServer;
+import objectos.ssg.AbstractSiteDsl;
 
 public class DevelopmentStage extends AbstractSiteDsl implements HttpModule {
 

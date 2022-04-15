@@ -15,8 +15,8 @@
  */
 package br.com.objectos.www.objectos.css;
 
-import br.com.objectos.be.site.SiteDirectory;
-import br.com.objectos.be.site.SiteStyleSheet;
+import objectos.ssg.SiteDirectory;
+import objectos.ssg.SiteStyleSheet;
 
 public final class CssDirectory extends SiteDirectory {
 

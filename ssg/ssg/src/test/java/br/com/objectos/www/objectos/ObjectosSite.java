@@ -15,8 +15,8 @@
  */
 package br.com.objectos.www.objectos;
 
-import br.com.objectos.be.site.AbstractSite;
 import br.com.objectos.core.list.ImmutableList;
+import objectos.ssg.AbstractSite;
 
 public final class ObjectosSite extends AbstractSite {
 

@@ -13,16 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package br.com.objectos.be.site.prod;
+package objectos.ssg;
 
-import br.com.objectos.fs.Directory;
-import br.com.objectos.fs.testing.TmpDir;
-import java.io.IOException;
+public interface HasHref {
 
-public abstract class AbstractSiteProdTest {
-
-  protected final Directory newTempDir() throws IOException {
-    return TmpDir.create();
-  }
+  String getHref();
 
 }

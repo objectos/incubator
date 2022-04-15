@@ -15,8 +15,6 @@
  */
 package br.com.objectos.be.maven.plugin;
 
-import br.com.objectos.be.site.Site;
-import br.com.objectos.be.site.prod.ProductionStage;
 import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.LocalFs;
 import java.io.File;
@@ -24,6 +22,8 @@ import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
+import objectos.ssg.Site;
+import objectos.ssg.stage.ProductionStage;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.Mojo;

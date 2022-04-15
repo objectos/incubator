@@ -13,16 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package br.com.objectos.be.annotations;
+package objectos.ssg.stage;
 
-import static java.lang.annotation.RetentionPolicy.RUNTIME;
+import br.com.objectos.fs.Directory;
+import br.com.objectos.fs.testing.TmpDir;
+import java.io.IOException;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.Target;
+public abstract class AbstractSiteProdTest {
 
-@Retention(RUNTIME)
-@Target(
-  {ElementType.METHOD, ElementType.TYPE}
-)
-public @interface Markdown {}
+  protected final Directory newTempDir() throws IOException {
+    return TmpDir.create();
+  }
+
+}

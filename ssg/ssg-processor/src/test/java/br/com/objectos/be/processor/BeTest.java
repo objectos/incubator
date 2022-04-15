@@ -35,8 +35,8 @@ public class BeTest {
       compilationUnit(
         "package testing;",
         "",
-        "import br.com.objectos.be.annotations.Markdown;",
         "import br.com.objectos.html.tmpl.AbstractTemplate;",
+        "import objectos.ssg.Markdown;",
         "",
         "final class TestCase04 extends AbstractTemplate {",
         "  @Override",

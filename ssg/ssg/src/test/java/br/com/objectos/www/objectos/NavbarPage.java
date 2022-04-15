@@ -15,7 +15,7 @@
  */
 package br.com.objectos.www.objectos;
 
-import br.com.objectos.be.site.HasHref;
+import objectos.ssg.HasHref;
 
 public interface NavbarPage extends HasHref {
 

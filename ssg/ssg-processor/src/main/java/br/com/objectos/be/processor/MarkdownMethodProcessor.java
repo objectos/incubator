@@ -18,7 +18,6 @@ package br.com.objectos.be.processor;
 import static br.com.objectos.code.java.Java.annotation;
 import static br.com.objectos.code.java.Java.l;
 
-import br.com.objectos.be.annotations.Markdown;
 import br.com.objectos.code.annotations.Generated;
 import br.com.objectos.code.annotations.Services;
 import br.com.objectos.code.java.declaration.AnnotationCode;
@@ -29,6 +28,7 @@ import br.com.objectos.code.processing.ProcessingRound;
 import br.com.objectos.core.set.ImmutableSet;
 import java.util.Set;
 import javax.annotation.processing.Processor;
+import objectos.ssg.Markdown;
 
 @Services(Processor.class)
 public final class MarkdownMethodProcessor extends AbstractProcessingRoundProcessor {

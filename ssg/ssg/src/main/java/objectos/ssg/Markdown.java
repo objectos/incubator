@@ -13,10 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package br.com.objectos.be.site;
+package objectos.ssg;
 
-public interface Site {
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
-  void acceptSiteDsl(SiteDsl dsl);
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.Target;
 
-}
+@Retention(RUNTIME)
+@Target(
+  {ElementType.METHOD, ElementType.TYPE}
+)
+public @interface Markdown {}

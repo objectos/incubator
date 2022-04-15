@@ -15,10 +15,10 @@
  */
 package br.com.objectos.www.objectos.css;
 
-import br.com.objectos.be.site.SiteStyleSheet;
 import br.com.objectos.css.Css;
 import br.com.objectos.css.select.ClassSelector;
 import br.com.objectos.css.sheet.StyleSheet;
+import objectos.ssg.SiteStyleSheet;
 
 final class Container extends SiteStyleSheet implements StyleSheetProvider {
 

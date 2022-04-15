@@ -15,9 +15,9 @@
  */
 package br.com.objectos.www.objectos;
 
-import br.com.objectos.be.site.SiteDirectory;
 import br.com.objectos.www.objectos.blog.BlogDirectory;
 import br.com.objectos.www.objectos.css.CssDirectory;
+import objectos.ssg.SiteDirectory;
 
 public final class RootDirectory extends SiteDirectory {
 

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package br.com.objectos.be.site.dev;
+package objectos.ssg.stage;
 
 import br.com.objectos.css.sheet.StyleSheet;
 import br.com.objectos.http.server.CssResponse;

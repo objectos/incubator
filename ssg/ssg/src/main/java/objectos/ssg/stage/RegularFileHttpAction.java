@@ -13,11 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package br.com.objectos.be.site.dev;
+package objectos.ssg.stage;
 
 import br.com.objectos.core.io.InputStreamSource;
 import br.com.objectos.core.io.Read;
+import br.com.objectos.fs.RegularFile;
 import br.com.objectos.http.media.MediaType;
+import br.com.objectos.http.media.MediaTypes;
 import br.com.objectos.http.server.Code500InternalServerErrorException;
 import br.com.objectos.http.server.HttpAction;
 import br.com.objectos.http.server.HttpException;
@@ -29,15 +31,25 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Objects;
 
-final class InputStreamSourceHttpAction implements HttpAction, Response {
+final class RegularFileHttpAction implements HttpAction, Response {
 
-  private final InputStreamSource file;
+  private final RegularFile file;
 
   private final MediaType type;
 
-  InputStreamSourceHttpAction(InputStreamSource file, MediaType type) {
+  RegularFileHttpAction(RegularFile file, MediaType type) {
     this.file = file;
     this.type = type;
+  }
+
+  public static RegularFileHttpAction of(RegularFile file) {
+    String name;
+    name = file.getName();
+
+    MediaType type;
+    type = MediaTypes.ofFileName(name);
+
+    return new RegularFileHttpAction(file, type);
   }
 
   @Override
@@ -46,11 +58,11 @@ final class InputStreamSourceHttpAction implements HttpAction, Response {
       return true;
     }
 
-    if (!(obj instanceof InputStreamSourceHttpAction)) {
+    if (!(obj instanceof RegularFileHttpAction)) {
       return false;
     }
 
-    InputStreamSourceHttpAction that = (InputStreamSourceHttpAction) obj;
+    RegularFileHttpAction that = (RegularFileHttpAction) obj;
     return file.equals(that.file)
         && type.equals(that.type);
   }

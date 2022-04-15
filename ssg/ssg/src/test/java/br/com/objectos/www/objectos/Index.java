@@ -15,8 +15,8 @@
  */
 package br.com.objectos.www.objectos;
 
-import br.com.objectos.be.site.SitePage;
 import br.com.objectos.www.objectos.css.CssDirectory;
+import objectos.ssg.SitePage;
 
 final class Index extends SitePage implements NavbarPage {
 

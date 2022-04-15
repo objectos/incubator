@@ -15,8 +15,8 @@
  */
 package br.com.objectos.be.it;
 
-import br.com.objectos.be.annotations.Markdown;
 import br.com.objectos.html.tmpl.AbstractTemplate;
+import objectos.ssg.Markdown;
 
 /**
  * # Hello world

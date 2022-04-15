@@ -13,9 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package br.com.objectos.be.site.prod;
+package objectos.ssg.stage;
 
-import br.com.objectos.be.site.AbstractSiteDsl;
 import br.com.objectos.core.io.Charsets;
 import br.com.objectos.core.io.InputStreamSource;
 import br.com.objectos.core.io.Read;
@@ -29,6 +28,7 @@ import br.com.objectos.http.media.MediaType;
 import br.com.objectos.http.path.Location;
 import java.io.IOException;
 import java.io.UncheckedIOException;
+import objectos.ssg.AbstractSiteDsl;
 
 public class ProductionStage extends AbstractSiteDsl {
 

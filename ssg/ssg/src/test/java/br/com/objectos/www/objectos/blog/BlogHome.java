@@ -15,8 +15,8 @@
  */
 package br.com.objectos.www.objectos.blog;
 
-import br.com.objectos.be.site.SitePage;
 import br.com.objectos.www.objectos.NavbarPage;
+import objectos.ssg.SitePage;
 
 final class BlogHome extends SitePage implements NavbarPage {
 

@@ -15,9 +15,9 @@
  */
 package br.com.objectos.www.objectos.css;
 
-import br.com.objectos.be.site.SiteStyleSheet;
 import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.css.sheet.StyleSheet;
+import objectos.ssg.SiteStyleSheet;
 
 final class Styles extends SiteStyleSheet {
 

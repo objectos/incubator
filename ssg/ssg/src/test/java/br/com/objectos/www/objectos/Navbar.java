@@ -15,10 +15,10 @@
  */
 package br.com.objectos.www.objectos;
 
-import br.com.objectos.be.site.SiteFragment;
 import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.core.object.Checks;
 import br.com.objectos.html.spi.type.UlValue;
+import objectos.ssg.SiteFragment;
 
 public class Navbar extends SiteFragment {
 

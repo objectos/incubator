@@ -36,7 +36,7 @@ public class MarkdownTypeProcessorTest {
         "",
         "Ipsum lorem",
         "*/",
-        "@br.com.objectos.be.annotations.Markdown",
+        "@objectos.ssg.Markdown",
         "public class Processor01 {}"
       )
     );

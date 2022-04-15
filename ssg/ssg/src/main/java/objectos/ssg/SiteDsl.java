@@ -13,30 +13,38 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package br.com.objectos.be.site;
+package objectos.ssg;
 
 import br.com.objectos.core.io.InputStreamSource;
+import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.css.sheet.StyleSheet;
 import br.com.objectos.html.tmpl.Template;
 import br.com.objectos.http.media.MediaType;
 
-final class TestingSiteDsl extends AbstractSiteDsl {
+public interface SiteDsl {
 
-  @Override
-  public void addResource(String fullPath, InputStreamSource resource) {}
+  void addDirectory(SiteDirectory directory);
 
-  @Override
-  public void addResource(String fullPath, InputStreamSource resource, MediaType mediaType) {}
+  void addDirectory(String path, SiteDirectory directory);
 
-  @Override
-  public void addStyleSheet(String fullPath, StyleSheet styleSheet) {}
+  void addResource(String fullPath, InputStreamSource resource);
 
-  @Override
-  public void addTemplate(String fullPath, Template template) {}
+  void addResource(String fullPath, InputStreamSource resource, MediaType mediaType);
 
-  @Override
-  public final String getBaseHref() {
-    return "";
-  }
+  void addStyleSheet(String fullPath, StyleSheet styleSheet);
+
+  void addTemplate(String fullPath, Template template);
+
+  String getBaseHref();
+
+  <T> T getInstance(Class<? extends T> key);
+
+  <T> ImmutableList<T> getInstancesByType(Class<? extends T> type);
+
+  void install();
+
+  boolean isDevelopment();
+
+  boolean isProduction();
 
 }

@@ -26,7 +26,7 @@ public class TypeNames {
   );
 
   public static final NamedClass AbstractSite = t(
-    br.com.objectos.be.site.AbstractSite.class
+    objectos.ssg.AbstractSite.class
   );
 
   public static final NamedClass ImageType = t(
@@ -34,7 +34,7 @@ public class TypeNames {
   );
 
   public static final NamedClass Markdown = t(
-    br.com.objectos.be.annotations.Markdown.class
+    objectos.ssg.Markdown.class
   );
 
   public static final NamedClass String = t(String.class);

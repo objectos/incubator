@@ -15,7 +15,7 @@
  */
 package br.com.objectos.www.objectos.blog;
 
-import br.com.objectos.be.site.SiteDirectory;
+import objectos.ssg.SiteDirectory;
 
 public class BlogDirectory extends SiteDirectory {
 

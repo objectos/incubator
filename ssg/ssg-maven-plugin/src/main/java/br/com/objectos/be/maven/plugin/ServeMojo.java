@@ -15,8 +15,6 @@
  */
 package br.com.objectos.be.maven.plugin;
 
-import br.com.objectos.be.site.Site;
-import br.com.objectos.be.site.dev.DevelopmentStage;
 import br.com.objectos.http.server.MutableHttpServer;
 import br.com.objectos.http.server.jetty.JettyHttpServerBuilder;
 import java.io.File;
@@ -29,6 +27,8 @@ import java.net.URI;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.Date;
+import objectos.ssg.Site;
+import objectos.ssg.stage.DevelopmentStage;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugin.logging.Log;

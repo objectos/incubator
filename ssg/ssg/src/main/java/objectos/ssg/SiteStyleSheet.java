@@ -13,15 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package br.com.objectos.be.site;
+package objectos.ssg;
 
 import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.core.object.Checks;
-import br.com.objectos.html.attribute.StandardAttributeName.Href;
-import br.com.objectos.html.element.ElementName;
-import br.com.objectos.html.tmpl.AbstractTemplate;
+import br.com.objectos.css.sheet.AbstractStyleSheet;
 
-public abstract class SitePage extends AbstractTemplate implements HasHref {
+public abstract class SiteStyleSheet extends AbstractStyleSheet implements HasHref {
 
   private SiteDirectory directory;
 
@@ -45,50 +43,16 @@ public abstract class SitePage extends AbstractTemplate implements HasHref {
     return directory.getInstancesByType(type);
   }
 
-  protected final Href href(Class<? extends HasHref> key) {
-    HasHref value;
-    value = directory.getInstance(key);
-
-    return href(value);
-  }
-
-  protected final Href href(HasHref value) {
-    String href;
-    href = value.getHref();
-
-    return href(href);
-  }
-
-  protected final StringBuilder hrefBuilder() {
-    return directory.hrefBuilder();
-  }
-
-  protected final ElementName link(Class<? extends SiteStyleSheet> key) {
-    return link(rel("stylesheet"), href(key));
-  }
-
-  protected final void putInstance(Object value) {
-    directory.putInstance(value);
-  }
-
-  protected void register() {}
-
-  protected void renderSitePage() {
-    String href;
-    href = getHref();
-
-    directory.addTemplate(href, this);
-  }
-
-  final void register(SiteDirectory directory, String fileName) {
+  final void setDirectory(SiteDirectory directory) {
     Checks.checkState(this.directory == null, "directory was already set");
+
+    this.directory = Checks.checkNotNull(directory, "directory == null");
+  }
+
+  final void setFileName(String fileName) {
     Checks.checkState(this.fileName == null, "fileName was already set");
 
-    this.directory = directory;
-
     this.fileName = Checks.checkNotNull(fileName, "fileName == null");
-
-    register();
   }
 
 }
