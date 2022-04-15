@@ -19,8 +19,12 @@ import br.com.objectos.core.io.InputStreamSource;
 import br.com.objectos.css.sheet.StyleSheet;
 import br.com.objectos.html.tmpl.Template;
 import br.com.objectos.http.media.MediaType;
+import java.util.IdentityHashMap;
+import java.util.Map;
 
-final class TestingSiteDsl extends AbstractSiteDsl {
+class TestingSiteDsl extends AbstractSiteDsl {
+
+  private final Map<Template, String> templatePaths = new IdentityHashMap<>();
 
   @Override
   public void addResource(String fullPath, InputStreamSource resource) {}
@@ -32,11 +36,21 @@ final class TestingSiteDsl extends AbstractSiteDsl {
   public void addStyleSheet(String fullPath, StyleSheet styleSheet) {}
 
   @Override
-  public void addTemplate(String fullPath, Template template) {}
+  public final void addTemplate(String fullPath, Template template) {
+    templatePaths.put(template, fullPath);
+  }
+
+  public final void clear() {
+    templatePaths.clear();
+  }
 
   @Override
   public final String getBaseHref() {
     return "";
+  }
+
+  public final String path(SitePage page) {
+    return templatePaths.get(page);
   }
 
 }

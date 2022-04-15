@@ -16,43 +16,16 @@
 package objectos.ssg;
 
 import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.object.Checks;
 import br.com.objectos.css.sheet.AbstractStyleSheet;
 
 public abstract class SiteStyleSheet extends AbstractStyleSheet implements HasHref {
 
-  private SiteDirectory directory;
-
-  private String fileName;
-
-  @Override
-  public final String getHref() {
-    StringBuilder href;
-    href = directory.hrefBuilder();
-
-    href.append(fileName);
-
-    return href.toString();
-  }
-
   protected final <T> T getInstance(Class<? extends T> key) {
-    return directory.getInstance(key);
+    throw new UnsupportedOperationException("Implement me");
   }
 
   protected final <T> ImmutableList<T> getInstancesByType(Class<? extends T> type) {
-    return directory.getInstancesByType(type);
-  }
-
-  final void setDirectory(SiteDirectory directory) {
-    Checks.checkState(this.directory == null, "directory was already set");
-
-    this.directory = Checks.checkNotNull(directory, "directory == null");
-  }
-
-  final void setFileName(String fileName) {
-    Checks.checkState(this.fileName == null, "fileName was already set");
-
-    this.fileName = Checks.checkNotNull(fileName, "fileName == null");
+    throw new UnsupportedOperationException("Implement me");
   }
 
 }

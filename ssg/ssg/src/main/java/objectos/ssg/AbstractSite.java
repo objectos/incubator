@@ -25,13 +25,11 @@ public abstract class AbstractSite implements Site {
   protected AbstractSite() {}
 
   @Override
-  public final void acceptSiteDsl(SiteDsl dsl) {
+  public final synchronized void acceptSiteDsl(SiteDsl dsl) {
     this.dsl = Checks.checkNotNull(dsl, "dsl == null");
 
     try {
       configure();
-
-      dsl.install();
     } finally {
       this.dsl = null;
     }

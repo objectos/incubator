@@ -5,4 +5,4 @@
  */
 package objectos.ssg;
 
-public interface HasHref {}
+public interface Component {}

@@ -27,25 +27,19 @@ public abstract class SiteFragment extends AbstractFragment {
   protected SiteFragment() {}
 
   protected final <T> T getInstance(Class<? extends T> key) {
-    return site.getInstance(key);
+    throw new UnsupportedOperationException("Implement me");
   }
 
   protected final <T> ImmutableList<T> getInstancesByType(Class<? extends T> type) {
-    return site.getInstancesByType(type);
+    throw new UnsupportedOperationException("Implement me");
   }
 
   protected final Href href(Class<? extends HasHref> key) {
-    HasHref value;
-    value = site.getInstance(key);
-
-    return href(value);
+    throw new UnsupportedOperationException("Implement me");
   }
 
   protected final Href href(HasHref value) {
-    String href;
-    href = value.getHref();
-
-    return href(href);
+    throw new UnsupportedOperationException("Implement me");
   }
 
   final void setSite(AbstractSiteDsl site) {

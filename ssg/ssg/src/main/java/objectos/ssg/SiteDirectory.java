@@ -16,42 +16,26 @@
 package objectos.ssg;
 
 import br.com.objectos.core.io.InputStreamSource;
-import br.com.objectos.core.io.Resource;
 import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.list.MutableList;
 import br.com.objectos.core.object.Checks;
 import br.com.objectos.http.media.MediaType;
 
 public abstract class SiteDirectory {
 
-  private final MutableList<SiteDirectory> directories = MutableList.create();
+  private Configuration cfg;
 
   private AbstractSiteDsl dsl;
 
-  private String name;
-
-  private final MutableList<SitePage> pages = MutableList.create();
-
-  private SiteDirectory parent;
-
-  private final MutableList<SiteStyleSheet> sheets = MutableList.create();
-
   protected SiteDirectory() {}
 
-  public final StringBuilder hrefBuilder() {
-    StringBuilder href;
+  public final void configure(Configuration configuration) {
+    this.cfg = Checks.checkNotNull(configuration, "configuration == null");
 
-    if (parent != null) {
-      href = parent.hrefBuilder();
-    } else {
-      href = dsl.hrefBuilder();
+    try {
+      configure();
+    } finally {
+      this.cfg = null;
     }
-
-    if (name != null) {
-      acceptHrefBuilder(href, name);
-    }
-
-    return href;
   }
 
   protected void acceptHrefBuilder(StringBuilder href, String name) {
@@ -61,74 +45,50 @@ public abstract class SiteDirectory {
   }
 
   protected final void addDirectory(String name, SiteDirectory directory) {
-    directories.addWithNullMessage(directory, "directory == null");
-
-    directory.setName(name);
-
-    directory.setParent(this);
-
-    dsl.put(directory);
-
-    directory.acceptSiteDsl(dsl);
+    throw new UnsupportedOperationException("Implement me");
   }
 
   protected final void addPage(String fileName, SitePage page) {
-    pages.addWithNullMessage(page, "page == null");
-
-    page.register(this, fileName);
-
-    dsl.put(page);
+    cfg().addPage(fileName, page);
   }
 
   protected final void addResource(String resourceName) {
-    Resource resource;
-    resource = Resource.getResource(getClass(), resourceName);
-
-    String href;
-    href = safeHref(resourceName);
-
-    dsl.addResource(href, resource);
+    //    Resource resource;
+    //    resource = Resource.getResource(getClass(), resourceName);
+    //
+    //    String href;
+    //    href = safeHref(resourceName);
+    //
+    //    dsl.addResource(href, resource);
   }
 
   protected final void addResource(String path, InputStreamSource resource) {
-    Checks.checkNotNull(path, "path == null");
-    Checks.checkNotNull(resource, "resource == null");
-
-    String href;
-    href = safeHref(path);
-
-    dsl.addResource(href, resource);
+    //    Checks.checkNotNull(path, "path == null");
+    //    Checks.checkNotNull(resource, "resource == null");
+    //
+    //    String href;
+    //    href = safeHref(path);
+    //
+    //    dsl.addResource(href, resource);
   }
 
   protected final void addResource(String path, InputStreamSource resource, MediaType mediaType) {
-    Checks.checkNotNull(path, "path == null");
-    Checks.checkNotNull(resource, "resource == null");
-    Checks.checkNotNull(mediaType, "mediaType == null");
-
-    String href;
-    href = safeHref(path);
-
-    dsl.addResource(href, resource, mediaType);
+    //    Checks.checkNotNull(path, "path == null");
+    //    Checks.checkNotNull(resource, "resource == null");
+    //    Checks.checkNotNull(mediaType, "mediaType == null");
+    //
+    //    String href;
+    //    href = safeHref(path);
+    //
+    //    dsl.addResource(href, resource, mediaType);
   }
 
   protected final void addResource(String resourceName, MediaType mediaType) {
-    Resource resource;
-    resource = Resource.getResource(getClass(), resourceName);
-
-    String href;
-    href = safeHref(resourceName);
-
-    dsl.addResource(href, resource, mediaType);
+    throw new UnsupportedOperationException("Implement me");
   }
 
   protected final void addStyleSheet(String fileName, SiteStyleSheet sheet) {
-    sheets.addWithNullMessage(sheet, "sheet == null");
-
-    sheet.setDirectory(this);
-
-    sheet.setFileName(fileName);
-
-    dsl.put(sheet);
+    throw new UnsupportedOperationException("Implement me");
   }
 
   protected abstract void configure();
@@ -145,23 +105,6 @@ public abstract class SiteDirectory {
     dsl.put(value);
   }
 
-  protected void renderSiteDirectory() {
-    for (SitePage page : pages) {
-      page.renderSitePage();
-    }
-
-    for (SiteStyleSheet sheet : sheets) {
-      String href;
-      href = sheet.getHref();
-
-      dsl.addStyleSheet(href, sheet);
-    }
-
-    for (SiteDirectory directory : directories) {
-      directory.render(dsl);
-    }
-  }
-
   final void acceptSiteDsl(AbstractSiteDsl dsl) {
     this.dsl = Checks.checkNotNull(dsl, "dsl == null");
 
@@ -176,37 +119,16 @@ public abstract class SiteDirectory {
     dsl.addTemplate(href, sitePage);
   }
 
-  final void render(AbstractSiteDsl dsl) {
-    this.dsl = Checks.checkNotNull(dsl, "dsl == null");
+  private Configuration cfg() {
+    Checks.checkState(cfg != null, "Please invoke this method under the configure() method");
 
-    try {
-      renderSiteDirectory();
-    } finally {
-      this.dsl = null;
-    }
+    return cfg;
   }
 
-  final void setName(String name) {
-    Checks.checkState(this.name == null, "name was already set");
+  public static interface Configuration {
 
-    this.name = name;
-  }
+    void addPage(String fileName, SitePage page);
 
-  final void setParent(SiteDirectory parent) {
-    Checks.checkState(this.parent == null, "parent was already set");
-
-    this.parent = Checks.checkNotNull(parent, "parent == null");
-  }
-
-  private String safeHref(String fileName) {
-    // TODO do not allow: absolute, subdir, path navigation
-
-    StringBuilder builder;
-    builder = hrefBuilder();
-
-    builder.append(fileName);
-
-    return builder.toString();
   }
 
 }

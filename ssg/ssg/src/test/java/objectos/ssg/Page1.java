@@ -5,4 +5,7 @@
  */
 package objectos.ssg;
 
-public interface HasHref {}
+final class Page1 extends SitePage {
+  @Override
+  protected final void definition() {}
+}

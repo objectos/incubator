@@ -17,59 +17,54 @@ package objectos.ssg;
 
 import static org.testng.Assert.assertEquals;
 
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class SiteDirectoryTest {
 
   private final TestingSiteDsl dsl = new TestingSiteDsl();
 
-  private String href;
+  private final Page0 page0 = new Page0();
 
-  @Test
-  public void hrefBuilder() {
-    abstract class Subject extends SiteDirectory {
-      final void indexHtml() {
-        StringBuilder b;
-        b = hrefBuilder();
+  private final Page1 page1 = new Page1();
 
-        b.append("index.html");
+  @BeforeMethod
+  public void _beforeMethod() {
+    dsl.clear();
+  }
 
-        href = b.toString();
+  @Test(description = "addPage")
+  public void addPage() {
+    class Root extends SiteDirectory {
+      @Override
+      protected final void configure() {
+        addPage("index.html", page0);
       }
     }
 
-    SiteDirectory subject;
-    subject = new Subject() {
+    class Docs extends SiteDirectory {
       @Override
       protected final void configure() {
-        setName("docs");
-
-        indexHtml();
+        addPage("index.html", page1);
       }
-    };
+    }
 
-    subject.acceptSiteDsl(dsl);
-
-    assertEquals(href, "/docs/index.html");
-
-    final SiteDirectory docs;
-    docs = new Subject() {
+    run(new AbstractSite() {
       @Override
       protected final void configure() {
-        indexHtml();
+        addDirectory(new Root());
+        addDirectory("docs", new Docs());
       }
-    };
+    });
 
-    subject = new Subject() {
-      @Override
-      protected final void configure() {
-        addDirectory("docs", docs);
-      }
-    };
+    assertEquals(dsl.path(page0), "/index.html");
+    assertEquals(dsl.path(page1), "/docs/index.html");
+  }
 
-    subject.acceptSiteDsl(dsl);
+  private void run(AbstractSite site) {
+    site.acceptSiteDsl(dsl);
 
-    assertEquals(href, "/docs/index.html");
+    dsl.render();
   }
 
 }

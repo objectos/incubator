@@ -16,79 +16,43 @@
 package objectos.ssg;
 
 import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.object.Checks;
 import br.com.objectos.html.attribute.StandardAttributeName.Href;
 import br.com.objectos.html.element.ElementName;
 import br.com.objectos.html.tmpl.AbstractTemplate;
 
 public abstract class SitePage extends AbstractTemplate implements HasHref {
 
-  private SiteDirectory directory;
-
-  private String fileName;
-
-  @Override
-  public final String getHref() {
-    StringBuilder href;
-    href = directory.hrefBuilder();
-
-    href.append(fileName);
-
-    return href.toString();
-  }
+  private Context context;
 
   protected final <T> T getInstance(Class<? extends T> key) {
-    return directory.getInstance(key);
+    return context.getInstance(key);
   }
 
   protected final <T> ImmutableList<T> getInstancesByType(Class<? extends T> type) {
-    return directory.getInstancesByType(type);
+    return context.getInstancesByType(type);
   }
 
   protected final Href href(Class<? extends HasHref> key) {
-    HasHref value;
-    value = directory.getInstance(key);
+    String value;
+    value = context.getHref(key);
 
     return href(value);
-  }
-
-  protected final Href href(HasHref value) {
-    String href;
-    href = value.getHref();
-
-    return href(href);
-  }
-
-  protected final StringBuilder hrefBuilder() {
-    return directory.hrefBuilder();
   }
 
   protected final ElementName link(Class<? extends SiteStyleSheet> key) {
     return link(rel("stylesheet"), href(key));
   }
 
-  protected final void putInstance(Object value) {
-    directory.putInstance(value);
-  }
+  protected void configure() {}
 
-  protected void register() {}
+  public static interface Context {
 
-  protected void renderSitePage() {
-    String href;
-    href = getHref();
+    String getHref(Class<? extends HasHref> key);
 
-    directory.addTemplate(href, this);
-  }
+    <T> T getInstance(Class<? extends T> key);
 
-  final void register(SiteDirectory directory, String fileName) {
-    Checks.checkState(this.directory == null, "directory was already set");
-    Checks.checkState(this.fileName == null, "fileName was already set");
+    <T> ImmutableList<T> getInstancesByType(Class<? extends T> type);
 
-    this.directory = directory;
-
-    this.fileName = Checks.checkNotNull(fileName, "fileName == null");
-
-    register();
   }
 
 }

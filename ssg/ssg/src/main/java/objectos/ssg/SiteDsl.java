@@ -41,10 +41,10 @@ public interface SiteDsl {
 
   <T> ImmutableList<T> getInstancesByType(Class<? extends T> type);
 
-  void install();
-
   boolean isDevelopment();
 
   boolean isProduction();
+
+  void render();
 
 }

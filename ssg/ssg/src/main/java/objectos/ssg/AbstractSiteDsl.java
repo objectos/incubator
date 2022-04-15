@@ -20,15 +20,18 @@ import br.com.objectos.core.list.MutableList;
 import br.com.objectos.core.map.MutableMap;
 import br.com.objectos.core.object.Checks;
 import java.io.IOException;
+import java.util.IdentityHashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.NoSuchElementException;
+import java.util.Set;
 
 public abstract class AbstractSiteDsl implements SiteDsl {
 
   private final Map<Class<?>, ImmutableList<?>> byTypeMap = MutableMap.create();
 
-  private final MutableList<SiteDirectory> directories = MutableList.create();
+  private final Map<Class<?>, String> hrefMap = new IdentityHashMap<>();
 
   private final Map<Class<?>, Object> objectMap = new LinkedHashMap<>();
 
@@ -38,14 +41,17 @@ public abstract class AbstractSiteDsl implements SiteDsl {
 
   @Override
   public final void addDirectory(SiteDirectory directory) {
-    addDirectory0(null, directory);
+    Checks.checkNotNull(directory, "directory == null");
+
+    addDirectory0("", directory);
   }
 
   @Override
-  public final void addDirectory(String path, SiteDirectory directory) {
-    Checks.checkNotNull(path, "path == null");
+  public final void addDirectory(String name, SiteDirectory directory) {
+    Checks.checkNotNull(name, "name == null");
+    Checks.checkNotNull(directory, "directory == null");
 
-    addDirectory0(path, directory);
+    addDirectory0(name, directory);
   }
 
   public final void addSite(Site site) throws IOException {
@@ -98,13 +104,6 @@ public abstract class AbstractSiteDsl implements SiteDsl {
   }
 
   @Override
-  public final void install() {
-    for (SiteDirectory directory : directories) {
-      directory.render(this);
-    }
-  }
-
-  @Override
   public boolean isDevelopment() {
     return false;
   }
@@ -112,6 +111,38 @@ public abstract class AbstractSiteDsl implements SiteDsl {
   @Override
   public boolean isProduction() {
     return false;
+  }
+
+  @Override
+  public final void render() {
+    Set<Entry<Class<?>, Object>> entries = objectMap.entrySet();
+
+    for (Entry<Class<?>, Object> entry : entries) {
+      Class<?> key;
+      key = entry.getKey();
+
+      String href;
+      href = hrefMap.get(key);
+
+      if (href == null) {
+        continue;
+      }
+
+      Object v;
+      v = entry.getValue();
+
+      if (v instanceof SitePage p) {
+        addTemplate(href, p);
+      }
+
+      else if (v instanceof SiteStyleSheet s) {
+        addStyleSheet(href, s);
+      }
+
+      else {
+        throw new IllegalArgumentException("Unknown type " + key);
+      }
+    }
   }
 
   final StringBuilder hrefBuilder() {
@@ -130,6 +161,11 @@ public abstract class AbstractSiteDsl implements SiteDsl {
   final void put(Class<? extends Object> key, Object value) {
     Checks.checkNotNull(value, "value == null");
 
+    if (objectMap.containsKey(key)) {
+      throw new IllegalArgumentException(
+        "An object of type " + key + " was already registered.");
+    }
+
     if (value instanceof SiteFragment) {
       SiteFragment f;
       f = (SiteFragment) value;
@@ -147,14 +183,69 @@ public abstract class AbstractSiteDsl implements SiteDsl {
     put(key, value);
   }
 
-  private void addDirectory0(String name, SiteDirectory directory) {
-    directories.addWithNullMessage(directory, "directory == null");
+  final void validateName(String name) {
+    // TODO: implement me
+  }
 
-    if (name != null) {
-      directory.setName(name);
+  private void addDirectory0(String name, SiteDirectory directory) {
+    put(directory);
+
+    StringBuilder hrefBuilder;
+    hrefBuilder = hrefBuilder();
+
+    validateName(name);
+
+    hrefBuilder.append(name);
+
+    if (!name.isEmpty()) {
+      hrefBuilder.append('/');
     }
 
-    directory.acceptSiteDsl(this);
+    String href;
+    href = hrefBuilder.toString();
+
+    ThisDirectory d;
+    d = new ThisDirectory(directory, href);
+
+    d.configure();
+  }
+
+  private class ThisDirectory implements SiteDirectory.Configuration {
+    private final SiteDirectory directory;
+
+    private final String directoryHref;
+
+    public ThisDirectory(SiteDirectory directory, String href) {
+      this.directory = directory;
+
+      this.directoryHref = href;
+    }
+
+    @Override
+    public final void addPage(String fileName, SitePage page) {
+      Checks.checkNotNull(fileName, "fileName == null");
+      Checks.checkNotNull(page, "page == null");
+
+      put(page);
+
+      putHref(page, fileName);
+    }
+
+    final void configure() {
+      directory.configure(this);
+    }
+
+    private void putHref(HasHref o, String name) {
+      validateName(name);
+
+      String href;
+      href = directoryHref + name;
+
+      Class<? extends HasHref> key;
+      key = o.getClass();
+
+      hrefMap.put(key, href);
+    }
   }
 
 }

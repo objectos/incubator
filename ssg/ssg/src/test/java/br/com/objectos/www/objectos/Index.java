@@ -46,7 +46,7 @@ final class Index extends SitePage implements NavbarPage {
   }
 
   @Override
-  protected final void register() {
+  protected final void configure() {
     navbarTitle = "Home";
   }
 
