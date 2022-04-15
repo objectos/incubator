@@ -54,18 +54,4 @@ public class PageSwitcherTest {
     return (T) map.get(key);
   }
 
-  private class Page0 extends DocsPage {
-    public Page0() {
-      nextPage = Page1.class;
-    }
-  }
-
-  private class Page1 extends DocsPage {
-    public Page1() {
-      nextPage = Page2.class;
-    }
-  }
-
-  private class Page2 extends DocsPage {}
-
 }

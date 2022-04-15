@@ -29,9 +29,9 @@ public final class FontSize {
 
   public static final Length XL2 = Length.rem(1.5); // 24px
 
-  public static final Length XL3 = Length.rem(1.875);
+  public static final Length XL3 = Length.rem(1.875); // 30px
 
-  public static final Length XL4 = Length.rem(2.25);
+  public static final Length XL4 = Length.rem(2.25); // 36px
 
   public static final Length XL5 = Length.rem(3);
 

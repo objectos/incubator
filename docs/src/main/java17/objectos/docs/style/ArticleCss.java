@@ -33,7 +33,7 @@ public final class ArticleCss extends AbstractStyleSheet {
     style(
       article, sp(), h1,
 
-      fontSize(px(40)),
+      fontSize(FontSize.XL3),
       fontWeight(600),
       letterSpacing(px(-0.5)),
       lineHeight(px(48)),

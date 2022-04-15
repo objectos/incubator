@@ -16,6 +16,7 @@
 package objectos.docs;
 
 import objectos.docs.intro.IntroDir;
+import objectos.docs.logging.LoggingDir;
 import objectos.docs.ui.DocsPage;
 
 final class Index extends DocsPage {
@@ -31,19 +32,25 @@ final class Index extends DocsPage {
         the reference manuals of individual libraries."""),
 
       section(
-        h2("First steps"),
+        h2("I am new to Objectos"),
+
+        p("Read these to get started with Objectos:"),
+
+        ul(
+          li(a(IntroDir.OVERVIEW, "What is Objectos?")),
+
+          li(a(IntroDir.INSTALLATION, "Installation"))
+        )
+      ),
+
+      section(
+        h2("Core libraries"),
 
         p("""
-          Start here if you are new to Objectos."""),
+          Utility libraries that most applications will require:"""),
 
-        div(
-          h3("From scratch"),
-
-          ul(
-            li(a(IntroDir.OVERVIEW, "Overview")),
-
-            li(a(IntroDir.INSTALLATION, "Installation"))
-          )
+        ul(
+          li(a(LoggingDir.INDEX, "Logging"))
         )
       )
     );
