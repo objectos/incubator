@@ -17,11 +17,15 @@ package objectos.ssg;
 
 public interface SiteDsl extends SiteComponentLocator {
 
-  void addDirectory(SiteDirectory directory);
-
   void addDirectory(String path, SiteDirectory directory);
 
   void addFragment(SiteFragment fragment);
+
+  void addPage(String fileName, SitePage page);
+
+  void addResource(Class<?> contextClass, String resourceName);
+
+  void addStyleSheet(String fileName, SiteStyleSheet sheet);
 
   String getBaseHref();
 

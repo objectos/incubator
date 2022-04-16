@@ -45,6 +45,10 @@ public abstract class SiteDirectory {
     cfg().addDirectory(name, directory);
   }
 
+  protected final void addFragment(SiteFragment fragment) {
+    cfg().addFragment(fragment);
+  }
+
   protected final void addPage(String fileName, SitePage page) {
     cfg().addPage(fileName, page);
   }
@@ -75,12 +79,6 @@ public abstract class SiteDirectory {
 
   protected final <T> ImmutableList<T> getInstancesByType(Class<? extends T> type) {
     throw new UnsupportedOperationException("Implement me");
-  }
-
-  protected final void putInstance(Object value) {
-    if (value instanceof SiteFragment f) {
-      cfg().addFragment(f);
-    }
   }
 
   private Configuration cfg() {

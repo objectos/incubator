@@ -47,19 +47,12 @@ public class SiteDirectoryTest {
       }
     }
 
-    class Root extends SiteDirectory {
+    run(new AbstractSite() {
       @Override
       protected final void configure() {
         addPage("index.html", page0);
 
         addDirectory("docs", new Docs());
-      }
-    }
-
-    run(new AbstractSite() {
-      @Override
-      protected final void configure() {
-        addDirectory(new Root());
       }
     });
 
@@ -69,13 +62,6 @@ public class SiteDirectoryTest {
 
   @Test
   public void addPage() {
-    class Root extends SiteDirectory {
-      @Override
-      protected final void configure() {
-        addPage("index.html", page0);
-      }
-    }
-
     class Docs extends SiteDirectory {
       @Override
       protected final void configure() {
@@ -86,7 +72,8 @@ public class SiteDirectoryTest {
     run(new AbstractSite() {
       @Override
       protected final void configure() {
-        addDirectory(new Root());
+        addPage("index.html", page0);
+
         addDirectory("docs", new Docs());
       }
     });
@@ -97,19 +84,20 @@ public class SiteDirectoryTest {
 
   @Test
   public void addResource() {
-    class Root extends SiteDirectory {
+    class Sub extends SiteDirectory {
       @Override
       protected final void configure() {
-        addResource("5x2.jpg");
-        addResource("sub/foo.jpg", "5x2.jpg");
-        addResource("sub/foo.txt", "5x2.jpg", TextType.PLAIN);
+        addResource("foo.jpg", "5x2.jpg");
+        addResource("foo.txt", "5x2.jpg", TextType.PLAIN);
       }
     }
 
     run(new AbstractSite() {
       @Override
       protected final void configure() {
-        addDirectory(new Root());
+        addResource("5x2.jpg");
+
+        addDirectory("sub", new Sub());
       }
     });
 
@@ -128,17 +116,10 @@ public class SiteDirectoryTest {
 
   @Test
   public void addStyleSheet() {
-    class Root extends SiteDirectory {
-      @Override
-      protected final void configure() {
-        addStyleSheet("foo.css", css0);
-      }
-    }
-
     run(new AbstractSite() {
       @Override
       protected final void configure() {
-        addDirectory(new Root());
+        addStyleSheet("foo.css", css0);
       }
     });
 
@@ -163,19 +144,12 @@ public class SiteDirectoryTest {
       }
     };
 
-    class Root extends SiteDirectory {
-      @Override
-      protected final void configure() {
-        putInstance(new Frag());
-
-        addPage("index.html", page);
-      }
-    }
-
     run(new AbstractSite() {
       @Override
       protected final void configure() {
-        addDirectory(new Root());
+        addFragment(new Frag());
+
+        addPage("index.html", page);
       }
     });
 

@@ -17,17 +17,11 @@ package br.com.objectos.www.objectos.css;
 
 import br.com.objectos.css.Css;
 import br.com.objectos.css.select.ClassSelector;
-import br.com.objectos.css.sheet.StyleSheet;
 import objectos.ssg.SiteStyleSheet;
 
-final class Container extends SiteStyleSheet implements StyleSheetProvider {
+final class Container extends SiteStyleSheet {
 
   static final ClassSelector CONTAINER = Css.dot("container");
-
-  @Override
-  public final StyleSheet get() {
-    return this;
-  }
 
   @Override
   protected final void definition() {

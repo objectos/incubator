@@ -24,8 +24,6 @@ public final class CssDirectory extends SiteDirectory {
 
   @Override
   protected void configure() {
-    putInstance(new Container());
-
     addStyleSheet("styles.css", new Styles());
   }
 

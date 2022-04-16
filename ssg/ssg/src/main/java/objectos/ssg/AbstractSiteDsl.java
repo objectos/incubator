@@ -26,6 +26,7 @@ import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
+import java.util.function.Supplier;
 import java.util.stream.Stream;
 import objectos.ssg.stage.SiteRenderable;
 import objectos.ssg.stage.SiteResource;
@@ -43,23 +44,25 @@ public abstract class AbstractSiteDsl implements SiteDsl, SiteComponent.Context 
   protected AbstractSiteDsl() {}
 
   @Override
-  public final void addDirectory(SiteDirectory directory) {
-    Checks.checkNotNull(directory, "directory == null");
-
-    addDirectory0("", directory);
-  }
-
-  @Override
   public final void addDirectory(String name, SiteDirectory directory) {
-    Checks.checkNotNull(name, "name == null");
-    Checks.checkNotNull(directory, "directory == null");
-
-    addDirectory0(name, directory);
+    addDirectory0(name, directory, this::hrefBuilder);
   }
 
   @Override
   public final void addFragment(SiteFragment fragment) {
     registerComponent(fragment);
+  }
+
+  @Override
+  public final void addPage(String fileName, SitePage page) {
+    addPage0(fileName, page, this::hrefBuilder);
+  }
+
+  @Override
+  public final void addResource(Class<?> contextClass, String resourceName) {
+    Checks.checkNotNull(resourceName, "resourceName == null");
+
+    addResource0(resourceName, contextClass, resourceName, null, this::hrefBuilder);
   }
 
   public final void addSite(Site site) throws IOException {
@@ -70,6 +73,11 @@ public abstract class AbstractSiteDsl implements SiteDsl, SiteComponent.Context 
     for (Site site : sites) {
       site.acceptSiteDsl(this);
     }
+  }
+
+  @Override
+  public final void addStyleSheet(String fileName, SiteStyleSheet sheet) {
+    addStyleSheet0(fileName, sheet, this::hrefBuilder);
   }
 
   @SuppressWarnings("unchecked")
@@ -165,6 +173,64 @@ public abstract class AbstractSiteDsl implements SiteDsl, SiteComponent.Context 
     return href;
   }
 
+  final void addDirectory0(
+      String name, SiteDirectory directory, Supplier<StringBuilder> supplier) {
+    Checks.checkNotNull(name, "name == null");
+    Checks.checkArgument(!name.isEmpty(), "name cannot be empty");
+    Checks.checkNotNull(directory, "directory == null");
+
+    validateName(name);
+
+    StringBuilder hrefBuilder;
+    hrefBuilder = supplier.get();
+
+    hrefBuilder.append(name);
+
+    hrefBuilder.append('/');
+
+    String href;
+    href = hrefBuilder.toString();
+
+    ThisDirectory d;
+    d = new ThisDirectory(directory, href);
+
+    d.configure();
+  }
+
+  final void addPage0(String fileName, SitePage page, Supplier<StringBuilder> supplier) {
+    Checks.checkNotNull(fileName, "fileName == null");
+    Checks.checkNotNull(page, "page == null");
+
+    registerRenderable(page);
+
+    putHref(page, fileName, supplier);
+  }
+
+  final void addResource0(
+      String path, Class<?> contextClass, String resourceName, MediaType mediaType,
+      Supplier<StringBuilder> supplier) {
+    String href;
+    href = safeHref(path, supplier);
+
+    URL url;
+    url = url(contextClass, resourceName);
+
+    SiteResource resource;
+    resource = new SiteResource(href, url, mediaType);
+
+    renderables.add(resource);
+  }
+
+  final void addStyleSheet0(String fileName, SiteStyleSheet sheet,
+      Supplier<StringBuilder> supplier) {
+    Checks.checkNotNull(fileName, "fileName == null");
+    Checks.checkNotNull(sheet, "sheet == null");
+
+    registerRenderable(sheet);
+
+    putHref(sheet, fileName, supplier);
+  }
+
   final StringBuilder hrefBuilder() {
     stringBuilder.setLength(0);
 
@@ -233,32 +299,54 @@ public abstract class AbstractSiteDsl implements SiteDsl, SiteComponent.Context 
     // TODO: implement me
   }
 
-  private void addDirectory0(String name, SiteDirectory directory) {
-    StringBuilder hrefBuilder;
-    hrefBuilder = hrefBuilder();
-
-    validateName(name);
-
-    hrefBuilder.append(name);
-
-    if (!name.isEmpty()) {
-      hrefBuilder.append('/');
-    }
-
-    String href;
-    href = hrefBuilder.toString();
-
-    ThisDirectory d;
-    d = new ThisDirectory(directory, href);
-
-    d.configure();
-  }
-
   private String getHref(Object o) {
     Class<?> key;
     key = o.getClass();
 
     return getHref0(key);
+  }
+
+  private void putHref(Object o, String fileName, Supplier<StringBuilder> supplier) {
+    String href;
+    href = safeHref(fileName, supplier);
+
+    Class<?> key;
+    key = o.getClass();
+
+    hrefMap.put(key, href);
+  }
+
+  private String safeHref(String fileName, Supplier<StringBuilder> supplier) {
+    validateName(fileName);
+
+    StringBuilder hrefBuilder;
+    hrefBuilder = supplier.get();
+
+    hrefBuilder.append(fileName);
+
+    return hrefBuilder.toString();
+  }
+
+  private URL url(Class<?> clazz, String resourceName) {
+    URL url;
+    url = clazz.getResource(resourceName);
+
+    if (url == null) {
+      String msg;
+      msg = """
+            Could not find resource named:
+
+                %s
+
+            relative to class:
+
+                %s
+            """.formatted(resourceName, clazz);
+
+      throw new IllegalArgumentException(msg);
+    }
+
+    return url;
   }
 
   private class ThisDirectory implements SiteDirectory.Configuration {
@@ -274,18 +362,7 @@ public abstract class AbstractSiteDsl implements SiteDsl, SiteComponent.Context 
 
     @Override
     public final void addDirectory(String name, SiteDirectory directory) {
-      Checks.checkNotNull(name, "name == null");
-      Checks.checkNotNull(directory, "directory == null");
-
-      validateName(name);
-
-      String href;
-      href = directoryHref + name + "/";
-
-      ThisDirectory d;
-      d = new ThisDirectory(directory, href);
-
-      d.configure();
+      addDirectory0(name, directory, this::hrefBuilder);
     }
 
     @Override
@@ -295,12 +372,7 @@ public abstract class AbstractSiteDsl implements SiteDsl, SiteComponent.Context 
 
     @Override
     public final void addPage(String fileName, SitePage page) {
-      Checks.checkNotNull(fileName, "fileName == null");
-      Checks.checkNotNull(page, "page == null");
-
-      registerRenderable(page);
-
-      putHref(page, fileName);
+      addPage0(fileName, page, this::hrefBuilder);
     }
 
     @Override
@@ -313,7 +385,7 @@ public abstract class AbstractSiteDsl implements SiteDsl, SiteComponent.Context 
       Checks.checkNotNull(path, "path == null");
       Checks.checkNotNull(resourceName, "resourceName == null");
 
-      addResource0(path, resourceName, null);
+      addResource0(path, directory.getClass(), resourceName, null, this::hrefBuilder);
     }
 
     @Override
@@ -322,75 +394,24 @@ public abstract class AbstractSiteDsl implements SiteDsl, SiteComponent.Context 
       Checks.checkNotNull(resourceName, "resourceName == null");
       Checks.checkNotNull(mediaType, "mediaType == null");
 
-      addResource0(path, resourceName, mediaType);
+      addResource0(path, directory.getClass(), resourceName, mediaType, this::hrefBuilder);
     }
 
     @Override
     public final void addStyleSheet(String fileName, SiteStyleSheet sheet) {
-      Checks.checkNotNull(fileName, "fileName == null");
-      Checks.checkNotNull(sheet, "sheet == null");
-
-      registerRenderable(sheet);
-
-      putHref(sheet, fileName);
+      addStyleSheet0(fileName, sheet, this::hrefBuilder);
     }
 
     final void configure() {
       directory.configure(this);
     }
 
-    private void addResource0(String path, String resourceName, MediaType mediaType) {
-      String href;
-      href = safeHref(path);
+    private StringBuilder hrefBuilder() {
+      stringBuilder.setLength(0);
 
-      URL url;
-      url = url(resourceName);
+      stringBuilder.append(directoryHref);
 
-      SiteResource resource;
-      resource = new SiteResource(href, url, mediaType);
-
-      renderables.add(resource);
-    }
-
-    private void putHref(Object o, String name) {
-      String href;
-      href = safeHref(name);
-
-      Class<?> key;
-      key = o.getClass();
-
-      hrefMap.put(key, href);
-    }
-
-    private String safeHref(String name) {
-      validateName(name);
-
-      return directoryHref + name;
-    }
-
-    private URL url(String resourceName) {
-      Class<? extends SiteDirectory> clazz;
-      clazz = directory.getClass();
-
-      URL url;
-      url = clazz.getResource(resourceName);
-
-      if (url == null) {
-        String msg;
-        msg = """
-              Could not find resource named:
-
-                  %s
-
-              relative to class:
-
-                  %s
-              """.formatted(resourceName, clazz);
-
-        throw new IllegalArgumentException(msg);
-      }
-
-      return url;
+      return stringBuilder;
     }
   }
 

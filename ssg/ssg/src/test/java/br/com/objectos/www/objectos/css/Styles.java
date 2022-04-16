@@ -15,8 +15,6 @@
  */
 package br.com.objectos.www.objectos.css;
 
-import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.css.sheet.StyleSheet;
 import objectos.ssg.SiteStyleSheet;
 
 final class Styles extends SiteStyleSheet {
@@ -28,15 +26,7 @@ final class Styles extends SiteStyleSheet {
       fontFamily("MyCustomFont")
     );
 
-    ImmutableList<StyleSheetProvider> providers;
-    providers = getComponentsByType(StyleSheetProvider.class);
-
-    for (StyleSheetProvider provider : providers) {
-      StyleSheet sheet;
-      sheet = provider.get();
-
-      install(sheet);
-    }
+    install(new Container());
   }
 
 }

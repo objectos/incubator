@@ -34,16 +34,24 @@ public abstract class AbstractSite implements Site {
     }
   }
 
-  protected final void addDirectory(SiteDirectory directory) {
-    dsl().addDirectory(directory);
-  }
-
   protected final void addDirectory(String path, SiteDirectory directory) {
     dsl().addDirectory(path, directory);
   }
 
   protected final void addFragment(SiteFragment fragment) {
     dsl().addFragment(fragment);
+  }
+
+  protected final void addPage(String fileName, SitePage page) {
+    dsl().addPage(fileName, page);
+  }
+
+  protected final void addResource(String resourceName) {
+    dsl().addResource(getClass(), resourceName);
+  }
+
+  protected final void addStyleSheet(String fileName, SiteStyleSheet sheet) {
+    dsl().addStyleSheet(fileName, sheet);
   }
 
   protected abstract void configure();

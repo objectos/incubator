@@ -15,6 +15,8 @@
  */
 package br.com.objectos.www.objectos;
 
+import br.com.objectos.www.objectos.blog.BlogDirectory;
+import br.com.objectos.www.objectos.css.CssDirectory;
 import objectos.ssg.AbstractSite;
 
 public final class ObjectosSite extends AbstractSite {
@@ -23,7 +25,14 @@ public final class ObjectosSite extends AbstractSite {
   protected final void configure() {
     addFragment(new Navbar());
 
-    addDirectory(new RootDirectory());
+    addResource("foo.txt");
+
+    addResource("v1/bar.html");
+
+    addPage("index.html", new Index());
+
+    addDirectory("blog", new BlogDirectory());
+    addDirectory("css", new CssDirectory());
   }
 
 }
