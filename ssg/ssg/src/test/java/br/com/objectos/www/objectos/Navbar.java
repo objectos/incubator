@@ -22,7 +22,7 @@ import objectos.ssg.SiteFragment;
 
 public class Navbar extends SiteFragment {
 
-  private ImmutableList<NavbarPage> pages;
+  private ImmutableList<NavbarPage> pages = ImmutableList.of();
 
   @Override
   protected final void definition() {

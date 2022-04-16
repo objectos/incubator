@@ -33,12 +33,14 @@ public class DevelopmentStageTest {
 
     stage.addSite(new ObjectosSite());
 
+    stage.render();
+
     int port = 7777;
 
     ImmutableHttpServer server;
     server = new JettyHttpServerBuilder()
-      .port(port)
-      .buildImmutable(stage);
+        .port(port)
+        .buildImmutable(stage);
 
     HttpTesting testing;
     testing = HttpTesting.at(port);
@@ -67,8 +69,6 @@ public class DevelopmentStageTest {
           "<body>",
           "<nav>",
           "<ul>",
-          "<li><a href=\"/index.html\">Home</a></li>",
-          "<li><a href=\"/blog/index.html\">Blog</a></li>",
           "</ul>",
           "</nav>",
           "<ul><li><a href=\"/index.html\"></a></li></ul>",

@@ -36,6 +36,8 @@ public class ProductionStageTest extends AbstractSiteProdTest {
 
     stage.addSite(new ObjectosSite());
 
+    stage.render();
+
     assertEquals(
       Read.string(target.getRegularFile("index.html"), Charsets.utf8()),
       String.join("",
@@ -46,8 +48,6 @@ public class ProductionStageTest extends AbstractSiteProdTest {
         "<body>",
         "<nav>",
         "<ul>",
-        "<li><a href=\"/index.html\">Home</a></li>",
-        "<li><a href=\"/blog/index.html\">Blog</a></li>",
         "</ul>",
         "</nav>",
         "<ul><li><a href=\"/index.html\"></a></li></ul>",
