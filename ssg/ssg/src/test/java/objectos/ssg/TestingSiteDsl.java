@@ -15,45 +15,24 @@
  */
 package objectos.ssg;
 
-import br.com.objectos.core.io.InputStreamSource;
 import br.com.objectos.css.sheet.StyleSheet;
 import br.com.objectos.html.tmpl.Template;
 import br.com.objectos.http.media.MediaType;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.IdentityHashMap;
 import java.util.Map;
+import objectos.ssg.stage.SiteResource;
 
 class TestingSiteDsl extends AbstractSiteDsl {
 
   private final Map<String, MediaType> mediaTypes = new HashMap<>();
 
-  private final Map<String, InputStreamSource> resources = new HashMap<>();
+  private final Map<String, URL> resources = new HashMap<>();
 
   private final Map<StyleSheet, String> sheetPaths = new IdentityHashMap<>();
 
   private final Map<Template, String> templatePaths = new IdentityHashMap<>();
-
-  @Override
-  public final void addResource(String fullPath, InputStreamSource resource) {
-    addResource(fullPath, resource, null);
-  }
-
-  @Override
-  public final void addResource(String fullPath, InputStreamSource resource, MediaType mediaType) {
-    resources.put(fullPath, resource);
-
-    mediaTypes.put(fullPath, mediaType);
-  }
-
-  @Override
-  public final void addStyleSheet(String fullPath, StyleSheet styleSheet) {
-    sheetPaths.put(styleSheet, fullPath);
-  }
-
-  @Override
-  public final void addTemplate(String fullPath, Template template) {
-    templatePaths.put(template, fullPath);
-  }
 
   public final void clear() {
     mediaTypes.clear();
@@ -74,7 +53,30 @@ class TestingSiteDsl extends AbstractSiteDsl {
     return mediaTypes.get(path);
   }
 
-  public final InputStreamSource resource(String path) {
+  @Override
+  public void renderSitePage(String fullPath, SitePage page) {
+    templatePaths.put(page, fullPath);
+  }
+
+  @Override
+  public final void renderSiteResource(SiteResource resource) {
+    String fullPath;
+    fullPath = resource.href();
+
+    resources.put(fullPath, resource.url());
+
+    MediaType mediaType;
+    mediaType = resource.mediaType();
+
+    mediaTypes.put(fullPath, mediaType);
+  }
+
+  @Override
+  public final void renderSiteStyleSheet(String fullPath, SiteStyleSheet sheet) {
+    sheetPaths.put(sheet, fullPath);
+  }
+
+  public final URL resource(String path) {
     return resources.get(path);
   }
 

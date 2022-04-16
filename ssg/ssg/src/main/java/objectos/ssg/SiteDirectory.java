@@ -15,7 +15,6 @@
  */
 package objectos.ssg;
 
-import br.com.objectos.core.io.InputStreamSource;
 import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.core.object.Checks;
 import br.com.objectos.http.media.MediaType;
@@ -56,12 +55,14 @@ public abstract class SiteDirectory {
     cfg().addResource(resourceName);
   }
 
-  protected final void addResource(String path, InputStreamSource resource) {
-    cfg().addResource(path, resource);
+  @Deprecated
+  protected final void addResource(String path, String resourceName) {
+    cfg().addResource(path, resourceName);
   }
 
-  protected final void addResource(String path, InputStreamSource resource, MediaType mediaType) {
-    cfg().addResource(path, resource, mediaType);
+  @Deprecated
+  protected final void addResource(String path, String resourceName, MediaType mediaType) {
+    cfg().addResource(path, resourceName, mediaType);
   }
 
   protected final void addStyleSheet(String fileName, SiteStyleSheet sheet) {
@@ -79,7 +80,7 @@ public abstract class SiteDirectory {
   }
 
   protected final void putInstance(Object value) {
-    dsl.put(value);
+    throw new UnsupportedOperationException("Implement me");
   }
 
   final void acceptSiteDsl(AbstractSiteDsl dsl) {
@@ -90,10 +91,6 @@ public abstract class SiteDirectory {
     } finally {
       this.dsl = null;
     }
-  }
-
-  final void addTemplate(String href, SitePage sitePage) {
-    dsl.addTemplate(href, sitePage);
   }
 
   private Configuration cfg() {
@@ -108,9 +105,9 @@ public abstract class SiteDirectory {
 
     void addResource(String resourceName);
 
-    void addResource(String path, InputStreamSource resource);
+    void addResource(String path, String resourceName);
 
-    void addResource(String path, InputStreamSource resource, MediaType mediaType);
+    void addResource(String path, String resourceName, MediaType mediaType);
 
     void addStyleSheet(String fileName, SiteStyleSheet sheet);
 

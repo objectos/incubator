@@ -13,9 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package objectos.ssg;
+package objectos.ssg.stage;
 
-final class Page1 extends SitePage {
-  @Override
-  protected final void definition() {}
+import objectos.ssg.AbstractSiteDsl;
+
+public interface SiteRenderable {
+
+  void render(AbstractSiteDsl dsl);
+
 }

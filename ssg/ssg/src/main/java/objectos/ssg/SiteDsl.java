@@ -15,25 +15,13 @@
  */
 package objectos.ssg;
 
-import br.com.objectos.core.io.InputStreamSource;
 import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.css.sheet.StyleSheet;
-import br.com.objectos.html.tmpl.Template;
-import br.com.objectos.http.media.MediaType;
 
 public interface SiteDsl {
 
   void addDirectory(SiteDirectory directory);
 
   void addDirectory(String path, SiteDirectory directory);
-
-  void addResource(String fullPath, InputStreamSource resource);
-
-  void addResource(String fullPath, InputStreamSource resource, MediaType mediaType);
-
-  void addStyleSheet(String fullPath, StyleSheet styleSheet);
-
-  void addTemplate(String fullPath, Template template);
 
   String getBaseHref();
 

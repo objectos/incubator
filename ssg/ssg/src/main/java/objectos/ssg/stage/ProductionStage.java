@@ -16,19 +16,17 @@
 package objectos.ssg.stage;
 
 import br.com.objectos.core.io.Charsets;
-import br.com.objectos.core.io.InputStreamSource;
 import br.com.objectos.core.io.Read;
 import br.com.objectos.core.io.Write;
 import br.com.objectos.core.object.Checks;
-import br.com.objectos.css.sheet.StyleSheet;
 import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.RegularFile;
-import br.com.objectos.html.tmpl.Template;
-import br.com.objectos.http.media.MediaType;
 import br.com.objectos.http.path.Location;
 import java.io.IOException;
 import java.io.UncheckedIOException;
 import objectos.ssg.AbstractSiteDsl;
+import objectos.ssg.SitePage;
+import objectos.ssg.SiteStyleSheet;
 
 public class ProductionStage extends AbstractSiteDsl {
 
@@ -43,15 +41,27 @@ public class ProductionStage extends AbstractSiteDsl {
   }
 
   @Override
-  public final void addResource(String fullPath, InputStreamSource resource) {
-    addResource(fullPath, resource, null);
+  public final String getBaseHref() {
+    return baseHref;
   }
 
   @Override
-  public final void addResource(String fullPath, InputStreamSource resource, MediaType mediaType) {
+  public final boolean isProduction() {
+    return true;
+  }
+
+  @Override
+  public final void renderSitePage(String fullPath, SitePage page) {
+    write(fullPath, page.printMinified());
+  }
+
+  @Override
+  public final void renderSiteResource(SiteResource resource) {
     try {
       byte[] data;
       data = Read.byteArray(resource);
+
+      String fullPath = resource.href();
 
       Location location;
       location = Location.parse(fullPath);
@@ -68,23 +78,8 @@ public class ProductionStage extends AbstractSiteDsl {
   }
 
   @Override
-  public final void addStyleSheet(String fullPath, StyleSheet styleSheet) {
-    write(fullPath, styleSheet.printMinified());
-  }
-
-  @Override
-  public final void addTemplate(String fullPath, Template template) {
-    write(fullPath, template.printMinified());
-  }
-
-  @Override
-  public final String getBaseHref() {
-    return baseHref;
-  }
-
-  @Override
-  public final boolean isProduction() {
-    return true;
+  public final void renderSiteStyleSheet(String fullPath, SiteStyleSheet sheet) {
+    write(fullPath, sheet.printMinified());
   }
 
   private void write(String fullPath, String text) {

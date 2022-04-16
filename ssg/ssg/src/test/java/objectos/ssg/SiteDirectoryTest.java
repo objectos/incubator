@@ -17,8 +17,9 @@ package objectos.ssg;
 
 import static org.testng.Assert.assertEquals;
 
-import br.com.objectos.core.io.Resource;
+import br.com.objectos.http.media.ImageType;
 import br.com.objectos.http.media.TextType;
+import java.net.URL;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -71,12 +72,8 @@ public class SiteDirectoryTest {
       @Override
       protected final void configure() {
         addResource("5x2.jpg");
-        addResource("sub/foo.jpg", r("5x2.jpg"));
-        addResource("sub/foo.txt", r("5x2.jpg"), TextType.PLAIN);
-      }
-
-      private Resource r(String resourceName) {
-        return Resource.getResource(getClass(), resourceName);
+        addResource("sub/foo.jpg", "5x2.jpg");
+        addResource("sub/foo.txt", "5x2.jpg", TextType.PLAIN);
       }
     }
 
@@ -87,14 +84,14 @@ public class SiteDirectoryTest {
       }
     });
 
-    Resource r;
-    r = Resource.getResource(getClass(), "5x2.jpg");
+    URL r;
+    r = getClass().getResource("5x2.jpg");
 
     assertEquals(dsl.resource("/5x2.jpg"), r);
-    assertEquals(dsl.mediaType("/5x2.jpg"), null);
+    assertEquals(dsl.mediaType("/5x2.jpg"), ImageType.JPEG);
 
     assertEquals(dsl.resource("/sub/foo.jpg"), r);
-    assertEquals(dsl.mediaType("/sub/foo.jpg"), null);
+    assertEquals(dsl.mediaType("/sub/foo.jpg"), ImageType.JPEG);
 
     assertEquals(dsl.resource("/sub/foo.txt"), r);
     assertEquals(dsl.mediaType("/sub/foo.txt"), TextType.PLAIN);

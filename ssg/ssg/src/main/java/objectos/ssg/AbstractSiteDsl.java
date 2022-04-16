@@ -15,30 +15,23 @@
  */
 package objectos.ssg;
 
-import br.com.objectos.core.io.InputStreamSource;
-import br.com.objectos.core.io.Resource;
 import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.core.list.MutableList;
-import br.com.objectos.core.map.MutableMap;
 import br.com.objectos.core.object.Checks;
-import br.com.objectos.css.sheet.StyleSheet;
-import br.com.objectos.html.tmpl.Template;
 import br.com.objectos.http.media.MediaType;
 import java.io.IOException;
+import java.net.URL;
 import java.util.IdentityHashMap;
-import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
-import java.util.NoSuchElementException;
-import java.util.Set;
+import objectos.ssg.stage.SiteRenderable;
+import objectos.ssg.stage.SiteResource;
 
 public abstract class AbstractSiteDsl implements SiteDsl {
 
-  private final Map<Class<?>, ImmutableList<?>> byTypeMap = MutableMap.create();
-
   private final Map<Class<?>, String> hrefMap = new IdentityHashMap<>();
 
-  private final Map<Class<?>, Object> objectMap = new LinkedHashMap<>();
+  private final List<SiteRenderable> renderables = new MutableList<>();
 
   private final StringBuilder stringBuilder = new StringBuilder();
 
@@ -71,41 +64,12 @@ public abstract class AbstractSiteDsl implements SiteDsl {
 
   @Override
   public final <T> T getInstance(Class<? extends T> key) {
-    if (objectMap.containsKey(key)) {
-      Object instance;
-      instance = objectMap.get(key);
-
-      return key.cast(instance);
-    } else {
-      String name;
-      name = key.getCanonicalName();
-
-      throw new NoSuchElementException(name);
-    }
+    throw new UnsupportedOperationException("Implement me");
   }
 
   @Override
-  @SuppressWarnings("unchecked")
   public final <T> ImmutableList<T> getInstancesByType(Class<? extends T> type) {
-    ImmutableList<?> result;
-    result = byTypeMap.get(type);
-
-    if (result == null) {
-      MutableList<Object> list;
-      list = new MutableList<>();
-
-      for (Object v : objectMap.values()) {
-        if (type.isInstance(v)) {
-          list.add(v);
-        }
-      }
-
-      result = list.toImmutableList();
-
-      byTypeMap.put(type, result);
-    }
-
-    return (ImmutableList<T>) result;
+    throw new UnsupportedOperationException("Implement me");
   }
 
   @Override
@@ -120,35 +84,16 @@ public abstract class AbstractSiteDsl implements SiteDsl {
 
   @Override
   public final void render() {
-    Set<Entry<Class<?>, Object>> entries = objectMap.entrySet();
-
-    for (Entry<Class<?>, Object> entry : entries) {
-      Class<?> key;
-      key = entry.getKey();
-
-      String href;
-      href = hrefMap.get(key);
-
-      if (href == null) {
-        continue;
-      }
-
-      Object v;
-      v = entry.getValue();
-
-      if (v instanceof Template t) {
-        addTemplate(href, t);
-      }
-
-      else if (v instanceof StyleSheet s) {
-        addStyleSheet(href, s);
-      }
-
-      else {
-        throw new IllegalArgumentException("Unknown type " + key);
-      }
+    for (SiteRenderable renderable : renderables) {
+      renderable.render(this);
     }
   }
+
+  public abstract void renderSitePage(String fullPath, SitePage page);
+
+  public abstract void renderSiteResource(SiteResource resource);
+
+  public abstract void renderSiteStyleSheet(String fullPath, SiteStyleSheet sheet);
 
   final StringBuilder hrefBuilder() {
     stringBuilder.setLength(0);
@@ -163,29 +108,18 @@ public abstract class AbstractSiteDsl implements SiteDsl {
     return stringBuilder;
   }
 
-  final void put(Class<? extends Object> key, Object value) {
-    Checks.checkNotNull(value, "value == null");
+  final void renderSitePage(SitePage page) {
+    String fullPath;
+    fullPath = getHref(page);
 
-    if (objectMap.containsKey(key)) {
-      throw new IllegalArgumentException(
-        "An object of type " + key + " was already registered.");
-    }
-
-    if (value instanceof SiteFragment) {
-      SiteFragment f;
-      f = (SiteFragment) value;
-
-      f.setSite(this);
-    }
-
-    objectMap.put(key, value);
+    renderSitePage(fullPath, page);
   }
 
-  final void put(Object value) {
-    Class<? extends Object> key;
-    key = value.getClass();
+  final void renderSiteStyleSheet(SiteStyleSheet sheet) {
+    String fullPath;
+    fullPath = getHref(sheet);
 
-    put(key, value);
+    renderSiteStyleSheet(fullPath, sheet);
   }
 
   final void validateName(String name) {
@@ -193,8 +127,6 @@ public abstract class AbstractSiteDsl implements SiteDsl {
   }
 
   private void addDirectory0(String name, SiteDirectory directory) {
-    put(directory);
-
     StringBuilder hrefBuilder;
     hrefBuilder = hrefBuilder();
 
@@ -215,6 +147,27 @@ public abstract class AbstractSiteDsl implements SiteDsl {
     d.configure();
   }
 
+  private String getHref(Object o) {
+    Class<?> key;
+    key = o.getClass();
+
+    String href;
+    href = hrefMap.get(key);
+
+    if (href == null) {
+      String msg;
+      msg = """
+            href value not found for object of type:
+
+               %s
+            """.formatted(key);
+
+      throw new IllegalArgumentException(msg);
+    }
+
+    return href;
+  }
+
   private class ThisDirectory implements SiteDirectory.Configuration {
     private final SiteDirectory directory;
 
@@ -231,40 +184,31 @@ public abstract class AbstractSiteDsl implements SiteDsl {
       Checks.checkNotNull(fileName, "fileName == null");
       Checks.checkNotNull(page, "page == null");
 
-      put(page);
+      renderables.add(page);
 
       putHref(page, fileName);
     }
 
     @Override
     public final void addResource(String resourceName) {
-      Class<? extends SiteDirectory> directoryClass;
-      directoryClass = directory.getClass();
-
-      Resource resource;
-      resource = Resource.getResource(directoryClass, resourceName);
-
-      addResource0(resourceName, resource);
+      addResource(resourceName, resourceName);
     }
 
     @Override
-    public final void addResource(String path, InputStreamSource resource) {
+    public final void addResource(String path, String resourceName) {
       Checks.checkNotNull(path, "path == null");
-      Checks.checkNotNull(resource, "resource == null");
+      Checks.checkNotNull(resourceName, "resourceName == null");
 
-      addResource0(path, resource);
+      addResource0(path, resourceName, null);
     }
 
     @Override
-    public final void addResource(String path, InputStreamSource resource, MediaType mediaType) {
+    public final void addResource(String path, String resourceName, MediaType mediaType) {
       Checks.checkNotNull(path, "path == null");
-      Checks.checkNotNull(resource, "resource == null");
+      Checks.checkNotNull(resourceName, "resourceName == null");
       Checks.checkNotNull(mediaType, "mediaType == null");
 
-      String href;
-      href = safeHref(path);
-
-      AbstractSiteDsl.this.addResource(href, resource, mediaType);
+      addResource0(path, resourceName, mediaType);
     }
 
     @Override
@@ -272,27 +216,33 @@ public abstract class AbstractSiteDsl implements SiteDsl {
       Checks.checkNotNull(fileName, "fileName == null");
       Checks.checkNotNull(sheet, "sheet == null");
 
-      put(sheet);
+      renderables.add(sheet);
 
       putHref(sheet, fileName);
-    }
-
-    protected void addResource0(String path, InputStreamSource resource) {
-      String href;
-      href = safeHref(path);
-
-      AbstractSiteDsl.this.addResource(href, resource);
     }
 
     final void configure() {
       directory.configure(this);
     }
 
-    private void putHref(HasHref o, String name) {
+    private void addResource0(String path, String resourceName, MediaType mediaType) {
+      String href;
+      href = safeHref(path);
+
+      URL url;
+      url = url(resourceName);
+
+      SiteResource resource;
+      resource = new SiteResource(href, url, mediaType);
+
+      renderables.add(resource);
+    }
+
+    private void putHref(Object o, String name) {
       String href;
       href = safeHref(name);
 
-      Class<? extends HasHref> key;
+      Class<?> key;
       key = o.getClass();
 
       hrefMap.put(key, href);
@@ -302,6 +252,31 @@ public abstract class AbstractSiteDsl implements SiteDsl {
       validateName(name);
 
       return directoryHref + name;
+    }
+
+    private URL url(String resourceName) {
+      Class<? extends SiteDirectory> clazz;
+      clazz = directory.getClass();
+
+      URL url;
+      url = clazz.getResource(resourceName);
+
+      if (url == null) {
+        String msg;
+        msg = """
+              Could not find resource named:
+
+                  %s
+
+              relative to class:
+
+                  %s
+              """.formatted(resourceName, clazz);
+
+        throw new IllegalArgumentException(msg);
+      }
+
+      return url;
     }
   }
 

@@ -34,11 +34,7 @@ public abstract class SiteFragment extends AbstractFragment {
     throw new UnsupportedOperationException("Implement me");
   }
 
-  protected final Href href(Class<? extends HasHref> key) {
-    throw new UnsupportedOperationException("Implement me");
-  }
-
-  protected final Href href(HasHref value) {
+  protected final Href href(Class<?> key) {
     throw new UnsupportedOperationException("Implement me");
   }
 

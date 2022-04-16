@@ -19,10 +19,18 @@ import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.html.attribute.StandardAttributeName.Href;
 import br.com.objectos.html.element.ElementName;
 import br.com.objectos.html.tmpl.AbstractTemplate;
+import objectos.ssg.stage.SiteRenderable;
 
-public abstract class SitePage extends AbstractTemplate implements HasHref {
+public abstract class SitePage extends AbstractTemplate implements SiteRenderable {
 
   private Context context;
+
+  @Override
+  public final void render(AbstractSiteDsl dsl) {
+    dsl.renderSitePage(this);
+  }
+
+  protected void configure() {}
 
   protected final <T> T getInstance(Class<? extends T> key) {
     return context.getInstance(key);
@@ -32,7 +40,7 @@ public abstract class SitePage extends AbstractTemplate implements HasHref {
     return context.getInstancesByType(type);
   }
 
-  protected final Href href(Class<? extends HasHref> key) {
+  protected final Href href(Class<?> key) {
     String value;
     value = context.getHref(key);
 
@@ -43,11 +51,9 @@ public abstract class SitePage extends AbstractTemplate implements HasHref {
     return link(rel("stylesheet"), href(key));
   }
 
-  protected void configure() {}
-
   public static interface Context {
 
-    String getHref(Class<? extends HasHref> key);
+    String getHref(Class<?> key);
 
     <T> T getInstance(Class<? extends T> key);
 

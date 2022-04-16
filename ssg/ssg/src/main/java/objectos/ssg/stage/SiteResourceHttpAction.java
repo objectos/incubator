@@ -17,7 +17,6 @@ package objectos.ssg.stage;
 
 import br.com.objectos.core.io.InputStreamSource;
 import br.com.objectos.core.io.Read;
-import br.com.objectos.http.media.MediaType;
 import br.com.objectos.http.server.Code500InternalServerErrorException;
 import br.com.objectos.http.server.HttpAction;
 import br.com.objectos.http.server.HttpException;
@@ -27,17 +26,13 @@ import br.com.objectos.http.server.ResponseWriter;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Objects;
 
-final class InputStreamSourceHttpAction implements HttpAction, Response {
+final class SiteResourceHttpAction implements HttpAction, Response {
 
-  private final InputStreamSource file;
+  private final SiteResource resource;
 
-  private final MediaType type;
-
-  InputStreamSourceHttpAction(InputStreamSource file, MediaType type) {
-    this.file = file;
-    this.type = type;
+  SiteResourceHttpAction(SiteResource resource) {
+    this.resource = resource;
   }
 
   @Override
@@ -46,13 +41,13 @@ final class InputStreamSourceHttpAction implements HttpAction, Response {
       return true;
     }
 
-    if (!(obj instanceof InputStreamSourceHttpAction)) {
+    if (!(obj instanceof SiteResourceHttpAction)) {
       return false;
     }
 
-    InputStreamSourceHttpAction that = (InputStreamSourceHttpAction) obj;
-    return file.equals(that.file)
-        && type.equals(that.type);
+    SiteResourceHttpAction that = (SiteResourceHttpAction) obj;
+
+    return resource.equals(that.resource);
   }
 
   @Override
@@ -62,20 +57,20 @@ final class InputStreamSourceHttpAction implements HttpAction, Response {
 
   @Override
   public final int hashCode() {
-    return Objects.hash(file, type);
+    return resource.hashCode();
   }
 
   @Override
   public final void writeTo(ResponseWriter writer) throws HttpException {
     try {
       byte[] bytes;
-      bytes = Read.byteArray(file);
+      bytes = Read.byteArray(resource);
 
       writer.sayOk();
 
       writer.contentLength(bytes.length);
 
-      writer.contentType(type);
+      writer.contentType(resource.mediaType());
 
       writer.messageBody(new ByteArrayByteSource(bytes));
 

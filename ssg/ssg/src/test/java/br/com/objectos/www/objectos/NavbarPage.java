@@ -15,9 +15,7 @@
  */
 package br.com.objectos.www.objectos;
 
-import objectos.ssg.HasHref;
-
-public interface NavbarPage extends HasHref {
+public interface NavbarPage {
 
   String navbarTitle();
 

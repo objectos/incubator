@@ -15,12 +15,7 @@
  */
 package objectos.ssg.stage;
 
-import br.com.objectos.core.io.InputStreamSource;
 import br.com.objectos.core.list.MutableList;
-import br.com.objectos.css.sheet.StyleSheet;
-import br.com.objectos.html.tmpl.Template;
-import br.com.objectos.http.media.MediaType;
-import br.com.objectos.http.media.MediaTypes;
 import br.com.objectos.http.path.Location;
 import br.com.objectos.http.path.Route;
 import br.com.objectos.http.server.HttpAction;
@@ -30,6 +25,8 @@ import br.com.objectos.http.server.HttpServerBuilder;
 import br.com.objectos.http.server.Method;
 import br.com.objectos.http.server.MutableHttpServer;
 import objectos.ssg.AbstractSiteDsl;
+import objectos.ssg.SitePage;
+import objectos.ssg.SiteStyleSheet;
 
 public class DevelopmentStage extends AbstractSiteDsl implements HttpModule {
 
@@ -40,38 +37,6 @@ public class DevelopmentStage extends AbstractSiteDsl implements HttpModule {
     for (Route route : routes) {
       dsl.addRoute(route);
     }
-  }
-
-  @Override
-  public final void addResource(String fullPath, InputStreamSource resource) {
-    MediaType mediaType;
-    mediaType = MediaTypes.ofFileName(fullPath);
-
-    addResource(fullPath, resource, mediaType);
-  }
-
-  @Override
-  public final void addResource(String fullPath, InputStreamSource resource, MediaType mediaType) {
-    InputStreamSourceHttpAction action;
-    action = new InputStreamSourceHttpAction(resource, mediaType);
-
-    addHttpAction(fullPath, action);
-  }
-
-  @Override
-  public final void addStyleSheet(String fullPath, StyleSheet styleSheet) {
-    StyleSheetHttpAction action;
-    action = new StyleSheetHttpAction(styleSheet);
-
-    addHttpAction(fullPath, action);
-  }
-
-  @Override
-  public final void addTemplate(String fullPath, Template template) {
-    TemplateHttpAction action;
-    action = new TemplateHttpAction(template);
-
-    addHttpAction(fullPath, action);
   }
 
   public final MutableHttpServer buildHttpServer(HttpServerBuilder factory) {
@@ -86,6 +51,33 @@ public class DevelopmentStage extends AbstractSiteDsl implements HttpModule {
   @Override
   public final boolean isDevelopment() {
     return true;
+  }
+
+  @Override
+  public final void renderSitePage(String fullPath, SitePage page) {
+    TemplateHttpAction action;
+    action = new TemplateHttpAction(page);
+
+    addHttpAction(fullPath, action);
+  }
+
+  @Override
+  public final void renderSiteResource(SiteResource resource) {
+    String fullPath;
+    fullPath = resource.href();
+
+    SiteResourceHttpAction action;
+    action = new SiteResourceHttpAction(resource);
+
+    addHttpAction(fullPath, action);
+  }
+
+  @Override
+  public final void renderSiteStyleSheet(String fullPath, SiteStyleSheet sheet) {
+    StyleSheetHttpAction action;
+    action = new StyleSheetHttpAction(sheet);
+
+    addHttpAction(fullPath, action);
   }
 
   private void addHttpAction(String fullPath, HttpAction action) {

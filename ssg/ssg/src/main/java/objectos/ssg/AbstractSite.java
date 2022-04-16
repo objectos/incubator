@@ -36,11 +36,11 @@ public abstract class AbstractSite implements Site {
   }
 
   protected final void addDirectory(SiteDirectory directory) {
-    dsl.addDirectory(directory);
+    dsl().addDirectory(directory);
   }
 
   protected final void addDirectory(String path, SiteDirectory directory) {
-    dsl.addDirectory(path, directory);
+    dsl().addDirectory(path, directory);
   }
 
   protected abstract void configure();

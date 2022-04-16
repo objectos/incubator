@@ -17,8 +17,14 @@ package objectos.ssg;
 
 import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.css.sheet.AbstractStyleSheet;
+import objectos.ssg.stage.SiteRenderable;
 
-public abstract class SiteStyleSheet extends AbstractStyleSheet implements HasHref {
+public abstract class SiteStyleSheet extends AbstractStyleSheet implements SiteRenderable {
+
+  @Override
+  public final void render(AbstractSiteDsl dsl) {
+    dsl.renderSiteStyleSheet(this);
+  }
 
   protected final <T> T getInstance(Class<? extends T> key) {
     throw new UnsupportedOperationException("Implement me");
