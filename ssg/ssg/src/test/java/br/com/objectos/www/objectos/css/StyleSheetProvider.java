@@ -16,8 +16,9 @@
 package br.com.objectos.www.objectos.css;
 
 import br.com.objectos.css.sheet.StyleSheet;
+import objectos.ssg.SiteComponent;
 
-public interface StyleSheetProvider {
+public interface StyleSheetProvider extends SiteComponent {
 
   StyleSheet get();
 

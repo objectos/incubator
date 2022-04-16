@@ -78,7 +78,9 @@ public abstract class SiteDirectory {
   }
 
   protected final void putInstance(Object value) {
-    throw new UnsupportedOperationException("Implement me");
+    if (value instanceof SiteFragment f) {
+      cfg().addFragment(f);
+    }
   }
 
   private Configuration cfg() {
@@ -90,6 +92,8 @@ public abstract class SiteDirectory {
   public static interface Configuration {
 
     void addDirectory(String name, SiteDirectory directory);
+
+    void addFragment(SiteFragment fragment);
 
     void addPage(String fileName, SitePage page);
 

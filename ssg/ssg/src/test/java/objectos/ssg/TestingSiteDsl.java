@@ -32,21 +32,17 @@ class TestingSiteDsl extends AbstractSiteDsl {
 
   private final Map<StyleSheet, String> sheetPaths = new IdentityHashMap<>();
 
+  private final Map<Template, String> templateHtml = new IdentityHashMap<>();
+
   private final Map<Template, String> templatePaths = new IdentityHashMap<>();
-
-  public final void clear() {
-    mediaTypes.clear();
-
-    resources.clear();
-
-    sheetPaths.clear();
-
-    templatePaths.clear();
-  }
 
   @Override
   public final String getBaseHref() {
     return "";
+  }
+
+  public final String html(SitePage page) {
+    return templateHtml.get(page);
   }
 
   public final MediaType mediaType(String path) {
@@ -55,6 +51,8 @@ class TestingSiteDsl extends AbstractSiteDsl {
 
   @Override
   public void renderSitePage(String fullPath, SitePage page) {
+    templateHtml.put(page, page.printMinified());
+
     templatePaths.put(page, fullPath);
   }
 

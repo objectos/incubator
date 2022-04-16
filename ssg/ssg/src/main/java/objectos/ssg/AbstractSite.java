@@ -15,7 +15,6 @@
  */
 package objectos.ssg;
 
-import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.core.object.Checks;
 
 public abstract class AbstractSite implements Site {
@@ -43,20 +42,16 @@ public abstract class AbstractSite implements Site {
     dsl().addDirectory(path, directory);
   }
 
+  protected final void addFragment(SiteFragment fragment) {
+    dsl().addFragment(fragment);
+  }
+
   protected abstract void configure();
 
   protected final SiteDsl dsl() {
     Checks.checkState(dsl != null, "Please call this under the configure() method");
 
     return dsl;
-  }
-
-  protected final <T> T getInstance(Class<? extends T> key) {
-    return dsl.getInstance(key);
-  }
-
-  protected final <T> ImmutableList<T> getInstancesByType(Class<? extends T> type) {
-    return dsl.getInstancesByType(type);
   }
 
 }

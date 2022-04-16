@@ -15,4 +15,16 @@
  */
 package objectos.ssg;
 
-public interface Component {}
+public interface SiteComponent {
+
+  void configure(Context context);
+
+  void unregister();
+
+  public static interface Context extends SiteComponentLocator {
+
+    String getHref(Class<?> key);
+
+  }
+
+}

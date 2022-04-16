@@ -21,13 +21,18 @@ import br.com.objectos.core.object.Checks;
 import br.com.objectos.http.media.MediaType;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Collection;
 import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
+import java.util.stream.Stream;
 import objectos.ssg.stage.SiteRenderable;
 import objectos.ssg.stage.SiteResource;
 
-public abstract class AbstractSiteDsl implements SiteDsl {
+public abstract class AbstractSiteDsl implements SiteDsl, SiteComponent.Context {
+
+  private final Map<Class<?>, SiteComponent> components = new IdentityHashMap<>();
 
   private final Map<Class<?>, String> hrefMap = new IdentityHashMap<>();
 
@@ -52,6 +57,11 @@ public abstract class AbstractSiteDsl implements SiteDsl {
     addDirectory0(name, directory);
   }
 
+  @Override
+  public final void addFragment(SiteFragment fragment) {
+    registerComponent(fragment);
+  }
+
   public final void addSite(Site site) throws IOException {
     site.acceptSiteDsl(this);
   }
@@ -62,14 +72,49 @@ public abstract class AbstractSiteDsl implements SiteDsl {
     }
   }
 
+  @SuppressWarnings("unchecked")
   @Override
-  public final <T> T getInstance(Class<? extends T> key) {
-    throw new UnsupportedOperationException("Implement me");
+  public final <T extends SiteComponent> T getComponent(Class<? extends T> key) {
+    Checks.checkNotNull(key, "key == null");
+
+    SiteComponent component;
+    component = components.get(key);
+
+    if (component == null) {
+      String msg;
+      msg = """
+            No component was found with key:
+
+                %s
+            """.formatted(key);
+
+      throw new NoSuchElementException(msg);
+    }
+
+    return (T) component;
   }
 
   @Override
-  public final <T> ImmutableList<T> getInstancesByType(Class<? extends T> type) {
-    throw new UnsupportedOperationException("Implement me");
+  public final <T extends SiteComponent>
+      ImmutableList<T> getComponentsByType(Class<? extends T> key) {
+    Collection<SiteComponent> values;
+    values = components.values();
+
+    Stream<SiteComponent> stream;
+    stream = values.stream();
+
+    Stream<SiteComponent> filter;
+    filter = stream.filter(key::isInstance);
+
+    Stream<? extends T> cast;
+    cast = filter.map(key::cast);
+
+    return ImmutableList.copyOf(cast.iterator());
+  }
+
+  @Override
+  public final String getHref(Class<?> key) {
+    return getHref0(key);
   }
 
   @Override
@@ -87,6 +132,13 @@ public abstract class AbstractSiteDsl implements SiteDsl {
     for (SiteRenderable renderable : renderables) {
       renderable.render(this);
     }
+
+    Collection<SiteComponent> values;
+    values = components.values();
+
+    for (SiteComponent component : values) {
+      component.unregister();
+    }
   }
 
   public abstract void renderSitePage(String fullPath, SitePage page);
@@ -94,6 +146,24 @@ public abstract class AbstractSiteDsl implements SiteDsl {
   public abstract void renderSiteResource(SiteResource resource);
 
   public abstract void renderSiteStyleSheet(String fullPath, SiteStyleSheet sheet);
+
+  protected String getHref0(Class<?> key) {
+    String href;
+    href = hrefMap.get(key);
+
+    if (href == null) {
+      String msg;
+      msg = """
+            href value not found for object of type:
+
+               %s
+            """.formatted(key);
+
+      throw new IllegalArgumentException(msg);
+    }
+
+    return href;
+  }
 
   final StringBuilder hrefBuilder() {
     stringBuilder.setLength(0);
@@ -106,6 +176,43 @@ public abstract class AbstractSiteDsl implements SiteDsl {
     stringBuilder.append('/');
 
     return stringBuilder;
+  }
+
+  final void registerComponent(SiteComponent component) {
+    Checks.checkNotNull(component, "component == null");
+
+    Class<? extends SiteComponent> key;
+    key = component.getClass();
+
+    SiteComponent existing;
+    existing = components.get(key);
+
+    if (existing != null) {
+      String msg;
+      msg = """
+            A component was already registered:
+
+                %s
+
+            for the key:
+
+                %s
+            """.formatted(existing, key);
+
+      throw new IllegalArgumentException(msg);
+    }
+
+    components.put(key, component);
+  }
+
+  final void registerRenderable(SiteRenderable renderable) {
+    if (renderable instanceof SiteComponent c) {
+      registerComponent(c);
+
+      c.configure(this);
+    }
+
+    renderables.add(renderable);
   }
 
   final void renderSitePage(SitePage page) {
@@ -151,21 +258,7 @@ public abstract class AbstractSiteDsl implements SiteDsl {
     Class<?> key;
     key = o.getClass();
 
-    String href;
-    href = hrefMap.get(key);
-
-    if (href == null) {
-      String msg;
-      msg = """
-            href value not found for object of type:
-
-               %s
-            """.formatted(key);
-
-      throw new IllegalArgumentException(msg);
-    }
-
-    return href;
+    return getHref0(key);
   }
 
   private class ThisDirectory implements SiteDirectory.Configuration {
@@ -196,11 +289,16 @@ public abstract class AbstractSiteDsl implements SiteDsl {
     }
 
     @Override
+    public final void addFragment(SiteFragment fragment) {
+      AbstractSiteDsl.this.addFragment(fragment);
+    }
+
+    @Override
     public final void addPage(String fileName, SitePage page) {
       Checks.checkNotNull(fileName, "fileName == null");
       Checks.checkNotNull(page, "page == null");
 
-      renderables.add(page);
+      registerRenderable(page);
 
       putHref(page, fileName);
     }
@@ -232,7 +330,7 @@ public abstract class AbstractSiteDsl implements SiteDsl {
       Checks.checkNotNull(fileName, "fileName == null");
       Checks.checkNotNull(sheet, "sheet == null");
 
-      renderables.add(sheet);
+      registerRenderable(sheet);
 
       putHref(sheet, fileName);
     }

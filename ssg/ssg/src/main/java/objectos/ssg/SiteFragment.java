@@ -20,28 +20,42 @@ import br.com.objectos.core.object.Checks;
 import br.com.objectos.html.attribute.StandardAttributeName.Href;
 import br.com.objectos.html.tmpl.AbstractFragment;
 
-public abstract class SiteFragment extends AbstractFragment {
+public abstract class SiteFragment extends AbstractFragment implements SiteComponent {
 
-  private AbstractSiteDsl site;
+  private Context context;
 
   protected SiteFragment() {}
 
-  protected final <T> T getInstance(Class<? extends T> key) {
-    throw new UnsupportedOperationException("Implement me");
+  @Override
+  public final void configure(Context context) {
+    Checks.checkState(this.context == null, "context was already set");
+
+    this.context = Checks.checkNotNull(context, "context == null");
+
+    configure();
   }
 
-  protected final <T> ImmutableList<T> getInstancesByType(Class<? extends T> type) {
-    throw new UnsupportedOperationException("Implement me");
+  @Override
+  public final void unregister() {
+    context = null;
+  }
+
+  protected void configure() {}
+
+  protected final <T extends SiteComponent> T getComponent(Class<? extends T> key) {
+    return context.getComponent(key);
+  }
+
+  protected final <T extends SiteComponent>
+      ImmutableList<T> getComponentsByType(Class<? extends T> type) {
+    return context.getComponentsByType(type);
   }
 
   protected final Href href(Class<?> key) {
-    throw new UnsupportedOperationException("Implement me");
-  }
+    String value;
+    value = context.getHref(key);
 
-  final void setSite(AbstractSiteDsl site) {
-    Checks.checkState(this.site == null, "site was already set");
-
-    this.site = Checks.checkNotNull(site, "site == null");
+    return href(value);
   }
 
 }

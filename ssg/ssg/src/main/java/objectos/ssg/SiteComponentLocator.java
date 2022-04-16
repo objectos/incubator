@@ -13,17 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package br.com.objectos.www.objectos;
+package objectos.ssg;
 
-import objectos.ssg.AbstractSite;
+import br.com.objectos.core.list.ImmutableList;
 
-public final class ObjectosSite extends AbstractSite {
+public interface SiteComponentLocator {
 
-  @Override
-  protected final void configure() {
-    addFragment(new Navbar());
+  <T extends SiteComponent> T getComponent(Class<? extends T> key);
 
-    addDirectory(new RootDirectory());
-  }
+  <T extends SiteComponent> ImmutableList<T> getComponentsByType(Class<? extends T> key);
 
 }

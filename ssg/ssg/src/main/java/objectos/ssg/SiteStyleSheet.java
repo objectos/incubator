@@ -16,22 +16,43 @@
 package objectos.ssg;
 
 import br.com.objectos.core.list.ImmutableList;
+import br.com.objectos.core.object.Checks;
 import br.com.objectos.css.sheet.AbstractStyleSheet;
 import objectos.ssg.stage.SiteRenderable;
 
-public abstract class SiteStyleSheet extends AbstractStyleSheet implements SiteRenderable {
+public abstract class SiteStyleSheet extends AbstractStyleSheet
+    implements SiteComponent, SiteRenderable {
+
+  private Context context;
+
+  @Override
+  public final void configure(Context context) {
+    Checks.checkState(this.context == null, "context was already set");
+
+    this.context = Checks.checkNotNull(context, "context == null");
+
+    configure();
+  }
 
   @Override
   public final void render(AbstractSiteDsl dsl) {
     dsl.renderSiteStyleSheet(this);
   }
 
-  protected final <T> T getInstance(Class<? extends T> key) {
-    throw new UnsupportedOperationException("Implement me");
+  @Override
+  public final void unregister() {
+    context = null;
   }
 
-  protected final <T> ImmutableList<T> getInstancesByType(Class<? extends T> type) {
-    throw new UnsupportedOperationException("Implement me");
+  protected void configure() {}
+
+  protected final <T extends SiteComponent> T getComponent(Class<? extends T> key) {
+    return context.getComponent(key);
+  }
+
+  protected final <T extends SiteComponent>
+      ImmutableList<T> getComponentsByType(Class<? extends T> type) {
+    return context.getComponentsByType(type);
   }
 
 }

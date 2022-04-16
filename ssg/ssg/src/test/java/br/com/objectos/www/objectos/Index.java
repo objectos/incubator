@@ -28,9 +28,14 @@ final class Index extends SitePage implements NavbarPage {
   }
 
   @Override
+  protected final void configure() {
+    navbarTitle = "Home";
+  }
+
+  @Override
   protected final void definition() {
     Navbar navbar;
-    navbar = getInstance(Navbar.class);
+    navbar = getComponent(Navbar.class);
 
     html(
       head(
@@ -43,11 +48,6 @@ final class Index extends SitePage implements NavbarPage {
         )
       )
     );
-  }
-
-  @Override
-  protected final void configure() {
-    navbarTitle = "Home";
   }
 
 }

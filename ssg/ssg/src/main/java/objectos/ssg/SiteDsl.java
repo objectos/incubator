@@ -15,19 +15,15 @@
  */
 package objectos.ssg;
 
-import br.com.objectos.core.list.ImmutableList;
-
-public interface SiteDsl {
+public interface SiteDsl extends SiteComponentLocator {
 
   void addDirectory(SiteDirectory directory);
 
   void addDirectory(String path, SiteDirectory directory);
 
+  void addFragment(SiteFragment fragment);
+
   String getBaseHref();
-
-  <T> T getInstance(Class<? extends T> key);
-
-  <T> ImmutableList<T> getInstancesByType(Class<? extends T> type);
 
   boolean isDevelopment();
 

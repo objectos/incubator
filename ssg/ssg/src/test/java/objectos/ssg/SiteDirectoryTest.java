@@ -27,7 +27,7 @@ public class SiteDirectoryTest {
 
   private final Css0 css0 = new Css0();
 
-  private final TestingSiteDsl dsl = new TestingSiteDsl();
+  private TestingSiteDsl dsl;
 
   private final Page0 page0 = new Page0();
 
@@ -35,7 +35,7 @@ public class SiteDirectoryTest {
 
   @BeforeMethod
   public void _beforeMethod() {
-    dsl.clear();
+    dsl = new TestingSiteDsl();
   }
 
   @Test
@@ -143,6 +143,43 @@ public class SiteDirectoryTest {
     });
 
     assertEquals(dsl.styleSheetPath(css0), "/foo.css");
+  }
+
+  @Test
+  public void store() {
+    class Frag extends SiteFragment {
+      @Override
+      protected final void definition() {
+        p("frag");
+      }
+    }
+
+    var page = new SitePage() {
+      @Override
+      protected final void definition() {
+        var frag = getComponent(Frag.class);
+
+        div(f(frag));
+      }
+    };
+
+    class Root extends SiteDirectory {
+      @Override
+      protected final void configure() {
+        putInstance(new Frag());
+
+        addPage("index.html", page);
+      }
+    }
+
+    run(new AbstractSite() {
+      @Override
+      protected final void configure() {
+        addDirectory(new Root());
+      }
+    });
+
+    assertEquals(dsl.html(page), "<div><p>frag</p></div>");
   }
 
   private void run(AbstractSite site) {

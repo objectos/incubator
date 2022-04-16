@@ -31,8 +31,6 @@ public final class RootDirectory extends SiteDirectory {
 
     addDirectory("blog", new BlogDirectory());
     addDirectory("css", new CssDirectory());
-
-    putInstance(new Navbar());
   }
 
 }

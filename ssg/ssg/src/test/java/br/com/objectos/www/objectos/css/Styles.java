@@ -29,7 +29,7 @@ final class Styles extends SiteStyleSheet {
     );
 
     ImmutableList<StyleSheetProvider> providers;
-    providers = getInstancesByType(StyleSheetProvider.class);
+    providers = getComponentsByType(StyleSheetProvider.class);
 
     for (StyleSheetProvider provider : providers) {
       StyleSheet sheet;
