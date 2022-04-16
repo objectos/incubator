@@ -180,6 +180,22 @@ public abstract class AbstractSiteDsl implements SiteDsl {
     }
 
     @Override
+    public final void addDirectory(String name, SiteDirectory directory) {
+      Checks.checkNotNull(name, "name == null");
+      Checks.checkNotNull(directory, "directory == null");
+
+      validateName(name);
+
+      String href;
+      href = directoryHref + name + "/";
+
+      ThisDirectory d;
+      d = new ThisDirectory(directory, href);
+
+      d.configure();
+    }
+
+    @Override
     public final void addPage(String fileName, SitePage page) {
       Checks.checkNotNull(fileName, "fileName == null");
       Checks.checkNotNull(page, "page == null");

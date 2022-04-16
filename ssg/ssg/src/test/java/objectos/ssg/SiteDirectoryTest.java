@@ -39,6 +39,35 @@ public class SiteDirectoryTest {
   }
 
   @Test
+  public void addDirectory() {
+    class Docs extends SiteDirectory {
+      @Override
+      protected final void configure() {
+        addPage("index.html", page1);
+      }
+    }
+
+    class Root extends SiteDirectory {
+      @Override
+      protected final void configure() {
+        addPage("index.html", page0);
+
+        addDirectory("docs", new Docs());
+      }
+    }
+
+    run(new AbstractSite() {
+      @Override
+      protected final void configure() {
+        addDirectory(new Root());
+      }
+    });
+
+    assertEquals(dsl.templatePath(page0), "/index.html");
+    assertEquals(dsl.templatePath(page1), "/docs/index.html");
+  }
+
+  @Test
   public void addPage() {
     class Root extends SiteDirectory {
       @Override

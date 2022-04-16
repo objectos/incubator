@@ -23,8 +23,6 @@ public abstract class SiteDirectory {
 
   private Configuration cfg;
 
-  private AbstractSiteDsl dsl;
-
   protected SiteDirectory() {}
 
   public final void configure(Configuration configuration) {
@@ -44,7 +42,7 @@ public abstract class SiteDirectory {
   }
 
   protected final void addDirectory(String name, SiteDirectory directory) {
-    throw new UnsupportedOperationException("Implement me");
+    cfg().addDirectory(name, directory);
   }
 
   protected final void addPage(String fileName, SitePage page) {
@@ -72,25 +70,15 @@ public abstract class SiteDirectory {
   protected abstract void configure();
 
   protected final <T> T getInstance(Class<? extends T> key) {
-    return dsl.getInstance(key);
+    throw new UnsupportedOperationException("Implement me");
   }
 
   protected final <T> ImmutableList<T> getInstancesByType(Class<? extends T> type) {
-    return dsl.getInstancesByType(type);
+    throw new UnsupportedOperationException("Implement me");
   }
 
   protected final void putInstance(Object value) {
     throw new UnsupportedOperationException("Implement me");
-  }
-
-  final void acceptSiteDsl(AbstractSiteDsl dsl) {
-    this.dsl = Checks.checkNotNull(dsl, "dsl == null");
-
-    try {
-      configure();
-    } finally {
-      this.dsl = null;
-    }
   }
 
   private Configuration cfg() {
@@ -100,6 +88,8 @@ public abstract class SiteDirectory {
   }
 
   public static interface Configuration {
+
+    void addDirectory(String name, SiteDirectory directory);
 
     void addPage(String fileName, SitePage page);
 
