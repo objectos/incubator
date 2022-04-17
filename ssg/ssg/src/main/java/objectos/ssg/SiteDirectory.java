@@ -45,8 +45,8 @@ public abstract class SiteDirectory {
     cfg().addDirectory(name, directory);
   }
 
-  protected final void addFragment(SiteFragment fragment) {
-    cfg().addFragment(fragment);
+  protected final void addObject(SiteObject object) {
+    cfg().addObject(object);
   }
 
   protected final void addPage(String fileName, SitePage page) {
@@ -92,7 +92,7 @@ public abstract class SiteDirectory {
 
     void addDirectory(String name, SiteDirectory directory);
 
-    void addFragment(SiteFragment fragment);
+    void addObject(SiteObject object);
 
     void addPage(String fileName, SitePage page);
 

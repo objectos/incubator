@@ -223,13 +223,21 @@ public abstract class AbstractSiteDsl implements SiteDsl, SiteComponent.Context 
     }
 
     objects.put(key, object);
+
+    if (object instanceof SiteComponent c) {
+      c.configure(this);
+    }
+
+    if (object instanceof SiteRenderable r) {
+      renderables.add(r);
+    }
   }
 
   final void addPage0(String fileName, SitePage page, Supplier<StringBuilder> supplier) {
     Checks.checkNotNull(fileName, "fileName == null");
     Checks.checkNotNull(page, "page == null");
 
-    registerRenderable(page);
+    addObject0(page);
 
     putHref(page, fileName, supplier);
   }
@@ -254,7 +262,7 @@ public abstract class AbstractSiteDsl implements SiteDsl, SiteComponent.Context 
     Checks.checkNotNull(fileName, "fileName == null");
     Checks.checkNotNull(sheet, "sheet == null");
 
-    registerRenderable(sheet);
+    addObject0(sheet);
 
     putHref(sheet, fileName, supplier);
   }
@@ -270,16 +278,6 @@ public abstract class AbstractSiteDsl implements SiteDsl, SiteComponent.Context 
     stringBuilder.append('/');
 
     return stringBuilder;
-  }
-
-  final void registerRenderable(SiteRenderable renderable) {
-    if (renderable instanceof SiteComponent c) {
-      addObject0(c);
-
-      c.configure(this);
-    }
-
-    renderables.add(renderable);
   }
 
   final void renderSitePage(SitePage page) {
@@ -363,8 +361,8 @@ public abstract class AbstractSiteDsl implements SiteDsl, SiteComponent.Context 
     }
 
     @Override
-    public final void addFragment(SiteFragment fragment) {
-      AbstractSiteDsl.this.addObject(fragment);
+    public final void addObject(SiteObject object) {
+      AbstractSiteDsl.this.addObject(object);
     }
 
     @Override
