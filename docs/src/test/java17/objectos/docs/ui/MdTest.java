@@ -17,8 +17,8 @@ package objectos.docs.ui;
 
 import static org.testng.Assert.assertEquals;
 
-import objectos.docs.style.SyntaxCss;
 import objectos.docs.style.JavaCss;
+import objectos.docs.style.SyntaxCss;
 import objectos.docs.style.XmlCss;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -29,10 +29,9 @@ public class MdTest {
 
   @BeforeClass
   public void _beforeClass() {
-    Locator l;
-    l = this::locator;
+    md = new Md();
 
-    md = new Md(l);
+    md.configure(new NoOpContext());
   }
 
   @Test
@@ -237,10 +236,6 @@ public class MdTest {
           .replace("ryi", XmlCss._SYMBOL.className())
           .replace("bx4", XmlCss._TAG_NAME.className())
     );
-  }
-
-  private <T> T locator(Class<? extends T> key) {
-    return null;
   }
 
   private void test(String source, String expected) {

@@ -22,6 +22,13 @@ import objectos.docs.ui.DocsPage;
 final class Index extends DocsPage {
 
   @Override
+  protected final void configure() {
+    nextPage = IntroDir.INDEX;
+
+    titleText = "Index";
+  }
+
+  @Override
   protected final void main0() {
     article(
       h1("Documentation for Objectos developers"),
@@ -54,13 +61,6 @@ final class Index extends DocsPage {
         )
       )
     );
-  }
-
-  @Override
-  protected final void register() {
-    nextPage = IntroDir.INDEX;
-
-    titleText = "Index";
   }
 
 }

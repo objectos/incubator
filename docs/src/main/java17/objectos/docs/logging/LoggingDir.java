@@ -15,8 +15,8 @@
  */
 package objectos.docs.logging;
 
-import br.com.objectos.be.site.SiteDirectory;
 import objectos.docs.ui.DocsPage;
+import objectos.ssg.SiteDirectory;
 
 public final class LoggingDir extends SiteDirectory {
 

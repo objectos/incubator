@@ -15,12 +15,11 @@
  */
 package objectos.docs.ui;
 
-import br.com.objectos.be.site.HasHref;
 import br.com.objectos.core.io.Charsets;
 import br.com.objectos.core.io.Read;
 import br.com.objectos.core.io.Resource;
 import java.util.Map;
-import java.util.NoSuchElementException;
+import objectos.ssg.SimpleSiteComponent;
 import org.commonmark.node.Link;
 import org.commonmark.node.Node;
 import org.commonmark.parser.Parser;
@@ -29,17 +28,13 @@ import org.commonmark.renderer.html.AttributeProviderContext;
 import org.commonmark.renderer.html.AttributeProviderFactory;
 import org.commonmark.renderer.html.HtmlRenderer;
 
-public final class Md {
-
-  private final Locator locator;
+public final class Md extends SimpleSiteComponent {
 
   private final Parser parser;
 
   private final HtmlRenderer renderer;
 
-  public Md(Locator locator) {
-    this.locator = locator;
-
+  public Md() {
     parser = Parser.builder().build();
 
     renderer = HtmlRenderer.builder()
@@ -103,7 +98,7 @@ public final class Md {
       String className;
       className = href.replace("href:", "objectos.docs.");
 
-      Class<? extends HasHref> pageClass;
+      Class<? extends DocsPage> pageClass;
 
       try {
         Class<? extends HrefChecker> type;
@@ -112,19 +107,12 @@ public final class Md {
         ClassLoader loader;
         loader = type.getClassLoader();
 
-        pageClass = (Class<? extends HasHref>) loader.loadClass(className);
+        pageClass = (Class<? extends DocsPage>) loader.loadClass(className);
       } catch (ClassNotFoundException e) {
         throw new RuntimeException(e);
       }
 
-      HasHref page;
-      page = locator.getInstance(pageClass);
-
-      if (page == null) {
-        throw new NoSuchElementException("No page for: " + pageClass);
-      }
-
-      href = page.getHref();
+      href = getHref(pageClass);
 
       attributes.put("href", href);
     }

@@ -15,17 +15,16 @@
  */
 package objectos.docs.intro;
 
-import br.com.objectos.be.site.HasHref;
-import br.com.objectos.be.site.SiteDirectory;
 import objectos.docs.ui.DocsPage;
+import objectos.ssg.SiteDirectory;
 
 public final class IntroDir extends SiteDirectory {
 
   public static final Class<? extends DocsPage> INDEX = Index.class;
 
-  public static final Class<? extends HasHref> INSTALLATION = Installation.class;
+  public static final Class<? extends DocsPage> INSTALLATION = Installation.class;
 
-  public static final Class<? extends HasHref> OVERVIEW = Overview.class;
+  public static final Class<? extends DocsPage> OVERVIEW = Overview.class;
 
   @Override
   protected final void configure() {

@@ -15,13 +15,36 @@
  */
 package objectos.docs;
 
-import br.com.objectos.be.site.AbstractSite;
+import objectos.docs.intro.IntroDir;
+import objectos.docs.logging.LoggingDir;
+import objectos.docs.ui.Md;
+import objectos.docs.ui.PageSwitcher;
+import objectos.ssg.Site;
+import objectos.ssg.SiteRenderable;
 
-public class DocsSite extends AbstractSite {
+public final class DocsSite extends Site {
+
+  public static final Class<? extends SiteRenderable> INDEX = Index.class;
 
   @Override
   protected final void configure() {
-    addDirectory("docs", new Docs());
+    addObject(new Md());
+    addObject(new StringBuilder());
+
+    Index index;
+    index = new Index();
+
+    addPage("index.html", index);
+
+    addDirectory("intro", new IntroDir());
+    addDirectory("logging", new LoggingDir());
+
+    PageSwitcher switcher;
+    switcher = new PageSwitcher();
+
+    addObject(switcher);
+
+    switcher.load(index);
   }
 
 }

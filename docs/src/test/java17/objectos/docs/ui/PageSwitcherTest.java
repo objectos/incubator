@@ -36,22 +36,22 @@ public class PageSwitcherTest {
     map.put(Page1.class, p1);
     map.put(Page2.class, p2);
 
-    Locator locator;
-    locator = this::locator;
-
     PageSwitcher sw;
-    sw = new PageSwitcher(locator);
+    sw = new PageSwitcher();
+
+    sw.configure(new NoOpContext() {
+      @SuppressWarnings("unchecked")
+      @Override
+      public <T> T getObject(Class<? extends T> key) {
+        return (T) map.get(key);
+      }
+    });
 
     sw.load(p0);
 
     assertNull(sw.backPage(p0));
     assertSame(sw.backPage(p1), p0);
     assertSame(sw.backPage(p2), p1);
-  }
-
-  @SuppressWarnings("unchecked")
-  private <T> T locator(Class<? extends T> key) {
-    return (T) map.get(key);
   }
 
 }

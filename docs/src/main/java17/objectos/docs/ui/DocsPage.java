@@ -15,19 +15,19 @@
  */
 package objectos.docs.ui;
 
-import br.com.objectos.be.site.HasHref;
-import br.com.objectos.be.site.SitePage;
 import br.com.objectos.core.list.MutableList;
 import br.com.objectos.css.sheet.StyleSheet;
 import br.com.objectos.html.element.ElementName;
 import br.com.objectos.http.media.ImageType;
 import objectos.docs.style.ArticleCss;
 import objectos.docs.style.ContainerCss;
+import objectos.docs.style.JavaCss;
 import objectos.docs.style.PageSwitcherCss;
 import objectos.docs.style.ResetCss;
 import objectos.docs.style.SyntaxCss;
-import objectos.docs.style.JavaCss;
 import objectos.docs.style.XmlCss;
+import objectos.ssg.SitePage;
+import objectos.ssg.SiteRenderable;
 
 public abstract class DocsPage extends SitePage {
 
@@ -43,7 +43,7 @@ public abstract class DocsPage extends SitePage {
     return titleText;
   }
 
-  protected final ElementName a(Class<? extends HasHref> href, String t) {
+  protected final ElementName a(Class<? extends SiteRenderable> href, String t) {
     return a(
       href(href),
 
@@ -57,7 +57,7 @@ public abstract class DocsPage extends SitePage {
     );
 
     PageSwitcher ps;
-    ps = getInstance(PageSwitcher.class);
+    ps = getObject(PageSwitcher.class);
 
     ps.set(this);
 
@@ -85,7 +85,7 @@ public abstract class DocsPage extends SitePage {
     link(rel("shortcut icon"), type(ImageType.ICON.qualifiedName()), href("/favicon.ico"));
 
     StringBuilder css;
-    css = getInstance(StringBuilder.class);
+    css = getObject(StringBuilder.class);
 
     css.setLength(0);
 
@@ -109,7 +109,7 @@ public abstract class DocsPage extends SitePage {
 
   protected void main0() {
     Md md;
-    md = getInstance(Md.class);
+    md = getObject(Md.class);
 
     String html;
     html = md.render(this);

@@ -15,11 +15,11 @@
  */
 package objectos.docs.logging;
 
-import br.com.objectos.be.annotations.Markdown;
 import br.com.objectos.logging.Event1;
 import br.com.objectos.logging.Events;
 import br.com.objectos.logging.NoopLogger;
 import objectos.docs.ui.DocsPage;
+import objectos.ssg.Markdown;
 
 //@formatter:off
 /**
@@ -153,7 +153,7 @@ final class GetStarted extends DocsPage {
   }
 
   @Override
-  protected final void register() {
+  protected final void configure() {
     nextPage = Introduction.class;
 
     titleText = "Get started";

@@ -15,8 +15,8 @@
  */
 package objectos.docs.intro;
 
-import br.com.objectos.be.annotations.Markdown;
 import objectos.docs.ui.DocsPage;
+import objectos.ssg.Markdown;
 
 //@formatter:off
 /**
@@ -93,7 +93,7 @@ But you can find the source code in our
 @Markdown
 final class Overview extends DocsPage {
   @Override
-  protected final void register() {
+  protected final void configure() {
     nextPage = Installation.class;
 
     titleText = "What is Objectos?";

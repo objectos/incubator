@@ -15,8 +15,8 @@
  */
 package objectos.docs.intro;
 
-import br.com.objectos.be.annotations.Markdown;
 import objectos.docs.ui.DocsPage;
+import objectos.ssg.Markdown;
 
 //@formatter:off
 /**
@@ -28,7 +28,7 @@ import objectos.docs.ui.DocsPage;
 @Markdown
 final class Index extends DocsPage {
   @Override
-  protected final void register() {
+  protected final void configure() {
     nextPage = Overview.class;
 
     titleText = "Get started with Objectos";

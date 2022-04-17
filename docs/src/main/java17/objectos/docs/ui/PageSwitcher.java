@@ -15,23 +15,19 @@
  */
 package objectos.docs.ui;
 
-import br.com.objectos.be.site.SiteFragment;
 import br.com.objectos.html.spi.type.DivValue;
 import java.util.IdentityHashMap;
 import java.util.Map;
 import objectos.docs.style.PageSwitcherCss;
+import objectos.ssg.SiteFragment;
 
 public class PageSwitcher extends SiteFragment {
 
   private DocsPage current;
 
-  private final Locator locator;
-
   private final Map<DocsPage, DocsPage> previousPages;
 
-  public PageSwitcher(Locator locator) {
-    this.locator = locator;
-
+  public PageSwitcher() {
     previousPages = new IdentityHashMap<>();
   }
 
@@ -47,7 +43,7 @@ public class PageSwitcher extends SiteFragment {
       }
 
       DocsPage next;
-      next = locator.getInstance(key);
+      next = getObject(key);
 
       if (next == null) {
         throw new NullPointerException("page not found: " + key);
@@ -72,7 +68,7 @@ public class PageSwitcher extends SiteFragment {
     Class<? extends DocsPage> nextKey = current.nextPage();
 
     if (nextKey != null) {
-      next = getInstance(nextKey);
+      next = getObject(nextKey);
     }
 
     nav(

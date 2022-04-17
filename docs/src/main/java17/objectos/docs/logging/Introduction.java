@@ -15,8 +15,8 @@
  */
 package objectos.docs.logging;
 
-import br.com.objectos.be.annotations.Markdown;
 import objectos.docs.ui.DocsPage;
+import objectos.ssg.Markdown;
 
 // @formatter:off
 /**
@@ -40,7 +40,7 @@ or a mail server.
 @Markdown
 final class Introduction extends DocsPage {
   @Override
-  protected final void register() {
+  protected final void configure() {
     nextPage = null;
 
     titleText = "Introduction";

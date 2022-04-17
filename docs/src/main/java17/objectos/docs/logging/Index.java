@@ -15,8 +15,8 @@
  */
 package objectos.docs.logging;
 
-import br.com.objectos.be.annotations.Markdown;
 import objectos.docs.ui.DocsPage;
+import objectos.ssg.Markdown;
 
 //@formatter:off
 /**
@@ -32,7 +32,7 @@ Events can be paramaterized making log method invocations type-safe.
 @Markdown
 final class Index extends DocsPage {
   @Override
-  protected void register() {
+  protected void configure() {
     nextPage = GetStarted.class;
 
     titleText = "Overview";
