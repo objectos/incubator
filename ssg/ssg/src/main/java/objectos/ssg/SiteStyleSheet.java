@@ -18,7 +18,6 @@ package objectos.ssg;
 import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.core.object.Checks;
 import br.com.objectos.css.sheet.AbstractStyleSheet;
-import objectos.ssg.stage.SiteRenderable;
 
 public abstract class SiteStyleSheet extends AbstractStyleSheet
     implements SiteComponent, SiteRenderable {
@@ -46,13 +45,13 @@ public abstract class SiteStyleSheet extends AbstractStyleSheet
 
   protected void configure() {}
 
-  protected final <T extends SiteComponent> T getComponent(Class<? extends T> key) {
-    return context.getComponent(key);
+  protected final <T extends SiteObject> T getObject(Class<? extends T> key) {
+    return context.getObject(key);
   }
 
-  protected final <T extends SiteComponent>
-      ImmutableList<T> getComponentsByType(Class<? extends T> type) {
-    return context.getComponentsByType(type);
+  protected final <T extends SiteObject>
+      ImmutableList<T> getObjectsByType(Class<? extends T> type) {
+    return context.getObjectsByType(type);
   }
 
 }

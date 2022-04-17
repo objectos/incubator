@@ -15,16 +15,12 @@
  */
 package objectos.ssg;
 
-public interface SiteComponent extends SiteObject {
+import br.com.objectos.core.list.ImmutableList;
 
-  void configure(Context context);
+public interface SiteObjectLocator {
 
-  void unregister();
+  <T extends SiteObject> T getObject(Class<? extends T> key);
 
-  public static interface Context extends SiteObjectLocator {
-
-    String getHref(Class<?> key);
-
-  }
+  <T extends SiteObject> ImmutableList<T> getObjectsByType(Class<? extends T> key);
 
 }

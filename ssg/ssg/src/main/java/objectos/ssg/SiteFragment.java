@@ -42,13 +42,13 @@ public abstract class SiteFragment extends AbstractFragment implements SiteCompo
 
   protected void configure() {}
 
-  protected final <T extends SiteComponent> T getComponent(Class<? extends T> key) {
-    return context.getComponent(key);
+  protected final <T extends SiteObject> T getObject(Class<? extends T> key) {
+    return context.getObject(key);
   }
 
-  protected final <T extends SiteComponent>
-      ImmutableList<T> getComponentsByType(Class<? extends T> type) {
-    return context.getComponentsByType(type);
+  protected final <T extends SiteObject>
+      ImmutableList<T> getObjectsByType(Class<? extends T> type) {
+    return context.getObjectsByType(type);
   }
 
   protected final Href href(Class<?> key) {
@@ -56,6 +56,13 @@ public abstract class SiteFragment extends AbstractFragment implements SiteCompo
     value = context.getHref(key);
 
     return href(value);
+  }
+
+  protected final Href href(SiteRenderable renderable) {
+    Class<? extends SiteRenderable> key;
+    key = renderable.getClass();
+
+    return href(key);
   }
 
 }

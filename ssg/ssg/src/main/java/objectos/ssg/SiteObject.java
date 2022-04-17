@@ -15,12 +15,4 @@
  */
 package objectos.ssg;
 
-import br.com.objectos.core.list.ImmutableList;
-
-public interface SiteComponentLocator {
-
-  <T extends SiteComponent> T getComponent(Class<? extends T> key);
-
-  <T extends SiteComponent> ImmutableList<T> getComponentsByType(Class<? extends T> key);
-
-}
+public interface SiteObject {}

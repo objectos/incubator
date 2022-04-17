@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import objectos.ssg.AbstractSiteDsl;
+import objectos.ssg.SiteRenderable;
 
 public record SiteResource(String href, URL url, MediaType mediaType)
     implements

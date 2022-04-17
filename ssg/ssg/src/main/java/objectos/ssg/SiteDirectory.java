@@ -73,11 +73,12 @@ public abstract class SiteDirectory {
 
   protected abstract void configure();
 
-  protected final <T> T getInstance(Class<? extends T> key) {
+  protected final <T extends SiteObject> T getObject(Class<? extends T> key) {
     throw new UnsupportedOperationException("Implement me");
   }
 
-  protected final <T> ImmutableList<T> getInstancesByType(Class<? extends T> type) {
+  protected final <T extends SiteObject>
+      ImmutableList<T> getObjectsByType(Class<? extends T> type) {
     throw new UnsupportedOperationException("Implement me");
   }
 

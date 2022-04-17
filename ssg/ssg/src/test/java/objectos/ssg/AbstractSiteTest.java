@@ -15,16 +15,21 @@
  */
 package objectos.ssg;
 
-public interface SiteComponent extends SiteObject {
+import org.testng.annotations.BeforeMethod;
 
-  void configure(Context context);
+public abstract class AbstractSiteTest {
 
-  void unregister();
+  TestingSiteDsl dsl;
 
-  public static interface Context extends SiteObjectLocator {
+  @BeforeMethod
+  public void _beforeMethod() {
+    dsl = new TestingSiteDsl();
+  }
 
-    String getHref(Class<?> key);
+  final void run(AbstractSite site) {
+    site.acceptSiteDsl(dsl);
 
+    dsl.render();
   }
 
 }

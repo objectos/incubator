@@ -13,11 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package objectos.ssg.stage;
+package objectos.ssg;
 
-import objectos.ssg.AbstractSiteDsl;
-
-public interface SiteRenderable {
+public interface SiteRenderable extends SiteObject {
 
   void render(AbstractSiteDsl dsl);
 

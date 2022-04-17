@@ -28,14 +28,13 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
-import objectos.ssg.stage.SiteRenderable;
 import objectos.ssg.stage.SiteResource;
 
 public abstract class AbstractSiteDsl implements SiteDsl, SiteComponent.Context {
 
-  private final Map<Class<?>, SiteComponent> components = new IdentityHashMap<>();
-
   private final Map<Class<?>, String> hrefMap = new IdentityHashMap<>();
+
+  private final Map<Class<?>, SiteObject> objects = new IdentityHashMap<>();
 
   private final List<SiteRenderable> renderables = new MutableList<>();
 
@@ -49,8 +48,8 @@ public abstract class AbstractSiteDsl implements SiteDsl, SiteComponent.Context 
   }
 
   @Override
-  public final void addFragment(SiteFragment fragment) {
-    registerComponent(fragment);
+  public final void addObject(SiteObject object) {
+    addObject0(object);
   }
 
   @Override
@@ -80,18 +79,23 @@ public abstract class AbstractSiteDsl implements SiteDsl, SiteComponent.Context 
     addStyleSheet0(fileName, sheet, this::hrefBuilder);
   }
 
+  @Override
+  public final String getHref(Class<?> key) {
+    return getHref0(key);
+  }
+
   @SuppressWarnings("unchecked")
   @Override
-  public final <T extends SiteComponent> T getComponent(Class<? extends T> key) {
+  public final <T extends SiteObject> T getObject(Class<? extends T> key) {
     Checks.checkNotNull(key, "key == null");
 
-    SiteComponent component;
-    component = components.get(key);
+    SiteObject object;
+    object = objects.get(key);
 
-    if (component == null) {
+    if (object == null) {
       String msg;
       msg = """
-            No component was found with key:
+            No SiteObject was found with key:
 
                 %s
             """.formatted(key);
@@ -99,30 +103,25 @@ public abstract class AbstractSiteDsl implements SiteDsl, SiteComponent.Context 
       throw new NoSuchElementException(msg);
     }
 
-    return (T) component;
+    return (T) object;
   }
 
   @Override
-  public final <T extends SiteComponent>
-      ImmutableList<T> getComponentsByType(Class<? extends T> key) {
-    Collection<SiteComponent> values;
-    values = components.values();
+  public final <T extends SiteObject>
+      ImmutableList<T> getObjectsByType(Class<? extends T> key) {
+    Collection<SiteObject> values;
+    values = objects.values();
 
-    Stream<SiteComponent> stream;
+    Stream<SiteObject> stream;
     stream = values.stream();
 
-    Stream<SiteComponent> filter;
+    Stream<SiteObject> filter;
     filter = stream.filter(key::isInstance);
 
     Stream<? extends T> cast;
     cast = filter.map(key::cast);
 
     return ImmutableList.copyOf(cast.iterator());
-  }
-
-  @Override
-  public final String getHref(Class<?> key) {
-    return getHref0(key);
   }
 
   @Override
@@ -141,11 +140,13 @@ public abstract class AbstractSiteDsl implements SiteDsl, SiteComponent.Context 
       renderable.render(this);
     }
 
-    Collection<SiteComponent> values;
-    values = components.values();
+    Collection<SiteObject> values;
+    values = objects.values();
 
-    for (SiteComponent component : values) {
-      component.unregister();
+    for (SiteObject object : values) {
+      if (object instanceof SiteComponent component) {
+        component.unregister();
+      }
     }
   }
 
@@ -197,6 +198,33 @@ public abstract class AbstractSiteDsl implements SiteDsl, SiteComponent.Context 
     d.configure();
   }
 
+  final void addObject0(SiteObject object) {
+    Checks.checkNotNull(object, "object == null");
+
+    Class<? extends SiteObject> key;
+    key = object.getClass();
+
+    SiteObject existing;
+    existing = objects.get(key);
+
+    if (existing != null) {
+      String msg;
+      msg = """
+            A SiteObject was already registered:
+
+                %s
+
+            for the key:
+
+                %s
+            """.formatted(existing, key);
+
+      throw new IllegalArgumentException(msg);
+    }
+
+    objects.put(key, object);
+  }
+
   final void addPage0(String fileName, SitePage page, Supplier<StringBuilder> supplier) {
     Checks.checkNotNull(fileName, "fileName == null");
     Checks.checkNotNull(page, "page == null");
@@ -244,36 +272,9 @@ public abstract class AbstractSiteDsl implements SiteDsl, SiteComponent.Context 
     return stringBuilder;
   }
 
-  final void registerComponent(SiteComponent component) {
-    Checks.checkNotNull(component, "component == null");
-
-    Class<? extends SiteComponent> key;
-    key = component.getClass();
-
-    SiteComponent existing;
-    existing = components.get(key);
-
-    if (existing != null) {
-      String msg;
-      msg = """
-            A component was already registered:
-
-                %s
-
-            for the key:
-
-                %s
-            """.formatted(existing, key);
-
-      throw new IllegalArgumentException(msg);
-    }
-
-    components.put(key, component);
-  }
-
   final void registerRenderable(SiteRenderable renderable) {
     if (renderable instanceof SiteComponent c) {
-      registerComponent(c);
+      addObject0(c);
 
       c.configure(this);
     }
@@ -367,7 +368,7 @@ public abstract class AbstractSiteDsl implements SiteDsl, SiteComponent.Context 
 
     @Override
     public final void addFragment(SiteFragment fragment) {
-      AbstractSiteDsl.this.addFragment(fragment);
+      AbstractSiteDsl.this.addObject(fragment);
     }
 
     @Override

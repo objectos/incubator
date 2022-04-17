@@ -20,7 +20,6 @@ import br.com.objectos.core.object.Checks;
 import br.com.objectos.html.attribute.StandardAttributeName.Href;
 import br.com.objectos.html.element.ElementName;
 import br.com.objectos.html.tmpl.AbstractTemplate;
-import objectos.ssg.stage.SiteRenderable;
 
 public abstract class SitePage extends AbstractTemplate
     implements SiteComponent, SiteRenderable {
@@ -48,13 +47,13 @@ public abstract class SitePage extends AbstractTemplate
 
   protected void configure() {}
 
-  protected final <T extends SiteComponent> T getComponent(Class<? extends T> key) {
-    return context.getComponent(key);
+  protected final <T extends SiteObject> T getObject(Class<? extends T> key) {
+    return context.getObject(key);
   }
 
-  protected final <T extends SiteComponent>
-      ImmutableList<T> getComponentsByType(Class<? extends T> type) {
-    return context.getComponentsByType(type);
+  protected final <T extends SiteObject>
+      ImmutableList<T> getObjectsByType(Class<? extends T> type) {
+    return context.getObjectsByType(type);
   }
 
   protected final Href href(Class<?> key) {
@@ -66,6 +65,13 @@ public abstract class SitePage extends AbstractTemplate
 
   protected final ElementName link(Class<? extends SiteStyleSheet> key) {
     return link(rel("stylesheet"), href(key));
+  }
+
+  protected final String thisHref() {
+    Class<? extends SitePage> key;
+    key = getClass();
+
+    return context.getHref(key);
   }
 
 }

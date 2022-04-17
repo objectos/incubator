@@ -38,8 +38,8 @@ public abstract class AbstractSite implements Site {
     dsl().addDirectory(path, directory);
   }
 
-  protected final void addFragment(SiteFragment fragment) {
-    dsl().addFragment(fragment);
+  protected final void addObject(SiteObject object) {
+    dsl().addObject(object);
   }
 
   protected final void addPage(String fileName, SitePage page) {

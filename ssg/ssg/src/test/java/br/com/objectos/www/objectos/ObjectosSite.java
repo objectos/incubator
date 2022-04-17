@@ -23,7 +23,7 @@ public final class ObjectosSite extends AbstractSite {
 
   @Override
   protected final void configure() {
-    addFragment(new Navbar());
+    addObject(new Navbar());
 
     addResource("foo.txt");
 

@@ -35,7 +35,7 @@ final class Index extends SitePage implements NavbarPage {
   @Override
   protected final void definition() {
     Navbar navbar;
-    navbar = getComponent(Navbar.class);
+    navbar = getObject(Navbar.class);
 
     html(
       head(

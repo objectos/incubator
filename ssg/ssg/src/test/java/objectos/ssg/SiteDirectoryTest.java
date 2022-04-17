@@ -20,23 +20,15 @@ import static org.testng.Assert.assertEquals;
 import br.com.objectos.http.media.ImageType;
 import br.com.objectos.http.media.TextType;
 import java.net.URL;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class SiteDirectoryTest {
+public class SiteDirectoryTest extends AbstractSiteTest {
 
   private final Css0 css0 = new Css0();
-
-  private TestingSiteDsl dsl;
 
   private final Page0 page0 = new Page0();
 
   private final Page1 page1 = new Page1();
-
-  @BeforeMethod
-  public void _beforeMethod() {
-    dsl = new TestingSiteDsl();
-  }
 
   @Test
   public void addDirectory() {
@@ -138,7 +130,7 @@ public class SiteDirectoryTest {
     var page = new SitePage() {
       @Override
       protected final void definition() {
-        var frag = getComponent(Frag.class);
+        var frag = getObject(Frag.class);
 
         div(f(frag));
       }
@@ -147,19 +139,13 @@ public class SiteDirectoryTest {
     run(new AbstractSite() {
       @Override
       protected final void configure() {
-        addFragment(new Frag());
+        addObject(new Frag());
 
         addPage("index.html", page);
       }
     });
 
     assertEquals(dsl.html(page), "<div><p>frag</p></div>");
-  }
-
-  private void run(AbstractSite site) {
-    site.acceptSiteDsl(dsl);
-
-    dsl.render();
   }
 
 }
