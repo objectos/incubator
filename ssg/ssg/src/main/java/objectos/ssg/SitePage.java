@@ -67,6 +67,13 @@ public abstract class SitePage extends AbstractTemplate
     return link(rel("stylesheet"), href(key));
   }
 
+  protected final String siblingHref(String fileName) {
+    String thisHref;
+    thisHref = thisHref();
+
+    return Hrefs.sibling(thisHref, fileName);
+  }
+
   protected final String thisHref() {
     Class<? extends SitePage> key;
     key = getClass();

@@ -180,7 +180,7 @@ public abstract class AbstractSiteDsl implements SiteDsl, SiteComponent.Context 
     Checks.checkArgument(!name.isEmpty(), "name cannot be empty");
     Checks.checkNotNull(directory, "directory == null");
 
-    validateName(name);
+    Hrefs.validateName(name);
 
     StringBuilder hrefBuilder;
     hrefBuilder = supplier.get();
@@ -296,10 +296,6 @@ public abstract class AbstractSiteDsl implements SiteDsl, SiteComponent.Context 
     renderSiteStyleSheet(fullPath, sheet);
   }
 
-  final void validateName(String name) {
-    // TODO: implement me
-  }
-
   private String getHref(Object o) {
     Class<?> key;
     key = o.getClass();
@@ -318,7 +314,7 @@ public abstract class AbstractSiteDsl implements SiteDsl, SiteComponent.Context 
   }
 
   private String safeHref(String fileName, Supplier<StringBuilder> supplier) {
-    validateName(fileName);
+    Hrefs.validateName(fileName);
 
     StringBuilder hrefBuilder;
     hrefBuilder = supplier.get();

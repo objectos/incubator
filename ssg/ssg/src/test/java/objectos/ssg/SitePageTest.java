@@ -22,6 +22,41 @@ import org.testng.annotations.Test;
 public class SitePageTest extends AbstractSiteTest {
 
   @Test
+  public void siblingHref() {
+    var root = new SitePage() {
+      @Override
+      protected final void definition() {
+        div(siblingHref("foo.jpg"));
+      }
+    };
+
+    var docs = new SitePage() {
+      @Override
+      protected final void definition() {
+        div(siblingHref("bar.jpg"));
+      }
+    };
+
+    class Docs extends SiteDirectory {
+      @Override
+      protected final void configure() {
+        addPage("foo.html", docs);
+      }
+    }
+
+    run(new AbstractSite() {
+      @Override
+      protected final void configure() {
+        addPage("index.html", root);
+        addDirectory("docs", new Docs());
+      }
+    });
+
+    assertEquals(dsl.html(root), "<div>/foo.jpg</div>");
+    assertEquals(dsl.html(docs), "<div>/docs/bar.jpg</div>");
+  }
+
+  @Test
   public void thisHref() {
     var root = new SitePage() {
       @Override
