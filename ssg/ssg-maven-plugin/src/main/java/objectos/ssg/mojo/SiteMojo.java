@@ -73,7 +73,7 @@ public class SiteMojo extends AbstractSiteMojo {
 
       stage.addSite(site);
 
-      stage.render();
+      stage.generate();
     } catch (IOException e) {
       throw new MojoExecutionException(e.getMessage(), e);
     }

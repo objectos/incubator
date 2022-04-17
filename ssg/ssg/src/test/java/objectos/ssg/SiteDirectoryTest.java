@@ -39,7 +39,7 @@ public class SiteDirectoryTest extends AbstractSiteTest {
       }
     }
 
-    run(new AbstractSite() {
+    run(new Site() {
       @Override
       protected final void configure() {
         addPage("index.html", page0);
@@ -61,7 +61,7 @@ public class SiteDirectoryTest extends AbstractSiteTest {
       }
     }
 
-    run(new AbstractSite() {
+    run(new Site() {
       @Override
       protected final void configure() {
         addPage("index.html", page0);
@@ -84,7 +84,7 @@ public class SiteDirectoryTest extends AbstractSiteTest {
       }
     }
 
-    run(new AbstractSite() {
+    run(new Site() {
       @Override
       protected final void configure() {
         addResource("5x2.jpg");
@@ -108,7 +108,7 @@ public class SiteDirectoryTest extends AbstractSiteTest {
 
   @Test
   public void addStyleSheet() {
-    run(new AbstractSite() {
+    run(new Site() {
       @Override
       protected final void configure() {
         addStyleSheet("foo.css", css0);
@@ -136,7 +136,7 @@ public class SiteDirectoryTest extends AbstractSiteTest {
       }
     };
 
-    run(new AbstractSite() {
+    run(new Site() {
       @Override
       protected final void configure() {
         addObject(new Frag());

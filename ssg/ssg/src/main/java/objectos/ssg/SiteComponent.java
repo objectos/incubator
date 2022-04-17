@@ -21,7 +21,7 @@ public interface SiteComponent {
 
   void unregister();
 
-  public static interface Context extends ObjectLocator {
+  public static interface Context extends Site.ObjectLocator {
 
     String getHref(Class<?> key);
 

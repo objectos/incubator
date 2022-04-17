@@ -33,7 +33,7 @@ public class DevelopmentStageTest {
 
     stage.addSite(new ObjectosSite());
 
-    stage.render();
+    stage.generate();
 
     int port = 7777;
 

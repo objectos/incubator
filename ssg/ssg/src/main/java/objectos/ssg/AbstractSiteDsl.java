@@ -30,7 +30,7 @@ import java.util.function.Supplier;
 import java.util.stream.Stream;
 import objectos.ssg.stage.SiteResource;
 
-public abstract class AbstractSiteDsl implements SiteDsl, SiteComponent.Context {
+public abstract class AbstractSiteDsl implements Site.Generator, SiteComponent.Context {
 
   private final Map<Class<?>, String> hrefMap = new IdentityHashMap<>();
 
@@ -65,12 +65,12 @@ public abstract class AbstractSiteDsl implements SiteDsl, SiteComponent.Context 
   }
 
   public final void addSite(Site site) throws IOException {
-    site.acceptSiteDsl(this);
+    site.configure(this);
   }
 
   public final void addSites(Iterable<? extends Site> sites) throws IOException {
     for (Site site : sites) {
-      site.acceptSiteDsl(this);
+      site.configure(this);
     }
   }
 
@@ -134,7 +134,7 @@ public abstract class AbstractSiteDsl implements SiteDsl, SiteComponent.Context 
   }
 
   @Override
-  public final void render() {
+  public final void generate() {
     for (SiteRenderable renderable : renderables) {
       renderable.render(this);
     }

@@ -26,10 +26,10 @@ public abstract class AbstractSiteTest {
     dsl = new TestingSiteDsl();
   }
 
-  final void run(AbstractSite site) {
-    site.acceptSiteDsl(dsl);
+  final void run(Site site) {
+    site.configure(dsl);
 
-    dsl.render();
+    dsl.generate();
   }
 
 }

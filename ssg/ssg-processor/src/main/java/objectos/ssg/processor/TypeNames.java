@@ -25,10 +25,6 @@ public class TypeNames {
     br.com.objectos.html.tmpl.AbstractFragment.class
   );
 
-  public static final NamedClass AbstractSite = t(
-    objectos.ssg.AbstractSite.class
-  );
-
   public static final NamedClass ImageType = t(
     br.com.objectos.http.media.ImageType.class
   );

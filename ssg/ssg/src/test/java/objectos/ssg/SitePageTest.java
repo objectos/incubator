@@ -44,7 +44,7 @@ public class SitePageTest extends AbstractSiteTest {
       }
     }
 
-    run(new AbstractSite() {
+    run(new Site() {
       @Override
       protected final void configure() {
         addPage("index.html", root);
@@ -79,7 +79,7 @@ public class SitePageTest extends AbstractSiteTest {
       }
     }
 
-    run(new AbstractSite() {
+    run(new Site() {
       @Override
       protected final void configure() {
         addPage("index.html", root);

@@ -36,7 +36,7 @@ public class ProductionStageTest extends AbstractSiteProdTest {
 
     stage.addSite(new ObjectosSite());
 
-    stage.render();
+    stage.generate();
 
     assertEquals(
       Read.string(target.getRegularFile("index.html"), Charsets.utf8()),

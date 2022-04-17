@@ -17,9 +17,9 @@ package br.com.objectos.www.objectos;
 
 import br.com.objectos.www.objectos.blog.BlogDirectory;
 import br.com.objectos.www.objectos.css.CssDirectory;
-import objectos.ssg.AbstractSite;
+import objectos.ssg.Site;
 
-public final class ObjectosSite extends AbstractSite {
+public final class ObjectosSite extends Site {
 
   @Override
   protected final void configure() {
