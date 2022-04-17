@@ -35,12 +35,6 @@ public abstract class SiteDirectory {
     }
   }
 
-  protected void acceptHrefBuilder(StringBuilder href, String name) {
-    href.append(name);
-
-    href.append('/');
-  }
-
   protected final void addDirectory(String name, SiteDirectory directory) {
     cfg().addDirectory(name, directory);
   }

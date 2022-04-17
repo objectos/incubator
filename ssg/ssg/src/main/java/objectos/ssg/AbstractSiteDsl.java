@@ -80,6 +80,22 @@ public abstract class AbstractSiteDsl implements Site.Generator, SiteComponent.C
   }
 
   @Override
+  public final void generate() {
+    for (SiteRenderable renderable : renderables) {
+      renderable.render(this);
+    }
+
+    Collection<Object> values;
+    values = objects.values();
+
+    for (Object object : values) {
+      if (object instanceof SiteComponent component) {
+        component.unregister();
+      }
+    }
+  }
+
+  @Override
   public final String getHref(Class<?> key) {
     return getHref0(key);
   }
@@ -131,22 +147,6 @@ public abstract class AbstractSiteDsl implements Site.Generator, SiteComponent.C
   @Override
   public boolean isProduction() {
     return false;
-  }
-
-  @Override
-  public final void generate() {
-    for (SiteRenderable renderable : renderables) {
-      renderable.render(this);
-    }
-
-    Collection<Object> values;
-    values = objects.values();
-
-    for (Object object : values) {
-      if (object instanceof SiteComponent component) {
-        component.unregister();
-      }
-    }
   }
 
   public abstract void renderSitePage(String fullPath, SitePage page);

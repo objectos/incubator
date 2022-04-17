@@ -17,12 +17,8 @@ package objectos.ssg;
 
 import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.core.object.Checks;
-import br.com.objectos.html.attribute.StandardAttributeName.Href;
-import br.com.objectos.html.element.ElementName;
-import br.com.objectos.html.tmpl.AbstractTemplate;
 
-public abstract class SitePage extends AbstractTemplate
-    implements SiteComponent, SiteRenderable {
+public class SimpleSiteComponent implements SiteComponent {
 
   private Context context;
 
@@ -36,16 +32,15 @@ public abstract class SitePage extends AbstractTemplate
   }
 
   @Override
-  public final void render(AbstractSiteDsl dsl) {
-    dsl.renderSitePage(this);
-  }
-
-  @Override
   public final void unregister() {
     context = null;
   }
 
   protected void configure() {}
+
+  protected final String getHref(Class<?> key) {
+    return context.getHref(key);
+  }
 
   protected final <T> T getObject(Class<? extends T> key) {
     return context.getObject(key);
@@ -54,31 +49,6 @@ public abstract class SitePage extends AbstractTemplate
   protected final <T>
       ImmutableList<T> getObjectsByType(Class<? extends T> type) {
     return context.getObjectsByType(type);
-  }
-
-  protected final Href href(Class<? extends SiteRenderable> key) {
-    String value;
-    value = context.getHref(key);
-
-    return href(value);
-  }
-
-  protected final ElementName link(Class<? extends SiteStyleSheet> key) {
-    return link(rel("stylesheet"), href(key));
-  }
-
-  protected final String siblingHref(String fileName) {
-    String thisHref;
-    thisHref = thisHref();
-
-    return Hrefs.sibling(thisHref, fileName);
-  }
-
-  protected final String thisHref() {
-    Class<? extends SitePage> key;
-    key = getClass();
-
-    return context.getHref(key);
   }
 
 }
