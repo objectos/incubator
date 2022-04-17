@@ -45,7 +45,7 @@ public abstract class SiteDirectory {
     cfg().addDirectory(name, directory);
   }
 
-  protected final void addObject(SiteObject object) {
+  protected final void addObject(Object object) {
     cfg().addObject(object);
   }
 
@@ -73,11 +73,11 @@ public abstract class SiteDirectory {
 
   protected abstract void configure();
 
-  protected final <T extends SiteObject> T getObject(Class<? extends T> key) {
+  protected final <T> T getObject(Class<? extends T> key) {
     throw new UnsupportedOperationException("Implement me");
   }
 
-  protected final <T extends SiteObject>
+  protected final <T>
       ImmutableList<T> getObjectsByType(Class<? extends T> type) {
     throw new UnsupportedOperationException("Implement me");
   }
@@ -92,7 +92,7 @@ public abstract class SiteDirectory {
 
     void addDirectory(String name, SiteDirectory directory);
 
-    void addObject(SiteObject object);
+    void addObject(Object object);
 
     void addPage(String fileName, SitePage page);
 

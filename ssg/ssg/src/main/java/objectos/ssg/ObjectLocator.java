@@ -15,4 +15,12 @@
  */
 package objectos.ssg;
 
-public interface SiteObject {}
+import br.com.objectos.core.list.ImmutableList;
+
+public interface ObjectLocator {
+
+  <T> T getObject(Class<? extends T> key);
+
+  <T> ImmutableList<T> getObjectsByType(Class<? extends T> key);
+
+}

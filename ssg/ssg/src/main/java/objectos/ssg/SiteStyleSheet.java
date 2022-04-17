@@ -45,11 +45,11 @@ public abstract class SiteStyleSheet extends AbstractStyleSheet
 
   protected void configure() {}
 
-  protected final <T extends SiteObject> T getObject(Class<? extends T> key) {
+  protected final <T> T getObject(Class<? extends T> key) {
     return context.getObject(key);
   }
 
-  protected final <T extends SiteObject>
+  protected final <T>
       ImmutableList<T> getObjectsByType(Class<? extends T> type) {
     return context.getObjectsByType(type);
   }

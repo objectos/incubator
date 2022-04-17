@@ -38,7 +38,7 @@ public abstract class AbstractSite implements Site {
     dsl().addDirectory(path, directory);
   }
 
-  protected final void addObject(SiteObject object) {
+  protected final void addObject(Object object) {
     dsl().addObject(object);
   }
 

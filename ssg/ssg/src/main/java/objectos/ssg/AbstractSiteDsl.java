@@ -34,7 +34,7 @@ public abstract class AbstractSiteDsl implements SiteDsl, SiteComponent.Context 
 
   private final Map<Class<?>, String> hrefMap = new IdentityHashMap<>();
 
-  private final Map<Class<?>, SiteObject> objects = new IdentityHashMap<>();
+  private final Map<Class<?>, Object> objects = new IdentityHashMap<>();
 
   private final List<SiteRenderable> renderables = new MutableList<>();
 
@@ -48,7 +48,7 @@ public abstract class AbstractSiteDsl implements SiteDsl, SiteComponent.Context 
   }
 
   @Override
-  public final void addObject(SiteObject object) {
+  public final void addObject(Object object) {
     addObject0(object);
   }
 
@@ -86,10 +86,10 @@ public abstract class AbstractSiteDsl implements SiteDsl, SiteComponent.Context 
 
   @SuppressWarnings("unchecked")
   @Override
-  public final <T extends SiteObject> T getObject(Class<? extends T> key) {
+  public final <T> T getObject(Class<? extends T> key) {
     Checks.checkNotNull(key, "key == null");
 
-    SiteObject object;
+    Object object;
     object = objects.get(key);
 
     if (object == null) {
@@ -107,15 +107,14 @@ public abstract class AbstractSiteDsl implements SiteDsl, SiteComponent.Context 
   }
 
   @Override
-  public final <T extends SiteObject>
-      ImmutableList<T> getObjectsByType(Class<? extends T> key) {
-    Collection<SiteObject> values;
+  public final <T> ImmutableList<T> getObjectsByType(Class<? extends T> key) {
+    Collection<Object> values;
     values = objects.values();
 
-    Stream<SiteObject> stream;
+    Stream<Object> stream;
     stream = values.stream();
 
-    Stream<SiteObject> filter;
+    Stream<Object> filter;
     filter = stream.filter(key::isInstance);
 
     Stream<? extends T> cast;
@@ -140,10 +139,10 @@ public abstract class AbstractSiteDsl implements SiteDsl, SiteComponent.Context 
       renderable.render(this);
     }
 
-    Collection<SiteObject> values;
+    Collection<Object> values;
     values = objects.values();
 
-    for (SiteObject object : values) {
+    for (Object object : values) {
       if (object instanceof SiteComponent component) {
         component.unregister();
       }
@@ -198,13 +197,13 @@ public abstract class AbstractSiteDsl implements SiteDsl, SiteComponent.Context 
     d.configure();
   }
 
-  final void addObject0(SiteObject object) {
+  final void addObject0(Object object) {
     Checks.checkNotNull(object, "object == null");
 
-    Class<? extends SiteObject> key;
+    Class<?> key;
     key = object.getClass();
 
-    SiteObject existing;
+    Object existing;
     existing = objects.get(key);
 
     if (existing != null) {
@@ -361,8 +360,8 @@ public abstract class AbstractSiteDsl implements SiteDsl, SiteComponent.Context 
     }
 
     @Override
-    public final void addObject(SiteObject object) {
-      AbstractSiteDsl.this.addObject(object);
+    public final void addObject(Object object) {
+      addObject0(object);
     }
 
     @Override

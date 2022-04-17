@@ -15,7 +15,7 @@
  */
 package objectos.ssg;
 
-public interface SiteRenderable extends SiteObject {
+public interface SiteRenderable {
 
   void render(AbstractSiteDsl dsl);
 
