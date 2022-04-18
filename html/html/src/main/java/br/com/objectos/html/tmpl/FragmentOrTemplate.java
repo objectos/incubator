@@ -26,6 +26,7 @@ import br.com.objectos.html.spi.tmpl.Renderer;
 import br.com.objectos.html.spi.type.AnyElementValue;
 import br.com.objectos.html.spi.type.NonVoidElementValue;
 import br.com.objectos.html.spi.type.Value;
+import br.com.objectos.html.writer.SimpleTemplateWriter;
 
 abstract class FragmentOrTemplate extends GeneratedAbstractTemplate {
 
@@ -38,6 +39,8 @@ abstract class FragmentOrTemplate extends GeneratedAbstractTemplate {
   public final AttributeOrElement clipPath(String text) {
     return addAttributeOrElement(AttributeOrElement.CLIPPATH, text);
   }
+
+  public abstract CompiledTemplate compile();
 
   public final Doctype doctype() {
     dsl.addDoctype();
@@ -91,10 +94,10 @@ abstract class FragmentOrTemplate extends GeneratedAbstractTemplate {
     Checks.checkNotNull(t1, "t1 == null");
     Checks.checkNotNull(t2, "t2 == null");
     return t(
-        new StringBuilder(t1)
-            .append(' ')
-            .append(t2)
-            .toString()
+      new StringBuilder(t1)
+          .append(' ')
+          .append(t2)
+          .toString()
     );
   }
 
@@ -106,12 +109,12 @@ abstract class FragmentOrTemplate extends GeneratedAbstractTemplate {
     Checks.checkNotNull(t2, "t2 == null");
     Checks.checkNotNull(t3, "t3 == null");
     return t(
-        new StringBuilder(t1)
-            .append(' ')
-            .append(t2)
-            .append(' ')
-            .append(t3)
-            .toString()
+      new StringBuilder(t1)
+          .append(' ')
+          .append(t2)
+          .append(' ')
+          .append(t3)
+          .toString()
     );
   }
 
@@ -125,14 +128,14 @@ abstract class FragmentOrTemplate extends GeneratedAbstractTemplate {
     Checks.checkNotNull(t3, "t3 == null");
     Checks.checkNotNull(t4, "t4 == null");
     return t(
-        new StringBuilder(t1)
-            .append(' ')
-            .append(t2)
-            .append(' ')
-            .append(t3)
-            .append(' ')
-            .append(t4)
-            .toString()
+      new StringBuilder(t1)
+          .append(' ')
+          .append(t2)
+          .append(' ')
+          .append(t3)
+          .append(' ')
+          .append(t4)
+          .toString()
     );
   }
 
@@ -148,16 +151,16 @@ abstract class FragmentOrTemplate extends GeneratedAbstractTemplate {
     Checks.checkNotNull(t4, "t4 == null");
     Checks.checkNotNull(t5, "t5 == null");
     return t(
-        new StringBuilder(t1)
-            .append(' ')
-            .append(t2)
-            .append(' ')
-            .append(t3)
-            .append(' ')
-            .append(t4)
-            .append(' ')
-            .append(t5)
-            .toString()
+      new StringBuilder(t1)
+          .append(' ')
+          .append(t2)
+          .append(' ')
+          .append(t3)
+          .append(' ')
+          .append(t4)
+          .append(' ')
+          .append(t5)
+          .toString()
     );
   }
 
@@ -175,18 +178,18 @@ abstract class FragmentOrTemplate extends GeneratedAbstractTemplate {
     Checks.checkNotNull(t5, "t5 == null");
     Checks.checkNotNull(t6, "t6 == null");
     return t(
-        new StringBuilder(t1)
-            .append(' ')
-            .append(t2)
-            .append(' ')
-            .append(t3)
-            .append(' ')
-            .append(t4)
-            .append(' ')
-            .append(t5)
-            .append(' ')
-            .append(t6)
-            .toString()
+      new StringBuilder(t1)
+          .append(' ')
+          .append(t2)
+          .append(' ')
+          .append(t3)
+          .append(' ')
+          .append(t4)
+          .append(' ')
+          .append(t5)
+          .append(' ')
+          .append(t6)
+          .toString()
     );
   }
 
@@ -206,20 +209,20 @@ abstract class FragmentOrTemplate extends GeneratedAbstractTemplate {
     Checks.checkNotNull(t6, "t6 == null");
     Checks.checkNotNull(t7, "t7 == null");
     return t(
-        new StringBuilder(t1)
-            .append(' ')
-            .append(t2)
-            .append(' ')
-            .append(t3)
-            .append(' ')
-            .append(t4)
-            .append(' ')
-            .append(t5)
-            .append(' ')
-            .append(t6)
-            .append(' ')
-            .append(t7)
-            .toString()
+      new StringBuilder(t1)
+          .append(' ')
+          .append(t2)
+          .append(' ')
+          .append(t3)
+          .append(' ')
+          .append(t4)
+          .append(' ')
+          .append(t5)
+          .append(' ')
+          .append(t6)
+          .append(' ')
+          .append(t7)
+          .toString()
     );
   }
 
@@ -241,22 +244,22 @@ abstract class FragmentOrTemplate extends GeneratedAbstractTemplate {
     Checks.checkNotNull(t7, "t7 == null");
     Checks.checkNotNull(t8, "t8 == null");
     return t(
-        new StringBuilder(t1)
-            .append(' ')
-            .append(t2)
-            .append(' ')
-            .append(t3)
-            .append(' ')
-            .append(t4)
-            .append(' ')
-            .append(t5)
-            .append(' ')
-            .append(t6)
-            .append(' ')
-            .append(t7)
-            .append(' ')
-            .append(t8)
-            .toString()
+      new StringBuilder(t1)
+          .append(' ')
+          .append(t2)
+          .append(' ')
+          .append(t3)
+          .append(' ')
+          .append(t4)
+          .append(' ')
+          .append(t5)
+          .append(' ')
+          .append(t6)
+          .append(' ')
+          .append(t7)
+          .append(' ')
+          .append(t8)
+          .toString()
     );
   }
 
@@ -280,29 +283,45 @@ abstract class FragmentOrTemplate extends GeneratedAbstractTemplate {
     Checks.checkNotNull(t8, "t8 == null");
     Checks.checkNotNull(t9, "t9 == null");
     return t(
-        new StringBuilder(t1)
-            .append(' ')
-            .append(t2)
-            .append(' ')
-            .append(t3)
-            .append(' ')
-            .append(t4)
-            .append(' ')
-            .append(t5)
-            .append(' ')
-            .append(t6)
-            .append(' ')
-            .append(t7)
-            .append(' ')
-            .append(t8)
-            .append(' ')
-            .append(t9)
-            .toString()
+      new StringBuilder(t1)
+          .append(' ')
+          .append(t2)
+          .append(' ')
+          .append(t3)
+          .append(' ')
+          .append(t4)
+          .append(' ')
+          .append(t5)
+          .append(' ')
+          .append(t6)
+          .append(' ')
+          .append(t7)
+          .append(' ')
+          .append(t8)
+          .append(' ')
+          .append(t9)
+          .toString()
     );
   }
 
   public final AttributeOrElement title(String text) {
     return addAttributeOrElement(AttributeOrElement.TITLE, text);
+  }
+
+  @Override
+  public final String toString() {
+    CompiledTemplate compiled;
+    compiled = compile();
+
+    StringBuilder out;
+    out = new StringBuilder();
+
+    SimpleTemplateWriter writer;
+    writer = new SimpleTemplateWriter(out);
+
+    compiled.acceptTemplateVisitor(writer);
+
+    return out.toString();
   }
 
   protected abstract void definition();
