@@ -59,7 +59,7 @@ public class DevelopmentStage extends Stage implements HttpModule {
   @Override
   public final void renderSiteResource(SiteResource resource) {
     String fullPath;
-    fullPath = resource.href();
+    fullPath = resource.path();
 
     SiteResourceHttpAction action;
     action = new SiteResourceHttpAction(resource);

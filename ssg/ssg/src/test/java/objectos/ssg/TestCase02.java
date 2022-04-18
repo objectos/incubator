@@ -15,13 +15,32 @@
  */
 package objectos.ssg;
 
-import br.com.objectos.http.media.MediaType;
-import java.io.IOException;
+/**
+ * - single add page.
+ * - single add resource.
+ * - reference resource from page
+ */
+final class TestCase02 extends Site {
 
-public interface SiteWriter {
+  private SitePath icon;
 
-  void writeBytes(String path, MediaType mediaType, byte[] contents) throws IOException;
+  @Override
+  protected final void configure() {
+    addPage("index.html", new Index());
 
-  void writeString(String path, MediaType mediaType, String contents) throws IOException;
+    icon = addResource("5x2.jpg");
+  }
+
+  static class Index extends SitePage {
+    @Override
+    protected final void definition() {
+      TestCase02 site;
+      site = getObject(TestCase02.class);
+
+      html(
+        img(src(site.icon))
+      );
+    }
+  }
 
 }

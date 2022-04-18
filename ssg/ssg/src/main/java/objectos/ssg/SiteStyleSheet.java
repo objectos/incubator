@@ -49,7 +49,7 @@ public abstract class SiteStyleSheet extends AbstractStyleSheet
     String contents;
     contents = printMinified();
 
-    writer.writeStringArtifact(path, TextType.CSS, contents);
+    writer.writeString(path, TextType.CSS, contents);
   }
 
   protected void configure() {}

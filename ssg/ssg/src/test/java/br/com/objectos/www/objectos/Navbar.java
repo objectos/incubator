@@ -46,7 +46,7 @@ public class Navbar extends SiteFragment {
       page = pages.get(i);
 
       lis[i] = li(
-        a(href(page.getClass()), t(page.navbarTitle()))
+        a(path(page.getClass()), t(page.navbarTitle()))
       );
     }
 

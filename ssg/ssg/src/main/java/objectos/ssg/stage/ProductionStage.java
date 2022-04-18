@@ -56,7 +56,7 @@ public class ProductionStage extends Stage {
       byte[] data;
       data = Read.byteArray(resource);
 
-      String fullPath = resource.href();
+      String fullPath = resource.path();
 
       Location location;
       location = Location.parse(fullPath);

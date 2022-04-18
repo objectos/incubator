@@ -15,33 +15,34 @@
  */
 package objectos.ssg.stage;
 
-import br.com.objectos.core.io.InputStreamSource;
 import br.com.objectos.http.media.MediaType;
 import br.com.objectos.http.media.MediaTypes;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import objectos.ssg.SitePath;
+import objectos.ssg.SiteWriteable;
+import objectos.ssg.SiteWriter;
 
-public record SiteResource(String href, URL url, MediaType mediaType)
+public record SiteResource(String path, URL url, MediaType mediaType)
     implements
-    InputStreamSource,
-    SitePath {
+    SitePath,
+    SiteWriteable {
 
   public SiteResource {
     if (mediaType == null) {
-      mediaType = MediaTypes.ofFileName(href);
+      mediaType = MediaTypes.ofFileName(path);
     }
   }
 
   @Override
-  public final InputStream openInputStream() throws IOException {
-    return url.openStream();
-  }
+  public final void writeTo(SiteWriter writer) throws IOException {
+    try (InputStream in = url.openStream()) {
+      byte[] bytes;
+      bytes = in.readAllBytes();
 
-  @Override
-  public final void generate(SitePath.Generator generator) {
-    generator.generateResource(this);
+      writer.writeBytes(path, mediaType, bytes);
+    }
   }
 
 }

@@ -59,7 +59,7 @@ class TestingSiteDsl extends Stage {
   @Override
   public final void renderSiteResource(SiteResource resource) {
     String fullPath;
-    fullPath = resource.href();
+    fullPath = resource.path();
 
     resources.put(fullPath, resource.url());
 

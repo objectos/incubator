@@ -16,19 +16,29 @@
 package objectos.ssg;
 
 import br.com.objectos.core.list.ImmutableList;
+import br.com.objectos.core.list.MutableList;
+import br.com.objectos.core.map.MutableMap;
 import br.com.objectos.core.object.Checks;
+import br.com.objectos.core.set.MutableSet;
 import br.com.objectos.core.throwable.Try;
+import br.com.objectos.http.media.MediaType;
 import java.io.IOException;
-import java.util.Collection;
-import java.util.IdentityHashMap;
+import java.net.URL;
+import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
+import java.util.Set;
+import objectos.ssg.stage.SiteResource;
 
 public abstract class Site {
 
+  private final Map<Class<?>, Object> byClassMap = new MutableMap<>();
+
   private Context context;
 
-  private final Map<Object, Object> objects = new IdentityHashMap<>();
+  private final List<Object> objects = new MutableList<>();
+
+  private final Set<String> paths = new MutableSet<>();
 
   private final StringBuilder stringBuilder = new StringBuilder();
 
@@ -44,7 +54,7 @@ public abstract class Site {
         Checks.checkNotNull(key, "key == null");
 
         Object object;
-        object = objects.get(key);
+        object = byClassMap.get(key);
 
         if (object == null) {
           String msg;
@@ -66,9 +76,15 @@ public abstract class Site {
       }
     };
 
+    byClassMap.clear();
+
     objects.clear();
 
+    paths.clear();
+
     stringBuilder.setLength(0);
+
+    addByClass(this);
 
     Throwable rethrow;
     rethrow = Try.begin();
@@ -85,11 +101,8 @@ public abstract class Site {
       Try.rethrowIfPossible(rethrow, IOException.class);
     }
 
-    Collection<Object> values;
-    values = objects.values();
-
     try {
-      for (Object o : values) {
+      for (Object o : objects) {
         if (o instanceof SiteWriteable w) {
           w.writeTo(writer);
         }
@@ -110,7 +123,15 @@ public abstract class Site {
     return addPage0(page, path);
   }
 
-  protected final void addResource(String resourceName) {}
+  protected final SitePath addResource(String resourceName) {
+    String path;
+    path = toPath(resourceName);
+
+    Class<? extends Site> contextClass;
+    contextClass = getClass();
+
+    return addResource0(path, contextClass, resourceName, null);
+  }
 
   protected final <T extends SiteStyleSheet> T addStyleSheet(String fileName, T sheet) {
     String path;
@@ -132,15 +153,29 @@ public abstract class Site {
 
     stringBuilder.append(fileName);
 
-    return stringBuilder.toString();
+    String path;
+    path = stringBuilder.toString();
+
+    if (!paths.add(path)) {
+      String msg;
+      msg = """
+            Path was already registered:
+
+                %s
+            """.formatted(path);
+
+      throw new IllegalArgumentException(msg);
+    }
+
+    return path;
   }
 
-  private void addObject0(Object o) {
+  private void addByClass(Object o) {
     Class<?> key;
     key = o.getClass();
 
     Object existing;
-    existing = objects.get(key);
+    existing = byClassMap.get(key);
 
     if (existing != null) {
       String msg;
@@ -157,38 +192,72 @@ public abstract class Site {
       throw new IllegalArgumentException(msg);
     }
 
-    objects.put(key, o);
+    byClassMap.put(key, o);
+
+    objects.add(o);
   }
 
   private <T extends SitePage> T addPage0(T page, String path) {
     Checks.checkNotNull(page, "page == null");
 
+    addByClass(page);
+
     page.set(context, path);
 
-    addObject0(page);
-
     return page;
+  }
+
+  private SitePath addResource0(
+      String path, Class<?> contextClass, String resourceName, MediaType mediaType) {
+    URL url;
+    url = url(contextClass, resourceName);
+
+    SiteResource resource;
+    resource = new SiteResource(path, url, mediaType);
+
+    objects.add(resource);
+
+    return resource;
   }
 
   private <T extends SiteStyleSheet> T addStyleSheet0(T sheet, String path) {
     Checks.checkNotNull(sheet, "sheet == null");
 
-    sheet.set(context, path);
+    addByClass(sheet);
 
-    addObject0(sheet);
+    sheet.set(context, path);
 
     return sheet;
   }
 
   private void postSiteGeneration() {
-    Collection<Object> values;
-    values = objects.values();
-
-    for (Object o : values) {
+    for (Object o : objects) {
       if (o instanceof SiteLifecycle l) {
         l.postSiteGeneration();
       }
     }
+  }
+
+  private URL url(Class<?> clazz, String resourceName) {
+    URL url;
+    url = clazz.getResource(resourceName);
+
+    if (url == null) {
+      String msg;
+      msg = """
+            Could not find resource named:
+
+                %s
+
+            relative to class:
+
+                %s
+            """.formatted(resourceName, clazz);
+
+      throw new IllegalArgumentException(msg);
+    }
+
+    return url;
   }
 
   public interface Configuration {

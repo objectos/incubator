@@ -63,14 +63,14 @@ public abstract class SiteFragment extends AbstractFragment
     String value;
     value = context.getHref(key);
 
-    return href(value);
+    return path(value);
   }
 
   protected final Href href(Object o) {
     Class<? extends Object> key;
     key = o.getClass();
 
-    return href(key);
+    return path(key);
   }
 
 }

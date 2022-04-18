@@ -18,6 +18,7 @@ package objectos.ssg;
 import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.core.object.Checks;
 import br.com.objectos.html.attribute.StandardAttributeName.Href;
+import br.com.objectos.html.attribute.StandardAttributeName.Src;
 import br.com.objectos.html.element.ElementName;
 import br.com.objectos.html.tmpl.AbstractTemplate;
 import br.com.objectos.http.media.TextType;
@@ -51,7 +52,7 @@ public abstract class SitePage extends AbstractTemplate
     String contents;
     contents = printMinified();
 
-    writer.writeStringArtifact(path, TextType.HTML, contents);
+    writer.writeString(path, TextType.HTML, contents);
   }
 
   protected void configure() {}
@@ -77,6 +78,10 @@ public abstract class SitePage extends AbstractTemplate
 
   protected final ElementName link(Class<? extends SiteStyleSheet> key) {
     return link(href(key), rel("stylesheet"));
+  }
+
+  protected final Src src(SitePath path) {
+    return src(path.path());
   }
 
   final void set(Context context, String path) {

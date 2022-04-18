@@ -18,6 +18,8 @@ package objectos.ssg;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
+import br.com.objectos.core.io.Read;
+import br.com.objectos.core.io.Resource;
 import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.http.media.MediaType;
 import java.io.IOException;
@@ -25,9 +27,9 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
-final class TestableWriter implements SiteWriter {
+final class TestableSiteWriter implements SiteWriter {
 
-  private final Map<String, StringContents> contentMap = new TreeMap<>();
+  private final Map<String, Contents> contentMap = new TreeMap<>();
 
   public final ImmutableList<String> pathList() {
     Set<String> keys;
@@ -36,26 +38,47 @@ final class TestableWriter implements SiteWriter {
     return ImmutableList.copyOf(keys);
   }
 
-  public final void testString(String path, MediaType mediaType, String contents) {
-    StringContents sc;
+  public final void testBytes(
+      String path, MediaType mediaType, Resource resource) throws IOException {
+    Contents sc;
     sc = contentMap.get(path);
 
     assertNotNull(sc, path + " not found");
 
     assertEquals(sc.mediaType, mediaType);
 
-    assertEquals(sc.contents, contents);
+    assertEquals(sc.bytes, Read.byteArray(resource));
+  }
+
+  public final void testString(String path, MediaType mediaType, String contents) {
+    Contents sc;
+    sc = contentMap.get(path);
+
+    assertNotNull(sc, path + " not found");
+
+    assertEquals(sc.mediaType, mediaType);
+
+    assertEquals(sc.string, contents);
   }
 
   @Override
-  public final void writeStringArtifact(
-      String path, MediaType mediaType, String contents) throws IOException {
-    StringContents c;
-    c = new StringContents(mediaType, contents);
+  public final void writeBytes(
+      String path, MediaType mediaType, byte[] contents) throws IOException {
+    Contents c;
+    c = new Contents(mediaType, null, contents);
 
     contentMap.put(path, c);
   }
 
-  private record StringContents(MediaType mediaType, String contents) {}
+  @Override
+  public final void writeString(
+      String path, MediaType mediaType, String contents) throws IOException {
+    Contents c;
+    c = new Contents(mediaType, contents, null);
+
+    contentMap.put(path, c);
+  }
+
+  private record Contents(MediaType mediaType, String string, byte[] bytes) {}
 
 }

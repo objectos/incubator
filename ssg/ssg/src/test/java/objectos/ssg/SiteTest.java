@@ -17,7 +17,9 @@ package objectos.ssg;
 
 import static org.testng.Assert.assertEquals;
 
+import br.com.objectos.core.io.Resource;
 import br.com.objectos.core.list.ImmutableList;
+import br.com.objectos.http.media.ImageType;
 import br.com.objectos.http.media.TextType;
 import java.io.IOException;
 import org.testng.annotations.Test;
@@ -26,7 +28,7 @@ public class SiteTest {
 
   @Test
   public void testCase00() throws IOException {
-    TestableWriter w;
+    TestableSiteWriter w;
     w = gen(new TestCase00());
 
     testPathList(
@@ -49,7 +51,7 @@ public class SiteTest {
 
   @Test
   public void testCase01() throws IOException {
-    TestableWriter w;
+    TestableSiteWriter w;
     w = gen(new TestCase01());
 
     testPathList(
@@ -84,13 +86,45 @@ public class SiteTest {
     );
   }
 
-  protected void testPathList(TestableWriter w, String... paths) {
+  @Test
+  public void testCase02() throws IOException {
+    TestableSiteWriter w;
+    w = gen(new TestCase02());
+
+    testPathList(
+      w,
+
+      "/5x2.jpg",
+      "/index.html"
+    );
+
+    w.testBytes(
+      "/5x2.jpg",
+
+      ImageType.JPEG,
+
+      Resource.getResource(getClass(), "5x2.jpg")
+    );
+
+    w.testString(
+      "/index.html",
+
+      TextType.HTML,
+
+      """
+      <html>\
+      <img src="/5x2.jpg">\
+      </html>"""
+    );
+  }
+
+  protected void testPathList(TestableSiteWriter w, String... paths) {
     assertEquals(w.pathList(), ImmutableList.copyOf(paths));
   }
 
-  private TestableWriter gen(Site site) throws IOException {
-    TestableWriter w;
-    w = new TestableWriter();
+  private TestableSiteWriter gen(Site site) throws IOException {
+    TestableSiteWriter w;
+    w = new TestableSiteWriter();
 
     site.generate(w);
 
