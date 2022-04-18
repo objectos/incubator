@@ -76,7 +76,7 @@ public abstract class SitePage extends AbstractTemplate
   }
 
   protected final ElementName link(Class<? extends SiteStyleSheet> key) {
-    return link(rel("stylesheet"), href(key));
+    return link(href(key), rel("stylesheet"));
   }
 
   final void set(Context context, String path) {
@@ -85,6 +85,8 @@ public abstract class SitePage extends AbstractTemplate
 
     this.context = context;
     this.path = path;
+
+    configure();
   }
 
 }

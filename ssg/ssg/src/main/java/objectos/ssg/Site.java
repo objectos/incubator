@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.IdentityHashMap;
 import java.util.Map;
+import java.util.NoSuchElementException;
 
 public abstract class Site {
 
@@ -37,14 +38,31 @@ public abstract class Site {
 
   public final void generate(SiteWriter writer, RenderingOption... options) throws IOException {
     context = new Context() {
+      @SuppressWarnings("unchecked")
       @Override
-      public <T> T getObject(Class<? extends T> key) {
-        return null;
+      public final <T> T getObject(Class<? extends T> key) {
+        Checks.checkNotNull(key, "key == null");
+
+        Object object;
+        object = objects.get(key);
+
+        if (object == null) {
+          String msg;
+          msg = """
+                No object was found for key:
+
+                    %s
+                """.formatted(key);
+
+          throw new NoSuchElementException(msg);
+        }
+
+        return (T) object;
       }
 
       @Override
-      public <T> ImmutableList<T> getObjectsByType(Class<? extends T> key) {
-        return null;
+      public final <T> ImmutableList<T> getObjectsByType(Class<? extends T> key) {
+        throw new UnsupportedOperationException("Implement me");
       }
     };
 
@@ -94,7 +112,12 @@ public abstract class Site {
 
   protected final void addResource(String resourceName) {}
 
-  protected final void addStyleSheet(String fileName, SiteStyleSheet sheet) {}
+  protected final <T extends SiteStyleSheet> T addStyleSheet(String fileName, T sheet) {
+    String path;
+    path = toPath(fileName);
+
+    return addStyleSheet0(sheet, path);
+  }
 
   protected abstract void configure();
 
@@ -145,6 +168,16 @@ public abstract class Site {
     addObject0(page);
 
     return page;
+  }
+
+  private <T extends SiteStyleSheet> T addStyleSheet0(T sheet, String path) {
+    Checks.checkNotNull(sheet, "sheet == null");
+
+    sheet.set(context, path);
+
+    addObject0(sheet);
+
+    return sheet;
   }
 
   private void postSiteGeneration() {
