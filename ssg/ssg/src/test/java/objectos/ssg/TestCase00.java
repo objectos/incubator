@@ -15,20 +15,25 @@
  */
 package objectos.ssg;
 
-import objectos.ssg.stage.SiteResource;
+/**
+ * Single add page.
+ */
+final class TestCase00 extends Site {
 
-public interface SiteArtifact {
+  public Index index;
 
-  void generate(Generator generator);
+  @Override
+  protected final void configure() {
+    index = addPage("index.html", new Index());
+  }
 
-  interface Generator {
-
-    void generatePage(SitePage page);
-
-    void generateResource(SiteResource resource);
-
-    void generateStyleSheet(SiteStyleSheet sheet);
-
+  static class Index extends SitePage {
+    @Override
+    protected final void definition() {
+      html(
+        body("TestCase00:index")
+      );
+    }
   }
 
 }

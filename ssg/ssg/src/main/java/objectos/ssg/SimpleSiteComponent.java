@@ -17,17 +17,14 @@ package objectos.ssg;
 
 import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.core.object.Checks;
-import br.com.objectos.css.sheet.AbstractStyleSheet;
+import objectos.ssg.Site.Context;
 
-public abstract class SiteStyleSheet extends AbstractStyleSheet
-    implements
-    SitePath,
-    SiteComponent {
+public class SimpleSiteComponent implements SiteComponent {
 
-  private Site.Context context;
+  private Context context;
 
   @Override
-  public final void configure(Site.Context context) {
+  public final void configure(Context context) {
     Checks.checkState(this.context == null, "context was already set");
 
     this.context = Checks.checkNotNull(context, "generator == null");
@@ -36,16 +33,15 @@ public abstract class SiteStyleSheet extends AbstractStyleSheet
   }
 
   @Override
-  public final void generate(SitePath.Generator generator) {
-    generator.generateStyleSheet(this);
-  }
-
-  @Override
   public final void generationOver() {
     context = null;
   }
 
   protected void configure() {}
+
+  protected final String getHref(Class<?> key) {
+    return context.getHref(key);
+  }
 
   protected final <T> T getObject(Class<? extends T> key) {
     return context.getObject(key);

@@ -32,8 +32,7 @@ public abstract class Stage
     implements
     Site.Configuration,
     Site.Generator,
-    SiteArtifact.Generator,
-    SiteComponent.Configuration {
+    SitePath.Generator {
 
   private final Map<Class<?>, String> hrefMap = new IdentityHashMap<>();
 
@@ -80,7 +79,7 @@ public abstract class Stage
     values = objects.values();
 
     for (Object object : values) {
-      if (object instanceof SiteArtifact a) {
+      if (object instanceof SitePath a) {
         a.generate(this);
       }
     }
@@ -335,7 +334,7 @@ public abstract class Stage
     return url;
   }
 
-  private static class SiteResources implements SiteArtifact {
+  private static class SiteResources implements SitePath {
 
     private final MutableList<SiteResource> resources = new MutableList<>();
 

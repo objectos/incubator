@@ -20,31 +20,38 @@ import br.com.objectos.core.object.Checks;
 import br.com.objectos.html.attribute.StandardAttributeName.Href;
 import br.com.objectos.html.element.ElementName;
 import br.com.objectos.html.tmpl.AbstractTemplate;
+import br.com.objectos.http.media.TextType;
+import java.io.IOException;
+import objectos.ssg.Site.Context;
 
 public abstract class SitePage extends AbstractTemplate
     implements
-    SiteArtifact,
-    SiteComponent {
+    SiteLifecycle,
+    SitePath,
+    SiteWriteable {
 
-  private Site.Context context;
+  private Context context;
+
+  private String path;
 
   @Override
-  public final void configure(Site.Context context) {
-    Checks.checkState(this.context == null, "context was already set");
-
-    this.context = Checks.checkNotNull(context, "generator == null");
-
-    configure();
+  public final String path() {
+    return path;
   }
 
   @Override
-  public final void generate(SiteArtifact.Generator generator) {
-    generator.generatePage(this);
-  }
-
-  @Override
-  public final void generationOver() {
+  public final void postSiteGeneration() {
     context = null;
+
+    path = null;
+  }
+
+  @Override
+  public final void writeTo(SiteWriter writer) throws IOException {
+    String contents;
+    contents = printMinified();
+
+    writer.writeStringArtifact(path, TextType.HTML, contents);
   }
 
   protected void configure() {}
@@ -58,29 +65,26 @@ public abstract class SitePage extends AbstractTemplate
     return context.getObjectsByType(type);
   }
 
-  protected final Href href(Class<?> key) {
-    String value;
-    value = context.getHref(key);
+  protected final Href href(Class<? extends SitePath> key) {
+    SitePath artifact;
+    artifact = getObject(key);
 
-    return href(value);
+    String path;
+    path = artifact.path();
+
+    return href(path);
   }
 
   protected final ElementName link(Class<? extends SiteStyleSheet> key) {
     return link(rel("stylesheet"), href(key));
   }
 
-  protected final String siblingHref(String fileName) {
-    String thisHref;
-    thisHref = thisHref();
+  final void set(Context context, String path) {
+    Checks.checkState(this.context == null, "context was already set");
+    Checks.checkState(this.path == null, "path was already set");
 
-    return Hrefs.sibling(thisHref, fileName);
-  }
-
-  protected final String thisHref() {
-    Class<? extends SitePage> key;
-    key = getClass();
-
-    return context.getHref(key);
+    this.context = context;
+    this.path = path;
   }
 
 }

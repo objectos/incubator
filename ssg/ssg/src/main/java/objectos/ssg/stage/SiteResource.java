@@ -21,12 +21,12 @@ import br.com.objectos.http.media.MediaTypes;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
-import objectos.ssg.SiteArtifact;
+import objectos.ssg.SitePath;
 
 public record SiteResource(String href, URL url, MediaType mediaType)
     implements
     InputStreamSource,
-    SiteArtifact {
+    SitePath {
 
   public SiteResource {
     if (mediaType == null) {
@@ -40,7 +40,7 @@ public record SiteResource(String href, URL url, MediaType mediaType)
   }
 
   @Override
-  public final void generate(SiteArtifact.Generator generator) {
+  public final void generate(SitePath.Generator generator) {
     generator.generateResource(this);
   }
 

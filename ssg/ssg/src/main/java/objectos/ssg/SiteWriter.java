@@ -15,12 +15,11 @@
  */
 package objectos.ssg;
 
-public interface SiteComponent {
+import br.com.objectos.http.media.MediaType;
+import java.io.IOException;
 
-  void configure(Site.Context context);
+public interface SiteWriter {
 
-  void generationOver();
-
-  interface Configuration {}
+  void writeStringArtifact(String path, MediaType mediaType, String contents) throws IOException;
 
 }

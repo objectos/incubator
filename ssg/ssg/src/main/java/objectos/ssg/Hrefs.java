@@ -15,6 +15,8 @@
  */
 package objectos.ssg;
 
+import br.com.objectos.core.object.Checks;
+
 final class Hrefs {
 
   private Hrefs() {}
@@ -42,7 +44,10 @@ final class Hrefs {
     return root + '/' + fileName;
   }
 
-  public static void validateName(String name) {
+  public static void validateName(String fileName) {
+    Checks.checkNotNull(fileName, "fileName == null");
+    Checks.checkArgument(!fileName.isEmpty(), "fileName cannot be empty");
+
     // TODO: implement me
   }
 

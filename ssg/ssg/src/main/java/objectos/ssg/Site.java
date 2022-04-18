@@ -17,62 +17,146 @@ package objectos.ssg;
 
 import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.core.object.Checks;
+import br.com.objectos.core.throwable.Try;
+import java.io.IOException;
+import java.util.Collection;
+import java.util.IdentityHashMap;
+import java.util.Map;
 
 public abstract class Site {
 
-  private Generator generator;
+  private Context context;
+
+  private final Map<Object, Object> objects = new IdentityHashMap<>();
+
+  private final StringBuilder stringBuilder = new StringBuilder();
 
   protected Site() {}
 
-  public final synchronized void generate(Generator generator) {
-    Checks.checkState(this.generator == null, "A generator was already set");
+  public final synchronized void generate(Generator generator) {}
 
-    this.generator = Checks.checkNotNull(generator, "generator == null");
+  public final void generate(SiteWriter writer, RenderingOption... options) throws IOException {
+    context = new Context() {
+      @Override
+      public <T> T getObject(Class<? extends T> key) {
+        return null;
+      }
+
+      @Override
+      public <T> ImmutableList<T> getObjectsByType(Class<? extends T> key) {
+        return null;
+      }
+    };
+
+    objects.clear();
+
+    stringBuilder.setLength(0);
+
+    Throwable rethrow;
+    rethrow = Try.begin();
 
     try {
       configure();
-    } finally {
-      this.generator = null;
+    } catch (Throwable e) {
+      rethrow = e;
     }
+
+    if (rethrow != null) {
+      postSiteGeneration();
+
+      Try.rethrowIfPossible(rethrow, IOException.class);
+    }
+
+    Collection<Object> values;
+    values = objects.values();
 
     try {
-      generate();
+      for (Object o : values) {
+        if (o instanceof SiteWriteable w) {
+          w.writeTo(writer);
+        }
+      }
     } finally {
-
+      postSiteGeneration();
     }
-
-    generator.generate();
   }
 
-  protected final void addDirectory(String path, SiteDirectory directory) {
-    cfg().addDirectory(path, directory);
+  protected final void addDirectory(String fileName, SiteDirectory directory) {}
+
+  protected final void addObject(Object object) {}
+
+  protected final <T extends SitePage> T addPage(String fileName, T page) {
+    String path;
+    path = toPath(fileName);
+
+    return addPage0(page, path);
   }
 
-  protected final void addObject(Object object) {
-    cfg().addObject(object);
-  }
+  protected final void addResource(String resourceName) {}
 
-  protected final void addPage(String fileName, SitePage page) {
-    cfg().addPage(fileName, page);
-  }
-
-  protected final void addResource(String resourceName) {
-    cfg().addResource(getClass(), resourceName);
-  }
-
-  protected final void addStyleSheet(String fileName, SiteStyleSheet sheet) {
-    cfg().addStyleSheet(fileName, sheet);
-  }
-
-  protected final Configuration cfg() {
-    Checks.checkState(generator != null, "Please call this under the configure() method");
-
-    return generator;
-  }
+  protected final void addStyleSheet(String fileName, SiteStyleSheet sheet) {}
 
   protected abstract void configure();
 
   protected void generate() {}
+
+  final String toPath(String fileName) {
+    Hrefs.validateName(fileName);
+
+    stringBuilder.setLength(0);
+
+    stringBuilder.append('/');
+
+    stringBuilder.append(fileName);
+
+    return stringBuilder.toString();
+  }
+
+  private void addObject0(Object o) {
+    Class<?> key;
+    key = o.getClass();
+
+    Object existing;
+    existing = objects.get(key);
+
+    if (existing != null) {
+      String msg;
+      msg = """
+            An object was already registered:
+
+                %s
+
+            for the key:
+
+                %s
+            """.formatted(existing, key);
+
+      throw new IllegalArgumentException(msg);
+    }
+
+    objects.put(key, o);
+  }
+
+  private <T extends SitePage> T addPage0(T page, String path) {
+    Checks.checkNotNull(page, "page == null");
+
+    page.set(context, path);
+
+    addObject0(page);
+
+    return page;
+  }
+
+  private void postSiteGeneration() {
+    Collection<Object> values;
+    values = objects.values();
+
+    for (Object o : values) {
+      if (o instanceof SiteLifecycle l) {
+        l.postSiteGeneration();
+      }
+    }
+  }
 
   public interface Configuration {
 
@@ -90,8 +174,6 @@ public abstract class Site {
 
   public interface Context {
 
-    String getHref(Class<?> key);
-
     <T> T getObject(Class<? extends T> key);
 
     <T> ImmutableList<T> getObjectsByType(Class<? extends T> key);
@@ -101,6 +183,10 @@ public abstract class Site {
   public interface Generator extends Configuration, Context {
 
     void generate();
+
+  }
+
+  public interface RenderingOption {
 
   }
 
