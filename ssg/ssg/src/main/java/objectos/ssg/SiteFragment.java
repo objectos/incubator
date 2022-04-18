@@ -42,6 +42,10 @@ public abstract class SiteFragment extends AbstractFragment implements SiteCompo
 
   protected void configure() {}
 
+  protected final String getHref(Class<?> key) {
+    return context.getHref(key);
+  }
+
   protected final <T> T getObject(Class<? extends T> key) {
     return context.getObject(key);
   }
