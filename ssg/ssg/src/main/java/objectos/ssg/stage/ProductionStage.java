@@ -24,11 +24,11 @@ import br.com.objectos.fs.RegularFile;
 import br.com.objectos.http.path.Location;
 import java.io.IOException;
 import java.io.UncheckedIOException;
-import objectos.ssg.AbstractSiteDsl;
 import objectos.ssg.SitePage;
 import objectos.ssg.SiteStyleSheet;
+import objectos.ssg.Stage;
 
-public class ProductionStage extends AbstractSiteDsl {
+public class ProductionStage extends Stage {
 
   private final String baseHref;
 
@@ -43,11 +43,6 @@ public class ProductionStage extends AbstractSiteDsl {
   @Override
   public final String getBaseHref() {
     return baseHref;
-  }
-
-  @Override
-  public final boolean isProduction() {
-    return true;
   }
 
   @Override

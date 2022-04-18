@@ -158,9 +158,7 @@ public class ServeMojo extends AbstractSiteMojo {
     site = newSite();
 
     if (site != null) {
-      stage.addSite(site);
-
-      stage.generate();
+      site.generate(stage);
 
       server.reconfigure(stage);
 

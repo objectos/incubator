@@ -20,27 +20,31 @@ import br.com.objectos.core.object.Checks;
 import br.com.objectos.html.attribute.StandardAttributeName.Href;
 import br.com.objectos.html.tmpl.AbstractFragment;
 
-public abstract class SiteFragment extends AbstractFragment implements SiteComponent {
+public abstract class SiteFragment extends AbstractFragment
+    implements
+    SiteComponent {
 
-  private Context context;
+  private Site.Context context;
 
   protected SiteFragment() {}
 
   @Override
-  public final void configure(Context context) {
+  public final void configure(Site.Context context) {
     Checks.checkState(this.context == null, "context was already set");
 
-    this.context = Checks.checkNotNull(context, "context == null");
+    this.context = Checks.checkNotNull(context, "generator == null");
 
     configure();
   }
 
   @Override
-  public final void unregister() {
+  public final void generationOver() {
     context = null;
   }
 
   protected void configure() {}
+
+  protected void generate() {}
 
   protected final String getHref(Class<?> key) {
     return context.getHref(key);
@@ -62,9 +66,9 @@ public abstract class SiteFragment extends AbstractFragment implements SiteCompo
     return href(value);
   }
 
-  protected final Href href(SiteRenderable renderable) {
-    Class<? extends SiteRenderable> key;
-    key = renderable.getClass();
+  protected final Href href(Object o) {
+    Class<? extends Object> key;
+    key = o.getClass();
 
     return href(key);
   }

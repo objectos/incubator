@@ -27,9 +27,7 @@ public abstract class AbstractSiteTest {
   }
 
   final void run(Site site) {
-    site.configure(dsl);
-
-    dsl.generate();
+    site.generate(dsl);
   }
 
 }

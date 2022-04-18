@@ -31,12 +31,13 @@ public class ProductionStageTest extends AbstractSiteProdTest {
     Directory target;
     target = newTempDir();
 
+    ObjectosSite site;
+    site = new ObjectosSite();
+
     ProductionStage stage;
     stage = new ProductionStage("", target);
 
-    stage.addSite(new ObjectosSite());
-
-    stage.generate();
+    site.generate(stage);
 
     assertEquals(
       Read.string(target.getRegularFile("index.html"), Charsets.utf8()),

@@ -28,12 +28,13 @@ public class DevelopmentStageTest {
 
   @Test
   public void objectos() throws IOException {
+    ObjectosSite site;
+    site = new ObjectosSite();
+
     DevelopmentStage stage;
     stage = new DevelopmentStage();
 
-    stage.addSite(new ObjectosSite());
-
-    stage.generate();
+    site.generate(stage);
 
     int port = 7777;
 

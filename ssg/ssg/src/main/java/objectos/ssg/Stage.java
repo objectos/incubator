@@ -19,28 +19,33 @@ import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.core.list.MutableList;
 import br.com.objectos.core.object.Checks;
 import br.com.objectos.http.media.MediaType;
-import java.io.IOException;
 import java.net.URL;
 import java.util.Collection;
 import java.util.IdentityHashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 import objectos.ssg.stage.SiteResource;
 
-public abstract class AbstractSiteDsl implements Site.Generator, SiteComponent.Context {
+public abstract class Stage
+    implements
+    Site.Configuration,
+    Site.Generator,
+    SiteArtifact.Generator,
+    SiteComponent.Configuration {
 
   private final Map<Class<?>, String> hrefMap = new IdentityHashMap<>();
 
   private final Map<Class<?>, Object> objects = new IdentityHashMap<>();
 
-  private final List<SiteRenderable> renderables = new MutableList<>();
+  private final SiteResources siteResources = new SiteResources();
 
   private final StringBuilder stringBuilder = new StringBuilder();
 
-  protected AbstractSiteDsl() {}
+  protected Stage() {
+    objects.put(SiteResources.class, siteResources);
+  }
 
   @Override
   public final void addDirectory(String name, SiteDirectory directory) {
@@ -64,16 +69,6 @@ public abstract class AbstractSiteDsl implements Site.Generator, SiteComponent.C
     addResource0(resourceName, contextClass, resourceName, null, this::hrefBuilder);
   }
 
-  public final void addSite(Site site) throws IOException {
-    site.configure(this);
-  }
-
-  public final void addSites(Iterable<? extends Site> sites) throws IOException {
-    for (Site site : sites) {
-      site.configure(this);
-    }
-  }
-
   @Override
   public final void addStyleSheet(String fileName, SiteStyleSheet sheet) {
     addStyleSheet0(fileName, sheet, this::hrefBuilder);
@@ -81,18 +76,41 @@ public abstract class AbstractSiteDsl implements Site.Generator, SiteComponent.C
 
   @Override
   public final void generate() {
-    for (SiteRenderable renderable : renderables) {
-      renderable.render(this);
-    }
-
     Collection<Object> values;
     values = objects.values();
 
     for (Object object : values) {
-      if (object instanceof SiteComponent component) {
-        component.unregister();
+      if (object instanceof SiteArtifact a) {
+        a.generate(this);
       }
     }
+
+    for (Object object : values) {
+      if (object instanceof SiteComponent component) {
+        component.generationOver();
+      }
+    }
+  }
+
+  @Override
+  public final void generatePage(SitePage page) {
+    String fullPath;
+    fullPath = getHref(page);
+
+    renderSitePage(fullPath, page);
+  }
+
+  @Override
+  public final void generateResource(SiteResource resource) {
+    renderSiteResource(resource);
+  }
+
+  @Override
+  public final void generateStyleSheet(SiteStyleSheet sheet) {
+    String fullPath;
+    fullPath = getHref(sheet);
+
+    renderSiteStyleSheet(fullPath, sheet);
   }
 
   @Override
@@ -111,7 +129,7 @@ public abstract class AbstractSiteDsl implements Site.Generator, SiteComponent.C
     if (object == null) {
       String msg;
       msg = """
-            No SiteObject was found with key:
+            No object was found for key:
 
                 %s
             """.formatted(key);
@@ -139,21 +157,13 @@ public abstract class AbstractSiteDsl implements Site.Generator, SiteComponent.C
     return ImmutableList.copyOf(cast.iterator());
   }
 
-  @Override
-  public boolean isDevelopment() {
-    return false;
-  }
-
-  @Override
-  public boolean isProduction() {
-    return false;
-  }
-
   public abstract void renderSitePage(String fullPath, SitePage page);
 
   public abstract void renderSiteResource(SiteResource resource);
 
   public abstract void renderSiteStyleSheet(String fullPath, SiteStyleSheet sheet);
+
+  protected abstract String getBaseHref();
 
   protected String getHref0(Class<?> key) {
     String href;
@@ -209,7 +219,7 @@ public abstract class AbstractSiteDsl implements Site.Generator, SiteComponent.C
     if (existing != null) {
       String msg;
       msg = """
-            A SiteObject was already registered:
+            An object was already registered:
 
                 %s
 
@@ -225,10 +235,6 @@ public abstract class AbstractSiteDsl implements Site.Generator, SiteComponent.C
 
     if (object instanceof SiteComponent c) {
       c.configure(this);
-    }
-
-    if (object instanceof SiteRenderable r) {
-      renderables.add(r);
     }
   }
 
@@ -253,7 +259,7 @@ public abstract class AbstractSiteDsl implements Site.Generator, SiteComponent.C
     SiteResource resource;
     resource = new SiteResource(href, url, mediaType);
 
-    renderables.add(resource);
+    siteResources.add(resource);
   }
 
   final void addStyleSheet0(String fileName, SiteStyleSheet sheet,
@@ -277,20 +283,6 @@ public abstract class AbstractSiteDsl implements Site.Generator, SiteComponent.C
     stringBuilder.append('/');
 
     return stringBuilder;
-  }
-
-  final void renderSitePage(SitePage page) {
-    String fullPath;
-    fullPath = getHref(page);
-
-    renderSitePage(fullPath, page);
-  }
-
-  final void renderSiteStyleSheet(SiteStyleSheet sheet) {
-    String fullPath;
-    fullPath = getHref(sheet);
-
-    renderSiteStyleSheet(fullPath, sheet);
   }
 
   private String getHref(Object o) {
@@ -341,6 +333,26 @@ public abstract class AbstractSiteDsl implements Site.Generator, SiteComponent.C
     }
 
     return url;
+  }
+
+  private static class SiteResources implements SiteArtifact {
+
+    private final MutableList<SiteResource> resources = new MutableList<>();
+
+    @Override
+    public final void generate(Generator generator) {
+      for (int i = 0, size = resources.size(); i < size; i++) {
+        SiteResource r;
+        r = resources.get(i);
+
+        generator.generateResource(r);
+      }
+    }
+
+    final void add(SiteResource resource) {
+      resources.add(resource);
+    }
+
   }
 
   private class ThisDirectory implements SiteDirectory.Configuration {

@@ -71,9 +71,7 @@ public class SiteMojo extends AbstractSiteMojo {
       Site site;
       site = getSiteInstance(classRealm);
 
-      stage.addSite(site);
-
-      stage.generate();
+      site.generate(stage);
     } catch (IOException e) {
       throw new MojoExecutionException(e.getMessage(), e);
     }

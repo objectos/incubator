@@ -20,49 +20,61 @@ import br.com.objectos.core.object.Checks;
 
 public abstract class Site {
 
-  private Generator gen;
+  private Generator generator;
 
   protected Site() {}
 
-  public final synchronized void configure(Generator generator) {
-    this.gen = Checks.checkNotNull(generator, "generator == null");
+  public final synchronized void generate(Generator generator) {
+    Checks.checkState(this.generator == null, "A generator was already set");
+
+    this.generator = Checks.checkNotNull(generator, "generator == null");
 
     try {
       configure();
     } finally {
-      this.gen = null;
+      this.generator = null;
     }
+
+    try {
+      generate();
+    } finally {
+
+    }
+
+    generator.generate();
   }
 
   protected final void addDirectory(String path, SiteDirectory directory) {
-    gen().addDirectory(path, directory);
+    cfg().addDirectory(path, directory);
   }
 
   protected final void addObject(Object object) {
-    gen().addObject(object);
+    cfg().addObject(object);
   }
 
   protected final void addPage(String fileName, SitePage page) {
-    gen().addPage(fileName, page);
+    cfg().addPage(fileName, page);
   }
 
   protected final void addResource(String resourceName) {
-    gen().addResource(getClass(), resourceName);
+    cfg().addResource(getClass(), resourceName);
   }
 
   protected final void addStyleSheet(String fileName, SiteStyleSheet sheet) {
-    gen().addStyleSheet(fileName, sheet);
+    cfg().addStyleSheet(fileName, sheet);
+  }
+
+  protected final Configuration cfg() {
+    Checks.checkState(generator != null, "Please call this under the configure() method");
+
+    return generator;
   }
 
   protected abstract void configure();
 
-  protected final Generator gen() {
-    Checks.checkState(gen != null, "Please call this under the configure() method");
+  protected void generate() {}
 
-    return gen;
-  }
-
-  public interface Generator extends ObjectLocator {
+  public interface Configuration {
 
     void addDirectory(String path, SiteDirectory directory);
 
@@ -74,21 +86,21 @@ public abstract class Site {
 
     void addStyleSheet(String fileName, SiteStyleSheet sheet);
 
-    void generate();
-
-    String getBaseHref();
-
-    boolean isDevelopment();
-
-    boolean isProduction();
-
   }
 
-  public interface ObjectLocator {
+  public interface Context {
+
+    String getHref(Class<?> key);
 
     <T> T getObject(Class<? extends T> key);
 
     <T> ImmutableList<T> getObjectsByType(Class<? extends T> key);
+
+  }
+
+  public interface Generator extends Configuration, Context {
+
+    void generate();
 
   }
 

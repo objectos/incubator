@@ -13,14 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package objectos.ssg;
+package objectos.ssg.tc00;
 
-public interface SiteComponent {
+import objectos.ssg.Site;
 
-  void configure(Site.Context context);
+public class TestCase00 extends Site {
 
-  void generationOver();
+  @Override
+  protected final void configure() {
 
-  interface Configuration {}
+  }
 
 }

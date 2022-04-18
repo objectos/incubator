@@ -13,14 +13,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package objectos.ssg;
+package objectos.ssg.tc00;
 
-public interface SiteComponent {
+import br.com.objectos.www.objectos.Navbar;
+import br.com.objectos.www.objectos.css.CssDirectory;
+import objectos.ssg.SitePage;
 
-  void configure(Site.Context context);
+final class Index extends SitePage {
 
-  void generationOver();
+  @Override
+  protected final void definition() {
+    Navbar navbar;
+    navbar = getObject(Navbar.class);
 
-  interface Configuration {}
+    html(
+      head(
+        link(CssDirectory.STYLES)
+      ),
+      body(
+        f(navbar),
+        ul(
+          li(a(href(Index.class)))
+        )
+      )
+    );
+  }
 
 }

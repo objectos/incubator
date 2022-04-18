@@ -24,11 +24,11 @@ import br.com.objectos.http.server.HttpModuleDsl;
 import br.com.objectos.http.server.HttpServerBuilder;
 import br.com.objectos.http.server.Method;
 import br.com.objectos.http.server.MutableHttpServer;
-import objectos.ssg.AbstractSiteDsl;
 import objectos.ssg.SitePage;
 import objectos.ssg.SiteStyleSheet;
+import objectos.ssg.Stage;
 
-public class DevelopmentStage extends AbstractSiteDsl implements HttpModule {
+public class DevelopmentStage extends Stage implements HttpModule {
 
   private final MutableList<Route> routes = MutableList.create();
 
@@ -46,11 +46,6 @@ public class DevelopmentStage extends AbstractSiteDsl implements HttpModule {
   @Override
   public final String getBaseHref() {
     return "";
-  }
-
-  @Override
-  public final boolean isDevelopment() {
-    return true;
   }
 
   @Override

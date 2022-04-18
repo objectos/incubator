@@ -24,7 +24,7 @@ import java.util.IdentityHashMap;
 import java.util.Map;
 import objectos.ssg.stage.SiteResource;
 
-class TestingSiteDsl extends AbstractSiteDsl {
+class TestingSiteDsl extends Stage {
 
   private final Map<String, MediaType> mediaTypes = new HashMap<>();
 

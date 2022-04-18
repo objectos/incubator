@@ -22,26 +22,28 @@ import br.com.objectos.html.element.ElementName;
 import br.com.objectos.html.tmpl.AbstractTemplate;
 
 public abstract class SitePage extends AbstractTemplate
-    implements SiteComponent, SiteRenderable {
+    implements
+    SiteArtifact,
+    SiteComponent {
 
-  private Context context;
+  private Site.Context context;
 
   @Override
-  public final void configure(Context context) {
+  public final void configure(Site.Context context) {
     Checks.checkState(this.context == null, "context was already set");
 
-    this.context = Checks.checkNotNull(context, "context == null");
+    this.context = Checks.checkNotNull(context, "generator == null");
 
     configure();
   }
 
   @Override
-  public final void render(AbstractSiteDsl dsl) {
-    dsl.renderSitePage(this);
+  public final void generate(SiteArtifact.Generator generator) {
+    generator.generatePage(this);
   }
 
   @Override
-  public final void unregister() {
+  public final void generationOver() {
     context = null;
   }
 
@@ -56,7 +58,7 @@ public abstract class SitePage extends AbstractTemplate
     return context.getObjectsByType(type);
   }
 
-  protected final Href href(Class<? extends SiteRenderable> key) {
+  protected final Href href(Class<?> key) {
     String value;
     value = context.getHref(key);
 

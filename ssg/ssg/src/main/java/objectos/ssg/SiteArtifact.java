@@ -15,8 +15,20 @@
  */
 package objectos.ssg;
 
-public interface SiteRenderable {
+import objectos.ssg.stage.SiteResource;
 
-  void render(AbstractSiteDsl dsl);
+public interface SiteArtifact {
+
+  void generate(Generator generator);
+
+  interface Generator {
+
+    void generatePage(SitePage page);
+
+    void generateResource(SiteResource resource);
+
+    void generateStyleSheet(SiteStyleSheet sheet);
+
+  }
 
 }
