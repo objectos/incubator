@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package objectos.ssg.stage;
+package objectos.ssg.mojo;
 
 import static org.testng.Assert.assertEquals;
 
@@ -24,15 +24,15 @@ import br.com.objectos.www.objectos.ObjectosSite;
 import java.io.IOException;
 import org.testng.annotations.Test;
 
-public class DevelopmentStageTest {
+public class ServeMojoWriterTest {
 
   @Test
   public void objectos() throws IOException {
     ObjectosSite site;
     site = new ObjectosSite();
 
-    DevelopmentStage stage;
-    stage = new DevelopmentStage();
+    ServeMojoWriter stage;
+    stage = new ServeMojoWriter();
 
     site.generate(stage);
 
@@ -65,7 +65,7 @@ public class DevelopmentStageTest {
         String.join("",
           "<html>",
           "<head>",
-          "<link rel=\"stylesheet\" href=\"/css/styles.css\">",
+          "<link href=\"/css/styles.css\" rel=\"stylesheet\">",
           "</head>",
           "<body>",
           "<nav>",

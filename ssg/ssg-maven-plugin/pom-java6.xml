@@ -114,6 +114,10 @@
 			<artifactId>http-server-jetty</artifactId>
 			<scope>compile</scope>
 		</dependency>
+		<dependency>
+			<groupId>br.com.objectos</groupId>
+			<artifactId>http-testing</artifactId>
+		</dependency>
 		
 		<dependency>
 			<groupId>br.com.objectos</groupId>

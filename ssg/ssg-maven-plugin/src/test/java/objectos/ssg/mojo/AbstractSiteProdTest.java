@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package objectos.ssg.stage;
+package objectos.ssg.mojo;
 
 import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.testing.TmpDir;

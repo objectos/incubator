@@ -15,7 +15,9 @@
  */
 package br.com.objectos.www.objectos;
 
-public interface NavbarPage {
+import objectos.ssg.SitePath;
+
+public interface NavbarPage extends SitePath {
 
   String navbarTitle();
 

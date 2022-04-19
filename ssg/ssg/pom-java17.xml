@@ -36,6 +36,10 @@
 	<dependencies>
 		<dependency>
 			<groupId>br.com.objectos</groupId>
+			<artifactId>core-set</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>br.com.objectos</groupId>
 			<artifactId>css</artifactId>
 		</dependency>
 
@@ -47,14 +51,6 @@
 		<dependency>
 			<groupId>br.com.objectos</groupId>
 			<artifactId>http-server</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>br.com.objectos</groupId>
-			<artifactId>http-server-jetty</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>br.com.objectos</groupId>
-			<artifactId>http-testing</artifactId>
 		</dependency>
 
 		<dependency>

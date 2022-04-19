@@ -28,7 +28,6 @@ import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.Date;
 import objectos.ssg.Site;
-import objectos.ssg.stage.DevelopmentStage;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugin.logging.Log;
@@ -151,16 +150,16 @@ public class ServeMojo extends AbstractSiteMojo {
 
     siteClassLoader = newClassLoader();
 
-    DevelopmentStage stage;
-    stage = new DevelopmentStage();
+    ServeMojoWriter writer;
+    writer = new ServeMojoWriter();
 
     Site site;
     site = newSite();
 
     if (site != null) {
-      site.generate(stage);
+      site.generate(writer);
 
-      server.reconfigure(stage);
+      server.reconfigure(writer);
 
       logger.info("Reload success: " + new Date());
     }

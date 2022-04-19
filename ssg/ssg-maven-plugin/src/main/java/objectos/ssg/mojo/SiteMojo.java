@@ -23,7 +23,6 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
 import objectos.ssg.Site;
-import objectos.ssg.stage.ProductionStage;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.Mojo;
@@ -61,17 +60,13 @@ public class SiteMojo extends AbstractSiteMojo {
       Directory target;
       target = LocalFs.getDirectory(siteOutputDirectory);
 
-      ProductionStage stage;
-      stage = new ProductionStage(
-        baseHref == null ? "" : baseHref,
-
-        target
-      );
+      SiteMojoWriter writer;
+      writer = new SiteMojoWriter(target);
 
       Site site;
       site = getSiteInstance(classRealm);
 
-      site.generate(stage);
+      site.generate(writer);
     } catch (IOException e) {
       throw new MojoExecutionException(e.getMessage(), e);
     }

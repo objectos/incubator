@@ -13,11 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package objectos.ssg.stage;
+package objectos.ssg.mojo;
 
 import br.com.objectos.core.io.InputStreamSource;
-import br.com.objectos.core.io.Read;
-import br.com.objectos.http.server.Code500InternalServerErrorException;
+import br.com.objectos.http.media.MediaType;
 import br.com.objectos.http.server.HttpAction;
 import br.com.objectos.http.server.HttpException;
 import br.com.objectos.http.server.Request;
@@ -26,29 +25,16 @@ import br.com.objectos.http.server.ResponseWriter;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import objectos.ssg.SiteResource;
 
-final class SiteResourceHttpAction implements HttpAction, Response {
+final class ByteArrayHttpAction implements HttpAction, Response {
 
-  private final SiteResource resource;
+  private final byte[] bytes;
 
-  SiteResourceHttpAction(SiteResource resource) {
-    this.resource = resource;
-  }
+  private final MediaType mediaType;
 
-  @Override
-  public final boolean equals(Object obj) {
-    if (obj == this) {
-      return true;
-    }
-
-    if (!(obj instanceof SiteResourceHttpAction)) {
-      return false;
-    }
-
-    SiteResourceHttpAction that = (SiteResourceHttpAction) obj;
-
-    return resource.equals(that.resource);
+  ByteArrayHttpAction(byte[] bytes, MediaType mediaType) {
+    this.bytes = bytes;
+    this.mediaType = mediaType;
   }
 
   @Override
@@ -57,28 +43,16 @@ final class SiteResourceHttpAction implements HttpAction, Response {
   }
 
   @Override
-  public final int hashCode() {
-    return resource.hashCode();
-  }
-
-  @Override
   public final void writeTo(ResponseWriter writer) throws HttpException {
-    try {
-      byte[] bytes;
-      bytes = Read.byteArray(resource);
+    writer.sayOk();
 
-      writer.sayOk();
+    writer.contentLength(bytes.length);
 
-      writer.contentLength(bytes.length);
+    writer.contentType(mediaType);
 
-      writer.contentType(resource.mediaType());
+    writer.messageBody(new ByteArrayByteSource(bytes));
 
-      writer.messageBody(new ByteArrayByteSource(bytes));
-
-      writer.write();
-    } catch (IOException e) {
-      throw new Code500InternalServerErrorException(e);
-    }
+    writer.write();
   }
 
   private static class ByteArrayByteSource implements InputStreamSource {
