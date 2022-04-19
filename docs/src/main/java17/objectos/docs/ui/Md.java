@@ -112,7 +112,10 @@ public final class Md extends SimpleSiteComponent {
         throw new RuntimeException(e);
       }
 
-      href = getHref(pageClass);
+      DocsPage page;
+      page = getObject(pageClass);
+
+      href = page.path();
 
       attributes.put("href", href);
     }

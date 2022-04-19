@@ -54,7 +54,8 @@ final class Index extends DocsPage {
         h2("Core libraries"),
 
         p("""
-          Utility libraries that most applications will require:"""),
+          Built from scratch core utilities for Java applications.
+          Core utilities are those that most Java applications will require:"""),
 
         ul(
           li(a(LoggingDir.INDEX, "Logging"))

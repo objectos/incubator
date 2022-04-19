@@ -20,29 +20,31 @@ import objectos.docs.logging.LoggingDir;
 import objectos.docs.ui.Md;
 import objectos.docs.ui.PageSwitcher;
 import objectos.ssg.Site;
-import objectos.ssg.SiteRenderable;
 
 public final class DocsSite extends Site {
 
-  public static final Class<? extends SiteRenderable> INDEX = Index.class;
+  public static final Class<?> INDEX = Index.class;
+
+  private Index index;
+
+  @Override
+  public final void releaseResources() {
+    index = null;
+  }
 
   @Override
   protected final void configure() {
     addObject(new Md());
+
     addObject(new StringBuilder());
 
-    Index index;
-    index = new Index();
+    PageSwitcher switcher;
+    switcher = addObject(new PageSwitcher());
 
-    addPage("index.html", index);
+    index = addPage("index.html", new Index());
 
     addDirectory("intro", new IntroDir());
     addDirectory("logging", new LoggingDir());
-
-    PageSwitcher switcher;
-    switcher = new PageSwitcher();
-
-    addObject(switcher);
 
     switcher.load(index);
   }

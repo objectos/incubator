@@ -6,14 +6,9 @@
 package objectos.docs.ui;
 
 import br.com.objectos.core.list.ImmutableList;
-import objectos.ssg.SiteComponent;
+import objectos.ssg.Site;
 
-class NoOpContext implements SiteComponent.Context {
-
-  @Override
-  public String getHref(Class<?> key) {
-    return null;
-  }
+class NoOpContext implements Site.Context {
 
   @Override
   public <T> T getObject(Class<? extends T> key) {

@@ -27,7 +27,7 @@ import objectos.docs.style.ResetCss;
 import objectos.docs.style.SyntaxCss;
 import objectos.docs.style.XmlCss;
 import objectos.ssg.SitePage;
-import objectos.ssg.SiteRenderable;
+import objectos.ssg.SitePath;
 
 public abstract class DocsPage extends SitePage {
 
@@ -43,7 +43,7 @@ public abstract class DocsPage extends SitePage {
     return titleText;
   }
 
-  protected final ElementName a(Class<? extends SiteRenderable> href, String t) {
+  protected final ElementName a(Class<? extends SitePath> href, String t) {
     return a(
       href(href),
 
