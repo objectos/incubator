@@ -100,8 +100,6 @@ public abstract class SiteDirectory
 
     this.path = path;
     this.site = site;
-
-    configure();
   }
 
   private String toPath(String fileName) {

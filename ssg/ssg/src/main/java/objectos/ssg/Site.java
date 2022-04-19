@@ -42,6 +42,8 @@ public abstract class Site implements SiteResourceHolder {
 
   private final Set<String> paths = new MutableSet<>();
 
+  private ThisSiteRegistry registry = NoOpSiteRegistry.INSTANCE;
+
   protected Site() {}
 
   public final void generate(SiteWriter writer, RenderingOption... options) throws IOException {
@@ -167,7 +169,13 @@ public abstract class Site implements SiteResourceHolder {
   final <T extends SiteDirectory> T addDirectory0(T directory, String path) {
     directory.set(path, this);
 
+    registry.visitSiteDirectory(directory);
+
+    directory.configure();
+
     addByClass(directory);
+
+    registry.postVisitSiteDirectory(directory);
 
     return directory;
   }
@@ -178,6 +186,8 @@ public abstract class Site implements SiteResourceHolder {
     addByClass(page);
 
     page.setPath(path);
+
+    registry.visitSitePage(page);
 
     return page;
   }
@@ -262,6 +272,10 @@ public abstract class Site implements SiteResourceHolder {
     if (o instanceof SiteComponent c) {
       c.configure(context);
     }
+
+    if (o instanceof SiteVisitor r) {
+      registry = registry.add(r);
+    }
   }
 
   private void postSiteGeneration() {
@@ -308,6 +322,72 @@ public abstract class Site implements SiteResourceHolder {
 
   public interface RenderingOption {
 
+  }
+
+  private static class NoOpSiteRegistry extends ThisSiteRegistry {
+    static final ThisSiteRegistry INSTANCE = new NoOpSiteRegistry();
+
+    @Override
+    public final void postVisitSiteDirectory(SiteDirectory directory) {}
+
+    @Override
+    public final void visitSiteDirectory(SiteDirectory directory) {}
+
+    @Override
+    public final void visitSitePage(SitePage page) {}
+
+    @Override
+    final ThisSiteRegistry add(SiteVisitor r) {
+      SimpleSiteRegistry registry;
+      registry = new SimpleSiteRegistry();
+
+      return registry.add(r);
+    }
+  }
+
+  private static class SimpleSiteRegistry extends ThisSiteRegistry {
+    private final List<SiteVisitor> values = new MutableList<>();
+
+    @Override
+    public final void postVisitSiteDirectory(SiteDirectory directory) {
+      for (int i = 0, size = values.size(); i < size; i++) {
+        SiteVisitor r;
+        r = values.get(i);
+
+        r.postVisitSiteDirectory(directory);
+      }
+    }
+
+    @Override
+    public final void visitSiteDirectory(SiteDirectory directory) {
+      for (int i = 0, size = values.size(); i < size; i++) {
+        SiteVisitor r;
+        r = values.get(i);
+
+        r.visitSiteDirectory(directory);
+      }
+    }
+
+    @Override
+    public final void visitSitePage(SitePage page) {
+      for (int i = 0, size = values.size(); i < size; i++) {
+        SiteVisitor r;
+        r = values.get(i);
+
+        r.visitSitePage(page);
+      }
+    }
+
+    @Override
+    ThisSiteRegistry add(SiteVisitor r) {
+      values.add(r);
+
+      return this;
+    }
+  }
+
+  private static abstract class ThisSiteRegistry implements SiteVisitor {
+    abstract ThisSiteRegistry add(SiteVisitor r);
   }
 
 }

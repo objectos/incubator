@@ -238,6 +238,32 @@ public class SiteTest {
       </html>"""
     );
   }
+
+  @Test
+  public void testCase07() throws IOException {
+    TestableSiteWriter w;
+    w = gen(new TestCase07());
+
+    w.testString(
+      "/toc.html",
+
+      TextType.HTML,
+
+      """
+      <html>\
+      <ul>\
+      <li>0:/page1.html</li>\
+      <li>0:/page2.html</li>\
+      <li>1:/l1/page1.html</li>\
+      <li>1:/l1/page2.html</li>\
+      <li>2:/l1/l2/page1.html</li>\
+      <li>1:/l1/page3.html</li>\
+      <li>0:/page3.html</li>\
+      </ul>\
+      </html>"""
+    );
+  }
+
   protected void testPathList(TestableSiteWriter w, String... paths) {
     assertEquals(w.pathList(), ImmutableList.copyOf(paths));
   }
