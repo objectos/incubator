@@ -28,7 +28,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Set;
-import objectos.ssg.stage.SiteResource;
+import java.util.stream.Stream;
 
 public abstract class Site {
 
@@ -44,8 +44,6 @@ public abstract class Site {
 
   protected Site() {}
 
-  public final synchronized void generate(Generator generator) {}
-
   public final void generate(SiteWriter writer, RenderingOption... options) throws IOException {
     context = new Context() {
       @SuppressWarnings("unchecked")
@@ -59,6 +57,7 @@ public abstract class Site {
         if (object == null) {
           String msg;
           msg = """
+
                 No object was found for key:
 
                     %s
@@ -72,7 +71,16 @@ public abstract class Site {
 
       @Override
       public final <T> ImmutableList<T> getObjectsByType(Class<? extends T> key) {
-        throw new UnsupportedOperationException("Implement me");
+        Stream<Object> stream;
+        stream = objects.stream();
+
+        Stream<Object> filter;
+        filter = stream.filter(key::isInstance);
+
+        Stream<? extends T> cast;
+        cast = filter.map(key::cast);
+
+        return ImmutableList.copyOf(cast.iterator());
       }
     };
 
@@ -119,7 +127,11 @@ public abstract class Site {
     return addDirectory0(directory, path);
   }
 
-  protected final void addObject(Object object) {}
+  protected final <T> T addObject(T object) {
+    addByClass(object);
+
+    return object;
+  }
 
   protected final <T extends SitePage> T addPage(String fileName, T page) {
     String path;
@@ -162,7 +174,7 @@ public abstract class Site {
 
     addByClass(page);
 
-    page.set(context, path);
+    page.setPath(path);
 
     return page;
   }
@@ -185,7 +197,7 @@ public abstract class Site {
 
     addByClass(sheet);
 
-    sheet.set(context, path);
+    sheet.setPath(path);
 
     return sheet;
   }
@@ -243,12 +255,16 @@ public abstract class Site {
     byClassMap.put(key, o);
 
     objects.add(o);
+
+    if (o instanceof SiteComponent c) {
+      c.configure(context);
+    }
   }
 
   private void postSiteGeneration() {
     for (Object o : objects) {
-      if (o instanceof SiteLifecycle l) {
-        l.postSiteGeneration();
+      if (o instanceof SiteResourceHolder h) {
+        h.releaseResources();
       }
     }
   }
@@ -279,31 +295,11 @@ public abstract class Site {
     return url;
   }
 
-  public interface Configuration {
-
-    void addDirectory(String path, SiteDirectory directory);
-
-    void addObject(Object object);
-
-    void addPage(String fileName, SitePage page);
-
-    void addResource(Class<?> contextClass, String resourceName);
-
-    void addStyleSheet(String fileName, SiteStyleSheet sheet);
-
-  }
-
   public interface Context {
 
     <T> T getObject(Class<? extends T> key);
 
     <T> ImmutableList<T> getObjectsByType(Class<? extends T> key);
-
-  }
-
-  public interface Generator extends Configuration, Context {
-
-    void generate();
 
   }
 

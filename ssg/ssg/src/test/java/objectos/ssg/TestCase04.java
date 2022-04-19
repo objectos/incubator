@@ -47,8 +47,8 @@ final class TestCase04 extends Site {
     SitePath txt;
 
     @Override
-    public final void postSiteGeneration() {
-      super.postSiteGeneration();
+    public final void releaseResources() {
+      super.releaseResources();
 
       ico = jpg = txt = null;
     }

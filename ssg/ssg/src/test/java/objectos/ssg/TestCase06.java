@@ -15,11 +15,36 @@
  */
 package objectos.ssg;
 
-final class Css0 extends SiteStyleSheet {
+/**
+ * - addFragment
+ */
+final class TestCase06 extends Site {
 
   @Override
-  protected final void definition() {
+  protected final void configure() {
+    addObject(new Top());
 
+    addPage("index.html", new Index());
+  }
+
+  private static class Index extends SitePage {
+    @Override
+    protected final void definition() {
+      html(
+        body(
+          f(getObject(Top.class))
+        )
+      );
+    }
+  }
+
+  private static class Top extends SiteFragment {
+    @Override
+    protected final void definition() {
+      header(
+        a(href(Index.class), t("Objectos"))
+      );
+    }
   }
 
 }

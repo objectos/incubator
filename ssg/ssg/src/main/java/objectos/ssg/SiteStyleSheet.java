@@ -24,8 +24,9 @@ import objectos.ssg.Site.Context;
 
 public abstract class SiteStyleSheet extends AbstractStyleSheet
     implements
-    SiteLifecycle,
+    SiteComponent,
     SitePath,
+    SiteResourceHolder,
     SiteWriteable {
 
   private Context context;
@@ -33,12 +34,21 @@ public abstract class SiteStyleSheet extends AbstractStyleSheet
   private String path;
 
   @Override
+  public final void configure(Context context) {
+    Checks.checkState(this.context == null, "context was already set");
+
+    this.context = Checks.checkNotNull(context, "context == null");
+
+    configure();
+  }
+
+  @Override
   public final String path() {
     return path;
   }
 
   @Override
-  public final void postSiteGeneration() {
+  public final void releaseResources() {
     context = null;
 
     path = null;
@@ -63,14 +73,10 @@ public abstract class SiteStyleSheet extends AbstractStyleSheet
     return context.getObjectsByType(type);
   }
 
-  final void set(Context context, String path) {
-    Checks.checkState(this.context == null, "context was already set");
+  final void setPath(String path) {
     Checks.checkState(this.path == null, "path was already set");
 
-    this.context = context;
     this.path = path;
-
-    configure();
   }
 
 }

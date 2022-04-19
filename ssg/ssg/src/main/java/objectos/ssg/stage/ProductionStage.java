@@ -25,6 +25,7 @@ import br.com.objectos.http.path.Location;
 import java.io.IOException;
 import java.io.UncheckedIOException;
 import objectos.ssg.SitePage;
+import objectos.ssg.SiteResource;
 import objectos.ssg.SiteStyleSheet;
 import objectos.ssg.Stage;
 

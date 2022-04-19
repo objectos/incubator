@@ -25,6 +25,7 @@ import br.com.objectos.http.server.HttpServerBuilder;
 import br.com.objectos.http.server.Method;
 import br.com.objectos.http.server.MutableHttpServer;
 import objectos.ssg.SitePage;
+import objectos.ssg.SiteResource;
 import objectos.ssg.SiteStyleSheet;
 import objectos.ssg.Stage;
 

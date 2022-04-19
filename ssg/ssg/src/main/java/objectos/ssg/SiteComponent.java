@@ -15,7 +15,8 @@
  */
 package objectos.ssg;
 
-final class Page1 extends SitePage {
-  @Override
-  protected final void definition() {}
+public interface SiteComponent {
+
+  void configure(Site.Context context);
+
 }

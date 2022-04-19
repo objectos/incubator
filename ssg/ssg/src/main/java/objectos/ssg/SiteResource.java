@@ -15,8 +15,31 @@
  */
 package objectos.ssg;
 
-public interface SiteLifecycle {
+import br.com.objectos.http.media.MediaType;
+import br.com.objectos.http.media.MediaTypes;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 
-  void postSiteGeneration();
+record SiteResource(String path, URL url, MediaType mediaType)
+    implements
+    SitePath,
+    SiteWriteable {
+
+  public SiteResource {
+    if (mediaType == null) {
+      mediaType = MediaTypes.ofFileName(path);
+    }
+  }
+
+  @Override
+  public final void writeTo(SiteWriter writer) throws IOException {
+    try (InputStream in = url.openStream()) {
+      byte[] bytes;
+      bytes = in.readAllBytes();
+
+      writer.writeBytes(path, mediaType, bytes);
+    }
+  }
 
 }

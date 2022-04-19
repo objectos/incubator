@@ -15,7 +15,8 @@
  */
 package objectos.ssg;
 
-final class Page0 extends SitePage {
-  @Override
-  protected final void definition() {}
+public interface SiteResourceHolder {
+
+  void releaseResources();
+
 }

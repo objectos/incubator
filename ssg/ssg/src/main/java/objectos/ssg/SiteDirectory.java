@@ -15,11 +15,12 @@
  */
 package objectos.ssg;
 
-import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.core.object.Checks;
 import br.com.objectos.http.media.MediaType;
 
-public abstract class SiteDirectory implements SiteLifecycle {
+public abstract class SiteDirectory
+    implements
+    SiteResourceHolder {
 
   private String path;
 
@@ -28,7 +29,7 @@ public abstract class SiteDirectory implements SiteLifecycle {
   protected SiteDirectory() {}
 
   @Override
-  public void postSiteGeneration() {
+  public void releaseResources() {
     path = null;
 
     site = null;
@@ -41,8 +42,8 @@ public abstract class SiteDirectory implements SiteLifecycle {
     return site.addDirectory0(directory, path);
   }
 
-  protected final void addObject(Object object) {
-    throw new UnsupportedOperationException("Implement me");
+  protected final <T> T addObject(T object) {
+    return site.addObject(object);
   }
 
   protected final <T extends SitePage> T addPage(String fileName, T page) {
@@ -92,15 +93,6 @@ public abstract class SiteDirectory implements SiteLifecycle {
   }
 
   protected abstract void configure();
-
-  protected final <T> T getObject(Class<? extends T> key) {
-    throw new UnsupportedOperationException("Implement me");
-  }
-
-  protected final <T>
-      ImmutableList<T> getObjectsByType(Class<? extends T> type) {
-    throw new UnsupportedOperationException("Implement me");
-  }
 
   final void set(String path, Site site) {
     Checks.checkState(this.path == null, "path was already set");

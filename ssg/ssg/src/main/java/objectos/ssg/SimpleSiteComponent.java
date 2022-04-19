@@ -19,7 +19,10 @@ import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.core.object.Checks;
 import objectos.ssg.Site.Context;
 
-public class SimpleSiteComponent implements SiteComponent {
+public class SimpleSiteComponent
+    implements
+    SiteComponent,
+    SiteResourceHolder {
 
   private Context context;
 
@@ -33,22 +36,17 @@ public class SimpleSiteComponent implements SiteComponent {
   }
 
   @Override
-  public final void generationOver() {
+  public void releaseResources() {
     context = null;
   }
 
   protected void configure() {}
 
-  protected final String getHref(Class<?> key) {
-    return context.getHref(key);
-  }
-
   protected final <T> T getObject(Class<? extends T> key) {
     return context.getObject(key);
   }
 
-  protected final <T>
-      ImmutableList<T> getObjectsByType(Class<? extends T> type) {
+  protected final <T> ImmutableList<T> getObjectsByType(Class<? extends T> type) {
     return context.getObjectsByType(type);
   }
 

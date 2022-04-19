@@ -26,6 +26,7 @@ import br.com.objectos.http.server.ResponseWriter;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import objectos.ssg.SiteResource;
 
 final class SiteResourceHttpAction implements HttpAction, Response {
 

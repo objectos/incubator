@@ -19,36 +19,32 @@ import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.core.object.Checks;
 import br.com.objectos.html.attribute.StandardAttributeName.Href;
 import br.com.objectos.html.tmpl.AbstractFragment;
+import objectos.ssg.Site.Context;
 
 public abstract class SiteFragment extends AbstractFragment
     implements
-    SiteComponent {
+    SiteComponent,
+    SiteResourceHolder {
 
   private Site.Context context;
 
   protected SiteFragment() {}
 
   @Override
-  public final void configure(Site.Context context) {
+  public final void configure(Context context) {
     Checks.checkState(this.context == null, "context was already set");
 
-    this.context = Checks.checkNotNull(context, "generator == null");
+    this.context = Checks.checkNotNull(context, "context == null");
 
     configure();
   }
 
   @Override
-  public final void generationOver() {
+  public void releaseResources() {
     context = null;
   }
 
   protected void configure() {}
-
-  protected void generate() {}
-
-  protected final String getHref(Class<?> key) {
-    return context.getHref(key);
-  }
 
   protected final <T> T getObject(Class<? extends T> key) {
     return context.getObject(key);
@@ -59,18 +55,18 @@ public abstract class SiteFragment extends AbstractFragment
     return context.getObjectsByType(type);
   }
 
-  protected final Href href(Class<?> key) {
-    String value;
-    value = context.getHref(key);
+  protected final Href href(Class<? extends SitePath> key) {
+    SitePath sitePath;
+    sitePath = getObject(key);
 
-    return path(value);
+    return href(sitePath);
   }
 
-  protected final Href href(Object o) {
-    Class<? extends Object> key;
-    key = o.getClass();
+  protected final Href href(SitePath sitePath) {
+    String value;
+    value = sitePath.path();
 
-    return path(key);
+    return href(value);
   }
 
 }
