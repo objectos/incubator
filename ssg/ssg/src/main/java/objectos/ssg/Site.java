@@ -32,6 +32,8 @@ import objectos.ssg.stage.SiteResource;
 
 public abstract class Site {
 
+  final StringBuilder stringBuilder = new StringBuilder();
+
   private final Map<Class<?>, Object> byClassMap = new MutableMap<>();
 
   private Context context;
@@ -39,8 +41,6 @@ public abstract class Site {
   private final List<Object> objects = new MutableList<>();
 
   private final Set<String> paths = new MutableSet<>();
-
-  private final StringBuilder stringBuilder = new StringBuilder();
 
   protected Site() {}
 
@@ -112,7 +112,12 @@ public abstract class Site {
     }
   }
 
-  protected final void addDirectory(String fileName, SiteDirectory directory) {}
+  protected final void addDirectory(String fileName, SiteDirectory directory) {
+    String path;
+    path = toPath(fileName);
+
+    addDirectory0(directory, path);
+  }
 
   protected final void addObject(Object object) {}
 
@@ -144,10 +149,38 @@ public abstract class Site {
 
   protected void generate() {}
 
-  final String toPath(String fileName) {
+  final void addDirectory0(SiteDirectory directory, String path) {
+    directory.set(path, this);
+
+    addByClass(directory);
+  }
+
+  final <T extends SitePage> T addPage0(T page, String path) {
+    Checks.checkNotNull(page, "page == null");
+
+    addByClass(page);
+
+    page.set(context, path);
+
+    return page;
+  }
+
+  final <T extends SiteStyleSheet> T addStyleSheet0(T sheet, String path) {
+    Checks.checkNotNull(sheet, "sheet == null");
+
+    addByClass(sheet);
+
+    sheet.set(context, path);
+
+    return sheet;
+  }
+
+  final String toPath(String basePath, String fileName) {
     Hrefs.validateName(fileName);
 
     stringBuilder.setLength(0);
+
+    stringBuilder.append(basePath);
 
     stringBuilder.append('/');
 
@@ -197,16 +230,6 @@ public abstract class Site {
     objects.add(o);
   }
 
-  private <T extends SitePage> T addPage0(T page, String path) {
-    Checks.checkNotNull(page, "page == null");
-
-    addByClass(page);
-
-    page.set(context, path);
-
-    return page;
-  }
-
   private SitePath addResource0(
       String path, Class<?> contextClass, String resourceName, MediaType mediaType) {
     URL url;
@@ -220,22 +243,16 @@ public abstract class Site {
     return resource;
   }
 
-  private <T extends SiteStyleSheet> T addStyleSheet0(T sheet, String path) {
-    Checks.checkNotNull(sheet, "sheet == null");
-
-    addByClass(sheet);
-
-    sheet.set(context, path);
-
-    return sheet;
-  }
-
   private void postSiteGeneration() {
     for (Object o : objects) {
       if (o instanceof SiteLifecycle l) {
         l.postSiteGeneration();
       }
     }
+  }
+
+  private String toPath(String fileName) {
+    return toPath("", fileName);
   }
 
   private URL url(Class<?> clazz, String resourceName) {

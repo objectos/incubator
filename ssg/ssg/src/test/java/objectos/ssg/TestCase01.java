@@ -31,7 +31,7 @@ final class TestCase01 extends Site {
     addStyleSheet("styles.css", new Styles());
   }
 
-  static class Index extends SitePage {
+  private static class Index extends SitePage {
     @Override
     protected final void definition() {
       html(
@@ -42,7 +42,7 @@ final class TestCase01 extends Site {
     }
   }
 
-  static class Styles extends SiteStyleSheet {
+  private static class Styles extends SiteStyleSheet {
     @Override
     protected final void definition() {
       style(

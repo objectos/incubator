@@ -118,6 +118,42 @@ public class SiteTest {
     );
   }
 
+  @Test
+  public void testCase03() throws IOException {
+    TestableSiteWriter w;
+    w = gen(new TestCase03());
+
+    testPathList(
+      w,
+
+      "/sub/index.html",
+      "/sub/styles.css"
+    );
+
+    w.testString(
+      "/sub/index.html",
+
+      TextType.HTML,
+
+      """
+      <html>\
+      <head><link href="/sub/styles.css" rel="stylesheet"></head>\
+      <body>TestCase03:index</body>\
+      </html>"""
+    );
+
+    w.testString(
+      "/sub/styles.css",
+
+      TextType.CSS,
+
+      """
+      body{\
+      font-family:MyCustomFont\
+      }"""
+    );
+  }
+
   protected void testPathList(TestableSiteWriter w, String... paths) {
     assertEquals(w.pathList(), ImmutableList.copyOf(paths));
   }

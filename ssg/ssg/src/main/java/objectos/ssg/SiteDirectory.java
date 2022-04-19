@@ -19,50 +19,55 @@ import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.core.object.Checks;
 import br.com.objectos.http.media.MediaType;
 
-public abstract class SiteDirectory {
+public abstract class SiteDirectory implements SiteLifecycle {
 
-  private Configuration cfg;
+  private String path;
+
+  private Site site;
 
   protected SiteDirectory() {}
 
-  public final void configure(Configuration configuration) {
-    this.cfg = Checks.checkNotNull(configuration, "configuration == null");
+  @Override
+  public final void postSiteGeneration() {
+    path = null;
 
-    try {
-      configure();
-    } finally {
-      this.cfg = null;
-    }
+    site = null;
   }
 
-  protected final void addDirectory(String name, SiteDirectory directory) {
-    cfg().addDirectory(name, directory);
+  protected final void addDirectory(String fileName, SiteDirectory directory) {
+    throw new UnsupportedOperationException("Implement me");
   }
 
   protected final void addObject(Object object) {
-    cfg().addObject(object);
+    throw new UnsupportedOperationException("Implement me");
   }
 
-  protected final void addPage(String fileName, SitePage page) {
-    cfg().addPage(fileName, page);
+  protected final <T extends SitePage> T addPage(String fileName, T page) {
+    String path;
+    path = toPath(fileName);
+
+    return site.addPage0(page, path);
   }
 
   protected final void addResource(String resourceName) {
-    cfg().addResource(resourceName);
+    throw new UnsupportedOperationException("Implement me");
   }
 
   @Deprecated
   protected final void addResource(String path, String resourceName) {
-    cfg().addResource(path, resourceName);
+    throw new UnsupportedOperationException("Implement me");
   }
 
   @Deprecated
   protected final void addResource(String path, String resourceName, MediaType mediaType) {
-    cfg().addResource(path, resourceName, mediaType);
+    throw new UnsupportedOperationException("Implement me");
   }
 
-  protected final void addStyleSheet(String fileName, SiteStyleSheet sheet) {
-    cfg().addStyleSheet(fileName, sheet);
+  protected final <T extends SiteStyleSheet> T addStyleSheet(String fileName, T sheet) {
+    String path;
+    path = toPath(fileName);
+
+    return site.addStyleSheet0(sheet, path);
   }
 
   protected abstract void configure();
@@ -76,28 +81,18 @@ public abstract class SiteDirectory {
     throw new UnsupportedOperationException("Implement me");
   }
 
-  private Configuration cfg() {
-    Checks.checkState(cfg != null, "Please invoke this method under the configure() method");
+  final void set(String path, Site site) {
+    Checks.checkState(this.path == null, "path was already set");
+    Checks.checkState(this.site == null, "site was already set");
 
-    return cfg;
+    this.path = path;
+    this.site = site;
+
+    configure();
   }
 
-  public static interface Configuration {
-
-    void addDirectory(String name, SiteDirectory directory);
-
-    void addObject(Object object);
-
-    void addPage(String fileName, SitePage page);
-
-    void addResource(String resourceName);
-
-    void addResource(String path, String resourceName);
-
-    void addResource(String path, String resourceName, MediaType mediaType);
-
-    void addStyleSheet(String fileName, SiteStyleSheet sheet);
-
+  private String toPath(String fileName) {
+    return site.toPath(path, fileName);
   }
 
 }

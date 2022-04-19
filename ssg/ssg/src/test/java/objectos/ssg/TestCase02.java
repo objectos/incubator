@@ -31,7 +31,7 @@ final class TestCase02 extends Site {
     icon = addResource("5x2.jpg");
   }
 
-  static class Index extends SitePage {
+  private static class Index extends SitePage {
     @Override
     protected final void definition() {
       TestCase02 site;

@@ -16,23 +16,45 @@
 package objectos.ssg;
 
 /**
- * Single add page.
+ * - directory: add page
+ * - directory: add stylesheet
  */
-final class TestCase00 extends Site {
-
-  public Index index;
+final class TestCase03 extends Site {
 
   @Override
   protected final void configure() {
-    index = addPage("index.html", new Index());
+    addDirectory("sub", new SubDir());
   }
 
   private static class Index extends SitePage {
     @Override
     protected final void definition() {
       html(
-        body("TestCase00:index")
+        head(
+          link(Styles.class)
+        ),
+
+        body("TestCase03:index")
       );
+    }
+  }
+
+  private static class Styles extends SiteStyleSheet {
+    @Override
+    protected final void definition() {
+      style(
+        body,
+
+        fontFamily("MyCustomFont")
+      );
+    }
+  }
+
+  private static class SubDir extends SiteDirectory {
+    @Override
+    protected final void configure() {
+      addPage("index.html", new Index());
+      addStyleSheet("styles.css", new Styles());
     }
   }
 
