@@ -154,6 +154,41 @@ public class SiteTest {
     );
   }
 
+  @Test
+  public void testCase04() throws IOException {
+    TestableSiteWriter w;
+    w = gen(new TestCase04());
+
+    testPathList(
+      w,
+
+      "/sub/5x2.jpg",
+      "/sub/foo.jpg",
+      "/sub/foo.txt",
+      "/sub/index.html"
+    );
+
+    Resource r;
+    r = Resource.getResource(getClass(), "5x2.jpg");
+
+    w.testBytes("/sub/5x2.jpg", ImageType.JPEG, r);
+    w.testBytes("/sub/foo.jpg", ImageType.JPEG, r);
+    w.testBytes("/sub/foo.txt", TextType.PLAIN, r);
+
+    w.testString(
+      "/sub/index.html",
+
+      TextType.HTML,
+
+      """
+      <html>\
+      <a href="/sub/5x2.jpg">ico</a>\
+      <a href="/sub/foo.jpg">jpg</a>\
+      <a href="/sub/foo.txt">txt</a>\
+      </html>"""
+    );
+  }
+
   protected void testPathList(TestableSiteWriter w, String... paths) {
     assertEquals(w.pathList(), ImmutableList.copyOf(paths));
   }

@@ -28,7 +28,7 @@ public abstract class SiteDirectory implements SiteLifecycle {
   protected SiteDirectory() {}
 
   @Override
-  public final void postSiteGeneration() {
+  public void postSiteGeneration() {
     path = null;
 
     site = null;
@@ -49,18 +49,36 @@ public abstract class SiteDirectory implements SiteLifecycle {
     return site.addPage0(page, path);
   }
 
-  protected final void addResource(String resourceName) {
-    throw new UnsupportedOperationException("Implement me");
+  protected final SitePath addResource(String resourceName) {
+    String path;
+    path = toPath(resourceName);
+
+    Class<?> contextClass;
+    contextClass = getClass();
+
+    return site.addResource0(path, contextClass, resourceName, null);
   }
 
   @Deprecated
-  protected final void addResource(String path, String resourceName) {
-    throw new UnsupportedOperationException("Implement me");
+  protected final SitePath addResource(String fileName, String resourceName) {
+    String path;
+    path = toPath(fileName);
+
+    Class<?> contextClass;
+    contextClass = getClass();
+
+    return site.addResource0(path, contextClass, resourceName, null);
   }
 
   @Deprecated
-  protected final void addResource(String path, String resourceName, MediaType mediaType) {
-    throw new UnsupportedOperationException("Implement me");
+  protected final SitePath addResource(String fileName, String resourceName, MediaType mediaType) {
+    String path;
+    path = toPath(fileName);
+
+    Class<?> contextClass;
+    contextClass = getClass();
+
+    return site.addResource0(path, contextClass, resourceName, mediaType);
   }
 
   protected final <T extends SiteStyleSheet> T addStyleSheet(String fileName, T sheet) {

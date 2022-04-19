@@ -165,6 +165,19 @@ public abstract class Site {
     return page;
   }
 
+  final SitePath addResource0(
+      String path, Class<?> contextClass, String resourceName, MediaType mediaType) {
+    URL url;
+    url = url(contextClass, resourceName);
+
+    SiteResource resource;
+    resource = new SiteResource(path, url, mediaType);
+
+    objects.add(resource);
+
+    return resource;
+  }
+
   final <T extends SiteStyleSheet> T addStyleSheet0(T sheet, String path) {
     Checks.checkNotNull(sheet, "sheet == null");
 
@@ -228,19 +241,6 @@ public abstract class Site {
     byClassMap.put(key, o);
 
     objects.add(o);
-  }
-
-  private SitePath addResource0(
-      String path, Class<?> contextClass, String resourceName, MediaType mediaType) {
-    URL url;
-    url = url(contextClass, resourceName);
-
-    SiteResource resource;
-    resource = new SiteResource(path, url, mediaType);
-
-    objects.add(resource);
-
-    return resource;
   }
 
   private void postSiteGeneration() {

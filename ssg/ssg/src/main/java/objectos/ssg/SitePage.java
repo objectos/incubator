@@ -67,11 +67,15 @@ public abstract class SitePage extends AbstractTemplate
   }
 
   protected final Href href(Class<? extends SitePath> key) {
-    SitePath artifact;
-    artifact = getObject(key);
+    SitePath sitePath;
+    sitePath = getObject(key);
 
+    return href(sitePath);
+  }
+
+  protected final Href href(SitePath sitePath) {
     String path;
-    path = artifact.path();
+    path = sitePath.path();
 
     return href(path);
   }
