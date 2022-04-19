@@ -30,7 +30,7 @@ import java.util.NoSuchElementException;
 import java.util.Set;
 import java.util.stream.Stream;
 
-public abstract class Site {
+public abstract class Site implements SiteResourceHolder {
 
   final StringBuilder stringBuilder = new StringBuilder();
 
@@ -119,6 +119,9 @@ public abstract class Site {
       postSiteGeneration();
     }
   }
+
+  @Override
+  public void releaseResources() {}
 
   protected final <T extends SiteDirectory> T addDirectory(String fileName, T directory) {
     String path;
