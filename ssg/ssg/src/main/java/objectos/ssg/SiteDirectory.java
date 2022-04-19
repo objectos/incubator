@@ -34,8 +34,11 @@ public abstract class SiteDirectory implements SiteLifecycle {
     site = null;
   }
 
-  protected final void addDirectory(String fileName, SiteDirectory directory) {
-    throw new UnsupportedOperationException("Implement me");
+  protected final <T extends SiteDirectory> T addDirectory(String fileName, T directory) {
+    String path;
+    path = toPath(fileName);
+
+    return site.addDirectory0(directory, path);
   }
 
   protected final void addObject(Object object) {

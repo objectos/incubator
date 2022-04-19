@@ -18,8 +18,7 @@ package objectos.ssg;
 import br.com.objectos.http.media.TextType;
 
 /**
- * - directory: add page
- * - directory: add stylesheet
+ * - directory: add resource
  */
 final class TestCase04 extends Site {
 

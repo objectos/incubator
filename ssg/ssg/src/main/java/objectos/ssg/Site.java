@@ -112,11 +112,11 @@ public abstract class Site {
     }
   }
 
-  protected final void addDirectory(String fileName, SiteDirectory directory) {
+  protected final <T extends SiteDirectory> T addDirectory(String fileName, T directory) {
     String path;
     path = toPath(fileName);
 
-    addDirectory0(directory, path);
+    return addDirectory0(directory, path);
   }
 
   protected final void addObject(Object object) {}
@@ -149,10 +149,12 @@ public abstract class Site {
 
   protected void generate() {}
 
-  final void addDirectory0(SiteDirectory directory, String path) {
+  final <T extends SiteDirectory> T addDirectory0(T directory, String path) {
     directory.set(path, this);
 
     addByClass(directory);
+
+    return directory;
   }
 
   final <T extends SitePage> T addPage0(T page, String path) {
