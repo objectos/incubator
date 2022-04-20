@@ -19,34 +19,38 @@ import objectos.docs.intro.IntroDir;
 import objectos.docs.logging.LoggingDir;
 import objectos.docs.ui.Md;
 import objectos.docs.ui.PageSwitcher;
+import objectos.docs.ui.TableOfContents;
 import objectos.ssg.Site;
 
 public final class DocsSite extends Site {
 
   public static final Class<?> INDEX = Index.class;
 
-  private Index index;
+  private Toc toc;
 
   @Override
   public final void releaseResources() {
-    index = null;
+    toc = null;
   }
 
   @Override
   protected final void configure() {
     addObject(new Md());
-
     addObject(new StringBuilder());
 
     PageSwitcher switcher;
     switcher = addObject(new PageSwitcher());
 
-    index = addPage("index.html", new Index());
+    toc = addPage("toc.html", new Toc());
+
+    addPage("index.html", new Index());
+
+    addObject(new TableOfContents());
 
     addDirectory("intro", new IntroDir());
     addDirectory("logging", new LoggingDir());
 
-    switcher.load(index);
+    switcher.load(toc);
   }
 
 }

@@ -13,6 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package objectos.docs.ui;
+package objectos.docs;
 
-final class Page2 extends DocsPage {}
+import objectos.docs.ui.DocsPage;
+import objectos.docs.ui.TableOfContents;
+
+final class Toc extends DocsPage {
+
+  @Override
+  protected final void configure() {
+    nextPage = Index.class;
+
+    titleText = "Table of contents";
+  }
+
+  @Override
+  protected final void main0() {
+    article(
+      h1("Table of contents"),
+
+      f(getObject(TableOfContents.class))
+    );
+  }
+
+}

@@ -1,7 +1,17 @@
 /*
- * Copyright 2022 Objectos Software LTDA.
+ * Copyright (C) 2022 Objectos Software LTDA.
  *
- * Reprodução parcial ou total proibida.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 package objectos.docs.ui;
 
@@ -9,12 +19,17 @@ import br.com.objectos.core.list.MutableList;
 import br.com.objectos.core.object.Checks;
 import br.com.objectos.html.element.ElementName;
 import br.com.objectos.html.spi.type.UlValue;
+import objectos.ssg.SiteDirectory;
 import objectos.ssg.SiteFragment;
+import objectos.ssg.SitePage;
 import objectos.ssg.SitePath;
+import objectos.ssg.SiteVisitor;
 
-public final class TableOfContents extends SiteFragment {
+public final class TableOfContents extends SiteFragment implements SiteVisitor {
 
   private Level currentLevel;
+
+  private boolean increase;
 
   private Level rootLevel;
 
@@ -30,8 +45,31 @@ public final class TableOfContents extends SiteFragment {
     currentLevel = currentLevel.incLevel(title, key);
   }
 
+  @Override
+  public final void postVisitSiteDirectory(SiteDirectory directory) {
+    decLevel();
+  }
+
   public final void set(DocsPage page) {
     configure();
+  }
+
+  @Override
+  public final void visitSiteDirectory(SiteDirectory directory) {
+    increase = true;
+  }
+
+  @Override
+  public final void visitSitePage(SitePage page) {
+    if (page instanceof DocsPage d) {
+      if (increase) {
+        incLevel(d.titleText, d.getClass());
+
+        increase = false;
+      } else {
+        add(d.titleText, d.getClass());
+      }
+    }
   }
 
   @Override

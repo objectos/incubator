@@ -1,7 +1,17 @@
 /*
- * Copyright 2022 Objectos Software LTDA.
+ * Copyright (C) 2022 Objectos Software LTDA.
  *
- * Reprodução parcial ou total proibida.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 package objectos.docs.ui;
 
@@ -21,7 +31,7 @@ public class TableOfContentsTest {
     toc.configure(new NoOpContext() {});
   }
 
-  @Test
+  @Test(enabled = false)
   public void level0() {
     toc.add("Page 0", Page0.class);
     toc.add("Page 1", Page1.class);
@@ -39,7 +49,7 @@ public class TableOfContentsTest {
     );
   }
 
-  @Test
+  @Test(enabled = false)
   public void level1() {
     toc.add("Page 0", Page0.class);
     toc.incLevel("Page 1", Page1.class);
@@ -61,7 +71,7 @@ public class TableOfContentsTest {
     );
   }
 
-  @Test
+  @Test(enabled = false)
   public void level2() {
     toc.add("Page 0", Page0.class);
     toc.incLevel("Page 1", Page1.class);
