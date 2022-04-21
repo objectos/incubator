@@ -35,6 +35,6 @@ final class Index extends DocsPage {
   protected void configure() {
     nextPage = GetStarted.class;
 
-    titleText = "Overview";
+    titleText = "Objectos Logging";
   }
 }

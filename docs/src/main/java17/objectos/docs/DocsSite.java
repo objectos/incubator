@@ -43,9 +43,9 @@ public final class DocsSite extends Site {
 
     toc = addPage("toc.html", new Toc());
 
-    addPage("index.html", new Index());
-
     addObject(new TableOfContents());
+
+    addPage("index.html", new Index());
 
     addDirectory("intro", new IntroDir());
     addDirectory("logging", new LoggingDir());

@@ -25,7 +25,7 @@ final class Index extends DocsPage {
   protected final void configure() {
     nextPage = IntroDir.INDEX;
 
-    titleText = "Index";
+    titleText = "Home";
   }
 
   @Override
