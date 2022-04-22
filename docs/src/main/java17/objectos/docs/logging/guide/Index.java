@@ -13,23 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package objectos.docs.logging;
+package objectos.docs.logging.guide;
 
-import objectos.docs.logging.guide.LoggingGuideDir;
 import objectos.docs.ui.DocsPage;
-import objectos.ssg.SiteDirectory;
+import objectos.ssg.Markdown;
 
-public final class LoggingDir extends SiteDirectory {
+//@formatter:off
+/**
 
-  public static final Class<? extends DocsPage> INDEX = Index.class;
+# User guide
 
+Welcome to the Objectos Logging user guide.
+
+*/
+//@formatter:on
+@Markdown
+final class Index extends DocsPage {
   @Override
-  protected final void configure() {
-    addPage("index.html", new Index());
-    addPage("get-started.html", new GetStarted());
-    addPage("why.html", new Why());
+  protected void configure() {
+    nextPage = Introduction.class;
 
-    addDirectory("guide", new LoggingGuideDir());
+    titleText = "User guide";
   }
-
 }

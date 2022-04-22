@@ -15,6 +15,7 @@
  */
 package objectos.docs.logging;
 
+import objectos.docs.logging.guide.LoggingGuideDir;
 import objectos.docs.ui.DocsPage;
 import objectos.ssg.Markdown;
 
@@ -22,6 +23,10 @@ import objectos.ssg.Markdown;
 /**
 
 # Introduction
+
+If you are new to logging in Java development or if you are not sure why logging might
+be required please read on. If you are already familiar with logging, you might skip
+to next section.
 
 Java developers need to output messages describing the state
 
@@ -94,11 +99,11 @@ One thing in common to all the examples is that it is the developer job to:
  */
 // @formatter:on
 @Markdown
-final class Introduction extends DocsPage {
+final class Why extends DocsPage {
   @Override
   protected final void configure() {
-    nextPage = null;
+    nextPage = LoggingGuideDir.INDEX;
 
-    titleText = "Introduction";
+    titleText = "Why Objectos Logging?";
   }
 }
