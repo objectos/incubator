@@ -35,7 +35,7 @@ public class HelloWorld {
   public static void main(String[] args) {
     Logger logger = NoOpLogger.getInstance();
 
-    logger.log(HELLO, "world");
+    logger.log(HELLO, "world!");
   }
 }
 ```
@@ -59,9 +59,11 @@ Objectos suite does not provide any implementation either.
 
 Implementations will be provided in a upcoming release.
 
+A second thing to notice is that `Logger` instances *do not have names*.
+
 ## Events, not string messages
 
-A second thing to notice from our example is that the API requires you to
+A third thing to notice from our example is that the API requires you to
 create a log event instance. As seen in the example, this event instance can be parameterized.
 
 ```java
@@ -74,8 +76,10 @@ type argument, you have to pass a string object to the `log` method along with t
 event instance, like so:
 
 ```java
-logger.log(HELLO, "world");
+logger.log(HELLO, "world!");
 ```
+
+In the next section you will learn more about creating log event instances.
 
 */
 //@formatter:on

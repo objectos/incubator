@@ -58,6 +58,7 @@ public final class ArticleCss extends AbstractStyleSheet {
     style(
       article, sp(), h3,
 
+      borderBottom(Spacing.PX, solid, Colors.GRAY3),
       fontSize(FontSize.XL),
       fontWeight(500),
       letterSpacing(px(-0.25)),
@@ -88,7 +89,8 @@ public final class ArticleCss extends AbstractStyleSheet {
     // code
 
     style(
-      article, sp(), p, sp(), code,
+      article, sp(), p, sp(), code, or(),
+      article, sp(), ul, sp(), code,
 
       backgroundColor(Colors.GRAY1),
       border(px(1), solid, Colors.GRAY3),

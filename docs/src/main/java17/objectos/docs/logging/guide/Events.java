@@ -21,46 +21,111 @@ import objectos.ssg.Markdown;
 //@formatter:off
 /**
 
-# Events
+# Creating events
 
-All logging methods from the `Logger` class require that you pass an `Event` instance.
-Therefore, before you can use a `logger` you need to define events.
-
-## Description
-
-An `Event` instance represents an event of a program execution that can be logged.
-So for instance, if you want to log the start of a scheduled task, you create a
-corresponding event like so:
+As we have seen in the previous section, Objectos Logging let's you log events
+instead of string messages.
 
 ```java
-public class MyTask {
-  private static final Event0 ESTART = Event0.info("START");
-  private static final Event1<Long> ESUCCESS = Event1.info("SUCCESS");
-  private static final Event1<IOException> EIO_EX = Event1.error("IO_EX");
+// log events...
+logger.log(HELLO, "world!");
 
-  private final Logger logger;
+// instead of string messages
+// note: the statement below does not compile
+logger.log("Hello world!");
+```
 
-  public MyTask(Logger logger) {
-    this.logger = logger;
-  }
+In this section you will learn how to create log event instances.
 
-  public void start() {
-    logger.log(ESTART);
+## A `Service` example
 
-    long startTime = System.currentTimeMillis();
+Let's create a hypothetical `Service` class. We will use it as an illustration on log
+event creation.
 
-    try {
-      doWork();
+Suppose our service is started without direct user interaction. How we will
+know if the service has started? We can log a message for this purpose.
+This message is of informational nature: "the service has started successfully".
+Let's define an event for it:
 
-      long finishTime = System.currentTimeMillis();
+```java
+package com.example; import objectos.logging.*;
 
-      logger.log(ESUCCESS, finishTime - startTime);
-    } catch (IOException e) {
-      logger.log(EIO_EX, e);
-    }
-  }
+public class Service {
+  static final Event0 STARTED = Event0.info();
 }
 ```
+
+There are important information in this statement, let's break them down:
+
+### Logging level
+
+Suppose our service needs to read some configuration information before it
+starts. Therefore our service start might fail if the configuration cannot be
+read. To indicate that the service started successfully  We will start by defining an event we will use to signal that our service
+has successfully started. Let's define that this is an informational message.
+In other words we want it to signal
+
+
+The logging level of an event is used to indicate its severity.
+
+The logging level is embedded in the event instance, so it must specified when you
+create an event instance.
+
+## Properties
+
+Every log event instance must define a number of required properties. It may define
+additional optional properties but, for now, we will focus on the required ones.
+To illustrate the required properties, we will create some events for a hypothetical
+`Service` class.
+
+We will start by defining an event we will use to signal that our service
+has successfully started:
+
+```java
+package com.example; import objectos.logging.*;
+
+public class Service {
+  static final Event0 STARTED = Event0.info();
+}
+```
+
+Things to notice:
+
+- the field is both `static` and `final`;
+- the field is initialized from the static method `info()`; and
+- the type of the field is `Event0`;
+
+### Events are both `static` and `final`
+
+The first thing to notice is that the event is defined as a field in our class.
+It is highly recommended that events be declared as both `static` and `final`.
+
+Event instances are _immutable_.
+
+### Logging level
+
+### Source
+
+### Keys
+
+### Creating parameterized event instances
+
+### Properties summary
+
+Every event instance must define the following properties:
+
+- **source**: a possibly hierarchical name indicating the source of the event.
+  This is typically the canonical name of the class where the event has been defined; and
+- **level**: indicates the severity of the event.
+  This is typically used by logger implementations to define whether a log message
+  should be created or not. In other words, whether a log method invocation
+  should produce a logging statement or not.
+
+Events may _optionally_ define the following:
+
+- **key**: an object that describes or identifies an event within the same source.
+  This is typically a string literal
+- **type parameters**:
 
  */
 //@formatter:on
@@ -70,6 +135,6 @@ final class Events extends DocsPage {
   protected final void configure() {
     nextPage = null;
 
-    titleText = "Events";
+    titleText = "Creating events";
   }
 }
