@@ -24,7 +24,7 @@ public abstract class SiteDirectory
 
   private String path;
 
-  private Site site;
+  private SiteGeneration site;
 
   protected SiteDirectory() {}
 
@@ -94,7 +94,7 @@ public abstract class SiteDirectory
 
   protected abstract void configure();
 
-  final void set(String path, Site site) {
+  final void set(String path, SiteGeneration site) {
     Checks.checkState(this.path == null, "path was already set");
     Checks.checkState(this.site == null, "site was already set");
 

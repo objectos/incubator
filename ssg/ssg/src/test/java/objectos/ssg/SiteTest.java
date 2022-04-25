@@ -264,6 +264,29 @@ public class SiteTest {
     );
   }
 
+  @Test
+  public void testCase08() throws IOException {
+    TestableSiteWriter w;
+    w = gen(new TestCase08());
+
+    testPathList(
+      w,
+
+      "/docs/index.html"
+    );
+
+    w.testString(
+      "/docs/index.html",
+
+      TextType.HTML,
+
+      """
+      <html>\
+      <body>TestCase08:index</body>\
+      </html>"""
+    );
+  }
+
   protected void testPathList(TestableSiteWriter w, String... paths) {
     assertEquals(w.pathList(), ImmutableList.copyOf(paths));
   }
