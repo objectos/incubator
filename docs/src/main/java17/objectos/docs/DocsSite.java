@@ -21,10 +21,11 @@ import objectos.docs.ui.Md;
 import objectos.docs.ui.PageSwitcher;
 import objectos.docs.ui.TableOfContents;
 import objectos.ssg.Site;
+import objectos.ssg.SitePath;
 
 public final class DocsSite extends Site {
 
-  public static final Class<?> INDEX = Index.class;
+  public static final Class<? extends SitePath> INDEX = Index.class;
 
   private Toc toc;
 
