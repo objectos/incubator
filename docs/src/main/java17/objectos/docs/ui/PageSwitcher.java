@@ -19,40 +19,24 @@ import br.com.objectos.html.spi.type.DivValue;
 import java.util.IdentityHashMap;
 import java.util.Map;
 import objectos.docs.style.PageSwitcherCss;
+import objectos.ssg.SiteDirectory;
 import objectos.ssg.SiteFragment;
+import objectos.ssg.SitePage;
+import objectos.ssg.SiteVisitor;
 
-public class PageSwitcher extends SiteFragment {
+public class PageSwitcher extends SiteFragment implements SiteVisitor {
 
   private DocsPage current;
 
-  private final Map<DocsPage, DocsPage> previousPages;
+  private final Map<DocsPage, DocsPage> nextPages = new IdentityHashMap<>();
 
-  public PageSwitcher() {
-    previousPages = new IdentityHashMap<>();
-  }
+  private final Map<DocsPage, DocsPage> previousPages = new IdentityHashMap<>();
 
-  public final void load(DocsPage page) {
-    current = page;
+  public PageSwitcher() {}
 
-    for (;;) {
-      Class<? extends DocsPage> key;
-      key = current.nextPage();
-
-      if (key == null) {
-        break;
-      }
-
-      DocsPage next;
-      next = getObject(key);
-
-      if (next == null) {
-        throw new NullPointerException("page not found: " + key);
-      }
-
-      previousPages.put(next, current);
-
-      current = next;
-    }
+  @Override
+  public final void postVisitSiteDirectory(SiteDirectory directory) {
+    // noop
   }
 
   public final void set(DocsPage page) {
@@ -60,16 +44,22 @@ public class PageSwitcher extends SiteFragment {
   }
 
   @Override
-  protected final void definition() {
-    DocsPage back = backPage(current);
+  public final void visitSiteDirectory(SiteDirectory directory) {
+    // noop
+  }
 
-    DocsPage next = null;
-
-    Class<? extends DocsPage> nextKey = current.nextPage();
-
-    if (nextKey != null) {
-      next = getObject(nextKey);
+  @Override
+  public final void visitSitePage(SitePage page) {
+    if (page instanceof DocsPage d) {
+      visitDocsPage(d);
     }
+  }
+
+  @Override
+  protected final void definition() {
+    var back = backPage(current);
+
+    var next = nextPages.get(current);
 
     nav(
       PageSwitcherCss._NAV,
@@ -148,6 +138,16 @@ public class PageSwitcher extends SiteFragment {
         span(back.titleText)
       )
     );
+  }
+
+  private void visitDocsPage(DocsPage next) {
+    if (current != null) {
+      previousPages.put(next, current);
+
+      nextPages.put(current, next);
+    }
+
+    current = next;
   }
 
 }

@@ -15,7 +15,6 @@
  */
 package objectos.docs.intro;
 
-import objectos.docs.logging.LoggingDir;
 import objectos.docs.ui.DocsPage;
 import objectos.ssg.Markdown;
 
@@ -87,8 +86,6 @@ module my.module {
 final class Installation extends DocsPage {
   @Override
   protected final void configure() {
-    nextPage = LoggingDir.INDEX;
-
     titleText = "Installation";
   }
 }

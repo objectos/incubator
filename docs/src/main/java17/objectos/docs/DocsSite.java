@@ -27,22 +27,14 @@ public final class DocsSite extends Site {
 
   public static final Class<? extends SitePath> INDEX = Index.class;
 
-  private Toc toc;
-
-  @Override
-  public final void releaseResources() {
-    toc = null;
-  }
-
   @Override
   protected final void configure() {
     addObject(new Md());
     addObject(new StringBuilder());
 
-    PageSwitcher switcher;
-    switcher = addObject(new PageSwitcher());
+    addObject(new PageSwitcher());
 
-    toc = addPage("toc.html", new Toc());
+    addPage("toc.html", new Toc());
 
     addObject(new TableOfContents());
 
@@ -50,8 +42,6 @@ public final class DocsSite extends Site {
 
     addDirectory("intro", new IntroDir());
     addDirectory("logging", new LoggingDir());
-
-    switcher.load(toc);
   }
 
 }

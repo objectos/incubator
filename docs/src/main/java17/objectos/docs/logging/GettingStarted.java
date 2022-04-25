@@ -13,25 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package objectos.docs;
+package objectos.docs.logging;
 
-import objectos.docs.ui.DocsPage;
-import objectos.docs.ui.TableOfContents;
+import objectos.ssg.SiteDirectory;
 
-final class Toc extends DocsPage {
+final class GettingStarted extends SiteDirectory {
 
   @Override
   protected final void configure() {
-    titleText = "Table of contents";
-  }
-
-  @Override
-  protected final void main0() {
-    article(
-      h1("Table of contents"),
-
-      f(getObject(TableOfContents.class))
-    );
+    addPage("index.html", new GettingStartedIndex());
+    addPage("basics.html", new GettingStartedAboutLogging());
   }
 
 }

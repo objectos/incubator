@@ -31,13 +31,7 @@ import objectos.ssg.SitePath;
 
 public abstract class DocsPage extends SitePage {
 
-  protected Class<? extends DocsPage> nextPage;
-
   protected String titleText = "";
-
-  public final Class<? extends DocsPage> nextPage() {
-    return nextPage;
-  }
 
   public final String titleText() {
     return titleText;

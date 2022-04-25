@@ -23,7 +23,7 @@ import objectos.ssg.Markdown;
 
 # Objectos Logging
 
-Objectos Logging provides a logging API for Java applications.
+Objectos Logging is a logging API for Java applications.
 You define logging events and you log them instead of string messages.
 Events can be paramaterized making log method invocations type-safe.
 
@@ -33,8 +33,6 @@ Events can be paramaterized making log method invocations type-safe.
 final class Index extends DocsPage {
   @Override
   protected void configure() {
-    nextPage = GetStarted.class;
-
     titleText = "Objectos Logging";
   }
 }

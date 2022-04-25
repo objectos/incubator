@@ -16,7 +16,5 @@
 package objectos.docs.ui;
 
 final class Page1 extends DocsPage {
-  public Page1() {
-    nextPage = Page2.class;
-  }
+  public Page1() {}
 }

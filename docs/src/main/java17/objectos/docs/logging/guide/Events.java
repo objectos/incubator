@@ -133,8 +133,6 @@ Events may _optionally_ define the following:
 final class Events extends DocsPage {
   @Override
   protected final void configure() {
-    nextPage = null;
-
     titleText = "Creating events";
   }
 }

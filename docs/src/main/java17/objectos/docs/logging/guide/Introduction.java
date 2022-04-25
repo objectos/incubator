@@ -87,8 +87,6 @@ In the next section you will learn more about creating log event instances.
 final class Introduction extends DocsPage {
   @Override
   protected final void configure() {
-    nextPage = Events.class;
-
     titleText = "Introduction";
   }
 }

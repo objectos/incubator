@@ -29,8 +29,6 @@ import objectos.ssg.Markdown;
 final class Index extends DocsPage {
   @Override
   protected final void configure() {
-    nextPage = Overview.class;
-
     titleText = "Get started with Objectos";
   }
 }

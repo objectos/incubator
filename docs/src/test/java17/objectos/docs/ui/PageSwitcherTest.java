@@ -18,13 +18,9 @@ package objectos.docs.ui;
 import static org.testng.Assert.assertNull;
 import static org.testng.Assert.assertSame;
 
-import java.util.HashMap;
-import java.util.Map;
 import org.testng.annotations.Test;
 
 public class PageSwitcherTest {
-
-  private final Map<Class<?>, Object> map = new HashMap<>();
 
   @Test
   public void backPage() {
@@ -32,22 +28,12 @@ public class PageSwitcherTest {
     Page1 p1 = new Page1();
     Page2 p2 = new Page2();
 
-    map.put(Page0.class, p0);
-    map.put(Page1.class, p1);
-    map.put(Page2.class, p2);
-
     PageSwitcher sw;
     sw = new PageSwitcher();
 
-    sw.configure(new NoOpContext() {
-      @SuppressWarnings("unchecked")
-      @Override
-      public <T> T getObject(Class<? extends T> key) {
-        return (T) map.get(key);
-      }
-    });
-
-    sw.load(p0);
+    sw.visitSitePage(p0);
+    sw.visitSitePage(p1);
+    sw.visitSitePage(p2);
 
     assertNull(sw.backPage(p0));
     assertSame(sw.backPage(p1), p0);

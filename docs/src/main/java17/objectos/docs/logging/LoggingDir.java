@@ -26,9 +26,8 @@ public final class LoggingDir extends SiteDirectory {
   @Override
   protected final void configure() {
     addPage("index.html", new Index());
-    addPage("get-started.html", new GetStarted());
-    addPage("why.html", new Why());
 
+    addDirectory("getting-started", new GettingStarted());
     addDirectory("guide", new LoggingGuideDir());
   }
 

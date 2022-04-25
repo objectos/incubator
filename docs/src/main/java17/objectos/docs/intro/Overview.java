@@ -94,8 +94,6 @@ But you can find the source code in our
 final class Overview extends DocsPage {
   @Override
   protected final void configure() {
-    nextPage = Installation.class;
-
     titleText = "What is Objectos?";
   }
 }

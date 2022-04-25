@@ -154,8 +154,6 @@ final class GetStarted extends DocsPage {
 
   @Override
   protected final void configure() {
-    nextPage = Why.class;
-
     titleText = "Get started";
   }
 }
