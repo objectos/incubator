@@ -151,24 +151,24 @@ public class MoreLoggingTest implements LogListener {
     cpuWorker = new FixedCpuWorker(10, 50, testableLogger);
 
     storageLogger = StorageLogger.create(
-        root,
+      root,
 
-        ioWorker,
+      ioWorker,
 
-        cpuWorker
+      cpuWorker
     );
 
     ShutdownHook.register(storageLogger);
 
     StorageWatcher storageWatcher;
     storageWatcher = StorageWatcher.create(
-        root,
+      root,
 
-        ioWorker,
+      ioWorker,
 
-        cpuWorker,
+      cpuWorker,
 
-        StorageWatcher.logListener(this)
+      StorageWatcher.logListener(this)
     );
 
     ShutdownHook.register(storageWatcher);
@@ -177,11 +177,11 @@ public class MoreLoggingTest implements LogListener {
     watchService = Watch.createService(storageWatcher);
 
     Services.start(
-        ioWorker,
+      ioWorker,
 
-        cpuWorker,
+      cpuWorker,
 
-        watchService
+      watchService
     );
   }
 
@@ -254,7 +254,7 @@ public class MoreLoggingTest implements LogListener {
     testLog(logs.get(7), INFO3, arg1, arg2, arg3);
   }
 
-  @Test(timeOut = 5000)
+  @Test(timeOut = 10000)
   public void testCase02() throws InterruptedException {
     Logger logger;
     logger = storageLogger;
