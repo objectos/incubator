@@ -34,9 +34,10 @@ log may be ephemeral such as messages directed to a console. Messages
 may be filtered out before being written to the log; for example, only messages
 above a certain severity level may be sent to the log.
 
-The act of emitting, filtering and storing messages in a program is called logging.
+The acts of emitting, filtering and storing messages in a program
+are collectively called logging.
 
-## Types of log messages
+## Messages to inform
 
 A log may contain purely informational messages such as:
 
@@ -44,52 +45,70 @@ A log may contain purely informational messages such as:
 - a HTTP server sent a 404 response; or
 - a scheduled job completed successfully.
 
-These informational messages can show developers, at development time, that the application
-is functioning as expected. Similarly, these messages can be used by a system operator
-to verify that the system is running correctly while in production.
+These informational messages can help developers, at development time, assert that
+the application is functioning as expected. Similarly, these messages can be used
+by a system operator to verify that the system is running correctly while in production.
+
+## Messages to warn about potential issues
 
 A log may also contain messages indicating that a problem might occur to a running
-application if no action is taken. These can be health-related messages such as resource
-exhaustion:
+application if no action is taken. These can be health-related messages such as
+possible resource exhaustion. Or perhaps they can be security-related such as
+suspicious activity. Some examples:
 
 - a query to the database took more than a certain number of milliseconds;
 - few free slots remain in the job scheduler; or
 - too many invalid requests from a certain client.
 
+## Message describing errors
+
 Applications will eventually not work as expected. As pointed out before, it could be
 from resource exhaustion. Other reasons might also include (but are in no way limited to):
 
 - programming errors;
-- invalid or insufficient permissions; or
+- invalid or insufficient system permissions; or
 - hardware failures.
 
 Therefore, the log may also contain error messages such as:
 
-- the application could not start as the configured network port is already in use;
-- a HTTP server could not serve a file as its system's process does not have the
+- the application could not start as the configured network port `P` is already in use;
+- a HTTP server could not serve a file `F` as its system's process does not have the
   required permissions to read it;
 - a scheduled job fails as it tries to use `null` as if it were an object; or
 - a scheduled job fails as the Java virtual machine cannot allocate an object as
   it ran out of memory.
 
+In Java programs these messages can include the stack trace from a `Throwable` object.
+Note, however, that inclusion of stack traces are not restricted to error messages.
+
+## Debugging messages
+
 While the log may contain the message that an error has occurred, the developer
 might need additional information in order to reproduce the error in a development
-environment. In this case, the log may also contain messages intended for debugging purposes.
-Some examples are:
+environment. This may also be necessary when it is impossible or impratical to attach
+a debugger to a running application. In this case, the log may also contain messages
+intended for debugging purposes. Some examples are:
 
-- a method has been invoked with such and such arguments;
-- a method completed normally returning such value; or
+- the failing service was invoked with such and such arguments;
+- a related method completed normally returning such value; or
 - this code path has been executed.
+
+## Monitoring messages
 
 Finally, the log may also contain messages that cover non-functional requirements.
 In a way, these messages can be classified as being both informational
-and for debugging purposes. For example, suppose you believe a library upgrade or
-some code refactoring might improve numbers such as latency or throughput. How can
-you confirm whether or not those changes improved those numbers?
+and for debugging purposes.
 
-be also be used for performance. For instance,
-how can you know if your last upgrade improved or not numbers such
-as latency or throughput.
+As an example, suppose you believe a library upgrade or a code refactoring
+will improve numbers such as latency or throughput. How can you confirm whether
+or not the changes improved the numbers? This involves some collecting and statistical
+analysis which is beyond the scope of a logging library. However for data to be collected
+and analyzed it must exist in the first place.
+
+## Summary
+
+In this section we discussed what logging libraries are and showed some examples
+of messages you might want to log using such libraries.
 
 One thing in common to all the examples is that it is the developer job to:
 
