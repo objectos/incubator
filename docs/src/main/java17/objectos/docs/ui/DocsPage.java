@@ -22,6 +22,7 @@ import br.com.objectos.http.media.ImageType;
 import objectos.docs.style.ArticleCss;
 import objectos.docs.style.ContainerCss;
 import objectos.docs.style.JavaCss;
+import objectos.docs.style.NextBannerCss;
 import objectos.docs.style.PageSwitcherCss;
 import objectos.docs.style.ResetCss;
 import objectos.docs.style.SyntaxCss;
@@ -32,6 +33,17 @@ import objectos.ssg.SitePath;
 public abstract class DocsPage extends SitePage {
 
   protected String titleText = "";
+
+  private NextBanner nextBanner;
+
+  @Override
+  public final void releaseResources() {
+    super.releaseResources();
+
+    titleText = null;
+
+    nextBanner = null;
+  }
 
   public final String titleText() {
     return titleText;
@@ -45,30 +57,36 @@ public abstract class DocsPage extends SitePage {
     );
   }
 
-  protected void body0() {
-    main(
-      f(this::main0)
-    );
-
+  protected final void body0() {
     PageSwitcher ps;
     ps = getObject(PageSwitcher.class);
 
     ps.set(this);
 
-    f(ps);
+    body(
+      nextBanner.shouldRender ? f(nextBanner) : noop(),
+
+      main(
+        f(this::main0)
+      ),
+
+      f(ps)
+    );
   }
 
   @Override
   protected final void definition() {
+    nextBanner = getObject(NextBanner.class);
+
+    nextBanner.set(this);
+
     doctype();
     html(
       lang("en"),
       head(
         f(this::head0)
       ),
-      body(
-        f(this::body0)
-      )
+      f(this::body0)
     );
   }
 
@@ -130,6 +148,10 @@ public abstract class DocsPage extends SitePage {
     list.add(new JavaCss());
 
     list.add(new XmlCss());
+
+    if (nextBanner.shouldRender) {
+      list.add(NextBannerCss.INSTANCE);
+    }
 
     return list;
   }

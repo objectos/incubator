@@ -13,25 +13,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package objectos.docs;
+package objectos.docs.style;
 
-import objectos.docs.next.NextDir;
-import objectos.docs.ui.Md;
-import objectos.docs.ui.NextBanner;
-import objectos.ssg.Site;
-import objectos.ssg.SitePath;
+import br.com.objectos.css.Css;
+import br.com.objectos.css.select.IdSelector;
+import objectos.ssg.SiteStyleSheet;
 
-public final class DocsSite extends Site {
+public final class NextBannerCss extends SiteStyleSheet {
 
-  public static final Class<? extends SitePath> INDEX = NextDir.INDEX;
+  public static final SiteStyleSheet INSTANCE = new NextBannerCss();
+
+  public static final IdSelector _ID = Css.randomHash(3);
 
   @Override
-  protected final void configure() {
-    addObject(new Md());
-    addObject(new NextBanner());
-    addObject(new StringBuilder());
+  protected final void definition() {
+    style(
+      _ID,
 
-    addDirectory("next", new NextDir());
+      backgroundColor(Colors.GRAPE0),
+      borderRadius(Spacing.V02),
+      fontSize(FontSize.SM),
+      marginBottom(Spacing.V02),
+      padding(Spacing.V03)
+    );
   }
 
 }
