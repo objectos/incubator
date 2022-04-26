@@ -13,10 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package objectos.docs;
+package objectos.docs.next;
 
-import objectos.docs.intro.IntroDir;
-import objectos.docs.logging.LoggingDir;
+import objectos.docs.next.intro.IntroDir;
+import objectos.docs.next.logging.LoggingDir;
 import objectos.docs.ui.DocsPage;
 
 final class Index extends DocsPage {

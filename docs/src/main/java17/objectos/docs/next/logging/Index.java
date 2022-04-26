@@ -13,16 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package objectos.docs.logging;
+package objectos.docs.next.logging;
 
-import objectos.ssg.SiteDirectory;
+import objectos.docs.ui.DocsPage;
+import objectos.ssg.Markdown;
 
-final class GettingStarted extends SiteDirectory {
+//@formatter:off
+/**
 
+# Objectos Logging
+
+Objectos Logging is a logging API for Java applications.
+You define logging events and you log them instead of string messages.
+Events can be paramaterized making log method invocations type-safe.
+
+*/
+//@formatter:on
+@Markdown
+final class Index extends DocsPage {
   @Override
-  protected final void configure() {
-    addPage("index.html", new GettingStartedIndex());
-    addPage("about-logging.html", new GettingStartedAboutLogging());
+  protected void configure() {
+    titleText = "Objectos Logging";
   }
-
 }

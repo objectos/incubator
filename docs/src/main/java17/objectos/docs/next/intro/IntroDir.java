@@ -13,20 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package objectos.docs.logging.guide;
+package objectos.docs.next.intro;
 
 import objectos.docs.ui.DocsPage;
 import objectos.ssg.SiteDirectory;
 
-public final class LoggingGuideDir extends SiteDirectory {
+public final class IntroDir extends SiteDirectory {
 
   public static final Class<? extends DocsPage> INDEX = Index.class;
+
+  public static final Class<? extends DocsPage> INSTALLATION = Installation.class;
+
+  public static final Class<? extends DocsPage> OVERVIEW = Overview.class;
 
   @Override
   protected final void configure() {
     addPage("index.html", new Index());
-    addPage("introduction.html", new Introduction());
-    addPage("events.html", new Events());
+    addPage("overview.html", new Overview());
+    addPage("install.html", new Installation());
   }
 
 }

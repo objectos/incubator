@@ -13,22 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package objectos.docs.intro;
+package objectos.docs.next.logging;
 
-import objectos.docs.ui.DocsPage;
-import objectos.ssg.Markdown;
+import objectos.ssg.SiteDirectory;
 
-//@formatter:off
-/**
+final class GettingStarted extends SiteDirectory {
 
-# Get started with Objectos
-
-*/
-//@formatter:on
-@Markdown
-final class Index extends DocsPage {
   @Override
   protected final void configure() {
-    titleText = "Get started with Objectos";
+    addPage("index.html", new GettingStartedIndex());
+    addPage("about-logging.html", new GettingStartedAboutLogging());
+    addPage("objectos-logging.html", new GettingStartedObjectosLogging());
   }
+
 }

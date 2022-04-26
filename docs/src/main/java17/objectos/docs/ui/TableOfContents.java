@@ -74,7 +74,7 @@ public final class TableOfContents extends SiteFragment implements SiteVisitor {
 
   @Override
   protected void configure() {
-    currentLevel = rootLevel = new Level();
+    currentLevel = rootLevel = new RootLevel();
   }
 
   @Override
@@ -82,7 +82,7 @@ public final class TableOfContents extends SiteFragment implements SiteVisitor {
     rootLevel.render();
   }
 
-  private class IncLevel extends Level {
+  private class IncLevel extends RootLevel {
 
     private final Level parent;
 
@@ -116,10 +116,43 @@ public final class TableOfContents extends SiteFragment implements SiteVisitor {
 
   }
 
-  private class Level extends Item {
+  private abstract class Level extends Item {
+
+    abstract void add(String title, Class<? extends SitePath> key);
+
+    abstract Level decLevel();
+
+    abstract Level incLevel(String title, Class<? extends SitePath> key);
+
+  }
+
+  private class NoOpLevel extends Level {
+
+    @Override
+    final void add(String title, Class<? extends SitePath> key) {}
+
+    @Override
+    final Level decLevel() {
+      return this;
+    }
+
+    @Override
+    final Level incLevel(String title, Class<? extends SitePath> key) {
+      return this;
+    }
+
+    @Override
+    ElementName render() {
+      throw new UnsupportedOperationException();
+    }
+
+  }
+
+  private class RootLevel extends Level {
 
     private final MutableList<Item> items = new MutableList<>();
 
+    @Override
     final void add(String title, Class<? extends SitePath> key) {
       Item simple;
       simple = simple(title, key);
@@ -127,10 +160,12 @@ public final class TableOfContents extends SiteFragment implements SiteVisitor {
       items.add(simple);
     }
 
+    @Override
     Level decLevel() {
-      throw new UnsupportedOperationException("root level");
+      return new NoOpLevel();
     }
 
+    @Override
     final Level incLevel(String title, Class<? extends SitePath> key) {
       Simple top;
       top = simple(title, key);

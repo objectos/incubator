@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package objectos.docs.logging;
+package objectos.docs.next.logging.guide;
 
 import objectos.docs.ui.DocsPage;
 import objectos.ssg.Markdown;
@@ -21,11 +21,9 @@ import objectos.ssg.Markdown;
 //@formatter:off
 /**
 
-# Objectos Logging
+# User guide
 
-Objectos Logging is a logging API for Java applications.
-You define logging events and you log them instead of string messages.
-Events can be paramaterized making log method invocations type-safe.
+Welcome to the Objectos Logging user guide.
 
 */
 //@formatter:on
@@ -33,6 +31,6 @@ Events can be paramaterized making log method invocations type-safe.
 final class Index extends DocsPage {
   @Override
   protected void configure() {
-    titleText = "Objectos Logging";
+    titleText = "User guide";
   }
 }

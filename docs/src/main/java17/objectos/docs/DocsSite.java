@@ -15,33 +15,21 @@
  */
 package objectos.docs;
 
-import objectos.docs.intro.IntroDir;
-import objectos.docs.logging.LoggingDir;
+import objectos.docs.next.NextDir;
 import objectos.docs.ui.Md;
-import objectos.docs.ui.PageSwitcher;
-import objectos.docs.ui.TableOfContents;
 import objectos.ssg.Site;
 import objectos.ssg.SitePath;
 
 public final class DocsSite extends Site {
 
-  public static final Class<? extends SitePath> INDEX = Index.class;
+  public static final Class<? extends SitePath> INDEX = NextDir.INDEX;
 
   @Override
   protected final void configure() {
     addObject(new Md());
     addObject(new StringBuilder());
 
-    addObject(new PageSwitcher());
-
-    addPage("toc.html", new Toc());
-
-    addObject(new TableOfContents());
-
-    addPage("index.html", new Index());
-
-    addDirectory("intro", new IntroDir());
-    addDirectory("logging", new LoggingDir());
+    addDirectory("next", new NextDir());
   }
 
 }

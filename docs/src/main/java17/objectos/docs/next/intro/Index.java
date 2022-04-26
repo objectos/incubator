@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package objectos.docs.logging;
+package objectos.docs.next.intro;
 
 import objectos.docs.ui.DocsPage;
 import objectos.ssg.Markdown;
@@ -21,24 +21,14 @@ import objectos.ssg.Markdown;
 //@formatter:off
 /**
 
-# Getting started with Objectos Logging
+# Get started with Objectos
 
-Welcome to Objectos Logging.
-
-This chapter introduces you to logging libraries in general and to
-Objectos Logging in particular.
-
-We begin by explaining why you may require a logging library in your Java application.
-Next we give an overview on the Objectos Logging approach to logging. Finally we
-give you instructions on how to install Objectos Logging and how to quickly get some
-working Java code that makes use of Objectos Logging.
-
- */
+*/
 //@formatter:on
 @Markdown
-final class GettingStartedIndex extends DocsPage {
+final class Index extends DocsPage {
   @Override
-  protected void configure() {
-    titleText = "Getting started";
+  protected final void configure() {
+    titleText = "Get started with Objectos";
   }
 }

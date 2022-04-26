@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package objectos.docs.intro;
+package objectos.docs.next.intro;
 
 import objectos.docs.ui.DocsPage;
 import objectos.ssg.Markdown;
