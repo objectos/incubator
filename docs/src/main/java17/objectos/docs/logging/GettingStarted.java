@@ -22,7 +22,7 @@ final class GettingStarted extends SiteDirectory {
   @Override
   protected final void configure() {
     addPage("index.html", new GettingStartedIndex());
-    addPage("basics.html", new GettingStartedAboutLogging());
+    addPage("about-logging.html", new GettingStartedAboutLogging());
   }
 
 }

@@ -23,24 +23,32 @@ import objectos.ssg.Markdown;
 
 # About logging
 
-Java developers need to keep a log of the events taking place during a program execution.
+A logging library let's you emit messages about the events that take place during
+a program execution. These messages usually contain the time of the event,
+the source of the event (in Java programs the name of class of the object from
+which the message was emitted) and the severity of the event. Additional information
+related to the event may be also added to the message at the developer's discretion.
 
-This can be specially useful for applications with no or little direct user interaction
-such as a HTTP server, a database server or a mail server. Keep in mind, though, that
-logging is not restricted to these kind of applications. For example, a text editor
-might want to keep a log of user actions in order to understand how a feature is being used
-(or perhaps if the feature is being used at all).
+These messages may be written to a log. The log may be persistent such as a log file. The
+log may be ephemeral such as messages directed to a console. Messages
+may be filtered out before being written to the log; for example, only messages
+above a certain severity level may be sent to the log.
 
-The log might contain purely informational messages such as:
+The act of emitting, filtering and storing messages in a program is called logging.
 
-- the application started successfully;
-- a HTTP server received a request; or
+## Types of log messages
+
+A log may contain purely informational messages such as:
+
+- a SQL server started successfully (i.e., it is ready for connections);
+- a HTTP server sent a 404 response; or
 - a scheduled job completed successfully.
 
-These informational messages can show developers that the application is functioning
-as expected both at development time and while running at production.
+These informational messages can show developers, at development time, that the application
+is functioning as expected. Similarly, these messages can be used by a system operator
+to verify that the system is running correctly while in production.
 
-The log might also contain messages indicating that a problem might occur to a running
+A log may also contain messages indicating that a problem might occur to a running
 application if no action is taken. These can be health-related messages such as resource
 exhaustion:
 
