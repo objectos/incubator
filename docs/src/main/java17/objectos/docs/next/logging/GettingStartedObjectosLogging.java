@@ -29,12 +29,91 @@ logging.
 ## Log events
 
 As we have seen in the previous section, logging is about emitting messages
-describing events taking place during a program execution. Therefore, a central
-part of logging with Objectos Logging is defining the events you want to log.
+describing events taking place during a program execution. The central
+part of logging with Objectos Logging is defining those events.
+
+In Objectos Logging events are _immutable_ objects that you instantiate.
+A "Hello world!" example:
+
+```java
+package com.example; import objectos.logging.*;
+
+public class Greeter {
+  static final Event0 HELLO_WORLD = Event0.info();
+
+  // for brevity, assume injected
+  Logger logger;
+
+  public void helloWorld() {
+    logger.log(HELLO_WORLD);
+  }
+}
+```
+
+If one were to provide a logger implementation the message could be printed as:
+
+(Please note that, as of the current release, Objectos Logging does not provide
+logger implementations)
+
+```
+ts=1651061090268 | level=INFO | thread=main | source=com.example.Greeter | name=Greeter.java:4
+```
+
+Or, using a more human readable format, could be printed as:
+
+```
+2022-04-27 09:04:50.268 INFO --- [main] com.example.Greeter(Greeter.java:4)
+```
+
+## Events can be parameterized
+
+In the previous example the event is "Hello world!". We could alter the event
+to mean "Hello something" by adding a type parameter:
+
+```java
+package com.example; import objectos.logging.*;
+
+public class Greeter {
+  static final Event1<String> HELLO = Event1.info();
+
+  // for brevity, assume injected
+  Logger logger;
+
+  public void hello(String something) {
+    logger.log(HELLO, something);
+  }
+}
+```
+
+So if we were to invoke our greeter with the string "universe!" the log message would be:
+
+```
+2022-04-27 09:04:50.268 INFO --- [main] com.example.Greeter(Greeter.java:4) universe!
+```
+
+This way you can add arbitrary payloads to the logging message.
 
 ## Debugging
 
-## Monitoring
+When using Objectos Logging logger instances are usually not `static final`. This means
+that you can use a specific implementation for your test cases. And since events are
+objects you can selectively intercept logging method invocations like so:
+
+```java
+public class MyTestingLogger extends NoOpLogger {
+  @Override
+  public void <T> log(Event1<T> event, T value) {
+    if (event == Greeter.HELLO && "world!".equals(value) {
+      // add a debugger breakpoint here.
+    }
+  }
+}
+```
+
+## Summary
+
+In this section we discussed what makes Objectos Logging particular regarding Java
+logging libraries.
 
  */
 //@formatter:on
