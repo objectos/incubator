@@ -22,7 +22,9 @@ import objectos.docs.ui.TableOfContents;
 import objectos.ssg.SiteDirectory;
 import objectos.ssg.SitePath;
 
-public final class NextDir extends SiteDirectory {
+public final class Next extends SiteDirectory {
+
+  public static final String VERSION = "0.1.0";
 
   public static final Class<? extends SitePath> INDEX = Index.class;
 

@@ -15,7 +15,7 @@
  */
 package objectos.docs;
 
-import objectos.docs.next.NextDir;
+import objectos.docs.next.Next;
 import objectos.docs.ui.Md;
 import objectos.docs.ui.NextBanner;
 import objectos.ssg.Site;
@@ -23,7 +23,7 @@ import objectos.ssg.SitePath;
 
 public final class DocsSite extends Site {
 
-  public static final Class<? extends SitePath> INDEX = NextDir.INDEX;
+  public static final Class<? extends SitePath> INDEX = Next.INDEX;
 
   @Override
   protected final void configure() {
@@ -31,7 +31,7 @@ public final class DocsSite extends Site {
     addObject(new NextBanner());
     addObject(new StringBuilder());
 
-    addDirectory("next", new NextDir());
+    addDirectory("next", new Next());
   }
 
 }
