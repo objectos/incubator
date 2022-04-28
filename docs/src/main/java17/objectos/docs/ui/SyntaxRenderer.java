@@ -21,7 +21,6 @@ import java.util.function.Function;
 import org.commonmark.node.FencedCodeBlock;
 import org.commonmark.node.Node;
 import org.commonmark.renderer.NodeRenderer;
-import org.commonmark.renderer.html.CoreHtmlNodeRenderer;
 import org.commonmark.renderer.html.HtmlNodeRendererContext;
 import org.commonmark.renderer.html.HtmlWriter;
 
@@ -55,10 +54,7 @@ final class SyntaxRenderer implements NodeRenderer {
     }
 
     else {
-      CoreHtmlNodeRenderer core;
-      core = new CoreHtmlNodeRenderer(context);
-
-      core.render(node);
+      render(b, DefaultRenderer::new);
     }
   }
 
@@ -70,6 +66,19 @@ final class SyntaxRenderer implements NodeRenderer {
     renderer = constructor.apply(html);
 
     renderer.render(b);
+  }
+
+  private static class DefaultRenderer extends LanguageRenderer {
+
+    DefaultRenderer(HtmlWriter html) {
+      super(html);
+    }
+
+    @Override
+    final void render(String info, String literal) {
+      text(literal);
+    }
+
   }
 
 }

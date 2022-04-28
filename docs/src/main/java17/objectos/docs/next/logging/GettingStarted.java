@@ -25,6 +25,7 @@ final class GettingStarted extends SiteDirectory {
     addPage("about-logging.html", new GettingStartedAboutLogging());
     addPage("objectos-logging.html", new GettingStartedObjectosLogging());
     addPage("installing.html", new GettingStartedInstalling());
+    addPage("quick-start.html", new GettingStartedQuickStart());
   }
 
 }
