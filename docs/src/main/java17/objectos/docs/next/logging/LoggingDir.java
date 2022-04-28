@@ -15,7 +15,6 @@
  */
 package objectos.docs.next.logging;
 
-import objectos.docs.next.logging.guide.LoggingGuideDir;
 import objectos.docs.ui.DocsPage;
 import objectos.ssg.SiteDirectory;
 
@@ -28,7 +27,7 @@ public final class LoggingDir extends SiteDirectory {
     addPage("index.html", new Index());
 
     addDirectory("getting-started", new GettingStarted());
-    addDirectory("guide", new LoggingGuideDir());
+    addDirectory("logging", new LoggingGuide());
   }
 
 }

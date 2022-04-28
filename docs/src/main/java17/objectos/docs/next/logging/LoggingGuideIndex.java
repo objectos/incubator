@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package objectos.docs.next.logging.guide;
+package objectos.docs.next.logging;
 
 import objectos.docs.ui.DocsPage;
 import objectos.ssg.Markdown;
@@ -21,16 +21,17 @@ import objectos.ssg.Markdown;
 //@formatter:off
 /**
 
-# User guide
+# Logging guide
 
-Welcome to the Objectos Logging user guide.
+In this chapter we will discuss how to use the Objectos Logging API
+to create and log events in your Java programs.
 
 */
 //@formatter:on
 @Markdown
-final class Index extends DocsPage {
+final class LoggingGuideIndex extends DocsPage {
   @Override
   protected void configure() {
-    titleText = "User guide";
+    titleText = "Logging guide";
   }
 }

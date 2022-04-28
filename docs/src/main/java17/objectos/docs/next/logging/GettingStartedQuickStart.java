@@ -265,6 +265,6 @@ final class GettingStartedQuickStart extends DocsPage {
 
   @Override
   protected final void configure() {
-    titleText = "Get started";
+    titleText = "Quick start";
   }
 }
