@@ -27,7 +27,7 @@ public final class LoggingDir extends SiteDirectory {
     addPage("index.html", new Index());
 
     addDirectory("getting-started", new GettingStarted());
-    addDirectory("logging", new LoggingGuide());
+    addDirectory("logging-guide", new LoggingGuide());
   }
 
 }

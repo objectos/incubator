@@ -26,6 +26,7 @@ final class LoggingGuide extends SiteDirectory {
   protected final void configure() {
     addPage("index.html", new LoggingGuideIndex());
     addPage("events.html", new LoggingGuideEvents());
+    addPage("logger.html", new LoggingGuideLogger());
   }
 
 }
