@@ -132,7 +132,7 @@ creates five different events each having a different event level:
 ```java
 import objectos.logging.*;
 
-public class LevelsExample {
+public class Levels {
   static final Event0 TRACE = Event0.trace();
   static final Event0 DEBUG = Event0.debug();
   static final Event0 INFO = Event0.info();
@@ -141,9 +141,61 @@ public class LevelsExample {
 }
 ```
 
-## Event keys
+## Creating parameterized events
 
-## Creating parameterized event instances
+Up to this point we have been using the `Event0` class in our examples.
+This type of event does not allow you to pass any additional argument
+to the log method. As an example the following code does not compile:
+
+```java
+static final Event0 IO_ERROR = Event0.error();
+
+public void log(Logger logger, IOException e) {
+  logger.log(IO_ERROR, e);
+  //                 ^
+  // compilation error here
+}
+```
+
+Sometimes you will want to add some additional data to the log message.
+In the example above we might want to pass the exception along. This
+way a logger could, for example, add the stack trace of the exception
+to the log file.
+
+In order to do that, you need to declare a parameterized event instance.
+The following code compiles without errors:
+
+```java
+static final Event1<IOException> IO_ERROR = Event1.error();
+
+public void log(Logger logger, IOException e) {
+  logger.log(IO_ERROR, e);
+}
+```
+
+Notice that we have changed the event type from `Event0` to `Event1`.
+The integer number at the end of the class name indicates the number
+of type parameters that the event subclass declares:
+
+- `Event0` does not allow any argument;
+- `Event1` allows one argument;
+- `Event2` allows two arguments; and
+- `Event3` allows three arguments.
+
+The next example illustrates the creation of each one of the available
+event types:
+
+```java
+import java.io.*;
+import objectos.logging.*;
+
+public class TypeArgs {
+  static final Event0 ZERO = Event0.trace();
+  static final Event1<String> ONE = Event1.debug();
+  static final Event2<String, Long> TWO = Event2.info();
+  static final Event3<String, Long, IOException> THREE = Event3.error();
+}
+```
 
  */
 //@formatter:on
