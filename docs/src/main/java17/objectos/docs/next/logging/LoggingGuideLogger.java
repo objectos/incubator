@@ -137,20 +137,106 @@ public class Service {
 }
 ```
 
-We consider this strategy as a last resort as it can make testing more complicated.
+Consider using this strategy as a last resort as it can make using loggers
+for debugging more complicated.
 
 ## Logging events
 
-### `Event0` events
+Now that you have:
 
-Events of the `Event0` types do not have type arguments. Therefore, you
-log them directly like so:
+- your events declared; and
+- obtained a logger instance.
+
+You can emit log messages.
+
+To emit log messages you invoke one of the `log` methods from the `Logger` interface.
+The `Logger` interface provides a different `log` method for each `Event` subclass.
+
+### `Event0`
+
+Events of the `Event0` are not parameterized:
 
 ```java
-import
+static final Event0 EVENT = Event0.info();
 ```
 
-### Parameterized events
+To emit a log message you invoke the `log` method passing the event as a parameter:
+
+```java
+logger.log(EVENT);
+```
+
+### `Event1`
+
+Events of the `Event1` class have a single type argument.
+In order to emit a log message of these events you must pass an object
+of the same type as the type argument of the event.
+
+For example, if the event is parameterized with a hypothetical `Result` type:
+
+```java
+static final Event1<Result> EVENT = Event1.info();
+```
+You must invoke the `log` method passing, along with the event itself, a `Result` instance:
+
+```java
+Result result = computeResult();
+logger.log(EVENT, result);
+```
+
+### `Event2`
+
+In a similar way, invoking the `log` method with `Event2` events requires you to
+pass, along with the event instance itself, two additional objects.
+The two objects must have the same types, in order, as those declared as
+type arguments of the event.
+
+So, if the event is declared as:
+
+```java
+static final Event2<Data, Result> EVENT = Event2.info();
+```
+
+Then the `log` method must be invoked with the arguments in the following order:
+
+- the event itself;
+- a `Data` object; and
+- a `Result` object.
+
+```java
+Data input = getInput();
+Result result = compute(input);
+logger.log(EVENT, input, result);
+```
+
+If we were to reverse the order of the type arguments in the event declaration:
+
+```java
+static final Event2<Result, Data> EVENT = Event2.info();
+```
+
+Then the `log` method invocation needs to be changed to:
+
+```java
+logger.log(EVENT, result, input);
+```
+
+### `Event3`
+
+Logging `Event3` events work in a similar way as `Event2`. If the event is parameterized,
+in order, with the hypothetical types `A`, `B` and `C`:
+
+```java
+static final Event3<A, B, C> EVENT = Event3.info();
+```
+
+Then a `log` method invocation would need to be:
+
+```java
+logger.log(EVENT, a, b, c);
+```
+
+Where `a`, `b` and `c` are objects of types `A`, `B` and `C` respectively.
 
 */
 //@formatter:on
