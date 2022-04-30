@@ -71,6 +71,320 @@
 		</developer>
 	</developers>
 
+	<profiles>
+
+		<profile>
+			<id>java17</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<jdk>jdk17</jdk>
+				<maven.toolchains.jdk-vendor>openjdk</maven.toolchains.jdk-vendor>
+				<maven.toolchains.jdk-version>17</maven.toolchains.jdk-version>
+				<project.classifier>java17</project.classifier>
+			</properties>
+			<build>
+				<directory>${project.basedir}/target-java17</directory>
+				<plugins>
+					<plugin>
+						<artifactId>maven-toolchains-plugin</artifactId>
+					</plugin>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>build-helper-maven-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>add-source</id>
+								<phase>generate-sources</phase>
+								<goals>
+									<goal>add-source</goal>
+								</goals>
+								<configuration>
+									<sources>
+										<source>src/main/java6</source>
+										<source>src/main/java7</source>
+										<source>src/main/java8</source>
+										<source>src/main/java11</source>
+										<source>src/main/java17</source>
+									</sources>
+								</configuration>
+							</execution>
+							<execution>
+								<id>add-test-source</id>
+								<phase>generate-test-sources</phase>
+								<goals>
+									<goal>add-test-source</goal>
+								</goals>
+								<configuration>
+									<sources>
+										<source>src/test/java6</source>
+										<source>src/test/java7</source>
+										<source>src/test/java8</source>
+										<source>src/test/java11</source>
+										<source>src/test/java17</source>
+									</sources>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>flatten-maven-plugin</artifactId>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	</profiles>
+
 	<modules>
 		<module>code/pom-java17.xml</module>
 		<module>concurrent/pom-java17.xml</module>
@@ -89,5 +403,48 @@
 		<module>smtp/pom-java17.xml</module>
 		<module>ssg/pom-java17.xml</module>
 	</modules>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>add-source</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>add-source</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<source>src/main/java6</source>
+								<source>src/main/java7</source>
+								<source>src/main/java8</source>
+								<source>src/main/java11</source>
+								<source>src/main/java17</source>
+							</sources>
+						</configuration>
+					</execution>
+					<execution>
+						<id>add-test-source</id>
+						<phase>generate-test-sources</phase>
+						<goals>
+							<goal>add-test-source</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<source>src/test/java6</source>
+								<source>src/test/java7</source>
+								<source>src/test/java8</source>
+								<source>src/test/java11</source>
+								<source>src/test/java17</source>
+							</sources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
 
 </project>
