@@ -1,18 +1,19 @@
 <factorypath>
-    <factorypathentry kind="VARJAR" id="M2_REPO/br/com/objectos/objectos-be/4.0.0-SNAPSHOT/objectos-be-4.0.0-SNAPSHOT.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="M2_REPO/br/com/objectos/objectos-be-processor/4.0.0-SNAPSHOT/objectos-be-processor-4.0.0-SNAPSHOT.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="M2_REPO/br/com/objectos/objectos-code/4.0.0-SNAPSHOT/objectos-code-4.0.0-SNAPSHOT.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="M2_REPO/br/com/objectos/objectos-css/4.0.0-SNAPSHOT/objectos-css-4.0.0-SNAPSHOT.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="M2_REPO/br/com/objectos/objectos-html-spi/4.0.0-SNAPSHOT/objectos-html-spi-4.0.0-SNAPSHOT.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="M2_REPO/br/com/objectos/objectos-core-object/4.0.0-SNAPSHOT/objectos-core-object-4.0.0-SNAPSHOT.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="M2_REPO/br/com/objectos/objectos-code-annotations/4.0.0-SNAPSHOT/objectos-code-annotations-4.0.0-SNAPSHOT.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="M2_REPO/br/com/objectos/objectos-collections-list/4.0.0-SNAPSHOT/objectos-collections-list-4.0.0-SNAPSHOT.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="M2_REPO/br/com/objectos/objectos-collections-base/4.0.0-SNAPSHOT/objectos-collections-base-4.0.0-SNAPSHOT.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="M2_REPO/br/com/objectos/objectos-core-array/4.0.0-SNAPSHOT/objectos-core-array-4.0.0-SNAPSHOT.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="M2_REPO/br/com/objectos/objectos-collections-set/4.0.0-SNAPSHOT/objectos-collections-set-4.0.0-SNAPSHOT.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="M2_REPO/br/com/objectos/objectos-core-io/4.0.0-SNAPSHOT/objectos-core-io-4.0.0-SNAPSHOT.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="M2_REPO/br/com/objectos/objectos-html/4.0.0-SNAPSHOT/objectos-html-4.0.0-SNAPSHOT.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="M2_REPO/br/com/objectos/objectos-collections-map/4.0.0-SNAPSHOT/objectos-collections-map-4.0.0-SNAPSHOT.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="M2_REPO/br/com/objectos/objectos-http/4.0.0-SNAPSHOT/objectos-http-4.0.0-SNAPSHOT.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="M2_REPO/br/com/objectos/objectos-core-string/4.0.0-SNAPSHOT/objectos-core-string-4.0.0-SNAPSHOT.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/org/commonmark/commonmark/0.18.0/commonmark-0.18.0.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/br/com/objectos/ssg/0.1.0-internal-SNAPSHOT/ssg-0.1.0-internal-SNAPSHOT.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/br/com/objectos/ssg-processor/0.1.0-internal-SNAPSHOT/ssg-processor-0.1.0-internal-SNAPSHOT.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/br/com/objectos/css/0.1.0-internal-SNAPSHOT/css-0.1.0-internal-SNAPSHOT.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/br/com/objectos/http/0.1.0-internal-SNAPSHOT/http-0.1.0-internal-SNAPSHOT.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/br/com/objectos/html/0.1.0-internal-SNAPSHOT/html-0.1.0-internal-SNAPSHOT.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/br/com/objectos/html-spi/0.1.0-internal-SNAPSHOT/html-spi-0.1.0-internal-SNAPSHOT.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/br/com/objectos/code/0.1.0-internal-SNAPSHOT/code-0.1.0-internal-SNAPSHOT.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/br/com/objectos/code-annotations/0.1.0-internal-SNAPSHOT/code-annotations-0.1.0-internal-SNAPSHOT.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/br/com/objectos/core-list/0.1.0-internal-SNAPSHOT/core-list-0.1.0-internal-SNAPSHOT.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/br/com/objectos/core-collection/0.1.0-internal-SNAPSHOT/core-collection-0.1.0-internal-SNAPSHOT.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/br/com/objectos/core-set/0.1.0-internal-SNAPSHOT/core-set-0.1.0-internal-SNAPSHOT.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/br/com/objectos/core-array/0.1.0-internal-SNAPSHOT/core-array-0.1.0-internal-SNAPSHOT.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/br/com/objectos/core-map/0.1.0-internal-SNAPSHOT/core-map-0.1.0-internal-SNAPSHOT.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/br/com/objectos/core-io/0.1.0-internal-SNAPSHOT/core-io-0.1.0-internal-SNAPSHOT.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/br/com/objectos/core-string/0.1.0-internal-SNAPSHOT/core-string-0.1.0-internal-SNAPSHOT.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/br/com/objectos/core-object/0.1.0-internal-SNAPSHOT/core-object-0.1.0-internal-SNAPSHOT.jar" enabled="true" runInBatchMode="false"/>
 </factorypath>
