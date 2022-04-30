@@ -1,6 +1,6 @@
 <factorypath>
-	<factorypathentry kind="VARJAR" id="M2_REPO/br/com/objectos/css-boot/0.1.0-internal-SNAPSHOT/css-boot-0.1.0-internal-SNAPSHOT.jar" enabled="true" runInBatchMode="false"/>
+	<factorypathentry kind="VARJAR" id="M2_REPO/br/com/objectos/css-boot/0.1.0-SNAPSHOT/css-boot-0.1.0-SNAPSHOT.jar" enabled="true" runInBatchMode="false"/>
 
-    <factorypathentry kind="VARJAR" id="M2_REPO/br/com/objectos/code/0.1.0-internal-SNAPSHOT/code-0.1.0-internal-SNAPSHOT.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="M2_REPO/br/com/objectos/code-annotations/0.1.0-internal-SNAPSHOT/code-annotations-0.1.0-internal-SNAPSHOT.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/br/com/objectos/code/0.1.0-SNAPSHOT/code-0.1.0-SNAPSHOT.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/br/com/objectos/code-annotations/0.1.0-SNAPSHOT/code-annotations-0.1.0-SNAPSHOT.jar" enabled="true" runInBatchMode="false"/>
 </factorypath>
