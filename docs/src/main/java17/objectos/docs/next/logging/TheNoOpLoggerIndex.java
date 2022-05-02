@@ -16,19 +16,26 @@
 package objectos.docs.next.logging;
 
 import objectos.docs.ui.DocsPage;
-import objectos.ssg.SiteDirectory;
+import objectos.ssg.Markdown;
 
-public final class LoggingDir extends SiteDirectory {
+//@formatter:off
+/**
 
-  public static final Class<? extends DocsPage> INDEX = Index.class;
+# Using the `NoOpLogger`
 
+The `NoOpLogger` is a no-operation logger implementation provided with Objectos Logging.
+In other words all of its logging methods do no operation when they are invoked.
+
+It has uses during the development of a Java application
+even though it performs no logging operation.
+This chapters describes some of its uses.
+
+ */
+//@formatter:on
+@Markdown
+final class TheNoOpLoggerIndex extends DocsPage {
   @Override
-  protected final void configure() {
-    addPage("index.html", new Index());
-
-    addDirectory("getting-started", new GettingStarted());
-    addDirectory("logging-guide", new LoggingGuide());
-    addDirectory("no-op-logger", new TheNoOpLogger());
+  protected void configure() {
+    titleText = "Using the NoOpLogger";
   }
-
 }
