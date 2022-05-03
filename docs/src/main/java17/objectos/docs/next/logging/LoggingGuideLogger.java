@@ -96,8 +96,10 @@ public class Setter {
 
 You must be aware this strategy is error-prone:
 
-- you must null-check before setting the logger field value; and
-- you must set the logger to a default value to avoid null-pointer exceptions.
+- you must null-check before setting the logger field value;
+- you must set the logger to a default value to avoid null-pointer exceptions. Typically this
+  will be the [`NoOpLogger`](href:next.logging.TheNoOpLoggerCoding); and
+- depending on your requirements, you might need to synchronize the access.
 
 ### Via static factory
 
@@ -138,7 +140,8 @@ public class Service {
 ```
 
 Consider using this strategy as a last resort as it can make using loggers
-for debugging more complicated.
+for debugging more complicated. Also this strategy is error-prone for the same reasons as
+the _setter method_ strategy.
 
 ## Logging events
 

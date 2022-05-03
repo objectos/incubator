@@ -24,6 +24,12 @@ public final class ArticleCss extends AbstractStyleSheet {
     // typography
 
     style(
+      article,
+
+      color(Colors.GRAY9)
+    );
+
+    style(
       article, sp(), blockquote,
 
       fontStyle(italic),
@@ -94,7 +100,6 @@ public final class ArticleCss extends AbstractStyleSheet {
 
       backgroundColor(Colors.GRAY1),
       border(px(1), solid, Colors.GRAY3),
-      color(Colors.GRAY9),
       fontSize(FontSize.SM),
       fontWeight(500),
       lineHeight(FontSize.SM),

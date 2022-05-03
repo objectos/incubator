@@ -23,11 +23,12 @@ import objectos.ssg.Markdown;
 
 # Using the `NoOpLogger`
 
-The `NoOpLogger` is a no-operation logger implementation provided with Objectos Logging.
-In other words all of its logging methods do no operation when they are invoked.
+The `NoOpLogger` is a logger implementation provided with Objectos Logging.
+It is a no-operation logger. All of its logging methods do no operation when invoked.
 
-It has uses during the development of a Java application
-even though it performs no logging operation.
+Even though it performs no logging operation, the `NoOpLogger` can be useful
+during the development of a Java application.
+
 This chapters describes some of its uses.
 
  */
