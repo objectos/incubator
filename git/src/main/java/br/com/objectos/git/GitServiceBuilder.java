@@ -20,7 +20,7 @@ import br.com.objectos.concurrent.CpuWorker;
 import br.com.objectos.concurrent.IoWorker;
 import br.com.objectos.core.object.Checks;
 import objectos.logging.Logger;
-import objectos.logging.NoopLogger;
+import objectos.logging.NoOpLogger;
 
 /**
  * @since 3
@@ -35,7 +35,7 @@ final class GitServiceBuilder {
 
   private final IoWorker ioWorker;
 
-  private Logger logger = NoopLogger.getInstance();
+  private Logger logger = NoOpLogger.getInstance();
 
   GitServiceBuilder(CpuArray cpuArray, IoWorker ioWorker) {
     this.cpuArray = Checks.checkNotNull(cpuArray, "cpuArray == null");

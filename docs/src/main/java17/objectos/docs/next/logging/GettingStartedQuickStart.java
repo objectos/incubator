@@ -18,7 +18,7 @@ package objectos.docs.next.logging;
 import objectos.docs.ui.DocsPage;
 import objectos.logging.Event1;
 import objectos.logging.Events;
-import objectos.logging.NoopLogger;
+import objectos.logging.NoOpLogger;
 import objectos.ssg.Markdown;
 
 //@formatter:off
@@ -251,7 +251,7 @@ final class GettingStartedQuickStart extends DocsPage {
       = Events.info(GettingStartedQuickStart.class, "HELLO", String.class);
 
   public static void main(String[] args) {
-    var logger = new NoopLogger() {
+    var logger = new NoOpLogger() {
       @Override
       public <T> void log(Event1<T> event, T arg) {
         if (event == HELLO) {

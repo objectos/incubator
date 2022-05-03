@@ -25,7 +25,7 @@ import objectos.logging.Event0;
 import objectos.logging.Event1;
 import objectos.logging.Events;
 import objectos.logging.Logger;
-import objectos.logging.NoopLogger;
+import objectos.logging.NoOpLogger;
 
 /**
  * Provides a facility for running operations in a {@link Runtime} shutdown
@@ -62,7 +62,7 @@ abstract class AbstractShutdownHook {
 
   private Job job;
 
-  private Logger logger = NoopLogger.getInstance();
+  private Logger logger = NoOpLogger.getInstance();
 
   private List<ShutdownHookTask> tasks;
 

@@ -37,7 +37,7 @@ import java.util.Map;
 import java.util.zip.Deflater;
 import java.util.zip.Inflater;
 import objectos.logging.Logger;
-import objectos.logging.NoopLogger;
+import objectos.logging.NoOpLogger;
 
 /**
  * A state machine providing low-level (plumbing) Git operations.
@@ -185,7 +185,7 @@ public final class GitEngine extends GitInjector {
    * <tr>
    * <th scope="row">{@link GitEngine#logger(Logger) logger}</th>
    * <td>The logger instance the {@code GitEngine} will use</td>
-   * <td>{@link NoopLogger#getInstance()}</td>
+   * <td>{@link NoOpLogger#getInstance()}</td>
    * </tr>
    * </tbody>
    * </table>

@@ -17,9 +17,9 @@ package br.com.objectos.git;
 
 import objectos.logging.Event;
 import objectos.logging.Event2;
-import objectos.logging.NoopLogger;
+import objectos.logging.NoOpLogger;
 
-final class GitTestingLogger extends NoopLogger {
+final class GitTestingLogger extends NoOpLogger {
 
   @SuppressWarnings("unused")
   private MutableTree testCase11Tree;

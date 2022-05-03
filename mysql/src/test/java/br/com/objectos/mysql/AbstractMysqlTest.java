@@ -41,7 +41,7 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
-import objectos.logging.NoopLogger;
+import objectos.logging.NoOpLogger;
 import org.testng.annotations.BeforeClass;
 
 public abstract class AbstractMysqlTest {
@@ -231,10 +231,10 @@ public abstract class AbstractMysqlTest {
     );
 
     IoWorkerService ioWorker;
-    ioWorker = new SingleThreadIoWorker(NoopLogger.getInstance());
+    ioWorker = new SingleThreadIoWorker(NoOpLogger.getInstance());
 
     CpuWorkerService worker;
-    worker = new FixedCpuWorker(1, 1, NoopLogger.getInstance());
+    worker = new FixedCpuWorker(1, 1, NoOpLogger.getInstance());
 
     Services.start(
         ioWorker,

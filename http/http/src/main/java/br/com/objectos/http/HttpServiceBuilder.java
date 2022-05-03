@@ -20,7 +20,7 @@ import br.com.objectos.concurrent.CpuWorker;
 import br.com.objectos.concurrent.IoWorker;
 import java.net.SocketAddress;
 import objectos.logging.Logger;
-import objectos.logging.NoopLogger;
+import objectos.logging.NoOpLogger;
 
 final class HttpServiceBuilder {
 
@@ -34,7 +34,7 @@ final class HttpServiceBuilder {
 
   private final IoWorker ioWorker;
 
-  private Logger logger = NoopLogger.getInstance();
+  private Logger logger = NoOpLogger.getInstance();
 
   private final HttpProcessorProvider processorProvider;
 

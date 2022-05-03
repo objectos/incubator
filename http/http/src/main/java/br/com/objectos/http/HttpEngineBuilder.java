@@ -17,7 +17,7 @@ package br.com.objectos.http;
 
 import br.com.objectos.concurrent.IoWorker;
 import objectos.logging.Logger;
-import objectos.logging.NoopLogger;
+import objectos.logging.NoOpLogger;
 
 final class HttpEngineBuilder {
 
@@ -25,7 +25,7 @@ final class HttpEngineBuilder {
 
   private final IoWorker ioWorker;
 
-  private Logger logger = NoopLogger.getInstance();
+  private Logger logger = NoOpLogger.getInstance();
 
   private final HttpProcessor processor;
 

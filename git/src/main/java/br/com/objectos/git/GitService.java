@@ -23,7 +23,7 @@ import br.com.objectos.core.object.Checks;
 import br.com.objectos.core.set.ImmutableSet;
 import br.com.objectos.fs.Directory;
 import objectos.logging.Logger;
-import objectos.logging.NoopLogger;
+import objectos.logging.NoOpLogger;
 
 /**
  * A class for supporting the execution of {@link GitCommand} instances.
@@ -146,7 +146,7 @@ public final class GitService implements GitExecutor {
    * <tr>
    * <th scope="row">{@link GitService#logger(Logger) logger}</th>
    * <td>The logger instance to use</td>
-   * <td>{@link NoopLogger#getInstance()}</td>
+   * <td>{@link NoOpLogger#getInstance()}</td>
    * </tr>
    * </tbody>
    * </table>

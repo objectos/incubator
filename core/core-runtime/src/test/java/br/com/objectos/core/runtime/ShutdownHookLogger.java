@@ -18,9 +18,9 @@ package br.com.objectos.core.runtime;
 import java.util.ArrayList;
 import java.util.List;
 import objectos.logging.Event1;
-import objectos.logging.NoopLogger;
+import objectos.logging.NoOpLogger;
 
-class ShutdownHookLogger extends NoopLogger {
+class ShutdownHookLogger extends NoOpLogger {
 
   final List<Exception> exceptions = new ArrayList<Exception>();
 

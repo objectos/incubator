@@ -16,9 +16,9 @@
 package br.com.objectos.http;
 
 import objectos.logging.Event;
-import objectos.logging.NoopLogger;
+import objectos.logging.NoOpLogger;
 
-final class HttpTestingLogger extends NoopLogger {
+final class HttpTestingLogger extends NoOpLogger {
 
   @Override
   public final boolean isEnabled(Event event) {

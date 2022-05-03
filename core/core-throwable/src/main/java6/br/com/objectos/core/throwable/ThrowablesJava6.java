@@ -21,12 +21,12 @@ import br.com.objectos.latest.Concrete.Constructor;
 import objectos.logging.Event1;
 import objectos.logging.Events;
 import objectos.logging.Logger;
-import objectos.logging.NoopLogger;
+import objectos.logging.NoOpLogger;
 
 @Bridge
 class ThrowablesJava6 extends AbstractThrowables {
 
-  static Logger LOGGER = NoopLogger.getInstance();
+  static Logger LOGGER = NoOpLogger.getInstance();
 
   private static final Throwable[] EMPTY = new Throwable[0];
 

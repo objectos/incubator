@@ -17,7 +17,7 @@ package br.com.objectos.git;
 
 import br.com.objectos.concurrent.IoWorker;
 import objectos.logging.Logger;
-import objectos.logging.NoopLogger;
+import objectos.logging.NoOpLogger;
 
 final class GitEngineBuilder {
 
@@ -25,7 +25,7 @@ final class GitEngineBuilder {
 
   private final IoWorker ioWorker;
 
-  private Logger logger = NoopLogger.getInstance();
+  private Logger logger = NoOpLogger.getInstance();
 
   GitEngineBuilder(IoWorker ioWorker) {
     this.ioWorker = ioWorker;

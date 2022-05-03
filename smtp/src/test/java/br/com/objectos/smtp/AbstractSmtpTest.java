@@ -29,7 +29,7 @@ import java.io.IOException;
 import javax.mail.Session;
 import javax.mail.internet.MimeMessage;
 import objectos.logging.Logger;
-import objectos.logging.NoopLogger;
+import objectos.logging.NoOpLogger;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
@@ -50,7 +50,7 @@ public abstract class AbstractSmtpTest {
     store = Smtp.newFileSystemMailStore(directory);
 
     Logger noopLogger;
-    noopLogger = NoopLogger.getInstance();
+    noopLogger = NoOpLogger.getInstance();
 
     loopback25 = loopback(4025);
 
