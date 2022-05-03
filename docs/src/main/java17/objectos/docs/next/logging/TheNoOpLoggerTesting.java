@@ -26,37 +26,17 @@ import objectos.ssg.Markdown;
 This section describes uses of the `NoOpLogger` when you are writing tests for your
 Java application.
 
-## Supplying a Logger
-
-Depending on the test case you might not be interested in the logging at all.
-In this situation you can supply the `NoOpLogger` to the tested class.
-For instance suppose the tested class is:
-
-```java
-import objectos.logging.*;
-
-public class Service {
-  private final Logger logger;
-
-  Service(Logger logger) { this.logger = logger; }
-
-  // methods
-}
-```
-
-Then, during testing:
-
-```java
-import objectos.logging.*;
-
-public class ServiceTest {
-
-  private Service service = new Service(NoOpLogger.getInstance());
-
-}
-```
+Please note that these are targeted to particular use-cases and should not
+be considered for general practice.
 
 ## Collecting events
+
+The `Logger` interface acts as an event listener. As such, it can be used
+to collect events during a test run. Later, you can test if the collected events are what
+you expected them to be.
+
+This can be useful, for example, when testing state machines or, in some cases, multi-threaded
+code.
 
  */
 //@formatter:on

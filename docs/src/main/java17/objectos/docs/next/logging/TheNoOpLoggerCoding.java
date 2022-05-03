@@ -21,7 +21,7 @@ import objectos.ssg.Markdown;
 //@formatter:off
 /**
 
-# In production code
+# During coding
 
 The `NoOpLogger` is a no-operation logger implementation. As it does nothing, it has no state
 either. It provides a singleton instance since it can be safely reused. You access it by
@@ -105,6 +105,6 @@ public class Service {
 final class TheNoOpLoggerCoding extends DocsPage {
   @Override
   protected void configure() {
-    titleText = "In production code";
+    titleText = "During coding";
   }
 }
