@@ -17,13 +17,13 @@ package br.com.objectos.concurrent;
 
 import br.com.objectos.core.object.Checks;
 import br.com.objectos.core.object.ToString;
-import br.com.objectos.logging.Event0;
-import br.com.objectos.logging.Event1;
-import br.com.objectos.logging.Events;
-import br.com.objectos.logging.Logger;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.locks.LockSupport;
+import objectos.logging.Event0;
+import objectos.logging.Event1;
+import objectos.logging.Events;
+import objectos.logging.Logger;
 
 /**
  * Runs {@linkplain CpuTask CPU bound tasks} concurrently (up to a fixed number)

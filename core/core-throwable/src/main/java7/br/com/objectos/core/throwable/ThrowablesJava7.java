@@ -18,7 +18,7 @@ package br.com.objectos.core.throwable;
 import br.com.objectos.core.object.Checks;
 import br.com.objectos.latest.Concrete.Bridge;
 import br.com.objectos.latest.Concrete.Constructor;
-import br.com.objectos.logging.Logger;
+import objectos.logging.Logger;
 
 @Bridge
 class ThrowablesJava7 extends AbstractThrowables {

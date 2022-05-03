@@ -25,7 +25,7 @@ module br.com.objectos.logger {
   requires transitive br.com.objectos.concurrent;
   requires transitive br.com.objectos.fs;
   requires transitive br.com.objectos.fs.watch;
-  requires transitive br.com.objectos.logging;
+  requires transitive objectos.logging;
 
   requires br.com.objectos.core.list;
   requires br.com.objectos.core.object;

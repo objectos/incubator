@@ -17,8 +17,8 @@ package br.com.objectos.http;
 
 import br.com.objectos.concurrent.CpuWorker;
 import br.com.objectos.concurrent.IoWorker;
-import br.com.objectos.logging.Logger;
 import java.nio.channels.SocketChannel;
+import objectos.logging.Logger;
 
 /**
  * @since 4

@@ -18,9 +18,9 @@ package br.com.objectos.git;
 import br.com.objectos.core.object.Checks;
 import br.com.objectos.core.object.ToString;
 import br.com.objectos.core.object.ToStringObject;
-import br.com.objectos.logging.Event1;
-import br.com.objectos.logging.Logger;
 import java.util.concurrent.ExecutionException;
+import objectos.logging.Event1;
+import objectos.logging.Logger;
 
 abstract class AbstractGitTask<V> implements GitTask<V>, ResultConsumer, ToStringObject {
 

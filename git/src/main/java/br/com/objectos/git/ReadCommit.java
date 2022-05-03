@@ -17,14 +17,14 @@ package br.com.objectos.git;
 
 import br.com.objectos.core.list.MutableList;
 import br.com.objectos.core.object.Checks;
-import br.com.objectos.logging.Event1;
-import br.com.objectos.logging.Events;
-import br.com.objectos.logging.Logger;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.nio.charset.Charset;
 import java.nio.charset.CharsetDecoder;
 import java.nio.charset.CoderResult;
+import objectos.logging.Event1;
+import objectos.logging.Events;
+import objectos.logging.Logger;
 
 final class ReadCommit implements ObjectReaderAdapter {
 

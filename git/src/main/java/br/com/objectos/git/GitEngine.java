@@ -24,8 +24,6 @@ import br.com.objectos.core.object.Checks;
 import br.com.objectos.core.set.ImmutableSet;
 import br.com.objectos.core.set.MutableSet;
 import br.com.objectos.fs.Directory;
-import br.com.objectos.logging.Logger;
-import br.com.objectos.logging.NoopLogger;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.nio.charset.Charset;
@@ -38,6 +36,8 @@ import java.util.Deque;
 import java.util.Map;
 import java.util.zip.Deflater;
 import java.util.zip.Inflater;
+import objectos.logging.Logger;
+import objectos.logging.NoopLogger;
 
 /**
  * A state machine providing low-level (plumbing) Git operations.

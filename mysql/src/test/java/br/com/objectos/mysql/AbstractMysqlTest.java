@@ -36,12 +36,12 @@ import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.RegularFile;
 import br.com.objectos.fs.ResolvedPath;
 import br.com.objectos.fs.testing.TmpDir;
-import br.com.objectos.logging.NoopLogger;
 import br.com.objectos.random.testing.Next;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
+import objectos.logging.NoopLogger;
 import org.testng.annotations.BeforeClass;
 
 public abstract class AbstractMysqlTest {

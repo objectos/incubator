@@ -18,16 +18,16 @@ package br.com.objectos.core.logging.testing;
 import br.com.objectos.core.object.ToString;
 import br.com.objectos.core.object.ToStringObject;
 import br.com.objectos.core.system.LineSeparator;
-import br.com.objectos.logging.Event;
-import br.com.objectos.logging.Event0;
-import br.com.objectos.logging.Event1;
-import br.com.objectos.logging.Event2;
-import br.com.objectos.logging.Event3;
-import br.com.objectos.logging.Level;
-import br.com.objectos.logging.Logging;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import objectos.logging.Event;
+import objectos.logging.Event0;
+import objectos.logging.Event1;
+import objectos.logging.Event2;
+import objectos.logging.Event3;
+import objectos.logging.Level;
+import objectos.logging.Logging;
 
 /**
  * A logged event that provides methods for its inspection.

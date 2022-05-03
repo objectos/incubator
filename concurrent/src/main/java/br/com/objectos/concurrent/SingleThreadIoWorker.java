@@ -16,11 +16,11 @@
 package br.com.objectos.concurrent;
 
 import br.com.objectos.core.object.Checks;
-import br.com.objectos.logging.Event1;
-import br.com.objectos.logging.Events;
-import br.com.objectos.logging.Logger;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingDeque;
+import objectos.logging.Event1;
+import objectos.logging.Events;
+import objectos.logging.Logger;
 
 /**
  * A service that uses a single thread for executing I/O tasks operating off an

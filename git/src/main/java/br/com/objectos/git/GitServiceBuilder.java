@@ -19,8 +19,8 @@ import br.com.objectos.concurrent.CpuArray;
 import br.com.objectos.concurrent.CpuWorker;
 import br.com.objectos.concurrent.IoWorker;
 import br.com.objectos.core.object.Checks;
-import br.com.objectos.logging.Logger;
-import br.com.objectos.logging.NoopLogger;
+import objectos.logging.Logger;
+import objectos.logging.NoopLogger;
 
 /**
  * @since 3

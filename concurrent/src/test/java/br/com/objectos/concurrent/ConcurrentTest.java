@@ -24,8 +24,8 @@ import static org.testng.Assert.assertTrue;
 
 import br.com.objectos.core.logging.testing.TestableLogger;
 import br.com.objectos.core.service.Services;
-import br.com.objectos.logging.NoopLogger;
 import java.io.IOException;
+import objectos.logging.NoopLogger;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;

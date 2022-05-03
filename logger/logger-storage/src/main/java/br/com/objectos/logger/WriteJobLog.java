@@ -16,9 +16,9 @@
 package br.com.objectos.logger;
 
 import br.com.objectos.core.object.ToString;
-import br.com.objectos.logging.Event;
-import br.com.objectos.logging.Level;
-import br.com.objectos.logging.Logger;
+import objectos.logging.Event;
+import objectos.logging.Level;
+import objectos.logging.Logger;
 
 abstract class WriteJobLog extends Log {
 

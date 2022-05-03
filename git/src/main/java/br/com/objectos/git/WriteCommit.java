@@ -21,8 +21,6 @@ import br.com.objectos.fs.NotRegularFileException;
 import br.com.objectos.fs.PathNameVisitor;
 import br.com.objectos.fs.RegularFile;
 import br.com.objectos.fs.ResolvedPath;
-import br.com.objectos.logging.Event1;
-import br.com.objectos.logging.Events;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
@@ -31,6 +29,8 @@ import java.nio.charset.CharsetEncoder;
 import java.nio.charset.CoderResult;
 import java.security.MessageDigest;
 import java.util.zip.Deflater;
+import objectos.logging.Event1;
+import objectos.logging.Events;
 
 final class WriteCommit extends AbstractGitEngineTask {
 

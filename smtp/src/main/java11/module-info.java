@@ -18,7 +18,7 @@ module br.com.objectos.mail.smtp.server {
   exports br.com.objectos.smtp;
 
   requires transitive br.com.objectos.fs;
-  requires transitive br.com.objectos.logging;
+  requires transitive objectos.logging;
 
   requires static br.com.objectos.latest;
 

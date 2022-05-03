@@ -16,8 +16,8 @@
 package br.com.objectos.http;
 
 import br.com.objectos.concurrent.IoWorker;
-import br.com.objectos.logging.Logger;
-import br.com.objectos.logging.NoopLogger;
+import objectos.logging.Logger;
+import objectos.logging.NoopLogger;
 
 final class HttpEngineBuilder {
 

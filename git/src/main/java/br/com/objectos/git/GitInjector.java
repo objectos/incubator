@@ -19,7 +19,6 @@ import br.com.objectos.concurrent.CpuTask;
 import br.com.objectos.concurrent.IoWorker;
 import br.com.objectos.core.list.MutableList;
 import br.com.objectos.core.set.MutableSet;
-import br.com.objectos.logging.Logger;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.nio.charset.Charset;
@@ -29,6 +28,7 @@ import java.security.MessageDigest;
 import java.util.ArrayDeque;
 import java.util.zip.Deflater;
 import java.util.zip.Inflater;
+import objectos.logging.Logger;
 
 abstract class GitInjector {
 

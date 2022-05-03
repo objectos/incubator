@@ -15,7 +15,7 @@
  */
 package br.com.objectos.smtp;
 
-import br.com.objectos.logging.Logger;
+import objectos.logging.Logger;
 
 public interface ClientBuilder {
 

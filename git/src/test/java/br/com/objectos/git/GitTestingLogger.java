@@ -15,9 +15,9 @@
  */
 package br.com.objectos.git;
 
-import br.com.objectos.logging.Event;
-import br.com.objectos.logging.Event2;
-import br.com.objectos.logging.NoopLogger;
+import objectos.logging.Event;
+import objectos.logging.Event2;
+import objectos.logging.NoopLogger;
 
 final class GitTestingLogger extends NoopLogger {
 

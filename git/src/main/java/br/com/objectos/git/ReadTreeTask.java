@@ -16,8 +16,8 @@
 package br.com.objectos.git;
 
 import br.com.objectos.core.object.ToString;
-import br.com.objectos.logging.Event1;
-import br.com.objectos.logging.Events;
+import objectos.logging.Event1;
+import objectos.logging.Events;
 
 final class ReadTreeTask extends AbstractGitTask<Tree> {
 

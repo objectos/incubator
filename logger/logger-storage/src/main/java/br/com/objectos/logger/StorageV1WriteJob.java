@@ -24,12 +24,12 @@ import br.com.objectos.core.list.MutableList;
 import br.com.objectos.core.string.Strings;
 import br.com.objectos.core.throwable.StackTraceElements;
 import br.com.objectos.core.throwable.Throwables;
-import br.com.objectos.logging.Level;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
+import objectos.logging.Level;
 
 final class StorageV1WriteJob implements IoTask, CpuTask, WriteJob {
 

@@ -21,12 +21,12 @@ import br.com.objectos.concurrent.IoWorker;
 import br.com.objectos.core.object.Checks;
 import br.com.objectos.core.throwable.Throwables;
 import br.com.objectos.core.throwable.Try;
-import br.com.objectos.logging.Event0;
-import br.com.objectos.logging.Event1;
-import br.com.objectos.logging.Event2;
-import br.com.objectos.logging.Logger;
 import java.io.Closeable;
 import java.io.IOException;
+import objectos.logging.Event0;
+import objectos.logging.Event1;
+import objectos.logging.Event2;
+import objectos.logging.Logger;
 
 abstract class AbstractGitEngineTask implements CpuTask, IoTask {
 

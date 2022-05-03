@@ -29,5 +29,5 @@ module br.com.objectos.git {
   requires br.com.objectos.core.set;
   requires br.com.objectos.core.system;
   requires br.com.objectos.core.throwable;
-  requires br.com.objectos.logging;
+  requires objectos.logging;
 }

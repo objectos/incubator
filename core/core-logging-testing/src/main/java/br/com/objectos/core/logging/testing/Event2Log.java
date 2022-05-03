@@ -17,9 +17,9 @@ package br.com.objectos.core.logging.testing;
 
 import br.com.objectos.core.object.Equals;
 import br.com.objectos.core.object.ToString;
-import br.com.objectos.logging.Event;
-import br.com.objectos.logging.Event2;
-import br.com.objectos.logging.Logging;
+import objectos.logging.Event;
+import objectos.logging.Event2;
+import objectos.logging.Logging;
 
 /**
  * An {@link Event2} log instance.

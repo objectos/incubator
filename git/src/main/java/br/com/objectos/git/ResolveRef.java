@@ -19,9 +19,6 @@ import br.com.objectos.fs.PathName;
 import br.com.objectos.fs.RegularFile;
 import br.com.objectos.fs.ResolvedPath;
 import br.com.objectos.fs.SimplePathNameVisitor;
-import br.com.objectos.logging.Event1;
-import br.com.objectos.logging.Event2;
-import br.com.objectos.logging.Events;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
@@ -29,6 +26,9 @@ import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
 import java.nio.charset.CharsetDecoder;
 import java.nio.charset.CoderResult;
+import objectos.logging.Event1;
+import objectos.logging.Event2;
+import objectos.logging.Events;
 
 /**
  * Resolves a Git reference.

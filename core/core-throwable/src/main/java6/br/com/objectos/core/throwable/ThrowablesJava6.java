@@ -18,10 +18,10 @@ package br.com.objectos.core.throwable;
 import br.com.objectos.core.object.Checks;
 import br.com.objectos.latest.Concrete.Bridge;
 import br.com.objectos.latest.Concrete.Constructor;
-import br.com.objectos.logging.Event1;
-import br.com.objectos.logging.Events;
-import br.com.objectos.logging.Logger;
-import br.com.objectos.logging.NoopLogger;
+import objectos.logging.Event1;
+import objectos.logging.Events;
+import objectos.logging.Logger;
+import objectos.logging.NoopLogger;
 
 @Bridge
 class ThrowablesJava6 extends AbstractThrowables {

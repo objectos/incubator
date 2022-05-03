@@ -19,7 +19,7 @@ import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 
 import br.com.objectos.core.service.Services;
-import br.com.objectos.logging.NoopLogger;
+import objectos.logging.NoopLogger;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 

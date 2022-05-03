@@ -20,7 +20,7 @@
 module br.com.objectos.core.logging.testing {
   exports br.com.objectos.core.logging.testing;
 
-  requires transitive br.com.objectos.logging;
+  requires transitive objectos.logging;
 
   requires br.com.objectos.core.list;
   requires br.com.objectos.core.object;

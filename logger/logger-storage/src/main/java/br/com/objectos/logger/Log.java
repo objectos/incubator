@@ -15,7 +15,7 @@
  */
 package br.com.objectos.logger;
 
-import br.com.objectos.logging.Level;
+import objectos.logging.Level;
 
 /**
  * A logged event.

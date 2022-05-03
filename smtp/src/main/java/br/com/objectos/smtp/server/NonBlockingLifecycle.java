@@ -16,14 +16,14 @@
 package br.com.objectos.smtp.server;
 
 import br.com.objectos.comuns.net.SocketChannelFactory;
-import br.com.objectos.logging.Event1;
-import br.com.objectos.logging.Events;
-import br.com.objectos.logging.Logger;
 import br.com.objectos.smtp.ConfigurationException;
 import java.io.Closeable;
 import java.io.IOException;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
+import objectos.logging.Event1;
+import objectos.logging.Events;
+import objectos.logging.Logger;
 
 public final class NonBlockingLifecycle implements Lifecycle {
 

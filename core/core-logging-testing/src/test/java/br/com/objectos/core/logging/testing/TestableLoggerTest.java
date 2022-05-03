@@ -20,12 +20,12 @@ import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertSame;
 import static org.testng.Assert.assertTrue;
 
-import br.com.objectos.logging.Event0;
-import br.com.objectos.logging.Event1;
-import br.com.objectos.logging.Event2;
-import br.com.objectos.logging.Event3;
-import br.com.objectos.logging.Events;
 import java.io.IOException;
+import objectos.logging.Event0;
+import objectos.logging.Event1;
+import objectos.logging.Event2;
+import objectos.logging.Event3;
+import objectos.logging.Events;
 import org.testng.annotations.Test;
 
 public class TestableLoggerTest {

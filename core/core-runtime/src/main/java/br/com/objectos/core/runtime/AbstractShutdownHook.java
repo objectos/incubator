@@ -17,15 +17,15 @@ package br.com.objectos.core.runtime;
 
 import br.com.objectos.core.object.Checks;
 import br.com.objectos.latest.Concrete;
-import br.com.objectos.logging.Event0;
-import br.com.objectos.logging.Event1;
-import br.com.objectos.logging.Events;
-import br.com.objectos.logging.Logger;
-import br.com.objectos.logging.NoopLogger;
 import java.io.Closeable;
 import java.lang.Thread.State;
 import java.util.ArrayList;
 import java.util.List;
+import objectos.logging.Event0;
+import objectos.logging.Event1;
+import objectos.logging.Events;
+import objectos.logging.Logger;
+import objectos.logging.NoopLogger;
 
 /**
  * Provides a facility for running operations in a {@link Runtime} shutdown

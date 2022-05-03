@@ -20,14 +20,14 @@ import br.com.objectos.core.throwable.Try;
 import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.RegularFile;
 import br.com.objectos.fs.ResolvedPath;
-import br.com.objectos.logging.Event1;
-import br.com.objectos.logging.Event2;
-import br.com.objectos.logging.Events;
-import br.com.objectos.logging.Logger;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.zip.GZIPOutputStream;
+import objectos.logging.Event1;
+import objectos.logging.Event2;
+import objectos.logging.Events;
+import objectos.logging.Logger;
 
 final class FullBackup extends AbstractClientJob<RegularFile> {
 

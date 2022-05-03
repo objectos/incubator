@@ -16,7 +16,7 @@
 package br.com.objectos.logger;
 
 import br.com.objectos.core.system.LineSeparator;
-import br.com.objectos.logging.Level;
+import objectos.logging.Level;
 
 final class MoreLogging {
 

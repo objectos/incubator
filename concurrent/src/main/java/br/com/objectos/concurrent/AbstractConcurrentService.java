@@ -17,7 +17,7 @@ package br.com.objectos.concurrent;
 
 import br.com.objectos.core.object.Checks;
 import br.com.objectos.core.service.AbstractService;
-import br.com.objectos.logging.Logger;
+import objectos.logging.Logger;
 
 abstract class AbstractConcurrentService extends AbstractService {
 

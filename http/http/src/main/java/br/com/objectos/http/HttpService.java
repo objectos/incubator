@@ -19,10 +19,10 @@ import br.com.objectos.concurrent.CpuArray;
 import br.com.objectos.concurrent.IoWorker;
 import br.com.objectos.core.object.Checks;
 import br.com.objectos.core.service.AbstractService;
-import br.com.objectos.logging.Logger;
 import java.net.SocketAddress;
 import java.nio.channels.SocketChannel;
 import java.util.Random;
+import objectos.logging.Logger;
 
 /**
  * @since 4

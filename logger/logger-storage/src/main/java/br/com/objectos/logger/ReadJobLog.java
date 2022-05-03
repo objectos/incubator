@@ -15,8 +15,8 @@
  */
 package br.com.objectos.logger;
 
-import br.com.objectos.logging.Event;
 import java.util.List;
+import objectos.logging.Event;
 
 abstract class ReadJobLog extends Log {
 

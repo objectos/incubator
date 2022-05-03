@@ -15,10 +15,10 @@
  */
 package br.com.objectos.core.runtime;
 
-import br.com.objectos.logging.Event1;
-import br.com.objectos.logging.NoopLogger;
 import java.util.ArrayList;
 import java.util.List;
+import objectos.logging.Event1;
+import objectos.logging.NoopLogger;
 
 class ShutdownHookLogger extends NoopLogger {
 

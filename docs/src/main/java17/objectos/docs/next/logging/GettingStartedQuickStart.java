@@ -15,10 +15,10 @@
  */
 package objectos.docs.next.logging;
 
-import br.com.objectos.logging.Event1;
-import br.com.objectos.logging.Events;
-import br.com.objectos.logging.NoopLogger;
 import objectos.docs.ui.DocsPage;
+import objectos.logging.Event1;
+import objectos.logging.Events;
+import objectos.logging.NoopLogger;
 import objectos.ssg.Markdown;
 
 //@formatter:off

@@ -15,12 +15,12 @@
  */
 package br.com.objectos.throwables;
 
-import br.com.objectos.logging.Event;
-import br.com.objectos.logging.Event0;
-import br.com.objectos.logging.Event1;
-import br.com.objectos.logging.Event2;
-import br.com.objectos.logging.Event3;
-import br.com.objectos.logging.Logger;
+import objectos.logging.Event;
+import objectos.logging.Event0;
+import objectos.logging.Event1;
+import objectos.logging.Event2;
+import objectos.logging.Event3;
+import objectos.logging.Logger;
 
 final class ThisLogger implements Logger {
 

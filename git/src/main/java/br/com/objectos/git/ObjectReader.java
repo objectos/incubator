@@ -24,16 +24,16 @@ import br.com.objectos.fs.PathNameVisitor;
 import br.com.objectos.fs.ReadableFileChannelSource;
 import br.com.objectos.fs.RegularFile;
 import br.com.objectos.fs.ResolvedPath;
-import br.com.objectos.logging.Event0;
-import br.com.objectos.logging.Event1;
-import br.com.objectos.logging.Event2;
-import br.com.objectos.logging.Events;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.util.Iterator;
 import java.util.zip.DataFormatException;
 import java.util.zip.Inflater;
+import objectos.logging.Event0;
+import objectos.logging.Event1;
+import objectos.logging.Event2;
+import objectos.logging.Events;
 
 /**
  * A state machine for reading Git objects from a repository. Supports:

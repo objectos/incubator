@@ -22,9 +22,6 @@ import br.com.objectos.fs.NotRegularFileException;
 import br.com.objectos.fs.PathNameVisitor;
 import br.com.objectos.fs.RegularFile;
 import br.com.objectos.fs.ResolvedPath;
-import br.com.objectos.logging.Event2;
-import br.com.objectos.logging.Events;
-import br.com.objectos.logging.TypeHint;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
@@ -32,6 +29,9 @@ import java.nio.charset.Charset;
 import java.security.MessageDigest;
 import java.util.Arrays;
 import java.util.zip.Deflater;
+import objectos.logging.Event2;
+import objectos.logging.Events;
+import objectos.logging.TypeHint;
 
 final class WriteTree extends AbstractGitEngineTask {
 

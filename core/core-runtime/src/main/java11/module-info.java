@@ -24,5 +24,5 @@ module br.com.objectos.core.runtime {
   requires static br.com.objectos.latest;
 
   requires br.com.objectos.core.object;
-  requires br.com.objectos.logging;
+  requires objectos.logging;
 }

@@ -17,9 +17,6 @@ package br.com.objectos.smtp.server;
 
 import br.com.objectos.comuns.net.SocketChannelFactory;
 import br.com.objectos.core.object.Checks;
-import br.com.objectos.logging.Event1;
-import br.com.objectos.logging.Events;
-import br.com.objectos.logging.Logger;
 import br.com.objectos.smtp.ConfigurationException;
 import br.com.objectos.smtp.MailStore;
 import br.com.objectos.smtp.Server;
@@ -32,6 +29,9 @@ import br.com.objectos.smtp.mail.ReversePathFacade;
 import br.com.objectos.smtp.mail.SimpleReversePathFacade;
 import java.nio.charset.Charset;
 import java.nio.charset.CharsetDecoder;
+import objectos.logging.Event1;
+import objectos.logging.Events;
+import objectos.logging.Logger;
 
 public final class NonBlockingServer implements Server {
 

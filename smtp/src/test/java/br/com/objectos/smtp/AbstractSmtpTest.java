@@ -24,12 +24,12 @@ import br.com.objectos.comuns.net.SocketChannelFactory;
 import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.testing.TmpDir;
-import br.com.objectos.logging.Logger;
-import br.com.objectos.logging.NoopLogger;
 import java.io.Closeable;
 import java.io.IOException;
 import javax.mail.Session;
 import javax.mail.internet.MimeMessage;
+import objectos.logging.Logger;
+import objectos.logging.NoopLogger;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 

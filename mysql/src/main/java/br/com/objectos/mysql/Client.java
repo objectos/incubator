@@ -22,8 +22,8 @@ import br.com.objectos.core.object.Checks;
 import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.RegularFile;
 import br.com.objectos.fs.ResolvedPath;
-import br.com.objectos.logging.Logger;
 import java.nio.charset.Charset;
+import objectos.logging.Logger;
 
 public final class Client {
 
