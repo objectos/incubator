@@ -15,6 +15,7 @@
  */
 package objectos.ssg;
 
+import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.core.object.Checks;
 import br.com.objectos.http.media.MediaType;
 
@@ -93,6 +94,15 @@ public abstract class SiteDirectory
   }
 
   protected abstract void configure();
+
+  protected final <T> T getObject(Class<? extends T> key) {
+    return site.getObject(key);
+  }
+
+  protected final <T>
+      ImmutableList<T> getObjectsByType(Class<? extends T> type) {
+    return site.getObjectsByType(type);
+  }
 
   final void set(String path, SiteGeneration site) {
     Checks.checkState(this.path == null, "path was already set");
