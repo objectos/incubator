@@ -25,6 +25,8 @@ public final class JavaCss extends AbstractStyleSheet {
 
   public static final ClassSelector _COMMENT = Css.randomDot(3);
 
+  public static final ClassSelector _DIGITS = Css.randomDot(3);
+
   public static final ClassSelector _IDENTIFIER = Css.randomDot(3);
 
   public static final ClassSelector _KEYWORD = Css.randomDot(3);
@@ -47,6 +49,12 @@ public final class JavaCss extends AbstractStyleSheet {
       _COMMENT,
 
       color(Colors.GRAPE8)
+    );
+
+    style(
+      _DIGITS,
+
+      color(Colors.RED7)
     );
 
     style(

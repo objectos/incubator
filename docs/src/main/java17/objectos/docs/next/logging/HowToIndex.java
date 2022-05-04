@@ -21,29 +21,17 @@ import objectos.ssg.Markdown;
 //@formatter:off
 /**
 
-# During testing
+# How-to guides
 
-This section describes uses of the `NoOpLogger` when you are writing tests for your
-Java application.
+In this chapter we present articles on how to use the Objectos Logging API
+to solve particular use-cases.
 
-Please note that these are targeted to particular use-cases and should not
-be considered for general practice.
-
-## Collecting events
-
-The `Logger` interface acts as an event listener. As such, it can be used
-to collect events during a test run. Later, you can test if the collected events are what
-you expected them to be.
-
-This can be useful, for example, when testing state machines or, in some cases, multi-threaded
-code.
-
- */
+*/
 //@formatter:on
 @Markdown
-final class TheNoOpLoggerTesting extends DocsPage {
+final class HowToIndex extends DocsPage {
   @Override
   protected void configure() {
-    titleText = "During testing";
+    titleText = "How-to guides";
   }
 }

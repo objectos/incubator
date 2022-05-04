@@ -32,15 +32,17 @@ final class JavaRenderer extends LanguageRenderer {
 
   private static final byte _IDENTIFIER = 5;
 
-  private static final byte _START = 6;
+  private static final byte _INT_LITERAL = 6;
+
+  private static final byte _START = 7;
 
   private static final byte _STOP = 0;
 
-  private static final byte _STRING_LITERAL = 7;
+  private static final byte _STRING_LITERAL = 8;
 
-  private static final byte _TOKEN = 8;
+  private static final byte _TOKEN = 9;
 
-  private static final byte _WS = 9;
+  private static final byte _WS = 10;
 
   private int index;
 
@@ -91,6 +93,8 @@ final class JavaRenderer extends LanguageRenderer {
         return executeCommentLine();
       case _IDENTIFIER:
         return executeIdentifier();
+      case _INT_LITERAL:
+        return executeIntLiteral();
       case _START:
         return executeStart();
       case _STRING_LITERAL:
@@ -216,6 +220,28 @@ final class JavaRenderer extends LanguageRenderer {
     return _START;
   }
 
+  private byte executeIntLiteral() {
+    while (hasNext()) {
+      char c;
+      c = peek();
+
+      if (!Character.isDigit(c)) {
+        break;
+      }
+
+      stringBuilder.append(c);
+
+      index++;
+    }
+
+    String lit;
+    lit = makeString();
+
+    span(JavaCss._DIGITS, lit);
+
+    return _START;
+  }
+
   private byte executeStart() {
     if (!hasNext()) {
       return _STOP;
@@ -248,6 +274,10 @@ final class JavaRenderer extends LanguageRenderer {
 
     else if (c == '/') {
       return _COMMENT;
+    }
+
+    else if (Character.isDigit(c)) {
+      return _INT_LITERAL;
     }
 
     throw new UnsupportedOperationException("Implement me: c=" + c);

@@ -98,7 +98,7 @@ You must be aware this strategy is error-prone:
 
 - you must null-check before setting the logger field value;
 - you must set the logger to a default value to avoid null-pointer exceptions. Typically this
-  will be the [`NoOpLogger`](href:next.logging.TheNoOpLoggerCoding); and
+  will be the [`NoOpLogger`](href:next.logging.TheNoOpLoggerIndex); and
 - depending on your requirements, you might need to synchronize the access.
 
 ### Via static factory

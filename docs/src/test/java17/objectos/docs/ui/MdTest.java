@@ -210,6 +210,37 @@ public class MdTest {
   }
 
   @Test
+  public void java05() {
+    test(
+      """
+      ```java
+      var i = 123;
+      ```
+      """,
+
+      """
+      <pre class="zqh">\
+      <code>\
+      <span class="kkl">var</span>\
+      <span class="trr"> </span>\
+      <span class="kkl">i</span>\
+      <span class="trr"> </span>\
+      <span class="a6g">=</span>\
+      <span class="trr"> </span>\
+      <span class="rlv">123</span>\
+      <span class="a6g">;</span>\
+      </code>\
+      </pre>
+            """
+          .replace("zqh", SyntaxCss._PRE.className())
+          .replace("trr", JavaCss._WS.className())
+          .replace("a6g", JavaCss._TOKEN.className())
+          .replace("kkl", JavaCss._IDENTIFIER.className())
+          .replace("rlv", JavaCss._DIGITS.className())
+    );
+  }
+
+  @Test
   public void xml() {
     test(
       """

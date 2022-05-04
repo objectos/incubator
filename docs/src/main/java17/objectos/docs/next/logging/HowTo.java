@@ -17,11 +17,12 @@ package objectos.docs.next.logging;
 
 import objectos.ssg.SiteDirectory;
 
-final class TheNoOpLogger extends SiteDirectory {
+final class HowTo extends SiteDirectory {
 
   @Override
   protected final void configure() {
-    addPage("index.html", new TheNoOpLoggerIndex());
+    addPage("index.html", new HowToIndex());
+    addPage("test-asynchronous-code.html", new HowToTestAsyncCode());
   }
 
 }
