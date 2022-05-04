@@ -29,8 +29,9 @@ logging.
 ## Log events
 
 As we have seen in the previous section, logging is about emitting messages
-describing events taking place during a program execution. The central
-part of logging with Objectos Logging is defining those events.
+describing events taking place during a program execution. Put simply,
+Objectos Logging acts as an event listener. Therefore, the central
+part of logging with Objectos Logging is defining these events.
 
 In Objectos Logging events are _immutable_ objects that you instantiate.
 A "Hello world!" example:

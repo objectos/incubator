@@ -29,7 +29,6 @@ public final class LoggingDir extends SiteDirectory {
     addDirectory("getting-started", new GettingStarted());
     addDirectory("logging-guide", new LoggingGuide());
     addDirectory("no-op-logger", new TheNoOpLogger());
-    addDirectory("how-to", new HowTo());
   }
 
 }

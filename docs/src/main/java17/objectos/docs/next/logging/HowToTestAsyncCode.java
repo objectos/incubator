@@ -21,67 +21,61 @@ import objectos.ssg.Markdown;
 //@formatter:off
 /**
 
-# During testing
+# HOWTO: test asynchronous code
 
-The `Logger` interface is an event listener. It can be used for logging and it can also be
-used during testing.
+The `Logger` interface acts as an event listener.
+It can be used for logging and it can also be used during testing.
 
-This section describes uses of the `NoOpLogger` when you are writing tests for your
-Java application.
+In this article we will discuss a way of using Objectos Logging to help you
+test asynchronous code.
 
-Please note that these are targeted to particular use-cases and should not
-be considered for general practice.
-
-## Asynchronous code
+## The challenge
 
 When you start a Java thread in your test code you might not know exactly when
 the thread will complete its work. If you don't know when the work is complete,
-you can't know when it is possible to do meaninful assertions. Suppose the
-class under test is the following `Runnable`:
+you can't know when it is possible to do meaningful assertions. Suppose the
+class under test is the following `Thread`:
 
 ```java
-import objectos.logging.*;
+class HelloWriter extends Thread {
+  private final int quantity;
 
-class Incrementer implements Runnable {
-  static final Event0 STARTED = Event0.info();
+  volatile int value;
 
-  private final Logger logger;
-  private final int stopAt;
-
-  int value;
-
-  Incrementer(Logger logger, int stopAt) {
-    this.logger = logger;
-    this.stopAt = stopAt;
+  Incrementer(int quantity) {
+    this.quantity = quantity;
   }
 
   @Override
   public void run() {
-    logger.log(STARTED);
+    Path p = Paths.of("/tmp/hello.txt");
+    try () {
+    }
+    for (int i = 0; i < stopAt; i++) {
+      value++;
+    }
   }
 }
 ```
 
 
 
-One solution is to put to sleep the thread
-running the test itself. The following example illustrates the use of the
-`Thread.sleep(int)` method:
+And the following test:
 
 ```java
-@Test
-public void example() {
-  var subject = new TaskBeingTested();
+public class IncrementerTest {
+  @Test
+  public void test() {
+    var inc = new Incrementer(1000);
 
-  var t = new Thread(subject);
+    inc.start();
 
-  t.start();
-
-  Thread.sleep(2000);
-
-  // assert subject
+    assertEquals(inc.value, 1000);
+  }
 }
 ```
+
+The problem is that the `Incrementer` code will be run
 
 ## Collecting events
 
@@ -98,6 +92,6 @@ state machines, code in Java threads.
 final class HowToTestAsyncCode extends DocsPage {
   @Override
   protected void configure() {
-    titleText = "How to Test asynchronous code";
+    titleText = "HOWTO: test asynchronous code";
   }
 }
