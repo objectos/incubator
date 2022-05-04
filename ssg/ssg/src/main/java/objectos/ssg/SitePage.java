@@ -59,10 +59,14 @@ public abstract class SitePage extends AbstractTemplate
 
   @Override
   public final void writeTo(SiteWriter writer) throws IOException {
+    writeStart();
+
     String contents;
     contents = printMinified();
 
     writer.writeString(path, TextType.HTML, contents);
+
+    writeEnd(contents);
   }
 
   protected void configure() {}
@@ -97,6 +101,10 @@ public abstract class SitePage extends AbstractTemplate
   protected final Src src(SitePath path) {
     return src(path.path());
   }
+
+  protected void writeEnd(String contents) {}
+
+  protected void writeStart() {}
 
   final void setPath(String path) {
     Checks.checkState(this.path == null, "path was already set");

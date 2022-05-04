@@ -287,6 +287,41 @@ public class SiteTest {
     );
   }
 
+  @Test
+  public void testCase09() throws IOException {
+    TestCase09 tc;
+    tc = new TestCase09();
+
+    TestableSiteWriter w;
+    w = gen(tc);
+
+    testPathList(
+      w,
+
+      "/index.html"
+    );
+
+    w.testString(
+      "/index.html",
+
+      TextType.HTML,
+
+      """
+      <html>\
+      <body>TestCase09:index</body>\
+      </html>"""
+    );
+
+    assertEquals(
+      tc.result,
+
+      """
+      <html>\
+      <body>TestCase09:index</body>\
+      </html>"""
+    );
+  }
+
   protected void testPathList(TestableSiteWriter w, String... paths) {
     assertEquals(w.pathList(), ImmutableList.copyOf(paths));
   }
