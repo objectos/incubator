@@ -13,27 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package objectos.docs;
+package objectos.docs.next.intro;
 
-import objectos.docs.next.Next;
-import objectos.docs.ui.Md;
-import objectos.docs.ui.NextBanner;
-import objectos.docs.ui.VersionHolder;
-import objectos.ssg.Site;
-import objectos.ssg.SitePath;
+import objectos.docs.ui.DocsPage;
+import objectos.ssg.SiteDirectory;
 
-public final class DocsSite extends Site {
+public final class Intro extends SiteDirectory {
 
-  public static final Class<? extends SitePath> INDEX = Next.INDEX;
+  public static final Class<? extends DocsPage> INDEX = IntroIndex.class;
+
+  public static final Class<? extends DocsPage> INSTALLATION = IntroInstallation.class;
+
+  public static final Class<? extends DocsPage> OVERVIEW = IntroOverview.class;
 
   @Override
   protected final void configure() {
-    addObject(new Md());
-    addObject(new NextBanner());
-    addObject(new StringBuilder());
-    addObject(new VersionHolder());
-
-    addDirectory("next", new Next());
+    addPage("index.html", new IntroIndex());
+    addPage("overview.html", new IntroOverview());
+    addPage("install.html", new IntroInstallation());
   }
 
 }

@@ -126,6 +126,11 @@ public abstract class DocsPage extends SitePage {
     String html;
     html = md.render(this);
 
+    VersionHolder vh;
+    vh = getObject(VersionHolder.class);
+
+    html = html.replace("{{version}}", vh.get());
+
     article(
       raw(html)
     );

@@ -15,7 +15,7 @@
  */
 package objectos.docs.next;
 
-import objectos.docs.next.intro.IntroDir;
+import objectos.docs.next.intro.Intro;
 import objectos.docs.next.logging.LoggingDir;
 import objectos.docs.ui.DocsPage;
 
@@ -42,9 +42,9 @@ final class Index extends DocsPage {
         p("Read these to get started with Objectos:"),
 
         ul(
-          li(a(IntroDir.OVERVIEW, "What is Objectos?")),
+          li(a(Intro.OVERVIEW, "What is Objectos?")),
 
-          li(a(IntroDir.INSTALLATION, "Installation"))
+          li(a(Intro.INSTALLATION, "Installation"))
         )
       ),
 

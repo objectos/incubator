@@ -13,24 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package objectos.docs.next.intro;
+package objectos.docs.ui;
 
-import objectos.docs.ui.DocsPage;
-import objectos.ssg.SiteDirectory;
+import br.com.objectos.core.object.Checks;
 
-public final class IntroDir extends SiteDirectory {
+public final class VersionHolder {
 
-  public static final Class<? extends DocsPage> INDEX = Index.class;
+  private String value = "";
 
-  public static final Class<? extends DocsPage> INSTALLATION = Installation.class;
+  public final String get() {
+    return value;
+  }
 
-  public static final Class<? extends DocsPage> OVERVIEW = Overview.class;
-
-  @Override
-  protected final void configure() {
-    addPage("index.html", new Index());
-    addPage("overview.html", new Overview());
-    addPage("install.html", new Installation());
+  public final void set(String value) {
+    this.value = Checks.checkNotNull(value, "value == null");
   }
 
 }

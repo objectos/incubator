@@ -68,9 +68,9 @@ We should embrace those gains.
 
 ## Documentation is a first-class citizen
 
-We do not claim to have good nor great documentation.
+We do not claim to have good documentation.
 
-We have learned the hard way that a project does not exist without proper
+With that said, we have learned that a project does not exist without proper
 documentation. Therefore, we will work to the best of our abilities to:
 
 - provide documentation for all of our publicly available libraries. This may include:
@@ -91,7 +91,7 @@ But you can find the source code in our
 */
 //@formatter:on
 @Markdown
-final class Overview extends DocsPage {
+final class IntroOverview extends DocsPage {
   @Override
   protected final void configure() {
     titleText = "What is Objectos?";

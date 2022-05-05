@@ -26,7 +26,7 @@ import objectos.ssg.Markdown;
 */
 //@formatter:on
 @Markdown
-final class Index extends DocsPage {
+final class IntroIndex extends DocsPage {
   @Override
   protected final void configure() {
     titleText = "Get started with Objectos";

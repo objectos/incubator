@@ -45,7 +45,7 @@ section of your project's POM file like so:
 *        <dependency>
 *            <groupId>br.com.objectos</groupId>
 *            <artifactId>bom</artifactId>
-*            <version>0.1.0</version>
+*            <version>{{version}}</version>
 *            <type>pom</type>
 *            <scope>import</scope>
 *        </dependency>
@@ -83,7 +83,7 @@ module my.module {
 */
 //@formatter:on
 @Markdown
-final class Installation extends DocsPage {
+final class IntroInstallation extends DocsPage {
   @Override
   protected final void configure() {
     titleText = "Installation";
