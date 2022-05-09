@@ -21,9 +21,21 @@ import java.io.IOException;
 
 public abstract class Site implements SiteResourceHolder {
 
-  private SiteGeneration generation;
+  private SiteConfiguration configuration;
 
   protected Site() {}
+
+  public final void configure(SiteConfiguration configuration) {
+    Checks.checkState(this.configuration == null, "concurrent configurations are not allowed");
+
+    this.configuration = configuration;
+
+    try {
+      configure();
+    } finally {
+      releaseResources();
+    }
+  }
 
   public final void generate(SiteWriter writer, RenderingOption... options) throws IOException {
     SiteGeneration generation;
@@ -36,49 +48,37 @@ public abstract class Site implements SiteResourceHolder {
 
   @Override
   public void releaseResources() {
-    generation = null;
+    configuration = null;
   }
 
   protected final <T extends SiteDirectory> T addDirectory(String fileName, T directory) {
-    return generation.addDirectory(fileName, directory);
+    return configuration.addDirectory(fileName, directory);
   }
 
   protected final <T> T addObject(T object) {
-    return generation.addObject(object);
+    return configuration.addObject(object);
   }
 
   protected final <T extends SitePage> T addPage(String fileName, T page) {
-    return generation.addPage(fileName, page);
+    return configuration.addPage(fileName, page);
   }
 
   protected final SitePath addResource(String resourceName) {
     Class<? extends Site> contextClass;
     contextClass = getClass();
 
-    return generation.addResource(contextClass, resourceName);
+    return configuration.addResource(contextClass, resourceName);
   }
 
   protected final <T extends Site> T addSite(String fileName, T site) {
-    return generation.addSite(fileName, site);
+    return configuration.addSite(fileName, site);
   }
 
   protected final <T extends SiteStyleSheet> T addStyleSheet(String fileName, T sheet) {
-    return generation.addStyleSheet(fileName, sheet);
+    return configuration.addStyleSheet(fileName, sheet);
   }
 
   protected abstract void configure();
-
-  final void configure(SiteGeneration generation) {
-    Checks.checkState(this.generation == null, "concurrent generations are not allowed");
-
-    this.generation = generation;
-
-    try {
-      configure();
-    } finally {
-      releaseResources();
-    }
-  }
 
   final void generate0(SiteGeneration generation) throws IOException {}
 
