@@ -152,7 +152,7 @@ public abstract class Log implements ToStringObject {
    */
   public final boolean isLevel(Level level) {
     Level actual;
-    actual = _event.getLevel();
+    actual = _event.level();
 
     return actual.equals(level);
   }
@@ -191,7 +191,7 @@ public abstract class Log implements ToStringObject {
     out.append(' ');
 
     Level level;
-    level = event.getLevel();
+    level = event.level();
 
     String levelName;
     levelName = level.name();

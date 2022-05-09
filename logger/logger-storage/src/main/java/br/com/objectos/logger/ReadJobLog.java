@@ -24,7 +24,7 @@ abstract class ReadJobLog extends Log {
 
   final boolean matchesEvent(Event event) {
     return key.equals(event.key())
-        && level.equals(event.getLevel())
+        && level.equals(event.level())
         && source.equals(getSource(event));
   }
 

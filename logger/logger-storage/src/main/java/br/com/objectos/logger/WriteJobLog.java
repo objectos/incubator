@@ -28,7 +28,7 @@ abstract class WriteJobLog extends Log {
 
     key = k.toString();
 
-    level = event.getLevel();
+    level = event.level();
 
     source = event.source();
 
