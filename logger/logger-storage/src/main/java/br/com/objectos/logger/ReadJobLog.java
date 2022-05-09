@@ -23,7 +23,7 @@ abstract class ReadJobLog extends Log {
   abstract void acceptValues(List<String> list);
 
   final boolean matchesEvent(Event event) {
-    return key.equals(event.getKey())
+    return key.equals(event.key())
         && level.equals(event.getLevel())
         && source.equals(getSource(event));
   }

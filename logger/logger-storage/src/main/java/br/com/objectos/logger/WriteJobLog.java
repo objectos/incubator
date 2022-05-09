@@ -23,7 +23,10 @@ import objectos.logging.Logger;
 abstract class WriteJobLog extends Log {
 
   WriteJobLog(Event event) {
-    key = event.getKey();
+    Object k;
+    k = event.key();
+
+    key = k.toString();
 
     level = event.getLevel();
 

@@ -217,7 +217,7 @@ public abstract class Log implements ToStringObject {
     out.append(':');
     out.append(' ');
 
-    out.append(event.getKey());
+    out.append(event.key());
 
     System.out.print(out.toString());
   }
