@@ -20,6 +20,7 @@ import br.com.objectos.css.sheet.StyleSheet;
 import br.com.objectos.html.element.ElementName;
 import br.com.objectos.http.media.ImageType;
 import objectos.docs.style.ArticleCss;
+import objectos.docs.style.BreadcrumbCss;
 import objectos.docs.style.ContainerCss;
 import objectos.docs.style.JavaCss;
 import objectos.docs.style.NextBannerCss;
@@ -58,6 +59,11 @@ public abstract class DocsPage extends SitePage {
   }
 
   protected final void body0() {
+    Breadcrumbs bc;
+    bc = getObject(Breadcrumbs.class);
+
+    bc.set(this);
+
     PageSwitcher ps;
     ps = getObject(PageSwitcher.class);
 
@@ -65,6 +71,8 @@ public abstract class DocsPage extends SitePage {
 
     body(
       nextBanner.shouldRender ? f(nextBanner) : noop(),
+
+      bc.shouldRender() ? f(bc) : noop(),
 
       main(
         f(this::main0)
@@ -142,9 +150,11 @@ public abstract class DocsPage extends SitePage {
 
     list.add(new ResetCss());
 
-    list.add(new ContainerCss());
-
     list.add(new ArticleCss());
+
+    list.add(new BreadcrumbCss());
+
+    list.add(new ContainerCss());
 
     list.add(new PageSwitcherCss());
 

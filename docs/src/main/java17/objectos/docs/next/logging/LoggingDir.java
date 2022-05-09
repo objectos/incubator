@@ -22,6 +22,8 @@ public final class LoggingDir extends SiteDirectory {
 
   public static final Class<? extends DocsPage> INDEX = Index.class;
 
+  public static final Class<? extends DocsPage> EVENTS = LoggingGuideEvents.class;
+
   @Override
   protected final void configure() {
     addPage("index.html", new Index());

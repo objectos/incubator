@@ -16,8 +16,11 @@
 package objectos.docs;
 
 import objectos.docs.next.Next;
+import objectos.docs.ui.Breadcrumbs;
 import objectos.docs.ui.Md;
 import objectos.docs.ui.NextBanner;
+import objectos.docs.ui.PageSwitcher;
+import objectos.docs.ui.Pages;
 import objectos.docs.ui.VersionHolder;
 import objectos.ssg.Site;
 import objectos.ssg.SitePath;
@@ -28,8 +31,11 @@ public final class DocsSite extends Site {
 
   @Override
   protected final void configure() {
+    addObject(new Breadcrumbs());
     addObject(new Md());
     addObject(new NextBanner());
+    addObject(new Pages());
+    addObject(new PageSwitcher());
     addObject(new StringBuilder());
     addObject(new VersionHolder());
 

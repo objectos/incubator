@@ -18,17 +18,18 @@ package objectos.docs.next;
 import objectos.docs.next.intro.Intro;
 import objectos.docs.next.logging.LoggingDir;
 import objectos.docs.next.relnotes.RelNotes;
-import objectos.docs.ui.PageSwitcher;
+import objectos.docs.ui.DocsPage;
 import objectos.docs.ui.TableOfContents;
 import objectos.docs.ui.VersionHolder;
 import objectos.ssg.SiteDirectory;
-import objectos.ssg.SitePath;
 
 public final class Next extends SiteDirectory {
 
   public static final String VERSION = "0.1.0-SNAPSHOT";
 
-  public static final Class<? extends SitePath> INDEX = Index.class;
+  public static final Class<? extends DocsPage> INDEX = Index.class;
+
+  public static final Class<? extends DocsPage> TOC = Toc.class;
 
   @Override
   protected final void configure() {
@@ -36,8 +37,6 @@ public final class Next extends SiteDirectory {
     vh = getObject(VersionHolder.class);
 
     vh.set(VERSION);
-
-    addObject(new PageSwitcher());
 
     addPage("toc.html", new Toc());
 

@@ -16,50 +16,21 @@
 package objectos.docs.ui;
 
 import br.com.objectos.html.spi.type.DivValue;
-import java.util.IdentityHashMap;
-import java.util.Map;
 import objectos.docs.style.PageSwitcherCss;
-import objectos.ssg.SiteDirectory;
 import objectos.ssg.SiteFragment;
-import objectos.ssg.SitePage;
-import objectos.ssg.SiteVisitor;
 
-public class PageSwitcher extends SiteFragment implements SiteVisitor {
+public final class PageSwitcher extends SiteFragment {
 
   private DocsPage current;
 
-  private final Map<DocsPage, DocsPage> nextPages = new IdentityHashMap<>();
-
-  private final Map<DocsPage, DocsPage> previousPages = new IdentityHashMap<>();
-
-  public PageSwitcher() {}
-
-  @Override
-  public final void postVisitSiteDirectory(SiteDirectory directory) {
-    // noop
-  }
-
-  public final void set(DocsPage page) {
-    this.current = page;
-  }
-
-  @Override
-  public final void visitSiteDirectory(SiteDirectory directory) {
-    // noop
-  }
-
-  @Override
-  public final void visitSitePage(SitePage page) {
-    if (page instanceof DocsPage d) {
-      visitDocsPage(d);
-    }
-  }
-
   @Override
   protected final void definition() {
-    var back = backPage(current);
+    Pages pages;
+    pages = getObject(Pages.class);
 
-    var next = nextPages.get(current);
+    var back = pages.backPage(current);
+
+    var next = pages.nextPage(current);
 
     nav(
       PageSwitcherCss._NAV,
@@ -78,8 +49,8 @@ public class PageSwitcher extends SiteFragment implements SiteVisitor {
     );
   }
 
-  final DocsPage backPage(DocsPage page) {
-    return previousPages.get(page);
+  final void set(DocsPage docsPage) {
+    current = docsPage;
   }
 
   private DivValue renderNext(DocsPage next) {
@@ -138,16 +109,6 @@ public class PageSwitcher extends SiteFragment implements SiteVisitor {
         span(back.titleText)
       )
     );
-  }
-
-  private void visitDocsPage(DocsPage next) {
-    if (current != null) {
-      previousPages.put(next, current);
-
-      nextPages.put(current, next);
-    }
-
-    current = next;
   }
 
 }
