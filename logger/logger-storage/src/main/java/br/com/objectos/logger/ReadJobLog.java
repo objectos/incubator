@@ -38,10 +38,7 @@ abstract class ReadJobLog extends Log {
   abstract void setThrowable(int index, ReadJobThrowable throwable);
 
   private String getSource(Event event) {
-    Class<?> type;
-    type = event.getSource();
-
-    return type.getCanonicalName();
+    return event.source();
   }
 
 }

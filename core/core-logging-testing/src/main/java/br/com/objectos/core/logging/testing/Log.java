@@ -208,10 +208,10 @@ public abstract class Log implements ToStringObject {
 
     out.append(' ');
 
-    Class<?> source;
-    source = event.getSource();
+    String source;
+    source = event.source();
 
-    Logging.abbreviate(out, source.getCanonicalName(), 40);
+    Logging.abbreviate(out, source, 40);
 
     out.append(' ');
     out.append(':');

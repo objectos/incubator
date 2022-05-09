@@ -27,10 +27,7 @@ abstract class WriteJobLog extends Log {
 
     level = event.getLevel();
 
-    Class<?> sourceType;
-    sourceType = event.getSource();
-
-    source = sourceType.getCanonicalName();
+    source = event.source();
 
     Thread currentThread;
     currentThread = Thread.currentThread();
@@ -58,10 +55,10 @@ abstract class WriteJobLog extends Log {
   @Override
   public String toString() {
     return ToString.toString(
-        this,
-        "", key,
-        "", level,
-        "", source
+      this,
+      "", key,
+      "", level,
+      "", source
     );
   }
 
