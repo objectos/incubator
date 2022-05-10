@@ -16,7 +16,6 @@
 package br.com.objectos.concurrent;
 
 import objectos.logging.Event0;
-import objectos.logging.Events;
 import objectos.logging.Logger;
 
 /**
@@ -27,14 +26,7 @@ import objectos.logging.Logger;
  */
 public final class FixedCpuArray extends CpuArrayService {
 
-  private static final Event0 STARTED;
-
-  static {
-    Class<?> s;
-    s = FixedCpuArray.class;
-
-    STARTED = Events.info(s, "STARTED");
-  }
+  private static final Event0 STARTED = Event0.info();
 
   private final FixedCpuWorker[] workers;
 

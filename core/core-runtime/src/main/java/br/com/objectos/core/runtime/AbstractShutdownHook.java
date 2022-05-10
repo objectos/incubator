@@ -23,7 +23,6 @@ import java.util.ArrayList;
 import java.util.List;
 import objectos.logging.Event0;
 import objectos.logging.Event1;
-import objectos.logging.Events;
 import objectos.logging.Logger;
 import objectos.logging.NoOpLogger;
 
@@ -43,22 +42,11 @@ import objectos.logging.NoOpLogger;
 @Concrete(modifiers = "public final", simpleName = "ShutdownHook")
 abstract class AbstractShutdownHook {
 
-  private static final Event1<Throwable> CAUGHT_EXCEPTION;
+  private static final Event1<Throwable> CAUGHT_EXCEPTION = Event1.warn();
 
-  private static final Event1<Long> FINISHED;
+  private static final Event1<Long> FINISHED = Event1.info();
 
-  private static final Event0 STARTED;
-
-  static {
-    Class<?> s;
-    s = ShutdownHook.class;
-
-    CAUGHT_EXCEPTION = Events.warn(s, "CAUGHT_EXCEPTION", Throwable.class);
-
-    FINISHED = Events.info(s, "FINISHED", Long.class);
-
-    STARTED = Events.info(s, "STARTED");
-  }
+  private static final Event0 STARTED = Event0.info();
 
   private Job job;
 

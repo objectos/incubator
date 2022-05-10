@@ -20,37 +20,21 @@ import br.com.objectos.fs.RegularFile;
 import java.io.IOException;
 import objectos.logging.Event1;
 import objectos.logging.Event2;
-import objectos.logging.Events;
 import objectos.logging.Logger;
 
 final class FullRestore extends AbstractClientJob<ImmutableList<String>> {
 
   private static final byte _FLUSH_PRIVILEGES = 0;
 
-  private static final Event1<Exception> EFAILED;
+  private static final Event1<Exception> EFAILED = Event1.error();
 
-  private static final Event1<Long> EFINISH;
+  private static final Event1<Long> EFINISH = Event1.info();
 
-  private static final Event1<String> EINVALID_FULLNAME;
+  private static final Event1<String> EINVALID_FULLNAME = Event1.info();
 
-  private static final Event2<LoginPath, String> ESTART;
+  private static final Event2<LoginPath, String> ESTART = Event2.info();
 
-  private static final String[] FLUSH_PRIVILEGES_INPUT = new String[] {
-      "FLUSH PRIVILEGES;"
-  };
-
-  static {
-    Class<?> source;
-    source = FullRestore.class;
-
-    EFAILED = Events.error(source, "FAILED", Exception.class);
-
-    ESTART = Events.info(source, "START", LoginPath.class, String.class);
-
-    EFINISH = Events.info(source, "FINISH", Long.class);
-
-    EINVALID_FULLNAME = Events.info(source, "INVALID_FULLNAME", String.class);
-  }
+  private static final String[] FLUSH_PRIVILEGES_INPUT = new String[] {"FLUSH PRIVILEGES;"};
 
   private final RegularFile file;
 
@@ -112,9 +96,9 @@ final class FullRestore extends AbstractClientJob<ImmutableList<String>> {
     gzip = new GzipInputStreamSource(file);
 
     return toSubTask(
-        new ExecuteInputStreamSource(client, loginPath, gzip, Mysql.skipColumnNames()),
+      new ExecuteInputStreamSource(client, loginPath, gzip, Mysql.skipColumnNames()),
 
-        _FLUSH_PRIVILEGES
+      _FLUSH_PRIVILEGES
     );
   }
 
@@ -140,11 +124,11 @@ final class FullRestore extends AbstractClientJob<ImmutableList<String>> {
 
   private byte executeFlushPrivileges() {
     return toSubTask(
-        new ExecuteStatement(
-            client, loginPath, FLUSH_PRIVILEGES_INPUT, Mysql.skipColumnNames()
-        ),
+      new ExecuteStatement(
+        client, loginPath, FLUSH_PRIVILEGES_INPUT, Mysql.skipColumnNames()
+      ),
 
-        toFinally()
+      toFinally()
     );
   }
 

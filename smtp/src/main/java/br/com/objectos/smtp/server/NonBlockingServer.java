@@ -30,20 +30,11 @@ import br.com.objectos.smtp.mail.SimpleReversePathFacade;
 import java.nio.charset.Charset;
 import java.nio.charset.CharsetDecoder;
 import objectos.logging.Event1;
-import objectos.logging.Events;
 import objectos.logging.Logger;
 
 public final class NonBlockingServer implements Server {
 
-  private static final Event1<Exception> SESSION_EXCEPTION;
-
-  static {
-    Class<?> source;
-    source = NonBlockingServer.class;
-
-    SESSION_EXCEPTION = Events.error(
-        source, "SESSION_EXCEPTION", Exception.class);
-  }
+  private static final Event1<Exception> SESSION_EXCEPTION = Event1.error();
 
   private final Lifecycle lifecycle;
 
@@ -138,7 +129,7 @@ public final class NonBlockingServer implements Server {
 
       SessionProvider nonBlockingSessionProvider;
       nonBlockingSessionProvider = new NonBlockingSessionProvider(
-          loggerAdapter, requestFacade, responseFacadeBuilder, mailStore);
+        loggerAdapter, requestFacade, responseFacadeBuilder, mailStore);
 
       SessionProvider sessionProvider;
       sessionProvider = new SingletonSessionProvider(nonBlockingSessionProvider);

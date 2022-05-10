@@ -33,7 +33,6 @@ import java.util.zip.Inflater;
 import objectos.logging.Event0;
 import objectos.logging.Event1;
 import objectos.logging.Event2;
-import objectos.logging.Events;
 
 /**
  * A state machine for reading Git objects from a repository. Supports:
@@ -46,6 +45,14 @@ import objectos.logging.Events;
  * @since 3
  */
 final class ObjectReader extends AbstractGitEngineTask implements ObjectReaderHandle {
+
+  static final Event0 EIO_CLOSE = Event0.trace();
+
+  static final Event1<Long> EIO_OPEN = Event1.trace();
+
+  static final Event2<Integer, Long> EIO_READ = Event2.trace();
+
+  static final Event1<ObjectId> ENEXT_OBJECT = Event1.debug();
 
   static final byte _BASE_OBJECT = 1;
 
@@ -79,14 +86,6 @@ final class ObjectReader extends AbstractGitEngineTask implements ObjectReaderHa
 
   static final byte _RECONSTRUCT_OBJECT = 17;
 
-  static final Event0 EIO_CLOSE;
-
-  static final Event1<Long> EIO_OPEN;
-
-  static final Event2<Integer, Long> EIO_READ;
-
-  static final Event1<ObjectId> ENEXT_OBJECT;
-
   static final byte IO_CLOSE = 1;
 
   static final byte IO_OPEN_LOOSE = 2;
@@ -104,19 +103,6 @@ final class ObjectReader extends AbstractGitEngineTask implements ObjectReaderHa
    * Offset to the object names table.
    */
   private static final int OFFSET_OBJECT_NAMES = 4 + 4 + (256 * 4);
-
-  static {
-    Class<?> s;
-    s = ObjectReader.class;
-
-    EIO_CLOSE = Events.trace(s, "IO_CLOSE");
-
-    EIO_OPEN = Events.trace(s, "IO_OPEN", Long.class);
-
-    EIO_READ = Events.trace(s, "IO_READ", Integer.class, Long.class);
-
-    ENEXT_OBJECT = Events.debug(s, "NEXT_OBJECT", ObjectId.class);
-  }
 
   ByteArrayWriter baseObject;
 
@@ -639,11 +625,11 @@ final class ObjectReader extends AbstractGitEngineTask implements ObjectReaderHa
 
     if (inflater.needsInput()) {
       inflater.setInput(
-          channelBuffer.array(),
+        channelBuffer.array(),
 
-          channelBuffer.position(),
+        channelBuffer.position(),
 
-          channelBuffer.remaining()
+        channelBuffer.remaining()
       );
     }
 
@@ -654,11 +640,11 @@ final class ObjectReader extends AbstractGitEngineTask implements ObjectReaderHa
 
     try {
       inflatedCount = inflater.inflate(
-          inflaterBuffer.array(),
+        inflaterBuffer.array(),
 
-          inflaterBuffer.position(),
+        inflaterBuffer.position(),
 
-          inflaterBuffer.remaining()
+        inflaterBuffer.remaining()
       );
     } catch (DataFormatException e) {
       return toDataFormatException(e);
@@ -666,7 +652,7 @@ final class ObjectReader extends AbstractGitEngineTask implements ObjectReaderHa
 
     if (inflatedCount < 0) {
       return toStubException(
-          "inflated returned < 0 for " + objectId + " and length " + objectLength);
+        "inflated returned < 0 for " + objectId + " and length " + objectLength);
     }
 
     long bytesRead;
@@ -677,7 +663,7 @@ final class ObjectReader extends AbstractGitEngineTask implements ObjectReaderHa
     }
 
     channelBuffer.position(
-        channelBuffer.position() + (int) bytesRead
+      channelBuffer.position() + (int) bytesRead
     );
 
     if (inflatedCount == 0 && objectLength != 0) {
@@ -702,7 +688,7 @@ final class ObjectReader extends AbstractGitEngineTask implements ObjectReaderHa
       }
     } else {
       inflaterBuffer.position(
-          inflaterBuffer.position() + inflatedCount
+        inflaterBuffer.position() + inflatedCount
       );
 
       inflaterBuffer.flip();
@@ -852,11 +838,11 @@ final class ObjectReader extends AbstractGitEngineTask implements ObjectReaderHa
     inflaterBuffer.clear();
 
     adapter.executeObjectBodyFull(
-        reconstructedObject.array(),
+      reconstructedObject.array(),
 
-        size,
+      size,
 
-        inflaterBuffer
+      inflaterBuffer
     );
 
     adapter.executeObjectFinish();
@@ -895,9 +881,9 @@ final class ObjectReader extends AbstractGitEngineTask implements ObjectReaderHa
     offset = objectPosition * 20;
 
     channelPosition(
-        OFFSET_OBJECT_NAMES + offset,
+      OFFSET_OBJECT_NAMES + offset,
 
-        bucketSize * 20
+      bucketSize * 20
     );
 
     return toIo(IO_READ_AUX, _PARSE_INDEX_OBJECT_NAME);
@@ -1375,7 +1361,7 @@ final class ObjectReader extends AbstractGitEngineTask implements ObjectReaderHa
     message = badObjectMessage.toString();
 
     return toError(
-        new BadObjectException(objectId, message)
+      new BadObjectException(objectId, message)
     );
   }
 

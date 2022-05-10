@@ -28,7 +28,6 @@ import java.nio.charset.CharsetDecoder;
 import java.nio.charset.CoderResult;
 import objectos.logging.Event1;
 import objectos.logging.Event2;
-import objectos.logging.Events;
 
 /**
  * Resolves a Git reference.
@@ -36,6 +35,10 @@ import objectos.logging.Events;
  * @since 1
  */
 final class ResolveRef extends AbstractGitEngineTask {
+
+  private static final Event2<Repository, RefName> ESTART = Event2.debug();
+
+  private static final Event1<MaybeObjectId> ESUCCESS = Event1.debug();
 
   private static final byte _CLOSE = 1;
 
@@ -51,10 +54,6 @@ final class ResolveRef extends AbstractGitEngineTask {
 
   private static final byte _PARSE_PACKED = 7;
 
-  private static final Event2<Repository, RefName> ESTART;
-
-  private static final Event1<MaybeObjectId> ESUCCESS;
-
   private static final byte IO_CLOSE = 1;
 
   private static final byte IO_READ = 2;
@@ -62,15 +61,6 @@ final class ResolveRef extends AbstractGitEngineTask {
   private static final byte IO_RESOLVE_LOOSE = 3;
 
   private static final byte IO_RESOLVE_PACKED = 4;
-
-  static {
-    Class<?> s;
-    s = ResolveRef.class;
-
-    ESTART = Events.debug(s, "START", Repository.class, RefName.class);
-
-    ESUCCESS = Events.debug(s, "SUCCESS", MaybeObjectId.class);
-  }
 
   /*
   
@@ -234,7 +224,7 @@ final class ResolveRef extends AbstractGitEngineTask {
     log(ESTART, repository, ref);
 
     return toIo(
-        IO_RESOLVE_LOOSE, toDecode(_LOOSE), _CLOSE
+      IO_RESOLVE_LOOSE, toDecode(_LOOSE), _CLOSE
     );
   }
 
@@ -302,7 +292,7 @@ final class ResolveRef extends AbstractGitEngineTask {
 
     if (!isChannelEof()) {
       return toIo(
-          IO_READ, toDecode(_LOOSE), _CLOSE
+        IO_READ, toDecode(_LOOSE), _CLOSE
       );
     }
 
@@ -320,11 +310,11 @@ final class ResolveRef extends AbstractGitEngineTask {
 
   private byte executeMaybePacked() {
     return toIo(
-        IO_RESOLVE_PACKED,
+      IO_RESOLVE_PACKED,
 
-        toDecode(_PACKED),
+      toDecode(_PACKED),
 
-        _CLOSE
+      _CLOSE
     );
   }
 
@@ -447,11 +437,11 @@ final class ResolveRef extends AbstractGitEngineTask {
       }
     } else {
       return toIo(
-          IO_READ,
+        IO_READ,
 
-          toDecode(_PARSE_PACKED),
+        toDecode(_PARSE_PACKED),
 
-          _CLOSE
+        _CLOSE
       );
     }
   }

@@ -23,10 +23,13 @@ import java.nio.charset.CharacterCodingException;
 import java.nio.charset.Charset;
 import java.nio.charset.CharsetDecoder;
 import objectos.logging.Event1;
-import objectos.logging.Events;
 import objectos.logging.Logger;
 
 final class ReadTree implements ObjectReaderAdapter {
+
+  static final Event1<ObjectId> ESTART = Event1.debug();
+
+  static final Event1<ObjectId> ESUCCESS = Event1.debug();
 
   static final byte _NEXT_ENTRY = 1;
 
@@ -41,19 +44,6 @@ final class ReadTree implements ObjectReaderAdapter {
   static final byte _START = 6;
 
   static final byte _STOP = 0;
-
-  static final Event1<ObjectId> ESTART;
-
-  static final Event1<ObjectId> ESUCCESS;
-
-  static {
-    Class<?> s;
-    s = ReadTree.class;
-
-    ESTART = Events.debug(s, "START", ObjectId.class);
-
-    ESUCCESS = Events.debug(s, "SUCCESS", ObjectId.class);
-  }
 
   byte state;
 
@@ -175,7 +165,7 @@ final class ReadTree implements ObjectReaderAdapter {
   public final void executeObjectHeader(ObjectKind kind, long length) {
     if (kind != ObjectKind.TREE) {
       handle.catchThrowable(
-          new BadObjectException(objectId, "Not a tree object. Found " + kind)
+        new BadObjectException(objectId, "Not a tree object. Found " + kind)
       );
     } else {
       objectLength = length;
@@ -187,7 +177,7 @@ final class ReadTree implements ObjectReaderAdapter {
   @Override
   public final void executeObjectNotFound(ObjectId objectId) {
     handle.catchThrowable(
-        new ObjectNotFoundException(objectId)
+      new ObjectNotFoundException(objectId)
     );
   }
 
@@ -301,7 +291,7 @@ final class ReadTree implements ObjectReaderAdapter {
         break;
       default:
         return toError(
-            new GitStubException("mode = " + Integer.toOctalString(modeOctal))
+          new GitStubException("mode = " + Integer.toOctalString(modeOctal))
         );
     }
 
@@ -411,10 +401,10 @@ final class ReadTree implements ObjectReaderAdapter {
   private void onDataReady() {
     if (objectPosition > objectLength) {
       handle.catchThrowable(
-          new BadObjectException(
-              objectId,
+        new BadObjectException(
+          objectId,
 
-              "Corrupt object: declared size=" + objectLength + " actual size=" + objectPosition)
+          "Corrupt object: declared size=" + objectLength + " actual size=" + objectPosition)
       );
     } else {
       active = true;
@@ -425,7 +415,7 @@ final class ReadTree implements ObjectReaderAdapter {
 
   private byte toBadObject() {
     return toError(
-        new BadObjectException(objectId, badObjectMessage)
+      new BadObjectException(objectId, badObjectMessage)
     );
   }
 

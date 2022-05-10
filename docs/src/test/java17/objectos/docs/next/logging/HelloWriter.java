@@ -21,14 +21,12 @@ import java.nio.file.Path;
 import java.util.List;
 import objectos.logging.Event0;
 import objectos.logging.Event1;
-import objectos.logging.Events;
 import objectos.logging.Logger;
 
 class HelloWriter extends Thread {
-  static final Event0 DONE = Events.info(HelloWriter.class, "DONE");
+  static final Event0 DONE = Event0.info();
 
-  static final Event1<IOException> IO_ERROR
-      = Events.error(HelloWriter.class, "IO_ERROR", IOException.class);
+  static final Event1<IOException> IO_ERROR = Event1.error();
 
   private final Logger logger;
   private final int quantity;

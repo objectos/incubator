@@ -30,14 +30,12 @@ import java.security.MessageDigest;
 import java.util.Arrays;
 import java.util.zip.Deflater;
 import objectos.logging.Event2;
-import objectos.logging.Events;
-import objectos.logging.TypeHint;
 
 final class WriteTree extends AbstractGitEngineTask {
 
-  static final Event2<GitCommand<?>, MutableTree> ESTART;
+  static final Event2<GitCommand<?>, MutableTree> ESTART = Event2.debug();
 
-  static final Event2<GitCommand<?>, ObjectId> ESUCCESS;
+  static final Event2<GitCommand<?>, ObjectId> ESUCCESS = Event2.debug();
 
   private static final byte _ASSEMBLE = 1;
 
@@ -50,17 +48,6 @@ final class WriteTree extends AbstractGitEngineTask {
   private static final byte RIMMUTABLE = 2;
 
   private static final byte RMUTABLE = 3;
-
-  static {
-    Class<?> s;
-    s = WriteTree.class;
-
-    TypeHint<GitCommand<?>> gitCommand = TypeHint.<GitCommand<?>> get();
-
-    ESTART = Events.debug(s, "START", gitCommand, TypeHint.of(MutableTree.class));
-
-    ESUCCESS = Events.debug(s, "SUCCESS", gitCommand, TypeHint.of(ObjectId.class));
-  }
 
   private ByteBuffer byteBuffer;
 
@@ -195,7 +182,7 @@ final class WriteTree extends AbstractGitEngineTask {
 
   final void skipObject() {
     byteBuffer.position(
-        byteBuffer.position() + objectSize
+      byteBuffer.position() + objectSize
     );
   }
 
@@ -322,7 +309,7 @@ final class WriteTree extends AbstractGitEngineTask {
 
   private void ioWriteImmutable() {
     byteBuffer.position(
-        byteBuffer.position() + ObjectId.BYTE_LENGTH
+      byteBuffer.position() + ObjectId.BYTE_LENGTH
     );
   }
 

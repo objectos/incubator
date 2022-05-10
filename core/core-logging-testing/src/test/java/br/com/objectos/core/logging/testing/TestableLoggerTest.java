@@ -25,7 +25,6 @@ import objectos.logging.Event0;
 import objectos.logging.Event1;
 import objectos.logging.Event2;
 import objectos.logging.Event3;
-import objectos.logging.Events;
 import org.testng.annotations.Test;
 
 public class TestableLoggerTest {
@@ -36,7 +35,7 @@ public class TestableLoggerTest {
     logger = new TestableLogger();
 
     Event0 e0;
-    e0 = Events.info(getClass(), "E0");
+    e0 = Event0.info();
 
     assertFalse(logger.contains(e0));
 
@@ -45,7 +44,7 @@ public class TestableLoggerTest {
     assertTrue(logger.contains(e0));
 
     Event1<IOException> e1;
-    e1 = Events.info(getClass(), "E1", IOException.class);
+    e1 = Event1.info();
 
     assertFalse(logger.contains(e1));
 
@@ -64,7 +63,7 @@ public class TestableLoggerTest {
     assertSame(log1.getValue(), ioException);
 
     Event2<Integer, Double> e2;
-    e2 = Events.info(getClass(), "E2", Integer.class, Double.class);
+    e2 = Event2.info();
 
     assertFalse(logger.contains(e2));
 
@@ -73,7 +72,7 @@ public class TestableLoggerTest {
     assertTrue(logger.contains(e2));
 
     Event3<String, String, String> e3;
-    e3 = Events.info(getClass(), "E3", String.class, String.class, String.class);
+    e3 = Event3.info();
 
     assertFalse(logger.contains(e3));
 

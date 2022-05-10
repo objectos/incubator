@@ -24,7 +24,6 @@ import br.com.objectos.fs.RegularFile;
 import br.com.objectos.fs.ResolvedPath;
 import java.io.IOException;
 import objectos.logging.Event1;
-import objectos.logging.Events;
 
 /**
  * Opens a Git repository.
@@ -32,6 +31,10 @@ import objectos.logging.Events;
  * @since 1
  */
 final class OpenRepository extends AbstractGitEngineTask {
+
+  private static final Event1<Directory> ESTART = Event1.debug();
+
+  private static final Event1<Repository> ESUCCESS = Event1.debug();
 
   private static final byte _MAYBE_PACKS = 1;
 
@@ -43,10 +46,6 @@ final class OpenRepository extends AbstractGitEngineTask {
 
   private static final byte _PACK_NAMES = 5;
 
-  private static final Event1<Directory> ESTART;
-
-  private static final Event1<Repository> ESUCCESS;
-
   private static final byte IO_BARE = 1;
 
   private static final int PACK_NAME_LENGTH;
@@ -54,13 +53,6 @@ final class OpenRepository extends AbstractGitEngineTask {
   private static final int PACK_PREFIX_LENGTH;
 
   static {
-    Class<?> s;
-    s = OpenRepository.class;
-
-    ESTART = Events.debug(s, "START", Directory.class);
-
-    ESUCCESS = Events.debug(s, "SUCCESS", Repository.class);
-
     PACK_PREFIX_LENGTH = "pack-".length();
 
     PACK_NAME_LENGTH = PACK_PREFIX_LENGTH + ObjectId.CHAR_LENGTH + ".pack".length();

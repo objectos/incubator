@@ -28,7 +28,6 @@ import java.io.OutputStream;
 import java.util.zip.GZIPOutputStream;
 import objectos.logging.Event1;
 import objectos.logging.Event2;
-import objectos.logging.Events;
 import objectos.logging.Logger;
 
 final class IncrementalBackup extends AbstractClientJob<ImmutableList<RegularFile>> {
@@ -41,36 +40,21 @@ final class IncrementalBackup extends AbstractClientJob<ImmutableList<RegularFil
 
   private static final byte _PURGE = 3;
 
-  private static final Event1<String> EBINARY_LOG;
+  private static final Event1<String> EBINARY_LOG = Event1.debug();
 
-  private static final Event1<Exception> EFAILED;
+  private static final Event1<Exception> EFAILED = Event1.error();
 
-  private static final Event1<String> ELOGBIN_BASENAME;
+  private static final Event1<String> ELOGBIN_BASENAME = Event1.debug();
 
-  private static final Event2<LoginPath, String> ESTART;
+  private static final Event2<LoginPath, String> ESTART = Event2.info();
 
-  private static final Event1<Long> ESUCCESS;
+  private static final Event1<Long> ESUCCESS = Event1.info();
 
   private static final byte IO_CLOSE = 0;
 
   private static final byte IO_COPY = 1;
 
   private static final byte IO_OPEN = 2;
-
-  static {
-    Class<?> source;
-    source = IncrementalBackup.class;
-
-    EBINARY_LOG = Events.debug(source, "BINARY_LOG", String.class);
-
-    EFAILED = Events.error(source, "FAILED", Exception.class);
-
-    ELOGBIN_BASENAME = Events.debug(source, "LOGBIN_BASENAME", String.class);
-
-    ESTART = Events.info(source, "START", LoginPath.class, String.class);
-
-    ESUCCESS = Events.info(source, "SUCCESS", Long.class);
-  }
 
   private String basename;
 
@@ -162,13 +146,13 @@ final class IncrementalBackup extends AbstractClientJob<ImmutableList<RegularFil
     result.clear();
 
     return toExecuteStatement(
-        _FIRST_LOG,
+      _FIRST_LOG,
 
-        "SELECT @@log_bin_basename;",
+      "SELECT @@log_bin_basename;",
 
-        "SHOW BINARY LOGS;",
+      "SHOW BINARY LOGS;",
 
-        "FLUSH BINARY LOGS;"
+      "FLUSH BINARY LOGS;"
     );
   }
 
@@ -255,9 +239,9 @@ final class IncrementalBackup extends AbstractClientJob<ImmutableList<RegularFil
 
     else {
       return toExecuteStatement(
-          _PURGE,
+        _PURGE,
 
-          "SHOW MASTER STATUS;"
+        "SHOW MASTER STATUS;"
       );
     }
   }
@@ -277,9 +261,9 @@ final class IncrementalBackup extends AbstractClientJob<ImmutableList<RegularFil
     currentBinLog = getBinlogSimpleName(masterStatusRow0);
 
     return toExecuteStatement(
-        toFinally(),
+      toFinally(),
 
-        Mysql.sql("PURGE BINARY LOGS TO '", currentBinLog, "'")
+      Mysql.sql("PURGE BINARY LOGS TO '", currentBinLog, "'")
     );
   }
 
@@ -345,9 +329,9 @@ final class IncrementalBackup extends AbstractClientJob<ImmutableList<RegularFil
 
   private byte toExecuteStatement(byte onReady, String... statements) {
     return toSubTask(
-        new ExecuteStatement(client, loginPath, statements, Mysql.skipColumnNames()),
+      new ExecuteStatement(client, loginPath, statements, Mysql.skipColumnNames()),
 
-        onReady
+      onReady
     );
   }
 

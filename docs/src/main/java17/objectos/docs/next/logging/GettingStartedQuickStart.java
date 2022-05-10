@@ -17,7 +17,6 @@ package objectos.docs.next.logging;
 
 import objectos.docs.ui.DocsPage;
 import objectos.logging.Event1;
-import objectos.logging.Events;
 import objectos.logging.NoOpLogger;
 import objectos.ssg.Markdown;
 
@@ -247,8 +246,7 @@ quickly with Objectos Logging.
 //@formatter:on
 @Markdown
 final class GettingStartedQuickStart extends DocsPage {
-  static final Event1<String> HELLO
-      = Events.info(GettingStartedQuickStart.class, "HELLO", String.class);
+  static final Event1<String> HELLO = Event1.info();
 
   public static void main(String[] args) {
     var logger = new NoOpLogger() {

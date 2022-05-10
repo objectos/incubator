@@ -22,25 +22,13 @@ import java.io.IOException;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
 import objectos.logging.Event1;
-import objectos.logging.Events;
 import objectos.logging.Logger;
 
 public final class NonBlockingLifecycle implements Lifecycle {
 
-  private static final Event1<IOException> CLOSE_FAILED;
+  private static final Event1<IOException> CLOSE_FAILED = Event1.error();
 
-  private static final Event1<Exception> UNEXPECTED_EXECUTION_EXCEPTION;
-
-  static {
-    Class<?> s;
-    s = NonBlockingLifecycle.class;
-
-    CLOSE_FAILED = Events.error(
-        s, "CLOSE_FAILED", IOException.class);
-
-    UNEXPECTED_EXECUTION_EXCEPTION = Events.error(
-        s, "UNEXPECTED_EXECUTION_EXCEPTION", Exception.class);
-  }
+  private static final Event1<Exception> UNEXPECTED_EXECUTION_EXCEPTION = Event1.error();
 
   private final Logger logger;
 

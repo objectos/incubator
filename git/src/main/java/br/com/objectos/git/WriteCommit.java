@@ -30,9 +30,12 @@ import java.nio.charset.CoderResult;
 import java.security.MessageDigest;
 import java.util.zip.Deflater;
 import objectos.logging.Event1;
-import objectos.logging.Events;
 
 final class WriteCommit extends AbstractGitEngineTask {
+
+  private static final Event1<MutableCommit> ESTART = Event1.debug();
+
+  private static final Event1<ObjectId> ESUCCESS = Event1.debug();
 
   static final byte _ASSEMBLE = 1;
 
@@ -40,20 +43,7 @@ final class WriteCommit extends AbstractGitEngineTask {
 
   static final byte _ENCODE = 3;
 
-  private static final Event1<MutableCommit> ESTART;
-
-  private static final Event1<ObjectId> ESUCCESS;
-
   private static final byte IO_WRITE_OBJECT = 1;
-
-  static {
-    Class<?> s;
-    s = WriteCommit.class;
-
-    ESTART = Events.debug(s, "START", MutableCommit.class);
-
-    ESUCCESS = Events.debug(s, "SUCCESS", ObjectId.class);
-  }
 
   private ByteArrayWriter body;
 

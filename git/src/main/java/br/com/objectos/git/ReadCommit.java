@@ -23,10 +23,13 @@ import java.nio.charset.Charset;
 import java.nio.charset.CharsetDecoder;
 import java.nio.charset.CoderResult;
 import objectos.logging.Event1;
-import objectos.logging.Events;
 import objectos.logging.Logger;
 
 final class ReadCommit implements ObjectReaderAdapter {
+
+  private static final Event1<ObjectId> ESTART = Event1.debug();
+
+  private static final Event1<ObjectId> ESUCCESS = Event1.debug();
 
   static final byte _BEFORE_IDENTIFICATION = 1;
 
@@ -58,10 +61,6 @@ final class ReadCommit implements ObjectReaderAdapter {
 
   static final byte _STOP = 0;
 
-  private static final Event1<ObjectId> ESTART;
-
-  private static final Event1<ObjectId> ESUCCESS;
-
   private static final char[] PAUTHOR = "uthor ".toCharArray();
 
   private static final char[] PCOMMITTER = "committer ".toCharArray();
@@ -69,15 +68,6 @@ final class ReadCommit implements ObjectReaderAdapter {
   private static final char[] PPARENT = "arent ".toCharArray();
 
   private static final char[] PTREE = "tree ".toCharArray();
-
-  static {
-    Class<?> s;
-    s = ReadCommit.class;
-
-    ESTART = Events.debug(s, "START", ObjectId.class);
-
-    ESUCCESS = Events.debug(s, "SUCCESS", ObjectId.class);
-  }
 
   byte state;
 
@@ -247,7 +237,7 @@ final class ReadCommit implements ObjectReaderAdapter {
   public final void executeObjectHeader(ObjectKind kind, long length) {
     if (kind != ObjectKind.COMMIT) {
       handle.catchThrowable(
-          new BadObjectException(objectId, "Not a commit object. Found " + kind)
+        new BadObjectException(objectId, "Not a commit object. Found " + kind)
       );
     } else {
       objectLength = length;
@@ -259,7 +249,7 @@ final class ReadCommit implements ObjectReaderAdapter {
   @Override
   public final void executeObjectNotFound(ObjectId objectId) {
     handle.catchThrowable(
-        new ObjectNotFoundException(objectId)
+      new ObjectNotFoundException(objectId)
     );
   }
 
@@ -440,21 +430,21 @@ final class ReadCommit implements ObjectReaderAdapter {
 
   private byte executeParseAuthor() {
     return parseAuthorOrCommitter(
-        "Failed to parse commit author information",
+      "Failed to parse commit author information",
 
-        PAUTHOR,
+      PAUTHOR,
 
-        _PARSE_AUTHOR
+      _PARSE_AUTHOR
     );
   }
 
   private byte executeParseCommitter() {
     return parseAuthorOrCommitter(
-        "Failed to parse commit committer information",
+      "Failed to parse commit committer information",
 
-        PCOMMITTER,
+      PCOMMITTER,
 
-        _PARSE_COMMITTER
+      _PARSE_COMMITTER
     );
   }
 
@@ -601,7 +591,7 @@ final class ReadCommit implements ObjectReaderAdapter {
         return _BEFORE_MESSAGE;
       default:
         throw new UnsupportedOperationException(
-            "Implement me: target=" + parseIdentificationTarget);
+          "Implement me: target=" + parseIdentificationTarget);
     }
   }
 
@@ -722,7 +712,7 @@ final class ReadCommit implements ObjectReaderAdapter {
           return toParseObjectId(parsePrefixSource);
         default:
           throw new UnsupportedOperationException(
-              "Implement me: parsePrefixSource=" + parsePrefixSource);
+            "Implement me: parsePrefixSource=" + parsePrefixSource);
       }
     }
 
@@ -743,12 +733,12 @@ final class ReadCommit implements ObjectReaderAdapter {
 
     Commit result;
     result = new Commit(
-        author,
-        committer,
-        message,
-        objectId,
-        parents.toImmutableList(),
-        tree
+      author,
+      committer,
+      message,
+      objectId,
+      parents.toImmutableList(),
+      tree
     );
 
     handle.setResult(result);
@@ -823,7 +813,7 @@ final class ReadCommit implements ObjectReaderAdapter {
 
   private byte toBadObject() {
     return toError(
-        new BadObjectException(objectId, badObjectMessage)
+      new BadObjectException(objectId, badObjectMessage)
     );
   }
 
@@ -885,7 +875,7 @@ final class ReadCommit implements ObjectReaderAdapter {
 
   private byte toStubException(String message) {
     return toError(
-        new GitStubException(message)
+      new GitStubException(message)
     );
   }
 

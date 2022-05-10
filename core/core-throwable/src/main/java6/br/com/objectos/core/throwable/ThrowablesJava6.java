@@ -19,7 +19,7 @@ import br.com.objectos.core.object.Checks;
 import br.com.objectos.latest.Concrete.Bridge;
 import br.com.objectos.latest.Concrete.Constructor;
 import objectos.logging.Event1;
-import objectos.logging.Events;
+import objectos.logging.Level;
 import objectos.logging.Logger;
 import objectos.logging.NoOpLogger;
 
@@ -36,7 +36,7 @@ class ThrowablesJava6 extends AbstractThrowables {
     Class<?> s;
     s = Throwables.class;
 
-    SUPPRESSED = Events.warn(s, "SUPPRESSED", Throwable.class);
+    SUPPRESSED = new Event1<Throwable>(s.getName(), "SUPPRESSED", Level.WARN);
   }
 
   @Constructor

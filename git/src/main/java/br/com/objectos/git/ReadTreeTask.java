@@ -17,18 +17,10 @@ package br.com.objectos.git;
 
 import br.com.objectos.core.object.ToString;
 import objectos.logging.Event1;
-import objectos.logging.Events;
 
 final class ReadTreeTask extends AbstractGitTask<Tree> {
 
-  static final Event1<ObjectId> ESET_INPUT;
-
-  static {
-    Class<?> s;
-    s = ReadTreeTask.class;
-
-    ESET_INPUT = Events.debug(s, "SET_INPUT", ObjectId.class);
-  }
+  static final Event1<ObjectId> ESET_INPUT = Event1.debug();
 
   private final ObjectId id;
 
@@ -45,9 +37,9 @@ final class ReadTreeTask extends AbstractGitTask<Tree> {
   @Override
   public final void formatToString(StringBuilder toString, int level) {
     ToString.formatToString(
-        toString, level, this,
-        "repository", repository,
-        "id", id
+      toString, level, this,
+      "repository", repository,
+      "id", id
     );
   }
 

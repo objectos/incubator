@@ -19,7 +19,6 @@ import br.com.objectos.core.object.Checks;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingDeque;
 import objectos.logging.Event1;
-import objectos.logging.Events;
 import objectos.logging.Logger;
 
 /**
@@ -30,18 +29,9 @@ import objectos.logging.Logger;
  */
 public final class SingleThreadIoWorker extends IoWorkerService {
 
-  private static final Event1<Throwable> ETASK_ERROR;
+  private static final Event1<Throwable> ETASK_ERROR = Event1.error();
 
-  private static final Event1<IoTask> ETASK_INTERRUPTED;
-
-  static {
-    Class<?> s;
-    s = SingleThreadIoWorker.class;
-
-    ETASK_INTERRUPTED = Events.trace(s, "TASK_INTERRUPTED", IoTask.class);
-
-    ETASK_ERROR = Events.error(s, "TASK_ERROR", Throwable.class);
-  }
+  private static final Event1<IoTask> ETASK_INTERRUPTED = Event1.trace();
 
   private final BlockingQueue<IoTask> queue;
 

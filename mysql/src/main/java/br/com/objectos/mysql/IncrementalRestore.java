@@ -30,7 +30,6 @@ import java.io.OutputStream;
 import java.util.zip.GZIPInputStream;
 import objectos.logging.Event0;
 import objectos.logging.Event1;
-import objectos.logging.Events;
 import objectos.logging.Logger;
 
 final class IncrementalRestore extends AbstractClientJob<ImmutableList<String>> {
@@ -43,13 +42,13 @@ final class IncrementalRestore extends AbstractClientJob<ImmutableList<String>> 
 
   private static final byte COPY = 2;
 
-  private static final Event0 EEMPTY_INPUT;
+  private static final Event0 EEMPTY_INPUT = Event0.warn();
 
-  private static final Event1<Exception> EFAILED;
+  private static final Event1<Exception> EFAILED = Event1.error();
 
-  private static final Event1<Long> EFINISH;
+  private static final Event1<Long> EFINISH = Event1.info();
 
-  private static final Event0 ESTART;
+  private static final Event0 ESTART = Event0.info();
 
   private static final byte IO_CLOSE = 0;
 
@@ -60,19 +59,6 @@ final class IncrementalRestore extends AbstractClientJob<ImmutableList<String>> 
   private static final byte IO_START_PROCESS = 3;
 
   private static final RandomString RANDOM = new RandomString();
-
-  static {
-    Class<?> source;
-    source = IncrementalRestore.class;
-
-    EEMPTY_INPUT = Events.warn(source, "EMPTY_INPUT");
-
-    EFAILED = Events.error(source, "FAILED", Exception.class);
-
-    ESTART = Events.info(source, "START");
-
-    EFINISH = Events.info(source, "FINISH", Long.class);
-  }
 
   private final byte[] byteArray;
 
@@ -216,9 +202,9 @@ final class IncrementalRestore extends AbstractClientJob<ImmutableList<String>> 
     };
 
     return toSubTask(
-        new ExecuteInputStreamSource(client, loginPath, source),
+      new ExecuteInputStreamSource(client, loginPath, source),
 
-        _CLOSE
+      _CLOSE
     );
   }
 

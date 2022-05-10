@@ -22,7 +22,6 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.locks.LockSupport;
 import objectos.logging.Event0;
 import objectos.logging.Event1;
-import objectos.logging.Events;
 import objectos.logging.Logger;
 
 /**
@@ -36,38 +35,19 @@ import objectos.logging.Logger;
  */
 public final class FixedCpuWorker extends CpuWorkerService {
 
-  static final Event1<CpuTask> INTERRUPTED;
+  static final Event1<CpuTask> INTERRUPTED = Event1.info();
 
-  static final Event1<CpuTask> JOB_COMPLETED;
+  static final Event1<CpuTask> JOB_COMPLETED = Event1.debug();
 
-  static final Event1<Throwable> JOB_EXCEPTION;
+  static final Event1<Throwable> JOB_EXCEPTION = Event1.error();
 
-  static final Event1<CpuTask> JOB_STARTED;
+  static final Event1<CpuTask> JOB_STARTED = Event1.debug();
 
-  static final Event0 PARKED;
+  static final Event0 PARKED = Event0.debug();
 
-  static final Event1<String> STARTED;
+  static final Event1<String> STARTED = Event1.info();
 
-  static final Event0 UNPARKED;
-
-  static {
-    Class<?> s;
-    s = FixedCpuWorker.class;
-
-    INTERRUPTED = Events.info(s, "INTERRUPTED", CpuTask.class);
-
-    JOB_COMPLETED = Events.debug(s, "JOB_COMPLETED", CpuTask.class);
-
-    JOB_EXCEPTION = Events.error(s, "JOB_EXCEPTION", Throwable.class);
-
-    JOB_STARTED = Events.debug(s, "JOB_STARTED", CpuTask.class);
-
-    PARKED = Events.debug(s, "PARKED");
-
-    UNPARKED = Events.trace(s, "UNPARKED");
-
-    STARTED = Events.info(s, "STARTED", String.class);
-  }
+  static final Event0 UNPARKED = Event0.trace();
 
   private final BlockingQueue<CpuTask> queue;
 
@@ -156,8 +136,8 @@ public final class FixedCpuWorker extends CpuWorkerService {
   @Override
   public final String toString() {
     return ToString.toString(
-        this,
-        "queue", queue
+      this,
+      "queue", queue
     );
   }
 

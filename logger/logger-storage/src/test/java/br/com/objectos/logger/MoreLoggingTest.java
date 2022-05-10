@@ -37,7 +37,6 @@ import objectos.logging.Event0;
 import objectos.logging.Event1;
 import objectos.logging.Event2;
 import objectos.logging.Event3;
-import objectos.logging.Events;
 import objectos.logging.Logger;
 import objectos.logging.Logging;
 import org.testng.annotations.BeforeClass;
@@ -46,86 +45,43 @@ import org.testng.annotations.Test;
 
 public class MoreLoggingTest implements LogListener {
 
-  private static final Event0 DEBUG0;
+  private static final Event0 DEBUG0 = Event0.debug();
 
-  private static final Event1<Arg1> DEBUG1;
+  private static final Event1<Arg1> DEBUG1 = Event1.debug();
 
-  private static final Event2<Arg1, Arg2> DEBUG2;
+  private static final Event2<Arg1, Arg2> DEBUG2 = Event2.debug();
 
-  private static final Event3<Arg1, Arg2, Arg3> DEBUG3;
+  private static final Event3<Arg1, Arg2, Arg3> DEBUG3 = Event3.debug();
 
-  private static final Event1<Ex1> ERROR1;
+  private static final Event1<Ex1> ERROR1 = Event1.error();
 
-  private static final Event2<Ex1, Ex2> ERROR2;
+  private static final Event2<Ex1, Ex2> ERROR2 = Event2.error();
 
-  private static final Event3<Ex1, Ex2, Ex3> ERROR3;
+  private static final Event3<Ex1, Ex2, Ex3> ERROR3 = Event3.error();
 
-  private static final Event0 INFO0;
+  private static final Event0 INFO0 = Event0.info();
 
-  private static final Event1<Arg1> INFO1;
+  private static final Event1<Arg1> INFO1 = Event1.info();
 
-  private static final Event2<Arg1, Arg2> INFO2;
+  private static final Event2<Arg1, Arg2> INFO2 = Event2.info();
 
-  private static final Event3<Arg1, Arg2, Arg3> INFO3;
+  private static final Event3<Arg1, Arg2, Arg3> INFO3 = Event3.info();
 
-  private static final Event0 TRACE0;
+  private static final Event0 TRACE0 = Event0.trace();
 
-  private static final Event1<Arg1> TRACE1;
+  private static final Event1<Arg1> TRACE1 = Event1.trace();
 
-  private static final Event2<Arg1, Arg2> TRACE2;
+  private static final Event2<Arg1, Arg2> TRACE2 = Event2.trace();
 
-  private static final Event3<Arg1, Arg2, Arg3> TRACE3;
+  private static final Event3<Arg1, Arg2, Arg3> TRACE3 = Event3.trace();
 
-  private static final Event0 WARN0;
+  private static final Event0 WARN0 = Event0.warn();
 
-  private static final Event1<Arg1> WARN1;
+  private static final Event1<Arg1> WARN1 = Event1.warn();
 
-  private static final Event2<Arg1, Arg2> WARN2;
+  private static final Event2<Arg1, Arg2> WARN2 = Event2.warn();
 
-  private static final Event3<Arg1, Arg2, Arg3> WARN3;
-
-  static {
-    Class<?> s;
-    s = MoreLoggingTest.class;
-
-    DEBUG0 = Events.debug(s, "DEBUG0");
-
-    DEBUG1 = Events.debug(s, "DEBUG1", Arg1.class);
-
-    DEBUG2 = Events.debug(s, "DEBUG2", Arg1.class, Arg2.class);
-
-    DEBUG3 = Events.debug(s, "DEBUG3", Arg1.class, Arg2.class, Arg3.class);
-
-    ERROR1 = Events.error(s, "ERROR1", Ex1.class);
-
-    ERROR2 = Events.error(s, "ERROR2", Ex1.class, Ex2.class);
-
-    ERROR3 = Events.error(s, "ERROR3", Ex1.class, Ex2.class, Ex3.class);
-
-    INFO0 = Events.info(s, "INFO0");
-
-    INFO1 = Events.info(s, "INFO1", Arg1.class);
-
-    INFO2 = Events.info(s, "INFO2", Arg1.class, Arg2.class);
-
-    INFO3 = Events.info(s, "INFO3", Arg1.class, Arg2.class, Arg3.class);
-
-    TRACE0 = Events.trace(s, "TRACE0");
-
-    TRACE1 = Events.trace(s, "TRACE1", Arg1.class);
-
-    TRACE2 = Events.trace(s, "TRACE2", Arg1.class, Arg2.class);
-
-    TRACE3 = Events.trace(s, "TRACE3", Arg1.class, Arg2.class, Arg3.class);
-
-    WARN0 = Events.trace(s, "WARN0");
-
-    WARN1 = Events.trace(s, "WARN1", Arg1.class);
-
-    WARN2 = Events.trace(s, "WARN2", Arg1.class, Arg2.class);
-
-    WARN3 = Events.trace(s, "WARN3", Arg1.class, Arg2.class, Arg3.class);
-  }
+  private static final Event3<Arg1, Arg2, Arg3> WARN3 = Event3.warn();
 
   private final MutableList<Log> logs = MutableList.create();
 
