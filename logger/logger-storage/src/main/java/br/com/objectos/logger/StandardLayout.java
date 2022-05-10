@@ -20,7 +20,6 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import objectos.logging.Level;
-import objectos.logging.Logging;
 
 /**
  * Provides a standard layout implementation.

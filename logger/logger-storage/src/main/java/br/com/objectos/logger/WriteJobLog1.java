@@ -17,7 +17,6 @@ package br.com.objectos.logger;
 
 import objectos.logging.Event1;
 import objectos.logging.Logger;
-import objectos.logging.Logging;
 
 final class WriteJobLog1<T1> extends WriteJobLog {
 

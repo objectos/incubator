@@ -38,7 +38,6 @@ import objectos.logging.Event1;
 import objectos.logging.Event2;
 import objectos.logging.Event3;
 import objectos.logging.Logger;
-import objectos.logging.Logging;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
