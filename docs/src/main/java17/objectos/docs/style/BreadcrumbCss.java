@@ -28,7 +28,7 @@ public final class BreadcrumbCss extends AbstractStyleSheet {
     style(
       ID,
 
-      padding(Spacing.V06, zero())
+      padding(Spacing.V08, zero())
     );
 
     style(
@@ -36,12 +36,13 @@ public final class BreadcrumbCss extends AbstractStyleSheet {
 
       alignItems(center),
       display(flex),
-      fontSize(FontSize.XS)
+      fontSize(FontSize.SM)
     );
 
     style(
       ID, gt(), ol, sp(), li,
 
+      alignItems(center),
       display(flex)
     );
 

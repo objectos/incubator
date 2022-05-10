@@ -54,8 +54,7 @@ could be written as:
 import objectos.logging.*;
 
 public class Service {
-  static final Event1<String> SAY_HELLO
-      = Events.info(Service.class, "SAY_HELLO", String.class);
+  static final Event1<String> SAY_HELLO = Event1.info();
 
   private final Logger logger;
 

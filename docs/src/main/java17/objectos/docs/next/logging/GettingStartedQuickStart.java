@@ -44,7 +44,7 @@ $ cd o7log
 
 ## 2. Install
 
-Download the Objectos Logging jar from Maven central:
+Download the Objectos Logging JAR file from Maven central:
 
 ```
 $ wget https://search.maven.org/remotecontent?filepath=br/com/objectos/logging/{{version}}/logging-{{version}}.jar
@@ -84,8 +84,7 @@ Edit the `HelloWorld.java` and add the event:
 import objectos.logging.*;
 
 public class HelloWorld {
-  static final Event1<String> HELLO
-      = Events.info(HelloWorld.class, "HELLO", String.class);
+  static final Event1<String> HELLO = Event1.info();
 
   public static void main(String[] args) {
     System.out.println("Hello world!");
@@ -93,7 +92,7 @@ public class HelloWorld {
 }
 ```
 
-To create the HELLO event we invoked the `info` method from the `Events` class.
+To create the HELLO event we invoked the `info` method from the `Event1` class.
 This way the event will be logged at the `INFO` level.
 
 ## 5. Create a logger implementation
@@ -106,15 +105,14 @@ it prints all events to `System.out`:
 import objectos.logging.*;
 
 public class HelloWorld {
-  static final Event1<String> HELLO
-      = Events.info(HelloWorld.class, "HELLO", String.class);
+  static final Event1<String> HELLO = Event1.info();
 
   public static void main(String[] args) {
     System.out.println("Hello world!");
   }
 }
 
-class ThisLogger extends NoopLogger {
+class ThisLogger extends NoOpLogger {
   public <T> void log(Event1<T> event, T value) {
     System.out.println(event + ":" + value);
   }
@@ -129,8 +127,7 @@ To log, invoke the `log` method from the logger instance as shown below:
 import objectos.logging.*;
 
 public class HelloWorld {
-  static final Event1<String> HELLO
-      = Events.info(HelloWorld.class, "HELLO", String.class);
+  static final Event1<String> HELLO = Event1.info();
 
   public static void main(String[] args) {
     var logger = new ThisLogger();
@@ -159,7 +156,7 @@ $ java -cp logging-{{version}}.jar HelloWorld.java
 When you run this Java program you will see the output:
 
 ```
-Event1[HelloWorld,INFO,HELLO]:world!
+Event1[HelloWorld,INFO,HelloWorld.java:4]:world!
 ```
 
 The output is not quite "Hello world!" but it should be sufficient for now.
@@ -189,15 +186,15 @@ $ java -cp logging-{{version}}.jar HelloWorld.java
 It should fail with a compilation error (the
 ellipsis `(...)` below indicates suppressed output):
 
-```shell
-HelloWorld.java:10: error: no suitable method found for log(Event1<String>,String,String)
-    logger.log(HELLO, "world", "!");
-          ^
-(...)
-
-1 error
-error: compilation failed
-```
+*```shell
+*HelloWorld.java:10: error: no suitable method found for log(Event1<String>,String,String)
+*    logger.log(HELLO, "world", "!");
+*          ^
+*(...)
+*
+*1 error
+*error: compilation failed
+*```
 
 Edit the `HelloWorld.java` again. This time remove all arguments from the `log` method
 invocation like so:
@@ -218,15 +215,15 @@ $ java -cp logging-{{version}}.jar HelloWorld.java
 
 And it fails again with a compilation error:
 
-```shell
-HelloWorld.java:10: error: no suitable method found for log(Event1<String>)
-    logger.log(HELLO);
-          ^
-(...)
-
-1 error
-error: compilation failed
-```
+*```shell
+*HelloWorld.java:10: error: no suitable method found for log(Event1<String>)
+*    logger.log(HELLO);
+*          ^
+*(...)
+*
+*1 error
+*error: compilation failed
+*```
 
 ## 9. Cleanup
 
