@@ -19,7 +19,6 @@ import objectos.docs.next.intro.Intro;
 import objectos.docs.next.logging.LoggingDir;
 import objectos.docs.next.relnotes.RelNotes;
 import objectos.docs.ui.DocsPage;
-import objectos.docs.ui.TableOfContents;
 import objectos.docs.ui.VersionHolder;
 import objectos.ssg.SiteDirectory;
 
@@ -29,18 +28,12 @@ public final class Next extends SiteDirectory {
 
   public static final Class<? extends DocsPage> INDEX = Index.class;
 
-  public static final Class<? extends DocsPage> TOC = Toc.class;
-
   @Override
   protected final void configure() {
     VersionHolder vh;
     vh = getObject(VersionHolder.class);
 
     vh.set(VERSION);
-
-    addPage("toc.html", new Toc());
-
-    addObject(new TableOfContents());
 
     addPage("index.html", new Index());
 

@@ -21,6 +21,7 @@ import objectos.docs.ui.Md;
 import objectos.docs.ui.NextBanner;
 import objectos.docs.ui.PageSwitcher;
 import objectos.docs.ui.Pages;
+import objectos.docs.ui.TableOfContents;
 import objectos.docs.ui.VersionHolder;
 import objectos.ssg.Site;
 import objectos.ssg.SitePath;
@@ -37,6 +38,7 @@ public final class DocsSite extends Site {
     addObject(new Pages());
     addObject(new PageSwitcher());
     addObject(new StringBuilder());
+    addObject(new TableOfContents());
     addObject(new VersionHolder());
 
     addDirectory("next", new Next());

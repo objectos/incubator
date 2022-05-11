@@ -27,7 +27,6 @@ import objectos.logging.Event1;
 import objectos.logging.Event2;
 import objectos.logging.Event3;
 import objectos.logging.Level;
-import objectos.logging.Logging;
 
 /**
  * A logged event that provides methods for its inspection.

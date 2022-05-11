@@ -42,7 +42,7 @@ public final class ArticleCss extends AbstractStyleSheet {
       fontSize(FontSize.XL3),
       fontWeight(600),
       letterSpacing(px(-0.5)),
-      lineHeight(px(48)),
+      lineHeight(1.3),
       marginBottom(Spacing.V04)
     );
 

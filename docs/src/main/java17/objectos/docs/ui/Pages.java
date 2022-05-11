@@ -25,7 +25,7 @@ import objectos.ssg.SiteFragment;
 import objectos.ssg.SitePage;
 import objectos.ssg.SiteVisitor;
 
-public class Pages implements SiteVisitor {
+public final class Pages implements SiteVisitor {
 
   private final Map<DocsPage, DocsPage> nextPages = new IdentityHashMap<>();
 

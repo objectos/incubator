@@ -19,6 +19,8 @@ import br.com.objectos.core.list.MutableList;
 import br.com.objectos.core.object.Checks;
 import br.com.objectos.html.element.ElementName;
 import br.com.objectos.html.spi.type.UlValue;
+import java.util.HashMap;
+import java.util.Map;
 import objectos.ssg.SiteDirectory;
 import objectos.ssg.SiteFragment;
 import objectos.ssg.SitePage;
@@ -31,55 +33,63 @@ public final class TableOfContents extends SiteFragment implements SiteVisitor {
 
   private boolean increase;
 
-  private Level rootLevel;
+  private final Map<String, RootLevel> roots = new HashMap<>();
 
-  public final void add(String title, Class<? extends SitePath> key) {
-    currentLevel.add(title, key);
-  }
-
-  public final void decLevel() {
-    currentLevel = currentLevel.decLevel();
-  }
-
-  public final void incLevel(String title, Class<? extends SitePath> key) {
-    currentLevel = currentLevel.incLevel(title, key);
-  }
+  private RootLevel rootLevel;
 
   @Override
   public final void postVisitSiteDirectory(SiteDirectory directory) {
-    decLevel();
+    currentLevel = currentLevel.decLevel();
   }
 
   public final void set(DocsPage page) {
-    configure();
+    String slug;
+    slug = VersionHolder.parse(page);
+
+    set(slug);
   }
 
   @Override
   public final void visitSiteDirectory(SiteDirectory directory) {
-    increase = true;
+    if (currentLevel == null) {
+      String slug;
+      slug = VersionHolder.parse(directory);
+
+      RootLevel root;
+      root = new RootLevel();
+
+      roots.put(slug, root);
+
+      currentLevel = root;
+    } else {
+      increase = true;
+    }
   }
 
   @Override
   public final void visitSitePage(SitePage page) {
     if (page instanceof DocsPage d) {
+      var title = d.titleText;
+
+      var key = d.getClass();
+
       if (increase) {
-        incLevel(d.titleText, d.getClass());
+        currentLevel = currentLevel.incLevel(title, key);
 
         increase = false;
       } else {
-        add(d.titleText, d.getClass());
+        currentLevel.add(title, key);
       }
     }
   }
 
   @Override
-  protected void configure() {
-    currentLevel = rootLevel = new RootLevel();
-  }
-
-  @Override
   protected final void definition() {
     rootLevel.render();
+  }
+
+  final void set(String slug) {
+    rootLevel = roots.get(slug);
   }
 
   private class IncLevel extends RootLevel {
@@ -126,28 +136,6 @@ public final class TableOfContents extends SiteFragment implements SiteVisitor {
 
   }
 
-  private class NoOpLevel extends Level {
-
-    @Override
-    final void add(String title, Class<? extends SitePath> key) {}
-
-    @Override
-    final Level decLevel() {
-      return this;
-    }
-
-    @Override
-    final Level incLevel(String title, Class<? extends SitePath> key) {
-      return this;
-    }
-
-    @Override
-    ElementName render() {
-      throw new UnsupportedOperationException();
-    }
-
-  }
-
   private class RootLevel extends Level {
 
     private final MutableList<Item> items = new MutableList<>();
@@ -162,7 +150,7 @@ public final class TableOfContents extends SiteFragment implements SiteVisitor {
 
     @Override
     Level decLevel() {
-      return new NoOpLevel();
+      return null;
     }
 
     @Override

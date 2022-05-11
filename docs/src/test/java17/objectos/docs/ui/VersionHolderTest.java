@@ -16,44 +16,29 @@
 package objectos.docs.ui;
 
 import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertNull;
 
-import br.com.objectos.core.list.ImmutableList;
 import objectos.docs.DocsSiteTest;
 import objectos.docs.next.Next;
 import objectos.docs.next.logging.LoggingDir;
-import org.testng.annotations.BeforeClass;
+import objectos.ssg.SiteDirectory;
 import org.testng.annotations.Test;
 
-public class PagesTest extends DocsSiteTest {
-
-  private Pages pages;
-
-  @BeforeClass
-  public void _beforeClass() {
-    pages = getObject(Pages.class);
-  }
+public class VersionHolderTest extends DocsSiteTest {
 
   @Test
-  public void backPage() {
-    DocsPage index;
-    index = getObject(Next.INDEX);
-
-    DocsPage toc;
-    toc = pages.backPage(index);
-
-    assertNull(toc);
+  public void parse() {
+    testParse(Next.class, "next");
+    testParse(LoggingDir.class, "next");
   }
 
-  @Test
-  public void trail() {
-    DocsPage events;
-    events = getObject(LoggingDir.EVENTS);
+  private void testParse(Class<? extends SiteDirectory> t, String expected) {
+    SiteDirectory dir;
+    dir = getObject(t);
 
-    ImmutableList<DocsPage> trail;
-    trail = pages.trail(events);
+    String res;
+    res = VersionHolder.parse(dir);
 
-    assertEquals(trail.size(), 4);
+    assertEquals(res, expected);
   }
 
 }

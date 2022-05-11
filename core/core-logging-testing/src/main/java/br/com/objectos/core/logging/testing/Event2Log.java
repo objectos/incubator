@@ -19,7 +19,6 @@ import br.com.objectos.core.object.Equals;
 import br.com.objectos.core.object.ToString;
 import objectos.logging.Event;
 import objectos.logging.Event2;
-import objectos.logging.Logging;
 
 /**
  * An {@link Event2} log instance.
@@ -61,10 +60,10 @@ public final class Event2Log<T1, T2> extends Log {
   @Override
   public final void formatToString(StringBuilder sb, int depth) {
     ToString.formatToString(
-        sb, depth, this,
-        "event", event,
-        "value1", value1,
-        "value2", value2
+      sb, depth, this,
+      "event", event,
+      "value1", value1,
+      "value2", value2
     );
   }
 
@@ -74,9 +73,9 @@ public final class Event2Log<T1, T2> extends Log {
   @Override
   public final <X1, X2> boolean isEvent2(Event2<X1, X2> event, X1 value1, X2 value2) {
     return Equals.objects(
-        this.event, event,
-        this.value1, value1,
-        this.value2, value2
+      this.event, event,
+      this.value1, value1,
+      this.value2, value2
     );
   }
 

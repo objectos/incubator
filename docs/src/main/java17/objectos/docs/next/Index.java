@@ -18,6 +18,7 @@ package objectos.docs.next;
 import objectos.docs.next.intro.Intro;
 import objectos.docs.next.logging.LoggingDir;
 import objectos.docs.ui.DocsPage;
+import objectos.docs.ui.TableOfContents;
 
 final class Index extends DocsPage {
 
@@ -28,6 +29,11 @@ final class Index extends DocsPage {
 
   @Override
   protected final void main0() {
+    TableOfContents toc;
+    toc = getObject(TableOfContents.class);
+
+    toc.set(this);
+
     article(
       h1("Documentation for Objectos developers"),
 
@@ -58,6 +64,12 @@ final class Index extends DocsPage {
         ul(
           li(a(LoggingDir.INDEX, "Logging"))
         )
+      ),
+
+      section(
+        h2("Table of contents"),
+
+        f(toc)
       )
     );
   }

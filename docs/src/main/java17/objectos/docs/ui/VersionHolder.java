@@ -16,10 +16,52 @@
 package objectos.docs.ui;
 
 import br.com.objectos.core.object.Checks;
+import objectos.ssg.SiteDirectory;
+import objectos.ssg.SitePage;
 
 public final class VersionHolder {
 
+  private static final String PREFIX = "objectos.docs.";
+
   private String value = "";
+
+  public static String parse(SiteDirectory directory) {
+    Class<?> type;
+    type = directory.getClass();
+
+    return parse0(type);
+  }
+
+  public static String parse(SitePage page) {
+    Class<?> type;
+    type = page.getClass();
+
+    return parse0(type);
+  }
+
+  private static String parse0(Class<?> type) {
+    String packageName;
+    packageName = type.getPackageName();
+
+    boolean skip;
+    skip = !packageName.startsWith(PREFIX);
+
+    if (skip) {
+      throw new IllegalArgumentException(packageName);
+    }
+
+    int prefixLen;
+    prefixLen = PREFIX.length();
+
+    int dot;
+    dot = packageName.indexOf('.', prefixLen);
+
+    if (dot == -1) {
+      return packageName.substring(prefixLen);
+    } else {
+      return packageName.substring(prefixLen, dot);
+    }
+  }
 
   public final String get() {
     return value;

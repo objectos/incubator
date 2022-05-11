@@ -17,82 +17,33 @@ package objectos.docs.ui;
 
 import static org.testng.Assert.assertEquals;
 
+import objectos.docs.DocsSiteTest;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class TableOfContentsTest {
+public class TableOfContentsTest extends DocsSiteTest {
 
   private TableOfContents toc;
 
   @BeforeMethod
   public void _beforeMethod() {
-    toc = new TableOfContents();
-
-    toc.configure(new NoOpContext() {});
+    toc = getObject(TableOfContents.class);
   }
 
-  @Test(enabled = false)
-  public void level0() {
-    toc.add("Page 0", Page0.class);
-    toc.add("Page 1", Page1.class);
-    toc.add("Page 2", Page2.class);
+  @Test
+  public void next() {
+    toc.set("next");
 
     assertEquals(
       toc.toString(),
 
       """
       <ul>\
-      <li><a href="/page0">Page 0</a></li>\
-      <li><a href="/page1">Page 1</a></li>\
-      <li><a href="/page2">Page 2</a></li>\
-      </ul>"""
-    );
-  }
-
-  @Test(enabled = false)
-  public void level1() {
-    toc.add("Page 0", Page0.class);
-    toc.incLevel("Page 1", Page1.class);
-    toc.add("Page 2", Page2.class);
-
-    assertEquals(
-      toc.toString(),
-
-      """
-      <ul>\
-      <li><a href="/page0">Page 0</a></li>\
-      <li>\
-      <a href="/page1">Page 1</a>\
-      <ul>\
-      <li><a href="/page2">Page 2</a></li>\
-      </ul>\
-      </li>\
-      </ul>"""
-    );
-  }
-
-  @Test(enabled = false)
-  public void level2() {
-    toc.add("Page 0", Page0.class);
-    toc.incLevel("Page 1", Page1.class);
-    toc.add("Page 2", Page2.class);
-    toc.decLevel();
-    toc.add("Page 3", Page0.class);
-
-    assertEquals(
-      toc.toString(),
-
-      """
-      <ul>\
-      <li><a href="/page0">Page 0</a></li>\
-      <li>\
-      <a href="/page1">Page 1</a>\
-      <ul>\
-      <li><a href="/page2">Page 2</a></li>\
-      </ul>\
-      </li>\
-      <li><a href="/page0">Page 3</a></li>\
-      </ul>"""
+      <li><a href="/next/index.html">Home</a></li>\
+      <li><a href="/next/intro/index.html">Get started with Objectos</a>\
+      <ul><li><a href="/next/intro/overview.html">What is Objectos?</a></li>\
+      <li><a href="/next/intro/install.html">Installation</a></li>\
+      </ul></li><li><a href="/next/logging/index.html">Objectos Logging</a><ul><li><a href="/next/logging/getting-started/index.html">Getting started</a><ul><li><a href="/next/logging/getting-started/about-logging.html">About logging</a></li><li><a href="/next/logging/getting-started/objectos-logging.html">Logging with Objectos Logging</a></li><li><a href="/next/logging/getting-started/installing.html">Installing Objectos Logging</a></li><li><a href="/next/logging/getting-started/quick-start.html">Quick start</a></li></ul></li><li><a href="/next/logging/logging-guide/index.html">Logging guide</a><ul><li><a href="/next/logging/logging-guide/events.html">Creating events</a></li><li><a href="/next/logging/logging-guide/logger.html">Using the Logger interface</a></li></ul></li><li><a href="/next/logging/no-op-logger/index.html">The NoOpLogger</a><ul></ul></li></ul></li><li><a href="/next/relnotes/index.html">Release notes</a><ul><li><a href="/next/relnotes/0.1.0.html">Objectos 0.1.0 release notes</a></li></ul></li></ul>"""
     );
   }
 

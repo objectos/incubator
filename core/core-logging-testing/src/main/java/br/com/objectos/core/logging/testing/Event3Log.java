@@ -19,7 +19,6 @@ import br.com.objectos.core.object.Equals;
 import br.com.objectos.core.object.ToString;
 import objectos.logging.Event;
 import objectos.logging.Event3;
-import objectos.logging.Logging;
 
 /**
  * An {@link Event3} log instance.
@@ -68,11 +67,11 @@ public final class Event3Log<T1, T2, T3> extends Log {
   @Override
   public final void formatToString(StringBuilder sb, int depth) {
     ToString.formatToString(
-        sb, depth, this,
-        "event", event,
-        "value1", value1,
-        "value2", value2,
-        "value3", value3
+      sb, depth, this,
+      "event", event,
+      "value1", value1,
+      "value2", value2,
+      "value3", value3
     );
   }
 
