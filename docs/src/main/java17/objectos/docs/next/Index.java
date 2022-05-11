@@ -15,12 +15,40 @@
  */
 package objectos.docs.next;
 
+import br.com.objectos.core.list.MutableList;
+import br.com.objectos.css.Css;
+import br.com.objectos.css.select.IdSelector;
+import br.com.objectos.css.sheet.StyleSheet;
 import objectos.docs.next.intro.Intro;
 import objectos.docs.next.logging.LoggingDir;
+import objectos.docs.style.Colors;
+import objectos.docs.style.FontSize;
+import objectos.docs.style.Spacing;
 import objectos.docs.ui.DocsPage;
 import objectos.docs.ui.TableOfContents;
+import objectos.docs.ui.VersionHolder;
+import objectos.ssg.SiteStyleSheet;
 
 final class Index extends DocsPage {
+
+  private static final IdSelector HD = Css.randomHash(3);
+
+  private static final IdSelector HDV = Css.randomHash(3);
+
+  private final StyleSheet css = new SiteStyleSheet() {
+    @Override
+    protected final void definition() {
+      style(
+        HDV,
+
+        backgroundColor(Colors.GRAY0),
+        display(flex),
+        fontSize(FontSize.SM),
+        justifyContent(spaceBetween),
+        padding(Spacing.V03)
+      );
+    }
+  };
 
   @Override
   protected final void configure() {
@@ -34,8 +62,23 @@ final class Index extends DocsPage {
 
     toc.set(this);
 
+    VersionHolder v;
+    v = getObject(VersionHolder.class);
+
     article(
-      h1("Documentation for Objectos developers"),
+      header(
+        HD,
+
+        h1("Documentation for Objectos developers"),
+
+        div(
+          HDV,
+
+          div(t("Version", v.get())),
+
+          div(t("API reference: "), a(href("api/index.html"), t("Javadocs")))
+        )
+      ),
 
       p("""
         Welcome to the Objectos documentation.
@@ -72,6 +115,16 @@ final class Index extends DocsPage {
         f(toc)
       )
     );
+  }
+
+  @Override
+  protected final MutableList<StyleSheet> styleSheets() {
+    MutableList<StyleSheet> sheets;
+    sheets = super.styleSheets();
+
+    sheets.add(css);
+
+    return sheets;
   }
 
 }
