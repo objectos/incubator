@@ -21,12 +21,15 @@ import objectos.docs.next.relnotes.RelNotes;
 import objectos.docs.ui.DocsPage;
 import objectos.docs.ui.VersionHolder;
 import objectos.ssg.SiteDirectory;
+import objectos.ssg.SitePath;
 
 public final class Next extends SiteDirectory {
 
   public static final String VERSION = "0.1.0-SNAPSHOT";
 
   public static final Class<? extends DocsPage> INDEX = Index.class;
+
+  public static final Class<? extends SitePath> WHAT = Intro.OVERVIEW;
 
   @Override
   protected final void configure() {

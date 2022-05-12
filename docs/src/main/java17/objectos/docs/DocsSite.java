@@ -30,6 +30,10 @@ public final class DocsSite extends Site {
 
   public static final Class<? extends SitePath> INDEX = Next.INDEX;
 
+  public static final Class<? extends SitePath> WHAT = Next.WHAT;
+
+  public static final String VERSION = Next.VERSION;
+
   @Override
   protected final void configure() {
     addObject(new Breadcrumbs());
