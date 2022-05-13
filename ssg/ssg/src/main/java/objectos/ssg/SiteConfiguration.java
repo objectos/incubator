@@ -141,9 +141,9 @@ public class SiteConfiguration implements Site.Context {
 
     registry.visitSiteDirectory(directory);
 
-    directory.configure();
-
     addByClass(directory);
+
+    directory.configure();
 
     registry.postVisitSiteDirectory(directory);
 

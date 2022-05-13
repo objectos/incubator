@@ -18,10 +18,12 @@ package objectos.ssg;
 import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.core.object.Checks;
 import br.com.objectos.http.media.MediaType;
+import java.io.IOException;
 
 public abstract class SiteDirectory
     implements
-    SiteResourceHolder {
+    SiteResourceHolder,
+    SiteWriteable {
 
   private String path;
 
@@ -34,6 +36,11 @@ public abstract class SiteDirectory
     path = null;
 
     site = null;
+  }
+
+  @Override
+  public final void writeTo(SiteWriter writer) throws IOException {
+    writeStart();
   }
 
   protected final <T extends SiteDirectory> T addDirectory(String fileName, T directory) {
@@ -103,6 +110,8 @@ public abstract class SiteDirectory
       ImmutableList<T> getObjectsByType(Class<? extends T> type) {
     return site.getObjectsByType(type);
   }
+
+  protected void writeStart() {}
 
   final void set(String path, SiteConfiguration site) {
     Checks.checkState(this.path == null, "path was already set");
