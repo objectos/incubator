@@ -23,16 +23,17 @@ import objectos.docs.ui.PageSwitcher;
 import objectos.docs.ui.Pages;
 import objectos.docs.ui.TableOfContents;
 import objectos.docs.ui.VersionHolder;
+import objectos.docs.v0001.V0001;
 import objectos.ssg.Site;
 import objectos.ssg.SitePath;
 
 public final class DocsSite extends Site {
 
-  public static final Class<? extends SitePath> INDEX = Next.INDEX;
+  public static final Class<? extends SitePath> INDEX = V0001.INDEX;
 
-  public static final Class<? extends SitePath> WHAT = Next.WHAT;
+  public static final Class<? extends SitePath> WHAT = V0001.WHAT;
 
-  public static final String VERSION = Next.VERSION;
+  public static final String VERSION = V0001.VERSION;
 
   @Override
   protected final void configure() {
@@ -46,6 +47,7 @@ public final class DocsSite extends Site {
     addObject(new VersionHolder());
 
     addDirectory("next", new Next());
+    addDirectory("0.1", new V0001());
   }
 
 }

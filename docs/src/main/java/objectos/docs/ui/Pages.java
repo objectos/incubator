@@ -43,6 +43,10 @@ public final class Pages implements SiteVisitor {
 
   public Pages() {}
 
+  public final void clear() {
+    current = null;
+  }
+
   @Override
   public final void postVisitSiteDirectory(SiteDirectory directory) {
     directoryDepth--;
