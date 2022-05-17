@@ -15,7 +15,6 @@
  */
 package br.com.objectos.core.throwable;
 
-import br.com.objectos.latest.Concrete;
 import objectos.lang.Checks;
 
 /**
@@ -56,12 +55,11 @@ import objectos.lang.Checks;
  * support Java 6. You should use the language provided try-with-resources
  * construct otherwise.
  *
- * @since 2
+ * @since 0.2
  */
-@Concrete(modifiers = "public final", simpleName = "Try")
-abstract class AbstractTry {
+public final class Try {
 
-  AbstractTry() {}
+  private Try() {}
 
   /**
    * Returns a {@code null} throwable reference.
@@ -73,6 +71,45 @@ abstract class AbstractTry {
    */
   public static Throwable begin() {
     return null;
+  }
+
+  /**
+   * Closes the specified {@code closeable} (if possible) and adds any
+   * suppressed throwable to {@code primary}. More formally:
+   *
+   * <p>
+   * If {@code closeable} is null, then no action is performed.
+   *
+   * <p>
+   * If the close operation completes normally, then {@code primary} value is
+   * returned.
+   *
+   * <p>
+   * If the close operation completes abruptly because of a Throwable {@code e},
+   * then the result of invoking {@code Throwables.addSuppressed(primary, e)} is
+   * returned.
+   *
+   * @param primary
+   *        a possibly null primary throwable
+   * @param closeable
+   *        a possible null auto-closeable that needs to be closed
+   *
+   * @return the {@code primary} throwable if it is not null, the caught
+   *         throwable (if any) or {@code null} otherwise
+   */
+  public static Throwable close(Throwable primary, AutoCloseable closeable) {
+    Throwable result;
+    result = primary;
+
+    if (closeable != null) {
+      try {
+        closeable.close();
+      } catch (Throwable e) {
+        result = Throwables.addSuppressed(result, e);
+      }
+    }
+
+    return result;
   }
 
   /**

@@ -21,8 +21,6 @@ import br.com.objectos.concurrent.IoTask;
 import br.com.objectos.concurrent.IoWorker;
 import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.core.list.MutableList;
-import br.com.objectos.core.throwable.StackTraceElements;
-import br.com.objectos.core.throwable.Throwables;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
@@ -604,11 +602,11 @@ final class StorageV1WriteJob implements IoTask, CpuTask, WriteJob {
   private byte toStackTraceElement(StackTraceElement element) {
     writeStringList.clear();
 
-    addWriteStringList(StackTraceElements.getClassLoaderName(element));
+    addWriteStringList(element.getClassLoaderName());
 
-    addWriteStringList(StackTraceElements.getModuleName(element));
+    addWriteStringList(element.getModuleName());
 
-    addWriteStringList(StackTraceElements.getModuleVersion(element));
+    addWriteStringList(element.getModuleVersion());
 
     addWriteStringList(element.getClassName());
 
@@ -708,7 +706,7 @@ final class StorageV1WriteJob implements IoTask, CpuTask, WriteJob {
 
       ready = onReady;
 
-      suppressed = Throwables.getSuppressed(value);
+      suppressed = value.getSuppressed();
 
       this.value = value;
     }

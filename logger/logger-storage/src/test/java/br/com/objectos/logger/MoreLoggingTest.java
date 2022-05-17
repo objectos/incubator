@@ -448,7 +448,7 @@ public class MoreLoggingTest implements LogListener {
 
     if (s != null) {
       Throwable[] suppressed;
-      suppressed = Throwables.getSuppressed(that);
+      suppressed = that.getSuppressed();
 
       assertEquals(s.size(), suppressed.length);
 

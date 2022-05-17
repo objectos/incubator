@@ -15,35 +15,23 @@
  */
 package br.com.objectos.core.throwable;
 
-import br.com.objectos.latest.Concrete.Bridge;
-import br.com.objectos.latest.Concrete.Constructor;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import objectos.lang.Checks;
-import objectos.logging.Event1;
-import objectos.logging.Level;
-import objectos.logging.Logger;
-import objectos.logging.NoOpLogger;
 
-@Bridge
-class ThrowablesJava6 extends AbstractThrowables {
+/**
+ * Provides {@code static} utility methods for working with {@link Throwable}
+ * instances. In particular, provides a single API for working with
+ * {@link Throwable} instances in a Java multi-release manner.
+ *
+ * @since 0.2
+ */
+public final class Throwables {
 
-  static Logger LOGGER = NoOpLogger.getInstance();
-
-  private static final Throwable[] EMPTY = new Throwable[0];
-
-  private static final Event1<Throwable> SUPPRESSED;
-
-  static {
-    Class<?> s;
-    s = Throwables.class;
-
-    SUPPRESSED = new Event1<Throwable>(s.getName(), "SUPPRESSED", Level.WARN);
-  }
-
-  @Constructor
-  ThrowablesJava6() {}
+  private Throwables() {}
 
   /**
-   * If the first exception is non-null logs the second one as a suppressed
+   * Adds to the first exception the second one as a suppressed
    * exception and returns the first exception. If the first exception is
    * {@code null} then the second exception is returned unchanged.
    *
@@ -58,7 +46,7 @@ class ThrowablesJava6 extends AbstractThrowables {
     Checks.checkNotNull(suppressed, "suppressed == null");
 
     if (exception != null) {
-      LOGGER.log(SUPPRESSED, suppressed);
+      exception.addSuppressed(suppressed);
 
       return exception;
     } else {
@@ -67,30 +55,24 @@ class ThrowablesJava6 extends AbstractThrowables {
   }
 
   /**
-   * Returns a zero-length {@code Throwable} array.
-   *
-   * <p>
-   * Note: suppressed exceptions were only introduced in Java 7.
+   * Returns a new string whose contents is what would be sent to the standard
+   * error stream as a result of invoking {@link Throwable#printStackTrace()}.
    *
    * @param throwable
-   *        a throwable instance
+   *        a throwable instance to analyze
    *
-   * @return a zero-length {@code Throwable} array.
+   * @return a string containing the throwable and its backtrace
    */
-  public static Throwable[] getSuppressed(Throwable throwable) {
-    Checks.checkNotNull(throwable, "throwable == null");
+  public static String printStackTraceToString(Throwable throwable) {
+    StringWriter output;
+    output = new StringWriter();
 
-    return EMPTY;
-  }
+    PrintWriter printWriter;
+    printWriter = new PrintWriter(output);
 
-  /**
-   * Sets the logger instance to use for logging suppressed exceptions.
-   *
-   * @param logger
-   *        a logger instance
-   */
-  public static void setLogger(Logger logger) {
-    LOGGER = LOGGER.replace(logger);
+    throwable.printStackTrace(printWriter);
+
+    return output.toString();
   }
 
 }

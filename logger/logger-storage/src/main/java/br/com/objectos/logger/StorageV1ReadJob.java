@@ -21,7 +21,6 @@ import br.com.objectos.concurrent.IoTask;
 import br.com.objectos.concurrent.IoWorker;
 import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.core.list.MutableList;
-import br.com.objectos.core.throwable.StackTraceElements;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.ReadableByteChannel;
@@ -29,33 +28,33 @@ import java.nio.channels.ReadableByteChannel;
 final class StorageV1ReadJob implements IoTask, ReadJob {
 
   /*
-  
+
   @startuml
-  
+
   hide empty description
   skinparam shadowing false
-  
+
   [*] --> START
-  
+
   FINALLY --> [*]
-  
+
   IO --> IO_WAIT
-  
+
   IO_WAIT --> MAYBE_LOGS : ioReady
-  
+
   MAYBE_LOGS --> FINALLY : logs == 0
   MAYBE_LOGS --> NEXT_LOG : logs > 0
-  
+
   NEXT_LOG --> FINALLY : no more logs
   NEXT_LOG --> NEXT_PROCESSOR : has more logs
-  
+
   NEXT_PROCESSOR --> NEXT_LOG : no more processors
   NEXT_PROCESSOR --> NEXT_PROCESSOR : has next processor
-  
+
   START --> IO : ioTask = readLogs\lioReady = MAYBE_LOGS
-  
+
   @enduml
-  
+
   */
 
   private static final byte _FINALLY = 0;
@@ -413,7 +412,7 @@ final class StorageV1ReadJob implements IoTask, ReadJob {
     log.timestamp = byteBuffer.getLong();
 
     return execute(
-        toStringList(3, _LOG_HEADER_STRING_LIST)
+      toStringList(3, _LOG_HEADER_STRING_LIST)
     );
   }
 
@@ -425,7 +424,7 @@ final class StorageV1ReadJob implements IoTask, ReadJob {
     log.thread = stringList.get(2);
 
     return execute(
-        toStringList(iterLength, _LOG_VALUES)
+      toStringList(iterLength, _LOG_VALUES)
     );
   }
 
@@ -589,28 +588,28 @@ final class StorageV1ReadJob implements IoTask, ReadJob {
     lineNumber = readShort;
 
     StackTraceElement element;
-    element = StackTraceElements.create(
-        emptyToNull(
-            classLoader
-        ),
+    element = new StackTraceElement(
+      emptyToNull(
+        classLoader
+      ),
 
-        emptyToNull(
-            moduleName
-        ),
+      emptyToNull(
+        moduleName
+      ),
 
-        emptyToNull(
-            moduleVersion
-        ),
+      emptyToNull(
+        moduleVersion
+      ),
 
-        className,
+      className,
 
-        methodName,
+      methodName,
 
-        emptyToNull(
-            fileName
-        ),
+      emptyToNull(
+        fileName
+      ),
 
-        lineNumber
+      lineNumber
     );
 
     stackTrace[stackTraceIndex] = element;
@@ -623,7 +622,7 @@ final class StorageV1ReadJob implements IoTask, ReadJob {
   private byte executeStackTraceLoop() {
     if (stackTraceIndex < stackTrace.length) {
       return execute(
-          toStringList(6, toReadShort(_STACK_TRACE_ELEMENT))
+        toStringList(6, toReadShort(_STACK_TRACE_ELEMENT))
       );
     }
 
@@ -639,7 +638,7 @@ final class StorageV1ReadJob implements IoTask, ReadJob {
   private byte executeStringList() {
     if (stringList.size() < stringListLength) {
       return execute(
-          toReadString(_STRING_LIST_VALUE)
+        toReadString(_STRING_LIST_VALUE)
       );
     }
 
@@ -666,13 +665,13 @@ final class StorageV1ReadJob implements IoTask, ReadJob {
     t.message = stringList.get(1);
 
     return execute(
-        toReadShort(_STACK_TRACE)
+      toReadShort(_STACK_TRACE)
     );
   }
 
   private byte executeThrowableLoop() {
     return execute(
-        toReadyByte(_THROWABLE_SWITCH)
+      toReadyByte(_THROWABLE_SWITCH)
     );
   }
 

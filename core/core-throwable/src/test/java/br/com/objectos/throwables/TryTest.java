@@ -16,43 +16,16 @@
 package br.com.objectos.throwables;
 
 import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertSame;
 import static org.testng.Assert.assertTrue;
 
 import br.com.objectos.core.throwable.RethrowException;
-import br.com.objectos.core.throwable.Throwables;
 import br.com.objectos.core.throwable.Try;
 import java.io.IOException;
 import org.testng.Assert;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 public class TryTest {
-
-  private boolean java6;
-
-  private ThisLogger logger;
-
-  @BeforeClass
-  public void _beforeClass() {
-    logger = new ThisLogger();
-
-    Throwables.setLogger(logger);
-
-    Class<?> tryWithType;
-    tryWithType = Try.class;
-
-    Class<?> bridgeType;
-    bridgeType = tryWithType.getSuperclass();
-
-    String simpleName;
-    simpleName = bridgeType.getSimpleName();
-
-    if (simpleName.endsWith("Java6")) {
-      java6 = true;
-    }
-  }
 
   @Test
   public void close() {
@@ -84,12 +57,8 @@ public class TryTest {
     } catch (IOException expected) {
       assertSame(expected, ioException);
 
-      if (java6) {
-        assertTrue(logger.isEmpty());
-      }
-
       Throwable[] suppressedArray;
-      suppressedArray = Throwables.getSuppressed(expected);
+      suppressedArray = expected.getSuppressed();
 
       assertEquals(suppressedArray.length, 0);
     }
@@ -116,16 +85,12 @@ public class TryTest {
     } catch (IOException expected) {
       assertSame(expected, ioException);
 
-      if (java6) {
-        assertFalse(logger.isEmpty());
-      } else {
-        Throwable[] suppressedArray;
-        suppressedArray = Throwables.getSuppressed(expected);
+      Throwable[] suppressedArray;
+      suppressedArray = expected.getSuppressed();
 
-        assertEquals(suppressedArray.length, 1);
+      assertEquals(suppressedArray.length, 1);
 
-        assertSame(suppressedArray[0], suppressed);
-      }
+      assertSame(suppressedArray[0], suppressed);
     }
   }
 
