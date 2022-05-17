@@ -28,5 +28,4 @@ module br.com.objectos.fs.watch {
   requires objectos.lang;
   requires br.com.objectos.core.runtime;
   requires br.com.objectos.core.set;
-  requires br.com.objectos.core.throwable;
 }

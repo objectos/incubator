@@ -18,7 +18,6 @@ package br.com.objectos.logger;
 import br.com.objectos.concurrent.IoWorker;
 import br.com.objectos.core.io.Charsets;
 import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.throwable.Try;
 import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.RegularFile;
 import br.com.objectos.fs.ResolvedPath;
@@ -30,6 +29,7 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
+import objectos.lang.Try;
 
 final class StorageV1 extends Storage {
 
@@ -89,14 +89,14 @@ final class StorageV1 extends Storage {
 
     byte[] bytes;
     bytes = new byte[] {
-        (byte) (timestamp >>> 56),
-        (byte) (timestamp >>> 48),
-        (byte) (timestamp >>> 40),
-        (byte) (timestamp >>> 32),
-        (byte) (timestamp >>> 24),
-        (byte) (timestamp >>> 16),
-        (byte) (timestamp >>> 8),
-        (byte) timestamp,
+                        (byte) (timestamp >>> 56),
+                        (byte) (timestamp >>> 48),
+                        (byte) (timestamp >>> 40),
+                        (byte) (timestamp >>> 32),
+                        (byte) (timestamp >>> 24),
+                        (byte) (timestamp >>> 16),
+                        (byte) (timestamp >>> 8),
+                        (byte) timestamp,
     };
 
     OutputStream out;

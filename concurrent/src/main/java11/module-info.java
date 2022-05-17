@@ -25,5 +25,4 @@ module br.com.objectos.concurrent {
   requires br.com.objectos.core.array;
   requires br.com.objectos.core.list;
   requires objectos.lang;
-  requires br.com.objectos.core.throwable;
 }

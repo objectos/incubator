@@ -15,9 +15,9 @@
  */
 package br.com.objectos.mysql;
 
-import br.com.objectos.core.throwable.Try;
 import java.io.IOException;
 import java.io.OutputStream;
+import objectos.lang.Try;
 
 final class ConfigEditorExecution extends Execution {
 

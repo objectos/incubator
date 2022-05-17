@@ -39,5 +39,4 @@ module br.com.objectos.code {
   requires objectos.lang;
   requires br.com.objectos.core.set;
   requires br.com.objectos.core.system;
-  requires br.com.objectos.core.throwable;
 }

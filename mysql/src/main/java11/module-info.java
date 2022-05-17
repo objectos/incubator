@@ -22,5 +22,4 @@ module br.com.objectos.mysql {
   requires br.com.objectos.code.annotations;
   requires objectos.lang;
   requires br.com.objectos.core.system;
-  requires br.com.objectos.core.throwable;
 }

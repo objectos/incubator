@@ -22,7 +22,6 @@ import br.com.objectos.core.io.Charsets;
 import br.com.objectos.core.io.Copy;
 import br.com.objectos.core.net.InetAddresses;
 import br.com.objectos.core.service.Services;
-import br.com.objectos.core.throwable.Try;
 import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.testing.TestInf;
 import java.io.ByteArrayOutputStream;
@@ -34,6 +33,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.concurrent.atomic.AtomicInteger;
+import objectos.lang.Try;
 import org.testng.annotations.BeforeSuite;
 
 public abstract class AbstractHttpTest {

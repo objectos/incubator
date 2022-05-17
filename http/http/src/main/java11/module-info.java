@@ -25,5 +25,4 @@ module br.com.objectos.http {
   requires br.com.objectos.core.map;
   requires br.com.objectos.core.net;
   requires objectos.lang;
-  requires br.com.objectos.core.throwable;
 }

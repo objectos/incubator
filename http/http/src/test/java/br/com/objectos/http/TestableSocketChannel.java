@@ -15,8 +15,8 @@
  */
 package br.com.objectos.http;
 
-import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.core.io.Charsets;
+import br.com.objectos.core.list.ImmutableList;
 import java.io.IOException;
 import java.net.Socket;
 import java.net.SocketAddress;

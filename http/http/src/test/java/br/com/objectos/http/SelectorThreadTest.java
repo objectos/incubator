@@ -17,10 +17,10 @@ package br.com.objectos.http;
 
 import static org.testng.Assert.assertTrue;
 
-import br.com.objectos.core.throwable.Try;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.channels.SocketChannel;
+import objectos.lang.Try;
 import org.testng.annotations.Test;
 
 public class SelectorThreadTest extends AbstractHttpTest implements SelectorThreadAdapter {

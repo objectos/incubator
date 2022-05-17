@@ -16,7 +16,6 @@
 package br.com.objectos.git;
 
 import br.com.objectos.core.io.Charsets;
-import br.com.objectos.core.throwable.Try;
 import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.PathNameVisitor;
 import br.com.objectos.fs.RegularFile;
@@ -27,6 +26,7 @@ import java.nio.channels.FileChannel;
 import objectos.lang.Checks;
 import objectos.lang.ToString;
 import objectos.lang.ToStringObject;
+import objectos.lang.Try;
 
 /**
  * Represents the name of a Git reference.
@@ -77,8 +77,8 @@ public abstract class RefName implements ToStringObject {
   @Override
   public final void formatToString(StringBuilder sb, int depth) {
     ToString.formatToString(
-        sb, depth, this,
-        "", print()
+      sb, depth, this,
+      "", print()
     );
   }
 

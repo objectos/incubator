@@ -16,7 +16,6 @@
 package br.com.objectos.git;
 
 import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.throwable.Try;
 import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.NotRegularFileException;
 import br.com.objectos.fs.PathNameVisitor;
@@ -29,6 +28,7 @@ import java.nio.charset.Charset;
 import java.security.MessageDigest;
 import java.util.Arrays;
 import java.util.zip.Deflater;
+import objectos.lang.Try;
 import objectos.logging.Event2;
 
 final class WriteTree extends AbstractGitEngineTask {

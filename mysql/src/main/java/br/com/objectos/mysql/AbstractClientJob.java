@@ -15,12 +15,10 @@
  */
 package br.com.objectos.mysql;
 
-import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.list.MutableList;
 import br.com.objectos.concurrent.IoTask;
 import br.com.objectos.concurrent.IoWorker;
-import br.com.objectos.core.throwable.Throwables;
-import br.com.objectos.core.throwable.Try;
+import br.com.objectos.core.list.ImmutableList;
+import br.com.objectos.core.list.MutableList;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -32,6 +30,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import objectos.lang.Checks;
+import objectos.lang.Throwables;
+import objectos.lang.Try;
 
 abstract class AbstractClientJob<V> implements ClientJob<V>, IoTask {
 

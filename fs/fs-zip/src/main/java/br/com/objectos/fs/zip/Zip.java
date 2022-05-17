@@ -16,12 +16,11 @@
 package br.com.objectos.fs.zip;
 
 import br.com.objectos.core.io.Copy;
-import br.com.objectos.core.throwable.Try;
 import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.DirectoryContentsVisitor;
+import br.com.objectos.fs.PathNameVisitor;
 import br.com.objectos.fs.RegularFile;
 import br.com.objectos.fs.ResolvedPath;
-import br.com.objectos.fs.PathNameVisitor;
 import java.io.Closeable;
 import java.io.IOException;
 import java.io.InputStream;
@@ -29,6 +28,7 @@ import java.io.OutputStream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 import objectos.lang.Checks;
+import objectos.lang.Try;
 
 /**
  * @since 2

@@ -24,7 +24,6 @@ import br.com.objectos.code.model.element.ProcessingType;
 import br.com.objectos.code.model.element.ProcessingTypeReprocessor;
 import br.com.objectos.core.set.ImmutableSet;
 import br.com.objectos.core.set.MutableSet;
-import br.com.objectos.core.throwable.Throwables;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.EnumSet;
@@ -41,9 +40,10 @@ import javax.lang.model.element.PackageElement;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.util.Elements;
 import javax.tools.Diagnostic.Kind;
-import objectos.lang.Checks;
 import javax.tools.FileObject;
 import javax.tools.StandardLocation;
+import objectos.lang.Checks;
+import objectos.lang.Throwables;
 
 public class ProcessingRound
     implements
@@ -52,10 +52,10 @@ public class ProcessingRound
     ProcessingTypeReprocessor {
 
   private static final Set<ElementKind> TYPES = EnumSet.of(
-      ElementKind.CLASS,
-      ElementKind.ENUM,
-      ElementKind.INTERFACE,
-      ElementKind.ANNOTATION_TYPE
+    ElementKind.CLASS,
+    ElementKind.ENUM,
+    ElementKind.INTERFACE,
+    ElementKind.ANNOTATION_TYPE
   );
 
   private final Set<? extends TypeElement> annotations;

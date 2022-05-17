@@ -19,7 +19,6 @@ import br.com.objectos.concurrent.CpuTask;
 import br.com.objectos.concurrent.IoTask;
 import br.com.objectos.concurrent.IoWorker;
 import br.com.objectos.core.io.Charsets;
-import br.com.objectos.core.throwable.Try;
 import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.PathNameVisitor;
 import br.com.objectos.fs.RegularFile;
@@ -32,6 +31,7 @@ import java.nio.channels.WritableByteChannel;
 import java.nio.charset.CharsetEncoder;
 import java.nio.charset.CoderResult;
 import java.util.Date;
+import objectos.lang.Try;
 
 final class HttpRequestProcessorImpl
     implements

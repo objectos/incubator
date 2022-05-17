@@ -27,7 +27,6 @@ import br.com.objectos.core.system.Linux;
 import br.com.objectos.core.system.OperatingSystem;
 import br.com.objectos.core.system.OperatingSystemVisitor;
 import br.com.objectos.core.system.UnsupportedOperatingSystem;
-import br.com.objectos.core.throwable.Try;
 import br.com.objectos.random.testing.Next;
 import java.io.File;
 import java.io.IOException;
@@ -42,6 +41,7 @@ import java.nio.charset.Charset;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import objectos.lang.Try;
 import org.testng.Assert;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
@@ -252,9 +252,9 @@ public class RegularFileTest extends AbstractObjectosFsTest {
     os = OperatingSystem.get();
 
     assertEquals(
-        subject.getPath(),
+      subject.getPath(),
 
-        os.acceptOperatingSystemVisitor(new Test(), root)
+      os.acceptOperatingSystemVisitor(new Test(), root)
     );
   }
 
@@ -577,9 +577,9 @@ public class RegularFileTest extends AbstractObjectosFsTest {
     r1 = new File(r0, root.getName());
 
     assertEquals(
-        f.toFile(),
+      f.toFile(),
 
-        new File(r1, "f")
+      new File(r1, "f")
     );
   }
 

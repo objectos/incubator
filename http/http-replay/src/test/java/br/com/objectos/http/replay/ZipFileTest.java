@@ -16,7 +16,6 @@
 package br.com.objectos.http.replay;
 
 import br.com.objectos.core.io.Copy;
-import br.com.objectos.core.throwable.Try;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
@@ -26,6 +25,7 @@ import java.util.Enumeration;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
+import objectos.lang.Try;
 import org.testng.annotations.Test;
 
 public class ZipFileTest {

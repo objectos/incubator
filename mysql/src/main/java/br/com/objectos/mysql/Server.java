@@ -16,7 +16,6 @@
 package br.com.objectos.mysql;
 
 import br.com.objectos.core.service.Service;
-import br.com.objectos.core.throwable.Try;
 import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.RegularFile;
 import br.com.objectos.fs.ResolvedPath;
@@ -28,6 +27,7 @@ import java.nio.charset.Charset;
 import java.nio.charset.CharsetDecoder;
 import java.util.List;
 import objectos.lang.Checks;
+import objectos.lang.Try;
 
 public final class Server extends Executable implements Service {
 

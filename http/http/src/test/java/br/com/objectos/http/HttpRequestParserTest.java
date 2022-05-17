@@ -19,10 +19,10 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 
-import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.concurrent.Concurrent;
 import br.com.objectos.concurrent.CpuTask;
 import br.com.objectos.concurrent.DirectIoWorker;
+import br.com.objectos.core.list.ImmutableList;
 import java.util.HashMap;
 import java.util.Map;
 import org.testng.annotations.BeforeClass;

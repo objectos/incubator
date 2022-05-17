@@ -26,11 +26,11 @@ import br.com.objectos.core.io.Charsets;
 import br.com.objectos.core.io.Write;
 import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.core.system.LineSeparator;
-import br.com.objectos.core.throwable.Try;
 import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.RegularFile;
 import br.com.objectos.fs.testing.TmpDir;
 import java.io.IOException;
+import objectos.lang.Try;
 import org.testng.annotations.Test;
 
 public class MojoRuntimeTest {
@@ -51,15 +51,15 @@ public class MojoRuntimeTest {
 
     try {
       runtime = MojoRuntime.runtime(
-          localRepository(
-              mojoTesting.repository
-          ),
+        localRepository(
+          mojoTesting.repository
+        ),
 
-          mirror(
-              id("mojo"),
-              url(mojoTesting.mirrorUrl),
-              mirrorOf("*")
-          )
+        mirror(
+          id("mojo"),
+          url(mojoTesting.mirrorUrl),
+          mirrorOf("*")
+        )
       );
 
       BuildRequest request;
@@ -74,20 +74,20 @@ public class MojoRuntimeTest {
       pom = basedir.createRegularFile("pom.xml");
 
       Write.string(
-          pom,
+        pom,
 
-          Charsets.utf8(),
+        Charsets.utf8(),
 
-          LineSeparator.join(
-              "<project>",
-              "<modelVersion>4.0.0</modelVersion>",
-              "<groupId>br.com.objectos.mojo</groupId>",
-              "<artifactId>mojo-runtime-it-01</artifactId>",
-              "<version>0.1.0</version>",
-              "<properties>",
-              "</properties>",
-              "</project>"
-          )
+        LineSeparator.join(
+          "<project>",
+          "<modelVersion>4.0.0</modelVersion>",
+          "<groupId>br.com.objectos.mojo</groupId>",
+          "<artifactId>mojo-runtime-it-01</artifactId>",
+          "<version>0.1.0</version>",
+          "<properties>",
+          "</properties>",
+          "</project>"
+        )
       );
 
       request.setPom(pom);

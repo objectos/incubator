@@ -45,10 +45,6 @@
 			<groupId>br.com.objectos</groupId>
 			<artifactId>core-system</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>br.com.objectos</groupId>
-			<artifactId>core-throwable</artifactId>
-		</dependency>
 
 		<dependency>
 			<groupId>br.com.objectos</groupId>

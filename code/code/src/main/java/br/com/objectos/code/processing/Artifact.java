@@ -17,11 +17,11 @@ package br.com.objectos.code.processing;
 
 import br.com.objectos.code.java.io.JavaFile;
 import br.com.objectos.core.list.MutableList;
-import br.com.objectos.core.throwable.Throwables;
 import java.io.IOException;
 import javax.annotation.processing.ProcessingEnvironment;
 import javax.tools.Diagnostic;
 import objectos.lang.Checks;
+import objectos.lang.Throwables;
 
 public abstract class Artifact {
 
@@ -58,7 +58,7 @@ public abstract class Artifact {
 
     processingEnv.getMessager()
         .printMessage(Diagnostic.Kind.ERROR,
-            "Processor threw an exception: " + msg);
+          "Processor threw an exception: " + msg);
   }
 
   public static class Builder {

@@ -17,12 +17,12 @@ package br.com.objectos.concurrent;
 
 import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.core.list.MutableList;
-import br.com.objectos.core.throwable.Throwables;
-import br.com.objectos.core.throwable.Try;
 import java.util.NoSuchElementException;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import objectos.lang.Checks;
+import objectos.lang.Throwables;
+import objectos.lang.Try;
 
 /**
  * A base async computation implementation providing an imperative programming
@@ -473,7 +473,7 @@ public abstract class StageComputationTask<V> implements Computation<V>, CpuTask
   @SuppressWarnings("unchecked")
   protected final <T> T get() throws ClassCastException {
     Checks.checkState(results.size() == 1,
-        "More than one result: getAll() should have been called");
+      "More than one result: getAll() should have been called");
 
     Object o;
     o = results.get(0);

@@ -16,7 +16,6 @@
 package br.com.objectos.git;
 
 import br.com.objectos.core.io.Charsets;
-import br.com.objectos.core.throwable.Try;
 import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.NotRegularFileException;
 import br.com.objectos.fs.PathNameVisitor;
@@ -27,6 +26,7 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import objectos.lang.Checks;
+import objectos.lang.Try;
 
 /**
  * Opens a Git packfile. Resolves the pathname and confirms (or not) that the
@@ -168,7 +168,7 @@ final class OpenPackFile extends AbstractGitEngineTask {
     }
 
     setResult(
-        new IndexedPackFile(indexFile, objectCount, objectId, packFile, packFileSize, version)
+      new IndexedPackFile(indexFile, objectCount, objectId, packFile, packFileSize, version)
     );
 
     return _FINALLY;
@@ -243,7 +243,7 @@ final class OpenPackFile extends AbstractGitEngineTask {
 
   private byte toBadObject(String message) {
     return toError(
-        new BadObjectException(objectId, message)
+      new BadObjectException(objectId, message)
     );
   }
 
@@ -254,7 +254,7 @@ final class OpenPackFile extends AbstractGitEngineTask {
     @Override
     public final Void visitDirectory(Directory directory, OpenPackFile p) throws IOException {
       p.catchThrowable(
-          new NotRegularFileException(directory)
+        new NotRegularFileException(directory)
       );
 
       return null;

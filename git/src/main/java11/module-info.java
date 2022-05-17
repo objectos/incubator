@@ -28,6 +28,5 @@ module br.com.objectos.git {
   requires br.com.objectos.core.map;
   requires br.com.objectos.core.set;
   requires br.com.objectos.core.system;
-  requires br.com.objectos.core.throwable;
   requires objectos.logging;
 }

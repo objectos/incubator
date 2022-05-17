@@ -16,12 +16,12 @@
 package br.com.objectos.fs;
 
 import br.com.objectos.core.io.Copy;
-import br.com.objectos.core.throwable.Try;
 import br.com.objectos.latest.Concrete;
 import java.io.File;
 import java.io.IOException;
 import java.nio.channels.FileChannel;
 import objectos.lang.ToString;
+import objectos.lang.Try;
 
 @Concrete(simpleName = "ObjectImpl")
 abstract class ObjectJavaAny
@@ -102,8 +102,8 @@ abstract class ObjectJavaAny
   @Override
   public final void formatToString(StringBuilder sb, int depth) {
     ToString.formatToString(
-        sb, depth, this,
-        "", getPath()
+      sb, depth, this,
+      "", getPath()
     );
   }
 

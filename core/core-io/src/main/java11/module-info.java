@@ -24,5 +24,4 @@ module br.com.objectos.core.io {
   requires transitive br.com.objectos.core.list;
 
   requires objectos.lang;
-  requires br.com.objectos.core.throwable;
 }

@@ -16,10 +16,10 @@
 package br.com.objectos.mysql;
 
 import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.throwable.Try;
 import br.com.objectos.fs.ResolvedPath;
 import java.io.IOException;
 import java.io.OutputStream;
+import objectos.lang.Try;
 
 final class SetLoginPath extends AbstractClientJob<ImmutableList<String>> {
 

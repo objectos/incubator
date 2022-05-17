@@ -16,7 +16,6 @@
 package br.com.objectos.git;
 
 import br.com.objectos.core.array.ByteArrays;
-import br.com.objectos.core.throwable.Try;
 import br.com.objectos.fs.WritablePathName;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -28,6 +27,7 @@ import java.nio.charset.CharsetDecoder;
 import java.security.MessageDigest;
 import java.util.Arrays;
 import java.util.zip.Deflater;
+import objectos.lang.Try;
 
 final class ByteArrayWriter {
 
@@ -320,7 +320,7 @@ final class ByteArrayWriter {
 
     if (deflate <= 0) {
       throw new AssertionError(
-          "Should not have happened. setInput + finish were called. return=" + deflate);
+        "Should not have happened. setInput + finish were called. return=" + deflate);
     }
 
     index += deflate;

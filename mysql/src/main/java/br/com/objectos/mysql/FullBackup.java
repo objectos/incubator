@@ -16,7 +16,6 @@
 package br.com.objectos.mysql;
 
 import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.throwable.Try;
 import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.RegularFile;
 import br.com.objectos.fs.ResolvedPath;
@@ -24,6 +23,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.zip.GZIPOutputStream;
+import objectos.lang.Try;
 import objectos.logging.Event1;
 import objectos.logging.Event2;
 import objectos.logging.Logger;

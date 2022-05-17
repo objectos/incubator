@@ -49,7 +49,6 @@
 		<module>core-service</module>
 		<module>core-set</module>
 		<module>core-system</module>
-		<module>core-throwable</module>
 	</modules>
 
 	<dependencyManagement>

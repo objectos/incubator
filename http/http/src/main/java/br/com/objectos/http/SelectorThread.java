@@ -16,7 +16,6 @@
 package br.com.objectos.http;
 
 import br.com.objectos.core.net.SocketAddresses;
-import br.com.objectos.core.throwable.Try;
 import java.io.IOException;
 import java.net.SocketAddress;
 import java.nio.channels.SelectionKey;
@@ -24,6 +23,7 @@ import java.nio.channels.Selector;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
 import java.util.Set;
+import objectos.lang.Try;
 
 final class SelectorThread extends Thread {
 
