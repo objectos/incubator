@@ -17,7 +17,7 @@ package br.com.objectos.logger;
 
 import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.core.list.MutableList;
-import br.com.objectos.core.object.Checks;
+import objectos.lang.Checks;
 import objectos.logging.Logger;
 
 /**

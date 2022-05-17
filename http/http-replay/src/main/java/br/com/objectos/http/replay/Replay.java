@@ -16,8 +16,8 @@
 package br.com.objectos.http.replay;
 
 import br.com.objectos.concurrent.IoWorker;
-import br.com.objectos.core.object.Checks;
 import java.net.SocketAddress;
+import objectos.lang.Checks;
 
 public final class Replay {
 

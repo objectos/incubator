@@ -15,7 +15,6 @@
  */
 package br.com.objectos.html.tmpl;
 
-import br.com.objectos.core.object.Checks;
 import br.com.objectos.html.attribute.StandardAttributeName;
 import br.com.objectos.html.element.Doctype;
 import br.com.objectos.html.element.ElementName;
@@ -27,6 +26,7 @@ import br.com.objectos.html.spi.type.AnyElementValue;
 import br.com.objectos.html.spi.type.NonVoidElementValue;
 import br.com.objectos.html.spi.type.Value;
 import br.com.objectos.html.writer.SimpleTemplateWriter;
+import objectos.lang.Checks;
 
 abstract class FragmentOrTemplate extends GeneratedAbstractTemplate {
 

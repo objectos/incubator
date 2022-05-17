@@ -15,11 +15,11 @@
  */
 package br.com.objectos.http.server;
 
-import br.com.objectos.core.object.Checks;
 import br.com.objectos.fs.RegularFile;
 import br.com.objectos.http.media.MediaType;
 import br.com.objectos.http.media.MediaTypes;
 import java.io.IOException;
+import objectos.lang.Checks;
 
 public class FileResponse implements HttpAction, Response {
 

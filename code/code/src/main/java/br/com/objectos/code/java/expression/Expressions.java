@@ -26,7 +26,7 @@ import br.com.objectos.code.java.type.NamedPrimitive;
 import br.com.objectos.code.java.type.NamedReferenceType;
 import br.com.objectos.code.java.type.NamedType;
 import br.com.objectos.core.list.MutableList;
-import br.com.objectos.core.object.Checks;
+import objectos.lang.Checks;
 
 public class Expressions {
 

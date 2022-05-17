@@ -26,7 +26,7 @@ import br.com.objectos.code.java.statement.BlockElement;
 import br.com.objectos.code.java.statement.BlockStatement;
 import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.core.list.MutableList;
-import br.com.objectos.core.object.Checks;
+import objectos.lang.Checks;
 
 public final class ConstructorCode
     extends AbstractCodeElement

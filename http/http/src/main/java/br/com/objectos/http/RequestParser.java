@@ -16,10 +16,10 @@
 package br.com.objectos.http;
 
 import br.com.objectos.concurrent.IoWorker;
-import br.com.objectos.core.object.Checks;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.util.Arrays;
+import objectos.lang.Checks;
 
 public final class RequestParser extends AbstractHttpParser<RequestHeader> {
 

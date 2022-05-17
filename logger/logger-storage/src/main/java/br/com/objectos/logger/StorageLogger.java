@@ -19,9 +19,9 @@ import br.com.objectos.concurrent.CpuWorker;
 import br.com.objectos.concurrent.IoWorker;
 import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.core.list.MutableList;
-import br.com.objectos.core.object.Checks;
 import br.com.objectos.fs.Directory;
 import java.io.IOException;
+import objectos.lang.Checks;
 import objectos.logging.Level;
 
 /**

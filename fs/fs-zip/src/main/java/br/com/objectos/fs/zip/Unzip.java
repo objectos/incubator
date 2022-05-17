@@ -17,7 +17,6 @@ package br.com.objectos.fs.zip;
 
 import br.com.objectos.core.io.Copy;
 import br.com.objectos.core.list.MutableList;
-import br.com.objectos.core.object.Checks;
 import br.com.objectos.core.throwable.Try;
 import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.PathNameVisitor;
@@ -29,6 +28,7 @@ import java.io.InputStream;
 import java.util.Enumeration;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
+import objectos.lang.Checks;
 
 /**
  * @since 2

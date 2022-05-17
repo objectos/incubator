@@ -17,11 +17,11 @@ package br.com.objectos.git;
 
 import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.core.list.MutableList;
-import br.com.objectos.core.object.Checks;
 import java.nio.ByteBuffer;
 import java.nio.charset.CharacterCodingException;
 import java.nio.charset.Charset;
 import java.nio.charset.CharsetDecoder;
+import objectos.lang.Checks;
 import objectos.logging.Event1;
 import objectos.logging.Logger;
 

@@ -15,8 +15,8 @@
  */
 package br.com.objectos.http.path;
 
-import br.com.objectos.core.object.Checks;
 import br.com.objectos.http.server.RequestedPart;
+import objectos.lang.Checks;
 
 final class FixedSlug extends Slug {
 

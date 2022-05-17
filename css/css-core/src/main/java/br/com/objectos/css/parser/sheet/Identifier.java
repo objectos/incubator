@@ -15,7 +15,6 @@
  */
 package br.com.objectos.css.parser.sheet;
 
-import br.com.objectos.core.object.Checks;
 import br.com.objectos.css.keyword.Keywords;
 import br.com.objectos.css.keyword.StandardKeyword;
 import br.com.objectos.css.parser.select.SelectorParser;
@@ -25,6 +24,7 @@ import br.com.objectos.css.type.Color;
 import br.com.objectos.css.type.ColorName;
 import br.com.objectos.css.type.Creator;
 import br.com.objectos.css.type.Marker;
+import objectos.lang.Checks;
 
 class Identifier extends ThisValue {
 

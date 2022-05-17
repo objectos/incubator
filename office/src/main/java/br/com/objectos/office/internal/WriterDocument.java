@@ -15,7 +15,6 @@
  */
 package br.com.objectos.office.internal;
 
-import br.com.objectos.core.object.Checks;
 import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.LocalFs;
 import br.com.objectos.fs.RegularFile;
@@ -35,6 +34,7 @@ import com.sun.star.util.XReplaceDescriptor;
 import com.sun.star.util.XReplaceable;
 import java.io.IOException;
 import java.net.URI;
+import objectos.lang.Checks;
 
 final class WriterDocument extends Document implements WriterDsl {
 

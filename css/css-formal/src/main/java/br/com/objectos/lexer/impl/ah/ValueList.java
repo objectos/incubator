@@ -15,12 +15,12 @@
  */
 package br.com.objectos.lexer.impl.ah;
 
-import br.com.objectos.core.object.Checks;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
 import java.util.Iterator;
 import java.util.List;
+import objectos.lang.Checks;
 
 class ValueList {
 

@@ -17,9 +17,9 @@ package br.com.objectos.git;
 
 import br.com.objectos.core.io.OutputStreamSource;
 import br.com.objectos.core.io.Write;
-import br.com.objectos.core.object.ToString;
 import java.io.IOException;
 import java.nio.charset.Charset;
+import objectos.lang.ToString;
 
 /**
  * A Git blob object resulting from a <em>read blob</em> operation.

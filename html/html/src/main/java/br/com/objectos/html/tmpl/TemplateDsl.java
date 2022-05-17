@@ -17,7 +17,6 @@ package br.com.objectos.html.tmpl;
 
 import br.com.objectos.core.array.CharArrays;
 import br.com.objectos.core.array.IntArrays;
-import br.com.objectos.core.object.Checks;
 import br.com.objectos.html.attribute.AttributeName;
 import br.com.objectos.html.attribute.StandardAttributeName;
 import br.com.objectos.html.element.ElementKind;
@@ -26,6 +25,7 @@ import br.com.objectos.html.spi.tmpl.Marker;
 import br.com.objectos.html.spi.tmpl.Renderer;
 import br.com.objectos.html.spi.type.Value;
 import java.util.Arrays;
+import objectos.lang.Checks;
 
 public class TemplateDsl implements Marker, Renderer {
 

@@ -17,11 +17,11 @@ package br.com.objectos.mojo;
 
 import br.com.objectos.code.annotations.Ignore;
 import br.com.objectos.core.list.Lists;
-import br.com.objectos.core.object.Checks;
 import br.com.objectos.fs.Directory;
 import java.io.Closeable;
 import java.io.File;
 import java.util.List;
+import objectos.lang.Checks;
 import org.apache.maven.Maven;
 import org.apache.maven.artifact.repository.ArtifactRepository;
 import org.apache.maven.bridge.MavenRepositorySystem;

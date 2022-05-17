@@ -17,8 +17,8 @@ package br.com.objectos.core.logging.testing;
 
 import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.core.list.MutableList;
-import br.com.objectos.core.object.Checks;
 import java.util.NoSuchElementException;
+import objectos.lang.Checks;
 import objectos.logging.Event;
 import objectos.logging.Event0;
 import objectos.logging.Event1;

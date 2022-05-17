@@ -21,7 +21,7 @@ import br.com.objectos.code.java.io.CodeWriter;
 import br.com.objectos.code.java.statement.TryStatement.Builder;
 import br.com.objectos.code.java.type.NamedClass;
 import br.com.objectos.code.java.type.NamedType;
-import br.com.objectos.core.object.Checks;
+import objectos.lang.Checks;
 
 public class ResourceElement extends AbstractCodeElement implements TryStatementElement {
 

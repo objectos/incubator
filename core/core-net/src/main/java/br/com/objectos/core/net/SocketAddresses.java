@@ -15,11 +15,11 @@
  */
 package br.com.objectos.core.net;
 
-import br.com.objectos.core.object.Checks;
 import br.com.objectos.latest.Singleton;
 import java.io.IOException;
 import java.net.SocketAddress;
 import java.nio.channels.ServerSocketChannel;
+import objectos.lang.Checks;
 
 /**
  * Provides {@code static} utility methods for working with

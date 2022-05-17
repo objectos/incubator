@@ -18,13 +18,13 @@ package br.com.objectos.git;
 import br.com.objectos.concurrent.CpuArray;
 import br.com.objectos.concurrent.CpuTask;
 import br.com.objectos.concurrent.CpuWorker;
-import br.com.objectos.core.object.Checks;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.security.SecureRandom;
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.Random;
+import objectos.lang.Checks;
 
 final class Git {
 

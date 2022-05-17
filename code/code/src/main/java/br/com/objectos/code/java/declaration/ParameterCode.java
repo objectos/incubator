@@ -26,12 +26,12 @@ import br.com.objectos.code.java.type.NamedType;
 import br.com.objectos.code.java.type.NamedVoid;
 import br.com.objectos.code.util.SimpleElementVisitor;
 import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.object.Checks;
 import java.util.List;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.VariableElement;
 import javax.lang.model.type.TypeMirror;
+import objectos.lang.Checks;
 
 public class ParameterCode extends AbstractImmutableCodeElement
     implements

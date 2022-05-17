@@ -20,9 +20,9 @@ import br.com.objectos.code.java.expression.Expressions;
 import br.com.objectos.code.java.expression.MethodReference;
 import br.com.objectos.code.java.expression.TypeWitness;
 import br.com.objectos.code.java.io.JavaFileImportSet;
-import br.com.objectos.core.object.Checks;
 import javax.lang.model.element.Name;
 import javax.lang.model.element.TypeParameterElement;
+import objectos.lang.Checks;
 
 public class NamedTypeVariable extends NamedReferenceType
     implements

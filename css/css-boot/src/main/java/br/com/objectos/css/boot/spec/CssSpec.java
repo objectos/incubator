@@ -16,7 +16,6 @@
 package br.com.objectos.css.boot.spec;
 
 import br.com.objectos.code.java.expression.Identifier;
-import br.com.objectos.core.object.Checks;
 import br.com.objectos.css.boot.function.FunctionName;
 import br.com.objectos.css.boot.keyword.KeywordName;
 import br.com.objectos.css.boot.property.ParameterType;
@@ -27,6 +26,7 @@ import br.com.objectos.css.boot.type.Primitive;
 import br.com.objectos.css.boot.type.PrimitiveType;
 import br.com.objectos.css.boot.type.Value;
 import br.com.objectos.css.boot.type.ValueType;
+import objectos.lang.Checks;
 
 public abstract class CssSpec {
 

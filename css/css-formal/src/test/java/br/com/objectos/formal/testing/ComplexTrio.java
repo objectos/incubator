@@ -15,8 +15,8 @@
  */
 package br.com.objectos.formal.testing;
 
-import br.com.objectos.core.object.ToString;
 import java.util.Objects;
+import objectos.lang.ToString;
 
 public class ComplexTrio implements IsComplex {
 

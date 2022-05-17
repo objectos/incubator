@@ -21,7 +21,7 @@ import br.com.objectos.code.java.element.CodeElement;
 import br.com.objectos.code.java.element.Keywords;
 import br.com.objectos.code.java.type.NamedClassOrParameterized;
 import br.com.objectos.core.list.MutableList;
-import br.com.objectos.core.object.Checks;
+import objectos.lang.Checks;
 
 public class Implements extends AbstractImmutableCodeElement
     implements

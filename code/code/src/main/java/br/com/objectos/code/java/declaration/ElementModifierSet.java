@@ -20,9 +20,9 @@ import br.com.objectos.code.java.element.Symbols;
 import br.com.objectos.code.java.io.CodeWriter;
 import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.core.list.MutableList;
-import br.com.objectos.core.object.Checks;
 import java.util.Iterator;
 import java.util.Locale;
+import objectos.lang.Checks;
 
 abstract class ElementModifierSet extends AbstractCodeElement {
 

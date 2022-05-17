@@ -16,7 +16,7 @@
 package br.com.objectos.git;
 
 import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.object.ToString;
+import objectos.lang.ToString;
 
 /**
  * A Git tree object resulting from a <em>read tree</em> operation.

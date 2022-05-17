@@ -16,10 +16,10 @@
 package br.com.objectos.css.specgen.spec;
 
 import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.object.Checks;
-import br.com.objectos.core.object.ToString;
 import java.io.Serializable;
 import java.util.Objects;
+import objectos.lang.Checks;
+import objectos.lang.ToString;
 
 public class Property implements Comparable<Property>, Serializable {
 

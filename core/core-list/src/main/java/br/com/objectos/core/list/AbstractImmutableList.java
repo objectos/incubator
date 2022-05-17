@@ -16,10 +16,10 @@
 package br.com.objectos.core.list;
 
 import br.com.objectos.core.collection.ImmutableCollection;
-import br.com.objectos.core.object.Checks;
 import br.com.objectos.latest.Concrete;
 import java.util.Collection;
 import java.util.Iterator;
+import objectos.lang.Checks;
 
 /**
  * An array-based {@link br.com.objectos.core.collection.ImmutableCollection}

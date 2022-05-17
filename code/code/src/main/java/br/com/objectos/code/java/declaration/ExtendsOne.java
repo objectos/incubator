@@ -16,7 +16,7 @@
 package br.com.objectos.code.java.declaration;
 
 import br.com.objectos.code.java.type.NamedClassOrParameterized;
-import br.com.objectos.core.object.Checks;
+import objectos.lang.Checks;
 
 public final class ExtendsOne
     implements

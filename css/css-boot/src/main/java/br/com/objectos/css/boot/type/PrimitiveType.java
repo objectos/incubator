@@ -22,10 +22,10 @@ import br.com.objectos.code.java.declaration.ExtendsMany;
 import br.com.objectos.code.java.type.NamedArray;
 import br.com.objectos.code.java.type.NamedClass;
 import br.com.objectos.code.java.type.NamedType;
-import br.com.objectos.core.object.Checks;
 import br.com.objectos.core.set.Sets;
 import br.com.objectos.css.boot.property.ParameterType;
 import java.util.Set;
+import objectos.lang.Checks;
 
 public class PrimitiveType implements ParameterType, Value {
 

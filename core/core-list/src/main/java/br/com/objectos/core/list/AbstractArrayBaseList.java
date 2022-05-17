@@ -18,14 +18,14 @@ package br.com.objectos.core.list;
 import br.com.objectos.core.array.ObjectArrays;
 import br.com.objectos.core.collection.AbstractBaseCollection;
 import br.com.objectos.core.collection.UnmodifiableIterator;
-import br.com.objectos.core.object.Checks;
-import br.com.objectos.core.object.HashCode;
-import br.com.objectos.core.object.ToString;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.NoSuchElementException;
 import java.util.RandomAccess;
+import objectos.lang.Checks;
+import objectos.lang.HashCode;
+import objectos.lang.ToString;
 
 abstract class AbstractArrayBaseList<E>
     extends AbstractBaseCollection<E>

@@ -15,12 +15,12 @@
  */
 package br.com.objectos.css.io;
 
-import br.com.objectos.core.object.Checks;
 import br.com.objectos.css.property.StandardPropertyName;
 import br.com.objectos.css.select.Combinator;
 import br.com.objectos.css.sheet.CompiledStyleSheet;
 import br.com.objectos.css.type.ColorHex;
 import java.io.IOException;
+import objectos.lang.Checks;
 
 public class MinifiedCssWriter extends CssWriter {
 

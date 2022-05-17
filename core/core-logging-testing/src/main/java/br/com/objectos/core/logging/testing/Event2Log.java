@@ -15,8 +15,8 @@
  */
 package br.com.objectos.core.logging.testing;
 
-import br.com.objectos.core.object.Equals;
-import br.com.objectos.core.object.ToString;
+import objectos.lang.Equals;
+import objectos.lang.ToString;
 import objectos.logging.Event;
 import objectos.logging.Event2;
 

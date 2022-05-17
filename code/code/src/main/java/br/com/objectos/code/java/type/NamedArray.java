@@ -23,7 +23,7 @@ import br.com.objectos.code.java.expression.MethodReference;
 import br.com.objectos.code.java.expression.TypeWitness;
 import br.com.objectos.code.java.io.CodeWriter;
 import br.com.objectos.code.java.io.JavaFileImportSet;
-import br.com.objectos.core.object.Checks;
+import objectos.lang.Checks;
 
 public abstract class NamedArray extends NamedReferenceType {
 

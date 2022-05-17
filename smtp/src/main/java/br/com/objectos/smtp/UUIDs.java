@@ -15,8 +15,8 @@
  */
 package br.com.objectos.smtp;
 
-import br.com.objectos.core.object.Checks;
 import java.util.UUID;
+import objectos.lang.Checks;
 
 public class UUIDs {
 

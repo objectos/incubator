@@ -19,7 +19,6 @@ import static java.nio.file.StandardWatchEventKinds.ENTRY_CREATE;
 import static java.nio.file.StandardWatchEventKinds.ENTRY_DELETE;
 import static java.nio.file.StandardWatchEventKinds.ENTRY_MODIFY;
 
-import br.com.objectos.core.object.Checks;
 import br.com.objectos.fs.watch.Watch.Event;
 import br.com.objectos.fs.watch.Watch.Option;
 import br.com.objectos.fs.watch.WatchServiceJava7.Builder;
@@ -27,6 +26,7 @@ import br.com.objectos.latest.Concrete;
 import java.io.IOException;
 import java.nio.file.WatchEvent;
 import java.util.Set;
+import objectos.lang.Checks;
 
 @Concrete.Bridge
 class FactoryJava7 extends FactoryJavaAny {

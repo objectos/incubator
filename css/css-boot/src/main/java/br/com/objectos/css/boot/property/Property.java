@@ -26,11 +26,11 @@ import br.com.objectos.code.java.expression.ExpressionName;
 import br.com.objectos.code.java.expression.Identifier;
 import br.com.objectos.code.java.expression.Literal;
 import br.com.objectos.code.java.type.NamedClass;
-import br.com.objectos.core.object.ToString;
 import br.com.objectos.css.boot.sheet.FunctionOrProperty;
 import br.com.objectos.css.boot.sheet.GeneratedStyleSheetStep;
 import br.com.objectos.css.boot.sheet.SheetNames;
 import java.util.Locale;
+import objectos.lang.ToString;
 
 public class Property implements Comparable<Property>, FunctionOrProperty {
 

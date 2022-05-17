@@ -15,9 +15,9 @@
  */
 package br.com.objectos.mysql;
 
-import br.com.objectos.core.object.Checks;
 import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.ResolvedPath;
+import objectos.lang.Checks;
 
 final class ServerOnlyOption extends AbstractOption implements ServerOption {
 

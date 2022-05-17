@@ -20,7 +20,6 @@ import br.com.objectos.code.java.type.NamedType;
 import br.com.objectos.code.model.AnnotatedElementOrType;
 import br.com.objectos.code.model.element.ProcessingAnnotation;
 import br.com.objectos.code.util.SimpleTypeVisitor;
-import br.com.objectos.core.object.Checks;
 import br.com.objectos.latest.Concrete;
 import java.util.Locale;
 import javax.annotation.processing.ProcessingEnvironment;
@@ -38,6 +37,7 @@ import javax.lang.model.type.TypeVariable;
 import javax.lang.model.type.WildcardType;
 import javax.lang.model.util.Elements;
 import javax.lang.model.util.Types;
+import objectos.lang.Checks;
 
 @Concrete(modifiers = "public abstract", simpleName = "PTypeMirror")
 abstract class PTypeMirrorJavaAny extends AnnotatedElementOrType {

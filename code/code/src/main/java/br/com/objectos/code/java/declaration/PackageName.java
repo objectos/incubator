@@ -39,11 +39,11 @@ import br.com.objectos.code.java.io.JavaFileCodeElement;
 import br.com.objectos.code.java.type.NamedClass;
 import br.com.objectos.code.java.type.NamedClassOrPackage;
 import br.com.objectos.code.model.element.ProcessingPackage;
-import br.com.objectos.core.object.Checks;
 import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.ResolvedPath;
 import java.io.IOException;
 import javax.lang.model.SourceVersion;
+import objectos.lang.Checks;
 
 public class PackageName implements NamedClassOrPackage, JavaFileCodeElement {
 

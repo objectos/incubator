@@ -18,7 +18,6 @@ package br.com.objectos.code.model;
 import br.com.objectos.code.model.element.ProcessingAnnotation;
 import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.core.list.MutableList;
-import br.com.objectos.core.object.Checks;
 import java.lang.annotation.Annotation;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -29,6 +28,7 @@ import javax.lang.model.element.TypeElement;
 import javax.lang.model.type.TypeMirror;
 import javax.lang.model.util.Elements;
 import javax.lang.model.util.Types;
+import objectos.lang.Checks;
 
 public abstract class AnnotatedElementOrType {
 

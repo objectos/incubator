@@ -15,8 +15,8 @@
  */
 package br.com.objectos.git;
 
-import br.com.objectos.core.object.ToString;
 import br.com.objectos.fs.Directory;
+import objectos.lang.ToString;
 
 final class MaterializeEntryTask extends AbstractGitTask<MaterializedEntry> {
 

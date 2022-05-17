@@ -15,8 +15,8 @@
  */
 package br.com.objectos.more.logging.slf4j;
 
-import br.com.objectos.core.object.Checks;
 import br.com.objectos.logger.StorageLogger;
+import objectos.lang.Checks;
 import org.slf4j.impl.StaticLoggerBinder;
 
 public final class MoreLoggingAndSlf4j {

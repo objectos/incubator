@@ -15,8 +15,8 @@
  */
 package br.com.objectos.mojo;
 
-import br.com.objectos.core.object.Checks;
 import java.util.Properties;
+import objectos.lang.Checks;
 
 public class SystemProperty implements MvnOption {
 

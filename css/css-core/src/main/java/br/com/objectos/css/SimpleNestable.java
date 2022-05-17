@@ -15,9 +15,9 @@
  */
 package br.com.objectos.css;
 
-import br.com.objectos.core.object.Equals;
 import java.util.Arrays;
 import java.util.List;
+import objectos.lang.Equals;
 
 class SimpleNestable implements Nestable {
 

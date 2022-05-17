@@ -20,7 +20,7 @@ import br.com.objectos.code.java.element.Keywords;
 import br.com.objectos.code.java.expression.production.ClassInstanceCreationExpression;
 import br.com.objectos.code.java.io.CodeWriter;
 import br.com.objectos.code.java.type.NamedClass;
-import br.com.objectos.core.object.Checks;
+import objectos.lang.Checks;
 
 public class NewClass extends AbstractStatementExpression
     implements

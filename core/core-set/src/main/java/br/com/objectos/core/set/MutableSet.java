@@ -17,12 +17,12 @@ package br.com.objectos.core.set;
 
 import br.com.objectos.core.array.ObjectArrays;
 import br.com.objectos.core.collection.MutableCollection;
-import br.com.objectos.core.object.Checks;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.RandomAccess;
 import java.util.Set;
+import objectos.lang.Checks;
 
 /**
  * A hash-based implementation of the {@link Set} and {@link MutableCollection}

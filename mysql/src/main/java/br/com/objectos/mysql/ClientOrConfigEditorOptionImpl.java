@@ -15,7 +15,7 @@
  */
 package br.com.objectos.mysql;
 
-import br.com.objectos.core.object.Checks;
+import objectos.lang.Checks;
 
 final class ClientOrConfigEditorOptionImpl
     extends AbstractOption

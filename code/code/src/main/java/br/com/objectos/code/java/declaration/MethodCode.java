@@ -35,10 +35,10 @@ import br.com.objectos.code.model.element.ProcessingMethod;
 import br.com.objectos.code.model.element.ProcessingParameter;
 import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.core.list.MutableList;
-import br.com.objectos.core.object.Checks;
 import java.lang.annotation.Annotation;
 import java.util.Set;
 import javax.lang.model.element.ExecutableElement;
+import objectos.lang.Checks;
 
 public final class MethodCode
     extends AbstractCodeElement

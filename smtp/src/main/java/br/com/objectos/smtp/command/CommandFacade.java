@@ -15,7 +15,6 @@
  */
 package br.com.objectos.smtp.command;
 
-import br.com.objectos.core.object.Checks;
 import br.com.objectos.smtp.mail.ClientName;
 import br.com.objectos.smtp.mail.ForwardPath;
 import br.com.objectos.smtp.mail.ReversePath;
@@ -23,6 +22,7 @@ import br.com.objectos.smtp.mail.ReversePathException;
 import br.com.objectos.smtp.mail.ReversePathFacade;
 import java.io.IOException;
 import java.nio.channels.ReadableByteChannel;
+import objectos.lang.Checks;
 
 public class CommandFacade {
 

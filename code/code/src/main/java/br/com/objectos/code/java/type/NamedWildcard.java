@@ -16,7 +16,7 @@
 package br.com.objectos.code.java.type;
 
 import br.com.objectos.code.java.io.JavaFileImportSet;
-import br.com.objectos.core.object.Checks;
+import objectos.lang.Checks;
 
 public abstract class NamedWildcard extends NamedType {
 

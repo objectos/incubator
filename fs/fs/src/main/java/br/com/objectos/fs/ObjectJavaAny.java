@@ -16,12 +16,12 @@
 package br.com.objectos.fs;
 
 import br.com.objectos.core.io.Copy;
-import br.com.objectos.core.object.ToString;
 import br.com.objectos.core.throwable.Try;
 import br.com.objectos.latest.Concrete;
 import java.io.File;
 import java.io.IOException;
 import java.nio.channels.FileChannel;
+import objectos.lang.ToString;
 
 @Concrete(simpleName = "ObjectImpl")
 abstract class ObjectJavaAny

@@ -38,8 +38,6 @@ import br.com.objectos.code.java.expression.MethodInvocation;
 import br.com.objectos.code.java.type.NamedArray;
 import br.com.objectos.code.java.type.NamedClass;
 import br.com.objectos.code.java.type.NamedType;
-import br.com.objectos.core.object.Checks;
-import br.com.objectos.core.object.ToString;
 import br.com.objectos.core.set.Sets;
 import br.com.objectos.css.boot.CssBoot;
 import br.com.objectos.css.boot.property.ParameterType;
@@ -49,6 +47,8 @@ import br.com.objectos.css.boot.type.Value;
 import br.com.objectos.css.boot.type.ValueType;
 import java.util.Set;
 import javax.lang.model.SourceVersion;
+import objectos.lang.Checks;
+import objectos.lang.ToString;
 
 public class KeywordName implements Comparable<KeywordName>, ParameterType, Value {
 

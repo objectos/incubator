@@ -15,8 +15,8 @@
  */
 package br.com.objectos.tools;
 
-import br.com.objectos.core.object.Checks;
 import java.util.Map;
+import objectos.lang.Checks;
 
 public final class Compilation {
 

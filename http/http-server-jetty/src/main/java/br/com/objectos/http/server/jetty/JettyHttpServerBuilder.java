@@ -15,13 +15,13 @@
  */
 package br.com.objectos.http.server.jetty;
 
-import br.com.objectos.core.object.Checks;
 import br.com.objectos.http.path.Router;
 import br.com.objectos.http.server.HttpModule;
 import br.com.objectos.http.server.HttpServerBuilder;
 import br.com.objectos.http.server.ImmutableHttpServer;
 import br.com.objectos.http.server.MutableHttpServer;
 import java.net.InetSocketAddress;
+import objectos.lang.Checks;
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Server;
 

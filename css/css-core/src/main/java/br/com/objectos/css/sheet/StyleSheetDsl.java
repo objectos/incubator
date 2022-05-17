@@ -20,7 +20,6 @@ import br.com.objectos.core.array.DoubleArrays;
 import br.com.objectos.core.array.IntArrays;
 import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.core.list.MutableList;
-import br.com.objectos.core.object.Checks;
 import br.com.objectos.css.function.StandardFunctionName;
 import br.com.objectos.css.keyword.StandardKeyword;
 import br.com.objectos.css.property.StandardPropertyName;
@@ -41,6 +40,7 @@ import br.com.objectos.css.type.LengthUnit;
 import br.com.objectos.css.type.Marker;
 import br.com.objectos.css.type.Value;
 import java.util.Arrays;
+import objectos.lang.Checks;
 
 public class StyleSheetDsl implements Creator, Marker {
 

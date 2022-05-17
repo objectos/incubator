@@ -35,8 +35,6 @@ import br.com.objectos.code.java.expression.MethodReference;
 import br.com.objectos.code.java.expression.TypeWitness;
 import br.com.objectos.code.java.io.JavaFileImportSet;
 import br.com.objectos.core.list.Lists;
-import br.com.objectos.core.object.Checks;
-import br.com.objectos.core.object.HashCode;
 import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.RegularFile;
 import java.io.IOException;
@@ -48,6 +46,8 @@ import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.Name;
 import javax.lang.model.element.PackageElement;
 import javax.lang.model.element.TypeElement;
+import objectos.lang.Checks;
+import objectos.lang.HashCode;
 
 public class NamedClass extends NamedClassOrParameterized
     implements

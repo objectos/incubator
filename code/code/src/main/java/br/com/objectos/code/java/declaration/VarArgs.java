@@ -18,7 +18,7 @@ package br.com.objectos.code.java.declaration;
 import br.com.objectos.code.java.element.AbstractImmutableCodeElement;
 import br.com.objectos.code.java.element.CodeElement;
 import br.com.objectos.code.java.type.NamedArray;
-import br.com.objectos.core.object.Checks;
+import objectos.lang.Checks;
 
 public class VarArgs extends AbstractImmutableCodeElement implements ParameterTypeName {
 

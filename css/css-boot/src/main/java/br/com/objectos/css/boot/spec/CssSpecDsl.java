@@ -16,7 +16,6 @@
 package br.com.objectos.css.boot.spec;
 
 import br.com.objectos.core.map.Maps;
-import br.com.objectos.core.object.Checks;
 import br.com.objectos.core.set.MutableSet;
 import br.com.objectos.core.set.Sets;
 import br.com.objectos.css.boot.function.FunctionName;
@@ -32,6 +31,7 @@ import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.Map;
 import java.util.Set;
+import objectos.lang.Checks;
 
 public class CssSpecDsl {
 

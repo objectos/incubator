@@ -15,8 +15,8 @@
  */
 package br.com.objectos.css.keyword;
 
-import br.com.objectos.core.object.ToString;
 import br.com.objectos.css.type.Value;
+import objectos.lang.ToString;
 
 public abstract class Keyword implements Value {
 

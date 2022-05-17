@@ -15,7 +15,6 @@
  */
 package br.com.objectos.css.sheet;
 
-import br.com.objectos.core.object.Checks;
 import br.com.objectos.css.Css;
 import br.com.objectos.css.function.StandardFunctionName;
 import br.com.objectos.css.io.MinifiedCssWriter;
@@ -44,6 +43,7 @@ import br.com.objectos.css.type.StringType;
 import br.com.objectos.css.type.UriType;
 import br.com.objectos.css.type.Value;
 import br.com.objectos.css.type.Zero;
+import objectos.lang.Checks;
 
 public abstract class AbstractStyleSheet extends GeneratedStyleSheet
     implements

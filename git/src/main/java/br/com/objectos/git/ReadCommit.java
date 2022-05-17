@@ -16,12 +16,12 @@
 package br.com.objectos.git;
 
 import br.com.objectos.core.list.MutableList;
-import br.com.objectos.core.object.Checks;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.nio.charset.Charset;
 import java.nio.charset.CharsetDecoder;
 import java.nio.charset.CoderResult;
+import objectos.lang.Checks;
 import objectos.logging.Event1;
 import objectos.logging.Logger;
 

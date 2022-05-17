@@ -15,11 +15,11 @@
  */
 package br.com.objectos.code.jdt;
 
-import br.com.objectos.core.object.Checks;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import objectos.lang.Checks;
 import org.eclipse.jdt.internal.compiler.env.ICompilationUnit;
 
 public class CompilationUnits {

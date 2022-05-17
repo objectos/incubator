@@ -15,12 +15,12 @@
  */
 package br.com.objectos.smtp.server;
 
-import br.com.objectos.core.object.Checks;
 import br.com.objectos.smtp.command.CommandFacade;
 import br.com.objectos.smtp.command.CommandVisitor;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.ReadableByteChannel;
+import objectos.lang.Checks;
 
 public class RequestFacade {
 

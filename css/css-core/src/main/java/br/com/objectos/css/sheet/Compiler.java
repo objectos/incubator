@@ -16,8 +16,8 @@
 package br.com.objectos.css.sheet;
 
 import br.com.objectos.core.array.IntArrays;
-import br.com.objectos.core.object.Checks;
 import java.util.Arrays;
+import objectos.lang.Checks;
 
 final class Compiler {
 

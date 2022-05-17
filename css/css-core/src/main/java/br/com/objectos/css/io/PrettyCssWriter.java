@@ -15,11 +15,11 @@
  */
 package br.com.objectos.css.io;
 
-import br.com.objectos.core.object.Checks;
 import br.com.objectos.css.property.StandardPropertyName;
 import br.com.objectos.css.select.Combinator;
 import br.com.objectos.css.sheet.CompiledStyleSheet;
 import java.io.IOException;
+import objectos.lang.Checks;
 
 public class PrettyCssWriter extends CssWriter {
 

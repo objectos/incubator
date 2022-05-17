@@ -17,12 +17,12 @@ package br.com.objectos.git;
 
 import br.com.objectos.concurrent.Concurrent;
 import br.com.objectos.core.io.Charsets;
-import br.com.objectos.core.object.Checks;
 import br.com.objectos.core.set.ImmutableSet;
 import br.com.objectos.fs.RegularFile;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.zip.Deflater;
+import objectos.lang.Checks;
 
 final class CopyObjects extends AbstractGitEngineTask {
 

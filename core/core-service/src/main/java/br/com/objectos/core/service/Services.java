@@ -15,8 +15,8 @@
  */
 package br.com.objectos.core.service;
 
-import br.com.objectos.core.object.Checks;
 import br.com.objectos.core.runtime.ShutdownHook;
+import objectos.lang.Checks;
 
 /**
  * Provides {@code static} utility methods for {@link Service} instances.

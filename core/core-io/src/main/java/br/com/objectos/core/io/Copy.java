@@ -15,11 +15,11 @@
  */
 package br.com.objectos.core.io;
 
-import br.com.objectos.core.object.Checks;
 import br.com.objectos.core.throwable.Try;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import objectos.lang.Checks;
 
 /**
  * Provides {@code static} methods for copying all bytes from one object to

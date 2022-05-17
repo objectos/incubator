@@ -16,9 +16,9 @@
 package br.com.objectos.code.jdt;
 
 import br.com.objectos.core.list.Lists;
-import br.com.objectos.core.object.Checks;
 import java.util.List;
 import javax.annotation.processing.Processor;
+import objectos.lang.Checks;
 import org.eclipse.jdt.internal.compiler.AbstractAnnotationProcessorManager;
 import org.eclipse.jdt.internal.compiler.Compiler;
 

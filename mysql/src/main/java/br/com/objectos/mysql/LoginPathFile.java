@@ -15,12 +15,12 @@
  */
 package br.com.objectos.mysql;
 
-import br.com.objectos.core.object.Checks;
 import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.PathName;
 import br.com.objectos.fs.SimplePathNameVisitor;
 import java.io.IOException;
 import java.util.Map;
+import objectos.lang.Checks;
 
 public final class LoginPathFile {
 

@@ -15,7 +15,6 @@
  */
 package br.com.objectos.fs;
 
-import br.com.objectos.core.object.Checks;
 import br.com.objectos.core.system.OperatingSystem;
 import br.com.objectos.latest.Concrete.Bridge;
 import br.com.objectos.latest.Concrete.Constructor;
@@ -43,6 +42,7 @@ import java.nio.file.attribute.BasicFileAttributes;
 import java.nio.file.attribute.FileAttribute;
 import java.nio.file.attribute.FileTime;
 import java.util.Iterator;
+import objectos.lang.Checks;
 
 @Bridge
 abstract class ObjectJava7 extends ObjectJavaAny {

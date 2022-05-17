@@ -15,12 +15,12 @@
  */
 package br.com.objectos.git;
 
-import br.com.objectos.core.object.ToString;
 import br.com.objectos.fs.Posix;
 import br.com.objectos.fs.RegularFile;
 import br.com.objectos.fs.ResolvedPath;
 import java.io.IOException;
 import java.nio.charset.Charset;
+import objectos.lang.ToString;
 
 /**
  * A Git tree entry resulting from a <em>read tree</em> operation.

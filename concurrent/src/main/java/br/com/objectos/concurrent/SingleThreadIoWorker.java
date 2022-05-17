@@ -15,9 +15,9 @@
  */
 package br.com.objectos.concurrent;
 
-import br.com.objectos.core.object.Checks;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingDeque;
+import objectos.lang.Checks;
 import objectos.logging.Event1;
 import objectos.logging.Logger;
 

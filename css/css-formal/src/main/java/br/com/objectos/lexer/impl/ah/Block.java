@@ -15,9 +15,9 @@
  */
 package br.com.objectos.lexer.impl.ah;
 
-import br.com.objectos.core.object.Checks;
 import br.com.objectos.lexer.charexp.CharExpression;
 import java.util.Objects;
+import objectos.lang.Checks;
 
 abstract class Block {
 

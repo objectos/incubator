@@ -16,7 +16,7 @@
 package br.com.objectos.css.boot.property;
 
 import br.com.objectos.code.java.expression.Identifier;
-import br.com.objectos.core.object.Checks;
+import objectos.lang.Checks;
 
 public enum PropertyKind {
 

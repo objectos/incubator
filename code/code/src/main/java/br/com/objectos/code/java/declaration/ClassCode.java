@@ -27,11 +27,11 @@ import br.com.objectos.code.java.type.NamedClassOrParameterized;
 import br.com.objectos.code.java.type.NamedTypeParameter;
 import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.core.list.MutableList;
-import br.com.objectos.core.object.Checks;
 import java.lang.annotation.Annotation;
 import java.util.List;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.TypeParameterElement;
+import objectos.lang.Checks;
 
 public class ClassCode extends AbstractTypeCode {
 

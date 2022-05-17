@@ -15,11 +15,11 @@
  */
 package br.com.objectos.concurrent;
 
-import br.com.objectos.core.object.Checks;
-import br.com.objectos.core.object.ToString;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.locks.LockSupport;
+import objectos.lang.Checks;
+import objectos.lang.ToString;
 import objectos.logging.Event0;
 import objectos.logging.Event1;
 import objectos.logging.Logger;

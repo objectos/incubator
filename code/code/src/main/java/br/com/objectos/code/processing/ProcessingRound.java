@@ -22,7 +22,6 @@ import br.com.objectos.code.model.element.ProcessingPackage;
 import br.com.objectos.code.model.element.ProcessingPackageReprocessor;
 import br.com.objectos.code.model.element.ProcessingType;
 import br.com.objectos.code.model.element.ProcessingTypeReprocessor;
-import br.com.objectos.core.object.Checks;
 import br.com.objectos.core.set.ImmutableSet;
 import br.com.objectos.core.set.MutableSet;
 import br.com.objectos.core.throwable.Throwables;
@@ -42,6 +41,7 @@ import javax.lang.model.element.PackageElement;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.util.Elements;
 import javax.tools.Diagnostic.Kind;
+import objectos.lang.Checks;
 import javax.tools.FileObject;
 import javax.tools.StandardLocation;
 

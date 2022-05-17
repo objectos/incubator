@@ -15,13 +15,13 @@
  */
 package br.com.objectos.code.processing;
 
-import br.com.objectos.core.object.Checks;
 import java.io.IOException;
 import java.io.OutputStream;
 import javax.annotation.processing.Filer;
 import javax.annotation.processing.ProcessingEnvironment;
 import javax.tools.FileObject;
 import javax.tools.StandardLocation;
+import objectos.lang.Checks;
 
 public abstract class ResourceArtifact extends Artifact {
 

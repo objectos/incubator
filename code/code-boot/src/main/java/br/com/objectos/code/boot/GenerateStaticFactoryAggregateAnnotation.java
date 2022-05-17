@@ -31,8 +31,8 @@ import br.com.objectos.code.processing.type.PDeclaredType;
 import br.com.objectos.code.processing.type.PTypeMirror;
 import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.core.list.MutableList;
-import br.com.objectos.core.object.HashCode;
-import br.com.objectos.core.object.ToString;
+import objectos.lang.HashCode;
+import objectos.lang.ToString;
 
 final class GenerateStaticFactoryAggregateAnnotation {
 

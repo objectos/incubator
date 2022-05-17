@@ -21,8 +21,8 @@ import static br.com.objectos.css.select.Combinator.DESCENDANT;
 import static br.com.objectos.css.select.Combinator.GENERAL_SIBLING;
 import static br.com.objectos.css.select.Combinator.LIST;
 
-import br.com.objectos.core.object.Checks;
 import br.com.objectos.css.select.Selector.Builder;
+import objectos.lang.Checks;
 
 public class SelectorFactory {
 

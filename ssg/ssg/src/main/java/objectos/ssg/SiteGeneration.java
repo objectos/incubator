@@ -15,8 +15,8 @@
  */
 package objectos.ssg;
 
-import br.com.objectos.core.object.Checks;
 import java.io.IOException;
+import objectos.lang.Checks;
 import objectos.ssg.Site.RenderingOption;
 
 final class SiteGeneration extends SiteConfiguration {

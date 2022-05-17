@@ -15,12 +15,12 @@
  */
 package br.com.objectos.core.io;
 
-import br.com.objectos.core.object.Checks;
 import br.com.objectos.core.throwable.Try;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.Writer;
 import java.nio.charset.Charset;
+import objectos.lang.Checks;
 
 /**
  * Provides {@code static} methods for writing to {@link OutputStream} and

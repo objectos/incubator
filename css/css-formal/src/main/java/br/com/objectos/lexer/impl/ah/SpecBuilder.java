@@ -15,7 +15,6 @@
  */
 package br.com.objectos.lexer.impl.ah;
 
-import br.com.objectos.core.object.Checks;
 import br.com.objectos.lexer.charexp.CharExpression;
 import br.com.objectos.lexer.grammar.LexerGrammar;
 import br.com.objectos.lexer.lang.Constructor1;
@@ -23,6 +22,7 @@ import br.com.objectos.lexer.lang.Constructor2;
 import br.com.objectos.lexer.lang.Constructor3;
 import java.util.EnumSet;
 import java.util.Objects;
+import objectos.lang.Checks;
 
 class SpecBuilder {
 

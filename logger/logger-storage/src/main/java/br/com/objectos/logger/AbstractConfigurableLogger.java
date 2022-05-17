@@ -15,7 +15,7 @@
  */
 package br.com.objectos.logger;
 
-import br.com.objectos.core.object.Checks;
+import objectos.lang.Checks;
 import objectos.logging.Event;
 import objectos.logging.Event0;
 import objectos.logging.Event1;

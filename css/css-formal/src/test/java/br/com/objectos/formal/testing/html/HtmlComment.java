@@ -15,8 +15,8 @@
  */
 package br.com.objectos.formal.testing.html;
 
-import br.com.objectos.core.object.ToString;
 import br.com.objectos.formal.testing.Token;
+import objectos.lang.ToString;
 
 public class HtmlComment implements Token {
 

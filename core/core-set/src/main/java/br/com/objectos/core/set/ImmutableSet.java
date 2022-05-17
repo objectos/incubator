@@ -17,10 +17,10 @@ package br.com.objectos.core.set;
 
 import br.com.objectos.core.array.ObjectArrays;
 import br.com.objectos.core.collection.ImmutableCollection;
-import br.com.objectos.core.object.Checks;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Set;
+import objectos.lang.Checks;
 
 /**
  * A hash-based implementation of the {@link Set} and

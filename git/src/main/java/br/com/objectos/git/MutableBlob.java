@@ -16,9 +16,9 @@
 package br.com.objectos.git;
 
 import br.com.objectos.core.array.ByteArrays;
-import br.com.objectos.core.object.Checks;
-import br.com.objectos.core.object.ToString;
 import java.nio.charset.Charset;
+import objectos.lang.Checks;
+import objectos.lang.ToString;
 
 /**
  * A class for creating an arbitrary blob object suitable for writing to a

@@ -15,7 +15,6 @@
  */
 package br.com.objectos.smtp.server;
 
-import br.com.objectos.core.object.Checks;
 import br.com.objectos.smtp.command.CommandVisitor;
 import br.com.objectos.smtp.mail.ClientName;
 import br.com.objectos.smtp.mail.ForwardPath;
@@ -23,6 +22,7 @@ import br.com.objectos.smtp.mail.ReversePath;
 import java.io.Closeable;
 import java.io.IOException;
 import java.nio.channels.ByteChannel;
+import objectos.lang.Checks;
 
 // @NotThreadSafe
 final class NonBlockingSession implements Session {

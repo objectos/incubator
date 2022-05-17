@@ -20,7 +20,7 @@ import br.com.objectos.code.java.element.AbstractImmutableCodeElement;
 import br.com.objectos.code.java.element.CodeElement;
 import br.com.objectos.code.java.expression.Arguments;
 import br.com.objectos.code.java.expression.Identifier;
-import br.com.objectos.core.object.Checks;
+import objectos.lang.Checks;
 
 public class EnumConstantCode
     extends AbstractImmutableCodeElement

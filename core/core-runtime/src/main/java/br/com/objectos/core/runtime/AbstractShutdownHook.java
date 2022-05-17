@@ -15,12 +15,12 @@
  */
 package br.com.objectos.core.runtime;
 
-import br.com.objectos.core.object.Checks;
 import br.com.objectos.latest.Concrete;
 import java.io.Closeable;
 import java.lang.Thread.State;
 import java.util.ArrayList;
 import java.util.List;
+import objectos.lang.Checks;
 import objectos.logging.Event0;
 import objectos.logging.Event1;
 import objectos.logging.Logger;

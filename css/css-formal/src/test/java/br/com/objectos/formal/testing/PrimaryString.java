@@ -15,7 +15,7 @@
  */
 package br.com.objectos.formal.testing;
 
-import br.com.objectos.core.object.ToString;
+import objectos.lang.ToString;
 
 public class PrimaryString implements IsPrimary {
 

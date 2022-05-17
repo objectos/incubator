@@ -17,7 +17,6 @@ package br.com.objectos.fs.watch;
 
 import br.com.objectos.core.map.ImmutableMap;
 import br.com.objectos.core.map.MutableMap;
-import br.com.objectos.core.object.Checks;
 import br.com.objectos.core.set.ImmutableSet;
 import br.com.objectos.core.throwable.Try;
 import br.com.objectos.fs.Directory;
@@ -31,6 +30,7 @@ import java.nio.file.WatchKey;
 import java.util.Collection;
 import java.util.EnumSet;
 import java.util.Set;
+import objectos.lang.Checks;
 
 final class WatchServiceJava7 implements Watch.Service {
 

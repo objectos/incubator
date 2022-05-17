@@ -20,7 +20,6 @@ import br.com.objectos.concurrent.IoTask;
 import br.com.objectos.concurrent.IoWorker;
 import br.com.objectos.core.array.CharArrays;
 import br.com.objectos.core.io.Charsets;
-import br.com.objectos.core.object.Checks;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
@@ -32,6 +31,7 @@ import java.nio.charset.CharsetEncoder;
 import java.nio.charset.CoderResult;
 import java.text.DateFormat;
 import java.util.Date;
+import objectos.lang.Checks;
 import objectos.logging.Logger;
 
 /**

@@ -16,7 +16,6 @@
 package br.com.objectos.core.map;
 
 import br.com.objectos.core.collection.UnmodifiableIterator;
-import br.com.objectos.core.object.Checks;
 import java.util.AbstractMap;
 import java.util.AbstractMap.SimpleEntry;
 import java.util.HashMap;
@@ -26,6 +25,7 @@ import java.util.Map.Entry;
 import java.util.NoSuchElementException;
 import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
+import objectos.lang.Checks;
 
 /**
  * This class provides {@code static} factory methods for the JDK

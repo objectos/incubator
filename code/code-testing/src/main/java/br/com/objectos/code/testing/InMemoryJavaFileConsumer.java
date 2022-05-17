@@ -19,9 +19,9 @@ import br.com.objectos.code.java.io.JavaFile;
 import br.com.objectos.code.java.io.JavaFileConsumer;
 import br.com.objectos.code.java.type.NamedClass;
 import br.com.objectos.core.map.Maps;
-import br.com.objectos.core.object.Checks;
 import java.util.Map;
 import java.util.NoSuchElementException;
+import objectos.lang.Checks;
 
 public class InMemoryJavaFileConsumer implements JavaFileConsumer {
 

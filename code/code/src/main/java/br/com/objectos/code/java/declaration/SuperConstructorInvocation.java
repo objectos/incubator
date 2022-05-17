@@ -20,8 +20,8 @@ import br.com.objectos.code.java.element.CodeElement;
 import br.com.objectos.code.java.element.Keywords;
 import br.com.objectos.code.java.expression.Argument;
 import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.object.Checks;
 import java.util.Arrays;
+import objectos.lang.Checks;
 
 public class SuperConstructorInvocation extends AbstractConstructorInvocation {
 

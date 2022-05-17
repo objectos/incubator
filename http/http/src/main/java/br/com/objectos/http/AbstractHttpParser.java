@@ -22,7 +22,6 @@ import br.com.objectos.core.io.Charsets;
 import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.core.list.MutableList;
 import br.com.objectos.core.map.Maps;
-import br.com.objectos.core.object.Checks;
 import br.com.objectos.http.Header.ContentTypeVisitor;
 import br.com.objectos.http.media.ApplicationType;
 import br.com.objectos.http.media.ImageType;
@@ -35,6 +34,7 @@ import java.nio.charset.Charset;
 import java.nio.charset.CharsetDecoder;
 import java.nio.charset.CoderResult;
 import java.util.Map;
+import objectos.lang.Checks;
 
 abstract class AbstractHttpParser<H extends Header> implements CpuTask, IoTask {
 

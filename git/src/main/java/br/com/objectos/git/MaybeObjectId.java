@@ -15,9 +15,9 @@
  */
 package br.com.objectos.git;
 
-import br.com.objectos.core.object.ToString;
-import br.com.objectos.core.object.ToStringObject;
 import java.util.NoSuchElementException;
+import objectos.lang.ToString;
+import objectos.lang.ToStringObject;
 
 /**
  * Represents an {@link ObjectId} or its absence.

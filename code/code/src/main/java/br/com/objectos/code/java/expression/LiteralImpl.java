@@ -19,7 +19,7 @@ import br.com.objectos.code.java.element.AbstractDefaultImmutableCodeElement;
 import br.com.objectos.code.java.element.CodeElement;
 import br.com.objectos.code.java.type.NamedClass;
 import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.object.Checks;
+import objectos.lang.Checks;
 
 final class LiteralImpl extends AbstractDefaultImmutableCodeElement implements Literal {
 

@@ -15,8 +15,8 @@
  */
 package br.com.objectos.core.array;
 
-import br.com.objectos.core.object.Checks;
 import java.lang.reflect.Array;
+import objectos.lang.Checks;
 
 /**
  * <p>

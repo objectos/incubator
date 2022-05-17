@@ -23,7 +23,7 @@ import br.com.objectos.code.model.element.ProcessingAnnotation;
 import br.com.objectos.code.model.element.ProcessingPackage;
 import br.com.objectos.code.model.element.ProcessingType;
 import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.object.Checks;
+import objectos.lang.Checks;
 import org.testng.IHookCallBack;
 import org.testng.IHookable;
 import org.testng.ITestResult;

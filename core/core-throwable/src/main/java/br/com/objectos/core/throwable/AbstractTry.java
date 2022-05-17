@@ -15,8 +15,8 @@
  */
 package br.com.objectos.core.throwable;
 
-import br.com.objectos.core.object.Checks;
 import br.com.objectos.latest.Concrete;
+import objectos.lang.Checks;
 
 /**
  * Provides a try-with-resources equivalent functionality for codebases that

@@ -17,7 +17,6 @@ package br.com.objectos.http.testing;
 
 import br.com.objectos.core.io.InputStreamSource;
 import br.com.objectos.core.list.MutableList;
-import br.com.objectos.core.object.Checks;
 import br.com.objectos.http.media.MediaType;
 import br.com.objectos.http.server.Header;
 import br.com.objectos.http.server.HttpException;
@@ -28,6 +27,7 @@ import br.com.objectos.http.server.StatusCode;
 import br.com.objectos.http.server.StringSocketWriter;
 import br.com.objectos.http.server.WrittenResponse;
 import java.io.IOException;
+import objectos.lang.Checks;
 
 public class StringResponseWriter implements ResponseWriter, MessageBodyDsl {
 

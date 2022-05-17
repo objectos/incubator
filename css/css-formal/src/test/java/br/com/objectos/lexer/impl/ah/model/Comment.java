@@ -15,7 +15,7 @@
  */
 package br.com.objectos.lexer.impl.ah.model;
 
-import br.com.objectos.core.object.ToString;
+import objectos.lang.ToString;
 
 public class Comment implements IsToken {
 

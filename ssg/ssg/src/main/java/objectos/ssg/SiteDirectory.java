@@ -16,9 +16,9 @@
 package objectos.ssg;
 
 import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.object.Checks;
 import br.com.objectos.http.media.MediaType;
 import java.io.IOException;
+import objectos.lang.Checks;
 
 public abstract class SiteDirectory
     implements

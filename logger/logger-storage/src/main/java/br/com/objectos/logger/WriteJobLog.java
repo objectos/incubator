@@ -15,7 +15,7 @@
  */
 package br.com.objectos.logger;
 
-import br.com.objectos.core.object.ToString;
+import objectos.lang.ToString;
 import objectos.logging.Event;
 import objectos.logging.Level;
 import objectos.logging.Logger;

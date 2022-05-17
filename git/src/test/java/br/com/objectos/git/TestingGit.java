@@ -24,13 +24,13 @@ import br.com.objectos.concurrent.DirectIoWorker;
 import br.com.objectos.core.array.ByteArrays;
 import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.core.list.MutableList;
-import br.com.objectos.core.object.Checks;
 import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.testing.TestInf;
 import br.com.objectos.fs.testing.TmpDir;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.concurrent.ExecutionException;
+import objectos.lang.Checks;
 
 final class TestingGit {
 

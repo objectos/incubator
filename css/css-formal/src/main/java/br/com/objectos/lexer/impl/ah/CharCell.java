@@ -15,7 +15,7 @@
  */
 package br.com.objectos.lexer.impl.ah;
 
-import br.com.objectos.core.object.Checks;
+import objectos.lang.Checks;
 
 class CharCell {
 

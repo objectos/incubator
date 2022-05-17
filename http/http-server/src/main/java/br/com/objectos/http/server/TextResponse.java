@@ -15,9 +15,9 @@
  */
 package br.com.objectos.http.server;
 
-import br.com.objectos.core.object.Checks;
 import br.com.objectos.http.media.MediaType;
 import br.com.objectos.http.media.TextType;
+import objectos.lang.Checks;
 
 public class TextResponse implements Response {
 

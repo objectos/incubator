@@ -15,7 +15,6 @@
  */
 package br.com.objectos.css.config.framework;
 
-import br.com.objectos.core.object.Checks;
 import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworMultiElement;
 import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkAtMedia;
 import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkAtMediaDeclaration;
@@ -32,6 +31,7 @@ import br.com.objectos.css.type.Color;
 import br.com.objectos.css.type.LengthUnit;
 import br.com.objectos.css.type.Value;
 import br.com.objectos.css.type.Zero;
+import objectos.lang.Checks;
 
 public abstract class AbstractConfiguration implements Configuration {
 

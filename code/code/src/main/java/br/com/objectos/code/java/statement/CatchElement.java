@@ -21,8 +21,8 @@ import br.com.objectos.code.java.expression.Identifier;
 import br.com.objectos.code.java.io.CodeWriter;
 import br.com.objectos.code.java.type.NamedClass;
 import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.object.Checks;
 import java.util.Iterator;
+import objectos.lang.Checks;
 
 public class CatchElement extends AbstractCodeElement implements TryStatementElement {
 

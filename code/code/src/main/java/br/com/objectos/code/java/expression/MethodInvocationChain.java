@@ -23,7 +23,7 @@ import br.com.objectos.code.java.expression.production.MethodInvocationExpressio
 import br.com.objectos.code.java.io.CodeWriter;
 import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.core.list.MutableList;
-import br.com.objectos.core.object.Checks;
+import objectos.lang.Checks;
 
 public class MethodInvocationChain extends AbstractStatementExpression
     implements

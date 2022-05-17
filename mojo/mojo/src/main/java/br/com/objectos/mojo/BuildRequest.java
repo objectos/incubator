@@ -17,7 +17,6 @@ package br.com.objectos.mojo;
 
 import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.core.list.Lists;
-import br.com.objectos.core.object.Checks;
 import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.RegularFile;
 import java.io.File;
@@ -25,6 +24,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
+import objectos.lang.Checks;
 import org.apache.maven.execution.MavenExecutionRequest;
 import org.apache.maven.settings.Mirror;
 import org.codehaus.plexus.util.Os;

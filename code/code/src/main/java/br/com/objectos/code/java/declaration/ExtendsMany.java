@@ -17,8 +17,8 @@ package br.com.objectos.code.java.declaration;
 
 import br.com.objectos.code.java.type.NamedClassOrParameterized;
 import br.com.objectos.core.list.Lists;
-import br.com.objectos.core.object.Checks;
 import java.util.ArrayList;
+import objectos.lang.Checks;
 
 public class ExtendsMany implements InterfaceCodeElement {
 

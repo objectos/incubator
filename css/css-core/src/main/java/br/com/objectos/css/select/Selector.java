@@ -17,10 +17,10 @@ package br.com.objectos.css.select;
 
 import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.core.list.MutableList;
-import br.com.objectos.core.object.Checks;
 import br.com.objectos.css.parser.IsNonTerminal;
 import br.com.objectos.css.sheet.RuleElement;
 import java.util.stream.Stream;
+import objectos.lang.Checks;
 
 public abstract class Selector implements IsNonTerminal {
 

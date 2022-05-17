@@ -16,8 +16,8 @@
 package br.com.objectos.git;
 
 import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.object.ToString;
 import br.com.objectos.core.system.LineSeparator;
+import objectos.lang.ToString;
 
 /**
  * A Git commit object resulting from a <em>read commit</em> operation.

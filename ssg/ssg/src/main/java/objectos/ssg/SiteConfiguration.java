@@ -18,7 +18,6 @@ package objectos.ssg;
 import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.core.list.MutableList;
 import br.com.objectos.core.map.MutableMap;
-import br.com.objectos.core.object.Checks;
 import br.com.objectos.core.set.MutableSet;
 import br.com.objectos.http.media.MediaType;
 import java.net.URL;
@@ -27,6 +26,7 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Set;
 import java.util.stream.Stream;
+import objectos.lang.Checks;
 
 public class SiteConfiguration implements Site.Context {
 

@@ -16,9 +16,9 @@
 package br.com.objectos.core.map;
 
 import br.com.objectos.core.array.ObjectArrays;
-import br.com.objectos.core.object.Checks;
 import java.util.Arrays;
 import java.util.Map;
+import objectos.lang.Checks;
 
 /**
  * A hash-based implementation of the {@link Map} interface.

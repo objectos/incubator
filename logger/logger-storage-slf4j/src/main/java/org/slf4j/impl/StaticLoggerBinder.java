@@ -15,7 +15,7 @@
  */
 package org.slf4j.impl;
 
-import br.com.objectos.core.object.Checks;
+import objectos.lang.Checks;
 import org.slf4j.ILoggerFactory;
 import org.slf4j.helpers.NOPLoggerFactory;
 import org.slf4j.spi.LoggerFactoryBinder;

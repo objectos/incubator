@@ -20,10 +20,10 @@ import static br.com.objectos.mojo.Mojo.mirror;
 import static br.com.objectos.mojo.Mojo.mirrorOf;
 import static br.com.objectos.mojo.Mojo.url;
 
-import br.com.objectos.core.object.Checks;
 import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.LocalFs;
 import java.io.IOException;
+import objectos.lang.Checks;
 
 final class MojoTesting {
 

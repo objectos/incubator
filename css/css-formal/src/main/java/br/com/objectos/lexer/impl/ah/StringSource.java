@@ -15,11 +15,11 @@
  */
 package br.com.objectos.lexer.impl.ah;
 
-import br.com.objectos.core.object.Checks;
 import br.com.objectos.lexer.charexp.CharExpression;
 import java.io.IOException;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+import objectos.lang.Checks;
 
 class StringSource implements Source {
 

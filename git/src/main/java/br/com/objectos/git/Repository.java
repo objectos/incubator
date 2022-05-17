@@ -16,13 +16,13 @@
 package br.com.objectos.git;
 
 import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.object.Checks;
-import br.com.objectos.core.object.ToString;
-import br.com.objectos.core.object.ToStringObject;
 import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.RegularFile;
 import br.com.objectos.fs.ResolvedPath;
 import java.io.IOException;
+import objectos.lang.Checks;
+import objectos.lang.ToString;
+import objectos.lang.ToStringObject;
 
 /**
  * Represents a Git repository.

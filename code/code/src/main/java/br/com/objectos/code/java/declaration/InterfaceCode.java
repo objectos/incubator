@@ -26,8 +26,8 @@ import br.com.objectos.code.java.type.NamedClass;
 import br.com.objectos.code.java.type.NamedClassOrParameterized;
 import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.core.list.MutableList;
-import br.com.objectos.core.object.Checks;
 import java.lang.annotation.Annotation;
+import objectos.lang.Checks;
 
 public final class InterfaceCode extends AbstractTypeCode {
 

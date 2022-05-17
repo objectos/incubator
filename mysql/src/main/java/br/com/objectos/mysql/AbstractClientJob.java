@@ -19,7 +19,6 @@ import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.core.list.MutableList;
 import br.com.objectos.concurrent.IoTask;
 import br.com.objectos.concurrent.IoWorker;
-import br.com.objectos.core.object.Checks;
 import br.com.objectos.core.throwable.Throwables;
 import br.com.objectos.core.throwable.Try;
 import java.io.BufferedReader;
@@ -32,6 +31,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import objectos.lang.Checks;
 
 abstract class AbstractClientJob<V> implements ClientJob<V>, IoTask {
 

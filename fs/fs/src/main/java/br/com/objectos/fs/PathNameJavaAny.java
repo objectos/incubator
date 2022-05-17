@@ -15,11 +15,11 @@
  */
 package br.com.objectos.fs;
 
-import br.com.objectos.core.object.ToStringObject;
 import br.com.objectos.latest.Concrete;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
+import objectos.lang.ToStringObject;
 
 /**
  * Represents a pathname in a file system.

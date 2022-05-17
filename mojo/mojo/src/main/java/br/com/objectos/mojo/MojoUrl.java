@@ -15,7 +15,7 @@
  */
 package br.com.objectos.mojo;
 
-import br.com.objectos.core.object.Checks;
+import objectos.lang.Checks;
 
 public final class MojoUrl implements MojoMirrorElement {
 

@@ -19,7 +19,7 @@ import br.com.objectos.code.java.element.Keywords;
 import br.com.objectos.code.java.expression.Expressions;
 import br.com.objectos.code.java.expression.Identifier;
 import br.com.objectos.code.java.io.CodeWriter;
-import br.com.objectos.core.object.Checks;
+import objectos.lang.Checks;
 
 public abstract class ContinueStatement extends AbstractSimpleStatement {
 

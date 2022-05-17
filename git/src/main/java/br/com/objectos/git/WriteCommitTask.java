@@ -15,7 +15,7 @@
  */
 package br.com.objectos.git;
 
-import br.com.objectos.core.object.ToString;
+import objectos.lang.ToString;
 
 final class WriteCommitTask extends AbstractGitTask<ObjectId> {
 

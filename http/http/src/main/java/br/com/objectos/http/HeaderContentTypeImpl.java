@@ -17,9 +17,6 @@ package br.com.objectos.http;
 
 import br.com.objectos.core.io.Charsets;
 import br.com.objectos.core.map.Maps;
-import br.com.objectos.core.object.Checks;
-import br.com.objectos.core.object.Equals;
-import br.com.objectos.core.object.HashCode;
 import br.com.objectos.http.media.ApplicationType;
 import br.com.objectos.http.media.ImageType;
 import br.com.objectos.http.media.MediaType;
@@ -28,6 +25,9 @@ import br.com.objectos.http.media.TextType;
 import br.com.objectos.http.media.TopLevel;
 import java.nio.charset.Charset;
 import java.util.Map;
+import objectos.lang.Checks;
+import objectos.lang.Equals;
+import objectos.lang.HashCode;
 
 final class HeaderContentTypeImpl
     extends AbstractHeader<Header.ContentType> implements Header.ContentType {

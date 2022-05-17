@@ -15,7 +15,7 @@
  */
 package objectos.docs.ui;
 
-import br.com.objectos.core.object.Checks;
+import objectos.lang.Checks;
 import objectos.ssg.SiteDirectory;
 import objectos.ssg.SitePage;
 

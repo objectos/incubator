@@ -15,9 +15,9 @@
  */
 package br.com.objectos.http.server;
 
-import br.com.objectos.core.object.Checks;
 import br.com.objectos.http.path.Location;
 import br.com.objectos.http.path.Route;
+import objectos.lang.Checks;
 
 public abstract class AbstractHttpModule implements HttpModule {
 

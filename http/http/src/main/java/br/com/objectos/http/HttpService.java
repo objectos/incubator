@@ -17,11 +17,11 @@ package br.com.objectos.http;
 
 import br.com.objectos.concurrent.CpuArray;
 import br.com.objectos.concurrent.IoWorker;
-import br.com.objectos.core.object.Checks;
 import br.com.objectos.core.service.AbstractService;
 import java.net.SocketAddress;
 import java.nio.channels.SocketChannel;
 import java.util.Random;
+import objectos.lang.Checks;
 import objectos.logging.Logger;
 
 /**

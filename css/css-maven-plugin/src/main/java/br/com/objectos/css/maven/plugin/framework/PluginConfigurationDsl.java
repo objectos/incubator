@@ -18,7 +18,6 @@ package br.com.objectos.css.maven.plugin.framework;
 import br.com.objectos.code.java.declaration.PackageName;
 import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.core.list.MutableList;
-import br.com.objectos.core.object.Checks;
 import br.com.objectos.css.config.framework.ConfigurationDsl;
 import br.com.objectos.css.property.StandardPropertyName;
 import br.com.objectos.css.type.ColorKind;
@@ -28,6 +27,7 @@ import br.com.objectos.css.type.Marker;
 import br.com.objectos.css.type.Value;
 import java.util.EnumMap;
 import java.util.Map;
+import objectos.lang.Checks;
 
 class PluginConfigurationDsl implements ConfigurationDsl {
 

@@ -30,10 +30,10 @@ import br.com.objectos.code.java.declaration.VarArgs;
 import br.com.objectos.code.java.expression.Identifier;
 import br.com.objectos.code.java.type.NamedArray;
 import br.com.objectos.code.java.type.NamedClass;
-import br.com.objectos.core.object.Checks;
 import br.com.objectos.css.boot.property.ParameterType;
 import br.com.objectos.css.boot.spec.Ids;
 import br.com.objectos.css.boot.type.TypeNames;
+import objectos.lang.Checks;
 
 public abstract class MethodSignature implements Comparable<MethodSignature> {
 

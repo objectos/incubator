@@ -26,8 +26,8 @@ import br.com.objectos.code.java.type.NamedClass;
 import br.com.objectos.code.java.type.NamedType;
 import br.com.objectos.code.java.type.NamedVoid;
 import br.com.objectos.core.list.MutableList;
-import br.com.objectos.core.object.Checks;
 import java.util.List;
+import objectos.lang.Checks;
 
 public final class FieldCode extends AbstractImmutableCodeElement
     implements

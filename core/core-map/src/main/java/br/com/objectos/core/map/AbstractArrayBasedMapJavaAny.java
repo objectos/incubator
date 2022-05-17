@@ -17,11 +17,11 @@ package br.com.objectos.core.map;
 
 import br.com.objectos.core.array.ObjectArrays;
 import br.com.objectos.core.collection.UnmodifiableIterator;
-import br.com.objectos.core.object.HashCode;
-import br.com.objectos.core.object.ToString;
-import br.com.objectos.core.object.ToStringObject;
 import br.com.objectos.latest.Concrete;
 import java.util.Map;
+import objectos.lang.HashCode;
+import objectos.lang.ToString;
+import objectos.lang.ToStringObject;
 
 @Concrete(modifiers = "abstract", simpleName = "AbstractArrayBasedMap")
 abstract class AbstractArrayBasedMapJavaAny<K, V>

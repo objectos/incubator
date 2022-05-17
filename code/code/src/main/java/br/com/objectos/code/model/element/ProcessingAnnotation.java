@@ -26,7 +26,6 @@ import br.com.objectos.code.util.SimpleAnnotationValueVisitor;
 import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.core.map.ImmutableMap;
 import br.com.objectos.core.map.MutableMap;
-import br.com.objectos.core.object.Checks;
 import br.com.objectos.core.set.ImmutableSet;
 import java.lang.annotation.Annotation;
 import java.util.Collections;
@@ -52,6 +51,7 @@ import javax.lang.model.type.TypeMirror;
 import javax.lang.model.type.TypeVisitor;
 import javax.lang.model.util.Elements;
 import javax.tools.Diagnostic.Kind;
+import objectos.lang.Checks;
 
 public class ProcessingAnnotation
     extends AnnotatedElementOrType

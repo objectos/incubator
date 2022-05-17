@@ -18,7 +18,7 @@ package br.com.objectos.code.java.statement;
 import br.com.objectos.code.java.element.Keywords;
 import br.com.objectos.code.java.expression.ThrowableExpression;
 import br.com.objectos.code.java.io.CodeWriter;
-import br.com.objectos.core.object.Checks;
+import objectos.lang.Checks;
 
 public final class ThrowStatement extends AbstractSimpleStatement {
 

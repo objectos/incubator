@@ -30,9 +30,9 @@
  */
 package br.com.objectos.git;
 
-import br.com.objectos.core.object.Checks;
 import java.nio.ByteBuffer;
 import java.util.Arrays;
+import objectos.lang.Checks;
 
 final class ReadBlob implements ObjectReaderAdapter {
 

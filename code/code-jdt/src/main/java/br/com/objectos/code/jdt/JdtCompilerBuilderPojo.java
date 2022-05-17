@@ -15,12 +15,12 @@
  */
 package br.com.objectos.code.jdt;
 
-import br.com.objectos.core.object.Checks;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import javax.annotation.processing.Processor;
 import javax.lang.model.SourceVersion;
+import objectos.lang.Checks;
 import org.eclipse.jdt.internal.compiler.Compiler;
 import org.eclipse.jdt.internal.compiler.DefaultErrorHandlingPolicies;
 import org.eclipse.jdt.internal.compiler.ICompilerRequestor;

@@ -23,7 +23,6 @@ import br.com.objectos.code.java.type.NamedTypeParameter;
 import br.com.objectos.code.model.AnnotatedElementOrType;
 import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.core.list.MutableList;
-import br.com.objectos.core.object.Checks;
 import br.com.objectos.core.set.ImmutableSet;
 import br.com.objectos.core.set.MutableSet;
 import br.com.objectos.core.string.Strings;
@@ -39,6 +38,7 @@ import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.TypeParameterElement;
 import javax.lang.model.util.Elements;
 import javax.tools.Diagnostic.Kind;
+import objectos.lang.Checks;
 import javax.tools.FileObject;
 import javax.tools.StandardLocation;
 

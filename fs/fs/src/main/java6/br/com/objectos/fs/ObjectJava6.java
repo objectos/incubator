@@ -15,7 +15,6 @@
  */
 package br.com.objectos.fs;
 
-import br.com.objectos.core.object.Checks;
 import br.com.objectos.latest.Concrete.Bridge;
 import br.com.objectos.latest.Concrete.Constructor;
 import java.io.BufferedReader;
@@ -34,6 +33,7 @@ import java.io.Writer;
 import java.net.URI;
 import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
+import objectos.lang.Checks;
 
 @Bridge
 abstract class ObjectJava6 extends ObjectJavaAny {

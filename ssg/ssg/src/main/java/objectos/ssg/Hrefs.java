@@ -15,7 +15,7 @@
  */
 package objectos.ssg;
 
-import br.com.objectos.core.object.Checks;
+import objectos.lang.Checks;
 
 final class Hrefs {
 

@@ -17,12 +17,12 @@ package objectos.ssg.mojo;
 
 import br.com.objectos.core.io.Charsets;
 import br.com.objectos.core.io.Write;
-import br.com.objectos.core.object.Checks;
 import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.RegularFile;
 import br.com.objectos.http.media.MediaType;
 import br.com.objectos.http.path.Location;
 import java.io.IOException;
+import objectos.lang.Checks;
 import objectos.ssg.SiteWriter;
 
 final class SiteMojoWriter implements SiteWriter {

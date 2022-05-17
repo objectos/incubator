@@ -15,9 +15,9 @@
  */
 package br.com.objectos.http.server;
 
-import br.com.objectos.core.object.Checks;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import objectos.lang.Checks;
 
 public class RequestedPath implements Iterator<RequestedPart> {
 

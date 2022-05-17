@@ -16,10 +16,10 @@
 package br.com.objectos.fs;
 
 import br.com.objectos.core.io.Resource;
-import br.com.objectos.core.object.Checks;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
+import objectos.lang.Checks;
 
 /**
  * Provides {@code static} methods for obtaining {@link PathName} instances,

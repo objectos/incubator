@@ -24,10 +24,10 @@ import br.com.objectos.code.java.element.AbstractCodeElement;
 import br.com.objectos.code.java.io.CanGenerateImportDeclaration;
 import br.com.objectos.code.java.io.CodeWriter;
 import br.com.objectos.code.java.io.JavaFileImportSet;
-import br.com.objectos.core.object.Checks;
 import java.util.List;
 import javax.lang.model.element.TypeParameterElement;
 import javax.lang.model.type.TypeMirror;
+import objectos.lang.Checks;
 
 public abstract class NamedTypeParameter extends AbstractCodeElement
     implements

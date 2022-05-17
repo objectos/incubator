@@ -15,7 +15,7 @@
  */
 package br.com.objectos.css.type;
 
-import br.com.objectos.core.object.Checks;
+import objectos.lang.Checks;
 
 public abstract class Color extends GeneratedColor implements ColorType, Value {
 

@@ -15,7 +15,6 @@
  */
 package br.com.objectos.code.processing;
 
-import br.com.objectos.core.object.Checks;
 import br.com.objectos.core.set.ImmutableSet;
 import br.com.objectos.core.set.MutableSet;
 import java.lang.annotation.Annotation;
@@ -28,6 +27,7 @@ import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Name;
 import javax.lang.model.element.PackageElement;
 import javax.lang.model.element.TypeElement;
+import objectos.lang.Checks;
 
 public abstract class AbstractProcessingRoundProcessor extends AbstractProcessor {
 

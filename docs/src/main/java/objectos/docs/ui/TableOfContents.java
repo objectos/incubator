@@ -16,11 +16,11 @@
 package objectos.docs.ui;
 
 import br.com.objectos.core.list.MutableList;
-import br.com.objectos.core.object.Checks;
 import br.com.objectos.html.element.ElementName;
 import br.com.objectos.html.spi.type.UlValue;
 import java.util.HashMap;
 import java.util.Map;
+import objectos.lang.Checks;
 import objectos.ssg.SiteDirectory;
 import objectos.ssg.SiteFragment;
 import objectos.ssg.SitePage;

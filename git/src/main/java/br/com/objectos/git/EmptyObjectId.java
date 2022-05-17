@@ -15,8 +15,8 @@
  */
 package br.com.objectos.git;
 
-import br.com.objectos.core.object.ToString;
 import java.util.NoSuchElementException;
+import objectos.lang.ToString;
 
 final class EmptyObjectId extends MaybeObjectId {
 

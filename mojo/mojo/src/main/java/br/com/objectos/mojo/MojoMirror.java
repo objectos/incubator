@@ -15,7 +15,7 @@
  */
 package br.com.objectos.mojo;
 
-import br.com.objectos.core.object.Checks;
+import objectos.lang.Checks;
 import org.apache.maven.settings.Mirror;
 
 public final class MojoMirror implements MojoRuntimeElement {

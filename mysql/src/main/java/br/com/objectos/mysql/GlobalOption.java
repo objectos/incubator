@@ -15,9 +15,9 @@
  */
 package br.com.objectos.mysql;
 
-import br.com.objectos.core.object.Checks;
 import br.com.objectos.fs.RegularFile;
 import br.com.objectos.fs.ResolvedPath;
+import objectos.lang.Checks;
 
 public final class GlobalOption extends AbstractOption
     implements

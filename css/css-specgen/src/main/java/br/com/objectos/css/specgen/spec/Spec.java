@@ -19,7 +19,7 @@ import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.core.map.ImmutableMap;
 import br.com.objectos.core.map.MutableMap;
 import br.com.objectos.core.map.MutableOrderedMap;
-import br.com.objectos.core.object.Checks;
+import objectos.lang.Checks;
 
 public class Spec {
 

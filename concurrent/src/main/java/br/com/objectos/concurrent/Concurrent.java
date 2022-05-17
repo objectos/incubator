@@ -15,8 +15,8 @@
  */
 package br.com.objectos.concurrent;
 
-import br.com.objectos.core.object.Checks;
 import java.util.concurrent.atomic.AtomicInteger;
+import objectos.lang.Checks;
 
 /**
  * Provides {@code static} utility methods.

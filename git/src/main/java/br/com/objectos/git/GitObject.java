@@ -15,9 +15,9 @@
  */
 package br.com.objectos.git;
 
-import br.com.objectos.core.object.Equals;
-import br.com.objectos.core.object.ToString;
-import br.com.objectos.core.object.ToStringObject;
+import objectos.lang.Equals;
+import objectos.lang.ToString;
+import objectos.lang.ToStringObject;
 
 /**
  * @since 1

@@ -15,14 +15,14 @@
  */
 package br.com.objectos.core.collection;
 
-import br.com.objectos.core.object.Checks;
-import br.com.objectos.core.object.ToString;
-import br.com.objectos.core.object.ToStringObject;
 import br.com.objectos.latest.Concrete;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.RandomAccess;
+import objectos.lang.Checks;
+import objectos.lang.ToString;
+import objectos.lang.ToStringObject;
 
 /**
  * An array-based {@code abstract} implementation of {@link BaseCollection}.

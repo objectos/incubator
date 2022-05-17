@@ -15,9 +15,6 @@
  */
 package br.com.objectos.core.io;
 
-import br.com.objectos.core.object.Checks;
-import br.com.objectos.core.object.ToString;
-import br.com.objectos.core.object.ToStringObject;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -27,6 +24,9 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.Charset;
+import objectos.lang.Checks;
+import objectos.lang.ToString;
+import objectos.lang.ToStringObject;
 
 /**
  * A {@link ClassLoader} resource.

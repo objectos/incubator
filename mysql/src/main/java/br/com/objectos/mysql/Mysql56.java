@@ -15,13 +15,13 @@
  */
 package br.com.objectos.mysql;
 
-import br.com.objectos.core.object.Checks;
 import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.RegularFile;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import objectos.lang.Checks;
 
 public final class Mysql56 {
 

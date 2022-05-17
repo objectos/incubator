@@ -15,7 +15,7 @@
  */
 package br.com.objectos.http;
 
-import br.com.objectos.core.object.Checks;
+import objectos.lang.Checks;
 
 final class HeaderCookieImpl extends AbstractHeader<Header.Cookie> implements Header.Cookie {
 

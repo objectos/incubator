@@ -17,11 +17,11 @@ package br.com.objectos.code.processing;
 
 import br.com.objectos.code.java.io.JavaFile;
 import br.com.objectos.core.list.MutableList;
-import br.com.objectos.core.object.Checks;
 import br.com.objectos.core.throwable.Throwables;
 import java.io.IOException;
 import javax.annotation.processing.ProcessingEnvironment;
 import javax.tools.Diagnostic;
+import objectos.lang.Checks;
 
 public abstract class Artifact {
 

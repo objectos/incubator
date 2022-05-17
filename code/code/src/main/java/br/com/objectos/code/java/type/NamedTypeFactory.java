@@ -17,7 +17,6 @@ package br.com.objectos.code.java.type;
 
 import br.com.objectos.code.util.SimpleTypeVisitor;
 import br.com.objectos.core.list.Lists;
-import br.com.objectos.core.object.Checks;
 import java.util.List;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.type.ArrayType;
@@ -27,6 +26,7 @@ import javax.lang.model.type.PrimitiveType;
 import javax.lang.model.type.TypeMirror;
 import javax.lang.model.type.TypeVariable;
 import javax.lang.model.type.WildcardType;
+import objectos.lang.Checks;
 
 final class NamedTypeFactory extends SimpleTypeVisitor<NamedType, Void> {
 

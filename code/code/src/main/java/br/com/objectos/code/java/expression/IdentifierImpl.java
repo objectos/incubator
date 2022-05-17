@@ -23,8 +23,8 @@ import br.com.objectos.code.java.declaration.InterfaceCode;
 import br.com.objectos.code.java.declaration.MethodCode;
 import br.com.objectos.code.java.element.AbstractDefaultImmutableCodeElement;
 import br.com.objectos.code.java.element.NewLine;
-import br.com.objectos.core.object.Checks;
 import javax.lang.model.SourceVersion;
+import objectos.lang.Checks;
 
 final class IdentifierImpl
     extends AbstractDefaultImmutableCodeElement

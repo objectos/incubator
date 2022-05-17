@@ -15,12 +15,12 @@
  */
 package br.com.objectos.core.logging.testing;
 
-import br.com.objectos.core.object.ToString;
-import br.com.objectos.core.object.ToStringObject;
 import br.com.objectos.core.system.LineSeparator;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import objectos.lang.ToString;
+import objectos.lang.ToStringObject;
 import objectos.logging.Event;
 import objectos.logging.Event0;
 import objectos.logging.Event1;

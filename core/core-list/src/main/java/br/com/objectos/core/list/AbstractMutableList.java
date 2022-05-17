@@ -17,7 +17,6 @@ package br.com.objectos.core.list;
 
 import br.com.objectos.core.array.ObjectArrays;
 import br.com.objectos.core.collection.MutableCollection;
-import br.com.objectos.core.object.Checks;
 import br.com.objectos.latest.Concrete;
 import java.util.Arrays;
 import java.util.Collection;
@@ -25,6 +24,7 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.RandomAccess;
+import objectos.lang.Checks;
 
 /**
  * An array-based {@link br.com.objectos.core.collection.MutableCollection} and

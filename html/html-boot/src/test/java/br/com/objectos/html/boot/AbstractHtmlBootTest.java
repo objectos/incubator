@@ -21,7 +21,6 @@ import br.com.objectos.code.java.io.JavaFile;
 import br.com.objectos.code.java.type.NamedClass;
 import br.com.objectos.core.list.MutableList;
 import br.com.objectos.core.map.Maps;
-import br.com.objectos.core.object.Checks;
 import br.com.objectos.html.boot.element.ElementNames;
 import br.com.objectos.html.boot.spec.AttributeSpec;
 import br.com.objectos.html.boot.spec.Spec;
@@ -29,6 +28,7 @@ import br.com.objectos.html.boot.spec.SpecDsl;
 import br.com.objectos.html.boot.spec.Step;
 import br.com.objectos.html.boot.spec.StepFactory;
 import java.util.Map;
+import objectos.lang.Checks;
 
 public abstract class AbstractHtmlBootTest {
 

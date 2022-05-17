@@ -16,9 +16,9 @@
 package br.com.objectos.git;
 
 import br.com.objectos.core.array.ByteArrays;
-import br.com.objectos.core.object.Checks;
-import br.com.objectos.core.object.ToString;
 import java.util.Arrays;
+import objectos.lang.Checks;
+import objectos.lang.ToString;
 
 /**
  * A hash value that uniquely identifies a Git object.

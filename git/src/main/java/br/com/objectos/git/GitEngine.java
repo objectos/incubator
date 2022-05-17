@@ -20,7 +20,6 @@ import br.com.objectos.concurrent.IoWorker;
 import br.com.objectos.core.list.MutableList;
 import br.com.objectos.core.map.Maps;
 import br.com.objectos.core.map.MutableMap;
-import br.com.objectos.core.object.Checks;
 import br.com.objectos.core.set.ImmutableSet;
 import br.com.objectos.core.set.MutableSet;
 import br.com.objectos.fs.Directory;
@@ -36,6 +35,7 @@ import java.util.Deque;
 import java.util.Map;
 import java.util.zip.Deflater;
 import java.util.zip.Inflater;
+import objectos.lang.Checks;
 import objectos.logging.Logger;
 import objectos.logging.NoOpLogger;
 

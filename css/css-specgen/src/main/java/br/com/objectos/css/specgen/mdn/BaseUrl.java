@@ -15,8 +15,8 @@
  */
 package br.com.objectos.css.specgen.mdn;
 
-import br.com.objectos.core.object.Checks;
 import java.io.IOException;
+import objectos.lang.Checks;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 

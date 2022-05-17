@@ -15,11 +15,11 @@
  */
 package br.com.objectos.core.runtime;
 
-import br.com.objectos.core.object.Checks;
 import br.com.objectos.latest.Concrete;
 import java.io.Closeable;
 import java.util.ArrayList;
 import java.util.List;
+import objectos.lang.Checks;
 
 @Concrete.Bridge
 class ShutdownHookJava7 extends AbstractShutdownHook {

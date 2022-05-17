@@ -16,7 +16,6 @@
 package br.com.objectos.office.internal;
 
 import br.com.objectos.core.list.Lists;
-import br.com.objectos.core.object.Checks;
 import br.com.objectos.core.string.RandomString;
 import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.JavaIoTmpdir;
@@ -32,6 +31,7 @@ import com.sun.star.uno.XComponentContext;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import objectos.lang.Checks;
 
 public class NativeProcess {
 

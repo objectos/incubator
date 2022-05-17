@@ -16,7 +16,6 @@
 package br.com.objectos.git;
 
 import br.com.objectos.core.io.Charsets;
-import br.com.objectos.core.object.Checks;
 import br.com.objectos.core.throwable.Try;
 import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.NotRegularFileException;
@@ -27,6 +26,7 @@ import br.com.objectos.fs.ResolvedPath;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
+import objectos.lang.Checks;
 
 /**
  * Opens a Git packfile. Resolves the pathname and confirms (or not) that the

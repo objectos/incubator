@@ -21,7 +21,7 @@ import br.com.objectos.code.java.expression.Expression;
 import br.com.objectos.code.java.expression.Identifier;
 import br.com.objectos.code.java.type.NamedClass;
 import br.com.objectos.code.java.type.NamedType;
-import br.com.objectos.core.object.Checks;
+import objectos.lang.Checks;
 
 public abstract class ForStatement extends AbstractSimpleStatement {
 

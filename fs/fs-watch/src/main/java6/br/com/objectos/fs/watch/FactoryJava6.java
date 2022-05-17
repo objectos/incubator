@@ -15,10 +15,10 @@
  */
 package br.com.objectos.fs.watch;
 
-import br.com.objectos.core.object.Checks;
 import br.com.objectos.fs.watch.Watch.Option;
 import br.com.objectos.latest.Concrete;
 import java.io.IOException;
+import objectos.lang.Checks;
 
 @Concrete.Bridge
 class FactoryJava6 extends FactoryJavaAny {

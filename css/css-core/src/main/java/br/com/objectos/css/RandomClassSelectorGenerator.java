@@ -15,12 +15,12 @@
  */
 package br.com.objectos.css;
 
-import br.com.objectos.core.object.Checks;
 import br.com.objectos.core.set.MutableSet;
 import br.com.objectos.css.select.ClassSelector;
 import br.com.objectos.css.select.SelectorFactory;
 import java.util.Locale;
 import java.util.Set;
+import objectos.lang.Checks;
 
 final class RandomClassSelectorGenerator {
 

@@ -15,9 +15,9 @@
  */
 package br.com.objectos.core.throwable;
 
-import br.com.objectos.core.object.Checks;
 import br.com.objectos.latest.Concrete.Bridge;
 import br.com.objectos.latest.Concrete.Constructor;
+import objectos.lang.Checks;
 
 @Bridge
 class StackTraceElementsJava11 extends AbstractStackTraceElements {

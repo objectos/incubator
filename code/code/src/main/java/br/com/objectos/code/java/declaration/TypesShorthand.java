@@ -16,7 +16,7 @@
 package br.com.objectos.code.java.declaration;
 
 import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.object.Checks;
+import objectos.lang.Checks;
 
 public class TypesShorthand implements ClassCodeElement {
 

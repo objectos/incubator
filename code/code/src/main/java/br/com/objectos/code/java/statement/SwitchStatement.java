@@ -22,7 +22,7 @@ import br.com.objectos.code.java.expression.Expression;
 import br.com.objectos.code.java.io.CodeWriter;
 import br.com.objectos.code.java.io.Section;
 import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.object.Checks;
+import objectos.lang.Checks;
 
 public class SwitchStatement extends AbstractSimpleStatement {
 

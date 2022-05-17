@@ -31,7 +31,7 @@ import br.com.objectos.code.model.element.ProcessingType;
 import br.com.objectos.code.processing.type.PTypeMirror;
 import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.core.list.MutableList;
-import br.com.objectos.core.object.HashCode;
+import objectos.lang.HashCode;
 
 final class StaticField {
 

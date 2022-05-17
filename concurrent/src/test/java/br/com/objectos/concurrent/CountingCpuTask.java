@@ -15,7 +15,7 @@
  */
 package br.com.objectos.concurrent;
 
-import br.com.objectos.core.object.ToString;
+import objectos.lang.ToString;
 
 final class CountingCpuTask implements CpuTask {
 

@@ -15,8 +15,8 @@
  */
 package br.com.objectos.css.select;
 
-import br.com.objectos.core.object.Checks;
 import br.com.objectos.css.parser.IsTerminal;
+import objectos.lang.Checks;
 
 public enum AttributeValueOperator implements IsTerminal {
 

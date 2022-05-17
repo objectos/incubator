@@ -15,7 +15,7 @@
  */
 package br.com.objectos.core.string;
 
-import br.com.objectos.core.object.Checks;
+import objectos.lang.Checks;
 
 /**
  * A state-machine for Unicode code point conversion participating in a

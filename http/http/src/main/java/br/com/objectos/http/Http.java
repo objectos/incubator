@@ -16,7 +16,6 @@
 package br.com.objectos.http;
 
 import br.com.objectos.concurrent.IoWorker;
-import br.com.objectos.core.object.Checks;
 import br.com.objectos.http.Header.ContentType;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
@@ -25,6 +24,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayDeque;
 import java.util.Locale;
 import java.util.TimeZone;
+import objectos.lang.Checks;
 
 public final class Http {
 

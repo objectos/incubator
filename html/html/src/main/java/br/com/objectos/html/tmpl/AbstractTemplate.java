@@ -15,10 +15,10 @@
  */
 package br.com.objectos.html.tmpl;
 
-import br.com.objectos.core.object.Checks;
 import br.com.objectos.html.spi.tmpl.Marker;
 import br.com.objectos.html.spi.tmpl.Renderer;
 import br.com.objectos.html.writer.SimpleTemplateWriter;
+import objectos.lang.Checks;
 
 public abstract class AbstractTemplate extends FragmentOrTemplate implements Template {
 

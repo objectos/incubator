@@ -16,12 +16,12 @@
 package br.com.objectos.core.map;
 
 import br.com.objectos.core.array.ByteArrays;
-import br.com.objectos.core.object.ToString;
-import br.com.objectos.core.object.ToStringObject;
 import br.com.objectos.random.testing.Next;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
+import objectos.lang.ToString;
+import objectos.lang.ToStringObject;
 
 final class Thing implements ToStringObject {
 

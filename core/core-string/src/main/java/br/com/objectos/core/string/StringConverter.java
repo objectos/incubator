@@ -15,7 +15,7 @@
  */
 package br.com.objectos.core.string;
 
-import br.com.objectos.core.object.Checks;
+import objectos.lang.Checks;
 
 /**
  * A class for converting strings by applying a series of user defined

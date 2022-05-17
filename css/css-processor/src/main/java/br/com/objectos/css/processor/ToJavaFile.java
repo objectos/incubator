@@ -29,12 +29,12 @@ import br.com.objectos.code.java.declaration.ClassCode;
 import br.com.objectos.code.java.declaration.ExtendsOne;
 import br.com.objectos.code.java.io.JavaFile;
 import br.com.objectos.code.java.type.NamedClass;
-import br.com.objectos.core.object.Checks;
 import br.com.objectos.css.parser.sheet.CssParser;
 import br.com.objectos.css.sheet.AbstractStyleSheet;
 import br.com.objectos.css.sheet.StyleSheet;
 import java.io.IOException;
 import java.io.InputStream;
+import objectos.lang.Checks;
 
 public class ToJavaFile {
 

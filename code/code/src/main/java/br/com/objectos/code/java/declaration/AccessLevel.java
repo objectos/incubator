@@ -15,10 +15,10 @@
  */
 package br.com.objectos.code.java.declaration;
 
-import br.com.objectos.core.object.Checks;
 import java.util.Set;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.Modifier;
+import objectos.lang.Checks;
 
 public enum AccessLevel implements ConstructorCodeElement {
 

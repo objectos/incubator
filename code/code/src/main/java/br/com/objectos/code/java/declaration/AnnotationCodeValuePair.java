@@ -20,7 +20,7 @@ import br.com.objectos.code.java.element.AbstractCodeElement;
 import br.com.objectos.code.java.expression.Expressions;
 import br.com.objectos.code.java.expression.Identifier;
 import br.com.objectos.code.java.io.CodeWriter;
-import br.com.objectos.core.object.Checks;
+import objectos.lang.Checks;
 
 public class AnnotationCodeValuePair extends AbstractCodeElement implements AnnotationCodeElement {
 

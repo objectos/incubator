@@ -15,10 +15,10 @@
  */
 package br.com.objectos.git;
 
-import br.com.objectos.core.object.Checks;
-import br.com.objectos.core.object.HashCode;
-import br.com.objectos.core.object.ToString;
-import br.com.objectos.core.object.ToStringObject;
+import objectos.lang.Checks;
+import objectos.lang.HashCode;
+import objectos.lang.ToString;
+import objectos.lang.ToStringObject;
 
 /**
  * The author or the commiter field of a commit object. Consists of the

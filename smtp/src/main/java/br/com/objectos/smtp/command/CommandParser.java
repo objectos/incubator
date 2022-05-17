@@ -16,13 +16,13 @@
 package br.com.objectos.smtp.command;
 
 import br.com.objectos.core.array.IntArrays;
-import br.com.objectos.core.object.Checks;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.nio.channels.ReadableByteChannel;
 import java.nio.charset.CharsetDecoder;
 import java.util.Arrays;
+import objectos.lang.Checks;
 
 public class CommandParser {
 

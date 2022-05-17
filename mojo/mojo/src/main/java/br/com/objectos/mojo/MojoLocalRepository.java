@@ -15,8 +15,8 @@
  */
 package br.com.objectos.mojo;
 
-import br.com.objectos.core.object.Checks;
 import br.com.objectos.fs.Directory;
+import objectos.lang.Checks;
 
 public class MojoLocalRepository implements MojoRuntimeElement {
 

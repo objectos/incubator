@@ -17,12 +17,12 @@ package br.com.objectos.git;
 
 import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.core.map.MutableMap;
-import br.com.objectos.core.object.Checks;
-import br.com.objectos.core.object.ToString;
 import br.com.objectos.fs.Directory;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import objectos.lang.Checks;
+import objectos.lang.ToString;
 
 /**
  * A command for <em>materializing</em> a Git repository.

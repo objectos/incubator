@@ -18,10 +18,10 @@ package br.com.objectos.core.set;
 import br.com.objectos.core.array.ObjectArrays;
 import br.com.objectos.core.collection.AbstractBaseCollection;
 import br.com.objectos.core.collection.UnmodifiableIterator;
-import br.com.objectos.core.object.HashCode;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Set;
+import objectos.lang.HashCode;
 
 abstract class AbstractArrayBaseSet<E>
     extends AbstractBaseCollection<E>

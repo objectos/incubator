@@ -17,13 +17,13 @@ package br.com.objectos.logger;
 
 import br.com.objectos.concurrent.IoWorker;
 import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.object.Checks;
 import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.PathNameVisitor;
 import br.com.objectos.fs.RegularFile;
 import br.com.objectos.fs.ResolvedPath;
 import br.com.objectos.fs.watch.Watch;
 import java.io.IOException;
+import objectos.lang.Checks;
 
 abstract class Storage {
 

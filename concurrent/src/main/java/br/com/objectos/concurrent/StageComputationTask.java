@@ -17,12 +17,12 @@ package br.com.objectos.concurrent;
 
 import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.core.list.MutableList;
-import br.com.objectos.core.object.Checks;
 import br.com.objectos.core.throwable.Throwables;
 import br.com.objectos.core.throwable.Try;
 import java.util.NoSuchElementException;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
+import objectos.lang.Checks;
 
 /**
  * A base async computation implementation providing an imperative programming

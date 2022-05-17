@@ -17,8 +17,8 @@ package br.com.objectos.http.media;
 
 import br.com.objectos.core.map.ImmutableMap;
 import br.com.objectos.core.map.MutableMap;
-import br.com.objectos.core.object.Checks;
 import java.util.Locale;
+import objectos.lang.Checks;
 
 public class MediaTypes {
 

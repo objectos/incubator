@@ -15,8 +15,8 @@
  */
 package br.com.objectos.core.array;
 
-import br.com.objectos.core.object.Checks;
 import br.com.objectos.latest.Singleton;
+import objectos.lang.Checks;
 
 final class MismatchJava6 extends Mismatch {
 

@@ -18,7 +18,6 @@ package br.com.objectos.mysql;
 import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.core.list.MutableList;
 import br.com.objectos.core.io.Read;
-import br.com.objectos.core.object.Checks;
 import br.com.objectos.core.system.LineSeparator;
 import br.com.objectos.core.throwable.Try;
 import br.com.objectos.fs.RegularFile;
@@ -27,6 +26,7 @@ import java.io.IOException;
 import java.io.Writer;
 import java.nio.charset.Charset;
 import java.util.List;
+import objectos.lang.Checks;
 
 public final class ConfigurationFile {
 

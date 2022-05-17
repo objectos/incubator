@@ -17,9 +17,9 @@ package br.com.objectos.css.boot.type;
 
 import br.com.objectos.code.java.JavaNames;
 import br.com.objectos.code.java.type.NamedClass;
-import br.com.objectos.core.object.Checks;
 import java.util.HashMap;
 import java.util.Map;
+import objectos.lang.Checks;
 
 public enum Primitive {
 

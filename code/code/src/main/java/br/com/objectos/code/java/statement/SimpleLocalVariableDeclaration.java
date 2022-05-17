@@ -17,7 +17,7 @@ package br.com.objectos.code.java.statement;
 
 import br.com.objectos.code.java.element.CodeElement;
 import br.com.objectos.code.java.type.NamedType;
-import br.com.objectos.core.object.Checks;
+import objectos.lang.Checks;
 
 public class SimpleLocalVariableDeclaration extends LocalVariableDeclaration {
 

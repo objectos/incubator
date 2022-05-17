@@ -22,7 +22,6 @@ import static br.com.objectos.tools.Tools.processor;
 
 import br.com.objectos.code.model.element.ProcessingPackage;
 import br.com.objectos.code.model.element.ProcessingType;
-import br.com.objectos.core.object.Checks;
 import java.util.Set;
 import javax.annotation.processing.AbstractProcessor;
 import javax.annotation.processing.ProcessingEnvironment;
@@ -32,6 +31,7 @@ import javax.lang.model.SourceVersion;
 import javax.lang.model.element.PackageElement;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.util.Elements;
+import objectos.lang.Checks;
 
 public final class TestingEnvironment {
 

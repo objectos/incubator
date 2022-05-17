@@ -18,10 +18,10 @@ package br.com.objectos.css.specgen.spec;
 import static br.com.objectos.code.java.Java.l;
 
 import br.com.objectos.code.java.expression.Literal;
-import br.com.objectos.core.object.Checks;
-import br.com.objectos.core.object.ToString;
-import br.com.objectos.core.object.ToStringObject;
 import java.util.Objects;
+import objectos.lang.Checks;
+import objectos.lang.ToString;
+import objectos.lang.ToStringObject;
 
 public class ValueType implements ToStringObject {
 

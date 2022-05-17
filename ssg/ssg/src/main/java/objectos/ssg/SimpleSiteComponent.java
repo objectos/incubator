@@ -16,7 +16,7 @@
 package objectos.ssg;
 
 import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.object.Checks;
+import objectos.lang.Checks;
 import objectos.ssg.Site.Context;
 
 public class SimpleSiteComponent

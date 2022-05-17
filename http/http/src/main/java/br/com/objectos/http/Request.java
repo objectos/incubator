@@ -16,7 +16,7 @@
 package br.com.objectos.http;
 
 import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.object.Checks;
+import objectos.lang.Checks;
 
 public final class Request {
 

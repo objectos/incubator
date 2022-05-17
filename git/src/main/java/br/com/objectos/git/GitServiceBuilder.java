@@ -18,7 +18,7 @@ package br.com.objectos.git;
 import br.com.objectos.concurrent.CpuArray;
 import br.com.objectos.concurrent.CpuWorker;
 import br.com.objectos.concurrent.IoWorker;
-import br.com.objectos.core.object.Checks;
+import objectos.lang.Checks;
 import objectos.logging.Logger;
 import objectos.logging.NoOpLogger;
 

@@ -15,10 +15,10 @@
  */
 package br.com.objectos.fs;
 
-import br.com.objectos.core.object.Checks;
 import br.com.objectos.latest.Concrete.Bridge;
 import java.io.File;
 import java.net.URI;
+import objectos.lang.Checks;
 
 @Bridge
 class LocalFsJava6 extends LocalFsJavaAny {

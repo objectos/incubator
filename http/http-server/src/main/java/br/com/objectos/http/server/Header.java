@@ -15,10 +15,10 @@
  */
 package br.com.objectos.http.server;
 
-import br.com.objectos.core.object.Checks;
 import br.com.objectos.http.media.MediaType;
 import java.io.IOException;
 import java.util.Objects;
+import objectos.lang.Checks;
 
 public abstract class Header implements SocketWritable {
 

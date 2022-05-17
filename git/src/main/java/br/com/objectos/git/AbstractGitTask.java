@@ -15,10 +15,10 @@
  */
 package br.com.objectos.git;
 
-import br.com.objectos.core.object.Checks;
-import br.com.objectos.core.object.ToString;
-import br.com.objectos.core.object.ToStringObject;
 import java.util.concurrent.ExecutionException;
+import objectos.lang.Checks;
+import objectos.lang.ToString;
+import objectos.lang.ToStringObject;
 import objectos.logging.Event1;
 import objectos.logging.Logger;
 

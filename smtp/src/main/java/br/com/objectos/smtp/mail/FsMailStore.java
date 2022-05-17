@@ -16,7 +16,6 @@
 package br.com.objectos.smtp.mail;
 
 import br.com.objectos.core.io.Write;
-import br.com.objectos.core.object.Checks;
 import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.RegularFile;
 import br.com.objectos.smtp.ConfigurationException;
@@ -31,6 +30,7 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.util.UUID;
+import objectos.lang.Checks;
 
 public final class FsMailStore implements MailStore {
 

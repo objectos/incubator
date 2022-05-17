@@ -15,12 +15,12 @@
  */
 package br.com.objectos.parser.spec;
 
-import br.com.objectos.core.object.ToString;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+import objectos.lang.ToString;
 
 public class ProductionQuery
     implements Iterable<Production>, Iterator<ProductionQuery> {

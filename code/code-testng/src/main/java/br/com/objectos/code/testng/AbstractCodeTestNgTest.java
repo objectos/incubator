@@ -16,7 +16,7 @@
 package br.com.objectos.code.testng;
 
 import br.com.objectos.code.testing.TestingEnvironment;
-import br.com.objectos.core.object.Checks;
+import objectos.lang.Checks;
 import org.testng.IHookCallBack;
 import org.testng.IHookable;
 import org.testng.ITestResult;

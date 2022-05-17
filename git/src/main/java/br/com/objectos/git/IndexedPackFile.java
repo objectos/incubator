@@ -15,8 +15,8 @@
  */
 package br.com.objectos.git;
 
-import br.com.objectos.core.object.ToString;
 import br.com.objectos.fs.RegularFile;
+import objectos.lang.ToString;
 
 final class IndexedPackFile extends PackFile {
 

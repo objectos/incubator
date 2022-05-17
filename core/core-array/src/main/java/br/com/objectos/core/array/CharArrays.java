@@ -15,7 +15,7 @@
  */
 package br.com.objectos.core.array;
 
-import br.com.objectos.core.object.Checks;
+import objectos.lang.Checks;
 
 /**
  * <p>

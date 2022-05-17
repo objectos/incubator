@@ -15,7 +15,7 @@
  */
 package br.com.objectos.office.writer;
 
-import br.com.objectos.core.object.Checks;
+import objectos.lang.Checks;
 
 public abstract class AbstractWriterScript implements WriterScript {
 

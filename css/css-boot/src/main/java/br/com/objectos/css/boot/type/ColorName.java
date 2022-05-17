@@ -23,7 +23,7 @@ import br.com.objectos.code.java.JavaNames;
 import br.com.objectos.code.java.expression.Callee;
 import br.com.objectos.code.java.expression.Identifier;
 import br.com.objectos.code.java.expression.MethodInvocation;
-import br.com.objectos.core.object.Checks;
+import objectos.lang.Checks;
 
 public class ColorName implements Comparable<ColorName> {
 

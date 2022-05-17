@@ -20,7 +20,6 @@ import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 
 import br.com.objectos.core.io.Resource;
-import br.com.objectos.core.object.Checks;
 import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.LocalFs;
 import br.com.objectos.fs.RegularFile;
@@ -32,6 +31,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
+import objectos.lang.Checks;
 import org.apache.maven.Maven;
 import org.apache.maven.artifact.InvalidRepositoryException;
 import org.apache.maven.bridge.MavenRepositorySystem;

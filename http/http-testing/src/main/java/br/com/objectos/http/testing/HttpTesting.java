@@ -15,7 +15,6 @@
  */
 package br.com.objectos.http.testing;
 
-import br.com.objectos.core.object.Checks;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -31,6 +30,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import objectos.lang.Checks;
 import java.util.Set;
 
 public class HttpTesting {

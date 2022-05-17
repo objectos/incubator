@@ -15,9 +15,9 @@
  */
 package br.com.objectos.core.string;
 
-import br.com.objectos.core.object.Checks;
 import java.security.SecureRandom;
 import java.util.Random;
+import objectos.lang.Checks;
 
 /**
  * A {@code RandomString} is used to generate random string values

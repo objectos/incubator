@@ -15,7 +15,6 @@
  */
 package br.com.objectos.git;
 
-import br.com.objectos.core.object.Checks;
 import br.com.objectos.core.set.ImmutableSet;
 import br.com.objectos.core.set.MutableSet;
 import br.com.objectos.fs.Directory;
@@ -30,6 +29,7 @@ import java.nio.channels.FileChannel;
 import java.util.Iterator;
 import java.util.zip.DataFormatException;
 import java.util.zip.Inflater;
+import objectos.lang.Checks;
 import objectos.logging.Event0;
 import objectos.logging.Event1;
 import objectos.logging.Event2;
