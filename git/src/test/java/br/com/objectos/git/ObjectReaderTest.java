@@ -21,7 +21,6 @@ import static org.testng.Assert.assertTrue;
 
 import br.com.objectos.concurrent.Concurrent;
 import br.com.objectos.core.io.Charsets;
-import br.com.objectos.core.runtime.ObjectosBuild;
 import br.com.objectos.core.set.ImmutableSet;
 import br.com.objectos.core.set.MutableSet;
 import java.io.IOException;
@@ -64,13 +63,13 @@ public class ObjectReaderTest extends AbstractGitTest {
     assertEquals(reader.state, ObjectReader._START);
 
     executeAndAssertState(
-        reader,
+      reader,
 
-        ObjectReader._NEXT_PACK_FILE,
+      ObjectReader._NEXT_PACK_FILE,
 
-        ObjectReader._NEXT_LOOSE_OBJECT,
+      ObjectReader._NEXT_LOOSE_OBJECT,
 
-        ObjectReader._WAIT_IO
+      ObjectReader._WAIT_IO
     );
 
     //    assertEquals(reader.ioTask, ObjectReader.IO_OPEN_LOOSE);
@@ -103,9 +102,9 @@ public class ObjectReaderTest extends AbstractGitTest {
     assertEquals(reader.inflaterBuffer.position(), 31);
 
     assertEquals(
-        adapter.byteArray.size(),
+      adapter.byteArray.size(),
 
-        reader.inflaterBuffer.position() - 11
+      reader.inflaterBuffer.position() - 11
     );
 
     assertEquals(adapter.objectKind, ObjectKind.COMMIT);
@@ -171,15 +170,15 @@ public class ObjectReaderTest extends AbstractGitTest {
     assertEquals(reader.state, ObjectReader._START);
 
     executeAndAssertState(
-        reader,
+      reader,
 
-        ObjectReader._NEXT_PACK_FILE,
+      ObjectReader._NEXT_PACK_FILE,
 
-        ObjectReader._NEXT_PACK_FILE_OBJECT,
+      ObjectReader._NEXT_PACK_FILE_OBJECT,
 
-        ObjectReader._IO_INDEX_FAN_OUT,
+      ObjectReader._IO_INDEX_FAN_OUT,
 
-        ObjectReader._WAIT_IO
+      ObjectReader._WAIT_IO
     );
 
     assertEquals(oid.getFanOutIndex(), 138);
@@ -189,11 +188,11 @@ public class ObjectReaderTest extends AbstractGitTest {
     assertEquals(reader.channelReadLimit, 4 + 4);
 
     executeAndAssertState(
-        reader,
+      reader,
 
-        ObjectReader._PARSE_INDEX_FAN_OUT,
+      ObjectReader._PARSE_INDEX_FAN_OUT,
 
-        ObjectReader._WAIT_IO
+      ObjectReader._WAIT_IO
     );
 
     assertEquals(reader.objectPosition, 24);
@@ -201,11 +200,11 @@ public class ObjectReaderTest extends AbstractGitTest {
     assertEquals(reader.objectLength, 25);
 
     executeAndAssertState(
-        reader,
+      reader,
 
-        ObjectReader._PARSE_INDEX_OBJECT_NAME,
+      ObjectReader._PARSE_INDEX_OBJECT_NAME,
 
-        ObjectReader._WAIT_IO
+      ObjectReader._WAIT_IO
     );
 
     assertEquals(reader.channelPosition, 4 + 4 + (256 * 4) + (51 * 20) + (51 * 4) + (24 * 4));
@@ -213,11 +212,11 @@ public class ObjectReaderTest extends AbstractGitTest {
     assertEquals(reader.channelReadLimit, 4);
 
     executeAndAssertState(
-        reader,
+      reader,
 
-        ObjectReader._PARSE_INDEX_OFFSET,
+      ObjectReader._PARSE_INDEX_OFFSET,
 
-        ObjectReader._WAIT_IO
+      ObjectReader._WAIT_IO
     );
 
     assertEquals(reader.channelPosition, 980);
@@ -227,15 +226,15 @@ public class ObjectReaderTest extends AbstractGitTest {
     assertEquals(reader.channelReadLimit, 2633);
 
     executeAndAssertState(
-        reader,
+      reader,
 
-        ObjectReader._PARSE_PACK_HEADER,
+      ObjectReader._PARSE_PACK_HEADER,
 
-        ObjectReader._INFLATE,
+      ObjectReader._INFLATE,
 
-        ObjectReader._OBJECT_DATA,
+      ObjectReader._OBJECT_DATA,
 
-        ObjectReader._WAIT_IO
+      ObjectReader._WAIT_IO
     );
 
     assertEquals(reader.channelReadCount, 64 + 64);
@@ -247,39 +246,34 @@ public class ObjectReaderTest extends AbstractGitTest {
     assertEquals(reader.objectLength, 238);
 
     executeAndAssertState(
-        reader,
+      reader,
 
-        ObjectReader._INFLATE,
+      ObjectReader._INFLATE,
 
-        ObjectReader._OBJECT_DATA
+      ObjectReader._OBJECT_DATA
     );
 
     reader.executeOne();
 
-    ObjectosBuild build;
-    build = ObjectosBuild.get();
+    assertEquals(reader.state, ObjectReader._INFLATE);
 
-    if (build != ObjectosBuild.JAVA6) {
-      assertEquals(reader.state, ObjectReader._INFLATE);
+    reader.executeOne();
 
-      reader.executeOne();
+    assertEquals(reader.state, ObjectReader._OBJECT_DATA);
 
-      assertEquals(reader.state, ObjectReader._OBJECT_DATA);
+    reader.executeOne();
 
-      reader.executeOne();
+    assertEquals(reader.state, ObjectReader._WAIT_IO);
 
-      assertEquals(reader.state, ObjectReader._WAIT_IO);
+    assertEquals(reader.channelReadCount, 64 + 64 + 64);
 
-      assertEquals(reader.channelReadCount, 64 + 64 + 64);
+    reader.executeOne();
 
-      reader.executeOne();
+    assertEquals(reader.state, ObjectReader._INFLATE);
 
-      assertEquals(reader.state, ObjectReader._INFLATE);
+    reader.executeOne();
 
-      reader.executeOne();
-
-      assertEquals(reader.state, ObjectReader._OBJECT_DATA);
-    }
+    assertEquals(reader.state, ObjectReader._OBJECT_DATA);
 
     Concurrent.exhaust(reader);
 
@@ -311,15 +305,15 @@ public class ObjectReaderTest extends AbstractGitTest {
     assertEquals(reader.state, ObjectReader._START);
 
     executeAndAssertState(
-        reader,
+      reader,
 
-        ObjectReader._NEXT_PACK_FILE,
+      ObjectReader._NEXT_PACK_FILE,
 
-        ObjectReader._NEXT_PACK_FILE_OBJECT,
+      ObjectReader._NEXT_PACK_FILE_OBJECT,
 
-        ObjectReader._IO_INDEX_FAN_OUT,
+      ObjectReader._IO_INDEX_FAN_OUT,
 
-        ObjectReader._WAIT_IO
+      ObjectReader._WAIT_IO
     );
 
     assertEquals(oid.getFanOutIndex(), 51);
@@ -367,15 +361,15 @@ public class ObjectReaderTest extends AbstractGitTest {
     assertEquals(reader.channelReadLimit, 83);
 
     executeAndAssertState(
-        reader,
+      reader,
 
-        ObjectReader._PARSE_PACK_HEADER,
+      ObjectReader._PARSE_PACK_HEADER,
 
-        ObjectReader._INFLATE,
+      ObjectReader._INFLATE,
 
-        ObjectReader._DELTA_ARRAY,
+      ObjectReader._DELTA_ARRAY,
 
-        ObjectReader._WAIT_IO
+      ObjectReader._WAIT_IO
     );
 
     assertEquals(reader.state, ObjectReader._WAIT_IO);
@@ -393,15 +387,15 @@ public class ObjectReaderTest extends AbstractGitTest {
     assertEquals(reader.deltaStack.peek(), 0);
 
     executeAndAssertState(
-        reader,
+      reader,
 
-        ObjectReader._PARSE_PACK_HEADER,
+      ObjectReader._PARSE_PACK_HEADER,
 
-        ObjectReader._INFLATE,
+      ObjectReader._INFLATE,
 
-        ObjectReader._BASE_OBJECT,
+      ObjectReader._BASE_OBJECT,
 
-        ObjectReader._WAIT_IO
+      ObjectReader._WAIT_IO
     );
 
     assertEquals(reader.channelPosition, 3343);
@@ -454,25 +448,25 @@ public class ObjectReaderTest extends AbstractGitTest {
     assertEquals(reader.state, ObjectReader._START);
 
     executeAndAssertState(
-        reader,
+      reader,
 
-        ObjectReader._NEXT_PACK_FILE,
+      ObjectReader._NEXT_PACK_FILE,
 
-        ObjectReader._NEXT_PACK_FILE_OBJECT,
+      ObjectReader._NEXT_PACK_FILE_OBJECT,
 
-        ObjectReader._IO_INDEX_FAN_OUT,
+      ObjectReader._IO_INDEX_FAN_OUT,
 
-        ObjectReader._WAIT_IO,
+      ObjectReader._WAIT_IO,
 
-        ObjectReader._PARSE_INDEX_FAN_OUT,
+      ObjectReader._PARSE_INDEX_FAN_OUT,
 
-        ObjectReader._WAIT_IO,
+      ObjectReader._WAIT_IO,
 
-        ObjectReader._PARSE_INDEX_OBJECT_NAME,
+      ObjectReader._PARSE_INDEX_OBJECT_NAME,
 
-        ObjectReader._WAIT_IO,
+      ObjectReader._WAIT_IO,
 
-        ObjectReader._PARSE_INDEX_OFFSET
+      ObjectReader._PARSE_INDEX_OFFSET
     );
 
     reader.executeOne();
@@ -545,25 +539,25 @@ public class ObjectReaderTest extends AbstractGitTest {
     assertEquals(reader.state, ObjectReader._START);
 
     executeAndAssertState(
-        reader,
+      reader,
 
-        ObjectReader._NEXT_PACK_FILE,
+      ObjectReader._NEXT_PACK_FILE,
 
-        ObjectReader._NEXT_PACK_FILE_OBJECT,
+      ObjectReader._NEXT_PACK_FILE_OBJECT,
 
-        ObjectReader._IO_INDEX_FAN_OUT,
+      ObjectReader._IO_INDEX_FAN_OUT,
 
-        ObjectReader._WAIT_IO,
+      ObjectReader._WAIT_IO,
 
-        ObjectReader._PARSE_INDEX_FAN_OUT,
+      ObjectReader._PARSE_INDEX_FAN_OUT,
 
-        ObjectReader._WAIT_IO,
+      ObjectReader._WAIT_IO,
 
-        ObjectReader._PARSE_INDEX_OBJECT_NAME,
+      ObjectReader._PARSE_INDEX_OBJECT_NAME,
 
-        ObjectReader._WAIT_IO,
+      ObjectReader._WAIT_IO,
 
-        ObjectReader._PARSE_INDEX_OFFSET
+      ObjectReader._PARSE_INDEX_OFFSET
     );
 
     reader.executeOne();
@@ -671,9 +665,9 @@ public class ObjectReaderTest extends AbstractGitTest {
     assertEquals(reader.state, ObjectReader._WAIT_IO);
 
     executeUntil(
-        reader,
+      reader,
 
-        ObjectReader._PARSE_PACK_HEADER
+      ObjectReader._PARSE_PACK_HEADER
     );
 
     reader.executeOne();
@@ -770,7 +764,7 @@ public class ObjectReaderTest extends AbstractGitTest {
     @Override
     public final void executeFinally() {
       handle.setResult(
-          result.toImmutableSet()
+        result.toImmutableSet()
       );
     }
 

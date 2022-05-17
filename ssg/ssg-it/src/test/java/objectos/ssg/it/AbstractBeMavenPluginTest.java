@@ -24,7 +24,6 @@ import static br.com.objectos.mojo.Mojo.url;
 
 import br.com.objectos.core.io.Charsets;
 import br.com.objectos.core.io.Write;
-import br.com.objectos.core.runtime.ObjectosBuild;
 import br.com.objectos.core.system.LineSeparator;
 import br.com.objectos.core.system.SystemProperty;
 import br.com.objectos.fs.Directory;
@@ -56,40 +55,26 @@ public abstract class AbstractBeMavenPluginTest {
     basedir = LocalFs.getDirectory(basedirPath);
 
     String compilerValue;
-
-    ObjectosBuild build;
-    build = ObjectosBuild.get();
-
-    switch (build) {
-      case JAVA6:
-        compilerValue = "1.6";
-        break;
-      case JAVA7:
-        compilerValue = "1.7";
-        break;
-      default:
-        compilerValue = "1.8";
-        break;
-    }
+    compilerValue = "1.8";
 
     compilerSourceTag = Mojo.xml("maven.compiler.source", compilerValue);
 
     compilerTargetTag = Mojo.xml("maven.compiler.target", compilerValue);
 
     runtime = runtime(
-        localRepository(
-            LocalFs.resolve(
-                SystemProperty.get("objectos.mojo.testing.repository")
-            ).toDirectoryCreateIfNotFound()
-        ),
+      localRepository(
+        LocalFs.resolve(
+          SystemProperty.get("objectos.mojo.testing.repository")
+        ).toDirectoryCreateIfNotFound()
+      ),
 
-        mirror(
-            id("mojo"),
-            url(
-                SystemProperty.get("objectos.mojo.testing.mirrorUrl")
-            ),
-            mirrorOf("*")
-        )
+      mirror(
+        id("mojo"),
+        url(
+          SystemProperty.get("objectos.mojo.testing.mirrorUrl")
+        ),
+        mirrorOf("*")
+      )
     );
 
     versionTag = Mojo.xml("version", SystemProperty.get("objectos.be.version"));

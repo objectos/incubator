@@ -22,7 +22,6 @@ import static org.testng.Assert.assertTrue;
 import br.com.objectos.core.io.Read;
 import br.com.objectos.core.io.Write;
 import br.com.objectos.core.list.Lists;
-import br.com.objectos.core.runtime.ObjectosBuild;
 import br.com.objectos.core.system.Linux;
 import br.com.objectos.core.system.OperatingSystem;
 import br.com.objectos.core.system.OperatingSystemVisitor;
@@ -40,7 +39,6 @@ import java.nio.channels.WritableByteChannel;
 import java.nio.charset.Charset;
 import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 import objectos.lang.Try;
 import org.testng.Assert;
 import org.testng.annotations.AfterSuite;
@@ -50,8 +48,6 @@ import org.testng.annotations.Test;
 public class RegularFileTest extends AbstractObjectosFsTest {
 
   private long lastModified;
-
-  private long lastModifiedStartNanos;
 
   private RegularFile lastModifiedSubject;
 
@@ -152,31 +148,6 @@ public class RegularFileTest extends AbstractObjectosFsTest {
   // actual getLastModifiedMillis test: workaround to be run at the end of the suite
   @AfterSuite(alwaysRun = true)
   public void getLastModifiedMillis() throws InterruptedException, IOException {
-    long elapsedTime;
-    elapsedTime = System.nanoTime() - lastModifiedStartNanos;
-
-    long elapsedMillis;
-    elapsedMillis = TimeUnit.NANOSECONDS.toMillis(elapsedTime);
-
-    ObjectosBuild build;
-    build = ObjectosBuild.get();
-
-    long sleep;
-
-    switch (build) {
-      case JAVA6:
-      case JAVA7:
-        sleep = 1000 - elapsedMillis;
-        break;
-      default:
-        sleep = 0;
-        break;
-    }
-
-    if (sleep > 0) {
-      Thread.sleep(sleep);
-    }
-
     byte[] bytes;
     bytes = Next.bytes(1 << 10);
 
@@ -196,8 +167,6 @@ public class RegularFileTest extends AbstractObjectosFsTest {
 
   @BeforeSuite
   public void getLastModifiedMillisSetup() throws IOException {
-    lastModifiedStartNanos = System.nanoTime();
-
     Directory lastModifiedDirectory;
     lastModifiedDirectory = InternalTestingFs.nextDirectory();
 

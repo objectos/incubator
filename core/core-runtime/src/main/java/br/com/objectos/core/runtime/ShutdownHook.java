@@ -15,8 +15,6 @@
  */
 package br.com.objectos.core.runtime;
 
-import br.com.objectos.latest.Concrete;
-import java.io.Closeable;
 import java.lang.Thread.State;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,10 +35,9 @@ import objectos.logging.NoOpLogger;
  * hook runs. To learn which method this facility invokes, see the specific
  * {@code register} method documentation.
  *
- * @since 2
+ * @since 0.2
  */
-@Concrete(modifiers = "public final", simpleName = "ShutdownHook")
-abstract class AbstractShutdownHook {
+public final class ShutdownHook {
 
   private static final Event1<Throwable> CAUGHT_EXCEPTION = Event1.warn();
 
@@ -54,7 +51,27 @@ abstract class AbstractShutdownHook {
 
   private List<ShutdownHookTask> tasks;
 
-  AbstractShutdownHook() {}
+  private List<AutoCloseable> closeables;
+
+  private ShutdownHook() {}
+
+  /**
+   * Registers the specified {@link AutoCloseable} instance to the
+   * facility provided by this class.
+   *
+   * <p>
+   * During the JVM shutdown process, the facility will invoke the
+   * {@link AutoCloseable#close()} method on supplied instance.
+   *
+   * @param closeable
+   *        a {@link AutoCloseable} instance to be registered
+   */
+  public static void register(AutoCloseable closeable) {
+    ShutdownHook hook;
+    hook = getHook();
+
+    hook.addAutoCloseable(closeable);
+  }
 
   /**
    * Registers the specified {@link ShutdownHookTask} instance to the
@@ -92,7 +109,21 @@ abstract class AbstractShutdownHook {
     return ShutdownHookLazy.INSTANCE;
   }
 
-  abstract void addCloseable(Closeable closeable);
+  final void addAutoCloseable(AutoCloseable closeable) {
+    Checks.checkNotNull(closeable, "closeable == null");
+
+    if (closeables == null) {
+      synchronized (this) {
+        if (closeables == null) {
+          closeables = new ArrayList<>();
+        }
+      }
+    }
+
+    synchronized (closeables) {
+      closeables.add(closeable);
+    }
+  }
 
   final void addShutdownHookTask(ShutdownHookTask task) {
     Checks.checkNotNull(task, "task == null");
@@ -122,8 +153,6 @@ abstract class AbstractShutdownHook {
 
     runtime.addShutdownHook(job);
   }
-
-  abstract void run0();
 
   final void setLoggerImpl(Logger logger) {
     Checks.checkNotNull(logger, "logger == null");
@@ -162,12 +191,27 @@ abstract class AbstractShutdownHook {
         doTasks();
       }
 
-      run0();
+      if (closeables != null) {
+        doCloseables();
+      }
 
       long totalTime;
       totalTime = System.currentTimeMillis() - startTime;
 
       logger.log(FINISHED, totalTime);
+    }
+
+    private void doCloseables() {
+      for (int i = 0; i < closeables.size(); i++) {
+        AutoCloseable c;
+        c = closeables.get(i);
+
+        try {
+          c.close();
+        } catch (Exception e) {
+          log(e);
+        }
+      }
     }
 
     private void doTasks() {
