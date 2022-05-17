@@ -40,7 +40,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>br.com.objectos</groupId>
-			<artifactId>core-string</artifactId>
+			<artifactId>objectos-lang</artifactId>
 		</dependency>
 
 		<dependency>

@@ -29,7 +29,6 @@ module br.com.objectos.logger {
 
   requires br.com.objectos.core.list;
   requires objectos.lang;
-  requires br.com.objectos.core.string;
   requires br.com.objectos.core.system;
   requires br.com.objectos.core.throwable;
 }

@@ -69,10 +69,6 @@
 			<groupId>br.com.objectos</groupId>
 			<artifactId>core-map</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>br.com.objectos</groupId>
-			<artifactId>core-string</artifactId>
-		</dependency>
 		
 		<dependency>
 			<groupId>br.com.objectos</groupId>

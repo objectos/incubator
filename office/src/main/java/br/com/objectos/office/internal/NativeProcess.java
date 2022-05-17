@@ -16,7 +16,6 @@
 package br.com.objectos.office.internal;
 
 import br.com.objectos.core.list.Lists;
-import br.com.objectos.core.string.RandomString;
 import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.JavaIoTmpdir;
 import br.com.objectos.office.ServerStartException;
@@ -32,6 +31,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import objectos.lang.Checks;
+import objectos.lang.RandomString;
 
 public class NativeProcess {
 
@@ -222,10 +222,10 @@ public class NativeProcess {
         Thread.sleep(SLEEP_TIME);
       } catch (IllegalArgumentException e) {
         throw new ServerStartException("Could not acquire StarOffice.ComponentContext instance",
-            e);
+          e);
       } catch (ConnectionSetupException e) {
         throw new ServerStartException("Could not acquire StarOffice.ComponentContext instance",
-            e);
+          e);
       }
     }
 

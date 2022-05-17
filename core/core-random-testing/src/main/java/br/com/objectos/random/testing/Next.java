@@ -15,8 +15,8 @@
  */
 package br.com.objectos.random.testing;
 
-import br.com.objectos.core.string.RandomString;
 import java.util.Random;
+import objectos.lang.RandomString;
 
 /**
  * Provides {@code static} methods for generating random byte arrays, string and

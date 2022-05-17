@@ -15,7 +15,7 @@
  */
 package br.com.objectos.css;
 
-import br.com.objectos.core.string.RandomString;
+import objectos.lang.RandomString;
 
 final class RandomStringImpl {
 

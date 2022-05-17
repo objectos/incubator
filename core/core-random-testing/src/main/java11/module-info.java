@@ -20,5 +20,4 @@ module br.com.objectos.random.testing {
   exports br.com.objectos.random.testing;
 
   requires objectos.lang;
-  requires br.com.objectos.core.string;
 }

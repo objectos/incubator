@@ -16,18 +16,18 @@
 package br.com.objectos.tools;
 
 import br.com.objectos.core.set.ImmutableSet;
-import br.com.objectos.core.string.Strings;
 import java.io.IOException;
 import java.net.URI;
+import objectos.lang.Strings;
 
 class StringJavaFileObject extends AbstractJavaFileObject {
 
   private static final ImmutableSet<String> TYPES_KEYWORDS = ImmutableSet.of(
-      "@interface",
-      "class",
-      "enum",
-      "interface",
-      "record"
+    "@interface",
+    "class",
+    "enum",
+    "interface",
+    "record"
   );
 
   private CanonicalName canonicalName;

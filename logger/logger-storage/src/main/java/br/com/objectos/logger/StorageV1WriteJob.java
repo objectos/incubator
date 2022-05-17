@@ -21,7 +21,6 @@ import br.com.objectos.concurrent.IoTask;
 import br.com.objectos.concurrent.IoWorker;
 import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.core.list.MutableList;
-import br.com.objectos.core.string.Strings;
 import br.com.objectos.core.throwable.StackTraceElements;
 import br.com.objectos.core.throwable.Throwables;
 import java.io.IOException;
@@ -29,6 +28,7 @@ import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
+import objectos.lang.Strings;
 import objectos.logging.Level;
 
 final class StorageV1WriteJob implements IoTask, CpuTask, WriteJob {
@@ -327,7 +327,7 @@ final class StorageV1WriteJob implements IoTask, CpuTask, WriteJob {
     writeStringList.add(log.thread);
 
     return execute(
-        toWriteStringList(_LOG_VALUES)
+      toWriteStringList(_LOG_VALUES)
     );
   }
 
@@ -343,16 +343,16 @@ final class StorageV1WriteJob implements IoTask, CpuTask, WriteJob {
         throwable = (Throwable) maybeThrowable;
 
         return execute(
-            toWriteByte(
-                StorageV1.THROWABLE,
+          toWriteByte(
+            StorageV1.THROWABLE,
 
-                toThrowable(throwable, _LOG_THROWABLE)
-            )
+            toThrowable(throwable, _LOG_THROWABLE)
+          )
         );
       }
 
       return execute(
-          toWriteByte(StorageV1.NOT_THROWABLE, _LOG_THROWABLE)
+        toWriteByte(StorageV1.NOT_THROWABLE, _LOG_THROWABLE)
       );
     }
 
@@ -375,7 +375,7 @@ final class StorageV1WriteJob implements IoTask, CpuTask, WriteJob {
       iterIndex++;
 
       return execute(
-          toWriteString(value, _LOG_VALUE)
+        toWriteString(value, _LOG_VALUE)
       );
     }
 
@@ -397,7 +397,7 @@ final class StorageV1WriteJob implements IoTask, CpuTask, WriteJob {
     stack = stack.previous;
 
     return execute(
-        toWriteByte(StorageV1.POP_THROWABLE, returnTo)
+      toWriteByte(StorageV1.POP_THROWABLE, returnTo)
     );
   }
 
@@ -409,7 +409,7 @@ final class StorageV1WriteJob implements IoTask, CpuTask, WriteJob {
       stackTraceIndex++;
 
       return execute(
-          toStackTraceElement(element)
+        toStackTraceElement(element)
       );
     }
 
@@ -427,13 +427,13 @@ final class StorageV1WriteJob implements IoTask, CpuTask, WriteJob {
     stackTraceIndex = 0;
 
     return execute(
-        toWriteShort(stackTrace.length, _STACK_TRACE)
+      toWriteShort(stackTrace.length, _STACK_TRACE)
     );
   }
 
   private byte executeStackTraceLineNumber() {
     return execute(
-        toWriteShort(stackTraceLineNumber, _STACK_TRACE)
+      toWriteShort(stackTraceLineNumber, _STACK_TRACE)
     );
   }
 
@@ -461,7 +461,7 @@ final class StorageV1WriteJob implements IoTask, CpuTask, WriteJob {
       t = stack.nextSuppressed();
 
       return execute(
-          toWriteByte(StorageV1.THROWABLE_SUPPRESSED, toThrowable(t, _SUPRESSED))
+        toWriteByte(StorageV1.THROWABLE_SUPPRESSED, toThrowable(t, _SUPRESSED))
       );
     }
 
@@ -470,7 +470,7 @@ final class StorageV1WriteJob implements IoTask, CpuTask, WriteJob {
 
     if (cause != null) {
       return execute(
-          toWriteByte(StorageV1.THROWABLE_CAUSE, toThrowable(cause, _POP_THROWABLE))
+        toWriteByte(StorageV1.THROWABLE_CAUSE, toThrowable(cause, _POP_THROWABLE))
       );
     }
 
@@ -487,7 +487,7 @@ final class StorageV1WriteJob implements IoTask, CpuTask, WriteJob {
     writeStringList.add(stack.message);
 
     return execute(
-        toWriteStringList(_STACK_TRACE_LENGTH)
+      toWriteStringList(_STACK_TRACE_LENGTH)
     );
   }
 
@@ -567,11 +567,11 @@ final class StorageV1WriteJob implements IoTask, CpuTask, WriteJob {
     length = bytes.length;
 
     return execute(
-        toWriteShort(
-            length,
+      toWriteShort(
+        length,
 
-            toWriteByteArray(bytes, writeStringReady)
-        )
+        toWriteByteArray(bytes, writeStringReady)
+      )
     );
   }
 
@@ -582,7 +582,7 @@ final class StorageV1WriteJob implements IoTask, CpuTask, WriteJob {
       writeStringListIndex++;
 
       return execute(
-          toWriteString(value, _WRITE_STRING_LIST)
+        toWriteString(value, _WRITE_STRING_LIST)
       );
     }
 

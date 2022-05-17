@@ -15,7 +15,6 @@
  */
 package br.com.objectos.css.parser.select;
 
-import br.com.objectos.core.string.Strings;
 import br.com.objectos.css.Css;
 import br.com.objectos.css.select.AttributeSelector;
 import br.com.objectos.css.select.AttributeValueOperator;
@@ -25,6 +24,7 @@ import br.com.objectos.css.select.IdSelector;
 import br.com.objectos.css.select.SelectorFactory;
 import br.com.objectos.css.select.TypeSelector;
 import br.com.objectos.css.select.TypeSelectors;
+import objectos.lang.Strings;
 import objectos.lang.ToString;
 
 class IdentToken implements HasStringValue {

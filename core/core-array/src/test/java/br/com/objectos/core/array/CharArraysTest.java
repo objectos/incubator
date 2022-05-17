@@ -21,8 +21,8 @@ import static org.testng.Assert.assertNotSame;
 import static org.testng.Assert.assertSame;
 import static org.testng.Assert.assertTrue;
 
-import br.com.objectos.core.string.RandomString;
 import java.util.Arrays;
+import objectos.lang.RandomString;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -166,8 +166,8 @@ public class CharArraysTest {
       String a, int aFromIndex, int aToIndex,
       String b, int bFromIndex, int bToIndex) {
     CharArrays.mismatch(
-        a.toCharArray(), aFromIndex, aToIndex,
-        b.toCharArray(), bFromIndex, bToIndex
+      a.toCharArray(), aFromIndex, aToIndex,
+      b.toCharArray(), bFromIndex, bToIndex
     );
 
     Assert.fail();
@@ -176,13 +176,13 @@ public class CharArraysTest {
   @DataProvider
   public Object[][] mismatch2_AIOBEParam() {
     return new Object[][] {
-        {"abcde", -1, 2, "abcde", 2, 3},
-        {"abcde", 0, 6, "abcde", 2, 3},
-        {"abcde", 0, 300, "abcde", 2, 3},
+                           {"abcde", -1, 2, "abcde", 2, 3},
+                           {"abcde", 0, 6, "abcde", 2, 3},
+                           {"abcde", 0, 300, "abcde", 2, 3},
 
-        {"abcde", 2, 3, "abcde", -2, 3},
-        {"abcde", 2, 3, "abcde", 2, 6},
-        {"abcde", 2, 3, "abcde", 2, 10}
+                           {"abcde", 2, 3, "abcde", -2, 3},
+                           {"abcde", 2, 3, "abcde", 2, 6},
+                           {"abcde", 2, 3, "abcde", 2, 10}
     };
   }
 
@@ -193,8 +193,8 @@ public class CharArraysTest {
       String a, int aFromIndex, int aToIndex,
       String b, int bFromIndex, int bToIndex) {
     CharArrays.mismatch(
-        a.toCharArray(), aFromIndex, aToIndex,
-        b.toCharArray(), bFromIndex, bToIndex
+      a.toCharArray(), aFromIndex, aToIndex,
+      b.toCharArray(), bFromIndex, bToIndex
     );
 
     Assert.fail();
@@ -203,8 +203,8 @@ public class CharArraysTest {
   @DataProvider
   public Object[][] mismatch2_IAEParam() {
     return new Object[][] {
-        {"abcde", 3, 2, "abcde", 2, 3},
-        {"abcde", 2, 3, "abcde", 3, 1}
+                           {"abcde", 3, 2, "abcde", 2, 3},
+                           {"abcde", 2, 3, "abcde", 3, 1}
     };
   }
 
@@ -226,9 +226,9 @@ public class CharArraysTest {
 
   private void test(int expected, char[] a, char[] b) {
     Assert.assertEquals(
-        CharArrays.mismatch(a, b),
+      CharArrays.mismatch(a, b),
 
-        expected
+      expected
     );
   }
 
@@ -237,12 +237,12 @@ public class CharArraysTest {
       String a, int aFromIndex, int aToIndex,
       String b, int bFromIndex, int bToIndex) {
     Assert.assertEquals(
-        CharArrays.mismatch(
-            a.toCharArray(), aFromIndex, aToIndex,
-            b.toCharArray(), bFromIndex, bToIndex
-        ),
+      CharArrays.mismatch(
+        a.toCharArray(), aFromIndex, aToIndex,
+        b.toCharArray(), bFromIndex, bToIndex
+      ),
 
-        expected
+      expected
     );
   }
 

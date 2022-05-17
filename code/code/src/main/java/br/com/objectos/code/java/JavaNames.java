@@ -15,8 +15,8 @@
  */
 package br.com.objectos.code.java;
 
-import br.com.objectos.core.string.Conversion;
-import br.com.objectos.core.string.StringConverter;
+import objectos.lang.Conversion;
+import objectos.lang.StringConverter;
 
 /**
  * This class provides utility methods to produce valid Java names.
@@ -26,15 +26,15 @@ import br.com.objectos.core.string.StringConverter;
 public final class JavaNames {
 
   private static final StringConverter IDENTIFIER = StringConverter.create(
-      Conversion.toJavaIdentifier()
+    Conversion.toJavaIdentifier()
   );
 
   private static final StringConverter LOWER_CAMEL_CASE = StringConverter.create(
-      Conversion.toJavaLowerCamelCase()
+    Conversion.toJavaLowerCamelCase()
   );
 
   private static final StringConverter UPPER_CAMEL_CASE = StringConverter.create(
-      Conversion.toJavaUpperCamelCase()
+    Conversion.toJavaUpperCamelCase()
   );
 
   private JavaNames() {}

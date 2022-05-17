@@ -15,8 +15,8 @@
  */
 package br.com.objectos.core.io;
 
-import br.com.objectos.core.string.RandomString;
 import java.util.Random;
+import objectos.lang.RandomString;
 
 final class ThisRandom {
 

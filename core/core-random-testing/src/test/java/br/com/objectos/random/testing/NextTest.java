@@ -19,9 +19,9 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotEquals;
 import static org.testng.Assert.assertTrue;
 
-import br.com.objectos.core.string.RandomString;
 import java.util.Arrays;
 import java.util.BitSet;
+import objectos.lang.RandomString;
 import org.testng.annotations.Test;
 
 public class NextTest {

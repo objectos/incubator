@@ -15,7 +15,7 @@
  */
 package br.com.objectos.css;
 
-import br.com.objectos.core.string.Strings;
+import objectos.lang.Strings;
 
 interface Selector {
 
