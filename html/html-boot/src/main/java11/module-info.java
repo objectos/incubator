@@ -24,7 +24,7 @@ module br.com.objectos.html.boot {
   requires br.com.objectos.core.collection;
   requires br.com.objectos.core.list;
   requires br.com.objectos.core.map;
-  requires br.com.objectos.core.object;
+  requires objectos.lang;
   requires br.com.objectos.core.set;
   requires br.com.objectos.fs;
   requires java.compiler;

@@ -23,7 +23,7 @@
 	<parent>
 		<groupId>br.com.objectos</groupId>
 		<artifactId>incubator</artifactId>
-		<version>0.1.0-SNAPSHOT</version>
+		<version>0.2.0-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 
@@ -103,10 +103,6 @@
 		<dependency>
 			<groupId>br.com.objectos</groupId>
 			<artifactId>core-logging-testing</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>br.com.objectos</groupId>
-			<artifactId>core-object</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>br.com.objectos</groupId>

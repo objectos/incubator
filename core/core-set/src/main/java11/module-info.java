@@ -19,7 +19,7 @@
 module br.com.objectos.core.set {
   exports br.com.objectos.core.set;
 
-  requires transitive br.com.objectos.core.object;
+  requires transitive objectos.lang;
 
   requires br.com.objectos.core.array;
   requires br.com.objectos.core.collection;

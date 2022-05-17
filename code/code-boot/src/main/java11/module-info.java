@@ -19,7 +19,7 @@ module br.com.objectos.code.boot {
   requires br.com.objectos.code;
   requires br.com.objectos.code.annotations;
   requires br.com.objectos.core.list;
-  requires br.com.objectos.core.object;
+  requires objectos.lang;
   requires br.com.objectos.core.set;
   requires java.compiler;
 

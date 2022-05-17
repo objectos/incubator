@@ -21,5 +21,5 @@
 module br.com.objectos.core.string {
   exports br.com.objectos.core.string;
 
-  requires br.com.objectos.core.object;
+  requires objectos.lang;
 }

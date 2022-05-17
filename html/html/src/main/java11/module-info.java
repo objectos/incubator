@@ -30,5 +30,5 @@ module br.com.objectos.html {
   requires br.com.objectos.core.collection;
   requires br.com.objectos.core.list;
   requires br.com.objectos.core.map;
-  requires br.com.objectos.core.object;
+  requires objectos.lang;
 }

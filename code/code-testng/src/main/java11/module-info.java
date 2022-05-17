@@ -21,5 +21,5 @@ module br.com.objectos.code.testng {
   requires transitive org.testng;
 
   requires br.com.objectos.code;
-  requires br.com.objectos.core.object;
+  requires objectos.lang;
 }

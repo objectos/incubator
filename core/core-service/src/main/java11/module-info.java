@@ -23,5 +23,5 @@ module br.com.objectos.core.service {
 
   requires transitive br.com.objectos.core.runtime;
 
-  requires br.com.objectos.core.object;
+  requires objectos.lang;
 }

@@ -23,5 +23,5 @@ module br.com.objectos.http.server {
   requires br.com.objectos.core.io;
   requires br.com.objectos.core.list;
   requires br.com.objectos.core.map;
-  requires br.com.objectos.core.object;
+  requires objectos.lang;
 }

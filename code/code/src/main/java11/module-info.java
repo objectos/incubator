@@ -36,7 +36,7 @@ module br.com.objectos.code {
 
   requires br.com.objectos.code.annotations;
   requires br.com.objectos.core.map;
-  requires br.com.objectos.core.object;
+  requires objectos.lang;
   requires br.com.objectos.core.set;
   requires br.com.objectos.core.string;
   requires br.com.objectos.core.system;

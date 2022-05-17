@@ -20,7 +20,7 @@ module br.com.objectos.code.testing {
 
   requires br.com.objectos.core.list;
   requires br.com.objectos.core.map;
-  requires br.com.objectos.core.object;
+  requires objectos.lang;
   requires br.com.objectos.tools;
   requires java.compiler;
 }

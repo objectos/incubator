@@ -19,7 +19,7 @@
 module br.com.objectos.core.list {
   exports br.com.objectos.core.list;
 
-  requires transitive br.com.objectos.core.object;
+  requires transitive objectos.lang;
 
   requires static br.com.objectos.latest;
 

@@ -23,7 +23,7 @@ module br.com.objectos.tools {
 
   requires br.com.objectos.core.list;
   requires br.com.objectos.core.map;
-  requires br.com.objectos.core.object;
+  requires objectos.lang;
   requires br.com.objectos.core.set;
   requires br.com.objectos.core.string;
   requires br.com.objectos.core.system;

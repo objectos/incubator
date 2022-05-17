@@ -23,7 +23,7 @@
 	<parent>
 		<groupId>br.com.objectos</groupId>
 		<artifactId>incubator</artifactId>
-		<version>0.1.0-SNAPSHOT</version>
+		<version>0.2.0-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>core-parent</artifactId>
@@ -44,7 +44,6 @@
 		<module>core-logging-testing</module>
 		<module>core-map</module>
 		<module>core-net</module>
-		<module>core-object</module>
 		<module>core-random-testing</module>
 		<module>core-runtime</module>
 		<module>core-service</module>

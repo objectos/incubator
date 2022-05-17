@@ -24,7 +24,7 @@ module br.com.objectos.fs {
   requires static br.com.objectos.latest;
 
   requires br.com.objectos.core.list;
-  requires br.com.objectos.core.object;
+  requires objectos.lang;
   requires br.com.objectos.core.system;
   requires br.com.objectos.core.throwable;
 }

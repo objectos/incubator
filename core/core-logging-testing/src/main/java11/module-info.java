@@ -23,6 +23,6 @@ module br.com.objectos.core.logging.testing {
   requires transitive objectos.logging;
 
   requires br.com.objectos.core.list;
-  requires br.com.objectos.core.object;
+  requires objectos.lang;
   requires br.com.objectos.core.system;
 }

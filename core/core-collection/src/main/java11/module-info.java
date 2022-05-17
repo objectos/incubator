@@ -20,7 +20,7 @@ module br.com.objectos.core.collection {
   exports br.com.objectos.core.collection;
 
   requires br.com.objectos.core.array;
-  requires br.com.objectos.core.object;
+  requires objectos.lang;
 
   requires static br.com.objectos.latest;
 }

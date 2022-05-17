@@ -24,5 +24,5 @@ module br.com.objectos.mail.smtp.server {
 
   requires br.com.objectos.core.list;
   requires br.com.objectos.core.array;
-  requires br.com.objectos.core.object;
+  requires objectos.lang;
 }

@@ -21,7 +21,7 @@ module br.com.objectos.git {
 
   requires transitive br.com.objectos.concurrent;
   requires transitive br.com.objectos.core.list;
-  requires transitive br.com.objectos.core.object;
+  requires transitive objectos.lang;
   requires transitive br.com.objectos.fs;
 
   requires br.com.objectos.core.array;

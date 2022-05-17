@@ -20,7 +20,7 @@ module br.com.objectos.mysql {
   requires transitive br.com.objectos.fs;
 
   requires br.com.objectos.code.annotations;
-  requires br.com.objectos.core.object;
+  requires objectos.lang;
   requires br.com.objectos.core.string;
   requires br.com.objectos.core.system;
   requires br.com.objectos.core.throwable;

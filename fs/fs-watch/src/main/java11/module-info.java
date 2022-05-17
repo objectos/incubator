@@ -25,7 +25,7 @@ module br.com.objectos.fs.watch {
   requires static br.com.objectos.latest;
 
   requires br.com.objectos.core.map;
-  requires br.com.objectos.core.object;
+  requires objectos.lang;
   requires br.com.objectos.core.runtime;
   requires br.com.objectos.core.set;
   requires br.com.objectos.core.throwable;

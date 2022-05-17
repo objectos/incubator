@@ -24,6 +24,6 @@ module br.com.objectos.core.throwable {
 
   requires static br.com.objectos.latest;
 
-  requires br.com.objectos.core.object;
+  requires objectos.lang;
   requires objectos.logging;
 }

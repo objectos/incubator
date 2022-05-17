@@ -23,6 +23,6 @@ module br.com.objectos.core.io {
 
   requires transitive br.com.objectos.core.list;
 
-  requires br.com.objectos.core.object;
+  requires objectos.lang;
   requires br.com.objectos.core.throwable;
 }

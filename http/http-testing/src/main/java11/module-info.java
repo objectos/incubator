@@ -20,7 +20,7 @@ module br.com.objectos.http.testing {
 
   requires br.com.objectos.core.io;
   requires br.com.objectos.core.list;
-  requires br.com.objectos.core.object;
+  requires objectos.lang;
   requires br.com.objectos.fs;
   requires br.com.objectos.fs.testing;
   requires org.testng;
