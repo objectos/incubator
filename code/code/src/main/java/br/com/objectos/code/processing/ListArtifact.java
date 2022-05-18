@@ -16,8 +16,8 @@
 package br.com.objectos.code.processing;
 
 import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.system.LineSeparator;
 import javax.annotation.processing.ProcessingEnvironment;
+import objectos.lang.LineSeparator;
 
 class ListArtifact extends Artifact {
 

@@ -17,7 +17,7 @@ package br.com.objectos.git;
 
 import static org.testng.Assert.assertEquals;
 
-import br.com.objectos.core.system.LineSeparator;
+import objectos.lang.LineSeparator;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 

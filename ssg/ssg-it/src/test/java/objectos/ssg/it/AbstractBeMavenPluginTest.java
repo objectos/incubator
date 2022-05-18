@@ -24,8 +24,6 @@ import static br.com.objectos.mojo.Mojo.url;
 
 import br.com.objectos.core.io.Charsets;
 import br.com.objectos.core.io.Write;
-import br.com.objectos.core.system.LineSeparator;
-import br.com.objectos.core.system.SystemProperty;
 import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.LocalFs;
 import br.com.objectos.fs.RegularFile;
@@ -33,6 +31,8 @@ import br.com.objectos.mojo.Mojo;
 import br.com.objectos.mojo.MojoException;
 import br.com.objectos.mojo.MojoRuntime;
 import java.io.IOException;
+import objectos.lang.LineSeparator;
+import objectos.lang.SystemProperty;
 import org.testng.annotations.BeforeSuite;
 
 public abstract class AbstractBeMavenPluginTest {

@@ -15,7 +15,6 @@
  */
 package br.com.objectos.core.logging.testing;
 
-import br.com.objectos.core.system.LineSeparator;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -25,6 +24,7 @@ import objectos.lang.Event1;
 import objectos.lang.Event2;
 import objectos.lang.Event3;
 import objectos.lang.Level;
+import objectos.lang.LineSeparator;
 import objectos.lang.ToString;
 import objectos.lang.ToStringObject;
 

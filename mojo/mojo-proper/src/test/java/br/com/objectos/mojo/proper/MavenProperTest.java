@@ -158,10 +158,10 @@ public class MavenProperTest {
 
     MavenCli cli = new MavenCli(classWorld);
     int result = cli.doMain(
-        new String[] {"compile"},
-        workingDirectory.toString(),
-        System.out,
-        System.err
+      new String[] {"compile"},
+      workingDirectory.toString(),
+      System.out,
+      System.err
     );
     assertEquals(result, 0);
 
@@ -204,7 +204,7 @@ public class MavenProperTest {
         for (Repository remoteRepository : remoteRepositories) {
           try {
             request.addRemoteRepository(
-                MavenRepositorySystem.buildArtifactRepository(remoteRepository));
+              MavenRepositorySystem.buildArtifactRepository(remoteRepository));
           } catch (InvalidRepositoryException e) {
             // do nothing for now
           }
@@ -214,7 +214,7 @@ public class MavenProperTest {
         for (Repository pluginRepository : pluginRepositories) {
           try {
             request.addPluginArtifactRepository(
-                MavenRepositorySystem.buildArtifactRepository(pluginRepository));
+              MavenRepositorySystem.buildArtifactRepository(pluginRepository));
           } catch (InvalidRepositoryException e) {
             // do nothing for now
           }

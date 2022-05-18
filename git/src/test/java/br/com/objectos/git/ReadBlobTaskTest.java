@@ -19,10 +19,10 @@ import static org.testng.Assert.assertEquals;
 
 import br.com.objectos.concurrent.Concurrent;
 import br.com.objectos.core.io.Charsets;
-import br.com.objectos.core.system.LineSeparator;
 import br.com.objectos.fs.Directory;
 import java.io.IOException;
 import java.util.concurrent.ExecutionException;
+import objectos.lang.LineSeparator;
 import org.testng.annotations.Test;
 
 public class ReadBlobTaskTest extends AbstractGitTest {
@@ -47,14 +47,14 @@ public class ReadBlobTaskTest extends AbstractGitTest {
     result = task.getResult();
 
     assertEquals(
-        result.toString(Charsets.utf8()),
+      result.toString(Charsets.utf8()),
 
-        LineSeparator.join(
-            "# ObjectosRepo",
-            "",
-            "This is a git repository meant to be used in tests.",
-            ""
-        )
+      LineSeparator.join(
+        "# ObjectosRepo",
+        "",
+        "This is a git repository meant to be used in tests.",
+        ""
+      )
     );
   }
 

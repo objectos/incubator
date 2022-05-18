@@ -15,8 +15,8 @@
  */
 package br.com.objectos.fs;
 
-import br.com.objectos.core.system.SystemProperty;
 import java.io.IOException;
+import objectos.lang.SystemProperty;
 
 /**
  * The {@code java.io.tmpdir} system property as a {@link Directory} instance.

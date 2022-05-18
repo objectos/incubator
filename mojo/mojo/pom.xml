@@ -94,6 +94,10 @@
 
 		<dependency>
 			<groupId>br.com.objectos</groupId>
+			<artifactId>core-io</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>br.com.objectos</groupId>
 			<artifactId>fs</artifactId>
 		</dependency>
 		<dependency>

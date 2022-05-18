@@ -38,5 +38,4 @@ module br.com.objectos.code {
   requires br.com.objectos.core.map;
   requires objectos.lang;
   requires br.com.objectos.core.set;
-  requires br.com.objectos.core.system;
 }

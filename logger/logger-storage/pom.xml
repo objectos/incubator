@@ -39,11 +39,11 @@
 		
 		<dependency>
 			<groupId>br.com.objectos</groupId>
-			<artifactId>core-logging-testing</artifactId>
+			<artifactId>core-io</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>br.com.objectos</groupId>
-			<artifactId>core-system</artifactId>
+			<artifactId>core-logging-testing</artifactId>
 		</dependency>
 
 		<dependency>

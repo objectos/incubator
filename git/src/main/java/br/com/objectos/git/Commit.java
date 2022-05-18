@@ -16,7 +16,7 @@
 package br.com.objectos.git;
 
 import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.system.LineSeparator;
+import objectos.lang.LineSeparator;
 import objectos.lang.ToString;
 
 /**
@@ -58,13 +58,13 @@ public final class Commit extends GitObject {
   @Override
   public final void formatToString(StringBuilder sb, int depth) {
     ToString.formatToString(
-        sb, depth, this,
-        "", objectId,
-        "author", getAuthor(),
-        "committer", getCommitter(),
-        "message", getMessage(),
-        "parents", getParents(),
-        "tree", getTree()
+      sb, depth, this,
+      "", objectId,
+      "author", getAuthor(),
+      "committer", getCommitter(),
+      "message", getMessage(),
+      "parents", getParents(),
+      "tree", getTree()
     );
   }
 

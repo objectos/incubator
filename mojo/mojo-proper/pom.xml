@@ -28,7 +28,7 @@
 	</parent>
 
 	<artifactId>mojo-proper</artifactId>
-	
+
 	<name>${project.groupId}:${project.artifactId}</name>
 
 	<inceptionYear>2020</inceptionYear>
@@ -45,6 +45,11 @@
 	</build>
 
 	<dependencies>
+		<dependency>
+			<groupId>br.com.objectos</groupId>
+			<artifactId>core-io</artifactId>
+			<scope>test</scope>
+		</dependency>
 		<dependency>
 			<groupId>br.com.objectos</groupId>
 			<artifactId>fs-testing</artifactId>

@@ -18,11 +18,11 @@ package br.com.objectos.fs;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
-import br.com.objectos.core.system.Linux;
-import br.com.objectos.core.system.OperatingSystem;
-import br.com.objectos.core.system.OperatingSystemVisitor;
-import br.com.objectos.core.system.SystemProperty;
-import br.com.objectos.core.system.UnsupportedOperatingSystem;
+import objectos.lang.Linux;
+import objectos.lang.OperatingSystem;
+import objectos.lang.OperatingSystemVisitor;
+import objectos.lang.SystemProperty;
+import objectos.lang.UnsupportedOperatingSystem;
 import br.com.objectos.random.testing.Next;
 import java.io.Closeable;
 import java.io.File;

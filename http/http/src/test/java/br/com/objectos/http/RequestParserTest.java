@@ -20,10 +20,10 @@ import static org.testng.Assert.assertEquals;
 import br.com.objectos.concurrent.Concurrent;
 import br.com.objectos.concurrent.DirectIoWorker;
 import br.com.objectos.concurrent.IoWorker;
-import br.com.objectos.core.system.LineSeparator;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.nio.channels.ReadableByteChannel;
+import objectos.lang.LineSeparator;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -54,16 +54,16 @@ public class RequestParserTest {
       + "- request line only")
   public void testCase01() {
     assertEquals(
-        parse(
-            "GET /test/ HTTP/1.0",
-            "",
-            ""
-        ),
-        LineSeparator.join(
-            "GET /test/ V1_0",
-            "BodyIgnoredImpl",
-            ""
-        )
+      parse(
+        "GET /test/ HTTP/1.0",
+        "",
+        ""
+      ),
+      LineSeparator.join(
+        "GET /test/ V1_0",
+        "BodyIgnoredImpl",
+        ""
+      )
     );
   }
 
@@ -73,20 +73,20 @@ public class RequestParserTest {
       + "- headers")
   public void testCase02() {
     assertEquals(
-        parse(
-            "GET /test/ HTTP/1.0",
-            "Accept: text/html",
-            "Host: www.example.com",
-            "",
-            ""
-        ),
-        LineSeparator.join(
-            "GET /test/ V1_0",
-            "HeaderAcceptImpl: text/html",
-            "HeaderHostImpl: www.example.com",
-            "BodyIgnoredImpl",
-            ""
-        )
+      parse(
+        "GET /test/ HTTP/1.0",
+        "Accept: text/html",
+        "Host: www.example.com",
+        "",
+        ""
+      ),
+      LineSeparator.join(
+        "GET /test/ V1_0",
+        "HeaderAcceptImpl: text/html",
+        "HeaderHostImpl: www.example.com",
+        "BodyIgnoredImpl",
+        ""
+      )
     );
   }
 
@@ -97,26 +97,26 @@ public class RequestParserTest {
       + "- payload")
   public void testCase03() {
     assertEquals(
-        parse(
-            "POST /test/api/login HTTP/1.0",
-            "Accept: application/json",
-            "Cookie: foo=bar",
-            "Content-Length: 35",
-            "Content-Type: application/json; charset=\"UTF-8\"",
-            "Host: www.example.com",
-            "",
-            "{\"prop1\":\"val001\",\"prop2\":\"val002\"}"
-        ),
-        LineSeparator.join(
-            "POST /test/api/login V1_0",
-            "HeaderAcceptImpl: application/json",
-            "HeaderCookieImpl: foo=bar",
-            "HeaderContentLengthImpl: 35",
-            "HeaderContentTypeImpl: application/json; charset=utf-8",
-            "HeaderHostImpl: www.example.com",
-            "BodyTextImpl",
-            "{\"prop1\":\"val001\",\"prop2\":\"val002\"}"
-        )
+      parse(
+        "POST /test/api/login HTTP/1.0",
+        "Accept: application/json",
+        "Cookie: foo=bar",
+        "Content-Length: 35",
+        "Content-Type: application/json; charset=\"UTF-8\"",
+        "Host: www.example.com",
+        "",
+        "{\"prop1\":\"val001\",\"prop2\":\"val002\"}"
+      ),
+      LineSeparator.join(
+        "POST /test/api/login V1_0",
+        "HeaderAcceptImpl: application/json",
+        "HeaderCookieImpl: foo=bar",
+        "HeaderContentLengthImpl: 35",
+        "HeaderContentTypeImpl: application/json; charset=utf-8",
+        "HeaderHostImpl: www.example.com",
+        "BodyTextImpl",
+        "{\"prop1\":\"val001\",\"prop2\":\"val002\"}"
+      )
     );
   }
 

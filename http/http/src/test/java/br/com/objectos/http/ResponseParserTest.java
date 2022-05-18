@@ -20,10 +20,10 @@ import static org.testng.Assert.assertEquals;
 import br.com.objectos.concurrent.Concurrent;
 import br.com.objectos.concurrent.DirectIoWorker;
 import br.com.objectos.concurrent.IoWorker;
-import br.com.objectos.core.system.LineSeparator;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.nio.channels.ReadableByteChannel;
+import objectos.lang.LineSeparator;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -42,15 +42,15 @@ public class ResponseParserTest {
       + "- status line only")
   public void testCase01() {
     assertEquals(
-        parse(
-            "HTTP/1.0 302 Found",
-            "", ""
-        ),
-        LineSeparator.join(
-            "V1_0 FOUND",
-            "BodyIgnoredImpl",
-            ""
-        )
+      parse(
+        "HTTP/1.0 302 Found",
+        "", ""
+      ),
+      LineSeparator.join(
+        "V1_0 FOUND",
+        "BodyIgnoredImpl",
+        ""
+      )
     );
   }
 
@@ -60,19 +60,19 @@ public class ResponseParserTest {
       + "- with headers")
   public void testCase02() {
     assertEquals(
-        parse(
-            "HTTP/1.1 302 Found",
-            "Server: objectos-http/1.0.0-SNAPSHOT",
-            "Location: /test/login",
-            "", ""
-        ),
-        LineSeparator.join(
-            "V1_1 FOUND",
-            "HeaderServerImpl: objectos-http/1.0.0-SNAPSHOT",
-            "HeaderLocationImpl: /test/login",
-            "BodyIgnoredImpl",
-            ""
-        )
+      parse(
+        "HTTP/1.1 302 Found",
+        "Server: objectos-http/1.0.0-SNAPSHOT",
+        "Location: /test/login",
+        "", ""
+      ),
+      LineSeparator.join(
+        "V1_1 FOUND",
+        "HeaderServerImpl: objectos-http/1.0.0-SNAPSHOT",
+        "HeaderLocationImpl: /test/login",
+        "BodyIgnoredImpl",
+        ""
+      )
     );
   }
 
@@ -83,24 +83,24 @@ public class ResponseParserTest {
       + "- content-length exact")
   public void testCase03() {
     assertEquals(
-        parse(
-            "HTTP/1.1 200 OK",
-            "Server: objectos-http/1.0.0-SNAPSHOT",
-            "Content-Type: text/html; charset=utf8",
-            "Content-Length: 4",
-            "Set-Cookie: foo=bar",
-            "",
-            "1234"
-        ),
-        LineSeparator.join(
-            "V1_1 OK",
-            "HeaderServerImpl: objectos-http/1.0.0-SNAPSHOT",
-            "HeaderContentTypeImpl: text/html; charset=utf-8",
-            "HeaderContentLengthImpl: 4",
-            "HeaderSetCookieImpl: foo=bar",
-            "BodyTextImpl",
-            "1234"
-        )
+      parse(
+        "HTTP/1.1 200 OK",
+        "Server: objectos-http/1.0.0-SNAPSHOT",
+        "Content-Type: text/html; charset=utf8",
+        "Content-Length: 4",
+        "Set-Cookie: foo=bar",
+        "",
+        "1234"
+      ),
+      LineSeparator.join(
+        "V1_1 OK",
+        "HeaderServerImpl: objectos-http/1.0.0-SNAPSHOT",
+        "HeaderContentTypeImpl: text/html; charset=utf-8",
+        "HeaderContentLengthImpl: 4",
+        "HeaderSetCookieImpl: foo=bar",
+        "BodyTextImpl",
+        "1234"
+      )
     );
   }
 
@@ -111,24 +111,24 @@ public class ResponseParserTest {
       + "- content-length shorter (ie, payload is greater than content-length)")
   public void testCase04() {
     assertEquals(
-        parse(
-            "HTTP/1.1 200 OK",
-            "Server: objectos-http/1.0.0-SNAPSHOT",
-            "Content-Type: text/html; charset=utf8",
-            "Content-Length: 4",
-            "Set-Cookie: foo=bar",
-            "",
-            "12345678"
-        ),
-        LineSeparator.join(
-            "V1_1 OK",
-            "HeaderServerImpl: objectos-http/1.0.0-SNAPSHOT",
-            "HeaderContentTypeImpl: text/html; charset=utf-8",
-            "HeaderContentLengthImpl: 4",
-            "HeaderSetCookieImpl: foo=bar",
-            "BodyTextImpl",
-            "1234"
-        )
+      parse(
+        "HTTP/1.1 200 OK",
+        "Server: objectos-http/1.0.0-SNAPSHOT",
+        "Content-Type: text/html; charset=utf8",
+        "Content-Length: 4",
+        "Set-Cookie: foo=bar",
+        "",
+        "12345678"
+      ),
+      LineSeparator.join(
+        "V1_1 OK",
+        "HeaderServerImpl: objectos-http/1.0.0-SNAPSHOT",
+        "HeaderContentTypeImpl: text/html; charset=utf-8",
+        "HeaderContentLengthImpl: 4",
+        "HeaderSetCookieImpl: foo=bar",
+        "BodyTextImpl",
+        "1234"
+      )
     );
   }
 

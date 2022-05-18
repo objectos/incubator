@@ -111,6 +111,11 @@
 
 		<dependency>
 			<groupId>br.com.objectos</groupId>
+			<artifactId>core-io</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>br.com.objectos</groupId>
 			<artifactId>http-server-jetty</artifactId>
 			<scope>compile</scope>
 		</dependency>

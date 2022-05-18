@@ -15,10 +15,10 @@
  */
 package br.com.objectos.git;
 
-import br.com.objectos.core.system.LineSeparator;
 import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.testing.TmpDir;
 import java.io.IOException;
+import objectos.lang.LineSeparator;
 
 /**
  * Support reading and parsing loose objects (iter. 4).

@@ -43,10 +43,6 @@
 			<groupId>br.com.objectos</groupId>
 			<artifactId>core-list</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>br.com.objectos</groupId>
-			<artifactId>core-system</artifactId>
-		</dependency>
 
 		<dependency>
 			<groupId>br.com.objectos</groupId>

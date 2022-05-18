@@ -16,7 +16,7 @@
 package objectos.ssg.processor;
 
 import br.com.objectos.code.java.declaration.MethodCode;
-import br.com.objectos.core.system.LineSeparator;
+import objectos.lang.LineSeparator;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 

@@ -22,7 +22,7 @@ import static br.com.objectos.tools.Tools.processor;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
-import br.com.objectos.core.system.LineSeparator;
+import objectos.lang.LineSeparator;
 import org.testng.annotations.Test;
 
 public class ToolsTest {
@@ -31,10 +31,10 @@ public class ToolsTest {
   public void itShouldCompileJavaSourceFilesAndGenerateClassFile() {
     Compilation compilation;
     compilation = javac(
-        compilationUnit(
-            "package testing.tools;",
-            "class Test {}"
-        )
+      compilationUnit(
+        "package testing.tools;",
+        "class Test {}"
+      )
     );
 
     assertTrue(compilation.wasSuccessful());
@@ -45,24 +45,24 @@ public class ToolsTest {
   public void itShouldGenerateFilesFromStandaloneProcessors() {
     Compilation compilation;
     compilation = javac(
-        processor(new GenerateInterfaceProcessor()),
+      processor(new GenerateInterfaceProcessor()),
 
-        patchModuleWithTestClasses("br.com.objectos.tools"),
+      patchModuleWithTestClasses("br.com.objectos.tools"),
 
-        compilationUnit(
-            "package testing.tools;",
-            "@br.com.objectos.tools.GenerateInterface",
-            "class Test {}"
-        )
+      compilationUnit(
+        "package testing.tools;",
+        "@br.com.objectos.tools.GenerateInterface",
+        "class Test {}"
+      )
     );
 
     System.out.println(compilation.getMessage());
 
     assertTrue(compilation.wasSuccessful());
     assertHasLines(
-        compilation.getJavaFile("testing.tools.TestInterface").contents(),
-        "package testing.tools;",
-        "public interface TestInterface {}"
+      compilation.getJavaFile("testing.tools.TestInterface").contents(),
+      "package testing.tools;",
+      "public interface TestInterface {}"
     );
   }
 

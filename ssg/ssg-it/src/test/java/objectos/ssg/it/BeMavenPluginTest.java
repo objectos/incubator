@@ -19,7 +19,6 @@ import static br.com.objectos.mojo.Mojo.plugin;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
-import br.com.objectos.core.system.SystemProperty;
 import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.testing.TmpDir;
 import br.com.objectos.mojo.Log;
@@ -27,6 +26,7 @@ import br.com.objectos.mojo.Mojo;
 import br.com.objectos.mojo.MojoException;
 import br.com.objectos.mojo.Result;
 import java.io.IOException;
+import objectos.lang.SystemProperty;
 import org.testng.annotations.Test;
 
 public class BeMavenPluginTest extends AbstractBeMavenPluginTest {
@@ -37,62 +37,62 @@ public class BeMavenPluginTest extends AbstractBeMavenPluginTest {
     basedir = TmpDir.create();
 
     cloneTo(
-        basedir,
-        "<project>",
+      basedir,
+      "<project>",
 
-        "<modelVersion>4.0.0</modelVersion>",
-        "<groupId>br.com.objectos</groupId>",
-        "<artifactId>be-test-case-01</artifactId>",
-        versionTag,
+      "<modelVersion>4.0.0</modelVersion>",
+      "<groupId>br.com.objectos</groupId>",
+      "<artifactId>be-test-case-01</artifactId>",
+      versionTag,
 
-        "<properties>",
-        compilerSourceTag,
-        compilerTargetTag,
-        "</properties>",
+      "<properties>",
+      compilerSourceTag,
+      compilerTargetTag,
+      "</properties>",
 
-        "<build>",
-        "<plugins>",
+      "<build>",
+      "<plugins>",
 
-        "<plugin>",
-        "<artifactId>maven-compiler-plugin</artifactId>",
-        "<version>3.8.1</version>",
-        "<configuration>",
-        "<annotationProcessorPaths>",
-        "<annotationProcessorPath>",
-        "<groupId>${project.groupId}</groupId>",
-        "<artifactId>objectos-be-processor</artifactId>",
-        "<version>${project.version}</version>",
-        "</annotationProcessorPath>",
-        "</annotationProcessorPaths>",
-        "</configuration>",
-        "</plugin>",
+      "<plugin>",
+      "<artifactId>maven-compiler-plugin</artifactId>",
+      "<version>3.8.1</version>",
+      "<configuration>",
+      "<annotationProcessorPaths>",
+      "<annotationProcessorPath>",
+      "<groupId>${project.groupId}</groupId>",
+      "<artifactId>objectos-be-processor</artifactId>",
+      "<version>${project.version}</version>",
+      "</annotationProcessorPath>",
+      "</annotationProcessorPaths>",
+      "</configuration>",
+      "</plugin>",
 
-        "<plugin>",
-        "<groupId>${project.groupId}</groupId>",
-        "<artifactId>objectos-be-maven-plugin</artifactId>",
-        "<version>${project.version}</version>",
-        "<configuration>",
-        "<joinExecution>false</joinExecution>",
-        "<site>",
-        "<id>site-file</id>",
-        "<url>file://${project.build.directory}/deploy</url>",
-        "</site>",
-        "<sitePackage>br.com.objectos.be.it</sitePackage>",
-        "</configuration>",
-        "</plugin>",
+      "<plugin>",
+      "<groupId>${project.groupId}</groupId>",
+      "<artifactId>objectos-be-maven-plugin</artifactId>",
+      "<version>${project.version}</version>",
+      "<configuration>",
+      "<joinExecution>false</joinExecution>",
+      "<site>",
+      "<id>site-file</id>",
+      "<url>file://${project.build.directory}/deploy</url>",
+      "</site>",
+      "<sitePackage>br.com.objectos.be.it</sitePackage>",
+      "</configuration>",
+      "</plugin>",
 
-        "</plugins>",
-        "</build>",
+      "</plugins>",
+      "</build>",
 
-        "<dependencies>",
-        "<dependency>",
-        "<groupId>${project.groupId}</groupId>",
-        "<artifactId>objectos-be</artifactId>",
-        "<version>${project.version}</version>",
-        "</dependency>",
-        "</dependencies>",
+      "<dependencies>",
+      "<dependency>",
+      "<groupId>${project.groupId}</groupId>",
+      "<artifactId>objectos-be</artifactId>",
+      "<version>${project.version}</version>",
+      "</dependency>",
+      "</dependencies>",
 
-        "</project>"
+      "</project>"
     );
 
     String assertKey;

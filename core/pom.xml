@@ -47,7 +47,6 @@
 		<module>core-random-testing</module>
 		<module>core-service</module>
 		<module>core-set</module>
-		<module>core-system</module>
 	</modules>
 
 	<dependencyManagement>

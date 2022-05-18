@@ -31,7 +31,6 @@ import br.com.objectos.core.io.Read;
 import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.core.logging.testing.TestableLogger;
 import br.com.objectos.core.service.Services;
-import br.com.objectos.core.system.LineSeparator;
 import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.RegularFile;
 import br.com.objectos.fs.ResolvedPath;
@@ -41,6 +40,7 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
+import objectos.lang.LineSeparator;
 import objectos.lang.NoOpLogger;
 import org.testng.annotations.BeforeClass;
 
@@ -121,11 +121,11 @@ public abstract class AbstractMysqlTest {
     notFound = etc.resolve("mysqld.cnf");
 
     serverConfigurationFile = Mysql.configurationFile(
-        notFound,
+      notFound,
 
-        charset,
+      charset,
 
-        mysqld
+      mysqld
     );
 
     RegularFile regularFile;
@@ -145,14 +145,14 @@ public abstract class AbstractMysqlTest {
 
     Server server;
     server = Mysql.createServer(
-        directoryBinariesServer,
+      directoryBinariesServer,
 
-        serverConfigurationFile
+      serverConfigurationFile
     );
 
     Process initialization;
     initialization = server.initializeInsecure(
-        Mysql.skipLogBin()
+      Mysql.skipLogBin()
     );
 
     initialization.waitFor();
@@ -175,9 +175,9 @@ public abstract class AbstractMysqlTest {
 
   public final void testCase03Impl() throws Exception {
     server = Mysql.createServer(
-        directoryBinariesServer,
+      directoryBinariesServer,
 
-        serverConfigurationFile
+      serverConfigurationFile
     );
 
     Services.start(server);
@@ -194,40 +194,40 @@ public abstract class AbstractMysqlTest {
 
     ConfigurationFile clientConfigurationFile;
     clientConfigurationFile = Mysql.configurationFile(
-        notFound,
+      notFound,
 
-        charset,
+      charset,
 
-        Mysql.client(
-            fs.socketOption
-        ),
+      Mysql.client(
+        fs.socketOption
+      ),
 
-        Mysql.mysql(
-            Mysql.binaryMode(),
+      Mysql.mysql(
+        Mysql.binaryMode(),
 
-            Mysql.skipColumnNames()
-        ),
+        Mysql.skipColumnNames()
+      ),
 
-        Mysql.mysqldump(
-            Mysql.singleTransaction(),
+      Mysql.mysqldump(
+        Mysql.singleTransaction(),
 
-            Mysql.allDatabases(),
+        Mysql.allDatabases(),
 
-            Mysql.events(),
+        Mysql.events(),
 
-            Mysql.routines(),
+        Mysql.routines(),
 
-            Mysql.flushLogs(),
+        Mysql.flushLogs(),
 
-            Mysql.masterData(2),
+        Mysql.masterData(2),
 
-            Mysql.deleteMasterLogs()
-        )
+        Mysql.deleteMasterLogs()
+      )
     );
 
     LoginPathFile loginPathFile;
     loginPathFile = Mysql.loginPathFile(
-        etc.resolve("login.cnf")
+      etc.resolve("login.cnf")
     );
 
     IoWorkerService ioWorker;
@@ -237,29 +237,29 @@ public abstract class AbstractMysqlTest {
     worker = new FixedCpuWorker(1, 1, NoOpLogger.getInstance());
 
     Services.start(
-        ioWorker,
+      ioWorker,
 
-        worker
+      worker
     );
 
     client = Mysql.createClient(
-        directoryBinariesClient,
+      directoryBinariesClient,
 
-        clientConfigurationFile,
+      clientConfigurationFile,
 
-        loginPathFile,
+      loginPathFile,
 
-        ioWorker,
+      ioWorker,
 
-        logger
+      logger
     );
 
     offerSetLoginPathJob(
-        LoginPaths.ROOT,
+      LoginPaths.ROOT,
 
-        Mysql.user("root"),
+      Mysql.user("root"),
 
-        Mysql.password("")
+      Mysql.password("")
     );
 
     assertNotNull(setLoginPath);
@@ -275,112 +275,112 @@ public abstract class AbstractMysqlTest {
     mysqldumpPassword = Next.string(32);
 
     offerExecuteStatementJob(
-        LoginPaths.ROOT,
+      LoginPaths.ROOT,
 
-        release.isRelease5_6()
-            ? Mysql.sql("SET PASSWORD FOR 'root'@'localhost' = PASSWORD('", rootPassword, "');")
-            : Mysql.sql("ALTER USER 'root'@'localhost' IDENTIFIED BY '", rootPassword, "';"),
+      release.isRelease5_6()
+          ? Mysql.sql("SET PASSWORD FOR 'root'@'localhost' = PASSWORD('", rootPassword, "');")
+          : Mysql.sql("ALTER USER 'root'@'localhost' IDENTIFIED BY '", rootPassword, "';"),
 
-        Mysql.sql(
-            "CREATE USER 'mysqldump'@'localhost' IDENTIFIED BY '",
-            mysqldumpPassword,
-            "';"
-        ),
+      Mysql.sql(
+        "CREATE USER 'mysqldump'@'localhost' IDENTIFIED BY '",
+        mysqldumpPassword,
+        "';"
+      ),
 
-        Mysql.sql(
-            "GRANT ",
-            "EVENT, ",
-            "SELECT, ",
-            "SHOW VIEW, ",
-            "PROCESS, ",
-            "RELOAD, ",
-            "REPLICATION CLIENT, ",
-            "SUPER, ",
-            "TRIGGER ",
-            "ON *.* TO 'mysqldump'@'localhost';"
-        )
+      Mysql.sql(
+        "GRANT ",
+        "EVENT, ",
+        "SELECT, ",
+        "SHOW VIEW, ",
+        "PROCESS, ",
+        "RELOAD, ",
+        "REPLICATION CLIENT, ",
+        "SUPER, ",
+        "TRIGGER ",
+        "ON *.* TO 'mysqldump'@'localhost';"
+      )
     );
 
     assertNotNull(executeStatement);
 
     offerSetLoginPathJob(
-        LoginPaths.ROOT,
+      LoginPaths.ROOT,
 
-        Mysql.user("root"),
+      Mysql.user("root"),
 
-        Mysql.password(rootPassword)
+      Mysql.password(rootPassword)
     );
 
     assertNotNull(setLoginPath);
 
     offerSetLoginPathJob(
-        LoginPaths.DUMP,
+      LoginPaths.DUMP,
 
-        Mysql.user("mysqldump"),
+      Mysql.user("mysqldump"),
 
-        Mysql.password(mysqldumpPassword)
+      Mysql.password(mysqldumpPassword)
     );
 
     assertNotNull(setLoginPath);
 
     offerExecuteStatementJob(
-        LoginPaths.ROOT,
+      LoginPaths.ROOT,
 
-        "SHOW DATABASES;"
+      "SHOW DATABASES;"
     );
 
     assertEquals(
-        executeStatement,
+      executeStatement,
 
-        ImmutableList.of(
-            "information_schema",
-            "mysql",
-            "performance_schema",
-            release.isRelease5_6() ? "test" : "sys"
-        )
+      ImmutableList.of(
+        "information_schema",
+        "mysql",
+        "performance_schema",
+        release.isRelease5_6() ? "test" : "sys"
+      )
     );
   }
 
   public void testCase06Impl(String... dbs) throws Exception {
     offerExecuteStatementJob(
-        LoginPaths.ROOT,
+      LoginPaths.ROOT,
 
-        createDatabase("db0"),
+      createDatabase("db0"),
 
-        createDatabase("db1"),
+      createDatabase("db1"),
 
-        createDatabase("db2"),
+      createDatabase("db2"),
 
-        createTable("db0", "a"),
+      createTable("db0", "a"),
 
-        createTable("db1", "a"),
+      createTable("db1", "a"),
 
-        createTable("db2", "a"),
+      createTable("db2", "a"),
 
-        insertRandomData("db0", "a"),
+      insertRandomData("db0", "a"),
 
-        insertRandomData("db1", "a"),
+      insertRandomData("db1", "a"),
 
-        insertRandomData("db2", "a"),
+      insertRandomData("db2", "a"),
 
-        "SHOW DATABASES;"
+      "SHOW DATABASES;"
     );
 
     assertNotNull(executeStatement);
 
     assertEquals(
-        executeStatement,
+      executeStatement,
 
-        ImmutableList.copyOf(dbs)
+      ImmutableList.copyOf(dbs)
     );
 
     Directory backupDirectory;
     backupDirectory = fs.backup;
 
     offerFullBackupJob(
-        LoginPaths.DUMP,
+      LoginPaths.DUMP,
 
-        backupDirectory
+      backupDirectory
     );
 
     assertNotNull(fullBackup);
@@ -392,21 +392,21 @@ public abstract class AbstractMysqlTest {
 
   public final void testCase07Impl() throws Exception {
     offerExecuteStatementJob(
-        LoginPaths.ROOT,
+      LoginPaths.ROOT,
 
-        createTable("db0", "b"),
+      createTable("db0", "b"),
 
-        insertRandomData("db0", "a"),
+      insertRandomData("db0", "a"),
 
-        insertRandomData("db0", "b"),
+      insertRandomData("db0", "b"),
 
-        deleteSomeData("db1", "a", 128),
+      deleteSomeData("db1", "a", 128),
 
-        createTable("db2", "b"),
+      createTable("db2", "b"),
 
-        insertRandomData("db2", "a"),
+      insertRandomData("db2", "a"),
 
-        insertRandomData("db2", "b")
+      insertRandomData("db2", "b")
     );
 
     assertNotNull(executeStatement);
@@ -415,9 +415,9 @@ public abstract class AbstractMysqlTest {
     backupDirectory = fs.backup;
 
     offerIncrementalBackupJob(
-        LoginPaths.DUMP,
+      LoginPaths.DUMP,
 
-        backupDirectory
+      backupDirectory
     );
 
     assertNotNull(incrementalBackup);
@@ -429,25 +429,25 @@ public abstract class AbstractMysqlTest {
     inc0Checksum = computeChecksum("db0", "db1", "db2");
 
     offerExecuteStatementJob(
-        LoginPaths.ROOT,
+      LoginPaths.ROOT,
 
-        deleteSomeData("db0", "a", 64),
+      deleteSomeData("db0", "a", 64),
 
-        createTable("db1", "b"),
+      createTable("db1", "b"),
 
-        insertRandomData("db1", "b"),
+      insertRandomData("db1", "b"),
 
-        insertRandomData("db2", "a"),
+      insertRandomData("db2", "a"),
 
-        deleteSomeData("db2", "b", 256)
+      deleteSomeData("db2", "b", 256)
     );
 
     assertNotNull(executeStatement);
 
     offerIncrementalBackupJob(
-        LoginPaths.DUMP,
+      LoginPaths.DUMP,
 
-        backupDirectory
+      backupDirectory
     );
 
     assertNotNull(incrementalBackup);
@@ -466,13 +466,13 @@ public abstract class AbstractMysqlTest {
     assertNotEquals(fullChecksum, currentChecksum);
 
     offerExecuteStatementJob(
-        LoginPaths.ROOT,
+      LoginPaths.ROOT,
 
-        "DROP DATABASE db0;",
+      "DROP DATABASE db0;",
 
-        "DROP DATABASE db1;",
+      "DROP DATABASE db1;",
 
-        "DROP DATABASE db2;"
+      "DROP DATABASE db2;"
     );
 
     assertNotNull(executeStatement);
@@ -501,11 +501,11 @@ public abstract class AbstractMysqlTest {
     workDirectory = fs.root;
 
     offerIncrementalRestoreJob(
-        LoginPaths.ROOT,
+      LoginPaths.ROOT,
 
-        workDirectory,
+      workDirectory,
 
-        files
+      files
     );
 
     assertNotNull(incrementalRestore);
@@ -517,9 +517,9 @@ public abstract class AbstractMysqlTest {
 
   private String checksumTable(String database) {
     return Mysql.sql(
-        "USE ", database, ";",
+      "USE ", database, ";",
 
-        "CHECKSUM TABLE a, b;"
+      "CHECKSUM TABLE a, b;"
     );
   }
 
@@ -541,9 +541,9 @@ public abstract class AbstractMysqlTest {
     }
 
     offerExecuteStatementJob(
-        LoginPaths.ROOT,
+      LoginPaths.ROOT,
 
-        statements
+      statements
     );
 
     assertNotNull(executeStatement);
@@ -553,29 +553,29 @@ public abstract class AbstractMysqlTest {
 
   private String createDatabase(String database) {
     return Mysql.sql(
-        "CREATE DATABASE ", database, ";",
+      "CREATE DATABASE ", database, ";",
 
-        "USE ", database, ";"
+      "USE ", database, ";"
     );
   }
 
   private String createTable(String database, String table) {
     return Mysql.sql(
-        "USE ", database, ";",
+      "USE ", database, ";",
 
-        "CREATE TABLE ", table, " (",
-        "  ", table, "_id CHAR(10),",
-        "  ", table, "_value INT,",
-        "  KEY (", table, "_id)",
-        ");"
+      "CREATE TABLE ", table, " (",
+      "  ", table, "_id CHAR(10),",
+      "  ", table, "_value INT,",
+      "  KEY (", table, "_id)",
+      ");"
     );
   }
 
   private String deleteSomeData(String database, String table, int count) {
     return Mysql.sql(
-        "USE ", database, ";",
+      "USE ", database, ";",
 
-        "DELETE FROM ", table, " LIMIT ", Integer.toString(count), ";"
+      "DELETE FROM ", table, " LIMIT ", Integer.toString(count), ";"
     );
   }
 
@@ -589,15 +589,15 @@ public abstract class AbstractMysqlTest {
 
   private String insertRandomData(String database, String table) {
     return Mysql.sql(
-        "USE ", database, ";",
+      "USE ", database, ";",
 
-        insertRandomData0(table)
+      insertRandomData0(table)
     );
   }
 
   private String insertRandomData0(String table) {
     return Mysql.sql(
-        "INSERT INTO ", table, " (", table, "_id, ", table, "_value) VALUES ", randomTuples(), ";"
+      "INSERT INTO ", table, " (", table, "_id, ", table, "_value) VALUES ", randomTuples(), ";"
     );
   }
 
@@ -605,28 +605,28 @@ public abstract class AbstractMysqlTest {
       LoginPath loginPath, String... statements)
       throws Exception {
     executeStatement = execute(
-        client.executeStatement(loginPath, statements)
+      client.executeStatement(loginPath, statements)
     );
   }
 
   private void offerFullBackupJob(LoginPath loginPath, Directory directory)
       throws Exception {
     fullBackup = execute(
-        client.fullBackup(loginPath, directory)
+      client.fullBackup(loginPath, directory)
     );
   }
 
   private void offerFullRestoreJob(LoginPath loginPath, RegularFile file)
       throws Exception {
     fullRestore = execute(
-        client.fullRestore(loginPath, file)
+      client.fullRestore(loginPath, file)
     );
   }
 
   private void offerIncrementalBackupJob(LoginPath loginPath, Directory directory)
       throws Exception {
     incrementalBackup = execute(
-        client.incrementalBackup(loginPath, directory)
+      client.incrementalBackup(loginPath, directory)
     );
   }
 
@@ -634,21 +634,21 @@ public abstract class AbstractMysqlTest {
       LoginPath loginPath, Directory workDirectory, ImmutableList<RegularFile> files)
       throws Exception {
     incrementalRestore = execute(
-        client.incrementalRestore(loginPath, workDirectory, files)
+      client.incrementalRestore(loginPath, workDirectory, files)
     );
   }
 
   private void offerSetLoginPathJob(ConfigEditorOption... options) throws Exception {
     setLoginPath = execute(
-        client.setLoginPath(options)
+      client.setLoginPath(options)
     );
   }
 
   private String randomTuple() {
     return Mysql.tuple(
-        Next.string(10),
+      Next.string(10),
 
-        Integer.toString(Next.intValue())
+      Integer.toString(Next.intValue())
     );
   }
 

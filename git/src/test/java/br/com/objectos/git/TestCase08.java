@@ -19,12 +19,12 @@ import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.core.map.Maps;
 import br.com.objectos.core.set.ImmutableSet;
 import br.com.objectos.core.set.MutableSet;
-import br.com.objectos.core.system.LineSeparator;
 import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.testing.TmpDir;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import objectos.lang.LineSeparator;
 
 /**
  * Verify that the copy command does not create a commit if the resulting tree

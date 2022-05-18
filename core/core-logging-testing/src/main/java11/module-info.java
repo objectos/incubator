@@ -23,5 +23,4 @@ module br.com.objectos.core.logging.testing {
   requires transitive objectos.lang;
 
   requires br.com.objectos.core.list;
-  requires br.com.objectos.core.system;
 }

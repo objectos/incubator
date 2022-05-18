@@ -17,16 +17,16 @@ package br.com.objectos.tools;
 
 import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.core.list.MutableList;
-import br.com.objectos.core.system.LineSeparator;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.util.Map;
 import javax.annotation.processing.Processor;
 import javax.tools.JavaCompiler;
 import javax.tools.JavaCompiler.CompilationTask;
-import objectos.lang.Checks;
 import javax.tools.JavaFileObject;
 import javax.tools.ToolProvider;
+import objectos.lang.Checks;
+import objectos.lang.LineSeparator;
 
 public final class Tools {
 

@@ -15,11 +15,11 @@
  */
 package br.com.objectos.logger;
 
-import br.com.objectos.core.system.LineSeparator;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import objectos.lang.Level;
+import objectos.lang.LineSeparator;
 
 /**
  * Provides a standard layout implementation.

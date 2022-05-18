@@ -20,7 +20,6 @@ import static org.testng.Assert.assertEquals;
 import br.com.objectos.concurrent.DirectIoWorker;
 import br.com.objectos.concurrent.IoWorker;
 import br.com.objectos.core.io.Resource;
-import br.com.objectos.core.system.LineSeparator;
 import br.com.objectos.http.Header.ContentType;
 import java.io.IOException;
 import java.io.InputStream;
@@ -29,6 +28,7 @@ import java.nio.CharBuffer;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
+import objectos.lang.LineSeparator;
 import objectos.lang.Try;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
@@ -136,23 +136,23 @@ public class ReplayResponseParserTest implements ReplayResponseParserAdapter {
       }
 
       assertEquals(
-          expectedBody,
-          LineSeparator.join(
-              "<!doctype html>",
-              "<html>",
-              "<head>",
-              "<title>Login</title>",
-              "</head>",
-              "<body>",
-              "</body>",
-              "</html>",
-              ""
-          )
+        expectedBody,
+        LineSeparator.join(
+          "<!doctype html>",
+          "<html>",
+          "<head>",
+          "<title>Login</title>",
+          "</head>",
+          "<body>",
+          "</body>",
+          "</html>",
+          ""
+        )
       );
 
       assertEquals(
-          expectedContentType.toString(),
-          "Content-Type: text/html; charset=utf-8"
+        expectedContentType.toString(),
+        "Content-Type: text/html; charset=utf-8"
       );
     } catch (IOException e) {
       rethrow = e;
@@ -167,15 +167,15 @@ public class ReplayResponseParserTest implements ReplayResponseParserAdapter {
   public void testCase02ContentLength() {
     String lines;
     lines = LineSeparator.join(
-        "<!doctype html>",
-        "<html>",
-        "<head>",
-        "<title>Login</title>",
-        "</head>",
-        "<body>",
-        "</body>",
-        "</html>",
-        ""
+      "<!doctype html>",
+      "<html>",
+      "<head>",
+      "<title>Login</title>",
+      "</head>",
+      "<body>",
+      "</body>",
+      "</html>",
+      ""
     );
 
     assertEquals(lines.length(), 82);

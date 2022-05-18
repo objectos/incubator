@@ -15,7 +15,7 @@
  */
 package br.com.objectos.git;
 
-import br.com.objectos.core.system.LineSeparator;
+import objectos.lang.LineSeparator;
 
 final class ThrowableMessageBuilder {
 

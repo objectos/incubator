@@ -15,14 +15,14 @@
  */
 package br.com.objectos.fs;
 
-import br.com.objectos.core.system.Linux;
-import br.com.objectos.core.system.OperatingSystem;
-import br.com.objectos.core.system.OperatingSystemVisitor;
-import br.com.objectos.core.system.UnsupportedOperatingSystem;
 import java.nio.file.attribute.FileAttribute;
 import java.nio.file.attribute.PosixFilePermission;
 import java.util.EnumSet;
 import java.util.Set;
+import objectos.lang.Linux;
+import objectos.lang.OperatingSystem;
+import objectos.lang.OperatingSystemVisitor;
+import objectos.lang.UnsupportedOperatingSystem;
 
 abstract class FileAttributeBuilder {
 

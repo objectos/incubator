@@ -25,13 +25,13 @@ import br.com.objectos.core.io.Charsets;
 import br.com.objectos.core.io.Read;
 import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.core.list.MutableList;
-import br.com.objectos.core.system.LineSeparator;
 import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.Posix;
 import br.com.objectos.fs.RegularFile;
 import br.com.objectos.fs.testing.TmpDir;
 import java.io.IOException;
 import java.util.concurrent.ExecutionException;
+import objectos.lang.LineSeparator;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -112,17 +112,17 @@ public class GitServiceTest extends AbstractGitTest {
     result = testCase00.getResult();
 
     testTree(
-        result,
+      result,
 
-        "README.md"
+      "README.md"
     );
 
     testRegularFile(
-        result, "README.md",
+      result, "README.md",
 
-        "# ObjectosRepo",
-        "",
-        "This is a git repository meant to be used in tests."
+      "# ObjectosRepo",
+      "",
+      "This is a git repository meant to be used in tests."
     );
   }
 
@@ -134,25 +134,25 @@ public class GitServiceTest extends AbstractGitTest {
     result = testCase01.getResult();
 
     testTree(
-        result,
+      result,
 
-        "README.md",
-        "bin/ci"
+      "README.md",
+      "bin/ci"
     );
 
     testRegularFile(
-        result, "README.md",
+      result, "README.md",
 
-        "# ObjectosRepo",
-        "",
-        "This is a git repository meant to be used in tests."
+      "# ObjectosRepo",
+      "",
+      "This is a git repository meant to be used in tests."
     );
 
     testExecutableFile(
-        result, "bin/ci",
+      result, "bin/ci",
 
-        "#!/bin/bash",
-        "#For testing purposes only."
+      "#!/bin/bash",
+      "#For testing purposes only."
     );
   }
 
@@ -164,35 +164,35 @@ public class GitServiceTest extends AbstractGitTest {
     result = testCase02.getResult();
 
     testTree(
-        result,
+      result,
 
-        "README.md",
-        "bin/ci",
-        "src/main/java/br/com/objectos/Main.java"
+      "README.md",
+      "bin/ci",
+      "src/main/java/br/com/objectos/Main.java"
     );
 
     testRegularFile(
-        result, "README.md",
+      result, "README.md",
 
-        "# ObjectosRepo",
-        "",
-        "This is a git repository meant to be used in tests."
+      "# ObjectosRepo",
+      "",
+      "This is a git repository meant to be used in tests."
     );
 
     testExecutableFile(
-        result, "bin/ci",
+      result, "bin/ci",
 
-        "#!/bin/bash",
-        "#For testing purposes only."
+      "#!/bin/bash",
+      "#For testing purposes only."
     );
 
     testRegularFile(
-        result, "src/main/java/br/com/objectos/Main.java",
+      result, "src/main/java/br/com/objectos/Main.java",
 
-        "package br.com.objectos;",
-        "",
-        "public class Main {",
-        "}"
+      "package br.com.objectos;",
+      "",
+      "public class Main {",
+      "}"
     );
   }
 
@@ -204,33 +204,33 @@ public class GitServiceTest extends AbstractGitTest {
     commitId = testCase03.getResult();
 
     testCommit(
-        testCase03Target, commitId,
+      testCase03Target, commitId,
 
-        "tree 1cd042294d3933032f5fbb9735034dcbce689dc9",
-        "parent 717271f0f0ee528c0bb094e8b2f84ea6cef7b39d",
-        "author The Author <author@example.com> 1600083193 -0300",
-        "committer The Committer <committer@example.com> 1600083193 -0300",
-        "",
-        "add README.md",
-        "",
-        "source b9c4f2db7b4fd742990b518ee3c8ae59eb1d6e93"
+      "tree 1cd042294d3933032f5fbb9735034dcbce689dc9",
+      "parent 717271f0f0ee528c0bb094e8b2f84ea6cef7b39d",
+      "author The Author <author@example.com> 1600083193 -0300",
+      "committer The Committer <committer@example.com> 1600083193 -0300",
+      "",
+      "add README.md",
+      "",
+      "source b9c4f2db7b4fd742990b518ee3c8ae59eb1d6e93"
     );
 
     Directory result;
     result = materialize(testCase03Target);
 
     testTree(
-        result,
+      result,
 
-        "README.md"
+      "README.md"
     );
 
     testRegularFile(
-        result, "README.md",
+      result, "README.md",
 
-        "# ObjectosRepo",
-        "",
-        "This is a git repository meant to be used in tests."
+      "# ObjectosRepo",
+      "",
+      "This is a git repository meant to be used in tests."
     );
   }
 
@@ -242,39 +242,39 @@ public class GitServiceTest extends AbstractGitTest {
     commitId = testCase04.getResult();
 
     testCommit(
-        testCase04Target, commitId,
+      testCase04Target, commitId,
 
-        "tree 1eda06f88aa783287b37817f287fbcbf318b8770",
-        "parent 717271f0f0ee528c0bb094e8b2f84ea6cef7b39d",
-        "author The Author <author@example.com> 1616414442 -0300",
-        "committer The Committer <committer@example.com> 1616414442 -0300",
-        "",
-        "[test] add some tests",
-        "",
-        "source 68699720c357a5ce1d4171a65ce801741736ea31"
+      "tree 1eda06f88aa783287b37817f287fbcbf318b8770",
+      "parent 717271f0f0ee528c0bb094e8b2f84ea6cef7b39d",
+      "author The Author <author@example.com> 1616414442 -0300",
+      "committer The Committer <committer@example.com> 1616414442 -0300",
+      "",
+      "[test] add some tests",
+      "",
+      "source 68699720c357a5ce1d4171a65ce801741736ea31"
     );
 
     Directory result;
     result = materialize(testCase04Target);
 
     testTree(
-        result,
+      result,
 
-        "ci",
-        "test/include-me"
+      "ci",
+      "test/include-me"
     );
 
     testExecutableFile(
-        result, "ci",
+      result, "ci",
 
-        "#!/bin/bash",
-        "#For testing purposes only."
+      "#!/bin/bash",
+      "#For testing purposes only."
     );
 
     testRegularFile(
-        result, "test/include-me",
+      result, "test/include-me",
 
-        "should have been included"
+      "should have been included"
     );
   }
 
@@ -286,52 +286,52 @@ public class GitServiceTest extends AbstractGitTest {
     commitId = testCase05.getResult();
 
     testCommit(
-        testCase05Target, commitId,
+      testCase05Target, commitId,
 
-        "tree 81059b029e0e689eb8cae57cb9f3c27f3061ba9d",
-        "parent 717271f0f0ee528c0bb094e8b2f84ea6cef7b39d",
-        "author The Author <author@example.com> 1616414442 -0300",
-        "committer The Committer <committer@example.com> 1616414442 -0300",
-        "",
-        "[test] add some tests",
-        "",
-        "source 68699720c357a5ce1d4171a65ce801741736ea31"
+      "tree 81059b029e0e689eb8cae57cb9f3c27f3061ba9d",
+      "parent 717271f0f0ee528c0bb094e8b2f84ea6cef7b39d",
+      "author The Author <author@example.com> 1616414442 -0300",
+      "committer The Committer <committer@example.com> 1616414442 -0300",
+      "",
+      "[test] add some tests",
+      "",
+      "source 68699720c357a5ce1d4171a65ce801741736ea31"
     );
 
     Directory result;
     result = materialize(testCase05Target);
 
     testTree(
-        result,
+      result,
 
-        "README.md",
-        "bin/ci",
-        "bin/test/include-me",
-        "src/main/java/br/com/objectos/Main.java"
+      "README.md",
+      "bin/ci",
+      "bin/test/include-me",
+      "src/main/java/br/com/objectos/Main.java"
     );
 
     testRegularFile(
-        result, "README.md",
+      result, "README.md",
 
-        "# ObjectosRepo",
-        "",
-        "This is a git repository meant to be used in tests."
+      "# ObjectosRepo",
+      "",
+      "This is a git repository meant to be used in tests."
     );
 
     testExecutableFile(
-        result, "bin/ci",
+      result, "bin/ci",
 
-        "#!/bin/bash",
-        "#For testing purposes only."
+      "#!/bin/bash",
+      "#For testing purposes only."
     );
 
     testRegularFile(
-        result, "src/main/java/br/com/objectos/Main.java",
+      result, "src/main/java/br/com/objectos/Main.java",
 
-        "package br.com.objectos;",
-        "",
-        "public class Main {",
-        "}"
+      "package br.com.objectos;",
+      "",
+      "public class Main {",
+      "}"
     );
   }
 
@@ -343,16 +343,16 @@ public class GitServiceTest extends AbstractGitTest {
     commitId = testCase06.getResult();
 
     testCommit(
-        testCase06Target, commitId,
+      testCase06Target, commitId,
 
-        "tree 81059b029e0e689eb8cae57cb9f3c27f3061ba9d",
-        "parent 717271f0f0ee528c0bb094e8b2f84ea6cef7b39d",
-        "author Changed Author <changed.author@example.com> 1616414442 -0300",
-        "committer Changed Committer <changed.committer@example.com> 1616414442 -0300",
-        "",
-        "[test] add some tests",
-        "",
-        "source 68699720c357a5ce1d4171a65ce801741736ea31"
+      "tree 81059b029e0e689eb8cae57cb9f3c27f3061ba9d",
+      "parent 717271f0f0ee528c0bb094e8b2f84ea6cef7b39d",
+      "author Changed Author <changed.author@example.com> 1616414442 -0300",
+      "committer Changed Committer <changed.committer@example.com> 1616414442 -0300",
+      "",
+      "[test] add some tests",
+      "",
+      "source 68699720c357a5ce1d4171a65ce801741736ea31"
     );
   }
 
@@ -364,51 +364,51 @@ public class GitServiceTest extends AbstractGitTest {
     commitId = testCase07.getResult();
 
     testCommit(
-        testCase07Target, commitId,
+      testCase07Target, commitId,
 
-        "tree 81059b029e0e689eb8cae57cb9f3c27f3061ba9d",
-        "author The Author <author@example.com> 1616414442 -0300",
-        "committer The Committer <committer@example.com> 1616414442 -0300",
-        "",
-        "[test] add some tests",
-        "",
-        "source 68699720c357a5ce1d4171a65ce801741736ea31"
+      "tree 81059b029e0e689eb8cae57cb9f3c27f3061ba9d",
+      "author The Author <author@example.com> 1616414442 -0300",
+      "committer The Committer <committer@example.com> 1616414442 -0300",
+      "",
+      "[test] add some tests",
+      "",
+      "source 68699720c357a5ce1d4171a65ce801741736ea31"
     );
 
     Directory result;
     result = materialize(testCase07Target);
 
     testTree(
-        result,
+      result,
 
-        "README.md",
-        "bin/ci",
-        "bin/test/include-me",
-        "src/main/java/br/com/objectos/Main.java"
+      "README.md",
+      "bin/ci",
+      "bin/test/include-me",
+      "src/main/java/br/com/objectos/Main.java"
     );
 
     testRegularFile(
-        result, "README.md",
+      result, "README.md",
 
-        "# ObjectosRepo",
-        "",
-        "This is a git repository meant to be used in tests."
+      "# ObjectosRepo",
+      "",
+      "This is a git repository meant to be used in tests."
     );
 
     testExecutableFile(
-        result, "bin/ci",
+      result, "bin/ci",
 
-        "#!/bin/bash",
-        "#For testing purposes only."
+      "#!/bin/bash",
+      "#For testing purposes only."
     );
 
     testRegularFile(
-        result, "src/main/java/br/com/objectos/Main.java",
+      result, "src/main/java/br/com/objectos/Main.java",
 
-        "package br.com.objectos;",
-        "",
-        "public class Main {",
-        "}"
+      "package br.com.objectos;",
+      "",
+      "public class Main {",
+      "}"
     );
   }
 
@@ -419,44 +419,44 @@ public class GitServiceTest extends AbstractGitTest {
     testCase08.getResult();
 
     testLog(
-        testCase08A,
+      testCase08A,
 
-        "68699720c357a5ce1d4171a65ce801741736ea31"
+      "68699720c357a5ce1d4171a65ce801741736ea31"
     );
 
     testTree(
-        materialize(testCase08A),
+      materialize(testCase08A),
 
-        "README.md",
-        "src/main/java/br/com/objectos/Main.java"
+      "README.md",
+      "src/main/java/br/com/objectos/Main.java"
     );
 
     testLog(
-        testCase08B,
+      testCase08B,
 
-        "68699720c357a5ce1d4171a65ce801741736ea31"
+      "68699720c357a5ce1d4171a65ce801741736ea31"
     );
 
     testTree(
-        materialize(testCase08B),
+      materialize(testCase08B),
 
-        "README.md",
-        "src/main/java/br/com/objectos/Main.java"
+      "README.md",
+      "src/main/java/br/com/objectos/Main.java"
     );
 
     testLog(
-        testCase08C,
+      testCase08C,
 
-        "a265fca5b5fc9d01302b05e5867b0cf62d6ee0ee",
-        "68699720c357a5ce1d4171a65ce801741736ea31"
+      "a265fca5b5fc9d01302b05e5867b0cf62d6ee0ee",
+      "68699720c357a5ce1d4171a65ce801741736ea31"
     );
 
     testTree(
-        materialize(testCase08C),
+      materialize(testCase08C),
 
-        "README.md",
-        "src/main/java/br/com/objectos/Git.java",
-        "src/main/java/br/com/objectos/Main.java"
+      "README.md",
+      "src/main/java/br/com/objectos/Git.java",
+      "src/main/java/br/com/objectos/Main.java"
     );
   }
 
@@ -468,54 +468,54 @@ public class GitServiceTest extends AbstractGitTest {
     commitId = testCase10.getResult();
 
     testCommit(
-        testCase10Target, commitId,
+      testCase10Target, commitId,
 
-        "tree 455ac98d24c80566d39583e3dc84f1d187cd7e69",
-        "author The Author <author@example.com> 1620139035 -0300",
-        "committer The Committer <committer@example.com> 1620139035 -0300",
-        "",
-        "src only commit",
-        "",
-        "source=717271f0f0ee528c0bb094e8b2f84ea6cef7b39d",
-        ""
+      "tree 455ac98d24c80566d39583e3dc84f1d187cd7e69",
+      "author The Author <author@example.com> 1620139035 -0300",
+      "committer The Committer <committer@example.com> 1620139035 -0300",
+      "",
+      "src only commit",
+      "",
+      "source=717271f0f0ee528c0bb094e8b2f84ea6cef7b39d",
+      ""
     );
 
     Directory result;
     result = materialize(testCase10Target);
 
     testTree(
-        result,
+      result,
 
-        "README.md",
-        "src/main/java/br/com/objectos/Git.java",
-        "src/main/java/br/com/objectos/Main.java"
+      "README.md",
+      "src/main/java/br/com/objectos/Git.java",
+      "src/main/java/br/com/objectos/Main.java"
     );
 
     testRegularFile(
-        result, "README.md",
+      result, "README.md",
 
-        "# ObjectosRepo",
-        "",
-        "This is a git repository meant to be used in tests."
+      "# ObjectosRepo",
+      "",
+      "This is a git repository meant to be used in tests."
     );
 
     testRegularFile(
-        result, "src/main/java/br/com/objectos/Git.java",
+      result, "src/main/java/br/com/objectos/Git.java",
 
-        "package br.com.objectos;",
-        "",
-        "// edited by Copy10",
-        "",
-        "public final class Git {}"
+      "package br.com.objectos;",
+      "",
+      "// edited by Copy10",
+      "",
+      "public final class Git {}"
     );
 
     testRegularFile(
-        result, "src/main/java/br/com/objectos/Main.java",
+      result, "src/main/java/br/com/objectos/Main.java",
 
-        "package br.com.objectos;",
-        "",
-        "public class Main {",
-        "}"
+      "package br.com.objectos;",
+      "",
+      "public class Main {",
+      "}"
     );
   }
 
@@ -527,35 +527,35 @@ public class GitServiceTest extends AbstractGitTest {
     commitId = testCase11.getResult();
 
     testCommit(
-        testCase11Target, commitId,
+      testCase11Target, commitId,
 
-        "tree a15379c93a131bad60b1bf54081ae5f371870427",
-        "author The Author <author@example.com> 1620139035 -0300",
-        "committer The Committer <committer@example.com> 1620139035 -0300",
-        "",
-        "src only commit",
-        "",
-        "source=717271f0f0ee528c0bb094e8b2f84ea6cef7b39d",
-        ""
+      "tree a15379c93a131bad60b1bf54081ae5f371870427",
+      "author The Author <author@example.com> 1620139035 -0300",
+      "committer The Committer <committer@example.com> 1620139035 -0300",
+      "",
+      "src only commit",
+      "",
+      "source=717271f0f0ee528c0bb094e8b2f84ea6cef7b39d",
+      ""
     );
 
     Directory result;
     result = materialize(testCase11Target);
 
     testTree(
-        result,
+      result,
 
-        "README.md",
-        "src/main/java/br/com/objectos/Git.java",
-        "src/main/java/br/com/objectos/Main.java"
+      "README.md",
+      "src/main/java/br/com/objectos/Git.java",
+      "src/main/java/br/com/objectos/Main.java"
     );
 
     testRegularFile(
-        result, "README.md",
+      result, "README.md",
 
-        "# ObjectosRepo",
-        "",
-        "test case 11"
+      "# ObjectosRepo",
+      "",
+      "test case 11"
     );
   }
 
@@ -596,9 +596,9 @@ public class GitServiceTest extends AbstractGitTest {
     commit = task.getResult();
 
     assertEquals(
-        commit.print(),
+      commit.print(),
 
-        LineSeparator.join(lines)
+      LineSeparator.join(lines)
     );
   }
 
@@ -608,9 +608,9 @@ public class GitServiceTest extends AbstractGitTest {
     file = dir.resolve(path).toRegularFile();
 
     assertEquals(
-        Read.lines(file, Charsets.utf8()),
+      Read.lines(file, Charsets.utf8()),
 
-        ImmutableList.copyOf(expected)
+      ImmutableList.copyOf(expected)
     );
 
     assertTrue(file.is(Posix.ownerExecutable()));
@@ -675,9 +675,9 @@ public class GitServiceTest extends AbstractGitTest {
     file = dir.resolve(path).toRegularFile();
 
     assertEquals(
-        Read.lines(file, Charsets.utf8()),
+      Read.lines(file, Charsets.utf8()),
 
-        ImmutableList.copyOf(expected)
+      ImmutableList.copyOf(expected)
     );
 
     assertFalse(file.is(Posix.ownerExecutable()));
@@ -688,11 +688,11 @@ public class GitServiceTest extends AbstractGitTest {
     result = ListRegularFiles.of(dir);
 
     assertEquals(
-        result,
+      result,
 
-        ImmutableList.copyOf(expected),
+      ImmutableList.copyOf(expected),
 
-        result.toString()
+      result.toString()
     );
   }
 

@@ -19,10 +19,10 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNull;
 
 import br.com.objectos.core.io.Charsets;
-import br.com.objectos.core.system.LineSeparator;
 import br.com.objectos.fs.ResolvedPath;
 import java.io.IOException;
 import java.nio.ByteBuffer;
+import objectos.lang.LineSeparator;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;

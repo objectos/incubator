@@ -21,11 +21,11 @@ import static org.testng.Assert.assertNull;
 
 import br.com.objectos.core.io.Resource;
 import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.system.LineSeparator;
 import br.com.objectos.http.Method;
 import br.com.objectos.http.ProtocolException;
 import br.com.objectos.http.Version;
 import java.io.IOException;
+import objectos.lang.LineSeparator;
 import objectos.lang.Try;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
@@ -57,19 +57,19 @@ public class ReplayTest extends AbstractReplayTest {
     assertEquals(parsedVersion, Version.V1_0);
 
     writeResponse(
-        "HTTP/1.0 302 Found",
-        "Location: /test/login",
-        "",
-        ""
+      "HTTP/1.0 302 Found",
+      "Location: /test/login",
+      "",
+      ""
     );
 
     sleep(100);
 
     assertEquals(
-        log,
-        ImmutableList.of(
-            "000000000001=OK"
-        )
+      log,
+      ImmutableList.of(
+        "000000000001=OK"
+      )
     );
   }
 
@@ -90,19 +90,19 @@ public class ReplayTest extends AbstractReplayTest {
     assertEquals(parsedVersion, Version.V1_0);
 
     writeResponse(
-        "HTTP/1.0 302 Found",
-        "Location: /test/login",
-        "",
-        ""
+      "HTTP/1.0 302 Found",
+      "Location: /test/login",
+      "",
+      ""
     );
 
     sleep(100);
 
     assertEquals(
-        log,
-        ImmutableList.of(
-            "000000000001=OK"
-        )
+      log,
+      ImmutableList.of(
+        "000000000001=OK"
+      )
     );
 
     parseRequest();
@@ -113,32 +113,32 @@ public class ReplayTest extends AbstractReplayTest {
     assertEquals(parsedVersion, Version.V1_0);
 
     writeResponse(
-        "HTTP/1.0 200 OK",
-        "Content-Type: text/html; charset=utf8",
-        "Content-Length: 82",
-        "Set-Cookie: JSESSIONID=original",
-        "",
-        LineSeparator.join(
-            "<!doctype html>",
-            "<html>",
-            "<head>",
-            "<title>Login</title>",
-            "</head>",
-            "<body>",
-            "</body>",
-            "</html>",
-            ""
-        )
+      "HTTP/1.0 200 OK",
+      "Content-Type: text/html; charset=utf8",
+      "Content-Length: 82",
+      "Set-Cookie: JSESSIONID=original",
+      "",
+      LineSeparator.join(
+        "<!doctype html>",
+        "<html>",
+        "<head>",
+        "<title>Login</title>",
+        "</head>",
+        "<body>",
+        "</body>",
+        "</html>",
+        ""
+      )
     );
 
     sleep(200);
 
     assertEquals(
-        log,
-        ImmutableList.of(
-            "000000000001=OK",
-            "000000000002=OK"
-        )
+      log,
+      ImmutableList.of(
+        "000000000001=OK",
+        "000000000002=OK"
+      )
     );
   }
 
@@ -159,20 +159,20 @@ public class ReplayTest extends AbstractReplayTest {
     assertEquals(parsedVersion, Version.V1_0);
 
     writeResponse(
-        "HTTP/1.0 200 OK",
-        "Content-Type: text/json",
-        "Content-Length: 35",
-        "",
-        "{\"prop1\":\"res001\",\"prop2\":\"res002\"}"
+      "HTTP/1.0 200 OK",
+      "Content-Type: text/json",
+      "Content-Length: 35",
+      "",
+      "{\"prop1\":\"res001\",\"prop2\":\"res002\"}"
     );
 
     sleep(100);
 
     assertEquals(
-        log,
-        ImmutableList.of(
-            "000000000001=OK"
-        )
+      log,
+      ImmutableList.of(
+        "000000000001=OK"
+      )
     );
   }
 
@@ -193,31 +193,31 @@ public class ReplayTest extends AbstractReplayTest {
     assertEquals(parsedVersion, Version.V1_0);
 
     writeResponse(
-        "HTTP/1.0 200 OK",
-        "Content-Type: text/html; charset=utf8",
-        "Content-Length: 82",
-        "Set-Cookie: JSESSIONID=expected",
-        "",
-        LineSeparator.join(
-            "<!doctype html>",
-            "<html>",
-            "<head>",
-            "<title>Login</title>",
-            "</head>",
-            "<body>",
-            "</body>",
-            "</html>",
-            ""
-        )
+      "HTTP/1.0 200 OK",
+      "Content-Type: text/html; charset=utf8",
+      "Content-Length: 82",
+      "Set-Cookie: JSESSIONID=expected",
+      "",
+      LineSeparator.join(
+        "<!doctype html>",
+        "<html>",
+        "<head>",
+        "<title>Login</title>",
+        "</head>",
+        "<body>",
+        "</body>",
+        "</html>",
+        ""
+      )
     );
 
     sleep(100);
 
     assertEquals(
-        log,
-        ImmutableList.of(
-            "000000000001=OK"
-        )
+      log,
+      ImmutableList.of(
+        "000000000001=OK"
+      )
     );
 
     parseRequest();
@@ -230,21 +230,21 @@ public class ReplayTest extends AbstractReplayTest {
     assertEquals(parsedVersion, Version.V1_0);
 
     writeResponse(
-        "HTTP/1.0 200 OK",
-        "Content-Type: text/json",
-        "Content-Length: 35",
-        "",
-        "{\"prop1\":\"res001\",\"prop2\":\"res002\"}"
+      "HTTP/1.0 200 OK",
+      "Content-Type: text/json",
+      "Content-Length: 35",
+      "",
+      "{\"prop1\":\"res001\",\"prop2\":\"res002\"}"
     );
 
     sleep(100);
 
     assertEquals(
-        log,
-        ImmutableList.of(
-            "000000000001=OK",
-            "000000000002=OK"
-        )
+      log,
+      ImmutableList.of(
+        "000000000001=OK",
+        "000000000002=OK"
+      )
     );
   }
 

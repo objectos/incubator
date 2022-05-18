@@ -28,12 +28,12 @@ import static org.testng.Assert.assertTrue;
 
 import br.com.objectos.core.io.Charsets;
 import br.com.objectos.core.io.Write;
-import br.com.objectos.core.system.LineSeparator;
 import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.RegularFile;
 import br.com.objectos.fs.ResolvedPath;
 import br.com.objectos.fs.testing.TmpDir;
 import java.io.IOException;
+import objectos.lang.LineSeparator;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -55,15 +55,15 @@ public class MojoTest {
     compilerTarget = mojoTesting.compilerTarget;
 
     runtime = runtime(
-        localRepository(
-            mojoTesting.repository
-        ),
+      localRepository(
+        mojoTesting.repository
+      ),
 
-        mirror(
-            id("mojo"),
-            url(mojoTesting.mirrorUrl),
-            mirrorOf("*")
-        )
+      mirror(
+        id("mojo"),
+        url(mojoTesting.mirrorUrl),
+        mirrorOf("*")
+      )
     );
   }
 
@@ -82,22 +82,22 @@ public class MojoTest {
     pom = basedir.createRegularFile("pom.xml");
 
     Write.string(
-        pom,
+      pom,
 
-        Charsets.utf8(),
+      Charsets.utf8(),
 
-        LineSeparator.join(
-            "<project>",
-            "<modelVersion>4.0.0</modelVersion>",
-            "<groupId>br.com.objectos.mojo</groupId>",
-            "<artifactId>mojo-test-case-01</artifactId>",
-            "<version>0.1.0</version>",
-            "<properties>",
-            compilerSource,
-            compilerTarget,
-            "</properties>",
-            "</project>"
-        )
+      LineSeparator.join(
+        "<project>",
+        "<modelVersion>4.0.0</modelVersion>",
+        "<groupId>br.com.objectos.mojo</groupId>",
+        "<artifactId>mojo-test-case-01</artifactId>",
+        "<version>0.1.0</version>",
+        "<properties>",
+        compilerSource,
+        compilerTarget,
+        "</properties>",
+        "</project>"
+      )
     );
 
     ResolvedPath resolved;
@@ -115,14 +115,14 @@ public class MojoTest {
     mainJava = srcMainTesting.createRegularFile("Main.java");
 
     Write.string(
-        mainJava,
+      mainJava,
 
-        Charsets.utf8(),
+      Charsets.utf8(),
 
-        LineSeparator.join(
-            "package testing;",
-            "public class Main {}"
-        )
+      LineSeparator.join(
+        "package testing;",
+        "public class Main {}"
+      )
     );
 
     // plugin goal

@@ -27,5 +27,4 @@ module br.com.objectos.git {
   requires br.com.objectos.core.array;
   requires br.com.objectos.core.map;
   requires br.com.objectos.core.set;
-  requires br.com.objectos.core.system;
 }
