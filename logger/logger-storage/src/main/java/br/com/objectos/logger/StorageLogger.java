@@ -22,7 +22,7 @@ import br.com.objectos.core.list.MutableList;
 import br.com.objectos.fs.Directory;
 import java.io.IOException;
 import objectos.lang.Checks;
-import objectos.logging.Level;
+import objectos.lang.Level;
 
 /**
  * A logger that writes log events to a file system storage.

@@ -15,8 +15,8 @@
  */
 package br.com.objectos.http;
 
-import objectos.logging.Event;
-import objectos.logging.NoOpLogger;
+import objectos.lang.Event;
+import objectos.lang.NoOpLogger;
 
 final class HttpTestingLogger extends NoOpLogger {
 

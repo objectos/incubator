@@ -24,9 +24,9 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.zip.GZIPOutputStream;
 import objectos.lang.Try;
-import objectos.logging.Event1;
-import objectos.logging.Event2;
-import objectos.logging.Logger;
+import objectos.lang.Event1;
+import objectos.lang.Event2;
+import objectos.lang.Logger;
 
 final class FullBackup extends AbstractClientJob<RegularFile> {
 

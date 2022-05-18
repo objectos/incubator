@@ -20,9 +20,8 @@
 module br.com.objectos.core.logging.testing {
   exports br.com.objectos.core.logging.testing;
 
-  requires transitive objectos.logging;
+  requires transitive objectos.lang;
 
   requires br.com.objectos.core.list;
-  requires objectos.lang;
   requires br.com.objectos.core.system;
 }

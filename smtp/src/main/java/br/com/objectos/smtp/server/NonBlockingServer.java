@@ -29,8 +29,8 @@ import br.com.objectos.smtp.mail.SimpleReversePathFacade;
 import java.nio.charset.Charset;
 import java.nio.charset.CharsetDecoder;
 import objectos.lang.Checks;
-import objectos.logging.Event1;
-import objectos.logging.Logger;
+import objectos.lang.Event1;
+import objectos.lang.Logger;
 
 public final class NonBlockingServer implements Server {
 

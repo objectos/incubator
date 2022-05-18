@@ -15,8 +15,8 @@
  */
 package br.com.objectos.concurrent;
 
-import objectos.logging.Event0;
-import objectos.logging.Logger;
+import objectos.lang.Event0;
+import objectos.lang.Logger;
 
 /**
  * A {@link CpuArray} implementation consisting of {@link FixedCpuWorker}

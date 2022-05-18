@@ -16,7 +16,7 @@
 package br.com.objectos.smtp;
 
 import br.com.objectos.comuns.net.SocketChannelFactory;
-import objectos.logging.Logger;
+import objectos.lang.Logger;
 
 public interface ServerBuilder {
 

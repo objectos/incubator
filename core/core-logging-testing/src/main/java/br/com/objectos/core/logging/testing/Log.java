@@ -19,14 +19,14 @@ import br.com.objectos.core.system.LineSeparator;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import objectos.lang.Event;
+import objectos.lang.Event0;
+import objectos.lang.Event1;
+import objectos.lang.Event2;
+import objectos.lang.Event3;
+import objectos.lang.Level;
 import objectos.lang.ToString;
 import objectos.lang.ToStringObject;
-import objectos.logging.Event;
-import objectos.logging.Event0;
-import objectos.logging.Event1;
-import objectos.logging.Event2;
-import objectos.logging.Event3;
-import objectos.logging.Level;
 
 /**
  * A logged event that provides methods for its inspection.

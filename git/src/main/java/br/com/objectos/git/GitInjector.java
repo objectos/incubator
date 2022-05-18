@@ -28,7 +28,7 @@ import java.security.MessageDigest;
 import java.util.ArrayDeque;
 import java.util.zip.Deflater;
 import java.util.zip.Inflater;
-import objectos.logging.Logger;
+import objectos.lang.Logger;
 
 abstract class GitInjector {
 

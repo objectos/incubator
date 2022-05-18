@@ -16,8 +16,8 @@
 package br.com.objectos.logger;
 
 import java.io.Closeable;
-import objectos.logging.Level;
-import objectos.logging.Logger;
+import objectos.lang.Level;
+import objectos.lang.Logger;
 
 /**
  * A {@link Logger} that allows for setting its level.

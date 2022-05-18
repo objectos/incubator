@@ -18,9 +18,9 @@ package br.com.objectos.mysql;
 import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.fs.RegularFile;
 import java.io.IOException;
-import objectos.logging.Event1;
-import objectos.logging.Event2;
-import objectos.logging.Logger;
+import objectos.lang.Event1;
+import objectos.lang.Event2;
+import objectos.lang.Logger;
 
 final class FullRestore extends AbstractClientJob<ImmutableList<String>> {
 

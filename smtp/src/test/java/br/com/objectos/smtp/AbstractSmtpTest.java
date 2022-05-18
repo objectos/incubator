@@ -28,8 +28,8 @@ import java.io.Closeable;
 import java.io.IOException;
 import javax.mail.Session;
 import javax.mail.internet.MimeMessage;
-import objectos.logging.Logger;
-import objectos.logging.NoOpLogger;
+import objectos.lang.Logger;
+import objectos.lang.NoOpLogger;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
@@ -55,13 +55,13 @@ public abstract class AbstractSmtpTest {
     loopback25 = loopback(4025);
 
     client = Smtp.client(
-        logger(noopLogger)
+      logger(noopLogger)
     );
 
     server = server(
-        logger(noopLogger),
-        listenSmtp(loopback25),
-        store
+      logger(noopLogger),
+      listenSmtp(loopback25),
+      store
     );
   }
 

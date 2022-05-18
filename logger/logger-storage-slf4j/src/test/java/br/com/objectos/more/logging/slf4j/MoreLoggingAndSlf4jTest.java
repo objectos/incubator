@@ -31,8 +31,8 @@ import br.com.objectos.logger.Log;
 import br.com.objectos.logger.LogListener;
 import br.com.objectos.logger.StorageLogger;
 import java.io.IOException;
+import objectos.lang.Level;
 import objectos.lang.ToString;
-import objectos.logging.Level;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
@@ -65,13 +65,13 @@ public class MoreLoggingAndSlf4jTest implements LogListener {
     cpuWorker = new FixedCpuWorker(4, 10, testableLogger);
 
     storageLogger = StorageLogger.create(
-        root,
+      root,
 
-        ioWorker,
+      ioWorker,
 
-        cpuWorker,
+      cpuWorker,
 
-        StorageLogger.logListener(this)
+      StorageLogger.logListener(this)
     );
 
     ShutdownHook.register(storageLogger);
@@ -79,9 +79,9 @@ public class MoreLoggingAndSlf4jTest implements LogListener {
     MoreLoggingAndSlf4j.bootstrap(storageLogger);
 
     Services.start(
-        ioWorker,
+      ioWorker,
 
-        cpuWorker
+      cpuWorker
     );
   }
 
@@ -137,67 +137,67 @@ public class MoreLoggingAndSlf4jTest implements LogListener {
     log = logs.get(index++);
 
     assertEquals(
-        log.toString(),
-        ToString.toString(
-            "Slf4jLog1",
-            "", "SLF4J",
-            "", Level.TRACE,
-            "", source,
-            "", "trace test"
-        )
+      log.toString(),
+      ToString.toString(
+        "Slf4jLog1",
+        "", "SLF4J",
+        "", Level.TRACE,
+        "", source,
+        "", "trace test"
+      )
     );
 
     log = logs.get(index++);
 
     assertEquals(
-        log.toString(),
-        ToString.toString(
-            "Slf4jLog1",
-            "", "SLF4J",
-            "", Level.DEBUG,
-            "", source,
-            "", "debug test 1"
-        )
+      log.toString(),
+      ToString.toString(
+        "Slf4jLog1",
+        "", "SLF4J",
+        "", Level.DEBUG,
+        "", source,
+        "", "debug test 1"
+      )
     );
 
     log = logs.get(index++);
 
     assertEquals(
-        log.toString(),
-        ToString.toString(
-            "Slf4jLog1",
-            "", "SLF4J",
-            "", Level.INFO,
-            "", source,
-            "", "info test 2 3"
-        )
+      log.toString(),
+      ToString.toString(
+        "Slf4jLog1",
+        "", "SLF4J",
+        "", Level.INFO,
+        "", source,
+        "", "info test 2 3"
+      )
     );
 
     log = logs.get(index++);
 
     assertEquals(
-        log.toString(),
-        ToString.toString(
-            "Slf4jLog1",
-            "", "SLF4J",
-            "", Level.WARN,
-            "", source,
-            "", "warn test A B"
-        )
+      log.toString(),
+      ToString.toString(
+        "Slf4jLog1",
+        "", "SLF4J",
+        "", Level.WARN,
+        "", source,
+        "", "warn test A B"
+      )
     );
 
     log = logs.get(index++);
 
     assertEquals(
-        log.toString(),
-        ToString.toString(
-            "Slf4jLog2",
-            "", "SLF4J",
-            "", Level.ERROR,
-            "", source,
-            "", "error test",
-            "", "java.io.IOException: ERROR"
-        )
+      log.toString(),
+      ToString.toString(
+        "Slf4jLog2",
+        "", "SLF4J",
+        "", Level.ERROR,
+        "", source,
+        "", "error test",
+        "", "java.io.IOException: ERROR"
+      )
     );
   }
 

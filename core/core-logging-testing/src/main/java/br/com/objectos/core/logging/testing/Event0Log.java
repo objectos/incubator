@@ -16,9 +16,9 @@
 package br.com.objectos.core.logging.testing;
 
 import objectos.lang.Equals;
+import objectos.lang.Event;
+import objectos.lang.Event0;
 import objectos.lang.ToString;
-import objectos.logging.Event;
-import objectos.logging.Event0;
 
 /**
  * An {@link Event0} log instance.
@@ -45,8 +45,8 @@ public final class Event0Log extends Log {
   @Override
   public final void formatToString(StringBuilder sb, int depth) {
     ToString.formatToString(
-        sb, depth, this,
-        "event", event
+      sb, depth, this,
+      "event", event
     );
   }
 

@@ -23,7 +23,7 @@ import br.com.objectos.fs.RegularFile;
 import br.com.objectos.fs.ResolvedPath;
 import java.nio.charset.Charset;
 import objectos.lang.Checks;
-import objectos.logging.Logger;
+import objectos.lang.Logger;
 
 public final class Client {
 

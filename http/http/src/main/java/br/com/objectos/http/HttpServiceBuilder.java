@@ -19,8 +19,8 @@ import br.com.objectos.concurrent.CpuArray;
 import br.com.objectos.concurrent.CpuWorker;
 import br.com.objectos.concurrent.IoWorker;
 import java.net.SocketAddress;
-import objectos.logging.Logger;
-import objectos.logging.NoOpLogger;
+import objectos.lang.Logger;
+import objectos.lang.NoOpLogger;
 
 final class HttpServiceBuilder {
 
@@ -63,7 +63,7 @@ final class HttpServiceBuilder {
       cpuWorker = cpuArray.get(i);
 
       workers[i] = HttpWorker.create(
-          bufferSize, cpuWorker, ioWorker, logger, enginesPerWorker, processorProvider);
+        bufferSize, cpuWorker, ioWorker, logger, enginesPerWorker, processorProvider);
     }
 
     return new HttpService(address, workers);

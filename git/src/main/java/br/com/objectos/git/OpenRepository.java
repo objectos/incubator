@@ -23,7 +23,7 @@ import br.com.objectos.fs.PathNameVisitor;
 import br.com.objectos.fs.RegularFile;
 import br.com.objectos.fs.ResolvedPath;
 import java.io.IOException;
-import objectos.logging.Event1;
+import objectos.lang.Event1;
 
 /**
  * Opens a Git repository.

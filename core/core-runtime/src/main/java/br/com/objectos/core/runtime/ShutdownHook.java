@@ -19,10 +19,10 @@ import java.lang.Thread.State;
 import java.util.ArrayList;
 import java.util.List;
 import objectos.lang.Checks;
-import objectos.logging.Event0;
-import objectos.logging.Event1;
-import objectos.logging.Logger;
-import objectos.logging.NoOpLogger;
+import objectos.lang.Event0;
+import objectos.lang.Event1;
+import objectos.lang.Logger;
+import objectos.lang.NoOpLogger;
 
 /**
  * Provides a facility for running operations in a {@link Runtime} shutdown

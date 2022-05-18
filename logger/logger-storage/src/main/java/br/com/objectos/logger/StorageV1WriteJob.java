@@ -26,8 +26,8 @@ import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
+import objectos.lang.Level;
 import objectos.lang.Strings;
-import objectos.logging.Level;
 
 final class StorageV1WriteJob implements IoTask, CpuTask, WriteJob {
 

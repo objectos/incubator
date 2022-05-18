@@ -21,7 +21,7 @@ import br.com.objectos.smtp.client.NonBlockingClient;
 import br.com.objectos.smtp.mail.FsMailStore;
 import br.com.objectos.smtp.server.NonBlockingServer;
 import objectos.lang.Checks;
-import objectos.logging.Logger;
+import objectos.lang.Logger;
 
 public final class Smtp {
 

@@ -22,8 +22,8 @@ import br.com.objectos.concurrent.IoWorker;
 import br.com.objectos.core.set.ImmutableSet;
 import br.com.objectos.fs.Directory;
 import objectos.lang.Checks;
-import objectos.logging.Logger;
-import objectos.logging.NoOpLogger;
+import objectos.lang.Logger;
+import objectos.lang.NoOpLogger;
 
 /**
  * A class for supporting the execution of {@link GitCommand} instances.

@@ -15,8 +15,8 @@
  */
 package br.com.objectos.logger;
 
+import objectos.lang.Level;
 import objectos.lang.ToString;
-import objectos.logging.Level;
 
 final class Slf4jLog2 extends WriteJobLog {
 

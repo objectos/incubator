@@ -17,10 +17,10 @@ package br.com.objectos.git;
 
 import java.util.concurrent.ExecutionException;
 import objectos.lang.Checks;
+import objectos.lang.Event1;
+import objectos.lang.Logger;
 import objectos.lang.ToString;
 import objectos.lang.ToStringObject;
-import objectos.logging.Event1;
-import objectos.logging.Logger;
 
 abstract class AbstractGitTask<V> implements GitTask<V>, ResultConsumer, ToStringObject {
 

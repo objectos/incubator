@@ -15,8 +15,8 @@
  */
 package br.com.objectos.git;
 
-import objectos.logging.Event1;
-import objectos.logging.Event2;
+import objectos.lang.Event1;
+import objectos.lang.Event2;
 
 /**
  * Provides access to the library's logging events.

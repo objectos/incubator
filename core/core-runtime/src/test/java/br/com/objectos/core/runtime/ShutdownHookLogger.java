@@ -17,8 +17,8 @@ package br.com.objectos.core.runtime;
 
 import java.util.ArrayList;
 import java.util.List;
-import objectos.logging.Event1;
-import objectos.logging.NoOpLogger;
+import objectos.lang.Event1;
+import objectos.lang.NoOpLogger;
 
 class ShutdownHookLogger extends NoOpLogger {
 

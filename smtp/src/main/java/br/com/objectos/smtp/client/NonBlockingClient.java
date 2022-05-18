@@ -30,8 +30,8 @@ import java.nio.charset.CharsetDecoder;
 import java.nio.charset.CharsetEncoder;
 import java.nio.charset.CoderResult;
 import objectos.lang.Checks;
-import objectos.logging.Event1;
-import objectos.logging.Logger;
+import objectos.lang.Event1;
+import objectos.lang.Logger;
 
 public class NonBlockingClient implements Client {
 

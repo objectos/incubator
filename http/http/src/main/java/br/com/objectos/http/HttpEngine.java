@@ -32,7 +32,7 @@ import java.nio.charset.CoderResult;
 import java.text.DateFormat;
 import java.util.Date;
 import objectos.lang.Checks;
-import objectos.logging.Logger;
+import objectos.lang.Logger;
 
 /**
  * @since 4
@@ -585,8 +585,8 @@ final class HttpEngine implements CpuTask, IoTask, HttpResponseHandle {
 
     int mismatch;
     mismatch = CharArrays.mismatch(
-        charArray, charArrayIndex, charArrayIndex + len,
-        HTTP_1_1, 0, len);
+      charArray, charArrayIndex, charArrayIndex + len,
+      HTTP_1_1, 0, len);
 
     if (mismatch != -1) {
       throw new UnsupportedOperationException("Implement me");
@@ -688,7 +688,7 @@ final class HttpEngine implements CpuTask, IoTask, HttpResponseHandle {
     processor.requestStart(this);
 
     return toIo(
-        IO_READ, toDecode(_PARSE), _FINALLY
+      IO_READ, toDecode(_PARSE), _FINALLY
     );
   }
 
@@ -753,7 +753,7 @@ final class HttpEngine implements CpuTask, IoTask, HttpResponseHandle {
     }
 
     return toIo(
-        IO_READ, toDecode(state), _FINALLY
+      IO_READ, toDecode(state), _FINALLY
     );
   }
 

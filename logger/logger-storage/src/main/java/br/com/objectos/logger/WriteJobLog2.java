@@ -15,8 +15,8 @@
  */
 package br.com.objectos.logger;
 
-import objectos.logging.Event2;
-import objectos.logging.Logger;
+import objectos.lang.Event2;
+import objectos.lang.Logger;
 
 final class WriteJobLog2<T1, T2> extends WriteJobLog {
 

@@ -19,8 +19,8 @@ import br.com.objectos.concurrent.CpuArray;
 import br.com.objectos.concurrent.CpuWorker;
 import br.com.objectos.concurrent.IoWorker;
 import objectos.lang.Checks;
-import objectos.logging.Logger;
-import objectos.logging.NoOpLogger;
+import objectos.lang.Logger;
+import objectos.lang.NoOpLogger;
 
 /**
  * @since 3
@@ -51,9 +51,9 @@ final class GitServiceBuilder {
     workers = new GitWorker[arraySize];
 
     GitEngine.Option[] engineOptions = {
-        GitEngine.bufferSize(bufferSize),
+                                        GitEngine.bufferSize(bufferSize),
 
-        GitEngine.logger(logger)
+                                        GitEngine.logger(logger)
     };
 
     for (int i = 0; i < arraySize; i++) {

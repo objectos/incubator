@@ -21,7 +21,5 @@
 module br.com.objectos.core.runtime {
   exports br.com.objectos.core.runtime;
 
-  requires transitive objectos.logging;
-
-  requires objectos.lang;
+  requires transitive objectos.lang;
 }

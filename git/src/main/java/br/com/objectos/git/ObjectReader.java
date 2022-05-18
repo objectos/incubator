@@ -30,9 +30,9 @@ import java.util.Iterator;
 import java.util.zip.DataFormatException;
 import java.util.zip.Inflater;
 import objectos.lang.Checks;
-import objectos.logging.Event0;
-import objectos.logging.Event1;
-import objectos.logging.Event2;
+import objectos.lang.Event0;
+import objectos.lang.Event1;
+import objectos.lang.Event2;
 
 /**
  * A state machine for reading Git objects from a repository. Supports:

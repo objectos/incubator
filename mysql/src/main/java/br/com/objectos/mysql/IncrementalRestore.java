@@ -28,9 +28,9 @@ import java.util.zip.GZIPInputStream;
 import objectos.lang.RandomString;
 import objectos.lang.Throwables;
 import objectos.lang.Try;
-import objectos.logging.Event0;
-import objectos.logging.Event1;
-import objectos.logging.Logger;
+import objectos.lang.Event0;
+import objectos.lang.Event1;
+import objectos.lang.Logger;
 
 final class IncrementalRestore extends AbstractClientJob<ImmutableList<String>> {
 

@@ -16,9 +16,9 @@
 package br.com.objectos.core.logging.testing;
 
 import objectos.lang.Equals;
+import objectos.lang.Event;
+import objectos.lang.Event3;
 import objectos.lang.ToString;
-import objectos.logging.Event;
-import objectos.logging.Event3;
 
 /**
  * An {@link Event3} log instance.

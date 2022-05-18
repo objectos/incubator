@@ -18,8 +18,8 @@ package br.com.objectos.concurrent;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingDeque;
 import objectos.lang.Checks;
-import objectos.logging.Event1;
-import objectos.logging.Logger;
+import objectos.lang.Event1;
+import objectos.lang.Logger;
 
 /**
  * A service that uses a single thread for executing I/O tasks operating off an

@@ -21,10 +21,10 @@ import static org.testng.Assert.assertSame;
 import static org.testng.Assert.assertTrue;
 
 import java.io.IOException;
-import objectos.logging.Event0;
-import objectos.logging.Event1;
-import objectos.logging.Event2;
-import objectos.logging.Event3;
+import objectos.lang.Event0;
+import objectos.lang.Event1;
+import objectos.lang.Event2;
+import objectos.lang.Event3;
 import org.testng.annotations.Test;
 
 public class TestableLoggerTest {

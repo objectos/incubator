@@ -26,8 +26,8 @@ import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
 import java.nio.charset.CharsetDecoder;
 import java.nio.charset.CoderResult;
-import objectos.logging.Event1;
-import objectos.logging.Event2;
+import objectos.lang.Event1;
+import objectos.lang.Event2;
 
 /**
  * Resolves a Git reference.
@@ -63,37 +63,37 @@ final class ResolveRef extends AbstractGitEngineTask {
   private static final byte IO_RESOLVE_PACKED = 4;
 
   /*
-  
+
   @startuml
-  
+
   hide empty description
   skinparam shadowing false
-  
+
   [*] --> IO : ioAction=resolveLoose\lioReady=MAYBE_LOOSE
-  
+
   FINALLY --> [*]
-  
+
   IO --> IO_WAIT
-  
+
   IO_WAIT --> MAYBE_LOOSE
   IO_WAIT --> MAYBE_PACKED
-  
+
   MAYBE_LOOSE --> OBJECT_ID
   MAYBE_LOOSE --> IO : ioAction=resolvePacked\lioReady=MAYBE_PACKED
-  
+
   MAYBE_PACKED --> NULL
   MAYBE_PACKED --> PARSE
-  
+
   OBJECT_ID --> FINALLY
-  
+
   PARSE --> OBJECT_ID
   PARSE --> IO : ioAction=readPacked\lioReady=PARSE
   PARSE --> NULL
-  
+
   NULL --> FINALLY
-  
+
   @enduml
-  
+
   */
 
   private FileChannel channel;

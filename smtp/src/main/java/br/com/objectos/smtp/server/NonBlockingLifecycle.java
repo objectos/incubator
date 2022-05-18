@@ -21,8 +21,8 @@ import java.io.Closeable;
 import java.io.IOException;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
-import objectos.logging.Event1;
-import objectos.logging.Logger;
+import objectos.lang.Event1;
+import objectos.lang.Logger;
 
 public final class NonBlockingLifecycle implements Lifecycle {
 

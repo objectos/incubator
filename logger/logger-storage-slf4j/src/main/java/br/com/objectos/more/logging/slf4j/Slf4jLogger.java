@@ -16,7 +16,7 @@
 package br.com.objectos.more.logging.slf4j;
 
 import br.com.objectos.logger.StorageLogger;
-import objectos.logging.Level;
+import objectos.lang.Level;
 import org.slf4j.Marker;
 import org.slf4j.helpers.FormattingTuple;
 import org.slf4j.helpers.MessageFormatter;

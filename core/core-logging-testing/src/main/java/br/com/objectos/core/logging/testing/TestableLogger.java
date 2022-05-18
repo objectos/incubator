@@ -19,13 +19,13 @@ import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.core.list.MutableList;
 import java.util.NoSuchElementException;
 import objectos.lang.Checks;
-import objectos.logging.Event;
-import objectos.logging.Event0;
-import objectos.logging.Event1;
-import objectos.logging.Event2;
-import objectos.logging.Event3;
-import objectos.logging.Level;
-import objectos.logging.Logger;
+import objectos.lang.Event;
+import objectos.lang.Event0;
+import objectos.lang.Event1;
+import objectos.lang.Event2;
+import objectos.lang.Event3;
+import objectos.lang.Level;
+import objectos.lang.Logger;
 
 /**
  * An in-memory Logger implementation with methods that allow for inspection of

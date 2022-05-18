@@ -19,7 +19,7 @@ import br.com.objectos.core.system.LineSeparator;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import objectos.logging.Level;
+import objectos.lang.Level;
 
 /**
  * Provides a standard layout implementation.

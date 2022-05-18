@@ -18,7 +18,7 @@ package br.com.objectos.logger;
 import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.core.list.MutableList;
 import objectos.lang.Checks;
-import objectos.logging.Logger;
+import objectos.lang.Logger;
 
 /**
  * An in-memory logger implementation that can be used to bootstrap a

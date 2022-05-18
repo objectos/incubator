@@ -29,7 +29,7 @@ import java.nio.charset.CharsetEncoder;
 import java.nio.charset.CoderResult;
 import java.security.MessageDigest;
 import java.util.zip.Deflater;
-import objectos.logging.Event1;
+import objectos.lang.Event1;
 
 final class WriteCommit extends AbstractGitEngineTask {
 

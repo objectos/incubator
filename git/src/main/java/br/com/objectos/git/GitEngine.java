@@ -36,8 +36,8 @@ import java.util.Map;
 import java.util.zip.Deflater;
 import java.util.zip.Inflater;
 import objectos.lang.Checks;
-import objectos.logging.Logger;
-import objectos.logging.NoOpLogger;
+import objectos.lang.Logger;
+import objectos.lang.NoOpLogger;
 
 /**
  * A state machine providing low-level (plumbing) Git operations.

@@ -20,9 +20,8 @@ module br.com.objectos.concurrent {
   exports br.com.objectos.concurrent;
 
   requires transitive br.com.objectos.core.service;
-  requires transitive objectos.logging;
+  requires transitive objectos.lang;
 
   requires br.com.objectos.core.array;
   requires br.com.objectos.core.list;
-  requires objectos.lang;
 }

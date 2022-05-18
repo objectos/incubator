@@ -22,7 +22,7 @@ import java.net.SocketAddress;
 import java.nio.channels.SocketChannel;
 import java.util.Random;
 import objectos.lang.Checks;
-import objectos.logging.Logger;
+import objectos.lang.Logger;
 
 /**
  * @since 4

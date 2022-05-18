@@ -25,7 +25,7 @@ import static org.testng.Assert.assertTrue;
 import br.com.objectos.core.logging.testing.TestableLogger;
 import br.com.objectos.core.service.Services;
 import java.io.IOException;
-import objectos.logging.NoOpLogger;
+import objectos.lang.NoOpLogger;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
@@ -74,9 +74,9 @@ public class ConcurrentTest implements IoTask {
     fixedCpuWorker = new FixedCpuWorker(1, 2, logger);
 
     Services.start(
-        singleThreadIoWorker,
+      singleThreadIoWorker,
 
-        fixedCpuWorker
+      fixedCpuWorker
     );
   }
 

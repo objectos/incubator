@@ -19,10 +19,10 @@ import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.locks.LockSupport;
 import objectos.lang.Checks;
+import objectos.lang.Event0;
+import objectos.lang.Event1;
+import objectos.lang.Logger;
 import objectos.lang.ToString;
-import objectos.logging.Event0;
-import objectos.logging.Event1;
-import objectos.logging.Logger;
 
 /**
  * Runs {@linkplain CpuTask CPU bound tasks} concurrently (up to a fixed number)

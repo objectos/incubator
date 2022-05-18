@@ -15,8 +15,8 @@
  */
 package br.com.objectos.concurrent;
 
-import objectos.logging.Event0;
-import objectos.logging.Event1;
+import objectos.lang.Event0;
+import objectos.lang.Event1;
 
 abstract class FixedCpuWorkerThreadAdapter {
 

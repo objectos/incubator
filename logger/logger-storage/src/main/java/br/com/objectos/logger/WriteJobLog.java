@@ -15,10 +15,10 @@
  */
 package br.com.objectos.logger;
 
+import objectos.lang.Event;
+import objectos.lang.Level;
+import objectos.lang.Logger;
 import objectos.lang.ToString;
-import objectos.logging.Event;
-import objectos.logging.Level;
-import objectos.logging.Logger;
 
 abstract class WriteJobLog extends Log {
 

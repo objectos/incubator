@@ -16,8 +16,8 @@
 package br.com.objectos.git;
 
 import br.com.objectos.concurrent.IoWorker;
-import objectos.logging.Logger;
-import objectos.logging.NoOpLogger;
+import objectos.lang.Logger;
+import objectos.lang.NoOpLogger;
 
 final class GitEngineBuilder {
 
@@ -41,11 +41,11 @@ final class GitEngineBuilder {
 
   final GitEngine build() {
     return new GitEngine(
-        bufferSize,
+      bufferSize,
 
-        ioWorker,
+      ioWorker,
 
-        logger
+      logger
     );
   }
 
