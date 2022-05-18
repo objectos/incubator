@@ -67,11 +67,6 @@
 		</dependency>
 		<dependency>
 			<groupId>br.com.objectos</groupId>
-			<artifactId>core-runtime</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>br.com.objectos</groupId>
 			<artifactId>core-system</artifactId>
 		</dependency>
 

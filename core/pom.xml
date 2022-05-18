@@ -45,7 +45,6 @@
 		<module>core-map</module>
 		<module>core-net</module>
 		<module>core-random-testing</module>
-		<module>core-runtime</module>
 		<module>core-service</module>
 		<module>core-set</module>
 		<module>core-system</module>

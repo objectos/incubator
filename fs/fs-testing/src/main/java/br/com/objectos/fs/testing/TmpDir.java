@@ -16,12 +16,12 @@
 package br.com.objectos.fs.testing;
 
 import br.com.objectos.core.list.MutableList;
-import br.com.objectos.core.runtime.ShutdownHook;
-import br.com.objectos.core.runtime.ShutdownHookTask;
 import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.JavaIoTmpdir;
 import br.com.objectos.random.testing.Next;
 import java.io.IOException;
+import objectos.lang.ShutdownHook;
+import objectos.lang.ShutdownHookTask;
 import objectos.lang.Throwables;
 
 /**

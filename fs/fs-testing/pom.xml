@@ -49,10 +49,6 @@
 			<artifactId>core-random-testing</artifactId>
 			<scope>compile</scope>
 		</dependency>
-		<dependency>
-			<groupId>br.com.objectos</groupId>
-			<artifactId>core-runtime</artifactId>
-		</dependency>
 
 		<dependency>
 			<groupId>org.testng</groupId>

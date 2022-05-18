@@ -90,11 +90,6 @@
 
 		<dependency>
 			<groupId>br.com.objectos</groupId>
-			<artifactId>core-runtime</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>br.com.objectos</groupId>
 			<artifactId>fs-testing</artifactId>
 		</dependency>
 

@@ -42,7 +42,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>br.com.objectos</groupId>
-			<artifactId>core-runtime</artifactId>
+			<artifactId>objectos-lang</artifactId>
 		</dependency>
 
 		<dependency>

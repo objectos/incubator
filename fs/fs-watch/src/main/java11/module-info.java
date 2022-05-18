@@ -26,6 +26,5 @@ module br.com.objectos.fs.watch {
 
   requires br.com.objectos.core.map;
   requires objectos.lang;
-  requires br.com.objectos.core.runtime;
   requires br.com.objectos.core.set;
 }

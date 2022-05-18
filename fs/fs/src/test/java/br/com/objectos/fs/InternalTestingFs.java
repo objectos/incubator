@@ -16,11 +16,11 @@
 package br.com.objectos.fs;
 
 import br.com.objectos.core.list.MutableList;
-import br.com.objectos.core.runtime.ShutdownHook;
-import br.com.objectos.core.runtime.ShutdownHookTask;
 import br.com.objectos.random.testing.Next;
 import java.io.IOException;
 import java.util.List;
+import objectos.lang.ShutdownHook;
+import objectos.lang.ShutdownHookTask;
 
 final class InternalTestingFs implements ShutdownHookTask {
 

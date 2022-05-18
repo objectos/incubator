@@ -15,7 +15,7 @@
  */
 package br.com.objectos.core.service;
 
-import br.com.objectos.core.runtime.ShutdownHookTask;
+import objectos.lang.ShutdownHookTask;
 
 /**
  * Defines a Service class.

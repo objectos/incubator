@@ -21,7 +21,5 @@
 module br.com.objectos.core.service {
   exports br.com.objectos.core.service;
 
-  requires transitive br.com.objectos.core.runtime;
-
-  requires objectos.lang;
+  requires transitive objectos.lang;
 }
