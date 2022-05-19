@@ -15,7 +15,7 @@
  */
 package br.com.objectos.code.java;
 
-import objectos.lang.Conversion;
+import objectos.lang.StringConversion;
 import objectos.lang.StringConverter;
 
 /**
@@ -26,15 +26,15 @@ import objectos.lang.StringConverter;
 public final class JavaNames {
 
   private static final StringConverter IDENTIFIER = StringConverter.create(
-    Conversion.toJavaIdentifier()
+    StringConversion.toJavaIdentifier()
   );
 
   private static final StringConverter LOWER_CAMEL_CASE = StringConverter.create(
-    Conversion.toJavaLowerCamelCase()
+    StringConversion.toJavaLowerCamelCase()
   );
 
   private static final StringConverter UPPER_CAMEL_CASE = StringConverter.create(
-    Conversion.toJavaUpperCamelCase()
+    StringConversion.toJavaUpperCamelCase()
   );
 
   private JavaNames() {}
