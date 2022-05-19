@@ -24,7 +24,6 @@ import objectos.lang.Event1;
 import objectos.lang.Event2;
 import objectos.lang.Event3;
 import objectos.lang.Level;
-import objectos.lang.LineSeparator;
 import objectos.lang.ToString;
 import objectos.lang.ToStringObject;
 
@@ -222,7 +221,7 @@ public abstract class Log implements ToStringObject {
   }
 
   final void printReturn() {
-    System.out.append(LineSeparator.get());
+    System.out.append(System.lineSeparator());
   }
 
   final void printStackTrace(Object o) {

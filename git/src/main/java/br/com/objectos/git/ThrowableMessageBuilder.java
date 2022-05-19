@@ -15,8 +15,6 @@
  */
 package br.com.objectos.git;
 
-import objectos.lang.LineSeparator;
-
 final class ThrowableMessageBuilder {
 
   private final StringBuilder message = new StringBuilder();
@@ -84,7 +82,7 @@ final class ThrowableMessageBuilder {
   }
 
   public final ThrowableMessageBuilder nl() {
-    message.append(LineSeparator.get());
+    message.append(System.lineSeparator());
 
     return this;
   }

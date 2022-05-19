@@ -19,7 +19,6 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import objectos.lang.Level;
-import objectos.lang.LineSeparator;
 
 /**
  * Provides a standard layout implementation.
@@ -138,7 +137,7 @@ public final class StandardLayout implements Layout {
 
     out.append(message);
 
-    out.append(LineSeparator.get());
+    out.append(System.lineSeparator());
 
     return out.toString();
   }

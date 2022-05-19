@@ -40,7 +40,6 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
-import objectos.lang.LineSeparator;
 import objectos.lang.NoOpLogger;
 import org.testng.annotations.BeforeClass;
 
@@ -548,7 +547,7 @@ public abstract class AbstractMysqlTest {
 
     assertNotNull(executeStatement);
 
-    return executeStatement.join(LineSeparator.get());
+    return executeStatement.join(System.lineSeparator());
   }
 
   private String createDatabase(String database) {

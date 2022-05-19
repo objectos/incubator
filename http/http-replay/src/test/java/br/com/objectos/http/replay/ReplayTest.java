@@ -25,7 +25,6 @@ import br.com.objectos.http.Method;
 import br.com.objectos.http.ProtocolException;
 import br.com.objectos.http.Version;
 import java.io.IOException;
-import objectos.lang.LineSeparator;
 import objectos.lang.Try;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
@@ -118,7 +117,9 @@ public class ReplayTest extends AbstractReplayTest {
       "Content-Length: 82",
       "Set-Cookie: JSESSIONID=original",
       "",
-      LineSeparator.join(
+      String.join(
+        System.lineSeparator(),
+
         "<!doctype html>",
         "<html>",
         "<head>",
@@ -198,7 +199,9 @@ public class ReplayTest extends AbstractReplayTest {
       "Content-Length: 82",
       "Set-Cookie: JSESSIONID=expected",
       "",
-      LineSeparator.join(
+      String.join(
+        System.lineSeparator(),
+
         "<!doctype html>",
         "<html>",
         "<head>",

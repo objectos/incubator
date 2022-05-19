@@ -24,7 +24,6 @@ import br.com.objectos.fs.testing.TmpDir;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
-import objectos.lang.LineSeparator;
 
 /**
  * Verify that the copy command does not create a commit if the resulting tree
@@ -162,7 +161,7 @@ final class TestCase08 extends StageGitCommand<Directory> {
       switch (step) {
         case 0:
           openRepository(
-              TestingGit.repo00()
+            TestingGit.repo00()
           );
 
         case 1:
@@ -304,10 +303,12 @@ final class TestCase08 extends StageGitCommand<Directory> {
           mutable.setCommitter(sourceCommit.getCommitter());
 
           mutable.setMessage(
-              LineSeparator.join(
-                  sourceCommit.getMessage(),
-                  "source=" + sourceCommit.getObjectId().getHexString()
-              )
+            String.join(
+              System.lineSeparator(),
+
+              sourceCommit.getMessage(),
+              "source=" + sourceCommit.getObjectId().getHexString()
+            )
           );
 
           mutable.setTree(rootTreeId);

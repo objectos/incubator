@@ -22,7 +22,6 @@ import br.com.objectos.core.io.Charsets;
 import br.com.objectos.fs.ResolvedPath;
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import objectos.lang.LineSeparator;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -78,14 +77,16 @@ public class ReadBlobTest extends AbstractGitTest {
     result = (Blob) handle.result;
 
     assertEquals(
-        result.toString(Charsets.utf8()),
+      result.toString(Charsets.utf8()),
 
-        LineSeparator.join(
-            "# ObjectosRepo",
-            "",
-            "This is a git repository meant to be used in tests.",
-            ""
-        )
+      String.join(
+        System.lineSeparator(),
+
+        "# ObjectosRepo",
+        "",
+        "This is a git repository meant to be used in tests.",
+        ""
+      )
     );
   }
 

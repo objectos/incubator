@@ -26,11 +26,10 @@ import javax.tools.JavaCompiler.CompilationTask;
 import javax.tools.JavaFileObject;
 import javax.tools.ToolProvider;
 import objectos.lang.Checks;
-import objectos.lang.LineSeparator;
 
 public final class Tools {
 
-  private static final String LINE_SEPARATOR = LineSeparator.get();
+  private static final String LINE_SEPARATOR = System.lineSeparator();
 
   private Tools() {}
 

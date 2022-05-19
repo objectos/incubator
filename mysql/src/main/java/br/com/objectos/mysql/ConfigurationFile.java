@@ -25,7 +25,6 @@ import java.io.Writer;
 import java.nio.charset.Charset;
 import java.util.List;
 import objectos.lang.Checks;
-import objectos.lang.LineSeparator;
 import objectos.lang.Try;
 
 public final class ConfigurationFile {
@@ -169,7 +168,7 @@ public final class ConfigurationFile {
   }
 
   private String toContents(MutableList<String> lines) {
-    return lines.join(LineSeparator.get());
+    return lines.join(System.lineSeparator());
   }
 
   private void writeString(String s) throws IOException {

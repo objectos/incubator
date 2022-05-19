@@ -25,7 +25,6 @@ import br.com.objectos.fs.testing.TmpDir;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
-import objectos.lang.LineSeparator;
 
 /**
  * Copy use-case. Verify that generated trees are sorted. In particular when
@@ -89,7 +88,7 @@ final class TestCase11 extends StageGitCommand<ObjectId> {
     switch (step) {
       case 0:
         openRepository(
-            TestingGit.repo00()
+          TestingGit.repo00()
         );
 
       case 1:
@@ -255,11 +254,13 @@ final class TestCase11 extends StageGitCommand<ObjectId> {
         mutable.setCommitter(sourceCommit.getCommitter());
 
         mutable.setMessage(
-            LineSeparator.join(
-                sourceCommit.getMessage(),
-                "source=" + sourceCommit.getObjectId().getHexString(),
-                ""
-            )
+          String.join(
+            System.lineSeparator(),
+
+            sourceCommit.getMessage(),
+            "source=" + sourceCommit.getObjectId().getHexString(),
+            ""
+          )
         );
 
         mutable.setTree(rootTreeId);
@@ -322,12 +323,14 @@ final class TestCase11 extends StageGitCommand<ObjectId> {
 
     if (edit.hasName("README.md")) {
       edit.setContents(
-          LineSeparator.join(
-              "# ObjectosRepo",
-              "",
-              "test case 11",
-              ""
-          ).getBytes(Charsets.utf8())
+        String.join(
+          System.lineSeparator(),
+
+          "# ObjectosRepo",
+          "",
+          "test case 11",
+          ""
+        ).getBytes(Charsets.utf8())
       );
 
       tree.addEntry(edit);

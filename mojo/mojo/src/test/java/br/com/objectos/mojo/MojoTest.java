@@ -33,7 +33,6 @@ import br.com.objectos.fs.RegularFile;
 import br.com.objectos.fs.ResolvedPath;
 import br.com.objectos.fs.testing.TmpDir;
 import java.io.IOException;
-import objectos.lang.LineSeparator;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -86,7 +85,9 @@ public class MojoTest {
 
       Charsets.utf8(),
 
-      LineSeparator.join(
+      String.join(
+        System.lineSeparator(),
+
         "<project>",
         "<modelVersion>4.0.0</modelVersion>",
         "<groupId>br.com.objectos.mojo</groupId>",
@@ -119,7 +120,9 @@ public class MojoTest {
 
       Charsets.utf8(),
 
-      LineSeparator.join(
+      String.join(
+        System.lineSeparator(),
+
         "package testing;",
         "public class Main {}"
       )

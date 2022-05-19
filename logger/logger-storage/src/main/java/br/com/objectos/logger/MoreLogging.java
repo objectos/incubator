@@ -16,59 +16,58 @@
 package br.com.objectos.logger;
 
 import objectos.lang.Level;
-import objectos.lang.LineSeparator;
 
 final class MoreLogging {
 
   /*
-  
+
   @startuml
-  
+
   ' config
-  
+
   hide empty members
   ' left to right direction
   skinparam genericDisplay old
   ' skinparam monochrome true
   skinparam shadowing false
   ' skinparam style strictuml
-  
+
   class BootstrapLogger {
     + StorageLogger\lbootstrap(\lStorageLogger l)
   }
-  
+
   interface Log {
   }
-  
+
   class MoreLogging {
     + {static} BootstrapLogger\lcreateBootstrapLogger()
     + {static} Storage\lcreateStorage(\lDirectory directory)
     + {static} Storage\lopenStorage(\lDirectory directory)
   }
-  
+
   interface ProcessingContext {
     + void submit(IoTask task)
   }
-  
+
   interface Processor {
     + Job\lprocess(\lProcessingContext c,\lLog l)
   }
-  
+
   abstract class Storage {
     + StorageLogger\lcreateLogger(\lIoExecutor ioWorker,\lWorker worker,\lProcessor... processors)
   }
-  
+
   ' rels
-  
+
   MoreLogging -[hidden]d- BootstrapLogger
-  
+
   BootstrapLogger -[hidden]d- Storage
-  
+
   @enduml
-  
+
    */
 
-  static final String LINE_SEPARATOR = LineSeparator.get();
+  static final String LINE_SEPARATOR = System.lineSeparator();
 
   private static final Level[] LEVELS = Level.values();
 

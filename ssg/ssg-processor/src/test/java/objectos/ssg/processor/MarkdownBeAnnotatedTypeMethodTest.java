@@ -16,7 +16,6 @@
 package objectos.ssg.processor;
 
 import br.com.objectos.code.java.declaration.MethodCode;
-import objectos.lang.LineSeparator;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -357,7 +356,7 @@ public class MarkdownBeAnnotatedTypeMethodTest {
 
     MethodCode result;
     result = method.generate0(
-      LineSeparator.join(lines)
+      String.join(System.lineSeparator(), lines)
     );
 
     return result.toString();

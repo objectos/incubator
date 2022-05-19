@@ -16,7 +16,6 @@
 package br.com.objectos.git;
 
 import br.com.objectos.core.list.ImmutableList;
-import objectos.lang.LineSeparator;
 import objectos.lang.ToString;
 
 /**
@@ -130,29 +129,29 @@ public final class Commit extends GitObject {
 
     out.append(tree.getHexString());
 
-    out.append(LineSeparator.get());
+    out.append(System.lineSeparator());
 
     for (ObjectId parent : parents) {
       out.append("parent ");
 
       out.append(parent.getHexString());
 
-      out.append(LineSeparator.get());
+      out.append(System.lineSeparator());
     }
 
     out.append("author ");
 
     out.append(author.print());
 
-    out.append(LineSeparator.get());
+    out.append(System.lineSeparator());
 
     out.append("committer ");
 
     out.append(committer.print());
 
-    out.append(LineSeparator.get());
+    out.append(System.lineSeparator());
 
-    out.append(LineSeparator.get());
+    out.append(System.lineSeparator());
 
     out.append(message);
 

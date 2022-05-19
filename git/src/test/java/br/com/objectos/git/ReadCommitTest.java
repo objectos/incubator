@@ -23,7 +23,6 @@ import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.fs.ResolvedPath;
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import objectos.lang.LineSeparator;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -102,12 +101,14 @@ public class ReadCommitTest extends AbstractGitTest {
     assertNotNull(result);
 
     assertEquals(
-        result.getMessage(),
+      result.getMessage(),
 
-        LineSeparator.join(
-            "add README.md",
-            ""
-        )
+      String.join(
+        System.lineSeparator(),
+
+        "add README.md",
+        ""
+      )
     );
 
     ImmutableList<ObjectId> parents;
@@ -180,12 +181,14 @@ public class ReadCommitTest extends AbstractGitTest {
     assertNotNull(result);
 
     assertEquals(
-        result.getMessage(),
+      result.getMessage(),
 
-        LineSeparator.join(
-            "[bin] add a ci script",
-            ""
-        )
+      String.join(
+        System.lineSeparator(),
+
+        "[bin] add a ci script",
+        ""
+      )
     );
 
     ImmutableList<ObjectId> parents;
@@ -238,12 +241,14 @@ public class ReadCommitTest extends AbstractGitTest {
     assertNotNull(result);
 
     assertEquals(
-        result.getMessage(),
+      result.getMessage(),
 
-        LineSeparator.join(
-            "[bin] add a ci script",
-            ""
-        )
+      String.join(
+        System.lineSeparator(),
+
+        "[bin] add a ci script",
+        ""
+      )
     );
 
     ImmutableList<ObjectId> parents;

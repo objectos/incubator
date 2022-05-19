@@ -31,7 +31,6 @@ import br.com.objectos.fs.RegularFile;
 import br.com.objectos.fs.testing.TmpDir;
 import java.io.IOException;
 import java.util.concurrent.ExecutionException;
-import objectos.lang.LineSeparator;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -598,7 +597,7 @@ public class GitServiceTest extends AbstractGitTest {
     assertEquals(
       commit.print(),
 
-      LineSeparator.join(lines)
+      String.join(System.lineSeparator(), lines)
     );
   }
 

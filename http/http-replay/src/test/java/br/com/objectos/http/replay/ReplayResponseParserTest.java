@@ -28,7 +28,6 @@ import java.nio.CharBuffer;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
-import objectos.lang.LineSeparator;
 import objectos.lang.Try;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
@@ -137,7 +136,9 @@ public class ReplayResponseParserTest implements ReplayResponseParserAdapter {
 
       assertEquals(
         expectedBody,
-        LineSeparator.join(
+        String.join(
+          System.lineSeparator(),
+
           "<!doctype html>",
           "<html>",
           "<head>",
@@ -166,7 +167,9 @@ public class ReplayResponseParserTest implements ReplayResponseParserAdapter {
   @Test
   public void testCase02ContentLength() {
     String lines;
-    lines = LineSeparator.join(
+    lines = String.join(
+      System.lineSeparator(),
+
       "<!doctype html>",
       "<html>",
       "<head>",

@@ -23,7 +23,6 @@ import br.com.objectos.concurrent.IoWorker;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.nio.channels.ReadableByteChannel;
-import objectos.lang.LineSeparator;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -46,7 +45,9 @@ public class ResponseParserTest {
         "HTTP/1.0 302 Found",
         "", ""
       ),
-      LineSeparator.join(
+      String.join(
+        System.lineSeparator(),
+
         "V1_0 FOUND",
         "BodyIgnoredImpl",
         ""
@@ -66,7 +67,9 @@ public class ResponseParserTest {
         "Location: /test/login",
         "", ""
       ),
-      LineSeparator.join(
+      String.join(
+        System.lineSeparator(),
+
         "V1_1 FOUND",
         "HeaderServerImpl: objectos-http/1.0.0-SNAPSHOT",
         "HeaderLocationImpl: /test/login",
@@ -92,7 +95,9 @@ public class ResponseParserTest {
         "",
         "1234"
       ),
-      LineSeparator.join(
+      String.join(
+        System.lineSeparator(),
+
         "V1_1 OK",
         "HeaderServerImpl: objectos-http/1.0.0-SNAPSHOT",
         "HeaderContentTypeImpl: text/html; charset=utf-8",
@@ -120,7 +125,9 @@ public class ResponseParserTest {
         "",
         "12345678"
       ),
-      LineSeparator.join(
+      String.join(
+        System.lineSeparator(),
+
         "V1_1 OK",
         "HeaderServerImpl: objectos-http/1.0.0-SNAPSHOT",
         "HeaderContentTypeImpl: text/html; charset=utf-8",

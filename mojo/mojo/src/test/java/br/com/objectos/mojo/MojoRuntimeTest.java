@@ -29,7 +29,6 @@ import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.RegularFile;
 import br.com.objectos.fs.testing.TmpDir;
 import java.io.IOException;
-import objectos.lang.LineSeparator;
 import objectos.lang.Try;
 import org.testng.annotations.Test;
 
@@ -78,7 +77,9 @@ public class MojoRuntimeTest {
 
         Charsets.utf8(),
 
-        LineSeparator.join(
+        String.join(
+          System.lineSeparator(),
+
           "<project>",
           "<modelVersion>4.0.0</modelVersion>",
           "<groupId>br.com.objectos.mojo</groupId>",

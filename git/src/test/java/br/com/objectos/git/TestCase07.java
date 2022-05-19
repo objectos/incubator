@@ -24,7 +24,6 @@ import br.com.objectos.fs.testing.TmpDir;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
-import objectos.lang.LineSeparator;
 
 /**
  * Verify that the copy command can create the first commit of the target
@@ -187,7 +186,7 @@ final class TestCase07 extends StageGitCommand<ObjectId> {
 
         if (parentId.isObjectId()) {
           mutable.addParent(
-              parentId.getObjectId()
+            parentId.getObjectId()
           );
         }
 
@@ -196,10 +195,12 @@ final class TestCase07 extends StageGitCommand<ObjectId> {
         mutable.setCommitter(sourceCommit.getCommitter());
 
         mutable.setMessage(
-            LineSeparator.join(
-                sourceCommit.getMessage(),
-                "source " + sourceCommit.getObjectId().getHexString()
-            )
+          String.join(
+            System.lineSeparator(),
+
+            sourceCommit.getMessage(),
+            "source " + sourceCommit.getObjectId().getHexString()
+          )
         );
 
         mutable.setTree(rootTreeId);

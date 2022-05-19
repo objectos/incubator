@@ -18,7 +18,6 @@ package br.com.objectos.git;
 import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.testing.TmpDir;
 import java.io.IOException;
-import objectos.lang.LineSeparator;
 
 /**
  * Support reading and parsing loose objects (iter. 4).
@@ -138,7 +137,7 @@ final class TestCase03 extends StageGitCommand<ObjectId> {
 
         if (parentId.isObjectId()) {
           mutable.addParent(
-              parentId.getObjectId()
+            parentId.getObjectId()
           );
         }
 
@@ -147,10 +146,12 @@ final class TestCase03 extends StageGitCommand<ObjectId> {
         mutable.setCommitter(sourceCommit.getCommitter());
 
         mutable.setMessage(
-            LineSeparator.join(
-                sourceCommit.getMessage(),
-                "source " + sourceCommit.getObjectId().getHexString()
-            )
+          String.join(
+            System.lineSeparator(),
+
+            sourceCommit.getMessage(),
+            "source " + sourceCommit.getObjectId().getHexString()
+          )
         );
 
         mutable.setTree(sourceCommit.getTree());

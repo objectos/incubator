@@ -23,7 +23,6 @@ import br.com.objectos.concurrent.IoWorker;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.nio.channels.ReadableByteChannel;
-import objectos.lang.LineSeparator;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -59,7 +58,9 @@ public class RequestParserTest {
         "",
         ""
       ),
-      LineSeparator.join(
+      String.join(
+        System.lineSeparator(),
+
         "GET /test/ V1_0",
         "BodyIgnoredImpl",
         ""
@@ -80,7 +81,9 @@ public class RequestParserTest {
         "",
         ""
       ),
-      LineSeparator.join(
+      String.join(
+        System.lineSeparator(),
+
         "GET /test/ V1_0",
         "HeaderAcceptImpl: text/html",
         "HeaderHostImpl: www.example.com",
@@ -107,7 +110,9 @@ public class RequestParserTest {
         "",
         "{\"prop1\":\"val001\",\"prop2\":\"val002\"}"
       ),
-      LineSeparator.join(
+      String.join(
+        System.lineSeparator(),
+
         "POST /test/api/login V1_0",
         "HeaderAcceptImpl: application/json",
         "HeaderCookieImpl: foo=bar",

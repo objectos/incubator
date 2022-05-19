@@ -17,7 +17,6 @@ package br.com.objectos.code.processing;
 
 import br.com.objectos.core.list.ImmutableList;
 import javax.annotation.processing.ProcessingEnvironment;
-import objectos.lang.LineSeparator;
 
 class ListArtifact extends Artifact {
 
@@ -29,7 +28,7 @@ class ListArtifact extends Artifact {
 
   @Override
   public String toString() {
-    return list.join(LineSeparator.get());
+    return list.join(System.lineSeparator());
   }
 
   @Override

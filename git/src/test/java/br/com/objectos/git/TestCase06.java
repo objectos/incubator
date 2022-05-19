@@ -24,7 +24,6 @@ import br.com.objectos.fs.testing.TmpDir;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
-import objectos.lang.LineSeparator;
 
 /**
  * Verify it is possible to alter the author/committer of a commit during a copy
@@ -183,7 +182,7 @@ final class TestCase06 extends StageGitCommand<ObjectId> {
 
         if (parentId.isObjectId()) {
           mutable.addParent(
-              parentId.getObjectId()
+            parentId.getObjectId()
           );
         }
 
@@ -191,21 +190,23 @@ final class TestCase06 extends StageGitCommand<ObjectId> {
         author = sourceCommit.getAuthor();
 
         mutable.setAuthor(
-            author.withIdentity("Changed Author", "changed.author@example.com")
+          author.withIdentity("Changed Author", "changed.author@example.com")
         );
 
         Identification committer;
         committer = sourceCommit.getCommitter();
 
         mutable.setCommitter(
-            committer.withIdentity("Changed Committer", "changed.committer@example.com")
+          committer.withIdentity("Changed Committer", "changed.committer@example.com")
         );
 
         mutable.setMessage(
-            LineSeparator.join(
-                sourceCommit.getMessage(),
-                "source " + sourceCommit.getObjectId().getHexString()
-            )
+          String.join(
+            System.lineSeparator(),
+
+            sourceCommit.getMessage(),
+            "source " + sourceCommit.getObjectId().getHexString()
+          )
         );
 
         mutable.setTree(rootTreeId);

@@ -17,7 +17,6 @@ package br.com.objectos.git;
 
 import static org.testng.Assert.assertEquals;
 
-import objectos.lang.LineSeparator;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -46,22 +45,24 @@ public class ThrowableMessageBuilderTest {
         .nl();
 
     assertEquals(
-        badObjectMessage.toString(),
+      badObjectMessage.toString(),
 
-        LineSeparator.join(
-            "Failed to inflate object data",
-            "",
-            "No more bytes left to read.",
-            "",
-            "channelReadCount=1234",
-            "channelReadLimit=1220",
-            "        objectId=ObjectId[",
-            "  808ee6fce27d119cfa2dbeacd176439e02e0924d",
-            "]",
-            "           state=_READ_OBJECT",
-            "",
-            ""
-        )
+      String.join(
+        System.lineSeparator(),
+
+        "Failed to inflate object data",
+        "",
+        "No more bytes left to read.",
+        "",
+        "channelReadCount=1234",
+        "channelReadLimit=1220",
+        "        objectId=ObjectId[",
+        "  808ee6fce27d119cfa2dbeacd176439e02e0924d",
+        "]",
+        "           state=_READ_OBJECT",
+        "",
+        ""
+      )
     );
   }
 

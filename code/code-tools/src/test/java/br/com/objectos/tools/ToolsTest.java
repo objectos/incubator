@@ -22,7 +22,6 @@ import static br.com.objectos.tools.Tools.processor;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
-import objectos.lang.LineSeparator;
 import org.testng.annotations.Test;
 
 public class ToolsTest {
@@ -68,7 +67,7 @@ public class ToolsTest {
 
   private void assertHasLines(String contents, String... expected) {
     String[] split;
-    split = contents.split(LineSeparator.get());
+    split = contents.split(System.lineSeparator());
 
     assertEquals(split, expected);
   }

@@ -22,7 +22,6 @@ import br.com.objectos.core.io.Charsets;
 import br.com.objectos.fs.Directory;
 import java.io.IOException;
 import java.util.concurrent.ExecutionException;
-import objectos.lang.LineSeparator;
 import org.testng.annotations.Test;
 
 public class ReadBlobTaskTest extends AbstractGitTest {
@@ -49,7 +48,9 @@ public class ReadBlobTaskTest extends AbstractGitTest {
     assertEquals(
       result.toString(Charsets.utf8()),
 
-      LineSeparator.join(
+      String.join(
+        System.lineSeparator(),
+
         "# ObjectosRepo",
         "",
         "This is a git repository meant to be used in tests.",

@@ -31,7 +31,6 @@ import br.com.objectos.mojo.Mojo;
 import br.com.objectos.mojo.MojoException;
 import br.com.objectos.mojo.MojoRuntime;
 import java.io.IOException;
-import objectos.lang.LineSeparator;
 import objectos.lang.SystemProperty;
 import org.testng.annotations.BeforeSuite;
 
@@ -84,7 +83,7 @@ public abstract class AbstractBeMavenPluginTest {
     RegularFile pom;
     pom = target.createRegularFile("pom.xml");
 
-    Write.string(pom, Charsets.utf8(), LineSeparator.join(pomLines));
+    Write.string(pom, Charsets.utf8(), String.join(System.lineSeparator(), pomLines));
 
     Directory baseSrcMain;
     baseSrcMain = basedir.resolve("src", "main").toDirectory();
