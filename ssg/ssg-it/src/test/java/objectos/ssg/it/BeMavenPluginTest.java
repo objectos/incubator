@@ -26,7 +26,6 @@ import br.com.objectos.mojo.Mojo;
 import br.com.objectos.mojo.MojoException;
 import br.com.objectos.mojo.Result;
 import java.io.IOException;
-import objectos.lang.SystemProperty;
 import org.testng.annotations.Test;
 
 public class BeMavenPluginTest extends AbstractBeMavenPluginTest {
@@ -112,7 +111,7 @@ public class BeMavenPluginTest extends AbstractBeMavenPluginTest {
 
     assertTrue(log.containsMessage("BUILD SUCCESS"));
 
-    assertEquals(SystemProperty.get(assertKey), "Hello!");
+    assertEquals(System.getProperty(assertKey), "Hello!");
   }
 
 }

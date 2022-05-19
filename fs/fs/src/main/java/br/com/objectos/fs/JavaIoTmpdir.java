@@ -16,7 +16,7 @@
 package br.com.objectos.fs;
 
 import java.io.IOException;
-import objectos.lang.SystemProperty;
+import java.util.NoSuchElementException;
 
 /**
  * The {@code java.io.tmpdir} system property as a {@link Directory} instance.
@@ -29,7 +29,11 @@ public abstract class JavaIoTmpdir {
 
   static {
     String value;
-    value = SystemProperty.get("java.io.tmpdir");
+    value = System.getProperty("java.io.tmpdir");
+
+    if (value == null) {
+      throw new NoSuchElementException("java.io.tmpdir");
+    }
 
     JavaIoTmpdir tmpdir;
 

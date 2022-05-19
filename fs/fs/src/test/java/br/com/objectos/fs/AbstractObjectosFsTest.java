@@ -18,11 +18,6 @@ package br.com.objectos.fs;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
-import objectos.lang.Linux;
-import objectos.lang.OperatingSystem;
-import objectos.lang.OperatingSystemVisitor;
-import objectos.lang.SystemProperty;
-import objectos.lang.UnsupportedOperatingSystem;
 import br.com.objectos.random.testing.Next;
 import java.io.Closeable;
 import java.io.File;
@@ -30,12 +25,16 @@ import java.io.IOException;
 import java.net.URI;
 import java.nio.charset.Charset;
 import java.util.Arrays;
+import objectos.lang.Linux;
+import objectos.lang.OperatingSystem;
+import objectos.lang.OperatingSystemVisitor;
+import objectos.lang.UnsupportedOperatingSystem;
 
 abstract class AbstractObjectosFsTest {
 
   static final byte[] EMPTY_BYTE_ARRAY = new byte[0];
 
-  static final String JAVA_IO_TMPDIR = SystemProperty.get("java.io.tmpdir");
+  static final String JAVA_IO_TMPDIR = System.getProperty("java.io.tmpdir");
 
   static final Charset UTF8 = Charset.forName("UTF-8");
 

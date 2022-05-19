@@ -31,7 +31,6 @@ import br.com.objectos.mojo.Mojo;
 import br.com.objectos.mojo.MojoException;
 import br.com.objectos.mojo.MojoRuntime;
 import java.io.IOException;
-import objectos.lang.SystemProperty;
 import org.testng.annotations.BeforeSuite;
 
 public abstract class AbstractBeMavenPluginTest {
@@ -49,7 +48,7 @@ public abstract class AbstractBeMavenPluginTest {
   @BeforeSuite
   public static void _setUp() throws IOException, MojoException {
     String basedirPath;
-    basedirPath = SystemProperty.get("objectos.be.basedir");
+    basedirPath = System.getProperty("objectos.be.basedir");
 
     basedir = LocalFs.getDirectory(basedirPath);
 
@@ -63,20 +62,20 @@ public abstract class AbstractBeMavenPluginTest {
     runtime = runtime(
       localRepository(
         LocalFs.resolve(
-          SystemProperty.get("objectos.mojo.testing.repository")
+          System.getProperty("objectos.mojo.testing.repository")
         ).toDirectoryCreateIfNotFound()
       ),
 
       mirror(
         id("mojo"),
         url(
-          SystemProperty.get("objectos.mojo.testing.mirrorUrl")
+          System.getProperty("objectos.mojo.testing.mirrorUrl")
         ),
         mirrorOf("*")
       )
     );
 
-    versionTag = Mojo.xml("version", SystemProperty.get("objectos.be.version"));
+    versionTag = Mojo.xml("version", System.getProperty("objectos.be.version"));
   }
 
   final void cloneTo(Directory target, String... pomLines) throws IOException {
