@@ -20,6 +20,7 @@ import br.com.objectos.core.io.Read;
 import br.com.objectos.core.io.Resource;
 import java.util.Map;
 import objectos.ssg.SimpleSiteComponent;
+import objectos.ssg.SitePage;
 import org.commonmark.node.Link;
 import org.commonmark.node.Node;
 import org.commonmark.parser.Parser;
@@ -43,8 +44,8 @@ public final class Md extends SimpleSiteComponent {
         .build();
   }
 
-  public final String render(DocsPage page) {
-    Class<? extends DocsPage> pageClass;
+  public final String render(SitePage page) {
+    Class<? extends SitePage> pageClass;
     pageClass = null;
 
     try {

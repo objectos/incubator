@@ -51,17 +51,17 @@ public class WatchTest implements Watch.Listener {
     watchServiceCreated = TmpDir.create();
 
     watchService = Watch.createService(
-        Watch.watchDirectory(
-            watchServiceCreated,
+      Watch.watchDirectory(
+        watchServiceCreated,
 
-            this,
+        this,
 
-            Watch.CREATED
-        )
+        Watch.CREATED
+      )
     );
 
     Services.start(
-        watchService
+      watchService
     );
   }
 
@@ -110,11 +110,11 @@ public class WatchTest implements Watch.Listener {
   }
 
   /*
-  
-  @startmindmap
 
-  *_ Test cases
+  @startmindmap
   
+  *_ Test cases
+
   **:**Test case 01**
   ----
   WatchDirectory use-case:
@@ -129,9 +129,9 @@ public class WatchTest implements Watch.Listener {
   # delete file
   # check listener not notified;
   *** WatchService
-  
-  @endmindmap
 
+  @endmindmap
+  
   */
 
   @Test
