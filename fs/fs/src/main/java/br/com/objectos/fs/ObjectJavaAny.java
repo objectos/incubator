@@ -21,7 +21,6 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.channels.FileChannel;
 import objectos.lang.ToString;
-import objectos.lang.Try;
 
 @Concrete(simpleName = "ObjectImpl")
 abstract class ObjectJavaAny
@@ -210,21 +209,9 @@ abstract class ObjectJavaAny
    */
   @Override
   public final void truncate() throws IOException {
-    FileChannel channel;
-    channel = openWriteChannel();
-
-    Throwable rethrow;
-    rethrow = Try.begin();
-
-    try {
+    try (FileChannel channel = openWriteChannel()) {
       channel.truncate(0);
-    } catch (Throwable e) {
-      rethrow = e;
-    } finally {
-      rethrow = Try.close(rethrow, channel);
     }
-
-    Try.rethrowIfPossible(rethrow, IOException.class);
   }
 
   abstract boolean equals0(ObjectJavaAny that);

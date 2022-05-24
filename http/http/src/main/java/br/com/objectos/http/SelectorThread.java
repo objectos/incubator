@@ -23,7 +23,6 @@ import java.nio.channels.Selector;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
 import java.util.Set;
-import objectos.lang.Try;
 
 final class SelectorThread extends Thread {
 
@@ -60,9 +59,6 @@ final class SelectorThread extends Thread {
 
     channel.configureBlocking(false);
 
-    Throwable rethrow;
-    rethrow = Try.begin();
-
     Selector selector;
     selector = null;
 
@@ -74,12 +70,14 @@ final class SelectorThread extends Thread {
 
       acceptKey = channel.register(selector, SelectionKey.OP_ACCEPT);
     } catch (IOException e) {
-      rethrow = e;
+      try {
+        channel.close();
+      } catch (IOException sup) {
+        e.addSuppressed(sup);
+      }
 
-      rethrow = Try.close(rethrow, channel);
+      throw e;
     }
-
-    Try.rethrowIfPossible(rethrow, IOException.class);
 
     return new SelectorThread(adapter, channel, selector, acceptKey);
   }
@@ -129,16 +127,34 @@ final class SelectorThread extends Thread {
     }
 
     if (selector.isOpen()) {
-      error = Try.close(error, selector);
+      error = close(error, selector);
     }
 
     if (channel.isOpen()) {
-      error = Try.close(error, channel);
+      error = close(error, channel);
     }
   }
 
   final boolean isOpen() {
     return channel.isOpen();
+  }
+
+  private Throwable close(Throwable original, AutoCloseable c) {
+    Throwable rethrow = original;
+
+    if (c != null) {
+      try {
+        c.close();
+      } catch (Exception e) {
+        if (rethrow == null) {
+          rethrow = e;
+        } else {
+          rethrow.addSuppressed(e);
+        }
+      }
+    }
+
+    return rethrow;
   }
 
 }

@@ -28,7 +28,6 @@ import java.io.OutputStream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 import objectos.lang.Checks;
-import objectos.lang.Try;
 
 /**
  * @since 2
@@ -96,18 +95,9 @@ public final class Zip implements DirectoryContentsVisitor, ZipOptionVisitor {
   }
 
   public final RegularFile execute(String[] files) throws IOException {
-    Throwable rethrow;
-    rethrow = Try.begin();
-
-    try {
+    try (zip) {
       execute0(files);
-    } catch (Throwable e) {
-      rethrow = e;
-    } finally {
-      rethrow = Try.close(rethrow, zip);
     }
-
-    Try.rethrowIfPossible(rethrow, IOException.class);
 
     return zipFile.toRegularFile();
   }
@@ -153,23 +143,9 @@ public final class Zip implements DirectoryContentsVisitor, ZipOptionVisitor {
 
     zip.putNextEntry(entry);
 
-    InputStream in;
-    in = file.openInputStream();
-
-    Throwable rethrow;
-    rethrow = Try.begin();
-
-    try {
+    try (InputStream in = file.openInputStream(); entryCloseable) {
       Copy.streams(in, zip, buffer);
-    } catch (Throwable e) {
-      rethrow = e;
-    } finally {
-      rethrow = Try.close(rethrow, in);
-
-      rethrow = Try.close(rethrow, entryCloseable);
     }
-
-    Try.rethrowIfPossible(rethrow, IOException.class);
   }
 
   private void execute0(String[] files) throws IOException {

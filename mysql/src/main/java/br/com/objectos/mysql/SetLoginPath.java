@@ -19,7 +19,6 @@ import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.fs.ResolvedPath;
 import java.io.IOException;
 import java.io.OutputStream;
-import objectos.lang.Try;
 
 final class SetLoginPath extends AbstractClientJob<ImmutableList<String>> {
 
@@ -114,26 +113,14 @@ final class SetLoginPath extends AbstractClientJob<ImmutableList<String>> {
     startStderrCollector();
 
     if (password != null) {
-      Throwable rethrow;
-      rethrow = null;
+      try (OutputStream outputStream = getProcessOutputStream()) {
+        byte[] bytes;
+        bytes = password.getBytes();
 
-      OutputStream outputStream;
-      outputStream = getProcessOutputStream();
-
-      byte[] bytes;
-      bytes = password.getBytes();
-
-      try {
         outputStream.write(bytes);
 
         outputStream.flush();
-      } catch (Throwable e) {
-        rethrow = e;
-      } finally {
-        rethrow = Try.close(rethrow, outputStream);
       }
-
-      Try.rethrowIfPossible(rethrow, IOException.class);
     }
   }
 

@@ -26,7 +26,6 @@ import objectos.lang.Event1;
 import objectos.lang.Event2;
 import objectos.lang.Logger;
 import objectos.lang.Throwables;
-import objectos.lang.Try;
 
 abstract class AbstractGitEngineTask implements CpuTask, IoTask {
 
@@ -128,7 +127,7 @@ abstract class AbstractGitEngineTask implements CpuTask, IoTask {
   }
 
   final void close(Closeable resource) {
-    error = Try.close(error, resource);
+    error = Git.close(error, resource);
   }
 
   final Throwable error() {

@@ -21,7 +21,6 @@ import br.com.objectos.fs.ResolvedPath;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import objectos.lang.Try;
 
 final class ExecuteInputStreamSource extends AbstractClientJob<ImmutableList<String>> {
 
@@ -151,18 +150,20 @@ final class ExecuteInputStreamSource extends AbstractClientJob<ImmutableList<Str
   }
 
   private void ioClose() throws IOException {
-    Throwable rethrow;
-    rethrow = Try.begin();
+    IOException rethrow;
+    rethrow = null;
 
-    rethrow = Try.close(rethrow, inputStream);
+    rethrow = closeOne(rethrow, inputStream);
 
     inputStream = null;
 
-    rethrow = Try.close(rethrow, outputStream);
+    rethrow = closeOne(rethrow, outputStream);
 
     outputStream = null;
 
-    Try.rethrowIfPossible(rethrow, IOException.class);
+    if (rethrow != null) {
+      throw rethrow;
+    }
   }
 
   private void ioCopy() throws IOException {

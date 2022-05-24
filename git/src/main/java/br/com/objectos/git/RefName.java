@@ -26,7 +26,6 @@ import java.nio.channels.FileChannel;
 import objectos.lang.Checks;
 import objectos.lang.ToString;
 import objectos.lang.ToStringObject;
-import objectos.lang.Try;
 
 /**
  * Represents the name of a Git reference.
@@ -143,13 +142,7 @@ public abstract class RefName implements ToStringObject {
       ResolvedPath maybeFile;
       maybeFile = resolveFsObject(directory);
 
-      FileChannel channel;
-      channel = maybeFile.acceptPathNameVisitor(this, null);
-
-      Throwable rethrow;
-      rethrow = Try.begin();
-
-      try {
+      try (var channel = maybeFile.acceptPathNameVisitor(this, null)) {
         String text;
         text = value.getHexString() + Git.LF;
 
@@ -162,13 +155,7 @@ public abstract class RefName implements ToStringObject {
         channel.truncate(0);
 
         channel.write(buffer);
-      } catch (Throwable e) {
-        rethrow = e;
-      } finally {
-        rethrow = Try.close(rethrow, channel);
       }
-
-      Try.rethrowIfPossible(rethrow, IOException.class);
     }
 
     private ResolvedPath resolveFsObject(Directory directory) throws IOException {

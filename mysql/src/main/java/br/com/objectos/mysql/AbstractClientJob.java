@@ -20,6 +20,7 @@ import br.com.objectos.concurrent.IoWorker;
 import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.core.list.MutableList;
 import java.io.BufferedReader;
+import java.io.Closeable;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -31,7 +32,6 @@ import java.util.List;
 import java.util.Map;
 import objectos.lang.Checks;
 import objectos.lang.Throwables;
-import objectos.lang.Try;
 
 abstract class AbstractClientJob<V> implements ClientJob<V>, IoTask {
 
@@ -153,6 +153,49 @@ abstract class AbstractClientJob<V> implements ClientJob<V>, IoTask {
     command = processBuilder.command();
 
     command.add(value);
+  }
+
+  final IOException closeOne(IOException ioe, Closeable c) {
+    IOException rethrow = ioe;
+
+    if (c != null) {
+      try {
+        c.close();
+      } catch (IOException e) {
+        if (rethrow == null) {
+          rethrow = e;
+        } else {
+          rethrow.addSuppressed(e);
+        }
+      }
+    }
+
+    return rethrow;
+  }
+
+  final void closeTwo(Closeable c1, Closeable c2) throws IOException {
+    IOException rethrow;
+    rethrow = null;
+
+    try {
+      c1.close();
+    } catch (IOException e) {
+      rethrow = e;
+    }
+
+    try {
+      c2.close();
+    } catch (IOException e) {
+      if (rethrow == null) {
+        rethrow = e;
+      } else {
+        rethrow.addSuppressed(e);
+      }
+    }
+
+    if (rethrow != null) {
+      throw rethrow;
+    }
   }
 
   final String createBackupPrefix() {
@@ -462,31 +505,16 @@ abstract class AbstractClientJob<V> implements ClientJob<V>, IoTask {
 
     @Override
     public final void run() {
-      InputStreamReader inputStreamReader;
-      inputStreamReader = new InputStreamReader(inputStream, charset);
-
-      BufferedReader reader;
-      reader = new BufferedReader(inputStreamReader);
-
-      Throwable rethrow;
-      rethrow = Try.begin();
-
-      try {
+      try (var isr = new InputStreamReader(inputStream, charset); var r = new BufferedReader(isr)) {
         String line;
-        line = reader.readLine();
+        line = r.readLine();
 
         while (line != null) {
           lines.add(line);
 
-          line = reader.readLine();
+          line = r.readLine();
         }
-      } catch (Throwable e) {
-        rethrow = e;
-      } finally {
-        rethrow = Try.close(rethrow, reader);
-      }
-
-      if (rethrow != null) {
+      } catch (IOException e) {
         // log
       }
     }

@@ -29,37 +29,31 @@ import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.RegularFile;
 import br.com.objectos.fs.testing.TmpDir;
 import java.io.IOException;
-import objectos.lang.Try;
 import org.testng.annotations.Test;
 
 public class MojoRuntimeTest {
 
   @Test
-  public void testCase01() throws IOException {
+  public void testCase01() throws IOException, MojoException {
     MojoTesting mojoTesting;
     mojoTesting = MojoTesting.get();
 
     Directory root;
     root = TmpDir.create();
 
-    MojoRuntime runtime;
-    runtime = null;
+    try (
+        MojoRuntime runtime = MojoRuntime.runtime(
+          localRepository(
+            mojoTesting.repository
+          ),
 
-    Throwable rethrow;
-    rethrow = Try.begin();
-
-    try {
-      runtime = MojoRuntime.runtime(
-        localRepository(
-          mojoTesting.repository
-        ),
-
-        mirror(
-          id("mojo"),
-          url(mojoTesting.mirrorUrl),
-          mirrorOf("*")
+          mirror(
+            id("mojo"),
+            url(mojoTesting.mirrorUrl),
+            mirrorOf("*")
+          )
         )
-      );
+    ) {
 
       BuildRequest request;
       request = new BuildRequest();
@@ -107,15 +101,7 @@ public class MojoRuntimeTest {
       log = result.getLog();
 
       assertTrue(log.containsMessage("BUILD SUCCESS"));
-    } catch (IOException e) {
-      rethrow = e;
-    } catch (MojoException e) {
-      rethrow = e;
-    } finally {
-      rethrow = Try.close(rethrow, runtime);
     }
-
-    Try.rethrowIfPossible(rethrow, IOException.class);
   }
 
 }

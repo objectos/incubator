@@ -25,12 +25,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.zip.GZIPInputStream;
-import objectos.lang.RandomString;
-import objectos.lang.Throwables;
-import objectos.lang.Try;
 import objectos.lang.Event0;
 import objectos.lang.Event1;
 import objectos.lang.Logger;
+import objectos.lang.RandomString;
+import objectos.lang.Throwables;
 
 final class IncrementalRestore extends AbstractClientJob<ImmutableList<String>> {
 
@@ -242,14 +241,14 @@ final class IncrementalRestore extends AbstractClientJob<ImmutableList<String>> 
   }
 
   private void ioClose() throws IOException {
-    Throwable rethrow;
-    rethrow = Try.begin();
+    IOException rethrow;
+    rethrow = null;
 
-    rethrow = Try.close(rethrow, inputStream);
+    rethrow = closeOne(rethrow, inputStream);
 
     inputStream = null;
 
-    rethrow = Try.close(rethrow, outputStream);
+    rethrow = closeOne(rethrow, outputStream);
 
     outputStream = null;
 
@@ -259,11 +258,13 @@ final class IncrementalRestore extends AbstractClientJob<ImmutableList<String>> 
 
         tempDirectory.delete();
       } catch (IOException e) {
-        rethrow = Throwables.addSuppressed(rethrow, e);
+        rethrow = (IOException) Throwables.addSuppressed(rethrow, e);
       }
     }
 
-    Try.rethrowIfPossible(rethrow, IOException.class);
+    if (rethrow != null) {
+      throw rethrow;
+    }
   }
 
   private void ioCopy() throws IOException {
@@ -275,16 +276,9 @@ final class IncrementalRestore extends AbstractClientJob<ImmutableList<String>> 
 
       copyMore = true;
     } else {
-      Throwable rethrow;
-      rethrow = Try.begin();
-
-      rethrow = Try.close(rethrow, inputStream);
-
-      rethrow = Try.close(rethrow, outputStream);
-
       copyMore = false;
 
-      Try.rethrowIfPossible(rethrow, IOException.class);
+      closeTwo(outputStream, inputStream);
     }
   }
 

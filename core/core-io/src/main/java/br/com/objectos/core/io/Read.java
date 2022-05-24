@@ -24,7 +24,6 @@ import java.io.InputStream;
 import java.io.Reader;
 import java.nio.charset.Charset;
 import objectos.lang.Checks;
-import objectos.lang.Try;
 
 /**
  * Provides {@code static} methods for reading from {@link InputStream},
@@ -76,33 +75,18 @@ public final class Read {
     Checks.checkNotNull(source, "source == null");
     Copy.checkBuffer(buffer);
 
-    InputStream inputStream;
-    inputStream = source.openInputStream();
-
-    ByteArrayOutputStream outputStream;
-    outputStream = new ByteArrayOutputStream();
-
-    Throwable rethrow;
-    rethrow = Try.begin();
-
-    try {
+    try (var in = source.openInputStream(); var out = new ByteArrayOutputStream()) {
       int count;
-      count = inputStream.read(buffer);
+      count = in.read(buffer);
 
       while (count > 0) {
-        outputStream.write(buffer, 0, count);
+        out.write(buffer, 0, count);
 
-        count = inputStream.read(buffer);
+        count = in.read(buffer);
       }
-    } catch (Throwable e) {
-      rethrow = e;
-    } finally {
-      rethrow = Try.close(rethrow, inputStream);
+
+      return out.toByteArray();
     }
-
-    Try.rethrowIfPossible(rethrow, IOException.class);
-
-    return outputStream.toByteArray();
   }
 
   /**
@@ -204,16 +188,10 @@ public final class Read {
     Checks.checkNotNull(charset, "charset == null");
     Copy.checkBuffer(buffer);
 
-    BufferedReader reader;
-    reader = open(source, charset);
-
     StringBuilder result;
     result = new StringBuilder();
 
-    Throwable rethrow;
-    rethrow = Try.begin();
-
-    try {
+    try (BufferedReader reader = open(source, charset)) {
       int count;
       count = reader.read(buffer);
 
@@ -222,13 +200,7 @@ public final class Read {
 
         count = reader.read(buffer);
       }
-    } catch (Throwable e) {
-      rethrow = e;
-    } finally {
-      rethrow = Try.close(rethrow, reader);
     }
-
-    Try.rethrowIfPossible(rethrow, IOException.class);
 
     return result.toString();
   }
@@ -237,10 +209,7 @@ public final class Read {
     MutableList<String> result;
     result = MutableList.create();
 
-    Throwable rethrow;
-    rethrow = Try.begin();
-
-    try {
+    try (r) {
       String line;
       line = r.readLine();
 
@@ -249,13 +218,7 @@ public final class Read {
 
         line = r.readLine();
       }
-    } catch (Throwable e) {
-      rethrow = e;
-    } finally {
-      rethrow = Try.close(rethrow, r);
     }
-
-    Try.rethrowIfPossible(rethrow, IOException.class);
 
     return result.toImmutableList();
   }

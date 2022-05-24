@@ -65,6 +65,10 @@ public final class Pages implements SiteVisitor {
 
   @Override
   public final void visitSitePage(SitePage page) {
+    if (page instanceof IgnoreMe) {
+      return;
+    }
+
     if (page instanceof DocsPage d) {
       visitDocsPage(d);
     }
@@ -107,5 +111,7 @@ public final class Pages implements SiteVisitor {
       trailBuilder.removeLast();
     }
   }
+
+  public interface IgnoreMe {}
 
 }

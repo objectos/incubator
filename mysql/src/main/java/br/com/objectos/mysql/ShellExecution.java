@@ -20,7 +20,6 @@ import br.com.objectos.core.list.ImmutableList;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import objectos.lang.Try;
 
 final class ShellExecution extends Execution {
 
@@ -34,27 +33,15 @@ final class ShellExecution extends Execution {
       throw new IOException("Failed to start mysql shell process", e);
     }
 
-    OutputStream out;
-    out = process.getOutputStream();
-
-    Throwable thrown;
-    thrown = Try.begin();
-
-    try {
+    try (OutputStream out = process.getOutputStream()) {
       byte[] buffer;
       buffer = new byte[4096];
 
       Copy.streams(in, out, buffer);
-    } catch (Throwable e) {
-      thrown = e;
-    } finally {
-      thrown = Try.close(thrown, out);
-
-      end(process);
-    }
-
-    if (thrown != null) {
+    } catch (IOException e) {
       throwExecutionExceptionIfNecessary();
+    } finally {
+      end(process);
     }
 
     return sysout();
@@ -70,13 +57,7 @@ final class ShellExecution extends Execution {
       throw new IOException("Failed to start mysql shell process", e);
     }
 
-    OutputStream out;
-    out = process.getOutputStream();
-
-    Throwable thrown;
-    thrown = Try.begin();
-
-    try {
+    try (OutputStream out = process.getOutputStream()) {
       for (int i = 0; i < statements.length; i++) {
         String statement;
         statement = statements[i];
@@ -92,16 +73,10 @@ final class ShellExecution extends Execution {
       }
 
       out.flush();
-    } catch (Throwable e) {
-      thrown = e;
-    } finally {
-      thrown = Try.close(thrown, out);
-
-      end(process);
-    }
-
-    if (thrown != null) {
+    } catch (IOException e) {
       throwExecutionExceptionIfNecessary();
+    } finally {
+      end(process);
     }
 
     return sysout();

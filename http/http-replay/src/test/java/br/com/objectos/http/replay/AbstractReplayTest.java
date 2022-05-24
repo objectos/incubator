@@ -47,7 +47,6 @@ import java.nio.CharBuffer;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
 import java.util.Map;
-import objectos.lang.Try;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
@@ -127,14 +126,11 @@ public abstract class AbstractReplayTest {
 
   @AfterClass(alwaysRun = true)
   public final void _tearDown() throws IOException {
-    Throwable rethrow;
-    rethrow = Try.begin();
-
-    rethrow = Try.close(rethrow, service);
-
-    rethrow = Try.close(rethrow, serverSocketChannel);
-
-    Try.rethrowIfPossible(rethrow, IOException.class);
+    try {
+      service.close();
+    } finally {
+      serverSocketChannel.close();
+    }
   }
 
   final void parseRequest() throws IOException, ProtocolException {

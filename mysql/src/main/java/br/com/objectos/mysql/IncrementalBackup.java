@@ -25,7 +25,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.zip.GZIPOutputStream;
-import objectos.lang.Try;
 import objectos.lang.Event1;
 import objectos.lang.Event2;
 import objectos.lang.Logger;
@@ -284,14 +283,7 @@ final class IncrementalBackup extends AbstractClientJob<ImmutableList<RegularFil
   }
 
   private void ioClose() throws IOException {
-    Throwable rethrow;
-    rethrow = Try.begin();
-
-    rethrow = Try.close(rethrow, inputStream);
-
-    rethrow = Try.close(rethrow, outputStream);
-
-    Try.rethrowIfPossible(rethrow, IOException.class);
+    closeTwo(inputStream, outputStream);
   }
 
   private void ioCopy() throws IOException {

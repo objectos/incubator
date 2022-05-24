@@ -20,7 +20,6 @@ import static org.testng.Assert.assertTrue;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.channels.SocketChannel;
-import objectos.lang.Try;
 import org.testng.annotations.Test;
 
 public class SelectorThreadTest extends AbstractHttpTest implements SelectorThreadAdapter {
@@ -43,46 +42,28 @@ public class SelectorThreadTest extends AbstractHttpTest implements SelectorThre
   }
 
   @Test(description = TestCase0001.DESCRIPTION)
-  public void testCase01() throws IOException {
+  public void testCase01() throws IOException, InterruptedException {
     InetSocketAddress loopback;
     loopback = nextLoopbackSocketAddress();
 
     SelectorThread thread;
-    thread = null;
+    thread = SelectorThread.create(this, loopback);
 
-    Throwable rethrow;
-    rethrow = Try.begin();
+    thread.start();
 
-    SocketChannel open;
-    open = null;
+    assertTrue(thread.isAlive());
 
-    try {
-      thread = SelectorThread.create(this, loopback);
+    assertTrue(thread.isOpen());
 
-      thread.start();
+    Thread.sleep(2);
 
-      assertTrue(thread.isAlive());
-
-      assertTrue(thread.isOpen());
-
-      Thread.sleep(2);
-
-      open = SocketChannel.open(loopback);
-
+    try (SocketChannel open = SocketChannel.open(loopback)) {
       synchronized (this) {
         wait();
       }
-    } catch (IOException e) {
-      rethrow = e;
-    } catch (InterruptedException e) {
-      rethrow = e;
     } finally {
-      rethrow = Try.close(rethrow, open);
-
       thread.interrupt();
     }
-
-    Try.rethrowIfPossible(rethrow, IOException.class);
 
     assertTrue(accepted);
   }

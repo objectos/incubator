@@ -25,7 +25,6 @@ import br.com.objectos.http.Method;
 import br.com.objectos.http.ProtocolException;
 import br.com.objectos.http.Version;
 import java.io.IOException;
-import objectos.lang.Try;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
@@ -33,12 +32,7 @@ public class ReplayTest extends AbstractReplayTest {
 
   @AfterMethod(alwaysRun = true)
   public void afterMethod() throws IOException {
-    Throwable rethrow;
-    rethrow = Try.begin();
-
-    rethrow = Try.close(rethrow, socketChannel);
-
-    Try.rethrowIfPossible(rethrow, IOException.class);
+    socketChannel.close();
   }
 
   @Test

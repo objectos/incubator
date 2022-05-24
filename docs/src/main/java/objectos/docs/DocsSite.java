@@ -33,6 +33,8 @@ public final class DocsSite extends Site {
 
   public static final Class<? extends SitePath> WHAT = V0001.WHAT;
 
+  public static final Class<? extends SitePath> VERSIONS = Versions.class;
+
   public static final String VERSION = V0001.VERSION;
 
   @Override
@@ -45,6 +47,8 @@ public final class DocsSite extends Site {
     addObject(new StringBuilder());
     addObject(new TableOfContents());
     addObject(new VersionHolder());
+
+    addPage("versions.html", new Versions());
 
     addDirectory("next", new Next());
     addDirectory("0.1", new V0001());

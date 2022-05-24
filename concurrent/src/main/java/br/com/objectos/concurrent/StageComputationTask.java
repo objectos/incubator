@@ -22,7 +22,6 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import objectos.lang.Checks;
 import objectos.lang.Throwables;
-import objectos.lang.Try;
 
 /**
  * A base async computation implementation providing an imperative programming
@@ -746,7 +745,7 @@ public abstract class StageComputationTask<V> implements Computation<V>, CpuTask
     }
 
     Throwable rethrow;
-    rethrow = Try.begin();
+    rethrow = null;
 
     if (!computations.isEmpty()) {
       ImmutableList<Computation<?>> copy;
@@ -785,7 +784,7 @@ public abstract class StageComputationTask<V> implements Computation<V>, CpuTask
       }
     }
 
-    Try.rethrowIfPossible(rethrow, Exception.class);
+    Throwables.rethrowIfPossible(rethrow, Exception.class);
 
     if (computations.isEmpty()) {
       unset(FSTAGE_INCREMENTED);

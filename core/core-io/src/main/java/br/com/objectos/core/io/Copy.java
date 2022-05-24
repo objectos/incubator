@@ -19,7 +19,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import objectos.lang.Checks;
-import objectos.lang.Try;
 
 /**
  * Provides {@code static} methods for copying all bytes from one object to
@@ -103,33 +102,9 @@ public final class Copy {
     Checks.checkNotNull(dst, "dst == null");
     checkBuffer(buffer);
 
-    long counter;
-    counter = 0;
-
-    InputStream in;
-    in = src.openInputStream();
-
-    OutputStream out;
-    out = null;
-
-    Throwable rethrow;
-    rethrow = Try.begin();
-
-    try {
-      out = dst.openOutputStream();
-
-      counter = Copy.copyUnchecked(in, out, buffer);
-    } catch (Throwable e) {
-      rethrow = e;
-    } finally {
-      rethrow = Try.close(rethrow, out);
-
-      rethrow = Try.close(rethrow, in);
+    try (var in = src.openInputStream(); var out = dst.openOutputStream()) {
+      return Copy.copyUnchecked(in, out, buffer);
     }
-
-    Try.rethrowIfPossible(rethrow, IOException.class);
-
-    return counter;
   }
 
   /**
@@ -246,30 +221,9 @@ public final class Copy {
     Checks.checkNotNull(dst, "dst == null");
     checkBuffer(buffer);
 
-    long counter;
-    counter = 0;
-
-    OutputStream out;
-    out = null;
-
-    Throwable rethrow;
-    rethrow = Try.begin();
-
-    try {
-      out = dst.openOutputStream();
-
-      counter = Copy.copyUnchecked(src, out, buffer);
-    } catch (Throwable e) {
-      rethrow = e;
-    } finally {
-      rethrow = Try.close(rethrow, out);
-
-      rethrow = Try.close(rethrow, src);
+    try (var out = dst.openOutputStream()) {
+      return Copy.copyUnchecked(src, out, buffer);
     }
-
-    Try.rethrowIfPossible(rethrow, IOException.class);
-
-    return counter;
   }
 
   static void checkBuffer(byte[] buffer) {
@@ -320,33 +274,9 @@ public final class Copy {
     Checks.checkNotNull(destination, "destination == null");
     Checks.checkNotNull(buffer, "buffer == null");
 
-    long counter;
-    counter = 0;
-
-    InputStream in;
-    in = source.openInputStream();
-
-    OutputStream out;
-    out = null;
-
-    Throwable rethrow;
-    rethrow = Try.begin();
-
-    try {
-      out = destination.openOutputStream();
-
-      counter = Copy.copyUnchecked(in, out, buffer);
-    } catch (Throwable e) {
-      rethrow = e;
-    } finally {
-      rethrow = Try.close(rethrow, out);
-
-      rethrow = Try.close(rethrow, in);
+    try (var in = source.openInputStream(); var out = destination.openOutputStream()) {
+      return Copy.copyUnchecked(in, out, buffer);
     }
-
-    Try.rethrowIfPossible(rethrow, IOException.class);
-
-    return counter;
   }
 
 }

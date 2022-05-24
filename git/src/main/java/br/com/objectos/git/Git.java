@@ -25,38 +25,39 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.Random;
 import objectos.lang.Checks;
+import objectos.lang.Throwables;
 
 final class Git {
 
   /*
-
+  
   @startuml
-
+  
   ' config
-
+  
   skinparam shadowing false
-
+  
   ' actors
-
+  
   actor :CI Server: as CI
-
+  
   ' usecases
-
+  
   usecase Copy as "Copy & transform"
-
+  
   note bottom of Copy : Copies a commit from a source\nrepository to a target repository.\nAllows filtering and content\ntransformations.
-
+  
   usecase Materialize as "Materialize a repository"
-
+  
   note bottom of Materialize : Similar to a 'git clone --depth 1'\nbut skips the creation of the '.git' dir
-
+  
   ' rels
-
+  
   CI --> Copy
   CI --> Materialize
-
+  
   @enduml
-
+  
    */
 
   public static final RefName MASTER = RefName.MASTER;
@@ -83,6 +84,21 @@ final class Git {
     Checks.checkArgument(size >= 64, "bufferSize minimum value is 64 bytes");
 
     return size;
+  }
+
+  static Throwable close(Throwable primary, AutoCloseable closeable) {
+    Throwable result;
+    result = primary;
+
+    if (closeable != null) {
+      try {
+        closeable.close();
+      } catch (Throwable e) {
+        result = Throwables.addSuppressed(result, e);
+      }
+    }
+
+    return result;
   }
 
   static boolean isHexDigit(char c) {

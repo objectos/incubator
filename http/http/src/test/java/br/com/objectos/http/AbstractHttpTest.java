@@ -26,14 +26,12 @@ import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.testing.TestInf;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.concurrent.atomic.AtomicInteger;
-import objectos.lang.Try;
 import org.testng.annotations.BeforeSuite;
 
 public abstract class AbstractHttpTest {
@@ -63,11 +61,11 @@ public abstract class AbstractHttpTest {
 
     HttpEngineBuilder engineBuilder;
     engineBuilder = new HttpEngineBuilder(
-        DirectIoWorker.get(),
+      DirectIoWorker.get(),
 
-        provider.create(),
+      provider.create(),
 
-        stringDeduplicator
+      stringDeduplicator
     );
 
     engineBuilder.setBufferSize(64);
@@ -88,27 +86,27 @@ public abstract class AbstractHttpTest {
     ioWorker = new SingleThreadIoWorker(logger);
 
     service = HttpService.create(
-        address,
+      address,
 
-        cpuArray,
+      cpuArray,
 
-        ioWorker,
+      ioWorker,
 
-        provider,
+      provider,
 
-        HttpService.bufferSize(64),
+      HttpService.bufferSize(64),
 
-        HttpService.enginesPerWorker(2),
+      HttpService.enginesPerWorker(2),
 
-        HttpService.logger(logger)
+      HttpService.logger(logger)
     );
 
     Services.start(
-        cpuArray,
+      cpuArray,
 
-        ioWorker,
+      ioWorker,
 
-        service
+      service
     );
   }
 
@@ -136,31 +134,14 @@ public abstract class AbstractHttpTest {
   }
 
   protected final String readString(URLConnection c) throws IOException {
-    Throwable rethrow;
-    rethrow = Try.begin();
-
-    InputStream in;
-    in = null;
-
-    ByteArrayOutputStream out;
-    out = new ByteArrayOutputStream();
-
-    try {
-      in = c.getInputStream();
-
+    try (var in = c.getInputStream(); var out = new ByteArrayOutputStream()) {
       Copy.streams(in, out, new byte[1024]);
-    } catch (IOException e) {
-      rethrow = e;
-    } finally {
-      rethrow = Try.close(rethrow, in);
+
+      byte[] bytes;
+      bytes = out.toByteArray();
+
+      return new String(bytes, Charsets.utf8());
     }
-
-    Try.rethrowIfPossible(rethrow, IOException.class);
-
-    byte[] bytes;
-    bytes = out.toByteArray();
-
-    return new String(bytes, Charsets.utf8());
   }
 
 }

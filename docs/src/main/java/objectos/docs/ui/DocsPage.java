@@ -58,7 +58,7 @@ public abstract class DocsPage extends SitePage {
     );
   }
 
-  protected final void body0() {
+  protected void body0() {
     Breadcrumbs bc;
     bc = getObject(Breadcrumbs.class);
 

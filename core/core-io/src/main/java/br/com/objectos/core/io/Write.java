@@ -20,7 +20,6 @@ import java.io.OutputStream;
 import java.io.Writer;
 import java.nio.charset.Charset;
 import objectos.lang.Checks;
-import objectos.lang.Try;
 
 /**
  * Provides {@code static} methods for writing to {@link OutputStream} and
@@ -49,21 +48,9 @@ public final class Write {
     Checks.checkNotNull(dst, "dst == null");
     Checks.checkNotNull(bytes, "bytes == null");
 
-    OutputStream outputStream;
-    outputStream = dst.openOutputStream();
-
-    Throwable rethrow;
-    rethrow = Try.begin();
-
-    try {
+    try (OutputStream outputStream = dst.openOutputStream()) {
       outputStream.write(bytes, 0, bytes.length);
-    } catch (Throwable e) {
-      rethrow = e;
-    } finally {
-      Try.close(rethrow, outputStream);
     }
-
-    Try.rethrowIfPossible(rethrow, IOException.class);
   }
 
   /**
@@ -87,21 +74,9 @@ public final class Write {
     Checks.checkNotNull(charset, "charset == null");
     Checks.checkNotNull(string, "string == null");
 
-    Writer writer;
-    writer = dst.openWriter(charset);
-
-    Throwable rethrow;
-    rethrow = Try.begin();
-
-    try {
+    try (Writer writer = dst.openWriter(charset)) {
       writer.write(string);
-    } catch (Throwable e) {
-      rethrow = e;
-    } finally {
-      Try.close(rethrow, writer);
     }
-
-    Try.rethrowIfPossible(rethrow, IOException.class);
   }
 
 }

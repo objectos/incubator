@@ -22,10 +22,6 @@ import static org.testng.Assert.assertTrue;
 import br.com.objectos.core.io.Read;
 import br.com.objectos.core.io.Write;
 import br.com.objectos.core.list.Lists;
-import objectos.lang.Linux;
-import objectos.lang.OperatingSystem;
-import objectos.lang.OperatingSystemVisitor;
-import objectos.lang.UnsupportedOperatingSystem;
 import br.com.objectos.random.testing.Next;
 import java.io.File;
 import java.io.IOException;
@@ -39,7 +35,10 @@ import java.nio.channels.WritableByteChannel;
 import java.nio.charset.Charset;
 import java.util.Collections;
 import java.util.List;
-import objectos.lang.Try;
+import objectos.lang.Linux;
+import objectos.lang.OperatingSystem;
+import objectos.lang.OperatingSystemVisitor;
+import objectos.lang.UnsupportedOperatingSystem;
 import org.testng.Assert;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
@@ -384,18 +383,10 @@ public class RegularFileTest extends AbstractObjectosFsTest {
     Directory root;
     root = createTempDir();
 
-    FileChannel writable;
-    writable = null;
-
     RegularFile file;
     file = root.createRegularFile("write");
 
-    Throwable rethrow;
-    rethrow = Try.begin();
-
-    try {
-      writable = file.openWriteChannel();
-
+    try (var writable = file.openWriteChannel()) {
       ByteBuffer bytesBuffer;
       bytesBuffer = ByteBuffer.allocate(5);
 
@@ -406,43 +397,21 @@ public class RegularFileTest extends AbstractObjectosFsTest {
       } catch (NonReadableChannelException expected) {
 
       }
-    } catch (Throwable e) {
-      rethrow = e;
-    } finally {
-      rethrow = Try.close(rethrow, writable);
     }
-
-    Try.rethrowIfPossible(rethrow, IOException.class);
 
     byte[] firstBytes;
     firstBytes = Next.bytes(8192);
 
-    try {
-      writable = file.openWriteChannel();
-
+    try (var writable = file.openWriteChannel()) {
       writeBytes(writable, firstBytes);
-    } catch (Throwable e) {
-      rethrow = e;
-    } finally {
-      rethrow = Try.close(rethrow, writable);
     }
-
-    Try.rethrowIfPossible(rethrow, IOException.class);
 
     byte[] lastBytes;
     lastBytes = Next.bytes(8192);
 
-    try {
-      writable = file.openWriteChannel();
-
+    try (var writable = file.openWriteChannel()) {
       writeBytes(writable, lastBytes);
-    } catch (Throwable e) {
-      rethrow = e;
-    } finally {
-      rethrow = Try.close(rethrow, writable);
     }
-
-    Try.rethrowIfPossible(rethrow, IOException.class);
 
     byte[] result;
     result = Read.byteArray(file);

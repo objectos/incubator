@@ -28,7 +28,6 @@ import java.nio.CharBuffer;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
-import objectos.lang.Try;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -83,15 +82,7 @@ public class ReplayResponseParserTest implements ReplayResponseParserAdapter {
     Resource resource;
     resource = Resource.getResource("TEST-INF/test-case-01.zip");
 
-    Throwable rethrow;
-    rethrow = Try.begin();
-
-    InputStream in;
-    in = null;
-
-    try {
-      in = resource.openInputStream();
-
+    try (InputStream in = resource.openInputStream()) {
       GZIPInputStream gzip;
       gzip = skipTo(in, "000000000001.response.gz");
 
@@ -102,13 +93,7 @@ public class ReplayResponseParserTest implements ReplayResponseParserAdapter {
       }
 
       assertEquals(expectedLocation, "/test/login");
-    } catch (IOException e) {
-      rethrow = e;
-    } finally {
-      rethrow = Try.close(rethrow, in);
     }
-
-    Try.rethrowIfPossible(rethrow, IOException.class);
   }
 
   @Test
@@ -116,15 +101,7 @@ public class ReplayResponseParserTest implements ReplayResponseParserAdapter {
     Resource resource;
     resource = Resource.getResource("TEST-INF/test-case-02.zip");
 
-    Throwable rethrow;
-    rethrow = Try.begin();
-
-    InputStream in;
-    in = null;
-
-    try {
-      in = resource.openInputStream();
-
+    try (InputStream in = resource.openInputStream()) {
       GZIPInputStream gzip;
       gzip = skipTo(in, "000000000002.response.gz");
 
@@ -155,13 +132,7 @@ public class ReplayResponseParserTest implements ReplayResponseParserAdapter {
         expectedContentType.toString(),
         "Content-Type: text/html; charset=utf-8"
       );
-    } catch (IOException e) {
-      rethrow = e;
-    } finally {
-      rethrow = Try.close(rethrow, in);
     }
-
-    Try.rethrowIfPossible(rethrow, IOException.class);
   }
 
   @Test

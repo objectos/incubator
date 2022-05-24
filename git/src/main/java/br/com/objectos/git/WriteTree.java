@@ -29,7 +29,6 @@ import java.security.MessageDigest;
 import java.util.Arrays;
 import java.util.zip.Deflater;
 import objectos.lang.Event2;
-import objectos.lang.Try;
 
 final class WriteTree extends AbstractGitEngineTask {
 
@@ -189,30 +188,18 @@ final class WriteTree extends AbstractGitEngineTask {
   final void write(ResolvedPath notFound) throws IOException {
     notFound.createParents();
 
-    Throwable rethrow;
-    rethrow = Try.begin();
+    try (FileChannel channel = notFound.openWriteChannel()) {
+      int limit;
+      limit = byteBuffer.limit();
 
-    FileChannel channel;
-    channel = notFound.openWriteChannel();
-
-    int limit;
-    limit = byteBuffer.limit();
-
-    try {
       byteBuffer.limit(byteBuffer.position() + objectSize);
 
       while (byteBuffer.hasRemaining()) {
         channel.write(byteBuffer);
       }
-    } catch (Throwable e) {
-      rethrow = e;
-    } finally {
-      rethrow = Try.close(rethrow, channel);
+
+      byteBuffer.limit(limit);
     }
-
-    byteBuffer.limit(limit);
-
-    Try.rethrowIfPossible(rethrow, IOException.class);
   }
 
   final void writeImmutable(ObjectId object) {

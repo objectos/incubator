@@ -24,9 +24,7 @@ import br.com.objectos.fs.RegularFile;
 import br.com.objectos.fs.ResolvedPath;
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import java.nio.channels.FileChannel;
 import objectos.lang.Checks;
-import objectos.lang.Try;
 
 /**
  * Opens a Git packfile. Resolves the pathname and confirms (or not) that the
@@ -216,28 +214,12 @@ final class OpenPackFile extends AbstractGitEngineTask {
   }
 
   private void ioRead(ReadableFileChannelSource source) throws IOException {
-    Throwable rethrow;
-    rethrow = Try.begin();
-
-    FileChannel channel;
-    channel = source.openReadChannel();
-
-    try {
+    try (var channel = source.openReadChannel()) {
       channel.position(0);
 
       channel.read(channelBuffer);
 
       channelBuffer.flip();
-    } catch (Throwable e) {
-      rethrow = e;
-    } finally {
-      rethrow = Try.close(rethrow, channel);
-    }
-
-    Try.rethrowIfPossible(rethrow, IOException.class);
-
-    if (rethrow != null) {
-      catchThrowable(rethrow);
     }
   }
 

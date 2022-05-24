@@ -30,7 +30,6 @@ import java.util.Collection;
 import java.util.EnumSet;
 import java.util.Set;
 import objectos.lang.Checks;
-import objectos.lang.Try;
 
 final class WatchServiceJava7 implements Watch.Service {
 
@@ -63,26 +62,21 @@ final class WatchServiceJava7 implements Watch.Service {
     MutableMap<WatchKey, WatchDirectoryJava7> keys;
     keys = MutableMap.create();
 
-    Throwable ioException;
-    ioException = Try.begin();
-
     for (WatchDirectoryJava7 option : directories) {
       try {
         WatchKey watchKey;
         watchKey = option.register(delegate);
 
         keys.put(watchKey, option);
-      } catch (Throwable e) {
-        ioException = e;
+      } catch (IOException e) {
+        try {
+          delegate.close();
+        } catch (IOException sup) {
+          e.addSuppressed(sup);
+        }
 
-        break;
+        throw e;
       }
-    }
-
-    if (ioException != null) {
-      ioException = Try.close(ioException, delegate);
-
-      Try.rethrowIfPossible(ioException, IOException.class);
     }
 
     worker = new Worker(delegate, keys.toImmutableMap());

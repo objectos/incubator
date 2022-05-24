@@ -29,7 +29,6 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
-import objectos.lang.Try;
 
 final class StorageV1 extends Storage {
 
@@ -99,29 +98,14 @@ final class StorageV1 extends Storage {
                         (byte) timestamp,
     };
 
-    OutputStream out;
-    out = file.openOutputStream();
-
-    Throwable rethrow;
-    rethrow = Try.begin();
-
-    try {
+    try (OutputStream out = file.openOutputStream()) {
       out.write(bytes);
-    } catch (Throwable e) {
-      rethrow = e;
-    } finally {
-      rethrow = Try.close(rethrow, out);
     }
-
-    Try.rethrowIfPossible(rethrow, IOException.class);
 
     RegularFile logFile;
     logFile = dataDirectory.createRegularFile(LOG_NAME);
 
-    FileChannel channel;
-    channel = logFile.openWriteChannel();
-
-    try {
+    try (FileChannel channel = logFile.openWriteChannel()) {
       ByteBuffer buffer;
       buffer = ByteBuffer.allocate(8);
 
@@ -134,13 +118,7 @@ final class StorageV1 extends Storage {
       buffer.flip();
 
       channel.write(buffer);
-    } catch (Throwable e) {
-      rethrow = e;
-    } finally {
-      rethrow = Try.close(rethrow, channel);
     }
-
-    Try.rethrowIfPossible(rethrow, IOException.class);
 
     return new StorageV1(logFile);
   }
@@ -208,13 +186,7 @@ final class StorageV1 extends Storage {
         throw new IOException("Corrupt storage: log file not found", e);
       }
 
-      FileChannel channel;
-      channel = logFile.openReadChannel();
-
-      Throwable rethrow;
-      rethrow = Try.begin();
-
-      try {
+      try (FileChannel channel = logFile.openReadChannel()) {
         ByteBuffer buffer;
         buffer = ByteBuffer.allocate(8);
 
@@ -248,13 +220,7 @@ final class StorageV1 extends Storage {
         if (version != V1) {
           throw new IOException("Invalid file format: unsupported version " + version);
         }
-      } catch (Throwable e) {
-        rethrow = e;
-      } finally {
-        rethrow = Try.close(rethrow, channel);
       }
-
-      Try.rethrowIfPossible(rethrow, IOException.class);
 
       return new StorageV1(logFile);
     }

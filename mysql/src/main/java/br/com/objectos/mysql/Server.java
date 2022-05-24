@@ -27,7 +27,6 @@ import java.nio.charset.Charset;
 import java.nio.charset.CharsetDecoder;
 import java.util.List;
 import objectos.lang.Checks;
-import objectos.lang.Try;
 
 public final class Server extends Executable implements Service {
 
@@ -87,13 +86,7 @@ public final class Server extends Executable implements Service {
     boolean ready;
     ready = false;
 
-    FileChannel channel;
-    channel = file.openReadChannel();
-
-    Throwable rethrow;
-    rethrow = Try.begin();
-
-    try {
+    try (FileChannel channel = file.openReadChannel()) {
       channel.position(offset);
 
       int diff;
@@ -144,13 +137,7 @@ public final class Server extends Executable implements Service {
           break;
         }
       }
-    } catch (Throwable e) {
-      rethrow = e;
-    } finally {
-      rethrow = Try.close(rethrow, channel);
     }
-
-    Try.rethrowIfPossible(rethrow, IOException.class);
 
     return ready;
   }

@@ -25,7 +25,6 @@ import java.io.Writer;
 import java.nio.charset.Charset;
 import java.util.List;
 import objectos.lang.Checks;
-import objectos.lang.Try;
 
 public final class ConfigurationFile {
 
@@ -124,21 +123,9 @@ public final class ConfigurationFile {
   }
 
   private void append(String s) throws IOException {
-    Writer w;
-    w = file.openWriter(charset);
-
-    Throwable rethrow;
-    rethrow = Try.begin();
-
-    try {
+    try (var w = file.openWriter(charset)) {
       w.write(s);
-    } catch (Throwable e) {
-      rethrow = e;
-    } finally {
-      rethrow = Try.close(rethrow, w);
     }
-
-    Try.rethrowIfPossible(rethrow, IOException.class);
   }
 
   private String toCommandOption() {
@@ -172,21 +159,9 @@ public final class ConfigurationFile {
   }
 
   private void writeString(String s) throws IOException {
-    Writer w;
-    w = file.openWriter(charset);
-
-    Throwable rethrow;
-    rethrow = Try.begin();
-
-    try {
+    try (Writer w = file.openWriter(charset)) {
       w.write(s);
-    } catch (Throwable e) {
-      rethrow = e;
-    } finally {
-      rethrow = Try.close(rethrow, w);
     }
-
-    Try.rethrowIfPossible(rethrow, IOException.class);
   }
 
 }

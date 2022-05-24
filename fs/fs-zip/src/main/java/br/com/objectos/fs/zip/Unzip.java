@@ -28,7 +28,6 @@ import java.util.Enumeration;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import objectos.lang.Checks;
-import objectos.lang.Try;
 
 /**
  * @since 2
@@ -38,8 +37,6 @@ public final class Unzip {
   private final byte[] buffer = new byte[8192];
 
   private final Enumeration<? extends ZipEntry> entries;
-
-  private Throwable ioException;
 
   private final Directory workingDirectory;
 
@@ -73,15 +70,9 @@ public final class Unzip {
   }
 
   public final void execute() throws IOException {
-    try {
+    try (zip) {
       execute0();
-    } catch (Throwable e) {
-      ioException = e;
-    } finally {
-      ioException = Try.close(ioException, zip);
     }
-
-    Try.rethrowIfPossible(ioException, IOException.class);
   }
 
   private void execute0() throws IOException {
@@ -106,9 +97,7 @@ public final class Unzip {
       entryName = entry.getName();
 
       if (entryName.isEmpty()) {
-        ioException = new IOException("Cannot unzip, entry pathname is empty");
-
-        break;
+        throw new IOException("Cannot unzip, entry pathname is empty");
       }
 
       nameParts.clear();
@@ -120,9 +109,7 @@ public final class Unzip {
       c = entryArray[0];
 
       if (c == '/') {
-        ioException = new IOException("Cannot unzip, entry pathname is absolute: " + entryName);
-
-        break;
+        throw new IOException("Cannot unzip, entry pathname is absolute: " + entryName);
       }
 
       namePart.setLength(0);
@@ -160,9 +147,7 @@ public final class Unzip {
       }
 
       if (nameParts.isEmpty()) {
-        ioException = new IOException("Cannot unzip, entry pathname is empty");
-
-        break;
+        throw new IOException("Cannot unzip, entry pathname is empty");
       }
 
       String firstName;
@@ -178,21 +163,23 @@ public final class Unzip {
       ResolvedPath resolved;
       resolved = workingDirectory.resolve(firstName, moreNames);
 
-      Throwable throwable;
-      throwable = resolved.acceptPathNameVisitor(thisVisitor, entry);
+      IOException ioe;
+      ioe = resolved.acceptPathNameVisitor(thisVisitor, entry);
 
-      Try.rethrowIfPossible(throwable, IOException.class);
+      if (ioe != null) {
+        throw ioe;
+      }
     }
   }
 
-  private class ThisVisitor implements PathNameVisitor<Throwable, ZipEntry> {
+  private class ThisVisitor implements PathNameVisitor<IOException, ZipEntry> {
     @Override
-    public final Throwable visitDirectory(Directory directory, ZipEntry p) {
+    public final IOException visitDirectory(Directory directory, ZipEntry p) {
       return new IOException("Cannot unzip, destination exists: " + directory.getPath());
     }
 
     @Override
-    public final Throwable visitNotFound(ResolvedPath notFound, ZipEntry entry) {
+    public final IOException visitNotFound(ResolvedPath notFound, ZipEntry entry) {
       try {
         notFound.createParents();
       } catch (IOException e) {
@@ -227,7 +214,7 @@ public final class Unzip {
     }
 
     @Override
-    public final Throwable visitRegularFile(RegularFile file, ZipEntry p) {
+    public final IOException visitRegularFile(RegularFile file, ZipEntry p) {
       return new IOException("Cannot unzip, destination exists: " + file.getPath());
     }
   }

@@ -25,7 +25,6 @@ import java.util.Enumeration;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
-import objectos.lang.Try;
 import org.testng.annotations.Test;
 
 public class ZipFileTest {
@@ -34,18 +33,10 @@ public class ZipFileTest {
 
   @Test(enabled = false)
   public void listEntries() throws IOException {
-    Throwable rethrow;
-    rethrow = Try.begin();
+    File file;
+    file = new File("/tmp/replay.zip");
 
-    ZipFile zip;
-    zip = null;
-
-    try {
-      File file;
-      file = new File("/tmp/replay.zip");
-
-      zip = new ZipFile(file);
-
+    try (ZipFile zip = new ZipFile(file)) {
       Enumeration<? extends ZipEntry> entries;
       entries = zip.entries();
 
@@ -74,13 +65,7 @@ public class ZipFileTest {
 
         listEntry(zip, request, response);
       }
-    } catch (IOException e) {
-      rethrow = e;
-    } finally {
-      rethrow = Try.close(rethrow, zip);
     }
-
-    Try.rethrowIfPossible(rethrow, IOException.class);
   }
 
   private boolean isRequest(ZipEntry entry) {
@@ -98,18 +83,8 @@ public class ZipFileTest {
   }
 
   private void listEntry(ZipFile tar, ZipEntry request, ZipEntry response) throws IOException {
-    Throwable rethrow;
-    rethrow = Try.begin();
-
-    GZIPInputStream gzip;
-    gzip = null;
-
-    try {
-      InputStream in;
-      in = tar.getInputStream(request);
-
-      gzip = new GZIPInputStream(in);
-
+    try (InputStream in = tar.getInputStream(request);
+        GZIPInputStream gzip = new GZIPInputStream(in)) {
       String name;
       name = request.getName();
 
@@ -135,20 +110,10 @@ public class ZipFileTest {
       s = new String(bytes);
 
       System.out.println(s);
-    } catch (IOException e) {
-      rethrow = e;
-    } finally {
-      rethrow = Try.close(rethrow, gzip);
     }
 
-    Try.rethrowIfPossible(rethrow, IOException.class);
-
-    try {
-      InputStream in;
-      in = tar.getInputStream(response);
-
-      gzip = new GZIPInputStream(in);
-
+    try (InputStream in = tar.getInputStream(response);
+        GZIPInputStream gzip = new GZIPInputStream(in)) {
       String name;
       name = response.getName();
 
@@ -163,13 +128,7 @@ public class ZipFileTest {
 
         System.out.println(s);
       }
-    } catch (IOException e) {
-      rethrow = e;
-    } finally {
-      rethrow = Try.close(rethrow, gzip);
     }
-
-    Try.rethrowIfPossible(rethrow, IOException.class);
   }
 
 }

@@ -19,6 +19,7 @@ import br.com.objectos.core.list.MutableList;
 import br.com.objectos.css.Css;
 import br.com.objectos.css.select.IdSelector;
 import br.com.objectos.css.sheet.StyleSheet;
+import objectos.docs.DocsSite;
 import objectos.docs.next.intro.Intro;
 import objectos.docs.next.logging.LoggingDir;
 import objectos.docs.style.Colors;
@@ -74,7 +75,7 @@ final class Index extends DocsPage {
         div(
           HDV,
 
-          div(t("Version", v.get())),
+          div(t("Version", v.get()), t(" ["), a(href(DocsSite.VERSIONS), t("change")), t("]")),
 
           div(t("API reference: "), a(href("api/index.html"), t("Javadocs")))
         )

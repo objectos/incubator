@@ -16,8 +16,6 @@
 package br.com.objectos.mysql;
 
 import java.io.IOException;
-import java.io.OutputStream;
-import objectos.lang.Try;
 
 final class ConfigEditorExecution extends Execution {
 
@@ -33,26 +31,14 @@ final class ConfigEditorExecution extends Execution {
     }
 
     if (password != null) {
-      OutputStream out;
-      out = process.getOutputStream();
+      try (var out = process.getOutputStream()) {
+        byte[] bytes;
+        bytes = password.getBytes();
 
-      byte[] bytes;
-      bytes = password.getBytes();
-
-      Throwable rethrow;
-      rethrow = Try.begin();
-
-      try {
         out.write(bytes);
 
         out.flush();
-      } catch (Throwable e) {
-        rethrow = e;
-      } finally {
-        rethrow = Try.close(rethrow, out);
       }
-
-      Try.rethrowIfPossible(rethrow, IOException.class);
     }
 
     end(process);

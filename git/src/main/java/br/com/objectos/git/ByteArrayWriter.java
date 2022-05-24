@@ -18,7 +18,6 @@ package br.com.objectos.git;
 import br.com.objectos.core.array.ByteArrays;
 import br.com.objectos.fs.WritablePathName;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.nio.charset.CharacterCodingException;
@@ -27,7 +26,6 @@ import java.nio.charset.CharsetDecoder;
 import java.security.MessageDigest;
 import java.util.Arrays;
 import java.util.zip.Deflater;
-import objectos.lang.Try;
 
 final class ByteArrayWriter {
 
@@ -288,21 +286,9 @@ final class ByteArrayWriter {
   }
 
   public final void writeTo(WritablePathName file) throws IOException {
-    OutputStream out;
-    out = file.openOutputStream();
-
-    Throwable rethrow;
-    rethrow = Try.begin();
-
-    try {
+    try (var out = file.openOutputStream()) {
       out.write(data, 0, index);
-    } catch (Throwable e) {
-      rethrow = e;
-    } finally {
-      rethrow = Try.close(rethrow, out);
     }
-
-    Try.rethrowIfPossible(rethrow, IOException.class);
   }
 
   final byte[] array() {

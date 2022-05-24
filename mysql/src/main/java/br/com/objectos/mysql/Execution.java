@@ -23,7 +23,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.List;
 import java.util.Map;
-import objectos.lang.Try;
 
 abstract class Execution {
 
@@ -110,31 +109,16 @@ abstract class Execution {
   }
 
   private void consume(InputStream in, MutableList<String> result) throws IOException {
-    InputStreamReader streamReader;
-    streamReader = new InputStreamReader(in);
-
-    BufferedReader reader;
-    reader = new BufferedReader(streamReader);
-
-    Throwable rethrow;
-    rethrow = Try.begin();
-
-    try {
+    try (var sr = new InputStreamReader(in); var r = new BufferedReader(sr)) {
       String line;
-      line = reader.readLine();
+      line = r.readLine();
 
       while (line != null) {
         result.add(line);
 
-        line = reader.readLine();
+        line = r.readLine();
       }
-    } catch (Throwable e) {
-      rethrow = e;
-    } finally {
-      rethrow = Try.close(rethrow, reader);
     }
-
-    Try.rethrowIfPossible(rethrow, IOException.class);
   }
 
 }

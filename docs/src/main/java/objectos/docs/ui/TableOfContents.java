@@ -68,6 +68,10 @@ public final class TableOfContents extends SiteFragment implements SiteVisitor {
 
   @Override
   public final void visitSitePage(SitePage page) {
+    if (currentLevel == null) {
+      return;
+    }
+
     if (page instanceof DocsPage d) {
       var title = d.titleText;
 
