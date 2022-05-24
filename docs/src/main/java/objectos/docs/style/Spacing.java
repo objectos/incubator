@@ -55,6 +55,8 @@ public final class Spacing {
 
   public static final Length V24 = Length.rem(6);
 
+  public static final Length V28 = Length.rem(7);
+
   public static final Length V32 = Length.rem(8);
 
   public static final Length V40 = Length.rem(10);
