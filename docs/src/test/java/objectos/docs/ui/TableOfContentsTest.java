@@ -31,19 +31,19 @@ public class TableOfContentsTest extends DocsSiteTest {
   }
 
   @Test
-  public void next() {
-    toc.set("next");
+  public void v0001() {
+    toc.set("v0001");
 
     assertEquals(
       toc.toString(),
 
       """
       <ul>\
-      <li><a href="/next/index.html">Home</a></li>\
-      <li><a href="/next/intro/index.html">Get started with Objectos</a>\
-      <ul><li><a href="/next/intro/overview.html">What is Objectos?</a></li>\
-      <li><a href="/next/intro/install.html">Installation</a></li>\
-      </ul></li><li><a href="/next/logging/index.html">Objectos Logging</a><ul><li><a href="/next/logging/getting-started/index.html">Getting started</a><ul><li><a href="/next/logging/getting-started/about-logging.html">About logging</a></li><li><a href="/next/logging/getting-started/objectos-logging.html">Logging with Objectos Logging</a></li><li><a href="/next/logging/getting-started/installing.html">Installing Objectos Logging</a></li><li><a href="/next/logging/getting-started/quick-start.html">Quick start</a></li></ul></li><li><a href="/next/logging/logging-guide/index.html">Logging guide</a><ul><li><a href="/next/logging/logging-guide/events.html">Creating events</a></li><li><a href="/next/logging/logging-guide/logger.html">Using the Logger interface</a></li></ul></li><li><a href="/next/logging/no-op-logger/index.html">The NoOpLogger</a><ul></ul></li></ul></li><li><a href="/next/relnotes/index.html">Release notes</a><ul><li><a href="/next/relnotes/0.1.0.html">Objectos 0.1.0 release notes</a></li></ul></li></ul>"""
+      <li><a href="/0.1/index.html">Home</a></li>\
+      <li><a href="/0.1/intro/index.html">Get started with Objectos</a>\
+      <ul><li><a href="/0.1/intro/overview.html">What is Objectos?</a></li>\
+      <li><a href="/0.1/intro/install.html">Installation</a></li>\
+      </ul></li><li><a href="/0.1/logging/index.html">Objectos Logging</a><ul><li><a href="/0.1/logging/getting-started/index.html">Getting started</a><ul><li><a href="/0.1/logging/getting-started/about-logging.html">About logging</a></li><li><a href="/0.1/logging/getting-started/objectos-logging.html">Logging with Objectos Logging</a></li><li><a href="/0.1/logging/getting-started/installing.html">Installing Objectos Logging</a></li><li><a href="/0.1/logging/getting-started/quick-start.html">Quick start</a></li></ul></li><li><a href="/0.1/logging/logging-guide/index.html">Logging guide</a><ul><li><a href="/0.1/logging/logging-guide/events.html">Creating events</a></li><li><a href="/0.1/logging/logging-guide/logger.html">Using the Logger interface</a></li></ul></li><li><a href="/0.1/logging/no-op-logger/index.html">The NoOpLogger</a><ul></ul></li></ul></li><li><a href="/0.1/relnotes/index.html">Release notes</a><ul><li><a href="/0.1/relnotes/0.1.0.html">Objectos 0.1.0 release notes</a></li></ul></li></ul>"""
     );
   }
 
