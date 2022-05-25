@@ -28,13 +28,13 @@ import java.nio.charset.Charset;
 import java.security.MessageDigest;
 import java.util.Arrays;
 import java.util.zip.Deflater;
-import objectos.lang.Event2;
+import objectos.lang.Note2;
 
 final class WriteTree extends AbstractGitEngineTask {
 
-  static final Event2<GitCommand<?>, MutableTree> ESTART = Event2.debug();
+  static final Note2<GitCommand<?>, MutableTree> ESTART = Note2.debug();
 
-  static final Event2<GitCommand<?>, ObjectId> ESUCCESS = Event2.debug();
+  static final Note2<GitCommand<?>, ObjectId> ESUCCESS = Note2.debug();
 
   private static final byte _ASSEMBLE = 1;
 

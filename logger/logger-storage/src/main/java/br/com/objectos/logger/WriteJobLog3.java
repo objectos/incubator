@@ -15,12 +15,12 @@
  */
 package br.com.objectos.logger;
 
-import objectos.lang.Event3;
-import objectos.lang.Logger;
+import objectos.lang.Note3;
+import objectos.lang.NoteSink;
 
 final class WriteJobLog3<T1, T2, T3> extends WriteJobLog {
 
-  private final Event3<T1, T2, T3> event;
+  private final Note3<T1, T2, T3> event;
 
   private final T1 value1;
 
@@ -28,7 +28,7 @@ final class WriteJobLog3<T1, T2, T3> extends WriteJobLog {
 
   private final T3 value3;
 
-  WriteJobLog3(Event3<T1, T2, T3> event,
+  WriteJobLog3(Note3<T1, T2, T3> event,
                T1 value1,
                T2 value2,
                T3 value3) {
@@ -77,7 +77,7 @@ final class WriteJobLog3<T1, T2, T3> extends WriteJobLog {
   }
 
   @Override
-  final void replay(Logger logger) {
+  final void replay(NoteSink logger) {
     logger.log(event, value1, value2, value3);
   }
 

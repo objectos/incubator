@@ -28,7 +28,7 @@ import java.security.MessageDigest;
 import java.util.ArrayDeque;
 import java.util.zip.Deflater;
 import java.util.zip.Inflater;
-import objectos.lang.Logger;
+import objectos.lang.NoteSink;
 
 abstract class GitInjector {
 
@@ -60,7 +60,7 @@ abstract class GitInjector {
 
   abstract IoWorker getIoWorker();
 
-  abstract Logger getLogger();
+  abstract NoteSink getLogger();
 
   abstract MessageDigest getMessageDigest(String algoName);
 

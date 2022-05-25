@@ -16,16 +16,16 @@
 package br.com.objectos.core.logging.testing;
 
 import objectos.lang.Equals;
-import objectos.lang.Event;
-import objectos.lang.Event0;
+import objectos.lang.Note;
+import objectos.lang.Note0;
 import objectos.lang.ToString;
 
 /**
- * An {@link Event0} log instance.
+ * An {@link Note0} log instance.
  */
 public final class Event0Log extends Log {
 
-  final Event0 event;
+  final Note0 event;
 
   /**
    * Creates a new log instance.
@@ -33,7 +33,7 @@ public final class Event0Log extends Log {
    * @param event
    *        the event instance
    */
-  public Event0Log(Event0 event) {
+  public Event0Log(Note0 event) {
     super(event);
 
     this.event = event;
@@ -54,12 +54,12 @@ public final class Event0Log extends Log {
    * {@inheritDoc}
    */
   @Override
-  public final boolean isEvent0(Event0 event) {
+  public final boolean isEvent0(Note0 event) {
     return Equals.objects(this.event, event);
   }
 
   @Override
-  final boolean hasEvent(Event event) {
+  final boolean hasEvent(Note event) {
     return Equals.objects(this.event, event);
   }
 

@@ -25,8 +25,8 @@ import br.com.objectos.core.logging.testing.Event1Log;
 import br.com.objectos.core.logging.testing.Log;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
-import objectos.lang.Event0;
-import objectos.lang.Event1;
+import objectos.lang.Note0;
+import objectos.lang.Note1;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
@@ -218,14 +218,14 @@ public class FixedCpuWorkerThreadTest {
 
     final CpuTask[] tasks = new CpuTask[10];
 
-    public final void assertLog(int index, Event0 event) {
+    public final void assertLog(int index, Note0 event) {
       Log l;
       l = logs.get(index);
 
       assertTrue(l.isEvent0(event));
     }
 
-    public final <T1> void assertLog(int index, Event1<T1> event, T1 value) {
+    public final <T1> void assertLog(int index, Note1<T1> event, T1 value) {
       Log l;
       l = logs.get(index);
 
@@ -293,7 +293,7 @@ public class FixedCpuWorkerThreadTest {
     }
 
     @Override
-    final void log(Event0 event) {
+    final void log(Note0 event) {
       Event0Log log;
       log = new Event0Log(event);
 
@@ -301,7 +301,7 @@ public class FixedCpuWorkerThreadTest {
     }
 
     @Override
-    final <T1> void log(Event1<T1> event, T1 t1) {
+    final <T1> void log(Note1<T1> event, T1 t1) {
       Event1Log<T1> log;
       log = new Event1Log<T1>(event, t1);
 

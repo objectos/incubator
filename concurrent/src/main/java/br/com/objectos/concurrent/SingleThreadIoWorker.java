@@ -18,8 +18,8 @@ package br.com.objectos.concurrent;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingDeque;
 import objectos.lang.Checks;
-import objectos.lang.Event1;
-import objectos.lang.Logger;
+import objectos.lang.Note1;
+import objectos.lang.NoteSink;
 
 /**
  * A service that uses a single thread for executing I/O tasks operating off an
@@ -29,9 +29,9 @@ import objectos.lang.Logger;
  */
 public final class SingleThreadIoWorker extends IoWorkerService {
 
-  private static final Event1<Throwable> ETASK_ERROR = Event1.error();
+  private static final Note1<Throwable> ETASK_ERROR = Note1.error();
 
-  private static final Event1<IoTask> ETASK_INTERRUPTED = Event1.trace();
+  private static final Note1<IoTask> ETASK_INTERRUPTED = Note1.trace();
 
   private final BlockingQueue<IoTask> queue;
 
@@ -43,7 +43,7 @@ public final class SingleThreadIoWorker extends IoWorkerService {
    * @param logger
    *        a logger instance
    */
-  public SingleThreadIoWorker(Logger logger) {
+  public SingleThreadIoWorker(NoteSink logger) {
     this.logger = Checks.checkNotNull(logger, "logger == null");
 
     queue = new LinkedBlockingDeque<IoTask>();

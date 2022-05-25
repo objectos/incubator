@@ -22,14 +22,14 @@ import java.nio.charset.Charset;
 import java.nio.charset.CharsetDecoder;
 import java.nio.charset.CoderResult;
 import objectos.lang.Checks;
-import objectos.lang.Event1;
-import objectos.lang.Logger;
+import objectos.lang.Note1;
+import objectos.lang.NoteSink;
 
 final class ReadCommit implements ObjectReaderAdapter {
 
-  private static final Event1<ObjectId> ESTART = Event1.debug();
+  private static final Note1<ObjectId> ESTART = Note1.debug();
 
-  private static final Event1<ObjectId> ESUCCESS = Event1.debug();
+  private static final Note1<ObjectId> ESUCCESS = Note1.debug();
 
   static final byte _BEFORE_IDENTIFICATION = 1;
 
@@ -101,7 +101,7 @@ final class ReadCommit implements ObjectReaderAdapter {
 
   private String line;
 
-  private Logger logger;
+  private NoteSink logger;
 
   private ObjectId objectId;
 

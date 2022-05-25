@@ -16,7 +16,7 @@
 package br.com.objectos.smtp;
 
 import br.com.objectos.comuns.net.SocketChannelFactory;
-import objectos.lang.Logger;
+import objectos.lang.NoteSink;
 
 public interface ServerBuilder {
 
@@ -24,7 +24,7 @@ public interface ServerBuilder {
 
   void setListenSmtp(SocketChannelFactory listen);
 
-  void setLogger(Logger logger);
+  void setLogger(NoteSink logger);
 
   void setMailStore(MailStore store);
 

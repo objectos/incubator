@@ -15,13 +15,13 @@
  */
 package br.com.objectos.http;
 
-import objectos.lang.Event;
-import objectos.lang.NoOpLogger;
+import objectos.lang.Note;
+import objectos.lang.NoOpNoteSink;
 
-final class HttpTestingLogger extends NoOpLogger {
+final class HttpTestingLogger extends NoOpNoteSink {
 
   @Override
-  public final boolean isEnabled(Event event) {
+  public final boolean isEnabled(Note event) {
     return super.isEnabled(event);
   }
 

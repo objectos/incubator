@@ -22,7 +22,7 @@ import java.net.SocketAddress;
 import java.nio.channels.SocketChannel;
 import java.util.Random;
 import objectos.lang.Checks;
-import objectos.lang.Logger;
+import objectos.lang.NoteSink;
 
 /**
  * @since 4
@@ -90,7 +90,7 @@ public final class HttpService extends AbstractService {
     };
   }
 
-  public static Option logger(Logger logger) {
+  public static Option logger(NoteSink logger) {
     Checks.checkNotNull(logger, "logger == null");
 
     return new Option() {

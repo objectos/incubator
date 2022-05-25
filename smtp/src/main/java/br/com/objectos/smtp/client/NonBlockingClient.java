@@ -30,20 +30,20 @@ import java.nio.charset.CharsetDecoder;
 import java.nio.charset.CharsetEncoder;
 import java.nio.charset.CoderResult;
 import objectos.lang.Checks;
-import objectos.lang.Event1;
-import objectos.lang.Logger;
+import objectos.lang.Note1;
+import objectos.lang.NoteSink;
 
 public class NonBlockingClient implements Client {
 
-  private static final Event1<IOException> CLOSE_FAILED = Event1.error();
+  private static final Note1<IOException> CLOSE_FAILED = Note1.error();
 
-  private final Logger logger;
+  private final NoteSink logger;
 
   private final ThisClientSession[] sessions = new ThisClientSession[2];
 
   private int sessionsSize;
 
-  private NonBlockingClient(Logger logger) {
+  private NonBlockingClient(NoteSink logger) {
     this.logger = logger;
   }
 
@@ -131,11 +131,11 @@ public class NonBlockingClient implements Client {
 
   private static class Builder implements ClientBuilder {
 
-    private Logger logger;
+    private NoteSink logger;
 
     @Override
     public final Client build() throws ConfigurationException {
-      Logger theLogger = logger;
+      NoteSink theLogger = logger;
 
       if (theLogger == null) {
         throw new ConfigurationException("logger was not set");
@@ -145,7 +145,7 @@ public class NonBlockingClient implements Client {
     }
 
     @Override
-    public final void setLogger(Logger logger) {
+    public final void setLogger(NoteSink logger) {
       Checks.checkState(this.logger == null, "logger was already set");
 
       this.logger = Checks.checkNotNull(logger, "logger == null");

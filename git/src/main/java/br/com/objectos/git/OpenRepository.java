@@ -23,7 +23,7 @@ import br.com.objectos.fs.PathNameVisitor;
 import br.com.objectos.fs.RegularFile;
 import br.com.objectos.fs.ResolvedPath;
 import java.io.IOException;
-import objectos.lang.Event1;
+import objectos.lang.Note1;
 
 /**
  * Opens a Git repository.
@@ -32,9 +32,9 @@ import objectos.lang.Event1;
  */
 final class OpenRepository extends AbstractGitEngineTask {
 
-  private static final Event1<Directory> ESTART = Event1.debug();
+  private static final Note1<Directory> ESTART = Note1.debug();
 
-  private static final Event1<Repository> ESUCCESS = Event1.debug();
+  private static final Note1<Repository> ESUCCESS = Note1.debug();
 
   private static final byte _MAYBE_PACKS = 1;
 

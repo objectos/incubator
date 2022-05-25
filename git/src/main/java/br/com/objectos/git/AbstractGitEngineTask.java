@@ -21,10 +21,10 @@ import br.com.objectos.concurrent.IoWorker;
 import java.io.Closeable;
 import java.io.IOException;
 import objectos.lang.Checks;
-import objectos.lang.Event0;
-import objectos.lang.Event1;
-import objectos.lang.Event2;
-import objectos.lang.Logger;
+import objectos.lang.Note0;
+import objectos.lang.Note1;
+import objectos.lang.Note2;
+import objectos.lang.NoteSink;
 import objectos.lang.Throwables;
 
 abstract class AbstractGitEngineTask implements CpuTask, IoTask {
@@ -57,7 +57,7 @@ abstract class AbstractGitEngineTask implements CpuTask, IoTask {
 
   private IoWorker ioWorker;
 
-  private Logger logger;
+  private NoteSink logger;
 
   private Object result;
 
@@ -213,15 +213,15 @@ abstract class AbstractGitEngineTask implements CpuTask, IoTask {
     ioReady = newState;
   }
 
-  final void log(Event0 event) {
+  final void log(Note0 event) {
     logger.log(event);
   }
 
-  final <T1> void log(Event1<T1> event, T1 v1) {
+  final <T1> void log(Note1<T1> event, T1 v1) {
     logger.log(event, v1);
   }
 
-  final <T1, T2> void log(Event2<T1, T2> event, T1 v1, T2 v2) {
+  final <T1, T2> void log(Note2<T1, T2> event, T1 v1, T2 v2) {
     logger.log(event, v1, v2);
   }
 

@@ -16,13 +16,13 @@
 package br.com.objectos.logger;
 
 import objectos.lang.Checks;
-import objectos.lang.Event;
-import objectos.lang.Event0;
-import objectos.lang.Event1;
-import objectos.lang.Event2;
-import objectos.lang.Event3;
+import objectos.lang.Note;
+import objectos.lang.Note0;
+import objectos.lang.Note1;
+import objectos.lang.Note2;
+import objectos.lang.Note3;
 import objectos.lang.Level;
-import objectos.lang.Logger;
+import objectos.lang.NoteSink;
 
 abstract class AbstractConfigurableLogger implements ConfigurableLogger {
 
@@ -41,7 +41,7 @@ abstract class AbstractConfigurableLogger implements ConfigurableLogger {
    * {@inheritDoc}
    */
   @Override
-  public final boolean isEnabled(Event event) {
+  public final boolean isEnabled(Note event) {
     if (event == null) {
       return false;
     }
@@ -53,7 +53,7 @@ abstract class AbstractConfigurableLogger implements ConfigurableLogger {
    * {@inheritDoc}
    */
   @Override
-  public final void log(Event0 event) {
+  public final void log(Note0 event) {
     if (event == null) {
       return;
     }
@@ -71,7 +71,7 @@ abstract class AbstractConfigurableLogger implements ConfigurableLogger {
    * {@inheritDoc}
    */
   @Override
-  public final <T1> void log(Event1<T1> event, T1 v1) {
+  public final <T1> void log(Note1<T1> event, T1 v1) {
     if (event == null) {
       return;
     }
@@ -89,7 +89,7 @@ abstract class AbstractConfigurableLogger implements ConfigurableLogger {
    * {@inheritDoc}
    */
   @Override
-  public final <T1, T2> void log(Event2<T1, T2> event, T1 v1, T2 v2) {
+  public final <T1, T2> void log(Note2<T1, T2> event, T1 v1, T2 v2) {
     if (event == null) {
       return;
     }
@@ -107,7 +107,7 @@ abstract class AbstractConfigurableLogger implements ConfigurableLogger {
    * {@inheritDoc}
    */
   @Override
-  public final <T1, T2, T3> void log(Event3<T1, T2, T3> event, T1 v1, T2 v2, T3 v3) {
+  public final <T1, T2, T3> void log(Note3<T1, T2, T3> event, T1 v1, T2 v2, T3 v3) {
     if (event == null) {
       return;
     }
@@ -122,7 +122,7 @@ abstract class AbstractConfigurableLogger implements ConfigurableLogger {
   }
 
   @Override
-  public Logger replace(Logger logger) {
+  public NoteSink replace(NoteSink logger) {
     return logger;
   }
 

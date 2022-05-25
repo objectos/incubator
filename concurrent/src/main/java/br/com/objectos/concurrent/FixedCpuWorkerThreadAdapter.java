@@ -15,8 +15,8 @@
  */
 package br.com.objectos.concurrent;
 
-import objectos.lang.Event0;
-import objectos.lang.Event1;
+import objectos.lang.Note0;
+import objectos.lang.Note1;
 
 abstract class FixedCpuWorkerThreadAdapter {
 
@@ -30,9 +30,9 @@ abstract class FixedCpuWorkerThreadAdapter {
 
   abstract boolean interrupted();
 
-  abstract void log(Event0 event);
+  abstract void log(Note0 event);
 
-  abstract <T1> void log(Event1<T1> event, T1 t1);
+  abstract <T1> void log(Note1<T1> event, T1 t1);
 
   abstract CpuTask poll();
 

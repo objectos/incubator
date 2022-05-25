@@ -23,7 +23,7 @@ import br.com.objectos.fs.RegularFile;
 import br.com.objectos.fs.ResolvedPath;
 import java.nio.charset.Charset;
 import objectos.lang.Checks;
-import objectos.lang.Logger;
+import objectos.lang.NoteSink;
 
 public final class Client {
 
@@ -37,7 +37,7 @@ public final class Client {
 
   private AbstractClientJob<?> job;
 
-  private final Logger logger;
+  private final NoteSink logger;
 
   private final LoginPathFile loginPathFile;
 
@@ -45,7 +45,7 @@ public final class Client {
                  ConfigurationFile configurationFile,
                  LoginPathFile loginPathFile,
                  IoWorker ioWorker,
-                 Logger logger) {
+                 NoteSink logger) {
     this.directory = directory;
     this.configurationFile = configurationFile;
     this.loginPathFile = loginPathFile;
@@ -56,7 +56,7 @@ public final class Client {
   public static Client createClient(
       Directory directory,
       ConfigurationFile configurationFile, LoginPathFile loginPathFile,
-      IoWorker ioWorker, Logger logger) {
+      IoWorker ioWorker, NoteSink logger) {
     Checks.checkNotNull(directory, "directory == null");
     Checks.checkNotNull(configurationFile, "configurationFile == null");
     Checks.checkNotNull(loginPathFile, "loginPathFile == null");
@@ -211,7 +211,7 @@ public final class Client {
     return ioWorker;
   }
 
-  final Logger getLogger() {
+  final NoteSink getLogger() {
     return logger;
   }
 

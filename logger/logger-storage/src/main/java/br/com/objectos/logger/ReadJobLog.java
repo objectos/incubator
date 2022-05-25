@@ -16,13 +16,13 @@
 package br.com.objectos.logger;
 
 import java.util.List;
-import objectos.lang.Event;
+import objectos.lang.Note;
 
 abstract class ReadJobLog extends Log {
 
   abstract void acceptValues(List<String> list);
 
-  final boolean matchesEvent(Event event) {
+  final boolean matchesEvent(Note event) {
     return key.equals(event.key())
         && level.equals(event.level())
         && source.equals(getSource(event));
@@ -37,7 +37,7 @@ abstract class ReadJobLog extends Log {
 
   abstract void setThrowable(int index, ReadJobThrowable throwable);
 
-  private String getSource(Event event) {
+  private String getSource(Note event) {
     return event.source();
   }
 

@@ -16,8 +16,8 @@
 package br.com.objectos.git;
 
 import br.com.objectos.concurrent.IoWorker;
-import objectos.lang.Logger;
-import objectos.lang.NoOpLogger;
+import objectos.lang.NoteSink;
+import objectos.lang.NoOpNoteSink;
 
 final class GitEngineBuilder {
 
@@ -25,7 +25,7 @@ final class GitEngineBuilder {
 
   private final IoWorker ioWorker;
 
-  private Logger logger = NoOpLogger.getInstance();
+  private NoteSink logger = NoOpNoteSink.getInstance();
 
   GitEngineBuilder(IoWorker ioWorker) {
     this.ioWorker = ioWorker;
@@ -35,7 +35,7 @@ final class GitEngineBuilder {
     bufferSize = size;
   }
 
-  public final void setLogger(Logger logger) {
+  public final void setLogger(NoteSink logger) {
     this.logger = logger;
   }
 

@@ -29,13 +29,13 @@ import java.nio.charset.CharsetEncoder;
 import java.nio.charset.CoderResult;
 import java.security.MessageDigest;
 import java.util.zip.Deflater;
-import objectos.lang.Event1;
+import objectos.lang.Note1;
 
 final class WriteCommit extends AbstractGitEngineTask {
 
-  private static final Event1<MutableCommit> ESTART = Event1.debug();
+  private static final Note1<MutableCommit> ESTART = Note1.debug();
 
-  private static final Event1<ObjectId> ESUCCESS = Event1.debug();
+  private static final Note1<ObjectId> ESUCCESS = Note1.debug();
 
   static final byte _ASSEMBLE = 1;
 

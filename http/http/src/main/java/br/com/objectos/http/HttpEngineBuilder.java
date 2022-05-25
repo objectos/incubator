@@ -16,8 +16,8 @@
 package br.com.objectos.http;
 
 import br.com.objectos.concurrent.IoWorker;
-import objectos.lang.Logger;
-import objectos.lang.NoOpLogger;
+import objectos.lang.NoteSink;
+import objectos.lang.NoOpNoteSink;
 
 final class HttpEngineBuilder {
 
@@ -25,7 +25,7 @@ final class HttpEngineBuilder {
 
   private final IoWorker ioWorker;
 
-  private Logger logger = NoOpLogger.getInstance();
+  private NoteSink logger = NoOpNoteSink.getInstance();
 
   private final HttpProcessor processor;
 
@@ -45,7 +45,7 @@ final class HttpEngineBuilder {
     bufferSize = size;
   }
 
-  public final void setLogger(Logger logger) {
+  public final void setLogger(NoteSink logger) {
     this.logger = logger;
   }
 

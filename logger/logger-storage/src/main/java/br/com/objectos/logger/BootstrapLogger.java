@@ -18,7 +18,7 @@ package br.com.objectos.logger;
 import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.core.list.MutableList;
 import objectos.lang.Checks;
-import objectos.lang.Logger;
+import objectos.lang.NoteSink;
 
 /**
  * An in-memory logger implementation that can be used to bootstrap a
@@ -75,7 +75,7 @@ public final class BootstrapLogger extends AbstractConfigurableLogger {
    * @return the specified logger
    */
   @Override
-  public final Logger replace(Logger logger) {
+  public final NoteSink replace(NoteSink logger) {
     Checks.checkNotNull(logger, "logger == null");
 
     ImmutableList<WriteJobLog> list;

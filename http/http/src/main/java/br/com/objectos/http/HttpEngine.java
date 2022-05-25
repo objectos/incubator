@@ -32,7 +32,7 @@ import java.nio.charset.CoderResult;
 import java.text.DateFormat;
 import java.util.Date;
 import objectos.lang.Checks;
-import objectos.lang.Logger;
+import objectos.lang.NoteSink;
 
 /**
  * @since 4
@@ -120,7 +120,7 @@ final class HttpEngine implements CpuTask, IoTask, HttpResponseHandle {
   private final IoWorker ioWorker;
 
   @SuppressWarnings("unused")
-  private final Logger logger;
+  private final NoteSink logger;
 
   private Method method;
 
@@ -136,7 +136,7 @@ final class HttpEngine implements CpuTask, IoTask, HttpResponseHandle {
 
   HttpEngine(int bufferSize,
              IoWorker ioWorker,
-             Logger logger,
+             NoteSink logger,
              HttpProcessor processor,
              StringDeduplicator stringDeduplicator) {
     byteBuffer = ByteBuffer.allocate(bufferSize);

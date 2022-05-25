@@ -15,12 +15,12 @@
  */
 package br.com.objectos.git;
 
-import objectos.lang.Event1;
+import objectos.lang.Note1;
 import objectos.lang.ToString;
 
 final class ReadTreeTask extends AbstractGitTask<Tree> {
 
-  static final Event1<ObjectId> ESET_INPUT = Event1.debug();
+  static final Note1<ObjectId> ESET_INPUT = Note1.debug();
 
   private final ObjectId id;
 

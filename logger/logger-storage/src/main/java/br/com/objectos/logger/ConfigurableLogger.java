@@ -17,17 +17,17 @@ package br.com.objectos.logger;
 
 import java.io.Closeable;
 import objectos.lang.Level;
-import objectos.lang.Logger;
+import objectos.lang.NoteSink;
 
 /**
- * A {@link Logger} that allows for setting its level.
+ * A {@link NoteSink} that allows for setting its level.
  *
  * @since 2
  */
 public interface ConfigurableLogger
     extends
     Closeable,
-    Logger {
+    NoteSink {
 
   /**
    * Sets the logging level of this logger so it will only log events having the

@@ -19,8 +19,8 @@ import br.com.objectos.concurrent.CpuArray;
 import br.com.objectos.concurrent.CpuWorker;
 import br.com.objectos.concurrent.IoWorker;
 import objectos.lang.Checks;
-import objectos.lang.Logger;
-import objectos.lang.NoOpLogger;
+import objectos.lang.NoteSink;
+import objectos.lang.NoOpNoteSink;
 
 /**
  * @since 3
@@ -35,7 +35,7 @@ final class GitServiceBuilder {
 
   private final IoWorker ioWorker;
 
-  private Logger logger = NoOpLogger.getInstance();
+  private NoteSink logger = NoOpNoteSink.getInstance();
 
   GitServiceBuilder(CpuArray cpuArray, IoWorker ioWorker) {
     this.cpuArray = Checks.checkNotNull(cpuArray, "cpuArray == null");
@@ -74,7 +74,7 @@ final class GitServiceBuilder {
     enginesPerWorker = value;
   }
 
-  final void setLogger(Logger logger) {
+  final void setLogger(NoteSink logger) {
     this.logger = logger;
   }
 

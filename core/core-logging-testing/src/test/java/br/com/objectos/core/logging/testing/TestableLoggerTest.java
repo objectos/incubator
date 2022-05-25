@@ -21,10 +21,10 @@ import static org.testng.Assert.assertSame;
 import static org.testng.Assert.assertTrue;
 
 import java.io.IOException;
-import objectos.lang.Event0;
-import objectos.lang.Event1;
-import objectos.lang.Event2;
-import objectos.lang.Event3;
+import objectos.lang.Note0;
+import objectos.lang.Note1;
+import objectos.lang.Note2;
+import objectos.lang.Note3;
 import org.testng.annotations.Test;
 
 public class TestableLoggerTest {
@@ -34,8 +34,8 @@ public class TestableLoggerTest {
     TestableLogger logger;
     logger = new TestableLogger();
 
-    Event0 e0;
-    e0 = Event0.info();
+    Note0 e0;
+    e0 = Note0.info();
 
     assertFalse(logger.contains(e0));
 
@@ -43,8 +43,8 @@ public class TestableLoggerTest {
 
     assertTrue(logger.contains(e0));
 
-    Event1<IOException> e1;
-    e1 = Event1.info();
+    Note1<IOException> e1;
+    e1 = Note1.info();
 
     assertFalse(logger.contains(e1));
 
@@ -62,8 +62,8 @@ public class TestableLoggerTest {
 
     assertSame(log1.getValue(), ioException);
 
-    Event2<Integer, Double> e2;
-    e2 = Event2.info();
+    Note2<Integer, Double> e2;
+    e2 = Note2.info();
 
     assertFalse(logger.contains(e2));
 
@@ -71,8 +71,8 @@ public class TestableLoggerTest {
 
     assertTrue(logger.contains(e2));
 
-    Event3<String, String, String> e3;
-    e3 = Event3.info();
+    Note3<String, String, String> e3;
+    e3 = Note3.info();
 
     assertFalse(logger.contains(e3));
 

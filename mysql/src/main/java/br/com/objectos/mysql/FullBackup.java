@@ -23,9 +23,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.zip.GZIPOutputStream;
-import objectos.lang.Event1;
-import objectos.lang.Event2;
-import objectos.lang.Logger;
+import objectos.lang.Note1;
+import objectos.lang.Note2;
+import objectos.lang.NoteSink;
 
 final class FullBackup extends AbstractClientJob<RegularFile> {
 
@@ -33,13 +33,13 @@ final class FullBackup extends AbstractClientJob<RegularFile> {
 
   private static final byte _COPY = 1;
 
-  private static final Event1<Exception> EFAILED = Event1.error();
+  private static final Note1<Exception> EFAILED = Note1.error();
 
-  private static final Event2<LoginPath, String> ESTART = Event2.info();
+  private static final Note2<LoginPath, String> ESTART = Note2.info();
 
-  private static final Event1<String> ESTART_PROCESS = Event1.debug();
+  private static final Note1<String> ESTART_PROCESS = Note1.debug();
 
-  private static final Event2<Long, String> ESUCCESS = Event2.info();
+  private static final Note2<Long, String> ESUCCESS = Note2.info();
 
   private static final byte IO_CLOSE = 0;
 
@@ -55,7 +55,7 @@ final class FullBackup extends AbstractClientJob<RegularFile> {
 
   private InputStream inputStream;
 
-  private final Logger logger;
+  private final NoteSink logger;
 
   private final LoginPath loginPath;
 

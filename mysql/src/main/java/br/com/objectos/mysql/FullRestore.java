@@ -18,27 +18,27 @@ package br.com.objectos.mysql;
 import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.fs.RegularFile;
 import java.io.IOException;
-import objectos.lang.Event1;
-import objectos.lang.Event2;
-import objectos.lang.Logger;
+import objectos.lang.Note1;
+import objectos.lang.Note2;
+import objectos.lang.NoteSink;
 
 final class FullRestore extends AbstractClientJob<ImmutableList<String>> {
 
   private static final byte _FLUSH_PRIVILEGES = 0;
 
-  private static final Event1<Exception> EFAILED = Event1.error();
+  private static final Note1<Exception> EFAILED = Note1.error();
 
-  private static final Event1<Long> EFINISH = Event1.info();
+  private static final Note1<Long> EFINISH = Note1.info();
 
-  private static final Event1<String> EINVALID_FULLNAME = Event1.info();
+  private static final Note1<String> EINVALID_FULLNAME = Note1.info();
 
-  private static final Event2<LoginPath, String> ESTART = Event2.info();
+  private static final Note2<LoginPath, String> ESTART = Note2.info();
 
   private static final String[] FLUSH_PRIVILEGES_INPUT = new String[] {"FLUSH PRIVILEGES;"};
 
   private final RegularFile file;
 
-  private final Logger logger;
+  private final NoteSink logger;
 
   private final LoginPath loginPath;
 

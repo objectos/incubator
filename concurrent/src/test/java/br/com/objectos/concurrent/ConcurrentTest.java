@@ -25,7 +25,7 @@ import static org.testng.Assert.assertTrue;
 import br.com.objectos.core.logging.testing.TestableLogger;
 import br.com.objectos.core.service.Services;
 import java.io.IOException;
-import objectos.lang.NoOpLogger;
+import objectos.lang.NoOpNoteSink;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
@@ -119,7 +119,7 @@ public class ConcurrentTest implements IoTask {
   @Test
   public void setLogger() {
     try {
-      fixedCpuWorker.setLogger(NoOpLogger.getInstance());
+      fixedCpuWorker.setLogger(NoOpNoteSink.getInstance());
 
       Assert.fail("expected exception was not thrown");
     } catch (IllegalStateException expected) {
@@ -130,7 +130,7 @@ public class ConcurrentTest implements IoTask {
     }
 
     try {
-      singleThreadIoWorker.setLogger(NoOpLogger.getInstance());
+      singleThreadIoWorker.setLogger(NoOpNoteSink.getInstance());
 
       Assert.fail("expected exception was not thrown");
     } catch (IllegalStateException expected) {

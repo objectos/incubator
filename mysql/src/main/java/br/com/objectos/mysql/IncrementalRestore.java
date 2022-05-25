@@ -25,9 +25,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.zip.GZIPInputStream;
-import objectos.lang.Event0;
-import objectos.lang.Event1;
-import objectos.lang.Logger;
+import objectos.lang.Note0;
+import objectos.lang.Note1;
+import objectos.lang.NoteSink;
 import objectos.lang.RandomString;
 import objectos.lang.Throwables;
 
@@ -41,13 +41,13 @@ final class IncrementalRestore extends AbstractClientJob<ImmutableList<String>> 
 
   private static final byte COPY = 2;
 
-  private static final Event0 EEMPTY_INPUT = Event0.warn();
+  private static final Note0 EEMPTY_INPUT = Note0.warn();
 
-  private static final Event1<Exception> EFAILED = Event1.error();
+  private static final Note1<Exception> EFAILED = Note1.error();
 
-  private static final Event1<Long> EFINISH = Event1.info();
+  private static final Note1<Long> EFINISH = Note1.info();
 
-  private static final Event0 ESTART = Event0.info();
+  private static final Note0 ESTART = Note0.info();
 
   private static final byte IO_CLOSE = 0;
 
@@ -71,7 +71,7 @@ final class IncrementalRestore extends AbstractClientJob<ImmutableList<String>> 
 
   private InputStream inputStream;
 
-  private final Logger logger;
+  private final NoteSink logger;
 
   private final LoginPath loginPath;
 

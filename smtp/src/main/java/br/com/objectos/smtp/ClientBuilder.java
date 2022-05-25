@@ -15,12 +15,12 @@
  */
 package br.com.objectos.smtp;
 
-import objectos.lang.Logger;
+import objectos.lang.NoteSink;
 
 public interface ClientBuilder {
 
   Client build() throws ConfigurationException;
 
-  void setLogger(Logger logger);
+  void setLogger(NoteSink logger);
 
 }

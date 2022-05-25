@@ -16,18 +16,18 @@
 package br.com.objectos.core.logging.testing;
 
 import objectos.lang.Equals;
-import objectos.lang.Event;
-import objectos.lang.Event1;
+import objectos.lang.Note;
+import objectos.lang.Note1;
 import objectos.lang.ToString;
 
 /**
- * An {@link Event1} log instance.
+ * An {@link Note1} log instance.
  *
  * @param <T1> the type of the log value
  */
 public final class Event1Log<T1> extends Log {
 
-  final Event1<T1> event;
+  final Note1<T1> event;
 
   final T1 value;
 
@@ -39,7 +39,7 @@ public final class Event1Log<T1> extends Log {
    * @param value
    *        the value associated with the event
    */
-  public Event1Log(Event1<T1> event, T1 value) {
+  public Event1Log(Note1<T1> event, T1 value) {
     super(event);
 
     this.event = event;
@@ -64,7 +64,7 @@ public final class Event1Log<T1> extends Log {
    *
    * @return the event associated with this log instance
    */
-  public final Event1<T1> getEvent() {
+  public final Note1<T1> getEvent() {
     return event;
   }
 
@@ -81,7 +81,7 @@ public final class Event1Log<T1> extends Log {
    * {@inheritDoc}
    */
   @Override
-  public final <X1> boolean isEvent1(Event1<X1> event, X1 value) {
+  public final <X1> boolean isEvent1(Note1<X1> event, X1 value) {
     return Equals.objects(
       this.event, event,
       this.value, value
@@ -97,7 +97,7 @@ public final class Event1Log<T1> extends Log {
   }
 
   @Override
-  final boolean hasEvent(Event event) {
+  final boolean hasEvent(Note event) {
     return Equals.objects(this.event, event);
   }
 

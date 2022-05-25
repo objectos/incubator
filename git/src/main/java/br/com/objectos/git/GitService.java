@@ -22,8 +22,8 @@ import br.com.objectos.concurrent.IoWorker;
 import br.com.objectos.core.set.ImmutableSet;
 import br.com.objectos.fs.Directory;
 import objectos.lang.Checks;
-import objectos.lang.Logger;
-import objectos.lang.NoOpLogger;
+import objectos.lang.NoteSink;
+import objectos.lang.NoOpNoteSink;
 
 /**
  * A class for supporting the execution of {@link GitCommand} instances.
@@ -144,9 +144,9 @@ public final class GitService implements GitExecutor {
    * <td>{@code 1}</td>
    * </tr>
    * <tr>
-   * <th scope="row">{@link GitService#logger(Logger) logger}</th>
+   * <th scope="row">{@link GitService#logger(NoteSink) logger}</th>
    * <td>The logger instance to use</td>
-   * <td>{@link NoOpLogger#getInstance()}</td>
+   * <td>{@link NoOpNoteSink#getInstance()}</td>
    * </tr>
    * </tbody>
    * </table>
@@ -230,7 +230,7 @@ public final class GitService implements GitExecutor {
    *
    * @return a new option that sets the logger instance to the specified value
    */
-  public static Option logger(final Logger logger) {
+  public static Option logger(final NoteSink logger) {
     Checks.checkNotNull(logger, "logger == null");
 
     return new Option() {

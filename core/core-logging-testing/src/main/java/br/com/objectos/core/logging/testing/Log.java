@@ -18,11 +18,11 @@ package br.com.objectos.core.logging.testing;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import objectos.lang.Event;
-import objectos.lang.Event0;
-import objectos.lang.Event1;
-import objectos.lang.Event2;
-import objectos.lang.Event3;
+import objectos.lang.Note;
+import objectos.lang.Note0;
+import objectos.lang.Note1;
+import objectos.lang.Note2;
+import objectos.lang.Note3;
 import objectos.lang.Level;
 import objectos.lang.ToString;
 import objectos.lang.ToStringObject;
@@ -32,13 +32,13 @@ import objectos.lang.ToStringObject;
  */
 public abstract class Log implements ToStringObject {
 
-  private final Event _event;
+  private final Note _event;
 
   private final String thread;
 
   private final long timestamp;
 
-  Log(Event event) {
+  Log(Note event) {
     _event = event;
 
     Thread currentThread;
@@ -71,7 +71,7 @@ public abstract class Log implements ToStringObject {
    * @return {@code true} if this log instance resulted from the specified
    *         event and {@code false} otherwise
    */
-  public boolean isEvent0(Event0 event) {
+  public boolean isEvent0(Note0 event) {
     return false;
   }
 
@@ -89,7 +89,7 @@ public abstract class Log implements ToStringObject {
    * @return {@code true} if this log instance resulted from the specified
    *         event and value; {@code false} otherwise
    */
-  public <X1> boolean isEvent1(Event1<X1> event, X1 value) {
+  public <X1> boolean isEvent1(Note1<X1> event, X1 value) {
     return false;
   }
 
@@ -110,7 +110,7 @@ public abstract class Log implements ToStringObject {
    * @return {@code true} if this log instance resulted from the specified
    *         event and values; {@code false} otherwise
    */
-  public <X1, X2> boolean isEvent2(Event2<X1, X2> event, X1 value1, X2 value2) {
+  public <X1, X2> boolean isEvent2(Note2<X1, X2> event, X1 value1, X2 value2) {
     return false;
   }
 
@@ -134,7 +134,7 @@ public abstract class Log implements ToStringObject {
    * @return {@code true} if this log instance resulted from the specified
    *         event and values; {@code false} otherwise
    */
-  public <X1, X2, X3> boolean isEvent3(Event3<X1, X2, X3> event, X1 value1, X2 value2, X3 value3) {
+  public <X1, X2, X3> boolean isEvent3(Note3<X1, X2, X3> event, X1 value1, X2 value2, X3 value3) {
     return false;
   }
 
@@ -170,11 +170,11 @@ public abstract class Log implements ToStringObject {
     return ToString.toString(this);
   }
 
-  abstract boolean hasEvent(Event event);
+  abstract boolean hasEvent(Note event);
 
   abstract void print();
 
-  final void print0(Event event) {
+  final void print0(Note event) {
     StringBuilder out;
     out = new StringBuilder();
 

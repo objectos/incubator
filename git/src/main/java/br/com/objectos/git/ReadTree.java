@@ -22,14 +22,14 @@ import java.nio.charset.CharacterCodingException;
 import java.nio.charset.Charset;
 import java.nio.charset.CharsetDecoder;
 import objectos.lang.Checks;
-import objectos.lang.Event1;
-import objectos.lang.Logger;
+import objectos.lang.Note1;
+import objectos.lang.NoteSink;
 
 final class ReadTree implements ObjectReaderAdapter {
 
-  static final Event1<ObjectId> ESTART = Event1.debug();
+  static final Note1<ObjectId> ESTART = Note1.debug();
 
-  static final Event1<ObjectId> ESUCCESS = Event1.debug();
+  static final Note1<ObjectId> ESUCCESS = Note1.debug();
 
   static final byte _NEXT_ENTRY = 1;
 
@@ -67,7 +67,7 @@ final class ReadTree implements ObjectReaderAdapter {
 
   private final GitInjector injector;
 
-  private Logger logger;
+  private NoteSink logger;
 
   private EntryMode mode;
 

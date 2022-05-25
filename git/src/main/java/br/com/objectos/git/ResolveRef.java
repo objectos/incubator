@@ -26,8 +26,8 @@ import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
 import java.nio.charset.CharsetDecoder;
 import java.nio.charset.CoderResult;
-import objectos.lang.Event1;
-import objectos.lang.Event2;
+import objectos.lang.Note1;
+import objectos.lang.Note2;
 
 /**
  * Resolves a Git reference.
@@ -36,9 +36,9 @@ import objectos.lang.Event2;
  */
 final class ResolveRef extends AbstractGitEngineTask {
 
-  private static final Event2<Repository, RefName> ESTART = Event2.debug();
+  private static final Note2<Repository, RefName> ESTART = Note2.debug();
 
-  private static final Event1<MaybeObjectId> ESUCCESS = Event1.debug();
+  private static final Note1<MaybeObjectId> ESUCCESS = Note1.debug();
 
   private static final byte _CLOSE = 1;
 

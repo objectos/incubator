@@ -19,8 +19,8 @@ import br.com.objectos.concurrent.CpuArray;
 import br.com.objectos.concurrent.CpuWorker;
 import br.com.objectos.concurrent.IoWorker;
 import java.net.SocketAddress;
-import objectos.lang.Logger;
-import objectos.lang.NoOpLogger;
+import objectos.lang.NoteSink;
+import objectos.lang.NoOpNoteSink;
 
 final class HttpServiceBuilder {
 
@@ -34,7 +34,7 @@ final class HttpServiceBuilder {
 
   private final IoWorker ioWorker;
 
-  private Logger logger = NoOpLogger.getInstance();
+  private NoteSink logger = NoOpNoteSink.getInstance();
 
   private final HttpProcessorProvider processorProvider;
 
@@ -77,7 +77,7 @@ final class HttpServiceBuilder {
     enginesPerWorker = value;
   }
 
-  final void setLogger(Logger logger) {
+  final void setLogger(NoteSink logger) {
     this.logger = logger;
   }
 

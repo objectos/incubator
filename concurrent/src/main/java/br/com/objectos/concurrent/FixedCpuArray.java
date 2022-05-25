@@ -15,8 +15,8 @@
  */
 package br.com.objectos.concurrent;
 
-import objectos.lang.Event0;
-import objectos.lang.Logger;
+import objectos.lang.Note0;
+import objectos.lang.NoteSink;
 
 /**
  * A {@link CpuArray} implementation consisting of {@link FixedCpuWorker}
@@ -26,7 +26,7 @@ import objectos.lang.Logger;
  */
 public final class FixedCpuArray extends CpuArrayService {
 
-  private static final Event0 STARTED = Event0.info();
+  private static final Note0 STARTED = Note0.info();
 
   private final FixedCpuWorker[] workers;
 
@@ -42,10 +42,10 @@ public final class FixedCpuArray extends CpuArrayService {
    * @param logger
    *        the logger to be used by this array and by each worker
    *
-   * @see FixedCpuWorker#FixedCpuWorker(int, int, Logger)
+   * @see FixedCpuWorker#FixedCpuWorker(int, int, NoteSink)
    * @see Runtime#availableProcessors()
    */
-  public FixedCpuArray(int activeCount, int queueCapacity, Logger logger) {
+  public FixedCpuArray(int activeCount, int queueCapacity, NoteSink logger) {
     Runtime runtime;
     runtime = Runtime.getRuntime();
 

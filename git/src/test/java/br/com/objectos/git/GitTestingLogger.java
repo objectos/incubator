@@ -15,22 +15,22 @@
  */
 package br.com.objectos.git;
 
-import objectos.lang.Event;
-import objectos.lang.Event2;
-import objectos.lang.NoOpLogger;
+import objectos.lang.Note;
+import objectos.lang.Note2;
+import objectos.lang.NoOpNoteSink;
 
-final class GitTestingLogger extends NoOpLogger {
+final class GitTestingLogger extends NoOpNoteSink {
 
   @SuppressWarnings("unused")
   private MutableTree testCase11Tree;
 
   @Override
-  public final boolean isEnabled(Event event) {
+  public final boolean isEnabled(Note event) {
     return super.isEnabled(event);
   }
 
   @Override
-  public final <T1, T2> void log(Event2<T1, T2> event, T1 v1, T2 v2) {
+  public final <T1, T2> void log(Note2<T1, T2> event, T1 v1, T2 v2) {
     if (event == GitEvents.writeTreeStart()) {
       writeTreeStart(v1, v2);
     }

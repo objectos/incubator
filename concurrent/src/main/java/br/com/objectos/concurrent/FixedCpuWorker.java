@@ -19,9 +19,9 @@ import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.locks.LockSupport;
 import objectos.lang.Checks;
-import objectos.lang.Event0;
-import objectos.lang.Event1;
-import objectos.lang.Logger;
+import objectos.lang.Note0;
+import objectos.lang.Note1;
+import objectos.lang.NoteSink;
 import objectos.lang.ToString;
 
 /**
@@ -35,19 +35,19 @@ import objectos.lang.ToString;
  */
 public final class FixedCpuWorker extends CpuWorkerService {
 
-  static final Event1<CpuTask> INTERRUPTED = Event1.info();
+  static final Note1<CpuTask> INTERRUPTED = Note1.info();
 
-  static final Event1<CpuTask> JOB_COMPLETED = Event1.debug();
+  static final Note1<CpuTask> JOB_COMPLETED = Note1.debug();
 
-  static final Event1<Throwable> JOB_EXCEPTION = Event1.error();
+  static final Note1<Throwable> JOB_EXCEPTION = Note1.error();
 
-  static final Event1<CpuTask> JOB_STARTED = Event1.debug();
+  static final Note1<CpuTask> JOB_STARTED = Note1.debug();
 
-  static final Event0 PARKED = Event0.debug();
+  static final Note0 PARKED = Note0.debug();
 
-  static final Event1<String> STARTED = Event1.info();
+  static final Note1<String> STARTED = Note1.info();
 
-  static final Event0 UNPARKED = Event0.trace();
+  static final Note0 UNPARKED = Note0.trace();
 
   private final BlockingQueue<CpuTask> queue;
 
@@ -67,7 +67,7 @@ public final class FixedCpuWorker extends CpuWorkerService {
    * @param logger
    *        the logger instance to be used for logging
    */
-  public FixedCpuWorker(int activeCount, int queueCapacity, Logger logger) {
+  public FixedCpuWorker(int activeCount, int queueCapacity, NoteSink logger) {
     Checks.checkArgument(activeCount > 0, "activeCount must be positive");
     Checks.checkArgument(queueCapacity > 0, "queueCapacity must be positive");
     Checks.checkNotNull(logger, "logger == null");
@@ -175,12 +175,12 @@ public final class FixedCpuWorker extends CpuWorkerService {
     }
 
     @Override
-    final void log(Event0 event) {
+    final void log(Note0 event) {
       logger.log(event);
     }
 
     @Override
-    final <T1> void log(Event1<T1> event, T1 t1) {
+    final <T1> void log(Note1<T1> event, T1 t1) {
       logger.log(event, t1);
     }
 

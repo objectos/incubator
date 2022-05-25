@@ -15,8 +15,8 @@
  */
 package br.com.objectos.git;
 
-import objectos.lang.Event1;
-import objectos.lang.Event2;
+import objectos.lang.Note1;
+import objectos.lang.Note2;
 
 /**
  * Provides access to the library's logging events.
@@ -27,23 +27,23 @@ final class GitEvents {
 
   private GitEvents() {}
 
-  public static Event1<ObjectId> objectReaderNextObject() {
+  public static Note1<ObjectId> objectReaderNextObject() {
     return ObjectReader.ENEXT_OBJECT;
   }
 
-  public static Event1<ObjectId> readTreeStart() {
+  public static Note1<ObjectId> readTreeStart() {
     return ReadTree.ESTART;
   }
 
-  public static Event1<ObjectId> readTreeTaskSetInput() {
+  public static Note1<ObjectId> readTreeTaskSetInput() {
     return ReadTreeTask.ESET_INPUT;
   }
 
-  public static Event2<GitCommand<?>, MutableTree> writeTreeStart() {
+  public static Note2<GitCommand<?>, MutableTree> writeTreeStart() {
     return WriteTree.ESTART;
   }
 
-  public static Event2<GitCommand<?>, ObjectId> writeTreeSuccess() {
+  public static Note2<GitCommand<?>, ObjectId> writeTreeSuccess() {
     return WriteTree.ESUCCESS;
   }
 

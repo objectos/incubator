@@ -29,12 +29,12 @@ import br.com.objectos.smtp.mail.SimpleReversePathFacade;
 import java.nio.charset.Charset;
 import java.nio.charset.CharsetDecoder;
 import objectos.lang.Checks;
-import objectos.lang.Event1;
-import objectos.lang.Logger;
+import objectos.lang.Note1;
+import objectos.lang.NoteSink;
 
 public final class NonBlockingServer implements Server {
 
-  private static final Event1<Exception> SESSION_EXCEPTION = Event1.error();
+  private static final Note1<Exception> SESSION_EXCEPTION = Note1.error();
 
   private final Lifecycle lifecycle;
 
@@ -72,7 +72,7 @@ public final class NonBlockingServer implements Server {
   private static class Builder implements ServerBuilder {
 
     private SocketChannelFactory listenSmtp;
-    private Logger logger;
+    private NoteSink logger;
     private MailStore mailStore;
 
     private Builder() {}
@@ -148,7 +148,7 @@ public final class NonBlockingServer implements Server {
     }
 
     @Override
-    public final void setLogger(Logger logger) {
+    public final void setLogger(NoteSink logger) {
       Checks.checkState(this.logger == null, "already set");
 
       this.logger = Checks.checkNotNull(logger, "logger == null");
@@ -165,9 +165,9 @@ public final class NonBlockingServer implements Server {
 
   private static class LoggerAdapter implements CommandParserAdapter, SessionLogger {
 
-    private final Logger logger;
+    private final NoteSink logger;
 
-    public LoggerAdapter(Logger logger) {
+    public LoggerAdapter(NoteSink logger) {
       this.logger = logger;
     }
 

@@ -18,7 +18,7 @@ package br.com.objectos.http;
 import br.com.objectos.concurrent.CpuWorker;
 import br.com.objectos.concurrent.IoWorker;
 import java.nio.channels.SocketChannel;
-import objectos.lang.Logger;
+import objectos.lang.NoteSink;
 
 /**
  * @since 4
@@ -30,9 +30,9 @@ final class HttpWorker {
   private final HttpEngine[] engines;
 
   @SuppressWarnings("unused")
-  private final Logger logger;
+  private final NoteSink logger;
 
-  HttpWorker(CpuWorker cpuWorker, Logger logger, HttpEngine[] engines) {
+  HttpWorker(CpuWorker cpuWorker, NoteSink logger, HttpEngine[] engines) {
     this.cpuWorker = cpuWorker;
 
     this.logger = logger;
@@ -44,7 +44,7 @@ final class HttpWorker {
       int bufferSize,
       CpuWorker cpuWorker,
       IoWorker ioWorker,
-      Logger logger,
+      NoteSink logger,
       int enginesPerWorker,
       HttpProcessorProvider processorProvider) {
     HttpEngine[] engines;

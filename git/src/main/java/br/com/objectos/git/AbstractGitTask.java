@@ -17,8 +17,8 @@ package br.com.objectos.git;
 
 import java.util.concurrent.ExecutionException;
 import objectos.lang.Checks;
-import objectos.lang.Event1;
-import objectos.lang.Logger;
+import objectos.lang.Note1;
+import objectos.lang.NoteSink;
 import objectos.lang.ToString;
 import objectos.lang.ToStringObject;
 
@@ -92,8 +92,8 @@ abstract class AbstractGitTask<V> implements GitTask<V>, ResultConsumer, ToStrin
 
   abstract AbstractGitEngineTask executeSetInputImpl();
 
-  final <V1> void log(Event1<V1> event, V1 v1) {
-    Logger logger;
+  final <V1> void log(Note1<V1> event, V1 v1) {
+    NoteSink logger;
     logger = engine.getLogger();
 
     logger.log(event, v1);

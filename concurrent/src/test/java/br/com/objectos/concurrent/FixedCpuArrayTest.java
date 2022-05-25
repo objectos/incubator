@@ -19,7 +19,7 @@ import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 
 import br.com.objectos.core.service.Services;
-import objectos.lang.NoOpLogger;
+import objectos.lang.NoOpNoteSink;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -29,7 +29,7 @@ public class FixedCpuArrayTest {
 
   @BeforeClass
   public void beforeClass() throws Exception {
-    array = new FixedCpuArray(100, 100, NoOpLogger.getInstance());
+    array = new FixedCpuArray(100, 100, NoOpNoteSink.getInstance());
 
     Services.start(
       array

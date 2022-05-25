@@ -21,7 +21,7 @@ import br.com.objectos.smtp.client.NonBlockingClient;
 import br.com.objectos.smtp.mail.FsMailStore;
 import br.com.objectos.smtp.server.NonBlockingServer;
 import objectos.lang.Checks;
-import objectos.lang.Logger;
+import objectos.lang.NoteSink;
 
 public final class Smtp {
 
@@ -49,7 +49,7 @@ public final class Smtp {
     };
   }
 
-  public static ClientOrServerOption logger(final Logger logger) {
+  public static ClientOrServerOption logger(final NoteSink logger) {
     Checks.checkNotNull(logger, "logger == null");
 
     return new ClientOrServerOption() {

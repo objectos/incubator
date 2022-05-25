@@ -21,16 +21,16 @@ import java.io.Closeable;
 import java.io.IOException;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
-import objectos.lang.Event1;
-import objectos.lang.Logger;
+import objectos.lang.Note1;
+import objectos.lang.NoteSink;
 
 public final class NonBlockingLifecycle implements Lifecycle {
 
-  private static final Event1<IOException> CLOSE_FAILED = Event1.error();
+  private static final Note1<IOException> CLOSE_FAILED = Note1.error();
 
-  private static final Event1<Exception> UNEXPECTED_EXECUTION_EXCEPTION = Event1.error();
+  private static final Note1<Exception> UNEXPECTED_EXECUTION_EXCEPTION = Note1.error();
 
-  private final Logger logger;
+  private final NoteSink logger;
 
   private final ServerSocketChannel serverSocketChannel;
 
@@ -40,7 +40,7 @@ public final class NonBlockingLifecycle implements Lifecycle {
 
   private int sessionsSize;
 
-  private NonBlockingLifecycle(Logger logger,
+  private NonBlockingLifecycle(NoteSink logger,
                                ServerSocketChannel serverSocketChannel,
                                SessionProvider sessionProvider) {
     this.logger = logger;
@@ -49,7 +49,7 @@ public final class NonBlockingLifecycle implements Lifecycle {
   }
 
   public static NonBlockingLifecycle create(
-      Logger logger,
+      NoteSink logger,
       SocketChannelFactory element,
       SessionProvider sessionProvider) throws ConfigurationException {
     try {

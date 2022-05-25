@@ -36,8 +36,8 @@ import java.util.Map;
 import java.util.zip.Deflater;
 import java.util.zip.Inflater;
 import objectos.lang.Checks;
-import objectos.lang.Logger;
-import objectos.lang.NoOpLogger;
+import objectos.lang.NoteSink;
+import objectos.lang.NoOpNoteSink;
 
 /**
  * A state machine providing low-level (plumbing) Git operations.
@@ -98,7 +98,7 @@ public final class GitEngine extends GitInjector {
 
   private final IoWorker ioWorker;
 
-  private final Logger logger;
+  private final NoteSink logger;
 
   private MaterializeEntry materializeEntry;
 
@@ -130,7 +130,7 @@ public final class GitEngine extends GitInjector {
 
   private WriteTree writeTree;
 
-  GitEngine(int bufferSize, IoWorker ioWorker, Logger logger) {
+  GitEngine(int bufferSize, IoWorker ioWorker, NoteSink logger) {
     this.bufferSize = bufferSize;
 
     this.ioWorker = ioWorker;
@@ -183,9 +183,9 @@ public final class GitEngine extends GitInjector {
    * <td>{@code 4096}</td>
    * </tr>
    * <tr>
-   * <th scope="row">{@link GitEngine#logger(Logger) logger}</th>
+   * <th scope="row">{@link GitEngine#logger(NoteSink) logger}</th>
    * <td>The logger instance the {@code GitEngine} will use</td>
-   * <td>{@link NoOpLogger#getInstance()}</td>
+   * <td>{@link NoOpNoteSink#getInstance()}</td>
    * </tr>
    * </tbody>
    * </table>
@@ -224,7 +224,7 @@ public final class GitEngine extends GitInjector {
    *
    * @return an option that sets the logger instance to the specified value
    */
-  public static Option logger(final Logger logger) {
+  public static Option logger(final NoteSink logger) {
     Checks.checkNotNull(logger, "logger == null");
 
     return new Option() {
@@ -681,7 +681,7 @@ public final class GitEngine extends GitInjector {
   }
 
   @Override
-  final Logger getLogger() {
+  final NoteSink getLogger() {
     return logger;
   }
 

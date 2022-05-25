@@ -31,11 +31,11 @@ import br.com.objectos.fs.testing.TmpDir;
 import br.com.objectos.fs.watch.Watch;
 import br.com.objectos.random.testing.Next;
 import java.io.IOException;
-import objectos.lang.Event0;
-import objectos.lang.Event1;
-import objectos.lang.Event2;
-import objectos.lang.Event3;
-import objectos.lang.Logger;
+import objectos.lang.Note0;
+import objectos.lang.Note1;
+import objectos.lang.Note2;
+import objectos.lang.Note3;
+import objectos.lang.NoteSink;
 import objectos.lang.ShutdownHook;
 import objectos.lang.Throwables;
 import org.testng.annotations.BeforeClass;
@@ -44,43 +44,43 @@ import org.testng.annotations.Test;
 
 public class MoreLoggingTest implements LogListener {
 
-  private static final Event0 DEBUG0 = Event0.debug();
+  private static final Note0 DEBUG0 = Note0.debug();
 
-  private static final Event1<Arg1> DEBUG1 = Event1.debug();
+  private static final Note1<Arg1> DEBUG1 = Note1.debug();
 
-  private static final Event2<Arg1, Arg2> DEBUG2 = Event2.debug();
+  private static final Note2<Arg1, Arg2> DEBUG2 = Note2.debug();
 
-  private static final Event3<Arg1, Arg2, Arg3> DEBUG3 = Event3.debug();
+  private static final Note3<Arg1, Arg2, Arg3> DEBUG3 = Note3.debug();
 
-  private static final Event1<Ex1> ERROR1 = Event1.error();
+  private static final Note1<Ex1> ERROR1 = Note1.error();
 
-  private static final Event2<Ex1, Ex2> ERROR2 = Event2.error();
+  private static final Note2<Ex1, Ex2> ERROR2 = Note2.error();
 
-  private static final Event3<Ex1, Ex2, Ex3> ERROR3 = Event3.error();
+  private static final Note3<Ex1, Ex2, Ex3> ERROR3 = Note3.error();
 
-  private static final Event0 INFO0 = Event0.info();
+  private static final Note0 INFO0 = Note0.info();
 
-  private static final Event1<Arg1> INFO1 = Event1.info();
+  private static final Note1<Arg1> INFO1 = Note1.info();
 
-  private static final Event2<Arg1, Arg2> INFO2 = Event2.info();
+  private static final Note2<Arg1, Arg2> INFO2 = Note2.info();
 
-  private static final Event3<Arg1, Arg2, Arg3> INFO3 = Event3.info();
+  private static final Note3<Arg1, Arg2, Arg3> INFO3 = Note3.info();
 
-  private static final Event0 TRACE0 = Event0.trace();
+  private static final Note0 TRACE0 = Note0.trace();
 
-  private static final Event1<Arg1> TRACE1 = Event1.trace();
+  private static final Note1<Arg1> TRACE1 = Note1.trace();
 
-  private static final Event2<Arg1, Arg2> TRACE2 = Event2.trace();
+  private static final Note2<Arg1, Arg2> TRACE2 = Note2.trace();
 
-  private static final Event3<Arg1, Arg2, Arg3> TRACE3 = Event3.trace();
+  private static final Note3<Arg1, Arg2, Arg3> TRACE3 = Note3.trace();
 
-  private static final Event0 WARN0 = Event0.warn();
+  private static final Note0 WARN0 = Note0.warn();
 
-  private static final Event1<Arg1> WARN1 = Event1.warn();
+  private static final Note1<Arg1> WARN1 = Note1.warn();
 
-  private static final Event2<Arg1, Arg2> WARN2 = Event2.warn();
+  private static final Note2<Arg1, Arg2> WARN2 = Note2.warn();
 
-  private static final Event3<Arg1, Arg2, Arg3> WARN3 = Event3.warn();
+  private static final Note3<Arg1, Arg2, Arg3> WARN3 = Note3.warn();
 
   private final MutableList<Log> logs = MutableList.create();
 
@@ -160,7 +160,7 @@ public class MoreLoggingTest implements LogListener {
 
   @Test(timeOut = 5000)
   public void testCase01() throws InterruptedException {
-    Logger logger;
+    NoteSink logger;
     logger = storageLogger;
 
     Arg1 arg1;
@@ -211,7 +211,7 @@ public class MoreLoggingTest implements LogListener {
 
   @Test(timeOut = 10000)
   public void testCase02() throws InterruptedException {
-    Logger logger;
+    NoteSink logger;
     logger = storageLogger;
 
     Ex1 ex1;
@@ -253,7 +253,7 @@ public class MoreLoggingTest implements LogListener {
     BootstrapLogger bootstrapLogger;
     bootstrapLogger = new BootstrapLogger();
 
-    Logger logger;
+    NoteSink logger;
     logger = bootstrapLogger;
 
     Arg1 arg1;
@@ -354,7 +354,7 @@ public class MoreLoggingTest implements LogListener {
     return stackTrace;
   }
 
-  private void testLog(Log log, Event0 event) {
+  private void testLog(Log log, Note0 event) {
     assertTrue(log instanceof ReadJobLog0);
 
     ReadJobLog0 read;
@@ -364,7 +364,7 @@ public class MoreLoggingTest implements LogListener {
     assertTrue(read.matchesThread(Thread.currentThread()));
   }
 
-  private <T1> void testLog(Log log, Event1<T1> event, T1 value) {
+  private <T1> void testLog(Log log, Note1<T1> event, T1 value) {
     assertTrue(log instanceof ReadJobLog1);
 
     ReadJobLog1 read;
@@ -379,7 +379,7 @@ public class MoreLoggingTest implements LogListener {
     testThrowable(read.throwable, value);
   }
 
-  private <T1, T2> void testLog(Log log, Event2<T1, T2> event, T1 value1, T2 value2) {
+  private <T1, T2> void testLog(Log log, Note2<T1, T2> event, T1 value1, T2 value2) {
     assertTrue(log instanceof ReadJobLog2);
 
     ReadJobLog2 read;
@@ -399,7 +399,7 @@ public class MoreLoggingTest implements LogListener {
   }
 
   private <T1, T2, T3> void testLog(
-      Log log, Event3<T1, T2, T3> event, T1 value1, T2 value2, T3 value3) {
+      Log log, Note3<T1, T2, T3> event, T1 value1, T2 value2, T3 value3) {
     assertTrue(log instanceof ReadJobLog3);
 
     ReadJobLog3 read;

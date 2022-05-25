@@ -16,12 +16,12 @@
 package br.com.objectos.core.logging.testing;
 
 import objectos.lang.Equals;
-import objectos.lang.Event;
-import objectos.lang.Event3;
+import objectos.lang.Note;
+import objectos.lang.Note3;
 import objectos.lang.ToString;
 
 /**
- * An {@link Event3} log instance.
+ * An {@link Note3} log instance.
  *
  * @param <T1>
  *        the type of the first log value
@@ -32,7 +32,7 @@ import objectos.lang.ToString;
  */
 public final class Event3Log<T1, T2, T3> extends Log {
 
-  final Event3<T1, T2, T3> event;
+  final Note3<T1, T2, T3> event;
 
   final T1 value1;
 
@@ -52,7 +52,7 @@ public final class Event3Log<T1, T2, T3> extends Log {
    * @param value3
    *        the third value associated with the event
    */
-  public Event3Log(Event3<T1, T2, T3> event, T1 value1, T2 value2, T3 value3) {
+  public Event3Log(Note3<T1, T2, T3> event, T1 value1, T2 value2, T3 value3) {
     super(event);
 
     this.event = event;
@@ -80,7 +80,7 @@ public final class Event3Log<T1, T2, T3> extends Log {
    */
   @Override
   public final <X1, X2, X3> boolean isEvent3(
-      Event3<X1, X2, X3> event, X1 value1, X2 value2, X3 value3) {
+      Note3<X1, X2, X3> event, X1 value1, X2 value2, X3 value3) {
     return Equals.objects(this.event, event)
         && Equals.objects(this.value1, value1)
         && Equals.objects(this.value2, value2)
@@ -100,7 +100,7 @@ public final class Event3Log<T1, T2, T3> extends Log {
   }
 
   @Override
-  final boolean hasEvent(Event event) {
+  final boolean hasEvent(Note event) {
     return Equals.objects(this.event, event);
   }
 

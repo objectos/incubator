@@ -17,11 +17,11 @@ package br.com.objectos.concurrent;
 
 import br.com.objectos.core.service.AbstractService;
 import objectos.lang.Checks;
-import objectos.lang.Logger;
+import objectos.lang.NoteSink;
 
 abstract class AbstractConcurrentService extends AbstractService {
 
-  Logger logger;
+  NoteSink logger;
 
   /**
    * Have this service use the specified logger for logging.
@@ -32,7 +32,7 @@ abstract class AbstractConcurrentService extends AbstractService {
    * @throws IllegalStateException
    *         if this service has been started
    */
-  public final void setLogger(Logger logger) {
+  public final void setLogger(NoteSink logger) {
     Checks.checkState(!isStarted(), "Service already started");
 
     this.logger = Checks.checkNotNull(logger, "logger == null");

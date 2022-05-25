@@ -30,9 +30,9 @@ import java.util.Iterator;
 import java.util.zip.DataFormatException;
 import java.util.zip.Inflater;
 import objectos.lang.Checks;
-import objectos.lang.Event0;
-import objectos.lang.Event1;
-import objectos.lang.Event2;
+import objectos.lang.Note0;
+import objectos.lang.Note1;
+import objectos.lang.Note2;
 
 /**
  * A state machine for reading Git objects from a repository. Supports:
@@ -46,13 +46,13 @@ import objectos.lang.Event2;
  */
 final class ObjectReader extends AbstractGitEngineTask implements ObjectReaderHandle {
 
-  static final Event0 EIO_CLOSE = Event0.trace();
+  static final Note0 EIO_CLOSE = Note0.trace();
 
-  static final Event1<Long> EIO_OPEN = Event1.trace();
+  static final Note1<Long> EIO_OPEN = Note1.trace();
 
-  static final Event2<Integer, Long> EIO_READ = Event2.trace();
+  static final Note2<Integer, Long> EIO_READ = Note2.trace();
 
-  static final Event1<ObjectId> ENEXT_OBJECT = Event1.debug();
+  static final Note1<ObjectId> ENEXT_OBJECT = Note1.debug();
 
   static final byte _BASE_OBJECT = 1;
 

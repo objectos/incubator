@@ -15,14 +15,14 @@
  */
 package br.com.objectos.logger;
 
-import objectos.lang.Event;
+import objectos.lang.Note;
 import objectos.lang.Level;
-import objectos.lang.Logger;
+import objectos.lang.NoteSink;
 import objectos.lang.ToString;
 
 abstract class WriteJobLog extends Log {
 
-  WriteJobLog(Event event) {
+  WriteJobLog(Note event) {
     Object k;
     k = event.key();
 
@@ -67,6 +67,6 @@ abstract class WriteJobLog extends Log {
 
   abstract byte getTypeV1();
 
-  void replay(Logger logger) {}
+  void replay(NoteSink logger) {}
 
 }
