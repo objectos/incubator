@@ -21,7 +21,7 @@ import br.com.objectos.css.select.IdSelector;
 import br.com.objectos.css.sheet.StyleSheet;
 import objectos.docs.DocsSite;
 import objectos.docs.next.intro.Intro;
-import objectos.docs.next.logging.LoggingDir;
+import objectos.docs.next.lang.Lang;
 import objectos.docs.style.Colors;
 import objectos.docs.style.FontSize;
 import objectos.docs.style.Spacing;
@@ -106,7 +106,7 @@ final class Index extends DocsPage {
           Core utilities are those that most Java applications will require:"""),
 
         ul(
-          li(a(LoggingDir.INDEX, "Logging"))
+          li(a(Lang.INDEX, "Objectos Lang"))
         )
       ),
 

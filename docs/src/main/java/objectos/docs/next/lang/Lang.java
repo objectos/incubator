@@ -13,41 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package objectos.docs.next;
+package objectos.docs.next.lang;
 
-import objectos.docs.next.intro.Intro;
-import objectos.docs.next.lang.Lang;
-import objectos.docs.next.logging.LoggingDir;
-import objectos.docs.next.relnotes.RelNotes;
 import objectos.docs.ui.DocsPage;
-import objectos.docs.ui.VersionHolder;
 import objectos.ssg.SiteDirectory;
-import objectos.ssg.SitePath;
 
-public final class Next extends SiteDirectory {
-
-  public static final String VERSION = "0.2.0-SNAPSHOT";
+public final class Lang extends SiteDirectory {
 
   public static final Class<? extends DocsPage> INDEX = Index.class;
-
-  public static final Class<? extends SitePath> WHAT = Intro.OVERVIEW;
 
   @Override
   protected final void configure() {
     addPage("index.html", new Index());
-
-    addDirectory("intro", new Intro());
-    addDirectory("lang", new Lang());
-    addDirectory("logging", new LoggingDir());
-    addDirectory("relnotes", new RelNotes());
-  }
-
-  @Override
-  protected final void writeStart() {
-    VersionHolder vh;
-    vh = getObject(VersionHolder.class);
-
-    vh.set(VERSION);
   }
 
 }
