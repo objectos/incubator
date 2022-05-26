@@ -37,7 +37,7 @@ public final class Next extends SiteDirectory {
     addPage("index.html", new Index());
 
     addDirectory("intro", new Intro());
-    addDirectory("lang", new Lang());
+    addDirectory("objectos-lang", new Lang());
     addDirectory("logging", new LoggingDir());
     addDirectory("relnotes", new RelNotes());
   }

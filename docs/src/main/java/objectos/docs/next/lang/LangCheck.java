@@ -21,7 +21,7 @@ import objectos.ssg.Markdown;
 //@formatter:off
 /**
 
-# `Checks`
+# The `Check` class
 
 If you are writing a method or constructor that is intended to be invoked by code other
 than your own, it is better to make no assumptions about:
@@ -36,15 +36,15 @@ can be invalid.
 
 ## _Fail-fast_ checks
 
-The `Checks` class provides static methods for implementing _fail-fast_ checks intended
+The `Check` class provides static methods for implementing _fail-fast_ checks intended
 to verify if a method or a constructor was invoked:
 
 - with valid arguments; or
 - on an object having the correct state.
 
-## `Checks.checkArgument`
+## `Check.argument`
 
-The `Checks` class provides a series of `checkArgument` methods for validating
+The `Check` class provides a series of `argument` methods for validating
 the arguments passed to a method or constructor. The following check for an `int` argument:
 
 ```java
@@ -61,7 +61,7 @@ Can be written as:
 
 ```java
 public void repeat(int count) {
-  Checks.checkArgument(count >= 0, "count must be >= 0");
+  Check.argument(count >= 0, "count must be >= 0");
 
   // method implementation
 }
@@ -73,7 +73,7 @@ The test expression must always be: ___"what I want to be true"___.
 
 ### Message concatenating
 
-The `Checks` class provides an overload that allows for concatenating two distinct
+The `Check` class provides an overload that allows for concatenating two distinct
 message parts into a single message. The concatenating happens in the same order the parts
 are specified.
 
@@ -81,8 +81,8 @@ For example the following check:
 
 ```java
 public void serveChildPath(Path path) {
-  Checks.checkArgument(
-    !path.isAbsolute,
+  Check.argument(
+    !path.isAbsolute(),
     "Expected a relative path. But found: ", path
   );
 }
@@ -102,12 +102,86 @@ Expected a relative path. But found: /var/secrets
 
 As the string representation of both message parts are concatenated into a single string.
 
+## `Check.notNull`
+
+You can use the `Check.notNull` method when you need to inform the programmer that a method
+(or a constructor) should not have been invoked with a `null` argument.
+
+In case of a `null` argument, the check causes the method to complete abruptly
+with a `NullPointerException` exception being thrown.
+
+### Safeguarding methods
+
+In the example below the check is used to prevent adding a `null` product to a
+hypothetical shopping cart:
+
+```java
+public void add(Product product) {
+  Check.notNull(product, "product == null");
+
+  // product is guaranteed to be != null
+  // it can now be safely added to the cart
+}
+```
+
+Which is equivalent to the following plain Java code:
+
+```java
+public void add(Product product) {
+  if (product == null) {
+    throw new NullPointerException("product == null");
+  }
+
+  // product is guaranteed to be != null
+  // it can now be safely added to the cart
+}
+```
+
+### Safeguarding field assignments
+
+You can use the check to prevent a field to be assigned a `null` value. This is
+particularly useful in constructors like so:
+
+```java
+public class Category {
+  private final String name;
+
+  public Category(String name) {
+    this.name = Check.notNull(name, "please provide a name");
+  }
+}
+```
+
+Which is _semantically_ equivalent to the plain Java code:
+
+```java
+public class Category {
+  private final String name;
+
+  public Category(String name) {
+    if (name == null) {
+      throw new NullPointerException("please provide a name");
+    }
+
+    this.name = name;
+  }
+}
+```
+
+You can also use it in methods:
+
+```java
+public void setName(String name) {
+  this.name = Check.notNull(name, "name == null");
+}
+```
+
 */
 //@formatter:on
 @Markdown
-final class LangChecks extends DocsPage {
+final class LangCheck extends DocsPage {
   @Override
   protected void configure() {
-    titleText = "Checks";
+    titleText = "The Check class";
   }
 }
