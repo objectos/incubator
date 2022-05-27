@@ -104,11 +104,11 @@ As the string representation of both message parts are concatenated into a singl
 
 ## `Check.notNull`
 
-You can use the `Check.notNull` method when you need to inform the programmer that a method
-(or a constructor) should not have been invoked with a `null` argument.
+The `Check.notNull` method is for informing the programmer that a method
+(or a constructor) was incorrectly invoked with a `null` argument.
 
-In case of a `null` argument, the check causes the method to complete abruptly
-with a `NullPointerException` exception being thrown.
+In this case the check will cause the invoking method to complete abruptly
+by throwing a `NullPointerException`.
 
 ### Safeguarding methods
 
@@ -175,6 +175,15 @@ public void setName(String name) {
   this.name = Check.notNull(name, "name == null");
 }
 ```
+
+## `Check.state`
+
+The `Check.state` method is for informing the programmer that a method was invoked
+at an inappropriate time.
+
+In this case the check will cause the invoking method to complete abruptly
+by throwing an `IllegalStateException`.
+
 
 */
 //@formatter:on
