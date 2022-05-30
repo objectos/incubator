@@ -96,6 +96,7 @@ public final class ArticleCss extends AbstractStyleSheet {
 
     style(
       article, sp(), p, sp(), code, or(),
+      article, sp(), ol, sp(), code, or(),
       article, sp(), ul, sp(), code,
 
       backgroundColor(Colors.GRAY1),
@@ -114,6 +115,13 @@ public final class ArticleCss extends AbstractStyleSheet {
     );
 
     // lists
+
+    style(
+      article, sp(), ol,
+
+      listStyle(decimal),
+      paddingLeft(Spacing.V10)
+    );
 
     style(
       article, sp(), ul,

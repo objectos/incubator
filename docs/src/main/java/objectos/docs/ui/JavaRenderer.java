@@ -370,6 +370,7 @@ final class JavaRenderer extends LanguageRenderer {
       case '-':
       case '&':
       case '!':
+      case ':':
         return true;
       default:
         return false;
