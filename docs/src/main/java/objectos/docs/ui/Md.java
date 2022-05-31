@@ -40,6 +40,7 @@ public final class Md extends SimpleSiteComponent {
 
     renderer = HtmlRenderer.builder()
         .attributeProviderFactory(new HrefChecker())
+        .nodeRendererFactory(ctx -> new HeadingRenderer(ctx))
         .nodeRendererFactory(ctx -> new SyntaxRenderer(ctx))
         .build();
   }

@@ -16,18 +16,19 @@
 package objectos.docs.next.lang;
 
 import objectos.docs.ui.DocsPage;
-import objectos.ssg.SiteDirectory;
+import objectos.ssg.Markdown;
 
-public final class Lang extends SiteDirectory {
+//@formatter:off
+/**
 
-  public static final Class<? extends DocsPage> INDEX = Index.class;
+# The `HashCode` class
 
+*/
+//@formatter:on
+@Markdown
+final class LangHashCode extends DocsPage {
   @Override
-  protected final void configure() {
-    addPage("index.html", new Index());
-    addPage("Check.html", new LangCheck());
-    addPage("Equals.html", new LangEquals());
-    addPage("HashCode.html", new LangHashCode());
+  protected void configure() {
+    titleText = "The HashCode class";
   }
-
 }

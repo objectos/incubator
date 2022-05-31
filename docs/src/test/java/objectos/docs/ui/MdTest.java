@@ -35,6 +35,21 @@ public class MdTest {
   }
 
   @Test
+  public void heading() {
+    test(
+      """
+      # heading{#id}
+      ## heading _foo_{#foo}
+      """,
+
+      """
+      <h1 id="id">heading</h1>
+      <h2 id="foo">heading <em>foo</em></h2>
+      """
+    );
+  }
+
+  @Test
   public void java00() {
     test(
       """
