@@ -184,6 +184,26 @@ at an inappropriate time.
 In this case the check will cause the invoking method to complete abruptly
 by throwing an `IllegalStateException`.
 
+In the following code you wish to prevent a hypothetical service from being started
+more than one time:
+
+```java
+public void start() {
+  if (state != State.NEW) {
+    throw new IllegalStateException("Cannot call start(): already started!");
+  }
+}
+```
+
+Becomes:
+
+```java
+public void start() {
+  Check.state(state == State.NEW, "Cannot call start(): already started!");
+}
+```
+
+Note that, for the checks to pass, the condition must evaluate to `true`.
 
 */
 //@formatter:on
