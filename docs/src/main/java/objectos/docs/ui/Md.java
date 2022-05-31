@@ -18,6 +18,7 @@ package objectos.docs.ui;
 import br.com.objectos.core.io.Charsets;
 import br.com.objectos.core.io.Read;
 import br.com.objectos.core.io.Resource;
+import java.util.List;
 import java.util.Map;
 import objectos.ssg.SimpleSiteComponent;
 import objectos.ssg.SitePage;
@@ -36,10 +37,13 @@ public final class Md extends SimpleSiteComponent {
   private final HtmlRenderer renderer;
 
   public Md() {
-    parser = Parser.builder().build();
+    parser = Parser.builder()
+        .extensions(List.of(new FootnoteExtension()))
+        .build();
 
     renderer = HtmlRenderer.builder()
         .attributeProviderFactory(new HrefChecker())
+        .nodeRendererFactory(ctx -> new FootnoteRenderer(ctx))
         .nodeRendererFactory(ctx -> new HeadingRenderer(ctx))
         .nodeRendererFactory(ctx -> new SyntaxRenderer(ctx))
         .build();
