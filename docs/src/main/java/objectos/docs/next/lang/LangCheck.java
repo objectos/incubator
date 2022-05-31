@@ -23,29 +23,26 @@ import objectos.ssg.Markdown;
 
 # The `Check` class
 
-If you are writing a method or constructor that is intended to be invoked by code other
-than your own, it is better to make no assumptions about:
+The `Check` class provides static methods for verifying if a method or a constructor was invoked:
 
-- the validity of arguments received;
-- whether an argument will not be null when nulls are not allowed; or
-- the correct state of an object before a method can be invoked.
-
-Put in other words, it is better to detect programming errors sooner rather than later;
-therefore, depending on your requirements, it is safer to always assume the arguments
-can be invalid.
-
-## _Fail-fast_ checks
-
-The `Check` class provides static methods for implementing _fail-fast_ checks intended
-to verify if a method or a constructor was invoked:
-
-- with valid arguments; or
+- with valid arguments;
+- without a null argument when nulls are not allowed; or
 - on an object having the correct state.
+
+All of the checks provided by the class are _runtime_ checks. In other words:
+
+- checking occurs during the execution of the program; and
+- failed checks result in a `RuntimeException` subclass being thrown.
 
 ## `Check.argument`
 
-The `Check` class provides a series of `argument` methods for validating
-the arguments passed to a method or constructor. The following check for an `int` argument:
+The `Check.argument` method is for informing the programmer that a method or a constructor
+was invoked with an illegal or invalid argument.
+
+In this case the check will cause the invoking method or constructor to complete abruptly
+by throwing an `IllegalArgumentException`.
+
+The following code checks the validity of an `int` argument:
 
 ```java
 public void repeat(int count) {
@@ -57,7 +54,7 @@ public void repeat(int count) {
 }
 ```
 
-Can be written as:
+Using the `Check.argument` it becomes:
 
 ```java
 public void repeat(int count) {
@@ -70,37 +67,6 @@ public void repeat(int count) {
 Note the test expression: `count >= 0`.
 
 The test expression must always be: ___"what I want to be true"___.
-
-### Message concatenating
-
-The `Check` class provides an overload that allows for concatenating two distinct
-message parts into a single message. The concatenating happens in the same order the parts
-are specified.
-
-For example the following check:
-
-```java
-public void serveChildPath(Path path) {
-  Check.argument(
-    !path.isAbsolute(),
-    "Expected a relative path. But found: ", path
-  );
-}
-```
-
-So if the method is invoked like so:
-
-```java
-serveChildPath(Path.of("/var/secrets"));
-```
-
-Would fail with the following message:
-
-```
-Expected a relative path. But found: /var/secrets
-```
-
-As the string representation of both message parts are concatenated into a single string.
 
 ## `Check.notNull`
 
@@ -179,13 +145,13 @@ public void setName(String name) {
 ## `Check.state`
 
 The `Check.state` method is for informing the programmer that a method was invoked
-at an inappropriate time.
+at an illegal or inappropriate time.
 
 In this case the check will cause the invoking method to complete abruptly
 by throwing an `IllegalStateException`.
 
-In the following code you wish to prevent a hypothetical service from being started
-more than one time:
+In the following code you wish to inform the programmer that a hypothetical service has already
+been started:
 
 ```java
 public void start() {
@@ -204,6 +170,37 @@ public void start() {
 ```
 
 Note that, for the checks to pass, the condition must evaluate to `true`.
+
+## Message concatenating
+
+The `Check` class provides overloads for concatenating two or more distinct
+message parts into a single message. The concatenating happens in the same order the parts
+are specified.
+
+For example the following check:
+
+```java
+public void serveChildPath(Path path) {
+  Check.argument(
+    !path.isAbsolute(),
+    "Expected a relative path. But found: ", path
+  );
+}
+```
+
+So if the method is invoked like so:
+
+```java
+serveChildPath(Path.of("/var/secrets"));
+```
+
+Would fail with the following message:
+
+```
+Expected a relative path. But found: /var/secrets
+```
+
+As the string representation of both message parts are concatenated into a single string.
 
 */
 //@formatter:on
