@@ -26,6 +26,7 @@ public final class Lang extends SiteDirectory {
   protected final void configure() {
     addPage("index.html", new Index());
     addPage("Check.html", new LangCheck());
+    addPage("Equals.html", new LangEquals());
   }
 
 }
