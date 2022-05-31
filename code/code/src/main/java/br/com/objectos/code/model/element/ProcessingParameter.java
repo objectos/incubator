@@ -21,7 +21,7 @@ import br.com.objectos.core.set.ImmutableSet;
 import javax.annotation.processing.ProcessingEnvironment;
 import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.VariableElement;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public class ProcessingParameter extends ProcessingVariableElement {
 
@@ -31,9 +31,9 @@ public class ProcessingParameter extends ProcessingVariableElement {
 
   public static ProcessingParameter adapt(
       ProcessingEnvironment processingEnv, VariableElement element) {
-    Checks.checkNotNull(processingEnv, "processingEnv == null");
-    Checks.checkNotNull(element, "element == null");
-    Checks.checkArgument(element.getKind() == ElementKind.PARAMETER, "Not ElementKind.PARAMETER");
+    Check.notNull(processingEnv, "processingEnv == null");
+    Check.notNull(element, "element == null");
+    Check.argument(element.getKind() == ElementKind.PARAMETER, "Not ElementKind.PARAMETER");
     return adaptUnchecked(processingEnv, element);
   }
 

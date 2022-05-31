@@ -15,15 +15,15 @@
  */
 package br.com.objectos.mojo;
 
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 final class XmlUtil {
 
   private XmlUtil() {}
 
   public static String xml(String name, String value) {
-    Checks.checkNotNull(name, "name == null");
-    Checks.checkNotNull(value, "value == null");
+    Check.notNull(name, "name == null");
+    Check.notNull(value, "value == null");
 
     StringBuilder s;
     s = new StringBuilder();

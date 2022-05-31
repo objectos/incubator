@@ -17,7 +17,7 @@ package br.com.objectos.git;
 
 import br.com.objectos.core.array.ByteArrays;
 import java.nio.charset.Charset;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 import objectos.lang.ToString;
 
 /**
@@ -49,15 +49,15 @@ public final class MutableBlob extends MutableTreeEntry {
    * @since 3
    */
   public MutableBlob(String name) {
-    this.name = Checks.checkNotNull(name, "name == null");
+    this.name = Check.notNull(name, "name == null");
 
-    Checks.checkArgument(!this.name.isEmpty(), "name must not be empty");
+    Check.argument(!this.name.isEmpty(), "name must not be empty");
   }
 
   MutableBlob(byte[] contents, String name) {
-    this.contents = Checks.checkNotNull(contents, "contents == null");
+    this.contents = Check.notNull(contents, "contents == null");
 
-    this.name = Checks.checkNotNull(name, "name == null");
+    this.name = Check.notNull(name, "name == null");
   }
 
   @Override
@@ -96,7 +96,7 @@ public final class MutableBlob extends MutableTreeEntry {
    * @since 3
    */
   public final void setContents(Blob value) {
-    Checks.checkNotNull(value, "value == null");
+    Check.notNull(value, "value == null");
 
     contents = value.getBytes();
   }
@@ -110,7 +110,7 @@ public final class MutableBlob extends MutableTreeEntry {
    * @since 3
    */
   public final void setContents(byte[] value) {
-    contents = Checks.checkNotNull(value, "value == null");
+    contents = Check.notNull(value, "value == null");
   }
 
   /**
@@ -122,7 +122,7 @@ public final class MutableBlob extends MutableTreeEntry {
 
   @Override
   final ObjectId computeObjectId(GitInjector job, Charset charset) {
-    Checks.checkState(objectId != null, "objectId was not set");
+    Check.state(objectId != null, "objectId was not set");
 
     return objectId;
   }

@@ -16,7 +16,7 @@
 package br.com.objectos.git;
 
 import java.util.concurrent.ExecutionException;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 import objectos.lang.Note1;
 import objectos.lang.NoteSink;
 import objectos.lang.ToString;
@@ -65,7 +65,7 @@ abstract class AbstractGitTask<V> implements GitTask<V>, ResultConsumer, ToStrin
   @SuppressWarnings("unchecked")
   @Override
   public final V getResult() throws IllegalStateException, ExecutionException {
-    Checks.checkState(state == _STOP, "task is active");
+    Check.state(state == _STOP, "task is active");
 
     if (error != null) {
       throw new ExecutionException(error);

@@ -19,7 +19,7 @@ import br.com.objectos.code.annotations.Ignore;
 import br.com.objectos.code.java.element.Keywords;
 import br.com.objectos.code.java.expression.Expression;
 import br.com.objectos.code.java.io.CodeWriter;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public class IfStatement extends AbstractSimpleStatement {
 
@@ -36,7 +36,7 @@ public class IfStatement extends AbstractSimpleStatement {
   public static IfStatement _if(
       Expression condition,
       IfStatementElement e1) {
-    Checks.checkNotNull(e1, "e1 == null");
+    Check.notNull(e1, "e1 == null");
     Builder b = builder0(condition);
     e1.acceptIfStatementBuilder(b);
     return b.build();
@@ -45,7 +45,7 @@ public class IfStatement extends AbstractSimpleStatement {
   public static IfStatement _if(
       Expression condition,
       IfStatementElement... elements) {
-    Checks.checkNotNull(elements, "elements == null");
+    Check.notNull(elements, "elements == null");
     Builder b = builder0(condition);
     for (int i = 0; i < elements.length; i++) {
       IfStatementElement e = elements[i];
@@ -61,8 +61,8 @@ public class IfStatement extends AbstractSimpleStatement {
       Expression condition,
       IfStatementElement e1,
       IfStatementElement e2) {
-    Checks.checkNotNull(e1, "e1 == null");
-    Checks.checkNotNull(e2, "e2 == null");
+    Check.notNull(e1, "e1 == null");
+    Check.notNull(e2, "e2 == null");
     Builder b = builder0(condition);
     e1.acceptIfStatementBuilder(b);
     e2.acceptIfStatementBuilder(b);
@@ -74,9 +74,9 @@ public class IfStatement extends AbstractSimpleStatement {
       IfStatementElement e1,
       IfStatementElement e2,
       IfStatementElement e3) {
-    Checks.checkNotNull(e1, "e1 == null");
-    Checks.checkNotNull(e2, "e2 == null");
-    Checks.checkNotNull(e3, "e3 == null");
+    Check.notNull(e1, "e1 == null");
+    Check.notNull(e2, "e2 == null");
+    Check.notNull(e3, "e3 == null");
     Builder b = builder0(condition);
     e1.acceptIfStatementBuilder(b);
     e2.acceptIfStatementBuilder(b);
@@ -90,10 +90,10 @@ public class IfStatement extends AbstractSimpleStatement {
       IfStatementElement e2,
       IfStatementElement e3,
       IfStatementElement e4) {
-    Checks.checkNotNull(e1, "e1 == null");
-    Checks.checkNotNull(e2, "e2 == null");
-    Checks.checkNotNull(e3, "e3 == null");
-    Checks.checkNotNull(e4, "e4 == null");
+    Check.notNull(e1, "e1 == null");
+    Check.notNull(e2, "e2 == null");
+    Check.notNull(e3, "e3 == null");
+    Check.notNull(e4, "e4 == null");
     Builder b = builder0(condition);
     e1.acceptIfStatementBuilder(b);
     e2.acceptIfStatementBuilder(b);
@@ -109,11 +109,11 @@ public class IfStatement extends AbstractSimpleStatement {
       IfStatementElement e3,
       IfStatementElement e4,
       IfStatementElement e5) {
-    Checks.checkNotNull(e1, "e1 == null");
-    Checks.checkNotNull(e2, "e2 == null");
-    Checks.checkNotNull(e3, "e3 == null");
-    Checks.checkNotNull(e4, "e4 == null");
-    Checks.checkNotNull(e5, "e5 == null");
+    Check.notNull(e1, "e1 == null");
+    Check.notNull(e2, "e2 == null");
+    Check.notNull(e3, "e3 == null");
+    Check.notNull(e4, "e4 == null");
+    Check.notNull(e5, "e5 == null");
     Builder b = builder0(condition);
     e1.acceptIfStatementBuilder(b);
     e2.acceptIfStatementBuilder(b);
@@ -131,12 +131,12 @@ public class IfStatement extends AbstractSimpleStatement {
       IfStatementElement e4,
       IfStatementElement e5,
       IfStatementElement e6) {
-    Checks.checkNotNull(e1, "e1 == null");
-    Checks.checkNotNull(e2, "e2 == null");
-    Checks.checkNotNull(e3, "e3 == null");
-    Checks.checkNotNull(e4, "e4 == null");
-    Checks.checkNotNull(e5, "e5 == null");
-    Checks.checkNotNull(e6, "e6 == null");
+    Check.notNull(e1, "e1 == null");
+    Check.notNull(e2, "e2 == null");
+    Check.notNull(e3, "e3 == null");
+    Check.notNull(e4, "e4 == null");
+    Check.notNull(e5, "e5 == null");
+    Check.notNull(e6, "e6 == null");
     Builder b = builder0(condition);
     e1.acceptIfStatementBuilder(b);
     e2.acceptIfStatementBuilder(b);
@@ -156,13 +156,13 @@ public class IfStatement extends AbstractSimpleStatement {
       IfStatementElement e5,
       IfStatementElement e6,
       IfStatementElement e7) {
-    Checks.checkNotNull(e1, "e1 == null");
-    Checks.checkNotNull(e2, "e2 == null");
-    Checks.checkNotNull(e3, "e3 == null");
-    Checks.checkNotNull(e4, "e4 == null");
-    Checks.checkNotNull(e5, "e5 == null");
-    Checks.checkNotNull(e6, "e6 == null");
-    Checks.checkNotNull(e7, "e7 == null");
+    Check.notNull(e1, "e1 == null");
+    Check.notNull(e2, "e2 == null");
+    Check.notNull(e3, "e3 == null");
+    Check.notNull(e4, "e4 == null");
+    Check.notNull(e5, "e5 == null");
+    Check.notNull(e6, "e6 == null");
+    Check.notNull(e7, "e7 == null");
     Builder b = builder0(condition);
     e1.acceptIfStatementBuilder(b);
     e2.acceptIfStatementBuilder(b);
@@ -184,14 +184,14 @@ public class IfStatement extends AbstractSimpleStatement {
       IfStatementElement e6,
       IfStatementElement e7,
       IfStatementElement e8) {
-    Checks.checkNotNull(e1, "e1 == null");
-    Checks.checkNotNull(e2, "e2 == null");
-    Checks.checkNotNull(e3, "e3 == null");
-    Checks.checkNotNull(e4, "e4 == null");
-    Checks.checkNotNull(e5, "e5 == null");
-    Checks.checkNotNull(e6, "e6 == null");
-    Checks.checkNotNull(e7, "e7 == null");
-    Checks.checkNotNull(e8, "e8 == null");
+    Check.notNull(e1, "e1 == null");
+    Check.notNull(e2, "e2 == null");
+    Check.notNull(e3, "e3 == null");
+    Check.notNull(e4, "e4 == null");
+    Check.notNull(e5, "e5 == null");
+    Check.notNull(e6, "e6 == null");
+    Check.notNull(e7, "e7 == null");
+    Check.notNull(e8, "e8 == null");
     Builder b = builder0(condition);
     e1.acceptIfStatementBuilder(b);
     e2.acceptIfStatementBuilder(b);
@@ -215,15 +215,15 @@ public class IfStatement extends AbstractSimpleStatement {
       IfStatementElement e7,
       IfStatementElement e8,
       IfStatementElement e9) {
-    Checks.checkNotNull(e1, "e1 == null");
-    Checks.checkNotNull(e2, "e2 == null");
-    Checks.checkNotNull(e3, "e3 == null");
-    Checks.checkNotNull(e4, "e4 == null");
-    Checks.checkNotNull(e5, "e5 == null");
-    Checks.checkNotNull(e6, "e6 == null");
-    Checks.checkNotNull(e7, "e7 == null");
-    Checks.checkNotNull(e8, "e8 == null");
-    Checks.checkNotNull(e9, "e9 == null");
+    Check.notNull(e1, "e1 == null");
+    Check.notNull(e2, "e2 == null");
+    Check.notNull(e3, "e3 == null");
+    Check.notNull(e4, "e4 == null");
+    Check.notNull(e5, "e5 == null");
+    Check.notNull(e6, "e6 == null");
+    Check.notNull(e7, "e7 == null");
+    Check.notNull(e8, "e8 == null");
+    Check.notNull(e9, "e9 == null");
     Builder b = builder0(condition);
     e1.acceptIfStatementBuilder(b);
     e2.acceptIfStatementBuilder(b);
@@ -284,7 +284,7 @@ public class IfStatement extends AbstractSimpleStatement {
     }
 
     public final Builder addToCurrentBlock(BlockElement element) {
-      Checks.checkNotNull(element, "element == null");
+      Check.notNull(element, "element == null");
       element.acceptStatementOrBlockBuilder(currentBlock);
       return this;
     }
@@ -301,7 +301,7 @@ public class IfStatement extends AbstractSimpleStatement {
     }
 
     public final Builder condition(Expression condition) {
-      this.condition = Checks.checkNotNull(condition, "condition == null");
+      this.condition = Check.notNull(condition, "condition == null");
       return this;
     }
 

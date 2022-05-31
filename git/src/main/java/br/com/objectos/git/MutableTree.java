@@ -26,7 +26,7 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import java.security.MessageDigest;
 import java.util.zip.Deflater;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 import objectos.lang.ToString;
 
 /**
@@ -68,9 +68,9 @@ public final class MutableTree extends MutableTreeEntry {
    * @since 3
    */
   public MutableTree(String name) {
-    this.name = Checks.checkNotNull(name, "name == null");
+    this.name = Check.notNull(name, "name == null");
 
-    Checks.checkArgument(!this.name.isEmpty(), "name must not be empty");
+    Check.argument(!this.name.isEmpty(), "name must not be empty");
   }
 
   /**
@@ -100,7 +100,7 @@ public final class MutableTree extends MutableTreeEntry {
    *        the tree to be added
    */
   public final void addEntry(MutableTree tree) {
-    Checks.checkArgument(tree.isNamed(), "MutableTree must define a name to serve as an entry");
+    Check.argument(tree.isNamed(), "MutableTree must define a name to serve as an entry");
 
     entries.addWithNullMessage(tree, "tree == null");
   }

@@ -18,7 +18,7 @@ package br.com.objectos.css.specgen.spec;
 import br.com.objectos.core.list.ImmutableList;
 import java.io.Serializable;
 import java.util.Objects;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 import objectos.lang.ToString;
 
 public class Property implements Comparable<Property>, Serializable {
@@ -34,9 +34,9 @@ public class Property implements Comparable<Property>, Serializable {
   }
 
   public Property(String name, String formal, ImmutableList<ValueType> valueTypes) {
-    this.name = Checks.checkNotNull(name, "name == null");
-    this.formal = Checks.checkNotNull(formal, "formal == null");
-    this.valueTypes = Checks.checkNotNull(valueTypes, "valueTypes == null");
+    this.name = Check.notNull(name, "name == null");
+    this.formal = Check.notNull(formal, "formal == null");
+    this.valueTypes = Check.notNull(valueTypes, "valueTypes == null");
   }
 
   public final void acceptKeywordSetBuilder(KeywordSet.Builder builder) {

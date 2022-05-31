@@ -19,7 +19,7 @@ import br.com.objectos.lexer.charexp.CharExpression;
 import java.io.IOException;
 import java.util.NoSuchElementException;
 import java.util.Optional;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 class StringSource implements Source {
 
@@ -119,7 +119,7 @@ class StringSource implements Source {
 
   @Override
   public final Optional<String> peekString(String value) {
-    Checks.checkArgument(value.length() > 0, "length > 0");
+    Check.argument(value.length() > 0, "length > 0");
     char[] testArray = value.toCharArray();
     int testIndex = 0;
 

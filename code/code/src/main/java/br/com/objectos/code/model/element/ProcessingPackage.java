@@ -24,7 +24,7 @@ import javax.annotation.processing.ProcessingEnvironment;
 import javax.lang.model.element.Name;
 import javax.lang.model.element.PackageElement;
 import javax.tools.StandardLocation;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public final class ProcessingPackage extends ProcessingElement<PackageElement> {
 
@@ -34,13 +34,13 @@ public final class ProcessingPackage extends ProcessingElement<PackageElement> {
 
   public static ProcessingPackage adapt(
       ProcessingEnvironment processingEnv, PackageElement packageElement) {
-    Checks.checkNotNull(processingEnv, "processingEnv == null");
-    Checks.checkNotNull(packageElement, "packageElement == null");
+    Check.notNull(processingEnv, "processingEnv == null");
+    Check.notNull(packageElement, "packageElement == null");
     return new ProcessingPackage(processingEnv, packageElement);
   }
 
   public final void acceptReprocessor(Reprocessor reprocessor) {
-    Checks.checkNotNull(reprocessor, "reprocessor == null");
+    Check.notNull(reprocessor, "reprocessor == null");
     reprocessor.reprocessPackage(element);
   }
 

@@ -16,7 +16,7 @@
 package br.com.objectos.core.array;
 
 import br.com.objectos.latest.Singleton;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 final class MismatchJava6 extends Mismatch {
 
@@ -25,8 +25,8 @@ final class MismatchJava6 extends Mismatch {
 
   @Override
   final int mismatch(char[] a, char[] b) {
-    Checks.checkNotNull(a, "a == null");
-    Checks.checkNotNull(b, "b == null");
+    Check.notNull(a, "a == null");
+    Check.notNull(b, "b == null");
 
     int len;
     len = Math.min(a.length, b.length);

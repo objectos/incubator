@@ -19,7 +19,7 @@ import br.com.objectos.core.io.Resource;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 /**
  * Provides {@code static} methods for obtaining {@link PathName} instances,
@@ -133,7 +133,7 @@ public final class LocalFs extends AbstractLocalFs {
    */
   public static RegularFile getRegularFile(Resource resource)
       throws NotFoundException, NotRegularFileException, IOException {
-    Checks.checkNotNull(resource, "resource == null");
+    Check.notNull(resource, "resource == null");
 
     URI uri;
     uri = resource.toUri();

@@ -16,7 +16,7 @@
 package br.com.objectos.tools;
 
 import java.util.Map;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public final class Compilation {
 
@@ -61,14 +61,14 @@ public final class Compilation {
   }
 
   public final GeneratedClassFile getClassFile(String qualifiedName) {
-    Checks.checkNotNull(qualifiedName, "qualifiedName == null");
+    Check.notNull(qualifiedName, "qualifiedName == null");
     checkKey(generatedClassFiles, qualifiedName);
 
     return generatedClassFiles.get(qualifiedName);
   }
 
   public final GeneratedJavaFile getJavaFile(String qualifiedName) {
-    Checks.checkNotNull(qualifiedName, "qualifiedName == null");
+    Check.notNull(qualifiedName, "qualifiedName == null");
     checkKey(generatedJavaFiles, qualifiedName);
 
     return generatedJavaFiles.get(qualifiedName);
@@ -79,7 +79,7 @@ public final class Compilation {
   }
 
   public final GeneratedResource getResource(String resourceName) {
-    Checks.checkNotNull(resourceName, "resourceName == null");
+    Check.notNull(resourceName, "resourceName == null");
     checkKey(generatedResources, resourceName);
     return generatedResources.get(resourceName);
   }

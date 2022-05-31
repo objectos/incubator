@@ -16,7 +16,7 @@
 package br.com.objectos.more.logging.slf4j;
 
 import br.com.objectos.logger.StorageLogger;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 import org.slf4j.impl.StaticLoggerBinder;
 
 public final class MoreLoggingAndSlf4j {
@@ -24,7 +24,7 @@ public final class MoreLoggingAndSlf4j {
   private MoreLoggingAndSlf4j() {}
 
   public static void bootstrap(StorageLogger logger) {
-    Checks.checkNotNull(logger, "logger == null");
+    Check.notNull(logger, "logger == null");
 
     Slf4jLoggerFactory factory;
     factory = new Slf4jLoggerFactory(logger);

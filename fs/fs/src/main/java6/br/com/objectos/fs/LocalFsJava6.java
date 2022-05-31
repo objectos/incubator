@@ -18,14 +18,14 @@ package br.com.objectos.fs;
 import br.com.objectos.latest.Concrete.Bridge;
 import java.io.File;
 import java.net.URI;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 @Bridge
 class LocalFsJava6 extends LocalFsJavaAny {
 
   @Override
   final ObjectJavaAny create(File file) {
-    Checks.checkNotNull(file, "file == null");
+    Check.notNull(file, "file == null");
 
     return new ObjectImpl(file);
   }
@@ -40,7 +40,7 @@ class LocalFsJava6 extends LocalFsJavaAny {
 
   @Override
   final ObjectJavaAny create(URI uri) {
-    Checks.checkNotNull(uri, "uri == null");
+    Check.notNull(uri, "uri == null");
 
     File file;
     file = new File(uri);
@@ -49,8 +49,8 @@ class LocalFsJava6 extends LocalFsJavaAny {
   }
 
   private File getFile(String first, String[] more) {
-    Checks.checkNotNull(first, "first == null");
-    Checks.checkNotNull(more, "more == null");
+    Check.notNull(first, "first == null");
+    Check.notNull(more, "more == null");
 
     StringBuilder s;
     s = new StringBuilder(first);
@@ -62,7 +62,7 @@ class LocalFsJava6 extends LocalFsJavaAny {
       part = more[i];
 
       s.append(
-          Checks.checkNotNull(part, "more[", i, "] == null")
+          Check.notNull(part, "more[", i, "] == null")
       );
     }
 

@@ -16,7 +16,7 @@
 package br.com.objectos.git;
 
 import br.com.objectos.core.list.MutableList;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 import objectos.lang.ToString;
 import objectos.lang.ToStringObject;
 
@@ -92,7 +92,7 @@ public final class MutableCommit implements ToStringObject {
    *        the value to set as the author of this commit
    */
   public final void setAuthor(Identification author) {
-    this.author = Checks.checkNotNull(author, "author == null");
+    this.author = Check.notNull(author, "author == null");
   }
 
   /**
@@ -102,7 +102,7 @@ public final class MutableCommit implements ToStringObject {
    *        the value to set as the committer of this commit
    */
   public final void setCommitter(Identification committer) {
-    this.committer = Checks.checkNotNull(committer, "committer == null");
+    this.committer = Check.notNull(committer, "committer == null");
   }
 
   /**
@@ -112,7 +112,7 @@ public final class MutableCommit implements ToStringObject {
    *        the value to set as the message of this commit
    */
   public final void setMessage(String message) {
-    this.message = Checks.checkNotNull(message, "message == null");
+    this.message = Check.notNull(message, "message == null");
   }
 
   /**
@@ -122,7 +122,7 @@ public final class MutableCommit implements ToStringObject {
    *        the value to set as the tree of this commit
    */
   public final void setTree(ObjectId tree) {
-    this.tree = Checks.checkNotNull(tree, "tree == null");
+    this.tree = Check.notNull(tree, "tree == null");
   }
 
   /**

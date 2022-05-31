@@ -20,7 +20,7 @@ import br.com.objectos.core.set.ImmutableSet;
 import javax.annotation.processing.ProcessingEnvironment;
 import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.ExecutableElement;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public class ProcessingConstructor extends ProcessingExecutableElement {
 
@@ -31,9 +31,9 @@ public class ProcessingConstructor extends ProcessingExecutableElement {
 
   public static ProcessingConstructor adapt(
       ProcessingEnvironment processingEnv, ExecutableElement executableElement) {
-    Checks.checkNotNull(processingEnv, "processingEnv == null");
-    Checks.checkNotNull(executableElement, "executableElement == null");
-    Checks.checkArgument(
+    Check.notNull(processingEnv, "processingEnv == null");
+    Check.notNull(executableElement, "executableElement == null");
+    Check.argument(
         executableElement.getKind() == ElementKind.CONSTRUCTOR,
         "Not ElementKind.CONSTRUCTOR"
     );

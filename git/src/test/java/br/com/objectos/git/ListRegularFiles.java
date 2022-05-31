@@ -23,7 +23,7 @@ import br.com.objectos.fs.DirectoryContentsVisitor;
 import br.com.objectos.fs.RegularFile;
 import java.io.File;
 import java.io.IOException;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 /**
  * A {@link DirectoryContentsVisitor} for recursively listing all of the regular
@@ -50,7 +50,7 @@ public final class ListRegularFiles implements DirectoryContentsVisitor {
    *         if an I/O error occurs
    */
   public static ImmutableList<String> of(Directory directory) throws IOException {
-    Checks.checkNotNull(directory, "directory == null");
+    Check.notNull(directory, "directory == null");
 
     ListRegularFiles ls;
     ls = new ListRegularFiles();

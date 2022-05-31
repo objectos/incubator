@@ -16,7 +16,7 @@
 package br.com.objectos.code.java.declaration;
 
 import br.com.objectos.core.list.ImmutableList;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public class TypesShorthand implements ClassCodeElement {
 
@@ -27,7 +27,7 @@ public class TypesShorthand implements ClassCodeElement {
   }
 
   public static TypesShorthand types(Iterable<? extends TypeCode> types) {
-    Checks.checkNotNull(types, "types == null");
+    Check.notNull(types, "types == null");
 
     return new TypesShorthand(ImmutableList.copyOf(types));
   }

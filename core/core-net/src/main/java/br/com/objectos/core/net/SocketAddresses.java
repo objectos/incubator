@@ -19,7 +19,7 @@ import br.com.objectos.latest.Singleton;
 import java.io.IOException;
 import java.net.SocketAddress;
 import java.nio.channels.ServerSocketChannel;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 /**
  * Provides {@code static} utility methods for working with
@@ -41,7 +41,7 @@ public final class SocketAddresses {
    */
   public static ServerSocketChannel openServerSocketChannel(
       SocketAddress address) throws IOException {
-    Checks.checkNotNull(address, "address == null");
+    Check.notNull(address, "address == null");
 
     return SocketAddressesImplSingleton.INSTANCE.openServerSocketChannel(address);
   }

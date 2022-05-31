@@ -21,7 +21,7 @@ import br.com.objectos.code.java.element.CodeElement;
 import br.com.objectos.code.java.element.Keywords;
 import br.com.objectos.code.java.type.NamedClassOrParameterized;
 import br.com.objectos.core.list.MutableList;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public class Implements extends AbstractImmutableCodeElement
     implements
@@ -36,7 +36,7 @@ public class Implements extends AbstractImmutableCodeElement
 
   public static Implements _implements(
       Iterable<? extends NamedClassOrParameterized> interfaces) {
-    Checks.checkNotNull(interfaces, "interfaces == null");
+    Check.notNull(interfaces, "interfaces == null");
     Builder b = builder();
 
     int i = 0;
@@ -56,7 +56,7 @@ public class Implements extends AbstractImmutableCodeElement
   }
 
   public static Implements _implements(NamedClassOrParameterized... interfaces) {
-    Checks.checkNotNull(interfaces, "interfaces == null");
+    Check.notNull(interfaces, "interfaces == null");
     Builder b = builder();
 
     for (int i = 0; i < interfaces.length; i++) {

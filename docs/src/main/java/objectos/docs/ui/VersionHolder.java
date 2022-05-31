@@ -15,7 +15,7 @@
  */
 package objectos.docs.ui;
 
-import objectos.lang.Checks;
+import objectos.lang.Check;
 import objectos.ssg.SiteDirectory;
 import objectos.ssg.SitePage;
 
@@ -68,7 +68,7 @@ public final class VersionHolder {
   }
 
   public final void set(String value) {
-    this.value = Checks.checkNotNull(value, "value == null");
+    this.value = Check.notNull(value, "value == null");
   }
 
 }

@@ -16,7 +16,7 @@
 package objectos.ssg;
 
 import java.io.IOException;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 import objectos.ssg.Site.RenderingOption;
 
 final class SiteGeneration extends SiteConfiguration {
@@ -28,8 +28,8 @@ final class SiteGeneration extends SiteConfiguration {
   }
 
   public static SiteGeneration create(SiteWriter writer, RenderingOption[] options) {
-    Checks.checkNotNull(writer, "writer == null");
-    Checks.checkNotNull(options, "options == null");
+    Check.notNull(writer, "writer == null");
+    Check.notNull(options, "options == null");
 
     return new SiteGeneration(writer);
   }

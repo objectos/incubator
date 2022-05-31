@@ -51,7 +51,7 @@ import javax.lang.model.type.TypeMirror;
 import javax.lang.model.type.TypeVisitor;
 import javax.lang.model.util.Elements;
 import javax.tools.Diagnostic.Kind;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public class ProcessingAnnotation
     extends AnnotatedElementOrType
@@ -81,9 +81,9 @@ public class ProcessingAnnotation
       ProcessingEnvironment processingEnv,
       Element annotatedElement,
       AnnotationMirror mirror) {
-    Checks.checkNotNull(processingEnv, "processingEnv == null");
-    Checks.checkNotNull(annotatedElement, "annotatedElement == null");
-    Checks.checkNotNull(mirror, "mirror == null");
+    Check.notNull(processingEnv, "processingEnv == null");
+    Check.notNull(annotatedElement, "annotatedElement == null");
+    Check.notNull(mirror, "mirror == null");
     return new ProcessingAnnotation(processingEnv, annotatedElement, mirror);
   }
 

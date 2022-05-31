@@ -17,7 +17,7 @@ package br.com.objectos.http.server;
 
 import br.com.objectos.http.path.Location;
 import br.com.objectos.http.path.Route;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public abstract class AbstractHttpModule implements HttpModule {
 
@@ -27,7 +27,7 @@ public abstract class AbstractHttpModule implements HttpModule {
 
   @Override
   public final void acceptHttpModuleDsl(HttpModuleDsl dsl) {
-    this.dsl = Checks.checkNotNull(dsl, "dsl == null");
+    this.dsl = Check.notNull(dsl, "dsl == null");
     try {
       configure();
     } finally {
@@ -38,25 +38,25 @@ public abstract class AbstractHttpModule implements HttpModule {
   protected abstract void configure();
 
   protected final RouteElement get(HttpAction action) {
-    Checks.checkNotNull(action, "action == null");
+    Check.notNull(action, "action == null");
     return new RouteElement(Method.GET, action);
   }
 
   protected final RouteElement post(HttpAction action) {
-    Checks.checkNotNull(action, "action == null");
+    Check.notNull(action, "action == null");
     return new RouteElement(Method.POST, action);
   }
 
   protected final void route(Location location, RouteElement e1) {
-    Checks.checkNotNull(location, "location == null");
-    Checks.checkNotNull(e1, "e1 == null");
+    Check.notNull(location, "location == null");
+    Check.notNull(e1, "e1 == null");
     e1.acceptLocation(location);
   }
 
   protected final void route(Location location, RouteElement e1, RouteElement e2) {
-    Checks.checkNotNull(location, "location == null");
-    Checks.checkNotNull(e1, "e1 == null");
-    Checks.checkNotNull(e2, "e2 == null");
+    Check.notNull(location, "location == null");
+    Check.notNull(e1, "e1 == null");
+    Check.notNull(e2, "e2 == null");
     e1.acceptLocation(location);
     e2.acceptLocation(location);
   }

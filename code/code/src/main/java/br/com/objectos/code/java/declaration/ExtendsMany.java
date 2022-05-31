@@ -18,7 +18,7 @@ package br.com.objectos.code.java.declaration;
 import br.com.objectos.code.java.type.NamedClassOrParameterized;
 import br.com.objectos.core.list.Lists;
 import java.util.ArrayList;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public class ExtendsMany implements InterfaceCodeElement {
 
@@ -30,12 +30,12 @@ public class ExtendsMany implements InterfaceCodeElement {
 
   public static ExtendsMany _extends(
       Iterable<? extends NamedClassOrParameterized> interfaces) {
-    Checks.checkNotNull(interfaces, "interfaces == null");
+    Check.notNull(interfaces, "interfaces == null");
     ArrayList<NamedClassOrParameterized> list = Lists.newArrayList();
 
     int i = 0;
     for (NamedClassOrParameterized iface : interfaces) {
-      list.add(Checks.checkNotNull(iface, "interfaces[" + i + "] == null"));
+      list.add(Check.notNull(iface, "interfaces[" + i + "] == null"));
       i++;
     }
 
@@ -43,13 +43,13 @@ public class ExtendsMany implements InterfaceCodeElement {
   }
 
   public static ExtendsMany _extends(NamedClassOrParameterized... interfaces) {
-    Checks.checkNotNull(interfaces, "interfaces == null");
+    Check.notNull(interfaces, "interfaces == null");
     NamedClassOrParameterized[] checked
         = new NamedClassOrParameterized[interfaces.length];
 
     for (int i = 0; i < interfaces.length; i++) {
       NamedClassOrParameterized iface = interfaces[i];
-      checked[i] = Checks.checkNotNull(iface, "interfaces[" + i + "] == null");
+      checked[i] = Check.notNull(iface, "interfaces[" + i + "] == null");
     }
 
     return new ExtendsMany(checked);
@@ -58,8 +58,8 @@ public class ExtendsMany implements InterfaceCodeElement {
   public static ExtendsMany _extends(
       NamedClassOrParameterized iface1,
       NamedClassOrParameterized iface2) {
-    Checks.checkNotNull(iface1, "iface1 == null");
-    Checks.checkNotNull(iface2, "iface2 == null");
+    Check.notNull(iface1, "iface1 == null");
+    Check.notNull(iface2, "iface2 == null");
     return new ExtendsMany(iface1, iface2);
   }
 
@@ -67,9 +67,9 @@ public class ExtendsMany implements InterfaceCodeElement {
       NamedClassOrParameterized iface1,
       NamedClassOrParameterized iface2,
       NamedClassOrParameterized iface3) {
-    Checks.checkNotNull(iface1, "iface1 == null");
-    Checks.checkNotNull(iface2, "iface2 == null");
-    Checks.checkNotNull(iface3, "iface3 == null");
+    Check.notNull(iface1, "iface1 == null");
+    Check.notNull(iface2, "iface2 == null");
+    Check.notNull(iface3, "iface3 == null");
     return new ExtendsMany(iface1, iface2, iface3);
   }
 
@@ -78,10 +78,10 @@ public class ExtendsMany implements InterfaceCodeElement {
       NamedClassOrParameterized iface2,
       NamedClassOrParameterized iface3,
       NamedClassOrParameterized iface4) {
-    Checks.checkNotNull(iface1, "iface1 == null");
-    Checks.checkNotNull(iface2, "iface2 == null");
-    Checks.checkNotNull(iface3, "iface3 == null");
-    Checks.checkNotNull(iface4, "iface4 == null");
+    Check.notNull(iface1, "iface1 == null");
+    Check.notNull(iface2, "iface2 == null");
+    Check.notNull(iface3, "iface3 == null");
+    Check.notNull(iface4, "iface4 == null");
     return new ExtendsMany(iface1, iface2, iface3, iface4);
   }
 

@@ -15,7 +15,7 @@
  */
 package org.slf4j.impl;
 
-import objectos.lang.Checks;
+import objectos.lang.Check;
 import org.slf4j.ILoggerFactory;
 import org.slf4j.helpers.NOPLoggerFactory;
 import org.slf4j.spi.LoggerFactoryBinder;
@@ -35,12 +35,12 @@ public final class StaticLoggerBinder
   }
 
   public static void setLoggerFactory(ILoggerFactory factory) {
-    Checks.checkNotNull(factory, "factory == null");
+    Check.notNull(factory, "factory == null");
 
     Class<? extends ILoggerFactory> factoryClass;
     factoryClass = loggerFactory.getClass();
 
-    Checks.checkState(factoryClass.equals(NOPLoggerFactory.class), "factory was already set");
+    Check.state(factoryClass.equals(NOPLoggerFactory.class), "factory was already set");
 
     loggerFactory = factory;
   }

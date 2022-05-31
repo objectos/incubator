@@ -25,7 +25,7 @@ import br.com.objectos.fs.watch.SimpleWatchListener;
 import br.com.objectos.fs.watch.Watch;
 import java.io.Closeable;
 import java.io.IOException;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 /**
  * Reads log events from a storage by watching it for changes.
@@ -73,10 +73,10 @@ public final class StorageWatcher implements Closeable, Watch.Option {
       Directory directory, IoWorker ioWorker, CpuWorker cpuWorker,
       Option... options)
       throws IOException {
-    Checks.checkNotNull(directory, "directory == null");
-    Checks.checkNotNull(ioWorker, "ioWorker == null");
-    Checks.checkNotNull(cpuWorker, "cpuWorker == null");
-    Checks.checkNotNull(options, "options == null");
+    Check.notNull(directory, "directory == null");
+    Check.notNull(ioWorker, "ioWorker == null");
+    Check.notNull(cpuWorker, "cpuWorker == null");
+    Check.notNull(options, "options == null");
 
     Storage storage;
     storage = Storage.get(directory);
@@ -88,7 +88,7 @@ public final class StorageWatcher implements Closeable, Watch.Option {
       Option option;
       option = options[i];
 
-      Checks.checkNotNull(option, "options[", i, "] == null");
+      Check.notNull(option, "options[", i, "] == null");
 
       option.acceptBuilder(b);
     }
@@ -105,7 +105,7 @@ public final class StorageWatcher implements Closeable, Watch.Option {
    * @return a new storage watcher option that adds the specified log listener
    */
   public static Option logListener(final LogListener listener) {
-    Checks.checkNotNull(listener, "listener == null");
+    Check.notNull(listener, "listener == null");
 
     return new Option() {
       @Override

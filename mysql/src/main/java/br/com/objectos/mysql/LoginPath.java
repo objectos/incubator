@@ -15,7 +15,7 @@
  */
 package br.com.objectos.mysql;
 
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public final class LoginPath extends AbstractOption implements ClientOrConfigEditorOption {
 
@@ -24,7 +24,7 @@ public final class LoginPath extends AbstractOption implements ClientOrConfigEdi
   }
 
   public static LoginPath loginPath(String name) {
-    Checks.checkNotNull(name, "name == null");
+    Check.notNull(name, "name == null");
 
     return new LoginPath("login-path", name);
   }

@@ -18,7 +18,7 @@ package br.com.objectos.http.server;
 import br.com.objectos.http.media.MediaType;
 import java.io.IOException;
 import java.util.Objects;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public abstract class Header implements SocketWritable {
 
@@ -29,7 +29,7 @@ public abstract class Header implements SocketWritable {
   }
 
   public static Header accessControlAllowOrigin(String origin) {
-    Checks.checkNotNull(origin, "origin == null");
+    Check.notNull(origin, "origin == null");
     return new StringHeader("Access-Control-Allow-Origin", origin);
   }
 
@@ -42,7 +42,7 @@ public abstract class Header implements SocketWritable {
   }
 
   public static Header location(String location) {
-    Checks.checkNotNull(location, "location == null");
+    Check.notNull(location, "location == null");
     return new StringHeader("Location", location);
   }
 

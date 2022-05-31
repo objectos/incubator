@@ -16,7 +16,7 @@
 package br.com.objectos.smtp;
 
 import java.util.UUID;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public class UUIDs {
 
@@ -27,8 +27,8 @@ public class UUIDs {
   private UUIDs() {}
 
   public static UUID fromByteArray(byte[] bytes) {
-    Checks.checkNotNull(bytes, "bytes == null");
-    Checks.checkArgument(bytes.length == 16, "bytes.length != 16");
+    Check.notNull(bytes, "bytes == null");
+    Check.argument(bytes.length == 16, "bytes.length != 16");
 
     long msb;
     msb = getMostSignificantBits(bytes);
@@ -40,7 +40,7 @@ public class UUIDs {
   }
 
   public static byte[] toByteArray(UUID uuid) {
-    Checks.checkNotNull(uuid, "uuid == null");
+    Check.notNull(uuid, "uuid == null");
 
     long msb;
     msb = uuid.getMostSignificantBits();
@@ -70,8 +70,8 @@ public class UUIDs {
   }
 
   public static String toHexString(byte[] bytes) {
-    Checks.checkNotNull(bytes, "bytes == null");
-    Checks.checkArgument(bytes.length == 16, "bytes.length != 16");
+    Check.notNull(bytes, "bytes == null");
+    Check.argument(bytes.length == 16, "bytes.length != 16");
 
     char[] charArray;
     charArray = new char[32];
@@ -88,7 +88,7 @@ public class UUIDs {
   }
 
   public static String toHexString(UUID uuid) {
-    Checks.checkNotNull(uuid, "uuid == null");
+    Check.notNull(uuid, "uuid == null");
 
     long msb;
     msb = uuid.getMostSignificantBits();

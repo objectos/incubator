@@ -26,7 +26,7 @@ import javax.lang.model.type.PrimitiveType;
 import javax.lang.model.type.TypeMirror;
 import javax.lang.model.type.TypeVariable;
 import javax.lang.model.type.WildcardType;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 final class NamedTypeFactory extends SimpleTypeVisitor<NamedType, Void> {
 
@@ -37,7 +37,7 @@ final class NamedTypeFactory extends SimpleTypeVisitor<NamedType, Void> {
   private NamedTypeFactory() {}
 
   public static NamedType of(TypeMirror type) {
-    Checks.checkNotNull(type, "type == null");
+    Check.notNull(type, "type == null");
 
     return type.accept(INSTANCE, null);
   }

@@ -31,7 +31,7 @@ import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.Map;
 import java.util.Set;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public class CssSpecDsl {
 
@@ -67,7 +67,7 @@ public class CssSpecDsl {
   }
 
   public final FunctionName addFunction(String name, MethodSignature[] signatures) {
-    Checks.checkArgument(!functions.containsKey(name), "function already defined: ", name);
+    Check.argument(!functions.containsKey(name), "function already defined: ", name);
 
     FunctionName function;
     function = FunctionName.of(name);
@@ -98,7 +98,7 @@ public class CssSpecDsl {
     String name;
     name = property.getName();
 
-    Checks.checkArgument(properties.add(name), "property already defined: ", name);
+    Check.argument(properties.add(name), "property already defined: ", name);
 
     step.addProperty(property);
 
@@ -142,7 +142,7 @@ public class CssSpecDsl {
   }
 
   public final KeywordName getKeyword(String value) {
-    Checks.checkNotNull(value, "value == null");
+    Check.notNull(value, "value == null");
 
     KeywordName keyword = keywords.get(value);
 
@@ -159,7 +159,7 @@ public class CssSpecDsl {
   }
 
   public final PrimitiveType getPrimitive(Primitive kind) {
-    Checks.checkNotNull(kind, "kind == null");
+    Check.notNull(kind, "kind == null");
 
     PrimitiveType type = primitives.get(kind);
 
@@ -172,8 +172,8 @@ public class CssSpecDsl {
   }
 
   public final ValueType getValueType(String name, Value[] values) {
-    Checks.checkNotNull(name, "name == null");
-    Checks.checkNotNull(values, "values == null");
+    Check.notNull(name, "name == null");
+    Check.notNull(values, "values == null");
 
     ValueType type = valueTypes.get(name);
 

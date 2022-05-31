@@ -21,7 +21,7 @@ import br.com.objectos.code.java.expression.Expressions;
 import br.com.objectos.code.java.expression.Identifier;
 import br.com.objectos.code.java.io.CodeWriter;
 import br.com.objectos.core.list.ImmutableList;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public class CaseSwitchElement extends SwitchElement {
 
@@ -33,7 +33,7 @@ public class CaseSwitchElement extends SwitchElement {
   }
 
   public static CaseSwitchElement _case(Identifier value, BlockStatement... statements) {
-    Checks.checkNotNull(value, "value == null");
+    Check.notNull(value, "value == null");
     return new CaseSwitchElement(
         value,
         ImmutableList.copyOf(statements)
@@ -48,7 +48,7 @@ public class CaseSwitchElement extends SwitchElement {
   }
 
   public static CaseSwitchElement _case(String value, BlockStatement... statements) {
-    Checks.checkNotNull(value, "value == null");
+    Check.notNull(value, "value == null");
     return new CaseSwitchElement(
         Expressions.l(value),
         ImmutableList.copyOf(statements)

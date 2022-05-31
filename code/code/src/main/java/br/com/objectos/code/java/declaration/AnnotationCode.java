@@ -27,7 +27,7 @@ import br.com.objectos.core.set.MutableSet;
 import java.lang.annotation.Annotation;
 import java.util.List;
 import java.util.Set;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public final class AnnotationCode
     extends AbstractImmutableCodeElement
@@ -42,7 +42,7 @@ public final class AnnotationCode
   }
 
   public static AnnotationCode annotation(AnnotationCodeElement... elements) {
-    Checks.checkNotNull(elements, "elements == null");
+    Check.notNull(elements, "elements == null");
     Builder b = builder();
 
     for (int i = 0; i < elements.length; i++) {
@@ -61,8 +61,8 @@ public final class AnnotationCode
   public static AnnotationCode annotation(
       AnnotationCodeElement v1,
       AnnotationCodeElement v2) {
-    Checks.checkNotNull(v1, "v1 == null");
-    Checks.checkNotNull(v2, "v2 == null");
+    Check.notNull(v1, "v1 == null");
+    Check.notNull(v2, "v2 == null");
     Builder b = builder();
     v1.acceptAnnotationCodeBuilder(b);
     v2.acceptAnnotationCodeBuilder(b);
@@ -73,9 +73,9 @@ public final class AnnotationCode
       AnnotationCodeElement v1,
       AnnotationCodeElement v2,
       AnnotationCodeElement v3) {
-    Checks.checkNotNull(v1, "v1 == null");
-    Checks.checkNotNull(v2, "v2 == null");
-    Checks.checkNotNull(v3, "v3 == null");
+    Check.notNull(v1, "v1 == null");
+    Check.notNull(v2, "v2 == null");
+    Check.notNull(v3, "v3 == null");
     Builder b = builder();
     v1.acceptAnnotationCodeBuilder(b);
     v2.acceptAnnotationCodeBuilder(b);
@@ -88,10 +88,10 @@ public final class AnnotationCode
       AnnotationCodeElement v2,
       AnnotationCodeElement v3,
       AnnotationCodeElement v4) {
-    Checks.checkNotNull(v1, "v1 == null");
-    Checks.checkNotNull(v2, "v2 == null");
-    Checks.checkNotNull(v3, "v3 == null");
-    Checks.checkNotNull(v4, "v4 == null");
+    Check.notNull(v1, "v1 == null");
+    Check.notNull(v2, "v2 == null");
+    Check.notNull(v3, "v3 == null");
+    Check.notNull(v4, "v4 == null");
     Builder b = builder();
     v1.acceptAnnotationCodeBuilder(b);
     v2.acceptAnnotationCodeBuilder(b);
@@ -106,11 +106,11 @@ public final class AnnotationCode
       AnnotationCodeElement v3,
       AnnotationCodeElement v4,
       AnnotationCodeElement v5) {
-    Checks.checkNotNull(v1, "v1 == null");
-    Checks.checkNotNull(v2, "v2 == null");
-    Checks.checkNotNull(v3, "v3 == null");
-    Checks.checkNotNull(v4, "v4 == null");
-    Checks.checkNotNull(v5, "v5 == null");
+    Check.notNull(v1, "v1 == null");
+    Check.notNull(v2, "v2 == null");
+    Check.notNull(v3, "v3 == null");
+    Check.notNull(v4, "v4 == null");
+    Check.notNull(v5, "v5 == null");
     Builder b = builder();
     v1.acceptAnnotationCodeBuilder(b);
     v2.acceptAnnotationCodeBuilder(b);
@@ -127,12 +127,12 @@ public final class AnnotationCode
       AnnotationCodeElement v4,
       AnnotationCodeElement v5,
       AnnotationCodeElement v6) {
-    Checks.checkNotNull(v1, "v1 == null");
-    Checks.checkNotNull(v2, "v2 == null");
-    Checks.checkNotNull(v3, "v3 == null");
-    Checks.checkNotNull(v4, "v4 == null");
-    Checks.checkNotNull(v5, "v5 == null");
-    Checks.checkNotNull(v6, "v6 == null");
+    Check.notNull(v1, "v1 == null");
+    Check.notNull(v2, "v2 == null");
+    Check.notNull(v3, "v3 == null");
+    Check.notNull(v4, "v4 == null");
+    Check.notNull(v5, "v5 == null");
+    Check.notNull(v6, "v6 == null");
     Builder b = builder();
     v1.acceptAnnotationCodeBuilder(b);
     v2.acceptAnnotationCodeBuilder(b);
@@ -151,13 +151,13 @@ public final class AnnotationCode
       AnnotationCodeElement v5,
       AnnotationCodeElement v6,
       AnnotationCodeElement v7) {
-    Checks.checkNotNull(v1, "v1 == null");
-    Checks.checkNotNull(v2, "v2 == null");
-    Checks.checkNotNull(v3, "v3 == null");
-    Checks.checkNotNull(v4, "v4 == null");
-    Checks.checkNotNull(v5, "v5 == null");
-    Checks.checkNotNull(v6, "v6 == null");
-    Checks.checkNotNull(v7, "v7 == null");
+    Check.notNull(v1, "v1 == null");
+    Check.notNull(v2, "v2 == null");
+    Check.notNull(v3, "v3 == null");
+    Check.notNull(v4, "v4 == null");
+    Check.notNull(v5, "v5 == null");
+    Check.notNull(v6, "v6 == null");
+    Check.notNull(v7, "v7 == null");
     Builder b = builder();
     v1.acceptAnnotationCodeBuilder(b);
     v2.acceptAnnotationCodeBuilder(b);
@@ -178,14 +178,14 @@ public final class AnnotationCode
       AnnotationCodeElement v6,
       AnnotationCodeElement v7,
       AnnotationCodeElement v8) {
-    Checks.checkNotNull(v1, "v1 == null");
-    Checks.checkNotNull(v2, "v2 == null");
-    Checks.checkNotNull(v3, "v3 == null");
-    Checks.checkNotNull(v5, "v5 == null");
-    Checks.checkNotNull(v4, "v4 == null");
-    Checks.checkNotNull(v6, "v6 == null");
-    Checks.checkNotNull(v7, "v7 == null");
-    Checks.checkNotNull(v8, "v8 == null");
+    Check.notNull(v1, "v1 == null");
+    Check.notNull(v2, "v2 == null");
+    Check.notNull(v3, "v3 == null");
+    Check.notNull(v5, "v5 == null");
+    Check.notNull(v4, "v4 == null");
+    Check.notNull(v6, "v6 == null");
+    Check.notNull(v7, "v7 == null");
+    Check.notNull(v8, "v8 == null");
     Builder b = builder();
     v1.acceptAnnotationCodeBuilder(b);
     v2.acceptAnnotationCodeBuilder(b);
@@ -208,15 +208,15 @@ public final class AnnotationCode
       AnnotationCodeElement v7,
       AnnotationCodeElement v8,
       AnnotationCodeElement v9) {
-    Checks.checkNotNull(v1, "v1 == null");
-    Checks.checkNotNull(v2, "v2 == null");
-    Checks.checkNotNull(v3, "v3 == null");
-    Checks.checkNotNull(v5, "v5 == null");
-    Checks.checkNotNull(v4, "v4 == null");
-    Checks.checkNotNull(v6, "v6 == null");
-    Checks.checkNotNull(v7, "v7 == null");
-    Checks.checkNotNull(v8, "v8 == null");
-    Checks.checkNotNull(v9, "v9 == null");
+    Check.notNull(v1, "v1 == null");
+    Check.notNull(v2, "v2 == null");
+    Check.notNull(v3, "v3 == null");
+    Check.notNull(v5, "v5 == null");
+    Check.notNull(v4, "v4 == null");
+    Check.notNull(v6, "v6 == null");
+    Check.notNull(v7, "v7 == null");
+    Check.notNull(v8, "v8 == null");
+    Check.notNull(v9, "v9 == null");
     Builder b = builder();
     v1.acceptAnnotationCodeBuilder(b);
     v2.acceptAnnotationCodeBuilder(b);
@@ -299,7 +299,7 @@ public final class AnnotationCode
     private Builder() {}
 
     public final Builder add(AnnotationCodeValuePair value) {
-      Checks.checkNotNull(value, "value == null");
+      Check.notNull(value, "value == null");
       addUnchecked(value);
       return this;
     }
@@ -309,12 +309,12 @@ public final class AnnotationCode
     }
 
     public final Builder setClassName(NamedClass className) {
-      this.className = Checks.checkNotNull(className, "className == null");
+      this.className = Check.notNull(className, "className == null");
       return this;
     }
 
     public final Builder setSingleValue(AnnotationCodeValue value) {
-      Checks.checkNotNull(value, "value == null");
+      Check.notNull(value, "value == null");
       mode = mode.setValue(this, value);
       return this;
     }

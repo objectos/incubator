@@ -33,32 +33,32 @@ import br.com.objectos.code.java.type.NamedClass;
 import br.com.objectos.css.boot.property.ParameterType;
 import br.com.objectos.css.boot.spec.Ids;
 import br.com.objectos.css.boot.type.TypeNames;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public abstract class MethodSignature implements Comparable<MethodSignature> {
 
   MethodSignature() {}
 
   public static MethodSignature abstractOf(ParameterType type, String name) {
-    Checks.checkNotNull(type, "type == null");
-    Checks.checkNotNull(name, "name == null");
+    Check.notNull(type, "type == null");
+    Check.notNull(name, "name == null");
     return new Abstract1(type, name);
   }
 
   public static MethodSignature of(
       ParameterType type, String name) {
-    Checks.checkNotNull(type, "type == null");
-    Checks.checkNotNull(name, "name == null");
+    Check.notNull(type, "type == null");
+    Check.notNull(name, "name == null");
     return new Signature1(type, name);
   }
 
   public static MethodSignature of(
       ParameterType type0, String name0,
       ParameterType type1, String name1) {
-    Checks.checkNotNull(type0, "type0 == null");
-    Checks.checkNotNull(name0, "name0 == null");
-    Checks.checkNotNull(type1, "type1 == null");
-    Checks.checkNotNull(name1, "name1 == null");
+    Check.notNull(type0, "type0 == null");
+    Check.notNull(name0, "name0 == null");
+    Check.notNull(type1, "type1 == null");
+    Check.notNull(name1, "name1 == null");
     return new Signature2(type0, name0, type1, name1);
   }
 
@@ -66,12 +66,12 @@ public abstract class MethodSignature implements Comparable<MethodSignature> {
       ParameterType type0, String name0,
       ParameterType type1, String name1,
       ParameterType type2, String name2) {
-    Checks.checkNotNull(type0, "type0 == null");
-    Checks.checkNotNull(name0, "name0 == null");
-    Checks.checkNotNull(type1, "type1 == null");
-    Checks.checkNotNull(name1, "name1 == null");
-    Checks.checkNotNull(type2, "type2 == null");
-    Checks.checkNotNull(name2, "name2 == null");
+    Check.notNull(type0, "type0 == null");
+    Check.notNull(name0, "name0 == null");
+    Check.notNull(type1, "type1 == null");
+    Check.notNull(name1, "name1 == null");
+    Check.notNull(type2, "type2 == null");
+    Check.notNull(name2, "name2 == null");
     return new Signature3(type0, name0, type1, name1, type2, name2);
   }
 
@@ -80,14 +80,14 @@ public abstract class MethodSignature implements Comparable<MethodSignature> {
       ParameterType type1, String name1,
       ParameterType type2, String name2,
       ParameterType type3, String name3) {
-    Checks.checkNotNull(type0, "type0 == null");
-    Checks.checkNotNull(name0, "name0 == null");
-    Checks.checkNotNull(type1, "type1 == null");
-    Checks.checkNotNull(name1, "name1 == null");
-    Checks.checkNotNull(type2, "type2 == null");
-    Checks.checkNotNull(name2, "name2 == null");
-    Checks.checkNotNull(type3, "type3 == null");
-    Checks.checkNotNull(name3, "name3 == null");
+    Check.notNull(type0, "type0 == null");
+    Check.notNull(name0, "name0 == null");
+    Check.notNull(type1, "type1 == null");
+    Check.notNull(name1, "name1 == null");
+    Check.notNull(type2, "type2 == null");
+    Check.notNull(name2, "name2 == null");
+    Check.notNull(type3, "type3 == null");
+    Check.notNull(name3, "name3 == null");
     return new Signature4(type0, name0, type1, name1, type2, name2, type3, name3);
   }
 
@@ -97,16 +97,16 @@ public abstract class MethodSignature implements Comparable<MethodSignature> {
       ParameterType type2, String name2,
       ParameterType type3, String name3,
       ParameterType type4, String name4) {
-    Checks.checkNotNull(type0, "type0 == null");
-    Checks.checkNotNull(name0, "name0 == null");
-    Checks.checkNotNull(type1, "type1 == null");
-    Checks.checkNotNull(name1, "name1 == null");
-    Checks.checkNotNull(type2, "type2 == null");
-    Checks.checkNotNull(name2, "name2 == null");
-    Checks.checkNotNull(type3, "type3 == null");
-    Checks.checkNotNull(name3, "name3 == null");
-    Checks.checkNotNull(type4, "type4 == null");
-    Checks.checkNotNull(name4, "name4 == null");
+    Check.notNull(type0, "type0 == null");
+    Check.notNull(name0, "name0 == null");
+    Check.notNull(type1, "type1 == null");
+    Check.notNull(name1, "name1 == null");
+    Check.notNull(type2, "type2 == null");
+    Check.notNull(name2, "name2 == null");
+    Check.notNull(type3, "type3 == null");
+    Check.notNull(name3, "name3 == null");
+    Check.notNull(type4, "type4 == null");
+    Check.notNull(name4, "name4 == null");
     return new Signature5(type0, name0, type1, name1, type2, name2, type3, name3, type4, name4);
   }
 
@@ -117,18 +117,18 @@ public abstract class MethodSignature implements Comparable<MethodSignature> {
       ParameterType type3, String name3,
       ParameterType type4, String name4,
       ParameterType type5, String name5) {
-    Checks.checkNotNull(type0, "type0 == null");
-    Checks.checkNotNull(name0, "name0 == null");
-    Checks.checkNotNull(type1, "type1 == null");
-    Checks.checkNotNull(name1, "name1 == null");
-    Checks.checkNotNull(type2, "type2 == null");
-    Checks.checkNotNull(name2, "name2 == null");
-    Checks.checkNotNull(type3, "type3 == null");
-    Checks.checkNotNull(name3, "name3 == null");
-    Checks.checkNotNull(type4, "type4 == null");
-    Checks.checkNotNull(name4, "name4 == null");
-    Checks.checkNotNull(type5, "type5 == null");
-    Checks.checkNotNull(name5, "name5 == null");
+    Check.notNull(type0, "type0 == null");
+    Check.notNull(name0, "name0 == null");
+    Check.notNull(type1, "type1 == null");
+    Check.notNull(name1, "name1 == null");
+    Check.notNull(type2, "type2 == null");
+    Check.notNull(name2, "name2 == null");
+    Check.notNull(type3, "type3 == null");
+    Check.notNull(name3, "name3 == null");
+    Check.notNull(type4, "type4 == null");
+    Check.notNull(name4, "name4 == null");
+    Check.notNull(type5, "type5 == null");
+    Check.notNull(name5, "name5 == null");
     return new Signature6(
         type0, name0, type1, name1, type2, name2, type3, name3, type4, name4, type5, name5
     );

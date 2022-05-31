@@ -16,7 +16,7 @@
 package br.com.objectos.concurrent;
 
 import br.com.objectos.core.service.AbstractService;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 import objectos.lang.NoteSink;
 
 abstract class AbstractConcurrentService extends AbstractService {
@@ -33,9 +33,9 @@ abstract class AbstractConcurrentService extends AbstractService {
    *         if this service has been started
    */
   public final void setLogger(NoteSink logger) {
-    Checks.checkState(!isStarted(), "Service already started");
+    Check.state(!isStarted(), "Service already started");
 
-    this.logger = Checks.checkNotNull(logger, "logger == null");
+    this.logger = Check.notNull(logger, "logger == null");
   }
 
   abstract boolean isStarted();

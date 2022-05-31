@@ -25,7 +25,7 @@ import javax.tools.JavaCompiler;
 import javax.tools.JavaCompiler.CompilationTask;
 import javax.tools.JavaFileObject;
 import javax.tools.ToolProvider;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public final class Tools {
 
@@ -34,7 +34,7 @@ public final class Tools {
   private Tools() {}
 
   public static JavacOption addModule(final String moduleName) {
-    Checks.checkNotNull(moduleName, "moduleName == null");
+    Check.notNull(moduleName, "moduleName == null");
 
     return new AbstractJavacOption() {
       @Override
@@ -63,7 +63,7 @@ public final class Tools {
   }
 
   public static Compilation javac(JavacElement... elements) {
-    Checks.checkNotNull(elements, "elements == null");
+    Check.notNull(elements, "elements == null");
 
     Builder b;
     b = new Builder();
@@ -83,7 +83,7 @@ public final class Tools {
   }
 
   public static JavacOption patchModuleWithTestClasses(final String moduleName) {
-    Checks.checkNotNull(moduleName, "moduleName == null");
+    Check.notNull(moduleName, "moduleName == null");
 
     return new AbstractJavacOption() {
       @Override

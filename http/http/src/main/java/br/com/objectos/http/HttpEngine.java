@@ -31,7 +31,7 @@ import java.nio.charset.CharsetEncoder;
 import java.nio.charset.CoderResult;
 import java.text.DateFormat;
 import java.util.Date;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 import objectos.lang.NoteSink;
 
 /**
@@ -238,7 +238,7 @@ final class HttpEngine implements CpuTask, IoTask, HttpResponseHandle {
   }
 
   public final void setInput(SocketChannel channel) {
-    this.channel = Checks.checkNotNull(channel, "channel == null");
+    this.channel = Check.notNull(channel, "channel == null");
 
     state = _START;
   }

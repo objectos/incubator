@@ -22,7 +22,7 @@ import static br.com.objectos.css.select.Combinator.GENERAL_SIBLING;
 import static br.com.objectos.css.select.Combinator.LIST;
 
 import br.com.objectos.css.select.Selector.Builder;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public class SelectorFactory {
 
@@ -33,25 +33,25 @@ public class SelectorFactory {
   }
 
   public static AttributeSelector attr(String name) {
-    Checks.checkNotNull(name, "name == null");
+    Check.notNull(name, "name == null");
     return new AttributeSelector(name);
   }
 
   public static AttributeValueSelector attr(String name, AttributeValueElement element) {
     AttributeSelector previous = attr(name);
-    Checks.checkNotNull(element, "element == null");
+    Check.notNull(element, "element == null");
     return new AttributeValueSelector(previous, element);
   }
 
   public static AttributeValueSelector attr(String name, AttributeValueOperator op, String value) {
     AttributeSelector previous = attr(name);
-    Checks.checkNotNull(op, "op == null");
-    Checks.checkNotNull(value, "value == null");
+    Check.notNull(op, "op == null");
+    Check.notNull(value, "value == null");
     return new AttributeValueSelector(previous, op, value);
   }
 
   public static ClassSelector cn(String className) {
-    Checks.checkNotNull(className, "className == null");
+    Check.notNull(className, "className == null");
     return new ClassSelector(className);
   }
 
@@ -60,7 +60,7 @@ public class SelectorFactory {
   }
 
   public static ClassSelector dot(String className) {
-    Checks.checkNotNull(className, "className == null");
+    Check.notNull(className, "className == null");
     return new ClassSelector(className);
   }
 
@@ -77,7 +77,7 @@ public class SelectorFactory {
   }
 
   public static IdSelector id(String id) {
-    Checks.checkNotNull(id, "id == null");
+    Check.notNull(id, "id == null");
     return new IdSelector(id);
   }
 
@@ -98,15 +98,15 @@ public class SelectorFactory {
   }
 
   public static Selector sel(Selector selector) {
-    return Checks.checkNotNull(selector, "selector == null");
+    return Check.notNull(selector, "selector == null");
   }
 
   public static Selector sel(SelectorElement... elements) {
-    Checks.checkNotNull(elements, "elements == null");
+    Check.notNull(elements, "elements == null");
     Builder b = Selector.builder();
 
     for (int i = 0; i < elements.length; i++) {
-      SelectorElement e = Checks.checkNotNull(elements[i], "elements[" + i + "] == null");
+      SelectorElement e = Check.notNull(elements[i], "elements[" + i + "] == null");
       e.acceptSelectorBuilderDsl(b);
     }
 
@@ -116,8 +116,8 @@ public class SelectorFactory {
   public static Selector sel(
       SelectorElement e1,
       SelectorElement e2) {
-    Checks.checkNotNull(e1, "e1 == null");
-    Checks.checkNotNull(e2, "e2 == null");
+    Check.notNull(e1, "e1 == null");
+    Check.notNull(e2, "e2 == null");
     Builder b = Selector.builder();
     e1.acceptSelectorBuilderDsl(b);
     e2.acceptSelectorBuilderDsl(b);
@@ -128,9 +128,9 @@ public class SelectorFactory {
       SelectorElement e1,
       SelectorElement e2,
       SelectorElement e3) {
-    Checks.checkNotNull(e1, "e1 == null");
-    Checks.checkNotNull(e2, "e2 == null");
-    Checks.checkNotNull(e3, "e3 == null");
+    Check.notNull(e1, "e1 == null");
+    Check.notNull(e2, "e2 == null");
+    Check.notNull(e3, "e3 == null");
     Builder b = Selector.builder();
     e1.acceptSelectorBuilderDsl(b);
     e2.acceptSelectorBuilderDsl(b);
@@ -143,10 +143,10 @@ public class SelectorFactory {
       SelectorElement e2,
       SelectorElement e3,
       SelectorElement e4) {
-    Checks.checkNotNull(e1, "e1 == null");
-    Checks.checkNotNull(e2, "e2 == null");
-    Checks.checkNotNull(e3, "e3 == null");
-    Checks.checkNotNull(e4, "e4 == null");
+    Check.notNull(e1, "e1 == null");
+    Check.notNull(e2, "e2 == null");
+    Check.notNull(e3, "e3 == null");
+    Check.notNull(e4, "e4 == null");
     Builder b = Selector.builder();
     e1.acceptSelectorBuilderDsl(b);
     e2.acceptSelectorBuilderDsl(b);
@@ -161,11 +161,11 @@ public class SelectorFactory {
       SelectorElement e3,
       SelectorElement e4,
       SelectorElement e5) {
-    Checks.checkNotNull(e1, "e1 == null");
-    Checks.checkNotNull(e2, "e2 == null");
-    Checks.checkNotNull(e3, "e3 == null");
-    Checks.checkNotNull(e4, "e4 == null");
-    Checks.checkNotNull(e5, "e5 == null");
+    Check.notNull(e1, "e1 == null");
+    Check.notNull(e2, "e2 == null");
+    Check.notNull(e3, "e3 == null");
+    Check.notNull(e4, "e4 == null");
+    Check.notNull(e5, "e5 == null");
     Builder b = Selector.builder();
     e1.acceptSelectorBuilderDsl(b);
     e2.acceptSelectorBuilderDsl(b);
@@ -182,12 +182,12 @@ public class SelectorFactory {
       SelectorElement e4,
       SelectorElement e5,
       SelectorElement e6) {
-    Checks.checkNotNull(e1, "e1 == null");
-    Checks.checkNotNull(e2, "e2 == null");
-    Checks.checkNotNull(e3, "e3 == null");
-    Checks.checkNotNull(e4, "e4 == null");
-    Checks.checkNotNull(e5, "e5 == null");
-    Checks.checkNotNull(e6, "e6 == null");
+    Check.notNull(e1, "e1 == null");
+    Check.notNull(e2, "e2 == null");
+    Check.notNull(e3, "e3 == null");
+    Check.notNull(e4, "e4 == null");
+    Check.notNull(e5, "e5 == null");
+    Check.notNull(e6, "e6 == null");
     Builder b = Selector.builder();
     e1.acceptSelectorBuilderDsl(b);
     e2.acceptSelectorBuilderDsl(b);
@@ -206,13 +206,13 @@ public class SelectorFactory {
       SelectorElement e5,
       SelectorElement e6,
       SelectorElement e7) {
-    Checks.checkNotNull(e1, "e1 == null");
-    Checks.checkNotNull(e2, "e2 == null");
-    Checks.checkNotNull(e3, "e3 == null");
-    Checks.checkNotNull(e4, "e4 == null");
-    Checks.checkNotNull(e5, "e5 == null");
-    Checks.checkNotNull(e6, "e6 == null");
-    Checks.checkNotNull(e7, "e7 == null");
+    Check.notNull(e1, "e1 == null");
+    Check.notNull(e2, "e2 == null");
+    Check.notNull(e3, "e3 == null");
+    Check.notNull(e4, "e4 == null");
+    Check.notNull(e5, "e5 == null");
+    Check.notNull(e6, "e6 == null");
+    Check.notNull(e7, "e7 == null");
     Builder b = Selector.builder();
     e1.acceptSelectorBuilderDsl(b);
     e2.acceptSelectorBuilderDsl(b);
@@ -233,14 +233,14 @@ public class SelectorFactory {
       SelectorElement e6,
       SelectorElement e7,
       SelectorElement e8) {
-    Checks.checkNotNull(e1, "e1 == null");
-    Checks.checkNotNull(e2, "e2 == null");
-    Checks.checkNotNull(e3, "e3 == null");
-    Checks.checkNotNull(e4, "e4 == null");
-    Checks.checkNotNull(e5, "e5 == null");
-    Checks.checkNotNull(e6, "e6 == null");
-    Checks.checkNotNull(e7, "e7 == null");
-    Checks.checkNotNull(e8, "e8 == null");
+    Check.notNull(e1, "e1 == null");
+    Check.notNull(e2, "e2 == null");
+    Check.notNull(e3, "e3 == null");
+    Check.notNull(e4, "e4 == null");
+    Check.notNull(e5, "e5 == null");
+    Check.notNull(e6, "e6 == null");
+    Check.notNull(e7, "e7 == null");
+    Check.notNull(e8, "e8 == null");
     Builder b = Selector.builder();
     e1.acceptSelectorBuilderDsl(b);
     e2.acceptSelectorBuilderDsl(b);
@@ -265,15 +265,15 @@ public class SelectorFactory {
       SelectorElement e7,
       SelectorElement e8,
       SelectorElement e9) {
-    Checks.checkNotNull(e1, "e1 == null");
-    Checks.checkNotNull(e2, "e2 == null");
-    Checks.checkNotNull(e3, "e3 == null");
-    Checks.checkNotNull(e4, "e4 == null");
-    Checks.checkNotNull(e5, "e5 == null");
-    Checks.checkNotNull(e6, "e6 == null");
-    Checks.checkNotNull(e7, "e7 == null");
-    Checks.checkNotNull(e8, "e8 == null");
-    Checks.checkNotNull(e9, "e9 == null");
+    Check.notNull(e1, "e1 == null");
+    Check.notNull(e2, "e2 == null");
+    Check.notNull(e3, "e3 == null");
+    Check.notNull(e4, "e4 == null");
+    Check.notNull(e5, "e5 == null");
+    Check.notNull(e6, "e6 == null");
+    Check.notNull(e7, "e7 == null");
+    Check.notNull(e8, "e8 == null");
+    Check.notNull(e9, "e9 == null");
     Builder b = Selector.builder();
     e1.acceptSelectorBuilderDsl(b);
     e2.acceptSelectorBuilderDsl(b);

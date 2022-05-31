@@ -19,7 +19,7 @@ import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.css.sheet.AbstractStyleSheet;
 import br.com.objectos.http.media.TextType;
 import java.io.IOException;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 import objectos.ssg.Site.Context;
 
 public abstract class SiteStyleSheet extends AbstractStyleSheet
@@ -35,9 +35,9 @@ public abstract class SiteStyleSheet extends AbstractStyleSheet
 
   @Override
   public final void configure(Context context) {
-    Checks.checkState(this.context == null, "context was already set");
+    Check.state(this.context == null, "context was already set");
 
-    this.context = Checks.checkNotNull(context, "context == null");
+    this.context = Check.notNull(context, "context == null");
 
     configure();
   }
@@ -74,7 +74,7 @@ public abstract class SiteStyleSheet extends AbstractStyleSheet
   }
 
   final void setPath(String path) {
-    Checks.checkState(this.path == null, "path was already set");
+    Check.state(this.path == null, "path was already set");
 
     this.path = path;
   }

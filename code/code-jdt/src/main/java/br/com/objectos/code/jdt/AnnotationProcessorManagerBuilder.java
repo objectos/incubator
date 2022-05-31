@@ -18,7 +18,7 @@ package br.com.objectos.code.jdt;
 import br.com.objectos.core.list.Lists;
 import java.util.List;
 import javax.annotation.processing.Processor;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 import org.eclipse.jdt.internal.compiler.AbstractAnnotationProcessorManager;
 import org.eclipse.jdt.internal.compiler.Compiler;
 
@@ -27,7 +27,7 @@ class AnnotationProcessorManagerBuilder {
   private final List<Processor> list = Lists.newArrayList();
 
   public void add(Processor processor) {
-    Checks.checkNotNull(processor, "processor == null");
+    Check.notNull(processor, "processor == null");
     list.add(processor);
   }
 

@@ -27,7 +27,7 @@ import br.com.objectos.code.java.io.JavaFileImportSet;
 import java.util.List;
 import javax.lang.model.element.TypeParameterElement;
 import javax.lang.model.type.TypeMirror;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public abstract class NamedTypeParameter extends AbstractCodeElement
     implements
@@ -39,13 +39,13 @@ public abstract class NamedTypeParameter extends AbstractCodeElement
 
   @Ignore("AggregatorGenProcessor")
   public static NamedTypeParameter named(String name) {
-    Checks.checkNotNull(name, "name == null");
+    Check.notNull(name, "name == null");
     return new Unbounded(name);
   }
 
   @Ignore("AggregatorGenProcessor")
   public static NamedTypeParameter of(TypeParameterElement element) {
-    Checks.checkNotNull(element, "element == null");
+    Check.notNull(element, "element == null");
 
     NamedTypeParameter result;
     result = named(element.getSimpleName().toString());
@@ -69,30 +69,30 @@ public abstract class NamedTypeParameter extends AbstractCodeElement
   }
 
   public static NamedTypeParameter typeParam(String name) {
-    Checks.checkNotNull(name, "name == null");
+    Check.notNull(name, "name == null");
     return new Unbounded(name);
   }
 
   public static NamedTypeParameter typeParam(String name, NamedClass bound) {
-    Checks.checkNotNull(name, "name == null");
-    Checks.checkNotNull(bound, "bound == null");
+    Check.notNull(name, "name == null");
+    Check.notNull(bound, "bound == null");
     return named(name).addBound0(bound);
   }
 
   public static NamedTypeParameter typeParam(
       String name, NamedClass bound1, NamedClass bound2) {
-    Checks.checkNotNull(name, "name == null");
-    Checks.checkNotNull(bound1, "bound1 == null");
-    Checks.checkNotNull(bound2, "bound2 == null");
+    Check.notNull(name, "name == null");
+    Check.notNull(bound1, "bound1 == null");
+    Check.notNull(bound2, "bound2 == null");
     return named(name).addBound0(bound1).addBound0(bound2);
   }
 
   public static NamedTypeParameter typeParam(
       String name, NamedClass bound1, NamedClass bound2, NamedClass bound3) {
-    Checks.checkNotNull(name, "name == null");
-    Checks.checkNotNull(bound1, "bound1 == null");
-    Checks.checkNotNull(bound2, "bound2 == null");
-    Checks.checkNotNull(bound3, "bound3 == null");
+    Check.notNull(name, "name == null");
+    Check.notNull(bound1, "bound1 == null");
+    Check.notNull(bound2, "bound2 == null");
+    Check.notNull(bound3, "bound3 == null");
     return named(name).addBound0(bound1).addBound0(bound2).addBound0(bound3);
   }
 
@@ -118,12 +118,12 @@ public abstract class NamedTypeParameter extends AbstractCodeElement
   }
 
   public final NamedTypeParameter addBound(NamedClass bound) {
-    Checks.checkNotNull(bound, "bound == null");
+    Check.notNull(bound, "bound == null");
     return addBound0(bound);
   }
 
   public final NamedTypeParameter addBound(NamedTypeVariable bound) {
-    Checks.checkNotNull(bound, "bound == null");
+    Check.notNull(bound, "bound == null");
     return addBound0(bound);
   }
 

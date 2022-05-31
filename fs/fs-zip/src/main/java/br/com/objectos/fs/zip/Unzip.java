@@ -27,7 +27,7 @@ import java.io.InputStream;
 import java.util.Enumeration;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 /**
  * @since 2
@@ -54,8 +54,8 @@ public final class Unzip {
   public static void unzip(
       Directory workingDirectory, RegularFile zipFile)
       throws IOException {
-    Checks.checkNotNull(workingDirectory, "workingDirectory == null");
-    Checks.checkNotNull(zipFile, "zipFile == null");
+    Check.notNull(workingDirectory, "workingDirectory == null");
+    Check.notNull(zipFile, "zipFile == null");
 
     File file;
     file = zipFile.toFile();

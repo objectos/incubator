@@ -31,7 +31,7 @@ import br.com.objectos.css.type.Color;
 import br.com.objectos.css.type.LengthUnit;
 import br.com.objectos.css.type.Value;
 import br.com.objectos.css.type.Zero;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public abstract class AbstractConfiguration implements Configuration {
 
@@ -43,7 +43,7 @@ public abstract class AbstractConfiguration implements Configuration {
 
   @Override
   public final void acceptConfigurationDsl(ConfigurationDsl dsl) {
-    this.dsl = Checks.checkNotNull(dsl, "dsl == null");
+    this.dsl = Check.notNull(dsl, "dsl == null");
     try {
       configure();
     } finally {

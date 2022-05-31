@@ -21,7 +21,7 @@ import br.com.objectos.code.java.expression.Expression;
 import br.com.objectos.code.java.expression.Identifier;
 import br.com.objectos.code.java.type.NamedClass;
 import br.com.objectos.code.java.type.NamedType;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public abstract class ForStatement extends AbstractSimpleStatement {
 
@@ -39,7 +39,7 @@ public abstract class ForStatement extends AbstractSimpleStatement {
   public static ForStatement _for(
       ForInitElement init, ForConditionElement condition, ForUpdateElement update,
       ForStatementElement e1) {
-    Checks.checkNotNull(e1, "e1 == null");
+    Check.notNull(e1, "e1 == null");
     Builder b = basicBuilder(init, condition, update);
     e1.acceptForStatementBuilder(b);
     return b.build();
@@ -49,8 +49,8 @@ public abstract class ForStatement extends AbstractSimpleStatement {
       ForInitElement init, ForConditionElement condition, ForUpdateElement update,
       ForStatementElement e1,
       ForStatementElement e2) {
-    Checks.checkNotNull(e1, "e1 == null");
-    Checks.checkNotNull(e2, "e2 == null");
+    Check.notNull(e1, "e1 == null");
+    Check.notNull(e2, "e2 == null");
     Builder b = basicBuilder(init, condition, update);
     e1.acceptForStatementBuilder(b);
     e2.acceptForStatementBuilder(b);
@@ -60,10 +60,10 @@ public abstract class ForStatement extends AbstractSimpleStatement {
   public static ForStatement _for(
       NamedType typeName, Identifier id, Expression expression,
       Statement body) {
-    Checks.checkNotNull(typeName, "typeName == null");
-    Checks.checkNotNull(id, "id == null");
-    Checks.checkNotNull(expression, "expression == null");
-    Checks.checkNotNull(body, "body == null");
+    Check.notNull(typeName, "typeName == null");
+    Check.notNull(id, "id == null");
+    Check.notNull(expression, "expression == null");
+    Check.notNull(body, "body == null");
     return new EnhancedForStatement(
         typeName, id, expression,
         body
@@ -97,13 +97,13 @@ public abstract class ForStatement extends AbstractSimpleStatement {
     private Builder() {}
 
     public final Builder addNewLine(NewLine newLine) {
-      Checks.checkNotNull(newLine, "newLine == null");
+      Check.notNull(newLine, "newLine == null");
       newLine.acceptStatementOrBlockBuilder(body);
       return this;
     }
 
     public final Builder addStatement(BlockStatement statement) {
-      Checks.checkNotNull(statement, "statement == null");
+      Check.notNull(statement, "statement == null");
       statement.acceptStatementOrBlockBuilder(body);
       return this;
     }
@@ -114,19 +114,19 @@ public abstract class ForStatement extends AbstractSimpleStatement {
 
     public final Builder condition(ForConditionElement condition) {
       setModeBasic();
-      this.condition = Checks.checkNotNull(condition, "condition == null");
+      this.condition = Check.notNull(condition, "condition == null");
       return this;
     }
 
     public final Builder init(ForInitElement init) {
       setModeBasic();
-      this.init = Checks.checkNotNull(init, "init == null");
+      this.init = Check.notNull(init, "init == null");
       return this;
     }
 
     public final Builder update(ForUpdateElement update) {
       setModeBasic();
-      this.update = Checks.checkNotNull(update, "update == null");
+      this.update = Check.notNull(update, "update == null");
       return this;
     }
 

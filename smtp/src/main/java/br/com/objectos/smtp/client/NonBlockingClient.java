@@ -29,7 +29,7 @@ import java.nio.charset.Charset;
 import java.nio.charset.CharsetDecoder;
 import java.nio.charset.CharsetEncoder;
 import java.nio.charset.CoderResult;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 import objectos.lang.Note1;
 import objectos.lang.NoteSink;
 
@@ -67,7 +67,7 @@ public class NonBlockingClient implements Client {
 
   @Override
   public final ClientSession connect(SocketChannelFactory serverAddress) throws IOException {
-    Checks.checkNotNull(serverAddress, "serverAddress == null");
+    Check.notNull(serverAddress, "serverAddress == null");
 
     if (sessionsSize > sessions.length) {
       throw new AssertionError("Unexpected... investigate");
@@ -146,9 +146,9 @@ public class NonBlockingClient implements Client {
 
     @Override
     public final void setLogger(NoteSink logger) {
-      Checks.checkState(this.logger == null, "logger was already set");
+      Check.state(this.logger == null, "logger was already set");
 
-      this.logger = Checks.checkNotNull(logger, "logger == null");
+      this.logger = Check.notNull(logger, "logger == null");
     }
 
   }

@@ -46,7 +46,7 @@ import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.Name;
 import javax.lang.model.element.PackageElement;
 import javax.lang.model.element.TypeElement;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 import objectos.lang.HashCode;
 
 public class NamedClass extends NamedClassOrParameterized
@@ -83,9 +83,9 @@ public class NamedClass extends NamedClassOrParameterized
   }
 
   public static NamedClass of(NamedClass className, String simpleName) {
-    Checks.checkNotNull(className, "className == null");
-    Checks.checkNotNull(simpleName, "simpleName == null");
-    Checks.checkArgument(
+    Check.notNull(className, "className == null");
+    Check.notNull(simpleName, "simpleName == null");
+    Check.argument(
         SourceVersion.isName(simpleName),
         simpleName, " is not a valid class name"
     );
@@ -94,9 +94,9 @@ public class NamedClass extends NamedClassOrParameterized
   }
 
   public static NamedClass of(PackageName packageName, String simpleName) {
-    Checks.checkNotNull(packageName, "packageName == null");
-    Checks.checkNotNull(simpleName, "simpleName == null");
-    Checks.checkArgument(
+    Check.notNull(packageName, "packageName == null");
+    Check.notNull(simpleName, "simpleName == null");
+    Check.argument(
         SourceVersion.isName(simpleName),
         simpleName, " is not a valid class name"
     );
@@ -105,13 +105,13 @@ public class NamedClass extends NamedClassOrParameterized
   }
 
   public static NamedClass of(TypeElement element) {
-    Checks.checkNotNull(element, "element == null");
+    Check.notNull(element, "element == null");
 
     return ofUnchecked(element);
   }
 
   public static NamedClass ofWithNullMessage(Class<?> type, String nullMessage) {
-    Checks.checkNotNull(type, nullMessage);
+    Check.notNull(type, nullMessage);
     return ofUnchecked(type);
   }
 
@@ -259,7 +259,7 @@ public class NamedClass extends NamedClassOrParameterized
   }
 
   public final RegularFile createSourceFile(Directory directory) throws IOException {
-    Checks.checkNotNull(directory, "directory == null");
+    Check.notNull(directory, "directory == null");
 
     Directory sourceDirectory;
     sourceDirectory = enclosingElement.createSourceDirectory(directory);
@@ -487,21 +487,21 @@ public class NamedClass extends NamedClassOrParameterized
   }
 
   public final NamedClass withPrefix(String prefix) {
-    Checks.checkNotNull(prefix, "prefix == null");
+    Check.notNull(prefix, "prefix == null");
     String withPrefix = prefix + simpleName;
     checkTypeName(withPrefix);
     return new NamedClass(enclosingElement, withPrefix);
   }
 
   public final NamedClass withSuffix(String suffix) {
-    Checks.checkNotNull(suffix, "suffix == null");
+    Check.notNull(suffix, "suffix == null");
     String withSuffix = simpleName + suffix;
     checkTypeName(withSuffix);
     return new NamedClass(enclosingElement, withSuffix);
   }
 
   private void checkTypeName(String simpleName) {
-    Checks.checkArgument(
+    Check.argument(
         simpleName != null && SourceVersion.isName(simpleName),
         simpleName, "%s is not a valid type name"
     );

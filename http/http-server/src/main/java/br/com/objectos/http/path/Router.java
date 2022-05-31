@@ -26,7 +26,7 @@ import br.com.objectos.http.server.Resolution;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public class Router {
 
@@ -43,7 +43,7 @@ public class Router {
   }
 
   public static Router of(HttpModule module) {
-    Checks.checkNotNull(module, "module == null");
+    Check.notNull(module, "module == null");
     Builder b = new Builder();
     module.acceptHttpModuleDsl(b);
     return b.build();
@@ -152,7 +152,7 @@ public class Router {
 
     @Override
     public final void addRoute(Route route) {
-      Checks.checkNotNull(route, "route == null");
+      Check.notNull(route, "route == null");
       routes.add(beforeAdd(route));
     }
 
@@ -162,14 +162,14 @@ public class Router {
 
     @Override
     public final void install(HttpModule module) {
-      Checks.checkNotNull(module, "module == null");
+      Check.notNull(module, "module == null");
       module.acceptHttpModuleDsl(this);
     }
 
     @Override
     public final void installAndIntercept(HttpModule module, HttpInterceptor interceptor) {
-      Checks.checkNotNull(module, "module == null");
-      Checks.checkNotNull(interceptor, "interceptor == null");
+      Check.notNull(module, "module == null");
+      Check.notNull(interceptor, "interceptor == null");
       Builder builder = new WithInterceptor(interceptor);
       module.acceptHttpModuleDsl(builder);
       routes.addAll(builder.routes);

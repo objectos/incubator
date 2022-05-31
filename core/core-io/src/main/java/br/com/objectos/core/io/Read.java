@@ -23,7 +23,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.Reader;
 import java.nio.charset.Charset;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 /**
  * Provides {@code static} methods for reading from {@link InputStream},
@@ -72,7 +72,7 @@ public final class Read {
    *         if the input stream cannot be closed
    */
   public static byte[] byteArray(InputStreamSource source, byte[] buffer) throws IOException {
-    Checks.checkNotNull(source, "source == null");
+    Check.notNull(source, "source == null");
     Copy.checkBuffer(buffer);
 
     try (var in = source.openInputStream(); var out = new ByteArrayOutputStream()) {
@@ -102,7 +102,7 @@ public final class Read {
    *         if lines cannot be read or if the reader cannot be closed
    */
   public static ImmutableList<String> lines(Reader reader) throws IOException {
-    Checks.checkNotNull(reader, "reader == null");
+    Check.notNull(reader, "reader == null");
 
     BufferedReader r;
 
@@ -132,8 +132,8 @@ public final class Read {
    */
   public static ImmutableList<String> lines(
       ReaderSource source, Charset charset) throws IOException {
-    Checks.checkNotNull(source, "source == null");
-    Checks.checkNotNull(charset, "charset == null");
+    Check.notNull(source, "source == null");
+    Check.notNull(charset, "charset == null");
 
     BufferedReader reader;
     reader = open(source, charset);
@@ -184,8 +184,8 @@ public final class Read {
    */
   public static String string(
       ReaderSource source, Charset charset, char[] buffer) throws IOException {
-    Checks.checkNotNull(source, "source == null");
-    Checks.checkNotNull(charset, "charset == null");
+    Check.notNull(source, "source == null");
+    Check.notNull(charset, "charset == null");
     Copy.checkBuffer(buffer);
 
     StringBuilder result;

@@ -21,7 +21,7 @@ import br.com.objectos.code.java.io.CodeWriter;
 import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.core.list.MutableList;
 import java.util.Iterator;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public class TryStatement extends AbstractSimpleStatement {
 
@@ -43,8 +43,8 @@ public class TryStatement extends AbstractSimpleStatement {
   public static TryStatement _try(
       TryStatementElement e1,
       TryStatementElement e2) {
-    Checks.checkNotNull(e1, "e1 == null");
-    Checks.checkNotNull(e2, "e2 == null");
+    Check.notNull(e1, "e1 == null");
+    Check.notNull(e2, "e2 == null");
     Builder b = builder();
     e1.acceptTryStatementBuilder(b);
     e2.acceptTryStatementBuilder(b);
@@ -55,9 +55,9 @@ public class TryStatement extends AbstractSimpleStatement {
       TryStatementElement e1,
       TryStatementElement e2,
       TryStatementElement e3) {
-    Checks.checkNotNull(e1, "e1 == null");
-    Checks.checkNotNull(e2, "e2 == null");
-    Checks.checkNotNull(e3, "e3 == null");
+    Check.notNull(e1, "e1 == null");
+    Check.notNull(e2, "e2 == null");
+    Check.notNull(e3, "e3 == null");
     Builder b = builder();
     e1.acceptTryStatementBuilder(b);
     e2.acceptTryStatementBuilder(b);
@@ -70,10 +70,10 @@ public class TryStatement extends AbstractSimpleStatement {
       TryStatementElement e2,
       TryStatementElement e3,
       TryStatementElement e4) {
-    Checks.checkNotNull(e1, "e1 == null");
-    Checks.checkNotNull(e2, "e2 == null");
-    Checks.checkNotNull(e3, "e3 == null");
-    Checks.checkNotNull(e4, "e4 == null");
+    Check.notNull(e1, "e1 == null");
+    Check.notNull(e2, "e2 == null");
+    Check.notNull(e3, "e3 == null");
+    Check.notNull(e4, "e4 == null");
     Builder b = builder();
     e1.acceptTryStatementBuilder(b);
     e2.acceptTryStatementBuilder(b);
@@ -88,11 +88,11 @@ public class TryStatement extends AbstractSimpleStatement {
       TryStatementElement e3,
       TryStatementElement e4,
       TryStatementElement e5) {
-    Checks.checkNotNull(e1, "e1 == null");
-    Checks.checkNotNull(e2, "e2 == null");
-    Checks.checkNotNull(e3, "e3 == null");
-    Checks.checkNotNull(e4, "e4 == null");
-    Checks.checkNotNull(e5, "e5 == null");
+    Check.notNull(e1, "e1 == null");
+    Check.notNull(e2, "e2 == null");
+    Check.notNull(e3, "e3 == null");
+    Check.notNull(e4, "e4 == null");
+    Check.notNull(e5, "e5 == null");
     Builder b = builder();
     e1.acceptTryStatementBuilder(b);
     e2.acceptTryStatementBuilder(b);

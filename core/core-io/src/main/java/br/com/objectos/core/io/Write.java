@@ -19,7 +19,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.Writer;
 import java.nio.charset.Charset;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 /**
  * Provides {@code static} methods for writing to {@link OutputStream} and
@@ -45,8 +45,8 @@ public final class Write {
    *         or if the output stream cannot be closed
    */
   public static void byteArray(OutputStreamSource dst, byte[] bytes) throws IOException {
-    Checks.checkNotNull(dst, "dst == null");
-    Checks.checkNotNull(bytes, "bytes == null");
+    Check.notNull(dst, "dst == null");
+    Check.notNull(bytes, "bytes == null");
 
     try (OutputStream outputStream = dst.openOutputStream()) {
       outputStream.write(bytes, 0, bytes.length);
@@ -70,9 +70,9 @@ public final class Write {
    */
   public static void string(
       WriterSource dst, Charset charset, String string) throws IOException {
-    Checks.checkNotNull(dst, "dst == null");
-    Checks.checkNotNull(charset, "charset == null");
-    Checks.checkNotNull(string, "string == null");
+    Check.notNull(dst, "dst == null");
+    Check.notNull(charset, "charset == null");
+    Check.notNull(string, "string == null");
 
     try (Writer writer = dst.openWriter(charset)) {
       writer.write(string);

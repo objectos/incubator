@@ -17,7 +17,7 @@ package br.com.objectos.lexer.impl.ah;
 
 import br.com.objectos.lexer.charexp.CharExpression;
 import java.util.Objects;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 abstract class Block {
 
@@ -42,7 +42,7 @@ abstract class Block {
 
   public final Block addString(String string) {
     Objects.requireNonNull(string);
-    Checks.checkArgument(!string.isEmpty(), "string cannot be empty");
+    Check.argument(!string.isEmpty(), "string cannot be empty");
     return string.length() == 1
         ? addChar(string.charAt(0))
         : matcherBlock(Quantifier.ONE, new StringConsumer(string));

@@ -23,7 +23,7 @@ import static br.com.objectos.mojo.Mojo.url;
 import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.LocalFs;
 import java.io.IOException;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 final class MojoTesting {
 
@@ -81,12 +81,12 @@ final class MojoTesting {
     String mirrorUrl;
     mirrorUrl = System.getProperty("objectos.mojo.testing.mirrorUrl");
 
-    Checks.checkNotNull(mirrorUrl, "objectos.mojo.testing.mirrorUrl was not set");
+    Check.notNull(mirrorUrl, "objectos.mojo.testing.mirrorUrl was not set");
 
     String repositoryPath;
     repositoryPath = System.getProperty("objectos.mojo.testing.repository");
 
-    Checks.checkNotNull(repositoryPath, "objectos.mojo.testing.repository was not set");
+    Check.notNull(repositoryPath, "objectos.mojo.testing.repository was not set");
 
     Directory repository;
 

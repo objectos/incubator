@@ -22,7 +22,7 @@ import br.com.objectos.smtp.mail.ReversePathException;
 import br.com.objectos.smtp.mail.ReversePathFacade;
 import java.io.IOException;
 import java.nio.channels.ReadableByteChannel;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public class CommandFacade {
 
@@ -37,8 +37,8 @@ public class CommandFacade {
   private final ReversePathFacade reversePathFacade;
 
   public CommandFacade(CommandParser commandParser, ReversePathFacade reversePathFacade) {
-    this.commandParser = Checks.checkNotNull(commandParser, "commandParser == null");
-    this.reversePathFacade = Checks.checkNotNull(reversePathFacade, "reversePathFacade == null");
+    this.commandParser = Check.notNull(commandParser, "commandParser == null");
+    this.reversePathFacade = Check.notNull(reversePathFacade, "reversePathFacade == null");
   }
 
   public final void consume(CommandVisitor visitor) {
@@ -64,7 +64,7 @@ public class CommandFacade {
   }
 
   final void consume1(CommandVisitor visitor) {
-    commandVisitor = Checks.checkNotNull(visitor, "visitor == null");
+    commandVisitor = Check.notNull(visitor, "visitor == null");
 
     while (hasCode()) {
       int commandByteCode;

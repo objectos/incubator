@@ -15,7 +15,7 @@
  */
 package br.com.objectos.logger;
 
-import objectos.lang.Checks;
+import objectos.lang.Check;
 import objectos.lang.Note;
 import objectos.lang.Note0;
 import objectos.lang.Note1;
@@ -131,7 +131,7 @@ abstract class AbstractConfigurableLogger implements ConfigurableLogger {
    */
   @Override
   public final void setLevel(Level level) {
-    this.level = Checks.checkNotNull(level, "level == null");
+    this.level = Check.notNull(level, "level == null");
   }
 
   abstract void write(WriteJobLog log);

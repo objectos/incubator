@@ -15,7 +15,7 @@
  */
 package br.com.objectos.core.array;
 
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 /**
  * <p>
@@ -81,7 +81,7 @@ public final class ByteArrays {
    *         if {@code requiredIndex < 0}
    */
   public static byte[] copyIfNecessary(byte[] array, int requiredIndex) {
-    Checks.checkArgument(requiredIndex >= 0, "requiredIndex cannot be negative");
+    Check.argument(requiredIndex >= 0, "requiredIndex cannot be negative");
 
     int length;
     length = array.length;
@@ -133,7 +133,7 @@ public final class ByteArrays {
    *         if {@code array} is null
    */
   public static String toHexString(byte[] array) {
-    Checks.checkNotNull(array, "array == null");
+    Check.notNull(array, "array == null");
 
     int length;
     length = array.length;
@@ -147,8 +147,8 @@ public final class ByteArrays {
   }
 
   static long longValue(byte[] array) {
-    Checks.checkNotNull(array, "array == null");
-    Checks.checkArgument(array.length == 8, "array.length must be 8");
+    Check.notNull(array, "array == null");
+    Check.argument(array.length == 8, "array.length must be 8");
 
     return longValueUnchecked(array);
   }

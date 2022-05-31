@@ -20,7 +20,7 @@ import br.com.objectos.code.java.element.CodeElement;
 import br.com.objectos.code.java.element.Keywords;
 import br.com.objectos.code.java.type.NamedClass;
 import br.com.objectos.code.java.type.NamedClassOrParameterized;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public final class ClassExtends extends AbstractImmutableCodeElement {
 
@@ -45,13 +45,13 @@ public final class ClassExtends extends AbstractImmutableCodeElement {
     }
 
     public final Builder setSuperclass(Class<?> superclass) {
-      Checks.checkNotNull(superclass, "superclass == null");
+      Check.notNull(superclass, "superclass == null");
       type = NamedClass.of(superclass);
       return this;
     }
     
     public final Builder setSuperclass(NamedClassOrParameterized superclass) {
-      type = Checks.checkNotNull(superclass, "superclass == null");
+      type = Check.notNull(superclass, "superclass == null");
       return this;
     }
 

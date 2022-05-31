@@ -15,7 +15,7 @@
  */
 package br.com.objectos.office.writer;
 
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public abstract class AbstractWriterScript implements WriterScript {
 
@@ -23,7 +23,7 @@ public abstract class AbstractWriterScript implements WriterScript {
 
   @Override
   public final synchronized void acceptWriterDsl(WriterDsl dsl) {
-    this.dsl = Checks.checkNotNull(dsl, "dsl == null");
+    this.dsl = Check.notNull(dsl, "dsl == null");
 
     try {
       definition();

@@ -26,7 +26,7 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Set;
 import java.util.stream.Stream;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public class SiteConfiguration implements Site.Context {
 
@@ -102,7 +102,7 @@ public class SiteConfiguration implements Site.Context {
   @SuppressWarnings("unchecked")
   @Override
   public final <T> T getObject(Class<? extends T> key) {
-    Checks.checkNotNull(key, "key == null");
+    Check.notNull(key, "key == null");
 
     Object object;
     object = byClassMap.get(key);
@@ -151,7 +151,7 @@ public class SiteConfiguration implements Site.Context {
   }
 
   final <T extends SitePage> T addPage0(T page, String path) {
-    Checks.checkNotNull(page, "page == null");
+    Check.notNull(page, "page == null");
 
     addByClass(page);
 
@@ -176,7 +176,7 @@ public class SiteConfiguration implements Site.Context {
   }
 
   final <T extends SiteStyleSheet> T addStyleSheet0(T sheet, String path) {
-    Checks.checkNotNull(sheet, "sheet == null");
+    Check.notNull(sheet, "sheet == null");
 
     addByClass(sheet);
 

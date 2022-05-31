@@ -15,7 +15,7 @@
  */
 package br.com.objectos.http;
 
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 final class HeaderCookieImpl extends AbstractHeader<Header.Cookie> implements Header.Cookie {
 
@@ -73,7 +73,7 @@ final class HeaderCookieImpl extends AbstractHeader<Header.Cookie> implements He
 
   @Override
   public final Cookie withCookieValue(String newValue) {
-    Checks.checkNotNull(newValue, "newValue == null");
+    Check.notNull(newValue, "newValue == null");
 
     return new HeaderCookieImpl(cookieName, newValue);
   }

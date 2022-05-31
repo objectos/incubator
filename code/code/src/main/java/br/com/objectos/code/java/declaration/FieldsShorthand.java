@@ -15,7 +15,7 @@
  */
 package br.com.objectos.code.java.declaration;
 
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public class FieldsShorthand implements ClassCodeElement, InterfaceCodeElement {
 
@@ -26,7 +26,7 @@ public class FieldsShorthand implements ClassCodeElement, InterfaceCodeElement {
   }
 
   public static FieldsShorthand fields(Iterable<FieldCode> fields) {
-    Checks.checkNotNull(fields, "fields == null");
+    Check.notNull(fields, "fields == null");
     return new FieldsShorthand(fields);
   }
 

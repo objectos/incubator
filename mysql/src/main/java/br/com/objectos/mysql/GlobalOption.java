@@ -17,7 +17,7 @@ package br.com.objectos.mysql;
 
 import br.com.objectos.fs.RegularFile;
 import br.com.objectos.fs.ResolvedPath;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public final class GlobalOption extends AbstractOption
     implements
@@ -35,13 +35,13 @@ public final class GlobalOption extends AbstractOption
   }
 
   public static GlobalOption bindAddress(String address) {
-    Checks.checkNotNull(address, "address == null");
+    Check.notNull(address, "address == null");
 
     return new GlobalOption("bind-address", address);
   }
 
   public static GlobalOption defaultsFile(RegularFile file) {
-    Checks.checkNotNull(file, "file == null");
+    Check.notNull(file, "file == null");
 
     return new GlobalOption("defaults-file", file.getPath());
   }
@@ -51,13 +51,13 @@ public final class GlobalOption extends AbstractOption
   }
 
   public static GlobalOption port(int value) {
-    Checks.checkNotNull(value, "value == null");
+    Check.notNull(value, "value == null");
 
     return new GlobalOption("port", Integer.toString(value));
   }
 
   public static GlobalOption socket(ResolvedPath path) {
-    Checks.checkNotNull(path, "path == null");
+    Check.notNull(path, "path == null");
 
     return new GlobalOption("socket", path.getPath());
   }

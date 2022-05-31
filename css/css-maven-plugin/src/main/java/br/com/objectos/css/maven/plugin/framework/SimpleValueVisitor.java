@@ -23,7 +23,7 @@ import br.com.objectos.css.type.Creator;
 import br.com.objectos.css.type.LengthUnit;
 import br.com.objectos.css.type.Marker;
 import br.com.objectos.css.type.Value;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 class SimpleValueVisitor<E> implements Creator, Marker {
 
@@ -150,7 +150,7 @@ class SimpleValueVisitor<E> implements Creator, Marker {
   public void markUri() {}
 
   protected final void set(E newResult) {
-    this.result = Checks.checkNotNull(newResult, "newResult == null");
+    this.result = Check.notNull(newResult, "newResult == null");
   }
 
 }

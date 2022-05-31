@@ -25,7 +25,7 @@ import br.com.objectos.html.spi.tmpl.Marker;
 import br.com.objectos.html.spi.tmpl.Renderer;
 import br.com.objectos.html.spi.type.Value;
 import java.util.Arrays;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public class TemplateDsl implements Marker, Renderer {
 
@@ -73,19 +73,19 @@ public class TemplateDsl implements Marker, Renderer {
   }
 
   public final void addAttribute(AttributeName name) {
-    Checks.checkNotNull(name, "name == null");
+    Check.notNull(name, "name == null");
 
     addAttribute0(name);
   }
 
   public final void addAttribute(AttributeName name, String value) {
-    Checks.checkNotNull(name, "name == null");
+    Check.notNull(name, "name == null");
 
     addAttribute0(name, value);
   }
 
   public final void addAttribute(String name) {
-    Checks.checkNotNull(name, "name == null");
+    Check.notNull(name, "name == null");
     StandardAttributeName maybeStd = StandardAttributeName.getByName(name);
     if (maybeStd != null) {
       addAttribute0(maybeStd);
@@ -96,7 +96,7 @@ public class TemplateDsl implements Marker, Renderer {
 
   @Override
   public final void addAttribute(String name, String value) {
-    Checks.checkNotNull(name, "name == null");
+    Check.notNull(name, "name == null");
     StandardAttributeName maybeStd = StandardAttributeName.getByName(name);
     if (maybeStd != null) {
       addAttribute0(maybeStd, value);
@@ -139,8 +139,8 @@ public class TemplateDsl implements Marker, Renderer {
   }
 
   public final void addElement(ElementName name, String text) {
-    Checks.checkNotNull(name, "name == null");
-    Checks.checkNotNull(text, "text == null");
+    Check.notNull(name, "name == null");
+    Check.notNull(text, "text == null");
 
     addProto(ByteProto.END_ELEMENT);
 
@@ -157,8 +157,8 @@ public class TemplateDsl implements Marker, Renderer {
   }
 
   public final void addElement(ElementName name, Value[] values) {
-    Checks.checkNotNull(name, "name == null");
-    Checks.checkNotNull(values, "values == null");
+    Check.notNull(name, "name == null");
+    Check.notNull(values, "values == null");
 
     renderAll(values);
 
@@ -174,7 +174,7 @@ public class TemplateDsl implements Marker, Renderer {
   }
 
   public final void addFragment(AbstractFragment fragment) {
-    Checks.checkNotNull(fragment, "fragment == null");
+    Check.notNull(fragment, "fragment == null");
 
     int returnLevel;
     returnLevel = level;
@@ -195,7 +195,7 @@ public class TemplateDsl implements Marker, Renderer {
   }
 
   public final void addLambda(Lambda lambda) {
-    Checks.checkNotNull(lambda, "lambda == null");
+    Check.notNull(lambda, "lambda == null");
 
     int returnLevel;
     returnLevel = level;
@@ -226,7 +226,7 @@ public class TemplateDsl implements Marker, Renderer {
   }
 
   public final void addTemplate(Template template) {
-    Checks.checkNotNull(template, "template == null");
+    Check.notNull(template, "template == null");
     template.acceptTemplateDsl(this);
   }
 
@@ -328,7 +328,7 @@ public class TemplateDsl implements Marker, Renderer {
   }
 
   final void uncheckedAddAttribute(String name, String value) {
-    Checks.checkNotNull(value, "value == null");
+    Check.notNull(value, "value == null");
 
     addProto(value.length());
     addProto(name.length());
@@ -353,7 +353,7 @@ public class TemplateDsl implements Marker, Renderer {
   }
 
   private void addAttribute0(AttributeName name, String value) {
-    Checks.checkNotNull(value, "value == null");
+    Check.notNull(value, "value == null");
 
     addProto(value.length());
     addProto(bufferLength);

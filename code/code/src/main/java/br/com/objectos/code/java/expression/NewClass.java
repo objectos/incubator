@@ -20,7 +20,7 @@ import br.com.objectos.code.java.element.Keywords;
 import br.com.objectos.code.java.expression.production.ClassInstanceCreationExpression;
 import br.com.objectos.code.java.io.CodeWriter;
 import br.com.objectos.code.java.type.NamedClass;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public class NewClass extends AbstractStatementExpression
     implements
@@ -40,22 +40,22 @@ public class NewClass extends AbstractStatementExpression
 
   public static NewClass _new(
       NamedClass className) {
-    Checks.checkNotNull(className, "className == null");
+    Check.notNull(className, "className == null");
     return new NewClass(className, noop(), Arguments.empty());
   }
 
   public static NewClass _new(
       NamedClass className,
       Arguments args) {
-    Checks.checkNotNull(className, "className == null");
-    Checks.checkNotNull(args, "args == null");
+    Check.notNull(className, "className == null");
+    Check.notNull(args, "args == null");
     return new NewClass(className, noop(), args);
   }
 
   public static NewClass _new(
       NamedClass className,
       ArgumentsElement a1) {
-    Checks.checkNotNull(className, "className == null");
+    Check.notNull(className, "className == null");
     return new NewClass(className, noop(), Arguments.args(a1));
   }
 
@@ -63,7 +63,7 @@ public class NewClass extends AbstractStatementExpression
       NamedClass className,
       ArgumentsElement a1,
       ArgumentsElement a2) {
-    Checks.checkNotNull(className, "className == null");
+    Check.notNull(className, "className == null");
     return new NewClass(className, noop(), Arguments.args(a1, a2));
   }
 
@@ -72,7 +72,7 @@ public class NewClass extends AbstractStatementExpression
       ArgumentsElement a1,
       ArgumentsElement a2,
       ArgumentsElement a3) {
-    Checks.checkNotNull(className, "className == null");
+    Check.notNull(className, "className == null");
     return new NewClass(className, noop(), Arguments.args(a1, a2, a3));
   }
 
@@ -82,38 +82,38 @@ public class NewClass extends AbstractStatementExpression
       ArgumentsElement a2,
       ArgumentsElement a3,
       ArgumentsElement a4) {
-    Checks.checkNotNull(className, "className == null");
+    Check.notNull(className, "className == null");
     return new NewClass(className, noop(), Arguments.args(a1, a2, a3, a4));
   }
 
   public static NewClass _new(
       NamedClass className,
       Iterable<? extends ArgumentsElement> args) {
-    Checks.checkNotNull(className, "className == null");
+    Check.notNull(className, "className == null");
     return new NewClass(className, noop(), Arguments.args(args));
   }
 
   public static NewClass _new(
       NamedClass className, TypeWitness witness) {
-    Checks.checkNotNull(className, "className == null");
-    Checks.checkNotNull(witness, "witness == null");
+    Check.notNull(className, "className == null");
+    Check.notNull(witness, "witness == null");
     return new NewClass(className, witness, Arguments.empty());
   }
 
   public static NewClass _new(
       NamedClass className, TypeWitness witness,
       Arguments args) {
-    Checks.checkNotNull(className, "className == null");
-    Checks.checkNotNull(witness, "witness == null");
-    Checks.checkNotNull(args, "args == null");
+    Check.notNull(className, "className == null");
+    Check.notNull(witness, "witness == null");
+    Check.notNull(args, "args == null");
     return new NewClass(className, witness, args);
   }
 
   public static NewClass _new(
       NamedClass className, TypeWitness witness,
       ArgumentsElement a1) {
-    Checks.checkNotNull(className, "className == null");
-    Checks.checkNotNull(witness, "witness == null");
+    Check.notNull(className, "className == null");
+    Check.notNull(witness, "witness == null");
     return new NewClass(className, witness, Arguments.args(a1));
   }
 
@@ -121,8 +121,8 @@ public class NewClass extends AbstractStatementExpression
       NamedClass className, TypeWitness witness,
       ArgumentsElement a1,
       ArgumentsElement a2) {
-    Checks.checkNotNull(className, "className == null");
-    Checks.checkNotNull(witness, "witness == null");
+    Check.notNull(className, "className == null");
+    Check.notNull(witness, "witness == null");
     return new NewClass(className, witness, Arguments.args(a1, a2));
   }
 
@@ -131,8 +131,8 @@ public class NewClass extends AbstractStatementExpression
       ArgumentsElement a1,
       ArgumentsElement a2,
       ArgumentsElement a3) {
-    Checks.checkNotNull(className, "className == null");
-    Checks.checkNotNull(witness, "witness == null");
+    Check.notNull(className, "className == null");
+    Check.notNull(witness, "witness == null");
     return new NewClass(className, witness, Arguments.args(a1, a2, a3));
   }
 
@@ -142,16 +142,16 @@ public class NewClass extends AbstractStatementExpression
       ArgumentsElement a2,
       ArgumentsElement a3,
       ArgumentsElement a4) {
-    Checks.checkNotNull(className, "className == null");
-    Checks.checkNotNull(witness, "witness == null");
+    Check.notNull(className, "className == null");
+    Check.notNull(witness, "witness == null");
     return new NewClass(className, witness, Arguments.args(a1, a2, a3, a4));
   }
 
   public static NewClass _new(
       NamedClass className, TypeWitness witness,
       Iterable<? extends ArgumentsElement> args) {
-    Checks.checkNotNull(className, "className == null");
-    Checks.checkNotNull(witness, "witness == null");
+    Check.notNull(className, "className == null");
+    Check.notNull(witness, "witness == null");
     return new NewClass(className, witness, Arguments.args(args));
   }
 

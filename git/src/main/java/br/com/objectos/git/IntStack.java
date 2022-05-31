@@ -16,7 +16,7 @@
 package br.com.objectos.git;
 
 import br.com.objectos.core.array.IntArrays;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 final class IntStack {
 
@@ -41,13 +41,13 @@ final class IntStack {
   }
 
   public final int peek() {
-    Checks.checkState(size > 0, "stack is empty");
+    Check.state(size > 0, "stack is empty");
 
     return values[size - 1];
   }
 
   public final int pop() {
-    Checks.checkState(size > 0, "stack is empty");
+    Check.state(size > 0, "stack is empty");
 
     return values[--size];
   }

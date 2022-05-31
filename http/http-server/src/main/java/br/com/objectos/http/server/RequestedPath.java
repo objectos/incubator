@@ -17,7 +17,7 @@ package br.com.objectos.http.server;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public class RequestedPath implements Iterator<RequestedPart> {
 
@@ -30,7 +30,7 @@ public class RequestedPath implements Iterator<RequestedPart> {
   private Builder builder = new Builder(0);
 
   public RequestedPath(String path) {
-    Checks.checkNotNull(path, "path == null");
+    Check.notNull(path, "path == null");
     charArray = path.toCharArray();
   }
 

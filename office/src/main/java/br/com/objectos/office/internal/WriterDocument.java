@@ -34,7 +34,7 @@ import com.sun.star.util.XReplaceDescriptor;
 import com.sun.star.util.XReplaceable;
 import java.io.IOException;
 import java.net.URI;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 final class WriterDocument extends Document implements WriterDsl {
 
@@ -66,7 +66,7 @@ final class WriterDocument extends Document implements WriterDsl {
 
   @Override
   public final void p(String... lines) {
-    Checks.checkNotNull(lines, "lines == null");
+    Check.notNull(lines, "lines == null");
 
     XTextCursor cursor;
     cursor = text.createTextCursor();
@@ -89,8 +89,8 @@ final class WriterDocument extends Document implements WriterDsl {
 
   @Override
   public final void replace(String target, String replacement) {
-    Checks.checkNotNull(target, "target == null");
-    Checks.checkNotNull(replacement, "replacement == null");
+    Check.notNull(target, "target == null");
+    Check.notNull(replacement, "replacement == null");
 
     XReplaceable replaceable;
     replaceable = queryInterface(XReplaceable.class);
@@ -107,7 +107,7 @@ final class WriterDocument extends Document implements WriterDsl {
 
   @Override
   final void executeWriterScript(WriterScript script) {
-    Checks.checkNotNull(script, "script == null");
+    Check.notNull(script, "script == null");
 
     script.acceptWriterDsl(this);
   }

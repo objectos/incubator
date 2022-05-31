@@ -19,7 +19,7 @@ import br.com.objectos.css.property.StandardPropertyName;
 import br.com.objectos.css.select.Combinator;
 import br.com.objectos.css.sheet.CompiledStyleSheet;
 import java.io.IOException;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public class PrettyCssWriter extends CssWriter {
 
@@ -31,7 +31,7 @@ public class PrettyCssWriter extends CssWriter {
   }
 
   public static PrettyCssWriter of(Appendable out) {
-    Checks.checkNotNull(out, "out == null");
+    Check.notNull(out, "out == null");
 
     Indentation indentation = Indentation.standard();
 

@@ -16,7 +16,7 @@
 package br.com.objectos.http;
 
 import br.com.objectos.core.list.ImmutableList;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public final class Response {
 
@@ -43,7 +43,7 @@ public final class Response {
   }
 
   public final void acceptResponseVisitor(ResponseVisitor visitor) {
-    Checks.checkNotNull(visitor, "visitor == null");
+    Check.notNull(visitor, "visitor == null");
 
     visitor.visitResponseStatusLine(version, status, reasonPhrase);
 

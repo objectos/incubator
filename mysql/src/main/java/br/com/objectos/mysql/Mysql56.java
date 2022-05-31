@@ -21,7 +21,7 @@ import java.io.IOException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public final class Mysql56 {
 
@@ -32,10 +32,10 @@ public final class Mysql56 {
       ConfigurationFile configurationFile,
       ServerOption option1,
       ServerOption option2) throws IOException {
-    Checks.checkNotNull(scriptsDirectory, "scriptsDirectory == null");
-    Checks.checkNotNull(configurationFile, "configurationFile == null");
-    Checks.checkNotNull(option1, "option1 == null");
-    Checks.checkNotNull(option2, "option2 == null");
+    Check.notNull(scriptsDirectory, "scriptsDirectory == null");
+    Check.notNull(configurationFile, "configurationFile == null");
+    Check.notNull(option1, "option1 == null");
+    Check.notNull(option2, "option2 == null");
 
     Set<String> keys;
     keys = new HashSet<String>();
@@ -44,9 +44,9 @@ public final class Mysql56 {
 
     option2.addKeyTo(keys);
 
-    Checks.checkArgument(keys.contains("basedir"), "--basedir option was not set");
+    Check.argument(keys.contains("basedir"), "--basedir option was not set");
 
-    Checks.checkArgument(keys.contains("datadir"), "--datadir option was not set");
+    Check.argument(keys.contains("datadir"), "--datadir option was not set");
 
     RegularFile scriptFile;
 

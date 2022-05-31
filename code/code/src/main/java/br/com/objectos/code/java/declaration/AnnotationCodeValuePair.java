@@ -20,7 +20,7 @@ import br.com.objectos.code.java.element.AbstractCodeElement;
 import br.com.objectos.code.java.expression.Expressions;
 import br.com.objectos.code.java.expression.Identifier;
 import br.com.objectos.code.java.io.CodeWriter;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public class AnnotationCodeValuePair extends AbstractCodeElement implements AnnotationCodeElement {
 
@@ -34,7 +34,7 @@ public class AnnotationCodeValuePair extends AbstractCodeElement implements Anno
 
   public static AnnotationCodeValuePair value(String name, AnnotationCodeValue value) {
     Identifier id = Expressions.id(name);
-    Checks.checkNotNull(value, "value == null");
+    Check.notNull(value, "value == null");
     return new AnnotationCodeValuePair(id, value);
   }
 

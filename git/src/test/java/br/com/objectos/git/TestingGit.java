@@ -30,7 +30,7 @@ import br.com.objectos.fs.testing.TmpDir;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.concurrent.ExecutionException;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 final class TestingGit {
 
@@ -201,7 +201,7 @@ final class TestingGit {
   }
 
   public static byte[] decode64(String... lines) {
-    Checks.checkNotNull(lines, "lines == null");
+    Check.notNull(lines, "lines == null");
 
     // 0
     if (lines.length == 0) {
@@ -216,7 +216,7 @@ final class TestingGit {
       String line;
       line = lines[i];
 
-      Checks.checkNotNull(line, "lines[", i, "] == null");
+      Check.notNull(line, "lines[", i, "] == null");
 
       if (line.isEmpty()) {
         throw new IllegalArgumentException("lines[" + i + "] is empty");
@@ -225,7 +225,7 @@ final class TestingGit {
       inputLength += line.length();
     }
 
-    Checks.checkArgument(inputLength >= 2, "input string length must be at least 2 chars");
+    Check.argument(inputLength >= 2, "input string length must be at least 2 chars");
 
     // 2
     int resultLength;

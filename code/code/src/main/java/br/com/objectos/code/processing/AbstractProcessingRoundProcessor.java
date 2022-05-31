@@ -27,7 +27,7 @@ import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Name;
 import javax.lang.model.element.PackageElement;
 import javax.lang.model.element.TypeElement;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public abstract class AbstractProcessingRoundProcessor extends AbstractProcessor {
 
@@ -55,7 +55,7 @@ public abstract class AbstractProcessingRoundProcessor extends AbstractProcessor
   protected abstract boolean process(ProcessingRound round);
 
   protected final Set<String> supportedAnnotationTypes(Class<? extends Annotation> annotation) {
-    Checks.checkNotNull(annotation, "annotation == null");
+    Check.notNull(annotation, "annotation == null");
     return Collections.singleton(annotation.getCanonicalName());
   }
 
@@ -87,14 +87,14 @@ public abstract class AbstractProcessingRoundProcessor extends AbstractProcessor
 
     @Override
     public final void reprocessPackage(PackageElement packageElement) {
-      Checks.checkNotNull(packageElement, "packageElement == null");
+      Check.notNull(packageElement, "packageElement == null");
 
       packages.add(packageElement.getQualifiedName());
     }
 
     @Override
     public final void reprocessType(TypeElement type) {
-      Checks.checkNotNull(type, "type == null");
+      Check.notNull(type, "type == null");
 
       types.add(type.getQualifiedName());
     }

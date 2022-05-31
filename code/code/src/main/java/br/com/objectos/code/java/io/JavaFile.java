@@ -28,7 +28,7 @@ import java.io.IOException;
 import java.io.Writer;
 import javax.annotation.processing.Filer;
 import javax.tools.JavaFileObject;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public final class JavaFile {
 
@@ -51,8 +51,8 @@ public final class JavaFile {
   }
 
   public static JavaFile javaFile(PackageName packageName, TypeCode type) {
-    Checks.checkNotNull(packageName, "packageName == null");
-    Checks.checkNotNull(type, "type == null");
+    Check.notNull(packageName, "packageName == null");
+    Check.notNull(type, "type == null");
     Builder b = builder();
     b.setPackage(packageName);
     b.addType(type);
@@ -120,7 +120,7 @@ public final class JavaFile {
     }
 
     public final Builder setPackage(PackageName packageName) {
-      this.packageName = Checks.checkNotNull(packageName, "packageName == null");
+      this.packageName = Check.notNull(packageName, "packageName == null");
       return this;
     }
 

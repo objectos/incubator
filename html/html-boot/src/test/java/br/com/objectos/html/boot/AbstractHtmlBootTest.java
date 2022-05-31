@@ -28,7 +28,7 @@ import br.com.objectos.html.boot.spec.SpecDsl;
 import br.com.objectos.html.boot.spec.Step;
 import br.com.objectos.html.boot.spec.StepFactory;
 import java.util.Map;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public abstract class AbstractHtmlBootTest {
 
@@ -64,7 +64,7 @@ public abstract class AbstractHtmlBootTest {
   }
 
   protected final void testLines(Object o, String... expected) {
-    Checks.checkNotNull(o, "o == null");
+    Check.notNull(o, "o == null");
 
     assertHasLines(o.toString(), expected);
   }

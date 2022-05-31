@@ -20,7 +20,7 @@ import br.com.objectos.css.select.IdSelector;
 import br.com.objectos.css.select.SelectorFactory;
 import java.util.Locale;
 import java.util.Set;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 final class RandomIdSelectorGenerator {
 
@@ -35,7 +35,7 @@ final class RandomIdSelectorGenerator {
   }
 
   public static IdSelector randomIdSelector(int length) {
-    Checks.checkArgument(length > 0, "length must be > 0");
+    Check.argument(length > 0, "length must be > 0");
 
     for (int i = 0; i < MAX_TRIES; i++) {
       String className;

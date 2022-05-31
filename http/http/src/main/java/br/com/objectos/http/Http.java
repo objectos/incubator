@@ -24,7 +24,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayDeque;
 import java.util.Locale;
 import java.util.TimeZone;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public final class Http {
 
@@ -93,7 +93,7 @@ public final class Http {
   }
 
   static int checkBufferSize(int size) {
-    Checks.checkArgument(size >= 64, "bufferSize minimum value is 64 bytes");
+    Check.argument(size >= 64, "bufferSize minimum value is 64 bytes");
 
     return size;
   }

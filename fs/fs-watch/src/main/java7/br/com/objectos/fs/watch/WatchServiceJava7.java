@@ -29,7 +29,7 @@ import java.nio.file.WatchKey;
 import java.util.Collection;
 import java.util.EnumSet;
 import java.util.Set;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 final class WatchServiceJava7 implements Watch.Service {
 
@@ -106,14 +106,14 @@ final class WatchServiceJava7 implements Watch.Service {
     @Override
     public final void watchDirectory(
         Directory directory, Listener listener, Event event) {
-      Checks.checkNotNull(directory, "directory == null");
+      Check.notNull(directory, "directory == null");
 
       if (directories.containsKey(directory)) {
         throw new IllegalArgumentException(directory.getPath() + " has already been registered");
       }
 
-      Checks.checkNotNull(listener, "listener == null");
-      Checks.checkNotNull(event, "event == null");
+      Check.notNull(listener, "listener == null");
+      Check.notNull(event, "event == null");
 
       EnumSet<Event> events;
       events = EnumSet.of(event);

@@ -36,7 +36,7 @@ import javax.lang.model.element.TypeElement;
 import javax.lang.model.util.ElementFilter;
 import javax.lang.model.util.Elements;
 import javax.lang.model.util.Types;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 import org.testng.IHookCallBack;
 import org.testng.IHookable;
 import org.testng.ITestResult;
@@ -139,7 +139,7 @@ public abstract class AbstractCodeCoreTest implements IHookable {
     TypeElement typeElement;
     typeElement = elements.getTypeElement(name);
 
-    return Checks.checkNotNull(typeElement, "Return null TypeElement for " + name);
+    return Check.notNull(typeElement, "Return null TypeElement for " + name);
   }
 
   protected final Types getTypeUtils() {

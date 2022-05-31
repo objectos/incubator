@@ -18,7 +18,7 @@ package br.com.objectos.code.java.declaration;
 import br.com.objectos.code.java.element.AbstractImmutableCodeElement;
 import br.com.objectos.code.java.element.CodeElement;
 import br.com.objectos.code.java.type.NamedArray;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public class VarArgs extends AbstractImmutableCodeElement implements ParameterTypeName {
 
@@ -27,7 +27,7 @@ public class VarArgs extends AbstractImmutableCodeElement implements ParameterTy
   }
 
   public static VarArgs of(NamedArray typeName) {
-    Checks.checkNotNull(typeName, "typeName == null");
+    Check.notNull(typeName, "typeName == null");
     return new VarArgs(
         typeName.getDeepComponent(),
         typeName.printVarArgsSymbol()

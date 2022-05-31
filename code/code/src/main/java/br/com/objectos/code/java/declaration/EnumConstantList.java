@@ -22,7 +22,7 @@ import br.com.objectos.code.java.io.CodeWriter;
 import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.core.list.MutableList;
 import java.util.Iterator;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public class EnumConstantList extends AbstractCodeElement
     implements
@@ -97,7 +97,7 @@ public class EnumConstantList extends AbstractCodeElement
     }
 
     public final Builder addEnumConstants(Iterable<? extends EnumConstantCode> constants) {
-      Checks.checkNotNull(constants, "constants == null");
+      Check.notNull(constants, "constants == null");
 
       for (EnumConstantCode constant : constants) {
         list.addWithNullMessage(constant, "constants[n] == null");

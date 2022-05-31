@@ -20,7 +20,7 @@ import br.com.objectos.code.java.element.AbstractImmutableCodeElement;
 import br.com.objectos.code.java.element.CodeElement;
 import br.com.objectos.code.java.expression.Arguments;
 import br.com.objectos.code.java.expression.Identifier;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public class EnumConstantCode
     extends AbstractImmutableCodeElement
@@ -38,7 +38,7 @@ public class EnumConstantCode
 
   public static EnumConstantCode enumConstant(
       EnumConstantCodeElement e1) {
-    Checks.checkNotNull(e1, "e1 == null");
+    Check.notNull(e1, "e1 == null");
     Builder b = builder();
     e1.acceptEnumConstantCodeBuilder(b);
     return b.build();
@@ -47,8 +47,8 @@ public class EnumConstantCode
   public static EnumConstantCode enumConstant(
       EnumConstantCodeElement e1,
       EnumConstantCodeElement e2) {
-    Checks.checkNotNull(e1, "e1 == null");
-    Checks.checkNotNull(e2, "e2 == null");
+    Check.notNull(e1, "e1 == null");
+    Check.notNull(e2, "e2 == null");
     Builder b = builder();
     e1.acceptEnumConstantCodeBuilder(b);
     e2.acceptEnumConstantCodeBuilder(b);
@@ -68,7 +68,7 @@ public class EnumConstantCode
     private Builder() {}
 
     public final Builder arguments(Arguments arguments) {
-      this.arguments = Checks.checkNotNull(arguments, "arguments == null");
+      this.arguments = Check.notNull(arguments, "arguments == null");
       return this;
     }
 
@@ -77,7 +77,7 @@ public class EnumConstantCode
     }
 
     public final Builder simpleName(Identifier name) {
-      this.simpleName = Checks.checkNotNull(name, "name == null");
+      this.simpleName = Check.notNull(name, "name == null");
       return this;
     }
 

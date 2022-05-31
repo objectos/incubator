@@ -38,7 +38,7 @@ import br.com.objectos.core.list.MutableList;
 import java.lang.annotation.Annotation;
 import java.util.Set;
 import javax.lang.model.element.ExecutableElement;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public final class MethodCode
     extends AbstractCodeElement
@@ -74,14 +74,14 @@ public final class MethodCode
 
   public static MethodCode method(
       MethodCodeElement e1) {
-    Checks.checkNotNull(e1, "e1 == null");
+    Check.notNull(e1, "e1 == null");
     Builder b = MethodCode.builder();
     e1.acceptMethodCodeBuilder(b);
     return b.build();
   }
 
   public static MethodCode method(MethodCodeElement... elements) {
-    Checks.checkNotNull(elements, "elements == null");
+    Check.notNull(elements, "elements == null");
     Builder b = MethodCode.builder();
     for (int i = 0; i < elements.length; i++) {
       MethodCodeElement element = elements[i];
@@ -95,8 +95,8 @@ public final class MethodCode
 
   public static MethodCode method(
       MethodCodeElement e1, MethodCodeElement e2) {
-    Checks.checkNotNull(e1, "e1 == null");
-    Checks.checkNotNull(e2, "e2 == null");
+    Check.notNull(e1, "e1 == null");
+    Check.notNull(e2, "e2 == null");
     Builder b = MethodCode.builder();
     e1.acceptMethodCodeBuilder(b);
     e2.acceptMethodCodeBuilder(b);
@@ -105,9 +105,9 @@ public final class MethodCode
 
   public static MethodCode method(
       MethodCodeElement e1, MethodCodeElement e2, MethodCodeElement e3) {
-    Checks.checkNotNull(e1, "e1 == null");
-    Checks.checkNotNull(e2, "e2 == null");
-    Checks.checkNotNull(e3, "e3 == null");
+    Check.notNull(e1, "e1 == null");
+    Check.notNull(e2, "e2 == null");
+    Check.notNull(e3, "e3 == null");
     Builder b = MethodCode.builder();
     e1.acceptMethodCodeBuilder(b);
     e2.acceptMethodCodeBuilder(b);
@@ -117,10 +117,10 @@ public final class MethodCode
 
   public static MethodCode method(
       MethodCodeElement e1, MethodCodeElement e2, MethodCodeElement e3, MethodCodeElement e4) {
-    Checks.checkNotNull(e1, "e1 == null");
-    Checks.checkNotNull(e2, "e2 == null");
-    Checks.checkNotNull(e3, "e3 == null");
-    Checks.checkNotNull(e4, "e4 == null");
+    Check.notNull(e1, "e1 == null");
+    Check.notNull(e2, "e2 == null");
+    Check.notNull(e3, "e3 == null");
+    Check.notNull(e4, "e4 == null");
     Builder b = MethodCode.builder();
     e1.acceptMethodCodeBuilder(b);
     e2.acceptMethodCodeBuilder(b);
@@ -135,11 +135,11 @@ public final class MethodCode
       MethodCodeElement e3,
       MethodCodeElement e4,
       MethodCodeElement e5) {
-    Checks.checkNotNull(e1, "e1 == null");
-    Checks.checkNotNull(e2, "e2 == null");
-    Checks.checkNotNull(e3, "e3 == null");
-    Checks.checkNotNull(e4, "e4 == null");
-    Checks.checkNotNull(e5, "e5 == null");
+    Check.notNull(e1, "e1 == null");
+    Check.notNull(e2, "e2 == null");
+    Check.notNull(e3, "e3 == null");
+    Check.notNull(e4, "e4 == null");
+    Check.notNull(e5, "e5 == null");
     Builder b = MethodCode.builder();
     e1.acceptMethodCodeBuilder(b);
     e2.acceptMethodCodeBuilder(b);
@@ -156,12 +156,12 @@ public final class MethodCode
       MethodCodeElement e4,
       MethodCodeElement e5,
       MethodCodeElement e6) {
-    Checks.checkNotNull(e1, "e1 == null");
-    Checks.checkNotNull(e2, "e2 == null");
-    Checks.checkNotNull(e3, "e3 == null");
-    Checks.checkNotNull(e4, "e4 == null");
-    Checks.checkNotNull(e5, "e5 == null");
-    Checks.checkNotNull(e6, "e6 == null");
+    Check.notNull(e1, "e1 == null");
+    Check.notNull(e2, "e2 == null");
+    Check.notNull(e3, "e3 == null");
+    Check.notNull(e4, "e4 == null");
+    Check.notNull(e5, "e5 == null");
+    Check.notNull(e6, "e6 == null");
     Builder b = MethodCode.builder();
     e1.acceptMethodCodeBuilder(b);
     e2.acceptMethodCodeBuilder(b);
@@ -180,13 +180,13 @@ public final class MethodCode
       MethodCodeElement e5,
       MethodCodeElement e6,
       MethodCodeElement e7) {
-    Checks.checkNotNull(e1, "e1 == null");
-    Checks.checkNotNull(e2, "e2 == null");
-    Checks.checkNotNull(e3, "e3 == null");
-    Checks.checkNotNull(e4, "e4 == null");
-    Checks.checkNotNull(e5, "e5 == null");
-    Checks.checkNotNull(e6, "e6 == null");
-    Checks.checkNotNull(e7, "e7 == null");
+    Check.notNull(e1, "e1 == null");
+    Check.notNull(e2, "e2 == null");
+    Check.notNull(e3, "e3 == null");
+    Check.notNull(e4, "e4 == null");
+    Check.notNull(e5, "e5 == null");
+    Check.notNull(e6, "e6 == null");
+    Check.notNull(e7, "e7 == null");
     Builder b = MethodCode.builder();
     e1.acceptMethodCodeBuilder(b);
     e2.acceptMethodCodeBuilder(b);
@@ -207,14 +207,14 @@ public final class MethodCode
       MethodCodeElement e6,
       MethodCodeElement e7,
       MethodCodeElement e8) {
-    Checks.checkNotNull(e1, "e1 == null");
-    Checks.checkNotNull(e2, "e2 == null");
-    Checks.checkNotNull(e3, "e3 == null");
-    Checks.checkNotNull(e4, "e4 == null");
-    Checks.checkNotNull(e5, "e5 == null");
-    Checks.checkNotNull(e6, "e6 == null");
-    Checks.checkNotNull(e7, "e7 == null");
-    Checks.checkNotNull(e8, "e8 == null");
+    Check.notNull(e1, "e1 == null");
+    Check.notNull(e2, "e2 == null");
+    Check.notNull(e3, "e3 == null");
+    Check.notNull(e4, "e4 == null");
+    Check.notNull(e5, "e5 == null");
+    Check.notNull(e6, "e6 == null");
+    Check.notNull(e7, "e7 == null");
+    Check.notNull(e8, "e8 == null");
     Builder b = MethodCode.builder();
     e1.acceptMethodCodeBuilder(b);
     e2.acceptMethodCodeBuilder(b);
@@ -237,15 +237,15 @@ public final class MethodCode
       MethodCodeElement e7,
       MethodCodeElement e8,
       MethodCodeElement e9) {
-    Checks.checkNotNull(e1, "e1 == null");
-    Checks.checkNotNull(e2, "e2 == null");
-    Checks.checkNotNull(e3, "e3 == null");
-    Checks.checkNotNull(e4, "e4 == null");
-    Checks.checkNotNull(e5, "e5 == null");
-    Checks.checkNotNull(e6, "e6 == null");
-    Checks.checkNotNull(e7, "e7 == null");
-    Checks.checkNotNull(e8, "e8 == null");
-    Checks.checkNotNull(e9, "e9 == null");
+    Check.notNull(e1, "e1 == null");
+    Check.notNull(e2, "e2 == null");
+    Check.notNull(e3, "e3 == null");
+    Check.notNull(e4, "e4 == null");
+    Check.notNull(e5, "e5 == null");
+    Check.notNull(e6, "e6 == null");
+    Check.notNull(e7, "e7 == null");
+    Check.notNull(e8, "e8 == null");
+    Check.notNull(e9, "e9 == null");
     Builder b = MethodCode.builder();
     e1.acceptMethodCodeBuilder(b);
     e2.acceptMethodCodeBuilder(b);
@@ -260,15 +260,15 @@ public final class MethodCode
   }
 
   public static OverridingProcessingMethod overriding(ProcessingMethod method) {
-    Checks.checkNotNull(method, "method == null");
-    Checks.checkArgument(!method.isFinal(), "Cannot override a final method");
-    Checks.checkArgument(!method.isStatic(), "Cannot override a static method");
-    Checks.checkArgument(!method.isPrivate(), "Cannot override a private method");
+    Check.notNull(method, "method == null");
+    Check.argument(!method.isFinal(), "Cannot override a final method");
+    Check.argument(!method.isStatic(), "Cannot override a static method");
+    Check.argument(!method.isPrivate(), "Cannot override a private method");
     return new OverridingProcessingMethod(method);
   }
 
   public static SignatureOfProcessingMethod signatureOf(ProcessingMethod method) {
-    Checks.checkNotNull(method, "method == null");
+    Check.notNull(method, "method == null");
     return new SignatureOfProcessingMethod(method);
   }
 
@@ -369,7 +369,7 @@ public final class MethodCode
     private Builder() {}
 
     public final Builder accessLevel(AccessLevel accessLevel) {
-      Checks.checkNotNull(accessLevel, "accessLevel == null");
+      Check.notNull(accessLevel, "accessLevel == null");
       switch (accessLevel) {
         case PUBLIC:
           return uncheckedAddModifier(Modifiers.PUBLIC);
@@ -383,7 +383,7 @@ public final class MethodCode
     }
 
     public final Builder accessLevelOf(ExecutableElement element) {
-      Checks.checkNotNull(element, "element == null");
+      Check.notNull(element, "element == null");
       Set<javax.lang.model.element.Modifier> modifierSet = element.getModifiers();
 
       if (modifierSet.contains(PUBLIC)) {
@@ -430,7 +430,7 @@ public final class MethodCode
       NamedClass typeName;
       typeName = NamedClass.of(type);
 
-      Checks.checkNotNull(name, "name == null");
+      Check.notNull(name, "name == null");
 
       ParameterCode parameter;
       parameter = ParameterCode.ofUnchecked(typeName, name);
@@ -439,19 +439,19 @@ public final class MethodCode
     }
 
     public final Builder addParameter(ParameterCode parameter) {
-      Checks.checkNotNull(parameter, "parameter == null");
+      Check.notNull(parameter, "parameter == null");
       return withParameterUnchecked(parameter);
     }
 
     public final Builder addParameter(ParameterTypeName typeName, String name) {
-      Checks.checkNotNull(typeName, "typeName == null");
-      Checks.checkNotNull(name, "name == null");
+      Check.notNull(typeName, "typeName == null");
+      Check.notNull(name, "name == null");
       ParameterCode parameter = ParameterCode.ofUnchecked(typeName, name);
       return withParameterUnchecked(parameter);
     }
 
     public final Builder addParameters(Iterable<ParameterCode> parameters) {
-      Checks.checkNotNull(parameters, "parameters == null");
+      Check.notNull(parameters, "parameters == null");
       for (ParameterCode parameter : parameters) {
         addParameter(parameter);
       }
@@ -501,7 +501,7 @@ public final class MethodCode
     }
 
     public final Builder addTypeParameter(NamedTypeParameter parameter) {
-      Checks.checkNotNull(parameter, "parameter == null");
+      Check.notNull(parameter, "parameter == null");
       typeParameters.add(parameter);
       return this;
     }
@@ -516,7 +516,7 @@ public final class MethodCode
     }
 
     public final Builder name(String name) {
-      this.name = Checks.checkNotNull(name, "name == null");
+      this.name = Check.notNull(name, "name == null");
       return this;
     }
 
@@ -528,7 +528,7 @@ public final class MethodCode
     }
 
     public final Builder returnType(NamedType typeName) {
-      Checks.checkNotNull(typeName, "typeName == null");
+      Check.notNull(typeName, "typeName == null");
       return setTypeNameUnchecked(typeName);
     }
 

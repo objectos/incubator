@@ -29,7 +29,7 @@ import java.nio.channels.FileChannel;
 import java.util.Iterator;
 import java.util.zip.DataFormatException;
 import java.util.zip.Inflater;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 import objectos.lang.Note0;
 import objectos.lang.Note1;
 import objectos.lang.Note2;
@@ -169,21 +169,21 @@ final class ObjectReader extends AbstractGitEngineTask implements ObjectReaderHa
   public final void set(ObjectReaderAdapter adapter) {
     checkSetInput();
 
-    this.adapter = Checks.checkNotNull(adapter, "adapter == null");
+    this.adapter = Check.notNull(adapter, "adapter == null");
   }
 
   @Override
   public final void setInput(ObjectReaderMode mode, ObjectId single) {
-    this.mode = Checks.checkNotNull(mode, "mode == null");
+    this.mode = Check.notNull(mode, "mode == null");
 
-    objectId = Checks.checkNotNull(single, "single == null");
+    objectId = Check.notNull(single, "single == null");
 
     objects = null;
   }
 
   @Override
   public final void setInputMany(ObjectReaderMode mode, Iterable<ObjectId> many) {
-    this.mode = Checks.checkNotNull(mode, "mode == null");
+    this.mode = Check.notNull(mode, "mode == null");
 
     objects = many.iterator();
 

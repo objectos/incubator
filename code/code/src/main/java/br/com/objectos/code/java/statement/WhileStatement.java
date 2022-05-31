@@ -18,7 +18,7 @@ package br.com.objectos.code.java.statement;
 import br.com.objectos.code.java.element.Keywords;
 import br.com.objectos.code.java.expression.Expression;
 import br.com.objectos.code.java.io.CodeWriter;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public class WhileStatement extends AbstractSimpleStatement {
 
@@ -31,8 +31,8 @@ public class WhileStatement extends AbstractSimpleStatement {
   }
 
   public static WhileStatement _while(Expression expression, Statement body) {
-    Checks.checkNotNull(expression, "expression == null");
-    Checks.checkNotNull(body, "body == null");
+    Check.notNull(expression, "expression == null");
+    Check.notNull(body, "body == null");
     return new WhileStatement(expression, body);
   }
 

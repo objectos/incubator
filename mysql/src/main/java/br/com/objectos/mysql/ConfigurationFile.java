@@ -24,7 +24,7 @@ import java.io.IOException;
 import java.io.Writer;
 import java.nio.charset.Charset;
 import java.util.List;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public final class ConfigurationFile {
 
@@ -39,8 +39,8 @@ public final class ConfigurationFile {
 
   public static ConfigurationFile configurationFile(
       RegularFile file, Charset charset) {
-    Checks.checkNotNull(file, "file == null");
-    Checks.checkNotNull(charset, "charset == null");
+    Check.notNull(file, "file == null");
+    Check.notNull(charset, "charset == null");
 
     return new ConfigurationFile(file, charset);
   }
@@ -48,9 +48,9 @@ public final class ConfigurationFile {
   public static ConfigurationFile configurationFile(
       ResolvedPath path, Charset charset, ConfigurationGroup... groups)
       throws IOException {
-    Checks.checkNotNull(path, "path == null");
-    Checks.checkNotNull(charset, "charset == null");
-    Checks.checkNotNull(groups, "groups == null");
+    Check.notNull(path, "path == null");
+    Check.notNull(charset, "charset == null");
+    Check.notNull(groups, "groups == null");
 
     RegularFile file;
     file = path.createRegularFile();
@@ -64,7 +64,7 @@ public final class ConfigurationFile {
   }
 
   public final void append(ConfigurationGroup... groups) throws IOException {
-    Checks.checkNotNull(groups, "groups == null");
+    Check.notNull(groups, "groups == null");
 
     switch (groups.length) {
       case 0:
@@ -88,7 +88,7 @@ public final class ConfigurationFile {
   }
 
   public final void replace(ConfigurationGroup... groups) throws IOException {
-    Checks.checkNotNull(groups, "groups == null");
+    Check.notNull(groups, "groups == null");
 
     switch (groups.length) {
       case 0:

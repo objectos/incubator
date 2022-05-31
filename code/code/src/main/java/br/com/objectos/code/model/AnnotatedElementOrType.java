@@ -28,7 +28,7 @@ import javax.lang.model.element.TypeElement;
 import javax.lang.model.type.TypeMirror;
 import javax.lang.model.util.Elements;
 import javax.lang.model.util.Types;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public abstract class AnnotatedElementOrType {
 
@@ -57,7 +57,7 @@ public abstract class AnnotatedElementOrType {
   public final ProcessingAnnotation getDirectlyPresentAnnotation(
       Class<? extends Annotation> annotationType)
       throws NoSuchElementException {
-    Checks.checkNotNull(annotationType, "annotationType == null");
+    Check.notNull(annotationType, "annotationType == null");
     return getDirectlyPresentAnnotation(annotationType.getCanonicalName());
   }
 
@@ -95,7 +95,7 @@ public abstract class AnnotatedElementOrType {
   protected final ProcessingAnnotation getDirectlyPresentOrInheritedAnnotationImpl(
       Element element, Class<? extends Annotation> annotationType)
       throws NoSuchElementException {
-    Checks.checkNotNull(annotationType, "annotationType == null");
+    Check.notNull(annotationType, "annotationType == null");
     return getDirectlyPresentOrInheritedAnnotationImpl(element, annotationType.getCanonicalName());
   }
 
@@ -119,7 +119,7 @@ public abstract class AnnotatedElementOrType {
 
   protected final ProcessingAnnotation getProcessingAnnotationByCanonicalName(
       ImmutableList<ProcessingAnnotation> annotations, String canonicalName) {
-    Checks.checkNotNull(canonicalName, "canonicalName == null");
+    Check.notNull(canonicalName, "canonicalName == null");
 
     for (int i = 0; i < annotations.size(); i++) {
       ProcessingAnnotation annotation;

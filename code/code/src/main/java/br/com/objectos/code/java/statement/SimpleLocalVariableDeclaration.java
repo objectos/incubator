@@ -17,7 +17,7 @@ package br.com.objectos.code.java.statement;
 
 import br.com.objectos.code.java.element.CodeElement;
 import br.com.objectos.code.java.type.NamedType;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public class SimpleLocalVariableDeclaration extends LocalVariableDeclaration {
 
@@ -32,7 +32,7 @@ public class SimpleLocalVariableDeclaration extends LocalVariableDeclaration {
   }
 
   public final WithInitLocalVariableDeclaration init(VariableInitializer init) {
-    Checks.checkNotNull(init, "init == null");
+    Check.notNull(init, "init == null");
     return WithInitLocalVariableDeclaration.ofUnchecked(this, init);
   }
 

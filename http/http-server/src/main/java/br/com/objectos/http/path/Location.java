@@ -23,7 +23,7 @@ import br.com.objectos.fs.ResolvedPath;
 import br.com.objectos.http.server.HttpAction;
 import br.com.objectos.http.server.RequestProto;
 import java.io.IOException;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public class Location {
 
@@ -44,7 +44,7 @@ public class Location {
   }
 
   public static Location parse(String string) {
-    Checks.checkNotNull(string, "string == null");
+    Check.notNull(string, "string == null");
     return new LocationParser(string).parse();
   }
 

@@ -17,7 +17,7 @@ package br.com.objectos.git;
 
 import br.com.objectos.core.array.ByteArrays;
 import java.util.Arrays;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 import objectos.lang.ToString;
 
 /**
@@ -145,7 +145,7 @@ public final class ObjectId extends MaybeObjectId {
   }
 
   private static byte[] toByteArray(String id) throws InvalidObjectIdFormatException {
-    Checks.checkNotNull(id, "id == null");
+    Check.notNull(id, "id == null");
 
     return toByteArray(id, 0);
   }

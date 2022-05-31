@@ -16,7 +16,7 @@
 package br.com.objectos.http.path;
 
 import br.com.objectos.http.server.RequestedPart;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 final class FixedSlug extends Slug {
 
@@ -27,7 +27,7 @@ final class FixedSlug extends Slug {
   }
 
   static Slug of(String slug) {
-    Checks.checkNotNull(slug, "slug == null");
+    Check.notNull(slug, "slug == null");
     return new FixedSlug(slug);
   }
 

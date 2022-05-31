@@ -37,7 +37,7 @@ import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.core.list.MutableList;
 import br.com.objectos.core.set.ImmutableSet;
 import java.util.List;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 import org.commonmark.node.BlockQuote;
 import org.commonmark.node.BulletList;
 import org.commonmark.node.Code;
@@ -252,7 +252,7 @@ class MarkdownMethod implements Visitor {
 
   @Override
   public final void visit(Document document) {
-    Checks.checkState(stackIndex < 0, "stackIndex < 0");
+    Check.state(stackIndex < 0, "stackIndex < 0");
 
     push(_DOCUMENT);
 
@@ -260,7 +260,7 @@ class MarkdownMethod implements Visitor {
 
     pop();
 
-    Checks.checkState(stackIndex < 0, "stackIndex < 0");
+    Check.state(stackIndex < 0, "stackIndex < 0");
   }
 
   @Override

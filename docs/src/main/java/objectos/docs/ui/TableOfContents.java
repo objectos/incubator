@@ -20,7 +20,7 @@ import br.com.objectos.html.element.ElementName;
 import br.com.objectos.html.spi.type.UlValue;
 import java.util.HashMap;
 import java.util.Map;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 import objectos.ssg.SiteDirectory;
 import objectos.ssg.SiteFragment;
 import objectos.ssg.SitePage;
@@ -189,7 +189,7 @@ public final class TableOfContents extends SiteFragment implements SiteVisitor {
     }
 
     private Simple simple(String title, Class<? extends SitePath> key) {
-      Checks.checkNotNull(title, "title == null");
+      Check.notNull(title, "title == null");
 
       SitePath page;
       page = getObject(key);

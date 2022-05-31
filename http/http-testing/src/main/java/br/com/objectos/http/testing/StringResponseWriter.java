@@ -27,7 +27,7 @@ import br.com.objectos.http.server.StatusCode;
 import br.com.objectos.http.server.StringSocketWriter;
 import br.com.objectos.http.server.WrittenResponse;
 import java.io.IOException;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public class StringResponseWriter implements ResponseWriter, MessageBodyDsl {
 
@@ -70,7 +70,7 @@ public class StringResponseWriter implements ResponseWriter, MessageBodyDsl {
 
   @Override
   public ResponseWriter say(StatusCode code) {
-    Checks.checkNotNull(code, "code == null");
+    Check.notNull(code, "code == null");
     return status(code);
   }
 

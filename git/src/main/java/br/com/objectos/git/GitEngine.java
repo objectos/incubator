@@ -35,7 +35,7 @@ import java.util.Deque;
 import java.util.Map;
 import java.util.zip.Deflater;
 import java.util.zip.Inflater;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 import objectos.lang.NoteSink;
 import objectos.lang.NoOpNoteSink;
 
@@ -198,8 +198,8 @@ public final class GitEngine extends GitInjector {
    * @return a new git engine instance
    */
   public static GitEngine create(IoWorker ioWorker, Option... options) {
-    Checks.checkNotNull(ioWorker, "ioWorker == null");
-    Checks.checkNotNull(options, "options == null");
+    Check.notNull(ioWorker, "ioWorker == null");
+    Check.notNull(options, "options == null");
 
     GitEngineBuilder builder;
     builder = new GitEngineBuilder(ioWorker);
@@ -208,7 +208,7 @@ public final class GitEngine extends GitInjector {
       Option o;
       o = options[i];
 
-      Checks.checkNotNull(o, "options[", i, "] == null");
+      Check.notNull(o, "options[", i, "] == null");
 
       o.acceptBuilder(builder);
     }
@@ -225,7 +225,7 @@ public final class GitEngine extends GitInjector {
    * @return an option that sets the logger instance to the specified value
    */
   public static Option logger(final NoteSink logger) {
-    Checks.checkNotNull(logger, "logger == null");
+    Check.notNull(logger, "logger == null");
 
     return new Option() {
       @Override
@@ -267,9 +267,9 @@ public final class GitEngine extends GitInjector {
    */
   public final GitTask<ImmutableSet<ObjectId>> copyObjects(
       Repository source, ImmutableSet<ObjectId> objects, Repository destination) {
-    Checks.checkNotNull(source, "source == null");
-    Checks.checkNotNull(objects, "objects == null");
-    Checks.checkNotNull(destination, "destination == null");
+    Check.notNull(source, "source == null");
+    Check.notNull(objects, "objects == null");
+    Check.notNull(destination, "destination == null");
 
     return new CopyObjectsTask(this, source, objects, destination);
   }
@@ -306,9 +306,9 @@ public final class GitEngine extends GitInjector {
    */
   public final GitTask<MaterializedEntry> materializeEntry(
       Repository repository, Entry entry, Directory target) {
-    Checks.checkNotNull(repository, "repository == null");
-    Checks.checkNotNull(entry, "entry == null");
-    Checks.checkNotNull(target, "target == null");
+    Check.notNull(repository, "repository == null");
+    Check.notNull(entry, "entry == null");
+    Check.notNull(target, "target == null");
 
     return new MaterializeEntryTask(this, repository, entry, target);
   }
@@ -335,7 +335,7 @@ public final class GitEngine extends GitInjector {
    * @since 1
    */
   public final GitTask<Repository> openRepository(Directory directory) {
-    Checks.checkNotNull(directory, "directory == null");
+    Check.notNull(directory, "directory == null");
 
     return new OpenRepositoryTask(this, directory);
   }
@@ -358,8 +358,8 @@ public final class GitEngine extends GitInjector {
    * @since 3
    */
   public final GitTask<Blob> readBlob(Repository repository, ObjectId id) {
-    Checks.checkNotNull(repository, "repository == null");
-    Checks.checkNotNull(id, "id == null");
+    Check.notNull(repository, "repository == null");
+    Check.notNull(id, "id == null");
 
     return new ReadBlobTask(this, repository, id);
   }
@@ -382,8 +382,8 @@ public final class GitEngine extends GitInjector {
    * @since 2
    */
   public final GitTask<Commit> readCommit(Repository repository, ObjectId id) {
-    Checks.checkNotNull(repository, "repository == null");
-    Checks.checkNotNull(id, "id == null");
+    Check.notNull(repository, "repository == null");
+    Check.notNull(id, "id == null");
 
     return new ReadCommitTask(this, repository, id);
   }
@@ -406,8 +406,8 @@ public final class GitEngine extends GitInjector {
    * @since 2
    */
   public final GitTask<Tree> readTree(Repository repository, ObjectId id) {
-    Checks.checkNotNull(repository, "repository == null");
-    Checks.checkNotNull(id, "id == null");
+    Check.notNull(repository, "repository == null");
+    Check.notNull(id, "id == null");
 
     return new ReadTreeTask(this, repository, id);
   }
@@ -426,8 +426,8 @@ public final class GitEngine extends GitInjector {
    * @since 1
    */
   public final GitTask<MaybeObjectId> resolve(Repository repository, RefName ref) {
-    Checks.checkNotNull(repository, "repository == null");
-    Checks.checkNotNull(ref, "ref == null");
+    Check.notNull(repository, "repository == null");
+    Check.notNull(ref, "ref == null");
 
     return new ResolveRefTask(this, repository, ref);
   }
@@ -448,9 +448,9 @@ public final class GitEngine extends GitInjector {
    */
   public final GitTask<MaybeObjectId> updateRef(
       Repository repository, RefName ref, ObjectId newValue) {
-    Checks.checkNotNull(repository, "repository == null");
-    Checks.checkNotNull(ref, "ref == null");
-    Checks.checkNotNull(newValue, "newValue == null");
+    Check.notNull(repository, "repository == null");
+    Check.notNull(ref, "ref == null");
+    Check.notNull(newValue, "newValue == null");
 
     return new UpdateRefTask(this, repository, ref, newValue);
   }
@@ -482,8 +482,8 @@ public final class GitEngine extends GitInjector {
    * @since 3
    */
   public final GitTask<ObjectId> writeCommit(Repository repository, MutableCommit commit) {
-    Checks.checkNotNull(repository, "repository == null");
-    Checks.checkNotNull(commit, "commit == null");
+    Check.notNull(repository, "repository == null");
+    Check.notNull(commit, "commit == null");
 
     return new WriteCommitTask(this, repository, commit);
   }
@@ -507,8 +507,8 @@ public final class GitEngine extends GitInjector {
    * @since 3
    */
   public final GitTask<ObjectId> writeTree(Repository repository, MutableTree tree) {
-    Checks.checkNotNull(repository, "repository == null");
-    Checks.checkNotNull(tree, "tree == null");
+    Check.notNull(repository, "repository == null");
+    Check.notNull(tree, "tree == null");
 
     return new WriteTreeTask(this, repository, tree);
   }
@@ -881,7 +881,7 @@ public final class GitEngine extends GitInjector {
       DecoderBucket bucket;
       bucket = decoderMap.get(charset);
 
-      Checks.checkState(bucket != null, "Bucket was null for ", charset);
+      Check.state(bucket != null, "Bucket was null for ", charset);
 
       bucket.checkedOut = false;
     }
@@ -1003,7 +1003,7 @@ public final class GitEngine extends GitInjector {
   }
 
   private void checkBitSet(int mask, String message) {
-    Checks.checkState((bitset & mask) == 0, message, " already checked out");
+    Check.state((bitset & mask) == 0, message, " already checked out");
   }
 
   private void setBitSet(int mask) {
@@ -1038,7 +1038,7 @@ public final class GitEngine extends GitInjector {
     }
 
     final CharsetDecoder get() {
-      Checks.checkState(!checkedOut, decoder.charset(), " decoder already checked out");
+      Check.state(!checkedOut, decoder.charset(), " decoder already checked out");
 
       checkedOut = true;
 

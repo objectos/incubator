@@ -15,7 +15,7 @@
  */
 package br.com.objectos.mojo;
 
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public final class MojoId implements MojoMirrorElement {
 
@@ -26,7 +26,7 @@ public final class MojoId implements MojoMirrorElement {
   }
 
   public static MojoId id(String id) {
-    Checks.checkNotNull(id, "id == null");
+    Check.notNull(id, "id == null");
 
     return new MojoId(id);
   }

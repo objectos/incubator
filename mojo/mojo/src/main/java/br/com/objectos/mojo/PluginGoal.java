@@ -15,7 +15,7 @@
  */
 package br.com.objectos.mojo;
 
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public class PluginGoal implements MvnOption {
 
@@ -28,8 +28,8 @@ public class PluginGoal implements MvnOption {
   }
 
   public static PluginGoal plugin(String prefix, String goal) {
-    Checks.checkNotNull(prefix, "prefix == null");
-    Checks.checkNotNull(goal, "goal == null");
+    Check.notNull(prefix, "prefix == null");
+    Check.notNull(goal, "goal == null");
     return new PluginGoal(prefix, goal);
   }
 

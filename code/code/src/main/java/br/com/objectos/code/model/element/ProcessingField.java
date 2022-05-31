@@ -21,7 +21,7 @@ import br.com.objectos.core.set.ImmutableSet;
 import javax.annotation.processing.ProcessingEnvironment;
 import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.VariableElement;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public class ProcessingField extends ProcessingVariableElement {
 
@@ -34,9 +34,9 @@ public class ProcessingField extends ProcessingVariableElement {
 
   public static ProcessingField adapt(
       ProcessingEnvironment processingEnv, VariableElement element) {
-    Checks.checkNotNull(processingEnv, "processingEnv == null");
-    Checks.checkNotNull(element, "element == null");
-    Checks.checkArgument(element.getKind() == ElementKind.FIELD, "Not ElementKind.FIELD");
+    Check.notNull(processingEnv, "processingEnv == null");
+    Check.notNull(element, "element == null");
+    Check.argument(element.getKind() == ElementKind.FIELD, "Not ElementKind.FIELD");
 
     return new ProcessingField(
         processingEnv,

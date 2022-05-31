@@ -22,7 +22,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.RandomAccess;
 import java.util.Set;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 /**
  * A hash-based implementation of the {@link Set} and {@link MutableCollection}
@@ -134,7 +134,7 @@ public final class MutableSet<E>
    */
   @Override
   public final boolean addAllIterable(Iterable<? extends E> iterable) {
-    Checks.checkNotNull(iterable, "iterable == null");
+    Check.notNull(iterable, "iterable == null");
 
     boolean result;
     result = false;
@@ -147,7 +147,7 @@ public final class MutableSet<E>
         E element;
         element = list.get(i);
 
-        Checks.checkNotNull(element, "iterable[", i, "] == null");
+        Check.notNull(element, "iterable[", i, "] == null");
 
         if (addUnchecked(element)) {
           result = true;
@@ -159,7 +159,7 @@ public final class MutableSet<E>
       int i = 0;
 
       for (E element : iterable) {
-        Checks.checkNotNull(element, "elements[", i, "] == null");
+        Check.notNull(element, "elements[", i, "] == null");
 
         if (addUnchecked(element)) {
           result = true;
@@ -198,11 +198,11 @@ public final class MutableSet<E>
    * @throws NullPointerException
    *         if the specified element is {@code null}
    *
-   * @see Checks#checkNotNull(Object, Object)
+   * @see Check#notNull(Object, Object)
    */
   @Override
   public final boolean addWithNullMessage(E e, Object nullMessage) {
-    Checks.checkNotNull(e, nullMessage);
+    Check.notNull(e, nullMessage);
 
     return addUnchecked(e);
   }
@@ -235,12 +235,12 @@ public final class MutableSet<E>
    *         operation. {@code false} if the element was already present in this
    *         set
    *
-   * @see Checks#checkNotNull(Object, Object, int, Object)
+   * @see Check#notNull(Object, Object, int, Object)
    */
   @Override
   public final boolean addWithNullMessage(
       E e, Object nullMessageStart, int index, Object nullMessageEnd) {
-    Checks.checkNotNull(e, nullMessageStart, index, nullMessageEnd);
+    Check.notNull(e, nullMessageStart, index, nullMessageEnd);
 
     return addUnchecked(e);
   }

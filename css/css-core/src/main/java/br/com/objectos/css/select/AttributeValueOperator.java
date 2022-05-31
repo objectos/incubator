@@ -16,7 +16,7 @@
 package br.com.objectos.css.select;
 
 import br.com.objectos.css.parser.IsTerminal;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public enum AttributeValueOperator implements IsTerminal {
 
@@ -105,7 +105,7 @@ public enum AttributeValueOperator implements IsTerminal {
   }
 
   public final AttributeValueElement withValue(String value) {
-    Checks.checkNotNull(value, "value == null");
+    Check.notNull(value, "value == null");
 
     return new AttributeValueElement(this, value);
   }

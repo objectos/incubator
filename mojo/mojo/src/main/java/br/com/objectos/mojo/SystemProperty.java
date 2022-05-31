@@ -16,7 +16,7 @@
 package br.com.objectos.mojo;
 
 import java.util.Properties;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public class SystemProperty implements MvnOption {
 
@@ -37,14 +37,14 @@ public class SystemProperty implements MvnOption {
   }
 
   public static SystemProperty prop(String key, boolean value) {
-    Checks.checkNotNull(key, "key == null");
+    Check.notNull(key, "key == null");
 
     return new SystemProperty(key, Boolean.toString(value));
   }
 
   public static SystemProperty prop(String key, String value) {
-    Checks.checkNotNull(key, "key == null");
-    Checks.checkNotNull(value, "value == null");
+    Check.notNull(key, "key == null");
+    Check.notNull(value, "value == null");
 
     return new SystemProperty(key, value);
   }

@@ -20,7 +20,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.RandomAccess;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 import objectos.lang.ToString;
 import objectos.lang.ToStringObject;
 
@@ -50,7 +50,7 @@ abstract class AbstractBaseCollectionJavaAny<E> implements BaseCollection<E> {
    */
   @Override
   public final boolean contains(Object first, Object... more) {
-    Checks.checkNotNull(more, "more == null");
+    Check.notNull(more, "more == null");
 
     if (isEmpty()) {
       return false;
@@ -86,7 +86,7 @@ abstract class AbstractBaseCollectionJavaAny<E> implements BaseCollection<E> {
    */
   @Override
   public final boolean containsAll(Collection<?> c) {
-    Checks.checkNotNull(c, "c == null");
+    Check.notNull(c, "c == null");
 
     if (c instanceof RandomAccess && c instanceof List) {
       List<?> list;
@@ -249,7 +249,7 @@ abstract class AbstractBaseCollectionJavaAny<E> implements BaseCollection<E> {
    */
   @Override
   public String join(String delimiter) {
-    Checks.checkNotNull(delimiter, "delimiter == null");
+    Check.notNull(delimiter, "delimiter == null");
 
     if (isEmpty()) {
       return "";
@@ -294,9 +294,9 @@ abstract class AbstractBaseCollectionJavaAny<E> implements BaseCollection<E> {
    */
   @Override
   public String join(String delimiter, String prefix, String suffix) {
-    Checks.checkNotNull(delimiter, "delimiter == null");
-    Checks.checkNotNull(prefix, "prefix == null");
-    Checks.checkNotNull(suffix, "suffix == null");
+    Check.notNull(delimiter, "delimiter == null");
+    Check.notNull(prefix, "prefix == null");
+    Check.notNull(suffix, "suffix == null");
 
     if (isEmpty()) {
       return prefix + suffix;

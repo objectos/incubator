@@ -18,7 +18,7 @@ package br.com.objectos.concurrent;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.locks.LockSupport;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 import objectos.lang.Note0;
 import objectos.lang.Note1;
 import objectos.lang.NoteSink;
@@ -68,9 +68,9 @@ public final class FixedCpuWorker extends CpuWorkerService {
    *        the logger instance to be used for logging
    */
   public FixedCpuWorker(int activeCount, int queueCapacity, NoteSink logger) {
-    Checks.checkArgument(activeCount > 0, "activeCount must be positive");
-    Checks.checkArgument(queueCapacity > 0, "queueCapacity must be positive");
-    Checks.checkNotNull(logger, "logger == null");
+    Check.argument(activeCount > 0, "activeCount must be positive");
+    Check.argument(queueCapacity > 0, "queueCapacity must be positive");
+    Check.notNull(logger, "logger == null");
 
     tasks = new CpuTask[activeCount];
 
@@ -93,7 +93,7 @@ public final class FixedCpuWorker extends CpuWorkerService {
    */
   @Override
   public final boolean offer(CpuTask task) {
-    Checks.checkNotNull(task, "task == null");
+    Check.notNull(task, "task == null");
 
     if (queue.offer(task) && thread != null) {
       LockSupport.unpark(thread);

@@ -27,7 +27,7 @@ import br.com.objectos.code.java.type.NamedType;
 import br.com.objectos.code.java.type.NamedVoid;
 import br.com.objectos.core.list.MutableList;
 import java.util.List;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public final class FieldCode extends AbstractImmutableCodeElement
     implements
@@ -47,8 +47,8 @@ public final class FieldCode extends AbstractImmutableCodeElement
   public static FieldCode field(
       FieldCodeElement e1,
       FieldCodeElement e2) {
-    Checks.checkNotNull(e1, "e1 == null");
-    Checks.checkNotNull(e2, "e2 == null");
+    Check.notNull(e1, "e1 == null");
+    Check.notNull(e2, "e2 == null");
     Builder b = FieldCode.builder();
     e1.acceptFieldCodeBuilder(b);
     e2.acceptFieldCodeBuilder(b);
@@ -59,9 +59,9 @@ public final class FieldCode extends AbstractImmutableCodeElement
       FieldCodeElement e1,
       FieldCodeElement e2,
       FieldCodeElement e3) {
-    Checks.checkNotNull(e1, "e1 == null");
-    Checks.checkNotNull(e2, "e2 == null");
-    Checks.checkNotNull(e3, "e3 == null");
+    Check.notNull(e1, "e1 == null");
+    Check.notNull(e2, "e2 == null");
+    Check.notNull(e3, "e3 == null");
     Builder b = FieldCode.builder();
     e1.acceptFieldCodeBuilder(b);
     e2.acceptFieldCodeBuilder(b);
@@ -74,10 +74,10 @@ public final class FieldCode extends AbstractImmutableCodeElement
       FieldCodeElement e2,
       FieldCodeElement e3,
       FieldCodeElement e4) {
-    Checks.checkNotNull(e1, "e1 == null");
-    Checks.checkNotNull(e2, "e2 == null");
-    Checks.checkNotNull(e3, "e3 == null");
-    Checks.checkNotNull(e4, "e4 == null");
+    Check.notNull(e1, "e1 == null");
+    Check.notNull(e2, "e2 == null");
+    Check.notNull(e3, "e3 == null");
+    Check.notNull(e4, "e4 == null");
     Builder b = FieldCode.builder();
     e1.acceptFieldCodeBuilder(b);
     e2.acceptFieldCodeBuilder(b);
@@ -92,11 +92,11 @@ public final class FieldCode extends AbstractImmutableCodeElement
       FieldCodeElement e3,
       FieldCodeElement e4,
       FieldCodeElement e5) {
-    Checks.checkNotNull(e1, "e1 == null");
-    Checks.checkNotNull(e2, "e2 == null");
-    Checks.checkNotNull(e3, "e3 == null");
-    Checks.checkNotNull(e4, "e4 == null");
-    Checks.checkNotNull(e5, "e5 == null");
+    Check.notNull(e1, "e1 == null");
+    Check.notNull(e2, "e2 == null");
+    Check.notNull(e3, "e3 == null");
+    Check.notNull(e4, "e4 == null");
+    Check.notNull(e5, "e5 == null");
     Builder b = FieldCode.builder();
     e1.acceptFieldCodeBuilder(b);
     e2.acceptFieldCodeBuilder(b);
@@ -107,8 +107,8 @@ public final class FieldCode extends AbstractImmutableCodeElement
   }
 
   public static FieldCodeDeclarator init(Identifier name, VariableInitializer initializer) {
-    Checks.checkNotNull(name, "name == null");
-    Checks.checkNotNull(initializer, "initializer == null");
+    Check.notNull(name, "name == null");
+    Check.notNull(initializer, "initializer == null");
     return FieldCodeDeclarator.init0(name, initializer);
   }
 
@@ -178,18 +178,18 @@ public final class FieldCode extends AbstractImmutableCodeElement
     }
 
     public final Builder addDeclarator(FieldCodeDeclarator declarator) {
-      Checks.checkNotNull(declarator, "declarator == null");
+      Check.notNull(declarator, "declarator == null");
       return addDeclarator0(declarator);
     }
 
     public final Builder addDeclarator(Identifier name) {
-      Checks.checkNotNull(name, "name == null");
+      Check.notNull(name, "name == null");
       return addDeclarator0(FieldCodeDeclarator.init0(name));
     }
 
     public final Builder addDeclarator(Identifier name, VariableInitializer initializer) {
-      Checks.checkNotNull(name, "name == null");
-      Checks.checkNotNull(initializer, "initializer == null");
+      Check.notNull(name, "name == null");
+      Check.notNull(initializer, "initializer == null");
       return addDeclarator0(FieldCodeDeclarator.init0(name, initializer));
     }
 
@@ -224,7 +224,7 @@ public final class FieldCode extends AbstractImmutableCodeElement
     }
 
     public final Builder type(NamedType typeName) {
-      this.typeName = Checks.checkNotNull(typeName, "typeName == null");
+      this.typeName = Check.notNull(typeName, "typeName == null");
       return this;
     }
 

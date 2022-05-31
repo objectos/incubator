@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 import org.apache.maven.execution.MavenExecutionRequest;
 import org.apache.maven.settings.Mirror;
 import org.codehaus.plexus.util.Os;
@@ -55,14 +55,14 @@ final class BuildRequest implements Request {
 
   @Override
   public final void addMirror(Mirror mirror) {
-    Checks.checkNotNull(mirror, "mirror == null");
+    Check.notNull(mirror, "mirror == null");
 
     mirrors.add(mirror);
   }
 
   @Override
   public final void setGoals(ImmutableList<String> goals) {
-    Checks.checkNotNull(goals, "goals == null");
+    Check.notNull(goals, "goals == null");
 
     this.goals.clear();
 
@@ -76,28 +76,28 @@ final class BuildRequest implements Request {
 
   @Override
   public final void setLocalRepository(Directory directory) {
-    Checks.checkNotNull(directory, "directory == null");
+    Check.notNull(directory, "directory == null");
 
     localRepository = directory.toFile();
   }
 
   @Override
   public final void setMultiModuleProjectDirectory(Directory directory) {
-    Checks.checkNotNull(directory, "directory == null");
+    Check.notNull(directory, "directory == null");
 
     multiModuleProjectDirectory = directory.toFile();
   }
 
   @Override
   public final void setPom(RegularFile file) {
-    Checks.checkNotNull(file, "file == null");
+    Check.notNull(file, "file == null");
 
     pom = file.toFile();
   }
 
   @Override
   public final void setSystemProperties(Properties properties) {
-    Checks.checkNotNull(properties, "properties == null");
+    Check.notNull(properties, "properties == null");
 
     systemProperties = properties;
   }

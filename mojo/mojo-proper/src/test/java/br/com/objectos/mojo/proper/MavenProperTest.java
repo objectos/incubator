@@ -31,7 +31,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 import org.apache.maven.Maven;
 import org.apache.maven.artifact.InvalidRepositoryException;
 import org.apache.maven.bridge.MavenRepositorySystem;
@@ -306,7 +306,7 @@ public class MavenProperTest {
   }
 
   private RegularFile project(String basedir) {
-    Checks.checkNotNull(basedir, "basedir == null");
+    Check.notNull(basedir, "basedir == null");
 
     String resourceName;
     resourceName = "TEST-INF/" + basedir + "/pom.xml";

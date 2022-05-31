@@ -21,7 +21,7 @@ import br.com.objectos.core.service.AbstractService;
 import java.net.SocketAddress;
 import java.nio.channels.SocketChannel;
 import java.util.Random;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 import objectos.lang.NoteSink;
 
 /**
@@ -57,11 +57,11 @@ public final class HttpService extends AbstractService {
   public static HttpService create(
       SocketAddress address, CpuArray cpuArray, IoWorker ioWorker,
       HttpProcessorProvider processorProvider, Option... options) {
-    Checks.checkNotNull(address, "address == null");
-    Checks.checkNotNull(cpuArray, "cpuArray == null");
-    Checks.checkNotNull(ioWorker, "ioWorker == null");
-    Checks.checkNotNull(processorProvider, "processorProvider == null");
-    Checks.checkNotNull(options, "options == null");
+    Check.notNull(address, "address == null");
+    Check.notNull(cpuArray, "cpuArray == null");
+    Check.notNull(ioWorker, "ioWorker == null");
+    Check.notNull(processorProvider, "processorProvider == null");
+    Check.notNull(options, "options == null");
 
     HttpServiceBuilder builder;
     builder = new HttpServiceBuilder(address, cpuArray, ioWorker, processorProvider);
@@ -71,7 +71,7 @@ public final class HttpService extends AbstractService {
     for (int i = 0; i < options.length; i++) {
       o = options[i];
 
-      Checks.checkNotNull(o, "options[", i, "] == null");
+      Check.notNull(o, "options[", i, "] == null");
 
       o.acceptBuilder(builder);
     }
@@ -80,7 +80,7 @@ public final class HttpService extends AbstractService {
   }
 
   public static Option enginesPerWorker(final int value) {
-    Checks.checkArgument(value > 0, "engines/worker minimum value is 1 engine/worker");
+    Check.argument(value > 0, "engines/worker minimum value is 1 engine/worker");
 
     return new Option() {
       @Override
@@ -91,7 +91,7 @@ public final class HttpService extends AbstractService {
   }
 
   public static Option logger(NoteSink logger) {
-    Checks.checkNotNull(logger, "logger == null");
+    Check.notNull(logger, "logger == null");
 
     return new Option() {
       @Override

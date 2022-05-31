@@ -31,7 +31,7 @@ import java.lang.annotation.Annotation;
 import java.util.List;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.TypeParameterElement;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public class ClassCode extends AbstractTypeCode {
 
@@ -43,14 +43,14 @@ public class ClassCode extends AbstractTypeCode {
   }
 
   public static ClassCode _class(ClassCodeElement e1) {
-    Checks.checkNotNull(e1, "e1 == null");
+    Check.notNull(e1, "e1 == null");
     Builder b = builder();
     e1.acceptClassCodeBuilder(b);
     return b.build();
   }
 
   public static ClassCode _class(ClassCodeElement... elements) {
-    Checks.checkNotNull(elements, "elements == null");
+    Check.notNull(elements, "elements == null");
     Builder b = builder();
 
     for (int i = 0; i < elements.length; i++) {
@@ -70,8 +70,8 @@ public class ClassCode extends AbstractTypeCode {
   public static ClassCode _class(
       ClassCodeElement e1,
       ClassCodeElement e2) {
-    Checks.checkNotNull(e1, "e1 == null");
-    Checks.checkNotNull(e2, "e2 == null");
+    Check.notNull(e1, "e1 == null");
+    Check.notNull(e2, "e2 == null");
     Builder b = builder();
     e1.acceptClassCodeBuilder(b);
     e2.acceptClassCodeBuilder(b);
@@ -82,9 +82,9 @@ public class ClassCode extends AbstractTypeCode {
       ClassCodeElement e1,
       ClassCodeElement e2,
       ClassCodeElement e3) {
-    Checks.checkNotNull(e1, "e1 == null");
-    Checks.checkNotNull(e2, "e2 == null");
-    Checks.checkNotNull(e3, "e3 == null");
+    Check.notNull(e1, "e1 == null");
+    Check.notNull(e2, "e2 == null");
+    Check.notNull(e3, "e3 == null");
     Builder b = builder();
     e1.acceptClassCodeBuilder(b);
     e2.acceptClassCodeBuilder(b);
@@ -97,10 +97,10 @@ public class ClassCode extends AbstractTypeCode {
       ClassCodeElement e2,
       ClassCodeElement e3,
       ClassCodeElement e4) {
-    Checks.checkNotNull(e1, "e1 == null");
-    Checks.checkNotNull(e2, "e2 == null");
-    Checks.checkNotNull(e3, "e3 == null");
-    Checks.checkNotNull(e4, "e4 == null");
+    Check.notNull(e1, "e1 == null");
+    Check.notNull(e2, "e2 == null");
+    Check.notNull(e3, "e3 == null");
+    Check.notNull(e4, "e4 == null");
     Builder b = builder();
     e1.acceptClassCodeBuilder(b);
     e2.acceptClassCodeBuilder(b);
@@ -115,11 +115,11 @@ public class ClassCode extends AbstractTypeCode {
       ClassCodeElement e3,
       ClassCodeElement e4,
       ClassCodeElement e5) {
-    Checks.checkNotNull(e1, "e1 == null");
-    Checks.checkNotNull(e2, "e2 == null");
-    Checks.checkNotNull(e3, "e3 == null");
-    Checks.checkNotNull(e4, "e4 == null");
-    Checks.checkNotNull(e5, "e5 == null");
+    Check.notNull(e1, "e1 == null");
+    Check.notNull(e2, "e2 == null");
+    Check.notNull(e3, "e3 == null");
+    Check.notNull(e4, "e4 == null");
+    Check.notNull(e5, "e5 == null");
     Builder b = builder();
     e1.acceptClassCodeBuilder(b);
     e2.acceptClassCodeBuilder(b);
@@ -136,12 +136,12 @@ public class ClassCode extends AbstractTypeCode {
       ClassCodeElement e4,
       ClassCodeElement e5,
       ClassCodeElement e6) {
-    Checks.checkNotNull(e1, "e1 == null");
-    Checks.checkNotNull(e2, "e2 == null");
-    Checks.checkNotNull(e3, "e3 == null");
-    Checks.checkNotNull(e4, "e4 == null");
-    Checks.checkNotNull(e5, "e5 == null");
-    Checks.checkNotNull(e6, "e6 == null");
+    Check.notNull(e1, "e1 == null");
+    Check.notNull(e2, "e2 == null");
+    Check.notNull(e3, "e3 == null");
+    Check.notNull(e4, "e4 == null");
+    Check.notNull(e5, "e5 == null");
+    Check.notNull(e6, "e6 == null");
     Builder b = builder();
     e1.acceptClassCodeBuilder(b);
     e2.acceptClassCodeBuilder(b);
@@ -160,13 +160,13 @@ public class ClassCode extends AbstractTypeCode {
       ClassCodeElement e5,
       ClassCodeElement e6,
       ClassCodeElement e7) {
-    Checks.checkNotNull(e1, "e1 == null");
-    Checks.checkNotNull(e2, "e2 == null");
-    Checks.checkNotNull(e3, "e3 == null");
-    Checks.checkNotNull(e4, "e4 == null");
-    Checks.checkNotNull(e5, "e5 == null");
-    Checks.checkNotNull(e6, "e6 == null");
-    Checks.checkNotNull(e7, "e7 == null");
+    Check.notNull(e1, "e1 == null");
+    Check.notNull(e2, "e2 == null");
+    Check.notNull(e3, "e3 == null");
+    Check.notNull(e4, "e4 == null");
+    Check.notNull(e5, "e5 == null");
+    Check.notNull(e6, "e6 == null");
+    Check.notNull(e7, "e7 == null");
     Builder b = builder();
     e1.acceptClassCodeBuilder(b);
     e2.acceptClassCodeBuilder(b);
@@ -187,14 +187,14 @@ public class ClassCode extends AbstractTypeCode {
       ClassCodeElement e6,
       ClassCodeElement e7,
       ClassCodeElement e8) {
-    Checks.checkNotNull(e1, "e1 == null");
-    Checks.checkNotNull(e2, "e2 == null");
-    Checks.checkNotNull(e3, "e3 == null");
-    Checks.checkNotNull(e4, "e4 == null");
-    Checks.checkNotNull(e5, "e5 == null");
-    Checks.checkNotNull(e6, "e6 == null");
-    Checks.checkNotNull(e7, "e7 == null");
-    Checks.checkNotNull(e8, "e8 == null");
+    Check.notNull(e1, "e1 == null");
+    Check.notNull(e2, "e2 == null");
+    Check.notNull(e3, "e3 == null");
+    Check.notNull(e4, "e4 == null");
+    Check.notNull(e5, "e5 == null");
+    Check.notNull(e6, "e6 == null");
+    Check.notNull(e7, "e7 == null");
+    Check.notNull(e8, "e8 == null");
     Builder b = builder();
     e1.acceptClassCodeBuilder(b);
     e2.acceptClassCodeBuilder(b);
@@ -217,15 +217,15 @@ public class ClassCode extends AbstractTypeCode {
       ClassCodeElement e7,
       ClassCodeElement e8,
       ClassCodeElement e9) {
-    Checks.checkNotNull(e1, "e1 == null");
-    Checks.checkNotNull(e2, "e2 == null");
-    Checks.checkNotNull(e3, "e3 == null");
-    Checks.checkNotNull(e4, "e4 == null");
-    Checks.checkNotNull(e5, "e5 == null");
-    Checks.checkNotNull(e6, "e6 == null");
-    Checks.checkNotNull(e7, "e7 == null");
-    Checks.checkNotNull(e8, "e8 == null");
-    Checks.checkNotNull(e9, "e9 == null");
+    Check.notNull(e1, "e1 == null");
+    Check.notNull(e2, "e2 == null");
+    Check.notNull(e3, "e3 == null");
+    Check.notNull(e4, "e4 == null");
+    Check.notNull(e5, "e5 == null");
+    Check.notNull(e6, "e6 == null");
+    Check.notNull(e7, "e7 == null");
+    Check.notNull(e8, "e8 == null");
+    Check.notNull(e9, "e9 == null");
     Builder b = builder();
     e1.acceptClassCodeBuilder(b);
     e2.acceptClassCodeBuilder(b);
@@ -345,7 +345,7 @@ public class ClassCode extends AbstractTypeCode {
     }
 
     public final Builder addTypeParameter(NamedTypeParameter parameter) {
-      Checks.checkNotNull(parameter, "parameter == null");
+      Check.notNull(parameter, "parameter == null");
       return addTypeParameter0(parameter);
     }
 
@@ -354,12 +354,12 @@ public class ClassCode extends AbstractTypeCode {
     }
 
     public final Builder addTypeParameters(Iterable<NamedTypeParameter> parameters) {
-      Checks.checkNotNull(parameters, "parameters == null");
+      Check.notNull(parameters, "parameters == null");
       return addTypeParameters0(parameters);
     }
 
     public final Builder addTypeParametersFrom(TypeElement type) {
-      Checks.checkNotNull(type, "type == null");
+      Check.notNull(type, "type == null");
 
       List<? extends TypeParameterElement> elements;
       elements = type.getTypeParameters();
@@ -400,7 +400,7 @@ public class ClassCode extends AbstractTypeCode {
     }
 
     public final ClassCode buildWith(BodyFormatter formatter) {
-      this.formatter = Checks.checkNotNull(formatter, "formatter == null");
+      this.formatter = Check.notNull(formatter, "formatter == null");
       return build();
     }
 
@@ -409,13 +409,13 @@ public class ClassCode extends AbstractTypeCode {
     }
 
     public final Builder simpleName(NamedClass className) {
-      Checks.checkNotNull(className, "className == null");
+      Check.notNull(className, "className == null");
       this.simpleName = className.getSimpleName();
       return this;
     }
 
     public final Builder simpleName(String simpleName) {
-      this.simpleName = Checks.checkNotNull(simpleName, "simpleName == null");
+      this.simpleName = Check.notNull(simpleName, "simpleName == null");
       return this;
     }
 

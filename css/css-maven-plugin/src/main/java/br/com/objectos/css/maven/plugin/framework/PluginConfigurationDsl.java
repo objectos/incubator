@@ -27,7 +27,7 @@ import br.com.objectos.css.type.Marker;
 import br.com.objectos.css.type.Value;
 import java.util.EnumMap;
 import java.util.Map;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 class PluginConfigurationDsl implements ConfigurationDsl {
 
@@ -60,8 +60,8 @@ class PluginConfigurationDsl implements ConfigurationDsl {
 
   @Override
   public final FrameworkAtMedia getAtMedia(String name, FrameworkAtMediaElement... elements) {
-    Checks.checkNotNull(name, "name == null");
-    Checks.checkNotNull(elements, "elements == null");
+    Check.notNull(name, "name == null");
+    Check.notNull(elements, "elements == null");
     ImmutableList<FrameworkAtMediaElement> set = ImmutableList.copyOf(elements);
     return new NamedAtMedia(name, set);
   }
@@ -80,8 +80,8 @@ class PluginConfigurationDsl implements ConfigurationDsl {
   @Override
   public final FrameworkAtMediaDeclaration getDeclaration(
       StandardPropertyName propertyName, Value value) {
-    Checks.checkNotNull(propertyName, "propertyName == null");
-    Checks.checkNotNull(value, "value == null");
+    Check.notNull(propertyName, "propertyName == null");
+    Check.notNull(value, "value == null");
     return new AtMediaDeclaration(propertyName, value);
   }
 
@@ -148,22 +148,22 @@ class PluginConfigurationDsl implements ConfigurationDsl {
 
   @Override
   public final FrameworkNamedValue getNamedValue(String name, double value) {
-    Checks.checkNotNull(name, "name == null");
+    Check.notNull(name, "name == null");
 
     return new NamedDouble(name, value);
   }
 
   @Override
   public final FrameworkNamedValue getNamedValue(String name, FrameworkAtMediaSet set) {
-    Checks.checkNotNull(name, "name == null");
-    Checks.checkNotNull(set, "set == null");
+    Check.notNull(name, "name == null");
+    Check.notNull(set, "set == null");
 
     return new NamedAtMediaSet(name, set);
   }
 
   @Override
   public final FrameworkNamedValue getNamedValue(String name, FrameworMultiElement... elements) {
-    Checks.checkNotNull(name, "name == null");
+    Check.notNull(name, "name == null");
 
     ImmutableList<FrameworMultiElement> list = ImmutableList.copyOf(elements);
 
@@ -172,14 +172,14 @@ class PluginConfigurationDsl implements ConfigurationDsl {
 
   @Override
   public final FrameworkNamedValue getNamedValue(String name, int value) {
-    Checks.checkNotNull(name, "name == null");
+    Check.notNull(name, "name == null");
 
     return new NamedInt(name, value);
   }
 
   @Override
   public final FrameworkNamedValue getNamedValue(String name, Value... values) {
-    Checks.checkNotNull(name, "name == null");
+    Check.notNull(name, "name == null");
 
     ImmutableList<Value> arguments;
     arguments = ImmutableList.copyOf(values);
@@ -232,7 +232,7 @@ class PluginConfigurationDsl implements ConfigurationDsl {
 
   @Override
   public final FrameworkPrefix getPrefix(String prefix) {
-    Checks.checkNotNull(prefix, "prefix == null");
+    Check.notNull(prefix, "prefix == null");
 
     return Prefix.named(prefix);
   }
@@ -254,7 +254,7 @@ class PluginConfigurationDsl implements ConfigurationDsl {
 
   @Override
   public final FrameworkSimpleName getSimpleName(String name) {
-    Checks.checkNotNull(name, "name == null");
+    Check.notNull(name, "name == null");
     return new SimpleName(name);
   }
 

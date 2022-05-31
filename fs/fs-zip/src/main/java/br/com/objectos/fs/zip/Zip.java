@@ -27,7 +27,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 /**
  * @since 2
@@ -69,10 +69,10 @@ public final class Zip implements DirectoryContentsVisitor, ZipOptionVisitor {
       Directory workingDirectory, ResolvedPath zipFile,
       ZipOption option,
       String... files) throws IOException {
-    Checks.checkNotNull(workingDirectory, "workingDirectory == null");
-    Checks.checkNotNull(zipFile, "zipFile == null");
-    Checks.checkNotNull(option, "option == null");
-    Checks.checkNotNull(files, "files == null");
+    Check.notNull(workingDirectory, "workingDirectory == null");
+    Check.notNull(zipFile, "zipFile == null");
+    Check.notNull(option, "option == null");
+    Check.notNull(files, "files == null");
 
     Zip zip;
     zip = open(workingDirectory, zipFile);
@@ -156,7 +156,7 @@ public final class Zip implements DirectoryContentsVisitor, ZipOptionVisitor {
       String fileName;
       fileName = files[i];
 
-      Checks.checkNotNull(fileName, "files[", i, "] == null");
+      Check.notNull(fileName, "files[", i, "] == null");
 
       if (fileName.equals(".")) {
         workingDirectory.visitContents(this);

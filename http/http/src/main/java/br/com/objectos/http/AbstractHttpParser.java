@@ -34,7 +34,7 @@ import java.nio.charset.Charset;
 import java.nio.charset.CharsetDecoder;
 import java.nio.charset.CoderResult;
 import java.util.Map;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 abstract class AbstractHttpParser<H extends Header> implements CpuTask, IoTask {
 
@@ -146,7 +146,7 @@ abstract class AbstractHttpParser<H extends Header> implements CpuTask, IoTask {
   }
 
   public final void setInput(ReadableByteChannel channel) {
-    Checks.checkNotNull(channel, "channel == null");
+    Check.notNull(channel, "channel == null");
 
     input = channel;
 

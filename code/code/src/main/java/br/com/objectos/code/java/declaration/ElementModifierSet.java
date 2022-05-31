@@ -22,7 +22,7 @@ import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.core.list.MutableList;
 import java.util.Iterator;
 import java.util.Locale;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 abstract class ElementModifierSet extends AbstractCodeElement {
 
@@ -68,7 +68,7 @@ abstract class ElementModifierSet extends AbstractCodeElement {
     public abstract E build();
 
     final void addModifier(Modifier... modifiers) {
-      Checks.checkNotNull(modifiers, "modifiers == null");
+      Check.notNull(modifiers, "modifiers == null");
 
       for (int i = 0; i < modifiers.length; i++) {
         Modifier modifier;
@@ -91,7 +91,7 @@ abstract class ElementModifierSet extends AbstractCodeElement {
     }
 
     final Builder<E> withModifier(ElementModifierSet modifier) {
-      Checks.checkNotNull(modifier, "modifier == null");
+      Check.notNull(modifier, "modifier == null");
 
       values.addAll(modifier.values);
 

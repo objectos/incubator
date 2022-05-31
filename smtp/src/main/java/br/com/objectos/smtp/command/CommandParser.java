@@ -22,7 +22,7 @@ import java.nio.CharBuffer;
 import java.nio.channels.ReadableByteChannel;
 import java.nio.charset.CharsetDecoder;
 import java.util.Arrays;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public class CommandParser {
 
@@ -51,9 +51,9 @@ public class CommandParser {
   private int stringOrPathStart;
 
   public CommandParser(CommandParserAdapter adapter, CharsetDecoder charsetDecoder) {
-    this.adapter = Checks.checkNotNull(adapter, "adapter == null");
+    this.adapter = Check.notNull(adapter, "adapter == null");
 
-    this.charsetDecoder = Checks.checkNotNull(charsetDecoder, "charsetDecoder == null");
+    this.charsetDecoder = Check.notNull(charsetDecoder, "charsetDecoder == null");
 
     charArray = charBuffer.array();
   }
@@ -134,7 +134,7 @@ public class CommandParser {
   }
 
   final boolean matches(char[] upper, char[] lower) {
-    Checks.checkArgument(upper.length == lower.length, "lengths must be equal");
+    Check.argument(upper.length == lower.length, "lengths must be equal");
 
     boolean result;
     result = true;

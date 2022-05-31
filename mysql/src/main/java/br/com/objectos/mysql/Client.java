@@ -22,7 +22,7 @@ import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.RegularFile;
 import br.com.objectos.fs.ResolvedPath;
 import java.nio.charset.Charset;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 import objectos.lang.NoteSink;
 
 public final class Client {
@@ -57,11 +57,11 @@ public final class Client {
       Directory directory,
       ConfigurationFile configurationFile, LoginPathFile loginPathFile,
       IoWorker ioWorker, NoteSink logger) {
-    Checks.checkNotNull(directory, "directory == null");
-    Checks.checkNotNull(configurationFile, "configurationFile == null");
-    Checks.checkNotNull(loginPathFile, "loginPathFile == null");
-    Checks.checkNotNull(ioWorker, "ioWorker == null");
-    Checks.checkNotNull(logger, "logger == null");
+    Check.notNull(directory, "directory == null");
+    Check.notNull(configurationFile, "configurationFile == null");
+    Check.notNull(loginPathFile, "loginPathFile == null");
+    Check.notNull(ioWorker, "ioWorker == null");
+    Check.notNull(logger, "logger == null");
 
     return new Client(
         directory,
@@ -71,7 +71,7 @@ public final class Client {
   }
 
   public static String sql(String... parts) {
-    Checks.checkNotNull(parts, "parts == null");
+    Check.notNull(parts, "parts == null");
 
     StringBuilder sql;
     sql = new StringBuilder();
@@ -91,7 +91,7 @@ public final class Client {
   }
 
   public static String tuple(Object... values) {
-    Checks.checkNotNull(values, "values == null");
+    Check.notNull(values, "values == null");
 
     StringBuilder result;
     result = new StringBuilder();
@@ -137,56 +137,56 @@ public final class Client {
 
   public final ClientJob<ImmutableList<String>> executeInputStreamSource(
       LoginPath loginPath, InputStreamSource source) {
-    Checks.checkNotNull(loginPath, "loginPath == null");
-    Checks.checkNotNull(source, "source == null");
+    Check.notNull(loginPath, "loginPath == null");
+    Check.notNull(source, "source == null");
 
     return new ExecuteInputStreamSource(this, loginPath, source);
   }
 
   public final ClientJob<ImmutableList<String>> executeStatement(
       LoginPath loginPath, String... statements) {
-    Checks.checkNotNull(loginPath, "loginPath == null");
-    Checks.checkNotNull(statements, "statements == null");
+    Check.notNull(loginPath, "loginPath == null");
+    Check.notNull(statements, "statements == null");
 
     return new ExecuteStatement(this, loginPath, statements);
   }
 
   public final ClientJob<RegularFile> fullBackup(
       LoginPath loginPath, Directory targetDirectory) {
-    Checks.checkNotNull(loginPath, "loginPath == null");
-    Checks.checkNotNull(targetDirectory, "targetDirectory == null");
+    Check.notNull(loginPath, "loginPath == null");
+    Check.notNull(targetDirectory, "targetDirectory == null");
 
     return new FullBackup(this, loginPath, targetDirectory);
   }
 
   public final ClientJob<ImmutableList<String>> fullRestore(
       LoginPath loginPath, RegularFile file) {
-    Checks.checkNotNull(loginPath, "loginPath == null");
-    Checks.checkNotNull(file, "file == null");
+    Check.notNull(loginPath, "loginPath == null");
+    Check.notNull(file, "file == null");
 
     return new FullRestore(this, loginPath, file);
   }
 
   public final ClientJob<ImmutableList<RegularFile>> incrementalBackup(
       LoginPath loginPath, Directory targetDirectory) {
-    Checks.checkNotNull(loginPath, "loginPath == null");
-    Checks.checkNotNull(targetDirectory, "targetDirectory == null");
+    Check.notNull(loginPath, "loginPath == null");
+    Check.notNull(targetDirectory, "targetDirectory == null");
 
     return new IncrementalBackup(this, loginPath, targetDirectory);
   }
 
   public final ClientJob<ImmutableList<String>> incrementalRestore(
       LoginPath loginPath, Directory workDirectory, ImmutableList<RegularFile> files) {
-    Checks.checkNotNull(loginPath, "loginPath == null");
-    Checks.checkNotNull(workDirectory, "workDirectory == null");
-    Checks.checkNotNull(files, "files == null");
+    Check.notNull(loginPath, "loginPath == null");
+    Check.notNull(workDirectory, "workDirectory == null");
+    Check.notNull(files, "files == null");
 
     return new IncrementalRestore(this, loginPath, workDirectory, files);
   }
 
   public final ClientJob<ImmutableList<String>> setLoginPath(
       ConfigEditorOption... options) {
-    Checks.checkNotNull(options, "options == null");
+    Check.notNull(options, "options == null");
 
     return new SetLoginPath(this, options);
   }
@@ -228,7 +228,7 @@ public final class Client {
   }
 
   final void set(AbstractClientJob<?> newJob) {
-    Checks.checkState(job == null, "A previous job is already running");
+    Check.state(job == null, "A previous job is already running");
 
     job = newJob;
   }

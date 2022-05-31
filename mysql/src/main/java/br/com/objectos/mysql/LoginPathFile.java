@@ -20,7 +20,7 @@ import br.com.objectos.fs.PathName;
 import br.com.objectos.fs.SimplePathNameVisitor;
 import java.io.IOException;
 import java.util.Map;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public final class LoginPathFile {
 
@@ -34,7 +34,7 @@ public final class LoginPathFile {
 
   public static LoginPathFile loginPathFile(PathName path) {
     try {
-      Checks.checkNotNull(path, "path == null");
+      Check.notNull(path, "path == null");
 
       return path.acceptPathNameVisitor(FACTORY, null);
     } catch (IOException e) {

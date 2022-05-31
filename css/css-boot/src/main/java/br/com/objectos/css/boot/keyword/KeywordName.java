@@ -47,7 +47,7 @@ import br.com.objectos.css.boot.type.Value;
 import br.com.objectos.css.boot.type.ValueType;
 import java.util.Set;
 import javax.lang.model.SourceVersion;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 import objectos.lang.ToString;
 
 public class KeywordName implements Comparable<KeywordName>, ParameterType, Value {
@@ -66,7 +66,7 @@ public class KeywordName implements Comparable<KeywordName>, ParameterType, Valu
   }
 
   public static KeywordName of(String value) {
-    Checks.checkNotNull(value, "value == null");
+    Check.notNull(value, "value == null");
 
     char firstChar = value.charAt(0);
     String fieldNameCandidate = Character.isUpperCase(firstChar)
@@ -79,7 +79,7 @@ public class KeywordName implements Comparable<KeywordName>, ParameterType, Valu
   }
 
   public static KeywordName withKwSuffix(String value) {
-    Checks.checkNotNull(value, "value == null");
+    Check.notNull(value, "value == null");
     return new KeywordName(value, JavaNames.toValidMethodName(value) + "Kw");
   }
 

@@ -18,14 +18,14 @@ package br.com.objectos.http.media;
 import br.com.objectos.core.map.ImmutableMap;
 import br.com.objectos.core.map.MutableMap;
 import java.util.Locale;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public class MediaTypes {
 
   private MediaTypes() {}
 
   public static MediaType ofExtension(String extension) {
-    Checks.checkNotNull(extension, "extension == null");
+    Check.notNull(extension, "extension == null");
 
     String ext = extension.toLowerCase();
 
@@ -39,7 +39,7 @@ public class MediaTypes {
   }
 
   public static MediaType ofFileName(String fileName) {
-    Checks.checkNotNull(fileName, "fileName == null");
+    Check.notNull(fileName, "fileName == null");
 
     int lastIndex;
     lastIndex = fileName.lastIndexOf('.');

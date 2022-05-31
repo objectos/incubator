@@ -23,7 +23,7 @@ import javax.annotation.processing.ProcessingEnvironment;
 import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.type.TypeMirror;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public final class ProcessingMethod extends ProcessingExecutableElement {
 
@@ -38,9 +38,9 @@ public final class ProcessingMethod extends ProcessingExecutableElement {
 
   public static ProcessingMethod adapt(
       ProcessingEnvironment processingEnv, ExecutableElement executableElement) {
-    Checks.checkNotNull(processingEnv, "processingEnv == null");
-    Checks.checkNotNull(executableElement, "executableElement == null");
-    Checks.checkArgument(executableElement.getKind() == ElementKind.METHOD,
+    Check.notNull(processingEnv, "processingEnv == null");
+    Check.notNull(executableElement, "executableElement == null");
+    Check.argument(executableElement.getKind() == ElementKind.METHOD,
         "Not ElementKind.METHOD");
 
     return ProcessingMethod.adaptUnchecked(processingEnv, executableElement);

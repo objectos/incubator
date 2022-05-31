@@ -42,7 +42,7 @@ import javax.lang.model.util.Elements;
 import javax.tools.Diagnostic.Kind;
 import javax.tools.FileObject;
 import javax.tools.StandardLocation;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 import objectos.lang.Throwables;
 
 public class ProcessingRound
@@ -79,10 +79,10 @@ public class ProcessingRound
       Set<? extends TypeElement> annotations,
       RoundEnvironment roundEnv,
       Reprocessor reprocessor) {
-    Checks.checkNotNull(processingEnv, "processingEnv == null");
-    Checks.checkNotNull(annotations, "annotations == null");
-    Checks.checkNotNull(roundEnv, "roundEnv == null");
-    Checks.checkNotNull(reprocessor, "reprocessor == null");
+    Check.notNull(processingEnv, "processingEnv == null");
+    Check.notNull(annotations, "annotations == null");
+    Check.notNull(roundEnv, "roundEnv == null");
+    Check.notNull(reprocessor, "reprocessor == null");
     return new ProcessingRound(processingEnv, annotations, roundEnv, reprocessor);
   }
 
@@ -140,7 +140,7 @@ public class ProcessingRound
   }
 
   public final void printMessageError(Exception e) {
-    Checks.checkNotNull(e, "e == null");
+    Check.notNull(e, "e == null");
 
     String stackTrace = Throwables.printStackTraceToString(e);
 
@@ -148,36 +148,36 @@ public class ProcessingRound
   }
 
   public final void printMessageError(String message) {
-    Checks.checkNotNull(message, "message == null");
+    Check.notNull(message, "message == null");
     printMessage(Kind.ERROR, message);
   }
 
   @Override
   public final void reprocessPackage(ProcessingPackage pkg) {
-    Checks.checkNotNull(pkg, "pkg == null");
+    Check.notNull(pkg, "pkg == null");
     pkg.acceptReprocessor(reprocessor);
   }
 
   @Override
   public final void reprocessType(ProcessingType type) {
-    Checks.checkNotNull(type, "type == null");
+    Check.notNull(type, "type == null");
     type.acceptReprocessor(reprocessor);
   }
 
   public final void writeArtifact(Artifact artifact) {
-    Checks.checkNotNull(artifact, "artifact == null");
+    Check.notNull(artifact, "artifact == null");
     artifact.execute(processingEnv);
   }
 
   public final void writeJavaFile(JavaFile javaFile) throws IOException {
-    Checks.checkNotNull(javaFile, "javaFile == null");
+    Check.notNull(javaFile, "javaFile == null");
     Filer filer = processingEnv.getFiler();
     javaFile.writeTo(filer);
   }
 
   public final void writeResource(String resourceName, String contents) throws IOException {
-    Checks.checkNotNull(resourceName, "resourceName == null");
-    Checks.checkNotNull(contents, "contents == null");
+    Check.notNull(resourceName, "resourceName == null");
+    Check.notNull(contents, "contents == null");
     Filer filer = processingEnv.getFiler();
     FileObject file = filer.createResource(StandardLocation.CLASS_OUTPUT, "", resourceName);
     OutputStream out = file.openOutputStream();

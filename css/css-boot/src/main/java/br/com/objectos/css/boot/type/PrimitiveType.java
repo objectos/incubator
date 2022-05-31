@@ -25,7 +25,7 @@ import br.com.objectos.code.java.type.NamedType;
 import br.com.objectos.core.set.Sets;
 import br.com.objectos.css.boot.property.ParameterType;
 import java.util.Set;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public class PrimitiveType implements ParameterType, Value {
 
@@ -37,7 +37,7 @@ public class PrimitiveType implements ParameterType, Value {
   }
 
   public static PrimitiveType of(Primitive kind) {
-    Checks.checkNotNull(kind, "kind == null");
+    Check.notNull(kind, "kind == null");
     return new PrimitiveType(kind);
   }
 

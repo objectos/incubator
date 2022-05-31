@@ -15,14 +15,14 @@
  */
 package br.com.objectos.css.type;
 
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public class Url implements ImageType {
 
   private final String value;
 
   public Url(String value) {
-    this.value = Checks.checkNotNull(value, "value == null");
+    this.value = Check.notNull(value, "value == null");
   }
 
   @Override

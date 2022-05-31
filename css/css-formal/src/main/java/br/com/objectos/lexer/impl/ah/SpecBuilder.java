@@ -22,7 +22,7 @@ import br.com.objectos.lexer.lang.Constructor2;
 import br.com.objectos.lexer.lang.Constructor3;
 import java.util.EnumSet;
 import java.util.Objects;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 class SpecBuilder {
 
@@ -130,7 +130,7 @@ class SpecBuilder {
 
   @SuppressWarnings({"rawtypes", "unchecked"})
   public final EnumSet<?> toEnumSet() {
-    Checks.checkArgument(type.isEnum(), type, " is not an enum type.");
+    Check.argument(type.isEnum(), type, " is not an enum type.");
     Class<? extends Enum> enumType = (Class<? extends Enum>) type;
     return EnumSet.allOf(enumType);
   }

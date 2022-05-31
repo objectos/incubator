@@ -23,7 +23,7 @@ import br.com.objectos.fs.ResolvedPath;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 import objectos.lang.ToString;
 import objectos.lang.ToStringObject;
 
@@ -59,7 +59,7 @@ public abstract class RefName implements ToStringObject {
    * @return a new {@code RefName} representing a named branch.
    */
   public static RefName namedBranch(String name) {
-    Checks.checkNotNull(name, "name == null");
+    Check.notNull(name, "name == null");
 
     char[] chars;
     chars = name.toCharArray();

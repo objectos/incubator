@@ -21,7 +21,7 @@ import br.com.objectos.http.server.HttpServerBuilder;
 import br.com.objectos.http.server.ImmutableHttpServer;
 import br.com.objectos.http.server.MutableHttpServer;
 import java.net.InetSocketAddress;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Server;
 
@@ -62,7 +62,7 @@ public class JettyHttpServerBuilder implements HttpServerBuilder {
   }
 
   public final JettyHttpServerBuilder hostname(String newHostname) {
-    hostname = Checks.checkNotNull(newHostname, "newHostname == null");
+    hostname = Check.notNull(newHostname, "newHostname == null");
     return this;
   }
 

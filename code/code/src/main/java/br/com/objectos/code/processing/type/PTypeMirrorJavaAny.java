@@ -37,7 +37,7 @@ import javax.lang.model.type.TypeVariable;
 import javax.lang.model.type.WildcardType;
 import javax.lang.model.util.Elements;
 import javax.lang.model.util.Types;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 @Concrete(modifiers = "public abstract", simpleName = "PTypeMirror")
 abstract class PTypeMirrorJavaAny extends AnnotatedElementOrType {
@@ -49,8 +49,8 @@ abstract class PTypeMirrorJavaAny extends AnnotatedElementOrType {
   }
 
   public static PTypeMirror adapt(ProcessingEnvironment processingEnv, TypeMirror type) {
-    Checks.checkNotNull(processingEnv, "processingEnv == null");
-    Checks.checkNotNull(type, "type == null");
+    Check.notNull(processingEnv, "processingEnv == null");
+    Check.notNull(type, "type == null");
 
     return type.accept(FACTORY, processingEnv);
   }
@@ -75,7 +75,7 @@ abstract class PTypeMirrorJavaAny extends AnnotatedElementOrType {
   }
 
   public final boolean isInstanceOf(Class<?> type) {
-    Checks.checkNotNull(type, "type == null");
+    Check.notNull(type, "type == null");
 
     Types types;
     types = processingEnv.getTypeUtils();

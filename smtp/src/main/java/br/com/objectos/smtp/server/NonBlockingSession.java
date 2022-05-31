@@ -22,7 +22,7 @@ import br.com.objectos.smtp.mail.ReversePath;
 import java.io.Closeable;
 import java.io.IOException;
 import java.nio.channels.ByteChannel;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 // @NotThreadSafe
 final class NonBlockingSession implements Session {
@@ -43,10 +43,10 @@ final class NonBlockingSession implements Session {
                             RequestFacade requestFacade,
                             ResponseFacade responseFacade,
                             TransactionFacade transactionFacade) {
-    this.logger = Checks.checkNotNull(logger, "logger == null");
-    this.requestFacade = Checks.checkNotNull(requestFacade, "requestFacade == null");
-    this.responseFacade = Checks.checkNotNull(responseFacade, "responseFacade == null");
-    this.transactionFacade = Checks.checkNotNull(transactionFacade, "transactionFacade == null");
+    this.logger = Check.notNull(logger, "logger == null");
+    this.requestFacade = Check.notNull(requestFacade, "requestFacade == null");
+    this.responseFacade = Check.notNull(responseFacade, "responseFacade == null");
+    this.transactionFacade = Check.notNull(transactionFacade, "transactionFacade == null");
   }
 
   @Override

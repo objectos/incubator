@@ -25,7 +25,7 @@ import br.com.objectos.http.media.TextType;
 import br.com.objectos.http.media.TopLevel;
 import java.nio.charset.Charset;
 import java.util.Map;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 import objectos.lang.Equals;
 import objectos.lang.HashCode;
 
@@ -110,7 +110,7 @@ final class HeaderContentTypeImpl
 
   @Override
   public final void acceptContentTypeVisitor(ContentTypeVisitor visitor) {
-    Checks.checkState(!isMalformed(), "this contentType is malformed");
+    Check.state(!isMalformed(), "this contentType is malformed");
 
     ThisMediaTypeVisitor mediaTypeVisitor;
     mediaTypeVisitor = new ThisMediaTypeVisitor(visitor);

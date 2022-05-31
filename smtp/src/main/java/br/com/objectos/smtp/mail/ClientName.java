@@ -15,7 +15,7 @@
  */
 package br.com.objectos.smtp.mail;
 
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public class ClientName {
 
@@ -26,7 +26,7 @@ public class ClientName {
   }
 
   public static ClientName of(String argument) {
-    Checks.checkNotNull(argument, "argument == null");
+    Check.notNull(argument, "argument == null");
 
     return new ClientName(argument);
   }

@@ -18,7 +18,7 @@ package br.com.objectos.code.java.statement;
 import br.com.objectos.code.java.element.Keywords;
 import br.com.objectos.code.java.expression.ThrowableExpression;
 import br.com.objectos.code.java.io.CodeWriter;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public final class ThrowStatement extends AbstractSimpleStatement {
 
@@ -29,7 +29,7 @@ public final class ThrowStatement extends AbstractSimpleStatement {
   }
 
   public static ThrowStatement _throw(ThrowableExpression expression) {
-    Checks.checkNotNull(expression, "expression == null");
+    Check.notNull(expression, "expression == null");
     return new ThrowStatement(expression);
   }
 

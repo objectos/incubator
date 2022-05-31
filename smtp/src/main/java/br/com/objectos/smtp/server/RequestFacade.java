@@ -20,7 +20,7 @@ import br.com.objectos.smtp.command.CommandVisitor;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.ReadableByteChannel;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public class RequestFacade {
 
@@ -31,7 +31,7 @@ public class RequestFacade {
   private final CommandFacade commandFacade;
 
   public RequestFacade(CommandFacade commandFacade) {
-    this.commandFacade = Checks.checkNotNull(commandFacade, "commandFacade == null");
+    this.commandFacade = Check.notNull(commandFacade, "commandFacade == null");
   }
 
   public final void consume(CommandVisitor visitor) {

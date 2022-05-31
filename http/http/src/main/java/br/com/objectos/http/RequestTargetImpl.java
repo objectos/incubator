@@ -15,7 +15,7 @@
  */
 package br.com.objectos.http;
 
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 final class RequestTargetImpl implements RequestTarget {
 
@@ -34,7 +34,7 @@ final class RequestTargetImpl implements RequestTarget {
 
   @Override
   public final boolean pathEquals(String string) {
-    Checks.checkNotNull(string, "string == null");
+    Check.notNull(string, "string == null");
 
     if (value.length != string.length()) {
       return false;

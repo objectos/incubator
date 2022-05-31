@@ -26,7 +26,7 @@ import br.com.objectos.code.java.statement.BlockElement;
 import br.com.objectos.code.java.statement.BlockStatement;
 import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.core.list.MutableList;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public final class ConstructorCode
     extends AbstractCodeElement
@@ -66,14 +66,14 @@ public final class ConstructorCode
 
   public static ConstructorCode constructor(
       ConstructorCodeElement e1) {
-    Checks.checkNotNull(e1, "e1 == null");
+    Check.notNull(e1, "e1 == null");
     Builder b = builder();
     e1.acceptConstructorCodeBuilder(b);
     return b.build();
   }
 
   public static ConstructorCode constructor(ConstructorCodeElement... elements) {
-    Checks.checkNotNull(elements, "elements == null");
+    Check.notNull(elements, "elements == null");
     Builder b = builder();
 
     for (int i = 0; i < elements.length; i++) {
@@ -93,8 +93,8 @@ public final class ConstructorCode
   public static ConstructorCode constructor(
       ConstructorCodeElement e1,
       ConstructorCodeElement e2) {
-    Checks.checkNotNull(e1, "e1 == null");
-    Checks.checkNotNull(e2, "e2 == null");
+    Check.notNull(e1, "e1 == null");
+    Check.notNull(e2, "e2 == null");
     Builder b = builder();
     e1.acceptConstructorCodeBuilder(b);
     e2.acceptConstructorCodeBuilder(b);
@@ -105,9 +105,9 @@ public final class ConstructorCode
       ConstructorCodeElement e1,
       ConstructorCodeElement e2,
       ConstructorCodeElement e3) {
-    Checks.checkNotNull(e1, "e1 == null");
-    Checks.checkNotNull(e2, "e2 == null");
-    Checks.checkNotNull(e3, "e3 == null");
+    Check.notNull(e1, "e1 == null");
+    Check.notNull(e2, "e2 == null");
+    Check.notNull(e3, "e3 == null");
     Builder b = builder();
     e1.acceptConstructorCodeBuilder(b);
     e2.acceptConstructorCodeBuilder(b);
@@ -120,10 +120,10 @@ public final class ConstructorCode
       ConstructorCodeElement e2,
       ConstructorCodeElement e3,
       ConstructorCodeElement e4) {
-    Checks.checkNotNull(e1, "e1 == null");
-    Checks.checkNotNull(e2, "e2 == null");
-    Checks.checkNotNull(e3, "e3 == null");
-    Checks.checkNotNull(e4, "e4 == null");
+    Check.notNull(e1, "e1 == null");
+    Check.notNull(e2, "e2 == null");
+    Check.notNull(e3, "e3 == null");
+    Check.notNull(e4, "e4 == null");
     Builder b = builder();
     e1.acceptConstructorCodeBuilder(b);
     e2.acceptConstructorCodeBuilder(b);
@@ -138,11 +138,11 @@ public final class ConstructorCode
       ConstructorCodeElement e3,
       ConstructorCodeElement e4,
       ConstructorCodeElement e5) {
-    Checks.checkNotNull(e1, "e1 == null");
-    Checks.checkNotNull(e2, "e2 == null");
-    Checks.checkNotNull(e3, "e3 == null");
-    Checks.checkNotNull(e4, "e4 == null");
-    Checks.checkNotNull(e5, "e5 == null");
+    Check.notNull(e1, "e1 == null");
+    Check.notNull(e2, "e2 == null");
+    Check.notNull(e3, "e3 == null");
+    Check.notNull(e4, "e4 == null");
+    Check.notNull(e5, "e5 == null");
     Builder b = builder();
     e1.acceptConstructorCodeBuilder(b);
     e2.acceptConstructorCodeBuilder(b);
@@ -159,12 +159,12 @@ public final class ConstructorCode
       ConstructorCodeElement e4,
       ConstructorCodeElement e5,
       ConstructorCodeElement e6) {
-    Checks.checkNotNull(e1, "e1 == null");
-    Checks.checkNotNull(e2, "e2 == null");
-    Checks.checkNotNull(e3, "e3 == null");
-    Checks.checkNotNull(e4, "e4 == null");
-    Checks.checkNotNull(e5, "e5 == null");
-    Checks.checkNotNull(e6, "e6 == null");
+    Check.notNull(e1, "e1 == null");
+    Check.notNull(e2, "e2 == null");
+    Check.notNull(e3, "e3 == null");
+    Check.notNull(e4, "e4 == null");
+    Check.notNull(e5, "e5 == null");
+    Check.notNull(e6, "e6 == null");
     Builder b = builder();
     e1.acceptConstructorCodeBuilder(b);
     e2.acceptConstructorCodeBuilder(b);
@@ -183,13 +183,13 @@ public final class ConstructorCode
       ConstructorCodeElement e5,
       ConstructorCodeElement e6,
       ConstructorCodeElement e7) {
-    Checks.checkNotNull(e1, "e1 == null");
-    Checks.checkNotNull(e2, "e2 == null");
-    Checks.checkNotNull(e3, "e3 == null");
-    Checks.checkNotNull(e4, "e4 == null");
-    Checks.checkNotNull(e5, "e5 == null");
-    Checks.checkNotNull(e6, "e6 == null");
-    Checks.checkNotNull(e7, "e7 == null");
+    Check.notNull(e1, "e1 == null");
+    Check.notNull(e2, "e2 == null");
+    Check.notNull(e3, "e3 == null");
+    Check.notNull(e4, "e4 == null");
+    Check.notNull(e5, "e5 == null");
+    Check.notNull(e6, "e6 == null");
+    Check.notNull(e7, "e7 == null");
     Builder b = builder();
     e1.acceptConstructorCodeBuilder(b);
     e2.acceptConstructorCodeBuilder(b);
@@ -210,14 +210,14 @@ public final class ConstructorCode
       ConstructorCodeElement e6,
       ConstructorCodeElement e7,
       ConstructorCodeElement e8) {
-    Checks.checkNotNull(e1, "e1 == null");
-    Checks.checkNotNull(e2, "e2 == null");
-    Checks.checkNotNull(e3, "e3 == null");
-    Checks.checkNotNull(e4, "e4 == null");
-    Checks.checkNotNull(e5, "e5 == null");
-    Checks.checkNotNull(e6, "e6 == null");
-    Checks.checkNotNull(e7, "e7 == null");
-    Checks.checkNotNull(e8, "e8 == null");
+    Check.notNull(e1, "e1 == null");
+    Check.notNull(e2, "e2 == null");
+    Check.notNull(e3, "e3 == null");
+    Check.notNull(e4, "e4 == null");
+    Check.notNull(e5, "e5 == null");
+    Check.notNull(e6, "e6 == null");
+    Check.notNull(e7, "e7 == null");
+    Check.notNull(e8, "e8 == null");
     Builder b = builder();
     e1.acceptConstructorCodeBuilder(b);
     e2.acceptConstructorCodeBuilder(b);
@@ -240,15 +240,15 @@ public final class ConstructorCode
       ConstructorCodeElement e7,
       ConstructorCodeElement e8,
       ConstructorCodeElement e9) {
-    Checks.checkNotNull(e1, "e1 == null");
-    Checks.checkNotNull(e2, "e2 == null");
-    Checks.checkNotNull(e3, "e3 == null");
-    Checks.checkNotNull(e4, "e4 == null");
-    Checks.checkNotNull(e5, "e5 == null");
-    Checks.checkNotNull(e6, "e6 == null");
-    Checks.checkNotNull(e7, "e7 == null");
-    Checks.checkNotNull(e8, "e8 == null");
-    Checks.checkNotNull(e9, "e9 == null");
+    Check.notNull(e1, "e1 == null");
+    Check.notNull(e2, "e2 == null");
+    Check.notNull(e3, "e3 == null");
+    Check.notNull(e4, "e4 == null");
+    Check.notNull(e5, "e5 == null");
+    Check.notNull(e6, "e6 == null");
+    Check.notNull(e7, "e7 == null");
+    Check.notNull(e8, "e8 == null");
+    Check.notNull(e9, "e9 == null");
     Builder b = builder();
     e1.acceptConstructorCodeBuilder(b);
     e2.acceptConstructorCodeBuilder(b);
@@ -351,17 +351,17 @@ public final class ConstructorCode
     private Builder() {}
 
     public final Builder addModifier(ConstructorModifier modifier) {
-      accessModifier = Checks.checkNotNull(modifier, "modifier == null");
+      accessModifier = Check.notNull(modifier, "modifier == null");
       return this;
     }
 
     public final Builder addParameter(ParameterCode parameter) {
-      Checks.checkNotNull(parameter, "parameter == null");
+      Check.notNull(parameter, "parameter == null");
       return withParameterUnchecked(parameter);
     }
 
     public final Builder addParameters(Iterable<ParameterCode> parameters) {
-      Checks.checkNotNull(parameters, "parameters == null");
+      Check.notNull(parameters, "parameters == null");
       for (ParameterCode parameter : parameters) {
         addParameter(parameter);
       }
@@ -388,7 +388,7 @@ public final class ConstructorCode
     }
 
     public final Builder constructorInvocation(ExplicitConstructorInvocation invocation) {
-      constructorInvocation = Checks.checkNotNull(invocation, "invocation == null");
+      constructorInvocation = Check.notNull(invocation, "invocation == null");
       return this;
     }
 

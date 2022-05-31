@@ -17,7 +17,7 @@ package br.com.objectos.concurrent;
 
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingDeque;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 import objectos.lang.Note1;
 import objectos.lang.NoteSink;
 
@@ -44,7 +44,7 @@ public final class SingleThreadIoWorker extends IoWorkerService {
    *        a logger instance
    */
   public SingleThreadIoWorker(NoteSink logger) {
-    this.logger = Checks.checkNotNull(logger, "logger == null");
+    this.logger = Check.notNull(logger, "logger == null");
 
     queue = new LinkedBlockingDeque<IoTask>();
 
@@ -59,7 +59,7 @@ public final class SingleThreadIoWorker extends IoWorkerService {
    */
   @Override
   public final boolean cancelOrInterrupt(IoTask task) {
-    Checks.checkNotNull(task, "task == null");
+    Check.notNull(task, "task == null");
 
     if (task == worker.currentTask) {
       worker.interrupt();
@@ -95,7 +95,7 @@ public final class SingleThreadIoWorker extends IoWorkerService {
    */
   @Override
   public final void submit(IoTask task) {
-    Checks.checkNotNull(task, "task == null");
+    Check.notNull(task, "task == null");
 
     queue.add(task);
   }

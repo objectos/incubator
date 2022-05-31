@@ -24,7 +24,7 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.RandomAccess;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 /**
  * An array-based {@link br.com.objectos.core.collection.MutableCollection} and
@@ -140,7 +140,7 @@ abstract class AbstractMutableList<E> extends AbstractArrayBaseList<E>
    */
   @Override
   public final boolean addAll(Collection<? extends E> c) {
-    Checks.checkNotNull(c, "c == null");
+    Check.notNull(c, "c == null");
 
     if (c.isEmpty()) {
       return false;
@@ -217,7 +217,7 @@ abstract class AbstractMutableList<E> extends AbstractArrayBaseList<E>
    */
   @Override
   public final boolean addAllIterable(Iterable<? extends E> iterable) {
-    Checks.checkNotNull(iterable, "iterable == null");
+    Check.notNull(iterable, "iterable == null");
 
     if (iterable instanceof RandomAccess && iterable instanceof List) {
       List<? extends E> list;
@@ -277,7 +277,7 @@ abstract class AbstractMutableList<E> extends AbstractArrayBaseList<E>
    */
   @Override
   public final boolean addWithNullMessage(E e, Object nullMessage) {
-    Checks.checkNotNull(e, nullMessage);
+    Check.notNull(e, nullMessage);
 
     return resizeIfNecessaryAndDataAppend(e);
   }
@@ -311,7 +311,7 @@ abstract class AbstractMutableList<E> extends AbstractArrayBaseList<E>
   @Override
   public final boolean addWithNullMessage(
       E e, Object nullMessageStart, int index, Object nullMessageEnd) {
-    Checks.checkNotNull(e, nullMessageStart, index, nullMessageEnd);
+    Check.notNull(e, nullMessageStart, index, nullMessageEnd);
 
     return resizeIfNecessaryAndDataAppend(e);
   }
@@ -377,7 +377,7 @@ abstract class AbstractMutableList<E> extends AbstractArrayBaseList<E>
    */
   @SuppressWarnings("unchecked")
   public final ImmutableList<E> toImmutableSortedList(Comparator<? super E> c) {
-    Checks.checkNotNull(c, "c == null");
+    Check.notNull(c, "c == null");
 
     switch (size) {
       case 0:
@@ -410,7 +410,7 @@ abstract class AbstractMutableList<E> extends AbstractArrayBaseList<E>
    *         if {@code newSize < 0}
    */
   public final void truncate(int newSize) {
-    Checks.checkArgument(newSize >= 0, "newSize must not be negative");
+    Check.argument(newSize >= 0, "newSize must not be negative");
 
     if (newSize >= size) {
       return;
@@ -422,7 +422,7 @@ abstract class AbstractMutableList<E> extends AbstractArrayBaseList<E>
   }
 
   final boolean addAll(Iterator<? extends E> iterator) {
-    Checks.checkNotNull(iterator, "iterator == null");
+    Check.notNull(iterator, "iterator == null");
 
     return addAllFromIterator(iterator);
   }

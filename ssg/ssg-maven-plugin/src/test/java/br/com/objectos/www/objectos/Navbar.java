@@ -17,7 +17,7 @@ package br.com.objectos.www.objectos;
 
 import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.html.spi.type.UlValue;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 import objectos.ssg.SiteFragment;
 
 public class Navbar extends SiteFragment {
@@ -34,7 +34,7 @@ public class Navbar extends SiteFragment {
   }
 
   final void setPages(ImmutableList<NavbarPage> pages) {
-    this.pages = Checks.checkNotNull(pages, "pages == null");
+    this.pages = Check.notNull(pages, "pages == null");
   }
 
   private UlValue[] items() {

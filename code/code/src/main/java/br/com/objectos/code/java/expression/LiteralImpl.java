@@ -19,7 +19,7 @@ import br.com.objectos.code.java.element.AbstractDefaultImmutableCodeElement;
 import br.com.objectos.code.java.element.CodeElement;
 import br.com.objectos.code.java.type.NamedClass;
 import br.com.objectos.core.list.ImmutableList;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 final class LiteralImpl extends AbstractDefaultImmutableCodeElement implements Literal {
 
@@ -36,7 +36,7 @@ final class LiteralImpl extends AbstractDefaultImmutableCodeElement implements L
   }
 
   static String escapeJava(String string) {
-    Checks.checkNotNull(string, "string == null");
+    Check.notNull(string, "string == null");
 
     StringBuilder result = new StringBuilder();
 

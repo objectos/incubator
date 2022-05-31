@@ -31,7 +31,7 @@ import javax.lang.model.SourceVersion;
 import javax.lang.model.element.PackageElement;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.util.Elements;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public final class TestingEnvironment {
 
@@ -46,7 +46,7 @@ public final class TestingEnvironment {
   }
 
   public static void bootstrap(Bootstrap bootstrap) {
-    Checks.checkNotNull(bootstrap, "bootstrap == null");
+    Check.notNull(bootstrap, "bootstrap == null");
 
     BootstrapProcessor bootstrapProcessor;
     bootstrapProcessor = new BootstrapProcessor(bootstrap);
@@ -61,7 +61,7 @@ public final class TestingEnvironment {
   }
 
   public final ProcessingPackage getProcessingPackage(Class<?> type) {
-    Checks.checkNotNull(type, "type == null");
+    Check.notNull(type, "type == null");
 
     Package typePackage;
     typePackage = type.getPackage();
@@ -70,7 +70,7 @@ public final class TestingEnvironment {
   }
 
   public final ProcessingPackage getProcessingPackage(String qualifiedName) {
-    Checks.checkNotNull(qualifiedName, "qualifiedName == null");
+    Check.notNull(qualifiedName, "qualifiedName == null");
 
     PackageElement packageElement;
     packageElement = elements.getPackageElement(qualifiedName);
@@ -79,13 +79,13 @@ public final class TestingEnvironment {
   }
 
   public final ProcessingType getProcessingType(Class<?> type) {
-    Checks.checkNotNull(type, "type == null");
+    Check.notNull(type, "type == null");
 
     return getProcessingType(type.getCanonicalName());
   }
 
   public final ProcessingType getProcessingType(String qualifiedName) {
-    Checks.checkNotNull(qualifiedName, "qualifiedName == null");
+    Check.notNull(qualifiedName, "qualifiedName == null");
 
     TypeElement typeElement;
     typeElement = elements.getTypeElement(qualifiedName);

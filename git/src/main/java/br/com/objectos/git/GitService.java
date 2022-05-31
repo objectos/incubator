@@ -21,7 +21,7 @@ import br.com.objectos.concurrent.CpuWorker;
 import br.com.objectos.concurrent.IoWorker;
 import br.com.objectos.core.set.ImmutableSet;
 import br.com.objectos.fs.Directory;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 import objectos.lang.NoteSink;
 import objectos.lang.NoOpNoteSink;
 
@@ -162,9 +162,9 @@ public final class GitService implements GitExecutor {
    *         values
    */
   public static GitService create(CpuArray cpuArray, IoWorker ioWorker, Option... options) {
-    Checks.checkNotNull(cpuArray, "cpuArray == null");
-    Checks.checkNotNull(ioWorker, "ioWorker == null");
-    Checks.checkNotNull(options, "options == null");
+    Check.notNull(cpuArray, "cpuArray == null");
+    Check.notNull(ioWorker, "ioWorker == null");
+    Check.notNull(options, "options == null");
 
     GitServiceBuilder builder;
     builder = new GitServiceBuilder(cpuArray, ioWorker);
@@ -173,7 +173,7 @@ public final class GitService implements GitExecutor {
       Option option;
       option = options[i];
 
-      Checks.checkNotNull(option, "options[", i, "] == null");
+      Check.notNull(option, "options[", i, "] == null");
 
       option.acceptBuilder(builder);
     }
@@ -211,7 +211,7 @@ public final class GitService implements GitExecutor {
    * @see GitService#create(CpuArray, IoWorker, Option...)
    */
   public static Option enginesPerWorker(final int value) {
-    Checks.checkArgument(value > 0, "engines/worker minimum value is 1 engine/worker");
+    Check.argument(value > 0, "engines/worker minimum value is 1 engine/worker");
 
     return new Option() {
       @Override
@@ -231,7 +231,7 @@ public final class GitService implements GitExecutor {
    * @return a new option that sets the logger instance to the specified value
    */
   public static Option logger(final NoteSink logger) {
-    Checks.checkNotNull(logger, "logger == null");
+    Check.notNull(logger, "logger == null");
 
     return new Option() {
       @Override
@@ -246,7 +246,7 @@ public final class GitService implements GitExecutor {
    */
   @Override
   public final <V> Computation<V> submit(GitCommand<V> command) {
-    Checks.checkNotNull(command, "command == null");
+    Check.notNull(command, "command == null");
 
     int index;
     index = Git.randomIndex(cpuArray);

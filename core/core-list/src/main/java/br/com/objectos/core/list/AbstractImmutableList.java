@@ -19,7 +19,7 @@ import br.com.objectos.core.collection.ImmutableCollection;
 import br.com.objectos.latest.Concrete;
 import java.util.Collection;
 import java.util.Iterator;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 /**
  * An array-based {@link br.com.objectos.core.collection.ImmutableCollection}
@@ -66,7 +66,7 @@ abstract class AbstractImmutableList<E> extends AbstractArrayBaseList<E>
    *         {@code null}
    */
   public static <E> ImmutableList<E> copyOf(E[] array) {
-    Checks.checkNotNull(array, "array == null");
+    Check.notNull(array, "array == null");
 
     switch (array.length) {
       case 0:
@@ -79,7 +79,7 @@ abstract class AbstractImmutableList<E> extends AbstractArrayBaseList<E>
           E e;
           e = array[i];
 
-          copy[i] = Checks.checkNotNull(e, "array[", i, "] == null");
+          copy[i] = Check.notNull(e, "array[", i, "] == null");
         }
 
         return new ImmutableList<E>(copy);
@@ -113,7 +113,7 @@ abstract class AbstractImmutableList<E> extends AbstractArrayBaseList<E>
    */
   @SuppressWarnings("unchecked")
   public static <E> ImmutableList<E> copyOf(Iterable<? extends E> elements) {
-    Checks.checkNotNull(elements, "elements == null");
+    Check.notNull(elements, "elements == null");
 
     if (elements instanceof ImmutableList) {
       return (ImmutableList<E>) elements;
@@ -133,7 +133,7 @@ abstract class AbstractImmutableList<E> extends AbstractArrayBaseList<E>
     index = 0;
 
     for (E e : elements) {
-      Checks.checkNotNull(e, "elements[", index, "] == null");
+      Check.notNull(e, "elements[", index, "] == null");
 
       list.resizeIfNecessaryAndDataAppend(e);
 
@@ -197,7 +197,7 @@ abstract class AbstractImmutableList<E> extends AbstractArrayBaseList<E>
    *         if the specified element is {@code null}
    */
   public static <E> ImmutableList<E> of(E element) {
-    Checks.checkNotNull(element, "element == null");
+    Check.notNull(element, "element == null");
 
     return new ImmutableList<E>(
         new Object[] {
@@ -225,8 +225,8 @@ abstract class AbstractImmutableList<E> extends AbstractArrayBaseList<E>
    *         if the specified element is {@code null}
    */
   public static <E> ImmutableList<E> of(E first, @SuppressWarnings("unchecked") E... more) {
-    Checks.checkNotNull(first, "first == null");
-    Checks.checkNotNull(more, "more == null");
+    Check.notNull(first, "first == null");
+    Check.notNull(more, "more == null");
 
     Object[] elements;
     elements = new Object[more.length + 1];
@@ -237,7 +237,7 @@ abstract class AbstractImmutableList<E> extends AbstractArrayBaseList<E>
       E e;
       e = more[i];
 
-      elements[i + 1] = Checks.checkNotNull(e, "more[" + i + "] == null");
+      elements[i + 1] = Check.notNull(e, "more[" + i + "] == null");
     }
 
     return new ImmutableList<E>(elements);

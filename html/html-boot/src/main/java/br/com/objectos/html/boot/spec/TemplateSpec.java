@@ -16,7 +16,7 @@
 package br.com.objectos.html.boot.spec;
 
 import br.com.objectos.core.set.MutableSet;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public class TemplateSpec {
 
@@ -42,13 +42,13 @@ public class TemplateSpec {
   }
 
   public final TemplateSpec maxArity(int newArity) {
-    Checks.checkArgument(newArity > 0, "arity must be > 0");
+    Check.argument(newArity > 0, "arity must be > 0");
     maxArity = newArity;
     return this;
   }
 
   public final TemplateSpec maxLevel(int newLevel) {
-    Checks.checkArgument(newLevel > 0, "level must be > 0");
+    Check.argument(newLevel > 0, "level must be > 0");
     maxLevel = newLevel;
     return this;
   }

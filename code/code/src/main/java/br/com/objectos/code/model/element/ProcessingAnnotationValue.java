@@ -21,7 +21,7 @@ import br.com.objectos.core.list.MutableList;
 import java.lang.annotation.Annotation;
 import javax.lang.model.element.AnnotationValue;
 import javax.lang.model.element.ExecutableElement;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public abstract class ProcessingAnnotationValue implements CanGenerateCompilationError {
 
@@ -61,7 +61,7 @@ public abstract class ProcessingAnnotationValue implements CanGenerateCompilatio
   }
 
   public final <E extends Enum<E>> E getEnum(Class<E> enumType) {
-    Checks.checkNotNull(enumType, "enumType == null");
+    Check.notNull(enumType, "enumType == null");
 
     ProcessingEnumConstant enumConstant;
     enumConstant = getEnumConstant();
@@ -70,7 +70,7 @@ public abstract class ProcessingAnnotationValue implements CanGenerateCompilatio
   }
 
   public final <E extends Enum<E>> ImmutableList<E> getEnumArray(Class<E> enumType) {
-    Checks.checkNotNull(enumType, "enumType == null");
+    Check.notNull(enumType, "enumType == null");
 
     MutableList<E> result;
     result = MutableList.create();

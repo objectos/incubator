@@ -30,7 +30,7 @@ import com.sun.star.uno.XComponentContext;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 import objectos.lang.RandomString;
 
 public class NativeProcess {
@@ -122,7 +122,7 @@ public class NativeProcess {
   }
 
   public final void start() throws ServerStartException {
-    Checks.checkState(process == null, "process already started");
+    Check.state(process == null, "process already started");
 
     synchronized (processBuilder) {
       try {

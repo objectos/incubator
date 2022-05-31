@@ -34,7 +34,7 @@ import br.com.objectos.css.sheet.AbstractStyleSheet;
 import br.com.objectos.css.sheet.StyleSheet;
 import java.io.IOException;
 import java.io.InputStream;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public class ToJavaFile {
 
@@ -45,7 +45,7 @@ public class ToJavaFile {
   }
 
   public static ToJavaFile generatedBy(Class<?> generator) {
-    Checks.checkNotNull(generator, "generator == null");
+    Check.notNull(generator, "generator == null");
     return new ToJavaFile(
         annotation(Generated.class, l(generator.getCanonicalName()))
     );

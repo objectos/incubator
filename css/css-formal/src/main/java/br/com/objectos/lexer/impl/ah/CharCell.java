@@ -15,7 +15,7 @@
  */
 package br.com.objectos.lexer.impl.ah;
 
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 class CharCell {
 
@@ -50,7 +50,7 @@ class CharCell {
   }
 
   public final CharCell merge(CharCell thatValue) {
-    Checks.checkArgument(key.equals(thatValue.key), "keys are not equal");
+    Check.argument(key.equals(thatValue.key), "keys are not equal");
     return new CharCell(key, link.merge(thatValue.link));
   }
 

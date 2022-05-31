@@ -20,7 +20,7 @@ import br.com.objectos.core.list.MutableList;
 import java.io.IOException;
 import javax.annotation.processing.ProcessingEnvironment;
 import javax.tools.Diagnostic;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 import objectos.lang.Throwables;
 
 public abstract class Artifact {
@@ -43,7 +43,7 @@ public abstract class Artifact {
   }
 
   public static Artifact of(JavaFile file) {
-    Checks.checkNotNull(file, "file == null");
+    Check.notNull(file, "file == null");
     return new JavaFileArtifact(file);
   }
 
@@ -73,7 +73,7 @@ public abstract class Artifact {
     }
 
     public Builder addArtifacts(Iterable<Artifact> artifacts) {
-      Checks.checkNotNull(artifacts, "artifacts == null");
+      Check.notNull(artifacts, "artifacts == null");
 
       for (Artifact artifact : artifacts) {
         list.add(artifact);

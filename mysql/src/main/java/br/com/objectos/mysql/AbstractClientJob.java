@@ -30,7 +30,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 import objectos.lang.Throwables;
 
 abstract class AbstractClientJob<V> implements ClientJob<V>, IoTask {
@@ -117,7 +117,7 @@ abstract class AbstractClientJob<V> implements ClientJob<V>, IoTask {
 
   @Override
   public final V getResult() throws IOException {
-    Checks.checkState(!isActive(), "job is active");
+    Check.state(!isActive(), "job is active");
 
     if (runtimeException != null) {
       throw runtimeException;
@@ -481,7 +481,7 @@ abstract class AbstractClientJob<V> implements ClientJob<V>, IoTask {
   }
 
   private void skipClientWait() {
-    Checks.checkState(state == _WAIT_CLIENT, "state != _WAIT_CLIENT");
+    Check.state(state == _WAIT_CLIENT, "state != _WAIT_CLIENT");
 
     state = _START;
   }

@@ -26,7 +26,7 @@ import br.com.objectos.html.spi.type.AnyElementValue;
 import br.com.objectos.html.spi.type.NonVoidElementValue;
 import br.com.objectos.html.spi.type.Value;
 import br.com.objectos.html.writer.SimpleTemplateWriter;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 abstract class FragmentOrTemplate extends GeneratedAbstractTemplate {
 
@@ -68,13 +68,13 @@ abstract class FragmentOrTemplate extends GeneratedAbstractTemplate {
   }
 
   public final StandardTextElement t(String... values) {
-    Checks.checkNotNull(values, "values == null");
+    Check.notNull(values, "values == null");
     switch (values.length) {
       case 0:
         return t("");
       default:
         StringBuilder sb = new StringBuilder();
-        sb.append(Checks.checkNotNull(values[0], "values[0] == null"));
+        sb.append(Check.notNull(values[0], "values[0] == null"));
         for (int i = 1; i < values.length; i++) {
           sb.append(' ');
           String value = values[i];
@@ -91,8 +91,8 @@ abstract class FragmentOrTemplate extends GeneratedAbstractTemplate {
   public final StandardTextElement t(
       String t1,
       String t2) {
-    Checks.checkNotNull(t1, "t1 == null");
-    Checks.checkNotNull(t2, "t2 == null");
+    Check.notNull(t1, "t1 == null");
+    Check.notNull(t2, "t2 == null");
     return t(
       new StringBuilder(t1)
           .append(' ')
@@ -105,9 +105,9 @@ abstract class FragmentOrTemplate extends GeneratedAbstractTemplate {
       String t1,
       String t2,
       String t3) {
-    Checks.checkNotNull(t1, "t1 == null");
-    Checks.checkNotNull(t2, "t2 == null");
-    Checks.checkNotNull(t3, "t3 == null");
+    Check.notNull(t1, "t1 == null");
+    Check.notNull(t2, "t2 == null");
+    Check.notNull(t3, "t3 == null");
     return t(
       new StringBuilder(t1)
           .append(' ')
@@ -123,10 +123,10 @@ abstract class FragmentOrTemplate extends GeneratedAbstractTemplate {
       String t2,
       String t3,
       String t4) {
-    Checks.checkNotNull(t1, "t1 == null");
-    Checks.checkNotNull(t2, "t2 == null");
-    Checks.checkNotNull(t3, "t3 == null");
-    Checks.checkNotNull(t4, "t4 == null");
+    Check.notNull(t1, "t1 == null");
+    Check.notNull(t2, "t2 == null");
+    Check.notNull(t3, "t3 == null");
+    Check.notNull(t4, "t4 == null");
     return t(
       new StringBuilder(t1)
           .append(' ')
@@ -145,11 +145,11 @@ abstract class FragmentOrTemplate extends GeneratedAbstractTemplate {
       String t3,
       String t4,
       String t5) {
-    Checks.checkNotNull(t1, "t1 == null");
-    Checks.checkNotNull(t2, "t2 == null");
-    Checks.checkNotNull(t3, "t3 == null");
-    Checks.checkNotNull(t4, "t4 == null");
-    Checks.checkNotNull(t5, "t5 == null");
+    Check.notNull(t1, "t1 == null");
+    Check.notNull(t2, "t2 == null");
+    Check.notNull(t3, "t3 == null");
+    Check.notNull(t4, "t4 == null");
+    Check.notNull(t5, "t5 == null");
     return t(
       new StringBuilder(t1)
           .append(' ')
@@ -171,12 +171,12 @@ abstract class FragmentOrTemplate extends GeneratedAbstractTemplate {
       String t4,
       String t5,
       String t6) {
-    Checks.checkNotNull(t1, "t1 == null");
-    Checks.checkNotNull(t2, "t2 == null");
-    Checks.checkNotNull(t3, "t3 == null");
-    Checks.checkNotNull(t4, "t4 == null");
-    Checks.checkNotNull(t5, "t5 == null");
-    Checks.checkNotNull(t6, "t6 == null");
+    Check.notNull(t1, "t1 == null");
+    Check.notNull(t2, "t2 == null");
+    Check.notNull(t3, "t3 == null");
+    Check.notNull(t4, "t4 == null");
+    Check.notNull(t5, "t5 == null");
+    Check.notNull(t6, "t6 == null");
     return t(
       new StringBuilder(t1)
           .append(' ')
@@ -201,13 +201,13 @@ abstract class FragmentOrTemplate extends GeneratedAbstractTemplate {
       String t5,
       String t6,
       String t7) {
-    Checks.checkNotNull(t1, "t1 == null");
-    Checks.checkNotNull(t2, "t2 == null");
-    Checks.checkNotNull(t3, "t3 == null");
-    Checks.checkNotNull(t4, "t4 == null");
-    Checks.checkNotNull(t5, "t5 == null");
-    Checks.checkNotNull(t6, "t6 == null");
-    Checks.checkNotNull(t7, "t7 == null");
+    Check.notNull(t1, "t1 == null");
+    Check.notNull(t2, "t2 == null");
+    Check.notNull(t3, "t3 == null");
+    Check.notNull(t4, "t4 == null");
+    Check.notNull(t5, "t5 == null");
+    Check.notNull(t6, "t6 == null");
+    Check.notNull(t7, "t7 == null");
     return t(
       new StringBuilder(t1)
           .append(' ')
@@ -235,14 +235,14 @@ abstract class FragmentOrTemplate extends GeneratedAbstractTemplate {
       String t6,
       String t7,
       String t8) {
-    Checks.checkNotNull(t1, "t1 == null");
-    Checks.checkNotNull(t2, "t2 == null");
-    Checks.checkNotNull(t3, "t3 == null");
-    Checks.checkNotNull(t4, "t4 == null");
-    Checks.checkNotNull(t5, "t5 == null");
-    Checks.checkNotNull(t6, "t6 == null");
-    Checks.checkNotNull(t7, "t7 == null");
-    Checks.checkNotNull(t8, "t8 == null");
+    Check.notNull(t1, "t1 == null");
+    Check.notNull(t2, "t2 == null");
+    Check.notNull(t3, "t3 == null");
+    Check.notNull(t4, "t4 == null");
+    Check.notNull(t5, "t5 == null");
+    Check.notNull(t6, "t6 == null");
+    Check.notNull(t7, "t7 == null");
+    Check.notNull(t8, "t8 == null");
     return t(
       new StringBuilder(t1)
           .append(' ')
@@ -273,15 +273,15 @@ abstract class FragmentOrTemplate extends GeneratedAbstractTemplate {
       String t7,
       String t8,
       String t9) {
-    Checks.checkNotNull(t1, "t1 == null");
-    Checks.checkNotNull(t2, "t2 == null");
-    Checks.checkNotNull(t3, "t3 == null");
-    Checks.checkNotNull(t4, "t4 == null");
-    Checks.checkNotNull(t5, "t5 == null");
-    Checks.checkNotNull(t6, "t6 == null");
-    Checks.checkNotNull(t7, "t7 == null");
-    Checks.checkNotNull(t8, "t8 == null");
-    Checks.checkNotNull(t9, "t9 == null");
+    Check.notNull(t1, "t1 == null");
+    Check.notNull(t2, "t2 == null");
+    Check.notNull(t3, "t3 == null");
+    Check.notNull(t4, "t4 == null");
+    Check.notNull(t5, "t5 == null");
+    Check.notNull(t6, "t6 == null");
+    Check.notNull(t7, "t7 == null");
+    Check.notNull(t8, "t8 == null");
+    Check.notNull(t9, "t9 == null");
     return t(
       new StringBuilder(t1)
           .append(' ')
@@ -327,7 +327,7 @@ abstract class FragmentOrTemplate extends GeneratedAbstractTemplate {
   protected abstract void definition();
 
   protected final TemplateDsl dsl() {
-    Checks.checkState(dsl != null, "dsl not set");
+    Check.state(dsl != null, "dsl not set");
 
     return dsl;
   }

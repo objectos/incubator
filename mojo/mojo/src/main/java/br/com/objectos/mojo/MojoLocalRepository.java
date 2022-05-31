@@ -16,7 +16,7 @@
 package br.com.objectos.mojo;
 
 import br.com.objectos.fs.Directory;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public class MojoLocalRepository implements MojoRuntimeElement {
 
@@ -27,7 +27,7 @@ public class MojoLocalRepository implements MojoRuntimeElement {
   }
 
   public static MojoLocalRepository localRepository(Directory directory) {
-    Checks.checkNotNull(directory, "directory == null");
+    Check.notNull(directory, "directory == null");
 
     return new MojoLocalRepository(directory);
   }

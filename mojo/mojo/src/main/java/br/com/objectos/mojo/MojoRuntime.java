@@ -21,7 +21,7 @@ import br.com.objectos.fs.Directory;
 import java.io.Closeable;
 import java.io.File;
 import java.util.List;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 import org.apache.maven.Maven;
 import org.apache.maven.artifact.repository.ArtifactRepository;
 import org.apache.maven.bridge.MavenRepositorySystem;
@@ -85,7 +85,7 @@ public class MojoRuntime implements Closeable {
 
   public static MojoRuntime runtime(
       MojoRuntimeElement e1) throws MojoException {
-    Checks.checkNotNull(e1, "e1 == null");
+    Check.notNull(e1, "e1 == null");
 
     Builder b;
     b = builder();
@@ -98,8 +98,8 @@ public class MojoRuntime implements Closeable {
   public static MojoRuntime runtime(
       MojoRuntimeElement e1,
       MojoRuntimeElement e2) throws MojoException {
-    Checks.checkNotNull(e1, "e1 == null");
-    Checks.checkNotNull(e2, "e2 == null");
+    Check.notNull(e1, "e1 == null");
+    Check.notNull(e2, "e2 == null");
 
     Builder b;
     b = builder();
@@ -114,9 +114,9 @@ public class MojoRuntime implements Closeable {
       MojoRuntimeElement e1,
       MojoRuntimeElement e2,
       MojoRuntimeElement e3) throws MojoException {
-    Checks.checkNotNull(e1, "e1 == null");
-    Checks.checkNotNull(e2, "e2 == null");
-    Checks.checkNotNull(e3, "e3 == null");
+    Check.notNull(e1, "e1 == null");
+    Check.notNull(e2, "e2 == null");
+    Check.notNull(e3, "e3 == null");
 
     Builder b;
     b = builder();
@@ -184,8 +184,8 @@ public class MojoRuntime implements Closeable {
   public final Result mvn(
       Directory basedir,
       MvnOption opt1) throws MojoException {
-    Checks.checkNotNull(basedir, "basedir == null");
-    Checks.checkNotNull(opt1, "opt1 == null");
+    Check.notNull(basedir, "basedir == null");
+    Check.notNull(opt1, "opt1 == null");
 
     MvnRequest request;
     request = mvn0(basedir);
@@ -199,9 +199,9 @@ public class MojoRuntime implements Closeable {
       Directory basedir,
       MvnOption opt1,
       MvnOption opt2) throws MojoException {
-    Checks.checkNotNull(basedir, "basedir == null");
-    Checks.checkNotNull(opt1, "opt1 == null");
-    Checks.checkNotNull(opt2, "opt2 == null");
+    Check.notNull(basedir, "basedir == null");
+    Check.notNull(opt1, "opt1 == null");
+    Check.notNull(opt2, "opt2 == null");
 
     MvnRequest request;
     request = mvn0(basedir);
@@ -217,10 +217,10 @@ public class MojoRuntime implements Closeable {
       MvnOption opt1,
       MvnOption opt2,
       MvnOption opt3) throws MojoException {
-    Checks.checkNotNull(basedir, "basedir == null");
-    Checks.checkNotNull(opt1, "opt1 == null");
-    Checks.checkNotNull(opt2, "opt2 == null");
-    Checks.checkNotNull(opt3, "opt3 == null");
+    Check.notNull(basedir, "basedir == null");
+    Check.notNull(opt1, "opt1 == null");
+    Check.notNull(opt2, "opt2 == null");
+    Check.notNull(opt3, "opt3 == null");
 
     MvnRequest request;
     request = mvn0(basedir);

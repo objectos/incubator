@@ -15,7 +15,7 @@
  */
 package br.com.objectos.git;
 
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 final class IdentificationBuilder {
 
@@ -32,11 +32,11 @@ final class IdentificationBuilder {
   IdentificationBuilder() {}
 
   public final void setEmail(String email) {
-    this.email = Checks.checkNotNull(email, "email == null");
+    this.email = Check.notNull(email, "email == null");
   }
 
   public final void setName(String name) {
-    this.name = Checks.checkNotNull(name, "name == null");
+    this.name = Check.notNull(name, "name == null");
   }
 
   final Identification build() {
@@ -60,7 +60,7 @@ final class IdentificationBuilder {
   }
 
   final void setGitTimeZone(String value) {
-    this.gitTimeZone = Checks.checkNotNull(value, "value == null");
+    this.gitTimeZone = Check.notNull(value, "value == null");
   }
 
   final void setSeconds(long seconds) {

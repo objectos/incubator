@@ -19,7 +19,7 @@ import br.com.objectos.code.java.element.Keywords;
 import br.com.objectos.code.java.expression.Expression;
 import br.com.objectos.code.java.expression.Expressions;
 import br.com.objectos.code.java.io.CodeWriter;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public abstract class ReturnStatement extends AbstractSimpleStatement {
 
@@ -30,7 +30,7 @@ public abstract class ReturnStatement extends AbstractSimpleStatement {
   }
 
   public static ReturnStatement _return(Expression expression) {
-    Checks.checkNotNull(expression, "expression == null");
+    Check.notNull(expression, "expression == null");
     return new WithExpressionReturnStatement(expression);
   }
   

@@ -19,7 +19,7 @@ import br.com.objectos.code.java.JavaNames;
 import br.com.objectos.code.java.type.NamedClass;
 import java.util.HashMap;
 import java.util.Map;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public enum Primitive {
 
@@ -50,7 +50,7 @@ public enum Primitive {
   }
 
   public static Primitive getByName(String name) {
-    Checks.checkArgument(containsName(name), name, " not found");
+    Check.argument(containsName(name), name, " not found");
 
     return nameMap.get(name);
   }

@@ -19,7 +19,7 @@ import static br.com.objectos.code.java.Java.l;
 
 import br.com.objectos.code.java.expression.Literal;
 import java.util.Objects;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 import objectos.lang.ToString;
 import objectos.lang.ToStringObject;
 
@@ -29,8 +29,8 @@ public class ValueType implements ToStringObject {
   private final String name;
 
   public ValueType(String name, String formal) {
-    this.name = Checks.checkNotNull(name, "name == null");
-    this.formal = Checks.checkNotNull(formal, "formal == null");
+    this.name = Check.notNull(name, "name == null");
+    this.formal = Check.notNull(formal, "formal == null");
   }
 
   public final void acceptKeywordSetBuilder(KeywordSet.Builder builder) {

@@ -18,7 +18,7 @@ package br.com.objectos.git;
 import br.com.objectos.core.set.ImmutableSet;
 import br.com.objectos.core.set.MutableSet;
 import java.nio.ByteBuffer;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 final class FilterNonExisting implements ObjectReaderAdapter {
 
@@ -81,7 +81,7 @@ final class FilterNonExisting implements ObjectReaderAdapter {
 
   @Override
   public final void executeStart(ObjectReaderHandle handle) {
-    Checks.checkState(this.handle == null, "already started");
+    Check.state(this.handle == null, "already started");
 
     handle.setInputMany(ObjectReaderMode.EXISTS, objects);
 
@@ -96,9 +96,9 @@ final class FilterNonExisting implements ObjectReaderAdapter {
   }
 
   public final void set(GitRepository repository, ImmutableSet<ObjectId> objects) {
-    this.repository = Checks.checkNotNull(repository, "repository == null");
+    this.repository = Check.notNull(repository, "repository == null");
 
-    this.objects = Checks.checkNotNull(objects, "objects == null");
+    this.objects = Check.notNull(objects, "objects == null");
   }
 
   final void executeResult() {

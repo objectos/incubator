@@ -21,18 +21,18 @@ import javax.annotation.processing.Filer;
 import javax.annotation.processing.ProcessingEnvironment;
 import javax.tools.FileObject;
 import javax.tools.StandardLocation;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public abstract class ResourceArtifact extends Artifact {
 
   private final String resourceName;
 
   protected ResourceArtifact(String resourceName) {
-    this.resourceName = Checks.checkNotNull(resourceName, "resourceName == null");
+    this.resourceName = Check.notNull(resourceName, "resourceName == null");
   }
 
   public static Builder named(String resourceName) {
-    Checks.checkNotNull(resourceName, "resourceName == null");
+    Check.notNull(resourceName, "resourceName == null");
 
     return new Builder(resourceName);
   }

@@ -22,7 +22,7 @@ import br.com.objectos.code.java.expression.Expression;
 import br.com.objectos.code.java.io.CodeWriter;
 import br.com.objectos.code.java.io.Section;
 import br.com.objectos.core.list.ImmutableList;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public class SwitchStatement extends AbstractSimpleStatement {
 
@@ -35,7 +35,7 @@ public class SwitchStatement extends AbstractSimpleStatement {
   }
 
   public static SwitchStatement _switch(Expression expression, SwitchElement... elements) {
-    Checks.checkNotNull(expression, "expression == null");
+    Check.notNull(expression, "expression == null");
     return new SwitchStatement(expression, ImmutableList.copyOf(elements));
   }
 

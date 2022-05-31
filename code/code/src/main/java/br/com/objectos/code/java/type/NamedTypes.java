@@ -17,7 +17,7 @@ package br.com.objectos.code.java.type;
 
 import br.com.objectos.code.java.declaration.PackageName;
 import br.com.objectos.core.list.ImmutableList;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public class NamedTypes {
 
@@ -73,14 +73,14 @@ public class NamedTypes {
 
   public static NamedClassOrParameterized t(
       NamedClass raw, Iterable<? extends NamedType> arguments) {
-    Checks.checkNotNull(arguments, "arguments == null");
+    Check.notNull(arguments, "arguments == null");
 
     ImmutableList<? extends NamedType> list;
     list = ImmutableList.copyOf(arguments);
 
     switch (list.size()) {
       case 0:
-        Checks.checkNotNull(raw, "raw == null");
+        Check.notNull(raw, "raw == null");
         return raw;
       default:
         return new NamedParameterized(raw, list);
@@ -88,11 +88,11 @@ public class NamedTypes {
   }
 
   public static NamedClassOrParameterized t(NamedClass raw, NamedType... arguments) {
-    Checks.checkNotNull(arguments, "arguments == null");
+    Check.notNull(arguments, "arguments == null");
 
     switch (arguments.length) {
       case 0:
-        Checks.checkNotNull(raw, "raw == null");
+        Check.notNull(raw, "raw == null");
         return raw;
       default:
         return NamedParameterized.of(raw, arguments);
@@ -129,12 +129,12 @@ public class NamedTypes {
   }
 
   public static NamedWildcard wildcardExtends(NamedReferenceType bound) {
-    Checks.checkNotNull(bound, "bound == null");
+    Check.notNull(bound, "bound == null");
     return NamedWildcard.extendsUnchecked(bound);
   }
 
   public static NamedWildcard wildcardSuper(NamedReferenceType bound) {
-    Checks.checkNotNull(bound, "bound == null");
+    Check.notNull(bound, "bound == null");
     return NamedWildcard.superUnchecked(bound);
   }
 

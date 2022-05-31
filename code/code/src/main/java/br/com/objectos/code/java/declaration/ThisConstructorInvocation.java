@@ -21,7 +21,7 @@ import br.com.objectos.code.java.element.Keywords;
 import br.com.objectos.code.java.expression.Argument;
 import br.com.objectos.core.list.ImmutableList;
 import java.util.Arrays;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public class ThisConstructorInvocation extends AbstractConstructorInvocation {
 
@@ -40,7 +40,7 @@ public class ThisConstructorInvocation extends AbstractConstructorInvocation {
 
   public static ThisConstructorInvocation _this(
       Argument arg1) {
-    Checks.checkNotNull(arg1, "arg1 == null");
+    Check.notNull(arg1, "arg1 == null");
     return _this0(Arrays.asList(arg1));
   }
 
@@ -51,8 +51,8 @@ public class ThisConstructorInvocation extends AbstractConstructorInvocation {
   public static ThisConstructorInvocation _this(
       Argument arg1,
       Argument arg2) {
-    Checks.checkNotNull(arg1, "arg1 == null");
-    Checks.checkNotNull(arg2, "arg2 == null");
+    Check.notNull(arg1, "arg1 == null");
+    Check.notNull(arg2, "arg2 == null");
     return _this0(Arrays.asList(arg1, arg2));
   }
 
@@ -60,9 +60,9 @@ public class ThisConstructorInvocation extends AbstractConstructorInvocation {
       Argument arg1,
       Argument arg2,
       Argument arg3) {
-    Checks.checkNotNull(arg1, "arg1 == null");
-    Checks.checkNotNull(arg2, "arg2 == null");
-    Checks.checkNotNull(arg3, "arg3 == null");
+    Check.notNull(arg1, "arg1 == null");
+    Check.notNull(arg2, "arg2 == null");
+    Check.notNull(arg3, "arg3 == null");
     return _this0(Arrays.asList(arg1, arg2, arg3));
   }
 

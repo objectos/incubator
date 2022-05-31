@@ -19,7 +19,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 import org.eclipse.jdt.internal.compiler.env.ICompilationUnit;
 
 public class CompilationUnits {
@@ -52,19 +52,19 @@ public class CompilationUnits {
 
     @Override
     public MainTypeName mainTypeName(String mainTypeName) {
-      this.mainTypeName = Checks.checkNotNull(mainTypeName, "mainTypeName == null");
+      this.mainTypeName = Check.notNull(mainTypeName, "mainTypeName == null");
       return this;
     }
 
     @Override
     public PackageName packageName(String packageName) {
-      this.packageName = Checks.checkNotNull(packageName, "packageName == null");
+      this.packageName = Check.notNull(packageName, "packageName == null");
       return this;
     }
 
     @Override
     public ResourceName resourceName(String resourceName) {
-      this.resourceName = Checks.checkNotNull(resourceName, "resourceName == null");
+      this.resourceName = Check.notNull(resourceName, "resourceName == null");
       return this;
     }
 

@@ -22,7 +22,7 @@ import br.com.objectos.code.java.io.CodeWriter;
 import br.com.objectos.code.java.type.NamedClass;
 import br.com.objectos.core.list.ImmutableList;
 import java.util.Iterator;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public class CatchElement extends AbstractCodeElement implements TryStatementElement {
 
@@ -57,7 +57,7 @@ public class CatchElement extends AbstractCodeElement implements TryStatementEle
   }
 
   private static CatchElement _catch0(ImmutableList<NamedClass> exceptionTypes, Identifier id) {
-    Checks.checkNotNull(id, "id == null");
+    Check.notNull(id, "id == null");
     return new CatchElement(exceptionTypes, id);
   }
 

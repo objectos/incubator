@@ -21,7 +21,7 @@ import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.core.list.MutableList;
 import br.com.objectos.fs.Directory;
 import java.io.IOException;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 import objectos.lang.Level;
 
 /**
@@ -71,10 +71,10 @@ public final class StorageLogger extends AbstractConfigurableLogger {
       Directory directory, IoWorker ioWorker, CpuWorker cpuWorker,
       Option... options)
       throws IOException {
-    Checks.checkNotNull(directory, "directory == null");
-    Checks.checkNotNull(ioWorker, "ioWorker == null");
-    Checks.checkNotNull(cpuWorker, "cpuWorker == null");
-    Checks.checkNotNull(options, "options == null");
+    Check.notNull(directory, "directory == null");
+    Check.notNull(ioWorker, "ioWorker == null");
+    Check.notNull(cpuWorker, "cpuWorker == null");
+    Check.notNull(options, "options == null");
 
     Storage storage;
     storage = Storage.get(directory);
@@ -86,7 +86,7 @@ public final class StorageLogger extends AbstractConfigurableLogger {
       Option option;
       option = options[i];
 
-      Checks.checkNotNull(option, "options[", i, "] == null");
+      Check.notNull(option, "options[", i, "] == null");
 
       option.acceptBuilder(b);
     }
@@ -103,7 +103,7 @@ public final class StorageLogger extends AbstractConfigurableLogger {
    * @return a new storage logger option that adds the specified log listener
    */
   public static Option logListener(final LogListener listener) {
-    Checks.checkNotNull(listener, "listener == null");
+    Check.notNull(listener, "listener == null");
 
     return new Option() {
       @Override

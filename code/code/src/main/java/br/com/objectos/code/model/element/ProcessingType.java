@@ -32,7 +32,7 @@ import javax.lang.model.element.Name;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.TypeParameterElement;
 import javax.lang.model.util.Elements;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public class ProcessingType extends ProcessingElement<TypeElement>
     implements
@@ -49,8 +49,8 @@ public class ProcessingType extends ProcessingElement<TypeElement>
   }
 
   public static ProcessingType adapt(ProcessingEnvironment processingEnv, TypeElement typeElement) {
-    Checks.checkNotNull(processingEnv, "processingEnv == null");
-    Checks.checkNotNull(typeElement, "typeElement == null");
+    Check.notNull(processingEnv, "processingEnv == null");
+    Check.notNull(typeElement, "typeElement == null");
 
     Class<? extends ProcessingEnvironment> envType;
     envType = processingEnv.getClass();
@@ -68,7 +68,7 @@ public class ProcessingType extends ProcessingElement<TypeElement>
   }
 
   public final void acceptReprocessor(Reprocessor reprocessor) {
-    Checks.checkNotNull(reprocessor, "reprocessor == null");
+    Check.notNull(reprocessor, "reprocessor == null");
 
     reprocessor.reprocessType(element);
   }
@@ -166,7 +166,7 @@ public class ProcessingType extends ProcessingElement<TypeElement>
   }
 
   public final boolean instanceOf(Class<?> type) {
-    Checks.checkNotNull(type, "type == null");
+    Check.notNull(type, "type == null");
     TypeElement typeElement = elementUtils().getTypeElement(type.getCanonicalName());
     return typeUtils().isAssignable(element.asType(), typeElement.asType());
   }

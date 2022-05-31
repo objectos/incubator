@@ -20,7 +20,7 @@ import br.com.objectos.fs.Directory;
 import br.com.objectos.smtp.client.NonBlockingClient;
 import br.com.objectos.smtp.mail.FsMailStore;
 import br.com.objectos.smtp.server.NonBlockingServer;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 import objectos.lang.NoteSink;
 
 public final class Smtp {
@@ -29,7 +29,7 @@ public final class Smtp {
 
   public static Client client(
       ClientOption e1) throws ConfigurationException {
-    Checks.checkNotNull(e1, "e1 == null");
+    Check.notNull(e1, "e1 == null");
 
     ClientBuilder b = NonBlockingClient.builder();
 
@@ -39,7 +39,7 @@ public final class Smtp {
   }
 
   public static ServerOption listenSmtp(final SocketChannelFactory channelFactory) {
-    Checks.checkNotNull(channelFactory, "channelFactory == null");
+    Check.notNull(channelFactory, "channelFactory == null");
 
     return new ServerOption() {
       @Override
@@ -50,7 +50,7 @@ public final class Smtp {
   }
 
   public static ClientOrServerOption logger(final NoteSink logger) {
-    Checks.checkNotNull(logger, "logger == null");
+    Check.notNull(logger, "logger == null");
 
     return new ClientOrServerOption() {
       @Override
@@ -77,8 +77,8 @@ public final class Smtp {
   public static Server server(
       ServerOption e1,
       ServerOption e2) throws ConfigurationException {
-    Checks.checkNotNull(e1, "e1 == null");
-    Checks.checkNotNull(e2, "e2 == null");
+    Check.notNull(e1, "e1 == null");
+    Check.notNull(e2, "e2 == null");
 
     ServerBuilder b;
     b = NonBlockingServer.builder();
@@ -93,9 +93,9 @@ public final class Smtp {
       ServerOption e1,
       ServerOption e2,
       ServerOption e3) throws ConfigurationException {
-    Checks.checkNotNull(e1, "e1 == null");
-    Checks.checkNotNull(e2, "e2 == null");
-    Checks.checkNotNull(e3, "e3 == null");
+    Check.notNull(e1, "e1 == null");
+    Check.notNull(e2, "e2 == null");
+    Check.notNull(e3, "e3 == null");
 
     ServerBuilder b;
     b = NonBlockingServer.builder();

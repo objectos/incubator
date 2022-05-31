@@ -16,7 +16,7 @@
 package br.com.objectos.code.java.type;
 
 import br.com.objectos.code.java.io.JavaFileImportSet;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public abstract class NamedWildcard extends NamedType {
 
@@ -25,12 +25,12 @@ public abstract class NamedWildcard extends NamedType {
   NamedWildcard() {}
 
   public static NamedWildcard extendsBound(NamedType bound) {
-    Checks.checkNotNull(bound, "bound == null");
+    Check.notNull(bound, "bound == null");
     return new Extends((NamedReferenceType) bound);
   }
 
   public static NamedWildcard superBound(NamedType bound) {
-    Checks.checkNotNull(bound, "bound == null");
+    Check.notNull(bound, "bound == null");
     return new Super((NamedReferenceType) bound);
   }
 

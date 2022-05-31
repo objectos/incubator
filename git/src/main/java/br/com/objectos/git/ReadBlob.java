@@ -32,7 +32,7 @@ package br.com.objectos.git;
 
 import java.nio.ByteBuffer;
 import java.util.Arrays;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 final class ReadBlob implements ObjectReaderAdapter {
 
@@ -154,7 +154,7 @@ final class ReadBlob implements ObjectReaderAdapter {
 
   @Override
   public final void executeStart(ObjectReaderHandle handle) {
-    Checks.checkState(state == _STOP, "already started");
+    Check.state(state == _STOP, "already started");
 
     handle.setInput(ObjectReaderMode.READ_OBJECT, objectId);
 
@@ -167,9 +167,9 @@ final class ReadBlob implements ObjectReaderAdapter {
   }
 
   public final void set(GitRepository repository, ObjectId objectId) {
-    this.repository = Checks.checkNotNull(repository, "repository == null");
+    this.repository = Check.notNull(repository, "repository == null");
 
-    this.objectId = Checks.checkNotNull(objectId, "objectId == null");
+    this.objectId = Check.notNull(objectId, "objectId == null");
   }
 
 }

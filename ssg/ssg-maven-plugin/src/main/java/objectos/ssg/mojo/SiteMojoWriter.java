@@ -22,7 +22,7 @@ import br.com.objectos.fs.RegularFile;
 import br.com.objectos.http.media.MediaType;
 import br.com.objectos.http.path.Location;
 import java.io.IOException;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 import objectos.ssg.SiteWriter;
 
 final class SiteMojoWriter implements SiteWriter {
@@ -30,7 +30,7 @@ final class SiteMojoWriter implements SiteWriter {
   private final Directory target;
 
   SiteMojoWriter(Directory target) {
-    this.target = Checks.checkNotNull(target, "target == null");
+    this.target = Check.notNull(target, "target == null");
   }
 
   public final void writeBytes(

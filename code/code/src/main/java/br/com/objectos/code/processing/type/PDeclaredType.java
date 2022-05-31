@@ -30,7 +30,7 @@ import javax.lang.model.element.TypeElement;
 import javax.lang.model.type.DeclaredType;
 import javax.lang.model.type.TypeKind;
 import javax.lang.model.type.TypeMirror;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public final class PDeclaredType extends PTypeMirror {
 
@@ -48,9 +48,9 @@ public final class PDeclaredType extends PTypeMirror {
   }
 
   public static PDeclaredType adapt(ProcessingEnvironment processingEnv, DeclaredType type) {
-    Checks.checkNotNull(processingEnv, "processingEnv == null");
-    Checks.checkNotNull(type, "type == null");
-    Checks.checkArgument(type.getKind() != TypeKind.ERROR, "type.getKind() == TypeKind.ERROR");
+    Check.notNull(processingEnv, "processingEnv == null");
+    Check.notNull(type, "type == null");
+    Check.argument(type.getKind() != TypeKind.ERROR, "type.getKind() == TypeKind.ERROR");
 
     return new PDeclaredType(processingEnv, type);
   }

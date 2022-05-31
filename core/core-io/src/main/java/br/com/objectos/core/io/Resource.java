@@ -24,7 +24,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.Charset;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 import objectos.lang.ToString;
 import objectos.lang.ToStringObject;
 
@@ -64,8 +64,8 @@ public final class Resource implements InputStreamSource, ReaderSource, ToString
    * @see Class#getResource(String)
    */
   public static Resource getResource(Class<?> contextClass, String resourceName) {
-    Checks.checkNotNull(contextClass, "contextClass == null");
-    Checks.checkNotNull(resourceName, "resourceName == null");
+    Check.notNull(contextClass, "contextClass == null");
+    Check.notNull(resourceName, "resourceName == null");
 
     URL url;
     url = contextClass.getResource(resourceName);
@@ -92,8 +92,8 @@ public final class Resource implements InputStreamSource, ReaderSource, ToString
    * @see ClassLoader#getResource(String)
    */
   public static Resource getResource(String resourceName) {
-    Checks.checkNotNull(resourceName, "resourceName == null");
-    Checks.checkArgument(resourceName.charAt(0) != '/', "resourceName must not start with a '/'");
+    Check.notNull(resourceName, "resourceName == null");
+    Check.argument(resourceName.charAt(0) != '/', "resourceName must not start with a '/'");
 
     Thread currentThread;
     currentThread = Thread.currentThread();

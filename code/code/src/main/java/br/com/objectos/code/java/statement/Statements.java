@@ -21,57 +21,57 @@ import br.com.objectos.code.java.io.Section;
 import br.com.objectos.code.java.type.NamedClass;
 import br.com.objectos.code.java.type.NamedType;
 import br.com.objectos.core.list.ImmutableList;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public class Statements {
 
   private Statements() {}
 
   public static SimpleLocalVariableDeclaration _var(Class<?> type, Identifier id) {
-    Checks.checkNotNull(type, "type == null");
-    Checks.checkNotNull(id, "id == null");
+    Check.notNull(type, "type == null");
+    Check.notNull(id, "id == null");
     return SimpleLocalVariableDeclaration.ofUnchecked(NamedClass.of(type), id.name());
   }
 
   public static WithInitLocalVariableDeclaration _var(Class<?> type, Identifier id,
       VariableInitializer init) {
-    Checks.checkNotNull(init, "init == null");
+    Check.notNull(init, "init == null");
     return _var(type, id).init(init);
   }
 
   public static SimpleLocalVariableDeclaration _var(Class<?> type, String name) {
-    Checks.checkNotNull(type, "type == null");
-    Checks.checkNotNull(name, "name == null");
+    Check.notNull(type, "type == null");
+    Check.notNull(name, "name == null");
     return SimpleLocalVariableDeclaration.ofUnchecked(NamedClass.of(type), name);
   }
 
   public static WithInitLocalVariableDeclaration _var(Class<?> type, String name,
       VariableInitializer init) {
-    Checks.checkNotNull(init, "init == null");
+    Check.notNull(init, "init == null");
     return _var(type, name).init(init);
   }
 
   public static SimpleLocalVariableDeclaration _var(NamedType typeName, Identifier id) {
-    Checks.checkNotNull(typeName, "typeName == null");
-    Checks.checkNotNull(id, "id == null");
+    Check.notNull(typeName, "typeName == null");
+    Check.notNull(id, "id == null");
     return SimpleLocalVariableDeclaration.ofUnchecked(typeName, id.name());
   }
 
   public static WithInitLocalVariableDeclaration _var(
       NamedType typeName, Identifier id, VariableInitializer init) {
-    Checks.checkNotNull(init, "init == null");
+    Check.notNull(init, "init == null");
     return _var(typeName, id).init(init);
   }
 
   public static SimpleLocalVariableDeclaration _var(NamedType typeName, String name) {
-    Checks.checkNotNull(typeName, "typeName == null");
-    Checks.checkNotNull(name, "name == null");
+    Check.notNull(typeName, "typeName == null");
+    Check.notNull(name, "name == null");
     return SimpleLocalVariableDeclaration.ofUnchecked(typeName, name);
   }
 
   public static WithInitLocalVariableDeclaration _var(
       NamedType typeName, String name, VariableInitializer init) {
-    Checks.checkNotNull(init, "init == null");
+    Check.notNull(init, "init == null");
     return _var(typeName, name).init(init);
   }
 

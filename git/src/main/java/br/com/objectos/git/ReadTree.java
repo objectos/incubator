@@ -21,7 +21,7 @@ import java.nio.ByteBuffer;
 import java.nio.charset.CharacterCodingException;
 import java.nio.charset.Charset;
 import java.nio.charset.CharsetDecoder;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 import objectos.lang.Note1;
 import objectos.lang.NoteSink;
 
@@ -126,7 +126,7 @@ final class ReadTree implements ObjectReaderAdapter {
 
   @Override
   public final void executeObjectBodyFull(byte[] array, int length, ByteBuffer buffer) {
-    Checks.checkState(!active, "already active");
+    Check.state(!active, "already active");
 
     data = array;
 
@@ -141,7 +141,7 @@ final class ReadTree implements ObjectReaderAdapter {
 
   @Override
   public final void executeObjectBodyPart(ByteBuffer buffer) {
-    Checks.checkState(!active, "already active");
+    Check.state(!active, "already active");
 
     data = buffer.array();
 
@@ -188,7 +188,7 @@ final class ReadTree implements ObjectReaderAdapter {
 
   @Override
   public final void executeStart(ObjectReaderHandle handle) {
-    Checks.checkState(state == _STOP, "already started");
+    Check.state(state == _STOP, "already started");
 
     handle.setInput(ObjectReaderMode.READ_OBJECT, objectId);
 
@@ -201,9 +201,9 @@ final class ReadTree implements ObjectReaderAdapter {
   }
 
   public final void set(GitRepository repository, ObjectId objectId) {
-    this.repository = Checks.checkNotNull(repository, "repository == null");
+    this.repository = Check.notNull(repository, "repository == null");
 
-    this.objectId = Checks.checkNotNull(objectId, "objectId == null");
+    this.objectId = Check.notNull(objectId, "objectId == null");
   }
 
   private void execute() {

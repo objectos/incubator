@@ -18,7 +18,7 @@ package br.com.objectos.git;
 import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.core.set.ImmutableSet;
 import br.com.objectos.core.set.MutableSet;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 /**
  * Recursively copies a tree object from one repository to another.
@@ -40,11 +40,11 @@ final class CopyTreeCommand extends StageGitCommand<ObjectId> {
   private final Repository target;
 
   CopyTreeCommand(Repository source, ObjectId tree, Repository destination) {
-    this.source = Checks.checkNotNull(source, "source == null");
+    this.source = Check.notNull(source, "source == null");
 
-    this.sourceId = Checks.checkNotNull(tree, "tree == null");
+    this.sourceId = Check.notNull(tree, "tree == null");
 
-    this.target = Checks.checkNotNull(destination, "destination == null");
+    this.target = Check.notNull(destination, "destination == null");
   }
 
   @Override

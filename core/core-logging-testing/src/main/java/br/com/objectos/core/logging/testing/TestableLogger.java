@@ -18,7 +18,7 @@ package br.com.objectos.core.logging.testing;
 import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.core.list.MutableList;
 import java.util.NoSuchElementException;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 import objectos.lang.Note;
 import objectos.lang.Note0;
 import objectos.lang.Note1;
@@ -60,7 +60,7 @@ public final class TestableLogger implements NoteSink {
    *         otherwise
    */
   public final boolean contains(Note event) {
-    Checks.checkNotNull(event, "event == null");
+    Check.notNull(event, "event == null");
 
     for (int i = 0, size = logs.size(); i < size; i++) {
       Log log;
@@ -91,7 +91,7 @@ public final class TestableLogger implements NoteSink {
    */
   @SuppressWarnings("unchecked")
   public final <T1> Event1Log<T1> getFirst(Note1<T1> event) {
-    Checks.checkNotNull(event, "event == null");
+    Check.notNull(event, "event == null");
 
     for (int i = 0, size = logs.size(); i < size; i++) {
       Log log;
@@ -123,7 +123,7 @@ public final class TestableLogger implements NoteSink {
    * @return all of the log instances in this logger having the specified level
    */
   public final ImmutableList<Log> getLogsByLevel(Level level) {
-    Checks.checkNotNull(level, "level == null");
+    Check.notNull(level, "level == null");
 
     MutableList<Log> result;
     result = MutableList.create();

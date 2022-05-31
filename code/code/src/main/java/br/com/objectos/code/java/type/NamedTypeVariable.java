@@ -22,7 +22,7 @@ import br.com.objectos.code.java.expression.TypeWitness;
 import br.com.objectos.code.java.io.JavaFileImportSet;
 import javax.lang.model.element.Name;
 import javax.lang.model.element.TypeParameterElement;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public class NamedTypeVariable extends NamedReferenceType
     implements
@@ -36,13 +36,13 @@ public class NamedTypeVariable extends NamedReferenceType
   }
 
   public static NamedTypeVariable of(String name) {
-    Checks.checkNotNull(name, "name == null");
+    Check.notNull(name, "name == null");
 
     return new NamedTypeVariable(name);
   }
 
   public static NamedTypeVariable of(TypeParameterElement element) {
-    Checks.checkNotNull(element, "element == null");
+    Check.notNull(element, "element == null");
 
     Name simpleName;
     simpleName = element.getSimpleName();

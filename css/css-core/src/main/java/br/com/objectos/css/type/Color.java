@@ -15,14 +15,14 @@
  */
 package br.com.objectos.css.type;
 
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public abstract class Color extends GeneratedColor implements ColorType, Value {
 
   Color() {}
 
   public static ColorHex hex(String text) {
-    Checks.checkArgument(text.startsWith("#"), "Hex colors must start with #");
+    Check.argument(text.startsWith("#"), "Hex colors must start with #");
     return new ColorHex(text);
   }
 

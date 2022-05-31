@@ -15,14 +15,14 @@
  */
 package br.com.objectos.code.java.expression;
 
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public class IdentifierBuilder {
 
   private final StringBuilder sb = new StringBuilder();
 
   public final IdentifierBuilder append(String string) {
-    Checks.checkNotNull(string, "string == null");
+    Check.notNull(string, "string == null");
     sb.append(string);
     return this;
   }

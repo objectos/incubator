@@ -33,7 +33,7 @@ import java.io.Writer;
 import java.net.URI;
 import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 @Bridge
 abstract class ObjectJava6 extends ObjectJavaAny {
@@ -50,7 +50,7 @@ abstract class ObjectJava6 extends ObjectJavaAny {
   @Override
   public final <R, P> R acceptPathNameVisitor(
       PathNameVisitor<R, P> visitor, P p) throws IOException {
-    Checks.checkNotNull(visitor, "visitor == null");
+    Check.notNull(visitor, "visitor == null");
 
     if (!delegate.exists()) {
       return visitor.visitNotFound(this, p);
@@ -103,7 +103,7 @@ abstract class ObjectJava6 extends ObjectJavaAny {
   @Override
   public final RegularFile createRegularFile(
       RegularFileCreateOption... options) throws IOException {
-    Checks.checkNotNull(options, "options == null");
+    Check.notNull(options, "options == null");
 
     checkRegularFileDoesNotExist(delegate);
 
@@ -161,7 +161,7 @@ abstract class ObjectJava6 extends ObjectJavaAny {
 
   @Override
   public final boolean is(RegularFileIsOption option) throws IOException {
-    Checks.checkNotNull(option, "option == null");
+    Check.notNull(option, "option == null");
 
     return option.is(delegate);
   }
@@ -263,7 +263,7 @@ abstract class ObjectJava6 extends ObjectJavaAny {
 
   @Override
   public final void visitContents(DirectoryContentsVisitor visitor) throws IOException {
-    Checks.checkNotNull(visitor, "visitor == null");
+    Check.notNull(visitor, "visitor == null");
 
     File[] files;
     files = delegate.listFiles();
@@ -304,7 +304,7 @@ abstract class ObjectJava6 extends ObjectJavaAny {
 
   @Override
   final ObjectJavaAny resolve0(String firstName, String[] more) {
-    Checks.checkNotNull(firstName, "firstName == null");
+    Check.notNull(firstName, "firstName == null");
 
     StringBuilder b;
     b = new StringBuilder(firstName);
@@ -316,7 +316,7 @@ abstract class ObjectJava6 extends ObjectJavaAny {
       part = more[i];
 
       b.append(
-          Checks.checkNotNull(part, "more[", i, "] == null")
+          Check.notNull(part, "more[", i, "] == null")
       );
     }
 
@@ -330,7 +330,7 @@ abstract class ObjectJava6 extends ObjectJavaAny {
     File file;
     file = new File(pathName);
 
-    Checks.checkArgument(!file.isAbsolute(), "pathName is absolute");
+    Check.argument(!file.isAbsolute(), "pathName is absolute");
 
     URI uri;
     uri = toUri();
@@ -352,21 +352,21 @@ abstract class ObjectJava6 extends ObjectJavaAny {
     boolean isDescendant;
     isDescendant = candidatePath.startsWith(parentPath + File.separatorChar);
 
-    Checks.checkArgument(isDescendant, "pathName is not a descendant");
+    Check.argument(isDescendant, "pathName is not a descendant");
 
     return newObject(candidate);
   }
 
   @Override
   final ObjectJavaAny resolveChild0(String value, String variableName) {
-    Checks.checkNotNull(value, variableName, " == null");
+    Check.notNull(value, variableName, " == null");
 
-    Checks.checkArgument(!value.equals(""), variableName, " is empty");
+    Check.argument(!value.equals(""), variableName, " is empty");
 
     File path;
     path = new File(value);
 
-    Checks.checkArgument(!path.isAbsolute(), variableName, " is absolute");
+    Check.argument(!path.isAbsolute(), variableName, " is absolute");
 
     File candidate;
     candidate = new File(delegate, value);
@@ -374,7 +374,7 @@ abstract class ObjectJava6 extends ObjectJavaAny {
     File parentFile;
     parentFile = candidate.getParentFile();
 
-    Checks.checkArgument(
+    Check.argument(
         delegate.equals(parentFile),
         variableName, " does not resolve to a child of this directory"
     );

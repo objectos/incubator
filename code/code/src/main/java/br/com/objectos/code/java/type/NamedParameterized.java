@@ -20,7 +20,7 @@ import br.com.objectos.code.java.expression.MethodReference;
 import br.com.objectos.code.java.expression.TypeWitness;
 import br.com.objectos.code.java.io.JavaFileImportSet;
 import br.com.objectos.core.list.ImmutableList;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 import objectos.lang.HashCode;
 
 public final class NamedParameterized extends NamedClassOrParameterized {
@@ -32,13 +32,13 @@ public final class NamedParameterized extends NamedClassOrParameterized {
     this.raw = raw;
     this.arguments = arguments;
 
-    Checks.checkArgument(!arguments.isEmpty(), "arguments is empty");
+    Check.argument(!arguments.isEmpty(), "arguments is empty");
   }
 
   public static NamedParameterized of(
       NamedClass raw, Iterable<? extends NamedType> arguments) {
-    Checks.checkNotNull(raw, "raw == null");
-    Checks.checkNotNull(arguments, "arguments == null");
+    Check.notNull(raw, "raw == null");
+    Check.notNull(arguments, "arguments == null");
 
     ImmutableList<? extends NamedType> list;
     list = ImmutableList.copyOf(arguments);
@@ -47,7 +47,7 @@ public final class NamedParameterized extends NamedClassOrParameterized {
   }
 
   public static NamedParameterized of(NamedClass raw, NamedType arg) {
-    Checks.checkNotNull(raw, "raw == null");
+    Check.notNull(raw, "raw == null");
 
     ImmutableList<NamedType> list;
     list = ImmutableList.of(arg);
@@ -56,7 +56,7 @@ public final class NamedParameterized extends NamedClassOrParameterized {
   }
 
   public static NamedParameterized of(NamedClass raw, NamedType... arguments) {
-    Checks.checkNotNull(raw, "raw == null");
+    Check.notNull(raw, "raw == null");
 
     ImmutableList<NamedType> list;
     list = ImmutableList.copyOf(arguments);
@@ -66,7 +66,7 @@ public final class NamedParameterized extends NamedClassOrParameterized {
 
   public static NamedParameterized of(
       NamedClass raw, NamedType arg1, NamedType arg2) {
-    Checks.checkNotNull(raw, "raw == null");
+    Check.notNull(raw, "raw == null");
 
     ImmutableList<NamedType> list;
     list = ImmutableList.of(arg1, arg2);
@@ -76,7 +76,7 @@ public final class NamedParameterized extends NamedClassOrParameterized {
 
   public static NamedParameterized of(
       NamedClass raw, NamedType arg1, NamedType arg2, NamedType arg3) {
-    Checks.checkNotNull(raw, "raw == null");
+    Check.notNull(raw, "raw == null");
 
     ImmutableList<NamedType> list;
     list = ImmutableList.of(arg1, arg2, arg3);

@@ -30,7 +30,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 import java.util.Set;
 
 public class HttpTesting {
@@ -156,7 +156,7 @@ public class HttpTesting {
     private final String url;
 
     Request(String url) {
-      this.url = Checks.checkNotNull(url, "url == null");
+      this.url = Check.notNull(url, "url == null");
     }
 
     @Override

@@ -24,7 +24,7 @@ import br.com.objectos.css.type.Color;
 import br.com.objectos.css.type.ColorName;
 import br.com.objectos.css.type.Creator;
 import br.com.objectos.css.type.Marker;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 class Identifier extends ThisValue {
 
@@ -34,7 +34,7 @@ class Identifier extends ThisValue {
   private final String name;
 
   public Identifier(String name) {
-    this.name = Checks.checkNotNull(name, "name == null");
+    this.name = Check.notNull(name, "name == null");
 
     if (Keywords.isKeyword(name)) {
       keyword = Keywords.getByName(name);

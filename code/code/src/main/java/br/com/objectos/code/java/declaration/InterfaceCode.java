@@ -27,7 +27,7 @@ import br.com.objectos.code.java.type.NamedClassOrParameterized;
 import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.core.list.MutableList;
 import java.lang.annotation.Annotation;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public final class InterfaceCode extends AbstractTypeCode {
 
@@ -40,18 +40,18 @@ public final class InterfaceCode extends AbstractTypeCode {
 
   public static InterfaceCode _interface(
       InterfaceCodeElement e1) {
-    Checks.checkNotNull(e1, "e1 == null");
+    Check.notNull(e1, "e1 == null");
     Builder b = builder();
     e1.acceptInterfaceCodeBuilder(b);
     return b.build();
   }
 
   public static InterfaceCode _interface(InterfaceCodeElement... elements) {
-    Checks.checkNotNull(elements, "elements == null");
+    Check.notNull(elements, "elements == null");
     Builder b = builder();
 
     for (int i = 0; i < elements.length; i++) {
-      InterfaceCodeElement element = Checks.checkNotNull(elements[i], "elements[" + i + "] == null");
+      InterfaceCodeElement element = Check.notNull(elements[i], "elements[" + i + "] == null");
       element.acceptInterfaceCodeBuilder(b);
     }
 
@@ -61,8 +61,8 @@ public final class InterfaceCode extends AbstractTypeCode {
   public static InterfaceCode _interface(
       InterfaceCodeElement e1,
       InterfaceCodeElement e2) {
-    Checks.checkNotNull(e1, "e1 == null");
-    Checks.checkNotNull(e2, "e2 == null");
+    Check.notNull(e1, "e1 == null");
+    Check.notNull(e2, "e2 == null");
     Builder b = builder();
     e1.acceptInterfaceCodeBuilder(b);
     e2.acceptInterfaceCodeBuilder(b);
@@ -73,9 +73,9 @@ public final class InterfaceCode extends AbstractTypeCode {
       InterfaceCodeElement e1,
       InterfaceCodeElement e2,
       InterfaceCodeElement e3) {
-    Checks.checkNotNull(e1, "e1 == null");
-    Checks.checkNotNull(e2, "e2 == null");
-    Checks.checkNotNull(e3, "e3 == null");
+    Check.notNull(e1, "e1 == null");
+    Check.notNull(e2, "e2 == null");
+    Check.notNull(e3, "e3 == null");
     Builder b = builder();
     e1.acceptInterfaceCodeBuilder(b);
     e2.acceptInterfaceCodeBuilder(b);
@@ -88,10 +88,10 @@ public final class InterfaceCode extends AbstractTypeCode {
       InterfaceCodeElement e2,
       InterfaceCodeElement e3,
       InterfaceCodeElement e4) {
-    Checks.checkNotNull(e1, "e1 == null");
-    Checks.checkNotNull(e2, "e2 == null");
-    Checks.checkNotNull(e3, "e3 == null");
-    Checks.checkNotNull(e4, "e4 == null");
+    Check.notNull(e1, "e1 == null");
+    Check.notNull(e2, "e2 == null");
+    Check.notNull(e3, "e3 == null");
+    Check.notNull(e4, "e4 == null");
     Builder b = builder();
     e1.acceptInterfaceCodeBuilder(b);
     e2.acceptInterfaceCodeBuilder(b);
@@ -106,11 +106,11 @@ public final class InterfaceCode extends AbstractTypeCode {
       InterfaceCodeElement e3,
       InterfaceCodeElement e4,
       InterfaceCodeElement e5) {
-    Checks.checkNotNull(e1, "e1 == null");
-    Checks.checkNotNull(e2, "e2 == null");
-    Checks.checkNotNull(e3, "e3 == null");
-    Checks.checkNotNull(e4, "e4 == null");
-    Checks.checkNotNull(e5, "e5 == null");
+    Check.notNull(e1, "e1 == null");
+    Check.notNull(e2, "e2 == null");
+    Check.notNull(e3, "e3 == null");
+    Check.notNull(e4, "e4 == null");
+    Check.notNull(e5, "e5 == null");
     Builder b = builder();
     e1.acceptInterfaceCodeBuilder(b);
     e2.acceptInterfaceCodeBuilder(b);
@@ -127,12 +127,12 @@ public final class InterfaceCode extends AbstractTypeCode {
       InterfaceCodeElement e4,
       InterfaceCodeElement e5,
       InterfaceCodeElement e6) {
-    Checks.checkNotNull(e1, "e1 == null");
-    Checks.checkNotNull(e2, "e2 == null");
-    Checks.checkNotNull(e3, "e3 == null");
-    Checks.checkNotNull(e4, "e4 == null");
-    Checks.checkNotNull(e5, "e5 == null");
-    Checks.checkNotNull(e6, "e6 == null");
+    Check.notNull(e1, "e1 == null");
+    Check.notNull(e2, "e2 == null");
+    Check.notNull(e3, "e3 == null");
+    Check.notNull(e4, "e4 == null");
+    Check.notNull(e5, "e5 == null");
+    Check.notNull(e6, "e6 == null");
     Builder b = builder();
     e1.acceptInterfaceCodeBuilder(b);
     e2.acceptInterfaceCodeBuilder(b);
@@ -151,13 +151,13 @@ public final class InterfaceCode extends AbstractTypeCode {
       InterfaceCodeElement e5,
       InterfaceCodeElement e6,
       InterfaceCodeElement e7) {
-    Checks.checkNotNull(e1, "e1 == null");
-    Checks.checkNotNull(e2, "e2 == null");
-    Checks.checkNotNull(e3, "e3 == null");
-    Checks.checkNotNull(e4, "e4 == null");
-    Checks.checkNotNull(e5, "e5 == null");
-    Checks.checkNotNull(e6, "e6 == null");
-    Checks.checkNotNull(e7, "e7 == null");
+    Check.notNull(e1, "e1 == null");
+    Check.notNull(e2, "e2 == null");
+    Check.notNull(e3, "e3 == null");
+    Check.notNull(e4, "e4 == null");
+    Check.notNull(e5, "e5 == null");
+    Check.notNull(e6, "e6 == null");
+    Check.notNull(e7, "e7 == null");
     Builder b = builder();
     e1.acceptInterfaceCodeBuilder(b);
     e2.acceptInterfaceCodeBuilder(b);
@@ -178,14 +178,14 @@ public final class InterfaceCode extends AbstractTypeCode {
       InterfaceCodeElement e6,
       InterfaceCodeElement e7,
       InterfaceCodeElement e8) {
-    Checks.checkNotNull(e1, "e1 == null");
-    Checks.checkNotNull(e2, "e2 == null");
-    Checks.checkNotNull(e3, "e3 == null");
-    Checks.checkNotNull(e4, "e4 == null");
-    Checks.checkNotNull(e5, "e5 == null");
-    Checks.checkNotNull(e6, "e6 == null");
-    Checks.checkNotNull(e7, "e7 == null");
-    Checks.checkNotNull(e8, "e8 == null");
+    Check.notNull(e1, "e1 == null");
+    Check.notNull(e2, "e2 == null");
+    Check.notNull(e3, "e3 == null");
+    Check.notNull(e4, "e4 == null");
+    Check.notNull(e5, "e5 == null");
+    Check.notNull(e6, "e6 == null");
+    Check.notNull(e7, "e7 == null");
+    Check.notNull(e8, "e8 == null");
     Builder b = builder();
     e1.acceptInterfaceCodeBuilder(b);
     e2.acceptInterfaceCodeBuilder(b);
@@ -208,15 +208,15 @@ public final class InterfaceCode extends AbstractTypeCode {
       InterfaceCodeElement e7,
       InterfaceCodeElement e8,
       InterfaceCodeElement e9) {
-    Checks.checkNotNull(e1, "e1 == null");
-    Checks.checkNotNull(e2, "e2 == null");
-    Checks.checkNotNull(e3, "e3 == null");
-    Checks.checkNotNull(e4, "e4 == null");
-    Checks.checkNotNull(e5, "e5 == null");
-    Checks.checkNotNull(e6, "e6 == null");
-    Checks.checkNotNull(e7, "e7 == null");
-    Checks.checkNotNull(e8, "e8 == null");
-    Checks.checkNotNull(e9, "e9 == null");
+    Check.notNull(e1, "e1 == null");
+    Check.notNull(e2, "e2 == null");
+    Check.notNull(e3, "e3 == null");
+    Check.notNull(e4, "e4 == null");
+    Check.notNull(e5, "e5 == null");
+    Check.notNull(e6, "e6 == null");
+    Check.notNull(e7, "e7 == null");
+    Check.notNull(e8, "e8 == null");
+    Check.notNull(e9, "e9 == null");
     Builder b = builder();
     e1.acceptInterfaceCodeBuilder(b);
     e2.acceptInterfaceCodeBuilder(b);
@@ -338,18 +338,18 @@ public final class InterfaceCode extends AbstractTypeCode {
     }
 
     public final InterfaceCode buildWith(BodyFormatter formatter) {
-      this.formatter = Checks.checkNotNull(formatter, "formatter == null");
+      this.formatter = Check.notNull(formatter, "formatter == null");
       return build();
     }
 
     public final Builder simpleName(NamedClass className) {
-      Checks.checkNotNull(className, "className == null");
+      Check.notNull(className, "className == null");
       simpleName = className.getSimpleName();
       return this;
     }
 
     public final Builder simpleName(String name) {
-      simpleName = Checks.checkNotNull(name, "name == null");
+      simpleName = Check.notNull(name, "name == null");
       return this;
     }
 

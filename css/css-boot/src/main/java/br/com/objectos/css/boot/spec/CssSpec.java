@@ -26,7 +26,7 @@ import br.com.objectos.css.boot.type.Primitive;
 import br.com.objectos.css.boot.type.PrimitiveType;
 import br.com.objectos.css.boot.type.Value;
 import br.com.objectos.css.boot.type.ValueType;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public abstract class CssSpec {
 
@@ -35,7 +35,7 @@ public abstract class CssSpec {
   protected CssSpec() {}
 
   public final void acceptCssSpecDsl(CssSpecDsl dsl) {
-    this.dsl = Checks.checkNotNull(dsl, "dsl == null");
+    this.dsl = Check.notNull(dsl, "dsl == null");
     try {
       definition();
     } finally {

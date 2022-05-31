@@ -23,7 +23,7 @@ import br.com.objectos.code.java.io.JavaFile;
 import br.com.objectos.code.java.io.NewLineFormatting.NewLineFormattingAction;
 import br.com.objectos.code.java.type.NamedClass;
 import br.com.objectos.core.list.ImmutableList;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 abstract class AbstractTypeCode extends AbstractImmutableCodeElement implements TypeCode {
 
@@ -72,7 +72,7 @@ abstract class AbstractTypeCode extends AbstractImmutableCodeElement implements 
   public abstract String simpleName();
 
   public final JavaFile toJavaFile(PackageName packageName) {
-    Checks.checkNotNull(packageName, "packageName == null");
+    Check.notNull(packageName, "packageName == null");
 
     return new JavaFile(packageName, this);
   }

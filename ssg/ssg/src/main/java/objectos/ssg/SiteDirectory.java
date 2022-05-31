@@ -18,7 +18,7 @@ package objectos.ssg;
 import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.http.media.MediaType;
 import java.io.IOException;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public abstract class SiteDirectory
     implements
@@ -114,8 +114,8 @@ public abstract class SiteDirectory
   protected void writeStart() {}
 
   final void set(String path, SiteConfiguration site) {
-    Checks.checkState(this.path == null, "path was already set");
-    Checks.checkState(this.site == null, "site was already set");
+    Check.state(this.path == null, "path was already set");
+    Check.state(this.site == null, "site was already set");
 
     this.path = path;
     this.site = site;

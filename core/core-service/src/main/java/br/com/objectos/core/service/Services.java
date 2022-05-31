@@ -15,7 +15,7 @@
  */
 package br.com.objectos.core.service;
 
-import objectos.lang.Checks;
+import objectos.lang.Check;
 import objectos.lang.ShutdownHook;
 
 /**
@@ -39,7 +39,7 @@ public final class Services {
    *         if a service fails to be started
    */
   public static void start(Service... services) throws Exception {
-    Checks.checkNotNull(services, "services == null");
+    Check.notNull(services, "services == null");
 
     for (int i = 0; i < services.length; i++) {
       Service s;

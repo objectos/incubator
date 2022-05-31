@@ -16,7 +16,7 @@
 package br.com.objectos.concurrent;
 
 import java.util.concurrent.atomic.AtomicInteger;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 /**
  * Provides {@code static} utility methods.
@@ -157,7 +157,7 @@ public final class Concurrent {
    *        the task to be executed to its completion
    */
   public static void exhaust(CpuTask task) {
-    Checks.checkNotNull(task, "task == null");
+    Check.notNull(task, "task == null");
 
     while (task.isActive()) {
       task.executeOne();

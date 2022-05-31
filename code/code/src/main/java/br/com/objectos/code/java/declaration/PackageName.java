@@ -43,7 +43,7 @@ import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.ResolvedPath;
 import java.io.IOException;
 import javax.lang.model.SourceVersion;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public class PackageName implements NamedClassOrPackage, JavaFileCodeElement {
 
@@ -65,8 +65,8 @@ public class PackageName implements NamedClassOrPackage, JavaFileCodeElement {
 
   @Ignore("AggregatorGenProcessor")
   public static PackageName named(String packageName) {
-    Checks.checkNotNull(packageName, "packageName == null");
-    Checks.checkArgument(
+    Check.notNull(packageName, "packageName == null");
+    Check.argument(
         SourceVersion.isName(packageName),
         packageName, " is not a valid package name"
     );
@@ -75,19 +75,19 @@ public class PackageName implements NamedClassOrPackage, JavaFileCodeElement {
 
   @Ignore("AggregatorGenProcessor")
   public static PackageName of(Class<?> type) {
-    Checks.checkNotNull(type, "type == null");
+    Check.notNull(type, "type == null");
     return of(type.getPackage());
   }
 
   @Ignore("AggregatorGenProcessor")
   public static PackageName of(Package pkg) {
-    Checks.checkNotNull(pkg, "pkg == null");
+    Check.notNull(pkg, "pkg == null");
     return ofCanonicalName(pkg.getName());
   }
 
   @Ignore("AggregatorGenProcessor")
   public static PackageName of(ProcessingPackage pkg) {
-    Checks.checkNotNull(pkg, "pkg == null");
+    Check.notNull(pkg, "pkg == null");
     return ofCanonicalName(pkg.getCanonicalName());
   }
 
@@ -119,7 +119,7 @@ public class PackageName implements NamedClassOrPackage, JavaFileCodeElement {
 
   @Override
   public final Directory createSourceDirectory(Directory directory) throws IOException {
-    Checks.checkNotNull(directory, "directory == null");
+    Check.notNull(directory, "directory == null");
 
     int length;
     length = canonicalName.length();
@@ -192,9 +192,9 @@ public class PackageName implements NamedClassOrPackage, JavaFileCodeElement {
   }
 
   public final PackageName nestedPackage(String child) {
-    Checks.checkNotNull(child, "child == null");
+    Check.notNull(child, "child == null");
     String newPackage = canonicalName + "." + child;
-    Checks.checkArgument(
+    Check.argument(
         SourceVersion.isName(newPackage),
         newPackage, " is not a valid package name"
     );
@@ -213,7 +213,7 @@ public class PackageName implements NamedClassOrPackage, JavaFileCodeElement {
 
     partBuilder.setLength(0);
 
-    Checks.checkArgument(
+    Check.argument(
         SourceVersion.isIdentifier(part),
         part, " is not a valid Java identifier"
     );

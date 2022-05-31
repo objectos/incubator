@@ -19,7 +19,7 @@ import br.com.objectos.code.java.element.CodeElement;
 import br.com.objectos.code.java.element.Keywords;
 import br.com.objectos.code.java.expression.Expression;
 import br.com.objectos.code.java.io.CodeWriter;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public class DoStatement extends AbstractSimpleStatement {
 
@@ -32,13 +32,13 @@ public class DoStatement extends AbstractSimpleStatement {
   }
 
   public static DoStatement _do(Statement body, WhileElement condition) {
-    Checks.checkNotNull(body, "body == null");
-    Checks.checkNotNull(condition, "condition == null");
+    Check.notNull(body, "body == null");
+    Check.notNull(condition, "condition == null");
     return new DoStatement(body, condition);
   }
   
   public static WhileElement _while(Expression condition) {
-    Checks.checkNotNull(condition, "condition == null");
+    Check.notNull(condition, "condition == null");
     return new WhileElement(condition);
   }
 

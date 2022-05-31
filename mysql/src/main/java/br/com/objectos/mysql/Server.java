@@ -26,7 +26,7 @@ import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
 import java.nio.charset.CharsetDecoder;
 import java.util.List;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public final class Server extends Executable implements Service {
 
@@ -46,8 +46,8 @@ public final class Server extends Executable implements Service {
 
   public static Server createServer(
       Directory directory, ConfigurationFile configurationFile) throws IOException {
-    Checks.checkNotNull(directory, "directory == null");
-    Checks.checkNotNull(configurationFile, "configurationFile == null");
+    Check.notNull(directory, "directory == null");
+    Check.notNull(configurationFile, "configurationFile == null");
 
     try {
       RegularFile file;

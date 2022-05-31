@@ -15,7 +15,7 @@
  */
 package br.com.objectos.css.type;
 
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public class ColorHex extends Color {
 
@@ -32,7 +32,7 @@ public class ColorHex extends Color {
   }
 
   public static boolean isValidHexNotation(String hex) {
-    Checks.checkNotNull(hex, "hex == null");
+    Check.notNull(hex, "hex == null");
 
     char[] array;
     array = hex.toCharArray();

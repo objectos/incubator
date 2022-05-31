@@ -21,7 +21,7 @@ import br.com.objectos.code.java.type.NamedClass;
 import br.com.objectos.core.map.Maps;
 import java.util.Map;
 import java.util.NoSuchElementException;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public class InMemoryJavaFileConsumer implements JavaFileConsumer {
 
@@ -29,7 +29,7 @@ public class InMemoryJavaFileConsumer implements JavaFileConsumer {
 
   @Override
   public final void acceptJavaFile(JavaFile javaFile) {
-    Checks.checkNotNull(javaFile, "javaFile == null");
+    Check.notNull(javaFile, "javaFile == null");
 
     NamedClass className;
     className = javaFile.className();
@@ -45,7 +45,7 @@ public class InMemoryJavaFileConsumer implements JavaFileConsumer {
   }
 
   public final boolean contains(NamedClass className) {
-    Checks.checkNotNull(className, "className == null");
+    Check.notNull(className, "className == null");
 
     return contains(className.getCanonicalName());
   }
@@ -55,7 +55,7 @@ public class InMemoryJavaFileConsumer implements JavaFileConsumer {
   }
 
   public final JavaFile get(NamedClass className) {
-    Checks.checkNotNull(className, "className == null");
+    Check.notNull(className, "className == null");
 
     return get(className.getCanonicalName());
   }

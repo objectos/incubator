@@ -25,7 +25,7 @@ import br.com.objectos.code.java.io.CodeWriter;
 import br.com.objectos.code.java.io.Section;
 import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.core.list.MutableList;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public final class Arguments extends AbstractImmutableCodeElement
     implements
@@ -49,17 +49,17 @@ public final class Arguments extends AbstractImmutableCodeElement
 
   public static Arguments args(
       ArgumentsElement a1) {
-    Checks.checkNotNull(a1, "a1 == null");
+    Check.notNull(a1, "a1 == null");
     Builder b = new Builder();
     a1.acceptArgumentsBuilder(b);
     return b.build();
   }
 
   public static Arguments args(ArgumentsElement... args) {
-    Checks.checkNotNull(args, "args == null");
+    Check.notNull(args, "args == null");
     Builder b = new Builder();
     for (int i = 0; i < args.length; i++) {
-      ArgumentsElement e = Checks.checkNotNull(args[i], "args[" + i + "] == null");
+      ArgumentsElement e = Check.notNull(args[i], "args[" + i + "] == null");
       e.acceptArgumentsBuilder(b);
     }
     return b.build();
@@ -68,8 +68,8 @@ public final class Arguments extends AbstractImmutableCodeElement
   public static Arguments args(
       ArgumentsElement a1,
       ArgumentsElement a2) {
-    Checks.checkNotNull(a1, "a1 == null");
-    Checks.checkNotNull(a2, "a2 == null");
+    Check.notNull(a1, "a1 == null");
+    Check.notNull(a2, "a2 == null");
     Builder b = new Builder();
     a1.acceptArgumentsBuilder(b);
     a2.acceptArgumentsBuilder(b);
@@ -80,9 +80,9 @@ public final class Arguments extends AbstractImmutableCodeElement
       ArgumentsElement a1,
       ArgumentsElement a2,
       ArgumentsElement a3) {
-    Checks.checkNotNull(a1, "a1 == null");
-    Checks.checkNotNull(a2, "a2 == null");
-    Checks.checkNotNull(a3, "a3 == null");
+    Check.notNull(a1, "a1 == null");
+    Check.notNull(a2, "a2 == null");
+    Check.notNull(a3, "a3 == null");
     Builder b = new Builder();
     a1.acceptArgumentsBuilder(b);
     a2.acceptArgumentsBuilder(b);
@@ -95,10 +95,10 @@ public final class Arguments extends AbstractImmutableCodeElement
       ArgumentsElement a2,
       ArgumentsElement a3,
       ArgumentsElement a4) {
-    Checks.checkNotNull(a1, "a1 == null");
-    Checks.checkNotNull(a2, "a2 == null");
-    Checks.checkNotNull(a3, "a3 == null");
-    Checks.checkNotNull(a4, "a4 == null");
+    Check.notNull(a1, "a1 == null");
+    Check.notNull(a2, "a2 == null");
+    Check.notNull(a3, "a3 == null");
+    Check.notNull(a4, "a4 == null");
     Builder b = new Builder();
     a1.acceptArgumentsBuilder(b);
     a2.acceptArgumentsBuilder(b);
@@ -113,11 +113,11 @@ public final class Arguments extends AbstractImmutableCodeElement
       ArgumentsElement a3,
       ArgumentsElement a4,
       ArgumentsElement a5) {
-    Checks.checkNotNull(a1, "a1 == null");
-    Checks.checkNotNull(a2, "a2 == null");
-    Checks.checkNotNull(a3, "a3 == null");
-    Checks.checkNotNull(a4, "a4 == null");
-    Checks.checkNotNull(a5, "a5 == null");
+    Check.notNull(a1, "a1 == null");
+    Check.notNull(a2, "a2 == null");
+    Check.notNull(a3, "a3 == null");
+    Check.notNull(a4, "a4 == null");
+    Check.notNull(a5, "a5 == null");
     Builder b = new Builder();
     a1.acceptArgumentsBuilder(b);
     a2.acceptArgumentsBuilder(b);
@@ -134,12 +134,12 @@ public final class Arguments extends AbstractImmutableCodeElement
       ArgumentsElement a4,
       ArgumentsElement a5,
       ArgumentsElement a6) {
-    Checks.checkNotNull(a1, "a1 == null");
-    Checks.checkNotNull(a2, "a2 == null");
-    Checks.checkNotNull(a3, "a3 == null");
-    Checks.checkNotNull(a4, "a4 == null");
-    Checks.checkNotNull(a5, "a5 == null");
-    Checks.checkNotNull(a6, "a6 == null");
+    Check.notNull(a1, "a1 == null");
+    Check.notNull(a2, "a2 == null");
+    Check.notNull(a3, "a3 == null");
+    Check.notNull(a4, "a4 == null");
+    Check.notNull(a5, "a5 == null");
+    Check.notNull(a6, "a6 == null");
     Builder b = new Builder();
     a1.acceptArgumentsBuilder(b);
     a2.acceptArgumentsBuilder(b);
@@ -158,13 +158,13 @@ public final class Arguments extends AbstractImmutableCodeElement
       ArgumentsElement a5,
       ArgumentsElement a6,
       ArgumentsElement a7) {
-    Checks.checkNotNull(a1, "a1 == null");
-    Checks.checkNotNull(a2, "a2 == null");
-    Checks.checkNotNull(a3, "a3 == null");
-    Checks.checkNotNull(a4, "a4 == null");
-    Checks.checkNotNull(a5, "a5 == null");
-    Checks.checkNotNull(a6, "a6 == null");
-    Checks.checkNotNull(a7, "a7 == null");
+    Check.notNull(a1, "a1 == null");
+    Check.notNull(a2, "a2 == null");
+    Check.notNull(a3, "a3 == null");
+    Check.notNull(a4, "a4 == null");
+    Check.notNull(a5, "a5 == null");
+    Check.notNull(a6, "a6 == null");
+    Check.notNull(a7, "a7 == null");
     Builder b = new Builder();
     a1.acceptArgumentsBuilder(b);
     a2.acceptArgumentsBuilder(b);
@@ -185,14 +185,14 @@ public final class Arguments extends AbstractImmutableCodeElement
       ArgumentsElement a6,
       ArgumentsElement a7,
       ArgumentsElement a8) {
-    Checks.checkNotNull(a1, "a1 == null");
-    Checks.checkNotNull(a2, "a2 == null");
-    Checks.checkNotNull(a3, "a3 == null");
-    Checks.checkNotNull(a4, "a4 == null");
-    Checks.checkNotNull(a5, "a5 == null");
-    Checks.checkNotNull(a6, "a6 == null");
-    Checks.checkNotNull(a7, "a7 == null");
-    Checks.checkNotNull(a8, "a8 == null");
+    Check.notNull(a1, "a1 == null");
+    Check.notNull(a2, "a2 == null");
+    Check.notNull(a3, "a3 == null");
+    Check.notNull(a4, "a4 == null");
+    Check.notNull(a5, "a5 == null");
+    Check.notNull(a6, "a6 == null");
+    Check.notNull(a7, "a7 == null");
+    Check.notNull(a8, "a8 == null");
     Builder b = new Builder();
     a1.acceptArgumentsBuilder(b);
     a2.acceptArgumentsBuilder(b);
@@ -215,15 +215,15 @@ public final class Arguments extends AbstractImmutableCodeElement
       ArgumentsElement a7,
       ArgumentsElement a8,
       ArgumentsElement a9) {
-    Checks.checkNotNull(a1, "a1 == null");
-    Checks.checkNotNull(a2, "a2 == null");
-    Checks.checkNotNull(a3, "a3 == null");
-    Checks.checkNotNull(a4, "a4 == null");
-    Checks.checkNotNull(a5, "a5 == null");
-    Checks.checkNotNull(a6, "a6 == null");
-    Checks.checkNotNull(a7, "a7 == null");
-    Checks.checkNotNull(a8, "a8 == null");
-    Checks.checkNotNull(a9, "a9 == null");
+    Check.notNull(a1, "a1 == null");
+    Check.notNull(a2, "a2 == null");
+    Check.notNull(a3, "a3 == null");
+    Check.notNull(a4, "a4 == null");
+    Check.notNull(a5, "a5 == null");
+    Check.notNull(a6, "a6 == null");
+    Check.notNull(a7, "a7 == null");
+    Check.notNull(a8, "a8 == null");
+    Check.notNull(a9, "a9 == null");
     Builder b = new Builder();
     a1.acceptArgumentsBuilder(b);
     a2.acceptArgumentsBuilder(b);
@@ -238,11 +238,11 @@ public final class Arguments extends AbstractImmutableCodeElement
   }
 
   public static Arguments args(Iterable<? extends ArgumentsElement> args) {
-    Checks.checkNotNull(args, "args == null");
+    Check.notNull(args, "args == null");
     Builder b = new Builder();
     int i = 0;
     for (ArgumentsElement e : args) {
-      e = Checks.checkNotNull(e, "args[" + i + "] == null");
+      e = Check.notNull(e, "args[" + i + "] == null");
       e.acceptArgumentsBuilder(b);
       i++;
     }
@@ -295,7 +295,7 @@ public final class Arguments extends AbstractImmutableCodeElement
     }
 
     public final Builder addArgument(Argument argument) {
-      Checks.checkNotNull(argument, "argument == null");
+      Check.notNull(argument, "argument == null");
       addArgumentUnchecked(argument);
       return this;
     }

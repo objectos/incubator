@@ -20,7 +20,7 @@ import br.com.objectos.core.list.MutableList;
 import java.util.NoSuchElementException;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 import objectos.lang.Throwables;
 
 /**
@@ -289,8 +289,8 @@ public abstract class StageComputationTask<V> implements Computation<V>, CpuTask
    */
   @Override
   public final V getResult() throws IllegalStateException, ExecutionException {
-    Checks.checkState(!isActive(), "computation is active");
-    Checks.checkState(!isSet(FRESULT_CONSUMED), "result already consumed");
+    Check.state(!isActive(), "computation is active");
+    Check.state(!isSet(FRESULT_CONSUMED), "result already consumed");
 
     set(FRESULT_CONSUMED);
 
@@ -471,7 +471,7 @@ public abstract class StageComputationTask<V> implements Computation<V>, CpuTask
    */
   @SuppressWarnings("unchecked")
   protected final <T> T get() throws ClassCastException {
-    Checks.checkState(results.size() == 1,
+    Check.state(results.size() == 1,
       "More than one result: getAll() should have been called");
 
     Object o;
@@ -803,9 +803,9 @@ public abstract class StageComputationTask<V> implements Computation<V>, CpuTask
    *         consumed
    */
   protected final void reset() {
-    Checks.checkState(state == _STOP, "task is active");
+    Check.state(state == _STOP, "task is active");
 
-    Checks.checkState(isSet(FRESULT_CONSUMED), "previous result was not consumed");
+    Check.state(isSet(FRESULT_CONSUMED), "previous result was not consumed");
 
     computations.clear();
 

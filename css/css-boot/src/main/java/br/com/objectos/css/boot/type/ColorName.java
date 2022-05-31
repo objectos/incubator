@@ -23,7 +23,7 @@ import br.com.objectos.code.java.JavaNames;
 import br.com.objectos.code.java.expression.Callee;
 import br.com.objectos.code.java.expression.Identifier;
 import br.com.objectos.code.java.expression.MethodInvocation;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public class ColorName implements Comparable<ColorName> {
 
@@ -36,7 +36,7 @@ public class ColorName implements Comparable<ColorName> {
   }
 
   public static ColorName of(String name) {
-    Checks.checkNotNull(name, "name == null");
+    Check.notNull(name, "name == null");
     return new ColorName(
         name,
         id(JavaNames.toIdentifier(name))

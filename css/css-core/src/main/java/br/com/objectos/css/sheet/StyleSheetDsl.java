@@ -40,7 +40,7 @@ import br.com.objectos.css.type.LengthUnit;
 import br.com.objectos.css.type.Marker;
 import br.com.objectos.css.type.Value;
 import java.util.Arrays;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public class StyleSheetDsl implements Creator, Marker {
 
@@ -69,7 +69,7 @@ public class StyleSheetDsl implements Creator, Marker {
   }
 
   public static CompiledStyleSheet compile(StyleSheet sheet) {
-    Checks.checkNotNull(sheet, "sheet == null");
+    Check.notNull(sheet, "sheet == null");
 
     StyleSheetDsl dsl;
     dsl = new StyleSheetDsl();
@@ -80,7 +80,7 @@ public class StyleSheetDsl implements Creator, Marker {
   }
 
   public final void addAtMedia(AtMediaElement[] elements) {
-    Checks.checkNotNull(elements, "elements == null");
+    Check.notNull(elements, "elements == null");
 
     addProto(ByteProto.AT_MEDIA_END);
 
@@ -119,7 +119,7 @@ public class StyleSheetDsl implements Creator, Marker {
   }
 
   public final void addDeclaration(StandardPropertyName name, double value) {
-    Checks.checkNotNull(name, "name == null");
+    Check.notNull(name, "name == null");
 
     addDeclarationEnd();
     addValueDouble(value);
@@ -127,7 +127,7 @@ public class StyleSheetDsl implements Creator, Marker {
   }
 
   public final void addDeclaration(StandardPropertyName name, int value) {
-    Checks.checkNotNull(name, "name == null");
+    Check.notNull(name, "name == null");
 
     addDeclarationEnd();
     addValueInt(value);
@@ -135,8 +135,8 @@ public class StyleSheetDsl implements Creator, Marker {
   }
 
   public final void addDeclaration(StandardPropertyName name, MultiDeclarationElement[] elements) {
-    Checks.checkNotNull(name, "name == null");
-    Checks.checkNotNull(elements, "elements == null");
+    Check.notNull(name, "name == null");
+    Check.notNull(elements, "elements == null");
 
     addProto(ByteProto.DECLARATION_MULTI_END);
 
@@ -156,8 +156,8 @@ public class StyleSheetDsl implements Creator, Marker {
   }
 
   public final void addDeclaration(StandardPropertyName name, String value) {
-    Checks.checkNotNull(name, "name == null");
-    Checks.checkNotNull(value, "value == null");
+    Check.notNull(name, "name == null");
+    Check.notNull(value, "value == null");
 
     addDeclarationEnd();
     addProtoString(ByteProto.VALUE_STRING, value);
@@ -165,8 +165,8 @@ public class StyleSheetDsl implements Creator, Marker {
   }
 
   public final void addDeclaration(StandardPropertyName name, Value v1) {
-    Checks.checkNotNull(name, "name == null");
-    Checks.checkNotNull(v1, "v1 == null");
+    Check.notNull(name, "name == null");
+    Check.notNull(v1, "v1 == null");
 
     v1.acceptValueCreator(this);
 
@@ -176,9 +176,9 @@ public class StyleSheetDsl implements Creator, Marker {
   }
 
   public final void addDeclaration(StandardPropertyName name, Value v1, Value v2) {
-    Checks.checkNotNull(name, "name == null");
-    Checks.checkNotNull(v1, "v1 == null");
-    Checks.checkNotNull(v2, "v2 == null");
+    Check.notNull(name, "name == null");
+    Check.notNull(v1, "v1 == null");
+    Check.notNull(v2, "v2 == null");
 
     v1.acceptValueCreator(this);
     v2.acceptValueCreator(this);
@@ -191,10 +191,10 @@ public class StyleSheetDsl implements Creator, Marker {
   }
 
   public final void addDeclaration(StandardPropertyName name, Value v1, Value v2, Value v3) {
-    Checks.checkNotNull(name, "name == null");
-    Checks.checkNotNull(v1, "v1 == null");
-    Checks.checkNotNull(v2, "v2 == null");
-    Checks.checkNotNull(v3, "v3 == null");
+    Check.notNull(name, "name == null");
+    Check.notNull(v1, "v1 == null");
+    Check.notNull(v2, "v2 == null");
+    Check.notNull(v3, "v3 == null");
 
     v1.acceptValueCreator(this);
     v2.acceptValueCreator(this);
@@ -210,11 +210,11 @@ public class StyleSheetDsl implements Creator, Marker {
 
   public final void addDeclaration(
       StandardPropertyName name, Value v1, Value v2, Value v3, Value v4) {
-    Checks.checkNotNull(name, "name == null");
-    Checks.checkNotNull(v1, "v1 == null");
-    Checks.checkNotNull(v2, "v2 == null");
-    Checks.checkNotNull(v3, "v3 == null");
-    Checks.checkNotNull(v4, "v4 == null");
+    Check.notNull(name, "name == null");
+    Check.notNull(v1, "v1 == null");
+    Check.notNull(v2, "v2 == null");
+    Check.notNull(v3, "v3 == null");
+    Check.notNull(v4, "v4 == null");
 
     v1.acceptValueCreator(this);
     v2.acceptValueCreator(this);
@@ -232,12 +232,12 @@ public class StyleSheetDsl implements Creator, Marker {
 
   public final void addDeclaration(
       StandardPropertyName name, Value v1, Value v2, Value v3, Value v4, Value v5) {
-    Checks.checkNotNull(name, "name == null");
-    Checks.checkNotNull(v1, "v1 == null");
-    Checks.checkNotNull(v2, "v2 == null");
-    Checks.checkNotNull(v3, "v3 == null");
-    Checks.checkNotNull(v4, "v4 == null");
-    Checks.checkNotNull(v5, "v5 == null");
+    Check.notNull(name, "name == null");
+    Check.notNull(v1, "v1 == null");
+    Check.notNull(v2, "v2 == null");
+    Check.notNull(v3, "v3 == null");
+    Check.notNull(v4, "v4 == null");
+    Check.notNull(v5, "v5 == null");
 
     v1.acceptValueCreator(this);
     v2.acceptValueCreator(this);
@@ -257,13 +257,13 @@ public class StyleSheetDsl implements Creator, Marker {
 
   public final void addDeclaration(
       StandardPropertyName name, Value v1, Value v2, Value v3, Value v4, Value v5, Value v6) {
-    Checks.checkNotNull(name, "name == null");
-    Checks.checkNotNull(v1, "v1 == null");
-    Checks.checkNotNull(v2, "v2 == null");
-    Checks.checkNotNull(v3, "v3 == null");
-    Checks.checkNotNull(v4, "v4 == null");
-    Checks.checkNotNull(v5, "v5 == null");
-    Checks.checkNotNull(v6, "v6 == null");
+    Check.notNull(name, "name == null");
+    Check.notNull(v1, "v1 == null");
+    Check.notNull(v2, "v2 == null");
+    Check.notNull(v3, "v3 == null");
+    Check.notNull(v4, "v4 == null");
+    Check.notNull(v5, "v5 == null");
+    Check.notNull(v6, "v6 == null");
 
     v1.acceptValueCreator(this);
     v2.acceptValueCreator(this);
@@ -284,8 +284,8 @@ public class StyleSheetDsl implements Creator, Marker {
   }
 
   public final void addFunction(StandardFunctionName name, Value v1) {
-    Checks.checkNotNull(name, "name == null");
-    Checks.checkNotNull(v1, "v1 == null");
+    Check.notNull(name, "name == null");
+    Check.notNull(v1, "v1 == null");
 
     v1.acceptValueCreator(this);
 
@@ -325,7 +325,7 @@ public class StyleSheetDsl implements Creator, Marker {
   }
 
   public void addRule(ImmutableList<RuleElement> elements) {
-    Checks.checkNotNull(elements, "elements == null");
+    Check.notNull(elements, "elements == null");
 
     addProto(ByteProto.RULE_END);
 
@@ -345,7 +345,7 @@ public class StyleSheetDsl implements Creator, Marker {
   }
 
   public void addRule(RuleElement[] elements) {
-    Checks.checkNotNull(elements, "elements == null");
+    Check.notNull(elements, "elements == null");
 
     addProto(ByteProto.RULE_END);
 
@@ -474,7 +474,7 @@ public class StyleSheetDsl implements Creator, Marker {
 
   @Override
   public final void createKeyword(String name) {
-    Checks.checkNotNull(name, "name == null");
+    Check.notNull(name, "name == null");
 
     for (char c : name.toCharArray()) {
       if (Character.isLetterOrDigit(c)) {
@@ -583,7 +583,7 @@ public class StyleSheetDsl implements Creator, Marker {
 
   @Override
   public final void createUri(String value) {
-    Checks.checkNotNull(value, "value == null");
+    Check.notNull(value, "value == null");
 
     addProtoString(
         ByteProto.VALUE_URI,
@@ -598,7 +598,7 @@ public class StyleSheetDsl implements Creator, Marker {
 
   public final void markAttributeValueElement() {
     int proto = getLastProto();
-    Checks.checkState(
+    Check.state(
         proto == ByteProto.SELECTOR_ATTRIBUTE_VALUE_ELEMENT,
         "not ", ByteProto.SELECTOR_ATTRIBUTE_VALUE_ELEMENT
     );
@@ -614,7 +614,7 @@ public class StyleSheetDsl implements Creator, Marker {
 
   @Override
   public final void markColor(ColorKind kind) {
-    Checks.checkNotNull(kind, "kind == null");
+    Check.notNull(kind, "kind == null");
 
     switch (kind) {
       case HEX:

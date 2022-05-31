@@ -26,7 +26,7 @@ import br.com.objectos.code.java.type.NamedPrimitive;
 import br.com.objectos.code.java.type.NamedReferenceType;
 import br.com.objectos.code.java.type.NamedType;
 import br.com.objectos.core.list.MutableList;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public class Expressions {
 
@@ -40,8 +40,8 @@ public class Expressions {
 
   public static ArrayCreationExpression _new(
       NamedArray type, ArrayInitializer initializer) {
-    Checks.checkNotNull(type, "type == null");
-    Checks.checkNotNull(initializer, "initializer == null");
+    Check.notNull(type, "type == null");
+    Check.notNull(initializer, "initializer == null");
     return ArrayCreationExpressionImpl._new0(type, initializer);
   }
 
@@ -49,8 +49,8 @@ public class Expressions {
 
   public static ArrayCreationExpression _new(
       NamedArray type, Expression dim0) {
-    Checks.checkNotNull(type, "type == null");
-    Checks.checkNotNull(dim0, "dim0 == null");
+    Check.notNull(type, "type == null");
+    Check.notNull(dim0, "dim0 == null");
     return ArrayCreationExpressionImpl._new0(type, dim0);
   }
 
@@ -58,36 +58,36 @@ public class Expressions {
 
   public static ArrayCreationExpression _new(
       NamedArray type, Expression dim0, Expression dim1) {
-    Checks.checkNotNull(type, "type == null");
-    Checks.checkNotNull(dim0, "dim0 == null");
-    Checks.checkNotNull(dim1, "dim1 == null");
+    Check.notNull(type, "type == null");
+    Check.notNull(dim0, "dim0 == null");
+    Check.notNull(dim1, "dim1 == null");
     return ArrayCreationExpressionImpl._new0(type, dim0, dim1);
   }
 
   public static ArrayCreationExpression _new(
       NamedArray type, Expression dim0, Expression dim1, Expression dim2) {
-    Checks.checkNotNull(type, "type == null");
-    Checks.checkNotNull(dim0, "dim0 == null");
-    Checks.checkNotNull(dim1, "dim1 == null");
-    Checks.checkNotNull(dim2, "dim2 == null");
+    Check.notNull(type, "type == null");
+    Check.notNull(dim0, "dim0 == null");
+    Check.notNull(dim1, "dim1 == null");
+    Check.notNull(dim2, "dim2 == null");
     return ArrayCreationExpressionImpl._new0(type, dim0, dim1, dim2);
   }
 
   public static ArrayCreationExpression _new(
       NamedArray type,
       Expression dim0, Expression dim1, Expression dim2, Expression dim3) {
-    Checks.checkNotNull(type, "type == null");
-    Checks.checkNotNull(dim0, "dim0 == null");
-    Checks.checkNotNull(dim1, "dim1 == null");
-    Checks.checkNotNull(dim2, "dim2 == null");
-    Checks.checkNotNull(dim3, "dim3 == null");
+    Check.notNull(type, "type == null");
+    Check.notNull(dim0, "dim0 == null");
+    Check.notNull(dim1, "dim1 == null");
+    Check.notNull(dim2, "dim2 == null");
+    Check.notNull(dim3, "dim3 == null");
     return ArrayCreationExpressionImpl._new0(type, dim0, dim1, dim2, dim3);
   }
 
   public static ArrayCreationExpression _new(
       NamedArray type, Iterable<? extends Expression> dims) {
-    Checks.checkNotNull(type, "type == null");
-    Checks.checkNotNull(dims, "dims == null");
+    Check.notNull(type, "type == null");
+    Check.notNull(dims, "dims == null");
     return ArrayCreationExpressionImpl._new0(type, dims);
   }
 
@@ -104,7 +104,7 @@ public class Expressions {
   }
 
   public static ArrayInitializer a(Iterable<? extends VariableInitializer> elements) {
-    Checks.checkNotNull(elements, "elements == null");
+    Check.notNull(elements, "elements == null");
 
     MutableList<VariableInitializer> list = MutableList.create();
 
@@ -115,12 +115,12 @@ public class Expressions {
 
   public static ArrayInitializer a(
       VariableInitializer v0) {
-    Checks.checkNotNull(v0, "v0 == null");
+    Check.notNull(v0, "v0 == null");
     return ArrayInitializerImpl.a0(v0);
   }
 
   public static ArrayInitializer a(VariableInitializer... elements) {
-    Checks.checkNotNull(elements, "elements == null");
+    Check.notNull(elements, "elements == null");
 
     VariableInitializer[] copy = new VariableInitializer[elements.length];
 
@@ -142,8 +142,8 @@ public class Expressions {
   public static ArrayInitializer a(
       VariableInitializer v0,
       VariableInitializer v1) {
-    Checks.checkNotNull(v0, "v0 == null");
-    Checks.checkNotNull(v1, "v1 == null");
+    Check.notNull(v0, "v0 == null");
+    Check.notNull(v1, "v1 == null");
     return ArrayInitializerImpl.a0(v0, v1);
   }
 
@@ -151,9 +151,9 @@ public class Expressions {
       VariableInitializer v0,
       VariableInitializer v1,
       VariableInitializer v2) {
-    Checks.checkNotNull(v0, "v0 == null");
-    Checks.checkNotNull(v1, "v1 == null");
-    Checks.checkNotNull(v2, "v2 == null");
+    Check.notNull(v0, "v0 == null");
+    Check.notNull(v1, "v1 == null");
+    Check.notNull(v2, "v2 == null");
     return ArrayInitializerImpl.a0(v0, v1, v2);
   }
 
@@ -162,10 +162,10 @@ public class Expressions {
       VariableInitializer v1,
       VariableInitializer v2,
       VariableInitializer v3) {
-    Checks.checkNotNull(v0, "v0 == null");
-    Checks.checkNotNull(v1, "v1 == null");
-    Checks.checkNotNull(v2, "v2 == null");
-    Checks.checkNotNull(v3, "v3 == null");
+    Check.notNull(v0, "v0 == null");
+    Check.notNull(v1, "v1 == null");
+    Check.notNull(v2, "v2 == null");
+    Check.notNull(v3, "v3 == null");
     return ArrayInitializerImpl.a0(v0, v1, v2, v3);
   }
 
@@ -175,11 +175,11 @@ public class Expressions {
       VariableInitializer v2,
       VariableInitializer v3,
       VariableInitializer v4) {
-    Checks.checkNotNull(v0, "v0 == null");
-    Checks.checkNotNull(v1, "v1 == null");
-    Checks.checkNotNull(v2, "v2 == null");
-    Checks.checkNotNull(v3, "v3 == null");
-    Checks.checkNotNull(v4, "v4 == null");
+    Check.notNull(v0, "v0 == null");
+    Check.notNull(v1, "v1 == null");
+    Check.notNull(v2, "v2 == null");
+    Check.notNull(v3, "v3 == null");
+    Check.notNull(v4, "v4 == null");
     return ArrayInitializerImpl.a0(v0, v1, v2, v3, v4);
   }
 
@@ -190,12 +190,12 @@ public class Expressions {
       VariableInitializer v3,
       VariableInitializer v4,
       VariableInitializer v5) {
-    Checks.checkNotNull(v0, "v0 == null");
-    Checks.checkNotNull(v1, "v1 == null");
-    Checks.checkNotNull(v2, "v2 == null");
-    Checks.checkNotNull(v3, "v3 == null");
-    Checks.checkNotNull(v4, "v4 == null");
-    Checks.checkNotNull(v5, "v5 == null");
+    Check.notNull(v0, "v0 == null");
+    Check.notNull(v1, "v1 == null");
+    Check.notNull(v2, "v2 == null");
+    Check.notNull(v3, "v3 == null");
+    Check.notNull(v4, "v4 == null");
+    Check.notNull(v5, "v5 == null");
     return ArrayInitializerImpl.a0(v0, v1, v2, v3, v4, v5);
   }
 
@@ -207,13 +207,13 @@ public class Expressions {
       VariableInitializer v4,
       VariableInitializer v5,
       VariableInitializer v6) {
-    Checks.checkNotNull(v0, "v0 == null");
-    Checks.checkNotNull(v1, "v1 == null");
-    Checks.checkNotNull(v2, "v2 == null");
-    Checks.checkNotNull(v3, "v3 == null");
-    Checks.checkNotNull(v4, "v4 == null");
-    Checks.checkNotNull(v5, "v5 == null");
-    Checks.checkNotNull(v6, "v6 == null");
+    Check.notNull(v0, "v0 == null");
+    Check.notNull(v1, "v1 == null");
+    Check.notNull(v2, "v2 == null");
+    Check.notNull(v3, "v3 == null");
+    Check.notNull(v4, "v4 == null");
+    Check.notNull(v5, "v5 == null");
+    Check.notNull(v6, "v6 == null");
     return ArrayInitializerImpl.a0(v0, v1, v2, v3, v4, v5, v6);
   }
 
@@ -228,14 +228,14 @@ public class Expressions {
       VariableInitializer v5,
       VariableInitializer v6,
       VariableInitializer v7) {
-    Checks.checkNotNull(v0, "v0 == null");
-    Checks.checkNotNull(v1, "v1 == null");
-    Checks.checkNotNull(v2, "v2 == null");
-    Checks.checkNotNull(v3, "v3 == null");
-    Checks.checkNotNull(v4, "v4 == null");
-    Checks.checkNotNull(v5, "v5 == null");
-    Checks.checkNotNull(v6, "v6 == null");
-    Checks.checkNotNull(v7, "v7 == null");
+    Check.notNull(v0, "v0 == null");
+    Check.notNull(v1, "v1 == null");
+    Check.notNull(v2, "v2 == null");
+    Check.notNull(v3, "v3 == null");
+    Check.notNull(v4, "v4 == null");
+    Check.notNull(v5, "v5 == null");
+    Check.notNull(v6, "v6 == null");
+    Check.notNull(v7, "v7 == null");
     return ArrayInitializerImpl.a0(v0, v1, v2, v3, v4, v5, v6, v7);
   }
 
@@ -249,15 +249,15 @@ public class Expressions {
       VariableInitializer v6,
       VariableInitializer v7,
       VariableInitializer v8) {
-    Checks.checkNotNull(v0, "v0 == null");
-    Checks.checkNotNull(v1, "v1 == null");
-    Checks.checkNotNull(v2, "v2 == null");
-    Checks.checkNotNull(v3, "v3 == null");
-    Checks.checkNotNull(v4, "v4 == null");
-    Checks.checkNotNull(v5, "v5 == null");
-    Checks.checkNotNull(v6, "v6 == null");
-    Checks.checkNotNull(v7, "v7 == null");
-    Checks.checkNotNull(v8, "v8 == null");
+    Check.notNull(v0, "v0 == null");
+    Check.notNull(v1, "v1 == null");
+    Check.notNull(v2, "v2 == null");
+    Check.notNull(v3, "v3 == null");
+    Check.notNull(v4, "v4 == null");
+    Check.notNull(v5, "v5 == null");
+    Check.notNull(v6, "v6 == null");
+    Check.notNull(v7, "v7 == null");
+    Check.notNull(v8, "v8 == null");
     return ArrayInitializerImpl.a0(v0, v1, v2, v3, v4, v5, v6, v7, v8);
   }
 
@@ -272,22 +272,22 @@ public class Expressions {
       VariableInitializer v7,
       VariableInitializer v8,
       VariableInitializer v9) {
-    Checks.checkNotNull(v0, "v0 == null");
-    Checks.checkNotNull(v1, "v1 == null");
-    Checks.checkNotNull(v2, "v2 == null");
-    Checks.checkNotNull(v3, "v3 == null");
-    Checks.checkNotNull(v4, "v4 == null");
-    Checks.checkNotNull(v5, "v5 == null");
-    Checks.checkNotNull(v6, "v6 == null");
-    Checks.checkNotNull(v7, "v7 == null");
-    Checks.checkNotNull(v8, "v8 == null");
-    Checks.checkNotNull(v9, "v9 == null");
+    Check.notNull(v0, "v0 == null");
+    Check.notNull(v1, "v1 == null");
+    Check.notNull(v2, "v2 == null");
+    Check.notNull(v3, "v3 == null");
+    Check.notNull(v4, "v4 == null");
+    Check.notNull(v5, "v5 == null");
+    Check.notNull(v6, "v6 == null");
+    Check.notNull(v7, "v7 == null");
+    Check.notNull(v8, "v8 == null");
+    Check.notNull(v9, "v9 == null");
     return ArrayInitializerImpl.a0(v0, v1, v2, v3, v4, v5, v6, v7, v8, v9);
   }
 
   public static AdditiveExpression add(AdditiveExpression lhs, MultiplicativeExpression rhs) {
-    Checks.checkNotNull(lhs, "lhs == null");
-    Checks.checkNotNull(rhs, "rhs == null");
+    Check.notNull(lhs, "lhs == null");
+    Check.notNull(rhs, "rhs == null");
     return AdditiveExpressionImpl.of0(AdditiveOperator.ADDITION, lhs, rhs);
   }
 
@@ -317,33 +317,33 @@ public class Expressions {
 
   public static ConditionalAndExpression and(
       ConditionalAndExpression lhs, InclusiveOrExpression rhs) {
-    Checks.checkNotNull(lhs, "lhs == null");
-    Checks.checkNotNull(rhs, "rhs == null");
+    Check.notNull(lhs, "lhs == null");
+    Check.notNull(rhs, "rhs == null");
     return ConditionalAndExpressionImpl.and0(lhs, rhs);
   }
 
   public static ArrayAccess arrayAccess(ArrayReferenceExpression ref, Expression e0) {
-    Checks.checkNotNull(ref, "ref == null");
-    Checks.checkNotNull(e0, "e0 == null");
+    Check.notNull(ref, "ref == null");
+    Check.notNull(e0, "e0 == null");
     return ArrayAccessImpl.arrayAccess0(ref, e0);
   }
 
   public static ArrayAccess arrayAccess(
       ArrayReferenceExpression ref,
       Expression e0, Expression e1) {
-    Checks.checkNotNull(ref, "ref == null");
-    Checks.checkNotNull(e0, "e0 == null");
-    Checks.checkNotNull(e1, "e1 == null");
+    Check.notNull(ref, "ref == null");
+    Check.notNull(e0, "e0 == null");
+    Check.notNull(e1, "e1 == null");
     return ArrayAccessImpl.arrayAccess0(ref, e0, e1);
   }
 
   public static ArrayAccess arrayAccess(
       ArrayReferenceExpression ref,
       Expression e0, Expression e1, Expression e2) {
-    Checks.checkNotNull(ref, "ref == null");
-    Checks.checkNotNull(e0, "e0 == null");
-    Checks.checkNotNull(e1, "e1 == null");
-    Checks.checkNotNull(e2, "e2 == null");
+    Check.notNull(ref, "ref == null");
+    Check.notNull(e0, "e0 == null");
+    Check.notNull(e1, "e1 == null");
+    Check.notNull(e2, "e2 == null");
     return ArrayAccessImpl.arrayAccess0(ref, e0, e1, e2);
   }
 
@@ -352,19 +352,19 @@ public class Expressions {
   public static ArrayAccess arrayAccess(
       ArrayReferenceExpression ref,
       Expression e0, Expression e1, Expression e2, Expression e3) {
-    Checks.checkNotNull(ref, "ref == null");
-    Checks.checkNotNull(e0, "e0 == null");
-    Checks.checkNotNull(e1, "e1 == null");
-    Checks.checkNotNull(e2, "e2 == null");
-    Checks.checkNotNull(e3, "e3 == null");
+    Check.notNull(ref, "ref == null");
+    Check.notNull(e0, "e0 == null");
+    Check.notNull(e1, "e1 == null");
+    Check.notNull(e2, "e2 == null");
+    Check.notNull(e3, "e3 == null");
     return ArrayAccessImpl.arrayAccess0(ref, e0, e1, e2, e3);
   }
 
   public static ArrayAccess arrayAccess(
       ArrayReferenceExpression ref,
       Iterable<? extends Expression> expressions) {
-    Checks.checkNotNull(ref, "ref == null");
-    Checks.checkNotNull(expressions, "expressions == null");
+    Check.notNull(ref, "ref == null");
+    Check.notNull(expressions, "expressions == null");
     return ArrayAccessImpl.arrayAccess0(ref, expressions);
   }
 
@@ -372,23 +372,23 @@ public class Expressions {
 
   public static Assignment assign(
       AssignmentOperator operator, LeftHandSide lhs, Expression rhs) {
-    Checks.checkNotNull(operator, "operator == null");
-    Checks.checkNotNull(lhs, "lhs == null");
-    Checks.checkNotNull(rhs, "rhs == null");
+    Check.notNull(operator, "operator == null");
+    Check.notNull(lhs, "lhs == null");
+    Check.notNull(rhs, "rhs == null");
     return AssignmentImpl.assign0(operator, lhs, rhs);
   }
 
   public static Assignment assign(LeftHandSide lhs, Expression rhs) {
-    Checks.checkNotNull(lhs, "lhs == null");
-    Checks.checkNotNull(rhs, "rhs == null");
+    Check.notNull(lhs, "lhs == null");
+    Check.notNull(rhs, "rhs == null");
     return AssignmentImpl.assign0(AssignmentOperator.SIMPLE, lhs, rhs);
   }
 
   // ConditionalAndExpression
 
   public static AndExpression bitwiseAnd(AndExpression lhs, EqualityExpression rhs) {
-    Checks.checkNotNull(lhs, "lhs == null");
-    Checks.checkNotNull(rhs, "rhs == null");
+    Check.notNull(lhs, "lhs == null");
+    Check.notNull(rhs, "rhs == null");
     return AndExpressionImpl.bitwiseAnd0(lhs, rhs);
   }
 
@@ -396,14 +396,14 @@ public class Expressions {
 
   public static InclusiveOrExpression bitwiseOr(
       InclusiveOrExpression lhs, ExclusiveOrExpression rhs) {
-    Checks.checkNotNull(lhs, "lhs == null");
-    Checks.checkNotNull(rhs, "rhs == null");
+    Check.notNull(lhs, "lhs == null");
+    Check.notNull(rhs, "rhs == null");
     return InclusiveOrExpressionImpl.bitwiseOr0(lhs, rhs);
   }
 
   public static ExclusiveOrExpression bitwiseXor(ExclusiveOrExpression lhs, AndExpression rhs) {
-    Checks.checkNotNull(lhs, "lhs == null");
-    Checks.checkNotNull(rhs, "rhs == null");
+    Check.notNull(lhs, "lhs == null");
+    Check.notNull(rhs, "rhs == null");
     return ExclusiveOrExpressionImpl.bitwiseXor0(lhs, rhs);
   }
 
@@ -411,8 +411,8 @@ public class Expressions {
 
   public static CastExpression cast(
       NamedPrimitive type, UnaryExpression expression) {
-    Checks.checkNotNull(type, "type == null");
-    Checks.checkNotNull(expression, "expression == null");
+    Check.notNull(type, "type == null");
+    Check.notNull(expression, "expression == null");
     return CastExpressionImpl.cast0(type, expression);
   }
 
@@ -420,8 +420,8 @@ public class Expressions {
 
   public static CastExpression cast(
       NamedReferenceType type, UnaryExpressionNotPlusMinus expression) {
-    Checks.checkNotNull(type, "type == null");
-    Checks.checkNotNull(expression, "expression == null");
+    Check.notNull(type, "type == null");
+    Check.notNull(expression, "expression == null");
     return CastExpressionImpl.cast0(type, expression);
   }
 
@@ -429,8 +429,8 @@ public class Expressions {
 
   public static MultiplicativeExpression divide(
       MultiplicativeExpression lhs, UnaryExpression rhs) {
-    Checks.checkNotNull(lhs, "lhs == null");
-    Checks.checkNotNull(rhs, "rhs == null");
+    Check.notNull(lhs, "lhs == null");
+    Check.notNull(rhs, "rhs == null");
     return MultiplicativeExpressionImpl.of0(MultiplicativeOperator.DIVISION, lhs, rhs);
   }
 
@@ -441,54 +441,54 @@ public class Expressions {
   // EmptyExpression
 
   public static EqualityExpression eq(EqualityExpression lhs, RelationalExpression rhs) {
-    Checks.checkNotNull(lhs, "lhs == null");
-    Checks.checkNotNull(rhs, "rhs == null");
+    Check.notNull(lhs, "lhs == null");
+    Check.notNull(rhs, "rhs == null");
     return EqualityExpressionImpl.eq0(lhs, rhs);
   }
 
   // ExpresssionName
 
   public static ExpressionName expressionName(Class<?> type, String id) {
-    Checks.checkNotNull(type, "type == null");
-    Checks.checkNotNull(id, "id == null");
+    Check.notNull(type, "type == null");
+    Check.notNull(id, "id == null");
     return ExpressionNameImpl.expressionName0(NamedClass.of(type), id(id));
   }
 
   public static ExpressionName expressionName(ExpressionName name, Identifier id) {
-    Checks.checkNotNull(name, "name == null");
-    Checks.checkNotNull(id, "id == null");
+    Check.notNull(name, "name == null");
+    Check.notNull(id, "id == null");
     return ExpressionNameImpl.expressionName0(name, id);
   }
 
   public static ExpressionName expressionName(ExpressionName name, String id) {
-    Checks.checkNotNull(name, "name == null");
-    Checks.checkNotNull(id, "id == null");
+    Check.notNull(name, "name == null");
+    Check.notNull(id, "id == null");
     return ExpressionNameImpl.expressionName0(name, id(id));
   }
 
   public static ExpressionName expressionName(NamedClass className, Identifier id) {
-    Checks.checkNotNull(className, "className == null");
-    Checks.checkNotNull(id, "id == null");
+    Check.notNull(className, "className == null");
+    Check.notNull(id, "id == null");
     return ExpressionNameImpl.expressionName0(className, id);
   }
 
   public static ExpressionName expressionName(NamedClass className, String id) {
-    Checks.checkNotNull(className, "className == null");
-    Checks.checkNotNull(id, "id == null");
+    Check.notNull(className, "className == null");
+    Check.notNull(id, "id == null");
     return ExpressionNameImpl.expressionName0(className, id(id));
   }
 
   // FieldAccess
 
   public static FieldAccess fieldAccess(FieldAccessReferenceExpression ref, Identifier id) {
-    Checks.checkNotNull(ref, "ref == null");
-    Checks.checkNotNull(id, "id == null");
+    Check.notNull(ref, "ref == null");
+    Check.notNull(id, "id == null");
     return FieldAccessImpl.fieldAccess0(ref, id);
   }
 
   public static FieldAccess fieldAccess(FieldAccessReferenceExpression ref, String id) {
-    Checks.checkNotNull(ref, "ref == null");
-    Checks.checkNotNull(id, "id == null");
+    Check.notNull(ref, "ref == null");
+    Check.notNull(id, "id == null");
     return FieldAccessImpl.fieldAccess0(ref, id(id));
   }
 
@@ -496,15 +496,15 @@ public class Expressions {
 
   public static RelationalExpression ge(
       RelationalExpression lhs, ShiftExpression rhs) {
-    Checks.checkNotNull(lhs, "lhs == null");
-    Checks.checkNotNull(rhs, "rhs == null");
+    Check.notNull(lhs, "lhs == null");
+    Check.notNull(rhs, "rhs == null");
     return RelationalExpressionImpl.of0(RelationalOperator.GE, lhs, rhs);
   }
 
   public static RelationalExpression gt(
       RelationalExpression lhs, ShiftExpression rhs) {
-    Checks.checkNotNull(lhs, "lhs == null");
-    Checks.checkNotNull(rhs, "rhs == null");
+    Check.notNull(lhs, "lhs == null");
+    Check.notNull(rhs, "rhs == null");
     return RelationalExpressionImpl.of0(RelationalOperator.GT, lhs, rhs);
   }
 
@@ -533,7 +533,7 @@ public class Expressions {
   }
 
   public static Identifier id(String name) {
-    Checks.checkNotNull(name, "name == null");
+    Check.notNull(name, "name == null");
     return IdentifierImpl.id0(name);
   }
 
@@ -543,8 +543,8 @@ public class Expressions {
 
   public static RelationalExpression instanceOf(
       RelationalExpression subject, NamedReferenceType test) {
-    Checks.checkNotNull(subject, "subject == null");
-    Checks.checkNotNull(test, "test == null");
+    Check.notNull(subject, "subject == null");
+    Check.notNull(test, "test == null");
     return RelationalExpressionImpl.instanceOf0(subject, test);
   }
 
@@ -552,23 +552,23 @@ public class Expressions {
 
   public static MethodInvocation invoke(
       Callee callee, String methodName) {
-    Checks.checkNotNull(callee, "callee == null");
-    Checks.checkNotNull(methodName, "methodName == null");
+    Check.notNull(callee, "callee == null");
+    Check.notNull(methodName, "methodName == null");
     return MethodInvocation.invoke0(callee, methodName, args());
   }
 
   public static MethodInvocation invoke(
       Callee callee, String methodName,
       ArgumentsElement a1) {
-    Checks.checkNotNull(callee, "callee == null");
-    Checks.checkNotNull(methodName, "methodName == null");
+    Check.notNull(callee, "callee == null");
+    Check.notNull(methodName, "methodName == null");
     return MethodInvocation.invoke0(callee, methodName, args(a1));
   }
 
   public static MethodInvocation invoke(
       Callee callee, String methodName, ArgumentsElement... args) {
-    Checks.checkNotNull(callee, "callee == null");
-    Checks.checkNotNull(methodName, "methodName == null");
+    Check.notNull(callee, "callee == null");
+    Check.notNull(methodName, "methodName == null");
     return MethodInvocation.invoke0(callee, methodName, args(args));
   }
 
@@ -576,8 +576,8 @@ public class Expressions {
       Callee callee, String methodName,
       ArgumentsElement a1,
       ArgumentsElement a2) {
-    Checks.checkNotNull(callee, "callee == null");
-    Checks.checkNotNull(methodName, "methodName == null");
+    Check.notNull(callee, "callee == null");
+    Check.notNull(methodName, "methodName == null");
     return MethodInvocation.invoke0(callee, methodName, args(a1, a2));
   }
 
@@ -586,8 +586,8 @@ public class Expressions {
       ArgumentsElement a1,
       ArgumentsElement a2,
       ArgumentsElement a3) {
-    Checks.checkNotNull(callee, "callee == null");
-    Checks.checkNotNull(methodName, "methodName == null");
+    Check.notNull(callee, "callee == null");
+    Check.notNull(methodName, "methodName == null");
     return MethodInvocation.invoke0(callee, methodName, args(a1, a2, a3));
   }
 
@@ -597,8 +597,8 @@ public class Expressions {
       ArgumentsElement a2,
       ArgumentsElement a3,
       ArgumentsElement a4) {
-    Checks.checkNotNull(callee, "callee == null");
-    Checks.checkNotNull(methodName, "methodName == null");
+    Check.notNull(callee, "callee == null");
+    Check.notNull(methodName, "methodName == null");
     return MethodInvocation.invoke0(callee, methodName, args(a1, a2, a3, a4));
   }
 
@@ -609,8 +609,8 @@ public class Expressions {
       ArgumentsElement a3,
       ArgumentsElement a4,
       ArgumentsElement a5) {
-    Checks.checkNotNull(callee, "callee == null");
-    Checks.checkNotNull(methodName, "methodName == null");
+    Check.notNull(callee, "callee == null");
+    Check.notNull(methodName, "methodName == null");
     return MethodInvocation.invoke0(callee, methodName, args(a1, a2, a3, a4, a5));
   }
 
@@ -622,8 +622,8 @@ public class Expressions {
       ArgumentsElement a4,
       ArgumentsElement a5,
       ArgumentsElement a6) {
-    Checks.checkNotNull(callee, "callee == null");
-    Checks.checkNotNull(methodName, "methodName == null");
+    Check.notNull(callee, "callee == null");
+    Check.notNull(methodName, "methodName == null");
     return MethodInvocation.invoke0(callee, methodName, args(a1, a2, a3, a4, a5, a6));
   }
 
@@ -636,8 +636,8 @@ public class Expressions {
       ArgumentsElement a5,
       ArgumentsElement a6,
       ArgumentsElement a7) {
-    Checks.checkNotNull(callee, "callee == null");
-    Checks.checkNotNull(methodName, "methodName == null");
+    Check.notNull(callee, "callee == null");
+    Check.notNull(methodName, "methodName == null");
     return MethodInvocation.invoke0(callee, methodName, args(a1, a2, a3, a4, a5, a6, a7));
   }
 
@@ -651,8 +651,8 @@ public class Expressions {
       ArgumentsElement a6,
       ArgumentsElement a7,
       ArgumentsElement a8) {
-    Checks.checkNotNull(callee, "callee == null");
-    Checks.checkNotNull(methodName, "methodName == null");
+    Check.notNull(callee, "callee == null");
+    Check.notNull(methodName, "methodName == null");
     return MethodInvocation.invoke0(callee, methodName, args(a1, a2, a3, a4, a5, a6, a7, a8));
   }
 
@@ -667,16 +667,16 @@ public class Expressions {
       ArgumentsElement a7,
       ArgumentsElement a8,
       ArgumentsElement a9) {
-    Checks.checkNotNull(callee, "callee == null");
-    Checks.checkNotNull(methodName, "methodName == null");
+    Check.notNull(callee, "callee == null");
+    Check.notNull(methodName, "methodName == null");
     return MethodInvocation.invoke0(callee, methodName,
         args(a1, a2, a3, a4, a5, a6, a7, a8, a9));
   }
 
   public static MethodInvocation invoke(
       Callee callee, String methodName, Iterable<? extends ArgumentsElement> args) {
-    Checks.checkNotNull(callee, "callee == null");
-    Checks.checkNotNull(methodName, "methodName == null");
+    Check.notNull(callee, "callee == null");
+    Check.notNull(methodName, "methodName == null");
     return MethodInvocation.invoke0(callee, methodName, args(args));
   }
 
@@ -684,36 +684,36 @@ public class Expressions {
 
   public static MethodInvocation invoke(
       Callee callee, TypeWitness witness, String methodName) {
-    Checks.checkNotNull(callee, "callee == null");
-    Checks.checkNotNull(witness, "witness == null");
-    Checks.checkNotNull(methodName, "methodName == null");
+    Check.notNull(callee, "callee == null");
+    Check.notNull(witness, "witness == null");
+    Check.notNull(methodName, "methodName == null");
     return MethodInvocation.invoke0(callee, witness, methodName, args());
   }
 
   public static MethodInvocation invoke(
       Callee callee, TypeWitness witness, String methodName,
       ArgumentsElement a1) {
-    Checks.checkNotNull(callee, "callee == null");
-    Checks.checkNotNull(witness, "witness == null");
-    Checks.checkNotNull(methodName, "methodName == null");
+    Check.notNull(callee, "callee == null");
+    Check.notNull(witness, "witness == null");
+    Check.notNull(methodName, "methodName == null");
     return MethodInvocation.invoke0(callee, witness, methodName, args(a1));
   }
 
   public static MethodInvocation invoke(
       Callee callee, TypeWitness witness, String methodName,
       ArgumentsElement a1, ArgumentsElement a2) {
-    Checks.checkNotNull(callee, "callee == null");
-    Checks.checkNotNull(witness, "witness == null");
-    Checks.checkNotNull(methodName, "methodName == null");
+    Check.notNull(callee, "callee == null");
+    Check.notNull(witness, "witness == null");
+    Check.notNull(methodName, "methodName == null");
     return MethodInvocation.invoke0(callee, witness, methodName, args(a1, a2));
   }
 
   public static MethodInvocation invoke(
       Callee callee, TypeWitness witness, String methodName,
       ArgumentsElement a1, ArgumentsElement a2, ArgumentsElement a3) {
-    Checks.checkNotNull(callee, "callee == null");
-    Checks.checkNotNull(witness, "witness == null");
-    Checks.checkNotNull(methodName, "methodName == null");
+    Check.notNull(callee, "callee == null");
+    Check.notNull(witness, "witness == null");
+    Check.notNull(methodName, "methodName == null");
     return MethodInvocation.invoke0(callee, witness, methodName, args(a1, a2, a3));
   }
 
@@ -722,45 +722,45 @@ public class Expressions {
   public static MethodInvocation invoke(
       Callee callee, TypeWitness witness, String methodName,
       ArgumentsElement a1, ArgumentsElement a2, ArgumentsElement a3, ArgumentsElement a4) {
-    Checks.checkNotNull(callee, "callee == null");
-    Checks.checkNotNull(witness, "witness == null");
-    Checks.checkNotNull(methodName, "methodName == null");
+    Check.notNull(callee, "callee == null");
+    Check.notNull(witness, "witness == null");
+    Check.notNull(methodName, "methodName == null");
     return MethodInvocation.invoke0(callee, witness, methodName, args(a1, a2, a3, a4));
   }
 
   public static MethodInvocation invoke(
       Callee callee, TypeWitness witness, String methodName,
       Iterable<? extends ArgumentsElement> args) {
-    Checks.checkNotNull(callee, "callee == null");
-    Checks.checkNotNull(witness, "witness == null");
-    Checks.checkNotNull(methodName, "methodName == null");
+    Check.notNull(callee, "callee == null");
+    Check.notNull(witness, "witness == null");
+    Check.notNull(methodName, "methodName == null");
     return MethodInvocation.invoke0(callee, witness, methodName, args(args));
   }
 
   public static Unqualified invoke(
       String methodName) {
-    Checks.checkNotNull(methodName, "methodName == null");
+    Check.notNull(methodName, "methodName == null");
     return MethodInvocation.invoke0(methodName, args());
   }
 
   public static Unqualified invoke(
       String methodName,
       ArgumentsElement a1) {
-    Checks.checkNotNull(methodName, "methodName == null");
+    Check.notNull(methodName, "methodName == null");
     return MethodInvocation.invoke0(methodName, args(a1));
   }
 
   public static Unqualified invoke(
       String methodName,
       ArgumentsElement a1, ArgumentsElement a2) {
-    Checks.checkNotNull(methodName, "methodName == null");
+    Check.notNull(methodName, "methodName == null");
     return MethodInvocation.invoke0(methodName, args(a1, a2));
   }
 
   public static Unqualified invoke(
       String methodName,
       ArgumentsElement a1, ArgumentsElement a2, ArgumentsElement a3) {
-    Checks.checkNotNull(methodName, "methodName == null");
+    Check.notNull(methodName, "methodName == null");
     return MethodInvocation.invoke0(methodName, args(a1, a2, a3));
   }
 
@@ -770,7 +770,7 @@ public class Expressions {
       ArgumentsElement a2,
       ArgumentsElement a3,
       ArgumentsElement a4) {
-    Checks.checkNotNull(methodName, "methodName == null");
+    Check.notNull(methodName, "methodName == null");
     return MethodInvocation.invoke0(methodName, args(a1, a2, a3, a4));
   }
 
@@ -781,7 +781,7 @@ public class Expressions {
       ArgumentsElement a3,
       ArgumentsElement a4,
       ArgumentsElement a5) {
-    Checks.checkNotNull(methodName, "methodName == null");
+    Check.notNull(methodName, "methodName == null");
     return MethodInvocation.invoke0(methodName, args(a1, a2, a3, a4, a5));
   }
 
@@ -793,7 +793,7 @@ public class Expressions {
       ArgumentsElement a4,
       ArgumentsElement a5,
       ArgumentsElement a6) {
-    Checks.checkNotNull(methodName, "methodName == null");
+    Check.notNull(methodName, "methodName == null");
     return MethodInvocation.invoke0(methodName, args(a1, a2, a3, a4, a5, a6));
   }
 
@@ -806,7 +806,7 @@ public class Expressions {
       ArgumentsElement a5,
       ArgumentsElement a6,
       ArgumentsElement a7) {
-    Checks.checkNotNull(methodName, "methodName == null");
+    Check.notNull(methodName, "methodName == null");
     return MethodInvocation.invoke0(methodName, args(a1, a2, a3, a4, a5, a6, a7));
   }
 
@@ -820,7 +820,7 @@ public class Expressions {
       ArgumentsElement a6,
       ArgumentsElement a7,
       ArgumentsElement a8) {
-    Checks.checkNotNull(methodName, "methodName == null");
+    Check.notNull(methodName, "methodName == null");
     return MethodInvocation.invoke0(methodName, args(a1, a2, a3, a4, a5, a6, a7, a8));
   }
 
@@ -835,13 +835,13 @@ public class Expressions {
       ArgumentsElement a7,
       ArgumentsElement a8,
       ArgumentsElement a9) {
-    Checks.checkNotNull(methodName, "methodName == null");
+    Check.notNull(methodName, "methodName == null");
     return MethodInvocation.invoke0(methodName, args(a1, a2, a3, a4, a5, a6, a7, a8, a9));
   }
 
   public static Unqualified invoke(
       String methodName, Iterable<? extends ArgumentsElement> args) {
-    Checks.checkNotNull(methodName, "methodName == null");
+    Check.notNull(methodName, "methodName == null");
     return MethodInvocation.invoke0(methodName, args(args));
   }
 
@@ -854,7 +854,7 @@ public class Expressions {
   }
 
   public static Literal l(Class<?> type) {
-    Checks.checkNotNull(type, "type == null");
+    Check.notNull(type, "type == null");
     return LiteralImpl.l0(type);
   }
 
@@ -875,72 +875,72 @@ public class Expressions {
   }
 
   public static Literal l(NamedClass className) {
-    Checks.checkNotNull(className, "className == null");
+    Check.notNull(className, "className == null");
     return LiteralImpl.l0(className);
   }
 
   public static Literal l(String s) {
-    Checks.checkNotNull(s, "s == null");
+    Check.notNull(s, "s == null");
     return LiteralImpl.l0(s);
   }
 
   public static LambdaExpression lambda(
       Identifier p1,
       LambdaBody body) {
-    Checks.checkNotNull(p1, "p1 == null");
-    Checks.checkNotNull(body, "body == null");
+    Check.notNull(p1, "p1 == null");
+    Check.notNull(body, "body == null");
     return LambdaExpressionImpl.lambda0(body, p1);
   }
 
   public static LambdaExpression lambda(
       Iterable<? extends LambdaParameter> params,
       LambdaBody body) {
-    Checks.checkNotNull(params, "params == null");
-    Checks.checkNotNull(body, "body == null");
+    Check.notNull(params, "params == null");
+    Check.notNull(body, "body == null");
     return LambdaExpressionImpl.lambda0(body, params);
   }
 
   public static LambdaExpression lambda(
       LambdaBody body) {
-    Checks.checkNotNull(body, "body == null");
+    Check.notNull(body, "body == null");
     return LambdaExpressionImpl.lambda0(body);
   }
 
   public static LambdaExpression lambda(
       LambdaParameter p1, LambdaParameter p2,
       LambdaBody body) {
-    Checks.checkNotNull(p1, "p1 == null");
-    Checks.checkNotNull(p2, "p2 == null");
-    Checks.checkNotNull(body, "body == null");
+    Check.notNull(p1, "p1 == null");
+    Check.notNull(p2, "p2 == null");
+    Check.notNull(body, "body == null");
     return LambdaExpressionImpl.lambda0(body, p1, p2);
   }
 
   public static LambdaExpression lambda(
       LambdaParameter p1, LambdaParameter p2, LambdaParameter p3,
       LambdaBody body) {
-    Checks.checkNotNull(p1, "p1 == null");
-    Checks.checkNotNull(p2, "p2 == null");
-    Checks.checkNotNull(p3, "p3 == null");
-    Checks.checkNotNull(body, "body == null");
+    Check.notNull(p1, "p1 == null");
+    Check.notNull(p2, "p2 == null");
+    Check.notNull(p3, "p3 == null");
+    Check.notNull(body, "body == null");
     return LambdaExpressionImpl.lambda0(body, p1, p2, p3);
   }
 
   public static LambdaExpression lambda(
       LambdaParameter p1, LambdaParameter p2, LambdaParameter p3, LambdaParameter p4,
       LambdaBody body) {
-    Checks.checkNotNull(p1, "p1 == null");
-    Checks.checkNotNull(p2, "p2 == null");
-    Checks.checkNotNull(p3, "p3 == null");
-    Checks.checkNotNull(p4, "p4 == null");
-    Checks.checkNotNull(body, "body == null");
+    Check.notNull(p1, "p1 == null");
+    Check.notNull(p2, "p2 == null");
+    Check.notNull(p3, "p3 == null");
+    Check.notNull(p4, "p4 == null");
+    Check.notNull(body, "body == null");
     return LambdaExpressionImpl.lambda0(body, p1, p2, p3, p4);
   }
 
   public static LambdaExpression lambda(
       ParameterCode p1,
       LambdaBody body) {
-    Checks.checkNotNull(p1, "p1 == null");
-    Checks.checkNotNull(body, "body == null");
+    Check.notNull(p1, "p1 == null");
+    Check.notNull(body, "body == null");
     return LambdaExpressionImpl.lambda0(body, p1);
   }
 
@@ -948,21 +948,21 @@ public class Expressions {
 
   public static RelationalExpression le(
       RelationalExpression lhs, ShiftExpression rhs) {
-    Checks.checkNotNull(lhs, "lhs == null");
-    Checks.checkNotNull(rhs, "rhs == null");
+    Check.notNull(lhs, "lhs == null");
+    Check.notNull(rhs, "rhs == null");
     return RelationalExpressionImpl.of0(RelationalOperator.LE, lhs, rhs);
   }
 
   public static ShiftExpression leftShift(ShiftExpression lhs, AdditiveExpression rhs) {
-    Checks.checkNotNull(lhs, "lhs == null");
-    Checks.checkNotNull(rhs, "rhs == null");
+    Check.notNull(lhs, "lhs == null");
+    Check.notNull(rhs, "rhs == null");
     return ShiftExpressionImpl.leftShift0(lhs, rhs);
   }
 
   public static RelationalExpression lt(
       RelationalExpression lhs, ShiftExpression rhs) {
-    Checks.checkNotNull(lhs, "lhs == null");
-    Checks.checkNotNull(rhs, "rhs == null");
+    Check.notNull(lhs, "lhs == null");
+    Check.notNull(rhs, "rhs == null");
     return RelationalExpressionImpl.of0(RelationalOperator.LT, lhs, rhs);
   }
 
@@ -970,23 +970,23 @@ public class Expressions {
 
   public static MultiplicativeExpression multiply(
       MultiplicativeExpression lhs, UnaryExpression rhs) {
-    Checks.checkNotNull(lhs, "lhs == null");
-    Checks.checkNotNull(rhs, "rhs == null");
+    Check.notNull(lhs, "lhs == null");
+    Check.notNull(rhs, "rhs == null");
     return MultiplicativeExpressionImpl.of0(MultiplicativeOperator.MULTIPLICATION, lhs, rhs);
   }
 
   // PostDecrementExpression
 
   public static EqualityExpression ne(EqualityExpression lhs, RelationalExpression rhs) {
-    Checks.checkNotNull(lhs, "lhs == null");
-    Checks.checkNotNull(rhs, "rhs == null");
+    Check.notNull(lhs, "lhs == null");
+    Check.notNull(rhs, "rhs == null");
     return EqualityExpressionImpl.ne0(lhs, rhs);
   }
 
   // PostIncrementExpression
 
   public static UnaryExpressionNotPlusMinus not(UnaryExpression expression) {
-    Checks.checkNotNull(expression, "expression == null");
+    Check.notNull(expression, "expression == null");
     return UnaryExpressionImpl.NotPlusOrMinus.of0(UnaryOperator.NOT, expression);
   }
 
@@ -994,44 +994,44 @@ public class Expressions {
 
   public static ConditionalOrExpression or(
       ConditionalOrExpression lhs, ConditionalAndExpression rhs) {
-    Checks.checkNotNull(lhs, "lhs == null");
-    Checks.checkNotNull(rhs, "rhs == null");
+    Check.notNull(lhs, "lhs == null");
+    Check.notNull(rhs, "rhs == null");
     return ConditionalOrExpressionImpl.or0(lhs, rhs);
   }
 
   // PreIncrementExpression
 
   public static ParenthesizedExpression parens(Expression expression) {
-    Checks.checkNotNull(expression, "expression == null");
+    Check.notNull(expression, "expression == null");
     return ParenthesizedExpressionImpl.parens0(expression);
   }
 
   // RelationalExpression
 
   public static PostDecrementExpression postDec(PostfixExpression expression) {
-    Checks.checkNotNull(expression, "expression == null");
+    Check.notNull(expression, "expression == null");
     return PostDecrementExpressionImpl.postDec0(expression);
   }
 
   public static PostIncrementExpression postInc(PostfixExpression expression) {
-    Checks.checkNotNull(expression, "expression == null");
+    Check.notNull(expression, "expression == null");
     return PostIncrementExpressionImpl.postInc0(expression);
   }
 
   public static PreDecrementExpression preDec(UnaryExpression expression) {
-    Checks.checkNotNull(expression, "expression == null");
+    Check.notNull(expression, "expression == null");
     return PreDecrementExpressionImpl.preDec0(expression);
   }
 
   public static PreIncrementExpression preInc(UnaryExpression expression) {
-    Checks.checkNotNull(expression, "expression == null");
+    Check.notNull(expression, "expression == null");
     return PreIncrementExpressionImpl.preInc0(expression);
   }
 
   public static MethodReference ref(
       MethodReferenceReferenceExpression expression, String methodName) {
-    Checks.checkNotNull(expression, "expression == null");
-    Checks.checkNotNull(methodName, "methodName == null");
+    Check.notNull(expression, "expression == null");
+    Check.notNull(methodName, "methodName == null");
     return MethodReferenceImpl.ref0(expression, methodName);
   }
 
@@ -1039,24 +1039,24 @@ public class Expressions {
 
   public static MethodReference ref(
       MethodReferenceReferenceExpression expression, TypeWitness witness, String methodName) {
-    Checks.checkNotNull(expression, "expression == null");
-    Checks.checkNotNull(witness, "witness == null");
-    Checks.checkNotNull(methodName, "methodName == null");
+    Check.notNull(expression, "expression == null");
+    Check.notNull(witness, "witness == null");
+    Check.notNull(methodName, "methodName == null");
     return MethodReferenceImpl.ref0(expression, witness, methodName);
   }
 
   public static MethodReference ref(
       NamedReferenceType typeName, String methodName) {
-    Checks.checkNotNull(typeName, "typeName == null");
-    Checks.checkNotNull(methodName, "methodName == null");
+    Check.notNull(typeName, "typeName == null");
+    Check.notNull(methodName, "methodName == null");
     return MethodReferenceImpl.ref0(typeName, methodName);
   }
 
   public static MethodReference ref(
       NamedReferenceType typeName, TypeWitness witness, String methodName) {
-    Checks.checkNotNull(typeName, "typeName == null");
-    Checks.checkNotNull(witness, "witness == null");
-    Checks.checkNotNull(methodName, "methodName == null");
+    Check.notNull(typeName, "typeName == null");
+    Check.notNull(witness, "witness == null");
+    Check.notNull(methodName, "methodName == null");
     return MethodReferenceImpl.ref0(typeName, witness, methodName);
   }
 
@@ -1064,54 +1064,54 @@ public class Expressions {
 
   public static MultiplicativeExpression remainder(
       MultiplicativeExpression lhs, UnaryExpression rhs) {
-    Checks.checkNotNull(lhs, "lhs == null");
-    Checks.checkNotNull(rhs, "rhs == null");
+    Check.notNull(lhs, "lhs == null");
+    Check.notNull(rhs, "rhs == null");
     return MultiplicativeExpressionImpl.of0(MultiplicativeOperator.REMAINDER, lhs, rhs);
   }
 
   public static ShiftExpression rightShift(ShiftExpression lhs, AdditiveExpression rhs) {
-    Checks.checkNotNull(lhs, "lhs == null");
-    Checks.checkNotNull(rhs, "rhs == null");
+    Check.notNull(lhs, "lhs == null");
+    Check.notNull(rhs, "rhs == null");
     return ShiftExpressionImpl.rightShift0(lhs, rhs);
   }
 
   public static AdditiveExpression subtract(AdditiveExpression lhs, MultiplicativeExpression rhs) {
-    Checks.checkNotNull(lhs, "lhs == null");
-    Checks.checkNotNull(rhs, "rhs == null");
+    Check.notNull(lhs, "lhs == null");
+    Check.notNull(rhs, "rhs == null");
     return AdditiveExpressionImpl.of0(AdditiveOperator.SUBTRACTION, lhs, rhs);
   }
 
   public static ConditionalExpression ternary(
       ConditionalOrExpression condition,
       Expression trueExpression, ConditionalExpression falseExpression) {
-    Checks.checkNotNull(condition, "condition == null");
-    Checks.checkNotNull(trueExpression, "trueExpression == null");
-    Checks.checkNotNull(falseExpression, "falseExpression == null");
+    Check.notNull(condition, "condition == null");
+    Check.notNull(trueExpression, "trueExpression == null");
+    Check.notNull(falseExpression, "falseExpression == null");
     return ConditionalExpressionImpl.ternary0(condition, trueExpression, falseExpression);
   }
 
   public static ConditionalExpression ternary(
       ConditionalOrExpression condition,
       Expression trueExpression, LambdaExpression falseExpression) {
-    Checks.checkNotNull(condition, "condition == null");
-    Checks.checkNotNull(trueExpression, "trueExpression == null");
-    Checks.checkNotNull(falseExpression, "falseExpression == null");
+    Check.notNull(condition, "condition == null");
+    Check.notNull(trueExpression, "trueExpression == null");
+    Check.notNull(falseExpression, "falseExpression == null");
     return ConditionalExpressionImpl.ternary0(condition, trueExpression, falseExpression);
   }
 
   public static UnaryExpression unaryMinus(UnaryExpression expression) {
-    Checks.checkNotNull(expression, "expression == null");
+    Check.notNull(expression, "expression == null");
     return UnaryExpressionImpl.Standard.of0(UnaryOperator.MINUS, expression);
   }
 
   public static UnaryExpression unaryPlus(UnaryExpression expression) {
-    Checks.checkNotNull(expression, "expression == null");
+    Check.notNull(expression, "expression == null");
     return UnaryExpressionImpl.Standard.of0(UnaryOperator.PLUS, expression);
   }
 
   public static ShiftExpression unsignedRightShift(ShiftExpression lhs, AdditiveExpression rhs) {
-    Checks.checkNotNull(lhs, "lhs == null");
-    Checks.checkNotNull(rhs, "rhs == null");
+    Check.notNull(lhs, "lhs == null");
+    Check.notNull(rhs, "rhs == null");
     return ShiftExpressionImpl.unsignedRightShift0(lhs, rhs);
   }
 
@@ -1120,29 +1120,29 @@ public class Expressions {
   }
 
   public static TypeWitness witness(Iterable<? extends NamedType> types) {
-    Checks.checkNotNull(types, "types == null");
+    Check.notNull(types, "types == null");
     return TypeWitness.witness0(types);
   }
 
   // UnaryExpression
 
   public static TypeWitness witness(NamedType t1) {
-    Checks.checkNotNull(t1, "t1 == null");
+    Check.notNull(t1, "t1 == null");
     return TypeWitness.witness0(t1);
   }
 
   public static TypeWitness witness(NamedType t1, NamedType t2) {
-    Checks.checkNotNull(t1, "t1 == null");
-    Checks.checkNotNull(t2, "t2 == null");
+    Check.notNull(t1, "t1 == null");
+    Check.notNull(t2, "t2 == null");
     return TypeWitness.witness0(t1, t2);
   }
 
   // UnaryExpressionNotPlusMinus
 
   public static TypeWitness witness(NamedType t1, NamedType t2, NamedType t3) {
-    Checks.checkNotNull(t1, "t1 == null");
-    Checks.checkNotNull(t2, "t2 == null");
-    Checks.checkNotNull(t3, "t3 == null");
+    Check.notNull(t1, "t1 == null");
+    Check.notNull(t2, "t2 == null");
+    Check.notNull(t3, "t3 == null");
     return TypeWitness.witness0(t1, t2, t3);
   }
 

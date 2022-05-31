@@ -18,13 +18,13 @@ package br.com.objectos.html.tmpl;
 import br.com.objectos.html.spi.tmpl.Marker;
 import br.com.objectos.html.spi.tmpl.Renderer;
 import br.com.objectos.html.writer.SimpleTemplateWriter;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public abstract class AbstractTemplate extends FragmentOrTemplate implements Template {
 
   @Override
   public final void acceptTemplateDsl(TemplateDsl dsl) {
-    this.dsl = Checks.checkNotNull(dsl, "dsl == null");
+    this.dsl = Check.notNull(dsl, "dsl == null");
 
     try {
       definition();

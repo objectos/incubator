@@ -18,7 +18,7 @@ package br.com.objectos.code.java.statement;
 import br.com.objectos.code.java.element.Keywords;
 import br.com.objectos.code.java.expression.Expression;
 import br.com.objectos.code.java.io.CodeWriter;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public class SynchronizedStatement extends AbstractSimpleStatement {
 
@@ -31,8 +31,8 @@ public class SynchronizedStatement extends AbstractSimpleStatement {
   }
 
   public static SynchronizedStatement _synchronized(Expression lock, Block body) {
-    Checks.checkNotNull(lock, "lock == null");
-    Checks.checkNotNull(body, "body == null");
+    Check.notNull(lock, "lock == null");
+    Check.notNull(body, "body == null");
     return new SynchronizedStatement(lock, body);
   }
 

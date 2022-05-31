@@ -18,7 +18,7 @@ package br.com.objectos.code.java.statement;
 import br.com.objectos.code.java.element.Keywords;
 import br.com.objectos.code.java.expression.Expression;
 import br.com.objectos.code.java.io.CodeWriter;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public class AssertStatement extends AbstractSimpleStatement {
 
@@ -31,13 +31,13 @@ public class AssertStatement extends AbstractSimpleStatement {
   }
 
   public static AssertStatement _assert(Expression expression) {
-    Checks.checkNotNull(expression, "expression == null");
+    Check.notNull(expression, "expression == null");
     return new AssertStatement(expression, null);
   }
 
   public static AssertStatement _assert(Expression expression, Expression detailMessage) {
-    Checks.checkNotNull(expression, "expression == null");
-    Checks.checkNotNull(detailMessage, "detailMessage == null");
+    Check.notNull(expression, "expression == null");
+    Check.notNull(detailMessage, "detailMessage == null");
     return new AssertStatement(expression, detailMessage);
   }
 

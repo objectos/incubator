@@ -15,7 +15,7 @@
  */
 package br.com.objectos.core.array;
 
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 /**
  * <p>
@@ -75,7 +75,7 @@ public final class DoubleArrays {
    *         if {@code requiredIndex < 0}
    */
   public static double[] copyIfNecessary(double[] array, int requiredIndex) {
-    Checks.checkArgument(requiredIndex >= 0, "requiredIndex cannot be negative");
+    Check.argument(requiredIndex >= 0, "requiredIndex cannot be negative");
 
     int length;
     length = array.length;

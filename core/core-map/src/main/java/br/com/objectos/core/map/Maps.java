@@ -25,7 +25,7 @@ import java.util.Map.Entry;
 import java.util.NoSuchElementException;
 import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 /**
  * This class provides {@code static} factory methods for the JDK
@@ -155,7 +155,7 @@ public final class Maps {
    * or throws an exception if the key has no mapping.
    */
   static <V> V getIfPresent(Map<?, V> map, Object key) throws NoSuchElementException {
-    Checks.checkNotNull(map, "map == null");
+    Check.notNull(map, "map == null");
 
     V value;
     value = map.get(key);
@@ -171,7 +171,7 @@ public final class Maps {
   }
 
   static <K, V> V getOrDefault(Map<K, V> map, K key, V defaultValue) {
-    Checks.checkNotNull(key, "key == null");
+    Check.notNull(key, "key == null");
 
     V result;
     result = map.get(key);

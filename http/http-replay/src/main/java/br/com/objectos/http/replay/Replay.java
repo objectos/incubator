@@ -17,7 +17,7 @@ package br.com.objectos.http.replay;
 
 import br.com.objectos.concurrent.IoWorker;
 import java.net.SocketAddress;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public final class Replay {
 
@@ -27,9 +27,9 @@ public final class Replay {
       ReplayAdapter adapter,
       IoWorker ioWorker,
       SocketAddress remoteAddress) {
-    Checks.checkNotNull(adapter, "adapter == null");
-    Checks.checkNotNull(ioWorker, "ioWorker == null");
-    Checks.checkNotNull(remoteAddress, "remoteAddress == null");
+    Check.notNull(adapter, "adapter == null");
+    Check.notNull(ioWorker, "ioWorker == null");
+    Check.notNull(remoteAddress, "remoteAddress == null");
 
     ByteSourceJob byteSourceJob;
     byteSourceJob = new ByteSourceJob(adapter, ioWorker, remoteAddress);

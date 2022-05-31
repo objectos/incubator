@@ -26,7 +26,7 @@ import br.com.objectos.latest.Concrete;
 import java.io.IOException;
 import java.nio.file.WatchEvent;
 import java.util.Set;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 @Concrete.Bridge
 class FactoryJava7 extends FactoryJavaAny {
@@ -57,7 +57,7 @@ class FactoryJava7 extends FactoryJavaAny {
 
   @Override
   final Watch.Service create(Option[] options) throws IOException {
-    Checks.checkNotNull(options, "options == null");
+    Check.notNull(options, "options == null");
 
     Builder builder;
     builder = new WatchServiceJava7.Builder();

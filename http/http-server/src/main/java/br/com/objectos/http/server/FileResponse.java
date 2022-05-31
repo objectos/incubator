@@ -19,14 +19,14 @@ import br.com.objectos.fs.RegularFile;
 import br.com.objectos.http.media.MediaType;
 import br.com.objectos.http.media.MediaTypes;
 import java.io.IOException;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public class FileResponse implements HttpAction, Response {
 
   private final RegularFile file;
 
   public FileResponse(RegularFile file) {
-    this.file = Checks.checkNotNull(file, "file == null");
+    this.file = Check.notNull(file, "file == null");
   }
 
   @Override

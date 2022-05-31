@@ -43,7 +43,7 @@ import br.com.objectos.css.type.StringType;
 import br.com.objectos.css.type.UriType;
 import br.com.objectos.css.type.Value;
 import br.com.objectos.css.type.Zero;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public abstract class AbstractStyleSheet extends GeneratedStyleSheet
     implements
@@ -65,7 +65,7 @@ public abstract class AbstractStyleSheet extends GeneratedStyleSheet
       throw new IllegalStateException("Only one Dsl instance per time.");
     }
 
-    this.dsl = Checks.checkNotNull(dsl, "dsl == null");
+    this.dsl = Check.notNull(dsl, "dsl == null");
 
     try {
       this.dsl.clearRulePrefix();
@@ -163,7 +163,7 @@ public abstract class AbstractStyleSheet extends GeneratedStyleSheet
   }
 
   protected final void install(StyleSheet sheet) {
-    Checks.checkNotNull(sheet, "sheet == null");
+    Check.notNull(sheet, "sheet == null");
 
     sheet.acceptStyleSheetDsl(dsl);
   }

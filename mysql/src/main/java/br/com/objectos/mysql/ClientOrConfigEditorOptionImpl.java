@@ -15,7 +15,7 @@
  */
 package br.com.objectos.mysql;
 
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 final class ClientOrConfigEditorOptionImpl
     extends AbstractOption
@@ -30,7 +30,7 @@ final class ClientOrConfigEditorOptionImpl
   }
 
   public static ClientOrConfigEditorOption user(String user) {
-    Checks.checkNotNull(user, "user == null");
+    Check.notNull(user, "user == null");
 
     return new ClientOrConfigEditorOptionImpl("user", user);
   }

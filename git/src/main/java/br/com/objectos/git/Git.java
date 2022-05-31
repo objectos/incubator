@@ -24,7 +24,7 @@ import java.security.SecureRandom;
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.Random;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 import objectos.lang.Throwables;
 
 final class Git {
@@ -81,7 +81,7 @@ final class Git {
   private Git() {}
 
   static int checkBufferSize(int size) {
-    Checks.checkArgument(size >= 64, "bufferSize minimum value is 64 bytes");
+    Check.argument(size >= 64, "bufferSize minimum value is 64 bytes");
 
     return size;
   }

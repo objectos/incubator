@@ -28,7 +28,7 @@ import br.com.objectos.smtp.mail.ReversePathFacade;
 import br.com.objectos.smtp.mail.SimpleReversePathFacade;
 import java.nio.charset.Charset;
 import java.nio.charset.CharsetDecoder;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 import objectos.lang.Note1;
 import objectos.lang.NoteSink;
 
@@ -142,23 +142,23 @@ public final class NonBlockingServer implements Server {
 
     @Override
     public final void setListenSmtp(SocketChannelFactory listen) {
-      Checks.checkState(listenSmtp == null, "already set");
+      Check.state(listenSmtp == null, "already set");
 
-      listenSmtp = Checks.checkNotNull(listen, "listen == null");
+      listenSmtp = Check.notNull(listen, "listen == null");
     }
 
     @Override
     public final void setLogger(NoteSink logger) {
-      Checks.checkState(this.logger == null, "already set");
+      Check.state(this.logger == null, "already set");
 
-      this.logger = Checks.checkNotNull(logger, "logger == null");
+      this.logger = Check.notNull(logger, "logger == null");
     }
 
     @Override
     public final void setMailStore(MailStore store) {
-      Checks.checkState(mailStore == null, "already set");
+      Check.state(mailStore == null, "already set");
 
-      mailStore = Checks.checkNotNull(store, "store == null");
+      mailStore = Check.notNull(store, "store == null");
     }
 
   }

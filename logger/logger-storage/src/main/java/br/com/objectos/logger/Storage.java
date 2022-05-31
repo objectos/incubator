@@ -23,7 +23,7 @@ import br.com.objectos.fs.RegularFile;
 import br.com.objectos.fs.ResolvedPath;
 import br.com.objectos.fs.watch.Watch;
 import java.io.IOException;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 abstract class Storage {
 
@@ -32,7 +32,7 @@ abstract class Storage {
   Storage() {}
 
   public static Storage get(Directory directory) throws IOException {
-    Checks.checkNotNull(directory, "directory == null");
+    Check.notNull(directory, "directory == null");
 
     if (directory.isEmpty()) {
       return StorageV1.create(directory);

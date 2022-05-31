@@ -19,7 +19,7 @@ import br.com.objectos.concurrent.IoWorker;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.util.Arrays;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public final class RequestParser extends AbstractHttpParser<RequestHeader> {
 
@@ -37,9 +37,9 @@ public final class RequestParser extends AbstractHttpParser<RequestHeader> {
 
   public static RequestParser create(
       ByteBuffer byteBuffer, CharBuffer charBuffer, IoWorker ioWorker) {
-    Checks.checkNotNull(byteBuffer, "byteBuffer == null");
-    Checks.checkNotNull(charBuffer, "charBuffer == null");
-    Checks.checkNotNull(ioWorker, "ioWorker == null");
+    Check.notNull(byteBuffer, "byteBuffer == null");
+    Check.notNull(charBuffer, "charBuffer == null");
+    Check.notNull(ioWorker, "ioWorker == null");
 
     return new RequestParser(byteBuffer, charBuffer, ioWorker);
   }

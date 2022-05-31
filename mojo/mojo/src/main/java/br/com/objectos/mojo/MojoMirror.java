@@ -15,7 +15,7 @@
  */
 package br.com.objectos.mojo;
 
-import objectos.lang.Checks;
+import objectos.lang.Check;
 import org.apache.maven.settings.Mirror;
 
 public final class MojoMirror implements MojoRuntimeElement {
@@ -32,9 +32,9 @@ public final class MojoMirror implements MojoRuntimeElement {
       MojoMirrorElement e1,
       MojoMirrorElement e2,
       MojoMirrorElement e3) {
-    Checks.checkNotNull(e1, "e1 == null");
-    Checks.checkNotNull(e2, "e2 == null");
-    Checks.checkNotNull(e3, "e3 == null");
+    Check.notNull(e1, "e1 == null");
+    Check.notNull(e2, "e2 == null");
+    Check.notNull(e3, "e3 == null");
 
     MojoMirror m;
     m = new MojoMirror();
@@ -47,7 +47,7 @@ public final class MojoMirror implements MojoRuntimeElement {
   }
 
   public static MojoMirrorElement mirrorOf(final String value) {
-    Checks.checkNotNull(value, "value == null");
+    Check.notNull(value, "value == null");
 
     return new MojoMirrorElement() {
       @Override

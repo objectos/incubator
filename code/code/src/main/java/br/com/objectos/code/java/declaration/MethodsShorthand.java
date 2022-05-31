@@ -15,7 +15,7 @@
  */
 package br.com.objectos.code.java.declaration;
 
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public class MethodsShorthand implements ClassCodeElement {
 
@@ -26,7 +26,7 @@ public class MethodsShorthand implements ClassCodeElement {
   }
 
   public static MethodsShorthand methods(Iterable<MethodCode> methods) {
-    Checks.checkNotNull(methods, "methods == null");
+    Check.notNull(methods, "methods == null");
     return new MethodsShorthand(methods);
   }
 
@@ -35,7 +35,7 @@ public class MethodsShorthand implements ClassCodeElement {
     int index = 0;
 
     for (MethodCode method : methods) {
-      Checks.checkNotNull(method, "methods[" + index + "] == null");
+      Check.notNull(method, "methods[" + index + "] == null");
       builder.addBodyElement0(method);
     }
   }

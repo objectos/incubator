@@ -20,7 +20,7 @@ import br.com.objectos.css.select.Combinator;
 import br.com.objectos.css.sheet.CompiledStyleSheet;
 import br.com.objectos.css.type.ColorHex;
 import java.io.IOException;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public class MinifiedCssWriter extends CssWriter {
 
@@ -29,7 +29,7 @@ public class MinifiedCssWriter extends CssWriter {
   }
 
   public static MinifiedCssWriter of(Appendable out) {
-    Checks.checkNotNull(out, "out == null");
+    Check.notNull(out, "out == null");
 
     return new MinifiedCssWriter(out);
   }

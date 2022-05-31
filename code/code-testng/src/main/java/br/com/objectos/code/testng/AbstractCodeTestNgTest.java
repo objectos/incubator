@@ -16,7 +16,7 @@
 package br.com.objectos.code.testng;
 
 import br.com.objectos.code.testing.TestingEnvironment;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 import org.testng.IHookCallBack;
 import org.testng.IHookable;
 import org.testng.ITestResult;
@@ -36,7 +36,7 @@ public abstract class AbstractCodeTestNgTest implements IHookable, TestingEnviro
 
   @Override
   public final void setTestingEnvironment(TestingEnvironment testingEnv) {
-    this.testingEnv = Checks.checkNotNull(testingEnv, "testingEnv");
+    this.testingEnv = Check.notNull(testingEnv, "testingEnv");
 
     runner.runTestMethod();
   }

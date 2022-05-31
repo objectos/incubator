@@ -16,7 +16,7 @@
 package br.com.objectos.core.array;
 
 import java.lang.reflect.Array;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 /**
  * <p>
@@ -78,7 +78,7 @@ public final class ObjectArrays {
    */
   @SuppressWarnings("unchecked")
   public static <E> E[] copyIfNecessary(E[] array, int requiredIndex) {
-    Checks.checkArgument(requiredIndex >= 0, "requiredIndex cannot be negative");
+    Check.argument(requiredIndex >= 0, "requiredIndex cannot be negative");
 
     int length;
     length = array.length;

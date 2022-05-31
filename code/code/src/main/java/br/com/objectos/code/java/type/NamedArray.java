@@ -23,20 +23,20 @@ import br.com.objectos.code.java.expression.MethodReference;
 import br.com.objectos.code.java.expression.TypeWitness;
 import br.com.objectos.code.java.io.CodeWriter;
 import br.com.objectos.code.java.io.JavaFileImportSet;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public abstract class NamedArray extends NamedReferenceType {
 
   NamedArray() {}
 
   public static NamedArray of(NamedArray type) {
-    Checks.checkNotNull(type, "type == null");
+    Check.notNull(type, "type == null");
 
     return new MultiDimension(type);
   }
 
   public static NamedArray of(NamedSingleDimensionArrayComponent type) {
-    Checks.checkNotNull(type, "type == null");
+    Check.notNull(type, "type == null");
 
     return new SingleDimension(type);
   }

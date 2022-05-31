@@ -15,7 +15,7 @@
  */
 package br.com.objectos.mysql;
 
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 final class PasswordOption extends AbstractOption implements ClientOrConfigEditorOption {
 
@@ -24,7 +24,7 @@ final class PasswordOption extends AbstractOption implements ClientOrConfigEdito
   }
 
   public static ClientOrConfigEditorOption password(String password) {
-    Checks.checkNotNull(password, "password == null");
+    Check.notNull(password, "password == null");
 
     return new PasswordOption("password", password);
   }

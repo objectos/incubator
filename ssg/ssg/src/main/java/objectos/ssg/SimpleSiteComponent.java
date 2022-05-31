@@ -16,7 +16,7 @@
 package objectos.ssg;
 
 import br.com.objectos.core.list.ImmutableList;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 import objectos.ssg.Site.Context;
 
 public class SimpleSiteComponent
@@ -28,9 +28,9 @@ public class SimpleSiteComponent
 
   @Override
   public final void configure(Context context) {
-    Checks.checkState(this.context == null, "context was already set");
+    Check.state(this.context == null, "context was already set");
 
-    this.context = Checks.checkNotNull(context, "generator == null");
+    this.context = Check.notNull(context, "generator == null");
 
     configure();
   }

@@ -18,7 +18,7 @@ package objectos.ssg;
 import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.html.attribute.StandardAttributeName.Href;
 import br.com.objectos.html.tmpl.AbstractFragment;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 import objectos.ssg.Site.Context;
 
 public abstract class SiteFragment extends AbstractFragment
@@ -32,9 +32,9 @@ public abstract class SiteFragment extends AbstractFragment
 
   @Override
   public final void configure(Context context) {
-    Checks.checkState(this.context == null, "context was already set");
+    Check.state(this.context == null, "context was already set");
 
-    this.context = Checks.checkNotNull(context, "context == null");
+    this.context = Check.notNull(context, "context == null");
 
     configure();
   }

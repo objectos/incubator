@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.Deque;
 import java.util.Iterator;
 import java.util.List;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 class ValueList {
 
@@ -33,9 +33,9 @@ class ValueList {
   }
 
   public final Object get() {
-    Checks.checkState(stack.size() == 1, "stacks != 1");
+    Check.state(stack.size() == 1, "stacks != 1");
     List<Object> list = stack.pop();
-    Checks.checkState(list.size() == 1, "list != 1");
+    Check.state(list.size() == 1, "list != 1");
     return list.get(0);
   }
 

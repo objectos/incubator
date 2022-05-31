@@ -19,14 +19,14 @@ import br.com.objectos.code.java.element.Keywords;
 import br.com.objectos.code.java.expression.Expressions;
 import br.com.objectos.code.java.expression.Identifier;
 import br.com.objectos.code.java.io.CodeWriter;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public abstract class ContinueStatement extends AbstractSimpleStatement {
 
   protected ContinueStatement() {}
 
   public static ContinueStatement _continue(Identifier id) {
-    Checks.checkNotNull(id, "id == null");
+    Check.notNull(id, "id == null");
     return new WithLabelContinueStatement(id);
   }
 

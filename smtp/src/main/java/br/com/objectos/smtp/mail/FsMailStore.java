@@ -30,7 +30,7 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.util.UUID;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public final class FsMailStore implements MailStore {
 
@@ -47,7 +47,7 @@ public final class FsMailStore implements MailStore {
   }
 
   public static FsMailStore create(Directory directory) throws ConfigurationException {
-    Checks.checkNotNull(directory, "directory == null");
+    Check.notNull(directory, "directory == null");
 
     Directory mailbox;
 

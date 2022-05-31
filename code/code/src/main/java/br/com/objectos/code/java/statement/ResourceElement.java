@@ -21,7 +21,7 @@ import br.com.objectos.code.java.io.CodeWriter;
 import br.com.objectos.code.java.statement.TryStatement.Builder;
 import br.com.objectos.code.java.type.NamedClass;
 import br.com.objectos.code.java.type.NamedType;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public class ResourceElement extends AbstractCodeElement implements TryStatementElement {
 
@@ -36,9 +36,9 @@ public class ResourceElement extends AbstractCodeElement implements TryStatement
   }
 
   public static ResourceElement resource(Class<?> type, Identifier id, VariableInitializer init) {
-    Checks.checkNotNull(type, "type == null");
-    Checks.checkNotNull(id, "id == null");
-    Checks.checkNotNull(init, "init == null");
+    Check.notNull(type, "type == null");
+    Check.notNull(id, "id == null");
+    Check.notNull(init, "init == null");
     return new ResourceElement(NamedClass.of(type), id, init);
   }
 

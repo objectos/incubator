@@ -20,7 +20,7 @@ import br.com.objectos.concurrent.CpuWorker;
 import br.com.objectos.concurrent.StageComputationTask;
 import br.com.objectos.core.set.ImmutableSet;
 import br.com.objectos.fs.Directory;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 import objectos.lang.ToString;
 import objectos.lang.ToStringObject;
 
@@ -164,12 +164,12 @@ public abstract class StageGitCommand<V>
   @Override
   public final Computation<V> submitAsync(
       GitCommandExecutor executor, CpuWorker cpuWorker) {
-    Checks.checkState(git == null, "The same command must not be submitted more than once");
-    Checks.checkNotNull(executor, "executor == null");
-    Checks.checkNotNull(cpuWorker, "cpuWorker == null");
+    Check.state(git == null, "The same command must not be submitted more than once");
+    Check.notNull(executor, "executor == null");
+    Check.notNull(cpuWorker, "cpuWorker == null");
 
     synchronized (this) {
-      Checks.checkState(git == null, "The same command must not be submitted more than once");
+      Check.state(git == null, "The same command must not be submitted more than once");
 
       git = executor;
     }
@@ -472,7 +472,7 @@ public abstract class StageGitCommand<V>
   }
 
   private GitCommandExecutor checkGit() {
-    Checks.checkState(git != null, "command not submitted or already consumed");
+    Check.state(git != null, "command not submitted or already consumed");
 
     return git;
   }

@@ -15,7 +15,7 @@
  */
 package br.com.objectos.git;
 
-import objectos.lang.Checks;
+import objectos.lang.Check;
 import objectos.lang.HashCode;
 import objectos.lang.ToString;
 import objectos.lang.ToStringObject;
@@ -174,7 +174,7 @@ public final class Identification implements ToStringObject {
    */
   @Deprecated
   public final void setEmail(String newEmail) {
-    email = Checks.checkNotNull(newEmail, "newEmail == null");
+    email = Check.notNull(newEmail, "newEmail == null");
   }
 
   /**
@@ -188,7 +188,7 @@ public final class Identification implements ToStringObject {
    */
   @Deprecated
   public final void setName(String newName) {
-    name = Checks.checkNotNull(newName, "newName == null");
+    name = Check.notNull(newName, "newName == null");
   }
 
   /**
@@ -217,8 +217,8 @@ public final class Identification implements ToStringObject {
    * @since 3
    */
   public final Identification withIdentity(String newName, String newEmail) {
-    Checks.checkNotNull(newName, "newName == null");
-    Checks.checkNotNull(newEmail, "newEmail == null");
+    Check.notNull(newName, "newName == null");
+    Check.notNull(newEmail, "newEmail == null");
 
     return new Identification(newName, newEmail, seconds, gitTimeZone);
   }

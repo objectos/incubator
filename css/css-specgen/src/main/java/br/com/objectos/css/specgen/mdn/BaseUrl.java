@@ -16,7 +16,7 @@
 package br.com.objectos.css.specgen.mdn;
 
 import java.io.IOException;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
@@ -25,7 +25,7 @@ public class BaseUrl {
   private final String value;
 
   public BaseUrl(String value) {
-    this.value = Checks.checkNotNull(value, "value == null");
+    this.value = Check.notNull(value, "value == null");
   }
 
   @Override

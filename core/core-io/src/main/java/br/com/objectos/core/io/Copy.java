@@ -18,7 +18,7 @@ package br.com.objectos.core.io;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 /**
  * Provides {@code static} methods for copying all bytes from one object to
@@ -98,8 +98,8 @@ public final class Copy {
    */
   public static long sources(
       InputStreamSource src, OutputStreamSource dst, byte[] buffer) throws IOException {
-    Checks.checkNotNull(src, "src == null");
-    Checks.checkNotNull(dst, "dst == null");
+    Check.notNull(src, "src == null");
+    Check.notNull(dst, "dst == null");
     checkBuffer(buffer);
 
     try (var in = src.openInputStream(); var out = dst.openOutputStream()) {
@@ -145,9 +145,9 @@ public final class Copy {
    *         cannot be closed
    */
   public static long streams(InputStream src, OutputStream dst, byte[] buffer) throws IOException {
-    Checks.checkNotNull(src, "src == null");
-    Checks.checkNotNull(dst, "dst == null");
-    Checks.checkNotNull(buffer, "buffer == null");
+    Check.notNull(src, "src == null");
+    Check.notNull(dst, "dst == null");
+    Check.notNull(buffer, "buffer == null");
 
     return copyUnchecked(src, dst, buffer);
   }
@@ -217,8 +217,8 @@ public final class Copy {
    */
   public static long streamToSource(
       InputStream src, OutputStreamSource dst, byte[] buffer) throws IOException {
-    Checks.checkNotNull(src, "src == null");
-    Checks.checkNotNull(dst, "dst == null");
+    Check.notNull(src, "src == null");
+    Check.notNull(dst, "dst == null");
     checkBuffer(buffer);
 
     try (var out = dst.openOutputStream()) {
@@ -227,13 +227,13 @@ public final class Copy {
   }
 
   static void checkBuffer(byte[] buffer) {
-    Checks.checkNotNull(buffer, "buffer == null");
-    Checks.checkArgument(buffer.length > 0, "buffer.length == 0");
+    Check.notNull(buffer, "buffer == null");
+    Check.argument(buffer.length > 0, "buffer.length == 0");
   }
 
   static void checkBuffer(char[] buffer) {
-    Checks.checkNotNull(buffer, "buffer == null");
-    Checks.checkArgument(buffer.length > 0, "buffer.length == 0");
+    Check.notNull(buffer, "buffer == null");
+    Check.argument(buffer.length > 0, "buffer.length == 0");
   }
 
   static long copyUnchecked(InputStream in, OutputStream out, byte[] buffer) throws IOException {
@@ -271,8 +271,8 @@ public final class Copy {
   static long transferTo(
       InputStreamSource source, OutputStreamSource destination, byte[] buffer)
       throws IOException {
-    Checks.checkNotNull(destination, "destination == null");
-    Checks.checkNotNull(buffer, "buffer == null");
+    Check.notNull(destination, "destination == null");
+    Check.notNull(buffer, "buffer == null");
 
     try (var in = source.openInputStream(); var out = destination.openOutputStream()) {
       return Copy.copyUnchecked(in, out, buffer);

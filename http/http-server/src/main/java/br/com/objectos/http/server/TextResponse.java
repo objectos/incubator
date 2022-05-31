@@ -17,7 +17,7 @@ package br.com.objectos.http.server;
 
 import br.com.objectos.http.media.MediaType;
 import br.com.objectos.http.media.TextType;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public class TextResponse implements Response {
 
@@ -26,7 +26,7 @@ public class TextResponse implements Response {
   private final String text;
 
   public TextResponse(String text) {
-    this.text = Checks.checkNotNull(text, "text == null");
+    this.text = Check.notNull(text, "text == null");
   }
 
   @Override

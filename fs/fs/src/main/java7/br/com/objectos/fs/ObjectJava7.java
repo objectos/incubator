@@ -41,7 +41,7 @@ import java.nio.file.attribute.BasicFileAttributes;
 import java.nio.file.attribute.FileAttribute;
 import java.nio.file.attribute.FileTime;
 import java.util.Iterator;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 import objectos.lang.OperatingSystem;
 
 @Bridge
@@ -74,7 +74,7 @@ abstract class ObjectJava7 extends ObjectJavaAny {
   @Override
   public final <R, P> R acceptPathNameVisitor(
       PathNameVisitor<R, P> visitor, P p) throws IOException {
-    Checks.checkNotNull(visitor, "visitor == null");
+    Check.notNull(visitor, "visitor == null");
 
     try {
       BasicFileAttributes attributes;
@@ -120,7 +120,7 @@ abstract class ObjectJava7 extends ObjectJavaAny {
   @Override
   public final RegularFile createRegularFile(
       RegularFileCreateOption... options) throws IOException {
-    Checks.checkNotNull(options, "options == null");
+    Check.notNull(options, "options == null");
 
     FileAttribute<?>[] attributes;
 
@@ -191,7 +191,7 @@ abstract class ObjectJava7 extends ObjectJavaAny {
 
   @Override
   public final boolean is(RegularFileIsOption option) throws IOException {
-    Checks.checkNotNull(option, "option == null");
+    Check.notNull(option, "option == null");
 
     return option.is(delegate);
   }
@@ -238,9 +238,9 @@ abstract class ObjectJava7 extends ObjectJavaAny {
 
   @Override
   public final ResolvedPath resolve(Path pathName) {
-    Checks.checkNotNull(pathName, "pathName == null");
+    Check.notNull(pathName, "pathName == null");
 
-    Checks.checkArgument(!pathName.isAbsolute(), "pathName is absolute");
+    Check.argument(!pathName.isAbsolute(), "pathName is absolute");
 
     Path resolved;
     resolved = delegate.resolve(pathName);
@@ -274,7 +274,7 @@ abstract class ObjectJava7 extends ObjectJavaAny {
 
   @Override
   public final void visitContents(DirectoryContentsVisitor visitor) throws IOException {
-    Checks.checkNotNull(visitor, "visitor == null");
+    Check.notNull(visitor, "visitor == null");
 
     try (DirectoryStream<Path> entries = Files.newDirectoryStream(delegate)) {
       for (Path entry : entries) {
@@ -310,12 +310,12 @@ abstract class ObjectJava7 extends ObjectJavaAny {
 
   @Override
   final ObjectJavaAny resolve0(String firstName, String[] rest) {
-    Checks.checkNotNull(firstName, "firstName == null");
+    Check.notNull(firstName, "firstName == null");
 
     Path path;
     path = Paths.get(firstName, rest);
 
-    Checks.checkArgument(!path.isAbsolute(), "pathName is absolute");
+    Check.argument(!path.isAbsolute(), "pathName is absolute");
 
     Path resolved;
     resolved = delegate.resolve(path);
@@ -325,14 +325,14 @@ abstract class ObjectJava7 extends ObjectJavaAny {
 
   @Override
   final ObjectJavaAny resolveChild0(String fileName, String variableName) {
-    Checks.checkNotNull(fileName, variableName, " == null");
+    Check.notNull(fileName, variableName, " == null");
 
-    Checks.checkArgument(!fileName.equals(""), variableName, " is empty");
+    Check.argument(!fileName.equals(""), variableName, " is empty");
 
     Path path;
     path = Paths.get(fileName);
 
-    Checks.checkArgument(!path.isAbsolute(), variableName, " is absolute");
+    Check.argument(!path.isAbsolute(), variableName, " is absolute");
 
     Path resolved;
     resolved = delegate.resolve(path);
@@ -342,7 +342,7 @@ abstract class ObjectJava7 extends ObjectJavaAny {
     Path parent;
     parent = resolved.getParent();
 
-    Checks.checkArgument(
+    Check.argument(
         delegate.equals(parent), variableName,
         " does not resolve to a child of this directory"
     );
@@ -391,7 +391,7 @@ abstract class ObjectJava7 extends ObjectJavaAny {
   private ObjectJavaAny newDescendant(Path resolved) {
     resolved = resolved.normalize();
 
-    Checks.checkArgument(resolved.startsWith(delegate), "pathName is not a descendant");
+    Check.argument(resolved.startsWith(delegate), "pathName is not a descendant");
 
     return new ObjectImpl(resolved);
   }

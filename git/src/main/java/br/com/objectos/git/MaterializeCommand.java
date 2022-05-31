@@ -21,7 +21,7 @@ import br.com.objectos.fs.Directory;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 import objectos.lang.ToString;
 
 /**
@@ -69,11 +69,11 @@ public final class MaterializeCommand extends StageGitCommand<Directory> {
   public MaterializeCommand(Directory source,
                             ObjectId commit,
                             Directory target) {
-    this.source = Checks.checkNotNull(source, "source == null");
+    this.source = Check.notNull(source, "source == null");
 
-    this.objectId = Checks.checkNotNull(commit, "commit == null");
+    this.objectId = Check.notNull(commit, "commit == null");
 
-    this.target = Checks.checkNotNull(target, "target == null");
+    this.target = Check.notNull(target, "target == null");
   }
 
   /**
@@ -90,11 +90,11 @@ public final class MaterializeCommand extends StageGitCommand<Directory> {
   public MaterializeCommand(Directory source,
                             RefName ref,
                             Directory target) {
-    this.source = Checks.checkNotNull(source, "source == null");
+    this.source = Check.notNull(source, "source == null");
 
-    this.ref = Checks.checkNotNull(ref, "ref == null");
+    this.ref = Check.notNull(ref, "ref == null");
 
-    this.target = Checks.checkNotNull(target, "target == null");
+    this.target = Check.notNull(target, "target == null");
   }
 
   /**

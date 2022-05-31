@@ -15,7 +15,7 @@
  */
 package br.com.objectos.mojo;
 
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public final class MojoUrl implements MojoMirrorElement {
 
@@ -26,7 +26,7 @@ public final class MojoUrl implements MojoMirrorElement {
   }
 
   public static MojoUrl url(String url) {
-    Checks.checkNotNull(url, "url == null");
+    Check.notNull(url, "url == null");
 
     return new MojoUrl(url);
   }

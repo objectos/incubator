@@ -20,7 +20,7 @@ import java.io.File;
 import java.net.URI;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 @Bridge
 class LocalFsJava7 extends LocalFsJavaAny {
@@ -34,14 +34,14 @@ class LocalFsJava7 extends LocalFsJavaAny {
    * @return a {@code ResolvedPath}
    */
   public static ResolvedPath resolve(Path path) {
-    Checks.checkNotNull(path, "path == null");
+    Check.notNull(path, "path == null");
 
     return new ObjectImpl(path);
   }
 
   @Override
   final ObjectJavaAny create(File file) {
-    Checks.checkNotNull(file, "file == null");
+    Check.notNull(file, "file == null");
 
     Path path;
     path = file.toPath();
@@ -50,7 +50,7 @@ class LocalFsJava7 extends LocalFsJavaAny {
   }
 
   final ObjectJavaAny create(Path path) {
-    Checks.checkNotNull(path, "path == null");
+    Check.notNull(path, "path == null");
 
     return newImpl(path);
   }

@@ -20,7 +20,7 @@ import br.com.objectos.concurrent.IoTask;
 import br.com.objectos.concurrent.IoWorker;
 import java.io.Closeable;
 import java.io.IOException;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 import objectos.lang.Note0;
 import objectos.lang.Note1;
 import objectos.lang.Note2;
@@ -105,7 +105,7 @@ abstract class AbstractGitEngineTask implements CpuTask, IoTask {
   }
 
   public final void setResult(Object newResult) {
-    Checks.checkState(result == null, "result was already set");
+    Check.state(result == null, "result was already set");
 
     result = newResult;
   }
@@ -119,9 +119,9 @@ abstract class AbstractGitEngineTask implements CpuTask, IoTask {
   }
 
   final void checkSetInput() {
-    Checks.checkState(state == _STOP, "task is active");
+    Check.state(state == _STOP, "task is active");
 
-    Checks.checkState(result == null, "previous result was not consumed");
+    Check.state(result == null, "previous result was not consumed");
 
     state = _START;
   }

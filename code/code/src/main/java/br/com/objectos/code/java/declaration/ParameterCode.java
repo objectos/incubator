@@ -31,7 +31,7 @@ import javax.lang.model.element.Element;
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.VariableElement;
 import javax.lang.model.type.TypeMirror;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public class ParameterCode extends AbstractImmutableCodeElement
     implements
@@ -54,7 +54,7 @@ public class ParameterCode extends AbstractImmutableCodeElement
 
   @Ignore("AggregatorGenProcessor")
   public static ParameterCode of(VariableElement element) {
-    Checks.checkNotNull(element, "element == null");
+    Check.notNull(element, "element == null");
     Element enclosingElement = element.getEnclosingElement();
     return enclosingElement.accept(FromVariableElementFactory.INSTANCE, element);
   }
@@ -113,7 +113,7 @@ public class ParameterCode extends AbstractImmutableCodeElement
     }
 
     public final Builder setName(Identifier name) {
-      return setNameUnchecked(Checks.checkNotNull(name, "name == null"));
+      return setNameUnchecked(Check.notNull(name, "name == null"));
     }
 
     public final Builder setName(String name) {
@@ -121,7 +121,7 @@ public class ParameterCode extends AbstractImmutableCodeElement
     }
 
     public final Builder setType(ParameterTypeName type) {
-      return setTypeUnchecked(Checks.checkNotNull(type, "type == null"));
+      return setTypeUnchecked(Check.notNull(type, "type == null"));
     }
 
     final Builder setNameUnchecked(Identifier name) {

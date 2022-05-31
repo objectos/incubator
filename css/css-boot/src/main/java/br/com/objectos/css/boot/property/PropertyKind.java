@@ -16,7 +16,7 @@
 package br.com.objectos.css.boot.property;
 
 import br.com.objectos.code.java.expression.Identifier;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public enum PropertyKind {
 
@@ -35,7 +35,7 @@ public enum PropertyKind {
   }
 
   public final Property get(String name, Identifier identifier) {
-    Checks.checkNotNull(name, "name == null");
+    Check.notNull(name, "name == null");
     return new Property(this, name, identifier);
   }
 

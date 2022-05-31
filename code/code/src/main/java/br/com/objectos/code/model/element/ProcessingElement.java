@@ -39,7 +39,7 @@ import javax.lang.model.util.Elements;
 import javax.tools.Diagnostic.Kind;
 import javax.tools.FileObject;
 import javax.tools.StandardLocation;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 import objectos.lang.Strings;
 
 public abstract class ProcessingElement<E extends Element>
@@ -71,7 +71,7 @@ public abstract class ProcessingElement<E extends Element>
 
   @Override
   public final boolean hasElementKind(ElementKind kind) {
-    Checks.checkNotNull(kind, "kind == null");
+    Check.notNull(kind, "kind == null");
     return element.getKind().equals(kind);
   }
 

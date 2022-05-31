@@ -19,7 +19,7 @@ import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.core.map.ImmutableMap;
 import br.com.objectos.core.map.MutableMap;
 import br.com.objectos.core.map.MutableOrderedMap;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public class Spec {
 
@@ -34,7 +34,7 @@ public class Spec {
   }
 
   public final Property getProperty(String name) {
-    Checks.checkArgument(properties.containsKey(name), name, " not found");
+    Check.argument(properties.containsKey(name), name, " not found");
 
     return properties.get(name);
   }

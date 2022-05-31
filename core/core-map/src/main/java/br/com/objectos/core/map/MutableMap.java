@@ -18,7 +18,7 @@ package br.com.objectos.core.map;
 import br.com.objectos.core.array.ObjectArrays;
 import java.util.Arrays;
 import java.util.Map;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 /**
  * A hash-based implementation of the {@link Map} interface.
@@ -92,8 +92,8 @@ public class MutableMap<K, V> extends AbstractArrayBasedMap<K, V> {
    */
   @Override
   public final V put(K key, V value) {
-    Checks.checkNotNull(key, "key == null");
-    Checks.checkNotNull(value, "value == null");
+    Check.notNull(key, "key == null");
+    Check.notNull(value, "value == null");
 
     return putUnchecked(key, value);
   }

@@ -18,7 +18,7 @@ package br.com.objectos.git;
 import br.com.objectos.concurrent.CpuArray;
 import br.com.objectos.concurrent.CpuWorker;
 import br.com.objectos.concurrent.IoWorker;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 import objectos.lang.NoteSink;
 import objectos.lang.NoOpNoteSink;
 
@@ -38,9 +38,9 @@ final class GitServiceBuilder {
   private NoteSink logger = NoOpNoteSink.getInstance();
 
   GitServiceBuilder(CpuArray cpuArray, IoWorker ioWorker) {
-    this.cpuArray = Checks.checkNotNull(cpuArray, "cpuArray == null");
+    this.cpuArray = Check.notNull(cpuArray, "cpuArray == null");
 
-    this.ioWorker = Checks.checkNotNull(ioWorker, "ioWorker == null");
+    this.ioWorker = Check.notNull(ioWorker, "ioWorker == null");
   }
 
   public final GitService build() {

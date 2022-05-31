@@ -23,14 +23,14 @@ import br.com.objectos.html.tmpl.CompiledTemplateVisitor;
 import br.com.objectos.html.tmpl.Template;
 import java.io.IOException;
 import java.io.UncheckedIOException;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public class SimpleTemplateWriter implements CompiledTemplateVisitor {
 
   private final Appendable out;
 
   public SimpleTemplateWriter(Appendable out) {
-    this.out = Checks.checkNotNull(out, "out == null");
+    this.out = Check.notNull(out, "out == null");
   }
 
   @Override

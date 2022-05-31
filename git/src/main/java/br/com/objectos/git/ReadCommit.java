@@ -21,7 +21,7 @@ import java.nio.CharBuffer;
 import java.nio.charset.Charset;
 import java.nio.charset.CharsetDecoder;
 import java.nio.charset.CoderResult;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 import objectos.lang.Note1;
 import objectos.lang.NoteSink;
 
@@ -219,7 +219,7 @@ final class ReadCommit implements ObjectReaderAdapter {
 
   @Override
   public final void executeObjectBodyPart(ByteBuffer buffer) {
-    Checks.checkState(!active, "already active");
+    Check.state(!active, "already active");
 
     data = buffer;
 
@@ -260,7 +260,7 @@ final class ReadCommit implements ObjectReaderAdapter {
 
   @Override
   public final void executeStart(ObjectReaderHandle handle) {
-    Checks.checkState(state == _STOP, "already started");
+    Check.state(state == _STOP, "already started");
 
     handle.setInput(ObjectReaderMode.READ_OBJECT, objectId);
 

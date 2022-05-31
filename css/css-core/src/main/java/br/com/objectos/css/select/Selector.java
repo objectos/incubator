@@ -20,7 +20,7 @@ import br.com.objectos.core.list.MutableList;
 import br.com.objectos.css.parser.IsNonTerminal;
 import br.com.objectos.css.sheet.RuleElement;
 import java.util.stream.Stream;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public abstract class Selector implements IsNonTerminal {
 
@@ -31,7 +31,7 @@ public abstract class Selector implements IsNonTerminal {
   }
 
   static Selector checkIsSelector(Object o, String name) {
-    Checks.checkArgument((o instanceof Selector), name + " not instanceof Selector");
+    Check.argument((o instanceof Selector), name + " not instanceof Selector");
     return (Selector) o;
   }
 
@@ -186,7 +186,7 @@ public abstract class Selector implements IsNonTerminal {
 
     @Override
     protected final void toCombinatorStartMode(Combinator combinator) {
-      currentCombinator = Checks.checkNotNull(combinator, "combinator == null");
+      currentCombinator = Check.notNull(combinator, "combinator == null");
 
       Selector selector;
       selector = build();
@@ -198,7 +198,7 @@ public abstract class Selector implements IsNonTerminal {
     protected final void toCombinatorStartMode(Combinator combinator, Selector selector) {
       Combinator previous = currentCombinator;
 
-      currentCombinator = Checks.checkNotNull(combinator, "combinator == null");
+      currentCombinator = Check.notNull(combinator, "combinator == null");
 
       Selector toAdd = selector;
 

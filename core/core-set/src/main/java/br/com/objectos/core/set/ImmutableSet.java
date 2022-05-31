@@ -20,7 +20,7 @@ import br.com.objectos.core.collection.ImmutableCollection;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Set;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 /**
  * A hash-based implementation of the {@link Set} and
@@ -78,7 +78,7 @@ public final class ImmutableSet<E>
    *         {@code null}
    */
   public static <E> ImmutableSet<E> copyOf(E[] array) {
-    Checks.checkNotNull(array, "array == null");
+    Check.notNull(array, "array == null");
 
     MutableSet<E> set;
     set = MutableSet.create();
@@ -89,7 +89,7 @@ public final class ImmutableSet<E>
       element = array[i];
 
       set.addUnchecked(
-          Checks.checkNotNull(element, "array[", i, "] == null")
+          Check.notNull(element, "array[", i, "] == null")
       );
     }
 
@@ -120,7 +120,7 @@ public final class ImmutableSet<E>
    */
   @SuppressWarnings("unchecked")
   public static <E> ImmutableSet<E> copyOf(Iterable<? extends E> elements) {
-    Checks.checkNotNull(elements, "elements == null");
+    Check.notNull(elements, "elements == null");
 
     if (elements instanceof ImmutableSet) {
       return (ImmutableSet<E>) elements;
@@ -162,7 +162,7 @@ public final class ImmutableSet<E>
    *         iterator is {@code null}
    */
   public static <E> ImmutableSet<E> copyOf(Iterator<? extends E> iterator) {
-    Checks.checkNotNull(iterator, "iterator == null");
+    Check.notNull(iterator, "iterator == null");
 
     if (!iterator.hasNext()) {
       return ImmutableSet.of();
@@ -227,7 +227,7 @@ public final class ImmutableSet<E>
    *         if the specified element is {@code null}
    */
   public static <E> ImmutableSet<E> of(E element) {
-    Checks.checkNotNull(element, "element == null");
+    Check.notNull(element, "element == null");
 
     MutableSet<E> set;
     set = MutableSet.create();
@@ -260,8 +260,8 @@ public final class ImmutableSet<E>
    */
   @SuppressWarnings("unchecked")
   public static <E> ImmutableSet<E> of(E first, E... more) {
-    Checks.checkNotNull(first, "first == null");
-    Checks.checkNotNull(more, "more == null");
+    Check.notNull(first, "first == null");
+    Check.notNull(more, "more == null");
 
     MutableSet<E> set;
     set = MutableSet.create();

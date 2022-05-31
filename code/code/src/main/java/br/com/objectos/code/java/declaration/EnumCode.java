@@ -29,7 +29,7 @@ import br.com.objectos.code.java.type.NamedClass;
 import br.com.objectos.code.java.type.NamedClassOrParameterized;
 import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.core.list.MutableList;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public final class EnumCode extends AbstractTypeCode {
 
@@ -41,18 +41,18 @@ public final class EnumCode extends AbstractTypeCode {
   }
 
   public static EnumCode _enum(EnumCodeElement e1) {
-    Checks.checkNotNull(e1, "e1 == null");
+    Check.notNull(e1, "e1 == null");
     Builder b = builder();
     e1.acceptEnumCodeBuilder(b);
     return b.build();
   }
 
   public static EnumCode _enum(EnumCodeElement... elements) {
-    Checks.checkNotNull(elements, "elements == null");
+    Check.notNull(elements, "elements == null");
     Builder b = builder();
 
     for (int i = 0; i < elements.length; i++) {
-      EnumCodeElement e = Checks.checkNotNull(elements[i], "elements[" + i + "] == null");
+      EnumCodeElement e = Check.notNull(elements[i], "elements[" + i + "] == null");
       e.acceptEnumCodeBuilder(b);
     }
 
@@ -62,8 +62,8 @@ public final class EnumCode extends AbstractTypeCode {
   public static EnumCode _enum(
       EnumCodeElement e1,
       EnumCodeElement e2) {
-    Checks.checkNotNull(e1, "e1 == null");
-    Checks.checkNotNull(e2, "e2 == null");
+    Check.notNull(e1, "e1 == null");
+    Check.notNull(e2, "e2 == null");
     Builder b = builder();
     e1.acceptEnumCodeBuilder(b);
     e2.acceptEnumCodeBuilder(b);
@@ -74,9 +74,9 @@ public final class EnumCode extends AbstractTypeCode {
       EnumCodeElement e1,
       EnumCodeElement e2,
       EnumCodeElement e3) {
-    Checks.checkNotNull(e1, "e1 == null");
-    Checks.checkNotNull(e2, "e2 == null");
-    Checks.checkNotNull(e3, "e3 == null");
+    Check.notNull(e1, "e1 == null");
+    Check.notNull(e2, "e2 == null");
+    Check.notNull(e3, "e3 == null");
     Builder b = builder();
     e1.acceptEnumCodeBuilder(b);
     e2.acceptEnumCodeBuilder(b);
@@ -89,10 +89,10 @@ public final class EnumCode extends AbstractTypeCode {
       EnumCodeElement e2,
       EnumCodeElement e3,
       EnumCodeElement e4) {
-    Checks.checkNotNull(e1, "e1 == null");
-    Checks.checkNotNull(e2, "e2 == null");
-    Checks.checkNotNull(e3, "e3 == null");
-    Checks.checkNotNull(e4, "e4 == null");
+    Check.notNull(e1, "e1 == null");
+    Check.notNull(e2, "e2 == null");
+    Check.notNull(e3, "e3 == null");
+    Check.notNull(e4, "e4 == null");
     Builder b = builder();
     e1.acceptEnumCodeBuilder(b);
     e2.acceptEnumCodeBuilder(b);
@@ -107,11 +107,11 @@ public final class EnumCode extends AbstractTypeCode {
       EnumCodeElement e3,
       EnumCodeElement e4,
       EnumCodeElement e5) {
-    Checks.checkNotNull(e1, "e1 == null");
-    Checks.checkNotNull(e2, "e2 == null");
-    Checks.checkNotNull(e3, "e3 == null");
-    Checks.checkNotNull(e4, "e4 == null");
-    Checks.checkNotNull(e5, "e5 == null");
+    Check.notNull(e1, "e1 == null");
+    Check.notNull(e2, "e2 == null");
+    Check.notNull(e3, "e3 == null");
+    Check.notNull(e4, "e4 == null");
+    Check.notNull(e5, "e5 == null");
     Builder b = builder();
     e1.acceptEnumCodeBuilder(b);
     e2.acceptEnumCodeBuilder(b);
@@ -128,12 +128,12 @@ public final class EnumCode extends AbstractTypeCode {
       EnumCodeElement e4,
       EnumCodeElement e5,
       EnumCodeElement e6) {
-    Checks.checkNotNull(e1, "e1 == null");
-    Checks.checkNotNull(e2, "e2 == null");
-    Checks.checkNotNull(e3, "e3 == null");
-    Checks.checkNotNull(e4, "e4 == null");
-    Checks.checkNotNull(e5, "e5 == null");
-    Checks.checkNotNull(e6, "e6 == null");
+    Check.notNull(e1, "e1 == null");
+    Check.notNull(e2, "e2 == null");
+    Check.notNull(e3, "e3 == null");
+    Check.notNull(e4, "e4 == null");
+    Check.notNull(e5, "e5 == null");
+    Check.notNull(e6, "e6 == null");
     Builder b = builder();
     e1.acceptEnumCodeBuilder(b);
     e2.acceptEnumCodeBuilder(b);
@@ -152,13 +152,13 @@ public final class EnumCode extends AbstractTypeCode {
       EnumCodeElement e5,
       EnumCodeElement e6,
       EnumCodeElement e7) {
-    Checks.checkNotNull(e1, "e1 == null");
-    Checks.checkNotNull(e2, "e2 == null");
-    Checks.checkNotNull(e3, "e3 == null");
-    Checks.checkNotNull(e4, "e4 == null");
-    Checks.checkNotNull(e5, "e5 == null");
-    Checks.checkNotNull(e6, "e6 == null");
-    Checks.checkNotNull(e7, "e7 == null");
+    Check.notNull(e1, "e1 == null");
+    Check.notNull(e2, "e2 == null");
+    Check.notNull(e3, "e3 == null");
+    Check.notNull(e4, "e4 == null");
+    Check.notNull(e5, "e5 == null");
+    Check.notNull(e6, "e6 == null");
+    Check.notNull(e7, "e7 == null");
     Builder b = builder();
     e1.acceptEnumCodeBuilder(b);
     e2.acceptEnumCodeBuilder(b);
@@ -179,14 +179,14 @@ public final class EnumCode extends AbstractTypeCode {
       EnumCodeElement e6,
       EnumCodeElement e7,
       EnumCodeElement e8) {
-    Checks.checkNotNull(e1, "e1 == null");
-    Checks.checkNotNull(e2, "e2 == null");
-    Checks.checkNotNull(e3, "e3 == null");
-    Checks.checkNotNull(e4, "e4 == null");
-    Checks.checkNotNull(e5, "e5 == null");
-    Checks.checkNotNull(e6, "e6 == null");
-    Checks.checkNotNull(e7, "e7 == null");
-    Checks.checkNotNull(e8, "e8 == null");
+    Check.notNull(e1, "e1 == null");
+    Check.notNull(e2, "e2 == null");
+    Check.notNull(e3, "e3 == null");
+    Check.notNull(e4, "e4 == null");
+    Check.notNull(e5, "e5 == null");
+    Check.notNull(e6, "e6 == null");
+    Check.notNull(e7, "e7 == null");
+    Check.notNull(e8, "e8 == null");
     Builder b = builder();
     e1.acceptEnumCodeBuilder(b);
     e2.acceptEnumCodeBuilder(b);
@@ -209,15 +209,15 @@ public final class EnumCode extends AbstractTypeCode {
       EnumCodeElement e7,
       EnumCodeElement e8,
       EnumCodeElement e9) {
-    Checks.checkNotNull(e1, "e1 == null");
-    Checks.checkNotNull(e2, "e2 == null");
-    Checks.checkNotNull(e3, "e3 == null");
-    Checks.checkNotNull(e4, "e4 == null");
-    Checks.checkNotNull(e5, "e5 == null");
-    Checks.checkNotNull(e6, "e6 == null");
-    Checks.checkNotNull(e7, "e7 == null");
-    Checks.checkNotNull(e8, "e8 == null");
-    Checks.checkNotNull(e9, "e9 == null");
+    Check.notNull(e1, "e1 == null");
+    Check.notNull(e2, "e2 == null");
+    Check.notNull(e3, "e3 == null");
+    Check.notNull(e4, "e4 == null");
+    Check.notNull(e5, "e5 == null");
+    Check.notNull(e6, "e6 == null");
+    Check.notNull(e7, "e7 == null");
+    Check.notNull(e8, "e8 == null");
+    Check.notNull(e9, "e9 == null");
     Builder b = builder();
     e1.acceptEnumCodeBuilder(b);
     e2.acceptEnumCodeBuilder(b);
@@ -316,19 +316,19 @@ public final class EnumCode extends AbstractTypeCode {
     }
 
     public final Builder simpleName(Identifier simpleName) {
-      Checks.checkNotNull(simpleName, "simpleName == null");
+      Check.notNull(simpleName, "simpleName == null");
       this.simpleName = simpleName.name();
       return this;
     }
 
     public final Builder simpleName(NamedClass className) {
-      Checks.checkNotNull(className, "className == null");
+      Check.notNull(className, "className == null");
       this.simpleName = className.getSimpleName();
       return this;
     }
 
     public final Builder simpleName(String simpleName) {
-      this.simpleName = Checks.checkNotNull(simpleName, "simpleName == null");
+      this.simpleName = Check.notNull(simpleName, "simpleName == null");
       return this;
     }
 

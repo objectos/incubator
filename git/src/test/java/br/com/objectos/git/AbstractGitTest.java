@@ -29,7 +29,7 @@ import br.com.objectos.fs.ResolvedPath;
 import br.com.objectos.fs.testing.TmpDir;
 import java.io.IOException;
 import java.util.concurrent.ExecutionException;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
@@ -131,12 +131,12 @@ public abstract class AbstractGitTest implements ResultConsumer {
   }
 
   final void executeWhileAndAssertState(AbstractGitEngineTask task, byte state, byte expected) {
-    Checks.checkState(task.isActive(), "task is not active");
+    Check.state(task.isActive(), "task is not active");
 
     task.executeOne();
 
     while (task.state == state) {
-      Checks.checkState(task.isActive(), "task is not active");
+      Check.state(task.isActive(), "task is not active");
 
       task.executeOne();
     }

@@ -23,7 +23,7 @@ import br.com.objectos.code.java.expression.production.MethodInvocationExpressio
 import br.com.objectos.code.java.io.CodeWriter;
 import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.core.list.MutableList;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public class MethodInvocationChain extends AbstractStatementExpression
     implements
@@ -45,8 +45,8 @@ public class MethodInvocationChain extends AbstractStatementExpression
   public static MethodInvocationChain chain(
       Callee caller,
       MethodInvocationChainElement e1) {
-    Checks.checkNotNull(caller, "caller == null");
-    Checks.checkNotNull(e1, "e1 == null");
+    Check.notNull(caller, "caller == null");
+    Check.notNull(e1, "e1 == null");
     Builder b = builder();
     b.setStart(caller);
     e1.acceptMethodInvocationChainBuilder(b);
@@ -56,8 +56,8 @@ public class MethodInvocationChain extends AbstractStatementExpression
   public static MethodInvocationChain chain(
       Callee caller,
       MethodInvocationChainElement... elements) {
-    Checks.checkNotNull(caller, "caller == null");
-    Checks.checkNotNull(elements, "elements == null");
+    Check.notNull(caller, "caller == null");
+    Check.notNull(elements, "elements == null");
     Builder b = builder();
     b.setStart(caller);
 
@@ -79,9 +79,9 @@ public class MethodInvocationChain extends AbstractStatementExpression
       Callee caller,
       MethodInvocationChainElement e1,
       MethodInvocationChainElement e2) {
-    Checks.checkNotNull(caller, "caller == null");
-    Checks.checkNotNull(e1, "e1 == null");
-    Checks.checkNotNull(e2, "e2 == null");
+    Check.notNull(caller, "caller == null");
+    Check.notNull(e1, "e1 == null");
+    Check.notNull(e2, "e2 == null");
     Builder b = builder();
     b.setStart(caller);
     e1.acceptMethodInvocationChainBuilder(b);
@@ -94,10 +94,10 @@ public class MethodInvocationChain extends AbstractStatementExpression
       MethodInvocationChainElement e1,
       MethodInvocationChainElement e2,
       MethodInvocationChainElement e3) {
-    Checks.checkNotNull(caller, "caller == null");
-    Checks.checkNotNull(e1, "e1 == null");
-    Checks.checkNotNull(e2, "e2 == null");
-    Checks.checkNotNull(e3, "e3 == null");
+    Check.notNull(caller, "caller == null");
+    Check.notNull(e1, "e1 == null");
+    Check.notNull(e2, "e2 == null");
+    Check.notNull(e3, "e3 == null");
     Builder b = builder();
     b.setStart(caller);
     e1.acceptMethodInvocationChainBuilder(b);
@@ -112,11 +112,11 @@ public class MethodInvocationChain extends AbstractStatementExpression
       MethodInvocationChainElement e2,
       MethodInvocationChainElement e3,
       MethodInvocationChainElement e4) {
-    Checks.checkNotNull(caller, "caller == null");
-    Checks.checkNotNull(e1, "e1 == null");
-    Checks.checkNotNull(e2, "e2 == null");
-    Checks.checkNotNull(e3, "e3 == null");
-    Checks.checkNotNull(e4, "e4 == null");
+    Check.notNull(caller, "caller == null");
+    Check.notNull(e1, "e1 == null");
+    Check.notNull(e2, "e2 == null");
+    Check.notNull(e3, "e3 == null");
+    Check.notNull(e4, "e4 == null");
     Builder b = builder();
     b.setStart(caller);
     e1.acceptMethodInvocationChainBuilder(b);
@@ -133,12 +133,12 @@ public class MethodInvocationChain extends AbstractStatementExpression
       MethodInvocationChainElement e3,
       MethodInvocationChainElement e4,
       MethodInvocationChainElement e5) {
-    Checks.checkNotNull(caller, "caller == null");
-    Checks.checkNotNull(e1, "e1 == null");
-    Checks.checkNotNull(e2, "e2 == null");
-    Checks.checkNotNull(e3, "e3 == null");
-    Checks.checkNotNull(e4, "e4 == null");
-    Checks.checkNotNull(e5, "e5 == null");
+    Check.notNull(caller, "caller == null");
+    Check.notNull(e1, "e1 == null");
+    Check.notNull(e2, "e2 == null");
+    Check.notNull(e3, "e3 == null");
+    Check.notNull(e4, "e4 == null");
+    Check.notNull(e5, "e5 == null");
     Builder b = builder();
     b.setStart(caller);
     e1.acceptMethodInvocationChainBuilder(b);
@@ -157,13 +157,13 @@ public class MethodInvocationChain extends AbstractStatementExpression
       MethodInvocationChainElement e4,
       MethodInvocationChainElement e5,
       MethodInvocationChainElement e6) {
-    Checks.checkNotNull(caller, "caller == null");
-    Checks.checkNotNull(e1, "e1 == null");
-    Checks.checkNotNull(e2, "e2 == null");
-    Checks.checkNotNull(e3, "e3 == null");
-    Checks.checkNotNull(e4, "e4 == null");
-    Checks.checkNotNull(e5, "e5 == null");
-    Checks.checkNotNull(e6, "e6 == null");
+    Check.notNull(caller, "caller == null");
+    Check.notNull(e1, "e1 == null");
+    Check.notNull(e2, "e2 == null");
+    Check.notNull(e3, "e3 == null");
+    Check.notNull(e4, "e4 == null");
+    Check.notNull(e5, "e5 == null");
+    Check.notNull(e6, "e6 == null");
     Builder b = builder();
     b.setStart(caller);
     e1.acceptMethodInvocationChainBuilder(b);
@@ -184,14 +184,14 @@ public class MethodInvocationChain extends AbstractStatementExpression
       MethodInvocationChainElement e5,
       MethodInvocationChainElement e6,
       MethodInvocationChainElement e7) {
-    Checks.checkNotNull(caller, "caller == null");
-    Checks.checkNotNull(e1, "e1 == null");
-    Checks.checkNotNull(e2, "e2 == null");
-    Checks.checkNotNull(e3, "e3 == null");
-    Checks.checkNotNull(e4, "e4 == null");
-    Checks.checkNotNull(e5, "e5 == null");
-    Checks.checkNotNull(e6, "e6 == null");
-    Checks.checkNotNull(e7, "e7 == null");
+    Check.notNull(caller, "caller == null");
+    Check.notNull(e1, "e1 == null");
+    Check.notNull(e2, "e2 == null");
+    Check.notNull(e3, "e3 == null");
+    Check.notNull(e4, "e4 == null");
+    Check.notNull(e5, "e5 == null");
+    Check.notNull(e6, "e6 == null");
+    Check.notNull(e7, "e7 == null");
     Builder b = builder();
     b.setStart(caller);
     e1.acceptMethodInvocationChainBuilder(b);
@@ -214,15 +214,15 @@ public class MethodInvocationChain extends AbstractStatementExpression
       MethodInvocationChainElement e6,
       MethodInvocationChainElement e7,
       MethodInvocationChainElement e8) {
-    Checks.checkNotNull(caller, "caller == null");
-    Checks.checkNotNull(e1, "e1 == null");
-    Checks.checkNotNull(e2, "e2 == null");
-    Checks.checkNotNull(e3, "e3 == null");
-    Checks.checkNotNull(e4, "e4 == null");
-    Checks.checkNotNull(e5, "e5 == null");
-    Checks.checkNotNull(e6, "e6 == null");
-    Checks.checkNotNull(e7, "e7 == null");
-    Checks.checkNotNull(e8, "e8 == null");
+    Check.notNull(caller, "caller == null");
+    Check.notNull(e1, "e1 == null");
+    Check.notNull(e2, "e2 == null");
+    Check.notNull(e3, "e3 == null");
+    Check.notNull(e4, "e4 == null");
+    Check.notNull(e5, "e5 == null");
+    Check.notNull(e6, "e6 == null");
+    Check.notNull(e7, "e7 == null");
+    Check.notNull(e8, "e8 == null");
     Builder b = builder();
     b.setStart(caller);
     e1.acceptMethodInvocationChainBuilder(b);
@@ -247,16 +247,16 @@ public class MethodInvocationChain extends AbstractStatementExpression
       MethodInvocationChainElement e7,
       MethodInvocationChainElement e8,
       MethodInvocationChainElement e9) {
-    Checks.checkNotNull(caller, "caller == null");
-    Checks.checkNotNull(e1, "e1 == null");
-    Checks.checkNotNull(e2, "e2 == null");
-    Checks.checkNotNull(e3, "e3 == null");
-    Checks.checkNotNull(e4, "e4 == null");
-    Checks.checkNotNull(e5, "e5 == null");
-    Checks.checkNotNull(e6, "e6 == null");
-    Checks.checkNotNull(e7, "e7 == null");
-    Checks.checkNotNull(e8, "e8 == null");
-    Checks.checkNotNull(e9, "e9 == null");
+    Check.notNull(caller, "caller == null");
+    Check.notNull(e1, "e1 == null");
+    Check.notNull(e2, "e2 == null");
+    Check.notNull(e3, "e3 == null");
+    Check.notNull(e4, "e4 == null");
+    Check.notNull(e5, "e5 == null");
+    Check.notNull(e6, "e6 == null");
+    Check.notNull(e7, "e7 == null");
+    Check.notNull(e8, "e8 == null");
+    Check.notNull(e9, "e9 == null");
     Builder b = builder();
     b.setStart(caller);
     e1.acceptMethodInvocationChainBuilder(b);
@@ -351,7 +351,7 @@ public class MethodInvocationChain extends AbstractStatementExpression
     private Callee start;
 
     public final Builder addMethodInvocation(Unqualified invocation) {
-      Checks.checkNotNull(invocation, "invocation == null");
+      Check.notNull(invocation, "invocation == null");
 
       UnqualifiedWrapper wrapper;
       wrapper = new UnqualifiedWrapper(invocation);
@@ -373,7 +373,7 @@ public class MethodInvocationChain extends AbstractStatementExpression
     }
 
     public final Builder setStart(Callee caller) {
-      start = Checks.checkNotNull(caller, "caller == null");
+      start = Check.notNull(caller, "caller == null");
       return this;
     }
 

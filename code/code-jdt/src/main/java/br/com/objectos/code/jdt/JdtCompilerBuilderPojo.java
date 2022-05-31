@@ -20,7 +20,7 @@ import java.util.Locale;
 import java.util.Map;
 import javax.annotation.processing.Processor;
 import javax.lang.model.SourceVersion;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 import org.eclipse.jdt.internal.compiler.Compiler;
 import org.eclipse.jdt.internal.compiler.DefaultErrorHandlingPolicies;
 import org.eclipse.jdt.internal.compiler.ICompilerRequestor;
@@ -61,13 +61,13 @@ class JdtCompilerBuilderPojo
 
   @Override
   public final CompilerRequestorStep withCompilerRequestor(ICompilerRequestor requestor) {
-    this.requestor = Checks.checkNotNull(requestor, "requestor == null");
+    this.requestor = Check.notNull(requestor, "requestor == null");
     return this;
   }
 
   @Override
   public final SourceVersionStep withSourceVersion(SourceVersion sourceVersion) {
-    Checks.checkNotNull(sourceVersion, "sourceVersion == null");
+    Check.notNull(sourceVersion, "sourceVersion == null");
     JdtSourceVersion jdtVersion = JdtSourceVersion.valueOf(sourceVersion.name());
     jdtVersion.set(optionMap);
     return this;

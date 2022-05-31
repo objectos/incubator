@@ -15,7 +15,7 @@
  */
 package br.com.objectos.core.array;
 
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 /**
  * <p>
@@ -70,7 +70,7 @@ public final class CharArrays {
    *         if {@code offset < 0}
    */
   public static char[] append(char[] array, int offset, CharSequence s) {
-    Checks.checkArgument(offset >= 0, "offset cannot be negative");
+    Check.argument(offset >= 0, "offset cannot be negative");
 
     int length;
     length = s.length();
@@ -137,7 +137,7 @@ public final class CharArrays {
    *         if {@code requiredIndex < 0}
    */
   public static char[] copyIfNecessary(char[] array, int requiredIndex) {
-    Checks.checkArgument(requiredIndex >= 0, "requiredIndex cannot be negative");
+    Check.argument(requiredIndex >= 0, "requiredIndex cannot be negative");
 
     int length;
     length = array.length;

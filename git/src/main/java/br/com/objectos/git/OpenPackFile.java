@@ -24,7 +24,7 @@ import br.com.objectos.fs.RegularFile;
 import br.com.objectos.fs.ResolvedPath;
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 /**
  * Opens a Git packfile. Resolves the pathname and confirms (or not) that the
@@ -78,9 +78,9 @@ final class OpenPackFile extends AbstractGitEngineTask {
   public final void set(Directory objectsDirectory, ObjectId objectId) {
     checkSetInput();
 
-    this.repository = Checks.checkNotNull(objectsDirectory, "objectsDirectory == null");
+    this.repository = Check.notNull(objectsDirectory, "objectsDirectory == null");
 
-    this.objectId = Checks.checkNotNull(objectId, "objectId == null");
+    this.objectId = Check.notNull(objectId, "objectId == null");
   }
 
   @Override

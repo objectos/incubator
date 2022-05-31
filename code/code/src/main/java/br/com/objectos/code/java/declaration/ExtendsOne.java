@@ -16,7 +16,7 @@
 package br.com.objectos.code.java.declaration;
 
 import br.com.objectos.code.java.type.NamedClassOrParameterized;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public final class ExtendsOne
     implements
@@ -30,7 +30,7 @@ public final class ExtendsOne
   }
 
   public static ExtendsOne _extends(NamedClassOrParameterized type) {
-    Checks.checkNotNull(type, "type == null");
+    Check.notNull(type, "type == null");
     return new ExtendsOne(type);
   }
 

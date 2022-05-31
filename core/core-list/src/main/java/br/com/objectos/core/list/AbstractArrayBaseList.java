@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.NoSuchElementException;
 import java.util.RandomAccess;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 import objectos.lang.HashCode;
 import objectos.lang.ToString;
 
@@ -270,7 +270,7 @@ abstract class AbstractArrayBaseList<E>
    */
   @Override
   public final String join(String delimiter) {
-    Checks.checkNotNull(delimiter, "delimiter == null");
+    Check.notNull(delimiter, "delimiter == null");
 
     if (size == 0) {
       return "";
@@ -318,9 +318,9 @@ abstract class AbstractArrayBaseList<E>
    */
   @Override
   public final String join(String delimiter, String prefix, String suffix) {
-    Checks.checkNotNull(delimiter, "delimiter == null");
-    Checks.checkNotNull(prefix, "prefix == null");
-    Checks.checkNotNull(suffix, "suffix == null");
+    Check.notNull(delimiter, "delimiter == null");
+    Check.notNull(prefix, "prefix == null");
+    Check.notNull(suffix, "suffix == null");
 
     if (size == 0) {
       return prefix + suffix;
@@ -532,7 +532,7 @@ abstract class AbstractArrayBaseList<E>
   @Override
   @SuppressWarnings("unchecked")
   public final <T> T[] toArray(T[] a) {
-    Checks.checkNotNull(a, "a == null");
+    Check.notNull(a, "a == null");
 
     if (a.length < size) {
       Class<? extends Object[]> newType;

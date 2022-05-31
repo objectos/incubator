@@ -24,7 +24,7 @@ import br.com.objectos.code.java.declaration.MethodCode;
 import br.com.objectos.code.java.element.AbstractDefaultImmutableCodeElement;
 import br.com.objectos.code.java.element.NewLine;
 import javax.lang.model.SourceVersion;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 final class IdentifierImpl
     extends AbstractDefaultImmutableCodeElement
@@ -43,7 +43,7 @@ final class IdentifierImpl
   }
 
   static Identifier id0(String name) {
-    Checks.checkArgument(
+    Check.argument(
         SourceVersion.isIdentifier(name),
         name, " is not a valid identifier"
     );

@@ -22,7 +22,7 @@ import br.com.objectos.fs.RegularFile;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.zip.Deflater;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 final class CopyObjects extends AbstractGitEngineTask {
 
@@ -55,11 +55,11 @@ final class CopyObjects extends AbstractGitEngineTask {
   public final void setInput(Repository src, ImmutableSet<ObjectId> objects, Repository dest) {
     checkSetInput();
 
-    repository = Checks.checkNotNull(src, "src == null");
+    repository = Check.notNull(src, "src == null");
 
-    set = Checks.checkNotNull(objects, "objects == null");
+    set = Check.notNull(objects, "objects == null");
 
-    destination = Checks.checkNotNull(dest, "dest == null");
+    destination = Check.notNull(dest, "dest == null");
   }
 
   @Override
@@ -246,7 +246,7 @@ final class CopyObjects extends AbstractGitEngineTask {
 
     @Override
     public final void executeObjectStart(ObjectId objectId) {
-      Checks.checkState(contents.isEmtpy(), "previous object not written");
+      Check.state(contents.isEmtpy(), "previous object not written");
 
       this.objectId = objectId;
     }

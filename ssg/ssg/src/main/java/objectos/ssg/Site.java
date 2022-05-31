@@ -17,7 +17,7 @@ package objectos.ssg;
 
 import br.com.objectos.core.list.ImmutableList;
 import java.io.IOException;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public abstract class Site implements SiteResourceHolder {
 
@@ -26,7 +26,7 @@ public abstract class Site implements SiteResourceHolder {
   protected Site() {}
 
   public final void configure(SiteConfiguration configuration) {
-    Checks.checkState(this.configuration == null, "concurrent configurations are not allowed");
+    Check.state(this.configuration == null, "concurrent configurations are not allowed");
 
     this.configuration = configuration;
 

@@ -18,7 +18,7 @@ package br.com.objectos.code.java.declaration;
 import java.util.Set;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.Modifier;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 public enum AccessLevel implements ConstructorCodeElement {
 
@@ -31,7 +31,7 @@ public enum AccessLevel implements ConstructorCodeElement {
   PRIVATE;
 
   public static AccessLevel of(Element element) {
-    Checks.checkNotNull(element, "element == null");
+    Check.notNull(element, "element == null");
     
     return ofModifiersUnchecked(element.getModifiers());
   }

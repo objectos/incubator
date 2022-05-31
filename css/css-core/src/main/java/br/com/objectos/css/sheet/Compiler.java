@@ -17,7 +17,7 @@ package br.com.objectos.css.sheet;
 
 import br.com.objectos.core.array.IntArrays;
 import java.util.Arrays;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 final class Compiler {
 
@@ -259,7 +259,7 @@ final class Compiler {
     // name
     addCode(getProto()); // start index
     addCode(getProto()); // length
-    Checks.checkState(
+    Check.state(
         getProto() == ByteProto.SELECTOR_ATTRIBUTE_VALUE_ELEMENT,
         "expected ", ByteProto.SELECTOR_ATTRIBUTE_VALUE_ELEMENT
     );

@@ -20,7 +20,7 @@ import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.RegularFile;
 import br.com.objectos.fs.ResolvedPath;
 import java.io.IOException;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 import objectos.lang.ToString;
 import objectos.lang.ToStringObject;
 
@@ -133,7 +133,7 @@ public final class Repository extends GitRepository implements ToStringObject {
   }
 
   final void update(RefName refName, ObjectId value) throws IOException {
-    Checks.checkNotNull(refName, "refName == null");
+    Check.notNull(refName, "refName == null");
 
     refName.update(gitDirectory, value);
   }

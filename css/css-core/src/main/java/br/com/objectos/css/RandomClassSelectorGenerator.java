@@ -20,7 +20,7 @@ import br.com.objectos.css.select.ClassSelector;
 import br.com.objectos.css.select.SelectorFactory;
 import java.util.Locale;
 import java.util.Set;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 
 final class RandomClassSelectorGenerator {
 
@@ -31,7 +31,7 @@ final class RandomClassSelectorGenerator {
   private RandomClassSelectorGenerator() {}
 
   public static ClassSelector randomClassSelector(int length) {
-    Checks.checkArgument(length > 0, "length must be > 0");
+    Check.argument(length > 0, "length must be > 0");
 
     for (int i = 0; i < MAX_TRIES; i++) {
       String className;

@@ -23,7 +23,7 @@ import br.com.objectos.code.model.element.ProcessingAnnotation;
 import br.com.objectos.code.model.element.ProcessingPackage;
 import br.com.objectos.code.model.element.ProcessingType;
 import br.com.objectos.core.list.ImmutableList;
-import objectos.lang.Checks;
+import objectos.lang.Check;
 import org.testng.IHookCallBack;
 import org.testng.IHookable;
 import org.testng.ITestResult;
@@ -92,7 +92,7 @@ public class TestingEnvironmentTest implements IHookable, TestingEnvironment.Boo
 
   @Override
   public final void setTestingEnvironment(TestingEnvironment round) {
-    testingEnv = Checks.checkNotNull(round, "round == null");
+    testingEnv = Check.notNull(round, "round == null");
     runner.runTestMethod();
   }
 
