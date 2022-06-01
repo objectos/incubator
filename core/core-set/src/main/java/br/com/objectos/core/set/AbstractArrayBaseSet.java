@@ -163,7 +163,7 @@ abstract class AbstractArrayBaseSet<E>
 
   final int hashIndex(Object o) {
     int hashCode;
-    hashCode = HashCode.hashCode(o);
+    hashCode = HashCode.of(o);
 
     return hashCode & hashMask;
   }

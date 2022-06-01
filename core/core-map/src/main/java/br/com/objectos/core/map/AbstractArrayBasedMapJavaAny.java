@@ -363,7 +363,7 @@ abstract class AbstractArrayBasedMapJavaAny<K, V>
 
   final int hashIndex(Object o) {
     int hashCode;
-    hashCode = HashCode.hashCode(o);
+    hashCode = HashCode.of(o);
 
     int half;
     half = hashCode & hashMask;

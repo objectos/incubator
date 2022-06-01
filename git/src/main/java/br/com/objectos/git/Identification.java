@@ -150,7 +150,7 @@ public final class Identification implements ToStringObject {
    */
   @Override
   public final int hashCode() {
-    return HashCode.hashCode(email, gitTimeZone, name, seconds);
+    return HashCode.of(email, gitTimeZone, name, seconds);
   }
 
   /**

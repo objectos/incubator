@@ -165,7 +165,7 @@ final class HeaderContentTypeImpl
 
   @Override
   public final int hashCode() {
-    return HashCode.hashCode(resultMediaType, resultCharset);
+    return HashCode.of(resultMediaType, resultCharset);
   }
 
   @Override

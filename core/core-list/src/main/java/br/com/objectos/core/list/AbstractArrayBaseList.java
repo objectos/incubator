@@ -163,13 +163,13 @@ abstract class AbstractArrayBaseList<E>
   @Override
   public final int hashCode() {
     int result;
-    result = HashCode.hashCodeStart();
+    result = HashCode.start();
 
     for (int i = 0; i < size; i++) {
       Object object;
       object = array[i];
 
-      result = HashCode.hashCodeUpdate(result, object);
+      result = HashCode.update(result, object);
     }
 
     return result;

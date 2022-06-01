@@ -301,7 +301,7 @@ public class NamedClass extends NamedClassOrParameterized
 
   @Override
   public final int hashCode() {
-    return HashCode.hashCode(enclosingElement, simpleName);
+    return HashCode.of(enclosingElement, simpleName);
   }
 
   public final ExpressionName id(Identifier id) {

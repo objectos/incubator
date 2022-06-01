@@ -115,7 +115,7 @@ final class StaticField {
 
   @Override
   public final int hashCode() {
-    return HashCode.hashCode(enclosingClassName, typeName, name);
+    return HashCode.of(enclosingClassName, typeName, name);
   }
 
   static abstract class Builder {

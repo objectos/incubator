@@ -135,7 +135,7 @@ public final class NamedParameterized extends NamedClassOrParameterized {
 
   @Override
   public final int hashCode() {
-    return HashCode.hashCode(raw, arguments);
+    return HashCode.of(raw, arguments);
   }
 
   @Override

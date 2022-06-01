@@ -93,7 +93,7 @@ final class GenerateStaticFactoryAggregateAnnotation {
 
   @Override
   public final int hashCode() {
-    return HashCode.hashCode(packageName, simpleName, factoryTypes);
+    return HashCode.of(packageName, simpleName, factoryTypes);
   }
 
   @Override
