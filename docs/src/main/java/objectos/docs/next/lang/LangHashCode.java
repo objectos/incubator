@@ -34,7 +34,7 @@ With that said, let's see how to use it.
 
 If you are computing the hash code of object reference only, i.e., it
 does not include computing the hash code of primitive values, you just
-invoke the `compute` method:
+invoke the `of` method:
 
 ```java
 class Edition {
@@ -44,7 +44,7 @@ class Edition {
 
   @Override
   public int hashCode() {
-    return HashCode.compute(book, publisher, date);
+    return HashCode.of(book, publisher, date);
   }
 ```
 
@@ -66,10 +66,10 @@ class Primitives {
 
   @Override
   public int hashCode() {
-    return HashCode.compute(
-      HashCode.compute(a),
-      HashCode.compute(b),
-      HashCode.compute(c)
+    return HashCode.of(
+      HashCode.of(a),
+      HashCode.of(b),
+      HashCode.of(c)
     );
   }
 }
@@ -93,10 +93,10 @@ class ShoppingCartItem {
 
   @Override
   public int hashCode() {
-    return HashCode.compute(
-      HashCode.compute(cart),
-      HashCode.compute(product),
-      HashCode.compute(quantity)
+    return HashCode.of(
+      HashCode.of(cart),
+      HashCode.of(product),
+      HashCode.of(quantity)
     );
   }
 }
@@ -114,7 +114,7 @@ It additionally prevents:
 ## Single object reference or single primitive
 
 When computing the hash code of either a single object reference or a single primitive
-you can do so by invoking the `compute` method directly.
+you can do so by invoking the `of` method directly.
 
 For example, a single object reference:
 
@@ -124,7 +124,7 @@ class Category {
 
   @Override
   public int hashCode() {
-    return HashCode.compute(name);
+    return HashCode.of(name);
   }
 }
 ```
@@ -141,12 +141,12 @@ public int hashCode() {
 In the case of a single primitive value:
 
 ```java
-class Code {
+class Id {
   long value;
 
   @Override
   public int hashCode() {
-    return HashCode.compute(value);
+    return HashCode.of(value);
   }
 }
 ```
@@ -157,6 +157,42 @@ Which is equivalent to:
 @Override
 public int hashCode() {
   return Long.hashCode(value);
+}
+```
+
+## Using `start` and `update`
+
+The class exposes the methods it uses internally for computing the hash code.
+
+For example, you can use them for computing the hash code of an array or a collection of elements:
+
+```java
+@Override
+public int hashCode() {
+  var result = HashCode.start();
+
+  for (Object e : elements) {
+    result = HashCode.update(result, e);
+  }
+
+  return result;
+}
+```
+
+You can also use for primitive values. The difference is that you should compute
+the hash code of an individual element before updating the partial result:
+
+```java
+@Override
+public int hashCode() {
+  var result = HashCode.start();
+
+  for (double d : values) {
+    var hc = HashCode.of(d);
+    result = HashCode.update(result, hc);
+  }
+
+  return result;
 }
 ```
 
