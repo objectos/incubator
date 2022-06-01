@@ -99,12 +99,9 @@ public final class ArticleCss extends AbstractStyleSheet {
       article, sp(), ol, sp(), code, or(),
       article, sp(), ul, sp(), code,
 
-      backgroundColor(Colors.GRAY1),
-      border(px(1), solid, Colors.GRAY3),
       fontSize(FontSize.SM),
       fontWeight(500),
-      lineHeight(FontSize.SM),
-      padding(Spacing.PX, Spacing.V01)
+      lineHeight(FontSize.SM)
     );
 
     style(

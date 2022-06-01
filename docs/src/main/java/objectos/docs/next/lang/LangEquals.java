@@ -30,7 +30,7 @@ It offers methods for testing pairs of objects for equality in a null-safe manne
 
 ```java
 class Category {
-  final String name;
+  String name;
 
   @Override
   public boolean equals(Object o) {
@@ -46,8 +46,8 @@ When testing two attributes for equality:
 
 ```java
 class Product {
-  final String name;
-  final Brand brand;
+  String name;
+  Brand brand;
 
   @Override
   public boolean equals(Object o) {
@@ -64,9 +64,9 @@ When testing three attributes:
 
 ```java
 class Edition {
-  final Book book;
-  final Publisher publisher;
-  final LocalDate date;
+  Book book;
+  Publisher publisher;
+  LocalDate date;
 
   @Override
   public boolean equals(Object o) {
@@ -88,9 +88,9 @@ You should use the `==` operator instead:
 
 ```java
 class ShoppingCartItem {
-  final ShoppingCart cart;
-  final Product product;
-  final int quantity;
+  ShoppingCart cart;
+  Product product;
+  int quantity;
 
   @Override
   public boolean equals(Object o) {
