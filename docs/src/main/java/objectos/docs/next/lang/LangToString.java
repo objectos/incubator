@@ -24,22 +24,17 @@ import objectos.ssg.Markdown;
 # The `ToString` facility
 
 Objectos Lang offers a facility for generating a human-readable `toString()` output.
-It is composed of the following classes and interfaces:
-
-- `ToString`
-- `ToStringObject`
-- `FormatToString`
 
 For example, the following `Category` class:
 
 ```java
-class Category implements ToStringObject {
+class Category implements ToString.Formattable {
   String name = "Default";
 
   @Override
-  public void formatToString(StringBuilder toString, int level) {
-    FormatToString.of(
-      toString, level,
+  public void formatToString(StringBuilder sb, int level) {
+    ToString.format(
+      sb, level,
 
       this,
       "name", name
@@ -61,31 +56,20 @@ Category [
 ]
 ```
 
-## Human-readable
-
-As mentioned, this particular `toString()` output is meant to be human-readable
-as opposed to machine-readable.
-In particular, it is meant to be readable during:
-
-- testing
-- debugging
-
-In "live" programming sessions or when searching through a log file.
-
 ## Nesting
 
 The `ToString` facility supports nesting. For example the `Product` class
-that uses the `Category` type from the last example:
+that uses the `Category` type from the previous example:
 
 ```java
-class Product implements ToStringObject {
+class Product implements ToString.Formattable {
   Category category = new Category("Audio");
   String name = "Headphone";
 
   @Override
-  public void formatToString(StringBuilder toString, int level) {
-    FormatToString.of(
-      toString, level,
+  public void formatToString(StringBuilder sb, int level) {
+    ToString.format(
+      sb, level,
 
       this,
       "category", category,
@@ -111,6 +95,17 @@ Product [
 ]
 ```
 
+## Human-readable
+
+As mentioned, this particular `toString()` output is meant to be human-readable
+as opposed to machine-readable.
+In particular, it is meant to be readable during:
+
+- testing
+- debugging
+
+In "live" programming sessions or when searching through a log file.
+
 ## Using a custom type name
 
 In our examples so far we have been using the `this` reference as the source of the type name.
@@ -120,13 +115,13 @@ instead of the `this` reference.
 For example, suppose our `Category` example was:
 
 ```java
-class CategoryImpl implements Category, ToStringObject {
+class CategoryImpl implements Category, ToString.Formattable {
   String name = "Default";
 
   @Override
-  public void formatToString(StringBuilder toString, int level) {
-    FormatToString.of(
-      toString, level,
+  public void formatToString(StringBuilder sb, int level) {
+    ToString.format(
+      sb, level,
 
       this,
       "name", name
@@ -153,9 +148,9 @@ implementation to:
 
 ```java
 @Override
-public void formatToString(StringBuilder toString, int level) {
-  FormatToString.of(
-    toString, level,
+public void formatToString(StringBuilder sb, int level) {
+  ToString.format(
+    sb, level,
 
     "Category",
     "name", name
@@ -171,11 +166,79 @@ Category [
 ]
 ```
 
-## Primitive values
+## Skipping the property name
 
+If you provide an empty string for a property name then only the value will be appended
+to the string representation.
 
+For example, if your `Product` class is implemented like so:
+
+```java
+class Product implements ToString.Formattable {
+  Category category = new Category("Audio");
+  String name = "Headphone";
+
+  @Override
+  public void formatToString(StringBuilder sb, int level) {
+    ToString.format(
+      sb, level,
+
+      this,
+      "", category,
+      "name", name
+    );
+  }
+
+  @Override
+  public String toString() {
+    return ToString.of(this);
+  }
+}
+```
+
+Notice we provided an empty string as the property name for the category value.
+
+Then the `toString()` output becomes:
+
+```
+Product [
+  Category [
+    name = Audio
+  ]
+  name = Headphone
+]
+```
 
 ## `ToString.of`
+
+If you do not wish to implement `ToString.Formattable` you can still use
+the `ToString` facility.
+
+The `ToString.of` method will generate a _flat_ string representation. Using
+our `Category` class:
+
+```java
+class Category {
+  String name = "Default";
+
+  @Override
+  public String toString() {
+    return ToString.of(
+      this,
+
+      "name", name
+    );
+  }
+}
+```
+
+Notice it does not implement the `ToString.Formattable` interface.
+
+The `toString()` method returns:
+
+```
+Category [ name = Default ]
+```
 
 */
 //@formatter:on
