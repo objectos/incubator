@@ -28,6 +28,7 @@ public final class Lang extends SiteDirectory {
     addPage("Check.html", new LangCheck());
     addPage("Equals.html", new LangEquals());
     addPage("HashCode.html", new LangHashCode());
+    addPage("ToString.html", new LangToString());
   }
 
 }
