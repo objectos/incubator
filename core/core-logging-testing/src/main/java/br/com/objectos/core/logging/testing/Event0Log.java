@@ -44,7 +44,7 @@ public final class Event0Log extends Log {
    */
   @Override
   public final void formatToString(StringBuilder sb, int depth) {
-    ToString.formatToString(
+    ToString.format(
       sb, depth, this,
       "event", event
     );

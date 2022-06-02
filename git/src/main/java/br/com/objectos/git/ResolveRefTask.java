@@ -35,7 +35,7 @@ final class ResolveRefTask extends AbstractGitTask<MaybeObjectId> {
 
   @Override
   public final void formatToString(StringBuilder toString, int level) {
-    ToString.formatToString(
+    ToString.format(
         toString, level, this,
         "repository", repository,
         "ref", ref

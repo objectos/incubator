@@ -70,7 +70,7 @@ final class Thing implements ToStringObject {
 
   @Override
   public final void formatToString(StringBuilder sb, int depth) {
-    ToString.formatToString(
+    ToString.format(
         sb, depth, this,
         "value", ByteArrays.toHexString(value)
     );
@@ -94,7 +94,7 @@ final class Thing implements ToStringObject {
 
   @Override
   public final String toString() {
-    return ToString.toString(this);
+    return ToString.of(this);
   }
 
   private boolean equals0(Thing that) {

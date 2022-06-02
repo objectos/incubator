@@ -35,7 +35,7 @@ final class ReadCommitTask extends AbstractGitTask<Commit> {
 
   @Override
   public final void formatToString(StringBuilder toString, int level) {
-    ToString.formatToString(
+    ToString.format(
         toString, level, this,
         "repository", repository,
         "id", id

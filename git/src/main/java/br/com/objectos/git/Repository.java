@@ -49,7 +49,7 @@ public final class Repository extends GitRepository implements ToStringObject {
 
   @Override
   public final void formatToString(StringBuilder sb, int depth) {
-    ToString.formatToString(
+    ToString.format(
         sb, depth, this,
         "gitDirectory", gitDirectory,
         "packFiles", packFiles
@@ -67,7 +67,7 @@ public final class Repository extends GitRepository implements ToStringObject {
 
   @Override
   public final String toString() {
-    return ToString.toString(this);
+    return ToString.of(this);
   }
 
   final RegularFile createRegularFile(ObjectId objectId) throws IOException {

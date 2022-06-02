@@ -31,7 +31,7 @@ abstract class PackFile implements ToStringObject {
 
   @Override
   public final String toString() {
-    return ToString.toString(this);
+    return ToString.of(this);
   }
 
   abstract ReadableFileChannelSource getIndexFile();

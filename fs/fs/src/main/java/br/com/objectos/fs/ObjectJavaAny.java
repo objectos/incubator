@@ -100,7 +100,7 @@ abstract class ObjectJavaAny
 
   @Override
   public final void formatToString(StringBuilder sb, int depth) {
-    ToString.formatToString(
+    ToString.format(
       sb, depth, this,
       "", getPath()
     );
@@ -197,7 +197,7 @@ abstract class ObjectJavaAny
    */
   @Override
   public final String toString() {
-    return ToString.toString(this);
+    return ToString.of(this);
   }
 
   /**

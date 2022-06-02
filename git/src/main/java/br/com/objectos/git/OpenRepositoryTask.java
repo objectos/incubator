@@ -30,7 +30,7 @@ final class OpenRepositoryTask extends AbstractGitTask<Repository> {
 
   @Override
   public final void formatToString(StringBuilder toString, int level) {
-    ToString.formatToString(
+    ToString.format(
         toString, level, this,
         "directory", directory
     );

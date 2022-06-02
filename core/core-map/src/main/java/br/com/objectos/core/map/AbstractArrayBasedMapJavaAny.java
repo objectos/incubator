@@ -338,7 +338,7 @@ abstract class AbstractArrayBasedMapJavaAny<K, V>
    */
   @Override
   public final String toString() {
-    return ToString.toString(this);
+    return ToString.of(this);
   }
 
   /**

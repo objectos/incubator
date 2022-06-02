@@ -85,7 +85,7 @@ abstract class AbstractGitTask<V> implements GitTask<V>, ResultConsumer, ToStrin
 
   @Override
   public final String toString() {
-    return ToString.toString(this);
+    return ToString.of(this);
   }
 
   void executeFinally() {}

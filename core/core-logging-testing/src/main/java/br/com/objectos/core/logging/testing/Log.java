@@ -167,7 +167,7 @@ public abstract class Log implements ToStringObject {
    */
   @Override
   public final String toString() {
-    return ToString.toString(this);
+    return ToString.of(this);
   }
 
   abstract boolean hasEvent(Note event);

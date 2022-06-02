@@ -36,7 +36,7 @@ final class ReadTreeTask extends AbstractGitTask<Tree> {
 
   @Override
   public final void formatToString(StringBuilder toString, int level) {
-    ToString.formatToString(
+    ToString.format(
       toString, level, this,
       "repository", repository,
       "id", id

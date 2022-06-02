@@ -33,7 +33,7 @@ final class WriteCommitTask extends AbstractGitTask<ObjectId> {
 
   @Override
   public final void formatToString(StringBuilder toString, int level) {
-    ToString.formatToString(
+    ToString.format(
         toString, level, this,
         "repository", repository,
         "commit", commit

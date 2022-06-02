@@ -427,7 +427,7 @@ abstract class AbstractBaseCollectionJavaAny<E> implements BaseCollection<E> {
    */
   @Override
   public final String toString() {
-    return ToString.toString(this);
+    return ToString.of(this);
   }
 
   /**

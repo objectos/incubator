@@ -66,7 +66,7 @@ public final class Event3Log<T1, T2, T3> extends Log {
    */
   @Override
   public final void formatToString(StringBuilder sb, int depth) {
-    ToString.formatToString(
+    ToString.format(
       sb, depth, this,
       "event", event,
       "value1", value1,

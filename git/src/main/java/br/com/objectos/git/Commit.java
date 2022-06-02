@@ -56,7 +56,7 @@ public final class Commit extends GitObject {
 
   @Override
   public final void formatToString(StringBuilder sb, int depth) {
-    ToString.formatToString(
+    ToString.format(
       sb, depth, this,
       "", objectId,
       "author", getAuthor(),

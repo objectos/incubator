@@ -26,7 +26,7 @@ final class EmptyObjectId extends MaybeObjectId {
 
   @Override
   public final void formatToString(StringBuilder sb, int depth) {
-    ToString.formatToString(sb, depth, this);
+    ToString.format(sb, depth, this);
   }
 
   @Override

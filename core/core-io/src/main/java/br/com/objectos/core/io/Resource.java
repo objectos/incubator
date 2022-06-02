@@ -141,7 +141,7 @@ public final class Resource implements InputStreamSource, ReaderSource, ToString
    */
   @Override
   public final void formatToString(StringBuilder toString, int level) {
-    ToString.formatToString(
+    ToString.format(
         toString, level, this,
         "", url
     );
@@ -200,7 +200,7 @@ public final class Resource implements InputStreamSource, ReaderSource, ToString
    */
   @Override
   public final String toString() {
-    return ToString.toString(this);
+    return ToString.of(this);
   }
 
   /**

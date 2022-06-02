@@ -48,7 +48,7 @@ final class IndexedPackFile extends PackFile {
 
   @Override
   public final void formatToString(StringBuilder toString, int level) {
-    ToString.formatToString(
+    ToString.format(
         toString, level, this,
         "", objectId
     );
