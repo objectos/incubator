@@ -225,7 +225,6 @@ class Category {
   public String toString() {
     return ToString.of(
       this,
-
       "name", name
     );
   }
@@ -238,6 +237,34 @@ The `toString()` method returns:
 
 ```
 Category [ name = Default ]
+```
+
+## Primitive values
+
+The `ToString.of` and the `ToString.format` methods only accepts object references for
+the values of the properties to be included in the string representation of a class.
+
+This means that for primitive values an auto boxing operation will occur.
+
+If you wish to avoid the auto boxing costs then you should convert the primitive
+to its string representation:
+
+```java
+class ShoppingCartItem {
+  ShoppingCart cart;
+  Product product;
+  int quantity;
+
+  @Override
+  public String toString() {
+    return ToString.of(
+      this,
+      "cart", cart,
+      "product", product,
+      "quantity", Integer.toString(quantity)
+    );
+  }
+}
 ```
 
 */
