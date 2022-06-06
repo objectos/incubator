@@ -31,7 +31,6 @@ import br.com.objectos.logger.LogListener;
 import br.com.objectos.logger.StorageLogger;
 import java.io.IOException;
 import objectos.lang.Level;
-import objectos.lang.ShutdownHook;
 import objectos.lang.ToString;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.BeforeClass;
@@ -74,7 +73,16 @@ public class MoreLoggingAndSlf4jTest implements LogListener {
       StorageLogger.logListener(this)
     );
 
-    ShutdownHook.register(storageLogger);
+    Runtime.getRuntime().addShutdownHook(new Thread() {
+      @Override
+      public final void run() {
+        try {
+          storageLogger.close();
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
+      }
+    });
 
     MoreLoggingAndSlf4j.bootstrap(storageLogger);
 

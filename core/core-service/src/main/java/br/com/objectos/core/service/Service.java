@@ -15,8 +15,6 @@
  */
 package br.com.objectos.core.service;
 
-import objectos.lang.ShutdownHookTask;
-
 /**
  * Defines a Service class.
  *
@@ -26,7 +24,7 @@ import objectos.lang.ShutdownHookTask;
  *
  * @since 2
  */
-public interface Service extends ShutdownHookTask {
+public interface Service {
 
   /**
    * Starts this service, or throws an exception if the start operation fails.

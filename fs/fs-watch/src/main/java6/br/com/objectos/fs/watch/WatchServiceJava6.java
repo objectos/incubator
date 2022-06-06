@@ -38,11 +38,6 @@ final class WatchServiceJava6 extends Thread implements Watch.Service {
   }
 
   @Override
-  public final void executeShutdownHookTask() {
-    stopService();
-  }
-
-  @Override
   public final void run() {
     while (!Thread.interrupted()) {
       try {

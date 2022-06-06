@@ -42,11 +42,6 @@ final class WatchServiceJava7 implements Watch.Service {
   }
 
   @Override
-  public final void executeShutdownHookTask() throws Exception {
-    stopService();
-  }
-
-  @Override
   public final synchronized void startService() throws IOException {
     FileSystem fs;
     fs = FileSystems.getDefault();

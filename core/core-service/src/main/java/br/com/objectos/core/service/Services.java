@@ -16,7 +16,6 @@
 package br.com.objectos.core.service;
 
 import objectos.lang.Check;
-import objectos.lang.ShutdownHook;
 
 /**
  * Provides {@code static} utility methods for {@link Service} instances.
@@ -49,7 +48,19 @@ public final class Services {
         throw new NullPointerException("services[" + i + "] == null");
       }
 
-      ShutdownHook.register(s);
+      var rt = Runtime.getRuntime();
+
+      rt.addShutdownHook(
+        new Thread(
+          () -> {
+            try {
+              s.stopService();
+            } catch (Exception e) {
+              e.printStackTrace();
+            }
+          }
+        )
+      );
 
       s.startService();
     }

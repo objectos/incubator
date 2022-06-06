@@ -62,11 +62,6 @@ public final class Server extends Executable implements Service {
     }
   }
 
-  @Override
-  public final void executeShutdownHookTask() throws Exception {
-    stopService();
-  }
-
   public final Process initialize(ServerOption option) throws IOException {
     return initialize0("--initialize", option);
   }

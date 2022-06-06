@@ -36,7 +36,6 @@ import objectos.lang.Note1;
 import objectos.lang.Note2;
 import objectos.lang.Note3;
 import objectos.lang.NoteSink;
-import objectos.lang.ShutdownHook;
 import objectos.lang.Throwables;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
@@ -113,8 +112,6 @@ public class MoreLoggingTest implements LogListener {
       cpuWorker
     );
 
-    ShutdownHook.register(storageLogger);
-
     StorageWatcher storageWatcher;
     storageWatcher = StorageWatcher.create(
       root,
@@ -126,7 +123,23 @@ public class MoreLoggingTest implements LogListener {
       StorageWatcher.logListener(this)
     );
 
-    ShutdownHook.register(storageWatcher);
+    Runtime.getRuntime().addShutdownHook(
+      new Thread(
+        () -> {
+          try {
+            storageLogger.close();
+          } catch (IOException e) {
+            e.printStackTrace();
+          }
+
+          try {
+            storageWatcher.close();
+          } catch (IOException e) {
+            e.printStackTrace();
+          }
+        }
+      )
+    );
 
     Watch.Service watchService;
     watchService = Watch.createService(storageWatcher);

@@ -15,8 +15,6 @@
  */
 package br.com.objectos.core.service;
 
-import objectos.lang.ShutdownHookTask;
-
 /**
  * An abstract {@link Service} that implements the
  * {@link br.com.objectos.core.runtime.ShutdownHookTask#executeShutdownHookTask()}
@@ -28,15 +26,5 @@ public abstract class AbstractService implements Service {
    * Sole constructor
    */
   protected AbstractService() {}
-
-  /**
-   * Invokes the {@link #stopService()} method.
-   *
-   * @see ShutdownHookTask#executeShutdownHookTask()
-   */
-  @Override
-  public final void executeShutdownHookTask() throws Exception {
-    stopService();
-  }
 
 }

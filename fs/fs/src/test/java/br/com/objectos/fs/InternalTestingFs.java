@@ -19,10 +19,8 @@ import br.com.objectos.core.list.MutableList;
 import br.com.objectos.random.testing.Next;
 import java.io.IOException;
 import java.util.List;
-import objectos.lang.ShutdownHook;
-import objectos.lang.ShutdownHookTask;
 
-final class InternalTestingFs implements ShutdownHookTask {
+final class InternalTestingFs {
 
   private static final InternalTestingFs INSTANCE;
 
@@ -30,7 +28,13 @@ final class InternalTestingFs implements ShutdownHookTask {
     InternalTestingFs tempDir;
     tempDir = new InternalTestingFs();
 
-    ShutdownHook.register(tempDir);
+    var rt = Runtime.getRuntime();
+
+    rt.addShutdownHook(
+      new Thread(
+        tempDir::executeShutdownHookTask, "hook-test-fs"
+      )
+    );
 
     INSTANCE = tempDir;
   }
@@ -58,8 +62,7 @@ final class InternalTestingFs implements ShutdownHookTask {
     return directory;
   }
 
-  @Override
-  public final void executeShutdownHookTask() {
+  final void executeShutdownHookTask() {
     for (Directory directory : tempDirectories) {
       try {
         directory.deleteContents();

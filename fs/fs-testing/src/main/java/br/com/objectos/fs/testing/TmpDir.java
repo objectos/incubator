@@ -20,8 +20,6 @@ import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.JavaIoTmpdir;
 import br.com.objectos.random.testing.Next;
 import java.io.IOException;
-import objectos.lang.ShutdownHook;
-import objectos.lang.ShutdownHookTask;
 import objectos.lang.Throwables;
 
 /**
@@ -34,7 +32,7 @@ import objectos.lang.Throwables;
  * mind. In other words, concurrent invocations of the {@link #create()} method
  * might suffer from contention.
  */
-public final class TmpDir implements ShutdownHookTask {
+public final class TmpDir {
 
   static final TmpDir INSTANCE = createInstance();
 
@@ -60,16 +58,20 @@ public final class TmpDir implements ShutdownHookTask {
   }
 
   private static TmpDir createInstance() {
-    TmpDir instance;
-    instance = new TmpDir();
+    var instance = new TmpDir();
 
-    ShutdownHook.register(instance);
+    var rt = Runtime.getRuntime();
+
+    rt.addShutdownHook(
+      new Thread(
+        instance::executeShutdownHookTask, "hook-tmpdir"
+      )
+    );
 
     return instance;
   }
 
-  @Override
-  public final void executeShutdownHookTask() throws Exception {
+  final void executeShutdownHookTask() {
     Throwable rethrow;
     rethrow = null;
 
@@ -91,7 +93,7 @@ public final class TmpDir implements ShutdownHookTask {
     }
 
     if (rethrow != null) {
-      throw (Exception) rethrow;
+      rethrow.printStackTrace();
     }
   }
 
