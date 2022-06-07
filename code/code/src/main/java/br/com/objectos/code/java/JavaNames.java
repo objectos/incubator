@@ -15,9 +15,6 @@
  */
 package br.com.objectos.code.java;
 
-import objectos.lang.StringConversion;
-import objectos.lang.StringConverter;
-
 /**
  * This class provides utility methods to produce valid Java names.
  *
