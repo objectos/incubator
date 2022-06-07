@@ -18,9 +18,10 @@ package br.com.objectos.tools;
 import br.com.objectos.core.set.ImmutableSet;
 import java.io.IOException;
 import java.net.URI;
-import objectos.lang.Strings;
 
 class StringJavaFileObject extends AbstractJavaFileObject {
+
+  private static final int[] EMPTY_INT_ARRAY = new int[0];
 
   private static final ImmutableSet<String> TYPES_KEYWORDS = ImmutableSet.of(
     "@interface",
@@ -183,7 +184,7 @@ class StringJavaFileObject extends AbstractJavaFileObject {
     private boolean nextWordComputed;
 
     Lexer(String source) {
-      codePoints = Strings.toCodePoints(source);
+      codePoints = toCodePoints(source);
     }
 
     final boolean hasNext() {
@@ -236,6 +237,69 @@ class StringJavaFileObject extends AbstractJavaFileObject {
 
       if (word.length() > 0) {
         nextWord = word.toString();
+      }
+    }
+
+    private int[] toCodePoints(String s) {
+      int stringLength;
+      stringLength = s.length();
+
+      if (stringLength == 0) {
+        return EMPTY_INT_ARRAY;
+      }
+
+      if (stringLength == 1) {
+        char onlyChar = s.charAt(0);
+
+        return new int[] {onlyChar};
+      }
+
+      int[] intArray;
+      intArray = new int[stringLength];
+
+      int intIndex;
+      intIndex = 0;
+
+      for (int charIndex = 0; charIndex < stringLength; charIndex++) {
+        char highOrBmp;
+        highOrBmp = s.charAt(charIndex);
+
+        intArray[intIndex] = highOrBmp;
+
+        if (!Character.isHighSurrogate(highOrBmp)) {
+          intIndex++;
+
+          continue;
+        }
+
+        char low;
+        low = s.charAt(charIndex + 1);
+
+        if (!Character.isLowSurrogate(low)) {
+          intIndex++;
+
+          continue;
+        }
+
+        charIndex++;
+
+        int codePoint;
+        codePoint = Character.toCodePoint(highOrBmp, low);
+
+        intArray[intIndex] = codePoint;
+
+        intIndex++;
+      }
+
+      if (intIndex == intArray.length) {
+        return intArray;
+      } else {
+        int[] result;
+        result = new int[intIndex];
+
+        System.arraycopy(intArray, 0, result, 0, intIndex);
+
+        return result;
       }
     }
 
