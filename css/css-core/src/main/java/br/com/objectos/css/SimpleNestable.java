@@ -15,9 +15,9 @@
  */
 package br.com.objectos.css;
 
+import br.com.objectos.core.collection.Iterables;
 import java.util.Arrays;
 import java.util.List;
-import objectos.lang.Equals;
 
 class SimpleNestable implements Nestable {
 
@@ -47,7 +47,7 @@ class SimpleNestable implements Nestable {
     }
     SimpleNestable that = (SimpleNestable) obj;
 
-    return Equals.iterables(parts, that.parts);
+    return Iterables.equals(parts, that.parts);
   }
 
   @Override
