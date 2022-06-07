@@ -27,7 +27,6 @@ import java.nio.channels.FileChannel;
 import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
 import objectos.lang.Level;
-import objectos.lang.Strings;
 
 final class StorageV1WriteJob implements IoTask, CpuTask, WriteJob {
 
@@ -190,8 +189,11 @@ final class StorageV1WriteJob implements IoTask, CpuTask, WriteJob {
   }
 
   private void addWriteStringList(String s) {
-    String value;
-    value = Strings.nullToEmpty(s);
+    var value = s;
+
+    if (value == null) {
+      value = "";
+    }
 
     writeStringList.add(value);
   }

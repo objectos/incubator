@@ -15,12 +15,15 @@
  */
 package br.com.objectos.css;
 
-import objectos.lang.Strings;
-
 interface Selector {
 
   static Selector parse(String selector) {
-    selector = Strings.nullToEmpty(selector).trim();
+    if (selector == null) {
+      selector = "";
+    }
+
+    selector = selector.trim();
+
     String[] parts = selector.split(",");
 
     Selector result = new SimpleSelector(parts[0]);

@@ -24,7 +24,6 @@ import br.com.objectos.css.select.IdSelector;
 import br.com.objectos.css.select.SelectorFactory;
 import br.com.objectos.css.select.TypeSelector;
 import br.com.objectos.css.select.TypeSelectors;
-import objectos.lang.Strings;
 import objectos.lang.ToString;
 
 class IdentToken implements HasStringValue {
@@ -32,7 +31,7 @@ class IdentToken implements HasStringValue {
   private final String value;
 
   IdentToken(String first, String rest) {
-    this(first + Strings.nullToEmpty(rest));
+    this(first + nullToEmpty(rest));
   }
 
   private IdentToken(String value) {
@@ -42,6 +41,14 @@ class IdentToken implements HasStringValue {
   // @VisibleForTesting
   static IdentToken of(String value) {
     return new IdentToken(value);
+  }
+
+  private static String nullToEmpty(String s) {
+    if (s == null) {
+      return "";
+    }
+
+    return s;
   }
 
   public final AttributeSelector asAttributeSelector() {

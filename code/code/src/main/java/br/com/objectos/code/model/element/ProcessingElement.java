@@ -40,7 +40,6 @@ import javax.tools.Diagnostic.Kind;
 import javax.tools.FileObject;
 import javax.tools.StandardLocation;
 import objectos.lang.Check;
-import objectos.lang.Strings;
 
 public abstract class ProcessingElement<E extends Element>
     extends AnnotatedElementOrType
@@ -135,7 +134,11 @@ public abstract class ProcessingElement<E extends Element>
     String maybeComment;
     maybeComment = elements.getDocComment(element);
 
-    return Strings.nullToEmpty(maybeComment);
+    if (maybeComment == null) {
+      maybeComment = "";
+    }
+
+    return maybeComment;
   }
 
   @SuppressWarnings("unchecked")
