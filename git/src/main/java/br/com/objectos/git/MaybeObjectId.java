@@ -17,14 +17,13 @@ package br.com.objectos.git;
 
 import java.util.NoSuchElementException;
 import objectos.lang.ToString;
-import objectos.lang.ToStringObject;
 
 /**
  * Represents an {@link ObjectId} or its absence.
  *
  * @since 1
  */
-public abstract class MaybeObjectId implements ToStringObject {
+public abstract class MaybeObjectId implements ToString.Formattable {
 
   MaybeObjectId() {}
 
@@ -57,7 +56,7 @@ public abstract class MaybeObjectId implements ToStringObject {
 
   /**
    * Returns the string representation of this id as defined by the
-   * {@link ToStringObject#formatToString(StringBuilder, int)} method.
+   * {@link ToString.Formattable#formatToString(StringBuilder, int)} method.
    *
    * @return the string representation of this id
    */

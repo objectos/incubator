@@ -36,8 +36,8 @@ import java.util.Map;
 import java.util.zip.Deflater;
 import java.util.zip.Inflater;
 import objectos.lang.Check;
-import objectos.lang.NoteSink;
 import objectos.lang.NoOpNoteSink;
+import objectos.lang.NoteSink;
 
 /**
  * A state machine providing low-level (plumbing) Git operations.

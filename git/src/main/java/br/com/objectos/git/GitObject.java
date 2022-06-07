@@ -17,12 +17,11 @@ package br.com.objectos.git;
 
 import objectos.lang.Equals;
 import objectos.lang.ToString;
-import objectos.lang.ToStringObject;
 
 /**
  * @since 1
  */
-abstract class GitObject implements ToStringObject {
+abstract class GitObject implements ToString.Formattable {
 
   final ObjectId objectId;
 
@@ -69,7 +68,7 @@ abstract class GitObject implements ToStringObject {
 
   /**
    * Returns the string representation of this Git object as defined by the
-   * {@link ToStringObject#formatToString(StringBuilder, int)} method.
+   * {@link ToString.Formattable#formatToString(StringBuilder, int)} method.
    *
    * @return the string representation of this Git object
    */
@@ -80,9 +79,9 @@ abstract class GitObject implements ToStringObject {
 
   private boolean equals0(GitObject obj) {
     return Equals.objects(
-        getClass(), obj.getClass(),
+      getClass(), obj.getClass(),
 
-        objectId, obj.objectId
+      objectId, obj.objectId
     );
   }
 

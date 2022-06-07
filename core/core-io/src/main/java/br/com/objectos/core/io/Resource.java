@@ -26,7 +26,6 @@ import java.net.URL;
 import java.nio.charset.Charset;
 import objectos.lang.Check;
 import objectos.lang.ToString;
-import objectos.lang.ToStringObject;
 
 /**
  * A {@link ClassLoader} resource.
@@ -38,7 +37,7 @@ import objectos.lang.ToStringObject;
  *
  * @since 2
  */
-public final class Resource implements InputStreamSource, ReaderSource, ToStringObject {
+public final class Resource implements InputStreamSource, ReaderSource, ToString.Formattable {
 
   private final URL url;
 
@@ -142,8 +141,8 @@ public final class Resource implements InputStreamSource, ReaderSource, ToString
   @Override
   public final void formatToString(StringBuilder toString, int level) {
     ToString.format(
-        toString, level, this,
-        "", url
+      toString, level, this,
+      "", url
     );
   }
 

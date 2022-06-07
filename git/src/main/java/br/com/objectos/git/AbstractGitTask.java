@@ -20,9 +20,8 @@ import objectos.lang.Check;
 import objectos.lang.Note1;
 import objectos.lang.NoteSink;
 import objectos.lang.ToString;
-import objectos.lang.ToStringObject;
 
-abstract class AbstractGitTask<V> implements GitTask<V>, ResultConsumer, ToStringObject {
+abstract class AbstractGitTask<V> implements GitTask<V>, ResultConsumer, ToString.Formattable {
 
   private static final byte _RESULT = 1;
 

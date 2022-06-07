@@ -22,7 +22,6 @@ import java.util.List;
 import java.util.RandomAccess;
 import objectos.lang.Check;
 import objectos.lang.ToString;
-import objectos.lang.ToStringObject;
 
 /**
  * An array-based {@code abstract} implementation of {@link BaseCollection}.
@@ -421,7 +420,7 @@ abstract class AbstractBaseCollectionJavaAny<E> implements BaseCollection<E> {
 
   /**
    * Returns the string representation of this collection as defined by the
-   * {@link ToStringObject#formatToString(StringBuilder, int)} method.
+   * {@link ToString.Formattable#formatToString(StringBuilder, int)} method.
    *
    * @return a string representation of this collection
    */

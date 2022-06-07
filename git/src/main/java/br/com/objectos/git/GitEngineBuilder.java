@@ -16,8 +16,8 @@
 package br.com.objectos.git;
 
 import br.com.objectos.concurrent.IoWorker;
-import objectos.lang.NoteSink;
 import objectos.lang.NoOpNoteSink;
+import objectos.lang.NoteSink;
 
 final class GitEngineBuilder {
 

@@ -19,8 +19,8 @@ import br.com.objectos.concurrent.CpuArray;
 import br.com.objectos.concurrent.CpuWorker;
 import br.com.objectos.concurrent.IoWorker;
 import objectos.lang.Check;
-import objectos.lang.NoteSink;
 import objectos.lang.NoOpNoteSink;
+import objectos.lang.NoteSink;
 
 /**
  * @since 3

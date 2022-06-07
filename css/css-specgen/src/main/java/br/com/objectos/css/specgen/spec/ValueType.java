@@ -21,9 +21,8 @@ import br.com.objectos.code.java.expression.Literal;
 import java.util.Objects;
 import objectos.lang.Check;
 import objectos.lang.ToString;
-import objectos.lang.ToStringObject;
 
-public class ValueType implements ToStringObject {
+public class ValueType implements ToString.Formattable {
 
   private final String formal;
   private final String name;
@@ -54,9 +53,9 @@ public class ValueType implements ToStringObject {
   @Override
   public final void formatToString(StringBuilder sb, int depth) {
     ToString.format(
-        sb, depth, this,
-        "name", name,
-        "formal", formal
+      sb, depth, this,
+      "name", name,
+      "formal", formal
     );
   }
 

@@ -18,19 +18,18 @@ package br.com.objectos.core.logging.testing;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import objectos.lang.Level;
 import objectos.lang.Note;
 import objectos.lang.Note0;
 import objectos.lang.Note1;
 import objectos.lang.Note2;
 import objectos.lang.Note3;
-import objectos.lang.Level;
 import objectos.lang.ToString;
-import objectos.lang.ToStringObject;
 
 /**
  * A logged event that provides methods for its inspection.
  */
-public abstract class Log implements ToStringObject {
+public abstract class Log implements ToString.Formattable {
 
   private final Note _event;
 

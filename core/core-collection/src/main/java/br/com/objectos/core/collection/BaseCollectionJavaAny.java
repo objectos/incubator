@@ -17,7 +17,7 @@ package br.com.objectos.core.collection;
 
 import br.com.objectos.latest.Template;
 import java.util.Collection;
-import objectos.lang.ToStringObject;
+import objectos.lang.ToString;
 
 /**
  * The base {@link java.util.Collection} interface for the Objectos Collections
@@ -31,9 +31,9 @@ import objectos.lang.ToStringObject;
  */
 @Template(
     simpleName = "BaseCollection",
-    extendsClause = "java.util.Collection<E>, Joinable, objectos.lang.ToStringObject"
+    extendsClause = "java.util.Collection<E>, Joinable, objectos.lang.ToString.Formattable"
 )
-interface BaseCollectionJavaAny<E> extends Collection<E>, Joinable, ToStringObject {
+interface BaseCollectionJavaAny<E> extends Collection<E>, Joinable, ToString.Formattable {
 
   /**
    * Adds the specified element to this collection.

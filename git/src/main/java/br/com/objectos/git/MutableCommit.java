@@ -18,14 +18,13 @@ package br.com.objectos.git;
 import br.com.objectos.core.list.MutableList;
 import objectos.lang.Check;
 import objectos.lang.ToString;
-import objectos.lang.ToStringObject;
 
 /**
  * A class for creating a commit object suitable for writing to a repository.
  *
  * @since 3
  */
-public final class MutableCommit implements ToStringObject {
+public final class MutableCommit implements ToString.Formattable {
 
   private Identification author;
 
@@ -127,7 +126,7 @@ public final class MutableCommit implements ToStringObject {
 
   /**
    * Returns the string representation of this commit as defined by the
-   * {@link ToStringObject#formatToString(StringBuilder, int)} method.
+   * {@link ToString.Formattable#formatToString(StringBuilder, int)} method.
    *
    * @return the string representation of this commit
    */

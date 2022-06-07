@@ -22,9 +22,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import objectos.lang.ToString;
-import objectos.lang.ToStringObject;
 
-final class Thing implements ToStringObject {
+final class Thing implements ToString.Formattable {
 
   private final byte[] value;
 
@@ -125,8 +124,8 @@ final class Thing implements ToStringObject {
   @Override
   public final void formatToString(StringBuilder sb, int depth) {
     ToString.format(
-        sb, depth, this,
-        "value", ByteArrays.toHexString(value)
+      sb, depth, this,
+      "value", ByteArrays.toHexString(value)
     );
   }
 

@@ -22,7 +22,6 @@ import br.com.objectos.core.set.ImmutableSet;
 import br.com.objectos.fs.Directory;
 import objectos.lang.Check;
 import objectos.lang.ToString;
-import objectos.lang.ToStringObject;
 
 /**
  * <p>
@@ -139,7 +138,7 @@ final class CopyTreeCommand extends StageGitCommand<ObjectId> {
  */
 public abstract class StageGitCommand<V>
     extends StageComputationTask<V>
-    implements Computation<V>, GitCommand<V>, ToStringObject {
+    implements Computation<V>, GitCommand<V>, ToString.Formattable {
 
   private GitCommandExecutor git;
 

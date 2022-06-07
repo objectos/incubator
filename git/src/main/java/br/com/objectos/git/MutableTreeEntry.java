@@ -20,14 +20,13 @@ import java.nio.charset.Charset;
 import java.util.Comparator;
 import objectos.lang.Equals;
 import objectos.lang.ToString;
-import objectos.lang.ToStringObject;
 
 /**
  * An object that can serve as a {@link MutableTree} entry.
  *
  * @since 3
  */
-abstract class MutableTreeEntry implements ToStringObject {
+abstract class MutableTreeEntry implements ToString.Formattable {
 
   static final Comparator<MutableTreeEntry> ORDER = new Comparator<MutableTreeEntry>() {
     @Override

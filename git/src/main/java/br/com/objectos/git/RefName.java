@@ -25,14 +25,13 @@ import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import objectos.lang.Check;
 import objectos.lang.ToString;
-import objectos.lang.ToStringObject;
 
 /**
  * Represents the name of a Git reference.
  *
  * @since 1
  */
-public abstract class RefName implements ToStringObject {
+public abstract class RefName implements ToString.Formattable {
 
   /**
    * The refs/heads/master reference.

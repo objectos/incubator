@@ -21,13 +21,12 @@ import br.com.objectos.latest.Concrete;
 import java.util.Map;
 import objectos.lang.HashCode;
 import objectos.lang.ToString;
-import objectos.lang.ToStringObject;
 
 @Concrete(modifiers = "abstract", simpleName = "AbstractArrayBasedMap")
 abstract class AbstractArrayBasedMapJavaAny<K, V>
     implements
     Map<K, V>,
-    ToStringObject {
+    ToString.Formattable {
 
   static final int MAX_POSITIVE_POWER_OF_TWO = 1 << 30;
 
@@ -332,7 +331,7 @@ abstract class AbstractArrayBasedMapJavaAny<K, V>
 
   /**
    * Returns the string representation of this map as defined by the
-   * {@link ToStringObject#formatToString(StringBuilder, int)} method.
+   * {@link ToString.Formattable#formatToString(StringBuilder, int)} method.
    *
    * @return a string representation of this map
    */

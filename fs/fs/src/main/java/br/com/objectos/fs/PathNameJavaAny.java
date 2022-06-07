@@ -19,7 +19,7 @@ import br.com.objectos.latest.Concrete;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
-import objectos.lang.ToStringObject;
+import objectos.lang.ToString;
 
 /**
  * Represents a pathname in a file system.
@@ -27,7 +27,7 @@ import objectos.lang.ToStringObject;
  * @since 2
  */
 @Concrete(modifiers = "public", simpleName = "PathName")
-interface PathNameJavaAny extends Comparable<PathName>, ToStringObject {
+interface PathNameJavaAny extends Comparable<PathName>, ToString.Formattable {
 
   /**
    * Accept method used to implement the visitor pattern.

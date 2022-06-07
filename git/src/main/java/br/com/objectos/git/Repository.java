@@ -22,14 +22,13 @@ import br.com.objectos.fs.ResolvedPath;
 import java.io.IOException;
 import objectos.lang.Check;
 import objectos.lang.ToString;
-import objectos.lang.ToStringObject;
 
 /**
  * Represents a Git repository.
  *
  * @since 1
  */
-public final class Repository extends GitRepository implements ToStringObject {
+public final class Repository extends GitRepository implements ToString.Formattable {
 
   private final Directory gitDirectory;
 

@@ -23,9 +23,8 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashSet;
 import objectos.lang.ToString;
-import objectos.lang.ToStringObject;
 
-final class Thing implements ToStringObject {
+final class Thing implements ToString.Formattable {
 
   static final Comparator<Thing> NATURAL_ORDER = new Comparator<Thing>() {
     @Override
@@ -118,8 +117,8 @@ final class Thing implements ToStringObject {
   @Override
   public final void formatToString(StringBuilder sb, int depth) {
     ToString.format(
-        sb, depth, this,
-        "value", ByteArrays.toHexString(value)
+      sb, depth, this,
+      "value", ByteArrays.toHexString(value)
     );
   }
 

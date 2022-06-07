@@ -17,9 +17,8 @@ package br.com.objectos.git;
 
 import br.com.objectos.fs.ReadableFileChannelSource;
 import objectos.lang.ToString;
-import objectos.lang.ToStringObject;
 
-abstract class PackFile implements ToStringObject {
+abstract class PackFile implements ToString.Formattable {
 
   public abstract int getObjectCount();
 

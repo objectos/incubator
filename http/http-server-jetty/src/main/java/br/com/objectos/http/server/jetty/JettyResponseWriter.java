@@ -19,7 +19,6 @@ import br.com.objectos.core.io.InputStreamSource;
 import br.com.objectos.http.media.MediaType;
 import br.com.objectos.http.server.Header;
 import br.com.objectos.http.server.ResponseWriter;
-import br.com.objectos.http.server.ResponseWriter.MessageBodyDsl;
 import br.com.objectos.http.server.StatusCode;
 import java.io.IOException;
 import java.io.InputStream;

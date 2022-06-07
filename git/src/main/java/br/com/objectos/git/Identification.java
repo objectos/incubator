@@ -18,7 +18,6 @@ package br.com.objectos.git;
 import objectos.lang.Check;
 import objectos.lang.HashCode;
 import objectos.lang.ToString;
-import objectos.lang.ToStringObject;
 
 /**
  * The author or the commiter field of a commit object. Consists of the
@@ -26,7 +25,7 @@ import objectos.lang.ToStringObject;
  *
  * @since 1
  */
-public final class Identification implements ToStringObject {
+public final class Identification implements ToString.Formattable {
 
   private String email;
 
@@ -193,7 +192,7 @@ public final class Identification implements ToStringObject {
 
   /**
    * Returns the string representation of this identification as defined by the
-   * {@link ToStringObject#formatToString(StringBuilder, int)} method.
+   * {@link ToString.Formattable#formatToString(StringBuilder, int)} method.
    *
    * @return the string representation of this identification
    */
