@@ -42,7 +42,6 @@ import java.nio.file.attribute.FileAttribute;
 import java.nio.file.attribute.FileTime;
 import java.util.Iterator;
 import objectos.lang.Check;
-import objectos.lang.OperatingSystem;
 
 @Bridge
 abstract class ObjectJava7 extends ObjectJavaAny {

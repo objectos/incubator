@@ -25,10 +25,6 @@ import java.io.IOException;
 import java.net.URI;
 import java.nio.charset.Charset;
 import java.util.Arrays;
-import objectos.lang.Linux;
-import objectos.lang.OperatingSystem;
-import objectos.lang.OperatingSystemVisitor;
-import objectos.lang.UnsupportedOperatingSystem;
 
 abstract class AbstractObjectosFsTest {
 

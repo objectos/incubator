@@ -19,10 +19,6 @@ import java.nio.file.attribute.FileAttribute;
 import java.nio.file.attribute.PosixFilePermission;
 import java.util.EnumSet;
 import java.util.Set;
-import objectos.lang.Linux;
-import objectos.lang.OperatingSystem;
-import objectos.lang.OperatingSystemVisitor;
-import objectos.lang.UnsupportedOperatingSystem;
 
 abstract class FileAttributeBuilder {
 
