@@ -18,10 +18,11 @@ package br.com.objectos.code.processing;
 import br.com.objectos.code.java.io.JavaFile;
 import br.com.objectos.core.list.MutableList;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import javax.annotation.processing.ProcessingEnvironment;
 import javax.tools.Diagnostic;
 import objectos.lang.Check;
-import objectos.lang.Throwables;
 
 public abstract class Artifact {
 
@@ -54,7 +55,13 @@ public abstract class Artifact {
   protected abstract void execute(ProcessingEnvironment processingEnv);
 
   protected final void log(ProcessingEnvironment processingEnv, IOException e) {
-    String msg = Throwables.printStackTraceToString(e);
+    var output = new StringWriter();
+
+    var printWriter = new PrintWriter(output);
+
+    e.printStackTrace(printWriter);
+
+    var msg = output.toString();
 
     processingEnv.getMessager()
         .printMessage(Diagnostic.Kind.ERROR,

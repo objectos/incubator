@@ -26,6 +26,8 @@ import br.com.objectos.core.set.ImmutableSet;
 import br.com.objectos.core.set.MutableSet;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.EnumSet;
 import java.util.Set;
 import javax.annotation.processing.Filer;
@@ -43,7 +45,6 @@ import javax.tools.Diagnostic.Kind;
 import javax.tools.FileObject;
 import javax.tools.StandardLocation;
 import objectos.lang.Check;
-import objectos.lang.Throwables;
 
 public class ProcessingRound
     implements
@@ -142,9 +143,15 @@ public class ProcessingRound
   public final void printMessageError(Exception e) {
     Check.notNull(e, "e == null");
 
-    String stackTrace = Throwables.printStackTraceToString(e);
+    var output = new StringWriter();
 
-    printMessageError("Processor threw an exception: " + stackTrace);
+    var printWriter = new PrintWriter(output);
+
+    e.printStackTrace(printWriter);
+
+    var msg = output.toString();
+
+    printMessageError("Processor threw an exception: " + msg);
   }
 
   public final void printMessageError(String message) {
