@@ -22,7 +22,6 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import objectos.lang.Check;
 import objectos.lang.Suppressed;
-import objectos.lang.Throwables;
 
 /**
  * A base async computation implementation providing an imperative programming
@@ -745,7 +744,7 @@ public abstract class StageComputationTask<V> implements Computation<V>, CpuTask
       results.clear();
     }
 
-    Throwable rethrow;
+    Exception rethrow;
     rethrow = null;
 
     if (!computations.isEmpty()) {
@@ -771,7 +770,7 @@ public abstract class StageComputationTask<V> implements Computation<V>, CpuTask
 
         try {
           r = c.getResult();
-        } catch (Throwable e) {
+        } catch (Exception e) {
           rethrow = e;
 
           computations.clear();
@@ -785,7 +784,9 @@ public abstract class StageComputationTask<V> implements Computation<V>, CpuTask
       }
     }
 
-    Throwables.rethrowIfPossible(rethrow, Exception.class);
+    if (rethrow != null) {
+      throw rethrow;
+    }
 
     if (computations.isEmpty()) {
       unset(FSTAGE_INCREMENTED);

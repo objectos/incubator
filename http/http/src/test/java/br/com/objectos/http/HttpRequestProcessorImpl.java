@@ -32,7 +32,6 @@ import java.nio.charset.CharsetEncoder;
 import java.nio.charset.CoderResult;
 import java.util.Date;
 import objectos.lang.Suppressed;
-import objectos.lang.Throwables;
 
 final class HttpRequestProcessorImpl
     implements
@@ -411,7 +410,7 @@ final class HttpRequestProcessorImpl
     long count;
     count = contentLength - fileChannelPosition;
 
-    Throwable rethrow;
+    IOException rethrow;
     rethrow = null;
 
     try {
@@ -419,7 +418,7 @@ final class HttpRequestProcessorImpl
       written = fileChannel.transferTo(fileChannelPosition, count, channel);
 
       fileChannelPosition += written;
-    } catch (Throwable e) {
+    } catch (IOException e) {
       rethrow = e;
     }
 
@@ -429,11 +428,13 @@ final class HttpRequestProcessorImpl
       try {
         fileChannel.close();
       } catch (IOException e) {
-        rethrow = Suppressed.addIfPossible(rethrow, e);
+        rethrow = (IOException) Suppressed.addIfPossible(rethrow, e);
       }
     }
 
-    Throwables.rethrowIfPossible(rethrow, IOException.class);
+    if (rethrow != null) {
+      throw rethrow;
+    }
   }
 
   private byte toIo(byte task, byte onReady) {
