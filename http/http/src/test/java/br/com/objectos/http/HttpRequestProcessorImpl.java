@@ -31,6 +31,7 @@ import java.nio.channels.WritableByteChannel;
 import java.nio.charset.CharsetEncoder;
 import java.nio.charset.CoderResult;
 import java.util.Date;
+import objectos.lang.Suppressed;
 import objectos.lang.Throwables;
 
 final class HttpRequestProcessorImpl
@@ -428,7 +429,7 @@ final class HttpRequestProcessorImpl
       try {
         fileChannel.close();
       } catch (IOException e) {
-        rethrow = Throwables.addSuppressed(rethrow, e);
+        rethrow = Suppressed.addIfPossible(rethrow, e);
       }
     }
 

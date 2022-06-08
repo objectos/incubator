@@ -25,7 +25,7 @@ import objectos.lang.Note0;
 import objectos.lang.Note1;
 import objectos.lang.Note2;
 import objectos.lang.NoteSink;
-import objectos.lang.Throwables;
+import objectos.lang.Suppressed;
 
 abstract class AbstractGitEngineTask implements CpuTask, IoTask {
 
@@ -72,7 +72,7 @@ abstract class AbstractGitEngineTask implements CpuTask, IoTask {
   }
 
   public final void catchThrowable(Throwable e) {
-    error = Throwables.addSuppressed(error, e);
+    error = Suppressed.addIfPossible(error, e);
   }
 
   @Override

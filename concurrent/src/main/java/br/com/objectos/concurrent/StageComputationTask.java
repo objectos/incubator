@@ -21,6 +21,7 @@ import java.util.NoSuchElementException;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import objectos.lang.Check;
+import objectos.lang.Suppressed;
 import objectos.lang.Throwables;
 
 /**
@@ -878,7 +879,7 @@ public abstract class StageComputationTask<V> implements Computation<V>, CpuTask
 
       executeFinally();
     } catch (Throwable e) {
-      error = Throwables.addSuppressed(error, e);
+      error = Suppressed.addIfPossible(error, e);
     }
 
     return _STOP;
