@@ -36,7 +36,6 @@ import objectos.lang.Note1;
 import objectos.lang.Note2;
 import objectos.lang.Note3;
 import objectos.lang.NoteSink;
-import objectos.lang.Suppressed;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -248,7 +247,7 @@ public class MoreLoggingTest implements LogListener {
 
     ex3.setStackTrace(randomStackTrace());
 
-    Suppressed.addIfPossible(ex3, ex1);
+    ex3.addSuppressed(ex1);
 
     logger.log(ERROR3, ex1, ex2, ex3);
 

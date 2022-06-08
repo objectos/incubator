@@ -21,7 +21,6 @@ import java.util.NoSuchElementException;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import objectos.lang.Check;
-import objectos.lang.Suppressed;
 
 /**
  * A base async computation implementation providing an imperative programming
@@ -880,7 +879,11 @@ public abstract class StageComputationTask<V> implements Computation<V>, CpuTask
 
       executeFinally();
     } catch (Throwable e) {
-      error = Suppressed.addIfPossible(error, e);
+      if (error != null) {
+        error.addSuppressed(e);
+      } else {
+        error = e;
+      }
     }
 
     return _STOP;

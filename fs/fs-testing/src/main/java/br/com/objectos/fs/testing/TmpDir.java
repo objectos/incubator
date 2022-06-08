@@ -20,7 +20,6 @@ import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.JavaIoTmpdir;
 import br.com.objectos.random.testing.Next;
 import java.io.IOException;
-import objectos.lang.Suppressed;
 
 /**
  * A class that creates and manages temporary directories suitable for testing
@@ -82,13 +81,13 @@ public final class TmpDir {
       try {
         directory.deleteContents();
       } catch (Exception e) {
-        rethrow = Suppressed.addIfPossible(rethrow, e);
+        rethrow = addIfPossible(rethrow, e);
       }
 
       try {
         directory.delete();
       } catch (Exception e) {
-        rethrow = Suppressed.addIfPossible(rethrow, e);
+        rethrow = addIfPossible(rethrow, e);
       }
     }
 
@@ -112,6 +111,16 @@ public final class TmpDir {
     }
 
     return result;
+  }
+
+  private Throwable addIfPossible(Throwable rethrow, Exception e) {
+    if (rethrow != null) {
+      rethrow.addSuppressed(e);
+
+      return rethrow;
+    } else {
+      return e;
+    }
   }
 
 }

@@ -31,7 +31,6 @@ import java.nio.channels.WritableByteChannel;
 import java.nio.charset.CharsetEncoder;
 import java.nio.charset.CoderResult;
 import java.util.Date;
-import objectos.lang.Suppressed;
 
 final class HttpRequestProcessorImpl
     implements
@@ -428,7 +427,11 @@ final class HttpRequestProcessorImpl
       try {
         fileChannel.close();
       } catch (IOException e) {
-        rethrow = (IOException) Suppressed.addIfPossible(rethrow, e);
+        if (rethrow != null) {
+          rethrow.addSuppressed(e);
+        } else {
+          rethrow = e;
+        }
       }
     }
 

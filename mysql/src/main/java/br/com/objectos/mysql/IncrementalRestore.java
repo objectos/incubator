@@ -29,7 +29,6 @@ import objectos.lang.Note0;
 import objectos.lang.Note1;
 import objectos.lang.NoteSink;
 import objectos.lang.RandomString;
-import objectos.lang.Suppressed;
 
 final class IncrementalRestore extends AbstractClientJob<ImmutableList<String>> {
 
@@ -258,7 +257,11 @@ final class IncrementalRestore extends AbstractClientJob<ImmutableList<String>> 
 
         tempDirectory.delete();
       } catch (IOException e) {
-        rethrow = (IOException) Suppressed.addIfPossible(rethrow, e);
+        if (rethrow != null) {
+          rethrow.addSuppressed(e);
+        } else {
+          rethrow = e;
+        }
       }
     }
 

@@ -31,7 +31,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import objectos.lang.Check;
-import objectos.lang.Suppressed;
 
 abstract class AbstractClientJob<V> implements ClientJob<V>, IoTask {
 
@@ -329,9 +328,13 @@ abstract class AbstractClientJob<V> implements ClientJob<V>, IoTask {
       c.join();
     } catch (InterruptedException e) {
       IOException maybeSuppressed;
-      maybeSuppressed = new IOException("Interrupted whlie collecting process stream", e);
+      maybeSuppressed = new IOException("Interrupted while collecting process stream", e);
 
-      ioException = (IOException) Suppressed.addIfPossible(ioException, maybeSuppressed);
+      if (ioException != null) {
+        ioException.addSuppressed(maybeSuppressed);
+      } else {
+        ioException = maybeSuppressed;
+      }
     }
 
     return c.get();
@@ -390,10 +393,10 @@ abstract class AbstractClientJob<V> implements ClientJob<V>, IoTask {
         ExecutionException executionException;
         executionException = new ExecutionException(exitValue, stderr, stdout);
 
-        if (ioException == null) {
-          ioException = executionException;
+        if (ioException != null) {
+          ioException.addSuppressed(executionException);
         } else {
-          ioException = (IOException) Suppressed.addIfPossible(ioException, executionException);
+          ioException = executionException;
         }
       }
 
