@@ -26,7 +26,7 @@ import objectos.ssg.Markdown;
 Objectos Lang provides:
 
 - utilities for instances whose type is from the `java.lang` package; and
-- a type-safe note sink (event listener) API.
+- a type-safe note sink API.
 
 Objectos itself is built on top of Objectos Lang.
 

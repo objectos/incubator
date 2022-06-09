@@ -15,22 +15,13 @@
  */
 package objectos.docs.next.lang;
 
-import objectos.docs.ui.DocsPage;
 import objectos.ssg.SiteDirectory;
 
-public final class Lang extends SiteDirectory {
-
-  public static final Class<? extends DocsPage> INDEX = Index.class;
+final class Notes extends SiteDirectory {
 
   @Override
   protected final void configure() {
-    addPage("index.html", new Index());
-    addPage("Check.html", new LangCheck());
-    addPage("Equals.html", new LangEquals());
-    addPage("HashCode.html", new LangHashCode());
-    addPage("ToString.html", new LangToString());
-
-    addDirectory("note-sink-api", new Notes());
+    addPage("index.html", new NotesIndex());
   }
 
 }
