@@ -23,30 +23,30 @@ import objectos.ssg.Markdown;
 
 # The `NoOpNoteSink`
 
-The `NoOpNoteSink` is a logger implementation provided with Objectos Logging.
-It is a no-operation logger. All of its logging methods do no operation when invoked.
+The `NoOpNoteSink` is a no-operation `NoteSink` implementation provided with Objectos Lang.
+All of its note sending methods do no operation when invoked.
 
-Even though it performs no logging operation, the `NoOpNoteSink` can be useful
+Even though it performs no note sending operation, the `NoOpNoteSink` can be useful
 during the development of a Java application.
 
 This section describes some of its uses.
 
 ## Obtaining the singleton instance
 
-The `NoOpNoteSink` is a no-operation logger implementation. As it does nothing, it has no state
-either. It provides a singleton instance since it can be safely reused. You access it by
+The `NoOpNoteSink` is a no-operation implementation. As it does nothing, it has no state
+either. Therefore, the provided singleton instance can be safely reused. You access it by
 invoking the static `getInstance()` method:
 
 ```java
-var logger = NoOpNoteSink.getInstance();
+var sink = NoOpNoteSink.getInstance();
 ```
 
 ## Use it as a _default_ value
 
-In classes where the `Logger` is defined as a mutable field, it is recommended you provide
-the `NoOpNoteSink` instance as a _default_ logger implementation.
+In classes where the `NoteSink` is defined as a mutable field, it is recommended you provide
+the `NoOpNoteSink` instance as a _default_ sink implementation.
 
-We saw two examples in the [obtaining the `Logger` interface](href:next.lang.NotesNoteSink)
+We saw two examples in the [obtaining the `NoteSink` interface](href:next.lang.NotesNoteSink)
 section:
 
 - via the setter method; and
@@ -55,56 +55,56 @@ section:
 As a quick reminder, let's see the _setter method_ strategy:
 
 ```java
-import objectos.logging.*;
+import objectos.lang.*;
 
 public class Setter {
-  private Logger logger = NoOpNoteSink.getInstance();
+  private NoteSink sink = NoOpNoteSink.getInstance();
 
-  void setLogger(Logger logger) {
-    if (logger == null) {
-      throw new NullPointerException("logger == null");
+  void setNoteSink(NoteSink sink) {
+    if (sink == null) {
+      throw new NullPointerException("sink == null");
     }
 
-    this.logger = logger;
+    this.sink = sink;
   }
 }
 ```
 
-Notice how the `logger` field is initialized with the `NoOpNoteSink` singleton instance.
-It can be altered via the `setLogger()` method.
+Notice how the `sink` field is initialized with the `NoOpNoteSink` singleton instance.
+It can be altered via the `setNoteSink` method.
 
 ## Use it by subclassing
 
 The `NoOpNoteSink` is also designed so it can be used by subclassing it.
 
-For example, suppose you wish to provide a default `Logger` implementation that does a little
+For example, suppose you wish to provide a default `NoteSink` implementation that does a little
 work, say print to the standard output. You can do it by extending the `NoOpNoteSink`.
 
 ```java
-import objectos.logging.*;
+import objectos.lang.*;
 
 public class Service {
-  static final Event0 START = Event0.info();
+  static final Note0 START = Note0.info();
 
-  Logger logger = new NoOpNoteSink() {
+  NoteSink sink = new NoOpNoteSink() {
     @Override
-    public void log(Event0 event) {
-      if (event == START) {
-        System.out.println(event);
+    public void log(Note0 note) {
+      if (note == START) {
+        System.out.println(note);
       }
     }
   };
 
   public void start() {
-    logger.log(START);
+    sink.send(START);
   }
 
-  void setLogger(Logger logger) {
-    if (logger == null) {
-      throw new NullPointerException("logger == null");
+  void setNoteSink(NoteSink sink) {
+    if (sink == null) {
+      throw new NullPointerException("sink == null");
     }
 
-    this.logger = logger;
+    this.sink = sink;
   }
 }
 ```
