@@ -17,7 +17,6 @@ package objectos.docs.next;
 
 import objectos.docs.next.intro.Intro;
 import objectos.docs.next.lang.Lang;
-import objectos.docs.next.logging.LoggingDir;
 import objectos.docs.next.relnotes.RelNotes;
 import objectos.docs.ui.DocsPage;
 import objectos.docs.ui.VersionHolder;
@@ -38,7 +37,6 @@ public final class Next extends SiteDirectory {
 
     addDirectory("intro", new Intro());
     addDirectory("objectos-lang", new Lang());
-    addDirectory("logging", new LoggingDir());
     addDirectory("relnotes", new RelNotes());
   }
 

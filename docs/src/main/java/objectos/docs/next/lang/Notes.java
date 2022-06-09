@@ -22,6 +22,9 @@ final class Notes extends SiteDirectory {
   @Override
   protected final void configure() {
     addPage("index.html", new NotesIndex());
+    addPage("creating-notes.html", new NotesNotes());
+    addPage("the-note-sink-interface.html", new NotesNoteSink());
+    addPage("the-no-op-note-sink.html", new NotesNoOpNoteSink());
   }
 
 }

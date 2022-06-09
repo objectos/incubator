@@ -45,7 +45,7 @@ We **highly recommend** the use of the Objectos BOM POM.
 
 ### Objectos Logging
 
-[Objectos Logging](href:next.logging.Index) provides a logging API for Java applications.
+[Objectos Logging](href:v0001.logging.Index) provides a logging API for Java applications.
 You log events and not string messages. Events can have type arguments so that log
 method invocations are type-safe. A hypothetical service that only logs "hello world!"
 could be written as:

@@ -20,11 +20,11 @@ import objectos.ssg.SiteDirectory;
 
 public final class Lang extends SiteDirectory {
 
-  public static final Class<? extends DocsPage> INDEX = Index.class;
+  public static final Class<? extends DocsPage> INDEX = LangIndex.class;
 
   @Override
   protected final void configure() {
-    addPage("index.html", new Index());
+    addPage("index.html", new LangIndex());
     addPage("Check.html", new LangCheck());
     addPage("Equals.html", new LangEquals());
     addPage("HashCode.html", new LangHashCode());

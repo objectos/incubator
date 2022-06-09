@@ -19,7 +19,7 @@ import static org.testng.Assert.assertEquals;
 
 import objectos.docs.DocsSiteTest;
 import objectos.docs.next.Next;
-import objectos.docs.next.logging.LoggingDir;
+import objectos.docs.v0001.logging.LoggingDir;
 import objectos.ssg.SiteDirectory;
 import org.testng.annotations.Test;
 
@@ -28,7 +28,7 @@ public class VersionHolderTest extends DocsSiteTest {
   @Test
   public void parse() {
     testParse(Next.class, "next");
-    testParse(LoggingDir.class, "next");
+    testParse(LoggingDir.class, "v0001");
   }
 
   private void testParse(Class<? extends SiteDirectory> t, String expected) {

@@ -21,7 +21,7 @@ import static org.testng.Assert.assertNull;
 import br.com.objectos.core.list.ImmutableList;
 import objectos.docs.DocsSiteTest;
 import objectos.docs.next.Next;
-import objectos.docs.next.logging.LoggingDir;
+import objectos.docs.v0001.logging.LoggingDir;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 

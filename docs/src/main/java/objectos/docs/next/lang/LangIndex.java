@@ -48,7 +48,7 @@ This assumes you are using the [Objectos BOM POM](href:next.intro.IntroInstallat
 */
 //@formatter:on
 @Markdown
-final class Index extends DocsPage {
+final class LangIndex extends DocsPage {
   @Override
   protected void configure() {
     titleText = "Objectos Lang";
