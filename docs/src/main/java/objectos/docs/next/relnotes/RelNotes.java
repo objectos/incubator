@@ -22,6 +22,8 @@ public final class RelNotes extends SiteDirectory {
   @Override
   protected final void configure() {
     addPage("index.html", new RelNotesIndex());
+
+    addPage("0.2.0.html", new RelNotes0_2_0());
     addPage("0.1.0.html", new RelNotes0_1_0());
   }
 

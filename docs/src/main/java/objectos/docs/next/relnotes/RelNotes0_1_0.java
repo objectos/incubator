@@ -72,6 +72,6 @@ public class Service {
 final class RelNotes0_1_0 extends DocsPage {
   @Override
   protected final void configure() {
-    titleText = "Objectos 0.1.0 release notes";
+    titleText = "Objectos 0.1.0 release notes (2022-05-16)";
   }
 }
