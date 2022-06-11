@@ -34,7 +34,7 @@ import br.com.objectos.core.list.MutableList;
 import objectos.lang.HashCode;
 import objectos.lang.ToString;
 
-final class GenerateStaticFactoryAggregateAnnotation {
+final class GenerateStaticFactoryAggregateAnnotation implements ToString.Formattable {
 
   private final ImmutableList<FactoryType> factoryTypes;
 
@@ -64,6 +64,16 @@ final class GenerateStaticFactoryAggregateAnnotation {
         && factoryTypes.equals(that.factoryTypes);
   }
 
+  @Override
+  public final void formatToString(StringBuilder toString, int level) {
+    ToString.format(
+      toString, level, this,
+      "packageName", packageName,
+      "simpleName", simpleName,
+      "factoryTypes", factoryTypes
+    );
+  }
+
   public final JavaFile generate() {
     return generateClass().toJavaFile(packageName);
   }
@@ -76,7 +86,7 @@ final class GenerateStaticFactoryAggregateAnnotation {
     b.simpleName(simpleName);
 
     b.addConstructor(
-        constructor(AccessLevel.PRIVATE)
+      constructor(AccessLevel.PRIVATE)
     );
 
     for (int i = 0; i < factoryTypes.size(); i++) {
@@ -98,12 +108,7 @@ final class GenerateStaticFactoryAggregateAnnotation {
 
   @Override
   public final String toString() {
-    return ToString.toString(
-        this,
-        "packageName", packageName,
-        "simpleName", simpleName,
-        "factoryTypes", factoryTypes
-    );
+    return ToString.of(this);
   }
 
   static abstract class Builder {

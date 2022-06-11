@@ -26,7 +26,7 @@ import br.com.objectos.css.select.TypeSelector;
 import br.com.objectos.css.select.TypeSelectors;
 import objectos.lang.ToString;
 
-class IdentToken implements HasStringValue {
+class IdentToken implements HasStringValue, ToString.Formattable {
 
   private final String value;
 
@@ -82,6 +82,14 @@ class IdentToken implements HasStringValue {
   }
 
   @Override
+  public final void formatToString(StringBuilder toString, int level) {
+    ToString.format(
+      toString, level, this,
+      "", value
+    );
+  }
+
+  @Override
   public final int hashCode() {
     return value.hashCode();
   }
@@ -93,7 +101,7 @@ class IdentToken implements HasStringValue {
 
   @Override
   public final String toString() {
-    return ToString.toString(this, "", value);
+    return ToString.of(this);
   }
 
 }

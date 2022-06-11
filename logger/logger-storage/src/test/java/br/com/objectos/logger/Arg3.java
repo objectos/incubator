@@ -17,7 +17,7 @@ package br.com.objectos.logger;
 
 import objectos.lang.ToString;
 
-final class Arg3 {
+final class Arg3 extends Arg {
 
   final int value;
 
@@ -26,8 +26,11 @@ final class Arg3 {
   }
 
   @Override
-  public final String toString() {
-    return ToString.toString(this, "", value);
+  public final void formatToString(StringBuilder toString, int level) {
+    ToString.format(
+      toString, level, this,
+      "", value
+    );
   }
 
 }

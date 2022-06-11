@@ -32,7 +32,7 @@ import br.com.objectos.css.boot.sheet.SheetNames;
 import java.util.Locale;
 import objectos.lang.ToString;
 
-public class Property implements Comparable<Property>, FunctionOrProperty {
+public class Property implements Comparable<Property>, FunctionOrProperty, ToString.Formattable {
 
   private NamedClass declarationName;
 
@@ -91,6 +91,14 @@ public class Property implements Comparable<Property>, FunctionOrProperty {
     }
     Property that = (Property) obj;
     return name.equals(that.name);
+  }
+
+  @Override
+  public final void formatToString(StringBuilder toString, int level) {
+    ToString.format(
+      toString, level, this,
+      "", name
+    );
   }
 
   public final Identifier getEnumName() {
@@ -152,42 +160,42 @@ public class Property implements Comparable<Property>, FunctionOrProperty {
 
   @Override
   public final String toString() {
-    return ToString.toString(this, "", name);
+    return ToString.of(this);
   }
 
   private void acceptGeneratedStyleSheetStep0Hash(GeneratedStyleSheetStep step) {
     step.addType(
-        _interface(
-            _protected(), getMultiDeclarationName(),
-            _extends(SheetNames._Declaration)
-        )
+      _interface(
+        _protected(), getMultiDeclarationName(),
+        _extends(SheetNames._Declaration)
+      )
     );
 
     step.addType(
-        _interface(
-            _protected(), getSingleDeclarationName(),
-            _extends(SheetNames._MultiDeclarationElement)
-        )
+      _interface(
+        _protected(), getSingleDeclarationName(),
+        _extends(SheetNames._MultiDeclarationElement)
+      )
     );
 
     step.addAnyDeclarationExtends(
-        getMultiDeclarationName()
+      getMultiDeclarationName()
     );
     step.addAnyDeclarationExtends(
-        getSingleDeclarationName()
+      getSingleDeclarationName()
     );
   }
 
   private void acceptGeneratedStyleSheetStep0Standard(GeneratedStyleSheetStep step) {
     step.addType(
-        _interface(
-            _protected(), getSingleDeclarationName(),
-            _extends(SheetNames._Declaration)
-        )
+      _interface(
+        _protected(), getSingleDeclarationName(),
+        _extends(SheetNames._Declaration)
+      )
     );
 
     step.addAnyDeclarationExtends(
-        getSingleDeclarationName()
+      getSingleDeclarationName()
     );
   }
 

@@ -22,7 +22,7 @@ import br.com.objectos.code.model.element.ProcessingType;
 import br.com.objectos.core.list.ImmutableList;
 import objectos.lang.ToString;
 
-final class FactoryType {
+final class FactoryType implements ToString.Formattable {
 
   private final ImmutableList<StaticField> staticFields;
 
@@ -45,6 +45,14 @@ final class FactoryType {
     FactoryType that = (FactoryType) obj;
     return staticFields.equals(that.staticFields)
         && staticMethods.equals(that.staticMethods);
+  }
+
+  @Override
+  public final void formatToString(StringBuilder toString, int level) {
+    ToString.format(
+      toString, level, this,
+      "staticMethods", staticMethods
+    );
   }
 
   public final void generateFields(ClassCode.Builder b) {
@@ -78,10 +86,7 @@ final class FactoryType {
 
   @Override
   public final String toString() {
-    return ToString.toString(
-        this,
-        "staticMethods", staticMethods
-    );
+    return ToString.of(this);
   }
 
   static abstract class Builder {

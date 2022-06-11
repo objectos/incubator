@@ -17,7 +17,7 @@ package br.com.objectos.lexer.impl.ah.model;
 
 import objectos.lang.ToString;
 
-public class TokenString implements IsToken {
+public class TokenString implements IsToken, ToString.Formattable {
 
   private final String value;
 
@@ -43,13 +43,21 @@ public class TokenString implements IsToken {
   }
 
   @Override
+  public final void formatToString(StringBuilder toString, int level) {
+    ToString.format(
+      toString, level, this,
+      "", value
+    );
+  }
+
+  @Override
   public final int hashCode() {
     return value.hashCode();
   }
 
   @Override
   public final String toString() {
-    return ToString.toString(this, "", value);
+    return ToString.of(this);
   }
 
 }

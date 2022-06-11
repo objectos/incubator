@@ -17,7 +17,7 @@ package br.com.objectos.concurrent;
 
 import objectos.lang.ToString;
 
-final class CountingCpuTask implements CpuTask {
+final class CountingCpuTask implements CpuTask, ToString.Formattable {
 
   private volatile boolean active;
 
@@ -26,6 +26,15 @@ final class CountingCpuTask implements CpuTask {
   @Override
   public final void executeOne() {
     counter++;
+  }
+
+  @Override
+  public final void formatToString(StringBuilder toString, int level) {
+    ToString.format(
+      toString, level, this,
+      "active", Boolean.toString(active),
+      "counter", Integer.toString(counter)
+    );
   }
 
   public final int get() {
@@ -49,11 +58,7 @@ final class CountingCpuTask implements CpuTask {
 
   @Override
   public final String toString() {
-    return ToString.toString(
-        this,
-        "active", Boolean.toString(active),
-        "counter", Integer.toString(counter)
-    );
+    return ToString.of(this);
   }
 
 }

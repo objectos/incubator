@@ -15,12 +15,12 @@
  */
 package br.com.objectos.logger;
 
-import objectos.lang.Note;
 import objectos.lang.Level;
+import objectos.lang.Note;
 import objectos.lang.NoteSink;
 import objectos.lang.ToString;
 
-abstract class WriteJobLog extends Log {
+abstract class WriteJobLog extends Log implements ToString.Formattable {
 
   WriteJobLog(Note event) {
     Object k;
@@ -56,13 +56,18 @@ abstract class WriteJobLog extends Log {
   }
 
   @Override
-  public String toString() {
-    return ToString.toString(
-      this,
+  public void formatToString(StringBuilder toString, int level) {
+    ToString.format(
+      toString, level, this,
       "", key,
       "", level,
       "", source
     );
+  }
+
+  @Override
+  public final String toString() {
+    return ToString.of(this);
   }
 
   abstract byte getTypeV1();

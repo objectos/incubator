@@ -18,7 +18,7 @@ package br.com.objectos.formal.testing;
 import java.util.Objects;
 import objectos.lang.ToString;
 
-public class ComplexSingle implements IsComplex {
+public class ComplexSingle implements IsComplex, ToString.Formattable {
 
   private final Object value;
 
@@ -40,13 +40,21 @@ public class ComplexSingle implements IsComplex {
   }
 
   @Override
+  public final void formatToString(StringBuilder toString, int level) {
+    ToString.format(
+      toString, level, this,
+      "", value
+    );
+  }
+
+  @Override
   public final int hashCode() {
     return value.hashCode();
   }
 
   @Override
   public final String toString() {
-    return ToString.toString(this, "", value);
+    return ToString.of(this);
   }
 
 }

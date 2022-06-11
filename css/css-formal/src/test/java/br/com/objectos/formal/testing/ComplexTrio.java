@@ -18,7 +18,7 @@ package br.com.objectos.formal.testing;
 import java.util.Objects;
 import objectos.lang.ToString;
 
-public class ComplexTrio implements IsComplex {
+public class ComplexTrio implements IsComplex, ToString.Formattable {
 
   private final Object first;
   private final Object second;
@@ -42,18 +42,23 @@ public class ComplexTrio implements IsComplex {
   }
 
   @Override
+  public final void formatToString(StringBuilder toString, int level) {
+    ToString.format(
+      toString, level, this,
+      "first", first,
+      "second", second,
+      "third", third
+    );
+  }
+
+  @Override
   public final int hashCode() {
     return Objects.hash(first, second, third);
   }
 
   @Override
   public final String toString() {
-    return ToString.toString(
-        this,
-        "first", first,
-        "second", second,
-        "third", third
-    );
+    return ToString.of(this);
   }
 
 }

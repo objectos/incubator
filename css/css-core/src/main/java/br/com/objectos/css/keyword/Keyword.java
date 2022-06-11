@@ -18,7 +18,7 @@ package br.com.objectos.css.keyword;
 import br.com.objectos.css.type.Value;
 import objectos.lang.ToString;
 
-public abstract class Keyword implements Value {
+public abstract class Keyword implements Value, ToString.Formattable {
 
   protected Keyword() {}
 
@@ -35,6 +35,13 @@ public abstract class Keyword implements Value {
         && equalsImpl(that);
   }
 
+  public final void formatToString(StringBuilder toString, int level) {
+    ToString.format(
+      toString, level, this,
+      "", getName()
+    );
+  }
+
   public abstract String getJavaName();
 
   public abstract String getName();
@@ -46,7 +53,7 @@ public abstract class Keyword implements Value {
 
   @Override
   public final String toString() {
-    return ToString.toString(this, "", getName());
+    return ToString.of(this);
   }
 
   protected abstract boolean equalsImpl(Keyword obj);

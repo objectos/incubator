@@ -18,7 +18,7 @@ package br.com.objectos.formal.testing.html;
 import br.com.objectos.formal.testing.IsBrick;
 import objectos.lang.ToString;
 
-public class HtmlWhitespaceChar implements IsBrick {
+public class HtmlWhitespaceChar implements IsBrick, ToString.Formattable {
 
   private final IsBrick brick;
 
@@ -36,13 +36,21 @@ public class HtmlWhitespaceChar implements IsBrick {
   }
 
   @Override
+  public final void formatToString(StringBuilder toString, int level) {
+    ToString.format(
+      toString, level, this,
+      "", brick
+    );
+  }
+
+  @Override
   public final int hashCode() {
     return brick.hashCode();
   }
 
   @Override
   public final String toString() {
-    return ToString.toString(this, "", brick);
+    return ToString.of(this);
   }
 
   @Override

@@ -146,12 +146,12 @@ public class MoreLoggingAndSlf4jTest implements LogListener {
 
     assertEquals(
       log.toString(),
-      ToString.toString(
+      toString0(
         "Slf4jLog1",
-        "", "SLF4J",
-        "", Level.TRACE,
-        "", source,
-        "", "trace test"
+        "SLF4J",
+        Level.TRACE,
+        source,
+        "trace test"
       )
     );
 
@@ -159,12 +159,12 @@ public class MoreLoggingAndSlf4jTest implements LogListener {
 
     assertEquals(
       log.toString(),
-      ToString.toString(
+      toString0(
         "Slf4jLog1",
-        "", "SLF4J",
-        "", Level.DEBUG,
-        "", source,
-        "", "debug test 1"
+        "SLF4J",
+        Level.DEBUG,
+        source,
+        "debug test 1"
       )
     );
 
@@ -172,12 +172,12 @@ public class MoreLoggingAndSlf4jTest implements LogListener {
 
     assertEquals(
       log.toString(),
-      ToString.toString(
+      toString0(
         "Slf4jLog1",
-        "", "SLF4J",
-        "", Level.INFO,
-        "", source,
-        "", "info test 2 3"
+        "SLF4J",
+        Level.INFO,
+        source,
+        "info test 2 3"
       )
     );
 
@@ -185,12 +185,12 @@ public class MoreLoggingAndSlf4jTest implements LogListener {
 
     assertEquals(
       log.toString(),
-      ToString.toString(
+      toString0(
         "Slf4jLog1",
-        "", "SLF4J",
-        "", Level.WARN,
-        "", source,
-        "", "warn test A B"
+        "SLF4J",
+        Level.WARN,
+        source,
+        "warn test A B"
       )
     );
 
@@ -198,19 +198,50 @@ public class MoreLoggingAndSlf4jTest implements LogListener {
 
     assertEquals(
       log.toString(),
-      ToString.toString(
+      toString0(
         "Slf4jLog2",
-        "", "SLF4J",
-        "", Level.ERROR,
-        "", source,
-        "", "error test",
-        "", "java.io.IOException: ERROR"
+        "SLF4J",
+        Level.ERROR,
+        source,
+        "error test",
+        "java.io.IOException: ERROR"
       )
     );
   }
 
   private void throwIoException(Level l) throws IOException {
     throw new IOException(l.name());
+  }
+
+  private String toString0(
+      String typeName, Object a, Object b, Object c, Object d) {
+    var out = new StringBuilder();
+
+    ToString.format(
+      out, 0, typeName,
+      "", a,
+      "", b,
+      "", c,
+      "", d
+    );
+
+    return out.toString();
+  }
+
+  private String toString0(
+      String typeName, Object a, Object b, Object c, Object d, Object e) {
+    var out = new StringBuilder();
+
+    ToString.format(
+      out, 0, typeName,
+      "", a,
+      "", b,
+      "", c,
+      "", d,
+      "", e
+    );
+
+    return out.toString();
   }
 
   private void waitLogs(int count) throws InterruptedException {

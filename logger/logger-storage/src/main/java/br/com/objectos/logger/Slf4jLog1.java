@@ -29,13 +29,13 @@ final class Slf4jLog1 extends WriteJobLog {
   }
 
   @Override
-  public final String toString() {
-    return ToString.toString(
-        this,
-        "", key,
-        "", level,
-        "", source,
-        "", message
+  public final void formatToString(StringBuilder toString, int level) {
+    ToString.format(
+      toString, level, this,
+      "", key,
+      "", this.level,
+      "", source,
+      "", message
     );
   }
 

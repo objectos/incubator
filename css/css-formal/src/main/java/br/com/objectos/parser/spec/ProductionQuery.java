@@ -23,7 +23,7 @@ import java.util.Optional;
 import objectos.lang.ToString;
 
 public class ProductionQuery
-    implements Iterable<Production>, Iterator<ProductionQuery> {
+    implements Iterable<Production>, Iterator<ProductionQuery>, ToString.Formattable {
 
   private static final ProductionQuery EMPTY = new ProductionQuery(Collections.emptyList());
 
@@ -46,6 +46,15 @@ public class ProductionQuery
 
   public final Optional<Production> findFirst() {
     return list.stream().findFirst();
+  }
+
+  @Override
+  public final void formatToString(StringBuilder toString, int level) {
+    ToString.format(
+      toString, level, this,
+      "index", index,
+      "list", list
+    );
   }
 
   public final Production get() {
@@ -80,11 +89,7 @@ public class ProductionQuery
 
   @Override
   public final String toString() {
-    return ToString.toString(
-        this,
-        "index", index,
-        "list", list
-    );
+    return ToString.of(this);
   }
 
 }

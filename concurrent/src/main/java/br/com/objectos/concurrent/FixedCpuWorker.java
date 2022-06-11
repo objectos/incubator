@@ -33,7 +33,7 @@ import objectos.lang.ToString;
  *
  * @since 2
  */
-public final class FixedCpuWorker extends CpuWorkerService {
+public final class FixedCpuWorker extends CpuWorkerService implements ToString.Formattable {
 
   static final Note1<CpuTask> INTERRUPTED = Note1.info();
 
@@ -77,6 +77,14 @@ public final class FixedCpuWorker extends CpuWorkerService {
     this.logger = logger;
 
     queue = new ArrayBlockingQueue<CpuTask>(queueCapacity);
+  }
+
+  @Override
+  public final void formatToString(StringBuilder toString, int level) {
+    ToString.format(
+      toString, level, this,
+      "queue", queue
+    );
   }
 
   /**
@@ -135,10 +143,7 @@ public final class FixedCpuWorker extends CpuWorkerService {
 
   @Override
   public final String toString() {
-    return ToString.toString(
-      this,
-      "queue", queue
-    );
+    return ToString.of(this);
   }
 
   @Override

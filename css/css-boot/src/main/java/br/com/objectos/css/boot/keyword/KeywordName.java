@@ -50,7 +50,12 @@ import javax.lang.model.SourceVersion;
 import objectos.lang.Check;
 import objectos.lang.ToString;
 
-public class KeywordName implements Comparable<KeywordName>, ParameterType, Value {
+public class KeywordName
+    implements
+    Comparable<KeywordName>,
+    ParameterType,
+    Value,
+    ToString.Formattable {
 
   public final NamedClass className;
 
@@ -110,6 +115,14 @@ public class KeywordName implements Comparable<KeywordName>, ParameterType, Valu
   }
 
   @Override
+  public final void formatToString(StringBuilder toString, int level) {
+    ToString.format(
+      toString, level, this,
+      "", name
+    );
+  }
+
+  @Override
   public final int hashCode() {
     return name.hashCode();
   }
@@ -124,27 +137,22 @@ public class KeywordName implements Comparable<KeywordName>, ParameterType, Valu
     return className;
   }
 
-  @Override
-  public final String toString() {
-    return ToString.toString(this, "", name);
-  }
-
   final ClassCode generate(int code) {
     return _class(
-        CssBoot.GENERATED,
-        _public(), _final(), className,
-        _extends(KeywordNames._StandardKeyword),
-        _implements(interfaces),
+      CssBoot.GENERATED,
+      _public(), _final(), className,
+      _extends(KeywordNames._StandardKeyword),
+      _implements(interfaces),
 
-        field(
-            _static(), _final(), className,
-            init(Ids.INSTANCE, _new(className))
-        ),
+      field(
+        _static(), _final(), className,
+        init(Ids.INSTANCE, _new(className))
+      ),
 
-        constructor(
-            _private(),
-            _super(l(code), l(fieldName.name()), l(name))
-        )
+      constructor(
+        _private(),
+        _super(l(code), l(fieldName.name()), l(name))
+      )
     );
   }
 

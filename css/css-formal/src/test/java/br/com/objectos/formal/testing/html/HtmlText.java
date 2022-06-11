@@ -18,7 +18,7 @@ package br.com.objectos.formal.testing.html;
 import br.com.objectos.formal.testing.Token;
 import objectos.lang.ToString;
 
-public class HtmlText implements Token {
+public class HtmlText implements Token, ToString.Formattable {
 
   private final String value;
 
@@ -36,13 +36,21 @@ public class HtmlText implements Token {
   }
 
   @Override
+  public final void formatToString(StringBuilder toString, int level) {
+    ToString.format(
+      toString, level, this,
+      "", value
+    );
+  }
+
+  @Override
   public final int hashCode() {
     return value.hashCode();
   }
 
   @Override
   public final String toString() {
-    return ToString.toString(this, "", value);
+    return ToString.of(this);
   }
 
 }

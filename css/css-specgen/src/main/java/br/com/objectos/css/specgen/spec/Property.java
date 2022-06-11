@@ -21,7 +21,7 @@ import java.util.Objects;
 import objectos.lang.Check;
 import objectos.lang.ToString;
 
-public class Property implements Comparable<Property>, Serializable {
+public class Property implements Comparable<Property>, Serializable, ToString.Formattable {
 
   private static final long serialVersionUID = -4272842217165803466L;
 
@@ -66,6 +66,16 @@ public class Property implements Comparable<Property>, Serializable {
   }
 
   @Override
+  public final void formatToString(StringBuilder toString, int level) {
+    ToString.format(
+      toString, level, this,
+      "name", name,
+      "formal", formal,
+      "valueTypes", valueTypes
+    );
+  }
+
+  @Override
   public final int hashCode() {
     return Objects.hash(name, formal);
   }
@@ -76,12 +86,7 @@ public class Property implements Comparable<Property>, Serializable {
 
   @Override
   public final String toString() {
-    return ToString.toString(
-        this,
-        "name", name,
-        "formal", formal,
-        "valueTypes", valueTypes
-    );
+    return ToString.of(this);
   }
 
   public final ImmutableList<ValueType> valueTypes() {
@@ -96,9 +101,9 @@ public class Property implements Comparable<Property>, Serializable {
 
     public final Property build() {
       return new Property(
-          name(),
-          formal(),
-          valueTypes()
+        name(),
+        formal(),
+        valueTypes()
       );
     }
 
