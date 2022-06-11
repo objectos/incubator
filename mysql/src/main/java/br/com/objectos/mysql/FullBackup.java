@@ -124,7 +124,7 @@ final class FullBackup extends AbstractClientJob<RegularFile> {
   final byte executeStart() {
     startTime = System.currentTimeMillis();
 
-    logger.log(ESTART, loginPath, targetDirectory.getPath());
+    logger.send(ESTART, loginPath, targetDirectory.getPath());
 
     addCommand(mysqldump.getPath());
 
@@ -148,13 +148,13 @@ final class FullBackup extends AbstractClientJob<RegularFile> {
       String fileName;
       fileName = targetFile.getName();
 
-      logger.log(ESUCCESS, totalTime, fileName);
+      logger.send(ESUCCESS, totalTime, fileName);
 
       return targetFile;
     }
 
     else {
-      logger.log(EFAILED, exception);
+      logger.send(EFAILED, exception);
 
       throw exception;
     }
@@ -208,7 +208,7 @@ final class FullBackup extends AbstractClientJob<RegularFile> {
       String command;
       command = getCommandString();
 
-      logger.log(ESTART_PROCESS, command);
+      logger.send(ESTART_PROCESS, command);
     }
 
     startStderrCollector();

@@ -78,16 +78,16 @@ final class FullRestore extends AbstractClientJob<ImmutableList<String>> {
     String fileName;
     fileName = file.getName();
 
-    logger.log(ESTART, loginPath, fileName);
+    logger.send(ESTART, loginPath, fileName);
 
     if (!fileName.startsWith("backup-")) {
-      logger.log(EINVALID_FULLNAME, fileName);
+      logger.send(EINVALID_FULLNAME, fileName);
 
       return toFinally();
     }
 
     if (!fileName.endsWith("full.sql.gz")) {
-      logger.log(EINVALID_FULLNAME, fileName);
+      logger.send(EINVALID_FULLNAME, fileName);
 
       return toFinally();
     }
@@ -110,13 +110,13 @@ final class FullRestore extends AbstractClientJob<ImmutableList<String>> {
       long totalTime;
       totalTime = System.currentTimeMillis() - startTime;
 
-      logger.log(EFINISH, totalTime);
+      logger.send(EFINISH, totalTime);
 
       return stdout;
     }
 
     else {
-      logger.log(EFAILED, exception);
+      logger.send(EFAILED, exception);
 
       throw exception;
     }

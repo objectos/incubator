@@ -53,7 +53,7 @@ abstract class AbstractConfigurableLogger implements ConfigurableLogger {
    * {@inheritDoc}
    */
   @Override
-  public final void log(Note0 event) {
+  public final void send(Note0 event) {
     if (event == null) {
       return;
     }
@@ -71,7 +71,7 @@ abstract class AbstractConfigurableLogger implements ConfigurableLogger {
    * {@inheritDoc}
    */
   @Override
-  public final <T1> void log(Note1<T1> event, T1 v1) {
+  public final <T1> void send(Note1<T1> event, T1 v1) {
     if (event == null) {
       return;
     }
@@ -89,7 +89,7 @@ abstract class AbstractConfigurableLogger implements ConfigurableLogger {
    * {@inheritDoc}
    */
   @Override
-  public final <T1, T2> void log(Note2<T1, T2> event, T1 v1, T2 v2) {
+  public final <T1, T2> void send(Note2<T1, T2> event, T1 v1, T2 v2) {
     if (event == null) {
       return;
     }
@@ -107,7 +107,7 @@ abstract class AbstractConfigurableLogger implements ConfigurableLogger {
    * {@inheritDoc}
    */
   @Override
-  public final <T1, T2, T3> void log(Note3<T1, T2, T3> event, T1 v1, T2 v2, T3 v3) {
+  public final <T1, T2, T3> void send(Note3<T1, T2, T3> event, T1 v1, T2 v2, T3 v3) {
     if (event == null) {
       return;
     }

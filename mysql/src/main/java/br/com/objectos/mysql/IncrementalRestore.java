@@ -150,14 +150,14 @@ final class IncrementalRestore extends AbstractClientJob<ImmutableList<String>> 
   @Override
   final byte executeStart() {
     if (files.isEmpty()) {
-      logger.log(EEMPTY_INPUT);
+      logger.send(EEMPTY_INPUT);
 
       return toFinally();
     }
 
     startTime = System.currentTimeMillis();
 
-    logger.log(ESTART);
+    logger.send(ESTART);
 
     filesIndex = 0;
 
@@ -174,13 +174,13 @@ final class IncrementalRestore extends AbstractClientJob<ImmutableList<String>> 
       long totalTime;
       totalTime = System.currentTimeMillis() - startTime;
 
-      logger.log(EFINISH, totalTime);
+      logger.send(EFINISH, totalTime);
 
       return stdout;
     }
 
     else {
-      logger.log(EFAILED, exception);
+      logger.send(EFAILED, exception);
 
       throw exception;
     }

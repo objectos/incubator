@@ -140,7 +140,7 @@ final class IncrementalBackup extends AbstractClientJob<ImmutableList<RegularFil
   final byte executeStart() {
     startTime = System.currentTimeMillis();
 
-    logger.log(ESTART, loginPath, targetDirectory.getPath());
+    logger.send(ESTART, loginPath, targetDirectory.getPath());
 
     result.clear();
 
@@ -163,13 +163,13 @@ final class IncrementalBackup extends AbstractClientJob<ImmutableList<RegularFil
       long totalTime;
       totalTime = System.currentTimeMillis() - startTime;
 
-      logger.log(ESUCCESS, totalTime);
+      logger.send(ESUCCESS, totalTime);
 
       return result.toImmutableList();
     }
 
     else {
-      logger.log(EFAILED, exception);
+      logger.send(EFAILED, exception);
 
       throw exception;
     }
@@ -183,7 +183,7 @@ final class IncrementalBackup extends AbstractClientJob<ImmutableList<RegularFil
     else {
       result.add(targetFile);
 
-      logger.log(EBINARY_LOG, binlogPathName);
+      logger.send(EBINARY_LOG, binlogPathName);
 
       return toIo(IO_CLOSE, _NEXT_LOG);
     }
@@ -201,7 +201,7 @@ final class IncrementalBackup extends AbstractClientJob<ImmutableList<RegularFil
 
     basename = executeStatementResult.get(0);
 
-    logger.log(ELOGBIN_BASENAME, basename);
+    logger.send(ELOGBIN_BASENAME, basename);
 
     binaryLogs = executeStatementResult;
 

@@ -223,7 +223,7 @@ public class NonBlockingClient implements Client {
       try {
         server.close();
       } catch (IOException e) {
-        logger.log(CLOSE_FAILED, e);
+        logger.send(CLOSE_FAILED, e);
       }
     }
 

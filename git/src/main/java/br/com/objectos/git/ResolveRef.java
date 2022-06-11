@@ -63,37 +63,37 @@ final class ResolveRef extends AbstractGitEngineTask {
   private static final byte IO_RESOLVE_PACKED = 4;
 
   /*
-
+  
   @startuml
-
+  
   hide empty description
   skinparam shadowing false
-
+  
   [*] --> IO : ioAction=resolveLoose\lioReady=MAYBE_LOOSE
-
+  
   FINALLY --> [*]
-
+  
   IO --> IO_WAIT
-
+  
   IO_WAIT --> MAYBE_LOOSE
   IO_WAIT --> MAYBE_PACKED
-
+  
   MAYBE_LOOSE --> OBJECT_ID
   MAYBE_LOOSE --> IO : ioAction=resolvePacked\lioReady=MAYBE_PACKED
-
+  
   MAYBE_PACKED --> NULL
   MAYBE_PACKED --> PARSE
-
+  
   OBJECT_ID --> FINALLY
-
+  
   PARSE --> OBJECT_ID
   PARSE --> IO : ioAction=readPacked\lioReady=PARSE
   PARSE --> NULL
-
+  
   NULL --> FINALLY
-
+  
   @enduml
-
+  
   */
 
   private FileChannel channel;
@@ -221,7 +221,7 @@ final class ResolveRef extends AbstractGitEngineTask {
 
     stringBuilder = injector.getStringBuilder();
 
-    log(ESTART, repository, ref);
+    send(ESTART, repository, ref);
 
     return toIo(
       IO_RESOLVE_LOOSE, toDecode(_LOOSE), _CLOSE
@@ -486,7 +486,7 @@ final class ResolveRef extends AbstractGitEngineTask {
   }
 
   private void setResult(MaybeObjectId result) {
-    log(ESUCCESS, result);
+    send(ESUCCESS, result);
 
     super.setResult(result);
   }

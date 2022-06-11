@@ -55,7 +55,7 @@ final class ReadTreeTask extends AbstractGitTask<Tree> {
 
     reader.set(readTree);
 
-    log(ESET_INPUT, id);
+    send(ESET_INPUT, id);
 
     return reader;
   }

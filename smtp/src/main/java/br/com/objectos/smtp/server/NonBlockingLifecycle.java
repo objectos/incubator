@@ -75,7 +75,7 @@ public final class NonBlockingLifecycle implements Lifecycle {
       executeActiveSessions();
       executeAcceptConnection();
     } catch (Exception e) {
-      logger.log(UNEXPECTED_EXECUTION_EXCEPTION, e);
+      logger.send(UNEXPECTED_EXECUTION_EXCEPTION, e);
       close();
     }
   }
@@ -94,7 +94,7 @@ public final class NonBlockingLifecycle implements Lifecycle {
     try {
       c.close();
     } catch (IOException e) {
-      logger.log(CLOSE_FAILED, e);
+      logger.send(CLOSE_FAILED, e);
     }
   }
 

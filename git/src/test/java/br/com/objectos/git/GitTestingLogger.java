@@ -30,7 +30,7 @@ final class GitTestingLogger extends NoOpNoteSink {
   }
 
   @Override
-  public final <T1, T2> void log(Note2<T1, T2> event, T1 v1, T2 v2) {
+  public final <T1, T2> void send(Note2<T1, T2> event, T1 v1, T2 v2) {
     if (event == GitEvents.writeTreeStart()) {
       writeTreeStart(v1, v2);
     }

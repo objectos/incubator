@@ -1280,7 +1280,7 @@ final class ObjectReader extends AbstractGitEngineTask implements ObjectReaderHa
 
     channelMain = null;
 
-    log(EIO_CLOSE);
+    send(EIO_CLOSE);
   }
 
   private void ioOpenLoose() throws IOException {
@@ -1319,14 +1319,14 @@ final class ObjectReader extends AbstractGitEngineTask implements ObjectReaderHa
 
     channelBuffer.flip();
 
-    log(EIO_READ, thisReadCount, channelReadCount);
+    send(EIO_READ, thisReadCount, channelReadCount);
   }
 
   private void ioReadAux() throws IOException {
     if (channelAux == null) {
       channelAux = channelAuxSource.openReadChannel();
 
-      log(EIO_OPEN, channelReadLimit);
+      send(EIO_OPEN, channelReadLimit);
     }
 
     ioRead(channelAux);
@@ -1336,7 +1336,7 @@ final class ObjectReader extends AbstractGitEngineTask implements ObjectReaderHa
     if (channelMain == null) {
       channelMain = channelMainSource.openReadChannel();
 
-      log(EIO_OPEN, channelReadLimit);
+      send(EIO_OPEN, channelReadLimit);
     }
 
     ioRead(channelMain);
@@ -1351,7 +1351,7 @@ final class ObjectReader extends AbstractGitEngineTask implements ObjectReaderHa
       next = objectId;
     }
 
-    log(ENEXT_OBJECT, next);
+    send(ENEXT_OBJECT, next);
 
     return next;
   }

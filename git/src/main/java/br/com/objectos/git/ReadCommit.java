@@ -743,7 +743,7 @@ final class ReadCommit implements ObjectReaderAdapter {
 
     handle.setResult(result);
 
-    logger.log(ESUCCESS, objectId);
+    logger.send(ESUCCESS, objectId);
 
     active = false;
 
@@ -764,7 +764,7 @@ final class ReadCommit implements ObjectReaderAdapter {
 
     stringBuilder = injector.getStringBuilder();
 
-    logger.log(ESTART, objectId);
+    logger.send(ESTART, objectId);
 
     return toDecode(_PARSE_TREE);
   }

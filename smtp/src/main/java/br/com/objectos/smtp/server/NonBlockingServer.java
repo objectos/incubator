@@ -173,7 +173,7 @@ public final class NonBlockingServer implements Server {
 
     @Override
     public final void logSessionException(Exception e, String message) {
-      logger.log(SESSION_EXCEPTION, e);
+      logger.send(SESSION_EXCEPTION, e);
     }
 
     @Override

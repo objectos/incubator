@@ -89,7 +89,7 @@ public final class FixedCpuArray extends CpuArrayService {
       worker.startService();
     }
 
-    logger.log(STARTED);
+    logger.send(STARTED);
   }
 
   /**

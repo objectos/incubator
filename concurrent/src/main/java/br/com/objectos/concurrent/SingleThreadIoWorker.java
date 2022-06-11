@@ -127,7 +127,7 @@ public final class SingleThreadIoWorker extends IoWorkerService {
         try {
           currentTask.executeIo();
         } catch (Throwable t) {
-          logger.log(ETASK_ERROR, t);
+          logger.send(ETASK_ERROR, t);
         }
 
         boolean wasInterrupted;
@@ -138,7 +138,7 @@ public final class SingleThreadIoWorker extends IoWorkerService {
         }
 
         else if (wasInterrupted) {
-          logger.log(ETASK_INTERRUPTED, currentTask);
+          logger.send(ETASK_INTERRUPTED, currentTask);
         }
 
         currentTask = null;

@@ -91,11 +91,11 @@ abstract class AbstractGitTask<V> implements GitTask<V>, ResultConsumer, ToStrin
 
   abstract AbstractGitEngineTask executeSetInputImpl();
 
-  final <V1> void log(Note1<V1> event, V1 v1) {
+  final <V1> void send(Note1<V1> event, V1 v1) {
     NoteSink logger;
     logger = engine.getLogger();
 
-    logger.log(event, v1);
+    logger.send(event, v1);
   }
 
   final void setCommand(GitCommand<?> origin) {

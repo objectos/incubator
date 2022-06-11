@@ -181,12 +181,12 @@ public final class FixedCpuWorker extends CpuWorkerService implements ToString.F
 
     @Override
     final void log(Note0 event) {
-      logger.log(event);
+      logger.send(event);
     }
 
     @Override
     final <T1> void log(Note1<T1> event, T1 t1) {
-      logger.log(event, t1);
+      logger.send(event, t1);
     }
 
     @Override

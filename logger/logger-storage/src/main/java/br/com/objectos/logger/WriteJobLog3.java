@@ -78,7 +78,7 @@ final class WriteJobLog3<T1, T2, T3> extends WriteJobLog {
 
   @Override
   final void replay(NoteSink logger) {
-    logger.log(event, value1, value2, value3);
+    logger.send(event, value1, value2, value3);
   }
 
   @Override

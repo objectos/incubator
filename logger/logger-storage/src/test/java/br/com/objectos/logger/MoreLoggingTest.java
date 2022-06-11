@@ -184,23 +184,23 @@ public class MoreLoggingTest implements LogListener {
     Arg3 arg3;
     arg3 = new Arg3(333);
 
-    logger.log(DEBUG0);
+    logger.send(DEBUG0);
 
-    logger.log(DEBUG1, arg1);
+    logger.send(DEBUG1, arg1);
 
-    logger.log(DEBUG2, arg1, arg2);
+    logger.send(DEBUG2, arg1, arg2);
 
-    logger.log(DEBUG3, arg1, arg2, arg3);
+    logger.send(DEBUG3, arg1, arg2, arg3);
 
     waitLogs(4);
 
-    logger.log(INFO0);
+    logger.send(INFO0);
 
-    logger.log(INFO1, arg1);
+    logger.send(INFO1, arg1);
 
-    logger.log(INFO2, arg1, arg2);
+    logger.send(INFO2, arg1, arg2);
 
-    logger.log(INFO3, arg1, arg2, arg3);
+    logger.send(INFO3, arg1, arg2, arg3);
 
     waitLogs(8);
 
@@ -238,9 +238,9 @@ public class MoreLoggingTest implements LogListener {
 
     ex2.initCause(ex1);
 
-    logger.log(ERROR1, ex1);
+    logger.send(ERROR1, ex1);
 
-    logger.log(ERROR2, ex1, ex2);
+    logger.send(ERROR2, ex1, ex2);
 
     Ex3 ex3;
     ex3 = new Ex3("Suppressed (if supported)");
@@ -249,7 +249,7 @@ public class MoreLoggingTest implements LogListener {
 
     ex3.addSuppressed(ex1);
 
-    logger.log(ERROR3, ex1, ex2, ex3);
+    logger.send(ERROR3, ex1, ex2, ex3);
 
     waitLogs(3);
 
@@ -277,25 +277,25 @@ public class MoreLoggingTest implements LogListener {
     Arg3 arg3;
     arg3 = new Arg3(333);
 
-    logger.log(TRACE0);
+    logger.send(TRACE0);
 
-    logger.log(WARN1, arg1);
+    logger.send(WARN1, arg1);
 
     logger = bootstrapLogger.replace(storageLogger);
 
     bootstrapLogger.close();
 
-    logger.log(WARN2, arg1, arg2);
+    logger.send(WARN2, arg1, arg2);
 
-    logger.log(WARN3, arg1, arg2, arg3);
+    logger.send(WARN3, arg1, arg2, arg3);
 
-    logger.log(WARN0);
+    logger.send(WARN0);
 
-    logger.log(TRACE1, arg1);
+    logger.send(TRACE1, arg1);
 
-    logger.log(TRACE2, arg1, arg2);
+    logger.send(TRACE2, arg1, arg2);
 
-    logger.log(TRACE3, arg1, arg2, arg3);
+    logger.send(TRACE3, arg1, arg2, arg3);
 
     waitLogs(8);
 

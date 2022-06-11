@@ -173,7 +173,7 @@ final class WriteTree extends AbstractGitEngineTask {
 
       treeBody = injector.getByteArrayWriter();
 
-      log(ESTART, command, tree);
+      send(ESTART, command, tree);
 
       return _ASSEMBLE;
     }
@@ -268,7 +268,7 @@ final class WriteTree extends AbstractGitEngineTask {
   private byte executeResult() {
     setResult(objectId);
 
-    log(ESUCCESS, command, objectId);
+    send(ESUCCESS, command, objectId);
 
     return _FINALLY;
   }

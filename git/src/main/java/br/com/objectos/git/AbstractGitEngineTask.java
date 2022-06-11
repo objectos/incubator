@@ -216,16 +216,16 @@ abstract class AbstractGitEngineTask implements CpuTask, IoTask {
     ioReady = newState;
   }
 
-  final void log(Note0 event) {
-    logger.log(event);
+  final void send(Note0 event) {
+    logger.send(event);
   }
 
-  final <T1> void log(Note1<T1> event, T1 v1) {
-    logger.log(event, v1);
+  final <T1> void send(Note1<T1> event, T1 v1) {
+    logger.send(event, v1);
   }
 
-  final <T1, T2> void log(Note2<T1, T2> event, T1 v1, T2 v2) {
-    logger.log(event, v1, v2);
+  final <T1, T2> void send(Note2<T1, T2> event, T1 v1, T2 v2) {
+    logger.send(event, v1, v2);
   }
 
   final byte toError(Throwable e) {

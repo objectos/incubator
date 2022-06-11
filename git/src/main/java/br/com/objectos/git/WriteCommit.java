@@ -134,7 +134,7 @@ final class WriteCommit extends AbstractGitEngineTask {
   final byte executeStart() {
     super.executeStart();
 
-    log(ESTART, commit);
+    send(ESTART, commit);
 
     stringBuilder = injector.getStringBuilder();
 
@@ -170,7 +170,7 @@ final class WriteCommit extends AbstractGitEngineTask {
   final void setResult() {
     setResult(objectId);
 
-    log(ESUCCESS, objectId);
+    send(ESUCCESS, objectId);
   }
 
   final void write(ResolvedPath notFound) throws IOException {

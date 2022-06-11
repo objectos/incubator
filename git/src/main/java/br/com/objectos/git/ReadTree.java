@@ -372,7 +372,7 @@ final class ReadTree implements ObjectReaderAdapter {
 
     active = false;
 
-    logger.log(ESUCCESS, objectId);
+    logger.send(ESUCCESS, objectId);
 
     return state;
   }
@@ -389,7 +389,7 @@ final class ReadTree implements ObjectReaderAdapter {
 
     logger = injector.getLogger();
 
-    logger.log(ESTART, objectId);
+    logger.send(ESTART, objectId);
 
     return _PARSE_MODE;
   }

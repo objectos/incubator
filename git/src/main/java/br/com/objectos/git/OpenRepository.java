@@ -144,7 +144,7 @@ final class OpenRepository extends AbstractGitEngineTask {
 
     packIds = injector.getMutableList();
 
-    log(ESTART, directory);
+    send(ESTART, directory);
 
     return toIo(IO_BARE, _MAYBE_PACKS, _FINALLY);
   }
@@ -215,7 +215,7 @@ final class OpenRepository extends AbstractGitEngineTask {
 
     setResult(result);
 
-    log(ESUCCESS, result);
+    send(ESUCCESS, result);
 
     return _FINALLY;
   }

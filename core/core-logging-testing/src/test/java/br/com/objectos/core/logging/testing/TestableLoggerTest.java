@@ -39,7 +39,7 @@ public class TestableLoggerTest {
 
     assertFalse(logger.contains(e0));
 
-    logger.log(e0);
+    logger.send(e0);
 
     assertTrue(logger.contains(e0));
 
@@ -51,7 +51,7 @@ public class TestableLoggerTest {
     IOException ioException;
     ioException = new IOException();
 
-    logger.log(e1, ioException);
+    logger.send(e1, ioException);
 
     assertTrue(logger.contains(e1));
 
@@ -67,7 +67,7 @@ public class TestableLoggerTest {
 
     assertFalse(logger.contains(e2));
 
-    logger.log(e2, Integer.valueOf(123), Double.valueOf(2.34));
+    logger.send(e2, Integer.valueOf(123), Double.valueOf(2.34));
 
     assertTrue(logger.contains(e2));
 
@@ -76,7 +76,7 @@ public class TestableLoggerTest {
 
     assertFalse(logger.contains(e3));
 
-    logger.log(e3, "A", "B", "C");
+    logger.send(e3, "A", "B", "C");
 
     assertTrue(logger.contains(e3));
   }
