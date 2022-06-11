@@ -147,7 +147,7 @@ final class HeaderContentTypeImpl
     that = (HeaderContentTypeImpl) obj;
 
     return resultMediaType.equals(that.resultMediaType)
-        && Equals.objects(resultCharset, that.resultCharset);
+        && Equals.of(resultCharset, that.resultCharset);
   }
 
   public final Charset getCharset() {

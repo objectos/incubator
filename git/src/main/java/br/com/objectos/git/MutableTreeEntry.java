@@ -84,7 +84,7 @@ abstract class MutableTreeEntry implements ToString.Formattable {
    * @since 3
    */
   public final boolean hasName(String name) {
-    return Equals.objects(getName(), name);
+    return Equals.of(getName(), name);
   }
 
   @Override

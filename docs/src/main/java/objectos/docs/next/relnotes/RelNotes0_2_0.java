@@ -75,7 +75,7 @@ class Edition implements ToString.Formattable {
   @Override
   public boolean equals(Object o) {
     return o == this || o instanceof Edition that
-      && Equals.objects(
+      && Equals.of(
         book, that.book,
         publisher, that.publisher,
         date, that.date

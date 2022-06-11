@@ -78,7 +78,7 @@ abstract class GitObject implements ToString.Formattable {
   }
 
   private boolean equals0(GitObject obj) {
-    return Equals.objects(
+    return Equals.of(
       getClass(), obj.getClass(),
 
       objectId, obj.objectId

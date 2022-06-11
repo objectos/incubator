@@ -81,10 +81,10 @@ public final class Event3Log<T1, T2, T3> extends Log {
   @Override
   public final <X1, X2, X3> boolean isEvent3(
       Note3<X1, X2, X3> event, X1 value1, X2 value2, X3 value3) {
-    return Equals.objects(this.event, event)
-        && Equals.objects(this.value1, value1)
-        && Equals.objects(this.value2, value2)
-        && Equals.objects(this.value3, value3);
+    return Equals.of(this.event, event)
+        && Equals.of(this.value1, value1)
+        && Equals.of(this.value2, value2)
+        && Equals.of(this.value3, value3);
   }
 
   /**
@@ -101,7 +101,7 @@ public final class Event3Log<T1, T2, T3> extends Log {
 
   @Override
   final boolean hasEvent(Note event) {
-    return Equals.objects(this.event, event);
+    return Equals.of(this.event, event);
   }
 
   @Override

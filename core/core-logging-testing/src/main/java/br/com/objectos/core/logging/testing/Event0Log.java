@@ -55,12 +55,12 @@ public final class Event0Log extends Log {
    */
   @Override
   public final boolean isEvent0(Note0 event) {
-    return Equals.objects(this.event, event);
+    return Equals.of(this.event, event);
   }
 
   @Override
   final boolean hasEvent(Note event) {
-    return Equals.objects(this.event, event);
+    return Equals.of(this.event, event);
   }
 
   @Override

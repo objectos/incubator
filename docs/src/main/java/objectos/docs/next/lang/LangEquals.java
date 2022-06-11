@@ -35,7 +35,7 @@ class Category {
   @Override
   public boolean equals(Object o) {
     return o == this || o instanceof Category that
-      && Equals.objects(name, that.name);
+      && Equals.of(name, that.name);
   }
 }
 ```
@@ -52,7 +52,7 @@ class Product {
   @Override
   public boolean equals(Object o) {
     return o == this || o instanceof Product that
-      && Equals.objects(
+      && Equals.of(
         name, that.name,
         brand, that.brand
       );
@@ -71,7 +71,7 @@ class Edition {
   @Override
   public boolean equals(Object o) {
     return o == this || o instanceof Edition that
-      && Equals.objects(
+      && Equals.of(
         book, that.book,
         publisher, that.publisher,
         date, that.date
@@ -96,7 +96,7 @@ class ShoppingCartItem {
   public boolean equals(Object o) {
     return o == this || o instanceof ShoppingCartItem that
       && quantity == that.quantity
-      && Equals.objects(
+      && Equals.of(
         cart, that.cart,
         product, that.product
       );

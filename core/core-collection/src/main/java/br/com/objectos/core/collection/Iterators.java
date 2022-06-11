@@ -58,7 +58,7 @@ public final class Iterators {
 
         bn = b.next();
 
-        if (!objectos.lang.Equals.objects(an, bn)) {
+        if (!objectos.lang.Equals.of(an, bn)) {
           return false;
         }
       }
