@@ -23,11 +23,11 @@ import objectos.ssg.Markdown;
 
 # What is Objectos?
 
-Objectos is a suite of open-source Java libraries. In this first public release
-it provides a type-safe logging API for Java applications.
-It does not provide an implementation for this API yet.
+Objectos is a suite of open-source Java libraries. It is currently under construction and
+still does very little. In this second public release it provides:
 
-One can safely say Objectos is under construction.
+- a set of utilities for objects whose type is from the `java.lang` package; and
+- a note sink API.
 
 In this document, we will present you some introductory information about the
 Objectos suite of Java libraries. We hope it will encourage you to:
