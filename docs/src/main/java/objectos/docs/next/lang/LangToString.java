@@ -209,36 +209,6 @@ Product [
 ]
 ```
 
-## `ToString.of`
-
-If you do not wish to implement `ToString.Formattable` you can still use
-the `ToString` facility.
-
-The `ToString.of` method will generate a _flat_ string representation. Using
-our `Category` class:
-
-```java
-class Category {
-  String name = "Default";
-
-  @Override
-  public String toString() {
-    return ToString.of(
-      this,
-      "name", name
-    );
-  }
-}
-```
-
-Notice it does not implement the `ToString.Formattable` interface.
-
-The `toString()` method returns:
-
-```
-Category [ name = Default ]
-```
-
 ## Primitive values
 
 The `ToString.of` and the `ToString.format` methods only accepts object references for
