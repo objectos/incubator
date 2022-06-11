@@ -67,7 +67,7 @@ Objectos Lang provides three utilities each for overriding one of the following
 The following example show all of them in action:
 
 ```java
-class Edition {
+class Edition implements ToString.Formattable {
   Book book;
   Publisher publisher;
   LocalDate date;
@@ -88,13 +88,18 @@ class Edition {
   }
 
   @Override
-  public String toString() {
-    return ToString.of(
-      this,
+  public void formatToString(StringBuilder sb, int level) {
+    ToString.format(
+      sb, level, this,
       "book", book,
       "publisher", publisher,
       "date", date
     );
+  }
+
+  @Override
+  public String toString() {
+    return ToString.of(this);
   }
 }
 ```
@@ -107,13 +112,46 @@ You can find the full documentation for each of the classes in the links below:
 
 ### The note sink API
 
+Objectos Lang provides an API for defining and sending notes about events taking
+place during an application execution. Use it for logging or debugging.
+
+```java
+import objectos.lang.*;
+
+public class Service {
+  static final Note1<String> SAY_HELLO = Note1.info();
+
+  private final NoteSink sink;
+
+  Service(NoteSink sink) { this.sink = sink; }
+
+  public void sayHelloWorld() {
+    sink.send(SAY_HELLO, "world!");
+  }
+}
+```
+
 ## Changes from Objectos 0.1.0
 
-### Objectos Logging moved to Objectos Lang
+Notable changes from the previous release are listed in this section.
 
-The classes from Objectos Logging were merged into Objectos Lang.
+### Objectos Logging was moved to Objectos Lang
+
+Classes from the Objectos Logging artifact were moved to Objectos Lang.
+Additionally the classes were renamed:
+
+- `Event` was renamed to `Note`
+- `Logger` was renamed to `NoteSink`
 
 ### Objectos BOM POM artifact name renamed
+
+The Maven artifact for the Objectos BOM POM was renamed from:
+
+- `bom`
+
+To:
+
+- `objectos-bom`
 
 */
 //@formatter:on

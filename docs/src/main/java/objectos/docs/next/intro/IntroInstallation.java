@@ -44,7 +44,7 @@ section of your project's POM file like so:
 *    <dependencies>
 *        <dependency>
 *            <groupId>br.com.objectos</groupId>
-*            <artifactId>bom</artifactId>
+*            <artifactId>objectos-bom</artifactId>
 *            <version>{{version}}</version>
 *            <type>pom</type>
 *            <scope>import</scope>
@@ -59,14 +59,14 @@ The next step is to add Objectos components to your project.
 Since you have the Objectos BOM imported you do not need to specify the version
 for each of the added components.
 
-For instance, to add Objectos Logging to your project, you would declare it
+For instance, to add Objectos Lang to your project, you would declare it
 in the `dependencies` section of your projects's POM file like so:
 
 *```xml
 *<dependencies>
 *    <dependency>
 *        <groupId>br.com.objectos</groupId>
-*        <artifactId>logging</artifactId>
+*        <artifactId>objectos-lang</artifactId>
 *    </dependency>
 *</dependencies>
 *```
@@ -76,7 +76,7 @@ directive to your `module-info.java` file like so:
 
 ```java
 module my.module {
-  requires objectos.logging;
+  requires objectos.lang;
 }
 ```
 
