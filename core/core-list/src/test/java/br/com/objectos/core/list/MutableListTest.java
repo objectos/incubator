@@ -569,46 +569,46 @@ public class MutableListTest extends AbstractObjectosListsTest {
   @Test
   public final void testCase06() {
     assertEquals(
-        list.join(),
-        ""
+      list.join(),
+      ""
     );
     assertEquals(
-        list.join("|"),
-        ""
+      list.join("|"),
+      ""
     );
     assertEquals(
-        list.join("|", "{", "}"),
-        "{}"
+      list.join("|", "{", "}"),
+      "{}"
     );
 
     list.add(t1);
 
     assertEquals(
-        list.join(),
-        t1.toString()
+      list.join(),
+      t1.toString()
     );
     assertEquals(
-        list.join("|"),
-        t1.toString()
+      list.join("|"),
+      t1.toString()
     );
     assertEquals(
-        list.join("|", "{", "}"),
-        "{" + t1.toString() + "}"
+      list.join("|", "{", "}"),
+      "{" + t1.toString() + "}"
     );
 
     list.add(t2);
 
     assertEquals(
-        list.join(),
-        t1.toString() + t2.toString()
+      list.join(),
+      t1.toString() + t2.toString()
     );
     assertEquals(
-        list.join("|"),
-        t1.toString() + "|" + t2.toString()
+      list.join("|"),
+      t1.toString() + "|" + t2.toString()
     );
     assertEquals(
-        list.join("|", "{", "}"),
-        "{" + t1.toString() + "|" + t2.toString() + "}"
+      list.join("|", "{", "}"),
+      "{" + t1.toString() + "|" + t2.toString() + "}"
     );
   }
 
@@ -817,9 +817,9 @@ public class MutableListTest extends AbstractObjectosListsTest {
     it = MutableList.create();
 
     assertEquals(
-        it.toString(),
+      it.toString(),
 
-        "MutableList[]"
+      "MutableList []"
     );
 
     it.add("A");
@@ -827,15 +827,15 @@ public class MutableListTest extends AbstractObjectosListsTest {
     it.add("C");
 
     assertEquals(
-        it.toString(),
+      it.toString(),
 
-        lines(
-            "MutableList[",
-            "  0=A",
-            "  1=B",
-            "  2=C",
-            "]"
-        )
+      lines(
+        "MutableList [",
+        "  0 = A",
+        "  1 = B",
+        "  2 = C",
+        "]"
+      )
     );
   }
 

@@ -56,7 +56,7 @@ public class ThrowableMessageBuilderTest {
         "",
         "channelReadCount=1234",
         "channelReadLimit=1220",
-        "        objectId=ObjectId[",
+        "        objectId=ObjectId [",
         "  808ee6fce27d119cfa2dbeacd176439e02e0924d",
         "]",
         "           state=_READ_OBJECT",

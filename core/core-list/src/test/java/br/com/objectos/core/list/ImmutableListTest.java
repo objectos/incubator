@@ -311,25 +311,25 @@ public class ImmutableListTest extends AbstractObjectosListsTest {
 
   @Test
   public void toStringTest() {
-    assertEquals(il0.toString(), "ImmutableList[]");
+    assertEquals(il0.toString(), "ImmutableList []");
 
     assertEquals(
-        il1.toString(),
-        lines(
-            "ImmutableList[",
-            "  0=" + singleton,
-            "]"
-        )
+      il1.toString(),
+      lines(
+        "ImmutableList [",
+        "  0 = " + singleton,
+        "]"
+      )
     );
 
     assertEquals(
-        il2.toString(),
-        lines(
-            "ImmutableList[",
-            "  0=" + singleton,
-            "  1=" + randomInt,
-            "]"
-        )
+      il2.toString(),
+      lines(
+        "ImmutableList [",
+        "  0 = " + singleton,
+        "  1 = " + randomInt,
+        "]"
+      )
     );
   }
 

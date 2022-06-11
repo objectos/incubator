@@ -97,7 +97,7 @@ public class ResourceTest {
 
     String result = r.toString();
 
-    assertTrue(result.startsWith("Resource["));
+    assertTrue(result.startsWith("Resource ["));
 
     assertTrue(result.contains("file:"));
 
