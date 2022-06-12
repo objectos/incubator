@@ -53,6 +53,9 @@ public void start(String name, int value) {
 }
 ```
 
+If any of the check conditions
+does not evaluate to `true` then the check fails with a specific `RuntimeException` sub-type.
+
 You can find [the full documentation here](href:next.lang.LangCheck).
 
 ### Utilities for overriding `java.lang.Object` methods
