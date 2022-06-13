@@ -13,19 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package objectos.docs.next;
+package objectos.docs.v0002;
 
-import objectos.docs.next.intro.Intro;
-import objectos.docs.next.lang.Lang;
-import objectos.docs.next.relnotes.RelNotes;
 import objectos.docs.ui.DocsPage;
+import objectos.docs.ui.Pages;
 import objectos.docs.ui.VersionHolder;
+import objectos.docs.v0002.intro.Intro;
+import objectos.docs.v0002.lang.Lang;
+import objectos.docs.v0002.relnotes.RelNotes;
 import objectos.ssg.SiteDirectory;
 import objectos.ssg.SitePath;
 
-public final class Next extends SiteDirectory {
+public final class V0002 extends SiteDirectory {
 
-  public static final String VERSION = "0.3.0-SNAPSHOT";
+  public static final String VERSION = "0.2.0";
 
   public static final Class<? extends DocsPage> INDEX = Index.class;
 
@@ -33,6 +34,11 @@ public final class Next extends SiteDirectory {
 
   @Override
   protected final void configure() {
+    Pages pages;
+    pages = getObject(Pages.class);
+
+    pages.clear();
+
     addPage("index.html", new Index());
 
     addDirectory("intro", new Intro());

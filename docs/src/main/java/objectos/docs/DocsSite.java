@@ -24,6 +24,7 @@ import objectos.docs.ui.Pages;
 import objectos.docs.ui.TableOfContents;
 import objectos.docs.ui.VersionHolder;
 import objectos.docs.v0001.V0001;
+import objectos.docs.v0002.V0002;
 import objectos.ssg.Site;
 import objectos.ssg.SitePath;
 
@@ -52,6 +53,7 @@ public final class DocsSite extends Site {
 
     addDirectory("next", new Next());
     addDirectory("0.1", new V0001());
+    addDirectory("0.2", new V0002());
   }
 
 }

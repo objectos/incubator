@@ -25,6 +25,7 @@ import objectos.docs.style.Spacing;
 import objectos.docs.ui.DocsPage;
 import objectos.docs.ui.Pages;
 import objectos.docs.v0001.V0001;
+import objectos.docs.v0002.V0002;
 import objectos.ssg.SiteStyleSheet;
 
 final class Versions extends DocsPage implements Pages.IgnoreMe {
@@ -101,13 +102,27 @@ final class Versions extends DocsPage implements Pages.IgnoreMe {
             td(
               TITLE,
 
-              a(href(Next.INDEX), t("0.2.0-SNAPSHOT"))
+              a(href(Next.INDEX), t("0.3.0-SNAPSHOT"))
             ),
 
             td(
               DATE,
 
               t("unreleased")
+            )
+          ),
+
+          tr(
+            td(
+              TITLE,
+
+              a(href(V0002.INDEX), t("0.2.0"))
+            ),
+
+            td(
+              DATE,
+
+              t("2022-06-13")
             )
           ),
 
