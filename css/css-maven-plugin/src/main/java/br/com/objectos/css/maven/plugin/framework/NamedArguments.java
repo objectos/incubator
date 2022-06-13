@@ -19,9 +19,9 @@ import static br.com.objectos.code.java.Java.invoke;
 
 import br.com.objectos.code.java.expression.Argument;
 import br.com.objectos.code.java.expression.MethodInvocation;
-import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.list.MutableList;
 import br.com.objectos.css.type.Value;
+import objectos.util.ImmutableList;
+import objectos.util.MutableList;
 
 class NamedArguments extends NamedValue {
 

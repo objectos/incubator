@@ -29,10 +29,10 @@ import br.com.objectos.code.model.element.ProcessingPackage;
 import br.com.objectos.code.model.element.ProcessingType;
 import br.com.objectos.code.processing.type.PDeclaredType;
 import br.com.objectos.code.processing.type.PTypeMirror;
-import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.list.MutableList;
 import objectos.lang.HashCode;
 import objectos.lang.ToString;
+import objectos.util.ImmutableList;
+import objectos.util.MutableList;
 
 final class GenerateStaticFactoryAggregateAnnotation implements ToString.Formattable {
 

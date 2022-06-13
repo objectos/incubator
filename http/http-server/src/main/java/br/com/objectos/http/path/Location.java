@@ -15,8 +15,6 @@
  */
 package br.com.objectos.http.path;
 
-import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.list.MutableList;
 import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.RegularFile;
 import br.com.objectos.fs.ResolvedPath;
@@ -24,6 +22,8 @@ import br.com.objectos.http.server.HttpAction;
 import br.com.objectos.http.server.RequestProto;
 import java.io.IOException;
 import objectos.lang.Check;
+import objectos.util.ImmutableList;
+import objectos.util.MutableList;
 
 public class Location {
 

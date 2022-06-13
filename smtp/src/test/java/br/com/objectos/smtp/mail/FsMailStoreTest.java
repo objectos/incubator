@@ -19,7 +19,6 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
-import br.com.objectos.core.list.MutableList;
 import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.testing.TmpDir;
 import br.com.objectos.smtp.ConfigurationException;
@@ -31,6 +30,7 @@ import br.com.objectos.smtp.server.ProcessingResult;
 import br.com.objectos.smtp.server.Transaction;
 import java.io.IOException;
 import java.nio.ByteBuffer;
+import objectos.util.MutableList;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;

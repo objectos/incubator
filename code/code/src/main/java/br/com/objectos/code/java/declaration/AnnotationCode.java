@@ -22,12 +22,12 @@ import br.com.objectos.code.java.element.CodeElement;
 import br.com.objectos.code.java.element.Symbols;
 import br.com.objectos.code.java.io.CodeWriter;
 import br.com.objectos.code.java.type.NamedClass;
-import br.com.objectos.core.list.MutableList;
-import br.com.objectos.core.set.MutableSet;
 import java.lang.annotation.Annotation;
 import java.util.List;
 import java.util.Set;
 import objectos.lang.Check;
+import objectos.util.MutableList;
+import objectos.util.MutableSet;
 
 public final class AnnotationCode
     extends AbstractImmutableCodeElement

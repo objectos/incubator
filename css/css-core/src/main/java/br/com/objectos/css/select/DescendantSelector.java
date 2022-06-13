@@ -15,11 +15,11 @@
  */
 package br.com.objectos.css.select;
 
-import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.list.MutableList;
 import br.com.objectos.css.sheet.RuleElement;
 import java.util.Iterator;
 import java.util.Optional;
+import objectos.util.ImmutableList;
+import objectos.util.MutableList;
 
 public class DescendantSelector
     extends Selector

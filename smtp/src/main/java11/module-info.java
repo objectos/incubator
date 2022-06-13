@@ -22,6 +22,5 @@ module br.com.objectos.mail.smtp.server {
 
   requires static br.com.objectos.latest;
 
-  requires br.com.objectos.core.list;
-  requires br.com.objectos.core.array;
+  requires objectos.util;
 }

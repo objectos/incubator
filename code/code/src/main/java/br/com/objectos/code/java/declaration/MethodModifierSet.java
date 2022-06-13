@@ -15,7 +15,7 @@
  */
 package br.com.objectos.code.java.declaration;
 
-import br.com.objectos.core.list.ImmutableList;
+import objectos.util.ImmutableList;
 
 public final class MethodModifierSet extends ElementModifierSet {
 

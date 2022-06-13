@@ -17,9 +17,9 @@ package br.com.objectos.git;
 
 import static org.testng.Assert.assertEquals;
 
-import br.com.objectos.core.array.ByteArrays;
 import java.security.SecureRandom;
 import java.util.Random;
+import objectos.util.ByteArrays;
 import org.testng.annotations.Test;
 
 public class ObjectIdTest {

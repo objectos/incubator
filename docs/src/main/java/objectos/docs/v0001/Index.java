@@ -15,7 +15,6 @@
  */
 package objectos.docs.v0001;
 
-import br.com.objectos.core.list.MutableList;
 import br.com.objectos.css.Css;
 import br.com.objectos.css.select.IdSelector;
 import br.com.objectos.css.sheet.StyleSheet;
@@ -29,6 +28,7 @@ import objectos.docs.ui.VersionHolder;
 import objectos.docs.v0001.intro.Intro;
 import objectos.docs.v0001.logging.LoggingDir;
 import objectos.ssg.SiteStyleSheet;
+import objectos.util.MutableList;
 
 final class Index extends DocsPage {
 

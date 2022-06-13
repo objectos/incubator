@@ -15,9 +15,9 @@
  */
 package br.com.objectos.git;
 
+import objectos.lang.NoOpNoteSink;
 import objectos.lang.Note;
 import objectos.lang.Note2;
-import objectos.lang.NoOpNoteSink;
 
 final class GitTestingLogger extends NoOpNoteSink {
 

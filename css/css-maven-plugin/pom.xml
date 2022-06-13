@@ -88,6 +88,11 @@
 
 		<dependency>
 			<groupId>br.com.objectos</groupId>
+			<artifactId>code</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>br.com.objectos</groupId>
 			<artifactId>html</artifactId>
 		</dependency>
 

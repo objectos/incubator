@@ -25,10 +25,10 @@ import br.com.objectos.code.java.io.JavaFile;
 import br.com.objectos.code.model.element.ProcessingMethod;
 import br.com.objectos.code.processing.AbstractProcessingRoundProcessor;
 import br.com.objectos.code.processing.ProcessingRound;
-import br.com.objectos.core.set.ImmutableSet;
 import java.util.Set;
 import javax.annotation.processing.Processor;
 import objectos.ssg.Markdown;
+import objectos.util.ImmutableSet;
 
 @Services(Processor.class)
 public final class MarkdownMethodProcessor extends AbstractProcessingRoundProcessor {

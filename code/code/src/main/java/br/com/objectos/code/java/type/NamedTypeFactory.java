@@ -16,7 +16,7 @@
 package br.com.objectos.code.java.type;
 
 import br.com.objectos.code.util.SimpleTypeVisitor;
-import br.com.objectos.core.list.Lists;
+import java.util.ArrayList;
 import java.util.List;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.type.ArrayType;
@@ -65,7 +65,7 @@ final class NamedTypeFactory extends SimpleTypeVisitor<NamedType, Void> {
 
     if (!typeArguments.isEmpty()) {
       List<NamedType> argumentNames;
-      argumentNames = Lists.newArrayListWithCapacity(typeArguments.size());
+      argumentNames = new ArrayList<>(typeArguments.size());
 
       for (int i = 0; i < typeArguments.size(); i++) {
         TypeMirror typeArgument;
@@ -174,7 +174,7 @@ final class NamedTypeFactory extends SimpleTypeVisitor<NamedType, Void> {
     @Override
     protected final NamedType defaultAction(NamedType t, Void p) {
       throw new UnsupportedOperationException(
-          "Cannot convert " + t.getClass() + " to ArrayTypeName.");
+        "Cannot convert " + t.getClass() + " to ArrayTypeName.");
     }
   }
 

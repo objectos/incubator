@@ -17,9 +17,9 @@ package br.com.objectos.html.boot.spec;
 
 import static org.testng.Assert.assertEquals;
 
-import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.list.MutableList;
 import br.com.objectos.html.boot.AbstractHtmlBootTest;
+import objectos.util.ImmutableList;
+import objectos.util.MutableList;
 import org.testng.annotations.Test;
 
 public class SpecDslTest extends AbstractHtmlBootTest {

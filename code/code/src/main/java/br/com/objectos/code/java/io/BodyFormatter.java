@@ -16,9 +16,9 @@
 package br.com.objectos.code.java.io;
 
 import br.com.objectos.code.java.declaration.BodyElement;
-import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.list.MutableList;
 import java.util.Iterator;
+import objectos.util.ImmutableList;
+import objectos.util.MutableList;
 
 public abstract class BodyFormatter {
 

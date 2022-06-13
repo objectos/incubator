@@ -30,8 +30,8 @@ import static br.com.objectos.code.java.type.NamedTypes.tvar;
 import br.com.objectos.code.java.type.NamedClass;
 import br.com.objectos.code.java.type.NamedParameterized;
 import br.com.objectos.code.util.AbstractCodeJavaTest;
-import br.com.objectos.core.list.ImmutableList;
 import java.io.Closeable;
+import objectos.util.ImmutableList;
 import org.testng.annotations.Test;
 
 public class InterfaceCodeTest extends AbstractCodeJavaTest {

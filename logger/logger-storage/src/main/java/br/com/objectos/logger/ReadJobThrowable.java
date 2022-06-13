@@ -15,7 +15,7 @@
  */
 package br.com.objectos.logger;
 
-import br.com.objectos.core.list.MutableList;
+import objectos.util.MutableList;
 
 final class ReadJobThrowable {
 

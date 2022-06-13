@@ -12,7 +12,6 @@ import static org.testng.Assert.assertNotEquals;
 import static org.testng.Assert.assertTrue;
 
 import br.com.objectos.code.util.AbstractCodeCoreTest;
-import br.com.objectos.core.list.MutableList;
 import java.util.List;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ExecutableElement;
@@ -20,6 +19,7 @@ import javax.lang.model.element.Name;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.util.ElementFilter;
 import javax.lang.model.util.Elements;
+import objectos.util.MutableList;
 import org.testng.annotations.Test;
 
 public class TypeElementTest extends AbstractCodeCoreTest {

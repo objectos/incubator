@@ -17,13 +17,13 @@ package br.com.objectos.css;
 
 import static org.testng.Assert.assertEquals;
 
-import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.css.io.CssWritable;
 import br.com.objectos.css.io.MinifiedCssWriter;
 import br.com.objectos.css.io.PrettyCssWriter;
 import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.testing.TmpDir;
 import java.io.IOException;
+import objectos.util.ImmutableList;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 

@@ -21,9 +21,7 @@ module br.com.objectos.tools {
 
   requires static br.com.objectos.latest;
 
-  requires br.com.objectos.core.list;
-  requires br.com.objectos.core.map;
   requires objectos.lang;
-  requires br.com.objectos.core.set;
+  requires objectos.util;
   requires br.com.objectos.fs;
 }

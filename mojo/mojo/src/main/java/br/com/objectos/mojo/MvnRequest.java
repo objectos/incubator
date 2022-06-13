@@ -15,9 +15,9 @@
  */
 package br.com.objectos.mojo;
 
-import br.com.objectos.core.list.Lists;
 import br.com.objectos.fs.Directory;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -27,7 +27,7 @@ import org.codehaus.plexus.util.Os;
 
 final class MvnRequest {
 
-  final List<String> goals = Lists.newArrayList();
+  final List<String> goals = new ArrayList<>();
 
   final Properties systemProperties = new Properties();
 

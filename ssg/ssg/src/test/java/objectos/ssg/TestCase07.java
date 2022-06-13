@@ -15,9 +15,9 @@
  */
 package objectos.ssg;
 
-import br.com.objectos.core.list.MutableList;
 import br.com.objectos.html.spi.type.UlValue;
 import java.util.List;
+import objectos.util.MutableList;
 
 /**
  * - SiteRegistry

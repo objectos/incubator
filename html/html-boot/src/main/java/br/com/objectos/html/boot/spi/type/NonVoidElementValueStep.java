@@ -22,11 +22,11 @@ import static br.com.objectos.code.java.Java._public;
 import br.com.objectos.code.java.declaration.InterfaceCode;
 import br.com.objectos.code.java.io.JavaFile;
 import br.com.objectos.code.java.type.NamedClass;
-import br.com.objectos.core.list.MutableList;
 import br.com.objectos.html.boot.HtmlBoot;
 import br.com.objectos.html.boot.spec.AbstractJavaFileStep;
 import br.com.objectos.html.boot.spec.ElementSpec;
 import java.util.function.Consumer;
+import objectos.util.MutableList;
 
 public class NonVoidElementValueStep extends AbstractJavaFileStep {
 

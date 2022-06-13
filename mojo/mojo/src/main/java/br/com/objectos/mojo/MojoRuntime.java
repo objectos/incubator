@@ -16,10 +16,10 @@
 package br.com.objectos.mojo;
 
 import br.com.objectos.code.annotations.Ignore;
-import br.com.objectos.core.list.Lists;
 import br.com.objectos.fs.Directory;
 import java.io.Closeable;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 import objectos.lang.Check;
 import org.apache.maven.Maven;
@@ -368,7 +368,7 @@ public class MojoRuntime implements Closeable {
 
     private File localRepository;
 
-    private final List<Mirror> mirrors = Lists.newArrayList();
+    private final List<Mirror> mirrors = new ArrayList<>();
 
     private Builder() {}
 

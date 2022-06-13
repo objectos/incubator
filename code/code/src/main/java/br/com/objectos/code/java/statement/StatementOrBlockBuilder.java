@@ -16,7 +16,7 @@
 package br.com.objectos.code.java.statement;
 
 import br.com.objectos.code.java.element.NewLine;
-import br.com.objectos.core.list.MutableList;
+import objectos.util.MutableList;
 
 public class StatementOrBlockBuilder {
 

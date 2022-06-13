@@ -18,7 +18,6 @@ package br.com.objectos.css.boot.sheet;
 import static org.testng.Assert.assertEquals;
 
 import br.com.objectos.code.java.io.JavaFile;
-import br.com.objectos.core.map.ImmutableMap;
 import br.com.objectos.css.boot.AbstractCssBootTest;
 import br.com.objectos.css.boot.function.FunctionName;
 import br.com.objectos.css.boot.keyword.KeywordName;
@@ -28,6 +27,7 @@ import br.com.objectos.css.boot.type.JavaType;
 import br.com.objectos.css.boot.type.Primitive;
 import br.com.objectos.css.boot.type.PrimitiveType;
 import br.com.objectos.css.boot.type.ValueType;
+import objectos.util.ImmutableMap;
 import org.testng.annotations.Test;
 
 public class GeneratedStyleSheetStepTest extends AbstractCssBootTest {

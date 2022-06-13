@@ -22,8 +22,8 @@ import br.com.objectos.code.java.type.NamedClass;
 import br.com.objectos.code.model.element.ProcessingAnnotation;
 import br.com.objectos.code.model.element.ProcessingPackage;
 import br.com.objectos.code.model.element.ProcessingType;
-import br.com.objectos.core.list.ImmutableList;
 import objectos.lang.Check;
+import objectos.util.ImmutableList;
 import org.testng.IHookCallBack;
 import org.testng.IHookable;
 import org.testng.ITestResult;
@@ -77,8 +77,8 @@ public class TestingEnvironmentTest implements IHookable, TestingEnvironment.Boo
     subject = testingEnv.getProcessingType(Subject.class);
 
     assertEquals(
-        subject.getBinaryName(),
-        "br.com.objectos.code.testing.TestingEnvironmentTest$Subject"
+      subject.getBinaryName(),
+      "br.com.objectos.code.testing.TestingEnvironmentTest$Subject"
     );
   }
 

@@ -50,13 +50,13 @@ import br.com.objectos.code.java.statement.VariableInitializer;
 import br.com.objectos.code.java.type.NamedArray;
 import br.com.objectos.code.java.type.NamedClass;
 import br.com.objectos.code.java.type.NamedClassOrParameterized;
-import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.list.MutableList;
 import br.com.objectos.css.boot.CssBoot;
 import br.com.objectos.css.boot.spec.Ids;
 import br.com.objectos.css.boot.spec.Step;
 import br.com.objectos.css.boot.spec.StepAdapter;
 import br.com.objectos.css.boot.spec.Types;
+import objectos.util.ImmutableList;
+import objectos.util.MutableList;
 
 public class GeneratedColorStep extends Step {
 

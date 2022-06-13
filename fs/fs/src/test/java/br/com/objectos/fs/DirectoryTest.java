@@ -21,11 +21,11 @@ import static org.testng.Assert.assertTrue;
 
 import br.com.objectos.core.io.Read;
 import br.com.objectos.core.io.Write;
-import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.list.MutableList;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
+import objectos.util.ImmutableList;
+import objectos.util.MutableList;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -40,18 +40,18 @@ public class DirectoryTest extends AbstractObjectosFsTest {
     os = OperatingSystem.get();
 
     absolutePath = os.acceptOperatingSystemVisitor(
-        new OperatingSystemVisitor<String, Void>() {
-          @Override
-          public String visitLinux(Linux os, Void p) {
-            return "/absolute";
-          }
+      new OperatingSystemVisitor<String, Void>() {
+        @Override
+        public String visitLinux(Linux os, Void p) {
+          return "/absolute";
+        }
 
-          @Override
-          public String visitUnsupportedOs(UnsupportedOperatingSystem os, Void p) {
-            throw new UnsupportedOperationException("Implement me: " + os.getOsName());
-          }
-        },
-        null
+        @Override
+        public String visitUnsupportedOs(UnsupportedOperatingSystem os, Void p) {
+          throw new UnsupportedOperationException("Implement me: " + os.getOsName());
+        }
+      },
+      null
     );
   }
 
@@ -75,21 +75,21 @@ public class DirectoryTest extends AbstractObjectosFsTest {
     src = createTempDir();
 
     Write.string(
-        src.createRegularFile("f1"),
-        UTF8, "f1"
+      src.createRegularFile("f1"),
+      UTF8, "f1"
     );
 
     Write.string(
-        src.createRegularFile("f2"),
-        UTF8, "f2"
+      src.createRegularFile("f2"),
+      UTF8, "f2"
     );
 
     Directory srcA;
     srcA = src.createDirectory("A");
 
     Write.string(
-        srcA.createRegularFile("f3"),
-        UTF8, "f3"
+      srcA.createRegularFile("f3"),
+      UTF8, "f3"
     );
 
     src.createDirectory("B");
@@ -97,8 +97,8 @@ public class DirectoryTest extends AbstractObjectosFsTest {
     Directory srcC = srcA.createDirectory("C");
 
     Write.string(
-        srcC.createRegularFile("f4"),
-        UTF8, "f4"
+      srcC.createRegularFile("f4"),
+      UTF8, "f4"
     );
 
     Directory dest;
@@ -138,21 +138,21 @@ public class DirectoryTest extends AbstractObjectosFsTest {
     src = createTempDir();
 
     Write.string(
-        src.createRegularFile("f1"),
-        UTF8, "f1"
+      src.createRegularFile("f1"),
+      UTF8, "f1"
     );
 
     Write.string(
-        src.createRegularFile("f2"),
-        UTF8, "f2"
+      src.createRegularFile("f2"),
+      UTF8, "f2"
     );
 
     Directory srcA;
     srcA = src.createDirectory("A");
 
     Write.string(
-        srcA.createRegularFile("f3"),
-        UTF8, "f3"
+      srcA.createRegularFile("f3"),
+      UTF8, "f3"
     );
 
     Directory dest;
@@ -260,11 +260,11 @@ public class DirectoryTest extends AbstractObjectosFsTest {
     assertFalse(file.is(Posix.ownerExecutable()));
 
     file = root.createRegularFile(
-        "perms",
+      "perms",
 
-        Posix.ownerReadable(),
-        Posix.ownerWritable(),
-        Posix.ownerExecutable()
+      Posix.ownerReadable(),
+      Posix.ownerWritable(),
+      Posix.ownerExecutable()
     );
 
     assertTrue(file.is(Posix.ownerExecutable()));
@@ -529,8 +529,8 @@ public class DirectoryTest extends AbstractObjectosFsTest {
     exists = root.createRegularFile("exists");
 
     assertEquals(
-        root.getOrCreateRegularFile("exists"),
-        exists
+      root.getOrCreateRegularFile("exists"),
+      exists
     );
 
     Directory subdir;
@@ -604,9 +604,9 @@ public class DirectoryTest extends AbstractObjectosFsTest {
     os = OperatingSystem.get();
 
     assertEquals(
-        c.getPath(),
+      c.getPath(),
 
-        os.acceptOperatingSystemVisitor(new Test(), root)
+      os.acceptOperatingSystemVisitor(new Test(), root)
     );
   }
 
@@ -739,9 +739,9 @@ public class DirectoryTest extends AbstractObjectosFsTest {
     javaIoTmpdir = JavaIoTmpdir.get();
 
     assertEquals(
-        javaIoTmpdir.toFile(),
+      javaIoTmpdir.toFile(),
 
-        new File(JAVA_IO_TMPDIR)
+      new File(JAVA_IO_TMPDIR)
     );
   }
 

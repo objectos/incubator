@@ -17,8 +17,6 @@ package br.com.objectos.git;
 
 import br.com.objectos.concurrent.CpuTask;
 import br.com.objectos.concurrent.IoWorker;
-import br.com.objectos.core.list.MutableList;
-import br.com.objectos.core.set.MutableSet;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.nio.charset.Charset;
@@ -29,6 +27,8 @@ import java.util.ArrayDeque;
 import java.util.zip.Deflater;
 import java.util.zip.Inflater;
 import objectos.lang.NoteSink;
+import objectos.util.MutableList;
+import objectos.util.MutableSet;
 
 abstract class GitInjector {
 

@@ -10,10 +10,10 @@ package br.com.objectos.code.model;
 import br.com.objectos.code.java.type.NamedClass;
 import br.com.objectos.code.model.element.ProcessingAnnotation;
 import br.com.objectos.code.util.AbstractCodeCoreTest;
-import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.list.MutableList;
 import java.util.List;
 import java.util.NoSuchElementException;
+import objectos.util.ImmutableList;
+import objectos.util.MutableList;
 
 public abstract class AbstractCodeModelTest extends AbstractCodeCoreTest {
 

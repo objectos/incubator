@@ -15,8 +15,6 @@
  */
 package br.com.objectos.core.io;
 
-import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.list.MutableList;
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -24,6 +22,8 @@ import java.io.InputStream;
 import java.io.Reader;
 import java.nio.charset.Charset;
 import objectos.lang.Check;
+import objectos.util.ImmutableList;
+import objectos.util.MutableList;
 
 /**
  * Provides {@code static} methods for reading from {@link InputStream},

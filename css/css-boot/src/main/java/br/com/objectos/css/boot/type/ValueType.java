@@ -24,16 +24,16 @@ import br.com.objectos.code.java.declaration.InterfaceCode;
 import br.com.objectos.code.java.type.NamedArray;
 import br.com.objectos.code.java.type.NamedClass;
 import br.com.objectos.code.java.type.NamedType;
-import br.com.objectos.core.set.Sets;
 import br.com.objectos.css.boot.CssBoot;
 import br.com.objectos.css.boot.property.ParameterType;
 import java.util.Set;
+import java.util.TreeSet;
 
 public class ValueType implements ParameterType, Value {
 
   public final NamedClass className;
 
-  private final Set<NamedClass> interfaces = Sets.newTreeSet();
+  private final Set<NamedClass> interfaces = new TreeSet<>();
 
   private ValueType(NamedClass className) {
     this.className = className;
@@ -62,8 +62,8 @@ public class ValueType implements ParameterType, Value {
 
   final InterfaceCode generate() {
     return _interface(
-        CssBoot.GENERATED,
-        _public(), className, _extends(interfaces)
+      CssBoot.GENERATED,
+      _public(), className, _extends(interfaces)
     );
   }
 

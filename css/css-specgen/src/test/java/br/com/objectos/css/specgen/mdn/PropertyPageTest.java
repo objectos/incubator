@@ -17,13 +17,13 @@ package br.com.objectos.css.specgen.mdn;
 
 import static org.testng.Assert.assertEquals;
 
-import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.core.io.Charsets;
 import br.com.objectos.core.io.Read;
 import br.com.objectos.core.io.Resource;
 import br.com.objectos.css.specgen.spec.Property;
 import br.com.objectos.css.specgen.spec.ValueType;
 import java.io.IOException;
+import objectos.util.ImmutableList;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.testng.annotations.Test;

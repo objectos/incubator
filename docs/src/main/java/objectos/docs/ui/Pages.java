@@ -15,7 +15,6 @@
  */
 package objectos.docs.ui;
 
-import br.com.objectos.core.list.ImmutableList;
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.IdentityHashMap;
@@ -24,6 +23,7 @@ import objectos.ssg.SiteDirectory;
 import objectos.ssg.SiteFragment;
 import objectos.ssg.SitePage;
 import objectos.ssg.SiteVisitor;
+import objectos.util.ImmutableList;
 
 public final class Pages implements SiteVisitor {
 

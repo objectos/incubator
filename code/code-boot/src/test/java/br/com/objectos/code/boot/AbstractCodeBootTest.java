@@ -24,8 +24,8 @@ import br.com.objectos.code.model.element.ProcessingField;
 import br.com.objectos.code.model.element.ProcessingMethod;
 import br.com.objectos.code.model.element.ProcessingType;
 import br.com.objectos.code.testng.AbstractCodeTestNgTest;
-import br.com.objectos.core.list.ImmutableList;
 import java.util.NoSuchElementException;
+import objectos.util.ImmutableList;
 
 public abstract class AbstractCodeBootTest extends AbstractCodeTestNgTest {
 

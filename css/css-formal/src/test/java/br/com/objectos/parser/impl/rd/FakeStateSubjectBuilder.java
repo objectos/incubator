@@ -15,8 +15,6 @@
  */
 package br.com.objectos.parser.impl.rd;
 
-import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.list.MutableList;
 import br.com.objectos.parser.spec.NonTerminal;
 import br.com.objectos.parser.spec.Production;
 import br.com.objectos.parser.spec.ProductionQuery;
@@ -30,6 +28,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import objectos.util.ImmutableList;
+import objectos.util.MutableList;
 
 class FakeStateSubjectBuilder {
 

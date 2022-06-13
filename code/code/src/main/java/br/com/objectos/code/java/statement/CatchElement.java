@@ -20,9 +20,9 @@ import br.com.objectos.code.java.element.Keywords;
 import br.com.objectos.code.java.expression.Identifier;
 import br.com.objectos.code.java.io.CodeWriter;
 import br.com.objectos.code.java.type.NamedClass;
-import br.com.objectos.core.list.ImmutableList;
 import java.util.Iterator;
 import objectos.lang.Check;
+import objectos.util.ImmutableList;
 
 public class CatchElement extends AbstractCodeElement implements TryStatementElement {
 

@@ -24,11 +24,11 @@ import static org.testng.Assert.assertTrue;
 
 import br.com.objectos.core.io.Charsets;
 import br.com.objectos.core.io.Write;
-import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.RegularFile;
 import br.com.objectos.fs.testing.TmpDir;
 import java.io.IOException;
+import objectos.util.ImmutableList;
 import org.testng.annotations.Test;
 
 public class MojoRuntimeTest {

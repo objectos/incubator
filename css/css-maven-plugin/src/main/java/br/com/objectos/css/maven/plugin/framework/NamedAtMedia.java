@@ -19,10 +19,10 @@ import static br.com.objectos.code.java.Java.id;
 
 import br.com.objectos.code.java.JavaNames;
 import br.com.objectos.code.java.expression.Identifier;
-import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkAtMedia;
 import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkAtMediaElement;
 import br.com.objectos.css.maven.plugin.framework.PropertyAtMedia.Invocation;
+import objectos.util.ImmutableList;
 
 class NamedAtMedia extends AbstractFrameworkObject implements FrameworkAtMedia {
 

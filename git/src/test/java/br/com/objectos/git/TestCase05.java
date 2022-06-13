@@ -19,15 +19,15 @@ import static br.com.objectos.git.TestingGit.executable;
 import static br.com.objectos.git.TestingGit.regular;
 import static br.com.objectos.git.TestingGit.tree;
 
-import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.map.Maps;
-import br.com.objectos.core.set.ImmutableSet;
-import br.com.objectos.core.set.MutableSet;
 import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.testing.TmpDir;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import objectos.util.ImmutableList;
+import objectos.util.ImmutableSet;
+import objectos.util.MutableSet;
 
 /**
  * Support reading and parsing loose objects (iter. 6).
@@ -51,7 +51,7 @@ final class TestCase05 extends StageGitCommand<ObjectId> {
 
   private MaybeObjectId parentId;
 
-  private final Map<ObjectId, MutableTree> parentMap = Maps.newHashMap();
+  private final Map<ObjectId, MutableTree> parentMap = new HashMap<>();
 
   private MutableTree rootTree;
 
@@ -343,7 +343,7 @@ final class TestCase05 extends StageGitCommand<ObjectId> {
   }
 
   /*
-
+  
   $ git cat-file --batch-check --batch-all-objects
   09cb9b7b846756738668aae8369dffe887e2fbba tree 30
   0fc7a9f2457ab0488441ca780d590b1ec26c75ee tree 31
@@ -394,7 +394,7 @@ final class TestCase05 extends StageGitCommand<ObjectId> {
   f173feaefcfdd9440b5907d2a0cdf9e0e7dd88bb tree 93
   fa7bdaeb40a7a8b7e7f4b3a280f5393605daf83c tree 41
   fb72221c840907a404a4433b2f3222fda77db320 blob 26
-
+  
    */
 
 }

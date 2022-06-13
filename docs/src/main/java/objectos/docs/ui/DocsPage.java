@@ -15,7 +15,6 @@
  */
 package objectos.docs.ui;
 
-import br.com.objectos.core.list.MutableList;
 import br.com.objectos.css.sheet.StyleSheet;
 import br.com.objectos.html.element.ElementName;
 import br.com.objectos.http.media.ImageType;
@@ -30,6 +29,7 @@ import objectos.docs.style.SyntaxCss;
 import objectos.docs.style.XmlCss;
 import objectos.ssg.SitePage;
 import objectos.ssg.SitePath;
+import objectos.util.MutableList;
 
 public abstract class DocsPage extends SitePage {
 

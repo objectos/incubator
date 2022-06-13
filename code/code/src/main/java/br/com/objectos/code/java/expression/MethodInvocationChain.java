@@ -21,9 +21,9 @@ import br.com.objectos.code.java.element.NewLine;
 import br.com.objectos.code.java.expression.MethodInvocation.Unqualified;
 import br.com.objectos.code.java.expression.production.MethodInvocationExpression;
 import br.com.objectos.code.java.io.CodeWriter;
-import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.list.MutableList;
 import objectos.lang.Check;
+import objectos.util.ImmutableList;
+import objectos.util.MutableList;
 
 public class MethodInvocationChain extends AbstractStatementExpression
     implements

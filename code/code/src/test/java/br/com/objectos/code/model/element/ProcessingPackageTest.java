@@ -19,11 +19,11 @@ import br.com.objectos.code.util.Marker1;
 import br.com.objectos.code.util.PackageAnnotation;
 import br.com.objectos.core.io.Charsets;
 import br.com.objectos.core.io.Read;
-import br.com.objectos.core.list.ImmutableList;
 import java.io.IOException;
 import javax.lang.model.element.PackageElement;
 import javax.lang.model.util.Elements;
 import javax.tools.StandardLocation;
+import objectos.util.ImmutableList;
 import org.testng.annotations.Test;
 
 public class ProcessingPackageTest extends AbstractCodeModelTest {

@@ -15,12 +15,12 @@
  */
 package objectos.ssg;
 
-import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.css.sheet.AbstractStyleSheet;
 import br.com.objectos.http.media.TextType;
 import java.io.IOException;
 import objectos.lang.Check;
 import objectos.ssg.Site.Context;
+import objectos.util.ImmutableList;
 
 public abstract class SiteStyleSheet extends AbstractStyleSheet
     implements

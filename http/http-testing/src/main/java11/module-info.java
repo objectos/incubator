@@ -19,8 +19,8 @@ module br.com.objectos.http.testing {
   requires transitive br.com.objectos.http.server;
 
   requires br.com.objectos.core.io;
-  requires br.com.objectos.core.list;
   requires objectos.lang;
+  requires objectos.util;
   requires br.com.objectos.fs;
   requires br.com.objectos.fs.testing;
   requires org.testng;

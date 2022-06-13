@@ -15,43 +15,43 @@
  */
 package br.com.objectos.http;
 
-import br.com.objectos.core.list.ImmutableList;
+import objectos.util.ImmutableList;
 
 final class TestCase0001 {
 
   static final String DESCRIPTION = "GET / => 200 text/html";
 
   static final ImmutableList<String> REQUEST = ImmutableList.of(
-      "GET / HTTP/1.1",
-      "Host: localhost:7001",
-      "Connection: keep-alive",
-      "sec-ch-ua: \" Not;A Brand\";v=\"99\", \"Google Chrome\";v=\"97\", \"Chromium\";v=\"97\"",
-      "sec-ch-ua-mobile: ?0",
-      "sec-ch-ua-platform: \"Linux\"",
-      "DNT: 1",
-      "Upgrade-Insecure-Requests: 1",
-      "User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36",
-      "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
-      "Sec-Fetch-Site: none",
-      "Sec-Fetch-Mode: navigate",
-      "Sec-Fetch-User: ?1",
-      "Sec-Fetch-Dest: document",
-      "Accept-Encoding: gzip, deflate, br",
-      "Accept-Language: pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7",
-      "",
-      ""
+    "GET / HTTP/1.1",
+    "Host: localhost:7001",
+    "Connection: keep-alive",
+    "sec-ch-ua: \" Not;A Brand\";v=\"99\", \"Google Chrome\";v=\"97\", \"Chromium\";v=\"97\"",
+    "sec-ch-ua-mobile: ?0",
+    "sec-ch-ua-platform: \"Linux\"",
+    "DNT: 1",
+    "Upgrade-Insecure-Requests: 1",
+    "User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36",
+    "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
+    "Sec-Fetch-Site: none",
+    "Sec-Fetch-Mode: navigate",
+    "Sec-Fetch-User: ?1",
+    "Sec-Fetch-Dest: document",
+    "Accept-Encoding: gzip, deflate, br",
+    "Accept-Language: pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7",
+    "",
+    ""
   );
 
   static final ImmutableList<String> RESPONSE = ImmutableList.of(
-      "HTTP/1.1 200 OK",
-      "Server: nginx/1.20.1",
-      "Date: Tue, 01 Feb 2022 11:50:15 GMT",
-      "Content-Type: text/html",
-      "Content-Length: 612",
-      "Last-Modified: Mon, 31 Jan 2022 12:22:08 GMT",
-      "Connection: keep-alive",
-      "ETag: \"61f7d470-264\"",
-      "Accept-Ranges: bytes"
+    "HTTP/1.1 200 OK",
+    "Server: nginx/1.20.1",
+    "Date: Tue, 01 Feb 2022 11:50:15 GMT",
+    "Content-Type: text/html",
+    "Content-Length: 612",
+    "Last-Modified: Mon, 31 Jan 2022 12:22:08 GMT",
+    "Connection: keep-alive",
+    "ETag: \"61f7d470-264\"",
+    "Accept-Ranges: bytes"
   );
 
 }

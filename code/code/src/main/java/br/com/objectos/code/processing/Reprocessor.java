@@ -15,10 +15,10 @@
  */
 package br.com.objectos.code.processing;
 
-import br.com.objectos.core.set.ImmutableSet;
 import javax.lang.model.element.Name;
 import javax.lang.model.element.PackageElement;
 import javax.lang.model.element.TypeElement;
+import objectos.util.ImmutableSet;
 
 public interface Reprocessor {
 

@@ -15,8 +15,8 @@
  */
 package br.com.objectos.html.attribute;
 
-import br.com.objectos.core.map.ImmutableMap;
-import br.com.objectos.core.map.MutableMap;
+import objectos.util.ImmutableMap;
+import objectos.util.MutableMap;
 
 class NamesBuilder {
 

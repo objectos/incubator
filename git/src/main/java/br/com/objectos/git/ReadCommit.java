@@ -15,7 +15,6 @@
  */
 package br.com.objectos.git;
 
-import br.com.objectos.core.list.MutableList;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.nio.charset.Charset;
@@ -24,6 +23,7 @@ import java.nio.charset.CoderResult;
 import objectos.lang.Check;
 import objectos.lang.Note1;
 import objectos.lang.NoteSink;
+import objectos.util.MutableList;
 
 final class ReadCommit implements ObjectReaderAdapter {
 

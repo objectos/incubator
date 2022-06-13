@@ -16,10 +16,10 @@
 package br.com.objectos.css.specgen;
 
 import br.com.objectos.code.java.io.JavaFile;
-import br.com.objectos.core.map.ImmutableMap;
-import br.com.objectos.core.map.MutableMap;
 import br.com.objectos.css.specgen.spec.Step;
 import br.com.objectos.css.specgen.spec.StepAdapter;
+import objectos.util.ImmutableMap;
+import objectos.util.MutableMap;
 import org.testng.Assert;
 
 public abstract class AbstractCssSpecgenTest {

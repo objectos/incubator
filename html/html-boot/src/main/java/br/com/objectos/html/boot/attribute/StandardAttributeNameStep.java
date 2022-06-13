@@ -52,7 +52,6 @@ import br.com.objectos.code.java.expression.Identifier;
 import br.com.objectos.code.java.io.JavaFile;
 import br.com.objectos.code.java.statement.VariableInitializer;
 import br.com.objectos.code.java.type.NamedClass;
-import br.com.objectos.core.list.MutableList;
 import br.com.objectos.html.boot.HtmlBoot;
 import br.com.objectos.html.boot.spec.AbstractJavaFileStep;
 import br.com.objectos.html.boot.spec.AttributeKind;
@@ -61,6 +60,7 @@ import br.com.objectos.html.boot.spi.tmpl.SpiTmpl;
 import br.com.objectos.html.boot.util.Ids;
 import br.com.objectos.html.boot.util.Names;
 import java.util.function.Consumer;
+import objectos.util.MutableList;
 
 public class StandardAttributeNameStep extends AbstractJavaFileStep {
 

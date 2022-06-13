@@ -34,10 +34,10 @@ import br.com.objectos.code.java.expression.MethodInvocation;
 import br.com.objectos.code.java.expression.MethodReference;
 import br.com.objectos.code.java.expression.TypeWitness;
 import br.com.objectos.code.java.io.JavaFileImportSet;
-import br.com.objectos.core.list.Lists;
 import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.RegularFile;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import javax.lang.model.SourceVersion;
@@ -86,8 +86,8 @@ public class NamedClass extends NamedClassOrParameterized
     Check.notNull(className, "className == null");
     Check.notNull(simpleName, "simpleName == null");
     Check.argument(
-        SourceVersion.isName(simpleName),
-        simpleName, " is not a valid class name"
+      SourceVersion.isName(simpleName),
+      simpleName, " is not a valid class name"
     );
 
     return new NamedClass(className, simpleName);
@@ -97,8 +97,8 @@ public class NamedClass extends NamedClassOrParameterized
     Check.notNull(packageName, "packageName == null");
     Check.notNull(simpleName, "simpleName == null");
     Check.argument(
-        SourceVersion.isName(simpleName),
-        simpleName, " is not a valid class name"
+      SourceVersion.isName(simpleName),
+      simpleName, " is not a valid class name"
     );
 
     return new NamedClass(packageName, simpleName);
@@ -117,7 +117,7 @@ public class NamedClass extends NamedClassOrParameterized
 
   private static NamedClass ofUnchecked(Class<?> type) {
     List<String> names;
-    names = Lists.newArrayList();
+    names = new ArrayList<>();
 
     names.add(type.getSimpleName());
 
@@ -154,7 +154,7 @@ public class NamedClass extends NamedClassOrParameterized
 
   private static NamedClass ofUnchecked(TypeElement element) {
     List<String> names;
-    names = Lists.newArrayList();
+    names = new ArrayList<>();
 
     Name elementSimpleName;
     elementSimpleName = element.getSimpleName();
@@ -502,8 +502,8 @@ public class NamedClass extends NamedClassOrParameterized
 
   private void checkTypeName(String simpleName) {
     Check.argument(
-        simpleName != null && SourceVersion.isName(simpleName),
-        simpleName, "%s is not a valid type name"
+      simpleName != null && SourceVersion.isName(simpleName),
+      simpleName, "%s is not a valid type name"
     );
   }
 

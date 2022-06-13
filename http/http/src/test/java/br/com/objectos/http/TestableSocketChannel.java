@@ -16,7 +16,6 @@
 package br.com.objectos.http;
 
 import br.com.objectos.core.io.Charsets;
-import br.com.objectos.core.list.ImmutableList;
 import java.io.IOException;
 import java.net.Socket;
 import java.net.SocketAddress;
@@ -24,6 +23,7 @@ import java.net.SocketOption;
 import java.nio.ByteBuffer;
 import java.nio.channels.SocketChannel;
 import java.util.Set;
+import objectos.util.ImmutableList;
 
 final class TestableSocketChannel extends SocketChannel {
 

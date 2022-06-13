@@ -21,15 +21,15 @@ import static br.com.objectos.smtp.Smtp.loopback;
 import static br.com.objectos.smtp.Smtp.server;
 
 import br.com.objectos.comuns.net.SocketChannelFactory;
-import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.testing.TmpDir;
 import java.io.Closeable;
 import java.io.IOException;
 import javax.mail.Session;
 import javax.mail.internet.MimeMessage;
-import objectos.lang.NoteSink;
 import objectos.lang.NoOpNoteSink;
+import objectos.lang.NoteSink;
+import objectos.util.ImmutableList;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 

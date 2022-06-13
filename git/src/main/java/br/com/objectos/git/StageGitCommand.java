@@ -18,10 +18,10 @@ package br.com.objectos.git;
 import br.com.objectos.concurrent.Computation;
 import br.com.objectos.concurrent.CpuWorker;
 import br.com.objectos.concurrent.StageComputationTask;
-import br.com.objectos.core.set.ImmutableSet;
 import br.com.objectos.fs.Directory;
 import objectos.lang.Check;
 import objectos.lang.ToString;
+import objectos.util.ImmutableSet;
 
 /**
  * <p>

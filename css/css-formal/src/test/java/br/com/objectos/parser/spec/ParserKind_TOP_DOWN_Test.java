@@ -17,8 +17,8 @@ package br.com.objectos.parser.spec;
 
 import static org.testng.Assert.assertEquals;
 
-import br.com.objectos.core.list.MutableList;
 import br.com.objectos.formal.testing.Letter;
+import objectos.util.MutableList;
 import org.testng.annotations.Test;
 
 public class ParserKind_TOP_DOWN_Test {

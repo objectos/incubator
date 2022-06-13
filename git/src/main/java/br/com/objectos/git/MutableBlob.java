@@ -15,10 +15,10 @@
  */
 package br.com.objectos.git;
 
-import br.com.objectos.core.array.ByteArrays;
 import java.nio.charset.Charset;
 import objectos.lang.Check;
 import objectos.lang.ToString;
+import objectos.util.ByteArrays;
 
 /**
  * A class for creating an arbitrary blob object suitable for writing to a

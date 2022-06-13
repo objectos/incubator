@@ -19,10 +19,10 @@ import br.com.objectos.code.java.element.AbstractDefaultImmutableCodeElement;
 import br.com.objectos.code.java.element.CodeElement;
 import br.com.objectos.code.java.element.Keywords;
 import br.com.objectos.code.java.type.NamedArray;
-import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.list.MutableList;
 import java.util.Arrays;
 import java.util.Iterator;
+import objectos.util.ImmutableList;
+import objectos.util.MutableList;
 
 final class ArrayCreationExpressionImpl
     extends AbstractDefaultImmutableCodeElement

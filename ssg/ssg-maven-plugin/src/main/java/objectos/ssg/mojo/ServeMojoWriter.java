@@ -18,7 +18,6 @@ package objectos.ssg.mojo;
 import static br.com.objectos.http.server.Method.GET;
 
 import br.com.objectos.core.io.Charsets;
-import br.com.objectos.core.list.MutableList;
 import br.com.objectos.http.media.MediaType;
 import br.com.objectos.http.path.Location;
 import br.com.objectos.http.path.Route;
@@ -28,6 +27,7 @@ import br.com.objectos.http.server.HttpServerBuilder;
 import br.com.objectos.http.server.MutableHttpServer;
 import java.io.IOException;
 import objectos.ssg.SiteWriter;
+import objectos.util.MutableList;
 
 final class ServeMojoWriter implements HttpModule, SiteWriter {
 

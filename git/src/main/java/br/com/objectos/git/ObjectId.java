@@ -15,10 +15,10 @@
  */
 package br.com.objectos.git;
 
-import br.com.objectos.core.array.ByteArrays;
 import java.util.Arrays;
 import objectos.lang.Check;
 import objectos.lang.ToString;
+import objectos.util.ByteArrays;
 
 /**
  * A hash value that uniquely identifies a Git object.

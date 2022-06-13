@@ -17,7 +17,7 @@ package br.com.objectos.code.java.io;
 
 import br.com.objectos.code.java.declaration.BodyElement;
 import br.com.objectos.code.java.element.NewLine;
-import br.com.objectos.core.list.MutableList;
+import objectos.util.MutableList;
 
 final class BodyElementFormatting extends Formatting {
 

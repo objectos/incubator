@@ -15,8 +15,8 @@
  */
 package br.com.objectos.html.boot.spec;
 
-import br.com.objectos.core.set.MutableSet;
 import objectos.lang.Check;
+import objectos.util.MutableSet;
 
 public class TemplateSpec {
 

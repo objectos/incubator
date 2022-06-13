@@ -33,14 +33,14 @@ import br.com.objectos.code.processing.type.PTypeMirror;
 import br.com.objectos.code.testing.InheritedAnnotation;
 import br.com.objectos.code.util.MethodAnnotation;
 import br.com.objectos.code.util.TypeAnnotation;
-import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.list.MutableList;
-import br.com.objectos.core.set.ImmutableSet;
 import br.com.objectos.tools.Compilation;
 import java.io.IOException;
 import java.util.List;
 import java.util.Set;
 import javax.lang.model.element.ExecutableElement;
+import objectos.util.ImmutableList;
+import objectos.util.ImmutableSet;
+import objectos.util.MutableList;
 import org.testng.annotations.Test;
 
 public class ProcessingMethodTest extends AbstractCodeModelTest {

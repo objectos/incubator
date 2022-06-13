@@ -19,7 +19,7 @@ import static br.com.objectos.code.java.Java.javaFile;
 
 import br.com.objectos.code.java.declaration.PackageName;
 import br.com.objectos.code.java.declaration.TypeCode;
-import br.com.objectos.core.list.ImmutableList;
+import objectos.util.ImmutableList;
 
 public abstract class Step {
 

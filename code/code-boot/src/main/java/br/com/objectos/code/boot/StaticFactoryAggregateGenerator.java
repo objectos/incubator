@@ -21,10 +21,10 @@ import br.com.objectos.code.java.io.JavaFile;
 import br.com.objectos.code.model.element.ProcessingPackage;
 import br.com.objectos.code.processing.AbstractProcessingRoundProcessor;
 import br.com.objectos.code.processing.ProcessingRound;
-import br.com.objectos.core.set.ImmutableSet;
 import java.io.IOException;
 import java.util.Set;
 import javax.annotation.processing.Processor;
+import objectos.util.ImmutableSet;
 
 @Services(Processor.class)
 public class StaticFactoryAggregateGenerator extends AbstractProcessingRoundProcessor {

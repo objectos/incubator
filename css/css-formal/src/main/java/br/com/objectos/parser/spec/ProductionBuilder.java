@@ -15,7 +15,6 @@
  */
 package br.com.objectos.parser.spec;
 
-import br.com.objectos.core.list.MutableList;
 import br.com.objectos.parser.grammar.Constructor1;
 import br.com.objectos.parser.grammar.Constructor2;
 import br.com.objectos.parser.grammar.Constructor3;
@@ -25,6 +24,7 @@ import br.com.objectos.parser.grammar.Constructor6;
 import br.com.objectos.parser.grammar.Constructor7;
 import java.util.List;
 import java.util.Objects;
+import objectos.util.MutableList;
 
 class ProductionBuilder {
 

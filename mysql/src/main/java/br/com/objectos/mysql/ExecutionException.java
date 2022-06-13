@@ -15,8 +15,8 @@
  */
 package br.com.objectos.mysql;
 
-import br.com.objectos.core.list.ImmutableList;
 import java.io.IOException;
+import objectos.util.ImmutableList;
 
 public class ExecutionException extends IOException {
 

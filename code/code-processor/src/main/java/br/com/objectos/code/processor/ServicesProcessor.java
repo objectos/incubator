@@ -24,19 +24,19 @@ import br.com.objectos.code.processing.AbstractProcessingRoundProcessor;
 import br.com.objectos.code.processing.ProcessingRound;
 import br.com.objectos.code.processing.type.PDeclaredType;
 import br.com.objectos.code.processing.type.PTypeMirror;
-import br.com.objectos.core.list.Lists;
-import br.com.objectos.core.list.MutableList;
-import br.com.objectos.core.map.Maps;
-import br.com.objectos.core.set.ImmutableSet;
 import java.io.IOException;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 import javax.annotation.processing.Processor;
+import objectos.util.ImmutableSet;
+import objectos.util.Lists;
+import objectos.util.MutableList;
 
 @Services(Processor.class)
 public class ServicesProcessor extends AbstractProcessingRoundProcessor {
 
-  private final Map<String, MutableList<String>> servicesMap = Maps.newTreeMap();
+  private final Map<String, MutableList<String>> servicesMap = new TreeMap<>();
 
   @Override
   public final Set<String> getSupportedAnnotationTypes() {

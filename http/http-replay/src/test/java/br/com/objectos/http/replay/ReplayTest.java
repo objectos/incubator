@@ -20,11 +20,11 @@ import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertNull;
 
 import br.com.objectos.core.io.Resource;
-import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.http.Method;
 import br.com.objectos.http.ProtocolException;
 import br.com.objectos.http.Version;
 import java.io.IOException;
+import objectos.util.ImmutableList;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 

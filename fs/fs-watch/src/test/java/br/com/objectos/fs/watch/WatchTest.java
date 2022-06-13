@@ -21,7 +21,6 @@ import static org.testng.Assert.assertTrue;
 import br.com.objectos.core.io.Write;
 import br.com.objectos.core.service.Service;
 import br.com.objectos.core.service.Services;
-import br.com.objectos.core.set.Sets;
 import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.PathName;
 import br.com.objectos.fs.RegularFile;
@@ -29,6 +28,7 @@ import br.com.objectos.fs.ResolvedPath;
 import br.com.objectos.fs.testing.TmpDir;
 import br.com.objectos.random.testing.Next;
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.Set;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
@@ -36,11 +36,11 @@ import org.testng.annotations.Test;
 
 public class WatchTest implements Watch.Listener {
 
-  private final Set<PathName> createdObjects = Sets.newHashSet();
+  private final Set<PathName> createdObjects = new HashSet<>();
 
-  private final Set<PathName> deletedObjects = Sets.newHashSet();
+  private final Set<PathName> deletedObjects = new HashSet<>();
 
-  private final Set<PathName> modifiedObjects = Sets.newHashSet();
+  private final Set<PathName> modifiedObjects = new HashSet<>();
 
   private Service watchService;
 
@@ -110,11 +110,11 @@ public class WatchTest implements Watch.Listener {
   }
 
   /*
-
-  @startmindmap
   
-  *_ Test cases
+  @startmindmap
 
+  *_ Test cases
+  
   **:**Test case 01**
   ----
   WatchDirectory use-case:
@@ -129,9 +129,9 @@ public class WatchTest implements Watch.Listener {
   # delete file
   # check listener not notified;
   *** WatchService
-
-  @endmindmap
   
+  @endmindmap
+
   */
 
   @Test

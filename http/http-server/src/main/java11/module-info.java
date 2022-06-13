@@ -21,7 +21,6 @@ module br.com.objectos.http.server {
   requires transitive br.com.objectos.fs;
 
   requires br.com.objectos.core.io;
-  requires br.com.objectos.core.list;
-  requires br.com.objectos.core.map;
   requires objectos.lang;
+  requires objectos.util;
 }

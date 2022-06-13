@@ -54,18 +54,15 @@
 			<groupId>br.com.objectos</groupId>
 			<artifactId>concurrent</artifactId>
 		</dependency>
+
+		<dependency>
+			<groupId>br.com.objectos</groupId>
+			<artifactId>objectos-util</artifactId>
+		</dependency>
 	
 		<dependency>
 			<groupId>br.com.objectos</groupId>
 			<artifactId>core-logging-testing</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>br.com.objectos</groupId>
-			<artifactId>core-map</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>br.com.objectos</groupId>
-			<artifactId>core-set</artifactId>
 		</dependency>
 
 		<dependency>

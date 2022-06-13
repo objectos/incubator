@@ -40,12 +40,12 @@ import static br.com.objectos.code.java.type.NamedTypes.tvar;
 import br.com.objectos.code.java.type.NamedClass;
 import br.com.objectos.code.java.type.NamedParameterized;
 import br.com.objectos.code.util.AbstractCodeJavaTest;
-import br.com.objectos.core.list.ImmutableList;
 import java.io.Closeable;
 import java.io.InputStream;
 import java.io.Serializable;
 import java.util.Arrays;
 import javax.lang.model.element.TypeElement;
+import objectos.util.ImmutableList;
 import org.testng.annotations.Test;
 
 public class ClassCodeTest extends AbstractCodeJavaTest {

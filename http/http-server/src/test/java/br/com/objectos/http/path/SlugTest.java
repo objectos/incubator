@@ -18,11 +18,11 @@ package br.com.objectos.http.path;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
-import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.http.server.RequestedPart;
 import br.com.objectos.http.server.RequestedPath;
 import java.util.Arrays;
 import java.util.List;
+import objectos.util.ImmutableList;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 

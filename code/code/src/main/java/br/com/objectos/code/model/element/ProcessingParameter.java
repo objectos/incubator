@@ -17,11 +17,11 @@ package br.com.objectos.code.model.element;
 
 import br.com.objectos.code.java.declaration.ParameterModifier;
 import br.com.objectos.code.processing.type.PTypeMirror;
-import br.com.objectos.core.set.ImmutableSet;
 import javax.annotation.processing.ProcessingEnvironment;
 import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.VariableElement;
 import objectos.lang.Check;
+import objectos.util.ImmutableSet;
 
 public class ProcessingParameter extends ProcessingVariableElement {
 

@@ -42,7 +42,6 @@ import static br.com.objectos.code.java.Java.t;
 import br.com.objectos.code.java.declaration.EnumCode;
 import br.com.objectos.code.java.declaration.EnumConstantCode;
 import br.com.objectos.code.java.expression.Identifier;
-import br.com.objectos.core.map.Maps;
 import br.com.objectos.css.boot.CssBoot;
 import br.com.objectos.css.boot.spec.Ids;
 import br.com.objectos.css.boot.spec.Step;
@@ -50,10 +49,11 @@ import br.com.objectos.css.boot.spec.StepAdapter;
 import br.com.objectos.css.boot.spec.Types;
 import java.util.Locale;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class AngleUnitStep extends Step {
 
-  private final Map<String, EnumConstantCode> constants = Maps.newTreeMap();
+  private final Map<String, EnumConstantCode> constants = new TreeMap<>();
 
   public AngleUnitStep(StepAdapter adapter) {
     super(adapter);
@@ -68,65 +68,65 @@ public class AngleUnitStep extends Step {
     enumName = id(simpleName);
 
     constants.put(
-        unit,
-        enumConstant(enumName)
+      unit,
+      enumConstant(enumName)
     );
   }
 
   @Override
   public final void execute() {
     writeJavaFile(
-        TypeNames.PACKAGE,
-        enumCode()
+      TypeNames.PACKAGE,
+      enumCode()
     );
   }
 
   private EnumCode enumCode() {
     return _enum(
-        CssBoot.GENERATED,
-        _public(), TypeNames._AngleUnit,
+      CssBoot.GENERATED,
+      _public(), TypeNames._AngleUnit,
 
-        enumConstants(constants.values()),
+      enumConstants(constants.values()),
 
-        field(
-            _private(), _static(), _final(),
-            a(TypeNames._AngleUnit),
-            init(Ids.ARRAY, TypeNames._AngleUnit.invoke("values"))
-        ),
+      field(
+        _private(), _static(), _final(),
+        a(TypeNames._AngleUnit),
+        init(Ids.ARRAY, TypeNames._AngleUnit.invoke("values"))
+      ),
 
-        field(_private(), _final(), Types._String, Ids.name),
+      field(_private(), _final(), Types._String, Ids.name),
 
-        constructor(
-            _private(),
-            assign(
-                fieldAccess(_this(), Ids.name),
-                chain(
-                    invoke("name"),
-                    invoke("toLowerCase", t(Locale.class).id("US"))
-                )
-            )
-        ),
-
-        method(
-            _public(), _static(), TypeNames._AngleUnit, Ids.getByCode,
-            param(_int(), Ids.code),
-            _return(arrayAccess(Ids.ARRAY, Ids.code))
-        ),
-
-        method(
-            _public(), _static(), _int(), Ids.size,
-            _return(Ids.ARRAY.id(Ids.length))
-        ),
-
-        method(
-            _public(), _final(), _int(), Ids.getCode,
-            _return(invoke("ordinal"))
-        ),
-
-        method(
-            _public(), _final(), Types._String, Ids.getName,
-            _return(Ids.name)
+      constructor(
+        _private(),
+        assign(
+          fieldAccess(_this(), Ids.name),
+          chain(
+            invoke("name"),
+            invoke("toLowerCase", t(Locale.class).id("US"))
+          )
         )
+      ),
+
+      method(
+        _public(), _static(), TypeNames._AngleUnit, Ids.getByCode,
+        param(_int(), Ids.code),
+        _return(arrayAccess(Ids.ARRAY, Ids.code))
+      ),
+
+      method(
+        _public(), _static(), _int(), Ids.size,
+        _return(Ids.ARRAY.id(Ids.length))
+      ),
+
+      method(
+        _public(), _final(), _int(), Ids.getCode,
+        _return(invoke("ordinal"))
+      ),
+
+      method(
+        _public(), _final(), Types._String, Ids.getName,
+        _return(Ids.name)
+      )
     );
   }
 

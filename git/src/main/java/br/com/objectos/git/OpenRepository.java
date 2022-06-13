@@ -15,8 +15,6 @@
  */
 package br.com.objectos.git;
 
-import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.list.MutableList;
 import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.DirectoryContentsVisitor;
 import br.com.objectos.fs.PathNameVisitor;
@@ -24,6 +22,8 @@ import br.com.objectos.fs.RegularFile;
 import br.com.objectos.fs.ResolvedPath;
 import java.io.IOException;
 import objectos.lang.Note1;
+import objectos.util.ImmutableList;
+import objectos.util.MutableList;
 
 /**
  * Opens a Git repository.

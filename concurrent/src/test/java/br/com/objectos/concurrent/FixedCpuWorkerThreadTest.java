@@ -18,8 +18,6 @@ package br.com.objectos.concurrent;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
-import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.list.MutableList;
 import br.com.objectos.core.logging.testing.Event0Log;
 import br.com.objectos.core.logging.testing.Event1Log;
 import br.com.objectos.core.logging.testing.Log;
@@ -27,6 +25,8 @@ import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 import objectos.lang.Note0;
 import objectos.lang.Note1;
+import objectos.util.ImmutableList;
+import objectos.util.MutableList;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;

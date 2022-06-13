@@ -50,20 +50,20 @@ import br.com.objectos.code.java.statement.BlockStatement;
 import br.com.objectos.code.java.type.NamedArray;
 import br.com.objectos.code.java.type.NamedClass;
 import br.com.objectos.code.java.type.NamedClassOrParameterized;
-import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.map.Maps;
 import br.com.objectos.css.boot.CssBoot;
 import br.com.objectos.css.boot.spec.Ids;
 import br.com.objectos.css.boot.spec.Step;
 import br.com.objectos.css.boot.spec.StepAdapter;
 import br.com.objectos.css.boot.spec.Types;
 import java.util.Map;
+import java.util.TreeMap;
+import objectos.util.ImmutableList;
 
 public class StandardFunctionNameStep extends Step {
 
-  private final Map<String, EnumConstantCode> constants = Maps.newTreeMap();
+  private final Map<String, EnumConstantCode> constants = new TreeMap<>();
 
-  private final Map<String, BlockStatement> mapStatements = Maps.newTreeMap();
+  private final Map<String, BlockStatement> mapStatements = new TreeMap<>();
 
   public StandardFunctionNameStep(StepAdapter adapter) {
     super(adapter);
@@ -87,21 +87,21 @@ public class StandardFunctionNameStep extends Step {
     nameLiteral = function.getNameLiteral();
 
     constants.put(
-        key,
-        enumConstant(enumName, args(javaName, nameLiteral))
+      key,
+      enumConstant(enumName, args(javaName, nameLiteral))
     );
 
     mapStatements.put(
-        key,
-        invoke(Ids.m, "put", function.getNameLiteral(), enumName)
+      key,
+      invoke(Ids.m, "put", function.getNameLiteral(), enumName)
     );
   }
 
   @Override
   public final void execute() {
     writeJavaFile(
-        FunctionNames._PACKAGE,
-        enumCode()
+      FunctionNames._PACKAGE,
+      enumCode()
     );
   }
 
@@ -122,74 +122,74 @@ public class StandardFunctionNameStep extends Step {
     implImmutableMap = t(Types._ImmutableMap, mapTypeArgs);
 
     return _enum(
-        CssBoot.GENERATED,
-        _public(), FunctionNames.StandardFunctionName, _implements(FunctionNames.FunctionName),
+      CssBoot.GENERATED,
+      _public(), FunctionNames.StandardFunctionName, _implements(FunctionNames.FunctionName),
 
-        enumConstants(constants.values()),
+      enumConstants(constants.values()),
 
-        field(
-            _private(), _static(), _final(),
-            implArray,
-            init(Ids.ARRAY, FunctionNames.StandardFunctionName.invoke("values"))
-        ),
+      field(
+        _private(), _static(), _final(),
+        implArray,
+        init(Ids.ARRAY, FunctionNames.StandardFunctionName.invoke("values"))
+      ),
 
-        field(
-            _private(), _static(), _final(), implImmutableMap,
-            init(Ids.MAP, invoke(Ids.buildMap.name()))
-        ),
+      field(
+        _private(), _static(), _final(), implImmutableMap,
+        init(Ids.MAP, invoke(Ids.buildMap.name()))
+      ),
 
-        field(_private(), _final(), Types._String, Ids.javaName),
+      field(_private(), _final(), Types._String, Ids.javaName),
 
-        field(_private(), _final(), Types._String, Ids.name),
+      field(_private(), _final(), Types._String, Ids.name),
 
-        constructor(
-            _private(),
-            param(Types._String, Ids.javaName),
-            param(Types._String, Ids.name),
-            assign(fieldAccess(_this(), Ids.javaName), Ids.javaName),
-            assign(fieldAccess(_this(), Ids.name), Ids.name)
-        ),
+      constructor(
+        _private(),
+        param(Types._String, Ids.javaName),
+        param(Types._String, Ids.name),
+        assign(fieldAccess(_this(), Ids.javaName), Ids.javaName),
+        assign(fieldAccess(_this(), Ids.name), Ids.name)
+      ),
 
-        method(
-            _public(), _static(), FunctionNames.StandardFunctionName, Ids.getByCode,
-            param(_int(), Ids.code),
-            _return(arrayAccess(Ids.ARRAY, Ids.code))
-        ),
+      method(
+        _public(), _static(), FunctionNames.StandardFunctionName, Ids.getByCode,
+        param(_int(), Ids.code),
+        _return(arrayAccess(Ids.ARRAY, Ids.code))
+      ),
 
-        method(
-            _public(), _static(), implName, Ids.getByName,
-            param(Types._String, Ids.name),
-            _return(invoke(Ids.MAP, "get", Ids.name))
-        ),
+      method(
+        _public(), _static(), implName, Ids.getByName,
+        param(Types._String, Ids.name),
+        _return(invoke(Ids.MAP, "get", Ids.name))
+      ),
 
-        method(
-            _private(), _static(), implImmutableMap, Ids.buildMap,
-            _var(implGrowableMap, Ids.m, Types._newMutableMap()),
-            statements(mapStatements.values()),
-            _return(invoke(Ids.m, "toImmutableMap"))
-        ),
+      method(
+        _private(), _static(), implImmutableMap, Ids.buildMap,
+        _var(implGrowableMap, Ids.m, Types._newMutableMap()),
+        statements(mapStatements.values()),
+        _return(invoke(Ids.m, "toImmutableMap"))
+      ),
 
-        method(
-            _public(), _static(), _int(), Ids.size,
-            _return(Ids.ARRAY.id(Ids.length))
-        ),
+      method(
+        _public(), _static(), _int(), Ids.size,
+        _return(Ids.ARRAY.id(Ids.length))
+      ),
 
-        method(
-            annotation(Override.class),
-            _public(), _final(), _int(), Ids.getCode,
-            _return(invoke("ordinal"))
-        ),
+      method(
+        annotation(Override.class),
+        _public(), _final(), _int(), Ids.getCode,
+        _return(invoke("ordinal"))
+      ),
 
-        method(
-            _public(), _final(), Types._String, Ids.getJavaName,
-            _return(Ids.javaName)
-        ),
+      method(
+        _public(), _final(), Types._String, Ids.getJavaName,
+        _return(Ids.javaName)
+      ),
 
-        method(
-            annotation(Override.class),
-            _public(), _final(), Types._String, Ids.getName,
-            _return(Ids.name)
-        )
+      method(
+        annotation(Override.class),
+        _public(), _final(), Types._String, Ids.getName,
+        _return(Ids.name)
+      )
     );
   }
 

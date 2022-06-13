@@ -23,9 +23,9 @@ import br.com.objectos.code.java.element.CodeElement;
 import br.com.objectos.code.java.element.NewLine;
 import br.com.objectos.code.java.io.CodeWriter;
 import br.com.objectos.code.java.io.Section;
-import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.list.MutableList;
 import objectos.lang.Check;
+import objectos.util.ImmutableList;
+import objectos.util.MutableList;
 
 public final class Arguments extends AbstractImmutableCodeElement
     implements

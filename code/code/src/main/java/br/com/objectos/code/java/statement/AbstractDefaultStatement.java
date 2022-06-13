@@ -21,7 +21,7 @@ import br.com.objectos.code.java.element.AbstractDefaultImmutableCodeElement;
 import br.com.objectos.code.java.element.CodeElement;
 import br.com.objectos.code.java.io.CodeWriter;
 import br.com.objectos.code.java.io.Section;
-import br.com.objectos.core.list.ImmutableList;
+import objectos.util.ImmutableList;
 
 public abstract class AbstractDefaultStatement
     extends AbstractDefaultImmutableCodeElement

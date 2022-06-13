@@ -17,8 +17,8 @@ package br.com.objectos.lexer.impl.ah;
 
 import static org.testng.Assert.assertEquals;
 
-import br.com.objectos.core.list.ImmutableList;
 import java.util.Iterator;
+import objectos.util.ImmutableList;
 import org.testng.annotations.Test;
 
 public class ValueListTest {

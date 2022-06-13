@@ -18,8 +18,6 @@ package br.com.objectos.css.specgen.mdn;
 import br.com.objectos.core.io.Charsets;
 import br.com.objectos.core.io.Read;
 import br.com.objectos.core.io.Resource;
-import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.list.MutableList;
 import br.com.objectos.css.specgen.spec.Property;
 import br.com.objectos.css.specgen.spec.Spec;
 import br.com.objectos.css.specgen.spec.Spec.Builder;
@@ -30,6 +28,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import objectos.util.ImmutableList;
+import objectos.util.MutableList;
 
 public class Mdn {
 

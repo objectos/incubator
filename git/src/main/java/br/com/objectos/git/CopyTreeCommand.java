@@ -15,10 +15,10 @@
  */
 package br.com.objectos.git;
 
-import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.set.ImmutableSet;
-import br.com.objectos.core.set.MutableSet;
 import objectos.lang.Check;
+import objectos.util.ImmutableList;
+import objectos.util.ImmutableSet;
+import objectos.util.MutableSet;
 
 /**
  * Recursively copies a tree object from one repository to another.

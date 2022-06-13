@@ -21,7 +21,7 @@ module br.com.objectos.fs.testing {
 
   requires transitive br.com.objectos.fs;
 
-  requires br.com.objectos.core.list;
   requires br.com.objectos.random.testing;
   requires objectos.lang;
+  requires objectos.util;
 }

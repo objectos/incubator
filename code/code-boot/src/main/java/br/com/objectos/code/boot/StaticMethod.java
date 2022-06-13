@@ -32,8 +32,8 @@ import br.com.objectos.code.model.element.ProcessingMethod;
 import br.com.objectos.code.model.element.ProcessingParameter;
 import br.com.objectos.code.model.element.ProcessingType;
 import br.com.objectos.code.processing.type.PTypeMirror;
-import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.list.MutableList;
+import objectos.util.ImmutableList;
+import objectos.util.MutableList;
 
 final class StaticMethod {
 
@@ -145,8 +145,8 @@ final class StaticMethod {
 
     MethodInvocation invocation;
     invocation = enclosingClassName.invoke(
-        methodName,
-        names
+      methodName,
+      names
     );
 
     Statement statement;

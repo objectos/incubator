@@ -17,13 +17,13 @@ package br.com.objectos.mysql;
 
 import br.com.objectos.concurrent.IoWorker;
 import br.com.objectos.core.io.InputStreamSource;
-import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.RegularFile;
 import br.com.objectos.fs.ResolvedPath;
 import java.nio.charset.Charset;
 import objectos.lang.Check;
 import objectos.lang.NoteSink;
+import objectos.util.ImmutableList;
 
 public final class Client {
 

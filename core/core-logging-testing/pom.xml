@@ -41,12 +41,11 @@
 	<dependencies>
 		<dependency>
 			<groupId>br.com.objectos</groupId>
-			<artifactId>core-list</artifactId>
+			<artifactId>objectos-lang</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>br.com.objectos</groupId>
-			<artifactId>objectos-lang</artifactId>
+			<artifactId>objectos-util</artifactId>
 		</dependency>
 
 		<dependency>

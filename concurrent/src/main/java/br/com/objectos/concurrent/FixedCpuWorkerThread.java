@@ -15,7 +15,7 @@
  */
 package br.com.objectos.concurrent;
 
-import br.com.objectos.core.array.IntArrays;
+import objectos.util.IntArrays;
 
 final class FixedCpuWorkerThread extends Thread {
 

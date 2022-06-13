@@ -17,11 +17,6 @@ package br.com.objectos.git;
 
 import br.com.objectos.concurrent.CpuTask;
 import br.com.objectos.concurrent.IoWorker;
-import br.com.objectos.core.list.MutableList;
-import br.com.objectos.core.map.Maps;
-import br.com.objectos.core.map.MutableMap;
-import br.com.objectos.core.set.ImmutableSet;
-import br.com.objectos.core.set.MutableSet;
 import br.com.objectos.fs.Directory;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
@@ -32,12 +27,17 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayDeque;
 import java.util.Deque;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.zip.Deflater;
 import java.util.zip.Inflater;
 import objectos.lang.Check;
 import objectos.lang.NoOpNoteSink;
 import objectos.lang.NoteSink;
+import objectos.util.ImmutableSet;
+import objectos.util.MutableList;
+import objectos.util.MutableMap;
+import objectos.util.MutableSet;
 
 /**
  * A state machine providing low-level (plumbing) Git operations.
@@ -86,7 +86,7 @@ public final class GitEngine extends GitInjector {
 
   private Deflater deflater;
 
-  private final Map<Charset, CharsetEncoder> encoderMap = Maps.newHashMapWithCapacity(2);
+  private final Map<Charset, CharsetEncoder> encoderMap = new HashMap<>(2);
 
   private FilterNonExisting filterNonExisting;
 

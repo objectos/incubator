@@ -16,7 +16,7 @@
 package br.com.objectos.code.model.element;
 
 import br.com.objectos.code.java.declaration.Modifier;
-import br.com.objectos.core.set.ImmutableSet;
+import objectos.util.ImmutableSet;
 
 public interface ElementModifiersQuery {
 

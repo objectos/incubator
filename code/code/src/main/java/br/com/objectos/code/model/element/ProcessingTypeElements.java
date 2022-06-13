@@ -16,14 +16,14 @@
 package br.com.objectos.code.model.element;
 
 import br.com.objectos.code.util.SimpleElementVisitor;
-import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.list.MutableList;
 import java.util.List;
 import javax.annotation.processing.ProcessingEnvironment;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.VariableElement;
+import objectos.util.ImmutableList;
+import objectos.util.MutableList;
 
 class ProcessingTypeElements {
 

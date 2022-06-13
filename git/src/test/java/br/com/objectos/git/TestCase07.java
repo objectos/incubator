@@ -15,15 +15,15 @@
  */
 package br.com.objectos.git;
 
-import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.map.Maps;
-import br.com.objectos.core.set.ImmutableSet;
-import br.com.objectos.core.set.MutableSet;
 import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.testing.TmpDir;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import objectos.util.ImmutableList;
+import objectos.util.ImmutableSet;
+import objectos.util.MutableSet;
 
 /**
  * Verify that the copy command can create the first commit of the target
@@ -43,7 +43,7 @@ final class TestCase07 extends StageGitCommand<ObjectId> {
 
   private MaybeObjectId parentId;
 
-  private final Map<ObjectId, MutableTree> parentMap = Maps.newHashMap();
+  private final Map<ObjectId, MutableTree> parentMap = new HashMap<>();
 
   private MutableTree rootTree;
 

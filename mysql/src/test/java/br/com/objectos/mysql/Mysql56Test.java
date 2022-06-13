@@ -19,7 +19,6 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
-import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.core.io.Read;
 import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.LocalFs;
@@ -27,6 +26,7 @@ import br.com.objectos.fs.ResolvedPath;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import objectos.util.ImmutableList;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -35,15 +35,15 @@ public class Mysql56Test extends AbstractMysqlTest {
   @Override
   public void _beforeClassInit() throws IOException {
     directoryBase = LocalFs.getDirectory(
-        System.getProperty("objectos.mysql56.baseDir")
+      System.getProperty("objectos.mysql56.baseDir")
     );
 
     directoryBinariesClient = LocalFs.getDirectory(
-        System.getProperty("objectos.mysql56.binaryDirClient")
+      System.getProperty("objectos.mysql56.binaryDirClient")
     );
 
     directoryBinariesServer = LocalFs.getDirectory(
-        System.getProperty("objectos.mysql56.binaryDirServer")
+      System.getProperty("objectos.mysql56.binaryDirServer")
     );
 
     release = Release.MYSQL_5_6;
@@ -52,59 +52,59 @@ public class Mysql56Test extends AbstractMysqlTest {
   @Test
   public void testCase01() throws IOException {
     testCase01(
-        Mysql.mysqld(
-            Mysql.basedir(directoryBase),
+      Mysql.mysqld(
+        Mysql.basedir(directoryBase),
 
-            Mysql.characterSetServer(MysqlCharset.UTF8MB4),
+        Mysql.characterSetServer(MysqlCharset.UTF8MB4),
 
-            Mysql.datadir(fs.data),
+        Mysql.datadir(fs.data),
 
-            Mysql.explicitDefaultsForTimestamp(Toggle.ON),
+        Mysql.explicitDefaultsForTimestamp(Toggle.ON),
 
-            Mysql.generalLog(Toggle.ON),
+        Mysql.generalLog(Toggle.ON),
 
-            Mysql.generalLogFile(fs.generalLogPath),
+        Mysql.generalLogFile(fs.generalLogPath),
 
-            Mysql.innodbBufferPoolSize(64, Unit.MB),
+        Mysql.innodbBufferPoolSize(64, Unit.MB),
 
-            Mysql.logBin(fs.binlog, "binlog"),
+        Mysql.logBin(fs.binlog, "binlog"),
 
-            Mysql.logError(fs.errorLogPath),
+        Mysql.logError(fs.errorLogPath),
 
-            Mysql.maxConnections(4),
+        Mysql.maxConnections(4),
 
-            Mysql.serverId(1),
+        Mysql.serverId(1),
 
-            Mysql.skipNetworking(),
+        Mysql.skipNetworking(),
 
-            Mysql.skipSsl(),
+        Mysql.skipSsl(),
 
-            fs.socketOption,
+        fs.socketOption,
 
-            Mysql.tmpdir(fs.root),
+        Mysql.tmpdir(fs.root),
 
-            Mysql.waitTimeout(90000)
-        ),
+        Mysql.waitTimeout(90000)
+      ),
 
-        ImmutableList.of(
-            "[mysqld]",
-            "basedir=" + directoryBase.getPath(),
-            "character-set-server=utf8mb4",
-            "datadir=" + fs.data.getPath(),
-            "explicit-defaults-for-timestamp=ON",
-            "general-log=ON",
-            "general-log-file=" + fs.generalLogPath.getPath(),
-            "innodb-buffer-pool-size=64MB",
-            "log-bin=" + fs.binlog.getPath() + "/binlog",
-            "log-error=" + fs.errorLogPath.getPath(),
-            "max-connections=4",
-            "server-id=1",
-            "skip-networking",
-            "skip-ssl",
-            "socket=" + fs.socketPath.getPath(),
-            "tmpdir=" + fs.root.getPath(),
-            "wait-timeout=90000"
-        )
+      ImmutableList.of(
+        "[mysqld]",
+        "basedir=" + directoryBase.getPath(),
+        "character-set-server=utf8mb4",
+        "datadir=" + fs.data.getPath(),
+        "explicit-defaults-for-timestamp=ON",
+        "general-log=ON",
+        "general-log-file=" + fs.generalLogPath.getPath(),
+        "innodb-buffer-pool-size=64MB",
+        "log-bin=" + fs.binlog.getPath() + "/binlog",
+        "log-error=" + fs.errorLogPath.getPath(),
+        "max-connections=4",
+        "server-id=1",
+        "skip-networking",
+        "skip-ssl",
+        "socket=" + fs.socketPath.getPath(),
+        "tmpdir=" + fs.root.getPath(),
+        "wait-timeout=90000"
+      )
     );
   }
 
@@ -127,13 +127,13 @@ public class Mysql56Test extends AbstractMysqlTest {
 
     Process handle;
     handle = Mysql56.install(
-        directoryScripts,
+      directoryScripts,
 
-        serverConfigurationFile,
+      serverConfigurationFile,
 
-        Mysql.basedir(directoryBase),
+      Mysql.basedir(directoryBase),
 
-        Mysql.datadir(data)
+      Mysql.datadir(data)
     );
 
     int exitValue;
@@ -178,13 +178,13 @@ public class Mysql56Test extends AbstractMysqlTest {
   @Test(dependsOnMethods = "testCase05")
   public void testCase06() throws Exception {
     testCase06Impl(
-        "information_schema",
-        "db0",
-        "db1",
-        "db2",
-        "mysql",
-        "performance_schema",
-        "test"
+      "information_schema",
+      "db0",
+      "db1",
+      "db2",
+      "mysql",
+      "performance_schema",
+      "test"
     );
   }
 

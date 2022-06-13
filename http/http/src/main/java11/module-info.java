@@ -19,10 +19,8 @@ module br.com.objectos.http {
 
   requires transitive br.com.objectos.concurrent;
 
-  requires br.com.objectos.core.array;
   requires br.com.objectos.core.io;
-  requires br.com.objectos.core.list;
-  requires br.com.objectos.core.map;
   requires br.com.objectos.core.net;
   requires objectos.lang;
+  requires objectos.util;
 }

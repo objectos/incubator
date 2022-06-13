@@ -15,8 +15,8 @@
  */
 package objectos.docs.ui;
 
-import br.com.objectos.core.list.ImmutableList;
 import objectos.ssg.Site;
+import objectos.util.ImmutableList;
 
 class NoOpContext implements Site.Context {
 

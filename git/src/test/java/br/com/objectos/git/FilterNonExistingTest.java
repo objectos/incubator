@@ -22,12 +22,12 @@ import static org.testng.Assert.assertNull;
 import static org.testng.Assert.assertSame;
 import static org.testng.Assert.assertTrue;
 
-import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.set.ImmutableSet;
 import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.ResolvedPath;
 import java.io.IOException;
 import java.util.concurrent.ExecutionException;
+import objectos.util.ImmutableList;
+import objectos.util.ImmutableSet;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;

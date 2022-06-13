@@ -15,9 +15,9 @@
  */
 package br.com.objectos.tools;
 
-import br.com.objectos.core.set.ImmutableSet;
 import java.io.IOException;
 import java.net.URI;
+import objectos.util.ImmutableSet;
 
 class StringJavaFileObject extends AbstractJavaFileObject {
 

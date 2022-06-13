@@ -17,10 +17,10 @@ import static org.testng.Assert.assertEquals;
 import br.com.objectos.code.java.expression.Identifier;
 import br.com.objectos.code.java.type.NamedClass;
 import br.com.objectos.code.util.AbstractCodeJavaTest;
-import br.com.objectos.core.list.Lists;
 import java.util.List;
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.VariableElement;
+import objectos.util.Lists;
 import org.testng.annotations.Test;
 
 public class ParameterCodeTest extends AbstractCodeJavaTest {
@@ -28,16 +28,16 @@ public class ParameterCodeTest extends AbstractCodeJavaTest {
   @Test
   public void ofFromVariableElement() {
     assertEquals(
-        ParameterCode.of(onlyParameterOfMethod("type")).toString(),
-        "java.lang.String name"
+      ParameterCode.of(onlyParameterOfMethod("type")).toString(),
+      "java.lang.String name"
     );
     assertEquals(
-        ParameterCode.of(onlyParameterOfMethod("isVarArgs")).toString(),
-        "int... values"
+      ParameterCode.of(onlyParameterOfMethod("isVarArgs")).toString(),
+      "int... values"
     );
     assertEquals(
-        ParameterCode.of(onlyParameterOfMethod("notVarArgs")).toString(),
-        "int[] values"
+      ParameterCode.of(onlyParameterOfMethod("notVarArgs")).toString(),
+      "int[] values"
     );
   }
 
@@ -57,11 +57,11 @@ public class ParameterCodeTest extends AbstractCodeJavaTest {
   )
   public void simpleParameter() {
     test(param(t(String.class), id("name")),
-        "java.lang.String name");
+      "java.lang.String name");
     test(param(_int(), id("value")),
-        "int value");
+      "int value");
     test(param(VarArgs.of(a(_int())), id("values")),
-        "int... values");
+      "int... values");
   }
 
   private ExecutableElement method(String methodName) {

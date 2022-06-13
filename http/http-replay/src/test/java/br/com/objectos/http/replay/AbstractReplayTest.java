@@ -19,9 +19,6 @@ import br.com.objectos.concurrent.Concurrent;
 import br.com.objectos.concurrent.DirectIoWorker;
 import br.com.objectos.concurrent.IoWorker;
 import br.com.objectos.core.io.Charsets;
-import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.list.MutableList;
-import br.com.objectos.core.map.Maps;
 import br.com.objectos.core.net.InetAddresses;
 import br.com.objectos.http.Body;
 import br.com.objectos.http.Body.Text;
@@ -46,7 +43,10 @@ import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
+import java.util.HashMap;
 import java.util.Map;
+import objectos.util.ImmutableList;
+import objectos.util.MutableList;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
@@ -75,7 +75,7 @@ public abstract class AbstractReplayTest {
 
   private ServerSocketChannel serverSocketChannel;
 
-  private final Map<String, String> sessionMap = Maps.newHashMap();
+  private final Map<String, String> sessionMap = new HashMap<>();
 
   private InetSocketAddress socketAddress;
 

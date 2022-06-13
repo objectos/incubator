@@ -15,7 +15,7 @@
  */
 package br.com.objectos.css.specgen.mdn;
 
-import br.com.objectos.core.list.MutableList;
+import objectos.util.MutableList;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;

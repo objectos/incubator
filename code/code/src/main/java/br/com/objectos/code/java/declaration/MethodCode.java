@@ -33,12 +33,12 @@ import br.com.objectos.code.java.type.NamedTypeVariable;
 import br.com.objectos.code.java.type.NamedVoid;
 import br.com.objectos.code.model.element.ProcessingMethod;
 import br.com.objectos.code.model.element.ProcessingParameter;
-import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.list.MutableList;
 import java.lang.annotation.Annotation;
 import java.util.Set;
 import javax.lang.model.element.ExecutableElement;
 import objectos.lang.Check;
+import objectos.util.ImmutableList;
+import objectos.util.MutableList;
 
 public final class MethodCode
     extends AbstractCodeElement

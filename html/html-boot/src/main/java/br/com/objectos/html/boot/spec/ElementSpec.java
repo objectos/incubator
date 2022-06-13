@@ -21,9 +21,9 @@ import br.com.objectos.code.java.JavaNames;
 import br.com.objectos.code.java.expression.Identifier;
 import br.com.objectos.code.java.expression.IdentifierBuilder;
 import br.com.objectos.code.java.type.NamedClass;
-import br.com.objectos.core.set.Sets;
 import br.com.objectos.html.boot.spi.type.SpiType;
 import java.util.Set;
+import java.util.TreeSet;
 
 public class ElementSpec
     implements
@@ -40,7 +40,7 @@ public class ElementSpec
 
   private boolean hasEndTag = true;
   private final String name;
-  private final Set<ElementSpec> parentSet = Sets.newTreeSet();
+  private final Set<ElementSpec> parentSet = new TreeSet<>();
 
   ElementSpec(SpecDsl dsl, String name) {
     this.dsl = dsl;

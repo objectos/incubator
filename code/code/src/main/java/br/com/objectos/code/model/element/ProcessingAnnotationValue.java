@@ -16,12 +16,12 @@
 package br.com.objectos.code.model.element;
 
 import br.com.objectos.code.processing.type.PTypeMirror;
-import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.list.MutableList;
 import java.lang.annotation.Annotation;
 import javax.lang.model.element.AnnotationValue;
 import javax.lang.model.element.ExecutableElement;
 import objectos.lang.Check;
+import objectos.util.ImmutableList;
+import objectos.util.MutableList;
 
 public abstract class ProcessingAnnotationValue implements CanGenerateCompilationError {
 

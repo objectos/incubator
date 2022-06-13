@@ -15,7 +15,7 @@
  */
 package br.com.objectos.formal.testing;
 
-import br.com.objectos.core.list.ImmutableList;
+import objectos.util.ImmutableList;
 
 public class HasLetters implements HasSomething {
 

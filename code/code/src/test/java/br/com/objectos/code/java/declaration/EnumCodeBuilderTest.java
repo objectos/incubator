@@ -9,7 +9,7 @@ package br.com.objectos.code.java.declaration;
 
 import br.com.objectos.code.java.type.NamedClass;
 import br.com.objectos.code.util.AbstractCodeJavaTest;
-import br.com.objectos.core.list.ImmutableList;
+import objectos.util.ImmutableList;
 import org.testng.annotations.Test;
 
 public class EnumCodeBuilderTest extends AbstractCodeJavaTest {

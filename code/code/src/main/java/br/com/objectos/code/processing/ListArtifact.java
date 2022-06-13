@@ -15,8 +15,8 @@
  */
 package br.com.objectos.code.processing;
 
-import br.com.objectos.core.list.ImmutableList;
 import javax.annotation.processing.ProcessingEnvironment;
+import objectos.util.ImmutableList;
 
 class ListArtifact extends Artifact {
 

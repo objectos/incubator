@@ -15,11 +15,11 @@
  */
 package br.com.objectos.mojo;
 
-import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.RegularFile;
 import java.util.List;
 import java.util.Properties;
+import objectos.util.ImmutableList;
 import org.apache.maven.settings.Mirror;
 
 final class FakeRequest implements Request {

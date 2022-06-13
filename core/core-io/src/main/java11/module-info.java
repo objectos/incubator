@@ -21,7 +21,7 @@
 module br.com.objectos.core.io {
   exports br.com.objectos.core.io;
 
-  requires transitive br.com.objectos.core.list;
+  requires transitive objectos.util;
 
   requires objectos.lang;
 }

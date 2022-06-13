@@ -19,11 +19,11 @@ import br.com.objectos.concurrent.Computation;
 import br.com.objectos.concurrent.CpuArray;
 import br.com.objectos.concurrent.CpuWorker;
 import br.com.objectos.concurrent.IoWorker;
-import br.com.objectos.core.set.ImmutableSet;
 import br.com.objectos.fs.Directory;
 import objectos.lang.Check;
 import objectos.lang.NoOpNoteSink;
 import objectos.lang.NoteSink;
+import objectos.util.ImmutableSet;
 
 /**
  * A class for supporting the execution of {@link GitCommand} instances.

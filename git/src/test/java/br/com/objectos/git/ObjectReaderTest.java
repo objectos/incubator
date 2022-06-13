@@ -21,12 +21,12 @@ import static org.testng.Assert.assertTrue;
 
 import br.com.objectos.concurrent.Concurrent;
 import br.com.objectos.core.io.Charsets;
-import br.com.objectos.core.set.ImmutableSet;
-import br.com.objectos.core.set.MutableSet;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.Set;
 import java.util.concurrent.ExecutionException;
+import objectos.util.ImmutableSet;
+import objectos.util.MutableSet;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;

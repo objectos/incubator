@@ -19,8 +19,8 @@ import br.com.objectos.code.java.declaration.ClassCode;
 import br.com.objectos.code.java.declaration.FieldCode;
 import br.com.objectos.code.java.declaration.MethodCode;
 import br.com.objectos.code.model.element.ProcessingType;
-import br.com.objectos.core.list.ImmutableList;
 import objectos.lang.ToString;
+import objectos.util.ImmutableList;
 
 final class FactoryType implements ToString.Formattable {
 

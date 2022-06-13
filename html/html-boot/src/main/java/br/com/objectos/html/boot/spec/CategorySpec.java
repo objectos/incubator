@@ -15,8 +15,8 @@
  */
 package br.com.objectos.html.boot.spec;
 
-import br.com.objectos.core.list.MutableList;
 import java.util.List;
+import objectos.util.MutableList;
 
 public class CategorySpec {
 

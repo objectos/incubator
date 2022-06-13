@@ -17,10 +17,10 @@ package br.com.objectos.css.specgen.mdn;
 
 import static org.testng.Assert.assertEquals;
 
-import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.css.specgen.AbstractCssSpecgenHttpServerTest;
 import br.com.objectos.css.specgen.spec.Property;
 import br.com.objectos.css.specgen.spec.Spec;
+import objectos.util.ImmutableList;
 import org.testng.annotations.Test;
 
 public class MdnCrawlerTest extends AbstractCssSpecgenHttpServerTest {

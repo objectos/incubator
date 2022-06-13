@@ -15,7 +15,6 @@
  */
 package objectos.docs;
 
-import br.com.objectos.core.list.MutableList;
 import br.com.objectos.css.Css;
 import br.com.objectos.css.select.ClassSelector;
 import br.com.objectos.css.sheet.StyleSheet;
@@ -27,6 +26,7 @@ import objectos.docs.ui.Pages;
 import objectos.docs.v0001.V0001;
 import objectos.docs.v0002.V0002;
 import objectos.ssg.SiteStyleSheet;
+import objectos.util.MutableList;
 
 final class Versions extends DocsPage implements Pages.IgnoreMe {
 

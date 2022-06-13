@@ -37,16 +37,11 @@
 	<inceptionYear>2021</inceptionYear>
 
 	<modules>
-		<module>core-array</module>
-		<module>core-collection</module>
 		<module>core-io</module>
-		<module>core-list</module>
 		<module>core-logging-testing</module>
-		<module>core-map</module>
 		<module>core-net</module>
 		<module>core-random-testing</module>
 		<module>core-service</module>
-		<module>core-set</module>
 	</modules>
 
 	<dependencyManagement>

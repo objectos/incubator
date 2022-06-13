@@ -21,25 +21,26 @@ import static br.com.objectos.html.boot.attribute.AttributeNames.StandardAttribu
 import br.com.objectos.code.java.JavaNames;
 import br.com.objectos.code.java.expression.Identifier;
 import br.com.objectos.code.java.type.NamedClass;
-import br.com.objectos.core.set.ImmutableSet;
-import br.com.objectos.core.set.Sets;
 import br.com.objectos.html.boot.attribute.AttributeNames;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.Set;
+import java.util.TreeSet;
+import objectos.util.ImmutableSet;
 
 public abstract class AttributeSpec {
 
-  final Set<NamedClass> interfaceSet = Sets.newTreeSet();
+  final Set<NamedClass> interfaceSet = new TreeSet<>();
 
   private final NamedClass className;
 
   private final Identifier constantName;
 
-  private final Set<AttributeKind> kindSet = Sets.newTreeSet();
+  private final Set<AttributeKind> kindSet = new TreeSet<>();
 
   private final String name;
 
-  private final Set<String> nameSet = Sets.newLinkedHashSet();
+  private final Set<String> nameSet = new LinkedHashSet<>();
 
   AttributeSpec(String name) {
     this.name = name;

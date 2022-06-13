@@ -18,10 +18,10 @@ package objectos.ssg;
 import static org.testng.Assert.assertEquals;
 
 import br.com.objectos.core.io.Resource;
-import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.http.media.ImageType;
 import br.com.objectos.http.media.TextType;
 import java.io.IOException;
+import objectos.util.ImmutableList;
 import org.testng.annotations.Test;
 
 public class SiteTest {

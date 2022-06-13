@@ -17,13 +17,13 @@ package br.com.objectos.code.jdt;
 
 import br.com.objectos.code.processing.AbstractProcessingRoundProcessor;
 import br.com.objectos.code.processing.ProcessingRound;
-import br.com.objectos.core.list.Lists;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
 class EnumConstantProcessor extends AbstractProcessingRoundProcessor {
 
-  private final List<String> enumConstantList = Lists.newArrayList();
+  private final List<String> enumConstantList = new ArrayList<>();
 
   @Override
   public final Set<String> getSupportedAnnotationTypes() {

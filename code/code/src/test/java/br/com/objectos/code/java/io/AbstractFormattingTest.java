@@ -9,10 +9,10 @@ package br.com.objectos.code.java.io;
 
 import br.com.objectos.code.java.declaration.ClassBodyElement;
 import br.com.objectos.code.util.AbstractCodeJavaTest;
-import br.com.objectos.core.collection.UnmodifiableIterator;
-import br.com.objectos.core.list.ImmutableList;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableIterator;
 import org.testng.annotations.BeforeMethod;
 
 public abstract class AbstractFormattingTest

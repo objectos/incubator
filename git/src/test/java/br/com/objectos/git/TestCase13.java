@@ -15,10 +15,10 @@
  */
 package br.com.objectos.git;
 
-import br.com.objectos.core.set.ImmutableSet;
 import br.com.objectos.fs.Directory;
 import java.io.IOException;
 import java.util.concurrent.ExecutionException;
+import objectos.util.ImmutableSet;
 
 /**
  * Unexpected BadObjectException during CopyObjectsTask.

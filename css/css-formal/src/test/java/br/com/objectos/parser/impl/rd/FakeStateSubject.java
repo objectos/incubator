@@ -17,10 +17,10 @@ package br.com.objectos.parser.impl.rd;
 
 import static org.testng.Assert.assertEquals;
 
-import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.parser.spec.NonTerminal;
 import br.com.objectos.parser.spec.ProductionQuery;
 import java.util.Arrays;
+import objectos.util.ImmutableList;
 
 class FakeStateSubject implements StateSubject {
 

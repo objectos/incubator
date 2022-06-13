@@ -15,8 +15,8 @@
  */
 package br.com.objectos.code.jdt;
 
-import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.list.MutableList;
+import objectos.util.ImmutableList;
+import objectos.util.MutableList;
 import org.eclipse.jdt.internal.compiler.env.NameEnvironmentAnswer;
 
 abstract class PackageName {

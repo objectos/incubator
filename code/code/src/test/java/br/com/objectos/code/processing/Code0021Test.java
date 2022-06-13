@@ -17,14 +17,14 @@ import static org.testng.Assert.assertTrue;
 import br.com.objectos.code.java.type.NamedClass;
 import br.com.objectos.code.model.element.ProcessingType;
 import br.com.objectos.code.util.Marker1;
-import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.list.MutableList;
-import br.com.objectos.core.set.ImmutableSet;
 import br.com.objectos.tools.Compilation;
 import br.com.objectos.tools.GeneratedResource;
 import java.io.IOException;
 import java.util.List;
 import java.util.Set;
+import objectos.util.ImmutableList;
+import objectos.util.ImmutableSet;
+import objectos.util.MutableList;
 import org.testng.annotations.Test;
 
 public class Code0021Test {

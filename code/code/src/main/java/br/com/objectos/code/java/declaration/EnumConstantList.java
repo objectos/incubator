@@ -19,10 +19,10 @@ import br.com.objectos.code.annotations.Ignore;
 import br.com.objectos.code.java.element.AbstractCodeElement;
 import br.com.objectos.code.java.element.CodeElement;
 import br.com.objectos.code.java.io.CodeWriter;
-import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.list.MutableList;
 import java.util.Iterator;
 import objectos.lang.Check;
+import objectos.util.ImmutableList;
+import objectos.util.MutableList;
 
 public class EnumConstantList extends AbstractCodeElement
     implements

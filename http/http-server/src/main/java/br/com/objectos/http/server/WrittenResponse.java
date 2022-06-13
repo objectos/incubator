@@ -15,9 +15,9 @@
  */
 package br.com.objectos.http.server;
 
-import br.com.objectos.core.list.ImmutableList;
 import java.io.IOException;
 import java.util.Objects;
+import objectos.util.ImmutableList;
 
 public class WrittenResponse {
 

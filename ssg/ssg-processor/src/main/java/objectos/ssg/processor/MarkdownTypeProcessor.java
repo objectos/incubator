@@ -19,11 +19,11 @@ import br.com.objectos.code.annotations.Services;
 import br.com.objectos.code.model.element.ProcessingType;
 import br.com.objectos.code.processing.AbstractProcessingRoundProcessor;
 import br.com.objectos.code.processing.ProcessingRound;
-import br.com.objectos.core.set.ImmutableSet;
 import java.io.IOException;
 import java.util.Set;
 import javax.annotation.processing.Processor;
 import objectos.ssg.Markdown;
+import objectos.util.ImmutableSet;
 
 @Services(Processor.class)
 public final class MarkdownTypeProcessor extends AbstractProcessingRoundProcessor {

@@ -30,9 +30,6 @@ import br.com.objectos.code.processing.ProcessingRound;
 import br.com.objectos.code.processing.type.PTypeMirror;
 import br.com.objectos.code.util.AbstractCodeCoreTest;
 import br.com.objectos.code.util.TypeAnnotation;
-import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.list.MutableList;
-import br.com.objectos.core.set.ImmutableSet;
 import br.com.objectos.tools.Compilation;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -40,6 +37,9 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import java.util.List;
 import java.util.Set;
+import objectos.util.ImmutableList;
+import objectos.util.ImmutableSet;
+import objectos.util.MutableList;
 import org.testng.annotations.Test;
 
 public class ProcessingParameterTest extends AbstractCodeCoreTest {

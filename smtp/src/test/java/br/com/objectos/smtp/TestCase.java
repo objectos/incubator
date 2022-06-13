@@ -15,29 +15,29 @@
  */
 package br.com.objectos.smtp;
 
-import br.com.objectos.core.list.ImmutableList;
 import java.nio.charset.Charset;
+import objectos.util.ImmutableList;
 
 public final class TestCase {
 
   public static final TestCase TC00 = testCase(
-      body(
-          "Date: Wed, 21 Oct 2020 02:36:23 -0300 (BRT)",
-          "From: tc00-sender@example.com",
-          "To: tc00-receiver@example.com",
-          "Message-ID: <1176164144.0.1603258583357@localhost>",
-          "Subject: Test case 00",
-          "MIME-Version: 1.0",
-          "Content-Type: text/plain; charset=us-ascii",
-          "Content-Transfer-Encoding: 7bit",
-          "",
-          "1) no SSL / no TLS",
-          "2) single recipient (TO:)",
-          "3) text only",
-          "4) ?",
-          ".",
-          ""
-      )
+    body(
+      "Date: Wed, 21 Oct 2020 02:36:23 -0300 (BRT)",
+      "From: tc00-sender@example.com",
+      "To: tc00-receiver@example.com",
+      "Message-ID: <1176164144.0.1603258583357@localhost>",
+      "Subject: Test case 00",
+      "MIME-Version: 1.0",
+      "Content-Type: text/plain; charset=us-ascii",
+      "Content-Transfer-Encoding: 7bit",
+      "",
+      "1) no SSL / no TLS",
+      "2) single recipient (TO:)",
+      "3) text only",
+      "4) ?",
+      ".",
+      ""
+    )
   );
 
   private final String body;

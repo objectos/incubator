@@ -21,8 +21,8 @@ import br.com.objectos.code.java.element.Keywords;
 import br.com.objectos.code.java.expression.Expression;
 import br.com.objectos.code.java.io.CodeWriter;
 import br.com.objectos.code.java.io.Section;
-import br.com.objectos.core.list.ImmutableList;
 import objectos.lang.Check;
+import objectos.util.ImmutableList;
 
 public class SwitchStatement extends AbstractSimpleStatement {
 

@@ -94,11 +94,7 @@
 
 		<dependency>
 			<groupId>br.com.objectos</groupId>
-			<artifactId>core-list</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>br.com.objectos</groupId>
-			<artifactId>core-map</artifactId>
+			<artifactId>objectos-util</artifactId>
 		</dependency>
 
 		<dependency>

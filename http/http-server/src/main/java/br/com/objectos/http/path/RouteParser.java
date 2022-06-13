@@ -15,7 +15,6 @@
  */
 package br.com.objectos.http.path;
 
-import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.http.server.HttpAction;
 import br.com.objectos.http.server.Request;
 import br.com.objectos.http.server.RequestProto;
@@ -23,6 +22,7 @@ import br.com.objectos.http.server.RequestedPart;
 import br.com.objectos.http.server.Resolution;
 import java.util.ArrayList;
 import java.util.List;
+import objectos.util.ImmutableList;
 
 public class RouteParser {
 

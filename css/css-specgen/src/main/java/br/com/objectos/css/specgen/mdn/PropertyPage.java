@@ -15,10 +15,10 @@
  */
 package br.com.objectos.css.specgen.mdn;
 
-import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.list.MutableList;
 import br.com.objectos.css.specgen.spec.Property;
 import br.com.objectos.css.specgen.spec.ValueType;
+import objectos.util.ImmutableList;
+import objectos.util.MutableList;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.nodes.Node;

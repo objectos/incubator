@@ -11,8 +11,8 @@ import static br.com.objectos.code.java.declaration.Modifiers.FINAL;
 import static br.com.objectos.code.java.declaration.Modifiers.PUBLIC;
 
 import br.com.objectos.code.util.AbstractCodeJavaTest;
-import br.com.objectos.core.list.ImmutableList;
 import java.io.InputStream;
+import objectos.util.ImmutableList;
 import org.testng.annotations.Test;
 
 public class ClassCodeBuilderTest extends AbstractCodeJavaTest {

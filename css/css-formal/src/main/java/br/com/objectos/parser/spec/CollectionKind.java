@@ -15,8 +15,8 @@
  */
 package br.com.objectos.parser.spec;
 
-import br.com.objectos.core.list.MutableList;
 import java.util.Iterator;
+import objectos.util.MutableList;
 
 public enum CollectionKind {
 

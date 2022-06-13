@@ -15,12 +15,12 @@
  */
 package br.com.objectos.http;
 
-import br.com.objectos.core.map.Maps;
+import java.util.HashMap;
 import java.util.Map;
 
 final class HashMapStringDeduplicator implements StringDeduplicator {
 
-  private final Map<String, String> map = Maps.newHashMap();
+  private final Map<String, String> map = new HashMap<>();
 
   @Override
   public final String dedup(String name) {

@@ -18,9 +18,9 @@ package br.com.objectos.css.maven.plugin.framework;
 import static org.testng.Assert.assertEquals;
 
 import br.com.objectos.code.java.io.JavaFile;
-import br.com.objectos.core.map.ImmutableMap;
-import br.com.objectos.core.map.MutableMap;
 import br.com.objectos.css.config.framework.Configuration;
+import objectos.util.ImmutableMap;
+import objectos.util.MutableMap;
 
 public abstract class AbstractCssMavenPluginFrameworkTest {
 

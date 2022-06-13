@@ -16,14 +16,14 @@
 package br.com.objectos.html.boot.spec;
 
 import br.com.objectos.code.java.type.NamedClass;
-import br.com.objectos.core.set.Sets;
 import java.util.Set;
+import java.util.TreeSet;
 
 public class TextSpec implements Child, Name {
 
   private final NamedClass className;
 
-  private final Set<ElementSpec> parentSet = Sets.newTreeSet();
+  private final Set<ElementSpec> parentSet = new TreeSet<>();
 
   TextSpec(SpecDsl dsl) {
     className = NamedClass.object();

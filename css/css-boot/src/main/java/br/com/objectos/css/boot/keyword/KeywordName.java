@@ -38,7 +38,6 @@ import br.com.objectos.code.java.expression.MethodInvocation;
 import br.com.objectos.code.java.type.NamedArray;
 import br.com.objectos.code.java.type.NamedClass;
 import br.com.objectos.code.java.type.NamedType;
-import br.com.objectos.core.set.Sets;
 import br.com.objectos.css.boot.CssBoot;
 import br.com.objectos.css.boot.property.ParameterType;
 import br.com.objectos.css.boot.spec.Ids;
@@ -46,6 +45,7 @@ import br.com.objectos.css.boot.type.PrimitiveType;
 import br.com.objectos.css.boot.type.Value;
 import br.com.objectos.css.boot.type.ValueType;
 import java.util.Set;
+import java.util.TreeSet;
 import javax.lang.model.SourceVersion;
 import objectos.lang.Check;
 import objectos.lang.ToString;
@@ -60,7 +60,7 @@ public class KeywordName
   public final NamedClass className;
 
   public final Identifier fieldName;
-  private final Set<NamedClass> interfaces = Sets.newTreeSet();
+  private final Set<NamedClass> interfaces = new TreeSet<>();
 
   private final String name;
 

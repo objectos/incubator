@@ -19,9 +19,6 @@ import br.com.objectos.concurrent.CpuTask;
 import br.com.objectos.concurrent.IoTask;
 import br.com.objectos.concurrent.IoWorker;
 import br.com.objectos.core.io.Charsets;
-import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.list.MutableList;
-import br.com.objectos.core.map.Maps;
 import br.com.objectos.http.Header.ContentTypeVisitor;
 import br.com.objectos.http.media.ApplicationType;
 import br.com.objectos.http.media.ImageType;
@@ -33,8 +30,11 @@ import java.nio.channels.ReadableByteChannel;
 import java.nio.charset.Charset;
 import java.nio.charset.CharsetDecoder;
 import java.nio.charset.CoderResult;
+import java.util.HashMap;
 import java.util.Map;
 import objectos.lang.Check;
+import objectos.util.ImmutableList;
+import objectos.util.MutableList;
 
 abstract class AbstractHttpParser<H extends Header> implements CpuTask, IoTask {
 
@@ -80,7 +80,7 @@ abstract class AbstractHttpParser<H extends Header> implements CpuTask, IoTask {
 
   private CharsetDecoder decoder;
 
-  private final Map<Charset, CharsetDecoder> decoderMap = Maps.newHashMapWithCapacity(4);
+  private final Map<Charset, CharsetDecoder> decoderMap = new HashMap<>(4);
 
   private ReadableByteChannel input;
 

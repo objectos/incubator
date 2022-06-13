@@ -22,9 +22,9 @@ import static org.testng.Assert.assertTrue;
 import br.com.objectos.concurrent.Concurrent;
 import br.com.objectos.concurrent.CpuTask;
 import br.com.objectos.concurrent.DirectIoWorker;
-import br.com.objectos.core.list.ImmutableList;
 import java.util.HashMap;
 import java.util.Map;
+import objectos.util.ImmutableList;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -54,15 +54,15 @@ public class HttpRequestParserTest extends AbstractHttpTest implements HttpProce
     headerMap = new HashMap<String, String>();
 
     parser = new HttpEngine(
-        64,
+      64,
 
-        DirectIoWorker.get(),
+      DirectIoWorker.get(),
 
-        logger,
+      logger,
 
-        this,
+      this,
 
-        stringDeduplicator
+      stringDeduplicator
     );
   }
 
@@ -142,14 +142,14 @@ public class HttpRequestParserTest extends AbstractHttpTest implements HttpProce
     assertEquals(parser.state, HttpEngine._PARSE);
 
     assertEquals(
-        parser.stringValue(),
+      parser.stringValue(),
 
-        crlf(
-            "GET / HTTP/1.1",
-            "Host: localhost:7001",
-            "Connection: keep-alive",
-            "se"
-        )
+      crlf(
+        "GET / HTTP/1.1",
+        "Host: localhost:7001",
+        "Connection: keep-alive",
+        "se"
+      )
     );
 
     executeOne();
@@ -190,9 +190,9 @@ public class HttpRequestParserTest extends AbstractHttpTest implements HttpProce
     assertEquals(parser.state, HttpEngine._PARSE_HEADER_NAME);
 
     assertEquals(
-        parser.stringValue(),
+      parser.stringValue(),
 
-        "sec-ch-ua: \" Not;A Brand\";v=\"99\", \"Google Chrome\";v=\"97\", \"Chrom"
+      "sec-ch-ua: \" Not;A Brand\";v=\"99\", \"Google Chrome\";v=\"97\", \"Chrom"
     );
 
     executeOne();
@@ -224,14 +224,14 @@ public class HttpRequestParserTest extends AbstractHttpTest implements HttpProce
     assertEquals(parser.state, HttpEngine._PARSE_HEADER_VALUE);
 
     assertEquals(
-        parser.stringValue(),
+      parser.stringValue(),
 
-        crlf(
-            "ium\";v=\"97\"",
-            "sec-ch-ua-mobile: ?0",
-            "sec-ch-ua-platform: \"Linux\"",
-            ""
-        )
+      crlf(
+        "ium\";v=\"97\"",
+        "sec-ch-ua-mobile: ?0",
+        "sec-ch-ua-platform: \"Linux\"",
+        ""
+      )
     );
 
     executeOne();
@@ -244,7 +244,7 @@ public class HttpRequestParserTest extends AbstractHttpTest implements HttpProce
 
     assertEquals(headerMap.size(), 3);
     assertEquals(headerMap.get("sec-ch-ua"),
-        "\" Not;A Brand\";v=\"99\", \"Google Chrome\";v=\"97\", \"Chromium\";v=\"97\"");
+      "\" Not;A Brand\";v=\"99\", \"Google Chrome\";v=\"97\", \"Chromium\";v=\"97\"");
     assertEquals(headerMap.get("sec-ch-ua-mobile"), "?0");
     assertEquals(headerMap.get("sec-ch-ua-platform"), "\"Linux\"");
     headerMap.clear();

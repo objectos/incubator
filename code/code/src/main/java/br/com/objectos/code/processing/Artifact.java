@@ -16,13 +16,13 @@
 package br.com.objectos.code.processing;
 
 import br.com.objectos.code.java.io.JavaFile;
-import br.com.objectos.core.list.MutableList;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import javax.annotation.processing.ProcessingEnvironment;
 import javax.tools.Diagnostic;
 import objectos.lang.Check;
+import objectos.util.MutableList;
 
 public abstract class Artifact {
 

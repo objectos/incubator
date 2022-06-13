@@ -36,7 +36,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>br.com.objectos</groupId>
-			<artifactId>core-map</artifactId>
+			<artifactId>core-io</artifactId>
 		</dependency>
 		
 		<dependency>

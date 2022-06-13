@@ -16,8 +16,6 @@
 package br.com.objectos.mysql;
 
 import br.com.objectos.core.io.InputStreamSource;
-import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.list.MutableList;
 import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.RegularFile;
 import br.com.objectos.fs.ResolvedPath;
@@ -29,6 +27,8 @@ import objectos.lang.Note0;
 import objectos.lang.Note1;
 import objectos.lang.NoteSink;
 import objectos.lang.RandomString;
+import objectos.util.ImmutableList;
+import objectos.util.MutableList;
 
 final class IncrementalRestore extends AbstractClientJob<ImmutableList<String>> {
 

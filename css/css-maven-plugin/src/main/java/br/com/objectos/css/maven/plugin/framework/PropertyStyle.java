@@ -30,8 +30,8 @@ import br.com.objectos.code.java.expression.ExpressionName;
 import br.com.objectos.code.java.expression.Identifier;
 import br.com.objectos.code.java.expression.MethodInvocation;
 import br.com.objectos.code.java.type.NamedClass;
-import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.list.MutableList;
+import objectos.util.ImmutableList;
+import objectos.util.MutableList;
 
 class PropertyStyle {
 

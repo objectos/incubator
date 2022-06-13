@@ -15,12 +15,12 @@
  */
 package br.com.objectos.http.server.jetty;
 
-import br.com.objectos.core.map.ImmutableMap;
-import br.com.objectos.core.map.MutableMap;
 import br.com.objectos.http.server.RequestHeaders;
 import java.util.Enumeration;
 import java.util.NoSuchElementException;
 import javax.servlet.http.HttpServletRequest;
+import objectos.util.ImmutableMap;
+import objectos.util.MutableMap;
 
 class JettyRequestHeaders implements RequestHeaders {
 

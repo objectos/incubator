@@ -15,9 +15,9 @@
  */
 package br.com.objectos.mysql;
 
-import br.com.objectos.core.list.MutableList;
 import java.util.List;
 import java.util.Set;
+import objectos.util.MutableList;
 
 abstract class AbstractOption implements Option {
 

@@ -15,8 +15,6 @@
  */
 package br.com.objectos.fs.watch;
 
-import br.com.objectos.core.map.MutableMap;
-import br.com.objectos.core.set.ImmutableSet;
 import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.watch.Watch.Event;
 import br.com.objectos.fs.watch.Watch.Listener;
@@ -24,6 +22,8 @@ import java.util.Collection;
 import java.util.EnumSet;
 import java.util.Map;
 import objectos.lang.Check;
+import objectos.util.ImmutableSet;
+import objectos.util.MutableMap;
 
 final class WatchServiceJava6 extends Thread implements Watch.Service {
 

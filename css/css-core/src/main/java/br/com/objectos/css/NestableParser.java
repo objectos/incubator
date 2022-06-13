@@ -15,8 +15,8 @@
  */
 package br.com.objectos.css;
 
-import br.com.objectos.core.list.MutableList;
 import java.util.Objects;
+import objectos.util.MutableList;
 
 class NestableParser {
 

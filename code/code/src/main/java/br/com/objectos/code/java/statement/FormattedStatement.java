@@ -20,9 +20,9 @@ import br.com.objectos.code.java.declaration.MethodCode;
 import br.com.objectos.code.java.element.AbstractCodeElement;
 import br.com.objectos.code.java.element.CodeElement;
 import br.com.objectos.code.java.io.CodeWriter;
-import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.list.MutableList;
 import java.util.Iterator;
+import objectos.util.ImmutableList;
+import objectos.util.MutableList;
 
 final class FormattedStatement extends AbstractCodeElement implements Statement {
 

@@ -15,9 +15,9 @@
  */
 package br.com.objectos.parser.spec;
 
-import br.com.objectos.core.list.MutableList;
 import java.util.Iterator;
 import java.util.Objects;
+import objectos.util.MutableList;
 
 abstract class Repetition extends NonTerminal {
 

@@ -26,7 +26,6 @@ import static br.com.objectos.code.java.Java.statements;
 import br.com.objectos.code.java.declaration.MethodCode;
 import br.com.objectos.code.java.expression.MethodInvocation;
 import br.com.objectos.code.java.statement.BlockStatement;
-import br.com.objectos.core.list.MutableList;
 import br.com.objectos.css.function.StandardFunctionName;
 import br.com.objectos.css.keyword.StandardKeyword;
 import br.com.objectos.css.property.StandardPropertyName;
@@ -42,6 +41,7 @@ import br.com.objectos.css.sheet.StyleSheet;
 import br.com.objectos.css.type.AngleUnit;
 import br.com.objectos.css.type.ColorName;
 import br.com.objectos.css.type.LengthUnit;
+import objectos.util.MutableList;
 
 class DefinitionMethod implements CompiledStyleSheetVisitor<RuntimeException> {
 
@@ -272,9 +272,9 @@ class DefinitionMethod implements CompiledStyleSheetVisitor<RuntimeException> {
 
   private MethodCode build() {
     return method(
-        annotation(Override.class),
-        _protected(), _final(), _void(), id("definition"),
-        statements(statements)
+      annotation(Override.class),
+      _protected(), _final(), _void(), id("definition"),
+      statements(statements)
     );
   }
 

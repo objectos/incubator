@@ -15,12 +15,12 @@
  */
 package br.com.objectos.css;
 
-import br.com.objectos.core.set.MutableSet;
 import br.com.objectos.css.select.IdSelector;
 import br.com.objectos.css.select.SelectorFactory;
 import java.util.Locale;
 import java.util.Set;
 import objectos.lang.Check;
+import objectos.util.MutableSet;
 
 final class RandomIdSelectorGenerator {
 

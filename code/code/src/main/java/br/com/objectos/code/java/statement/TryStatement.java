@@ -18,10 +18,10 @@ package br.com.objectos.code.java.statement;
 import br.com.objectos.code.annotations.Ignore;
 import br.com.objectos.code.java.element.Keywords;
 import br.com.objectos.code.java.io.CodeWriter;
-import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.list.MutableList;
 import java.util.Iterator;
 import objectos.lang.Check;
+import objectos.util.ImmutableList;
+import objectos.util.MutableList;
 
 public class TryStatement extends AbstractSimpleStatement {
 

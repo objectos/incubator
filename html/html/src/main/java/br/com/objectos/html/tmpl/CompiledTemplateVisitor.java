@@ -15,9 +15,9 @@
  */
 package br.com.objectos.html.tmpl;
 
-import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.html.attribute.AttributeName;
 import br.com.objectos.html.element.ElementName;
+import objectos.util.ImmutableList;
 
 public interface CompiledTemplateVisitor {
 

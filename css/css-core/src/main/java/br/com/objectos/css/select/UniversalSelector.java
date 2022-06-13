@@ -15,11 +15,11 @@
  */
 package br.com.objectos.css.select;
 
-import br.com.objectos.core.list.MutableList;
 import br.com.objectos.css.io.CssWriter;
 import br.com.objectos.css.sheet.RuleElement;
 import br.com.objectos.css.sheet.StyleSheetDsl;
 import java.io.IOException;
+import objectos.util.MutableList;
 
 public final class UniversalSelector extends Selector
     implements

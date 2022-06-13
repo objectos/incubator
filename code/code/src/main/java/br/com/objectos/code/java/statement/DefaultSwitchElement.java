@@ -20,7 +20,7 @@ import br.com.objectos.code.java.declaration.MethodCodeElement;
 import br.com.objectos.code.java.declaration.Modifiers;
 import br.com.objectos.code.java.element.Keywords;
 import br.com.objectos.code.java.io.CodeWriter;
-import br.com.objectos.core.list.ImmutableList;
+import objectos.util.ImmutableList;
 
 public final class DefaultSwitchElement extends SwitchElement
     implements

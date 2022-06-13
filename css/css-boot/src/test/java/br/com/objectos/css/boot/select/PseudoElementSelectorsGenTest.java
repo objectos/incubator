@@ -18,9 +18,9 @@ package br.com.objectos.css.boot.select;
 import static org.testng.Assert.assertEquals;
 
 import br.com.objectos.code.java.io.JavaFile;
-import br.com.objectos.core.map.ImmutableMap;
 import br.com.objectos.css.boot.AbstractCssBootTest;
 import br.com.objectos.css.boot.spec.CssSpec;
+import objectos.util.ImmutableMap;
 import org.testng.annotations.Test;
 
 public class PseudoElementSelectorsGenTest extends AbstractCssBootTest {

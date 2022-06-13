@@ -24,8 +24,8 @@ import br.com.objectos.code.util.NonInheritedContainerAnnotation;
 import br.com.objectos.code.util.NonInheritedRepeatableAnnotation;
 import br.com.objectos.code.util.RepeatableAnnotation;
 import br.com.objectos.code.util.TypeAnnotation;
-import br.com.objectos.core.list.ImmutableList;
 import java.util.NoSuchElementException;
+import objectos.util.ImmutableList;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -37,15 +37,15 @@ public class ProcessingTypeTestJava8 extends AbstractCodeModelTest {
     subject = query(AnnotationsSubject.class);
 
     assertNotNull(
-        subject.getDirectlyPresentAnnotation(Marker1.class)
+      subject.getDirectlyPresentAnnotation(Marker1.class)
     );
 
     assertNotNull(
-        subject.getDirectlyPresentAnnotation(Marker2.class.getCanonicalName())
+      subject.getDirectlyPresentAnnotation(Marker2.class.getCanonicalName())
     );
 
     assertNotNull(
-        subject.getDirectlyPresentAnnotation(ContainerAnnotation.class)
+      subject.getDirectlyPresentAnnotation(ContainerAnnotation.class)
     );
 
     try {
@@ -100,15 +100,15 @@ public class ProcessingTypeTestJava8 extends AbstractCodeModelTest {
     subject = query(AnnotationsSubject.class);
 
     assertNotNull(
-        subject.getDirectlyPresentOrInheritedAnnotation(Marker1.class)
+      subject.getDirectlyPresentOrInheritedAnnotation(Marker1.class)
     );
 
     assertNotNull(
-        subject.getDirectlyPresentOrInheritedAnnotation(InheritedAnnotation.class)
+      subject.getDirectlyPresentOrInheritedAnnotation(InheritedAnnotation.class)
     );
 
     assertNotNull(
-        subject.getDirectlyPresentOrInheritedAnnotation(InheritedContainerAnnotation.class)
+      subject.getDirectlyPresentOrInheritedAnnotation(InheritedContainerAnnotation.class)
     );
 
     try {

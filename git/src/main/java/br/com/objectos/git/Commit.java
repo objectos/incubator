@@ -15,8 +15,8 @@
  */
 package br.com.objectos.git;
 
-import br.com.objectos.core.list.ImmutableList;
 import objectos.lang.ToString;
+import objectos.util.ImmutableList;
 
 /**
  * A Git commit object resulting from a <em>read commit</em> operation.

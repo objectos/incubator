@@ -18,12 +18,12 @@ import br.com.objectos.code.java.type.NamedClass;
 import br.com.objectos.code.processing.AbstractProcessingRoundProcessor;
 import br.com.objectos.code.processing.ProcessingRound;
 import br.com.objectos.code.processing.type.PTypeMirror;
-import br.com.objectos.core.set.ImmutableSet;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import java.util.Set;
+import objectos.util.ImmutableSet;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 

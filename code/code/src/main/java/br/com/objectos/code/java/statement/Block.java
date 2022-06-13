@@ -21,8 +21,8 @@ import br.com.objectos.code.annotations.Ignore;
 import br.com.objectos.code.java.expression.LambdaBody;
 import br.com.objectos.code.java.io.CodeWriter;
 import br.com.objectos.code.java.io.Section;
-import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.list.MutableList;
+import objectos.util.ImmutableList;
+import objectos.util.MutableList;
 
 public class Block extends AbstractSimpleStatement implements LambdaBody {
 

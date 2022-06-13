@@ -19,10 +19,10 @@ import static org.testng.Assert.assertEquals;
 
 import br.com.objectos.concurrent.Computation;
 import br.com.objectos.concurrent.Concurrent;
-import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.fs.Directory;
 import java.io.IOException;
 import java.util.concurrent.ExecutionException;
+import objectos.util.ImmutableList;
 import org.testng.annotations.Test;
 
 public class CopyTreeCommandTest extends AbstractGitTest {

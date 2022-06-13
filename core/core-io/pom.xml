@@ -38,7 +38,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>br.com.objectos</groupId>
-			<artifactId>core-list</artifactId>
+			<artifactId>objectos-util</artifactId>
 		</dependency>
 
 		<dependency>

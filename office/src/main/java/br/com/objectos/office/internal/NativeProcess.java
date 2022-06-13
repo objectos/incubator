@@ -15,7 +15,6 @@
  */
 package br.com.objectos.office.internal;
 
-import br.com.objectos.core.list.Lists;
 import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.JavaIoTmpdir;
 import br.com.objectos.office.ServerStartException;
@@ -28,6 +27,7 @@ import com.sun.star.lang.XMultiComponentFactory;
 import com.sun.star.uno.UnoRuntime;
 import com.sun.star.uno.XComponentContext;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import objectos.lang.Check;
@@ -52,7 +52,7 @@ public class NativeProcess {
                         ConnectString connectString,
                         Directory workingDirectory) {
     List<String> command;
-    command = Lists.newArrayList();
+    command = new ArrayList<>();
 
     command.add(executablePath);
     command.add("--headless");

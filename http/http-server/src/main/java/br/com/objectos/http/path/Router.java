@@ -15,8 +15,6 @@
  */
 package br.com.objectos.http.path;
 
-import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.list.MutableList;
 import br.com.objectos.http.server.HttpInterceptor;
 import br.com.objectos.http.server.HttpModule;
 import br.com.objectos.http.server.HttpModuleDsl;
@@ -27,6 +25,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import objectos.lang.Check;
+import objectos.util.ImmutableList;
+import objectos.util.MutableList;
 
 public class Router {
 

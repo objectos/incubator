@@ -15,8 +15,8 @@
  */
 package br.com.objectos.mysql;
 
-import br.com.objectos.core.list.MutableList;
 import java.util.Set;
+import objectos.util.MutableList;
 
 public final class NoopOption
     implements

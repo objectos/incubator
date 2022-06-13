@@ -15,9 +15,9 @@
  */
 package br.com.objectos.mysql;
 
-import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.list.MutableList;
 import java.util.Locale;
+import objectos.util.ImmutableList;
+import objectos.util.MutableList;
 
 public final class ConfigurationGroup {
 

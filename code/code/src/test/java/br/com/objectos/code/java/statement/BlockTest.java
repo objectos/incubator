@@ -17,8 +17,8 @@ import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
 import br.com.objectos.code.util.AbstractCodeJavaTest;
-import br.com.objectos.core.list.ImmutableList;
 import java.util.Collections;
+import objectos.util.ImmutableList;
 import org.testng.annotations.Test;
 
 public class BlockTest extends AbstractCodeJavaTest {

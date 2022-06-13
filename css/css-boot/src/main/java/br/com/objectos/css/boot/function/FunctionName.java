@@ -27,16 +27,16 @@ import br.com.objectos.code.java.expression.ExpressionName;
 import br.com.objectos.code.java.expression.Identifier;
 import br.com.objectos.code.java.expression.Literal;
 import br.com.objectos.code.java.type.NamedClass;
-import br.com.objectos.core.set.Sets;
 import br.com.objectos.css.boot.sheet.FunctionOrProperty;
 import br.com.objectos.css.boot.type.Value;
 import br.com.objectos.css.boot.type.ValueType;
 import java.util.Locale;
 import java.util.Set;
+import java.util.TreeSet;
 
 public final class FunctionName implements FunctionOrProperty, Value {
 
-  private final Set<NamedClass> interfaces = Sets.newTreeSet();
+  private final Set<NamedClass> interfaces = new TreeSet<>();
 
   private final String name;
 
@@ -107,8 +107,8 @@ public final class FunctionName implements FunctionOrProperty, Value {
 
   final InterfaceCode generate() {
     return _interface(
-        _public(), getSingleDeclarationName(),
-        _extends(interfaces)
+      _public(), getSingleDeclarationName(),
+      _extends(interfaces)
     );
   }
 

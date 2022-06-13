@@ -44,7 +44,6 @@ import br.com.objectos.code.java.declaration.EnumCode;
 import br.com.objectos.code.java.declaration.EnumConstantCode;
 import br.com.objectos.code.java.expression.ExpressionName;
 import br.com.objectos.code.java.io.JavaFile;
-import br.com.objectos.core.list.MutableList;
 import br.com.objectos.html.boot.HtmlBoot;
 import br.com.objectos.html.boot.spec.AbstractJavaFileStep;
 import br.com.objectos.html.boot.spec.ElementSpec;
@@ -52,6 +51,7 @@ import br.com.objectos.html.boot.spi.tmpl.SpiTmpl;
 import br.com.objectos.html.boot.util.Ids;
 import br.com.objectos.html.boot.util.Names;
 import java.util.function.Consumer;
+import objectos.util.MutableList;
 
 public class StandardElementNameStep extends AbstractJavaFileStep {
 

@@ -16,8 +16,8 @@
 package br.com.objectos.code.java.io;
 
 import br.com.objectos.code.java.declaration.BodyElement;
-import br.com.objectos.core.list.ImmutableList;
 import java.util.List;
+import objectos.util.ImmutableList;
 
 class TailFormattingAction extends FormattingAction {
 

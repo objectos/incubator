@@ -22,6 +22,5 @@ module br.com.objectos.concurrent {
   requires transitive br.com.objectos.core.service;
   requires transitive objectos.lang;
 
-  requires br.com.objectos.core.array;
-  requires br.com.objectos.core.list;
+  requires objectos.util;
 }

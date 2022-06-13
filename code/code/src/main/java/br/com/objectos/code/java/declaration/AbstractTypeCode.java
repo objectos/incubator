@@ -22,8 +22,8 @@ import br.com.objectos.code.java.io.CodeWriter;
 import br.com.objectos.code.java.io.JavaFile;
 import br.com.objectos.code.java.io.NewLineFormatting.NewLineFormattingAction;
 import br.com.objectos.code.java.type.NamedClass;
-import br.com.objectos.core.list.ImmutableList;
 import objectos.lang.Check;
+import objectos.util.ImmutableList;
 
 abstract class AbstractTypeCode extends AbstractImmutableCodeElement implements TypeCode {
 

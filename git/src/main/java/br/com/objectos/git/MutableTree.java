@@ -16,8 +16,6 @@
 package br.com.objectos.git;
 
 import br.com.objectos.core.io.Write;
-import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.list.MutableList;
 import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.PathNameVisitor;
 import br.com.objectos.fs.RegularFile;
@@ -28,6 +26,8 @@ import java.security.MessageDigest;
 import java.util.zip.Deflater;
 import objectos.lang.Check;
 import objectos.lang.ToString;
+import objectos.util.ImmutableList;
+import objectos.util.MutableList;
 
 /**
  * A class for creating a Git tree hierarchy suitable for recursively writing to

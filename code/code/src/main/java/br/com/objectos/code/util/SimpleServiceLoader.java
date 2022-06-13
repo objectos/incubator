@@ -34,8 +34,6 @@
  */
 package br.com.objectos.code.util;
 
-import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.list.MutableList;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -47,6 +45,8 @@ import java.util.Collections;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.ServiceConfigurationError;
+import objectos.util.ImmutableList;
+import objectos.util.MutableList;
 
 /**
  * A replacement for {@link java.util.ServiceLoader} that avoids certain

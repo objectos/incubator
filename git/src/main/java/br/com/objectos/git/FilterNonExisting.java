@@ -15,10 +15,10 @@
  */
 package br.com.objectos.git;
 
-import br.com.objectos.core.set.ImmutableSet;
-import br.com.objectos.core.set.MutableSet;
 import java.nio.ByteBuffer;
 import objectos.lang.Check;
+import objectos.util.ImmutableSet;
+import objectos.util.MutableSet;
 
 final class FilterNonExisting implements ObjectReaderAdapter {
 

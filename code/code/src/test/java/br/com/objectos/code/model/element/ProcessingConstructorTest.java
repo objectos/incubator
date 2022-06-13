@@ -18,9 +18,9 @@ import br.com.objectos.code.java.type.NamedClass;
 import br.com.objectos.code.java.type.NamedTypeParameter;
 import br.com.objectos.code.model.AbstractCodeModelTest;
 import br.com.objectos.code.util.Marker1;
-import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.set.ImmutableSet;
 import java.util.NoSuchElementException;
+import objectos.util.ImmutableList;
+import objectos.util.ImmutableSet;
 import org.testng.annotations.Test;
 
 public class ProcessingConstructorTest extends AbstractCodeModelTest {

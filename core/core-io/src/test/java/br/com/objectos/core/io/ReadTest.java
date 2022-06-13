@@ -17,12 +17,12 @@ package br.com.objectos.core.io;
 
 import static org.testng.Assert.assertEquals;
 
-import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.list.MutableList;
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import objectos.util.ImmutableList;
+import objectos.util.MutableList;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 

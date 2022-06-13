@@ -20,9 +20,9 @@ import br.com.objectos.code.model.element.ProcessingMethod;
 import br.com.objectos.code.processing.AbstractProcessingRoundProcessor;
 import br.com.objectos.code.processing.ProcessingRound;
 import br.com.objectos.code.util.AbstractCodeCoreTest;
-import br.com.objectos.core.set.ImmutableSet;
 import br.com.objectos.tools.Compilation;
 import java.util.Set;
+import objectos.util.ImmutableSet;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 

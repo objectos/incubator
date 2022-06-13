@@ -16,12 +16,12 @@
 package br.com.objectos.logger;
 
 import objectos.lang.Check;
+import objectos.lang.Level;
 import objectos.lang.Note;
 import objectos.lang.Note0;
 import objectos.lang.Note1;
 import objectos.lang.Note2;
 import objectos.lang.Note3;
-import objectos.lang.Level;
 import objectos.lang.NoteSink;
 
 abstract class AbstractConfigurableLogger implements ConfigurableLogger {

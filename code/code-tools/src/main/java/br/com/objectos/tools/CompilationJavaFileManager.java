@@ -16,9 +16,9 @@
 package br.com.objectos.tools;
 
 import br.com.objectos.core.io.Resource;
-import br.com.objectos.core.map.Maps;
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.util.LinkedHashMap;
 import java.util.Locale;
 import java.util.Map;
 import javax.tools.FileObject;
@@ -31,9 +31,9 @@ import javax.tools.StandardLocation;
 
 class CompilationJavaFileManager extends ForwardingJavaFileManager<JavaFileManager> {
 
-  final Map<String, WritableByteArrayJavaFileObject> generatedClassFiles = Maps.newLinkedHashMap();
-  final Map<String, WritableStringJavaFileObject> generatedJavaFiles = Maps.newLinkedHashMap();
-  final Map<String, WritableByteArrayJavaFileObject> generatedResources = Maps.newLinkedHashMap();
+  final Map<String, WritableByteArrayJavaFileObject> generatedClassFiles = new LinkedHashMap<>();
+  final Map<String, WritableStringJavaFileObject> generatedJavaFiles = new LinkedHashMap<>();
+  final Map<String, WritableByteArrayJavaFileObject> generatedResources = new LinkedHashMap<>();
 
   CompilationJavaFileManager(JavaCompiler compiler) {
     super(compiler.getStandardFileManager(null, Locale.getDefault(), Charset.defaultCharset()));

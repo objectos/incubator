@@ -15,7 +15,6 @@
  */
 package br.com.objectos.http.server.jetty;
 
-import br.com.objectos.core.map.MutableMap;
 import br.com.objectos.http.server.Method;
 import br.com.objectos.http.server.RequestHeaders;
 import br.com.objectos.http.server.RequestParameters;
@@ -24,6 +23,7 @@ import br.com.objectos.http.server.RequestedPart;
 import br.com.objectos.http.server.RequestedPath;
 import java.util.Enumeration;
 import javax.servlet.http.HttpServletRequest;
+import objectos.util.MutableMap;
 
 class JettyRequestProto implements RequestProto {
 
@@ -41,9 +41,9 @@ class JettyRequestProto implements RequestProto {
 
   public static JettyRequestProto of(HttpServletRequest request) {
     return new JettyRequestProto(
-        request,
-        Method.get(request.getMethod()),
-        new RequestedPath(request.getPathInfo()));
+      request,
+      Method.get(request.getMethod()),
+      new RequestedPath(request.getPathInfo()));
   }
 
   @Override

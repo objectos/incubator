@@ -23,7 +23,7 @@ import br.com.objectos.code.java.declaration.MethodCode;
 import br.com.objectos.code.java.declaration.Modifiers;
 import br.com.objectos.code.java.expression.MethodInvocation;
 import br.com.objectos.code.java.type.NamedClass;
-import br.com.objectos.core.list.ImmutableList;
+import objectos.util.ImmutableList;
 
 class PropertyClass {
 

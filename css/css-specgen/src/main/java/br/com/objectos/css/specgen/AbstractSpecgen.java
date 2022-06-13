@@ -15,10 +15,10 @@
  */
 package br.com.objectos.css.specgen;
 
-import br.com.objectos.core.list.MutableList;
 import br.com.objectos.css.specgen.spec.Property;
 import br.com.objectos.css.specgen.spec.Spec;
 import br.com.objectos.css.specgen.spec.Step;
+import objectos.util.MutableList;
 
 abstract class AbstractSpecgen {
 

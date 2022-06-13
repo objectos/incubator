@@ -17,7 +17,7 @@ package br.com.objectos.http.server;
 
 import static org.testng.Assert.assertEquals;
 
-import br.com.objectos.core.list.ImmutableList;
+import objectos.util.ImmutableList;
 import org.testng.annotations.Test;
 
 public class RequestedPathTest {

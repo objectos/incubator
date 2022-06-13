@@ -2,8 +2,8 @@ package br.com.objectos.css.select;
 
 import br.com.objectos.code.annotations.Generated;
 import br.com.objectos.code.annotations.Ignore;
-import br.com.objectos.core.map.ImmutableMap;
-import br.com.objectos.core.map.MutableMap;
+import objectos.util.ImmutableMap;
+import objectos.util.MutableMap;
 
 @Generated("br.com.objectos.css.boot.select.PseudoClassSelectorsGen")
 public final class PseudoClassSelectors {

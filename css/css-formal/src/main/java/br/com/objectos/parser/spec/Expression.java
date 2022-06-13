@@ -15,9 +15,9 @@
  */
 package br.com.objectos.parser.spec;
 
-import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.list.MutableList;
 import java.util.Objects;
+import objectos.util.ImmutableList;
+import objectos.util.MutableList;
 
 public class Expression {
 

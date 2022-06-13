@@ -20,11 +20,7 @@ module br.com.objectos.git {
   exports br.com.objectos.git;
 
   requires transitive br.com.objectos.concurrent;
-  requires transitive br.com.objectos.core.list;
   requires transitive objectos.lang;
+  requires transitive objectos.util;
   requires transitive br.com.objectos.fs;
-
-  requires br.com.objectos.core.array;
-  requires br.com.objectos.core.map;
-  requires br.com.objectos.core.set;
 }

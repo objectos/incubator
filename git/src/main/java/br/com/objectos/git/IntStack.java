@@ -15,8 +15,8 @@
  */
 package br.com.objectos.git;
 
-import br.com.objectos.core.array.IntArrays;
 import objectos.lang.Check;
+import objectos.util.IntArrays;
 
 final class IntStack {
 

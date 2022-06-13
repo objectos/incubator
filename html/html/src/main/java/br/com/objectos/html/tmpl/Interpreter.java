@@ -15,10 +15,10 @@
  */
 package br.com.objectos.html.tmpl;
 
-import br.com.objectos.core.array.IntArrays;
-import br.com.objectos.core.list.MutableList;
 import br.com.objectos.html.attribute.StandardAttributeName;
 import br.com.objectos.html.element.StandardElementName;
+import objectos.util.IntArrays;
+import objectos.util.MutableList;
 
 class Interpreter {
 

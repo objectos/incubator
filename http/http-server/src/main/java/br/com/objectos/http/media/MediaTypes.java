@@ -15,10 +15,10 @@
  */
 package br.com.objectos.http.media;
 
-import br.com.objectos.core.map.ImmutableMap;
-import br.com.objectos.core.map.MutableMap;
 import java.util.Locale;
 import objectos.lang.Check;
+import objectos.util.ImmutableMap;
+import objectos.util.MutableMap;
 
 public class MediaTypes {
 

@@ -10,8 +10,8 @@ package br.com.objectos.code.processing.type;
 import br.com.objectos.code.model.element.ProcessingMethod;
 import br.com.objectos.code.model.element.ProcessingType;
 import br.com.objectos.code.util.AbstractCodeCoreTest;
-import br.com.objectos.core.list.ImmutableList;
 import java.util.NoSuchElementException;
+import objectos.util.ImmutableList;
 
 public abstract class AbstractPTypeMirrorTest extends AbstractCodeCoreTest {
 

@@ -15,10 +15,10 @@
  */
 package objectos.docs.ui;
 
-import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.html.spi.type.OlValue;
 import objectos.docs.style.BreadcrumbCss;
 import objectos.ssg.SiteFragment;
+import objectos.util.ImmutableList;
 
 public final class Breadcrumbs extends SiteFragment {
 

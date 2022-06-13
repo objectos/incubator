@@ -21,13 +21,13 @@ import br.com.objectos.code.model.element.ProcessingMethod;
 import br.com.objectos.code.model.element.ProcessingType;
 import br.com.objectos.code.processing.AbstractProcessingRoundProcessor;
 import br.com.objectos.code.processing.ProcessingRound;
-import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.list.MutableList;
-import br.com.objectos.core.set.ImmutableSet;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import javax.lang.model.SourceVersion;
+import objectos.util.ImmutableList;
+import objectos.util.ImmutableSet;
+import objectos.util.MutableList;
 import org.eclipse.jdt.core.compiler.CategorizedProblem;
 import org.eclipse.jdt.internal.compiler.CompilationResult;
 import org.eclipse.jdt.internal.compiler.ICompilerRequestor;
@@ -133,8 +133,8 @@ public class JdtCompilerTest {
     compiler.compile(FakeCompilationUnit.MethodOrder);
 
     assertEquals(
-        processor.getAbstractMethodNames(),
-        ImmutableList.of("m6", "m5", "m4", "m3", "m2", "m1", "m0")
+      processor.getAbstractMethodNames(),
+      ImmutableList.of("m6", "m5", "m4", "m3", "m2", "m1", "m0")
     );
   }
 

@@ -20,12 +20,12 @@ import static org.testng.Assert.assertNotNull;
 
 import br.com.objectos.core.io.Read;
 import br.com.objectos.core.io.Resource;
-import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.http.media.MediaType;
 import java.io.IOException;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
+import objectos.util.ImmutableList;
 
 final class TestableSiteWriter implements SiteWriter {
 

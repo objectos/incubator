@@ -23,8 +23,8 @@ import br.com.objectos.code.java.declaration.ClassCode;
 import br.com.objectos.code.java.declaration.MethodCode;
 import br.com.objectos.code.java.declaration.Modifiers;
 import br.com.objectos.code.java.declaration.PackageName;
-import br.com.objectos.core.list.MutableList;
 import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkGroup;
+import objectos.util.MutableList;
 
 class FrameworkClass {
 

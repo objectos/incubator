@@ -18,13 +18,13 @@ package br.com.objectos.code.model.element;
 import br.com.objectos.code.java.declaration.Modifier;
 import br.com.objectos.code.java.declaration.PackageName;
 import br.com.objectos.code.processing.Reprocessor;
-import br.com.objectos.core.set.ImmutableSet;
 import java.io.IOException;
 import javax.annotation.processing.ProcessingEnvironment;
 import javax.lang.model.element.Name;
 import javax.lang.model.element.PackageElement;
 import javax.tools.StandardLocation;
 import objectos.lang.Check;
+import objectos.util.ImmutableSet;
 
 public final class ProcessingPackage extends ProcessingElement<PackageElement> {
 

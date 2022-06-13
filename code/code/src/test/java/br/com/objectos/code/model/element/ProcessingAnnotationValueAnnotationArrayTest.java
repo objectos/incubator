@@ -10,12 +10,12 @@ package br.com.objectos.code.model.element;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
-import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.list.MutableList;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
+import objectos.util.ImmutableList;
+import objectos.util.MutableList;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 

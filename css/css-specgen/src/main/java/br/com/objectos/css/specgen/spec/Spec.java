@@ -15,11 +15,11 @@
  */
 package br.com.objectos.css.specgen.spec;
 
-import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.map.ImmutableMap;
-import br.com.objectos.core.map.MutableMap;
-import br.com.objectos.core.map.MutableOrderedMap;
 import objectos.lang.Check;
+import objectos.util.ImmutableList;
+import objectos.util.ImmutableMap;
+import objectos.util.MutableMap;
+import objectos.util.MutableOrderedMap;
 
 public class Spec {
 

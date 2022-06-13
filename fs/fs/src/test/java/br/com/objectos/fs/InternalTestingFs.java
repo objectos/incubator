@@ -15,10 +15,10 @@
  */
 package br.com.objectos.fs;
 
-import br.com.objectos.core.list.MutableList;
 import br.com.objectos.random.testing.Next;
 import java.io.IOException;
 import java.util.List;
+import objectos.util.MutableList;
 
 final class InternalTestingFs {
 

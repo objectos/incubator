@@ -31,14 +31,14 @@ import br.com.objectos.code.java.expression.ArgumentsElement;
 import br.com.objectos.code.java.expression.Identifier;
 import br.com.objectos.code.java.expression.Literal;
 import br.com.objectos.code.java.expression.MethodInvocation;
-import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.list.MutableList;
 import br.com.objectos.css.specgen.spec.KeywordSet;
 import br.com.objectos.css.specgen.spec.Property;
 import br.com.objectos.css.specgen.spec.Step;
 import br.com.objectos.css.specgen.spec.StepAdapter;
 import br.com.objectos.css.specgen.spec.ValueType;
 import java.util.Iterator;
+import objectos.util.ImmutableList;
+import objectos.util.MutableList;
 
 class PropertyModuleStep extends Step {
 

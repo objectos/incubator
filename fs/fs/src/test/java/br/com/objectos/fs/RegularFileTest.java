@@ -21,7 +21,6 @@ import static org.testng.Assert.assertTrue;
 
 import br.com.objectos.core.io.Read;
 import br.com.objectos.core.io.Write;
-import br.com.objectos.core.list.Lists;
 import br.com.objectos.random.testing.Next;
 import java.io.File;
 import java.io.IOException;
@@ -33,6 +32,7 @@ import java.nio.channels.NonReadableChannelException;
 import java.nio.channels.NonWritableChannelException;
 import java.nio.channels.WritableByteChannel;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import org.testng.Assert;
@@ -70,7 +70,7 @@ public class RegularFileTest extends AbstractObjectosFsTest {
     root = createTempDir();
 
     List<RegularFile> files;
-    files = Lists.newArrayList();
+    files = new ArrayList<>();
 
     RegularFile f3;
     f3 = root.createRegularFile("f3");

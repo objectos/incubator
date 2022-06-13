@@ -15,10 +15,10 @@
  */
 package br.com.objectos.css.select;
 
-import br.com.objectos.core.list.MutableList;
 import br.com.objectos.css.io.CssWriter;
 import br.com.objectos.css.sheet.RuleElement;
 import java.io.IOException;
+import objectos.util.MutableList;
 
 public abstract class SimpleSelector extends Selector
     implements

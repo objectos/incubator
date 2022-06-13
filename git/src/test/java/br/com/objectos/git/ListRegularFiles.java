@@ -15,15 +15,15 @@
  */
 package br.com.objectos.git;
 
-import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.list.Lists;
-import br.com.objectos.core.list.MutableList;
 import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.DirectoryContentsVisitor;
 import br.com.objectos.fs.RegularFile;
 import java.io.File;
 import java.io.IOException;
 import objectos.lang.Check;
+import objectos.util.ImmutableList;
+import objectos.util.Lists;
+import objectos.util.MutableList;
 
 /**
  * A {@link DirectoryContentsVisitor} for recursively listing all of the regular

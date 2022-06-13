@@ -15,10 +15,10 @@
  */
 package br.com.objectos.mojo;
 
-import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.list.MutableList;
 import br.com.objectos.mojo.BuildLog.Event;
 import br.com.objectos.mojo.BuildLog.Message;
+import objectos.util.ImmutableList;
+import objectos.util.MutableList;
 import org.codehaus.plexus.logging.Logger;
 import org.slf4j.event.Level;
 import org.slf4j.helpers.FormattingTuple;

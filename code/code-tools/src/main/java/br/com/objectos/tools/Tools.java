@@ -15,8 +15,6 @@
  */
 package br.com.objectos.tools;
 
-import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.list.MutableList;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.util.Map;
@@ -26,6 +24,8 @@ import javax.tools.JavaCompiler.CompilationTask;
 import javax.tools.JavaFileObject;
 import javax.tools.ToolProvider;
 import objectos.lang.Check;
+import objectos.util.ImmutableList;
+import objectos.util.MutableList;
 
 public final class Tools {
 

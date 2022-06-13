@@ -17,12 +17,12 @@ package br.com.objectos.logger;
 
 import br.com.objectos.concurrent.CpuWorker;
 import br.com.objectos.concurrent.IoWorker;
-import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.list.MutableList;
 import br.com.objectos.fs.Directory;
 import java.io.IOException;
 import objectos.lang.Check;
 import objectos.lang.Level;
+import objectos.util.ImmutableList;
+import objectos.util.MutableList;
 
 /**
  * A logger that writes log events to a file system storage.

@@ -25,9 +25,9 @@ import br.com.objectos.code.java.statement.VariableInitializer;
 import br.com.objectos.code.java.type.NamedClass;
 import br.com.objectos.code.java.type.NamedType;
 import br.com.objectos.code.java.type.NamedVoid;
-import br.com.objectos.core.list.MutableList;
 import java.util.List;
 import objectos.lang.Check;
+import objectos.util.MutableList;
 
 public final class FieldCode extends AbstractImmutableCodeElement
     implements

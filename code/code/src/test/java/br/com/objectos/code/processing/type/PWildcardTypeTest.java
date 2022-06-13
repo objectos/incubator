@@ -16,8 +16,8 @@ import br.com.objectos.code.java.type.NamedClass;
 import br.com.objectos.code.java.type.NamedWildcard;
 import br.com.objectos.code.model.element.ProcessingMethod;
 import br.com.objectos.code.model.element.ProcessingParameter;
-import br.com.objectos.core.list.ImmutableList;
 import java.util.NoSuchElementException;
+import objectos.util.ImmutableList;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 

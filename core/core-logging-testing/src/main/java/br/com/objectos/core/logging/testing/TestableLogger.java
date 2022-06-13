@@ -15,17 +15,17 @@
  */
 package br.com.objectos.core.logging.testing;
 
-import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.list.MutableList;
 import java.util.NoSuchElementException;
 import objectos.lang.Check;
+import objectos.lang.Level;
 import objectos.lang.Note;
 import objectos.lang.Note0;
 import objectos.lang.Note1;
 import objectos.lang.Note2;
 import objectos.lang.Note3;
-import objectos.lang.Level;
 import objectos.lang.NoteSink;
+import objectos.util.ImmutableList;
+import objectos.util.MutableList;
 
 /**
  * An in-memory Logger implementation with methods that allow for inspection of
@@ -154,6 +154,14 @@ public final class TestableLogger implements NoteSink {
    * {@inheritDoc}
    */
   @Override
+  public final NoteSink replace(NoteSink logger) {
+    return this;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   public final void send(Note0 event) {
     if (event == null) {
       return;
@@ -208,14 +216,6 @@ public final class TestableLogger implements NoteSink {
     log = new Event3Log<T1, T2, T3>(event, v1, v2, v3);
 
     log0(log);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public final NoteSink replace(NoteSink logger) {
-    return this;
   }
 
   /**

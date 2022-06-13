@@ -15,7 +15,7 @@
  */
 package br.com.objectos.css.select;
 
-import br.com.objectos.core.list.MutableList;
+import objectos.util.MutableList;
 
 public class SelectorListBuilder {
 

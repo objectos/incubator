@@ -15,12 +15,12 @@
  */
 package br.com.objectos.smtp.mail;
 
-import br.com.objectos.core.array.ByteArrays;
 import br.com.objectos.smtp.MailBox;
 import br.com.objectos.smtp.MailObject;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
+import objectos.util.ByteArrays;
 
 final class FsMailBox implements MailBox {
 

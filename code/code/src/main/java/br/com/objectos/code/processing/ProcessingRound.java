@@ -22,8 +22,6 @@ import br.com.objectos.code.model.element.ProcessingPackage;
 import br.com.objectos.code.model.element.ProcessingPackageReprocessor;
 import br.com.objectos.code.model.element.ProcessingType;
 import br.com.objectos.code.model.element.ProcessingTypeReprocessor;
-import br.com.objectos.core.set.ImmutableSet;
-import br.com.objectos.core.set.MutableSet;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
@@ -45,6 +43,8 @@ import javax.tools.Diagnostic.Kind;
 import javax.tools.FileObject;
 import javax.tools.StandardLocation;
 import objectos.lang.Check;
+import objectos.util.ImmutableSet;
+import objectos.util.MutableSet;
 
 public class ProcessingRound
     implements

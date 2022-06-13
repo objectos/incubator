@@ -17,16 +17,16 @@ package br.com.objectos.code.java.io;
 
 import br.com.objectos.code.java.declaration.PackageName;
 import br.com.objectos.code.java.type.NamedClass;
-import br.com.objectos.core.set.MutableSet;
-import br.com.objectos.core.set.Sets;
 import java.util.Iterator;
 import java.util.Set;
+import java.util.TreeSet;
+import objectos.util.MutableSet;
 
 public class JavaFileImportSet extends ImportSet {
 
   private final PackageName packageName;
 
-  private final Set<NamedClass> qualifiedNameSet = Sets.newTreeSet();
+  private final Set<NamedClass> qualifiedNameSet = new TreeSet<>();
 
   private final Set<String> simpleNameSet = MutableSet.create();
 

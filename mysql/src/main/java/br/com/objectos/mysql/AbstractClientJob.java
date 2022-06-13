@@ -17,8 +17,6 @@ package br.com.objectos.mysql;
 
 import br.com.objectos.concurrent.IoTask;
 import br.com.objectos.concurrent.IoWorker;
-import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.list.MutableList;
 import java.io.BufferedReader;
 import java.io.Closeable;
 import java.io.IOException;
@@ -31,6 +29,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import objectos.lang.Check;
+import objectos.util.ImmutableList;
+import objectos.util.MutableList;
 
 abstract class AbstractClientJob<V> implements ClientJob<V>, IoTask {
 

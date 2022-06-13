@@ -45,13 +45,13 @@ import br.com.objectos.code.java.expression.MethodInvocation;
 import br.com.objectos.code.java.type.NamedClass;
 import br.com.objectos.code.model.element.ProcessingMethod;
 import br.com.objectos.code.util.AbstractCodeJavaTest;
-import br.com.objectos.core.list.ImmutableList;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import javax.lang.model.element.ExecutableElement;
+import objectos.util.ImmutableList;
 import org.testng.annotations.Test;
 
 public class MethodCodeTest extends AbstractCodeJavaTest {

@@ -15,9 +15,9 @@ import br.com.objectos.code.java.statement.ReturnStatement;
 import br.com.objectos.code.java.type.NamedClass;
 import br.com.objectos.code.java.type.NamedTypeVariable;
 import br.com.objectos.code.util.AbstractCodeJavaTest;
-import br.com.objectos.core.list.ImmutableList;
 import java.io.IOException;
 import java.util.concurrent.ExecutionException;
+import objectos.util.ImmutableList;
 import org.testng.annotations.Test;
 
 public class MethodCodeBuilderTest extends AbstractCodeJavaTest {

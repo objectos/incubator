@@ -17,7 +17,6 @@ package br.com.objectos.css.sheet;
 
 import static org.testng.Assert.assertEquals;
 
-import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.css.io.MinifiedCssWriter;
 import br.com.objectos.css.io.PrettyCssWriter;
 import br.com.objectos.css.sheet.ex.BackgroundImageTestCase;
@@ -58,6 +57,7 @@ import br.com.objectos.css.sheet.ex.TestCase33;
 import br.com.objectos.css.sheet.ex.TestCase34;
 import br.com.objectos.css.sheet.ex.TestCase35;
 import br.com.objectos.css.sheet.ex.TransformTestCase;
+import objectos.util.ImmutableList;
 import org.testng.annotations.Test;
 
 public class CompiledStyleSheetTest {

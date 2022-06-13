@@ -15,9 +15,9 @@
  */
 package br.com.objectos.css.maven.plugin.framework;
 
-import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkNamedValue;
 import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkNamedValueSet;
+import objectos.util.ImmutableList;
 
 class NamedValueSet extends AbstractFrameworkObject implements FrameworkNamedValueSet {
 

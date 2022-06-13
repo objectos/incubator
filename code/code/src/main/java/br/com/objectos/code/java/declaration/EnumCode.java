@@ -27,9 +27,9 @@ import br.com.objectos.code.java.io.Section;
 import br.com.objectos.code.java.statement.Block;
 import br.com.objectos.code.java.type.NamedClass;
 import br.com.objectos.code.java.type.NamedClassOrParameterized;
-import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.list.MutableList;
 import objectos.lang.Check;
+import objectos.util.ImmutableList;
+import objectos.util.MutableList;
 
 public final class EnumCode extends AbstractTypeCode {
 

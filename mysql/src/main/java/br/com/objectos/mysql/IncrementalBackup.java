@@ -15,8 +15,6 @@
  */
 package br.com.objectos.mysql;
 
-import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.list.MutableList;
 import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.LocalFs;
 import br.com.objectos.fs.RegularFile;
@@ -28,6 +26,8 @@ import java.util.zip.GZIPOutputStream;
 import objectos.lang.Note1;
 import objectos.lang.Note2;
 import objectos.lang.NoteSink;
+import objectos.util.ImmutableList;
+import objectos.util.MutableList;
 
 final class IncrementalBackup extends AbstractClientJob<ImmutableList<RegularFile>> {
 

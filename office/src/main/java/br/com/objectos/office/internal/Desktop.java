@@ -15,8 +15,6 @@
  */
 package br.com.objectos.office.internal;
 
-import br.com.objectos.core.map.ImmutableMap;
-import br.com.objectos.core.map.MutableMap;
 import br.com.objectos.fs.RegularFile;
 import com.sun.star.beans.PropertyValue;
 import com.sun.star.frame.XDesktop2;
@@ -28,11 +26,15 @@ import com.sun.star.uno.UnoRuntime;
 import com.sun.star.uno.XComponentContext;
 import java.io.IOException;
 import java.net.URI;
+import objectos.util.ImmutableMap;
+import objectos.util.MutableMap;
 
 class Desktop {
 
   private static final PropertyValue[] DEFAULT_PROPERTIES = new PropertyValue[] {
-      Uno.newPropertyValue("Hidden", Boolean.TRUE)
+                                                                                 Uno.newPropertyValue(
+                                                                                   "Hidden",
+                                                                                   Boolean.TRUE)
   };
 
   private static final String NAME = "com.sun.star.frame.Desktop";

@@ -10,8 +10,6 @@ package br.com.objectos.code.processing.type;
 import static org.testng.Assert.assertEquals;
 
 import br.com.objectos.code.util.AbstractCodeCoreTest;
-import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.list.MutableList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import javax.lang.model.element.Element;
@@ -24,6 +22,8 @@ import javax.lang.model.type.TypeKind;
 import javax.lang.model.type.TypeMirror;
 import javax.lang.model.type.TypeVariable;
 import javax.lang.model.util.Types;
+import objectos.util.ImmutableList;
+import objectos.util.MutableList;
 import org.testng.annotations.Test;
 
 public class WildcardTypeTest extends AbstractCodeCoreTest {

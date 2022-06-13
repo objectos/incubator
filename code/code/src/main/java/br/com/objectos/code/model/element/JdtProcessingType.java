@@ -61,14 +61,13 @@
  */
 package br.com.objectos.code.model.element;
 
-import br.com.objectos.core.list.Lists;
-import br.com.objectos.core.map.Maps;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -129,7 +128,7 @@ final class JdtProcessingType extends ProcessingType {
     Object binaryType = lookupBinaryType(binding);
     final Object[] sortedMethods = (Object[]) method(binaryType, "getMethods");
 
-    List<Object> sortedElements = Lists.newArrayList();
+    List<Object> sortedElements = new ArrayList<>();
     if (sortedMethods != null) {
       sortedElements.addAll(Arrays.asList(sortedMethods));
     }
@@ -163,7 +162,7 @@ final class JdtProcessingType extends ProcessingType {
     Class<?> nestedType
         = classLoader.loadClass("org.eclipse.jdt.internal.compiler.env.IBinaryNestedType");
 
-    List<Object> bindings = Lists.newArrayList();
+    List<Object> bindings = new ArrayList<>();
     for (Object sortedElement : sortedElements) {
       Class<?> elementClass = sortedElement.getClass();
       if (binaryMethod.isAssignableFrom(elementClass)) {
@@ -188,7 +187,7 @@ final class JdtProcessingType extends ProcessingType {
       } else if (binaryField.isAssignableFrom(elementClass)) {
         char[] selector = (char[]) method(sortedElement, "getName");
         Object foundField = method(binding, "getField",
-            new Class<?>[] {char[].class, boolean.class}, selector, true);
+          new Class<?>[] {char[].class, boolean.class}, selector, true);
         if (foundField != null) {
           bindings.add(foundField);
         }
@@ -215,7 +214,7 @@ final class JdtProcessingType extends ProcessingType {
   private static List<Object> findSourceTypeOrder(Object binding) throws Exception {
     Object referenceContext = field(field(binding, "scope"), "referenceContext");
 
-    TreeMap<Integer, Object> orderedBindings = Maps.newTreeMap();
+    TreeMap<Integer, Object> orderedBindings = new TreeMap<>();
 
     collectSourceOrder(orderedBindings, referenceContext, "methods");
     collectSourceOrder(orderedBindings, referenceContext, "fields");
@@ -355,7 +354,7 @@ final class JdtProcessingType extends ProcessingType {
         return "None";
       default:
         throw new RuntimeException(
-            "Unknown type specified " + mirror.getKind() + " mirror: " + mirror);
+          "Unknown type specified " + mirror.getKind() + " mirror: " + mirror);
     }
   }
 
@@ -482,7 +481,7 @@ final class JdtProcessingType extends ProcessingType {
           Element enclosing2Element = o2.getEnclosingElement();
 
           if (!typeEquals(enclosing1Element.asType(),
-              enclosing2Element.asType())) {
+            enclosing2Element.asType())) {
             throw new AssertionError();
           }
 
@@ -506,12 +505,12 @@ final class JdtProcessingType extends ProcessingType {
   }
 
   private List<? extends Element> sortBySourceOrder(List<? extends Element> elements) {
-    Map<TypeElement, List<Element>> groupedByEnclosing = Maps.newHashMap();
+    Map<TypeElement, List<Element>> groupedByEnclosing = new HashMap<>();
     for (Element element : elements) {
       Element enclosing = element.getEnclosingElement();
       List<Element> grouped = groupedByEnclosing.get(enclosing);
       if (grouped == null) {
-        grouped = Lists.newArrayList();
+        grouped = new ArrayList<>();
         groupedByEnclosing.put((TypeElement) enclosing, grouped);
       }
       grouped.add(element);
@@ -537,7 +536,7 @@ final class JdtProcessingType extends ProcessingType {
         }
       });
 
-      List<Element> sourceOrderElements = Lists.newArrayList();
+      List<Element> sourceOrderElements = new ArrayList<>();
       for (TypeElement typeElement : enclosingTypes) {
         sourceOrderElements.addAll(groupedByEnclosing.get(typeElement));
       }

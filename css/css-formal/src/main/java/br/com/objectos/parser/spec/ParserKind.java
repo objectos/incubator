@@ -15,8 +15,8 @@
  */
 package br.com.objectos.parser.spec;
 
-import br.com.objectos.core.list.MutableList;
 import br.com.objectos.parser.grammar.ParserGrammar;
+import objectos.util.MutableList;
 
 public enum ParserKind {
 

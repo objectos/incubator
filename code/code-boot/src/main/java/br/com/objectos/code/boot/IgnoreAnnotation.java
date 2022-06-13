@@ -19,7 +19,7 @@ import br.com.objectos.code.annotations.Ignore;
 import br.com.objectos.code.java.type.NamedClass;
 import br.com.objectos.code.model.AnnotatedElementOrType;
 import br.com.objectos.code.model.element.ProcessingAnnotation;
-import br.com.objectos.core.list.ImmutableList;
+import objectos.util.ImmutableList;
 
 class IgnoreAnnotation {
 

@@ -20,7 +20,7 @@ import static br.com.objectos.code.java.element.NewLine.nextLine;
 import br.com.objectos.code.java.element.AbstractCodeElement;
 import br.com.objectos.code.java.io.CodeWriter;
 import br.com.objectos.code.java.io.Section;
-import br.com.objectos.core.list.ImmutableList;
+import objectos.util.ImmutableList;
 
 public abstract class SwitchElement extends AbstractCodeElement {
 

@@ -21,11 +21,8 @@ module br.com.objectos.html.boot {
 
   requires br.com.objectos.code;
   requires br.com.objectos.code.annotations;
-  requires br.com.objectos.core.collection;
-  requires br.com.objectos.core.list;
-  requires br.com.objectos.core.map;
   requires objectos.lang;
-  requires br.com.objectos.core.set;
+  requires objectos.util;
   requires br.com.objectos.fs;
   requires java.compiler;
 }

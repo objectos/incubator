@@ -20,12 +20,12 @@ import static br.com.objectos.http.server.Method.HEAD;
 import static br.com.objectos.http.server.Resolution.resolved;
 import static org.testng.Assert.assertEquals;
 
-import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.http.AbstractHttpCoreTest;
 import br.com.objectos.http.server.AbstractHttpModule;
 import br.com.objectos.http.server.AlwaysOk;
 import br.com.objectos.http.server.Method;
 import br.com.objectos.http.server.Resolution;
+import objectos.util.ImmutableList;
 import org.testng.annotations.Test;
 
 public class RouterTest extends AbstractHttpCoreTest {

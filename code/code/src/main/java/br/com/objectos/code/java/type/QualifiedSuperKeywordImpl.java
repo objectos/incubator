@@ -29,7 +29,7 @@ import br.com.objectos.code.java.expression.MethodReferenceReferenceExpression;
 import br.com.objectos.code.java.expression.MultiplicativeExpression;
 import br.com.objectos.code.java.expression.PostfixExpression;
 import br.com.objectos.code.java.expression.RelationalExpression;
-import br.com.objectos.core.list.ImmutableList;
+import objectos.util.ImmutableList;
 
 class QualifiedSuperKeywordImpl
     extends AbstractDefaultImmutableCodeElement

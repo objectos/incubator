@@ -23,13 +23,13 @@ import br.com.objectos.code.java.expression.Identifier;
 import br.com.objectos.code.java.type.NamedClass;
 import br.com.objectos.code.model.AbstractCodeModelTest;
 import br.com.objectos.code.processing.type.PTypeMirror;
-import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.set.ImmutableSet;
 import java.util.List;
 import java.util.NoSuchElementException;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.VariableElement;
 import javax.lang.model.util.ElementFilter;
+import objectos.util.ImmutableList;
+import objectos.util.ImmutableSet;
 import org.testng.annotations.Test;
 
 public class ProcessingFieldTest extends AbstractCodeModelTest {

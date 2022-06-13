@@ -21,9 +21,6 @@ import static br.com.objectos.git.EntryMode.TREE;
 
 import br.com.objectos.concurrent.Concurrent;
 import br.com.objectos.concurrent.DirectIoWorker;
-import br.com.objectos.core.array.ByteArrays;
-import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.list.MutableList;
 import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.testing.TestInf;
 import br.com.objectos.fs.testing.TmpDir;
@@ -31,6 +28,9 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.concurrent.ExecutionException;
 import objectos.lang.Check;
+import objectos.util.ByteArrays;
+import objectos.util.ImmutableList;
+import objectos.util.MutableList;
 
 final class TestingGit {
 

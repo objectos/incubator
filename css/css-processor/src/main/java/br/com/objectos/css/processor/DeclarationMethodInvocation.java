@@ -23,11 +23,11 @@ import static br.com.objectos.code.java.Java.nl;
 import br.com.objectos.code.java.expression.Argument;
 import br.com.objectos.code.java.expression.ArgumentsElement;
 import br.com.objectos.code.java.expression.MethodInvocation;
-import br.com.objectos.core.list.MutableList;
 import br.com.objectos.css.keyword.StandardKeyword;
 import br.com.objectos.css.property.StandardPropertyName;
 import br.com.objectos.css.type.ColorName;
 import br.com.objectos.css.type.LengthUnit;
+import objectos.util.MutableList;
 
 abstract class DeclarationMethodInvocation {
 
@@ -154,8 +154,8 @@ abstract class DeclarationMethodInvocation {
       arguments.add(nl());
 
       return invoke(
-          getMethodName(),
-          arguments
+        getMethodName(),
+        arguments
       );
     }
 

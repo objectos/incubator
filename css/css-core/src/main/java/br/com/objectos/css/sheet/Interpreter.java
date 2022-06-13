@@ -15,7 +15,6 @@
  */
 package br.com.objectos.css.sheet;
 
-import br.com.objectos.core.array.IntArrays;
 import br.com.objectos.css.function.StandardFunctionName;
 import br.com.objectos.css.keyword.Keywords;
 import br.com.objectos.css.keyword.StandardKeyword;
@@ -36,6 +35,7 @@ import br.com.objectos.css.type.ColorName;
 import br.com.objectos.css.type.LengthUnit;
 import java.util.ArrayDeque;
 import java.util.Deque;
+import objectos.util.IntArrays;
 
 final class Interpreter<E extends Exception> implements Context.Adapter<E> {
 

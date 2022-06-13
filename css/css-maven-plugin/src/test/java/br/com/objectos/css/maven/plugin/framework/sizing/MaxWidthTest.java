@@ -20,12 +20,12 @@ import static br.com.objectos.css.sheet.MediaType.SCREEN;
 import static org.testng.Assert.assertEquals;
 
 import br.com.objectos.code.java.io.JavaFile;
-import br.com.objectos.core.map.ImmutableMap;
 import br.com.objectos.css.config.framework.AbstractConfiguration;
 import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkAtMediaSet;
 import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkGroup;
 import br.com.objectos.css.keyword.Keywords;
 import br.com.objectos.css.maven.plugin.framework.AbstractCssMavenPluginFrameworkTest;
+import objectos.util.ImmutableMap;
 import org.testng.annotations.Test;
 
 public class MaxWidthTest extends AbstractCssMavenPluginFrameworkTest {

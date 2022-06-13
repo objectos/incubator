@@ -21,7 +21,7 @@ import br.com.objectos.code.java.declaration.ConstructorCode;
 import br.com.objectos.code.java.declaration.ConstructorCodeEx;
 import br.com.objectos.code.java.declaration.FieldCode;
 import br.com.objectos.code.java.element.NewLine;
-import br.com.objectos.core.list.ImmutableList;
+import objectos.util.ImmutableList;
 import org.testng.annotations.Test;
 
 public class FormattingTest extends AbstractFormattingTest {

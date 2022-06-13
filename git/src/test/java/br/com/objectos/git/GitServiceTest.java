@@ -23,14 +23,14 @@ import br.com.objectos.concurrent.Computation;
 import br.com.objectos.concurrent.Concurrent;
 import br.com.objectos.core.io.Charsets;
 import br.com.objectos.core.io.Read;
-import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.list.MutableList;
 import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.Posix;
 import br.com.objectos.fs.RegularFile;
 import br.com.objectos.fs.testing.TmpDir;
 import java.io.IOException;
 import java.util.concurrent.ExecutionException;
+import objectos.util.ImmutableList;
+import objectos.util.MutableList;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 

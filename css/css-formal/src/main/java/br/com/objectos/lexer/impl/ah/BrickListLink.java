@@ -15,8 +15,8 @@
  */
 package br.com.objectos.lexer.impl.ah;
 
-import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.list.MutableList;
+import objectos.util.ImmutableList;
+import objectos.util.MutableList;
 
 class BrickListLink implements Link, LinkMerger {
 

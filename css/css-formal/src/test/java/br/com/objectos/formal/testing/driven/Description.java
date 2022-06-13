@@ -15,11 +15,11 @@
  */
 package br.com.objectos.formal.testing.driven;
 
-import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.formal.testing.Node;
 import br.com.objectos.formal.testing.NodeVisitor;
 import java.util.Arrays;
 import java.util.Iterator;
+import objectos.util.ImmutableList;
 
 public class Description implements Node {
 

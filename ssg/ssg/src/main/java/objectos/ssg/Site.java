@@ -15,9 +15,9 @@
  */
 package objectos.ssg;
 
-import br.com.objectos.core.list.ImmutableList;
 import java.io.IOException;
 import objectos.lang.Check;
+import objectos.util.ImmutableList;
 
 public abstract class Site implements SiteResourceHolder {
 

@@ -18,15 +18,15 @@ package br.com.objectos.css.boot;
 import static org.testng.Assert.assertEquals;
 
 import br.com.objectos.code.java.io.JavaFile;
-import br.com.objectos.core.list.MutableList;
-import br.com.objectos.core.map.ImmutableMap;
-import br.com.objectos.core.map.MutableMap;
 import br.com.objectos.css.boot.spec.CssSpec;
 import br.com.objectos.css.boot.spec.CssSpecDsl;
 import br.com.objectos.css.boot.spec.Step;
 import br.com.objectos.css.boot.spec.StepAdapter;
 import java.util.Arrays;
 import java.util.List;
+import objectos.util.ImmutableMap;
+import objectos.util.MutableList;
+import objectos.util.MutableMap;
 import org.testng.annotations.BeforeMethod;
 
 public abstract class AbstractCssBootTest {

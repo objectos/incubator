@@ -15,11 +15,11 @@
  */
 package br.com.objectos.fs.testing;
 
-import br.com.objectos.core.list.MutableList;
 import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.JavaIoTmpdir;
 import br.com.objectos.random.testing.Next;
 import java.io.IOException;
+import objectos.util.MutableList;
 
 /**
  * A class that creates and manages temporary directories suitable for testing

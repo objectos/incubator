@@ -15,9 +15,9 @@
  */
 package br.com.objectos.git;
 
-import br.com.objectos.core.list.MutableList;
 import objectos.lang.Check;
 import objectos.lang.ToString;
+import objectos.util.MutableList;
 
 /**
  * A class for creating a commit object suitable for writing to a repository.

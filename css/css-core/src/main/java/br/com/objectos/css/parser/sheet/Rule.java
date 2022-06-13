@@ -15,13 +15,13 @@
  */
 package br.com.objectos.css.parser.sheet;
 
-import br.com.objectos.core.list.MutableList;
 import br.com.objectos.css.parser.IsNonTerminal;
 import br.com.objectos.css.select.Selector;
 import br.com.objectos.css.sheet.RuleElement;
 import br.com.objectos.css.sheet.StyleSheetDsl;
 import java.util.List;
 import java.util.Objects;
+import objectos.util.MutableList;
 
 final class Rule implements IsNonTerminal {
 

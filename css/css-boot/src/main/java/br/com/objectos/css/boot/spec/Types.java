@@ -18,8 +18,8 @@ package br.com.objectos.css.boot.spec;
 import br.com.objectos.code.java.declaration.PackageName;
 import br.com.objectos.code.java.expression.MethodInvocation;
 import br.com.objectos.code.java.type.NamedClass;
-import br.com.objectos.core.map.ImmutableMap;
-import br.com.objectos.core.map.MutableMap;
+import objectos.util.ImmutableMap;
+import objectos.util.MutableMap;
 
 public class Types {
 

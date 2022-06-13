@@ -16,8 +16,8 @@
 package br.com.objectos.code.java.element;
 
 import br.com.objectos.code.java.io.CodeWriter;
-import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.list.MutableList;
+import objectos.util.ImmutableList;
+import objectos.util.MutableList;
 
 public abstract class AbstractImmutableCodeElement extends AbstractCodeElement {
 

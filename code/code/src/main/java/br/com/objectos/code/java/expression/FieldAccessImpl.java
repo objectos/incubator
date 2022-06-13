@@ -17,7 +17,7 @@ package br.com.objectos.code.java.expression;
 
 import br.com.objectos.code.java.element.AbstractDefaultImmutableCodeElement;
 import br.com.objectos.code.java.element.CodeElement;
-import br.com.objectos.core.list.ImmutableList;
+import objectos.util.ImmutableList;
 
 final class FieldAccessImpl extends AbstractDefaultImmutableCodeElement implements FieldAccess {
 

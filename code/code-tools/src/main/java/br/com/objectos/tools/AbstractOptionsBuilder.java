@@ -15,8 +15,8 @@
  */
 package br.com.objectos.tools;
 
-import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.latest.Concrete;
+import objectos.util.ImmutableList;
 
 @Concrete(modifiers = "final", simpleName = "OptionsBuilder")
 abstract class AbstractOptionsBuilder implements JavacOptionVisitor {

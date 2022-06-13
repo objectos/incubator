@@ -1,7 +1,6 @@
 package br.com.objectos.html.attribute;
 
 import br.com.objectos.code.annotations.Generated;
-import br.com.objectos.core.map.ImmutableMap;
 import br.com.objectos.html.spi.tmpl.Marker;
 import br.com.objectos.html.spi.tmpl.Renderer;
 import br.com.objectos.html.spi.type.AValue;
@@ -27,6 +26,7 @@ import br.com.objectos.html.spi.type.StyleValue;
 import br.com.objectos.html.spi.type.SvgValue;
 import br.com.objectos.html.spi.type.TextareaValue;
 import br.com.objectos.html.spi.type.Value;
+import objectos.util.ImmutableMap;
 
 @Generated("br.com.objectos.html.boot.HtmlBoot")
 public abstract class StandardAttributeName implements AttributeName, Value {

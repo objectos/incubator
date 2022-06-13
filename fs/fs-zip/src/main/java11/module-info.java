@@ -23,6 +23,6 @@ module br.com.objectos.fs.zip {
 
   requires static br.com.objectos.latest;
 
-  requires br.com.objectos.core.list;
   requires objectos.lang;
+  requires objectos.util;
 }

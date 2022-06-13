@@ -21,7 +21,7 @@ import br.com.objectos.code.java.declaration.PackageName;
 import br.com.objectos.code.java.type.NamedArray;
 import br.com.objectos.code.java.type.NamedClass;
 import br.com.objectos.code.java.type.NamedParameterized;
-import br.com.objectos.core.map.ImmutableMap;
+import objectos.util.ImmutableMap;
 
 public class AttributeNames {
 

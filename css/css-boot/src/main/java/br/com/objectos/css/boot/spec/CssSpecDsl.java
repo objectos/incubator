@@ -15,9 +15,6 @@
  */
 package br.com.objectos.css.boot.spec;
 
-import br.com.objectos.core.map.Maps;
-import br.com.objectos.core.set.MutableSet;
-import br.com.objectos.core.set.Sets;
 import br.com.objectos.css.boot.function.FunctionName;
 import br.com.objectos.css.boot.keyword.KeywordName;
 import br.com.objectos.css.boot.property.Property;
@@ -29,19 +26,23 @@ import br.com.objectos.css.boot.type.Value;
 import br.com.objectos.css.boot.type.ValueType;
 import java.util.Arrays;
 import java.util.EnumMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
+import java.util.TreeSet;
 import objectos.lang.Check;
+import objectos.util.MutableSet;
 
 public class CssSpecDsl {
 
-  private final Set<ColorName> colors = Sets.newTreeSet();
+  private final Set<ColorName> colors = new TreeSet<>();
 
   private final MutableSet<String> elementNames = MutableSet.create();
 
-  private final Map<String, FunctionName> functions = Maps.newTreeMap();
+  private final Map<String, FunctionName> functions = new TreeMap<>();
 
-  private final Map<String, KeywordName> keywords = Maps.newTreeMap();
+  private final Map<String, KeywordName> keywords = new TreeMap<>();
 
   private final Map<Primitive, PrimitiveType> primitives
       = new EnumMap<Primitive, PrimitiveType>(Primitive.class);
@@ -50,7 +51,7 @@ public class CssSpecDsl {
 
   private final Step step;
 
-  private final Map<String, ValueType> valueTypes = Maps.newLinkedHashMap();
+  private final Map<String, ValueType> valueTypes = new LinkedHashMap<>();
 
   public CssSpecDsl(Step step) {
     this.step = step;

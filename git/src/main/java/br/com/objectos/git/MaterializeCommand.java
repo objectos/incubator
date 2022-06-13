@@ -15,14 +15,14 @@
  */
 package br.com.objectos.git;
 
-import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.map.MutableMap;
 import br.com.objectos.fs.Directory;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import objectos.lang.Check;
 import objectos.lang.ToString;
+import objectos.util.ImmutableList;
+import objectos.util.MutableMap;
 
 /**
  * A command for <em>materializing</em> a Git repository.

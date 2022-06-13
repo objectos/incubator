@@ -15,7 +15,7 @@
  */
 package br.com.objectos.http.path;
 
-import br.com.objectos.core.list.MutableList;
+import objectos.util.MutableList;
 
 class LocationParser {
 

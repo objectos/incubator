@@ -16,8 +16,8 @@
 package br.com.objectos.git;
 
 import br.com.objectos.concurrent.Computation;
-import br.com.objectos.core.set.ImmutableSet;
 import br.com.objectos.fs.Directory;
+import objectos.util.ImmutableSet;
 
 /**
  * Interface for supporting the execution of {@link GitCommand} instances. It

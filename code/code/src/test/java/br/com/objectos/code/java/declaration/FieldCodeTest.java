@@ -23,7 +23,7 @@ import static br.com.objectos.code.java.type.NamedTypes._int;
 import static br.com.objectos.code.java.type.NamedTypes.t;
 
 import br.com.objectos.code.util.AbstractCodeJavaTest;
-import br.com.objectos.core.set.ImmutableSet;
+import objectos.util.ImmutableSet;
 import org.testng.annotations.Test;
 
 public class FieldCodeTest extends AbstractCodeJavaTest {

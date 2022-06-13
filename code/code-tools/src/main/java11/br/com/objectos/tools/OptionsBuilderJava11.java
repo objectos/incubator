@@ -15,10 +15,6 @@
  */
 package br.com.objectos.tools;
 
-import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.list.MutableList;
-import br.com.objectos.core.map.ImmutableMap;
-import br.com.objectos.core.map.MutableMap;
 import br.com.objectos.latest.Concrete;
 import java.lang.module.Configuration;
 import java.lang.module.ModuleReference;
@@ -27,6 +23,10 @@ import java.net.URI;
 import java.nio.file.Path;
 import java.util.Optional;
 import java.util.Set;
+import objectos.util.ImmutableList;
+import objectos.util.ImmutableMap;
+import objectos.util.MutableList;
+import objectos.util.MutableMap;
 
 @Concrete.Bridge
 abstract class OptionsBuilderJava11 extends AbstractOptionsBuilder {

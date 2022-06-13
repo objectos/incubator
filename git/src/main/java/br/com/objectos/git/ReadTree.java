@@ -15,8 +15,6 @@
  */
 package br.com.objectos.git;
 
-import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.list.MutableList;
 import java.nio.ByteBuffer;
 import java.nio.charset.CharacterCodingException;
 import java.nio.charset.Charset;
@@ -24,6 +22,8 @@ import java.nio.charset.CharsetDecoder;
 import objectos.lang.Check;
 import objectos.lang.Note1;
 import objectos.lang.NoteSink;
+import objectos.util.ImmutableList;
+import objectos.util.MutableList;
 
 final class ReadTree implements ObjectReaderAdapter {
 

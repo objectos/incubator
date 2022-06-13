@@ -19,7 +19,7 @@ import br.com.objectos.code.java.declaration.ConstructorCode;
 import br.com.objectos.code.java.declaration.MethodCode;
 import br.com.objectos.code.java.element.AbstractImmutableCodeElement;
 import br.com.objectos.code.java.element.CodeElement;
-import br.com.objectos.core.list.ImmutableList;
+import objectos.util.ImmutableList;
 
 public abstract class AbstractStatement extends AbstractImmutableCodeElement implements Statement {
 

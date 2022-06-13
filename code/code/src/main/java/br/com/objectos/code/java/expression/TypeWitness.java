@@ -18,8 +18,8 @@ package br.com.objectos.code.java.expression;
 import br.com.objectos.code.java.element.AbstractImmutableCodeElement;
 import br.com.objectos.code.java.element.CodeElement;
 import br.com.objectos.code.java.type.NamedType;
-import br.com.objectos.core.list.ImmutableList;
 import java.util.Arrays;
+import objectos.util.ImmutableList;
 
 public class TypeWitness extends AbstractImmutableCodeElement {
 

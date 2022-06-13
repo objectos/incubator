@@ -23,9 +23,9 @@ import static br.com.objectos.code.java.Java.l;
 import br.com.objectos.code.java.JavaNames;
 import br.com.objectos.code.java.declaration.MethodCode;
 import br.com.objectos.code.java.expression.Identifier;
-import br.com.objectos.core.set.Sets;
 import br.com.objectos.css.specgen.Types;
 import java.util.Set;
+import java.util.TreeSet;
 import javax.lang.model.SourceVersion;
 
 public class KeywordSet {
@@ -43,7 +43,7 @@ public class KeywordSet {
   public final void acceptPropertyDefinitionMethod(MethodCode.Builder builder) {
     for (String value : values) {
       builder.addStatement(
-          _var(Types.KeywordName, identifier(value), invoke("keyword", l(value)))
+        _var(Types.KeywordName, identifier(value), invoke("keyword", l(value)))
       );
     }
   }
@@ -78,7 +78,7 @@ public class KeywordSet {
 
     private final StringBuilder sb = new StringBuilder();
 
-    private final Set<String> values = Sets.newTreeSet();
+    private final Set<String> values = new TreeSet<>();
 
     private Builder() {}
 

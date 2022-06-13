@@ -20,9 +20,9 @@ import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 
-import br.com.objectos.core.list.ImmutableList;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import objectos.util.ImmutableList;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 

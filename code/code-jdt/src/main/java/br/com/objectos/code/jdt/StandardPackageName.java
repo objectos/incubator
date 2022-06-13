@@ -15,10 +15,10 @@
  */
 package br.com.objectos.code.jdt;
 
-import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.list.MutableList;
 import java.io.IOException;
 import java.io.InputStream;
+import objectos.util.ImmutableList;
+import objectos.util.MutableList;
 import org.eclipse.jdt.internal.compiler.classfmt.ClassFileReader;
 import org.eclipse.jdt.internal.compiler.classfmt.ClassFormatException;
 import org.eclipse.jdt.internal.compiler.env.NameEnvironmentAnswer;

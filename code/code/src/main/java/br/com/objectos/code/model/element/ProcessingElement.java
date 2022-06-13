@@ -21,10 +21,6 @@ import br.com.objectos.code.java.declaration.Modifiers;
 import br.com.objectos.code.java.declaration.PackageName;
 import br.com.objectos.code.java.type.NamedTypeParameter;
 import br.com.objectos.code.model.AnnotatedElementOrType;
-import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.list.MutableList;
-import br.com.objectos.core.set.ImmutableSet;
-import br.com.objectos.core.set.MutableSet;
 import java.io.IOException;
 import java.util.List;
 import javax.annotation.processing.Filer;
@@ -40,6 +36,10 @@ import javax.tools.Diagnostic.Kind;
 import javax.tools.FileObject;
 import javax.tools.StandardLocation;
 import objectos.lang.Check;
+import objectos.util.ImmutableList;
+import objectos.util.ImmutableSet;
+import objectos.util.MutableList;
+import objectos.util.MutableSet;
 
 public abstract class ProcessingElement<E extends Element>
     extends AnnotatedElementOrType

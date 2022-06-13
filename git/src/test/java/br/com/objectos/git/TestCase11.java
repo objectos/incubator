@@ -16,15 +16,15 @@
 package br.com.objectos.git;
 
 import br.com.objectos.core.io.Charsets;
-import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.map.Maps;
-import br.com.objectos.core.set.ImmutableSet;
-import br.com.objectos.core.set.MutableSet;
 import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.testing.TmpDir;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import objectos.util.ImmutableList;
+import objectos.util.ImmutableSet;
+import objectos.util.MutableSet;
 
 /**
  * Copy use-case. Verify that generated trees are sorted. In particular when
@@ -36,7 +36,7 @@ final class TestCase11 extends StageGitCommand<ObjectId> {
 
   static final String DESCRIPTION = "Copy use-case: sorted generated trees";
 
-  private final Map<ObjectId, String> blobNames = Maps.newHashMap();
+  private final Map<ObjectId, String> blobNames = new HashMap<>();
 
   private final MutableSet<ObjectId> blobsToCopy = MutableSet.create();
 
@@ -46,7 +46,7 @@ final class TestCase11 extends StageGitCommand<ObjectId> {
 
   private ObjectId parentId;
 
-  private final Map<ObjectId, MutableTree> parentMap = Maps.newHashMap();
+  private final Map<ObjectId, MutableTree> parentMap = new HashMap<>();
 
   private MutableTree rootTree;
 

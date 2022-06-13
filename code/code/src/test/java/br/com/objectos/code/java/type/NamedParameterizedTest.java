@@ -15,9 +15,9 @@ import br.com.objectos.code.java.expression.MethodReferenceReferenceExpression;
 import br.com.objectos.code.java.expression.MethodReferenceReferenceExpressionTest;
 import br.com.objectos.code.java.io.ImportSet;
 import br.com.objectos.code.util.AbstractCodeJavaTest;
-import br.com.objectos.core.list.ImmutableList;
 import java.util.Arrays;
 import java.util.List;
+import objectos.util.ImmutableList;
 import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
 

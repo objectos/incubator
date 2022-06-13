@@ -15,7 +15,6 @@
  */
 package objectos.docs.ui;
 
-import br.com.objectos.core.list.MutableList;
 import br.com.objectos.html.element.ElementName;
 import br.com.objectos.html.spi.type.UlValue;
 import java.util.HashMap;
@@ -26,6 +25,7 @@ import objectos.ssg.SiteFragment;
 import objectos.ssg.SitePage;
 import objectos.ssg.SitePath;
 import objectos.ssg.SiteVisitor;
+import objectos.util.MutableList;
 
 public final class TableOfContents extends SiteFragment implements SiteVisitor {
 

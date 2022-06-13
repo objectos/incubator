@@ -18,10 +18,10 @@ package br.com.objectos.css.maven.plugin.framework.typography;
 import static org.testng.Assert.assertEquals;
 
 import br.com.objectos.code.java.io.JavaFile;
-import br.com.objectos.core.map.ImmutableMap;
 import br.com.objectos.css.config.framework.AbstractConfiguration;
 import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkGroup;
 import br.com.objectos.css.maven.plugin.framework.AbstractCssMavenPluginFrameworkTest;
+import objectos.util.ImmutableMap;
 import org.testng.annotations.Test;
 
 public class FontWeightTest extends AbstractCssMavenPluginFrameworkTest {

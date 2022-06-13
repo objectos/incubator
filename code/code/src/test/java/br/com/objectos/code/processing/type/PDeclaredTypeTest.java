@@ -14,7 +14,7 @@ import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 
 import br.com.objectos.code.java.type.NamedClass;
-import br.com.objectos.core.list.ImmutableList;
+import objectos.util.ImmutableList;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 

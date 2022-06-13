@@ -25,21 +25,21 @@ import br.com.objectos.code.model.element.ProcessingPackage;
 import br.com.objectos.code.model.element.ProcessingType;
 import br.com.objectos.code.processing.type.ErrorTypeException;
 import br.com.objectos.code.processing.type.PTypeMirror;
-import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.list.MutableList;
-import br.com.objectos.core.set.ImmutableSet;
-import br.com.objectos.core.set.Sets;
 import br.com.objectos.tools.Compilation;
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.Set;
 import javax.annotation.processing.SupportedAnnotationTypes;
+import objectos.util.ImmutableList;
+import objectos.util.ImmutableSet;
+import objectos.util.MutableList;
 import org.testng.annotations.Test;
 
 public class ProcessingRoundTest {
 
   @Test
   public void getAnnotatedPackages() {
-    final Set<String> names = Sets.newHashSet();
+    final Set<String> names = new HashSet<>();
 
     @SupportedAnnotationTypes("br.com.objectos.code.util.Marker1")
     class ThisProcessor extends AbstractProcessingRoundProcessor {
@@ -54,16 +54,16 @@ public class ProcessingRoundTest {
     }
 
     Compilation result = javac(
-        processor(new ThisProcessor()),
-        patchModuleWithTestClasses("br.com.objectos.code"),
-        compilationUnit(
-            "@br.com.objectos.code.util.Marker1",
-            "package testing.yes;"
-        ),
-        compilationUnit(
-            "@br.com.objectos.code.util.Marker2",
-            "package testing.no;"
-        )
+      processor(new ThisProcessor()),
+      patchModuleWithTestClasses("br.com.objectos.code"),
+      compilationUnit(
+        "@br.com.objectos.code.util.Marker1",
+        "package testing.yes;"
+      ),
+      compilationUnit(
+        "@br.com.objectos.code.util.Marker2",
+        "package testing.no;"
+      )
     );
 
     assertTrue(result.wasSuccessful());
@@ -73,7 +73,7 @@ public class ProcessingRoundTest {
 
   @Test
   public void getAnnotatedTypes() {
-    final Set<String> names = Sets.newHashSet();
+    final Set<String> names = new HashSet<>();
 
     @SupportedAnnotationTypes("br.com.objectos.code.util.Marker1")
     class ThisProcessor extends AbstractProcessingRoundProcessor {
@@ -88,39 +88,39 @@ public class ProcessingRoundTest {
     }
 
     Compilation result = javac(
-        processor(new ThisProcessor()),
-        patchModuleWithTestClasses("br.com.objectos.code"),
-        compilationUnit(
-            "package testing.yes;",
-            "@br.com.objectos.code.util.Marker1",
-            "@interface IncludeMeAnnotation {}"
-        ),
-        compilationUnit(
-            "package testing.yes;",
-            "@br.com.objectos.code.util.Marker1",
-            "class IncludeMeClass {}"
-        ),
-        compilationUnit(
-            "package testing.yes;",
-            "@br.com.objectos.code.util.Marker1",
-            "enum IncludeMeEnum { INSTANCE; }"
-        ),
-        compilationUnit(
-            "package testing.yes;",
-            "@br.com.objectos.code.util.Marker1",
-            "interface IncludeMeIface {}"
-        ),
-        compilationUnit(
-            "package testing.yes;",
-            "class NotOnType {",
-            "  @br.com.objectos.code.util.Marker1",
-            "  void method() {}",
-            "}"
-        ),
-        compilationUnit(
-            "@br.com.objectos.code.util.Marker1",
-            "package testing.no;"
-        )
+      processor(new ThisProcessor()),
+      patchModuleWithTestClasses("br.com.objectos.code"),
+      compilationUnit(
+        "package testing.yes;",
+        "@br.com.objectos.code.util.Marker1",
+        "@interface IncludeMeAnnotation {}"
+      ),
+      compilationUnit(
+        "package testing.yes;",
+        "@br.com.objectos.code.util.Marker1",
+        "class IncludeMeClass {}"
+      ),
+      compilationUnit(
+        "package testing.yes;",
+        "@br.com.objectos.code.util.Marker1",
+        "enum IncludeMeEnum { INSTANCE; }"
+      ),
+      compilationUnit(
+        "package testing.yes;",
+        "@br.com.objectos.code.util.Marker1",
+        "interface IncludeMeIface {}"
+      ),
+      compilationUnit(
+        "package testing.yes;",
+        "class NotOnType {",
+        "  @br.com.objectos.code.util.Marker1",
+        "  void method() {}",
+        "}"
+      ),
+      compilationUnit(
+        "@br.com.objectos.code.util.Marker1",
+        "package testing.no;"
+      )
     );
     assertTrue(result.wasSuccessful());
     assertEquals(names.size(), 4);
@@ -166,14 +166,14 @@ public class ProcessingRoundTest {
     ClassArrayAnnotationProcesssor processor = new ClassArrayAnnotationProcesssor();
 
     Compilation compilation = javac(
-        processor(processor),
-        patchModuleWithTestClasses("br.com.objectos.code"),
-        compilationUnit(
-            "@br.com.objectos.code.processing.ClassArrayAnnotation(",
-            "    { testing.code.GeneratedIface.class }",
-            ")",
-            "package testing.code;"
-        )
+      processor(processor),
+      patchModuleWithTestClasses("br.com.objectos.code"),
+      compilationUnit(
+        "@br.com.objectos.code.processing.ClassArrayAnnotation(",
+        "    { testing.code.GeneratedIface.class }",
+        ")",
+        "package testing.code;"
+      )
     );
 
     assertTrue(compilation.wasSuccessful());
@@ -224,15 +224,15 @@ public class ProcessingRoundTest {
     processor = new ClassArrayAnnotationProcesssor();
 
     Compilation compilation = javac(
-        processor(processor),
-        patchModuleWithTestClasses("br.com.objectos.code"),
-        compilationUnit(
-            "package testing.code;",
-            "@br.com.objectos.code.processing.ClassArrayAnnotation(",
-            "    { testing.code.DynamicGenerated.class }",
-            ")",
-            "class Dynamic {}"
-        )
+      processor(processor),
+      patchModuleWithTestClasses("br.com.objectos.code"),
+      compilationUnit(
+        "package testing.code;",
+        "@br.com.objectos.code.processing.ClassArrayAnnotation(",
+        "    { testing.code.DynamicGenerated.class }",
+        ")",
+        "class Dynamic {}"
+      )
     );
 
     assertTrue(compilation.wasSuccessful());
@@ -266,12 +266,12 @@ public class ProcessingRoundTest {
 
     final void generateIface(ProcessingRound round, NamedClass className) throws IOException {
       round.writeJavaFile(
-          JavaFile.javaFile(
-              className.getPackage(),
-              _interface(
-                  className
-              )
+        JavaFile.javaFile(
+          className.getPackage(),
+          _interface(
+            className
           )
+        )
       );
     }
 

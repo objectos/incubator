@@ -16,8 +16,8 @@
 package br.com.objectos.code.java.type;
 
 import br.com.objectos.code.java.io.JavaFileImportSet;
-import br.com.objectos.core.map.Maps;
 import java.util.EnumMap;
+import java.util.HashMap;
 import java.util.Map;
 import javax.lang.model.type.TypeKind;
 
@@ -124,7 +124,7 @@ public final class NamedPrimitive extends NamedType
     static final EnumMap<TypeKind, NamedPrimitive> MAP = buildMap();
 
     static EnumMap<TypeKind, NamedPrimitive> buildMap() {
-      Map<TypeKind, NamedPrimitive> map = Maps.newHashMap();
+      Map<TypeKind, NamedPrimitive> map = new HashMap<>();
 
       map.put(TypeKind.BOOLEAN, BOOLEAN);
       map.put(TypeKind.BYTE, BYTE);

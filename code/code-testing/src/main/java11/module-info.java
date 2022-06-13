@@ -18,8 +18,6 @@ module br.com.objectos.code.testing {
 
   requires transitive br.com.objectos.code;
 
-  requires br.com.objectos.core.list;
-  requires br.com.objectos.core.map;
   requires objectos.lang;
   requires br.com.objectos.tools;
   requires java.compiler;

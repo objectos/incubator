@@ -15,20 +15,20 @@
  */
 package objectos.docs.v0002;
 
-import br.com.objectos.core.list.MutableList;
 import br.com.objectos.css.Css;
 import br.com.objectos.css.select.IdSelector;
 import br.com.objectos.css.sheet.StyleSheet;
 import objectos.docs.DocsSite;
-import objectos.docs.v0002.intro.Intro;
-import objectos.docs.v0002.lang.Lang;
 import objectos.docs.style.Colors;
 import objectos.docs.style.FontSize;
 import objectos.docs.style.Spacing;
 import objectos.docs.ui.DocsPage;
 import objectos.docs.ui.TableOfContents;
 import objectos.docs.ui.VersionHolder;
+import objectos.docs.v0002.intro.Intro;
+import objectos.docs.v0002.lang.Lang;
 import objectos.ssg.SiteStyleSheet;
+import objectos.util.MutableList;
 
 final class Index extends DocsPage {
 

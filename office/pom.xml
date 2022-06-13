@@ -67,7 +67,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>br.com.objectos</groupId>
-			<artifactId>core-map</artifactId>
+			<artifactId>objectos-util</artifactId>
 		</dependency>
 		
 		<dependency>

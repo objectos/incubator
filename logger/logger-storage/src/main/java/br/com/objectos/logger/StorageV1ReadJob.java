@@ -19,11 +19,11 @@ import static br.com.objectos.logger.StorageV1.LOG;
 
 import br.com.objectos.concurrent.IoTask;
 import br.com.objectos.concurrent.IoWorker;
-import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.list.MutableList;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.ReadableByteChannel;
+import objectos.util.ImmutableList;
+import objectos.util.MutableList;
 
 final class StorageV1ReadJob implements IoTask, ReadJob {
 

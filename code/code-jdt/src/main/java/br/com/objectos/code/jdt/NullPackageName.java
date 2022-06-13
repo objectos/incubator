@@ -15,7 +15,7 @@
  */
 package br.com.objectos.code.jdt;
 
-import br.com.objectos.core.list.ImmutableList;
+import objectos.util.ImmutableList;
 
 class NullPackageName extends PackageName {
 

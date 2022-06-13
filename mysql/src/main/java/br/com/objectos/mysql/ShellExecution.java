@@ -16,10 +16,10 @@
 package br.com.objectos.mysql;
 
 import br.com.objectos.core.io.Copy;
-import br.com.objectos.core.list.ImmutableList;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import objectos.util.ImmutableList;
 
 final class ShellExecution extends Execution {
 

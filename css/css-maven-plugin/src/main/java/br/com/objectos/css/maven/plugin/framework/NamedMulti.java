@@ -21,9 +21,9 @@ import static br.com.objectos.code.java.Java.nl;
 import br.com.objectos.code.java.expression.Argument;
 import br.com.objectos.code.java.expression.ArgumentsElement;
 import br.com.objectos.code.java.expression.MethodInvocation;
-import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.list.MutableList;
 import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworMultiElement;
+import objectos.util.ImmutableList;
+import objectos.util.MutableList;
 
 class NamedMulti extends NamedValue {
 

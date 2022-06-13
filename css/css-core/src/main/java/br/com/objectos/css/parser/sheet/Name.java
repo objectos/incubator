@@ -15,10 +15,10 @@
  */
 package br.com.objectos.css.parser.sheet;
 
-import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.list.MutableList;
 import java.util.Iterator;
 import java.util.List;
+import objectos.util.ImmutableList;
+import objectos.util.MutableList;
 
 class Name {
 

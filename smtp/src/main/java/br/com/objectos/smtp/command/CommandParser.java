@@ -15,7 +15,6 @@
  */
 package br.com.objectos.smtp.command;
 
-import br.com.objectos.core.array.IntArrays;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
@@ -23,6 +22,7 @@ import java.nio.channels.ReadableByteChannel;
 import java.nio.charset.CharsetDecoder;
 import java.util.Arrays;
 import objectos.lang.Check;
+import objectos.util.IntArrays;
 
 public class CommandParser {
 

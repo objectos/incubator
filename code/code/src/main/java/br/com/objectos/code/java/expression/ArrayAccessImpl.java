@@ -17,9 +17,9 @@ package br.com.objectos.code.java.expression;
 
 import br.com.objectos.code.java.element.AbstractDefaultImmutableCodeElement;
 import br.com.objectos.code.java.element.CodeElement;
-import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.list.MutableList;
 import java.util.Arrays;
+import objectos.util.ImmutableList;
+import objectos.util.MutableList;
 
 final class ArrayAccessImpl
     extends AbstractDefaultImmutableCodeElement

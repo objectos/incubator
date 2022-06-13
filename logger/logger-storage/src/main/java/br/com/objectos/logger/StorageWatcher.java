@@ -17,8 +17,6 @@ package br.com.objectos.logger;
 
 import br.com.objectos.concurrent.CpuWorker;
 import br.com.objectos.concurrent.IoWorker;
-import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.list.MutableList;
 import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.RegularFile;
 import br.com.objectos.fs.watch.SimpleWatchListener;
@@ -26,6 +24,8 @@ import br.com.objectos.fs.watch.Watch;
 import java.io.Closeable;
 import java.io.IOException;
 import objectos.lang.Check;
+import objectos.util.ImmutableList;
+import objectos.util.MutableList;
 
 /**
  * Reads log events from a storage by watching it for changes.

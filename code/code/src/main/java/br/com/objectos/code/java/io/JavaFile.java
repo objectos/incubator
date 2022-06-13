@@ -21,7 +21,6 @@ import br.com.objectos.code.java.declaration.TypeCode;
 import br.com.objectos.code.java.type.NamedClass;
 import br.com.objectos.core.io.Charsets;
 import br.com.objectos.core.io.Write;
-import br.com.objectos.core.list.MutableList;
 import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.RegularFile;
 import java.io.IOException;
@@ -29,6 +28,7 @@ import java.io.Writer;
 import javax.annotation.processing.Filer;
 import javax.tools.JavaFileObject;
 import objectos.lang.Check;
+import objectos.util.MutableList;
 
 public final class JavaFile {
 

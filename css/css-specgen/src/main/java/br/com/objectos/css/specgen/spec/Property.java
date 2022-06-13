@@ -15,11 +15,11 @@
  */
 package br.com.objectos.css.specgen.spec;
 
-import br.com.objectos.core.list.ImmutableList;
 import java.io.Serializable;
 import java.util.Objects;
 import objectos.lang.Check;
 import objectos.lang.ToString;
+import objectos.util.ImmutableList;
 
 public class Property implements Comparable<Property>, Serializable, ToString.Formattable {
 

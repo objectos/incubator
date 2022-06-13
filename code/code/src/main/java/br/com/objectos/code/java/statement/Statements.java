@@ -20,8 +20,8 @@ import br.com.objectos.code.java.io.CodeWriter;
 import br.com.objectos.code.java.io.Section;
 import br.com.objectos.code.java.type.NamedClass;
 import br.com.objectos.code.java.type.NamedType;
-import br.com.objectos.core.list.ImmutableList;
 import objectos.lang.Check;
+import objectos.util.ImmutableList;
 
 public class Statements {
 

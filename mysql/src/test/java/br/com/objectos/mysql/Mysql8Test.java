@@ -15,9 +15,9 @@
  */
 package br.com.objectos.mysql;
 
-import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.fs.LocalFs;
 import java.io.IOException;
+import objectos.util.ImmutableList;
 import org.testng.annotations.Test;
 
 public class Mysql8Test extends AbstractMysqlTest {
@@ -25,15 +25,15 @@ public class Mysql8Test extends AbstractMysqlTest {
   @Override
   public void _beforeClassInit() throws IOException {
     directoryBase = LocalFs.getDirectory(
-        System.getProperty("objectos.mysql8.baseDir")
+      System.getProperty("objectos.mysql8.baseDir")
     );
 
     directoryBinariesClient = LocalFs.getDirectory(
-        System.getProperty("objectos.mysql8.binaryDirClient")
+      System.getProperty("objectos.mysql8.binaryDirClient")
     );
 
     directoryBinariesServer = LocalFs.getDirectory(
-        System.getProperty("objectos.mysql8.binaryDirServer")
+      System.getProperty("objectos.mysql8.binaryDirServer")
     );
 
     release = Release.MYSQL_8;
@@ -42,94 +42,94 @@ public class Mysql8Test extends AbstractMysqlTest {
   @Test
   public void testCase01() throws IOException {
     testCase01(
-        Mysql.mysqld(
-            Mysql.basedir(directoryBase),
+      Mysql.mysqld(
+        Mysql.basedir(directoryBase),
 
-            Mysql.characterSetServer(MysqlCharset.UTF8MB4),
+        Mysql.characterSetServer(MysqlCharset.UTF8MB4),
 
-            Mysql.datadir(fs.data),
+        Mysql.datadir(fs.data),
 
-            Mysql.disabledStorageEngines(
-                StorageEngine.ARCHIVE,
+        Mysql.disabledStorageEngines(
+          StorageEngine.ARCHIVE,
 
-                StorageEngine.BLACKHOLE,
+          StorageEngine.BLACKHOLE,
 
-                StorageEngine.CSV,
+          StorageEngine.CSV,
 
-                StorageEngine.EXAMPLE,
+          StorageEngine.EXAMPLE,
 
-                StorageEngine.FEDERATED,
+          StorageEngine.FEDERATED,
 
-                StorageEngine.MEMORY,
+          StorageEngine.MEMORY,
 
-                StorageEngine.MERGE,
+          StorageEngine.MERGE,
 
-                StorageEngine.MRG_MYISAM,
+          StorageEngine.MRG_MYISAM,
 
-                StorageEngine.PERFORMANCE_SCHEMA
-            ),
-
-            Mysql.generalLog(Toggle.ON),
-
-            Mysql.generalLogFile(fs.generalLogPath),
-
-            Mysql.innodbBufferPoolChunkSize(64, Unit.MB),
-
-            Mysql.innodbBufferPoolSize(64, Unit.MB),
-
-            Mysql.logBin(fs.binlog, "binlog"),
-
-            Mysql.logError(fs.errorLogPath),
-
-            Mysql.maxConnections(4),
-
-            Mysql.mysqlx(Toggle.OFF),
-
-            Mysql.serverId(1),
-
-            Mysql.skipNetworking(),
-
-            Mysql.skipSsl(),
-
-            fs.socketOption,
-
-            release.isRelease5_6()
-                ? Mysql.noop()
-                : Mysql.sqlMode(
-                    SqlMode.STRICT_TRANS_TABLES,
-                    SqlMode.NO_ZERO_IN_DATE,
-                    SqlMode.NO_ZERO_DATE,
-                    SqlMode.ERROR_FOR_DIVISION_BY_ZERO,
-                    SqlMode.NO_ENGINE_SUBSTITUTION
-                ),
-
-            Mysql.tmpdir(fs.root),
-
-            Mysql.waitTimeout(90000)
+          StorageEngine.PERFORMANCE_SCHEMA
         ),
 
-        ImmutableList.of(
-            "[mysqld]",
-            "basedir=" + directoryBase.getPath(),
-            "character-set-server=utf8mb4",
-            "datadir=" + fs.data.getPath(),
-            "disabled-storage-engines=ARCHIVE,BLACKHOLE,CSV,EXAMPLE,FEDERATED,MEMORY,MERGE,MRG_MYISAM,PERFORMANCE_SCHEMA",
-            "general-log=ON",
-            "general-log-file=" + fs.generalLogPath.getPath(),
-            "innodb-buffer-pool-chunk-size=64MB",
-            "innodb-buffer-pool-size=64MB",
-            "log-bin=" + fs.binlog.getPath() + "/binlog",
-            "log-error=" + fs.errorLogPath.getPath(),
-            "max-connections=4",
-            "mysqlx=OFF",
-            "server-id=1",
-            "skip-networking",
-            "skip-ssl",
-            "socket=" + fs.socketPath.getPath(),
-            "sql-mode=STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION",
-            "tmpdir=" + fs.root.getPath(),
-            "wait-timeout=90000"
-        )
+        Mysql.generalLog(Toggle.ON),
+
+        Mysql.generalLogFile(fs.generalLogPath),
+
+        Mysql.innodbBufferPoolChunkSize(64, Unit.MB),
+
+        Mysql.innodbBufferPoolSize(64, Unit.MB),
+
+        Mysql.logBin(fs.binlog, "binlog"),
+
+        Mysql.logError(fs.errorLogPath),
+
+        Mysql.maxConnections(4),
+
+        Mysql.mysqlx(Toggle.OFF),
+
+        Mysql.serverId(1),
+
+        Mysql.skipNetworking(),
+
+        Mysql.skipSsl(),
+
+        fs.socketOption,
+
+        release.isRelease5_6()
+            ? Mysql.noop()
+            : Mysql.sqlMode(
+              SqlMode.STRICT_TRANS_TABLES,
+              SqlMode.NO_ZERO_IN_DATE,
+              SqlMode.NO_ZERO_DATE,
+              SqlMode.ERROR_FOR_DIVISION_BY_ZERO,
+              SqlMode.NO_ENGINE_SUBSTITUTION
+            ),
+
+        Mysql.tmpdir(fs.root),
+
+        Mysql.waitTimeout(90000)
+      ),
+
+      ImmutableList.of(
+        "[mysqld]",
+        "basedir=" + directoryBase.getPath(),
+        "character-set-server=utf8mb4",
+        "datadir=" + fs.data.getPath(),
+        "disabled-storage-engines=ARCHIVE,BLACKHOLE,CSV,EXAMPLE,FEDERATED,MEMORY,MERGE,MRG_MYISAM,PERFORMANCE_SCHEMA",
+        "general-log=ON",
+        "general-log-file=" + fs.generalLogPath.getPath(),
+        "innodb-buffer-pool-chunk-size=64MB",
+        "innodb-buffer-pool-size=64MB",
+        "log-bin=" + fs.binlog.getPath() + "/binlog",
+        "log-error=" + fs.errorLogPath.getPath(),
+        "max-connections=4",
+        "mysqlx=OFF",
+        "server-id=1",
+        "skip-networking",
+        "skip-ssl",
+        "socket=" + fs.socketPath.getPath(),
+        "sql-mode=STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION",
+        "tmpdir=" + fs.root.getPath(),
+        "wait-timeout=90000"
+      )
     );
   }
 
@@ -156,13 +156,13 @@ public class Mysql8Test extends AbstractMysqlTest {
   @Test(dependsOnMethods = "testCase05")
   public void testCase06() throws Exception {
     testCase06Impl(
-        "db0",
-        "db1",
-        "db2",
-        "information_schema",
-        "mysql",
-        "performance_schema",
-        "sys"
+      "db0",
+      "db1",
+      "db2",
+      "information_schema",
+      "mysql",
+      "performance_schema",
+      "sys"
     );
   }
 

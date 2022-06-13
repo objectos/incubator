@@ -15,9 +15,9 @@
  */
 package br.com.objectos.parser.spec;
 
-import br.com.objectos.core.list.MutableList;
 import java.util.Iterator;
 import java.util.List;
+import objectos.util.MutableList;
 
 class ValueList {
 

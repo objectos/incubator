@@ -17,13 +17,13 @@ package br.com.objectos.html.boot;
 
 import static org.testng.Assert.assertEquals;
 
-import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.set.ImmutableSet;
 import br.com.objectos.html.boot.attribute.AttributeNames;
 import br.com.objectos.html.boot.spec.AttributeKind;
 import br.com.objectos.html.boot.spec.AttributeSpec;
 import br.com.objectos.html.boot.spec.SpecDsl;
 import br.com.objectos.html.boot.spi.type.SpiType;
+import objectos.util.ImmutableList;
+import objectos.util.ImmutableSet;
 import org.testng.annotations.Test;
 
 public class AttributeSpecTest extends AbstractHtmlBootTest {
@@ -75,11 +75,11 @@ public class AttributeSpecTest extends AbstractHtmlBootTest {
     assertEquals(res.name(), "href");
     assertEquals(res.kindSet(), ImmutableSet.of(AttributeKind.STRING));
     assertEquals(
-        res.interfaceSet(),
-        ImmutableSet.of(
-            SpiType.className("AValue"),
-            SpiType.className("LinkValue")
-        )
+      res.interfaceSet(),
+      ImmutableSet.of(
+        SpiType.className("AValue"),
+        SpiType.className("LinkValue")
+      )
     );
   }
 

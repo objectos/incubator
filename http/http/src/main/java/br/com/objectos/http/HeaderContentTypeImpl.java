@@ -16,7 +16,6 @@
 package br.com.objectos.http;
 
 import br.com.objectos.core.io.Charsets;
-import br.com.objectos.core.map.Maps;
 import br.com.objectos.http.media.ApplicationType;
 import br.com.objectos.http.media.ImageType;
 import br.com.objectos.http.media.MediaType;
@@ -24,6 +23,7 @@ import br.com.objectos.http.media.MediaTypeVisitor;
 import br.com.objectos.http.media.TextType;
 import br.com.objectos.http.media.TopLevel;
 import java.nio.charset.Charset;
+import java.util.HashMap;
 import java.util.Map;
 import objectos.lang.Check;
 import objectos.lang.Equals;
@@ -52,7 +52,7 @@ final class HeaderContentTypeImpl
 
   private static Map<String, Charset> createCharsetMap() {
     Map<String, Charset> map;
-    map = Maps.newHashMap();
+    map = new HashMap<>();
 
     map.put("utf8", Charsets.utf8());
     map.put("utf-8", Charsets.utf8());
@@ -63,7 +63,7 @@ final class HeaderContentTypeImpl
   private static Map<String, MediaType>
       createSubtypeMap(Class<? extends Enum<? extends MediaType>> subtype) {
     Map<String, MediaType> map;
-    map = Maps.newHashMap();
+    map = new HashMap<>();
 
     Enum<? extends MediaType>[] enumConstants;
     enumConstants = subtype.getEnumConstants();
@@ -83,7 +83,7 @@ final class HeaderContentTypeImpl
 
   private static Map<String, Map<String, MediaType>> createTopLevelMap() {
     Map<String, Map<String, MediaType>> map;
-    map = Maps.newHashMap();
+    map = new HashMap<>();
 
     // standard
     for (TopLevel topLevel : TopLevel.values()) {

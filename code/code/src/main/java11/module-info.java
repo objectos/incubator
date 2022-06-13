@@ -28,14 +28,12 @@ module br.com.objectos.code {
   exports br.com.objectos.code.processing.type;
   exports br.com.objectos.code.util;
 
-  requires transitive br.com.objectos.core.list;
+  requires transitive objectos.util;
   requires transitive br.com.objectos.fs;
   requires transitive java.compiler;
 
   requires static br.com.objectos.latest;
 
   requires br.com.objectos.code.annotations;
-  requires br.com.objectos.core.map;
   requires objectos.lang;
-  requires br.com.objectos.core.set;
 }

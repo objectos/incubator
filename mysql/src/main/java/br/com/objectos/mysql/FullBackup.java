@@ -15,7 +15,6 @@
  */
 package br.com.objectos.mysql;
 
-import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.RegularFile;
 import br.com.objectos.fs.ResolvedPath;
@@ -26,6 +25,7 @@ import java.util.zip.GZIPOutputStream;
 import objectos.lang.Note1;
 import objectos.lang.Note2;
 import objectos.lang.NoteSink;
+import objectos.util.ImmutableList;
 
 final class FullBackup extends AbstractClientJob<RegularFile> {
 

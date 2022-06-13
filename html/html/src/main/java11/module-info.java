@@ -26,9 +26,6 @@ module br.com.objectos.html {
   requires transitive br.com.objectos.html.spi;
 
   requires br.com.objectos.code.annotations;
-  requires br.com.objectos.core.array;
-  requires br.com.objectos.core.collection;
-  requires br.com.objectos.core.list;
-  requires br.com.objectos.core.map;
   requires objectos.lang;
+  requires objectos.util;
 }

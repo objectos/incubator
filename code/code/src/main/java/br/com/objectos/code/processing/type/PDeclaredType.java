@@ -21,8 +21,6 @@ import br.com.objectos.code.java.type.NamedClassOrParameterized;
 import br.com.objectos.code.java.type.NamedParameterized;
 import br.com.objectos.code.java.type.NamedType;
 import br.com.objectos.code.model.element.ProcessingType;
-import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.list.MutableList;
 import java.util.List;
 import javax.annotation.processing.ProcessingEnvironment;
 import javax.lang.model.element.Element;
@@ -31,6 +29,8 @@ import javax.lang.model.type.DeclaredType;
 import javax.lang.model.type.TypeKind;
 import javax.lang.model.type.TypeMirror;
 import objectos.lang.Check;
+import objectos.util.ImmutableList;
+import objectos.util.MutableList;
 
 public final class PDeclaredType extends PTypeMirror {
 

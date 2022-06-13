@@ -28,7 +28,6 @@ import br.com.objectos.concurrent.IoWorkerService;
 import br.com.objectos.concurrent.SingleThreadIoWorker;
 import br.com.objectos.core.io.Charsets;
 import br.com.objectos.core.io.Read;
-import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.core.logging.testing.TestableLogger;
 import br.com.objectos.core.service.Services;
 import br.com.objectos.fs.Directory;
@@ -41,6 +40,7 @@ import java.nio.charset.Charset;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import objectos.lang.NoOpNoteSink;
+import objectos.util.ImmutableList;
 import org.testng.annotations.BeforeClass;
 
 public abstract class AbstractMysqlTest {

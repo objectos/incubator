@@ -19,10 +19,10 @@ import static br.com.objectos.css.parser.sheet.DeclarationToken.COLON;
 import static br.com.objectos.css.parser.sheet.DeclarationToken.SEMI;
 import static org.testng.Assert.assertEquals;
 
-import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.css.parser.IsTerminal;
 import br.com.objectos.lexer.Analyzer;
 import br.com.objectos.lexer.UncheckedAnalyzer;
+import objectos.util.ImmutableList;
 import org.testng.annotations.Test;
 
 public class CssLexerTest extends CssLexerDriver {

@@ -15,7 +15,6 @@
  */
 package br.com.objectos.css;
 
-import br.com.objectos.core.collection.Iterables;
 import java.util.Arrays;
 import java.util.List;
 

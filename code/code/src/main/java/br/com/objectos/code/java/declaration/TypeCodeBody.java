@@ -20,8 +20,8 @@ import br.com.objectos.code.java.element.Symbols;
 import br.com.objectos.code.java.io.CodeWriter;
 import br.com.objectos.code.java.io.Section;
 import br.com.objectos.code.java.statement.Block;
-import br.com.objectos.core.list.ImmutableList;
 import java.util.Iterator;
+import objectos.util.ImmutableList;
 
 class TypeCodeBody implements CodeElement {
 

@@ -15,11 +15,11 @@
  */
 package objectos.ssg;
 
-import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.html.attribute.StandardAttributeName.Href;
 import br.com.objectos.html.tmpl.AbstractFragment;
 import objectos.lang.Check;
 import objectos.ssg.Site.Context;
+import objectos.util.ImmutableList;
 
 public abstract class SiteFragment extends AbstractFragment
     implements

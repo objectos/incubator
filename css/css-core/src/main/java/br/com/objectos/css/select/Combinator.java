@@ -15,7 +15,6 @@
  */
 package br.com.objectos.css.select;
 
-import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.css.io.CssWriter;
 import br.com.objectos.css.io.CssWriterVisitor;
 import br.com.objectos.css.io.MinifiedCssWriter;
@@ -23,6 +22,7 @@ import br.com.objectos.css.io.PrettyCssWriter;
 import br.com.objectos.css.parser.IsTerminal;
 import br.com.objectos.css.sheet.StyleSheetDsl;
 import java.io.IOException;
+import objectos.util.ImmutableList;
 
 public enum Combinator implements CssWriterVisitor, SelectorElement, IsTerminal {
 

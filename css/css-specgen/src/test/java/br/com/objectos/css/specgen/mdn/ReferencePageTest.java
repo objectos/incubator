@@ -18,11 +18,11 @@ package br.com.objectos.css.specgen.mdn;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
-import br.com.objectos.core.set.MutableSet;
 import br.com.objectos.core.io.Charsets;
 import br.com.objectos.core.io.Read;
 import br.com.objectos.core.io.Resource;
 import java.io.IOException;
+import objectos.util.MutableSet;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.testng.annotations.Test;

@@ -24,10 +24,10 @@ import br.com.objectos.code.java.element.NewLine;
 import br.com.objectos.code.java.io.BodyFormatter;
 import br.com.objectos.code.java.type.NamedClass;
 import br.com.objectos.code.java.type.NamedClassOrParameterized;
-import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.list.MutableList;
 import java.lang.annotation.Annotation;
 import objectos.lang.Check;
+import objectos.util.ImmutableList;
+import objectos.util.MutableList;
 
 public final class InterfaceCode extends AbstractTypeCode {
 

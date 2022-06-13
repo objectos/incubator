@@ -15,9 +15,9 @@
  */
 package br.com.objectos.http.server.jetty;
 
-import br.com.objectos.core.map.ImmutableMap;
 import br.com.objectos.http.server.RequestParameters;
 import java.util.NoSuchElementException;
+import objectos.util.ImmutableMap;
 
 class JettyParamMap implements RequestParameters {
 

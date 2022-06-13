@@ -16,9 +16,7 @@
 module br.com.objectos.code.processor {
   requires br.com.objectos.code;
   requires br.com.objectos.code.annotations;
-  requires br.com.objectos.core.list;
-  requires br.com.objectos.core.map;
-  requires br.com.objectos.core.set;
+  requires objectos.util;
   requires java.compiler;
 
   exports br.com.objectos.code.processor;

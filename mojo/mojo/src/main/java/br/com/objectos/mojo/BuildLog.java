@@ -15,7 +15,7 @@
  */
 package br.com.objectos.mojo;
 
-import br.com.objectos.core.list.ImmutableList;
+import objectos.util.ImmutableList;
 import org.slf4j.event.Level;
 
 final class BuildLog implements Log {

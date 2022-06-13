@@ -19,16 +19,16 @@ import static org.testng.Assert.assertEquals;
 
 import br.com.objectos.code.java.io.JavaFile;
 import br.com.objectos.code.java.type.NamedClass;
-import br.com.objectos.core.list.MutableList;
-import br.com.objectos.core.map.Maps;
 import br.com.objectos.html.boot.element.ElementNames;
 import br.com.objectos.html.boot.spec.AttributeSpec;
 import br.com.objectos.html.boot.spec.Spec;
 import br.com.objectos.html.boot.spec.SpecDsl;
 import br.com.objectos.html.boot.spec.Step;
 import br.com.objectos.html.boot.spec.StepFactory;
+import java.util.HashMap;
 import java.util.Map;
 import objectos.lang.Check;
+import objectos.util.MutableList;
 
 public abstract class AbstractHtmlBootTest {
 
@@ -46,7 +46,7 @@ public abstract class AbstractHtmlBootTest {
     dsl.execute(step);
 
     Map<String, JavaFile> map;
-    map = Maps.newHashMap();
+    map = new HashMap<>();
 
     for (int i = 0; i < javaFiles.size(); i++) {
       JavaFile file = javaFiles.get(i);

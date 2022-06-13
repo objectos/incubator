@@ -24,7 +24,6 @@ module br.com.objectos.fs.watch {
 
   requires static br.com.objectos.latest;
 
-  requires br.com.objectos.core.map;
   requires objectos.lang;
-  requires br.com.objectos.core.set;
+  requires objectos.util;
 }

@@ -18,11 +18,11 @@ package br.com.objectos.code.java.declaration;
 import br.com.objectos.code.java.element.AbstractCodeElement;
 import br.com.objectos.code.java.element.Symbols;
 import br.com.objectos.code.java.io.CodeWriter;
-import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.list.MutableList;
 import java.util.Iterator;
 import java.util.Locale;
 import objectos.lang.Check;
+import objectos.util.ImmutableList;
+import objectos.util.MutableList;
 
 abstract class ElementModifierSet extends AbstractCodeElement {
 

@@ -16,8 +16,8 @@
 package br.com.objectos.code.java.type;
 
 import br.com.objectos.code.java.declaration.PackageName;
-import br.com.objectos.core.list.ImmutableList;
 import objectos.lang.Check;
+import objectos.util.ImmutableList;
 
 public class NamedTypes {
 

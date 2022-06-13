@@ -15,10 +15,10 @@
  */
 package br.com.objectos.logger;
 
-import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.list.MutableList;
 import objectos.lang.Check;
 import objectos.lang.NoteSink;
+import objectos.util.ImmutableList;
+import objectos.util.MutableList;
 
 /**
  * An in-memory logger implementation that can be used to bootstrap a

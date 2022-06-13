@@ -15,8 +15,8 @@
  */
 package br.com.objectos.git;
 
-import br.com.objectos.core.set.ImmutableSet;
 import objectos.lang.ToString;
+import objectos.util.ImmutableSet;
 
 final class CopyObjectsTask extends AbstractGitTask<ImmutableSet<ObjectId>> {
 

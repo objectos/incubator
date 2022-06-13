@@ -24,9 +24,9 @@ import br.com.objectos.code.java.io.NewLineFormatting.NewLineFormattingAction;
 import br.com.objectos.code.java.io.Section;
 import br.com.objectos.code.java.statement.BlockElement;
 import br.com.objectos.code.java.statement.BlockStatement;
-import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.list.MutableList;
 import objectos.lang.Check;
+import objectos.util.ImmutableList;
+import objectos.util.MutableList;
 
 public final class ConstructorCode
     extends AbstractCodeElement

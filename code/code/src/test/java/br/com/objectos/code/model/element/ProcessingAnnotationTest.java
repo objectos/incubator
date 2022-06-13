@@ -25,8 +25,6 @@ import br.com.objectos.code.util.AnnotationValues;
 import br.com.objectos.code.util.Letter;
 import br.com.objectos.code.util.StringValueAnnotation;
 import br.com.objectos.code.util.TypeAnnotation;
-import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.set.ImmutableSet;
 import br.com.objectos.tools.Compilation;
 import java.lang.annotation.Annotation;
 import java.lang.annotation.ElementType;
@@ -37,6 +35,8 @@ import java.util.NoSuchElementException;
 import java.util.Set;
 import javax.lang.model.type.DeclaredType;
 import javax.lang.model.util.Types;
+import objectos.util.ImmutableList;
+import objectos.util.ImmutableSet;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 

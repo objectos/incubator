@@ -27,7 +27,6 @@ import br.com.objectos.code.java.type.NamedClass;
 import br.com.objectos.code.model.element.ProcessingPackage;
 import br.com.objectos.code.processing.AbstractProcessingRoundProcessor;
 import br.com.objectos.code.processing.ProcessingRound;
-import br.com.objectos.core.set.ImmutableSet;
 import br.com.objectos.css.CssCompiler;
 import java.io.IOException;
 import java.io.InputStream;
@@ -38,12 +37,13 @@ import javax.annotation.processing.ProcessingEnvironment;
 import javax.annotation.processing.Processor;
 import javax.tools.FileObject;
 import javax.tools.StandardLocation;
+import objectos.util.ImmutableSet;
 
 @Services(Processor.class)
 public class CssCompilerProcessor extends AbstractProcessingRoundProcessor {
 
   static final AnnotationCode GENERATED = annotation(
-      Generated.class, l(CssCompilerProcessor.class.getCanonicalName())
+    Generated.class, l(CssCompilerProcessor.class.getCanonicalName())
   );
 
   private Supplier<Filer> filerSupplier;
@@ -129,9 +129,9 @@ public class CssCompilerProcessor extends AbstractProcessingRoundProcessor {
       Filer filer = getFiler();
 
       FileObject resource = filer.getResource(
-          StandardLocation.SOURCE_PATH,
-          packageName.toString(),
-          simpleName + ".css");
+        StandardLocation.SOURCE_PATH,
+        packageName.toString(),
+        simpleName + ".css");
 
       return resource.openInputStream();
     }

@@ -15,8 +15,8 @@
  */
 package br.com.objectos.css.sheet;
 
-import br.com.objectos.core.set.Sets;
 import java.util.Set;
+import java.util.TreeSet;
 import org.testng.annotations.Test;
 
 public class PseudoCodeGen {
@@ -24,276 +24,276 @@ public class PseudoCodeGen {
   @Test(enabled = false)
   public void byteCode() {
     generate(
-        // Declaration
+      // Declaration
 
-        "DECLARATION_START",
+      "DECLARATION_START",
 
-        // Flow
+      // Flow
 
-        "FLOW_JMP",
+      "FLOW_JMP",
 
-        "FLOW_RETURN",
+      "FLOW_RETURN",
 
-        // Function
+      // Function
 
-        "FUNCTION_END",
+      "FUNCTION_END",
 
-        "FUNCTION_START",
+      "FUNCTION_START",
 
-        // @media
+      // @media
 
-        "MEDIA_END",
+      "MEDIA_END",
 
-        "MEDIA_START",
+      "MEDIA_START",
 
-        "MEDIA_TYPE",
+      "MEDIA_TYPE",
 
-        "MULTI_DECLARATION_SEPARATOR",
+      "MULTI_DECLARATION_SEPARATOR",
 
-        // Root
+      // Root
 
-        "ROOT",
+      "ROOT",
 
-        // Rule
+      // Rule
 
-        "RULE_END",
+      "RULE_END",
 
-        "RULE_START",
+      "RULE_START",
 
-        // Selector
+      // Selector
 
-        "SELECTOR_ATTRIBUTE",
+      "SELECTOR_ATTRIBUTE",
 
-        "SELECTOR_ATTRIBUTE_VALUE",
+      "SELECTOR_ATTRIBUTE_VALUE",
 
-        "SELECTOR_CLASS",
+      "SELECTOR_CLASS",
 
-        "SELECTOR_COMBINATOR",
+      "SELECTOR_COMBINATOR",
 
-        "SELECTOR_ID",
+      "SELECTOR_ID",
 
-        "SELECTOR_PSEUDO_CLASS",
+      "SELECTOR_PSEUDO_CLASS",
 
-        "SELECTOR_PSEUDO_ELEMENT",
+      "SELECTOR_PSEUDO_ELEMENT",
 
-        "SELECTOR_TYPE",
+      "SELECTOR_TYPE",
 
-        "SELECTOR_UNIVERSAL",
+      "SELECTOR_UNIVERSAL",
 
-        // Value
+      // Value
 
-        "VALUE_ANGLE_DOUBLE",
+      "VALUE_ANGLE_DOUBLE",
 
-        "VALUE_ANGLE_INT",
+      "VALUE_ANGLE_INT",
 
-        "VALUE_COLOR_HEX",
+      "VALUE_COLOR_HEX",
 
-        "VALUE_COLOR_NAME",
+      "VALUE_COLOR_NAME",
 
-        "VALUE_DOUBLE",
+      "VALUE_DOUBLE",
 
-        "VALUE_INT",
+      "VALUE_INT",
 
-        "VALUE_KEYWORD",
+      "VALUE_KEYWORD",
 
-        "VALUE_KEYWORD_CUSTOM",
+      "VALUE_KEYWORD_CUSTOM",
 
-        "VALUE_LENGTH_DOUBLE",
+      "VALUE_LENGTH_DOUBLE",
 
-        "VALUE_LENGTH_INT",
+      "VALUE_LENGTH_INT",
 
-        "VALUE_PERCENTAGE_DOUBLE",
+      "VALUE_PERCENTAGE_DOUBLE",
 
-        "VALUE_PERCENTAGE_INT",
+      "VALUE_PERCENTAGE_INT",
 
-        "VALUE_RGB_DOUBLE",
+      "VALUE_RGB_DOUBLE",
 
-        "VALUE_RGB_DOUBLE_ALPHA",
+      "VALUE_RGB_DOUBLE_ALPHA",
 
-        "VALUE_RGB_INT",
+      "VALUE_RGB_INT",
 
-        "VALUE_RGB_INT_ALPHA",
+      "VALUE_RGB_INT_ALPHA",
 
-        "VALUE_RGBA_DOUBLE",
+      "VALUE_RGBA_DOUBLE",
 
-        "VALUE_RGBA_INT",
+      "VALUE_RGBA_INT",
 
-        "VALUE_STRING",
+      "VALUE_STRING",
 
-        "VALUE_URI"
+      "VALUE_URI"
     );
   }
 
   @Test(enabled = false)
   public void byteProto() {
     generate(
-        "AT_MEDIA_END",
+      "AT_MEDIA_END",
 
-        "AT_MEDIA_MARK",
+      "AT_MEDIA_MARK",
 
-        "AT_MEDIA_START",
+      "AT_MEDIA_START",
 
-        // Declaration
+      // Declaration
 
-        "DECLARATION_END",
+      "DECLARATION_END",
 
-        "DECLARATION_MARK",
+      "DECLARATION_MARK",
 
-        "DECLARATION_MULTI_ELEMENT_MARK",
+      "DECLARATION_MULTI_ELEMENT_MARK",
 
-        "DECLARATION_MULTI_END",
+      "DECLARATION_MULTI_END",
 
-        "DECLARATION_MULTI_START",
+      "DECLARATION_MULTI_START",
 
-        "DECLARATION_START",
+      "DECLARATION_START",
 
-        // Function
+      // Function
 
-        "FUNCTION_END",
+      "FUNCTION_END",
 
-        "FUNCTION_START",
+      "FUNCTION_START",
 
-        // Root
+      // Root
 
-        "MEDIA_TYPE",
+      "MEDIA_TYPE",
 
-        "ROOT_END",
+      "ROOT_END",
 
-        "ROOT_START",
+      "ROOT_START",
 
-        // Rule
+      // Rule
 
-        "RULE_END",
+      "RULE_END",
 
-        "RULE_MARK",
+      "RULE_MARK",
 
-        // Selector
+      // Selector
 
-        "RULE_START",
+      "RULE_START",
 
-        "SELECTOR_ATTRIBUTE",
+      "SELECTOR_ATTRIBUTE",
 
-        "SELECTOR_ATTRIBUTE_MARK",
+      "SELECTOR_ATTRIBUTE_MARK",
 
-        "SELECTOR_ATTRIBUTE_VALUE",
+      "SELECTOR_ATTRIBUTE_VALUE",
 
-        "SELECTOR_ATTRIBUTE_VALUE_ELEMENT",
+      "SELECTOR_ATTRIBUTE_VALUE_ELEMENT",
 
-        "SELECTOR_ATTRIBUTE_VALUE_MARK",
+      "SELECTOR_ATTRIBUTE_VALUE_MARK",
 
-        "SELECTOR_CLASS",
+      "SELECTOR_CLASS",
 
-        "SELECTOR_CLASS_MARK",
+      "SELECTOR_CLASS_MARK",
 
-        "SELECTOR_CLASS_OBJ",
+      "SELECTOR_CLASS_OBJ",
 
-        "SELECTOR_COMBINATOR",
+      "SELECTOR_COMBINATOR",
 
-        "SELECTOR_ID",
+      "SELECTOR_ID",
 
-        "SELECTOR_ID_MARK",
+      "SELECTOR_ID_MARK",
 
-        "SELECTOR_ID_OBJ",
+      "SELECTOR_ID_OBJ",
 
-        "SELECTOR_PSEUDO_CLASS_OBJ",
+      "SELECTOR_PSEUDO_CLASS_OBJ",
 
-        "SELECTOR_PSEUDO_ELEMENT_OBJ",
+      "SELECTOR_PSEUDO_ELEMENT_OBJ",
 
-        "SELECTOR_TYPE_OBJ",
+      "SELECTOR_TYPE_OBJ",
 
-        // Value
+      // Value
 
-        "SELECTOR_UNIVERSAL_OBJ",
+      "SELECTOR_UNIVERSAL_OBJ",
 
-        "VALUE_ANGLE_DOUBLE",
+      "VALUE_ANGLE_DOUBLE",
 
-        "VALUE_ANGLE_DOUBLE_MARK",
+      "VALUE_ANGLE_DOUBLE_MARK",
 
-        "VALUE_ANGLE_INT",
+      "VALUE_ANGLE_INT",
 
-        "VALUE_ANGLE_INT_MARK",
+      "VALUE_ANGLE_INT_MARK",
 
-        "VALUE_COLOR_HEX",
+      "VALUE_COLOR_HEX",
 
-        "VALUE_COLOR_HEX_MARK",
+      "VALUE_COLOR_HEX_MARK",
 
-        "VALUE_COLOR_NAME",
+      "VALUE_COLOR_NAME",
 
-        "VALUE_DOUBLE",
+      "VALUE_DOUBLE",
 
-        "VALUE_DOUBLE_DSL",
+      "VALUE_DOUBLE_DSL",
 
-        "VALUE_DOUBLE_MARK",
+      "VALUE_DOUBLE_MARK",
 
-        "VALUE_FUNCTION_MARK",
+      "VALUE_FUNCTION_MARK",
 
-        "VALUE_INT",
+      "VALUE_INT",
 
-        "VALUE_INT_DSL",
+      "VALUE_INT_DSL",
 
-        "VALUE_INT_MARK",
+      "VALUE_INT_MARK",
 
-        "VALUE_KEYWORD",
+      "VALUE_KEYWORD",
 
-        "VALUE_KEYWORD_CUSTOM",
+      "VALUE_KEYWORD_CUSTOM",
 
-        "VALUE_KEYWORD_CUSTOM_MARK",
+      "VALUE_KEYWORD_CUSTOM_MARK",
 
-        "VALUE_LENGTH_DOUBLE",
+      "VALUE_LENGTH_DOUBLE",
 
-        "VALUE_LENGTH_DOUBLE_MARK",
+      "VALUE_LENGTH_DOUBLE_MARK",
 
-        "VALUE_LENGTH_INT",
+      "VALUE_LENGTH_INT",
 
-        "VALUE_LENGTH_INT_MARK",
+      "VALUE_LENGTH_INT_MARK",
 
-        "VALUE_PERCENTAGE_DOUBLE",
+      "VALUE_PERCENTAGE_DOUBLE",
 
-        "VALUE_PERCENTAGE_DOUBLE_MARK",
+      "VALUE_PERCENTAGE_DOUBLE_MARK",
 
-        "VALUE_PERCENTAGE_INT",
+      "VALUE_PERCENTAGE_INT",
 
-        "VALUE_PERCENTAGE_INT_MARK",
+      "VALUE_PERCENTAGE_INT_MARK",
 
-        "VALUE_RGB_DOUBLE",
+      "VALUE_RGB_DOUBLE",
 
-        "VALUE_RGB_DOUBLE_ALPHA",
+      "VALUE_RGB_DOUBLE_ALPHA",
 
-        "VALUE_RGB_DOUBLE_ALPHA_MARK",
+      "VALUE_RGB_DOUBLE_ALPHA_MARK",
 
-        "VALUE_RGB_DOUBLE_MARK",
+      "VALUE_RGB_DOUBLE_MARK",
 
-        "VALUE_RGB_INT",
+      "VALUE_RGB_INT",
 
-        "VALUE_RGB_INT_ALPHA",
+      "VALUE_RGB_INT_ALPHA",
 
-        "VALUE_RGB_INT_ALPHA_MARK",
+      "VALUE_RGB_INT_ALPHA_MARK",
 
-        "VALUE_RGB_INT_MARK",
+      "VALUE_RGB_INT_MARK",
 
-        "VALUE_RGBA_DOUBLE",
+      "VALUE_RGBA_DOUBLE",
 
-        "VALUE_RGBA_DOUBLE_MARK",
+      "VALUE_RGBA_DOUBLE_MARK",
 
-        "VALUE_RGBA_INT",
+      "VALUE_RGBA_INT",
 
-        "VALUE_RGBA_INT_MARK",
+      "VALUE_RGBA_INT_MARK",
 
-        "VALUE_STRING",
+      "VALUE_STRING",
 
-        "VALUE_STRING_DSL",
+      "VALUE_STRING_DSL",
 
-        "VALUE_STRING_MARK",
+      "VALUE_STRING_MARK",
 
-        "VALUE_URI",
+      "VALUE_URI",
 
-        "VALUE_URI_MARK"
+      "VALUE_URI_MARK"
     );
   }
 
   private void generate(String... names) {
     Set<String> tree;
-    tree = Sets.newTreeSet();
+    tree = new TreeSet<>();
 
     for (String name : names) {
       tree.add(name);

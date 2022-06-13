@@ -15,8 +15,8 @@
  */
 package br.com.objectos.parser.spec;
 
-import br.com.objectos.core.list.ImmutableList;
 import java.util.Objects;
+import objectos.util.ImmutableList;
 
 public abstract class NonTerminal extends AbstractSymbol implements Repeatable {
 

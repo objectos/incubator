@@ -15,7 +15,6 @@
  */
 package br.com.objectos.fs.watch;
 
-import br.com.objectos.core.map.MutableMap;
 import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.DirectoryContentsVisitor;
 import br.com.objectos.fs.RegularFile;
@@ -23,6 +22,7 @@ import br.com.objectos.fs.watch.Watch.Event;
 import java.io.IOException;
 import java.util.Map;
 import java.util.Set;
+import objectos.util.MutableMap;
 
 final class WatchDirectoryJava6 implements DirectoryContentsVisitor {
 

@@ -15,27 +15,27 @@
  */
 package br.com.objectos.mojo;
 
-import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.list.Lists;
 import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.RegularFile;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
 import objectos.lang.Check;
+import objectos.util.ImmutableList;
 import org.apache.maven.execution.MavenExecutionRequest;
 import org.apache.maven.settings.Mirror;
 import org.codehaus.plexus.util.Os;
 
 final class BuildRequest implements Request {
 
-  private final List<String> goals = Lists.newArrayList();
+  private final List<String> goals = new ArrayList<>();
 
   private File localRepository;
 
-  private final List<Mirror> mirrors = Lists.newArrayList();
+  private final List<Mirror> mirrors = new ArrayList<>();
 
   private File multiModuleProjectDirectory;
 

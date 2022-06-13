@@ -15,7 +15,7 @@ import static br.com.objectos.code.java.expression.MethodInvocationChain.chain;
 import static br.com.objectos.code.java.type.NamedTypes.t;
 
 import br.com.objectos.code.util.AbstractCodeJavaTest;
-import br.com.objectos.core.list.ImmutableList;
+import objectos.util.ImmutableList;
 import org.testng.annotations.Test;
 
 public class MethodInvocationChainTest extends AbstractCodeJavaTest {

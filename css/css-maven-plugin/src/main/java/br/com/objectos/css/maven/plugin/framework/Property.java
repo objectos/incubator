@@ -17,9 +17,9 @@ package br.com.objectos.css.maven.plugin.framework;
 
 import br.com.objectos.code.java.declaration.PackageName;
 import br.com.objectos.code.java.type.NamedClass;
-import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.list.MutableList;
 import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkGroup;
+import objectos.util.ImmutableList;
+import objectos.util.MutableList;
 
 class Property extends PropertyClass.Builder {
 

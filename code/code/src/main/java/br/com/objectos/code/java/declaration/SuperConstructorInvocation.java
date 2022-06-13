@@ -19,9 +19,9 @@ import br.com.objectos.code.annotations.Ignore;
 import br.com.objectos.code.java.element.CodeElement;
 import br.com.objectos.code.java.element.Keywords;
 import br.com.objectos.code.java.expression.Argument;
-import br.com.objectos.core.list.ImmutableList;
 import java.util.Arrays;
 import objectos.lang.Check;
+import objectos.util.ImmutableList;
 
 public class SuperConstructorInvocation extends AbstractConstructorInvocation {
 

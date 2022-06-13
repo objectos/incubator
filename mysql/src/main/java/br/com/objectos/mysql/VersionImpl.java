@@ -15,12 +15,12 @@
  */
 package br.com.objectos.mysql;
 
-import br.com.objectos.core.list.Lists;
 import br.com.objectos.fs.RegularFile;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.List;
 
 final class VersionImpl implements Version {
@@ -40,7 +40,7 @@ final class VersionImpl implements Version {
 
   static VersionImpl parse(RegularFile executable) throws IOException {
     List<String> command;
-    command = Lists.newArrayList();
+    command = new ArrayList<>();
 
     command.add(executable.getPath());
 
@@ -83,7 +83,7 @@ final class VersionImpl implements Version {
     } catch (InterruptedException interrupted) {
       Thread.currentThread().interrupt();
       throw new IOException(
-          "Interrupted while trying to parse version", interrupted);
+        "Interrupted while trying to parse version", interrupted);
     }
 
     if (exitValue != 0) {

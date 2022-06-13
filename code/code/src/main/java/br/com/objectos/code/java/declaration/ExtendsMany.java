@@ -16,7 +16,6 @@
 package br.com.objectos.code.java.declaration;
 
 import br.com.objectos.code.java.type.NamedClassOrParameterized;
-import br.com.objectos.core.list.Lists;
 import java.util.ArrayList;
 import objectos.lang.Check;
 
@@ -31,7 +30,7 @@ public class ExtendsMany implements InterfaceCodeElement {
   public static ExtendsMany _extends(
       Iterable<? extends NamedClassOrParameterized> interfaces) {
     Check.notNull(interfaces, "interfaces == null");
-    ArrayList<NamedClassOrParameterized> list = Lists.newArrayList();
+    ArrayList<NamedClassOrParameterized> list = new ArrayList<>();
 
     int i = 0;
     for (NamedClassOrParameterized iface : interfaces) {

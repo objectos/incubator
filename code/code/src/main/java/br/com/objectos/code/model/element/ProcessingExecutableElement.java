@@ -19,14 +19,14 @@ import br.com.objectos.code.java.declaration.AccessLevel;
 import br.com.objectos.code.java.declaration.Modifiers;
 import br.com.objectos.code.java.type.NamedTypeParameter;
 import br.com.objectos.code.processing.type.PTypeMirror;
-import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.list.MutableList;
 import java.util.List;
 import javax.annotation.processing.ProcessingEnvironment;
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.TypeParameterElement;
 import javax.lang.model.element.VariableElement;
 import javax.lang.model.type.TypeMirror;
+import objectos.util.ImmutableList;
+import objectos.util.MutableList;
 
 abstract class ProcessingExecutableElement
     extends ProcessingElement<ExecutableElement>

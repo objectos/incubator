@@ -15,10 +15,10 @@
  */
 package objectos.ssg;
 
-import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.http.media.MediaType;
 import java.io.IOException;
 import objectos.lang.Check;
+import objectos.util.ImmutableList;
 
 public abstract class SiteDirectory
     implements

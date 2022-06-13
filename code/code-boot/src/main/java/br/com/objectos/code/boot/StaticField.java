@@ -29,9 +29,9 @@ import br.com.objectos.code.java.type.NamedType;
 import br.com.objectos.code.model.element.ProcessingField;
 import br.com.objectos.code.model.element.ProcessingType;
 import br.com.objectos.code.processing.type.PTypeMirror;
-import br.com.objectos.core.list.ImmutableList;
-import br.com.objectos.core.list.MutableList;
 import objectos.lang.HashCode;
+import objectos.util.ImmutableList;
+import objectos.util.MutableList;
 
 final class StaticField {
 
@@ -108,8 +108,8 @@ final class StaticField {
 
   public final FieldCode generate() {
     return field(
-        _public(), _static(), _final(), typeName,
-        init(name, enclosingClassName.id(name))
+      _public(), _static(), _final(), typeName,
+      init(name, enclosingClassName.id(name))
     );
   }
 

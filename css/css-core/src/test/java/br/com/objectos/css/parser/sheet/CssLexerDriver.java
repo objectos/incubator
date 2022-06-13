@@ -17,10 +17,10 @@ package br.com.objectos.css.parser.sheet;
 
 import static org.testng.Assert.assertEquals;
 
-import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.css.parser.IsTerminal;
 import br.com.objectos.lexer.Analyzer;
 import br.com.objectos.lexer.UncheckedAnalyzer;
+import objectos.util.ImmutableList;
 
 class CssLexerDriver extends CssLexerDriverDef {
 

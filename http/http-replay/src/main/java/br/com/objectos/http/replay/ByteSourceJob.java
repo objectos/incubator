@@ -19,7 +19,6 @@ import br.com.objectos.concurrent.IoTask;
 import br.com.objectos.concurrent.IoWorker;
 import br.com.objectos.core.io.Charsets;
 import br.com.objectos.core.io.InputStreamSource;
-import br.com.objectos.core.map.Maps;
 import br.com.objectos.http.Body;
 import br.com.objectos.http.Body.Ignored;
 import br.com.objectos.http.Body.Text;
@@ -44,6 +43,7 @@ import java.nio.channels.SocketChannel;
 import java.nio.charset.Charset;
 import java.nio.charset.CharsetEncoder;
 import java.nio.charset.CoderResult;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.ZipEntry;
@@ -63,7 +63,7 @@ final class ByteSourceJob implements BodyVisitor, IoTask, Runnable {
 
   private final CharBuffer charBuffer;
 
-  private final Map<Charset, CharsetEncoder> charEncoderMap = Maps.newHashMapWithCapacity(4);
+  private final Map<Charset, CharsetEncoder> charEncoderMap = new HashMap<>(4);
 
   private State closeState;
 

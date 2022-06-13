@@ -19,9 +19,9 @@ import br.com.objectos.code.java.expression.Expressions;
 import br.com.objectos.code.java.expression.MethodReference;
 import br.com.objectos.code.java.expression.TypeWitness;
 import br.com.objectos.code.java.io.JavaFileImportSet;
-import br.com.objectos.core.list.ImmutableList;
 import objectos.lang.Check;
 import objectos.lang.HashCode;
+import objectos.util.ImmutableList;
 
 public final class NamedParameterized extends NamedClassOrParameterized {
 

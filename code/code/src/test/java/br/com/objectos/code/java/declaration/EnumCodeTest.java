@@ -36,8 +36,8 @@ import static br.com.objectos.code.java.type.NamedTypes.tvar;
 
 import br.com.objectos.code.java.element.Keywords;
 import br.com.objectos.code.util.AbstractCodeJavaTest;
-import br.com.objectos.core.list.ImmutableList;
 import java.io.Serializable;
+import objectos.util.ImmutableList;
 import org.testng.annotations.Test;
 
 public class EnumCodeTest extends AbstractCodeJavaTest {

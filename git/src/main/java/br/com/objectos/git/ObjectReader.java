@@ -15,8 +15,6 @@
  */
 package br.com.objectos.git;
 
-import br.com.objectos.core.set.ImmutableSet;
-import br.com.objectos.core.set.MutableSet;
 import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.NotRegularFileException;
 import br.com.objectos.fs.PathNameVisitor;
@@ -33,6 +31,8 @@ import objectos.lang.Check;
 import objectos.lang.Note0;
 import objectos.lang.Note1;
 import objectos.lang.Note2;
+import objectos.util.ImmutableSet;
+import objectos.util.MutableSet;
 
 /**
  * A state machine for reading Git objects from a repository. Supports:

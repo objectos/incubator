@@ -19,7 +19,7 @@ import static org.testng.Assert.assertEquals;
 
 import br.com.objectos.code.model.element.ProcessingMethod;
 import br.com.objectos.code.model.element.ProcessingType;
-import br.com.objectos.core.list.ImmutableList;
+import objectos.util.ImmutableList;
 import org.testng.annotations.Test;
 
 public class StaticMethodTest extends AbstractCodeBootTest {
@@ -30,10 +30,10 @@ public class StaticMethodTest extends AbstractCodeBootTest {
     method = getStaticMethod(Expressions.class, "id");
 
     test(
-        method.generate(),
-        "public static br.com.objectos.code.java.expression.Identifier id(java.lang.String name) {",
-        "  return br.com.objectos.code.boot.AbstractCodeBootTest.Expressions.id(name);",
-        "}"
+      method.generate(),
+      "public static br.com.objectos.code.java.expression.Identifier id(java.lang.String name) {",
+      "  return br.com.objectos.code.boot.AbstractCodeBootTest.Expressions.id(name);",
+      "}"
     );
   }
 
@@ -51,10 +51,10 @@ public class StaticMethodTest extends AbstractCodeBootTest {
     m1 = result.get(0);
 
     test(
-        m1.generate(),
-        "public static void m1() throws java.io.IOException {",
-        "  br.com.objectos.code.boot.TestCase01Factory.m1();",
-        "}"
+      m1.generate(),
+      "public static void m1() throws java.io.IOException {",
+      "  br.com.objectos.code.boot.TestCase01Factory.m1();",
+      "}"
     );
   }
 

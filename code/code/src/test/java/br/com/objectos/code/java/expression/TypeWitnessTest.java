@@ -12,7 +12,7 @@ import static br.com.objectos.code.java.type.NamedTypes.tvar;
 
 import br.com.objectos.code.java.type.NamedType;
 import br.com.objectos.code.util.AbstractCodeJavaTest;
-import br.com.objectos.core.list.ImmutableList;
+import objectos.util.ImmutableList;
 import org.testng.annotations.Test;
 
 public class TypeWitnessTest extends AbstractCodeJavaTest {

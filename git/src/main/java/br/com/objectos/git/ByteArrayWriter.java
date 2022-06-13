@@ -15,7 +15,6 @@
  */
 package br.com.objectos.git;
 
-import br.com.objectos.core.array.ByteArrays;
 import br.com.objectos.fs.WritablePathName;
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -26,6 +25,7 @@ import java.nio.charset.CharsetDecoder;
 import java.security.MessageDigest;
 import java.util.Arrays;
 import java.util.zip.Deflater;
+import objectos.util.ByteArrays;
 
 final class ByteArrayWriter {
 

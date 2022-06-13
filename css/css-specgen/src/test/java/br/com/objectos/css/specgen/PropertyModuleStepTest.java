@@ -18,9 +18,9 @@ package br.com.objectos.css.specgen;
 import static org.testng.Assert.assertEquals;
 
 import br.com.objectos.code.java.io.JavaFile;
-import br.com.objectos.core.map.ImmutableMap;
 import br.com.objectos.css.specgen.mdn.Mdn;
 import java.io.IOException;
+import objectos.util.ImmutableMap;
 import org.testng.annotations.Test;
 
 public class PropertyModuleStepTest extends AbstractCssSpecgenTest {

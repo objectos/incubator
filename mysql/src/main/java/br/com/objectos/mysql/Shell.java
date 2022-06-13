@@ -15,11 +15,11 @@
  */
 package br.com.objectos.mysql;
 
-import br.com.objectos.core.list.ImmutableList;
 import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.RegularFile;
 import java.io.IOException;
 import java.io.InputStream;
+import objectos.util.ImmutableList;
 
 final class Shell extends Executable {
 

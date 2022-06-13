@@ -18,14 +18,14 @@ package br.com.objectos.code.testing;
 import br.com.objectos.code.java.io.JavaFile;
 import br.com.objectos.code.java.io.JavaFileConsumer;
 import br.com.objectos.code.java.type.NamedClass;
-import br.com.objectos.core.map.Maps;
 import java.util.Map;
 import java.util.NoSuchElementException;
+import java.util.TreeMap;
 import objectos.lang.Check;
 
 public class InMemoryJavaFileConsumer implements JavaFileConsumer {
 
-  private final Map<String, JavaFile> map = Maps.newTreeMap();
+  private final Map<String, JavaFile> map = new TreeMap<>();
 
   @Override
   public final void acceptJavaFile(JavaFile javaFile) {

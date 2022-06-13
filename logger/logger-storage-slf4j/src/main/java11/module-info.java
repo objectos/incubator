@@ -20,8 +20,8 @@ module br.com.objectos.more.logging.slf4j {
   requires transitive br.com.objectos.logger;
   requires transitive org.slf4j;
 
-  requires br.com.objectos.core.list;
   requires objectos.lang;
+  requires objectos.util;
 
   provides org.slf4j.spi.SLF4JServiceProvider with org.slf4j.impl.SLF4JServiceProviderImpl;
 }
