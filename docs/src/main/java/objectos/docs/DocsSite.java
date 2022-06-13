@@ -30,13 +30,13 @@ import objectos.ssg.SitePath;
 
 public final class DocsSite extends Site {
 
-  public static final Class<? extends SitePath> INDEX = V0001.INDEX;
+  public static final Class<? extends SitePath> INDEX = V0002.INDEX;
 
-  public static final Class<? extends SitePath> WHAT = V0001.WHAT;
+  public static final Class<? extends SitePath> WHAT = V0002.WHAT;
 
   public static final Class<? extends SitePath> VERSIONS = Versions.class;
 
-  public static final String VERSION = V0001.VERSION;
+  public static final String VERSION = V0002.VERSION;
 
   @Override
   protected final void configure() {
