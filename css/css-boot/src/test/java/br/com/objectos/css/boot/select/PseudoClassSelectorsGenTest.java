@@ -29,60 +29,60 @@ public class PseudoClassSelectorsGenTest extends AbstractCssBootTest {
   public void generateJavaFile() {
     ImmutableMap<String, JavaFile> javaFiles;
     javaFiles = execute(
-        PseudoClassSelectorsGen::new,
-        new CssSpec() {
-          @Override
-          protected final void definition() {
-            pseudoClasses(
-                "checked",
-                "-moz-focusring"
-            );
-          }
+      PseudoClassSelectorsGen::new,
+      new CssSpec() {
+        @Override
+        protected final void definition() {
+          pseudoClasses(
+            "checked",
+            "-moz-focusring"
+          );
         }
+      }
     );
 
     assertEquals(javaFiles.size(), 1);
 
     testLines(
-        javaFiles.get("PseudoClassSelectors"),
-        "package br.com.objectos.css.select;",
-        "",
-        "import br.com.objectos.code.annotations.Generated;",
-        "import br.com.objectos.code.annotations.Ignore;",
-        "import br.com.objectos.core.map.ImmutableMap;",
-        "import br.com.objectos.core.map.MutableMap;",
-        "",
-        "@Generated(\"br.com.objectos.css.boot.select.PseudoClassSelectorsGen\")",
-        "public final class PseudoClassSelectors {",
-        "",
-        "  public static final PseudoClassSelector CHECKED = new PseudoClassSelector(0, \"checked\");",
-        "",
-        "  public static final PseudoClassSelector _MOZ_FOCUSRING = new PseudoClassSelector(1, \"-moz-focusring\");",
-        "",
-        "  private static final PseudoClassSelector[] ARRAY = new PseudoClassSelector[] {CHECKED, _MOZ_FOCUSRING};",
-        "",
-        "  private static final ImmutableMap<String, PseudoClassSelector> MAP = buildMap();",
-        "",
-        "  private PseudoClassSelectors() {}",
-        "",
-        "  @Ignore",
-        "  public static PseudoClassSelector getByCode(int code) {",
-        "    return ARRAY[code];",
-        "  }",
-        "",
-        "  @Ignore",
-        "  public static PseudoClassSelector getByName(String name) {",
-        "    return MAP.get(name);",
-        "  }",
-        "",
-        "  private static ImmutableMap<String, PseudoClassSelector> buildMap() {",
-        "    MutableMap<String, PseudoClassSelector> m = MutableMap.create();",
-        "    m.put(\"checked\", CHECKED);",
-        "    m.put(\"-moz-focusring\", _MOZ_FOCUSRING);",
-        "    return m.toImmutableMap();",
-        "  }",
-        "",
-        "}"
+      javaFiles.get("PseudoClassSelectors"),
+      "package br.com.objectos.css.select;",
+      "",
+      "import br.com.objectos.code.annotations.Generated;",
+      "import br.com.objectos.code.annotations.Ignore;",
+      "import objectos.util.ImmutableMap;",
+      "import objectos.util.MutableMap;",
+      "",
+      "@Generated(\"br.com.objectos.css.boot.select.PseudoClassSelectorsGen\")",
+      "public final class PseudoClassSelectors {",
+      "",
+      "  public static final PseudoClassSelector CHECKED = new PseudoClassSelector(0, \"checked\");",
+      "",
+      "  public static final PseudoClassSelector _MOZ_FOCUSRING = new PseudoClassSelector(1, \"-moz-focusring\");",
+      "",
+      "  private static final PseudoClassSelector[] ARRAY = new PseudoClassSelector[] {CHECKED, _MOZ_FOCUSRING};",
+      "",
+      "  private static final ImmutableMap<String, PseudoClassSelector> MAP = buildMap();",
+      "",
+      "  private PseudoClassSelectors() {}",
+      "",
+      "  @Ignore",
+      "  public static PseudoClassSelector getByCode(int code) {",
+      "    return ARRAY[code];",
+      "  }",
+      "",
+      "  @Ignore",
+      "  public static PseudoClassSelector getByName(String name) {",
+      "    return MAP.get(name);",
+      "  }",
+      "",
+      "  private static ImmutableMap<String, PseudoClassSelector> buildMap() {",
+      "    MutableMap<String, PseudoClassSelector> m = MutableMap.create();",
+      "    m.put(\"checked\", CHECKED);",
+      "    m.put(\"-moz-focusring\", _MOZ_FOCUSRING);",
+      "    return m.toImmutableMap();",
+      "  }",
+      "",
+      "}"
     );
   }
 

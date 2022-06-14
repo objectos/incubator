@@ -29,58 +29,58 @@ public class TypeSelectorsGenTest extends AbstractCssBootTest {
   public void generateJavaFile() {
     ImmutableMap<String, JavaFile> javaFiles;
     javaFiles = execute(
-        TypeSelectorsGen::new,
-        new CssSpec() {
-          @Override
-          protected final void definition() {
-            elementName("a");
-            elementName("div");
-          }
+      TypeSelectorsGen::new,
+      new CssSpec() {
+        @Override
+        protected final void definition() {
+          elementName("a");
+          elementName("div");
         }
+      }
     );
 
     assertEquals(javaFiles.size(), 1);
 
     testLines(
-        javaFiles.get("TypeSelectors"),
-        "package br.com.objectos.css.select;",
-        "",
-        "import br.com.objectos.code.annotations.Generated;",
-        "import br.com.objectos.code.annotations.Ignore;",
-        "import br.com.objectos.core.map.ImmutableMap;",
-        "import br.com.objectos.core.map.MutableMap;",
-        "",
-        "@Generated(\"br.com.objectos.css.boot.select.TypeSelectorsGen\")",
-        "public final class TypeSelectors {",
-        "",
-        "  public static final TypeSelector a = new TypeSelector(0, \"a\");",
-        "",
-        "  public static final TypeSelector div = new TypeSelector(1, \"div\");",
-        "",
-        "  private static final TypeSelector[] ARRAY = new TypeSelector[] {a, div};",
-        "",
-        "  private static final ImmutableMap<String, TypeSelector> MAP = buildMap();",
-        "",
-        "  private TypeSelectors() {}",
-        "",
-        "  @Ignore",
-        "  public static TypeSelector getByCode(int code) {",
-        "    return ARRAY[code];",
-        "  }",
-        "",
-        "  @Ignore",
-        "  public static TypeSelector getByName(String name) {",
-        "    return MAP.get(name);",
-        "  }",
-        "",
-        "  private static ImmutableMap<String, TypeSelector> buildMap() {",
-        "    MutableMap<String, TypeSelector> m = MutableMap.create();",
-        "    m.put(\"a\", a);",
-        "    m.put(\"div\", div);",
-        "    return m.toImmutableMap();",
-        "  }",
-        "",
-        "}"
+      javaFiles.get("TypeSelectors"),
+      "package br.com.objectos.css.select;",
+      "",
+      "import br.com.objectos.code.annotations.Generated;",
+      "import br.com.objectos.code.annotations.Ignore;",
+      "import objectos.util.ImmutableMap;",
+      "import objectos.util.MutableMap;",
+      "",
+      "@Generated(\"br.com.objectos.css.boot.select.TypeSelectorsGen\")",
+      "public final class TypeSelectors {",
+      "",
+      "  public static final TypeSelector a = new TypeSelector(0, \"a\");",
+      "",
+      "  public static final TypeSelector div = new TypeSelector(1, \"div\");",
+      "",
+      "  private static final TypeSelector[] ARRAY = new TypeSelector[] {a, div};",
+      "",
+      "  private static final ImmutableMap<String, TypeSelector> MAP = buildMap();",
+      "",
+      "  private TypeSelectors() {}",
+      "",
+      "  @Ignore",
+      "  public static TypeSelector getByCode(int code) {",
+      "    return ARRAY[code];",
+      "  }",
+      "",
+      "  @Ignore",
+      "  public static TypeSelector getByName(String name) {",
+      "    return MAP.get(name);",
+      "  }",
+      "",
+      "  private static ImmutableMap<String, TypeSelector> buildMap() {",
+      "    MutableMap<String, TypeSelector> m = MutableMap.create();",
+      "    m.put(\"a\", a);",
+      "    m.put(\"div\", div);",
+      "    return m.toImmutableMap();",
+      "  }",
+      "",
+      "}"
     );
   }
 

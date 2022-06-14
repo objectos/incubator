@@ -31,92 +31,92 @@ public class StandardPropertyNameStepTest extends AbstractCssBootTest {
   public void execute() {
     ImmutableMap<String, JavaFile> javaFiles;
     javaFiles = execute(
-        StandardPropertyNameStep::new,
-        new CssSpec() {
-          @Override
-          protected final void definition() {
-            KeywordName auto = keyword("auto");
-            KeywordName none = keyword("none");
+      StandardPropertyNameStep::new,
+      new CssSpec() {
+        @Override
+        protected final void definition() {
+          KeywordName auto = keyword("auto");
+          KeywordName none = keyword("none");
 
-            property(
-                "clear",
-                formal("", Source.MANUAL_ENTRY),
-                sig(t("ClearValue", none), "value")
-            );
+          property(
+            "clear",
+            formal("", Source.MANUAL_ENTRY),
+            sig(t("ClearValue", none), "value")
+          );
 
-            property(
-                "top",
-                formal("", Source.MANUAL_ENTRY),
-                sig(t("TopValue", auto), "value")
-            );
-          }
+          property(
+            "top",
+            formal("", Source.MANUAL_ENTRY),
+            sig(t("TopValue", auto), "value")
+          );
         }
+      }
     );
 
     assertEquals(javaFiles.size(), 1);
 
     testLines(
-        javaFiles.get("StandardPropertyName"),
-        "package br.com.objectos.css.property;",
-        "",
-        "import br.com.objectos.code.annotations.Generated;",
-        "import br.com.objectos.core.map.ImmutableMap;",
-        "import br.com.objectos.core.map.MutableMap;",
-        "",
-        "@Generated(\"br.com.objectos.css.boot.CssBoot\")",
-        "public enum StandardPropertyName implements PropertyName {",
-        "",
-        "  CLEAR(\"clear\", \"clear\"),",
-        "",
-        "  TOP(\"top\", \"top\");",
-        "",
-        "  private static final StandardPropertyName[] ARRAY = StandardPropertyName.values();",
-        "",
-        "  private static final ImmutableMap<String, StandardPropertyName> MAP = buildMap();",
-        "",
-        "  private final String javaName;",
-        "",
-        "  private final String name;",
-        "",
-        "  private StandardPropertyName(String javaName, String name) {",
-        "    this.javaName = javaName;",
-        "    this.name = name;",
-        "  }",
-        "",
-        "  public static StandardPropertyName getByCode(int code) {",
-        "    return ARRAY[code];",
-        "  }",
-        "",
-        "  public static StandardPropertyName getByName(String name) {",
-        "    return MAP.get(name);",
-        "  }",
-        "",
-        "  private static ImmutableMap<String, StandardPropertyName> buildMap() {",
-        "    MutableMap<String, StandardPropertyName> m = MutableMap.create();",
-        "    m.put(\"clear\", CLEAR);",
-        "    m.put(\"top\", TOP);",
-        "    return m.toImmutableMap();",
-        "  }",
-        "",
-        "  public static int size() {",
-        "    return ARRAY.length;",
-        "  }",
-        "",
-        "  @Override",
-        "  public final int getCode() {",
-        "    return ordinal();",
-        "  }",
-        "",
-        "  public final String getJavaName() {",
-        "    return javaName;",
-        "  }",
-        "",
-        "  @Override",
-        "  public final String getName() {",
-        "    return name;",
-        "  }",
-        "",
-        "}"
+      javaFiles.get("StandardPropertyName"),
+      "package br.com.objectos.css.property;",
+      "",
+      "import br.com.objectos.code.annotations.Generated;",
+      "import objectos.util.ImmutableMap;",
+      "import objectos.util.MutableMap;",
+      "",
+      "@Generated(\"br.com.objectos.css.boot.CssBoot\")",
+      "public enum StandardPropertyName implements PropertyName {",
+      "",
+      "  CLEAR(\"clear\", \"clear\"),",
+      "",
+      "  TOP(\"top\", \"top\");",
+      "",
+      "  private static final StandardPropertyName[] ARRAY = StandardPropertyName.values();",
+      "",
+      "  private static final ImmutableMap<String, StandardPropertyName> MAP = buildMap();",
+      "",
+      "  private final String javaName;",
+      "",
+      "  private final String name;",
+      "",
+      "  private StandardPropertyName(String javaName, String name) {",
+      "    this.javaName = javaName;",
+      "    this.name = name;",
+      "  }",
+      "",
+      "  public static StandardPropertyName getByCode(int code) {",
+      "    return ARRAY[code];",
+      "  }",
+      "",
+      "  public static StandardPropertyName getByName(String name) {",
+      "    return MAP.get(name);",
+      "  }",
+      "",
+      "  private static ImmutableMap<String, StandardPropertyName> buildMap() {",
+      "    MutableMap<String, StandardPropertyName> m = MutableMap.create();",
+      "    m.put(\"clear\", CLEAR);",
+      "    m.put(\"top\", TOP);",
+      "    return m.toImmutableMap();",
+      "  }",
+      "",
+      "  public static int size() {",
+      "    return ARRAY.length;",
+      "  }",
+      "",
+      "  @Override",
+      "  public final int getCode() {",
+      "    return ordinal();",
+      "  }",
+      "",
+      "  public final String getJavaName() {",
+      "    return javaName;",
+      "  }",
+      "",
+      "  @Override",
+      "  public final String getName() {",
+      "    return name;",
+      "  }",
+      "",
+      "}"
     );
   }
 

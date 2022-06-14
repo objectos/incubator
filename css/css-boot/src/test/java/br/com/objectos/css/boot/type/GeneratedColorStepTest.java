@@ -29,60 +29,60 @@ public class GeneratedColorStepTest extends AbstractCssBootTest {
   public void execute() {
     ImmutableMap<String, JavaFile> javaFiles;
     javaFiles = execute(
-        GeneratedColorStep::new,
-        new CssSpec() {
-          @Override
-          protected final void definition() {
-            namedColors("transparent", "ButtonText");
-          }
+      GeneratedColorStep::new,
+      new CssSpec() {
+        @Override
+        protected final void definition() {
+          namedColors("transparent", "ButtonText");
         }
+      }
     );
 
     assertEquals(javaFiles.size(), 1);
 
     testLines(
-        javaFiles.get("GeneratedColor"),
-        "package br.com.objectos.css.type;",
-        "",
-        "import br.com.objectos.code.annotations.Generated;",
-        "import br.com.objectos.core.map.ImmutableMap;",
-        "import br.com.objectos.core.map.MutableMap;",
-        "",
-        "@Generated(\"br.com.objectos.css.boot.CssBoot\")",
-        "abstract class GeneratedColor {",
-        "",
-        "  public static final ColorName ButtonText = new ColorName(0, \"ButtonText\");",
-        "",
-        "  public static final ColorName transparent = new ColorName(1, \"transparent\");",
-        "",
-        "  private static final ColorName[] ARRAY = new ColorName[] {ButtonText, transparent};",
-        "",
-        "  private static final ImmutableMap<String, ColorName> MAP = buildMap();",
-        "",
-        "  public static ColorName getByCode(int code) {",
-        "    return ARRAY[code];",
-        "  }",
-        "",
-        "  public static ColorName getByName(String name) {",
-        "    ColorName c = MAP.get(name);",
-        "    if (c == null) {",
-        "      throw new IllegalArgumentException(name);",
-        "    }",
-        "    return c;",
-        "  }",
-        "",
-        "  public static boolean isColor(String name) {",
-        "    return MAP.containsKey(name);",
-        "  }",
-        "",
-        "  private static ImmutableMap<String, ColorName> buildMap() {",
-        "    MutableMap<String, ColorName> m = MutableMap.create();",
-        "    m.put(\"ButtonText\", ButtonText);",
-        "    m.put(\"transparent\", transparent);",
-        "    return m.toImmutableMap();",
-        "  }",
-        "",
-        "}"
+      javaFiles.get("GeneratedColor"),
+      "package br.com.objectos.css.type;",
+      "",
+      "import br.com.objectos.code.annotations.Generated;",
+      "import objectos.util.ImmutableMap;",
+      "import objectos.util.MutableMap;",
+      "",
+      "@Generated(\"br.com.objectos.css.boot.CssBoot\")",
+      "abstract class GeneratedColor {",
+      "",
+      "  public static final ColorName ButtonText = new ColorName(0, \"ButtonText\");",
+      "",
+      "  public static final ColorName transparent = new ColorName(1, \"transparent\");",
+      "",
+      "  private static final ColorName[] ARRAY = new ColorName[] {ButtonText, transparent};",
+      "",
+      "  private static final ImmutableMap<String, ColorName> MAP = buildMap();",
+      "",
+      "  public static ColorName getByCode(int code) {",
+      "    return ARRAY[code];",
+      "  }",
+      "",
+      "  public static ColorName getByName(String name) {",
+      "    ColorName c = MAP.get(name);",
+      "    if (c == null) {",
+      "      throw new IllegalArgumentException(name);",
+      "    }",
+      "    return c;",
+      "  }",
+      "",
+      "  public static boolean isColor(String name) {",
+      "    return MAP.containsKey(name);",
+      "  }",
+      "",
+      "  private static ImmutableMap<String, ColorName> buildMap() {",
+      "    MutableMap<String, ColorName> m = MutableMap.create();",
+      "    m.put(\"ButtonText\", ButtonText);",
+      "    m.put(\"transparent\", transparent);",
+      "    return m.toImmutableMap();",
+      "  }",
+      "",
+      "}"
     );
   }
 
