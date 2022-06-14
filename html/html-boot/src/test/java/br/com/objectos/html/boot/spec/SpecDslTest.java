@@ -36,7 +36,7 @@ public class SpecDslTest extends AbstractHtmlBootTest {
     assertEquals(flow.name(), "flow");
 
     MutableList<String> names;
-    names = MutableList.create();
+    names = new MutableList<>();
 
     for (Child child : flow.childStream()) {
       names.add(child.name());
@@ -99,7 +99,7 @@ public class SpecDslTest extends AbstractHtmlBootTest {
 
   private Iterable<String> toName(Iterable<ElementSpec> specs) {
     MutableList<String> result;
-    result = MutableList.create();
+    result = new MutableList<>();
 
     for (ElementSpec spec : specs) {
       result.add(spec.name());

@@ -127,7 +127,7 @@ abstract class DeclarationMethodInvocation {
 
     private Simple current;
 
-    private final MutableList<Simple> elements = MutableList.create();
+    private final MutableList<Simple> elements = new MutableList<>();
 
     Multi(StandardPropertyName property, Simple first) {
       super(property);
@@ -140,7 +140,7 @@ abstract class DeclarationMethodInvocation {
       elements.add(current);
 
       MutableList<ArgumentsElement> arguments;
-      arguments = MutableList.create();
+      arguments = new MutableList<>();
 
       for (int i = 0; i < elements.size(); i++) {
         arguments.add(nl());
@@ -179,7 +179,7 @@ abstract class DeclarationMethodInvocation {
 
   private static class Simple extends DeclarationMethodInvocation {
 
-    private final MutableList<ArgumentsElement> arguments = MutableList.create();
+    private final MutableList<ArgumentsElement> arguments = new MutableList<>();
 
     Simple(StandardPropertyName property) {
       super(property);

@@ -47,7 +47,7 @@ final class TestCase05 extends StageGitCommand<ObjectId> {
       + "2) target=bare, loose objects only; "
       + "3) tree filtering";
 
-  private final MutableSet<ObjectId> blobsToCopy = MutableSet.create();
+  private final MutableSet<ObjectId> blobsToCopy = new MutableSet<>();
 
   private MaybeObjectId parentId;
 

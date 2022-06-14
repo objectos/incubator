@@ -58,11 +58,11 @@ import objectos.util.MutableList;
 
 public class KeywordsClassStep extends Step {
 
-  private final MutableList<VariableInitializer> constantNames = MutableList.create();
+  private final MutableList<VariableInitializer> constantNames = new MutableList<>();
 
-  private final MutableList<FieldCode> keywords = MutableList.create();
+  private final MutableList<FieldCode> keywords = new MutableList<>();
 
-  private final MutableList<BlockStatement> mapStatements = MutableList.create();
+  private final MutableList<BlockStatement> mapStatements = new MutableList<>();
 
   public KeywordsClassStep(StepAdapter adapter) {
     super(adapter);

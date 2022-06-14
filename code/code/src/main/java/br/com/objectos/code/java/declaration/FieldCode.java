@@ -139,11 +139,11 @@ public final class FieldCode extends AbstractImmutableCodeElement
 
   public static class Builder {
 
-    private final List<FieldCodeDeclarator> declarators = MutableList.create();
+    private final List<FieldCodeDeclarator> declarators = new MutableList<>();
 
-    private final MutableList<CodeElement> modifierSet = MutableList.create();
+    private final MutableList<CodeElement> modifierSet = new MutableList<>();
 
-    private final List<String> names = MutableList.create();
+    private final List<String> names = new MutableList<>();
 
     private NamedType typeName = NamedVoid._void();
 

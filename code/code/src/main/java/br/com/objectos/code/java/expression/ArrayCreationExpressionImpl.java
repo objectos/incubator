@@ -48,7 +48,7 @@ final class ArrayCreationExpressionImpl
 
   static ArrayCreationExpression _new0(
       NamedArray type, Iterable<? extends Expression> dims) {
-    MutableList<CodeElement> els = MutableList.create();
+    MutableList<CodeElement> els = new MutableList<>();
 
     els.add(Keywords._new());
     els.add(space());

@@ -42,7 +42,7 @@ public class FsMailStoreTest {
 
   @BeforeClass
   public void _setUp() {
-    directories = MutableList.create();
+    directories = new MutableList<>();
   }
 
   @AfterClass(alwaysRun = true)

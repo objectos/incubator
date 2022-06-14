@@ -118,7 +118,7 @@ public class ProcessingAnnotationValueTypeArrayTest extends AbstractProcessingAn
 
   private ImmutableList<NamedType> tn(List<PTypeMirror> iter) {
     MutableList<NamedType> result;
-    result = MutableList.create();
+    result = new MutableList<>();
 
     for (int i = 0; i < iter.size(); i++) {
       PTypeMirror modelType = iter.get(i);

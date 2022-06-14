@@ -67,7 +67,7 @@ public class PropertyPage extends Property.Builder {
 
   @Override
   protected final ImmutableList<ValueType> valueTypes() {
-    MutableList<ValueType> vt = MutableList.create();
+    MutableList<ValueType> vt = new MutableList<>();
 
     for (Element code : codeElements) {
       valueTypes0(vt, code);

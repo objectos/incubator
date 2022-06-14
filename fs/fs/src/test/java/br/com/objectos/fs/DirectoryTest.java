@@ -812,9 +812,9 @@ public class DirectoryTest extends AbstractObjectosFsTest {
 
   private static class CollectingNodeVisitor implements DirectoryContentsVisitor {
 
-    private final MutableList<Directory> directories = MutableList.create();
+    private final MutableList<Directory> directories = new MutableList<>();
 
-    private final MutableList<RegularFile> files = MutableList.create();
+    private final MutableList<RegularFile> files = new MutableList<>();
 
     @Override
     public final void visitDirectory(Directory directory) {

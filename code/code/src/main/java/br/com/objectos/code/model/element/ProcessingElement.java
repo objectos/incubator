@@ -173,7 +173,7 @@ public abstract class ProcessingElement<E extends Element>
   final ImmutableList<NamedTypeParameter>
       toNamedTypeParameter(List<? extends TypeParameterElement> elements) {
     MutableList<NamedTypeParameter> result;
-    result = MutableList.create();
+    result = new MutableList<>();
 
     for (int i = 0; i < elements.size(); i++) {
       TypeParameterElement element;
@@ -193,7 +193,7 @@ public abstract class ProcessingElement<E extends Element>
   }
 
   private ImmutableSet<Modifier> getModifiers0() {
-    MutableSet<Modifier> set = MutableSet.create();
+    MutableSet<Modifier> set = new MutableSet<>();
 
     for (javax.lang.model.element.Modifier modifier : element.getModifiers()) {
       set.add(Modifiers.of(modifier));

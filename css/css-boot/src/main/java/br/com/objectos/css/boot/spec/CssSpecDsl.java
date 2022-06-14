@@ -38,7 +38,7 @@ public class CssSpecDsl {
 
   private final Set<ColorName> colors = new TreeSet<>();
 
-  private final MutableSet<String> elementNames = MutableSet.create();
+  private final MutableSet<String> elementNames = new MutableSet<>();
 
   private final Map<String, FunctionName> functions = new TreeMap<>();
 
@@ -47,7 +47,7 @@ public class CssSpecDsl {
   private final Map<Primitive, PrimitiveType> primitives
       = new EnumMap<Primitive, PrimitiveType>(Primitive.class);
 
-  private final MutableSet<String> properties = MutableSet.create();
+  private final MutableSet<String> properties = new MutableSet<>();
 
   private final Step step;
 

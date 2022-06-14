@@ -35,7 +35,7 @@ class NamedArguments extends NamedValue {
   @Override
   public final MethodInvocation invokePropertyMethod(String methodName) {
     MutableList<Argument> arguments;
-    arguments = MutableList.create();
+    arguments = new MutableList<>();
 
     for (Value v : values) {
       Argument argument = toArgument(v);

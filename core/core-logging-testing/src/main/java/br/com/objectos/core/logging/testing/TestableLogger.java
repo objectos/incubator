@@ -34,7 +34,7 @@ import objectos.util.MutableList;
  */
 public final class TestableLogger implements NoteSink {
 
-  private final MutableList<Log> logs = MutableList.create();
+  private final MutableList<Log> logs = new MutableList<>();
 
   private boolean sysout;
 
@@ -126,7 +126,7 @@ public final class TestableLogger implements NoteSink {
     Check.notNull(level, "level == null");
 
     MutableList<Log> result;
-    result = MutableList.create();
+    result = new MutableList<>();
 
     for (int i = 0, size = logs.size(); i < size; i++) {
       Log l;

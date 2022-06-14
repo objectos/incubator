@@ -26,7 +26,7 @@ final class RandomIdSelectorGenerator {
 
   private static final int MAX_TRIES = 20;
 
-  private static final Set<String> NAMES = MutableSet.create();
+  private static final Set<String> NAMES = new MutableSet<>();
 
   private RandomIdSelectorGenerator() {}
 

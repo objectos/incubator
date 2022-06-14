@@ -86,7 +86,7 @@ public class ServicesProcessor extends AbstractProcessingRoundProcessor {
     implementationList = servicesMap.get(serviceName);
 
     if (implementationList == null) {
-      implementationList = MutableList.create();
+      implementationList = new MutableList<>();
 
       servicesMap.put(serviceName, implementationList);
     }

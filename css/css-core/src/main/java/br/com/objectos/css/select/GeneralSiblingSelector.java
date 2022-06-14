@@ -70,7 +70,7 @@ public class GeneralSiblingSelector extends Selector implements ComplexSelector 
 
   @Override
   final GeneralSiblingSelector newGeneralSiblingSelectorWithPrevious(Selector previous) {
-    MutableList<Selector> newSelectors = MutableList.create();
+    MutableList<Selector> newSelectors = new MutableList<>();
     newSelectors.add(previous);
     newSelectors.addAll(selectors);
     return new GeneralSiblingSelector(newSelectors.toImmutableList());

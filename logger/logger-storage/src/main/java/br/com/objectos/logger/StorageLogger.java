@@ -186,7 +186,7 @@ public final class StorageLogger extends AbstractConfigurableLogger {
 
     private final IoWorker ioWorker;
 
-    private final MutableList<LogListener> listeners = MutableList.create();
+    private final MutableList<LogListener> listeners = new MutableList<>();
 
     private final Storage storage;
 

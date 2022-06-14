@@ -41,7 +41,7 @@ public final class MutableTree extends MutableTreeEntry {
 
   private byte[] contents;
 
-  private final MutableList<MutableTreeEntry> entries = MutableList.create();
+  private final MutableList<MutableTreeEntry> entries = new MutableList<>();
 
   private final String name;
 

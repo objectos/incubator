@@ -149,7 +149,7 @@ public abstract class AnnotatedElementOrType {
   protected final ImmutableList<ProcessingAnnotation> toProcessingAnnotationImmutableList(
       List<? extends AnnotationMirror> mirrors) {
     MutableList<ProcessingAnnotation> list;
-    list = MutableList.create();
+    list = new MutableList<>();
 
     for (int i = 0; i < mirrors.size(); i++) {
       AnnotationMirror mirror;

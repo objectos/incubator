@@ -53,7 +53,7 @@ import org.testng.annotations.BeforeMethod;
 
 public abstract class AbstractReplayTest {
 
-  final MutableList<String> log = MutableList.create();
+  final MutableList<String> log = new MutableList<>();
 
   Header.Cookie parsedCookie;
 

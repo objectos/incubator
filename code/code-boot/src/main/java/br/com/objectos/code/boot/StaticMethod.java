@@ -48,7 +48,7 @@ final class StaticMethod {
 
   static ImmutableList<StaticMethod> listOf(ProcessingType type) {
     MutableList<StaticMethod> result;
-    result = MutableList.create();
+    result = new MutableList<>();
 
     ImmutableList<ProcessingMethod> methods;
     methods = type.getDeclaredOrInheritedMethods();
@@ -110,7 +110,7 @@ final class StaticMethod {
     b.name(methodName);
 
     MutableList<Identifier> names;
-    names = MutableList.create();
+    names = new MutableList<>();
 
     ImmutableList<ProcessingParameter> parameters;
     parameters = method.getParameters();

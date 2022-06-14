@@ -41,7 +41,7 @@ class NioResponseWriter
 
   private MessageBody body = MessageBody.empty();
 
-  private final MutableList<Header> headerList = MutableList.create();
+  private final MutableList<Header> headerList = new MutableList<>();
   private final CanOpenSocketWriter socket;
   private StatusCode status;
 

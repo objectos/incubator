@@ -50,7 +50,7 @@ class Property extends PropertyClass.Builder {
   @Override
   final ImmutableList<PropertyAtMedia> queries() {
     MutableList<PropertyAtMedia> medias;
-    medias = MutableList.create();
+    medias = new MutableList<>();
 
     for (NamedAtMedia query : queries) {
       PropertyAtMedia m = toPropertyMediaQuery(query);
@@ -78,8 +78,8 @@ class Property extends PropertyClass.Builder {
     private final PackageName packageName;
 
     private Prefix prefix;
-    private final MutableList<NamedAtMedia> queries = MutableList.create();
-    private final MutableList<NamedValue> values = MutableList.create();
+    private final MutableList<NamedAtMedia> queries = new MutableList<>();
+    private final MutableList<NamedValue> values = new MutableList<>();
 
     Builder(PackageName packageName, FrameworkGroup group) {
       this.packageName = packageName;
@@ -112,7 +112,7 @@ class Property extends PropertyClass.Builder {
 
     final ImmutableList<PropertyStyle> styles() {
       MutableList<PropertyStyle> builder;
-      builder = MutableList.create();
+      builder = new MutableList<>();
 
       for (int i = 0; i < values.size(); i++) {
         NamedValue value;

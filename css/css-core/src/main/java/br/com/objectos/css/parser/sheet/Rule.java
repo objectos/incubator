@@ -51,7 +51,7 @@ final class Rule implements IsNonTerminal {
 
   final void acceptStyleSheetDsl(StyleSheetDsl dsl) {
     MutableList<RuleElement> elements;
-    elements = MutableList.create();
+    elements = new MutableList<>();
 
     selector.acceptRuleElementList(elements);
 

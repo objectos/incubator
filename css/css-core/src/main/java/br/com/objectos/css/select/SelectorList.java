@@ -98,7 +98,7 @@ public class SelectorList extends Selector implements Iterable<Selector>, Select
 
   @Override
   final SelectorList newSelectorListWithHead(Selector head) {
-    MutableList<Selector> newList = MutableList.create();
+    MutableList<Selector> newList = new MutableList<>();
     newList.add(head);
     newList.addAll(list);
     return new SelectorList(newList.toImmutableList());

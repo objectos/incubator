@@ -96,7 +96,7 @@ public class ChildSelector extends Selector
 
   @Override
   final ChildSelector newChildSelectorWithParent(Selector parent) {
-    MutableList<Selector> newSelectors = MutableList.create();
+    MutableList<Selector> newSelectors = new MutableList<>();
     newSelectors.add(parent);
     newSelectors.addAll(selectors);
     return new ChildSelector(newSelectors.toImmutableList());

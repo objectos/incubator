@@ -133,7 +133,7 @@ public class ProcessingRoundTest {
   @Test
   public void reprocessIfPossible_packages() {
     final MutableList<RoundClassName> result;
-    result = MutableList.create();
+    result = new MutableList<>();
 
     class ClassArrayAnnotationProcesssor extends ReprocessorProcessor {
       @Override
@@ -189,7 +189,7 @@ public class ProcessingRoundTest {
   @Test
   public void reprocessIfPossible_types() {
     final MutableList<RoundClassName> result;
-    result = MutableList.create();
+    result = new MutableList<>();
 
     class ClassArrayAnnotationProcesssor extends ReprocessorProcessor {
       @Override

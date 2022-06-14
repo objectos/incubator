@@ -124,7 +124,7 @@ public final class PDeclaredType extends PTypeMirror {
         return rawName;
       default:
         MutableList<NamedType> argumentNames;
-        argumentNames = MutableList.create();
+        argumentNames = new MutableList<>();
 
         for (int i = 0; i < size; i++) {
           PTypeMirror typeArgument;
@@ -152,7 +152,7 @@ public final class PDeclaredType extends PTypeMirror {
         return ImmutableList.of();
       default:
         MutableList<PTypeMirror> result;
-        result = MutableList.create();
+        result = new MutableList<>();
 
         for (int i = 0; i < size; i++) {
           TypeMirror typeArgument;

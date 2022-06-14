@@ -82,7 +82,7 @@ public final class GitEngine extends GitInjector {
 
   private CpuTask currentCpuTask;
 
-  private final Map<Charset, DecoderBucket> decoderMap = MutableMap.create();
+  private final Map<Charset, DecoderBucket> decoderMap = new MutableMap<>();
 
   private Deflater deflater;
 
@@ -710,7 +710,7 @@ public final class GitEngine extends GitInjector {
   @SuppressWarnings("unchecked")
   final <E> MutableList<E> getMutableList() {
     if (mutableLists.isEmpty()) {
-      return MutableList.create();
+      return new MutableList<>();
     }
 
     MutableList<Object> list;
@@ -725,7 +725,7 @@ public final class GitEngine extends GitInjector {
   @Override
   final <E> MutableSet<E> getMutableSet() {
     if (mutableSets.isEmpty()) {
-      return MutableSet.create();
+      return new MutableSet<>();
     }
 
     MutableSet<Object> set;

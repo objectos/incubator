@@ -753,7 +753,7 @@ public class ObjectReaderTest extends AbstractGitTest {
 
     private final Set<ObjectId> objects;
 
-    private final MutableSet<ObjectId> result = MutableSet.create();
+    private final MutableSet<ObjectId> result = new MutableSet<>();
 
     FilterNonExistingAdapter(GitRepository repository, Set<ObjectId> objects) {
       super(repository);

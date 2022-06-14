@@ -50,7 +50,7 @@ class ProcessingAnnotationValueAnnotationArray extends ProcessingAnnotationValue
   private static ImmutableList<ProcessingAnnotation> toAnnotationArray(
       ProcessingAnnotation annotation, List<? extends AnnotationValue> array) {
     MutableList<ProcessingAnnotation> result;
-    result = MutableList.create();
+    result = new MutableList<>();
 
     for (int i = 0; i < array.size(); i++) {
       AnnotationValue annotationValue;

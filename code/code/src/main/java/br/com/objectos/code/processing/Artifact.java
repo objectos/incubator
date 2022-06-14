@@ -70,7 +70,7 @@ public abstract class Artifact {
 
   public static class Builder {
 
-    private final MutableList<Artifact> list = MutableList.create();
+    private final MutableList<Artifact> list = new MutableList<>();
 
     private Builder() {}
 

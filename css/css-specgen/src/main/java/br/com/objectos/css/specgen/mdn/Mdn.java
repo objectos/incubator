@@ -88,7 +88,7 @@ public class Mdn {
   }
 
   private static ImmutableList<ValueType> loadValueTypes(String property) throws IOException {
-    MutableList<ValueType> types = MutableList.create();
+    MutableList<ValueType> types = new MutableList<>();
 
     Resource resource = Resource.getResource("mdn/" + property);
 

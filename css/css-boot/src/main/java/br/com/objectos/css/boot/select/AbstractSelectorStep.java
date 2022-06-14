@@ -60,9 +60,9 @@ import objectos.util.MutableList;
 
 abstract class AbstractSelectorStep extends Step {
 
-  private final MutableList<VariableInitializer> constantNames = MutableList.create();
-  private final MutableList<FieldCode> fields = MutableList.create();
-  private final MutableList<BlockStatement> mapStatements = MutableList.create();
+  private final MutableList<VariableInitializer> constantNames = new MutableList<>();
+  private final MutableList<FieldCode> fields = new MutableList<>();
+  private final MutableList<BlockStatement> mapStatements = new MutableList<>();
 
   AbstractSelectorStep(StepAdapter adapter) {
     super(adapter);

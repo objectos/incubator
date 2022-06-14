@@ -19,7 +19,7 @@ import objectos.util.MutableList;
 
 public class SelectorListBuilder {
 
-  private final MutableList<Selector> list = MutableList.create();
+  private final MutableList<Selector> list = new MutableList<>();
 
   public SelectorListBuilder() {}
 

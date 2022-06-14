@@ -35,7 +35,7 @@ final class TestCase06 extends StageGitCommand<ObjectId> {
 
   static final String DESCRIPTION = "Change author/committer of a commit during a copy operation";
 
-  private final MutableSet<ObjectId> blobsToCopy = MutableSet.create();
+  private final MutableSet<ObjectId> blobsToCopy = new MutableSet<>();
 
   private MaybeObjectId parentId;
 

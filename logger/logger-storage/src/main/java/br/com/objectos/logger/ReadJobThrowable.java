@@ -31,7 +31,7 @@ final class ReadJobThrowable {
 
   final void addSuppressed(ReadJobThrowable throwable) {
     if (suppressed == null) {
-      suppressed = MutableList.create();
+      suppressed = new MutableList<>();
     }
 
     suppressed.add(throwable);

@@ -87,7 +87,7 @@ public class JdtCompilerTest {
 
       public final ImmutableList<String> getAbstractMethodNames() {
         MutableList<String> result;
-        result = MutableList.create();
+        result = new MutableList<>();
 
         for (int i = 0; i < methods.size(); i++) {
           ProcessingMethod method;

@@ -64,7 +64,7 @@ final class WatchServiceJava6 extends Thread implements Watch.Service {
 
   static final class Builder implements Watch.ServiceBuilder {
 
-    private final Map<Directory, WatchDirectoryJava6> directories = MutableMap.create();
+    private final Map<Directory, WatchDirectoryJava6> directories = new MutableMap<>();
 
     public final Watch.Service build() {
       Collection<WatchDirectoryJava6> values;

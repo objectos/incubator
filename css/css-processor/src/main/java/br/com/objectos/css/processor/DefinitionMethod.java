@@ -45,7 +45,7 @@ import objectos.util.MutableList;
 
 class DefinitionMethod implements CompiledStyleSheetVisitor<RuntimeException> {
 
-  private final MutableList<BlockStatement> statements = MutableList.create();
+  private final MutableList<BlockStatement> statements = new MutableList<>();
   private StyleMethodInvocation style;
 
   private DefinitionMethod() {}

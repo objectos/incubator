@@ -28,7 +28,7 @@ public class JavaFileImportSet extends ImportSet {
 
   private final Set<NamedClass> qualifiedNameSet = new TreeSet<>();
 
-  private final Set<String> simpleNameSet = MutableSet.create();
+  private final Set<String> simpleNameSet = new MutableSet<>();
 
   JavaFileImportSet(PackageName packageName) {
     this.packageName = packageName;

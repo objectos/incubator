@@ -292,9 +292,9 @@ public final class AnnotationCode
 
     private Mode mode = Mode.MARKER;
 
-    private final Set<String> names = MutableSet.create();
+    private final Set<String> names = new MutableSet<>();
 
-    private final List<AnnotationCodeValuePair> pairs = MutableList.create();
+    private final List<AnnotationCodeValuePair> pairs = new MutableList<>();
 
     private Builder() {}
 

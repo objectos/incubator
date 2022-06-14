@@ -98,7 +98,7 @@ abstract class AbstractHttpParser<H extends Header> implements CpuTask, IoTask {
 
   private Action parseToEolAction;
 
-  private final MutableList<H> resultHeaders = MutableList.create();
+  private final MutableList<H> resultHeaders = new MutableList<>();
 
   private final StringBuilder stringBuilder = new StringBuilder();
 

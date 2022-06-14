@@ -35,7 +35,7 @@ public final class InterfaceExtends extends AbstractImmutableCodeElement {
 
   public static class Builder {
 
-    private final MutableList<NamedClassOrParameterized> interfaces = MutableList.create();
+    private final MutableList<NamedClassOrParameterized> interfaces = new MutableList<>();
 
     private Builder() {}
 

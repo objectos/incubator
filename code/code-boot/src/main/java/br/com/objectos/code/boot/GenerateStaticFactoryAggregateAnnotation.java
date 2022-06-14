@@ -136,7 +136,7 @@ final class GenerateStaticFactoryAggregateAnnotation implements ToString.Formatt
 
     @Override
     final ImmutableList<FactoryType> factoryTypes() {
-      MutableList<FactoryType> result = MutableList.create();
+      MutableList<FactoryType> result = new MutableList<>();
 
       ProcessingAnnotationValue factoriesValue;
       factoriesValue = annotation.getDeclaredOrDefaultValue("factories");

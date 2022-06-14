@@ -347,7 +347,7 @@ public class MethodInvocationChain extends AbstractStatementExpression
 
   public static class Builder {
 
-    private final MutableList<CodeElement> elements = MutableList.create();
+    private final MutableList<CodeElement> elements = new MutableList<>();
     private Callee start;
 
     public final Builder addMethodInvocation(Unqualified invocation) {

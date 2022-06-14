@@ -92,7 +92,7 @@ public class StandardPropertyNameStepTest extends AbstractCssBootTest {
       "  }",
       "",
       "  private static ImmutableMap<String, StandardPropertyName> buildMap() {",
-      "    MutableMap<String, StandardPropertyName> m = MutableMap.create();",
+      "    MutableMap<String, StandardPropertyName> m = new MutableMap<>();",
       "    m.put(\"clear\", CLEAR);",
       "    m.put(\"top\", TOP);",
       "    return m.toImmutableMap();",

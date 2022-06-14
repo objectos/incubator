@@ -43,9 +43,9 @@ final class TestCase10 extends StageGitCommand<ObjectId> {
 
   private final Map<ObjectId, String> blobNames = new HashMap<>();
 
-  private final MutableSet<ObjectId> blobsToCopy = MutableSet.create();
+  private final MutableSet<ObjectId> blobsToCopy = new MutableSet<>();
 
-  private final MutableSet<ObjectId> blobsToRead = MutableSet.create();
+  private final MutableSet<ObjectId> blobsToRead = new MutableSet<>();
 
   private Commit parentCommit;
 

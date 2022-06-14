@@ -108,11 +108,11 @@ public final class Tools {
 
     private final CompilationJavaFileManager fileManager;
 
-    private final MutableList<JavaFileObject> javaFiles = MutableList.create();
+    private final MutableList<JavaFileObject> javaFiles = new MutableList<>();
 
-    private final MutableList<JavacOption> options = MutableList.create();
+    private final MutableList<JavacOption> options = new MutableList<>();
 
-    private final MutableList<Processor> processors = MutableList.create();
+    private final MutableList<Processor> processors = new MutableList<>();
 
     private final StringWriter stdout;
 

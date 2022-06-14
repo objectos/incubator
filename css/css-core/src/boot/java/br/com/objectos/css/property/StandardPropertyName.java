@@ -261,7 +261,7 @@ public enum StandardPropertyName implements PropertyName {
   }
 
   private static ImmutableMap<String, StandardPropertyName> buildMap() {
-    MutableMap<String, StandardPropertyName> m = MutableMap.create();
+    MutableMap<String, StandardPropertyName> m = new MutableMap<>();
     m.put("-moz-appearance", _MOZ_APPEARANCE);
     m.put("-webkit-appearance", _WEBKIT_APPEARANCE);
     m.put("-webkit-text-size-adjust", _WEBKIT_TEXT_SIZE_ADJUST);

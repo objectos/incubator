@@ -84,7 +84,7 @@ final class IncrementalRestore extends AbstractClientJob<ImmutableList<String>> 
 
   private Directory tempDirectory;
 
-  private final MutableList<RegularFile> uncompressedFiles = MutableList.create();
+  private final MutableList<RegularFile> uncompressedFiles = new MutableList<>();
 
   private final Directory workDirectory;
 

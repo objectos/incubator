@@ -128,7 +128,7 @@ class Interpreter {
         );
         break;
       default:
-        MutableList<String> values = MutableList.create();
+        MutableList<String> values = new MutableList<>();
         for (int i = 0; i < valueCount; i++) {
           values.add(
               getBuffer(getCurrentAttr(), getCurrentAttr())

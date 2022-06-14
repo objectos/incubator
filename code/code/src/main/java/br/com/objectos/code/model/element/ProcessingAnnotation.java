@@ -246,7 +246,7 @@ public class ProcessingAnnotation
 
   private ImmutableMap<String, DeclaredOrDefault> getDeclaredOrDefaultMap0() {
     MutableMap<String, DeclaredOrDefault> map;
-    map = MutableMap.create();
+    map = new MutableMap<>();
 
     Map<? extends ExecutableElement, ? extends AnnotationValue> declaredValues;
     declaredValues = annotation.getElementValues();

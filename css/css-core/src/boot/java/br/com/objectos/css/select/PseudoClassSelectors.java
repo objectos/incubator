@@ -119,7 +119,7 @@ public final class PseudoClassSelectors {
   }
 
   private static ImmutableMap<String, PseudoClassSelector> buildMap() {
-    MutableMap<String, PseudoClassSelector> m = MutableMap.create();
+    MutableMap<String, PseudoClassSelector> m = new MutableMap<>();
     m.put("active", ACTIVE);
     m.put("any-link", ANY_LINK);
     m.put("blank", BLANK);

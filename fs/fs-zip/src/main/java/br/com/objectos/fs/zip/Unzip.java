@@ -84,7 +84,7 @@ public final class Unzip {
     namePart = new StringBuilder();
 
     MutableList<String> nameParts;
-    nameParts = MutableList.create();
+    nameParts = new MutableList<>();
 
     ThisVisitor thisVisitor;
     thisVisitor = new ThisVisitor();

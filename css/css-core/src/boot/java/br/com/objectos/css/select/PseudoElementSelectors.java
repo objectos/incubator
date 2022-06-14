@@ -57,7 +57,7 @@ public final class PseudoElementSelectors {
   }
 
   private static ImmutableMap<String, PseudoElementSelector> buildMap() {
-    MutableMap<String, PseudoElementSelector> m = MutableMap.create();
+    MutableMap<String, PseudoElementSelector> m = new MutableMap<>();
     m.put("after", AFTER);
     m.put("backdrop", BACKDROP);
     m.put("before", BEFORE);

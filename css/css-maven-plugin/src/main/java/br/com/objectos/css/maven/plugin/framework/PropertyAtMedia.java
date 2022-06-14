@@ -90,7 +90,7 @@ class PropertyAtMedia {
 
   public class Invocation implements MediaType.Visitor {
 
-    private final MutableList<ArgumentsElement> arguments = MutableList.create();
+    private final MutableList<ArgumentsElement> arguments = new MutableList<>();
 
     public final void addArgument(Argument argument) {
       arguments.add(argument);

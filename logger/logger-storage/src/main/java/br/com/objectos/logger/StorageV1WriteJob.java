@@ -124,7 +124,7 @@ final class StorageV1WriteJob implements IoTask, CpuTask, WriteJob {
 
   private String writeString;
 
-  private final MutableList<String> writeStringList = MutableList.create();
+  private final MutableList<String> writeStringList = new MutableList<>();
 
   private int writeStringListIndex;
 

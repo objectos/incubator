@@ -32,7 +32,7 @@ import objectos.util.MutableList;
 public class StringResponseWriter implements ResponseWriter, MessageBodyDsl {
 
   private MessageBody body = MessageBody.empty();
-  private final MutableList<Header> headerList = MutableList.create();
+  private final MutableList<Header> headerList = new MutableList<>();
   private StatusCode status;
   private final StringSocketWriter writer = new StringSocketWriter();
 

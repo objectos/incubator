@@ -106,7 +106,7 @@ public final class JavaFile {
 
     private PackageName packageName = PackageName.unnamed();
 
-    private final MutableList<TypeCode> types = MutableList.create();
+    private final MutableList<TypeCode> types = new MutableList<>();
 
     private Builder() {}
 

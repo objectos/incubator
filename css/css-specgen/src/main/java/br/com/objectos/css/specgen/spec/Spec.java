@@ -45,7 +45,7 @@ public class Spec {
 
   public static class Builder {
 
-    private final MutableMap<String, Property> properties = MutableOrderedMap.create();
+    private final MutableMap<String, Property> properties = new MutableOrderedMap<>();
 
     public final Builder addProperty(Property property) {
       properties.put(property.name(), property);
@@ -54,7 +54,7 @@ public class Spec {
 
     public Spec build() {
       return new Spec(
-          properties.toImmutableMap()
+        properties.toImmutableMap()
       );
     }
 

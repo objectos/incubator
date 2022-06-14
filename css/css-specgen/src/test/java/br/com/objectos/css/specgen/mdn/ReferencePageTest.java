@@ -46,7 +46,7 @@ public class ReferencePageTest {
     ReferencePage page = BaseUrlFake.LOCALHOST.getReferencePage(document);
 
     MutableSet<String> props;
-    props = MutableSet.create();
+    props = new MutableSet<>();
 
     Iterable<PropertyAnchor> crawl = page.crawl();
 

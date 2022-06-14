@@ -35,7 +35,7 @@ public class Expression {
 
   static Expression of(Symbol... symbols) {
     Objects.requireNonNull(symbols);
-    MutableList<Symbol> list = MutableList.create();
+    MutableList<Symbol> list = new MutableList<>();
 
     for (Symbol symbol : symbols) {
       list.add(Objects.requireNonNull(symbol));

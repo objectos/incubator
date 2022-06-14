@@ -104,7 +104,7 @@ public class Code0021Test {
 
   private static class Code0021Processor extends AbstractProcessingRoundProcessor {
 
-    private final MutableList<String> nameList = MutableList.create();
+    private final MutableList<String> nameList = new MutableList<>();
 
     @Override
     public final Set<String> getSupportedAnnotationTypes() {

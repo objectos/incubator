@@ -50,7 +50,7 @@ class ProcessingAnnotationValueEnumConstantArray extends ProcessingAnnotationVal
   private static ImmutableList<ProcessingEnumConstant> toEnumConstant(
       ProcessingAnnotation annotation, List<? extends AnnotationValue> array) {
     MutableList<ProcessingEnumConstant> result;
-    result = MutableList.create();
+    result = new MutableList<>();
 
     for (int i = 0; i < array.size(); i++) {
       AnnotationValue annotationValue;

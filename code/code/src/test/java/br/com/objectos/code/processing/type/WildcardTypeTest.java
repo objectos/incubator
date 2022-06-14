@@ -70,7 +70,7 @@ public class WildcardTypeTest extends AbstractCodeCoreTest {
 
   private ImmutableList<TypeMirror> capture(List<? extends VariableElement> parameters) {
     MutableList<TypeMirror> result;
-    result = MutableList.create();
+    result = new MutableList<>();
 
     Types types;
     types = processingEnv.getTypeUtils();

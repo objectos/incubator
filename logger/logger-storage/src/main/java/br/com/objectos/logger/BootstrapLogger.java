@@ -30,7 +30,7 @@ public final class BootstrapLogger extends AbstractConfigurableLogger {
 
   private boolean bootstrap;
 
-  private final MutableList<WriteJobLog> logs = MutableList.create();
+  private final MutableList<WriteJobLog> logs = new MutableList<>();
 
   /**
    * Creates a new instance.

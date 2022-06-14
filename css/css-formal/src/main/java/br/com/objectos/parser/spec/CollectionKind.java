@@ -23,7 +23,7 @@ public enum CollectionKind {
   LIST {
     @Override
     final Object get(Iterator<?> iterator) {
-      MutableList<Object> builder = MutableList.create();
+      MutableList<Object> builder = new MutableList<>();
       while (iterator.hasNext()) {
         Object value = iterator.next();
         if (value instanceof Iterable<?>) {

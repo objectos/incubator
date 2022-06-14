@@ -76,7 +76,7 @@ public class PseudoElementSelectorsGenTest extends AbstractCssBootTest {
       "  }",
       "",
       "  private static ImmutableMap<String, PseudoElementSelector> buildMap() {",
-      "    MutableMap<String, PseudoElementSelector> m = MutableMap.create();",
+      "    MutableMap<String, PseudoElementSelector> m = new MutableMap<>();",
       "    m.put(\"after\", AFTER);",
       "    m.put(\"-moz-focus-inner\", _MOZ_FOCUS_INNER);",
       "    return m.toImmutableMap();",

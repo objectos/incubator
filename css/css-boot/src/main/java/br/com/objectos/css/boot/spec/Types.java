@@ -15,8 +15,9 @@
  */
 package br.com.objectos.css.boot.spec;
 
+import br.com.objectos.code.java.Java;
 import br.com.objectos.code.java.declaration.PackageName;
-import br.com.objectos.code.java.expression.MethodInvocation;
+import br.com.objectos.code.java.expression.NewClass;
 import br.com.objectos.code.java.type.NamedClass;
 import objectos.util.ImmutableMap;
 import objectos.util.MutableMap;
@@ -33,7 +34,7 @@ public class Types {
 
   public static final NamedClass _String;
 
-  private static final MethodInvocation NEW_GROWABLE_MAP;
+  private static final NewClass NEW_GROWABLE_MAP;
 
   static {
     _PACKAGE = PackageName.named("br.com.objectos.css");
@@ -46,12 +47,12 @@ public class Types {
 
     _String = NamedClass.of(String.class);
 
-    NEW_GROWABLE_MAP = _MutableMap.invoke("create");
+    NEW_GROWABLE_MAP = Java._new(_MutableMap, Java.hint());
   }
 
   private Types() {}
 
-  public static MethodInvocation _newMutableMap() {
+  public static NewClass _newMutableMap() {
     return NEW_GROWABLE_MAP;
   }
 

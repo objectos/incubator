@@ -34,7 +34,7 @@ abstract class PackageName {
       return NULL;
     }
 
-    MutableList<String> nameList = MutableList.create();
+    MutableList<String> nameList = new MutableList<>();
 
     for (char[] cs : packageName) {
       nameList.add(new String(cs));

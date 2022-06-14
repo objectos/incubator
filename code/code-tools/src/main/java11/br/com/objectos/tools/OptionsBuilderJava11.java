@@ -35,9 +35,9 @@ abstract class OptionsBuilderJava11 extends AbstractOptionsBuilder {
 
   private static final String PATH_SEPARATOR = System.getProperty("path.separator");
 
-  private final MutableList<String> addModules = MutableList.create();
-  private final MutableList<String> modulePaths = MutableList.create();
-  private final MutableList<String> patchModules = MutableList.create();
+  private final MutableList<String> addModules = new MutableList<>();
+  private final MutableList<String> modulePaths = new MutableList<>();
+  private final MutableList<String> patchModules = new MutableList<>();
 
   @Concrete.Constructor
   OptionsBuilderJava11() {}
@@ -106,7 +106,7 @@ abstract class OptionsBuilderJava11 extends AbstractOptionsBuilder {
   @Override
   public final ImmutableList<String> build() {
     MutableList<String> result;
-    result = MutableList.create();
+    result = new MutableList<>();
 
     config.addTo(this);
 
@@ -214,9 +214,9 @@ abstract class OptionsBuilderJava11 extends AbstractOptionsBuilder {
 
   private static class ConfigBuilder {
 
-    private final MutableList<String> addModules = MutableList.create();
+    private final MutableList<String> addModules = new MutableList<>();
 
-    private final MutableMap<String, Path> modulePaths = MutableMap.create();
+    private final MutableMap<String, Path> modulePaths = new MutableMap<>();
 
     public final Config build() {
       return new Config(this);

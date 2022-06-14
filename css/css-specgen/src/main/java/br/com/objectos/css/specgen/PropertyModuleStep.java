@@ -87,7 +87,7 @@ class PropertyModuleStep extends Step {
     }
 
     MutableList<Literal> literals;
-    literals = MutableList.create();
+    literals = new MutableList<>();
 
     for (Property property : group) {
       String name = property.name();
@@ -133,7 +133,7 @@ class PropertyModuleStep extends Step {
   }
 
   private ArgumentsElement formalExpression(Property property) {
-    MutableList<ArgumentsElement> args = MutableList.create();
+    MutableList<ArgumentsElement> args = new MutableList<>();
     args.add(nl());
     args.add(Types.Source.id(Ids.MDN));
     args.add(nl());

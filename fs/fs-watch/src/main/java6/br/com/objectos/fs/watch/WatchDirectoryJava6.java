@@ -28,13 +28,13 @@ final class WatchDirectoryJava6 implements DirectoryContentsVisitor {
 
   private final Checker checker = new Checker();
 
-  private final Map<String, Directory> directories = MutableMap.create();
+  private final Map<String, Directory> directories = new MutableMap<>();
 
   private final Directory directory;
 
   private final Set<Event> events;
 
-  private final Map<String, RegularFileWrapper> files = MutableMap.create();
+  private final Map<String, RegularFileWrapper> files = new MutableMap<>();
 
   private final Watch.Listener listener;
 

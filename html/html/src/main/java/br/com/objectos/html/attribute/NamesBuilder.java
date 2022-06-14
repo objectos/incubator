@@ -20,7 +20,7 @@ import objectos.util.MutableMap;
 
 class NamesBuilder {
 
-  private final MutableMap<String, StandardAttributeName> map = MutableMap.create();
+  private final MutableMap<String, StandardAttributeName> map = new MutableMap<>();
 
   public final ImmutableMap<String, StandardAttributeName> build() {
     return map.toImmutableMap();

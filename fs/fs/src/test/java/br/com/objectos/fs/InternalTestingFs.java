@@ -39,7 +39,7 @@ final class InternalTestingFs {
     INSTANCE = tempDir;
   }
 
-  private final List<Directory> tempDirectories = MutableList.create();
+  private final List<Directory> tempDirectories = new MutableList<>();
 
   private InternalTestingFs() {}
 

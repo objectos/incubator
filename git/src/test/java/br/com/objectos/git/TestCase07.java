@@ -39,7 +39,7 @@ final class TestCase07 extends StageGitCommand<ObjectId> {
 
   static final String DESCRIPTION = "Copy operation: create first commit of target repo";
 
-  private final MutableSet<ObjectId> blobsToCopy = MutableSet.create();
+  private final MutableSet<ObjectId> blobsToCopy = new MutableSet<>();
 
   private MaybeObjectId parentId;
 

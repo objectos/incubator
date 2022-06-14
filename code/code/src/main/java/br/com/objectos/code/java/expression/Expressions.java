@@ -106,7 +106,7 @@ public class Expressions {
   public static ArrayInitializer a(Iterable<? extends VariableInitializer> elements) {
     Check.notNull(elements, "elements == null");
 
-    MutableList<VariableInitializer> list = MutableList.create();
+    MutableList<VariableInitializer> list = new MutableList<>();
 
     list.addAllIterable(elements);
 

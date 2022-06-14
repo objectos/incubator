@@ -50,7 +50,7 @@ class ProcessingAnnotationValueTypeArray extends ProcessingAnnotationValue {
   private static ImmutableList<PTypeMirror> toClassArray(
       ProcessingAnnotation annotation, List<? extends AnnotationValue> array) {
     MutableList<PTypeMirror> result;
-    result = MutableList.create();
+    result = new MutableList<>();
 
     for (int i = 0; i < array.size(); i++) {
       AnnotationValue annotationValue;

@@ -20,7 +20,7 @@ import objectos.util.MutableList;
 
 public class CategorySpec {
 
-  private final List<Child> childSet = MutableList.create();
+  private final List<Child> childSet = new MutableList<>();
 
   private final String name;
 

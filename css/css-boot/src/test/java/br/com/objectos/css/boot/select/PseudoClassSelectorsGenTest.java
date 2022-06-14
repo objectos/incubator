@@ -76,7 +76,7 @@ public class PseudoClassSelectorsGenTest extends AbstractCssBootTest {
       "  }",
       "",
       "  private static ImmutableMap<String, PseudoClassSelector> buildMap() {",
-      "    MutableMap<String, PseudoClassSelector> m = MutableMap.create();",
+      "    MutableMap<String, PseudoClassSelector> m = new MutableMap<>();",
       "    m.put(\"checked\", CHECKED);",
       "    m.put(\"-moz-focusring\", _MOZ_FOCUSRING);",
       "    return m.toImmutableMap();",

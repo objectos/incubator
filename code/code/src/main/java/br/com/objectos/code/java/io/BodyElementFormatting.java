@@ -88,7 +88,7 @@ final class BodyElementFormatting extends Formatting {
 
     @Override
     final MutableList<BodyElement> applyTo(MutableList<BodyElement> elements) {
-      MutableList<BodyElement> result = MutableList.create();
+      MutableList<BodyElement> result = new MutableList<>();
 
       for (BodyElement element : elements) {
         result.add(element);

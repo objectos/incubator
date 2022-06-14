@@ -31,7 +31,7 @@ import objectos.util.MutableList;
 
 final class ServeMojoWriter implements HttpModule, SiteWriter {
 
-  private final MutableList<Route> routes = MutableList.create();
+  private final MutableList<Route> routes = new MutableList<>();
 
   @Override
   public final void acceptHttpModuleDsl(HttpModuleDsl dsl) {

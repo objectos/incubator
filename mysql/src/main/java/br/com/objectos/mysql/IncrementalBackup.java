@@ -79,7 +79,7 @@ final class IncrementalBackup extends AbstractClientJob<ImmutableList<RegularFil
 
   private String prefix;
 
-  private final MutableList<RegularFile> result = MutableList.create();
+  private final MutableList<RegularFile> result = new MutableList<>();
 
   private long startTime;
 

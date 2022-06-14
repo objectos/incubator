@@ -159,7 +159,7 @@ final class StorageV1ReadJob implements IoTask, ReadJob {
 
   private int stringLength;
 
-  private final MutableList<String> stringList = MutableList.create();
+  private final MutableList<String> stringList = new MutableList<>();
 
   private int stringListLength;
 

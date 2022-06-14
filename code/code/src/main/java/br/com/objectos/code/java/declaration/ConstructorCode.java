@@ -344,9 +344,9 @@ public final class ConstructorCode
   public static class Builder {
 
     private ConstructorModifier accessModifier = Nothing.INSTANCE;
-    private final MutableList<BlockElement> body = MutableList.create();
+    private final MutableList<BlockElement> body = new MutableList<>();
     private ExplicitConstructorInvocation constructorInvocation = Nothing.INSTANCE;
-    private final MutableList<ParameterCode> parameters = MutableList.create();
+    private final MutableList<ParameterCode> parameters = new MutableList<>();
 
     private Builder() {}
 

@@ -76,7 +76,7 @@ public class GeneratedColorStepTest extends AbstractCssBootTest {
       "  }",
       "",
       "  private static ImmutableMap<String, ColorName> buildMap() {",
-      "    MutableMap<String, ColorName> m = MutableMap.create();",
+      "    MutableMap<String, ColorName> m = new MutableMap<>();",
       "    m.put(\"ButtonText\", ButtonText);",
       "    m.put(\"transparent\", transparent);",
       "    return m.toImmutableMap();",

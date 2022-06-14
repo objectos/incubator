@@ -112,7 +112,7 @@ public class ProcessingAnnotationValueAnnotationArrayTest
 
   private ImmutableList<String> tn(ImmutableList<ProcessingAnnotation> iter) {
     MutableList<String> result;
-    result = MutableList.create();
+    result = new MutableList<>();
 
     for (int i = 0; i < iter.size(); i++) {
       ProcessingAnnotation ann;

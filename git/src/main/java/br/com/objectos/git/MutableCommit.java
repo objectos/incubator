@@ -49,7 +49,7 @@ public final class MutableCommit implements ToString.Formattable {
    */
   public final void addParent(ObjectId parent) {
     if (parents == null) {
-      parents = MutableList.create();
+      parents = new MutableList<>();
     }
 
     parents.addWithNullMessage(parent, "parent == null");

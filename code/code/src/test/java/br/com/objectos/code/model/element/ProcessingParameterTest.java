@@ -76,7 +76,7 @@ public class ProcessingParameterTest extends AbstractCodeCoreTest {
       + "The `final` modifier has a (analogous to) 'source-only' retention policy; "
       + "test was required to do a full compilation step.")
   public void getModifiers() {
-    final MutableList<ProcessingParameter> result = MutableList.create();
+    final MutableList<ProcessingParameter> result = new MutableList<>();
 
     class ThisProcessor extends AbstractProcessingRoundProcessor {
       @Override
@@ -186,7 +186,7 @@ public class ProcessingParameterTest extends AbstractCodeCoreTest {
     subjectParameters = getSubjectParameters(GetTypeSubject.class);
 
     MutableList<NamedType> result;
-    result = MutableList.create();
+    result = new MutableList<>();
 
     for (int i = 0; i < subjectParameters.size(); i++) {
       ProcessingParameter parameter;
@@ -304,7 +304,7 @@ public class ProcessingParameterTest extends AbstractCodeCoreTest {
 
   private <F, T> ImmutableList<T> map(List<F> list, Function<F, T> f) {
     MutableList<T> result;
-    result = MutableList.create();
+    result = new MutableList<>();
 
     for (F e : list) {
       T apply = f.apply(e);

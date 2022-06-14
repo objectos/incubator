@@ -112,7 +112,7 @@ public class DescendantSelector
 
   @Override
   final DescendantSelector newDescendantSelectorWithAncestor(Selector ancestor) {
-    MutableList<Selector> newSelectors = MutableList.create();
+    MutableList<Selector> newSelectors = new MutableList<>();
     newSelectors.add(ancestor);
     newSelectors.addAll(selectors);
     return new DescendantSelector(newSelectors.toImmutableList());

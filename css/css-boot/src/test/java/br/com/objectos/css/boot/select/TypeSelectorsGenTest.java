@@ -74,7 +74,7 @@ public class TypeSelectorsGenTest extends AbstractCssBootTest {
       "  }",
       "",
       "  private static ImmutableMap<String, TypeSelector> buildMap() {",
-      "    MutableMap<String, TypeSelector> m = MutableMap.create();",
+      "    MutableMap<String, TypeSelector> m = new MutableMap<>();",
       "    m.put(\"a\", a);",
       "    m.put(\"div\", div);",
       "    return m.toImmutableMap();",

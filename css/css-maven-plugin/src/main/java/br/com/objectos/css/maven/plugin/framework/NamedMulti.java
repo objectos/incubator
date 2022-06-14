@@ -61,7 +61,7 @@ class NamedMulti extends NamedValue {
 
   public class Invocation {
 
-    private final MutableList<ArgumentsElement> arguments = MutableList.create();
+    private final MutableList<ArgumentsElement> arguments = new MutableList<>();
 
     private final String methodName;
 

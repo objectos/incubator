@@ -40,7 +40,7 @@ class StandardPackageName extends PackageName {
     }
 
     MutableList<String> list;
-    list = MutableList.create();
+    list = new MutableList<>();
 
     list.addAll(nameList);
 

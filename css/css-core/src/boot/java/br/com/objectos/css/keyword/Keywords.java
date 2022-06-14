@@ -592,7 +592,7 @@ public final class Keywords {
   }
 
   private static ImmutableMap<String, StandardKeyword> buildMap() {
-    MutableMap<String, StandardKeyword> m = MutableMap.create();
+    MutableMap<String, StandardKeyword> m = new MutableMap<>();
     m.put("-moz-arabic-indic", mozArabicIndic);
     m.put("-moz-bengali", mozBengali);
     m.put("-moz-cjk-earthly-branch", mozCjkEarthlyBranch);

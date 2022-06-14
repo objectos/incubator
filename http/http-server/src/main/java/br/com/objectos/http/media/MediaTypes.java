@@ -83,7 +83,7 @@ public class MediaTypes {
 
     private static ImmutableMap<String, MediaType> buildExtensionMap() {
       MutableMap<String, MediaType> map;
-      map = MutableMap.create();
+      map = new MutableMap<>();
 
       // application
       map.put("js", ApplicationType.JAVASCRIPT);

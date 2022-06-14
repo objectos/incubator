@@ -134,7 +134,7 @@ public final class ConfigurationFile {
 
   private String toContents(ConfigurationGroup[] groups) {
     MutableList<String> lines;
-    lines = MutableList.create();
+    lines = new MutableList<>();
 
     for (int i = 0; i < groups.length; i++) {
       ConfigurationGroup group;

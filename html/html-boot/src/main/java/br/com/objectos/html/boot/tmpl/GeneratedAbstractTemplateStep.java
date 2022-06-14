@@ -55,8 +55,8 @@ import objectos.util.MutableList;
 
 public class GeneratedAbstractTemplateStep extends AbstractJavaFileStep {
 
-  private final MutableList<MethodCode> attrMethods = MutableList.create();
-  private final MutableList<MethodCode> elementMethods = MutableList.create();
+  private final MutableList<MethodCode> attrMethods = new MutableList<>();
+  private final MutableList<MethodCode> elementMethods = new MutableList<>();
 
   private TemplateSpec templateSpec;
 
@@ -174,7 +174,7 @@ public class GeneratedAbstractTemplateStep extends AbstractJavaFileStep {
     b.returnType(attributeSpec.className());
     b.name(methodName);
 
-    MutableList<Argument> args = MutableList.create();
+    MutableList<Argument> args = new MutableList<>();
     args.add(StandardAttributeName.id(attributeSpec.constantName()));
 
     AttributeKind kind = attributeSpec.kind();

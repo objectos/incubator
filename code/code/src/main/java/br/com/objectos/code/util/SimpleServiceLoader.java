@@ -84,7 +84,7 @@ public final class SimpleServiceLoader {
     }
 
     MutableList<T> providers;
-    providers = MutableList.create();
+    providers = new MutableList<>();
 
     for (URL resourceUrl : resourceUrls) {
       try {
@@ -120,7 +120,7 @@ public final class SimpleServiceLoader {
   private static <T> ImmutableList<T> providersFromUrl(
       URL resourceUrl, Class<T> service, ClassLoader loader) throws IOException {
     MutableList<T> providers;
-    providers = MutableList.create();
+    providers = new MutableList<>();
 
     URLConnection urlConnection;
     urlConnection = resourceUrl.openConnection();

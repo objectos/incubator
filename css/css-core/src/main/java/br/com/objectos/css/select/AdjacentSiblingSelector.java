@@ -70,7 +70,7 @@ public class AdjacentSiblingSelector extends Selector {
 
   @Override
   final AdjacentSiblingSelector newAdjacentSiblingSelectorWithPrevious(Selector previous) {
-    MutableList<Selector> newSelectors = MutableList.create();
+    MutableList<Selector> newSelectors = new MutableList<>();
     newSelectors.add(previous);
     newSelectors.addAll(selectors);
     return new AdjacentSiblingSelector(newSelectors.toImmutableList());

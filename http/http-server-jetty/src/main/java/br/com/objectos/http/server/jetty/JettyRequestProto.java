@@ -69,7 +69,7 @@ class JettyRequestProto implements RequestProto {
   @Override
   public final RequestParameters parameters() {
     MutableMap<String, String> map;
-    map = MutableMap.create();
+    map = new MutableMap<>();
 
     Enumeration<String> parameterNames;
     parameterNames = request.getParameterNames();

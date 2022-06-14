@@ -243,8 +243,8 @@ public final class InterfaceCode extends AbstractTypeCode {
   public static final class Builder {
 
     private final InterfaceExtends.Builder _extends = InterfaceExtends.builder();
-    private final MutableList<AnnotationCode> annotations = MutableList.create();
-    private final MutableList<InterfaceBodyElement> bodyElements = MutableList.create();
+    private final MutableList<AnnotationCode> annotations = new MutableList<>();
+    private final MutableList<InterfaceBodyElement> bodyElements = new MutableList<>();
     private BodyFormatter formatter = BodyFormatter.defaultFormatter();
     private final InterfaceModifierSet.Builder modifiers = InterfaceModifierSet.builder();
 

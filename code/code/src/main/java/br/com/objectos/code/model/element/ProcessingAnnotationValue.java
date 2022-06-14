@@ -73,7 +73,7 @@ public abstract class ProcessingAnnotationValue implements CanGenerateCompilatio
     Check.notNull(enumType, "enumType == null");
 
     MutableList<E> result;
-    result = MutableList.create();
+    result = new MutableList<>();
 
     ImmutableList<ProcessingEnumConstant> enumArray;
     enumArray = getEnumConstantArray();

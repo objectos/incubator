@@ -80,7 +80,7 @@ public class MoreLoggingTest implements LogListener {
 
   private static final Note3<Arg1, Arg2, Arg3> WARN3 = Note3.warn();
 
-  private final MutableList<Log> logs = MutableList.create();
+  private final MutableList<Log> logs = new MutableList<>();
 
   private int notifySize;
 

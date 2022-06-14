@@ -52,7 +52,7 @@ public final class MaterializeCommand extends StageGitCommand<Directory> {
 
   private final Directory target;
 
-  private final Map<ObjectId, Directory> treeMap = MutableMap.create();
+  private final Map<ObjectId, Directory> treeMap = new MutableMap<>();
 
   /**
    * <em>Materializes</em> from the {@code source} repository the specified

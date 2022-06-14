@@ -27,7 +27,7 @@ class NestableParser {
 
   private Mode mode = Mode.START;
   private Nestable nestable;
-  private MutableList<NestablePart> parts = MutableList.create();
+  private MutableList<NestablePart> parts = new MutableList<>();
   private final char[] value;
   private boolean whitespace;
 
@@ -77,7 +77,7 @@ class NestableParser {
     SimpleNestable newNestable = new SimpleNestable(parts.toImmutableList());
     nestable = nestable != null ? nestable.add(newNestable) : newNestable;
 
-    parts = MutableList.create();
+    parts = new MutableList<>();
     ident.setLength(0);
     whitespace = false;
   }

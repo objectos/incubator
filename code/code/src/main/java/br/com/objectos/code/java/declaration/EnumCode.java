@@ -245,10 +245,10 @@ public final class EnumCode extends AbstractTypeCode {
 
     private Implements _implements;
     private final Implements.Builder _implementsBuilder = Implements.builder();
-    private final MutableList<AnnotationCode> annotations = MutableList.create();
-    private final MutableList<EnumBodyElement> bodyElements = MutableList.create();
+    private final MutableList<AnnotationCode> annotations = new MutableList<>();
+    private final MutableList<EnumBodyElement> bodyElements = new MutableList<>();
     private final EnumConstantList.Builder constantListBuilder = EnumConstantList.builder();
-    private final MutableList<EnumModifier> modifiers = MutableList.create();
+    private final MutableList<EnumModifier> modifiers = new MutableList<>();
     private String simpleName = "Unnamed";
 
     private Builder() {}

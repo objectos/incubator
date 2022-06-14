@@ -39,7 +39,7 @@ public abstract class AbstractHtmlBootTest {
 
     dsl.with(spec);
 
-    MutableList<JavaFile> javaFiles = MutableList.create();
+    MutableList<JavaFile> javaFiles = new MutableList<>();
 
     Step step = factory.get(javaFiles::add);
 

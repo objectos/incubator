@@ -254,13 +254,13 @@ public class ClassCode extends AbstractTypeCode {
     private final ClassExtends.Builder _extends = ClassExtends.builder();
     private Implements _implements;
     private final Implements.Builder _implementsBuilder = Implements.builder();
-    private final MutableList<AnnotationCode> annotations = MutableList.create();
-    private final MutableList<ClassBodyElement> bodyElements = MutableList.create();
+    private final MutableList<AnnotationCode> annotations = new MutableList<>();
+    private final MutableList<ClassBodyElement> bodyElements = new MutableList<>();
     private BodyFormatter formatter = BodyFormatter.defaultFormatter();
     private final ClassModifierSet.Builder modifiers = ClassModifierSet.builder();
     private String simpleName = "Unnamed";
 
-    private final MutableList<NamedTypeParameter> typeParameters = MutableList.create();
+    private final MutableList<NamedTypeParameter> typeParameters = new MutableList<>();
 
     private Builder() {}
 

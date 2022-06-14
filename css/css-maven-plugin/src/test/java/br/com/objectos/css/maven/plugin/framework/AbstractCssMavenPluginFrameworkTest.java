@@ -52,7 +52,7 @@ public abstract class AbstractCssMavenPluginFrameworkTest {
 
   private static class ThisConfigurationAdapter implements ConfigurationAdapter {
 
-    private final MutableMap<String, JavaFile> map = MutableMap.create();
+    private final MutableMap<String, JavaFile> map = new MutableMap<>();
 
     @Override
     public final void writeJavaFile(JavaFile file) {

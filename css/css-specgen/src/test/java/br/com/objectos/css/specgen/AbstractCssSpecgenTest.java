@@ -51,7 +51,7 @@ public abstract class AbstractCssSpecgenTest {
 
   private static class ThisStepAdapter extends StepAdapter {
 
-    private final MutableMap<String, JavaFile> javaFiles = MutableMap.create();
+    private final MutableMap<String, JavaFile> javaFiles = new MutableMap<>();
 
     @Override
     public final void writeJavaFile(JavaFile javaFile) {

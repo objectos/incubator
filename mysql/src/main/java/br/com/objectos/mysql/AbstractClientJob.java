@@ -493,7 +493,7 @@ abstract class AbstractClientJob<V> implements ClientJob<V>, IoTask {
 
     private final InputStream inputStream;
 
-    private final MutableList<String> lines = MutableList.create();
+    private final MutableList<String> lines = new MutableList<>();
 
     StreamCollector(String name, InputStream inputStream) {
       super(name);

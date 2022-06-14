@@ -128,7 +128,7 @@ final class TestCase08 extends StageGitCommand<Directory> {
 
   private static class CopyImpl extends StageGitCommand<ObjectId> {
 
-    private final MutableSet<ObjectId> blobsToCopy = MutableSet.create();
+    private final MutableSet<ObjectId> blobsToCopy = new MutableSet<>();
 
     private Commit parentCommit;
 

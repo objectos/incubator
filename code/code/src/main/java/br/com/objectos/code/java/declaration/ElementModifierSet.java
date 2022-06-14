@@ -61,7 +61,7 @@ abstract class ElementModifierSet extends AbstractCodeElement {
 
   static abstract class Builder<E extends ElementModifierSet> {
 
-    final MutableList<Modifier> values = MutableList.create();
+    final MutableList<Modifier> values = new MutableList<>();
 
     Builder() {}
 

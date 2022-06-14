@@ -630,7 +630,7 @@ public class GitServiceTest extends AbstractGitTest {
     id = maybe.getObjectId();
 
     MutableList<String> list;
-    list = MutableList.create();
+    list = new MutableList<>();
 
     while (id != null) {
       GitTask<Commit> computable;

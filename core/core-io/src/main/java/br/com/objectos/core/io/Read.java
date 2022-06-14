@@ -207,7 +207,7 @@ public final class Read {
 
   private static ImmutableList<String> lines0(BufferedReader r) throws IOException {
     MutableList<String> result;
-    result = MutableList.create();
+    result = new MutableList<>();
 
     try (r) {
       String line;

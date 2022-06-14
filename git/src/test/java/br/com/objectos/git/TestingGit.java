@@ -365,7 +365,7 @@ final class TestingGit {
     engine = standardEngineInstance();
 
     MutableList<String> list;
-    list = MutableList.create();
+    list = new MutableList<>();
 
     while (id != null) {
       GitTask<Commit> computable;

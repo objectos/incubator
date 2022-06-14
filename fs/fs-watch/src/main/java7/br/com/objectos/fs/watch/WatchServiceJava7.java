@@ -55,7 +55,7 @@ final class WatchServiceJava7 implements Watch.Service {
     }
 
     MutableMap<WatchKey, WatchDirectoryJava7> keys;
-    keys = MutableMap.create();
+    keys = new MutableMap<>();
 
     for (WatchDirectoryJava7 option : directories) {
       try {
@@ -86,7 +86,7 @@ final class WatchServiceJava7 implements Watch.Service {
 
   static class Builder implements ServiceBuilder {
 
-    private final MutableMap<Directory, WatchDirectoryJava7> directories = MutableMap.create();
+    private final MutableMap<Directory, WatchDirectoryJava7> directories = new MutableMap<>();
 
     public final Watch.Service build() {
       Collection<WatchDirectoryJava7> values;

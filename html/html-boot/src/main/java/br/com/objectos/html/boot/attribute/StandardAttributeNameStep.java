@@ -64,11 +64,11 @@ import objectos.util.MutableList;
 
 public class StandardAttributeNameStep extends AbstractJavaFileStep {
 
-  private final MutableList<VariableInitializer> constantNames = MutableList.create();
-  private final MutableList<FieldCode> constants = MutableList.create();
+  private final MutableList<VariableInitializer> constantNames = new MutableList<>();
+  private final MutableList<FieldCode> constants = new MutableList<>();
   private Callee currentCallee;
 
-  private final MutableList<ClassCode> nameTypes = MutableList.create();
+  private final MutableList<ClassCode> nameTypes = new MutableList<>();
 
   public StandardAttributeNameStep(Consumer<JavaFile> javaFileWriter) {
     super(javaFileWriter);

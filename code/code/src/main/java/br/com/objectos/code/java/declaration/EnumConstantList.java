@@ -87,7 +87,7 @@ public class EnumConstantList extends AbstractCodeElement
 
   public static class Builder {
 
-    private final MutableList<EnumConstantCode> list = MutableList.create();
+    private final MutableList<EnumConstantCode> list = new MutableList<>();
 
     private Builder() {}
 

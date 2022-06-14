@@ -73,7 +73,7 @@ class JettyRequestHeaders implements RequestHeaders {
   }
 
   private ImmutableMap<String, String> initMap() {
-    MutableMap<String, String> map = MutableMap.create();
+    MutableMap<String, String> map = new MutableMap<>();
 
     Enumeration<String> names = request.getHeaderNames();
     while (names.hasMoreElements()) {

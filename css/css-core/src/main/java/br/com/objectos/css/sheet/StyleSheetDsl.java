@@ -724,7 +724,7 @@ public class StyleSheetDsl implements Creator, Marker {
 
   public final void setRulePrefix(RuleElement[] elements) {
     if (rulePrefix == null) {
-      rulePrefix = MutableList.create();
+      rulePrefix = new MutableList<>();
     }
 
     for (int i = 0; i < elements.length; i++) {

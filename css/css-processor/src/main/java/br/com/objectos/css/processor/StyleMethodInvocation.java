@@ -35,9 +35,9 @@ import objectos.util.MutableList;
 class StyleMethodInvocation {
 
   private DeclarationMethodInvocation currentDeclaration;
-  private final MutableList<Argument> declarations = MutableList.create();
+  private final MutableList<Argument> declarations = new MutableList<>();
 
-  private final MutableList<ArgumentsElement> selector = MutableList.create();
+  private final MutableList<ArgumentsElement> selector = new MutableList<>();
 
   StyleMethodInvocation() {}
 
@@ -45,7 +45,7 @@ class StyleMethodInvocation {
     buildCurrentDeclarationIfNecessary();
 
     MutableList<ArgumentsElement> arguments;
-    arguments = MutableList.create();
+    arguments = new MutableList<>();
 
     arguments.add(nl());
     arguments.addAll(selector);

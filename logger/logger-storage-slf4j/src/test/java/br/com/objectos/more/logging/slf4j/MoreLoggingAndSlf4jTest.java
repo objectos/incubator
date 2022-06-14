@@ -39,7 +39,7 @@ import org.testng.annotations.Test;
 
 public class MoreLoggingAndSlf4jTest implements LogListener {
 
-  private final MutableList<Log> logs = MutableList.create();
+  private final MutableList<Log> logs = new MutableList<>();
 
   private int notifySize;
 

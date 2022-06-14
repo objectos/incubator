@@ -51,17 +51,17 @@ class ProcessingTypeElements {
 
   static class Builder extends SimpleElementVisitor<Void, Void> {
 
-    private final MutableList<ProcessingConstructor> constructors = MutableList.create();
+    private final MutableList<ProcessingConstructor> constructors = new MutableList<>();
     private final List<? extends Element> elements;
 
     private final ProcessingType enclosing;
 
-    private final MutableList<ProcessingField> fields = MutableList.create();
-    private final MutableList<ProcessingMethod> methods = MutableList.create();
+    private final MutableList<ProcessingField> fields = new MutableList<>();
+    private final MutableList<ProcessingMethod> methods = new MutableList<>();
     private final ProcessingEnvironment processingEnv;
     private int size;
 
-    private final MutableList<ProcessingType> types = MutableList.create();
+    private final MutableList<ProcessingType> types = new MutableList<>();
 
     Builder(ProcessingType enclosing, List<? extends Element> elements) {
       this.enclosing = enclosing;

@@ -100,7 +100,7 @@ public class Location {
 
   public static class Builder {
 
-    private final MutableList<Slug> slugs = MutableList.create();
+    private final MutableList<Slug> slugs = new MutableList<>();
 
     private Builder() {}
 

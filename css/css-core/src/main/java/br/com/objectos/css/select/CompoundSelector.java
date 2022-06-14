@@ -31,7 +31,7 @@ public class CompoundSelector
   }
 
   public static CompoundSelector ofParser(SimpleSelector first, Iterable<SimpleSelector> more) {
-    MutableList<Selector> list = MutableList.create();
+    MutableList<Selector> list = new MutableList<>();
     list.add(checkIsSelector(first, "first"));
 
     for (SimpleSelector s : more) {

@@ -20,7 +20,7 @@ public abstract class AbstractCodeModelTest extends AbstractCodeCoreTest {
   protected final ImmutableList<NamedClass> annotationToClassName(
       List<ProcessingAnnotation> annotations) {
     MutableList<NamedClass> result;
-    result = MutableList.create();
+    result = new MutableList<>();
 
     for (int i = 0; i < annotations.size(); i++) {
       ProcessingAnnotation ann;
@@ -58,7 +58,7 @@ public abstract class AbstractCodeModelTest extends AbstractCodeCoreTest {
 
   protected final <F, T> ImmutableList<T> map(List<F> list, Function<? super F, ? extends T> f) {
     MutableList<T> result;
-    result = MutableList.create();
+    result = new MutableList<>();
 
     for (F e : list) {
       T apply = f.apply(e);

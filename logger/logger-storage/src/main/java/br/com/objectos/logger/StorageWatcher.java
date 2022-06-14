@@ -164,7 +164,7 @@ public final class StorageWatcher implements Closeable, Watch.Option {
 
     private final IoWorker ioWorker;
 
-    private final MutableList<LogListener> listeners = MutableList.create();
+    private final MutableList<LogListener> listeners = new MutableList<>();
 
     private final Storage storage;
 

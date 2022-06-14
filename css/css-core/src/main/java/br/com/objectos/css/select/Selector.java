@@ -217,7 +217,7 @@ public abstract class Selector implements IsNonTerminal {
     @Override
     protected final void toSimpleSelectorMode(Selector selector) {
       if (compoundList == null) {
-        compoundList = MutableList.create();
+        compoundList = new MutableList<>();
       }
 
       compoundList.addWithNullMessage(selector, "selector == null");
@@ -225,7 +225,7 @@ public abstract class Selector implements IsNonTerminal {
 
     private void addToCombinatorList(Selector selector) {
       if (combinatorList == null) {
-        combinatorList = MutableList.create();
+        combinatorList = new MutableList<>();
       }
 
       combinatorList.add(selector);

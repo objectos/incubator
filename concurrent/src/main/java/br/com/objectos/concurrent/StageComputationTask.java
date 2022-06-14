@@ -253,7 +253,7 @@ public abstract class StageComputationTask<V> implements Computation<V>, CpuTask
 
   private static final int FSTAGE_INCREMENTED = 1 << 2;
 
-  private final MutableList<Computation<?>> computations = MutableList.create();
+  private final MutableList<Computation<?>> computations = new MutableList<>();
 
   private Throwable error;
 
@@ -261,7 +261,7 @@ public abstract class StageComputationTask<V> implements Computation<V>, CpuTask
 
   private V result;
 
-  private final MutableList<Object> results = MutableList.create();
+  private final MutableList<Object> results = new MutableList<>();
 
   private int stage;
 

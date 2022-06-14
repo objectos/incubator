@@ -37,7 +37,7 @@ public enum StandardFunctionName implements FunctionName {
   }
 
   private static ImmutableMap<String, StandardFunctionName> buildMap() {
-    MutableMap<String, StandardFunctionName> m = MutableMap.create();
+    MutableMap<String, StandardFunctionName> m = new MutableMap<>();
     m.put("rotate", ROTATE);
     m.put("rotateX", ROTATEX);
     m.put("rotateY", ROTATEY);

@@ -102,7 +102,7 @@ public class ProcessingRound
 
   public final ImmutableSet<ProcessingMethod> getAnnotatedMethods() {
     MutableSet<ProcessingMethod> result;
-    result = MutableSet.create();
+    result = new MutableSet<>();
 
     for (TypeElement annotation : annotations) {
       getAnnotatedMethods0(result, annotation);
@@ -113,7 +113,7 @@ public class ProcessingRound
 
   public final ImmutableSet<ProcessingPackage> getAnnotatedPackages() {
     MutableSet<ProcessingPackage> result;
-    result = MutableSet.create();
+    result = new MutableSet<>();
 
     addReprocessorPackagesIfNecessary(result);
 
@@ -125,7 +125,7 @@ public class ProcessingRound
   }
 
   public final ImmutableSet<ProcessingType> getAnnotatedTypes() {
-    MutableSet<ProcessingType> result = MutableSet.create();
+    MutableSet<ProcessingType> result = new MutableSet<>();
 
     addReprocessorTypesIfNecessary(result);
 

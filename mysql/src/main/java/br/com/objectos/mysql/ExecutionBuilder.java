@@ -25,8 +25,8 @@ import objectos.util.MutableList;
 
 final class ExecutionBuilder {
 
-  private final MutableList<String> error = MutableList.create();
-  private final MutableList<String> output = MutableList.create();
+  private final MutableList<String> error = new MutableList<>();
+  private final MutableList<String> output = new MutableList<>();
 
   private int exitValue = -1;
 

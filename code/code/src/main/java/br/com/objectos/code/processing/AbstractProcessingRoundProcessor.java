@@ -61,9 +61,9 @@ public abstract class AbstractProcessingRoundProcessor extends AbstractProcessor
 
   private static class ThisReprocessor implements Reprocessor {
 
-    private final MutableSet<Name> packages = MutableSet.create();
+    private final MutableSet<Name> packages = new MutableSet<>();
 
-    private final MutableSet<Name> types = MutableSet.create();
+    private final MutableSet<Name> types = new MutableSet<>();
 
     @Override
     public final ImmutableSet<Name> getPackages() {

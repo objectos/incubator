@@ -58,7 +58,7 @@ public class StandardElementNameStep extends AbstractJavaFileStep {
   private static final ExpressionName NORMAL = ElementNames.ElementKind.id("NORMAL");
   private static final ExpressionName VOID = ElementNames.ElementKind.id("VOID");
 
-  private final MutableList<EnumConstantCode> constants = MutableList.create();
+  private final MutableList<EnumConstantCode> constants = new MutableList<>();
 
   public StandardElementNameStep(Consumer<JavaFile> javaFileWriter) {
     super(javaFileWriter);

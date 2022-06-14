@@ -42,7 +42,7 @@ public class TypeElementTest extends AbstractCodeCoreTest {
     subjectAllMethods = ElementFilter.methodsIn(allMembers);
 
     MutableList<String> methodNames;
-    methodNames = MutableList.create();
+    methodNames = new MutableList<>();
 
     TypeElement objectTypeElement;
     objectTypeElement = elements.getTypeElement("java.lang.Object");

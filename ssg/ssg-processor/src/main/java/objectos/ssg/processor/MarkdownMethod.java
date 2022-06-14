@@ -100,7 +100,7 @@ class MarkdownMethod implements Visitor {
 
   MethodCode.Builder methodCode;
 
-  private final MutableList<ArgumentsElement> arguments = MutableList.create();
+  private final MutableList<ArgumentsElement> arguments = new MutableList<>();
 
   private int[] argumentsStack = new int[2];
 
@@ -308,7 +308,7 @@ class MarkdownMethod implements Visitor {
       }
     } else {
       List<ArgumentsElement> args;
-      args = MutableList.create();
+      args = new MutableList<>();
 
       if (!info.isEmpty()) {
         args.add(nl());
@@ -711,7 +711,7 @@ class MarkdownMethod implements Visitor {
     }
 
     MutableList<ArgumentsElement> result;
-    result = MutableList.create();
+    result = new MutableList<>();
 
     for (int i = argsInitial; i < argsCurrent; i++) {
       ArgumentsElement a;

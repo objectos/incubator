@@ -49,7 +49,7 @@ final class StaticField {
 
   public static ImmutableList<StaticField> listOf(ProcessingType type) {
     MutableList<StaticField> result;
-    result = MutableList.create();
+    result = new MutableList<>();
 
     ImmutableList<ProcessingField> fields;
     fields = type.getDeclaredOrInheritedFields();

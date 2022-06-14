@@ -36,7 +36,7 @@ final class FormattedStatement extends AbstractCodeElement implements Statement 
 
   static FormattedStatement of(MutableList<BlockElement> elements) {
     MutableList<CodeElement> builder;
-    builder = MutableList.create();
+    builder = new MutableList<>();
 
     for (int i = 0; i < elements.size(); i++) {
       BlockElement element;

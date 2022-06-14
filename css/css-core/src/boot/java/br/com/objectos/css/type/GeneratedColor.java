@@ -382,7 +382,7 @@ abstract class GeneratedColor {
   }
 
   private static ImmutableMap<String, ColorName> buildMap() {
-    MutableMap<String, ColorName> m = MutableMap.create();
+    MutableMap<String, ColorName> m = new MutableMap<>();
     m.put("ActiveBorder", ActiveBorder);
     m.put("ActiveCaption", ActiveCaption);
     m.put("AppWorkspace", AppWorkspace);

@@ -40,7 +40,7 @@ final class ArrayAccessImpl
 
   static ArrayAccess arrayAccess0(
       ArrayReferenceExpression ref, Iterable<? extends Expression> expressions) {
-    MutableList<CodeElement> els = MutableList.create();
+    MutableList<CodeElement> els = new MutableList<>();
     els.add(ref);
 
     for (Expression expression : expressions) {

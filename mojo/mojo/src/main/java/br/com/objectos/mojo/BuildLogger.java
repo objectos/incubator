@@ -28,7 +28,7 @@ final class BuildLogger extends AbstractLogger {
 
   private final Level level = Level.INFO;
 
-  private final MutableList<Message> messages = MutableList.create();
+  private final MutableList<Message> messages = new MutableList<>();
 
   BuildLogger() {}
 

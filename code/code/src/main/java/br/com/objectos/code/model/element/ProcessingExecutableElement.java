@@ -93,7 +93,7 @@ abstract class ProcessingExecutableElement
 
   private ImmutableList<ProcessingParameter> getParameters0() {
     MutableList<ProcessingParameter> result;
-    result = MutableList.create();
+    result = new MutableList<>();
 
     List<? extends VariableElement> parameterElements;
     parameterElements = element.getParameters();
@@ -113,7 +113,7 @@ abstract class ProcessingExecutableElement
 
   private ImmutableList<PTypeMirror> getThrownTypes0() {
     MutableList<PTypeMirror> result;
-    result = MutableList.create();
+    result = new MutableList<>();
 
     List<? extends TypeMirror> types;
     types = element.getThrownTypes();

@@ -21,7 +21,7 @@ class LocationParser {
 
   private final StringBuilder slug = new StringBuilder();
 
-  private final MutableList<Slug> slugs = MutableList.create();
+  private final MutableList<Slug> slugs = new MutableList<>();
   private State state = State.START;
   private final String string;
 

@@ -88,7 +88,7 @@ public class KeywordsClassStepTest extends AbstractCssBootTest {
       "  }",
       "",
       "  private static ImmutableMap<String, StandardKeyword> buildMap() {",
-      "    MutableMap<String, StandardKeyword> m = MutableMap.create();",
+      "    MutableMap<String, StandardKeyword> m = new MutableMap<>();",
       "    m.put(\"auto\", auto);",
       "    m.put(\"div\", divKw);",
       "    m.put(\"double\", doubleKw);",

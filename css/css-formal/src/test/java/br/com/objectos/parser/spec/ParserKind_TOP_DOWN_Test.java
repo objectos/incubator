@@ -27,7 +27,7 @@ public class ParserKind_TOP_DOWN_Test {
   public void oneOrMore() {
     Terminal letter = Terminal.get(Letter.class);
     Repetition it = Repetition.oneOrMore(letter, CollectionKind.LIST);
-    MutableList<Production> list = MutableList.create();
+    MutableList<Production> list = new MutableList<>();
 
     it.forTopDown(list);
 

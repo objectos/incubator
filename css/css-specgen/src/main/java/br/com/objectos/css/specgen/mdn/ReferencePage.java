@@ -33,7 +33,7 @@ public class ReferencePage {
 
   public final Iterable<PropertyAnchor> crawl() {
     MutableList<PropertyAnchor> result;
-    result = MutableList.create();
+    result = new MutableList<>();
 
     Elements elements = fragment.select("div.index code");
 

@@ -22,7 +22,7 @@ import objectos.util.MutableList;
 
 abstract class FormattingAction {
 
-  private final MutableList<BodyElement> elements = MutableList.create();
+  private final MutableList<BodyElement> elements = new MutableList<>();
 
   private final FormattingAction nextAction;
 
@@ -57,7 +57,7 @@ abstract class FormattingAction {
 
   public final <E extends BodyElement> ImmutableList<E> toImmutableList(Class<E> type) {
     MutableList<E> result;
-    result = MutableList.create();
+    result = new MutableList<>();
 
     List<BodyElement> stream;
     stream = stream();

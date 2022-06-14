@@ -97,7 +97,7 @@ class Desktop {
 
   private ImmutableMap<String, Object> getArgs(XModel2 model) {
     MutableMap<String, Object> map;
-    map = MutableMap.create();
+    map = new MutableMap<>();
 
     PropertyValue[] args;
     args = model.getArgs();

@@ -148,15 +148,15 @@ public class TryStatement extends AbstractSimpleStatement {
 
   public static class Builder {
 
-    final MutableList<Block.Builder> catchBlocks = MutableList.create();
+    final MutableList<Block.Builder> catchBlocks = new MutableList<>();
 
-    final MutableList<CatchElement> catchElements = MutableList.create();
+    final MutableList<CatchElement> catchElements = new MutableList<>();
 
     Block.Builder currentBlock;
 
     Block.Builder finallyBlock;
 
-    final MutableList<ResourceElement> resources = MutableList.create();
+    final MutableList<ResourceElement> resources = new MutableList<>();
 
     final Block.Builder tryBlock = Block.builder();
 
@@ -199,7 +199,7 @@ public class TryStatement extends AbstractSimpleStatement {
     }
 
     private ImmutableList<CatchBlock> buildCatchBlocks() {
-      MutableList<CatchBlock> blocks = MutableList.create();
+      MutableList<CatchBlock> blocks = new MutableList<>();
 
       for (int i = 0; i < catchElements.size(); i++) {
         blocks.add(

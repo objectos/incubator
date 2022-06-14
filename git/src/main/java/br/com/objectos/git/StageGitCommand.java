@@ -48,7 +48,7 @@ import objectos.util.ImmutableSet;
  *
  * <pre>{@code
 final class CopyTreeCommand extends StageGitCommand<ObjectId> {
-  private final MutableSet<ObjectId> objectsToCopy = MutableSet.create();
+  private final MutableSet<ObjectId> objectsToCopy = new MutableSet<>();
 
   private final Repository source;
 

@@ -285,7 +285,7 @@ public final class Arguments extends AbstractImmutableCodeElement
 
   public static class Builder {
 
-    private final MutableList<CodeElement> elements = MutableList.create();
+    private final MutableList<CodeElement> elements = new MutableList<>();
 
     private CommaOrNoop lastCommaOrNoop = CommaOrNoop.noop();
 

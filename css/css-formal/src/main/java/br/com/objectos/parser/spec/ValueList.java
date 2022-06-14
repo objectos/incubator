@@ -21,7 +21,7 @@ import objectos.util.MutableList;
 
 class ValueList {
 
-  final MutableList<Object> list = MutableList.create();
+  final MutableList<Object> list = new MutableList<>();
 
   ValueList() {}
 

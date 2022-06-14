@@ -38,7 +38,7 @@ public class ReadTest {
     randomLinesTxtBuilder = new StringBuilder();
 
     MutableList<String> randomLinesBuilder;
-    randomLinesBuilder = MutableList.create();
+    randomLinesBuilder = new MutableList<>();
 
     for (int i = 0; i < 8192; i++) {
       String randomLine;

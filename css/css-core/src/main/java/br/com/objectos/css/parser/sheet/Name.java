@@ -33,7 +33,7 @@ class Name {
   }
 
   static Name fromString(String name) {
-    MutableList<String> list = MutableList.create();
+    MutableList<String> list = new MutableList<>();
     StringBuilder part = new StringBuilder();
     char[] chars = name.toCharArray();
     for (char c : chars) {

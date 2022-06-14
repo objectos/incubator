@@ -72,7 +72,7 @@ public class Router {
 
   public final Resolution resolve(RequestProto request) {
     MutableList<RouteParser> parserList;
-    parserList = MutableList.create();
+    parserList = new MutableList<>();
 
     for (Route route : routes) {
       if (route.hasSameMethod(request)) {
@@ -94,7 +94,7 @@ public class Router {
 
   private Resolution resolveEmpty(Iterable<RouteParser> parserList) {
     MutableList<Resolution> resolutions;
-    resolutions = MutableList.create();
+    resolutions = new MutableList<>();
 
     for (RouteParser parser : parserList) {
       if (parser.matchesEmpty()) {
@@ -146,7 +146,7 @@ public class Router {
       implements
       HttpModuleDsl {
 
-    private final MutableList<Route> routes = MutableList.create();
+    private final MutableList<Route> routes = new MutableList<>();
 
     private Builder() {}
 

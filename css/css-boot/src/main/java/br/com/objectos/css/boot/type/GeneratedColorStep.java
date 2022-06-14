@@ -60,9 +60,9 @@ import objectos.util.MutableList;
 
 public class GeneratedColorStep extends Step {
 
-  private final MutableList<FieldCode> colors = MutableList.create();
-  private final MutableList<VariableInitializer> constantNames = MutableList.create();
-  private final MutableList<BlockStatement> mapStatements = MutableList.create();
+  private final MutableList<FieldCode> colors = new MutableList<>();
+  private final MutableList<VariableInitializer> constantNames = new MutableList<>();
+  private final MutableList<BlockStatement> mapStatements = new MutableList<>();
 
   public GeneratedColorStep(StepAdapter adapter) {
     super(adapter);

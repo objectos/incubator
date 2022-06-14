@@ -86,7 +86,7 @@ class FakeStateSubjectBuilder {
   }
 
   Iterator<Object> valueIterator(int size) {
-    MutableList<Object> list = MutableList.create();
+    MutableList<Object> list = new MutableList<>();
 
     for (int i = 0; i < size; i++) {
       list.add(valueList.removeLast());

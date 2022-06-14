@@ -39,7 +39,7 @@ public abstract class AbstractImmutableCodeElement extends AbstractCodeElement {
 
   protected final ImmutableList<CodeElement> appendNextLine() {
     MutableList<CodeElement> list;
-    list = MutableList.create();
+    list = new MutableList<>();
 
     list.addAll(elements);
 

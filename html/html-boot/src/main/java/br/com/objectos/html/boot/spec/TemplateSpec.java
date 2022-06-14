@@ -25,9 +25,9 @@ public class TemplateSpec {
   private int maxArity = 5;
   private int maxLevel = 5;
 
-  private final MutableSet<String> skipAttribute = MutableSet.create();
+  private final MutableSet<String> skipAttribute = new MutableSet<>();
 
-  private final MutableSet<String> skipText = MutableSet.create();
+  private final MutableSet<String> skipText = new MutableSet<>();
 
   TemplateSpec(SpecDsl dsl) {
     this.dsl = dsl;

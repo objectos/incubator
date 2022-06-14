@@ -30,7 +30,7 @@ import objectos.util.MutableList;
 
 public class AnyElementValueStep extends AbstractJavaFileStep {
 
-  private final MutableList<NamedClass> interfaces = MutableList.create();
+  private final MutableList<NamedClass> interfaces = new MutableList<>();
 
   public AnyElementValueStep(Consumer<JavaFile> javaFileWriter) {
     super(javaFileWriter);

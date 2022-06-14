@@ -96,7 +96,7 @@ class PropertyStyle {
 
   private MethodInvocation generateMethodInvocation0(ExpressionName name) {
     MutableList<ArgumentsElement> args;
-    args = MutableList.create();
+    args = new MutableList<>();
 
     args.add(nl());
     args.add(name);

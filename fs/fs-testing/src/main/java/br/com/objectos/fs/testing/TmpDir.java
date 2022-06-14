@@ -35,7 +35,7 @@ public final class TmpDir {
 
   static final TmpDir INSTANCE = createInstance();
 
-  private final MutableList<Directory> directories = MutableList.create();
+  private final MutableList<Directory> directories = new MutableList<>();
 
   private TmpDir() {}
 

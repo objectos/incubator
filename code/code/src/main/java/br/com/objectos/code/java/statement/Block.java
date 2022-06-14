@@ -94,7 +94,7 @@ public class Block extends AbstractSimpleStatement implements LambdaBody {
 
   public static class Builder {
 
-    private final MutableList<BlockElement> elements = MutableList.create();
+    private final MutableList<BlockElement> elements = new MutableList<>();
 
     private Builder() {}
 

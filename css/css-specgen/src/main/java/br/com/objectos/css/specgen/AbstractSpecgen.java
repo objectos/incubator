@@ -43,7 +43,7 @@ abstract class AbstractSpecgen {
   }
 
   protected final void p(String name, String... more) {
-    MutableList<Property> moreProperties = MutableList.create();
+    MutableList<Property> moreProperties = new MutableList<>();
     for (String propertyName : more) {
       moreProperties.add(spec.getProperty(propertyName));
     }

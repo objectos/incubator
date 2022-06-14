@@ -26,7 +26,7 @@ public class EntryTest {
   @Test
   public void compareTo() {
     MutableList<MutableTreeEntry> entries;
-    entries = MutableList.create();
+    entries = new MutableList<>();
 
     entries.add(TestingGit.tree("foo", "74a9c52015b363408e231ddea72ca57746615e77"));
     entries.add(TestingGit.tree("foo-bar", "74a9c52015b363408e231ddea72ca57746615e77"));
@@ -72,7 +72,7 @@ public class EntryTest {
 
   private ImmutableList<String> toNames(MutableList<MutableTreeEntry> entries) {
     MutableList<String> result;
-    result = MutableList.create();
+    result = new MutableList<>();
 
     for (int i = 0, size = entries.size(); i < size; i++) {
       MutableTreeEntry e;

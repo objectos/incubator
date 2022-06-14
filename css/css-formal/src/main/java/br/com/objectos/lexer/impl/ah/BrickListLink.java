@@ -101,7 +101,7 @@ class BrickListLink implements Link, LinkMerger {
 
   private Link add(BrickLink that) {
     MutableList<BrickLink> l;
-    l = MutableList.create();
+    l = new MutableList<>();
 
     l.addAll(list);
 

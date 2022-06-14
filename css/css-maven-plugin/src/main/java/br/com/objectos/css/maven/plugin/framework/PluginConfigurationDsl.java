@@ -54,7 +54,7 @@ class PluginConfigurationDsl implements ConfigurationDsl {
     Property property = b.build();
 
     PropertyClass propertyClass = property.toPropertyClass();
-    groupMap.computeIfAbsent(group, k -> MutableList.create()).add(propertyClass);
+    groupMap.computeIfAbsent(group, k -> new MutableList<>()).add(propertyClass);
 
   }
 

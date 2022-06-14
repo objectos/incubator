@@ -27,7 +27,7 @@ import br.com.objectos.io.Directory;
 public class CachingProxyBuilder {
 
   private final Directory cache;
-  private final MutableList<String> specList = MutableList.create();
+  private final MutableList<String> specList = new MutableList<>();
 
   public CachingProxyBuilder(Directory cache) {
     this.cache = checkNotNull(cache, "cache == null");

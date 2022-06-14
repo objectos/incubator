@@ -37,7 +37,7 @@ public abstract class AbstractCssBootTest {
 
   @BeforeMethod
   public void setUp() {
-    srcJavaFiles = MutableList.create();
+    srcJavaFiles = new MutableList<>();
   }
 
   protected final ImmutableMap<String, JavaFile> execute(StepFactory factory, CssSpec spec) {
@@ -74,7 +74,7 @@ public abstract class AbstractCssBootTest {
 
   private static class ThisStepAdapter extends StepAdapter {
 
-    private final MutableMap<String, JavaFile> javaFiles = MutableMap.create();
+    private final MutableMap<String, JavaFile> javaFiles = new MutableMap<>();
 
     public ImmutableMap<String, JavaFile> toMap() {
       return javaFiles.toImmutableMap();

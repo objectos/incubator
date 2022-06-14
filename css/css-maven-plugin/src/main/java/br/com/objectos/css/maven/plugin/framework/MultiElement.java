@@ -35,7 +35,7 @@ class MultiElement extends AbstractFrameworkObject implements FrameworMultiEleme
     invocation.addNewLine();
 
     MutableList<Argument> arguments;
-    arguments = MutableList.create();
+    arguments = new MutableList<>();
 
     for (int i = 0; i < values.size(); i++) {
       Value value;

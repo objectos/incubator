@@ -356,15 +356,15 @@ public final class MethodCode
 
   public static class Builder implements ThrowsElement.Consumer {
 
-    private final MutableList<AnnotationCode> annotations = MutableList.create();
+    private final MutableList<AnnotationCode> annotations = new MutableList<>();
     private Block block;
     private final MethodModifierSet.Builder modifiers = MethodModifierSet.builder();
     private String name = "unnamed";
-    private final MutableList<ParameterCode> parameters = MutableList.create();
+    private final MutableList<ParameterCode> parameters = new MutableList<>();
     private NamedType returnType = NamedVoid._void();
-    private final MutableList<BlockStatement> statements = MutableList.create();
-    private final MutableList<NamedType> thrownTypes = MutableList.create();
-    private final MutableList<NamedTypeParameter> typeParameters = MutableList.create();
+    private final MutableList<BlockStatement> statements = new MutableList<>();
+    private final MutableList<NamedType> thrownTypes = new MutableList<>();
+    private final MutableList<NamedTypeParameter> typeParameters = new MutableList<>();
 
     private Builder() {}
 

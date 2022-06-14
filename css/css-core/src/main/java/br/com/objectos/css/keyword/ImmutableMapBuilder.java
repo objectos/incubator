@@ -20,7 +20,7 @@ import objectos.util.MutableMap;
 
 class ImmutableMapBuilder {
 
-  private final MutableMap<String, StandardKeyword> map = MutableMap.create();
+  private final MutableMap<String, StandardKeyword> map = new MutableMap<>();
 
   public final ImmutableMap<String, StandardKeyword> build() {
     return map.toImmutableMap();

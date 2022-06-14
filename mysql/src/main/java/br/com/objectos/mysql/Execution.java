@@ -32,11 +32,11 @@ abstract class Execution {
 
   private final Map<String, String> environment;
 
-  private final MutableList<String> error = MutableList.create();
+  private final MutableList<String> error = new MutableList<>();
 
   private int exitValue = -1;
 
-  private final MutableList<String> output = MutableList.create();
+  private final MutableList<String> output = new MutableList<>();
 
   Execution() {
     builder = new ProcessBuilder();

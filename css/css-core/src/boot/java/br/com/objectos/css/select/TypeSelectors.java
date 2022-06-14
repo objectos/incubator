@@ -169,7 +169,7 @@ public final class TypeSelectors {
   }
 
   private static ImmutableMap<String, TypeSelector> buildMap() {
-    MutableMap<String, TypeSelector> m = MutableMap.create();
+    MutableMap<String, TypeSelector> m = new MutableMap<>();
     m.put("a", a);
     m.put("abbr", abbr);
     m.put("article", article);

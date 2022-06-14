@@ -212,7 +212,7 @@ public class FixedCpuWorkerThreadTest {
 
   final static class MutableAdapter extends FixedCpuWorkerThreadAdapter {
 
-    final MutableList<Log> logs = MutableList.create();
+    final MutableList<Log> logs = new MutableList<>();
 
     final BlockingQueue<CpuTask> queue = new ArrayBlockingQueue<CpuTask>(20);
 

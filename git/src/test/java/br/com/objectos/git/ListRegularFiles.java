@@ -31,7 +31,7 @@ import objectos.util.MutableList;
  */
 public final class ListRegularFiles implements DirectoryContentsVisitor {
 
-  private final MutableList<String> leafs = MutableList.create();
+  private final MutableList<String> leafs = new MutableList<>();
 
   private String prefix = "";
 

@@ -30,10 +30,10 @@ class ProductionBuilder {
 
   private CollectionKind collectionKind;
   private Repeatable currentSymbol;
-  private final MutableList<Symbol> expressionList = MutableList.create();
+  private final MutableList<Symbol> expressionList = new MutableList<>();
   private final ParserKind parserKind;
 
-  private final MutableList<Production> productionList = MutableList.create();
+  private final MutableList<Production> productionList = new MutableList<>();
   private Quantifier quantifier;
   private final NonTerminal symbol;
 

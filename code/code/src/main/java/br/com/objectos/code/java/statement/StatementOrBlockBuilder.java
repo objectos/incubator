@@ -20,7 +20,7 @@ import objectos.util.MutableList;
 
 public class StatementOrBlockBuilder {
 
-  private final MutableList<BlockElement> blockElements = MutableList.create();
+  private final MutableList<BlockElement> blockElements = new MutableList<>();
 
   private int blockStatementCount;
   private boolean forceBlock;

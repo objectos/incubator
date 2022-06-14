@@ -106,7 +106,7 @@ public class ProcessingMethodTest extends AbstractCodeModelTest {
   @Test
   public void getDocComment() {
     class ThisProcessor extends AbstractProcessingRoundProcessor {
-      private final MutableList<String> comments = MutableList.create();
+      private final MutableList<String> comments = new MutableList<>();
 
       @Override
       public final Set<String> getSupportedAnnotationTypes() {
@@ -246,7 +246,7 @@ public class ProcessingMethodTest extends AbstractCodeModelTest {
     methods = subject.getDeclaredMethods();
 
     MutableList<NamedType> result;
-    result = MutableList.create();
+    result = new MutableList<>();
 
     for (int i = 0; i < methods.size(); i++) {
       ProcessingMethod method;
@@ -293,7 +293,7 @@ public class ProcessingMethodTest extends AbstractCodeModelTest {
         method = method(type, name);
 
         MutableList<NamedType> result;
-        result = MutableList.create();
+        result = new MutableList<>();
 
         ImmutableList<PTypeMirror> types;
         types = method.getThrownTypes();

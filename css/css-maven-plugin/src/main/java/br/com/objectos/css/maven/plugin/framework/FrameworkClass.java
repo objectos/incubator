@@ -30,7 +30,7 @@ class FrameworkClass {
 
   private final ClassCode.Builder c;
   private final MethodCode.Builder def;
-  private final MutableList<MethodCode> groupMethods = MutableList.create();
+  private final MutableList<MethodCode> groupMethods = new MutableList<>();
 
   private final PackageName packageName;
 
