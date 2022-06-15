@@ -22,23 +22,9 @@ import br.com.objectos.formal.testing.ComplexSingle;
 import br.com.objectos.formal.testing.HasLetters;
 import br.com.objectos.formal.testing.Letter;
 import java.util.List;
-import java.util.stream.Collectors;
 import org.testng.annotations.Test;
 
 public class ProductionBuilderTest {
-
-  @Test
-  public void grammar0_HasLetters() {
-    NonTerminal symbol = NonTerminal.get(HasLetters.class);
-
-    List<Production> res = new ProductionBuilder(ParserKind.TOP_DOWN, symbol)
-        .addTokenValue(Letter.A)
-        .andCreateWith(HasLetters::hasOne);
-
-    assertEquals(res.size(), 1);
-    assertEquals(res.get(0),
-        factoryOf(HasLetters::hasOne).production(symbol, Terminal.get(Letter.A)));
-  }
 
   @Test
   public void grammar0_ComplexSingle() {
@@ -50,24 +36,34 @@ public class ProductionBuilderTest {
 
     assertEquals(res.size(), 1);
     assertEquals(res.get(0),
-        factoryOf(ComplexSingle::new).production(symbol, NonTerminal.get(HasLetters.class)));
+      factoryOf(ComplexSingle::new).production(symbol, NonTerminal.get(HasLetters.class)));
+  }
+
+  @Test
+  public void grammar0_HasLetters() {
+    NonTerminal symbol = NonTerminal.get(HasLetters.class);
+
+    List<Production> res = new ProductionBuilder(ParserKind.TOP_DOWN, symbol)
+        .addTokenValue(Letter.A)
+        .andCreateWith(HasLetters::hasOne);
+
+    assertEquals(res.size(), 1);
+    assertEquals(res.get(0),
+      factoryOf(HasLetters::hasOne).production(symbol, Terminal.get(Letter.A)));
   }
 
   @Test
   public void grammar1_HasLetters() {
     NonTerminal symbol = NonTerminal.get(HasLetters.class);
 
-    List<String> res = new ProductionBuilder(ParserKind.TOP_DOWN, symbol)
+    var res = new ProductionBuilder(ParserKind.TOP_DOWN, symbol)
         .addTokenType(Letter.class).oneOrMore()
-        .andCreateWith(HasLetters::ofIterable)
-        .stream()
-        .map(Object::toString)
-        .collect(Collectors.toList());
+        .andCreateWith(HasLetters::ofIterable);
 
     assertEquals(res.size(), 3);
-    assertEquals(res.get(0), "Letter+ -> Letter Letter+");
-    assertEquals(res.get(1), "Letter+ -> Letter");
-    assertEquals(res.get(2), "<HasLetters> -> Letter+");
+    assertEquals(res.get(0).toString(), "Letter+ -> Letter Letter+");
+    assertEquals(res.get(1).toString(), "Letter+ -> Letter");
+    assertEquals(res.get(2).toString(), "<HasLetters> -> Letter+");
   }
 
 }
