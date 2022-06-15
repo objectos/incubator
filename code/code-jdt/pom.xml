@@ -28,7 +28,7 @@
 	</parent>
 
 	<artifactId>code-jdt</artifactId>
-	
+
 	<name>${project.groupId}:${project.artifactId}</name>
 
 	<inceptionYear>2014</inceptionYear>
@@ -50,15 +50,15 @@
 				<jdt.compiler-apt.version>1.0.600.v20130530-1010</jdt.compiler-apt.version>
 				<jdt.core.groupId>org.eclipse.tycho</jdt.core.groupId>
 				<jdt.core.version>3.9.1.v20130905-0837</jdt.core.version>
-			</properties>			
-		</profile>	
+			</properties>
+		</profile>
 		<profile>
 			<id>java7</id>
 			<properties>
 				<jdt.compiler-apt.version>1.2.100</jdt.compiler-apt.version>
 				<jdt.core.version>3.12.3</jdt.core.version>
-			</properties>			
-		</profile>		
+			</properties>
+		</profile>
 	</profiles>
 
 	<dependencies>
@@ -77,11 +77,23 @@
 			<groupId>${jdt.core.groupId}</groupId>
 			<artifactId>org.eclipse.jdt.core</artifactId>
 			<version>${jdt.core.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.osgi.service</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>${jdt.compiler-apt.groupId}</groupId>
 			<artifactId>org.eclipse.jdt.compiler.apt</artifactId>
 			<version>${jdt.compiler-apt.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.osgi.service</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>${platform.equinox-common.groupId}</groupId>
