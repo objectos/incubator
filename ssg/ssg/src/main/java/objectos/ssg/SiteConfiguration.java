@@ -17,6 +17,7 @@ package objectos.ssg;
 
 import br.com.objectos.http.media.MediaType;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
@@ -34,7 +35,7 @@ public class SiteConfiguration implements Site.Context {
 
   private final Map<Class<?>, Object> byClassMap = new MutableMap<>();
 
-  final List<Object> objects = new MutableList<>();
+  final List<Object> objects = new ArrayList<>();
 
   private final Set<String> paths = new MutableSet<>();
 
