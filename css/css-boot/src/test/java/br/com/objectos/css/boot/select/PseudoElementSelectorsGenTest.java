@@ -20,14 +20,14 @@ import static org.testng.Assert.assertEquals;
 import br.com.objectos.code.java.io.JavaFile;
 import br.com.objectos.css.boot.AbstractCssBootTest;
 import br.com.objectos.css.boot.spec.CssSpec;
-import objectos.util.ImmutableMap;
+import objectos.util.UnmodifiableMap;
 import org.testng.annotations.Test;
 
 public class PseudoElementSelectorsGenTest extends AbstractCssBootTest {
 
   @Test
   public void generateJavaFile() {
-    ImmutableMap<String, JavaFile> javaFiles;
+    UnmodifiableMap<String, JavaFile> javaFiles;
     javaFiles = execute(
       PseudoElementSelectorsGen::new,
       new CssSpec() {
@@ -49,7 +49,7 @@ public class PseudoElementSelectorsGenTest extends AbstractCssBootTest {
       "",
       "import br.com.objectos.code.annotations.Generated;",
       "import br.com.objectos.code.annotations.Ignore;",
-      "import objectos.util.ImmutableMap;",
+      "import objectos.util.UnmodifiableMap;",
       "import objectos.util.MutableMap;",
       "",
       "@Generated(\"br.com.objectos.css.boot.select.PseudoElementSelectorsGen\")",
@@ -61,7 +61,7 @@ public class PseudoElementSelectorsGenTest extends AbstractCssBootTest {
       "",
       "  private static final PseudoElementSelector[] ARRAY = new PseudoElementSelector[] {AFTER, _MOZ_FOCUS_INNER};",
       "",
-      "  private static final ImmutableMap<String, PseudoElementSelector> MAP = buildMap();",
+      "  private static final UnmodifiableMap<String, PseudoElementSelector> MAP = buildMap();",
       "",
       "  private PseudoElementSelectors() {}",
       "",
@@ -75,11 +75,11 @@ public class PseudoElementSelectorsGenTest extends AbstractCssBootTest {
       "    return MAP.get(name);",
       "  }",
       "",
-      "  private static ImmutableMap<String, PseudoElementSelector> buildMap() {",
+      "  private static UnmodifiableMap<String, PseudoElementSelector> buildMap() {",
       "    MutableMap<String, PseudoElementSelector> m = new MutableMap<>();",
       "    m.put(\"after\", AFTER);",
       "    m.put(\"-moz-focus-inner\", _MOZ_FOCUS_INNER);",
-      "    return m.toImmutableMap();",
+      "    return m.toUnmodifiableMap();",
       "  }",
       "",
       "}"

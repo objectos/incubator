@@ -102,8 +102,8 @@ public class KeywordsClassStep extends Step {
     NamedClassOrParameterized implGrowableMap;
     implGrowableMap = t(Types._MutableMap, mapTypeArgs);
 
-    NamedClassOrParameterized implImmutableMap;
-    implImmutableMap = t(Types._ImmutableMap, mapTypeArgs);
+    NamedClassOrParameterized implUnmodifiableMap;
+    implUnmodifiableMap = t(Types._UnmodifiableMap, mapTypeArgs);
 
     return _class(
         CssBoot.GENERATED,
@@ -117,7 +117,7 @@ public class KeywordsClassStep extends Step {
         ),
 
         field(
-            _private(), _static(), _final(), implImmutableMap,
+            _private(), _static(), _final(), implUnmodifiableMap,
             init(Ids.MAP, invoke(Ids.buildMap.name()))
         ),
 
@@ -146,10 +146,10 @@ public class KeywordsClassStep extends Step {
         ),
 
         method(
-            _private(), _static(), implImmutableMap, Ids.buildMap,
+            _private(), _static(), implUnmodifiableMap, Ids.buildMap,
             _var(implGrowableMap, Ids.m, Types._newMutableMap()),
             statements(mapStatements),
-            _return(invoke(Ids.m, "toImmutableMap"))
+            _return(invoke(Ids.m, "toUnmodifiableMap"))
         )
     );
   }

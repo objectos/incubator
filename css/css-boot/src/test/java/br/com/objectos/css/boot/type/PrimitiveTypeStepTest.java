@@ -21,14 +21,14 @@ import br.com.objectos.code.java.io.JavaFile;
 import br.com.objectos.css.boot.AbstractCssBootTest;
 import br.com.objectos.css.boot.spec.CssSpec;
 import br.com.objectos.css.boot.spec.Source;
-import objectos.util.ImmutableMap;
+import objectos.util.UnmodifiableMap;
 import org.testng.annotations.Test;
 
 public class PrimitiveTypeStepTest extends AbstractCssBootTest {
 
   @Test
   public void execute() {
-    ImmutableMap<String, JavaFile> javaFiles = execute(
+    UnmodifiableMap<String, JavaFile> javaFiles = execute(
         PrimitiveTypeStep::new,
         new CssSpec() {
           @Override

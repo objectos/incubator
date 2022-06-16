@@ -2,7 +2,7 @@ package br.com.objectos.css.select;
 
 import br.com.objectos.code.annotations.Generated;
 import br.com.objectos.code.annotations.Ignore;
-import objectos.util.ImmutableMap;
+import objectos.util.UnmodifiableMap;
 import objectos.util.MutableMap;
 
 @Generated("br.com.objectos.css.boot.select.PseudoElementSelectorsGen")
@@ -42,7 +42,7 @@ public final class PseudoElementSelectors {
 
   private static final PseudoElementSelector[] ARRAY = new PseudoElementSelector[] {AFTER, BACKDROP, BEFORE, CUE, FIRST_LETTER, FIRST_LINE, GRAMMAR_ERROR, MARKER, PLACEHOLDER, SELECTION, SPELLING_ERROR, _MOZ_FOCUS_INNER, _WEBKIT_INNER_SPIN_BUTTON, _WEBKIT_OUTER_SPIN_BUTTON, _WEBKIT_SEARCH_DECORATION, _WEBKIT_FILE_UPLOAD_BUTTON};
 
-  private static final ImmutableMap<String, PseudoElementSelector> MAP = buildMap();
+  private static final UnmodifiableMap<String, PseudoElementSelector> MAP = buildMap();
 
   private PseudoElementSelectors() {}
 
@@ -56,7 +56,7 @@ public final class PseudoElementSelectors {
     return MAP.get(name);
   }
 
-  private static ImmutableMap<String, PseudoElementSelector> buildMap() {
+  private static UnmodifiableMap<String, PseudoElementSelector> buildMap() {
     MutableMap<String, PseudoElementSelector> m = new MutableMap<>();
     m.put("after", AFTER);
     m.put("backdrop", BACKDROP);
@@ -74,7 +74,7 @@ public final class PseudoElementSelectors {
     m.put("-webkit-outer-spin-button", _WEBKIT_OUTER_SPIN_BUTTON);
     m.put("-webkit-search-decoration", _WEBKIT_SEARCH_DECORATION);
     m.put("-webkit-file-upload-button", _WEBKIT_FILE_UPLOAD_BUTTON);
-    return m.toImmutableMap();
+    return m.toUnmodifiableMap();
   }
 
 }

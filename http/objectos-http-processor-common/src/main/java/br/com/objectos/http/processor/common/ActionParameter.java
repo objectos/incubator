@@ -20,7 +20,7 @@ package br.com.objectos.http.processor.common;
 
 import br.com.objectos.http.processor.common.ActionParameterConstructor.IndexGenerator;
 import br.com.objectos.way.code.model.element.ExecutableElementQuery;
-import br.com.objectos.way.util.ImmutableMap;
+import br.com.objectos.way.util.UnmodifiableMap;
 import br.com.objectos.way.util.MoreCollectors;
 import com.squareup.javapoet.CodeBlock;
 import com.squareup.javapoet.TypeName;
@@ -29,7 +29,7 @@ import java.util.Map;
 
 public abstract class ActionParameter {
 
-  private static final Map<String, ActionParameterFactory> FACTORY_MAP = ImmutableMap
+  private static final Map<String, ActionParameterFactory> FACTORY_MAP = UnmodifiableMap
       .<String, ActionParameterFactory>builder()
       .put("int", ActionParameterInt::new)
       .put("java.lang.String", ActionParameterString::new)

@@ -18,13 +18,13 @@ package br.com.objectos.css.specgen;
 import br.com.objectos.code.java.io.JavaFile;
 import br.com.objectos.css.specgen.spec.Step;
 import br.com.objectos.css.specgen.spec.StepAdapter;
-import objectos.util.ImmutableMap;
+import objectos.util.UnmodifiableMap;
 import objectos.util.MutableMap;
 import org.testng.Assert;
 
 public abstract class AbstractCssSpecgenTest {
 
-  protected final ImmutableMap<String, JavaFile> execute(
+  protected final UnmodifiableMap<String, JavaFile> execute(
       StepFactory factory, AbstractSpecgen specgen) {
     ThisStepAdapter adapter = new ThisStepAdapter();
     Step step = factory.get(adapter);
@@ -58,8 +58,8 @@ public abstract class AbstractCssSpecgenTest {
       javaFiles.put(javaFile.simpleName(), javaFile);
     }
 
-    final ImmutableMap<String, JavaFile> toMap() {
-      return javaFiles.toImmutableMap();
+    final UnmodifiableMap<String, JavaFile> toMap() {
+      return javaFiles.toUnmodifiableMap();
     }
 
   }

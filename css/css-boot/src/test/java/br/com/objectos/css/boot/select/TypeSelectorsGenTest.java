@@ -20,14 +20,14 @@ import static org.testng.Assert.assertEquals;
 import br.com.objectos.code.java.io.JavaFile;
 import br.com.objectos.css.boot.AbstractCssBootTest;
 import br.com.objectos.css.boot.spec.CssSpec;
-import objectos.util.ImmutableMap;
+import objectos.util.UnmodifiableMap;
 import org.testng.annotations.Test;
 
 public class TypeSelectorsGenTest extends AbstractCssBootTest {
 
   @Test
   public void generateJavaFile() {
-    ImmutableMap<String, JavaFile> javaFiles;
+    UnmodifiableMap<String, JavaFile> javaFiles;
     javaFiles = execute(
       TypeSelectorsGen::new,
       new CssSpec() {
@@ -47,7 +47,7 @@ public class TypeSelectorsGenTest extends AbstractCssBootTest {
       "",
       "import br.com.objectos.code.annotations.Generated;",
       "import br.com.objectos.code.annotations.Ignore;",
-      "import objectos.util.ImmutableMap;",
+      "import objectos.util.UnmodifiableMap;",
       "import objectos.util.MutableMap;",
       "",
       "@Generated(\"br.com.objectos.css.boot.select.TypeSelectorsGen\")",
@@ -59,7 +59,7 @@ public class TypeSelectorsGenTest extends AbstractCssBootTest {
       "",
       "  private static final TypeSelector[] ARRAY = new TypeSelector[] {a, div};",
       "",
-      "  private static final ImmutableMap<String, TypeSelector> MAP = buildMap();",
+      "  private static final UnmodifiableMap<String, TypeSelector> MAP = buildMap();",
       "",
       "  private TypeSelectors() {}",
       "",
@@ -73,11 +73,11 @@ public class TypeSelectorsGenTest extends AbstractCssBootTest {
       "    return MAP.get(name);",
       "  }",
       "",
-      "  private static ImmutableMap<String, TypeSelector> buildMap() {",
+      "  private static UnmodifiableMap<String, TypeSelector> buildMap() {",
       "    MutableMap<String, TypeSelector> m = new MutableMap<>();",
       "    m.put(\"a\", a);",
       "    m.put(\"div\", div);",
-      "    return m.toImmutableMap();",
+      "    return m.toUnmodifiableMap();",
       "  }",
       "",
       "}"

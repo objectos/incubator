@@ -20,14 +20,14 @@ import static org.testng.Assert.assertEquals;
 import br.com.objectos.code.java.io.JavaFile;
 import br.com.objectos.css.boot.AbstractCssBootTest;
 import br.com.objectos.css.boot.spec.CssSpec;
-import objectos.util.ImmutableMap;
+import objectos.util.UnmodifiableMap;
 import org.testng.annotations.Test;
 
 public class GeneratedColorStepTest extends AbstractCssBootTest {
 
   @Test
   public void execute() {
-    ImmutableMap<String, JavaFile> javaFiles;
+    UnmodifiableMap<String, JavaFile> javaFiles;
     javaFiles = execute(
       GeneratedColorStep::new,
       new CssSpec() {
@@ -45,7 +45,7 @@ public class GeneratedColorStepTest extends AbstractCssBootTest {
       "package br.com.objectos.css.type;",
       "",
       "import br.com.objectos.code.annotations.Generated;",
-      "import objectos.util.ImmutableMap;",
+      "import objectos.util.UnmodifiableMap;",
       "import objectos.util.MutableMap;",
       "",
       "@Generated(\"br.com.objectos.css.boot.CssBoot\")",
@@ -57,7 +57,7 @@ public class GeneratedColorStepTest extends AbstractCssBootTest {
       "",
       "  private static final ColorName[] ARRAY = new ColorName[] {ButtonText, transparent};",
       "",
-      "  private static final ImmutableMap<String, ColorName> MAP = buildMap();",
+      "  private static final UnmodifiableMap<String, ColorName> MAP = buildMap();",
       "",
       "  public static ColorName getByCode(int code) {",
       "    return ARRAY[code];",
@@ -75,11 +75,11 @@ public class GeneratedColorStepTest extends AbstractCssBootTest {
       "    return MAP.containsKey(name);",
       "  }",
       "",
-      "  private static ImmutableMap<String, ColorName> buildMap() {",
+      "  private static UnmodifiableMap<String, ColorName> buildMap() {",
       "    MutableMap<String, ColorName> m = new MutableMap<>();",
       "    m.put(\"ButtonText\", ButtonText);",
       "    m.put(\"transparent\", transparent);",
-      "    return m.toImmutableMap();",
+      "    return m.toUnmodifiableMap();",
       "  }",
       "",
       "}"

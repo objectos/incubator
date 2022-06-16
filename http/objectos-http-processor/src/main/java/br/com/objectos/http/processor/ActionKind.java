@@ -27,7 +27,7 @@ import br.com.objectos.http.server.StatusCode;
 import br.com.objectos.http.server.TextResponse;
 import br.com.objectos.way.code.model.element.ExecutableElementQuery;
 import br.com.objectos.way.code.model.type.TypeMirrorQuery;
-import br.com.objectos.way.util.ImmutableMap;
+import br.com.objectos.way.util.UnmodifiableMap;
 import com.squareup.javapoet.CodeBlock;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -72,7 +72,7 @@ enum ActionKind {
   };
 
   private static final Map<String, ActionKind> QNAME_MAP =
-      ImmutableMap.<String, ActionKind> builder()
+      UnmodifiableMap.<String, ActionKind> builder()
           .put(Response.class.getName(), RESPONSE)
           .put(File.class.getName(), FILE)
           .put(StatusCode.class.getName(), STATUS_CODE)
@@ -80,7 +80,7 @@ enum ActionKind {
           .build();
 
   private static final Map<Class<?>, ActionKind> INSTANCEOF_MAP =
-      ImmutableMap.<Class<?>, ActionKind> builder()
+      UnmodifiableMap.<Class<?>, ActionKind> builder()
           .put(HtmlWritable.class, HTML_WRITABLE)
           .build();
 

@@ -19,12 +19,12 @@ import br.com.objectos.http.server.RequestHeaders;
 import java.util.Enumeration;
 import java.util.NoSuchElementException;
 import javax.servlet.http.HttpServletRequest;
-import objectos.util.ImmutableMap;
+import objectos.util.UnmodifiableMap;
 import objectos.util.MutableMap;
 
 class JettyRequestHeaders implements RequestHeaders {
 
-  private ImmutableMap<String, String> map;
+  private UnmodifiableMap<String, String> map;
 
   private final HttpServletRequest request;
 
@@ -72,7 +72,7 @@ class JettyRequestHeaders implements RequestHeaders {
     }
   }
 
-  private ImmutableMap<String, String> initMap() {
+  private UnmodifiableMap<String, String> initMap() {
     MutableMap<String, String> map = new MutableMap<>();
 
     Enumeration<String> names = request.getHeaderNames();
@@ -90,7 +90,7 @@ class JettyRequestHeaders implements RequestHeaders {
       map.put(name, sb.toString());
     }
 
-    return map.toImmutableMap();
+    return map.toUnmodifiableMap();
   }
 
 }

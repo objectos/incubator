@@ -22,7 +22,7 @@ public class KeywordNames {
 
   static final PackageName PACKAGE = PackageName.named("br.com.objectos.css.keyword");
 
-  static final NamedClass _ImmutableMapBuilder = className("ImmutableMapBuilder");
+  static final NamedClass _UnmodifiableMapBuilder = className("UnmodifiableMapBuilder");
   static final NamedClass _StandardKeyword = className("StandardKeyword");
   static final NamedClass _UnknownKeyword = className("UnknownKeyword");
   public static final NamedClass _Keywords = className("Keywords");

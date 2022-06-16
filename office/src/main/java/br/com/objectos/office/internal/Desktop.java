@@ -26,7 +26,7 @@ import com.sun.star.uno.UnoRuntime;
 import com.sun.star.uno.XComponentContext;
 import java.io.IOException;
 import java.net.URI;
-import objectos.util.ImmutableMap;
+import objectos.util.UnmodifiableMap;
 import objectos.util.MutableMap;
 
 class Desktop {
@@ -75,7 +75,7 @@ class Desktop {
     XModel2 model;
     model = UnoRuntime.queryInterface(XModel2.class, component);
 
-    ImmutableMap<String, Object> args;
+    UnmodifiableMap<String, Object> args;
     args = getArgs(model);
 
     Object _documentService;
@@ -95,7 +95,7 @@ class Desktop {
     desktop.terminate();
   }
 
-  private ImmutableMap<String, Object> getArgs(XModel2 model) {
+  private UnmodifiableMap<String, Object> getArgs(XModel2 model) {
     MutableMap<String, Object> map;
     map = new MutableMap<>();
 
@@ -112,7 +112,7 @@ class Desktop {
       map.put(key, value);
     }
 
-    return map.toImmutableMap();
+    return map.toUnmodifiableMap();
   }
 
   private XComponent loadComponent(String url) throws IOException {

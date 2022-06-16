@@ -1,7 +1,7 @@
 package br.com.objectos.css.keyword;
 
 import br.com.objectos.code.annotations.Generated;
-import objectos.util.ImmutableMap;
+import objectos.util.UnmodifiableMap;
 import objectos.util.MutableMap;
 
 @Generated("br.com.objectos.css.boot.CssBoot")
@@ -571,7 +571,7 @@ public final class Keywords {
 
   private static final StandardKeyword[] ARRAY = new StandardKeyword[] {mozArabicIndic, mozBengali, mozCjkEarthlyBranch, mozCjkHeavenlyStem, mozDevanagari, mozGujarati, mozGurmukhi, mozKannada, mozKhmer, mozLao, mozMalayalam, mozMyanmar, mozOriya, mozPersian, mozTamil, mozTelugu, mozThai, absolute, alias, allScroll, arabicIndic, armenian, auto, baseline, bengali, blink, block, bold, bolder, borderBox, both, bottom, breakSpaces, buttonKw, buttonBevel, cambodian, capitalize, caption, cell, center, checkbox, circle, cjkDecimal, cjkEarthlyBranch, cjkHeavenlyStem, cjkIdeographic, clip, closeQuote, colResize, collapse, column, columnReverse, contain, content, contentBox, contents, contextMenu, copy, cover, crosshair, cursive, dashed, decimal, decimalLeadingZero, defaultKw, devanagari, disc, disclosureClosed, disclosureOpen, dotted, doubleKw, eResize, end, ethiopicNumeric, ewResize, fantasy, first, fixed, flex, flexEnd, flexStart, flow, flowRoot, fromFont, fullSizeKana, fullWidth, georgian, grab, grabbing, grammarError, grid, groove, gujarati, gurmukhi, hebrew, help, hidden, hiragana, hiraganaIroha, horizontal, icon, inherit, initial, inline, inlineBlock, inlineEnd, inlineFlex, inlineGrid, inlineStart, inlineTable, inset, inside, invert, italic, japaneseFormal, japaneseInformal, justify, kannada, katakana, katakanaIroha, khmer, koreanHangulFormal, koreanHanjaFormal, koreanHanjaInformal, lao, large, larger, last, left, legacy, lighter, lineThrough, listItem, listbox, local, lowerAlpha, lowerArmenian, lowerGreek, lowerLatin, lowerRoman, lowercase, malayalam, matchParent, maxContent, medium, menu, menulist, menulistButton, messageBox, meter, middle, minContent, mongolian, monospace, move, myanmar, nResize, neResize, neswResize, noCloseQuote, noDrop, noOpenQuote, noRepeat, none, normal, notAllowed, nowrap, nsResize, nwResize, nwseResize, oblique, openQuote, oriya, outset, outside, overline, paddingBox, persian, pointer, preKw, preLine, preWrap, progressKw, progressBar, pushButton, radio, relative, repeat, repeatX, repeatY, ridge, right, round, row, rowResize, rowReverse, ruby, rubyBase, rubyBaseContainer, rubyText, rubyTextContainer, runIn, sResize, safe, sansSerif, scroll, seResize, searchfield, selfEnd, selfStart, separate, serif, simpChineseFormal, simpChineseInformal, sliderHorizontal, smallKw, smallCaps, smallCaption, smaller, solid, space, spaceAround, spaceBetween, spaceEvenly, spellingError, square, squareButton, start, staticKw, statusBar, sticky, stretch, subKw, superKw, swResize, tableKw, tableCaption, tableCell, tableColumn, tableColumnGroup, tableFooterGroup, tableHeaderGroup, tableRow, tableRowGroup, tamil, telugu, text, textBottom, textTop, textareaKw, textfield, thai, thick, thin, tibetan, top, tradChineseFormal, tradChineseInformal, underline, unsafe, unset, upperAlpha, upperArmenian, upperLatin, upperRoman, uppercase, vertical, verticalText, visible, wResize, wait, wavy, wrap, wrapReverse, xLarge, xSmall, xxLarge, xxSmall, xxxLarge, zoomIn, zoomOut};
 
-  private static final ImmutableMap<String, StandardKeyword> MAP = buildMap();
+  private static final UnmodifiableMap<String, StandardKeyword> MAP = buildMap();
 
   private Keywords() {}
 
@@ -591,7 +591,7 @@ public final class Keywords {
     return MAP.containsKey(name);
   }
 
-  private static ImmutableMap<String, StandardKeyword> buildMap() {
+  private static UnmodifiableMap<String, StandardKeyword> buildMap() {
     MutableMap<String, StandardKeyword> m = new MutableMap<>();
     m.put("-moz-arabic-indic", mozArabicIndic);
     m.put("-moz-bengali", mozBengali);
@@ -874,7 +874,7 @@ public final class Keywords {
     m.put("xxx-large", xxxLarge);
     m.put("zoom-in", zoomIn);
     m.put("zoom-out", zoomOut);
-    return m.toImmutableMap();
+    return m.toUnmodifiableMap();
   }
 
 }

@@ -2,7 +2,7 @@ package br.com.objectos.css.select;
 
 import br.com.objectos.code.annotations.Generated;
 import br.com.objectos.code.annotations.Ignore;
-import objectos.util.ImmutableMap;
+import objectos.util.UnmodifiableMap;
 import objectos.util.MutableMap;
 
 @Generated("br.com.objectos.css.boot.select.PseudoClassSelectorsGen")
@@ -104,7 +104,7 @@ public final class PseudoClassSelectors {
 
   private static final PseudoClassSelector[] ARRAY = new PseudoClassSelector[] {ACTIVE, ANY_LINK, BLANK, CHECKED, CURRENT, DEFAULT, DEFINED, DISABLED, DROP, EMPTY, ENABLED, FIRST, FIRST_CHILD, FIRST_OF_TYPE, FULLSCREEN, FUTURE, FOCUS, FOCUS_VISIBLE, FOCUS_WITHIN, HOST, HOVER, INDETERMINATE, IN_RANGE, INVALID, LAST_CHILD, LAST_OF_TYPE, LEFT, LINK, LOCAL_LINK, ONLY_CHILD, ONLY_OF_TYPE, OPTIONAL, OUT_OF_RANGE, PAST, PLACEHOLDER_SHOWN, READ_ONLY, READ_WRITE, REQUIRED, RIGHT, ROOT, SCOPE, TARGET, TARGET_WITHIN, USER_INVALID, VALID, VISITED, _MOZ_FOCUSRING};
 
-  private static final ImmutableMap<String, PseudoClassSelector> MAP = buildMap();
+  private static final UnmodifiableMap<String, PseudoClassSelector> MAP = buildMap();
 
   private PseudoClassSelectors() {}
 
@@ -118,7 +118,7 @@ public final class PseudoClassSelectors {
     return MAP.get(name);
   }
 
-  private static ImmutableMap<String, PseudoClassSelector> buildMap() {
+  private static UnmodifiableMap<String, PseudoClassSelector> buildMap() {
     MutableMap<String, PseudoClassSelector> m = new MutableMap<>();
     m.put("active", ACTIVE);
     m.put("any-link", ANY_LINK);
@@ -167,7 +167,7 @@ public final class PseudoClassSelectors {
     m.put("valid", VALID);
     m.put("visited", VISITED);
     m.put("-moz-focusring", _MOZ_FOCUSRING);
-    return m.toImmutableMap();
+    return m.toUnmodifiableMap();
   }
 
 }

@@ -21,7 +21,7 @@ import br.com.objectos.code.java.declaration.PackageName;
 import br.com.objectos.code.java.type.NamedArray;
 import br.com.objectos.code.java.type.NamedClass;
 import br.com.objectos.code.java.type.NamedParameterized;
-import objectos.util.ImmutableMap;
+import objectos.util.UnmodifiableMap;
 
 public class AttributeNames {
 
@@ -41,7 +41,7 @@ public class AttributeNames {
       = StandardAttributeName.toNamedArray();
 
   static final NamedParameterized namesMapTypeName = t(
-      t(ImmutableMap.class),
+      t(UnmodifiableMap.class),
       t(String.class),
       StandardAttributeName
   );

@@ -17,7 +17,7 @@ package br.com.objectos.http.media;
 
 import java.util.Locale;
 import objectos.lang.Check;
-import objectos.util.ImmutableMap;
+import objectos.util.UnmodifiableMap;
 import objectos.util.MutableMap;
 
 public class MediaTypes {
@@ -79,9 +79,9 @@ public class MediaTypes {
 
   private static class ExtensionHolder {
 
-    static final ImmutableMap<String, MediaType> map = buildExtensionMap();
+    static final UnmodifiableMap<String, MediaType> map = buildExtensionMap();
 
-    private static ImmutableMap<String, MediaType> buildExtensionMap() {
+    private static UnmodifiableMap<String, MediaType> buildExtensionMap() {
       MutableMap<String, MediaType> map;
       map = new MutableMap<>();
 
@@ -105,7 +105,7 @@ public class MediaTypes {
       map.put("xml", TextType.XML);
       map.put("txt", TextType.PLAIN);
 
-      return map.toImmutableMap();
+      return map.toUnmodifiableMap();
     }
 
   }

@@ -21,13 +21,13 @@ package br.com.objectos.http.server.nio;
 import static br.com.objectos.collections.Collections.newOrderedGrowableMap;
 
 import br.com.objectos.collections.GrowableMap;
-import br.com.objectos.collections.ImmutableMap;
+import br.com.objectos.collections.UnmodifiableMap;
 import br.com.objectos.http.server.RequestParameters;
 import java.util.NoSuchElementException;
 
 class NioRequestParameters implements RequestParameters {
 
-  private ImmutableMap<String, String> map;
+  private UnmodifiableMap<String, String> map;
   private final SocketReader reader;
   private boolean ready = false;
 
@@ -42,7 +42,7 @@ class NioRequestParameters implements RequestParameters {
     return map.get(key);
   }
 
-  private ImmutableMap<String, String> buildMap() {
+  private UnmodifiableMap<String, String> buildMap() {
     ParamMapBuilder map = new ParamMapBuilder();
     String all = reader.readAll();
     String[] lines = all.split("\n");
@@ -106,8 +106,8 @@ class NioRequestParameters implements RequestParameters {
       sb.append(c);
     }
 
-    public ImmutableMap<String, String> build() {
-      return map.toImmutableMap();
+    public UnmodifiableMap<String, String> build() {
+      return map.toUnmodifiableMap();
     }
 
     public void reset() {

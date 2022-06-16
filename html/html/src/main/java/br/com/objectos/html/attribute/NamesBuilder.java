@@ -15,15 +15,15 @@
  */
 package br.com.objectos.html.attribute;
 
-import objectos.util.ImmutableMap;
+import objectos.util.UnmodifiableMap;
 import objectos.util.MutableMap;
 
 class NamesBuilder {
 
   private final MutableMap<String, StandardAttributeName> map = new MutableMap<>();
 
-  public final ImmutableMap<String, StandardAttributeName> build() {
-    return map.toImmutableMap();
+  public final UnmodifiableMap<String, StandardAttributeName> build() {
+    return map.toUnmodifiableMap();
   }
 
   public final NamesBuilder put(String name, StandardAttributeName value) {

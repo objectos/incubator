@@ -1,7 +1,7 @@
 package br.com.objectos.css.type;
 
 import br.com.objectos.code.annotations.Generated;
-import objectos.util.ImmutableMap;
+import objectos.util.UnmodifiableMap;
 import objectos.util.MutableMap;
 
 @Generated("br.com.objectos.css.boot.CssBoot")
@@ -363,7 +363,7 @@ abstract class GeneratedColor {
 
   private static final ColorName[] ARRAY = new ColorName[] {ActiveBorder, ActiveCaption, AppWorkspace, Background, ButtonFace, ButtonHighlight, ButtonShadow, ButtonText, CaptionText, GrayText, Highlight, HighlightText, InactiveBorder, InactiveCaption, InactiveCaptionText, InfoBackground, InfoText, MenuText, Scrollbar, ThreeDDarkShadow, ThreeDFace, ThreeDHighlight, ThreeDLightShadow, ThreeDShadow, Window, WindowFrame, WindowText, aliceblue, antiquewhite, aqua, aquamarine, azure, beige, bisque, black, blanchedalmond, blue, blueviolet, brown, burlywood, cadetblue, chartreuse, chocolate, coral, cornflowerblue, cornsilk, crimson, currentcolor, cyan, darkblue, darkcyan, darkgoldenrod, darkgray, darkgreen, darkgrey, darkkhaki, darkmagenta, darkolivegreen, darkorange, darkorchid, darkred, darksalmon, darkseagreen, darkslateblue, darkslategray, darkslategrey, darkturquoise, darkviolet, deeppink, deepskyblue, dimgray, dimgrey, dodgerblue, firebrick, floralwhite, forestgreen, fuchsia, gainsboro, ghostwhite, gold, goldenrod, gray, green, greenyellow, grey, honeydew, hotpink, indianred, indigo, ivory, khaki, lavender, lavenderblush, lawngreen, lemonchiffon, lightblue, lightcoral, lightcyan, lightgoldenrodyellow, lightgray, lightgreen, lightgrey, lightpink, lightsalmon, lightseagreen, lightskyblue, lightslategray, lightslategrey, lightsteelblue, lightyellow, lime, limegreen, linen, magenta, maroon, mediumaquamarine, mediumblue, mediumorchid, mediumpurple, mediumseagreen, mediumslateblue, mediumspringgreen, mediumturquoise, mediumvioletred, midnightblue, mintcream, mistyrose, moccasin, navajowhite, navy, oldlace, olive, olivedrab, orange, orangered, orchid, palegoldenrod, palegreen, paleturquoise, palevioletred, papayawhip, peachpuff, peru, pink, plum, powderblue, purple, rebeccapurple, red, rosybrown, royalblue, saddlebrown, salmon, sandybrown, seagreen, seashell, sienna, silver, skyblue, slateblue, slategray, slategrey, snow, springgreen, steelblue, tan, teal, thistle, tomato, transparent, turquoise, violet, wheat, white, whitesmoke, yellow, yellowgreen};
 
-  private static final ImmutableMap<String, ColorName> MAP = buildMap();
+  private static final UnmodifiableMap<String, ColorName> MAP = buildMap();
 
   public static ColorName getByCode(int code) {
     return ARRAY[code];
@@ -381,7 +381,7 @@ abstract class GeneratedColor {
     return MAP.containsKey(name);
   }
 
-  private static ImmutableMap<String, ColorName> buildMap() {
+  private static UnmodifiableMap<String, ColorName> buildMap() {
     MutableMap<String, ColorName> m = new MutableMap<>();
     m.put("ActiveBorder", ActiveBorder);
     m.put("ActiveCaption", ActiveCaption);
@@ -560,7 +560,7 @@ abstract class GeneratedColor {
     m.put("whitesmoke", whitesmoke);
     m.put("yellow", yellow);
     m.put("yellowgreen", yellowgreen);
-    return m.toImmutableMap();
+    return m.toUnmodifiableMap();
   }
 
 }

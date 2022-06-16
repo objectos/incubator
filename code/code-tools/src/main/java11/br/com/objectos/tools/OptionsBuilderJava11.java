@@ -24,7 +24,7 @@ import java.nio.file.Path;
 import java.util.Optional;
 import java.util.Set;
 import objectos.util.UnmodifiableList;
-import objectos.util.ImmutableMap;
+import objectos.util.UnmodifiableMap;
 import objectos.util.MutableList;
 import objectos.util.MutableMap;
 
@@ -126,7 +126,7 @@ abstract class OptionsBuilderJava11 extends AbstractOptionsBuilder {
 
   @Override
   public final void visitPatchModuleWithTestClasses(String moduleName) {
-    ImmutableMap<String, Path> paths;
+    UnmodifiableMap<String, Path> paths;
     paths = config.modulePaths;
 
     if (!paths.containsKey(moduleName)) {
@@ -186,7 +186,7 @@ abstract class OptionsBuilderJava11 extends AbstractOptionsBuilder {
 
     final UnmodifiableList<String> addModules;
 
-    final ImmutableMap<String, Path> modulePaths;
+    final UnmodifiableMap<String, Path> modulePaths;
 
     Config(ConfigBuilder builder) {
       this.addModules = builder.getAddModules();
@@ -232,8 +232,8 @@ abstract class OptionsBuilderJava11 extends AbstractOptionsBuilder {
       return addModules.toUnmodifiableList();
     }
 
-    final ImmutableMap<String, Path> getModulePaths() {
-      return modulePaths.toImmutableMap();
+    final UnmodifiableMap<String, Path> getModulePaths() {
+      return modulePaths.toUnmodifiableMap();
     }
 
   }

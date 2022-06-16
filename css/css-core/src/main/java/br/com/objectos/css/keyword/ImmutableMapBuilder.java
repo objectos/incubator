@@ -15,18 +15,18 @@
  */
 package br.com.objectos.css.keyword;
 
-import objectos.util.ImmutableMap;
+import objectos.util.UnmodifiableMap;
 import objectos.util.MutableMap;
 
-class ImmutableMapBuilder {
+class UnmodifiableMapBuilder {
 
   private final MutableMap<String, StandardKeyword> map = new MutableMap<>();
 
-  public final ImmutableMap<String, StandardKeyword> build() {
-    return map.toImmutableMap();
+  public final UnmodifiableMap<String, StandardKeyword> build() {
+    return map.toUnmodifiableMap();
   }
 
-  final ImmutableMapBuilder put(String name, StandardKeyword value) {
+  final UnmodifiableMapBuilder put(String name, StandardKeyword value) {
     map.put(name, value);
     return this;
   }

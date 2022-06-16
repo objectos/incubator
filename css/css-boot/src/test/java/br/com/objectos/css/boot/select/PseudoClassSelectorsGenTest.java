@@ -20,14 +20,14 @@ import static org.testng.Assert.assertEquals;
 import br.com.objectos.code.java.io.JavaFile;
 import br.com.objectos.css.boot.AbstractCssBootTest;
 import br.com.objectos.css.boot.spec.CssSpec;
-import objectos.util.ImmutableMap;
+import objectos.util.UnmodifiableMap;
 import org.testng.annotations.Test;
 
 public class PseudoClassSelectorsGenTest extends AbstractCssBootTest {
 
   @Test
   public void generateJavaFile() {
-    ImmutableMap<String, JavaFile> javaFiles;
+    UnmodifiableMap<String, JavaFile> javaFiles;
     javaFiles = execute(
       PseudoClassSelectorsGen::new,
       new CssSpec() {
@@ -49,7 +49,7 @@ public class PseudoClassSelectorsGenTest extends AbstractCssBootTest {
       "",
       "import br.com.objectos.code.annotations.Generated;",
       "import br.com.objectos.code.annotations.Ignore;",
-      "import objectos.util.ImmutableMap;",
+      "import objectos.util.UnmodifiableMap;",
       "import objectos.util.MutableMap;",
       "",
       "@Generated(\"br.com.objectos.css.boot.select.PseudoClassSelectorsGen\")",
@@ -61,7 +61,7 @@ public class PseudoClassSelectorsGenTest extends AbstractCssBootTest {
       "",
       "  private static final PseudoClassSelector[] ARRAY = new PseudoClassSelector[] {CHECKED, _MOZ_FOCUSRING};",
       "",
-      "  private static final ImmutableMap<String, PseudoClassSelector> MAP = buildMap();",
+      "  private static final UnmodifiableMap<String, PseudoClassSelector> MAP = buildMap();",
       "",
       "  private PseudoClassSelectors() {}",
       "",
@@ -75,11 +75,11 @@ public class PseudoClassSelectorsGenTest extends AbstractCssBootTest {
       "    return MAP.get(name);",
       "  }",
       "",
-      "  private static ImmutableMap<String, PseudoClassSelector> buildMap() {",
+      "  private static UnmodifiableMap<String, PseudoClassSelector> buildMap() {",
       "    MutableMap<String, PseudoClassSelector> m = new MutableMap<>();",
       "    m.put(\"checked\", CHECKED);",
       "    m.put(\"-moz-focusring\", _MOZ_FOCUSRING);",
-      "    return m.toImmutableMap();",
+      "    return m.toUnmodifiableMap();",
       "  }",
       "",
       "}"

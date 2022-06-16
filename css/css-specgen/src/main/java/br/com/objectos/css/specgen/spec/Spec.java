@@ -17,15 +17,15 @@ package br.com.objectos.css.specgen.spec;
 
 import objectos.lang.Check;
 import objectos.util.UnmodifiableList;
-import objectos.util.ImmutableMap;
+import objectos.util.UnmodifiableMap;
 import objectos.util.MutableMap;
 import objectos.util.MutableOrderedMap;
 
 public class Spec {
 
-  private final ImmutableMap<String, Property> properties;
+  private final UnmodifiableMap<String, Property> properties;
 
-  private Spec(ImmutableMap<String, Property> properties) {
+  private Spec(UnmodifiableMap<String, Property> properties) {
     this.properties = properties;
   }
 
@@ -54,7 +54,7 @@ public class Spec {
 
     public Spec build() {
       return new Spec(
-        properties.toImmutableMap()
+        properties.toUnmodifiableMap()
       );
     }
 

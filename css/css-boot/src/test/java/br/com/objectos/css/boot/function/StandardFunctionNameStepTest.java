@@ -21,14 +21,14 @@ import br.com.objectos.code.java.io.JavaFile;
 import br.com.objectos.css.boot.AbstractCssBootTest;
 import br.com.objectos.css.boot.spec.CssSpec;
 import br.com.objectos.css.boot.type.Primitive;
-import objectos.util.ImmutableMap;
+import objectos.util.UnmodifiableMap;
 import org.testng.annotations.Test;
 
 public class StandardFunctionNameStepTest extends AbstractCssBootTest {
 
   @Test(description = "it should generate an enum constant for each function defined")
   public void execute() {
-    ImmutableMap<String, JavaFile> javaFiles;
+    UnmodifiableMap<String, JavaFile> javaFiles;
     javaFiles = execute(
       StandardFunctionNameStep::new,
       new CssSpec() {
@@ -46,7 +46,7 @@ public class StandardFunctionNameStepTest extends AbstractCssBootTest {
       "package br.com.objectos.css.function;",
       "",
       "import br.com.objectos.code.annotations.Generated;",
-      "import objectos.util.ImmutableMap;",
+      "import objectos.util.UnmodifiableMap;",
       "import objectos.util.MutableMap;",
       "",
       "@Generated(\"br.com.objectos.css.boot.CssBoot\")",
@@ -56,7 +56,7 @@ public class StandardFunctionNameStepTest extends AbstractCssBootTest {
       "",
       "  private static final StandardFunctionName[] ARRAY = StandardFunctionName.values();",
       "",
-      "  private static final ImmutableMap<String, StandardFunctionName> MAP = buildMap();",
+      "  private static final UnmodifiableMap<String, StandardFunctionName> MAP = buildMap();",
       "",
       "  private final String javaName;",
       "",
@@ -75,10 +75,10 @@ public class StandardFunctionNameStepTest extends AbstractCssBootTest {
       "    return MAP.get(name);",
       "  }",
       "",
-      "  private static ImmutableMap<String, StandardFunctionName> buildMap() {",
+      "  private static UnmodifiableMap<String, StandardFunctionName> buildMap() {",
       "    MutableMap<String, StandardFunctionName> m = new MutableMap<>();",
       "    m.put(\"rotate\", ROTATE);",
-      "    return m.toImmutableMap();",
+      "    return m.toUnmodifiableMap();",
       "  }",
       "",
       "  public static int size() {",

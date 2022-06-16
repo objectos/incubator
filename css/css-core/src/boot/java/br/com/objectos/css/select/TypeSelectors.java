@@ -2,7 +2,7 @@ package br.com.objectos.css.select;
 
 import br.com.objectos.code.annotations.Generated;
 import br.com.objectos.code.annotations.Ignore;
-import objectos.util.ImmutableMap;
+import objectos.util.UnmodifiableMap;
 import objectos.util.MutableMap;
 
 @Generated("br.com.objectos.css.boot.select.TypeSelectorsGen")
@@ -154,7 +154,7 @@ public final class TypeSelectors {
 
   private static final TypeSelector[] ARRAY = new TypeSelector[] {a, abbr, article, b, blockquote, body, br, button, clipPath, code, dd, defs, details, div, dl, dt, em, fieldset, figure, footer, form, g, h1, h2, h3, h4, h5, h6, head, header, hgroup, hr, html, img, input, kbd, label, legend, li, link, main, meta, nav, ol, optgroup, option, p, path, pre, progress, samp, script, section, select, small, span, strong, style, sub, summary, sup, svg, table, tbody, td, template, textarea, th, thead, title, tr, ul};
 
-  private static final ImmutableMap<String, TypeSelector> MAP = buildMap();
+  private static final UnmodifiableMap<String, TypeSelector> MAP = buildMap();
 
   private TypeSelectors() {}
 
@@ -168,7 +168,7 @@ public final class TypeSelectors {
     return MAP.get(name);
   }
 
-  private static ImmutableMap<String, TypeSelector> buildMap() {
+  private static UnmodifiableMap<String, TypeSelector> buildMap() {
     MutableMap<String, TypeSelector> m = new MutableMap<>();
     m.put("a", a);
     m.put("abbr", abbr);
@@ -242,7 +242,7 @@ public final class TypeSelectors {
     m.put("title", title);
     m.put("tr", tr);
     m.put("ul", ul);
-    return m.toImmutableMap();
+    return m.toUnmodifiableMap();
   }
 
 }

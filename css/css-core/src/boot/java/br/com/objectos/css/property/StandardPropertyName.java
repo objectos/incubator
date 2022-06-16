@@ -1,7 +1,7 @@
 package br.com.objectos.css.property;
 
 import br.com.objectos.code.annotations.Generated;
-import objectos.util.ImmutableMap;
+import objectos.util.UnmodifiableMap;
 import objectos.util.MutableMap;
 
 @Generated("br.com.objectos.css.boot.CssBoot")
@@ -241,7 +241,7 @@ public enum StandardPropertyName implements PropertyName {
 
   private static final StandardPropertyName[] ARRAY = StandardPropertyName.values();
 
-  private static final ImmutableMap<String, StandardPropertyName> MAP = buildMap();
+  private static final UnmodifiableMap<String, StandardPropertyName> MAP = buildMap();
 
   private final String javaName;
 
@@ -260,7 +260,7 @@ public enum StandardPropertyName implements PropertyName {
     return MAP.get(name);
   }
 
-  private static ImmutableMap<String, StandardPropertyName> buildMap() {
+  private static UnmodifiableMap<String, StandardPropertyName> buildMap() {
     MutableMap<String, StandardPropertyName> m = new MutableMap<>();
     m.put("-moz-appearance", _MOZ_APPEARANCE);
     m.put("-webkit-appearance", _WEBKIT_APPEARANCE);
@@ -378,7 +378,7 @@ public enum StandardPropertyName implements PropertyName {
     m.put("white-space", WHITE_SPACE);
     m.put("width", WIDTH);
     m.put("z-index", Z_INDEX);
-    return m.toImmutableMap();
+    return m.toUnmodifiableMap();
   }
 
   public static int size() {

@@ -24,7 +24,7 @@ import br.com.objectos.css.boot.spec.Step;
 import br.com.objectos.css.boot.spec.StepAdapter;
 import java.util.Arrays;
 import java.util.List;
-import objectos.util.ImmutableMap;
+import objectos.util.UnmodifiableMap;
 import objectos.util.MutableList;
 import objectos.util.MutableMap;
 import org.testng.annotations.BeforeMethod;
@@ -40,7 +40,7 @@ public abstract class AbstractCssBootTest {
     srcJavaFiles = new MutableList<>();
   }
 
-  protected final ImmutableMap<String, JavaFile> execute(StepFactory factory, CssSpec spec) {
+  protected final UnmodifiableMap<String, JavaFile> execute(StepFactory factory, CssSpec spec) {
     ThisStepAdapter stepAdapter = new ThisStepAdapter();
     Step step = factory.get(stepAdapter);
 
@@ -76,8 +76,8 @@ public abstract class AbstractCssBootTest {
 
     private final MutableMap<String, JavaFile> javaFiles = new MutableMap<>();
 
-    public ImmutableMap<String, JavaFile> toMap() {
-      return javaFiles.toImmutableMap();
+    public UnmodifiableMap<String, JavaFile> toMap() {
+      return javaFiles.toUnmodifiableMap();
     }
 
     @Override

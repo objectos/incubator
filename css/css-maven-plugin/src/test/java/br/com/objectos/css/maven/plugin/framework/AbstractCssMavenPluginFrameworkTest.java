@@ -19,12 +19,12 @@ import static org.testng.Assert.assertEquals;
 
 import br.com.objectos.code.java.io.JavaFile;
 import br.com.objectos.css.config.framework.Configuration;
-import objectos.util.ImmutableMap;
+import objectos.util.UnmodifiableMap;
 import objectos.util.MutableMap;
 
 public abstract class AbstractCssMavenPluginFrameworkTest {
 
-  protected final ImmutableMap<String, JavaFile> executeFramework(Configuration config) {
+  protected final UnmodifiableMap<String, JavaFile> executeFramework(Configuration config) {
     ThisConfigurationAdapter adapter = new ThisConfigurationAdapter();
     PluginConfigurationDsl dsl = new PluginConfigurationDsl();
     config.acceptConfigurationDsl(dsl);
@@ -32,7 +32,7 @@ public abstract class AbstractCssMavenPluginFrameworkTest {
     return adapter.toMap();
   }
 
-  protected final ImmutableMap<String, JavaFile> executeProperty(Configuration config) {
+  protected final UnmodifiableMap<String, JavaFile> executeProperty(Configuration config) {
     ThisConfigurationAdapter adapter = new ThisConfigurationAdapter();
     PluginConfigurationDsl dsl = new PluginConfigurationDsl();
     config.acceptConfigurationDsl(dsl);
@@ -59,8 +59,8 @@ public abstract class AbstractCssMavenPluginFrameworkTest {
       map.put(file.simpleName(), file);
     }
 
-    final ImmutableMap<String, JavaFile> toMap() {
-      return map.toImmutableMap();
+    final UnmodifiableMap<String, JavaFile> toMap() {
+      return map.toUnmodifiableMap();
     }
 
   }

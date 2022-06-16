@@ -17,13 +17,13 @@ package br.com.objectos.http.server.jetty;
 
 import br.com.objectos.http.server.RequestParameters;
 import java.util.NoSuchElementException;
-import objectos.util.ImmutableMap;
+import objectos.util.UnmodifiableMap;
 
 class JettyParamMap implements RequestParameters {
 
-  private final ImmutableMap<String, String> map;
+  private final UnmodifiableMap<String, String> map;
 
-  JettyParamMap(ImmutableMap<String, String> map) {
+  JettyParamMap(UnmodifiableMap<String, String> map) {
     this.map = map;
   }
 

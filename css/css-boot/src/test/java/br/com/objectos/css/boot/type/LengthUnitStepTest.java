@@ -20,7 +20,7 @@ import static org.testng.Assert.assertEquals;
 import br.com.objectos.code.java.io.JavaFile;
 import br.com.objectos.css.boot.AbstractCssBootTest;
 import br.com.objectos.css.boot.spec.CssSpec;
-import objectos.util.ImmutableMap;
+import objectos.util.UnmodifiableMap;
 import org.testng.annotations.Test;
 
 public class LengthUnitStepTest extends AbstractCssBootTest {
@@ -28,7 +28,7 @@ public class LengthUnitStepTest extends AbstractCssBootTest {
   @Test(description = ""
       + "it should generate an enum constant for each unit.")
   public void execute() {
-    ImmutableMap<String, JavaFile> javaFiles;
+    UnmodifiableMap<String, JavaFile> javaFiles;
     javaFiles = execute(
         LengthUnitStep::new,
         new CssSpec() {

@@ -49,8 +49,8 @@ class SelectNames {
       Types._String,
       TypeSelector
   );
-  static final NamedParameterized TypeSelectorImmutableMap = t(
-      Types._ImmutableMap,
+  static final NamedParameterized TypeSelectorUnmodifiableMap = t(
+      Types._UnmodifiableMap,
       Types._String,
       TypeSelector
   );

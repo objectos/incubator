@@ -20,14 +20,14 @@ import static org.testng.Assert.assertEquals;
 import br.com.objectos.code.java.io.JavaFile;
 import br.com.objectos.css.specgen.mdn.Mdn;
 import java.io.IOException;
-import objectos.util.ImmutableMap;
+import objectos.util.UnmodifiableMap;
 import org.testng.annotations.Test;
 
 public class PropertyModuleStepTest extends AbstractCssSpecgenTest {
 
   @Test
   public void clear() throws IOException {
-    ImmutableMap<String, JavaFile> javaFiles = execute(
+    UnmodifiableMap<String, JavaFile> javaFiles = execute(
         PropertyModuleStep::new,
         new AbstractSpecgen(Mdn.load()) {
           @Override
@@ -74,7 +74,7 @@ public class PropertyModuleStepTest extends AbstractCssSpecgenTest {
 
   @Test
   public void margin() throws IOException {
-    ImmutableMap<String, JavaFile> javaFiles = execute(
+    UnmodifiableMap<String, JavaFile> javaFiles = execute(
         PropertyModuleStep::new,
         new AbstractSpecgen(Mdn.load()) {
           @Override

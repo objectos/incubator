@@ -27,7 +27,7 @@ import java.util.Collection;
 import java.util.EnumSet;
 import java.util.Set;
 import objectos.lang.Check;
-import objectos.util.ImmutableMap;
+import objectos.util.UnmodifiableMap;
 import objectos.util.UnmodifiableSet;
 import objectos.util.MutableMap;
 
@@ -74,7 +74,7 @@ final class WatchServiceJava7 implements Watch.Service {
       }
     }
 
-    worker = new Worker(delegate, keys.toImmutableMap());
+    worker = new Worker(delegate, keys.toUnmodifiableMap());
 
     worker.start();
   }
@@ -125,9 +125,9 @@ final class WatchServiceJava7 implements Watch.Service {
 
     private final java.nio.file.WatchService delegate;
 
-    private final ImmutableMap<WatchKey, WatchDirectoryJava7> keys;
+    private final UnmodifiableMap<WatchKey, WatchDirectoryJava7> keys;
 
-    Worker(java.nio.file.WatchService delegate, ImmutableMap<WatchKey, WatchDirectoryJava7> keys) {
+    Worker(java.nio.file.WatchService delegate, UnmodifiableMap<WatchKey, WatchDirectoryJava7> keys) {
       super("WatchService");
 
       this.delegate = delegate;

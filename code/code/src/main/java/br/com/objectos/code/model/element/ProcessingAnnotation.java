@@ -49,7 +49,7 @@ import javax.lang.model.util.Elements;
 import javax.tools.Diagnostic.Kind;
 import objectos.lang.Check;
 import objectos.util.UnmodifiableList;
-import objectos.util.ImmutableMap;
+import objectos.util.UnmodifiableMap;
 import objectos.util.UnmodifiableSet;
 import objectos.util.MutableMap;
 
@@ -60,7 +60,7 @@ public class ProcessingAnnotation
   private final Element annotatedElement;
   private final AnnotationMirror annotation;
 
-  private ImmutableMap<String, DeclaredOrDefault> declaredOrDefaultMap;
+  private UnmodifiableMap<String, DeclaredOrDefault> declaredOrDefaultMap;
 
   private PDeclaredType type;
 
@@ -224,7 +224,7 @@ public class ProcessingAnnotation
   }
 
   private DeclaredOrDefault getDeclaredOrDefault(String name) {
-    ImmutableMap<String, DeclaredOrDefault> map;
+    UnmodifiableMap<String, DeclaredOrDefault> map;
     map = getDeclaredOrDefaultMap();
 
     DeclaredOrDefault value = map.get(name);
@@ -236,7 +236,7 @@ public class ProcessingAnnotation
     return value;
   }
 
-  private ImmutableMap<String, DeclaredOrDefault> getDeclaredOrDefaultMap() {
+  private UnmodifiableMap<String, DeclaredOrDefault> getDeclaredOrDefaultMap() {
     if (declaredOrDefaultMap == null) {
       declaredOrDefaultMap = getDeclaredOrDefaultMap0();
     }
@@ -244,7 +244,7 @@ public class ProcessingAnnotation
     return declaredOrDefaultMap;
   }
 
-  private ImmutableMap<String, DeclaredOrDefault> getDeclaredOrDefaultMap0() {
+  private UnmodifiableMap<String, DeclaredOrDefault> getDeclaredOrDefaultMap0() {
     MutableMap<String, DeclaredOrDefault> map;
     map = new MutableMap<>();
 
@@ -267,7 +267,7 @@ public class ProcessingAnnotation
       value.addTo(map);
     }
 
-    return map.toImmutableMap();
+    return map.toUnmodifiableMap();
   }
 
   private PDeclaredType getType0() {

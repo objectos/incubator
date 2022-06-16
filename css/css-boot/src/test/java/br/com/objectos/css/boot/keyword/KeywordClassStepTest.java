@@ -21,7 +21,7 @@ import br.com.objectos.code.java.io.JavaFile;
 import br.com.objectos.css.boot.AbstractCssBootTest;
 import br.com.objectos.css.boot.spec.CssSpec;
 import br.com.objectos.css.boot.spec.Source;
-import objectos.util.ImmutableMap;
+import objectos.util.UnmodifiableMap;
 import org.testng.annotations.Test;
 
 public class KeywordClassStepTest extends AbstractCssBootTest {
@@ -30,7 +30,7 @@ public class KeywordClassStepTest extends AbstractCssBootTest {
       + "keyword class must implement the PropertyValue interface "
       + "if part of that value set")
   public void execute() {
-    ImmutableMap<String, JavaFile> javaFiles;
+    UnmodifiableMap<String, JavaFile> javaFiles;
     javaFiles = execute(
         KeywordClassStep::new,
         new CssSpec() {

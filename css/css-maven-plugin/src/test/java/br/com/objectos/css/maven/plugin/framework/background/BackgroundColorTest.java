@@ -26,14 +26,14 @@ import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkGroup;
 import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkNamedValueSet;
 import br.com.objectos.css.maven.plugin.framework.AbstractCssMavenPluginFrameworkTest;
 import br.com.objectos.css.type.Color;
-import objectos.util.ImmutableMap;
+import objectos.util.UnmodifiableMap;
 import org.testng.annotations.Test;
 
 public class BackgroundColorTest extends AbstractCssMavenPluginFrameworkTest {
 
   @Test
   public void execute() {
-    ImmutableMap<String, JavaFile> javaFiles = executeProperty(
+    UnmodifiableMap<String, JavaFile> javaFiles = executeProperty(
         new AbstractConfiguration() {
           @Override
           protected final void configure() {

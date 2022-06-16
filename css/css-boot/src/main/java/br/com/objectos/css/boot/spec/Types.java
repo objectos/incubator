@@ -19,14 +19,14 @@ import br.com.objectos.code.java.Java;
 import br.com.objectos.code.java.declaration.PackageName;
 import br.com.objectos.code.java.expression.NewClass;
 import br.com.objectos.code.java.type.NamedClass;
-import objectos.util.ImmutableMap;
+import objectos.util.UnmodifiableMap;
 import objectos.util.MutableMap;
 
 public class Types {
 
   public static final NamedClass _Css;
 
-  public static final NamedClass _ImmutableMap;
+  public static final NamedClass _UnmodifiableMap;
 
   public static final NamedClass _MutableMap;
 
@@ -43,7 +43,7 @@ public class Types {
 
     _MutableMap = NamedClass.of(MutableMap.class);
 
-    _ImmutableMap = NamedClass.of(ImmutableMap.class);
+    _UnmodifiableMap = NamedClass.of(UnmodifiableMap.class);
 
     _String = NamedClass.of(String.class);
 

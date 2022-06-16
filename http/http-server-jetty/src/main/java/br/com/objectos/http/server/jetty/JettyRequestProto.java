@@ -82,7 +82,7 @@ class JettyRequestProto implements RequestProto {
       map.put(name, value);
     }
 
-    return new JettyParamMap(map.toImmutableMap());
+    return new JettyParamMap(map.toUnmodifiableMap());
   }
 
   @Override

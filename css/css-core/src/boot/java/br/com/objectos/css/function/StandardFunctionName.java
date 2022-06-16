@@ -1,7 +1,7 @@
 package br.com.objectos.css.function;
 
 import br.com.objectos.code.annotations.Generated;
-import objectos.util.ImmutableMap;
+import objectos.util.UnmodifiableMap;
 import objectos.util.MutableMap;
 
 @Generated("br.com.objectos.css.boot.CssBoot")
@@ -17,7 +17,7 @@ public enum StandardFunctionName implements FunctionName {
 
   private static final StandardFunctionName[] ARRAY = StandardFunctionName.values();
 
-  private static final ImmutableMap<String, StandardFunctionName> MAP = buildMap();
+  private static final UnmodifiableMap<String, StandardFunctionName> MAP = buildMap();
 
   private final String javaName;
 
@@ -36,13 +36,13 @@ public enum StandardFunctionName implements FunctionName {
     return MAP.get(name);
   }
 
-  private static ImmutableMap<String, StandardFunctionName> buildMap() {
+  private static UnmodifiableMap<String, StandardFunctionName> buildMap() {
     MutableMap<String, StandardFunctionName> m = new MutableMap<>();
     m.put("rotate", ROTATE);
     m.put("rotateX", ROTATEX);
     m.put("rotateY", ROTATEY);
     m.put("rotateZ", ROTATEZ);
-    return m.toImmutableMap();
+    return m.toUnmodifiableMap();
   }
 
   public static int size() {
