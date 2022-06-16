@@ -17,7 +17,7 @@ package br.com.objectos.code.java.type;
 
 import br.com.objectos.code.java.declaration.PackageName;
 import objectos.lang.Check;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 
 public class NamedTypes {
 
@@ -75,8 +75,8 @@ public class NamedTypes {
       NamedClass raw, Iterable<? extends NamedType> arguments) {
     Check.notNull(arguments, "arguments == null");
 
-    ImmutableList<? extends NamedType> list;
-    list = ImmutableList.copyOf(arguments);
+    UnmodifiableList<? extends NamedType> list;
+    list = UnmodifiableList.copyOf(arguments);
 
     switch (list.size()) {
       case 0:

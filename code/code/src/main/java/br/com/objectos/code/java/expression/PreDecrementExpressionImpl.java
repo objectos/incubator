@@ -17,7 +17,7 @@ package br.com.objectos.code.java.expression;
 
 import br.com.objectos.code.java.element.AbstractDefaultImmutableCodeElement;
 import br.com.objectos.code.java.element.CodeElement;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 
 final class PreDecrementExpressionImpl
     extends AbstractDefaultImmutableCodeElement
@@ -27,7 +27,7 @@ final class PreDecrementExpressionImpl
     super(elements);
   }
 
-  private PreDecrementExpressionImpl(ImmutableList<CodeElement> elements) {
+  private PreDecrementExpressionImpl(UnmodifiableList<CodeElement> elements) {
     super(elements);
   }
 

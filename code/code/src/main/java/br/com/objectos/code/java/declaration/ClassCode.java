@@ -30,7 +30,7 @@ import java.util.List;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.TypeParameterElement;
 import objectos.lang.Check;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.MutableList;
 
 public class ClassCode extends AbstractTypeCode {
@@ -434,11 +434,11 @@ public class ClassCode extends AbstractTypeCode {
       return this;
     }
 
-    final ImmutableList<AnnotationCode> annotationList() {
-      return annotations.toImmutableList();
+    final UnmodifiableList<AnnotationCode> annotationList() {
+      return annotations.toUnmodifiableList();
     }
 
-    final ImmutableList<ClassBodyElement> bodyElements() {
+    final UnmodifiableList<ClassBodyElement> bodyElements() {
       return formatter.format(bodyElements, ClassBodyElement.class);
     }
 
@@ -451,8 +451,8 @@ public class ClassCode extends AbstractTypeCode {
       return this;
     }
 
-    final ImmutableList<NamedTypeParameter> typeParameters() {
-      return typeParameters.toImmutableList();
+    final UnmodifiableList<NamedTypeParameter> typeParameters() {
+      return typeParameters.toUnmodifiableList();
     }
 
     private Builder addTypeParameter0(NamedTypeParameter name) {

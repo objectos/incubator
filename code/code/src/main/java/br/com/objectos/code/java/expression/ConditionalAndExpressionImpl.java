@@ -17,7 +17,7 @@ package br.com.objectos.code.java.expression;
 
 import br.com.objectos.code.java.element.AbstractDefaultImmutableCodeElement;
 import br.com.objectos.code.java.element.CodeElement;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 
 final class ConditionalAndExpressionImpl
     extends AbstractDefaultImmutableCodeElement
@@ -29,7 +29,7 @@ final class ConditionalAndExpressionImpl
     super(elements);
   }
 
-  private ConditionalAndExpressionImpl(ImmutableList<CodeElement> elements) {
+  private ConditionalAndExpressionImpl(UnmodifiableList<CodeElement> elements) {
     super(elements);
   }
 

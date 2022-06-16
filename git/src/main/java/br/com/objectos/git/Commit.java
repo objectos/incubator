@@ -16,7 +16,7 @@
 package br.com.objectos.git;
 
 import objectos.lang.ToString;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 
 /**
  * A Git commit object resulting from a <em>read commit</em> operation.
@@ -31,7 +31,7 @@ public final class Commit extends GitObject {
 
   final String message;
 
-  final ImmutableList<ObjectId> parents;
+  final UnmodifiableList<ObjectId> parents;
 
   final ObjectId tree;
 
@@ -39,7 +39,7 @@ public final class Commit extends GitObject {
          Identification committer,
          String message,
          ObjectId objectId,
-         ImmutableList<ObjectId> parents,
+         UnmodifiableList<ObjectId> parents,
          ObjectId tree) {
     super(objectId);
 
@@ -99,7 +99,7 @@ public final class Commit extends GitObject {
    *
    * @return the hash values of the parents of this commit
    */
-  public final ImmutableList<ObjectId> getParents() {
+  public final UnmodifiableList<ObjectId> getParents() {
     return parents;
   }
 

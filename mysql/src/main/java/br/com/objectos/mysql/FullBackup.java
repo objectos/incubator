@@ -25,7 +25,7 @@ import java.util.zip.GZIPOutputStream;
 import objectos.lang.Note1;
 import objectos.lang.Note2;
 import objectos.lang.NoteSink;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 
 final class FullBackup extends AbstractClientJob<RegularFile> {
 
@@ -139,7 +139,7 @@ final class FullBackup extends AbstractClientJob<RegularFile> {
 
   @Override
   final RegularFile getResultImpl(
-      IOException exception, ImmutableList<String> stderr, ImmutableList<String> stdout)
+      IOException exception, UnmodifiableList<String> stderr, UnmodifiableList<String> stdout)
       throws IOException {
     if (exception == null) {
       long totalTime;

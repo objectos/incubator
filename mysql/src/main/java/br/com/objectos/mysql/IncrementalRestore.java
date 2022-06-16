@@ -27,10 +27,10 @@ import objectos.lang.Note0;
 import objectos.lang.Note1;
 import objectos.lang.NoteSink;
 import objectos.lang.RandomString;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.MutableList;
 
-final class IncrementalRestore extends AbstractClientJob<ImmutableList<String>> {
+final class IncrementalRestore extends AbstractClientJob<UnmodifiableList<String>> {
 
   private static final byte _CLOSE = 0;
 
@@ -64,7 +64,7 @@ final class IncrementalRestore extends AbstractClientJob<ImmutableList<String>> 
 
   private volatile boolean copyMore;
 
-  private final ImmutableList<RegularFile> files;
+  private final UnmodifiableList<RegularFile> files;
 
   private int filesIndex;
 
@@ -91,7 +91,7 @@ final class IncrementalRestore extends AbstractClientJob<ImmutableList<String>> 
   IncrementalRestore(Client worker,
                      LoginPath loginPath,
                      Directory workDirectory,
-                     ImmutableList<RegularFile> files) {
+                     UnmodifiableList<RegularFile> files) {
     super(worker);
 
     byteArray = worker.getByteArray();
@@ -167,8 +167,8 @@ final class IncrementalRestore extends AbstractClientJob<ImmutableList<String>> 
   }
 
   @Override
-  final ImmutableList<String> getResultImpl(
-      IOException exception, ImmutableList<String> stderr, ImmutableList<String> stdout)
+  final UnmodifiableList<String> getResultImpl(
+      IOException exception, UnmodifiableList<String> stderr, UnmodifiableList<String> stdout)
       throws IOException {
     if (exception == null) {
       long totalTime;

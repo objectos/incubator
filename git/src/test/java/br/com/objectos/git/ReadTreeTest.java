@@ -21,7 +21,7 @@ import static org.testng.Assert.assertNull;
 import br.com.objectos.fs.ResolvedPath;
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -87,7 +87,7 @@ public class ReadTreeTest extends AbstractGitTest {
 
     assertEquals(result.objectId, oid);
 
-    ImmutableList<Entry> entries;
+    UnmodifiableList<Entry> entries;
     entries = result.getEntries();
 
     assertEquals(entries.size(), 1);
@@ -153,7 +153,7 @@ public class ReadTreeTest extends AbstractGitTest {
 
     assertEquals(result.objectId, oid);
 
-    ImmutableList<Entry> entries;
+    UnmodifiableList<Entry> entries;
     entries = result.getEntries();
 
     assertEquals(entries.size(), 2);
@@ -209,7 +209,7 @@ public class ReadTreeTest extends AbstractGitTest {
 
     assertEquals(result.objectId, oid);
 
-    ImmutableList<Entry> entries;
+    UnmodifiableList<Entry> entries;
     entries = result.getEntries();
 
     assertEquals(entries.size(), 2);

@@ -16,16 +16,16 @@
 package br.com.objectos.parser.spec;
 
 import java.util.Objects;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.MutableList;
 
 public class Expression {
 
   private static final Expression EMPTY = of(Symbol.empty());
 
-  private final ImmutableList<Symbol> list;
+  private final UnmodifiableList<Symbol> list;
 
-  Expression(ImmutableList<Symbol> list) {
+  Expression(UnmodifiableList<Symbol> list) {
     this.list = list;
   }
 
@@ -41,7 +41,7 @@ public class Expression {
       list.add(Objects.requireNonNull(symbol));
     }
 
-    return new Expression(list.toImmutableList());
+    return new Expression(list.toUnmodifiableList());
   }
 
   @Override

@@ -24,7 +24,7 @@ import br.com.objectos.concurrent.CpuTask;
 import br.com.objectos.concurrent.DirectIoWorker;
 import java.util.HashMap;
 import java.util.Map;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -267,8 +267,8 @@ public class HttpRequestParserTest extends AbstractHttpTest implements HttpProce
   }
 
   private String crlf(String... strings) {
-    ImmutableList<String> list;
-    list = ImmutableList.copyOf(strings);
+    UnmodifiableList<String> list;
+    list = UnmodifiableList.copyOf(strings);
 
     return list.join(Http.CRLF);
   }

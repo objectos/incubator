@@ -12,12 +12,12 @@ import br.com.objectos.code.model.element.ProcessingAnnotation;
 import br.com.objectos.code.util.AbstractCodeCoreTest;
 import java.util.List;
 import java.util.NoSuchElementException;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.MutableList;
 
 public abstract class AbstractCodeModelTest extends AbstractCodeCoreTest {
 
-  protected final ImmutableList<NamedClass> annotationToClassName(
+  protected final UnmodifiableList<NamedClass> annotationToClassName(
       List<ProcessingAnnotation> annotations) {
     MutableList<NamedClass> result;
     result = new MutableList<>();
@@ -32,10 +32,10 @@ public abstract class AbstractCodeModelTest extends AbstractCodeCoreTest {
       result.add(className);
     }
 
-    return result.toImmutableList();
+    return result.toUnmodifiableList();
   }
 
-  protected final <E> E filterAndGetOnly(ImmutableList<E> list, Predicate<E> predicate) {
+  protected final <E> E filterAndGetOnly(UnmodifiableList<E> list, Predicate<E> predicate) {
     E result;
     result = null;
 
@@ -56,7 +56,7 @@ public abstract class AbstractCodeModelTest extends AbstractCodeCoreTest {
     }
   }
 
-  protected final <F, T> ImmutableList<T> map(List<F> list, Function<? super F, ? extends T> f) {
+  protected final <F, T> UnmodifiableList<T> map(List<F> list, Function<? super F, ? extends T> f) {
     MutableList<T> result;
     result = new MutableList<>();
 
@@ -66,7 +66,7 @@ public abstract class AbstractCodeModelTest extends AbstractCodeCoreTest {
       result.add(apply);
     }
 
-    return result.toImmutableList();
+    return result.toUnmodifiableList();
   }
 
 }

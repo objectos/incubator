@@ -16,13 +16,13 @@
 package br.com.objectos.tools;
 
 import br.com.objectos.latest.Concrete;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 
 @Concrete(modifiers = "final", simpleName = "OptionsBuilder")
 abstract class AbstractOptionsBuilder implements JavacOptionVisitor {
 
   AbstractOptionsBuilder() {}
 
-  public abstract ImmutableList<String> build();
+  public abstract UnmodifiableList<String> build();
 
 }

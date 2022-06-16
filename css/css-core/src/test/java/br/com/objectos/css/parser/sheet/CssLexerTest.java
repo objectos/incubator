@@ -22,7 +22,7 @@ import static org.testng.Assert.assertEquals;
 import br.com.objectos.css.parser.IsTerminal;
 import br.com.objectos.lexer.Analyzer;
 import br.com.objectos.lexer.UncheckedAnalyzer;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import org.testng.annotations.Test;
 
 public class CssLexerTest extends CssLexerDriver {
@@ -227,8 +227,8 @@ public class CssLexerTest extends CssLexerDriver {
 
   private void test(String css, IsTerminal... expected) {
     Analyzer<IsTerminal> analyzer = CssLexer.get().analyze(css);
-    ImmutableList<IsTerminal> tokens = ImmutableList.copyOf(new UncheckedAnalyzer<>(analyzer));
-    assertEquals(tokens, ImmutableList.copyOf(expected));
+    UnmodifiableList<IsTerminal> tokens = UnmodifiableList.copyOf(new UncheckedAnalyzer<>(analyzer));
+    assertEquals(tokens, UnmodifiableList.copyOf(expected));
   }
 
 }

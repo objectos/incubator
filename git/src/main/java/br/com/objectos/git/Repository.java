@@ -21,7 +21,7 @@ import br.com.objectos.fs.ResolvedPath;
 import java.io.IOException;
 import objectos.lang.Check;
 import objectos.lang.ToString;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 
 /**
  * Represents a Git repository.
@@ -34,11 +34,11 @@ public final class Repository extends GitRepository implements ToString.Formatta
 
   private final Directory objectsDirectory;
 
-  private final ImmutableList<PackFile> packFiles;
+  private final UnmodifiableList<PackFile> packFiles;
 
   Repository(Directory gitDirectory,
              Directory objectsDirectory,
-             ImmutableList<PackFile> packFiles) {
+             UnmodifiableList<PackFile> packFiles) {
     this.gitDirectory = gitDirectory;
 
     this.objectsDirectory = objectsDirectory;

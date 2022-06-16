@@ -17,19 +17,19 @@ package br.com.objectos.css.select;
 
 import br.com.objectos.css.sheet.RuleElement;
 import java.util.Iterator;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.MutableList;
 
 public class SelectorList extends Selector implements Iterable<Selector>, SelectorListTail {
 
-  private final ImmutableList<Selector> list;
+  private final UnmodifiableList<Selector> list;
 
-  SelectorList(ImmutableList<Selector> list) {
+  SelectorList(UnmodifiableList<Selector> list) {
     this.list = list;
   }
 
   SelectorList(Selector... selectors) {
-    list = ImmutableList.copyOf(selectors);
+    list = UnmodifiableList.copyOf(selectors);
   }
 
   public static SelectorList ofParser(SelectorListHead head, SelectorListTail tail) {
@@ -72,7 +72,7 @@ public class SelectorList extends Selector implements Iterable<Selector>, Select
     throw new UnsupportedOperationException("Implement me");
   }
 
-  public final ImmutableList<Selector> selectors() {
+  public final UnmodifiableList<Selector> selectors() {
     return list;
   }
 
@@ -101,7 +101,7 @@ public class SelectorList extends Selector implements Iterable<Selector>, Select
     MutableList<Selector> newList = new MutableList<>();
     newList.add(head);
     newList.addAll(list);
-    return new SelectorList(newList.toImmutableList());
+    return new SelectorList(newList.toUnmodifiableList());
   }
 
 }

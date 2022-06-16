@@ -17,13 +17,13 @@ package br.com.objectos.html.tmpl;
 
 import br.com.objectos.html.attribute.AttributeName;
 import br.com.objectos.html.element.ElementName;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 
 public interface CompiledTemplateVisitor {
 
   void visitAttribute(AttributeName name);
 
-  void visitAttribute(AttributeName name, ImmutableList<String> values);
+  void visitAttribute(AttributeName name, UnmodifiableList<String> values);
 
   void visitAttribute(AttributeName name, String value);
 

@@ -19,7 +19,7 @@ import static org.testng.Assert.assertEquals;
 
 import br.com.objectos.code.model.element.ProcessingMethod;
 import br.com.objectos.code.model.element.ProcessingType;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import org.testng.annotations.Test;
 
 public class StaticMethodTest extends AbstractCodeBootTest {
@@ -42,7 +42,7 @@ public class StaticMethodTest extends AbstractCodeBootTest {
     ProcessingType subject;
     subject = query(TestCase01Factory.class);
 
-    ImmutableList<StaticMethod> result;
+    UnmodifiableList<StaticMethod> result;
     result = StaticMethod.listOf(subject);
 
     assertEquals(result.size(), 1);

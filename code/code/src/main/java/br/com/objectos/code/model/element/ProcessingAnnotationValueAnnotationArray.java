@@ -19,17 +19,17 @@ import java.util.List;
 import javax.lang.model.element.AnnotationMirror;
 import javax.lang.model.element.AnnotationValue;
 import javax.lang.model.element.ExecutableElement;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.MutableList;
 
 class ProcessingAnnotationValueAnnotationArray extends ProcessingAnnotationValue {
 
-  private final ImmutableList<ProcessingAnnotation> value;
+  private final UnmodifiableList<ProcessingAnnotation> value;
 
   private ProcessingAnnotationValueAnnotationArray(ProcessingAnnotation annotation,
                                                    ExecutableElement element,
                                                    AnnotationValue annotationValue,
-                                                   ImmutableList<ProcessingAnnotation> value) {
+                                                   UnmodifiableList<ProcessingAnnotation> value) {
     super(annotation, element, annotationValue);
     this.value = value;
   }
@@ -47,7 +47,7 @@ class ProcessingAnnotationValueAnnotationArray extends ProcessingAnnotationValue
     );
   }
 
-  private static ImmutableList<ProcessingAnnotation> toAnnotationArray(
+  private static UnmodifiableList<ProcessingAnnotation> toAnnotationArray(
       ProcessingAnnotation annotation, List<? extends AnnotationValue> array) {
     MutableList<ProcessingAnnotation> result;
     result = new MutableList<>();
@@ -65,11 +65,11 @@ class ProcessingAnnotationValueAnnotationArray extends ProcessingAnnotationValue
       result.add(instance);
     }
 
-    return result.toImmutableList();
+    return result.toUnmodifiableList();
   }
 
   @Override
-  public final ImmutableList<ProcessingAnnotation> getAnnotationArray() {
+  public final UnmodifiableList<ProcessingAnnotation> getAnnotationArray() {
     return value;
   }
 

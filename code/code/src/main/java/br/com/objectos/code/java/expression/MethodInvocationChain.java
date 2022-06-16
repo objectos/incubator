@@ -22,7 +22,7 @@ import br.com.objectos.code.java.expression.MethodInvocation.Unqualified;
 import br.com.objectos.code.java.expression.production.MethodInvocationExpression;
 import br.com.objectos.code.java.io.CodeWriter;
 import objectos.lang.Check;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.MutableList;
 
 public class MethodInvocationChain extends AbstractStatementExpression
@@ -30,9 +30,9 @@ public class MethodInvocationChain extends AbstractStatementExpression
     MethodInvocationExpression {
 
   private final Callee caller;
-  private final ImmutableList<CodeElement> elements;
+  private final UnmodifiableList<CodeElement> elements;
 
-  MethodInvocationChain(Callee caller, ImmutableList<CodeElement> elements) {
+  MethodInvocationChain(Callee caller, UnmodifiableList<CodeElement> elements) {
     this.caller = caller;
     this.elements = elements;
   }
@@ -368,7 +368,7 @@ public class MethodInvocationChain extends AbstractStatementExpression
     public final MethodInvocationChain build() {
       return new MethodInvocationChain(
           start,
-          elements.toImmutableList()
+          elements.toUnmodifiableList()
       );
     }
 

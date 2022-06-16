@@ -19,7 +19,7 @@ import static br.com.objectos.code.java.Java.javaFile;
 
 import br.com.objectos.code.java.declaration.PackageName;
 import br.com.objectos.code.java.declaration.TypeCode;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 
 public abstract class Step {
 
@@ -33,7 +33,7 @@ public abstract class Step {
 
   }
 
-  public void addProperty(Property property, ImmutableList<Property> group) {
+  public void addProperty(Property property, UnmodifiableList<Property> group) {
 
   }
 

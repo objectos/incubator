@@ -25,7 +25,7 @@ import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 import objectos.lang.Note0;
 import objectos.lang.Note1;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.MutableList;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
@@ -253,7 +253,7 @@ public class FixedCpuWorkerThreadTest {
     }
 
     final void assertLogs(Log... expected) {
-      assertEquals(logs, ImmutableList.copyOf(expected));
+      assertEquals(logs, UnmodifiableList.copyOf(expected));
     }
 
     @Override

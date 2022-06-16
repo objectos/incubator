@@ -30,7 +30,7 @@ import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 import javax.annotation.processing.SupportedAnnotationTypes;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.ImmutableSet;
 import objectos.util.MutableList;
 import org.testng.annotations.Test;
@@ -284,7 +284,7 @@ public class ProcessingRoundTest {
       ProcessingAnnotationValue value;
       value = annotation.getDeclaredOrDefaultValue("value");
 
-      ImmutableList<PTypeMirror> classValues;
+      UnmodifiableList<PTypeMirror> classValues;
       classValues = value.getTypeArray();
 
       for (PTypeMirror classValue : classValues) {

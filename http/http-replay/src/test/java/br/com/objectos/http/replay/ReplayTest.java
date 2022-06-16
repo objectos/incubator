@@ -24,7 +24,7 @@ import br.com.objectos.http.Method;
 import br.com.objectos.http.ProtocolException;
 import br.com.objectos.http.Version;
 import java.io.IOException;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
@@ -60,7 +60,7 @@ public class ReplayTest extends AbstractReplayTest {
 
     assertEquals(
       log,
-      ImmutableList.of(
+      UnmodifiableList.of(
         "000000000001=OK"
       )
     );
@@ -93,7 +93,7 @@ public class ReplayTest extends AbstractReplayTest {
 
     assertEquals(
       log,
-      ImmutableList.of(
+      UnmodifiableList.of(
         "000000000001=OK"
       )
     );
@@ -130,7 +130,7 @@ public class ReplayTest extends AbstractReplayTest {
 
     assertEquals(
       log,
-      ImmutableList.of(
+      UnmodifiableList.of(
         "000000000001=OK",
         "000000000002=OK"
       )
@@ -165,7 +165,7 @@ public class ReplayTest extends AbstractReplayTest {
 
     assertEquals(
       log,
-      ImmutableList.of(
+      UnmodifiableList.of(
         "000000000001=OK"
       )
     );
@@ -212,7 +212,7 @@ public class ReplayTest extends AbstractReplayTest {
 
     assertEquals(
       log,
-      ImmutableList.of(
+      UnmodifiableList.of(
         "000000000001=OK"
       )
     );
@@ -238,7 +238,7 @@ public class ReplayTest extends AbstractReplayTest {
 
     assertEquals(
       log,
-      ImmutableList.of(
+      UnmodifiableList.of(
         "000000000001=OK",
         "000000000002=OK"
       )

@@ -45,7 +45,7 @@ import java.io.InputStream;
 import java.io.Serializable;
 import java.util.Arrays;
 import javax.lang.model.element.TypeElement;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import org.testng.annotations.Test;
 
 public class ClassCodeTest extends AbstractCodeJavaTest {
@@ -336,7 +336,7 @@ public class ClassCodeTest extends AbstractCodeJavaTest {
     test(
         _class(
             id("Subject"),
-            _implements(ImmutableList.of(a, b, c, d, e, f, g, h, i, j))
+            _implements(UnmodifiableList.of(a, b, c, d, e, f, g, h, i, j))
         ),
         "class Subject implements abc.A, abc.B, abc.C, abc.D, abc.E, abc.F, abc.G, abc.H, abc.I, abc.J {}"
     );
@@ -464,7 +464,7 @@ public class ClassCodeTest extends AbstractCodeJavaTest {
         _class(
             id("Subject"),
             TypesShorthand.types(
-                ImmutableList.of(
+                UnmodifiableList.of(
                     _class(id("A")),
                     _interface(id("B")),
                     _enum(id("C"))
@@ -561,7 +561,7 @@ public class ClassCodeTest extends AbstractCodeJavaTest {
   }
 
   private Iterable<FieldCode> classWithFieldsShorthand0() {
-    return ImmutableList.of(
+    return UnmodifiableList.of(
         field(_int(), id("a")),
         field(_private(), _static(), _final(), t(String.class), init(id("b"), l("something")))
     );

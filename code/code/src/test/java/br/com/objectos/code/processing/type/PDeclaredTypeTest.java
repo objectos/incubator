@@ -14,7 +14,7 @@ import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 
 import br.com.objectos.code.java.type.NamedClass;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -47,7 +47,7 @@ public class PDeclaredTypeTest extends AbstractPTypeMirrorTest {
     PDeclaredType a;
     a = _a.toDeclaredType();
 
-    ImmutableList<PTypeMirror> aArgs;
+    UnmodifiableList<PTypeMirror> aArgs;
     aArgs = a.getTypeArguments();
 
     assertEquals(aArgs.size(), 0);
@@ -58,7 +58,7 @@ public class PDeclaredTypeTest extends AbstractPTypeMirrorTest {
     PDeclaredType param1;
     param1 = _param1.toDeclaredType();
 
-    ImmutableList<PTypeMirror> param1Args;
+    UnmodifiableList<PTypeMirror> param1Args;
     param1Args = param1.getTypeArguments();
 
     assertEquals(param1Args.size(), 1);

@@ -25,18 +25,18 @@ import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.TypeParameterElement;
 import javax.lang.model.element.VariableElement;
 import javax.lang.model.type.TypeMirror;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.MutableList;
 
 abstract class ProcessingExecutableElement
     extends ProcessingElement<ExecutableElement>
     implements CanGenerateCompilationError {
 
-  private ImmutableList<ProcessingParameter> parameters;
+  private UnmodifiableList<ProcessingParameter> parameters;
 
-  private ImmutableList<PTypeMirror> thrownTypes;
+  private UnmodifiableList<PTypeMirror> thrownTypes;
 
-  private ImmutableList<NamedTypeParameter> typeParameters;
+  private UnmodifiableList<NamedTypeParameter> typeParameters;
 
   ProcessingExecutableElement(ProcessingEnvironment processingEnv,
                               ExecutableElement element) {
@@ -51,7 +51,7 @@ abstract class ProcessingExecutableElement
     return getDocComment0();
   }
 
-  public final ImmutableList<ProcessingParameter> getParameters() {
+  public final UnmodifiableList<ProcessingParameter> getParameters() {
     if (parameters == null) {
       parameters = getParameters0();
     }
@@ -59,7 +59,7 @@ abstract class ProcessingExecutableElement
     return parameters;
   }
 
-  public final ImmutableList<PTypeMirror> getThrownTypes() {
+  public final UnmodifiableList<PTypeMirror> getThrownTypes() {
     if (thrownTypes == null) {
       thrownTypes = getThrownTypes0();
     }
@@ -67,7 +67,7 @@ abstract class ProcessingExecutableElement
     return thrownTypes;
   }
 
-  public final ImmutableList<NamedTypeParameter> getTypeParameters() {
+  public final UnmodifiableList<NamedTypeParameter> getTypeParameters() {
     if (typeParameters == null) {
       typeParameters = getTypeParameters0();
     }
@@ -91,7 +91,7 @@ abstract class ProcessingExecutableElement
     return hasModifier(Modifiers._public());
   }
 
-  private ImmutableList<ProcessingParameter> getParameters0() {
+  private UnmodifiableList<ProcessingParameter> getParameters0() {
     MutableList<ProcessingParameter> result;
     result = new MutableList<>();
 
@@ -108,10 +108,10 @@ abstract class ProcessingExecutableElement
       result.add(parameter);
     }
 
-    return result.toImmutableList();
+    return result.toUnmodifiableList();
   }
 
-  private ImmutableList<PTypeMirror> getThrownTypes0() {
+  private UnmodifiableList<PTypeMirror> getThrownTypes0() {
     MutableList<PTypeMirror> result;
     result = new MutableList<>();
 
@@ -128,10 +128,10 @@ abstract class ProcessingExecutableElement
       result.add(thrown);
     }
 
-    return result.toImmutableList();
+    return result.toUnmodifiableList();
   }
 
-  private ImmutableList<NamedTypeParameter> getTypeParameters0() {
+  private UnmodifiableList<NamedTypeParameter> getTypeParameters0() {
     List<? extends TypeParameterElement> elements;
     elements = element.getTypeParameters();
 

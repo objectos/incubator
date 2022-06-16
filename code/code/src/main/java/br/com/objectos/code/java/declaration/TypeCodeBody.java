@@ -21,7 +21,7 @@ import br.com.objectos.code.java.io.CodeWriter;
 import br.com.objectos.code.java.io.Section;
 import br.com.objectos.code.java.statement.Block;
 import java.util.Iterator;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 
 class TypeCodeBody implements CodeElement {
 
@@ -31,7 +31,7 @@ class TypeCodeBody implements CodeElement {
     this.elements = elements;
   }
 
-  static CodeElement of(ImmutableList<? extends BodyElement> bodyElements) {
+  static CodeElement of(UnmodifiableList<? extends BodyElement> bodyElements) {
     return bodyElements.isEmpty()
         ? Block.empty()
         : new TypeCodeBody(bodyElements);

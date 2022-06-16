@@ -51,7 +51,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import javax.lang.model.element.ExecutableElement;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import org.testng.annotations.Test;
 
 public class MethodCodeTest extends AbstractCodeJavaTest {
@@ -94,8 +94,8 @@ public class MethodCodeTest extends AbstractCodeJavaTest {
 
   @Test
   public void _throwsTest() {
-    ImmutableList<ThrowsElement> empty;
-    empty = ImmutableList.of();
+    UnmodifiableList<ThrowsElement> empty;
+    empty = UnmodifiableList.of();
 
     test(
         method(
@@ -137,7 +137,7 @@ public class MethodCodeTest extends AbstractCodeJavaTest {
     test(
         method(
             ThrowsShorthand._throws(
-                ImmutableList.of(
+                UnmodifiableList.of(
                     NamedClass.of(InterruptedException.class),
                     NamedClass.of(IOException.class),
                     NamedClass.of(ExecutionException.class)

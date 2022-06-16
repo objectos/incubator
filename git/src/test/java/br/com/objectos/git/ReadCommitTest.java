@@ -22,7 +22,7 @@ import static org.testng.Assert.assertNull;
 import br.com.objectos.fs.ResolvedPath;
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -111,7 +111,7 @@ public class ReadCommitTest extends AbstractGitTest {
       )
     );
 
-    ImmutableList<ObjectId> parents;
+    UnmodifiableList<ObjectId> parents;
     parents = result.getParents();
 
     assertEquals(parents.size(), 0);
@@ -191,7 +191,7 @@ public class ReadCommitTest extends AbstractGitTest {
       )
     );
 
-    ImmutableList<ObjectId> parents;
+    UnmodifiableList<ObjectId> parents;
     parents = result.getParents();
 
     assertEquals(parents.size(), 1);
@@ -251,7 +251,7 @@ public class ReadCommitTest extends AbstractGitTest {
       )
     );
 
-    ImmutableList<ObjectId> parents;
+    UnmodifiableList<ObjectId> parents;
     parents = result.getParents();
 
     assertEquals(parents.size(), 1);

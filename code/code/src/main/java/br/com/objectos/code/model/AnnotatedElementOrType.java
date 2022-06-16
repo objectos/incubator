@@ -27,15 +27,15 @@ import javax.lang.model.type.TypeMirror;
 import javax.lang.model.util.Elements;
 import javax.lang.model.util.Types;
 import objectos.lang.Check;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.MutableList;
 
 public abstract class AnnotatedElementOrType {
 
   protected final ProcessingEnvironment processingEnv;
 
-  private ImmutableList<ProcessingAnnotation> directlyPresentAnnotations;
-  private ImmutableList<ProcessingAnnotation> directlyPresentOrInheritedAnnotations;
+  private UnmodifiableList<ProcessingAnnotation> directlyPresentAnnotations;
+  private UnmodifiableList<ProcessingAnnotation> directlyPresentOrInheritedAnnotations;
 
   protected AnnotatedElementOrType(ProcessingEnvironment processingEnv) {
     this.processingEnv = processingEnv;
@@ -64,13 +64,13 @@ public abstract class AnnotatedElementOrType {
   public final ProcessingAnnotation getDirectlyPresentAnnotation(
       String canonicalName)
       throws NoSuchElementException {
-    ImmutableList<ProcessingAnnotation> annotations;
+    UnmodifiableList<ProcessingAnnotation> annotations;
     annotations = getDirectlyPresentAnnotations();
 
     return getProcessingAnnotationByCanonicalName(annotations, canonicalName);
   }
 
-  public final ImmutableList<ProcessingAnnotation> getDirectlyPresentAnnotations() {
+  public final UnmodifiableList<ProcessingAnnotation> getDirectlyPresentAnnotations() {
     if (directlyPresentAnnotations == null) {
       directlyPresentAnnotations = getDirectlyPresentAnnotations0();
     }
@@ -102,13 +102,13 @@ public abstract class AnnotatedElementOrType {
   protected final ProcessingAnnotation getDirectlyPresentOrInheritedAnnotationImpl(
       Element element, String canonicalName)
       throws NoSuchElementException {
-    ImmutableList<ProcessingAnnotation> annotations;
+    UnmodifiableList<ProcessingAnnotation> annotations;
     annotations = getDirectlyPresentOrInheritedAnnotationsImpl(element);
 
     return getProcessingAnnotationByCanonicalName(annotations, canonicalName);
   }
 
-  protected final ImmutableList<ProcessingAnnotation>
+  protected final UnmodifiableList<ProcessingAnnotation>
       getDirectlyPresentOrInheritedAnnotationsImpl(Element element) {
     if (directlyPresentOrInheritedAnnotations == null) {
       directlyPresentOrInheritedAnnotations = getDirectlyPresentOrInheritedAnnotations0(element);
@@ -118,7 +118,7 @@ public abstract class AnnotatedElementOrType {
   }
 
   protected final ProcessingAnnotation getProcessingAnnotationByCanonicalName(
-      ImmutableList<ProcessingAnnotation> annotations, String canonicalName) {
+      UnmodifiableList<ProcessingAnnotation> annotations, String canonicalName) {
     Check.notNull(canonicalName, "canonicalName == null");
 
     for (int i = 0; i < annotations.size(); i++) {
@@ -146,7 +146,7 @@ public abstract class AnnotatedElementOrType {
 
   protected abstract ProcessingAnnotation toProcessingAnnotation(AnnotationMirror mirror);
 
-  protected final ImmutableList<ProcessingAnnotation> toProcessingAnnotationImmutableList(
+  protected final UnmodifiableList<ProcessingAnnotation> toProcessingAnnotationUnmodifiableList(
       List<? extends AnnotationMirror> mirrors) {
     MutableList<ProcessingAnnotation> list;
     list = new MutableList<>();
@@ -161,21 +161,21 @@ public abstract class AnnotatedElementOrType {
       list.add(annotation);
     }
 
-    return list.toImmutableList();
+    return list.toUnmodifiableList();
   }
 
   protected final Types typeUtils() {
     return processingEnv.getTypeUtils();
   }
 
-  private ImmutableList<ProcessingAnnotation> getDirectlyPresentAnnotations0() {
+  private UnmodifiableList<ProcessingAnnotation> getDirectlyPresentAnnotations0() {
     List<? extends AnnotationMirror> mirrors;
     mirrors = getAnnotationMirrors();
 
-    return toProcessingAnnotationImmutableList(mirrors);
+    return toProcessingAnnotationUnmodifiableList(mirrors);
   }
 
-  private ImmutableList<ProcessingAnnotation> getDirectlyPresentOrInheritedAnnotations0(
+  private UnmodifiableList<ProcessingAnnotation> getDirectlyPresentOrInheritedAnnotations0(
       Element element) {
     Elements elements;
     elements = elementUtils();
@@ -183,7 +183,7 @@ public abstract class AnnotatedElementOrType {
     List<? extends AnnotationMirror> mirrors;
     mirrors = elements.getAllAnnotationMirrors(element);
 
-    return toProcessingAnnotationImmutableList(mirrors);
+    return toProcessingAnnotationUnmodifiableList(mirrors);
   }
 
 }

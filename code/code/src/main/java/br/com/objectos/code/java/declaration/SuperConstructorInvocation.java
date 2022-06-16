@@ -21,12 +21,12 @@ import br.com.objectos.code.java.element.Keywords;
 import br.com.objectos.code.java.expression.Argument;
 import java.util.Arrays;
 import objectos.lang.Check;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 
 public class SuperConstructorInvocation extends AbstractConstructorInvocation {
 
   private static final SuperConstructorInvocation EMPTY = _super0(
-      ImmutableList.<Argument> of()
+      UnmodifiableList.<Argument> of()
   );
 
   private SuperConstructorInvocation(CodeElement... elements) {
@@ -45,7 +45,7 @@ public class SuperConstructorInvocation extends AbstractConstructorInvocation {
   }
 
   public static SuperConstructorInvocation _super(Argument... arguments) {
-    return _super0(ImmutableList.copyOf(arguments));
+    return _super0(UnmodifiableList.copyOf(arguments));
   }
 
   public static SuperConstructorInvocation _super(

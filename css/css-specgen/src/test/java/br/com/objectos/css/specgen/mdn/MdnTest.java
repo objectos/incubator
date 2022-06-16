@@ -20,7 +20,7 @@ import static org.testng.Assert.assertEquals;
 import br.com.objectos.css.specgen.spec.Property;
 import br.com.objectos.css.specgen.spec.Spec;
 import java.io.IOException;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import org.testng.annotations.Test;
 
 public class MdnTest {
@@ -28,7 +28,7 @@ public class MdnTest {
   @Test
   public void load() throws IOException {
     Spec spec = Mdn.load();
-    ImmutableList<Property> properties = spec.properties();
+    UnmodifiableList<Property> properties = spec.properties();
     assertEquals(properties.size(), 361);
   }
 

@@ -29,8 +29,8 @@ class ValueList {
     list.add(value);
   }
 
-  public final List<Object> toImmutableList() {
-    return list.toImmutableList();
+  public final List<Object> toUnmodifiableList() {
+    return list.toUnmodifiableList();
   }
 
   final Iterator<Object> build() {

@@ -16,7 +16,7 @@
 package br.com.objectos.git;
 
 import objectos.lang.ToString;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 
 /**
  * A Git tree object resulting from a <em>read tree</em> operation.
@@ -25,11 +25,11 @@ import objectos.util.ImmutableList;
  */
 public final class Tree extends GitObject {
 
-  final ImmutableList<Entry> entries;
+  final UnmodifiableList<Entry> entries;
 
   private int index;
 
-  Tree(ImmutableList<Entry> entries, ObjectId objectId) {
+  Tree(UnmodifiableList<Entry> entries, ObjectId objectId) {
     super(objectId);
 
     this.entries = entries;
@@ -60,7 +60,7 @@ public final class Tree extends GitObject {
    *
    * @return the entries of this tree object
    */
-  public final ImmutableList<Entry> getEntries() {
+  public final UnmodifiableList<Entry> getEntries() {
     return entries;
   }
 

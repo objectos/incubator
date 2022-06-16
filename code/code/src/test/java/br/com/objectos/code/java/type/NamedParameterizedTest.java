@@ -17,7 +17,7 @@ import br.com.objectos.code.java.io.ImportSet;
 import br.com.objectos.code.util.AbstractCodeJavaTest;
 import java.util.Arrays;
 import java.util.List;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
 
@@ -97,7 +97,7 @@ public class NamedParameterizedTest extends AbstractCodeJavaTest
         "testing.code.Raw<E1, E2, E3, E4, E5>"
     );
     test(
-        NamedParameterized.of(raw, ImmutableList.of(e1, e2, e3, e4, e5)),
+        NamedParameterized.of(raw, UnmodifiableList.of(e1, e2, e3, e4, e5)),
         "testing.code.Raw<E1, E2, E3, E4, E5>"
     );
   }

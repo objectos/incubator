@@ -16,7 +16,7 @@
 package br.com.objectos.code.java.expression;
 
 import br.com.objectos.code.java.element.CodeElement;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 
 final class PostDecrementExpressionImpl
     extends AbstractDefaultStatementExpression
@@ -26,7 +26,7 @@ final class PostDecrementExpressionImpl
     super(elements);
   }
 
-  private PostDecrementExpressionImpl(ImmutableList<CodeElement> elements) {
+  private PostDecrementExpressionImpl(UnmodifiableList<CodeElement> elements) {
     super(elements);
   }
 

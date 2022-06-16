@@ -20,12 +20,12 @@ import static org.testng.Assert.assertEquals;
 import br.com.objectos.css.parser.IsTerminal;
 import br.com.objectos.lexer.Analyzer;
 import br.com.objectos.lexer.UncheckedAnalyzer;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 
 class CssLexerDriver extends CssLexerDriverDef {
 
   private String css;
-  private ImmutableList<IsTerminal> tokenList;
+  private UnmodifiableList<IsTerminal> tokenList;
 
   @Override
   void givenCssImpl(String css) {
@@ -40,13 +40,13 @@ class CssLexerDriver extends CssLexerDriverDef {
 
   @Override
   void thenTokenListImpl(IsTerminal[] expected) {
-    assertEquals(tokenList, ImmutableList.copyOf(expected));
+    assertEquals(tokenList, UnmodifiableList.copyOf(expected));
   }
 
   @Override
   void whenAnalyzeImpl() {
     Analyzer<IsTerminal> analyzer = CssLexer.get().analyze(css);
-    tokenList = ImmutableList.copyOf(new UncheckedAnalyzer<>(analyzer));
+    tokenList = UnmodifiableList.copyOf(new UncheckedAnalyzer<>(analyzer));
   }
 
 }

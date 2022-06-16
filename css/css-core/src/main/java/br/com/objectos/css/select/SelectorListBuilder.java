@@ -32,7 +32,7 @@ public class SelectorListBuilder {
   }
 
   public final SelectorList build() {
-    return new SelectorList(list.toImmutableList());
+    return new SelectorList(list.toUnmodifiableList());
   }
 
 }

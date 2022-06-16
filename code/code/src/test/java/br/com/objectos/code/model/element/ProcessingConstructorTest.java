@@ -19,7 +19,7 @@ import br.com.objectos.code.java.type.NamedTypeParameter;
 import br.com.objectos.code.model.AbstractCodeModelTest;
 import br.com.objectos.code.util.Marker1;
 import java.util.NoSuchElementException;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.ImmutableSet;
 import org.testng.annotations.Test;
 
@@ -30,7 +30,7 @@ public class ProcessingConstructorTest extends AbstractCodeModelTest {
     ProcessingType subject;
     subject = query(Subject.class);
 
-    ImmutableList<ProcessingConstructor> constructors;
+    UnmodifiableList<ProcessingConstructor> constructors;
     constructors = subject.getDeclaredConstructors();
 
     assertEquals(constructors.size(), 4);
@@ -45,7 +45,7 @@ public class ProcessingConstructorTest extends AbstractCodeModelTest {
     ProcessingConstructor defaultConstructor;
     defaultConstructor = getConstructorByAccessLevel(Subject.class, AccessLevel.DEFAULT);
 
-    ImmutableList<ProcessingAnnotation> defaultAnnotations;
+    UnmodifiableList<ProcessingAnnotation> defaultAnnotations;
     defaultAnnotations = defaultConstructor.getDirectlyPresentAnnotations();
 
     assertEquals(defaultAnnotations.size(), 0);
@@ -53,10 +53,10 @@ public class ProcessingConstructorTest extends AbstractCodeModelTest {
     ProcessingConstructor privateConstructor;
     privateConstructor = getConstructorByAccessLevel(Subject.class, AccessLevel.PRIVATE);
 
-    ImmutableList<ProcessingAnnotation> privateAnnotations;
+    UnmodifiableList<ProcessingAnnotation> privateAnnotations;
     privateAnnotations = privateConstructor.getDirectlyPresentAnnotations();
 
-    ImmutableList<NamedClass> privateAnnotationClassNames;
+    UnmodifiableList<NamedClass> privateAnnotationClassNames;
     privateAnnotationClassNames = annotationToClassName(privateAnnotations);
 
     assertEquals(privateAnnotationClassNames.size(), 1);
@@ -91,7 +91,7 @@ public class ProcessingConstructorTest extends AbstractCodeModelTest {
     ProcessingConstructor defaultSubject;
     defaultSubject = getConstructorByAccessLevel(ParametersSubject.class, AccessLevel.DEFAULT);
 
-    ImmutableList<ProcessingParameter> defaultParameters;
+    UnmodifiableList<ProcessingParameter> defaultParameters;
     defaultParameters = defaultSubject.getParameters();
 
     assertEquals(defaultParameters.size(), 0);
@@ -99,7 +99,7 @@ public class ProcessingConstructorTest extends AbstractCodeModelTest {
     ProcessingConstructor publicSubject;
     publicSubject = getConstructorByAccessLevel(ParametersSubject.class, AccessLevel.PUBLIC);
 
-    ImmutableList<ProcessingParameter> publicParameters;
+    UnmodifiableList<ProcessingParameter> publicParameters;
     publicParameters = publicSubject.getParameters();
 
     assertEquals(publicParameters.size(), 2);
@@ -112,7 +112,7 @@ public class ProcessingConstructorTest extends AbstractCodeModelTest {
     ProcessingConstructor publicSubject;
     publicSubject = getConstructorByAccessLevel(TypeParametersSubject.class, AccessLevel.PUBLIC);
 
-    ImmutableList<NamedTypeParameter> publicParameters;
+    UnmodifiableList<NamedTypeParameter> publicParameters;
     publicParameters = publicSubject.getTypeParameters();
 
     assertEquals(publicParameters.size(), 0);
@@ -120,7 +120,7 @@ public class ProcessingConstructorTest extends AbstractCodeModelTest {
     ProcessingConstructor privateSubject;
     privateSubject = getConstructorByAccessLevel(TypeParametersSubject.class, AccessLevel.PRIVATE);
 
-    ImmutableList<NamedTypeParameter> privateParameters;
+    UnmodifiableList<NamedTypeParameter> privateParameters;
     privateParameters = privateSubject.getTypeParameters();
 
     assertEquals(privateParameters.size(), 2);
@@ -176,7 +176,7 @@ public class ProcessingConstructorTest extends AbstractCodeModelTest {
     ProcessingType processingType;
     processingType = query(type);
 
-    ImmutableList<ProcessingConstructor> constructors;
+    UnmodifiableList<ProcessingConstructor> constructors;
     constructors = processingType.getDeclaredConstructors();
 
     for (int i = 0; i < constructors.size(); i++) {

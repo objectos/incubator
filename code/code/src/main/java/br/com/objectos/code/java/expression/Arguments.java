@@ -24,7 +24,7 @@ import br.com.objectos.code.java.element.NewLine;
 import br.com.objectos.code.java.io.CodeWriter;
 import br.com.objectos.code.java.io.Section;
 import objectos.lang.Check;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.MutableList;
 
 public final class Arguments extends AbstractImmutableCodeElement
@@ -39,7 +39,7 @@ public final class Arguments extends AbstractImmutableCodeElement
     super(elements);
   }
 
-  private Arguments(ImmutableList<CodeElement> elements) {
+  private Arguments(UnmodifiableList<CodeElement> elements) {
     super(elements);
   }
 
@@ -312,7 +312,7 @@ public final class Arguments extends AbstractImmutableCodeElement
       elements.add(endSection());
       elements.add(indentIfNecessary());
       elements.add(closeParens());
-      return new Arguments(elements.toImmutableList());
+      return new Arguments(elements.toUnmodifiableList());
     }
 
     final void addArgumentUnchecked(Argument argument) {

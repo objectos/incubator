@@ -18,7 +18,7 @@ package objectos.ssg;
 import br.com.objectos.http.media.MediaType;
 import java.io.IOException;
 import objectos.lang.Check;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 
 public abstract class SiteDirectory
     implements
@@ -107,7 +107,7 @@ public abstract class SiteDirectory
   }
 
   protected final <T>
-      ImmutableList<T> getObjectsByType(Class<? extends T> type) {
+      UnmodifiableList<T> getObjectsByType(Class<? extends T> type) {
     return site.getObjectsByType(type);
   }
 

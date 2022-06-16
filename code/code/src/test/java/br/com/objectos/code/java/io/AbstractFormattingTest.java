@@ -11,7 +11,7 @@ import br.com.objectos.code.java.declaration.ClassBodyElement;
 import br.com.objectos.code.util.AbstractCodeJavaTest;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.UnmodifiableIterator;
 import org.testng.annotations.BeforeMethod;
 
@@ -51,7 +51,7 @@ public abstract class AbstractFormattingTest
   }
 
   final void withElements(ClassBodyElement... elements) {
-    iterator = ImmutableList.copyOf(elements).iterator();
+    iterator = UnmodifiableList.copyOf(elements).iterator();
   }
 
 }

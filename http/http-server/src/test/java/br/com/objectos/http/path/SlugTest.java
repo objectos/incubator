@@ -22,7 +22,7 @@ import br.com.objectos.http.server.RequestedPart;
 import br.com.objectos.http.server.RequestedPath;
 import java.util.Arrays;
 import java.util.List;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -108,14 +108,14 @@ public class SlugTest {
   }
 
   private void accept(Slug part, String value, boolean expected) {
-    ImmutableList<Slug> expectedList = ImmutableList.of(part);
+    UnmodifiableList<Slug> expectedList = UnmodifiableList.of(part);
     RouteParser parser = new RouteParser(expectedList, null, null);
     RequestedPart requestedPart = new RequestedPath(value).next();
     assertEquals(part.matches(parser, requestedPart), expected);
   }
 
   private List<Argument> resolve(Slug part, RequestedPath path, boolean expected) {
-    ImmutableList<Slug> expectedList = ImmutableList.of(part);
+    UnmodifiableList<Slug> expectedList = UnmodifiableList.of(part);
     RouteParser parser = new RouteParser(expectedList, null, null);
     assertEquals(part.matches(parser, path.next()), expected);
     return parser.argumentList();

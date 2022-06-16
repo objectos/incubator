@@ -17,7 +17,7 @@ import br.com.objectos.code.java.type.NamedWildcard;
 import br.com.objectos.code.model.element.ProcessingMethod;
 import br.com.objectos.code.model.element.ProcessingParameter;
 import java.util.NoSuchElementException;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -110,7 +110,7 @@ public class PWildcardTypeTest extends AbstractPTypeMirrorTest {
     ProcessingMethod method;
     method = getDeclaredMethod(type, methodName);
 
-    ImmutableList<ProcessingParameter> parameters;
+    UnmodifiableList<ProcessingParameter> parameters;
     parameters = method.getParameters();
 
     ProcessingParameter only;
@@ -122,7 +122,7 @@ public class PWildcardTypeTest extends AbstractPTypeMirrorTest {
     PDeclaredType declared;
     declared = parameterType.toDeclaredType();
 
-    ImmutableList<PTypeMirror> typeArguments;
+    UnmodifiableList<PTypeMirror> typeArguments;
     typeArguments = declared.getTypeArguments();
 
     return typeArguments.getOnly();

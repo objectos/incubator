@@ -12,7 +12,7 @@ import static br.com.objectos.code.java.type.NamedTypes.tvar;
 
 import br.com.objectos.code.java.type.NamedType;
 import br.com.objectos.code.util.AbstractCodeJavaTest;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import org.testng.annotations.Test;
 
 public class TypeWitnessTest extends AbstractCodeJavaTest {
@@ -28,7 +28,7 @@ public class TypeWitnessTest extends AbstractCodeJavaTest {
   @Test
   public void witness0WithIterable() {
     Iterable<? extends NamedType> types
-        = ImmutableList.of(tvar("E1"), tvar("E2"), tvar("E3"), tvar("E4"));
+        = UnmodifiableList.of(tvar("E1"), tvar("E2"), tvar("E3"), tvar("E4"));
     test(TypeWitness.witness0(types), "<E1, E2, E3, E4>");
   }
 

@@ -37,7 +37,7 @@ import static br.com.objectos.code.java.type.NamedTypes.tvar;
 import br.com.objectos.code.java.element.Keywords;
 import br.com.objectos.code.util.AbstractCodeJavaTest;
 import java.io.Serializable;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import org.testng.annotations.Test;
 
 public class EnumCodeTest extends AbstractCodeJavaTest {
@@ -253,8 +253,8 @@ public class EnumCodeTest extends AbstractCodeJavaTest {
     EnumConstantCode a = enumConstant(id("A"));
     EnumConstantCode b = enumConstant(id("B"));
     EnumConstantCode c = enumConstant(id("C"));
-    ImmutableList<EnumConstantCode> abc = ImmutableList.of(a, b, c);
-    ImmutableList<EnumConstantCode> bc = ImmutableList.of(b, c);
+    UnmodifiableList<EnumConstantCode> abc = UnmodifiableList.of(a, b, c);
+    UnmodifiableList<EnumConstantCode> bc = UnmodifiableList.of(b, c);
     test(
         _enum(
             id("Subject"),

@@ -64,7 +64,7 @@ final class Rule implements IsNonTerminal {
       elements.add(declaration);
     }
 
-    dsl.addRule(elements.toImmutableList());
+    dsl.addRule(elements.toUnmodifiableList());
   }
 
 }

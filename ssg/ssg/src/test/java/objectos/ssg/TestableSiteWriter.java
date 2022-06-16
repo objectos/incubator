@@ -25,17 +25,17 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 
 final class TestableSiteWriter implements SiteWriter {
 
   private final Map<String, Contents> contentMap = new TreeMap<>();
 
-  public final ImmutableList<String> pathList() {
+  public final UnmodifiableList<String> pathList() {
     Set<String> keys;
     keys = contentMap.keySet();
 
-    return ImmutableList.copyOf(keys);
+    return UnmodifiableList.copyOf(keys);
   }
 
   public final void testBytes(

@@ -25,7 +25,7 @@ import br.com.objectos.code.util.NonInheritedRepeatableAnnotation;
 import br.com.objectos.code.util.RepeatableAnnotation;
 import br.com.objectos.code.util.TypeAnnotation;
 import java.util.NoSuchElementException;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -81,10 +81,10 @@ public class ProcessingTypeTestJava8 extends AbstractCodeModelTest {
     ProcessingType subject;
     subject = query(AnnotationsSubject.class);
 
-    ImmutableList<ProcessingAnnotation> subjectAnnotations;
+    UnmodifiableList<ProcessingAnnotation> subjectAnnotations;
     subjectAnnotations = subject.getDirectlyPresentAnnotations();
 
-    ImmutableList<NamedClass> subjectClassNames;
+    UnmodifiableList<NamedClass> subjectClassNames;
     subjectClassNames = annotationToClassName(subjectAnnotations);
 
     assertEquals(subjectClassNames.size(), 4);
@@ -137,10 +137,10 @@ public class ProcessingTypeTestJava8 extends AbstractCodeModelTest {
     ProcessingType subject;
     subject = query(AnnotationsSubject.class);
 
-    ImmutableList<ProcessingAnnotation> subjectAnnotations;
+    UnmodifiableList<ProcessingAnnotation> subjectAnnotations;
     subjectAnnotations = subject.getDirectlyPresentOrInheritedAnnotations();
 
-    ImmutableList<NamedClass> subjectClassNames;
+    UnmodifiableList<NamedClass> subjectClassNames;
     subjectClassNames = annotationToClassName(subjectAnnotations);
 
     assertEquals(subjectClassNames.size(), 6);

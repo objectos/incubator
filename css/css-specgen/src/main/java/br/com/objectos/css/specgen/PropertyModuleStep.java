@@ -37,7 +37,7 @@ import br.com.objectos.css.specgen.spec.Step;
 import br.com.objectos.css.specgen.spec.StepAdapter;
 import br.com.objectos.css.specgen.spec.ValueType;
 import java.util.Iterator;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.MutableList;
 
 class PropertyModuleStep extends Step {
@@ -48,11 +48,11 @@ class PropertyModuleStep extends Step {
 
   @Override
   public final void addProperty(Property property) {
-    addProperty(property, ImmutableList.of());
+    addProperty(property, UnmodifiableList.of());
   }
 
   @Override
-  public final void addProperty(Property property, ImmutableList<Property> group) {
+  public final void addProperty(Property property, UnmodifiableList<Property> group) {
     MethodCode.Builder def = MethodCode.builder();
     def.addAnnotation(Override.class);
     def.addModifier(Modifiers.FINAL);
@@ -81,7 +81,7 @@ class PropertyModuleStep extends Step {
     );
   }
 
-  private void doGroupProperties(ImmutableList<Property> group, Builder def) {
+  private void doGroupProperties(UnmodifiableList<Property> group, Builder def) {
     if (group.isEmpty()) {
       return;
     }
@@ -103,7 +103,7 @@ class PropertyModuleStep extends Step {
   }
 
   private void doKeywords(
-      Property property, ImmutableList<Property> group, MethodCode.Builder def) {
+      Property property, UnmodifiableList<Property> group, MethodCode.Builder def) {
     KeywordSet.Builder kwSetBuilder = KeywordSet.builder();
     property.acceptKeywordSetBuilder(kwSetBuilder);
 

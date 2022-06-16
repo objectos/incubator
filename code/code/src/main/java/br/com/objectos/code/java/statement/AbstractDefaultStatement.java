@@ -21,7 +21,7 @@ import br.com.objectos.code.java.element.AbstractDefaultImmutableCodeElement;
 import br.com.objectos.code.java.element.CodeElement;
 import br.com.objectos.code.java.io.CodeWriter;
 import br.com.objectos.code.java.io.Section;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 
 public abstract class AbstractDefaultStatement
     extends AbstractDefaultImmutableCodeElement
@@ -31,7 +31,7 @@ public abstract class AbstractDefaultStatement
     super(elements);
   }
 
-  protected AbstractDefaultStatement(ImmutableList<CodeElement> elements) {
+  protected AbstractDefaultStatement(UnmodifiableList<CodeElement> elements) {
     super(elements);
   }
 

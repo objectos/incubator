@@ -31,7 +31,7 @@ import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.TypeParameterElement;
 import javax.lang.model.util.Elements;
 import objectos.lang.Check;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.ImmutableSet;
 
 public class ProcessingType extends ProcessingElement<TypeElement>
@@ -42,7 +42,7 @@ public class ProcessingType extends ProcessingElement<TypeElement>
   private ProcessingTypeElements declaredElements;
   private ProcessingTypeElements declaredOrInheritedElements;
   private NamedClass name;
-  private ImmutableList<NamedTypeParameter> typeParameters;
+  private UnmodifiableList<NamedTypeParameter> typeParameters;
 
   ProcessingType(ProcessingEnvironment processingEnv, TypeElement element) {
     super(processingEnv, element);
@@ -90,31 +90,31 @@ public class ProcessingType extends ProcessingElement<TypeElement>
     return qualifiedName.toString();
   }
 
-  public final ImmutableList<ProcessingConstructor> getDeclaredConstructors() {
+  public final UnmodifiableList<ProcessingConstructor> getDeclaredConstructors() {
     return getDeclaredElements().constructors;
   }
 
-  public final ImmutableList<ProcessingField> getDeclaredFields() {
+  public final UnmodifiableList<ProcessingField> getDeclaredFields() {
     return getDeclaredElements().fields;
   }
 
-  public final ImmutableList<ProcessingMethod> getDeclaredMethods() {
+  public final UnmodifiableList<ProcessingMethod> getDeclaredMethods() {
     return getDeclaredElements().methods;
   }
 
-  public final ImmutableList<ProcessingField> getDeclaredOrInheritedFields() {
+  public final UnmodifiableList<ProcessingField> getDeclaredOrInheritedFields() {
     return getDeclaredOrInheritedElements().fields;
   }
 
-  public final ImmutableList<ProcessingMethod> getDeclaredOrInheritedMethods() {
+  public final UnmodifiableList<ProcessingMethod> getDeclaredOrInheritedMethods() {
     return getDeclaredOrInheritedElements().methods;
   }
 
-  public final ImmutableList<ProcessingType> getDeclaredOrInheritedTypes() {
+  public final UnmodifiableList<ProcessingType> getDeclaredOrInheritedTypes() {
     return getDeclaredOrInheritedElements().types;
   }
 
-  public final ImmutableList<ProcessingType> getDeclaredTypes() {
+  public final UnmodifiableList<ProcessingType> getDeclaredTypes() {
     return getDeclaredElements().types;
   }
 
@@ -129,7 +129,7 @@ public class ProcessingType extends ProcessingElement<TypeElement>
     return getDirectlyPresentOrInheritedAnnotationImpl(element, canonicalName);
   }
 
-  public final ImmutableList<ProcessingAnnotation> getDirectlyPresentOrInheritedAnnotations() {
+  public final UnmodifiableList<ProcessingAnnotation> getDirectlyPresentOrInheritedAnnotations() {
     return getDirectlyPresentOrInheritedAnnotationsImpl(element);
   }
 
@@ -157,7 +157,7 @@ public class ProcessingType extends ProcessingElement<TypeElement>
     return simpleName.toString();
   }
 
-  public final ImmutableList<NamedTypeParameter> getTypeParameters() {
+  public final UnmodifiableList<NamedTypeParameter> getTypeParameters() {
     if (typeParameters == null) {
       typeParameters = getTypeParameters0();
     }
@@ -265,7 +265,7 @@ public class ProcessingType extends ProcessingElement<TypeElement>
     return NamedClass.of(element);
   }
 
-  private ImmutableList<NamedTypeParameter> getTypeParameters0() {
+  private UnmodifiableList<NamedTypeParameter> getTypeParameters0() {
     List<? extends TypeParameterElement> parameters;
     parameters = element.getTypeParameters();
 

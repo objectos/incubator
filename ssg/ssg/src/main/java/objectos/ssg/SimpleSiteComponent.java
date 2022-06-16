@@ -17,7 +17,7 @@ package objectos.ssg;
 
 import objectos.lang.Check;
 import objectos.ssg.Site.Context;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 
 public class SimpleSiteComponent
     implements
@@ -46,7 +46,7 @@ public class SimpleSiteComponent
     return context.getObject(key);
   }
 
-  protected final <T> ImmutableList<T> getObjectsByType(Class<? extends T> type) {
+  protected final <T> UnmodifiableList<T> getObjectsByType(Class<? extends T> type) {
     return context.getObjectsByType(type);
   }
 

@@ -18,11 +18,11 @@ package br.com.objectos.www.objectos;
 import br.com.objectos.html.spi.type.UlValue;
 import objectos.lang.Check;
 import objectos.ssg.SiteFragment;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 
 public class Navbar extends SiteFragment {
 
-  private ImmutableList<NavbarPage> pages = ImmutableList.of();
+  private UnmodifiableList<NavbarPage> pages = UnmodifiableList.of();
 
   @Override
   protected final void definition() {
@@ -33,7 +33,7 @@ public class Navbar extends SiteFragment {
     );
   }
 
-  final void setPages(ImmutableList<NavbarPage> pages) {
+  final void setPages(UnmodifiableList<NavbarPage> pages) {
     this.pages = Check.notNull(pages, "pages == null");
   }
 

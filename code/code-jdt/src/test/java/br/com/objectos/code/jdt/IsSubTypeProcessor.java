@@ -23,7 +23,7 @@ import br.com.objectos.code.processing.AbstractProcessingRoundProcessor;
 import br.com.objectos.code.processing.ProcessingRound;
 import br.com.objectos.code.processing.type.PTypeMirror;
 import java.util.Set;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.ImmutableSet;
 
 class IsSubTypeProcessor extends AbstractProcessingRoundProcessor {
@@ -44,7 +44,7 @@ class IsSubTypeProcessor extends AbstractProcessingRoundProcessor {
 
   private void isSubType(
       ProcessingType type, String methodName, Class<?> superType, boolean expected) {
-    ImmutableList<ProcessingMethod> methods;
+    UnmodifiableList<ProcessingMethod> methods;
     methods = type.getDeclaredMethods();
 
     ProcessingMethod first;

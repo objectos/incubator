@@ -22,7 +22,7 @@ import java.io.InputStream;
 import java.io.Reader;
 import java.nio.charset.Charset;
 import objectos.lang.Check;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.MutableList;
 
 /**
@@ -101,7 +101,7 @@ public final class Read {
    * @throws IOException
    *         if lines cannot be read or if the reader cannot be closed
    */
-  public static ImmutableList<String> lines(Reader reader) throws IOException {
+  public static UnmodifiableList<String> lines(Reader reader) throws IOException {
     Check.notNull(reader, "reader == null");
 
     BufferedReader r;
@@ -130,7 +130,7 @@ public final class Read {
    *         if a reader cannot be obtained, if lines cannot be read or if the
    *         reader cannot be closed
    */
-  public static ImmutableList<String> lines(
+  public static UnmodifiableList<String> lines(
       ReaderSource source, Charset charset) throws IOException {
     Check.notNull(source, "source == null");
     Check.notNull(charset, "charset == null");
@@ -205,7 +205,7 @@ public final class Read {
     return result.toString();
   }
 
-  private static ImmutableList<String> lines0(BufferedReader r) throws IOException {
+  private static UnmodifiableList<String> lines0(BufferedReader r) throws IOException {
     MutableList<String> result;
     result = new MutableList<>();
 
@@ -220,7 +220,7 @@ public final class Read {
       }
     }
 
-    return result.toImmutableList();
+    return result.toUnmodifiableList();
   }
 
   private static BufferedReader open(ReaderSource source, Charset charset) throws IOException {

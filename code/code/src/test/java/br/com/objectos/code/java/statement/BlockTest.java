@@ -18,7 +18,7 @@ import static org.testng.Assert.assertTrue;
 
 import br.com.objectos.code.util.AbstractCodeJavaTest;
 import java.util.Collections;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import org.testng.annotations.Test;
 
 public class BlockTest extends AbstractCodeJavaTest {
@@ -29,7 +29,7 @@ public class BlockTest extends AbstractCodeJavaTest {
   public void empty() {
     test(Block.block(), "{}");
     test(Block.block(new BlockStatement[] {}), "{}");
-    test(Block.block(ImmutableList.<BlockElement> of()), "{}");
+    test(Block.block(UnmodifiableList.<BlockElement> of()), "{}");
   }
 
   @Test

@@ -17,7 +17,7 @@ package br.com.objectos.code.java.expression;
 
 import br.com.objectos.code.java.element.CodeElement;
 import br.com.objectos.code.java.statement.AbstractDefaultStatement;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 
 abstract class AbstractDefaultStatementExpression
     extends AbstractDefaultStatement
@@ -27,7 +27,7 @@ abstract class AbstractDefaultStatementExpression
     super(elements);
   }
 
-  AbstractDefaultStatementExpression(ImmutableList<CodeElement> elements) {
+  AbstractDefaultStatementExpression(UnmodifiableList<CodeElement> elements) {
     super(elements);
   }
 

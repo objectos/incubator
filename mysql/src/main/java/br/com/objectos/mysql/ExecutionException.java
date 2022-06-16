@@ -16,7 +16,7 @@
 package br.com.objectos.mysql;
 
 import java.io.IOException;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 
 public class ExecutionException extends IOException {
 
@@ -24,13 +24,13 @@ public class ExecutionException extends IOException {
 
   private final int exitValue;
 
-  private final ImmutableList<String> stderr;
+  private final UnmodifiableList<String> stderr;
 
-  private final ImmutableList<String> stdout;
+  private final UnmodifiableList<String> stdout;
 
   public ExecutionException(int exitValue,
-                            ImmutableList<String> stderr,
-                            ImmutableList<String> stdout) {
+                            UnmodifiableList<String> stderr,
+                            UnmodifiableList<String> stdout) {
     this.exitValue = exitValue;
     this.stderr = stderr;
     this.stdout = stdout;
@@ -40,11 +40,11 @@ public class ExecutionException extends IOException {
     return exitValue;
   }
 
-  public final ImmutableList<String> getErrorLines() {
+  public final UnmodifiableList<String> getErrorLines() {
     return stderr;
   }
 
-  public final ImmutableList<String> getOutputLines() {
+  public final UnmodifiableList<String> getOutputLines() {
     return stdout;
   }
 

@@ -19,9 +19,9 @@
 package br.com.objectos.http.server.nio;
 
 import static br.com.objectos.collections.Collections.map;
-import static br.com.objectos.collections.Collections.toImmutableList;
+import static br.com.objectos.collections.Collections.toUnmodifiableList;
 
-import br.com.objectos.collections.ImmutableList;
+import br.com.objectos.collections.UnmodifiableList;
 import br.com.objectos.http.server.Code500InternalServerErrorException;
 import br.com.objectos.http.server.FileResponse;
 import br.com.objectos.http.server.HttpException;
@@ -42,9 +42,9 @@ import java.util.concurrent.TimeUnit;
 public class CachingProxy implements FsObjectVisitor<ResponseBuilder, String> {
 
   private final Directory cache;
-  private final ImmutableList<String> specList;
+  private final UnmodifiableList<String> specList;
 
-  CachingProxy(Directory cache, ImmutableList<String> specList) {
+  CachingProxy(Directory cache, UnmodifiableList<String> specList) {
     this.cache = cache;
     this.specList = specList;
   }
@@ -61,11 +61,11 @@ public class CachingProxy implements FsObjectVisitor<ResponseBuilder, String> {
     }
   }
 
-  public ImmutableList<Url> urlList(String path) {
+  public UnmodifiableList<Url> urlList(String path) {
     Iterable<Url> map
         = map(specList, spec -> Url.of(spec + path).timeoutAfter(3, TimeUnit.MINUTES));
 
-    return toImmutableList(map);
+    return toUnmodifiableList(map);
   }
 
   @Override

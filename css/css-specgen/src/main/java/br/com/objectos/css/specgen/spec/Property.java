@@ -19,7 +19,7 @@ import java.io.Serializable;
 import java.util.Objects;
 import objectos.lang.Check;
 import objectos.lang.ToString;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 
 public class Property implements Comparable<Property>, Serializable, ToString.Formattable {
 
@@ -27,13 +27,13 @@ public class Property implements Comparable<Property>, Serializable, ToString.Fo
 
   private final String formal;
   private final String name;
-  private final ImmutableList<ValueType> valueTypes;
+  private final UnmodifiableList<ValueType> valueTypes;
 
   public Property(String name, String formal) {
-    this(name, formal, ImmutableList.of());
+    this(name, formal, UnmodifiableList.of());
   }
 
-  public Property(String name, String formal, ImmutableList<ValueType> valueTypes) {
+  public Property(String name, String formal, UnmodifiableList<ValueType> valueTypes) {
     this.name = Check.notNull(name, "name == null");
     this.formal = Check.notNull(formal, "formal == null");
     this.valueTypes = Check.notNull(valueTypes, "valueTypes == null");
@@ -89,7 +89,7 @@ public class Property implements Comparable<Property>, Serializable, ToString.Fo
     return ToString.of(this);
   }
 
-  public final ImmutableList<ValueType> valueTypes() {
+  public final UnmodifiableList<ValueType> valueTypes() {
     return valueTypes;
   }
 
@@ -111,7 +111,7 @@ public class Property implements Comparable<Property>, Serializable, ToString.Fo
 
     protected abstract String name();
 
-    protected abstract ImmutableList<ValueType> valueTypes();
+    protected abstract UnmodifiableList<ValueType> valueTypes();
 
   }
 

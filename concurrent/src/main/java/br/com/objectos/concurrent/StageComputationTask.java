@@ -19,7 +19,7 @@ import java.util.NoSuchElementException;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import objectos.lang.Check;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.MutableList;
 
 /**
@@ -500,7 +500,7 @@ public abstract class StageComputationTask<V> implements Computation<V>, CpuTask
    *         return;
    *       }
    *
-   *       final ImmutableList<Item> items;
+   *       final UnmodifiableList<Item> items;
    *       items = getAll();
    *
    *       for (Item item : items) {
@@ -521,7 +521,7 @@ public abstract class StageComputationTask<V> implements Computation<V>, CpuTask
    * <p>
    * Please note that this method is generic only as a small convenience to the
    * programmer. For practical purposes, it mostly behaves as if
-   * its return type was declared as {@code ImmutableList<Object>}. In other
+   * its return type was declared as {@code UnmodifiableList<Object>}. In other
    * words, it is the programmer responsibility to keep track of the correct
    * types; the compiler will not be able to help here. The reason being that
    * the type of the computation in a triggering stage is completely lost in the
@@ -543,11 +543,11 @@ public abstract class StageComputationTask<V> implements Computation<V>, CpuTask
    * @see #get()
    */
   @SuppressWarnings("unchecked")
-  protected final <T> ImmutableList<T> getAll() {
-    ImmutableList<Object> list;
-    list = results.toImmutableList();
+  protected final <T> UnmodifiableList<T> getAll() {
+    UnmodifiableList<Object> list;
+    list = results.toUnmodifiableList();
 
-    return (ImmutableList<T>) list;
+    return (UnmodifiableList<T>) list;
   }
 
   /**
@@ -747,8 +747,8 @@ public abstract class StageComputationTask<V> implements Computation<V>, CpuTask
     rethrow = null;
 
     if (!computations.isEmpty()) {
-      ImmutableList<Computation<?>> copy;
-      copy = computations.toImmutableList();
+      UnmodifiableList<Computation<?>> copy;
+      copy = computations.toUnmodifiableList();
 
       computations.clear();
 

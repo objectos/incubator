@@ -45,7 +45,7 @@ import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
 import java.util.HashMap;
 import java.util.Map;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.MutableList;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -175,8 +175,8 @@ public abstract class AbstractReplayTest {
   }
 
   final void writeResponse(String... lines) throws IOException {
-    ImmutableList<String> list;
-    list = ImmutableList.copyOf(lines);
+    UnmodifiableList<String> list;
+    list = UnmodifiableList.copyOf(lines);
 
     String string;
     string = list.join("\r\n");

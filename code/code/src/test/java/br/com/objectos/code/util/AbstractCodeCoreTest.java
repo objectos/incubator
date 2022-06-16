@@ -36,7 +36,7 @@ import javax.lang.model.util.ElementFilter;
 import javax.lang.model.util.Elements;
 import javax.lang.model.util.Types;
 import objectos.lang.Check;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import org.testng.IHookCallBack;
 import org.testng.IHookable;
 import org.testng.ITestResult;
@@ -87,7 +87,7 @@ public abstract class AbstractCodeCoreTest implements IHookable {
   }
 
   protected final ProcessingMethod getDeclaredMethod(ProcessingType type, String methodName) {
-    ImmutableList<ProcessingMethod> methods;
+    UnmodifiableList<ProcessingMethod> methods;
     methods = type.getDeclaredMethods();
 
     for (int i = 0; i < methods.size(); i++) {
@@ -154,7 +154,7 @@ public abstract class AbstractCodeCoreTest implements IHookable {
   }
 
   protected final void testToString(Object o, String... lines) {
-    ImmutableList<String> list = ImmutableList.copyOf(lines);
+    UnmodifiableList<String> list = UnmodifiableList.copyOf(lines);
 
     String expected = list.join("\n");
 

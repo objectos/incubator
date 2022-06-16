@@ -20,7 +20,7 @@ import static org.testng.Assert.assertEquals;
 import br.com.objectos.parser.spec.NonTerminal;
 import br.com.objectos.parser.spec.ProductionQuery;
 import java.util.Arrays;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 
 class FakeStateSubject implements StateSubject {
 
@@ -64,7 +64,7 @@ class FakeStateSubject implements StateSubject {
   }
 
   final void hasSource(Object[] expected) {
-    assertEquals(ImmutableList.copyOf(builder.source), ImmutableList.copyOf(expected));
+    assertEquals(UnmodifiableList.copyOf(builder.source), UnmodifiableList.copyOf(expected));
   }
 
   final void hasTokenList(Object[] expected) {
@@ -72,7 +72,7 @@ class FakeStateSubject implements StateSubject {
   }
 
   final void hasValueList(Object[] expected) {
-    assertEquals(ImmutableList.copyOf(builder.valueList), ImmutableList.copyOf(expected));
+    assertEquals(UnmodifiableList.copyOf(builder.valueList), UnmodifiableList.copyOf(expected));
   }
 
   final void isFailed(boolean expected) {

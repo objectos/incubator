@@ -18,7 +18,7 @@ package br.com.objectos.css.select;
 import br.com.objectos.css.sheet.RuleElement;
 import java.util.Iterator;
 import java.util.Optional;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.MutableList;
 
 public class DescendantSelector
@@ -27,9 +27,9 @@ public class DescendantSelector
     ComplexSelector,
     Iterable<Selector> {
 
-  private final ImmutableList<Selector> selectors;
+  private final UnmodifiableList<Selector> selectors;
 
-  DescendantSelector(ImmutableList<Selector> selectors) {
+  DescendantSelector(UnmodifiableList<Selector> selectors) {
     this.selectors = selectors;
   }
 
@@ -101,7 +101,7 @@ public class DescendantSelector
     return true;
   }
 
-  public final ImmutableList<Selector> selectors() {
+  public final UnmodifiableList<Selector> selectors() {
     return selectors;
   }
 
@@ -115,7 +115,7 @@ public class DescendantSelector
     MutableList<Selector> newSelectors = new MutableList<>();
     newSelectors.add(ancestor);
     newSelectors.addAll(selectors);
-    return new DescendantSelector(newSelectors.toImmutableList());
+    return new DescendantSelector(newSelectors.toUnmodifiableList());
   }
 
 }

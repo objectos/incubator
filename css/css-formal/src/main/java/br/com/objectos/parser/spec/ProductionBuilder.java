@@ -150,7 +150,7 @@ class ProductionBuilder {
   }
 
   private Production buildParent(Factory factory) {
-    Expression expression = new Expression(expressionList.toImmutableList());
+    Expression expression = new Expression(expressionList.toUnmodifiableList());
     return new FactoryProduction(symbol, expression, factory);
   }
 

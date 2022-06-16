@@ -21,18 +21,18 @@ import br.com.objectos.code.annotations.Ignore;
 import br.com.objectos.code.java.expression.LambdaBody;
 import br.com.objectos.code.java.io.CodeWriter;
 import br.com.objectos.code.java.io.Section;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.MutableList;
 
 public class Block extends AbstractSimpleStatement implements LambdaBody {
 
   private static final Block EMPTY = new Block(
-      ImmutableList.<BlockElement> of()
+      UnmodifiableList.<BlockElement> of()
   );
 
-  private final ImmutableList<BlockElement> elements;
+  private final UnmodifiableList<BlockElement> elements;
 
-  private Block(ImmutableList<BlockElement> elements) {
+  private Block(UnmodifiableList<BlockElement> elements) {
     this.elements = elements;
   }
 
@@ -41,11 +41,11 @@ public class Block extends AbstractSimpleStatement implements LambdaBody {
   }
 
   public static Block block(BlockElement... elements) {
-    return new Block(ImmutableList.copyOf(elements));
+    return new Block(UnmodifiableList.copyOf(elements));
   }
 
   public static Block block(Iterable<? extends BlockElement> elements) {
-    return new Block(ImmutableList.copyOf(elements));
+    return new Block(UnmodifiableList.copyOf(elements));
   }
 
   @Ignore
@@ -113,7 +113,7 @@ public class Block extends AbstractSimpleStatement implements LambdaBody {
     }
 
     public final Block build() {
-      return elements.isEmpty() ? empty() : new Block(elements.toImmutableList());
+      return elements.isEmpty() ? empty() : new Block(elements.toUnmodifiableList());
     }
 
   }

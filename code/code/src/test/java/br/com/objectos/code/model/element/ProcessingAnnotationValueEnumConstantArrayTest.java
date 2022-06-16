@@ -15,7 +15,7 @@ import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -27,17 +27,17 @@ public class ProcessingAnnotationValueEnumConstantArrayTest
   public void getDeclaredOrDefaultValue() {
     assertEquals(
         getDeclaredOrDefaultValue(defaults()),
-        ImmutableList.of()
+        UnmodifiableList.of()
     );
 
     assertEquals(
         getDeclaredOrDefaultValue(noDefaults()),
-        ImmutableList.of(Letter.A)
+        UnmodifiableList.of(Letter.A)
     );
 
     assertEquals(
         getDeclaredOrDefaultValue(withDefaults()),
-        ImmutableList.of(Letter.B, Letter.C)
+        UnmodifiableList.of(Letter.B, Letter.C)
     );
   }
 
@@ -52,12 +52,12 @@ public class ProcessingAnnotationValueEnumConstantArrayTest
 
     assertEquals(
         getDeclaredValue(noDefaults()),
-        ImmutableList.of(Letter.A)
+        UnmodifiableList.of(Letter.A)
     );
 
     assertEquals(
         getDeclaredValue(withDefaults()),
-        ImmutableList.of(Letter.B, Letter.C)
+        UnmodifiableList.of(Letter.B, Letter.C)
     );
   }
 
@@ -65,7 +65,7 @@ public class ProcessingAnnotationValueEnumConstantArrayTest
   public void getDefaultValue() {
     assertEquals(
         getDefaultValue(defaults()),
-        ImmutableList.of()
+        UnmodifiableList.of()
     );
 
     try {
@@ -77,7 +77,7 @@ public class ProcessingAnnotationValueEnumConstantArrayTest
 
     assertEquals(
         getDefaultValue(withDefaults()),
-        ImmutableList.of()
+        UnmodifiableList.of()
     );
   }
 
@@ -85,21 +85,21 @@ public class ProcessingAnnotationValueEnumConstantArrayTest
     return getDirectlyPresentAnnotation(Defaults.class, WithDefaults.class);
   }
 
-  private ImmutableList<Letter> getDeclaredOrDefaultValue(ProcessingAnnotation annotation) {
+  private UnmodifiableList<Letter> getDeclaredOrDefaultValue(ProcessingAnnotation annotation) {
     ProcessingAnnotationValue value;
     value = getDeclaredOrDefaultValue(annotation, "value");
 
     return value.getEnumArray(Letter.class);
   }
 
-  private ImmutableList<Letter> getDeclaredValue(ProcessingAnnotation annotation) {
+  private UnmodifiableList<Letter> getDeclaredValue(ProcessingAnnotation annotation) {
     ProcessingAnnotationValue value;
     value = getDeclaredValue(annotation, "value");
 
     return value.getEnumArray(Letter.class);
   }
 
-  private ImmutableList<Letter> getDefaultValue(ProcessingAnnotation annotation) {
+  private UnmodifiableList<Letter> getDefaultValue(ProcessingAnnotation annotation) {
     ProcessingAnnotationValue value;
     value = getDefaultValue(annotation, "value");
 

@@ -22,20 +22,20 @@ import br.com.objectos.css.io.PrettyCssWriter;
 import br.com.objectos.css.parser.IsTerminal;
 import br.com.objectos.css.sheet.StyleSheetDsl;
 import java.io.IOException;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 
 public enum Combinator implements CssWriterVisitor, SelectorElement, IsTerminal {
 
   ADJACENT_SIBLING('+', "plus") {
     @Override
-    final Selector combine(ImmutableList<Selector> selectors) {
+    final Selector combine(UnmodifiableList<Selector> selectors) {
       return new AdjacentSiblingSelector(selectors);
     }
   },
 
   CHILD('>', "gt") {
     @Override
-    final Selector combine(ImmutableList<Selector> selectors) {
+    final Selector combine(UnmodifiableList<Selector> selectors) {
       return new ChildSelector(selectors);
     }
   },
@@ -47,14 +47,14 @@ public enum Combinator implements CssWriterVisitor, SelectorElement, IsTerminal 
     }
 
     @Override
-    final Selector combine(ImmutableList<Selector> selectors) {
+    final Selector combine(UnmodifiableList<Selector> selectors) {
       return new DescendantSelector(selectors);
     }
   },
 
   GENERAL_SIBLING('~', "tilde") {
     @Override
-    final Selector combine(ImmutableList<Selector> selectors) {
+    final Selector combine(UnmodifiableList<Selector> selectors) {
       return new GeneralSiblingSelector(selectors);
     }
   },
@@ -67,7 +67,7 @@ public enum Combinator implements CssWriterVisitor, SelectorElement, IsTerminal 
     }
 
     @Override
-    final Selector combine(ImmutableList<Selector> selectors) {
+    final Selector combine(UnmodifiableList<Selector> selectors) {
       return new SelectorList(selectors);
     }
   };
@@ -121,6 +121,6 @@ public enum Combinator implements CssWriterVisitor, SelectorElement, IsTerminal 
     w.write(' ');
   }
 
-  abstract Selector combine(ImmutableList<Selector> selectors);
+  abstract Selector combine(UnmodifiableList<Selector> selectors);
 
 }

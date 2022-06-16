@@ -24,7 +24,7 @@ import br.com.objectos.core.io.Write;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.MutableList;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
@@ -800,11 +800,11 @@ public class DirectoryTest extends AbstractObjectosFsTest {
     CollectingNodeVisitor visitor = new CollectingNodeVisitor();
     root.visitContents(visitor);
 
-    ImmutableList<Directory> directories = visitor.directories.toImmutableList();
+    UnmodifiableList<Directory> directories = visitor.directories.toUnmodifiableList();
     assertEquals(directories.size(), 1);
     assertTrue(directories.contains(dirA));
 
-    ImmutableList<RegularFile> files = visitor.files.toImmutableList();
+    UnmodifiableList<RegularFile> files = visitor.files.toUnmodifiableList();
     assertEquals(files.size(), 2);
     assertTrue(files.contains(f1, f4));
     assertFalse(files.contains(f2, f3));

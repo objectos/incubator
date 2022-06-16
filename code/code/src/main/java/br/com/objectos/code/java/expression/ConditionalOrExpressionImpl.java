@@ -17,7 +17,7 @@ package br.com.objectos.code.java.expression;
 
 import br.com.objectos.code.java.element.AbstractImmutableCodeElement;
 import br.com.objectos.code.java.element.CodeElement;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 
 final class ConditionalOrExpressionImpl
     extends AbstractImmutableCodeElement
@@ -29,7 +29,7 @@ final class ConditionalOrExpressionImpl
     super(elements);
   }
 
-  private ConditionalOrExpressionImpl(ImmutableList<CodeElement> elements) {
+  private ConditionalOrExpressionImpl(UnmodifiableList<CodeElement> elements) {
     super(elements);
   }
 

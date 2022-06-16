@@ -21,7 +21,7 @@ import br.com.objectos.concurrent.Concurrent;
 import br.com.objectos.fs.Directory;
 import java.io.IOException;
 import java.util.concurrent.ExecutionException;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import org.testng.annotations.Test;
 
 public class ReadTreeTaskTest extends AbstractGitTest {
@@ -47,7 +47,7 @@ public class ReadTreeTaskTest extends AbstractGitTest {
 
     assertEquals(result.objectId, oid);
 
-    ImmutableList<Entry> entries;
+    UnmodifiableList<Entry> entries;
     entries = result.getEntries();
 
     assertEquals(entries.size(), 1);
@@ -83,7 +83,7 @@ public class ReadTreeTaskTest extends AbstractGitTest {
 
     assertEquals(result.objectId, oid);
 
-    ImmutableList<Entry> entries;
+    UnmodifiableList<Entry> entries;
     entries = result.getEntries();
 
     assertEquals(entries.size(), 2);
@@ -121,7 +121,7 @@ public class ReadTreeTaskTest extends AbstractGitTest {
 
     assertEquals(result.objectId, objectId);
 
-    ImmutableList<Entry> entries;
+    UnmodifiableList<Entry> entries;
     entries = result.getEntries();
 
     assertEquals(entries.size(), 2);

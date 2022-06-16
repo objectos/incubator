@@ -26,7 +26,7 @@ import br.com.objectos.css.type.Value;
 import java.util.EnumMap;
 import java.util.Map;
 import objectos.lang.Check;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.MutableList;
 
 class PluginConfigurationDsl implements ConfigurationDsl {
@@ -62,7 +62,7 @@ class PluginConfigurationDsl implements ConfigurationDsl {
   public final FrameworkAtMedia getAtMedia(String name, FrameworkAtMediaElement... elements) {
     Check.notNull(name, "name == null");
     Check.notNull(elements, "elements == null");
-    ImmutableList<FrameworkAtMediaElement> set = ImmutableList.copyOf(elements);
+    UnmodifiableList<FrameworkAtMediaElement> set = UnmodifiableList.copyOf(elements);
     return new NamedAtMedia(name, set);
   }
 
@@ -72,7 +72,7 @@ class PluginConfigurationDsl implements ConfigurationDsl {
       case 0:
         return AtMediaSet.EMPTY;
       default:
-        ImmutableList<FrameworkAtMedia> set = ImmutableList.copyOf(queries);
+        UnmodifiableList<FrameworkAtMedia> set = UnmodifiableList.copyOf(queries);
         return new AtMediaSet(set);
     }
   }
@@ -132,16 +132,16 @@ class PluginConfigurationDsl implements ConfigurationDsl {
 
   @Override
   public final FrameworkMethodSet getMethodSet(String... names) {
-    ImmutableList<String> set;
-    set = ImmutableList.copyOf(names);
+    UnmodifiableList<String> set;
+    set = UnmodifiableList.copyOf(names);
 
     return new MethodSet(set);
   }
 
   @Override
   public final FrameworMultiElement getMultiElement(Value... values) {
-    ImmutableList<Value> arguments;
-    arguments = ImmutableList.copyOf(values);
+    UnmodifiableList<Value> arguments;
+    arguments = UnmodifiableList.copyOf(values);
 
     return new MultiElement(arguments);
   }
@@ -165,7 +165,7 @@ class PluginConfigurationDsl implements ConfigurationDsl {
   public final FrameworkNamedValue getNamedValue(String name, FrameworMultiElement... elements) {
     Check.notNull(name, "name == null");
 
-    ImmutableList<FrameworMultiElement> list = ImmutableList.copyOf(elements);
+    UnmodifiableList<FrameworMultiElement> list = UnmodifiableList.copyOf(elements);
 
     return new NamedMulti(name, list);
   }
@@ -181,16 +181,16 @@ class PluginConfigurationDsl implements ConfigurationDsl {
   public final FrameworkNamedValue getNamedValue(String name, Value... values) {
     Check.notNull(name, "name == null");
 
-    ImmutableList<Value> arguments;
-    arguments = ImmutableList.copyOf(values);
+    UnmodifiableList<Value> arguments;
+    arguments = UnmodifiableList.copyOf(values);
 
     return new NamedArguments(name, arguments);
   }
 
   @Override
   public final FrameworkNamedValueSet getNamedValueSet(FrameworkNamedValue... values) {
-    ImmutableList<FrameworkNamedValue> set;
-    set = ImmutableList.copyOf(values);
+    UnmodifiableList<FrameworkNamedValue> set;
+    set = UnmodifiableList.copyOf(values);
 
     return new NamedValueSet(set);
   }

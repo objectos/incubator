@@ -45,7 +45,7 @@ import java.util.Collections;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.ServiceConfigurationError;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.MutableList;
 
 /**
@@ -65,11 +65,11 @@ public final class SimpleServiceLoader {
 
   private SimpleServiceLoader() {}
 
-  public static <T> ImmutableList<T> load(Class<? extends T> service) {
+  public static <T> UnmodifiableList<T> load(Class<? extends T> service) {
     return load(service, service.getClassLoader());
   }
 
-  public static <T> ImmutableList<T> load(Class<? extends T> service, ClassLoader loader) {
+  public static <T> UnmodifiableList<T> load(Class<? extends T> service, ClassLoader loader) {
     String resourceName = "META-INF/services/" + service.getName();
 
     List<URL> resourceUrls;
@@ -88,7 +88,7 @@ public final class SimpleServiceLoader {
 
     for (URL resourceUrl : resourceUrls) {
       try {
-        ImmutableList<? extends T> urlProviders;
+        UnmodifiableList<? extends T> urlProviders;
         urlProviders = providersFromUrl(resourceUrl, service, loader);
 
         providers.addAll(urlProviders);
@@ -97,7 +97,7 @@ public final class SimpleServiceLoader {
       }
     }
 
-    return providers.toImmutableList();
+    return providers.toUnmodifiableList();
   }
 
   private static String parseClassName(String line) {
@@ -117,7 +117,7 @@ public final class SimpleServiceLoader {
     return line;
   }
 
-  private static <T> ImmutableList<T> providersFromUrl(
+  private static <T> UnmodifiableList<T> providersFromUrl(
       URL resourceUrl, Class<T> service, ClassLoader loader) throws IOException {
     MutableList<T> providers;
     providers = new MutableList<>();
@@ -175,7 +175,7 @@ public final class SimpleServiceLoader {
         }
       }
 
-      return providers.toImmutableList();
+      return providers.toUnmodifiableList();
     } finally {
       reader.close();
     }

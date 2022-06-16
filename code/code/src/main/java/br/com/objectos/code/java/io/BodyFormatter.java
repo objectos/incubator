@@ -17,7 +17,7 @@ package br.com.objectos.code.java.io;
 
 import br.com.objectos.code.java.declaration.BodyElement;
 import java.util.Iterator;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.MutableList;
 
 public abstract class BodyFormatter {
@@ -43,22 +43,22 @@ public abstract class BodyFormatter {
   }
 
   public static BodyFormatter with(Formatting... formattings) {
-    return new StandardClassBodyFormatter(ImmutableList.copyOf(formattings));
+    return new StandardClassBodyFormatter(UnmodifiableList.copyOf(formattings));
   }
 
-  public abstract <E extends BodyElement> ImmutableList<E> format(
+  public abstract <E extends BodyElement> UnmodifiableList<E> format(
       MutableList<E> elements, Class<E> type);
 
   private static class StandardClassBodyFormatter extends BodyFormatter {
 
-    private final ImmutableList<Formatting> formattings;
+    private final UnmodifiableList<Formatting> formattings;
 
-    private StandardClassBodyFormatter(ImmutableList<Formatting> formattings) {
+    private StandardClassBodyFormatter(UnmodifiableList<Formatting> formattings) {
       this.formattings = formattings;
     }
 
     @Override
-    public final <E extends BodyElement> ImmutableList<E> format(
+    public final <E extends BodyElement> UnmodifiableList<E> format(
         MutableList<E> elements, Class<E> type) {
       FormattingAction action = TailFormattingAction.getInstance();
       for (int i = formattings.size() - 1; i >= 0; i--) {
@@ -67,7 +67,7 @@ public abstract class BodyFormatter {
       }
       FormattingSource source = new ThisFormattingSource(elements);
       action.consume(source);
-      return action.toImmutableList(type);
+      return action.toUnmodifiableList(type);
     }
 
     private static class ThisFormattingSource implements FormattingSource {
@@ -92,9 +92,9 @@ public abstract class BodyFormatter {
 
   private static class UnformattedClassBodyFormatter extends BodyFormatter {
     @Override
-    public final <E extends BodyElement> ImmutableList<E> format(
+    public final <E extends BodyElement> UnmodifiableList<E> format(
         MutableList<E> elements, Class<E> type) {
-      return elements.toImmutableList();
+      return elements.toUnmodifiableList();
     }
   }
 

@@ -19,7 +19,7 @@ import br.com.objectos.code.annotations.Ignore;
 import br.com.objectos.code.java.type.NamedClass;
 import br.com.objectos.code.model.AnnotatedElementOrType;
 import br.com.objectos.code.model.element.ProcessingAnnotation;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 
 class IgnoreAnnotation {
 
@@ -28,7 +28,7 @@ class IgnoreAnnotation {
   private IgnoreAnnotation() {}
 
   public static boolean isAnnotatedWith(AnnotatedElementOrType element) {
-    ImmutableList<ProcessingAnnotation> annotations;
+    UnmodifiableList<ProcessingAnnotation> annotations;
     annotations = element.getDirectlyPresentAnnotations();
 
     for (int i = 0; i < annotations.size(); i++) {

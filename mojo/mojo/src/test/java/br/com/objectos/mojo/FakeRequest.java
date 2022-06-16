@@ -19,12 +19,12 @@ import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.RegularFile;
 import java.util.List;
 import java.util.Properties;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import org.apache.maven.settings.Mirror;
 
 final class FakeRequest implements Request {
 
-  private ImmutableList<String> goals;
+  private UnmodifiableList<String> goals;
 
   private RegularFile pom;
 
@@ -35,7 +35,7 @@ final class FakeRequest implements Request {
   public void addMirror(Mirror mirror) {}
 
   @Override
-  public void setGoals(ImmutableList<String> goals) {
+  public void setGoals(UnmodifiableList<String> goals) {
     this.goals = goals;
   }
 

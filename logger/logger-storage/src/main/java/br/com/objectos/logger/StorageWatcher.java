@@ -24,7 +24,7 @@ import br.com.objectos.fs.watch.Watch;
 import java.io.Closeable;
 import java.io.IOException;
 import objectos.lang.Check;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.MutableList;
 
 /**
@@ -181,8 +181,8 @@ public final class StorageWatcher implements Closeable, Watch.Option {
     }
 
     final StorageWatcher build() throws IOException {
-      ImmutableList<LogListener> list;
-      list = listeners.toImmutableList();
+      UnmodifiableList<LogListener> list;
+      list = listeners.toUnmodifiableList();
 
       ReadJob readJob;
       readJob = storage.createReadJob(ioWorker, list);

@@ -17,7 +17,7 @@ package br.com.objectos.http.server;
 
 import static org.testng.Assert.assertEquals;
 
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import org.testng.annotations.Test;
 
 public class RequestedPathTest {
@@ -47,7 +47,7 @@ public class RequestedPathTest {
   }
 
   private String list(RequestedPath path) {
-    return ImmutableList.copyOf(path).join(",", "[", "]");
+    return UnmodifiableList.copyOf(path).join(",", "[", "]");
   }
 
 }

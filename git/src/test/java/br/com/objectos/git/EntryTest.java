@@ -17,7 +17,7 @@ package br.com.objectos.git;
 
 import static org.testng.Assert.assertEquals;
 
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.MutableList;
 import org.testng.annotations.Test;
 
@@ -36,7 +36,7 @@ public class EntryTest {
     assertEquals(
         toNames(entries),
 
-        ImmutableList.of(
+        UnmodifiableList.of(
             "foo-bar",
             "foo"
         )
@@ -70,7 +70,7 @@ public class EntryTest {
     );
   }
 
-  private ImmutableList<String> toNames(MutableList<MutableTreeEntry> entries) {
+  private UnmodifiableList<String> toNames(MutableList<MutableTreeEntry> entries) {
     MutableList<String> result;
     result = new MutableList<>();
 
@@ -81,7 +81,7 @@ public class EntryTest {
       result.add(e.getName());
     }
 
-    return result.toImmutableList();
+    return result.toUnmodifiableList();
   }
 
 }

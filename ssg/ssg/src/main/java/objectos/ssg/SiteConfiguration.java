@@ -24,7 +24,7 @@ import java.util.NoSuchElementException;
 import java.util.Set;
 import java.util.stream.Stream;
 import objectos.lang.Check;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.MutableList;
 import objectos.util.MutableMap;
 import objectos.util.MutableSet;
@@ -124,7 +124,7 @@ public class SiteConfiguration implements Site.Context {
   }
 
   @Override
-  public final <T> ImmutableList<T> getObjectsByType(Class<? extends T> key) {
+  public final <T> UnmodifiableList<T> getObjectsByType(Class<? extends T> key) {
     Stream<Object> stream;
     stream = objects.stream();
 
@@ -134,7 +134,7 @@ public class SiteConfiguration implements Site.Context {
     Stream<? extends T> cast;
     cast = filter.map(key::cast);
 
-    return ImmutableList.copyOf(cast.iterator());
+    return UnmodifiableList.copyOf(cast.iterator());
   }
 
   final <T extends SiteDirectory> T addDirectory0(T directory, String path) {

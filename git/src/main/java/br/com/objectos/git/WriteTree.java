@@ -28,7 +28,7 @@ import java.security.MessageDigest;
 import java.util.Arrays;
 import java.util.zip.Deflater;
 import objectos.lang.Note2;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 
 final class WriteTree extends AbstractGitEngineTask {
 
@@ -218,7 +218,7 @@ final class WriteTree extends AbstractGitEngineTask {
     writeMutable1();
   }
 
-  final void writeMutableTree(ImmutableList<MutableTreeEntry> sortedEntries) {
+  final void writeMutableTree(UnmodifiableList<MutableTreeEntry> sortedEntries) {
     treeBody.clear();
 
     for (int i = 0, size = sortedEntries.size(); i < size; i++) {

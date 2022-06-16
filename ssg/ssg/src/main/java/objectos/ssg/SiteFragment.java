@@ -19,7 +19,7 @@ import br.com.objectos.html.attribute.StandardAttributeName.Href;
 import br.com.objectos.html.tmpl.AbstractFragment;
 import objectos.lang.Check;
 import objectos.ssg.Site.Context;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 
 public abstract class SiteFragment extends AbstractFragment
     implements
@@ -51,7 +51,7 @@ public abstract class SiteFragment extends AbstractFragment
   }
 
   protected final <T>
-      ImmutableList<T> getObjectsByType(Class<? extends T> type) {
+      UnmodifiableList<T> getObjectsByType(Class<? extends T> type) {
     return context.getObjectsByType(type);
   }
 

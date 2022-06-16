@@ -22,7 +22,7 @@ import br.com.objectos.tools.GeneratedResource;
 import java.io.IOException;
 import java.util.List;
 import java.util.Set;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.ImmutableSet;
 import objectos.util.MutableList;
 import org.testng.annotations.Test;
@@ -99,7 +99,7 @@ public class Code0021Test {
 
     assertEquals(res.size(), lines.length);
 
-    assertTrue(res.containsAll(ImmutableList.copyOf(lines)));
+    assertTrue(res.containsAll(UnmodifiableList.copyOf(lines)));
   }
 
   private static class Code0021Processor extends AbstractProcessingRoundProcessor {

@@ -33,7 +33,7 @@ import java.nio.charset.CoderResult;
 import java.util.HashMap;
 import java.util.Map;
 import objectos.lang.Check;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.MutableList;
 
 abstract class AbstractHttpParser<H extends Header> implements CpuTask, IoTask {
@@ -164,8 +164,8 @@ abstract class AbstractHttpParser<H extends Header> implements CpuTask, IoTask {
     }
   }
 
-  final ImmutableList<H> buildHeaders() {
-    return resultHeaders.toImmutableList();
+  final UnmodifiableList<H> buildHeaders() {
+    return resultHeaders.toUnmodifiableList();
   }
 
   abstract HeaderParser<? extends H> createHeaderParser(String lowerCaseName, String originalName);

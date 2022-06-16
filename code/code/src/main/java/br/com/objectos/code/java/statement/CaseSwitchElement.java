@@ -21,13 +21,13 @@ import br.com.objectos.code.java.expression.Expressions;
 import br.com.objectos.code.java.expression.Identifier;
 import br.com.objectos.code.java.io.CodeWriter;
 import objectos.lang.Check;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 
 public class CaseSwitchElement extends SwitchElement {
 
   private final CodeElement value;
 
-  private CaseSwitchElement(CodeElement value, ImmutableList<BlockStatement> statements) {
+  private CaseSwitchElement(CodeElement value, UnmodifiableList<BlockStatement> statements) {
     super(statements);
     this.value = value;
   }
@@ -36,14 +36,14 @@ public class CaseSwitchElement extends SwitchElement {
     Check.notNull(value, "value == null");
     return new CaseSwitchElement(
         value,
-        ImmutableList.copyOf(statements)
+        UnmodifiableList.copyOf(statements)
     );
   }
 
   public static CaseSwitchElement _case(int value, BlockStatement... statements) {
     return new CaseSwitchElement(
         Expressions.l(value),
-        ImmutableList.copyOf(statements)
+        UnmodifiableList.copyOf(statements)
     );
   }
 
@@ -51,7 +51,7 @@ public class CaseSwitchElement extends SwitchElement {
     Check.notNull(value, "value == null");
     return new CaseSwitchElement(
         Expressions.l(value),
-        ImmutableList.copyOf(statements)
+        UnmodifiableList.copyOf(statements)
     );
   }
 

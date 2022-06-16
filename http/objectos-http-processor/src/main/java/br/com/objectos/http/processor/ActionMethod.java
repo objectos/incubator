@@ -72,7 +72,7 @@ class ActionMethod {
         .map(ActionMethod::of)
         .filter(Optional::isPresent)
         .map(Optional::get)
-        .collect(MoreCollectors.toImmutableList());
+        .collect(MoreCollectors.toUnmodifiableList());
   }
 
   private static Optional<ActionMethod> of(ExecutableElementQuery method) {

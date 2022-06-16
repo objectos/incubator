@@ -16,7 +16,7 @@
 package br.com.objectos.parser.spec;
 
 import java.util.Objects;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 
 public abstract class NonTerminal extends AbstractSymbol implements Repeatable {
 
@@ -38,7 +38,7 @@ public abstract class NonTerminal extends AbstractSymbol implements Repeatable {
   abstract boolean isSuperType(Class<?> subType);
 
   final Expression toGoalExpression() {
-    ImmutableList<Symbol> list = ImmutableList.of(this, Symbol.eof());
+    UnmodifiableList<Symbol> list = UnmodifiableList.of(this, Symbol.eof());
     return new Expression(list);
   }
 

@@ -19,7 +19,7 @@ import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.RegularFile;
 import java.io.IOException;
 import java.io.InputStream;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 
 final class Shell extends Executable {
 
@@ -37,7 +37,7 @@ final class Shell extends Executable {
     return new Shell(executable, version);
   }
 
-  public final ImmutableList<String> executeInputStream(
+  public final UnmodifiableList<String> executeInputStream(
       ConfigurationFile configurationFile, LoginPathFile loginPathFile,
       LoginPath loginPath, InputStream in)
       throws ExecutionException, IOException {
@@ -51,7 +51,7 @@ final class Shell extends Executable {
 
   }
 
-  public final ImmutableList<String> executeStatement(
+  public final UnmodifiableList<String> executeStatement(
       ConfigurationFile configurationFile, LoginPathFile loginPathFile,
       LoginPath loginPath, String[] statements)
       throws ExecutionException, IOException {

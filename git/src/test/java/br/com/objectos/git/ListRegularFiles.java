@@ -21,7 +21,7 @@ import br.com.objectos.fs.RegularFile;
 import java.io.File;
 import java.io.IOException;
 import objectos.lang.Check;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.Lists;
 import objectos.util.MutableList;
 
@@ -49,7 +49,7 @@ public final class ListRegularFiles implements DirectoryContentsVisitor {
    * @throws IOException
    *         if an I/O error occurs
    */
-  public static ImmutableList<String> of(Directory directory) throws IOException {
+  public static UnmodifiableList<String> of(Directory directory) throws IOException {
     Check.notNull(directory, "directory == null");
 
     ListRegularFiles ls;
@@ -85,10 +85,10 @@ public final class ListRegularFiles implements DirectoryContentsVisitor {
     leafs.add(leaf);
   }
 
-  final ImmutableList<String> build() throws IOException {
+  final UnmodifiableList<String> build() throws IOException {
     leafs.sort(Lists.naturalOrder());
 
-    return leafs.toImmutableList();
+    return leafs.toUnmodifiableList();
   }
 
 }

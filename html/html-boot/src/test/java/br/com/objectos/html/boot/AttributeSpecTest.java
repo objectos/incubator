@@ -22,7 +22,7 @@ import br.com.objectos.html.boot.spec.AttributeKind;
 import br.com.objectos.html.boot.spec.AttributeSpec;
 import br.com.objectos.html.boot.spec.SpecDsl;
 import br.com.objectos.html.boot.spi.type.SpiType;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.ImmutableSet;
 import org.testng.annotations.Test;
 
@@ -40,7 +40,7 @@ public class AttributeSpecTest extends AbstractHtmlBootTest {
     assertEquals(res.name(), "class");
     assertEquals(res.kindSet(), ImmutableSet.of(AttributeKind.STRING));
     assertEquals(res.interfaceSet(), ImmutableSet.of(AttributeNames.GlobalAttributeName));
-    assertEquals(res.methodNameStream(), ImmutableList.of("_class"));
+    assertEquals(res.methodNameStream(), UnmodifiableList.of("_class"));
   }
 
   @Test
@@ -55,7 +55,7 @@ public class AttributeSpecTest extends AbstractHtmlBootTest {
     assertEquals(res.name(), "hidden");
     assertEquals(res.kindSet(), ImmutableSet.of(AttributeKind.BOOLEAN));
     assertEquals(res.interfaceSet(), ImmutableSet.of(AttributeNames.GlobalAttributeName));
-    assertEquals(res.methodNameStream(), ImmutableList.of("hidden"));
+    assertEquals(res.methodNameStream(), UnmodifiableList.of("hidden"));
   }
 
   @Test
@@ -95,7 +95,7 @@ public class AttributeSpecTest extends AbstractHtmlBootTest {
     assertEquals(res.name(), "id");
     assertEquals(res.kindSet(), ImmutableSet.of(AttributeKind.STRING));
     assertEquals(res.interfaceSet(), ImmutableSet.of(AttributeNames.GlobalAttributeName));
-    assertEquals(res.methodNameStream(), ImmutableList.of("id"));
+    assertEquals(res.methodNameStream(), UnmodifiableList.of("id"));
   }
 
 }

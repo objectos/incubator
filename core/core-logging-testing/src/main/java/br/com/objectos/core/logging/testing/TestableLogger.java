@@ -24,7 +24,7 @@ import objectos.lang.Note1;
 import objectos.lang.Note2;
 import objectos.lang.Note3;
 import objectos.lang.NoteSink;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.MutableList;
 
 /**
@@ -110,8 +110,8 @@ public final class TestableLogger implements NoteSink {
    *
    * @return all of the log instances in this logger
    */
-  public final ImmutableList<Log> getLogs() {
-    return logs.toImmutableList();
+  public final UnmodifiableList<Log> getLogs() {
+    return logs.toUnmodifiableList();
   }
 
   /**
@@ -122,7 +122,7 @@ public final class TestableLogger implements NoteSink {
    *
    * @return all of the log instances in this logger having the specified level
    */
-  public final ImmutableList<Log> getLogsByLevel(Level level) {
+  public final UnmodifiableList<Log> getLogsByLevel(Level level) {
     Check.notNull(level, "level == null");
 
     MutableList<Log> result;
@@ -139,7 +139,7 @@ public final class TestableLogger implements NoteSink {
       result.add(l);
     }
 
-    return result.toImmutableList();
+    return result.toUnmodifiableList();
   }
 
   /**

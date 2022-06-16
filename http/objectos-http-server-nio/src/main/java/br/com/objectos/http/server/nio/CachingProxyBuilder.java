@@ -45,7 +45,7 @@ public class CachingProxyBuilder {
   }
 
   public CachingProxy build() {
-    return new CachingProxy(cache, specList.toImmutableList());
+    return new CachingProxy(cache, specList.toUnmodifiableList());
   }
 
 }

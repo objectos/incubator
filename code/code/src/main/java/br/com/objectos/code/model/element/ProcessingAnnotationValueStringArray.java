@@ -18,17 +18,17 @@ package br.com.objectos.code.model.element;
 import java.util.List;
 import javax.lang.model.element.AnnotationValue;
 import javax.lang.model.element.ExecutableElement;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.MutableList;
 
 class ProcessingAnnotationValueStringArray extends ProcessingAnnotationValue {
 
-  private final ImmutableList<String> value;
+  private final UnmodifiableList<String> value;
 
   ProcessingAnnotationValueStringArray(ProcessingAnnotation annotation,
                                        ExecutableElement element,
                                        AnnotationValue annotationValue,
-                                       ImmutableList<String> value) {
+                                       UnmodifiableList<String> value) {
     super(annotation, element, annotationValue);
     this.value = value;
   }
@@ -46,7 +46,7 @@ class ProcessingAnnotationValueStringArray extends ProcessingAnnotationValue {
     );
   }
 
-  private static ImmutableList<String> toStringArray(List<? extends AnnotationValue> array) {
+  private static UnmodifiableList<String> toStringArray(List<? extends AnnotationValue> array) {
     MutableList<String> result = new MutableList<>();
 
     for (int i = 0; i < array.size(); i++) {
@@ -59,11 +59,11 @@ class ProcessingAnnotationValueStringArray extends ProcessingAnnotationValue {
       result.add(string);
     }
 
-    return result.toImmutableList();
+    return result.toUnmodifiableList();
   }
 
   @Override
-  public final ImmutableList<String> getStringArray() {
+  public final UnmodifiableList<String> getStringArray() {
     return value;
   }
 

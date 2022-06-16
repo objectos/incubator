@@ -15,19 +15,19 @@
  */
 package br.com.objectos.lexer.impl.ah;
 
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.MutableList;
 
 class BrickListLink implements Link, LinkMerger {
 
   private final Link link;
-  private final ImmutableList<BrickLink> list;
+  private final UnmodifiableList<BrickLink> list;
 
   BrickListLink() {
-    this(ImmutableList.of(), null);
+    this(UnmodifiableList.of(), null);
   }
 
-  private BrickListLink(ImmutableList<BrickLink> list, Link link) {
+  private BrickListLink(UnmodifiableList<BrickLink> list, Link link) {
     this.list = list;
     this.link = link;
   }
@@ -107,7 +107,7 @@ class BrickListLink implements Link, LinkMerger {
 
     l.add(that);
 
-    return new BrickListLink(l.toImmutableList(), link);
+    return new BrickListLink(l.toUnmodifiableList(), link);
   }
 
   private Link linkMerge(Link that) {

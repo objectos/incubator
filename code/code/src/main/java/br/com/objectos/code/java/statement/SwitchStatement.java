@@ -22,21 +22,21 @@ import br.com.objectos.code.java.expression.Expression;
 import br.com.objectos.code.java.io.CodeWriter;
 import br.com.objectos.code.java.io.Section;
 import objectos.lang.Check;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 
 public class SwitchStatement extends AbstractSimpleStatement {
 
-  private final ImmutableList<SwitchElement> elements;
+  private final UnmodifiableList<SwitchElement> elements;
   private final Expression expression;
 
-  private SwitchStatement(Expression expression, ImmutableList<SwitchElement> elements) {
+  private SwitchStatement(Expression expression, UnmodifiableList<SwitchElement> elements) {
     this.expression = expression;
     this.elements = elements;
   }
 
   public static SwitchStatement _switch(Expression expression, SwitchElement... elements) {
     Check.notNull(expression, "expression == null");
-    return new SwitchStatement(expression, ImmutableList.copyOf(elements));
+    return new SwitchStatement(expression, UnmodifiableList.copyOf(elements));
   }
 
   @Override

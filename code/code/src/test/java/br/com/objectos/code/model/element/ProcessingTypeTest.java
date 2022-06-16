@@ -37,7 +37,7 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Set;
 import javax.lang.model.element.ElementKind;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.ImmutableSet;
 import objectos.util.MutableList;
 import org.testng.Assert;
@@ -96,7 +96,7 @@ public class ProcessingTypeTest extends AbstractCodeModelTest {
     ProcessingType subject;
     subject = query(GetDeclaredConstructorSubject.class);
 
-    ImmutableList<ProcessingConstructor> explicitlyDeclared;
+    UnmodifiableList<ProcessingConstructor> explicitlyDeclared;
     explicitlyDeclared = subject.getDeclaredConstructors();
 
     assertEquals(explicitlyDeclared.size(), 2);
@@ -110,7 +110,7 @@ public class ProcessingTypeTest extends AbstractCodeModelTest {
     ProcessingType compilerProvidedSubject;
     compilerProvidedSubject = query(GetDeclaredConstructorCompilerSubject.class);
 
-    ImmutableList<ProcessingConstructor> compilerProvidedConstructors;
+    UnmodifiableList<ProcessingConstructor> compilerProvidedConstructors;
     compilerProvidedConstructors = compilerProvidedSubject.getDeclaredConstructors();
 
     assertEquals(compilerProvidedConstructors.size(), 1);
@@ -126,7 +126,7 @@ public class ProcessingTypeTest extends AbstractCodeModelTest {
     ProcessingType subject;
     subject = query(GetFieldsSubject.class);
 
-    ImmutableList<ProcessingField> fields;
+    UnmodifiableList<ProcessingField> fields;
     fields = subject.getDeclaredFields();
 
     assertEquals(fields.size(), 3);
@@ -145,7 +145,7 @@ public class ProcessingTypeTest extends AbstractCodeModelTest {
     ProcessingType subject;
     subject = query(GetMethodsSubject.class);
 
-    ImmutableList<ProcessingMethod> methods;
+    UnmodifiableList<ProcessingMethod> methods;
     methods = subject.getDeclaredMethods();
 
     assertEquals(methods.size(), 4);
@@ -166,12 +166,12 @@ public class ProcessingTypeTest extends AbstractCodeModelTest {
     ProcessingType subject;
     subject = query(GetFieldsSubject.class);
 
-    ImmutableList<ProcessingField> fields;
+    UnmodifiableList<ProcessingField> fields;
     fields = subject.getDeclaredOrInheritedFields();
 
     assertEquals(fields.size(), 7);
 
-    ImmutableList<String> fieldStrings;
+    UnmodifiableList<String> fieldStrings;
     fieldStrings = map(fields, toStringFunction());
 
     assertTrue(fieldStrings.contains("protected short f2"));
@@ -188,7 +188,7 @@ public class ProcessingTypeTest extends AbstractCodeModelTest {
     ProcessingType subject;
     subject = query(GetMethodsSubject.class);
 
-    ImmutableList<ProcessingMethod> methods;
+    UnmodifiableList<ProcessingMethod> methods;
     methods = subject.getDeclaredOrInheritedMethods();
 
     MutableList<String> methodsToString;
@@ -211,8 +211,8 @@ public class ProcessingTypeTest extends AbstractCodeModelTest {
       methodsToString.add(method.toString());
     }
 
-    ImmutableList<String> result;
-    result = methodsToString.toImmutableList();
+    UnmodifiableList<String> result;
+    result = methodsToString.toUnmodifiableList();
 
     assertEquals(result.size(), 7);
     assertTrue(result.contains("public final void m0()"));
@@ -229,7 +229,7 @@ public class ProcessingTypeTest extends AbstractCodeModelTest {
     ProcessingType subject;
     subject = query(GetDeclaredOrInheritedTypesSubject.class);
 
-    ImmutableList<ProcessingType> types;
+    UnmodifiableList<ProcessingType> types;
     types = subject.getDeclaredOrInheritedTypes();
 
     assertEquals(types.size(), 3);
@@ -248,7 +248,7 @@ public class ProcessingTypeTest extends AbstractCodeModelTest {
     ProcessingType subject;
     subject = query(GetDeclaredOrInheritedTypesSubject.class);
 
-    ImmutableList<ProcessingType> types;
+    UnmodifiableList<ProcessingType> types;
     types = subject.getDeclaredTypes();
 
     assertEquals(types.size(), 1);
@@ -295,10 +295,10 @@ public class ProcessingTypeTest extends AbstractCodeModelTest {
     ProcessingType subject;
     subject = query(AnnotationsSubject.class);
 
-    ImmutableList<ProcessingAnnotation> subjectAnnotations;
+    UnmodifiableList<ProcessingAnnotation> subjectAnnotations;
     subjectAnnotations = subject.getDirectlyPresentAnnotations();
 
-    ImmutableList<NamedClass> subjectClassNames;
+    UnmodifiableList<NamedClass> subjectClassNames;
     subjectClassNames = annotationToClassName(subjectAnnotations);
 
     assertEquals(subjectClassNames.size(), 3);
@@ -336,10 +336,10 @@ public class ProcessingTypeTest extends AbstractCodeModelTest {
     ProcessingType subject;
     subject = query(AnnotationsSubject.class);
 
-    ImmutableList<ProcessingAnnotation> subjectAnnotations;
+    UnmodifiableList<ProcessingAnnotation> subjectAnnotations;
     subjectAnnotations = subject.getDirectlyPresentOrInheritedAnnotations();
 
-    ImmutableList<NamedClass> subjectClassNames;
+    UnmodifiableList<NamedClass> subjectClassNames;
     subjectClassNames = annotationToClassName(subjectAnnotations);
 
     assertEquals(subjectClassNames.size(), 4);
@@ -397,8 +397,8 @@ public class ProcessingTypeTest extends AbstractCodeModelTest {
 
     compilation.assertWasSuccessful();
 
-    ImmutableList<String> result;
-    result = thisProcessor.comments.toImmutableList();
+    UnmodifiableList<String> result;
+    result = thisProcessor.comments.toUnmodifiableList();
 
     assertEquals(result.size(), 1);
 
@@ -466,7 +466,7 @@ public class ProcessingTypeTest extends AbstractCodeModelTest {
 
     assertEquals(
       query.getTypeParameters(),
-      ImmutableList.of(
+      UnmodifiableList.of(
         NamedTypeParameter.named("U"),
         NamedTypeParameter.named("B").addBound(InputStream.class),
         NamedTypeParameter.named("I").addBound(InputStream.class).addBound(Closeable.class)

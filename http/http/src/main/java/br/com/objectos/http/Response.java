@@ -16,13 +16,13 @@
 package br.com.objectos.http;
 
 import objectos.lang.Check;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 
 public final class Response {
 
   private final Body body;
 
-  private final ImmutableList<ResponseHeader> headers;
+  private final UnmodifiableList<ResponseHeader> headers;
 
   private final String reasonPhrase;
 
@@ -31,7 +31,7 @@ public final class Response {
   private final Version version;
 
   Response(Body body,
-           ImmutableList<ResponseHeader> headers,
+           UnmodifiableList<ResponseHeader> headers,
            String reasonPhrase,
            Status status,
            Version version) {

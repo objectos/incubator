@@ -31,12 +31,12 @@ import br.com.objectos.code.processing.type.PDeclaredType;
 import br.com.objectos.code.processing.type.PTypeMirror;
 import objectos.lang.HashCode;
 import objectos.lang.ToString;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.MutableList;
 
 final class GenerateStaticFactoryAggregateAnnotation implements ToString.Formattable {
 
-  private final ImmutableList<FactoryType> factoryTypes;
+  private final UnmodifiableList<FactoryType> factoryTypes;
 
   private final PackageName packageName;
 
@@ -117,7 +117,7 @@ final class GenerateStaticFactoryAggregateAnnotation implements ToString.Formatt
       return new GenerateStaticFactoryAggregateAnnotation(this);
     }
 
-    abstract ImmutableList<FactoryType> factoryTypes();
+    abstract UnmodifiableList<FactoryType> factoryTypes();
 
     abstract PackageName packageName();
 
@@ -135,13 +135,13 @@ final class GenerateStaticFactoryAggregateAnnotation implements ToString.Formatt
     }
 
     @Override
-    final ImmutableList<FactoryType> factoryTypes() {
+    final UnmodifiableList<FactoryType> factoryTypes() {
       MutableList<FactoryType> result = new MutableList<>();
 
       ProcessingAnnotationValue factoriesValue;
       factoriesValue = annotation.getDeclaredOrDefaultValue("factories");
 
-      ImmutableList<PTypeMirror> factories;
+      UnmodifiableList<PTypeMirror> factories;
       factories = factoriesValue.getTypeArray();
 
       for (int i = 0; i < factories.size(); i++) {
@@ -163,7 +163,7 @@ final class GenerateStaticFactoryAggregateAnnotation implements ToString.Formatt
         result.add(factoryType);
       }
 
-      return result.toImmutableList();
+      return result.toUnmodifiableList();
     }
 
     @Override

@@ -17,7 +17,7 @@ package br.com.objectos.code.java.io;
 
 import br.com.objectos.code.java.declaration.BodyElement;
 import java.util.List;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.MutableList;
 
 abstract class FormattingAction {
@@ -55,7 +55,7 @@ abstract class FormattingAction {
     return result;
   }
 
-  public final <E extends BodyElement> ImmutableList<E> toImmutableList(Class<E> type) {
+  public final <E extends BodyElement> UnmodifiableList<E> toUnmodifiableList(Class<E> type) {
     MutableList<E> result;
     result = new MutableList<>();
 
@@ -72,7 +72,7 @@ abstract class FormattingAction {
       result.add(cast);
     }
 
-    return result.toImmutableList();
+    return result.toUnmodifiableList();
   }
 
   MutableList<BodyElement> elements() {

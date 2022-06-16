@@ -22,17 +22,17 @@ import br.com.objectos.code.java.expression.Identifier;
 import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkAtMedia;
 import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkAtMediaElement;
 import br.com.objectos.css.maven.plugin.framework.PropertyAtMedia.Invocation;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 
 class NamedAtMedia extends AbstractFrameworkObject implements FrameworkAtMedia {
 
-  final ImmutableList<FrameworkAtMediaElement> elements;
+  final UnmodifiableList<FrameworkAtMediaElement> elements;
 
   final String name;
 
   final Identifier simpleName;
 
-  NamedAtMedia(String name, ImmutableList<FrameworkAtMediaElement> elements) {
+  NamedAtMedia(String name, UnmodifiableList<FrameworkAtMediaElement> elements) {
     this.name = name;
     this.elements = elements;
 

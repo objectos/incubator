@@ -23,7 +23,7 @@ import br.com.objectos.fs.ResolvedPath;
 import java.nio.charset.Charset;
 import objectos.lang.Check;
 import objectos.lang.NoteSink;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 
 public final class Client {
 
@@ -135,7 +135,7 @@ public final class Client {
     out.append('\'');
   }
 
-  public final ClientJob<ImmutableList<String>> executeInputStreamSource(
+  public final ClientJob<UnmodifiableList<String>> executeInputStreamSource(
       LoginPath loginPath, InputStreamSource source) {
     Check.notNull(loginPath, "loginPath == null");
     Check.notNull(source, "source == null");
@@ -143,7 +143,7 @@ public final class Client {
     return new ExecuteInputStreamSource(this, loginPath, source);
   }
 
-  public final ClientJob<ImmutableList<String>> executeStatement(
+  public final ClientJob<UnmodifiableList<String>> executeStatement(
       LoginPath loginPath, String... statements) {
     Check.notNull(loginPath, "loginPath == null");
     Check.notNull(statements, "statements == null");
@@ -159,7 +159,7 @@ public final class Client {
     return new FullBackup(this, loginPath, targetDirectory);
   }
 
-  public final ClientJob<ImmutableList<String>> fullRestore(
+  public final ClientJob<UnmodifiableList<String>> fullRestore(
       LoginPath loginPath, RegularFile file) {
     Check.notNull(loginPath, "loginPath == null");
     Check.notNull(file, "file == null");
@@ -167,7 +167,7 @@ public final class Client {
     return new FullRestore(this, loginPath, file);
   }
 
-  public final ClientJob<ImmutableList<RegularFile>> incrementalBackup(
+  public final ClientJob<UnmodifiableList<RegularFile>> incrementalBackup(
       LoginPath loginPath, Directory targetDirectory) {
     Check.notNull(loginPath, "loginPath == null");
     Check.notNull(targetDirectory, "targetDirectory == null");
@@ -175,8 +175,8 @@ public final class Client {
     return new IncrementalBackup(this, loginPath, targetDirectory);
   }
 
-  public final ClientJob<ImmutableList<String>> incrementalRestore(
-      LoginPath loginPath, Directory workDirectory, ImmutableList<RegularFile> files) {
+  public final ClientJob<UnmodifiableList<String>> incrementalRestore(
+      LoginPath loginPath, Directory workDirectory, UnmodifiableList<RegularFile> files) {
     Check.notNull(loginPath, "loginPath == null");
     Check.notNull(workDirectory, "workDirectory == null");
     Check.notNull(files, "files == null");
@@ -184,7 +184,7 @@ public final class Client {
     return new IncrementalRestore(this, loginPath, workDirectory, files);
   }
 
-  public final ClientJob<ImmutableList<String>> setLoginPath(
+  public final ClientJob<UnmodifiableList<String>> setLoginPath(
       ConfigEditorOption... options) {
     Check.notNull(options, "options == null");
 

@@ -31,7 +31,7 @@ import br.com.objectos.code.java.type.NamedClass;
 import br.com.objectos.code.java.type.NamedParameterized;
 import br.com.objectos.code.util.AbstractCodeJavaTest;
 import java.io.Closeable;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import org.testng.annotations.Test;
 
 public class InterfaceCodeTest extends AbstractCodeJavaTest {
@@ -219,7 +219,7 @@ public class InterfaceCodeTest extends AbstractCodeJavaTest {
     );
     test(
         _interface(
-            id("A"), _extends(ImmutableList.of(t(Appendable.class), t(Closeable.class)))
+            id("A"), _extends(UnmodifiableList.of(t(Appendable.class), t(Closeable.class)))
         ),
         "interface A extends java.lang.Appendable, java.io.Closeable {}"
     );
@@ -240,7 +240,7 @@ public class InterfaceCodeTest extends AbstractCodeJavaTest {
     test(
         _interface(
             fields(
-                ImmutableList.of(
+                UnmodifiableList.of(
                     field(_int(), FieldCode.init(id("F1"), l(1))),
                     field(_int(), FieldCode.init(id("F2"), l(2)))
                 )

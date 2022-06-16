@@ -17,16 +17,16 @@ package br.com.objectos.css.select;
 
 import br.com.objectos.css.sheet.RuleElement;
 import java.util.Iterator;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.MutableList;
 
 public class CompoundSelector
     extends Selector
     implements ComplexSelectorHead, ComplexSelectorTail, Iterable<Selector> {
 
-  private final ImmutableList<Selector> selectors;
+  private final UnmodifiableList<Selector> selectors;
 
-  CompoundSelector(ImmutableList<Selector> selectors) {
+  CompoundSelector(UnmodifiableList<Selector> selectors) {
     this.selectors = selectors;
   }
 
@@ -38,7 +38,7 @@ public class CompoundSelector
       list.add(checkIsSelector(s, "more"));
     }
 
-    return new CompoundSelector(list.toImmutableList());
+    return new CompoundSelector(list.toUnmodifiableList());
   }
 
   @Override
@@ -88,7 +88,7 @@ public class CompoundSelector
     return true;
   }
 
-  public final ImmutableList<Selector> selectors() {
+  public final UnmodifiableList<Selector> selectors() {
     return selectors;
   }
 

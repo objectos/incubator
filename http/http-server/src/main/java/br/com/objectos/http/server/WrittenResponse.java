@@ -17,15 +17,15 @@ package br.com.objectos.http.server;
 
 import java.io.IOException;
 import java.util.Objects;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 
 public class WrittenResponse {
 
   private final MessageBody body;
-  private final ImmutableList<Header> headerList;
+  private final UnmodifiableList<Header> headerList;
   private final StatusCode status;
 
-  public WrittenResponse(StatusCode status, ImmutableList<Header> headerList, MessageBody body) {
+  public WrittenResponse(StatusCode status, UnmodifiableList<Header> headerList, MessageBody body) {
     this.status = status;
     this.headerList = headerList;
     this.body = body;

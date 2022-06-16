@@ -25,7 +25,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import javax.lang.model.SourceVersion;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.ImmutableSet;
 import objectos.util.MutableList;
 import org.eclipse.jdt.core.compiler.CategorizedProblem;
@@ -83,9 +83,9 @@ public class JdtCompilerTest {
   @Test
   public void methodsShouldBeListedInDeclarationOrder() {
     class MethodCollectorProcessor extends AbstractProcessingRoundProcessor {
-      private ImmutableList<ProcessingMethod> methods;
+      private UnmodifiableList<ProcessingMethod> methods;
 
-      public final ImmutableList<String> getAbstractMethodNames() {
+      public final UnmodifiableList<String> getAbstractMethodNames() {
         MutableList<String> result;
         result = new MutableList<>();
 
@@ -103,7 +103,7 @@ public class JdtCompilerTest {
           result.add(name);
         }
 
-        return result.toImmutableList();
+        return result.toUnmodifiableList();
       }
 
       @Override
@@ -134,7 +134,7 @@ public class JdtCompilerTest {
 
     assertEquals(
       processor.getAbstractMethodNames(),
-      ImmutableList.of("m6", "m5", "m4", "m3", "m2", "m1", "m0")
+      UnmodifiableList.of("m6", "m5", "m4", "m3", "m2", "m1", "m0")
     );
   }
 

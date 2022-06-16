@@ -20,14 +20,14 @@ import static br.com.objectos.code.java.Java.invoke;
 import br.com.objectos.code.java.expression.Argument;
 import br.com.objectos.code.java.expression.MethodInvocation;
 import br.com.objectos.css.type.Value;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.MutableList;
 
 class NamedArguments extends NamedValue {
 
-  private final ImmutableList<Value> values;
+  private final UnmodifiableList<Value> values;
 
-  NamedArguments(String name, ImmutableList<Value> values) {
+  NamedArguments(String name, UnmodifiableList<Value> values) {
     super(name);
     this.values = values;
   }

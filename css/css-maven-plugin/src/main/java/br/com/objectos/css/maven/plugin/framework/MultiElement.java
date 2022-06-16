@@ -19,14 +19,14 @@ import br.com.objectos.code.java.expression.Argument;
 import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworMultiElement;
 import br.com.objectos.css.maven.plugin.framework.NamedMulti.Invocation;
 import br.com.objectos.css.type.Value;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.MutableList;
 
 class MultiElement extends AbstractFrameworkObject implements FrameworMultiElement {
 
-  private final ImmutableList<Value> values;
+  private final UnmodifiableList<Value> values;
 
-  MultiElement(ImmutableList<Value> values) {
+  MultiElement(UnmodifiableList<Value> values) {
     this.values = values;
   }
 

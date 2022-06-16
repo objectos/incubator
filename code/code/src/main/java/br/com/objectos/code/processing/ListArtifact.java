@@ -16,13 +16,13 @@
 package br.com.objectos.code.processing;
 
 import javax.annotation.processing.ProcessingEnvironment;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 
 class ListArtifact extends Artifact {
 
-  private final ImmutableList<Artifact> list;
+  private final UnmodifiableList<Artifact> list;
 
-  public ListArtifact(ImmutableList<Artifact> list) {
+  public ListArtifact(UnmodifiableList<Artifact> list) {
     this.list = list;
   }
 

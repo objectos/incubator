@@ -20,7 +20,7 @@ import java.io.Closeable;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.MutableList;
 
 final class ExecutionBuilder {
@@ -50,26 +50,26 @@ final class ExecutionBuilder {
     }
   }
 
-  public final ImmutableList<String> build() throws ExecutionException {
-    ImmutableList<String> sysout;
-    sysout = output.toImmutableList();
+  public final UnmodifiableList<String> build() throws ExecutionException {
+    UnmodifiableList<String> sysout;
+    sysout = output.toUnmodifiableList();
 
     if (exitValue == 0) {
       return sysout;
     }
 
-    ImmutableList<String> syserr;
-    syserr = error.toImmutableList();
+    UnmodifiableList<String> syserr;
+    syserr = error.toUnmodifiableList();
 
     throw new ExecutionException(exitValue, syserr, sysout);
   }
 
   public final void throwExecutionExceptionIfNecessary() throws ExecutionException {
-    ImmutableList<String> sysout;
-    sysout = output.toImmutableList();
+    UnmodifiableList<String> sysout;
+    sysout = output.toUnmodifiableList();
 
-    ImmutableList<String> syserr;
-    syserr = error.toImmutableList();
+    UnmodifiableList<String> syserr;
+    syserr = error.toUnmodifiableList();
 
     if (!syserr.isEmpty()) {
       throw new ExecutionException(exitValue, syserr, sysout);

@@ -74,7 +74,7 @@ final class CopyTreeCommand extends StageGitCommand<ObjectId> {
           return;
         }
 
-        final ImmutableList<Tree> trees;
+        final UnmodifiableList<Tree> trees;
         trees = getAll();
 
         for (Tree tree : trees) {
@@ -114,7 +114,7 @@ final class CopyTreeCommand extends StageGitCommand<ObjectId> {
 
     objectsToCopy.add(treeId);
 
-    ImmutableList<Entry> entries;
+    UnmodifiableList<Entry> entries;
     entries = tree.getEntries();
 
     for (Entry entry : entries) {

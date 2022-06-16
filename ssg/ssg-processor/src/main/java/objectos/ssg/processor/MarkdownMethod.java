@@ -34,7 +34,7 @@ import br.com.objectos.code.model.element.ProcessingType;
 import java.util.List;
 import objectos.lang.Check;
 import objectos.util.ByteArrays;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.ImmutableSet;
 import objectos.util.IntArrays;
 import objectos.util.MutableList;
@@ -94,7 +94,7 @@ class MarkdownMethod implements Visitor {
 
   private static final Parser PARSER = Parser.builder()
       .extensions(
-        ImmutableList.of(FootnoteExtension.INSTANCE)
+        UnmodifiableList.of(FootnoteExtension.INSTANCE)
       )
       .build();
 

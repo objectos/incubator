@@ -19,16 +19,16 @@ import br.com.objectos.formal.testing.Node;
 import br.com.objectos.formal.testing.NodeVisitor;
 import java.util.Arrays;
 import java.util.Objects;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 
 public class Scenario implements Node {
 
   public final Description description;
-  public final ImmutableList<Step> stepList;
+  public final UnmodifiableList<Step> stepList;
 
   public Scenario(Description description, Iterable<Step> stepList) {
     this.description = description;
-    this.stepList = ImmutableList.copyOf(stepList);
+    this.stepList = UnmodifiableList.copyOf(stepList);
   }
 
   public Scenario(Iterable<Step> stepList) {

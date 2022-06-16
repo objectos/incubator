@@ -18,7 +18,7 @@ package br.com.objectos.mojo;
 import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.RegularFile;
 import java.util.Properties;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import org.apache.maven.settings.Mirror;
 
 public interface Request {
@@ -27,7 +27,7 @@ public interface Request {
 
   void addMirror(Mirror mirror);
 
-  void setGoals(ImmutableList<String> goals);
+  void setGoals(UnmodifiableList<String> goals);
 
   void setLocalRepository(Directory directory);
 

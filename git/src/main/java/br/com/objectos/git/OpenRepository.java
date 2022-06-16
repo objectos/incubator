@@ -22,7 +22,7 @@ import br.com.objectos.fs.RegularFile;
 import br.com.objectos.fs.ResolvedPath;
 import java.io.IOException;
 import objectos.lang.Note1;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.MutableList;
 
 /**
@@ -207,8 +207,8 @@ final class OpenRepository extends AbstractGitEngineTask {
   }
 
   private byte executeNewResult() {
-    ImmutableList<PackFile> packs;
-    packs = packFiles.toImmutableList();
+    UnmodifiableList<PackFile> packs;
+    packs = packFiles.toUnmodifiableList();
 
     Repository result;
     result = new Repository(gitDirectory, objectsDirectory, packs);

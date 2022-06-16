@@ -22,7 +22,7 @@ import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.testing.TmpDir;
 import java.io.IOException;
 import java.util.concurrent.ExecutionException;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import org.testng.annotations.Test;
 
 public class WriteCommitTaskTest extends AbstractGitTest {
@@ -90,7 +90,7 @@ public class WriteCommitTaskTest extends AbstractGitTest {
 
     assertEquals(commit.getMessage(), message);
 
-    ImmutableList<ObjectId> parents;
+    UnmodifiableList<ObjectId> parents;
     parents = commit.getParents();
 
     assertEquals(parents.size(), 1);

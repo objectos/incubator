@@ -40,7 +40,7 @@ import java.nio.charset.Charset;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import objectos.lang.NoOpNoteSink;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import org.testng.annotations.BeforeClass;
 
 public abstract class AbstractMysqlTest {
@@ -64,9 +64,9 @@ public abstract class AbstractMysqlTest {
   ConfigurationFile serverConfigurationFile;
 
   @SuppressWarnings("unused")
-  private ImmutableList<String> executeInputStreamSource;
+  private UnmodifiableList<String> executeInputStreamSource;
 
-  private ImmutableList<String> executeStatement;
+  private UnmodifiableList<String> executeStatement;
 
   private RegularFile full;
 
@@ -74,7 +74,7 @@ public abstract class AbstractMysqlTest {
 
   private String fullChecksum;
 
-  private ImmutableList<String> fullRestore;
+  private UnmodifiableList<String> fullRestore;
 
   private RegularFile inc0;
 
@@ -84,13 +84,13 @@ public abstract class AbstractMysqlTest {
 
   private String inc1Checksum;
 
-  private ImmutableList<RegularFile> incrementalBackup;
+  private UnmodifiableList<RegularFile> incrementalBackup;
 
-  private ImmutableList<String> incrementalRestore;
+  private UnmodifiableList<String> incrementalRestore;
 
   private TestableLogger logger;
 
-  private ImmutableList<String> setLoginPath;
+  private UnmodifiableList<String> setLoginPath;
 
   @BeforeClass
   public final void _beforeClass() throws Exception {
@@ -111,7 +111,7 @@ public abstract class AbstractMysqlTest {
   public abstract void _beforeClassInit() throws IOException;
 
   public final void testCase01(
-      ConfigurationGroup mysqld, ImmutableList<String> expected)
+      ConfigurationGroup mysqld, UnmodifiableList<String> expected)
       throws IOException {
     Directory etc;
     etc = fs.etc;
@@ -130,7 +130,7 @@ public abstract class AbstractMysqlTest {
     RegularFile regularFile;
     regularFile = notFound.toRegularFile();
 
-    ImmutableList<String> lines;
+    UnmodifiableList<String> lines;
     lines = Read.lines(regularFile, charset);
 
     assertEquals(lines, expected);
@@ -331,7 +331,7 @@ public abstract class AbstractMysqlTest {
     assertEquals(
       executeStatement,
 
-      ImmutableList.of(
+      UnmodifiableList.of(
         "information_schema",
         "mysql",
         "performance_schema",
@@ -370,7 +370,7 @@ public abstract class AbstractMysqlTest {
     assertEquals(
       executeStatement,
 
-      ImmutableList.copyOf(dbs)
+      UnmodifiableList.copyOf(dbs)
     );
 
     Directory backupDirectory;
@@ -493,8 +493,8 @@ public abstract class AbstractMysqlTest {
 
     assertNotEquals(inc1Checksum, currentChecksum);
 
-    ImmutableList<RegularFile> files;
-    files = ImmutableList.of(inc0, inc1);
+    UnmodifiableList<RegularFile> files;
+    files = UnmodifiableList.of(inc0, inc1);
 
     Directory workDirectory;
     workDirectory = fs.root;
@@ -630,7 +630,7 @@ public abstract class AbstractMysqlTest {
   }
 
   private void offerIncrementalRestoreJob(
-      LoginPath loginPath, Directory workDirectory, ImmutableList<RegularFile> files)
+      LoginPath loginPath, Directory workDirectory, UnmodifiableList<RegularFile> files)
       throws Exception {
     incrementalRestore = execute(
       client.incrementalRestore(loginPath, workDirectory, files)

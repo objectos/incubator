@@ -18,7 +18,7 @@ package br.com.objectos.code.java.expression;
 import br.com.objectos.code.java.element.AbstractDefaultImmutableCodeElement;
 import br.com.objectos.code.java.element.CodeElement;
 import br.com.objectos.code.java.type.NamedClass;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 
 final class ExpressionNameImpl
     extends AbstractDefaultImmutableCodeElement
@@ -28,7 +28,7 @@ final class ExpressionNameImpl
     super(elements);
   }
 
-  private ExpressionNameImpl(ImmutableList<CodeElement> elements) {
+  private ExpressionNameImpl(UnmodifiableList<CodeElement> elements) {
     super(elements);
   }
 

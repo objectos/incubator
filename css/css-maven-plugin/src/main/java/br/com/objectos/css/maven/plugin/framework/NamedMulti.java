@@ -22,14 +22,14 @@ import br.com.objectos.code.java.expression.Argument;
 import br.com.objectos.code.java.expression.ArgumentsElement;
 import br.com.objectos.code.java.expression.MethodInvocation;
 import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworMultiElement;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.MutableList;
 
 class NamedMulti extends NamedValue {
 
-  private final ImmutableList<FrameworMultiElement> elements;
+  private final UnmodifiableList<FrameworMultiElement> elements;
 
-  NamedMulti(String name, ImmutableList<FrameworMultiElement> elements) {
+  NamedMulti(String name, UnmodifiableList<FrameworMultiElement> elements) {
     super(name);
     this.elements = elements;
   }

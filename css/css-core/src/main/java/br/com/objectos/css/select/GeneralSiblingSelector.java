@@ -16,14 +16,14 @@
 package br.com.objectos.css.select;
 
 import br.com.objectos.css.sheet.RuleElement;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.MutableList;
 
 public class GeneralSiblingSelector extends Selector implements ComplexSelector {
 
-  private final ImmutableList<Selector> selectors;
+  private final UnmodifiableList<Selector> selectors;
 
-  GeneralSiblingSelector(ImmutableList<Selector> selectors) {
+  GeneralSiblingSelector(UnmodifiableList<Selector> selectors) {
     this.selectors = selectors;
   }
 
@@ -73,7 +73,7 @@ public class GeneralSiblingSelector extends Selector implements ComplexSelector 
     MutableList<Selector> newSelectors = new MutableList<>();
     newSelectors.add(previous);
     newSelectors.addAll(selectors);
-    return new GeneralSiblingSelector(newSelectors.toImmutableList());
+    return new GeneralSiblingSelector(newSelectors.toUnmodifiableList());
   }
 
 }

@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Map;
 import objectos.lang.Check;
 import objectos.lang.ToString;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.MutableMap;
 
 /**
@@ -230,7 +230,7 @@ public final class MaterializeCommand extends StageGitCommand<Directory> {
   }
 
   private void materializeTree(Tree tree, Directory directory) {
-    ImmutableList<Entry> entries;
+    UnmodifiableList<Entry> entries;
     entries = tree.getEntries();
 
     for (int i = 0, size = entries.size(); i < size; i++) {

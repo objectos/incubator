@@ -31,7 +31,7 @@ import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.VariableElement;
 import javax.lang.model.type.TypeMirror;
 import objectos.lang.Check;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 
 public class ParameterCode extends AbstractImmutableCodeElement
     implements
@@ -67,7 +67,7 @@ public class ParameterCode extends AbstractImmutableCodeElement
   }
 
   public static ParamsShorthand params(Iterable<ParameterCode> parameters) {
-    ImmutableList<ParameterCode> copy = ImmutableList.copyOf(parameters);
+    UnmodifiableList<ParameterCode> copy = UnmodifiableList.copyOf(parameters);
 
     return new ParamsShorthand(copy);
   }
@@ -108,8 +108,8 @@ public class ParameterCode extends AbstractImmutableCodeElement
       return new ParameterCode(this);
     }
 
-    public ImmutableList<CodeElement> elements() {
-      return ImmutableList.of(type, space(), name);
+    public UnmodifiableList<CodeElement> elements() {
+      return UnmodifiableList.of(type, space(), name);
     }
 
     public final Builder setName(Identifier name) {
@@ -138,9 +138,9 @@ public class ParameterCode extends AbstractImmutableCodeElement
 
   public static class ParamsShorthand implements ConstructorCodeElement, MethodCodeElement {
 
-    private final ImmutableList<ParameterCode> parameters;
+    private final UnmodifiableList<ParameterCode> parameters;
 
-    private ParamsShorthand(ImmutableList<ParameterCode> parameters) {
+    private ParamsShorthand(UnmodifiableList<ParameterCode> parameters) {
       this.parameters = parameters;
     }
 

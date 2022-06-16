@@ -20,13 +20,13 @@ import br.com.objectos.code.java.declaration.FieldCode;
 import br.com.objectos.code.java.declaration.MethodCode;
 import br.com.objectos.code.model.element.ProcessingType;
 import objectos.lang.ToString;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 
 final class FactoryType implements ToString.Formattable {
 
-  private final ImmutableList<StaticField> staticFields;
+  private final UnmodifiableList<StaticField> staticFields;
 
-  private final ImmutableList<StaticMethod> staticMethods;
+  private final UnmodifiableList<StaticMethod> staticMethods;
 
   private FactoryType(Builder builder) {
     staticFields = builder.staticFields();
@@ -94,9 +94,9 @@ final class FactoryType implements ToString.Formattable {
       return new FactoryType(this);
     }
 
-    abstract ImmutableList<StaticField> staticFields();
+    abstract UnmodifiableList<StaticField> staticFields();
 
-    abstract ImmutableList<StaticMethod> staticMethods();
+    abstract UnmodifiableList<StaticMethod> staticMethods();
   }
 
   private static class TypeElementQueryBuilder extends Builder {
@@ -107,12 +107,12 @@ final class FactoryType implements ToString.Formattable {
     }
 
     @Override
-    final ImmutableList<StaticField> staticFields() {
+    final UnmodifiableList<StaticField> staticFields() {
       return StaticField.listOf(query);
     }
 
     @Override
-    final ImmutableList<StaticMethod> staticMethods() {
+    final UnmodifiableList<StaticMethod> staticMethods() {
       return StaticMethod.listOf(query);
     }
   }

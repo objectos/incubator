@@ -23,7 +23,7 @@ import br.com.objectos.css.io.PrettyCssWriter;
 import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.testing.TmpDir;
 import java.io.IOException;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
@@ -46,8 +46,8 @@ public abstract class AbstractCssCoreTest {
     String result;
     result = MinifiedCssWriter.toString(o);
 
-    ImmutableList<String> parts;
-    parts = ImmutableList.copyOf(expected);
+    UnmodifiableList<String> parts;
+    parts = UnmodifiableList.copyOf(expected);
 
     assertEquals(result, parts.join());
   }

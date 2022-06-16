@@ -20,7 +20,7 @@ import br.com.objectos.code.java.element.CodeElement;
 import br.com.objectos.code.java.type.NamedPrimitive;
 import br.com.objectos.code.java.type.NamedReferenceType;
 import br.com.objectos.code.java.type.NamedType;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 
 final class CastExpressionImpl extends AbstractDefaultImmutableCodeElement
     implements CastExpression {
@@ -29,7 +29,7 @@ final class CastExpressionImpl extends AbstractDefaultImmutableCodeElement
     super(elements);
   }
 
-  private CastExpressionImpl(ImmutableList<CodeElement> elements) {
+  private CastExpressionImpl(UnmodifiableList<CodeElement> elements) {
     super(elements);
   }
 

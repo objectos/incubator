@@ -22,7 +22,7 @@ import br.com.objectos.concurrent.Concurrent;
 import br.com.objectos.fs.Directory;
 import java.io.IOException;
 import java.util.concurrent.ExecutionException;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import org.testng.annotations.Test;
 
 public class CopyTreeCommandTest extends AbstractGitTest {
@@ -62,7 +62,7 @@ public class CopyTreeCommandTest extends AbstractGitTest {
     Tree tree;
     tree = maybeTree.getResult();
 
-    ImmutableList<Entry> entries;
+    UnmodifiableList<Entry> entries;
     entries = tree.getEntries();
 
     assertEquals(entries.size(), 1);

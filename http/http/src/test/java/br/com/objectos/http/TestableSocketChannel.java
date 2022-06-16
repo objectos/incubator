@@ -23,7 +23,7 @@ import java.net.SocketOption;
 import java.nio.ByteBuffer;
 import java.nio.channels.SocketChannel;
 import java.util.Set;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 
 final class TestableSocketChannel extends SocketChannel {
 
@@ -110,7 +110,7 @@ final class TestableSocketChannel extends SocketChannel {
     throw new UnsupportedOperationException("Implement me");
   }
 
-  public final void setRequest(ImmutableList<String> request) {
+  public final void setRequest(UnmodifiableList<String> request) {
     String text;
     text = request.join(Http.CRLF);
 

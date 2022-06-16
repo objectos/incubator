@@ -43,7 +43,7 @@ import br.com.objectos.code.java.expression.ShiftExpression;
 import br.com.objectos.code.java.expression.TypeWitness;
 import br.com.objectos.code.java.expression.UnaryExpression;
 import br.com.objectos.code.java.type.NamedReferenceType;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 
 public abstract class AbstractDefaultImmutableCodeElement extends AbstractImmutableCodeElement {
 
@@ -51,7 +51,7 @@ public abstract class AbstractDefaultImmutableCodeElement extends AbstractImmuta
     super(elements);
   }
 
-  protected AbstractDefaultImmutableCodeElement(ImmutableList<CodeElement> elements) {
+  protected AbstractDefaultImmutableCodeElement(UnmodifiableList<CodeElement> elements) {
     super(elements);
   }
 

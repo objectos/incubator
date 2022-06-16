@@ -16,7 +16,7 @@
 package br.com.objectos.git;
 
 import objectos.lang.Check;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.ImmutableSet;
 import objectos.util.MutableSet;
 
@@ -58,7 +58,7 @@ final class CopyTreeCommand extends StageGitCommand<ObjectId> {
           return;
         }
 
-        final ImmutableList<Tree> trees;
+        final UnmodifiableList<Tree> trees;
         trees = getAll();
 
         for (Tree tree : trees) {
@@ -98,7 +98,7 @@ final class CopyTreeCommand extends StageGitCommand<ObjectId> {
 
     objectsToCopy.add(treeId);
 
-    ImmutableList<Entry> entries;
+    UnmodifiableList<Entry> entries;
     entries = tree.getEntries();
 
     for (Entry entry : entries) {

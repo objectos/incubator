@@ -16,15 +16,15 @@
 package br.com.objectos.mysql;
 
 import java.util.Locale;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.MutableList;
 
 public final class ConfigurationGroup {
 
   private final Group group;
-  private final ImmutableList<? extends Option> options;
+  private final UnmodifiableList<? extends Option> options;
 
-  private ConfigurationGroup(Group group, ImmutableList<? extends Option> options) {
+  private ConfigurationGroup(Group group, UnmodifiableList<? extends Option> options) {
     this.group = group;
     this.options = options;
   }
@@ -32,35 +32,35 @@ public final class ConfigurationGroup {
   public static ConfigurationGroup client(ClientOption... options) {
     return new ConfigurationGroup(
         Group.CLIENT,
-        ImmutableList.copyOf(options)
+        UnmodifiableList.copyOf(options)
     );
   }
 
   public static ConfigurationGroup mysql(ShellOption... options) {
     return new ConfigurationGroup(
         Group.MYSQL,
-        ImmutableList.copyOf(options)
+        UnmodifiableList.copyOf(options)
     );
   }
 
   public static ConfigurationGroup mysqlbinlog(BinlogOption... options) {
     return new ConfigurationGroup(
         Group.MYSQLBINLOG,
-        ImmutableList.copyOf(options)
+        UnmodifiableList.copyOf(options)
     );
   }
 
   public static ConfigurationGroup mysqld(ServerOption... options) {
     return new ConfigurationGroup(
         Group.MYSQLD,
-        ImmutableList.copyOf(options)
+        UnmodifiableList.copyOf(options)
     );
   }
 
   public static ConfigurationGroup mysqldump(DumpOption... options) {
     return new ConfigurationGroup(
         Group.MYSQLDUMP,
-        ImmutableList.copyOf(options)
+        UnmodifiableList.copyOf(options)
     );
   }
 

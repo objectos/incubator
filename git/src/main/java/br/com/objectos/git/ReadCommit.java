@@ -737,7 +737,7 @@ final class ReadCommit implements ObjectReaderAdapter {
       committer,
       message,
       objectId,
-      parents.toImmutableList(),
+      parents.toUnmodifiableList(),
       tree
     );
 

@@ -25,7 +25,7 @@ import br.com.objectos.code.java.io.Section;
 import br.com.objectos.code.java.statement.BlockElement;
 import br.com.objectos.code.java.statement.BlockStatement;
 import objectos.lang.Check;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.MutableList;
 
 public final class ConstructorCode
@@ -39,16 +39,16 @@ public final class ConstructorCode
   private static final ConstructorCode PROTECTED = ofModifier(Modifiers.PROTECTED);
   private static final ConstructorCode PUBLIC = ofModifier(Modifiers.PUBLIC);
 
-  private final ImmutableList<BlockElement> body;
+  private final UnmodifiableList<BlockElement> body;
 
   private final ExplicitConstructorInvocation constructorInvocation;
   private final ConstructorModifier modifier;
-  private final ImmutableList<ParameterCode> parameters;
+  private final UnmodifiableList<ParameterCode> parameters;
 
   private ConstructorCode(ConstructorModifier modifier,
-                          ImmutableList<ParameterCode> parameters,
+                          UnmodifiableList<ParameterCode> parameters,
                           ExplicitConstructorInvocation constructorInvocation,
-                          ImmutableList<BlockElement> body) {
+                          UnmodifiableList<BlockElement> body) {
     this.modifier = modifier;
     this.parameters = parameters;
     this.constructorInvocation = constructorInvocation;
@@ -381,9 +381,9 @@ public final class ConstructorCode
     public final ConstructorCode build() {
       return new ConstructorCode(
           accessModifier,
-          parameters.toImmutableList(),
+          parameters.toUnmodifiableList(),
           constructorInvocation,
-          body.toImmutableList()
+          body.toUnmodifiableList()
       );
     }
 

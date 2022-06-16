@@ -23,7 +23,7 @@ import br.com.objectos.code.java.io.JavaFile;
 import br.com.objectos.code.java.io.NewLineFormatting.NewLineFormattingAction;
 import br.com.objectos.code.java.type.NamedClass;
 import objectos.lang.Check;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 
 abstract class AbstractTypeCode extends AbstractImmutableCodeElement implements TypeCode {
 
@@ -31,7 +31,7 @@ abstract class AbstractTypeCode extends AbstractImmutableCodeElement implements 
     super(elements);
   }
 
-  AbstractTypeCode(ImmutableList<CodeElement> elements) {
+  AbstractTypeCode(UnmodifiableList<CodeElement> elements) {
     super(elements);
   }
 

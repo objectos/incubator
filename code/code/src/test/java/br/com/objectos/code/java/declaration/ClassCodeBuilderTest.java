@@ -12,7 +12,7 @@ import static br.com.objectos.code.java.declaration.Modifiers.PUBLIC;
 
 import br.com.objectos.code.util.AbstractCodeJavaTest;
 import java.io.InputStream;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import org.testng.annotations.Test;
 
 public class ClassCodeBuilderTest extends AbstractCodeJavaTest {
@@ -39,7 +39,7 @@ public class ClassCodeBuilderTest extends AbstractCodeJavaTest {
     );
     test(
         ClassCode.builder()
-            .addModifiers(ImmutableList.of(PUBLIC, FINAL))
+            .addModifiers(UnmodifiableList.of(PUBLIC, FINAL))
             .build(),
         "public final class Unnamed {}"
     );

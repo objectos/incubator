@@ -15,12 +15,12 @@
  */
 package br.com.objectos.mojo;
 
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import org.slf4j.event.Level;
 
 final class BuildLog implements Log {
 
-  private final ImmutableList<Message> messages;
+  private final UnmodifiableList<Message> messages;
 
   BuildLog(BuildLogger builder) {
     messages = builder.messages();

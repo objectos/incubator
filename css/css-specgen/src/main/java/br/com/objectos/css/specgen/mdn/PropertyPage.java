@@ -17,7 +17,7 @@ package br.com.objectos.css.specgen.mdn;
 
 import br.com.objectos.css.specgen.spec.Property;
 import br.com.objectos.css.specgen.spec.ValueType;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.MutableList;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -66,14 +66,14 @@ public class PropertyPage extends Property.Builder {
   }
 
   @Override
-  protected final ImmutableList<ValueType> valueTypes() {
+  protected final UnmodifiableList<ValueType> valueTypes() {
     MutableList<ValueType> vt = new MutableList<>();
 
     for (Element code : codeElements) {
       valueTypes0(vt, code);
     }
 
-    return vt.toImmutableList();
+    return vt.toUnmodifiableList();
   }
 
   private String getText(Node node) {

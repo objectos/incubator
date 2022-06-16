@@ -21,7 +21,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.List;
 import java.util.Map;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.MutableList;
 
 abstract class Execution {
@@ -82,27 +82,27 @@ abstract class Execution {
     return builder.start();
   }
 
-  final ImmutableList<String> sysout() throws ExecutionException {
-    ImmutableList<String> sysout;
-    sysout = output.toImmutableList();
+  final UnmodifiableList<String> sysout() throws ExecutionException {
+    UnmodifiableList<String> sysout;
+    sysout = output.toUnmodifiableList();
 
     if (exitValue == 0) {
       return sysout;
     }
 
-    ImmutableList<String> syserr;
-    syserr = error.toImmutableList();
+    UnmodifiableList<String> syserr;
+    syserr = error.toUnmodifiableList();
 
     throw new ExecutionException(exitValue, syserr, sysout);
   }
 
   final void throwExecutionExceptionIfNecessary() throws ExecutionException {
     if (exitValue != 0) {
-      ImmutableList<String> sysout;
-      sysout = output.toImmutableList();
+      UnmodifiableList<String> sysout;
+      sysout = output.toUnmodifiableList();
 
-      ImmutableList<String> syserr;
-      syserr = error.toImmutableList();
+      UnmodifiableList<String> syserr;
+      syserr = error.toUnmodifiableList();
 
       throw new ExecutionException(exitValue, syserr, sysout);
     }

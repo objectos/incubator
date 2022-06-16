@@ -20,7 +20,7 @@ import java.lang.annotation.Annotation;
 import javax.lang.model.element.AnnotationValue;
 import javax.lang.model.element.ExecutableElement;
 import objectos.lang.Check;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.MutableList;
 
 public abstract class ProcessingAnnotationValue implements CanGenerateCompilationError {
@@ -52,7 +52,7 @@ public abstract class ProcessingAnnotationValue implements CanGenerateCompilatio
     throw new AnnotationValueTypeException(Annotation.class);
   }
 
-  public ImmutableList<ProcessingAnnotation> getAnnotationArray() {
+  public UnmodifiableList<ProcessingAnnotation> getAnnotationArray() {
     throw new AnnotationValueTypeException(Annotation.class);
   }
 
@@ -69,13 +69,13 @@ public abstract class ProcessingAnnotationValue implements CanGenerateCompilatio
     return Enum.valueOf(enumType, enumConstant.getName());
   }
 
-  public final <E extends Enum<E>> ImmutableList<E> getEnumArray(Class<E> enumType) {
+  public final <E extends Enum<E>> UnmodifiableList<E> getEnumArray(Class<E> enumType) {
     Check.notNull(enumType, "enumType == null");
 
     MutableList<E> result;
     result = new MutableList<>();
 
-    ImmutableList<ProcessingEnumConstant> enumArray;
+    UnmodifiableList<ProcessingEnumConstant> enumArray;
     enumArray = getEnumConstantArray();
 
     for (int i = 0; i < enumArray.size(); i++) {
@@ -88,14 +88,14 @@ public abstract class ProcessingAnnotationValue implements CanGenerateCompilatio
       result.add(value);
     }
 
-    return result.toImmutableList();
+    return result.toUnmodifiableList();
   }
 
   public ProcessingEnumConstant getEnumConstant() {
     throw new AnnotationValueTypeException(Enum.class);
   }
 
-  public ImmutableList<ProcessingEnumConstant> getEnumConstantArray() {
+  public UnmodifiableList<ProcessingEnumConstant> getEnumConstantArray() {
     throw new AnnotationValueTypeException(Enum[].class);
   }
 
@@ -107,7 +107,7 @@ public abstract class ProcessingAnnotationValue implements CanGenerateCompilatio
     throw new AnnotationValueTypeException(String.class);
   }
 
-  public ImmutableList<String> getStringArray() {
+  public UnmodifiableList<String> getStringArray() {
     throw new AnnotationValueTypeException(String[].class);
   }
 
@@ -115,7 +115,7 @@ public abstract class ProcessingAnnotationValue implements CanGenerateCompilatio
     throw new AnnotationValueTypeException(Class.class);
   }
 
-  public ImmutableList<PTypeMirror> getTypeArray() {
+  public UnmodifiableList<PTypeMirror> getTypeArray() {
     throw new AnnotationValueTypeException(Class[].class);
   }
 

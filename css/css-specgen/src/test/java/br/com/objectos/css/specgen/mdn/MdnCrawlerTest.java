@@ -20,7 +20,7 @@ import static org.testng.Assert.assertEquals;
 import br.com.objectos.css.specgen.AbstractCssSpecgenHttpServerTest;
 import br.com.objectos.css.specgen.spec.Property;
 import br.com.objectos.css.specgen.spec.Spec;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import org.testng.annotations.Test;
 
 public class MdnCrawlerTest extends AbstractCssSpecgenHttpServerTest {
@@ -29,7 +29,7 @@ public class MdnCrawlerTest extends AbstractCssSpecgenHttpServerTest {
   public void crawl() {
     Spec spec = new MdnCrawler(httpTesting.httpLocalhost("/html/MDN")).crawl();
 
-    ImmutableList<Property> props = spec.properties();
+    UnmodifiableList<Property> props = spec.properties();
     assertEquals(props.size(), 2);
 
     Property p0 = props.get(0);

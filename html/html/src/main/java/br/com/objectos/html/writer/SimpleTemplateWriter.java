@@ -23,7 +23,7 @@ import br.com.objectos.html.tmpl.Template;
 import java.io.IOException;
 import java.io.UncheckedIOException;
 import objectos.lang.Check;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 
 public class SimpleTemplateWriter implements CompiledTemplateVisitor {
 
@@ -39,7 +39,7 @@ public class SimpleTemplateWriter implements CompiledTemplateVisitor {
   }
 
   @Override
-  public final void visitAttribute(AttributeName name, ImmutableList<String> values) {
+  public final void visitAttribute(AttributeName name, UnmodifiableList<String> values) {
     visitAttribute(name.getName(), values.join(" "));
   }
 

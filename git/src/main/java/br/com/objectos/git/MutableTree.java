@@ -26,7 +26,7 @@ import java.security.MessageDigest;
 import java.util.zip.Deflater;
 import objectos.lang.Check;
 import objectos.lang.ToString;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.MutableList;
 
 /**
@@ -168,7 +168,7 @@ public final class MutableTree extends MutableTreeEntry {
 
   @Override
   final void executeWriteTree(WriteTree wt) {
-    ImmutableList<MutableTreeEntry> sorted;
+    UnmodifiableList<MutableTreeEntry> sorted;
     sorted = entries.toImmutableSortedList(ORDER);
 
     for (int i = sorted.size() - 1; i >= 0; i--) {

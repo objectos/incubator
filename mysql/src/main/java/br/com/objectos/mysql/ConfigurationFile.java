@@ -23,7 +23,7 @@ import java.io.Writer;
 import java.nio.charset.Charset;
 import java.util.List;
 import objectos.lang.Check;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.MutableList;
 
 public final class ConfigurationFile {
@@ -79,7 +79,7 @@ public final class ConfigurationFile {
     }
   }
 
-  public final ImmutableList<String> readAllLines() throws IOException {
+  public final UnmodifiableList<String> readAllLines() throws IOException {
     return Read.lines(file, charset);
   }
 

@@ -17,7 +17,7 @@ package objectos.ssg;
 
 import java.io.IOException;
 import objectos.lang.Check;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 
 public abstract class Site implements SiteResourceHolder {
 
@@ -86,7 +86,7 @@ public abstract class Site implements SiteResourceHolder {
 
     <T> T getObject(Class<? extends T> key);
 
-    <T> ImmutableList<T> getObjectsByType(Class<? extends T> key);
+    <T> UnmodifiableList<T> getObjectsByType(Class<? extends T> key);
 
   }
 

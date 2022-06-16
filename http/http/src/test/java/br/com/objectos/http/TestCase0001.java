@@ -15,13 +15,13 @@
  */
 package br.com.objectos.http;
 
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 
 final class TestCase0001 {
 
   static final String DESCRIPTION = "GET / => 200 text/html";
 
-  static final ImmutableList<String> REQUEST = ImmutableList.of(
+  static final UnmodifiableList<String> REQUEST = UnmodifiableList.of(
     "GET / HTTP/1.1",
     "Host: localhost:7001",
     "Connection: keep-alive",
@@ -42,7 +42,7 @@ final class TestCase0001 {
     ""
   );
 
-  static final ImmutableList<String> RESPONSE = ImmutableList.of(
+  static final UnmodifiableList<String> RESPONSE = UnmodifiableList.of(
     "HTTP/1.1 200 OK",
     "Server: nginx/1.20.1",
     "Date: Tue, 01 Feb 2022 11:50:15 GMT",

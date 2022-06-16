@@ -16,20 +16,20 @@
 package br.com.objectos.code.java.declaration;
 
 import objectos.lang.Check;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 
 public class TypesShorthand implements ClassCodeElement {
 
-  private final ImmutableList<TypeCode> types;
+  private final UnmodifiableList<TypeCode> types;
 
-  private TypesShorthand(ImmutableList<TypeCode> types) {
+  private TypesShorthand(UnmodifiableList<TypeCode> types) {
     this.types = types;
   }
 
   public static TypesShorthand types(Iterable<? extends TypeCode> types) {
     Check.notNull(types, "types == null");
 
-    return new TypesShorthand(ImmutableList.copyOf(types));
+    return new TypesShorthand(UnmodifiableList.copyOf(types));
   }
 
   @Override

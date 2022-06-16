@@ -22,14 +22,14 @@ import br.com.objectos.code.java.io.CodeWriter;
 import br.com.objectos.code.java.type.NamedClass;
 import java.util.Iterator;
 import objectos.lang.Check;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 
 public class CatchElement extends AbstractCodeElement implements TryStatementElement {
 
-  private final ImmutableList<NamedClass> exceptionTypes;
+  private final UnmodifiableList<NamedClass> exceptionTypes;
   private final Identifier id;
 
-  private CatchElement(ImmutableList<NamedClass> exceptionTypes, Identifier id) {
+  private CatchElement(UnmodifiableList<NamedClass> exceptionTypes, Identifier id) {
     this.exceptionTypes = exceptionTypes;
     this.id = id;
   }
@@ -39,7 +39,7 @@ public class CatchElement extends AbstractCodeElement implements TryStatementEle
       Class<? extends Throwable> type2,
       Identifier id) {
     return _catch0(
-        ImmutableList.of(
+        UnmodifiableList.of(
             NamedClass.ofWithNullMessage(type1, "type1 == null"),
             NamedClass.ofWithNullMessage(type2, "type2 == null")
         ),
@@ -49,14 +49,14 @@ public class CatchElement extends AbstractCodeElement implements TryStatementEle
 
   public static CatchElement _catch(Class<? extends Throwable> type, Identifier id) {
     return _catch0(
-        ImmutableList.of(
+        UnmodifiableList.of(
             NamedClass.ofWithNullMessage(type, "type == null")
         ),
         id
     );
   }
 
-  private static CatchElement _catch0(ImmutableList<NamedClass> exceptionTypes, Identifier id) {
+  private static CatchElement _catch0(UnmodifiableList<NamedClass> exceptionTypes, Identifier id) {
     Check.notNull(id, "id == null");
     return new CatchElement(exceptionTypes, id);
   }

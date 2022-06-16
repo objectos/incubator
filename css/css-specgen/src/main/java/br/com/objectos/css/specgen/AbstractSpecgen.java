@@ -49,7 +49,7 @@ abstract class AbstractSpecgen {
     }
 
     Property p = spec.getProperty(name);
-    step.addProperty(p, moreProperties.toImmutableList());
+    step.addProperty(p, moreProperties.toUnmodifiableList());
   }
 
 }

@@ -18,7 +18,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import java.util.List;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.MutableList;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -29,17 +29,17 @@ public class ProcessingAnnotationValueTypeArrayTest extends AbstractProcessingAn
   public void getDeclaredOrDefaultValue() {
     assertEquals(
         getDeclaredOrDefaultValue(defaults()),
-        ImmutableList.of()
+        UnmodifiableList.of()
     );
 
     assertEquals(
         getDeclaredOrDefaultValue(noDefaults()),
-        ImmutableList.of(cn(Void.class))
+        UnmodifiableList.of(cn(Void.class))
     );
 
     assertEquals(
         getDeclaredOrDefaultValue(withDefaults()),
-        ImmutableList.of(cn(Integer.class), cn(Long.class))
+        UnmodifiableList.of(cn(Integer.class), cn(Long.class))
     );
   }
 
@@ -54,12 +54,12 @@ public class ProcessingAnnotationValueTypeArrayTest extends AbstractProcessingAn
 
     assertEquals(
         getDeclaredValue(noDefaults()),
-        ImmutableList.of(cn(Void.class))
+        UnmodifiableList.of(cn(Void.class))
     );
 
     assertEquals(
         getDeclaredValue(withDefaults()),
-        ImmutableList.of(cn(Integer.class), cn(Long.class))
+        UnmodifiableList.of(cn(Integer.class), cn(Long.class))
     );
   }
 
@@ -67,7 +67,7 @@ public class ProcessingAnnotationValueTypeArrayTest extends AbstractProcessingAn
   public void getDefaultValue() {
     assertEquals(
         getDefaultValue(defaults()),
-        ImmutableList.of()
+        UnmodifiableList.of()
     );
 
     try {
@@ -79,7 +79,7 @@ public class ProcessingAnnotationValueTypeArrayTest extends AbstractProcessingAn
 
     assertEquals(
         getDefaultValue(withDefaults()),
-        ImmutableList.of()
+        UnmodifiableList.of()
     );
   }
 
@@ -91,21 +91,21 @@ public class ProcessingAnnotationValueTypeArrayTest extends AbstractProcessingAn
     return getDirectlyPresentAnnotation(Defaults.class, WithDefaults.class);
   }
 
-  private ImmutableList<NamedType> getDeclaredOrDefaultValue(ProcessingAnnotation annotation) {
+  private UnmodifiableList<NamedType> getDeclaredOrDefaultValue(ProcessingAnnotation annotation) {
     ProcessingAnnotationValue value;
     value = getDeclaredOrDefaultValue(annotation, "value");
 
     return tn(value.getTypeArray());
   }
 
-  private ImmutableList<NamedType> getDeclaredValue(ProcessingAnnotation annotation) {
+  private UnmodifiableList<NamedType> getDeclaredValue(ProcessingAnnotation annotation) {
     ProcessingAnnotationValue value;
     value = getDeclaredValue(annotation, "value");
 
     return tn(value.getTypeArray());
   }
 
-  private ImmutableList<NamedType> getDefaultValue(ProcessingAnnotation annotation) {
+  private UnmodifiableList<NamedType> getDefaultValue(ProcessingAnnotation annotation) {
     ProcessingAnnotationValue value;
     value = getDefaultValue(annotation, "value");
 
@@ -116,7 +116,7 @@ public class ProcessingAnnotationValueTypeArrayTest extends AbstractProcessingAn
     return getDirectlyPresentAnnotation(Subject.class, NoDefaults.class);
   }
 
-  private ImmutableList<NamedType> tn(List<PTypeMirror> iter) {
+  private UnmodifiableList<NamedType> tn(List<PTypeMirror> iter) {
     MutableList<NamedType> result;
     result = new MutableList<>();
 
@@ -128,7 +128,7 @@ public class ProcessingAnnotationValueTypeArrayTest extends AbstractProcessingAn
       result.add(name);
     }
 
-    return result.toImmutableList();
+    return result.toUnmodifiableList();
   }
 
   private ProcessingAnnotation withDefaults() {

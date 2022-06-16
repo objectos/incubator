@@ -22,7 +22,7 @@ import javax.lang.model.type.TypeKind;
 import javax.lang.model.type.TypeMirror;
 import javax.lang.model.type.TypeVariable;
 import javax.lang.model.util.Types;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.MutableList;
 import org.testng.annotations.Test;
 
@@ -36,7 +36,7 @@ public class WildcardTypeTest extends AbstractCodeCoreTest {
     List<? extends VariableElement> parameters;
     parameters = m0.getParameters();
 
-    ImmutableList<TypeMirror> capturedParameters;
+    UnmodifiableList<TypeMirror> capturedParameters;
     capturedParameters = capture(parameters);
 
     TypeMirror capturedList;
@@ -68,7 +68,7 @@ public class WildcardTypeTest extends AbstractCodeCoreTest {
     );
   }
 
-  private ImmutableList<TypeMirror> capture(List<? extends VariableElement> parameters) {
+  private UnmodifiableList<TypeMirror> capture(List<? extends VariableElement> parameters) {
     MutableList<TypeMirror> result;
     result = new MutableList<>();
 
@@ -88,7 +88,7 @@ public class WildcardTypeTest extends AbstractCodeCoreTest {
       result.add(captured);
     }
 
-    return result.toImmutableList();
+    return result.toUnmodifiableList();
   }
 
   private ExecutableElement getExecutableElement(Class<?> type, String name) {

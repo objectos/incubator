@@ -18,7 +18,7 @@ package br.com.objectos.html.boot.spec;
 import static org.testng.Assert.assertEquals;
 
 import br.com.objectos.html.boot.AbstractHtmlBootTest;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.MutableList;
 import org.testng.annotations.Test;
 
@@ -42,7 +42,7 @@ public class SpecDslTest extends AbstractHtmlBootTest {
       names.add(child.name());
     }
 
-    assertEquals(names, ImmutableList.of("div", "form"));
+    assertEquals(names, UnmodifiableList.of("div", "form"));
   }
 
   @Test
@@ -57,8 +57,8 @@ public class SpecDslTest extends AbstractHtmlBootTest {
 
     dsl.prepare();
 
-    assertEquals(toName(div.parentStream()), ImmutableList.of("div"));
-    assertEquals(toName(form.parentStream()), ImmutableList.of("div"));
+    assertEquals(toName(div.parentStream()), UnmodifiableList.of("div"));
+    assertEquals(toName(form.parentStream()), UnmodifiableList.of("div"));
   }
 
   @Test
@@ -76,8 +76,8 @@ public class SpecDslTest extends AbstractHtmlBootTest {
 
     dsl.prepare();
 
-    assertEquals(toName(div.parentStream()), ImmutableList.of("div", "form"));
-    assertEquals(toName(form.parentStream()), ImmutableList.of("div"));
+    assertEquals(toName(div.parentStream()), UnmodifiableList.of("div", "form"));
+    assertEquals(toName(form.parentStream()), UnmodifiableList.of("div"));
   }
 
   @Test
@@ -93,8 +93,8 @@ public class SpecDslTest extends AbstractHtmlBootTest {
 
     dsl.prepare();
 
-    assertEquals(toName(div.parentStream()), ImmutableList.of("div"));
-    assertEquals(toName(text.parentStream()), ImmutableList.of("div"));
+    assertEquals(toName(div.parentStream()), UnmodifiableList.of("div"));
+    assertEquals(toName(text.parentStream()), UnmodifiableList.of("div"));
   }
 
   private Iterable<String> toName(Iterable<ElementSpec> specs) {

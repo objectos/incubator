@@ -21,7 +21,7 @@ import static org.testng.Assert.assertNull;
 import objectos.docs.DocsSiteTest;
 import objectos.docs.next.Next;
 import objectos.docs.v0001.logging.LoggingDir;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -50,7 +50,7 @@ public class PagesTest extends DocsSiteTest {
     DocsPage events;
     events = getObject(LoggingDir.EVENTS);
 
-    ImmutableList<DocsPage> trail;
+    UnmodifiableList<DocsPage> trail;
     trail = pages.trail(events);
 
     assertEquals(trail.size(), 4);

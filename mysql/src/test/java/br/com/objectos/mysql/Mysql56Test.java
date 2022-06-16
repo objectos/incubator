@@ -26,7 +26,7 @@ import br.com.objectos.fs.ResolvedPath;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -86,7 +86,7 @@ public class Mysql56Test extends AbstractMysqlTest {
         Mysql.waitTimeout(90000)
       ),
 
-      ImmutableList.of(
+      UnmodifiableList.of(
         "[mysqld]",
         "basedir=" + directoryBase.getPath(),
         "character-set-server=utf8mb4",
@@ -149,7 +149,7 @@ public class Mysql56Test extends AbstractMysqlTest {
     InputStreamReader reader;
     reader = new InputStreamReader(inputStream, charset);
 
-    ImmutableList<String> output;
+    UnmodifiableList<String> output;
     output = Read.lines(reader);
 
     assertTrue(output.contains("PLEASE REMEMBER TO SET A PASSWORD FOR THE MySQL root USER !"));

@@ -12,7 +12,7 @@ import static br.com.objectos.code.java.declaration.Modifiers.STATIC;
 import static br.com.objectos.code.java.declaration.Modifiers.STRICTFP;
 
 import br.com.objectos.code.util.AbstractCodeJavaTest;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import org.testng.annotations.Test;
 
 public class InterfaceCodeBuilderTest extends AbstractCodeJavaTest {
@@ -37,7 +37,7 @@ public class InterfaceCodeBuilderTest extends AbstractCodeJavaTest {
     );
     test(
         InterfaceCode.builder()
-            .addAnnotations(ImmutableList.of(ann1, ann2))
+            .addAnnotations(UnmodifiableList.of(ann1, ann2))
             .build(),
         "@testing.code.Ann1",
         "@testing.code.Ann2",
@@ -73,7 +73,7 @@ public class InterfaceCodeBuilderTest extends AbstractCodeJavaTest {
     );
     test(
         InterfaceCode.builder()
-            .addModifiers(ImmutableList.of(PUBLIC, Modifiers.STATIC))
+            .addModifiers(UnmodifiableList.of(PUBLIC, Modifiers.STATIC))
             .build(),
         "public static interface Unnamed {}"
     );

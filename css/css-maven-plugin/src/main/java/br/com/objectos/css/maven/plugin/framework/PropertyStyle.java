@@ -30,16 +30,16 @@ import br.com.objectos.code.java.expression.ExpressionName;
 import br.com.objectos.code.java.expression.Identifier;
 import br.com.objectos.code.java.expression.MethodInvocation;
 import br.com.objectos.code.java.type.NamedClass;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.MutableList;
 
 class PropertyStyle {
 
-  private final ImmutableList<String> methodNames;
+  private final UnmodifiableList<String> methodNames;
   private final Prefix prefix;
   private final NamedValue value;
 
-  PropertyStyle(NamedValue value, Prefix prefix, ImmutableList<String> methodNames) {
+  PropertyStyle(NamedValue value, Prefix prefix, UnmodifiableList<String> methodNames) {
     this.value = value;
     this.prefix = prefix;
     this.methodNames = methodNames;

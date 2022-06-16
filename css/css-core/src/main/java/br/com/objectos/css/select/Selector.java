@@ -19,7 +19,7 @@ import br.com.objectos.css.parser.IsNonTerminal;
 import br.com.objectos.css.sheet.RuleElement;
 import java.util.stream.Stream;
 import objectos.lang.Check;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.MutableList;
 
 public abstract class Selector implements IsNonTerminal {
@@ -45,7 +45,7 @@ public abstract class Selector implements IsNonTerminal {
   public abstract String toString();
 
   final void acceptRuleElementListImpl(
-      MutableList<RuleElement> elements, ImmutableList<Selector> list, Combinator combinator) {
+      MutableList<RuleElement> elements, UnmodifiableList<Selector> list, Combinator combinator) {
     if (list.isEmpty()) {
       return;
     }
@@ -66,23 +66,23 @@ public abstract class Selector implements IsNonTerminal {
   }
 
   AdjacentSiblingSelector newAdjacentSiblingSelectorWithPrevious(Selector previous) {
-    return new AdjacentSiblingSelector(ImmutableList.of(previous, this));
+    return new AdjacentSiblingSelector(UnmodifiableList.of(previous, this));
   }
 
   ChildSelector newChildSelectorWithParent(Selector parent) {
-    return new ChildSelector(ImmutableList.of(parent, this));
+    return new ChildSelector(UnmodifiableList.of(parent, this));
   }
 
   DescendantSelector newDescendantSelectorWithAncestor(Selector ancestor) {
-    return new DescendantSelector(ImmutableList.of(ancestor, this));
+    return new DescendantSelector(UnmodifiableList.of(ancestor, this));
   }
 
   GeneralSiblingSelector newGeneralSiblingSelectorWithPrevious(Selector previous) {
-    return new GeneralSiblingSelector(ImmutableList.of(previous, this));
+    return new GeneralSiblingSelector(UnmodifiableList.of(previous, this));
   }
 
   SelectorList newSelectorListWithHead(Selector head) {
-    return new SelectorList(ImmutableList.of(head, this));
+    return new SelectorList(UnmodifiableList.of(head, this));
   }
 
   final Stream<? extends Selectable> parentStream(Selectable element) {
@@ -146,8 +146,8 @@ public abstract class Selector implements IsNonTerminal {
     protected final Selector newCombinatorSelector(Selector selector) {
       addToCombinatorList(selector);
 
-      ImmutableList<Selector> elements;
-      elements = combinatorList.toImmutableList();
+      UnmodifiableList<Selector> elements;
+      elements = combinatorList.toUnmodifiableList();
 
       combinatorList = null;
 
@@ -156,8 +156,8 @@ public abstract class Selector implements IsNonTerminal {
 
     @Override
     protected final Selector newCompoundSelector() {
-      ImmutableList<Selector> elements;
-      elements = compoundList.toImmutableList();
+      UnmodifiableList<Selector> elements;
+      elements = compoundList.toUnmodifiableList();
 
       compoundList = null;
 

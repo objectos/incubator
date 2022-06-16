@@ -17,7 +17,7 @@ package br.com.objectos.code.java.expression;
 
 import br.com.objectos.code.java.element.AbstractDefaultImmutableCodeElement;
 import br.com.objectos.code.java.element.CodeElement;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 
 class PreIncrementExpressionImpl
     extends AbstractDefaultImmutableCodeElement
@@ -27,7 +27,7 @@ class PreIncrementExpressionImpl
     super(elements);
   }
 
-  private PreIncrementExpressionImpl(ImmutableList<CodeElement> elements) {
+  private PreIncrementExpressionImpl(UnmodifiableList<CodeElement> elements) {
     super(elements);
   }
 

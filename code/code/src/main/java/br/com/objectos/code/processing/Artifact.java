@@ -96,7 +96,7 @@ public abstract class Artifact {
         case 1:
           return list.get(0);
         default:
-          return new ListArtifact(list.toImmutableList());
+          return new ListArtifact(list.toUnmodifiableList());
       }
     }
 

@@ -18,7 +18,7 @@ package br.com.objectos.code.java.expression;
 import br.com.objectos.code.java.element.AbstractDefaultImmutableCodeElement;
 import br.com.objectos.code.java.element.CodeElement;
 import br.com.objectos.code.java.type.NamedReferenceType;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 
 final class MethodReferenceImpl
     extends AbstractDefaultImmutableCodeElement
@@ -28,7 +28,7 @@ final class MethodReferenceImpl
     super(elements);
   }
 
-  private MethodReferenceImpl(ImmutableList<CodeElement> elements) {
+  private MethodReferenceImpl(UnmodifiableList<CodeElement> elements) {
     super(elements);
   }
 

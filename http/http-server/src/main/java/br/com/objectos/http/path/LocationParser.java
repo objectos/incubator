@@ -36,7 +36,7 @@ class LocationParser {
 
     state.onEof(this);
 
-    return slugs.isEmpty() ? Location.root() : new Location(slugs.toImmutableList());
+    return slugs.isEmpty() ? Location.root() : new Location(slugs.toUnmodifiableList());
   }
 
   protected Location buildStandard() {

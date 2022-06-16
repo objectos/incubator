@@ -35,7 +35,7 @@ import java.util.NoSuchElementException;
 import java.util.Set;
 import javax.lang.model.type.DeclaredType;
 import javax.lang.model.util.Types;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.ImmutableSet;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -80,7 +80,7 @@ public class ProcessingAnnotationTest extends AbstractCodeModelTest {
 
         typeAnn.compilationError("Hello world!");
 
-        ImmutableList<ProcessingMethod> methods;
+        UnmodifiableList<ProcessingMethod> methods;
         methods = type.getDeclaredMethods();
 
         ProcessingExecutableElement someMethod;

@@ -29,7 +29,7 @@ import javax.lang.model.type.DeclaredType;
 import javax.lang.model.type.TypeKind;
 import javax.lang.model.type.TypeMirror;
 import objectos.lang.Check;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.MutableList;
 
 public final class PDeclaredType extends PTypeMirror {
@@ -40,7 +40,7 @@ public final class PDeclaredType extends PTypeMirror {
 
   private final DeclaredType type;
 
-  private ImmutableList<PTypeMirror> typeParameters;
+  private UnmodifiableList<PTypeMirror> typeParameters;
 
   PDeclaredType(ProcessingEnvironment processingEnv, DeclaredType type) {
     super(processingEnv);
@@ -64,7 +64,7 @@ public final class PDeclaredType extends PTypeMirror {
     return name;
   }
 
-  public final ImmutableList<PTypeMirror> getTypeArguments() {
+  public final UnmodifiableList<PTypeMirror> getTypeArguments() {
     if (typeParameters == null) {
       typeParameters = getTypeArguments0();
     }
@@ -113,7 +113,7 @@ public final class PDeclaredType extends PTypeMirror {
     NamedClass rawName;
     rawName = NamedClass.of(typeElement);
 
-    ImmutableList<PTypeMirror> typeArguments;
+    UnmodifiableList<PTypeMirror> typeArguments;
     typeArguments = getTypeArguments();
 
     int size;
@@ -140,7 +140,7 @@ public final class PDeclaredType extends PTypeMirror {
     }
   }
 
-  private ImmutableList<PTypeMirror> getTypeArguments0() {
+  private UnmodifiableList<PTypeMirror> getTypeArguments0() {
     List<? extends TypeMirror> typeArguments;
     typeArguments = type.getTypeArguments();
 
@@ -149,7 +149,7 @@ public final class PDeclaredType extends PTypeMirror {
 
     switch (size) {
       case 0:
-        return ImmutableList.of();
+        return UnmodifiableList.of();
       default:
         MutableList<PTypeMirror> result;
         result = new MutableList<>();
@@ -164,7 +164,7 @@ public final class PDeclaredType extends PTypeMirror {
           result.add(adapted);
         }
 
-        return result.toImmutableList();
+        return result.toUnmodifiableList();
     }
   }
 

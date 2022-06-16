@@ -21,7 +21,7 @@ import br.com.objectos.code.java.element.CodeElement;
 import br.com.objectos.code.java.io.CodeWriter;
 import java.util.Iterator;
 import objectos.lang.Check;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.MutableList;
 
 public class EnumConstantList extends AbstractCodeElement
@@ -29,12 +29,12 @@ public class EnumConstantList extends AbstractCodeElement
     EnumCodeElement {
 
   private static final EnumConstantList EMPTY = new EnumConstantList(
-      ImmutableList.<EnumConstantCode> of()
+      UnmodifiableList.<EnumConstantCode> of()
   );
 
-  private final ImmutableList<EnumConstantCode> list;
+  private final UnmodifiableList<EnumConstantCode> list;
 
-  private EnumConstantList(ImmutableList<EnumConstantCode> list) {
+  private EnumConstantList(UnmodifiableList<EnumConstantCode> list) {
     this.list = list;
   }
 
@@ -107,7 +107,7 @@ public class EnumConstantList extends AbstractCodeElement
     }
 
     public final EnumConstantList build() {
-      return new EnumConstantList(list.toImmutableList());
+      return new EnumConstantList(list.toUnmodifiableList());
     }
 
     final void uncheckedAddEnumConstants(Iterable<EnumConstantCode> values) {

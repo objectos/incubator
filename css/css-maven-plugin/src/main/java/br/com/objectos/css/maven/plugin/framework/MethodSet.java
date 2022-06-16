@@ -16,13 +16,13 @@
 package br.com.objectos.css.maven.plugin.framework;
 
 import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkMethodSet;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 
 class MethodSet extends AbstractFrameworkObject implements FrameworkMethodSet {
 
-  private final ImmutableList<String> set;
+  private final UnmodifiableList<String> set;
 
-  MethodSet(ImmutableList<String> set) {
+  MethodSet(UnmodifiableList<String> set) {
     this.set = set;
   }
 

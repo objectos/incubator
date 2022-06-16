@@ -32,7 +32,7 @@ import br.com.objectos.code.model.element.ProcessingMethod;
 import br.com.objectos.code.model.element.ProcessingParameter;
 import br.com.objectos.code.model.element.ProcessingType;
 import br.com.objectos.code.processing.type.PTypeMirror;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.MutableList;
 
 final class StaticMethod {
@@ -46,11 +46,11 @@ final class StaticMethod {
     this.method = method;
   }
 
-  static ImmutableList<StaticMethod> listOf(ProcessingType type) {
+  static UnmodifiableList<StaticMethod> listOf(ProcessingType type) {
     MutableList<StaticMethod> result;
     result = new MutableList<>();
 
-    ImmutableList<ProcessingMethod> methods;
+    UnmodifiableList<ProcessingMethod> methods;
     methods = type.getDeclaredOrInheritedMethods();
 
     for (int i = 0; i < methods.size(); i++) {
@@ -67,7 +67,7 @@ final class StaticMethod {
       result.add(staticMethod);
     }
 
-    return result.toImmutableList();
+    return result.toUnmodifiableList();
   }
 
   static StaticMethod ofUnchecked(ProcessingType type, ProcessingMethod method) {
@@ -112,7 +112,7 @@ final class StaticMethod {
     MutableList<Identifier> names;
     names = new MutableList<>();
 
-    ImmutableList<ProcessingParameter> parameters;
+    UnmodifiableList<ProcessingParameter> parameters;
     parameters = method.getParameters();
 
     for (int i = 0; i < parameters.size(); i++) {
@@ -127,7 +127,7 @@ final class StaticMethod {
       names.add(parameter.toIdentifier());
     }
 
-    ImmutableList<PTypeMirror> thrownTypes;
+    UnmodifiableList<PTypeMirror> thrownTypes;
     thrownTypes = method.getThrownTypes();
 
     for (int i = 0; i < thrownTypes.size(); i++) {

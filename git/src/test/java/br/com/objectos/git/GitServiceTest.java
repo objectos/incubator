@@ -29,7 +29,7 @@ import br.com.objectos.fs.RegularFile;
 import br.com.objectos.fs.testing.TmpDir;
 import java.io.IOException;
 import java.util.concurrent.ExecutionException;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.MutableList;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -609,7 +609,7 @@ public class GitServiceTest extends AbstractGitTest {
     assertEquals(
       Read.lines(file, Charsets.utf8()),
 
-      ImmutableList.copyOf(expected)
+      UnmodifiableList.copyOf(expected)
     );
 
     assertTrue(file.is(Posix.ownerExecutable()));
@@ -654,7 +654,7 @@ public class GitServiceTest extends AbstractGitTest {
 
       list.add(source);
 
-      ImmutableList<ObjectId> parents;
+      UnmodifiableList<ObjectId> parents;
       parents = commit.getParents();
 
       if (!parents.isEmpty()) {
@@ -662,10 +662,10 @@ public class GitServiceTest extends AbstractGitTest {
       }
     }
 
-    ImmutableList<String> log;
-    log = list.toImmutableList();
+    UnmodifiableList<String> log;
+    log = list.toUnmodifiableList();
 
-    assertEquals(log, ImmutableList.copyOf(expected));
+    assertEquals(log, UnmodifiableList.copyOf(expected));
   }
 
   private void testRegularFile(
@@ -676,20 +676,20 @@ public class GitServiceTest extends AbstractGitTest {
     assertEquals(
       Read.lines(file, Charsets.utf8()),
 
-      ImmutableList.copyOf(expected)
+      UnmodifiableList.copyOf(expected)
     );
 
     assertFalse(file.is(Posix.ownerExecutable()));
   }
 
   private void testTree(Directory dir, String... expected) throws IOException {
-    ImmutableList<String> result;
+    UnmodifiableList<String> result;
     result = ListRegularFiles.of(dir);
 
     assertEquals(
       result,
 
-      ImmutableList.copyOf(expected),
+      UnmodifiableList.copyOf(expected),
 
       result.toString()
     );

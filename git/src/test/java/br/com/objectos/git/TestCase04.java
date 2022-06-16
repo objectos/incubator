@@ -18,7 +18,7 @@ package br.com.objectos.git;
 import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.testing.TmpDir;
 import java.io.IOException;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 
 /**
  * Support reading and parsing loose objects (iter. 5).
@@ -200,7 +200,7 @@ final class TestCase04 extends StageGitCommand<ObjectId> {
     ObjectId result;
     result = null;
 
-    ImmutableList<Entry> entries;
+    UnmodifiableList<Entry> entries;
     entries = root.getEntries();
 
     for (int i = 0, size = entries.size(); i < size; i++) {

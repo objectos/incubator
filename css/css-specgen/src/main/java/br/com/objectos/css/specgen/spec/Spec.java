@@ -16,7 +16,7 @@
 package br.com.objectos.css.specgen.spec;
 
 import objectos.lang.Check;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.ImmutableMap;
 import objectos.util.MutableMap;
 import objectos.util.MutableOrderedMap;
@@ -39,8 +39,8 @@ public class Spec {
     return properties.get(name);
   }
 
-  public final ImmutableList<Property> properties() {
-    return ImmutableList.copyOf(properties.values());
+  public final UnmodifiableList<Property> properties() {
+    return UnmodifiableList.copyOf(properties.values());
   }
 
   public static class Builder {

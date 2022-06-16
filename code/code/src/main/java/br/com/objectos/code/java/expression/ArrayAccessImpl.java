@@ -18,7 +18,7 @@ package br.com.objectos.code.java.expression;
 import br.com.objectos.code.java.element.AbstractDefaultImmutableCodeElement;
 import br.com.objectos.code.java.element.CodeElement;
 import java.util.Arrays;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.MutableList;
 
 final class ArrayAccessImpl
@@ -29,7 +29,7 @@ final class ArrayAccessImpl
     super(elements);
   }
 
-  private ArrayAccessImpl(ImmutableList<CodeElement> elements) {
+  private ArrayAccessImpl(UnmodifiableList<CodeElement> elements) {
     super(elements);
   }
 
@@ -50,7 +50,7 @@ final class ArrayAccessImpl
     }
 
     return new ArrayAccessImpl(
-        els.toImmutableList()
+        els.toUnmodifiableList()
     );
   }
 

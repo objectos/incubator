@@ -21,16 +21,16 @@ import br.com.objectos.code.java.element.AbstractCodeElement;
 import br.com.objectos.code.java.element.CodeElement;
 import br.com.objectos.code.java.io.CodeWriter;
 import java.util.Iterator;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.MutableList;
 
 final class FormattedStatement extends AbstractCodeElement implements Statement {
 
   private static final Class<CodeElement> CODE_ELEMENT = CodeElement.class;
 
-  private final ImmutableList<CodeElement> elements;
+  private final UnmodifiableList<CodeElement> elements;
 
-  private FormattedStatement(ImmutableList<CodeElement> elements) {
+  private FormattedStatement(UnmodifiableList<CodeElement> elements) {
     this.elements = elements;
   }
 
@@ -48,8 +48,8 @@ final class FormattedStatement extends AbstractCodeElement implements Statement 
       builder.add(code);
     }
 
-    ImmutableList<CodeElement> list;
-    list = builder.toImmutableList();
+    UnmodifiableList<CodeElement> list;
+    list = builder.toUnmodifiableList();
 
     return new FormattedStatement(list);
   }

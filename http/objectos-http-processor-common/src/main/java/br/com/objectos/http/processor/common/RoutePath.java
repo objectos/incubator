@@ -18,8 +18,8 @@
  */
 package br.com.objectos.http.processor.common;
 
-import br.com.objectos.way.util.ImmutableList;
-import br.com.objectos.way.util.ImmutableListBuilder;
+import br.com.objectos.way.util.UnmodifiableList;
+import br.com.objectos.way.util.UnmodifiableListBuilder;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -34,7 +34,7 @@ public class RoutePath {
   }
 
   private RoutePath(Iterator<RoutePart> iterator) {
-    partList = ImmutableList.ofAll(iterator);
+    partList = UnmodifiableList.ofAll(iterator);
   }
 
   public static RoutePath parse(String path) {
@@ -69,7 +69,7 @@ public class RoutePath {
   }
 
   public RoutePath add(RoutePath other) {
-    ImmutableListBuilder<RoutePart> add = ImmutableList.builder();
+    UnmodifiableListBuilder<RoutePart> add = UnmodifiableList.builder();
     add.addAll(partList);
     add.addAll(other.partList);
     return new RoutePath(add.build());

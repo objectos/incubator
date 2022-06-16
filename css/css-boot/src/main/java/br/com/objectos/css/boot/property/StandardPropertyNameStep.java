@@ -57,7 +57,7 @@ import br.com.objectos.css.boot.spec.StepAdapter;
 import br.com.objectos.css.boot.spec.Types;
 import java.util.Map;
 import java.util.TreeMap;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 
 public class StandardPropertyNameStep extends Step {
 
@@ -112,8 +112,8 @@ public class StandardPropertyNameStep extends Step {
     NamedArray implArray;
     implArray = implName.toNamedArray();
 
-    ImmutableList<NamedClass> mapTypeArgs;
-    mapTypeArgs = ImmutableList.of(Types._String, implName);
+    UnmodifiableList<NamedClass> mapTypeArgs;
+    mapTypeArgs = UnmodifiableList.of(Types._String, implName);
 
     NamedClassOrParameterized implGrowableMap;
     implGrowableMap = t(Types._MutableMap, mapTypeArgs);

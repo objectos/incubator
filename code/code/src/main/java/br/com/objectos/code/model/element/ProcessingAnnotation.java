@@ -48,7 +48,7 @@ import javax.lang.model.type.TypeVisitor;
 import javax.lang.model.util.Elements;
 import javax.tools.Diagnostic.Kind;
 import objectos.lang.Check;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.ImmutableMap;
 import objectos.util.ImmutableSet;
 import objectos.util.MutableMap;
@@ -139,7 +139,7 @@ public class ProcessingAnnotation
     return getDirectlyPresentOrInheritedAnnotationImpl(element(), canonicalName);
   }
 
-  public final ImmutableList<ProcessingAnnotation> getDirectlyPresentOrInheritedAnnotations() {
+  public final UnmodifiableList<ProcessingAnnotation> getDirectlyPresentOrInheritedAnnotations() {
     return getDirectlyPresentOrInheritedAnnotationsImpl(element());
   }
 

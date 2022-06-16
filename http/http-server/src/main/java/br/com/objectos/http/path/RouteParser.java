@@ -22,18 +22,18 @@ import br.com.objectos.http.server.RequestedPart;
 import br.com.objectos.http.server.Resolution;
 import java.util.ArrayList;
 import java.util.List;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 
 public class RouteParser {
 
   private final HttpAction action;
   private final List<Argument> argumentList = new ArrayList<>();
-  private final ImmutableList<Slug> expectedList;
+  private final UnmodifiableList<Slug> expectedList;
 
   private int index;
   private final RequestProto request;
 
-  public RouteParser(ImmutableList<Slug> expectedList,
+  public RouteParser(UnmodifiableList<Slug> expectedList,
                      HttpAction action,
                      RequestProto request) {
     this.expectedList = expectedList;

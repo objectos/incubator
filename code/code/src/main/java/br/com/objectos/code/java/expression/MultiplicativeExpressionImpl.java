@@ -17,7 +17,7 @@ package br.com.objectos.code.java.expression;
 
 import br.com.objectos.code.java.element.AbstractDefaultImmutableCodeElement;
 import br.com.objectos.code.java.element.CodeElement;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 
 final class MultiplicativeExpressionImpl
     extends AbstractDefaultImmutableCodeElement
@@ -27,7 +27,7 @@ final class MultiplicativeExpressionImpl
     super(elements);
   }
 
-  private MultiplicativeExpressionImpl(ImmutableList<CodeElement> elements) {
+  private MultiplicativeExpressionImpl(UnmodifiableList<CodeElement> elements) {
     super(elements);
   }
 

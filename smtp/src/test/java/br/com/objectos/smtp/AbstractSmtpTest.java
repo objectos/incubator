@@ -29,7 +29,7 @@ import javax.mail.Session;
 import javax.mail.internet.MimeMessage;
 import objectos.lang.NoOpNoteSink;
 import objectos.lang.NoteSink;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
@@ -108,8 +108,8 @@ public abstract class AbstractSmtpTest {
   }
 
   final String lines(String... lines) {
-    ImmutableList<String> list;
-    list = ImmutableList.copyOf(lines);
+    UnmodifiableList<String> list;
+    list = UnmodifiableList.copyOf(lines);
 
     return list.join("\r\n");
   }

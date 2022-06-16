@@ -21,14 +21,14 @@ import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.MutableList;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 public class ReadTest {
 
-  private ImmutableList<String> randomLines;
+  private UnmodifiableList<String> randomLines;
 
   private String randomLinesTxt;
 
@@ -58,7 +58,7 @@ public class ReadTest {
       randomLinesTxtBuilder.append('\n');
     }
 
-    randomLines = randomLinesBuilder.toImmutableList();
+    randomLines = randomLinesBuilder.toUnmodifiableList();
 
     randomLinesTxt = randomLinesTxtBuilder.toString();
   }
@@ -88,7 +88,7 @@ public class ReadTest {
     InputStreamReader reader;
     reader = new InputStreamReader(in, Charsets.utf8());
 
-    ImmutableList<String> result;
+    UnmodifiableList<String> result;
     result = Read.lines(reader);
 
     assertEquals(result, randomLines);
@@ -110,7 +110,7 @@ public class ReadTest {
     BufferedReader reader;
     reader = new BufferedReader(r);
 
-    ImmutableList<String> result;
+    UnmodifiableList<String> result;
     result = Read.lines(reader);
 
     assertEquals(result, randomLines);
@@ -121,7 +121,7 @@ public class ReadTest {
     ReaderSource source;
     source = new ByteArrayReaderSource(randomLinesTxt);
 
-    ImmutableList<String> result;
+    UnmodifiableList<String> result;
     result = Read.lines(source, Charsets.utf8());
 
     assertEquals(result, randomLines);

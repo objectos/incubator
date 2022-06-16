@@ -50,7 +50,7 @@ public abstract class ActionParameter {
     return method.parameterStream()
         .map(param -> ActionParameterConstructor.ofParameter(index, param))
         .map(ActionParameter::of)
-        .collect(MoreCollectors.toImmutableList());
+        .collect(MoreCollectors.toUnmodifiableList());
   }
 
   public static ActionParameter of(ActionParameterConstructor constructor) {

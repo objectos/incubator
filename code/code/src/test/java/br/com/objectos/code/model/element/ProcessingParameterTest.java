@@ -37,7 +37,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import java.util.List;
 import java.util.Set;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.ImmutableSet;
 import objectos.util.MutableList;
 import org.testng.annotations.Test;
@@ -46,13 +46,13 @@ public class ProcessingParameterTest extends AbstractCodeCoreTest {
 
   @Test
   public void getDirectlyPresentAnnotations() {
-    ImmutableList<ProcessingParameter> subjectParameters;
+    UnmodifiableList<ProcessingParameter> subjectParameters;
     subjectParameters = getSubjectParameters(GetDirectlyPresentAnnotationsSubject.class);
 
     ProcessingParameter p0;
     p0 = subjectParameters.get(0);
 
-    ImmutableList<ProcessingAnnotation> p0Annotations;
+    UnmodifiableList<ProcessingAnnotation> p0Annotations;
     p0Annotations = p0.getDirectlyPresentAnnotations();
 
     assertEquals(p0Annotations.size(), 0);
@@ -60,10 +60,10 @@ public class ProcessingParameterTest extends AbstractCodeCoreTest {
     ProcessingParameter p1;
     p1 = subjectParameters.get(1);
 
-    ImmutableList<ProcessingAnnotation> p1Annotations;
+    UnmodifiableList<ProcessingAnnotation> p1Annotations;
     p1Annotations = p1.getDirectlyPresentAnnotations();
 
-    ImmutableList<String> p1Values;
+    UnmodifiableList<String> p1Values;
     p1Values = map(p1Annotations, getDirectlyPresentAnnotationsFunction());
 
     assertEquals(p1Values.size(), 2);
@@ -97,7 +97,7 @@ public class ProcessingParameterTest extends AbstractCodeCoreTest {
         ProcessingMethod subjectMethod;
         subjectMethod = getDeclaredMethod(type, "subject");
 
-        ImmutableList<ProcessingParameter> parameters;
+        UnmodifiableList<ProcessingParameter> parameters;
         parameters = subjectMethod.getParameters();
 
         result.addAll(parameters);
@@ -118,8 +118,8 @@ public class ProcessingParameterTest extends AbstractCodeCoreTest {
 
     assertTrue(compilation.wasSuccessful());
 
-    ImmutableList<ProcessingParameter> subject;
-    subject = result.toImmutableList();
+    UnmodifiableList<ProcessingParameter> subject;
+    subject = result.toUnmodifiableList();
 
     assertEquals(subject.size(), 2);
 
@@ -157,10 +157,10 @@ public class ProcessingParameterTest extends AbstractCodeCoreTest {
     GetName getName;
     getName = new GetName();
 
-    ImmutableList<ProcessingParameter> subjectParameters;
+    UnmodifiableList<ProcessingParameter> subjectParameters;
     subjectParameters = getSubjectParameters(GetNameSubject.class);
 
-    ImmutableList<String> subjectNames;
+    UnmodifiableList<String> subjectNames;
     subjectNames = map(subjectParameters, getName);
 
     assertEquals(subjectNames.size(), 3);
@@ -168,10 +168,10 @@ public class ProcessingParameterTest extends AbstractCodeCoreTest {
     assertEquals(subjectNames.get(1), "b");
     assertEquals(subjectNames.get(2), "c");
 
-    ImmutableList<ProcessingParameter> abstractParameters;
+    UnmodifiableList<ProcessingParameter> abstractParameters;
     abstractParameters = getSubjectParameters(GetNameAbstract.class);
 
-    ImmutableList<String> abstractNames;
+    UnmodifiableList<String> abstractNames;
     abstractNames = map(abstractParameters, getName);
 
     assertEquals(abstractNames.size(), 3);
@@ -182,7 +182,7 @@ public class ProcessingParameterTest extends AbstractCodeCoreTest {
 
   @Test
   public void getType() {
-    ImmutableList<ProcessingParameter> subjectParameters;
+    UnmodifiableList<ProcessingParameter> subjectParameters;
     subjectParameters = getSubjectParameters(GetTypeSubject.class);
 
     MutableList<NamedType> result;
@@ -209,7 +209,7 @@ public class ProcessingParameterTest extends AbstractCodeCoreTest {
 
   @Test
   public void hasName() {
-    ImmutableList<ProcessingParameter> subjectParameters;
+    UnmodifiableList<ProcessingParameter> subjectParameters;
     subjectParameters = getSubjectParameters(GetNameSubject.class);
 
     ProcessingParameter a;
@@ -237,7 +237,7 @@ public class ProcessingParameterTest extends AbstractCodeCoreTest {
           + "Also that multiple calls return the exact same instance."
   )
   public void toIdentifier() {
-    ImmutableList<ProcessingParameter> subjectParameters;
+    UnmodifiableList<ProcessingParameter> subjectParameters;
     subjectParameters = getSubjectParameters(ToIdentifierSubject.class);
 
     ProcessingParameter a = subjectParameters.get(0);
@@ -259,7 +259,7 @@ public class ProcessingParameterTest extends AbstractCodeCoreTest {
 
   @Test
   public void toParameterCode() {
-    ImmutableList<ProcessingParameter> subjectParameters;
+    UnmodifiableList<ProcessingParameter> subjectParameters;
     subjectParameters = getSubjectParameters(ToParameterCodeSubject.class);
 
     ProcessingParameter p0;
@@ -295,14 +295,14 @@ public class ProcessingParameterTest extends AbstractCodeCoreTest {
     return value.getString();
   }
 
-  private ImmutableList<ProcessingParameter> getSubjectParameters(Class<?> type) {
+  private UnmodifiableList<ProcessingParameter> getSubjectParameters(Class<?> type) {
     ProcessingMethod subject;
     subject = getDeclaredMethod(type, "subject");
 
     return subject.getParameters();
   }
 
-  private <F, T> ImmutableList<T> map(List<F> list, Function<F, T> f) {
+  private <F, T> UnmodifiableList<T> map(List<F> list, Function<F, T> f) {
     MutableList<T> result;
     result = new MutableList<>();
 
@@ -312,7 +312,7 @@ public class ProcessingParameterTest extends AbstractCodeCoreTest {
       result.add(apply);
     }
 
-    return result.toImmutableList();
+    return result.toUnmodifiableList();
   }
 
   @Retention(RetentionPolicy.RUNTIME)

@@ -20,7 +20,7 @@ import br.com.objectos.code.java.type.NamedType;
 import br.com.objectos.code.util.AbstractCodeJavaTest;
 import java.util.Arrays;
 import java.util.Collections;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
 
@@ -219,7 +219,7 @@ public class MethodInvocationTest extends AbstractCodeJavaTest
     );
 
     Iterable<? extends NamedType> types;
-    types = ImmutableList.of(tvar("E1"), tvar("E2"), tvar("E3"), tvar("E4"));
+    types = UnmodifiableList.of(tvar("E1"), tvar("E2"), tvar("E3"), tvar("E4"));
 
     test(
         invoke(t(Collections.class), hint(types), "foo"),

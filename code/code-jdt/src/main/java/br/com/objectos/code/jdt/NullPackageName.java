@@ -15,7 +15,7 @@
  */
 package br.com.objectos.code.jdt;
 
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 
 class NullPackageName extends PackageName {
 
@@ -23,7 +23,7 @@ class NullPackageName extends PackageName {
   public PackageName append(char[] name) {
     String theName = new String(name);
 
-    ImmutableList<String> list = ImmutableList.of(theName);
+    UnmodifiableList<String> list = UnmodifiableList.of(theName);
 
     return new StandardPackageName(list);
   }

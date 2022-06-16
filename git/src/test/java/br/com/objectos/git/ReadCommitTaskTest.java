@@ -21,7 +21,7 @@ import br.com.objectos.concurrent.Concurrent;
 import br.com.objectos.fs.Directory;
 import java.io.IOException;
 import java.util.concurrent.ExecutionException;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import org.testng.annotations.Test;
 
 public class ReadCommitTaskTest extends AbstractGitTest {
@@ -56,7 +56,7 @@ public class ReadCommitTaskTest extends AbstractGitTest {
       )
     );
 
-    ImmutableList<ObjectId> parents;
+    UnmodifiableList<ObjectId> parents;
     parents = result.getParents();
 
     assertEquals(parents.size(), 0);
@@ -95,7 +95,7 @@ public class ReadCommitTaskTest extends AbstractGitTest {
       )
     );
 
-    ImmutableList<ObjectId> parents;
+    UnmodifiableList<ObjectId> parents;
     parents = result.getParents();
 
     assertEquals(parents.size(), 1);
@@ -138,7 +138,7 @@ public class ReadCommitTaskTest extends AbstractGitTest {
       )
     );
 
-    ImmutableList<ObjectId> parents;
+    UnmodifiableList<ObjectId> parents;
     parents = result.getParents();
 
     assertEquals(parents.size(), 1);

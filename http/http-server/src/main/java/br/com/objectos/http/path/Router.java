@@ -25,16 +25,16 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import objectos.lang.Check;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.MutableList;
 
 public class Router {
 
-  private static final Router EMPTY = new Router(ImmutableList.of());
+  private static final Router EMPTY = new Router(UnmodifiableList.of());
 
-  private final ImmutableList<Route> routes;
+  private final UnmodifiableList<Route> routes;
 
-  private Router(ImmutableList<Route> routes) {
+  private Router(UnmodifiableList<Route> routes) {
     this.routes = routes;
   }
 
@@ -50,7 +50,7 @@ public class Router {
   }
 
   static Router of(Route... routes) {
-    return new Router(ImmutableList.copyOf(routes));
+    return new Router(UnmodifiableList.copyOf(routes));
   }
 
   @Override
@@ -88,7 +88,7 @@ public class Router {
         : resolvePath(parserList, request);
   }
 
-  final ImmutableList<Route> routes() {
+  final UnmodifiableList<Route> routes() {
     return routes;
   }
 
@@ -179,8 +179,8 @@ public class Router {
       return route;
     }
 
-    final ImmutableList<Route> routes() {
-      return routes.toImmutableList();
+    final UnmodifiableList<Route> routes() {
+      return routes.toUnmodifiableList();
     }
 
   }

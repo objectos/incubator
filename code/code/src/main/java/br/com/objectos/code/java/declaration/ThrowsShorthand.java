@@ -16,13 +16,13 @@
 package br.com.objectos.code.java.declaration;
 
 import br.com.objectos.code.java.type.NamedClass;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 
 public class ThrowsShorthand implements MethodCodeElement {
 
-  private final ImmutableList<? extends ThrowsElement> elements;
+  private final UnmodifiableList<? extends ThrowsElement> elements;
 
-  private ThrowsShorthand(ImmutableList<? extends ThrowsElement> elements) {
+  private ThrowsShorthand(UnmodifiableList<? extends ThrowsElement> elements) {
     this.elements = elements;
   }
 
@@ -30,22 +30,22 @@ public class ThrowsShorthand implements MethodCodeElement {
     ThrowsElement e;
     e = NamedClass.ofWithNullMessage(throwable, "throwable == null");
 
-    ImmutableList<ThrowsElement> set;
-    set = ImmutableList.of(e);
+    UnmodifiableList<ThrowsElement> set;
+    set = UnmodifiableList.of(e);
 
     return new ThrowsShorthand(set);
   }
 
   public static ThrowsShorthand _throws(Iterable<? extends ThrowsElement> elements) {
-    ImmutableList<? extends ThrowsElement> set;
-    set = ImmutableList.copyOf(elements);
+    UnmodifiableList<? extends ThrowsElement> set;
+    set = UnmodifiableList.copyOf(elements);
 
     return new ThrowsShorthand(set);
   }
 
   public static ThrowsShorthand _throws(ThrowsElement throwable) {
-    ImmutableList<ThrowsElement> set;
-    set = ImmutableList.of(throwable);
+    UnmodifiableList<ThrowsElement> set;
+    set = UnmodifiableList.of(throwable);
 
     return new ThrowsShorthand(set);
   }
@@ -53,8 +53,8 @@ public class ThrowsShorthand implements MethodCodeElement {
   public static ThrowsShorthand _throws(
       ThrowsElement t1,
       ThrowsElement t2) {
-    ImmutableList<ThrowsElement> set;
-    set = ImmutableList.of(t1, t2);
+    UnmodifiableList<ThrowsElement> set;
+    set = UnmodifiableList.of(t1, t2);
 
     return new ThrowsShorthand(set);
   }
@@ -63,8 +63,8 @@ public class ThrowsShorthand implements MethodCodeElement {
       ThrowsElement t1,
       ThrowsElement t2,
       ThrowsElement t3) {
-    ImmutableList<ThrowsElement> set;
-    set = ImmutableList.of(t1, t2, t3);
+    UnmodifiableList<ThrowsElement> set;
+    set = UnmodifiableList.of(t1, t2, t3);
 
     return new ThrowsShorthand(set);
   }

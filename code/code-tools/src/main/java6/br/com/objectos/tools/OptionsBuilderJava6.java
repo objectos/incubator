@@ -16,7 +16,7 @@
 package br.com.objectos.tools;
 
 import br.com.objectos.latest.Concrete;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 
 @Concrete.Bridge
 abstract class OptionsBuilderJava6 extends AbstractOptionsBuilder {
@@ -25,8 +25,8 @@ abstract class OptionsBuilderJava6 extends AbstractOptionsBuilder {
   OptionsBuilderJava6() {}
 
   @Override
-  public final ImmutableList<String> build() {
-    return ImmutableList.of();
+  public final UnmodifiableList<String> build() {
+    return UnmodifiableList.of();
   }
 
   @Override

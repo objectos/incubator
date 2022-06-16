@@ -57,7 +57,7 @@ import br.com.objectos.css.sheet.ex.TestCase33;
 import br.com.objectos.css.sheet.ex.TestCase34;
 import br.com.objectos.css.sheet.ex.TestCase35;
 import br.com.objectos.css.sheet.ex.TransformTestCase;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import org.testng.annotations.Test;
 
 public class CompiledStyleSheetTest {
@@ -696,15 +696,15 @@ public class CompiledStyleSheetTest {
   }
 
   private String minified(String... expected) {
-    ImmutableList<String> parts;
-    parts = ImmutableList.copyOf(expected);
+    UnmodifiableList<String> parts;
+    parts = UnmodifiableList.copyOf(expected);
 
     return parts.join();
   }
 
   private String pretty(String... expected) {
-    ImmutableList<String> lines;
-    lines = ImmutableList.copyOf(expected);
+    UnmodifiableList<String> lines;
+    lines = UnmodifiableList.copyOf(expected);
 
     return lines.join("\n");
   }

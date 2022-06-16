@@ -29,7 +29,7 @@ import java.util.Arrays;
 import java.util.concurrent.ExecutionException;
 import objectos.lang.Check;
 import objectos.util.ByteArrays;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.MutableList;
 
 final class TestingGit {
@@ -349,7 +349,7 @@ final class TestingGit {
     }
   }
 
-  public static ImmutableList<String> fetchLogSource(
+  public static UnmodifiableList<String> fetchLogSource(
       Repository repository) throws GitStubException, IOException, ExecutionException {
     MaybeObjectId maybe;
     maybe = resolve(repository, Git.MASTER);
@@ -389,7 +389,7 @@ final class TestingGit {
 
       list.add(source);
 
-      ImmutableList<ObjectId> parents;
+      UnmodifiableList<ObjectId> parents;
       parents = commit.getParents();
 
       if (!parents.isEmpty()) {
@@ -397,7 +397,7 @@ final class TestingGit {
       }
     }
 
-    return list.toImmutableList();
+    return list.toUnmodifiableList();
   }
 
   public static Directory getDirectory(String directoryName) throws IOException {

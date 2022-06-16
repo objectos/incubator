@@ -23,7 +23,7 @@ import java.net.URI;
 import java.nio.file.Path;
 import java.util.Optional;
 import java.util.Set;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.ImmutableMap;
 import objectos.util.MutableList;
 import objectos.util.MutableMap;
@@ -104,7 +104,7 @@ abstract class OptionsBuilderJava11 extends AbstractOptionsBuilder {
   }
 
   @Override
-  public final ImmutableList<String> build() {
+  public final UnmodifiableList<String> build() {
     MutableList<String> result;
     result = new MutableList<>();
 
@@ -116,7 +116,7 @@ abstract class OptionsBuilderJava11 extends AbstractOptionsBuilder {
 
     doPatchModules(result);
 
-    return result.toImmutableList();
+    return result.toUnmodifiableList();
   }
 
   @Override
@@ -184,7 +184,7 @@ abstract class OptionsBuilderJava11 extends AbstractOptionsBuilder {
 
   private static class Config {
 
-    final ImmutableList<String> addModules;
+    final UnmodifiableList<String> addModules;
 
     final ImmutableMap<String, Path> modulePaths;
 
@@ -228,8 +228,8 @@ abstract class OptionsBuilderJava11 extends AbstractOptionsBuilder {
       addModules.add(name);
     }
 
-    final ImmutableList<String> getAddModules() {
-      return addModules.toImmutableList();
+    final UnmodifiableList<String> getAddModules() {
+      return addModules.toUnmodifiableList();
     }
 
     final ImmutableMap<String, Path> getModulePaths() {

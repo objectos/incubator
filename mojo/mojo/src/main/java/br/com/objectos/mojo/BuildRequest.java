@@ -24,7 +24,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
 import objectos.lang.Check;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import org.apache.maven.execution.MavenExecutionRequest;
 import org.apache.maven.settings.Mirror;
 import org.codehaus.plexus.util.Os;
@@ -61,7 +61,7 @@ final class BuildRequest implements Request {
   }
 
   @Override
-  public final void setGoals(ImmutableList<String> goals) {
+  public final void setGoals(UnmodifiableList<String> goals) {
     Check.notNull(goals, "goals == null");
 
     this.goals.clear();

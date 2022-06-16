@@ -17,7 +17,7 @@ package br.com.objectos.logger;
 
 import objectos.lang.Check;
 import objectos.lang.NoteSink;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.MutableList;
 
 /**
@@ -78,8 +78,8 @@ public final class BootstrapLogger extends AbstractConfigurableLogger {
   public final NoteSink replace(NoteSink logger) {
     Check.notNull(logger, "logger == null");
 
-    ImmutableList<WriteJobLog> list;
-    list = logs.toImmutableList();
+    UnmodifiableList<WriteJobLog> list;
+    list = logs.toUnmodifiableList();
 
     for (int i = 0; i < list.size(); i++) {
       WriteJobLog log;

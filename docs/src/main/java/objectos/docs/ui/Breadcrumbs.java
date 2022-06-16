@@ -18,11 +18,11 @@ package objectos.docs.ui;
 import br.com.objectos.html.spi.type.OlValue;
 import objectos.docs.style.BreadcrumbCss;
 import objectos.ssg.SiteFragment;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 
 public final class Breadcrumbs extends SiteFragment {
 
-  private ImmutableList<DocsPage> trail;
+  private UnmodifiableList<DocsPage> trail;
 
   @Override
   protected final void definition() {

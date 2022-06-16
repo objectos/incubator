@@ -15,7 +15,7 @@
  */
 package br.com.objectos.code.jdt;
 
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.MutableList;
 import org.eclipse.jdt.internal.compiler.env.NameEnvironmentAnswer;
 
@@ -40,12 +40,12 @@ abstract class PackageName {
       nameList.add(new String(cs));
     }
 
-    return new StandardPackageName(nameList.toImmutableList());
+    return new StandardPackageName(nameList.toUnmodifiableList());
   }
 
   public static PackageName ofString(String packageName) {
     String[] parts = packageName.split("\\.");
-    return new StandardPackageName(ImmutableList.copyOf(parts));
+    return new StandardPackageName(UnmodifiableList.copyOf(parts));
   }
 
   public abstract PackageName append(char[] name);

@@ -17,7 +17,7 @@ import br.com.objectos.code.java.type.NamedTypeVariable;
 import br.com.objectos.code.util.AbstractCodeJavaTest;
 import java.io.IOException;
 import java.util.concurrent.ExecutionException;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import org.testng.annotations.Test;
 
 public class MethodCodeBuilderTest extends AbstractCodeJavaTest {
@@ -56,7 +56,7 @@ public class MethodCodeBuilderTest extends AbstractCodeJavaTest {
     );
     test(
         MethodCode.builder()
-            .addModifiers(ImmutableList.of(PUBLIC, FINAL))
+            .addModifiers(UnmodifiableList.of(PUBLIC, FINAL))
             .build(),
         "public final void unnamed();"
     );

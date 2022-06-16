@@ -21,7 +21,7 @@ import br.com.objectos.fs.Directory;
 import java.io.IOException;
 import objectos.lang.Check;
 import objectos.lang.Level;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.MutableList;
 
 /**
@@ -205,8 +205,8 @@ public final class StorageLogger extends AbstractConfigurableLogger {
     }
 
     final StorageLogger build() throws IOException {
-      ImmutableList<LogListener> list;
-      list = listeners.toImmutableList();
+      UnmodifiableList<LogListener> list;
+      list = listeners.toUnmodifiableList();
 
       WriteJob writeJob;
       writeJob = storage.createWriteJob(ioWorker, list);

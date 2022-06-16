@@ -23,13 +23,13 @@ import br.com.objectos.code.java.declaration.MethodCode;
 import br.com.objectos.code.java.declaration.Modifiers;
 import br.com.objectos.code.java.expression.MethodInvocation;
 import br.com.objectos.code.java.type.NamedClass;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 
 class PropertyClass {
 
   final NamedClass className;
-  final ImmutableList<PropertyAtMedia> queries;
-  final ImmutableList<PropertyStyle> styles;
+  final UnmodifiableList<PropertyAtMedia> queries;
+  final UnmodifiableList<PropertyStyle> styles;
 
   PropertyClass(Builder builder) {
     className = builder.className();
@@ -123,9 +123,9 @@ class PropertyClass {
 
     abstract NamedClass className();
 
-    abstract ImmutableList<PropertyAtMedia> queries();
+    abstract UnmodifiableList<PropertyAtMedia> queries();
 
-    abstract ImmutableList<PropertyStyle> styles();
+    abstract UnmodifiableList<PropertyStyle> styles();
 
   }
 

@@ -38,7 +38,7 @@ import java.util.Arrays;
 import objectos.lang.Check;
 import objectos.util.CharArrays;
 import objectos.util.DoubleArrays;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.IntArrays;
 import objectos.util.MutableList;
 
@@ -324,7 +324,7 @@ public class StyleSheetDsl implements Creator, Marker {
     addProto(ByteProto.SELECTOR_PSEUDO_ELEMENT_OBJ);
   }
 
-  public void addRule(ImmutableList<RuleElement> elements) {
+  public void addRule(UnmodifiableList<RuleElement> elements) {
     Check.notNull(elements, "elements == null");
 
     addProto(ByteProto.RULE_END);

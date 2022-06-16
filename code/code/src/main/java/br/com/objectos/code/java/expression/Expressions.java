@@ -110,7 +110,7 @@ public class Expressions {
 
     list.addAllIterable(elements);
 
-    return ArrayInitializerImpl.a0(list.toImmutableList());
+    return ArrayInitializerImpl.a0(list.toUnmodifiableList());
   }
 
   public static ArrayInitializer a(

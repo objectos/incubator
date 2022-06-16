@@ -22,7 +22,7 @@ import br.com.objectos.concurrent.IoWorker;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.ReadableByteChannel;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.MutableList;
 
 final class StorageV1ReadJob implements IoTask, ReadJob {
@@ -127,7 +127,7 @@ final class StorageV1ReadJob implements IoTask, ReadJob {
 
   private int iterLength;
 
-  private final ImmutableList<LogListener> listeners;
+  private final UnmodifiableList<LogListener> listeners;
 
   private int listenersIndex;
 
@@ -167,7 +167,7 @@ final class StorageV1ReadJob implements IoTask, ReadJob {
 
   StorageV1ReadJob(ReadableByteChannel channel,
                    IoWorker ioWorker,
-                   ImmutableList<LogListener> listeners) {
+                   UnmodifiableList<LogListener> listeners) {
     this.channel = channel;
     this.ioWorker = ioWorker;
     this.listeners = listeners;

@@ -21,7 +21,7 @@ import br.com.objectos.core.io.Resource;
 import br.com.objectos.http.media.ImageType;
 import br.com.objectos.http.media.TextType;
 import java.io.IOException;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import org.testng.annotations.Test;
 
 public class SiteTest {
@@ -361,7 +361,7 @@ public class SiteTest {
   }
 
   protected void testPathList(TestableSiteWriter w, String... paths) {
-    assertEquals(w.pathList(), ImmutableList.copyOf(paths));
+    assertEquals(w.pathList(), UnmodifiableList.copyOf(paths));
   }
 
   private TestableSiteWriter gen(Site site) throws IOException {

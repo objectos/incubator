@@ -20,13 +20,13 @@ import static br.com.objectos.code.java.element.NewLine.nextLine;
 import br.com.objectos.code.java.element.AbstractCodeElement;
 import br.com.objectos.code.java.io.CodeWriter;
 import br.com.objectos.code.java.io.Section;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 
 public abstract class SwitchElement extends AbstractCodeElement {
 
-  private final ImmutableList<BlockStatement> statements;
+  private final UnmodifiableList<BlockStatement> statements;
 
-  SwitchElement(ImmutableList<BlockStatement> statements) {
+  SwitchElement(UnmodifiableList<BlockStatement> statements) {
     this.statements = statements;
   }
 

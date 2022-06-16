@@ -25,7 +25,7 @@ import br.com.objectos.code.java.statement.Semicolon;
 import br.com.objectos.code.java.statement.StatementOrBlockBuilder;
 import br.com.objectos.code.java.statement.Statements;
 import br.com.objectos.code.java.statement.TryStatement;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 
 final class AssignmentImpl
     // extends AbstractImmutableCodeElement instead of
@@ -38,7 +38,7 @@ final class AssignmentImpl
     super(elements);
   }
 
-  private AssignmentImpl(ImmutableList<CodeElement> elements) {
+  private AssignmentImpl(UnmodifiableList<CodeElement> elements) {
     super(elements);
   }
 

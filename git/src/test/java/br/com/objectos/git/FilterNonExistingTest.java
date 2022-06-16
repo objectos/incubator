@@ -26,7 +26,7 @@ import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.ResolvedPath;
 import java.io.IOException;
 import java.util.concurrent.ExecutionException;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.ImmutableSet;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
@@ -89,8 +89,8 @@ public class FilterNonExistingTest extends AbstractGitTest {
 
     assertSame(input, set);
 
-    ImmutableList<ObjectId> list;
-    list = ImmutableList.copyOf(set);
+    UnmodifiableList<ObjectId> list;
+    list = UnmodifiableList.copyOf(set);
 
     job.executeObjectStart(list.get(0));
 

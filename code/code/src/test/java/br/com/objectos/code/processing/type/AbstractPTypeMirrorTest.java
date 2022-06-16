@@ -11,7 +11,7 @@ import br.com.objectos.code.model.element.ProcessingMethod;
 import br.com.objectos.code.model.element.ProcessingType;
 import br.com.objectos.code.util.AbstractCodeCoreTest;
 import java.util.NoSuchElementException;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 
 public abstract class AbstractPTypeMirrorTest extends AbstractCodeCoreTest {
 
@@ -19,7 +19,7 @@ public abstract class AbstractPTypeMirrorTest extends AbstractCodeCoreTest {
     ProcessingType processingType;
     processingType = query(type);
 
-    ImmutableList<ProcessingMethod> methods;
+    UnmodifiableList<ProcessingMethod> methods;
     methods = processingType.getDeclaredOrInheritedMethods();
 
     for (int i = 0; i < methods.size(); i++) {

@@ -15,19 +15,19 @@
  */
 package br.com.objectos.code.java.declaration;
 
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 
 public final class InterfaceModifierSet extends ElementModifierSet {
 
   private static final InterfaceModifierSet EMPTY = new InterfaceModifierSet(
-      ImmutableList.<Modifier> of()
+      UnmodifiableList.<Modifier> of()
   );
 
   private InterfaceModifierSet(Builder builder) {
     super(builder);
   }
 
-  private InterfaceModifierSet(ImmutableList<Modifier> values) {
+  private InterfaceModifierSet(UnmodifiableList<Modifier> values) {
     super(values);
   }
 

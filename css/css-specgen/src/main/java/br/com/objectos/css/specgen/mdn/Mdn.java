@@ -28,7 +28,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.MutableList;
 
 public class Mdn {
@@ -46,7 +46,7 @@ public class Mdn {
 
     Resource properties = Resource.getResource("mdn-properties.txt");
 
-    ImmutableList<String> lines = Read.lines(properties, Charsets.utf8());
+    UnmodifiableList<String> lines = Read.lines(properties, Charsets.utf8());
 
     for (String propertyLine : lines) {
       if (isNotEmpty(propertyLine)) {
@@ -87,12 +87,12 @@ public class Mdn {
     );
   }
 
-  private static ImmutableList<ValueType> loadValueTypes(String property) throws IOException {
+  private static UnmodifiableList<ValueType> loadValueTypes(String property) throws IOException {
     MutableList<ValueType> types = new MutableList<>();
 
     Resource resource = Resource.getResource("mdn/" + property);
 
-    ImmutableList<String> lines = Read.lines(resource, Charsets.utf8());
+    UnmodifiableList<String> lines = Read.lines(resource, Charsets.utf8());
 
     for (String line : lines) {
       if (isNotEmpty(line)) {
@@ -102,7 +102,7 @@ public class Mdn {
       }
     }
 
-    return types.toImmutableList();
+    return types.toUnmodifiableList();
   }
 
   private void execute() throws IOException {

@@ -23,7 +23,7 @@ import objectos.ssg.SiteDirectory;
 import objectos.ssg.SiteFragment;
 import objectos.ssg.SitePage;
 import objectos.ssg.SiteVisitor;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 
 public final class Pages implements SiteVisitor {
 
@@ -31,7 +31,7 @@ public final class Pages implements SiteVisitor {
 
   private final Map<DocsPage, DocsPage> previousPages = new IdentityHashMap<>();
 
-  private final Map<DocsPage, ImmutableList<DocsPage>> trails = new IdentityHashMap<>();
+  private final Map<DocsPage, UnmodifiableList<DocsPage>> trails = new IdentityHashMap<>();
 
   private final Deque<DocsPage> trailBuilder = new ArrayDeque<>();
 
@@ -54,7 +54,7 @@ public final class Pages implements SiteVisitor {
     trailBuilder.removeLast();
   }
 
-  public final ImmutableList<DocsPage> trail(DocsPage page) {
+  public final UnmodifiableList<DocsPage> trail(DocsPage page) {
     return trails.get(page);
   }
 
@@ -102,8 +102,8 @@ public final class Pages implements SiteVisitor {
 
     trailBuilder.add(next);
 
-    ImmutableList<DocsPage> trail;
-    trail = ImmutableList.copyOf(trailBuilder);
+    UnmodifiableList<DocsPage> trail;
+    trail = UnmodifiableList.copyOf(trailBuilder);
 
     trails.put(next, trail);
 

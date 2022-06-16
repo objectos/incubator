@@ -17,7 +17,7 @@ package br.com.objectos.code.java.io;
 
 import br.com.objectos.code.java.declaration.BodyElement;
 import java.util.List;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 
 class TailFormattingAction extends FormattingAction {
 
@@ -59,7 +59,7 @@ class TailFormattingAction extends FormattingAction {
 
     @Override
     public final List<BodyElement> stream() {
-      return ImmutableList.of();
+      return UnmodifiableList.of();
     }
 
   }

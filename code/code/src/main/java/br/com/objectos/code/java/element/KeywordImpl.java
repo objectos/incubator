@@ -23,7 +23,7 @@ import br.com.objectos.code.java.expression.MethodReferenceReferenceExpression;
 import br.com.objectos.code.java.expression.MultiplicativeExpression;
 import br.com.objectos.code.java.expression.PostfixExpression;
 import br.com.objectos.code.java.expression.RelationalExpression;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 
 final class KeywordImpl extends AbstractDefaultImmutableCodeElement
     implements Keyword {
@@ -32,7 +32,7 @@ final class KeywordImpl extends AbstractDefaultImmutableCodeElement
     super(elements);
   }
 
-  private KeywordImpl(ImmutableList<CodeElement> elements) {
+  private KeywordImpl(UnmodifiableList<CodeElement> elements) {
     super(elements);
   }
 

@@ -21,12 +21,12 @@ import br.com.objectos.code.java.element.Keywords;
 import br.com.objectos.code.java.expression.Argument;
 import java.util.Arrays;
 import objectos.lang.Check;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 
 public class ThisConstructorInvocation extends AbstractConstructorInvocation {
 
   private static final ThisConstructorInvocation EMPTY = _this0(
-      ImmutableList.<Argument> of()
+      UnmodifiableList.<Argument> of()
   );
 
   private ThisConstructorInvocation(CodeElement... elements) {
@@ -45,7 +45,7 @@ public class ThisConstructorInvocation extends AbstractConstructorInvocation {
   }
 
   public static ThisConstructorInvocation _this(Argument... arguments) {
-    return _this0(ImmutableList.copyOf(arguments));
+    return _this0(UnmodifiableList.copyOf(arguments));
   }
 
   public static ThisConstructorInvocation _this(

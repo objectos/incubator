@@ -37,7 +37,7 @@ import java.lang.annotation.Annotation;
 import java.util.Set;
 import javax.lang.model.element.ExecutableElement;
 import objectos.lang.Check;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.MutableList;
 
 public final class MethodCode
@@ -47,14 +47,14 @@ public final class MethodCode
     EnumBodyElement,
     InterfaceBodyElement {
 
-  private final ImmutableList<AnnotationCode> annotations;
+  private final UnmodifiableList<AnnotationCode> annotations;
   private final Block block;
   private final MethodModifierSet modifiers;
   private final String name;
-  private final ImmutableList<ParameterCode> parameters;
+  private final UnmodifiableList<ParameterCode> parameters;
   private final NamedType returnType;
-  private final ImmutableList<NamedType> thrownTypes;
-  private final ImmutableList<NamedTypeParameter> typeParameters;
+  private final UnmodifiableList<NamedType> thrownTypes;
+  private final UnmodifiableList<NamedTypeParameter> typeParameters;
 
   private MethodCode(Builder builder) {
     annotations = builder.getAnnotations();
@@ -536,36 +536,36 @@ public final class MethodCode
       return statements.isEmpty() ? block : Block.block(statements);
     }
 
-    final ImmutableList<AnnotationCode> getAnnotations() {
-      return annotations.toImmutableList();
+    final UnmodifiableList<AnnotationCode> getAnnotations() {
+      return annotations.toUnmodifiableList();
     }
 
     final MethodModifierSet getModifiers() {
       return modifiers.build();
     }
 
-    final ImmutableList<ParameterCode> getParameters() {
-      return parameters.toImmutableList();
+    final UnmodifiableList<ParameterCode> getParameters() {
+      return parameters.toUnmodifiableList();
     }
 
     final NamedType getReturnType() {
       return returnType;
     }
 
-    final ImmutableList<NamedType> getThrownTypes() {
-      return thrownTypes.toImmutableList();
+    final UnmodifiableList<NamedType> getThrownTypes() {
+      return thrownTypes.toUnmodifiableList();
     }
 
-    final ImmutableList<NamedTypeParameter> getTypeParameters() {
-      return typeParameters.toImmutableList();
+    final UnmodifiableList<NamedTypeParameter> getTypeParameters() {
+      return typeParameters.toUnmodifiableList();
     }
 
     final String name() {
       return name;
     }
 
-    final ImmutableList<ParameterCode> parameters() {
-      return parameters.toImmutableList();
+    final UnmodifiableList<ParameterCode> parameters() {
+      return parameters.toUnmodifiableList();
     }
 
     final Builder uncheckedAddModifier(MethodModifier modifier) {

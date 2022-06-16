@@ -17,7 +17,7 @@ package br.com.objectos.html.tmpl;
 
 import br.com.objectos.html.attribute.AttributeName;
 import br.com.objectos.html.element.ElementName;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 
 public class SimpleCompiledTemplateVisitor implements CompiledTemplateVisitor {
 
@@ -25,7 +25,7 @@ public class SimpleCompiledTemplateVisitor implements CompiledTemplateVisitor {
   public void visitAttribute(AttributeName name) {}
 
   @Override
-  public void visitAttribute(AttributeName name, ImmutableList<String> values) {}
+  public void visitAttribute(AttributeName name, UnmodifiableList<String> values) {}
 
   @Override
   public void visitAttribute(AttributeName name, String value) {}

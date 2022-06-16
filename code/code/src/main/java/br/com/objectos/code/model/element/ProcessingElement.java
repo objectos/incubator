@@ -36,7 +36,7 @@ import javax.tools.Diagnostic.Kind;
 import javax.tools.FileObject;
 import javax.tools.StandardLocation;
 import objectos.lang.Check;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.ImmutableSet;
 import objectos.util.MutableList;
 import objectos.util.MutableSet;
@@ -170,7 +170,7 @@ public abstract class ProcessingElement<E extends Element>
     return getModifiers().join(" ");
   }
 
-  final ImmutableList<NamedTypeParameter>
+  final UnmodifiableList<NamedTypeParameter>
       toNamedTypeParameter(List<? extends TypeParameterElement> elements) {
     MutableList<NamedTypeParameter> result;
     result = new MutableList<>();
@@ -185,7 +185,7 @@ public abstract class ProcessingElement<E extends Element>
       result.add(named);
     }
 
-    return result.toImmutableList();
+    return result.toUnmodifiableList();
   }
 
   private AccessLevel getAccessLevel0() {

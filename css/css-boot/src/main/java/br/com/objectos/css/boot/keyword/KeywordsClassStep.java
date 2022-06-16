@@ -53,7 +53,7 @@ import br.com.objectos.css.boot.spec.Ids;
 import br.com.objectos.css.boot.spec.Step;
 import br.com.objectos.css.boot.spec.StepAdapter;
 import br.com.objectos.css.boot.spec.Types;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.MutableList;
 
 public class KeywordsClassStep extends Step {
@@ -96,8 +96,8 @@ public class KeywordsClassStep extends Step {
 
     NamedArray implArray = implName.toNamedArray();
 
-    ImmutableList<NamedClass> mapTypeArgs;
-    mapTypeArgs = ImmutableList.of(Types._String, implName);
+    UnmodifiableList<NamedClass> mapTypeArgs;
+    mapTypeArgs = UnmodifiableList.of(Types._String, implName);
 
     NamedClassOrParameterized implGrowableMap;
     implGrowableMap = t(Types._MutableMap, mapTypeArgs);

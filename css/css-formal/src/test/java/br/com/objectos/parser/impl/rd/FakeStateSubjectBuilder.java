@@ -28,7 +28,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.MutableList;
 
 class FakeStateSubjectBuilder {
@@ -36,7 +36,7 @@ class FakeStateSubjectBuilder {
   final List<Symbol> expression = new ArrayList<>();
   final Map<NonTerminal, List<Production>> nonTerminalMap = new HashMap<>();
   Object result;
-  Iterator<Object> source = ImmutableList.of().iterator();
+  Iterator<Object> source = UnmodifiableList.of().iterator();
   final List<Object> tokenList = new ArrayList<>();
   final Deque<Object> valueList = new ArrayDeque<>();
 

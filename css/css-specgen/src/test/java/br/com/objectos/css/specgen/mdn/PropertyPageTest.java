@@ -23,7 +23,7 @@ import br.com.objectos.core.io.Resource;
 import br.com.objectos.css.specgen.spec.Property;
 import br.com.objectos.css.specgen.spec.ValueType;
 import java.io.IOException;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.testng.annotations.Test;
@@ -38,7 +38,7 @@ public class PropertyPageTest {
     assertEquals(p.name(), "background");
     assertEquals(p.formal(), "[ <bg-layer> , ]* <final-bg-layer>");
 
-    ImmutableList<ValueType> vt = p.valueTypes();
+    UnmodifiableList<ValueType> vt = p.valueTypes();
     assertEquals(vt.size(), 47);
 
     ValueType vt0 = vt.get(0);
@@ -61,7 +61,7 @@ public class PropertyPageTest {
         new Property(
             "bottom",
             "<length> | <percentage> | auto",
-            ImmutableList.of()
+            UnmodifiableList.of()
         )
     );
   }

@@ -26,10 +26,10 @@ import java.util.zip.GZIPOutputStream;
 import objectos.lang.Note1;
 import objectos.lang.Note2;
 import objectos.lang.NoteSink;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.MutableList;
 
-final class IncrementalBackup extends AbstractClientJob<ImmutableList<RegularFile>> {
+final class IncrementalBackup extends AbstractClientJob<UnmodifiableList<RegularFile>> {
 
   private static final byte _COPY = 0;
 
@@ -57,7 +57,7 @@ final class IncrementalBackup extends AbstractClientJob<ImmutableList<RegularFil
 
   private String basename;
 
-  private ImmutableList<String> binaryLogs;
+  private UnmodifiableList<String> binaryLogs;
 
   private int binaryLogsIndex;
 
@@ -156,8 +156,8 @@ final class IncrementalBackup extends AbstractClientJob<ImmutableList<RegularFil
   }
 
   @Override
-  final ImmutableList<RegularFile> getResultImpl(
-      IOException exception, ImmutableList<String> stderr, ImmutableList<String> stdout)
+  final UnmodifiableList<RegularFile> getResultImpl(
+      IOException exception, UnmodifiableList<String> stderr, UnmodifiableList<String> stdout)
       throws IOException {
     if (exception == null) {
       long totalTime;
@@ -165,7 +165,7 @@ final class IncrementalBackup extends AbstractClientJob<ImmutableList<RegularFil
 
       logger.send(ESUCCESS, totalTime);
 
-      return result.toImmutableList();
+      return result.toUnmodifiableList();
     }
 
     else {
@@ -190,7 +190,7 @@ final class IncrementalBackup extends AbstractClientJob<ImmutableList<RegularFil
   }
 
   private byte executeFirstLog() {
-    ImmutableList<String> executeStatementResult;
+    UnmodifiableList<String> executeStatementResult;
     executeStatementResult = getSubTaskResult();
 
     if (executeStatementResult.isEmpty()) {
@@ -246,7 +246,7 @@ final class IncrementalBackup extends AbstractClientJob<ImmutableList<RegularFil
   }
 
   private byte executePurge() {
-    ImmutableList<String> masterStatus;
+    UnmodifiableList<String> masterStatus;
     masterStatus = getSubTaskResult();
 
     if (masterStatus.isEmpty()) {

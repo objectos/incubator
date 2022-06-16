@@ -19,17 +19,17 @@ import java.util.List;
 import javax.lang.model.element.AnnotationValue;
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.VariableElement;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.MutableList;
 
 class ProcessingAnnotationValueEnumConstantArray extends ProcessingAnnotationValue {
 
-  private final ImmutableList<ProcessingEnumConstant> value;
+  private final UnmodifiableList<ProcessingEnumConstant> value;
 
   ProcessingAnnotationValueEnumConstantArray(ProcessingAnnotation annotation,
                                              ExecutableElement element,
                                              AnnotationValue annotationValue,
-                                             ImmutableList<ProcessingEnumConstant> value) {
+                                             UnmodifiableList<ProcessingEnumConstant> value) {
     super(annotation, element, annotationValue);
     this.value = value;
   }
@@ -47,7 +47,7 @@ class ProcessingAnnotationValueEnumConstantArray extends ProcessingAnnotationVal
     );
   }
 
-  private static ImmutableList<ProcessingEnumConstant> toEnumConstant(
+  private static UnmodifiableList<ProcessingEnumConstant> toEnumConstant(
       ProcessingAnnotation annotation, List<? extends AnnotationValue> array) {
     MutableList<ProcessingEnumConstant> result;
     result = new MutableList<>();
@@ -65,11 +65,11 @@ class ProcessingAnnotationValueEnumConstantArray extends ProcessingAnnotationVal
       result.add(value);
     }
 
-    return result.toImmutableList();
+    return result.toUnmodifiableList();
   }
 
   @Override
-  public final ImmutableList<ProcessingEnumConstant> getEnumConstantArray() {
+  public final UnmodifiableList<ProcessingEnumConstant> getEnumConstantArray() {
     return value;
   }
 

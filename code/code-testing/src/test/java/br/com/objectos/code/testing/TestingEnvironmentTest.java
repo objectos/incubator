@@ -23,7 +23,7 @@ import br.com.objectos.code.model.element.ProcessingAnnotation;
 import br.com.objectos.code.model.element.ProcessingPackage;
 import br.com.objectos.code.model.element.ProcessingType;
 import objectos.lang.Check;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import org.testng.IHookCallBack;
 import org.testng.IHookable;
 import org.testng.ITestResult;
@@ -51,7 +51,7 @@ public class TestingEnvironmentTest implements IHookable, TestingEnvironment.Boo
     NamedClass expected;
     expected = NamedClass.of(MarkerA.class);
 
-    ImmutableList<ProcessingAnnotation> annotations;
+    UnmodifiableList<ProcessingAnnotation> annotations;
     annotations = ex.getDirectlyPresentAnnotations();
 
     for (int i = 0; i < annotations.size(); i++) {

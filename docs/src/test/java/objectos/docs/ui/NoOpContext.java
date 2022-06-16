@@ -16,7 +16,7 @@
 package objectos.docs.ui;
 
 import objectos.ssg.Site;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 
 class NoOpContext implements Site.Context {
 
@@ -26,7 +26,7 @@ class NoOpContext implements Site.Context {
   }
 
   @Override
-  public <T> ImmutableList<T> getObjectsByType(Class<? extends T> key) {
+  public <T> UnmodifiableList<T> getObjectsByType(Class<? extends T> key) {
     return null;
   }
 

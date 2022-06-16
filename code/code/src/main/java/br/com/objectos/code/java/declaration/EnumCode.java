@@ -28,7 +28,7 @@ import br.com.objectos.code.java.statement.Block;
 import br.com.objectos.code.java.type.NamedClass;
 import br.com.objectos.code.java.type.NamedClassOrParameterized;
 import objectos.lang.Check;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.MutableList;
 
 public final class EnumCode extends AbstractTypeCode {
@@ -336,7 +336,7 @@ public final class EnumCode extends AbstractTypeCode {
       this._implements = _implements;
     }
 
-    final void uncheckedAddEnumConstants(ImmutableList<EnumConstantCode> list) {
+    final void uncheckedAddEnumConstants(UnmodifiableList<EnumConstantCode> list) {
       constantListBuilder.uncheckedAddEnumConstants(list);
     }
 

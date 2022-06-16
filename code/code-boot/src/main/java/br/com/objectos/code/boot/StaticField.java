@@ -30,7 +30,7 @@ import br.com.objectos.code.model.element.ProcessingField;
 import br.com.objectos.code.model.element.ProcessingType;
 import br.com.objectos.code.processing.type.PTypeMirror;
 import objectos.lang.HashCode;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.MutableList;
 
 final class StaticField {
@@ -47,11 +47,11 @@ final class StaticField {
     name = builder.name();
   }
 
-  public static ImmutableList<StaticField> listOf(ProcessingType type) {
+  public static UnmodifiableList<StaticField> listOf(ProcessingType type) {
     MutableList<StaticField> result;
     result = new MutableList<>();
 
-    ImmutableList<ProcessingField> fields;
+    UnmodifiableList<ProcessingField> fields;
     fields = type.getDeclaredOrInheritedFields();
 
     for (int i = 0; i < fields.size(); i++) {
@@ -68,7 +68,7 @@ final class StaticField {
       result.add(staticField);
     }
 
-    return result.toImmutableList();
+    return result.toUnmodifiableList();
   }
 
   public static StaticField ofUnchecked(ProcessingField element) {

@@ -28,7 +28,7 @@ import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.RegularFile;
 import br.com.objectos.fs.testing.TmpDir;
 import java.io.IOException;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import org.testng.annotations.Test;
 
 public class MojoRuntimeTest {
@@ -58,7 +58,7 @@ public class MojoRuntimeTest {
       BuildRequest request;
       request = new BuildRequest();
 
-      request.setGoals(ImmutableList.of("verify"));
+      request.setGoals(UnmodifiableList.of("verify"));
 
       Directory basedir;
       basedir = root.createDirectory("basedir");

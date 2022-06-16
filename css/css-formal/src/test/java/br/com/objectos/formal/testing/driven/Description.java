@@ -19,16 +19,16 @@ import br.com.objectos.formal.testing.Node;
 import br.com.objectos.formal.testing.NodeVisitor;
 import java.util.Arrays;
 import java.util.Iterator;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 
 public class Description implements Node {
 
-  public static final Description EMPTY = new Description(ImmutableList.of());
+  public static final Description EMPTY = new Description(UnmodifiableList.of());
 
-  public final ImmutableList<StepText> textList;
+  public final UnmodifiableList<StepText> textList;
 
   public Description(Iterable<StepText> textList) {
-    this.textList = ImmutableList.copyOf(textList);
+    this.textList = UnmodifiableList.copyOf(textList);
   }
 
   public static Description of(StepText... texts) {

@@ -19,17 +19,17 @@ import br.com.objectos.code.processing.type.PTypeMirror;
 import java.util.List;
 import javax.lang.model.element.AnnotationValue;
 import javax.lang.model.element.ExecutableElement;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.MutableList;
 
 class ProcessingAnnotationValueTypeArray extends ProcessingAnnotationValue {
 
-  private final ImmutableList<PTypeMirror> value;
+  private final UnmodifiableList<PTypeMirror> value;
 
   ProcessingAnnotationValueTypeArray(ProcessingAnnotation annotation,
                                      ExecutableElement element,
                                      AnnotationValue annotationValue,
-                                     ImmutableList<PTypeMirror> value) {
+                                     UnmodifiableList<PTypeMirror> value) {
     super(annotation, element, annotationValue);
     this.value = value;
   }
@@ -47,7 +47,7 @@ class ProcessingAnnotationValueTypeArray extends ProcessingAnnotationValue {
     );
   }
 
-  private static ImmutableList<PTypeMirror> toClassArray(
+  private static UnmodifiableList<PTypeMirror> toClassArray(
       ProcessingAnnotation annotation, List<? extends AnnotationValue> array) {
     MutableList<PTypeMirror> result;
     result = new MutableList<>();
@@ -62,11 +62,11 @@ class ProcessingAnnotationValueTypeArray extends ProcessingAnnotationValue {
       result.add(type);
     }
 
-    return result.toImmutableList();
+    return result.toUnmodifiableList();
   }
 
   @Override
-  public final ImmutableList<PTypeMirror> getTypeArray() {
+  public final UnmodifiableList<PTypeMirror> getTypeArray() {
     return value;
   }
 

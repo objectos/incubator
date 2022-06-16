@@ -22,7 +22,7 @@ import static org.testng.Assert.assertTrue;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -62,7 +62,7 @@ public class ResourceTest {
     Resource resource;
     resource = Resource.getResource(getClass(), "resource0.txt");
 
-    ImmutableList<String> result;
+    UnmodifiableList<String> result;
     result = Read.lines(resource, Charsets.utf8());
 
     assertEquals(result.size(), 2);

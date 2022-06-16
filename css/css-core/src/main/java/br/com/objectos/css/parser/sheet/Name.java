@@ -17,19 +17,19 @@ package br.com.objectos.css.parser.sheet;
 
 import java.util.Iterator;
 import java.util.List;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.MutableList;
 
 class Name {
 
-  private final ImmutableList<String> partList;
+  private final UnmodifiableList<String> partList;
 
-  private Name(ImmutableList<String> partList) {
+  private Name(UnmodifiableList<String> partList) {
     this.partList = partList;
   }
 
   static Name copyOf(List<String> nameList) {
-    return new Name(ImmutableList.copyOf(nameList));
+    return new Name(UnmodifiableList.copyOf(nameList));
   }
 
   static Name fromString(String name) {
@@ -45,7 +45,7 @@ class Name {
       }
     }
     list.add(part.toString());
-    return new Name(list.toImmutableList());
+    return new Name(list.toUnmodifiableList());
   }
 
   String interpolate() {

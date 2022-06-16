@@ -17,7 +17,7 @@ package br.com.objectos.code.java.expression;
 
 import br.com.objectos.code.java.element.AbstractDefaultImmutableCodeElement;
 import br.com.objectos.code.java.element.CodeElement;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 
 final class AdditiveExpressionImpl
     extends AbstractDefaultImmutableCodeElement
@@ -27,7 +27,7 @@ final class AdditiveExpressionImpl
     super(elements);
   }
 
-  private AdditiveExpressionImpl(ImmutableList<CodeElement> elements) {
+  private AdditiveExpressionImpl(UnmodifiableList<CodeElement> elements) {
     super(elements);
   }
 

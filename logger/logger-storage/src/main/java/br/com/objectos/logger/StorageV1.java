@@ -28,7 +28,7 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 
 final class StorageV1 extends Storage {
 
@@ -133,7 +133,7 @@ final class StorageV1 extends Storage {
 
   @Override
   public final ReadJob createReadJob(
-      IoWorker ioWorker, ImmutableList<LogListener> listeners) throws IOException {
+      IoWorker ioWorker, UnmodifiableList<LogListener> listeners) throws IOException {
     FileChannel channel;
     channel = logFile.openReadChannel();
 
@@ -145,7 +145,7 @@ final class StorageV1 extends Storage {
 
   @Override
   public final WriteJob createWriteJob(
-      IoWorker ioWorker, ImmutableList<LogListener> listeners) throws IOException {
+      IoWorker ioWorker, UnmodifiableList<LogListener> listeners) throws IOException {
     FileChannel channel;
     channel = logFile.openWriteChannel();
 

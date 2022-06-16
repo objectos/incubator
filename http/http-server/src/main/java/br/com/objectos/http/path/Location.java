@@ -22,7 +22,7 @@ import br.com.objectos.http.server.HttpAction;
 import br.com.objectos.http.server.RequestProto;
 import java.io.IOException;
 import objectos.lang.Check;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.MutableList;
 
 public class Location {
@@ -31,11 +31,11 @@ public class Location {
       .catchAll()
       .build();
 
-  private static final Location ROOT = new Location(ImmutableList.of());
+  private static final Location ROOT = new Location(UnmodifiableList.of());
 
-  private final ImmutableList<Slug> slugs;
+  private final UnmodifiableList<Slug> slugs;
 
-  Location(ImmutableList<Slug> slugs) {
+  Location(UnmodifiableList<Slug> slugs) {
     this.slugs = slugs;
   }
 
@@ -105,7 +105,7 @@ public class Location {
     private Builder() {}
 
     public final Location build() {
-      return slugs.isEmpty() ? ROOT : new Location(slugs.toImmutableList());
+      return slugs.isEmpty() ? ROOT : new Location(slugs.toUnmodifiableList());
     }
 
     public final Builder catchAll() {

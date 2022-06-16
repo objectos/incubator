@@ -21,7 +21,7 @@ import br.com.objectos.code.java.io.Section;
 import br.com.objectos.code.java.type.NamedClass;
 import br.com.objectos.code.java.type.NamedType;
 import objectos.lang.Check;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 
 public class Statements {
 
@@ -78,7 +78,7 @@ public class Statements {
   // Misc.
 
   public static StatementsShorthand statements(Iterable<? extends BlockStatement> statements) {
-    ImmutableList<? extends BlockStatement> copy = ImmutableList.copyOf(statements);
+    UnmodifiableList<? extends BlockStatement> copy = UnmodifiableList.copyOf(statements);
     return new StatementsShorthand(copy);
   }
 

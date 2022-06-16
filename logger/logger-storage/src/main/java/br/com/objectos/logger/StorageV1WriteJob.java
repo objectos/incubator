@@ -25,7 +25,7 @@ import java.nio.channels.FileChannel;
 import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
 import objectos.lang.Level;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.MutableList;
 
 final class StorageV1WriteJob implements IoTask, CpuTask, WriteJob {
@@ -90,7 +90,7 @@ final class StorageV1WriteJob implements IoTask, CpuTask, WriteJob {
 
   private int iterLength;
 
-  private final ImmutableList<LogListener> listeners;
+  private final UnmodifiableList<LogListener> listeners;
 
   private WriteJobLog log;
 
@@ -134,7 +134,7 @@ final class StorageV1WriteJob implements IoTask, CpuTask, WriteJob {
 
   StorageV1WriteJob(FileChannel channel,
                     IoWorker ioWorker,
-                    ImmutableList<LogListener> listeners) {
+                    UnmodifiableList<LogListener> listeners) {
     this.channel = channel;
 
     this.ioWorker = ioWorker;

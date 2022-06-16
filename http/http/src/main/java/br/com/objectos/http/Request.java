@@ -16,13 +16,13 @@
 package br.com.objectos.http;
 
 import objectos.lang.Check;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 
 public final class Request {
 
   private final Body body;
 
-  private final ImmutableList<RequestHeader> headers;
+  private final UnmodifiableList<RequestHeader> headers;
 
   private final Method method;
 
@@ -31,7 +31,7 @@ public final class Request {
   private final Version version;
 
   Request(Body body,
-          ImmutableList<RequestHeader> headers,
+          UnmodifiableList<RequestHeader> headers,
           Method method,
           String target,
           Version version) {

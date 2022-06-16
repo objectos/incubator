@@ -20,7 +20,7 @@ import br.com.objectos.http.media.TextType;
 import java.io.IOException;
 import objectos.lang.Check;
 import objectos.ssg.Site.Context;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 
 public abstract class SiteStyleSheet extends AbstractStyleSheet
     implements
@@ -69,7 +69,7 @@ public abstract class SiteStyleSheet extends AbstractStyleSheet
   }
 
   protected final <T>
-      ImmutableList<T> getObjectsByType(Class<? extends T> type) {
+      UnmodifiableList<T> getObjectsByType(Class<? extends T> type) {
     return context.getObjectsByType(type);
   }
 

@@ -38,7 +38,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Set;
 import javax.lang.model.element.ExecutableElement;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.ImmutableSet;
 import objectos.util.MutableList;
 import org.testng.annotations.Test;
@@ -50,7 +50,7 @@ public class ProcessingMethodTest extends AbstractCodeModelTest {
     ProcessingType subject;
     subject = query(AccessLevelSubject.class);
 
-    ImmutableList<ProcessingMethod> methods;
+    UnmodifiableList<ProcessingMethod> methods;
     methods = subject.getDeclaredMethods();
 
     assertEquals(methods.size(), 4);
@@ -73,7 +73,7 @@ public class ProcessingMethodTest extends AbstractCodeModelTest {
     ProcessingType subject;
     subject = query(DeclaringTypeSubject.class);
 
-    ImmutableList<ProcessingMethod> methods;
+    UnmodifiableList<ProcessingMethod> methods;
     methods = subject.getDeclaredOrInheritedMethods();
 
     ProcessingMethod fromParent;
@@ -90,10 +90,10 @@ public class ProcessingMethodTest extends AbstractCodeModelTest {
     ProcessingExecutableElement subject;
     subject = method(AnnotationsSubject.class, "subject");
 
-    ImmutableList<ProcessingAnnotation> subjectAnnotations;
+    UnmodifiableList<ProcessingAnnotation> subjectAnnotations;
     subjectAnnotations = subject.getDirectlyPresentAnnotations();
 
-    ImmutableList<NamedClass> subjectClassNames;
+    UnmodifiableList<NamedClass> subjectClassNames;
     subjectClassNames = annotationToClassName(subjectAnnotations);
 
     assertEquals(subjectClassNames.size(), 1);
@@ -126,7 +126,7 @@ public class ProcessingMethodTest extends AbstractCodeModelTest {
       }
 
       private void process0(ProcessingRound round, ProcessingType type) {
-        ImmutableList<ProcessingMethod> methods;
+        UnmodifiableList<ProcessingMethod> methods;
         methods = type.getDeclaredMethods();
 
         for (int i = 0, size = methods.size(); i < size; i++) {
@@ -167,8 +167,8 @@ public class ProcessingMethodTest extends AbstractCodeModelTest {
 
     compilation.assertWasSuccessful();
 
-    ImmutableList<String> result;
-    result = thisProcessor.comments.toImmutableList();
+    UnmodifiableList<String> result;
+    result = thisProcessor.comments.toUnmodifiableList();
 
     assertEquals(result.size(), 4);
 
@@ -183,7 +183,7 @@ public class ProcessingMethodTest extends AbstractCodeModelTest {
     ProcessingType subject;
     subject = query(ModifiersSubject.class);
 
-    ImmutableList<ProcessingMethod> methods;
+    UnmodifiableList<ProcessingMethod> methods;
     methods = subject.getDeclaredMethods();
 
     assertEquals(methods.size(), 1);
@@ -201,7 +201,7 @@ public class ProcessingMethodTest extends AbstractCodeModelTest {
     ProcessingType subject;
     subject = query(NameSubject.class);
 
-    ImmutableList<ProcessingMethod> methods;
+    UnmodifiableList<ProcessingMethod> methods;
     methods = subject.getDeclaredMethods();
 
     assertEquals(methods.size(), 1);
@@ -213,7 +213,7 @@ public class ProcessingMethodTest extends AbstractCodeModelTest {
     ProcessingType subject;
     subject = query(ParametersSubject.class);
 
-    ImmutableList<ProcessingMethod> methods;
+    UnmodifiableList<ProcessingMethod> methods;
     methods = subject.getDeclaredMethods();
 
     assertEquals(methods.size(), 2);
@@ -221,7 +221,7 @@ public class ProcessingMethodTest extends AbstractCodeModelTest {
     ProcessingExecutableElement m0;
     m0 = methods.get(0);
 
-    ImmutableList<ProcessingParameter> m0Parameters;
+    UnmodifiableList<ProcessingParameter> m0Parameters;
     m0Parameters = m0.getParameters();
 
     assertEquals(m0Parameters.size(), 2);
@@ -231,7 +231,7 @@ public class ProcessingMethodTest extends AbstractCodeModelTest {
     ProcessingExecutableElement m1;
     m1 = methods.get(1);
 
-    ImmutableList<ProcessingParameter> m1Parameters;
+    UnmodifiableList<ProcessingParameter> m1Parameters;
     m1Parameters = m1.getParameters();
 
     assertEquals(m1Parameters.size(), 0);
@@ -242,7 +242,7 @@ public class ProcessingMethodTest extends AbstractCodeModelTest {
     ProcessingType subject;
     subject = query(ReturnTypeSubject.class);
 
-    ImmutableList<ProcessingMethod> methods;
+    UnmodifiableList<ProcessingMethod> methods;
     methods = subject.getDeclaredMethods();
 
     MutableList<NamedType> result;
@@ -288,52 +288,52 @@ public class ProcessingMethodTest extends AbstractCodeModelTest {
         return input.getName();
       }
 
-      public final ImmutableList<NamedType> get(String name) {
+      public final UnmodifiableList<NamedType> get(String name) {
         ProcessingMethod method;
         method = method(type, name);
 
         MutableList<NamedType> result;
         result = new MutableList<>();
 
-        ImmutableList<PTypeMirror> types;
+        UnmodifiableList<PTypeMirror> types;
         types = method.getThrownTypes();
 
         for (PTypeMirror type : types) {
           result.add(type.getName());
         }
 
-        return result.toImmutableList();
+        return result.toUnmodifiableList();
       }
     }
 
     Get get;
     get = new Get(ThrownTypesSubject.class);
 
-    ImmutableList<NamedType> m0;
+    UnmodifiableList<NamedType> m0;
     m0 = get.get("m0");
 
     assertEquals(m0.size(), 0);
 
-    ImmutableList<NamedType> m1;
+    UnmodifiableList<NamedType> m1;
     m1 = get.get("m1");
 
     assertEquals(m1.size(), 1);
     assertEquals(m1.get(0), NamedClass.of(IOException.class));
 
-    ImmutableList<NamedType> m2;
+    UnmodifiableList<NamedType> m2;
     m2 = get.get("m2");
 
     assertEquals(m2.size(), 2);
     assertEquals(m2.get(0), NamedClass.of(IOException.class));
     assertEquals(m2.get(1), NamedClass.of(InterruptedException.class));
 
-    ImmutableList<NamedType> m3;
+    UnmodifiableList<NamedType> m3;
     m3 = get.get("m3");
 
     assertEquals(m3.size(), 1);
     assertEquals(m3.get(0), NamedTypeVariable.of("E"));
 
-    ImmutableList<NamedType> m4;
+    UnmodifiableList<NamedType> m4;
     m4 = get.get("m4");
 
     assertEquals(m4.size(), 1);
@@ -342,14 +342,14 @@ public class ProcessingMethodTest extends AbstractCodeModelTest {
 
   @Test(
       description = ""
-          + "getTypeParameters() method should return an ImmutableList of TypeParameterName "
+          + "getTypeParameters() method should return an UnmodifiableList of TypeParameterName "
           + "instances in declaration order."
   )
   public void getTypeParameters() {
     ProcessingExecutableElement m0;
     m0 = method(TypeParametersSubject.class, "typeParam0");
 
-    ImmutableList<NamedTypeParameter> tp0;
+    UnmodifiableList<NamedTypeParameter> tp0;
     tp0 = m0.getTypeParameters();
 
     assertEquals(tp0.size(), 0);
@@ -357,7 +357,7 @@ public class ProcessingMethodTest extends AbstractCodeModelTest {
     ProcessingExecutableElement m1;
     m1 = method(TypeParametersSubject.class, "typeParam1");
 
-    ImmutableList<NamedTypeParameter> tp1;
+    UnmodifiableList<NamedTypeParameter> tp1;
     tp1 = m1.getTypeParameters();
 
     assertEquals(tp1.size(), 1);
@@ -366,7 +366,7 @@ public class ProcessingMethodTest extends AbstractCodeModelTest {
     ProcessingExecutableElement m2;
     m2 = method(TypeParametersSubject.class, "typeParam2");
 
-    ImmutableList<NamedTypeParameter> tp2;
+    UnmodifiableList<NamedTypeParameter> tp2;
     tp2 = m2.getTypeParameters();
 
     assertEquals(tp2.size(), 2);
@@ -379,7 +379,7 @@ public class ProcessingMethodTest extends AbstractCodeModelTest {
     ProcessingType subject;
     subject = query(AccessLevelSubject.class);
 
-    ImmutableList<ProcessingMethod> methods;
+    UnmodifiableList<ProcessingMethod> methods;
     methods = subject.getDeclaredMethods();
 
     assertEquals(methods.size(), 4);
@@ -418,7 +418,7 @@ public class ProcessingMethodTest extends AbstractCodeModelTest {
     ProcessingType subject;
     subject = query(NameSubject.class);
 
-    ImmutableList<ProcessingMethod> methods;
+    UnmodifiableList<ProcessingMethod> methods;
     methods = subject.getDeclaredMethods();
 
     assertEquals(methods.size(), 1);

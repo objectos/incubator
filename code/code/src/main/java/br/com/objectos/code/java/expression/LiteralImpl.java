@@ -19,7 +19,7 @@ import br.com.objectos.code.java.element.AbstractDefaultImmutableCodeElement;
 import br.com.objectos.code.java.element.CodeElement;
 import br.com.objectos.code.java.type.NamedClass;
 import objectos.lang.Check;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 
 final class LiteralImpl extends AbstractDefaultImmutableCodeElement implements Literal {
 
@@ -31,7 +31,7 @@ final class LiteralImpl extends AbstractDefaultImmutableCodeElement implements L
     super(elements);
   }
 
-  private LiteralImpl(ImmutableList<CodeElement> elements) {
+  private LiteralImpl(UnmodifiableList<CodeElement> elements) {
     super(elements);
   }
 

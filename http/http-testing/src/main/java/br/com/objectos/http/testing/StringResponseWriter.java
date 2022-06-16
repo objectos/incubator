@@ -100,7 +100,7 @@ public class StringResponseWriter implements ResponseWriter, MessageBodyDsl {
   @Override
   public void write() throws HttpException {
     try {
-      WrittenResponse response = new WrittenResponse(status, headerList.toImmutableList(), body);
+      WrittenResponse response = new WrittenResponse(status, headerList.toUnmodifiableList(), body);
       response.respond(writer);
     } catch (IOException e) {
       throw new AssertionError(e);

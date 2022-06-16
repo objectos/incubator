@@ -15,17 +15,17 @@
  */
 package br.com.objectos.formal.testing;
 
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 
 public class HasLetters implements HasSomething {
 
-  private final ImmutableList<Letter> letterList;
+  private final UnmodifiableList<Letter> letterList;
 
   public HasLetters(Letter... letters) {
-    letterList = ImmutableList.copyOf(letters);
+    letterList = UnmodifiableList.copyOf(letters);
   }
 
-  private HasLetters(ImmutableList<Letter> letterList) {
+  private HasLetters(UnmodifiableList<Letter> letterList) {
     this.letterList = letterList;
   }
 
@@ -42,7 +42,7 @@ public class HasLetters implements HasSomething {
   }
 
   public static HasLetters ofIterable(Iterable<Letter> many) {
-    return new HasLetters(ImmutableList.copyOf(many));
+    return new HasLetters(UnmodifiableList.copyOf(many));
   }
 
   public final ComplexSingle asComplexSingle() {

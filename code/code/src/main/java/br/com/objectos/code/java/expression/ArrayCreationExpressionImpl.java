@@ -21,7 +21,7 @@ import br.com.objectos.code.java.element.Keywords;
 import br.com.objectos.code.java.type.NamedArray;
 import java.util.Arrays;
 import java.util.Iterator;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.MutableList;
 
 final class ArrayCreationExpressionImpl
@@ -32,7 +32,7 @@ final class ArrayCreationExpressionImpl
     super(elements);
   }
 
-  private ArrayCreationExpressionImpl(ImmutableList<CodeElement> elements) {
+  private ArrayCreationExpressionImpl(UnmodifiableList<CodeElement> elements) {
     super(elements);
   }
 
@@ -75,7 +75,7 @@ final class ArrayCreationExpressionImpl
     }
 
     return new ArrayCreationExpressionImpl(
-        els.toImmutableList()
+        els.toUnmodifiableList()
     );
   }
 

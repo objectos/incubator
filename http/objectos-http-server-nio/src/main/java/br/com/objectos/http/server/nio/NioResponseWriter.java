@@ -118,7 +118,7 @@ class NioResponseWriter
   }
 
   private WrittenResponse write0() {
-    return new WrittenResponse(status, headerList.toImmutableList(), body);
+    return new WrittenResponse(status, headerList.toUnmodifiableList(), body);
   }
 
 }

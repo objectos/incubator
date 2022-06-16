@@ -19,11 +19,11 @@ import br.com.objectos.core.io.Copy;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 
 final class ShellExecution extends Execution {
 
-  public final ImmutableList<String> executeInputStream(
+  public final UnmodifiableList<String> executeInputStream(
       InputStream in) throws ExecutionException, IOException {
     Process process;
 
@@ -47,7 +47,7 @@ final class ShellExecution extends Execution {
     return sysout();
   }
 
-  public final ImmutableList<String> executeStatement(
+  public final UnmodifiableList<String> executeStatement(
       String[] statements) throws ExecutionException, IOException {
     Process process;
 

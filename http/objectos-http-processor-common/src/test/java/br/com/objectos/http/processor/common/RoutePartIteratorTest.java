@@ -20,7 +20,7 @@ package br.com.objectos.http.processor.common;
 
 import static org.testng.Assert.assertEquals;
 
-import br.com.objectos.way.util.ImmutableList;
+import br.com.objectos.way.util.UnmodifiableList;
 import java.util.Iterator;
 import java.util.List;
 import org.testng.annotations.Test;
@@ -47,7 +47,7 @@ public class RoutePartIteratorTest {
 
   private List<RoutePart> toList(String path) {
     Iterator<RoutePart> iterator = new RoutePartIterator(path);
-    return ImmutableList.ofAll(iterator);
+    return UnmodifiableList.ofAll(iterator);
   }
 
 }

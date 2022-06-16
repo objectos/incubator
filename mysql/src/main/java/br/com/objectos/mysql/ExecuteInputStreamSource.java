@@ -20,9 +20,9 @@ import br.com.objectos.fs.ResolvedPath;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 
-final class ExecuteInputStreamSource extends AbstractClientJob<ImmutableList<String>> {
+final class ExecuteInputStreamSource extends AbstractClientJob<UnmodifiableList<String>> {
 
   private static final byte _CLOSE = 0;
 
@@ -48,7 +48,7 @@ final class ExecuteInputStreamSource extends AbstractClientJob<ImmutableList<Str
 
   private final ResolvedPath mysql;
 
-  private final ImmutableList<ShellOption> options;
+  private final UnmodifiableList<ShellOption> options;
 
   private OutputStream outputStream;
 
@@ -70,7 +70,7 @@ final class ExecuteInputStreamSource extends AbstractClientJob<ImmutableList<Str
 
     mysql = worker.getPath(Program.MYSQL);
 
-    this.options = ImmutableList.copyOf(options);
+    this.options = UnmodifiableList.copyOf(options);
 
     this.source = source;
   }
@@ -125,8 +125,8 @@ final class ExecuteInputStreamSource extends AbstractClientJob<ImmutableList<Str
   }
 
   @Override
-  final ImmutableList<String> getResultImpl(
-      IOException exception, ImmutableList<String> stderr, ImmutableList<String> stdout)
+  final UnmodifiableList<String> getResultImpl(
+      IOException exception, UnmodifiableList<String> stderr, UnmodifiableList<String> stdout)
       throws IOException {
     if (exception == null) {
       return stdout;

@@ -17,7 +17,7 @@ package br.com.objectos.mysql;
 
 import br.com.objectos.fs.LocalFs;
 import java.io.IOException;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import org.testng.annotations.Test;
 
 public class Mysql57Test extends AbstractMysqlTest {
@@ -104,7 +104,7 @@ public class Mysql57Test extends AbstractMysqlTest {
         Mysql.waitTimeout(90000)
       ),
 
-      ImmutableList.of(
+      UnmodifiableList.of(
         "[mysqld]",
         "basedir=" + directoryBase.getPath(),
         "character-set-server=utf8mb4",

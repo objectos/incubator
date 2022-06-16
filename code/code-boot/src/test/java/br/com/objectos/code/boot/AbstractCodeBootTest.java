@@ -25,7 +25,7 @@ import br.com.objectos.code.model.element.ProcessingMethod;
 import br.com.objectos.code.model.element.ProcessingType;
 import br.com.objectos.code.testng.AbstractCodeTestNgTest;
 import java.util.NoSuchElementException;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 
 public abstract class AbstractCodeBootTest extends AbstractCodeTestNgTest {
 
@@ -38,7 +38,7 @@ public abstract class AbstractCodeBootTest extends AbstractCodeTestNgTest {
     ProcessingType processing;
     processing = query(type);
 
-    ImmutableList<ProcessingField> fields;
+    UnmodifiableList<ProcessingField> fields;
     fields = processing.getDeclaredOrInheritedFields();
 
     for (int i = 0; i < fields.size(); i++) {
@@ -57,7 +57,7 @@ public abstract class AbstractCodeBootTest extends AbstractCodeTestNgTest {
     ProcessingType processing;
     processing = query(type);
 
-    ImmutableList<ProcessingMethod> methods;
+    UnmodifiableList<ProcessingMethod> methods;
     methods = processing.getDeclaredMethods();
 
     for (int i = 0; i < methods.size(); i++) {
@@ -81,8 +81,8 @@ public abstract class AbstractCodeBootTest extends AbstractCodeTestNgTest {
   }
 
   protected final void testToString(Object o, String... lines) {
-    ImmutableList<String> list;
-    list = ImmutableList.copyOf(lines);
+    UnmodifiableList<String> list;
+    list = UnmodifiableList.copyOf(lines);
 
     String expected;
     expected = list.join("\n");

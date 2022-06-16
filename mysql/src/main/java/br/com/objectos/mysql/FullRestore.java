@@ -20,9 +20,9 @@ import java.io.IOException;
 import objectos.lang.Note1;
 import objectos.lang.Note2;
 import objectos.lang.NoteSink;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 
-final class FullRestore extends AbstractClientJob<ImmutableList<String>> {
+final class FullRestore extends AbstractClientJob<UnmodifiableList<String>> {
 
   private static final byte _FLUSH_PRIVILEGES = 0;
 
@@ -103,8 +103,8 @@ final class FullRestore extends AbstractClientJob<ImmutableList<String>> {
   }
 
   @Override
-  final ImmutableList<String> getResultImpl(
-      IOException exception, ImmutableList<String> stderr, ImmutableList<String> stdout)
+  final UnmodifiableList<String> getResultImpl(
+      IOException exception, UnmodifiableList<String> stderr, UnmodifiableList<String> stdout)
       throws IOException {
     if (exception == null) {
       long totalTime;

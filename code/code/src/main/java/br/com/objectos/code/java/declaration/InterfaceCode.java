@@ -26,7 +26,7 @@ import br.com.objectos.code.java.type.NamedClass;
 import br.com.objectos.code.java.type.NamedClassOrParameterized;
 import java.lang.annotation.Annotation;
 import objectos.lang.Check;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.MutableList;
 
 public final class InterfaceCode extends AbstractTypeCode {
@@ -353,7 +353,7 @@ public final class InterfaceCode extends AbstractTypeCode {
       return this;
     }
 
-    final ImmutableList<InterfaceBodyElement> bodyElements() {
+    final UnmodifiableList<InterfaceBodyElement> bodyElements() {
       return formatter.format(bodyElements, InterfaceBodyElement.class);
     }
 

@@ -50,8 +50,8 @@
     + void visitError(\lIOException exception)
     + void visitError(\lTimeoutException exception)
     + void visitExecuteFullBackup(\lRegularFile f)
-    + void visitExecuteIncrementalBackup(\lImmutableList<RegularFile> f)
-    + void visitExecuteStatement(\lImmutableList<String> r)
+    + void visitExecuteIncrementalBackup(\lUnmodifiableList<RegularFile> f)
+    + void visitExecuteStatement(\lUnmodifiableList<String> r)
     + void visitRestoreFullBackup()
     + void visitRestoreIncrementalBackup()
   }

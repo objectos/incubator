@@ -15,19 +15,19 @@
  */
 package br.com.objectos.code.java.declaration;
 
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 
 public final class ClassModifierSet extends ElementModifierSet {
 
   private static final ClassModifierSet EMPTY = new ClassModifierSet(
-      ImmutableList.<Modifier> of()
+      UnmodifiableList.<Modifier> of()
   );
 
   private ClassModifierSet(Builder builder) {
     super(builder);
   }
 
-  private ClassModifierSet(ImmutableList<Modifier> values) {
+  private ClassModifierSet(UnmodifiableList<Modifier> values) {
     super(values);
   }
 

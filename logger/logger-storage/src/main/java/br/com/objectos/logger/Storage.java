@@ -23,7 +23,7 @@ import br.com.objectos.fs.ResolvedPath;
 import br.com.objectos.fs.watch.Watch;
 import java.io.IOException;
 import objectos.lang.Check;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 
 abstract class Storage {
 
@@ -45,10 +45,10 @@ abstract class Storage {
   }
 
   public abstract ReadJob createReadJob(
-      IoWorker ioWorker, ImmutableList<LogListener> listeners) throws IOException;
+      IoWorker ioWorker, UnmodifiableList<LogListener> listeners) throws IOException;
 
   public abstract WriteJob createWriteJob(
-      IoWorker ioWorker, ImmutableList<LogListener> listeners) throws IOException;
+      IoWorker ioWorker, UnmodifiableList<LogListener> listeners) throws IOException;
 
   public abstract void watchDirectory(Watch.ServiceBuilder builder, Watch.Listener listener)
       throws IOException;

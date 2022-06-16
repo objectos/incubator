@@ -31,7 +31,7 @@ import java.nio.file.Path;
 import java.nio.file.PathMatcher;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
@@ -76,7 +76,7 @@ public class ToJavaMojo extends AbstractMojo {
       Path packageAbsolutePath = file.getParent();
       Path packageAsPath = sourceDirectory.relativize(packageAbsolutePath);
       PackageName packageName
-          = PackageName.named(ImmutableList.copyOf(packageAsPath).join("."));
+          = PackageName.named(UnmodifiableList.copyOf(packageAsPath).join("."));
       String simpleName = fileName.substring(0, fileName.length() - ".css".length());
       return packageName.nestedClass(simpleName);
     }

@@ -17,7 +17,7 @@ package br.com.objectos.code.jdt;
 
 import java.io.IOException;
 import java.io.InputStream;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.MutableList;
 import org.eclipse.jdt.internal.compiler.classfmt.ClassFileReader;
 import org.eclipse.jdt.internal.compiler.classfmt.ClassFormatException;
@@ -26,9 +26,9 @@ import org.eclipse.jdt.internal.compiler.env.NameEnvironmentAnswer;
 class StandardPackageName extends PackageName {
 
   private final String name;
-  private final ImmutableList<String> nameList;
+  private final UnmodifiableList<String> nameList;
 
-  public StandardPackageName(ImmutableList<String> nameList) {
+  public StandardPackageName(UnmodifiableList<String> nameList) {
     this.nameList = nameList;
     name = nameList.join(".");
   }
@@ -46,8 +46,8 @@ class StandardPackageName extends PackageName {
 
     list.add(new String(name));
 
-    ImmutableList<String> result;
-    result = list.toImmutableList();
+    UnmodifiableList<String> result;
+    result = list.toUnmodifiableList();
 
     return new StandardPackageName(result);
   }

@@ -24,7 +24,7 @@ import javax.tools.JavaCompiler.CompilationTask;
 import javax.tools.JavaFileObject;
 import javax.tools.ToolProvider;
 import objectos.lang.Check;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.MutableList;
 
 public final class Tools {
@@ -45,8 +45,8 @@ public final class Tools {
   }
 
   public static JavacElement compilationUnit(String... lines) {
-    ImmutableList<String> list;
-    list = ImmutableList.copyOf(lines);
+    UnmodifiableList<String> list;
+    list = UnmodifiableList.copyOf(lines);
 
     String source;
     source = list.join(LINE_SEPARATOR);
@@ -169,7 +169,7 @@ public final class Tools {
         option.acceptJavacOptionVisitor(optionsBuilder);
       }
 
-      ImmutableList<String> taskOptions;
+      UnmodifiableList<String> taskOptions;
       taskOptions = optionsBuilder.build();
 
       CompilationTask task;

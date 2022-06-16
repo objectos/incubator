@@ -20,19 +20,19 @@ import br.com.objectos.code.java.element.Keywords;
 import br.com.objectos.code.java.io.CodeWriter;
 import java.util.Iterator;
 import objectos.lang.Check;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.MutableList;
 
 public class TryStatement extends AbstractSimpleStatement {
 
-  private final ImmutableList<CatchBlock> catchBlocks;
+  private final UnmodifiableList<CatchBlock> catchBlocks;
   private final Block finallyBlock;
-  private final ImmutableList<ResourceElement> resources;
+  private final UnmodifiableList<ResourceElement> resources;
   private final Block tryBlock;
 
-  private TryStatement(ImmutableList<ResourceElement> resources,
+  private TryStatement(UnmodifiableList<ResourceElement> resources,
                        Block tryBlock,
-                       ImmutableList<CatchBlock> catchBlocks,
+                       UnmodifiableList<CatchBlock> catchBlocks,
                        Block finallyBlock) {
     this.resources = resources;
     this.tryBlock = tryBlock;
@@ -191,14 +191,14 @@ public class TryStatement extends AbstractSimpleStatement {
 
     public final TryStatement build() {
       return new TryStatement(
-          resources.toImmutableList(),
+          resources.toUnmodifiableList(),
           tryBlock.build(),
           buildCatchBlocks(),
           buildFinallyBlock()
       );
     }
 
-    private ImmutableList<CatchBlock> buildCatchBlocks() {
+    private UnmodifiableList<CatchBlock> buildCatchBlocks() {
       MutableList<CatchBlock> blocks = new MutableList<>();
 
       for (int i = 0; i < catchElements.size(); i++) {
@@ -210,7 +210,7 @@ public class TryStatement extends AbstractSimpleStatement {
         );
       }
 
-      return blocks.toImmutableList();
+      return blocks.toUnmodifiableList();
     }
 
     private Block buildFinallyBlock() {

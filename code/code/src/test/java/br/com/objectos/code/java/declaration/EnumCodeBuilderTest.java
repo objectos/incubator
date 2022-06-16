@@ -9,7 +9,7 @@ package br.com.objectos.code.java.declaration;
 
 import br.com.objectos.code.java.type.NamedClass;
 import br.com.objectos.code.util.AbstractCodeJavaTest;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import org.testng.annotations.Test;
 
 public class EnumCodeBuilderTest extends AbstractCodeJavaTest {
@@ -33,7 +33,7 @@ public class EnumCodeBuilderTest extends AbstractCodeJavaTest {
     );
     test(
         EnumCode.builder()
-            .addImplementedInterfaces(ImmutableList.of(iface2, iface1))
+            .addImplementedInterfaces(UnmodifiableList.of(iface2, iface1))
             .build(),
         "enum Unnamed implements testing.code.Iface2, testing.code.Iface1 {}"
     );

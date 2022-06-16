@@ -18,9 +18,9 @@ package br.com.objectos.mysql;
 import br.com.objectos.fs.ResolvedPath;
 import java.io.IOException;
 import java.io.OutputStream;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 
-final class ExecuteStatement extends AbstractClientJob<ImmutableList<String>> {
+final class ExecuteStatement extends AbstractClientJob<UnmodifiableList<String>> {
 
   private static final byte _CLOSE = 0;
 
@@ -42,13 +42,13 @@ final class ExecuteStatement extends AbstractClientJob<ImmutableList<String>> {
 
   private final ResolvedPath mysql;
 
-  private final ImmutableList<ShellOption> options;
+  private final UnmodifiableList<ShellOption> options;
 
   private volatile OutputStream outputStream;
 
   private int statementIndex;
 
-  private final ImmutableList<String> statements;
+  private final UnmodifiableList<String> statements;
 
   ExecuteStatement(Client worker,
                    LoginPath loginPath,
@@ -64,9 +64,9 @@ final class ExecuteStatement extends AbstractClientJob<ImmutableList<String>> {
 
     mysql = worker.getPath(Program.MYSQL);
 
-    this.options = ImmutableList.copyOf(options);
+    this.options = UnmodifiableList.copyOf(options);
 
-    this.statements = ImmutableList.copyOf(statements);
+    this.statements = UnmodifiableList.copyOf(statements);
   }
 
   @Override
@@ -125,8 +125,8 @@ final class ExecuteStatement extends AbstractClientJob<ImmutableList<String>> {
   }
 
   @Override
-  final ImmutableList<String> getResultImpl(
-      IOException exception, ImmutableList<String> stderr, ImmutableList<String> stdout)
+  final UnmodifiableList<String> getResultImpl(
+      IOException exception, UnmodifiableList<String> stderr, UnmodifiableList<String> stdout)
       throws IOException {
     if (exception == null) {
       return stdout;

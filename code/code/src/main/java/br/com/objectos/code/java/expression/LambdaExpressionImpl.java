@@ -17,7 +17,7 @@ package br.com.objectos.code.java.expression;
 
 import br.com.objectos.code.java.element.AbstractImmutableCodeElement;
 import br.com.objectos.code.java.element.CodeElement;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 
 final class LambdaExpressionImpl
     extends AbstractImmutableCodeElement
@@ -46,7 +46,7 @@ final class LambdaExpressionImpl
 
   static LambdaExpression lambda0(
       LambdaBody body, LambdaParameter... params) {
-    return lambda0(body, ImmutableList.copyOf(params));
+    return lambda0(body, UnmodifiableList.copyOf(params));
   }
 
   static LambdaExpression lambda1(

@@ -19,7 +19,7 @@ import br.com.objectos.code.java.element.AbstractImmutableCodeElement;
 import br.com.objectos.code.java.element.CodeElement;
 import br.com.objectos.code.java.type.NamedType;
 import java.util.Arrays;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 
 public class TypeWitness extends AbstractImmutableCodeElement {
 
@@ -31,7 +31,7 @@ public class TypeWitness extends AbstractImmutableCodeElement {
     super(elements);
   }
 
-  private TypeWitness(ImmutableList<CodeElement> elements) {
+  private TypeWitness(UnmodifiableList<CodeElement> elements) {
     super(elements);
   }
 

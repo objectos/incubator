@@ -23,7 +23,7 @@ import java.io.IOException;
 import javax.lang.model.element.PackageElement;
 import javax.lang.model.util.Elements;
 import javax.tools.StandardLocation;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import org.testng.annotations.Test;
 
 public class ProcessingPackageTest extends AbstractCodeModelTest {
@@ -32,10 +32,10 @@ public class ProcessingPackageTest extends AbstractCodeModelTest {
   public void getDirectlyPresentAnnotations() {
     ProcessingPackage pkg00 = getProcessingPackage(ModelTypeMarker.class);
 
-    ImmutableList<ProcessingAnnotation> annotations;
+    UnmodifiableList<ProcessingAnnotation> annotations;
     annotations = pkg00.getDirectlyPresentAnnotations();
 
-    ImmutableList<NamedClass> classNames;
+    UnmodifiableList<NamedClass> classNames;
     classNames = annotationToClassName(annotations);
 
     assertEquals(classNames.size(), 2);

@@ -18,7 +18,7 @@ package br.com.objectos.http;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.ReadableByteChannel;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 
 public final class ByteArrayReadableByteChannel implements ReadableByteChannel {
 
@@ -30,7 +30,7 @@ public final class ByteArrayReadableByteChannel implements ReadableByteChannel {
     this.byteArray = byteArray;
   }
 
-  public static ByteArrayReadableByteChannel ofLines(ImmutableList<String> lines) {
+  public static ByteArrayReadableByteChannel ofLines(UnmodifiableList<String> lines) {
     String text;
     text = lines.join(Http.CRLF);
 
@@ -41,8 +41,8 @@ public final class ByteArrayReadableByteChannel implements ReadableByteChannel {
   }
 
   public static ByteArrayReadableByteChannel ofLines(String... lines) {
-    ImmutableList<String> list;
-    list = ImmutableList.copyOf(lines);
+    UnmodifiableList<String> list;
+    list = UnmodifiableList.copyOf(lines);
 
     return ofLines(list);
   }

@@ -21,7 +21,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.ImmutableSet;
 import objectos.util.MutableSet;
 
@@ -251,7 +251,7 @@ final class TestCase07 extends StageGitCommand<ObjectId> {
       currentTree = rootTree;
     }
 
-    ImmutableList<Entry> entries;
+    UnmodifiableList<Entry> entries;
     entries = tree.getEntries();
 
     for (Entry entry : entries) {

@@ -20,17 +20,17 @@ import br.com.objectos.code.java.declaration.MethodCodeElement;
 import br.com.objectos.code.java.declaration.Modifiers;
 import br.com.objectos.code.java.element.Keywords;
 import br.com.objectos.code.java.io.CodeWriter;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 
 public final class DefaultSwitchElement extends SwitchElement
     implements
     MethodCodeElement {
 
   private static final DefaultSwitchElement EMPTY = new DefaultSwitchElement(
-      ImmutableList.<BlockStatement> of()
+      UnmodifiableList.<BlockStatement> of()
   );
 
-  DefaultSwitchElement(ImmutableList<BlockStatement> statements) {
+  DefaultSwitchElement(UnmodifiableList<BlockStatement> statements) {
     super(statements);
   }
 
@@ -39,7 +39,7 @@ public final class DefaultSwitchElement extends SwitchElement
   }
 
   public static DefaultSwitchElement _default(BlockStatement... statements) {
-    return new DefaultSwitchElement(ImmutableList.copyOf(statements));
+    return new DefaultSwitchElement(UnmodifiableList.copyOf(statements));
   }
 
   @Override

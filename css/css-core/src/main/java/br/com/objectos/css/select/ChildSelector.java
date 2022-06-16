@@ -18,7 +18,7 @@ package br.com.objectos.css.select;
 import br.com.objectos.css.sheet.RuleElement;
 import java.util.Iterator;
 import java.util.Optional;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.MutableList;
 
 public class ChildSelector extends Selector
@@ -26,9 +26,9 @@ public class ChildSelector extends Selector
     ComplexSelector,
     Iterable<Selector> {
 
-  private final ImmutableList<Selector> selectors;
+  private final UnmodifiableList<Selector> selectors;
 
-  ChildSelector(ImmutableList<Selector> selectors) {
+  ChildSelector(UnmodifiableList<Selector> selectors) {
     this.selectors = selectors;
   }
 
@@ -99,7 +99,7 @@ public class ChildSelector extends Selector
     MutableList<Selector> newSelectors = new MutableList<>();
     newSelectors.add(parent);
     newSelectors.addAll(selectors);
-    return new ChildSelector(newSelectors.toImmutableList());
+    return new ChildSelector(newSelectors.toUnmodifiableList());
   }
 
 }

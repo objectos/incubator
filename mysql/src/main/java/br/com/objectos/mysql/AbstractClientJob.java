@@ -29,7 +29,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import objectos.lang.Check;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.MutableList;
 
 abstract class AbstractClientJob<V> implements ClientJob<V>, IoTask {
@@ -76,11 +76,11 @@ abstract class AbstractClientJob<V> implements ClientJob<V>, IoTask {
 
   private byte state = _WAIT_CLIENT;
 
-  private ImmutableList<String> stderr = ImmutableList.of();
+  private UnmodifiableList<String> stderr = UnmodifiableList.of();
 
   private StreamCollector stderrCollector;
 
-  private ImmutableList<String> stdout = ImmutableList.of();
+  private UnmodifiableList<String> stdout = UnmodifiableList.of();
 
   private StreamCollector stdoutCollector;
 
@@ -249,7 +249,7 @@ abstract class AbstractClientJob<V> implements ClientJob<V>, IoTask {
   }
 
   abstract V getResultImpl(
-      IOException exception, ImmutableList<String> stderr, ImmutableList<String> stdout)
+      IOException exception, UnmodifiableList<String> stderr, UnmodifiableList<String> stdout)
       throws IOException;
 
   @SuppressWarnings("unchecked")
@@ -321,7 +321,7 @@ abstract class AbstractClientJob<V> implements ClientJob<V>, IoTask {
     return _SUB_TASK;
   }
 
-  private ImmutableList<String> collect(StreamCollector c) {
+  private UnmodifiableList<String> collect(StreamCollector c) {
     c.interrupt();
 
     try {
@@ -502,8 +502,8 @@ abstract class AbstractClientJob<V> implements ClientJob<V>, IoTask {
       setDaemon(true);
     }
 
-    public final ImmutableList<String> get() {
-      return lines.toImmutableList();
+    public final UnmodifiableList<String> get() {
+      return lines.toUnmodifiableList();
     }
 
     @Override

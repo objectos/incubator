@@ -21,18 +21,18 @@ import br.com.objectos.code.java.io.CodeWriter;
 import java.util.Iterator;
 import java.util.Locale;
 import objectos.lang.Check;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.MutableList;
 
 abstract class ElementModifierSet extends AbstractCodeElement {
 
-  private final ImmutableList<Modifier> values;
+  private final UnmodifiableList<Modifier> values;
 
   ElementModifierSet(Builder<?> builder) {
     values = builder.values();
   }
 
-  ElementModifierSet(ImmutableList<Modifier> values) {
+  ElementModifierSet(UnmodifiableList<Modifier> values) {
     this.values = values;
   }
 
@@ -86,8 +86,8 @@ abstract class ElementModifierSet extends AbstractCodeElement {
       values.addWithNullMessage(modifier, message);
     }
 
-    final ImmutableList<Modifier> values() {
-      return values.toImmutableList();
+    final UnmodifiableList<Modifier> values() {
+      return values.toUnmodifiableList();
     }
 
     final Builder<E> withModifier(ElementModifierSet modifier) {

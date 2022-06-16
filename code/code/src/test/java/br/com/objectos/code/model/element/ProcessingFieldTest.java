@@ -28,7 +28,7 @@ import java.util.NoSuchElementException;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.VariableElement;
 import javax.lang.model.util.ElementFilter;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.ImmutableSet;
 import org.testng.annotations.Test;
 
@@ -69,7 +69,7 @@ public class ProcessingFieldTest extends AbstractCodeModelTest {
     ProcessingType subject;
     subject = query(Subject.class);
 
-    ImmutableList<ProcessingField> fields;
+    UnmodifiableList<ProcessingField> fields;
     fields = subject.getDeclaredFields();
 
     ProcessingField a = fields.get(0);
@@ -102,7 +102,7 @@ public class ProcessingFieldTest extends AbstractCodeModelTest {
     ProcessingType subject;
     subject = query(Subject.class);
 
-    ImmutableList<ProcessingField> fields;
+    UnmodifiableList<ProcessingField> fields;
     fields = subject.getDeclaredFields();
 
     ProcessingField a = fields.get(0);

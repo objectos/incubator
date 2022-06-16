@@ -22,16 +22,16 @@ import javax.lang.model.element.Element;
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.VariableElement;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.MutableList;
 
 class ProcessingTypeElements {
 
-  final ImmutableList<ProcessingConstructor> constructors;
-  final ImmutableList<ProcessingField> fields;
-  final ImmutableList<ProcessingMethod> methods;
+  final UnmodifiableList<ProcessingConstructor> constructors;
+  final UnmodifiableList<ProcessingField> fields;
+  final UnmodifiableList<ProcessingMethod> methods;
   final int size;
-  final ImmutableList<ProcessingType> types;
+  final UnmodifiableList<ProcessingType> types;
 
   private ProcessingTypeElements(Builder builder) {
     constructors = builder.constructors();
@@ -120,20 +120,20 @@ class ProcessingTypeElements {
       throw new UnsupportedOperationException("Implement me: kind=" + e.getKind());
     }
 
-    final ImmutableList<ProcessingConstructor> constructors() {
-      return constructors.toImmutableList();
+    final UnmodifiableList<ProcessingConstructor> constructors() {
+      return constructors.toUnmodifiableList();
     }
 
-    final ImmutableList<ProcessingField> fields() {
-      return fields.toImmutableList();
+    final UnmodifiableList<ProcessingField> fields() {
+      return fields.toUnmodifiableList();
     }
 
-    final ImmutableList<ProcessingMethod> methods() {
-      return methods.toImmutableList();
+    final UnmodifiableList<ProcessingMethod> methods() {
+      return methods.toUnmodifiableList();
     }
 
-    final ImmutableList<ProcessingType> types() {
-      return types.toImmutableList();
+    final UnmodifiableList<ProcessingType> types() {
+      return types.toUnmodifiableList();
     }
 
     private Void incrementSize() {

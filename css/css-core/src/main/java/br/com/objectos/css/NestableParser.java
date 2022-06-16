@@ -74,7 +74,7 @@ class NestableParser {
       parts.add(NestableSymbol.DESCENDANT);
     }
     parts.add(new Ident(ident.toString()));
-    SimpleNestable newNestable = new SimpleNestable(parts.toImmutableList());
+    SimpleNestable newNestable = new SimpleNestable(parts.toUnmodifiableList());
     nestable = nestable != null ? nestable.add(newNestable) : newNestable;
 
     parts = new MutableList<>();

@@ -28,15 +28,15 @@ import br.com.objectos.code.java.expression.ExpressionName;
 import br.com.objectos.code.java.expression.MethodInvocation;
 import br.com.objectos.css.sheet.AbstractStyleSheet;
 import br.com.objectos.css.sheet.MediaType;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.MutableList;
 
 class PropertyAtMedia {
 
   private final NamedAtMedia media;
-  private final ImmutableList<PropertyStyle> styles;
+  private final UnmodifiableList<PropertyStyle> styles;
 
-  PropertyAtMedia(NamedAtMedia query, ImmutableList<PropertyStyle> styles) {
+  PropertyAtMedia(NamedAtMedia query, UnmodifiableList<PropertyStyle> styles) {
     this.media = query;
     this.styles = styles;
   }

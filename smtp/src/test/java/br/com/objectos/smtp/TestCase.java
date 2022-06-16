@@ -16,7 +16,7 @@
 package br.com.objectos.smtp;
 
 import java.nio.charset.Charset;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 
 public final class TestCase {
 
@@ -50,8 +50,8 @@ public final class TestCase {
     return new Element() {
       @Override
       public final void accept(Builder builder) {
-        ImmutableList<String> list;
-        list = ImmutableList.copyOf(lines);
+        UnmodifiableList<String> list;
+        list = UnmodifiableList.copyOf(lines);
 
         String body;
         body = list.join("\r\n");

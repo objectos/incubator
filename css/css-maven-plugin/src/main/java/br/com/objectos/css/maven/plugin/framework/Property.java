@@ -18,7 +18,7 @@ package br.com.objectos.css.maven.plugin.framework;
 import br.com.objectos.code.java.declaration.PackageName;
 import br.com.objectos.code.java.type.NamedClass;
 import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkGroup;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.MutableList;
 
 class Property extends PropertyClass.Builder {
@@ -27,15 +27,15 @@ class Property extends PropertyClass.Builder {
   @SuppressWarnings("unused")
   private final FrameworkGroup group;
 
-  private final ImmutableList<NamedAtMedia> queries;
+  private final UnmodifiableList<NamedAtMedia> queries;
 
-  private final ImmutableList<PropertyStyle> styles;
+  private final UnmodifiableList<PropertyStyle> styles;
 
   private Property(Builder builder) {
     group = builder.group;
     className = builder.className;
     styles = builder.styles();
-    queries = builder.queries.toImmutableList();
+    queries = builder.queries.toUnmodifiableList();
   }
 
   public final PropertyClass toPropertyClass() {
@@ -48,7 +48,7 @@ class Property extends PropertyClass.Builder {
   }
 
   @Override
-  final ImmutableList<PropertyAtMedia> queries() {
+  final UnmodifiableList<PropertyAtMedia> queries() {
     MutableList<PropertyAtMedia> medias;
     medias = new MutableList<>();
 
@@ -58,11 +58,11 @@ class Property extends PropertyClass.Builder {
       medias.add(m);
     }
 
-    return medias.toImmutableList();
+    return medias.toUnmodifiableList();
   }
 
   @Override
-  final ImmutableList<PropertyStyle> styles() {
+  final UnmodifiableList<PropertyStyle> styles() {
     return styles;
   }
 
@@ -74,7 +74,7 @@ class Property extends PropertyClass.Builder {
 
     private NamedClass className;
     private final FrameworkGroup group;
-    private ImmutableList<String> methodNames;
+    private UnmodifiableList<String> methodNames;
     private final PackageName packageName;
 
     private Prefix prefix;
@@ -98,7 +98,7 @@ class Property extends PropertyClass.Builder {
       values.add(value);
     }
 
-    final void methodNames(ImmutableList<String> set) {
+    final void methodNames(UnmodifiableList<String> set) {
       methodNames = set;
     }
 
@@ -110,7 +110,7 @@ class Property extends PropertyClass.Builder {
       className = packageName.nestedPackage(group.name().toLowerCase()).nestedClass(name);
     }
 
-    final ImmutableList<PropertyStyle> styles() {
+    final UnmodifiableList<PropertyStyle> styles() {
       MutableList<PropertyStyle> builder;
       builder = new MutableList<>();
 
@@ -124,7 +124,7 @@ class Property extends PropertyClass.Builder {
         builder.add(style);
       }
 
-      return builder.toImmutableList();
+      return builder.toUnmodifiableList();
     }
 
     private PropertyStyle toPropertyStyle(NamedValue value) {

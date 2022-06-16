@@ -15,7 +15,7 @@ import static br.com.objectos.code.java.expression.MethodInvocationChain.chain;
 import static br.com.objectos.code.java.type.NamedTypes.t;
 
 import br.com.objectos.code.util.AbstractCodeJavaTest;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import org.testng.annotations.Test;
 
 public class MethodInvocationChainTest extends AbstractCodeJavaTest {
@@ -29,7 +29,7 @@ public class MethodInvocationChainTest extends AbstractCodeJavaTest {
             invoke("withString", l("abc")), nl(),
             invoke("withClass", l(Number.class)), nl(),
             invoke("withClassFromClassName", l(t(String.class))), nl(),
-            invoke("withIterableAsArgs", ImmutableList.of(l(0), l(1))), nl(),
+            invoke("withIterableAsArgs", UnmodifiableList.of(l(0), l(1))), nl(),
             invoke("build")
         ),
         "foo.builder()",

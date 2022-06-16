@@ -21,7 +21,7 @@ import br.com.objectos.code.java.declaration.ConstructorCode;
 import br.com.objectos.code.java.declaration.ConstructorCodeEx;
 import br.com.objectos.code.java.declaration.FieldCode;
 import br.com.objectos.code.java.element.NewLine;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import org.testng.annotations.Test;
 
 public class FormattingTest extends AbstractFormattingTest {
@@ -38,25 +38,25 @@ public class FormattingTest extends AbstractFormattingTest {
   public void fields() {
     withElements(c0, f0, f1);
 
-    ImmutableList<ClassBodyElement> res = consume(Formatting.fields());
+    UnmodifiableList<ClassBodyElement> res = consume(Formatting.fields());
 
-    assertEquals(res, ImmutableList.of(f0, nl, f1, nl, c0));
+    assertEquals(res, UnmodifiableList.of(f0, nl, f1, nl, c0));
   }
 
   @Test
   public void newLine() {
     withElements(f0, f1);
 
-    ImmutableList<ClassBodyElement> res = consume(Formatting.newLine());
+    UnmodifiableList<ClassBodyElement> res = consume(Formatting.newLine());
 
-    assertEquals(res, ImmutableList.of(nl, f0, f1));
+    assertEquals(res, UnmodifiableList.of(nl, f0, f1));
   }
 
   @Test
   public void newLineWhenEmpty() {
     withElements();
 
-    ImmutableList<ClassBodyElement> res = consume(Formatting.newLine());
+    UnmodifiableList<ClassBodyElement> res = consume(Formatting.newLine());
 
     assertTrue(res.isEmpty());
   }
@@ -65,17 +65,17 @@ public class FormattingTest extends AbstractFormattingTest {
   public void newLineWhenNewLines() {
     withElements(nl, nl);
 
-    ImmutableList<ClassBodyElement> res = consume(Formatting.newLine());
+    UnmodifiableList<ClassBodyElement> res = consume(Formatting.newLine());
 
     assertTrue(res.isEmpty());
   }
 
-  private ImmutableList<ClassBodyElement> consume(Formatting formatting) {
+  private UnmodifiableList<ClassBodyElement> consume(Formatting formatting) {
     FormattingAction action = action(formatting);
 
     action.consume(this);
 
-    return action.toImmutableList(ClassBodyElement.class);
+    return action.toUnmodifiableList(ClassBodyElement.class);
   }
 
 }

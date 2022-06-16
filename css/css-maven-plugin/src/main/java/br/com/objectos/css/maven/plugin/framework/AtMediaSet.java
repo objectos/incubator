@@ -17,15 +17,15 @@ package br.com.objectos.css.maven.plugin.framework;
 
 import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkAtMedia;
 import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkAtMediaSet;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 
 class AtMediaSet extends AbstractFrameworkObject implements FrameworkAtMediaSet {
 
-  static final AtMediaSet EMPTY = new AtMediaSet(ImmutableList.of());
+  static final AtMediaSet EMPTY = new AtMediaSet(UnmodifiableList.of());
 
-  private final ImmutableList<FrameworkAtMedia> set;
+  private final UnmodifiableList<FrameworkAtMedia> set;
 
-  AtMediaSet(ImmutableList<FrameworkAtMedia> set) {
+  AtMediaSet(UnmodifiableList<FrameworkAtMedia> set) {
     this.set = set;
   }
 

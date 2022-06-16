@@ -22,7 +22,7 @@ import java.nio.charset.CharsetDecoder;
 import objectos.lang.Check;
 import objectos.lang.Note1;
 import objectos.lang.NoteSink;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.MutableList;
 
 final class ReadTree implements ObjectReaderAdapter {
@@ -362,8 +362,8 @@ final class ReadTree implements ObjectReaderAdapter {
   }
 
   private byte executeResult() {
-    ImmutableList<Entry> list;
-    list = entries.toImmutableList();
+    UnmodifiableList<Entry> list;
+    list = entries.toUnmodifiableList();
 
     Tree result;
     result = new Tree(list, objectId);

@@ -15,17 +15,17 @@
  */
 package br.com.objectos.formal.testing;
 
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 
 public class HasDigits implements HasSomething {
 
-  private final ImmutableList<Digit> digitList;
+  private final UnmodifiableList<Digit> digitList;
 
   public HasDigits(Digit... digits) {
-    digitList = ImmutableList.copyOf(digits);
+    digitList = UnmodifiableList.copyOf(digits);
   }
 
-  private HasDigits(ImmutableList<Digit> digitList) {
+  private HasDigits(UnmodifiableList<Digit> digitList) {
     this.digitList = digitList;
   }
 
@@ -42,7 +42,7 @@ public class HasDigits implements HasSomething {
   }
 
   public static HasDigits ofIterable(Iterable<Digit> many) {
-    return new HasDigits(ImmutableList.copyOf(many));
+    return new HasDigits(UnmodifiableList.copyOf(many));
   }
 
   public final ComplexSingle asComplexSingle() {

@@ -25,7 +25,7 @@ import br.com.objectos.http.server.AbstractHttpModule;
 import br.com.objectos.http.server.AlwaysOk;
 import br.com.objectos.http.server.Method;
 import br.com.objectos.http.server.Resolution;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import org.testng.annotations.Test;
 
 public class RouterTest extends AbstractHttpCoreTest {
@@ -83,7 +83,7 @@ public class RouterTest extends AbstractHttpCoreTest {
     });
     assertEquals(
         router.routes(),
-        ImmutableList.of(getFile, postApi)
+        UnmodifiableList.of(getFile, postApi)
     );
   }
 

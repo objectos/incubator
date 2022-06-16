@@ -136,7 +136,7 @@ class Interpreter {
         }
         visitor.visitAttribute(
             name,
-            values.toImmutableList()
+            values.toUnmodifiableList()
         );
         break;
     }

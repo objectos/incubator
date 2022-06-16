@@ -18,9 +18,9 @@ package br.com.objectos.mysql;
 import br.com.objectos.fs.ResolvedPath;
 import java.io.IOException;
 import java.io.OutputStream;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 
-final class SetLoginPath extends AbstractClientJob<ImmutableList<String>> {
+final class SetLoginPath extends AbstractClientJob<UnmodifiableList<String>> {
 
   private static final byte IO_EXECUTE_PROCESS = 0;
 
@@ -86,8 +86,8 @@ final class SetLoginPath extends AbstractClientJob<ImmutableList<String>> {
   }
 
   @Override
-  final ImmutableList<String> getResultImpl(
-      IOException exception, ImmutableList<String> stderr, ImmutableList<String> stdout)
+  final UnmodifiableList<String> getResultImpl(
+      IOException exception, UnmodifiableList<String> stderr, UnmodifiableList<String> stdout)
       throws IOException {
     if (exception == null) {
       return stdout;

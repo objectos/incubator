@@ -17,7 +17,7 @@ package br.com.objectos.mojo;
 
 import br.com.objectos.mojo.BuildLog.Event;
 import br.com.objectos.mojo.BuildLog.Message;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import objectos.util.MutableList;
 import org.codehaus.plexus.logging.Logger;
 import org.slf4j.event.Level;
@@ -112,8 +112,8 @@ final class BuildLogger extends AbstractLogger {
     add(Level.WARN, msg);
   }
 
-  final ImmutableList<Message> messages() {
-    return messages.toImmutableList();
+  final UnmodifiableList<Message> messages() {
+    return messages.toUnmodifiableList();
   }
 
   @Override

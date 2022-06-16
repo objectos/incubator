@@ -18,7 +18,7 @@ package br.com.objectos.lexer.impl.ah;
 import static org.testng.Assert.assertEquals;
 
 import java.util.Iterator;
-import objectos.util.ImmutableList;
+import objectos.util.UnmodifiableList;
 import org.testng.annotations.Test;
 
 public class ValueListTest {
@@ -32,7 +32,7 @@ public class ValueListTest {
 
     assertEquals(list.size(), 3);
     Iterator<Object> iterator = list.iterator();
-    ImmutableList<Object> res = ImmutableList.copyOf(iterator);
+    UnmodifiableList<Object> res = UnmodifiableList.copyOf(iterator);
     assertEquals(res.size(), 3);
     assertEquals(res.get(0), "A");
     assertEquals(res.get(1), "B");
