@@ -20,7 +20,7 @@ import br.com.objectos.code.model.AbstractCodeModelTest;
 import br.com.objectos.code.util.Marker1;
 import java.util.NoSuchElementException;
 import objectos.util.UnmodifiableList;
-import objectos.util.ImmutableSet;
+import objectos.util.UnmodifiableSet;
 import org.testng.annotations.Test;
 
 public class ProcessingConstructorTest extends AbstractCodeModelTest {
@@ -71,7 +71,7 @@ public class ProcessingConstructorTest extends AbstractCodeModelTest {
     ProcessingConstructor defaultConstructor;
     defaultConstructor = getConstructorByAccessLevel(Subject.class, AccessLevel.DEFAULT);
 
-    ImmutableSet<ConstructorModifier> defaultModifiers;
+    UnmodifiableSet<ConstructorModifier> defaultModifiers;
     defaultModifiers = defaultConstructor.getModifiers();
 
     assertEquals(defaultModifiers.size(), 0);
@@ -79,7 +79,7 @@ public class ProcessingConstructorTest extends AbstractCodeModelTest {
     ProcessingConstructor privateConstructor;
     privateConstructor = getConstructorByAccessLevel(Subject.class, AccessLevel.PRIVATE);
 
-    ImmutableSet<ConstructorModifier> privateModifiers;
+    UnmodifiableSet<ConstructorModifier> privateModifiers;
     privateModifiers = privateConstructor.getModifiers();
 
     assertEquals(privateModifiers.size(), 1);

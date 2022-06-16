@@ -18,7 +18,7 @@ package br.com.objectos.html.boot;
 import br.com.objectos.html.boot.spec.AbstractSpec;
 import br.com.objectos.html.boot.spec.CategorySpec;
 import java.util.Set;
-import objectos.util.ImmutableSet;
+import objectos.util.UnmodifiableSet;
 
 class HtmlSpec extends AbstractSpec {
 
@@ -344,7 +344,7 @@ class HtmlSpec extends AbstractSpec {
       .noEndTag();
 
     Set<String> svgPresentationProps;
-    svgPresentationProps = ImmutableSet.of(
+    svgPresentationProps = UnmodifiableSet.of(
       "alignment-baseline",
       "baseline-shift",
       "clip-path",

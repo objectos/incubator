@@ -23,7 +23,7 @@ import br.com.objectos.concurrent.Concurrent;
 import br.com.objectos.fs.Directory;
 import java.io.IOException;
 import java.util.concurrent.ExecutionException;
-import objectos.util.ImmutableSet;
+import objectos.util.UnmodifiableSet;
 import objectos.util.UnmodifiableIterator;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
@@ -51,7 +51,7 @@ public class CopyObjectsTest extends AbstractGitTest {
     Repository src;
     src = openRepository(srcDir);
 
-    ImmutableSet<ObjectId> set;
+    UnmodifiableSet<ObjectId> set;
     set = TestCase05.getCopyObjectSet();
 
     Repository dest;
@@ -93,7 +93,7 @@ public class CopyObjectsTest extends AbstractGitTest {
     Repository src;
     src = openRepository(srcDir);
 
-    ImmutableSet<ObjectId> set;
+    UnmodifiableSet<ObjectId> set;
     set = TestCase13.getCopyObjectSet();
 
     Repository dest;
@@ -129,7 +129,7 @@ public class CopyObjectsTest extends AbstractGitTest {
     Repository src;
     src = openRepository(srcDir);
 
-    ImmutableSet<ObjectId> set;
+    UnmodifiableSet<ObjectId> set;
     set = TestCase14.getCopyObjectSet();
 
     Repository dest;

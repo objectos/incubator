@@ -18,7 +18,7 @@ package br.com.objectos.code.model.element;
 import br.com.objectos.code.java.declaration.Modifier;
 import javax.annotation.processing.ProcessingEnvironment;
 import javax.lang.model.element.VariableElement;
-import objectos.util.ImmutableSet;
+import objectos.util.UnmodifiableSet;
 
 public class ProcessingEnumConstant extends ProcessingVariableElement {
 
@@ -27,7 +27,7 @@ public class ProcessingEnumConstant extends ProcessingVariableElement {
   }
 
   @Override
-  public final ImmutableSet<? extends Modifier> getModifiers() {
+  public final UnmodifiableSet<? extends Modifier> getModifiers() {
     return getModifiersImpl();
   }
 

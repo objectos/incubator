@@ -27,7 +27,7 @@ import br.com.objectos.fs.ResolvedPath;
 import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 import objectos.util.UnmodifiableList;
-import objectos.util.ImmutableSet;
+import objectos.util.UnmodifiableSet;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
@@ -45,7 +45,7 @@ public class FilterNonExistingTest extends AbstractGitTest {
 
   private ObjectReaderMode mode;
 
-  private ImmutableSet<ObjectId> result;
+  private UnmodifiableSet<ObjectId> result;
 
   @AfterMethod(alwaysRun = true)
   public void afterMethod() {
@@ -78,7 +78,7 @@ public class FilterNonExistingTest extends AbstractGitTest {
     Repository src;
     src = openRepository(srcDir);
 
-    ImmutableSet<ObjectId> set;
+    UnmodifiableSet<ObjectId> set;
     set = TestCase05.getCopyObjectSet();
 
     job.set(src, set);
@@ -137,7 +137,7 @@ public class FilterNonExistingTest extends AbstractGitTest {
     @SuppressWarnings("unchecked")
     @Override
     public final void setResult(Object r) {
-      outer.result = (ImmutableSet<ObjectId>) r;
+      outer.result = (UnmodifiableSet<ObjectId>) r;
     }
 
     @Override

@@ -26,7 +26,7 @@ import javax.lang.model.element.Name;
 import javax.lang.model.element.PackageElement;
 import javax.lang.model.element.TypeElement;
 import objectos.lang.Check;
-import objectos.util.ImmutableSet;
+import objectos.util.UnmodifiableSet;
 import objectos.util.MutableSet;
 
 public abstract class AbstractProcessingRoundProcessor extends AbstractProcessor {
@@ -66,9 +66,9 @@ public abstract class AbstractProcessingRoundProcessor extends AbstractProcessor
     private final MutableSet<Name> types = new MutableSet<>();
 
     @Override
-    public final ImmutableSet<Name> getPackages() {
-      ImmutableSet<Name> result;
-      result = packages.toImmutableSet();
+    public final UnmodifiableSet<Name> getPackages() {
+      UnmodifiableSet<Name> result;
+      result = packages.toUnmodifiableSet();
 
       packages.clear();
 
@@ -76,9 +76,9 @@ public abstract class AbstractProcessingRoundProcessor extends AbstractProcessor
     }
 
     @Override
-    public final ImmutableSet<Name> getTypes() {
-      ImmutableSet<Name> result;
-      result = types.toImmutableSet();
+    public final UnmodifiableSet<Name> getTypes() {
+      UnmodifiableSet<Name> result;
+      result = types.toUnmodifiableSet();
 
       types.clear();
 

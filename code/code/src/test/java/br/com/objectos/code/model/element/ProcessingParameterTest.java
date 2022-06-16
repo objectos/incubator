@@ -38,7 +38,7 @@ import java.lang.annotation.Target;
 import java.util.List;
 import java.util.Set;
 import objectos.util.UnmodifiableList;
-import objectos.util.ImmutableSet;
+import objectos.util.UnmodifiableSet;
 import objectos.util.MutableList;
 import org.testng.annotations.Test;
 
@@ -86,7 +86,7 @@ public class ProcessingParameterTest extends AbstractCodeCoreTest {
 
       @Override
       protected final boolean process(ProcessingRound round) {
-        ImmutableSet<ProcessingType> types = round.getAnnotatedTypes();
+        UnmodifiableSet<ProcessingType> types = round.getAnnotatedTypes();
         for (ProcessingType type : types) {
           process(round, type);
         }
@@ -128,7 +128,7 @@ public class ProcessingParameterTest extends AbstractCodeCoreTest {
 
     assertFalse(no.hasModifier(Modifiers.FINAL));
 
-    ImmutableSet<ParameterModifier> noModifiers;
+    UnmodifiableSet<ParameterModifier> noModifiers;
     noModifiers = no.getModifiers();
 
     assertEquals(noModifiers.size(), 0);
@@ -138,7 +138,7 @@ public class ProcessingParameterTest extends AbstractCodeCoreTest {
 
     assertTrue(yes.hasModifier(Modifiers.FINAL));
 
-    ImmutableSet<ParameterModifier> yesModifiers;
+    UnmodifiableSet<ParameterModifier> yesModifiers;
     yesModifiers = yes.getModifiers();
 
     assertEquals(yesModifiers.size(), 1);

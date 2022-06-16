@@ -22,7 +22,7 @@ import br.com.objectos.code.processing.ProcessingRound;
 import br.com.objectos.code.util.AbstractCodeCoreTest;
 import br.com.objectos.tools.Compilation;
 import java.util.Set;
-import objectos.util.ImmutableSet;
+import objectos.util.UnmodifiableSet;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -77,7 +77,7 @@ public class PErrorTypeTest extends AbstractCodeCoreTest {
 
     @Override
     protected final boolean process(ProcessingRound round) {
-      ImmutableSet<ProcessingMethod> methods;
+      UnmodifiableSet<ProcessingMethod> methods;
       methods = round.getAnnotatedMethods();
 
       if (methods.isEmpty() && !round.isOver()) {

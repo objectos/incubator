@@ -17,7 +17,7 @@ package br.com.objectos.git;
 
 import java.nio.ByteBuffer;
 import objectos.lang.Check;
-import objectos.util.ImmutableSet;
+import objectos.util.UnmodifiableSet;
 import objectos.util.MutableSet;
 
 final class FilterNonExisting implements ObjectReaderAdapter {
@@ -26,7 +26,7 @@ final class FilterNonExisting implements ObjectReaderAdapter {
 
   private final GitInjector injector;
 
-  private ImmutableSet<ObjectId> objects;
+  private UnmodifiableSet<ObjectId> objects;
 
   private GitRepository repository;
 
@@ -95,7 +95,7 @@ final class FilterNonExisting implements ObjectReaderAdapter {
     return repository;
   }
 
-  public final void set(GitRepository repository, ImmutableSet<ObjectId> objects) {
+  public final void set(GitRepository repository, UnmodifiableSet<ObjectId> objects) {
     this.repository = Check.notNull(repository, "repository == null");
 
     this.objects = Check.notNull(objects, "objects == null");
@@ -103,7 +103,7 @@ final class FilterNonExisting implements ObjectReaderAdapter {
 
   final void executeResult() {
     handle.setResult(
-        result.toImmutableSet()
+        result.toUnmodifiableSet()
     );
   }
 

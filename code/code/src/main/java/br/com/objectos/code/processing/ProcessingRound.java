@@ -43,7 +43,7 @@ import javax.tools.Diagnostic.Kind;
 import javax.tools.FileObject;
 import javax.tools.StandardLocation;
 import objectos.lang.Check;
-import objectos.util.ImmutableSet;
+import objectos.util.UnmodifiableSet;
 import objectos.util.MutableSet;
 
 public class ProcessingRound
@@ -100,7 +100,7 @@ public class ProcessingRound
     return true;
   }
 
-  public final ImmutableSet<ProcessingMethod> getAnnotatedMethods() {
+  public final UnmodifiableSet<ProcessingMethod> getAnnotatedMethods() {
     MutableSet<ProcessingMethod> result;
     result = new MutableSet<>();
 
@@ -108,10 +108,10 @@ public class ProcessingRound
       getAnnotatedMethods0(result, annotation);
     }
 
-    return result.toImmutableSet();
+    return result.toUnmodifiableSet();
   }
 
-  public final ImmutableSet<ProcessingPackage> getAnnotatedPackages() {
+  public final UnmodifiableSet<ProcessingPackage> getAnnotatedPackages() {
     MutableSet<ProcessingPackage> result;
     result = new MutableSet<>();
 
@@ -121,10 +121,10 @@ public class ProcessingRound
       getAnnotatedPackages0(result, annotation);
     }
 
-    return result.toImmutableSet();
+    return result.toUnmodifiableSet();
   }
 
-  public final ImmutableSet<ProcessingType> getAnnotatedTypes() {
+  public final UnmodifiableSet<ProcessingType> getAnnotatedTypes() {
     MutableSet<ProcessingType> result = new MutableSet<>();
 
     addReprocessorTypesIfNecessary(result);
@@ -133,7 +133,7 @@ public class ProcessingRound
       getAnnotatedTypes0(result, annotation);
     }
 
-    return result.toImmutableSet();
+    return result.toUnmodifiableSet();
   }
 
   public final boolean isOver() {
@@ -217,7 +217,7 @@ public class ProcessingRound
   }
 
   private void addReprocessorPackagesIfNecessary(Set<ProcessingPackage> result) {
-    ImmutableSet<Name> packageNames;
+    UnmodifiableSet<Name> packageNames;
     packageNames = reprocessor.getPackages();
 
     if (packageNames.isEmpty()) {
@@ -236,7 +236,7 @@ public class ProcessingRound
   }
 
   private void addReprocessorTypesIfNecessary(Set<ProcessingType> result) {
-    ImmutableSet<Name> typeNames;
+    UnmodifiableSet<Name> typeNames;
     typeNames = reprocessor.getTypes();
 
     if (typeNames.isEmpty()) {

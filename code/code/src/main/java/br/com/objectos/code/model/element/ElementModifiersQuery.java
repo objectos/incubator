@@ -16,11 +16,11 @@
 package br.com.objectos.code.model.element;
 
 import br.com.objectos.code.java.declaration.Modifier;
-import objectos.util.ImmutableSet;
+import objectos.util.UnmodifiableSet;
 
 public interface ElementModifiersQuery {
 
-  ImmutableSet<? extends Modifier> getModifiers();
+  UnmodifiableSet<? extends Modifier> getModifiers();
 
   boolean hasModifier(Modifier modifier);
 

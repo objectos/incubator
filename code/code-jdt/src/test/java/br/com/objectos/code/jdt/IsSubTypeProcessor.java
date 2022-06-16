@@ -24,7 +24,7 @@ import br.com.objectos.code.processing.ProcessingRound;
 import br.com.objectos.code.processing.type.PTypeMirror;
 import java.util.Set;
 import objectos.util.UnmodifiableList;
-import objectos.util.ImmutableSet;
+import objectos.util.UnmodifiableSet;
 
 class IsSubTypeProcessor extends AbstractProcessingRoundProcessor {
 
@@ -35,7 +35,7 @@ class IsSubTypeProcessor extends AbstractProcessingRoundProcessor {
 
   @Override
   protected boolean process(ProcessingRound round) {
-    ImmutableSet<ProcessingType> types = round.getAnnotatedTypes();
+    UnmodifiableSet<ProcessingType> types = round.getAnnotatedTypes();
     for (ProcessingType type : types) {
       isSubType(type, "stringValue", CharSequence.class, true);
     }

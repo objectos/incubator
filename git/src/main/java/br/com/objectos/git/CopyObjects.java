@@ -22,7 +22,7 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.zip.Deflater;
 import objectos.lang.Check;
-import objectos.util.ImmutableSet;
+import objectos.util.UnmodifiableSet;
 
 final class CopyObjects extends AbstractGitEngineTask {
 
@@ -36,7 +36,7 @@ final class CopyObjects extends AbstractGitEngineTask {
 
   private FilterNonExisting filterNonExisting;
 
-  private ImmutableSet<ObjectId> nonExisting;
+  private UnmodifiableSet<ObjectId> nonExisting;
 
   private ObjectId objectId;
 
@@ -46,13 +46,13 @@ final class CopyObjects extends AbstractGitEngineTask {
 
   private Repository repository;
 
-  private ImmutableSet<ObjectId> set;
+  private UnmodifiableSet<ObjectId> set;
 
   CopyObjects(GitInjector injector) {
     super(injector);
   }
 
-  public final void setInput(Repository src, ImmutableSet<ObjectId> objects, Repository dest) {
+  public final void setInput(Repository src, UnmodifiableSet<ObjectId> objects, Repository dest) {
     checkSetInput();
 
     repository = Check.notNull(src, "src == null");
@@ -156,7 +156,7 @@ final class CopyObjects extends AbstractGitEngineTask {
   }
 
   private byte executeFilterNonExisting() {
-    ImmutableSet<ObjectId> result;
+    UnmodifiableSet<ObjectId> result;
     result = getSubTaskResult();
 
     nonExisting = result;

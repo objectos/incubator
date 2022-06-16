@@ -32,7 +32,7 @@ import javax.lang.model.element.TypeParameterElement;
 import javax.lang.model.util.Elements;
 import objectos.lang.Check;
 import objectos.util.UnmodifiableList;
-import objectos.util.ImmutableSet;
+import objectos.util.UnmodifiableSet;
 
 public class ProcessingType extends ProcessingElement<TypeElement>
     implements
@@ -138,7 +138,7 @@ public class ProcessingType extends ProcessingElement<TypeElement>
   }
 
   @Override
-  public final ImmutableSet<TypeModifier> getModifiers() {
+  public final UnmodifiableSet<TypeModifier> getModifiers() {
     return getModifiersImpl();
   }
 

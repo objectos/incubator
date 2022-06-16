@@ -23,7 +23,7 @@ import java.io.IOException;
 import java.util.Set;
 import javax.annotation.processing.Processor;
 import objectos.ssg.Markdown;
-import objectos.util.ImmutableSet;
+import objectos.util.UnmodifiableSet;
 
 @Services(Processor.class)
 public final class MarkdownTypeProcessor extends AbstractProcessingRoundProcessor {
@@ -35,7 +35,7 @@ public final class MarkdownTypeProcessor extends AbstractProcessingRoundProcesso
 
   @Override
   protected final boolean process(ProcessingRound round) {
-    ImmutableSet<ProcessingType> types;
+    UnmodifiableSet<ProcessingType> types;
     types = round.getAnnotatedTypes();
 
     for (ProcessingType type : types) {

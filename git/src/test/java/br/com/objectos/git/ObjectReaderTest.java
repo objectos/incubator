@@ -25,7 +25,7 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.Set;
 import java.util.concurrent.ExecutionException;
-import objectos.util.ImmutableSet;
+import objectos.util.UnmodifiableSet;
 import objectos.util.MutableSet;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
@@ -130,7 +130,7 @@ public class ObjectReaderTest extends AbstractGitTest {
     Repository repository;
     repository = createEmptyRepository();
 
-    ImmutableSet<ObjectId> objectSet;
+    UnmodifiableSet<ObjectId> objectSet;
     objectSet = TestCase05.getCopyObjectSet();
 
     FilterNonExistingAdapter adapter;
@@ -146,7 +146,7 @@ public class ObjectReaderTest extends AbstractGitTest {
 
     reader.acceptResultConsumer(this);
 
-    ImmutableSet<ObjectId> result;
+    UnmodifiableSet<ObjectId> result;
     result = getResult();
 
     assertEquals(result, objectSet);
@@ -764,7 +764,7 @@ public class ObjectReaderTest extends AbstractGitTest {
     @Override
     public final void executeFinally() {
       handle.setResult(
-        result.toImmutableSet()
+        result.toUnmodifiableSet()
       );
     }
 

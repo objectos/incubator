@@ -22,7 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import objectos.util.UnmodifiableList;
-import objectos.util.ImmutableSet;
+import objectos.util.UnmodifiableSet;
 import objectos.util.MutableSet;
 
 /**
@@ -233,8 +233,8 @@ final class TestCase07 extends StageGitCommand<ObjectId> {
   }
 
   private void submitCopyBlobs() {
-    ImmutableSet<ObjectId> ids;
-    ids = blobsToCopy.toImmutableSet();
+    UnmodifiableSet<ObjectId> ids;
+    ids = blobsToCopy.toUnmodifiableSet();
 
     blobsToCopy.clear();
 

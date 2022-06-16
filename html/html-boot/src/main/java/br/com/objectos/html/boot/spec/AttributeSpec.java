@@ -26,7 +26,7 @@ import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.TreeSet;
-import objectos.util.ImmutableSet;
+import objectos.util.UnmodifiableSet;
 
 public abstract class AttributeSpec {
 
@@ -94,7 +94,7 @@ public abstract class AttributeSpec {
 
   public final Iterable<String> methodNameStream() {
     return nameSet.isEmpty()
-        ? ImmutableSet.of(methodName(name))
+        ? UnmodifiableSet.of(methodName(name))
         : nameSet;
   }
 

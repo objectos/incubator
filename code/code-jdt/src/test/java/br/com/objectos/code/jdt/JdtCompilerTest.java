@@ -26,7 +26,7 @@ import java.util.List;
 import java.util.Set;
 import javax.lang.model.SourceVersion;
 import objectos.util.UnmodifiableList;
-import objectos.util.ImmutableSet;
+import objectos.util.UnmodifiableSet;
 import objectos.util.MutableList;
 import org.eclipse.jdt.core.compiler.CategorizedProblem;
 import org.eclipse.jdt.internal.compiler.CompilationResult;
@@ -113,7 +113,7 @@ public class JdtCompilerTest {
 
       @Override
       protected final boolean process(ProcessingRound round) {
-        ImmutableSet<ProcessingType> types = round.getAnnotatedTypes();
+        UnmodifiableSet<ProcessingType> types = round.getAnnotatedTypes();
         for (ProcessingType type : types) {
           methods = type.getDeclaredMethods();
         }

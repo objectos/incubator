@@ -20,7 +20,7 @@ import javax.annotation.processing.ProcessingEnvironment;
 import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.ExecutableElement;
 import objectos.lang.Check;
-import objectos.util.ImmutableSet;
+import objectos.util.UnmodifiableSet;
 
 public class ProcessingConstructor extends ProcessingExecutableElement {
 
@@ -49,7 +49,7 @@ public class ProcessingConstructor extends ProcessingExecutableElement {
   }
 
   @Override
-  public final ImmutableSet<ConstructorModifier> getModifiers() {
+  public final UnmodifiableSet<ConstructorModifier> getModifiers() {
     return getModifiersImpl();
   }
 

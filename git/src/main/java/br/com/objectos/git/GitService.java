@@ -23,7 +23,7 @@ import br.com.objectos.fs.Directory;
 import objectos.lang.Check;
 import objectos.lang.NoOpNoteSink;
 import objectos.lang.NoteSink;
-import objectos.util.ImmutableSet;
+import objectos.util.UnmodifiableSet;
 
 /**
  * A class for supporting the execution of {@link GitCommand} instances.
@@ -301,8 +301,8 @@ public final class GitService implements GitExecutor {
   private class ThisCommandExecutor implements GitCommandExecutor {
 
     @Override
-    public final Computation<ImmutableSet<ObjectId>> copyObjects(
-        Repository source, ImmutableSet<ObjectId> objectsToCopy, Repository destination) {
+    public final Computation<UnmodifiableSet<ObjectId>> copyObjects(
+        Repository source, UnmodifiableSet<ObjectId> objectsToCopy, Repository destination) {
       GitWorker w;
       w = randomWorker();
 

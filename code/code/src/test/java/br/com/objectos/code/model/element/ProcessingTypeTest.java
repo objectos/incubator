@@ -38,7 +38,7 @@ import java.util.NoSuchElementException;
 import java.util.Set;
 import javax.lang.model.element.ElementKind;
 import objectos.util.UnmodifiableList;
-import objectos.util.ImmutableSet;
+import objectos.util.UnmodifiableSet;
 import objectos.util.MutableList;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -361,7 +361,7 @@ public class ProcessingTypeTest extends AbstractCodeModelTest {
 
       @Override
       protected final boolean process(ProcessingRound round) {
-        ImmutableSet<ProcessingType> types;
+        UnmodifiableSet<ProcessingType> types;
         types = round.getAnnotatedTypes();
 
         for (ProcessingType type : types) {
@@ -410,7 +410,7 @@ public class ProcessingTypeTest extends AbstractCodeModelTest {
     ProcessingType subject0;
     subject0 = query(ModifiersSubject0.class);
 
-    ImmutableSet<TypeModifier> modifiers0;
+    UnmodifiableSet<TypeModifier> modifiers0;
     modifiers0 = subject0.getModifiers();
 
     assertEquals(modifiers0.size(), 3);
@@ -421,7 +421,7 @@ public class ProcessingTypeTest extends AbstractCodeModelTest {
     ProcessingType subject1;
     subject1 = query(ModifiersSubject1.class);
 
-    ImmutableSet<TypeModifier> modifiers1;
+    UnmodifiableSet<TypeModifier> modifiers1;
     modifiers1 = subject1.getModifiers();
 
     assertEquals(modifiers1.size(), 2);

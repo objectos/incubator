@@ -29,7 +29,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 import javax.annotation.processing.Processor;
-import objectos.util.ImmutableSet;
+import objectos.util.UnmodifiableSet;
 import objectos.util.Lists;
 import objectos.util.MutableList;
 
@@ -45,7 +45,7 @@ public class ServicesProcessor extends AbstractProcessingRoundProcessor {
 
   @Override
   protected final boolean process(ProcessingRound round) {
-    ImmutableSet<ProcessingType> types = round.getAnnotatedTypes();
+    UnmodifiableSet<ProcessingType> types = round.getAnnotatedTypes();
     for (ProcessingType type : types) {
       process(type);
     }

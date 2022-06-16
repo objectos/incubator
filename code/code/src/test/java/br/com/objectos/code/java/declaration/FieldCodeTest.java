@@ -23,7 +23,7 @@ import static br.com.objectos.code.java.type.NamedTypes._int;
 import static br.com.objectos.code.java.type.NamedTypes.t;
 
 import br.com.objectos.code.util.AbstractCodeJavaTest;
-import objectos.util.ImmutableSet;
+import objectos.util.UnmodifiableSet;
 import org.testng.annotations.Test;
 
 public class FieldCodeTest extends AbstractCodeJavaTest {
@@ -31,8 +31,8 @@ public class FieldCodeTest extends AbstractCodeJavaTest {
   @Test(description = ""
       + "explicit Builder usage should be allowed.")
   public void builder() {
-    ImmutableSet<FieldModifier> modifiers;
-    modifiers = ImmutableSet.<FieldModifier> of(_static(), _final());
+    UnmodifiableSet<FieldModifier> modifiers;
+    modifiers = UnmodifiableSet.<FieldModifier> of(_static(), _final());
 
     test(
         FieldCode.builder()

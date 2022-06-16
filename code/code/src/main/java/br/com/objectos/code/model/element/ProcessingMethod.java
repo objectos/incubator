@@ -23,7 +23,7 @@ import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.type.TypeMirror;
 import objectos.lang.Check;
-import objectos.util.ImmutableSet;
+import objectos.util.UnmodifiableSet;
 
 public final class ProcessingMethod extends ProcessingExecutableElement {
 
@@ -63,7 +63,7 @@ public final class ProcessingMethod extends ProcessingExecutableElement {
   }
 
   @Override
-  public final ImmutableSet<MethodModifier> getModifiers() {
+  public final UnmodifiableSet<MethodModifier> getModifiers() {
     return getModifiersImpl();
   }
 

@@ -29,7 +29,7 @@ import javax.lang.model.element.Element;
 import javax.lang.model.element.VariableElement;
 import javax.lang.model.util.ElementFilter;
 import objectos.util.UnmodifiableList;
-import objectos.util.ImmutableSet;
+import objectos.util.UnmodifiableSet;
 import org.testng.annotations.Test;
 
 public class ProcessingFieldTest extends AbstractCodeModelTest {
@@ -51,9 +51,9 @@ public class ProcessingFieldTest extends AbstractCodeModelTest {
     ProcessingField b = field(Subject.class, "b");
     ProcessingField c = field(Subject.class, "c");
 
-    ImmutableSet<FieldModifier> amod = a.getModifiers();
-    ImmutableSet<FieldModifier> bmod = b.getModifiers();
-    ImmutableSet<FieldModifier> cmod = c.getModifiers();
+    UnmodifiableSet<FieldModifier> amod = a.getModifiers();
+    UnmodifiableSet<FieldModifier> bmod = b.getModifiers();
+    UnmodifiableSet<FieldModifier> cmod = c.getModifiers();
 
     assertEquals(amod.size(), 0);
     assertEquals(bmod.size(), 1);

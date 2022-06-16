@@ -35,7 +35,7 @@ import java.util.List;
 import objectos.lang.Check;
 import objectos.util.ByteArrays;
 import objectos.util.UnmodifiableList;
-import objectos.util.ImmutableSet;
+import objectos.util.UnmodifiableSet;
 import objectos.util.IntArrays;
 import objectos.util.MutableList;
 import org.commonmark.node.BlockQuote;
@@ -707,7 +707,7 @@ class MarkdownMethod implements Visitor {
     stackIndex--;
 
     if (argsQuantity == 0) {
-      return ImmutableSet.of();
+      return UnmodifiableSet.of();
     }
 
     MutableList<ArgumentsElement> result;

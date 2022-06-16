@@ -37,7 +37,7 @@ import javax.annotation.processing.ProcessingEnvironment;
 import javax.annotation.processing.Processor;
 import javax.tools.FileObject;
 import javax.tools.StandardLocation;
-import objectos.util.ImmutableSet;
+import objectos.util.UnmodifiableSet;
 
 @Services(Processor.class)
 public class CssCompilerProcessor extends AbstractProcessingRoundProcessor {
@@ -71,7 +71,7 @@ public class CssCompilerProcessor extends AbstractProcessingRoundProcessor {
 
   @Override
   protected final boolean process(ProcessingRound round) {
-    ImmutableSet<ProcessingPackage> packages = round.getAnnotatedPackages();
+    UnmodifiableSet<ProcessingPackage> packages = round.getAnnotatedPackages();
     for (ProcessingPackage pkg : packages) {
       process0(round, pkg);
     }

@@ -39,7 +39,7 @@ import java.util.List;
 import java.util.Set;
 import javax.lang.model.element.ExecutableElement;
 import objectos.util.UnmodifiableList;
-import objectos.util.ImmutableSet;
+import objectos.util.UnmodifiableSet;
 import objectos.util.MutableList;
 import org.testng.annotations.Test;
 
@@ -115,7 +115,7 @@ public class ProcessingMethodTest extends AbstractCodeModelTest {
 
       @Override
       protected final boolean process(ProcessingRound round) {
-        ImmutableSet<ProcessingType> types;
+        UnmodifiableSet<ProcessingType> types;
         types = round.getAnnotatedTypes();
 
         for (ProcessingType type : types) {
@@ -188,7 +188,7 @@ public class ProcessingMethodTest extends AbstractCodeModelTest {
 
     assertEquals(methods.size(), 1);
 
-    ImmutableSet<MethodModifier> m0;
+    UnmodifiableSet<MethodModifier> m0;
     m0 = methods.get(0).getModifiers();
 
     assertEquals(m0.size(), 2);

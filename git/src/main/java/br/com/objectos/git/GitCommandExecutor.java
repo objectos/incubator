@@ -17,7 +17,7 @@ package br.com.objectos.git;
 
 import br.com.objectos.concurrent.Computation;
 import br.com.objectos.fs.Directory;
-import objectos.util.ImmutableSet;
+import objectos.util.UnmodifiableSet;
 
 /**
  * Interface for supporting the execution of {@link GitCommand} instances. It
@@ -38,7 +38,7 @@ public interface GitCommandExecutor extends GitExecutor {
    *
    * <p>
    * This is the asynchronous execution of the
-   * {@link GitEngine#copyObjects(Repository, ImmutableSet, Repository)} task.
+   * {@link GitEngine#copyObjects(Repository, UnmodifiableSet, Repository)} task.
    *
    * @param source
    *        the source repository containing the objects. Git objects will be
@@ -52,8 +52,8 @@ public interface GitCommandExecutor extends GitExecutor {
    * @return a new computation for copying a set of objects from one repository
    *         to another
    */
-  Computation<ImmutableSet<ObjectId>> copyObjects(
-      Repository source, ImmutableSet<ObjectId> objects, Repository destination);
+  Computation<UnmodifiableSet<ObjectId>> copyObjects(
+      Repository source, UnmodifiableSet<ObjectId> objects, Repository destination);
 
   /**
    * Returns a new computation for materializing a Git tree entry at the

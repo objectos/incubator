@@ -26,7 +26,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import objectos.util.UnmodifiableList;
-import objectos.util.ImmutableSet;
+import objectos.util.UnmodifiableSet;
 import objectos.util.MutableSet;
 
 /**
@@ -88,8 +88,8 @@ final class TestCase05 extends StageGitCommand<ObjectId> {
     return ObjectId.parse("68699720c357a5ce1d4171a65ce801741736ea31");
   }
 
-  public static ImmutableSet<ObjectId> getCopyObjectSet() throws InvalidObjectIdFormatException {
-    return ImmutableSet.of(
+  public static UnmodifiableSet<ObjectId> getCopyObjectSet() throws InvalidObjectIdFormatException {
+    return UnmodifiableSet.of(
       ObjectId.parse("6eaf9247b35bbc35676d1698313381be80a4bdc4"),
       ObjectId.parse("4cf27def690a4b1cf92d49a653003cbda787ca5f"),
       ObjectId.parse("1584aeadeea6a620b0d91016b7aa1eca2f62af46"),
@@ -289,8 +289,8 @@ final class TestCase05 extends StageGitCommand<ObjectId> {
   }
 
   private void submitCopyBlobs() {
-    ImmutableSet<ObjectId> ids;
-    ids = blobsToCopy.toImmutableSet();
+    UnmodifiableSet<ObjectId> ids;
+    ids = blobsToCopy.toUnmodifiableSet();
 
     blobsToCopy.clear();
 

@@ -21,7 +21,7 @@ import javax.annotation.processing.ProcessingEnvironment;
 import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.VariableElement;
 import objectos.lang.Check;
-import objectos.util.ImmutableSet;
+import objectos.util.UnmodifiableSet;
 
 public class ProcessingField extends ProcessingVariableElement {
 
@@ -61,7 +61,7 @@ public class ProcessingField extends ProcessingVariableElement {
   }
 
   @Override
-  public final ImmutableSet<FieldModifier> getModifiers() {
+  public final UnmodifiableSet<FieldModifier> getModifiers() {
     return getModifiersImpl();
   }
 

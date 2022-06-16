@@ -37,7 +37,7 @@ import javax.tools.FileObject;
 import javax.tools.StandardLocation;
 import objectos.lang.Check;
 import objectos.util.UnmodifiableList;
-import objectos.util.ImmutableSet;
+import objectos.util.UnmodifiableSet;
 import objectos.util.MutableList;
 import objectos.util.MutableSet;
 
@@ -51,7 +51,7 @@ public abstract class ProcessingElement<E extends Element>
 
   private AccessLevel accessLevel;
 
-  private ImmutableSet<Modifier> modifiers;
+  private UnmodifiableSet<Modifier> modifiers;
 
   ProcessingElement(ProcessingEnvironment processingEnv, E element) {
     super(processingEnv);
@@ -142,12 +142,12 @@ public abstract class ProcessingElement<E extends Element>
   }
 
   @SuppressWarnings("unchecked")
-  final <M extends Modifier> ImmutableSet<M> getModifiersImpl() {
+  final <M extends Modifier> UnmodifiableSet<M> getModifiersImpl() {
     if (modifiers == null) {
       modifiers = getModifiers0();
     }
 
-    return (ImmutableSet<M>) modifiers;
+    return (UnmodifiableSet<M>) modifiers;
   }
 
   final ProcessingResource getResource0(
@@ -192,14 +192,14 @@ public abstract class ProcessingElement<E extends Element>
     return AccessLevel.of(element);
   }
 
-  private ImmutableSet<Modifier> getModifiers0() {
+  private UnmodifiableSet<Modifier> getModifiers0() {
     MutableSet<Modifier> set = new MutableSet<>();
 
     for (javax.lang.model.element.Modifier modifier : element.getModifiers()) {
       set.add(Modifiers.of(modifier));
     }
 
-    return set.toImmutableSet();
+    return set.toUnmodifiableSet();
   }
 
 }

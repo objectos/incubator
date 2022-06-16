@@ -17,13 +17,13 @@ package br.com.objectos.tools;
 
 import java.io.IOException;
 import java.net.URI;
-import objectos.util.ImmutableSet;
+import objectos.util.UnmodifiableSet;
 
 class StringJavaFileObject extends AbstractJavaFileObject {
 
   private static final int[] EMPTY_INT_ARRAY = new int[0];
 
-  private static final ImmutableSet<String> TYPES_KEYWORDS = ImmutableSet.of(
+  private static final UnmodifiableSet<String> TYPES_KEYWORDS = UnmodifiableSet.of(
     "@interface",
     "class",
     "enum",

@@ -23,7 +23,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Set;
 import objectos.util.UnmodifiableList;
-import objectos.util.ImmutableSet;
+import objectos.util.UnmodifiableSet;
 import objectos.util.MutableList;
 import org.testng.annotations.Test;
 
@@ -113,7 +113,7 @@ public class Code0021Test {
 
     @Override
     protected final boolean process(ProcessingRound round) {
-      ImmutableSet<ProcessingType> types = round.getAnnotatedTypes();
+      UnmodifiableSet<ProcessingType> types = round.getAnnotatedTypes();
       for (ProcessingType type : types) {
         NamedClass className = type.getName();
         nameList.add(className.getCanonicalName());

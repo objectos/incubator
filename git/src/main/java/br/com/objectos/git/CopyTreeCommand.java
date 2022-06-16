@@ -17,7 +17,7 @@ package br.com.objectos.git;
 
 import objectos.lang.Check;
 import objectos.util.UnmodifiableList;
-import objectos.util.ImmutableSet;
+import objectos.util.UnmodifiableSet;
 import objectos.util.MutableSet;
 
 /**
@@ -71,8 +71,8 @@ final class CopyTreeCommand extends StageGitCommand<ObjectId> {
           return;
         }
 
-        final ImmutableSet<ObjectId> set;
-        set = objectsToCopy.toImmutableSet();
+        final UnmodifiableSet<ObjectId> set;
+        set = objectsToCopy.toUnmodifiableSet();
 
         objectsToCopy.clear();
 

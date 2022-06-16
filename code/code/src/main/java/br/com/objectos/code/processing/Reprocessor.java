@@ -18,13 +18,13 @@ package br.com.objectos.code.processing;
 import javax.lang.model.element.Name;
 import javax.lang.model.element.PackageElement;
 import javax.lang.model.element.TypeElement;
-import objectos.util.ImmutableSet;
+import objectos.util.UnmodifiableSet;
 
 public interface Reprocessor {
 
-  ImmutableSet<Name> getPackages();
+  UnmodifiableSet<Name> getPackages();
 
-  ImmutableSet<Name> getTypes();
+  UnmodifiableSet<Name> getTypes();
 
   void reprocessPackage(PackageElement packageElement);
 

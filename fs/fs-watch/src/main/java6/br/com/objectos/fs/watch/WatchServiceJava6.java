@@ -22,16 +22,16 @@ import java.util.Collection;
 import java.util.EnumSet;
 import java.util.Map;
 import objectos.lang.Check;
-import objectos.util.ImmutableSet;
+import objectos.util.UnmodifiableSet;
 import objectos.util.MutableMap;
 
 final class WatchServiceJava6 extends Thread implements Watch.Service {
 
-  private final ImmutableSet<WatchDirectoryJava6> directories;
+  private final UnmodifiableSet<WatchDirectoryJava6> directories;
 
   private final int timeout = 1 * 1000;
 
-  WatchServiceJava6(ImmutableSet<WatchDirectoryJava6> directories) {
+  WatchServiceJava6(UnmodifiableSet<WatchDirectoryJava6> directories) {
     super("WatchService");
 
     this.directories = directories;
@@ -70,8 +70,8 @@ final class WatchServiceJava6 extends Thread implements Watch.Service {
       Collection<WatchDirectoryJava6> values;
       values = directories.values();
 
-      ImmutableSet<WatchDirectoryJava6> set;
-      set = ImmutableSet.copyOf(values);
+      UnmodifiableSet<WatchDirectoryJava6> set;
+      set = UnmodifiableSet.copyOf(values);
 
       return new WatchServiceJava6(set);
     }

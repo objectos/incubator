@@ -31,7 +31,7 @@ import objectos.lang.Check;
 import objectos.lang.Note0;
 import objectos.lang.Note1;
 import objectos.lang.Note2;
-import objectos.util.ImmutableSet;
+import objectos.util.UnmodifiableSet;
 import objectos.util.MutableSet;
 
 /**
@@ -761,8 +761,8 @@ final class ObjectReader extends AbstractGitEngineTask implements ObjectReaderHa
 
       return _IO_INDEX_FAN_OUT;
     } else {
-      ImmutableSet<ObjectId> copy;
-      copy = objectsNotFound.toImmutableSet();
+      UnmodifiableSet<ObjectId> copy;
+      copy = objectsNotFound.toUnmodifiableSet();
 
       objects = copy.iterator();
 

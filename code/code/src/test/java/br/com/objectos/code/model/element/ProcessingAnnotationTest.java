@@ -36,7 +36,7 @@ import java.util.Set;
 import javax.lang.model.type.DeclaredType;
 import javax.lang.model.util.Types;
 import objectos.util.UnmodifiableList;
-import objectos.util.ImmutableSet;
+import objectos.util.UnmodifiableSet;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -58,7 +58,7 @@ public class ProcessingAnnotationTest extends AbstractCodeModelTest {
 
       @Override
       protected final boolean process(ProcessingRound round) {
-        ImmutableSet<ProcessingType> types = round.getAnnotatedTypes();
+        UnmodifiableSet<ProcessingType> types = round.getAnnotatedTypes();
         for (ProcessingType type : types) {
           process0(round, type);
         }

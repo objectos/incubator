@@ -28,7 +28,7 @@ import br.com.objectos.code.processing.ProcessingRound;
 import java.util.Set;
 import javax.annotation.processing.Processor;
 import objectos.ssg.Markdown;
-import objectos.util.ImmutableSet;
+import objectos.util.UnmodifiableSet;
 
 @Services(Processor.class)
 public final class MarkdownMethodProcessor extends AbstractProcessingRoundProcessor {
@@ -45,7 +45,7 @@ public final class MarkdownMethodProcessor extends AbstractProcessingRoundProces
 
   @Override
   protected final boolean process(ProcessingRound round) {
-    ImmutableSet<ProcessingMethod> methods;
+    UnmodifiableSet<ProcessingMethod> methods;
     methods = round.getAnnotatedMethods();
 
     for (ProcessingMethod m : methods) {

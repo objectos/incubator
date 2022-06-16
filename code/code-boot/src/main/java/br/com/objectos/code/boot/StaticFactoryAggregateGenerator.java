@@ -24,7 +24,7 @@ import br.com.objectos.code.processing.ProcessingRound;
 import java.io.IOException;
 import java.util.Set;
 import javax.annotation.processing.Processor;
-import objectos.util.ImmutableSet;
+import objectos.util.UnmodifiableSet;
 
 @Services(Processor.class)
 public class StaticFactoryAggregateGenerator extends AbstractProcessingRoundProcessor {
@@ -36,7 +36,7 @@ public class StaticFactoryAggregateGenerator extends AbstractProcessingRoundProc
 
   @Override
   protected final boolean process(ProcessingRound round) {
-    ImmutableSet<ProcessingPackage> packages = round.getAnnotatedPackages();
+    UnmodifiableSet<ProcessingPackage> packages = round.getAnnotatedPackages();
     for (ProcessingPackage pkg : packages) {
       process0(round, pkg);
     }

@@ -34,7 +34,7 @@ import java.util.zip.Inflater;
 import objectos.lang.Check;
 import objectos.lang.NoOpNoteSink;
 import objectos.lang.NoteSink;
-import objectos.util.ImmutableSet;
+import objectos.util.UnmodifiableSet;
 import objectos.util.MutableList;
 import objectos.util.MutableMap;
 import objectos.util.MutableSet;
@@ -265,8 +265,8 @@ public final class GitEngine extends GitInjector {
    *
    * @since 3
    */
-  public final GitTask<ImmutableSet<ObjectId>> copyObjects(
-      Repository source, ImmutableSet<ObjectId> objects, Repository destination) {
+  public final GitTask<UnmodifiableSet<ObjectId>> copyObjects(
+      Repository source, UnmodifiableSet<ObjectId> objects, Repository destination) {
     Check.notNull(source, "source == null");
     Check.notNull(objects, "objects == null");
     Check.notNull(destination, "destination == null");

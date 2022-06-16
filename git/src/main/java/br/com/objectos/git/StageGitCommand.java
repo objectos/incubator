@@ -21,7 +21,7 @@ import br.com.objectos.concurrent.StageComputationTask;
 import br.com.objectos.fs.Directory;
 import objectos.lang.Check;
 import objectos.lang.ToString;
-import objectos.util.ImmutableSet;
+import objectos.util.UnmodifiableSet;
 
 /**
  * <p>
@@ -87,8 +87,8 @@ final class CopyTreeCommand extends StageGitCommand<ObjectId> {
           return;
         }
 
-        final ImmutableSet<ObjectId> set;
-        set = objectsToCopy.toImmutableSet();
+        final UnmodifiableSet<ObjectId> set;
+        set = objectsToCopy.toUnmodifiableSet();
 
         objectsToCopy.clear();
 
@@ -191,7 +191,7 @@ public abstract class StageGitCommand<V>
 
   /**
    * Adds a single asynchronous computation by invoking
-   * {@link GitCommandExecutor#copyObjects(Repository, ImmutableSet, Repository)}.
+   * {@link GitCommandExecutor#copyObjects(Repository, UnmodifiableSet, Repository)}.
    *
    * @param source
    *        the source repository containing the objects. Git objects will be
@@ -206,7 +206,7 @@ public abstract class StageGitCommand<V>
    * @see #openRepository(Directory)
    */
   protected final void copyObjects(
-      Repository source, ImmutableSet<ObjectId> objects, Repository destination) {
+      Repository source, UnmodifiableSet<ObjectId> objects, Repository destination) {
     GitCommandExecutor git;
     git = checkGit();
 

@@ -23,7 +23,7 @@ import br.com.objectos.html.boot.spec.AttributeSpec;
 import br.com.objectos.html.boot.spec.SpecDsl;
 import br.com.objectos.html.boot.spi.type.SpiType;
 import objectos.util.UnmodifiableList;
-import objectos.util.ImmutableSet;
+import objectos.util.UnmodifiableSet;
 import org.testng.annotations.Test;
 
 public class AttributeSpecTest extends AbstractHtmlBootTest {
@@ -38,8 +38,8 @@ public class AttributeSpecTest extends AbstractHtmlBootTest {
     AttributeSpec res = attributeSpec("class");
 
     assertEquals(res.name(), "class");
-    assertEquals(res.kindSet(), ImmutableSet.of(AttributeKind.STRING));
-    assertEquals(res.interfaceSet(), ImmutableSet.of(AttributeNames.GlobalAttributeName));
+    assertEquals(res.kindSet(), UnmodifiableSet.of(AttributeKind.STRING));
+    assertEquals(res.interfaceSet(), UnmodifiableSet.of(AttributeNames.GlobalAttributeName));
     assertEquals(res.methodNameStream(), UnmodifiableList.of("_class"));
   }
 
@@ -53,8 +53,8 @@ public class AttributeSpecTest extends AbstractHtmlBootTest {
     AttributeSpec res = attributeSpec("hidden");
 
     assertEquals(res.name(), "hidden");
-    assertEquals(res.kindSet(), ImmutableSet.of(AttributeKind.BOOLEAN));
-    assertEquals(res.interfaceSet(), ImmutableSet.of(AttributeNames.GlobalAttributeName));
+    assertEquals(res.kindSet(), UnmodifiableSet.of(AttributeKind.BOOLEAN));
+    assertEquals(res.interfaceSet(), UnmodifiableSet.of(AttributeNames.GlobalAttributeName));
     assertEquals(res.methodNameStream(), UnmodifiableList.of("hidden"));
   }
 
@@ -73,10 +73,10 @@ public class AttributeSpecTest extends AbstractHtmlBootTest {
     AttributeSpec res = attributeSpec("href");
 
     assertEquals(res.name(), "href");
-    assertEquals(res.kindSet(), ImmutableSet.of(AttributeKind.STRING));
+    assertEquals(res.kindSet(), UnmodifiableSet.of(AttributeKind.STRING));
     assertEquals(
       res.interfaceSet(),
-      ImmutableSet.of(
+      UnmodifiableSet.of(
         SpiType.className("AValue"),
         SpiType.className("LinkValue")
       )
@@ -93,8 +93,8 @@ public class AttributeSpecTest extends AbstractHtmlBootTest {
     AttributeSpec res = attributeSpec("id");
 
     assertEquals(res.name(), "id");
-    assertEquals(res.kindSet(), ImmutableSet.of(AttributeKind.STRING));
-    assertEquals(res.interfaceSet(), ImmutableSet.of(AttributeNames.GlobalAttributeName));
+    assertEquals(res.kindSet(), UnmodifiableSet.of(AttributeKind.STRING));
+    assertEquals(res.interfaceSet(), UnmodifiableSet.of(AttributeNames.GlobalAttributeName));
     assertEquals(res.methodNameStream(), UnmodifiableList.of("id"));
   }
 

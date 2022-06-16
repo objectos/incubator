@@ -16,19 +16,19 @@
 package br.com.objectos.git;
 
 import objectos.lang.ToString;
-import objectos.util.ImmutableSet;
+import objectos.util.UnmodifiableSet;
 
-final class CopyObjectsTask extends AbstractGitTask<ImmutableSet<ObjectId>> {
+final class CopyObjectsTask extends AbstractGitTask<UnmodifiableSet<ObjectId>> {
 
   private final Repository destination;
 
-  private final ImmutableSet<ObjectId> objectsToCopy;
+  private final UnmodifiableSet<ObjectId> objectsToCopy;
 
   private final Repository source;
 
   CopyObjectsTask(GitEngine engine,
                   Repository source,
-                  ImmutableSet<ObjectId> objectsToCopy,
+                  UnmodifiableSet<ObjectId> objectsToCopy,
                   Repository destination) {
     super(engine);
 

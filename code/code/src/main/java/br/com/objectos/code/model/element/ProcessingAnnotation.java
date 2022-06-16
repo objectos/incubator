@@ -50,7 +50,7 @@ import javax.tools.Diagnostic.Kind;
 import objectos.lang.Check;
 import objectos.util.UnmodifiableList;
 import objectos.util.ImmutableMap;
-import objectos.util.ImmutableSet;
+import objectos.util.UnmodifiableSet;
 import objectos.util.MutableMap;
 
 public class ProcessingAnnotation
@@ -605,7 +605,7 @@ public class ProcessingAnnotation
   private static class ToModelType
       extends SimpleAnnotationValueVisitor<PTypeMirror, ProcessingEnvironment> {
 
-    static final ImmutableSet<String> ERROR_MESSAGES = ImmutableSet.of("<any>", "<error>");
+    static final UnmodifiableSet<String> ERROR_MESSAGES = UnmodifiableSet.of("<any>", "<error>");
     static final ToModelType INSTANCE = new ToModelType();
 
     private ToModelType() {}

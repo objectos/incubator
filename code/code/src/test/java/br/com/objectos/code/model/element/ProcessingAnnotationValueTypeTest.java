@@ -23,7 +23,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import java.util.Set;
-import objectos.util.ImmutableSet;
+import objectos.util.UnmodifiableSet;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -42,7 +42,7 @@ public class ProcessingAnnotationValueTypeTest extends AbstractProcessingAnnotat
 
       @Override
       protected final boolean process(ProcessingRound round) {
-        ImmutableSet<ProcessingType> annotatedTypes;
+        UnmodifiableSet<ProcessingType> annotatedTypes;
         annotatedTypes = round.getAnnotatedTypes();
 
         for (ProcessingType annotatedType : annotatedTypes) {

@@ -18,7 +18,7 @@ package br.com.objectos.git;
 import br.com.objectos.fs.Directory;
 import java.io.IOException;
 import java.util.concurrent.ExecutionException;
-import objectos.util.ImmutableSet;
+import objectos.util.UnmodifiableSet;
 
 /**
  * Unexpected BadObjectException during CopyObjectsTask.
@@ -1310,8 +1310,8 @@ final class TestCase14 {
     );
   }
 
-  public static ImmutableSet<ObjectId> getCopyObjectSet() throws InvalidObjectIdFormatException {
-    return ImmutableSet.of(
+  public static UnmodifiableSet<ObjectId> getCopyObjectSet() throws InvalidObjectIdFormatException {
+    return UnmodifiableSet.of(
         getBlob()
     );
   }

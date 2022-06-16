@@ -28,7 +28,7 @@ import java.util.EnumSet;
 import java.util.Set;
 import objectos.lang.Check;
 import objectos.util.ImmutableMap;
-import objectos.util.ImmutableSet;
+import objectos.util.UnmodifiableSet;
 import objectos.util.MutableMap;
 
 final class WatchServiceJava7 implements Watch.Service {
@@ -92,8 +92,8 @@ final class WatchServiceJava7 implements Watch.Service {
       Collection<WatchDirectoryJava7> values;
       values = directories.values();
 
-      ImmutableSet<WatchDirectoryJava7> set;
-      set = ImmutableSet.copyOf(values);
+      UnmodifiableSet<WatchDirectoryJava7> set;
+      set = UnmodifiableSet.copyOf(values);
 
       return new WatchServiceJava7(set);
     }

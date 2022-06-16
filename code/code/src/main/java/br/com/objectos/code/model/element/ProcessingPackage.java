@@ -24,7 +24,7 @@ import javax.lang.model.element.Name;
 import javax.lang.model.element.PackageElement;
 import javax.tools.StandardLocation;
 import objectos.lang.Check;
-import objectos.util.ImmutableSet;
+import objectos.util.UnmodifiableSet;
 
 public final class ProcessingPackage extends ProcessingElement<PackageElement> {
 
@@ -52,7 +52,7 @@ public final class ProcessingPackage extends ProcessingElement<PackageElement> {
   }
 
   @Override
-  public final ImmutableSet<Modifier> getModifiers() {
+  public final UnmodifiableSet<Modifier> getModifiers() {
     return getModifiersImpl();
   }
 

@@ -20,7 +20,7 @@ import br.com.objectos.concurrent.CpuWorker;
 import br.com.objectos.concurrent.IoWorker;
 import br.com.objectos.fs.Directory;
 import br.com.objectos.git.GitEngine.Option;
-import objectos.util.ImmutableSet;
+import objectos.util.UnmodifiableSet;
 
 final class GitWorker {
 
@@ -46,12 +46,12 @@ final class GitWorker {
     return new GitWorker(cpuWorker, engines);
   }
 
-  public final Computation<ImmutableSet<ObjectId>> copyObjects(
-      Repository source, ImmutableSet<ObjectId> objectsToCopy, Repository destination) {
+  public final Computation<UnmodifiableSet<ObjectId>> copyObjects(
+      Repository source, UnmodifiableSet<ObjectId> objectsToCopy, Repository destination) {
     GitEngine e;
     e = randomEngine();
 
-    GitTask<ImmutableSet<ObjectId>> task;
+    GitTask<UnmodifiableSet<ObjectId>> task;
     task = e.copyObjects(source, objectsToCopy, destination);
 
     return create(task);
