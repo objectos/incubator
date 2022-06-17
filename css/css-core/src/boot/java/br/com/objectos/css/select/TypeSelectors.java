@@ -2,8 +2,8 @@ package br.com.objectos.css.select;
 
 import br.com.objectos.code.annotations.Generated;
 import br.com.objectos.code.annotations.Ignore;
-import objectos.util.UnmodifiableMap;
 import objectos.util.MutableMap;
+import objectos.util.UnmodifiableMap;
 
 @Generated("br.com.objectos.css.boot.select.TypeSelectorsGen")
 public final class TypeSelectors {
