@@ -25,7 +25,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import objectos.util.UnmodifiableList;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -812,9 +812,9 @@ public class DirectoryTest extends AbstractObjectosFsTest {
 
   private static class CollectingNodeVisitor implements DirectoryContentsVisitor {
 
-    private final MutableList<Directory> directories = new MutableList<>();
+    private final GrowableList<Directory> directories = new GrowableList<>();
 
-    private final MutableList<RegularFile> files = new MutableList<>();
+    private final GrowableList<RegularFile> files = new GrowableList<>();
 
     @Override
     public final void visitDirectory(Directory directory) {

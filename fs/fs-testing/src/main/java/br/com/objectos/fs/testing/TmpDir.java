@@ -19,7 +19,7 @@ import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.JavaIoTmpdir;
 import br.com.objectos.random.testing.Next;
 import java.io.IOException;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 /**
  * A class that creates and manages temporary directories suitable for testing
@@ -35,7 +35,7 @@ public final class TmpDir {
 
   static final TmpDir INSTANCE = createInstance();
 
-  private final MutableList<Directory> directories = new MutableList<>();
+  private final GrowableList<Directory> directories = new GrowableList<>();
 
   private TmpDir() {}
 

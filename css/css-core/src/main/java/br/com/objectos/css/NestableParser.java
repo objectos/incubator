@@ -16,7 +16,7 @@
 package br.com.objectos.css;
 
 import java.util.Objects;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 class NestableParser {
 
@@ -27,7 +27,7 @@ class NestableParser {
 
   private Mode mode = Mode.START;
   private Nestable nestable;
-  private MutableList<NestablePart> parts = new MutableList<>();
+  private GrowableList<NestablePart> parts = new GrowableList<>();
   private final char[] value;
   private boolean whitespace;
 
@@ -77,7 +77,7 @@ class NestableParser {
     SimpleNestable newNestable = new SimpleNestable(parts.toUnmodifiableList());
     nestable = nestable != null ? nestable.add(newNestable) : newNestable;
 
-    parts = new MutableList<>();
+    parts = new GrowableList<>();
     ident.setLength(0);
     whitespace = false;
   }

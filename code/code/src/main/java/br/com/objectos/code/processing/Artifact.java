@@ -22,7 +22,7 @@ import java.io.StringWriter;
 import javax.annotation.processing.ProcessingEnvironment;
 import javax.tools.Diagnostic;
 import objectos.lang.Check;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 public abstract class Artifact {
 
@@ -70,7 +70,7 @@ public abstract class Artifact {
 
   public static class Builder {
 
-    private final MutableList<Artifact> list = new MutableList<>();
+    private final GrowableList<Artifact> list = new GrowableList<>();
 
     private Builder() {}
 

@@ -18,7 +18,7 @@ package br.com.objectos.css.select;
 import br.com.objectos.css.sheet.RuleElement;
 import java.util.Iterator;
 import objectos.util.UnmodifiableList;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 public class SelectorList extends Selector implements Iterable<Selector>, SelectorListTail {
 
@@ -39,7 +39,7 @@ public class SelectorList extends Selector implements Iterable<Selector>, Select
   }
 
   @Override
-  public final void acceptRuleElementList(MutableList<RuleElement> elements) {
+  public final void acceptRuleElementList(GrowableList<RuleElement> elements) {
     acceptRuleElementListImpl(elements, list, Combinator.LIST);
   }
 
@@ -98,7 +98,7 @@ public class SelectorList extends Selector implements Iterable<Selector>, Select
 
   @Override
   final SelectorList newSelectorListWithHead(Selector head) {
-    MutableList<Selector> newList = new MutableList<>();
+    GrowableList<Selector> newList = new GrowableList<>();
     newList.add(head);
     newList.addAll(list);
     return new SelectorList(newList.toUnmodifiableList());

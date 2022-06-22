@@ -21,7 +21,7 @@ import javax.lang.model.element.AnnotationValue;
 import javax.lang.model.element.ExecutableElement;
 import objectos.lang.Check;
 import objectos.util.UnmodifiableList;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 public abstract class ProcessingAnnotationValue implements CanGenerateCompilationError {
 
@@ -72,8 +72,8 @@ public abstract class ProcessingAnnotationValue implements CanGenerateCompilatio
   public final <E extends Enum<E>> UnmodifiableList<E> getEnumArray(Class<E> enumType) {
     Check.notNull(enumType, "enumType == null");
 
-    MutableList<E> result;
-    result = new MutableList<>();
+    GrowableList<E> result;
+    result = new GrowableList<>();
 
     UnmodifiableList<ProcessingEnumConstant> enumArray;
     enumArray = getEnumConstantArray();

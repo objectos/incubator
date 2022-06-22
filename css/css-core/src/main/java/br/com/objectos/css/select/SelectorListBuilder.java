@@ -15,11 +15,11 @@
  */
 package br.com.objectos.css.select;
 
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 public class SelectorListBuilder {
 
-  private final MutableList<Selector> list = new MutableList<>();
+  private final GrowableList<Selector> list = new GrowableList<>();
 
   public SelectorListBuilder() {}
 

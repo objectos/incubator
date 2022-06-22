@@ -40,7 +40,7 @@ import objectos.util.CharArrays;
 import objectos.util.DoubleArrays;
 import objectos.util.UnmodifiableList;
 import objectos.util.IntArrays;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 public class StyleSheetDsl implements Creator, Marker {
 
@@ -56,7 +56,7 @@ public class StyleSheetDsl implements Creator, Marker {
   private int[] protos;
   private int protosLength;
 
-  private MutableList<RuleElement> rulePrefix;
+  private GrowableList<RuleElement> rulePrefix;
 
   StyleSheetDsl() {
     chars = new char[16 * 128];
@@ -724,7 +724,7 @@ public class StyleSheetDsl implements Creator, Marker {
 
   public final void setRulePrefix(RuleElement[] elements) {
     if (rulePrefix == null) {
-      rulePrefix = new MutableList<>();
+      rulePrefix = new GrowableList<>();
     }
 
     for (int i = 0; i < elements.length; i++) {

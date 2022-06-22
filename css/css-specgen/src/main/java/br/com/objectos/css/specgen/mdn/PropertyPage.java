@@ -18,7 +18,7 @@ package br.com.objectos.css.specgen.mdn;
 import br.com.objectos.css.specgen.spec.Property;
 import br.com.objectos.css.specgen.spec.ValueType;
 import objectos.util.UnmodifiableList;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.nodes.Node;
@@ -67,7 +67,7 @@ public class PropertyPage extends Property.Builder {
 
   @Override
   protected final UnmodifiableList<ValueType> valueTypes() {
-    MutableList<ValueType> vt = new MutableList<>();
+    GrowableList<ValueType> vt = new GrowableList<>();
 
     for (Element code : codeElements) {
       valueTypes0(vt, code);
@@ -96,7 +96,7 @@ public class PropertyPage extends Property.Builder {
     return false;
   }
 
-  private void valueTypes0(MutableList<ValueType> vt, Element code) {
+  private void valueTypes0(GrowableList<ValueType> vt, Element code) {
     String name = null;
     StringBuilder formal = new StringBuilder();
 

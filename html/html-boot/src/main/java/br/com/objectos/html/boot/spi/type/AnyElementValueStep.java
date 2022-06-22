@@ -26,11 +26,11 @@ import br.com.objectos.html.boot.HtmlBoot;
 import br.com.objectos.html.boot.spec.AbstractJavaFileStep;
 import br.com.objectos.html.boot.spec.ElementSpec;
 import java.util.function.Consumer;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 public class AnyElementValueStep extends AbstractJavaFileStep {
 
-  private final MutableList<NamedClass> interfaces = new MutableList<>();
+  private final GrowableList<NamedClass> interfaces = new GrowableList<>();
 
   public AnyElementValueStep(Consumer<JavaFile> javaFileWriter) {
     super(javaFileWriter);

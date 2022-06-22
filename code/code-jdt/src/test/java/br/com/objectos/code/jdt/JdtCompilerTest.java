@@ -27,7 +27,7 @@ import java.util.Set;
 import javax.lang.model.SourceVersion;
 import objectos.util.UnmodifiableList;
 import objectos.util.UnmodifiableSet;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 import org.eclipse.jdt.core.compiler.CategorizedProblem;
 import org.eclipse.jdt.internal.compiler.CompilationResult;
 import org.eclipse.jdt.internal.compiler.ICompilerRequestor;
@@ -86,8 +86,8 @@ public class JdtCompilerTest {
       private UnmodifiableList<ProcessingMethod> methods;
 
       public final UnmodifiableList<String> getAbstractMethodNames() {
-        MutableList<String> result;
-        result = new MutableList<>();
+        GrowableList<String> result;
+        result = new GrowableList<>();
 
         for (int i = 0; i < methods.size(); i++) {
           ProcessingMethod method;

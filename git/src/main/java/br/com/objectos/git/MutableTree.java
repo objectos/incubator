@@ -27,7 +27,7 @@ import java.util.zip.Deflater;
 import objectos.lang.Check;
 import objectos.lang.ToString;
 import objectos.util.UnmodifiableList;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 /**
  * A class for creating a Git tree hierarchy suitable for recursively writing to
@@ -41,7 +41,7 @@ public final class MutableTree extends MutableTreeEntry {
 
   private byte[] contents;
 
-  private final MutableList<MutableTreeEntry> entries = new MutableList<>();
+  private final GrowableList<MutableTreeEntry> entries = new GrowableList<>();
 
   private final String name;
 

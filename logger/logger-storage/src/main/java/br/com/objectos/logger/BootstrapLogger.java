@@ -18,7 +18,7 @@ package br.com.objectos.logger;
 import objectos.lang.Check;
 import objectos.lang.NoteSink;
 import objectos.util.UnmodifiableList;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 /**
  * An in-memory logger implementation that can be used to bootstrap a
@@ -30,7 +30,7 @@ public final class BootstrapLogger extends AbstractConfigurableLogger {
 
   private boolean bootstrap;
 
-  private final MutableList<WriteJobLog> logs = new MutableList<>();
+  private final GrowableList<WriteJobLog> logs = new GrowableList<>();
 
   /**
    * Creates a new instance.

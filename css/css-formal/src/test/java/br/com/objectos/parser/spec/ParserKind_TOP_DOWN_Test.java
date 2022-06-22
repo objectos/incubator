@@ -18,7 +18,7 @@ package br.com.objectos.parser.spec;
 import static org.testng.Assert.assertEquals;
 
 import br.com.objectos.formal.testing.Letter;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 import org.testng.annotations.Test;
 
 public class ParserKind_TOP_DOWN_Test {
@@ -27,7 +27,7 @@ public class ParserKind_TOP_DOWN_Test {
   public void oneOrMore() {
     Terminal letter = Terminal.get(Letter.class);
     Repetition it = Repetition.oneOrMore(letter, CollectionKind.LIST);
-    MutableList<Production> list = new MutableList<>();
+    GrowableList<Production> list = new GrowableList<>();
 
     it.forTopDown(list);
 

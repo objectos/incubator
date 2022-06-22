@@ -40,7 +40,7 @@ import java.util.Set;
 import javax.lang.model.element.ExecutableElement;
 import objectos.util.UnmodifiableList;
 import objectos.util.UnmodifiableSet;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 import org.testng.annotations.Test;
 
 public class ProcessingMethodTest extends AbstractCodeModelTest {
@@ -106,7 +106,7 @@ public class ProcessingMethodTest extends AbstractCodeModelTest {
   @Test
   public void getDocComment() {
     class ThisProcessor extends AbstractProcessingRoundProcessor {
-      private final MutableList<String> comments = new MutableList<>();
+      private final GrowableList<String> comments = new GrowableList<>();
 
       @Override
       public final Set<String> getSupportedAnnotationTypes() {
@@ -245,8 +245,8 @@ public class ProcessingMethodTest extends AbstractCodeModelTest {
     UnmodifiableList<ProcessingMethod> methods;
     methods = subject.getDeclaredMethods();
 
-    MutableList<NamedType> result;
-    result = new MutableList<>();
+    GrowableList<NamedType> result;
+    result = new GrowableList<>();
 
     for (int i = 0; i < methods.size(); i++) {
       ProcessingMethod method;
@@ -292,8 +292,8 @@ public class ProcessingMethodTest extends AbstractCodeModelTest {
         ProcessingMethod method;
         method = method(type, name);
 
-        MutableList<NamedType> result;
-        result = new MutableList<>();
+        GrowableList<NamedType> result;
+        result = new GrowableList<>();
 
         UnmodifiableList<PTypeMirror> types;
         types = method.getThrownTypes();

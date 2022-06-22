@@ -26,7 +26,7 @@ import java.lang.annotation.Annotation;
 import java.util.List;
 import java.util.Set;
 import objectos.lang.Check;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 import objectos.util.MutableSet;
 
 public final class AnnotationCode
@@ -294,7 +294,7 @@ public final class AnnotationCode
 
     private final Set<String> names = new MutableSet<>();
 
-    private final List<AnnotationCodeValuePair> pairs = new MutableList<>();
+    private final List<AnnotationCodeValuePair> pairs = new GrowableList<>();
 
     private Builder() {}
 

@@ -13,14 +13,14 @@ import br.com.objectos.code.util.AbstractCodeCoreTest;
 import java.util.List;
 import java.util.NoSuchElementException;
 import objectos.util.UnmodifiableList;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 public abstract class AbstractCodeModelTest extends AbstractCodeCoreTest {
 
   protected final UnmodifiableList<NamedClass> annotationToClassName(
       List<ProcessingAnnotation> annotations) {
-    MutableList<NamedClass> result;
-    result = new MutableList<>();
+    GrowableList<NamedClass> result;
+    result = new GrowableList<>();
 
     for (int i = 0; i < annotations.size(); i++) {
       ProcessingAnnotation ann;
@@ -57,8 +57,8 @@ public abstract class AbstractCodeModelTest extends AbstractCodeCoreTest {
   }
 
   protected final <F, T> UnmodifiableList<T> map(List<F> list, Function<? super F, ? extends T> f) {
-    MutableList<T> result;
-    result = new MutableList<>();
+    GrowableList<T> result;
+    result = new GrowableList<>();
 
     for (F e : list) {
       T apply = f.apply(e);

@@ -22,7 +22,7 @@ import java.util.Iterator;
 import java.util.Locale;
 import objectos.lang.Check;
 import objectos.util.UnmodifiableList;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 abstract class ElementModifierSet extends AbstractCodeElement {
 
@@ -61,7 +61,7 @@ abstract class ElementModifierSet extends AbstractCodeElement {
 
   static abstract class Builder<E extends ElementModifierSet> {
 
-    final MutableList<Modifier> values = new MutableList<>();
+    final GrowableList<Modifier> values = new GrowableList<>();
 
     Builder() {}
 

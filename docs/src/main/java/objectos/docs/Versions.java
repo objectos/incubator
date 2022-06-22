@@ -26,7 +26,7 @@ import objectos.docs.ui.Pages;
 import objectos.docs.v0001.V0001;
 import objectos.docs.v0002.V0002;
 import objectos.ssg.SiteStyleSheet;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 final class Versions extends DocsPage implements Pages.IgnoreMe {
 
@@ -145,8 +145,8 @@ final class Versions extends DocsPage implements Pages.IgnoreMe {
   }
 
   @Override
-  protected final MutableList<StyleSheet> styleSheets() {
-    MutableList<StyleSheet> sheets;
+  protected final GrowableList<StyleSheet> styleSheets() {
+    GrowableList<StyleSheet> sheets;
     sheets = super.styleSheets();
 
     sheets.add(css);

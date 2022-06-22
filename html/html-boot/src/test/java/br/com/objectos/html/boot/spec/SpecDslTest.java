@@ -19,7 +19,7 @@ import static org.testng.Assert.assertEquals;
 
 import br.com.objectos.html.boot.AbstractHtmlBootTest;
 import objectos.util.UnmodifiableList;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 import org.testng.annotations.Test;
 
 public class SpecDslTest extends AbstractHtmlBootTest {
@@ -35,8 +35,8 @@ public class SpecDslTest extends AbstractHtmlBootTest {
 
     assertEquals(flow.name(), "flow");
 
-    MutableList<String> names;
-    names = new MutableList<>();
+    GrowableList<String> names;
+    names = new GrowableList<>();
 
     for (Child child : flow.childStream()) {
       names.add(child.name());
@@ -98,8 +98,8 @@ public class SpecDslTest extends AbstractHtmlBootTest {
   }
 
   private Iterable<String> toName(Iterable<ElementSpec> specs) {
-    MutableList<String> result;
-    result = new MutableList<>();
+    GrowableList<String> result;
+    result = new GrowableList<>();
 
     for (ElementSpec spec : specs) {
       result.add(spec.name());

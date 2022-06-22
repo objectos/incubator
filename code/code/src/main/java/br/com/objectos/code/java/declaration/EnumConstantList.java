@@ -22,7 +22,7 @@ import br.com.objectos.code.java.io.CodeWriter;
 import java.util.Iterator;
 import objectos.lang.Check;
 import objectos.util.UnmodifiableList;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 public class EnumConstantList extends AbstractCodeElement
     implements
@@ -87,7 +87,7 @@ public class EnumConstantList extends AbstractCodeElement
 
   public static class Builder {
 
-    private final MutableList<EnumConstantCode> list = new MutableList<>();
+    private final GrowableList<EnumConstantCode> list = new GrowableList<>();
 
     private Builder() {}
 

@@ -16,13 +16,13 @@
 package br.com.objectos.mysql;
 
 import java.util.Set;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 public interface Option {
 
   void acceptClientJob(AbstractClientJob<?> job);
 
-  void acceptConfigurationFile(MutableList<String> lines);
+  void acceptConfigurationFile(GrowableList<String> lines);
 
   @SuppressWarnings("exports")
   void acceptExecution(Execution execution);

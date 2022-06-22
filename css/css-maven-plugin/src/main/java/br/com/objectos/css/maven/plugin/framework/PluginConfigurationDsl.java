@@ -27,11 +27,11 @@ import java.util.EnumMap;
 import java.util.Map;
 import objectos.lang.Check;
 import objectos.util.UnmodifiableList;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 class PluginConfigurationDsl implements ConfigurationDsl {
 
-  private final Map<FrameworkGroup, MutableList<PropertyClass>> groupMap
+  private final Map<FrameworkGroup, GrowableList<PropertyClass>> groupMap
       = new EnumMap<>(FrameworkGroup.class);
 
   private PackageName packageName = PackageName.unnamed();
@@ -54,7 +54,7 @@ class PluginConfigurationDsl implements ConfigurationDsl {
     Property property = b.build();
 
     PropertyClass propertyClass = property.toPropertyClass();
-    groupMap.computeIfAbsent(group, k -> new MutableList<>()).add(propertyClass);
+    groupMap.computeIfAbsent(group, k -> new GrowableList<>()).add(propertyClass);
 
   }
 

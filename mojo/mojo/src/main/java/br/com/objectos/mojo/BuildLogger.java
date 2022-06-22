@@ -18,7 +18,7 @@ package br.com.objectos.mojo;
 import br.com.objectos.mojo.BuildLog.Event;
 import br.com.objectos.mojo.BuildLog.Message;
 import objectos.util.UnmodifiableList;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 import org.codehaus.plexus.logging.Logger;
 import org.slf4j.event.Level;
 import org.slf4j.helpers.FormattingTuple;
@@ -28,7 +28,7 @@ final class BuildLogger extends AbstractLogger {
 
   private final Level level = Level.INFO;
 
-  private final MutableList<Message> messages = new MutableList<>();
+  private final GrowableList<Message> messages = new GrowableList<>();
 
   BuildLogger() {}
 

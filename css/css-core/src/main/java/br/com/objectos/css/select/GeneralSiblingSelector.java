@@ -17,7 +17,7 @@ package br.com.objectos.css.select;
 
 import br.com.objectos.css.sheet.RuleElement;
 import objectos.util.UnmodifiableList;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 public class GeneralSiblingSelector extends Selector implements ComplexSelector {
 
@@ -35,7 +35,7 @@ public class GeneralSiblingSelector extends Selector implements ComplexSelector 
   }
 
   @Override
-  public final void acceptRuleElementList(MutableList<RuleElement> elements) {
+  public final void acceptRuleElementList(GrowableList<RuleElement> elements) {
     acceptRuleElementListImpl(elements, selectors, Combinator.GENERAL_SIBLING);
   }
 
@@ -70,7 +70,7 @@ public class GeneralSiblingSelector extends Selector implements ComplexSelector 
 
   @Override
   final GeneralSiblingSelector newGeneralSiblingSelectorWithPrevious(Selector previous) {
-    MutableList<Selector> newSelectors = new MutableList<>();
+    GrowableList<Selector> newSelectors = new GrowableList<>();
     newSelectors.add(previous);
     newSelectors.addAll(selectors);
     return new GeneralSiblingSelector(newSelectors.toUnmodifiableList());

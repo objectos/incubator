@@ -22,7 +22,7 @@ import br.com.objectos.code.java.element.CodeElement;
 import br.com.objectos.code.java.io.CodeWriter;
 import java.util.Iterator;
 import objectos.util.UnmodifiableList;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 final class FormattedStatement extends AbstractCodeElement implements Statement {
 
@@ -34,9 +34,9 @@ final class FormattedStatement extends AbstractCodeElement implements Statement 
     this.elements = elements;
   }
 
-  static FormattedStatement of(MutableList<BlockElement> elements) {
-    MutableList<CodeElement> builder;
-    builder = new MutableList<>();
+  static FormattedStatement of(GrowableList<BlockElement> elements) {
+    GrowableList<CodeElement> builder;
+    builder = new GrowableList<>();
 
     for (int i = 0; i < elements.size(); i++) {
       BlockElement element;

@@ -30,22 +30,22 @@ import br.com.objectos.css.select.SimpleSelector;
 import br.com.objectos.css.select.UniversalSelector;
 import br.com.objectos.css.type.ColorName;
 import br.com.objectos.css.type.LengthUnit;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 class StyleMethodInvocation {
 
   private DeclarationMethodInvocation currentDeclaration;
-  private final MutableList<Argument> declarations = new MutableList<>();
+  private final GrowableList<Argument> declarations = new GrowableList<>();
 
-  private final MutableList<ArgumentsElement> selector = new MutableList<>();
+  private final GrowableList<ArgumentsElement> selector = new GrowableList<>();
 
   StyleMethodInvocation() {}
 
   public final MethodInvocation build() {
     buildCurrentDeclarationIfNecessary();
 
-    MutableList<ArgumentsElement> arguments;
-    arguments = new MutableList<>();
+    GrowableList<ArgumentsElement> arguments;
+    arguments = new GrowableList<>();
 
     arguments.add(nl());
     arguments.addAll(selector);

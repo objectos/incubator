@@ -16,7 +16,7 @@
 package br.com.objectos.lexer.impl.ah;
 
 import objectos.util.UnmodifiableList;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 class BrickListLink implements Link, LinkMerger {
 
@@ -100,8 +100,8 @@ class BrickListLink implements Link, LinkMerger {
   }
 
   private Link add(BrickLink that) {
-    MutableList<BrickLink> l;
-    l = new MutableList<>();
+    GrowableList<BrickLink> l;
+    l = new GrowableList<>();
 
     l.addAll(list);
 

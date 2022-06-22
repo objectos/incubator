@@ -20,7 +20,7 @@ import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworMultiElemen
 import br.com.objectos.css.maven.plugin.framework.NamedMulti.Invocation;
 import br.com.objectos.css.type.Value;
 import objectos.util.UnmodifiableList;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 class MultiElement extends AbstractFrameworkObject implements FrameworMultiElement {
 
@@ -34,8 +34,8 @@ class MultiElement extends AbstractFrameworkObject implements FrameworMultiEleme
   final void acceptNamedMultiInvocation(Invocation invocation) {
     invocation.addNewLine();
 
-    MutableList<Argument> arguments;
-    arguments = new MutableList<>();
+    GrowableList<Argument> arguments;
+    arguments = new GrowableList<>();
 
     for (int i = 0; i < values.size(); i++) {
       Value value;

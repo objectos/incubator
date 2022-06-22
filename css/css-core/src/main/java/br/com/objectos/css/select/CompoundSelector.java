@@ -18,7 +18,7 @@ package br.com.objectos.css.select;
 import br.com.objectos.css.sheet.RuleElement;
 import java.util.Iterator;
 import objectos.util.UnmodifiableList;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 public class CompoundSelector
     extends Selector
@@ -31,7 +31,7 @@ public class CompoundSelector
   }
 
   public static CompoundSelector ofParser(SimpleSelector first, Iterable<SimpleSelector> more) {
-    MutableList<Selector> list = new MutableList<>();
+    GrowableList<Selector> list = new GrowableList<>();
     list.add(checkIsSelector(first, "first"));
 
     for (SimpleSelector s : more) {
@@ -42,7 +42,7 @@ public class CompoundSelector
   }
 
   @Override
-  public final void acceptRuleElementList(MutableList<RuleElement> elements) {
+  public final void acceptRuleElementList(GrowableList<RuleElement> elements) {
     for (int i = 0; i < selectors.size(); i++) {
       Selector selector;
       selector = selectors.get(i);

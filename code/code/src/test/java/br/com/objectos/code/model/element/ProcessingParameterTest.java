@@ -39,7 +39,7 @@ import java.util.List;
 import java.util.Set;
 import objectos.util.UnmodifiableList;
 import objectos.util.UnmodifiableSet;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 import org.testng.annotations.Test;
 
 public class ProcessingParameterTest extends AbstractCodeCoreTest {
@@ -76,7 +76,7 @@ public class ProcessingParameterTest extends AbstractCodeCoreTest {
       + "The `final` modifier has a (analogous to) 'source-only' retention policy; "
       + "test was required to do a full compilation step.")
   public void getModifiers() {
-    final MutableList<ProcessingParameter> result = new MutableList<>();
+    final GrowableList<ProcessingParameter> result = new GrowableList<>();
 
     class ThisProcessor extends AbstractProcessingRoundProcessor {
       @Override
@@ -185,8 +185,8 @@ public class ProcessingParameterTest extends AbstractCodeCoreTest {
     UnmodifiableList<ProcessingParameter> subjectParameters;
     subjectParameters = getSubjectParameters(GetTypeSubject.class);
 
-    MutableList<NamedType> result;
-    result = new MutableList<>();
+    GrowableList<NamedType> result;
+    result = new GrowableList<>();
 
     for (int i = 0; i < subjectParameters.size(); i++) {
       ProcessingParameter parameter;
@@ -303,8 +303,8 @@ public class ProcessingParameterTest extends AbstractCodeCoreTest {
   }
 
   private <F, T> UnmodifiableList<T> map(List<F> list, Function<F, T> f) {
-    MutableList<T> result;
-    result = new MutableList<>();
+    GrowableList<T> result;
+    result = new GrowableList<>();
 
     for (F e : list) {
       T apply = f.apply(e);

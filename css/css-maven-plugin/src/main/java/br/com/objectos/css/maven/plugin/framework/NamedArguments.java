@@ -21,7 +21,7 @@ import br.com.objectos.code.java.expression.Argument;
 import br.com.objectos.code.java.expression.MethodInvocation;
 import br.com.objectos.css.type.Value;
 import objectos.util.UnmodifiableList;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 class NamedArguments extends NamedValue {
 
@@ -34,8 +34,8 @@ class NamedArguments extends NamedValue {
 
   @Override
   public final MethodInvocation invokePropertyMethod(String methodName) {
-    MutableList<Argument> arguments;
-    arguments = new MutableList<>();
+    GrowableList<Argument> arguments;
+    arguments = new GrowableList<>();
 
     for (Value v : values) {
       Argument argument = toArgument(v);

@@ -17,7 +17,7 @@ package br.com.objectos.mysql;
 
 import java.util.List;
 import java.util.Set;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 abstract class AbstractOption implements Option {
 
@@ -42,7 +42,7 @@ abstract class AbstractOption implements Option {
   }
 
   @Override
-  public final void acceptConfigurationFile(MutableList<String> lines) {
+  public final void acceptConfigurationFile(GrowableList<String> lines) {
     String option;
     option = toOptionImpl(key);
 

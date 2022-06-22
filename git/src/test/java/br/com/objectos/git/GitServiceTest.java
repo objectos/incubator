@@ -30,7 +30,7 @@ import br.com.objectos.fs.testing.TmpDir;
 import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 import objectos.util.UnmodifiableList;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -629,8 +629,8 @@ public class GitServiceTest extends AbstractGitTest {
     ObjectId id;
     id = maybe.getObjectId();
 
-    MutableList<String> list;
-    list = new MutableList<>();
+    GrowableList<String> list;
+    list = new GrowableList<>();
 
     while (id != null) {
       GitTask<Commit> computable;

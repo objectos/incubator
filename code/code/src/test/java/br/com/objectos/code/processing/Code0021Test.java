@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.Set;
 import objectos.util.UnmodifiableList;
 import objectos.util.UnmodifiableSet;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 import org.testng.annotations.Test;
 
 public class Code0021Test {
@@ -104,7 +104,7 @@ public class Code0021Test {
 
   private static class Code0021Processor extends AbstractProcessingRoundProcessor {
 
-    private final MutableList<String> nameList = new MutableList<>();
+    private final GrowableList<String> nameList = new GrowableList<>();
 
     @Override
     public final Set<String> getSupportedAnnotationTypes() {

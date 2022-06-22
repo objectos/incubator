@@ -29,7 +29,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import objectos.util.UnmodifiableList;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 class FakeStateSubjectBuilder {
 
@@ -86,7 +86,7 @@ class FakeStateSubjectBuilder {
   }
 
   Iterator<Object> valueIterator(int size) {
-    MutableList<Object> list = new MutableList<>();
+    GrowableList<Object> list = new GrowableList<>();
 
     for (int i = 0; i < size; i++) {
       list.add(valueList.removeLast());

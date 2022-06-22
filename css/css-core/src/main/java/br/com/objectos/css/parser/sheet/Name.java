@@ -18,7 +18,7 @@ package br.com.objectos.css.parser.sheet;
 import java.util.Iterator;
 import java.util.List;
 import objectos.util.UnmodifiableList;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 class Name {
 
@@ -33,7 +33,7 @@ class Name {
   }
 
   static Name fromString(String name) {
-    MutableList<String> list = new MutableList<>();
+    GrowableList<String> list = new GrowableList<>();
     StringBuilder part = new StringBuilder();
     char[] chars = name.toCharArray();
     for (char c : chars) {

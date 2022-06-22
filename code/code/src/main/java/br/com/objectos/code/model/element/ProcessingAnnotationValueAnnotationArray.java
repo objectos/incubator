@@ -20,7 +20,7 @@ import javax.lang.model.element.AnnotationMirror;
 import javax.lang.model.element.AnnotationValue;
 import javax.lang.model.element.ExecutableElement;
 import objectos.util.UnmodifiableList;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 class ProcessingAnnotationValueAnnotationArray extends ProcessingAnnotationValue {
 
@@ -49,8 +49,8 @@ class ProcessingAnnotationValueAnnotationArray extends ProcessingAnnotationValue
 
   private static UnmodifiableList<ProcessingAnnotation> toAnnotationArray(
       ProcessingAnnotation annotation, List<? extends AnnotationValue> array) {
-    MutableList<ProcessingAnnotation> result;
-    result = new MutableList<>();
+    GrowableList<ProcessingAnnotation> result;
+    result = new GrowableList<>();
 
     for (int i = 0; i < array.size(); i++) {
       AnnotationValue annotationValue;

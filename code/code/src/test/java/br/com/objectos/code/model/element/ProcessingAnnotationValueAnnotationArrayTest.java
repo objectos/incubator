@@ -15,7 +15,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import objectos.util.UnmodifiableList;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -111,8 +111,8 @@ public class ProcessingAnnotationValueAnnotationArrayTest
   }
 
   private UnmodifiableList<String> tn(UnmodifiableList<ProcessingAnnotation> iter) {
-    MutableList<String> result;
-    result = new MutableList<>();
+    GrowableList<String> result;
+    result = new GrowableList<>();
 
     for (int i = 0; i < iter.size(); i++) {
       ProcessingAnnotation ann;

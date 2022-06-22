@@ -19,7 +19,7 @@ import br.com.objectos.css.io.CssWriter;
 import br.com.objectos.css.sheet.RuleElement;
 import br.com.objectos.css.sheet.StyleSheetDsl;
 import java.io.IOException;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 public final class UniversalSelector extends Selector
     implements
@@ -41,7 +41,7 @@ public final class UniversalSelector extends Selector
   }
 
   @Override
-  public final void acceptRuleElementList(MutableList<RuleElement> elements) {
+  public final void acceptRuleElementList(GrowableList<RuleElement> elements) {
     elements.add(this);
   }
 

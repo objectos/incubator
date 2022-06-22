@@ -16,11 +16,11 @@
 package br.com.objectos.html.boot.spec;
 
 import java.util.List;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 public class CategorySpec {
 
-  private final List<Child> childSet = new MutableList<>();
+  private final List<Child> childSet = new GrowableList<>();
 
   private final String name;
 

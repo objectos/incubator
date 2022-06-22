@@ -29,7 +29,7 @@ import br.com.objectos.code.java.type.NamedClass;
 import br.com.objectos.code.java.type.NamedClassOrParameterized;
 import objectos.lang.Check;
 import objectos.util.UnmodifiableList;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 public final class EnumCode extends AbstractTypeCode {
 
@@ -245,10 +245,10 @@ public final class EnumCode extends AbstractTypeCode {
 
     private Implements _implements;
     private final Implements.Builder _implementsBuilder = Implements.builder();
-    private final MutableList<AnnotationCode> annotations = new MutableList<>();
-    private final MutableList<EnumBodyElement> bodyElements = new MutableList<>();
+    private final GrowableList<AnnotationCode> annotations = new GrowableList<>();
+    private final GrowableList<EnumBodyElement> bodyElements = new GrowableList<>();
     private final EnumConstantList.Builder constantListBuilder = EnumConstantList.builder();
-    private final MutableList<EnumModifier> modifiers = new MutableList<>();
+    private final GrowableList<EnumModifier> modifiers = new GrowableList<>();
     private String simpleName = "Unnamed";
 
     private Builder() {}
@@ -351,10 +351,10 @@ public final class EnumCode extends AbstractTypeCode {
 
   private static class EnumBody implements CodeElement {
 
-    private final MutableList<EnumBodyElement> bodyElements;
+    private final GrowableList<EnumBodyElement> bodyElements;
     private final EnumConstantList enumConstantList;
 
-    EnumBody(EnumConstantList enumConstantList, MutableList<EnumBodyElement> bodyElements) {
+    EnumBody(EnumConstantList enumConstantList, GrowableList<EnumBodyElement> bodyElements) {
       this.enumConstantList = enumConstantList;
       this.bodyElements = bodyElements;
     }

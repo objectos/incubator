@@ -21,12 +21,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import objectos.util.UnmodifiableList;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 final class ExecutionBuilder {
 
-  private final MutableList<String> error = new MutableList<>();
-  private final MutableList<String> output = new MutableList<>();
+  private final GrowableList<String> error = new GrowableList<>();
+  private final GrowableList<String> output = new GrowableList<>();
 
   private int exitValue = -1;
 
@@ -91,7 +91,7 @@ final class ExecutionBuilder {
     }
   }
 
-  private void consume(InputStream in, MutableList<String> result) {
+  private void consume(InputStream in, GrowableList<String> result) {
     InputStreamReader streamReader;
     streamReader = new InputStreamReader(in);
 

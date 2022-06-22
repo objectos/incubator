@@ -26,7 +26,7 @@ import br.com.objectos.code.java.statement.BlockElement;
 import br.com.objectos.code.java.statement.BlockStatement;
 import objectos.lang.Check;
 import objectos.util.UnmodifiableList;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 public final class ConstructorCode
     extends AbstractCodeElement
@@ -344,9 +344,9 @@ public final class ConstructorCode
   public static class Builder {
 
     private ConstructorModifier accessModifier = Nothing.INSTANCE;
-    private final MutableList<BlockElement> body = new MutableList<>();
+    private final GrowableList<BlockElement> body = new GrowableList<>();
     private ExplicitConstructorInvocation constructorInvocation = Nothing.INSTANCE;
-    private final MutableList<ParameterCode> parameters = new MutableList<>();
+    private final GrowableList<ParameterCode> parameters = new GrowableList<>();
 
     private Builder() {}
 

@@ -19,7 +19,7 @@ import br.com.objectos.css.sheet.RuleElement;
 import java.util.Iterator;
 import java.util.Optional;
 import objectos.util.UnmodifiableList;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 public class DescendantSelector
     extends Selector
@@ -40,7 +40,7 @@ public class DescendantSelector
   }
 
   @Override
-  public final void acceptRuleElementList(MutableList<RuleElement> elements) {
+  public final void acceptRuleElementList(GrowableList<RuleElement> elements) {
     acceptRuleElementListImpl(elements, selectors, Combinator.DESCENDANT);
   }
 
@@ -112,7 +112,7 @@ public class DescendantSelector
 
   @Override
   final DescendantSelector newDescendantSelectorWithAncestor(Selector ancestor) {
-    MutableList<Selector> newSelectors = new MutableList<>();
+    GrowableList<Selector> newSelectors = new GrowableList<>();
     newSelectors.add(ancestor);
     newSelectors.addAll(selectors);
     return new DescendantSelector(newSelectors.toUnmodifiableList());

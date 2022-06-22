@@ -24,13 +24,13 @@ import br.com.objectos.code.java.declaration.MethodCode;
 import br.com.objectos.code.java.declaration.Modifiers;
 import br.com.objectos.code.java.declaration.PackageName;
 import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkGroup;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 class FrameworkClass {
 
   private final ClassCode.Builder c;
   private final MethodCode.Builder def;
-  private final MutableList<MethodCode> groupMethods = new MutableList<>();
+  private final GrowableList<MethodCode> groupMethods = new GrowableList<>();
 
   private final PackageName packageName;
 

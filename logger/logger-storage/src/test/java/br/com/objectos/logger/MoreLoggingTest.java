@@ -35,7 +35,7 @@ import objectos.lang.Note1;
 import objectos.lang.Note2;
 import objectos.lang.Note3;
 import objectos.lang.NoteSink;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -80,7 +80,7 @@ public class MoreLoggingTest implements LogListener {
 
   private static final Note3<Arg1, Arg2, Arg3> WARN3 = Note3.warn();
 
-  private final MutableList<Log> logs = new MutableList<>();
+  private final GrowableList<Log> logs = new GrowableList<>();
 
   private int notifySize;
 
@@ -455,7 +455,7 @@ public class MoreLoggingTest implements LogListener {
 
     assertEquals(throwable.stackTrace, that.getStackTrace());
 
-    MutableList<ReadJobThrowable> s;
+    GrowableList<ReadJobThrowable> s;
     s = throwable.suppressed;
 
     if (s != null) {

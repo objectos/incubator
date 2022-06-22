@@ -17,7 +17,7 @@ package br.com.objectos.parser.spec;
 
 import java.util.Objects;
 import objectos.util.UnmodifiableList;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 public class Expression {
 
@@ -35,7 +35,7 @@ public class Expression {
 
   static Expression of(Symbol... symbols) {
     Objects.requireNonNull(symbols);
-    MutableList<Symbol> list = new MutableList<>();
+    GrowableList<Symbol> list = new GrowableList<>();
 
     for (Symbol symbol : symbols) {
       list.add(Objects.requireNonNull(symbol));

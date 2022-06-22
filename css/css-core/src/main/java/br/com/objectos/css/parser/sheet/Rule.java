@@ -21,7 +21,7 @@ import br.com.objectos.css.sheet.RuleElement;
 import br.com.objectos.css.sheet.StyleSheetDsl;
 import java.util.List;
 import java.util.Objects;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 final class Rule implements IsNonTerminal {
 
@@ -50,8 +50,8 @@ final class Rule implements IsNonTerminal {
   }
 
   final void acceptStyleSheetDsl(StyleSheetDsl dsl) {
-    MutableList<RuleElement> elements;
-    elements = new MutableList<>();
+    GrowableList<RuleElement> elements;
+    elements = new GrowableList<>();
 
     selector.acceptRuleElementList(elements);
 

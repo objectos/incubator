@@ -23,7 +23,7 @@ import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.VariableElement;
 import objectos.util.UnmodifiableList;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 class ProcessingTypeElements {
 
@@ -51,17 +51,17 @@ class ProcessingTypeElements {
 
   static class Builder extends SimpleElementVisitor<Void, Void> {
 
-    private final MutableList<ProcessingConstructor> constructors = new MutableList<>();
+    private final GrowableList<ProcessingConstructor> constructors = new GrowableList<>();
     private final List<? extends Element> elements;
 
     private final ProcessingType enclosing;
 
-    private final MutableList<ProcessingField> fields = new MutableList<>();
-    private final MutableList<ProcessingMethod> methods = new MutableList<>();
+    private final GrowableList<ProcessingField> fields = new GrowableList<>();
+    private final GrowableList<ProcessingMethod> methods = new GrowableList<>();
     private final ProcessingEnvironment processingEnv;
     private int size;
 
-    private final MutableList<ProcessingType> types = new MutableList<>();
+    private final GrowableList<ProcessingType> types = new GrowableList<>();
 
     Builder(ProcessingType enclosing, List<? extends Element> elements) {
       this.enclosing = enclosing;

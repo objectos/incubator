@@ -30,7 +30,7 @@ import br.com.objectos.smtp.server.ProcessingResult;
 import br.com.objectos.smtp.server.Transaction;
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -38,11 +38,11 @@ import org.testng.annotations.Test;
 
 public class FsMailStoreTest {
 
-  private MutableList<Directory> directories;
+  private GrowableList<Directory> directories;
 
   @BeforeClass
   public void _setUp() {
-    directories = new MutableList<>();
+    directories = new GrowableList<>();
   }
 
   @AfterClass(alwaysRun = true)

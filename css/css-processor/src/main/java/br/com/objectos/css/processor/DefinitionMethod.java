@@ -41,11 +41,11 @@ import br.com.objectos.css.sheet.StyleSheet;
 import br.com.objectos.css.type.AngleUnit;
 import br.com.objectos.css.type.ColorName;
 import br.com.objectos.css.type.LengthUnit;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 class DefinitionMethod implements CompiledStyleSheetVisitor<RuntimeException> {
 
-  private final MutableList<BlockStatement> statements = new MutableList<>();
+  private final GrowableList<BlockStatement> statements = new GrowableList<>();
   private StyleMethodInvocation style;
 
   private DefinitionMethod() {}

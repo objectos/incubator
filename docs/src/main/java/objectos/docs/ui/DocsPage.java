@@ -29,7 +29,7 @@ import objectos.docs.style.SyntaxCss;
 import objectos.docs.style.XmlCss;
 import objectos.ssg.SitePage;
 import objectos.ssg.SitePath;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 public abstract class DocsPage extends SitePage {
 
@@ -109,7 +109,7 @@ public abstract class DocsPage extends SitePage {
 
     css.setLength(0);
 
-    MutableList<StyleSheet> sheets;
+    GrowableList<StyleSheet> sheets;
     sheets = styleSheets();
 
     for (int i = 0; i < sheets.size(); i++) {
@@ -144,9 +144,9 @@ public abstract class DocsPage extends SitePage {
     );
   }
 
-  protected MutableList<StyleSheet> styleSheets() {
-    MutableList<StyleSheet> list;
-    list = new MutableList<>();
+  protected GrowableList<StyleSheet> styleSheets() {
+    GrowableList<StyleSheet> list;
+    list = new GrowableList<>();
 
     list.add(new ResetCss());
 

@@ -51,12 +51,12 @@ import br.com.objectos.html.boot.spi.type.SpiType;
 import br.com.objectos.html.boot.util.Ids;
 import br.com.objectos.html.boot.util.Names;
 import java.util.function.Consumer;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 public class GeneratedAbstractTemplateStep extends AbstractJavaFileStep {
 
-  private final MutableList<MethodCode> attrMethods = new MutableList<>();
-  private final MutableList<MethodCode> elementMethods = new MutableList<>();
+  private final GrowableList<MethodCode> attrMethods = new GrowableList<>();
+  private final GrowableList<MethodCode> elementMethods = new GrowableList<>();
 
   private TemplateSpec templateSpec;
 
@@ -174,7 +174,7 @@ public class GeneratedAbstractTemplateStep extends AbstractJavaFileStep {
     b.returnType(attributeSpec.className());
     b.name(methodName);
 
-    MutableList<Argument> args = new MutableList<>();
+    GrowableList<Argument> args = new GrowableList<>();
     args.add(StandardAttributeName.id(attributeSpec.constantName()));
 
     AttributeKind kind = attributeSpec.kind();

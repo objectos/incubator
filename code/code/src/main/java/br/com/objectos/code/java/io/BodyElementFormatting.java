@@ -17,7 +17,7 @@ package br.com.objectos.code.java.io;
 
 import br.com.objectos.code.java.declaration.BodyElement;
 import br.com.objectos.code.java.element.NewLine;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 final class BodyElementFormatting extends Formatting {
 
@@ -77,7 +77,7 @@ final class BodyElementFormatting extends Formatting {
     }
 
     @Override
-    final MutableList<BodyElement> elements() {
+    final GrowableList<BodyElement> elements() {
       return postAction.applyTo(super.elements());
     }
 
@@ -87,8 +87,8 @@ final class BodyElementFormatting extends Formatting {
     private static final NewLinePostAction INSTANCE = new NewLinePostAction();
 
     @Override
-    final MutableList<BodyElement> applyTo(MutableList<BodyElement> elements) {
-      MutableList<BodyElement> result = new MutableList<>();
+    final GrowableList<BodyElement> applyTo(GrowableList<BodyElement> elements) {
+      GrowableList<BodyElement> result = new GrowableList<>();
 
       for (BodyElement element : elements) {
         result.add(element);
@@ -101,7 +101,7 @@ final class BodyElementFormatting extends Formatting {
   }
 
   private abstract static class PostAction {
-    abstract MutableList<BodyElement> applyTo(MutableList<BodyElement> elements);
+    abstract GrowableList<BodyElement> applyTo(GrowableList<BodyElement> elements);
   }
 
 }

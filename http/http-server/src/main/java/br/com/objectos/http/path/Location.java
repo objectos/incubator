@@ -23,7 +23,7 @@ import br.com.objectos.http.server.RequestProto;
 import java.io.IOException;
 import objectos.lang.Check;
 import objectos.util.UnmodifiableList;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 public class Location {
 
@@ -100,7 +100,7 @@ public class Location {
 
   public static class Builder {
 
-    private final MutableList<Slug> slugs = new MutableList<>();
+    private final GrowableList<Slug> slugs = new GrowableList<>();
 
     private Builder() {}
 

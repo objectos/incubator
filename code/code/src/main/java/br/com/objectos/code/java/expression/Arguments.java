@@ -25,7 +25,7 @@ import br.com.objectos.code.java.io.CodeWriter;
 import br.com.objectos.code.java.io.Section;
 import objectos.lang.Check;
 import objectos.util.UnmodifiableList;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 public final class Arguments extends AbstractImmutableCodeElement
     implements
@@ -285,7 +285,7 @@ public final class Arguments extends AbstractImmutableCodeElement
 
   public static class Builder {
 
-    private final MutableList<CodeElement> elements = new MutableList<>();
+    private final GrowableList<CodeElement> elements = new GrowableList<>();
 
     private CommaOrNoop lastCommaOrNoop = CommaOrNoop.noop();
 

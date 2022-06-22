@@ -16,7 +16,7 @@
 package br.com.objectos.mysql;
 
 import java.util.Set;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 public final class NoopOption
     implements
@@ -37,7 +37,7 @@ public final class NoopOption
   }
 
   @Override
-  public final void acceptConfigurationFile(MutableList<String> lines) {
+  public final void acceptConfigurationFile(GrowableList<String> lines) {
     // noop
   }
 

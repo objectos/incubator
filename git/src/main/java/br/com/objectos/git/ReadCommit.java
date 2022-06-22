@@ -23,7 +23,7 @@ import java.nio.charset.CoderResult;
 import objectos.lang.Check;
 import objectos.lang.Note1;
 import objectos.lang.NoteSink;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 final class ReadCommit implements ObjectReaderAdapter {
 
@@ -109,7 +109,7 @@ final class ReadCommit implements ObjectReaderAdapter {
 
   private long objectPosition;
 
-  private MutableList<ObjectId> parents;
+  private GrowableList<ObjectId> parents;
 
   private byte parseIdentificationTarget;
 
@@ -169,7 +169,7 @@ final class ReadCommit implements ObjectReaderAdapter {
 
     objectPosition = 0;
 
-    parents = injector.putMutableList(parents);
+    parents = injector.putGrowableList(parents);
 
     parseIdentificationTarget = 0;
 
@@ -760,7 +760,7 @@ final class ReadCommit implements ObjectReaderAdapter {
 
     logger = injector.getLogger();
 
-    parents = injector.getMutableList();
+    parents = injector.getGrowableList();
 
     stringBuilder = injector.getStringBuilder();
 

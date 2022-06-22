@@ -31,7 +31,7 @@ import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.TypeParameterElement;
 import objectos.lang.Check;
 import objectos.util.UnmodifiableList;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 public class ClassCode extends AbstractTypeCode {
 
@@ -254,13 +254,13 @@ public class ClassCode extends AbstractTypeCode {
     private final ClassExtends.Builder _extends = ClassExtends.builder();
     private Implements _implements;
     private final Implements.Builder _implementsBuilder = Implements.builder();
-    private final MutableList<AnnotationCode> annotations = new MutableList<>();
-    private final MutableList<ClassBodyElement> bodyElements = new MutableList<>();
+    private final GrowableList<AnnotationCode> annotations = new GrowableList<>();
+    private final GrowableList<ClassBodyElement> bodyElements = new GrowableList<>();
     private BodyFormatter formatter = BodyFormatter.defaultFormatter();
     private final ClassModifierSet.Builder modifiers = ClassModifierSet.builder();
     private String simpleName = "Unnamed";
 
-    private final MutableList<NamedTypeParameter> typeParameters = new MutableList<>();
+    private final GrowableList<NamedTypeParameter> typeParameters = new GrowableList<>();
 
     private Builder() {}
 

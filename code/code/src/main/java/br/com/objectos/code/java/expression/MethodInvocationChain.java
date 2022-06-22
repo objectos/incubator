@@ -23,7 +23,7 @@ import br.com.objectos.code.java.expression.production.MethodInvocationExpressio
 import br.com.objectos.code.java.io.CodeWriter;
 import objectos.lang.Check;
 import objectos.util.UnmodifiableList;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 public class MethodInvocationChain extends AbstractStatementExpression
     implements
@@ -347,7 +347,7 @@ public class MethodInvocationChain extends AbstractStatementExpression
 
   public static class Builder {
 
-    private final MutableList<CodeElement> elements = new MutableList<>();
+    private final GrowableList<CodeElement> elements = new GrowableList<>();
     private Callee start;
 
     public final Builder addMethodInvocation(Unqualified invocation) {

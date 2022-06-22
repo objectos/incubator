@@ -19,7 +19,7 @@ import br.com.objectos.css.sheet.RuleElement;
 import java.util.Iterator;
 import java.util.Optional;
 import objectos.util.UnmodifiableList;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 public class ChildSelector extends Selector
     implements
@@ -39,7 +39,7 @@ public class ChildSelector extends Selector
   }
 
   @Override
-  public final void acceptRuleElementList(MutableList<RuleElement> elements) {
+  public final void acceptRuleElementList(GrowableList<RuleElement> elements) {
     acceptRuleElementListImpl(elements, selectors, Combinator.CHILD);
   }
 
@@ -96,7 +96,7 @@ public class ChildSelector extends Selector
 
   @Override
   final ChildSelector newChildSelectorWithParent(Selector parent) {
-    MutableList<Selector> newSelectors = new MutableList<>();
+    GrowableList<Selector> newSelectors = new GrowableList<>();
     newSelectors.add(parent);
     newSelectors.addAll(selectors);
     return new ChildSelector(newSelectors.toUnmodifiableList());

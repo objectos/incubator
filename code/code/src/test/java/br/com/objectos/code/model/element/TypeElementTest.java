@@ -19,7 +19,7 @@ import javax.lang.model.element.Name;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.util.ElementFilter;
 import javax.lang.model.util.Elements;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 import org.testng.annotations.Test;
 
 public class TypeElementTest extends AbstractCodeCoreTest {
@@ -41,8 +41,8 @@ public class TypeElementTest extends AbstractCodeCoreTest {
     List<ExecutableElement> subjectAllMethods;
     subjectAllMethods = ElementFilter.methodsIn(allMembers);
 
-    MutableList<String> methodNames;
-    methodNames = new MutableList<>();
+    GrowableList<String> methodNames;
+    methodNames = new GrowableList<>();
 
     TypeElement objectTypeElement;
     objectTypeElement = elements.getTypeElement("java.lang.Object");

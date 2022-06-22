@@ -17,7 +17,7 @@ package br.com.objectos.css.select;
 
 import br.com.objectos.css.sheet.RuleElement;
 import objectos.util.UnmodifiableList;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 public class AdjacentSiblingSelector extends Selector {
 
@@ -35,7 +35,7 @@ public class AdjacentSiblingSelector extends Selector {
   }
 
   @Override
-  public final void acceptRuleElementList(MutableList<RuleElement> elements) {
+  public final void acceptRuleElementList(GrowableList<RuleElement> elements) {
     acceptRuleElementListImpl(elements, selectors, Combinator.ADJACENT_SIBLING);
   }
 
@@ -70,7 +70,7 @@ public class AdjacentSiblingSelector extends Selector {
 
   @Override
   final AdjacentSiblingSelector newAdjacentSiblingSelectorWithPrevious(Selector previous) {
-    MutableList<Selector> newSelectors = new MutableList<>();
+    GrowableList<Selector> newSelectors = new GrowableList<>();
     newSelectors.add(previous);
     newSelectors.addAll(selectors);
     return new AdjacentSiblingSelector(newSelectors.toUnmodifiableList());

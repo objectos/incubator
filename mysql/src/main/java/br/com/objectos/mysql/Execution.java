@@ -22,7 +22,7 @@ import java.io.InputStreamReader;
 import java.util.List;
 import java.util.Map;
 import objectos.util.UnmodifiableList;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 abstract class Execution {
 
@@ -32,11 +32,11 @@ abstract class Execution {
 
   private final Map<String, String> environment;
 
-  private final MutableList<String> error = new MutableList<>();
+  private final GrowableList<String> error = new GrowableList<>();
 
   private int exitValue = -1;
 
-  private final MutableList<String> output = new MutableList<>();
+  private final GrowableList<String> output = new GrowableList<>();
 
   Execution() {
     builder = new ProcessBuilder();
@@ -108,7 +108,7 @@ abstract class Execution {
     }
   }
 
-  private void consume(InputStream in, MutableList<String> result) throws IOException {
+  private void consume(InputStream in, GrowableList<String> result) throws IOException {
     try (var sr = new InputStreamReader(in); var r = new BufferedReader(sr)) {
       String line;
       line = r.readLine();

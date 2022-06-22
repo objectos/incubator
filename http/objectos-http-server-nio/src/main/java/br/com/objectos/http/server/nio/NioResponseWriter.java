@@ -18,10 +18,10 @@
  */
 package br.com.objectos.http.server.nio;
 
-import static br.com.objectos.collections.Collections.newMutableList;
+import static br.com.objectos.collections.Collections.newGrowableList;
 import static br.com.objectos.preconditions.Preconditions.checkNotNull;
 
-import br.com.objectos.collections.MutableList;
+import br.com.objectos.collections.GrowableList;
 import br.com.objectos.http.media.MediaType;
 import br.com.objectos.http.server.CanOpenSocketWriter;
 import br.com.objectos.http.server.Code500InternalServerErrorException;
@@ -41,7 +41,7 @@ class NioResponseWriter
 
   private MessageBody body = MessageBody.empty();
 
-  private final MutableList<Header> headerList = new MutableList<>();
+  private final GrowableList<Header> headerList = new GrowableList<>();
   private final CanOpenSocketWriter socket;
   private StatusCode status;
 

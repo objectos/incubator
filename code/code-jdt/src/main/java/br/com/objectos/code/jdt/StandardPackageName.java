@@ -18,7 +18,7 @@ package br.com.objectos.code.jdt;
 import java.io.IOException;
 import java.io.InputStream;
 import objectos.util.UnmodifiableList;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 import org.eclipse.jdt.internal.compiler.classfmt.ClassFileReader;
 import org.eclipse.jdt.internal.compiler.classfmt.ClassFormatException;
 import org.eclipse.jdt.internal.compiler.env.NameEnvironmentAnswer;
@@ -39,8 +39,8 @@ class StandardPackageName extends PackageName {
       return this;
     }
 
-    MutableList<String> list;
-    list = new MutableList<>();
+    GrowableList<String> list;
+    list = new GrowableList<>();
 
     list.addAll(nameList);
 

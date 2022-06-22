@@ -27,12 +27,12 @@ import br.com.objectos.http.server.StringSocketWriter;
 import br.com.objectos.http.server.WrittenResponse;
 import java.io.IOException;
 import objectos.lang.Check;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 public class StringResponseWriter implements ResponseWriter, MessageBodyDsl {
 
   private MessageBody body = MessageBody.empty();
-  private final MutableList<Header> headerList = new MutableList<>();
+  private final GrowableList<Header> headerList = new GrowableList<>();
   private StatusCode status;
   private final StringSocketWriter writer = new StringSocketWriter();
 

@@ -51,14 +51,14 @@ import br.com.objectos.html.boot.spi.tmpl.SpiTmpl;
 import br.com.objectos.html.boot.util.Ids;
 import br.com.objectos.html.boot.util.Names;
 import java.util.function.Consumer;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 public class StandardElementNameStep extends AbstractJavaFileStep {
 
   private static final ExpressionName NORMAL = ElementNames.ElementKind.id("NORMAL");
   private static final ExpressionName VOID = ElementNames.ElementKind.id("VOID");
 
-  private final MutableList<EnumConstantCode> constants = new MutableList<>();
+  private final GrowableList<EnumConstantCode> constants = new GrowableList<>();
 
   public StandardElementNameStep(Consumer<JavaFile> javaFileWriter) {
     super(javaFileWriter);

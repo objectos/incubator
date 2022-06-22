@@ -26,7 +26,7 @@ import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
 import objectos.lang.Level;
 import objectos.util.UnmodifiableList;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 final class StorageV1WriteJob implements IoTask, CpuTask, WriteJob {
 
@@ -124,7 +124,7 @@ final class StorageV1WriteJob implements IoTask, CpuTask, WriteJob {
 
   private String writeString;
 
-  private final MutableList<String> writeStringList = new MutableList<>();
+  private final GrowableList<String> writeStringList = new GrowableList<>();
 
   private int writeStringListIndex;
 

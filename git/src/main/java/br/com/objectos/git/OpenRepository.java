@@ -23,7 +23,7 @@ import br.com.objectos.fs.ResolvedPath;
 import java.io.IOException;
 import objectos.lang.Note1;
 import objectos.util.UnmodifiableList;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 /**
  * Opens a Git repository.
@@ -62,15 +62,15 @@ final class OpenRepository extends AbstractGitEngineTask {
 
   private Directory gitDirectory;
 
-  private MutableList<String> maybePackNames;
+  private GrowableList<String> maybePackNames;
 
   private final MaybePackNamesGetter maybePackNamesGetter = new MaybePackNamesGetter();
 
   private Directory objectsDirectory;
 
-  private MutableList<PackFile> packFiles;
+  private GrowableList<PackFile> packFiles;
 
-  private MutableList<ObjectId> packIds;
+  private GrowableList<ObjectId> packIds;
 
   private int packIndex;
 
@@ -111,13 +111,13 @@ final class OpenRepository extends AbstractGitEngineTask {
 
     objectsDirectory = null;
 
-    maybePackNames = injector.putMutableList(maybePackNames);
+    maybePackNames = injector.putGrowableList(maybePackNames);
 
     packIndex = 0;
 
-    packFiles = injector.putMutableList(packFiles);
+    packFiles = injector.putGrowableList(packFiles);
 
-    packIds = injector.putMutableList(packIds);
+    packIds = injector.putGrowableList(packIds);
 
     return super.executeFinally();
   }
@@ -138,11 +138,11 @@ final class OpenRepository extends AbstractGitEngineTask {
   final byte executeStart() {
     super.executeStart();
 
-    maybePackNames = injector.getMutableList();
+    maybePackNames = injector.getGrowableList();
 
-    packFiles = injector.getMutableList();
+    packFiles = injector.getGrowableList();
 
-    packIds = injector.getMutableList();
+    packIds = injector.getGrowableList();
 
     send(ESTART, directory);
 

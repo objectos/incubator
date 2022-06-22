@@ -27,11 +27,11 @@ import br.com.objectos.http.server.HttpServerBuilder;
 import br.com.objectos.http.server.MutableHttpServer;
 import java.io.IOException;
 import objectos.ssg.SiteWriter;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 final class ServeMojoWriter implements HttpModule, SiteWriter {
 
-  private final MutableList<Route> routes = new MutableList<>();
+  private final GrowableList<Route> routes = new GrowableList<>();
 
   @Override
   public final void acceptHttpModuleDsl(HttpModuleDsl dsl) {

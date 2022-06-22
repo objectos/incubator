@@ -25,7 +25,7 @@ import java.util.Set;
 import java.util.stream.Stream;
 import objectos.lang.Check;
 import objectos.util.UnmodifiableList;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 import objectos.util.MutableMap;
 import objectos.util.MutableSet;
 
@@ -315,7 +315,7 @@ public class SiteConfiguration implements Site.Context {
   }
 
   private static class SimpleSiteRegistry extends ThisSiteRegistry {
-    private final List<SiteVisitor> values = new MutableList<>();
+    private final List<SiteVisitor> values = new GrowableList<>();
 
     @Override
     public final void postVisitSiteDirectory(SiteDirectory directory) {

@@ -60,15 +60,15 @@ import br.com.objectos.html.boot.spi.tmpl.SpiTmpl;
 import br.com.objectos.html.boot.util.Ids;
 import br.com.objectos.html.boot.util.Names;
 import java.util.function.Consumer;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 public class StandardAttributeNameStep extends AbstractJavaFileStep {
 
-  private final MutableList<VariableInitializer> constantNames = new MutableList<>();
-  private final MutableList<FieldCode> constants = new MutableList<>();
+  private final GrowableList<VariableInitializer> constantNames = new GrowableList<>();
+  private final GrowableList<FieldCode> constants = new GrowableList<>();
   private Callee currentCallee;
 
-  private final MutableList<ClassCode> nameTypes = new MutableList<>();
+  private final GrowableList<ClassCode> nameTypes = new GrowableList<>();
 
   public StandardAttributeNameStep(Consumer<JavaFile> javaFileWriter) {
     super(javaFileWriter);

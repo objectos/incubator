@@ -24,7 +24,7 @@ import java.nio.charset.Charset;
 import java.util.List;
 import objectos.lang.Check;
 import objectos.util.UnmodifiableList;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 public final class ConfigurationFile {
 
@@ -133,8 +133,8 @@ public final class ConfigurationFile {
   }
 
   private String toContents(ConfigurationGroup[] groups) {
-    MutableList<String> lines;
-    lines = new MutableList<>();
+    GrowableList<String> lines;
+    lines = new GrowableList<>();
 
     for (int i = 0; i < groups.length; i++) {
       ConfigurationGroup group;
@@ -154,7 +154,7 @@ public final class ConfigurationFile {
     return toContents(lines);
   }
 
-  private String toContents(MutableList<String> lines) {
+  private String toContents(GrowableList<String> lines) {
     return lines.join(System.lineSeparator());
   }
 

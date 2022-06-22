@@ -31,12 +31,12 @@ import java.util.TreeMap;
 import javax.annotation.processing.Processor;
 import objectos.util.UnmodifiableSet;
 import objectos.util.Lists;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 @Services(Processor.class)
 public class ServicesProcessor extends AbstractProcessingRoundProcessor {
 
-  private final Map<String, MutableList<String>> servicesMap = new TreeMap<>();
+  private final Map<String, GrowableList<String>> servicesMap = new TreeMap<>();
 
   @Override
   public final Set<String> getSupportedAnnotationTypes() {
@@ -82,11 +82,11 @@ public class ServicesProcessor extends AbstractProcessingRoundProcessor {
     String serviceName;
     serviceName = getServiceName(type);
 
-    MutableList<String> implementationList;
+    GrowableList<String> implementationList;
     implementationList = servicesMap.get(serviceName);
 
     if (implementationList == null) {
-      implementationList = new MutableList<>();
+      implementationList = new GrowableList<>();
 
       servicesMap.put(serviceName, implementationList);
     }
@@ -105,7 +105,7 @@ public class ServicesProcessor extends AbstractProcessingRoundProcessor {
   private void write0(
       ProcessingRound round,
       String serviceName,
-      MutableList<String> implementations) {
+      GrowableList<String> implementations) {
     try {
       String resourceName;
       resourceName = "META-INF/services/" + serviceName;

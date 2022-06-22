@@ -46,14 +46,14 @@ import java.nio.channels.SocketChannel;
 import java.util.HashMap;
 import java.util.Map;
 import objectos.util.UnmodifiableList;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 
 public abstract class AbstractReplayTest {
 
-  final MutableList<String> log = new MutableList<>();
+  final GrowableList<String> log = new GrowableList<>();
 
   Header.Cookie parsedCookie;
 

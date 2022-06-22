@@ -26,7 +26,7 @@ import java.util.Iterator;
 import java.util.List;
 import objectos.lang.Check;
 import objectos.util.UnmodifiableList;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 public class Router {
 
@@ -71,8 +71,8 @@ public class Router {
   }
 
   public final Resolution resolve(RequestProto request) {
-    MutableList<RouteParser> parserList;
-    parserList = new MutableList<>();
+    GrowableList<RouteParser> parserList;
+    parserList = new GrowableList<>();
 
     for (Route route : routes) {
       if (route.hasSameMethod(request)) {
@@ -93,8 +93,8 @@ public class Router {
   }
 
   private Resolution resolveEmpty(Iterable<RouteParser> parserList) {
-    MutableList<Resolution> resolutions;
-    resolutions = new MutableList<>();
+    GrowableList<Resolution> resolutions;
+    resolutions = new GrowableList<>();
 
     for (RouteParser parser : parserList) {
       if (parser.matchesEmpty()) {
@@ -146,7 +146,7 @@ public class Router {
       implements
       HttpModuleDsl {
 
-    private final MutableList<Route> routes = new MutableList<>();
+    private final GrowableList<Route> routes = new GrowableList<>();
 
     private Builder() {}
 

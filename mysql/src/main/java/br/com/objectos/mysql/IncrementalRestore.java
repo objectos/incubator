@@ -28,7 +28,7 @@ import objectos.lang.Note1;
 import objectos.lang.NoteSink;
 import objectos.lang.RandomString;
 import objectos.util.UnmodifiableList;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 final class IncrementalRestore extends AbstractClientJob<UnmodifiableList<String>> {
 
@@ -84,7 +84,7 @@ final class IncrementalRestore extends AbstractClientJob<UnmodifiableList<String
 
   private Directory tempDirectory;
 
-  private final MutableList<RegularFile> uncompressedFiles = new MutableList<>();
+  private final GrowableList<RegularFile> uncompressedFiles = new GrowableList<>();
 
   private final Directory workDirectory;
 

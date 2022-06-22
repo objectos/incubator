@@ -28,7 +28,7 @@ import objectos.docs.ui.VersionHolder;
 import objectos.docs.v0001.intro.Intro;
 import objectos.docs.v0001.logging.LoggingDir;
 import objectos.ssg.SiteStyleSheet;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 final class Index extends DocsPage {
 
@@ -119,8 +119,8 @@ final class Index extends DocsPage {
   }
 
   @Override
-  protected final MutableList<StyleSheet> styleSheets() {
-    MutableList<StyleSheet> sheets;
+  protected final GrowableList<StyleSheet> styleSheets() {
+    GrowableList<StyleSheet> sheets;
     sheets = super.styleSheets();
 
     sheets.add(css);

@@ -46,7 +46,7 @@ import java.util.Enumeration;
 import java.util.List;
 import java.util.ServiceConfigurationError;
 import objectos.util.UnmodifiableList;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 /**
  * A replacement for {@link java.util.ServiceLoader} that avoids certain
@@ -83,8 +83,8 @@ public final class SimpleServiceLoader {
       throw new ServiceConfigurationError("Could not look up " + resourceName, e);
     }
 
-    MutableList<T> providers;
-    providers = new MutableList<>();
+    GrowableList<T> providers;
+    providers = new GrowableList<>();
 
     for (URL resourceUrl : resourceUrls) {
       try {
@@ -119,8 +119,8 @@ public final class SimpleServiceLoader {
 
   private static <T> UnmodifiableList<T> providersFromUrl(
       URL resourceUrl, Class<T> service, ClassLoader loader) throws IOException {
-    MutableList<T> providers;
-    providers = new MutableList<>();
+    GrowableList<T> providers;
+    providers = new GrowableList<>();
 
     URLConnection urlConnection;
     urlConnection = resourceUrl.openConnection();

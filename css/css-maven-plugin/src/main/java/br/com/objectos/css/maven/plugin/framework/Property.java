@@ -19,7 +19,7 @@ import br.com.objectos.code.java.declaration.PackageName;
 import br.com.objectos.code.java.type.NamedClass;
 import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkGroup;
 import objectos.util.UnmodifiableList;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 class Property extends PropertyClass.Builder {
 
@@ -49,8 +49,8 @@ class Property extends PropertyClass.Builder {
 
   @Override
   final UnmodifiableList<PropertyAtMedia> queries() {
-    MutableList<PropertyAtMedia> medias;
-    medias = new MutableList<>();
+    GrowableList<PropertyAtMedia> medias;
+    medias = new GrowableList<>();
 
     for (NamedAtMedia query : queries) {
       PropertyAtMedia m = toPropertyMediaQuery(query);
@@ -78,8 +78,8 @@ class Property extends PropertyClass.Builder {
     private final PackageName packageName;
 
     private Prefix prefix;
-    private final MutableList<NamedAtMedia> queries = new MutableList<>();
-    private final MutableList<NamedValue> values = new MutableList<>();
+    private final GrowableList<NamedAtMedia> queries = new GrowableList<>();
+    private final GrowableList<NamedValue> values = new GrowableList<>();
 
     Builder(PackageName packageName, FrameworkGroup group) {
       this.packageName = packageName;
@@ -111,8 +111,8 @@ class Property extends PropertyClass.Builder {
     }
 
     final UnmodifiableList<PropertyStyle> styles() {
-      MutableList<PropertyStyle> builder;
-      builder = new MutableList<>();
+      GrowableList<PropertyStyle> builder;
+      builder = new GrowableList<>();
 
       for (int i = 0; i < values.size(); i++) {
         NamedValue value;

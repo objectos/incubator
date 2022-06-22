@@ -35,7 +35,7 @@ import objectos.lang.Check;
 import objectos.lang.NoOpNoteSink;
 import objectos.lang.NoteSink;
 import objectos.util.UnmodifiableSet;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 import objectos.util.MutableMap;
 import objectos.util.MutableSet;
 
@@ -104,7 +104,7 @@ public final class GitEngine extends GitInjector {
 
   private MessageDigest messageDigest;
 
-  private final Deque<MutableList<Object>> mutableLists = Git.newArrayDeque(3);
+  private final Deque<GrowableList<Object>> GrowableLists = Git.newArrayDeque(3);
 
   private final Deque<MutableSet<Object>> mutableSets = Git.newArrayDeque(3);
 
@@ -708,17 +708,17 @@ public final class GitEngine extends GitInjector {
 
   @Override
   @SuppressWarnings("unchecked")
-  final <E> MutableList<E> getMutableList() {
-    if (mutableLists.isEmpty()) {
-      return new MutableList<>();
+  final <E> GrowableList<E> getGrowableList() {
+    if (GrowableLists.isEmpty()) {
+      return new GrowableList<>();
     }
 
-    MutableList<Object> list;
-    list = mutableLists.remove();
+    GrowableList<Object> list;
+    list = GrowableLists.remove();
 
     list.clear();
 
-    return (MutableList<E>) list;
+    return (GrowableList<E>) list;
   }
 
   @SuppressWarnings("unchecked")
@@ -938,9 +938,9 @@ public final class GitEngine extends GitInjector {
 
   @Override
   @SuppressWarnings("unchecked")
-  final <E> MutableList<E> putMutableList(MutableList<E> list) {
+  final <E> GrowableList<E> putGrowableList(GrowableList<E> list) {
     if (list != null) {
-      mutableLists.add((MutableList<Object>) list);
+      GrowableLists.add((GrowableList<Object>) list);
     }
 
     return null;

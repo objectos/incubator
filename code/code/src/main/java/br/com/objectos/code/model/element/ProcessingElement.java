@@ -38,7 +38,7 @@ import javax.tools.StandardLocation;
 import objectos.lang.Check;
 import objectos.util.UnmodifiableList;
 import objectos.util.UnmodifiableSet;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 import objectos.util.MutableSet;
 
 public abstract class ProcessingElement<E extends Element>
@@ -172,8 +172,8 @@ public abstract class ProcessingElement<E extends Element>
 
   final UnmodifiableList<NamedTypeParameter>
       toNamedTypeParameter(List<? extends TypeParameterElement> elements) {
-    MutableList<NamedTypeParameter> result;
-    result = new MutableList<>();
+    GrowableList<NamedTypeParameter> result;
+    result = new GrowableList<>();
 
     for (int i = 0; i < elements.size(); i++) {
       TypeParameterElement element;

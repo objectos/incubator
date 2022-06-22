@@ -28,7 +28,7 @@ import br.com.objectos.html.boot.spec.StepFactory;
 import java.util.HashMap;
 import java.util.Map;
 import objectos.lang.Check;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 public abstract class AbstractHtmlBootTest {
 
@@ -39,7 +39,7 @@ public abstract class AbstractHtmlBootTest {
 
     dsl.with(spec);
 
-    MutableList<JavaFile> javaFiles = new MutableList<>();
+    GrowableList<JavaFile> javaFiles = new GrowableList<>();
 
     Step step = factory.get(javaFiles::add);
 

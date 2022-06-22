@@ -23,7 +23,7 @@ import br.com.objectos.code.java.expression.ArgumentsElement;
 import br.com.objectos.code.java.expression.MethodInvocation;
 import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworMultiElement;
 import objectos.util.UnmodifiableList;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 class NamedMulti extends NamedValue {
 
@@ -61,7 +61,7 @@ class NamedMulti extends NamedValue {
 
   public class Invocation {
 
-    private final MutableList<ArgumentsElement> arguments = new MutableList<>();
+    private final GrowableList<ArgumentsElement> arguments = new GrowableList<>();
 
     private final String methodName;
 
@@ -69,7 +69,7 @@ class NamedMulti extends NamedValue {
       this.methodName = methodName;
     }
 
-    public final void addElement(MutableList<Argument> element) {
+    public final void addElement(GrowableList<Argument> element) {
       MethodInvocation invocation;
       invocation = invoke(methodName, element);
 

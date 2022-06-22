@@ -33,7 +33,7 @@ import br.com.objectos.code.model.element.ProcessingParameter;
 import br.com.objectos.code.model.element.ProcessingType;
 import br.com.objectos.code.processing.type.PTypeMirror;
 import objectos.util.UnmodifiableList;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 final class StaticMethod {
 
@@ -47,8 +47,8 @@ final class StaticMethod {
   }
 
   static UnmodifiableList<StaticMethod> listOf(ProcessingType type) {
-    MutableList<StaticMethod> result;
-    result = new MutableList<>();
+    GrowableList<StaticMethod> result;
+    result = new GrowableList<>();
 
     UnmodifiableList<ProcessingMethod> methods;
     methods = type.getDeclaredOrInheritedMethods();
@@ -109,8 +109,8 @@ final class StaticMethod {
 
     b.name(methodName);
 
-    MutableList<Identifier> names;
-    names = new MutableList<>();
+    GrowableList<Identifier> names;
+    names = new GrowableList<>();
 
     UnmodifiableList<ProcessingParameter> parameters;
     parameters = method.getParameters();

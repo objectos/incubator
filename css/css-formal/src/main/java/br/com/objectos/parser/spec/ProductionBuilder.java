@@ -24,16 +24,16 @@ import br.com.objectos.parser.grammar.Constructor6;
 import br.com.objectos.parser.grammar.Constructor7;
 import java.util.List;
 import java.util.Objects;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 class ProductionBuilder {
 
   private CollectionKind collectionKind;
   private Repeatable currentSymbol;
-  private final MutableList<Symbol> expressionList = new MutableList<>();
+  private final GrowableList<Symbol> expressionList = new GrowableList<>();
   private final ParserKind parserKind;
 
-  private final MutableList<Production> productionList = new MutableList<>();
+  private final GrowableList<Production> productionList = new GrowableList<>();
   private Quantifier quantifier;
   private final NonTerminal symbol;
 

@@ -15,7 +15,7 @@
  */
 package br.com.objectos.logger;
 
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 final class ReadJobThrowable {
 
@@ -27,11 +27,11 @@ final class ReadJobThrowable {
 
   StackTraceElement[] stackTrace;
 
-  MutableList<ReadJobThrowable> suppressed;
+  GrowableList<ReadJobThrowable> suppressed;
 
   final void addSuppressed(ReadJobThrowable throwable) {
     if (suppressed == null) {
-      suppressed = new MutableList<>();
+      suppressed = new GrowableList<>();
     }
 
     suppressed.add(throwable);

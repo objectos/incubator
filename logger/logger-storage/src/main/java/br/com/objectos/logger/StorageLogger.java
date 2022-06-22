@@ -22,7 +22,7 @@ import java.io.IOException;
 import objectos.lang.Check;
 import objectos.lang.Level;
 import objectos.util.UnmodifiableList;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 /**
  * A logger that writes log events to a file system storage.
@@ -186,7 +186,7 @@ public final class StorageLogger extends AbstractConfigurableLogger {
 
     private final IoWorker ioWorker;
 
-    private final MutableList<LogListener> listeners = new MutableList<>();
+    private final GrowableList<LogListener> listeners = new GrowableList<>();
 
     private final Storage storage;
 

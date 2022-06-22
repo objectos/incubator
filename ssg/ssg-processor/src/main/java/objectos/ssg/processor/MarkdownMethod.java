@@ -37,7 +37,7 @@ import objectos.util.ByteArrays;
 import objectos.util.UnmodifiableList;
 import objectos.util.UnmodifiableSet;
 import objectos.util.IntArrays;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 import org.commonmark.node.BlockQuote;
 import org.commonmark.node.BulletList;
 import org.commonmark.node.Code;
@@ -100,7 +100,7 @@ class MarkdownMethod implements Visitor {
 
   MethodCode.Builder methodCode;
 
-  private final MutableList<ArgumentsElement> arguments = new MutableList<>();
+  private final GrowableList<ArgumentsElement> arguments = new GrowableList<>();
 
   private int[] argumentsStack = new int[2];
 
@@ -308,7 +308,7 @@ class MarkdownMethod implements Visitor {
       }
     } else {
       List<ArgumentsElement> args;
-      args = new MutableList<>();
+      args = new GrowableList<>();
 
       if (!info.isEmpty()) {
         args.add(nl());
@@ -710,8 +710,8 @@ class MarkdownMethod implements Visitor {
       return UnmodifiableSet.of();
     }
 
-    MutableList<ArgumentsElement> result;
-    result = new MutableList<>();
+    GrowableList<ArgumentsElement> result;
+    result = new GrowableList<>();
 
     for (int i = argsInitial; i < argsCurrent; i++) {
       ArgumentsElement a;

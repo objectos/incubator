@@ -18,7 +18,7 @@ package br.com.objectos.css.specgen;
 import br.com.objectos.css.specgen.spec.Property;
 import br.com.objectos.css.specgen.spec.Spec;
 import br.com.objectos.css.specgen.spec.Step;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 abstract class AbstractSpecgen {
 
@@ -43,7 +43,7 @@ abstract class AbstractSpecgen {
   }
 
   protected final void p(String name, String... more) {
-    MutableList<Property> moreProperties = new MutableList<>();
+    GrowableList<Property> moreProperties = new GrowableList<>();
     for (String propertyName : more) {
       moreProperties.add(spec.getProperty(propertyName));
     }

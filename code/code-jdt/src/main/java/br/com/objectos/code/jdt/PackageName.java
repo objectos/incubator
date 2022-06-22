@@ -16,7 +16,7 @@
 package br.com.objectos.code.jdt;
 
 import objectos.util.UnmodifiableList;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 import org.eclipse.jdt.internal.compiler.env.NameEnvironmentAnswer;
 
 abstract class PackageName {
@@ -34,7 +34,7 @@ abstract class PackageName {
       return NULL;
     }
 
-    MutableList<String> nameList = new MutableList<>();
+    GrowableList<String> nameList = new GrowableList<>();
 
     for (char[] cs : packageName) {
       nameList.add(new String(cs));

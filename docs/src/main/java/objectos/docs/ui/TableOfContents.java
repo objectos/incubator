@@ -25,7 +25,7 @@ import objectos.ssg.SiteFragment;
 import objectos.ssg.SitePage;
 import objectos.ssg.SitePath;
 import objectos.ssg.SiteVisitor;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 public final class TableOfContents extends SiteFragment implements SiteVisitor {
 
@@ -142,7 +142,7 @@ public final class TableOfContents extends SiteFragment implements SiteVisitor {
 
   private class RootLevel extends Level {
 
-    private final MutableList<Item> items = new MutableList<>();
+    private final GrowableList<Item> items = new GrowableList<>();
 
     @Override
     final void add(String title, Class<? extends SitePath> key) {

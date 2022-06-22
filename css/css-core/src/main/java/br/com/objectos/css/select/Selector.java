@@ -20,7 +20,7 @@ import br.com.objectos.css.sheet.RuleElement;
 import java.util.stream.Stream;
 import objectos.lang.Check;
 import objectos.util.UnmodifiableList;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 public abstract class Selector implements IsNonTerminal {
 
@@ -35,7 +35,7 @@ public abstract class Selector implements IsNonTerminal {
     return (Selector) o;
   }
 
-  public abstract void acceptRuleElementList(MutableList<RuleElement> elements);
+  public abstract void acceptRuleElementList(GrowableList<RuleElement> elements);
 
   public abstract <R, P> R acceptSelectorVisitor(SelectorVisitor<R, P> visitor, P p);
 
@@ -45,7 +45,7 @@ public abstract class Selector implements IsNonTerminal {
   public abstract String toString();
 
   final void acceptRuleElementListImpl(
-      MutableList<RuleElement> elements, UnmodifiableList<Selector> list, Combinator combinator) {
+      GrowableList<RuleElement> elements, UnmodifiableList<Selector> list, Combinator combinator) {
     if (list.isEmpty()) {
       return;
     }
@@ -107,9 +107,9 @@ public abstract class Selector implements IsNonTerminal {
 
   public static class Builder extends ModeDsl implements BuilderDsl {
 
-    private MutableList<Selector> combinatorList;
+    private GrowableList<Selector> combinatorList;
 
-    private MutableList<Selector> compoundList;
+    private GrowableList<Selector> compoundList;
     private Combinator currentCombinator;
     private Mode mode = Mode.start();
 
@@ -217,7 +217,7 @@ public abstract class Selector implements IsNonTerminal {
     @Override
     protected final void toSimpleSelectorMode(Selector selector) {
       if (compoundList == null) {
-        compoundList = new MutableList<>();
+        compoundList = new GrowableList<>();
       }
 
       compoundList.addWithNullMessage(selector, "selector == null");
@@ -225,7 +225,7 @@ public abstract class Selector implements IsNonTerminal {
 
     private void addToCombinatorList(Selector selector) {
       if (combinatorList == null) {
-        combinatorList = new MutableList<>();
+        combinatorList = new GrowableList<>();
       }
 
       combinatorList.add(selector);

@@ -20,7 +20,7 @@ import javax.lang.model.element.AnnotationValue;
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.VariableElement;
 import objectos.util.UnmodifiableList;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 class ProcessingAnnotationValueEnumConstantArray extends ProcessingAnnotationValue {
 
@@ -49,8 +49,8 @@ class ProcessingAnnotationValueEnumConstantArray extends ProcessingAnnotationVal
 
   private static UnmodifiableList<ProcessingEnumConstant> toEnumConstant(
       ProcessingAnnotation annotation, List<? extends AnnotationValue> array) {
-    MutableList<ProcessingEnumConstant> result;
-    result = new MutableList<>();
+    GrowableList<ProcessingEnumConstant> result;
+    result = new GrowableList<>();
 
     for (int i = 0; i < array.size(); i++) {
       AnnotationValue annotationValue;

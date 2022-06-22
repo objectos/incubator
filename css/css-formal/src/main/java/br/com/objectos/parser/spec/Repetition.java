@@ -17,7 +17,7 @@ package br.com.objectos.parser.spec;
 
 import java.util.Iterator;
 import java.util.Objects;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 abstract class Repetition extends NonTerminal {
 
@@ -68,7 +68,7 @@ abstract class Repetition extends NonTerminal {
         && kind.equals(that.kind);
   }
 
-  abstract void forTopDown(MutableList<Production> list);
+  abstract void forTopDown(GrowableList<Production> list);
 
   final Object get(Iterator<?> iterator) {
     return kind.get(iterator);
@@ -93,7 +93,7 @@ abstract class Repetition extends NonTerminal {
     }
 
     @Override
-    final void forTopDown(MutableList<Production> list) {
+    final void forTopDown(GrowableList<Production> list) {
       list.add(new RepetitionProduction(this, Expression.of(value, this)));
       list.add(new RepetitionProduction(this, Expression.of(value)));
     }
@@ -112,7 +112,7 @@ abstract class Repetition extends NonTerminal {
     }
 
     @Override
-    final void forTopDown(MutableList<Production> list) {
+    final void forTopDown(GrowableList<Production> list) {
       list.add(new RepetitionProduction(this, Expression.of(value, this)));
       list.add(new RepetitionProduction(this, Expression.empty()));
     }

@@ -18,7 +18,7 @@ package br.com.objectos.css.select;
 import br.com.objectos.css.io.CssWriter;
 import br.com.objectos.css.sheet.RuleElement;
 import java.io.IOException;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 public abstract class SimpleSelector extends Selector
     implements
@@ -34,7 +34,7 @@ public abstract class SimpleSelector extends Selector
   }
 
   @Override
-  public final void acceptRuleElementList(MutableList<RuleElement> elements) {
+  public final void acceptRuleElementList(GrowableList<RuleElement> elements) {
     elements.add(this);
   }
 

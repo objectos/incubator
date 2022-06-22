@@ -26,7 +26,7 @@ import java.util.concurrent.BlockingQueue;
 import objectos.lang.Note0;
 import objectos.lang.Note1;
 import objectos.util.UnmodifiableList;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
@@ -212,7 +212,7 @@ public class FixedCpuWorkerThreadTest {
 
   final static class MutableAdapter extends FixedCpuWorkerThreadAdapter {
 
-    final MutableList<Log> logs = new MutableList<>();
+    final GrowableList<Log> logs = new GrowableList<>();
 
     final BlockingQueue<CpuTask> queue = new ArrayBlockingQueue<CpuTask>(20);
 

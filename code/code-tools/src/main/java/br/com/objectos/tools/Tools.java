@@ -25,7 +25,7 @@ import javax.tools.JavaFileObject;
 import javax.tools.ToolProvider;
 import objectos.lang.Check;
 import objectos.util.UnmodifiableList;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 public final class Tools {
 
@@ -108,11 +108,11 @@ public final class Tools {
 
     private final CompilationJavaFileManager fileManager;
 
-    private final MutableList<JavaFileObject> javaFiles = new MutableList<>();
+    private final GrowableList<JavaFileObject> javaFiles = new GrowableList<>();
 
-    private final MutableList<JavacOption> options = new MutableList<>();
+    private final GrowableList<JavacOption> options = new GrowableList<>();
 
-    private final MutableList<Processor> processors = new MutableList<>();
+    private final GrowableList<Processor> processors = new GrowableList<>();
 
     private final StringWriter stdout;
 

@@ -23,7 +23,7 @@ import java.io.Reader;
 import java.nio.charset.Charset;
 import objectos.lang.Check;
 import objectos.util.UnmodifiableList;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 /**
  * Provides {@code static} methods for reading from {@link InputStream},
@@ -206,8 +206,8 @@ public final class Read {
   }
 
   private static UnmodifiableList<String> lines0(BufferedReader r) throws IOException {
-    MutableList<String> result;
-    result = new MutableList<>();
+    GrowableList<String> result;
+    result = new GrowableList<>();
 
     try (r) {
       String line;

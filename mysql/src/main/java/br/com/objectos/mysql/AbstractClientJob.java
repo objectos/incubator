@@ -30,7 +30,7 @@ import java.util.List;
 import java.util.Map;
 import objectos.lang.Check;
 import objectos.util.UnmodifiableList;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 abstract class AbstractClientJob<V> implements ClientJob<V>, IoTask {
 
@@ -493,7 +493,7 @@ abstract class AbstractClientJob<V> implements ClientJob<V>, IoTask {
 
     private final InputStream inputStream;
 
-    private final MutableList<String> lines = new MutableList<>();
+    private final GrowableList<String> lines = new GrowableList<>();
 
     StreamCollector(String name, InputStream inputStream) {
       super(name);

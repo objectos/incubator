@@ -23,7 +23,7 @@ import objectos.lang.Check;
 import objectos.lang.Note1;
 import objectos.lang.NoteSink;
 import objectos.util.UnmodifiableList;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 final class ReadTree implements ObjectReaderAdapter {
 
@@ -61,7 +61,7 @@ final class ReadTree implements ObjectReaderAdapter {
 
   private CharsetDecoder decoder;
 
-  private MutableList<Entry> entries;
+  private GrowableList<Entry> entries;
 
   private ObjectReaderHandle handle;
 
@@ -101,7 +101,7 @@ final class ReadTree implements ObjectReaderAdapter {
 
     decoder = injector.putDecoder(decoder);
 
-    entries = injector.putMutableList(entries);
+    entries = injector.putGrowableList(entries);
 
     handle = null;
 
@@ -385,7 +385,7 @@ final class ReadTree implements ObjectReaderAdapter {
 
     decoder = injector.getDecoder(charset);
 
-    entries = injector.getMutableList();
+    entries = injector.getGrowableList();
 
     logger = injector.getLogger();
 

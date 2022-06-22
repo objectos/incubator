@@ -17,11 +17,11 @@ package br.com.objectos.parser.spec;
 
 import java.util.Iterator;
 import java.util.List;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 class ValueList {
 
-  final MutableList<Object> list = new MutableList<>();
+  final GrowableList<Object> list = new GrowableList<>();
 
   ValueList() {}
 

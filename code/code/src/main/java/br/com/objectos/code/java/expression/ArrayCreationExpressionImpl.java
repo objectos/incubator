@@ -22,7 +22,7 @@ import br.com.objectos.code.java.type.NamedArray;
 import java.util.Arrays;
 import java.util.Iterator;
 import objectos.util.UnmodifiableList;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 final class ArrayCreationExpressionImpl
     extends AbstractDefaultImmutableCodeElement
@@ -48,7 +48,7 @@ final class ArrayCreationExpressionImpl
 
   static ArrayCreationExpression _new0(
       NamedArray type, Iterable<? extends Expression> dims) {
-    MutableList<CodeElement> els = new MutableList<>();
+    GrowableList<CodeElement> els = new GrowableList<>();
 
     els.add(Keywords._new());
     els.add(space());

@@ -25,7 +25,7 @@ import java.util.Optional;
 import java.util.Set;
 import objectos.util.UnmodifiableList;
 import objectos.util.UnmodifiableMap;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 import objectos.util.MutableMap;
 
 @Concrete.Bridge
@@ -35,9 +35,9 @@ abstract class OptionsBuilderJava11 extends AbstractOptionsBuilder {
 
   private static final String PATH_SEPARATOR = System.getProperty("path.separator");
 
-  private final MutableList<String> addModules = new MutableList<>();
-  private final MutableList<String> modulePaths = new MutableList<>();
-  private final MutableList<String> patchModules = new MutableList<>();
+  private final GrowableList<String> addModules = new GrowableList<>();
+  private final GrowableList<String> modulePaths = new GrowableList<>();
+  private final GrowableList<String> patchModules = new GrowableList<>();
 
   @Concrete.Constructor
   OptionsBuilderJava11() {}
@@ -105,8 +105,8 @@ abstract class OptionsBuilderJava11 extends AbstractOptionsBuilder {
 
   @Override
   public final UnmodifiableList<String> build() {
-    MutableList<String> result;
-    result = new MutableList<>();
+    GrowableList<String> result;
+    result = new GrowableList<>();
 
     config.addTo(this);
 
@@ -149,7 +149,7 @@ abstract class OptionsBuilderJava11 extends AbstractOptionsBuilder {
     patchModules.add(moduleName + '=' + testClasses.toString());
   }
 
-  private void doAddModules(MutableList<String> result) {
+  private void doAddModules(GrowableList<String> result) {
     if (!addModules.isEmpty()) {
       result.add("--add-modules");
 
@@ -160,7 +160,7 @@ abstract class OptionsBuilderJava11 extends AbstractOptionsBuilder {
     }
   }
 
-  private void doModulePath(MutableList<String> result) {
+  private void doModulePath(GrowableList<String> result) {
     if (!modulePaths.isEmpty()) {
       result.add("--module-path");
 
@@ -171,7 +171,7 @@ abstract class OptionsBuilderJava11 extends AbstractOptionsBuilder {
     }
   }
 
-  private void doPatchModules(MutableList<String> result) {
+  private void doPatchModules(GrowableList<String> result) {
     for (int i = 0; i < patchModules.size(); i++) {
       result.add("--patch-module");
 
@@ -194,12 +194,12 @@ abstract class OptionsBuilderJava11 extends AbstractOptionsBuilder {
     }
 
     final void addTo(OptionsBuilderJava11 builder) {
-      MutableList<String> thatAddModules;
+      GrowableList<String> thatAddModules;
       thatAddModules = builder.addModules;
 
       thatAddModules.addAll(addModules);
 
-      MutableList<String> thatModulePaths;
+      GrowableList<String> thatModulePaths;
       thatModulePaths = builder.modulePaths;
 
       for (Path path : modulePaths.values()) {
@@ -214,7 +214,7 @@ abstract class OptionsBuilderJava11 extends AbstractOptionsBuilder {
 
   private static class ConfigBuilder {
 
-    private final MutableList<String> addModules = new MutableList<>();
+    private final GrowableList<String> addModules = new GrowableList<>();
 
     private final MutableMap<String, Path> modulePaths = new MutableMap<>();
 

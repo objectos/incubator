@@ -21,7 +21,7 @@ import br.com.objectos.code.java.element.CodeElement;
 import br.com.objectos.code.java.element.Keywords;
 import br.com.objectos.code.java.type.NamedClassOrParameterized;
 import objectos.lang.Check;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 public class Implements extends AbstractImmutableCodeElement
     implements
@@ -211,8 +211,8 @@ public class Implements extends AbstractImmutableCodeElement
 
   public static class Builder {
 
-    private final MutableList<NamedClassOrParameterized> interfaces
-        = new MutableList<>();
+    private final GrowableList<NamedClassOrParameterized> interfaces
+        = new GrowableList<>();
 
     private Builder() {}
 

@@ -18,15 +18,15 @@ package br.com.objectos.git;
 import static org.testng.Assert.assertEquals;
 
 import objectos.util.UnmodifiableList;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 import org.testng.annotations.Test;
 
 public class EntryTest {
 
   @Test
   public void compareTo() {
-    MutableList<MutableTreeEntry> entries;
-    entries = new MutableList<>();
+    GrowableList<MutableTreeEntry> entries;
+    entries = new GrowableList<>();
 
     entries.add(TestingGit.tree("foo", "74a9c52015b363408e231ddea72ca57746615e77"));
     entries.add(TestingGit.tree("foo-bar", "74a9c52015b363408e231ddea72ca57746615e77"));
@@ -70,9 +70,9 @@ public class EntryTest {
     );
   }
 
-  private UnmodifiableList<String> toNames(MutableList<MutableTreeEntry> entries) {
-    MutableList<String> result;
-    result = new MutableList<>();
+  private UnmodifiableList<String> toNames(GrowableList<MutableTreeEntry> entries) {
+    GrowableList<String> result;
+    result = new GrowableList<>();
 
     for (int i = 0, size = entries.size(); i < size; i++) {
       MutableTreeEntry e;

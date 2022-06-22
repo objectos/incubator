@@ -29,7 +29,7 @@ import br.com.objectos.code.java.expression.MethodInvocation;
 import br.com.objectos.css.sheet.AbstractStyleSheet;
 import br.com.objectos.css.sheet.MediaType;
 import objectos.util.UnmodifiableList;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 class PropertyAtMedia {
 
@@ -90,7 +90,7 @@ class PropertyAtMedia {
 
   public class Invocation implements MediaType.Visitor {
 
-    private final MutableList<ArgumentsElement> arguments = new MutableList<>();
+    private final GrowableList<ArgumentsElement> arguments = new GrowableList<>();
 
     public final void addArgument(Argument argument) {
       arguments.add(argument);

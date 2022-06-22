@@ -54,15 +54,15 @@ import br.com.objectos.css.boot.spec.Step;
 import br.com.objectos.css.boot.spec.StepAdapter;
 import br.com.objectos.css.boot.spec.Types;
 import objectos.util.UnmodifiableList;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 public class KeywordsClassStep extends Step {
 
-  private final MutableList<VariableInitializer> constantNames = new MutableList<>();
+  private final GrowableList<VariableInitializer> constantNames = new GrowableList<>();
 
-  private final MutableList<FieldCode> keywords = new MutableList<>();
+  private final GrowableList<FieldCode> keywords = new GrowableList<>();
 
-  private final MutableList<BlockStatement> mapStatements = new MutableList<>();
+  private final GrowableList<BlockStatement> mapStatements = new GrowableList<>();
 
   public KeywordsClassStep(StepAdapter adapter) {
     super(adapter);

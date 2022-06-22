@@ -23,7 +23,7 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.ReadableByteChannel;
 import objectos.util.UnmodifiableList;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 final class StorageV1ReadJob implements IoTask, ReadJob {
 
@@ -159,7 +159,7 @@ final class StorageV1ReadJob implements IoTask, ReadJob {
 
   private int stringLength;
 
-  private final MutableList<String> stringList = new MutableList<>();
+  private final GrowableList<String> stringList = new GrowableList<>();
 
   private int stringListLength;
 

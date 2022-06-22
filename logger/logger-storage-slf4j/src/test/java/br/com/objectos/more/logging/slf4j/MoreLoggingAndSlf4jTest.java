@@ -31,7 +31,7 @@ import br.com.objectos.logger.StorageLogger;
 import java.io.IOException;
 import objectos.lang.Level;
 import objectos.lang.ToString;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
@@ -39,7 +39,7 @@ import org.testng.annotations.Test;
 
 public class MoreLoggingAndSlf4jTest implements LogListener {
 
-  private final MutableList<Log> logs = new MutableList<>();
+  private final GrowableList<Log> logs = new GrowableList<>();
 
   private int notifySize;
 

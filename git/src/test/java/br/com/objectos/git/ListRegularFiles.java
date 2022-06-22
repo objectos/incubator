@@ -23,7 +23,7 @@ import java.io.IOException;
 import objectos.lang.Check;
 import objectos.util.UnmodifiableList;
 import objectos.util.Lists;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 /**
  * A {@link DirectoryContentsVisitor} for recursively listing all of the regular
@@ -31,7 +31,7 @@ import objectos.util.MutableList;
  */
 public final class ListRegularFiles implements DirectoryContentsVisitor {
 
-  private final MutableList<String> leafs = new MutableList<>();
+  private final GrowableList<String> leafs = new GrowableList<>();
 
   private String prefix = "";
 

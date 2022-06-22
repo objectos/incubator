@@ -16,13 +16,13 @@
 package br.com.objectos.parser.spec;
 
 import br.com.objectos.parser.grammar.ParserGrammar;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 public enum ParserKind {
 
   TOP_DOWN {
     @Override
-    final void acceptRepetition(Repetition repetition, MutableList<Production> list) {
+    final void acceptRepetition(Repetition repetition, GrowableList<Production> list) {
       repetition.forTopDown(list);
     }
   };
@@ -41,6 +41,6 @@ public enum ParserKind {
     return new SpecBuilder<>(this, delegate);
   }
 
-  abstract void acceptRepetition(Repetition repetition, MutableList<Production> list);
+  abstract void acceptRepetition(Repetition repetition, GrowableList<Production> list);
 
 }

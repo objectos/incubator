@@ -27,7 +27,7 @@ import br.com.objectos.css.keyword.StandardKeyword;
 import br.com.objectos.css.property.StandardPropertyName;
 import br.com.objectos.css.type.ColorName;
 import br.com.objectos.css.type.LengthUnit;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 abstract class DeclarationMethodInvocation {
 
@@ -127,7 +127,7 @@ abstract class DeclarationMethodInvocation {
 
     private Simple current;
 
-    private final MutableList<Simple> elements = new MutableList<>();
+    private final GrowableList<Simple> elements = new GrowableList<>();
 
     Multi(StandardPropertyName property, Simple first) {
       super(property);
@@ -139,8 +139,8 @@ abstract class DeclarationMethodInvocation {
     public final MethodInvocation build() {
       elements.add(current);
 
-      MutableList<ArgumentsElement> arguments;
-      arguments = new MutableList<>();
+      GrowableList<ArgumentsElement> arguments;
+      arguments = new GrowableList<>();
 
       for (int i = 0; i < elements.size(); i++) {
         arguments.add(nl());
@@ -179,7 +179,7 @@ abstract class DeclarationMethodInvocation {
 
   private static class Simple extends DeclarationMethodInvocation {
 
-    private final MutableList<ArgumentsElement> arguments = new MutableList<>();
+    private final GrowableList<ArgumentsElement> arguments = new GrowableList<>();
 
     Simple(StandardPropertyName property) {
       super(property);

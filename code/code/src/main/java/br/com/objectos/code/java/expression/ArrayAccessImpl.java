@@ -19,7 +19,7 @@ import br.com.objectos.code.java.element.AbstractDefaultImmutableCodeElement;
 import br.com.objectos.code.java.element.CodeElement;
 import java.util.Arrays;
 import objectos.util.UnmodifiableList;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 final class ArrayAccessImpl
     extends AbstractDefaultImmutableCodeElement
@@ -40,7 +40,7 @@ final class ArrayAccessImpl
 
   static ArrayAccess arrayAccess0(
       ArrayReferenceExpression ref, Iterable<? extends Expression> expressions) {
-    MutableList<CodeElement> els = new MutableList<>();
+    GrowableList<CodeElement> els = new GrowableList<>();
     els.add(ref);
 
     for (Expression expression : expressions) {

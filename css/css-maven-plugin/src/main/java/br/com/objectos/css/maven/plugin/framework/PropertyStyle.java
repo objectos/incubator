@@ -31,7 +31,7 @@ import br.com.objectos.code.java.expression.Identifier;
 import br.com.objectos.code.java.expression.MethodInvocation;
 import br.com.objectos.code.java.type.NamedClass;
 import objectos.util.UnmodifiableList;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 class PropertyStyle {
 
@@ -95,8 +95,8 @@ class PropertyStyle {
   }
 
   private MethodInvocation generateMethodInvocation0(ExpressionName name) {
-    MutableList<ArgumentsElement> args;
-    args = new MutableList<>();
+    GrowableList<ArgumentsElement> args;
+    args = new GrowableList<>();
 
     args.add(nl());
     args.add(name);

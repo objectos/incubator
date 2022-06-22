@@ -30,7 +30,7 @@ import java.util.concurrent.ExecutionException;
 import objectos.lang.Check;
 import objectos.util.ByteArrays;
 import objectos.util.UnmodifiableList;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 final class TestingGit {
 
@@ -364,8 +364,8 @@ final class TestingGit {
     GitEngine engine;
     engine = standardEngineInstance();
 
-    MutableList<String> list;
-    list = new MutableList<>();
+    GrowableList<String> list;
+    list = new GrowableList<>();
 
     while (id != null) {
       GitTask<Commit> computable;

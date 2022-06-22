@@ -23,7 +23,7 @@ import javax.lang.model.type.TypeMirror;
 import javax.lang.model.type.TypeVariable;
 import javax.lang.model.util.Types;
 import objectos.util.UnmodifiableList;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 import org.testng.annotations.Test;
 
 public class WildcardTypeTest extends AbstractCodeCoreTest {
@@ -69,8 +69,8 @@ public class WildcardTypeTest extends AbstractCodeCoreTest {
   }
 
   private UnmodifiableList<TypeMirror> capture(List<? extends VariableElement> parameters) {
-    MutableList<TypeMirror> result;
-    result = new MutableList<>();
+    GrowableList<TypeMirror> result;
+    result = new GrowableList<>();
 
     Types types;
     types = processingEnv.getTypeUtils();

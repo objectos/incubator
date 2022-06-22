@@ -30,7 +30,7 @@ import javax.lang.model.type.TypeKind;
 import javax.lang.model.type.TypeMirror;
 import objectos.lang.Check;
 import objectos.util.UnmodifiableList;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 public final class PDeclaredType extends PTypeMirror {
 
@@ -123,8 +123,8 @@ public final class PDeclaredType extends PTypeMirror {
       case 0:
         return rawName;
       default:
-        MutableList<NamedType> argumentNames;
-        argumentNames = new MutableList<>();
+        GrowableList<NamedType> argumentNames;
+        argumentNames = new GrowableList<>();
 
         for (int i = 0; i < size; i++) {
           PTypeMirror typeArgument;
@@ -151,8 +151,8 @@ public final class PDeclaredType extends PTypeMirror {
       case 0:
         return UnmodifiableList.of();
       default:
-        MutableList<PTypeMirror> result;
-        result = new MutableList<>();
+        GrowableList<PTypeMirror> result;
+        result = new GrowableList<>();
 
         for (int i = 0; i < size; i++) {
           TypeMirror typeArgument;

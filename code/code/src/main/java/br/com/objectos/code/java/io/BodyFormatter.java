@@ -18,7 +18,7 @@ package br.com.objectos.code.java.io;
 import br.com.objectos.code.java.declaration.BodyElement;
 import java.util.Iterator;
 import objectos.util.UnmodifiableList;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 public abstract class BodyFormatter {
 
@@ -47,7 +47,7 @@ public abstract class BodyFormatter {
   }
 
   public abstract <E extends BodyElement> UnmodifiableList<E> format(
-      MutableList<E> elements, Class<E> type);
+      GrowableList<E> elements, Class<E> type);
 
   private static class StandardClassBodyFormatter extends BodyFormatter {
 
@@ -59,7 +59,7 @@ public abstract class BodyFormatter {
 
     @Override
     public final <E extends BodyElement> UnmodifiableList<E> format(
-        MutableList<E> elements, Class<E> type) {
+        GrowableList<E> elements, Class<E> type) {
       FormattingAction action = TailFormattingAction.getInstance();
       for (int i = formattings.size() - 1; i >= 0; i--) {
         Formatting formatting = formattings.get(i);
@@ -73,7 +73,7 @@ public abstract class BodyFormatter {
     private static class ThisFormattingSource implements FormattingSource {
       private final Iterator<? extends BodyElement> elements;
 
-      ThisFormattingSource(MutableList<? extends BodyElement> elements) {
+      ThisFormattingSource(GrowableList<? extends BodyElement> elements) {
         this.elements = elements.iterator();
       }
 
@@ -93,7 +93,7 @@ public abstract class BodyFormatter {
   private static class UnformattedClassBodyFormatter extends BodyFormatter {
     @Override
     public final <E extends BodyElement> UnmodifiableList<E> format(
-        MutableList<E> elements, Class<E> type) {
+        GrowableList<E> elements, Class<E> type) {
       return elements.toUnmodifiableList();
     }
   }

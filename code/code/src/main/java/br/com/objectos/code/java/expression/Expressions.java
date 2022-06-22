@@ -26,7 +26,7 @@ import br.com.objectos.code.java.type.NamedPrimitive;
 import br.com.objectos.code.java.type.NamedReferenceType;
 import br.com.objectos.code.java.type.NamedType;
 import objectos.lang.Check;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 public class Expressions {
 
@@ -106,7 +106,7 @@ public class Expressions {
   public static ArrayInitializer a(Iterable<? extends VariableInitializer> elements) {
     Check.notNull(elements, "elements == null");
 
-    MutableList<VariableInitializer> list = new MutableList<>();
+    GrowableList<VariableInitializer> list = new GrowableList<>();
 
     list.addAllIterable(elements);
 

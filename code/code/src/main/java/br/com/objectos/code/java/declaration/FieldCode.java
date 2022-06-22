@@ -27,7 +27,7 @@ import br.com.objectos.code.java.type.NamedType;
 import br.com.objectos.code.java.type.NamedVoid;
 import java.util.List;
 import objectos.lang.Check;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 public final class FieldCode extends AbstractImmutableCodeElement
     implements
@@ -139,11 +139,11 @@ public final class FieldCode extends AbstractImmutableCodeElement
 
   public static class Builder {
 
-    private final List<FieldCodeDeclarator> declarators = new MutableList<>();
+    private final List<FieldCodeDeclarator> declarators = new GrowableList<>();
 
-    private final MutableList<CodeElement> modifierSet = new MutableList<>();
+    private final GrowableList<CodeElement> modifierSet = new GrowableList<>();
 
-    private final List<String> names = new MutableList<>();
+    private final List<String> names = new GrowableList<>();
 
     private NamedType typeName = NamedVoid._void();
 

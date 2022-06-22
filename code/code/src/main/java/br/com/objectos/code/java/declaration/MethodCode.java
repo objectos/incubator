@@ -38,7 +38,7 @@ import java.util.Set;
 import javax.lang.model.element.ExecutableElement;
 import objectos.lang.Check;
 import objectos.util.UnmodifiableList;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 public final class MethodCode
     extends AbstractCodeElement
@@ -356,15 +356,15 @@ public final class MethodCode
 
   public static class Builder implements ThrowsElement.Consumer {
 
-    private final MutableList<AnnotationCode> annotations = new MutableList<>();
+    private final GrowableList<AnnotationCode> annotations = new GrowableList<>();
     private Block block;
     private final MethodModifierSet.Builder modifiers = MethodModifierSet.builder();
     private String name = "unnamed";
-    private final MutableList<ParameterCode> parameters = new MutableList<>();
+    private final GrowableList<ParameterCode> parameters = new GrowableList<>();
     private NamedType returnType = NamedVoid._void();
-    private final MutableList<BlockStatement> statements = new MutableList<>();
-    private final MutableList<NamedType> thrownTypes = new MutableList<>();
-    private final MutableList<NamedTypeParameter> typeParameters = new MutableList<>();
+    private final GrowableList<BlockStatement> statements = new GrowableList<>();
+    private final GrowableList<NamedType> thrownTypes = new GrowableList<>();
+    private final GrowableList<NamedTypeParameter> typeParameters = new GrowableList<>();
 
     private Builder() {}
 

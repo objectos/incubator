@@ -38,7 +38,7 @@ import br.com.objectos.css.specgen.spec.StepAdapter;
 import br.com.objectos.css.specgen.spec.ValueType;
 import java.util.Iterator;
 import objectos.util.UnmodifiableList;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 class PropertyModuleStep extends Step {
 
@@ -86,8 +86,8 @@ class PropertyModuleStep extends Step {
       return;
     }
 
-    MutableList<Literal> literals;
-    literals = new MutableList<>();
+    GrowableList<Literal> literals;
+    literals = new GrowableList<>();
 
     for (Property property : group) {
       String name = property.name();
@@ -133,7 +133,7 @@ class PropertyModuleStep extends Step {
   }
 
   private ArgumentsElement formalExpression(Property property) {
-    MutableList<ArgumentsElement> args = new MutableList<>();
+    GrowableList<ArgumentsElement> args = new GrowableList<>();
     args.add(nl());
     args.add(Types.Source.id(Ids.MDN));
     args.add(nl());

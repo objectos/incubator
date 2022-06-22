@@ -28,7 +28,7 @@ import java.io.Writer;
 import javax.annotation.processing.Filer;
 import javax.tools.JavaFileObject;
 import objectos.lang.Check;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 public final class JavaFile {
 
@@ -106,7 +106,7 @@ public final class JavaFile {
 
     private PackageName packageName = PackageName.unnamed();
 
-    private final MutableList<TypeCode> types = new MutableList<>();
+    private final GrowableList<TypeCode> types = new GrowableList<>();
 
     private Builder() {}
 

@@ -27,7 +27,7 @@ import java.util.ArrayDeque;
 import java.util.zip.Deflater;
 import java.util.zip.Inflater;
 import objectos.lang.NoteSink;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 import objectos.util.MutableSet;
 
 abstract class GitInjector {
@@ -64,7 +64,7 @@ abstract class GitInjector {
 
   abstract MessageDigest getMessageDigest(String algoName);
 
-  abstract <E> MutableList<E> getMutableList();
+  abstract <E> GrowableList<E> getGrowableList();
 
   abstract <E> MutableSet<E> getMutableSet();
 
@@ -102,7 +102,7 @@ abstract class GitInjector {
 
   abstract MessageDigest putMessageDigest(MessageDigest digest);
 
-  abstract <E> MutableList<E> putMutableList(MutableList<E> list);
+  abstract <E> GrowableList<E> putGrowableList(GrowableList<E> list);
 
   abstract <E> MutableSet<E> putMutableSet(MutableSet<E> set);
 

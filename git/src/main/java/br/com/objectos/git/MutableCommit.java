@@ -17,7 +17,7 @@ package br.com.objectos.git;
 
 import objectos.lang.Check;
 import objectos.lang.ToString;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 /**
  * A class for creating a commit object suitable for writing to a repository.
@@ -32,7 +32,7 @@ public final class MutableCommit implements ToString.Formattable {
 
   private String message;
 
-  private MutableList<ObjectId> parents;
+  private GrowableList<ObjectId> parents;
 
   private ObjectId tree;
 
@@ -49,7 +49,7 @@ public final class MutableCommit implements ToString.Formattable {
    */
   public final void addParent(ObjectId parent) {
     if (parents == null) {
-      parents = new MutableList<>();
+      parents = new GrowableList<>();
     }
 
     parents.addWithNullMessage(parent, "parent == null");

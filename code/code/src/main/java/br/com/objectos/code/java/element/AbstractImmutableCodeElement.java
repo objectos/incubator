@@ -17,7 +17,7 @@ package br.com.objectos.code.java.element;
 
 import br.com.objectos.code.java.io.CodeWriter;
 import objectos.util.UnmodifiableList;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 public abstract class AbstractImmutableCodeElement extends AbstractCodeElement {
 
@@ -38,8 +38,8 @@ public abstract class AbstractImmutableCodeElement extends AbstractCodeElement {
   }
 
   protected final UnmodifiableList<CodeElement> appendNextLine() {
-    MutableList<CodeElement> list;
-    list = new MutableList<>();
+    GrowableList<CodeElement> list;
+    list = new GrowableList<>();
 
     list.addAll(elements);
 

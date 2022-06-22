@@ -29,7 +29,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import objectos.util.UnmodifiableList;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 public class Mdn {
 
@@ -88,7 +88,7 @@ public class Mdn {
   }
 
   private static UnmodifiableList<ValueType> loadValueTypes(String property) throws IOException {
-    MutableList<ValueType> types = new MutableList<>();
+    GrowableList<ValueType> types = new GrowableList<>();
 
     Resource resource = Resource.getResource("mdn/" + property);
 

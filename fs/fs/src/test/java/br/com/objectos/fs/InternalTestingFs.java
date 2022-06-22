@@ -18,7 +18,7 @@ package br.com.objectos.fs;
 import br.com.objectos.random.testing.Next;
 import java.io.IOException;
 import java.util.List;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 final class InternalTestingFs {
 
@@ -39,7 +39,7 @@ final class InternalTestingFs {
     INSTANCE = tempDir;
   }
 
-  private final List<Directory> tempDirectories = new MutableList<>();
+  private final List<Directory> tempDirectories = new GrowableList<>();
 
   private InternalTestingFs() {}
 

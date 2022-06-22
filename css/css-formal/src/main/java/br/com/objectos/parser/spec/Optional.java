@@ -16,7 +16,7 @@
 package br.com.objectos.parser.spec;
 
 import java.util.Objects;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 class Optional extends NonTerminal {
 
@@ -41,7 +41,7 @@ class Optional extends NonTerminal {
     value.acceptStage02Builder(builder, superType);
   }
 
-  public final void acceptProductionList(MutableList<Production> list) {
+  public final void acceptProductionList(GrowableList<Production> list) {
     list.add(present());
     list.add(absent());
   }

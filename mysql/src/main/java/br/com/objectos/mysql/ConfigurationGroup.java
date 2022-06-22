@@ -17,7 +17,7 @@ package br.com.objectos.mysql;
 
 import java.util.Locale;
 import objectos.util.UnmodifiableList;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 public final class ConfigurationGroup {
 
@@ -64,7 +64,7 @@ public final class ConfigurationGroup {
     );
   }
 
-  public final void addTo(MutableList<String> lines) {
+  public final void addTo(GrowableList<String> lines) {
     if (options.isEmpty()) {
       return;
     }

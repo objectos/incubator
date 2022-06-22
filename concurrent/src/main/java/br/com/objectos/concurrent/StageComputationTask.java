@@ -20,7 +20,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import objectos.lang.Check;
 import objectos.util.UnmodifiableList;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 /**
  * A base async computation implementation providing an imperative programming
@@ -253,7 +253,7 @@ public abstract class StageComputationTask<V> implements Computation<V>, CpuTask
 
   private static final int FSTAGE_INCREMENTED = 1 << 2;
 
-  private final MutableList<Computation<?>> computations = new MutableList<>();
+  private final GrowableList<Computation<?>> computations = new GrowableList<>();
 
   private Throwable error;
 
@@ -261,7 +261,7 @@ public abstract class StageComputationTask<V> implements Computation<V>, CpuTask
 
   private V result;
 
-  private final MutableList<Object> results = new MutableList<>();
+  private final GrowableList<Object> results = new GrowableList<>();
 
   private int stage;
 

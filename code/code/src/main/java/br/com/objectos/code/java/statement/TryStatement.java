@@ -21,7 +21,7 @@ import br.com.objectos.code.java.io.CodeWriter;
 import java.util.Iterator;
 import objectos.lang.Check;
 import objectos.util.UnmodifiableList;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 public class TryStatement extends AbstractSimpleStatement {
 
@@ -148,15 +148,15 @@ public class TryStatement extends AbstractSimpleStatement {
 
   public static class Builder {
 
-    final MutableList<Block.Builder> catchBlocks = new MutableList<>();
+    final GrowableList<Block.Builder> catchBlocks = new GrowableList<>();
 
-    final MutableList<CatchElement> catchElements = new MutableList<>();
+    final GrowableList<CatchElement> catchElements = new GrowableList<>();
 
     Block.Builder currentBlock;
 
     Block.Builder finallyBlock;
 
-    final MutableList<ResourceElement> resources = new MutableList<>();
+    final GrowableList<ResourceElement> resources = new GrowableList<>();
 
     final Block.Builder tryBlock = Block.builder();
 
@@ -199,7 +199,7 @@ public class TryStatement extends AbstractSimpleStatement {
     }
 
     private UnmodifiableList<CatchBlock> buildCatchBlocks() {
-      MutableList<CatchBlock> blocks = new MutableList<>();
+      GrowableList<CatchBlock> blocks = new GrowableList<>();
 
       for (int i = 0; i < catchElements.size(); i++) {
         blocks.add(

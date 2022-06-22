@@ -18,11 +18,11 @@ package br.com.objectos.code.java.io;
 import br.com.objectos.code.java.declaration.BodyElement;
 import java.util.List;
 import objectos.util.UnmodifiableList;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 abstract class FormattingAction {
 
-  private final MutableList<BodyElement> elements = new MutableList<>();
+  private final GrowableList<BodyElement> elements = new GrowableList<>();
 
   private final FormattingAction nextAction;
 
@@ -39,7 +39,7 @@ abstract class FormattingAction {
   }
 
   public List<BodyElement> stream() {
-    MutableList<BodyElement> result;
+    GrowableList<BodyElement> result;
     result = elements();
 
     List<BodyElement> fromNext;
@@ -56,8 +56,8 @@ abstract class FormattingAction {
   }
 
   public final <E extends BodyElement> UnmodifiableList<E> toUnmodifiableList(Class<E> type) {
-    MutableList<E> result;
-    result = new MutableList<>();
+    GrowableList<E> result;
+    result = new GrowableList<>();
 
     List<BodyElement> stream;
     stream = stream();
@@ -75,7 +75,7 @@ abstract class FormattingAction {
     return result.toUnmodifiableList();
   }
 
-  MutableList<BodyElement> elements() {
+  GrowableList<BodyElement> elements() {
     return elements;
   }
 

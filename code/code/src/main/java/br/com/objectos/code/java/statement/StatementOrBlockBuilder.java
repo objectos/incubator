@@ -16,11 +16,11 @@
 package br.com.objectos.code.java.statement;
 
 import br.com.objectos.code.java.element.NewLine;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 public class StatementOrBlockBuilder {
 
-  private final MutableList<BlockElement> blockElements = new MutableList<>();
+  private final GrowableList<BlockElement> blockElements = new GrowableList<>();
 
   private int blockStatementCount;
   private boolean forceBlock;

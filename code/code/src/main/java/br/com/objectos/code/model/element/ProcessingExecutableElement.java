@@ -26,7 +26,7 @@ import javax.lang.model.element.TypeParameterElement;
 import javax.lang.model.element.VariableElement;
 import javax.lang.model.type.TypeMirror;
 import objectos.util.UnmodifiableList;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 abstract class ProcessingExecutableElement
     extends ProcessingElement<ExecutableElement>
@@ -92,8 +92,8 @@ abstract class ProcessingExecutableElement
   }
 
   private UnmodifiableList<ProcessingParameter> getParameters0() {
-    MutableList<ProcessingParameter> result;
-    result = new MutableList<>();
+    GrowableList<ProcessingParameter> result;
+    result = new GrowableList<>();
 
     List<? extends VariableElement> parameterElements;
     parameterElements = element.getParameters();
@@ -112,8 +112,8 @@ abstract class ProcessingExecutableElement
   }
 
   private UnmodifiableList<PTypeMirror> getThrownTypes0() {
-    MutableList<PTypeMirror> result;
-    result = new MutableList<>();
+    GrowableList<PTypeMirror> result;
+    result = new GrowableList<>();
 
     List<? extends TypeMirror> types;
     types = element.getThrownTypes();

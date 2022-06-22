@@ -28,7 +28,7 @@ import javax.lang.model.util.Elements;
 import javax.lang.model.util.Types;
 import objectos.lang.Check;
 import objectos.util.UnmodifiableList;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 public abstract class AnnotatedElementOrType {
 
@@ -148,8 +148,8 @@ public abstract class AnnotatedElementOrType {
 
   protected final UnmodifiableList<ProcessingAnnotation> toProcessingAnnotationUnmodifiableList(
       List<? extends AnnotationMirror> mirrors) {
-    MutableList<ProcessingAnnotation> list;
-    list = new MutableList<>();
+    GrowableList<ProcessingAnnotation> list;
+    list = new GrowableList<>();
 
     for (int i = 0; i < mirrors.size(); i++) {
       AnnotationMirror mirror;

@@ -31,7 +31,7 @@ import br.com.objectos.code.model.element.ProcessingType;
 import br.com.objectos.code.processing.type.PTypeMirror;
 import objectos.lang.HashCode;
 import objectos.util.UnmodifiableList;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 final class StaticField {
 
@@ -48,8 +48,8 @@ final class StaticField {
   }
 
   public static UnmodifiableList<StaticField> listOf(ProcessingType type) {
-    MutableList<StaticField> result;
-    result = new MutableList<>();
+    GrowableList<StaticField> result;
+    result = new GrowableList<>();
 
     UnmodifiableList<ProcessingField> fields;
     fields = type.getDeclaredOrInheritedFields();

@@ -15,13 +15,13 @@
  */
 package br.com.objectos.http.path;
 
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 class LocationParser {
 
   private final StringBuilder slug = new StringBuilder();
 
-  private final MutableList<Slug> slugs = new MutableList<>();
+  private final GrowableList<Slug> slugs = new GrowableList<>();
   private State state = State.START;
   private final String string;
 

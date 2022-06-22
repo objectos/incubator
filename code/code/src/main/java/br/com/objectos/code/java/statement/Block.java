@@ -22,7 +22,7 @@ import br.com.objectos.code.java.expression.LambdaBody;
 import br.com.objectos.code.java.io.CodeWriter;
 import br.com.objectos.code.java.io.Section;
 import objectos.util.UnmodifiableList;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 public class Block extends AbstractSimpleStatement implements LambdaBody {
 
@@ -94,7 +94,7 @@ public class Block extends AbstractSimpleStatement implements LambdaBody {
 
   public static class Builder {
 
-    private final MutableList<BlockElement> elements = new MutableList<>();
+    private final GrowableList<BlockElement> elements = new GrowableList<>();
 
     private Builder() {}
 

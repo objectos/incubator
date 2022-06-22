@@ -25,19 +25,19 @@ import br.com.objectos.css.boot.spec.StepAdapter;
 import java.util.Arrays;
 import java.util.List;
 import objectos.util.UnmodifiableMap;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 import objectos.util.MutableMap;
 import org.testng.annotations.BeforeMethod;
 
 public abstract class AbstractCssBootTest {
 
-  protected MutableList<JavaFile> srcJavaFiles;
+  protected GrowableList<JavaFile> srcJavaFiles;
 
   protected AbstractCssBootTest() {}
 
   @BeforeMethod
   public void setUp() {
-    srcJavaFiles = new MutableList<>();
+    srcJavaFiles = new GrowableList<>();
   }
 
   protected final UnmodifiableMap<String, JavaFile> execute(StepFactory factory, CssSpec spec) {

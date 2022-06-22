@@ -34,7 +34,7 @@ import java.util.HashMap;
 import java.util.Map;
 import objectos.lang.Check;
 import objectos.util.UnmodifiableList;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 abstract class AbstractHttpParser<H extends Header> implements CpuTask, IoTask {
 
@@ -98,7 +98,7 @@ abstract class AbstractHttpParser<H extends Header> implements CpuTask, IoTask {
 
   private Action parseToEolAction;
 
-  private final MutableList<H> resultHeaders = new MutableList<>();
+  private final GrowableList<H> resultHeaders = new GrowableList<>();
 
   private final StringBuilder stringBuilder = new StringBuilder();
 

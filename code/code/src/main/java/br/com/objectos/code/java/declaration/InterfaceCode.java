@@ -27,7 +27,7 @@ import br.com.objectos.code.java.type.NamedClassOrParameterized;
 import java.lang.annotation.Annotation;
 import objectos.lang.Check;
 import objectos.util.UnmodifiableList;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 public final class InterfaceCode extends AbstractTypeCode {
 
@@ -243,8 +243,8 @@ public final class InterfaceCode extends AbstractTypeCode {
   public static final class Builder {
 
     private final InterfaceExtends.Builder _extends = InterfaceExtends.builder();
-    private final MutableList<AnnotationCode> annotations = new MutableList<>();
-    private final MutableList<InterfaceBodyElement> bodyElements = new MutableList<>();
+    private final GrowableList<AnnotationCode> annotations = new GrowableList<>();
+    private final GrowableList<InterfaceBodyElement> bodyElements = new GrowableList<>();
     private BodyFormatter formatter = BodyFormatter.defaultFormatter();
     private final InterfaceModifierSet.Builder modifiers = InterfaceModifierSet.builder();
 

@@ -22,7 +22,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import objectos.util.UnmodifiableList;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -37,8 +37,8 @@ public class ReadTest {
     StringBuilder randomLinesTxtBuilder;
     randomLinesTxtBuilder = new StringBuilder();
 
-    MutableList<String> randomLinesBuilder;
-    randomLinesBuilder = new MutableList<>();
+    GrowableList<String> randomLinesBuilder;
+    randomLinesBuilder = new GrowableList<>();
 
     for (int i = 0; i < 8192; i++) {
       String randomLine;

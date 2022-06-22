@@ -32,7 +32,7 @@ import java.util.Set;
 import javax.annotation.processing.SupportedAnnotationTypes;
 import objectos.util.UnmodifiableList;
 import objectos.util.UnmodifiableSet;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 import org.testng.annotations.Test;
 
 public class ProcessingRoundTest {
@@ -132,8 +132,8 @@ public class ProcessingRoundTest {
 
   @Test
   public void reprocessIfPossible_packages() {
-    final MutableList<RoundClassName> result;
-    result = new MutableList<>();
+    final GrowableList<RoundClassName> result;
+    result = new GrowableList<>();
 
     class ClassArrayAnnotationProcesssor extends ReprocessorProcessor {
       @Override
@@ -188,8 +188,8 @@ public class ProcessingRoundTest {
 
   @Test
   public void reprocessIfPossible_types() {
-    final MutableList<RoundClassName> result;
-    result = new MutableList<>();
+    final GrowableList<RoundClassName> result;
+    result = new GrowableList<>();
 
     class ClassArrayAnnotationProcesssor extends ReprocessorProcessor {
       @Override
@@ -276,7 +276,7 @@ public class ProcessingRoundTest {
     }
 
     final void process0(
-        MutableList<RoundClassName> result, AnnotatedElementOrType element)
+        GrowableList<RoundClassName> result, AnnotatedElementOrType element)
         throws ErrorTypeException {
       ProcessingAnnotation annotation;
       annotation = element.getDirectlyPresentAnnotation(ClassArrayAnnotation.class);

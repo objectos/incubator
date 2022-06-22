@@ -18,7 +18,7 @@ package br.com.objectos.html.tmpl;
 import br.com.objectos.html.attribute.StandardAttributeName;
 import br.com.objectos.html.element.StandardElementName;
 import objectos.util.IntArrays;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 class Interpreter {
 
@@ -128,7 +128,7 @@ class Interpreter {
         );
         break;
       default:
-        MutableList<String> values = new MutableList<>();
+        GrowableList<String> values = new GrowableList<>();
         for (int i = 0; i < valueCount; i++) {
           values.add(
               getBuffer(getCurrentAttr(), getCurrentAttr())

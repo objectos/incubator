@@ -19,7 +19,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import java.util.List;
 import objectos.util.UnmodifiableList;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -117,8 +117,8 @@ public class ProcessingAnnotationValueTypeArrayTest extends AbstractProcessingAn
   }
 
   private UnmodifiableList<NamedType> tn(List<PTypeMirror> iter) {
-    MutableList<NamedType> result;
-    result = new MutableList<>();
+    GrowableList<NamedType> result;
+    result = new GrowableList<>();
 
     for (int i = 0; i < iter.size(); i++) {
       PTypeMirror modelType = iter.get(i);

@@ -56,13 +56,13 @@ import br.com.objectos.css.boot.spec.Step;
 import br.com.objectos.css.boot.spec.StepAdapter;
 import br.com.objectos.css.boot.spec.Types;
 import objectos.util.UnmodifiableList;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 abstract class AbstractSelectorStep extends Step {
 
-  private final MutableList<VariableInitializer> constantNames = new MutableList<>();
-  private final MutableList<FieldCode> fields = new MutableList<>();
-  private final MutableList<BlockStatement> mapStatements = new MutableList<>();
+  private final GrowableList<VariableInitializer> constantNames = new GrowableList<>();
+  private final GrowableList<FieldCode> fields = new GrowableList<>();
+  private final GrowableList<BlockStatement> mapStatements = new GrowableList<>();
 
   AbstractSelectorStep(StepAdapter adapter) {
     super(adapter);

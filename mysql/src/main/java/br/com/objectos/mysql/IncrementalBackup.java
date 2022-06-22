@@ -27,7 +27,7 @@ import objectos.lang.Note1;
 import objectos.lang.Note2;
 import objectos.lang.NoteSink;
 import objectos.util.UnmodifiableList;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 final class IncrementalBackup extends AbstractClientJob<UnmodifiableList<RegularFile>> {
 
@@ -79,7 +79,7 @@ final class IncrementalBackup extends AbstractClientJob<UnmodifiableList<Regular
 
   private String prefix;
 
-  private final MutableList<RegularFile> result = new MutableList<>();
+  private final GrowableList<RegularFile> result = new GrowableList<>();
 
   private long startTime;
 

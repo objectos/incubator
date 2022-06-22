@@ -17,7 +17,7 @@ package objectos.ssg;
 
 import br.com.objectos.html.spi.type.UlValue;
 import java.util.List;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 /**
  * - SiteRegistry
@@ -64,7 +64,7 @@ final class TestCase07 extends Site {
   }
 
   private static class Toc extends SiteFragment implements SiteVisitor {
-    private final List<String> items = new MutableList<>();
+    private final List<String> items = new GrowableList<>();
 
     private int level;
 

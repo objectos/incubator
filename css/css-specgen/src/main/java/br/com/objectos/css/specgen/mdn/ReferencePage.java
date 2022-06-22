@@ -15,7 +15,7 @@
  */
 package br.com.objectos.css.specgen.mdn;
 
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -32,8 +32,8 @@ public class ReferencePage {
   }
 
   public final Iterable<PropertyAnchor> crawl() {
-    MutableList<PropertyAnchor> result;
-    result = new MutableList<>();
+    GrowableList<PropertyAnchor> result;
+    result = new GrowableList<>();
 
     Elements elements = fragment.select("div.index code");
 

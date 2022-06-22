@@ -32,7 +32,7 @@ import br.com.objectos.code.processing.type.PTypeMirror;
 import objectos.lang.HashCode;
 import objectos.lang.ToString;
 import objectos.util.UnmodifiableList;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 final class GenerateStaticFactoryAggregateAnnotation implements ToString.Formattable {
 
@@ -136,7 +136,7 @@ final class GenerateStaticFactoryAggregateAnnotation implements ToString.Formatt
 
     @Override
     final UnmodifiableList<FactoryType> factoryTypes() {
-      MutableList<FactoryType> result = new MutableList<>();
+      GrowableList<FactoryType> result = new GrowableList<>();
 
       ProcessingAnnotationValue factoriesValue;
       factoriesValue = annotation.getDeclaredOrDefaultValue("factories");

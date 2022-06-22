@@ -25,7 +25,7 @@ import java.io.Closeable;
 import java.io.IOException;
 import objectos.lang.Check;
 import objectos.util.UnmodifiableList;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 /**
  * Reads log events from a storage by watching it for changes.
@@ -164,7 +164,7 @@ public final class StorageWatcher implements Closeable, Watch.Option {
 
     private final IoWorker ioWorker;
 
-    private final MutableList<LogListener> listeners = new MutableList<>();
+    private final GrowableList<LogListener> listeners = new GrowableList<>();
 
     private final Storage storage;
 

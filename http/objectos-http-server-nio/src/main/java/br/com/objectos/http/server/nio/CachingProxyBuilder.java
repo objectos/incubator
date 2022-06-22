@@ -18,16 +18,16 @@
  */
 package br.com.objectos.http.server.nio;
 
-import static br.com.objectos.collections.Collections.newMutableList;
+import static br.com.objectos.collections.Collections.newGrowableList;
 import static br.com.objectos.preconditions.Preconditions.checkNotNull;
 
-import br.com.objectos.collections.MutableList;
+import br.com.objectos.collections.GrowableList;
 import br.com.objectos.io.Directory;
 
 public class CachingProxyBuilder {
 
   private final Directory cache;
-  private final MutableList<String> specList = new MutableList<>();
+  private final GrowableList<String> specList = new GrowableList<>();
 
   public CachingProxyBuilder(Directory cache) {
     this.cache = checkNotNull(cache, "cache == null");

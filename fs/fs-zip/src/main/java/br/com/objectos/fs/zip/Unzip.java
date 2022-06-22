@@ -27,7 +27,7 @@ import java.util.Enumeration;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import objectos.lang.Check;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 /**
  * @since 2
@@ -83,8 +83,8 @@ public final class Unzip {
     StringBuilder namePart;
     namePart = new StringBuilder();
 
-    MutableList<String> nameParts;
-    nameParts = new MutableList<>();
+    GrowableList<String> nameParts;
+    nameParts = new GrowableList<>();
 
     ThisVisitor thisVisitor;
     thisVisitor = new ThisVisitor();

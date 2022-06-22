@@ -25,7 +25,7 @@ import objectos.lang.Note2;
 import objectos.lang.Note3;
 import objectos.lang.NoteSink;
 import objectos.util.UnmodifiableList;
-import objectos.util.MutableList;
+import objectos.util.GrowableList;
 
 /**
  * An in-memory Logger implementation with methods that allow for inspection of
@@ -34,7 +34,7 @@ import objectos.util.MutableList;
  */
 public final class TestableLogger implements NoteSink {
 
-  private final MutableList<Log> logs = new MutableList<>();
+  private final GrowableList<Log> logs = new GrowableList<>();
 
   private boolean sysout;
 
@@ -125,8 +125,8 @@ public final class TestableLogger implements NoteSink {
   public final UnmodifiableList<Log> getLogsByLevel(Level level) {
     Check.notNull(level, "level == null");
 
-    MutableList<Log> result;
-    result = new MutableList<>();
+    GrowableList<Log> result;
+    result = new GrowableList<>();
 
     for (int i = 0, size = logs.size(); i < size; i++) {
       Log l;
