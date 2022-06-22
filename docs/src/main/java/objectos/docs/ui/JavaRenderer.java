@@ -113,7 +113,7 @@ final class JavaRenderer extends LanguageRenderer {
       char c;
       c = peek();
 
-      if (Character.isWhitespace(c)) {
+      if (!Character.isJavaIdentifierPart(c)) {
         break;
       }
 

@@ -256,6 +256,53 @@ public class MdTest {
   }
 
   @Test
+  public void java06() {
+    test(
+      """
+      ```java
+      @SuppressWarnings({"rawtypes", "unchecked"})
+      public void foo() {}
+      ```
+      """,
+
+      """
+      <pre class="tju">\
+      <code>\
+      <span class="vry">@SuppressWarnings</span>\
+      <span class="ah1">(</span>\
+      <span class="ah1">{</span>\
+      <span class="rlv">&quot;rawtypes&quot;</span>\
+      <span class="ah1">,</span>\
+      <span class="xw2"> </span>\
+      <span class="rlv">&quot;unchecked&quot;</span>\
+      <span class="ah1">}</span>\
+      <span class="ah1">)</span>\
+      <span class="xw2">
+      </span>\
+      <span class="vzu">public</span>\
+      <span class="xw2"> </span>\
+      <span class="vzu">void</span>\
+      <span class="xw2"> </span>\
+      <span class="nps">foo</span>\
+      <span class="ah1">(</span>\
+      <span class="ah1">)</span>\
+      <span class="xw2"> </span>\
+      <span class="ah1">{</span>\
+      <span class="ah1">}</span>\
+      </code>\
+      </pre>
+      """
+          .replace("tju", SyntaxCss._PRE.className())
+          .replace("vry", JavaCss._ANNOTATION.className())
+          .replace("xw2", JavaCss._WS.className())
+          .replace("vzu", JavaCss._KEYWORD.className())
+          .replace("ah1", JavaCss._TOKEN.className())
+          .replace("nps", JavaCss._IDENTIFIER.className())
+          .replace("rlv", JavaCss._STRING.className())
+    );
+  }
+
+  @Test
   public void xml() {
     test(
       """
