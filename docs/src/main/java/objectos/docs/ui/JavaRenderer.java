@@ -16,11 +16,17 @@
 package objectos.docs.ui;
 
 import br.com.objectos.css.select.ClassSelector;
+import java.util.Set;
 import javax.lang.model.SourceVersion;
 import objectos.docs.style.JavaCss;
 import org.commonmark.renderer.html.HtmlWriter;
 
 final class JavaRenderer extends LanguageRenderer {
+
+  private static final Set<String> CONTEXTUAL_KEYWORDS = Set.of(
+    "record",
+    "var"
+  );
 
   private static final byte _ANNOTATION = 1;
 
@@ -200,7 +206,7 @@ final class JavaRenderer extends LanguageRenderer {
     ClassSelector type;
     type = JavaCss._IDENTIFIER;
 
-    if (SourceVersion.isKeyword(id, sourceVersion)) {
+    if (SourceVersion.isKeyword(id, sourceVersion) || CONTEXTUAL_KEYWORDS.contains(id)) {
       type = JavaCss._KEYWORD;
     }
 
