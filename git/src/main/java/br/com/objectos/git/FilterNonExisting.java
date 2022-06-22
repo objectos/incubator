@@ -18,7 +18,7 @@ package br.com.objectos.git;
 import java.nio.ByteBuffer;
 import objectos.lang.Check;
 import objectos.util.UnmodifiableSet;
-import objectos.util.MutableSet;
+import objectos.util.GrowableSet;
 
 final class FilterNonExisting implements ObjectReaderAdapter {
 
@@ -30,7 +30,7 @@ final class FilterNonExisting implements ObjectReaderAdapter {
 
   private GitRepository repository;
 
-  private MutableSet<ObjectId> result;
+  private GrowableSet<ObjectId> result;
 
   FilterNonExisting(GitInjector injector) {
     this.injector = injector;
@@ -46,7 +46,7 @@ final class FilterNonExisting implements ObjectReaderAdapter {
 
     repository = null;
 
-    result = injector.putMutableSet(result);
+    result = injector.putGrowableSet(result);
   }
 
   @Override
@@ -87,7 +87,7 @@ final class FilterNonExisting implements ObjectReaderAdapter {
 
     this.handle = handle;
 
-    result = injector.getMutableSet();
+    result = injector.getGrowableSet();
   }
 
   @Override

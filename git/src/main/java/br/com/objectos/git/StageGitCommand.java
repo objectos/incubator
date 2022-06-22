@@ -48,7 +48,7 @@ import objectos.util.UnmodifiableSet;
  *
  * <pre>{@code
 final class CopyTreeCommand extends StageGitCommand<ObjectId> {
-  private final MutableSet<ObjectId> objectsToCopy = new MutableSet<>();
+  private final GrowableSet<ObjectId> objectsToCopy = new GrowableSet<>();
 
   private final Repository source;
 

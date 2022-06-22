@@ -37,7 +37,7 @@ import objectos.lang.NoteSink;
 import objectos.util.UnmodifiableSet;
 import objectos.util.GrowableList;
 import objectos.util.MutableMap;
-import objectos.util.MutableSet;
+import objectos.util.GrowableSet;
 
 /**
  * A state machine providing low-level (plumbing) Git operations.
@@ -106,7 +106,7 @@ public final class GitEngine extends GitInjector {
 
   private final Deque<GrowableList<Object>> GrowableLists = Git.newArrayDeque(3);
 
-  private final Deque<MutableSet<Object>> mutableSets = Git.newArrayDeque(3);
+  private final Deque<GrowableSet<Object>> GrowableSets = Git.newArrayDeque(3);
 
   private ObjectReader objectReader;
 
@@ -723,17 +723,17 @@ public final class GitEngine extends GitInjector {
 
   @SuppressWarnings("unchecked")
   @Override
-  final <E> MutableSet<E> getMutableSet() {
-    if (mutableSets.isEmpty()) {
-      return new MutableSet<>();
+  final <E> GrowableSet<E> getGrowableSet() {
+    if (GrowableSets.isEmpty()) {
+      return new GrowableSet<>();
     }
 
-    MutableSet<Object> set;
-    set = mutableSets.remove();
+    GrowableSet<Object> set;
+    set = GrowableSets.remove();
 
     set.clear();
 
-    return (MutableSet<E>) set;
+    return (GrowableSet<E>) set;
   }
 
   @Override
@@ -948,9 +948,9 @@ public final class GitEngine extends GitInjector {
 
   @SuppressWarnings("unchecked")
   @Override
-  final <E> MutableSet<E> putMutableSet(MutableSet<E> set) {
+  final <E> GrowableSet<E> putGrowableSet(GrowableSet<E> set) {
     if (set != null) {
-      mutableSets.add((MutableSet<Object>) set);
+      GrowableSets.add((GrowableSet<Object>) set);
     }
 
     return null;

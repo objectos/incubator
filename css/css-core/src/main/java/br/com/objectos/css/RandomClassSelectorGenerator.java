@@ -20,13 +20,13 @@ import br.com.objectos.css.select.SelectorFactory;
 import java.util.Locale;
 import java.util.Set;
 import objectos.lang.Check;
-import objectos.util.MutableSet;
+import objectos.util.GrowableSet;
 
 final class RandomClassSelectorGenerator {
 
   private static final int MAX_TRIES = 20;
 
-  private static final Set<String> NAMES = new MutableSet<>();
+  private static final Set<String> NAMES = new GrowableSet<>();
 
   private RandomClassSelectorGenerator() {}
 

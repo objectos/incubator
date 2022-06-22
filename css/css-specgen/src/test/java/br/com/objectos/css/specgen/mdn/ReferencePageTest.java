@@ -22,7 +22,7 @@ import br.com.objectos.core.io.Charsets;
 import br.com.objectos.core.io.Read;
 import br.com.objectos.core.io.Resource;
 import java.io.IOException;
-import objectos.util.MutableSet;
+import objectos.util.GrowableSet;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.testng.annotations.Test;
@@ -45,8 +45,8 @@ public class ReferencePageTest {
     Document document = Jsoup.parse(html);
     ReferencePage page = BaseUrlFake.LOCALHOST.getReferencePage(document);
 
-    MutableSet<String> props;
-    props = new MutableSet<>();
+    GrowableSet<String> props;
+    props = new GrowableSet<>();
 
     Iterable<PropertyAnchor> crawl = page.crawl();
 

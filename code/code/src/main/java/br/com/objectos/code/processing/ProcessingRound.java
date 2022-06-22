@@ -44,7 +44,7 @@ import javax.tools.FileObject;
 import javax.tools.StandardLocation;
 import objectos.lang.Check;
 import objectos.util.UnmodifiableSet;
-import objectos.util.MutableSet;
+import objectos.util.GrowableSet;
 
 public class ProcessingRound
     implements
@@ -101,8 +101,8 @@ public class ProcessingRound
   }
 
   public final UnmodifiableSet<ProcessingMethod> getAnnotatedMethods() {
-    MutableSet<ProcessingMethod> result;
-    result = new MutableSet<>();
+    GrowableSet<ProcessingMethod> result;
+    result = new GrowableSet<>();
 
     for (TypeElement annotation : annotations) {
       getAnnotatedMethods0(result, annotation);
@@ -112,8 +112,8 @@ public class ProcessingRound
   }
 
   public final UnmodifiableSet<ProcessingPackage> getAnnotatedPackages() {
-    MutableSet<ProcessingPackage> result;
-    result = new MutableSet<>();
+    GrowableSet<ProcessingPackage> result;
+    result = new GrowableSet<>();
 
     addReprocessorPackagesIfNecessary(result);
 
@@ -125,7 +125,7 @@ public class ProcessingRound
   }
 
   public final UnmodifiableSet<ProcessingType> getAnnotatedTypes() {
-    MutableSet<ProcessingType> result = new MutableSet<>();
+    GrowableSet<ProcessingType> result = new GrowableSet<>();
 
     addReprocessorTypesIfNecessary(result);
 

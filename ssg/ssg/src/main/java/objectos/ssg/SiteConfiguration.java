@@ -27,7 +27,7 @@ import objectos.lang.Check;
 import objectos.util.UnmodifiableList;
 import objectos.util.GrowableList;
 import objectos.util.MutableMap;
-import objectos.util.MutableSet;
+import objectos.util.GrowableSet;
 
 public class SiteConfiguration implements Site.Context {
 
@@ -37,7 +37,7 @@ public class SiteConfiguration implements Site.Context {
 
   final List<Object> objects = new ArrayList<>();
 
-  private final Set<String> paths = new MutableSet<>();
+  private final Set<String> paths = new GrowableSet<>();
 
   private ThisSiteRegistry registry = NoOpSiteRegistry.INSTANCE;
 

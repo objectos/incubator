@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.Map;
 import objectos.util.UnmodifiableList;
 import objectos.util.UnmodifiableSet;
-import objectos.util.MutableSet;
+import objectos.util.GrowableSet;
 
 /**
  * Copy use-case. Verify that generated trees are sorted. In particular when
@@ -38,9 +38,9 @@ final class TestCase11 extends StageGitCommand<ObjectId> {
 
   private final Map<ObjectId, String> blobNames = new HashMap<>();
 
-  private final MutableSet<ObjectId> blobsToCopy = new MutableSet<>();
+  private final GrowableSet<ObjectId> blobsToCopy = new GrowableSet<>();
 
-  private final MutableSet<ObjectId> blobsToRead = new MutableSet<>();
+  private final GrowableSet<ObjectId> blobsToRead = new GrowableSet<>();
 
   private Commit parentCommit;
 

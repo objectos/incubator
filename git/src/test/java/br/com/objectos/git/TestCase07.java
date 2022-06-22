@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.Map;
 import objectos.util.UnmodifiableList;
 import objectos.util.UnmodifiableSet;
-import objectos.util.MutableSet;
+import objectos.util.GrowableSet;
 
 /**
  * Verify that the copy command can create the first commit of the target
@@ -39,7 +39,7 @@ final class TestCase07 extends StageGitCommand<ObjectId> {
 
   static final String DESCRIPTION = "Copy operation: create first commit of target repo";
 
-  private final MutableSet<ObjectId> blobsToCopy = new MutableSet<>();
+  private final GrowableSet<ObjectId> blobsToCopy = new GrowableSet<>();
 
   private MaybeObjectId parentId;
 

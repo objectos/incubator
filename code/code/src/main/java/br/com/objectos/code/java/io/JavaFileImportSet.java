@@ -20,7 +20,7 @@ import br.com.objectos.code.java.type.NamedClass;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.TreeSet;
-import objectos.util.MutableSet;
+import objectos.util.GrowableSet;
 
 public class JavaFileImportSet extends ImportSet {
 
@@ -28,7 +28,7 @@ public class JavaFileImportSet extends ImportSet {
 
   private final Set<NamedClass> qualifiedNameSet = new TreeSet<>();
 
-  private final Set<String> simpleNameSet = new MutableSet<>();
+  private final Set<String> simpleNameSet = new GrowableSet<>();
 
   JavaFileImportSet(PackageName packageName) {
     this.packageName = packageName;

@@ -32,13 +32,13 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 import objectos.lang.Check;
-import objectos.util.MutableSet;
+import objectos.util.GrowableSet;
 
 public class CssSpecDsl {
 
   private final Set<ColorName> colors = new TreeSet<>();
 
-  private final MutableSet<String> elementNames = new MutableSet<>();
+  private final GrowableSet<String> elementNames = new GrowableSet<>();
 
   private final Map<String, FunctionName> functions = new TreeMap<>();
 
@@ -47,7 +47,7 @@ public class CssSpecDsl {
   private final Map<Primitive, PrimitiveType> primitives
       = new EnumMap<Primitive, PrimitiveType>(Primitive.class);
 
-  private final MutableSet<String> properties = new MutableSet<>();
+  private final GrowableSet<String> properties = new GrowableSet<>();
 
   private final Step step;
 

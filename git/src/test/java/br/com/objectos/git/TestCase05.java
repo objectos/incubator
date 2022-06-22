@@ -27,7 +27,7 @@ import java.util.List;
 import java.util.Map;
 import objectos.util.UnmodifiableList;
 import objectos.util.UnmodifiableSet;
-import objectos.util.MutableSet;
+import objectos.util.GrowableSet;
 
 /**
  * Support reading and parsing loose objects (iter. 6).
@@ -47,7 +47,7 @@ final class TestCase05 extends StageGitCommand<ObjectId> {
       + "2) target=bare, loose objects only; "
       + "3) tree filtering";
 
-  private final MutableSet<ObjectId> blobsToCopy = new MutableSet<>();
+  private final GrowableSet<ObjectId> blobsToCopy = new GrowableSet<>();
 
   private MaybeObjectId parentId;
 

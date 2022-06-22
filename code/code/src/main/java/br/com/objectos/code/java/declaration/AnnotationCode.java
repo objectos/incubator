@@ -27,7 +27,7 @@ import java.util.List;
 import java.util.Set;
 import objectos.lang.Check;
 import objectos.util.GrowableList;
-import objectos.util.MutableSet;
+import objectos.util.GrowableSet;
 
 public final class AnnotationCode
     extends AbstractImmutableCodeElement
@@ -292,7 +292,7 @@ public final class AnnotationCode
 
     private Mode mode = Mode.MARKER;
 
-    private final Set<String> names = new MutableSet<>();
+    private final Set<String> names = new GrowableSet<>();
 
     private final List<AnnotationCodeValuePair> pairs = new GrowableList<>();
 

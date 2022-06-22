@@ -39,7 +39,7 @@ import objectos.lang.Check;
 import objectos.util.UnmodifiableList;
 import objectos.util.UnmodifiableSet;
 import objectos.util.GrowableList;
-import objectos.util.MutableSet;
+import objectos.util.GrowableSet;
 
 public abstract class ProcessingElement<E extends Element>
     extends AnnotatedElementOrType
@@ -193,7 +193,7 @@ public abstract class ProcessingElement<E extends Element>
   }
 
   private UnmodifiableSet<Modifier> getModifiers0() {
-    MutableSet<Modifier> set = new MutableSet<>();
+    GrowableSet<Modifier> set = new GrowableSet<>();
 
     for (javax.lang.model.element.Modifier modifier : element.getModifiers()) {
       set.add(Modifiers.of(modifier));

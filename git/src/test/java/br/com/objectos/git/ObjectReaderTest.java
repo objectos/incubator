@@ -26,7 +26,7 @@ import java.nio.ByteBuffer;
 import java.util.Set;
 import java.util.concurrent.ExecutionException;
 import objectos.util.UnmodifiableSet;
-import objectos.util.MutableSet;
+import objectos.util.GrowableSet;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -753,7 +753,7 @@ public class ObjectReaderTest extends AbstractGitTest {
 
     private final Set<ObjectId> objects;
 
-    private final MutableSet<ObjectId> result = new MutableSet<>();
+    private final GrowableSet<ObjectId> result = new GrowableSet<>();
 
     FilterNonExistingAdapter(GitRepository repository, Set<ObjectId> objects) {
       super(repository);

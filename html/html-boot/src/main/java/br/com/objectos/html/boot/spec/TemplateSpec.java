@@ -16,7 +16,7 @@
 package br.com.objectos.html.boot.spec;
 
 import objectos.lang.Check;
-import objectos.util.MutableSet;
+import objectos.util.GrowableSet;
 
 public class TemplateSpec {
 
@@ -25,9 +25,9 @@ public class TemplateSpec {
   private int maxArity = 5;
   private int maxLevel = 5;
 
-  private final MutableSet<String> skipAttribute = new MutableSet<>();
+  private final GrowableSet<String> skipAttribute = new GrowableSet<>();
 
-  private final MutableSet<String> skipText = new MutableSet<>();
+  private final GrowableSet<String> skipText = new GrowableSet<>();
 
   TemplateSpec(SpecDsl dsl) {
     this.dsl = dsl;

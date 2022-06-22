@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.Map;
 import objectos.util.UnmodifiableList;
 import objectos.util.UnmodifiableSet;
-import objectos.util.MutableSet;
+import objectos.util.GrowableSet;
 
 /**
  * Verify that the copy command does not create a commit if the resulting tree
@@ -128,7 +128,7 @@ final class TestCase08 extends StageGitCommand<Directory> {
 
   private static class CopyImpl extends StageGitCommand<ObjectId> {
 
-    private final MutableSet<ObjectId> blobsToCopy = new MutableSet<>();
+    private final GrowableSet<ObjectId> blobsToCopy = new GrowableSet<>();
 
     private Commit parentCommit;
 

@@ -32,7 +32,7 @@ import objectos.lang.Note0;
 import objectos.lang.Note1;
 import objectos.lang.Note2;
 import objectos.util.UnmodifiableSet;
-import objectos.util.MutableSet;
+import objectos.util.GrowableSet;
 
 /**
  * A state machine for reading Git objects from a repository. Supports:
@@ -152,7 +152,7 @@ final class ObjectReader extends AbstractGitEngineTask implements ObjectReaderHa
 
   private Iterator<ObjectId> objects;
 
-  private MutableSet<ObjectId> objectsNotFound;
+  private GrowableSet<ObjectId> objectsNotFound;
 
   private PackFile packFile;
 
@@ -286,7 +286,7 @@ final class ObjectReader extends AbstractGitEngineTask implements ObjectReaderHa
 
       objects = null;
 
-      objectsNotFound = injector.putMutableSet(objectsNotFound);
+      objectsNotFound = injector.putGrowableSet(objectsNotFound);
 
       packFile = null;
 
@@ -345,7 +345,7 @@ final class ObjectReader extends AbstractGitEngineTask implements ObjectReaderHa
 
     inflaterBuffer = injector.getByteBuffer();
 
-    objectsNotFound = injector.getMutableSet();
+    objectsNotFound = injector.getGrowableSet();
 
     reconstructedObject = injector.getByteArrayWriter();
 

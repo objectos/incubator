@@ -28,7 +28,7 @@ import java.util.zip.Deflater;
 import java.util.zip.Inflater;
 import objectos.lang.NoteSink;
 import objectos.util.GrowableList;
-import objectos.util.MutableSet;
+import objectos.util.GrowableSet;
 
 abstract class GitInjector {
 
@@ -66,7 +66,7 @@ abstract class GitInjector {
 
   abstract <E> GrowableList<E> getGrowableList();
 
-  abstract <E> MutableSet<E> getMutableSet();
+  abstract <E> GrowableSet<E> getGrowableSet();
 
   abstract ObjectReader getObjectReader();
 
@@ -104,7 +104,7 @@ abstract class GitInjector {
 
   abstract <E> GrowableList<E> putGrowableList(GrowableList<E> list);
 
-  abstract <E> MutableSet<E> putMutableSet(MutableSet<E> set);
+  abstract <E> GrowableSet<E> putGrowableSet(GrowableSet<E> set);
 
   abstract ObjectReader putObjectReader(ObjectReader reader);
 

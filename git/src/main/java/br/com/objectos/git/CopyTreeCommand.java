@@ -18,7 +18,7 @@ package br.com.objectos.git;
 import objectos.lang.Check;
 import objectos.util.UnmodifiableList;
 import objectos.util.UnmodifiableSet;
-import objectos.util.MutableSet;
+import objectos.util.GrowableSet;
 
 /**
  * Recursively copies a tree object from one repository to another.
@@ -31,7 +31,7 @@ import objectos.util.MutableSet;
  */
 final class CopyTreeCommand extends StageGitCommand<ObjectId> {
 
-  private final MutableSet<ObjectId> objectsToCopy = new MutableSet<>();
+  private final GrowableSet<ObjectId> objectsToCopy = new GrowableSet<>();
 
   private final Repository source;
 

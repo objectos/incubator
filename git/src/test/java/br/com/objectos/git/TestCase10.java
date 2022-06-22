@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.Map;
 import objectos.util.UnmodifiableList;
 import objectos.util.UnmodifiableSet;
-import objectos.util.MutableSet;
+import objectos.util.GrowableSet;
 
 /**
  * Copy use-case. Verify that the CopyJob can transform the contents of a file
@@ -43,9 +43,9 @@ final class TestCase10 extends StageGitCommand<ObjectId> {
 
   private final Map<ObjectId, String> blobNames = new HashMap<>();
 
-  private final MutableSet<ObjectId> blobsToCopy = new MutableSet<>();
+  private final GrowableSet<ObjectId> blobsToCopy = new GrowableSet<>();
 
-  private final MutableSet<ObjectId> blobsToRead = new MutableSet<>();
+  private final GrowableSet<ObjectId> blobsToRead = new GrowableSet<>();
 
   private Commit parentCommit;
 

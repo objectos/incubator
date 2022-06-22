@@ -27,7 +27,7 @@ import javax.lang.model.element.PackageElement;
 import javax.lang.model.element.TypeElement;
 import objectos.lang.Check;
 import objectos.util.UnmodifiableSet;
-import objectos.util.MutableSet;
+import objectos.util.GrowableSet;
 
 public abstract class AbstractProcessingRoundProcessor extends AbstractProcessor {
 
@@ -61,9 +61,9 @@ public abstract class AbstractProcessingRoundProcessor extends AbstractProcessor
 
   private static class ThisReprocessor implements Reprocessor {
 
-    private final MutableSet<Name> packages = new MutableSet<>();
+    private final GrowableSet<Name> packages = new GrowableSet<>();
 
-    private final MutableSet<Name> types = new MutableSet<>();
+    private final GrowableSet<Name> types = new GrowableSet<>();
 
     @Override
     public final UnmodifiableSet<Name> getPackages() {
