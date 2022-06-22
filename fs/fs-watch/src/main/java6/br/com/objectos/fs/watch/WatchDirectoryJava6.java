@@ -22,19 +22,19 @@ import br.com.objectos.fs.watch.Watch.Event;
 import java.io.IOException;
 import java.util.Map;
 import java.util.Set;
-import objectos.util.MutableMap;
+import objectos.util.GrowableMap;
 
 final class WatchDirectoryJava6 implements DirectoryContentsVisitor {
 
   private final Checker checker = new Checker();
 
-  private final Map<String, Directory> directories = new MutableMap<>();
+  private final Map<String, Directory> directories = new GrowableMap<>();
 
   private final Directory directory;
 
   private final Set<Event> events;
 
-  private final Map<String, RegularFileWrapper> files = new MutableMap<>();
+  private final Map<String, RegularFileWrapper> files = new GrowableMap<>();
 
   private final Watch.Listener listener;
 

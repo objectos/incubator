@@ -1,7 +1,7 @@
 package br.com.objectos.css.type;
 
 import br.com.objectos.code.annotations.Generated;
-import objectos.util.MutableMap;
+import objectos.util.GrowableMap;
 import objectos.util.UnmodifiableMap;
 
 @Generated("br.com.objectos.css.boot.CssBoot")
@@ -382,7 +382,7 @@ abstract class GeneratedColor {
   }
 
   private static UnmodifiableMap<String, ColorName> buildMap() {
-    MutableMap<String, ColorName> m = new MutableMap<>();
+    GrowableMap<String, ColorName> m = new GrowableMap<>();
     m.put("ActiveBorder", ActiveBorder);
     m.put("ActiveCaption", ActiveCaption);
     m.put("AppWorkspace", AppWorkspace);

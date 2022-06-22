@@ -116,7 +116,7 @@ public class StandardFunctionNameStep extends Step {
     mapTypeArgs = UnmodifiableList.of(Types._String, implName);
 
     NamedClassOrParameterized implGrowableMap;
-    implGrowableMap = t(Types._MutableMap, mapTypeArgs);
+    implGrowableMap = t(Types._GrowableMap, mapTypeArgs);
 
     NamedClassOrParameterized implUnmodifiableMap;
     implUnmodifiableMap = t(Types._UnmodifiableMap, mapTypeArgs);
@@ -164,7 +164,7 @@ public class StandardFunctionNameStep extends Step {
 
       method(
         _private(), _static(), implUnmodifiableMap, Ids.buildMap,
-        _var(implGrowableMap, Ids.m, Types._newMutableMap()),
+        _var(implGrowableMap, Ids.m, Types._newGrowableMap()),
         statements(mapStatements.values()),
         _return(invoke(Ids.m, "toUnmodifiableMap"))
       ),

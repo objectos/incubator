@@ -1,7 +1,7 @@
 package br.com.objectos.css.function;
 
 import br.com.objectos.code.annotations.Generated;
-import objectos.util.MutableMap;
+import objectos.util.GrowableMap;
 import objectos.util.UnmodifiableMap;
 
 @Generated("br.com.objectos.css.boot.CssBoot")
@@ -37,7 +37,7 @@ public enum StandardFunctionName implements FunctionName {
   }
 
   private static UnmodifiableMap<String, StandardFunctionName> buildMap() {
-    MutableMap<String, StandardFunctionName> m = new MutableMap<>();
+    GrowableMap<String, StandardFunctionName> m = new GrowableMap<>();
     m.put("rotate", ROTATE);
     m.put("rotateX", ROTATEX);
     m.put("rotateY", ROTATEY);

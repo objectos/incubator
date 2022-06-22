@@ -51,7 +51,7 @@ import objectos.lang.Check;
 import objectos.util.UnmodifiableList;
 import objectos.util.UnmodifiableMap;
 import objectos.util.UnmodifiableSet;
-import objectos.util.MutableMap;
+import objectos.util.GrowableMap;
 
 public class ProcessingAnnotation
     extends AnnotatedElementOrType
@@ -245,8 +245,8 @@ public class ProcessingAnnotation
   }
 
   private UnmodifiableMap<String, DeclaredOrDefault> getDeclaredOrDefaultMap0() {
-    MutableMap<String, DeclaredOrDefault> map;
-    map = new MutableMap<>();
+    GrowableMap<String, DeclaredOrDefault> map;
+    map = new GrowableMap<>();
 
     Map<? extends ExecutableElement, ? extends AnnotationValue> declaredValues;
     declaredValues = annotation.getElementValues();
@@ -433,7 +433,7 @@ public class ProcessingAnnotation
       throw new UnsupportedOperationException("Implement me");
     }
 
-    final void addTo(MutableMap<String, DeclaredOrDefault> map) {
+    final void addTo(GrowableMap<String, DeclaredOrDefault> map) {
       String key;
       key = getSimpleName();
 

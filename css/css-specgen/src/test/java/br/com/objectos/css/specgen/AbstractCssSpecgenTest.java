@@ -19,7 +19,7 @@ import br.com.objectos.code.java.io.JavaFile;
 import br.com.objectos.css.specgen.spec.Step;
 import br.com.objectos.css.specgen.spec.StepAdapter;
 import objectos.util.UnmodifiableMap;
-import objectos.util.MutableMap;
+import objectos.util.GrowableMap;
 import org.testng.Assert;
 
 public abstract class AbstractCssSpecgenTest {
@@ -51,7 +51,7 @@ public abstract class AbstractCssSpecgenTest {
 
   private static class ThisStepAdapter extends StepAdapter {
 
-    private final MutableMap<String, JavaFile> javaFiles = new MutableMap<>();
+    private final GrowableMap<String, JavaFile> javaFiles = new GrowableMap<>();
 
     @Override
     public final void writeJavaFile(JavaFile javaFile) {

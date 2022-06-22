@@ -27,7 +27,7 @@ import com.sun.star.uno.XComponentContext;
 import java.io.IOException;
 import java.net.URI;
 import objectos.util.UnmodifiableMap;
-import objectos.util.MutableMap;
+import objectos.util.GrowableMap;
 
 class Desktop {
 
@@ -96,8 +96,8 @@ class Desktop {
   }
 
   private UnmodifiableMap<String, Object> getArgs(XModel2 model) {
-    MutableMap<String, Object> map;
-    map = new MutableMap<>();
+    GrowableMap<String, Object> map;
+    map = new GrowableMap<>();
 
     PropertyValue[] args;
     args = model.getArgs();

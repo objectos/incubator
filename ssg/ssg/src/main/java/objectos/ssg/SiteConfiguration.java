@@ -26,14 +26,14 @@ import java.util.stream.Stream;
 import objectos.lang.Check;
 import objectos.util.UnmodifiableList;
 import objectos.util.GrowableList;
-import objectos.util.MutableMap;
+import objectos.util.GrowableMap;
 import objectos.util.GrowableSet;
 
 public class SiteConfiguration implements Site.Context {
 
   final StringBuilder stringBuilder = new StringBuilder();
 
-  private final Map<Class<?>, Object> byClassMap = new MutableMap<>();
+  private final Map<Class<?>, Object> byClassMap = new GrowableMap<>();
 
   final List<Object> objects = new ArrayList<>();
 

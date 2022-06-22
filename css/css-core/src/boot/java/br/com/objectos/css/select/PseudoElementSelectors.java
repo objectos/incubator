@@ -2,7 +2,7 @@ package br.com.objectos.css.select;
 
 import br.com.objectos.code.annotations.Generated;
 import br.com.objectos.code.annotations.Ignore;
-import objectos.util.MutableMap;
+import objectos.util.GrowableMap;
 import objectos.util.UnmodifiableMap;
 
 @Generated("br.com.objectos.css.boot.select.PseudoElementSelectorsGen")
@@ -57,7 +57,7 @@ public final class PseudoElementSelectors {
   }
 
   private static UnmodifiableMap<String, PseudoElementSelector> buildMap() {
-    MutableMap<String, PseudoElementSelector> m = new MutableMap<>();
+    GrowableMap<String, PseudoElementSelector> m = new GrowableMap<>();
     m.put("after", AFTER);
     m.put("backdrop", BACKDROP);
     m.put("before", BEFORE);

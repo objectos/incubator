@@ -1,7 +1,7 @@
 package br.com.objectos.css.keyword;
 
 import br.com.objectos.code.annotations.Generated;
-import objectos.util.MutableMap;
+import objectos.util.GrowableMap;
 import objectos.util.UnmodifiableMap;
 
 @Generated("br.com.objectos.css.boot.CssBoot")
@@ -592,7 +592,7 @@ public final class Keywords {
   }
 
   private static UnmodifiableMap<String, StandardKeyword> buildMap() {
-    MutableMap<String, StandardKeyword> m = new MutableMap<>();
+    GrowableMap<String, StandardKeyword> m = new GrowableMap<>();
     m.put("-moz-arabic-indic", mozArabicIndic);
     m.put("-moz-bengali", mozBengali);
     m.put("-moz-cjk-earthly-branch", mozCjkEarthlyBranch);

@@ -16,10 +16,10 @@
 package br.com.objectos.css.specgen.spec;
 
 import objectos.lang.Check;
+import objectos.util.GrowableMap;
+import objectos.util.GrowableOrderedMap;
 import objectos.util.UnmodifiableList;
 import objectos.util.UnmodifiableMap;
-import objectos.util.MutableMap;
-import objectos.util.MutableOrderedMap;
 
 public class Spec {
 
@@ -45,7 +45,7 @@ public class Spec {
 
   public static class Builder {
 
-    private final MutableMap<String, Property> properties = new MutableOrderedMap<>();
+    private final GrowableMap<String, Property> properties = new GrowableOrderedMap<>();
 
     public final Builder addProperty(Property property) {
       properties.put(property.name(), property);

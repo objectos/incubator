@@ -26,7 +26,7 @@ import java.util.Arrays;
 import java.util.List;
 import objectos.util.UnmodifiableMap;
 import objectos.util.GrowableList;
-import objectos.util.MutableMap;
+import objectos.util.GrowableMap;
 import org.testng.annotations.BeforeMethod;
 
 public abstract class AbstractCssBootTest {
@@ -74,7 +74,7 @@ public abstract class AbstractCssBootTest {
 
   private static class ThisStepAdapter extends StepAdapter {
 
-    private final MutableMap<String, JavaFile> javaFiles = new MutableMap<>();
+    private final GrowableMap<String, JavaFile> javaFiles = new GrowableMap<>();
 
     public UnmodifiableMap<String, JavaFile> toMap() {
       return javaFiles.toUnmodifiableMap();

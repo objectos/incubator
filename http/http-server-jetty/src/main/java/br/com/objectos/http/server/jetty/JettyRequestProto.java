@@ -23,7 +23,7 @@ import br.com.objectos.http.server.RequestedPart;
 import br.com.objectos.http.server.RequestedPath;
 import java.util.Enumeration;
 import javax.servlet.http.HttpServletRequest;
-import objectos.util.MutableMap;
+import objectos.util.GrowableMap;
 
 class JettyRequestProto implements RequestProto {
 
@@ -68,8 +68,8 @@ class JettyRequestProto implements RequestProto {
 
   @Override
   public final RequestParameters parameters() {
-    MutableMap<String, String> map;
-    map = new MutableMap<>();
+    GrowableMap<String, String> map;
+    map = new GrowableMap<>();
 
     Enumeration<String> parameterNames;
     parameterNames = request.getParameterNames();

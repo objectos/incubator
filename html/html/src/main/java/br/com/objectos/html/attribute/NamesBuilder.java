@@ -16,11 +16,11 @@
 package br.com.objectos.html.attribute;
 
 import objectos.util.UnmodifiableMap;
-import objectos.util.MutableMap;
+import objectos.util.GrowableMap;
 
 class NamesBuilder {
 
-  private final MutableMap<String, StandardAttributeName> map = new MutableMap<>();
+  private final GrowableMap<String, StandardAttributeName> map = new GrowableMap<>();
 
   public final UnmodifiableMap<String, StandardAttributeName> build() {
     return map.toUnmodifiableMap();

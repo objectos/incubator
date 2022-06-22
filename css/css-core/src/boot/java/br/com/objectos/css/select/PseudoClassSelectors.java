@@ -2,7 +2,7 @@ package br.com.objectos.css.select;
 
 import br.com.objectos.code.annotations.Generated;
 import br.com.objectos.code.annotations.Ignore;
-import objectos.util.MutableMap;
+import objectos.util.GrowableMap;
 import objectos.util.UnmodifiableMap;
 
 @Generated("br.com.objectos.css.boot.select.PseudoClassSelectorsGen")
@@ -119,7 +119,7 @@ public final class PseudoClassSelectors {
   }
 
   private static UnmodifiableMap<String, PseudoClassSelector> buildMap() {
-    MutableMap<String, PseudoClassSelector> m = new MutableMap<>();
+    GrowableMap<String, PseudoClassSelector> m = new GrowableMap<>();
     m.put("active", ACTIVE);
     m.put("any-link", ANY_LINK);
     m.put("blank", BLANK);

@@ -16,11 +16,11 @@
 package br.com.objectos.css.keyword;
 
 import objectos.util.UnmodifiableMap;
-import objectos.util.MutableMap;
+import objectos.util.GrowableMap;
 
 class UnmodifiableMapBuilder {
 
-  private final MutableMap<String, StandardKeyword> map = new MutableMap<>();
+  private final GrowableMap<String, StandardKeyword> map = new GrowableMap<>();
 
   public final UnmodifiableMap<String, StandardKeyword> build() {
     return map.toUnmodifiableMap();

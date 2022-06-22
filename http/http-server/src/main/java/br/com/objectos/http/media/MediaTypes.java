@@ -18,7 +18,7 @@ package br.com.objectos.http.media;
 import java.util.Locale;
 import objectos.lang.Check;
 import objectos.util.UnmodifiableMap;
-import objectos.util.MutableMap;
+import objectos.util.GrowableMap;
 
 public class MediaTypes {
 
@@ -82,8 +82,8 @@ public class MediaTypes {
     static final UnmodifiableMap<String, MediaType> map = buildExtensionMap();
 
     private static UnmodifiableMap<String, MediaType> buildExtensionMap() {
-      MutableMap<String, MediaType> map;
-      map = new MutableMap<>();
+      GrowableMap<String, MediaType> map;
+      map = new GrowableMap<>();
 
       // application
       map.put("js", ApplicationType.JAVASCRIPT);

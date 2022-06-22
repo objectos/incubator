@@ -20,7 +20,7 @@ import static org.testng.Assert.assertEquals;
 import br.com.objectos.code.java.io.JavaFile;
 import br.com.objectos.css.config.framework.Configuration;
 import objectos.util.UnmodifiableMap;
-import objectos.util.MutableMap;
+import objectos.util.GrowableMap;
 
 public abstract class AbstractCssMavenPluginFrameworkTest {
 
@@ -52,7 +52,7 @@ public abstract class AbstractCssMavenPluginFrameworkTest {
 
   private static class ThisConfigurationAdapter implements ConfigurationAdapter {
 
-    private final MutableMap<String, JavaFile> map = new MutableMap<>();
+    private final GrowableMap<String, JavaFile> map = new GrowableMap<>();
 
     @Override
     public final void writeJavaFile(JavaFile file) {

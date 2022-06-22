@@ -20,7 +20,7 @@ import java.util.Enumeration;
 import java.util.NoSuchElementException;
 import javax.servlet.http.HttpServletRequest;
 import objectos.util.UnmodifiableMap;
-import objectos.util.MutableMap;
+import objectos.util.GrowableMap;
 
 class JettyRequestHeaders implements RequestHeaders {
 
@@ -73,7 +73,7 @@ class JettyRequestHeaders implements RequestHeaders {
   }
 
   private UnmodifiableMap<String, String> initMap() {
-    MutableMap<String, String> map = new MutableMap<>();
+    GrowableMap<String, String> map = new GrowableMap<>();
 
     Enumeration<String> names = request.getHeaderNames();
     while (names.hasMoreElements()) {

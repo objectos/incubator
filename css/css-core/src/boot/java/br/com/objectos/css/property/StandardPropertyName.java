@@ -1,7 +1,7 @@
 package br.com.objectos.css.property;
 
 import br.com.objectos.code.annotations.Generated;
-import objectos.util.MutableMap;
+import objectos.util.GrowableMap;
 import objectos.util.UnmodifiableMap;
 
 @Generated("br.com.objectos.css.boot.CssBoot")
@@ -261,7 +261,7 @@ public enum StandardPropertyName implements PropertyName {
   }
 
   private static UnmodifiableMap<String, StandardPropertyName> buildMap() {
-    MutableMap<String, StandardPropertyName> m = new MutableMap<>();
+    GrowableMap<String, StandardPropertyName> m = new GrowableMap<>();
     m.put("-moz-appearance", _MOZ_APPEARANCE);
     m.put("-webkit-appearance", _WEBKIT_APPEARANCE);
     m.put("-webkit-text-size-adjust", _WEBKIT_TEXT_SIZE_ADJUST);

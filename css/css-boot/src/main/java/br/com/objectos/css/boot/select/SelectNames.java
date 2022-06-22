@@ -45,7 +45,7 @@ class SelectNames {
 
   static final NamedArray TypeSelectorArray = TypeSelector.toNamedArray();
   static final NamedParameterized TypeSelectorGrowableMap = t(
-      Types._MutableMap,
+      Types._GrowableMap,
       Types._String,
       TypeSelector
   );

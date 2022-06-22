@@ -22,7 +22,7 @@ import java.util.Map;
 import objectos.lang.Check;
 import objectos.lang.ToString;
 import objectos.util.UnmodifiableList;
-import objectos.util.MutableMap;
+import objectos.util.GrowableMap;
 
 /**
  * A command for <em>materializing</em> a Git repository.
@@ -52,7 +52,7 @@ public final class MaterializeCommand extends StageGitCommand<Directory> {
 
   private final Directory target;
 
-  private final Map<ObjectId, Directory> treeMap = new MutableMap<>();
+  private final Map<ObjectId, Directory> treeMap = new GrowableMap<>();
 
   /**
    * <em>Materializes</em> from the {@code source} repository the specified

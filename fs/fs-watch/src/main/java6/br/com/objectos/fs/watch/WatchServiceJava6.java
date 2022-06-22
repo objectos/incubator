@@ -23,7 +23,7 @@ import java.util.EnumSet;
 import java.util.Map;
 import objectos.lang.Check;
 import objectos.util.UnmodifiableSet;
-import objectos.util.MutableMap;
+import objectos.util.GrowableMap;
 
 final class WatchServiceJava6 extends Thread implements Watch.Service {
 
@@ -64,7 +64,7 @@ final class WatchServiceJava6 extends Thread implements Watch.Service {
 
   static final class Builder implements Watch.ServiceBuilder {
 
-    private final Map<Directory, WatchDirectoryJava6> directories = new MutableMap<>();
+    private final Map<Directory, WatchDirectoryJava6> directories = new GrowableMap<>();
 
     public final Watch.Service build() {
       Collection<WatchDirectoryJava6> values;

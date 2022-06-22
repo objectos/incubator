@@ -29,7 +29,7 @@ import java.util.Set;
 import objectos.lang.Check;
 import objectos.util.UnmodifiableMap;
 import objectos.util.UnmodifiableSet;
-import objectos.util.MutableMap;
+import objectos.util.GrowableMap;
 
 final class WatchServiceJava7 implements Watch.Service {
 
@@ -54,8 +54,8 @@ final class WatchServiceJava7 implements Watch.Service {
       throw e;
     }
 
-    MutableMap<WatchKey, WatchDirectoryJava7> keys;
-    keys = new MutableMap<>();
+    GrowableMap<WatchKey, WatchDirectoryJava7> keys;
+    keys = new GrowableMap<>();
 
     for (WatchDirectoryJava7 option : directories) {
       try {
@@ -86,7 +86,7 @@ final class WatchServiceJava7 implements Watch.Service {
 
   static class Builder implements ServiceBuilder {
 
-    private final MutableMap<Directory, WatchDirectoryJava7> directories = new MutableMap<>();
+    private final GrowableMap<Directory, WatchDirectoryJava7> directories = new GrowableMap<>();
 
     public final Watch.Service build() {
       Collection<WatchDirectoryJava7> values;

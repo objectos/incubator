@@ -20,7 +20,7 @@ import br.com.objectos.code.java.declaration.PackageName;
 import br.com.objectos.code.java.expression.NewClass;
 import br.com.objectos.code.java.type.NamedClass;
 import objectos.util.UnmodifiableMap;
-import objectos.util.MutableMap;
+import objectos.util.GrowableMap;
 
 public class Types {
 
@@ -28,7 +28,7 @@ public class Types {
 
   public static final NamedClass _UnmodifiableMap;
 
-  public static final NamedClass _MutableMap;
+  public static final NamedClass _GrowableMap;
 
   public static final PackageName _PACKAGE;
 
@@ -41,18 +41,18 @@ public class Types {
 
     _Css = _PACKAGE.nestedClass("Css");
 
-    _MutableMap = NamedClass.of(MutableMap.class);
+    _GrowableMap = NamedClass.of(GrowableMap.class);
 
     _UnmodifiableMap = NamedClass.of(UnmodifiableMap.class);
 
     _String = NamedClass.of(String.class);
 
-    NEW_GROWABLE_MAP = Java._new(_MutableMap, Java.hint());
+    NEW_GROWABLE_MAP = Java._new(_GrowableMap, Java.hint());
   }
 
   private Types() {}
 
-  public static NewClass _newMutableMap() {
+  public static NewClass _newGrowableMap() {
     return NEW_GROWABLE_MAP;
   }
 

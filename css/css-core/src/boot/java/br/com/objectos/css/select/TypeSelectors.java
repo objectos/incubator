@@ -2,7 +2,7 @@ package br.com.objectos.css.select;
 
 import br.com.objectos.code.annotations.Generated;
 import br.com.objectos.code.annotations.Ignore;
-import objectos.util.MutableMap;
+import objectos.util.GrowableMap;
 import objectos.util.UnmodifiableMap;
 
 @Generated("br.com.objectos.css.boot.select.TypeSelectorsGen")
@@ -169,7 +169,7 @@ public final class TypeSelectors {
   }
 
   private static UnmodifiableMap<String, TypeSelector> buildMap() {
-    MutableMap<String, TypeSelector> m = new MutableMap<>();
+    GrowableMap<String, TypeSelector> m = new GrowableMap<>();
     m.put("a", a);
     m.put("abbr", abbr);
     m.put("article", article);

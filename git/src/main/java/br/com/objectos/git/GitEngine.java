@@ -36,7 +36,7 @@ import objectos.lang.NoOpNoteSink;
 import objectos.lang.NoteSink;
 import objectos.util.UnmodifiableSet;
 import objectos.util.GrowableList;
-import objectos.util.MutableMap;
+import objectos.util.GrowableMap;
 import objectos.util.GrowableSet;
 
 /**
@@ -82,7 +82,7 @@ public final class GitEngine extends GitInjector {
 
   private CpuTask currentCpuTask;
 
-  private final Map<Charset, DecoderBucket> decoderMap = new MutableMap<>();
+  private final Map<Charset, DecoderBucket> decoderMap = new GrowableMap<>();
 
   private Deflater deflater;
 

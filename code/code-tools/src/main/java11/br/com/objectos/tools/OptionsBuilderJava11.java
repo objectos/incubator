@@ -26,7 +26,7 @@ import java.util.Set;
 import objectos.util.UnmodifiableList;
 import objectos.util.UnmodifiableMap;
 import objectos.util.GrowableList;
-import objectos.util.MutableMap;
+import objectos.util.GrowableMap;
 
 @Concrete.Bridge
 abstract class OptionsBuilderJava11 extends AbstractOptionsBuilder {
@@ -216,7 +216,7 @@ abstract class OptionsBuilderJava11 extends AbstractOptionsBuilder {
 
     private final GrowableList<String> addModules = new GrowableList<>();
 
-    private final MutableMap<String, Path> modulePaths = new MutableMap<>();
+    private final GrowableMap<String, Path> modulePaths = new GrowableMap<>();
 
     public final Config build() {
       return new Config(this);
