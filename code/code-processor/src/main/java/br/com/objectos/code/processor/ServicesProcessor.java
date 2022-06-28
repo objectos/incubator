@@ -25,13 +25,13 @@ import br.com.objectos.code.processing.ProcessingRound;
 import br.com.objectos.code.processing.type.PDeclaredType;
 import br.com.objectos.code.processing.type.PTypeMirror;
 import java.io.IOException;
+import java.util.Comparator;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 import javax.annotation.processing.Processor;
-import objectos.util.UnmodifiableSet;
-import objectos.util.Lists;
 import objectos.util.GrowableList;
+import objectos.util.UnmodifiableSet;
 
 @Services(Processor.class)
 public class ServicesProcessor extends AbstractProcessingRoundProcessor {
@@ -110,7 +110,7 @@ public class ServicesProcessor extends AbstractProcessingRoundProcessor {
       String resourceName;
       resourceName = "META-INF/services/" + serviceName;
 
-      implementations.sort(Lists.naturalOrder());
+      implementations.sort(Comparator.naturalOrder());
 
       String contents;
       contents = implementations.join("\n");

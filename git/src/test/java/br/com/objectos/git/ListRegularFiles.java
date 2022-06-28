@@ -20,10 +20,10 @@ import br.com.objectos.fs.DirectoryContentsVisitor;
 import br.com.objectos.fs.RegularFile;
 import java.io.File;
 import java.io.IOException;
+import java.util.Comparator;
 import objectos.lang.Check;
-import objectos.util.UnmodifiableList;
-import objectos.util.Lists;
 import objectos.util.GrowableList;
+import objectos.util.UnmodifiableList;
 
 /**
  * A {@link DirectoryContentsVisitor} for recursively listing all of the regular
@@ -86,7 +86,7 @@ public final class ListRegularFiles implements DirectoryContentsVisitor {
   }
 
   final UnmodifiableList<String> build() throws IOException {
-    leafs.sort(Lists.naturalOrder());
+    leafs.sort(Comparator.naturalOrder());
 
     return leafs.toUnmodifiableList();
   }
