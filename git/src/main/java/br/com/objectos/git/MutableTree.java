@@ -169,7 +169,7 @@ public final class MutableTree extends MutableTreeEntry {
   @Override
   final void executeWriteTree(WriteTree wt) {
     UnmodifiableList<MutableTreeEntry> sorted;
-    sorted = entries.toImmutableSortedList(ORDER);
+    sorted = entries.toUnmodifiableList(ORDER);
 
     for (int i = sorted.size() - 1; i >= 0; i--) {
       MutableTreeEntry entry;
