@@ -24,8 +24,8 @@ import br.com.objectos.core.io.Write;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
-import objectos.util.UnmodifiableList;
 import objectos.util.GrowableList;
+import objectos.util.UnmodifiableList;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -806,8 +806,10 @@ public class DirectoryTest extends AbstractObjectosFsTest {
 
     UnmodifiableList<RegularFile> files = visitor.files.toUnmodifiableList();
     assertEquals(files.size(), 2);
-    assertTrue(files.contains(f1, f4));
-    assertFalse(files.contains(f2, f3));
+    assertTrue(files.contains(f1));
+    assertTrue(files.contains(f4));
+    assertFalse(files.contains(f2));
+    assertFalse(files.contains(f3));
   }
 
   private static class CollectingNodeVisitor implements DirectoryContentsVisitor {
