@@ -15,15 +15,9 @@
  */
 package br.com.objectos.css;
 
-import static org.testng.Assert.assertEquals;
-
-import br.com.objectos.css.io.CssWritable;
-import br.com.objectos.css.io.MinifiedCssWriter;
-import br.com.objectos.css.io.PrettyCssWriter;
 import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.testing.TmpDir;
 import java.io.IOException;
-import objectos.util.UnmodifiableList;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
@@ -42,23 +36,6 @@ public abstract class AbstractCssCoreTest {
     directory = TmpDir.create();
   }
 
-  protected final void testMinified(CssWritable o, String... expected) {
-    String result;
-    result = MinifiedCssWriter.toString(o);
-
-    UnmodifiableList<String> parts;
-    parts = UnmodifiableList.copyOf(expected);
-
-    assertEquals(result, parts.join());
-  }
-
-  protected final void testPretty(CssWritable o, String... expected) {
-    String result;
-    result = PrettyCssWriter.toString(o);
-
-    assertHasLines(result, expected);
-  }
-
   // selector
 
   final ListSelector list(Selector first, Selector second) {
@@ -67,12 +44,6 @@ public abstract class AbstractCssCoreTest {
 
   final SimpleSelector selector(String value) {
     return new SimpleSelector(value);
-  }
-
-  private void assertHasLines(String result, String[] expected) {
-    String[] split = result.split("\n");
-
-    assertEquals(split, expected);
   }
 
 }

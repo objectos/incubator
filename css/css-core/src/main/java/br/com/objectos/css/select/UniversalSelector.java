@@ -15,10 +15,8 @@
  */
 package br.com.objectos.css.select;
 
-import br.com.objectos.css.io.CssWriter;
 import br.com.objectos.css.sheet.RuleElement;
 import br.com.objectos.css.sheet.StyleSheetDsl;
-import java.io.IOException;
 import objectos.util.GrowableList;
 
 public final class UniversalSelector extends Selector
@@ -33,11 +31,6 @@ public final class UniversalSelector extends Selector
 
   public static UniversalSelector getInstance() {
     return INSTANCE;
-  }
-
-  @Override
-  public final void acceptCssWriter(CssWriter w) throws IOException {
-    w.write('*');
   }
 
   @Override
@@ -83,7 +76,7 @@ public final class UniversalSelector extends Selector
   @Override
   final void uncheckedAddTypeSelector(TypeSelector selector) {
     throw InvalidSelectorException.get(
-        "Cannot append type selector '%s' to the universal selector '*'", selector
+      "Cannot append type selector '%s' to the universal selector '*'", selector
     );
   }
 

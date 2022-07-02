@@ -17,53 +17,17 @@ package br.com.objectos.css.io;
 
 import br.com.objectos.css.property.StandardPropertyName;
 import br.com.objectos.css.select.Combinator;
-import br.com.objectos.css.sheet.CompiledStyleSheet;
 import br.com.objectos.css.type.ColorHex;
 import java.io.IOException;
-import objectos.lang.Check;
 
-public class MinifiedCssWriter extends CssWriter {
-
-  MinifiedCssWriter(Appendable out) {
-    super(out);
-  }
-
-  public static MinifiedCssWriter of(Appendable out) {
-    Check.notNull(out, "out == null");
-
-    return new MinifiedCssWriter(out);
-  }
+class MinifiedCssWriter extends CssWriter {
 
   public static MinifiedCssWriter ofString() {
-    return of(new StringBuilder());
-  }
+    var writer = new MinifiedCssWriter();
 
-  public static String toString(CompiledStyleSheet sheet) {
-    try {
-      MinifiedCssWriter w;
-      w = ofString();
+    writer.out(new StringBuilder());
 
-      sheet.acceptCompiledStyleSheetVisitor(w);
-
-      return w.toString();
-    } catch (IOException e) {
-      throw new AssertionError("StringBuilder should not have thrown IOException", e);
-    }
-  }
-
-  public static String toString(CssWritable element) {
-    try {
-      MinifiedCssWriter w = ofString();
-      element.acceptCssWriter(w);
-      return w.toString();
-    } catch (IOException e) {
-      throw new AssertionError("IOException should not have occured with a StringBuilder", e);
-    }
-  }
-
-  @Override
-  public final void acceptCssWriterVisitor(CssWriterVisitor visitor) throws IOException {
-    visitor.visitMinifiedCssWriter(this);
+    return writer;
   }
 
   @Override
@@ -93,7 +57,7 @@ public class MinifiedCssWriter extends CssWriter {
 
   @Override
   public final void visitCombinator(Combinator combinator) throws IOException {
-    combinator.visitMinifiedCssWriter(this);
+    write(combinator.symbol);
   }
 
   @Override

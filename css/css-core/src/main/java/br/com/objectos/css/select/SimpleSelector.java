@@ -15,9 +15,7 @@
  */
 package br.com.objectos.css.select;
 
-import br.com.objectos.css.io.CssWriter;
 import br.com.objectos.css.sheet.RuleElement;
-import java.io.IOException;
 import objectos.util.GrowableList;
 
 public abstract class SimpleSelector extends Selector
@@ -27,11 +25,6 @@ public abstract class SimpleSelector extends Selector
     SelectorElement {
 
   SimpleSelector() {}
-
-  @Override
-  public final void acceptCssWriter(CssWriter w) throws IOException {
-    w.write(toString());
-  }
 
   @Override
   public final void acceptRuleElementList(GrowableList<RuleElement> elements) {

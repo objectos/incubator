@@ -20,6 +20,7 @@ import br.com.objectos.css.keyword.StandardKeyword;
 import br.com.objectos.css.select.AttributeValueOperator;
 import br.com.objectos.css.select.SimpleSelector;
 import br.com.objectos.css.select.UniversalSelector;
+import br.com.objectos.css.sheet.CompiledStyleSheet;
 import br.com.objectos.css.sheet.CompiledStyleSheetVisitor;
 import br.com.objectos.css.sheet.LogicalOperator;
 import br.com.objectos.css.sheet.MediaType;
@@ -27,16 +28,73 @@ import br.com.objectos.css.type.AngleUnit;
 import br.com.objectos.css.type.ColorName;
 import br.com.objectos.css.type.LengthUnit;
 import java.io.IOException;
+import objectos.lang.Check;
 
 public abstract class CssWriter implements CompiledStyleSheetVisitor<IOException> {
 
-  private final Appendable out;
+  public enum Style {
+    MINIFIED,
 
-  CssWriter(Appendable out) {
-    this.out = out;
+    PRETTY;
   }
 
-  public abstract void acceptCssWriterVisitor(CssWriterVisitor visitor) throws IOException;
+  private enum NoOpAppendable implements Appendable {
+    INSTANCE;
+
+    @Override
+    public final Appendable append(char c) throws IOException {
+      return this;
+    }
+
+    @Override
+    public final Appendable append(CharSequence csq) throws IOException {
+      return this;
+    }
+
+    @Override
+    public final Appendable append(CharSequence csq, int start, int end) throws IOException {
+      return this;
+    }
+  }
+
+  Appendable out = NoOpAppendable.INSTANCE;
+
+  public static String toMinifiedString(CompiledStyleSheet sheet) {
+    Check.notNull(sheet, "sheet == null");
+
+    var writer = new MinifiedCssWriter();
+
+    return toString0(sheet, writer);
+  }
+
+  public static String toString(CompiledStyleSheet sheet) {
+    Check.notNull(sheet, "sheet == null");
+
+    var writer = new PrettyCssWriter();
+
+    return toString0(sheet, writer);
+  }
+
+  private static String toString0(CompiledStyleSheet sheet, CssWriter writer) {
+    try {
+
+      var out = new StringBuilder();
+
+      writer.out(out);
+
+      sheet.acceptCompiledStyleSheetVisitor(writer);
+
+      return out.toString();
+    } catch (IOException e) {
+      throw new AssertionError("StringBuilder does not throw IOException", e);
+    }
+  }
+
+  public final CssWriter out(Appendable out) {
+    this.out = Check.notNull(out, "out == null");
+
+    return this;
+  }
 
   @Override
   public final String toString() {
@@ -44,26 +102,26 @@ public abstract class CssWriter implements CompiledStyleSheetVisitor<IOException
   }
 
   @Override
-  public final void visitAngle(AngleUnit unit, double value) throws IOException {
+  public void visitAngle(AngleUnit unit, double value) throws IOException {
     writeDouble(value);
     write(unit.getName());
   }
 
   @Override
-  public final void visitAngle(AngleUnit unit, int value) throws IOException {
+  public void visitAngle(AngleUnit unit, int value) throws IOException {
     writeInt(value);
     write(unit.getName());
   }
 
   @Override
-  public final void visitAttributeSelector(String attributeName) throws IOException {
+  public void visitAttributeSelector(String attributeName) throws IOException {
     write('[');
     write(attributeName);
     write(']');
   }
 
   @Override
-  public final void visitAttributeValueSelector(
+  public void visitAttributeValueSelector(
       String attributeName, AttributeValueOperator operator, String value)
       throws IOException {
     write('[');
@@ -74,60 +132,60 @@ public abstract class CssWriter implements CompiledStyleSheetVisitor<IOException
   }
 
   @Override
-  public final void visitBeforeNextValue() throws IOException {
+  public void visitBeforeNextValue() throws IOException {
     write(' ');
   }
 
   @Override
-  public final void visitClassSelector(String className) throws IOException {
+  public void visitClassSelector(String className) throws IOException {
     write('.');
     write(className);
   }
 
   @Override
-  public final void visitColor(ColorName value) throws IOException {
+  public void visitColor(ColorName value) throws IOException {
     write(value.getName());
   }
 
   @Override
-  public final void visitColor(String value) throws IOException {
+  public void visitColor(String value) throws IOException {
     writeValueColorHex(value);
   }
 
   @Override
-  public final void visitDouble(double value) throws IOException {
+  public void visitDouble(double value) throws IOException {
     writeDoubleImpl(value);
   }
 
   @Override
-  public final void visitFunctionEnd() throws IOException {
+  public void visitFunctionEnd() throws IOException {
     write(')');
   }
 
   @Override
-  public final void visitFunctionStart(StandardFunctionName name) throws IOException {
+  public void visitFunctionStart(StandardFunctionName name) throws IOException {
     write(name.getName());
     write('(');
   }
 
   @Override
-  public final void visitIdSelector(String id) throws IOException {
+  public void visitIdSelector(String id) throws IOException {
     write('#');
     write(id);
   }
 
   @Override
-  public final void visitInt(int value) throws IOException {
+  public void visitInt(int value) throws IOException {
     write(Integer.toString(value));
   }
 
   @Override
-  public final void visitKeyword(StandardKeyword value) throws IOException {
+  public void visitKeyword(StandardKeyword value) throws IOException {
     write(value.getName());
   }
 
   @Override
-  public final void visitKeyword(String keyword) throws IOException {
+  public void visitKeyword(String keyword) throws IOException {
     write(keyword);
   }
 
@@ -144,12 +202,12 @@ public abstract class CssWriter implements CompiledStyleSheetVisitor<IOException
   }
 
   @Override
-  public final void visitLogicalExpressionEnd() throws IOException {
+  public void visitLogicalExpressionEnd() throws IOException {
     write(')');
   }
 
   @Override
-  public final void visitLogicalExpressionStart(LogicalOperator operator) throws IOException {
+  public void visitLogicalExpressionStart(LogicalOperator operator) throws IOException {
     write(' ');
     write(operator.getName());
     write(' ');
@@ -157,30 +215,30 @@ public abstract class CssWriter implements CompiledStyleSheetVisitor<IOException
   }
 
   @Override
-  public final void visitMediaStart() throws IOException {
+  public void visitMediaStart() throws IOException {
     write("@media");
   }
 
   @Override
-  public final void visitMediaType(MediaType type) throws IOException {
+  public void visitMediaType(MediaType type) throws IOException {
     write(' ');
     write(type.getName());
   }
 
   @Override
-  public final void visitPercentage(double value) throws IOException {
+  public void visitPercentage(double value) throws IOException {
     writeDouble(value);
     write('%');
   }
 
   @Override
-  public final void visitPercentage(int value) throws IOException {
+  public void visitPercentage(int value) throws IOException {
     writeInt(value);
     write('%');
   }
 
   @Override
-  public final void visitRgb(double r, double g, double b) throws IOException {
+  public void visitRgb(double r, double g, double b) throws IOException {
     writeRgbStart();
     writeDouble(r);
     writeComma();
@@ -191,7 +249,7 @@ public abstract class CssWriter implements CompiledStyleSheetVisitor<IOException
   }
 
   @Override
-  public final void visitRgb(double r, double g, double b, double alpha) throws IOException {
+  public void visitRgb(double r, double g, double b, double alpha) throws IOException {
     writeRgbStart();
     writeDouble(r);
     writeComma();
@@ -204,7 +262,7 @@ public abstract class CssWriter implements CompiledStyleSheetVisitor<IOException
   }
 
   @Override
-  public final void visitRgb(int r, int g, int b) throws IOException {
+  public void visitRgb(int r, int g, int b) throws IOException {
     writeRgbStart();
     writeInt(r);
     writeComma();
@@ -215,7 +273,7 @@ public abstract class CssWriter implements CompiledStyleSheetVisitor<IOException
   }
 
   @Override
-  public final void visitRgb(int r, int g, int b, double alpha) throws IOException {
+  public void visitRgb(int r, int g, int b, double alpha) throws IOException {
     writeRgbStart();
     writeInt(r);
     writeComma();
@@ -228,7 +286,7 @@ public abstract class CssWriter implements CompiledStyleSheetVisitor<IOException
   }
 
   @Override
-  public final void visitRgba(double r, double g, double b, double alpha) throws IOException {
+  public void visitRgba(double r, double g, double b, double alpha) throws IOException {
     writeRgbaStart();
     writeDouble(r);
     writeComma();
@@ -241,7 +299,7 @@ public abstract class CssWriter implements CompiledStyleSheetVisitor<IOException
   }
 
   @Override
-  public final void visitRgba(int r, int g, int b, double alpha) throws IOException {
+  public void visitRgba(int r, int g, int b, double alpha) throws IOException {
     writeRgbaStart();
     writeInt(r);
     writeComma();
@@ -254,42 +312,38 @@ public abstract class CssWriter implements CompiledStyleSheetVisitor<IOException
   }
 
   @Override
-  public final void visitSimpleSelector(SimpleSelector selector) throws IOException {
-    selector.acceptCssWriter(this);
+  public void visitSimpleSelector(SimpleSelector selector) throws IOException {
+    write(selector.toString());
   }
 
   @Override
-  public final void visitString(String value) throws IOException {
+  public void visitString(String value) throws IOException {
     quoteIfNecessary(value);
   }
 
   @Override
-  public final void visitUniversalSelector(UniversalSelector selector) throws IOException {
+  public void visitUniversalSelector(UniversalSelector selector) throws IOException {
     write('*');
   }
 
   @Override
-  public final void visitUri(String value) throws IOException {
+  public void visitUri(String value) throws IOException {
     write("url(");
     quoteIfNecessary(value);
     write(')');
   }
 
-  public final void write(char c) throws IOException {
+  public void write(char c) throws IOException {
     out.append(c);
   }
 
-  public final void write(String s) throws IOException {
+  public void write(String s) throws IOException {
     out.append(s);
   }
 
   public abstract void writeComma() throws IOException;
 
-  public final void writeCssElement(CssWritable element) throws IOException {
-    element.acceptCssWriter(this);
-  }
-
-  public final void writeUrl(String src) throws IOException {
+  public void writeUrl(String src) throws IOException {
     write("url(");
     write('"');
     write(src);

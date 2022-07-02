@@ -17,8 +17,7 @@ package br.com.objectos.css.sheet;
 
 import static org.testng.Assert.assertEquals;
 
-import br.com.objectos.css.io.MinifiedCssWriter;
-import br.com.objectos.css.io.PrettyCssWriter;
+import br.com.objectos.css.io.CssWriter;
 import br.com.objectos.css.sheet.ex.BackgroundImageTestCase;
 import br.com.objectos.css.sheet.ex.TestCase00;
 import br.com.objectos.css.sheet.ex.TestCase01;
@@ -65,633 +64,633 @@ public class CompiledStyleSheetTest {
   @Test
   public void backgroundImage() {
     test(
-        new BackgroundImageTestCase(),
-        minified(
-            "body{",
-            "background-image:url(\"foo.jpg\")",
-            "}"
-        ),
-        pretty(
-            "body {",
-            "  background-image: url(\"foo.jpg\");",
-            "}"
-        )
+      new BackgroundImageTestCase(),
+      minified(
+        "body{",
+        "background-image:url(\"foo.jpg\")",
+        "}"
+      ),
+      pretty(
+        "body {",
+        "  background-image: url(\"foo.jpg\");",
+        "}"
+      )
     );
   }
 
   @Test
   public void testCase00() {
     test(
-        new TestCase00(),
-        minified(
-            "body{}"
-        ),
-        pretty(
-            "body {}"
-        )
+      new TestCase00(),
+      minified(
+        "body{}"
+      ),
+      pretty(
+        "body {}"
+      )
     );
   }
 
   @Test
   public void testCase01() {
     test(
-        new TestCase01(),
-        minified(
-            "#myid{}"
-        ),
-        pretty(
-            "#myid {}"
-        )
+      new TestCase01(),
+      minified(
+        "#myid{}"
+      ),
+      pretty(
+        "#myid {}"
+      )
     );
   }
 
   @Test
   public void testCase02() {
     test(
-        new TestCase02(),
-        minified(
-            "a#myid{}"
-        ),
-        pretty(
-            "a#myid {}"
-        )
+      new TestCase02(),
+      minified(
+        "a#myid{}"
+      ),
+      pretty(
+        "a#myid {}"
+      )
     );
   }
 
   @Test
   public void testCase03() {
     test(
-        new TestCase03(),
-        minified(
-            "a#myid{}"
-        ),
-        pretty(
-            "a#myid {}"
-        )
+      new TestCase03(),
+      minified(
+        "a#myid{}"
+      ),
+      pretty(
+        "a#myid {}"
+      )
     );
   }
 
   @Test
   public void testCase04() {
     test(
-        new TestCase04(),
-        minified(
-            "body.dsl.obj{}"
+      new TestCase04(),
+      minified(
+        "body.dsl.obj{}"
 
-        ),
-        pretty(
-            "body.dsl.obj {}"
-        )
+      ),
+      pretty(
+        "body.dsl.obj {}"
+      )
     );
   }
 
   @Test
   public void testCase05() {
     test(
-        new TestCase05(),
-        minified(
-            "ul li{}"
-        ),
-        pretty(
-            "ul li {}"
-        )
+      new TestCase05(),
+      minified(
+        "ul li{}"
+      ),
+      pretty(
+        "ul li {}"
+      )
     );
   }
 
   @Test
   public void testCase06() {
     test(
-        new TestCase06(),
-        minified(
-            "a::after,a:visited{}"
-        ),
-        pretty(
-            "a::after, a:visited {}"
-        )
+      new TestCase06(),
+      minified(
+        "a::after,a:visited{}"
+      ),
+      pretty(
+        "a::after, a:visited {}"
+      )
     );
   }
 
   @Test
   public void testCase07() {
     test(
-        new TestCase07(),
-        minified(
-            "[type],[type=input],[data-attr^=start]{}"
-        ),
-        pretty(
-            "[type], [type=\"input\"], [data-attr^=\"start\"] {}"
-        )
+      new TestCase07(),
+      minified(
+        "[type],[type=input],[data-attr^=start]{}"
+      ),
+      pretty(
+        "[type], [type=\"input\"], [data-attr^=\"start\"] {}"
+      )
     );
   }
 
   @Test
   public void testCase08() {
     test(
-        new TestCase08(),
-        minified(
-            "*{display:block}"
-        ),
-        pretty(
-            "* {",
-            "  display: block;",
-            "}"
-        )
+      new TestCase08(),
+      minified(
+        "*{display:block}"
+      ),
+      pretty(
+        "* {",
+        "  display: block;",
+        "}"
+      )
     );
   }
 
   @Test
   public void testCase09() {
     test(
-        new TestCase09(),
-        minified(
-            "*{z-index:-300}"
-        ),
-        pretty(
-            "* {",
-            "  z-index: -300;",
-            "}"
-        )
+      new TestCase09(),
+      minified(
+        "*{z-index:-300}"
+      ),
+      pretty(
+        "* {",
+        "  z-index: -300;",
+        "}"
+      )
     );
   }
 
   @Test
   public void testCase10() {
     test(
-        new TestCase10(),
-        minified(
-            "*{line-height:2.5}"
-        ),
-        pretty(
-            "* {",
-            "  line-height: 2.5;",
-            "}"
-        )
+      new TestCase10(),
+      minified(
+        "*{line-height:2.5}"
+      ),
+      pretty(
+        "* {",
+        "  line-height: 2.5;",
+        "}"
+      )
     );
   }
 
   @Test
   public void testCase11() {
     test(
-        new TestCase11(),
-        minified(
-            "*{content:\"Chapter \"}"
-        ),
-        pretty(
-            "* {",
-            "  content: \"Chapter \";",
-            "}"
-        )
+      new TestCase11(),
+      minified(
+        "*{content:\"Chapter \"}"
+      ),
+      pretty(
+        "* {",
+        "  content: \"Chapter \";",
+        "}"
+      )
     );
   }
 
   @Test
   public void testCase12() {
     test(
-        new TestCase12(),
-        minified(
-            "*{min-height:160px}"
-        ),
-        pretty(
-            "* {",
-            "  min-height: 160px;",
-            "}"
-        )
+      new TestCase12(),
+      minified(
+        "*{min-height:160px}"
+      ),
+      pretty(
+        "* {",
+        "  min-height: 160px;",
+        "}"
+      )
     );
   }
 
   @Test
   public void testCase13() {
     test(
-        new TestCase13(),
-        minified(
-            "*{line-height:1.4pt}"
-        ),
-        pretty(
-            "* {",
-            "  line-height: 1.4pt;",
-            "}"
-        )
+      new TestCase13(),
+      minified(
+        "*{line-height:1.4pt}"
+      ),
+      pretty(
+        "* {",
+        "  line-height: 1.4pt;",
+        "}"
+      )
     );
   }
 
   @Test
   public void testCase14() {
     test(
-        new TestCase14(),
-        minified(
-            "*{background-color:floralwhite}"
-        ),
-        pretty(
-            "* {",
-            "  background-color: floralwhite;",
-            "}"
-        )
+      new TestCase14(),
+      minified(
+        "*{background-color:floralwhite}"
+      ),
+      pretty(
+        "* {",
+        "  background-color: floralwhite;",
+        "}"
+      )
     );
   }
 
   @Test
   public void testCase15() {
     test(
-        new TestCase15(),
-        minified(
-            "*{color:#f09}"
-        ),
-        pretty(
-            "* {",
-            "  color: #ff0099;",
-            "}"
-        )
+      new TestCase15(),
+      minified(
+        "*{color:#f09}"
+      ),
+      pretty(
+        "* {",
+        "  color: #ff0099;",
+        "}"
+      )
     );
   }
 
   @Test
   public void testCase16() {
     test(
-        new TestCase16(),
-        minified(
-            "*{flex:2 2}"
-        ),
-        pretty(
-            "* {",
-            "  flex: 2 2;",
-            "}"
-        )
+      new TestCase16(),
+      minified(
+        "*{flex:2 2}"
+      ),
+      pretty(
+        "* {",
+        "  flex: 2 2;",
+        "}"
+      )
     );
   }
 
   @Test
   public void testCase17() {
     test(
-        new TestCase17(),
-        minified(
-            "*{flex:2 2.5}"
-        ),
-        pretty(
-            "* {",
-            "  flex: 2 2.5;",
-            "}"
-        )
+      new TestCase17(),
+      minified(
+        "*{flex:2 2.5}"
+      ),
+      pretty(
+        "* {",
+        "  flex: 2 2.5;",
+        "}"
+      )
     );
   }
 
   @Test
   public void testCase18() {
     test(
-        new TestCase18(),
-        minified(
-            "*{margin:0 auto}"
-        ),
-        pretty(
-            "* {",
-            "  margin: 0 auto;",
-            "}"
-        )
+      new TestCase18(),
+      minified(
+        "*{margin:0 auto}"
+      ),
+      pretty(
+        "* {",
+        "  margin: 0 auto;",
+        "}"
+      )
     );
   }
 
   @Test
   public void testCase19() {
     test(
-        new TestCase19(),
-        minified(
-            "*{margin:0 1px}"
-        ),
-        pretty(
-            "* {",
-            "  margin: 0 1px;",
-            "}"
-        )
+      new TestCase19(),
+      minified(
+        "*{margin:0 1px}"
+      ),
+      pretty(
+        "* {",
+        "  margin: 0 1px;",
+        "}"
+      )
     );
   }
 
   @Test
   public void testCase20() {
     test(
-        new TestCase20(),
-        minified(
-            "*{margin:0 .5em}"
-        ),
-        pretty(
-            "* {",
-            "  margin: 0 0.5em;",
-            "}"
-        )
+      new TestCase20(),
+      minified(
+        "*{margin:0 .5em}"
+      ),
+      pretty(
+        "* {",
+        "  margin: 0 0.5em;",
+        "}"
+      )
     );
   }
 
   @Test
   public void testCase21() {
     test(
-        new TestCase21(),
-        minified(
-            "*{border-bottom:1px blue}"
-        ),
-        pretty(
-            "* {",
-            "  border-bottom: 1px blue;",
-            "}"
-        )
+      new TestCase21(),
+      minified(
+        "*{border-bottom:1px blue}"
+      ),
+      pretty(
+        "* {",
+        "  border-bottom: 1px blue;",
+        "}"
+      )
     );
   }
 
   @Test
   public void testCase22() {
     test(
-        new TestCase22(),
-        minified(
-            "*{border-top:1px #f0c927}"
-        ),
-        pretty(
-            "* {",
-            "  border-top: 1px #f0c927;",
-            "}"
-        )
+      new TestCase22(),
+      minified(
+        "*{border-top:1px #f0c927}"
+      ),
+      pretty(
+        "* {",
+        "  border-top: 1px #f0c927;",
+        "}"
+      )
     );
   }
 
   @Test
   public void testCase23() {
     test(
-        new TestCase23(),
-        minified(
-            "*{",
-            "margin:1px 2.3pt 4rem;",
-            "padding:1px 0 3px 10px",
-            "}"
-        ),
-        pretty(
-            "* {",
-            "  margin: 1px 2.3pt 4rem;",
-            "  padding: 1px 0 3px 10px;",
-            "}"
-        )
+      new TestCase23(),
+      minified(
+        "*{",
+        "margin:1px 2.3pt 4rem;",
+        "padding:1px 0 3px 10px",
+        "}"
+      ),
+      pretty(
+        "* {",
+        "  margin: 1px 2.3pt 4rem;",
+        "  padding: 1px 0 3px 10px;",
+        "}"
+      )
     );
   }
 
   @Test
   public void testCase24() {
     test(
-        new TestCase24(),
-        minified(
-            "a:hover{text-decoration:underline}",
-            "p{line-height:1}"
-        ),
-        pretty(
-            "a:hover {",
-            "  text-decoration: underline;",
-            "}",
-            "",
-            "p {",
-            "  line-height: 1;",
-            "}"
-        )
+      new TestCase24(),
+      minified(
+        "a:hover{text-decoration:underline}",
+        "p{line-height:1}"
+      ),
+      pretty(
+        "a:hover {",
+        "  text-decoration: underline;",
+        "}",
+        "",
+        "p {",
+        "  line-height: 1;",
+        "}"
+      )
     );
   }
 
   @Test
   public void testCase25() {
     test(
-        new TestCase25(),
-        minified(
-            "*{font-family:sans-serif,Arial}"
-        ),
-        pretty(
-            "* {",
-            "  font-family: sans-serif, \"Arial\";",
-            "}"
-        )
+      new TestCase25(),
+      minified(
+        "*{font-family:sans-serif,Arial}"
+      ),
+      pretty(
+        "* {",
+        "  font-family: sans-serif, \"Arial\";",
+        "}"
+      )
     );
   }
 
   @Test
   public void testCase26() {
     test(
-        new TestCase26(),
-        minified(
-            "*{margin:30.5% 70%}"
-        ),
-        pretty(
-            "* {",
-            "  margin: 30.5% 70%;",
-            "}"
-        )
+      new TestCase26(),
+      minified(
+        "*{margin:30.5% 70%}"
+      ),
+      pretty(
+        "* {",
+        "  margin: 30.5% 70%;",
+        "}"
+      )
     );
   }
 
   @Test
   public void testCase27() {
     test(
-        new TestCase27(),
-        minified(
-            "@media screen{",
-            "section{width:100%}",
-            "}"
-        ),
-        pretty(
-            "@media screen {",
-            "  section {",
-            "    width: 100%;",
-            "  }",
-            "}"
-        )
+      new TestCase27(),
+      minified(
+        "@media screen{",
+        "section{width:100%}",
+        "}"
+      ),
+      pretty(
+        "@media screen {",
+        "  section {",
+        "    width: 100%;",
+        "  }",
+        "}"
+      )
     );
   }
 
   @Test
   public void testCase28() {
     test(
-        new TestCase28(),
-        minified(
-            "@media screen and (min-width:800px){",
-            "section{width:100%}",
-            "}"
-        ),
-        pretty(
-            "@media screen and (min-width: 800px) {",
-            "  section {",
-            "    width: 100%;",
-            "  }",
-            "}"
-        )
+      new TestCase28(),
+      minified(
+        "@media screen and (min-width:800px){",
+        "section{width:100%}",
+        "}"
+      ),
+      pretty(
+        "@media screen and (min-width: 800px) {",
+        "  section {",
+        "    width: 100%;",
+        "  }",
+        "}"
+      )
     );
   }
 
   @Test
   public void testCase29() {
     test(
-        new TestCase29(),
-        minified(
-            "button:focus{",
-            "outline:1px dotted;",
-            "outline:5px auto -webkit-focus-ring-color",
-            "}"
-        ),
-        pretty(
-            "button:focus {",
-            "  outline: 1px dotted;",
-            "  outline: 5px auto -webkit-focus-ring-color;",
-            "}"
-        )
+      new TestCase29(),
+      minified(
+        "button:focus{",
+        "outline:1px dotted;",
+        "outline:5px auto -webkit-focus-ring-color",
+        "}"
+      ),
+      pretty(
+        "button:focus {",
+        "  outline: 1px dotted;",
+        "  outline: 5px auto -webkit-focus-ring-color;",
+        "}"
+      )
     );
   }
 
   @Test
   public void testCase30() {
     test(
-        new TestCase30(),
-        minified(
-            ".rgb{",
-            "color:rgb(0,1,2);",
-            "color:rgb(0,100.1,255);",
-            "color:rgb(0,127,255,.5);",
-            "color:rgb(.1,.2,.3,.4);",
-            "color:rgba(0,127,255,.5);",
-            "color:rgba(.1,.2,.3,.4)",
-            "}"
-        ),
-        pretty(
-            ".rgb {",
-            "  color: rgb(0, 1, 2);",
-            "  color: rgb(0, 100.1, 255);",
-            "  color: rgb(0, 127, 255, 0.5);",
-            "  color: rgb(0.1, 0.2, 0.3, 0.4);",
-            "  color: rgba(0, 127, 255, 0.5);",
-            "  color: rgba(0.1, 0.2, 0.3, 0.4);",
-            "}"
-        )
+      new TestCase30(),
+      minified(
+        ".rgb{",
+        "color:rgb(0,1,2);",
+        "color:rgb(0,100.1,255);",
+        "color:rgb(0,127,255,.5);",
+        "color:rgb(.1,.2,.3,.4);",
+        "color:rgba(0,127,255,.5);",
+        "color:rgba(.1,.2,.3,.4)",
+        "}"
+      ),
+      pretty(
+        ".rgb {",
+        "  color: rgb(0, 1, 2);",
+        "  color: rgb(0, 100.1, 255);",
+        "  color: rgb(0, 127, 255, 0.5);",
+        "  color: rgb(0.1, 0.2, 0.3, 0.4);",
+        "  color: rgba(0, 127, 255, 0.5);",
+        "  color: rgba(0.1, 0.2, 0.3, 0.4);",
+        "}"
+      )
     );
   }
 
   @Test
   public void testCase31() {
     test(
-        new TestCase31(),
-        minified(
-            ".string{content:\"string value\"}"
-        ),
-        pretty(
-            ".string {",
-            "  content: \"string value\";",
-            "}"
-        )
+      new TestCase31(),
+      minified(
+        ".string{content:\"string value\"}"
+      ),
+      pretty(
+        ".string {",
+        "  content: \"string value\";",
+        "}"
+      )
     );
   }
 
   @Test
   public void testCase32() {
     test(
-        new TestCase32(),
-        minified(
-            ".zero{z-index:0}",
-            ".one{z-index:1}",
-            ".two{z-index:2}"
-        ),
-        pretty(
-            ".zero {",
-            "  z-index: 0;",
-            "}",
-            "",
-            ".one {",
-            "  z-index: 1;",
-            "}",
-            "",
-            ".two {",
-            "  z-index: 2;",
-            "}"
-        )
+      new TestCase32(),
+      minified(
+        ".zero{z-index:0}",
+        ".one{z-index:1}",
+        ".two{z-index:2}"
+      ),
+      pretty(
+        ".zero {",
+        "  z-index: 0;",
+        "}",
+        "",
+        ".one {",
+        "  z-index: 1;",
+        "}",
+        "",
+        ".two {",
+        "  z-index: 2;",
+        "}"
+      )
     );
   }
 
   @Test
   public void testCase33() {
     test(
-        new TestCase33(),
-        minified(
-            ".zero{z-index:0}",
-            "@media screen and (min-width:800px){.one{z-index:1}}",
-            ".two{z-index:2}"
-        ),
-        pretty(
-            ".zero {",
-            "  z-index: 0;",
-            "}",
-            "",
-            "@media screen and (min-width: 800px) {",
-            "  .one {",
-            "    z-index: 1;",
-            "  }",
-            "}",
-            "",
-            ".two {",
-            "  z-index: 2;",
-            "}"
-        )
+      new TestCase33(),
+      minified(
+        ".zero{z-index:0}",
+        "@media screen and (min-width:800px){.one{z-index:1}}",
+        ".two{z-index:2}"
+      ),
+      pretty(
+        ".zero {",
+        "  z-index: 0;",
+        "}",
+        "",
+        "@media screen and (min-width: 800px) {",
+        "  .one {",
+        "    z-index: 1;",
+        "  }",
+        "}",
+        "",
+        ".two {",
+        "  z-index: 2;",
+        "}"
+      )
     );
   }
 
   @Test
   public void testCase34() {
     test(
-        new TestCase34(),
-        minified(
-            ".zero{z-index:0}",
-            ".one{font-family:\"Foo Light\"}",
-            ".two{z-index:2}"
-        ),
-        pretty(
-            ".zero {",
-            "  z-index: 0;",
-            "}",
-            "",
-            ".one {",
-            "  font-family: \"Foo Light\";",
-            "}",
-            "",
-            ".two {",
-            "  z-index: 2;",
-            "}"
-        )
+      new TestCase34(),
+      minified(
+        ".zero{z-index:0}",
+        ".one{font-family:\"Foo Light\"}",
+        ".two{z-index:2}"
+      ),
+      pretty(
+        ".zero {",
+        "  z-index: 0;",
+        "}",
+        "",
+        ".one {",
+        "  font-family: \"Foo Light\";",
+        "}",
+        "",
+        ".two {",
+        "  z-index: 2;",
+        "}"
+      )
     );
   }
 
   @Test
   public void testCase35() {
     test(
-        new TestCase35(),
-        minified(
-            "@media screen and (min-width:800px){",
-            ".one{z-index:1}",
-            ".two{z-index:2}",
-            "}"
-        ),
-        pretty(
-            "@media screen and (min-width: 800px) {",
-            "  .one {",
-            "    z-index: 1;",
-            "  }",
-            "",
-            "  .two {",
-            "    z-index: 2;",
-            "  }",
-            "}"
-        )
+      new TestCase35(),
+      minified(
+        "@media screen and (min-width:800px){",
+        ".one{z-index:1}",
+        ".two{z-index:2}",
+        "}"
+      ),
+      pretty(
+        "@media screen and (min-width: 800px) {",
+        "  .one {",
+        "    z-index: 1;",
+        "  }",
+        "",
+        "  .two {",
+        "    z-index: 2;",
+        "  }",
+        "}"
+      )
     );
   }
 
   @Test
   public void transform() {
     test(
-        new TransformTestCase(),
-        minified(
-            "#tc-01{",
-            "transform:rotate(45deg)",
-            "}"
-        ),
-        pretty(
-            "#tc-01 {",
-            "  transform: rotate(45deg);",
-            "}"
-        )
+      new TransformTestCase(),
+      minified(
+        "#tc-01{",
+        "transform:rotate(45deg)",
+        "}"
+      ),
+      pretty(
+        "#tc-01 {",
+        "  transform: rotate(45deg);",
+        "}"
+      )
     );
   }
 
@@ -714,15 +713,15 @@ public class CompiledStyleSheetTest {
     compiled = sheet.compile();
 
     assertEquals(
-        MinifiedCssWriter.toString(compiled),
-        minified,
-        "MinifiedCssWriter"
+      CssWriter.toMinifiedString(compiled),
+      minified,
+      "MinifiedCssWriter"
     );
 
     assertEquals(
-        PrettyCssWriter.toString(compiled),
-        pretty,
-        "PrettyCssWriter"
+      CssWriter.toString(compiled),
+      pretty,
+      "PrettyCssWriter"
     );
   }
 

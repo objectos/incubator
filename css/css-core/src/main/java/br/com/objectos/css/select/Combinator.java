@@ -15,16 +15,11 @@
  */
 package br.com.objectos.css.select;
 
-import br.com.objectos.css.io.CssWriter;
-import br.com.objectos.css.io.CssWriterVisitor;
-import br.com.objectos.css.io.MinifiedCssWriter;
-import br.com.objectos.css.io.PrettyCssWriter;
 import br.com.objectos.css.parser.IsTerminal;
 import br.com.objectos.css.sheet.StyleSheetDsl;
-import java.io.IOException;
 import objectos.util.UnmodifiableList;
 
-public enum Combinator implements CssWriterVisitor, SelectorElement, IsTerminal {
+public enum Combinator implements SelectorElement, IsTerminal {
 
   ADJACENT_SIBLING('+', "plus") {
     @Override
@@ -42,11 +37,6 @@ public enum Combinator implements CssWriterVisitor, SelectorElement, IsTerminal 
 
   DESCENDANT(' ', "sp") {
     @Override
-    public final void visitPrettyCssWriter(PrettyCssWriter w) throws IOException {
-      w.write(' ');
-    }
-
-    @Override
     final Selector combine(UnmodifiableList<Selector> selectors) {
       return new DescendantSelector(selectors);
     }
@@ -61,12 +51,6 @@ public enum Combinator implements CssWriterVisitor, SelectorElement, IsTerminal 
 
   LIST(',', "or") {
     @Override
-    public final void visitPrettyCssWriter(PrettyCssWriter w) throws IOException {
-      w.write(',');
-      w.write(' ');
-    }
-
-    @Override
     final Selector combine(UnmodifiableList<Selector> selectors) {
       return new SelectorList(selectors);
     }
@@ -75,7 +59,8 @@ public enum Combinator implements CssWriterVisitor, SelectorElement, IsTerminal 
   private static final Combinator[] ARRAY = values();
 
   private final String javaName;
-  private final char symbol;
+
+  public final char symbol;
 
   private Combinator(char symbol, String javaName) {
     this.symbol = symbol;
@@ -84,11 +69,6 @@ public enum Combinator implements CssWriterVisitor, SelectorElement, IsTerminal 
 
   public static Combinator getByCode(int code) {
     return ARRAY[code];
-  }
-
-  @Override
-  public final void acceptCssWriter(CssWriter w) throws IOException {
-    w.acceptCssWriterVisitor(this);
   }
 
   @Override
@@ -107,18 +87,6 @@ public enum Combinator implements CssWriterVisitor, SelectorElement, IsTerminal 
 
   public final String getJavaName() {
     return javaName;
-  }
-
-  @Override
-  public final void visitMinifiedCssWriter(MinifiedCssWriter w) throws IOException {
-    w.write(symbol);
-  }
-
-  @Override
-  public void visitPrettyCssWriter(PrettyCssWriter w) throws IOException {
-    w.write(' ');
-    w.write(symbol);
-    w.write(' ');
   }
 
   abstract Selector combine(UnmodifiableList<Selector> selectors);

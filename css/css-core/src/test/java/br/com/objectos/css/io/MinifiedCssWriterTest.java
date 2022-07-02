@@ -15,37 +15,42 @@
  */
 package br.com.objectos.css.io;
 
-import br.com.objectos.css.AbstractCssCoreTest;
+import static org.testng.Assert.assertEquals;
+
 import java.io.IOException;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class MinifiedCssWriterTest extends AbstractCssCoreTest {
+public class MinifiedCssWriterTest {
+
+  private MinifiedCssWriter w;
+
+  private StringBuilder sb;
+
+  @BeforeClass
+  public void _beforeClass() {
+    w = new MinifiedCssWriter();
+
+    sb = new StringBuilder();
+
+    w.out(sb);
+  }
+
+  @BeforeMethod
+  public void _beforeMethod() {
+    sb.setLength(0);
+  }
 
   @Test
   public void writeUrl() throws IOException {
-    testMinified(
-        new Subject() {
-          @Override
-          public final void visitMinifiedCssWriter(MinifiedCssWriter w) throws IOException {
-            w.writeUrl("abc");
-          }
-        },
-        "url(\"abc\")"
+    w.writeUrl("abc");
+
+    assertEquals(
+      sb.toString(),
+
+      "url(\"abc\")"
     );
-  }
-
-  private abstract static class Subject implements CssWritable, CssWriterVisitor {
-
-    @Override
-    public final void acceptCssWriter(CssWriter w) throws IOException {
-      w.acceptCssWriterVisitor(this);
-    }
-
-    @Override
-    public final void visitPrettyCssWriter(PrettyCssWriter w) throws IOException {
-      throw new AssertionError();
-    }
-
   }
 
 }

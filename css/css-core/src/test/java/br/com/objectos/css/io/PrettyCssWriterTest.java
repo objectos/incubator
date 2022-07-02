@@ -15,61 +15,66 @@
  */
 package br.com.objectos.css.io;
 
-import br.com.objectos.css.AbstractCssCoreTest;
+import static org.testng.Assert.assertEquals;
+
 import java.io.IOException;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class PrettyCssWriterTest extends AbstractCssCoreTest {
+public class PrettyCssWriterTest {
+
+  private PrettyCssWriter w;
+
+  private StringBuilder sb;
+
+  @BeforeClass
+  public void _beforeClass() {
+    w = new PrettyCssWriter();
+
+    sb = new StringBuilder();
+
+    w.out(sb);
+  }
+
+  @BeforeMethod
+  public void _beforeMethod() {
+    sb.setLength(0);
+  }
 
   @Test
-  public void writeIndentation() {
-    testPretty(
-        new Subject() {
-          @Override
-          public final void visitPrettyCssWriter(PrettyCssWriter w) throws IOException {
-            w.writeIndentation();
-            w.write("#foo {");
-            w.writeNewLine();
-            w.indent();
-            w.writeIndentation();
-            w.write("margin: 0;");
-            w.writeNewLine();
-            w.unindent();
-            w.writeIndentation();
-            w.write('}');
-          }
-        },
-        "#foo {",
-        "  margin: 0;",
-        "}"
+  public void writeIndentation() throws IOException {
+    w.writeIndentation();
+    w.write("#foo {");
+    w.writeNewLine();
+    w.indent();
+    w.writeIndentation();
+    w.write("margin: 0;");
+    w.writeNewLine();
+    w.unindent();
+    w.writeIndentation();
+    w.write('}');
+
+    assertEquals(
+      sb.toString(),
+
+      """
+      #foo {
+        margin: 0;
+      }"""
     );
   }
 
   @Test
   public void writeUrl() throws IOException {
-    testPretty(
-        new Subject() {
-          @Override
-          public final void visitPrettyCssWriter(PrettyCssWriter w) throws IOException {
-            w.writeUrl("abc");
-          }
-        },
-        "url(\"abc\")"
+    w.writeUrl("abc");
+
+    assertEquals(
+      sb.toString(),
+
+      """
+      url("abc")"""
     );
-  }
-
-  private abstract static class Subject implements CssWritable, CssWriterVisitor {
-
-    @Override
-    public final void acceptCssWriter(CssWriter w) throws IOException {
-      w.acceptCssWriterVisitor(this);
-    }
-
-    @Override
-    public final void visitMinifiedCssWriter(MinifiedCssWriter w) throws IOException {
-      throw new AssertionError();
-    }
-
   }
 
 }

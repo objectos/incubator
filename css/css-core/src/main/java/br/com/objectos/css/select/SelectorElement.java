@@ -15,12 +15,10 @@
  */
 package br.com.objectos.css.select;
 
-import br.com.objectos.css.io.CssWritable;
 import br.com.objectos.css.sheet.RuleElement;
 
 public interface SelectorElement
     extends
-    CssWritable,
     RuleElement {
 
   void acceptSelectorBuilderDsl(Selector.BuilderDsl dsl);

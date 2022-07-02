@@ -17,8 +17,7 @@ package br.com.objectos.css.sheet;
 
 import br.com.objectos.css.Css;
 import br.com.objectos.css.function.StandardFunctionName;
-import br.com.objectos.css.io.MinifiedCssWriter;
-import br.com.objectos.css.io.PrettyCssWriter;
+import br.com.objectos.css.io.CssWriter;
 import br.com.objectos.css.property.StandardPropertyName;
 import br.com.objectos.css.select.AttributeValueOperator;
 import br.com.objectos.css.select.Combinator;
@@ -48,6 +47,275 @@ import objectos.lang.Check;
 public abstract class AbstractStyleSheet extends GeneratedStyleSheet
     implements
     StyleSheet {
+
+  protected final static class CustomKeyword implements FontFamilyValue, OutlineValue {
+    static final CustomKeyword INSTANCE = new CustomKeyword();
+
+    private CustomKeyword() {}
+
+    @Override
+    public final void acceptValueCreator(Creator creator) {
+      // noop
+    }
+
+    @Override
+    public final void acceptValueMarker(Marker marker) {
+      marker.markKeyword();
+    }
+  }
+
+  protected final static class StyleType implements AtMediaElement {
+    static final StyleType INSTANCE = new StyleType();
+
+    private StyleType() {}
+
+    @Override
+    public final void acceptMediaQueryElementVisitor(StyleSheetDsl dsl) {
+      dsl.markRule();
+    }
+  }
+
+  protected final static class ThisAttributeValueElement {
+    static final ThisAttributeValueElement INSTANCE = new ThisAttributeValueElement();
+
+    private ThisAttributeValueElement() {}
+
+    final void acceptStyleSheetDsl(StyleSheetDsl dsl) {
+      dsl.markAttributeValueElement();
+    }
+  }
+
+  protected final static class ThisMaxHeightDeclaration
+      extends AbstractMediaExpressionOrRuleElement implements MaxHeightDeclaration {
+    static final ThisMaxHeightDeclaration INSTANCE = new ThisMaxHeightDeclaration();
+
+    private ThisMaxHeightDeclaration() {}
+  }
+
+  protected final static class ThisMaxWidthDeclaration
+      extends AbstractMediaExpressionOrRuleElement implements MaxWidthDeclaration {
+    static final ThisMaxWidthDeclaration INSTANCE = new ThisMaxWidthDeclaration();
+
+    private ThisMaxWidthDeclaration() {}
+  }
+
+  protected final static class ThisMinHeightDeclaration
+      extends AbstractMediaExpressionOrRuleElement implements MinHeightDeclaration {
+    static final ThisMinHeightDeclaration INSTANCE = new ThisMinHeightDeclaration();
+
+    private ThisMinHeightDeclaration() {}
+  }
+
+  protected final static class ThisMinWidthDeclaration
+      extends AbstractMediaExpressionOrRuleElement implements MinWidthDeclaration {
+    static final ThisMinWidthDeclaration INSTANCE = new ThisMinWidthDeclaration();
+
+    private ThisMinWidthDeclaration() {}
+  }
+
+  private abstract static class AbstractMediaExpressionOrRuleElement
+      implements
+      MediaExpression,
+      AtMediaElement,
+      RuleElement {
+    @Override
+    public final void acceptMediaQueryElementVisitor(StyleSheetDsl dsl) {
+      dsl.markDeclaration();
+    }
+
+    @Override
+    public final void acceptRuleElementVisitor(StyleSheetDsl dsl) {
+      dsl.markDeclaration();
+    }
+  }
+
+  private static class ThisAngleTypeDouble extends ThisValue implements AngleType {
+    static final AngleType INSTANCE = new ThisAngleTypeDouble();
+
+    @Override
+    public final void acceptValueMarker(Marker marker) {
+      marker.markDoubleAngle();
+    }
+  }
+
+  private static class ThisAngleTypeInt extends ThisValue implements AngleType {
+    static final AngleType INSTANCE = new ThisAngleTypeInt();
+
+    @Override
+    public final void acceptValueMarker(Marker marker) {
+      marker.markIntAngle();
+    }
+  }
+
+  private static class ThisAnyDeclaration implements AnyDeclaration {
+    static final AnyDeclaration INSTANCE = new ThisAnyDeclaration();
+
+    @Override
+    public final void acceptRuleElementVisitor(StyleSheetDsl dsl) {
+      dsl.markDeclaration();
+    }
+
+    @Override
+    public final void markMultiDeclarationElement(StyleSheetDsl dsl) {
+      dsl.markMultiDeclarationElement();
+    }
+  }
+
+  private static class ThisAnyFunction extends ThisValue implements AnyFunction {
+    static final AnyFunction INSTANCE = new ThisAnyFunction();
+
+    @Override
+    public final void acceptValueMarker(Marker marker) {
+      marker.markFunction();
+    }
+  }
+
+  private static class ThisAttributeSelector implements RuleElement {
+    static final ThisAttributeSelector INSTANCE = new ThisAttributeSelector();
+
+    @Override
+    public final void acceptRuleElementVisitor(StyleSheetDsl dsl) {
+      dsl.markAttributeSelector();
+    }
+  }
+
+  private static class ThisAttributeValueSelector implements RuleElement {
+    static final ThisAttributeValueSelector INSTANCE = new ThisAttributeValueSelector();
+
+    @Override
+    public final void acceptRuleElementVisitor(StyleSheetDsl dsl) {
+      dsl.markAttributeValueSelector();
+    }
+  }
+
+  private static class ThisClassSelector implements RuleElement {
+    static final ThisClassSelector INSTANCE = new ThisClassSelector();
+
+    @Override
+    public final void acceptRuleElementVisitor(StyleSheetDsl dsl) {
+      dsl.markClassSelector();
+    }
+  }
+
+  private enum ThisColorType implements ColorType {
+    HEX,
+
+    RGB_DOUBLE,
+
+    RGB_DOUBLE_ALPHA,
+
+    RGB_INT,
+
+    RGB_INT_ALPHA,
+
+    RGBA_DOUBLE,
+
+    RGBA_INT;
+
+    private final ColorKind kind;
+
+    private ThisColorType() {
+      this.kind = ColorKind.valueOf(name());
+    }
+
+    @Override
+    public final void acceptValueCreator(Creator creator) {
+      // noop
+    }
+
+    @Override
+    public final void acceptValueMarker(Marker marker) {
+      marker.markColor(kind);
+    }
+  }
+
+  private static class ThisDoubleType extends ThisValue implements DoubleType {
+    static final DoubleType INSTANCE = new ThisDoubleType();
+
+    @Override
+    public final void acceptValueMarker(Marker marker) {
+      marker.markDouble();
+    }
+  }
+
+  private static class ThisIdSelector implements RuleElement {
+    static final ThisIdSelector INSTANCE = new ThisIdSelector();
+
+    @Override
+    public final void acceptRuleElementVisitor(StyleSheetDsl dsl) {
+      dsl.markIdSelector();
+    }
+  }
+
+  private static class ThisIntType extends ThisValue implements IntType {
+    static final IntType INSTANCE = new ThisIntType();
+
+    @Override
+    public final void acceptValueMarker(Marker marker) {
+      marker.markInt();
+    }
+  }
+
+  private static class ThisLengthTypeDouble extends ThisValue implements LengthType {
+    static final LengthType INSTANCE = new ThisLengthTypeDouble();
+
+    @Override
+    public final void acceptValueMarker(Marker marker) {
+      marker.markDoubleLength();
+    }
+  }
+
+  private static class ThisLengthTypeInt extends ThisValue implements LengthType {
+    static final LengthType INSTANCE = new ThisLengthTypeInt();
+
+    @Override
+    public final void acceptValueMarker(Marker marker) {
+      marker.markIntLength();
+    }
+  }
+
+  private static class ThisPercentageTypeDouble extends ThisValue implements PercentageType {
+    static final PercentageType INSTANCE = new ThisPercentageTypeDouble();
+
+    @Override
+    public final void acceptValueMarker(Marker marker) {
+      marker.markDoublePercentage();
+    }
+  }
+
+  private static class ThisPercentageTypeInt extends ThisValue implements PercentageType {
+    static final PercentageType INSTANCE = new ThisPercentageTypeInt();
+
+    @Override
+    public final void acceptValueMarker(Marker marker) {
+      marker.markIntPercentage();
+    }
+  }
+
+  private static class ThisStringType extends ThisValue implements StringType {
+    static final StringType INSTANCE = new ThisStringType();
+
+    @Override
+    public final void acceptValueMarker(Marker marker) {
+      marker.markString();
+    }
+  }
+
+  private static class ThisUri extends ThisValue implements UriType {
+    static final UriType INSTANCE = new ThisUri();
+
+    @Override
+    public final void acceptValueMarker(Marker marker) {
+      marker.markUri();
+    }
+  }
+
+  private abstract static class ThisValue implements Value {
+    @Override
+    public final void acceptValueCreator(Creator creator) {
+      // noop
+    }
+  }
 
   protected static final MediaType all = MediaType.ALL;
 
@@ -83,18 +351,16 @@ public abstract class AbstractStyleSheet extends GeneratedStyleSheet
 
   @Override
   public final String printMinified() {
-    CompiledStyleSheet compiled;
-    compiled = compile();
+    var compiled = compile();
 
-    return MinifiedCssWriter.toString(compiled);
+    return CssWriter.toMinifiedString(compiled);
   }
 
   @Override
   public final String toString() {
-    CompiledStyleSheet compiled;
-    compiled = compile();
+    var compiled = compile();
 
-    return PrettyCssWriter.toString(compiled);
+    return CssWriter.toString(compiled);
   }
 
   protected final RuleElement _webkitTextSizeAdjust(PercentageType pct) {
@@ -433,327 +699,6 @@ public abstract class AbstractStyleSheet extends GeneratedStyleSheet
 
   private void addRule(RuleElement... elements) {
     dsl.addRule(elements);
-  }
-
-  protected final static class CustomKeyword implements FontFamilyValue, OutlineValue {
-
-    static final CustomKeyword INSTANCE = new CustomKeyword();
-
-    private CustomKeyword() {}
-
-    @Override
-    public final void acceptValueCreator(Creator creator) {
-      // noop
-    }
-
-    @Override
-    public final void acceptValueMarker(Marker marker) {
-      marker.markKeyword();
-    }
-
-  }
-
-  protected final static class StyleType implements AtMediaElement {
-
-    static final StyleType INSTANCE = new StyleType();
-
-    private StyleType() {}
-
-    @Override
-    public final void acceptMediaQueryElementVisitor(StyleSheetDsl dsl) {
-      dsl.markRule();
-    }
-
-  }
-
-  protected final static class ThisAttributeValueElement {
-
-    static final ThisAttributeValueElement INSTANCE = new ThisAttributeValueElement();
-
-    private ThisAttributeValueElement() {}
-
-    final void acceptStyleSheetDsl(StyleSheetDsl dsl) {
-      dsl.markAttributeValueElement();
-    }
-
-  }
-
-  protected final static class ThisMaxHeightDeclaration
-      extends AbstractMediaExpressionOrRuleElement implements MaxHeightDeclaration {
-
-    static final ThisMaxHeightDeclaration INSTANCE = new ThisMaxHeightDeclaration();
-
-    private ThisMaxHeightDeclaration() {}
-
-  }
-
-  protected final static class ThisMaxWidthDeclaration
-      extends AbstractMediaExpressionOrRuleElement implements MaxWidthDeclaration {
-
-    static final ThisMaxWidthDeclaration INSTANCE = new ThisMaxWidthDeclaration();
-
-    private ThisMaxWidthDeclaration() {}
-
-  }
-
-  protected final static class ThisMinHeightDeclaration
-      extends AbstractMediaExpressionOrRuleElement implements MinHeightDeclaration {
-
-    static final ThisMinHeightDeclaration INSTANCE = new ThisMinHeightDeclaration();
-
-    private ThisMinHeightDeclaration() {}
-
-  }
-
-  protected final static class ThisMinWidthDeclaration
-      extends AbstractMediaExpressionOrRuleElement implements MinWidthDeclaration {
-
-    static final ThisMinWidthDeclaration INSTANCE = new ThisMinWidthDeclaration();
-
-    private ThisMinWidthDeclaration() {}
-
-  }
-
-  private abstract static class AbstractMediaExpressionOrRuleElement
-      implements
-      MediaExpression,
-      AtMediaElement,
-      RuleElement {
-
-    @Override
-    public final void acceptMediaQueryElementVisitor(StyleSheetDsl dsl) {
-      dsl.markDeclaration();
-    }
-
-    @Override
-    public final void acceptRuleElementVisitor(StyleSheetDsl dsl) {
-      dsl.markDeclaration();
-    }
-
-  }
-
-  private static class ThisAngleTypeDouble extends ThisValue implements AngleType {
-
-    static final AngleType INSTANCE = new ThisAngleTypeDouble();
-
-    @Override
-    public final void acceptValueMarker(Marker marker) {
-      marker.markDoubleAngle();
-    }
-
-  }
-
-  private static class ThisAngleTypeInt extends ThisValue implements AngleType {
-
-    static final AngleType INSTANCE = new ThisAngleTypeInt();
-
-    @Override
-    public final void acceptValueMarker(Marker marker) {
-      marker.markIntAngle();
-    }
-
-  }
-
-  private static class ThisAnyDeclaration implements AnyDeclaration {
-
-    static final AnyDeclaration INSTANCE = new ThisAnyDeclaration();
-
-    @Override
-    public final void acceptRuleElementVisitor(StyleSheetDsl dsl) {
-      dsl.markDeclaration();
-    }
-
-    @Override
-    public final void markMultiDeclarationElement(StyleSheetDsl dsl) {
-      dsl.markMultiDeclarationElement();
-    }
-
-  }
-
-  private static class ThisAnyFunction extends ThisValue implements AnyFunction {
-
-    static final AnyFunction INSTANCE = new ThisAnyFunction();
-
-    @Override
-    public final void acceptValueMarker(Marker marker) {
-      marker.markFunction();
-    }
-
-  }
-
-  private static class ThisAttributeSelector implements RuleElement {
-
-    static final ThisAttributeSelector INSTANCE = new ThisAttributeSelector();
-
-    @Override
-    public final void acceptRuleElementVisitor(StyleSheetDsl dsl) {
-      dsl.markAttributeSelector();
-    }
-
-  }
-
-  private static class ThisAttributeValueSelector implements RuleElement {
-
-    static final ThisAttributeValueSelector INSTANCE = new ThisAttributeValueSelector();
-
-    @Override
-    public final void acceptRuleElementVisitor(StyleSheetDsl dsl) {
-      dsl.markAttributeValueSelector();
-    }
-
-  }
-
-  private static class ThisClassSelector implements RuleElement {
-
-    static final ThisClassSelector INSTANCE = new ThisClassSelector();
-
-    @Override
-    public final void acceptRuleElementVisitor(StyleSheetDsl dsl) {
-      dsl.markClassSelector();
-    }
-
-  }
-
-  private enum ThisColorType implements ColorType {
-
-    HEX,
-
-    RGB_DOUBLE,
-
-    RGB_DOUBLE_ALPHA,
-
-    RGB_INT,
-
-    RGB_INT_ALPHA,
-
-    RGBA_DOUBLE,
-
-    RGBA_INT;
-
-    private final ColorKind kind;
-
-    private ThisColorType() {
-      this.kind = ColorKind.valueOf(name());
-    }
-
-    @Override
-    public final void acceptValueCreator(Creator creator) {
-      // noop
-    }
-
-    @Override
-    public final void acceptValueMarker(Marker marker) {
-      marker.markColor(kind);
-    }
-
-  }
-
-  private static class ThisDoubleType extends ThisValue implements DoubleType {
-
-    static final DoubleType INSTANCE = new ThisDoubleType();
-
-    @Override
-    public final void acceptValueMarker(Marker marker) {
-      marker.markDouble();
-    }
-
-  }
-
-  private static class ThisIdSelector implements RuleElement {
-
-    static final ThisIdSelector INSTANCE = new ThisIdSelector();
-
-    @Override
-    public final void acceptRuleElementVisitor(StyleSheetDsl dsl) {
-      dsl.markIdSelector();
-    }
-
-  }
-
-  private static class ThisIntType extends ThisValue implements IntType {
-
-    static final IntType INSTANCE = new ThisIntType();
-
-    @Override
-    public final void acceptValueMarker(Marker marker) {
-      marker.markInt();
-    }
-
-  }
-
-  private static class ThisLengthTypeDouble extends ThisValue implements LengthType {
-
-    static final LengthType INSTANCE = new ThisLengthTypeDouble();
-
-    @Override
-    public final void acceptValueMarker(Marker marker) {
-      marker.markDoubleLength();
-    }
-
-  }
-
-  private static class ThisLengthTypeInt extends ThisValue implements LengthType {
-
-    static final LengthType INSTANCE = new ThisLengthTypeInt();
-
-    @Override
-    public final void acceptValueMarker(Marker marker) {
-      marker.markIntLength();
-    }
-
-  }
-
-  private static class ThisPercentageTypeDouble extends ThisValue implements PercentageType {
-
-    static final PercentageType INSTANCE = new ThisPercentageTypeDouble();
-
-    @Override
-    public final void acceptValueMarker(Marker marker) {
-      marker.markDoublePercentage();
-    }
-
-  }
-
-  private static class ThisPercentageTypeInt extends ThisValue implements PercentageType {
-
-    static final PercentageType INSTANCE = new ThisPercentageTypeInt();
-
-    @Override
-    public final void acceptValueMarker(Marker marker) {
-      marker.markIntPercentage();
-    }
-
-  }
-
-  private static class ThisStringType extends ThisValue implements StringType {
-
-    static final StringType INSTANCE = new ThisStringType();
-
-    @Override
-    public final void acceptValueMarker(Marker marker) {
-      marker.markString();
-    }
-
-  }
-
-  private static class ThisUri extends ThisValue implements UriType {
-
-    static final UriType INSTANCE = new ThisUri();
-
-    @Override
-    public final void acceptValueMarker(Marker marker) {
-      marker.markUri();
-    }
-
-  }
-
-  private abstract static class ThisValue implements Value {
-
-    @Override
-    public final void acceptValueCreator(Creator creator) {
-      // noop
-    }
-
   }
 
 }

@@ -15,7 +15,7 @@
  */
 package br.com.objectos.css.sheet;
 
-import br.com.objectos.css.io.PrettyCssWriter;
+import br.com.objectos.css.io.CssWriter;
 import java.util.Arrays;
 
 public class CompiledStyleSheet {
@@ -53,17 +53,17 @@ public class CompiledStyleSheet {
   @Override
   public final int hashCode() {
     return Arrays.hashCode(
-        new int[] {
-            Arrays.hashCode(codes),
-            Arrays.hashCode(chars),
-            Arrays.hashCode(doubles)
-        }
+      new int[] {
+          Arrays.hashCode(codes),
+          Arrays.hashCode(chars),
+          Arrays.hashCode(doubles)
+      }
     );
   }
 
   @Override
   public final String toString() {
-    return PrettyCssWriter.toString(this);
+    return CssWriter.toString(this);
   }
 
   final int getCode(int index) {

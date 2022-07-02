@@ -17,57 +17,18 @@ package br.com.objectos.css.io;
 
 import br.com.objectos.css.property.StandardPropertyName;
 import br.com.objectos.css.select.Combinator;
-import br.com.objectos.css.sheet.CompiledStyleSheet;
 import java.io.IOException;
-import objectos.lang.Check;
 
-public class PrettyCssWriter extends CssWriter {
+class PrettyCssWriter extends CssWriter {
 
-  private final Indentation indentation;
-
-  PrettyCssWriter(Appendable out, Indentation indentation) {
-    super(out);
-    this.indentation = indentation;
-  }
-
-  public static PrettyCssWriter of(Appendable out) {
-    Check.notNull(out, "out == null");
-
-    Indentation indentation = Indentation.standard();
-
-    return new PrettyCssWriter(out, indentation);
-  }
+  private final Indentation indentation = Indentation.standard();
 
   public static PrettyCssWriter ofString() {
-    return of(new StringBuilder());
-  }
+    var writer = new PrettyCssWriter();
 
-  public static String toString(CompiledStyleSheet sheet) {
-    try {
-      PrettyCssWriter w;
-      w = ofString();
+    writer.out(new StringBuilder());
 
-      sheet.acceptCompiledStyleSheetVisitor(w);
-
-      return w.toString();
-    } catch (IOException e) {
-      throw new AssertionError("StringBuilder should not have thrown IOException", e);
-    }
-  }
-
-  public static String toString(CssWritable element) {
-    try {
-      PrettyCssWriter w = ofString();
-      element.acceptCssWriter(w);
-      return w.toString();
-    } catch (IOException e) {
-      throw new AssertionError("IOException should not have occured with a StringBuilder", e);
-    }
-  }
-
-  @Override
-  public final void acceptCssWriterVisitor(CssWriterVisitor visitor) throws IOException {
-    visitor.visitPrettyCssWriter(this);
+    return writer;
   }
 
   public final void indent() {
@@ -79,24 +40,24 @@ public class PrettyCssWriter extends CssWriter {
   }
 
   @Override
-  public final void visitAfterLastDeclaration() throws IOException {
+  public void visitAfterLastDeclaration() throws IOException {
     write(';');
   }
 
   @Override
-  public final void visitBeforeNextDeclaration() throws IOException {
+  public void visitBeforeNextDeclaration() throws IOException {
     visitAfterLastDeclaration();
     writeNewLine();
   }
 
   @Override
-  public final void visitBeforeNextStatement() throws IOException {
+  public void visitBeforeNextStatement() throws IOException {
     writeNewLine();
     writeNewLine();
   }
 
   @Override
-  public final void visitBlockEnd() throws IOException {
+  public void visitBlockEnd() throws IOException {
     writeNewLine();
     unindent();
     writeIndentation();
@@ -104,7 +65,7 @@ public class PrettyCssWriter extends CssWriter {
   }
 
   @Override
-  public final void visitBlockStart() throws IOException {
+  public void visitBlockStart() throws IOException {
     write(' ');
     write('{');
     writeNewLine();
@@ -112,12 +73,23 @@ public class PrettyCssWriter extends CssWriter {
   }
 
   @Override
-  public final void visitCombinator(Combinator combinator) throws IOException {
-    combinator.visitPrettyCssWriter(this);
+  public void visitCombinator(Combinator combinator) throws IOException {
+    switch (combinator) {
+      default -> {
+        write(' ');
+        write(combinator.symbol);
+        write(' ');
+      }
+      case DESCENDANT -> write(' ');
+      case LIST -> {
+        write(',');
+        write(' ');
+      }
+    }
   }
 
   @Override
-  public final void visitDeclarationStart(StandardPropertyName name) throws IOException {
+  public void visitDeclarationStart(StandardPropertyName name) throws IOException {
     writeIndentation();
     write(name.getName());
     write(':');
@@ -125,34 +97,34 @@ public class PrettyCssWriter extends CssWriter {
   }
 
   @Override
-  public final void visitEmptyBlock() throws IOException {
+  public void visitEmptyBlock() throws IOException {
     write(' ');
     write('{');
     write('}');
   }
 
   @Override
-  public final void visitMultiDeclarationSeparator() throws IOException {
+  public void visitMultiDeclarationSeparator() throws IOException {
     write(',');
     write(' ');
   }
 
   @Override
-  public final void visitRuleStart() throws IOException {
+  public void visitRuleStart() throws IOException {
     writeIndentation();
   }
 
   @Override
-  public final void writeComma() throws IOException {
+  public void writeComma() throws IOException {
     write(',');
     write(' ');
   }
 
-  public final void writeIndentation() throws IOException {
+  public void writeIndentation() throws IOException {
     indentation.write(this);
   }
 
-  public final void writeNewLine() throws IOException {
+  public void writeNewLine() throws IOException {
     write(System.lineSeparator());
   }
 
