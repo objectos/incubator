@@ -34,7 +34,7 @@ class Compiler {
   private int currentElementLength;
 
   private int cursor;
-  private final TemplateDsl dsl;
+  private final TemplateDslImpl dsl;
 
   // elements stack
   private int[] element;
@@ -48,7 +48,7 @@ class Compiler {
   private final int[] title;
   private int titleIndex = -1;
 
-  Compiler(TemplateDsl dsl) {
+  Compiler(TemplateDslImpl dsl) {
     this.dsl = dsl;
 
     attribute = new int[64];
@@ -75,8 +75,8 @@ class Compiler {
       processByteProto(proto);
     }
     return new CompiledTemplate(
-        dsl.getBuffer(),
-        Arrays.copyOf(codes, codesIndex)
+      dsl.getBuffer(),
+      Arrays.copyOf(codes, codesIndex)
     );
   }
 

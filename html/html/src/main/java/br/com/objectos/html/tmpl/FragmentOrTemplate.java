@@ -64,6 +64,7 @@ abstract class FragmentOrTemplate extends GeneratedAbstractTemplate {
 
   public final StandardTextElement t(String text) {
     dsl.addText(text);
+
     return StandardTextElement.INSTANCE;
   }
 

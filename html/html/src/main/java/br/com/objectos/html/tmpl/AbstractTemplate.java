@@ -37,8 +37,7 @@ public abstract class AbstractTemplate extends FragmentOrTemplate implements Tem
 
   @Override
   public final CompiledTemplate compile() {
-    TemplateDsl dsl;
-    dsl = new TemplateDsl();
+    var dsl = new TemplateDslImpl();
 
     acceptTemplateDsl(dsl);
 

@@ -33,9 +33,9 @@ public abstract class AbstractFragment extends FragmentOrTemplate implements Non
     }
   }
 
+  @Override
   public final CompiledTemplate compile() {
-    TemplateDsl dsl;
-    dsl = new TemplateDsl();
+    var dsl = new TemplateDslImpl();
 
     acceptTemplateDsl(dsl);
 
