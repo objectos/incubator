@@ -1,0 +1,864 @@
+/*
+ * Copyright (C) 2016-2022 Objectos Software LTDA.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package br.com.objectos.css.sheet;
+
+import br.com.objectos.css.function.StandardFunctionName;
+import br.com.objectos.css.keyword.StandardKeyword;
+import br.com.objectos.css.property.StandardPropertyName;
+import br.com.objectos.css.select.AttributeValueOperator;
+import br.com.objectos.css.select.ClassSelector;
+import br.com.objectos.css.select.Combinator;
+import br.com.objectos.css.select.IdSelector;
+import br.com.objectos.css.select.PseudoClassSelector;
+import br.com.objectos.css.select.PseudoElementSelector;
+import br.com.objectos.css.select.TypeSelector;
+import br.com.objectos.css.select.UniversalSelector;
+import br.com.objectos.css.type.AngleUnit;
+import br.com.objectos.css.type.ColorHex;
+import br.com.objectos.css.type.ColorKind;
+import br.com.objectos.css.type.ColorName;
+import br.com.objectos.css.type.LengthUnit;
+import br.com.objectos.css.type.Value;
+import java.util.Arrays;
+import objectos.lang.Check;
+import objectos.util.CharArrays;
+import objectos.util.DoubleArrays;
+import objectos.util.GrowableList;
+import objectos.util.IntArrays;
+import objectos.util.UnmodifiableList;
+
+final class StyleSheetDslImpl implements StyleSheetDsl {
+
+  private char[] chars;
+  private int charsLength;
+
+  private double[] doubles;
+  private int doublesLength;
+
+  private int[] objects;
+  private int objectsLength;
+
+  private int[] protos;
+  private int protosLength;
+
+  private GrowableList<RuleElement> rulePrefix;
+
+  StyleSheetDslImpl() {
+    chars = new char[16 * 128];
+
+    doubles = new double[10];
+
+    objects = new int[128];
+
+    protos = new int[128];
+  }
+
+  @Override
+  public final void addAtMedia(AtMediaElement... elements) {
+    Check.notNull(elements, "elements == null");
+
+    addProto(ByteProto.AT_MEDIA_END);
+
+    for (int i = elements.length - 1; i >= 0; i--) {
+      AtMediaElement element;
+      element = elements[i];
+
+      if (element == null) {
+        throw new NullPointerException("elements[" + i + "] == null");
+      }
+
+      element.acceptMediaQueryElementVisitor(this);
+    }
+
+    addProto(ByteProto.AT_MEDIA_START);
+
+    addObject(ByteProto.AT_MEDIA_MARK);
+  }
+
+  @Override
+  public final void addClassSelector(ClassSelector selector) {
+    addProtoString(
+      ByteProto.SELECTOR_CLASS_OBJ,
+      selector.className()
+    );
+  }
+
+  @Override
+  public final void addColor(ColorName color) {
+    addProto(color.getCode());
+    addProto(ByteProto.VALUE_COLOR_NAME);
+  }
+
+  @Override
+  public final void addCombinator(Combinator combinator) {
+    addProto(combinator.getCode());
+    addProto(ByteProto.SELECTOR_COMBINATOR);
+  }
+
+  @Override
+  public final void addDeclaration(StandardPropertyName name, double value) {
+    Check.notNull(name, "name == null");
+
+    addDeclarationEnd();
+    addValueDouble(value);
+    addDeclarationStart(name);
+  }
+
+  @Override
+  public final void addDeclaration(StandardPropertyName name, int value) {
+    Check.notNull(name, "name == null");
+
+    addDeclarationEnd();
+    addValueInt(value);
+    addDeclarationStart(name);
+  }
+
+  @Override
+  public final void addDeclaration(StandardPropertyName name, MultiDeclarationElement... elements) {
+    Check.notNull(name, "name == null");
+    Check.notNull(elements, "elements == null");
+
+    addProto(ByteProto.DECLARATION_MULTI_END);
+
+    // yes, reverse
+    for (int i = elements.length - 1; i >= 0; i--) {
+      MultiDeclarationElement element = elements[i];
+
+      if (element == null) {
+        throw new NullPointerException("elements[" + i + "] == null");
+      }
+
+      element.markMultiDeclarationElement(this);
+    }
+
+    addProto(name.getCode());
+    addProto(ByteProto.DECLARATION_MULTI_START);
+  }
+
+  @Override
+  public final void addDeclaration(StandardPropertyName name, String value) {
+    Check.notNull(name, "name == null");
+    Check.notNull(value, "value == null");
+
+    addDeclarationEnd();
+    addProtoString(ByteProto.VALUE_STRING, value);
+    addDeclarationStart(name);
+  }
+
+  @Override
+  public final void addDeclaration(StandardPropertyName name, Value v1) {
+    Check.notNull(name, "name == null");
+    Check.notNull(v1, "v1 == null");
+
+    v1.acceptValueCreator(this);
+
+    addDeclarationEnd();
+    v1.acceptValueMarker(this);
+    addDeclarationStart(name);
+  }
+
+  @Override
+  public final void addDeclaration(StandardPropertyName name, Value v1, Value v2) {
+    Check.notNull(name, "name == null");
+    Check.notNull(v1, "v1 == null");
+    Check.notNull(v2, "v2 == null");
+
+    v1.acceptValueCreator(this);
+    v2.acceptValueCreator(this);
+
+    addDeclarationEnd();
+    // yes, reverse
+    v2.acceptValueMarker(this);
+    v1.acceptValueMarker(this);
+    addDeclarationStart(name);
+  }
+
+  @Override
+  public final void addDeclaration(StandardPropertyName name, Value v1, Value v2, Value v3) {
+    Check.notNull(name, "name == null");
+    Check.notNull(v1, "v1 == null");
+    Check.notNull(v2, "v2 == null");
+    Check.notNull(v3, "v3 == null");
+
+    v1.acceptValueCreator(this);
+    v2.acceptValueCreator(this);
+    v3.acceptValueCreator(this);
+
+    addDeclarationEnd();
+    // yes, reverse
+    v3.acceptValueMarker(this);
+    v2.acceptValueMarker(this);
+    v1.acceptValueMarker(this);
+    addDeclarationStart(name);
+  }
+
+  @Override
+  public final void addDeclaration(
+      StandardPropertyName name, Value v1, Value v2, Value v3, Value v4) {
+    Check.notNull(name, "name == null");
+    Check.notNull(v1, "v1 == null");
+    Check.notNull(v2, "v2 == null");
+    Check.notNull(v3, "v3 == null");
+    Check.notNull(v4, "v4 == null");
+
+    v1.acceptValueCreator(this);
+    v2.acceptValueCreator(this);
+    v3.acceptValueCreator(this);
+    v4.acceptValueCreator(this);
+
+    addDeclarationEnd();
+    // yes, reverse
+    v4.acceptValueMarker(this);
+    v3.acceptValueMarker(this);
+    v2.acceptValueMarker(this);
+    v1.acceptValueMarker(this);
+    addDeclarationStart(name);
+  }
+
+  @Override
+  public final void addDeclaration(
+      StandardPropertyName name, Value v1, Value v2, Value v3, Value v4, Value v5) {
+    Check.notNull(name, "name == null");
+    Check.notNull(v1, "v1 == null");
+    Check.notNull(v2, "v2 == null");
+    Check.notNull(v3, "v3 == null");
+    Check.notNull(v4, "v4 == null");
+    Check.notNull(v5, "v5 == null");
+
+    v1.acceptValueCreator(this);
+    v2.acceptValueCreator(this);
+    v3.acceptValueCreator(this);
+    v4.acceptValueCreator(this);
+    v5.acceptValueCreator(this);
+
+    addDeclarationEnd();
+    // yes, reverse
+    v5.acceptValueMarker(this);
+    v4.acceptValueMarker(this);
+    v3.acceptValueMarker(this);
+    v2.acceptValueMarker(this);
+    v1.acceptValueMarker(this);
+    addDeclarationStart(name);
+  }
+
+  @Override
+  public final void addDeclaration(
+      StandardPropertyName name, Value v1, Value v2, Value v3, Value v4, Value v5, Value v6) {
+    Check.notNull(name, "name == null");
+    Check.notNull(v1, "v1 == null");
+    Check.notNull(v2, "v2 == null");
+    Check.notNull(v3, "v3 == null");
+    Check.notNull(v4, "v4 == null");
+    Check.notNull(v5, "v5 == null");
+    Check.notNull(v6, "v6 == null");
+
+    v1.acceptValueCreator(this);
+    v2.acceptValueCreator(this);
+    v3.acceptValueCreator(this);
+    v4.acceptValueCreator(this);
+    v5.acceptValueCreator(this);
+    v6.acceptValueCreator(this);
+
+    addDeclarationEnd();
+    // yes, reverse
+    v6.acceptValueMarker(this);
+    v5.acceptValueMarker(this);
+    v4.acceptValueMarker(this);
+    v3.acceptValueMarker(this);
+    v2.acceptValueMarker(this);
+    v1.acceptValueMarker(this);
+    addDeclarationStart(name);
+  }
+
+  @Override
+  public final void addFunction(StandardFunctionName name, Value v1) {
+    Check.notNull(name, "name == null");
+    Check.notNull(v1, "v1 == null");
+
+    v1.acceptValueCreator(this);
+
+    addFunctionEnd();
+
+    v1.acceptValueMarker(this);
+
+    addFunctionStart(name);
+  }
+
+  @Override
+  public final void addIdSelector(IdSelector selector) {
+    addProtoString(
+      ByteProto.SELECTOR_ID_OBJ,
+      selector.id()
+    );
+  }
+
+  @Override
+  public final void addKeyword(StandardKeyword keyword) {
+    addProto(keyword.getCode());
+    addProto(ByteProto.VALUE_KEYWORD);
+  }
+
+  @Override
+  public final void addMediaType(MediaType type) {
+    addProto(type.getCode());
+    addProto(ByteProto.MEDIA_TYPE);
+  }
+
+  @Override
+  public final void addPseudoClassSelector(PseudoClassSelector selector) {
+    addProto(selector.getCode());
+    addProto(ByteProto.SELECTOR_PSEUDO_CLASS_OBJ);
+  }
+
+  @Override
+  public final void addPseudoElementSelector(PseudoElementSelector selector) {
+    addProto(selector.getCode());
+    addProto(ByteProto.SELECTOR_PSEUDO_ELEMENT_OBJ);
+  }
+
+  @Override
+  public void addRule(RuleElement... elements) {
+    Check.notNull(elements, "elements == null");
+
+    addProto(ByteProto.RULE_END);
+
+    for (int i = elements.length - 1; i >= 0; i--) {
+      RuleElement element;
+      element = elements[i];
+
+      if (element == null) {
+        throw new NullPointerException("elements[" + i + "] == null");
+      }
+
+      element.acceptRuleElementVisitor(this);
+    }
+
+    if (rulePrefix != null) {
+      for (int i = rulePrefix.size() - 1; i >= 0; i--) {
+        RuleElement element;
+        element = rulePrefix.get(i);
+
+        element.acceptRuleElementVisitor(this);
+      }
+    }
+
+    addProto(ByteProto.RULE_START);
+    addObject(ByteProto.RULE_MARK);
+  }
+
+  public void addRule(UnmodifiableList<RuleElement> elements) {
+    Check.notNull(elements, "elements == null");
+
+    addProto(ByteProto.RULE_END);
+
+    for (int i = elements.size() - 1; i >= 0; i--) {
+      RuleElement element;
+      element = elements.get(i);
+
+      if (element == null) {
+        throw new NullPointerException("elements[" + i + "] == null");
+      }
+
+      element.acceptRuleElementVisitor(this);
+    }
+
+    addProto(ByteProto.RULE_START);
+    addObject(ByteProto.RULE_MARK);
+  }
+
+  @Override
+  public final void addTypeSelector(TypeSelector selector) {
+    addProto(selector.getCode());
+    addProto(ByteProto.SELECTOR_TYPE_OBJ);
+  }
+
+  @Override
+  public final void addUniversalSelector(UniversalSelector selector) {
+    addProto(ByteProto.SELECTOR_UNIVERSAL_OBJ);
+  }
+
+  @Override
+  public final void addZero() {
+    addValueInt(0);
+  }
+
+  @Override
+  public final void clearRulePrefix() {
+    if (rulePrefix != null) {
+      rulePrefix.clear();
+    }
+  }
+
+  public final CompiledStyleSheet compile() {
+    onCompile();
+
+    Compiler compiler;
+    compiler = new Compiler(this);
+
+    return compiler.compile(protosLength);
+  }
+
+  @Override
+  public final void createAngle(AngleUnit unit, double value) {
+    addDoubleProto(value);
+    addProto(unit.getCode());
+    addProto(ByteProto.VALUE_ANGLE_DOUBLE);
+  }
+
+  @Override
+  public final void createAngle(AngleUnit unit, int value) {
+    addProto(value);
+    addProto(unit.getCode());
+    addProto(ByteProto.VALUE_ANGLE_INT);
+  }
+
+  @Override
+  public final void createAttributeSelector(String name) {
+    addProtoString(
+      ByteProto.SELECTOR_ATTRIBUTE,
+      name
+    );
+  }
+
+  @Override
+  public final void createAttributeValueElement(AttributeValueOperator operator, String value) {
+    addProto(value.length());
+    addProto(charsLength);
+    addProto(operator.getCode());
+    addProto(ByteProto.SELECTOR_ATTRIBUTE_VALUE_ELEMENT);
+
+    addString(value);
+  }
+
+  @Override
+  public final void createAttributeValueSelector(String name) {
+    addProtoString(
+      ByteProto.SELECTOR_ATTRIBUTE_VALUE,
+      name
+    );
+  }
+
+  @Override
+  public final void createClassSelector(String className) {
+    addProtoString(
+      ByteProto.SELECTOR_CLASS,
+      className
+    );
+  }
+
+  @Override
+  public final void createColor(String hex) {
+    ColorHex.checkValidHexNotation(hex);
+
+    addProtoString(ByteProto.VALUE_COLOR_HEX, hex);
+  }
+
+  @Override
+  public final void createDouble(double value) {
+    addDoubleProto(value);
+    addProto(ByteProto.VALUE_DOUBLE_DSL);
+  }
+
+  @Override
+  public final void createIdSelector(String id) {
+    addProtoString(
+      ByteProto.SELECTOR_ID,
+      id
+    );
+  }
+
+  @Override
+  public final void createInt(int value) {
+    addProto(value);
+    addProto(ByteProto.VALUE_INT_DSL);
+  }
+
+  @Override
+  public final void createKeyword(String name) {
+    Check.notNull(name, "name == null");
+
+    for (char c : name.toCharArray()) {
+      if (Character.isLetterOrDigit(c)) {
+        continue;
+      }
+      if (c == '-') {
+        continue;
+      }
+      throw new IllegalArgumentException("Invalid keyword name: " + name);
+    }
+
+    addProtoString(ByteProto.VALUE_KEYWORD_CUSTOM, name);
+  }
+
+  @Override
+  public final void createLength(LengthUnit unit, double value) {
+    addDoubleProto(value);
+    addProto(unit.getCode());
+    addProto(ByteProto.VALUE_LENGTH_DOUBLE);
+  }
+
+  @Override
+  public final void createLength(LengthUnit unit, int value) {
+    addProto(value);
+    addProto(unit.getCode());
+    addProto(ByteProto.VALUE_LENGTH_INT);
+  }
+
+  @Override
+  public final void createPercentage(double value) {
+    addDoubleProto(value);
+    addProto(ByteProto.VALUE_PERCENTAGE_DOUBLE);
+  }
+
+  @Override
+  public final void createPercentage(int value) {
+    addProto(value);
+    addProto(ByteProto.VALUE_PERCENTAGE_INT);
+  }
+
+  @Override
+  public final void createRgb(double r, double g, double b) {
+    addProto(doublesLength);
+
+    addDouble(r);
+    addDouble(g);
+    addDouble(b);
+
+    addProto(ByteProto.VALUE_RGB_DOUBLE);
+  }
+
+  @Override
+  public final void createRgb(double r, double g, double b, double alpha) {
+    addProto(doublesLength);
+
+    addDouble(r);
+    addDouble(g);
+    addDouble(b);
+    addDouble(alpha);
+
+    addProto(ByteProto.VALUE_RGB_DOUBLE_ALPHA);
+  }
+
+  @Override
+  public final void createRgb(int r, int g, int b) {
+    addProto(b);
+    addProto(g);
+    addProto(r);
+    addProto(ByteProto.VALUE_RGB_INT);
+  }
+
+  @Override
+  public final void createRgb(int r, int g, int b, double alpha) {
+    addDoubleProto(alpha);
+    addProto(b);
+    addProto(g);
+    addProto(r);
+    addProto(ByteProto.VALUE_RGB_INT_ALPHA);
+  }
+
+  @Override
+  public final void createRgba(double r, double g, double b, double alpha) {
+    addProto(doublesLength);
+
+    addDouble(r);
+    addDouble(g);
+    addDouble(b);
+    addDouble(alpha);
+
+    addProto(ByteProto.VALUE_RGBA_DOUBLE);
+  }
+
+  @Override
+  public final void createRgba(int r, int g, int b, double alpha) {
+    addDoubleProto(alpha);
+    addProto(b);
+    addProto(g);
+    addProto(r);
+    addProto(ByteProto.VALUE_RGBA_INT);
+  }
+
+  @Override
+  public final void createString(String value) {
+    addProtoString(ByteProto.VALUE_STRING_DSL, value);
+  }
+
+  @Override
+  public final void createUri(String value) {
+    Check.notNull(value, "value == null");
+
+    addProtoString(
+      ByteProto.VALUE_URI,
+
+      value
+    );
+  }
+
+  @Override
+  public final void markAttributeSelector() {
+    addProto(ByteProto.SELECTOR_ATTRIBUTE_MARK);
+  }
+
+  @Override
+  public final void markAttributeValueElement() {
+    int proto = getLastProto();
+    Check.state(
+      proto == ByteProto.SELECTOR_ATTRIBUTE_VALUE_ELEMENT,
+      "not ", ByteProto.SELECTOR_ATTRIBUTE_VALUE_ELEMENT
+    );
+  }
+
+  @Override
+  public final void markAttributeValueSelector() {
+    addProto(ByteProto.SELECTOR_ATTRIBUTE_VALUE_MARK);
+  }
+
+  @Override
+  public final void markClassSelector() {
+    addProto(ByteProto.SELECTOR_CLASS_MARK);
+  }
+
+  @Override
+  public final void markColor(ColorKind kind) {
+    Check.notNull(kind, "kind == null");
+
+    switch (kind) {
+      case HEX:
+        addProto(ByteProto.VALUE_COLOR_HEX_MARK);
+        break;
+      case RGB_DOUBLE:
+        addProto(ByteProto.VALUE_RGB_DOUBLE_MARK);
+        break;
+      case RGB_DOUBLE_ALPHA:
+        addProto(ByteProto.VALUE_RGB_DOUBLE_ALPHA_MARK);
+        break;
+      case RGB_INT:
+        addProto(ByteProto.VALUE_RGB_INT_MARK);
+        break;
+      case RGB_INT_ALPHA:
+        addProto(ByteProto.VALUE_RGB_INT_ALPHA_MARK);
+        break;
+      case RGBA_DOUBLE:
+        addProto(ByteProto.VALUE_RGBA_DOUBLE_MARK);
+        break;
+      case RGBA_INT:
+        addProto(ByteProto.VALUE_RGBA_INT_MARK);
+        break;
+      default:
+        throw new AssertionError("Unexpected kind " + kind);
+    }
+  }
+
+  @Override
+  public final void markDeclaration() {
+    addProto(ByteProto.DECLARATION_MARK);
+  }
+
+  @Override
+  public final void markDouble() {
+    addProto(ByteProto.VALUE_DOUBLE_MARK);
+  }
+
+  @Override
+  public final void markDoubleAngle() {
+    addProto(ByteProto.VALUE_ANGLE_DOUBLE_MARK);
+  }
+
+  @Override
+  public final void markDoubleLength() {
+    addProto(ByteProto.VALUE_LENGTH_DOUBLE_MARK);
+  }
+
+  @Override
+  public final void markDoublePercentage() {
+    addProto(ByteProto.VALUE_PERCENTAGE_DOUBLE_MARK);
+  }
+
+  @Override
+  public final void markFunction() {
+    addProto(ByteProto.VALUE_FUNCTION_MARK);
+  }
+
+  @Override
+  public final void markIdSelector() {
+    addProto(ByteProto.SELECTOR_ID_MARK);
+  }
+
+  @Override
+  public final void markInt() {
+    addProto(ByteProto.VALUE_INT_MARK);
+  }
+
+  @Override
+  public final void markIntAngle() {
+    addProto(ByteProto.VALUE_ANGLE_INT_MARK);
+  }
+
+  @Override
+  public final void markIntLength() {
+    addProto(ByteProto.VALUE_LENGTH_INT_MARK);
+  }
+
+  @Override
+  public final void markIntPercentage() {
+    addProto(ByteProto.VALUE_PERCENTAGE_INT_MARK);
+  }
+
+  @Override
+  public final void markKeyword() {
+    addProto(ByteProto.VALUE_KEYWORD_CUSTOM_MARK);
+  }
+
+  @Override
+  public final void markMultiDeclarationElement() {
+    addProto(ByteProto.DECLARATION_MULTI_ELEMENT_MARK);
+  }
+
+  @Override
+  public final void markRule() {
+    int code;
+    code = popObject();
+
+    addProto(code);
+  }
+
+  @Override
+  public final void markString() {
+    addProto(ByteProto.VALUE_STRING_MARK);
+  }
+
+  @Override
+  public final void markUri() {
+    addProto(ByteProto.VALUE_URI_MARK);
+  }
+
+  @Override
+  public final void setRulePrefix(RuleElement... elements) {
+    if (rulePrefix == null) {
+      rulePrefix = new GrowableList<>();
+    }
+
+    for (int i = 0; i < elements.length; i++) {
+      RuleElement element;
+      element = elements[i];
+
+      rulePrefix.addWithNullMessage(element, "elements[", i, "] == null");
+    }
+  }
+
+  void addDouble(double value) {
+    doubles = DoubleArrays.copyIfNecessary(doubles, doublesLength);
+
+    doubles[doublesLength++] = value;
+  }
+
+  final String charsToString() {
+    return new String(chars, 0, charsLength);
+  }
+
+  final char[] getChars() {
+    return Arrays.copyOf(chars, charsLength);
+  }
+
+  final double[] getDoubles() {
+    return Arrays.copyOf(doubles, doublesLength);
+  }
+
+  final int getProto(int index) {
+    return protos[index];
+  }
+
+  final int[] getProtos() {
+    return Arrays.copyOf(protos, protosLength);
+  }
+
+  private void addDeclarationEnd() {
+    addProto(ByteProto.DECLARATION_END);
+  }
+
+  private void addDeclarationStart(StandardPropertyName name) {
+    addProto(name.getCode());
+    addProto(ByteProto.DECLARATION_START);
+  }
+
+  private void addDoubleProto(double value) {
+    addProto(doublesLength);
+    addDouble(value);
+  }
+
+  private void addFunctionEnd() {
+    addProto(ByteProto.FUNCTION_END);
+  }
+
+  private void addFunctionStart(StandardFunctionName name) {
+    addProto(name.getCode());
+    addProto(ByteProto.FUNCTION_START);
+  }
+
+  private void addObject(int code) {
+    objects = IntArrays.copyIfNecessary(objects, objectsLength);
+
+    objects[objectsLength++] = code;
+  }
+
+  private void addProto(int code) {
+    protos = IntArrays.copyIfNecessary(protos, protosLength);
+
+    protos[protosLength++] = code;
+  }
+
+  private void addProtoString(int code, String value) {
+    addProto(value.length());
+    addProto(charsLength);
+    addProto(code);
+
+    addString(value);
+  }
+
+  private void addString(String value) {
+    chars = CharArrays.append(chars, charsLength, value);
+
+    charsLength += value.length();
+  }
+
+  private void addValueDouble(double value) {
+    addDoubleProto(value);
+    addProto(ByteProto.VALUE_DOUBLE);
+  }
+
+  private void addValueInt(int value) {
+    addProto(value);
+    addProto(ByteProto.VALUE_INT);
+  }
+
+  private int getLastProto() {
+    return protos[protosLength - 1];
+  }
+
+  private void onCompile() {
+    addProto(ByteProto.ROOT_END);
+
+    for (int i = objectsLength - 1; i >= 0; i--) {
+      addProto(objects[i]);
+    }
+
+    addProto(ByteProto.ROOT_START);
+  }
+
+  private int popObject() {
+    return objects[--objectsLength];
+  }
+
+}

@@ -35,224 +35,215 @@ public class StyleSheetDslTest {
 
   @Test
   public void testCase00() {
-    StyleSheetDsl dsl;
-    dsl = dsl(new TestCase00());
+    var dsl = dsl(new TestCase00());
 
     testProtos(
-        dsl,
-        ByteProto.RULE_END,
-        TypeSelectors.body.getCode(),
-        ByteProto.SELECTOR_TYPE_OBJ,
-        ByteProto.RULE_START
+      dsl,
+      ByteProto.RULE_END,
+      TypeSelectors.body.getCode(),
+      ByteProto.SELECTOR_TYPE_OBJ,
+      ByteProto.RULE_START
     );
   }
 
   @Test
   public void testCase01() {
-    StyleSheetDsl dsl;
-    dsl = dsl(new TestCase01());
+    var dsl = dsl(new TestCase01());
 
     testChars(
-        dsl,
-        "myid"
+      dsl,
+      "myid"
     );
 
     testProtos(
-        dsl,
-        4, 0,
-        ByteProto.SELECTOR_ID,
-        ByteProto.RULE_END,
-        ByteProto.SELECTOR_ID_MARK,
-        ByteProto.RULE_START
+      dsl,
+      4, 0,
+      ByteProto.SELECTOR_ID,
+      ByteProto.RULE_END,
+      ByteProto.SELECTOR_ID_MARK,
+      ByteProto.RULE_START
     );
   }
 
   @Test
   public void testCase08() {
-    StyleSheetDsl dsl;
-    dsl = dsl(new TestCase08());
+    var dsl = dsl(new TestCase08());
 
     testProtos(
-        dsl,
-        ByteProto.DECLARATION_END,
-        Keywords.block.getCode(),
-        ByteProto.VALUE_KEYWORD,
-        StandardPropertyName.DISPLAY.getCode(),
-        ByteProto.DECLARATION_START,
+      dsl,
+      ByteProto.DECLARATION_END,
+      Keywords.block.getCode(),
+      ByteProto.VALUE_KEYWORD,
+      StandardPropertyName.DISPLAY.getCode(),
+      ByteProto.DECLARATION_START,
 
-        ByteProto.RULE_END,
-        ByteProto.DECLARATION_MARK,
-        ByteProto.SELECTOR_UNIVERSAL_OBJ,
-        ByteProto.RULE_START
+      ByteProto.RULE_END,
+      ByteProto.DECLARATION_MARK,
+      ByteProto.SELECTOR_UNIVERSAL_OBJ,
+      ByteProto.RULE_START
     );
   }
 
   @Test
   public void testCase09() {
-    StyleSheetDsl dsl;
-    dsl = dsl(new TestCase09());
+    var dsl = dsl(new TestCase09());
 
     testProtos(
-        dsl,
-        ByteProto.DECLARATION_END,
-        -300,
-        ByteProto.VALUE_INT,
-        StandardPropertyName.Z_INDEX.getCode(),
-        ByteProto.DECLARATION_START,
+      dsl,
+      ByteProto.DECLARATION_END,
+      -300,
+      ByteProto.VALUE_INT,
+      StandardPropertyName.Z_INDEX.getCode(),
+      ByteProto.DECLARATION_START,
 
-        ByteProto.RULE_END,
-        ByteProto.DECLARATION_MARK,
-        ByteProto.SELECTOR_UNIVERSAL_OBJ,
-        ByteProto.RULE_START
+      ByteProto.RULE_END,
+      ByteProto.DECLARATION_MARK,
+      ByteProto.SELECTOR_UNIVERSAL_OBJ,
+      ByteProto.RULE_START
     );
   }
 
   @Test
   public void testCase17() {
-    StyleSheetDsl dsl;
-    dsl = dsl(new TestCase17());
+    var dsl = dsl(new TestCase17());
 
     testProtos(
-        dsl,
-        2, ByteProto.VALUE_INT_DSL,
-        0, ByteProto.VALUE_DOUBLE_DSL,
+      dsl,
+      2, ByteProto.VALUE_INT_DSL,
+      0, ByteProto.VALUE_DOUBLE_DSL,
 
-        ByteProto.DECLARATION_END,
-        ByteProto.VALUE_DOUBLE_MARK,
-        ByteProto.VALUE_INT_MARK,
-        StandardPropertyName.FLEX.getCode(),
-        ByteProto.DECLARATION_START,
+      ByteProto.DECLARATION_END,
+      ByteProto.VALUE_DOUBLE_MARK,
+      ByteProto.VALUE_INT_MARK,
+      StandardPropertyName.FLEX.getCode(),
+      ByteProto.DECLARATION_START,
 
-        ByteProto.RULE_END,
-        ByteProto.DECLARATION_MARK,
-        ByteProto.SELECTOR_UNIVERSAL_OBJ,
-        ByteProto.RULE_START
+      ByteProto.RULE_END,
+      ByteProto.DECLARATION_MARK,
+      ByteProto.SELECTOR_UNIVERSAL_OBJ,
+      ByteProto.RULE_START
     );
   }
 
   @Test
   public void testCase25() {
-    StyleSheetDsl dsl;
-    dsl = dsl(new TestCase25());
+    var dsl = dsl(new TestCase25());
 
     testProtos(
-        dsl,
-        ByteProto.DECLARATION_END,
-        Keywords.sansSerif.getCode(),
-        ByteProto.VALUE_KEYWORD,
-        StandardPropertyName.FONT_FAMILY.getCode(),
-        ByteProto.DECLARATION_START,
+      dsl,
+      ByteProto.DECLARATION_END,
+      Keywords.sansSerif.getCode(),
+      ByteProto.VALUE_KEYWORD,
+      StandardPropertyName.FONT_FAMILY.getCode(),
+      ByteProto.DECLARATION_START,
 
-        ByteProto.DECLARATION_END,
-        5, 0,
-        ByteProto.VALUE_STRING,
-        StandardPropertyName.FONT_FAMILY.getCode(),
-        ByteProto.DECLARATION_START,
+      ByteProto.DECLARATION_END,
+      5, 0,
+      ByteProto.VALUE_STRING,
+      StandardPropertyName.FONT_FAMILY.getCode(),
+      ByteProto.DECLARATION_START,
 
-        ByteProto.DECLARATION_MULTI_END,
-        ByteProto.DECLARATION_MULTI_ELEMENT_MARK,
-        ByteProto.DECLARATION_MULTI_ELEMENT_MARK,
-        StandardPropertyName.FONT_FAMILY.getCode(),
-        ByteProto.DECLARATION_MULTI_START,
+      ByteProto.DECLARATION_MULTI_END,
+      ByteProto.DECLARATION_MULTI_ELEMENT_MARK,
+      ByteProto.DECLARATION_MULTI_ELEMENT_MARK,
+      StandardPropertyName.FONT_FAMILY.getCode(),
+      ByteProto.DECLARATION_MULTI_START,
 
-        ByteProto.RULE_END,
-        ByteProto.DECLARATION_MARK,
-        ByteProto.SELECTOR_UNIVERSAL_OBJ,
-        ByteProto.RULE_START
+      ByteProto.RULE_END,
+      ByteProto.DECLARATION_MARK,
+      ByteProto.SELECTOR_UNIVERSAL_OBJ,
+      ByteProto.RULE_START
     );
   }
 
   @Test
   public void testCase27() {
-    StyleSheetDsl dsl;
-    dsl = dsl(new TestCase27());
+    var dsl = dsl(new TestCase27());
 
     testProtos(
-        dsl,
-        100,
-        ByteProto.VALUE_PERCENTAGE_INT,
+      dsl,
+      100,
+      ByteProto.VALUE_PERCENTAGE_INT,
 
-        ByteProto.DECLARATION_END,
-        ByteProto.VALUE_PERCENTAGE_INT_MARK,
-        StandardPropertyName.WIDTH.getCode(),
-        ByteProto.DECLARATION_START,
+      ByteProto.DECLARATION_END,
+      ByteProto.VALUE_PERCENTAGE_INT_MARK,
+      StandardPropertyName.WIDTH.getCode(),
+      ByteProto.DECLARATION_START,
 
-        ByteProto.RULE_END,
-        ByteProto.DECLARATION_MARK,
-        TypeSelectors.section.getCode(),
-        ByteProto.SELECTOR_TYPE_OBJ,
-        ByteProto.RULE_START,
+      ByteProto.RULE_END,
+      ByteProto.DECLARATION_MARK,
+      TypeSelectors.section.getCode(),
+      ByteProto.SELECTOR_TYPE_OBJ,
+      ByteProto.RULE_START,
 
-        ByteProto.AT_MEDIA_END,
-        ByteProto.RULE_MARK,
-        MediaType.SCREEN.getCode(),
-        ByteProto.MEDIA_TYPE,
-        ByteProto.AT_MEDIA_START
+      ByteProto.AT_MEDIA_END,
+      ByteProto.RULE_MARK,
+      MediaType.SCREEN.getCode(),
+      ByteProto.MEDIA_TYPE,
+      ByteProto.AT_MEDIA_START
     );
   }
 
   @Test
   public void testCase32() {
-    StyleSheetDsl dsl;
-    dsl = dsl(new TestCase32());
+    var dsl = dsl(new TestCase32());
 
     testProtos(
-        dsl,
-        4, 0,
-        ByteProto.SELECTOR_CLASS,
-        ByteProto.DECLARATION_END,
-        0,
-        ByteProto.VALUE_INT,
-        StandardPropertyName.Z_INDEX.getCode(),
-        ByteProto.DECLARATION_START,
+      dsl,
+      4, 0,
+      ByteProto.SELECTOR_CLASS,
+      ByteProto.DECLARATION_END,
+      0,
+      ByteProto.VALUE_INT,
+      StandardPropertyName.Z_INDEX.getCode(),
+      ByteProto.DECLARATION_START,
 
-        ByteProto.RULE_END,
-        ByteProto.DECLARATION_MARK,
-        ByteProto.SELECTOR_CLASS_MARK,
-        ByteProto.RULE_START,
+      ByteProto.RULE_END,
+      ByteProto.DECLARATION_MARK,
+      ByteProto.SELECTOR_CLASS_MARK,
+      ByteProto.RULE_START,
 
-        3, 4,
-        ByteProto.SELECTOR_CLASS,
-        ByteProto.DECLARATION_END,
-        1,
-        ByteProto.VALUE_INT,
-        StandardPropertyName.Z_INDEX.getCode(),
-        ByteProto.DECLARATION_START,
+      3, 4,
+      ByteProto.SELECTOR_CLASS,
+      ByteProto.DECLARATION_END,
+      1,
+      ByteProto.VALUE_INT,
+      StandardPropertyName.Z_INDEX.getCode(),
+      ByteProto.DECLARATION_START,
 
-        ByteProto.RULE_END,
-        ByteProto.DECLARATION_MARK,
-        ByteProto.SELECTOR_CLASS_MARK,
-        ByteProto.RULE_START,
+      ByteProto.RULE_END,
+      ByteProto.DECLARATION_MARK,
+      ByteProto.SELECTOR_CLASS_MARK,
+      ByteProto.RULE_START,
 
-        3, 7,
-        ByteProto.SELECTOR_CLASS,
-        ByteProto.DECLARATION_END,
-        2,
-        ByteProto.VALUE_INT,
-        StandardPropertyName.Z_INDEX.getCode(),
-        ByteProto.DECLARATION_START,
+      3, 7,
+      ByteProto.SELECTOR_CLASS,
+      ByteProto.DECLARATION_END,
+      2,
+      ByteProto.VALUE_INT,
+      StandardPropertyName.Z_INDEX.getCode(),
+      ByteProto.DECLARATION_START,
 
-        ByteProto.RULE_END,
-        ByteProto.DECLARATION_MARK,
-        ByteProto.SELECTOR_CLASS_MARK,
-        ByteProto.RULE_START
+      ByteProto.RULE_END,
+      ByteProto.DECLARATION_MARK,
+      ByteProto.SELECTOR_CLASS_MARK,
+      ByteProto.RULE_START
     );
   }
 
-  private StyleSheetDsl dsl(StyleSheet sheet) {
-    StyleSheetDsl dsl;
-    dsl = new StyleSheetDsl();
+  private StyleSheetDslImpl dsl(StyleSheet sheet) {
+    var dsl = new StyleSheetDslImpl();
 
     sheet.acceptStyleSheetDsl(dsl);
 
     return dsl;
   }
 
-  private void testChars(StyleSheetDsl dsl, String expected) {
+  private void testChars(StyleSheetDslImpl dsl, String expected) {
     assertEquals(dsl.charsToString(), expected);
   }
 
-  private void testProtos(StyleSheetDsl dsl, int... expected) {
+  private void testProtos(StyleSheetDslImpl dsl, int... expected) {
     int[] result;
     result = dsl.getProtos();
 

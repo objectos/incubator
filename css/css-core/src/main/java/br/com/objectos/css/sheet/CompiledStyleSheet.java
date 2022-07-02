@@ -21,7 +21,9 @@ import java.util.Arrays;
 public class CompiledStyleSheet {
 
   private final int[] codes;
+
   private final char[] chars;
+
   private final double[] doubles;
 
   CompiledStyleSheet(int[] codes, char[] chars, double[] doubles) {
@@ -32,7 +34,8 @@ public class CompiledStyleSheet {
 
   public final <E extends Exception> void acceptCompiledStyleSheetVisitor(
       CompiledStyleSheetVisitor<E> visitor) throws E {
-    Interpreter<E> interpreter = new Interpreter<>(this, visitor);
+    var interpreter = new Interpreter<>(this, visitor);
+
     interpreter.execute();
   }
 

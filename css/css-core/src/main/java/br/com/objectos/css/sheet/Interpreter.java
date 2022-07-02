@@ -46,11 +46,13 @@ final class Interpreter<E extends Exception> implements Context.Adapter<E> {
   private int callIndex = -1;
 
   private Context<E> context;
+
   private int cursor;
 
   private boolean running;
 
   private final CompiledStyleSheet sheet;
+
   private final CompiledStyleSheetVisitor<E> visitor;
 
   Interpreter(CompiledStyleSheet sheet, CompiledStyleSheetVisitor<E> visitor) {

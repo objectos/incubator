@@ -26,7 +26,7 @@ final class Compiler {
   private int codesIndex;
   private int cursor;
 
-  private final StyleSheetDsl dsl;
+  private final StyleSheetDslImpl dsl;
   // multi stack
   private int[] multi;
 
@@ -36,7 +36,7 @@ final class Compiler {
 
   private int stackIndex = -1;
 
-  public Compiler(StyleSheetDsl dsl) {
+  public Compiler(StyleSheetDslImpl dsl) {
     this.dsl = dsl;
 
     codes = new int[1024];
@@ -109,9 +109,9 @@ final class Compiler {
     }
 
     return new CompiledStyleSheet(
-        Arrays.copyOf(codes, codesIndex),
-        dsl.getChars(),
-        dsl.getDoubles()
+      Arrays.copyOf(codes, codesIndex),
+      dsl.getChars(),
+      dsl.getDoubles()
     );
   }
 
@@ -260,8 +260,8 @@ final class Compiler {
     addCode(getProto()); // start index
     addCode(getProto()); // length
     Check.state(
-        getProto() == ByteProto.SELECTOR_ATTRIBUTE_VALUE_ELEMENT,
-        "expected ", ByteProto.SELECTOR_ATTRIBUTE_VALUE_ELEMENT
+      getProto() == ByteProto.SELECTOR_ATTRIBUTE_VALUE_ELEMENT,
+      "expected ", ByteProto.SELECTOR_ATTRIBUTE_VALUE_ELEMENT
     );
     // operator
     addCode(getProto());
