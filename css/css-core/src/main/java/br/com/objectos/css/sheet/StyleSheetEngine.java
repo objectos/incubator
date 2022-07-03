@@ -32,8 +32,9 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 import objectos.util.IntArrays;
 
-public abstract class StyleSheetEngine<E extends Exception> extends StyleSheetCompiler
-    implements Context.Adapter<E> {
+public abstract class StyleSheetEngine<E extends Exception>
+    extends StyleSheetCompiler
+    implements CompiledStyleSheetVisitor<E> {
 
   @FunctionalInterface
   private interface DoValue<X extends Exception> {
@@ -88,17 +89,14 @@ public abstract class StyleSheetEngine<E extends Exception> extends StyleSheetCo
     //context = context.visitStyleSheetEnd(this);
   }
 
-  @Override
   public final Body peekBody() {
     return bodyStack.peek();
   }
 
-  @Override
   public final Body popBody() {
     return bodyStack.pop();
   }
 
-  @Override
   public final void pushBody(Body body) {
     bodyStack.push(body);
   }
