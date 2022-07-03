@@ -18,7 +18,8 @@ package br.com.objectos.css.sheet;
 import br.com.objectos.css.sheet.GeneratedStyleSheet.MaxHeightDeclaration;
 
 final class MaxHeightDeclarationMark
-    extends AbstractMediaExpressionOrRuleElement implements MaxHeightDeclaration {
+    extends AbstractMediaExpressionOrRuleElement
+    implements AtMediaElement, MaxHeightDeclaration {
   static final MaxHeightDeclarationMark INSTANCE = new MaxHeightDeclarationMark();
 
   private MaxHeightDeclarationMark() {}

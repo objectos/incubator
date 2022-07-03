@@ -18,7 +18,7 @@ package br.com.objectos.css.sheet;
 import br.com.objectos.css.sheet.GeneratedStyleSheet.MaxWidthDeclaration;
 
 final class MaxWidthDeclarationMark
-    extends AbstractMediaExpressionOrRuleElement implements MaxWidthDeclaration {
+    extends AbstractMediaExpressionOrRuleElement implements AtMediaElement, MaxWidthDeclaration {
   static final MaxWidthDeclarationMark INSTANCE = new MaxWidthDeclarationMark();
 
   private MaxWidthDeclarationMark() {}

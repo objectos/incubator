@@ -15,11 +15,7 @@
  */
 package br.com.objectos.css.sheet;
 
-abstract class AbstractMediaExpressionOrRuleElement
-    implements
-    MediaExpression,
-    AtMediaElement,
-    RuleElement {
+abstract class AbstractMediaExpressionOrRuleElement implements MediaExpression, RuleElement {
 
   @Override
   public final void acceptRuleElementVisitor(StyleSheetDsl dsl) {

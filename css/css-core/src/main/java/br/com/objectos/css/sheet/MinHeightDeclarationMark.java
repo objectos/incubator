@@ -18,7 +18,10 @@ package br.com.objectos.css.sheet;
 import br.com.objectos.css.sheet.GeneratedStyleSheet.MinHeightDeclaration;
 
 final class MinHeightDeclarationMark
-    extends AbstractMediaExpressionOrRuleElement implements MinHeightDeclaration {
+    extends AbstractMediaExpressionOrRuleElement
+    implements
+    AtMediaElement,
+    MinHeightDeclaration {
   static final MinHeightDeclarationMark INSTANCE = new MinHeightDeclarationMark();
 
   private MinHeightDeclarationMark() {}

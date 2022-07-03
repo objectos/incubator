@@ -15,4 +15,11 @@
  */
 package br.com.objectos.css.sheet;
 
-public interface AtMediaElement {}
+public sealed interface AtMediaElement //
+permits //
+MaxHeightDeclarationMark, //
+MaxWidthDeclarationMark, //
+MinHeightDeclarationMark, //
+MinWidthDeclarationMark, //
+MediaType, //
+RuleMark {}

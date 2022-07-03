@@ -18,7 +18,7 @@ package br.com.objectos.css.sheet;
 import br.com.objectos.css.sheet.GeneratedStyleSheet.MinWidthDeclaration;
 
 final class MinWidthDeclarationMark
-    extends AbstractMediaExpressionOrRuleElement implements MinWidthDeclaration {
+    extends AbstractMediaExpressionOrRuleElement implements AtMediaElement, MinWidthDeclaration {
   static final MinWidthDeclarationMark INSTANCE = new MinWidthDeclarationMark();
 
   private MinWidthDeclarationMark() {}
