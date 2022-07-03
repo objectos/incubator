@@ -698,6 +698,20 @@ class StyleSheetVisitor implements StyleEngine {
     return Arrays.copyOf(protos, protosLength);
   }
 
+  void reset() {
+    charsLength = 0;
+
+    doublesLength = 0;
+
+    objectsLength = 0;
+
+    protosLength = 0;
+
+    if (rulePrefix != null) {
+      rulePrefix.clear();
+    }
+  }
+
   private void acceptMediaQueryElement0(AtMediaElement element) {
     // TODO use pattern matching when possible
     if (element instanceof AbstractMediaExpressionOrRuleElement) {

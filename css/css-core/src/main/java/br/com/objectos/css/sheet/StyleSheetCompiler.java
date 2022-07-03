@@ -60,6 +60,19 @@ class StyleSheetCompiler extends StyleSheetVisitor {
     }
   }
 
+  @Override
+  void reset() {
+    super.reset();
+
+    codesIndex = 0;
+
+    cursor = 0;
+
+    multiIndex = -1;
+
+    stackIndex = -1;
+  }
+
   void setJumpToSlot() {
     int returnTo = codesIndex;
     codesIndex = pop();

@@ -80,6 +80,19 @@ abstract class StyleSheetEngine<E extends Exception> extends StyleSheetCompiler
     bodyStack.push(body);
   }
 
+  @Override
+  void reset() {
+    super.reset();
+
+    bodyStack.clear();
+
+    callIndex = -1;
+
+    context = null;
+
+    running = false;
+  }
+
   private void doDeclarationStart() throws E {
     int code;
     code = getCode();

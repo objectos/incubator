@@ -17,7 +17,6 @@ package br.com.objectos.css.sheet;
 
 import static org.testng.Assert.assertEquals;
 
-import br.com.objectos.css.io.CssWriter;
 import br.com.objectos.css.sheet.ex.BackgroundImageTestCase;
 import br.com.objectos.css.sheet.ex.TestCase00;
 import br.com.objectos.css.sheet.ex.TestCase01;
@@ -56,10 +55,27 @@ import br.com.objectos.css.sheet.ex.TestCase33;
 import br.com.objectos.css.sheet.ex.TestCase34;
 import br.com.objectos.css.sheet.ex.TestCase35;
 import br.com.objectos.css.sheet.ex.TransformTestCase;
+import java.io.IOException;
 import objectos.util.UnmodifiableList;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-public class CompiledStyleSheetTest {
+public class StyleSheetTest {
+
+  private StyleSheetWriter minified;
+
+  private StyleSheetWriter pretty;
+
+  private StringBuilder out;
+
+  @BeforeClass
+  public void _beforeClass() {
+    minified = StyleSheetWriter.ofMinified();
+
+    pretty = StyleSheetWriter.ofPretty();
+
+    out = new StringBuilder();
+  }
 
   @Test
   public void backgroundImage() {
@@ -695,34 +711,33 @@ public class CompiledStyleSheetTest {
   }
 
   private String minified(String... expected) {
-    UnmodifiableList<String> parts;
-    parts = UnmodifiableList.copyOf(expected);
+    var parts = UnmodifiableList.copyOf(expected);
 
     return parts.join();
   }
 
   private String pretty(String... expected) {
-    UnmodifiableList<String> lines;
-    lines = UnmodifiableList.copyOf(expected);
+    var lines = UnmodifiableList.copyOf(expected);
 
     return lines.join("\n");
   }
 
-  private void test(StyleSheet sheet, String minified, String pretty) {
-    CompiledStyleSheet compiled;
-    compiled = sheet.compile();
+  private void test(StyleSheet sheet, String minifiedOutput, String prettyOutput) {
+    try {
+      out.setLength(0);
 
-    assertEquals(
-      CssWriter.toMinifiedString(compiled),
-      minified,
-      "MinifiedCssWriter"
-    );
+      minified.writeTo(sheet, out);
 
-    assertEquals(
-      CssWriter.toString(compiled),
-      pretty,
-      "PrettyCssWriter"
-    );
+      assertEquals(out.toString(), minifiedOutput, "MinifiedStyleSheetWriter");
+
+      out.setLength(0);
+
+      pretty.writeTo(sheet, out);
+
+      assertEquals(out.toString(), prettyOutput, "PrettyStyleSheetWriter");
+    } catch (IOException e) {
+      throw new AssertionError("StringBuilder does not throw IOException", e);
+    }
   }
 
 }
