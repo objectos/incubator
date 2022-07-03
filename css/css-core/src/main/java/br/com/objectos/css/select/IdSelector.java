@@ -30,13 +30,13 @@ public class IdSelector extends SimpleSelector implements AnyElementValue {
   }
 
   @Override
-  public final <R, P> R acceptSimpleSelectorVisitor(SimpleSelectorVisitor<R, P> visitor, P p) {
-    return visitor.visitIdSelector(this, p);
+  public final void acceptRuleElementVisitor(StyleSheetDsl dsl) {
+    throw new UnsupportedOperationException();
   }
 
   @Override
-  public final void acceptRuleElementVisitor(StyleSheetDsl dsl) {
-    dsl.addIdSelector(this);
+  public final <R, P> R acceptSimpleSelectorVisitor(SimpleSelectorVisitor<R, P> visitor, P p) {
+    return visitor.visitIdSelector(this, p);
   }
 
   @Override

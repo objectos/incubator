@@ -75,16 +75,6 @@ public abstract class AbstractStyleSheet extends GeneratedStyleSheet
     }
   }
 
-  protected final static class ThisAttributeValueElement {
-    static final ThisAttributeValueElement INSTANCE = new ThisAttributeValueElement();
-
-    private ThisAttributeValueElement() {}
-
-    final void acceptStyleSheetDsl(StyleSheetDsl dsl) {
-      dsl.markAttributeValueElement();
-    }
-  }
-
   protected final static class ThisMaxHeightDeclaration
       extends AbstractMediaExpressionOrRuleElement implements MaxHeightDeclaration {
     static final ThisMaxHeightDeclaration INSTANCE = new ThisMaxHeightDeclaration();
@@ -170,33 +160,6 @@ public abstract class AbstractStyleSheet extends GeneratedStyleSheet
     }
   }
 
-  private static class ThisAttributeSelector implements RuleElement {
-    static final ThisAttributeSelector INSTANCE = new ThisAttributeSelector();
-
-    @Override
-    public final void acceptRuleElementVisitor(StyleSheetDsl dsl) {
-      dsl.markAttributeSelector();
-    }
-  }
-
-  private static class ThisAttributeValueSelector implements RuleElement {
-    static final ThisAttributeValueSelector INSTANCE = new ThisAttributeValueSelector();
-
-    @Override
-    public final void acceptRuleElementVisitor(StyleSheetDsl dsl) {
-      dsl.markAttributeValueSelector();
-    }
-  }
-
-  private static class ThisClassSelector implements RuleElement {
-    static final ThisClassSelector INSTANCE = new ThisClassSelector();
-
-    @Override
-    public final void acceptRuleElementVisitor(StyleSheetDsl dsl) {
-      dsl.markClassSelector();
-    }
-  }
-
   private enum ThisColorType implements ColorType {
     HEX,
 
@@ -235,15 +198,6 @@ public abstract class AbstractStyleSheet extends GeneratedStyleSheet
     @Override
     public final void acceptValueMarker(Marker marker) {
       marker.markDouble();
-    }
-  }
-
-  private static class ThisIdSelector implements RuleElement {
-    static final ThisIdSelector INSTANCE = new ThisIdSelector();
-
-    @Override
-    public final void acceptRuleElementVisitor(StyleSheetDsl dsl) {
-      dsl.markIdSelector();
     }
   }
 
@@ -383,15 +337,15 @@ public abstract class AbstractStyleSheet extends GeneratedStyleSheet
   protected final RuleElement attr(String name) {
     dsl.createAttributeSelector(name);
 
-    return ThisAttributeSelector.INSTANCE;
+    return AttributeSelectorMark.INSTANCE;
   }
 
-  protected final ThisAttributeValueSelector attr(String name, ThisAttributeValueElement element) {
-    element.acceptStyleSheetDsl(dsl);
+  protected final AttributeValueSelectorMark attr(String name, AttributeValueElementMark element) {
+    dsl.markAttributeValueElement();
 
     dsl.createAttributeValueSelector(name);
 
-    return ThisAttributeValueSelector.INSTANCE;
+    return AttributeValueSelectorMark.INSTANCE;
   }
 
   protected final void clearRulePrefix() {
@@ -401,15 +355,15 @@ public abstract class AbstractStyleSheet extends GeneratedStyleSheet
   protected final RuleElement cn(String className) {
     dsl.createClassSelector(className);
 
-    return ThisClassSelector.INSTANCE;
+    return ClassSelectorMark.INSTANCE;
   }
 
   protected abstract void definition();
 
-  protected final ThisAttributeValueElement eq(String value) {
+  protected final AttributeValueElementMark eq(String value) {
     dsl.createAttributeValueElement(AttributeValueOperator.EQUALS, value);
 
-    return ThisAttributeValueElement.INSTANCE;
+    return AttributeValueElementMark.INSTANCE;
   }
 
   protected final Combinator gt() {
@@ -425,7 +379,7 @@ public abstract class AbstractStyleSheet extends GeneratedStyleSheet
   protected final RuleElement id(String id) {
     dsl.createIdSelector(id);
 
-    return ThisIdSelector.INSTANCE;
+    return IdSelectorMark.INSTANCE;
   }
 
   protected final void install(StyleSheet sheet) {
@@ -558,10 +512,10 @@ public abstract class AbstractStyleSheet extends GeneratedStyleSheet
     return Combinator.DESCENDANT;
   }
 
-  protected final ThisAttributeValueElement startsWith(String value) {
+  protected final AttributeValueElementMark startsWith(String value) {
     dsl.createAttributeValueElement(AttributeValueOperator.STARTS_WITH, value);
 
-    return ThisAttributeValueElement.INSTANCE;
+    return AttributeValueElementMark.INSTANCE;
   }
 
   protected final StyleType style(RuleElement... elements) {

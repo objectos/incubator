@@ -40,7 +40,7 @@ public final class UniversalSelector extends Selector
 
   @Override
   public final void acceptRuleElementVisitor(StyleSheetDsl dsl) {
-    dsl.addUniversalSelector(this);
+    throw new UnsupportedOperationException();
   }
 
   @Override

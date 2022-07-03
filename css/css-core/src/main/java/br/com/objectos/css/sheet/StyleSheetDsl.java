@@ -18,13 +18,6 @@ package br.com.objectos.css.sheet;
 import br.com.objectos.css.function.StandardFunctionName;
 import br.com.objectos.css.property.StandardPropertyName;
 import br.com.objectos.css.select.AttributeValueOperator;
-import br.com.objectos.css.select.ClassSelector;
-import br.com.objectos.css.select.Combinator;
-import br.com.objectos.css.select.IdSelector;
-import br.com.objectos.css.select.PseudoClassSelector;
-import br.com.objectos.css.select.PseudoElementSelector;
-import br.com.objectos.css.select.TypeSelector;
-import br.com.objectos.css.select.UniversalSelector;
 import br.com.objectos.css.type.Creator;
 import br.com.objectos.css.type.Marker;
 import br.com.objectos.css.type.Value;
@@ -44,10 +37,6 @@ public interface StyleSheetDsl extends Creator, Marker {
   }
 
   void addAtMedia(AtMediaElement... elements);
-
-  void addClassSelector(ClassSelector selector);
-
-  void addCombinator(Combinator combinator);
 
   void addDeclaration(StandardPropertyName name, double value);
 
@@ -72,21 +61,11 @@ public interface StyleSheetDsl extends Creator, Marker {
 
   void addFunction(StandardFunctionName name, Value v1);
 
-  void addIdSelector(IdSelector selector);
-
   void addMediaType(MediaType type);
-
-  void addPseudoClassSelector(PseudoClassSelector selector);
-
-  void addPseudoElementSelector(PseudoElementSelector selector);
 
   void addRule(RuleElement... elements);
 
   void addRule(UnmodifiableList<RuleElement> elements);
-
-  void addTypeSelector(TypeSelector selector);
-
-  void addUniversalSelector(UniversalSelector selector);
 
   void clearRulePrefix();
 
@@ -100,17 +79,9 @@ public interface StyleSheetDsl extends Creator, Marker {
 
   void createIdSelector(String id);
 
-  void markAttributeSelector();
-
   void markAttributeValueElement();
 
-  void markAttributeValueSelector();
-
-  void markClassSelector();
-
   void markDeclaration();
-
-  void markIdSelector();
 
   void markMultiDeclarationElement();
 

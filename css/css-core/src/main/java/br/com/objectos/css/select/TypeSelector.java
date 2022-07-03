@@ -28,13 +28,13 @@ public class TypeSelector extends SimpleSelector {
   }
 
   @Override
-  public final <R, P> R acceptSimpleSelectorVisitor(SimpleSelectorVisitor<R, P> visitor, P p) {
-    return visitor.visitTypeSelector(this, p);
+  public final void acceptRuleElementVisitor(StyleSheetDsl dsl) {
+    throw new UnsupportedOperationException();
   }
 
   @Override
-  public final void acceptRuleElementVisitor(StyleSheetDsl dsl) {
-    dsl.addTypeSelector(this);
+  public final <R, P> R acceptSimpleSelectorVisitor(SimpleSelectorVisitor<R, P> visitor, P p) {
+    return visitor.visitTypeSelector(this, p);
   }
 
   @Override
@@ -50,6 +50,10 @@ public class TypeSelector extends SimpleSelector {
     return code;
   }
 
+  public final String getName() {
+    return name;
+  }
+
   @Override
   public final int hashCode() {
     return code;
@@ -60,10 +64,6 @@ public class TypeSelector extends SimpleSelector {
     return element.hasName(name);
   }
 
-  public final String getName() {
-    return name;
-  }
-
   @Override
   public final String toString() {
     return name;
@@ -72,8 +72,8 @@ public class TypeSelector extends SimpleSelector {
   @Override
   final void uncheckedAddTypeSelector(TypeSelector selector) {
     throw InvalidSelectorException.get(
-        "Cannot append type selector '%s' to another type selector '%s'",
-        selector, this
+      "Cannot append type selector '%s' to another type selector '%s'",
+      selector, this
     );
   }
 

@@ -39,13 +39,7 @@ public class AttributeValueSelector extends SimpleSelector {
 
   @Override
   public final void acceptRuleElementVisitor(StyleSheetDsl dsl) {
-    dsl.createAttributeValueElement(operator, value);
-
-    dsl.markAttributeValueElement();
-
-    dsl.createAttributeValueSelector(previous.name());
-
-    dsl.markAttributeValueSelector();
+    throw new UnsupportedOperationException();
   }
 
   @Override

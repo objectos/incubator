@@ -18,7 +18,9 @@ package br.com.objectos.css.sheet;
 import br.com.objectos.css.function.StandardFunctionName;
 import br.com.objectos.css.keyword.StandardKeyword;
 import br.com.objectos.css.property.StandardPropertyName;
+import br.com.objectos.css.select.AttributeSelector;
 import br.com.objectos.css.select.AttributeValueOperator;
+import br.com.objectos.css.select.AttributeValueSelector;
 import br.com.objectos.css.select.ClassSelector;
 import br.com.objectos.css.select.Combinator;
 import br.com.objectos.css.select.IdSelector;
@@ -89,23 +91,9 @@ final class StyleSheetDslImpl implements StyleSheetDsl {
   }
 
   @Override
-  public final void addClassSelector(ClassSelector selector) {
-    addProtoString(
-      ByteProto.SELECTOR_CLASS_OBJ,
-      selector.className()
-    );
-  }
-
-  @Override
   public final void addColor(ColorName color) {
     addProto(color.getCode());
     addProto(ByteProto.VALUE_COLOR_NAME);
-  }
-
-  @Override
-  public final void addCombinator(Combinator combinator) {
-    addProto(combinator.getCode());
-    addProto(ByteProto.SELECTOR_COMBINATOR);
   }
 
   @Override
@@ -298,14 +286,6 @@ final class StyleSheetDslImpl implements StyleSheetDsl {
   }
 
   @Override
-  public final void addIdSelector(IdSelector selector) {
-    addProtoString(
-      ByteProto.SELECTOR_ID_OBJ,
-      selector.id()
-    );
-  }
-
-  @Override
   public final void addKeyword(StandardKeyword keyword) {
     addProto(keyword.getCode());
     addProto(ByteProto.VALUE_KEYWORD);
@@ -315,18 +295,6 @@ final class StyleSheetDslImpl implements StyleSheetDsl {
   public final void addMediaType(MediaType type) {
     addProto(type.getCode());
     addProto(ByteProto.MEDIA_TYPE);
-  }
-
-  @Override
-  public final void addPseudoClassSelector(PseudoClassSelector selector) {
-    addProto(selector.getCode());
-    addProto(ByteProto.SELECTOR_PSEUDO_CLASS_OBJ);
-  }
-
-  @Override
-  public final void addPseudoElementSelector(PseudoElementSelector selector) {
-    addProto(selector.getCode());
-    addProto(ByteProto.SELECTOR_PSEUDO_ELEMENT_OBJ);
   }
 
   @Override
@@ -343,7 +311,7 @@ final class StyleSheetDslImpl implements StyleSheetDsl {
         throw new NullPointerException("elements[" + i + "] == null");
       }
 
-      element.acceptRuleElementVisitor(this);
+      acceptRuleElement0(element);
     }
 
     if (rulePrefix != null) {
@@ -351,7 +319,7 @@ final class StyleSheetDslImpl implements StyleSheetDsl {
         RuleElement element;
         element = rulePrefix.get(i);
 
-        element.acceptRuleElementVisitor(this);
+        acceptRuleElement0(element);
       }
     }
 
@@ -372,22 +340,11 @@ final class StyleSheetDslImpl implements StyleSheetDsl {
         throw new NullPointerException("elements[" + i + "] == null");
       }
 
-      element.acceptRuleElementVisitor(this);
+      acceptRuleElement0(element);
     }
 
     addProto(ByteProto.RULE_START);
     addObject(ByteProto.RULE_MARK);
-  }
-
-  @Override
-  public final void addTypeSelector(TypeSelector selector) {
-    addProto(selector.getCode());
-    addProto(ByteProto.SELECTOR_TYPE_OBJ);
-  }
-
-  @Override
-  public final void addUniversalSelector(UniversalSelector selector) {
-    addProto(ByteProto.SELECTOR_UNIVERSAL_OBJ);
   }
 
   @Override
@@ -607,27 +564,12 @@ final class StyleSheetDslImpl implements StyleSheetDsl {
   }
 
   @Override
-  public final void markAttributeSelector() {
-    addProto(ByteProto.SELECTOR_ATTRIBUTE_MARK);
-  }
-
-  @Override
   public final void markAttributeValueElement() {
     int proto = getLastProto();
     Check.state(
       proto == ByteProto.SELECTOR_ATTRIBUTE_VALUE_ELEMENT,
       "not ", ByteProto.SELECTOR_ATTRIBUTE_VALUE_ELEMENT
     );
-  }
-
-  @Override
-  public final void markAttributeValueSelector() {
-    addProto(ByteProto.SELECTOR_ATTRIBUTE_VALUE_MARK);
-  }
-
-  @Override
-  public final void markClassSelector() {
-    addProto(ByteProto.SELECTOR_CLASS_MARK);
   }
 
   @Override
@@ -691,7 +633,6 @@ final class StyleSheetDslImpl implements StyleSheetDsl {
     addProto(ByteProto.VALUE_FUNCTION_MARK);
   }
 
-  @Override
   public final void markIdSelector() {
     addProto(ByteProto.SELECTOR_ID_MARK);
   }
@@ -782,6 +723,59 @@ final class StyleSheetDslImpl implements StyleSheetDsl {
 
   final int[] getProtos() {
     return Arrays.copyOf(protos, protosLength);
+  }
+
+  private void acceptRuleElement0(RuleElement element) {
+    // TODO use pattern matching when possible
+    if (element instanceof AttributeSelector sel) {
+      createAttributeSelector(sel.name());
+
+      addProto(ByteProto.SELECTOR_ATTRIBUTE_MARK);
+    } else if (element instanceof AttributeSelectorMark) {
+      addProto(ByteProto.SELECTOR_ATTRIBUTE_MARK);
+    } else if (element instanceof AttributeValueSelector sel) {
+      createAttributeValueElement(sel.operator(), sel.value());
+
+      markAttributeValueElement();
+
+      var attribute = sel.attribute();
+
+      createAttributeValueSelector(attribute.name());
+
+      addProto(ByteProto.SELECTOR_ATTRIBUTE_VALUE_MARK);
+    } else if (element instanceof AttributeValueSelectorMark) {
+      addProto(ByteProto.SELECTOR_ATTRIBUTE_VALUE_MARK);
+    } else if (element instanceof ClassSelector sel) {
+      addProtoString(
+        ByteProto.SELECTOR_CLASS_OBJ,
+        sel.className()
+      );
+    } else if (element instanceof ClassSelectorMark) {
+      addProto(ByteProto.SELECTOR_CLASS_MARK);
+    } else if (element instanceof Combinator c) {
+      addProto(c.getCode());
+      addProto(ByteProto.SELECTOR_COMBINATOR);
+    } else if (element instanceof IdSelector sel) {
+      addProtoString(
+        ByteProto.SELECTOR_ID_OBJ,
+        sel.id()
+      );
+    } else if (element instanceof IdSelectorMark) {
+      addProto(ByteProto.SELECTOR_ID_MARK);
+    } else if (element instanceof PseudoClassSelector sel) {
+      addProto(sel.getCode());
+      addProto(ByteProto.SELECTOR_PSEUDO_CLASS_OBJ);
+    } else if (element instanceof PseudoElementSelector sel) {
+      addProto(sel.getCode());
+      addProto(ByteProto.SELECTOR_PSEUDO_ELEMENT_OBJ);
+    } else if (element instanceof TypeSelector sel) {
+      addProto(sel.getCode());
+      addProto(ByteProto.SELECTOR_TYPE_OBJ);
+    } else if (element instanceof UniversalSelector) {
+      addProto(ByteProto.SELECTOR_UNIVERSAL_OBJ);
+    } else {
+      element.acceptRuleElementVisitor(this);
+    }
   }
 
   private void addDeclarationEnd() {

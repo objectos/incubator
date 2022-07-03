@@ -73,7 +73,7 @@ public enum Combinator implements SelectorElement, IsTerminal {
 
   @Override
   public final void acceptRuleElementVisitor(StyleSheetDsl dsl) {
-    dsl.addCombinator(this);
+    throw new UnsupportedOperationException();
   }
 
   @Override

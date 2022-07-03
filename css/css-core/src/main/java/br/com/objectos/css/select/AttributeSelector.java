@@ -27,8 +27,7 @@ public class AttributeSelector extends SimpleSelector {
 
   @Override
   public final void acceptRuleElementVisitor(StyleSheetDsl dsl) {
-    dsl.createAttributeSelector(name);
-    dsl.markAttributeSelector();
+    throw new UnsupportedOperationException();
   }
 
   @Override

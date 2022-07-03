@@ -28,13 +28,13 @@ public class PseudoElementSelector extends SimpleSelector {
   }
 
   @Override
-  public final <R, P> R acceptSimpleSelectorVisitor(SimpleSelectorVisitor<R, P> visitor, P p) {
-    return visitor.visitPseudoElementSelector(this, p);
+  public final void acceptRuleElementVisitor(StyleSheetDsl dsl) {
+    throw new UnsupportedOperationException();
   }
 
   @Override
-  public final void acceptRuleElementVisitor(StyleSheetDsl dsl) {
-    dsl.addPseudoElementSelector(this);
+  public final <R, P> R acceptSimpleSelectorVisitor(SimpleSelectorVisitor<R, P> visitor, P p) {
+    return visitor.visitPseudoElementSelector(this, p);
   }
 
   @Override
