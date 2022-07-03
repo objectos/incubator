@@ -79,8 +79,6 @@ public interface StyleSheetDsl extends Creator, Marker {
 
   void markAttributeValueElement();
 
-  void markMultiDeclarationElement();
-
   void setRulePrefix(RuleElement... elements);
 
 }

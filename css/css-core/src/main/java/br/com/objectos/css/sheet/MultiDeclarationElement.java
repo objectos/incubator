@@ -15,10 +15,4 @@
  */
 package br.com.objectos.css.sheet;
 
-public interface MultiDeclarationElement
-    extends
-    Declaration {
-
-  void markMultiDeclarationElement(StyleSheetDsl dsl);
-
-}
+public interface MultiDeclarationElement extends RuleElement {}

@@ -129,7 +129,7 @@ final class StyleSheetDslImpl implements StyleSheetDsl {
         throw new NullPointerException("elements[" + i + "] == null");
       }
 
-      element.markMultiDeclarationElement(this);
+      addProto(ByteProto.DECLARATION_MULTI_ELEMENT_MARK);
     }
 
     addProto(name.getCode());
@@ -649,11 +649,6 @@ final class StyleSheetDslImpl implements StyleSheetDsl {
   @Override
   public final void markKeyword() {
     addProto(ByteProto.VALUE_KEYWORD_CUSTOM_MARK);
-  }
-
-  @Override
-  public final void markMultiDeclarationElement() {
-    addProto(ByteProto.DECLARATION_MULTI_ELEMENT_MARK);
   }
 
   @Override

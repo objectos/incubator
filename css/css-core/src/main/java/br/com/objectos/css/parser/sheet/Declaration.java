@@ -25,14 +25,7 @@ import java.util.List;
 abstract class Declaration implements IsNonTerminal, br.com.objectos.css.sheet.Declaration {
 
   private enum ThisMultiDeclarationElement implements MultiDeclarationElement {
-
     INSTANCE;
-
-    @Override
-    public final void markMultiDeclarationElement(StyleSheetDsl dsl) {
-      dsl.markMultiDeclarationElement();
-    }
-
   }
 
   final StandardPropertyName propertyName;
