@@ -15,4 +15,11 @@
  */
 package br.com.objectos.css.sheet;
 
-public interface MediaExpression {}
+import br.com.objectos.css.sheet.GeneratedStyleSheet.MaxWidthDeclaration;
+
+final class MaxWidthDeclarationMark
+    extends AbstractMediaExpressionOrRuleElement implements MaxWidthDeclaration {
+  static final MaxWidthDeclarationMark INSTANCE = new MaxWidthDeclarationMark();
+
+  private MaxWidthDeclarationMark() {}
+}

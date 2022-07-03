@@ -15,4 +15,11 @@
  */
 package br.com.objectos.css.sheet;
 
-public interface MediaExpression {}
+import br.com.objectos.css.sheet.GeneratedStyleSheet.MinWidthDeclaration;
+
+final class MinWidthDeclarationMark
+    extends AbstractMediaExpressionOrRuleElement implements MinWidthDeclaration {
+  static final MinWidthDeclarationMark INSTANCE = new MinWidthDeclarationMark();
+
+  private MinWidthDeclarationMark() {}
+}

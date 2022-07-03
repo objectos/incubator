@@ -15,4 +15,11 @@
  */
 package br.com.objectos.css.sheet;
 
-public interface MediaExpression {}
+import br.com.objectos.css.sheet.GeneratedStyleSheet.MaxHeightDeclaration;
+
+final class MaxHeightDeclarationMark
+    extends AbstractMediaExpressionOrRuleElement implements MaxHeightDeclaration {
+  static final MaxHeightDeclarationMark INSTANCE = new MaxHeightDeclarationMark();
+
+  private MaxHeightDeclarationMark() {}
+}

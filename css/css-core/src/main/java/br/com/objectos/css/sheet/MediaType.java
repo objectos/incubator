@@ -26,6 +26,12 @@ public enum MediaType implements AtMediaElement, FrameworkAtMediaElement, MediaQ
 
   PRINT;
 
+  public interface Visitor {
+
+    void visitMediaType(MediaType type);
+
+  }
+
   private static final MediaType[] ARRAY = values();
 
   private final String name = name().toLowerCase(Locale.US);
@@ -42,11 +48,6 @@ public enum MediaType implements AtMediaElement, FrameworkAtMediaElement, MediaQ
     }
   }
 
-  @Override
-  public final void acceptMediaQueryElementVisitor(StyleSheetDsl dsl) {
-    dsl.addMediaType(this);
-  }
-
   public final int getCode() {
     return ordinal();
   }
@@ -57,12 +58,6 @@ public enum MediaType implements AtMediaElement, FrameworkAtMediaElement, MediaQ
 
   public final boolean isAll() {
     return this == ALL;
-  }
-
-  public interface Visitor {
-
-    void visitMediaType(MediaType type);
-
   }
 
 }

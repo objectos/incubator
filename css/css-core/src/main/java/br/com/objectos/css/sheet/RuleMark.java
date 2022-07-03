@@ -15,4 +15,6 @@
  */
 package br.com.objectos.css.sheet;
 
-public interface MediaExpression {}
+enum RuleMark implements AtMediaElement {
+  INSTANCE;
+}

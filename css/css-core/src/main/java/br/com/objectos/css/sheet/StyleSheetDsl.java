@@ -61,8 +61,6 @@ public interface StyleSheetDsl extends Creator, Marker {
 
   void addFunction(StandardFunctionName name, Value v1);
 
-  void addMediaType(MediaType type);
-
   void addRule(RuleElement... elements);
 
   void addRule(UnmodifiableList<RuleElement> elements);
@@ -84,8 +82,6 @@ public interface StyleSheetDsl extends Creator, Marker {
   void markDeclaration();
 
   void markMultiDeclarationElement();
-
-  void markRule();
 
   void setRulePrefix(RuleElement... elements);
 

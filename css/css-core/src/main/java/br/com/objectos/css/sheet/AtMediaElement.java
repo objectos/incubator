@@ -15,8 +15,4 @@
  */
 package br.com.objectos.css.sheet;
 
-public interface AtMediaElement {
-
-  void acceptMediaQueryElementVisitor(StyleSheetDsl dsl);
-
-}
+public interface AtMediaElement {}

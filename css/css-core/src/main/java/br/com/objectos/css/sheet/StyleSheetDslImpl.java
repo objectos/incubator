@@ -82,7 +82,7 @@ final class StyleSheetDslImpl implements StyleSheetDsl {
         throw new NullPointerException("elements[" + i + "] == null");
       }
 
-      element.acceptMediaQueryElementVisitor(this);
+      acceptMediaQueryElement0(element);
     }
 
     addProto(ByteProto.AT_MEDIA_START);
@@ -289,12 +289,6 @@ final class StyleSheetDslImpl implements StyleSheetDsl {
   public final void addKeyword(StandardKeyword keyword) {
     addProto(keyword.getCode());
     addProto(ByteProto.VALUE_KEYWORD);
-  }
-
-  @Override
-  public final void addMediaType(MediaType type) {
-    addProto(type.getCode());
-    addProto(ByteProto.MEDIA_TYPE);
   }
 
   @Override
@@ -668,14 +662,6 @@ final class StyleSheetDslImpl implements StyleSheetDsl {
   }
 
   @Override
-  public final void markRule() {
-    int code;
-    code = popObject();
-
-    addProto(code);
-  }
-
-  @Override
   public final void markString() {
     addProto(ByteProto.VALUE_STRING_MARK);
   }
@@ -723,6 +709,24 @@ final class StyleSheetDslImpl implements StyleSheetDsl {
 
   final int[] getProtos() {
     return Arrays.copyOf(protos, protosLength);
+  }
+
+  private void acceptMediaQueryElement0(AtMediaElement element) {
+    // TODO use pattern matching when possible
+    if (element instanceof AbstractMediaExpressionOrRuleElement) {
+      addProto(ByteProto.DECLARATION_MARK);
+    } else if (element instanceof MediaType mt) {
+      addProto(mt.getCode());
+      addProto(ByteProto.MEDIA_TYPE);
+    } else if (element instanceof RuleMark) {
+      var code = popObject();
+
+      addProto(code);
+    } else {
+      var type = element.getClass();
+
+      throw new AssertionError("Unexpected implementation: " + type);
+    }
   }
 
   private void acceptRuleElement0(RuleElement element) {

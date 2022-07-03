@@ -64,61 +64,6 @@ public abstract class AbstractStyleSheet extends GeneratedStyleSheet
     }
   }
 
-  protected final static class StyleType implements AtMediaElement {
-    static final StyleType INSTANCE = new StyleType();
-
-    private StyleType() {}
-
-    @Override
-    public final void acceptMediaQueryElementVisitor(StyleSheetDsl dsl) {
-      dsl.markRule();
-    }
-  }
-
-  protected final static class ThisMaxHeightDeclaration
-      extends AbstractMediaExpressionOrRuleElement implements MaxHeightDeclaration {
-    static final ThisMaxHeightDeclaration INSTANCE = new ThisMaxHeightDeclaration();
-
-    private ThisMaxHeightDeclaration() {}
-  }
-
-  protected final static class ThisMaxWidthDeclaration
-      extends AbstractMediaExpressionOrRuleElement implements MaxWidthDeclaration {
-    static final ThisMaxWidthDeclaration INSTANCE = new ThisMaxWidthDeclaration();
-
-    private ThisMaxWidthDeclaration() {}
-  }
-
-  protected final static class ThisMinHeightDeclaration
-      extends AbstractMediaExpressionOrRuleElement implements MinHeightDeclaration {
-    static final ThisMinHeightDeclaration INSTANCE = new ThisMinHeightDeclaration();
-
-    private ThisMinHeightDeclaration() {}
-  }
-
-  protected final static class ThisMinWidthDeclaration
-      extends AbstractMediaExpressionOrRuleElement implements MinWidthDeclaration {
-    static final ThisMinWidthDeclaration INSTANCE = new ThisMinWidthDeclaration();
-
-    private ThisMinWidthDeclaration() {}
-  }
-
-  private abstract static class AbstractMediaExpressionOrRuleElement
-      implements
-      MediaExpression,
-      AtMediaElement,
-      RuleElement {
-    @Override
-    public final void acceptMediaQueryElementVisitor(StyleSheetDsl dsl) {
-      dsl.markDeclaration();
-    }
-
-    @Override
-    public final void acceptRuleElementVisitor(StyleSheetDsl dsl) {
-      dsl.markDeclaration();
-    }
-  }
-
   private static class ThisAngleTypeDouble extends ThisValue implements AngleType {
     static final AngleType INSTANCE = new ThisAngleTypeDouble();
 
@@ -417,17 +362,17 @@ public abstract class AbstractStyleSheet extends GeneratedStyleSheet
   }
 
   @Override
-  protected final ThisMaxHeightDeclaration maxHeight(LengthType length) {
+  protected final MaxHeightDeclarationMark maxHeight(LengthType length) {
     dsl.addDeclaration(StandardPropertyName.MAX_HEIGHT, length);
 
-    return ThisMaxHeightDeclaration.INSTANCE;
+    return MaxHeightDeclarationMark.INSTANCE;
   }
 
   @Override
-  protected final ThisMaxWidthDeclaration maxWidth(LengthType length) {
+  protected final MaxWidthDeclarationMark maxWidth(LengthType length) {
     dsl.addDeclaration(StandardPropertyName.MAX_WIDTH, length);
 
-    return ThisMaxWidthDeclaration.INSTANCE;
+    return MaxWidthDeclarationMark.INSTANCE;
   }
 
   protected final void media(AtMediaElement... elements) {
@@ -435,17 +380,17 @@ public abstract class AbstractStyleSheet extends GeneratedStyleSheet
   }
 
   @Override
-  protected final ThisMinHeightDeclaration minHeight(LengthType length) {
+  protected final MinHeightDeclarationMark minHeight(LengthType length) {
     dsl.addDeclaration(StandardPropertyName.MIN_HEIGHT, length);
 
-    return ThisMinHeightDeclaration.INSTANCE;
+    return MinHeightDeclarationMark.INSTANCE;
   }
 
   @Override
-  protected final ThisMinWidthDeclaration minWidth(LengthType length) {
+  protected final MinWidthDeclarationMark minWidth(LengthType length) {
     dsl.addDeclaration(StandardPropertyName.MIN_WIDTH, length);
 
-    return ThisMinWidthDeclaration.INSTANCE;
+    return MinWidthDeclarationMark.INSTANCE;
   }
 
   protected final Combinator or() {
@@ -518,10 +463,10 @@ public abstract class AbstractStyleSheet extends GeneratedStyleSheet
     return AttributeValueElementMark.INSTANCE;
   }
 
-  protected final StyleType style(RuleElement... elements) {
+  protected final RuleMark style(RuleElement... elements) {
     addRule(elements);
 
-    return StyleType.INSTANCE;
+    return RuleMark.INSTANCE;
   }
 
   protected final Combinator tilde() {
