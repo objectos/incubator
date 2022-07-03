@@ -198,10 +198,7 @@ class StyleSheetCompiler extends StyleSheetVisitor {
     int startIndex;
     startIndex = getProto();
 
-    int length;
-    length = getProto();
-
-    addMarked(startIndex, length);
+    addMarked(startIndex);
   }
 
   private void doMediaEnd() {
@@ -259,7 +256,6 @@ class StyleSheetCompiler extends StyleSheetVisitor {
     addCode(ByteCode.SELECTOR_ATTRIBUTE);
     pushCode();
     addCode(0); // start index
-    addCode(0); // length
   }
 
   private void doSelectorAttributeValue() {
@@ -267,7 +263,6 @@ class StyleSheetCompiler extends StyleSheetVisitor {
 
     // name
     addCode(getProto()); // start index
-    addCode(getProto()); // length
     Check.state(
       getProto() == ByteProto.SELECTOR_ATTRIBUTE_VALUE_ELEMENT,
       "expected ", ByteProto.SELECTOR_ATTRIBUTE_VALUE_ELEMENT
@@ -276,7 +271,6 @@ class StyleSheetCompiler extends StyleSheetVisitor {
     addCode(getProto());
     // value
     addCode(getProto()); // start index
-    addCode(getProto()); // length
 
     setCode(returnTo);
   }
@@ -286,12 +280,10 @@ class StyleSheetCompiler extends StyleSheetVisitor {
     pushCode();
     // name
     addCode(0); // start index
-    addCode(0); // length
     // operator
     addCode(0);
     // value
     addCode(0); // start index
-    addCode(0); // length
   }
 
   private void doSelectorClass() {
@@ -302,13 +294,11 @@ class StyleSheetCompiler extends StyleSheetVisitor {
     addCode(ByteCode.SELECTOR_CLASS);
     pushCode();
     addCode(0); // start index
-    addCode(0); // length
   }
 
   private void doSelectorClassObj() {
     addCode(ByteCode.SELECTOR_CLASS);
     addCode(getProto()); // start index
-    addCode(getProto()); // length
   }
 
   private void doSelectorCombinator() {
@@ -324,13 +314,11 @@ class StyleSheetCompiler extends StyleSheetVisitor {
     addCode(ByteCode.SELECTOR_ID);
     pushCode();
     addCode(0); // start index
-    addCode(0); // length
   }
 
   private void doSelectorIdObj() {
     addCode(ByteCode.SELECTOR_ID);
     addCode(getProto()); // start index
-    addCode(getProto()); // length
   }
 
   private void doSelectorPseudoClassObj() {
@@ -394,7 +382,6 @@ class StyleSheetCompiler extends StyleSheetVisitor {
     addCode(ByteCode.VALUE_COLOR_HEX);
     pushCode();
     addCode(0); // start index
-    addCode(0); // length
   }
 
   private void doValueColorNamed() {
@@ -457,7 +444,6 @@ class StyleSheetCompiler extends StyleSheetVisitor {
     addCode(ByteCode.VALUE_KEYWORD_CUSTOM);
     pushCode();
     addCode(0); // start index
-    addCode(0); // length
   }
 
   private void doValueLengthDouble() {
@@ -621,7 +607,6 @@ class StyleSheetCompiler extends StyleSheetVisitor {
   private void doValueString() {
     addCode(ByteCode.VALUE_STRING);
     addCode(getProto()); // start index
-    addCode(getProto()); // length
   }
 
   private void doValueStringDsl() {
@@ -632,7 +617,6 @@ class StyleSheetCompiler extends StyleSheetVisitor {
     addCode(ByteCode.VALUE_STRING);
     pushCode();
     addCode(0); // start index
-    addCode(0); // length
   }
 
   private void doValueUri() {
@@ -643,7 +627,6 @@ class StyleSheetCompiler extends StyleSheetVisitor {
     addCode(ByteCode.VALUE_URI);
     pushCode();
     addCode(0); // start index
-    addCode(0); // length
   }
 
   private int getProto() {

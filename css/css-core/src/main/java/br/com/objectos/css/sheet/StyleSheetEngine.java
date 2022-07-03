@@ -627,11 +627,11 @@ public abstract class StyleSheetEngine<E extends Exception> extends StyleSheetCo
   }
 
   private String getString() {
-    return getString(getCode(), getCode());
+    return getString(getCode());
   }
 
-  private String getString(int index, int length) {
-    return new String(chars, index, length);
+  private String getString(int index) {
+    return strings.get(index);
   }
 
   private int popCall() {

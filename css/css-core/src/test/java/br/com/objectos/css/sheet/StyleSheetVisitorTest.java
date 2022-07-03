@@ -62,7 +62,7 @@ public class StyleSheetVisitorTest {
     );
 
     testProtos(
-      4, 0,
+      0,
       ByteProto.SELECTOR_ID,
       ByteProto.RULE_END,
       ByteProto.SELECTOR_ID_MARK,
@@ -139,7 +139,7 @@ public class StyleSheetVisitorTest {
       ByteProto.DECLARATION_START,
 
       ByteProto.DECLARATION_END,
-      5, 0,
+      0,
       ByteProto.VALUE_STRING,
       StandardPropertyName.FONT_FAMILY.getCode(),
       ByteProto.DECLARATION_START,
@@ -189,7 +189,7 @@ public class StyleSheetVisitorTest {
     dsl(new TestCase32());
 
     testProtos(
-      4, 0,
+      0,
       ByteProto.SELECTOR_CLASS,
       ByteProto.DECLARATION_END,
       0,
@@ -202,7 +202,7 @@ public class StyleSheetVisitorTest {
       ByteProto.SELECTOR_CLASS_MARK,
       ByteProto.RULE_START,
 
-      3, 4,
+      1,
       ByteProto.SELECTOR_CLASS,
       ByteProto.DECLARATION_END,
       1,
@@ -215,7 +215,7 @@ public class StyleSheetVisitorTest {
       ByteProto.SELECTOR_CLASS_MARK,
       ByteProto.RULE_START,
 
-      3, 7,
+      2,
       ByteProto.SELECTOR_CLASS,
       ByteProto.DECLARATION_END,
       2,
@@ -237,7 +237,7 @@ public class StyleSheetVisitorTest {
   }
 
   private void testChars(String expected) {
-    assertEquals(visitor.charsToString(), expected);
+    assertEquals(visitor.strings.join(), expected);
   }
 
   private void testProtos(int... expected) {

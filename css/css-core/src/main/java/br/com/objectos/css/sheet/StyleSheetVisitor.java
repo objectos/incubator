@@ -36,16 +36,12 @@ import br.com.objectos.css.type.LengthUnit;
 import br.com.objectos.css.type.Value;
 import java.util.Arrays;
 import objectos.lang.Check;
-import objectos.util.CharArrays;
 import objectos.util.DoubleArrays;
 import objectos.util.GrowableList;
 import objectos.util.IntArrays;
 import objectos.util.UnmodifiableList;
 
 class StyleSheetVisitor implements StyleEngine {
-
-  char[] chars;
-  private int charsLength;
 
   double[] doubles;
   private int doublesLength;
@@ -56,16 +52,18 @@ class StyleSheetVisitor implements StyleEngine {
   int[] protos;
   int protosLength;
 
+  GrowableList<String> strings;
+
   private GrowableList<RuleElement> rulePrefix;
 
   StyleSheetVisitor() {
-    chars = new char[16 * 128];
-
     doubles = new double[10];
 
     objects = new int[128];
 
     protos = new int[128];
+
+    strings = new GrowableList<>();
   }
 
   @Override
@@ -377,12 +375,11 @@ class StyleSheetVisitor implements StyleEngine {
 
   @Override
   public final void createAttributeValueElement(AttributeValueOperator operator, String value) {
-    addProto(value.length());
-    addProto(charsLength);
+    addProto(strings.size());
     addProto(operator.getCode());
     addProto(ByteProto.SELECTOR_ATTRIBUTE_VALUE_ELEMENT);
 
-    addString(value);
+    strings.add(value);
   }
 
   @Override
@@ -678,14 +675,6 @@ class StyleSheetVisitor implements StyleEngine {
     protos[protosLength++] = code;
   }
 
-  final String charsToString() {
-    return new String(chars, 0, charsLength);
-  }
-
-  final char[] getChars() {
-    return Arrays.copyOf(chars, charsLength);
-  }
-
   final double[] getDoubles() {
     return Arrays.copyOf(doubles, doublesLength);
   }
@@ -699,13 +688,13 @@ class StyleSheetVisitor implements StyleEngine {
   }
 
   void reset() {
-    charsLength = 0;
-
     doublesLength = 0;
 
     objectsLength = 0;
 
     protosLength = 0;
+
+    strings.clear();
 
     if (rulePrefix != null) {
       rulePrefix.clear();
@@ -819,17 +808,10 @@ class StyleSheetVisitor implements StyleEngine {
   }
 
   private void addProtoString(int code, String value) {
-    addProto(value.length());
-    addProto(charsLength);
+    addProto(strings.size());
     addProto(code);
 
-    addString(value);
-  }
-
-  private void addString(String value) {
-    chars = CharArrays.append(chars, charsLength, value);
-
-    charsLength += value.length();
+    strings.add(value);
   }
 
   private void addValueDouble(double value) {
