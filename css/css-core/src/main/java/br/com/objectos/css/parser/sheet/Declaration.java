@@ -18,7 +18,7 @@ package br.com.objectos.css.parser.sheet;
 import br.com.objectos.css.parser.IsNonTerminal;
 import br.com.objectos.css.property.StandardPropertyName;
 import br.com.objectos.css.sheet.MultiDeclarationElement;
-import br.com.objectos.css.sheet.StyleSheetDsl;
+import br.com.objectos.css.sheet.StyleEngine;
 import java.util.Arrays;
 import java.util.List;
 
@@ -37,8 +37,8 @@ abstract class Declaration implements IsNonTerminal, br.com.objectos.css.sheet.D
   public static Declaration get1(Identifier identifier, ThisValue value) {
     return new Declaration(identifier) {
       @Override
-      public final void create(StyleSheetDsl dsl) {
-        dsl.addDeclaration(propertyName, value);
+      public final void create(StyleEngine engine) {
+        engine.addDeclaration(propertyName, value);
       }
     };
   }
@@ -46,8 +46,8 @@ abstract class Declaration implements IsNonTerminal, br.com.objectos.css.sheet.D
   public static Declaration get2(Identifier identifier, ThisValue value1, ThisValue value2) {
     return new Declaration(identifier) {
       @Override
-      public final void create(StyleSheetDsl dsl) {
-        dsl.addDeclaration(propertyName, value1, value2);
+      public final void create(StyleEngine engine) {
+        engine.addDeclaration(propertyName, value1, value2);
       }
     };
   }
@@ -56,8 +56,8 @@ abstract class Declaration implements IsNonTerminal, br.com.objectos.css.sheet.D
       ThisValue value3) {
     return new Declaration(identifier) {
       @Override
-      public final void create(StyleSheetDsl dsl) {
-        dsl.addDeclaration(propertyName, value1, value2, value3);
+      public final void create(StyleEngine engine) {
+        engine.addDeclaration(propertyName, value1, value2, value3);
       }
     };
   }
@@ -67,8 +67,8 @@ abstract class Declaration implements IsNonTerminal, br.com.objectos.css.sheet.D
       ThisValue value4) {
     return new Declaration(identifier) {
       @Override
-      public final void create(StyleSheetDsl dsl) {
-        dsl.addDeclaration(propertyName, value1, value2, value3, value4);
+      public final void create(StyleEngine engine) {
+        engine.addDeclaration(propertyName, value1, value2, value3, value4);
       }
     };
   }
@@ -77,8 +77,8 @@ abstract class Declaration implements IsNonTerminal, br.com.objectos.css.sheet.D
       List<CommaValue> rest) {
     return new Declaration(identifier) {
       @Override
-      public final void create(StyleSheetDsl dsl) {
-        doValue(dsl, first);
+      public final void create(StyleEngine engine) {
+        doValue(engine, first);
 
         for (int i = 0; i < rest.size(); i++) {
           CommaValue restValue;
@@ -87,7 +87,7 @@ abstract class Declaration implements IsNonTerminal, br.com.objectos.css.sheet.D
           ThisValue nextValue;
           nextValue = restValue.value;
 
-          doValue(dsl, nextValue);
+          doValue(engine, nextValue);
         }
 
         MultiDeclarationElement[] elements;
@@ -95,16 +95,16 @@ abstract class Declaration implements IsNonTerminal, br.com.objectos.css.sheet.D
 
         Arrays.fill(elements, ThisMultiDeclarationElement.INSTANCE);
 
-        dsl.addDeclaration(propertyName, elements);
+        engine.addDeclaration(propertyName, elements);
       }
 
-      private void doValue(StyleSheetDsl dsl, ThisValue value) {
-        dsl.addDeclaration(propertyName, value);
+      private void doValue(StyleEngine engine, ThisValue value) {
+        engine.addDeclaration(propertyName, value);
       }
     };
   }
 
-  public abstract void create(StyleSheetDsl dsl);
+  public abstract void create(StyleEngine engine);
 
   public final String toMethodName() {
     return propertyName.getJavaName();

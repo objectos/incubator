@@ -33,17 +33,16 @@ import br.com.objectos.css.select.AttributeValueOperator;
 import br.com.objectos.css.select.Combinator;
 import br.com.objectos.css.select.SimpleSelector;
 import br.com.objectos.css.select.UniversalSelector;
-import br.com.objectos.css.sheet.CompiledStyleSheet;
-import br.com.objectos.css.sheet.CompiledStyleSheetVisitor;
 import br.com.objectos.css.sheet.LogicalOperator;
 import br.com.objectos.css.sheet.MediaType;
 import br.com.objectos.css.sheet.StyleSheet;
+import br.com.objectos.css.sheet.StyleSheetEngine;
 import br.com.objectos.css.type.AngleUnit;
 import br.com.objectos.css.type.ColorName;
 import br.com.objectos.css.type.LengthUnit;
 import objectos.util.GrowableList;
 
-class DefinitionMethod implements CompiledStyleSheetVisitor<RuntimeException> {
+class DefinitionMethod extends StyleSheetEngine<RuntimeException> {
 
   private final GrowableList<BlockStatement> statements = new GrowableList<>();
   private StyleMethodInvocation style;
@@ -54,10 +53,11 @@ class DefinitionMethod implements CompiledStyleSheetVisitor<RuntimeException> {
     DefinitionMethod method;
     method = new DefinitionMethod();
 
-    CompiledStyleSheet compiled;
-    compiled = sheet.compile();
+    sheet.eval(method);
 
-    compiled.acceptCompiledStyleSheetVisitor(method);
+    method.compile();
+
+    method.execute();
 
     return method.build();
   }

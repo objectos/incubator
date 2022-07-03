@@ -36,7 +36,7 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 import objectos.util.IntArrays;
 
-abstract class StyleSheetEngine<E extends Exception> extends StyleSheetCompiler
+public abstract class StyleSheetEngine<E extends Exception> extends StyleSheetCompiler
     implements Context.Adapter<E> {
 
   private final Deque<Body> bodyStack = new ArrayDeque<>(3);
@@ -49,7 +49,7 @@ abstract class StyleSheetEngine<E extends Exception> extends StyleSheetCompiler
 
   private boolean running;
 
-  StyleSheetEngine() {}
+  protected StyleSheetEngine() {}
 
   public final void execute() throws E {
     context = Context.getStart();

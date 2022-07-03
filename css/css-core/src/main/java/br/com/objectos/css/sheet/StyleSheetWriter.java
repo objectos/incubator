@@ -59,6 +59,20 @@ public abstract class StyleSheetWriter extends StyleSheetEngine<IOException> {
     return new PrettyStyleSheetWriter();
   }
 
+  public static String toMinifiedString(StyleSheet sheet) {
+    try {
+      var writer = StyleSheetWriter.ofMinified();
+
+      var out = new StringBuilder();
+
+      writer.writeTo(sheet, out);
+
+      return out.toString();
+    } catch (IOException e) {
+      throw new AssertionError("StringBuilder does not throw IOException", e);
+    }
+  }
+
   @Override
   public void visitAngle(AngleUnit unit, double value) throws IOException {
     writeDouble(value);

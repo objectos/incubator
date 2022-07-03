@@ -19,8 +19,4 @@ final class AttributeValueElementMark {
   static final AttributeValueElementMark INSTANCE = new AttributeValueElementMark();
 
   private AttributeValueElementMark() {}
-
-  final void acceptStyleSheetDsl(StyleSheetDsl dsl) {
-    dsl.markAttributeValueElement();
-  }
 }

@@ -18,7 +18,7 @@ package br.com.objectos.css.parser.sheet;
 import br.com.objectos.css.parser.IsNonTerminal;
 import br.com.objectos.css.select.Selector;
 import br.com.objectos.css.sheet.RuleElement;
-import br.com.objectos.css.sheet.StyleSheetDsl;
+import br.com.objectos.css.sheet.StyleEngine;
 import java.util.List;
 import java.util.Objects;
 import objectos.util.GrowableList;
@@ -49,7 +49,7 @@ final class Rule implements IsNonTerminal {
     return Objects.hash(selector, declarations);
   }
 
-  final void acceptStyleSheetDsl(StyleSheetDsl dsl) {
+  final void acceptStyleEngine(StyleEngine engine) {
     GrowableList<RuleElement> elements;
     elements = new GrowableList<>();
 
@@ -59,12 +59,12 @@ final class Rule implements IsNonTerminal {
       Declaration declaration;
       declaration = declarations.get(i);
 
-      declaration.create(dsl);
+      declaration.create(engine);
 
       elements.add(declaration);
     }
 
-    dsl.addRule(elements.toUnmodifiableList());
+    engine.addRule(elements.toUnmodifiableList());
   }
 
 }

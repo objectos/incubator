@@ -15,10 +15,8 @@
  */
 package br.com.objectos.css.parser.sheet;
 
-import br.com.objectos.css.sheet.CompiledStyleSheet;
 import br.com.objectos.css.sheet.StyleEngine;
 import br.com.objectos.css.sheet.StyleSheet;
-import br.com.objectos.css.sheet.StyleSheetDsl;
 import java.util.List;
 
 class ParsedStyleSheet implements StyleSheet {
@@ -30,23 +28,13 @@ class ParsedStyleSheet implements StyleSheet {
   }
 
   @Override
-  public final void acceptStyleSheetDsl(StyleSheetDsl dsl) {
+  public final void eval(StyleEngine engine) {
     for (int i = 0; i < rules.size(); i++) {
       Rule rule;
       rule = rules.get(i);
 
-      rule.acceptStyleSheetDsl(dsl);
+      rule.acceptStyleEngine(engine);
     }
-  }
-
-  @Override
-  public final CompiledStyleSheet compile() {
-    return StyleSheetDsl.compile(this);
-  }
-
-  @Override
-  public final void eval(StyleEngine engine) {
-    throw new UnsupportedOperationException("Implement me");
   }
 
   @Override

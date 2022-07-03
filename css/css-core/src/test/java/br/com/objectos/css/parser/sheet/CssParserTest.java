@@ -17,9 +17,9 @@ package br.com.objectos.css.parser.sheet;
 
 import static org.testng.Assert.assertEquals;
 
-import br.com.objectos.css.io.CssWriter;
 import br.com.objectos.css.sheet.AbstractStyleSheet;
 import br.com.objectos.css.sheet.StyleSheet;
+import br.com.objectos.css.sheet.StyleSheetWriter;
 import org.testng.annotations.Test;
 
 public class CssParserTest {
@@ -392,8 +392,8 @@ public class CssParserTest {
     sheet = CssParser.parse(css);
 
     assertEquals(
-      CssWriter.toMinifiedString(sheet.compile()),
-      CssWriter.toMinifiedString(expected.compile())
+      StyleSheetWriter.toMinifiedString(sheet),
+      StyleSheetWriter.toMinifiedString(expected)
     );
   }
 

@@ -17,7 +17,6 @@ package br.com.objectos.css.sheet;
 
 import br.com.objectos.css.Css;
 import br.com.objectos.css.function.StandardFunctionName;
-import br.com.objectos.css.io.CssWriter;
 import br.com.objectos.css.property.StandardPropertyName;
 import br.com.objectos.css.select.AttributeValueOperator;
 import br.com.objectos.css.select.Combinator;
@@ -42,6 +41,7 @@ import br.com.objectos.css.type.StringType;
 import br.com.objectos.css.type.UriType;
 import br.com.objectos.css.type.Value;
 import br.com.objectos.css.type.Zero;
+import java.io.IOException;
 import objectos.lang.Check;
 
 public abstract class AbstractStyleSheet extends GeneratedStyleSheet
@@ -213,28 +213,6 @@ public abstract class AbstractStyleSheet extends GeneratedStyleSheet
   protected AbstractStyleSheet() {}
 
   @Override
-  public final void acceptStyleSheetDsl(StyleSheetDsl dsl) {
-    if (this.engine != null) {
-      throw new IllegalStateException("Only one Dsl instance per time.");
-    }
-
-    this.engine = Check.notNull(dsl, "dsl == null");
-
-    try {
-      this.engine.clearRulePrefix();
-
-      definition();
-    } finally {
-      this.engine = null;
-    }
-  }
-
-  @Override
-  public final CompiledStyleSheet compile() {
-    return StyleSheetDsl.compile(this);
-  }
-
-  @Override
   public final void eval(StyleEngine engine) {
     Check.state(this.engine == null, "Concurrent evaluation by multiple engines is not supported");
 
@@ -251,16 +229,32 @@ public abstract class AbstractStyleSheet extends GeneratedStyleSheet
 
   @Override
   public final String printMinified() {
-    var compiled = compile();
+    try {
+      var writer = StyleSheetWriter.ofMinified();
 
-    return CssWriter.toMinifiedString(compiled);
+      var out = new StringBuilder();
+
+      writer.writeTo(this, out);
+
+      return out.toString();
+    } catch (IOException e) {
+      throw new AssertionError("StringBuilder does not throw IOException", e);
+    }
   }
 
   @Override
   public final String toString() {
-    var compiled = compile();
+    try {
+      var writer = StyleSheetWriter.ofPretty();
 
-    return CssWriter.toString(compiled);
+      var out = new StringBuilder();
+
+      writer.writeTo(this, out);
+
+      return out.toString();
+    } catch (IOException e) {
+      throw new AssertionError("StringBuilder does not throw IOException", e);
+    }
   }
 
   protected final RuleElement _webkitTextSizeAdjust(PercentageType pct) {

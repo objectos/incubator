@@ -21,10 +21,6 @@ public interface StyleSheet
     extends
     IsNonTerminal {
 
-  void acceptStyleSheetDsl(StyleSheetDsl dsl);
-
-  CompiledStyleSheet compile();
-
   void eval(StyleEngine engine);
 
   String printMinified();
