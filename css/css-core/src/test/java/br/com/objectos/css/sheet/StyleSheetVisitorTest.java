@@ -29,16 +29,23 @@ import br.com.objectos.css.sheet.ex.TestCase25;
 import br.com.objectos.css.sheet.ex.TestCase27;
 import br.com.objectos.css.sheet.ex.TestCase32;
 import java.util.Arrays;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-public class StyleSheetDslTest {
+public class StyleSheetVisitorTest {
+
+  private StyleSheetVisitor visitor;
+
+  @BeforeClass
+  public void _beforeClass() {
+    visitor = new StyleSheetVisitor();
+  }
 
   @Test
   public void testCase00() {
-    var dsl = dsl(new TestCase00());
+    dsl(new TestCase00());
 
     testProtos(
-      dsl,
       ByteProto.RULE_END,
       TypeSelectors.body.getCode(),
       ByteProto.SELECTOR_TYPE_OBJ,
@@ -48,15 +55,13 @@ public class StyleSheetDslTest {
 
   @Test
   public void testCase01() {
-    var dsl = dsl(new TestCase01());
+    dsl(new TestCase01());
 
     testChars(
-      dsl,
       "myid"
     );
 
     testProtos(
-      dsl,
       4, 0,
       ByteProto.SELECTOR_ID,
       ByteProto.RULE_END,
@@ -67,10 +72,9 @@ public class StyleSheetDslTest {
 
   @Test
   public void testCase08() {
-    var dsl = dsl(new TestCase08());
+    dsl(new TestCase08());
 
     testProtos(
-      dsl,
       ByteProto.DECLARATION_END,
       Keywords.block.getCode(),
       ByteProto.VALUE_KEYWORD,
@@ -86,10 +90,9 @@ public class StyleSheetDslTest {
 
   @Test
   public void testCase09() {
-    var dsl = dsl(new TestCase09());
+    dsl(new TestCase09());
 
     testProtos(
-      dsl,
       ByteProto.DECLARATION_END,
       -300,
       ByteProto.VALUE_INT,
@@ -105,10 +108,9 @@ public class StyleSheetDslTest {
 
   @Test
   public void testCase17() {
-    var dsl = dsl(new TestCase17());
+    dsl(new TestCase17());
 
     testProtos(
-      dsl,
       2, ByteProto.VALUE_INT_DSL,
       0, ByteProto.VALUE_DOUBLE_DSL,
 
@@ -127,10 +129,9 @@ public class StyleSheetDslTest {
 
   @Test
   public void testCase25() {
-    var dsl = dsl(new TestCase25());
+    dsl(new TestCase25());
 
     testProtos(
-      dsl,
       ByteProto.DECLARATION_END,
       Keywords.sansSerif.getCode(),
       ByteProto.VALUE_KEYWORD,
@@ -158,10 +159,9 @@ public class StyleSheetDslTest {
 
   @Test
   public void testCase27() {
-    var dsl = dsl(new TestCase27());
+    dsl(new TestCase27());
 
     testProtos(
-      dsl,
       100,
       ByteProto.VALUE_PERCENTAGE_INT,
 
@@ -186,10 +186,9 @@ public class StyleSheetDslTest {
 
   @Test
   public void testCase32() {
-    var dsl = dsl(new TestCase32());
+    dsl(new TestCase32());
 
     testProtos(
-      dsl,
       4, 0,
       ByteProto.SELECTOR_CLASS,
       ByteProto.DECLARATION_END,
@@ -231,26 +230,23 @@ public class StyleSheetDslTest {
     );
   }
 
-  private StyleSheetDslImpl dsl(StyleSheet sheet) {
-    var dsl = new StyleSheetDslImpl();
+  private void dsl(StyleSheet sheet) {
+    visitor.reset();
 
-    sheet.acceptStyleSheetDsl(dsl);
-
-    return dsl;
+    sheet.eval(visitor);
   }
 
-  private void testChars(StyleSheetDslImpl dsl, String expected) {
-    assertEquals(dsl.charsToString(), expected);
+  private void testChars(String expected) {
+    assertEquals(visitor.charsToString(), expected);
   }
 
-  private void testProtos(StyleSheetDslImpl dsl, int... expected) {
-    int[] result;
-    result = dsl.getProtos();
+  private void testProtos(int... expected) {
+    int[] protos = visitor.getProtos();
 
     try {
-      assertEquals(result, expected);
+      assertEquals(protos, expected);
     } catch (AssertionError e) {
-      System.err.println(Arrays.toString(result));
+      System.err.println(Arrays.toString(protos));
       System.err.println(Arrays.toString(expected));
       throw e;
     }
