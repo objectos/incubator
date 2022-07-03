@@ -15,7 +15,6 @@
  */
 package br.com.objectos.css.select;
 
-import br.com.objectos.css.sheet.StyleSheetDsl;
 import br.com.objectos.html.spi.tmpl.Marker;
 import br.com.objectos.html.spi.tmpl.Renderer;
 import br.com.objectos.html.spi.type.AnyElementValue;
@@ -27,11 +26,6 @@ public class IdSelector extends SimpleSelector implements AnyElementValue {
 
   IdSelector(String id) {
     this.id = id;
-  }
-
-  @Override
-  public final void acceptRuleElementVisitor(StyleSheetDsl dsl) {
-    throw new UnsupportedOperationException();
   }
 
   @Override

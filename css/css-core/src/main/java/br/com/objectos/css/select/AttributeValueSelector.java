@@ -15,7 +15,6 @@
  */
 package br.com.objectos.css.select;
 
-import br.com.objectos.css.sheet.StyleSheetDsl;
 import java.util.Objects;
 
 public class AttributeValueSelector extends SimpleSelector {
@@ -35,11 +34,6 @@ public class AttributeValueSelector extends SimpleSelector {
     this.previous = previous;
     this.operator = operator;
     this.value = value;
-  }
-
-  @Override
-  public final void acceptRuleElementVisitor(StyleSheetDsl dsl) {
-    throw new UnsupportedOperationException();
   }
 
   @Override

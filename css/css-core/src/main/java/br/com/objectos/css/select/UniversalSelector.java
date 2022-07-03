@@ -16,7 +16,6 @@
 package br.com.objectos.css.select;
 
 import br.com.objectos.css.sheet.RuleElement;
-import br.com.objectos.css.sheet.StyleSheetDsl;
 import objectos.util.GrowableList;
 
 public final class UniversalSelector extends Selector
@@ -36,11 +35,6 @@ public final class UniversalSelector extends Selector
   @Override
   public final void acceptRuleElementList(GrowableList<RuleElement> elements) {
     elements.add(this);
-  }
-
-  @Override
-  public final void acceptRuleElementVisitor(StyleSheetDsl dsl) {
-    throw new UnsupportedOperationException();
   }
 
   @Override

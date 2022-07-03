@@ -16,7 +16,6 @@
 package br.com.objectos.css.select;
 
 import br.com.objectos.css.parser.IsTerminal;
-import br.com.objectos.css.sheet.StyleSheetDsl;
 import objectos.util.UnmodifiableList;
 
 public enum Combinator implements SelectorElement, IsTerminal {
@@ -69,11 +68,6 @@ public enum Combinator implements SelectorElement, IsTerminal {
 
   public static Combinator getByCode(int code) {
     return ARRAY[code];
-  }
-
-  @Override
-  public final void acceptRuleElementVisitor(StyleSheetDsl dsl) {
-    throw new UnsupportedOperationException();
   }
 
   @Override

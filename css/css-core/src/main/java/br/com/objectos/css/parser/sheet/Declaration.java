@@ -18,12 +18,22 @@ package br.com.objectos.css.parser.sheet;
 import br.com.objectos.css.parser.IsNonTerminal;
 import br.com.objectos.css.property.StandardPropertyName;
 import br.com.objectos.css.sheet.MultiDeclarationElement;
-import br.com.objectos.css.sheet.RuleElement;
 import br.com.objectos.css.sheet.StyleSheetDsl;
 import java.util.Arrays;
 import java.util.List;
 
-abstract class Declaration implements IsNonTerminal, RuleElement {
+abstract class Declaration implements IsNonTerminal, br.com.objectos.css.sheet.Declaration {
+
+  private enum ThisMultiDeclarationElement implements MultiDeclarationElement {
+
+    INSTANCE;
+
+    @Override
+    public final void markMultiDeclarationElement(StyleSheetDsl dsl) {
+      dsl.markMultiDeclarationElement();
+    }
+
+  }
 
   final StandardPropertyName propertyName;
 
@@ -101,31 +111,10 @@ abstract class Declaration implements IsNonTerminal, RuleElement {
     };
   }
 
-  @Override
-  public final void acceptRuleElementVisitor(StyleSheetDsl dsl) {
-    dsl.markDeclaration();
-  }
-
   public abstract void create(StyleSheetDsl dsl);
 
   public final String toMethodName() {
     return propertyName.getJavaName();
-  }
-
-  private enum ThisMultiDeclarationElement implements MultiDeclarationElement {
-
-    INSTANCE;
-
-    @Override
-    public void acceptRuleElementVisitor(StyleSheetDsl dsl) {
-      throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public final void markMultiDeclarationElement(StyleSheetDsl dsl) {
-      dsl.markMultiDeclarationElement();
-    }
-
   }
 
 }

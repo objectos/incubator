@@ -15,11 +15,4 @@
  */
 package br.com.objectos.css.sheet;
 
-abstract class AbstractMediaExpressionOrRuleElement implements MediaExpression, RuleElement {
-
-  @Override
-  public final void acceptRuleElementVisitor(StyleSheetDsl dsl) {
-    dsl.markDeclaration();
-  }
-
-}
+abstract class AbstractMediaExpressionOrRuleElement implements MediaExpression, RuleElement {}

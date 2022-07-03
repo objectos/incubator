@@ -17,9 +17,4 @@ package br.com.objectos.css.sheet;
 
 enum IdSelectorMark implements RuleElement {
   INSTANCE;
-
-  @Override
-  public final void acceptRuleElementVisitor(StyleSheetDsl dsl) {
-    throw new UnsupportedOperationException();
-  }
 }

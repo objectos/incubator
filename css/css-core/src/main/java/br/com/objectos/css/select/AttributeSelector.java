@@ -15,19 +15,12 @@
  */
 package br.com.objectos.css.select;
 
-import br.com.objectos.css.sheet.StyleSheetDsl;
-
 public class AttributeSelector extends SimpleSelector {
 
   private final String name;
 
   AttributeSelector(String name) {
     this.name = name;
-  }
-
-  @Override
-  public final void acceptRuleElementVisitor(StyleSheetDsl dsl) {
-    throw new UnsupportedOperationException();
   }
 
   @Override

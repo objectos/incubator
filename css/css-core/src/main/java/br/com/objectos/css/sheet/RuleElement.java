@@ -15,8 +15,4 @@
  */
 package br.com.objectos.css.sheet;
 
-public interface RuleElement {
-
-  void acceptRuleElementVisitor(StyleSheetDsl dsl);
-
-}
+public interface RuleElement {}

@@ -15,6 +15,4 @@
  */
 package br.com.objectos.css.sheet;
 
-public interface Declaration
-    extends
-    RuleElement {}
+public interface Declaration extends RuleElement {}

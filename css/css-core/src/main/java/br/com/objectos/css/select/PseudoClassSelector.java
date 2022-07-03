@@ -15,8 +15,6 @@
  */
 package br.com.objectos.css.select;
 
-import br.com.objectos.css.sheet.StyleSheetDsl;
-
 public class PseudoClassSelector extends SimpleSelector {
 
   private final int code;
@@ -25,11 +23,6 @@ public class PseudoClassSelector extends SimpleSelector {
   PseudoClassSelector(int code, String name) {
     this.code = code;
     this.name = name;
-  }
-
-  @Override
-  public final void acceptRuleElementVisitor(StyleSheetDsl dsl) {
-    throw new UnsupportedOperationException();
   }
 
   @Override

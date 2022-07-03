@@ -598,11 +598,6 @@ final class StyleSheetDslImpl implements StyleSheetDsl {
   }
 
   @Override
-  public final void markDeclaration() {
-    addProto(ByteProto.DECLARATION_MARK);
-  }
-
-  @Override
   public final void markDouble() {
     addProto(ByteProto.VALUE_DOUBLE_MARK);
   }
@@ -725,13 +720,15 @@ final class StyleSheetDslImpl implements StyleSheetDsl {
     } else {
       var type = element.getClass();
 
-      throw new AssertionError("Unexpected implementation: " + type);
+      throw new AssertionError("Unexpected AtMediaElement type: " + type);
     }
   }
 
   private void acceptRuleElement0(RuleElement element) {
     // TODO use pattern matching when possible
-    if (element instanceof AttributeSelector sel) {
+    if (element instanceof AbstractMediaExpressionOrRuleElement) {
+      addProto(ByteProto.DECLARATION_MARK);
+    } else if (element instanceof AttributeSelector sel) {
       createAttributeSelector(sel.name());
 
       addProto(ByteProto.SELECTOR_ATTRIBUTE_MARK);
@@ -759,6 +756,8 @@ final class StyleSheetDslImpl implements StyleSheetDsl {
     } else if (element instanceof Combinator c) {
       addProto(c.getCode());
       addProto(ByteProto.SELECTOR_COMBINATOR);
+    } else if (element instanceof Declaration) {
+      addProto(ByteProto.DECLARATION_MARK);
     } else if (element instanceof IdSelector sel) {
       addProtoString(
         ByteProto.SELECTOR_ID_OBJ,
@@ -778,7 +777,9 @@ final class StyleSheetDslImpl implements StyleSheetDsl {
     } else if (element instanceof UniversalSelector) {
       addProto(ByteProto.SELECTOR_UNIVERSAL_OBJ);
     } else {
-      element.acceptRuleElementVisitor(this);
+      var type = element.getClass();
+
+      throw new AssertionError("Unexpected RuleElement type: " + type);
     }
   }
 

@@ -82,20 +82,6 @@ public abstract class AbstractStyleSheet extends GeneratedStyleSheet
     }
   }
 
-  private static class ThisAnyDeclaration implements AnyDeclaration {
-    static final AnyDeclaration INSTANCE = new ThisAnyDeclaration();
-
-    @Override
-    public final void acceptRuleElementVisitor(StyleSheetDsl dsl) {
-      dsl.markDeclaration();
-    }
-
-    @Override
-    public final void markMultiDeclarationElement(StyleSheetDsl dsl) {
-      dsl.markMultiDeclarationElement();
-    }
-  }
-
   private static class ThisAnyFunction extends ThisValue implements AnyFunction {
     static final AnyFunction INSTANCE = new ThisAnyFunction();
 
@@ -491,14 +477,14 @@ public abstract class AbstractStyleSheet extends GeneratedStyleSheet
   final AnyDeclaration addDeclaration(StandardPropertyName name, double value) {
     dsl.addDeclaration(name, value);
 
-    return ThisAnyDeclaration.INSTANCE;
+    return AnyDeclarationMark.INSTANCE;
   }
 
   @Override
   final AnyDeclaration addDeclaration(StandardPropertyName name, int value) {
     dsl.addDeclaration(name, value);
 
-    return ThisAnyDeclaration.INSTANCE;
+    return AnyDeclarationMark.INSTANCE;
   }
 
   @Override
@@ -506,35 +492,35 @@ public abstract class AbstractStyleSheet extends GeneratedStyleSheet
       StandardPropertyName name, MultiDeclarationElement... elements) {
     dsl.addDeclaration(name, elements);
 
-    return ThisAnyDeclaration.INSTANCE;
+    return AnyDeclarationMark.INSTANCE;
   }
 
   @Override
   final AnyDeclaration addDeclaration(StandardPropertyName name, String value) {
     dsl.addDeclaration(name, value);
 
-    return ThisAnyDeclaration.INSTANCE;
+    return AnyDeclarationMark.INSTANCE;
   }
 
   @Override
   final AnyDeclaration addDeclaration(StandardPropertyName name, Value v1) {
     dsl.addDeclaration(name, v1);
 
-    return ThisAnyDeclaration.INSTANCE;
+    return AnyDeclarationMark.INSTANCE;
   }
 
   @Override
   final AnyDeclaration addDeclaration(StandardPropertyName name, Value v1, Value v2) {
     dsl.addDeclaration(name, v1, v2);
 
-    return ThisAnyDeclaration.INSTANCE;
+    return AnyDeclarationMark.INSTANCE;
   }
 
   @Override
   final AnyDeclaration addDeclaration(StandardPropertyName name, Value v1, Value v2, Value v3) {
     dsl.addDeclaration(name, v1, v2, v3);
 
-    return ThisAnyDeclaration.INSTANCE;
+    return AnyDeclarationMark.INSTANCE;
   }
 
   @Override
@@ -542,7 +528,7 @@ public abstract class AbstractStyleSheet extends GeneratedStyleSheet
       StandardPropertyName name, Value v1, Value v2, Value v3, Value v4) {
     dsl.addDeclaration(name, v1, v2, v3, v4);
 
-    return ThisAnyDeclaration.INSTANCE;
+    return AnyDeclarationMark.INSTANCE;
   }
 
   @Override
@@ -550,7 +536,7 @@ public abstract class AbstractStyleSheet extends GeneratedStyleSheet
       StandardPropertyName name, Value v1, Value v2, Value v3, Value v4, Value v5) {
     dsl.addDeclaration(name, v1, v2, v3, v4, v5);
 
-    return ThisAnyDeclaration.INSTANCE;
+    return AnyDeclarationMark.INSTANCE;
   }
 
   @Override
@@ -558,7 +544,7 @@ public abstract class AbstractStyleSheet extends GeneratedStyleSheet
       StandardPropertyName name, Value v1, Value v2, Value v3, Value v4, Value v5, Value v6) {
     dsl.addDeclaration(name, v1, v2, v3, v4, v5, v6);
 
-    return ThisAnyDeclaration.INSTANCE;
+    return AnyDeclarationMark.INSTANCE;
   }
 
   @Override

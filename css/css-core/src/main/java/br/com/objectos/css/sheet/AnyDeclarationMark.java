@@ -15,6 +15,13 @@
  */
 package br.com.objectos.css.sheet;
 
-enum ClassSelectorMark implements RuleElement {
+import br.com.objectos.css.sheet.GeneratedStyleSheet.AnyDeclaration;
+
+enum AnyDeclarationMark implements AnyDeclaration {
   INSTANCE;
+
+  @Override
+  public final void markMultiDeclarationElement(StyleSheetDsl dsl) {
+    dsl.markMultiDeclarationElement();
+  }
 }
