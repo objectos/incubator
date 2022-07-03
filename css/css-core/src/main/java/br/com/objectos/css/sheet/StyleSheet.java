@@ -25,6 +25,8 @@ public interface StyleSheet
 
   CompiledStyleSheet compile();
 
+  void eval(StyleEngine engine);
+
   String printMinified();
 
 }

@@ -15,16 +15,9 @@
  */
 package br.com.objectos.css.sheet;
 
-import br.com.objectos.css.function.StandardFunctionName;
-import br.com.objectos.css.property.StandardPropertyName;
-import br.com.objectos.css.select.AttributeValueOperator;
-import br.com.objectos.css.type.Creator;
-import br.com.objectos.css.type.Marker;
-import br.com.objectos.css.type.Value;
 import objectos.lang.Check;
-import objectos.util.UnmodifiableList;
 
-public interface StyleSheetDsl extends Creator, Marker {
+public interface StyleSheetDsl extends StyleEngine {
 
   static CompiledStyleSheet compile(StyleSheet sheet) {
     Check.notNull(sheet, "sheet == null");
@@ -35,50 +28,5 @@ public interface StyleSheetDsl extends Creator, Marker {
 
     return dsl.compile();
   }
-
-  void addAtMedia(AtMediaElement... elements);
-
-  void addDeclaration(StandardPropertyName name, double value);
-
-  void addDeclaration(StandardPropertyName name, int value);
-
-  void addDeclaration(StandardPropertyName name, MultiDeclarationElement... elements);
-
-  void addDeclaration(StandardPropertyName name, String value);
-
-  void addDeclaration(StandardPropertyName name, Value v1);
-
-  void addDeclaration(StandardPropertyName name, Value v1, Value v2);
-
-  void addDeclaration(StandardPropertyName name, Value v1, Value v2, Value v3);
-
-  void addDeclaration(StandardPropertyName name, Value v1, Value v2, Value v3, Value v4);
-
-  void addDeclaration(StandardPropertyName name, Value v1, Value v2, Value v3, Value v4, Value v5);
-
-  void addDeclaration(
-      StandardPropertyName name, Value v1, Value v2, Value v3, Value v4, Value v5, Value v6);
-
-  void addFunction(StandardFunctionName name, Value v1);
-
-  void addRule(RuleElement... elements);
-
-  void addRule(UnmodifiableList<RuleElement> elements);
-
-  void clearRulePrefix();
-
-  void createAttributeSelector(String name);
-
-  void createAttributeValueElement(AttributeValueOperator operator, String value);
-
-  void createAttributeValueSelector(String name);
-
-  void createClassSelector(String className);
-
-  void createIdSelector(String id);
-
-  void markAttributeValueElement();
-
-  void setRulePrefix(RuleElement... elements);
 
 }

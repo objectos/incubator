@@ -208,30 +208,45 @@ public abstract class AbstractStyleSheet extends GeneratedStyleSheet
 
   protected static final MediaType screen = MediaType.SCREEN;
 
-  private StyleSheetDsl dsl;
+  private StyleEngine engine;
 
   protected AbstractStyleSheet() {}
 
   @Override
   public final void acceptStyleSheetDsl(StyleSheetDsl dsl) {
-    if (this.dsl != null) {
+    if (this.engine != null) {
       throw new IllegalStateException("Only one Dsl instance per time.");
     }
 
-    this.dsl = Check.notNull(dsl, "dsl == null");
+    this.engine = Check.notNull(dsl, "dsl == null");
 
     try {
-      this.dsl.clearRulePrefix();
+      this.engine.clearRulePrefix();
 
       definition();
     } finally {
-      this.dsl = null;
+      this.engine = null;
     }
   }
 
   @Override
   public final CompiledStyleSheet compile() {
     return StyleSheetDsl.compile(this);
+  }
+
+  @Override
+  public final void eval(StyleEngine engine) {
+    Check.state(this.engine == null, "Concurrent evaluation by multiple engines is not supported");
+
+    this.engine = Check.notNull(engine, "engine == null");
+
+    try {
+      this.engine.clearRulePrefix();
+
+      definition();
+    } finally {
+      this.engine = null;
+    }
   }
 
   @Override
@@ -266,25 +281,25 @@ public abstract class AbstractStyleSheet extends GeneratedStyleSheet
   }
 
   protected final RuleElement attr(String name) {
-    dsl.createAttributeSelector(name);
+    engine.createAttributeSelector(name);
 
     return AttributeSelectorMark.INSTANCE;
   }
 
   protected final AttributeValueSelectorMark attr(String name, AttributeValueElementMark element) {
-    dsl.markAttributeValueElement();
+    engine.markAttributeValueElement();
 
-    dsl.createAttributeValueSelector(name);
+    engine.createAttributeValueSelector(name);
 
     return AttributeValueSelectorMark.INSTANCE;
   }
 
   protected final void clearRulePrefix() {
-    dsl.clearRulePrefix();
+    engine.clearRulePrefix();
   }
 
   protected final RuleElement cn(String className) {
-    dsl.createClassSelector(className);
+    engine.createClassSelector(className);
 
     return ClassSelectorMark.INSTANCE;
   }
@@ -292,7 +307,7 @@ public abstract class AbstractStyleSheet extends GeneratedStyleSheet
   protected abstract void definition();
 
   protected final AttributeValueElementMark eq(String value) {
-    dsl.createAttributeValueElement(AttributeValueOperator.EQUALS, value);
+    engine.createAttributeValueElement(AttributeValueOperator.EQUALS, value);
 
     return AttributeValueElementMark.INSTANCE;
   }
@@ -302,13 +317,13 @@ public abstract class AbstractStyleSheet extends GeneratedStyleSheet
   }
 
   protected final ColorType hex(String hex) {
-    dsl.createColor(hex);
+    engine.createColor(hex);
 
     return ThisColorType.HEX;
   }
 
   protected final RuleElement id(String id) {
-    dsl.createIdSelector(id);
+    engine.createIdSelector(id);
 
     return IdSelectorMark.INSTANCE;
   }
@@ -316,29 +331,29 @@ public abstract class AbstractStyleSheet extends GeneratedStyleSheet
   protected final void install(StyleSheet sheet) {
     Check.notNull(sheet, "sheet == null");
 
-    sheet.acceptStyleSheetDsl(dsl);
+    sheet.eval(engine);
   }
 
   protected final CustomKeyword keyword(String name) {
-    dsl.createKeyword(name);
+    engine.createKeyword(name);
 
     return CustomKeyword.INSTANCE;
   }
 
   protected final DoubleType l(double value) {
-    dsl.createDouble(value);
+    engine.createDouble(value);
 
     return ThisDoubleType.INSTANCE;
   }
 
   protected final IntType l(int value) {
-    dsl.createInt(value);
+    engine.createInt(value);
 
     return ThisIntType.INSTANCE;
   }
 
   protected final StringType l(String value) {
-    dsl.createString(value);
+    engine.createString(value);
 
     return ThisStringType.INSTANCE;
   }
@@ -349,32 +364,32 @@ public abstract class AbstractStyleSheet extends GeneratedStyleSheet
 
   @Override
   protected final MaxHeightDeclarationMark maxHeight(LengthType length) {
-    dsl.addDeclaration(StandardPropertyName.MAX_HEIGHT, length);
+    engine.addDeclaration(StandardPropertyName.MAX_HEIGHT, length);
 
     return MaxHeightDeclarationMark.INSTANCE;
   }
 
   @Override
   protected final MaxWidthDeclarationMark maxWidth(LengthType length) {
-    dsl.addDeclaration(StandardPropertyName.MAX_WIDTH, length);
+    engine.addDeclaration(StandardPropertyName.MAX_WIDTH, length);
 
     return MaxWidthDeclarationMark.INSTANCE;
   }
 
   protected final void media(AtMediaElement... elements) {
-    dsl.addAtMedia(elements);
+    engine.addAtMedia(elements);
   }
 
   @Override
   protected final MinHeightDeclarationMark minHeight(LengthType length) {
-    dsl.addDeclaration(StandardPropertyName.MIN_HEIGHT, length);
+    engine.addDeclaration(StandardPropertyName.MIN_HEIGHT, length);
 
     return MinHeightDeclarationMark.INSTANCE;
   }
 
   @Override
   protected final MinWidthDeclarationMark minWidth(LengthType length) {
-    dsl.addDeclaration(StandardPropertyName.MIN_WIDTH, length);
+    engine.addDeclaration(StandardPropertyName.MIN_WIDTH, length);
 
     return MinWidthDeclarationMark.INSTANCE;
   }
@@ -384,13 +399,13 @@ public abstract class AbstractStyleSheet extends GeneratedStyleSheet
   }
 
   protected final PercentageType pct(double value) {
-    dsl.createPercentage(value);
+    engine.createPercentage(value);
 
     return ThisPercentageTypeDouble.INSTANCE;
   }
 
   protected final PercentageType pct(int value) {
-    dsl.createPercentage(value);
+    engine.createPercentage(value);
 
     return ThisPercentageTypeInt.INSTANCE;
   }
@@ -400,43 +415,43 @@ public abstract class AbstractStyleSheet extends GeneratedStyleSheet
   }
 
   protected final ColorType rgb(double r, double g, double b) {
-    dsl.createRgb(r, g, b);
+    engine.createRgb(r, g, b);
 
     return ThisColorType.RGB_DOUBLE;
   }
 
   protected final ColorType rgb(double r, double g, double b, double alpha) {
-    dsl.createRgb(r, g, b, alpha);
+    engine.createRgb(r, g, b, alpha);
 
     return ThisColorType.RGB_DOUBLE_ALPHA;
   }
 
   protected final ColorType rgb(int r, int g, int b) {
-    dsl.createRgb(r, g, b);
+    engine.createRgb(r, g, b);
 
     return ThisColorType.RGB_INT;
   }
 
   protected final ColorType rgb(int r, int g, int b, double alpha) {
-    dsl.createRgb(r, g, b, alpha);
+    engine.createRgb(r, g, b, alpha);
 
     return ThisColorType.RGB_INT_ALPHA;
   }
 
   protected final ColorType rgba(double r, double g, double b, double alpha) {
-    dsl.createRgba(r, g, b, alpha);
+    engine.createRgba(r, g, b, alpha);
 
     return ThisColorType.RGBA_DOUBLE;
   }
 
   protected final ColorType rgba(int r, int g, int b, double alpha) {
-    dsl.createRgba(r, g, b, alpha);
+    engine.createRgba(r, g, b, alpha);
 
     return ThisColorType.RGBA_INT;
   }
 
   protected final void setRulePrefix(RuleElement... elements) {
-    dsl.setRulePrefix(elements);
+    engine.setRulePrefix(elements);
   }
 
   protected final Combinator sp() {
@@ -444,7 +459,7 @@ public abstract class AbstractStyleSheet extends GeneratedStyleSheet
   }
 
   protected final AttributeValueElementMark startsWith(String value) {
-    dsl.createAttributeValueElement(AttributeValueOperator.STARTS_WITH, value);
+    engine.createAttributeValueElement(AttributeValueOperator.STARTS_WITH, value);
 
     return AttributeValueElementMark.INSTANCE;
   }
@@ -460,7 +475,7 @@ public abstract class AbstractStyleSheet extends GeneratedStyleSheet
   }
 
   protected final UriType url(String value) {
-    dsl.createUri(value);
+    engine.createUri(value);
 
     return ThisUri.INSTANCE;
   }
@@ -475,14 +490,14 @@ public abstract class AbstractStyleSheet extends GeneratedStyleSheet
 
   @Override
   final AnyDeclaration addDeclaration(StandardPropertyName name, double value) {
-    dsl.addDeclaration(name, value);
+    engine.addDeclaration(name, value);
 
     return AnyDeclarationMark.INSTANCE;
   }
 
   @Override
   final AnyDeclaration addDeclaration(StandardPropertyName name, int value) {
-    dsl.addDeclaration(name, value);
+    engine.addDeclaration(name, value);
 
     return AnyDeclarationMark.INSTANCE;
   }
@@ -490,35 +505,35 @@ public abstract class AbstractStyleSheet extends GeneratedStyleSheet
   @Override
   final AnyDeclaration addDeclaration(
       StandardPropertyName name, MultiDeclarationElement... elements) {
-    dsl.addDeclaration(name, elements);
+    engine.addDeclaration(name, elements);
 
     return AnyDeclarationMark.INSTANCE;
   }
 
   @Override
   final AnyDeclaration addDeclaration(StandardPropertyName name, String value) {
-    dsl.addDeclaration(name, value);
+    engine.addDeclaration(name, value);
 
     return AnyDeclarationMark.INSTANCE;
   }
 
   @Override
   final AnyDeclaration addDeclaration(StandardPropertyName name, Value v1) {
-    dsl.addDeclaration(name, v1);
+    engine.addDeclaration(name, v1);
 
     return AnyDeclarationMark.INSTANCE;
   }
 
   @Override
   final AnyDeclaration addDeclaration(StandardPropertyName name, Value v1, Value v2) {
-    dsl.addDeclaration(name, v1, v2);
+    engine.addDeclaration(name, v1, v2);
 
     return AnyDeclarationMark.INSTANCE;
   }
 
   @Override
   final AnyDeclaration addDeclaration(StandardPropertyName name, Value v1, Value v2, Value v3) {
-    dsl.addDeclaration(name, v1, v2, v3);
+    engine.addDeclaration(name, v1, v2, v3);
 
     return AnyDeclarationMark.INSTANCE;
   }
@@ -526,7 +541,7 @@ public abstract class AbstractStyleSheet extends GeneratedStyleSheet
   @Override
   final AnyDeclaration addDeclaration(
       StandardPropertyName name, Value v1, Value v2, Value v3, Value v4) {
-    dsl.addDeclaration(name, v1, v2, v3, v4);
+    engine.addDeclaration(name, v1, v2, v3, v4);
 
     return AnyDeclarationMark.INSTANCE;
   }
@@ -534,7 +549,7 @@ public abstract class AbstractStyleSheet extends GeneratedStyleSheet
   @Override
   final AnyDeclaration addDeclaration(
       StandardPropertyName name, Value v1, Value v2, Value v3, Value v4, Value v5) {
-    dsl.addDeclaration(name, v1, v2, v3, v4, v5);
+    engine.addDeclaration(name, v1, v2, v3, v4, v5);
 
     return AnyDeclarationMark.INSTANCE;
   }
@@ -542,48 +557,48 @@ public abstract class AbstractStyleSheet extends GeneratedStyleSheet
   @Override
   final AnyDeclaration addDeclaration(
       StandardPropertyName name, Value v1, Value v2, Value v3, Value v4, Value v5, Value v6) {
-    dsl.addDeclaration(name, v1, v2, v3, v4, v5, v6);
+    engine.addDeclaration(name, v1, v2, v3, v4, v5, v6);
 
     return AnyDeclarationMark.INSTANCE;
   }
 
   @Override
   final AnyFunction addFunction(StandardFunctionName name, Value v1) {
-    dsl.addFunction(name, v1);
+    engine.addFunction(name, v1);
 
     return ThisAnyFunction.INSTANCE;
   }
 
   @Override
   final AngleType getAngle(AngleUnit unit, double value) {
-    dsl.createAngle(unit, value);
+    engine.createAngle(unit, value);
 
     return ThisAngleTypeDouble.INSTANCE;
   }
 
   @Override
   final AngleType getAngle(AngleUnit unit, int value) {
-    dsl.createAngle(unit, value);
+    engine.createAngle(unit, value);
 
     return ThisAngleTypeInt.INSTANCE;
   }
 
   @Override
   final LengthType getLength(LengthUnit unit, double value) {
-    dsl.createLength(unit, value);
+    engine.createLength(unit, value);
 
     return ThisLengthTypeDouble.INSTANCE;
   }
 
   @Override
   final LengthType getLength(LengthUnit unit, int value) {
-    dsl.createLength(unit, value);
+    engine.createLength(unit, value);
 
     return ThisLengthTypeInt.INSTANCE;
   }
 
   private void addRule(RuleElement... elements) {
-    dsl.addRule(elements);
+    engine.addRule(elements);
   }
 
 }

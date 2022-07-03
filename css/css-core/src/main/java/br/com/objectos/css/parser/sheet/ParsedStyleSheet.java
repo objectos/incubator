@@ -16,6 +16,7 @@
 package br.com.objectos.css.parser.sheet;
 
 import br.com.objectos.css.sheet.CompiledStyleSheet;
+import br.com.objectos.css.sheet.StyleEngine;
 import br.com.objectos.css.sheet.StyleSheet;
 import br.com.objectos.css.sheet.StyleSheetDsl;
 import java.util.List;
@@ -41,6 +42,11 @@ class ParsedStyleSheet implements StyleSheet {
   @Override
   public final CompiledStyleSheet compile() {
     return StyleSheetDsl.compile(this);
+  }
+
+  @Override
+  public final void eval(StyleEngine engine) {
+    throw new UnsupportedOperationException("Implement me");
   }
 
   @Override
