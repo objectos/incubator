@@ -15,8 +15,6 @@
  */
 package br.com.objectos.css.sheet;
 
-import br.com.objectos.css.property.StandardPropertyName;
-
 final class ContextMediaQuery<E extends Exception> extends Context<E> {
 
   private static final Context<Exception> INSTANCE = new ContextMediaQuery<>();
@@ -26,21 +24,6 @@ final class ContextMediaQuery<E extends Exception> extends Context<E> {
   @SuppressWarnings("unchecked")
   public static <E extends Exception> Context<E> get() {
     return (Context<E>) INSTANCE;
-  }
-
-  @Override
-  final Context<E> visitDeclarationStart(Adapter<E> a, StandardPropertyName name) throws E {
-    a.visitLogicalExpressionStart(LogicalOperator.AND);
-    a.visitDeclarationStart(name);
-    return toMediaQueryDeclaration();
-  }
-
-  @Override
-  final Context<E> visitRuleStart(Adapter<E> a) throws E {
-    a.pushBody(Body.MEDIA);
-    a.visitBlockStart();
-    a.visitRuleStart();
-    return toRuleStart();
   }
 
 }

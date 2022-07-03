@@ -15,8 +15,6 @@
  */
 package br.com.objectos.css.sheet;
 
-import br.com.objectos.css.property.StandardPropertyName;
-
 class ContextSelector<E extends Exception> extends ContextVisitSelector<E> {
 
   private static final ContextSelector<Exception> INSTANCE = new ContextSelector<>();
@@ -26,19 +24,6 @@ class ContextSelector<E extends Exception> extends ContextVisitSelector<E> {
   @SuppressWarnings("unchecked")
   public static <E extends Exception> Context<E> get() {
     return (Context<E>) INSTANCE;
-  }
-
-  @Override
-  final Context<E> visitDeclarationStart(Adapter<E> a, StandardPropertyName name) throws E {
-    a.visitBlockStart();
-    a.visitDeclarationStart(name);
-    return toDeclarationStart();
-  }
-
-  @Override
-  final Context<E> visitRuleEnd(Adapter<E> a) throws E {
-    a.visitEmptyBlock();
-    return toMediaOrSheetBody(a);
   }
 
 }

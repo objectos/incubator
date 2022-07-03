@@ -26,10 +26,4 @@ class ContextAtMediaStart<E extends Exception> extends Context<E> {
     return (Context<E>) INSTANCE;
   }
 
-  @Override
-  final Context<E> visitMediaType(Adapter<E> a, MediaType type) throws E {
-    a.visitMediaType(type);
-    return toMediaQuery();
-  }
-
 }

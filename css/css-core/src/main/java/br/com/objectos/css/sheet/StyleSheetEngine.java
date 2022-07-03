@@ -17,20 +17,16 @@ package br.com.objectos.css.sheet;
 
 import br.com.objectos.css.function.StandardFunctionName;
 import br.com.objectos.css.keyword.Keywords;
-import br.com.objectos.css.keyword.StandardKeyword;
 import br.com.objectos.css.property.StandardPropertyName;
 import br.com.objectos.css.select.AttributeValueOperator;
 import br.com.objectos.css.select.Combinator;
-import br.com.objectos.css.select.PseudoClassSelector;
 import br.com.objectos.css.select.PseudoClassSelectors;
-import br.com.objectos.css.select.PseudoElementSelector;
 import br.com.objectos.css.select.PseudoElementSelectors;
-import br.com.objectos.css.select.TypeSelector;
+import br.com.objectos.css.select.SimpleSelector;
 import br.com.objectos.css.select.TypeSelectors;
 import br.com.objectos.css.select.UniversalSelector;
 import br.com.objectos.css.type.AngleUnit;
 import br.com.objectos.css.type.Color;
-import br.com.objectos.css.type.ColorName;
 import br.com.objectos.css.type.LengthUnit;
 import java.util.ArrayDeque;
 import java.util.Deque;
@@ -39,30 +35,57 @@ import objectos.util.IntArrays;
 public abstract class StyleSheetEngine<E extends Exception> extends StyleSheetCompiler
     implements Context.Adapter<E> {
 
+  @FunctionalInterface
+  private interface DoValue<X extends Exception> {
+    void execute() throws X;
+  }
+
+  private static final int _START = 1;
+
+  private static final int _STOP = 2;
+
+  static final int _AT_MEDIA_BODY = 3;
+
+  private static final int _AT_MEDIA_START = 4;
+
+  private static final int _DECLARATION_START = 5;
+
+  private static final int _DECLARATION_VALUES = 6;
+
+  private static final int _FUNCTION_START = 7;
+
+  private static final int _FUNCTION_VALUES = 8;
+
+  private static final int _MEDIA_QUERY = 9;
+
+  private static final int _MEDIA_QUERY_DECLARATION = 10;
+
+  private static final int _RULE_START = 11;
+
+  private static final int _SELECTOR = 12;
+
+  static final int _SHEET_BODY = 13;
+
   private final Deque<Body> bodyStack = new ArrayDeque<>(3);
 
   private int[] call = new int[64];
 
   private int callIndex = -1;
 
-  private Context<E> context;
-
-  private boolean running;
+  private int state;
 
   protected StyleSheetEngine() {}
 
   public final void execute() throws E {
-    context = Context.getStart();
+    state = _START;
 
     cursor = 0;
 
-    running = true;
-
-    while (running) {
+    while (state != _STOP) {
       execute0();
     }
 
-    context = context.visitStyleSheetEnd(this);
+    //context = context.visitStyleSheetEnd(this);
   }
 
   @Override
@@ -88,19 +111,49 @@ public abstract class StyleSheetEngine<E extends Exception> extends StyleSheetCo
 
     callIndex = -1;
 
-    context = null;
+    cursor = 0;
 
-    running = false;
+    state = 0;
   }
 
   private void doDeclarationStart() throws E {
-    int code;
-    code = getCode();
+    var code = getCode();
 
-    StandardPropertyName name;
-    name = StandardPropertyName.getByCode(code);
+    var name = StandardPropertyName.getByCode(code);
 
-    context = context.visitDeclarationStart(this, name);
+    state = switch (state) {
+      case _AT_MEDIA_BODY -> {
+        visitBlockEnd();
+
+        popBody();
+
+        var body = peekBody();
+
+        yield body.state;
+      }
+      case _DECLARATION_VALUES -> {
+        visitBeforeNextDeclaration();
+
+        visitDeclarationStart(name);
+
+        yield _DECLARATION_START;
+      }
+      case _MEDIA_QUERY -> {
+        visitLogicalExpressionStart(LogicalOperator.AND);
+
+        visitDeclarationStart(name);
+
+        yield _MEDIA_QUERY_DECLARATION;
+      }
+      case _SELECTOR -> {
+        visitBlockStart();
+
+        visitDeclarationStart(name);
+
+        yield _DECLARATION_START;
+      }
+      default -> throw new IllegalArgumentException("Unexpected state: " + state);
+    };
   }
 
   private void doFlowJmp() {
@@ -115,346 +168,477 @@ public abstract class StyleSheetEngine<E extends Exception> extends StyleSheetCo
     if (callIndex >= 0) {
       cursor = popCall();
     } else {
-      running = false;
+      state = _STOP;
     }
   }
 
   private void doFunctionEnd() throws E {
-    context = context.visitFunctionEnd(this);
+    state = switch (state) {
+      case _FUNCTION_VALUES -> {
+        visitFunctionEnd();
+
+        yield _DECLARATION_VALUES;
+      }
+      default -> throw new IllegalArgumentException("Unexpected state: " + state);
+    };
   }
 
   private void doFunctionStart() throws E {
-    int code;
-    code = getCode();
+    var code = getCode();
 
-    StandardFunctionName name;
-    name = StandardFunctionName.getByCode(code);
+    var name = StandardFunctionName.getByCode(code);
 
-    context = context.visitFunctionStart(this, name);
+    state = switch (state) {
+      case _DECLARATION_START -> {
+        visitFunctionStart(name);
+
+        yield _FUNCTION_START;
+      }
+      case _DECLARATION_VALUES -> {
+        visitBeforeNextValue();
+
+        visitFunctionStart(name);
+
+        yield _FUNCTION_START;
+      }
+      default -> throw new IllegalArgumentException("Unexpected state: " + state);
+    };
   }
 
   private void doMediaEnd() throws E {
-    context = context.visitMediaEnd(this);
+    state = switch (state) {
+      case _AT_MEDIA_BODY -> {
+        visitBlockEnd();
+
+        popBody();
+
+        var body = peekBody();
+
+        yield body.state;
+      }
+      default -> throw new IllegalArgumentException("Unexpected state: " + state);
+    };
   }
 
   private void doMediaStart() throws E {
-    context = context.visitMediaStart(this);
+    state = switch (state) {
+      case _SHEET_BODY -> {
+        visitBeforeNextStatement();
+
+        visitMediaStart();
+
+        yield _AT_MEDIA_START;
+      }
+      case _START -> {
+        pushBody(Body.SHEET);
+
+        visitMediaStart();
+
+        yield _AT_MEDIA_START;
+      }
+      default -> throw new IllegalArgumentException("Unexpected state: " + state);
+    };
   }
 
   private void doMediaType() throws E {
-    int code;
-    code = getCode();
+    state = switch (state) {
+      case _AT_MEDIA_START -> {
+        var code = getCode();
 
-    MediaType type;
-    type = MediaType.getByCode(code);
+        var type = MediaType.getByCode(code);
 
-    context = context.visitMediaType(this, type);
+        visitMediaType(type);
+
+        yield _MEDIA_QUERY;
+      }
+      default -> throw new IllegalArgumentException("Unexpected state: " + state);
+    };
   }
 
   private void doMultiDeclarationSeparator() throws E {
-    context = context.visitMultiDeclarationSeparator(this);
+    state = switch (state) {
+      case _DECLARATION_START -> {
+        yield _DECLARATION_START;
+      }
+      case _DECLARATION_VALUES -> {
+        visitMultiDeclarationSeparator();
+
+        yield _DECLARATION_START;
+      }
+      default -> throw new IllegalArgumentException("Unexpected state: " + state);
+    };
   }
 
   private void doRuleEnd() throws E {
-    context = context.visitRuleEnd(this);
+    state = switch (state) {
+      case _DECLARATION_VALUES -> {
+        visitAfterLastDeclaration();
+
+        visitBlockEnd();
+
+        var body = peekBody();
+
+        yield body.state;
+      }
+      case _SELECTOR -> {
+        visitEmptyBlock();
+
+        var body = peekBody();
+
+        yield body.state;
+      }
+      default -> throw new IllegalArgumentException("Unexpected state: " + state);
+    };
   }
 
   private void doRuleStart() throws E {
-    context = context.visitRuleStart(this);
+    state = switch (state) {
+      case _AT_MEDIA_BODY -> {
+
+        visitBeforeNextStatement();
+
+        visitRuleStart();
+
+        yield _RULE_START;
+      }
+      case _MEDIA_QUERY -> {
+        pushBody(Body.MEDIA);
+
+        visitBlockStart();
+
+        visitRuleStart();
+
+        yield _RULE_START;
+      }
+      case _SHEET_BODY -> {
+        visitBeforeNextStatement();
+
+        visitRuleStart();
+
+        yield _RULE_START;
+      }
+      case _START -> {
+        pushBody(Body.SHEET);
+
+        visitRuleStart();
+
+        yield _RULE_START;
+      }
+      default -> throw new IllegalArgumentException("Unexpected state: " + state);
+    };
   }
 
   private void doSelectorAttribute() throws E {
-    String attributeName;
-    attributeName = getString();
+    state = switch (state) {
+      case _RULE_START, _SELECTOR -> {
+        var attributeName = getString();
 
-    context = context.visitAttributeSelector(this, attributeName);
+        visitAttributeSelector(attributeName);
+
+        yield _SELECTOR;
+      }
+      default -> throw new IllegalArgumentException("Unexpected state: " + state);
+    };
   }
 
   private void doSelectorAttributeValue() throws E {
-    String attributeName = getString();
+    state = switch (state) {
+      case _RULE_START, _SELECTOR -> {
+        var attributeName = getString();
 
-    int opCode;
-    opCode = getCode();
+        var opCode = getCode();
 
-    AttributeValueOperator operator;
-    operator = AttributeValueOperator.getByCode(opCode);
+        var operator = AttributeValueOperator.getByCode(opCode);
 
-    String value;
-    value = getString();
+        var value = getString();
 
-    context = context.visitAttributeValueSelector(this, attributeName, operator, value);
+        visitAttributeValueSelector(attributeName, operator, value);
+
+        yield _SELECTOR;
+      }
+      default -> throw new IllegalArgumentException("Unexpected state: " + state);
+    };
   }
 
   private void doSelectorClass() throws E {
-    String className;
-    className = getString();
+    state = switch (state) {
+      case _RULE_START, _SELECTOR -> {
+        var className = getString();
 
-    context = context.visitClassSelector(this, className);
+        visitClassSelector(className);
+
+        yield _SELECTOR;
+      }
+      default -> throw new IllegalArgumentException("Unexpected state: " + state);
+    };
   }
 
   private void doSelectorCombinator() throws E {
-    int code;
-    code = getCode();
+    state = switch (state) {
+      case _RULE_START, _SELECTOR -> {
+        var code = getCode();
 
-    Combinator combinator;
-    combinator = Combinator.getByCode(code);
+        var combinator = Combinator.getByCode(code);
 
-    context = context.visitCombinator(this, combinator);
+        visitCombinator(combinator);
+
+        yield _SELECTOR;
+      }
+      default -> throw new IllegalArgumentException("Unexpected state: " + state);
+    };
   }
 
   private void doSelectorId() throws E {
-    String id;
-    id = getString();
+    state = switch (state) {
+      case _RULE_START, _SELECTOR -> {
+        var id = getString();
 
-    context = context.visitIdSelector(this, id);
+        visitIdSelector(id);
+
+        yield _SELECTOR;
+      }
+      default -> throw new IllegalArgumentException("Unexpected state: " + state);
+    };
   }
 
   private void doSelectorPseudoClass() throws E {
-    int code;
-    code = getCode();
+    var code = getCode();
 
-    PseudoClassSelector selector;
-    selector = PseudoClassSelectors.getByCode(code);
+    var selector = PseudoClassSelectors.getByCode(code);
 
-    context = context.visitSimpleSelector(this, selector);
+    doSimpleSelector(selector);
   }
 
   private void doSelectorPseudoElement() throws E {
-    int code;
-    code = getCode();
+    var code = getCode();
 
-    PseudoElementSelector selector;
-    selector = PseudoElementSelectors.getByCode(code);
+    var selector = PseudoElementSelectors.getByCode(code);
 
-    context = context.visitSimpleSelector(this, selector);
+    doSimpleSelector(selector);
   }
 
   private void doSelectorType() throws E {
-    int code;
-    code = getCode();
+    var code = getCode();
 
-    TypeSelector selector;
-    selector = TypeSelectors.getByCode(code);
+    var selector = TypeSelectors.getByCode(code);
 
-    context = context.visitSimpleSelector(this, selector);
+    doSimpleSelector(selector);
   }
 
   private void doSelectorUniversal() throws E {
-    context = context.visitUniversalSelector(this, UniversalSelector.getInstance());
+    state = switch (state) {
+      case _RULE_START, _SELECTOR -> {
+        var selector = UniversalSelector.getInstance();
+
+        visitUniversalSelector(selector);
+
+        yield _SELECTOR;
+      }
+      default -> throw new IllegalArgumentException("Unexpected state: " + state);
+    };
+  }
+
+  private void doSimpleSelector(SimpleSelector selector) throws E {
+    state = switch (state) {
+      case _RULE_START, _SELECTOR -> {
+        visitSimpleSelector(selector);
+
+        yield _SELECTOR;
+      }
+      default -> throw new IllegalArgumentException("Unexpected state: " + state);
+    };
+  }
+
+  private <T> void doValue0(DoValue<E> action) throws E {
+    state = switch (state) {
+      case _DECLARATION_START -> {
+        action.execute();
+
+        yield _DECLARATION_VALUES;
+      }
+      case _DECLARATION_VALUES -> {
+        visitBeforeNextValue();
+
+        action.execute();
+
+        yield _DECLARATION_VALUES;
+      }
+      case _FUNCTION_START -> {
+        action.execute();
+
+        yield _FUNCTION_VALUES;
+      }
+
+      case _FUNCTION_VALUES -> {
+        visitBeforeNextValue();
+
+        action.execute();
+
+        yield _FUNCTION_VALUES;
+      }
+      case _MEDIA_QUERY_DECLARATION -> {
+        action.execute();
+
+        visitLogicalExpressionEnd();
+
+        yield _MEDIA_QUERY;
+      }
+      default -> throw new IllegalArgumentException("Unexpected state: " + state);
+    };
   }
 
   private void doValueAngleDouble() throws E {
-    AngleUnit unit;
-    unit = getAngleUnit();
+    var unit = getAngleUnit();
 
-    double value;
-    value = getDouble();
+    var value = getDouble();
 
-    context = context.visitAngle(this, unit, value);
+    doValue0(() -> visitAngle(unit, value));
   }
 
   private void doValueAngleInt() throws E {
-    AngleUnit unit;
-    unit = getAngleUnit();
+    var unit = getAngleUnit();
 
-    int value;
-    value = getCode();
+    var value = getCode();
 
-    context = context.visitAngle(this, unit, value);
+    doValue0(() -> visitAngle(unit, value));
   }
 
   private void doValueColorHex() throws E {
-    String hex;
-    hex = getString();
+    var hex = getString();
 
-    context = context.visitColor(this, hex);
+    doValue0(() -> visitColor(hex));
   }
 
   private void doValueColorName() throws E {
-    int code;
-    code = getCode();
+    var code = getCode();
 
-    ColorName color;
-    color = Color.getByCode(code);
+    var color = Color.getByCode(code);
 
-    context = context.visitColor(this, color);
+    doValue0(() -> visitColor(color));
   }
 
   private void doValueDouble() throws E {
-    double value;
-    value = getDouble();
+    var value = getDouble();
 
-    context = context.visitDouble(this, value);
+    doValue0(() -> visitDouble(value));
   }
 
   private void doValueInt() throws E {
-    int value;
-    value = getCode();
+    var value = getCode();
 
-    context = context.visitInt(this, value);
+    doValue0(() -> visitInt(value));
   }
 
   private void doValueKeyword() throws E {
-    int code;
-    code = getCode();
+    var code = getCode();
 
-    StandardKeyword keyword;
-    keyword = Keywords.getByCode(code);
+    var keyword = Keywords.getByCode(code);
 
-    context = context.visitKeyword(this, keyword);
+    doValue0(() -> visitKeyword(keyword));
   }
 
   private void doValueKeywordCustom() throws E {
-    String keyword = getString();
+    var keyword = getString();
 
-    context = context.visitKeyword(this, keyword);
+    doValue0(() -> visitKeyword(keyword));
   }
 
   private void doValueLengthDouble() throws E {
-    LengthUnit unit;
-    unit = getLengthUnit();
+    var unit = getLengthUnit();
 
-    double value;
-    value = getDouble();
+    var value = getDouble();
 
-    context = context.visitLength(this, unit, value);
+    doValue0(() -> visitLength(unit, value));
   }
 
   private void doValueLengthInt() throws E {
-    LengthUnit unit;
-    unit = getLengthUnit();
+    var unit = getLengthUnit();
 
-    int value;
-    value = getCode();
+    var value = getCode();
 
-    context = context.visitLength(this, unit, value);
+    doValue0(() -> visitLength(unit, value));
   }
 
   private void doValuePercentageDouble() throws E {
-    double value;
-    value = getDouble();
+    var value = getDouble();
 
-    context = context.visitPercentage(this, value);
+    doValue0(() -> visitPercentage(value));
   }
 
   private void doValuePercentageInt() throws E {
-    int value;
-    value = getCode();
+    var value = getCode();
 
-    context = context.visitPercentage(this, value);
+    doValue0(() -> visitPercentage(value));
   }
 
   private void doValueRgbaDouble() throws E {
-    int doubleStartIndex;
-    doubleStartIndex = getCode();
+    var doubleStartIndex = getCode();
 
-    double r;
-    r = getDouble(doubleStartIndex++);
+    var r = getDouble(doubleStartIndex++);
+    var g = getDouble(doubleStartIndex++);
+    var b = getDouble(doubleStartIndex++);
+    var alpha = getDouble(doubleStartIndex);
 
-    double g;
-    g = getDouble(doubleStartIndex++);
-
-    double b;
-    b = getDouble(doubleStartIndex++);
-
-    double alpha;
-    alpha = getDouble(doubleStartIndex);
-
-    context = context.visitRgba(this, r, g, b, alpha);
+    doValue0(() -> visitRgba(r, g, b, alpha));
   }
 
   private void doValueRgbaInt() throws E {
-    int r;
-    r = getCode();
+    var r = getCode();
+    var g = getCode();
+    var b = getCode();
+    var alpha = getDouble();
 
-    int g;
-    g = getCode();
-
-    int b;
-    b = getCode();
-
-    double alpha;
-    alpha = getDouble();
-
-    context = context.visitRgba(this, r, g, b, alpha);
+    doValue0(() -> visitRgba(r, g, b, alpha));
   }
 
   private void doValueRgbDouble() throws E {
-    int doubleStartIndex;
-    doubleStartIndex = getCode();
+    var doubleStartIndex = getCode();
 
-    double r;
-    r = getDouble(doubleStartIndex++);
+    var r = getDouble(doubleStartIndex++);
+    var g = getDouble(doubleStartIndex++);
+    var b = getDouble(doubleStartIndex++);
 
-    double g;
-    g = getDouble(doubleStartIndex++);
-
-    double b;
-    b = getDouble(doubleStartIndex++);
-
-    context = context.visitRgb(this, r, g, b);
+    doValue0(() -> visitRgb(r, g, b));
   }
 
   private void doValueRgbDoubleAlpha() throws E {
-    int doubleStartIndex;
-    doubleStartIndex = getCode();
+    var doubleStartIndex = getCode();
 
-    double r;
-    r = getDouble(doubleStartIndex++);
+    var r = getDouble(doubleStartIndex++);
+    var g = getDouble(doubleStartIndex++);
+    var b = getDouble(doubleStartIndex++);
+    var alpha = getDouble(doubleStartIndex);
 
-    double g;
-    g = getDouble(doubleStartIndex++);
-
-    double b;
-    b = getDouble(doubleStartIndex++);
-
-    double alpha;
-    alpha = getDouble(doubleStartIndex);
-
-    context = context.visitRgb(this, r, g, b, alpha);
+    doValue0(() -> visitRgb(r, g, b, alpha));
   }
 
   private void doValueRgbInt() throws E {
-    int r;
-    r = getCode();
+    var r = getCode();
+    var g = getCode();
+    var b = getCode();
 
-    int g;
-    g = getCode();
-
-    int b;
-    b = getCode();
-
-    context = context.visitRgb(this, r, g, b);
+    doValue0(() -> visitRgb(r, g, b));
   }
 
   private void doValueRgbIntAlpha() throws E {
-    int r;
-    r = getCode();
+    var r = getCode();
+    var g = getCode();
+    var b = getCode();
+    var alpha = getDouble();
 
-    int g;
-    g = getCode();
-
-    int b;
-    b = getCode();
-
-    double alpha;
-    alpha = getDouble();
-
-    context = context.visitRgb(this, r, g, b, alpha);
+    doValue0(() -> visitRgb(r, g, b, alpha));
   }
 
   private void doValueString() throws E {
-    String value;
-    value = getString();
+    var value = getString();
 
-    context = context.visitString(this, value);
+    doValue0(() -> visitString(value));
   }
 
   private void doValueUri() throws E {
-    String value;
-    value = getString();
+    var value = getString();
 
-    context = context.visitUri(this, value);
+    doValue0(() -> visitUri(value));
   }
 
   private void execute0() throws E {

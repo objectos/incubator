@@ -26,23 +26,4 @@ class ContextSheetBody<E extends Exception> extends Context<E> {
     return (Context<E>) INSTANCE;
   }
 
-  @Override
-  final Context<E> visitMediaStart(Adapter<E> a) throws E {
-    a.visitBeforeNextStatement();
-    a.visitMediaStart();
-    return toMediaStart();
-  }
-
-  @Override
-  final Context<E> visitRuleStart(Adapter<E> a) throws E {
-    a.visitBeforeNextStatement();
-    a.visitRuleStart();
-    return toRuleStart();
-  }
-
-  @Override
-  final Context<E> visitStyleSheetEnd(Adapter<E> a) throws E {
-    return this;
-  }
-
 }

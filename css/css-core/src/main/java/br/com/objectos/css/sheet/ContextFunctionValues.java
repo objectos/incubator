@@ -37,11 +37,4 @@ final class ContextFunctionValues<E extends Exception> extends ContextVisitValue
     a.visitBeforeNextValue();
   }
 
-  @Override
-  final Context<E> visitFunctionEnd(Adapter<E> a) throws E {
-    a.visitFunctionEnd();
-
-    return toDeclarationValues();
-  }
-
 }

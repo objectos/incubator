@@ -26,18 +26,4 @@ final class ContextAtMediaBody<E extends Exception> extends Context<E> {
     return (Context<E>) INSTANCE;
   }
 
-  @Override
-  final Context<E> visitMediaEnd(Adapter<E> a) throws E {
-    a.visitBlockEnd();
-    a.popBody();
-    return toMediaOrSheetBody(a);
-  }
-
-  @Override
-  final Context<E> visitRuleStart(Adapter<E> a) throws E {
-    a.visitBeforeNextStatement();
-    a.visitRuleStart();
-    return toRuleStart();
-  }
-
 }

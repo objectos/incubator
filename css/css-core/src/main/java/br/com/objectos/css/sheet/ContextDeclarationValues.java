@@ -15,8 +15,6 @@
  */
 package br.com.objectos.css.sheet;
 
-import br.com.objectos.css.property.StandardPropertyName;
-
 final class ContextDeclarationValues<E extends Exception> extends ContextVisitValue<E> {
 
   private static final ContextDeclarationValues<Exception> INSTANCE
@@ -37,26 +35,6 @@ final class ContextDeclarationValues<E extends Exception> extends ContextVisitVa
   @Override
   final void visitBeforeValueImpl(Adapter<E> a) throws E {
     a.visitBeforeNextValue();
-  }
-
-  @Override
-  final Context<E> visitDeclarationStart(Adapter<E> a, StandardPropertyName name) throws E {
-    a.visitBeforeNextDeclaration();
-    a.visitDeclarationStart(name);
-    return toDeclarationStart();
-  }
-
-  @Override
-  final Context<E> visitMultiDeclarationSeparator(Adapter<E> a) throws E {
-    a.visitMultiDeclarationSeparator();
-    return toDeclarationStart();
-  }
-
-  @Override
-  final Context<E> visitRuleEnd(Adapter<E> a) throws E {
-    a.visitAfterLastDeclaration();
-    a.visitBlockEnd();
-    return toMediaOrSheetBody(a);
   }
 
 }

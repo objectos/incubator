@@ -17,18 +17,14 @@ package br.com.objectos.css.sheet;
 
 enum Body {
 
-  SHEET(ContextSheetBody.get()),
+  SHEET(StyleSheetEngine._SHEET_BODY),
 
-  MEDIA(ContextAtMediaBody.get());
+  MEDIA(StyleSheetEngine._AT_MEDIA_BODY);
 
-  private final Context<?> context;
+  final int state;
 
-  private Body(Context<?> context) {
-    this.context = context;
-  }
-
-  final Context<?> getContext() {
-    return context;
+  Body(int state) {
+    this.state = state;
   }
 
 }

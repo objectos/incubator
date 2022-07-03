@@ -26,27 +26,4 @@ class ContextStart<E extends Exception> extends Context<E> {
     return (Context<E>) INSTANCE;
   }
 
-  @Override
-  final Context<E> visitMediaStart(Adapter<E> a) throws E {
-    doStart(a);
-    a.visitMediaStart();
-    return toMediaStart();
-  }
-
-  @Override
-  final Context<E> visitRuleStart(Adapter<E> a) throws E {
-    doStart(a);
-    a.visitRuleStart();
-    return toRuleStart();
-  }
-
-  @Override
-  final Context<E> visitStyleSheetEnd(Adapter<E> a) throws E {
-    return this;
-  }
-
-  private void doStart(Adapter<E> a) {
-    a.pushBody(Body.SHEET);
-  }
-
 }

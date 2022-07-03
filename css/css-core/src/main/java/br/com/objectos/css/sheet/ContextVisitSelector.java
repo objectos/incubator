@@ -15,57 +15,8 @@
  */
 package br.com.objectos.css.sheet;
 
-import br.com.objectos.css.select.AttributeValueOperator;
-import br.com.objectos.css.select.Combinator;
-import br.com.objectos.css.select.SimpleSelector;
-import br.com.objectos.css.select.UniversalSelector;
-
 abstract class ContextVisitSelector<E extends Exception> extends Context<E> {
 
   ContextVisitSelector() {}
-
-  @Override
-  final Context<E> visitAttributeSelector(Adapter<E> a, String attributeName) throws E {
-    a.visitAttributeSelector(attributeName);
-    return toSelector();
-  }
-
-  @Override
-  final Context<E> visitAttributeValueSelector(
-      Adapter<E> a, String attributeName, AttributeValueOperator operator, String value)
-      throws E {
-    a.visitAttributeValueSelector(attributeName, operator, value);
-    return toSelector();
-  }
-
-  @Override
-  final Context<E> visitClassSelector(Adapter<E> a, String className) throws E {
-    a.visitClassSelector(className);
-    return toSelector();
-  }
-
-  @Override
-  final Context<E> visitCombinator(Adapter<E> a, Combinator combinator) throws E {
-    a.visitCombinator(combinator);
-    return toSelector();
-  }
-
-  @Override
-  final Context<E> visitIdSelector(Adapter<E> a, String id) throws E {
-    a.visitIdSelector(id);
-    return toSelector();
-  }
-
-  @Override
-  final Context<E> visitSimpleSelector(Adapter<E> a, SimpleSelector selector) throws E {
-    a.visitSimpleSelector(selector);
-    return toSelector();
-  }
-
-  @Override
-  final Context<E> visitUniversalSelector(Adapter<E> a, UniversalSelector selector) throws E {
-    a.visitUniversalSelector(selector);
-    return toSelector();
-  }
 
 }

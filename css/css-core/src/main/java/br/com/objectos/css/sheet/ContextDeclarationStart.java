@@ -37,9 +37,4 @@ class ContextDeclarationStart<E extends Exception> extends ContextVisitValue<E> 
     // noop
   }
 
-  @Override
-  final Context<E> visitMultiDeclarationSeparator(Adapter<E> a) throws E {
-    return toDeclarationStart();
-  }
-
 }
