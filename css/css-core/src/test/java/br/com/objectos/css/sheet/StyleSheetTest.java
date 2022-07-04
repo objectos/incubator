@@ -17,6 +17,7 @@ package br.com.objectos.css.sheet;
 
 import static org.testng.Assert.assertEquals;
 
+import br.com.objectos.css.Css;
 import br.com.objectos.css.sheet.ex.BackgroundImageTestCase;
 import br.com.objectos.css.sheet.ex.TestCase00;
 import br.com.objectos.css.sheet.ex.TestCase01;
@@ -56,8 +57,10 @@ import br.com.objectos.css.sheet.ex.TestCase34;
 import br.com.objectos.css.sheet.ex.TestCase35;
 import br.com.objectos.css.sheet.ex.TransformTestCase;
 import java.io.IOException;
+import java.util.Set;
 import objectos.util.UnmodifiableList;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class StyleSheetTest {
@@ -75,6 +78,13 @@ public class StyleSheetTest {
     pretty = StyleSheetWriter.ofPretty();
 
     out = new StringBuilder();
+  }
+
+  @BeforeMethod
+  public void _beforeMethod() {
+    minified.clear();
+
+    pretty.clear();
   }
 
   @Test
@@ -693,6 +703,61 @@ public class StyleSheetTest {
     );
   }
 
+  @Test(description = //
+  """
+  # filterClassName test case #01
+
+  - result will be non-empty
+  """)
+  public void testCase36() {
+    var css = new AbstractStyleSheet() {
+      @Override
+      protected final void definition() {
+        style(cn("a"), border(zero()));
+
+        style(b, zIndex(1));
+
+        style(cn("b"), margin(zero()));
+
+        style(Css.dot("c"), padding(zero()));
+      }
+    };
+
+    var keep = Set.of("a", "c");
+
+    minified.filterClassSelectorsByName(keep::contains);
+
+    test(minified, css,
+      """
+      .a{\
+      border:0\
+      }\
+      b{\
+      z-index:1\
+      }\
+      .c{\
+      padding:0\
+      }"""
+    );
+
+    pretty.filterClassSelectorsByName(keep::contains);
+
+    test(pretty, css,
+      """
+      .a {
+        border: 0;
+      }
+
+      b {
+        z-index: 1;
+      }
+
+      .c {
+        padding: 0;
+      }"""
+    );
+  }
+
   @Test
   public void transform() {
     test(
@@ -735,6 +800,18 @@ public class StyleSheetTest {
       pretty.writeTo(sheet, out);
 
       assertEquals(out.toString(), prettyOutput, "PrettyStyleSheetWriter");
+    } catch (IOException e) {
+      throw new AssertionError("StringBuilder does not throw IOException", e);
+    }
+  }
+
+  private void test(StyleSheetWriter writer, StyleSheet sheet, String expected) {
+    try {
+      out.setLength(0);
+
+      writer.writeTo(sheet, out);
+
+      assertEquals(out.toString(), expected);
     } catch (IOException e) {
       throw new AssertionError("StringBuilder does not throw IOException", e);
     }

@@ -22,7 +22,6 @@ import br.com.objectos.css.select.AttributeValueOperator;
 import br.com.objectos.css.select.Combinator;
 import br.com.objectos.css.select.PseudoClassSelectors;
 import br.com.objectos.css.select.PseudoElementSelectors;
-import br.com.objectos.css.select.SimpleSelector;
 import br.com.objectos.css.select.TypeSelectors;
 import br.com.objectos.css.select.UniversalSelector;
 import br.com.objectos.css.type.AngleUnit;
@@ -30,6 +29,8 @@ import br.com.objectos.css.type.Color;
 import br.com.objectos.css.type.LengthUnit;
 import java.util.ArrayDeque;
 import java.util.Deque;
+import java.util.function.Predicate;
+import objectos.lang.Check;
 import objectos.util.IntArrays;
 
 public abstract class StyleSheetEngine<E extends Exception>
@@ -37,7 +38,7 @@ public abstract class StyleSheetEngine<E extends Exception>
     implements CompiledStyleSheetVisitor<E> {
 
   @FunctionalInterface
-  private interface DoValue<X extends Exception> {
+  private interface Action<X extends Exception> {
     void execute() throws X;
   }
 
@@ -57,15 +58,19 @@ public abstract class StyleSheetEngine<E extends Exception>
 
   private static final int _FUNCTION_VALUES = 8;
 
-  private static final int _MEDIA_QUERY = 9;
+  private static final int _IGNORE_IF_SINGLE_SELECTOR = 9;
 
-  private static final int _MEDIA_QUERY_DECLARATION = 10;
+  private static final int _IGNORE_RULE = 10;
 
-  private static final int _RULE_START = 11;
+  private static final int _MEDIA_QUERY = 11;
 
-  private static final int _SELECTOR = 12;
+  private static final int _MEDIA_QUERY_DECLARATION = 12;
 
-  static final int _SHEET_BODY = 13;
+  private static final int _SELECTOR = 13;
+
+  static final int _SHEET_BODY = 14;
+
+  private static final Predicate<String> CLASS_SELECTORS_ALWAYS_TRUE = (s) -> true;
 
   private final Deque<Body> bodyStack = new ArrayDeque<>(3);
 
@@ -75,29 +80,51 @@ public abstract class StyleSheetEngine<E extends Exception>
 
   private int state;
 
+  private Predicate<String> classSelectorsByName;
+
+  private String currentClassName;
+
   protected StyleSheetEngine() {}
 
+  public final void clear() {
+    if (classSelectorsByName != null) {
+      classSelectorsByName = null;
+    }
+  }
+
   public final void execute() throws E {
-    state = _START;
+    if (classSelectorsByName == null) {
+      classSelectorsByName = CLASS_SELECTORS_ALWAYS_TRUE;
+    }
 
     cursor = 0;
+
+    state = _START;
 
     while (state != _STOP) {
       execute0();
     }
-
-    //context = context.visitStyleSheetEnd(this);
   }
 
-  public final Body peekBody() {
+  public final void filterClassSelectorsByName(Predicate<String> names) {
+    Check.notNull(names, "names == null");
+
+    if (classSelectorsByName == null) {
+      classSelectorsByName = names;
+    } else {
+      classSelectorsByName = classSelectorsByName.and(names);
+    }
+  }
+
+  final Body peekBody() {
     return bodyStack.peek();
   }
 
-  public final Body popBody() {
+  final Body popBody() {
     return bodyStack.pop();
   }
 
-  public final void pushBody(Body body) {
+  final void pushBody(Body body) {
     bodyStack.push(body);
   }
 
@@ -136,6 +163,7 @@ public abstract class StyleSheetEngine<E extends Exception>
 
         yield _DECLARATION_START;
       }
+      case _IGNORE_IF_SINGLE_SELECTOR -> _IGNORE_RULE;
       case _MEDIA_QUERY -> {
         visitLogicalExpressionStart(LogicalOperator.AND);
 
@@ -278,6 +306,11 @@ public abstract class StyleSheetEngine<E extends Exception>
 
         yield body.state;
       }
+      case _IGNORE_RULE -> {
+        var body = peekBody();
+
+        yield body.state;
+      }
       case _SELECTOR -> {
         visitEmptyBlock();
 
@@ -291,112 +324,123 @@ public abstract class StyleSheetEngine<E extends Exception>
 
   private void doRuleStart() throws E {
     state = switch (state) {
-      case _AT_MEDIA_BODY -> {
-
-        visitBeforeNextStatement();
-
-        visitRuleStart();
-
-        yield _RULE_START;
-      }
+      case _AT_MEDIA_BODY, _SHEET_BODY -> state;
       case _MEDIA_QUERY -> {
         pushBody(Body.MEDIA);
 
         visitBlockStart();
 
-        visitRuleStart();
-
-        yield _RULE_START;
-      }
-      case _SHEET_BODY -> {
-        visitBeforeNextStatement();
-
-        visitRuleStart();
-
-        yield _RULE_START;
+        yield state;
       }
       case _START -> {
         pushBody(Body.SHEET);
 
-        visitRuleStart();
-
-        yield _RULE_START;
+        yield state;
       }
       default -> throw new IllegalArgumentException("Unexpected state: " + state);
     };
+  }
+
+  private void doSelector0(Action<E> action) throws E {
+    switch (state) {
+      case _AT_MEDIA_BODY:
+        visitBeforeNextStatement();
+
+        visitRuleStart();
+
+        action.execute();
+
+        break;
+      case _IGNORE_IF_SINGLE_SELECTOR:
+        visitRuleStart();
+
+        visitClassSelector(currentClassName);
+
+        currentClassName = null;
+
+        action.execute();
+
+        break;
+      case _MEDIA_QUERY:
+        visitRuleStart();
+
+        action.execute();
+
+        break;
+      case _SHEET_BODY:
+        visitBeforeNextStatement();
+
+        visitRuleStart();
+
+        action.execute();
+
+        break;
+      case _SELECTOR:
+        action.execute();
+
+        break;
+      case _START:
+        visitRuleStart();
+
+        action.execute();
+
+        break;
+      default:
+        throw new IllegalArgumentException("Unexpected state: " + state);
+    }
+
+    state = _SELECTOR;
   }
 
   private void doSelectorAttribute() throws E {
-    state = switch (state) {
-      case _RULE_START, _SELECTOR -> {
-        var attributeName = getString();
+    var attributeName = getString();
 
-        visitAttributeSelector(attributeName);
-
-        yield _SELECTOR;
-      }
-      default -> throw new IllegalArgumentException("Unexpected state: " + state);
-    };
+    doSelector0(() -> visitAttributeSelector(attributeName));
   }
 
   private void doSelectorAttributeValue() throws E {
-    state = switch (state) {
-      case _RULE_START, _SELECTOR -> {
-        var attributeName = getString();
+    var attributeName = getString();
 
-        var opCode = getCode();
+    var opCode = getCode();
 
-        var operator = AttributeValueOperator.getByCode(opCode);
+    var operator = AttributeValueOperator.getByCode(opCode);
 
-        var value = getString();
+    var value = getString();
 
-        visitAttributeValueSelector(attributeName, operator, value);
-
-        yield _SELECTOR;
-      }
-      default -> throw new IllegalArgumentException("Unexpected state: " + state);
-    };
+    doSelector0(() -> visitAttributeValueSelector(attributeName, operator, value));
   }
 
   private void doSelectorClass() throws E {
+    var className = getString();
+
     state = switch (state) {
-      case _RULE_START, _SELECTOR -> {
-        var className = getString();
+      case _AT_MEDIA_BODY, _MEDIA_QUERY, _SHEET_BODY, _START:
+        if (!classSelectorsByName.test(className)) {
+          currentClassName = className;
 
-        visitClassSelector(className);
+          yield _IGNORE_IF_SINGLE_SELECTOR;
+        }
 
-        yield _SELECTOR;
-      }
-      default -> throw new IllegalArgumentException("Unexpected state: " + state);
+        // fall through
+      default:
+        doSelector0(() -> visitClassSelector(className));
+
+        yield state;
     };
   }
 
   private void doSelectorCombinator() throws E {
-    state = switch (state) {
-      case _RULE_START, _SELECTOR -> {
-        var code = getCode();
+    var code = getCode();
 
-        var combinator = Combinator.getByCode(code);
+    var combinator = Combinator.getByCode(code);
 
-        visitCombinator(combinator);
-
-        yield _SELECTOR;
-      }
-      default -> throw new IllegalArgumentException("Unexpected state: " + state);
-    };
+    doSelector0(() -> visitCombinator(combinator));
   }
 
   private void doSelectorId() throws E {
-    state = switch (state) {
-      case _RULE_START, _SELECTOR -> {
-        var id = getString();
+    var id = getString();
 
-        visitIdSelector(id);
-
-        yield _SELECTOR;
-      }
-      default -> throw new IllegalArgumentException("Unexpected state: " + state);
-    };
+    doSelector0(() -> visitIdSelector(id));
   }
 
   private void doSelectorPseudoClass() throws E {
@@ -404,7 +448,7 @@ public abstract class StyleSheetEngine<E extends Exception>
 
     var selector = PseudoClassSelectors.getByCode(code);
 
-    doSimpleSelector(selector);
+    doSelector0(() -> visitSimpleSelector(selector));
   }
 
   private void doSelectorPseudoElement() throws E {
@@ -412,7 +456,7 @@ public abstract class StyleSheetEngine<E extends Exception>
 
     var selector = PseudoElementSelectors.getByCode(code);
 
-    doSimpleSelector(selector);
+    doSelector0(() -> visitSimpleSelector(selector));
   }
 
   private void doSelectorType() throws E {
@@ -420,34 +464,16 @@ public abstract class StyleSheetEngine<E extends Exception>
 
     var selector = TypeSelectors.getByCode(code);
 
-    doSimpleSelector(selector);
+    doSelector0(() -> visitSimpleSelector(selector));
   }
 
   private void doSelectorUniversal() throws E {
-    state = switch (state) {
-      case _RULE_START, _SELECTOR -> {
-        var selector = UniversalSelector.getInstance();
+    var selector = UniversalSelector.getInstance();
 
-        visitUniversalSelector(selector);
-
-        yield _SELECTOR;
-      }
-      default -> throw new IllegalArgumentException("Unexpected state: " + state);
-    };
+    doSelector0(() -> visitUniversalSelector(selector));
   }
 
-  private void doSimpleSelector(SimpleSelector selector) throws E {
-    state = switch (state) {
-      case _RULE_START, _SELECTOR -> {
-        visitSimpleSelector(selector);
-
-        yield _SELECTOR;
-      }
-      default -> throw new IllegalArgumentException("Unexpected state: " + state);
-    };
-  }
-
-  private <T> void doValue0(DoValue<E> action) throws E {
+  private <T> void doValue0(Action<E> action) throws E {
     state = switch (state) {
       case _DECLARATION_START -> {
         action.execute();
@@ -466,7 +492,6 @@ public abstract class StyleSheetEngine<E extends Exception>
 
         yield _FUNCTION_VALUES;
       }
-
       case _FUNCTION_VALUES -> {
         visitBeforeNextValue();
 
@@ -474,6 +499,7 @@ public abstract class StyleSheetEngine<E extends Exception>
 
         yield _FUNCTION_VALUES;
       }
+      case _IGNORE_RULE -> _IGNORE_RULE;
       case _MEDIA_QUERY_DECLARATION -> {
         action.execute();
 

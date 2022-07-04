@@ -305,16 +305,6 @@ public abstract class StyleSheetWriter extends StyleSheetEngine<IOException> {
     write(')');
   }
 
-  public void write(char c) throws IOException {
-    out.append(c);
-  }
-
-  public void write(String s) throws IOException {
-    out.append(s);
-  }
-
-  public abstract void writeComma() throws IOException;
-
   public final void writeTo(StyleSheet sheet, Appendable out) throws IOException {
     Check.notNull(sheet, "sheet == null");
     this.out = Check.notNull(out, "out == null");
@@ -328,14 +318,6 @@ public abstract class StyleSheetWriter extends StyleSheetEngine<IOException> {
     execute();
   }
 
-  public void writeUrl(String src) throws IOException {
-    write("url(");
-    write('"');
-    write(src);
-    write('"');
-    write(')');
-  }
-
   final void quote(String value) throws IOException {
     write('"');
     write(value);
@@ -343,6 +325,16 @@ public abstract class StyleSheetWriter extends StyleSheetEngine<IOException> {
   }
 
   abstract void quoteIfNecessary(String value) throws IOException;
+
+  final void write(char c) throws IOException {
+    out.append(c);
+  }
+
+  final void write(String s) throws IOException {
+    out.append(s);
+  }
+
+  abstract void writeComma() throws IOException;
 
   void writeDoubleImpl(double value) throws IOException {
     write(Double.toString(value));
@@ -352,6 +344,14 @@ public abstract class StyleSheetWriter extends StyleSheetEngine<IOException> {
 
   final void writeInt(int value) throws IOException {
     write(Integer.toString(value));
+  }
+
+  final void writeUrl(String src) throws IOException {
+    write("url(");
+    write('"');
+    write(src);
+    write('"');
+    write(')');
   }
 
   abstract void writeValueColorHex(String value) throws IOException;
