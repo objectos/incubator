@@ -705,7 +705,7 @@ public class StyleSheetTest {
 
   @Test(description = //
   """
-  # filterClassName test case #01
+  # filterClassSelectorsByName test case #01
 
   - result will be non-empty
   - filtered out in the middle
@@ -743,6 +743,83 @@ public class StyleSheetTest {
         padding: 0;
       }"""
     );
+  }
+
+  @Test(description = //
+  """
+  # filterClassSelectorsByName test case #02
+
+  - result will be empty
+  """)
+  public void testCase37() {
+    var css = new AbstractStyleSheet() {
+      @Override
+      protected final void definition() {
+        style(cn("a"), border(zero()));
+      }
+    };
+
+    var keep = Set.of("b", "c");
+
+    minified.filterClassSelectorsByName(keep::contains);
+
+    test(minified, css, "");
+
+    pretty.filterClassSelectorsByName(keep::contains);
+
+    test(pretty, css, "");
+  }
+
+  @Test(description = //
+  """
+  # filterClassSelectorsByName test case #03
+
+  - media queries
+  """)
+  public void testCase38() {
+    var css = new AbstractStyleSheet() {
+      @Override
+      protected final void definition() {
+        style(
+          cn("a"),
+          zIndex(0)
+        );
+
+        media(
+          screen, minWidth(px(800)),
+
+          style(
+            cn("b"),
+            zIndex(1)
+          ),
+
+          style(
+            cn("c"),
+            zIndex(2)
+          )
+        );
+      }
+    };
+
+    var keep = Set.of("a", "b");
+
+    minified.filterClassSelectorsByName(keep::contains);
+
+    test(minified, css, ".a{z-index:0}@media screen and (min-width:800px){.b{z-index:1}}");
+
+    pretty.filterClassSelectorsByName(keep::contains);
+
+    test(pretty, css,
+      """
+      .a {
+        z-index: 0;
+      }
+
+      @media screen and (min-width: 800px) {
+        .b {
+          z-index: 1;
+        }
+      }""");
   }
 
   @Test
