@@ -73,238 +73,6 @@ public abstract class StyleSheetWriter extends StyleSheetEngine<IOException> {
     }
   }
 
-  @Override
-  public void visitAngle(AngleUnit unit, double value) throws IOException {
-    writeDouble(value);
-    write(unit.getName());
-  }
-
-  @Override
-  public void visitAngle(AngleUnit unit, int value) throws IOException {
-    writeInt(value);
-    write(unit.getName());
-  }
-
-  @Override
-  public void visitAttributeSelector(String attributeName) throws IOException {
-    write('[');
-    write(attributeName);
-    write(']');
-  }
-
-  @Override
-  public void visitAttributeValueSelector(
-      String attributeName, AttributeValueOperator operator, String value)
-      throws IOException {
-    write('[');
-    write(attributeName);
-    write(operator.getSymbol());
-    quoteIfNecessary(value);
-    write(']');
-  }
-
-  @Override
-  public void visitBeforeNextValue() throws IOException {
-    write(' ');
-  }
-
-  @Override
-  public void visitClassSelector(String className) throws IOException {
-    write('.');
-    write(className);
-  }
-
-  @Override
-  public void visitColor(ColorName value) throws IOException {
-    write(value.getName());
-  }
-
-  @Override
-  public void visitColor(String value) throws IOException {
-    writeValueColorHex(value);
-  }
-
-  @Override
-  public void visitDouble(double value) throws IOException {
-    writeDoubleImpl(value);
-  }
-
-  @Override
-  public void visitFunctionEnd() throws IOException {
-    write(')');
-  }
-
-  @Override
-  public void visitFunctionStart(StandardFunctionName name) throws IOException {
-    write(name.getName());
-    write('(');
-  }
-
-  @Override
-  public void visitIdSelector(String id) throws IOException {
-    write('#');
-    write(id);
-  }
-
-  @Override
-  public void visitInt(int value) throws IOException {
-    write(Integer.toString(value));
-  }
-
-  @Override
-  public void visitKeyword(StandardKeyword value) throws IOException {
-    write(value.getName());
-  }
-
-  @Override
-  public void visitKeyword(String keyword) throws IOException {
-    write(keyword);
-  }
-
-  @Override
-  public void visitLength(LengthUnit unit, double value) throws IOException {
-    writeDouble(value);
-    write(unit.getName());
-  }
-
-  @Override
-  public void visitLength(LengthUnit unit, int value) throws IOException {
-    writeInt(value);
-    write(unit.getName());
-  }
-
-  @Override
-  public void visitLogicalExpressionEnd() throws IOException {
-    write(')');
-  }
-
-  @Override
-  public void visitLogicalExpressionStart(LogicalOperator operator) throws IOException {
-    write(' ');
-    write(operator.getName());
-    write(' ');
-    write('(');
-  }
-
-  @Override
-  public void visitMediaStart() throws IOException {
-    write("@media");
-  }
-
-  @Override
-  public void visitMediaType(MediaType type) throws IOException {
-    write(' ');
-    write(type.getName());
-  }
-
-  @Override
-  public void visitPercentage(double value) throws IOException {
-    writeDouble(value);
-    write('%');
-  }
-
-  @Override
-  public void visitPercentage(int value) throws IOException {
-    writeInt(value);
-    write('%');
-  }
-
-  @Override
-  public void visitRgb(double r, double g, double b) throws IOException {
-    writeRgbStart();
-    writeDouble(r);
-    writeComma();
-    writeDouble(g);
-    writeComma();
-    writeDouble(b);
-    write(')');
-  }
-
-  @Override
-  public void visitRgb(double r, double g, double b, double alpha) throws IOException {
-    writeRgbStart();
-    writeDouble(r);
-    writeComma();
-    writeDouble(g);
-    writeComma();
-    writeDouble(b);
-    writeComma();
-    writeDouble(alpha);
-    write(')');
-  }
-
-  @Override
-  public void visitRgb(int r, int g, int b) throws IOException {
-    writeRgbStart();
-    writeInt(r);
-    writeComma();
-    writeInt(g);
-    writeComma();
-    writeInt(b);
-    write(')');
-  }
-
-  @Override
-  public void visitRgb(int r, int g, int b, double alpha) throws IOException {
-    writeRgbStart();
-    writeInt(r);
-    writeComma();
-    writeInt(g);
-    writeComma();
-    writeInt(b);
-    writeComma();
-    writeDouble(alpha);
-    write(')');
-  }
-
-  @Override
-  public void visitRgba(double r, double g, double b, double alpha) throws IOException {
-    writeRgbaStart();
-    writeDouble(r);
-    writeComma();
-    writeDouble(g);
-    writeComma();
-    writeDouble(b);
-    writeComma();
-    writeDouble(alpha);
-    write(')');
-  }
-
-  @Override
-  public void visitRgba(int r, int g, int b, double alpha) throws IOException {
-    writeRgbaStart();
-    writeInt(r);
-    writeComma();
-    writeInt(g);
-    writeComma();
-    writeInt(b);
-    writeComma();
-    writeDouble(alpha);
-    write(')');
-  }
-
-  @Override
-  public void visitSimpleSelector(SimpleSelector selector) throws IOException {
-    write(selector.toString());
-  }
-
-  @Override
-  public void visitString(String value) throws IOException {
-    quoteIfNecessary(value);
-  }
-
-  @Override
-  public void visitUniversalSelector(UniversalSelector selector) throws IOException {
-    write('*');
-  }
-
-  @Override
-  public void visitUri(String value) throws IOException {
-    write("url(");
-    quoteIfNecessary(value);
-    write(')');
-  }
-
   public final void writeTo(StyleSheet sheet, Appendable out) throws IOException {
     Check.notNull(sheet, "sheet == null");
     this.out = Check.notNull(out, "out == null");
@@ -316,6 +84,238 @@ public abstract class StyleSheetWriter extends StyleSheetEngine<IOException> {
     compile();
 
     execute();
+  }
+
+  @Override
+  protected void visitAngle(AngleUnit unit, double value) throws IOException {
+    writeDouble(value);
+    write(unit.getName());
+  }
+
+  @Override
+  protected void visitAngle(AngleUnit unit, int value) throws IOException {
+    writeInt(value);
+    write(unit.getName());
+  }
+
+  @Override
+  protected void visitAttributeSelector(String attributeName) throws IOException {
+    write('[');
+    write(attributeName);
+    write(']');
+  }
+
+  @Override
+  protected void visitAttributeValueSelector(
+      String attributeName, AttributeValueOperator operator, String value)
+      throws IOException {
+    write('[');
+    write(attributeName);
+    write(operator.getSymbol());
+    quoteIfNecessary(value);
+    write(']');
+  }
+
+  @Override
+  protected void visitBeforeNextValue() throws IOException {
+    write(' ');
+  }
+
+  @Override
+  protected void visitClassSelector(String className) throws IOException {
+    write('.');
+    write(className);
+  }
+
+  @Override
+  protected void visitColor(ColorName value) throws IOException {
+    write(value.getName());
+  }
+
+  @Override
+  protected void visitColor(String value) throws IOException {
+    writeValueColorHex(value);
+  }
+
+  @Override
+  protected void visitDouble(double value) throws IOException {
+    writeDoubleImpl(value);
+  }
+
+  @Override
+  protected void visitFunctionEnd() throws IOException {
+    write(')');
+  }
+
+  @Override
+  protected void visitFunctionStart(StandardFunctionName name) throws IOException {
+    write(name.getName());
+    write('(');
+  }
+
+  @Override
+  protected void visitIdSelector(String id) throws IOException {
+    write('#');
+    write(id);
+  }
+
+  @Override
+  protected void visitInt(int value) throws IOException {
+    write(Integer.toString(value));
+  }
+
+  @Override
+  protected void visitKeyword(StandardKeyword value) throws IOException {
+    write(value.getName());
+  }
+
+  @Override
+  protected void visitKeyword(String keyword) throws IOException {
+    write(keyword);
+  }
+
+  @Override
+  protected void visitLength(LengthUnit unit, double value) throws IOException {
+    writeDouble(value);
+    write(unit.getName());
+  }
+
+  @Override
+  protected void visitLength(LengthUnit unit, int value) throws IOException {
+    writeInt(value);
+    write(unit.getName());
+  }
+
+  @Override
+  protected void visitLogicalExpressionEnd() throws IOException {
+    write(')');
+  }
+
+  @Override
+  protected void visitLogicalExpressionStart(LogicalOperator operator) throws IOException {
+    write(' ');
+    write(operator.getName());
+    write(' ');
+    write('(');
+  }
+
+  @Override
+  protected void visitMediaStart() throws IOException {
+    write("@media");
+  }
+
+  @Override
+  protected void visitMediaType(MediaType type) throws IOException {
+    write(' ');
+    write(type.getName());
+  }
+
+  @Override
+  protected void visitPercentage(double value) throws IOException {
+    writeDouble(value);
+    write('%');
+  }
+
+  @Override
+  protected void visitPercentage(int value) throws IOException {
+    writeInt(value);
+    write('%');
+  }
+
+  @Override
+  protected void visitRgb(double r, double g, double b) throws IOException {
+    writeRgbStart();
+    writeDouble(r);
+    writeComma();
+    writeDouble(g);
+    writeComma();
+    writeDouble(b);
+    write(')');
+  }
+
+  @Override
+  protected void visitRgb(double r, double g, double b, double alpha) throws IOException {
+    writeRgbStart();
+    writeDouble(r);
+    writeComma();
+    writeDouble(g);
+    writeComma();
+    writeDouble(b);
+    writeComma();
+    writeDouble(alpha);
+    write(')');
+  }
+
+  @Override
+  protected void visitRgb(int r, int g, int b) throws IOException {
+    writeRgbStart();
+    writeInt(r);
+    writeComma();
+    writeInt(g);
+    writeComma();
+    writeInt(b);
+    write(')');
+  }
+
+  @Override
+  protected void visitRgb(int r, int g, int b, double alpha) throws IOException {
+    writeRgbStart();
+    writeInt(r);
+    writeComma();
+    writeInt(g);
+    writeComma();
+    writeInt(b);
+    writeComma();
+    writeDouble(alpha);
+    write(')');
+  }
+
+  @Override
+  protected void visitRgba(double r, double g, double b, double alpha) throws IOException {
+    writeRgbaStart();
+    writeDouble(r);
+    writeComma();
+    writeDouble(g);
+    writeComma();
+    writeDouble(b);
+    writeComma();
+    writeDouble(alpha);
+    write(')');
+  }
+
+  @Override
+  protected void visitRgba(int r, int g, int b, double alpha) throws IOException {
+    writeRgbaStart();
+    writeInt(r);
+    writeComma();
+    writeInt(g);
+    writeComma();
+    writeInt(b);
+    writeComma();
+    writeDouble(alpha);
+    write(')');
+  }
+
+  @Override
+  protected void visitSimpleSelector(SimpleSelector selector) throws IOException {
+    write(selector.toString());
+  }
+
+  @Override
+  protected void visitString(String value) throws IOException {
+    quoteIfNecessary(value);
+  }
+
+  @Override
+  protected void visitUniversalSelector(UniversalSelector selector) throws IOException {
+    write('*');
+  }
+
+  @Override
+  protected void visitUri(String value) throws IOException {
+    write("url(");
+    quoteIfNecessary(value);
+    write(')');
   }
 
   final void quote(String value) throws IOException {

@@ -17,15 +17,18 @@ package br.com.objectos.css.sheet;
 
 import br.com.objectos.css.function.StandardFunctionName;
 import br.com.objectos.css.keyword.Keywords;
+import br.com.objectos.css.keyword.StandardKeyword;
 import br.com.objectos.css.property.StandardPropertyName;
 import br.com.objectos.css.select.AttributeValueOperator;
 import br.com.objectos.css.select.Combinator;
 import br.com.objectos.css.select.PseudoClassSelectors;
 import br.com.objectos.css.select.PseudoElementSelectors;
+import br.com.objectos.css.select.SimpleSelector;
 import br.com.objectos.css.select.TypeSelectors;
 import br.com.objectos.css.select.UniversalSelector;
 import br.com.objectos.css.type.AngleUnit;
 import br.com.objectos.css.type.Color;
+import br.com.objectos.css.type.ColorName;
 import br.com.objectos.css.type.LengthUnit;
 import java.util.ArrayDeque;
 import java.util.Deque;
@@ -33,9 +36,7 @@ import java.util.function.Predicate;
 import objectos.lang.Check;
 import objectos.util.IntArrays;
 
-public abstract class StyleSheetEngine<E extends Exception>
-    extends StyleSheetCompiler
-    implements CompiledStyleSheetVisitor<E> {
+public abstract class StyleSheetEngine<E extends Exception> extends StyleSheetCompiler {
 
   @FunctionalInterface
   private interface Action<X extends Exception> {
@@ -115,6 +116,93 @@ public abstract class StyleSheetEngine<E extends Exception>
       classSelectorsByName = classSelectorsByName.and(names);
     }
   }
+
+  protected abstract void visitAfterLastDeclaration() throws E;
+
+  protected abstract void visitAngle(AngleUnit unit, double value) throws E;
+
+  protected abstract void visitAngle(AngleUnit unit, int value) throws E;
+
+  protected abstract void visitAttributeSelector(String attributeName) throws E;
+
+  protected abstract void visitAttributeValueSelector(
+      String attributeName, AttributeValueOperator operator, String value) throws E;
+
+  protected abstract void visitBeforeNextDeclaration() throws E;
+
+  protected abstract void visitBeforeNextStatement() throws E;
+
+  protected abstract void visitBeforeNextValue() throws E;
+
+  protected abstract void visitBlockEnd() throws E;
+
+  protected abstract void visitBlockStart() throws E;
+
+  protected abstract void visitClassSelector(String className) throws E;
+
+  protected abstract void visitColor(ColorName value) throws E;
+
+  protected abstract void visitColor(String value) throws E;
+
+  protected abstract void visitCombinator(Combinator combinator) throws E;
+
+  protected abstract void visitDeclarationStart(StandardPropertyName name) throws E;
+
+  protected abstract void visitDouble(double value) throws E;
+
+  protected abstract void visitEmptyBlock() throws E;
+
+  protected abstract void visitFunctionEnd() throws E;
+
+  protected abstract void visitFunctionStart(StandardFunctionName name) throws E;
+
+  protected abstract void visitIdSelector(String id) throws E;
+
+  protected abstract void visitInt(int value) throws E;
+
+  protected abstract void visitKeyword(StandardKeyword value) throws E;
+
+  protected abstract void visitKeyword(String keyword) throws E;
+
+  protected abstract void visitLength(LengthUnit unit, double value) throws E;
+
+  protected abstract void visitLength(LengthUnit unit, int value) throws E;
+
+  protected abstract void visitLogicalExpressionEnd() throws E;
+
+  protected abstract void visitLogicalExpressionStart(LogicalOperator operator) throws E;
+
+  protected abstract void visitMediaStart() throws E;
+
+  protected abstract void visitMediaType(MediaType type) throws E;
+
+  protected abstract void visitMultiDeclarationSeparator() throws E;
+
+  protected abstract void visitPercentage(double value) throws E;
+
+  protected abstract void visitPercentage(int value) throws E;
+
+  protected abstract void visitRgb(double r, double g, double b) throws E;
+
+  protected abstract void visitRgb(double r, double g, double b, double alpha) throws E;
+
+  protected abstract void visitRgb(int r, int g, int b) throws E;
+
+  protected abstract void visitRgb(int r, int g, int b, double alpha) throws E;
+
+  protected abstract void visitRgba(double r, double g, double b, double alpha) throws E;
+
+  protected abstract void visitRgba(int r, int g, int b, double alpha) throws E;
+
+  protected abstract void visitRuleStart() throws E;
+
+  protected abstract void visitSimpleSelector(SimpleSelector selector) throws E;
+
+  protected abstract void visitString(String value) throws E;
+
+  protected abstract void visitUniversalSelector(UniversalSelector selector) throws E;
+
+  protected abstract void visitUri(String value) throws E;
 
   final Body peekBody() {
     return bodyStack.peek();

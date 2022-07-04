@@ -708,17 +708,15 @@ public class StyleSheetTest {
   # filterClassName test case #01
 
   - result will be non-empty
+  - filtered out in the middle
   """)
   public void testCase36() {
     var css = new AbstractStyleSheet() {
       @Override
       protected final void definition() {
         style(cn("a"), border(zero()));
-
         style(b, zIndex(1));
-
         style(cn("b"), margin(zero()));
-
         style(Css.dot("c"), padding(zero()));
       }
     };
@@ -727,18 +725,7 @@ public class StyleSheetTest {
 
     minified.filterClassSelectorsByName(keep::contains);
 
-    test(minified, css,
-      """
-      .a{\
-      border:0\
-      }\
-      b{\
-      z-index:1\
-      }\
-      .c{\
-      padding:0\
-      }"""
-    );
+    test(minified, css, ".a{border:0}b{z-index:1}.c{padding:0}");
 
     pretty.filterClassSelectorsByName(keep::contains);
 
