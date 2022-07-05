@@ -169,6 +169,8 @@ public final class DocsSite extends Site {
 
     articlePage.set(document);
 
+    articlePage.setNext(relativePath.startsWith("next"));
+
     try (var writer = Files.newBufferedWriter(targetHtml, StandardCharsets.UTF_8)) {
       var s = articlePage.toString();
 

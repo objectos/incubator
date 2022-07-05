@@ -24,10 +24,18 @@ final class ArticlePage extends AbstractTemplate {
 
   private final ArticleCss css = new ArticleCss();
 
+  private final NextBanner nextBanner = new NextBanner();
+
   private Document document;
+
+  private boolean next;
 
   public final void set(Document document) {
     this.document = Check.notNull(document, "document == null");
+  }
+
+  public final void setNext(boolean next) {
+    this.next = next;
   }
 
   @Override
@@ -44,6 +52,8 @@ final class ArticlePage extends AbstractTemplate {
 
   private void body0() {
     body(
+      next ? f(nextBanner) : noop(),
+
       main(
         f(this::main0)
       )
