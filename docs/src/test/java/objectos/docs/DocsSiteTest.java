@@ -22,6 +22,7 @@ public abstract class DocsSiteTest {
 
   private static SiteConfiguration generator;
 
+  @SuppressWarnings("resource")
   @BeforeSuite
   public static void _beforeSuite() {
     DocsSite site;

@@ -18,6 +18,8 @@ package objectos.docs;
 import static java.lang.System.err;
 import static java.lang.System.out;
 
+import br.com.objectos.html.tmpl.Template;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -37,8 +39,9 @@ import objectos.ssg.Site;
 import objectos.ssg.SitePath;
 import org.asciidoctor.Asciidoctor;
 import org.asciidoctor.Options;
+import org.asciidoctor.ast.Document;
 
-public final class DocsSite extends Site {
+public final class DocsSite extends Site implements AutoCloseable {
 
   public static final Class<? extends SitePath> INDEX = V0002.INDEX;
 
@@ -50,28 +53,22 @@ public final class DocsSite extends Site {
 
   private final ArticlePage articlePage = new ArticlePage();
 
-  private Path docs;
+  private final Asciidoctor asciidoctor = Asciidoctor.Factory.create();
 
   private Path target;
 
   public DocsSite() {}
 
-  private DocsSite(Path docs, Path target) {
-    this.docs = docs;
-
+  private DocsSite(Path target) {
     this.target = target;
   }
 
   public static DocsSite create(String docsPathName, String targetPathName) {
-    var docs = toPath(docsPathName);
-
-    out.println("Resolved docs path:   " + docs);
-
     var target = toPath(targetPathName);
 
     out.println("Resolved target path: " + target);
 
-    return new DocsSite(docs, target);
+    return new DocsSite(target);
   }
 
   public static void main(String[] args) {
@@ -83,9 +80,13 @@ public final class DocsSite extends Site {
 
     out.println("Running...");
 
-    var site = DocsSite.create(args[0], args[1]);
+    try (var site = DocsSite.create(args[0], args[1])) {
+      site.generate();
+    } catch (IOException e) {
+      err.println("Failed to generate site");
 
-    site.generate();
+      e.printStackTrace();
+    }
   }
 
   private static Path toPath(String name) {
@@ -98,18 +99,33 @@ public final class DocsSite extends Site {
     return path;
   }
 
-  public final void generate() {
-    try (var asciidoctor = Asciidoctor.Factory.create()) {
-      try (var walk = Files.walk(docs)) {
-        walk.filter(Files::isRegularFile)
-            .filter(this::isAdoc)
-            .forEach(p -> processAdoc(asciidoctor, p));
-      }
-    } catch (IOException e) {
-      err.println("Failed to open or read a file");
+  @Override
+  public final void close() {
+    asciidoctor.shutdown();
+  }
 
-      e.printStackTrace();
-    }
+  public final void generate() throws IOException {
+    generateVersion(
+      "next", "next",
+
+      "intro/index",
+      "intro/overview",
+      "intro/installation",
+
+      "objectos-lang/index",
+      "objectos-lang/Check",
+      "objectos-lang/Equals",
+      "objectos-lang/HashCode",
+      "objectos-lang/ToString",
+      "objectos-lang/note-sink-api/index",
+      "objectos-lang/note-sink-api/creating-notes",
+      "objectos-lang/note-sink-api/the-note-sink-interface",
+      "objectos-lang/note-sink-api/the-no-op-note-sink",
+
+      "relnotes/index",
+      "relnotes/0.2.0",
+      "relnotes/0.1.0"
+    );
   }
 
   @Override
@@ -130,55 +146,58 @@ public final class DocsSite extends Site {
     addDirectory("0.2", new V0002());
   }
 
-  private boolean isAdoc(Path path) {
-    var filePath = path.getFileName();
+  private void generateVersion(
+      String slug, String directoryName, String... keys) throws IOException {
+    articlePage.setNext(slug.equals("next"));
 
-    var fileName = filePath.toString();
+    for (int i = 0; i < keys.length; i++) {
+      var key = keys[i];
 
-    return fileName.endsWith(".adoc");
+      var document = loadDocument(directoryName, key);
+
+      articlePage.set(document);
+
+      var writePath = target.resolve(slug + "/" + key + ".html");
+
+      writeDocument(articlePage, writePath);
+    }
   }
 
-  private void processAdoc(Asciidoctor asciidoctor, Path path) {
-    out.println("source: " + path);
+  private Document loadDocument(String directoryName, String key) throws IOException {
+    var resourceName = directoryName + "/" + key + ".adoc";
 
-    var relativePath = docs.relativize(path);
+    var out = new ByteArrayOutputStream();
 
-    var relativeParent = relativePath.getParent();
+    var thisClass = getClass();
 
-    var adocName = relativePath.getFileName().toString();
-
-    var htmlName = adocName.replace(".adoc", ".html");
-
-    var targetParent = target.resolve(relativeParent);
-
-    try {
-      Files.createDirectories(targetParent);
+    try (var inputStream = thisClass.getResourceAsStream(resourceName)) {
+      inputStream.transferTo(out);
     } catch (IOException e) {
-      err.println("Failed to create a parent directory");
+      err.println("Failed to load a resource");
 
-      e.printStackTrace();
-
-      return;
+      throw e;
     }
 
-    var targetHtml = targetParent.resolve(htmlName);
+    var bytes = out.toByteArray();
 
-    out.println("target: " + targetHtml);
+    var contents = new String(bytes, StandardCharsets.UTF_8);
 
-    var document = asciidoctor.loadFile(path.toFile(), Options.builder().build());
+    return asciidoctor.load(contents, Options.builder().build());
+  }
 
-    articlePage.set(document);
+  private void writeDocument(Template tmpl, Path target) throws IOException {
+    var parent = target.getParent();
 
-    articlePage.setNext(relativePath.startsWith("next"));
+    Files.createDirectories(parent);
 
-    try (var writer = Files.newBufferedWriter(targetHtml, StandardCharsets.UTF_8)) {
+    try (var writer = Files.newBufferedWriter(target, StandardCharsets.UTF_8)) {
       var s = articlePage.toString();
 
       writer.write(s);
     } catch (IOException e) {
       err.println("Failed to write a file");
 
-      e.printStackTrace();
+      throw e;
     }
   }
 
