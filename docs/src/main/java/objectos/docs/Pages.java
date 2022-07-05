@@ -46,7 +46,13 @@ final class Pages {
 
   private String slug;
 
+  private String baseHref;
+
   public Pages() {}
+
+  public final Document document(String key) {
+    return get0(documents, key);
+  }
 
   public final String href(String key) {
     return get0(hrefs, key);
@@ -61,7 +67,7 @@ final class Pages {
   }
 
   public final void put(String key) {
-    var href = "/" + slug + "/" + key + ".html";
+    var href = baseHref + "/" + slug + "/" + key + ".html";
 
     hrefs.put(key, href);
 
@@ -111,7 +117,9 @@ final class Pages {
     trails.put(key, trailBuilder.toUnmodifiableList());
   }
 
-  public final void reset(String slug) {
+  public final void reset(String baseHref, String slug) {
+    this.baseHref = baseHref;
+
     this.slug = slug;
 
     current = null;
@@ -129,6 +137,12 @@ final class Pages {
 
   public final void set(String key, Document document) {
     documents.put(key, document);
+  }
+
+  public final String title(String key) {
+    var doc = document(key);
+
+    return doc.getDoctitle();
   }
 
   public final UnmodifiableList<String> trail(String key) {

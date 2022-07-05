@@ -17,7 +17,6 @@ package objectos.docs;
 
 import br.com.objectos.html.tmpl.AbstractTemplate;
 import br.com.objectos.http.media.ImageType;
-import objectos.lang.Check;
 import org.asciidoctor.ast.Document;
 
 final class ArticlePage extends AbstractTemplate {
@@ -26,16 +25,22 @@ final class ArticlePage extends AbstractTemplate {
 
   private final NextBanner nextBanner = new NextBanner();
 
+  private final PageSwitcher pageSwitcher = new PageSwitcher();
+
   private Document document;
 
-  private boolean next;
+  private Pages pages;
 
-  public final void set(Document document) {
-    this.document = Check.notNull(document, "document == null");
-  }
+  private String key;
 
-  public final void setNext(boolean next) {
-    this.next = next;
+  public final void set(Pages pages, String key) {
+    this.pages = pages;
+
+    this.key = key;
+
+    pageSwitcher.set(pages, key);
+
+    document = pages.document(key);
   }
 
   @Override
@@ -51,12 +56,16 @@ final class ArticlePage extends AbstractTemplate {
   }
 
   private void body0() {
+    var href = pages.href(key);
+
     body(
-      next ? f(nextBanner) : noop(),
+      href.startsWith("/next") ? f(nextBanner) : noop(),
 
       main(
         f(this::main0)
-      )
+      ),
+
+      f(pageSwitcher)
     );
   }
 

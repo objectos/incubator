@@ -32,7 +32,7 @@ public class PagesTest {
 
   @Test
   public void v0002() {
-    pages.reset("next");
+    pages.reset("", "next");
 
     putAll(
       "index",

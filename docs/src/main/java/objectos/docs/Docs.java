@@ -39,6 +39,8 @@ final class Docs implements AutoCloseable {
 
   private Path target;
 
+  private String baseHref = "";
+
   public Docs() {}
 
   private Docs(Path target) {
@@ -46,7 +48,11 @@ final class Docs implements AutoCloseable {
   }
 
   public static Docs create(String targetPathName) {
-    var target = toPath(targetPathName);
+    var target = Path.of(targetPathName);
+
+    target = target.toAbsolutePath();
+
+    Check.argument(Files.isDirectory(target), target, " is not a directory");
 
     out.println("Resolved target path: " + target);
 
@@ -55,7 +61,7 @@ final class Docs implements AutoCloseable {
 
   public static void main(String[] args) {
     if (args.length != 1) {
-      out.println("Invocation: java objectos.docs.DocsSite  target-path");
+      out.println("Invocation: java objectos.docs.DocsSite target-path");
 
       return;
     }
@@ -63,6 +69,8 @@ final class Docs implements AutoCloseable {
     out.println("Running...");
 
     try (var site = Docs.create(args[0])) {
+      site.development();
+
       site.generate();
     } catch (IOException e) {
       err.println("Failed to generate site");
@@ -71,19 +79,13 @@ final class Docs implements AutoCloseable {
     }
   }
 
-  private static Path toPath(String name) {
-    var path = Path.of(name);
-
-    path = path.toAbsolutePath();
-
-    Check.argument(Files.isDirectory(path), path, " is not a directory");
-
-    return path;
-  }
-
   @Override
   public final void close() {
     asciidoctor.shutdown();
+  }
+
+  public final void development() {
+    baseHref = target.toString();
   }
 
   public final void generate() throws IOException {
@@ -112,7 +114,7 @@ final class Docs implements AutoCloseable {
 
   private void generateVersion(
       String slug, String resourceDirectory, String... keys) throws IOException {
-    pages.reset(slug);
+    pages.reset(baseHref, slug);
 
     for (int i = 0; i < keys.length; i++) {
       var key = keys[i];
@@ -124,14 +126,10 @@ final class Docs implements AutoCloseable {
       pages.set(key, document);
     }
 
-    articlePage.setNext(slug.equals("next"));
-
     for (int i = 0; i < keys.length; i++) {
       var key = keys[i];
 
-      var document = loadDocument(resourceDirectory, key);
-
-      articlePage.set(document);
+      articlePage.set(pages, key);
 
       var writePath = target.resolve(slug + "/" + key + ".html");
 
