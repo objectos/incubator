@@ -1,0 +1,11 @@
+= Release notes
+
+Release notes for all of the Objectos releases.
+Each release note will tell you what's new in each version,
+improvements made and fixes included. If a version
+includes backwards-incompatible changes we will describe them
+in the release notes.
+
+== 0.x releases
+
+* link:href:next.relnotes.RelNotes0_1_0[Objectos 0.1.0 release notes]

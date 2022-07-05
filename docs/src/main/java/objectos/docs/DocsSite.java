@@ -31,6 +31,7 @@ import objectos.docs.ui.TableOfContents;
 import objectos.docs.ui.VersionHolder;
 import objectos.docs.v0001.V0001;
 import objectos.docs.v0002.V0002;
+import objectos.lang.Check;
 import objectos.ssg.Site;
 import objectos.ssg.SitePath;
 import org.asciidoctor.Asciidoctor;
@@ -45,39 +46,52 @@ public final class DocsSite extends Site {
 
   public static final String VERSION = V0002.VERSION;
 
+  private Path docs;
+
+  private Path target;
+
+  public DocsSite() {}
+
+  private DocsSite(Path docs, Path target) {
+    this.docs = docs;
+
+    this.target = target;
+  }
+
+  public static DocsSite create(String docsPathName, String targetPathName) {
+    var docs = toPath(docsPathName);
+
+    out.println("Resolved docs path:   " + docs);
+
+    var target = toPath(targetPathName);
+
+    out.println("Resolved target path: " + target);
+
+    return new DocsSite(docs, target);
+  }
+
   public static void main(String[] args) {
-    if (args.length == 0) {
-      out.println("DocsSite Help Screen");
+    if (args.length != 2) {
+      out.println("Invocation: java objectos.docs.DocsSite docs-path target-path");
 
       return;
     }
 
     out.println("Running...");
 
-    var docsPathName = args[0];
+    var site = DocsSite.create(args[0], args[1]);
 
-    final var docsPath = Path.of(docsPathName).toAbsolutePath();
+    site.generate();
+  }
 
-    if (!Files.isDirectory(docsPath)) {
-      err.println(docsPath + " is not a directory.");
+  private static Path toPath(String name) {
+    var path = Path.of(name);
 
-      return;
-    }
+    path = path.toAbsolutePath();
 
-    out.println("Resolved docs path: " + docsPath);
+    Check.argument(Files.isDirectory(path), path, " is not a directory");
 
-    try (var asciidoctor = Asciidoctor.Factory.create()) {
-      try (var walk = Files.walk(docsPath)) {
-        walk.filter(Files::isRegularFile)
-            .forEach(p -> {
-              var relative = docsPath.relativize(p);
-
-              out.println(relative);
-            });
-      } catch (IOException e) {
-        err.println("Failed to open or read a file");
-      }
-    }
+    return path;
   }
 
   @Override
@@ -96,6 +110,44 @@ public final class DocsSite extends Site {
     addDirectory("next", new Next());
     addDirectory("0.1", new V0001());
     addDirectory("0.2", new V0002());
+  }
+
+  private void generate() {
+    try (var asciidoctor = Asciidoctor.Factory.create()) {
+      try (var walk = Files.walk(docs)) {
+        walk.filter(Files::isRegularFile)
+            .filter(this::isAdoc)
+            .forEach(p -> processAdoc(asciidoctor, p));
+      }
+    } catch (IOException e) {
+      err.println("Failed to open or read a file");
+
+      e.printStackTrace();
+    }
+  }
+
+  private boolean isAdoc(Path path) {
+    var filePath = path.getFileName();
+
+    var fileName = filePath.toString();
+
+    return fileName.endsWith(".adoc");
+  }
+
+  private void processAdoc(Asciidoctor asciidoctor, Path path) {
+    out.println("source: " + path);
+
+    var relativePath = docs.relativize(path);
+
+    var relativeParent = relativePath.getParent();
+
+    var adocName = relativePath.getFileName().toString();
+
+    var htmlName = adocName.replace(".adoc", ".html");
+
+    var targetHtml = target.resolve(relativeParent).resolve(htmlName);
+
+    out.println("target: " + targetHtml);
   }
 
 }
