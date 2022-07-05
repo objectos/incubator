@@ -22,6 +22,8 @@ import org.asciidoctor.ast.Document;
 
 final class ArticlePage extends AbstractTemplate {
 
+  private final ArticleCss css = new ArticleCss();
+
   private Document document;
 
   public final void set(Document document) {
@@ -53,8 +55,10 @@ final class ArticlePage extends AbstractTemplate {
     meta(httpEquiv("x-ua-compatible"), content("ie=edge"));
     meta(name("viewport"), content("width=device-width, initial-scale=1, shrink-to-fit=no"));
     link(rel("shortcut icon"), type(ImageType.ICON.qualifiedName()), href("/favicon.ico"));
-
     title(document.getDoctitle());
+    style(
+      raw(css.toString())
+    );
   }
 
   private void main0() {
