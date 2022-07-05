@@ -15,25 +15,6 @@
  */
 package objectos.docs;
 
-import objectos.ssg.SiteConfiguration;
-import org.testng.annotations.BeforeSuite;
+import org.asciidoctor.ast.Document;
 
-public abstract class DocsSiteTest {
-
-  private static SiteConfiguration generator;
-
-  @BeforeSuite
-  public static void _beforeSuite() {
-    DocsSite site;
-    site = new DocsSite();
-
-    generator = new SiteConfiguration();
-
-    site.configure(generator);
-  }
-
-  protected final <T> T getObject(Class<? extends T> key) {
-    return generator.getObject(key);
-  }
-
-}
+record Page(String key, String href, Document document) {}
