@@ -19,6 +19,7 @@ import static java.lang.System.err;
 import static java.lang.System.out;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import objectos.docs.next.Next;
@@ -35,6 +36,7 @@ import objectos.lang.Check;
 import objectos.ssg.Site;
 import objectos.ssg.SitePath;
 import org.asciidoctor.Asciidoctor;
+import org.asciidoctor.Options;
 
 public final class DocsSite extends Site {
 
@@ -45,6 +47,8 @@ public final class DocsSite extends Site {
   public static final Class<? extends SitePath> VERSIONS = Versions.class;
 
   public static final String VERSION = V0002.VERSION;
+
+  private final ArticlePage articlePage = new ArticlePage();
 
   private Path docs;
 
@@ -94,6 +98,20 @@ public final class DocsSite extends Site {
     return path;
   }
 
+  public final void generate() {
+    try (var asciidoctor = Asciidoctor.Factory.create()) {
+      try (var walk = Files.walk(docs)) {
+        walk.filter(Files::isRegularFile)
+            .filter(this::isAdoc)
+            .forEach(p -> processAdoc(asciidoctor, p));
+      }
+    } catch (IOException e) {
+      err.println("Failed to open or read a file");
+
+      e.printStackTrace();
+    }
+  }
+
   @Override
   protected final void configure() {
     addObject(new Breadcrumbs());
@@ -110,20 +128,6 @@ public final class DocsSite extends Site {
     addDirectory("next", new Next());
     addDirectory("0.1", new V0001());
     addDirectory("0.2", new V0002());
-  }
-
-  private void generate() {
-    try (var asciidoctor = Asciidoctor.Factory.create()) {
-      try (var walk = Files.walk(docs)) {
-        walk.filter(Files::isRegularFile)
-            .filter(this::isAdoc)
-            .forEach(p -> processAdoc(asciidoctor, p));
-      }
-    } catch (IOException e) {
-      err.println("Failed to open or read a file");
-
-      e.printStackTrace();
-    }
   }
 
   private boolean isAdoc(Path path) {
@@ -145,9 +149,35 @@ public final class DocsSite extends Site {
 
     var htmlName = adocName.replace(".adoc", ".html");
 
-    var targetHtml = target.resolve(relativeParent).resolve(htmlName);
+    var targetParent = target.resolve(relativeParent);
+
+    try {
+      Files.createDirectories(targetParent);
+    } catch (IOException e) {
+      err.println("Failed to create a parent directory");
+
+      e.printStackTrace();
+
+      return;
+    }
+
+    var targetHtml = targetParent.resolve(htmlName);
 
     out.println("target: " + targetHtml);
+
+    var document = asciidoctor.loadFile(path.toFile(), Options.builder().build());
+
+    articlePage.set(document);
+
+    try (var writer = Files.newBufferedWriter(targetHtml, StandardCharsets.UTF_8)) {
+      var s = articlePage.toString();
+
+      writer.write(s);
+    } catch (IOException e) {
+      err.println("Failed to write a file");
+
+      e.printStackTrace();
+    }
   }
 
 }
