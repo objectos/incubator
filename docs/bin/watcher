@@ -1,0 +1,46 @@
+#!/bin/bash
+#
+# Copyright (C) 2021-2022 Objectos Software LTDA.
+#
+# This file is confidential. Reproduction in part or in total
+# is strictly forbidden.
+# 
+set -e
+
+CLASS_PATH="target/classes"
+CLASS_PATH="$CLASS_PATH:target/lib/*"
+
+DEPS=(
+"br.com.objectos:objectos-util:0.3.0-SNAPSHOT"
+"br.com.objectos:objectos-lang:0.3.0-SNAPSHOT"
+"br.com.objectos:code:0.3.0-SNAPSHOT"
+"br.com.objectos:code-boot:0.3.0-SNAPSHOT"
+"br.com.objectos:html:0.3.0-SNAPSHOT"
+"br.com.objectos:html-spi:0.3.0-SNAPSHOT"
+"br.com.objectos:http-server:0.3.0-SNAPSHOT"
+"br.com.objectos:ssg:0.3.0-SNAPSHOT"
+"org.asciidoctor:asciidoctorj:2.5.4"
+"org.commonmark:commonmark:0.18.0"
+)
+
+echo "Running with CLASS_PATH:"
+echo $CLASS_PATH
+for DEP in ${DEPS[@]}; do
+	IFS=':' read -ra PARTS <<< "$DEP"
+	JAR="$HOME/.m2/repository"
+	JAR="$JAR/${PARTS[0]//\.//}"
+	JAR="$JAR/${PARTS[1]}"
+	JAR="$JAR/${PARTS[2]}"
+	JAR="$JAR/${PARTS[1]}-${PARTS[2]}.jar"
+	CLASS_PATH="$CLASS_PATH:$JAR"
+	echo $JAR
+done
+
+echo
+
+java \
+	--class-path $CLASS_PATH \
+	--add-opens java.base/sun.nio.ch=ALL-UNNAMED \
+	--add-opens java.base/java.io=ALL-UNNAMED \
+	objectos.docs.DocsSite \
+	"docs"

@@ -15,6 +15,12 @@
  */
 package objectos.docs;
 
+import static java.lang.System.err;
+import static java.lang.System.out;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import objectos.docs.next.Next;
 import objectos.docs.ui.Breadcrumbs;
 import objectos.docs.ui.Md;
@@ -27,6 +33,7 @@ import objectos.docs.v0001.V0001;
 import objectos.docs.v0002.V0002;
 import objectos.ssg.Site;
 import objectos.ssg.SitePath;
+import org.asciidoctor.Asciidoctor;
 
 public final class DocsSite extends Site {
 
@@ -37,6 +44,41 @@ public final class DocsSite extends Site {
   public static final Class<? extends SitePath> VERSIONS = Versions.class;
 
   public static final String VERSION = V0002.VERSION;
+
+  public static void main(String[] args) {
+    if (args.length == 0) {
+      out.println("DocsSite Help Screen");
+
+      return;
+    }
+
+    out.println("Running...");
+
+    var docsPathName = args[0];
+
+    final var docsPath = Path.of(docsPathName).toAbsolutePath();
+
+    if (!Files.isDirectory(docsPath)) {
+      err.println(docsPath + " is not a directory.");
+
+      return;
+    }
+
+    out.println("Resolved docs path: " + docsPath);
+
+    try (var asciidoctor = Asciidoctor.Factory.create()) {
+      try (var walk = Files.walk(docsPath)) {
+        walk.filter(Files::isRegularFile)
+            .forEach(p -> {
+              var relative = docsPath.relativize(p);
+
+              out.println(relative);
+            });
+      } catch (IOException e) {
+        err.println("Failed to open or read a file");
+      }
+    }
+  }
 
   @Override
   protected final void configure() {
