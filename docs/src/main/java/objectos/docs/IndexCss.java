@@ -15,41 +15,31 @@
  */
 package objectos.docs;
 
-import br.com.objectos.css.sheet.StyleSheet;
+import br.com.objectos.css.Css;
+import br.com.objectos.css.select.IdSelector;
+import br.com.objectos.css.sheet.AbstractStyleSheet;
+import objectos.docs.style.Colors;
+import objectos.docs.style.FontSize;
+import objectos.docs.style.Spacing;
 
-final class IndexPage extends ThisTemplate {
+final class IndexCss extends AbstractStyleSheet {
 
-  private final IndexCss css = new IndexCss();
+  static final IdSelector HD = Css.randomHash(3);
 
-  @Override
-  final void body0() {
-    body(
-      main(
-        f(this::main0)
-      )
-    );
-  }
+  static final IdSelector HDV = Css.randomHash(3);
 
   @Override
-  final StyleSheet styleSheet() {
-    return css;
-  }
+  protected final void definition() {
+    install(new ArticleCss());
 
-  private void main0() {
-    article(
-      f(() -> {
-        h1(document.getDoctitle());
+    style(
+      HDV,
 
-        for (var node : document.getBlocks()) {
-          var c = node.getContent();
-
-          if (c instanceof String s) {
-            raw(s);
-          } else {
-            throw new RuntimeException("Unexpected content: " + c.getClass());
-          }
-        }
-      })
+      backgroundColor(Colors.GRAY0),
+      display(flex),
+      fontSize(FontSize.SM),
+      justifyContent(spaceBetween),
+      padding(Spacing.V03)
     );
   }
 

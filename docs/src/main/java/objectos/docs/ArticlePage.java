@@ -15,8 +15,7 @@
  */
 package objectos.docs;
 
-import br.com.objectos.http.media.ImageType;
-import org.asciidoctor.ast.Document;
+import br.com.objectos.css.sheet.StyleSheet;
 
 final class ArticlePage extends ThisTemplate {
 
@@ -28,8 +27,6 @@ final class ArticlePage extends ThisTemplate {
 
   private final PageSwitcher pageSwitcher = new PageSwitcher();
 
-  private Document document;
-
   @Override
   public final void set(Pages pages) {
     super.set(pages);
@@ -37,23 +34,10 @@ final class ArticlePage extends ThisTemplate {
     breadcrumbs.set(pages);
 
     pageSwitcher.set(pages);
-
-    document = pages.document();
   }
 
   @Override
-  final void definitionImpl() {
-    doctype();
-    html(
-      lang("en"),
-      head(
-        f(this::head0)
-      ),
-      f(this::body0)
-    );
-  }
-
-  private void body0() {
+  final void body0() {
     var href = pages.href();
 
     body(
@@ -69,19 +53,9 @@ final class ArticlePage extends ThisTemplate {
     );
   }
 
-  private void head0() {
-    meta(charset("utf-8"));
-    meta(httpEquiv("x-ua-compatible"), content("ie=edge"));
-    meta(name("viewport"), content("width=device-width, initial-scale=1, shrink-to-fit=no"));
-    link(rel("shortcut icon"), type(ImageType.ICON.qualifiedName()), href("/favicon.ico"));
-
-    var title = document.getDoctitle();
-
-    title(pages.stripTags(title));
-
-    style(
-      raw(css.toString())
-    );
+  @Override
+  final StyleSheet styleSheet() {
+    return css;
   }
 
   private void main0() {

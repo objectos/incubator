@@ -39,14 +39,18 @@ final class Docs implements AutoCloseable {
 
   private final Pages pages = new Pages();
 
-  private Path target;
+  private final Path target;
 
   private String baseHref = "";
 
-  public Docs() {}
-
   private Docs(Path target) {
     this.target = target;
+
+    var registry = asciidoctor.javaExtensionRegistry();
+
+    registry.inlineMacro(
+      new InternalLinkInlineMacro(pages)
+    );
   }
 
   public static Docs create(String targetPathName) {

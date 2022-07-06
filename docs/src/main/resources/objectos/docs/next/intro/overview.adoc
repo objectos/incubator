@@ -16,7 +16,7 @@ Objectos suite of Java libraries. We hope it will encourage you to:
 == Open-source
 
 Objectos is open-source software licensed under the
-https://www.apache.org/licenses/LICENSE-2.0"[Apache License, version 2.0].
+https://www.apache.org/licenses/LICENSE-2.0[Apache License, version 2.0].
 
 == Built from scratch
 

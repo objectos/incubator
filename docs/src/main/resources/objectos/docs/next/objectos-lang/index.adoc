@@ -21,4 +21,4 @@ To use Objectos Lang in your project add the following to your POM:
 </dependencies>
 ----
 
-This assumes you are using the link:href:next.intro.IntroInstallation[Objectos BOM POM].
+This assumes you are using the ilink:intro/installation[Objectos BOM POM].

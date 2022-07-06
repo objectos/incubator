@@ -8,4 +8,5 @@ in the release notes.
 
 == 0.x releases
 
-* link:href:next.relnotes.RelNotes0_1_0[Objectos 0.1.0 release notes]
+* ilink:relnotes/0.2.0[Objectos 0.2.0 release notes]
+* ilink:relnotes/0.1.0[Objectos 0.1.0 release notes]
