@@ -15,12 +15,14 @@
  */
 package objectos.docs;
 
+import br.com.objectos.html.element.ElementName;
+import br.com.objectos.html.spi.type.UlValue;
+import java.util.List;
 import objectos.lang.ToString;
-import objectos.ssg.SiteFragment;
 import objectos.util.GrowableList;
 import objectos.util.UnmodifiableList;
 
-final class TableOfContents extends SiteFragment {
+final class TableOfContents extends ThisFragment {
 
   sealed abstract class Item implements ToString.Formattable permits Level, Simple {
     final String key;
@@ -146,12 +148,34 @@ final class TableOfContents extends SiteFragment {
   }
 
   @Override
-  protected final void definition() {
-    throw new UnsupportedOperationException("Implement me");
+  final void definitionImpl() {
+    ul0(items);
   }
 
   final UnmodifiableList<Item> toUnmodifiableList() {
     return items.toUnmodifiableList();
+  }
+
+  private ElementName ul0(List<? extends Item> items) {
+    var size = items.size();
+
+    var values = new UlValue[size];
+
+    for (int i = 0; i < size; i++) {
+      var item = items.get(i);
+
+      var href = pages.href(item.key);
+
+      var title = trailTitle(item.key);
+
+      values[i] = li(
+        a(href(href), t(title)),
+
+        item instanceof Level level ? ul0(level.items) : noop()
+      );
+    }
+
+    return ul(values);
   }
 
 }

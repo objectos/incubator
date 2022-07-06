@@ -32,10 +32,13 @@ import org.asciidoctor.ast.Document;
 
 final class Docs implements AutoCloseable {
 
-  private final ArticlePage articlePage = new ArticlePage();
-  private final IndexPage indexPage = new IndexPage();
-
   private final Asciidoctor asciidoctor = Asciidoctor.Factory.create();
+
+  private final ArticlePage articlePage = new ArticlePage();
+
+  private final TableOfContents tableOfContents = new TableOfContents();
+
+  private final IndexPage indexPage = new IndexPage(tableOfContents);
 
   private final Pages pages = new Pages();
 
@@ -124,6 +127,8 @@ final class Docs implements AutoCloseable {
       String version, String slug, String resourceDirectory, String... keys) throws IOException {
     pages.reset(baseHref, slug);
 
+    tableOfContents.clear();
+
     var attributes = Attributes.builder()
         .attribute("objectos-version", version)
         .build();
@@ -136,6 +141,8 @@ final class Docs implements AutoCloseable {
       var key = keys[i];
 
       pages.put(key);
+
+      tableOfContents.put(key);
 
       var document = loadDocument(resourceDirectory, key, options);
 

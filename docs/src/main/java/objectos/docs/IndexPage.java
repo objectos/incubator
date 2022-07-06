@@ -21,11 +21,48 @@ final class IndexPage extends ThisTemplate {
 
   private final IndexCss css = new IndexCss();
 
+  private final StringBuilder sb = new StringBuilder();
+
+  private final TableOfContents toc;
+
+  IndexPage(TableOfContents toc) {
+    this.toc = toc;
+  }
+
+  @Override
+  public final void set(Pages pages) {
+    super.set(pages);
+
+    toc.set(pages);
+  }
+
   @Override
   final void body0() {
+    sb.setLength(0);
+
+    for (var node : document.getBlocks()) {
+      var c = node.getContent();
+
+      if (c instanceof String s) {
+        sb.append(s);
+      } else {
+        throw new RuntimeException("Unexpected content: " + c.getClass());
+      }
+    }
+
     body(
       main(
-        f(this::main0)
+        article(
+          h1(document.getDoctitle()),
+
+          raw(sb.toString()),
+
+          section(
+            h2("Table of contents"),
+
+            f(toc)
+          )
+        )
       )
     );
   }
@@ -33,24 +70,6 @@ final class IndexPage extends ThisTemplate {
   @Override
   final StyleSheet styleSheet() {
     return css;
-  }
-
-  private void main0() {
-    article(
-      f(() -> {
-        h1(document.getDoctitle());
-
-        for (var node : document.getBlocks()) {
-          var c = node.getContent();
-
-          if (c instanceof String s) {
-            raw(s);
-          } else {
-            throw new RuntimeException("Unexpected content: " + c.getClass());
-          }
-        }
-      })
-    );
   }
 
 }

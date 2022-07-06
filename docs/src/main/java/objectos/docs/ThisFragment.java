@@ -34,4 +34,14 @@ abstract class ThisFragment extends SiteFragment {
 
   abstract void definitionImpl();
 
+  final String trailTitle(String key) {
+    var document = pages.document(key);
+
+    var defaultValue = document.getDoctitle();
+
+    var title = (String) document.getAttribute("trail-title", defaultValue);
+
+    return pages.stripTags(title);
+  }
+
 }

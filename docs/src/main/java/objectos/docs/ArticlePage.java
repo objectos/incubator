@@ -27,6 +27,8 @@ final class ArticlePage extends ThisTemplate {
 
   private final PageSwitcher pageSwitcher = new PageSwitcher();
 
+  private final StringBuilder sb = new StringBuilder();
+
   @Override
   public final void set(Pages pages) {
     super.set(pages);
@@ -40,13 +42,29 @@ final class ArticlePage extends ThisTemplate {
   final void body0() {
     var href = pages.href();
 
+    sb.setLength(0);
+
+    for (var node : document.getBlocks()) {
+      var c = node.getContent();
+
+      if (c instanceof String s) {
+        sb.append(s);
+      } else {
+        throw new RuntimeException("Unexpected content: " + c.getClass());
+      }
+    }
+
     body(
       href.contains("/next/") ? f(nextBanner) : noop(),
 
       f(breadcrumbs),
 
       main(
-        f(this::main0)
+        article(
+          h1(raw(document.getDoctitle())),
+
+          raw(sb.toString())
+        )
       ),
 
       f(pageSwitcher)
@@ -56,26 +74,6 @@ final class ArticlePage extends ThisTemplate {
   @Override
   final StyleSheet styleSheet() {
     return css;
-  }
-
-  private void main0() {
-    article(
-      f(() -> {
-        h1(
-          raw(document.getDoctitle())
-        );
-
-        for (var node : document.getBlocks()) {
-          var c = node.getContent();
-
-          if (c instanceof String s) {
-            raw(s);
-          } else {
-            throw new RuntimeException("Unexpected content: " + c.getClass());
-          }
-        }
-      })
-    );
   }
 
 }

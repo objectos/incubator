@@ -29,7 +29,7 @@ final class Breadcrumbs extends ThisFragment {
     var key = trail.get(0);
 
     items[0] = li(
-      a(href(pages.href(key)), t(title0(key)))
+      a(href(pages.href(key)), t(trailTitle(key)))
     );
 
     for (int i = 1, size = trail.size(); i < size; i++) {
@@ -51,7 +51,7 @@ final class Breadcrumbs extends ThisFragment {
           )
         ),
 
-        a(href(pages.href(key)), t(title0(key)))
+        a(href(pages.href(key)), t(trailTitle(key)))
       );
     }
 
@@ -62,16 +62,6 @@ final class Breadcrumbs extends ThisFragment {
         items
       )
     );
-  }
-
-  private String title0(String key) {
-    var document = pages.document(key);
-
-    var defaultValue = document.getDoctitle();
-
-    var title = (String) document.getAttribute("trail-title", defaultValue);
-
-    return pages.stripTags(title);
   }
 
 }
