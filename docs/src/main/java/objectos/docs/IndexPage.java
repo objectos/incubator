@@ -18,25 +18,14 @@ package objectos.docs;
 import br.com.objectos.http.media.ImageType;
 import org.asciidoctor.ast.Document;
 
-final class ArticlePage extends ThisTemplate {
-
+final class IndexPage extends ThisTemplate {
   private final ArticleCss css = new ArticleCss();
-
-  private final Breadcrumbs breadcrumbs = new Breadcrumbs();
-
-  private final NextBanner nextBanner = new NextBanner();
-
-  private final PageSwitcher pageSwitcher = new PageSwitcher();
 
   private Document document;
 
   @Override
   public final void set(Pages pages) {
     super.set(pages);
-
-    breadcrumbs.set(pages);
-
-    pageSwitcher.set(pages);
 
     document = pages.document();
   }
@@ -54,18 +43,10 @@ final class ArticlePage extends ThisTemplate {
   }
 
   private void body0() {
-    var href = pages.href();
-
     body(
-      href.contains("/next/") ? f(nextBanner) : noop(),
-
-      f(breadcrumbs),
-
       main(
         f(this::main0)
-      ),
-
-      f(pageSwitcher)
+      )
     );
   }
 

@@ -159,10 +159,20 @@ final class Pages {
     documents.put(key, document);
   }
 
+  public final String templateName() {
+    var document = document(current);
+
+    return (String) document.getAttribute("template", "ArticlePage");
+  }
+
   public final String title(String key) {
     var doc = document(key);
 
     return doc.getDoctitle();
+  }
+
+  public final UnmodifiableList<String> trail() {
+    return trail(current);
   }
 
   public final UnmodifiableList<String> trail(String key) {

@@ -32,6 +32,7 @@ import org.asciidoctor.ast.Document;
 final class Docs implements AutoCloseable {
 
   private final ArticlePage articlePage = new ArticlePage();
+  private final IndexPage indexPage = new IndexPage();
 
   private final Asciidoctor asciidoctor = Asciidoctor.Factory.create();
 
@@ -92,6 +93,8 @@ final class Docs implements AutoCloseable {
     generateVersion(
       "next", "next",
 
+      "index",
+
       "intro/index",
       "intro/overview",
       "intro/installation",
@@ -131,11 +134,19 @@ final class Docs implements AutoCloseable {
 
       pages.current(key);
 
-      articlePage.set(pages);
+      var templateName = pages.templateName();
+
+      ThisTemplate tmpl = switch (templateName) {
+        case "ArticlePage" -> articlePage;
+        case "IndexPage" -> indexPage;
+        default -> throw new IllegalArgumentException("Unexpected value: " + templateName);
+      };
+
+      tmpl.set(pages);
 
       var writePath = target.resolve(slug + "/" + key + ".html");
 
-      writeDocument(articlePage, writePath);
+      writeDocument(tmpl, writePath);
     }
   }
 
@@ -167,7 +178,7 @@ final class Docs implements AutoCloseable {
     Files.createDirectories(parent);
 
     try (var writer = Files.newBufferedWriter(target, StandardCharsets.UTF_8)) {
-      var s = articlePage.toString();
+      var s = tmpl.toString();
 
       writer.write(s);
     } catch (IOException e) {

@@ -29,8 +29,6 @@ abstract class ThisFragment extends SiteFragment {
   protected final void definition() {
     definitionImpl();
 
-    pages.unset();
-
     pages = null;
   }
 

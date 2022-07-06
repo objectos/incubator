@@ -32,7 +32,7 @@ public class PagesTest {
 
   @Test
   public void v0002() {
-    pages.reset("", "next");
+    pages.reset("http://foo", "next");
 
     putAll(
       "index",
@@ -59,28 +59,28 @@ public class PagesTest {
     var key = "index";
 
     assertEquals(pages.prevKey(key), null);
-    assertEquals(pages.href(key), "/next/index.html");
+    assertEquals(pages.href(key), "http://foo/next/index.html");
     assertEquals(pages.nextKey(key), "intro/index");
     assertEquals(pages.trail(key), List.of("index"));
 
     key = "intro/index";
 
     assertEquals(pages.prevKey(key), "index");
-    assertEquals(pages.href(key), "/next/intro/index.html");
+    assertEquals(pages.href(key), "http://foo/next/intro/index.html");
     assertEquals(pages.nextKey(key), "intro/overview");
     assertEquals(pages.trail(key), List.of("index", "intro/index"));
 
     key = "intro/installation";
 
     assertEquals(pages.prevKey(key), "intro/overview");
-    assertEquals(pages.href(key), "/next/intro/installation.html");
+    assertEquals(pages.href(key), "http://foo/next/intro/installation.html");
     assertEquals(pages.nextKey(key), "objectos-lang/index");
     assertEquals(pages.trail(key), List.of("index", "intro/index", "intro/installation"));
 
     key = "objectos-lang/Check";
 
     assertEquals(pages.prevKey(key), "objectos-lang/index");
-    assertEquals(pages.href(key), "/next/objectos-lang/Check.html");
+    assertEquals(pages.href(key), "http://foo/next/objectos-lang/Check.html");
     assertEquals(pages.nextKey(key), "objectos-lang/Equals");
     assertEquals(pages.trail(key), List.of("index", "objectos-lang/index", "objectos-lang/Check"));
   }
