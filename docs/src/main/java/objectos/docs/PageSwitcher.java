@@ -17,19 +17,14 @@ package objectos.docs;
 
 import br.com.objectos.html.spi.type.DivValue;
 import objectos.docs.style.PageSwitcherCss;
-import objectos.ssg.SiteFragment;
 
-final class PageSwitcher extends SiteFragment {
-
-  private Pages pages;
-
-  private String key;
+final class PageSwitcher extends ThisFragment {
 
   @Override
-  protected final void definition() {
-    var back = pages.prevKey(key);
+  final void definitionImpl() {
+    var back = pages.prevKey();
 
-    var next = pages.nextKey(key);
+    var next = pages.nextKey();
 
     nav(
       PageSwitcherCss._NAV,
@@ -46,12 +41,6 @@ final class PageSwitcher extends SiteFragment {
         next != null ? renderNext(next) : noop()
       )
     );
-  }
-
-  final void set(Pages pages, String key) {
-    this.pages = pages;
-
-    this.key = key;
   }
 
   private DivValue renderNext(String nextKey) {

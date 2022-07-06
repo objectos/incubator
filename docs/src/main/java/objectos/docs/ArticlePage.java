@@ -15,11 +15,10 @@
  */
 package objectos.docs;
 
-import br.com.objectos.html.tmpl.AbstractTemplate;
 import br.com.objectos.http.media.ImageType;
 import org.asciidoctor.ast.Document;
 
-final class ArticlePage extends AbstractTemplate {
+final class ArticlePage extends ThisTemplate {
 
   private final ArticleCss css = new ArticleCss();
 
@@ -29,22 +28,17 @@ final class ArticlePage extends AbstractTemplate {
 
   private Document document;
 
-  private Pages pages;
+  @Override
+  public final void set(Pages pages) {
+    super.set(pages);
 
-  private String key;
+    pageSwitcher.set(pages);
 
-  public final void set(Pages pages, String key) {
-    this.pages = pages;
-
-    this.key = key;
-
-    pageSwitcher.set(pages, key);
-
-    document = pages.document(key);
+    document = pages.document();
   }
 
   @Override
-  protected final void definition() {
+  final void definitionImpl() {
     doctype();
     html(
       lang("en"),
@@ -56,10 +50,10 @@ final class ArticlePage extends AbstractTemplate {
   }
 
   private void body0() {
-    var href = pages.href(key);
+    var href = pages.href();
 
     body(
-      href.startsWith("/next") ? f(nextBanner) : noop(),
+      href.contains("/next/") ? f(nextBanner) : noop(),
 
       main(
         f(this::main0)

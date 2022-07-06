@@ -129,7 +129,9 @@ final class Docs implements AutoCloseable {
     for (int i = 0; i < keys.length; i++) {
       var key = keys[i];
 
-      articlePage.set(pages, key);
+      pages.current(key);
+
+      articlePage.set(pages);
 
       var writePath = target.resolve(slug + "/" + key + ".html");
 

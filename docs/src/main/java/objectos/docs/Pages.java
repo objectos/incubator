@@ -50,16 +50,36 @@ final class Pages {
 
   public Pages() {}
 
+  public final void current(String key) {
+    current = key;
+  }
+
+  public final Document document() {
+    return document(current);
+  }
+
   public final Document document(String key) {
     return get0(documents, key);
+  }
+
+  public final String href() {
+    return href(current);
   }
 
   public final String href(String key) {
     return get0(hrefs, key);
   }
 
+  public final String nextKey() {
+    return nextKey(current);
+  }
+
   public final String nextKey(String key) {
     return nextKeys.get(key);
+  }
+
+  public final String prevKey() {
+    return prevKey(current);
   }
 
   public final String prevKey(String key) {
@@ -147,6 +167,10 @@ final class Pages {
 
   public final UnmodifiableList<String> trail(String key) {
     return get0(trails, key);
+  }
+
+  public final void unset() {
+    current = null;
   }
 
   private <T> T get0(Map<String, T> map, String key) {
