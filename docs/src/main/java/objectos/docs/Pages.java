@@ -18,6 +18,7 @@ package objectos.docs;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.NoSuchElementException;
+import java.util.regex.Pattern;
 import objectos.docs.ui.PageSwitcher;
 import objectos.ssg.SiteFragment;
 import objectos.util.GrowableList;
@@ -25,6 +26,8 @@ import objectos.util.UnmodifiableList;
 import org.asciidoctor.ast.Document;
 
 final class Pages {
+
+  static final Pattern STRIP_TAGS = Pattern.compile("<code>(.*?)</code>", Pattern.DOTALL);
 
   private final Map<String, Document> documents = new HashMap<>();
 
@@ -181,6 +184,10 @@ final class Pages {
 
   public final void unset() {
     current = null;
+  }
+
+  final String stripTags(String string) {
+    return STRIP_TAGS.matcher(string).replaceAll("$1");
   }
 
   private <T> T get0(Map<String, T> map, String key) {

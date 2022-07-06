@@ -31,6 +31,11 @@ public class PagesTest {
   }
 
   @Test
+  public void stripTags() {
+    assertEquals(pages.stripTags("The <code>Check</code> class"), "The Check class");
+  }
+
+  @Test
   public void v0002() {
     pages.reset("http://foo", "next");
 

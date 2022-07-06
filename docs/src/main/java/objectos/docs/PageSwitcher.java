@@ -52,7 +52,9 @@ final class PageSwitcher extends ThisFragment {
 
         div("Next"),
 
-        span(pages.title(nextKey))
+        span(
+          raw(pages.title(nextKey))
+        )
       ),
 
       svg(
@@ -96,7 +98,9 @@ final class PageSwitcher extends ThisFragment {
 
         div("Previous"),
 
-        span(pages.title(prevKey))
+        span(
+          raw(pages.title(prevKey))
+        )
       )
     );
   }

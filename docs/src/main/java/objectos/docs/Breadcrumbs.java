@@ -69,7 +69,9 @@ final class Breadcrumbs extends ThisFragment {
 
     var defaultValue = document.getDoctitle();
 
-    return (String) document.getAttribute("trail-title", defaultValue);
+    var title = (String) document.getAttribute("trail-title", defaultValue);
+
+    return pages.stripTags(title);
   }
 
 }

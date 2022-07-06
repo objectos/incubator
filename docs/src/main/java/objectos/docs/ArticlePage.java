@@ -74,7 +74,11 @@ final class ArticlePage extends ThisTemplate {
     meta(httpEquiv("x-ua-compatible"), content("ie=edge"));
     meta(name("viewport"), content("width=device-width, initial-scale=1, shrink-to-fit=no"));
     link(rel("shortcut icon"), type(ImageType.ICON.qualifiedName()), href("/favicon.ico"));
-    title(document.getDoctitle());
+
+    var title = document.getDoctitle();
+
+    title(pages.stripTags(title));
+
     style(
       raw(css.toString())
     );
@@ -83,7 +87,9 @@ final class ArticlePage extends ThisTemplate {
   private void main0() {
     article(
       f(() -> {
-        h1(document.getDoctitle());
+        h1(
+          raw(document.getDoctitle())
+        );
 
         for (var node : document.getBlocks()) {
           var c = node.getContent();
