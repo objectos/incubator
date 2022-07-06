@@ -16,14 +16,14 @@ Using the Objectos BOM POM is the recommended way of adding Objectos to your
 project. You can import it by declaring it in the `dependencyManagement`
 section of your project's POM file like so:
 
-[,xml]
+[,xml,subs=attributes+]
 ----
 <dependencyManagement>
     <dependencies>
         <dependency>
             <groupId>br.com.objectos</groupId>
             <artifactId>objectos-bom</artifactId>
-            <version>{{version}}</version>
+            <version>{objectos-version}</version>
             <type>pom</type>
             <scope>import</scope>
         </dependency>

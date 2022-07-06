@@ -1,4 +1,5 @@
 = Documentation for Objectos developers
+:trail-title: Home
 :template: IndexPage
 
 Welcome to the Objectos documentation.

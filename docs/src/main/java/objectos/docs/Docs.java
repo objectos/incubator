@@ -26,6 +26,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import objectos.lang.Check;
 import org.asciidoctor.Asciidoctor;
+import org.asciidoctor.Attributes;
 import org.asciidoctor.Options;
 import org.asciidoctor.ast.Document;
 
@@ -91,7 +92,7 @@ final class Docs implements AutoCloseable {
 
   public final void generate() throws IOException {
     generateVersion(
-      "next", "next",
+      "0.3.0-SNAPSHOT", "next", "next",
 
       "index",
 
@@ -116,15 +117,23 @@ final class Docs implements AutoCloseable {
   }
 
   private void generateVersion(
-      String slug, String resourceDirectory, String... keys) throws IOException {
+      String version, String slug, String resourceDirectory, String... keys) throws IOException {
     pages.reset(baseHref, slug);
+
+    var attributes = Attributes.builder()
+        .attribute("objectos-version", version)
+        .build();
+
+    var options = Options.builder()
+        .attributes(attributes)
+        .build();
 
     for (int i = 0; i < keys.length; i++) {
       var key = keys[i];
 
       pages.put(key);
 
-      var document = loadDocument(resourceDirectory, key);
+      var document = loadDocument(resourceDirectory, key, options);
 
       pages.set(key, document);
     }
@@ -150,7 +159,8 @@ final class Docs implements AutoCloseable {
     }
   }
 
-  private Document loadDocument(String resourceDirectory, String key) throws IOException {
+  private Document loadDocument(
+      String resourceDirectory, String key, Options options) throws IOException {
     var resourceName = resourceDirectory + "/" + key + ".adoc";
 
     var out = new ByteArrayOutputStream();
@@ -169,7 +179,7 @@ final class Docs implements AutoCloseable {
 
     var contents = new String(bytes, StandardCharsets.UTF_8);
 
-    return asciidoctor.load(contents, Options.builder().build());
+    return asciidoctor.load(contents, options);
   }
 
   private void writeDocument(Template tmpl, Path target) throws IOException {
