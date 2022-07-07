@@ -16,20 +16,25 @@
 package objectos.docs;
 
 import br.com.objectos.html.spi.type.OlValue;
+import br.com.objectos.html.tmpl.AbstractFragment;
 import objectos.docs.style.BreadcrumbCss;
 
-final class Breadcrumbs extends ThisFragment {
+final class Breadcrumbs extends AbstractFragment {
+
+  private final DocsInjector injector;
+
+  Breadcrumbs(DocsInjector injector) { this.injector = injector; }
 
   @Override
-  final void definitionImpl() {
-    var trail = pages.trail();
+  protected final void definition() {
+    var trail = injector.$trail();
 
     var items = new OlValue[trail.size()];
 
     var key = trail.get(0);
 
     items[0] = li(
-      a(href(pages.href(key)), t(trailTitle(key)))
+      a(href(injector.$href(key)), t(injector.$trailTitle(key)))
     );
 
     for (int i = 1, size = trail.size(); i < size; i++) {
@@ -51,7 +56,7 @@ final class Breadcrumbs extends ThisFragment {
           )
         ),
 
-        a(href(pages.href(key)), t(trailTitle(key)))
+        a(href(injector.$href(key)), t(injector.$trailTitle(key)))
       );
     }
 

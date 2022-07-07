@@ -17,55 +17,38 @@ package objectos.docs;
 
 import br.com.objectos.css.sheet.StyleSheet;
 
-final class ArticlePage extends ThisTemplate {
+final class ArticlePage extends BaseTemplate {
 
   private final ArticleCss css = new ArticleCss();
 
-  private final Breadcrumbs breadcrumbs = new Breadcrumbs();
+  private final Breadcrumbs breadcrumbs;
 
-  private final NextBanner nextBanner;
+  private final PageSwitcher pageSwitcher;
 
-  private final PageSwitcher pageSwitcher = new PageSwitcher();
+  private final DocsInjector injector;
 
-  private final StringBuilder sb = new StringBuilder();
+  ArticlePage(DocsInjector injector) {
+    this.injector = injector;
 
-  ArticlePage(NextBanner nextBanner) { this.nextBanner = nextBanner; }
+    breadcrumbs = new Breadcrumbs(injector);
 
-  @Override
-  public final void set(Pages pages) {
-    super.set(pages);
-
-    breadcrumbs.set(pages);
-
-    pageSwitcher.set(pages);
+    pageSwitcher = new PageSwitcher(injector);
   }
 
   @Override
   final void body0() {
-    var href = pages.href();
-
-    sb.setLength(0);
-
-    for (var node : document.getBlocks()) {
-      var c = node.getContent();
-
-      if (c instanceof String s) {
-        sb.append(s);
-      } else {
-        throw new RuntimeException("Unexpected content: " + c.getClass());
-      }
-    }
+    var nextBanner = injector.$nextBanner();
 
     body(
-      href.contains("/next/") ? f(nextBanner) : noop(),
+      nextBanner.shouldRender() ? f(nextBanner) : noop(),
 
       f(breadcrumbs),
 
       main(
         article(
-          h1(raw(document.getDoctitle())),
+          h1(raw(injector.$doctitle())),
 
-          raw(sb.toString())
+          raw(injector.$contents())
         )
       ),
 
@@ -76,6 +59,11 @@ final class ArticlePage extends ThisTemplate {
   @Override
   final StyleSheet styleSheet() {
     return css;
+  }
+
+  @Override
+  final String thisTitle() {
+    return injector.$doctitle();
   }
 
 }

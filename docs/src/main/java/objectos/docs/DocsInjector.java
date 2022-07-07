@@ -15,33 +15,32 @@
  */
 package objectos.docs;
 
-import objectos.ssg.SiteFragment;
+import objectos.util.UnmodifiableList;
 
-abstract class ThisFragment extends SiteFragment {
+abstract class DocsInjector {
 
-  Pages pages;
+  abstract String $contents();
 
-  public void set(Pages pages) {
-    this.pages = pages;
-  }
+  abstract String $doctitle();
 
-  @Override
-  protected final void definition() {
-    definitionImpl();
+  abstract String $doctitle(String key);
 
-    pages = null;
-  }
+  abstract String $href();
 
-  abstract void definitionImpl();
+  abstract String $href(String key);
 
-  final String trailTitle(String key) {
-    var document = pages.document(key);
+  abstract NextBanner $nextBanner();
 
-    var defaultValue = document.getDoctitle();
+  abstract String $nextKey();
 
-    var title = (String) document.getAttribute("trail-title", defaultValue);
+  abstract String $prevKey();
 
-    return pages.stripTags(title);
-  }
+  abstract TableOfContents $tableOfContents();
+
+  abstract UnmodifiableList<String> $trail();
+
+  abstract String $trailTitle(String key);
+
+  abstract Version $version();
 
 }

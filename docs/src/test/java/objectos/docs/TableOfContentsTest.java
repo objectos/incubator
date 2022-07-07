@@ -26,7 +26,7 @@ public class TableOfContentsTest {
 
   @BeforeClass
   public void _beforeClass() {
-    toc = new TableOfContents();
+    toc = new TableOfContents(null);
   }
 
   @Test

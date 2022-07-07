@@ -22,7 +22,7 @@ import br.com.objectos.http.media.ImageType;
 abstract class BaseTemplate extends AbstractTemplate {
 
   @Override
-  protected void definition() {
+  protected final void definition() {
     doctype();
     html(
       lang("en"),

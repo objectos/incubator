@@ -30,36 +30,32 @@ import objectos.util.UnmodifiableList;
 import org.asciidoctor.Asciidoctor;
 import org.asciidoctor.Options;
 
-public final class Docs implements AutoCloseable {
+public final class Docs extends DocsInjector implements AutoCloseable {
 
   private final Asciidoctor asciidoctor = Asciidoctor.Factory.create();
 
   private String baseHref = "";
 
-  private final ArticlePage articlePage;
+  private final ArticlePage articlePage = new ArticlePage(this);
 
-  private final IndexPage indexPage;
+  private final IndexPage indexPage = new IndexPage(this);
 
-  private final Pages pages;
+  private final NextBanner nextBanner = new NextBanner(this);
 
-  private final TableOfContents tableOfContents;
+  private final Pages pages = new Pages();
+
+  private final TableOfContents tableOfContents = new TableOfContents(this);
 
   private final Path target;
 
   private final List<Version> versions;
 
+  private final StringBuilder sb = new StringBuilder();
+
+  private Version version;
+
   private Docs(Path target) {
     this.target = target;
-
-    var nextBanner = new NextBanner();
-
-    articlePage = new ArticlePage(nextBanner);
-
-    pages = new Pages();
-
-    tableOfContents = new TableOfContents();
-
-    indexPage = new IndexPage(nextBanner, tableOfContents);
 
     versions = UnmodifiableList.of(
       Version.NEXT,
@@ -118,12 +114,82 @@ public final class Docs implements AutoCloseable {
   }
 
   public final void generate() throws IOException {
-    for (var version : versions) {
+    for (var v : versions) {
+      version = v;
+
       version.generate(this);
     }
 
     writeTemplate("versions.html", new VersionsPage(baseHref, versions));
   }
+
+  @Override
+  final String $contents() {
+    sb.setLength(0);
+
+    var document = pages.document();
+
+    for (var node : document.getBlocks()) {
+      var c = node.getContent();
+
+      if (c instanceof String s) {
+        sb.append(s);
+      } else {
+        throw new RuntimeException("Unexpected content: " + c.getClass());
+      }
+    }
+
+    return sb.toString();
+  }
+
+  @Override
+  final String $doctitle() {
+    var document = pages.document();
+
+    return document.getDoctitle();
+  }
+
+  @Override
+  final String $doctitle(String key) {
+    var document = pages.document(key);
+
+    return document.getDoctitle();
+  }
+
+  @Override
+  final String $href() { return pages.href(); }
+
+  @Override
+  final String $href(String key) { return pages.href(key); }
+
+  @Override
+  final NextBanner $nextBanner() { return nextBanner; }
+
+  @Override
+  final String $nextKey() { return pages.nextKey(); }
+
+  @Override
+  final String $prevKey() { return pages.prevKey(); }
+
+  @Override
+  final TableOfContents $tableOfContents() { return tableOfContents; }
+
+  @Override
+  final UnmodifiableList<String> $trail() { return pages.trail(); }
+
+  @Override
+  final String $trailTitle(String key) {
+    var document = pages.document(key);
+
+    var defaultValue = document.getDoctitle();
+
+    var title = (String) document.getAttribute("trail-title", defaultValue);
+
+    return pages.stripTags(title);
+  }
+
+  @Override
+  final Version $version() { return version; }
 
   final void generateVersion0Start(String slug) {
     pages.reset(baseHref, slug);
@@ -168,13 +234,11 @@ public final class Docs implements AutoCloseable {
 
     var templateName = pages.templateName();
 
-    ThisTemplate tmpl = switch (templateName) {
+    BaseTemplate tmpl = switch (templateName) {
       case "ArticlePage" -> articlePage;
       case "IndexPage" -> indexPage;
       default -> throw new IllegalArgumentException("Unexpected value: " + templateName);
     };
-
-    tmpl.set(pages);
 
     writeTemplate(slug + "/" + key + ".html", tmpl);
   }

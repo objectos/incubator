@@ -16,15 +16,20 @@
 package objectos.docs;
 
 import br.com.objectos.html.spi.type.DivValue;
+import br.com.objectos.html.tmpl.AbstractFragment;
 import objectos.docs.style.PageSwitcherCss;
 
-final class PageSwitcher extends ThisFragment {
+final class PageSwitcher extends AbstractFragment {
+
+  private final DocsInjector injector;
+
+  PageSwitcher(DocsInjector injector) { this.injector = injector; }
 
   @Override
-  final void definitionImpl() {
-    var back = pages.prevKey();
+  protected final void definition() {
+    var back = injector.$prevKey();
 
-    var next = pages.nextKey();
+    var next = injector.$nextKey();
 
     nav(
       PageSwitcherCss._NAV,
@@ -45,7 +50,7 @@ final class PageSwitcher extends ThisFragment {
 
   private DivValue renderNext(String nextKey) {
     return a(
-      href(pages.href(nextKey)),
+      href(injector.$href(nextKey)),
 
       div(
         PageSwitcherCss._TEXT,
@@ -53,7 +58,7 @@ final class PageSwitcher extends ThisFragment {
         div("Next"),
 
         span(
-          raw(pages.title(nextKey))
+          raw(injector.$doctitle(nextKey))
         )
       ),
 
@@ -76,7 +81,7 @@ final class PageSwitcher extends ThisFragment {
 
   private DivValue renderPrev(String prevKey) {
     return a(
-      href(pages.href(prevKey)),
+      href(injector.$href(prevKey)),
 
       svg(
         xmlns("http://www.w3.org/2000/svg"),
@@ -99,7 +104,7 @@ final class PageSwitcher extends ThisFragment {
         div("Previous"),
 
         span(
-          raw(pages.title(prevKey))
+          raw(injector.$doctitle(prevKey))
         )
       )
     );

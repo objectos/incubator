@@ -15,10 +15,20 @@
  */
 package objectos.docs;
 
+import br.com.objectos.html.tmpl.AbstractFragment;
 import objectos.docs.style.NextBannerCss;
-import objectos.ssg.SiteFragment;
 
-final class NextBanner extends SiteFragment {
+final class NextBanner extends AbstractFragment {
+
+  private final DocsInjector injector;
+
+  NextBanner(DocsInjector injector) { this.injector = injector; }
+
+  public final boolean shouldRender() {
+    var href = injector.$href();
+
+    return href.contains("/next/");
+  }
 
   @Override
   protected final void definition() {

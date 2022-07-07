@@ -17,58 +17,52 @@ package objectos.docs;
 
 import br.com.objectos.css.sheet.StyleSheet;
 
-final class IndexPage extends ThisTemplate {
+final class IndexPage extends BaseTemplate {
 
   private final IndexCss css = new IndexCss();
 
-  private final StringBuilder sb = new StringBuilder();
+  private final DocsInjector injector;
 
-  private final NextBanner nextBanner;
-
-  private final TableOfContents toc;
-
-  IndexPage(NextBanner nextBanner, TableOfContents toc) {
-    this.nextBanner = nextBanner;
-
-    this.toc = toc;
-  }
-
-  @Override
-  public final void set(Pages pages) {
-    super.set(pages);
-
-    toc.set(pages);
+  IndexPage(DocsInjector injector) {
+    this.injector = injector;
   }
 
   @Override
   final void body0() {
-    var href = pages.href();
+    var nextBanner = injector.$nextBanner();
 
-    sb.setLength(0);
-
-    for (var node : document.getBlocks()) {
-      var c = node.getContent();
-
-      if (c instanceof String s) {
-        sb.append(s);
-      } else {
-        throw new RuntimeException("Unexpected content: " + c.getClass());
-      }
-    }
+    var version = injector.$version();
 
     body(
-      href.contains("/next/") ? f(nextBanner) : noop(),
+      nextBanner.shouldRender() ? f(nextBanner) : noop(),
 
       main(
         article(
-          h1(document.getDoctitle()),
+          header(
+            IndexCss.HD,
 
-          raw(sb.toString()),
+            h1("Documentation for Objectos developers"),
+
+            div(
+              IndexCss.HDV,
+
+              div(
+                t("Version", version.name()), t(" ["), a(href("../versions.html"), t("change")),
+                t("]")
+              ),
+
+              div(
+                t("API reference: "), a(href("api/index.html"), t("Javadocs"))
+              )
+            )
+          ),
+
+          raw(injector.$contents()),
 
           section(
             h2("Table of contents"),
 
-            f(toc)
+            f(injector.$tableOfContents())
           )
         )
       )
@@ -78,6 +72,11 @@ final class IndexPage extends ThisTemplate {
   @Override
   final StyleSheet styleSheet() {
     return css;
+  }
+
+  @Override
+  final String thisTitle() {
+    return injector.$doctitle();
   }
 
 }

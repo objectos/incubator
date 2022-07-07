@@ -17,12 +17,13 @@ package objectos.docs;
 
 import br.com.objectos.html.element.ElementName;
 import br.com.objectos.html.spi.type.UlValue;
+import br.com.objectos.html.tmpl.AbstractFragment;
 import java.util.List;
 import objectos.lang.ToString;
 import objectos.util.GrowableList;
 import objectos.util.UnmodifiableList;
 
-final class TableOfContents extends ThisFragment {
+final class TableOfContents extends AbstractFragment {
 
   sealed abstract class Item implements ToString.Formattable permits Level, Simple {
     final String key;
@@ -109,9 +110,15 @@ final class TableOfContents extends ThisFragment {
     }
   }
 
+  private final DocsInjector injector;
+
   private final GrowableList<Item> items = new GrowableList<>();
 
   private Level level;
+
+  public TableOfContents(DocsInjector injector) {
+    this.injector = injector;
+  }
 
   public final void clear() {
     items.clear();
@@ -148,7 +155,7 @@ final class TableOfContents extends ThisFragment {
   }
 
   @Override
-  final void definitionImpl() {
+  protected final void definition() {
     ul0(items);
   }
 
@@ -164,9 +171,9 @@ final class TableOfContents extends ThisFragment {
     for (int i = 0; i < size; i++) {
       var item = items.get(i);
 
-      var href = pages.href(item.key);
+      var href = injector.$href(item.key);
 
-      var title = trailTitle(item.key);
+      var title = injector.$trailTitle(item.key);
 
       values[i] = li(
         a(href(href), t(title)),
