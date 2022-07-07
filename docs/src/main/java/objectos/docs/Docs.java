@@ -18,21 +18,22 @@ package objectos.docs;
 import static java.lang.System.err;
 import static java.lang.System.out;
 
-import br.com.objectos.html.tmpl.Template;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.List;
 import objectos.lang.Check;
+import objectos.util.UnmodifiableList;
 import org.asciidoctor.Asciidoctor;
-import org.asciidoctor.Attributes;
 import org.asciidoctor.Options;
-import org.asciidoctor.ast.Document;
 
-final class Docs implements AutoCloseable {
+public final class Docs implements AutoCloseable {
 
   private final Asciidoctor asciidoctor = Asciidoctor.Factory.create();
+
+  private String baseHref = "";
 
   private final ArticlePage articlePage = new ArticlePage();
 
@@ -44,7 +45,13 @@ final class Docs implements AutoCloseable {
 
   private final Path target;
 
-  private String baseHref = "";
+  private final List<Version> versions = UnmodifiableList.of(
+    Version.NEXT,
+
+    Version.V0_2_0,
+
+    Version.V0_1_0
+  );
 
   private Docs(Path target) {
     this.target = target;
@@ -98,155 +105,72 @@ final class Docs implements AutoCloseable {
   }
 
   public final void generate() throws IOException {
-    generateVersion(
-      "0.3.0-SNAPSHOT", "next", "next",
-
-      "index",
-
-      "intro/index",
-      "intro/overview",
-      "intro/installation",
-
-      "objectos-lang/index",
-      "objectos-lang/Check",
-      "objectos-lang/Equals",
-      "objectos-lang/HashCode",
-      "objectos-lang/ToString",
-      "objectos-lang/note-sink-api/index",
-      "objectos-lang/note-sink-api/creating-notes",
-      "objectos-lang/note-sink-api/the-note-sink-interface",
-      "objectos-lang/note-sink-api/the-no-op-note-sink",
-
-      "relnotes/index",
-      "relnotes/0.2.0",
-      "relnotes/0.1.0"
-    );
-
-    generateVersion(
-      "0.2.0", "0.2", "v0002",
-
-      "index",
-
-      "intro/index",
-      "intro/overview",
-      "intro/installation",
-
-      "objectos-lang/index",
-      "objectos-lang/Check",
-      "objectos-lang/Equals",
-      "objectos-lang/HashCode",
-      "objectos-lang/ToString",
-      "objectos-lang/note-sink-api/index",
-      "objectos-lang/note-sink-api/creating-notes",
-      "objectos-lang/note-sink-api/the-note-sink-interface",
-      "objectos-lang/note-sink-api/the-no-op-note-sink",
-
-      "relnotes/index",
-      "relnotes/0.2.0",
-      "relnotes/0.1.0"
-    );
-
-    generateVersion(
-      "0.1.0", "0.1", "v0001",
-
-      "index",
-
-      "intro/index",
-      "intro/overview",
-      "intro/install",
-
-      "logging/index",
-      "logging/getting-started/index",
-      "logging/getting-started/about-logging",
-      "logging/getting-started/objectos-logging",
-      "logging/getting-started/installing",
-      "logging/getting-started/quick-start",
-      "logging/logging-guide/index",
-      "logging/logging-guide/events",
-      "logging/logging-guide/logger",
-      "logging/no-op-logger/index",
-
-      "relnotes/index",
-      "relnotes/0.1.0"
-    );
+    for (var version : versions) {
+      version.generate(this);
+    }
   }
 
-  private void generateVersion(
-      String version, String slug, String resourceDirectory, String... keys) throws IOException {
+  final void generateVersion0Start(String slug) {
     pages.reset(baseHref, slug);
 
     tableOfContents.clear();
-
-    var attributes = Attributes.builder()
-        .attribute("objectos-version", version)
-        .build();
-
-    var options = Options.builder()
-        .attributes(attributes)
-        .build();
-
-    for (int i = 0; i < keys.length; i++) {
-      var key = keys[i];
-
-      pages.put(key);
-
-      tableOfContents.put(key);
-
-      var document = loadDocument(resourceDirectory, key, options);
-
-      pages.set(key, document);
-    }
-
-    for (int i = 0; i < keys.length; i++) {
-      var key = keys[i];
-
-      pages.current(key);
-
-      var templateName = pages.templateName();
-
-      ThisTemplate tmpl = switch (templateName) {
-        case "ArticlePage" -> articlePage;
-        case "IndexPage" -> indexPage;
-        default -> throw new IllegalArgumentException("Unexpected value: " + templateName);
-      };
-
-      tmpl.set(pages);
-
-      var writePath = target.resolve(slug + "/" + key + ".html");
-
-      writeDocument(tmpl, writePath);
-    }
   }
 
-  private Document loadDocument(
+  final void generateVersion1PrepareKey(
       String resourceDirectory, String key, Options options) throws IOException {
+    // prepare
+    pages.put(key);
+
+    tableOfContents.put(key);
+
+    // load document
     var resourceName = resourceDirectory + "/" + key + ".adoc";
 
-    var out = new ByteArrayOutputStream();
+    var output = new ByteArrayOutputStream();
 
     var thisClass = getClass();
 
-    try (var inputStream = thisClass.getResourceAsStream(resourceName)) {
-      inputStream.transferTo(out);
+    try (var input = thisClass.getResourceAsStream(resourceName)) {
+      input.transferTo(output);
     } catch (IOException e) {
       err.println("Failed to load a resource");
 
       throw e;
     }
 
-    var bytes = out.toByteArray();
+    var bytes = output.toByteArray();
 
     var contents = new String(bytes, StandardCharsets.UTF_8);
 
-    return asciidoctor.load(contents, options);
+    var document = asciidoctor.load(contents, options);
+
+    // set document
+    pages.set(key, document);
   }
 
-  private void writeDocument(Template tmpl, Path target) throws IOException {
-    var parent = target.getParent();
+  final void generateVersion2Write(String slug, String key) throws IOException {
+    // prepare
+    pages.current(key);
+
+    // write path
+    var templateName = pages.templateName();
+
+    ThisTemplate tmpl = switch (templateName) {
+      case "ArticlePage" -> articlePage;
+      case "IndexPage" -> indexPage;
+      default -> throw new IllegalArgumentException("Unexpected value: " + templateName);
+    };
+
+    tmpl.set(pages);
+
+    var writePath = target.resolve(slug + "/" + key + ".html");
+
+    // write document
+    var parent = writePath.getParent();
 
     Files.createDirectories(parent);
 
-    try (var writer = Files.newBufferedWriter(target, StandardCharsets.UTF_8)) {
+    try (var writer = Files.newBufferedWriter(writePath, StandardCharsets.UTF_8)) {
       var s = tmpl.toString();
 
       writer.write(s);
