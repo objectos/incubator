@@ -1,0 +1,60 @@
+= Installing Objectos Logging
+
+In order to use Objectos Logging in your Java project you need to have it
+installed in your system.
+
+As of the current release there is only one supported installation method:
+
+* adding Objectos Logging to an existing Maven project.
+
+== System requirements
+
+Objectos requires JDK 17 or later.
+
+== Maven
+
+Here are the instructions to install Objectos Logging in an existing Maven project.
+
+The first step is to import the Objectos BOM POM to your project.
+You can do it by declaring it in the `dependencyManagement` section
+of your project's POM file like so:
+
+[,xml,subs=attributes+]
+----
+<dependencyManagement>
+    <dependencies>
+        <dependency>
+            <groupId>br.com.objectos</groupId>
+            <artifactId>bom</artifactId>
+            <version>{objectos-version}</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+    </dependencies>
+</dependencyManagement>
+----
+
+The second step is to add Objectos Logging to your project. Declare it
+in the `dependencies` section of your projects's POM file like so:
+
+[,xml]
+----
+<dependencies>
+    <dependency>
+        <groupId>br.com.objectos</groupId>
+        <artifactId>logging</artifactId>
+    </dependency>
+</dependencies>
+----
+
+== `module-info.java`
+
+If your project is modular you should add a `requires` directive
+to your `module-info.java` file:
+
+[,java]
+----
+module com.example.project {
+  requires objectos.logging;
+}
+----

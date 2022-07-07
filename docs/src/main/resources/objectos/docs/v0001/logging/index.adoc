@@ -1,0 +1,5 @@
+= Objectos Logging
+
+Objectos Logging is a logging API for Java applications.
+You define logging events and you log them instead of string messages.
+Events can be paramaterized making log method invocations type-safe.

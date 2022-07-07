@@ -145,6 +145,30 @@ final class Docs implements AutoCloseable {
       "relnotes/0.2.0",
       "relnotes/0.1.0"
     );
+
+    generateVersion(
+      "0.1.0", "0.1", "v0001",
+
+      "index",
+
+      "intro/index",
+      "intro/overview",
+      "intro/install",
+
+      "logging/index",
+      "logging/getting-started/index",
+      "logging/getting-started/about-logging",
+      "logging/getting-started/objectos-logging",
+      "logging/getting-started/installing",
+      "logging/getting-started/quick-start",
+      "logging/logging-guide/index",
+      "logging/logging-guide/events",
+      "logging/logging-guide/logger",
+      "logging/no-op-logger/index",
+
+      "relnotes/index",
+      "relnotes/0.1.0"
+    );
   }
 
   private void generateVersion(

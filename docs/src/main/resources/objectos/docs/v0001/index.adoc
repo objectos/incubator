@@ -1,0 +1,20 @@
+= Documentation for Objectos developers
+:trail-title: Home
+:template: IndexPage
+
+Welcome to the Objectos documentation.
+Here you will find tutorials, topic guides, how-to guides and the reference manuals of individual libraries.
+
+== I am new to Objectos
+
+Read these to get started with Objectos:
+
+* ilink:intro/overview[What is Objectos?]
+* ilink:intro/install[Installation]
+
+== Core libraries
+
+Built from scratch core utilities for Java applications.
+Core utilities are those that most Java applications will require:
+
+* ilink:logging/index[Logging]

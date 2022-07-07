@@ -1,0 +1,4 @@
+= Logging guide
+
+In this chapter we will discuss how to use the Objectos Logging API
+to create and log events in your Java programs.
