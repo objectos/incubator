@@ -36,26 +36,38 @@ public final class Docs implements AutoCloseable {
 
   private String baseHref = "";
 
-  private final ArticlePage articlePage = new ArticlePage();
+  private final ArticlePage articlePage;
 
-  private final TableOfContents tableOfContents = new TableOfContents();
+  private final IndexPage indexPage;
 
-  private final IndexPage indexPage = new IndexPage(tableOfContents);
+  private final Pages pages;
 
-  private final Pages pages = new Pages();
+  private final TableOfContents tableOfContents;
 
   private final Path target;
 
-  private final List<Version> versions = UnmodifiableList.of(
-    Version.NEXT,
-
-    Version.V0_2_0,
-
-    Version.V0_1_0
-  );
+  private final List<Version> versions;
 
   private Docs(Path target) {
     this.target = target;
+
+    var nextBanner = new NextBanner();
+
+    articlePage = new ArticlePage(nextBanner);
+
+    pages = new Pages();
+
+    tableOfContents = new TableOfContents();
+
+    indexPage = new IndexPage(nextBanner, tableOfContents);
+
+    versions = UnmodifiableList.of(
+      Version.NEXT,
+
+      Version.V0_2_0,
+
+      Version.V0_1_0
+    );
 
     var registry = asciidoctor.javaExtensionRegistry();
 

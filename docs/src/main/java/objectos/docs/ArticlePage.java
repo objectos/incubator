@@ -23,11 +23,13 @@ final class ArticlePage extends ThisTemplate {
 
   private final Breadcrumbs breadcrumbs = new Breadcrumbs();
 
-  private final NextBanner nextBanner = new NextBanner();
+  private final NextBanner nextBanner;
 
   private final PageSwitcher pageSwitcher = new PageSwitcher();
 
   private final StringBuilder sb = new StringBuilder();
+
+  ArticlePage(NextBanner nextBanner) { this.nextBanner = nextBanner; }
 
   @Override
   public final void set(Pages pages) {

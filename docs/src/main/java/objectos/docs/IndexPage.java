@@ -23,9 +23,13 @@ final class IndexPage extends ThisTemplate {
 
   private final StringBuilder sb = new StringBuilder();
 
+  private final NextBanner nextBanner;
+
   private final TableOfContents toc;
 
-  IndexPage(TableOfContents toc) {
+  IndexPage(NextBanner nextBanner, TableOfContents toc) {
+    this.nextBanner = nextBanner;
+
     this.toc = toc;
   }
 
@@ -38,6 +42,8 @@ final class IndexPage extends ThisTemplate {
 
   @Override
   final void body0() {
+    var href = pages.href();
+
     sb.setLength(0);
 
     for (var node : document.getBlocks()) {
@@ -51,6 +57,8 @@ final class IndexPage extends ThisTemplate {
     }
 
     body(
+      href.contains("/next/") ? f(nextBanner) : noop(),
+
       main(
         article(
           h1(document.getDoctitle()),
