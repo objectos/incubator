@@ -121,6 +121,30 @@ final class Docs implements AutoCloseable {
       "relnotes/0.2.0",
       "relnotes/0.1.0"
     );
+
+    generateVersion(
+      "0.2.0", "0.2", "v0002",
+
+      "index",
+
+      "intro/index",
+      "intro/overview",
+      "intro/installation",
+
+      "objectos-lang/index",
+      "objectos-lang/Check",
+      "objectos-lang/Equals",
+      "objectos-lang/HashCode",
+      "objectos-lang/ToString",
+      "objectos-lang/note-sink-api/index",
+      "objectos-lang/note-sink-api/creating-notes",
+      "objectos-lang/note-sink-api/the-note-sink-interface",
+      "objectos-lang/note-sink-api/the-no-op-note-sink",
+
+      "relnotes/index",
+      "relnotes/0.2.0",
+      "relnotes/0.1.0"
+    );
   }
 
   private void generateVersion(
