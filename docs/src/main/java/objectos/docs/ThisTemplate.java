@@ -15,12 +15,9 @@
  */
 package objectos.docs;
 
-import br.com.objectos.css.sheet.StyleSheet;
-import br.com.objectos.html.tmpl.AbstractTemplate;
-import br.com.objectos.http.media.ImageType;
 import org.asciidoctor.ast.Document;
 
-abstract class ThisTemplate extends AbstractTemplate {
+abstract class ThisTemplate extends BaseTemplate {
 
   Pages pages;
 
@@ -34,37 +31,18 @@ abstract class ThisTemplate extends AbstractTemplate {
 
   @Override
   protected final void definition() {
-    doctype();
-    html(
-      lang("en"),
-      head(
-        f(this::head0)
-      ),
-      f(this::body0)
-    );
+    super.definition();
 
     pages.unset();
 
     pages = null;
   }
 
-  abstract void body0();
-
-  abstract StyleSheet styleSheet();
-
-  private void head0() {
-    meta(charset("utf-8"));
-    meta(httpEquiv("x-ua-compatible"), content("ie=edge"));
-    meta(name("viewport"), content("width=device-width, initial-scale=1, shrink-to-fit=no"));
-    link(rel("shortcut icon"), type(ImageType.ICON.qualifiedName()), href("/favicon.ico"));
-
+  @Override
+  final String thisTitle() {
     var title = document.getDoctitle();
 
-    title(pages.stripTags(title));
-
-    style(
-      raw(styleSheet().toString())
-    );
+    return pages.stripTags(title);
   }
 
 }

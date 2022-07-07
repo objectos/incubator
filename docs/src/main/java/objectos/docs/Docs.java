@@ -18,6 +18,7 @@ package objectos.docs;
 import static java.lang.System.err;
 import static java.lang.System.out;
 
+import br.com.objectos.html.tmpl.Template;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -108,6 +109,8 @@ public final class Docs implements AutoCloseable {
     for (var version : versions) {
       version.generate(this);
     }
+
+    writeTemplate("versions.html", new VersionsPage(baseHref, versions));
   }
 
   final void generateVersion0Start(String slug) {
@@ -149,10 +152,8 @@ public final class Docs implements AutoCloseable {
   }
 
   final void generateVersion2Write(String slug, String key) throws IOException {
-    // prepare
     pages.current(key);
 
-    // write path
     var templateName = pages.templateName();
 
     ThisTemplate tmpl = switch (templateName) {
@@ -163,9 +164,12 @@ public final class Docs implements AutoCloseable {
 
     tmpl.set(pages);
 
-    var writePath = target.resolve(slug + "/" + key + ".html");
+    writeTemplate(slug + "/" + key + ".html", tmpl);
+  }
 
-    // write document
+  private void writeTemplate(String pathName, Template tmpl) throws IOException {
+    var writePath = target.resolve(pathName);
+
     var parent = writePath.getParent();
 
     Files.createDirectories(parent);

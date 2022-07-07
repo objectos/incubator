@@ -16,6 +16,7 @@
 package objectos.docs;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
 import objectos.util.UnmodifiableList;
 import org.asciidoctor.Attributes;
@@ -24,10 +25,12 @@ import org.asciidoctor.Options;
 record Version(String name,
                String slug,
                String resourceDirectory,
+               LocalDate releaseDate,
                List<String> keys) {
 
   static final Version NEXT = new Version(
     name("0.3.0-SNAPSHOT"), slug("next"), resourceDirectory("next"),
+    unreleased(),
 
     keys(
       "index",
@@ -54,6 +57,7 @@ record Version(String name,
 
   static final Version V0_2_0 = new Version(
     name("0.2.0"), slug("0.2"), resourceDirectory("v0002"),
+    releaseDate(2022, 6, 13),
 
     keys(
       "index",
@@ -80,6 +84,7 @@ record Version(String name,
 
   static final Version V0_1_0 = new Version(
     name("0.1.0"), slug("0.1"), resourceDirectory("v0001"),
+    releaseDate(2022, 5, 16),
 
     keys(
       "index",
@@ -107,6 +112,12 @@ record Version(String name,
   private static UnmodifiableList<String> keys(String... keys) {
     return UnmodifiableList.copyOf(keys);
   }
+
+  private static LocalDate releaseDate(int year, int month, int day) {
+    return LocalDate.of(year, month, day);
+  }
+
+  private static LocalDate unreleased() { return null; }
 
   private static String name(String s) { return s; }
 
