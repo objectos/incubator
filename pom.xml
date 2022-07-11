@@ -399,6 +399,7 @@
 		<module>logger</module>
 		<module>mojo</module>
 		<module>mysql</module>
+		<module>objectos-asciidoc</module>
 		<module>office</module>
 		<module>smtp</module>
 		<module>ssg</module>
