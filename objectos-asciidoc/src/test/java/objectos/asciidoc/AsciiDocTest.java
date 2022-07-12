@@ -89,6 +89,47 @@ public class AsciiDocTest {
     );
   }
 
+  @Test(enabled = false)
+  public final void testCase02() {
+    test(
+      """
+      = Test document
+
+      Some preamble
+      """,
+
+      """
+      <div id="header">
+      <h1>Test document</h1>
+      </div>
+      <div id="content">
+      <div class="paragraph">
+      <p>Some preamble</p>
+      </div>
+      </div>
+      """
+    );
+  }
+
+  @Test(enabled = false)
+  public final void testCase03() {
+    test(
+      """
+      = The `Foo` class
+      """,
+
+      """
+      <div id="header">
+      <h1>The <code>Foo</code> class</h1>
+      </div>
+      <div id="content">
+
+      </div>
+      </div>
+      """
+    );
+  }
+
   String convert(String source) {
     var html = processor.convert(source);
 

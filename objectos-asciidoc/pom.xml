@@ -31,6 +31,17 @@
 
 	<inceptionYear>2021</inceptionYear>
 
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<argLine>--add-opens java.base/sun.nio.ch=ALL-UNNAMED --add-opens java.base/java.io=ALL-UNNAMED</argLine>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
@@ -52,7 +63,7 @@
 			<groupId>${project.groupId}</groupId>
 			<artifactId>objectos-util</artifactId>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>html</artifactId>
