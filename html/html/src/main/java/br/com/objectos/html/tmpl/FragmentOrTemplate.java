@@ -30,6 +30,38 @@ import objectos.lang.Check;
 
 abstract class FragmentOrTemplate extends GeneratedAbstractTemplate {
 
+  private enum DoctypeImpl implements Doctype {
+
+    INSTANCE;
+
+  }
+
+  private enum NoOp implements AnyElementValue {
+
+    INSTANCE;
+
+    @Override
+    public final void mark(Marker marker) {}
+
+    @Override
+    public final void render(Renderer renderer) {}
+
+  }
+
+  private enum Raw implements NonVoidElementValue {
+
+    INSTANCE;
+
+    @Override
+    public final void mark(Marker marker) {
+      marker.markRaw();
+    }
+
+    @Override
+    public final void render(Renderer renderer) {}
+
+  }
+
   TemplateDsl dsl;
 
   FragmentOrTemplate() {}
@@ -325,6 +357,20 @@ abstract class FragmentOrTemplate extends GeneratedAbstractTemplate {
     return out.toString();
   }
 
+  @Override
+  protected final ElementName addStandardElement(StandardElementName element, String text) {
+    dsl.addElement(element, text);
+
+    return element;
+  }
+
+  @Override
+  protected final ElementName addStandardElement(StandardElementName element, Value[] values) {
+    dsl.addElement(element, values);
+
+    return element;
+  }
+
   protected abstract void definition();
 
   protected final TemplateDsl dsl() {
@@ -359,56 +405,10 @@ abstract class FragmentOrTemplate extends GeneratedAbstractTemplate {
     return name;
   }
 
-  @Override
-  final ElementName addStandardElement(StandardElementName element, String text) {
-    dsl.addElement(element, text);
-
-    return element;
-  }
-
-  @Override
-  final ElementName addStandardElement(StandardElementName element, Value[] values) {
-    dsl.addElement(element, values);
-
-    return element;
-  }
-
   private AttributeOrElement addAttributeOrElement(AttributeOrElement value, String text) {
     dsl.addAttributeOrElement(value, text);
 
     return value;
-  }
-
-  private enum DoctypeImpl implements Doctype {
-
-    INSTANCE;
-
-  }
-
-  private enum NoOp implements AnyElementValue {
-
-    INSTANCE;
-
-    @Override
-    public final void mark(Marker marker) {}
-
-    @Override
-    public final void render(Renderer renderer) {}
-
-  }
-
-  private enum Raw implements NonVoidElementValue {
-
-    INSTANCE;
-
-    @Override
-    public final void mark(Marker marker) {
-      marker.markRaw();
-    }
-
-    @Override
-    public final void render(Renderer renderer) {}
-
   }
 
 }
