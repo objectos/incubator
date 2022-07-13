@@ -53,13 +53,21 @@ class Parser {
     static final int TITLE = 4;
   }
 
-  private static final int _START = 1;
+  private static final int _FINALLY = 1;
 
-  private static final int _START_CONTEXT = 2;
+  private static final int _START = 2;
+
+  private static final int _START_CONTEXT = 3;
 
   private static final int _STOP = 0;
 
-  private static final int _TEXT = 3;
+  private static final int _TEXT = 4;
+
+  private static final int _TEXT_CONSUME = 5;
+
+  private static final int _TEXT_NL = 6;
+
+  private static final int _TEXT_RESULT = 7;
 
   private int[] code;
 
@@ -78,6 +86,8 @@ class Parser {
   private int state;
 
   private final List<String> strings = new GrowableList<>();
+
+  private int textAux;
 
   Parser() {
     code = new int[1024];
@@ -138,6 +148,10 @@ class Parser {
   }
 
   private void addText(int beginIndex, int endIndex) {
+    if (beginIndex == endIndex) {
+      return;
+    }
+
     var s = source.substring(beginIndex, endIndex);
 
     addCode(Code.TEXT); // code
@@ -164,6 +178,7 @@ class Parser {
 
   private int execute(int state) {
     return switch (state) {
+      case _FINALLY -> executeFinally();
       case _START -> executeStart();
       case _START_CONTEXT -> executeStartContext();
       case _TEXT -> executeText();
@@ -292,48 +307,45 @@ class Parser {
   }
 
   private int executeText() {
-    if (!hasRemaining()) {
-      return executeFinally();
+    while (state != _TEXT_RESULT) {
+      state = switch (state) {
+        case _TEXT -> executeTextStart();
+        case _TEXT_CONSUME -> executeTextConsume();
+        case _TEXT_NL -> executeTextNewLine();
+        default -> throw new UnsupportedOperationException("Implement me :: text state=" + state);
+      };
     }
 
-    int beginIndex = sourceIndex;
-    int endIndex = beginIndex;
+    return textAux;
+  }
 
-    var eol = false;
-    var title = peekCtx() == Context.TITLE;
-
-    do {
+  private int executeTextConsume() {
+    if (hasRemaining()) {
       var c = nextChar();
 
-      endIndex = sourceIndex;
-
-      if (c == '\n') {
-        if (title || eol) {
-          break;
-        }
-
-        eol = true;
-
-        continue;
-      }
-
-      if (isInlineStart(c)) {
-        throw new UnsupportedOperationException("Implement me :: inline=" + c);
-      }
-    } while (hasRemaining());
-
-    addText(beginIndex, endIndex);
-
-    if (hasRemaining()) {
-      int ctx = endContext();
-
-      return switch (ctx) {
-        case Context.TITLE -> _START_CONTEXT;
-        default -> throw new UnsupportedOperationException("Implement me :: ctx=" + ctx);
+      return switch (c) {
+        case '\n' -> _TEXT_NL;
+        default -> _TEXT_CONSUME;
       };
     } else {
-      return executeFinally();
+      return toTextResult(_FINALLY);
     }
+  }
+
+  private int executeTextNewLine() {
+    var ctx = peekCtx();
+
+    if (ctx == Context.TITLE) {
+      return toTextResult(_START_CONTEXT);
+    } else {
+      return _TEXT_CONSUME;
+    }
+  }
+
+  private int executeTextStart() {
+    textAux = sourceIndex;
+
+    return executeTextConsume();
   }
 
   private int executeTitle(int level) {
@@ -350,13 +362,6 @@ class Parser {
 
   private boolean hasRemaining() {
     return sourceIndex < source.length();
-  }
-
-  private boolean isInlineStart(char c) {
-    return switch (c) {
-      case '`' -> true;
-      default -> false;
-    };
   }
 
   private char nextChar() {
@@ -381,6 +386,16 @@ class Parser {
     context = IntArrays.copyIfNecessary(context, contextIndex);
 
     context[contextIndex] = value;
+  }
+
+  private int toTextResult(int result) {
+    addText(textAux, sourceIndex);
+
+    endContext();
+
+    textAux = result;
+
+    return _TEXT_RESULT;
   }
 
 }

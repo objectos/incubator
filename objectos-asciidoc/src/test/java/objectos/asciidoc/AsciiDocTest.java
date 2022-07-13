@@ -135,6 +135,14 @@ public class AsciiDocTest {
       """
       = The doctitle""",
 
+      codes(
+        Parser.Code.START_DOCUMENT,
+        Parser.Code.START_TITLE, 1,
+        Parser.Code.TEXT, 0,
+        Parser.Code.END_TITLE,
+        Parser.Code.END_DOCUMENT
+      ),
+
       """
       <div id="header">
       <h1>The doctitle</h1>
