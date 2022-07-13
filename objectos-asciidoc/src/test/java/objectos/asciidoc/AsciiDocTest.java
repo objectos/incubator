@@ -17,9 +17,12 @@ package objectos.asciidoc;
 
 import static org.testng.Assert.assertEquals;
 
-import br.com.objectos.html.attribute.StandardAttributeName;
 import br.com.objectos.html.element.StandardElementName;
+import br.com.objectos.html.spi.type.DivValue;
+import br.com.objectos.html.spi.type.Value;
 import br.com.objectos.html.tmpl.AbstractTemplate;
+import java.util.List;
+import objectos.util.GrowableList;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -33,6 +36,8 @@ public class AsciiDocTest {
 
     private StandardElementName el;
 
+    private final List<Value> children = new GrowableList<>();
+
     public final String convert(String source) {
       this.source = source;
 
@@ -40,17 +45,39 @@ public class AsciiDocTest {
     }
 
     @Override
-    public final void startTitle() {
-      id("header");
+    public final void endDocument() {
 
-      el = StandardElementName.H1;
+    }
+
+    @Override
+    public final void endTitle() {
+      var values = children.toArray(DivValue[]::new);
+
+      div(values);
+    }
+
+    @Override
+    public final void startDocument() {
+
+    }
+
+    @Override
+    public final void startTitle(int level) {
+      children.add(
+        id("header")
+      );
+
+      el = switch (level) {
+        case 1 -> StandardElementName.H1;
+        default -> throw new UnsupportedOperationException("Implement me :: level=" + level);
+      };
     }
 
     @Override
     public final void text(String s) {
-      addStandardElement(el, s);
-
-      div(StandardAttributeName.ID, el);
+      children.add(
+        addStandardElement(el, s)
+      );
     }
 
     @Override
@@ -72,7 +99,13 @@ public class AsciiDocTest {
     processor = new ThisProcessor();
   }
 
-  @Test
+  @Test(description = //
+  """
+  = Document title
+
+  - happy path
+  - title ends @ eof
+  """)
   public final void testCase01() {
     test(
       """
@@ -89,7 +122,14 @@ public class AsciiDocTest {
     );
   }
 
-  @Test(enabled = false)
+  @Test(enabled = false, description = //
+  """
+  = Document title
+
+  - happy path
+  - title ends @ NL
+  - with preamble
+  """)
   public final void testCase02() {
     test(
       """
@@ -111,7 +151,13 @@ public class AsciiDocTest {
     );
   }
 
-  @Test(enabled = false)
+  @Test(enabled = false, description = //
+  """
+  = Document title
+
+  - title has inline element (code)
+  - title ends @ NL
+  """)
   public final void testCase03() {
     test(
       """
@@ -126,6 +172,32 @@ public class AsciiDocTest {
 
       </div>
       </div>
+      """
+    );
+  }
+
+  @Test(enabled = false, description = //
+  """
+  = Document title
+
+  - not a title (no space after symbol '=')
+  """)
+  public final void testCase04() {
+    test(
+      """
+      =Not Title
+      """,
+
+      """
+      <body>
+      <div id="header">
+      </div>
+      <div id="content">
+      <div class="paragraph">
+      <p>=Not Title</p>
+      </div>
+      </div>
+      </body>
       """
     );
   }

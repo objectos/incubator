@@ -21,13 +21,17 @@ public class AsciiDoc extends Parser {
 
   public interface Processor {
 
-    void startTitle();
+    void endDocument();
+
+    void endTitle();
+
+    void startDocument();
+
+    void startTitle(int level);
 
     void text(String s);
 
   }
-
-  private Processor processor;
 
   private AsciiDoc() {
   }
@@ -38,7 +42,7 @@ public class AsciiDoc extends Parser {
 
   public final void process(String source, Processor processor) {
     Check.notNull(source, "source == null");
-    this.processor = Check.notNull(processor, "processor == null");
+    Check.notNull(processor, "processor == null");
 
     parse(source);
 
@@ -46,23 +50,31 @@ public class AsciiDoc extends Parser {
       int code = nextCode();
 
       switch (code) {
-        case TEXT -> processText();
-        case TITLE -> processTitle();
+        case Code.END_DOCUMENT -> processor.endDocument();
+
+        case Code.END_TITLE -> processor.endTitle();
+
+        case Code.START_DOCUMENT -> processor.startDocument();
+
+        case Code.START_TITLE -> {
+          Check.state(hasCode(), "Could not find title level");
+
+          var level = nextCode();
+
+          processor.startTitle(level);
+        }
+
+        case Code.TEXT -> {
+          Check.state(hasCode(), "Could not find string index");
+
+          var index = nextCode();
+
+          processor.text(string(index));
+        }
+
         default -> throw new UnsupportedOperationException("Implement me :: code=" + code);
       }
     }
-  }
-
-  private void processText() {
-    Check.state(hasCode(), "Could not find string index");
-
-    var index = nextCode();
-
-    processor.text(string(index));
-  }
-
-  private void processTitle() {
-    processor.startTitle();
   }
 
 }
