@@ -23,9 +23,17 @@ public class AsciiDoc extends Parser {
 
     void endDocument();
 
+    void endParagraph();
+
+    void endPreamble();
+
     void endTitle();
 
     void startDocument();
+
+    void startParagraph();
+
+    void startPreamble();
 
     void startTitle(int level);
 
@@ -46,15 +54,27 @@ public class AsciiDoc extends Parser {
 
     parse(source);
 
+    process0(processor);
+  }
+
+  final void process0(Processor processor) {
     while (hasCode()) {
       int code = nextCode();
 
       switch (code) {
         case Code.END_DOCUMENT -> processor.endDocument();
 
+        case Code.END_PARAGRAPH -> processor.endParagraph();
+
+        case Code.END_PREAMBLE -> processor.endPreamble();
+
         case Code.END_TITLE -> processor.endTitle();
 
         case Code.START_DOCUMENT -> processor.startDocument();
+
+        case Code.START_PARAGRAPH -> processor.startParagraph();
+
+        case Code.START_PREAMBLE -> processor.startPreamble();
 
         case Code.START_TITLE -> {
           Check.state(hasCode(), "Could not find title level");

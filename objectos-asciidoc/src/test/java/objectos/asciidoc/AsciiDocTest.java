@@ -17,12 +17,7 @@ package objectos.asciidoc;
 
 import static org.testng.Assert.assertEquals;
 
-import br.com.objectos.html.element.StandardElementName;
-import br.com.objectos.html.spi.type.DivValue;
-import br.com.objectos.html.spi.type.Value;
-import br.com.objectos.html.tmpl.AbstractTemplate;
-import java.util.List;
-import objectos.util.GrowableList;
+import java.util.Arrays;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -31,60 +26,89 @@ import org.testng.annotations.Test;
 
 public class AsciiDocTest {
 
-  private class ThisProcessor extends AbstractTemplate implements AsciiDoc.Processor {
-    private String source;
+  private class ThisProcessor implements AsciiDoc.Processor {
+    private boolean contentStarted;
 
-    private StandardElementName el;
+    private int level;
 
-    private final List<Value> children = new GrowableList<>();
-
-    public final String convert(String source) {
-      this.source = source;
-
-      return toString();
-    }
+    private final StringBuilder sb = new StringBuilder();
 
     @Override
     public final void endDocument() {
+      if (!contentStarted) {
+        sb.append(
+          """
+          <div id="content">
 
+          """);
+      }
+
+      sb.append("</div>");
+    }
+
+    @Override
+    public final void endParagraph() {
+      sb.append("</p></div>");
+    }
+
+    @Override
+    public final void endPreamble() {
     }
 
     @Override
     public final void endTitle() {
-      var values = children.toArray(DivValue[]::new);
-
-      div(values);
+      sb.append("</h");
+      sb.append(level);
+      sb.append(">\n</div>\n");
     }
 
     @Override
     public final void startDocument() {
+      contentStarted = false;
 
+      level = 0;
+
+      sb.setLength(0);
+    }
+
+    @Override
+    public final void startParagraph() {
+      sb.append("<div class=\"paragraph\">\n<p>");
+    }
+
+    @Override
+    public final void startPreamble() {
+      startContent();
     }
 
     @Override
     public final void startTitle(int level) {
-      children.add(
-        id("header")
-      );
+      sb.append("<div id=\"header\">\n");
+      sb.append("<h");
+      sb.append(level);
+      sb.append(">");
 
-      el = switch (level) {
-        case 1 -> StandardElementName.H1;
-        default -> throw new UnsupportedOperationException("Implement me :: level=" + level);
-      };
+      this.level = level;
     }
 
     @Override
     public final void text(String s) {
-      children.add(
-        addStandardElement(el, s)
-      );
+      sb.append(s);
     }
 
     @Override
-    protected final void definition() {
-      asciiDoc.process(source, this);
+    public final String toString() {
+      asciiDoc.process0(this);
 
-      div(id("content"), t("\n\n"));
+      return sb.toString();
+    }
+
+    private void startContent() {
+      if (!contentStarted) {
+        sb.append("<div id=\"content\">\n");
+
+        contentStarted = true;
+      }
     }
   }
 
@@ -122,7 +146,7 @@ public class AsciiDocTest {
     );
   }
 
-  @Test(enabled = false, description = //
+  @Test(description = //
   """
   = Document title
 
@@ -137,6 +161,19 @@ public class AsciiDocTest {
 
       Some preamble
       """,
+
+      codes(
+        Parser.Code.START_DOCUMENT,
+        Parser.Code.START_TITLE, 1,
+        Parser.Code.TEXT, 0,
+        Parser.Code.END_TITLE,
+        Parser.Code.START_PREAMBLE,
+        Parser.Code.START_PARAGRAPH,
+        Parser.Code.TEXT, 1,
+        Parser.Code.END_PARAGRAPH,
+        Parser.Code.END_PREAMBLE,
+        Parser.Code.END_DOCUMENT
+      ),
 
       """
       <div id="header">
@@ -203,7 +240,7 @@ public class AsciiDocTest {
   }
 
   String convert(String source) {
-    var html = processor.convert(source);
+    var html = processor.toString();
 
     return normalize(html);
   }
@@ -216,7 +253,42 @@ public class AsciiDocTest {
     return body.toString();
   }
 
+  private int[] codes(int... values) { return values; }
+
+  private void test(String source, int[] expectedCodes, String expectedHtml) {
+    int[] actual;
+
+    if (asciiDoc != null) {
+      asciiDoc.parse(source);
+
+      actual = asciiDoc.toCode();
+    } else {
+      actual = expectedCodes;
+    }
+
+    assertEquals(
+      actual,
+      expectedCodes,
+      """
+
+      actual  =%s
+      expected=%s
+
+      """.formatted(Arrays.toString(actual), Arrays.toString(expectedCodes))
+    );
+
+    assertEquals(
+      convert(source),
+
+      normalize(expectedHtml)
+    );
+  }
+
   private void test(String source, String expectedHtml) {
+    if (asciiDoc != null) {
+      asciiDoc.parse(source);
+    }
+
     assertEquals(
       convert(source),
 

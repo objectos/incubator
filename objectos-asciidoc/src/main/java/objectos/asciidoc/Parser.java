@@ -15,6 +15,7 @@
  */
 package objectos.asciidoc;
 
+import java.util.Arrays;
 import java.util.List;
 import objectos.lang.Check;
 import objectos.util.GrowableList;
@@ -126,6 +127,10 @@ class Parser {
     return strings.get(index);
   }
 
+  final int[] toCode() {
+    return Arrays.copyOf(code, codeIndex);
+  }
+
   private void addCode(int value) {
     code = IntArrays.copyIfNecessary(code, codeIndex);
 
@@ -147,6 +152,8 @@ class Parser {
     addCode(
       switch (ctx) {
         case Context.DOCUMENT -> Code.END_DOCUMENT;
+        case Context.PARAGRAPH -> Code.END_PARAGRAPH;
+        case Context.PREAMBLE -> Code.END_PREAMBLE;
         case Context.TITLE -> Code.END_TITLE;
         default -> throw new UnsupportedOperationException("Implement me :: ctx=" + ctx);
       }
@@ -207,12 +214,7 @@ class Parser {
     }
 
     if (state == _START && level == 1) {
-      addCode(Code.START_TITLE);
-      addCode(level);
-
-      pushCtx(Context.TITLE);
-
-      return _TEXT;
+      return executeTitle(level);
     }
 
     throw new UnsupportedOperationException("Implement me :: not doctitle");
@@ -248,11 +250,15 @@ class Parser {
   }
 
   private int executeStartContext() {
+    if (!hasRemaining()) {
+      return executeFinally();
+    }
+
     var found = false;
 
     var c = '\0';
 
-    outer: while (hasRemaining()) {
+    loop: do {
       c = peekChar();
 
       switch (c) {
@@ -264,12 +270,12 @@ class Parser {
         default:
           found = true;
 
-          break outer;
+          break loop;
       }
-    }
+    } while (hasRemaining());
 
     if (!found) {
-      throw new UnsupportedOperationException("Implement me");
+      throw new UnsupportedOperationException("Implement me :: not found");
     }
 
     int ctx = peekCtx();
@@ -286,43 +292,54 @@ class Parser {
   }
 
   private int executeText() {
+    if (!hasRemaining()) {
+      return executeFinally();
+    }
+
     int beginIndex = sourceIndex;
     int endIndex = beginIndex;
 
     var eol = false;
+    var title = peekCtx() == Context.TITLE;
 
-    while (hasRemaining()) {
-      char c = nextChar();
+    do {
+      var c = nextChar();
+
+      endIndex = sourceIndex;
+
+      if (c == '\n') {
+        if (title || eol) {
+          break;
+        }
+
+        eol = true;
+
+        continue;
+      }
 
       if (isInlineStart(c)) {
         throw new UnsupportedOperationException("Implement me :: inline=" + c);
       }
-
-      if (c == '\n') {
-        eol = true;
-
-        break;
-      }
-
-      endIndex = sourceIndex;
-    }
-
-    if (endIndex == beginIndex) {
-      // eof
-
-      return executeFinally();
-    }
+    } while (hasRemaining());
 
     addText(beginIndex, endIndex);
 
-    if (eol) {
+    if (hasRemaining()) {
       int ctx = endContext();
 
       return switch (ctx) {
         case Context.TITLE -> _START_CONTEXT;
         default -> throw new UnsupportedOperationException("Implement me :: ctx=" + ctx);
       };
+    } else {
+      return executeFinally();
     }
+  }
+
+  private int executeTitle(int level) {
+    addCode(Code.START_TITLE);
+    addCode(level);
+    pushCtx(Context.TITLE);
 
     return _TEXT;
   }
