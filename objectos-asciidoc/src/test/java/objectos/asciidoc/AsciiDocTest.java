@@ -135,7 +135,7 @@ public class AsciiDocTest {
       """
       = The doctitle""",
 
-      codes(
+      parser(
         Parser.Code.START_DOCUMENT,
         Parser.Code.START_TITLE, 1,
         Parser.Code.TEXT, 0,
@@ -170,7 +170,7 @@ public class AsciiDocTest {
       Some preamble
       """,
 
-      codes(
+      parser(
         Parser.Code.START_DOCUMENT,
         Parser.Code.START_TITLE, 1,
         Parser.Code.TEXT, 0,
@@ -209,6 +209,18 @@ public class AsciiDocTest {
       = The `Foo` class
       """,
 
+      parser(
+        Parser.Code.START_DOCUMENT,
+        Parser.Code.START_TITLE, 1,
+        Parser.Code.TEXT, 0,
+        Parser.Code.START_MONOSPACE,
+        Parser.Code.TEXT, 1,
+        Parser.Code.END_MONOSPACE,
+        Parser.Code.TEXT, 2,
+        Parser.Code.END_TITLE,
+        Parser.Code.END_DOCUMENT
+      ),
+
       """
       <div id="header">
       <h1>The <code>Foo</code> class</h1>
@@ -232,6 +244,8 @@ public class AsciiDocTest {
       """
       =Not Title
       """,
+
+      parser(),
 
       """
       <body>
@@ -261,40 +275,30 @@ public class AsciiDocTest {
     return body.toString();
   }
 
-  private int[] codes(int... values) { return values; }
+  private int[] parser(int... values) { return values; }
 
-  private void test(String source, int[] expectedCodes, String expectedHtml) {
-    int[] actual;
+  private void test(String source, int[] expectedParser, String expectedHtml) {
+    int[] parser;
 
     if (asciiDoc != null) {
       asciiDoc.parse(source);
 
-      actual = asciiDoc.toCode();
+      parser = asciiDoc.toCode();
     } else {
-      actual = expectedCodes;
+      parser = expectedParser;
     }
 
-    assertEquals(
-      actual,
-      expectedCodes,
-      """
+    if (expectedParser.length > 0) {
+      assertEquals(
+        parser,
+        expectedParser,
+        """
 
       actual  =%s
       expected=%s
 
-      """.formatted(Arrays.toString(actual), Arrays.toString(expectedCodes))
-    );
-
-    assertEquals(
-      convert(source),
-
-      normalize(expectedHtml)
-    );
-  }
-
-  private void test(String source, String expectedHtml) {
-    if (asciiDoc != null) {
-      asciiDoc.parse(source);
+      """.formatted(Arrays.toString(parser), Arrays.toString(expectedParser))
+      );
     }
 
     assertEquals(
