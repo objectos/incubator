@@ -214,51 +214,34 @@ class Parser {
   }
 
   private int executeLineStart() {
-    char c = peekChar();
+    //lineStart = sourceIndex;
+
+    char c = nextChar();
 
     return switch (c) {
-      case '=' -> executeMaybeTitle();
+      case '=' -> executeMaybeTitle(c, 1);
       default -> executeParagraph();
     };
   }
 
-  private int executeMaybeTitle() {
-    //int beginIndex = sourceIndex;
-
-    int level = 0;
-
-    var title = false;
-
-    outer: while (hasChar()) {
-      char c = nextChar();
-
-      switch (c) {
-        case ' ':
-          title = true;
-
-          break outer;
-
-        case '=':
-          level++;
-
-          continue outer;
-
-        default:
-          throw new UnsupportedOperationException("Implement me :: to text block");
-      }
+  private int executeMaybeTitle(char symbol, int level) {
+    if (!hasChar()) {
+      throw new UnsupportedOperationException("Implement me :: single '='");
     }
 
-    if (!title) {
-      throw new UnsupportedOperationException("Implement me :: not found (eof?)");
-    }
+    var c = peekChar();
 
-    int ctx = peekCtx();
+    if (c == ' ') {
+      nextChar();
 
-    if (ctx == Context.DOCUMENT && level == 1) {
       return executeTitle(level);
-    }
+    } else if (c == symbol) {
+      nextChar();
 
-    throw new UnsupportedOperationException("Implement me :: not doctitle");
+      return executeMaybeTitle(symbol, level + 1);
+    } else {
+      throw new UnsupportedOperationException("Implement me :: text block");
+    }
   }
 
   private int executeParagraph() {
@@ -271,7 +254,7 @@ class Parser {
 
   private int executeStart0(char c) {
     return switch (c) {
-      case '=' -> executeMaybeTitle();
+      case '=' -> executeMaybeTitle(c, 1);
       default -> executeParagraph();
     };
   }
@@ -361,11 +344,21 @@ class Parser {
   }
 
   private int executeTitle(int level) {
-    addCode(Code.START_TITLE);
-    addCode(level);
-    pushCtx(Context.TITLE);
+    int ctx = peekCtx();
 
-    return _TEXT;
+    if (ctx == Context.DOCUMENT) {
+      if (level != 1) {
+        throw new UnsupportedOperationException("Implement me :: doctitle level != 1");
+      }
+
+      addCode(Code.START_TITLE);
+      addCode(level);
+      pushCtx(Context.TITLE);
+
+      return _TEXT;
+    } else {
+      throw new UnsupportedOperationException("Implement me :: section title?");
+    }
   }
 
   private boolean hasChar() {
