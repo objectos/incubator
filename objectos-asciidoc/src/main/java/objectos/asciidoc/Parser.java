@@ -16,58 +16,43 @@
 package objectos.asciidoc;
 
 import java.util.Arrays;
-import java.util.List;
 import objectos.lang.Check;
-import objectos.util.GrowableList;
 import objectos.util.IntArrays;
 
-class Parser {
+class Parser extends Lexer {
 
   static class Code {
-    static final int END_DOCUMENT = 1;
+    static final int START_DOCUMENT = -1;
+    static final int END_DOCUMENT = -2;
 
-    static final int END_PARAGRAPH = 2;
+    static final int START_TITLE = -3;
+    static final int END_TITLE = -4;
 
-    static final int END_PREAMBLE = 3;
+    static final int START_PREAMBLE = -5;
+    static final int END_PREAMBLE = -6;
 
-    static final int END_TITLE = 4;
+    static final int START_PARAGRAPH = -7;
+    static final int END_PARAGRAPH = -8;
 
-    static final int START_DOCUMENT = 5;
+    static final int START_MONOSPACE = -9;
+    static final int END_MONOSPACE = -10;
 
-    static final int START_PARAGRAPH = 6;
+    static final int NOOP = -11;
 
-    static final int START_PREAMBLE = 7;
-
-    static final int START_TITLE = 8;
-
-    static final int TEXT = 9;
+    static final int TEXT = -12;
+    static final int TEXT_EOF = -13;
+    static final int LF = -14;
   }
 
   static class Context {
-    static final int DOCUMENT = 1;
+    static final int DOCUMENT = -1;
 
-    static final int PARAGRAPH = 2;
+    static final int PARAGRAPH = -2;
 
-    static final int PREAMBLE = 3;
+    static final int PREAMBLE = -3;
 
-    static final int TITLE = 4;
+    static final int TITLE = -4;
   }
-
-  private static final int _FINALLY = 1;
-
-  private static final int _START = 2;
-
-  private static final int _START_CONTEXT = 3;
-
-  private static final int _STOP = 0;
-
-  private static final int _TEXT = 4;
-
-  private static final int _TEXT_CONSUME = 5;
-
-  private static final int _TEXT_NL = 6;
-
-  private static final int _TEXT_RESULT = 7;
 
   private int[] code;
 
@@ -77,22 +62,15 @@ class Parser {
 
   private int[] context;
 
-  private int contextIndex;
+  private int contextIndex = -1;
 
-  private String source;
-
-  private int sourceIndex;
-
-  private int state;
-
-  private final List<String> strings = new GrowableList<>();
-
-  private int textAux;
+  @SuppressWarnings("unused")
+  private int currentLine;
 
   Parser() {
     code = new int[1024];
 
-    context = new int[64];
+    context = new int[32];
   }
 
   final boolean hasCode() {
@@ -103,9 +81,9 @@ class Parser {
     return code[codeCounter++];
   }
 
-  final void parse(String source) {
+  final void parse() {
     Check.state(
-      state == _STOP,
+      contextIndex < 0,
 
       """
       Concurrent parsing is not supported.
@@ -120,21 +98,13 @@ class Parser {
 
     contextIndex = -1;
 
-    this.source = source;
+    pushCtx(Context.DOCUMENT);
 
-    sourceIndex = 0;
-
-    state = _START;
-
-    strings.clear();
-
-    while (state != _STOP) {
-      state = execute(state);
+    while (hasSymbol()) {
+      parse(nextSymbol());
     }
-  }
 
-  final String string(int index) {
-    return strings.get(index);
+    codeCounter = 0;
   }
 
   final int[] toCode() {
@@ -147,238 +117,72 @@ class Parser {
     code[codeIndex++] = value;
   }
 
-  private void addText(int beginIndex, int endIndex) {
-    if (beginIndex == endIndex) {
-      return;
+  private boolean hasCtx() { return contextIndex >= 0; }
+
+  private void parse(int symbol) {
+    switch (symbol) {
+      case Symbol.EOF -> parseEof();
+      case Symbol.LINE_NO -> parseLineNo();
+      case Symbol.TEXT -> parseText();
+      case Symbol.TITLE_EQUALS -> parseTitle();
+      default -> throw new UnsupportedOperationException("Implement me :: symbol=" + symbol);
     }
-
-    var s = source.substring(beginIndex, endIndex);
-
-    addCode(Code.TEXT); // code
-    addCode(strings.size()); // string index
-
-    strings.add(s);
   }
 
-  private int endContext() {
-    int ctx = popCtx();
-
-    addCode(
-      switch (ctx) {
-        case Context.DOCUMENT -> Code.END_DOCUMENT;
-        case Context.PARAGRAPH -> Code.END_PARAGRAPH;
-        case Context.PREAMBLE -> Code.END_PREAMBLE;
-        case Context.TITLE -> Code.END_TITLE;
-        default -> throw new UnsupportedOperationException("Implement me :: ctx=" + ctx);
-      }
-    );
-
-    return ctx;
-  }
-
-  private int execute(int state) {
-    return switch (state) {
-      case _FINALLY -> executeFinally();
-      case _START -> executeStart();
-      case _START_CONTEXT -> executeStartContext();
-      case _TEXT -> executeText();
-      default -> throw new UnsupportedOperationException("Implement me :: state=" + state);
-    };
-  }
-
-  private int executeFinally() {
+  private void parseEof() {
     while (hasCtx()) {
-      endContext();
+      int ctx = popCtx();
+
+      addCode(
+        switch (ctx) {
+          case Context.DOCUMENT -> Code.END_DOCUMENT;
+          case Context.PARAGRAPH -> Code.END_PARAGRAPH;
+          case Context.PREAMBLE -> Code.END_PREAMBLE;
+          case Context.TITLE -> Code.END_TITLE;
+          default -> throw new UnsupportedOperationException("Implement me :: ctx=" + ctx);
+        }
+      );
     }
-
-    codeCounter = 0;
-
-    source = null;
-
-    return _STOP;
   }
 
-  private int executeMaybeTitle() {
-    //int beginIndex = sourceIndex;
+  private void parseLineNo() {
+    currentLine = nextSymbol();
 
-    int level = 0;
+    var ctx = peekCtx();
 
-    var title = false;
-
-    outer: while (hasRemaining()) {
-      char c = nextChar();
-
-      switch (c) {
-        case ' ':
-          title = true;
-
-          break outer;
-
-        case '=':
-          level++;
-
-          continue outer;
-
-        default:
-          throw new UnsupportedOperationException("Implement me :: to text block");
+    switch (ctx) {
+      case Context.DOCUMENT -> {
+        addCode(Code.START_DOCUMENT);
       }
+      default -> throw new UnsupportedOperationException("Implement me :: ctx=" + ctx);
     }
-
-    if (!title) {
-      throw new UnsupportedOperationException("Implement me :: not found (eof?)");
-    }
-
-    if (state == _START && level == 1) {
-      return executeTitle(level);
-    }
-
-    throw new UnsupportedOperationException("Implement me :: not doctitle");
   }
 
-  private int executeParagraph() {
-    addCode(Code.START_PARAGRAPH);
-
-    pushCtx(Context.PARAGRAPH);
-
-    return _TEXT;
+  private void parseText() {
+    addCode(Code.TEXT);
+    addCode(nextSymbol());
   }
 
-  private int executeStart() {
-    addCode(Code.START_DOCUMENT);
-
-    pushCtx(Context.DOCUMENT);
-
-    if (!hasRemaining()) {
-      return executeFinally();
-    }
-
-    char c = peekChar();
-
-    return executeStart0(c);
-  }
-
-  private int executeStart0(char c) {
-    return switch (c) {
-      case '=' -> executeMaybeTitle();
-      default -> executeParagraph();
-    };
-  }
-
-  private int executeStartContext() {
-    if (!hasRemaining()) {
-      return executeFinally();
-    }
-
-    var found = false;
-
-    var c = '\0';
-
-    loop: do {
-      c = peekChar();
-
-      switch (c) {
-        case '\r':
-        case '\n':
-          sourceIndex++;
-
-          continue;
-        default:
-          found = true;
-
-          break loop;
-      }
-    } while (hasRemaining());
-
-    if (!found) {
-      throw new UnsupportedOperationException("Implement me :: not found");
-    }
+  private void parseTitle() {
+    int level = nextSymbol();
 
     int ctx = peekCtx();
 
     switch (ctx) {
       case Context.DOCUMENT -> {
-        addCode(Code.START_PREAMBLE);
-        pushCtx(Context.PREAMBLE);
+        addCode(Code.START_TITLE);
+        addCode(level);
+        pushCtx(Context.TITLE);
       }
       default -> throw new UnsupportedOperationException("Implement me :: ctx=" + ctx);
     }
-
-    return executeStart0(c);
   }
 
-  private int executeText() {
-    while (state != _TEXT_RESULT) {
-      state = switch (state) {
-        case _TEXT -> executeTextStart();
-        case _TEXT_CONSUME -> executeTextConsume();
-        case _TEXT_NL -> executeTextNewLine();
-        default -> throw new UnsupportedOperationException("Implement me :: text state=" + state);
-      };
-    }
+  // private int peekCode() { return code[codeIndex - 1]; }
 
-    return textAux;
-  }
+  private int peekCtx() { return context[contextIndex]; }
 
-  private int executeTextConsume() {
-    if (hasRemaining()) {
-      var c = nextChar();
-
-      return switch (c) {
-        case '\n' -> _TEXT_NL;
-        default -> _TEXT_CONSUME;
-      };
-    } else {
-      return toTextResult(_FINALLY);
-    }
-  }
-
-  private int executeTextNewLine() {
-    var ctx = peekCtx();
-
-    if (ctx == Context.TITLE) {
-      return toTextResult(_START_CONTEXT);
-    } else {
-      return _TEXT_CONSUME;
-    }
-  }
-
-  private int executeTextStart() {
-    textAux = sourceIndex;
-
-    return executeTextConsume();
-  }
-
-  private int executeTitle(int level) {
-    addCode(Code.START_TITLE);
-    addCode(level);
-    pushCtx(Context.TITLE);
-
-    return _TEXT;
-  }
-
-  private boolean hasCtx() {
-    return contextIndex >= 0;
-  }
-
-  private boolean hasRemaining() {
-    return sourceIndex < source.length();
-  }
-
-  private char nextChar() {
-    return source.charAt(sourceIndex++);
-  }
-
-  private char peekChar() {
-    return source.charAt(sourceIndex);
-  }
-
-  private int peekCtx() {
-    return context[contextIndex];
-  }
-
-  private int popCtx() {
-    return context[contextIndex--];
-  }
+  private int popCtx() { return context[contextIndex--]; }
 
   private void pushCtx(int value) {
     contextIndex++;
@@ -386,16 +190,6 @@ class Parser {
     context = IntArrays.copyIfNecessary(context, contextIndex);
 
     context[contextIndex] = value;
-  }
-
-  private int toTextResult(int result) {
-    addText(textAux, sourceIndex);
-
-    endContext();
-
-    textAux = result;
-
-    return _TEXT_RESULT;
   }
 
 }

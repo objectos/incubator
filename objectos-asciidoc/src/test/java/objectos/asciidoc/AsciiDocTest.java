@@ -47,6 +47,11 @@ public class AsciiDocTest {
     }
 
     @Override
+    public final void endMonospace() {
+      sb.append("</code>");
+    }
+
+    @Override
     public final void endParagraph() {
       sb.append("</p></div>");
     }
@@ -69,6 +74,11 @@ public class AsciiDocTest {
       level = 0;
 
       sb.setLength(0);
+    }
+
+    @Override
+    public final void startMonospace() {
+      sb.append("<code>");
     }
 
     @Override
@@ -135,6 +145,13 @@ public class AsciiDocTest {
       """
       = The doctitle""",
 
+      lexer(
+        Lexer.Symbol.LINE_NO, 1,
+        Lexer.Symbol.TITLE_EQUALS, 1,
+        Lexer.Symbol.TEXT, 0,
+        Lexer.Symbol.EOF
+      ),
+
       codes(
         Parser.Code.START_DOCUMENT,
         Parser.Code.START_TITLE, 1,
@@ -154,7 +171,7 @@ public class AsciiDocTest {
     );
   }
 
-  @Test(description = //
+  @Test(enabled = false, description = //
   """
   = Document title
 
@@ -263,11 +280,65 @@ public class AsciiDocTest {
 
   private int[] codes(int... values) { return values; }
 
+  private int[] lexer(int... values) { return values; }
+
+  private void test(String source, int[] expectedLexer, int[] expectedParser, String expectedHtml) {
+    int[] actual;
+
+    if (asciiDoc != null) {
+      asciiDoc.tokenize(source);
+
+      actual = asciiDoc.toSymbol();
+    } else {
+      actual = expectedLexer;
+    }
+
+    assertEquals(
+      actual,
+      expectedLexer,
+      """
+      Lexer assertion failed
+      ----------------------
+
+      actual  =%s
+      expected=%s
+
+      """.formatted(Arrays.toString(actual), Arrays.toString(expectedLexer))
+    );
+
+    if (asciiDoc != null) {
+      asciiDoc.parse();
+
+      actual = asciiDoc.toCode();
+    } else {
+      actual = expectedParser;
+    }
+
+    assertEquals(
+      actual,
+      expectedParser,
+      """
+      Parser assertion failed
+      ----------------------
+
+      actual  =%s
+      expected=%s
+
+      """.formatted(Arrays.toString(actual), Arrays.toString(expectedParser))
+    );
+
+    assertEquals(
+      convert(source),
+
+      normalize(expectedHtml)
+    );
+  }
+
   private void test(String source, int[] expectedCodes, String expectedHtml) {
     int[] actual;
 
     if (asciiDoc != null) {
-      asciiDoc.parse(source);
+      asciiDoc.parse();
 
       actual = asciiDoc.toCode();
     } else {
@@ -293,15 +364,7 @@ public class AsciiDocTest {
   }
 
   private void test(String source, String expectedHtml) {
-    if (asciiDoc != null) {
-      asciiDoc.parse(source);
-    }
-
-    assertEquals(
-      convert(source),
-
-      normalize(expectedHtml)
-    );
+    throw new UnsupportedOperationException("Implement me");
   }
 
 }
