@@ -16,43 +16,60 @@
 package objectos.asciidoc;
 
 import java.util.Arrays;
+import java.util.List;
 import objectos.lang.Check;
+import objectos.util.GrowableList;
 import objectos.util.IntArrays;
 
-class Parser extends Lexer {
+class Parser {
 
   static class Code {
-    static final int START_DOCUMENT = -1;
-    static final int END_DOCUMENT = -2;
+    static final int END_DOCUMENT = 1;
 
-    static final int START_TITLE = -3;
-    static final int END_TITLE = -4;
+    static final int END_PARAGRAPH = 2;
 
-    static final int START_PREAMBLE = -5;
-    static final int END_PREAMBLE = -6;
+    static final int END_PREAMBLE = 3;
 
-    static final int START_PARAGRAPH = -7;
-    static final int END_PARAGRAPH = -8;
+    static final int END_TITLE = 4;
 
-    static final int START_MONOSPACE = -9;
-    static final int END_MONOSPACE = -10;
+    static final int START_DOCUMENT = 5;
 
-    static final int NOOP = -11;
+    static final int START_PARAGRAPH = 6;
 
-    static final int TEXT = -12;
-    static final int TEXT_EOF = -13;
-    static final int LF = -14;
+    static final int START_PREAMBLE = 7;
+
+    static final int START_TITLE = 8;
+
+    static final int TEXT = 9;
   }
 
   static class Context {
-    static final int DOCUMENT = -1;
+    static final int DOCUMENT = 1;
 
-    static final int PARAGRAPH = -2;
+    static final int PARAGRAPH = 2;
 
-    static final int PREAMBLE = -3;
+    static final int PREAMBLE = 3;
 
-    static final int TITLE = -4;
+    static final int TITLE = 4;
   }
+
+  private static final int _DOCUMENT_START = 1;
+
+  private static final int _EOF = 0;
+
+  private static final int _FINALLY = 2;
+
+  private static final int _LINE_START = 3;
+
+  private static final int _START_CONTEXT = 4;
+
+  private static final int _TEXT = 5;
+
+  private static final int _TEXT_CONSUME = 6;
+
+  private static final int _TEXT_NL = 7;
+
+  private static final int _TEXT_RESULT = 8;
 
   private int[] code;
 
@@ -62,15 +79,22 @@ class Parser extends Lexer {
 
   private int[] context;
 
-  private int contextIndex = -1;
+  private int contextIndex;
 
-  @SuppressWarnings("unused")
-  private int currentLine;
+  private String source;
+
+  private int sourceIndex;
+
+  private int state;
+
+  private final List<String> strings = new GrowableList<>();
+
+  private int textAux;
 
   Parser() {
     code = new int[1024];
 
-    context = new int[32];
+    context = new int[64];
   }
 
   final boolean hasCode() {
@@ -81,9 +105,9 @@ class Parser extends Lexer {
     return code[codeCounter++];
   }
 
-  final void parse() {
+  final void parse(String source) {
     Check.state(
-      contextIndex < 0,
+      state == _EOF,
 
       """
       Concurrent parsing is not supported.
@@ -98,13 +122,21 @@ class Parser extends Lexer {
 
     contextIndex = -1;
 
-    pushCtx(Context.DOCUMENT);
+    this.source = source;
 
-    while (hasSymbol()) {
-      parse(nextSymbol());
+    sourceIndex = 0;
+
+    state = _DOCUMENT_START;
+
+    strings.clear();
+
+    while (state != _EOF) {
+      state = execute(state);
     }
+  }
 
-    codeCounter = 0;
+  final String string(int index) {
+    return strings.get(index);
   }
 
   final int[] toCode() {
@@ -117,72 +149,248 @@ class Parser extends Lexer {
     code[codeIndex++] = value;
   }
 
-  private boolean hasCtx() { return contextIndex >= 0; }
-
-  private void parse(int symbol) {
-    switch (symbol) {
-      case Symbol.EOF -> parseEof();
-      case Symbol.LINE_NO -> parseLineNo();
-      case Symbol.TEXT -> parseText();
-      case Symbol.TITLE_EQUALS -> parseTitle();
-      default -> throw new UnsupportedOperationException("Implement me :: symbol=" + symbol);
+  private void addText(int beginIndex, int endIndex) {
+    if (beginIndex == endIndex) {
+      return;
     }
+
+    var s = source.substring(beginIndex, endIndex);
+
+    addCode(Code.TEXT); // code
+    addCode(strings.size()); // string index
+
+    strings.add(s);
   }
 
-  private void parseEof() {
-    while (hasCtx()) {
-      int ctx = popCtx();
+  private int endContext() {
+    int ctx = popCtx();
 
-      addCode(
-        switch (ctx) {
-          case Context.DOCUMENT -> Code.END_DOCUMENT;
-          case Context.PARAGRAPH -> Code.END_PARAGRAPH;
-          case Context.PREAMBLE -> Code.END_PREAMBLE;
-          case Context.TITLE -> Code.END_TITLE;
-          default -> throw new UnsupportedOperationException("Implement me :: ctx=" + ctx);
-        }
-      );
-    }
-  }
-
-  private void parseLineNo() {
-    currentLine = nextSymbol();
-
-    var ctx = peekCtx();
-
-    switch (ctx) {
-      case Context.DOCUMENT -> {
-        addCode(Code.START_DOCUMENT);
+    addCode(
+      switch (ctx) {
+        case Context.DOCUMENT -> Code.END_DOCUMENT;
+        case Context.PARAGRAPH -> Code.END_PARAGRAPH;
+        case Context.PREAMBLE -> Code.END_PREAMBLE;
+        case Context.TITLE -> Code.END_TITLE;
+        default -> throw new UnsupportedOperationException("Implement me :: ctx=" + ctx);
       }
-      default -> throw new UnsupportedOperationException("Implement me :: ctx=" + ctx);
+    );
+
+    return ctx;
+  }
+
+  private int execute(int state) {
+    return switch (state) {
+      case _DOCUMENT_START -> executeDocumentStart();
+      case _FINALLY -> executeFinally();
+      case _LINE_START -> executeLineStart();
+      case _START_CONTEXT -> executeStartContext();
+      case _TEXT -> executeText();
+      default -> throw new UnsupportedOperationException("Implement me :: state=" + state);
+    };
+  }
+
+  private int executeDocumentStart() {
+    addCode(Code.START_DOCUMENT);
+    pushCtx(Context.DOCUMENT);
+
+    if (!hasChar()) {
+      return executeFinally();
     }
+
+    return _LINE_START;
+
   }
 
-  private void parseText() {
-    addCode(Code.TEXT);
-    addCode(nextSymbol());
+  private int executeFinally() {
+    while (hasCtx()) {
+      endContext();
+    }
+
+    codeCounter = 0;
+
+    source = null;
+
+    return _EOF;
   }
 
-  private void parseTitle() {
-    int level = nextSymbol();
+  private int executeLineStart() {
+    char c = peekChar();
+
+    return switch (c) {
+      case '=' -> executeMaybeTitle();
+      default -> executeParagraph();
+    };
+  }
+
+  private int executeMaybeTitle() {
+    //int beginIndex = sourceIndex;
+
+    int level = 0;
+
+    var title = false;
+
+    outer: while (hasChar()) {
+      char c = nextChar();
+
+      switch (c) {
+        case ' ':
+          title = true;
+
+          break outer;
+
+        case '=':
+          level++;
+
+          continue outer;
+
+        default:
+          throw new UnsupportedOperationException("Implement me :: to text block");
+      }
+    }
+
+    if (!title) {
+      throw new UnsupportedOperationException("Implement me :: not found (eof?)");
+    }
+
+    int ctx = peekCtx();
+
+    if (ctx == Context.DOCUMENT && level == 1) {
+      return executeTitle(level);
+    }
+
+    throw new UnsupportedOperationException("Implement me :: not doctitle");
+  }
+
+  private int executeParagraph() {
+    addCode(Code.START_PARAGRAPH);
+
+    pushCtx(Context.PARAGRAPH);
+
+    return _TEXT;
+  }
+
+  private int executeStart0(char c) {
+    return switch (c) {
+      case '=' -> executeMaybeTitle();
+      default -> executeParagraph();
+    };
+  }
+
+  private int executeStartContext() {
+    if (!hasChar()) {
+      return executeFinally();
+    }
+
+    var found = false;
+
+    var c = '\0';
+
+    loop: do {
+      c = peekChar();
+
+      switch (c) {
+        case '\r':
+        case '\n':
+          sourceIndex++;
+
+          continue;
+        default:
+          found = true;
+
+          break loop;
+      }
+    } while (hasChar());
+
+    if (!found) {
+      throw new UnsupportedOperationException("Implement me :: not found");
+    }
 
     int ctx = peekCtx();
 
     switch (ctx) {
       case Context.DOCUMENT -> {
-        addCode(Code.START_TITLE);
-        addCode(level);
-        pushCtx(Context.TITLE);
+        addCode(Code.START_PREAMBLE);
+        pushCtx(Context.PREAMBLE);
       }
       default -> throw new UnsupportedOperationException("Implement me :: ctx=" + ctx);
     }
+
+    return executeStart0(c);
   }
 
-  // private int peekCode() { return code[codeIndex - 1]; }
+  private int executeText() {
+    while (state != _TEXT_RESULT) {
+      state = switch (state) {
+        case _TEXT -> executeTextStart();
+        case _TEXT_CONSUME -> executeTextConsume();
+        case _TEXT_NL -> executeTextNewLine();
+        default -> throw new UnsupportedOperationException("Implement me :: text state=" + state);
+      };
+    }
 
-  private int peekCtx() { return context[contextIndex]; }
+    return textAux;
+  }
 
-  private int popCtx() { return context[contextIndex--]; }
+  private int executeTextConsume() {
+    if (hasChar()) {
+      var c = nextChar();
+
+      return switch (c) {
+        case '\n' -> _TEXT_NL;
+        default -> _TEXT_CONSUME;
+      };
+    } else {
+      return toTextResult(_FINALLY);
+    }
+  }
+
+  private int executeTextNewLine() {
+    var ctx = peekCtx();
+
+    if (ctx == Context.TITLE) {
+      return toTextResult(_START_CONTEXT);
+    } else {
+      return _TEXT_CONSUME;
+    }
+  }
+
+  private int executeTextStart() {
+    textAux = sourceIndex;
+
+    return executeTextConsume();
+  }
+
+  private int executeTitle(int level) {
+    addCode(Code.START_TITLE);
+    addCode(level);
+    pushCtx(Context.TITLE);
+
+    return _TEXT;
+  }
+
+  private boolean hasChar() {
+    return sourceIndex < source.length();
+  }
+
+  private boolean hasCtx() {
+    return contextIndex >= 0;
+  }
+
+  private char nextChar() {
+    return source.charAt(sourceIndex++);
+  }
+
+  private char peekChar() {
+    return source.charAt(sourceIndex);
+  }
+
+  private int peekCtx() {
+    return context[contextIndex];
+  }
+
+  private int popCtx() {
+    return context[contextIndex--];
+  }
 
   private void pushCtx(int value) {
     contextIndex++;
@@ -190,6 +398,16 @@ class Parser extends Lexer {
     context = IntArrays.copyIfNecessary(context, contextIndex);
 
     context[contextIndex] = value;
+  }
+
+  private int toTextResult(int result) {
+    addText(textAux, sourceIndex);
+
+    endContext();
+
+    textAux = result;
+
+    return _TEXT_RESULT;
   }
 
 }
