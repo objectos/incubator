@@ -46,9 +46,11 @@ final class JavaRenderer extends LanguageRenderer {
 
   private static final byte _STRING_LITERAL = 8;
 
-  private static final byte _TOKEN = 9;
+  private static final byte _TEXT_BLOCK = 9;
 
-  private static final byte _WS = 10;
+  private static final byte _TOKEN = 10;
+
+  private static final byte _WS = 11;
 
   private int index;
 
@@ -105,6 +107,8 @@ final class JavaRenderer extends LanguageRenderer {
         return executeStart();
       case _STRING_LITERAL:
         return executeStringLiteral();
+      case _TEXT_BLOCK:
+        return executeTextBlock();
       case _TOKEN:
         return executeToken();
       case _WS:
@@ -271,7 +275,13 @@ final class JavaRenderer extends LanguageRenderer {
     }
 
     else if (c == '"') {
-      return _STRING_LITERAL;
+      if (hasNext(0) && peek(0) == '"'
+          && hasNext(1) && peek(1) == '"'
+          && hasNext(2) && peek(2) == '\n') {
+        return _TEXT_BLOCK;
+      } else {
+        return _STRING_LITERAL;
+      }
     }
 
     else if (c == '@') {
@@ -322,6 +332,46 @@ final class JavaRenderer extends LanguageRenderer {
     return _START;
   }
 
+  private byte executeTextBlock() {
+    stringBuilder.append("\"\"\n");
+    next();
+    next();
+    next();
+
+    boolean found = false;
+
+    outer: while (hasNext()) {
+      char c;
+      c = next();
+
+      stringBuilder.append(c);
+
+      if (c == '"') {
+        int last = stringBuilder.length() - 2;
+
+        if (last > 1
+            && stringBuilder.charAt(last--) == '"'
+            && stringBuilder.charAt(last--) == '"') {
+          found = true;
+
+          break outer;
+        }
+      }
+    }
+
+    String lit;
+    lit = makeString();
+
+    if (!found) {
+      throw new UnsupportedOperationException(
+        "Implement me: string missing closing quote: " + lit);
+    }
+
+    span(JavaCss._STRING, lit);
+
+    return _START;
+  }
+
   private byte executeToken() {
     String t;
     t = makeString();
@@ -355,6 +405,10 @@ final class JavaRenderer extends LanguageRenderer {
 
   private boolean hasNext() {
     return index < length;
+  }
+
+  private boolean hasNext(int offset) {
+    return index + offset < length;
   }
 
   private boolean isToken(char c) {
@@ -400,6 +454,10 @@ final class JavaRenderer extends LanguageRenderer {
 
   private char peek() {
     return java.charAt(index);
+  }
+
+  private char peek(int offset) {
+    return java.charAt(index + offset);
   }
 
 }

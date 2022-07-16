@@ -305,6 +305,42 @@ public class MdTest {
   }
 
   @Test
+  public void java07() {
+    test(
+      """
+      ```java
+      var s = \"""
+      Text block
+      \""";
+      ```
+      """,
+
+      """
+      <pre class="zqh">\
+      <code>\
+      <span class="fzn">var</span>\
+      <span class="trr"> </span>\
+      <span class="kkl">s</span>\
+      <span class="trr"> </span>\
+      <span class="a6g">=</span>\
+      <span class="trr"> </span>\
+      <span class="rlv">&quot;&quot;&quot;
+      Text block
+      &quot;&quot;&quot;</span>\
+      <span class="a6g">;</span>\
+      </code>\
+      </pre>
+            """
+          .replace("zqh", SyntaxCss._PRE.className())
+          .replace("fzn", JavaCss._KEYWORD.className())
+          .replace("trr", JavaCss._WS.className())
+          .replace("a6g", JavaCss._TOKEN.className())
+          .replace("kkl", JavaCss._IDENTIFIER.className())
+          .replace("rlv", JavaCss._STRING.className())
+    );
+  }
+
+  @Test
   public void xml() {
     test(
       """
