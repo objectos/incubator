@@ -52,7 +52,9 @@ public class AsciiDoc extends Parser {
     Check.notNull(source, "source == null");
     Check.notNull(processor, "processor == null");
 
-    parse(source);
+    tokenize(source);
+
+    parse();
 
     process0(processor);
   }

@@ -135,6 +135,13 @@ public class AsciiDocTest {
       """
       = The doctitle""",
 
+      lexer(
+        Lexer.Symbol.LINE, 0,
+        Lexer.Symbol.EQUALS, 1,
+        Lexer.Symbol.TEXT, 2,
+        Lexer.Symbol.EOF, 14
+      ),
+
       parser(
         Parser.Code.START_DOCUMENT,
         Parser.Code.START_TITLE, 1,
@@ -154,7 +161,7 @@ public class AsciiDocTest {
     );
   }
 
-  @Test(description = //
+  @Test(enabled = false, description = //
   """
   = Document title
 
@@ -169,6 +176,8 @@ public class AsciiDocTest {
 
       Some preamble
       """,
+
+      lexer(),
 
       parser(
         Parser.Code.START_DOCUMENT,
@@ -209,6 +218,8 @@ public class AsciiDocTest {
       = The `Foo` class
       """,
 
+      lexer(),
+
       parser(
         Parser.Code.START_DOCUMENT,
         Parser.Code.START_TITLE, 1,
@@ -245,6 +256,8 @@ public class AsciiDocTest {
       =Not Title
       """,
 
+      lexer(),
+
       parser(),
 
       """
@@ -275,30 +288,45 @@ public class AsciiDocTest {
     return body.toString();
   }
 
+  private int[] lexer(int... values) { return values; }
+
   private int[] parser(int... values) { return values; }
 
-  private void test(String source, int[] expectedParser, String expectedHtml) {
-    int[] parser;
-
+  private void test(String source, int[] expectedLexer, int[] expectedParser, String expectedHtml) {
     if (asciiDoc != null) {
-      asciiDoc.parse(source);
+      asciiDoc.tokenize(source);
 
-      parser = asciiDoc.toCode();
-    } else {
-      parser = expectedParser;
-    }
+      if (expectedLexer.length > 0) {
+        var symbol = asciiDoc.toSymbol();
 
-    if (expectedParser.length > 0) {
-      assertEquals(
-        parser,
-        expectedParser,
-        """
+        assertEquals(
+          symbol,
+          expectedLexer,
+          """
 
-      actual  =%s
-      expected=%s
+        actual  =%s
+        expected=%s
 
-      """.formatted(Arrays.toString(parser), Arrays.toString(expectedParser))
-      );
+        """.formatted(Arrays.toString(symbol), Arrays.toString(expectedLexer))
+        );
+      }
+
+      asciiDoc.parse();
+
+      if (expectedParser.length > 0) {
+        var parser = asciiDoc.toCode();
+
+        assertEquals(
+          parser,
+          expectedParser,
+          """
+
+        actual  =%s
+        expected=%s
+
+        """.formatted(Arrays.toString(parser), Arrays.toString(expectedParser))
+        );
+      }
     }
 
     assertEquals(
