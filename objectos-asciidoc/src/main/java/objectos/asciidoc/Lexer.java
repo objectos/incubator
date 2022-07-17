@@ -22,15 +22,17 @@ import objectos.util.IntArrays;
 class Lexer {
 
   class Symbol {
-    static final int EOF = -1;
+    static final int EMPTY = -1;
 
-    static final int EQUALS = -2;
+    static final int EOF = -2;
 
-    static final int LINE = -3;
+    static final int EOL = -3;
 
-    static final int START = -4;
+    static final int EQUALS = -4;
 
-    static final int TEXT = -5;
+    static final int LINE = -5;
+
+    static final int TEXT = -6;
   }
 
   private static final int _FINALLY = 1;
@@ -111,12 +113,17 @@ class Lexer {
     symbol[symbolIndex++] = value;
   }
 
-  private boolean hasChar() { return sourceIndex < source.length(); }
-
-  private void markTextStart() {
-    addSymbol(Symbol.TEXT);
+  private void atChar(int symbol) {
+    addSymbol(symbol);
     addSymbol(sourceIndex);
   }
+
+  private void atPrevious(int symbol) {
+    addSymbol(symbol);
+    addSymbol(sourceIndex - 1);
+  }
+
+  private boolean hasChar() { return sourceIndex < source.length(); }
 
   private char nextChar() { return source.charAt(sourceIndex++); }
 
@@ -142,14 +149,12 @@ class Lexer {
   }
 
   private int tokenizeLineStart() {
-    addSymbol(Symbol.LINE);
-    addSymbol(sourceIndex);
 
     if (!hasChar()) {
+      atChar(Symbol.EMPTY);
+
       return _FINALLY;
     }
-
-    markTextStart();
 
     var c = nextChar();
 
@@ -157,9 +162,21 @@ class Lexer {
       case '=' -> {
         counter = 1;
 
+        atPrevious(Symbol.LINE);
+
         yield _TITLE;
       }
-      default -> throw new UnsupportedOperationException("Implement me");
+      case '\n' -> {
+        atPrevious(Symbol.EMPTY);
+
+        yield _LINE_START;
+      }
+      default -> {
+        atPrevious(Symbol.LINE);
+        atPrevious(Symbol.TEXT);
+
+        yield _TEXT;
+      }
     };
   }
 
@@ -168,9 +185,16 @@ class Lexer {
       return _FINALLY;
     }
 
-    nextChar();
+    var c = nextChar();
 
-    return _TEXT;
+    return switch (c) {
+      case '\n' -> {
+        atPrevious(Symbol.EOL);
+
+        yield _LINE_START;
+      }
+      default -> _TEXT;
+    };
   }
 
   private int tokenizeTitle() {
@@ -184,12 +208,10 @@ class Lexer {
       case ' ' -> {
         nextChar();
 
-        unmarkTextStart();
-
         addSymbol(Symbol.EQUALS);
         addSymbol(counter);
 
-        markTextStart();
+        atChar(Symbol.TEXT);
 
         yield _TEXT;
       }
@@ -201,11 +223,6 @@ class Lexer {
       }
       default -> _TEXT;
     };
-  }
-
-  private void unmarkTextStart() {
-    symbolIndex--; // remove sourceIndex
-    symbolIndex--; // remove Symbol.TEXT
   }
 
 }

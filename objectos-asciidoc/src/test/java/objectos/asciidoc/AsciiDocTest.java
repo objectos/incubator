@@ -161,7 +161,7 @@ public class AsciiDocTest {
     );
   }
 
-  @Test(enabled = false, description = //
+  @Test(description = //
   """
   = Document title
 
@@ -177,7 +177,18 @@ public class AsciiDocTest {
       Some preamble
       """,
 
-      lexer(),
+      lexer(
+        Lexer.Symbol.LINE, 0,
+        Lexer.Symbol.EQUALS, 1,
+        Lexer.Symbol.TEXT, 2,
+        Lexer.Symbol.EOL, 15,
+        Lexer.Symbol.EMPTY, 16,
+        Lexer.Symbol.LINE, 17,
+        Lexer.Symbol.TEXT, 17,
+        Lexer.Symbol.EOL, 30,
+        Lexer.Symbol.EMPTY, 31,
+        Lexer.Symbol.EOF, 31
+      ),
 
       parser(
         Parser.Code.START_DOCUMENT,

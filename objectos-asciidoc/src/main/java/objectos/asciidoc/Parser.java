@@ -50,17 +50,17 @@ class Parser extends Lexer {
   static class Context {
     static final int DOCUMENT = -1;
 
-    static final int DOCUMENT_METADATA = -2;
+    static final int DOCUMENT_TITLE = -2;
 
-    static final int PARAGRAPH = -3;
+    static final int DOCUMENT_METADATA = -3;
 
-    static final int PREAMBLE = -4;
+    static final int PARAGRAPH = -4;
 
-    static final int TITLE = -5;
+    static final int PREAMBLE = -5;
+  }
 
-    // LINE
-
-    static final int $TEXT = -6;
+  static class Text {
+    static final int REGULAR = -1;
   }
 
   private int[] code;
@@ -78,25 +78,16 @@ class Parser extends Lexer {
 
   private final List<String> strings = new GrowableList<>();
 
+  private int[] text;
+
+  private int textIndex = -1;
+
   Parser() {
     code = new int[1024];
 
     context = new int[64];
-  }
 
-  void addString() {
-    //    var beginIndex = popText();
-    //
-    //    if (beginIndex < sourceIndex) {
-    //      var s = source.substring(beginIndex, sourceIndex);
-    //
-    //      addCode(Code.TEXT);
-    //      addCode(strings.size());
-    //
-    //      strings.add(s);
-    //    }
-
-    throw new UnsupportedOperationException("Implement me");
+    text = new int[32];
   }
 
   final boolean hasCode() {
@@ -126,12 +117,16 @@ class Parser extends Lexer {
 
     strings.clear();
 
+    textIndex = -1;
+
     while (hasSymbol()) {
       var symbol = nextSymbol();
       var value = nextSymbol();
 
       switch (symbol) {
+        case Symbol.EMPTY -> parseEmpty(value);
         case Symbol.EOF -> parseEof(value);
+        case Symbol.EOL -> parseEol(value);
         case Symbol.EQUALS -> parseEquals(value);
         case Symbol.LINE -> parseLine(value);
         case Symbol.TEXT -> parseText(value);
@@ -171,6 +166,22 @@ class Parser extends Lexer {
     }
   }
 
+  private void consumeText(int value) {
+    while (hasText()) {
+      int text = popText();
+
+      switch (text) {
+        case Text.REGULAR -> {
+          var beginIndex = popText();
+          var endIndex = value;
+
+          addStringIfNotEmpty(beginIndex, endIndex);
+        }
+        default -> throw new UnsupportedOperationException("Implement me :: text=" + text);
+      }
+    }
+  }
+
   private int endContext() {
     int ctx = popCtx();
 
@@ -179,7 +190,6 @@ class Parser extends Lexer {
         case Context.DOCUMENT -> Code.END_DOCUMENT;
         case Context.PARAGRAPH -> Code.END_PARAGRAPH;
         case Context.PREAMBLE -> Code.END_PREAMBLE;
-        case Context.TITLE -> Code.END_TITLE;
         default -> throw new UnsupportedOperationException("Implement me :: ctx=" + ctx);
       }
     );
@@ -189,17 +199,54 @@ class Parser extends Lexer {
 
   private boolean hasCtx() { return contextIndex >= 0; }
 
-  private void parseEof(int value) {
+  private boolean hasText() { return textIndex >= 0; }
+
+  private void parseEmpty(int value) {
     int ctx = popCtx();
 
     switch (ctx) {
-      case Context.$TEXT -> {
-        var beginIndex = popCtx();
-        var endIndex = value;
+      case Context.DOCUMENT_METADATA -> {
+        pushCtx(Context.PREAMBLE);
+      }
+      case Context.PARAGRAPH -> {
+        consumeText(value);
 
-        addStringIfNotEmpty(beginIndex, endIndex);
+        addCode(Code.END_PARAGRAPH);
       }
       default -> throw new UnsupportedOperationException("Implement me :: context=" + ctx);
+    }
+  }
+
+  private void parseEof(int value) {
+    consumeText(value);
+
+    while (hasCtx()) {
+      int ctx = popCtx();
+
+      addCode(
+        switch (ctx) {
+          case Context.DOCUMENT -> Code.END_DOCUMENT;
+          case Context.DOCUMENT_TITLE -> Code.END_TITLE;
+          case Context.PARAGRAPH -> Code.END_PARAGRAPH;
+          case Context.PREAMBLE -> Code.END_PREAMBLE;
+          default -> throw new UnsupportedOperationException("Implement me :: ctx=" + ctx);
+        }
+      );
+    }
+  }
+
+  private void parseEol(int value) {
+    int ctx = popCtx();
+
+    switch (ctx) {
+      case Context.DOCUMENT_TITLE -> {
+        consumeText(value);
+
+        addCode(Code.END_TITLE);
+
+        pushCtx(Context.DOCUMENT_METADATA);
+      }
+      default -> pushCtx(ctx);
     }
   }
 
@@ -213,7 +260,7 @@ class Parser extends Lexer {
         if (level == 1) {
           addCode(Code.START_TITLE);
           addCode(value); // level
-          pushCtx(Context.TITLE);
+          pushCtx(Context.DOCUMENT_TITLE);
         } else {
           throw new UnsupportedOperationException("Implement me :: start section?");
         }
@@ -228,19 +275,32 @@ class Parser extends Lexer {
     if (!hasCtx()) {
       addCode(Code.START_DOCUMENT);
       pushCtx(Context.DOCUMENT);
-    } else {
-      throw new UnsupportedOperationException("Implement me :: value=" + value);
+
+      return;
+    }
+
+    int ctx = peekCtx();
+
+    switch (ctx) {
+      case Context.PREAMBLE -> {
+        addCode(Code.START_PREAMBLE);
+        addCode(Code.START_PARAGRAPH);
+        pushCtx(Context.PARAGRAPH);
+      }
+      default -> throw new UnsupportedOperationException("Implement me :: context=" + ctx);
     }
   }
 
   private void parseText(int value) {
-    pushCtx(value);
-    pushCtx(Context.$TEXT);
+    pushText(value);
+    pushText(Text.REGULAR);
   }
 
   private int peekCtx() { return context[contextIndex]; }
 
   private int popCtx() { return context[contextIndex--]; }
+
+  private int popText() { return text[textIndex--]; }
 
   private void pushCtx(int value) {
     contextIndex++;
@@ -248,6 +308,14 @@ class Parser extends Lexer {
     context = IntArrays.copyIfNecessary(context, contextIndex);
 
     context[contextIndex] = value;
+  }
+
+  private void pushText(int value) {
+    textIndex++;
+
+    text = IntArrays.copyIfNecessary(text, textIndex);
+
+    text[textIndex] = value;
   }
 
 }
