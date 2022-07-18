@@ -165,8 +165,6 @@ class Lexer {
       case '=' -> {
         counter = 1;
 
-        atPrevious(Symbol.TITLE);
-
         yield _TITLE;
       }
       case '\n' -> {
@@ -213,6 +211,9 @@ class Lexer {
 
     return switch (c) {
       case ' ' -> {
+        addSymbol(Symbol.TITLE);
+        addSymbol(symbolIndex - counter);
+
         nextChar();
 
         addSymbol(Symbol.TITLE_LEVEL);
@@ -228,7 +229,12 @@ class Lexer {
 
         yield state;
       }
-      default -> _TEXT;
+      default -> {
+        addSymbol(Symbol.PARAGRAPH);
+        addSymbol(symbolIndex - counter);
+
+        yield _TEXT;
+      }
     };
   }
 

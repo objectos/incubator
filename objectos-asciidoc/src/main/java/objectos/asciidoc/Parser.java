@@ -264,6 +264,12 @@ class Parser extends Lexer {
   private void parseParagraph(int value) {
     line++;
 
+    if (!hasCtx()) {
+      addCode(Code.START_DOCUMENT);
+      pushCtx(Context.DOCUMENT);
+      pushCtx(Context.MAYBE_PREAMBLE);
+    }
+
     int ctx = popCtx();
 
     switch (ctx) {

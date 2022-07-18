@@ -26,103 +26,7 @@ import org.testng.annotations.Test;
 
 public class AsciiDocTest {
 
-  private class ThisProcessor implements AsciiDoc.Processor {
-    private boolean contentStarted;
-
-    private int level;
-
-    private final StringBuilder sb = new StringBuilder();
-
-    @Override
-    public final void endDocument() {
-      if (!contentStarted) {
-        sb.append(
-          """
-          <div id="content">
-
-          """);
-      }
-
-      sb.append("</div>");
-    }
-
-    @Override
-    public final void endMonospace() {
-      sb.append("</code>");
-    }
-
-    @Override
-    public final void endParagraph() {
-      sb.append("</p></div>");
-    }
-
-    @Override
-    public final void endPreamble() {
-    }
-
-    @Override
-    public final void endTitle() {
-      sb.append("</h");
-      sb.append(level);
-      sb.append(">\n</div>\n");
-    }
-
-    @Override
-    public final void startDocument() {
-      contentStarted = false;
-
-      level = 0;
-
-      sb.setLength(0);
-    }
-
-    @Override
-    public final void startMonospace() {
-      sb.append("<code>");
-    }
-
-    @Override
-    public final void startParagraph() {
-      sb.append("<div class=\"paragraph\">\n<p>");
-    }
-
-    @Override
-    public final void startPreamble() {
-      startContent();
-    }
-
-    @Override
-    public final void startTitle(int level) {
-      sb.append("<div id=\"header\">\n");
-      sb.append("<h");
-      sb.append(level);
-      sb.append(">");
-
-      this.level = level;
-    }
-
-    @Override
-    public final void text(String s) {
-      sb.append(s);
-    }
-
-    @Override
-    public final String toString() {
-      asciiDoc.process0(this);
-
-      return sb.toString();
-    }
-
-    private void startContent() {
-      if (!contentStarted) {
-        sb.append("<div id=\"content\">\n");
-
-        contentStarted = true;
-      }
-    }
-  }
-
-  private AsciiDoc asciiDoc;
+  AsciiDoc asciiDoc;
 
   private ThisProcessor processor;
 
@@ -273,7 +177,7 @@ public class AsciiDocTest {
     );
   }
 
-  @Test(enabled = false, description = //
+  @Test(description = //
   """
   = Document title
 
@@ -285,9 +189,22 @@ public class AsciiDocTest {
       =Not Title
       """,
 
-      lexer(),
+      lexer(
+        Lexer.Symbol.PARAGRAPH, 0,
+        Lexer.Symbol.EOL, 10,
+        Lexer.Symbol.EMPTY, 11,
+        Lexer.Symbol.EOF, 11
+      ),
 
-      parser(),
+      parser(
+        Parser.Code.START_DOCUMENT,
+        Parser.Code.START_PREAMBLE,
+        Parser.Code.START_PARAGRAPH,
+        Parser.Code.TEXT, 0,
+        Parser.Code.END_PARAGRAPH,
+        Parser.Code.END_PREAMBLE,
+        Parser.Code.END_DOCUMENT
+      ),
 
       """
       <body>
@@ -304,6 +221,8 @@ public class AsciiDocTest {
   }
 
   String convert(String source) {
+    asciiDoc.process0(processor);
+
     var html = processor.toString();
 
     return normalize(html);
