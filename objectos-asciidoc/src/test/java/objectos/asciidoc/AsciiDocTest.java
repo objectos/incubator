@@ -136,9 +136,9 @@ public class AsciiDocTest {
       = The doctitle""",
 
       lexer(
-        Lexer.Symbol.LINE, 0,
-        Lexer.Symbol.EQUALS, 1,
-        Lexer.Symbol.TEXT, 2,
+        Lexer.Symbol.TITLE, 0,
+        Lexer.Symbol.TITLE_LEVEL, 1,
+        Lexer.Symbol.TITLE_TEXT, 2,
         Lexer.Symbol.EOF, 14
       ),
 
@@ -178,13 +178,12 @@ public class AsciiDocTest {
       """,
 
       lexer(
-        Lexer.Symbol.LINE, 0,
-        Lexer.Symbol.EQUALS, 1,
-        Lexer.Symbol.TEXT, 2,
+        Lexer.Symbol.TITLE, 0,
+        Lexer.Symbol.TITLE_LEVEL, 1,
+        Lexer.Symbol.TITLE_TEXT, 2,
         Lexer.Symbol.EOL, 15,
         Lexer.Symbol.EMPTY, 16,
-        Lexer.Symbol.LINE, 17,
-        Lexer.Symbol.TEXT, 17,
+        Lexer.Symbol.PARAGRAPH, 17,
         Lexer.Symbol.EOL, 30,
         Lexer.Symbol.EMPTY, 31,
         Lexer.Symbol.EOF, 31
@@ -229,7 +228,16 @@ public class AsciiDocTest {
       = The `Foo` class
       """,
 
-      lexer(),
+      lexer(
+        Lexer.Symbol.TITLE, 0,
+        Lexer.Symbol.TITLE_LEVEL, 1,
+        Lexer.Symbol.TITLE_TEXT, 2,
+        Lexer.Symbol.BACKTICK, 6,
+        Lexer.Symbol.BACKTICK, 10,
+        Lexer.Symbol.EOL, 17,
+        Lexer.Symbol.EMPTY, 18,
+        Lexer.Symbol.EOF, 18
+      ),
 
       parser(
         Parser.Code.START_DOCUMENT,
@@ -315,6 +323,7 @@ public class AsciiDocTest {
           expectedLexer,
           """
 
+        Lexer assertion failed
         actual  =%s
         expected=%s
 
@@ -332,6 +341,7 @@ public class AsciiDocTest {
           expectedParser,
           """
 
+        Parser assertion failed
         actual  =%s
         expected=%s
 

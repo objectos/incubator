@@ -22,17 +22,21 @@ import objectos.util.IntArrays;
 class Lexer {
 
   class Symbol {
-    static final int EMPTY = -1;
+    static final int BACKTICK = -1;
 
-    static final int EOF = -2;
+    static final int EMPTY = -2;
 
-    static final int EOL = -3;
+    static final int EOF = -3;
 
-    static final int EQUALS = -4;
+    static final int EOL = -4;
 
-    static final int LINE = -5;
+    static final int PARAGRAPH = -5;
 
-    static final int TEXT = -6;
+    static final int TITLE = -6;
+
+    static final int TITLE_LEVEL = -7;
+
+    static final int TITLE_TEXT = -8;
   }
 
   private static final int _FINALLY = 1;
@@ -149,7 +153,6 @@ class Lexer {
   }
 
   private int tokenizeLineStart() {
-
     if (!hasChar()) {
       atChar(Symbol.EMPTY);
 
@@ -162,7 +165,7 @@ class Lexer {
       case '=' -> {
         counter = 1;
 
-        atPrevious(Symbol.LINE);
+        atPrevious(Symbol.TITLE);
 
         yield _TITLE;
       }
@@ -172,8 +175,7 @@ class Lexer {
         yield _LINE_START;
       }
       default -> {
-        atPrevious(Symbol.LINE);
-        atPrevious(Symbol.TEXT);
+        atPrevious(Symbol.PARAGRAPH);
 
         yield _TEXT;
       }
@@ -193,6 +195,11 @@ class Lexer {
 
         yield _LINE_START;
       }
+      case '`' -> {
+        atPrevious(Symbol.BACKTICK);
+
+        yield _TEXT;
+      }
       default -> _TEXT;
     };
   }
@@ -208,10 +215,10 @@ class Lexer {
       case ' ' -> {
         nextChar();
 
-        addSymbol(Symbol.EQUALS);
+        addSymbol(Symbol.TITLE_LEVEL);
         addSymbol(counter);
 
-        atChar(Symbol.TEXT);
+        atChar(Symbol.TITLE_TEXT);
 
         yield _TEXT;
       }
