@@ -54,14 +54,22 @@ class Parser extends Lexer {
 
     static final int DOCUMENT_METADATA = -3;
 
-    static final int PARAGRAPH = -4;
+    static final int MAYBE_DOCUMENT_METADATA = -4;
 
-    static final int PREAMBLE = -5;
+    static final int MAYBE_PREAMBLE = -5;
+
+    static final int PARAGRAPH = -6;
+
+    static final int PREAMBLE = -7;
   }
 
   static class Text {
+    static final int _BACKTICK = 1;
+
     static final int REGULAR = -1;
   }
+
+  private int beginIndexText = Integer.MAX_VALUE;
 
   private int[] code;
 
@@ -76,9 +84,9 @@ class Parser extends Lexer {
   @SuppressWarnings("unused")
   private int line;
 
-  private final List<String> strings = new GrowableList<>();
+  private int monospace = Integer.MAX_VALUE;
 
-  private int textBeginIndex;
+  private final List<String> strings = new GrowableList<>();
 
   Parser() {
     code = new int[1024];
@@ -107,13 +115,15 @@ class Parser extends Lexer {
       - finished abruptly (most likely due to a bug in this parser, sorry...).
       """);
 
+    beginIndexText = Integer.MAX_VALUE;
+
+    monospace = Integer.MAX_VALUE;
+
     codeIndex = 0;
 
     contextIndex = -1;
 
     strings.clear();
-
-    textBeginIndex = Integer.MAX_VALUE;
 
     parse0();
 
@@ -135,29 +145,29 @@ class Parser extends Lexer {
   }
 
   private void consumeText(int endIndex) {
-    if (textBeginIndex < endIndex) {
-      var s = source(textBeginIndex, endIndex);
+    if (beginIndexText < endIndex) {
+      var s = source(beginIndexText, endIndex);
 
       addCode(Code.TEXT);
       addCode(strings.size());
 
       strings.add(s);
 
-      textBeginIndex = Integer.MAX_VALUE;
+      beginIndexText = Integer.MAX_VALUE;
     }
   }
 
   private int endContext() {
     int ctx = popCtx();
 
-    addCode(
-      switch (ctx) {
-        case Context.DOCUMENT -> Code.END_DOCUMENT;
-        case Context.PARAGRAPH -> Code.END_PARAGRAPH;
-        case Context.PREAMBLE -> Code.END_PREAMBLE;
-        default -> throw new UnsupportedOperationException("Implement me :: ctx=" + ctx);
-      }
-    );
+    switch (ctx) {
+      case Context.DOCUMENT -> addCode(Code.END_DOCUMENT);
+      case Context.DOCUMENT_TITLE -> addCode(Code.END_TITLE);
+      case Context.MAYBE_PREAMBLE -> { /*noop*/ }
+      case Context.PARAGRAPH -> addCode(Code.END_PARAGRAPH);
+      case Context.PREAMBLE -> addCode(Code.END_PREAMBLE);
+      default -> throw new UnsupportedOperationException("Implement me :: ctx=" + ctx);
+    }
 
     return ctx;
   }
@@ -170,6 +180,7 @@ class Parser extends Lexer {
       var value = nextSymbol();
 
       switch (symbol) {
+        case Symbol.BACKTICK -> parseBacktick(value);
         case Symbol.EMPTY -> parseEmpty(value);
         case Symbol.EOF -> parseEof(value);
         case Symbol.EOL -> parseEol(value);
@@ -186,12 +197,41 @@ class Parser extends Lexer {
     }
   }
 
+  private void parseBacktick(int value) {
+    if (monospace == Integer.MAX_VALUE) {
+      monospace = value;
+
+      return;
+    }
+
+    // TODO: check bold and italic
+
+    consumeText(monospace);
+
+    var beginIndex = monospace + 1;
+    var endIndex = value;
+    beginIndexText = endIndex + 1;
+
+    if (beginIndex < endIndex) {
+      var s = source(beginIndex, value);
+
+      addCode(Code.START_MONOSPACE);
+      addCode(Code.TEXT);
+      addCode(strings.size());
+      addCode(Code.END_MONOSPACE);
+
+      strings.add(s);
+
+      monospace = Integer.MAX_VALUE;
+    }
+  }
+
   private void parseEmpty(int value) {
     int ctx = popCtx();
 
     switch (ctx) {
-      case Context.DOCUMENT_METADATA -> {
-        pushCtx(Context.PREAMBLE);
+      case Context.MAYBE_DOCUMENT_METADATA -> {
+        pushCtx(Context.MAYBE_PREAMBLE);
       }
       case Context.PARAGRAPH -> {
         consumeText(value);
@@ -204,20 +244,6 @@ class Parser extends Lexer {
 
   private void parseEof(int value) {
     consumeText(value);
-
-    while (hasCtx()) {
-      int ctx = popCtx();
-
-      addCode(
-        switch (ctx) {
-          case Context.DOCUMENT -> Code.END_DOCUMENT;
-          case Context.DOCUMENT_TITLE -> Code.END_TITLE;
-          case Context.PARAGRAPH -> Code.END_PARAGRAPH;
-          case Context.PREAMBLE -> Code.END_PREAMBLE;
-          default -> throw new UnsupportedOperationException("Implement me :: ctx=" + ctx);
-        }
-      );
-    }
   }
 
   private void parseEol(int value) {
@@ -229,7 +255,7 @@ class Parser extends Lexer {
 
         addCode(Code.END_TITLE);
 
-        pushCtx(Context.DOCUMENT_METADATA);
+        pushCtx(Context.MAYBE_DOCUMENT_METADATA);
       }
       default -> pushCtx(ctx);
     }
@@ -238,15 +264,17 @@ class Parser extends Lexer {
   private void parseParagraph(int value) {
     line++;
 
-    int ctx = peekCtx();
+    int ctx = popCtx();
 
     switch (ctx) {
-      case Context.PREAMBLE -> {
+      case Context.MAYBE_PREAMBLE -> {
         addCode(Code.START_PREAMBLE);
+        pushCtx(Context.PREAMBLE);
+
         addCode(Code.START_PARAGRAPH);
         pushCtx(Context.PARAGRAPH);
 
-        textBeginIndex = value;
+        beginIndexText = value;
       }
       default -> throw new UnsupportedOperationException("Implement me :: context=" + ctx);
     }
@@ -283,7 +311,7 @@ class Parser extends Lexer {
   }
 
   private void parseTitleText(int value) {
-    textBeginIndex = value;
+    beginIndexText = value;
   }
 
   private int peekCtx() { return context[contextIndex]; }

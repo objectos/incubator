@@ -23,6 +23,8 @@ public class AsciiDoc extends Parser {
 
     void endDocument();
 
+    void endMonospace();
+
     void endParagraph();
 
     void endPreamble();
@@ -30,6 +32,8 @@ public class AsciiDoc extends Parser {
     void endTitle();
 
     void startDocument();
+
+    void startMonospace();
 
     void startParagraph();
 
@@ -66,6 +70,8 @@ public class AsciiDoc extends Parser {
       switch (code) {
         case Code.END_DOCUMENT -> processor.endDocument();
 
+        case Code.END_MONOSPACE -> processor.endMonospace();
+
         case Code.END_PARAGRAPH -> processor.endParagraph();
 
         case Code.END_PREAMBLE -> processor.endPreamble();
@@ -73,6 +79,8 @@ public class AsciiDoc extends Parser {
         case Code.END_TITLE -> processor.endTitle();
 
         case Code.START_DOCUMENT -> processor.startDocument();
+
+        case Code.START_MONOSPACE -> processor.startMonospace();
 
         case Code.START_PARAGRAPH -> processor.startParagraph();
 

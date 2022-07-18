@@ -47,6 +47,11 @@ public class AsciiDocTest {
     }
 
     @Override
+    public final void endMonospace() {
+      sb.append("</code>");
+    }
+
+    @Override
     public final void endParagraph() {
       sb.append("</p></div>");
     }
@@ -69,6 +74,11 @@ public class AsciiDocTest {
       level = 0;
 
       sb.setLength(0);
+    }
+
+    @Override
+    public final void startMonospace() {
+      sb.append("<code>");
     }
 
     @Override
@@ -215,7 +225,7 @@ public class AsciiDocTest {
     );
   }
 
-  @Test(enabled = false, description = //
+  @Test(description = //
   """
   = Document title
 
