@@ -1,0 +1,23 @@
+= Inline elements
+
+== Bold (constrained)
+
+*a* *b*, *c*; *d*. *e*
+
+*abc
+de*
+
+*abc
+*
+
+*abc*d
+
+*abc*0
+
+*abc*@
+
+*abc
+
+abc*
+
+*abc*def*

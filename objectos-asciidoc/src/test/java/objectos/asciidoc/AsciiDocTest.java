@@ -292,6 +292,75 @@ public class AsciiDocTest {
     );
   }
 
+  @Test(enabled = false, description = //
+  """
+  = Bold (constrained)
+
+  - start of line
+  - ends in space
+  - ends in punctuation
+  - not bold, just star char
+  """)
+  public final void testCase06() {
+    test(
+      """
+      *a* *b*, *c*; *d*. *e*
+      """,
+
+      lexer(
+        Lexer.Symbol.PARAGRAPH, 0,
+        Lexer.Symbol.CBOLD0, 0,
+        Lexer.Symbol.CBOLD9, 2, // a
+        Lexer.Symbol.CBOLD0, 0,
+        Lexer.Symbol.CBOLD9, 2, // b
+        Lexer.Symbol.CBOLD0, 0,
+        Lexer.Symbol.CBOLD9, 2, // c
+        Lexer.Symbol.CBOLD0, 0,
+        Lexer.Symbol.CBOLD9, 2, // d
+        Lexer.Symbol.CBOLD0, 0,
+        Lexer.Symbol.CBOLD9, 2, // e
+        Lexer.Symbol.EOL, 42,
+
+        Lexer.Symbol.EMPTY, 68,
+        Lexer.Symbol.EOF, 68
+      ),
+
+      parser(
+        Parser.Code.START_DOCUMENT,
+        Parser.Code.START_PREAMBLE,
+        Parser.Code.START_PARAGRAPH,
+        Parser.Code.START_MONOSPACE,
+        Parser.Code.TEXT, 0, // at
+        Parser.Code.END_MONOSPACE,
+        Parser.Code.TEXT, 1, // start of line at
+        Parser.Code.START_MONOSPACE,
+        Parser.Code.TEXT, 2, // the middle
+        Parser.Code.END_MONOSPACE,
+        Parser.Code.TEXT, 3, // of line at the end
+        Parser.Code.START_MONOSPACE,
+        Parser.Code.TEXT, 4, // of the line
+        Parser.Code.END_MONOSPACE,
+        Parser.Code.TEXT, 5, // ws
+
+        Parser.Code.END_PARAGRAPH,
+        Parser.Code.END_PREAMBLE,
+        Parser.Code.END_DOCUMENT
+      ),
+
+      """
+      <body>
+      <div id="header">
+      </div>
+      <div id="content">
+      <div class="paragraph">
+      <p><code>at</code> start of line at <code>the middle</code> of line at the end <code>of the line</code></p>
+      </div>
+      </div>
+      </body>
+      """
+    );
+  }
+
   String convert(String source) {
     asciiDoc.process0(processor);
 

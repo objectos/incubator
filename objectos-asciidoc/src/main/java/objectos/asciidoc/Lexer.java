@@ -24,30 +24,36 @@ class Lexer {
   class Symbol {
     static final int BACKTICK = -1;
 
-    static final int EMPTY = -2;
+    static final int CBOLD0 = -2;
 
-    static final int EOF = -3;
+    static final int CBOLD9 = -3;
 
-    static final int EOL = -4;
+    static final int EMPTY = -4;
 
-    static final int PARAGRAPH = -5;
+    static final int EOF = -5;
 
-    static final int TITLE = -6;
+    static final int EOL = -6;
 
-    static final int TITLE_LEVEL = -7;
+    static final int PARAGRAPH = -7;
 
-    static final int TITLE_TEXT = -8;
+    static final int TITLE = -8;
+
+    static final int TITLE_LEVEL = -9;
+
+    static final int TITLE_TEXT = -10;
   }
 
   private static final int _FINALLY = 1;
 
-  private static final int _LINE_START = 2;
+  private static final int _MAYBE_START_CONSTRAINED = 2;
+
+  private static final int _START_LINE = 3;
 
   private static final int _STOP = 0;
 
-  private static final int _TEXT = 3;
+  private static final int _TEXT = 4;
 
-  private static final int _TITLE = 4;
+  private static final int _TITLE = 5;
 
   private int counter;
 
@@ -100,7 +106,7 @@ class Lexer {
 
     symbolIndex = 0;
 
-    state = _LINE_START;
+    state = _START_LINE;
 
     while (state != _STOP) {
       state = tokenize(state);
@@ -117,26 +123,25 @@ class Lexer {
     symbol[symbolIndex++] = value;
   }
 
+  private int advance(int state) {
+    sourceIndex++;
+
+    return state;
+  }
+
   private void atChar(int symbol) {
     addSymbol(symbol);
     addSymbol(sourceIndex);
   }
 
-  private void atPrevious(int symbol) {
-    addSymbol(symbol);
-    addSymbol(sourceIndex - 1);
-  }
-
   private boolean hasChar() { return sourceIndex < source.length(); }
 
-  private char nextChar() { return source.charAt(sourceIndex++); }
-
-  private char peekChar() { return source.charAt(sourceIndex); }
+  private char peek() { return source.charAt(sourceIndex); }
 
   private int tokenize(int state) {
     return switch (state) {
       case _FINALLY -> tokenizeFinally();
-      case _LINE_START -> tokenizeLineStart();
+      case _START_LINE -> tokenizeStartLine();
       case _TEXT -> tokenizeText();
       case _TITLE -> tokenizeTitle();
       default -> throw new UnsupportedOperationException("Implement me :: state=" + state);
@@ -152,32 +157,27 @@ class Lexer {
     return _STOP;
   }
 
-  private int tokenizeLineStart() {
+  private int tokenizeStartLine() {
     if (!hasChar()) {
       atChar(Symbol.EMPTY);
 
       return _FINALLY;
     }
 
-    var c = nextChar();
-
-    return switch (c) {
+    return switch (peek()) {
       case '\n' -> {
-        atPrevious(Symbol.EMPTY);
+        atChar(Symbol.EMPTY);
 
-        yield _LINE_START;
+        yield advance(_START_LINE);
       }
+      case '*' -> advance(_MAYBE_START_CONSTRAINED);
       case '=' -> {
         counter = 1;
 
-        yield _TITLE;
+        yield advance(_TITLE);
       }
       default -> {
-        atPrevious(Symbol.PARAGRAPH);
-
-        switch (c) {
-          case '`' -> { atPrevious(Symbol.BACKTICK); }
-        }
+        atChar(Symbol.PARAGRAPH);
 
         yield _TEXT;
       }
@@ -189,20 +189,18 @@ class Lexer {
       return _FINALLY;
     }
 
-    var c = nextChar();
-
-    return switch (c) {
+    return switch (peek()) {
       case '\n' -> {
-        atPrevious(Symbol.EOL);
+        atChar(Symbol.EOL);
 
-        yield _LINE_START;
+        yield advance(_START_LINE);
       }
       case '`' -> {
-        atPrevious(Symbol.BACKTICK);
+        atChar(Symbol.BACKTICK);
 
-        yield _TEXT;
+        yield advance(_TEXT);
       }
-      default -> _TEXT;
+      default -> advance(_TEXT);
     };
   }
 
@@ -211,27 +209,25 @@ class Lexer {
       return _FINALLY;
     }
 
-    char c = peekChar();
-
-    return switch (c) {
+    return switch (peek()) {
       case ' ' -> {
         addSymbol(Symbol.TITLE);
         addSymbol(symbolIndex - counter);
 
-        nextChar();
-
         addSymbol(Symbol.TITLE_LEVEL);
         addSymbol(counter);
 
+        int nextState = advance(_TEXT);
+
         atChar(Symbol.TITLE_TEXT);
 
-        yield _TEXT;
+        yield nextState;
       }
 
       case '=' -> {
         counter++;
 
-        yield state;
+        yield advance(state);
       }
       default -> {
         addSymbol(Symbol.PARAGRAPH);
