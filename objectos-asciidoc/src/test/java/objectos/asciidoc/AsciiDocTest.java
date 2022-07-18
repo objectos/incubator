@@ -220,6 +220,78 @@ public class AsciiDocTest {
     );
   }
 
+  @Test(description = //
+  """
+  = Monospace
+
+  - start of line
+  - middle of line
+  - end of line
+  """)
+  public final void testCase05() {
+    test(
+      """
+      `at` start of line
+      at `the middle` of line
+      at the end `of the line`
+      """,
+
+      lexer(
+        Lexer.Symbol.PARAGRAPH, 0,
+        Lexer.Symbol.BACKTICK, 0,
+        Lexer.Symbol.BACKTICK, 3,
+        Lexer.Symbol.EOL, 18,
+
+        Lexer.Symbol.PARAGRAPH, 19,
+        Lexer.Symbol.BACKTICK, 22,
+        Lexer.Symbol.BACKTICK, 33,
+        Lexer.Symbol.EOL, 42,
+
+        Lexer.Symbol.PARAGRAPH, 43,
+        Lexer.Symbol.BACKTICK, 54,
+        Lexer.Symbol.BACKTICK, 66,
+        Lexer.Symbol.EOL, 67,
+
+        Lexer.Symbol.EMPTY, 68,
+        Lexer.Symbol.EOF, 68
+      ),
+
+      parser(
+        Parser.Code.START_DOCUMENT,
+        Parser.Code.START_PREAMBLE,
+        Parser.Code.START_PARAGRAPH,
+        Parser.Code.START_MONOSPACE,
+        Parser.Code.TEXT, 0, // at
+        Parser.Code.END_MONOSPACE,
+        Parser.Code.TEXT, 1, // start of line at
+        Parser.Code.START_MONOSPACE,
+        Parser.Code.TEXT, 2, // the middle
+        Parser.Code.END_MONOSPACE,
+        Parser.Code.TEXT, 3, // of line at the end
+        Parser.Code.START_MONOSPACE,
+        Parser.Code.TEXT, 4, // of the line
+        Parser.Code.END_MONOSPACE,
+        Parser.Code.TEXT, 5, // ws
+
+        Parser.Code.END_PARAGRAPH,
+        Parser.Code.END_PREAMBLE,
+        Parser.Code.END_DOCUMENT
+      ),
+
+      """
+      <body>
+      <div id="header">
+      </div>
+      <div id="content">
+      <div class="paragraph">
+      <p><code>at</code> start of line at <code>the middle</code> of line at the end <code>of the line</code></p>
+      </div>
+      </div>
+      </body>
+      """
+    );
+  }
+
   String convert(String source) {
     asciiDoc.process0(processor);
 

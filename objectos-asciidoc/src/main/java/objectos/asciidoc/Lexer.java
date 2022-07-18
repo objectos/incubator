@@ -162,18 +162,22 @@ class Lexer {
     var c = nextChar();
 
     return switch (c) {
-      case '=' -> {
-        counter = 1;
-
-        yield _TITLE;
-      }
       case '\n' -> {
         atPrevious(Symbol.EMPTY);
 
         yield _LINE_START;
       }
+      case '=' -> {
+        counter = 1;
+
+        yield _TITLE;
+      }
       default -> {
         atPrevious(Symbol.PARAGRAPH);
+
+        switch (c) {
+          case '`' -> { atPrevious(Symbol.BACKTICK); }
+        }
 
         yield _TEXT;
       }

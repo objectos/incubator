@@ -282,6 +282,9 @@ class Parser extends Lexer {
 
         beginIndexText = value;
       }
+      case Context.PARAGRAPH -> {
+        pushCtx(ctx);
+      }
       default -> throw new UnsupportedOperationException("Implement me :: context=" + ctx);
     }
   }
