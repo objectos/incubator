@@ -72,11 +72,13 @@ class Parser extends Lexer {
   private static class State {
     static final int EOF = 0;
 
+    //
+
     static final int DOC = 1;
-
     static final int DOCTITLE = 2;
-
     static final int DOCTITLE_TEXT = 3;
+
+    static final int MAYBE_DOCTITLE = 4;
   }
 
   private int beginIndexText = Integer.MAX_VALUE;
@@ -90,6 +92,8 @@ class Parser extends Lexer {
   private int state;
 
   private final List<String> strings = new GrowableList<>();
+
+  private int level;
 
   Parser() {
     code = new int[1024];
@@ -163,8 +167,7 @@ class Parser extends Lexer {
 
       state = switch (symbol) {
         case Symbol.EOF -> parseEof(value);
-        case Symbol.TITLE -> parseTitle(value);
-        case Symbol.TITLE_LEVEL -> parseTitleLevel(value);
+        case Symbol.EQUALS -> parseEquals(value);
         case Symbol.WORD -> parseWord(value);
         case Symbol.WS -> parseWs(value);
         default -> throw new UnsupportedOperationException("Implement me :: symbol=" + symbol);
@@ -190,30 +193,12 @@ class Parser extends Lexer {
     };
   }
 
-  private int parseTitle(int value) {
+  private int parseEquals(int value) {
     return switch (state) {
       case State.DOC -> {
-        addCode(Code.START_DOCUMENT);
+        level = 1;
 
-        yield state;
-      }
-      default -> throw new UnsupportedOperationException("Implement me :: state=" + state);
-    };
-  }
-
-  private int parseTitleLevel(int value) {
-    return switch (state) {
-      case State.DOC -> {
-        var level = value;
-
-        if (level == 1) {
-          addCode(Code.START_TITLE);
-          addCode(value); // level
-
-          yield State.DOCTITLE;
-        } else {
-          throw new UnsupportedOperationException("Implement me :: start section?");
-        }
+        yield State.MAYBE_DOCTITLE;
       }
       default -> throw new UnsupportedOperationException("Implement me :: state=" + state);
     };
@@ -234,6 +219,17 @@ class Parser extends Lexer {
   private int parseWs(int value) {
     return switch (state) {
       case State.DOCTITLE_TEXT -> state;
+      case State.MAYBE_DOCTITLE -> {
+        if (level == 1) {
+          addCode(Code.START_DOCUMENT);
+          addCode(Code.START_TITLE);
+          addCode(value); // level
+
+          yield State.DOCTITLE;
+        } else {
+          throw new UnsupportedOperationException("Implement me :: start section?");
+        }
+      }
       default -> throw new UnsupportedOperationException("Implement me :: state=" + state);
     };
   }

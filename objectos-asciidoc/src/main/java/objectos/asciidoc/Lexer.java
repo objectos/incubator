@@ -22,74 +22,28 @@ import objectos.util.IntArrays;
 class Lexer {
 
   class Symbol {
-    static final int BACKTICK = -1;
+    static final int EOF = -1;
 
-    static final int CBOLD0 = -2;
+    static final int EQUALS = -2;
 
-    static final int CBOLD9 = -3;
+    static final int LF = -3;
 
-    static final int CONSTRAINED_M0 = -4;
-    static final int CONSTRAINED_MX = -5;
+    static final int WORD = -4;
 
-    static final int EMPTY = -6;
-
-    static final int EOF = -7;
-
-    static final int EOL = -8;
-
-    static final int LF = 0;
-
-    static final int PARAGRAPH = -9;
-
-    static final int TITLE = -10;
-
-    static final int TITLE_LEVEL = -11;
-
-    static final int WORD = -12;
-
-    static final int WS = -13;
+    static final int WS = -5;
   }
 
-  /*
+  private static class State {
+    private static final int STOP = 0;
 
-  @startuml
-  hide empty description
+    private static final int EQUALS = 1;
 
-  [*] --> START_LINE
+    private static final int START_LINE = 2;
 
-  CONSTRAINED --> CONSTRAINED : !special char
-  CONSTRAINED --> MAYBE_END_CONSTRAINED : special char && previous != ws
+    private static final int WORD = 3;
 
-  MAYBE_END_CONSTRAINED --> TEXT : !word
-  MAYBE_END_CONSTRAINED --> CONSTRAINED : word
-  
-  MAYBE_START_CONSTRAINED --> CONSTRAINED : !isBigS(c)
-  
-  NOT_WORD --> MAYBE_START_CONSTRAINED : (backtick |\nasterisk |\nunderscore) &&\nvalid state
-  
-  START_LINE --> TEXT
-
-  TEXT --> NOT_WORD : non word
-
-  @enduml
-
-   */
-
-  private static final int _FINALLY = 1;
-
-  private static final int _START_LINE = 2;
-
-  private static final int _STOP = 0;
-
-  private static final int _TEXT = 3;
-
-  private static final int _TEXT_WORD = 4;
-
-  private static final int _TEXT_WS = 5;
-
-  private static final int _TITLE = 6;
-
-  private int counter;
+    private static final int WS = 4;
+  }
 
   private String source;
 
@@ -112,32 +66,32 @@ class Lexer {
   }
 
   /*
-  
+
   # *strong*
   [:strong, :constrained, /(^|[^#{CC_WORD};:}])(?:#{QuoteAttributeListRxt})?\*(\S|\S#{CC_ALL}*?\S)\*(?!#{CG_WORD})/m],
-  
+
   /\S/ - A non-whitespace character: /[^ \t\r\n\f\v]/
   /\p{Word}/ - A member of one of the following Unicode general category Letter, Mark, Number, Connector_Punctuation
-  
+
   A Unicode character's General Category value can also be matched with \p{Ab} where Ab is the category's abbreviation as described below:
-  
+
   /\p{Ll}/ - 'Letter: Lowercase'
   /\p{Lm}/ - 'Letter: Mark'
   /\p{Lo}/ - 'Letter: Other'
   /\p{Lt}/ - 'Letter: Titlecase'
   /\p{Lu}/ - 'Letter: Uppercase
   /\p{Lo}/ - 'Letter: Other'
-  
+
   /\p{Mn}/ - 'Mark: Nonspacing'
   /\p{Mc}/ - 'Mark: Spacing Combining'
   /\p{Me}/ - 'Mark: Enclosing'
-  
+
   /\p{Nd}/ - 'Number: Decimal Digit'
   /\p{Nl}/ - 'Number: Letter'
   /\p{No}/ - 'Number: Other'
-  
+
   /\p{Pc}/ - 'Punctuation: Connector'
-  
+
    */
 
   final boolean isBigS(char c) {
@@ -183,7 +137,7 @@ class Lexer {
 
   final void tokenize(String source) {
     Check.state(
-      state == _STOP,
+      state == State.STOP,
 
       """
       Concurrent lexical analysis is not supported.
@@ -194,17 +148,15 @@ class Lexer {
       - finished abruptly (most likely due to a bug in this lexer, sorry...).
       """);
 
-    counter = 0;
-
     this.source = source;
 
     sourceIndex = 0;
 
     symbolIndex = 0;
 
-    state = _START_LINE;
+    state = State.START_LINE;
 
-    while (state != _STOP) {
+    while (state != State.STOP) {
       state = tokenize(state);
     }
   }
@@ -235,180 +187,130 @@ class Lexer {
   private char peek() { return source.charAt(sourceIndex); }
 
   private int tokenize(int state) {
+    if (!hasChar()) {
+      return tokenizeEof();
+    }
+
     return switch (state) {
-      case _FINALLY -> tokenizeFinally();
-      case _START_LINE -> tokenizeStartLine();
-      case _TEXT -> tokenizeText();
-      case _TEXT_WORD -> tokenizeTextWord();
-      case _TEXT_WS -> tokenizeTextWs();
-      case _TITLE -> tokenizeTitle();
+      case State.EQUALS -> tokenizeEquals();
+      case State.START_LINE -> tokenizeStartLine();
+      case State.WORD -> tokenizeWord();
+      case State.WS -> tokenizeWs();
       default -> throw new UnsupportedOperationException("Implement me :: state=" + state);
     };
   }
 
-  private int tokenizeFinally() {
-    addSymbol(Symbol.EOF);
-    addSymbol(sourceIndex);
+  private int tokenizeEof() {
+    atChar(Symbol.EOF);
 
-    symbolCounter = 0;
+    return State.STOP;
+  }
 
-    return _STOP;
+  private int tokenizeEquals() {
+    return switch (peek()) {
+      case '\t', '\u000b', '\f', ' ' -> {
+        atChar(Symbol.WS);
+
+        yield advance(State.WS);
+      }
+      case '\n' -> {
+        atChar(Symbol.LF);
+
+        yield advance(State.START_LINE);
+      }
+      case '=' -> advance(State.EQUALS);
+      default -> {
+        atChar(Symbol.WORD);
+
+        yield advance(State.WORD);
+      }
+    };
   }
 
   private int tokenizeStartLine() {
-    if (!hasChar()) {
-      atChar(Symbol.EMPTY);
-
-      return _FINALLY;
-    }
-
-    return switch (peek()) {
-      case '\n' -> {
-        atChar(Symbol.EMPTY);
-
-        yield advance(_START_LINE);
-      }
-      case '=' -> {
-        counter = 1;
-
-        yield advance(_TITLE);
-      }
-      default -> {
-        atChar(Symbol.PARAGRAPH);
-
-        yield tokenizeText0();
-      }
-    };
-  }
-
-  private int tokenizeText() {
-    if (!hasChar()) {
-      return _FINALLY;
-    }
-
-    return tokenizeText0();
-  }
-
-  private int tokenizeText0() {
     return switch (peek()) {
       case '\t', '\u000b', '\f', ' ' -> {
         atChar(Symbol.WS);
 
-        yield advance(_TEXT_WS);
+        yield advance(State.WS);
       }
       case '\n' -> {
         atChar(Symbol.LF);
 
-        yield advance(_START_LINE);
+        yield advance(State.START_LINE);
+      }
+      case '=' -> {
+        atChar(Symbol.EQUALS);
+
+        yield advance(State.EQUALS);
       }
       default -> {
         atChar(Symbol.WORD);
 
-        yield advance(_TEXT_WORD);
+        yield advance(State.WORD);
       }
     };
   }
 
-  private int tokenizeTextWord() {
-    if (!hasChar()) {
-      return _FINALLY;
-    }
-
+  private int tokenizeWord() {
     return switch (peek()) {
       case '\t', '\u000b', '\f', ' ' -> {
         atChar(Symbol.WS);
 
-        yield advance(_TEXT_WS);
+        yield advance(State.WS);
       }
       case '\n' -> {
         atChar(Symbol.LF);
 
-        yield advance(_START_LINE);
+        yield advance(State.START_LINE);
       }
-      default -> {
-        yield advance(_TEXT_WORD);
-      }
+      default -> advance(State.WORD);
     };
   }
 
-  private int tokenizeTextWs() {
-    if (!hasChar()) {
-      return _FINALLY;
-    }
-
+  private int tokenizeWs() {
     return switch (peek()) {
-      case '\t', '\u000b', '\f', ' ' -> {
-        yield advance(_TEXT_WS);
-      }
+      case '\t', '\u000b', '\f', ' ' -> advance(State.WS);
       case '\n' -> {
         atChar(Symbol.LF);
 
-        yield advance(_START_LINE);
+        yield advance(State.START_LINE);
       }
       default -> {
         atChar(Symbol.WORD);
 
-        yield advance(_TEXT_WORD);
-      }
-    };
-  }
-
-  private int tokenizeTitle() {
-    if (!hasChar()) {
-      return _FINALLY;
-    }
-
-    return switch (peek()) {
-      case ' ' -> {
-        addSymbol(Symbol.TITLE);
-        addSymbol(symbolIndex - counter);
-
-        addSymbol(Symbol.TITLE_LEVEL);
-        addSymbol(counter);
-
-        yield advance(_TEXT);
-      }
-      case '=' -> {
-        counter++;
-
-        yield advance(state);
-      }
-      default -> {
-        addSymbol(Symbol.PARAGRAPH);
-        addSymbol(symbolIndex - counter);
-
-        yield tokenizeText0();
+        yield advance(State.WORD);
       }
     };
   }
 
   /*
-  
+
   # *strong*
   [:strong, :constrained, /(^|[^#{CC_WORD};:}])(?:#{QuoteAttributeListRxt})?\*(\S|\S#{CC_ALL}*?\S)\*(?!#{CG_WORD})/m],
-  
+
   /\S/ - A non-whitespace character: /[^ \t\r\n\f\v]/
   /\p{Word}/ - A member of one of the following Unicode general category Letter, Mark, Number, Connector_Punctuation
-  
+
   A Unicode character's General Category value can also be matched with \p{Ab} where Ab is the category's abbreviation as described below:
-  
+
   /\p{Ll}/ - 'Letter: Lowercase'
   /\p{Lm}/ - 'Letter: Mark'
   /\p{Lo}/ - 'Letter: Other'
   /\p{Lt}/ - 'Letter: Titlecase'
   /\p{Lu}/ - 'Letter: Uppercase
   /\p{Lo}/ - 'Letter: Other'
-  
+
   /\p{Mn}/ - 'Mark: Nonspacing'
   /\p{Mc}/ - 'Mark: Spacing Combining'
   /\p{Me}/ - 'Mark: Enclosing'
-  
+
   /\p{Nd}/ - 'Number: Decimal Digit'
   /\p{Nl}/ - 'Number: Letter'
   /\p{No}/ - 'Number: Other'
-  
+
   /\p{Pc}/ - 'Punctuation: Connector'
-  
+
    */
 
 }
