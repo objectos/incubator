@@ -51,9 +51,7 @@ public class AsciiDocTest {
 
       lexer(
         Lexer.Symbol.EQUALS, 0,
-        Lexer.Symbol.WS, 1,
         Lexer.Symbol.WORD, 2,
-        Lexer.Symbol.WS, 5,
         Lexer.Symbol.WORD, 6,
         Lexer.Symbol.EOF, 14
       ),
@@ -95,14 +93,11 @@ public class AsciiDocTest {
 
       lexer(
         Lexer.Symbol.EQUALS, 0,
-        Lexer.Symbol.WS, 1,
         Lexer.Symbol.WORD, 2,
-        Lexer.Symbol.WS, 6,
         Lexer.Symbol.WORD, 7,
         Lexer.Symbol.LF, 15,
         Lexer.Symbol.LF, 16,
         Lexer.Symbol.WORD, 17,
-        Lexer.Symbol.WS, 21,
         Lexer.Symbol.WORD, 22,
         Lexer.Symbol.LF, 30,
         Lexer.Symbol.EOF, 31
@@ -149,13 +144,10 @@ public class AsciiDocTest {
 
       lexer(
         Lexer.Symbol.EQUALS, 0,
-        Lexer.Symbol.WS, 1,
         Lexer.Symbol.WORD, 2,
-        Lexer.Symbol.WS, 5,
         Lexer.Symbol.BACKTICK, 6,
         Lexer.Symbol.WORD, 7,
         Lexer.Symbol.BACKTICK, 10,
-        Lexer.Symbol.WS, 11,
         Lexer.Symbol.WORD, 12,
         Lexer.Symbol.LF, 17,
         Lexer.Symbol.EOF, 18

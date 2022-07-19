@@ -175,7 +175,6 @@ class Parser extends Lexer {
         case Symbol.EQUALS -> parseEquals(value);
         case Symbol.LF -> parseLf(value);
         case Symbol.WORD -> parseWord(value);
-        case Symbol.WS -> parseWs(value);
         default -> throw new UnsupportedOperationException("Implement me :: symbol=" + symbol);
       };
     }
@@ -244,6 +243,19 @@ class Parser extends Lexer {
         yield State.DOCTITLE_TEXT;
       }
       case State.DOCTITLE_TEXT -> state;
+      case State.MAYBE_DOCTITLE -> {
+        if (level == 1) {
+          addCode(Code.START_DOCUMENT);
+          addCode(Code.START_TITLE);
+          addCode(level); // level
+
+          beginIndexText = value;
+
+          yield State.DOCTITLE_TEXT;
+        } else {
+          throw new UnsupportedOperationException("Implement me :: start section?");
+        }
+      }
       case State.MAYBE_PREAMBLE -> {
         addCode(Code.START_PREAMBLE);
 
@@ -252,25 +264,6 @@ class Parser extends Lexer {
         addCode(Code.START_PARAGRAPH);
 
         yield State.PREAMBLE_PARAGRAPH;
-      }
-      case State.PREAMBLE_PARAGRAPH -> state;
-      default -> throw new UnsupportedOperationException("Implement me :: state=" + state);
-    };
-  }
-
-  private int parseWs(int value) {
-    return switch (state) {
-      case State.DOCTITLE_TEXT -> state;
-      case State.MAYBE_DOCTITLE -> {
-        if (level == 1) {
-          addCode(Code.START_DOCUMENT);
-          addCode(Code.START_TITLE);
-          addCode(value); // level
-
-          yield State.DOCTITLE;
-        } else {
-          throw new UnsupportedOperationException("Implement me :: start section?");
-        }
       }
       case State.PREAMBLE_PARAGRAPH -> state;
       default -> throw new UnsupportedOperationException("Implement me :: state=" + state);
