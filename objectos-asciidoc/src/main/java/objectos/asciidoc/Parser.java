@@ -65,6 +65,9 @@ class Parser extends Lexer {
   private static final int _METADATA = 2_000;
   private static final int _PARAGRAPH = 3_000;
 
+  // inline
+  private static final int _MONOSPACE = 100;
+
   private int beginIndexText = Integer.MAX_VALUE;
 
   private int[] code;
@@ -73,11 +76,13 @@ class Parser extends Lexer {
 
   private int codeIndex;
 
+  private int level;
+
+  private int monospace = Integer.MAX_VALUE;
+
   private int state;
 
   private final List<String> strings = new GrowableList<>();
-
-  private int level;
 
   Parser() {
     code = new int[1024];
@@ -109,6 +114,10 @@ class Parser extends Lexer {
 
     codeIndex = 0;
 
+    level = 0;
+
+    monospace = Integer.MAX_VALUE;
+
     state = _START;
 
     strings.clear();
@@ -132,7 +141,13 @@ class Parser extends Lexer {
     code[codeIndex++] = value;
   }
 
-  private void consumeText(int endIndex) {
+  private void consumeText(int value) {
+    var endIndex = value;
+
+    if (monospace != Integer.MAX_VALUE) {
+      endIndex = monospace;
+    }
+
     if (beginIndexText < endIndex) {
       var s = source(beginIndexText, endIndex);
 
@@ -143,6 +158,25 @@ class Parser extends Lexer {
 
       beginIndexText = Integer.MAX_VALUE;
     }
+
+    if (monospace == Integer.MAX_VALUE) {
+      return;
+    }
+
+    monospace++;
+
+    if (monospace < value) {
+      var s = source(monospace, value);
+
+      addCode(Code.START_MONOSPACE);
+      addCode(Code.TEXT);
+      addCode(strings.size());
+      addCode(Code.END_MONOSPACE);
+
+      strings.add(s);
+
+      monospace = Integer.MAX_VALUE;
+    }
   }
 
   private void parse0() {
@@ -151,6 +185,7 @@ class Parser extends Lexer {
       var value = nextSymbol();
 
       state = switch (symbol) {
+        case Symbol.BACKTICK -> parseBacktick(value);
         case Symbol.EOF -> parseEof(value);
         case Symbol.EQUALS -> parseEquals(value);
         case Symbol.LF -> parseLf(value);
@@ -166,15 +201,36 @@ class Parser extends Lexer {
     codeCounter = 0;
   }
 
-  private int parseEof(int value) {
+  private int parseBacktick(int value) {
     return switch (state) {
+      case _DOCUMENT + _TITLE -> {
+        monospace = value;
+
+        yield _DOCUMENT + _TITLE + _MAYBE + _MONOSPACE;
+      }
+      case _DOCUMENT + _TITLE + _MAYBE + _MONOSPACE -> {
+        consumeText(value);
+
+        beginIndexText = value + 1;
+
+        yield _DOCUMENT + _TITLE;
+      }
+      default -> throw new UnsupportedOperationException("Implement me :: state=" + state);
+    };
+  }
+
+  private int parseEof(int value) {
+    switch (state) {
       case _DOCUMENT + _TITLE -> {
         consumeText(value);
 
         addCode(Code.END_TITLE);
         addCode(Code.END_DOCUMENT);
+      }
+      case _MAYBE + _DOCUMENT + _METADATA -> {
+        consumeText(value);
 
-        yield _EOF;
+        addCode(Code.END_DOCUMENT);
       }
       case _PREAMBLE + _PARAGRAPH + _MULTILINE -> {
         consumeText(value);
@@ -182,11 +238,11 @@ class Parser extends Lexer {
         addCode(Code.END_PARAGRAPH);
         addCode(Code.END_PREAMBLE);
         addCode(Code.END_DOCUMENT);
-
-        yield _EOF;
       }
       default -> throw new UnsupportedOperationException("Implement me :: state=" + state);
-    };
+    }
+
+    return _EOF;
   }
 
   private int parseEquals(int value) {
@@ -218,6 +274,7 @@ class Parser extends Lexer {
   private int parseWord(int value) {
     return switch (state) {
       case _DOCUMENT + _TITLE -> state;
+      case _DOCUMENT + _TITLE + _MAYBE + _MONOSPACE -> state;
       case _MAYBE + _DOCUMENT + _TITLE -> {
         if (level == 1) {
           addCode(Code.START_DOCUMENT);
