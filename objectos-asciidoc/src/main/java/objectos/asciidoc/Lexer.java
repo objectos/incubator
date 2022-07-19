@@ -22,27 +22,31 @@ import objectos.util.IntArrays;
 class Lexer {
 
   class Symbol {
-    static final int EOF = -1;
+    static final int BACKTICK = -1;
 
-    static final int EQUALS = -2;
+    static final int EOF = -2;
 
-    static final int LF = -3;
+    static final int EQUALS = -3;
 
-    static final int WORD = -4;
+    static final int LF = -4;
 
-    static final int WS = -5;
+    static final int WORD = -5;
+
+    static final int WS = -6;
   }
 
   private static class State {
-    private static final int STOP = 0;
+    static final int STOP = 0;
 
-    private static final int EQUALS = 1;
+    static final int EQUALS = 1;
 
-    private static final int START_LINE = 2;
+    static final int LINE = 2;
 
-    private static final int WORD = 3;
+    static final int START_LINE = 3;
 
-    private static final int WS = 4;
+    static final int WORD = 4;
+
+    static final int WS = 5;
   }
 
   private String source;
@@ -66,32 +70,32 @@ class Lexer {
   }
 
   /*
-  
+
   # *strong*
   [:strong, :constrained, /(^|[^#{CC_WORD};:}])(?:#{QuoteAttributeListRxt})?\*(\S|\S#{CC_ALL}*?\S)\*(?!#{CG_WORD})/m],
-  
+
   /\S/ - A non-whitespace character: /[^ \t\r\n\f\v]/
   /\p{Word}/ - A member of one of the following Unicode general category Letter, Mark, Number, Connector_Punctuation
-  
+
   A Unicode character's General Category value can also be matched with \p{Ab} where Ab is the category's abbreviation as described below:
-  
+
   /\p{Ll}/ - 'Letter: Lowercase'
   /\p{Lm}/ - 'Letter: Mark'
   /\p{Lo}/ - 'Letter: Other'
   /\p{Lt}/ - 'Letter: Titlecase'
   /\p{Lu}/ - 'Letter: Uppercase
   /\p{Lo}/ - 'Letter: Other'
-  
+
   /\p{Mn}/ - 'Mark: Nonspacing'
   /\p{Mc}/ - 'Mark: Spacing Combining'
   /\p{Me}/ - 'Mark: Enclosing'
-  
+
   /\p{Nd}/ - 'Number: Decimal Digit'
   /\p{Nl}/ - 'Number: Letter'
   /\p{No}/ - 'Number: Other'
-  
+
   /\p{Pc}/ - 'Punctuation: Connector'
-  
+
    */
 
   final boolean isBigS(char c) {
@@ -129,6 +133,10 @@ class Lexer {
 
   final int nextSymbol() {
     return symbol[symbolCounter++];
+  }
+
+  final int previousSymbol() {
+    return symbol[symbolCounter - 4];
   }
 
   final String source(int beginIndex, int endIndex) {
@@ -184,6 +192,36 @@ class Lexer {
     addSymbol(sourceIndex);
   }
 
+  private int consumeBacktick() {
+    atChar(Symbol.BACKTICK);
+
+    return advance(State.LINE);
+  }
+
+  private int consumeEquals() {
+    atChar(Symbol.EQUALS);
+
+    return advance(State.EQUALS);
+  }
+
+  private int consumeLf() {
+    atChar(Symbol.LF);
+
+    return advance(State.START_LINE);
+  }
+
+  private int consumeWord() {
+    atChar(Symbol.WORD);
+
+    return advance(State.WORD);
+  }
+
+  private int consumeWs() {
+    atChar(Symbol.WS);
+
+    return advance(State.WS);
+  }
+
   private boolean hasChar() { return sourceIndex < source.length(); }
 
   private char peek() { return source.charAt(sourceIndex); }
@@ -195,6 +233,7 @@ class Lexer {
 
     return switch (state) {
       case State.EQUALS -> tokenizeEquals();
+      case State.LINE -> tokenizeLine();
       case State.START_LINE -> tokenizeStartLine();
       case State.WORD -> tokenizeWord();
       case State.WS -> tokenizeWs();
@@ -210,62 +249,38 @@ class Lexer {
 
   private int tokenizeEquals() {
     return switch (peek()) {
-      case '\t', '\u000b', '\f', ' ' -> {
-        atChar(Symbol.WS);
+      case '\t', '\u000b', '\f', ' ' -> consumeWs();
+      case '\n' -> consumeLf();
+      case '=' -> consumeEquals();
+      case '`' -> consumeBacktick();
+      default -> consumeWord();
+    };
+  }
 
-        yield advance(State.WS);
-      }
-      case '\n' -> {
-        atChar(Symbol.LF);
-
-        yield advance(State.START_LINE);
-      }
-      case '=' -> advance(State.EQUALS);
-      default -> {
-        atChar(Symbol.WORD);
-
-        yield advance(State.WORD);
-      }
+  private int tokenizeLine() {
+    return switch (peek()) {
+      case '\t', '\u000b', '\f', ' ' -> consumeWs();
+      case '\n' -> consumeLf();
+      case '`' -> consumeBacktick();
+      default -> consumeWord();
     };
   }
 
   private int tokenizeStartLine() {
     return switch (peek()) {
-      case '\t', '\u000b', '\f', ' ' -> {
-        atChar(Symbol.WS);
-
-        yield advance(State.WS);
-      }
-      case '\n' -> {
-        atChar(Symbol.LF);
-
-        yield advance(State.START_LINE);
-      }
-      case '=' -> {
-        atChar(Symbol.EQUALS);
-
-        yield advance(State.EQUALS);
-      }
-      default -> {
-        atChar(Symbol.WORD);
-
-        yield advance(State.WORD);
-      }
+      case '\t', '\u000b', '\f', ' ' -> consumeWs();
+      case '\n' -> consumeLf();
+      case '=' -> consumeEquals();
+      case '`' -> consumeBacktick();
+      default -> consumeWord();
     };
   }
 
   private int tokenizeWord() {
     return switch (peek()) {
-      case '\t', '\u000b', '\f', ' ' -> {
-        atChar(Symbol.WS);
-
-        yield advance(State.WS);
-      }
-      case '\n' -> {
-        atChar(Symbol.LF);
-
-        yield advance(State.START_LINE);
-      }
+      case '\t', '\u000b', '\f', ' ' -> consumeWs();
+      case '\n' -> consumeLf();
+      case '`' -> consumeBacktick();
       default -> advance(State.WORD);
     };
   }
@@ -273,46 +288,39 @@ class Lexer {
   private int tokenizeWs() {
     return switch (peek()) {
       case '\t', '\u000b', '\f', ' ' -> advance(State.WS);
-      case '\n' -> {
-        atChar(Symbol.LF);
-
-        yield advance(State.START_LINE);
-      }
-      default -> {
-        atChar(Symbol.WORD);
-
-        yield advance(State.WORD);
-      }
+      case '\n' -> consumeLf();
+      case '`' -> consumeBacktick();
+      default -> consumeWord();
     };
   }
 
   /*
-  
+
   # *strong*
   [:strong, :constrained, /(^|[^#{CC_WORD};:}])(?:#{QuoteAttributeListRxt})?\*(\S|\S#{CC_ALL}*?\S)\*(?!#{CG_WORD})/m],
-  
+
   /\S/ - A non-whitespace character: /[^ \t\r\n\f\v]/
   /\p{Word}/ - A member of one of the following Unicode general category Letter, Mark, Number, Connector_Punctuation
-  
+
   A Unicode character's General Category value can also be matched with \p{Ab} where Ab is the category's abbreviation as described below:
-  
+
   /\p{Ll}/ - 'Letter: Lowercase'
   /\p{Lm}/ - 'Letter: Mark'
   /\p{Lo}/ - 'Letter: Other'
   /\p{Lt}/ - 'Letter: Titlecase'
   /\p{Lu}/ - 'Letter: Uppercase
   /\p{Lo}/ - 'Letter: Other'
-  
+
   /\p{Mn}/ - 'Mark: Nonspacing'
   /\p{Mc}/ - 'Mark: Spacing Combining'
   /\p{Me}/ - 'Mark: Enclosing'
-  
+
   /\p{Nd}/ - 'Number: Decimal Digit'
   /\p{Nl}/ - 'Number: Letter'
   /\p{No}/ - 'Number: Other'
-  
+
   /\p{Pc}/ - 'Punctuation: Connector'
-  
+
    */
 
 }

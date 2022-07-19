@@ -149,11 +149,15 @@ public class AsciiDocTest {
 
       lexer(
         Lexer.Symbol.EQUALS, 0,
+        Lexer.Symbol.WS, 1,
         Lexer.Symbol.WORD, 2,
-        //        Lexer.Symbol.BACKTICK, 6,
-        //        Lexer.Symbol.BACKTICK, 10,
-        //        Lexer.Symbol.EOL, 17,
-        //        Lexer.Symbol.EMPTY, 18,
+        Lexer.Symbol.WS, 5,
+        Lexer.Symbol.BACKTICK, 6,
+        Lexer.Symbol.WORD, 7,
+        Lexer.Symbol.BACKTICK, 10,
+        Lexer.Symbol.WS, 11,
+        Lexer.Symbol.WORD, 12,
+        Lexer.Symbol.LF, 17,
         Lexer.Symbol.EOF, 18
       ),
 
