@@ -14,10 +14,24 @@ de*
 
 *abc*0
 
-*abc*@
+*abc*;
+
+*abc*!
+
+*abc*?
+
+*abc*@a
+
+*abc-@*
 
 *abc
 
 abc*
 
 *abc*def*
+
+`abc
+`
+
+`abc
+de`

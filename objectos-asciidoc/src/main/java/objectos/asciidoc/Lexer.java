@@ -28,32 +28,66 @@ class Lexer {
 
     static final int CBOLD9 = -3;
 
-    static final int EMPTY = -4;
+    static final int CONSTRAINED_M0 = -4;
+    static final int CONSTRAINED_MX = -5;
 
-    static final int EOF = -5;
+    static final int EMPTY = -6;
 
-    static final int EOL = -6;
+    static final int EOF = -7;
 
-    static final int PARAGRAPH = -7;
+    static final int EOL = -8;
 
-    static final int TITLE = -8;
+    static final int LF = 0;
 
-    static final int TITLE_LEVEL = -9;
+    static final int PARAGRAPH = -9;
 
-    static final int TITLE_TEXT = -10;
+    static final int TITLE = -10;
+
+    static final int TITLE_LEVEL = -11;
+
+    static final int WORD = -12;
+
+    static final int WS = -13;
   }
+
+  /*
+
+  @startuml
+  hide empty description
+
+  [*] --> START_LINE
+
+  CONSTRAINED --> CONSTRAINED : !special char
+  CONSTRAINED --> MAYBE_END_CONSTRAINED : special char && previous != ws
+
+  MAYBE_END_CONSTRAINED --> TEXT : !word
+  MAYBE_END_CONSTRAINED --> CONSTRAINED : word
+  
+  MAYBE_START_CONSTRAINED --> CONSTRAINED : !isBigS(c)
+  
+  NOT_WORD --> MAYBE_START_CONSTRAINED : (backtick |\nasterisk |\nunderscore) &&\nvalid state
+  
+  START_LINE --> TEXT
+
+  TEXT --> NOT_WORD : non word
+
+  @enduml
+
+   */
 
   private static final int _FINALLY = 1;
 
-  private static final int _MAYBE_START_CONSTRAINED = 2;
-
-  private static final int _START_LINE = 3;
+  private static final int _START_LINE = 2;
 
   private static final int _STOP = 0;
 
-  private static final int _TEXT = 4;
+  private static final int _TEXT = 3;
 
-  private static final int _TITLE = 5;
+  private static final int _TEXT_WORD = 4;
+
+  private static final int _TEXT_WS = 5;
+
+  private static final int _TITLE = 6;
 
   private int counter;
 
@@ -75,6 +109,68 @@ class Lexer {
 
   final boolean hasSymbol() {
     return symbolCounter < symbolIndex;
+  }
+
+  /*
+  
+  # *strong*
+  [:strong, :constrained, /(^|[^#{CC_WORD};:}])(?:#{QuoteAttributeListRxt})?\*(\S|\S#{CC_ALL}*?\S)\*(?!#{CG_WORD})/m],
+  
+  /\S/ - A non-whitespace character: /[^ \t\r\n\f\v]/
+  /\p{Word}/ - A member of one of the following Unicode general category Letter, Mark, Number, Connector_Punctuation
+  
+  A Unicode character's General Category value can also be matched with \p{Ab} where Ab is the category's abbreviation as described below:
+  
+  /\p{Ll}/ - 'Letter: Lowercase'
+  /\p{Lm}/ - 'Letter: Mark'
+  /\p{Lo}/ - 'Letter: Other'
+  /\p{Lt}/ - 'Letter: Titlecase'
+  /\p{Lu}/ - 'Letter: Uppercase
+  /\p{Lo}/ - 'Letter: Other'
+  
+  /\p{Mn}/ - 'Mark: Nonspacing'
+  /\p{Mc}/ - 'Mark: Spacing Combining'
+  /\p{Me}/ - 'Mark: Enclosing'
+  
+  /\p{Nd}/ - 'Number: Decimal Digit'
+  /\p{Nl}/ - 'Number: Letter'
+  /\p{No}/ - 'Number: Other'
+  
+  /\p{Pc}/ - 'Punctuation: Connector'
+  
+   */
+
+  final boolean isBigS(char c) {
+    return switch (c) {
+      case ' ', '\t', '\r', '\n', '\f', '\u000B' -> true;
+      default -> false;
+    };
+  }
+
+  final boolean isWord(char c) {
+    int type = Character.getType(c);
+
+    return switch (type) {
+      case Character.LOWERCASE_LETTER:
+      case Character.MODIFIER_LETTER:
+      case Character.OTHER_LETTER:
+      case Character.TITLECASE_LETTER:
+      case Character.UPPERCASE_LETTER:
+
+      case Character.NON_SPACING_MARK:
+      case Character.COMBINING_SPACING_MARK:
+      case Character.ENCLOSING_MARK:
+
+      case Character.DECIMAL_DIGIT_NUMBER:
+      case Character.LETTER_NUMBER:
+      case Character.OTHER_NUMBER:
+
+      case Character.CONNECTOR_PUNCTUATION:
+
+        yield true;
+      default:
+        yield false;
+    };
   }
 
   final int nextSymbol() {
@@ -143,6 +239,8 @@ class Lexer {
       case _FINALLY -> tokenizeFinally();
       case _START_LINE -> tokenizeStartLine();
       case _TEXT -> tokenizeText();
+      case _TEXT_WORD -> tokenizeTextWord();
+      case _TEXT_WS -> tokenizeTextWs();
       case _TITLE -> tokenizeTitle();
       default -> throw new UnsupportedOperationException("Implement me :: state=" + state);
     };
@@ -170,7 +268,6 @@ class Lexer {
 
         yield advance(_START_LINE);
       }
-      case '*' -> advance(_MAYBE_START_CONSTRAINED);
       case '=' -> {
         counter = 1;
 
@@ -179,7 +276,7 @@ class Lexer {
       default -> {
         atChar(Symbol.PARAGRAPH);
 
-        yield _TEXT;
+        yield tokenizeText0();
       }
     };
   }
@@ -189,18 +286,70 @@ class Lexer {
       return _FINALLY;
     }
 
+    return tokenizeText0();
+  }
+
+  private int tokenizeText0() {
     return switch (peek()) {
+      case '\t', '\u000b', '\f', ' ' -> {
+        atChar(Symbol.WS);
+
+        yield advance(_TEXT_WS);
+      }
       case '\n' -> {
-        atChar(Symbol.EOL);
+        atChar(Symbol.LF);
 
         yield advance(_START_LINE);
       }
-      case '`' -> {
-        atChar(Symbol.BACKTICK);
+      default -> {
+        atChar(Symbol.WORD);
 
-        yield advance(_TEXT);
+        yield advance(_TEXT_WORD);
       }
-      default -> advance(_TEXT);
+    };
+  }
+
+  private int tokenizeTextWord() {
+    if (!hasChar()) {
+      return _FINALLY;
+    }
+
+    return switch (peek()) {
+      case '\t', '\u000b', '\f', ' ' -> {
+        atChar(Symbol.WS);
+
+        yield advance(_TEXT_WS);
+      }
+      case '\n' -> {
+        atChar(Symbol.LF);
+
+        yield advance(_START_LINE);
+      }
+      default -> {
+        yield advance(_TEXT_WORD);
+      }
+    };
+  }
+
+  private int tokenizeTextWs() {
+    if (!hasChar()) {
+      return _FINALLY;
+    }
+
+    return switch (peek()) {
+      case '\t', '\u000b', '\f', ' ' -> {
+        yield advance(_TEXT_WS);
+      }
+      case '\n' -> {
+        atChar(Symbol.LF);
+
+        yield advance(_START_LINE);
+      }
+      default -> {
+        atChar(Symbol.WORD);
+
+        yield advance(_TEXT_WORD);
+      }
     };
   }
 
@@ -217,13 +366,8 @@ class Lexer {
         addSymbol(Symbol.TITLE_LEVEL);
         addSymbol(counter);
 
-        int nextState = advance(_TEXT);
-
-        atChar(Symbol.TITLE_TEXT);
-
-        yield nextState;
+        yield advance(_TEXT);
       }
-
       case '=' -> {
         counter++;
 
@@ -233,9 +377,38 @@ class Lexer {
         addSymbol(Symbol.PARAGRAPH);
         addSymbol(symbolIndex - counter);
 
-        yield _TEXT;
+        yield tokenizeText0();
       }
     };
   }
+
+  /*
+  
+  # *strong*
+  [:strong, :constrained, /(^|[^#{CC_WORD};:}])(?:#{QuoteAttributeListRxt})?\*(\S|\S#{CC_ALL}*?\S)\*(?!#{CG_WORD})/m],
+  
+  /\S/ - A non-whitespace character: /[^ \t\r\n\f\v]/
+  /\p{Word}/ - A member of one of the following Unicode general category Letter, Mark, Number, Connector_Punctuation
+  
+  A Unicode character's General Category value can also be matched with \p{Ab} where Ab is the category's abbreviation as described below:
+  
+  /\p{Ll}/ - 'Letter: Lowercase'
+  /\p{Lm}/ - 'Letter: Mark'
+  /\p{Lo}/ - 'Letter: Other'
+  /\p{Lt}/ - 'Letter: Titlecase'
+  /\p{Lu}/ - 'Letter: Uppercase
+  /\p{Lo}/ - 'Letter: Other'
+  
+  /\p{Mn}/ - 'Mark: Nonspacing'
+  /\p{Mc}/ - 'Mark: Spacing Combining'
+  /\p{Me}/ - 'Mark: Enclosing'
+  
+  /\p{Nd}/ - 'Number: Decimal Digit'
+  /\p{Nl}/ - 'Number: Letter'
+  /\p{No}/ - 'Number: Other'
+  
+  /\p{Pc}/ - 'Punctuation: Connector'
+  
+   */
 
 }
