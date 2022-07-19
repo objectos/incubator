@@ -47,44 +47,23 @@ class Parser extends Lexer {
     static final int TEXT = -11;
   }
 
-  static class Context {
-    static final int DOCUMENT = -1;
+  // mods
 
-    static final int DOCUMENT_TITLE = -2;
+  private static final int _EOF = 0;
+  private static final int _MAYBE = 1;
+  private static final int _MULTILINE = 2;
 
-    static final int DOCUMENT_METADATA = -3;
+  // sections
 
-    static final int MAYBE_DOCUMENT_METADATA = -4;
+  private static final int _START = 100_000;
+  private static final int _DOCUMENT = 200_000;
+  private static final int _PREAMBLE = 300_000;
 
-    static final int MAYBE_PREAMBLE = -5;
+  // blocks
 
-    static final int PARAGRAPH = -6;
-
-    static final int PREAMBLE = -7;
-  }
-
-  static class Text {
-    static final int _BACKTICK = 1;
-
-    static final int REGULAR = -1;
-  }
-
-  private static class State {
-    static final int EOF = 0;
-
-    //
-
-    static final int DOC = 1;
-    static final int DOCTITLE = 2;
-    static final int DOCTITLE_TEXT = 3;
-
-    static final int MAYBE_DOCTITLE = 4;
-    static final int MAYBE_DOCMETA = 5;
-    static final int MAYBE_PREAMBLE = 6;
-
-    static final int PREAMBLE_PARAGRAPH = 7;
-    static final int PREAMBLE_PARAGRAPH_NL = 8;
-  }
+  private static final int _TITLE = 1_000;
+  private static final int _METADATA = 2_000;
+  private static final int _PARAGRAPH = 3_000;
 
   private int beginIndexText = Integer.MAX_VALUE;
 
@@ -114,7 +93,7 @@ class Parser extends Lexer {
 
   final void parse() {
     Check.state(
-      state == State.EOF,
+      state == _EOF,
 
       """
       Concurrent parsing is not supported.
@@ -123,13 +102,14 @@ class Parser extends Lexer {
 
       - is currently running; or
       - finished abruptly (most likely due to a bug in this parser, sorry...).
-      """);
+      """
+    );
 
     beginIndexText = Integer.MAX_VALUE;
 
     codeIndex = 0;
 
-    state = State.DOC;
+    state = _START;
 
     strings.clear();
 
@@ -179,7 +159,7 @@ class Parser extends Lexer {
       };
     }
 
-    if (state != State.EOF) {
+    if (state != _EOF) {
       throw new UnsupportedOperationException("Implement me :: state=" + state);
     }
 
@@ -188,22 +168,22 @@ class Parser extends Lexer {
 
   private int parseEof(int value) {
     return switch (state) {
-      case State.DOCTITLE_TEXT -> {
+      case _DOCUMENT + _TITLE -> {
         consumeText(value);
 
         addCode(Code.END_TITLE);
         addCode(Code.END_DOCUMENT);
 
-        yield State.EOF;
+        yield _EOF;
       }
-      case State.PREAMBLE_PARAGRAPH_NL -> {
+      case _PREAMBLE + _PARAGRAPH + _MULTILINE -> {
         consumeText(value);
 
         addCode(Code.END_PARAGRAPH);
         addCode(Code.END_PREAMBLE);
         addCode(Code.END_DOCUMENT);
 
-        yield State.EOF;
+        yield _EOF;
       }
       default -> throw new UnsupportedOperationException("Implement me :: state=" + state);
     };
@@ -211,10 +191,10 @@ class Parser extends Lexer {
 
   private int parseEquals(int value) {
     return switch (state) {
-      case State.DOC -> {
+      case _START -> {
         level = 1;
 
-        yield State.MAYBE_DOCTITLE;
+        yield _MAYBE + _DOCUMENT + _TITLE;
       }
       default -> throw new UnsupportedOperationException("Implement me :: state=" + state);
     };
@@ -222,50 +202,45 @@ class Parser extends Lexer {
 
   private int parseLf(int value) {
     return switch (state) {
-      case State.DOCTITLE_TEXT -> {
+      case _DOCUMENT + _TITLE -> {
         consumeText(value);
 
         addCode(Code.END_TITLE);
 
-        yield State.MAYBE_DOCMETA;
+        yield _MAYBE + _DOCUMENT + _METADATA;
       }
-      case State.MAYBE_DOCMETA -> State.MAYBE_PREAMBLE;
-      case State.PREAMBLE_PARAGRAPH -> State.PREAMBLE_PARAGRAPH_NL;
+      case _MAYBE + _DOCUMENT + _METADATA -> _MAYBE + _PREAMBLE;
+      case _PREAMBLE + _PARAGRAPH -> _PREAMBLE + _PARAGRAPH + _MULTILINE;
       default -> throw new UnsupportedOperationException("Implement me :: state=" + state);
     };
   }
 
   private int parseWord(int value) {
     return switch (state) {
-      case State.DOCTITLE -> {
-        beginIndexText = value;
-
-        yield State.DOCTITLE_TEXT;
-      }
-      case State.DOCTITLE_TEXT -> state;
-      case State.MAYBE_DOCTITLE -> {
+      case _DOCUMENT + _TITLE -> state;
+      case _MAYBE + _DOCUMENT + _TITLE -> {
         if (level == 1) {
           addCode(Code.START_DOCUMENT);
           addCode(Code.START_TITLE);
-          addCode(level); // level
+          addCode(level);
 
           beginIndexText = value;
 
-          yield State.DOCTITLE_TEXT;
+          yield _DOCUMENT + _TITLE;
         } else {
           throw new UnsupportedOperationException("Implement me :: start section?");
         }
       }
-      case State.MAYBE_PREAMBLE -> {
+      case _MAYBE + _PREAMBLE -> {
         addCode(Code.START_PREAMBLE);
 
         beginIndexText = value;
 
         addCode(Code.START_PARAGRAPH);
 
-        yield State.PREAMBLE_PARAGRAPH;
+        yield _PREAMBLE + _PARAGRAPH;
       }
-      case State.PREAMBLE_PARAGRAPH -> state;
+      case _PREAMBLE + _PARAGRAPH -> state;
       default -> throw new UnsupportedOperationException("Implement me :: state=" + state);
     };
   }
