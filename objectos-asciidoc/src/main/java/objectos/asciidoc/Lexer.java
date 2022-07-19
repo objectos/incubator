@@ -66,32 +66,32 @@ class Lexer {
   }
 
   /*
-
+  
   # *strong*
   [:strong, :constrained, /(^|[^#{CC_WORD};:}])(?:#{QuoteAttributeListRxt})?\*(\S|\S#{CC_ALL}*?\S)\*(?!#{CG_WORD})/m],
-
+  
   /\S/ - A non-whitespace character: /[^ \t\r\n\f\v]/
   /\p{Word}/ - A member of one of the following Unicode general category Letter, Mark, Number, Connector_Punctuation
-
+  
   A Unicode character's General Category value can also be matched with \p{Ab} where Ab is the category's abbreviation as described below:
-
+  
   /\p{Ll}/ - 'Letter: Lowercase'
   /\p{Lm}/ - 'Letter: Mark'
   /\p{Lo}/ - 'Letter: Other'
   /\p{Lt}/ - 'Letter: Titlecase'
   /\p{Lu}/ - 'Letter: Uppercase
   /\p{Lo}/ - 'Letter: Other'
-
+  
   /\p{Mn}/ - 'Mark: Nonspacing'
   /\p{Mc}/ - 'Mark: Spacing Combining'
   /\p{Me}/ - 'Mark: Enclosing'
-
+  
   /\p{Nd}/ - 'Number: Decimal Digit'
   /\p{Nl}/ - 'Number: Letter'
   /\p{No}/ - 'Number: Other'
-
+  
   /\p{Pc}/ - 'Punctuation: Connector'
-
+  
    */
 
   final boolean isBigS(char c) {
@@ -159,6 +159,8 @@ class Lexer {
     while (state != State.STOP) {
       state = tokenize(state);
     }
+
+    symbolCounter = 0;
   }
 
   final int[] toSymbol() {
@@ -285,32 +287,32 @@ class Lexer {
   }
 
   /*
-
+  
   # *strong*
   [:strong, :constrained, /(^|[^#{CC_WORD};:}])(?:#{QuoteAttributeListRxt})?\*(\S|\S#{CC_ALL}*?\S)\*(?!#{CG_WORD})/m],
-
+  
   /\S/ - A non-whitespace character: /[^ \t\r\n\f\v]/
   /\p{Word}/ - A member of one of the following Unicode general category Letter, Mark, Number, Connector_Punctuation
-
+  
   A Unicode character's General Category value can also be matched with \p{Ab} where Ab is the category's abbreviation as described below:
-
+  
   /\p{Ll}/ - 'Letter: Lowercase'
   /\p{Lm}/ - 'Letter: Mark'
   /\p{Lo}/ - 'Letter: Other'
   /\p{Lt}/ - 'Letter: Titlecase'
   /\p{Lu}/ - 'Letter: Uppercase
   /\p{Lo}/ - 'Letter: Other'
-
+  
   /\p{Mn}/ - 'Mark: Nonspacing'
   /\p{Mc}/ - 'Mark: Spacing Combining'
   /\p{Me}/ - 'Mark: Enclosing'
-
+  
   /\p{Nd}/ - 'Number: Decimal Digit'
   /\p{Nl}/ - 'Number: Letter'
   /\p{No}/ - 'Number: Other'
-
+  
   /\p{Pc}/ - 'Punctuation: Connector'
-
+  
    */
 
 }

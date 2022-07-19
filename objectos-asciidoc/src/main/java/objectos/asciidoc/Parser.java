@@ -79,6 +79,11 @@ class Parser extends Lexer {
     static final int DOCTITLE_TEXT = 3;
 
     static final int MAYBE_DOCTITLE = 4;
+    static final int MAYBE_DOCMETA = 5;
+    static final int MAYBE_PREAMBLE = 6;
+
+    static final int PREAMBLE_PARAGRAPH = 7;
+    static final int PREAMBLE_PARAGRAPH_NL = 8;
   }
 
   private int beginIndexText = Integer.MAX_VALUE;
@@ -168,6 +173,7 @@ class Parser extends Lexer {
       state = switch (symbol) {
         case Symbol.EOF -> parseEof(value);
         case Symbol.EQUALS -> parseEquals(value);
+        case Symbol.LF -> parseLf(value);
         case Symbol.WORD -> parseWord(value);
         case Symbol.WS -> parseWs(value);
         default -> throw new UnsupportedOperationException("Implement me :: symbol=" + symbol);
@@ -177,6 +183,8 @@ class Parser extends Lexer {
     if (state != State.EOF) {
       throw new UnsupportedOperationException("Implement me :: state=" + state);
     }
+
+    codeCounter = 0;
   }
 
   private int parseEof(int value) {
@@ -185,6 +193,15 @@ class Parser extends Lexer {
         consumeText(value);
 
         addCode(Code.END_TITLE);
+        addCode(Code.END_DOCUMENT);
+
+        yield State.EOF;
+      }
+      case State.PREAMBLE_PARAGRAPH_NL -> {
+        consumeText(value);
+
+        addCode(Code.END_PARAGRAPH);
+        addCode(Code.END_PREAMBLE);
         addCode(Code.END_DOCUMENT);
 
         yield State.EOF;
@@ -204,6 +221,21 @@ class Parser extends Lexer {
     };
   }
 
+  private int parseLf(int value) {
+    return switch (state) {
+      case State.DOCTITLE_TEXT -> {
+        consumeText(value);
+
+        addCode(Code.END_TITLE);
+
+        yield State.MAYBE_DOCMETA;
+      }
+      case State.MAYBE_DOCMETA -> State.MAYBE_PREAMBLE;
+      case State.PREAMBLE_PARAGRAPH -> State.PREAMBLE_PARAGRAPH_NL;
+      default -> throw new UnsupportedOperationException("Implement me :: state=" + state);
+    };
+  }
+
   private int parseWord(int value) {
     return switch (state) {
       case State.DOCTITLE -> {
@@ -212,6 +244,16 @@ class Parser extends Lexer {
         yield State.DOCTITLE_TEXT;
       }
       case State.DOCTITLE_TEXT -> state;
+      case State.MAYBE_PREAMBLE -> {
+        addCode(Code.START_PREAMBLE);
+
+        beginIndexText = value;
+
+        addCode(Code.START_PARAGRAPH);
+
+        yield State.PREAMBLE_PARAGRAPH;
+      }
+      case State.PREAMBLE_PARAGRAPH -> state;
       default -> throw new UnsupportedOperationException("Implement me :: state=" + state);
     };
   }
@@ -230,6 +272,7 @@ class Parser extends Lexer {
           throw new UnsupportedOperationException("Implement me :: start section?");
         }
       }
+      case State.PREAMBLE_PARAGRAPH -> state;
       default -> throw new UnsupportedOperationException("Implement me :: state=" + state);
     };
   }
