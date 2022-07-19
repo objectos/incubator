@@ -290,14 +290,22 @@ class Parser extends Lexer {
       }
       case _MAYBE + _PREAMBLE -> {
         addCode(Code.START_PREAMBLE);
+        addCode(Code.START_PARAGRAPH);
 
         beginIndexText = value;
-
-        addCode(Code.START_PARAGRAPH);
 
         yield _PREAMBLE + _PARAGRAPH;
       }
       case _PREAMBLE + _PARAGRAPH -> state;
+      case _START -> {
+        addCode(Code.START_DOCUMENT);
+        addCode(Code.START_PREAMBLE);
+        addCode(Code.START_PARAGRAPH);
+
+        beginIndexText = value;
+
+        yield _PREAMBLE + _PARAGRAPH;
+      }
       default -> throw new UnsupportedOperationException("Implement me :: state=" + state);
     };
   }

@@ -177,7 +177,7 @@ public class AsciiDocTest {
     );
   }
 
-  @Test(enabled = false, description = //
+  @Test(description = //
   """
   = Document title
 
@@ -190,9 +190,9 @@ public class AsciiDocTest {
       """,
 
       lexer(
-        //        Lexer.Symbol.PARAGRAPH, 0,
-        //        Lexer.Symbol.EOL, 10,
-        //        Lexer.Symbol.EMPTY, 11,
+        Lexer.Symbol.WORD, 0,
+        Lexer.Symbol.WORD, 5,
+        Lexer.Symbol.LF, 10,
         Lexer.Symbol.EOF, 11
       ),
 
