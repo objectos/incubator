@@ -45,6 +45,8 @@ class Parser extends Lexer {
     static final int START_TITLE = -10;
 
     static final int TEXT = -11;
+
+    static final int NL = -12;
   }
 
   // mods
@@ -69,15 +71,11 @@ class Parser extends Lexer {
   private static final int _REGULAR = 1 << 8;
   //private static final int _MONOSPACE = 1 << 9;
 
-  private int beginIndexText = Integer.MAX_VALUE;
-
   private int[] code;
 
   private int codeCounter;
 
   private int codeIndex;
-
-  private int monospace = Integer.MAX_VALUE;
 
   private int state;
 
@@ -109,11 +107,7 @@ class Parser extends Lexer {
       """
     );
 
-    beginIndexText = Integer.MAX_VALUE;
-
     codeIndex = 0;
-
-    monospace = Integer.MAX_VALUE;
 
     state = _START;
 
@@ -138,41 +132,14 @@ class Parser extends Lexer {
     code[codeIndex++] = value;
   }
 
-  private void consumeText(int value) {
-    var endIndex = value;
-
-    if (monospace != Integer.MAX_VALUE) {
-      endIndex = monospace;
-    }
-
-    if (beginIndexText < endIndex) {
-      var s = source(beginIndexText, endIndex);
+  private void addText(int beginIndex, int endIndex) {
+    if (beginIndex < endIndex) {
+      var s = source(beginIndex, endIndex);
 
       addCode(Code.TEXT);
       addCode(strings.size());
 
       strings.add(s);
-
-      beginIndexText = Integer.MAX_VALUE;
-    }
-
-    if (monospace == Integer.MAX_VALUE) {
-      return;
-    }
-
-    monospace++;
-
-    if (monospace < value) {
-      var s = source(monospace, value);
-
-      addCode(Code.START_MONOSPACE);
-      addCode(Code.TEXT);
-      addCode(strings.size());
-      addCode(Code.END_MONOSPACE);
-
-      strings.add(s);
-
-      monospace = Integer.MAX_VALUE;
     }
   }
 
@@ -183,7 +150,8 @@ class Parser extends Lexer {
       state = switch (symbol) {
         case Symbol.EOF -> parseEof(nextSymbol());
         case Symbol.LF -> parseLf(nextSymbol());
-        case Symbol.REGULAR -> parseRegular(nextSymbol());
+        case Symbol.MONOSPACE -> parseMonospace(nextSymbol(), nextSymbol());
+        case Symbol.REGULAR -> parseRegular(nextSymbol(), nextSymbol());
         case Symbol.TITLE -> parseTitle(nextSymbol());
         default -> throw new UnsupportedOperationException("Implement me :: symbol=" + symbol);
       };
@@ -199,19 +167,19 @@ class Parser extends Lexer {
   private int parseEof(int value) {
     switch (state) {
       case _DOCUMENT | _TITLE | _REGULAR -> {
-        consumeText(value);
-
         addCode(Code.END_TITLE);
         addCode(Code.END_DOCUMENT);
       }
+      case _MAYBE | _DOCUMENT | _METADATA -> {
+        addCode(Code.END_DOCUMENT);
+      }
       case _PREAMBLE | _PARAGRAPH | _REGULAR | _MULTILINE -> {
-        consumeText(value);
-
+        addCode(Code.NL);
         addCode(Code.END_PARAGRAPH);
         addCode(Code.END_PREAMBLE);
         addCode(Code.END_DOCUMENT);
       }
-      default -> throw new UnsupportedOperationException("Implement me :: state=" + state);
+      default -> uoe();
     }
 
     return _EOF;
@@ -220,8 +188,6 @@ class Parser extends Lexer {
   private int parseLf(int value) {
     return switch (state) {
       case _DOCUMENT | _TITLE | _REGULAR -> {
-        consumeText(value);
-
         addCode(Code.END_TITLE);
 
         yield _MAYBE | _DOCUMENT | _METADATA;
@@ -232,18 +198,30 @@ class Parser extends Lexer {
     };
   }
 
-  private int parseRegular(int value) {
+  private int parseMonospace(int beginIndex, int endIndex) {
+    return switch (state) {
+      case _DOCUMENT | _TITLE | _REGULAR -> {
+        addCode(Code.START_MONOSPACE);
+        addText(beginIndex, endIndex);
+        addCode(Code.END_MONOSPACE);
+
+        yield _DOCUMENT | _TITLE;
+      }
+      default -> throw new UnsupportedOperationException("Implement me :: state=" + state);
+    };
+  }
+
+  private int parseRegular(int beginIndex, int endIndex) {
     return switch (state) {
       case _DOCUMENT | _TITLE -> {
-        beginIndexText = value;
+        addText(beginIndex, endIndex);
 
         yield _DOCUMENT | _TITLE | _REGULAR;
       }
       case _MAYBE | _PREAMBLE -> {
-        beginIndexText = value;
-
         addCode(Code.START_PREAMBLE);
         addCode(Code.START_PARAGRAPH);
+        addText(beginIndex, endIndex);
 
         yield _PREAMBLE | _PARAGRAPH | _REGULAR;
       }
@@ -268,6 +246,11 @@ class Parser extends Lexer {
       }
       default -> throw new UnsupportedOperationException("Implement me :: state=" + state);
     };
+  }
+
+  private int uoe() {
+    throw new UnsupportedOperationException(
+      "Implement me :: state=" + Integer.toBinaryString(state));
   }
 
 }

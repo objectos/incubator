@@ -51,7 +51,7 @@ public class AsciiDocTest {
 
       lexer(
         Lexer.Symbol.TITLE, 1,
-        Lexer.Symbol.REGULAR, 2,
+        Lexer.Symbol.REGULAR, 2, 14,
         Lexer.Symbol.EOF, 14
       ),
 
@@ -92,10 +92,10 @@ public class AsciiDocTest {
 
       lexer(
         Lexer.Symbol.TITLE, 1,
-        Lexer.Symbol.REGULAR, 2,
+        Lexer.Symbol.REGULAR, 2, 15,
         Lexer.Symbol.LF, 15,
         Lexer.Symbol.LF, 16,
-        Lexer.Symbol.REGULAR, 17,
+        Lexer.Symbol.REGULAR, 17, 30,
         Lexer.Symbol.LF, 30,
         Lexer.Symbol.EOF, 31
       ),
@@ -108,6 +108,7 @@ public class AsciiDocTest {
         Parser.Code.START_PREAMBLE,
         Parser.Code.START_PARAGRAPH,
         Parser.Code.TEXT, 1,
+        Parser.Code.NL,
         Parser.Code.END_PARAGRAPH,
         Parser.Code.END_PREAMBLE,
         Parser.Code.END_DOCUMENT
@@ -126,7 +127,7 @@ public class AsciiDocTest {
     );
   }
 
-  @Test(enabled = false, description = //
+  @Test(description = //
   """
   = Document title
 
@@ -141,9 +142,9 @@ public class AsciiDocTest {
 
       lexer(
         Lexer.Symbol.TITLE, 1,
-        Lexer.Symbol.REGULAR, 2,
-        Lexer.Symbol.MONOSPACE, 6, 10,
-        Lexer.Symbol.REGULAR, 11,
+        Lexer.Symbol.REGULAR, 2, 6,
+        Lexer.Symbol.MONOSPACE, 7, 10,
+        Lexer.Symbol.REGULAR, 11, 17,
         Lexer.Symbol.LF, 17,
         Lexer.Symbol.EOF, 18
       ),

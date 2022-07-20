@@ -31,6 +31,8 @@ public class AsciiDoc extends Parser {
 
     void endTitle();
 
+    void newLine();
+
     void startDocument();
 
     void startMonospace();
@@ -101,6 +103,8 @@ public class AsciiDoc extends Parser {
 
           processor.text(string(index));
         }
+
+        case Code.NL -> processor.newLine();
 
         default -> throw new UnsupportedOperationException("Implement me :: code=" + code);
       }

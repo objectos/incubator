@@ -46,8 +46,10 @@ class Lexer {
 
   // token
 
-  private static final int _REGULAR = 1 << 3;
   private static final int _TITLE = 1 << 4;
+  private static final int _REGULAR = 1 << 5;
+  private static final int _MONOSPACE = 1 << 6;
+  private static final int _C_MONOSPACE_START = 1 << 7;
 
   private String source;
 
@@ -64,6 +66,8 @@ class Lexer {
   private int beginIndex;
 
   private int maybeTitleLevel;
+
+  private int monospaceIndex;
 
   Lexer() {
     symbol = new int[512];
@@ -150,15 +154,29 @@ class Lexer {
     return Arrays.copyOf(symbol, symbolIndex);
   }
 
-  private void addSymbol(int value) {
-    symbol = IntArrays.copyIfNecessary(symbol, symbolIndex);
+  private void add(int s0, int s1) {
+    symbol = IntArrays.copyIfNecessary(symbol, symbolIndex + 1);
 
-    symbol[symbolIndex++] = value;
+    symbol[symbolIndex++] = s0;
+    symbol[symbolIndex++] = s1;
   }
 
-  private void addTwo(int symbol, int position) {
-    addSymbol(symbol);
-    addSymbol(position);
+  private void add(int s0, int s1, int s2) {
+    symbol = IntArrays.copyIfNecessary(symbol, symbolIndex + 2);
+
+    symbol[symbolIndex++] = s0;
+    symbol[symbolIndex++] = s1;
+    symbol[symbolIndex++] = s2;
+  }
+
+  private void add(int s0, int s1, int s2, int s3, int s4) {
+    symbol = IntArrays.copyIfNecessary(symbol, symbolIndex + 4);
+
+    symbol[symbolIndex++] = s0;
+    symbol[symbolIndex++] = s1;
+    symbol[symbolIndex++] = s2;
+    symbol[symbolIndex++] = s3;
+    symbol[symbolIndex++] = s4;
   }
 
   private int advance(int state) {
@@ -173,9 +191,7 @@ class Lexer {
 
   private int state(int state) {
     if (!hasChar()) {
-      addTwo(Symbol.EOF, sourceIndex);
-
-      return _EOF;
+      return tokenizeEof();
     }
 
     return switch (state) {
@@ -185,85 +201,140 @@ class Lexer {
         yield switch (peek()) {
           case '\t', '\u000b', '\f', ' ' -> advance(_WS);
           case '\n' -> {
-            addTwo(Symbol.LF, sourceIndex);
+            add(Symbol.LF, sourceIndex);
 
             yield advance(_LSTART);
           }
           case '=' -> advance(_MAYBE | _TITLE);
-          default -> {
-            addTwo(Symbol.REGULAR, sourceIndex);
-
-            yield advance(_REGULAR);
-          }
-        };
-      }
-
-      case _MAYBE | _TITLE -> {
-        yield switch (peek()) {
-          case '\t', '\u000b', '\f', ' ' -> {
-            maybeTitleLevel = sourceIndex - beginIndex;
-
-            yield advance(_MAYBE | _TITLE | _WS);
-          }
-          case '\n' -> {
-            addTwo(Symbol.REGULAR, beginIndex);
-            addTwo(Symbol.LF, sourceIndex);
-
-            yield advance(_LSTART);
-          }
-          case '=' -> advance(state);
-          default -> {
-            addTwo(Symbol.REGULAR, beginIndex);
-
-            yield advance(_REGULAR);
-          }
-        };
-      }
-
-      case _MAYBE | _TITLE | _WS -> {
-        yield switch (peek()) {
-          case '\t', '\u000b', '\f', ' ' -> advance(state);
-          case '\n' -> {
-            addTwo(Symbol.REGULAR, beginIndex);
-            addTwo(Symbol.LF, sourceIndex);
-
-            yield advance(_LSTART);
-          }
-          default -> {
-            addTwo(Symbol.TITLE, maybeTitleLevel);
-            addTwo(Symbol.REGULAR, sourceIndex);
-
-            yield advance(_REGULAR);
-          }
-        };
-      }
-
-      case _REGULAR -> {
-        yield switch (peek()) {
-          case '\t', '\u000b', '\f', ' ' -> advance(_REGULAR | _WS);
-          case '\n' -> {
-            addTwo(Symbol.LF, sourceIndex);
-
-            yield advance(_LSTART);
-          }
-          default -> advance(state);
-        };
-      }
-
-      case _REGULAR | _WS -> {
-        yield switch (peek()) {
-          case '\t', '\u000b', '\f', ' ' -> advance(state);
-          case '\n' -> {
-            addTwo(Symbol.LF, sourceIndex);
-
-            yield advance(_LSTART);
-          }
           default -> advance(_REGULAR);
         };
       }
+      case _MAYBE | _REGULAR -> switch (peek()) {
+        case '\t', '\u000b', '\f', ' ' -> advance(state);
+        case '\n' -> {
+          add(Symbol.LF, sourceIndex);
+
+          yield advance(_LSTART);
+        }
+        default -> {
+          beginIndex = sourceIndex - 1;
+
+          yield advance(_REGULAR);
+        }
+      };
+
+      case _REGULAR -> switch (peek()) {
+        case '\t', '\u000b', '\f', ' ' -> advance(_REGULAR | _WS);
+        case '\n' -> {
+          add(
+            Symbol.REGULAR, beginIndex, sourceIndex,
+            Symbol.LF, sourceIndex
+          );
+
+          yield advance(_LSTART);
+        }
+        default -> advance(state);
+      };
+
+      case _REGULAR | _MAYBE | _MONOSPACE -> switch (peek()) {
+        case '\t', '\u000b', '\f', ' ' -> {
+          add(Symbol.REGULAR, beginIndex, monospaceIndex);
+          add(Symbol.MONOSPACE, monospaceIndex + 1, sourceIndex - 1);
+
+          yield advance(_MAYBE | _REGULAR);
+        }
+        case '\n' -> {
+          add(Symbol.LF, sourceIndex);
+
+          yield advance(_LSTART);
+        }
+        default -> advance(_REGULAR | _C_MONOSPACE_START);
+      };
+
+      case _REGULAR | _C_MONOSPACE_START -> switch (peek()) {
+        case '\n' -> {
+          add(
+            Symbol.REGULAR, beginIndex, sourceIndex,
+            Symbol.LF, sourceIndex
+          );
+
+          yield advance(_LSTART);
+        }
+        case '`' -> advance(_REGULAR | _MAYBE | _MONOSPACE);
+        default -> advance(state);
+      };
+
+      case _REGULAR | _MAYBE | _C_MONOSPACE_START -> switch (peek()) {
+        case '\t', '\u000b', '\f', ' ' -> advance(_REGULAR | _WS);
+        default -> {
+          monospaceIndex = sourceIndex - 1;
+
+          yield advance(_REGULAR | _C_MONOSPACE_START);
+        }
+      };
+
+      case _REGULAR | _WS -> switch (peek()) {
+        case '\t', '\u000b', '\f', ' ' -> advance(state);
+        case '\n' -> {
+          add(Symbol.LF, sourceIndex);
+
+          yield advance(_LSTART);
+        }
+        case '`' -> advance(_REGULAR | _MAYBE | _C_MONOSPACE_START);
+        default -> advance(_REGULAR);
+      };
+
+      case _MAYBE | _TITLE -> switch (peek()) {
+        case '\t', '\u000b', '\f', ' ' -> {
+          maybeTitleLevel = sourceIndex - beginIndex;
+
+          yield advance(_MAYBE | _TITLE | _WS);
+        }
+        case '\n' -> {
+          add(
+            Symbol.REGULAR, beginIndex, sourceIndex,
+            Symbol.LF, sourceIndex
+          );
+
+          yield advance(_LSTART);
+        }
+        case '=' -> advance(state);
+        default -> advance(_REGULAR);
+      };
+
+      case _MAYBE | _TITLE | _WS -> switch (peek()) {
+        case '\t', '\u000b', '\f', ' ' -> advance(state);
+        case '\n' -> {
+          add(
+            Symbol.REGULAR, beginIndex, sourceIndex,
+            Symbol.LF, sourceIndex
+          );
+
+          yield advance(_LSTART);
+        }
+        default -> {
+          add(Symbol.TITLE, maybeTitleLevel);
+
+          beginIndex = sourceIndex;
+
+          yield advance(_REGULAR);
+        }
+      };
 
       default -> throw new UnsupportedOperationException("Implement me :: state=" + state);
     };
+  }
+
+  private int tokenizeEof() {
+    switch (state) {
+      case _LSTART -> { /* noop */ }
+      case _REGULAR -> add(Symbol.REGULAR, beginIndex, sourceIndex);
+      default -> throw new UnsupportedOperationException("Implement me :: state=" + state);
+    }
+
+    add(Symbol.EOF, sourceIndex);
+
+    return _EOF;
   }
 
   /*

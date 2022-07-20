@@ -65,6 +65,11 @@ class ThisProcessor implements AsciiDoc.Processor {
   }
 
   @Override
+  public final void newLine() {
+    sb.append('\n');
+  }
+
+  @Override
   public final void startDocument() {
     level = 0;
 
