@@ -22,30 +22,30 @@ import objectos.util.IntArrays;
 class Lexer {
 
   class Symbol {
-    static final int BACKTICK = -1;
+    static final int EOF = -1;
 
-    static final int EOF = -2;
+    static final int LF = -2;
 
-    static final int EQUALS = -3;
+    static final int MONOSPACE = -3;
 
-    static final int LF = -4;
+    static final int REGULAR = -4;
 
-    static final int WORD = -5;
+    static final int TITLE = -5;
   }
 
-  private static class State {
-    static final int STOP = 0;
+  private static final int _EOF = 0;
 
-    static final int EQUALS = 1;
+  private static final int _LINE_FIRST = 1;
 
-    static final int LINE = 2;
+  private static final int _MAYBE_START_MONOSPACE = 2;
 
-    static final int START_LINE = 3;
+  private static final int _MAYBE_TITLE0 = 3;
 
-    static final int WORD = 4;
+  private static final int _MAYBE_TITLE1 = 4;
 
-    static final int WS = 5;
-  }
+  private static final int _WORD = 5;
+
+  private static final int _WS = 6;
 
   private String source;
 
@@ -59,7 +59,9 @@ class Lexer {
 
   private int symbolIndex;
 
-  private int startLine;
+  private int beginIndex;
+
+  private int maybeTitleLevel;
 
   Lexer() {
     symbol = new int[512];
@@ -68,35 +70,6 @@ class Lexer {
   final boolean hasSymbol() {
     return symbolCounter < symbolIndex;
   }
-
-  /*
-
-  # *strong*
-  [:strong, :constrained, /(^|[^#{CC_WORD};:}])(?:#{QuoteAttributeListRxt})?\*(\S|\S#{CC_ALL}*?\S)\*(?!#{CG_WORD})/m],
-
-  /\S/ - A non-whitespace character: /[^ \t\r\n\f\v]/
-  /\p{Word}/ - A member of one of the following Unicode general category Letter, Mark, Number, Connector_Punctuation
-
-  A Unicode character's General Category value can also be matched with \p{Ab} where Ab is the category's abbreviation as described below:
-
-  /\p{Ll}/ - 'Letter: Lowercase'
-  /\p{Lm}/ - 'Letter: Mark'
-  /\p{Lo}/ - 'Letter: Other'
-  /\p{Lt}/ - 'Letter: Titlecase'
-  /\p{Lu}/ - 'Letter: Uppercase
-  /\p{Lo}/ - 'Letter: Other'
-
-  /\p{Mn}/ - 'Mark: Nonspacing'
-  /\p{Mc}/ - 'Mark: Spacing Combining'
-  /\p{Me}/ - 'Mark: Enclosing'
-
-  /\p{Nd}/ - 'Number: Decimal Digit'
-  /\p{Nl}/ - 'Number: Letter'
-  /\p{No}/ - 'Number: Other'
-
-  /\p{Pc}/ - 'Punctuation: Connector'
-
-   */
 
   final boolean isBigS(char c) {
     return switch (c) {
@@ -145,7 +118,7 @@ class Lexer {
 
   final void tokenize(String source) {
     Check.state(
-      state == State.STOP,
+      state == _EOF,
 
       """
       Concurrent lexical analysis is not supported.
@@ -162,10 +135,10 @@ class Lexer {
 
     symbolIndex = 0;
 
-    state = State.START_LINE;
+    state = _LINE_FIRST;
 
-    while (state != State.STOP) {
-      state = tokenize(state);
+    while (state != _EOF) {
+      state = state(state);
     }
 
     symbolCounter = 0;
@@ -192,117 +165,126 @@ class Lexer {
     addSymbol(sourceIndex);
   }
 
-  private int consumeBacktick() {
-    atChar(Symbol.BACKTICK);
-
-    return advance(State.LINE);
-  }
-
   private int consumeLf() {
     atChar(Symbol.LF);
 
-    return advance(State.START_LINE);
-  }
-
-  private int consumeWord() {
-    atChar(Symbol.WORD);
-
-    return advance(State.WORD);
+    return advance(_LINE_FIRST);
   }
 
   private int consumeWs() {
-    return advance(State.WS);
+    return advance(_WS);
   }
 
   private boolean hasChar() { return sourceIndex < source.length(); }
 
   private char peek() { return source.charAt(sourceIndex); }
 
-  private int tokenize(int state) {
+  private int state(int state) {
     if (!hasChar()) {
       return tokenizeEof();
     }
 
     return switch (state) {
-      case State.EQUALS -> tokenizeEquals();
-      case State.LINE -> tokenizeLine();
-      case State.START_LINE -> tokenizeStartLine();
-      case State.WORD -> tokenizeWord();
-      case State.WS -> tokenizeWs();
+      case _LINE_FIRST -> stateLineFirst();
+      case _MAYBE_TITLE0 -> stateMaybeTitle0();
+      case _MAYBE_TITLE1 -> stateMaybeTitle1();
+      case _WORD -> stateWord();
+      case _WS -> stateWs();
       default -> throw new UnsupportedOperationException("Implement me :: state=" + state);
+    };
+  }
+
+  private int stateLineFirst() {
+    beginIndex = sourceIndex;
+
+    return switch (peek()) {
+      case '\t', '\u000b', '\f', ' ' -> consumeWs();
+      case '\n' -> consumeLf();
+      case '=' -> advance(_MAYBE_TITLE0);
+      default -> tokenizeFirstChar();
+    };
+  }
+
+  private int stateMaybeTitle0() {
+    return switch (peek()) {
+      case '\t', '\u000b', '\f', ' ' -> {
+        maybeTitleLevel = sourceIndex - beginIndex;
+
+        yield advance(_MAYBE_TITLE1);
+      }
+      case '\n' -> tokenizeRegularLf();
+      case '=' -> advance(state);
+      default -> tokenizeFirstChar();
+    };
+  }
+
+  private int stateMaybeTitle1() {
+    return switch (peek()) {
+      case '\t', '\u000b', '\f', ' ' -> advance(_MAYBE_TITLE1);
+      case '\n' -> tokenizeRegularLf();
+      default -> {
+        addSymbol(Symbol.TITLE);
+        addSymbol(maybeTitleLevel);
+
+        yield tokenizeFirstChar();
+      }
+    };
+  }
+
+  private int stateWord() {
+    return switch (peek()) {
+      case '\t', '\u000b', '\f', ' ' -> advance(_WS);
+      case '\n' -> tokenizeLf();
+      default -> advance(_WORD);
+    };
+  }
+
+  private int stateWs() {
+    return switch (peek()) {
+      case '\t', '\u000b', '\f', ' ' -> advance(state);
+      case '\n' -> tokenizeLf();
+      case '`' -> advance(_MAYBE_START_MONOSPACE);
+      default -> tokenizeNextChar();
     };
   }
 
   private int tokenizeEof() {
     atChar(Symbol.EOF);
 
-    return State.STOP;
+    return _EOF;
   }
 
-  private int tokenizeEquals() {
+  private int tokenizeFirstChar() {
     return switch (peek()) {
-      case '\t', '\u000b', '\f', ' ' -> {
-        for (int i = startLine; i < sourceIndex; i++) {
-          addSymbol(Symbol.EQUALS);
-          addSymbol(i);
-        }
-
-        yield advance(State.WS);
-      }
-      case '\n' -> {
-        addSymbol(Symbol.WORD);
-        addSymbol(startLine);
-
-        yield consumeLf();
-      }
-      case '=' -> advance(State.EQUALS);
-      case '`' -> consumeBacktick();
+      case '`' -> advance(_MAYBE_START_MONOSPACE);
       default -> {
-        addSymbol(Symbol.WORD);
-        addSymbol(startLine);
+        addSymbol(Symbol.REGULAR);
+        addSymbol(sourceIndex);
 
-        yield advance(State.WORD);
+        yield advance(_WORD);
       }
     };
   }
 
-  private int tokenizeLine() {
+  private int tokenizeLf() {
+    addSymbol(Symbol.LF);
+    addSymbol(sourceIndex);
+
+    return advance(_LINE_FIRST);
+  }
+
+  private int tokenizeNextChar() {
     return switch (peek()) {
-      case '\t', '\u000b', '\f', ' ' -> consumeWs();
-      case '\n' -> consumeLf();
-      case '`' -> consumeBacktick();
-      default -> consumeWord();
+      case '`' -> advance(_MAYBE_START_MONOSPACE);
+      default -> advance(_WORD);
     };
   }
 
-  private int tokenizeStartLine() {
-    startLine = sourceIndex;
+  private int tokenizeRegularLf() {
+    addSymbol(Symbol.REGULAR);
+    addSymbol(beginIndex);
 
-    return switch (peek()) {
-      case '\t', '\u000b', '\f', ' ' -> consumeWs();
-      case '\n' -> consumeLf();
-      case '=' -> advance(State.EQUALS);
-      case '`' -> consumeBacktick();
-      default -> consumeWord();
-    };
-  }
-
-  private int tokenizeWord() {
-    return switch (peek()) {
-      case '\t', '\u000b', '\f', ' ' -> consumeWs();
-      case '\n' -> consumeLf();
-      case '`' -> consumeBacktick();
-      default -> advance(State.WORD);
-    };
-  }
-
-  private int tokenizeWs() {
-    return switch (peek()) {
-      case '\t', '\u000b', '\f', ' ' -> advance(State.WS);
-      case '\n' -> consumeLf();
-      case '`' -> consumeBacktick();
-      default -> consumeWord();
-    };
+    return tokenizeLf();
   }
 
   /*
