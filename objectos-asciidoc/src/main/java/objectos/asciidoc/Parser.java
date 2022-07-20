@@ -217,6 +217,14 @@ class Parser extends Lexer {
 
   private int parseRegular(int beginIndex, int endIndex) {
     return switch (state) {
+      case _START -> {
+        addCode(Code.START_DOCUMENT);
+        addCode(Code.START_PREAMBLE);
+        addCode(Code.START_PARAGRAPH);
+        addText(beginIndex, endIndex);
+
+        yield _PREAMBLE | _PARAGRAPH | _REGULAR;
+      }
       case _DOCUMENT | _TITLE -> {
         addText(beginIndex, endIndex);
 
@@ -229,7 +237,7 @@ class Parser extends Lexer {
 
         yield _PREAMBLE | _PARAGRAPH | _REGULAR;
       }
-      default -> throw new UnsupportedOperationException("Implement me :: state=" + state);
+      default -> uoe();
     };
   }
 

@@ -212,9 +212,9 @@ public class AsciiDocTest {
     );
   }
 
-  @Test(enabled = false, description = //
+  @Test(description = //
   """
-  = Document title
+  (not) doctitle
 
   - not a title (no space after symbol '=')
   """)
@@ -225,8 +225,7 @@ public class AsciiDocTest {
       """,
 
       lexer(
-        //        Lexer.Symbol.WORD, 0,
-        //        Lexer.Symbol.WORD, 5,
+        Lexer.Symbol.REGULAR, 0, 10,
         Lexer.Symbol.LF, 10,
         Lexer.Symbol.EOF, 11
       ),
@@ -236,6 +235,7 @@ public class AsciiDocTest {
         Parser.Code.START_PREAMBLE,
         Parser.Code.START_PARAGRAPH,
         Parser.Code.TEXT, 0,
+        Parser.Code.NL,
         Parser.Code.END_PARAGRAPH,
         Parser.Code.END_PREAMBLE,
         Parser.Code.END_DOCUMENT
