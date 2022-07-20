@@ -37,7 +37,7 @@ public class AsciidoctorTest extends AsciiDocTest {
         .build();
   }
 
-  @Test
+  @Test(enabled = false)
   public void _enableCodeMinings() {
   }
 

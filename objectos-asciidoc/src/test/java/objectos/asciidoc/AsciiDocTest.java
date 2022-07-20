@@ -39,7 +39,7 @@ public class AsciiDocTest {
 
   @Test(description = //
   """
-  = Document title
+  doctitle
 
   - happy path
   - title ends @ eof
@@ -76,7 +76,7 @@ public class AsciiDocTest {
 
   @Test(description = //
   """
-  = Document title
+  doctitle
 
   - happy path
   - title ends @ NL
@@ -129,9 +129,9 @@ public class AsciiDocTest {
 
   @Test(description = //
   """
-  = Document title
+  doctitle + monospace
 
-  - title has inline element (code)
+  - title has inline element (monospace)
   - title ends @ NL
   """)
   public final void testCase03() {
@@ -164,6 +164,45 @@ public class AsciiDocTest {
       """
       <div id="header">
       <h1>The <code>Foo</code> class</h1>
+      </div>
+      <div id="content">
+
+      </div>
+      </div>
+      """
+    );
+  }
+
+  @Test(description = //
+  """
+  doctitle + monospace
+
+  - title has inline element (monospace)
+  - inline elements starts the title
+  - title ends @ NL
+  """)
+  public final void testCase04() {
+    test("= `A`",
+
+      lexer(
+        Lexer.Symbol.TITLE, 1,
+        Lexer.Symbol.MONOSPACE, 3, 4,
+        Lexer.Symbol.EOF, 5
+      ),
+
+      parser(
+        Parser.Code.START_DOCUMENT,
+        Parser.Code.START_TITLE, 1,
+        Parser.Code.START_MONOSPACE,
+        Parser.Code.TEXT, 0,
+        Parser.Code.END_MONOSPACE,
+        Parser.Code.END_TITLE,
+        Parser.Code.END_DOCUMENT
+      ),
+
+      """
+      <div id="header">
+      <h1><code>A</code></h1>
       </div>
       <div id="content">
 

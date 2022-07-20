@@ -166,7 +166,9 @@ class Parser extends Lexer {
 
   private int parseEof(int value) {
     switch (state) {
-      case _DOCUMENT | _TITLE | _REGULAR -> {
+      case //
+          _DOCUMENT | _TITLE, //
+          _DOCUMENT | _TITLE | _REGULAR -> {
         addCode(Code.END_TITLE);
         addCode(Code.END_DOCUMENT);
       }
@@ -200,14 +202,16 @@ class Parser extends Lexer {
 
   private int parseMonospace(int beginIndex, int endIndex) {
     return switch (state) {
-      case _DOCUMENT | _TITLE | _REGULAR -> {
+      case //
+          _DOCUMENT | _TITLE, //
+          _DOCUMENT | _TITLE | _REGULAR -> {
         addCode(Code.START_MONOSPACE);
         addText(beginIndex, endIndex);
         addCode(Code.END_MONOSPACE);
 
         yield _DOCUMENT | _TITLE;
       }
-      default -> throw new UnsupportedOperationException("Implement me :: state=" + state);
+      default -> uoe();
     };
   }
 

@@ -209,6 +209,34 @@ class Lexer {
           default -> advance(_REGULAR);
         };
       }
+
+      case _MAYBE | _C_MONOSPACE_START -> switch (peek()) {
+        case '\n' -> {
+          add(
+            Symbol.REGULAR, beginIndex, sourceIndex,
+            Symbol.LF, sourceIndex
+          );
+
+          yield advance(_LSTART);
+        }
+        case '`' -> advance(_MAYBE | _MONOSPACE);
+        default -> advance(state);
+      };
+
+      case _MAYBE | _MONOSPACE -> switch (peek()) {
+        case '\t', '\u000b', '\f', ' ' -> {
+          add(Symbol.MONOSPACE, monospaceIndex + 1, sourceIndex - 1);
+
+          yield advance(_MAYBE | _REGULAR);
+        }
+        case '\n' -> {
+          add(Symbol.LF, sourceIndex);
+
+          yield advance(_LSTART);
+        }
+        default -> advance(_C_MONOSPACE_START);
+      };
+
       case _MAYBE | _REGULAR -> switch (peek()) {
         case '\t', '\u000b', '\f', ' ' -> advance(state);
         case '\n' -> {
@@ -312,6 +340,13 @@ class Lexer {
 
           yield advance(_LSTART);
         }
+        case '`' -> {
+          add(Symbol.TITLE, maybeTitleLevel);
+
+          monospaceIndex = sourceIndex;
+
+          yield advance(_MAYBE | _C_MONOSPACE_START);
+        }
         default -> {
           add(Symbol.TITLE, maybeTitleLevel);
 
@@ -321,15 +356,18 @@ class Lexer {
         }
       };
 
-      default -> throw new UnsupportedOperationException("Implement me :: state=" + state);
+      default -> throw new UnsupportedOperationException(
+        "Implement me :: state=" + Integer.toBinaryString(state));
     };
   }
 
   private int tokenizeEof() {
     switch (state) {
       case _LSTART -> { /* noop */ }
+      case _MAYBE | _MONOSPACE -> add(Symbol.MONOSPACE, monospaceIndex + 1, sourceIndex - 1);
       case _REGULAR -> add(Symbol.REGULAR, beginIndex, sourceIndex);
-      default -> throw new UnsupportedOperationException("Implement me :: state=" + state);
+      default -> throw new UnsupportedOperationException(
+        "Implement me :: state=" + Integer.toBinaryString(state));
     }
 
     add(Symbol.EOF, sourceIndex);
@@ -338,32 +376,32 @@ class Lexer {
   }
 
   /*
-
+  
   # *strong*
   [:strong, :constrained, /(^|[^#{CC_WORD};:}])(?:#{QuoteAttributeListRxt})?\*(\S|\S#{CC_ALL}*?\S)\*(?!#{CG_WORD})/m],
-
+  
   /\S/ - A non-whitespace character: /[^ \t\r\n\f\v]/
   /\p{Word}/ - A member of one of the following Unicode general category Letter, Mark, Number, Connector_Punctuation
-
+  
   A Unicode character's General Category value can also be matched with \p{Ab} where Ab is the category's abbreviation as described below:
-
+  
   /\p{Ll}/ - 'Letter: Lowercase'
   /\p{Lm}/ - 'Letter: Mark'
   /\p{Lo}/ - 'Letter: Other'
   /\p{Lt}/ - 'Letter: Titlecase'
   /\p{Lu}/ - 'Letter: Uppercase
   /\p{Lo}/ - 'Letter: Other'
-
+  
   /\p{Mn}/ - 'Mark: Nonspacing'
   /\p{Mc}/ - 'Mark: Spacing Combining'
   /\p{Me}/ - 'Mark: Enclosing'
-
+  
   /\p{Nd}/ - 'Number: Decimal Digit'
   /\p{Nl}/ - 'Number: Letter'
   /\p{No}/ - 'Number: Other'
-
+  
   /\p{Pc}/ - 'Punctuation: Connector'
-
+  
    */
 
 }
