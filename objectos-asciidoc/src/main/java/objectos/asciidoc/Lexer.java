@@ -35,17 +35,19 @@ class Lexer {
 
   private static final int _EOF = 0;
 
-  private static final int _LINE_FIRST = 1;
+  // mods
 
-  private static final int _MAYBE_START_MONOSPACE = 2;
+  private static final int _MAYBE = 1 << 0;
+  private static final int _WS = 1 << 1;
 
-  private static final int _MAYBE_TITLE0 = 3;
+  // ctx
 
-  private static final int _MAYBE_TITLE1 = 4;
+  private static final int _LSTART = 1 << 2;
 
-  private static final int _WORD = 5;
+  // token
 
-  private static final int _WS = 6;
+  private static final int _REGULAR = 1 << 3;
+  private static final int _TITLE = 1 << 4;
 
   private String source;
 
@@ -135,7 +137,7 @@ class Lexer {
 
     symbolIndex = 0;
 
-    state = _LINE_FIRST;
+    state = _LSTART;
 
     while (state != _EOF) {
       state = state(state);
@@ -154,25 +156,15 @@ class Lexer {
     symbol[symbolIndex++] = value;
   }
 
+  private void addTwo(int symbol, int position) {
+    addSymbol(symbol);
+    addSymbol(position);
+  }
+
   private int advance(int state) {
     sourceIndex++;
 
     return state;
-  }
-
-  private void atChar(int symbol) {
-    addSymbol(symbol);
-    addSymbol(sourceIndex);
-  }
-
-  private int consumeLf() {
-    atChar(Symbol.LF);
-
-    return advance(_LINE_FIRST);
-  }
-
-  private int consumeWs() {
-    return advance(_WS);
   }
 
   private boolean hasChar() { return sourceIndex < source.length(); }
@@ -181,110 +173,97 @@ class Lexer {
 
   private int state(int state) {
     if (!hasChar()) {
-      return tokenizeEof();
+      addTwo(Symbol.EOF, sourceIndex);
+
+      return _EOF;
     }
 
     return switch (state) {
-      case _LINE_FIRST -> stateLineFirst();
-      case _MAYBE_TITLE0 -> stateMaybeTitle0();
-      case _MAYBE_TITLE1 -> stateMaybeTitle1();
-      case _WORD -> stateWord();
-      case _WS -> stateWs();
+      case _LSTART -> {
+        beginIndex = sourceIndex;
+
+        yield switch (peek()) {
+          case '\t', '\u000b', '\f', ' ' -> advance(_WS);
+          case '\n' -> {
+            addTwo(Symbol.LF, sourceIndex);
+
+            yield advance(_LSTART);
+          }
+          case '=' -> advance(_MAYBE | _TITLE);
+          default -> {
+            addTwo(Symbol.REGULAR, sourceIndex);
+
+            yield advance(_REGULAR);
+          }
+        };
+      }
+
+      case _MAYBE | _TITLE -> {
+        yield switch (peek()) {
+          case '\t', '\u000b', '\f', ' ' -> {
+            maybeTitleLevel = sourceIndex - beginIndex;
+
+            yield advance(_MAYBE | _TITLE | _WS);
+          }
+          case '\n' -> {
+            addTwo(Symbol.REGULAR, beginIndex);
+            addTwo(Symbol.LF, sourceIndex);
+
+            yield advance(_LSTART);
+          }
+          case '=' -> advance(state);
+          default -> {
+            addTwo(Symbol.REGULAR, beginIndex);
+
+            yield advance(_REGULAR);
+          }
+        };
+      }
+
+      case _MAYBE | _TITLE | _WS -> {
+        yield switch (peek()) {
+          case '\t', '\u000b', '\f', ' ' -> advance(state);
+          case '\n' -> {
+            addTwo(Symbol.REGULAR, beginIndex);
+            addTwo(Symbol.LF, sourceIndex);
+
+            yield advance(_LSTART);
+          }
+          default -> {
+            addTwo(Symbol.TITLE, maybeTitleLevel);
+            addTwo(Symbol.REGULAR, sourceIndex);
+
+            yield advance(_REGULAR);
+          }
+        };
+      }
+
+      case _REGULAR -> {
+        yield switch (peek()) {
+          case '\t', '\u000b', '\f', ' ' -> advance(_REGULAR | _WS);
+          case '\n' -> {
+            addTwo(Symbol.LF, sourceIndex);
+
+            yield advance(_LSTART);
+          }
+          default -> advance(state);
+        };
+      }
+
+      case _REGULAR | _WS -> {
+        yield switch (peek()) {
+          case '\t', '\u000b', '\f', ' ' -> advance(state);
+          case '\n' -> {
+            addTwo(Symbol.LF, sourceIndex);
+
+            yield advance(_LSTART);
+          }
+          default -> advance(_REGULAR);
+        };
+      }
+
       default -> throw new UnsupportedOperationException("Implement me :: state=" + state);
     };
-  }
-
-  private int stateLineFirst() {
-    beginIndex = sourceIndex;
-
-    return switch (peek()) {
-      case '\t', '\u000b', '\f', ' ' -> consumeWs();
-      case '\n' -> consumeLf();
-      case '=' -> advance(_MAYBE_TITLE0);
-      default -> tokenizeFirstChar();
-    };
-  }
-
-  private int stateMaybeTitle0() {
-    return switch (peek()) {
-      case '\t', '\u000b', '\f', ' ' -> {
-        maybeTitleLevel = sourceIndex - beginIndex;
-
-        yield advance(_MAYBE_TITLE1);
-      }
-      case '\n' -> tokenizeRegularLf();
-      case '=' -> advance(state);
-      default -> tokenizeFirstChar();
-    };
-  }
-
-  private int stateMaybeTitle1() {
-    return switch (peek()) {
-      case '\t', '\u000b', '\f', ' ' -> advance(_MAYBE_TITLE1);
-      case '\n' -> tokenizeRegularLf();
-      default -> {
-        addSymbol(Symbol.TITLE);
-        addSymbol(maybeTitleLevel);
-
-        yield tokenizeFirstChar();
-      }
-    };
-  }
-
-  private int stateWord() {
-    return switch (peek()) {
-      case '\t', '\u000b', '\f', ' ' -> advance(_WS);
-      case '\n' -> tokenizeLf();
-      default -> advance(_WORD);
-    };
-  }
-
-  private int stateWs() {
-    return switch (peek()) {
-      case '\t', '\u000b', '\f', ' ' -> advance(state);
-      case '\n' -> tokenizeLf();
-      case '`' -> advance(_MAYBE_START_MONOSPACE);
-      default -> tokenizeNextChar();
-    };
-  }
-
-  private int tokenizeEof() {
-    atChar(Symbol.EOF);
-
-    return _EOF;
-  }
-
-  private int tokenizeFirstChar() {
-    return switch (peek()) {
-      case '`' -> advance(_MAYBE_START_MONOSPACE);
-      default -> {
-        addSymbol(Symbol.REGULAR);
-        addSymbol(sourceIndex);
-
-        yield advance(_WORD);
-      }
-    };
-  }
-
-  private int tokenizeLf() {
-    addSymbol(Symbol.LF);
-    addSymbol(sourceIndex);
-
-    return advance(_LINE_FIRST);
-  }
-
-  private int tokenizeNextChar() {
-    return switch (peek()) {
-      case '`' -> advance(_MAYBE_START_MONOSPACE);
-      default -> advance(_WORD);
-    };
-  }
-
-  private int tokenizeRegularLf() {
-    addSymbol(Symbol.REGULAR);
-    addSymbol(beginIndex);
-
-    return tokenizeLf();
   }
 
   /*
