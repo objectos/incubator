@@ -18,6 +18,7 @@ package objectos.asciidoc;
 import static org.testng.Assert.assertEquals;
 
 import java.util.Arrays;
+import objectos.asciidoc.Process0.Token;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -37,296 +38,6 @@ public class AsciiDocTest {
     processor = new ThisProcessor();
   }
 
-  @Test(description = //
-  """
-  doctitle
-
-  - happy path
-  - title ends @ eof
-  """)
-  public final void testCase01() {
-    test(
-      """
-      = The doctitle""",
-
-      lexer(
-        Lexer.Symbol.TITLE, 1,
-        Lexer.Symbol.REGULAR, 2, 14,
-        Lexer.Symbol.EOF, 14
-      ),
-
-      parser(
-        Parser.Code.START_DOCUMENT,
-        Parser.Code.START_TITLE, 1,
-        Parser.Code.TEXT, 0,
-        Parser.Code.END_TITLE,
-        Parser.Code.END_DOCUMENT
-      ),
-
-      """
-      <div id="header">
-      <h1>The doctitle</h1>
-      </div>
-      <div id="content">
-
-      </div>
-      """
-    );
-  }
-
-  @Test(description = //
-  """
-  doctitle
-
-  - happy path
-  - title ends @ NL
-  - with preamble
-  """)
-  public final void testCase02() {
-    test(
-      """
-      = Test document
-
-      Some preamble
-      """,
-
-      lexer(
-        Lexer.Symbol.TITLE, 1,
-        Lexer.Symbol.REGULAR, 2, 15,
-        Lexer.Symbol.LF, 15,
-        Lexer.Symbol.LF, 16,
-        Lexer.Symbol.REGULAR, 17, 30,
-        Lexer.Symbol.LF, 30,
-        Lexer.Symbol.EOF, 31
-      ),
-
-      parser(
-        Parser.Code.START_DOCUMENT,
-        Parser.Code.START_TITLE, 1,
-        Parser.Code.TEXT, 0,
-        Parser.Code.END_TITLE,
-        Parser.Code.START_PREAMBLE,
-        Parser.Code.START_PARAGRAPH,
-        Parser.Code.TEXT, 1,
-        Parser.Code.NL,
-        Parser.Code.END_PARAGRAPH,
-        Parser.Code.END_PREAMBLE,
-        Parser.Code.END_DOCUMENT
-      ),
-
-      """
-      <div id="header">
-      <h1>Test document</h1>
-      </div>
-      <div id="content">
-      <div class="paragraph">
-      <p>Some preamble</p>
-      </div>
-      </div>
-      """
-    );
-  }
-
-  @Test(description = //
-  """
-  doctitle + monospace
-
-  - title has inline element (monospace)
-  - title ends @ NL
-  """)
-  public final void testCase03() {
-    test(
-      """
-      = The `Foo` class
-      """,
-
-      lexer(
-        Lexer.Symbol.TITLE, 1,
-        Lexer.Symbol.REGULAR, 2, 6,
-        Lexer.Symbol.MONOSPACE, 7, 10,
-        Lexer.Symbol.REGULAR, 11, 17,
-        Lexer.Symbol.LF, 17,
-        Lexer.Symbol.EOF, 18
-      ),
-
-      parser(
-        Parser.Code.START_DOCUMENT,
-        Parser.Code.START_TITLE, 1,
-        Parser.Code.TEXT, 0,
-        Parser.Code.START_MONOSPACE,
-        Parser.Code.TEXT, 1,
-        Parser.Code.END_MONOSPACE,
-        Parser.Code.TEXT, 2,
-        Parser.Code.END_TITLE,
-        Parser.Code.END_DOCUMENT
-      ),
-
-      """
-      <div id="header">
-      <h1>The <code>Foo</code> class</h1>
-      </div>
-      <div id="content">
-
-      </div>
-      </div>
-      """
-    );
-  }
-
-  @Test(description = //
-  """
-  doctitle + monospace
-
-  - title has inline element (monospace)
-  - inline elements starts the title
-  - title ends @ NL
-  """)
-  public final void testCase04() {
-    test("= `A`",
-
-      lexer(
-        Lexer.Symbol.TITLE, 1,
-        Lexer.Symbol.MONOSPACE, 3, 4,
-        Lexer.Symbol.EOF, 5
-      ),
-
-      parser(
-        Parser.Code.START_DOCUMENT,
-        Parser.Code.START_TITLE, 1,
-        Parser.Code.START_MONOSPACE,
-        Parser.Code.TEXT, 0,
-        Parser.Code.END_MONOSPACE,
-        Parser.Code.END_TITLE,
-        Parser.Code.END_DOCUMENT
-      ),
-
-      """
-      <div id="header">
-      <h1><code>A</code></h1>
-      </div>
-      <div id="content">
-
-      </div>
-      </div>
-      """
-    );
-  }
-
-  @Test(description = //
-  """
-  (not) doctitle
-
-  - not a title (no space after symbol '=')
-  """)
-  public final void testCase05() {
-    test(
-      """
-      =Not Title
-      """,
-
-      lexer(
-        Lexer.Symbol.REGULAR, 0, 10,
-        Lexer.Symbol.LF, 10,
-        Lexer.Symbol.EOF, 11
-      ),
-
-      parser(
-        Parser.Code.START_DOCUMENT,
-        Parser.Code.START_PREAMBLE,
-        Parser.Code.START_PARAGRAPH,
-        Parser.Code.TEXT, 0,
-        Parser.Code.NL,
-        Parser.Code.END_PARAGRAPH,
-        Parser.Code.END_PREAMBLE,
-        Parser.Code.END_DOCUMENT
-      ),
-
-      """
-      <body>
-      <div id="header">
-      </div>
-      <div id="content">
-      <div class="paragraph">
-      <p>=Not Title</p>
-      </div>
-      </div>
-      </body>
-      """
-    );
-  }
-
-  @Test(enabled = false, description = //
-  """
-  = Monospace
-
-  - start of line
-  - middle of line
-  - end of line
-  """)
-  public final void testCaseX1() {
-    test(
-      """
-      `at` start of line
-      at `the middle` of line
-      at the end `of the line`
-      """,
-
-      lexer(
-        //        Lexer.Symbol.PARAGRAPH, 0,
-        //        Lexer.Symbol.BACKTICK, 0,
-        //        Lexer.Symbol.BACKTICK, 3,
-        //        Lexer.Symbol.EOL, 18,
-        //
-        //        Lexer.Symbol.PARAGRAPH, 19,
-        //        Lexer.Symbol.BACKTICK, 22,
-        //        Lexer.Symbol.BACKTICK, 33,
-        //        Lexer.Symbol.EOL, 42,
-        //
-        //        Lexer.Symbol.PARAGRAPH, 43,
-        //        Lexer.Symbol.BACKTICK, 54,
-        //        Lexer.Symbol.BACKTICK, 66,
-        //        Lexer.Symbol.EOL, 67,
-        //
-        //        Lexer.Symbol.EMPTY, 68,
-        Lexer.Symbol.EOF, 68
-      ),
-
-      parser(
-        Parser.Code.START_DOCUMENT,
-        Parser.Code.START_PREAMBLE,
-        Parser.Code.START_PARAGRAPH,
-        Parser.Code.START_MONOSPACE,
-        Parser.Code.TEXT, 0, // at
-        Parser.Code.END_MONOSPACE,
-        Parser.Code.TEXT, 1, // start of line at
-        Parser.Code.START_MONOSPACE,
-        Parser.Code.TEXT, 2, // the middle
-        Parser.Code.END_MONOSPACE,
-        Parser.Code.TEXT, 3, // of line at the end
-        Parser.Code.START_MONOSPACE,
-        Parser.Code.TEXT, 4, // of the line
-        Parser.Code.END_MONOSPACE,
-        Parser.Code.TEXT, 5, // ws
-
-        Parser.Code.END_PARAGRAPH,
-        Parser.Code.END_PREAMBLE,
-        Parser.Code.END_DOCUMENT
-      ),
-
-      """
-      <body>
-      <div id="header">
-      </div>
-      <div id="content">
-      <div class="paragraph">
-      <p><code>at</code> start of line at <code>the middle</code> of line at the end <code>of the line</code></p>
-      </div>
-      </div>
-      </body>
-      """
-    );
-  }
-
   @Test(enabled = false, description = //
   """
   = Bold (constrained)
@@ -336,13 +47,13 @@ public class AsciiDocTest {
   - ends in punctuation
   - not bold, just star char
   """)
-  public final void testCaseX2() {
+  public final void bold01() {
     test(
       """
       *a* *b*, *c*; *d*. *e*
       """,
 
-      lexer(
+      p0(
         //        Lexer.Symbol.PARAGRAPH, 0,
         //        Lexer.Symbol.CBOLD0, 0,
         //        Lexer.Symbol.CBOLD9, 2, // a
@@ -396,6 +107,629 @@ public class AsciiDocTest {
     );
   }
 
+  @Test(description = //
+  """
+  doctitle + eof
+
+  - happy path
+  - title ends @ eof
+
+  '''
+  = The doctitle'''
+
+  P0: ^ H1-0,2 W2,5 SP W6,14 $ EOF
+
+  P1: DOC_START
+      TITLE 1 P0 start end
+      DOC_END
+  """)
+  public final void doctitle01() {
+    test(
+      """
+      = The doctitle""",
+
+      p0(
+        Token.LINE_START,
+        Token.HEADING, 1, 0, 2,
+        Token.WORD, 2, 5,
+        Token.SP,
+        Token.WORD, 6, 14,
+        Token.LINE_END,
+        Token.EOF
+      ),
+
+      parser(
+        Parser.Code.START_DOCUMENT,
+        Parser.Code.START_TITLE, 1,
+        Parser.Code.TEXT, 0,
+        Parser.Code.END_TITLE,
+        Parser.Code.END_DOCUMENT
+      ),
+
+      """
+      <div id="header">
+      <h1>The doctitle</h1>
+      </div>
+      <div id="content">
+
+      </div>
+      """
+    );
+  }
+
+  @Test(enabled = false, description = //
+  """
+  doctitle + NL
+
+  - happy path
+  - title ends @ NL
+  - with preamble
+
+  '''
+  = Test document
+
+  Some preamble
+  '''
+
+  P0: ^ = SP W2,6 SP W7,15 $ LF
+      ^ $ LF
+      ^ W17,21 SP W22,30 $ LF
+      ^ $ EOF
+
+  P1: DOC_START
+      TITLE 1 P0 start end
+      PREAMBLE_START
+      PARAGRAPH P0 start end
+      PREAMBLE_END
+      DOC_END
+  """)
+  public final void doctitle02() {
+    test(
+      """
+      = Test document
+
+      Some preamble
+      """,
+
+      p0(
+        Lexer.Symbol.TITLE, 1,
+        Lexer.Symbol.REGULAR, 2, 15,
+        Lexer.Symbol.LF, 15,
+        Lexer.Symbol.LF, 16,
+        Lexer.Symbol.REGULAR, 17, 30,
+        Lexer.Symbol.LF, 30,
+        Lexer.Symbol.EOF, 31
+      ),
+
+      parser(
+        Parser.Code.START_DOCUMENT,
+        Parser.Code.START_TITLE, 1,
+        Parser.Code.TEXT, 0,
+        Parser.Code.END_TITLE,
+        Parser.Code.START_PREAMBLE,
+        Parser.Code.START_PARAGRAPH,
+        Parser.Code.TEXT, 1,
+        Parser.Code.NL,
+        Parser.Code.END_PARAGRAPH,
+        Parser.Code.END_PREAMBLE,
+        Parser.Code.END_DOCUMENT
+      ),
+
+      """
+      <div id="header">
+      <h1>Test document</h1>
+      </div>
+      <div id="content">
+      <div class="paragraph">
+      <p>Some preamble</p>
+      </div>
+      </div>
+      """
+    );
+  }
+
+  @Test(enabled = false, description = //
+  """
+  doctitle + monospace
+
+  - title has inline element (monospace)
+  - title ends @ NL
+
+  '''
+  = The `Foo` class
+  '''
+
+  L0: ^ = SP W2,5 SP ` W7,10 ` SP W12,17 $ LF
+      ^ $ EOF
+
+  L1: ^ T1 R2,6 <M R7,10 M> R11,17 $ LF
+      ^ $ EOF
+  """)
+  public final void doctitle03() {
+    test(
+      """
+      = The `Foo` class
+      """,
+
+      p0(
+        Lexer.Symbol.TITLE, 1,
+        Lexer.Symbol.REGULAR, 2, 6,
+        Lexer.Symbol.MONOSPACE, 7, 10,
+        Lexer.Symbol.REGULAR, 11, 17,
+        Lexer.Symbol.LF, 17,
+        Lexer.Symbol.EOF, 18
+      ),
+
+      parser(
+        Parser.Code.START_DOCUMENT,
+        Parser.Code.START_TITLE, 1,
+        Parser.Code.TEXT, 0,
+        Parser.Code.START_MONOSPACE,
+        Parser.Code.TEXT, 1,
+        Parser.Code.END_MONOSPACE,
+        Parser.Code.TEXT, 2,
+        Parser.Code.END_TITLE,
+        Parser.Code.END_DOCUMENT
+      ),
+
+      """
+      <div id="header">
+      <h1>The <code>Foo</code> class</h1>
+      </div>
+      <div id="content">
+
+      </div>
+      </div>
+      """
+    );
+  }
+
+  @Test(enabled = false, description = //
+  """
+  doctitle + monospace (@ start)
+
+  - title has inline element (monospace)
+  - inline elements starts the title
+  - title ends @ NL
+  """)
+  public final void doctitle04() {
+    test("= `A`",
+
+      p0(
+        Lexer.Symbol.TITLE, 1,
+        Lexer.Symbol.MONOSPACE, 3, 4,
+        Lexer.Symbol.EOF, 5
+      ),
+
+      parser(
+        Parser.Code.START_DOCUMENT,
+        Parser.Code.START_TITLE, 1,
+        Parser.Code.START_MONOSPACE,
+        Parser.Code.TEXT, 0,
+        Parser.Code.END_MONOSPACE,
+        Parser.Code.END_TITLE,
+        Parser.Code.END_DOCUMENT
+      ),
+
+      """
+      <div id="header">
+      <h1><code>A</code></h1>
+      </div>
+      <div id="content">
+
+      </div>
+      </div>
+      """
+    );
+  }
+
+  @Test(enabled = false, description = //
+  """
+  doctitle (not a doctitle)
+
+  - not a title (no space after symbol '=')
+
+  0123456789
+  '''
+  =NotTitle
+  '''
+
+  P0: ^ = X1,9 $ LF
+      ^ $ EOF
+
+  P1: DOC_START
+      PREAMBLE_START
+      PARAGRAPH P0 start end
+      PREAMBLE_END
+      DOC_END
+  """)
+  public final void doctitle05() {
+    test(
+      """
+      =Not Title
+      """,
+
+      p0(
+        Lexer.Symbol.REGULAR, 0, 10,
+        Lexer.Symbol.LF, 10,
+        Lexer.Symbol.EOF, 11
+      ),
+
+      parser(
+        Parser.Code.START_DOCUMENT,
+        Parser.Code.START_PREAMBLE,
+        Parser.Code.START_PARAGRAPH,
+        Parser.Code.TEXT, 0,
+        Parser.Code.NL,
+        Parser.Code.END_PARAGRAPH,
+        Parser.Code.END_PREAMBLE,
+        Parser.Code.END_DOCUMENT
+      ),
+
+      """
+      <body>
+      <div id="header">
+      </div>
+      <div id="content">
+      <div class="paragraph">
+      <p>=Not Title</p>
+      </div>
+      </div>
+      </body>
+      """
+    );
+  }
+
+  @Test(enabled = false, description = //
+  """
+  listing block
+
+  - w/ attribute
+  - delimited
+
+  01234567
+  89012
+  3456789
+  01234
+  '''
+  [,java]
+  ----
+  break;
+  ----
+  '''
+
+  P0: ^ [ , W2,6 ] $ LF
+      ^ DLB $ LF
+      ^ X13,19 $ LF
+      ^ DLB $ LF
+      ^ $ EOF
+
+  P1: DOCUMENT_START
+      DELIMITED_LISTING_BLOCK_START
+      ATTR 1,1
+      ATTR 2,6
+      P0 start end
+      DELIMITED_LISTING_BLOCK_END
+      DOCUMENT_END
+  """)
+  public final void listingBlock01() {
+  }
+
+  @Test(enabled = false, description = //
+  """
+  monospace
+
+  - constrained
+  - words only
+  - well-formed
+
+  '''
+  `a` `b`, `c`
+  '''
+
+  L0: ^ ` W1,2 ` SP ` W5,6 ` X7,8 SP ` W10,11 ` $ LF
+      ^ $ EOF
+
+  L1: ^ <M R1,2 M> R3,4 <M R5,6 M> R7,9 <M R10,11 M> $ LF
+      ^ $ EOF
+  """)
+  public final void monospace01() {
+    test(
+      """
+      `a` `b`, `c`; `d`. `e`
+      """,
+
+      p0(
+        Lexer.Symbol.MONOSPACE, 1, 2,
+        Lexer.Symbol.REGULAR, 3, 4,
+        Lexer.Symbol.MONOSPACE, 5, 6,
+        Lexer.Symbol.REGULAR, 7, 9,
+        Lexer.Symbol.MONOSPACE, 10, 11,
+        Lexer.Symbol.EOF, 68
+      ),
+
+      parser(
+        Parser.Code.START_DOCUMENT,
+        Parser.Code.START_PREAMBLE,
+        Parser.Code.START_PARAGRAPH,
+        Parser.Code.START_MONOSPACE,
+        Parser.Code.TEXT, 0, // at
+        Parser.Code.END_MONOSPACE,
+        Parser.Code.TEXT, 1, // start of line at
+        Parser.Code.START_MONOSPACE,
+        Parser.Code.TEXT, 2, // the middle
+        Parser.Code.END_MONOSPACE,
+        Parser.Code.TEXT, 3, // of line at the end
+        Parser.Code.START_MONOSPACE,
+        Parser.Code.TEXT, 4, // of the line
+        Parser.Code.END_MONOSPACE,
+        Parser.Code.TEXT, 5, // ws
+
+        Parser.Code.END_PARAGRAPH,
+        Parser.Code.END_PREAMBLE,
+        Parser.Code.END_DOCUMENT
+      ),
+
+      """
+      <body>
+      <div id="header">
+      </div>
+      <div id="content">
+      <div class="paragraph">
+      <p><code>at</code> start of line at <code>the middle</code> of line at the end <code>of the line</code></p>
+      </div>
+      </div>
+      </body>
+      """
+    );
+  }
+
+  @Test(enabled = false, description = //
+  """
+  monospace
+
+  - constrained
+  - phrases
+  - well-formed
+
+            1
+  012345678901234567
+  '''
+  `a b` `c d`, `d e`
+  '''
+
+  L0: ^ ` W1,2 SP W3,4 ` SP ` W7,8 SP W9,10 ` X11,12 SP ` W14,15 SP W16,17 ` $ LF
+      ^ $ EOF
+
+  L1: ^ <M R1,4 M> R4,6 <M R7,10 M> R11,13 <M R14,17 M> $ LF
+      ^ $ EOF
+  """)
+  public final void monospace02() {
+  }
+
+  @Test(enabled = false, description = //
+  """
+  monospace + nested bold
+
+  - mono constrained
+  - bold constrained
+  - same length
+  - words
+  - well-formed
+
+            1
+  012345678901234567
+  '''
+  `*a*` `*b*`; `*c*`
+  '''
+
+  L0: ^ ` * W2,3 * ` SP ` * W8,9 * ` X11,12 SP ` * W15,16 * ` $ LF
+      ^ $ EOF
+
+  L1: ^ <M R2,3 M> R5,6 <M R8,9 M> R11,13 <M R15,16 M> $ LF
+      ^ $ EOF
+  """)
+  public final void monospace03() {
+  }
+
+  @Test(enabled = false, description = //
+  """
+  monospace (not monospace)
+
+  - ill-formed -> chunk
+
+  0123
+  '''
+  `a b
+  '''
+
+  L0: ^ ` W1,2 SP W3,4 $ LF
+      ^ $ EOF
+
+  L1: ^ R0,4 $ LF
+      ^ $ EOF
+  """)
+  public final void monospace04() {
+  }
+
+  @Test(enabled = false, description = //
+  """
+  monospace
+
+  - multiline
+
+  0123
+  4567
+  '''
+  `a b
+  c` e
+  '''
+
+  L0: ^ ` W1,2 SP W3,4 $ LF
+      ^ W4,5 ` SP W7,8 $ LF
+      ^ $ EOF
+
+  L1: ^ <M R1,4 $ LF
+      ^ R4,5 >M R6,8 $ LF
+      ^ $ EOF
+  """)
+  public final void monospace05() {
+  }
+
+  @Test(enabled = false, description = //
+  """
+  unordered list
+
+  - simple elements
+  - dash
+  - single level
+
+  0123
+  4567
+  8901
+  '''
+  - a
+  - b
+  - c
+  '''
+
+  P0: ^ - SP W2,3 $ LF
+      ^ - SP W6,7 $ LF
+      ^ - SP W10,11 $ LF
+      ^ $ EOF
+
+  P1: DOC_START
+      PREAMBLE_START
+      ULIST_START
+      LI_START 1
+      PARAGRAPH P0 start end
+      LI_START 1
+      PARAGRAPH P0 start end
+      LI_START 1
+      PARAGRAPH P0 start end
+      ULIST_END
+      PREAMBLE_END
+      DOC_END
+  """)
+  public final void unorderedList01() {
+  }
+
+  @Test(enabled = false, description = //
+  """
+  unordered list
+
+  - complex elements
+  - dash
+  - single level
+
+  0123
+  4567
+  8901
+  2345
+  '''
+  - a
+  bcd
+  - e
+  fgh
+  '''
+
+  L0: ^ - SP W2,3 $ LF
+      ^ W4,7 $ LF
+      ^ - SP W10,11 $ LF
+      ^ W12,15 $ LF
+      ^ $ EOF
+
+  P1: DOC_START
+      PREAMBLE_START
+      ULIST_START
+      LI_START 1
+      PARAGRAPH P0 start end
+      LI_START 1
+      PARAGRAPH P0 start end
+      ULIST_END
+      PREAMBLE_END
+      DOC_END
+  """)
+  public final void unorderedList02() {
+  }
+
+  @Test(enabled = false, description = //
+  """
+  unordered list
+
+  - nested unordered list
+  - asterisk
+
+  0123
+  45678
+  90123
+  4567
+  '''
+  * a
+  ** b
+  ** c
+  * d
+  '''
+
+  P0: ^ * SP W2,3 $ LF
+      ^ * * SP W7,8 $ LF
+      ^ * * SP W12,13 $ LF
+      ^ * SP W16,17 $ LF
+      ^ $ EOF
+
+  P1: DOC_START
+      PREAMBLE_START
+      ULIST_START
+      LI_START
+      PARAGRAPH P0 start end
+      ULIST_START
+      LI_START
+      PARAGRAPH P0 start end
+      LI_START
+      PARAGRAPH P0 start end
+      ULIST_END
+      LI_START
+      PARAGRAPH P0 start end
+      ULIST_END
+      PREAMBLE_END
+      DOC_END
+  """)
+  public final void unorderedList03() {
+  }
+
+  @Test(enabled = false, description = //
+  """
+  unordered list
+
+  - indented nested unordered list
+  - asterisk
+
+  0123
+  4567
+  8901
+  2345
+  '''
+  - a
+  bcd
+  - e
+  fgh
+  '''
+
+  L0: ^ - SP W2,3 $ LF
+      ^ W4,7 $ LF
+      ^ - SP W10,11 $ LF
+      ^ W12,15 $ LF
+      ^ $ EOF
+
+  L1: ^ UL1 R2,3 $ LF
+      ^ R4,7 $ LF
+      ^ UL1 R10,11 $ LF
+      ^ R12,15 $ LF
+      ^ $ EOF
+  """)
+  public final void unorderedList04() {
+  }
+
   String convert(String source) {
     asciiDoc.process0(processor);
 
@@ -412,54 +746,64 @@ public class AsciiDocTest {
     return body.toString();
   }
 
-  private int[] lexer(int... values) { return values; }
+  void test(String source, int[] expected0, int[] expected1, String expectedHtml) {
+    //    asciiDoc.tokenize(source);
+    //
+    //    if (expected0.length > 0) {
+    //      var symbol = asciiDoc.toSymbol();
+    //
+    //      assertEquals(
+    //        symbol,
+    //        expected0,
+    //        """
+    //
+    //        Lexer assertion failed
+    //        actual  =%s
+    //        expected=%s
+    //
+    //        """.formatted(Arrays.toString(symbol), Arrays.toString(expected0))
+    //      );
+    //    }
+    //
+    //    asciiDoc.parse();
+    //
+    //    if (expected1.length > 0) {
+    //      var parser = asciiDoc.toCode();
+    //
+    //      assertEquals(
+    //        parser,
+    //        expected1,
+    //        """
+    //
+    //        Parser assertion failed
+    //        actual  =%s
+    //        expected=%s
+    //
+    //        """.formatted(Arrays.toString(parser), Arrays.toString(expected1))
+    //      );
+    //    }
+    //
+    //    assertEquals(
+    //      convert(source),
+    //
+    //      normalize(expectedHtml)
+    //    );
+  }
+
+  final void testArrays(int[] result, int[] expected, String header) {
+    var msg = """
+
+    %s
+    actual  =%s
+    expected=%s
+
+    """.formatted(header, Arrays.toString(result), Arrays.toString(expected));
+
+    assertEquals(result, expected, msg);
+  }
+
+  private int[] p0(int... values) { return values; }
 
   private int[] parser(int... values) { return values; }
-
-  private void test(String source, int[] expectedLexer, int[] expectedParser, String expectedHtml) {
-    if (asciiDoc != null) {
-      asciiDoc.tokenize(source);
-
-      if (expectedLexer.length > 0) {
-        var symbol = asciiDoc.toSymbol();
-
-        assertEquals(
-          symbol,
-          expectedLexer,
-          """
-
-        Lexer assertion failed
-        actual  =%s
-        expected=%s
-
-        """.formatted(Arrays.toString(symbol), Arrays.toString(expectedLexer))
-        );
-      }
-
-      asciiDoc.parse();
-
-      if (expectedParser.length > 0) {
-        var parser = asciiDoc.toCode();
-
-        assertEquals(
-          parser,
-          expectedParser,
-          """
-
-        Parser assertion failed
-        actual  =%s
-        expected=%s
-
-        """.formatted(Arrays.toString(parser), Arrays.toString(expectedParser))
-        );
-      }
-    }
-
-    assertEquals(
-      convert(source),
-
-      normalize(expectedHtml)
-    );
-  }
 
 }

@@ -15,26 +15,17 @@
  */
 package objectos.asciidoc;
 
-import org.asciidoctor.Asciidoctor;
-import org.asciidoctor.Options;
-import org.jsoup.Jsoup;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-public class AsciidoctorTest extends AsciiDocTest {
+public class Process0Test extends AsciiDocTest {
 
-  private Asciidoctor asciidoctor;
-
-  private Options options;
+  private Process0 process0;
 
   @BeforeClass
   @Override
   public void _beforeClass() {
-    asciidoctor = Asciidoctor.Factory.create();
-
-    options = Options.builder()
-        .headerFooter(true)
-        .build();
+    process0 = new Process0();
   }
 
   @Test(enabled = false)
@@ -43,30 +34,18 @@ public class AsciidoctorTest extends AsciiDocTest {
 
   @Override
   final String convert(String source) {
-    var doc = asciidoctor.load(source, options);
+    process0.execute(source);
 
-    for (var block : doc.getBlocks()) {
-      System.out.println(block);
-    }
-
-    var html = asciidoctor.convert(source, options);
-
-    var document = Jsoup.parse(html);
-
-    var body = document.body();
-
-    body.removeAttr("class");
-
-    var footer = body.getElementById("footer");
-
-    footer.remove();
-
-    return body.toString();
+    return null;
   }
 
   @Override
   final void test(String source, int[] expected0, int[] expected1, String expectedHtml) {
+    process0.execute(source);
 
+    int[] result = process0.toToken();
+
+    testArrays(result, expected0, "Process (0) assertion failed");
   }
 
 }

@@ -42,14 +42,14 @@ class Lexer {
 
   // ctx
 
-  private static final int _LSTART = 1 << 2;
+  private static final int _LINE_START = 1 << 2;
+  private static final int _MONO_START = 1 << 3;
 
   // token
 
   private static final int _TITLE = 1 << 4;
   private static final int _REGULAR = 1 << 5;
   private static final int _MONOSPACE = 1 << 6;
-  private static final int _C_MONOSPACE_START = 1 << 7;
 
   private String source;
 
@@ -141,7 +141,7 @@ class Lexer {
 
     symbolIndex = 0;
 
-    state = _LSTART;
+    state = _LINE_START;
 
     while (state != _EOF) {
       state = state(state);
@@ -189,60 +189,89 @@ class Lexer {
 
   private char peek() { return source.charAt(sourceIndex); }
 
+  /*
+  
+  @startuml
+  hide empty description
+  [*] --> _LINE_START
+
+  _LINE_START --> _MAYBE::_MONO_START : backtick
+  
+  _MAYBE::_MONO_START --> _MAYBE::_MONOSPACE : not ws
+  
+  _MAYBE::_MONOSPACE --> _MAYBE::_MONOSPACE : not backtick\nnot ws
+  _MAYBE::_MONOSPACE --> _MONOSPACE_START : ws
+  _MAYBE::_MONOSPACE --> _MAYBE::_MONOSPACE_WORD : backtick
+  
+  _MAYBE::_MONOSPACE_WORD --> _MONOSPACE_WORD : not word
+  @enduml
+  
+   */
+
   private int state(int state) {
     if (!hasChar()) {
       return tokenizeEof();
     }
 
     return switch (state) {
-      case _LSTART -> {
-        beginIndex = sourceIndex;
+      case _LINE_START -> {
+        beginIndex = monospaceIndex = sourceIndex;
 
         yield switch (peek()) {
           case '\t', '\u000b', '\f', ' ' -> advance(_WS);
           case '\n' -> {
             add(Symbol.LF, sourceIndex);
 
-            yield advance(_LSTART);
+            yield advance(_LINE_START);
           }
           case '=' -> advance(_MAYBE | _TITLE);
+          case '`' -> advance(_MAYBE | _MONO_START);
           default -> advance(_REGULAR);
         };
       }
 
-      case _MAYBE | _C_MONOSPACE_START -> switch (peek()) {
+      case _MAYBE | _MONO_START -> switch (peek()) {
         case '\n' -> {
           add(
             Symbol.REGULAR, beginIndex, sourceIndex,
             Symbol.LF, sourceIndex
           );
 
-          yield advance(_LSTART);
+          yield advance(_LINE_START);
         }
         case '`' -> advance(_MAYBE | _MONOSPACE);
         default -> advance(state);
       };
 
-      case _MAYBE | _MONOSPACE -> switch (peek()) {
-        case '\t', '\u000b', '\f', ' ' -> {
-          add(Symbol.MONOSPACE, monospaceIndex + 1, sourceIndex - 1);
+      case _MAYBE | _MONOSPACE -> {
+        var c = peek();
 
-          yield advance(_MAYBE | _REGULAR);
+        if (isWord(c)) {
+          yield advance(_MONO_START);
         }
-        case '\n' -> {
-          add(Symbol.LF, sourceIndex);
 
-          yield advance(_LSTART);
-        }
-        default -> advance(_C_MONOSPACE_START);
-      };
+        yield switch (c) {
+          case '\n' -> {
+            add(Symbol.LF, sourceIndex);
+
+            yield advance(_LINE_START);
+          }
+          default -> {
+            add(Symbol.MONOSPACE, monospaceIndex + 1, sourceIndex - 1);
+
+            beginIndex = sourceIndex;
+
+            yield advance(_REGULAR);
+          }
+        };
+      }
 
       case _MAYBE | _REGULAR -> switch (peek()) {
         case '\t', '\u000b', '\f', ' ' -> advance(state);
         case '\n' -> {
           add(Symbol.LF, sourceIndex);
 
-          yield advance(_LSTART);
+          yield advance(_LINE_START);
         }
         default -> {
           beginIndex = sourceIndex - 1;
@@ -259,7 +288,7 @@ class Lexer {
             Symbol.LF, sourceIndex
           );
 
-          yield advance(_LSTART);
+          yield advance(_LINE_START);
         }
         default -> advance(state);
       };
@@ -274,30 +303,30 @@ class Lexer {
         case '\n' -> {
           add(Symbol.LF, sourceIndex);
 
-          yield advance(_LSTART);
+          yield advance(_LINE_START);
         }
-        default -> advance(_REGULAR | _C_MONOSPACE_START);
+        default -> advance(_REGULAR | _MONO_START);
       };
 
-      case _REGULAR | _C_MONOSPACE_START -> switch (peek()) {
+      case _REGULAR | _MONO_START -> switch (peek()) {
         case '\n' -> {
           add(
             Symbol.REGULAR, beginIndex, sourceIndex,
             Symbol.LF, sourceIndex
           );
 
-          yield advance(_LSTART);
+          yield advance(_LINE_START);
         }
         case '`' -> advance(_REGULAR | _MAYBE | _MONOSPACE);
         default -> advance(state);
       };
 
-      case _REGULAR | _MAYBE | _C_MONOSPACE_START -> switch (peek()) {
+      case _REGULAR | _MAYBE | _MONO_START -> switch (peek()) {
         case '\t', '\u000b', '\f', ' ' -> advance(_REGULAR | _WS);
         default -> {
           monospaceIndex = sourceIndex - 1;
 
-          yield advance(_REGULAR | _C_MONOSPACE_START);
+          yield advance(_REGULAR | _MONO_START);
         }
       };
 
@@ -306,9 +335,9 @@ class Lexer {
         case '\n' -> {
           add(Symbol.LF, sourceIndex);
 
-          yield advance(_LSTART);
+          yield advance(_LINE_START);
         }
-        case '`' -> advance(_REGULAR | _MAYBE | _C_MONOSPACE_START);
+        case '`' -> advance(_REGULAR | _MAYBE | _MONO_START);
         default -> advance(_REGULAR);
       };
 
@@ -324,7 +353,7 @@ class Lexer {
             Symbol.LF, sourceIndex
           );
 
-          yield advance(_LSTART);
+          yield advance(_LINE_START);
         }
         case '=' -> advance(state);
         default -> advance(_REGULAR);
@@ -338,14 +367,14 @@ class Lexer {
             Symbol.LF, sourceIndex
           );
 
-          yield advance(_LSTART);
+          yield advance(_LINE_START);
         }
         case '`' -> {
           add(Symbol.TITLE, maybeTitleLevel);
 
           monospaceIndex = sourceIndex;
 
-          yield advance(_MAYBE | _C_MONOSPACE_START);
+          yield advance(_MAYBE | _MONO_START);
         }
         default -> {
           add(Symbol.TITLE, maybeTitleLevel);
@@ -363,7 +392,7 @@ class Lexer {
 
   private int tokenizeEof() {
     switch (state) {
-      case _LSTART -> { /* noop */ }
+      case _LINE_START -> { /* noop */ }
       case _MAYBE | _MONOSPACE -> add(Symbol.MONOSPACE, monospaceIndex + 1, sourceIndex - 1);
       case _REGULAR -> add(Symbol.REGULAR, beginIndex, sourceIndex);
       default -> throw new UnsupportedOperationException(
