@@ -18,14 +18,14 @@ package objectos.asciidoc;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-public class Process0Test extends AsciiDocTest {
+public class Pass0Test extends AsciiDocTest {
 
-  private Process0 process0;
+  private Pass0 pass0;
 
   @BeforeClass
   @Override
   public void _beforeClass() {
-    process0 = new Process0();
+    pass0 = new Pass0();
   }
 
   @Test(enabled = false)
@@ -34,16 +34,17 @@ public class Process0Test extends AsciiDocTest {
 
   @Override
   final String convert(String source) {
-    process0.execute(source);
+    pass0.execute(source);
 
     return null;
   }
 
   @Override
-  final void test(String source, int[] expected0, int[] expected1, String expectedHtml) {
-    process0.execute(source);
+  final void test(
+      String source, int[] expected0, int[] expected1, int[][] expected2, String expectedHtml) {
+    pass0.execute(source);
 
-    int[] result = process0.toToken();
+    int[] result = pass0.toToken();
 
     testArrays(result, expected0, "Process (0) assertion failed");
   }

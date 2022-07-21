@@ -18,8 +18,6 @@ package objectos.asciidoc;
 import static org.testng.Assert.assertEquals;
 
 import java.util.Arrays;
-import objectos.asciidoc.Process0.Token;
-import objectos.asciidoc.Process1.Proto;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -94,6 +92,8 @@ public class AsciiDocTest {
         Parser.Code.END_DOCUMENT
       ),
 
+      p2(),
+
       """
       <body>
       <div id="header">
@@ -147,6 +147,10 @@ public class AsciiDocTest {
         Proto.TOKENS, 5, 12,
         Proto.HEADING_END,
         Proto.DOCUMENT_END
+      ),
+
+      p2(
+        t(Text.REGULAR, 2, 14)
       ),
 
       """
@@ -218,6 +222,8 @@ public class AsciiDocTest {
         Parser.Code.END_DOCUMENT
       ),
 
+      p2(),
+
       """
       <div id="header">
       <h1>Test document</h1>
@@ -275,6 +281,8 @@ public class AsciiDocTest {
         Parser.Code.END_DOCUMENT
       ),
 
+      p2(),
+
       """
       <div id="header">
       <h1>The <code>Foo</code> class</h1>
@@ -313,6 +321,8 @@ public class AsciiDocTest {
         Parser.Code.END_TITLE,
         Parser.Code.END_DOCUMENT
       ),
+
+      p2(),
 
       """
       <div id="header">
@@ -368,6 +378,8 @@ public class AsciiDocTest {
         Parser.Code.END_PREAMBLE,
         Parser.Code.END_DOCUMENT
       ),
+
+      p2(),
 
       """
       <body>
@@ -472,6 +484,8 @@ public class AsciiDocTest {
         Parser.Code.END_PREAMBLE,
         Parser.Code.END_DOCUMENT
       ),
+
+      p2(),
 
       """
       <body>
@@ -749,7 +763,8 @@ public class AsciiDocTest {
     return body.toString();
   }
 
-  void test(String source, int[] expected0, int[] expected1, String expectedHtml) {
+  void test(
+      String source, int[] expected0, int[] expected1, int[][] expected2, String expectedHtml) {
     //    asciiDoc.tokenize(source);
     //
     //    if (expected0.length > 0) {
@@ -808,5 +823,9 @@ public class AsciiDocTest {
   private int[] p0(int... values) { return values; }
 
   private int[] p1(int... values) { return values; }
+
+  private int[][] p2(int[]... values) { return values; }
+
+  private int[] t(int... values) { return values; }
 
 }

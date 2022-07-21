@@ -15,29 +15,38 @@
  */
 package objectos.asciidoc;
 
-class ArrayProcess1Source implements Process1.Source {
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
 
-  private final int[] token;
+public class Pass1Test extends AsciiDocTest {
 
-  private int cursor;
+  private Pass1 pass1;
 
-  ArrayProcess1Source(int[] token) {
-    this.token = token;
+  @BeforeClass
+  @Override
+  public void _beforeClass() {
+    pass1 = new Pass1();
+  }
+
+  @Test(enabled = false)
+  public void _enableCodeMinings() {
   }
 
   @Override
-  public final int cursor() {
-    return cursor;
+  final String convert(String source) {
+    return null;
   }
 
   @Override
-  public final boolean hasToken() {
-    return cursor < token.length;
-  }
+  final void test(
+      String source, int[] expected0, int[] expected1, int[][] expected2, String expectedHtml) {
+    var s = new ArrayPass1Source(expected0);
 
-  @Override
-  public final int nextToken() {
-    return token[cursor++];
+    pass1.execute(s);
+
+    int[] result = pass1.toCode();
+
+    testArrays(result, expected1, "Process (1) assertion failed");
   }
 
 }

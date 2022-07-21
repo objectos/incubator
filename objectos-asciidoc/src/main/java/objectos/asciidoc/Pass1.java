@@ -16,30 +16,17 @@
 package objectos.asciidoc;
 
 import java.util.Arrays;
-import objectos.asciidoc.Process0.Token;
 import objectos.lang.Check;
 import objectos.util.IntArrays;
 
-class Process1 {
-
-  static class Proto {
-    static final int DOCUMENT_START = -1;
-    static final int DOCUMENT_END = -2;
-
-    static final int HEADING_START = -3;
-    static final int HEADING_END = -4;
-
-    static final int TOKENS = -5;
-  }
+class Pass1 {
 
   interface Source {
-
-    int cursor();
-
     boolean hasToken();
 
     int nextToken();
 
+    int tokenCursor();
   }
 
   private static final int EOF = 0;
@@ -66,7 +53,7 @@ class Process1 {
 
   private int tokenStart;
 
-  Process1() {
+  Pass1() {
     proto = new int[512];
   }
 
@@ -75,9 +62,9 @@ class Process1 {
       state == EOF,
 
       """
-      Concurrent process (1) is not supported.
+      Concurrent pass (1) is not supported.
 
-      It seems a previous AsciiDoc document process (1):
+      It seems a previous AsciiDoc document pass (1):
 
       - is currently running; or
       - finished abruptly (most likely due to a bug in this component, sorry...).
@@ -121,7 +108,7 @@ class Process1 {
 
   private void execute0() {
     while (hasToken()) {
-      tokenIndex = source.cursor();
+      tokenIndex = source.tokenCursor();
 
       var token = nextToken();
 

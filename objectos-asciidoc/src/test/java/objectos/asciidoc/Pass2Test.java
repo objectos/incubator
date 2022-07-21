@@ -15,26 +15,19 @@
  */
 package objectos.asciidoc;
 
-import org.asciidoctor.Asciidoctor;
-import org.asciidoctor.Options;
-import org.jsoup.Jsoup;
+import static org.testng.Assert.assertEquals;
+
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-public class AsciidoctorTest extends AsciiDocTest {
+public class Pass2Test extends AsciiDocTest {
 
-  private Asciidoctor asciidoctor;
-
-  private Options options;
+  private Pass2 pass2;
 
   @BeforeClass
   @Override
   public void _beforeClass() {
-    asciidoctor = Asciidoctor.Factory.create();
-
-    options = Options.builder()
-        .headerFooter(true)
-        .build();
+    pass2 = new Pass2();
   }
 
   @Test(enabled = false)
@@ -43,31 +36,36 @@ public class AsciidoctorTest extends AsciiDocTest {
 
   @Override
   final String convert(String source) {
-    var doc = asciidoctor.load(source, options);
-
-    for (var block : doc.getBlocks()) {
-      System.out.println(block);
-    }
-
-    var html = asciidoctor.convert(source, options);
-
-    var document = Jsoup.parse(html);
-
-    var body = document.body();
-
-    body.removeAttr("class");
-
-    var footer = body.getElementById("footer");
-
-    footer.remove();
-
-    return body.toString();
+    return null;
   }
 
   @Override
   final void test(
       String source, int[] expected0, int[] expected1, int[][] expected2, String expectedHtml) {
+    var s = new ArrayPass2Source(expected0);
 
+    var index = 0;
+
+    for (int i = 0; i < expected1.length; i++) {
+      var code = expected1[i];
+
+      if (code != Proto.TOKENS) {
+        continue;
+      }
+
+      var first = expected1[i + 1];
+      var last = expected1[i + 2];
+
+      pass2.execute(s, first, last);
+
+      var result = pass2.toText();
+
+      testArrays(result, expected2[index], "Pass (2) assertion failed at index=" + index);
+
+      index++;
+    }
+
+    assertEquals(expected2.length, index);
   }
 
 }

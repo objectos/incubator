@@ -19,21 +19,7 @@ import java.util.Arrays;
 import objectos.lang.Check;
 import objectos.util.IntArrays;
 
-class Process0 implements Process1.Source {
-
-  class Token {
-    static final int EOF = -1;
-
-    static final int LINE_START = -2;
-
-    static final int LINE_END = -3;
-
-    static final int HEADING = -4;
-
-    static final int WORD = -5;
-
-    static final int SP = -6;
-  }
+class Pass0 implements Pass1.Source {
 
   private static final int EOF = 0;
 
@@ -65,12 +51,9 @@ class Process0 implements Process1.Source {
 
   private int wordStart;
 
-  Process0() {
+  Pass0() {
     token = new int[512];
   }
-
-  @Override
-  public final int cursor() { return tokenCursor; }
 
   public final void execute(String source) {
     Check.state(
@@ -106,6 +89,9 @@ class Process0 implements Process1.Source {
 
   @Override
   public final int nextToken() { return token[tokenCursor++]; }
+
+  @Override
+  public final int tokenCursor() { return tokenCursor; }
 
   final boolean isWord(char c) {
     int type = Character.getType(c);
