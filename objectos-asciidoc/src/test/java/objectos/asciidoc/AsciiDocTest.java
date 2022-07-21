@@ -19,6 +19,7 @@ import static org.testng.Assert.assertEquals;
 
 import java.util.Arrays;
 import objectos.asciidoc.Process0.Token;
+import objectos.asciidoc.Process1.Proto;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -71,7 +72,7 @@ public class AsciiDocTest {
         Lexer.Symbol.EOF, 68
       ),
 
-      parser(
+      p1(
         Parser.Code.START_DOCUMENT,
         Parser.Code.START_PREAMBLE,
         Parser.Code.START_PARAGRAPH,
@@ -120,7 +121,9 @@ public class AsciiDocTest {
   P0: ^ H1-0,2 W2,5 SP W6,14 $ EOF
 
   P1: DOC_START
-      TITLE 1 P0 start end
+      HEADING_START
+      1 P0 start end
+      HEADING_END
       DOC_END
   """)
   public final void doctitle01() {
@@ -138,12 +141,12 @@ public class AsciiDocTest {
         Token.EOF
       ),
 
-      parser(
-        Parser.Code.START_DOCUMENT,
-        Parser.Code.START_TITLE, 1,
-        Parser.Code.TEXT, 0,
-        Parser.Code.END_TITLE,
-        Parser.Code.END_DOCUMENT
+      p1(
+        Proto.DOCUMENT_START,
+        Proto.HEADING_START, 1,
+        Proto.TOKENS, 5, 12,
+        Proto.HEADING_END,
+        Proto.DOCUMENT_END
       ),
 
       """
@@ -201,7 +204,7 @@ public class AsciiDocTest {
         Lexer.Symbol.EOF, 31
       ),
 
-      parser(
+      p1(
         Parser.Code.START_DOCUMENT,
         Parser.Code.START_TITLE, 1,
         Parser.Code.TEXT, 0,
@@ -260,7 +263,7 @@ public class AsciiDocTest {
         Lexer.Symbol.EOF, 18
       ),
 
-      parser(
+      p1(
         Parser.Code.START_DOCUMENT,
         Parser.Code.START_TITLE, 1,
         Parser.Code.TEXT, 0,
@@ -301,7 +304,7 @@ public class AsciiDocTest {
         Lexer.Symbol.EOF, 5
       ),
 
-      parser(
+      p1(
         Parser.Code.START_DOCUMENT,
         Parser.Code.START_TITLE, 1,
         Parser.Code.START_MONOSPACE,
@@ -355,7 +358,7 @@ public class AsciiDocTest {
         Lexer.Symbol.EOF, 11
       ),
 
-      parser(
+      p1(
         Parser.Code.START_DOCUMENT,
         Parser.Code.START_PREAMBLE,
         Parser.Code.START_PARAGRAPH,
@@ -448,7 +451,7 @@ public class AsciiDocTest {
         Lexer.Symbol.EOF, 68
       ),
 
-      parser(
+      p1(
         Parser.Code.START_DOCUMENT,
         Parser.Code.START_PREAMBLE,
         Parser.Code.START_PARAGRAPH,
@@ -804,6 +807,6 @@ public class AsciiDocTest {
 
   private int[] p0(int... values) { return values; }
 
-  private int[] parser(int... values) { return values; }
+  private int[] p1(int... values) { return values; }
 
 }

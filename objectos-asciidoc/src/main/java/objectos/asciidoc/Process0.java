@@ -19,16 +19,16 @@ import java.util.Arrays;
 import objectos.lang.Check;
 import objectos.util.IntArrays;
 
-class Process0 {
+class Process0 implements Process1.Source {
 
   class Token {
-    static final int LINE_START = -1;
+    static final int EOF = -1;
 
-    static final int LINE_END = -2;
+    static final int LINE_START = -2;
 
-    static final int HEADING = -3;
+    static final int LINE_END = -3;
 
-    static final int EOF = -4;
+    static final int HEADING = -4;
 
     static final int WORD = -5;
 
@@ -55,7 +55,7 @@ class Process0 {
 
   private int[] token;
 
-  private int tokenCounter = Integer.MAX_VALUE;
+  private int tokenCursor;
 
   private int tokenIndex;
 
@@ -69,6 +69,9 @@ class Process0 {
     token = new int[512];
   }
 
+  @Override
+  public final int cursor() { return tokenCursor; }
+
   public final void execute(String source) {
     Check.state(
       state == EOF,
@@ -80,7 +83,8 @@ class Process0 {
 
       - is currently running; or
       - finished abruptly (most likely due to a bug in this component, sorry...).
-      """);
+      """
+    );
 
     this.source = source;
 
@@ -94,12 +98,14 @@ class Process0 {
       state = state(state);
     }
 
-    tokenCounter = 0;
+    tokenCursor = 0;
   }
 
-  final boolean hasToken() {
-    return tokenCounter < tokenIndex;
-  }
+  @Override
+  public final boolean hasToken() { return tokenCursor < tokenIndex; }
+
+  @Override
+  public final int nextToken() { return token[tokenCursor++]; }
 
   final boolean isWord(char c) {
     int type = Character.getType(c);
