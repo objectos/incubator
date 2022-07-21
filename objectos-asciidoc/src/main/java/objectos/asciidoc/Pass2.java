@@ -115,15 +115,35 @@ class Pass2 {
       state = switch (token) {
         case Token.WORD -> executeWord(nextToken(), nextToken());
 
+        case Token.BLOB -> executeBlob(nextToken(), nextToken());
+
         case Token.SP -> executeSpace();
 
+        case Token.LINE_START -> executeLineStart();
+
         case Token.LINE_END -> executeLineEnd();
+
+        case Token.LF -> executeLf();
 
         default -> uoe(token);
       };
     }
 
     state = executeEof();
+  }
+
+  private int executeBlob(int start, int end) {
+    return switch (state) {
+      case START -> {
+        addText(Text.REGULAR, start);
+
+        regularEnd = end;
+
+        yield REGULAR;
+      }
+
+      default -> uoe();
+    };
   }
 
   private int executeEof() {
@@ -138,7 +158,23 @@ class Pass2 {
     return EOF;
   }
 
+  private int executeLf() {
+    return switch (state) {
+      case REGULAR -> state;
+
+      default -> uoe();
+    };
+  }
+
   private int executeLineEnd() {
+    return switch (state) {
+      case REGULAR -> state;
+
+      default -> uoe();
+    };
+  }
+
+  private int executeLineStart() {
     return switch (state) {
       case REGULAR -> state;
 

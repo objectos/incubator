@@ -163,6 +163,134 @@ public class AsciiDocTest {
       """
     );
   }
+  @Test(description = //
+  """
+  doctitle + NL
+
+  - happy path
+  - title ends @ NL
+
+  '''
+  = The doctitle
+  '''
+
+  P0: ^ H1-0,2 W2,5 SP W6,14 $ LF
+      ^ $ EOF
+
+  P1: DOC_START
+      HEADING_START
+      1 P0 start end
+      HEADING_END
+      DOC_END
+  """)
+  public final void doctitle02() {
+    test(
+      """
+      = The doctitle
+      """,
+
+      p0(
+        Token.LINE_START,
+        Token.HEADING, 1, 0, 2,
+        Token.WORD, 2, 5,
+        Token.SP,
+        Token.WORD, 6, 14,
+        Token.LINE_END,
+        Token.LF,
+        Token.LINE_START,
+        Token.LINE_END,
+        Token.EOF
+      ),
+
+      p1(
+        Code.DOCUMENT_START,
+        Code.HEADING_START, 1,
+        Code.TOKENS, 5, 12,
+        Code.HEADING_END,
+        Code.DOCUMENT_END
+      ),
+
+      p2(
+        t(Text.REGULAR, 2, 14)
+      ),
+
+      """
+      <div id="header">
+      <h1>The doctitle</h1>
+      </div>
+      <div id="content">
+
+      </div>
+      </div>
+      """
+    );
+  }
+
+  @Test(description = //
+  """
+  doctitle (not a doctitle)
+
+  - not a title (no space after symbol '=')
+
+  0123456789
+  '''
+  =Not Title
+  '''
+
+  P0: ^ X0,4 SP W5,10 $ LF
+      ^ $ EOF
+
+  P1: DOC_START
+      PREAMBLE_START
+      PARAGRAPH P0 start end
+      PREAMBLE_END
+      DOC_END
+  """)
+  public final void doctitle03() {
+    test(
+      """
+      =Not Title
+      """,
+
+      p0(
+        Token.LINE_START,
+        Token.BLOB, 0, 4,
+        Token.SP,
+        Token.WORD, 5, 10,
+        Token.LINE_END,
+        Token.LF,
+        Token.LINE_START,
+        Token.LINE_END,
+        Token.EOF
+      ),
+
+      p1(
+        Code.DOCUMENT_START,
+        Code.PREAMBLE_START,
+        Code.PARAGRAPH_START,
+        Code.TOKENS, 1, 11,
+        Code.PARAGRAPH_END,
+        Code.PREAMBLE_END,
+        Code.DOCUMENT_END
+      ),
+
+      p2(
+        t(Text.REGULAR, 0, 10)
+      ),
+
+      """
+      <body>
+      <div id="header">
+      </div>
+      <div id="content">
+      <div class="paragraph">
+      <p>=Not Title</p>
+      </div>
+      </div>
+      </body>
+      """
+    );
+  }
 
   @Test(enabled = false, description = //
   """
@@ -190,7 +318,7 @@ public class AsciiDocTest {
       PREAMBLE_END
       DOC_END
   """)
-  public final void doctitle02() {
+  public final void doctitle0X() {
     test(
       """
       = Test document
@@ -233,164 +361,6 @@ public class AsciiDocTest {
       <p>Some preamble</p>
       </div>
       </div>
-      """
-    );
-  }
-
-  @Test(enabled = false, description = //
-  """
-  doctitle + monospace
-
-  - title has inline element (monospace)
-  - title ends @ NL
-
-  '''
-  = The `Foo` class
-  '''
-
-  L0: ^ = SP W2,5 SP ` W7,10 ` SP W12,17 $ LF
-      ^ $ EOF
-
-  L1: ^ T1 R2,6 <M R7,10 M> R11,17 $ LF
-      ^ $ EOF
-  """)
-  public final void doctitle03() {
-    test(
-      """
-      = The `Foo` class
-      """,
-
-      p0(
-        //        Lexer.Symbol.TITLE, 1,
-      //        Lexer.Symbol.REGULAR, 2, 6,
-      //        Lexer.Symbol.MONOSPACE, 7, 10,
-      //        Lexer.Symbol.REGULAR, 11, 17,
-      //        Lexer.Symbol.LF, 17,
-      //        Lexer.Symbol.EOF, 18
-      ),
-
-      p1(
-        //        Parser.Code.START_DOCUMENT,
-      //        Parser.Code.START_TITLE, 1,
-      //        Parser.Code.TEXT, 0,
-      //        Parser.Code.START_MONOSPACE,
-      //        Parser.Code.TEXT, 1,
-      //        Parser.Code.END_MONOSPACE,
-      //        Parser.Code.TEXT, 2,
-      //        Parser.Code.END_TITLE,
-      //        Parser.Code.END_DOCUMENT
-      ),
-
-      p2(),
-
-      """
-      <div id="header">
-      <h1>The <code>Foo</code> class</h1>
-      </div>
-      <div id="content">
-
-      </div>
-      </div>
-      """
-    );
-  }
-
-  @Test(enabled = false, description = //
-  """
-  doctitle + monospace (@ start)
-
-  - title has inline element (monospace)
-  - inline elements starts the title
-  - title ends @ NL
-  """)
-  public final void doctitle04() {
-    test("= `A`",
-
-      p0(
-        //        Lexer.Symbol.TITLE, 1,
-      //        Lexer.Symbol.MONOSPACE, 3, 4,
-      //        Lexer.Symbol.EOF, 5
-      ),
-
-      p1(
-        //        Parser.Code.START_DOCUMENT,
-      //        Parser.Code.START_TITLE, 1,
-      //        Parser.Code.START_MONOSPACE,
-      //        Parser.Code.TEXT, 0,
-      //        Parser.Code.END_MONOSPACE,
-      //        Parser.Code.END_TITLE,
-      //        Parser.Code.END_DOCUMENT
-      ),
-
-      p2(),
-
-      """
-      <div id="header">
-      <h1><code>A</code></h1>
-      </div>
-      <div id="content">
-
-      </div>
-      </div>
-      """
-    );
-  }
-
-  @Test(enabled = false, description = //
-  """
-  doctitle (not a doctitle)
-
-  - not a title (no space after symbol '=')
-
-  0123456789
-  '''
-  =NotTitle
-  '''
-
-  P0: ^ = X1,9 $ LF
-      ^ $ EOF
-
-  P1: DOC_START
-      PREAMBLE_START
-      PARAGRAPH P0 start end
-      PREAMBLE_END
-      DOC_END
-  """)
-  public final void doctitle05() {
-    test(
-      """
-      =Not Title
-      """,
-
-      p0(
-        //        Lexer.Symbol.REGULAR, 0, 10,
-      //        Lexer.Symbol.LF, 10,
-      //        Lexer.Symbol.EOF, 11
-      ),
-
-      p1(
-        //        Parser.Code.START_DOCUMENT,
-      //        Parser.Code.START_PREAMBLE,
-      //        Parser.Code.START_PARAGRAPH,
-      //        Parser.Code.TEXT, 0,
-      //        Parser.Code.NL,
-      //        Parser.Code.END_PARAGRAPH,
-      //        Parser.Code.END_PREAMBLE,
-      //        Parser.Code.END_DOCUMENT
-      ),
-
-      p2(),
-
-      """
-      <body>
-      <div id="header">
-      </div>
-      <div id="content">
-      <div class="paragraph">
-      <p>=Not Title</p>
-      </div>
-      </div>
-      </body>
       """
     );
   }

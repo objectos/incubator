@@ -58,15 +58,6 @@ class ThisProcessor implements AsciiDoc.Processor {
   }
 
   @Override
-  public final void endParagraph() {
-    sb.append("</p></div>");
-  }
-
-  @Override
-  public final void endPreamble() {
-  }
-
-  @Override
   public final void headingEnd() {
     sb.append("</h");
     sb.append(level);
@@ -97,17 +88,21 @@ class ThisProcessor implements AsciiDoc.Processor {
   }
 
   @Override
-  public final void startMonospace() {
-    sb.append("<code>");
+  public final void paragraphEnd() {
+    sb.append("</p></div>");
   }
 
   @Override
-  public final void startParagraph() {
+  public final void paragraphStart() {
     sb.append("<div class=\"paragraph\">\n<p>");
   }
 
   @Override
-  public final void startPreamble() {
+  public final void preambleEnd() {
+  }
+
+  @Override
+  public final void preambleStart() {
     switch (state) {
       case _START -> sb.append("""
         <div id="header">
@@ -124,6 +119,11 @@ class ThisProcessor implements AsciiDoc.Processor {
     }
 
     state = _CONTENT;
+  }
+
+  @Override
+  public final void startMonospace() {
+    sb.append("<code>");
   }
 
   @Override

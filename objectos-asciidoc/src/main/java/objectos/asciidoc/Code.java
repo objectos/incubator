@@ -23,7 +23,13 @@ final class Code {
   static final int HEADING_START = -3;
   static final int HEADING_END = -4;
 
-  static final int TOKENS = -5;
+  static final int PREAMBLE_START = -5;
+  static final int PREAMBLE_END = -6;
+
+  static final int PARAGRAPH_START = -7;
+  static final int PARAGRAPH_END = -8;
+
+  static final int TOKENS = -9;
 
   private Code() {}
 

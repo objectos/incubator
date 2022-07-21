@@ -27,21 +27,21 @@ public class AsciiDoc {
 
     void endMonospace();
 
-    void endParagraph();
-
-    void endPreamble();
-
     void headingEnd();
 
     void headingStart(int level);
 
     void newLine();
 
+    void paragraphEnd();
+
+    void paragraphStart();
+
+    void preambleEnd();
+
+    void preambleStart();
+
     void startMonospace();
-
-    void startParagraph();
-
-    void startPreamble();
 
     void text(String s);
 
@@ -87,6 +87,14 @@ public class AsciiDoc {
         case Code.HEADING_START -> processor.headingStart(nextCode());
 
         case Code.HEADING_END -> processor.headingEnd();
+
+        case Code.PREAMBLE_START -> processor.preambleStart();
+
+        case Code.PREAMBLE_END -> processor.preambleEnd();
+
+        case Code.PARAGRAPH_START -> processor.paragraphStart();
+
+        case Code.PARAGRAPH_END -> processor.paragraphEnd();
 
         case Code.TOKENS -> processTokens(nextCode(), nextCode());
 

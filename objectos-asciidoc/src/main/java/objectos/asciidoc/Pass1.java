@@ -37,9 +37,13 @@ class Pass1 {
 
   private static final int DOCUMENT = 1 << 2;
 
-  private static final int HEADING = 1 << 3;
+  private static final int METADATA = 1 << 3;
 
-  private static final int METADATA = 1 << 4;
+  private static final int PREAMBLE = 1 << 4;
+
+  private static final int HEADING = 1 << 5;
+
+  private static final int PARAGRAPH = 1 << 6;
 
   private int[] code;
 
@@ -118,6 +122,27 @@ class Pass1 {
     code[codeIndex++] = p3;
   }
 
+  private void addCode(int p0, int p1, int p2, int p3, int p4) {
+    code = IntArrays.copyIfNecessary(code, codeIndex + 4);
+
+    code[codeIndex++] = p0;
+    code[codeIndex++] = p1;
+    code[codeIndex++] = p2;
+    code[codeIndex++] = p3;
+    code[codeIndex++] = p4;
+  }
+
+  private void addCode(int p0, int p1, int p2, int p3, int p4, int p5) {
+    code = IntArrays.copyIfNecessary(code, codeIndex + 5);
+
+    code[codeIndex++] = p0;
+    code[codeIndex++] = p1;
+    code[codeIndex++] = p2;
+    code[codeIndex++] = p3;
+    code[codeIndex++] = p4;
+    code[codeIndex++] = p5;
+  }
+
   private void execute0() {
     while (hasToken()) {
       tokenIndex = source.tokenCursor();
@@ -125,17 +150,19 @@ class Pass1 {
       var token = nextToken();
 
       state = switch (token) {
-        case Token.EOF -> parseEof();
-
         case Token.LINE_START -> parseLineStart();
 
-        case Token.LINE_END -> parseLineEnd();
+        case Token.LINE_END -> parseLineEnd(nextToken());
 
         case Token.HEADING -> parseHeading(nextToken(), nextToken(), nextToken());
 
         case Token.WORD -> parseWord(nextToken(), nextToken());
 
+        case Token.BLOB -> parseBlob(nextToken(), nextToken());
+
         case Token.SP -> parseSpace();
+
+        case Token.LF -> parseLineFeed();
 
         default -> throw new UnsupportedOperationException("Implement me :: token=" + token);
       };
@@ -154,13 +181,17 @@ class Pass1 {
     return source.nextToken();
   }
 
-  private int parseEof() {
+  private int parseBlob(int start, int end) {
     return switch (state) {
-      case DOCUMENT | METADATA -> {
-        addCode(Code.DOCUMENT_END);
+      case DOCUMENT | HEADING -> {
+        tokenStart = tokenIndex;
 
-        yield EOF;
+        addCode(Code.PREAMBLE_START);
+        addCode(Code.PARAGRAPH_START);
+
+        yield PREAMBLE | PARAGRAPH;
       }
+
       default -> uoe();
     };
   }
@@ -172,20 +203,69 @@ class Pass1 {
 
         yield DOCUMENT | HEADING | START;
       }
+
       default -> uoe();
     };
   }
 
-  private int parseLineEnd() {
-    return switch (state) {
-      case DOCUMENT | HEADING | NEXT -> {
-        addCode(
-          Code.TOKENS, tokenStart, tokenIndex,
-          Code.HEADING_END
-        );
+  private int parseLineEnd(int terminator) {
+    return switch (terminator) {
+      case Token.EOF -> switch (state) {
+        case DOCUMENT | HEADING | NEXT -> {
+          addCode(
+            Code.TOKENS, tokenStart, tokenIndex,
+            Code.HEADING_END,
+            Code.DOCUMENT_END
+          );
 
-        yield DOCUMENT | METADATA;
-      }
+          yield EOF;
+        }
+
+        case DOCUMENT | METADATA -> {
+          addCode(Code.DOCUMENT_END);
+
+          yield EOF;
+        }
+
+        case PREAMBLE | PARAGRAPH | START -> {
+          addCode(
+            Code.TOKENS, tokenStart, tokenIndex,
+            Code.PARAGRAPH_END,
+            Code.PREAMBLE_END,
+            Code.DOCUMENT_END
+          );
+
+          yield EOF;
+        }
+
+        default -> uoe();
+      };
+
+      case Token.LF -> switch (state) {
+        case DOCUMENT | HEADING | NEXT -> {
+          addCode(
+            Code.TOKENS, tokenStart, tokenIndex,
+            Code.HEADING_END
+          );
+
+          yield DOCUMENT | METADATA;
+        }
+
+        case PREAMBLE | PARAGRAPH -> state;
+
+        default -> uoe();
+      };
+
+      case DOCUMENT | METADATA -> PREAMBLE;
+
+      default -> uoe();
+    };
+  }
+
+  private int parseLineFeed() {
+    return switch (state) {
+      case DOCUMENT | METADATA -> state;
+
       default -> uoe();
     };
   }
@@ -197,6 +277,11 @@ class Pass1 {
 
         yield DOCUMENT | HEADING;
       }
+
+      case DOCUMENT | METADATA -> state;
+
+      case PREAMBLE | PARAGRAPH -> PREAMBLE | PARAGRAPH | START;
+
       default -> uoe();
     };
   }
@@ -204,6 +289,9 @@ class Pass1 {
   private int parseSpace() {
     return switch (state) {
       case DOCUMENT | HEADING | NEXT -> state;
+
+      case PREAMBLE | PARAGRAPH -> state;
+
       default -> uoe();
     };
   }
@@ -215,7 +303,11 @@ class Pass1 {
 
         yield DOCUMENT | HEADING | NEXT;
       }
+
       case DOCUMENT | HEADING | NEXT -> state;
+
+      case PREAMBLE | PARAGRAPH -> state;
+
       default -> uoe();
     };
   }

@@ -33,6 +33,8 @@ class Pass0 implements Pass1.Source, Pass2.Source {
 
   private static final int WORD = 5;
 
+  private static final int BLOB = 6;
+
   private String source;
 
   private int sourceIndex;
@@ -49,7 +51,7 @@ class Pass0 implements Pass1.Source, Pass2.Source {
 
   private int lineStart;
 
-  private int wordStart;
+  private int textStart;
 
   Pass0() {
     token = new int[512];
@@ -184,7 +186,44 @@ class Pass0 implements Pass1.Source, Pass2.Source {
 
       case WORD -> stateWord();
 
+      case BLOB -> stateBlob();
+
       default -> uoe();
+    };
+  }
+
+  private int stateBlob() {
+    if (!hasChar()) {
+      add(
+        Token.BLOB, textStart, sourceIndex,
+        Token.LINE_END, Token.EOF
+      );
+
+      return EOF;
+    }
+
+    var c = peek();
+
+    return switch (c) {
+      case '\n' -> {
+        add(
+          Token.BLOB, textStart, sourceIndex,
+          Token.LINE_END, Token.LF
+        );
+
+        yield advance(LINE_START);
+      }
+
+      case ' ' -> {
+        add(
+          Token.BLOB, textStart, sourceIndex,
+          Token.SP
+        );
+
+        yield advance(LINE);
+      }
+
+      default -> advance(state);
     };
   }
 
@@ -208,14 +247,22 @@ class Pass0 implements Pass1.Source, Pass2.Source {
       throw new UnsupportedOperationException("Implement me :: not H[1-6]");
     }
 
-    return switch (peek()) {
+    var c = peek();
+
+    return switch (c) {
       case '=' -> {
         counter++;
 
         yield advance(state);
       }
+
       case ' ' -> advance(HEADING);
-      default -> uoe();
+
+      default -> {
+        textStart = lineStart;
+
+        yield advance(BLOB);
+      }
     };
   }
 
@@ -229,7 +276,7 @@ class Pass0 implements Pass1.Source, Pass2.Source {
     var c = peek();
 
     if (isWord(c)) {
-      wordStart = sourceIndex;
+      textStart = sourceIndex;
 
       return advance(WORD);
     }
@@ -254,6 +301,7 @@ class Pass0 implements Pass1.Source, Pass2.Source {
 
         yield advance(HEADING_START);
       }
+
       default -> uoe();
     };
   }
@@ -261,7 +309,7 @@ class Pass0 implements Pass1.Source, Pass2.Source {
   private int stateWord() {
     if (!hasChar()) {
       add(
-        Token.WORD, wordStart, sourceIndex,
+        Token.WORD, textStart, sourceIndex,
         Token.LINE_END, Token.EOF
       );
 
@@ -275,14 +323,24 @@ class Pass0 implements Pass1.Source, Pass2.Source {
     }
 
     return switch (c) {
+      case '\n' -> {
+        add(
+          Token.WORD, textStart, sourceIndex,
+          Token.LINE_END, Token.LF
+        );
+
+        yield advance(LINE_START);
+      }
+
       case ' ' -> {
         add(
-          Token.WORD, wordStart, sourceIndex,
+          Token.WORD, textStart, sourceIndex,
           Token.SP
         );
 
         yield advance(LINE);
       }
+
       default -> uoe(c);
     };
   }

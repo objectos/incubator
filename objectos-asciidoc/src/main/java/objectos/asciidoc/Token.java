@@ -27,7 +27,11 @@ final class Token {
 
   static final int WORD = -5;
 
-  static final int SP = -6;
+  static final int BLOB = -6;
+
+  static final int SP = -7;
+
+  static final int LF = -8;
 
   private Token() {}
 
