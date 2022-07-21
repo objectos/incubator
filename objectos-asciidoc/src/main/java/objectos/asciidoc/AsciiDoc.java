@@ -17,11 +17,13 @@ package objectos.asciidoc;
 
 import objectos.lang.Check;
 
-public class AsciiDoc extends Parser {
+public class AsciiDoc {
 
   public interface Processor {
 
-    void endDocument();
+    void documentEnd();
+
+    void documentStart();
 
     void endMonospace();
 
@@ -29,11 +31,11 @@ public class AsciiDoc extends Parser {
 
     void endPreamble();
 
-    void endTitle();
+    void headingEnd();
+
+    void headingStart(int level);
 
     void newLine();
-
-    void startDocument();
 
     void startMonospace();
 
@@ -41,11 +43,19 @@ public class AsciiDoc extends Parser {
 
     void startPreamble();
 
-    void startTitle(int level);
-
     void text(String s);
 
   }
+
+  private final Pass0 pass0 = new Pass0();
+
+  private final Pass1 pass1 = new Pass1();
+
+  private final Pass2 pass2 = new Pass2();
+
+  private String source;
+
+  private Processor processor;
 
   private AsciiDoc() {
   }
@@ -55,58 +65,61 @@ public class AsciiDoc extends Parser {
   }
 
   public final void process(String source, Processor processor) {
-    Check.notNull(source, "source == null");
-    Check.notNull(processor, "processor == null");
+    this.source = Check.notNull(source, "source == null");
+    this.processor = Check.notNull(processor, "processor == null");
 
-    tokenize(source);
+    pass0.execute(source);
 
-    parse();
+    pass1.execute(pass0);
 
-    process0(processor);
+    process0();
   }
 
-  final void process0(Processor processor) {
+  final void process0() {
     while (hasCode()) {
       int code = nextCode();
 
       switch (code) {
-        case Code.END_DOCUMENT -> processor.endDocument();
+        case Code.DOCUMENT_START -> processor.documentStart();
 
-        case Code.END_MONOSPACE -> processor.endMonospace();
+        case Code.DOCUMENT_END -> processor.documentEnd();
 
-        case Code.END_PARAGRAPH -> processor.endParagraph();
+        case Code.HEADING_START -> processor.headingStart(nextCode());
 
-        case Code.END_PREAMBLE -> processor.endPreamble();
+        case Code.HEADING_END -> processor.headingEnd();
 
-        case Code.END_TITLE -> processor.endTitle();
-
-        case Code.START_DOCUMENT -> processor.startDocument();
-
-        case Code.START_MONOSPACE -> processor.startMonospace();
-
-        case Code.START_PARAGRAPH -> processor.startParagraph();
-
-        case Code.START_PREAMBLE -> processor.startPreamble();
-
-        case Code.START_TITLE -> {
-          Check.state(hasCode(), "Could not find title level");
-
-          var level = nextCode();
-
-          processor.startTitle(level);
-        }
-
-        case Code.TEXT -> {
-          Check.state(hasCode(), "Could not find string index");
-
-          var index = nextCode();
-
-          processor.text(string(index));
-        }
-
-        case Code.NL -> processor.newLine();
+        case Code.TOKENS -> processTokens(nextCode(), nextCode());
 
         default -> throw new UnsupportedOperationException("Implement me :: code=" + code);
+      }
+    }
+  }
+
+  private boolean hasCode() { return pass1.hasCode(); }
+
+  private int nextCode() {
+    return pass1.nextCode();
+  }
+
+  private void processTokens(int first, int last) {
+    pass2.execute(pass0, first, last);
+
+    while (pass2.hasText()) {
+      var text = pass2.nextText();
+
+      switch (text) {
+        case Text.REGULAR -> {
+          var begin = pass2.nextText();
+          var end = pass2.nextText();
+
+          if (begin < end) {
+            var s = source.substring(begin, end);
+
+            processor.text(s);
+          }
+        }
+
+        default -> throw new UnsupportedOperationException("Implement me :: text=" + text);
       }
     }
   }

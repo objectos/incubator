@@ -42,7 +42,8 @@ public class AsciidoctorTest extends AsciiDocTest {
   }
 
   @Override
-  final String convert(String source) {
+  final void test(
+      String source, int[] expected0, int[] expected1, int[][] expected2, String expectedHtml) {
     var doc = asciidoctor.load(source, options);
 
     for (var block : doc.getBlocks()) {
@@ -61,13 +62,9 @@ public class AsciidoctorTest extends AsciiDocTest {
 
     footer.remove();
 
-    return body.toString();
-  }
+    var result = body.toString();
 
-  @Override
-  final void test(
-      String source, int[] expected0, int[] expected1, int[][] expected2, String expectedHtml) {
-
+    testHtml(result, expectedHtml);
   }
 
 }

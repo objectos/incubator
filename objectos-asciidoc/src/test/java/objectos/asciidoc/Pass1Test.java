@@ -33,11 +33,6 @@ public class Pass1Test extends AsciiDocTest {
   }
 
   @Override
-  final String convert(String source) {
-    return null;
-  }
-
-  @Override
   final void test(
       String source, int[] expected0, int[] expected1, int[][] expected2, String expectedHtml) {
     var s = new ArrayPass1Source(expected0);

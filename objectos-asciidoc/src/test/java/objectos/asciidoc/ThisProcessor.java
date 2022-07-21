@@ -30,7 +30,7 @@ class ThisProcessor implements AsciiDoc.Processor {
   private final StringBuilder sb = new StringBuilder();
 
   @Override
-  public final void endDocument() {
+  public final void documentEnd() {
     switch (state) {
       case _HEADER -> sb.append("""
         </div>
@@ -41,6 +41,15 @@ class ThisProcessor implements AsciiDoc.Processor {
       case _CONTENT -> sb.append("</div>");
       default -> throw new UnsupportedOperationException("Implement me :: state=" + state);
     }
+  }
+
+  @Override
+  public final void documentStart() {
+    level = 0;
+
+    state = _START;
+
+    sb.setLength(0);
   }
 
   @Override
@@ -58,24 +67,33 @@ class ThisProcessor implements AsciiDoc.Processor {
   }
 
   @Override
-  public final void endTitle() {
+  public final void headingEnd() {
     sb.append("</h");
     sb.append(level);
     sb.append(">\n");
   }
 
   @Override
-  public final void newLine() {
-    sb.append('\n');
+  public final void headingStart(int level) {
+    switch (state) {
+      case _START -> sb.append("""
+        <div id="header">
+        """);
+      default -> throw new UnsupportedOperationException("Implement me :: state=" + state);
+    }
+
+    state = _HEADER;
+
+    sb.append("<h");
+    sb.append(level);
+    sb.append(">");
+
+    this.level = level;
   }
 
   @Override
-  public final void startDocument() {
-    level = 0;
-
-    state = _START;
-
-    sb.setLength(0);
+  public final void newLine() {
+    sb.append('\n');
   }
 
   @Override
@@ -106,24 +124,6 @@ class ThisProcessor implements AsciiDoc.Processor {
     }
 
     state = _CONTENT;
-  }
-
-  @Override
-  public final void startTitle(int level) {
-    switch (state) {
-      case _START -> sb.append("""
-        <div id="header">
-        """);
-      default -> throw new UnsupportedOperationException("Implement me :: state=" + state);
-    }
-
-    state = _HEADER;
-
-    sb.append("<h");
-    sb.append(level);
-    sb.append(">");
-
-    this.level = level;
   }
 
   @Override

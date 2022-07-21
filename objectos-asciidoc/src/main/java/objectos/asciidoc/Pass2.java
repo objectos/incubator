@@ -48,6 +48,8 @@ class Pass2 {
 
   private int regularEnd;
 
+  private int textCursor;
+
   Pass2() {
     text = new int[128];
   }
@@ -77,6 +79,16 @@ class Pass2 {
     state = START;
 
     execute0();
+
+    textCursor = 0;
+  }
+
+  final boolean hasText() {
+    return textCursor < textIndex;
+  }
+
+  final int nextText() {
+    return text[textCursor++];
   }
 
   final int[] toText() {
@@ -111,10 +123,10 @@ class Pass2 {
       };
     }
 
-    executeEof();
+    state = executeEof();
   }
 
-  private void executeEof() {
+  private int executeEof() {
     switch (state) {
       case REGULAR -> {
         addText(regularEnd);
@@ -122,6 +134,8 @@ class Pass2 {
 
       default -> uoe();
     }
+
+    return EOF;
   }
 
   private int executeLineEnd() {

@@ -15,7 +15,7 @@
  */
 package objectos.asciidoc;
 
-final class Proto {
+final class Code {
 
   static final int DOCUMENT_START = -1;
   static final int DOCUMENT_END = -2;
@@ -25,6 +25,6 @@ final class Proto {
 
   static final int TOKENS = -5;
 
-  private Proto() {}
+  private Code() {}
 
 }

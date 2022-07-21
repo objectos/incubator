@@ -41,9 +41,11 @@ class Pass1 {
 
   private static final int METADATA = 1 << 4;
 
-  private int[] proto;
+  private int[] code;
 
-  private int protoIndex;
+  private int codeCursor;
+
+  private int codeIndex;
 
   private int state;
 
@@ -54,7 +56,7 @@ class Pass1 {
   private int tokenStart;
 
   Pass1() {
-    proto = new int[512];
+    code = new int[512];
   }
 
   public final void execute(Source source) {
@@ -73,37 +75,47 @@ class Pass1 {
 
     this.source = source;
 
-    protoIndex = 0;
+    codeIndex = 0;
 
     state = START;
 
     execute0();
+
+    codeCursor = 0;
+  }
+
+  final boolean hasCode() {
+    return codeCursor < codeIndex;
+  }
+
+  final int nextCode() {
+    return code[codeCursor++];
   }
 
   final int[] toCode() {
-    return Arrays.copyOf(proto, protoIndex);
+    return Arrays.copyOf(code, codeIndex);
   }
 
-  private void addProto(int p0) {
-    proto = IntArrays.copyIfNecessary(proto, protoIndex);
+  private void addCode(int p0) {
+    code = IntArrays.copyIfNecessary(code, codeIndex);
 
-    proto[protoIndex++] = p0;
+    code[codeIndex++] = p0;
   }
 
-  private void addProto(int p0, int p1) {
-    proto = IntArrays.copyIfNecessary(proto, protoIndex + 1);
+  private void addCode(int p0, int p1) {
+    code = IntArrays.copyIfNecessary(code, codeIndex + 1);
 
-    proto[protoIndex++] = p0;
-    proto[protoIndex++] = p1;
+    code[codeIndex++] = p0;
+    code[codeIndex++] = p1;
   }
 
-  private void addProto(int p0, int p1, int p2, int p3) {
-    proto = IntArrays.copyIfNecessary(proto, protoIndex + 3);
+  private void addCode(int p0, int p1, int p2, int p3) {
+    code = IntArrays.copyIfNecessary(code, codeIndex + 3);
 
-    proto[protoIndex++] = p0;
-    proto[protoIndex++] = p1;
-    proto[protoIndex++] = p2;
-    proto[protoIndex++] = p3;
+    code[codeIndex++] = p0;
+    code[codeIndex++] = p1;
+    code[codeIndex++] = p2;
+    code[codeIndex++] = p3;
   }
 
   private void execute0() {
@@ -145,7 +157,7 @@ class Pass1 {
   private int parseEof() {
     return switch (state) {
       case DOCUMENT | METADATA -> {
-        addProto(Proto.DOCUMENT_END);
+        addCode(Code.DOCUMENT_END);
 
         yield EOF;
       }
@@ -156,7 +168,7 @@ class Pass1 {
   private int parseHeading(int level, int start, int end) {
     return switch (state) {
       case DOCUMENT | HEADING -> {
-        addProto(Proto.HEADING_START, level);
+        addCode(Code.HEADING_START, level);
 
         yield DOCUMENT | HEADING | START;
       }
@@ -167,9 +179,9 @@ class Pass1 {
   private int parseLineEnd() {
     return switch (state) {
       case DOCUMENT | HEADING | NEXT -> {
-        addProto(
-          Proto.TOKENS, tokenStart, tokenIndex,
-          Proto.HEADING_END
+        addCode(
+          Code.TOKENS, tokenStart, tokenIndex,
+          Code.HEADING_END
         );
 
         yield DOCUMENT | METADATA;
@@ -181,7 +193,7 @@ class Pass1 {
   private int parseLineStart() {
     return switch (state) {
       case START -> {
-        addProto(Proto.DOCUMENT_START);
+        addCode(Code.DOCUMENT_START);
 
         yield DOCUMENT | HEADING;
       }

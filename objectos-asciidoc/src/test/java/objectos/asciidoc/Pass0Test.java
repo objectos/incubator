@@ -33,13 +33,6 @@ public class Pass0Test extends AsciiDocTest {
   }
 
   @Override
-  final String convert(String source) {
-    pass0.execute(source);
-
-    return null;
-  }
-
-  @Override
   final void test(
       String source, int[] expected0, int[] expected1, int[][] expected2, String expectedHtml) {
     pass0.execute(source);

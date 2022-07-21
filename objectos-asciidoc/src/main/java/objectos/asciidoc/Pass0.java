@@ -19,7 +19,7 @@ import java.util.Arrays;
 import objectos.lang.Check;
 import objectos.util.IntArrays;
 
-class Pass0 implements Pass1.Source {
+class Pass0 implements Pass1.Source, Pass2.Source {
 
   private static final int EOF = 0;
 
@@ -89,6 +89,9 @@ class Pass0 implements Pass1.Source {
 
   @Override
   public final int nextToken() { return token[tokenCursor++]; }
+
+  @Override
+  public final int token(int index) { return token[index]; }
 
   @Override
   public final int tokenCursor() { return tokenCursor; }

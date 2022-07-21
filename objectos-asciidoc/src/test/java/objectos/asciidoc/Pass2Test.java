@@ -35,11 +35,6 @@ public class Pass2Test extends AsciiDocTest {
   }
 
   @Override
-  final String convert(String source) {
-    return null;
-  }
-
-  @Override
   final void test(
       String source, int[] expected0, int[] expected1, int[][] expected2, String expectedHtml) {
     var s = new ArrayPass2Source(expected0);
@@ -49,7 +44,7 @@ public class Pass2Test extends AsciiDocTest {
     for (int i = 0; i < expected1.length; i++) {
       var code = expected1[i];
 
-      if (code != Proto.TOKENS) {
+      if (code != Code.TOKENS) {
         continue;
       }
 

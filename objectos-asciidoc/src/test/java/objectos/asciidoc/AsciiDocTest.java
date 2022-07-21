@@ -54,42 +54,42 @@ public class AsciiDocTest {
 
       p0(
         //        Lexer.Symbol.PARAGRAPH, 0,
-        //        Lexer.Symbol.CBOLD0, 0,
-        //        Lexer.Symbol.CBOLD9, 2, // a
-        //        Lexer.Symbol.CBOLD0, 0,
-        //        Lexer.Symbol.CBOLD9, 2, // b
-        //        Lexer.Symbol.CBOLD0, 0,
-        //        Lexer.Symbol.CBOLD9, 2, // c
-        //        Lexer.Symbol.CBOLD0, 0,
-        //        Lexer.Symbol.CBOLD9, 2, // d
-        //        Lexer.Symbol.CBOLD0, 0,
-        //        Lexer.Symbol.CBOLD9, 2, // e
-        //        Lexer.Symbol.EOL, 42,
-        //
-        //        Lexer.Symbol.EMPTY, 68,
-        Lexer.Symbol.EOF, 68
+      //        Lexer.Symbol.CBOLD0, 0,
+      //        Lexer.Symbol.CBOLD9, 2, // a
+      //        Lexer.Symbol.CBOLD0, 0,
+      //        Lexer.Symbol.CBOLD9, 2, // b
+      //        Lexer.Symbol.CBOLD0, 0,
+      //        Lexer.Symbol.CBOLD9, 2, // c
+      //        Lexer.Symbol.CBOLD0, 0,
+      //        Lexer.Symbol.CBOLD9, 2, // d
+      //        Lexer.Symbol.CBOLD0, 0,
+      //        Lexer.Symbol.CBOLD9, 2, // e
+      //        Lexer.Symbol.EOL, 42,
+      //
+      //        Lexer.Symbol.EMPTY, 68,
+      //        Lexer.Symbol.EOF, 68
       ),
 
       p1(
-        Parser.Code.START_DOCUMENT,
-        Parser.Code.START_PREAMBLE,
-        Parser.Code.START_PARAGRAPH,
-        Parser.Code.START_MONOSPACE,
-        Parser.Code.TEXT, 0, // at
-        Parser.Code.END_MONOSPACE,
-        Parser.Code.TEXT, 1, // start of line at
-        Parser.Code.START_MONOSPACE,
-        Parser.Code.TEXT, 2, // the middle
-        Parser.Code.END_MONOSPACE,
-        Parser.Code.TEXT, 3, // of line at the end
-        Parser.Code.START_MONOSPACE,
-        Parser.Code.TEXT, 4, // of the line
-        Parser.Code.END_MONOSPACE,
-        Parser.Code.TEXT, 5, // ws
-
-        Parser.Code.END_PARAGRAPH,
-        Parser.Code.END_PREAMBLE,
-        Parser.Code.END_DOCUMENT
+        //        Parser.Code.START_DOCUMENT,
+      //        Parser.Code.START_PREAMBLE,
+      //        Parser.Code.START_PARAGRAPH,
+      //        Parser.Code.START_MONOSPACE,
+      //        Parser.Code.TEXT, 0, // at
+      //        Parser.Code.END_MONOSPACE,
+      //        Parser.Code.TEXT, 1, // start of line at
+      //        Parser.Code.START_MONOSPACE,
+      //        Parser.Code.TEXT, 2, // the middle
+      //        Parser.Code.END_MONOSPACE,
+      //        Parser.Code.TEXT, 3, // of line at the end
+      //        Parser.Code.START_MONOSPACE,
+      //        Parser.Code.TEXT, 4, // of the line
+      //        Parser.Code.END_MONOSPACE,
+      //        Parser.Code.TEXT, 5, // ws
+      //
+      //        Parser.Code.END_PARAGRAPH,
+      //        Parser.Code.END_PREAMBLE,
+      //        Parser.Code.END_DOCUMENT
       ),
 
       p2(),
@@ -142,11 +142,11 @@ public class AsciiDocTest {
       ),
 
       p1(
-        Proto.DOCUMENT_START,
-        Proto.HEADING_START, 1,
-        Proto.TOKENS, 5, 12,
-        Proto.HEADING_END,
-        Proto.DOCUMENT_END
+        Code.DOCUMENT_START,
+        Code.HEADING_START, 1,
+        Code.TOKENS, 5, 12,
+        Code.HEADING_END,
+        Code.DOCUMENT_END
       ),
 
       p2(
@@ -199,27 +199,27 @@ public class AsciiDocTest {
       """,
 
       p0(
-        Lexer.Symbol.TITLE, 1,
-        Lexer.Symbol.REGULAR, 2, 15,
-        Lexer.Symbol.LF, 15,
-        Lexer.Symbol.LF, 16,
-        Lexer.Symbol.REGULAR, 17, 30,
-        Lexer.Symbol.LF, 30,
-        Lexer.Symbol.EOF, 31
+        //        Lexer.Symbol.TITLE, 1,
+      //        Lexer.Symbol.REGULAR, 2, 15,
+      //        Lexer.Symbol.LF, 15,
+      //        Lexer.Symbol.LF, 16,
+      //        Lexer.Symbol.REGULAR, 17, 30,
+      //        Lexer.Symbol.LF, 30,
+      //        Lexer.Symbol.EOF, 31
       ),
 
       p1(
-        Parser.Code.START_DOCUMENT,
-        Parser.Code.START_TITLE, 1,
-        Parser.Code.TEXT, 0,
-        Parser.Code.END_TITLE,
-        Parser.Code.START_PREAMBLE,
-        Parser.Code.START_PARAGRAPH,
-        Parser.Code.TEXT, 1,
-        Parser.Code.NL,
-        Parser.Code.END_PARAGRAPH,
-        Parser.Code.END_PREAMBLE,
-        Parser.Code.END_DOCUMENT
+        //        Parser.Code.START_DOCUMENT,
+      //        Parser.Code.START_TITLE, 1,
+      //        Parser.Code.TEXT, 0,
+      //        Parser.Code.END_TITLE,
+      //        Parser.Code.START_PREAMBLE,
+      //        Parser.Code.START_PARAGRAPH,
+      //        Parser.Code.TEXT, 1,
+      //        Parser.Code.NL,
+      //        Parser.Code.END_PARAGRAPH,
+      //        Parser.Code.END_PREAMBLE,
+      //        Parser.Code.END_DOCUMENT
       ),
 
       p2(),
@@ -261,24 +261,24 @@ public class AsciiDocTest {
       """,
 
       p0(
-        Lexer.Symbol.TITLE, 1,
-        Lexer.Symbol.REGULAR, 2, 6,
-        Lexer.Symbol.MONOSPACE, 7, 10,
-        Lexer.Symbol.REGULAR, 11, 17,
-        Lexer.Symbol.LF, 17,
-        Lexer.Symbol.EOF, 18
+        //        Lexer.Symbol.TITLE, 1,
+      //        Lexer.Symbol.REGULAR, 2, 6,
+      //        Lexer.Symbol.MONOSPACE, 7, 10,
+      //        Lexer.Symbol.REGULAR, 11, 17,
+      //        Lexer.Symbol.LF, 17,
+      //        Lexer.Symbol.EOF, 18
       ),
 
       p1(
-        Parser.Code.START_DOCUMENT,
-        Parser.Code.START_TITLE, 1,
-        Parser.Code.TEXT, 0,
-        Parser.Code.START_MONOSPACE,
-        Parser.Code.TEXT, 1,
-        Parser.Code.END_MONOSPACE,
-        Parser.Code.TEXT, 2,
-        Parser.Code.END_TITLE,
-        Parser.Code.END_DOCUMENT
+        //        Parser.Code.START_DOCUMENT,
+      //        Parser.Code.START_TITLE, 1,
+      //        Parser.Code.TEXT, 0,
+      //        Parser.Code.START_MONOSPACE,
+      //        Parser.Code.TEXT, 1,
+      //        Parser.Code.END_MONOSPACE,
+      //        Parser.Code.TEXT, 2,
+      //        Parser.Code.END_TITLE,
+      //        Parser.Code.END_DOCUMENT
       ),
 
       p2(),
@@ -307,19 +307,19 @@ public class AsciiDocTest {
     test("= `A`",
 
       p0(
-        Lexer.Symbol.TITLE, 1,
-        Lexer.Symbol.MONOSPACE, 3, 4,
-        Lexer.Symbol.EOF, 5
+        //        Lexer.Symbol.TITLE, 1,
+      //        Lexer.Symbol.MONOSPACE, 3, 4,
+      //        Lexer.Symbol.EOF, 5
       ),
 
       p1(
-        Parser.Code.START_DOCUMENT,
-        Parser.Code.START_TITLE, 1,
-        Parser.Code.START_MONOSPACE,
-        Parser.Code.TEXT, 0,
-        Parser.Code.END_MONOSPACE,
-        Parser.Code.END_TITLE,
-        Parser.Code.END_DOCUMENT
+        //        Parser.Code.START_DOCUMENT,
+      //        Parser.Code.START_TITLE, 1,
+      //        Parser.Code.START_MONOSPACE,
+      //        Parser.Code.TEXT, 0,
+      //        Parser.Code.END_MONOSPACE,
+      //        Parser.Code.END_TITLE,
+      //        Parser.Code.END_DOCUMENT
       ),
 
       p2(),
@@ -363,20 +363,20 @@ public class AsciiDocTest {
       """,
 
       p0(
-        Lexer.Symbol.REGULAR, 0, 10,
-        Lexer.Symbol.LF, 10,
-        Lexer.Symbol.EOF, 11
+        //        Lexer.Symbol.REGULAR, 0, 10,
+      //        Lexer.Symbol.LF, 10,
+      //        Lexer.Symbol.EOF, 11
       ),
 
       p1(
-        Parser.Code.START_DOCUMENT,
-        Parser.Code.START_PREAMBLE,
-        Parser.Code.START_PARAGRAPH,
-        Parser.Code.TEXT, 0,
-        Parser.Code.NL,
-        Parser.Code.END_PARAGRAPH,
-        Parser.Code.END_PREAMBLE,
-        Parser.Code.END_DOCUMENT
+        //        Parser.Code.START_DOCUMENT,
+      //        Parser.Code.START_PREAMBLE,
+      //        Parser.Code.START_PARAGRAPH,
+      //        Parser.Code.TEXT, 0,
+      //        Parser.Code.NL,
+      //        Parser.Code.END_PARAGRAPH,
+      //        Parser.Code.END_PREAMBLE,
+      //        Parser.Code.END_DOCUMENT
       ),
 
       p2(),
@@ -455,34 +455,34 @@ public class AsciiDocTest {
       """,
 
       p0(
-        Lexer.Symbol.MONOSPACE, 1, 2,
-        Lexer.Symbol.REGULAR, 3, 4,
-        Lexer.Symbol.MONOSPACE, 5, 6,
-        Lexer.Symbol.REGULAR, 7, 9,
-        Lexer.Symbol.MONOSPACE, 10, 11,
-        Lexer.Symbol.EOF, 68
+        //        Lexer.Symbol.MONOSPACE, 1, 2,
+      //        Lexer.Symbol.REGULAR, 3, 4,
+      //        Lexer.Symbol.MONOSPACE, 5, 6,
+      //        Lexer.Symbol.REGULAR, 7, 9,
+      //        Lexer.Symbol.MONOSPACE, 10, 11,
+      //        Lexer.Symbol.EOF, 68
       ),
 
       p1(
-        Parser.Code.START_DOCUMENT,
-        Parser.Code.START_PREAMBLE,
-        Parser.Code.START_PARAGRAPH,
-        Parser.Code.START_MONOSPACE,
-        Parser.Code.TEXT, 0, // at
-        Parser.Code.END_MONOSPACE,
-        Parser.Code.TEXT, 1, // start of line at
-        Parser.Code.START_MONOSPACE,
-        Parser.Code.TEXT, 2, // the middle
-        Parser.Code.END_MONOSPACE,
-        Parser.Code.TEXT, 3, // of line at the end
-        Parser.Code.START_MONOSPACE,
-        Parser.Code.TEXT, 4, // of the line
-        Parser.Code.END_MONOSPACE,
-        Parser.Code.TEXT, 5, // ws
-
-        Parser.Code.END_PARAGRAPH,
-        Parser.Code.END_PREAMBLE,
-        Parser.Code.END_DOCUMENT
+        //        Parser.Code.START_DOCUMENT,
+      //        Parser.Code.START_PREAMBLE,
+      //        Parser.Code.START_PARAGRAPH,
+      //        Parser.Code.START_MONOSPACE,
+      //        Parser.Code.TEXT, 0, // at
+      //        Parser.Code.END_MONOSPACE,
+      //        Parser.Code.TEXT, 1, // start of line at
+      //        Parser.Code.START_MONOSPACE,
+      //        Parser.Code.TEXT, 2, // the middle
+      //        Parser.Code.END_MONOSPACE,
+      //        Parser.Code.TEXT, 3, // of line at the end
+      //        Parser.Code.START_MONOSPACE,
+      //        Parser.Code.TEXT, 4, // of the line
+      //        Parser.Code.END_MONOSPACE,
+      //        Parser.Code.TEXT, 5, // ws
+      //
+      //        Parser.Code.END_PARAGRAPH,
+      //        Parser.Code.END_PREAMBLE,
+      //        Parser.Code.END_DOCUMENT
       ),
 
       p2(),
@@ -747,14 +747,6 @@ public class AsciiDocTest {
   public final void unorderedList04() {
   }
 
-  String convert(String source) {
-    asciiDoc.process0(processor);
-
-    var html = processor.toString();
-
-    return normalize(html);
-  }
-
   final String normalize(String html) {
     Document fragment = Jsoup.parseBodyFragment(html);
 
@@ -765,47 +757,11 @@ public class AsciiDocTest {
 
   void test(
       String source, int[] expected0, int[] expected1, int[][] expected2, String expectedHtml) {
-    //    asciiDoc.tokenize(source);
-    //
-    //    if (expected0.length > 0) {
-    //      var symbol = asciiDoc.toSymbol();
-    //
-    //      assertEquals(
-    //        symbol,
-    //        expected0,
-    //        """
-    //
-    //        Lexer assertion failed
-    //        actual  =%s
-    //        expected=%s
-    //
-    //        """.formatted(Arrays.toString(symbol), Arrays.toString(expected0))
-    //      );
-    //    }
-    //
-    //    asciiDoc.parse();
-    //
-    //    if (expected1.length > 0) {
-    //      var parser = asciiDoc.toCode();
-    //
-    //      assertEquals(
-    //        parser,
-    //        expected1,
-    //        """
-    //
-    //        Parser assertion failed
-    //        actual  =%s
-    //        expected=%s
-    //
-    //        """.formatted(Arrays.toString(parser), Arrays.toString(expected1))
-    //      );
-    //    }
-    //
-    //    assertEquals(
-    //      convert(source),
-    //
-    //      normalize(expectedHtml)
-    //    );
+    asciiDoc.process(source, processor);
+
+    var result = processor.toString();
+
+    testHtml(result, expectedHtml);
   }
 
   final void testArrays(int[] result, int[] expected, String header) {
@@ -818,6 +774,10 @@ public class AsciiDocTest {
     """.formatted(header, Arrays.toString(result), Arrays.toString(expected));
 
     assertEquals(result, expected, msg);
+  }
+
+  final void testHtml(String result, String expected) {
+    assertEquals(normalize(result), normalize(expected));
   }
 
   private int[] p0(int... values) { return values; }
