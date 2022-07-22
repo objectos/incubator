@@ -25,7 +25,7 @@ public class AsciiDoc {
 
     void documentStart();
 
-    void endMonospace();
+    void monospaceEnd();
 
     void headingEnd();
 
@@ -41,7 +41,7 @@ public class AsciiDoc {
 
     void preambleStart();
 
-    void startMonospace();
+    void monospaceStart();
 
     void text(String s);
 
@@ -126,6 +126,10 @@ public class AsciiDoc {
             processor.text(s);
           }
         }
+
+        case Text.MONOSPACE_START -> processor.monospaceStart();
+
+        case Text.MONOSPACE_END -> processor.monospaceEnd();
 
         default -> throw new UnsupportedOperationException("Implement me :: text=" + text);
       }

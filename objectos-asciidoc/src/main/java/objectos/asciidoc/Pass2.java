@@ -27,9 +27,11 @@ class Pass2 {
 
   private static final int EOF = 0;
 
-  private static final int START = 1;
+  private static final int START = 1 << 0;
 
-  private static final int REGULAR = 2;
+  private static final int REGULAR = 1 << 1;
+
+  private static final int MONOSPACE = 1 << 2;
 
   private Source source;
 
@@ -39,6 +41,8 @@ class Pass2 {
   private int sourceFirst;
 
   private int sourceLast;
+
+  private int sourceMark;
 
   private int[] text;
 
@@ -121,6 +125,10 @@ class Pass2 {
 
         case Token.LF -> executeLf();
 
+        case Token.MONO_START -> executeMonoStart(nextToken());
+
+        case Token.MONO_END -> executeMonoEnd(nextToken());
+
         default -> uoe(token);
       };
     }
@@ -138,25 +146,34 @@ class Pass2 {
         yield REGULAR;
       }
 
+      case MONOSPACE | START -> {
+        addText(Text.REGULAR, start);
+
+        regularEnd = end;
+
+        yield MONOSPACE;
+      }
+
       default -> uoe();
     };
   }
 
   private int executeEof() {
-    switch (state) {
+    return switch (state) {
+      case START -> EOF;
       case REGULAR -> {
         addText(regularEnd);
+
+        yield EOF;
       }
 
       default -> uoe();
-    }
-
-    return EOF;
+    };
   }
 
   private int executeLf() {
     return switch (state) {
-      case REGULAR -> state;
+      case START, REGULAR -> state;
 
       default -> uoe();
     };
@@ -164,7 +181,7 @@ class Pass2 {
 
   private int executeLineEnd() {
     return switch (state) {
-      case REGULAR -> state;
+      case START, REGULAR -> state;
 
       default -> uoe();
     };
@@ -172,7 +189,47 @@ class Pass2 {
 
   private int executeLineStart() {
     return switch (state) {
-      case REGULAR -> state;
+      case START, REGULAR -> state;
+
+      default -> uoe();
+    };
+  }
+
+  private int executeMonoEnd(int index) {
+    return switch (state) {
+      case MONOSPACE -> {
+        addText(regularEnd);
+        addText(Text.MONOSPACE_END);
+
+        yield START;
+      }
+
+      default -> uoe();
+    };
+  }
+
+  private int executeMonoStart(int index) {
+    return switch (state) {
+      case START -> {
+        if (searchToken(Token.MONO_END)) {
+          addText(Text.MONOSPACE_START);
+
+          yield MONOSPACE | START;
+        } else {
+          yield REGULAR;
+        }
+      }
+
+      case REGULAR -> {
+        if (searchToken(Token.MONO_END)) {
+          addText(regularEnd);
+          addText(Text.MONOSPACE_START);
+
+          yield MONOSPACE | START;
+        } else {
+          yield REGULAR;
+        }
+      }
 
       default -> uoe();
     };
@@ -186,8 +243,30 @@ class Pass2 {
     return source.token(sourceIndex++);
   }
 
+  private boolean searchToken(int token) {
+    sourceMark = sourceIndex;
+
+    var found = false;
+
+    while (hasToken()) {
+      var current = nextToken();
+
+      if (current < 0 && current == token) {
+        found = true;
+
+        break;
+      }
+    }
+
+    sourceIndex = sourceMark;
+
+    return found;
+  }
+
   private int uoe() {
-    throw new UnsupportedOperationException("Implement me :: state=" + state);
+    var s = Integer.toBinaryString(state);
+
+    throw new UnsupportedOperationException("Implement me :: state=" + s);
   }
 
   private int uoe(int t) {

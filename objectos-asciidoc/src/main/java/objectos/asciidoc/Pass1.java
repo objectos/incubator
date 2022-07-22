@@ -156,9 +156,13 @@ class Pass1 {
 
         case Token.HEADING -> parseHeading(nextToken(), nextToken(), nextToken());
 
-        case Token.BLOB -> parseBlob(nextToken(), nextToken());
+        case Token.BLOB -> parseTokens(nextToken(), nextToken());
 
         case Token.LF -> parseLineFeed();
+
+        case Token.MONO_START -> parseTokens(nextToken());
+
+        case Token.MONO_END -> parseTokens(nextToken());
 
         default -> throw new UnsupportedOperationException("Implement me :: token=" + token);
       };
@@ -175,27 +179,6 @@ class Pass1 {
 
   private int nextToken() {
     return source.nextToken();
-  }
-
-  private int parseBlob(int start, int end) {
-    return switch (state) {
-      case DOCUMENT | HEADING -> {
-        tokenStart = tokenIndex;
-
-        addCode(Code.PREAMBLE_START);
-        addCode(Code.PARAGRAPH_START);
-
-        yield PREAMBLE | PARAGRAPH;
-      }
-
-      case DOCUMENT | HEADING | START -> {
-        tokenStart = tokenIndex;
-
-        yield DOCUMENT | HEADING | NEXT;
-      }
-
-      default -> uoe();
-    };
   }
 
   private int parseHeading(int level, int start, int end) {
@@ -283,6 +266,33 @@ class Pass1 {
       case DOCUMENT | METADATA -> state;
 
       case PREAMBLE | PARAGRAPH -> PREAMBLE | PARAGRAPH | START;
+
+      default -> uoe();
+    };
+  }
+
+  private int parseTokens(int v0) {
+    return parseTokens(v0, 0);
+  }
+
+  private int parseTokens(int v0, int v1) {
+    return switch (state) {
+      case DOCUMENT | HEADING -> {
+        tokenStart = tokenIndex;
+
+        addCode(Code.PREAMBLE_START);
+        addCode(Code.PARAGRAPH_START);
+
+        yield PREAMBLE | PARAGRAPH;
+      }
+
+      case DOCUMENT | HEADING | START -> {
+        tokenStart = tokenIndex;
+
+        yield DOCUMENT | HEADING | NEXT;
+      }
+
+      case PREAMBLE | PARAGRAPH -> state;
 
       default -> uoe();
     };

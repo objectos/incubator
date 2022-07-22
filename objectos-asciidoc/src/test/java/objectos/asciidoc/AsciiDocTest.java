@@ -118,7 +118,7 @@ public class AsciiDocTest {
   '''
   = The doctitle'''
 
-  P0: ^ H1-0,2 W2,5 SP W6,14 $ EOF
+  P0: ^ H1-0,2 B2,14 $ EOF
 
   P1: DOC_START
       HEADING_START
@@ -172,7 +172,7 @@ public class AsciiDocTest {
   = The doctitle
   '''
 
-  P0: ^ H1-0,2 W2,5 SP W6,14 $ LF
+  P0: ^ H1-0,2 B2,14 $ LF
       ^ $ EOF
 
   P1: DOC_START
@@ -233,7 +233,7 @@ public class AsciiDocTest {
   =Not Title
   '''
 
-  P0: ^ X0,4 SP W5,10 $ LF
+  P0: ^ B0,10 $ LF
       ^ $ EOF
 
   P1: DOC_START
@@ -321,7 +321,7 @@ public class AsciiDocTest {
   public final void listingBlock01() {
   }
 
-  @Test(enabled = false, description = //
+  @Test(description = //
   """
   monospace
 
@@ -334,7 +334,7 @@ public class AsciiDocTest {
   `a` `b`, `c`
   '''
 
-  L0: ^ ` W1,2 ` SP ` W5,6 ` X7,8 SP ` W10,11 ` $ LF
+  L0: ^ ` B1,2 ` B3,4 ` B5,6 ` B7,9 ` B10,11 ` $ LF
       ^ $ EOF
 
   L1: ^ <M R1,2 M> R3,4 <M R5,6 M> R7,9 <M R10,11 M> $ LF
@@ -362,32 +362,35 @@ public class AsciiDocTest {
         Token.LINE_END,
         Token.LF,
         Token.LINE_START,
+        Token.LINE_END,
         Token.EOF
       ),
 
       p1(
-        //        Parser.Code.START_DOCUMENT,
-      //        Parser.Code.START_PREAMBLE,
-      //        Parser.Code.START_PARAGRAPH,
-      //        Parser.Code.START_MONOSPACE,
-      //        Parser.Code.TEXT, 0, // at
-      //        Parser.Code.END_MONOSPACE,
-      //        Parser.Code.TEXT, 1, // start of line at
-      //        Parser.Code.START_MONOSPACE,
-      //        Parser.Code.TEXT, 2, // the middle
-      //        Parser.Code.END_MONOSPACE,
-      //        Parser.Code.TEXT, 3, // of line at the end
-      //        Parser.Code.START_MONOSPACE,
-      //        Parser.Code.TEXT, 4, // of the line
-      //        Parser.Code.END_MONOSPACE,
-      //        Parser.Code.TEXT, 5, // ws
-      //
-      //        Parser.Code.END_PARAGRAPH,
-      //        Parser.Code.END_PREAMBLE,
-      //        Parser.Code.END_DOCUMENT
+        Code.DOCUMENT_START,
+        Code.PREAMBLE_START,
+        Code.PARAGRAPH_START,
+        Code.TOKENS, 1, 31,
+        Code.PARAGRAPH_END,
+        Code.PREAMBLE_END,
+        Code.DOCUMENT_END
       ),
 
-      p2(),
+      p2(
+        t(
+          Text.MONOSPACE_START,
+          Text.REGULAR, 1, 2,
+          Text.MONOSPACE_END,
+          Text.REGULAR, 3, 4,
+          Text.MONOSPACE_START,
+          Text.REGULAR, 5, 6,
+          Text.MONOSPACE_END,
+          Text.REGULAR, 7, 9,
+          Text.MONOSPACE_START,
+          Text.REGULAR, 10, 11,
+          Text.MONOSPACE_END
+        )
+      ),
 
       """
       <body>
@@ -395,7 +398,7 @@ public class AsciiDocTest {
       </div>
       <div id="content">
       <div class="paragraph">
-      <p><code>at</code> start of line at <code>the middle</code> of line at the end <code>of the line</code></p>
+      <p><code>a</code> <code>b</code>, <code>c</code></p>
       </div>
       </div>
       </body>

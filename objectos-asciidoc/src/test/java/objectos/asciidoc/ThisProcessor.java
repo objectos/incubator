@@ -53,11 +53,6 @@ class ThisProcessor implements AsciiDoc.Processor {
   }
 
   @Override
-  public final void endMonospace() {
-    sb.append("</code>");
-  }
-
-  @Override
   public final void headingEnd() {
     sb.append("</h");
     sb.append(level);
@@ -80,6 +75,16 @@ class ThisProcessor implements AsciiDoc.Processor {
     sb.append(">");
 
     this.level = level;
+  }
+
+  @Override
+  public final void monospaceEnd() {
+    sb.append("</code>");
+  }
+
+  @Override
+  public final void monospaceStart() {
+    sb.append("<code>");
   }
 
   @Override
@@ -119,11 +124,6 @@ class ThisProcessor implements AsciiDoc.Processor {
     }
 
     state = _CONTENT;
-  }
-
-  @Override
-  public final void startMonospace() {
-    sb.append("<code>");
   }
 
   @Override

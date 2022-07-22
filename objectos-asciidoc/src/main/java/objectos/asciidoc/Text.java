@@ -19,6 +19,10 @@ final class Text {
 
   static final int REGULAR = -1;
 
+  static final int MONOSPACE_START = -2;
+
+  static final int MONOSPACE_END = -3;
+
   private Text() {}
 
 }

@@ -25,7 +25,7 @@ class Pass0 implements Pass1.Source, Pass2.Source {
 
   private static final int LINE_START = 1;
 
-  private static final int LINE = 2;
+  private static final int LINE_START_LIKE = 2;
 
   private static final int HEADING_START = 3;
 
@@ -33,9 +33,11 @@ class Pass0 implements Pass1.Source, Pass2.Source {
 
   private static final int BLOB = 5;
 
-  private static final int WORD = 6;
+  private static final int SPACE_LIKE = 6;
 
-  private static final int SPACE = 7;
+  private static final int MONO_START = 7;
+
+  private static final int MONO_END = 8;
 
   private String source;
 
@@ -100,7 +102,75 @@ class Pass0 implements Pass1.Source, Pass2.Source {
   @Override
   public final int tokenCursor() { return tokenCursor; }
 
-  final boolean isWord(char c) {
+  final String source(int beginIndex, int endIndex) {
+    return source.substring(beginIndex, endIndex);
+  }
+
+  final int[] toToken() {
+    return Arrays.copyOf(token, tokenIndex);
+  }
+
+  private void add(int s0) {
+    token = IntArrays.copyIfNecessary(token, tokenIndex);
+
+    token[tokenIndex++] = s0;
+  }
+
+  private void add(int s0, int s1) {
+    token = IntArrays.copyIfNecessary(token, tokenIndex + 1);
+
+    token[tokenIndex++] = s0;
+    token[tokenIndex++] = s1;
+  }
+
+  private void add(int s0, int s1, int s2) {
+    token = IntArrays.copyIfNecessary(token, tokenIndex + 2);
+
+    token[tokenIndex++] = s0;
+    token[tokenIndex++] = s1;
+    token[tokenIndex++] = s2;
+  }
+
+  private void add(int s0, int s1, int s2, int s3) {
+    token = IntArrays.copyIfNecessary(token, tokenIndex + 3);
+
+    token[tokenIndex++] = s0;
+    token[tokenIndex++] = s1;
+    token[tokenIndex++] = s2;
+    token[tokenIndex++] = s3;
+  }
+
+  private void add(int s0, int s1, int s2, int s3, int s4) {
+    token = IntArrays.copyIfNecessary(token, tokenIndex + 4);
+
+    token[tokenIndex++] = s0;
+    token[tokenIndex++] = s1;
+    token[tokenIndex++] = s2;
+    token[tokenIndex++] = s3;
+    token[tokenIndex++] = s4;
+  }
+
+  private void add(int s0, int s1, int s2, int s3, int s4, int s5, int s6) {
+    token = IntArrays.copyIfNecessary(token, tokenIndex + 6);
+
+    token[tokenIndex++] = s0;
+    token[tokenIndex++] = s1;
+    token[tokenIndex++] = s2;
+    token[tokenIndex++] = s3;
+    token[tokenIndex++] = s4;
+    token[tokenIndex++] = s5;
+    token[tokenIndex++] = s6;
+  }
+
+  private int advance(int state) {
+    sourceIndex++;
+
+    return state;
+  }
+
+  private boolean hasChar() { return sourceIndex < source.length(); }
+
+  private boolean isWord(char c) {
     int type = Character.getType(c);
 
     return switch (type) {
@@ -126,61 +196,13 @@ class Pass0 implements Pass1.Source, Pass2.Source {
     };
   }
 
-  final String source(int beginIndex, int endIndex) {
-    return source.substring(beginIndex, endIndex);
-  }
-
-  final int[] toToken() {
-    return Arrays.copyOf(token, tokenIndex);
-  }
-
-  private void add(int s0) {
-    token = IntArrays.copyIfNecessary(token, tokenIndex);
-
-    token[tokenIndex++] = s0;
-  }
-
-  private void add(int s0, int s1) {
-    token = IntArrays.copyIfNecessary(token, tokenIndex + 1);
-
-    token[tokenIndex++] = s0;
-    token[tokenIndex++] = s1;
-  }
-
-  private void add(int s0, int s1, int s2, int s3) {
-    token = IntArrays.copyIfNecessary(token, tokenIndex + 3);
-
-    token[tokenIndex++] = s0;
-    token[tokenIndex++] = s1;
-    token[tokenIndex++] = s2;
-    token[tokenIndex++] = s3;
-  }
-
-  private void add(int s0, int s1, int s2, int s3, int s4) {
-    token = IntArrays.copyIfNecessary(token, tokenIndex + 4);
-
-    token[tokenIndex++] = s0;
-    token[tokenIndex++] = s1;
-    token[tokenIndex++] = s2;
-    token[tokenIndex++] = s3;
-    token[tokenIndex++] = s4;
-  }
-
-  private int advance(int state) {
-    sourceIndex++;
-
-    return state;
-  }
-
-  private boolean hasChar() { return sourceIndex < source.length(); }
-
   private char peek() { return source.charAt(sourceIndex); }
 
   private int state(int state) {
     return switch (state) {
       case LINE_START -> stateLineStart();
 
-      case LINE -> stateLine();
+      case LINE_START_LIKE -> stateLineStartLike();
 
       case HEADING_START -> stateHeadingStart();
 
@@ -188,9 +210,11 @@ class Pass0 implements Pass1.Source, Pass2.Source {
 
       case BLOB -> stateBlob();
 
-      case WORD -> stateWord();
+      case SPACE_LIKE -> stateSpaceLike();
 
-      case SPACE -> stateSpace();
+      case MONO_START -> stateMonoStart();
+
+      case MONO_END -> stateMonoEnd();
 
       default -> uoe();
     };
@@ -206,9 +230,11 @@ class Pass0 implements Pass1.Source, Pass2.Source {
       return EOF;
     }
 
-    var c = peek();
+    return stateBlob0();
+  }
 
-    return switch (c) {
+  private int stateBlob0() {
+    return switch (peek()) {
       case '\n' -> {
         add(
           Token.BLOB, blobStart, sourceIndex,
@@ -218,9 +244,11 @@ class Pass0 implements Pass1.Source, Pass2.Source {
         yield advance(LINE_START);
       }
 
-      case ' ' -> advance(SPACE);
+      case ' ' -> advance(SPACE_LIKE);
 
-      default -> advance(state);
+      case '`' -> advance(MONO_END);
+
+      default -> advance(BLOB);
     };
   }
 
@@ -234,7 +262,7 @@ class Pass0 implements Pass1.Source, Pass2.Source {
       default -> {
         add(Token.HEADING, counter, lineStart, sourceIndex);
 
-        yield LINE;
+        yield LINE_START_LIKE;
       }
     };
   }
@@ -263,24 +291,6 @@ class Pass0 implements Pass1.Source, Pass2.Source {
     };
   }
 
-  private int stateLine() {
-    if (!hasChar()) {
-      add(Token.LINE_END, Token.EOF);
-
-      return EOF;
-    }
-
-    var c = peek();
-
-    if (isWord(c)) {
-      blobStart = sourceIndex;
-
-      return advance(WORD);
-    }
-
-    throw new UnsupportedOperationException("Implement me");
-  }
-
   private int stateLineStart() {
     add(Token.LINE_START);
 
@@ -290,7 +300,7 @@ class Pass0 implements Pass1.Source, Pass2.Source {
       return EOF;
     }
 
-    lineStart = sourceIndex;
+    lineStart = blobStart = sourceIndex;
 
     return switch (peek()) {
       case '=' -> {
@@ -299,14 +309,31 @@ class Pass0 implements Pass1.Source, Pass2.Source {
         yield advance(HEADING_START);
       }
 
+      case '`' -> advance(MONO_START);
+
       default -> uoe();
     };
   }
 
-  private int stateSpace() {
+  private int stateLineStartLike() {
+    if (!hasChar()) {
+      add(Token.LINE_END, Token.EOF);
+
+      return EOF;
+    }
+
+    blobStart = sourceIndex;
+
+    return stateBlob0();
+  }
+
+  private int stateMonoEnd() {
+    var endIndex = sourceIndex - 1;
+
     if (!hasChar()) {
       add(
-        Token.BLOB, blobStart, sourceIndex,
+        Token.BLOB, blobStart, endIndex,
+        Token.MONO_END, endIndex,
         Token.LINE_END, Token.EOF
       );
 
@@ -316,10 +343,78 @@ class Pass0 implements Pass1.Source, Pass2.Source {
     var c = peek();
 
     if (isWord(c)) {
-      return advance(WORD);
+      return advance(BLOB);
     }
 
+    add(
+      Token.BLOB, blobStart, endIndex,
+      Token.MONO_END, endIndex
+    );
+
+    blobStart = sourceIndex;
+
     return switch (c) {
+      case '\n' -> {
+        add(Token.LINE_END, Token.LF);
+
+        yield advance(LINE_START);
+      }
+
+      case ' ', '\t', '\f', '\u000B' -> advance(SPACE_LIKE);
+
+      default -> advance(BLOB);
+    };
+  }
+
+  private int stateMonoStart() {
+    if (!hasChar()) {
+      add(
+        Token.BLOB, blobStart, sourceIndex,
+        Token.LINE_END, Token.EOF
+      );
+
+      return EOF;
+    }
+
+    return switch (peek()) {
+      case '\n' -> {
+        add(
+          Token.BLOB, blobStart, sourceIndex,
+          Token.LINE_END, Token.LF
+        );
+
+        yield advance(LINE_START);
+      }
+
+      case ' ', '\t', '\f', '\u000B' -> advance(SPACE_LIKE);
+
+      default -> {
+        var endIndex = sourceIndex - 1;
+
+        if (blobStart != lineStart) {
+          add(Token.BLOB, blobStart, endIndex);
+        }
+
+        add(Token.MONO_START, endIndex);
+
+        blobStart = sourceIndex;
+
+        yield advance(BLOB);
+      }
+    };
+  }
+
+  private int stateSpaceLike() {
+    if (!hasChar()) {
+      add(
+        Token.BLOB, blobStart, sourceIndex,
+        Token.LINE_END, Token.EOF
+      );
+
+      return EOF;
+    }
+
+    return switch (peek()) {
       case '\n' -> {
         add(
           Token.BLOB, blobStart, sourceIndex,
@@ -331,48 +426,14 @@ class Pass0 implements Pass1.Source, Pass2.Source {
 
       case ' ' -> advance(state);
 
-      default -> uoe(c);
-    };
-  }
+      case '`' -> advance(MONO_START);
 
-  private int stateWord() {
-    if (!hasChar()) {
-      add(
-        Token.BLOB, blobStart, sourceIndex,
-        Token.LINE_END, Token.EOF
-      );
-
-      return EOF;
-    }
-
-    var c = peek();
-
-    if (isWord(c)) {
-      return advance(WORD);
-    }
-
-    return switch (c) {
-      case '\n' -> {
-        add(
-          Token.BLOB, blobStart, sourceIndex,
-          Token.LINE_END, Token.LF
-        );
-
-        yield advance(LINE_START);
-      }
-
-      case ' ' -> advance(SPACE);
-
-      default -> uoe(c);
+      default -> advance(BLOB);
     };
   }
 
   private int uoe() {
     throw new UnsupportedOperationException("Implement me :: state=" + state);
-  }
-
-  private int uoe(char c) {
-    throw new UnsupportedOperationException("Implement me :: state=" + state + "; char=" + c);
   }
 
 }
