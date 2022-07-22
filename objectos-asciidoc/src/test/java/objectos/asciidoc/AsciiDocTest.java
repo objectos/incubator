@@ -161,6 +161,7 @@ public class AsciiDocTest {
       """
     );
   }
+
   @Test(description = //
   """
   doctitle + NL
@@ -334,10 +335,10 @@ public class AsciiDocTest {
   `a` `b`, `c`
   '''
 
-  L0: ^ ` B1,2 ` B3,4 ` B5,6 ` B7,9 ` B10,11 ` $ LF
+  P0: ^ ` B1,2 ` B3,4 ` B5,6 ` B7,9 ` B10,11 ` $ LF
       ^ $ EOF
 
-  L1: ^ <M R1,2 M> R3,4 <M R5,6 M> R7,9 <M R10,11 M> $ LF
+  P2: ^ <M R1,2 M> R3,4 <M R5,6 M> R7,9 <M R10,11 M> $ LF
       ^ $ EOF
   """)
   public final void monospace01() {
@@ -406,7 +407,7 @@ public class AsciiDocTest {
     );
   }
 
-  @Test(enabled = false, description = //
+  @Test(description = //
   """
   monospace
 
@@ -417,7 +418,7 @@ public class AsciiDocTest {
             1
   012345678901234567
   '''
-  `a b` `c d`, `d e`
+  `a b` `c d`, `e f`
   '''
 
   L0: ^ ` W1,2 SP W3,4 ` SP ` W7,8 SP W9,10 ` X11,12 SP ` W14,15 SP W16,17 ` $ LF
@@ -427,6 +428,69 @@ public class AsciiDocTest {
       ^ $ EOF
   """)
   public final void monospace02() {
+    test(
+      """
+      `a b` `c d`, `e f`
+      """,
+
+      p0(
+        Token.LINE_START,
+        Token.MONO_START, 0,
+        Token.BLOB, 1, 4,
+        Token.MONO_END, 4,
+        Token.BLOB, 5, 6,
+        Token.MONO_START, 6,
+        Token.BLOB, 7, 10,
+        Token.MONO_END, 10,
+        Token.BLOB, 11, 13,
+        Token.MONO_START, 13,
+        Token.BLOB, 14, 17,
+        Token.MONO_END, 17,
+        Token.LINE_END,
+        Token.LF,
+        Token.LINE_START,
+        Token.LINE_END,
+        Token.EOF
+      ),
+
+      p1(
+        Code.DOCUMENT_START,
+        Code.PREAMBLE_START,
+        Code.PARAGRAPH_START,
+        Code.TOKENS, 1, 31,
+        Code.PARAGRAPH_END,
+        Code.PREAMBLE_END,
+        Code.DOCUMENT_END
+      ),
+
+      p2(
+        t(
+          Text.MONOSPACE_START,
+          Text.REGULAR, 1, 4,
+          Text.MONOSPACE_END,
+          Text.REGULAR, 5, 6,
+          Text.MONOSPACE_START,
+          Text.REGULAR, 7, 10,
+          Text.MONOSPACE_END,
+          Text.REGULAR, 11, 13,
+          Text.MONOSPACE_START,
+          Text.REGULAR, 14, 17,
+          Text.MONOSPACE_END
+        )
+      ),
+
+      """
+      <body>
+      <div id="header">
+      </div>
+      <div id="content">
+      <div class="paragraph">
+      <p><code>a b</code> <code>c d</code>, <code>e f</code></p>
+      </div>
+      </div>
+      </body>
+      """
+    );
   }
 
   @Test(enabled = false, description = //
