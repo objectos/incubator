@@ -44,12 +44,6 @@ public class AsciidoctorTest extends AsciiDocTest {
   @Override
   final void test(
       String source, int[] expected0, int[] expected1, int[][] expected2, String expectedHtml) {
-    var doc = asciidoctor.load(source, options);
-
-    for (var block : doc.getBlocks()) {
-      System.out.println(block);
-    }
-
     var html = asciidoctor.convert(source, options);
 
     var document = Jsoup.parse(html);

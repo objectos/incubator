@@ -37,62 +37,76 @@ public class AsciiDocTest {
     processor = new ThisProcessor();
   }
 
-  @Test(enabled = false, description = //
+  @Test(description = //
   """
-  = Bold (constrained)
+  = bold
 
-  - start of line
-  - ends in space
-  - ends in punctuation
-  - not bold, just star char
+  - constrained
+  - words only
+  - well-formed
+
+  0123456789012
+  '''
+  *a* *b*, *c*
+  '''
+
+  P0: ^ * B1,2 * B3,4 * B5,6 * B7,9 * B10,11 * $ LF
+      ^ $ EOF
+
+  P2: ^ <B R1,2 B> R3,4 <B R5,6 B> R7,9 <B R10,11 B> $ LF
+      ^ $ EOF
   """)
   public final void bold01() {
     test(
       """
-      *a* *b*, *c*; *d*. *e*
+      *a* *b*, *c*
       """,
 
       p0(
-        //        Lexer.Symbol.PARAGRAPH, 0,
-      //        Lexer.Symbol.CBOLD0, 0,
-      //        Lexer.Symbol.CBOLD9, 2, // a
-      //        Lexer.Symbol.CBOLD0, 0,
-      //        Lexer.Symbol.CBOLD9, 2, // b
-      //        Lexer.Symbol.CBOLD0, 0,
-      //        Lexer.Symbol.CBOLD9, 2, // c
-      //        Lexer.Symbol.CBOLD0, 0,
-      //        Lexer.Symbol.CBOLD9, 2, // d
-      //        Lexer.Symbol.CBOLD0, 0,
-      //        Lexer.Symbol.CBOLD9, 2, // e
-      //        Lexer.Symbol.EOL, 42,
-      //
-      //        Lexer.Symbol.EMPTY, 68,
-      //        Lexer.Symbol.EOF, 68
+        Token.LINE_START,
+        Token.BOLD_START, 0,
+        Token.BLOB, 1, 2,
+        Token.BOLD_END, 2,
+        Token.BLOB, 3, 4,
+        Token.BOLD_START, 4,
+        Token.BLOB, 5, 6,
+        Token.BOLD_END, 6,
+        Token.BLOB, 7, 9,
+        Token.BOLD_START, 9,
+        Token.BLOB, 10, 11,
+        Token.BOLD_END, 11,
+        Token.LINE_END,
+        Token.LF,
+        Token.LINE_START,
+        Token.LINE_END,
+        Token.EOF
       ),
 
       p1(
-        //        Parser.Code.START_DOCUMENT,
-      //        Parser.Code.START_PREAMBLE,
-      //        Parser.Code.START_PARAGRAPH,
-      //        Parser.Code.START_MONOSPACE,
-      //        Parser.Code.TEXT, 0, // at
-      //        Parser.Code.END_MONOSPACE,
-      //        Parser.Code.TEXT, 1, // start of line at
-      //        Parser.Code.START_MONOSPACE,
-      //        Parser.Code.TEXT, 2, // the middle
-      //        Parser.Code.END_MONOSPACE,
-      //        Parser.Code.TEXT, 3, // of line at the end
-      //        Parser.Code.START_MONOSPACE,
-      //        Parser.Code.TEXT, 4, // of the line
-      //        Parser.Code.END_MONOSPACE,
-      //        Parser.Code.TEXT, 5, // ws
-      //
-      //        Parser.Code.END_PARAGRAPH,
-      //        Parser.Code.END_PREAMBLE,
-      //        Parser.Code.END_DOCUMENT
+        Code.DOCUMENT_START,
+        Code.PREAMBLE_START,
+        Code.PARAGRAPH_START,
+        Code.TOKENS, 1, 31,
+        Code.PARAGRAPH_END,
+        Code.PREAMBLE_END,
+        Code.DOCUMENT_END
       ),
 
-      p2(),
+      p2(
+        t(
+          Text.BOLD_START,
+          Text.REGULAR, 1, 2,
+          Text.BOLD_END,
+          Text.REGULAR, 3, 4,
+          Text.BOLD_START,
+          Text.REGULAR, 5, 6,
+          Text.BOLD_END,
+          Text.REGULAR, 7, 9,
+          Text.BOLD_START,
+          Text.REGULAR, 10, 11,
+          Text.BOLD_END
+        )
+      ),
 
       """
       <body>
@@ -100,7 +114,7 @@ public class AsciiDocTest {
       </div>
       <div id="content">
       <div class="paragraph">
-      <p><code>at</code> start of line at <code>the middle</code> of line at the end <code>of the line</code></p>
+      <p><strong>a</strong> <strong>b</strong>, <strong>c</strong></p>
       </div>
       </div>
       </body>

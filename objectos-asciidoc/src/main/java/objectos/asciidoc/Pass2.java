@@ -31,7 +31,9 @@ class Pass2 {
 
   private static final int REGULAR = 1 << 1;
 
-  private static final int MONOSPACE = 1 << 2;
+  private static final int BOLD = 1 << 2;
+
+  private static final int MONOSPACE = 1 << 3;
 
   private Source source;
 
@@ -125,6 +127,10 @@ class Pass2 {
 
         case Token.LF -> executeLf();
 
+        case Token.BOLD_START -> executeBoldStart(nextToken());
+
+        case Token.BOLD_END -> executeBoldEnd(nextToken());
+
         case Token.MONO_START -> executeMonoStart(nextToken());
 
         case Token.MONO_END -> executeMonoEnd(nextToken());
@@ -146,12 +152,64 @@ class Pass2 {
         yield REGULAR;
       }
 
+      case BOLD | START -> {
+        addText(Text.REGULAR, start);
+
+        regularEnd = end;
+
+        yield BOLD;
+      }
+
       case MONOSPACE | START -> {
         addText(Text.REGULAR, start);
 
         regularEnd = end;
 
         yield MONOSPACE;
+      }
+
+      default -> uoe();
+    };
+  }
+
+  private int executeBoldEnd(int nextToken) {
+    return switch (state) {
+      case BOLD -> {
+        addText(regularEnd);
+        addText(Text.BOLD_END);
+
+        yield START;
+      }
+
+      default -> uoe();
+    };
+  }
+
+  private int executeBoldStart(int index) {
+    return executeConstrainedStart(Text.BOLD_START, Token.BOLD_END, BOLD);
+  }
+
+  private int executeConstrainedStart(int startCode, int endToken, int nextState) {
+    return switch (state) {
+      case START -> {
+        if (searchToken(endToken)) {
+          addText(startCode);
+
+          yield nextState | START;
+        } else {
+          yield REGULAR;
+        }
+      }
+
+      case REGULAR -> {
+        if (searchToken(endToken)) {
+          addText(regularEnd);
+          addText(startCode);
+
+          yield nextState | START;
+        } else {
+          yield REGULAR;
+        }
       }
 
       default -> uoe();
@@ -209,30 +267,7 @@ class Pass2 {
   }
 
   private int executeMonoStart(int index) {
-    return switch (state) {
-      case START -> {
-        if (searchToken(Token.MONO_END)) {
-          addText(Text.MONOSPACE_START);
-
-          yield MONOSPACE | START;
-        } else {
-          yield REGULAR;
-        }
-      }
-
-      case REGULAR -> {
-        if (searchToken(Token.MONO_END)) {
-          addText(regularEnd);
-          addText(Text.MONOSPACE_START);
-
-          yield MONOSPACE | START;
-        } else {
-          yield REGULAR;
-        }
-      }
-
-      default -> uoe();
-    };
+    return executeConstrainedStart(Text.MONOSPACE_START, Token.MONO_END, MONOSPACE);
   }
 
   private boolean hasToken() {

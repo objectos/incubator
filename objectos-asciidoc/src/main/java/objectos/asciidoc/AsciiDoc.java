@@ -21,15 +21,21 @@ public class AsciiDoc {
 
   public interface Processor {
 
+    void boldEnd();
+
+    void boldStart();
+
     void documentEnd();
 
     void documentStart();
 
-    void monospaceEnd();
-
     void headingEnd();
 
     void headingStart(int level);
+
+    void monospaceEnd();
+
+    void monospaceStart();
 
     void newLine();
 
@@ -40,8 +46,6 @@ public class AsciiDoc {
     void preambleEnd();
 
     void preambleStart();
-
-    void monospaceStart();
 
     void text(String s);
 
@@ -126,6 +130,10 @@ public class AsciiDoc {
             processor.text(s);
           }
         }
+
+        case Text.BOLD_START -> processor.boldStart();
+
+        case Text.BOLD_END -> processor.boldEnd();
 
         case Text.MONOSPACE_START -> processor.monospaceStart();
 

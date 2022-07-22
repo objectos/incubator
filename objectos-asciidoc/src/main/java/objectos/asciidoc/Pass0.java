@@ -35,9 +35,15 @@ class Pass0 implements Pass1.Source, Pass2.Source {
 
   private static final int SPACE_LIKE = 6;
 
-  private static final int MONO_START = 7;
+  private static final int BOLD_OR_LIST = 7;
 
-  private static final int MONO_END = 8;
+  private static final int BOLD_START = 8;
+  private static final int BOLD_END = 9;
+
+  private static final int MONO_START = 10;
+  private static final int MONO_END = 11;
+
+  private static final int LIST = 12;
 
   private String source;
 
@@ -212,6 +218,12 @@ class Pass0 implements Pass1.Source, Pass2.Source {
 
       case SPACE_LIKE -> stateSpaceLike();
 
+      case BOLD_OR_LIST -> stateBoldOrList();
+
+      case BOLD_START -> stateBoldStart();
+
+      case BOLD_END -> stateBoldEnd();
+
       case MONO_START -> stateMonoStart();
 
       case MONO_END -> stateMonoEnd();
@@ -246,9 +258,126 @@ class Pass0 implements Pass1.Source, Pass2.Source {
 
       case ' ' -> advance(SPACE_LIKE);
 
+      case '*' -> advance(BOLD_END);
+
       case '`' -> advance(MONO_END);
 
       default -> advance(BLOB);
+    };
+  }
+
+  private int stateBoldEnd() {
+    var endIndex = sourceIndex - 1;
+
+    if (!hasChar()) {
+      add(
+        Token.BLOB, blobStart, endIndex,
+        Token.BOLD_END, endIndex,
+        Token.LINE_END, Token.EOF
+      );
+
+      return EOF;
+    }
+
+    var c = peek();
+
+    if (isWord(c)) {
+      return advance(BLOB);
+    }
+
+    add(
+      Token.BLOB, blobStart, endIndex,
+      Token.BOLD_END, endIndex
+    );
+
+    blobStart = sourceIndex;
+
+    return switch (c) {
+      case '\n' -> {
+        add(Token.LINE_END, Token.LF);
+
+        yield advance(LINE_START);
+      }
+
+      case ' ', '\t', '\f', '\u000B' -> advance(SPACE_LIKE);
+
+      default -> advance(BLOB);
+    };
+  }
+
+  private int stateBoldOrList() {
+    if (!hasChar()) {
+      add(
+        Token.BLOB, blobStart, sourceIndex,
+        Token.LINE_END, Token.EOF
+      );
+
+      return EOF;
+    }
+
+    return switch (peek()) {
+      case '\n' -> {
+        add(
+          Token.BLOB, blobStart, sourceIndex,
+          Token.LINE_END, Token.LF
+        );
+
+        yield advance(LINE_START);
+      }
+
+      case ' ', '\t', '\f', '\u000B' -> advance(LIST);
+
+      default -> {
+        var endIndex = sourceIndex - 1;
+
+        if (blobStart != lineStart) {
+          add(Token.BLOB, blobStart, endIndex);
+        }
+
+        add(Token.BOLD_START, endIndex);
+
+        blobStart = sourceIndex;
+
+        yield advance(BLOB);
+      }
+    };
+  }
+
+  private int stateBoldStart() {
+    if (!hasChar()) {
+      add(
+        Token.BLOB, blobStart, sourceIndex,
+        Token.LINE_END, Token.EOF
+      );
+
+      return EOF;
+    }
+
+    return switch (peek()) {
+      case '\n' -> {
+        add(
+          Token.BLOB, blobStart, sourceIndex,
+          Token.LINE_END, Token.LF
+        );
+
+        yield advance(LINE_START);
+      }
+
+      case ' ', '\t', '\f', '\u000B' -> advance(SPACE_LIKE);
+
+      default -> {
+        var endIndex = sourceIndex - 1;
+
+        if (blobStart != lineStart) {
+          add(Token.BLOB, blobStart, endIndex);
+        }
+
+        add(Token.BOLD_START, endIndex);
+
+        blobStart = sourceIndex;
+
+        yield advance(BLOB);
+      }
     };
   }
 
@@ -308,6 +437,8 @@ class Pass0 implements Pass1.Source, Pass2.Source {
 
         yield advance(HEADING_START);
       }
+
+      case '*' -> advance(BOLD_OR_LIST);
 
       case '`' -> advance(MONO_START);
 
@@ -425,6 +556,8 @@ class Pass0 implements Pass1.Source, Pass2.Source {
       }
 
       case ' ' -> advance(state);
+
+      case '*' -> advance(BOLD_START);
 
       case '`' -> advance(MONO_START);
 

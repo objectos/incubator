@@ -30,6 +30,16 @@ class ThisProcessor implements AsciiDoc.Processor {
   private final StringBuilder sb = new StringBuilder();
 
   @Override
+  public final void boldEnd() {
+    sb.append("</strong>");
+  }
+
+  @Override
+  public final void boldStart() {
+    sb.append("<strong>");
+  }
+
+  @Override
   public final void documentEnd() {
     switch (state) {
       case _HEADER -> sb.append("""

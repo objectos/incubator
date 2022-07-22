@@ -29,8 +29,11 @@ final class Token {
 
   static final int LF = -6;
 
-  static final int MONO_START = -7;
-  static final int MONO_END = -8;
+  static final int BOLD_START = -7;
+  static final int BOLD_END = -8;
+
+  static final int MONO_START = -9;
+  static final int MONO_END = -10;
 
   private Token() {}
 
