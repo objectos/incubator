@@ -31,9 +31,11 @@ class Pass0 implements Pass1.Source, Pass2.Source {
 
   private static final int HEADING = 4;
 
-  private static final int WORD = 5;
+  private static final int BLOB = 5;
 
-  private static final int BLOB = 6;
+  private static final int WORD = 6;
+
+  private static final int SPACE = 7;
 
   private String source;
 
@@ -51,7 +53,7 @@ class Pass0 implements Pass1.Source, Pass2.Source {
 
   private int lineStart;
 
-  private int textStart;
+  private int blobStart;
 
   Pass0() {
     token = new int[512];
@@ -184,9 +186,11 @@ class Pass0 implements Pass1.Source, Pass2.Source {
 
       case HEADING -> stateHeading();
 
+      case BLOB -> stateBlob();
+
       case WORD -> stateWord();
 
-      case BLOB -> stateBlob();
+      case SPACE -> stateSpace();
 
       default -> uoe();
     };
@@ -195,7 +199,7 @@ class Pass0 implements Pass1.Source, Pass2.Source {
   private int stateBlob() {
     if (!hasChar()) {
       add(
-        Token.BLOB, textStart, sourceIndex,
+        Token.BLOB, blobStart, sourceIndex,
         Token.LINE_END, Token.EOF
       );
 
@@ -207,21 +211,14 @@ class Pass0 implements Pass1.Source, Pass2.Source {
     return switch (c) {
       case '\n' -> {
         add(
-          Token.BLOB, textStart, sourceIndex,
+          Token.BLOB, blobStart, sourceIndex,
           Token.LINE_END, Token.LF
         );
 
         yield advance(LINE_START);
       }
 
-      case ' ' -> {
-        add(
-          Token.BLOB, textStart, sourceIndex,
-          Token.SP
-        );
-
-        yield advance(LINE);
-      }
+      case ' ' -> advance(SPACE);
 
       default -> advance(state);
     };
@@ -259,7 +256,7 @@ class Pass0 implements Pass1.Source, Pass2.Source {
       case ' ' -> advance(HEADING);
 
       default -> {
-        textStart = lineStart;
+        blobStart = lineStart;
 
         yield advance(BLOB);
       }
@@ -276,7 +273,7 @@ class Pass0 implements Pass1.Source, Pass2.Source {
     var c = peek();
 
     if (isWord(c)) {
-      textStart = sourceIndex;
+      blobStart = sourceIndex;
 
       return advance(WORD);
     }
@@ -306,10 +303,10 @@ class Pass0 implements Pass1.Source, Pass2.Source {
     };
   }
 
-  private int stateWord() {
+  private int stateSpace() {
     if (!hasChar()) {
       add(
-        Token.WORD, textStart, sourceIndex,
+        Token.BLOB, blobStart, sourceIndex,
         Token.LINE_END, Token.EOF
       );
 
@@ -325,21 +322,46 @@ class Pass0 implements Pass1.Source, Pass2.Source {
     return switch (c) {
       case '\n' -> {
         add(
-          Token.WORD, textStart, sourceIndex,
+          Token.BLOB, blobStart, sourceIndex,
           Token.LINE_END, Token.LF
         );
 
         yield advance(LINE_START);
       }
 
-      case ' ' -> {
+      case ' ' -> advance(state);
+
+      default -> uoe(c);
+    };
+  }
+
+  private int stateWord() {
+    if (!hasChar()) {
+      add(
+        Token.BLOB, blobStart, sourceIndex,
+        Token.LINE_END, Token.EOF
+      );
+
+      return EOF;
+    }
+
+    var c = peek();
+
+    if (isWord(c)) {
+      return advance(WORD);
+    }
+
+    return switch (c) {
+      case '\n' -> {
         add(
-          Token.WORD, textStart, sourceIndex,
-          Token.SP
+          Token.BLOB, blobStart, sourceIndex,
+          Token.LINE_END, Token.LF
         );
 
-        yield advance(LINE);
+        yield advance(LINE_START);
       }
+
+      case ' ' -> advance(SPACE);
 
       default -> uoe(c);
     };

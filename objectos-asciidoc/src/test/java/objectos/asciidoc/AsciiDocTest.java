@@ -134,9 +134,7 @@ public class AsciiDocTest {
       p0(
         Token.LINE_START,
         Token.HEADING, 1, 0, 2,
-        Token.WORD, 2, 5,
-        Token.SP,
-        Token.WORD, 6, 14,
+        Token.BLOB, 2, 14,
         Token.LINE_END,
         Token.EOF
       ),
@@ -144,7 +142,7 @@ public class AsciiDocTest {
       p1(
         Code.DOCUMENT_START,
         Code.HEADING_START, 1,
-        Code.TOKENS, 5, 12,
+        Code.TOKENS, 5, 8,
         Code.HEADING_END,
         Code.DOCUMENT_END
       ),
@@ -192,9 +190,7 @@ public class AsciiDocTest {
       p0(
         Token.LINE_START,
         Token.HEADING, 1, 0, 2,
-        Token.WORD, 2, 5,
-        Token.SP,
-        Token.WORD, 6, 14,
+        Token.BLOB, 2, 14,
         Token.LINE_END,
         Token.LF,
         Token.LINE_START,
@@ -205,7 +201,7 @@ public class AsciiDocTest {
       p1(
         Code.DOCUMENT_START,
         Code.HEADING_START, 1,
-        Code.TOKENS, 5, 12,
+        Code.TOKENS, 5, 8,
         Code.HEADING_END,
         Code.DOCUMENT_END
       ),
@@ -254,9 +250,7 @@ public class AsciiDocTest {
 
       p0(
         Token.LINE_START,
-        Token.BLOB, 0, 4,
-        Token.SP,
-        Token.WORD, 5, 10,
+        Token.BLOB, 0, 10,
         Token.LINE_END,
         Token.LF,
         Token.LINE_START,
@@ -268,7 +262,7 @@ public class AsciiDocTest {
         Code.DOCUMENT_START,
         Code.PREAMBLE_START,
         Code.PARAGRAPH_START,
-        Code.TOKENS, 1, 11,
+        Code.TOKENS, 1, 7,
         Code.PARAGRAPH_END,
         Code.PREAMBLE_END,
         Code.DOCUMENT_END
@@ -288,79 +282,6 @@ public class AsciiDocTest {
       </div>
       </div>
       </body>
-      """
-    );
-  }
-
-  @Test(enabled = false, description = //
-  """
-  doctitle + NL
-
-  - happy path
-  - title ends @ NL
-  - with preamble
-
-  '''
-  = Test document
-
-  Some preamble
-  '''
-
-  P0: ^ = SP W2,6 SP W7,15 $ LF
-      ^ $ LF
-      ^ W17,21 SP W22,30 $ LF
-      ^ $ EOF
-
-  P1: DOC_START
-      TITLE 1 P0 start end
-      PREAMBLE_START
-      PARAGRAPH P0 start end
-      PREAMBLE_END
-      DOC_END
-  """)
-  public final void doctitle0X() {
-    test(
-      """
-      = Test document
-
-      Some preamble
-      """,
-
-      p0(
-        //        Lexer.Symbol.TITLE, 1,
-      //        Lexer.Symbol.REGULAR, 2, 15,
-      //        Lexer.Symbol.LF, 15,
-      //        Lexer.Symbol.LF, 16,
-      //        Lexer.Symbol.REGULAR, 17, 30,
-      //        Lexer.Symbol.LF, 30,
-      //        Lexer.Symbol.EOF, 31
-      ),
-
-      p1(
-        //        Parser.Code.START_DOCUMENT,
-      //        Parser.Code.START_TITLE, 1,
-      //        Parser.Code.TEXT, 0,
-      //        Parser.Code.END_TITLE,
-      //        Parser.Code.START_PREAMBLE,
-      //        Parser.Code.START_PARAGRAPH,
-      //        Parser.Code.TEXT, 1,
-      //        Parser.Code.NL,
-      //        Parser.Code.END_PARAGRAPH,
-      //        Parser.Code.END_PREAMBLE,
-      //        Parser.Code.END_DOCUMENT
-      ),
-
-      p2(),
-
-      """
-      <div id="header">
-      <h1>Test document</h1>
-      </div>
-      <div id="content">
-      <div class="paragraph">
-      <p>Some preamble</p>
-      </div>
-      </div>
       """
     );
   }
@@ -408,6 +329,7 @@ public class AsciiDocTest {
   - words only
   - well-formed
 
+  0123456789012
   '''
   `a` `b`, `c`
   '''
@@ -421,16 +343,26 @@ public class AsciiDocTest {
   public final void monospace01() {
     test(
       """
-      `a` `b`, `c`; `d`. `e`
+      `a` `b`, `c`
       """,
 
       p0(
-        //        Lexer.Symbol.MONOSPACE, 1, 2,
-      //        Lexer.Symbol.REGULAR, 3, 4,
-      //        Lexer.Symbol.MONOSPACE, 5, 6,
-      //        Lexer.Symbol.REGULAR, 7, 9,
-      //        Lexer.Symbol.MONOSPACE, 10, 11,
-      //        Lexer.Symbol.EOF, 68
+        Token.LINE_START,
+        Token.MONO_START, 0,
+        Token.BLOB, 1, 2,
+        Token.MONO_END, 2,
+        Token.BLOB, 3, 4,
+        Token.MONO_START, 4,
+        Token.BLOB, 5, 6,
+        Token.MONO_END, 6,
+        Token.BLOB, 7, 9,
+        Token.MONO_START, 9,
+        Token.BLOB, 10, 11,
+        Token.MONO_END, 11,
+        Token.LINE_END,
+        Token.LF,
+        Token.LINE_START,
+        Token.EOF
       ),
 
       p1(

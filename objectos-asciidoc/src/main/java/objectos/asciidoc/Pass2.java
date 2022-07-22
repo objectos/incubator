@@ -113,11 +113,7 @@ class Pass2 {
       var token = nextToken();
 
       state = switch (token) {
-        case Token.WORD -> executeWord(nextToken(), nextToken());
-
         case Token.BLOB -> executeBlob(nextToken(), nextToken());
-
-        case Token.SP -> executeSpace();
 
         case Token.LINE_START -> executeLineStart();
 
@@ -177,34 +173,6 @@ class Pass2 {
   private int executeLineStart() {
     return switch (state) {
       case REGULAR -> state;
-
-      default -> uoe();
-    };
-  }
-
-  private int executeSpace() {
-    return switch (state) {
-      case REGULAR -> state;
-
-      default -> uoe();
-    };
-  }
-
-  private int executeWord(int start, int end) {
-    return switch (state) {
-      case START -> {
-        addText(Text.REGULAR, start);
-
-        regularEnd = end;
-
-        yield REGULAR;
-      }
-
-      case REGULAR -> {
-        regularEnd = end;
-
-        yield state;
-      }
 
       default -> uoe();
     };

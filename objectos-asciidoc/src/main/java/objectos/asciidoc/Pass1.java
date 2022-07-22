@@ -156,11 +156,7 @@ class Pass1 {
 
         case Token.HEADING -> parseHeading(nextToken(), nextToken(), nextToken());
 
-        case Token.WORD -> parseWord(nextToken(), nextToken());
-
         case Token.BLOB -> parseBlob(nextToken(), nextToken());
-
-        case Token.SP -> parseSpace();
 
         case Token.LF -> parseLineFeed();
 
@@ -190,6 +186,12 @@ class Pass1 {
         addCode(Code.PARAGRAPH_START);
 
         yield PREAMBLE | PARAGRAPH;
+      }
+
+      case DOCUMENT | HEADING | START -> {
+        tokenStart = tokenIndex;
+
+        yield DOCUMENT | HEADING | NEXT;
       }
 
       default -> uoe();
@@ -281,32 +283,6 @@ class Pass1 {
       case DOCUMENT | METADATA -> state;
 
       case PREAMBLE | PARAGRAPH -> PREAMBLE | PARAGRAPH | START;
-
-      default -> uoe();
-    };
-  }
-
-  private int parseSpace() {
-    return switch (state) {
-      case DOCUMENT | HEADING | NEXT -> state;
-
-      case PREAMBLE | PARAGRAPH -> state;
-
-      default -> uoe();
-    };
-  }
-
-  private int parseWord(int start, int end) {
-    return switch (state) {
-      case DOCUMENT | HEADING | START -> {
-        tokenStart = tokenIndex;
-
-        yield DOCUMENT | HEADING | NEXT;
-      }
-
-      case DOCUMENT | HEADING | NEXT -> state;
-
-      case PREAMBLE | PARAGRAPH -> state;
 
       default -> uoe();
     };

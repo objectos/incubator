@@ -25,13 +25,12 @@ final class Token {
 
   static final int HEADING = -4;
 
-  static final int WORD = -5;
+  static final int BLOB = -5;
 
-  static final int BLOB = -6;
+  static final int LF = -6;
 
-  static final int SP = -7;
-
-  static final int LF = -8;
+  static final int MONO_START = -7;
+  static final int MONO_END = -8;
 
   private Token() {}
 
