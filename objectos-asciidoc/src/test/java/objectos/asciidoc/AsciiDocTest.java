@@ -124,6 +124,92 @@ public class AsciiDocTest {
 
   @Test(description = //
   """
+  bold
+
+  - constrained
+  - phrases
+  - well-formed
+
+            1
+  012345678901234567
+  '''
+  *a b* *c d*, *e f*
+  '''
+
+  L0: ^ * W1,2 SP W3,4 * SP * W7,8 SP W9,10 * X11,12 SP * W14,15 SP W16,17 * $ LF
+      ^ $ EOF
+
+  L1: ^ <B R1,4 B> R4,6 <B R7,10 B> R11,13 <B R14,17 B> $ LF
+      ^ $ EOF
+  """)
+  public final void bold02() {
+    test(
+      """
+      *a b* *c d*, *e f*
+      """,
+
+      p0(
+        Token.LINE_START,
+        Token.BOLD_START, 0,
+        Token.BLOB, 1, 4,
+        Token.BOLD_END, 4,
+        Token.BLOB, 5, 6,
+        Token.BOLD_START, 6,
+        Token.BLOB, 7, 10,
+        Token.BOLD_END, 10,
+        Token.BLOB, 11, 13,
+        Token.BOLD_START, 13,
+        Token.BLOB, 14, 17,
+        Token.BOLD_END, 17,
+        Token.LINE_END,
+        Token.LF,
+        Token.LINE_START,
+        Token.LINE_END,
+        Token.EOF
+      ),
+
+      p1(
+        Code.DOCUMENT_START,
+        Code.PREAMBLE_START,
+        Code.PARAGRAPH_START,
+        Code.TOKENS, 1, 31,
+        Code.PARAGRAPH_END,
+        Code.PREAMBLE_END,
+        Code.DOCUMENT_END
+      ),
+
+      p2(
+        t(
+          Text.BOLD_START,
+          Text.REGULAR, 1, 4,
+          Text.BOLD_END,
+          Text.REGULAR, 5, 6,
+          Text.BOLD_START,
+          Text.REGULAR, 7, 10,
+          Text.BOLD_END,
+          Text.REGULAR, 11, 13,
+          Text.BOLD_START,
+          Text.REGULAR, 14, 17,
+          Text.BOLD_END
+        )
+      ),
+
+      """
+      <body>
+      <div id="header">
+      </div>
+      <div id="content">
+      <div class="paragraph">
+      <p><strong>a b</strong> <strong>c d</strong>, <strong>e f</strong></p>
+      </div>
+      </div>
+      </body>
+      """
+    );
+  }
+
+  @Test(description = //
+  """
   doctitle + eof
 
   - happy path
