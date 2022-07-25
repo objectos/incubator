@@ -472,6 +472,91 @@ public class AsciiDocTest {
     );
   }
 
+  @Test(description = //
+  """
+  italic
+
+  - constrained
+  - phrases
+  - well-formed
+
+  012345678901234567
+  '''
+  _a b_ _c d_, _e f_
+  '''
+
+  L0: ^ _ W1,2 SP W3,4 _ SP _ W7,8 SP W9,10 _ X11,12 SP _ W14,15 SP W16,17 _ $ LF
+      ^ $ EOF
+
+  L1: ^ <I R1,4 I> R4,6 <I R7,10 I> R11,13 <I R14,17 I> $ LF
+      ^ $ EOF
+  """)
+  public final void italic02() {
+    test(
+      """
+      _a b_ _c d_, _e f_
+      """,
+
+      p0(
+        Token.LINE_START,
+        Token.ITALIC_START, 0,
+        Token.BLOB, 1, 4,
+        Token.ITALIC_END, 4,
+        Token.BLOB, 5, 6,
+        Token.ITALIC_START, 6,
+        Token.BLOB, 7, 10,
+        Token.ITALIC_END, 10,
+        Token.BLOB, 11, 13,
+        Token.ITALIC_START, 13,
+        Token.BLOB, 14, 17,
+        Token.ITALIC_END, 17,
+        Token.LINE_END,
+        Token.LF,
+        Token.LINE_START,
+        Token.LINE_END,
+        Token.EOF
+      ),
+
+      p1(
+        Code.DOCUMENT_START,
+        Code.PREAMBLE_START,
+        Code.PARAGRAPH_START,
+        Code.TOKENS, 1, 31,
+        Code.PARAGRAPH_END,
+        Code.PREAMBLE_END,
+        Code.DOCUMENT_END
+      ),
+
+      p2(
+        t(
+          Text.ITALIC_START,
+          Text.REGULAR, 1, 4,
+          Text.ITALIC_END,
+          Text.REGULAR, 5, 6,
+          Text.ITALIC_START,
+          Text.REGULAR, 7, 10,
+          Text.ITALIC_END,
+          Text.REGULAR, 11, 13,
+          Text.ITALIC_START,
+          Text.REGULAR, 14, 17,
+          Text.ITALIC_END
+        )
+      ),
+
+      """
+      <body>
+      <div id="header">
+      </div>
+      <div id="content">
+      <div class="paragraph">
+      <p><em>a b</em> <em>c d</em>, <em>e f</em></p>
+      </div>
+      </div>
+      </body>
+      """
+    );
+  }
+
   @Test(enabled = false, description = //
   """
   listing block
