@@ -88,6 +88,16 @@ class ThisProcessor implements AsciiDoc.Processor {
   }
 
   @Override
+  public final void italicEnd() {
+    sb.append("</em>");
+  }
+
+  @Override
+  public final void italicStart() {
+    sb.append("<em>");
+  }
+
+  @Override
   public final void monospaceEnd() {
     sb.append("</code>");
   }

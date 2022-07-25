@@ -33,6 +33,10 @@ public class AsciiDoc {
 
     void headingStart(int level);
 
+    void italicEnd();
+
+    void italicStart();
+
     void monospaceEnd();
 
     void monospaceStart();
@@ -131,13 +135,17 @@ public class AsciiDoc {
           }
         }
 
+        case Text.MONOSPACE_START -> processor.monospaceStart();
+
+        case Text.MONOSPACE_END -> processor.monospaceEnd();
+
         case Text.BOLD_START -> processor.boldStart();
 
         case Text.BOLD_END -> processor.boldEnd();
 
-        case Text.MONOSPACE_START -> processor.monospaceStart();
+        case Text.ITALIC_START -> processor.italicStart();
 
-        case Text.MONOSPACE_END -> processor.monospaceEnd();
+        case Text.ITALIC_END -> processor.italicEnd();
 
         default -> throw new UnsupportedOperationException("Implement me :: text=" + text);
       }

@@ -19,11 +19,14 @@ final class Text {
 
   static final int REGULAR = -1;
 
-  static final int BOLD_START = -2;
-  static final int BOLD_END = -3;
+  static final int MONOSPACE_START = -2;
+  static final int MONOSPACE_END = -3;
 
-  static final int MONOSPACE_START = -4;
-  static final int MONOSPACE_END = -5;
+  static final int BOLD_START = -4;
+  static final int BOLD_END = -5;
+
+  static final int ITALIC_START = -6;
+  static final int ITALIC_END = -7;
 
   private Text() {}
 

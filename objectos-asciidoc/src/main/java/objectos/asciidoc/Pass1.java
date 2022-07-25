@@ -162,6 +162,8 @@ class Pass1 {
 
         case Token.BOLD_START, Token.BOLD_END -> parseTokens(nextToken());
 
+        case Token.ITALIC_START, Token.ITALIC_END -> parseTokens(nextToken());
+
         case Token.MONO_START, Token.MONO_END -> parseTokens(nextToken());
 
         default -> throw new UnsupportedOperationException("Implement me :: token=" + token);

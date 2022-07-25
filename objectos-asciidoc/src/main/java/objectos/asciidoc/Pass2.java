@@ -31,9 +31,11 @@ class Pass2 {
 
   private static final int REGULAR = 1 << 1;
 
-  private static final int BOLD = 1 << 2;
+  private static final int MONOSPACE = 1 << 2;
 
-  private static final int MONOSPACE = 1 << 3;
+  private static final int BOLD = 1 << 3;
+
+  private static final int ITALIC = 1 << 4;
 
   private Source source;
 
@@ -131,6 +133,10 @@ class Pass2 {
 
         case Token.BOLD_END -> executeBoldEnd(nextToken());
 
+        case Token.ITALIC_START -> executeItalicStart(nextToken());
+
+        case Token.ITALIC_END -> executeItalicEnd(nextToken());
+
         case Token.MONO_START -> executeMonoStart(nextToken());
 
         case Token.MONO_END -> executeMonoEnd(nextToken());
@@ -152,6 +158,14 @@ class Pass2 {
         yield REGULAR;
       }
 
+      case MONOSPACE | START -> {
+        addText(Text.REGULAR, start);
+
+        regularEnd = end;
+
+        yield MONOSPACE;
+      }
+
       case BOLD | START -> {
         addText(Text.REGULAR, start);
 
@@ -160,12 +174,12 @@ class Pass2 {
         yield BOLD;
       }
 
-      case MONOSPACE | START -> {
+      case ITALIC | START -> {
         addText(Text.REGULAR, start);
 
         regularEnd = end;
 
-        yield MONOSPACE;
+        yield ITALIC;
       }
 
       default -> uoe();
@@ -227,6 +241,23 @@ class Pass2 {
 
       default -> uoe();
     };
+  }
+
+  private int executeItalicEnd(int nextToken) {
+    return switch (state) {
+      case ITALIC -> {
+        addText(regularEnd);
+        addText(Text.ITALIC_END);
+
+        yield START;
+      }
+
+      default -> uoe();
+    };
+  }
+
+  private int executeItalicStart(int index) {
+    return executeConstrainedStart(Text.ITALIC_START, Token.ITALIC_END, ITALIC);
   }
 
   private int executeLf() {
