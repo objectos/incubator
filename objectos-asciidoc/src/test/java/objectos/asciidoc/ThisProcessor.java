@@ -17,17 +17,33 @@ package objectos.asciidoc;
 
 class ThisProcessor implements AsciiDoc.Processor {
 
-  private static final int _START = 0;
+  private static final int START = 0;
 
-  private static final int _HEADER = 1;
+  private static final int HEADER = 1 << 0;
 
-  private static final int _CONTENT = 2;
+  private static final int PREAMBLE = 1 << 1;
+
+  private static final int CONTENT = 1 << 2;
 
   private int level;
 
+  private int sectionCount;
+
   private int state;
 
-  private final StringBuilder sb = new StringBuilder();
+  private String result;
+
+  private final StringBuilder header = new StringBuilder();
+
+  private final StringBuilder headingId = new StringBuilder();
+
+  private int headingIdIndex;
+
+  private final StringBuilder preamble = new StringBuilder();
+
+  private final StringBuilder content = new StringBuilder();
+
+  private StringBuilder sb;
 
   @Override
   public final void boldEnd() {
@@ -41,25 +57,66 @@ class ThisProcessor implements AsciiDoc.Processor {
 
   @Override
   public final void documentEnd() {
-    switch (state) {
-      case _HEADER -> sb.append("""
+    result = switch (state) {
+      case HEADER -> """
+        <div id="header">
+        %s
         </div>
 
         <div id="content">
         </div>
-        """);
-      case _CONTENT -> sb.append("</div>");
+        """.formatted(header);
+
+      case PREAMBLE -> """
+        <div id="header">
+        </div>
+
+        <div id="content">
+        %s
+        </div>
+        """.formatted(preamble);
+
+      case HEADER | PREAMBLE | CONTENT -> """
+        <body>
+        <div id="header">
+        %s
+        </div>
+        <div id="content">
+        <div id="preamble">
+        <div class="sectionbody">
+        %s
+        </div>
+        </div>
+        %s
+        </div>
+        </body>
+        """.formatted(header, preamble, content);
+
       default -> throw new UnsupportedOperationException("Implement me :: state=" + state);
-    }
+    };
   }
 
   @Override
   public final void documentStart() {
     level = 0;
 
-    state = _START;
+    sectionCount = 0;
 
-    sb.setLength(0);
+    state = START;
+
+    result = "";
+
+    header.setLength(0);
+
+    headingId.setLength(0);
+
+    headingIdIndex = 0;
+
+    content.setLength(0);
+
+    preamble.setLength(0);
+
+    sb = null;
   }
 
   @Override
@@ -67,22 +124,44 @@ class ThisProcessor implements AsciiDoc.Processor {
     sb.append("</h");
     sb.append(level);
     sb.append(">\n");
+
+    switch (state) {
+      case HEADER -> { /*noop*/ }
+      case HEADER | PREAMBLE | CONTENT -> {
+        sb.insert(headingIdIndex, headingId);
+
+        content.append("<div class=\"sectionbody\">\n");
+      }
+      default -> throw new UnsupportedOperationException("Implement me :: state=" + state);
+    }
   }
 
   @Override
   public final void headingStart(int level) {
-    switch (state) {
-      case _START -> sb.append("""
-        <div id="header">
-        """);
-      default -> throw new UnsupportedOperationException("Implement me :: state=" + state);
-    }
+    sb = switch (state) {
+      case START -> {
+        state = HEADER;
 
-    state = _HEADER;
+        header.append("<h");
+        header.append(level);
+        header.append(">");
 
-    sb.append("<h");
-    sb.append(level);
-    sb.append(">");
+        yield header;
+      }
+
+      default -> {
+        headingId.setLength(0);
+        headingId.append("_");
+
+        content.append("<h");
+        content.append(level);
+        content.append(" id=\"");
+        headingIdIndex = sb.length();
+        content.append("\">");
+
+        yield content;
+      }
+    };
 
     this.level = level;
   }
@@ -114,7 +193,7 @@ class ThisProcessor implements AsciiDoc.Processor {
 
   @Override
   public final void paragraphEnd() {
-    sb.append("</p></div>");
+    sb.append("</p>\n</div>\n");
   }
 
   @Override
@@ -128,31 +207,46 @@ class ThisProcessor implements AsciiDoc.Processor {
 
   @Override
   public final void preambleStart() {
-    switch (state) {
-      case _START -> sb.append("""
-        <div id="header">
-        </div>
-
-        <div id="content">
-        """);
-      case _HEADER -> sb.append("""
-        </div>
-
-        <div id="content">
-        """);
+    state = switch (state) {
+      case START -> PREAMBLE;
+      case HEADER -> HEADER | PREAMBLE;
       default -> throw new UnsupportedOperationException("Implement me :: state=" + state);
-    }
+    };
 
-    state = _CONTENT;
+    sb = preamble;
+  }
+
+  @Override
+  public final void sectionEnd() {
+    sb.append("</div>\n"); // section body
+    sb.append("</div>\n"); // section
+  }
+
+  @Override
+  public final void sectionStart(int level) {
+    state = switch (state) {
+      case HEADER | PREAMBLE -> HEADER | PREAMBLE | CONTENT;
+      default -> throw new UnsupportedOperationException("Implement me :: state=" + state);
+    };
+
+    sb = content;
+
+    sb.append("<div class=\"sect");
+    sb.append(++sectionCount);
+    sb.append("\">\n");
   }
 
   @Override
   public final void text(String s) {
     sb.append(s);
+
+    if (headingIdIndex > 0) {
+      headingId.append(s.replace(' ', '_').toLowerCase());
+    }
   }
 
   @Override
   public final String toString() {
-    return sb.toString();
+    return result.toString();
   }
 }

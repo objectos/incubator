@@ -31,6 +31,9 @@ final class Code {
 
   static final int TOKENS = -9;
 
+  static final int SECTION_START = -10;
+  static final int SECTION_END = -11;
+
   private Code() {}
 
 }

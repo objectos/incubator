@@ -518,6 +518,12 @@ class Pass0 implements Pass1.Source, Pass2.Source {
     lineStart = blobStart = sourceIndex;
 
     return switch (peek()) {
+      case '\n' -> {
+        add(Token.LINE_END, Token.LF);
+
+        yield advance(state);
+      }
+
       case '=' -> {
         counter = 1;
 
@@ -530,7 +536,7 @@ class Pass0 implements Pass1.Source, Pass2.Source {
 
       case '`' -> advance(MONO_START);
 
-      default -> uoe();
+      default -> advance(BLOB);
     };
   }
 

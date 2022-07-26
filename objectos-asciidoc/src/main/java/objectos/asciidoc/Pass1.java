@@ -31,9 +31,9 @@ class Pass1 {
 
   private static final int EOF = 0;
 
-  private static final int START = 1 << 0;
+  private static final int MAYBE = 1 << 0;
 
-  private static final int NEXT = 1 << 1;
+  private static final int NL = 1 << 1;
 
   private static final int DOCUMENT = 1 << 2;
 
@@ -41,15 +41,21 @@ class Pass1 {
 
   private static final int PREAMBLE = 1 << 4;
 
-  private static final int HEADING = 1 << 5;
+  private static final int SECTION = 1 << 5;
 
-  private static final int PARAGRAPH = 1 << 6;
+  private static final int HEADING = 1 << 6;
+
+  private static final int PARAGRAPH = 1 << 7;
 
   private int[] code;
 
   private int codeCursor;
 
   private int codeIndex;
+
+  private int[] section;
+
+  private int sectionIndex = -1;
 
   private int state;
 
@@ -61,6 +67,8 @@ class Pass1 {
 
   Pass1() {
     code = new int[512];
+
+    section = new int[8];
   }
 
   public final void execute(Source source) {
@@ -81,7 +89,9 @@ class Pass1 {
 
     codeIndex = 0;
 
-    state = START;
+    sectionIndex = -1;
+
+    state = MAYBE;
 
     execute0();
 
@@ -185,10 +195,24 @@ class Pass1 {
 
   private int parseHeading(int level, int start, int end) {
     return switch (state) {
-      case DOCUMENT | HEADING -> {
+      case MAYBE | DOCUMENT | HEADING -> {
         addCode(Code.HEADING_START, level);
 
-        yield DOCUMENT | HEADING | START;
+        yield DOCUMENT | HEADING;
+      }
+
+      case PREAMBLE -> {
+        var section = level - 1;
+
+        pushSection(section);
+
+        addCode(
+          Code.PREAMBLE_END,
+          Code.SECTION_START, section,
+          Code.HEADING_START, level
+        );
+
+        yield SECTION | HEADING;
       }
 
       default -> uoe();
@@ -198,7 +222,7 @@ class Pass1 {
   private int parseLineEnd(int terminator) {
     return switch (terminator) {
       case Token.EOF -> switch (state) {
-        case DOCUMENT | HEADING | NEXT -> {
+        case DOCUMENT | HEADING -> {
           addCode(
             Code.TOKENS, tokenStart, tokenIndex,
             Code.HEADING_END,
@@ -208,13 +232,13 @@ class Pass1 {
           yield EOF;
         }
 
-        case DOCUMENT | METADATA -> {
+        case MAYBE | DOCUMENT | METADATA -> {
           addCode(Code.DOCUMENT_END);
 
           yield EOF;
         }
 
-        case PREAMBLE | PARAGRAPH | START -> {
+        case PREAMBLE | PARAGRAPH | NL -> {
           addCode(
             Code.TOKENS, tokenStart, tokenIndex,
             Code.PARAGRAPH_END,
@@ -225,25 +249,58 @@ class Pass1 {
           yield EOF;
         }
 
+        case SECTION | PARAGRAPH | NL -> {
+          addCode(
+            Code.TOKENS, tokenStart, tokenIndex,
+            Code.PARAGRAPH_END,
+            Code.SECTION_END,
+            Code.DOCUMENT_END
+          );
+
+          yield EOF;
+        }
+
         default -> uoe();
       };
 
       case Token.LF -> switch (state) {
-        case DOCUMENT | HEADING | NEXT -> {
+        case DOCUMENT | HEADING -> {
           addCode(
             Code.TOKENS, tokenStart, tokenIndex,
             Code.HEADING_END
           );
 
-          yield DOCUMENT | METADATA;
+          yield MAYBE | DOCUMENT | METADATA;
         }
 
-        case PREAMBLE | PARAGRAPH -> state;
+        case MAYBE | DOCUMENT | METADATA -> MAYBE | PREAMBLE;
+
+        case PREAMBLE | PARAGRAPH -> PREAMBLE | PARAGRAPH | NL;
+
+        case PREAMBLE | PARAGRAPH | NL -> {
+          addCode(
+            Code.TOKENS, tokenStart, tokenIndex,
+            Code.PARAGRAPH_END
+          );
+
+          yield PREAMBLE;
+        }
+
+        case SECTION -> state;
+
+        case SECTION | HEADING -> {
+          addCode(
+            Code.TOKENS, tokenStart, tokenIndex,
+            Code.HEADING_END
+          );
+
+          yield SECTION;
+        }
+
+        case SECTION | PARAGRAPH -> SECTION | PARAGRAPH | NL;
 
         default -> uoe();
       };
-
-      case DOCUMENT | METADATA -> PREAMBLE;
 
       default -> uoe();
     };
@@ -259,15 +316,27 @@ class Pass1 {
 
   private int parseLineStart() {
     return switch (state) {
-      case START -> {
+      case MAYBE -> {
         addCode(Code.DOCUMENT_START);
 
-        yield DOCUMENT | HEADING;
+        yield MAYBE | DOCUMENT | HEADING;
       }
+
+      case MAYBE | DOCUMENT | METADATA -> state;
 
       case DOCUMENT | METADATA -> state;
 
-      case PREAMBLE | PARAGRAPH -> PREAMBLE | PARAGRAPH | START;
+      case MAYBE | PREAMBLE -> state;
+
+      case PREAMBLE -> state;
+
+      case PREAMBLE | PARAGRAPH -> state;
+
+      case PREAMBLE | PARAGRAPH | NL -> state;
+
+      case SECTION -> state;
+
+      case SECTION | PARAGRAPH | NL -> state;
 
       default -> uoe();
     };
@@ -279,7 +348,7 @@ class Pass1 {
 
   private int parseTokens(int v0, int v1) {
     return switch (state) {
-      case DOCUMENT | HEADING -> {
+      case MAYBE | DOCUMENT | HEADING -> {
         tokenStart = tokenIndex;
 
         addCode(Code.PREAMBLE_START);
@@ -288,16 +357,47 @@ class Pass1 {
         yield PREAMBLE | PARAGRAPH;
       }
 
-      case DOCUMENT | HEADING | START -> {
+      case DOCUMENT | HEADING -> {
         tokenStart = tokenIndex;
 
-        yield DOCUMENT | HEADING | NEXT;
+        yield state;
+      }
+
+      case MAYBE | PREAMBLE -> {
+        tokenStart = tokenIndex;
+
+        addCode(Code.PREAMBLE_START);
+        addCode(Code.PARAGRAPH_START);
+
+        yield PREAMBLE | PARAGRAPH;
       }
 
       case PREAMBLE | PARAGRAPH -> state;
 
+      case SECTION -> {
+        tokenStart = tokenIndex;
+
+        addCode(Code.PARAGRAPH_START);
+
+        yield SECTION | PARAGRAPH;
+      }
+
+      case SECTION | HEADING -> {
+        tokenStart = tokenIndex;
+
+        yield state;
+      }
+
       default -> uoe();
     };
+  }
+
+  private void pushSection(int level) {
+    sectionIndex++;
+
+    section = IntArrays.copyIfNecessary(section, sectionIndex);
+
+    section[sectionIndex] = level;
   }
 
   private int uoe() {

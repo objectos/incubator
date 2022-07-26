@@ -51,6 +51,10 @@ public class AsciiDoc {
 
     void preambleStart();
 
+    void sectionEnd();
+
+    void sectionStart(int level);
+
     void text(String s);
 
   }
@@ -99,6 +103,10 @@ public class AsciiDoc {
         case Code.PREAMBLE_START -> processor.preambleStart();
 
         case Code.PREAMBLE_END -> processor.preambleEnd();
+
+        case Code.SECTION_START -> processor.sectionStart(nextCode());
+
+        case Code.SECTION_END -> processor.sectionEnd();
 
         case Code.PARAGRAPH_START -> processor.paragraphStart();
 
