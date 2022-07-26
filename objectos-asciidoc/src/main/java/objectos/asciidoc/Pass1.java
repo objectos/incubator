@@ -47,6 +47,8 @@ class Pass1 {
 
   private static final int PARAGRAPH = 1 << 7;
 
+  private static final int ATTR = 1 << 8;
+
   private int[] code;
 
   private int codeCursor;
@@ -110,10 +112,18 @@ class Pass1 {
     return Arrays.copyOf(code, codeIndex);
   }
 
-  private void addCode(int p0) {
+  private void add(int p0) {
     code = IntArrays.copyIfNecessary(code, codeIndex);
 
     code[codeIndex++] = p0;
+  }
+
+  private void add(int p0, int p1, int p2) {
+    code = IntArrays.copyIfNecessary(code, codeIndex + 2);
+
+    code[codeIndex++] = p0;
+    code[codeIndex++] = p1;
+    code[codeIndex++] = p2;
   }
 
   private void addCode(int p0, int p1) {
@@ -154,27 +164,33 @@ class Pass1 {
   }
 
   private void execute0() {
-    while (hasToken()) {
+    while (hasNext()) {
       tokenIndex = source.tokenCursor();
 
-      var token = nextToken();
+      var token = next();
 
       state = switch (token) {
         case Token.LINE_START -> parseLineStart();
 
-        case Token.LINE_END -> parseLineEnd(nextToken());
+        case Token.LINE_END -> parseLineEnd(next());
 
-        case Token.HEADING -> parseHeading(nextToken(), nextToken(), nextToken());
+        case Token.HEADING -> parseHeading(next(), next(), next());
 
-        case Token.BLOB -> parseTokens(nextToken(), nextToken());
+        case Token.BLOB -> parseTokens(next(), next());
 
         case Token.LF -> parseLineFeed();
 
-        case Token.BOLD_START, Token.BOLD_END -> parseTokens(nextToken());
+        case Token.ATTR_LIST_START -> { add(Code.ATTR_LIST_START); yield state | ATTR; }
 
-        case Token.ITALIC_START, Token.ITALIC_END -> parseTokens(nextToken());
+        case Token.ATTR_LIST_END -> { add(Code.ATTR_LIST_END); yield state; }
 
-        case Token.MONO_START, Token.MONO_END -> parseTokens(nextToken());
+        case Token.ATTR_POS -> { add(Code.ATTR_POS, next(), next()); yield state; }
+
+        case Token.BOLD_START, Token.BOLD_END -> parseTokens(next());
+
+        case Token.ITALIC_START, Token.ITALIC_END -> parseTokens(next());
+
+        case Token.MONO_START, Token.MONO_END -> parseTokens(next());
 
         default -> throw new UnsupportedOperationException("Implement me :: token=" + token);
       };
@@ -185,15 +201,15 @@ class Pass1 {
     }
   }
 
+  private boolean hasNext() {
+    return source.hasToken();
+  }
+
   private boolean hasSection() {
     return sectionIndex >= 0;
   }
 
-  private boolean hasToken() {
-    return source.hasToken();
-  }
-
-  private int nextToken() {
+  private int next() {
     return source.nextToken();
   }
 
@@ -203,6 +219,19 @@ class Pass1 {
         addCode(Code.HEADING_START, level);
 
         yield DOCUMENT | HEADING;
+      }
+
+      case MAYBE | PREAMBLE -> {
+        var section = level - 1;
+
+        pushSection(section);
+
+        addCode(
+          Code.SECTION_START, section,
+          Code.HEADING_START, level
+        );
+
+        yield SECTION | HEADING;
       }
 
       case PREAMBLE -> {
@@ -250,7 +279,7 @@ class Pass1 {
         }
 
         case MAYBE | DOCUMENT | METADATA -> {
-          addCode(Code.DOCUMENT_END);
+          add(Code.DOCUMENT_END);
 
           yield EOF;
         }
@@ -274,10 +303,10 @@ class Pass1 {
 
           while (hasSection()) {
             popSection();
-            addCode(Code.SECTION_END);
+            add(Code.SECTION_END);
           }
 
-          addCode(Code.DOCUMENT_END);
+          add(Code.DOCUMENT_END);
 
           yield EOF;
         }
@@ -286,6 +315,8 @@ class Pass1 {
       };
 
       case Token.LF -> switch (state) {
+        case MAYBE | DOCUMENT | HEADING | ATTR -> MAYBE | PREAMBLE;
+
         case DOCUMENT | HEADING -> {
           addCode(
             Code.TOKENS, tokenStart, tokenIndex,
@@ -348,7 +379,7 @@ class Pass1 {
   private int parseLineStart() {
     return switch (state) {
       case MAYBE -> {
-        addCode(Code.DOCUMENT_START);
+        add(Code.DOCUMENT_START);
 
         yield MAYBE | DOCUMENT | HEADING;
       }
@@ -382,8 +413,8 @@ class Pass1 {
       case MAYBE | DOCUMENT | HEADING -> {
         tokenStart = tokenIndex;
 
-        addCode(Code.PREAMBLE_START);
-        addCode(Code.PARAGRAPH_START);
+        add(Code.PREAMBLE_START);
+        add(Code.PARAGRAPH_START);
 
         yield PREAMBLE | PARAGRAPH;
       }
@@ -397,8 +428,8 @@ class Pass1 {
       case MAYBE | PREAMBLE -> {
         tokenStart = tokenIndex;
 
-        addCode(Code.PREAMBLE_START);
-        addCode(Code.PARAGRAPH_START);
+        add(Code.PREAMBLE_START);
+        add(Code.PARAGRAPH_START);
 
         yield PREAMBLE | PARAGRAPH;
       }
@@ -408,7 +439,7 @@ class Pass1 {
       case SECTION -> {
         tokenStart = tokenIndex;
 
-        addCode(Code.PARAGRAPH_START);
+        add(Code.PARAGRAPH_START);
 
         yield SECTION | PARAGRAPH;
       }

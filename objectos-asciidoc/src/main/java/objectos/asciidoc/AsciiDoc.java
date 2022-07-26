@@ -21,6 +21,10 @@ public class AsciiDoc {
 
   public interface Processor {
 
+    void attrlistEnd();
+
+    void attrlistStart();
+
     void boldEnd();
 
     void boldStart();
@@ -47,6 +51,8 @@ public class AsciiDoc {
 
     void paragraphStart();
 
+    void positionalAttribute(int index, String value);
+
     void preambleEnd();
 
     void preambleStart();
@@ -68,6 +74,8 @@ public class AsciiDoc {
   private String source;
 
   private Processor processor;
+
+  private int position;
 
   private AsciiDoc() {
   }
@@ -112,6 +120,12 @@ public class AsciiDoc {
 
         case Code.PARAGRAPH_END -> processor.paragraphEnd();
 
+        case Code.ATTR_LIST_START -> { position = 0; processor.attrlistStart(); }
+
+        case Code.ATTR_LIST_END -> processor.attrlistEnd();
+
+        case Code.ATTR_POS -> processAttrPos(nextCode(), nextCode());
+
         case Code.TOKENS -> processTokens(nextCode(), nextCode());
 
         default -> throw new UnsupportedOperationException("Implement me :: code=" + code);
@@ -123,6 +137,12 @@ public class AsciiDoc {
 
   private int nextCode() {
     return pass1.nextCode();
+  }
+
+  private void processAttrPos(int begin, int end) {
+    var s = source.substring(begin, end);
+
+    processor.positionalAttribute(++position, s);
   }
 
   private void processTokens(int first, int last) {

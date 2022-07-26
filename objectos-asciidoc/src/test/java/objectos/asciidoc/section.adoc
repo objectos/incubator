@@ -1,9 +1,4 @@
-= doc  
+[source]
+== L1
 
-pream
-
-== foo bar
-
-parag
-
-anoth
+sect1

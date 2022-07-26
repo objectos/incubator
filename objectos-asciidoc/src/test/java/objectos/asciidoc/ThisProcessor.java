@@ -46,6 +46,12 @@ class ThisProcessor implements AsciiDoc.Processor {
   private StringBuilder sb;
 
   @Override
+  public final void attrlistEnd() {}
+
+  @Override
+  public final void attrlistStart() {}
+
+  @Override
   public final void boldEnd() {
     sb.append("</strong>");
   }
@@ -76,8 +82,16 @@ class ThisProcessor implements AsciiDoc.Processor {
         </div>
         """.formatted(preamble);
 
+      case CONTENT -> """
+        <div id="header">
+        </div>
+
+        <div id="content">
+        %s
+        </div>
+        """.formatted(content);
+
       case HEADER | PREAMBLE | CONTENT -> """
-        <body>
         <div id="header">
         %s
         </div>
@@ -89,7 +103,6 @@ class ThisProcessor implements AsciiDoc.Processor {
         </div>
         %s
         </div>
-        </body>
         """.formatted(header, preamble, content);
 
       default -> throw new UnsupportedOperationException("Implement me :: state=" + state);
@@ -127,7 +140,7 @@ class ThisProcessor implements AsciiDoc.Processor {
 
     switch (state) {
       case HEADER -> { /*noop*/ }
-      case HEADER | PREAMBLE | CONTENT -> {
+      case HEADER | PREAMBLE | CONTENT, CONTENT -> {
         sb.insert(headingIdIndex, headingId);
 
         if (sectionCount == 1) {
@@ -204,8 +217,10 @@ class ThisProcessor implements AsciiDoc.Processor {
   }
 
   @Override
-  public final void preambleEnd() {
-  }
+  public final void positionalAttribute(int index, String value) {}
+
+  @Override
+  public final void preambleEnd() {}
 
   @Override
   public final void preambleStart() {
@@ -231,6 +246,7 @@ class ThisProcessor implements AsciiDoc.Processor {
   @Override
   public final void sectionStart(int level) {
     state = switch (state) {
+      case START -> CONTENT;
       case HEADER | PREAMBLE -> HEADER | PREAMBLE | CONTENT;
       case HEADER | PREAMBLE | CONTENT -> state;
       default -> throw new UnsupportedOperationException("Implement me :: state=" + state);

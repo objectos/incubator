@@ -46,7 +46,10 @@ class Pass0 implements Pass1.Source, Pass2.Source {
   private static final int MONO_START = 12;
   private static final int MONO_END = 13;
 
-  private static final int LIST = 14;
+  private static final int ATTR_NAME = 14;
+  private static final int ATTR_LIST_END = 15;
+
+  private static final int LIST = 15;
 
   private String source;
 
@@ -65,6 +68,8 @@ class Pass0 implements Pass1.Source, Pass2.Source {
   private int lineStart;
 
   private int blobStart;
+
+  private int attributeNameStart;
 
   Pass0() {
     token = new int[512];
@@ -207,6 +212,15 @@ class Pass0 implements Pass1.Source, Pass2.Source {
 
   private char peek() { return source.charAt(sourceIndex); }
 
+  private int rollbackAttributes() {
+    sourceIndex = lineStart;
+    sourceIndex++; // skips initial '['
+
+    tokenIndex = tokenCursor;
+
+    return BLOB;
+  }
+
   private int state(int state) {
     return switch (state) {
       case LINE_START -> stateLineStart();
@@ -235,7 +249,55 @@ class Pass0 implements Pass1.Source, Pass2.Source {
 
       case MONO_END -> stateMonoEnd();
 
+      case ATTR_LIST_END -> stateAttrListEnd();
+
+      case ATTR_NAME -> stateAttrName();
+
       default -> uoe();
+    };
+  }
+
+  private int stateAttrListEnd() {
+    if (!hasChar()) {
+      add(
+        Token.ATTR_LIST_END,
+        Token.LINE_END, Token.EOF
+      );
+
+      return EOF;
+    }
+
+    return switch (peek()) {
+      case '\n' -> {
+        add(
+          Token.ATTR_LIST_END,
+          Token.LINE_END, Token.LF
+        );
+
+        yield advance(LINE_START);
+      }
+
+      case ' ', '\t', '\f', '\u000B' -> advance(ATTR_LIST_END);
+
+      default -> rollbackAttributes();
+    };
+  }
+
+  private int stateAttrName() {
+    if (!hasChar()) {
+      return rollbackAttributes();
+    }
+
+    return switch (peek()) {
+      case '\n' -> rollbackAttributes();
+
+      case ']' -> {
+        add(Token.ATTR_POS, attributeNameStart, sourceIndex);
+
+        yield advance(ATTR_LIST_END);
+      }
+
+      default -> advance(state);
     };
   }
 
@@ -266,6 +328,8 @@ class Pass0 implements Pass1.Source, Pass2.Source {
       case ' ' -> advance(SPACE_LIKE);
 
       case '*' -> advance(BOLD_END);
+
+      case ']' -> advance(ATTR_LIST_END);
 
       case '_' -> advance(ITALIC_END);
 
@@ -531,6 +595,16 @@ class Pass0 implements Pass1.Source, Pass2.Source {
       }
 
       case '*' -> advance(BOLD_OR_LIST);
+
+      case '[' -> {
+        attributeNameStart = sourceIndex + 1;
+
+        tokenCursor = tokenIndex;
+
+        add(Token.ATTR_LIST_START);
+
+        yield advance(ATTR_NAME);
+      }
 
       case '_' -> advance(ITALIC_START);
 

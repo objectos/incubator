@@ -1137,6 +1137,94 @@ public class AsciiDocTest {
     );
   }
 
+  @Test(description = //
+  """
+  section
+
+  - attribute list
+  - level 1
+  - no doctitle
+  - single paragraph
+
+  012345
+  678901
+  2
+  345678
+  '''
+  [nam]
+  == L1
+
+  sect1
+  '''
+
+  P0: ^ [ B1,4 ] $ LF
+      ^ H2-6,9 B9,11 $ LF
+      ^ $ LF
+      ^ B13,18 $ LF
+      ^ $ EOF
+  """)
+  public final void section03() {
+    test(
+      """
+      [nam]
+      == L1
+
+      sect1
+      """,
+
+      p0(
+        Token.LINE_START,
+        Token.ATTR_LIST_START,
+        Token.ATTR_POS, 1, 4,
+        Token.ATTR_LIST_END,
+        Token.LINE_END, Token.LF,
+        Token.LINE_START,
+        Token.HEADING, 2, 6, 9,
+        Token.BLOB, 9, 11,
+        Token.LINE_END, Token.LF,
+        Token.LINE_START, Token.LINE_END, Token.LF,
+        Token.LINE_START,
+        Token.BLOB, 13, 18,
+        Token.LINE_END, Token.LF,
+        Token.LINE_START, Token.LINE_END, Token.EOF
+      ),
+
+      p1(
+        Code.DOCUMENT_START,
+
+        Code.ATTR_LIST_START,
+        Code.ATTR_POS, 1, 4,
+        Code.ATTR_LIST_END,
+        Code.SECTION_START, 1,
+        Code.HEADING_START, 2, Code.TOKENS, 13, 16, Code.HEADING_END,
+        Code.PARAGRAPH_START, Code.TOKENS, 22, 28, Code.PARAGRAPH_END,
+        Code.SECTION_END,
+
+        Code.DOCUMENT_END
+      ),
+
+      p2(
+        t(Text.REGULAR, 9, 11),
+        t(Text.REGULAR, 13, 18)
+      ),
+
+      """
+      <div id="header">
+      </div>
+      <div id="content">
+      <div class="sect1">
+      <h2 id="_l1">L1</h2>
+      <div class="sectionbody">
+      <div class="paragraph">
+      <p>sect1</p>
+      </div>
+      </div>
+      </div>
+      </div>
+      """
+    );
+  }
+
   @Test(enabled = false, description = //
   """
   unordered list

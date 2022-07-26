@@ -38,6 +38,11 @@ final class Token {
   static final int ITALIC_START = -11;
   static final int ITALIC_END = -12;
 
+  static final int ATTR_LIST_START = -13;
+  static final int ATTR_LIST_END = -14;
+
+  static final int ATTR_POS = -15;
+
   private Token() {}
 
 }

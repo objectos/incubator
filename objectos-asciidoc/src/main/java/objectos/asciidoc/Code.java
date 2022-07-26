@@ -34,6 +34,10 @@ final class Code {
   static final int SECTION_START = -10;
   static final int SECTION_END = -11;
 
+  static final int ATTR_LIST_START = -12;
+  static final int ATTR_LIST_END = -13;
+  static final int ATTR_POS = -14;
+
   private Code() {}
 
 }
