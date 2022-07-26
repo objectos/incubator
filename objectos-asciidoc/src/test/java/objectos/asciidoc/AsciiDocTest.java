@@ -960,6 +960,183 @@ public class AsciiDocTest {
     );
   }
 
+  @Test(description = //
+  """
+  section
+
+  - level 1
+  - level 2
+  - single paragraph in each
+
+  012345
+  6
+  789012
+  3
+  456789
+  0
+  123456
+  7
+  890123
+  4
+  567890
+  '''
+  = doc
+
+  pream
+
+  == L1
+
+  sect1
+
+  === 2
+
+  sect2
+  '''
+
+  P0: ^ H1-0,2 B2,5 $ LF
+      ^ $ LF
+      ^ B7,12 $ LF
+      ^ $ LF
+      ^ H2-14,17 B17,19 $ LF
+      ^ $ LF
+      ^ B21,26 $ LF
+      ^ $ LF
+      ^ H3-28,32 B32,33 $ LF
+      ^ $ LF
+      ^ B35,40 $ LF
+      ^ $ EOF
+
+  P1: DOC_START
+      HEADING_START 1
+      P0 start end
+      HEADING_END
+      PREAMBLE_START
+      PARAGRAPH P0 start end
+      PREAMBLE_END
+      SECTION_START 1
+      HEADING_START 2
+      P0 start end
+      HEADING_END
+      PARAGRAPH P0 start end
+      SECTION_END
+      SECTION_START 2
+      HEADING_START 3
+      P0 start end
+      HEADING_END
+      PARAGRAPH P0 start end
+      SECTION_END
+      DOC_END
+  """)
+  public final void section02() {
+    test(
+      """
+      = doc
+
+      pream
+
+      == L1
+
+      sect1
+
+      === 2
+
+      sect2
+      """,
+
+      p0(
+        Token.LINE_START,
+        Token.HEADING, 1, 0, 2,
+        Token.BLOB, 2, 5,
+        Token.LINE_END, Token.LF,
+        Token.LINE_START, Token.LINE_END, Token.LF,
+        Token.LINE_START,
+        Token.BLOB, 7, 12,
+        Token.LINE_END, Token.LF,
+        Token.LINE_START, Token.LINE_END, Token.LF,
+
+        Token.LINE_START,
+        Token.HEADING, 2, 14, 17,
+        Token.BLOB, 17, 19,
+        Token.LINE_END, Token.LF,
+        Token.LINE_START, Token.LINE_END, Token.LF,
+        Token.LINE_START,
+        Token.BLOB, 21, 26,
+        Token.LINE_END, Token.LF,
+        Token.LINE_START, Token.LINE_END, Token.LF,
+
+        Token.LINE_START,
+        Token.HEADING, 3, 28, 32,
+        Token.BLOB, 32, 33,
+        Token.LINE_END, Token.LF,
+        Token.LINE_START, Token.LINE_END, Token.LF,
+        Token.LINE_START,
+        Token.BLOB, 35, 40,
+        Token.LINE_END, Token.LF,
+
+        Token.LINE_START, Token.LINE_END, Token.EOF
+      ),
+
+      p1(
+        Code.DOCUMENT_START,
+        Code.HEADING_START, 1, Code.TOKENS, 5, 8, Code.HEADING_END,
+        Code.PREAMBLE_START,
+        Code.PARAGRAPH_START, Code.TOKENS, 14, 20, Code.PARAGRAPH_END,
+        Code.PREAMBLE_END,
+
+        Code.SECTION_START, 1,
+        Code.HEADING_START, 2, Code.TOKENS, 27, 30, Code.HEADING_END,
+        Code.PARAGRAPH_START, Code.TOKENS, 36, 42, Code.PARAGRAPH_END,
+
+        Code.SECTION_START, 2,
+        Code.HEADING_START, 3, Code.TOKENS, 49, 52, Code.HEADING_END,
+        Code.PARAGRAPH_START, Code.TOKENS, 58, 64, Code.PARAGRAPH_END,
+
+        Code.SECTION_END,
+        Code.SECTION_END,
+
+        Code.DOCUMENT_END
+      ),
+
+      p2(
+        t(Text.REGULAR, 2, 5),
+        t(Text.REGULAR, 7, 12),
+        t(Text.REGULAR, 17, 19),
+        t(Text.REGULAR, 21, 26),
+        t(Text.REGULAR, 32, 33),
+        t(Text.REGULAR, 35, 40)
+      ),
+
+      """
+      <div id="header">
+      <h1>doc</h1>
+      </div>
+      <div id="content">
+      <div id="preamble">
+      <div class="sectionbody">
+      <div class="paragraph">
+      <p>pream</p>
+      </div>
+      </div>
+      </div>
+      <div class="sect1">
+      <h2 id="_l1">L1</h2>
+      <div class="sectionbody">
+      <div class="paragraph">
+      <p>sect1</p>
+      </div>
+      <div class="sect2">
+      <h3 id="_2">2</h3>
+      <div class="paragraph">
+      <p>sect2</p>
+      </div>
+      </div>
+      </div>
+      </div>
+      </div>
+      """
+    );
+  }
+
   @Test(enabled = false, description = //
   """
   unordered list

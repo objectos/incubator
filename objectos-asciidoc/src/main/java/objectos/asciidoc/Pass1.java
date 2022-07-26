@@ -185,6 +185,10 @@ class Pass1 {
     }
   }
 
+  private boolean hasSection() {
+    return sectionIndex >= 0;
+  }
+
   private boolean hasToken() {
     return source.hasToken();
   }
@@ -208,6 +212,19 @@ class Pass1 {
 
         addCode(
           Code.PREAMBLE_END,
+          Code.SECTION_START, section,
+          Code.HEADING_START, level
+        );
+
+        yield SECTION | HEADING;
+      }
+
+      case SECTION -> {
+        var section = level - 1;
+
+        pushSection(section);
+
+        addCode(
           Code.SECTION_START, section,
           Code.HEADING_START, level
         );
@@ -252,10 +269,15 @@ class Pass1 {
         case SECTION | PARAGRAPH | NL -> {
           addCode(
             Code.TOKENS, tokenStart, tokenIndex,
-            Code.PARAGRAPH_END,
-            Code.SECTION_END,
-            Code.DOCUMENT_END
+            Code.PARAGRAPH_END
           );
+
+          while (hasSection()) {
+            popSection();
+            addCode(Code.SECTION_END);
+          }
+
+          addCode(Code.DOCUMENT_END);
 
           yield EOF;
         }
@@ -298,6 +320,15 @@ class Pass1 {
         }
 
         case SECTION | PARAGRAPH -> SECTION | PARAGRAPH | NL;
+
+        case SECTION | PARAGRAPH | NL -> {
+          addCode(
+            Code.TOKENS, tokenStart, tokenIndex,
+            Code.PARAGRAPH_END
+          );
+
+          yield SECTION;
+        }
 
         default -> uoe();
       };
@@ -390,6 +421,10 @@ class Pass1 {
 
       default -> uoe();
     };
+  }
+
+  private int popSection() {
+    return section[sectionIndex--];
   }
 
   private void pushSection(int level) {

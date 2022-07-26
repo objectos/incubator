@@ -130,7 +130,9 @@ class ThisProcessor implements AsciiDoc.Processor {
       case HEADER | PREAMBLE | CONTENT -> {
         sb.insert(headingIdIndex, headingId);
 
-        content.append("<div class=\"sectionbody\">\n");
+        if (sectionCount == 1) {
+          content.append("<div class=\"sectionbody\">\n");
+        }
       }
       default -> throw new UnsupportedOperationException("Implement me :: state=" + state);
     }
@@ -218,22 +220,29 @@ class ThisProcessor implements AsciiDoc.Processor {
 
   @Override
   public final void sectionEnd() {
-    sb.append("</div>\n"); // section body
+    if (sectionCount == 1) {
+      sb.append("</div>\n"); // section body
+    }
     sb.append("</div>\n"); // section
+
+    sectionCount--;
   }
 
   @Override
   public final void sectionStart(int level) {
     state = switch (state) {
       case HEADER | PREAMBLE -> HEADER | PREAMBLE | CONTENT;
+      case HEADER | PREAMBLE | CONTENT -> state;
       default -> throw new UnsupportedOperationException("Implement me :: state=" + state);
     };
 
     sb = content;
 
     sb.append("<div class=\"sect");
-    sb.append(++sectionCount);
+    sb.append(level);
     sb.append("\">\n");
+
+    sectionCount++;
   }
 
   @Override
