@@ -575,8 +575,6 @@ class Pass0 implements Pass1.Source, Pass2.Source {
   }
 
   private int stateLineStart() {
-    add(Token.LINE_START);
-
     if (!hasChar()) {
       add(Token.LINE_END, Token.EOF);
 

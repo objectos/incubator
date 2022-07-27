@@ -166,14 +166,14 @@ class Pass1 {
   }
 
   private void execute0() {
+    add(Code.DOCUMENT_START);
+
     while (hasNext()) {
       tokenIndex = source.tokenCursor();
 
       var token = next();
 
       state = switch (token) {
-        case Token.LINE_START -> parseLineStart();
-
         case Token.LINE_END -> parseLineEnd(next());
 
         case Token.HEADING -> parseHeading(next(), next(), next());
@@ -231,7 +231,7 @@ class Pass1 {
 
   private int parseHeading(int level, int start, int end) {
     return switch (state) {
-      case MAYBE | DOCUMENT | HEADING -> {
+      case MAYBE -> {
         add(Code.HEADING_START, level);
 
         yield DOCUMENT | HEADING;
@@ -331,7 +331,7 @@ class Pass1 {
       };
 
       case Token.LF -> switch (state) {
-        case MAYBE | DOCUMENT | HEADING | ATTR -> MAYBE | PREAMBLE;
+        case MAYBE | ATTR -> MAYBE | PREAMBLE;
 
         case DOCUMENT | HEADING -> {
           addCode(
@@ -394,36 +394,6 @@ class Pass1 {
     };
   }
 
-  private int parseLineStart() {
-    return switch (state) {
-      case MAYBE -> {
-        add(Code.DOCUMENT_START);
-
-        yield MAYBE | DOCUMENT | HEADING;
-      }
-
-      case MAYBE | DOCUMENT | METADATA -> state;
-
-      case DOCUMENT | METADATA -> state;
-
-      case MAYBE | PREAMBLE -> state;
-
-      case PREAMBLE -> state;
-
-      case PREAMBLE | PARAGRAPH -> state;
-
-      case PREAMBLE | PARAGRAPH | NL -> state;
-
-      case PREAMBLE | LISTING_BLOCK -> state;
-
-      case SECTION -> state;
-
-      case SECTION | PARAGRAPH | NL -> state;
-
-      default -> uoe();
-    };
-  }
-
   private int parseListingBlockDelim(int dashes) {
     return switch (state) {
       case MAYBE | DOCUMENT | HEADING -> {
@@ -443,7 +413,7 @@ class Pass1 {
 
   private int parseTokens(int v0, int v1) {
     return switch (state) {
-      case MAYBE | DOCUMENT | HEADING -> {
+      case MAYBE -> {
         tokenStart = tokenIndex;
 
         add(Code.PREAMBLE_START, Code.PARAGRAPH_START);

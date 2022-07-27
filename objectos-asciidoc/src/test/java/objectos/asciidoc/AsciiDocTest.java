@@ -63,7 +63,6 @@ public class AsciiDocTest {
       """,
 
       p0(
-        Token.LINE_START,
         Token.BOLD_START, 0,
         Token.BLOB, 1, 2,
         Token.BOLD_END, 2,
@@ -77,7 +76,6 @@ public class AsciiDocTest {
         Token.BOLD_END, 11,
         Token.LINE_END,
         Token.LF,
-        Token.LINE_START,
         Token.LINE_END,
         Token.EOF
       ),
@@ -86,7 +84,7 @@ public class AsciiDocTest {
         Code.DOCUMENT_START,
         Code.PREAMBLE_START,
         Code.PARAGRAPH_START,
-        Code.TOKENS, 1, 31,
+        Code.TOKENS, 0, 29,
         Code.PARAGRAPH_END,
         Code.PREAMBLE_END,
         Code.DOCUMENT_END
@@ -149,7 +147,6 @@ public class AsciiDocTest {
       """,
 
       p0(
-        Token.LINE_START,
         Token.BOLD_START, 0,
         Token.BLOB, 1, 4,
         Token.BOLD_END, 4,
@@ -163,7 +160,6 @@ public class AsciiDocTest {
         Token.BOLD_END, 17,
         Token.LINE_END,
         Token.LF,
-        Token.LINE_START,
         Token.LINE_END,
         Token.EOF
       ),
@@ -172,7 +168,7 @@ public class AsciiDocTest {
         Code.DOCUMENT_START,
         Code.PREAMBLE_START,
         Code.PARAGRAPH_START,
-        Code.TOKENS, 1, 31,
+        Code.TOKENS, 0, 29,
         Code.PARAGRAPH_END,
         Code.PREAMBLE_END,
         Code.DOCUMENT_END
@@ -232,7 +228,6 @@ public class AsciiDocTest {
       = The doctitle""",
 
       p0(
-        Token.LINE_START,
         Token.HEADING, 1, 0, 2,
         Token.BLOB, 2, 14,
         Token.LINE_END,
@@ -242,7 +237,7 @@ public class AsciiDocTest {
       p1(
         Code.DOCUMENT_START,
         Code.HEADING_START, 1,
-        Code.TOKENS, 5, 8,
+        Code.TOKENS, 4, 7,
         Code.HEADING_END,
         Code.DOCUMENT_END
       ),
@@ -289,12 +284,10 @@ public class AsciiDocTest {
       """,
 
       p0(
-        Token.LINE_START,
         Token.HEADING, 1, 0, 2,
         Token.BLOB, 2, 14,
         Token.LINE_END,
         Token.LF,
-        Token.LINE_START,
         Token.LINE_END,
         Token.EOF
       ),
@@ -302,7 +295,7 @@ public class AsciiDocTest {
       p1(
         Code.DOCUMENT_START,
         Code.HEADING_START, 1,
-        Code.TOKENS, 5, 8,
+        Code.TOKENS, 4, 7,
         Code.HEADING_END,
         Code.DOCUMENT_END
       ),
@@ -350,11 +343,9 @@ public class AsciiDocTest {
       """,
 
       p0(
-        Token.LINE_START,
         Token.BLOB, 0, 10,
         Token.LINE_END,
         Token.LF,
-        Token.LINE_START,
         Token.LINE_END,
         Token.EOF
       ),
@@ -363,7 +354,7 @@ public class AsciiDocTest {
         Code.DOCUMENT_START,
         Code.PREAMBLE_START,
         Code.PARAGRAPH_START,
-        Code.TOKENS, 1, 7,
+        Code.TOKENS, 0, 5,
         Code.PARAGRAPH_END,
         Code.PREAMBLE_END,
         Code.DOCUMENT_END
@@ -413,7 +404,6 @@ public class AsciiDocTest {
       """,
 
       p0(
-        Token.LINE_START,
         Token.ITALIC_START, 0,
         Token.BLOB, 1, 2,
         Token.ITALIC_END, 2,
@@ -427,7 +417,6 @@ public class AsciiDocTest {
         Token.ITALIC_END, 11,
         Token.LINE_END,
         Token.LF,
-        Token.LINE_START,
         Token.LINE_END,
         Token.EOF
       ),
@@ -436,7 +425,7 @@ public class AsciiDocTest {
         Code.DOCUMENT_START,
         Code.PREAMBLE_START,
         Code.PARAGRAPH_START,
-        Code.TOKENS, 1, 31,
+        Code.TOKENS, 0, 29,
         Code.PARAGRAPH_END,
         Code.PREAMBLE_END,
         Code.DOCUMENT_END
@@ -498,7 +487,6 @@ public class AsciiDocTest {
       """,
 
       p0(
-        Token.LINE_START,
         Token.ITALIC_START, 0,
         Token.BLOB, 1, 4,
         Token.ITALIC_END, 4,
@@ -512,7 +500,6 @@ public class AsciiDocTest {
         Token.ITALIC_END, 17,
         Token.LINE_END,
         Token.LF,
-        Token.LINE_START,
         Token.LINE_END,
         Token.EOF
       ),
@@ -521,7 +508,7 @@ public class AsciiDocTest {
         Code.DOCUMENT_START,
         Code.PREAMBLE_START,
         Code.PARAGRAPH_START,
-        Code.TOKENS, 1, 31,
+        Code.TOKENS, 0, 29,
         Code.PARAGRAPH_END,
         Code.PREAMBLE_END,
         Code.DOCUMENT_END
@@ -587,19 +574,15 @@ public class AsciiDocTest {
       """,
 
       p0(
-        Token.LINE_START,
         Token.LISTING_BLOCK_DELIM, 4,
         Token.LINE_END, Token.LF,
 
-        Token.LINE_START,
         Token.BLOB, 5, 9,
         Token.LINE_END, Token.LF,
 
-        Token.LINE_START,
         Token.LISTING_BLOCK_DELIM, 4,
         Token.LINE_END, Token.LF,
 
-        Token.LINE_START,
         Token.LINE_END, Token.EOF
       ),
 
@@ -655,7 +638,6 @@ public class AsciiDocTest {
       """,
 
       p0(
-        Token.LINE_START,
         Token.MONO_START, 0,
         Token.BLOB, 1, 2,
         Token.MONO_END, 2,
@@ -669,7 +651,6 @@ public class AsciiDocTest {
         Token.MONO_END, 11,
         Token.LINE_END,
         Token.LF,
-        Token.LINE_START,
         Token.LINE_END,
         Token.EOF
       ),
@@ -678,7 +659,7 @@ public class AsciiDocTest {
         Code.DOCUMENT_START,
         Code.PREAMBLE_START,
         Code.PARAGRAPH_START,
-        Code.TOKENS, 1, 31,
+        Code.TOKENS, 0, 29,
         Code.PARAGRAPH_END,
         Code.PREAMBLE_END,
         Code.DOCUMENT_END
@@ -741,7 +722,6 @@ public class AsciiDocTest {
       """,
 
       p0(
-        Token.LINE_START,
         Token.MONO_START, 0,
         Token.BLOB, 1, 4,
         Token.MONO_END, 4,
@@ -755,7 +735,6 @@ public class AsciiDocTest {
         Token.MONO_END, 17,
         Token.LINE_END,
         Token.LF,
-        Token.LINE_START,
         Token.LINE_END,
         Token.EOF
       ),
@@ -764,7 +743,7 @@ public class AsciiDocTest {
         Code.DOCUMENT_START,
         Code.PREAMBLE_START,
         Code.PARAGRAPH_START,
-        Code.TOKENS, 1, 31,
+        Code.TOKENS, 0, 29,
         Code.PARAGRAPH_END,
         Code.PREAMBLE_END,
         Code.DOCUMENT_END
@@ -930,36 +909,32 @@ public class AsciiDocTest {
       """,
 
       p0(
-        Token.LINE_START,
         Token.HEADING, 1, 0, 2,
         Token.BLOB, 2, 5,
         Token.LINE_END, Token.LF,
-        Token.LINE_START, Token.LINE_END, Token.LF,
-        Token.LINE_START,
+        Token.LINE_END, Token.LF,
         Token.BLOB, 7, 12,
         Token.LINE_END, Token.LF,
-        Token.LINE_START, Token.LINE_END, Token.LF,
-        Token.LINE_START,
+        Token.LINE_END, Token.LF,
         Token.HEADING, 2, 14, 17,
         Token.BLOB, 17, 19,
         Token.LINE_END, Token.LF,
-        Token.LINE_START, Token.LINE_END, Token.LF,
-        Token.LINE_START,
+        Token.LINE_END, Token.LF,
         Token.BLOB, 21, 26,
         Token.LINE_END, Token.LF,
-        Token.LINE_START, Token.LINE_END, Token.EOF
+        Token.LINE_END, Token.EOF
       ),
 
       p1(
         Code.DOCUMENT_START,
-        Code.HEADING_START, 1, Code.TOKENS, 5, 8, Code.HEADING_END,
+        Code.HEADING_START, 1, Code.TOKENS, 4, 7, Code.HEADING_END,
         Code.PREAMBLE_START,
-        Code.PARAGRAPH_START, Code.TOKENS, 14, 20, Code.PARAGRAPH_END,
+        Code.PARAGRAPH_START, Code.TOKENS, 11, 16, Code.PARAGRAPH_END,
         Code.PREAMBLE_END,
 
         Code.SECTION_START, 1,
-        Code.HEADING_START, 2, Code.TOKENS, 27, 30, Code.HEADING_END,
-        Code.PARAGRAPH_START, Code.TOKENS, 36, 42, Code.PARAGRAPH_END,
+        Code.HEADING_START, 2, Code.TOKENS, 22, 25, Code.HEADING_END,
+        Code.PARAGRAPH_START, Code.TOKENS, 29, 34, Code.PARAGRAPH_END,
         Code.SECTION_END,
 
         Code.DOCUMENT_END
@@ -1081,52 +1056,48 @@ public class AsciiDocTest {
       """,
 
       p0(
-        Token.LINE_START,
         Token.HEADING, 1, 0, 2,
         Token.BLOB, 2, 5,
         Token.LINE_END, Token.LF,
-        Token.LINE_START, Token.LINE_END, Token.LF,
-        Token.LINE_START,
+        Token.LINE_END, Token.LF,
         Token.BLOB, 7, 12,
         Token.LINE_END, Token.LF,
-        Token.LINE_START, Token.LINE_END, Token.LF,
+        Token.LINE_END, Token.LF,
 
-        Token.LINE_START,
         Token.HEADING, 2, 14, 17,
         Token.BLOB, 17, 19,
         Token.LINE_END, Token.LF,
-        Token.LINE_START, Token.LINE_END, Token.LF,
-        Token.LINE_START,
+        Token.LINE_END, Token.LF,
+
         Token.BLOB, 21, 26,
         Token.LINE_END, Token.LF,
-        Token.LINE_START, Token.LINE_END, Token.LF,
+        Token.LINE_END, Token.LF,
 
-        Token.LINE_START,
         Token.HEADING, 3, 28, 32,
         Token.BLOB, 32, 33,
         Token.LINE_END, Token.LF,
-        Token.LINE_START, Token.LINE_END, Token.LF,
-        Token.LINE_START,
+        Token.LINE_END, Token.LF,
+
         Token.BLOB, 35, 40,
         Token.LINE_END, Token.LF,
 
-        Token.LINE_START, Token.LINE_END, Token.EOF
+        Token.LINE_END, Token.EOF
       ),
 
       p1(
         Code.DOCUMENT_START,
-        Code.HEADING_START, 1, Code.TOKENS, 5, 8, Code.HEADING_END,
+        Code.HEADING_START, 1, Code.TOKENS, 4, 7, Code.HEADING_END,
         Code.PREAMBLE_START,
-        Code.PARAGRAPH_START, Code.TOKENS, 14, 20, Code.PARAGRAPH_END,
+        Code.PARAGRAPH_START, Code.TOKENS, 11, 16, Code.PARAGRAPH_END,
         Code.PREAMBLE_END,
 
         Code.SECTION_START, 1,
-        Code.HEADING_START, 2, Code.TOKENS, 27, 30, Code.HEADING_END,
-        Code.PARAGRAPH_START, Code.TOKENS, 36, 42, Code.PARAGRAPH_END,
+        Code.HEADING_START, 2, Code.TOKENS, 22, 25, Code.HEADING_END,
+        Code.PARAGRAPH_START, Code.TOKENS, 29, 34, Code.PARAGRAPH_END,
 
         Code.SECTION_START, 2,
-        Code.HEADING_START, 3, Code.TOKENS, 49, 52, Code.HEADING_END,
-        Code.PARAGRAPH_START, Code.TOKENS, 58, 64, Code.PARAGRAPH_END,
+        Code.HEADING_START, 3, Code.TOKENS, 40, 43, Code.HEADING_END,
+        Code.PARAGRAPH_START, Code.TOKENS, 47, 52, Code.PARAGRAPH_END,
 
         Code.SECTION_END,
         Code.SECTION_END,
@@ -1210,20 +1181,19 @@ public class AsciiDocTest {
       """,
 
       p0(
-        Token.LINE_START,
         Token.ATTR_LIST_START,
         Token.ATTR_POS, 1, 4,
         Token.ATTR_LIST_END,
         Token.LINE_END, Token.LF,
-        Token.LINE_START,
+
         Token.HEADING, 2, 6, 9,
         Token.BLOB, 9, 11,
         Token.LINE_END, Token.LF,
-        Token.LINE_START, Token.LINE_END, Token.LF,
-        Token.LINE_START,
+        Token.LINE_END, Token.LF,
+
         Token.BLOB, 13, 18,
         Token.LINE_END, Token.LF,
-        Token.LINE_START, Token.LINE_END, Token.EOF
+        Token.LINE_END, Token.EOF
       ),
 
       p1(
@@ -1233,8 +1203,8 @@ public class AsciiDocTest {
         Code.ATTR_POS, 1, 4,
         Code.ATTR_LIST_END,
         Code.SECTION_START, 1,
-        Code.HEADING_START, 2, Code.TOKENS, 13, 16, Code.HEADING_END,
-        Code.PARAGRAPH_START, Code.TOKENS, 22, 28, Code.PARAGRAPH_END,
+        Code.HEADING_START, 2, Code.TOKENS, 11, 14, Code.HEADING_END,
+        Code.PARAGRAPH_START, Code.TOKENS, 18, 23, Code.PARAGRAPH_END,
         Code.SECTION_END,
 
         Code.DOCUMENT_END

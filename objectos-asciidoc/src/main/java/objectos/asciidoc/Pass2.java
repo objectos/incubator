@@ -123,8 +123,6 @@ class Pass2 {
       state = switch (token) {
         case Token.BLOB -> executeBlob(nextToken(), nextToken());
 
-        case Token.LINE_START -> executeLineStart();
-
         case Token.LINE_END -> executeLineEnd();
 
         case Token.LF -> executeLf();
@@ -269,14 +267,6 @@ class Pass2 {
   }
 
   private int executeLineEnd() {
-    return switch (state) {
-      case START, REGULAR -> state;
-
-      default -> uoe();
-    };
-  }
-
-  private int executeLineStart() {
     return switch (state) {
       case START, REGULAR -> state;
 

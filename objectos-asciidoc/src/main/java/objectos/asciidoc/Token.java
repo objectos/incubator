@@ -19,8 +19,6 @@ final class Token {
 
   static final int EOF = -1;
 
-  static final int LINE_START = -2;
-
   static final int LINE_END = -3;
 
   static final int HEADING = -4;
