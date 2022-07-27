@@ -41,6 +41,10 @@ public class AsciiDoc {
 
     void italicStart();
 
+    void listingBlockEnd();
+
+    void listingBlockStart();
+
     void monospaceEnd();
 
     void monospaceStart();
@@ -127,6 +131,12 @@ public class AsciiDoc {
         case Code.ATTR_POS -> processAttrPos(nextCode(), nextCode());
 
         case Code.TOKENS -> processTokens(nextCode(), nextCode());
+
+        case Code.LISTING_BLOCK_START -> processor.listingBlockStart();
+
+        case Code.LISTING_BLOCK_END -> processor.listingBlockEnd();
+
+        case Code.BLOB -> processor.text(source.substring(nextCode(), nextCode()));
 
         default -> throw new UnsupportedOperationException("Implement me :: code=" + code);
       }

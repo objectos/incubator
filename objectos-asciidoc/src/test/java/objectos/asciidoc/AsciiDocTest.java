@@ -544,7 +544,7 @@ public class AsciiDocTest {
     );
   }
 
-  @Test(enabled = false, description = //
+  @Test(description = //
   """
   listing block
 
@@ -603,8 +603,10 @@ public class AsciiDocTest {
       <div id="header">
       </div>
       <div id="content">
-      <div class="paragraph">
-      <p><code>a</code> <code>b</code>, <code>c</code></p>
+      <div class="listingblock">
+      <div class="content">
+      <pre>code</pre>
+      </div>
       </div>
       </div>
       </body>

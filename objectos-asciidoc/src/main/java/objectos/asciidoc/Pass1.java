@@ -135,6 +135,17 @@ class Pass1 {
     code[codeIndex++] = p2;
   }
 
+  private void add(int p0, int p1, int p2, int p3, int p4, int p5) {
+    code = IntArrays.copyIfNecessary(code, codeIndex + 5);
+
+    code[codeIndex++] = p0;
+    code[codeIndex++] = p1;
+    code[codeIndex++] = p2;
+    code[codeIndex++] = p3;
+    code[codeIndex++] = p4;
+    code[codeIndex++] = p5;
+  }
+
   private void addCode(int p0, int p1, int p2, int p3) {
     code = IntArrays.copyIfNecessary(code, codeIndex + 3);
 
@@ -152,17 +163,6 @@ class Pass1 {
     code[codeIndex++] = p2;
     code[codeIndex++] = p3;
     code[codeIndex++] = p4;
-  }
-
-  private void addCode(int p0, int p1, int p2, int p3, int p4, int p5) {
-    code = IntArrays.copyIfNecessary(code, codeIndex + 5);
-
-    code[codeIndex++] = p0;
-    code[codeIndex++] = p1;
-    code[codeIndex++] = p2;
-    code[codeIndex++] = p3;
-    code[codeIndex++] = p4;
-    code[codeIndex++] = p5;
   }
 
   private void execute0() {
@@ -300,8 +300,14 @@ class Pass1 {
           yield EOF;
         }
 
+        case PREAMBLE -> {
+          add(Code.PREAMBLE_END, Code.DOCUMENT_END);
+
+          yield EOF;
+        }
+
         case PREAMBLE | PARAGRAPH | NL -> {
-          addCode(
+          add(
             Code.TOKENS, tokenStart, tokenIndex,
             Code.PARAGRAPH_END,
             Code.PREAMBLE_END,
@@ -344,6 +350,8 @@ class Pass1 {
 
         case MAYBE | DOCUMENT | METADATA -> MAYBE | PREAMBLE;
 
+        case PREAMBLE -> state;
+
         case PREAMBLE | PARAGRAPH -> PREAMBLE | PARAGRAPH | NL;
 
         case PREAMBLE | PARAGRAPH | NL -> {
@@ -356,6 +364,12 @@ class Pass1 {
         }
 
         case PREAMBLE | LISTING_BLOCK | MAYBE -> PREAMBLE | LISTING_BLOCK;
+
+        case PREAMBLE | LISTING_BLOCK -> {
+          tokenStart = tokenIndex;
+
+          yield PREAMBLE | LISTING_BLOCK | NL;
+        }
 
         case SECTION -> state;
 
@@ -396,13 +410,28 @@ class Pass1 {
 
   private int parseListingBlockDelim(int dashes) {
     return switch (state) {
-      case MAYBE | DOCUMENT | HEADING -> {
+      case MAYBE -> {
         add(Code.PREAMBLE_START, Code.LISTING_BLOCK_START);
 
         pushSection(dashes);
 
         yield PREAMBLE | LISTING_BLOCK | MAYBE;
       }
+
+      case PREAMBLE | LISTING_BLOCK | NL -> {
+        var current = popSection();
+
+        if (current != dashes) {
+          pushSection(current);
+
+          throw new UnsupportedOperationException("Implement me :: literal dashes?");
+        }
+
+        add(Code.LISTING_BLOCK_END);
+
+        yield PREAMBLE;
+      }
+
       default -> uoe();
     };
   }

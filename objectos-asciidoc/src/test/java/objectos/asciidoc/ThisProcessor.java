@@ -192,6 +192,20 @@ class ThisProcessor implements AsciiDoc.Processor {
   }
 
   @Override
+  public final void listingBlockEnd() {
+    sb.append("</pre>");
+    sb.append("</div>");
+    sb.append("</div>");
+  }
+
+  @Override
+  public final void listingBlockStart() {
+    sb.append("<div class=\"listingblock\">");
+    sb.append("<div class=\"content\">");
+    sb.append("<pre>");
+  }
+
+  @Override
   public final void monospaceEnd() {
     sb.append("</code>");
   }
