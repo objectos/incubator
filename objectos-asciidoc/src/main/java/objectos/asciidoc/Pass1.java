@@ -49,6 +49,8 @@ class Pass1 {
 
   private static final int ATTR = 1 << 8;
 
+  private static final int LISTING_BLOCK = 1 << 9;
+
   private int[] code;
 
   private int codeCursor;
@@ -118,19 +120,19 @@ class Pass1 {
     code[codeIndex++] = p0;
   }
 
+  private void add(int p0, int p1) {
+    code = IntArrays.copyIfNecessary(code, codeIndex + 1);
+
+    code[codeIndex++] = p0;
+    code[codeIndex++] = p1;
+  }
+
   private void add(int p0, int p1, int p2) {
     code = IntArrays.copyIfNecessary(code, codeIndex + 2);
 
     code[codeIndex++] = p0;
     code[codeIndex++] = p1;
     code[codeIndex++] = p2;
-  }
-
-  private void addCode(int p0, int p1) {
-    code = IntArrays.copyIfNecessary(code, codeIndex + 1);
-
-    code[codeIndex++] = p0;
-    code[codeIndex++] = p1;
   }
 
   private void addCode(int p0, int p1, int p2, int p3) {
@@ -176,7 +178,7 @@ class Pass1 {
 
         case Token.HEADING -> parseHeading(next(), next(), next());
 
-        case Token.BLOB -> parseTokens(next(), next());
+        case Token.BLOB -> parseBlob(next(), next());
 
         case Token.LF -> parseLineFeed();
 
@@ -191,6 +193,8 @@ class Pass1 {
         case Token.ITALIC_START, Token.ITALIC_END -> parseTokens(next());
 
         case Token.MONO_START, Token.MONO_END -> parseTokens(next());
+
+        case Token.LISTING_BLOCK_DELIM -> parseListingBlockDelim(next());
 
         default -> throw new UnsupportedOperationException("Implement me :: token=" + token);
       };
@@ -213,10 +217,22 @@ class Pass1 {
     return source.nextToken();
   }
 
+  private int parseBlob(int start, int end) {
+    return switch (state) {
+      case PREAMBLE | LISTING_BLOCK -> {
+        add(Code.BLOB, start, end);
+
+        yield state;
+      }
+
+      default -> parseTokens(start, end);
+    };
+  }
+
   private int parseHeading(int level, int start, int end) {
     return switch (state) {
       case MAYBE | DOCUMENT | HEADING -> {
-        addCode(Code.HEADING_START, level);
+        add(Code.HEADING_START, level);
 
         yield DOCUMENT | HEADING;
       }
@@ -339,6 +355,8 @@ class Pass1 {
           yield PREAMBLE;
         }
 
+        case PREAMBLE | LISTING_BLOCK | MAYBE -> PREAMBLE | LISTING_BLOCK;
+
         case SECTION -> state;
 
         case SECTION | HEADING -> {
@@ -396,10 +414,25 @@ class Pass1 {
 
       case PREAMBLE | PARAGRAPH | NL -> state;
 
+      case PREAMBLE | LISTING_BLOCK -> state;
+
       case SECTION -> state;
 
       case SECTION | PARAGRAPH | NL -> state;
 
+      default -> uoe();
+    };
+  }
+
+  private int parseListingBlockDelim(int dashes) {
+    return switch (state) {
+      case MAYBE | DOCUMENT | HEADING -> {
+        add(Code.PREAMBLE_START, Code.LISTING_BLOCK_START);
+
+        pushSection(dashes);
+
+        yield PREAMBLE | LISTING_BLOCK | MAYBE;
+      }
       default -> uoe();
     };
   }
@@ -413,8 +446,7 @@ class Pass1 {
       case MAYBE | DOCUMENT | HEADING -> {
         tokenStart = tokenIndex;
 
-        add(Code.PREAMBLE_START);
-        add(Code.PARAGRAPH_START);
+        add(Code.PREAMBLE_START, Code.PARAGRAPH_START);
 
         yield PREAMBLE | PARAGRAPH;
       }
@@ -428,8 +460,7 @@ class Pass1 {
       case MAYBE | PREAMBLE -> {
         tokenStart = tokenIndex;
 
-        add(Code.PREAMBLE_START);
-        add(Code.PARAGRAPH_START);
+        add(Code.PREAMBLE_START, Code.PARAGRAPH_START);
 
         yield PREAMBLE | PARAGRAPH;
       }

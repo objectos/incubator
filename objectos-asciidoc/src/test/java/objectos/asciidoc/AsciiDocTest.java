@@ -561,35 +561,72 @@ public class AsciiDocTest {
   """
   listing block
 
-  - w/ attribute
   - delimited
+  - single line
 
-  01234567
-  89012
-  3456789
+  01234
+  56789
   01234
   '''
-  [,java]
   ----
-  break;
+  code
   ----
   '''
 
-  P0: ^ [ , W2,6 ] $ LF
-      ^ DLB $ LF
-      ^ X13,19 $ LF
-      ^ DLB $ LF
+  P0: ^ LBD $ LF
+      ^ B5,9 $ LF
+      ^ LBD $ LF
       ^ $ EOF
-
-  P1: DOCUMENT_START
-      DELIMITED_LISTING_BLOCK_START
-      ATTR 1,1
-      ATTR 2,6
-      P0 start end
-      DELIMITED_LISTING_BLOCK_END
-      DOCUMENT_END
   """)
   public final void listingBlock01() {
+    test(
+      """
+      ----
+      code
+      ----
+      """,
+
+      p0(
+        Token.LINE_START,
+        Token.LISTING_BLOCK_DELIM, 4,
+        Token.LINE_END, Token.LF,
+
+        Token.LINE_START,
+        Token.BLOB, 5, 9,
+        Token.LINE_END, Token.LF,
+
+        Token.LINE_START,
+        Token.LISTING_BLOCK_DELIM, 4,
+        Token.LINE_END, Token.LF,
+
+        Token.LINE_START,
+        Token.LINE_END, Token.EOF
+      ),
+
+      p1(
+        Code.DOCUMENT_START,
+        Code.PREAMBLE_START,
+        Code.LISTING_BLOCK_START,
+        Code.BLOB, 5, 9,
+        Code.LISTING_BLOCK_END,
+        Code.PREAMBLE_END,
+        Code.DOCUMENT_END
+      ),
+
+      p2(),
+
+      """
+      <body>
+      <div id="header">
+      </div>
+      <div id="content">
+      <div class="paragraph">
+      <p><code>a</code> <code>b</code>, <code>c</code></p>
+      </div>
+      </div>
+      </body>
+      """
+    );
   }
 
   @Test(description = //

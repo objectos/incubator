@@ -43,6 +43,8 @@ final class Token {
 
   static final int ATTR_POS = -15;
 
+  static final int LISTING_BLOCK_DELIM = -16;
+
   private Token() {}
 
 }

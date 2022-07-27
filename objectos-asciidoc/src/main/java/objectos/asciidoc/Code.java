@@ -38,6 +38,11 @@ final class Code {
   static final int ATTR_LIST_END = -13;
   static final int ATTR_POS = -14;
 
+  static final int LISTING_BLOCK_START = -15;
+  static final int LISTING_BLOCK_END = -16;
+
+  static final int BLOB = -17;
+
   private Code() {}
 
 }

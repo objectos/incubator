@@ -49,7 +49,9 @@ class Pass0 implements Pass1.Source, Pass2.Source {
   private static final int ATTR_NAME = 14;
   private static final int ATTR_LIST_END = 15;
 
-  private static final int LIST = 15;
+  private static final int LISTING_BLOCK = 16;
+
+  private static final int LIST = 17;
 
   private String source;
 
@@ -252,6 +254,8 @@ class Pass0 implements Pass1.Source, Pass2.Source {
       case ATTR_LIST_END -> stateAttrListEnd();
 
       case ATTR_NAME -> stateAttrName();
+
+      case LISTING_BLOCK -> stateListingBlock();
 
       default -> uoe();
     };
@@ -588,6 +592,12 @@ class Pass0 implements Pass1.Source, Pass2.Source {
         yield advance(state);
       }
 
+      case '-' -> {
+        counter = 1;
+
+        yield advance(LISTING_BLOCK);
+      }
+
       case '=' -> {
         counter = 1;
 
@@ -624,6 +634,50 @@ class Pass0 implements Pass1.Source, Pass2.Source {
     blobStart = sourceIndex;
 
     return stateBlob0();
+  }
+
+  private int stateListingBlock() {
+    if (!hasChar()) {
+      if (counter >= 4) {
+        add(
+          Token.LISTING_BLOCK_DELIM, counter,
+          Token.LINE_END, Token.EOF
+        );
+      } else {
+        add(
+          Token.BLOB, blobStart, sourceIndex,
+          Token.LINE_END, Token.EOF
+        );
+      }
+
+      return EOF;
+    }
+
+    return switch (peek()) {
+      case '\n' -> {
+        if (counter >= 4) {
+          add(Token.LISTING_BLOCK_DELIM, counter, Token.LINE_END, Token.LF);
+        } else {
+          add(Token.LINE_END, Token.LF);
+        }
+
+        yield advance(LINE_START);
+      }
+
+      case ' ', '\t', '\f', '\u000B' -> {
+        var next = counter >= 4 ? state : BLOB;
+
+        yield next;
+      }
+
+      case '-' -> {
+        counter++;
+
+        yield advance(state);
+      }
+
+      default -> advance(BLOB);
+    };
   }
 
   private int stateMonoEnd() {
