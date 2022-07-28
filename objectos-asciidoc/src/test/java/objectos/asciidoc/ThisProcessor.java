@@ -46,12 +46,6 @@ class ThisProcessor implements AsciiDoc.Processor {
   private StringBuilder sb;
 
   @Override
-  public final void attrlistEnd() {}
-
-  @Override
-  public final void attrlistStart() {}
-
-  @Override
   public final void boldEnd() {
     sb.append("</strong>");
   }
@@ -216,11 +210,6 @@ class ThisProcessor implements AsciiDoc.Processor {
   }
 
   @Override
-  public final void newLine() {
-    sb.append('\n');
-  }
-
-  @Override
   public final void paragraphEnd() {
     sb.append("</p>\n</div>\n");
   }
@@ -229,9 +218,6 @@ class ThisProcessor implements AsciiDoc.Processor {
   public final void paragraphStart() {
     sb.append("<div class=\"paragraph\">\n<p>");
   }
-
-  @Override
-  public final void positionalAttribute(int index, String value) {}
 
   @Override
   public final void preambleEnd() {}
@@ -273,6 +259,31 @@ class ThisProcessor implements AsciiDoc.Processor {
     sb.append("\">\n");
 
     sectionCount++;
+  }
+
+  @Override
+  public final void sectionStart(int level, String style) {
+    sectionStart(level);
+  }
+
+  @Override
+  public final void sourceCodeBlockEnd() {
+    sb.append("</code>");
+    sb.append("</pre>");
+    sb.append("</div>");
+    sb.append("</div>");
+  }
+
+  @Override
+  public final void sourceCodeBlockStart(String language) {
+    sb.append("<div class=\"listingblock\">");
+    sb.append("<div class=\"content\">");
+    sb.append("<pre class=\"highlight\">");
+    sb.append("<code class=\"language-");
+    sb.append(language);
+    sb.append("\" data-lang=\"");
+    sb.append(language);
+    sb.append("\">");
   }
 
   @Override

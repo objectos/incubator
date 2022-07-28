@@ -295,8 +295,19 @@ class Pass0 implements Pass1.Source, Pass2.Source {
     return switch (peek()) {
       case '\n' -> rollbackAttributes();
 
+      case ',' -> {
+        add(
+          Token.ATTR_VALUE, attributeNameStart, sourceIndex,
+          Token.SEPARATOR
+        );
+
+        attributeNameStart = sourceIndex + 1;
+
+        yield advance(ATTR_NAME);
+      }
+
       case ']' -> {
-        add(Token.ATTR_POS, attributeNameStart, sourceIndex);
+        add(Token.ATTR_VALUE, attributeNameStart, sourceIndex);
 
         yield advance(ATTR_LIST_END);
       }

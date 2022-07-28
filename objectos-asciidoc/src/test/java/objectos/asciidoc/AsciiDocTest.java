@@ -1184,7 +1184,7 @@ public class AsciiDocTest {
 
       p0(
         Token.ATTR_LIST_START,
-        Token.ATTR_POS, 1, 4,
+        Token.ATTR_VALUE, 1, 4,
         Token.ATTR_LIST_END,
         Token.LINE_END, Token.LF,
 
@@ -1201,9 +1201,7 @@ public class AsciiDocTest {
       p1(
         Code.DOCUMENT_START,
 
-        Code.ATTR_LIST_START,
-        Code.ATTR_POS, 1, 4,
-        Code.ATTR_LIST_END,
+        Code.ATTR_POSITIONAL, 1, 1, 4,
         Code.SECTION_START, 1,
         Code.HEADING_START, 2, Code.TOKENS, 11, 14, Code.HEADING_END,
         Code.PARAGRAPH_START, Code.TOKENS, 18, 23, Code.PARAGRAPH_END,
@@ -1230,6 +1228,90 @@ public class AsciiDocTest {
       </div>
       </div>
       </div>
+      """
+    );
+  }
+
+  @Test(description = //
+  """
+  source code block
+
+  - implict source style
+  - delimited
+  - single line
+
+  01234567
+  89012
+  3456789
+  01234
+  '''
+  [,java]
+  ----
+  break;
+  ----
+  '''
+
+  P0: [ AVAL1,1 , AVAL3,6 ] $ LF
+      LBD $ LF
+      B13,19 $ LF
+      LBD $ LF
+      $ EOF
+  """)
+  public final void sourceCodeBlock01() {
+    test(
+      """
+      [,java]
+      ----
+      break;
+      ----
+      """,
+
+      p0(
+        Token.ATTR_LIST_START,
+        Token.ATTR_VALUE, 1, 1,
+        Token.SEPARATOR,
+        Token.ATTR_VALUE, 2, 6,
+        Token.ATTR_LIST_END,
+        Token.LINE_END, Token.LF,
+
+        Token.LISTING_BLOCK_DELIM, 4,
+        Token.LINE_END, Token.LF,
+
+        Token.BLOB, 13, 19,
+        Token.LINE_END, Token.LF,
+
+        Token.LISTING_BLOCK_DELIM, 4,
+        Token.LINE_END, Token.LF,
+
+        Token.LINE_END, Token.EOF
+      ),
+
+      p1(
+        Code.DOCUMENT_START,
+        Code.ATTR_POSITIONAL, 1, 1, 1,
+        Code.ATTR_POSITIONAL, 2, 2, 6,
+        Code.PREAMBLE_START,
+        Code.LISTING_BLOCK_START,
+        Code.BLOB, 13, 19,
+        Code.LISTING_BLOCK_END,
+        Code.PREAMBLE_END,
+        Code.DOCUMENT_END
+      ),
+
+      p2(),
+
+      """
+      <body>
+      <div id="header">
+      </div>
+      <div id="content">
+      <div class="listingblock">
+      <div class="content">
+      <pre class="highlight"><code class="language-java" data-lang="java">break;</code></pre>
+      </div>
+      </div>
+      </div>
+      </body>
       """
     );
   }

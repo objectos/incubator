@@ -51,6 +51,8 @@ class Pass1 {
 
   private static final int LISTING_BLOCK = 1 << 9;
 
+  private int attrCount;
+
   private int[] code;
 
   private int codeCursor;
@@ -102,6 +104,14 @@ class Pass1 {
     codeCursor = 0;
   }
 
+  final int codeAt(int index) {
+    return code[index];
+  }
+
+  final int codeCursor() {
+    return codeCursor;
+  }
+
   final boolean hasCode() {
     return codeCursor < codeIndex;
   }
@@ -135,6 +145,15 @@ class Pass1 {
     code[codeIndex++] = p2;
   }
 
+  private void add(int p0, int p1, int p2, int p3) {
+    code = IntArrays.copyIfNecessary(code, codeIndex + 3);
+
+    code[codeIndex++] = p0;
+    code[codeIndex++] = p1;
+    code[codeIndex++] = p2;
+    code[codeIndex++] = p3;
+  }
+
   private void add(int p0, int p1, int p2, int p3, int p4, int p5) {
     code = IntArrays.copyIfNecessary(code, codeIndex + 5);
 
@@ -144,15 +163,6 @@ class Pass1 {
     code[codeIndex++] = p3;
     code[codeIndex++] = p4;
     code[codeIndex++] = p5;
-  }
-
-  private void addCode(int p0, int p1, int p2, int p3) {
-    code = IntArrays.copyIfNecessary(code, codeIndex + 3);
-
-    code[codeIndex++] = p0;
-    code[codeIndex++] = p1;
-    code[codeIndex++] = p2;
-    code[codeIndex++] = p3;
   }
 
   private void addCode(int p0, int p1, int p2, int p3, int p4) {
@@ -182,11 +192,11 @@ class Pass1 {
 
         case Token.LF -> parseLineFeed();
 
-        case Token.ATTR_LIST_START -> { add(Code.ATTR_LIST_START); yield state | ATTR; }
+        case Token.ATTR_LIST_START -> parseAttrListStart();
 
-        case Token.ATTR_LIST_END -> { add(Code.ATTR_LIST_END); yield state; }
+        case Token.ATTR_LIST_END -> parseAttrListEnd();
 
-        case Token.ATTR_POS -> { add(Code.ATTR_POS, next(), next()); yield state; }
+        case Token.ATTR_VALUE -> parseAttrValue(next(), next());
 
         case Token.BOLD_START, Token.BOLD_END -> parseTokens(next());
 
@@ -195,6 +205,8 @@ class Pass1 {
         case Token.MONO_START, Token.MONO_END -> parseTokens(next());
 
         case Token.LISTING_BLOCK_DELIM -> parseListingBlockDelim(next());
+
+        case Token.SEPARATOR -> parseSeparator();
 
         default -> throw new UnsupportedOperationException("Implement me :: token=" + token);
       };
@@ -217,6 +229,40 @@ class Pass1 {
     return source.nextToken();
   }
 
+  private int parseAttrListEnd() {
+    state = state & ~(ATTR);
+
+    return switch (state) {
+      case MAYBE -> MAYBE | ATTR;
+
+      default -> uoe();
+    };
+  }
+
+  private int parseAttrListStart() {
+    attrCount = 1;
+
+    return switch (state) {
+      case MAYBE -> state | ATTR;
+
+      default -> uoe();
+    };
+  }
+
+  private int parseAttrValue(int start, int end) {
+    int attr = state & (ATTR);
+
+    return switch (attr) {
+      case ATTR -> {
+        add(Code.ATTR_POSITIONAL, attrCount, start, end);
+
+        yield state;
+      }
+
+      default -> uoe(attr);
+    };
+  }
+
   private int parseBlob(int start, int end) {
     return switch (state) {
       case PREAMBLE | LISTING_BLOCK -> {
@@ -237,12 +283,12 @@ class Pass1 {
         yield DOCUMENT | HEADING;
       }
 
-      case MAYBE | PREAMBLE -> {
+      case MAYBE | ATTR -> {
         var section = level - 1;
 
         pushSection(section);
 
-        addCode(
+        add(
           Code.SECTION_START, section,
           Code.HEADING_START, level
         );
@@ -269,7 +315,7 @@ class Pass1 {
 
         pushSection(section);
 
-        addCode(
+        add(
           Code.SECTION_START, section,
           Code.HEADING_START, level
         );
@@ -318,7 +364,7 @@ class Pass1 {
         }
 
         case SECTION | PARAGRAPH | NL -> {
-          addCode(
+          add(
             Code.TOKENS, tokenStart, tokenIndex,
             Code.PARAGRAPH_END
           );
@@ -337,10 +383,10 @@ class Pass1 {
       };
 
       case Token.LF -> switch (state) {
-        case MAYBE | ATTR -> MAYBE | PREAMBLE;
+        case MAYBE | ATTR -> state;
 
         case DOCUMENT | HEADING -> {
-          addCode(
+          add(
             Code.TOKENS, tokenStart, tokenIndex,
             Code.HEADING_END
           );
@@ -355,7 +401,7 @@ class Pass1 {
         case PREAMBLE | PARAGRAPH -> PREAMBLE | PARAGRAPH | NL;
 
         case PREAMBLE | PARAGRAPH | NL -> {
-          addCode(
+          add(
             Code.TOKENS, tokenStart, tokenIndex,
             Code.PARAGRAPH_END
           );
@@ -374,7 +420,7 @@ class Pass1 {
         case SECTION -> state;
 
         case SECTION | HEADING -> {
-          addCode(
+          add(
             Code.TOKENS, tokenStart, tokenIndex,
             Code.HEADING_END
           );
@@ -385,7 +431,7 @@ class Pass1 {
         case SECTION | PARAGRAPH -> SECTION | PARAGRAPH | NL;
 
         case SECTION | PARAGRAPH | NL -> {
-          addCode(
+          add(
             Code.TOKENS, tokenStart, tokenIndex,
             Code.PARAGRAPH_END
           );
@@ -410,7 +456,7 @@ class Pass1 {
 
   private int parseListingBlockDelim(int dashes) {
     return switch (state) {
-      case MAYBE -> {
+      case MAYBE, MAYBE | ATTR -> {
         add(Code.PREAMBLE_START, Code.LISTING_BLOCK_START);
 
         pushSection(dashes);
@@ -431,6 +477,14 @@ class Pass1 {
 
         yield PREAMBLE;
       }
+
+      default -> uoe();
+    };
+  }
+
+  private int parseSeparator() {
+    return switch (state) {
+      case MAYBE | ATTR -> { attrCount++; yield state; }
 
       default -> uoe();
     };
@@ -497,7 +551,11 @@ class Pass1 {
   }
 
   private int uoe() {
-    var s = Integer.toBinaryString(state);
+    return uoe(state);
+  }
+
+  private int uoe(int value) {
+    var s = Integer.toBinaryString(value);
 
     throw new UnsupportedOperationException("Implement me :: state=" + s);
   }

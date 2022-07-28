@@ -39,9 +39,11 @@ final class Token {
   static final int ATTR_LIST_START = -13;
   static final int ATTR_LIST_END = -14;
 
-  static final int ATTR_POS = -15;
+  static final int ATTR_VALUE = -15;
 
   static final int LISTING_BLOCK_DELIM = -16;
+
+  static final int SEPARATOR = -17;
 
   private Token() {}
 

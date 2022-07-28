@@ -15,32 +15,12 @@
  */
 package objectos.asciidoc;
 
-final class Code {
+final class AttrName {
 
-  static final int DOCUMENT_START = -1;
-  static final int DOCUMENT_END = -2;
+  static final String LANGUAGE = "lang";
 
-  static final int HEADING_START = -3;
-  static final int HEADING_END = -4;
+  static final String STYLE = "style";
 
-  static final int PREAMBLE_START = -5;
-  static final int PREAMBLE_END = -6;
-
-  static final int PARAGRAPH_START = -7;
-  static final int PARAGRAPH_END = -8;
-
-  static final int TOKENS = -9;
-
-  static final int SECTION_START = -10;
-  static final int SECTION_END = -11;
-
-  static final int ATTR_POSITIONAL = -12;
-
-  static final int LISTING_BLOCK_START = -13;
-  static final int LISTING_BLOCK_END = -14;
-
-  static final int BLOB = -15;
-
-  private Code() {}
+  private AttrName() {}
 
 }
