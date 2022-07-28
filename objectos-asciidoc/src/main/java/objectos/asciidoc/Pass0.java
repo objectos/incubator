@@ -166,8 +166,8 @@ class Pass0 implements Pass1.Source, Pass2.Source {
     token[tokenIndex++] = s4;
   }
 
-  private void add(int s0, int s1, int s2, int s3, int s4, int s5, int s6) {
-    token = IntArrays.copyIfNecessary(token, tokenIndex + 6);
+  private void add(int s0, int s1, int s2, int s3, int s4, int s5) {
+    token = IntArrays.copyIfNecessary(token, tokenIndex + 5);
 
     token[tokenIndex++] = s0;
     token[tokenIndex++] = s1;
@@ -175,7 +175,6 @@ class Pass0 implements Pass1.Source, Pass2.Source {
     token[tokenIndex++] = s3;
     token[tokenIndex++] = s4;
     token[tokenIndex++] = s5;
-    token[tokenIndex++] = s6;
   }
 
   private int advance(int state) {
@@ -263,20 +262,14 @@ class Pass0 implements Pass1.Source, Pass2.Source {
 
   private int stateAttrListEnd() {
     if (!hasChar()) {
-      add(
-        Token.ATTR_LIST_END,
-        Token.LINE_END, Token.EOF
-      );
+      add(Token.ATTR_LIST_END, Token.EOF);
 
       return EOF;
     }
 
     return switch (peek()) {
       case '\n' -> {
-        add(
-          Token.ATTR_LIST_END,
-          Token.LINE_END, Token.LF
-        );
+        add(Token.ATTR_LIST_END, Token.LF);
 
         yield advance(LINE_START);
       }
@@ -320,7 +313,7 @@ class Pass0 implements Pass1.Source, Pass2.Source {
     if (!hasChar()) {
       add(
         Token.BLOB, blobStart, sourceIndex,
-        Token.LINE_END, Token.EOF
+        Token.EOF
       );
 
       return EOF;
@@ -334,7 +327,7 @@ class Pass0 implements Pass1.Source, Pass2.Source {
       case '\n' -> {
         add(
           Token.BLOB, blobStart, sourceIndex,
-          Token.LINE_END, Token.LF
+          Token.LF
         );
 
         yield advance(LINE_START);
@@ -361,7 +354,7 @@ class Pass0 implements Pass1.Source, Pass2.Source {
       add(
         Token.BLOB, blobStart, endIndex,
         Token.BOLD_END, endIndex,
-        Token.LINE_END, Token.EOF
+        Token.EOF
       );
 
       return EOF;
@@ -382,7 +375,7 @@ class Pass0 implements Pass1.Source, Pass2.Source {
 
     return switch (c) {
       case '\n' -> {
-        add(Token.LINE_END, Token.LF);
+        add(Token.LF);
 
         yield advance(LINE_START);
       }
@@ -397,7 +390,7 @@ class Pass0 implements Pass1.Source, Pass2.Source {
     if (!hasChar()) {
       add(
         Token.BLOB, blobStart, sourceIndex,
-        Token.LINE_END, Token.EOF
+        Token.EOF
       );
 
       return EOF;
@@ -407,7 +400,7 @@ class Pass0 implements Pass1.Source, Pass2.Source {
       case '\n' -> {
         add(
           Token.BLOB, blobStart, sourceIndex,
-          Token.LINE_END, Token.LF
+          Token.LF
         );
 
         yield advance(LINE_START);
@@ -435,7 +428,7 @@ class Pass0 implements Pass1.Source, Pass2.Source {
     if (!hasChar()) {
       add(
         Token.BLOB, blobStart, sourceIndex,
-        Token.LINE_END, Token.EOF
+        Token.EOF
       );
 
       return EOF;
@@ -445,7 +438,7 @@ class Pass0 implements Pass1.Source, Pass2.Source {
       case '\n' -> {
         add(
           Token.BLOB, blobStart, sourceIndex,
-          Token.LINE_END, Token.LF
+          Token.LF
         );
 
         yield advance(LINE_START);
@@ -515,7 +508,7 @@ class Pass0 implements Pass1.Source, Pass2.Source {
       add(
         Token.BLOB, blobStart, endIndex,
         Token.ITALIC_END, endIndex,
-        Token.LINE_END, Token.EOF
+        Token.EOF
       );
 
       return EOF;
@@ -536,7 +529,7 @@ class Pass0 implements Pass1.Source, Pass2.Source {
 
     return switch (c) {
       case '\n' -> {
-        add(Token.LINE_END, Token.LF);
+        add(Token.LF);
 
         yield advance(LINE_START);
       }
@@ -551,7 +544,7 @@ class Pass0 implements Pass1.Source, Pass2.Source {
     if (!hasChar()) {
       add(
         Token.BLOB, blobStart, sourceIndex,
-        Token.LINE_END, Token.EOF
+        Token.EOF
       );
 
       return EOF;
@@ -561,7 +554,7 @@ class Pass0 implements Pass1.Source, Pass2.Source {
       case '\n' -> {
         add(
           Token.BLOB, blobStart, sourceIndex,
-          Token.LINE_END, Token.LF
+          Token.LF
         );
 
         yield advance(LINE_START);
@@ -587,7 +580,7 @@ class Pass0 implements Pass1.Source, Pass2.Source {
 
   private int stateLineStart() {
     if (!hasChar()) {
-      add(Token.LINE_END, Token.EOF);
+      add(Token.EOF);
 
       return EOF;
     }
@@ -596,7 +589,7 @@ class Pass0 implements Pass1.Source, Pass2.Source {
 
     return switch (peek()) {
       case '\n' -> {
-        add(Token.LINE_END, Token.LF);
+        add(Token.LF);
 
         yield advance(state);
       }
@@ -635,7 +628,7 @@ class Pass0 implements Pass1.Source, Pass2.Source {
 
   private int stateLineStartLike() {
     if (!hasChar()) {
-      add(Token.LINE_END, Token.EOF);
+      add(Token.EOF);
 
       return EOF;
     }
@@ -650,12 +643,12 @@ class Pass0 implements Pass1.Source, Pass2.Source {
       if (counter >= 4) {
         add(
           Token.LISTING_BLOCK_DELIM, counter,
-          Token.LINE_END, Token.EOF
+          Token.EOF
         );
       } else {
         add(
           Token.BLOB, blobStart, sourceIndex,
-          Token.LINE_END, Token.EOF
+          Token.EOF
         );
       }
 
@@ -665,9 +658,9 @@ class Pass0 implements Pass1.Source, Pass2.Source {
     return switch (peek()) {
       case '\n' -> {
         if (counter >= 4) {
-          add(Token.LISTING_BLOCK_DELIM, counter, Token.LINE_END, Token.LF);
+          add(Token.LISTING_BLOCK_DELIM, counter, Token.LF);
         } else {
-          add(Token.LINE_END, Token.LF);
+          add(Token.LF);
         }
 
         yield advance(LINE_START);
@@ -696,7 +689,7 @@ class Pass0 implements Pass1.Source, Pass2.Source {
       add(
         Token.BLOB, blobStart, endIndex,
         Token.MONO_END, endIndex,
-        Token.LINE_END, Token.EOF
+        Token.EOF
       );
 
       return EOF;
@@ -717,7 +710,7 @@ class Pass0 implements Pass1.Source, Pass2.Source {
 
     return switch (c) {
       case '\n' -> {
-        add(Token.LINE_END, Token.LF);
+        add(Token.LF);
 
         yield advance(LINE_START);
       }
@@ -732,7 +725,7 @@ class Pass0 implements Pass1.Source, Pass2.Source {
     if (!hasChar()) {
       add(
         Token.BLOB, blobStart, sourceIndex,
-        Token.LINE_END, Token.EOF
+        Token.EOF
       );
 
       return EOF;
@@ -742,7 +735,7 @@ class Pass0 implements Pass1.Source, Pass2.Source {
       case '\n' -> {
         add(
           Token.BLOB, blobStart, sourceIndex,
-          Token.LINE_END, Token.LF
+          Token.LF
         );
 
         yield advance(LINE_START);
@@ -770,7 +763,7 @@ class Pass0 implements Pass1.Source, Pass2.Source {
     if (!hasChar()) {
       add(
         Token.BLOB, blobStart, sourceIndex,
-        Token.LINE_END, Token.EOF
+        Token.EOF
       );
 
       return EOF;
@@ -780,7 +773,7 @@ class Pass0 implements Pass1.Source, Pass2.Source {
       case '\n' -> {
         add(
           Token.BLOB, blobStart, sourceIndex,
-          Token.LINE_END, Token.LF
+          Token.LF
         );
 
         yield advance(LINE_START);

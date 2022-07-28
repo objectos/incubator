@@ -184,13 +184,13 @@ class Pass1 {
       var token = next();
 
       state = switch (token) {
-        case Token.LINE_END -> parseLineEnd(next());
+        case Token.LF -> parseLineEnd();
+
+        case Token.EOF -> parseLineEndEof();
 
         case Token.HEADING -> parseHeading(next(), next(), next());
 
         case Token.BLOB -> parseBlob(next(), next());
-
-        case Token.LF -> parseLineFeed();
 
         case Token.ATTR_LIST_START -> parseAttrListStart();
 
@@ -327,128 +327,118 @@ class Pass1 {
     };
   }
 
-  private int parseLineEnd(int terminator) {
-    return switch (terminator) {
-      case Token.EOF -> switch (state) {
-        case DOCUMENT | HEADING -> {
-          addCode(
-            Code.TOKENS, tokenStart, tokenIndex,
-            Code.HEADING_END,
-            Code.DOCUMENT_END
-          );
+  private int parseLineEnd() {
+    return switch (state) {
+      case MAYBE | ATTR -> state;
 
-          yield EOF;
-        }
+      case DOCUMENT | HEADING -> {
+        add(
+          Code.TOKENS, tokenStart, tokenIndex,
+          Code.HEADING_END
+        );
 
-        case MAYBE | DOCUMENT | METADATA -> {
-          add(Code.DOCUMENT_END);
+        yield MAYBE | DOCUMENT | METADATA;
+      }
 
-          yield EOF;
-        }
+      case MAYBE | DOCUMENT | METADATA -> MAYBE | PREAMBLE;
 
-        case PREAMBLE -> {
-          add(Code.PREAMBLE_END, Code.DOCUMENT_END);
+      case PREAMBLE -> state;
 
-          yield EOF;
-        }
+      case PREAMBLE | PARAGRAPH -> PREAMBLE | PARAGRAPH | NL;
 
-        case PREAMBLE | PARAGRAPH | NL -> {
-          add(
-            Code.TOKENS, tokenStart, tokenIndex,
-            Code.PARAGRAPH_END,
-            Code.PREAMBLE_END,
-            Code.DOCUMENT_END
-          );
+      case PREAMBLE | PARAGRAPH | NL -> {
+        add(
+          Code.TOKENS, tokenStart, tokenIndex,
+          Code.PARAGRAPH_END
+        );
 
-          yield EOF;
-        }
+        yield PREAMBLE;
+      }
 
-        case SECTION | PARAGRAPH | NL -> {
-          add(
-            Code.TOKENS, tokenStart, tokenIndex,
-            Code.PARAGRAPH_END
-          );
+      case PREAMBLE | LISTING_BLOCK | MAYBE -> PREAMBLE | LISTING_BLOCK;
 
-          while (hasSection()) {
-            popSection();
-            add(Code.SECTION_END);
-          }
+      case PREAMBLE | LISTING_BLOCK -> {
+        tokenStart = tokenIndex;
 
-          add(Code.DOCUMENT_END);
+        yield PREAMBLE | LISTING_BLOCK | NL;
+      }
 
-          yield EOF;
-        }
+      case SECTION -> state;
 
-        default -> uoe();
-      };
+      case SECTION | HEADING -> {
+        add(
+          Code.TOKENS, tokenStart, tokenIndex,
+          Code.HEADING_END
+        );
 
-      case Token.LF -> switch (state) {
-        case MAYBE | ATTR -> state;
+        yield SECTION;
+      }
 
-        case DOCUMENT | HEADING -> {
-          add(
-            Code.TOKENS, tokenStart, tokenIndex,
-            Code.HEADING_END
-          );
+      case SECTION | PARAGRAPH -> SECTION | PARAGRAPH | NL;
 
-          yield MAYBE | DOCUMENT | METADATA;
-        }
+      case SECTION | PARAGRAPH | NL -> {
+        add(
+          Code.TOKENS, tokenStart, tokenIndex,
+          Code.PARAGRAPH_END
+        );
 
-        case MAYBE | DOCUMENT | METADATA -> MAYBE | PREAMBLE;
-
-        case PREAMBLE -> state;
-
-        case PREAMBLE | PARAGRAPH -> PREAMBLE | PARAGRAPH | NL;
-
-        case PREAMBLE | PARAGRAPH | NL -> {
-          add(
-            Code.TOKENS, tokenStart, tokenIndex,
-            Code.PARAGRAPH_END
-          );
-
-          yield PREAMBLE;
-        }
-
-        case PREAMBLE | LISTING_BLOCK | MAYBE -> PREAMBLE | LISTING_BLOCK;
-
-        case PREAMBLE | LISTING_BLOCK -> {
-          tokenStart = tokenIndex;
-
-          yield PREAMBLE | LISTING_BLOCK | NL;
-        }
-
-        case SECTION -> state;
-
-        case SECTION | HEADING -> {
-          add(
-            Code.TOKENS, tokenStart, tokenIndex,
-            Code.HEADING_END
-          );
-
-          yield SECTION;
-        }
-
-        case SECTION | PARAGRAPH -> SECTION | PARAGRAPH | NL;
-
-        case SECTION | PARAGRAPH | NL -> {
-          add(
-            Code.TOKENS, tokenStart, tokenIndex,
-            Code.PARAGRAPH_END
-          );
-
-          yield SECTION;
-        }
-
-        default -> uoe();
-      };
+        yield SECTION;
+      }
 
       default -> uoe();
     };
   }
 
-  private int parseLineFeed() {
+  private int parseLineEndEof() {
     return switch (state) {
-      case DOCUMENT | METADATA -> state;
+      case DOCUMENT | HEADING -> {
+        addCode(
+          Code.TOKENS, tokenStart, tokenIndex,
+          Code.HEADING_END,
+          Code.DOCUMENT_END
+        );
+
+        yield EOF;
+      }
+
+      case MAYBE | DOCUMENT | METADATA -> {
+        add(Code.DOCUMENT_END);
+
+        yield EOF;
+      }
+
+      case PREAMBLE -> {
+        add(Code.PREAMBLE_END, Code.DOCUMENT_END);
+
+        yield EOF;
+      }
+
+      case PREAMBLE | PARAGRAPH | NL -> {
+        add(
+          Code.TOKENS, tokenStart, tokenIndex,
+          Code.PARAGRAPH_END,
+          Code.PREAMBLE_END,
+          Code.DOCUMENT_END
+        );
+
+        yield EOF;
+      }
+
+      case SECTION | PARAGRAPH | NL -> {
+        add(
+          Code.TOKENS, tokenStart, tokenIndex,
+          Code.PARAGRAPH_END
+        );
+
+        while (hasSection()) {
+          popSection();
+          add(Code.SECTION_END);
+        }
+
+        add(Code.DOCUMENT_END);
+
+        yield EOF;
+      }
 
       default -> uoe();
     };
