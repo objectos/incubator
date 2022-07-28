@@ -39,6 +39,8 @@ public class AsciiDoc {
 
     void italicStart();
 
+    void lineFeed();
+
     void listingBlockEnd();
 
     void listingBlockStart();
@@ -160,7 +162,7 @@ public class AsciiDoc {
 
         case Code.LISTING_BLOCK_END -> { processListingBlockEnd(); attrClear(); }
 
-        case Code.BLOB -> processor.text(source.substring(nextCode(), nextCode()));
+        case Code.VERBATIM -> processVerbatim(nextCode(), nextCode());
 
         default -> throw new UnsupportedOperationException("Implement me :: code=" + code);
       }
@@ -320,11 +322,7 @@ public class AsciiDoc {
           var begin = pass2.nextText();
           var end = pass2.nextText();
 
-          if (begin < end) {
-            var s = source.substring(begin, end);
-
-            processor.text(s);
-          }
+          text(begin, end);
         }
 
         case Text.MONOSPACE_START -> processor.monospaceStart();
@@ -341,6 +339,33 @@ public class AsciiDoc {
 
         default -> throw new UnsupportedOperationException("Implement me :: text=" + text);
       }
+    }
+  }
+
+  private void processVerbatim(int first, int last) {
+    for (int index = first; index < last;) {
+      int token = pass0.token(index++);
+
+      switch (token) {
+        case Token.BLOB -> {
+          var begin = pass0.token(index++);
+          var end = pass0.token(index++);
+
+          text(begin, end);
+        }
+
+        case Token.LF -> processor.lineFeed();
+
+        default -> uoe(token);
+      }
+    }
+  }
+
+  private void text(int begin, int end) {
+    if (begin < end) {
+      var s = source.substring(begin, end);
+
+      processor.text(s);
     }
   }
 

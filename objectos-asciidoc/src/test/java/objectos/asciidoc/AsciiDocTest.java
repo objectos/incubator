@@ -574,7 +574,7 @@ public class AsciiDocTest {
         Code.DOCUMENT_START,
         Code.PREAMBLE_START,
         Code.LISTING_BLOCK_START,
-        Code.BLOB, 5, 9,
+        Code.VERBATIM, 3, 6,
         Code.LISTING_BLOCK_END,
         Code.PREAMBLE_END,
         Code.DOCUMENT_END
@@ -1272,7 +1272,7 @@ public class AsciiDocTest {
         Code.ATTR_POSITIONAL, 2, 2, 6,
         Code.PREAMBLE_START,
         Code.LISTING_BLOCK_START,
-        Code.BLOB, 13, 19,
+        Code.VERBATIM, 13, 16,
         Code.LISTING_BLOCK_END,
         Code.PREAMBLE_END,
         Code.DOCUMENT_END
@@ -1296,6 +1296,98 @@ public class AsciiDocTest {
     );
   }
 
+  @Test(description = //
+  """
+      source code block
+
+      - implict source style
+      - delimited
+      - multiple lines
+
+      01234567
+      89012
+      3456789
+      01234
+      '''
+      [source,java]
+      ----
+      class A {
+
+      }
+      ----
+      '''
+
+      P0: [ AVAL1,1 , AVAL3,6 ] $ LF
+          LBD $ LF
+          B13,19 $ LF
+          LBD $ LF
+          $ EOF
+      """)
+  public final void sourceCodeBlock02() {
+    test(
+      """
+          [source,java]
+          ----
+          class A {
+
+          }
+          ----
+          """,
+
+      p0(
+        Token.ATTR_LIST_START,
+        Token.ATTR_VALUE, 1, 7,
+        Token.SEPARATOR,
+        Token.ATTR_VALUE, 8, 12,
+        Token.ATTR_LIST_END,
+        Token.LF,
+
+        Token.LISTING_BLOCK_DELIM, 4,
+        Token.LF,
+
+        Token.BLOB, 19, 28,
+        Token.LF,
+        Token.LF,
+        Token.BLOB, 30, 31,
+        Token.LF,
+
+        Token.LISTING_BLOCK_DELIM, 4,
+        Token.LF,
+
+        Token.EOF
+      ),
+
+      p1(
+        Code.DOCUMENT_START,
+        Code.ATTR_POSITIONAL, 1, 1, 7,
+        Code.ATTR_POSITIONAL, 2, 8, 12,
+        Code.PREAMBLE_START,
+        Code.LISTING_BLOCK_START,
+        Code.VERBATIM, 13, 21,
+        Code.LISTING_BLOCK_END,
+        Code.PREAMBLE_END,
+        Code.DOCUMENT_END
+      ),
+
+      p2(),
+
+      """
+      <body>
+      <div id="header">
+      </div>
+      <div id="content">
+      <div class="listingblock">
+      <div class="content">
+      <pre class="highlight"><code class="language-java" data-lang="java">class A {
+
+      }</code></pre>
+      </div>
+      </div>
+      </div>
+      </body>
+      """
+    );
+  }
   @Test(enabled = false, description = //
   """
   unordered list

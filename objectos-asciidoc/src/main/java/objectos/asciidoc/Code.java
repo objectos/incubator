@@ -39,7 +39,7 @@ final class Code {
   static final int LISTING_BLOCK_START = -13;
   static final int LISTING_BLOCK_END = -14;
 
-  static final int BLOB = -15;
+  static final int VERBATIM = -15;
 
   private Code() {}
 

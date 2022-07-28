@@ -186,6 +186,11 @@ class ThisProcessor implements AsciiDoc.Processor {
   }
 
   @Override
+  public final void lineFeed() {
+    sb.append('\n');
+  }
+
+  @Override
   public final void listingBlockEnd() {
     sb.append("</pre>");
     sb.append("</div>");

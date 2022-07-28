@@ -32,6 +32,7 @@ class Pass1 {
   private static final int EOF = 0;
 
   private static final int MAYBE = 1 << 0;
+  private static final int START = MAYBE;
 
   private static final int NL = 1 << 1;
 
@@ -137,6 +138,7 @@ class Pass1 {
     code[codeIndex++] = p1;
   }
 
+  @SuppressWarnings("unused")
   private void add(int p0, int p1, int p2) {
     code = IntArrays.copyIfNecessary(code, codeIndex + 2);
 
@@ -154,6 +156,16 @@ class Pass1 {
     code[codeIndex++] = p3;
   }
 
+  private void add(int p0, int p1, int p2, int p3, int p4) {
+    code = IntArrays.copyIfNecessary(code, codeIndex + 4);
+
+    code[codeIndex++] = p0;
+    code[codeIndex++] = p1;
+    code[codeIndex++] = p2;
+    code[codeIndex++] = p3;
+    code[codeIndex++] = p4;
+  }
+
   private void add(int p0, int p1, int p2, int p3, int p4, int p5) {
     code = IntArrays.copyIfNecessary(code, codeIndex + 5);
 
@@ -163,16 +175,6 @@ class Pass1 {
     code[codeIndex++] = p3;
     code[codeIndex++] = p4;
     code[codeIndex++] = p5;
-  }
-
-  private void addCode(int p0, int p1, int p2, int p3, int p4) {
-    code = IntArrays.copyIfNecessary(code, codeIndex + 4);
-
-    code[codeIndex++] = p0;
-    code[codeIndex++] = p1;
-    code[codeIndex++] = p2;
-    code[codeIndex++] = p3;
-    code[codeIndex++] = p4;
   }
 
   private void execute0() {
@@ -190,7 +192,7 @@ class Pass1 {
 
         case Token.HEADING -> parseHeading(next(), next(), next());
 
-        case Token.BLOB -> parseBlob(next(), next());
+        case Token.BLOB -> parseTokens(next(), next());
 
         case Token.ATTR_LIST_START -> parseAttrListStart();
 
@@ -263,18 +265,6 @@ class Pass1 {
     };
   }
 
-  private int parseBlob(int start, int end) {
-    return switch (state) {
-      case PREAMBLE | LISTING_BLOCK -> {
-        add(Code.BLOB, start, end);
-
-        yield state;
-      }
-
-      default -> parseTokens(start, end);
-    };
-  }
-
   private int parseHeading(int level, int start, int end) {
     return switch (state) {
       case MAYBE -> {
@@ -301,7 +291,7 @@ class Pass1 {
 
         pushSection(section);
 
-        addCode(
+        add(
           Code.PREAMBLE_END,
           Code.SECTION_START, section,
           Code.HEADING_START, level
@@ -327,6 +317,24 @@ class Pass1 {
     };
   }
 
+  /*
+  
+  @startuml
+  hide empty description
+
+  [*] --> MAYBE
+
+  MAYBE --> PREAMBLE..LISTING_BLOCK..START : \----
+  PREAMBLE..LISTING_BLOCK..START --> PREAMBLE..LISTING_BLOCK : \\n \n tokenStart=tokenIndex
+  PREAMBLE..LISTING_BLOCK --> PREAMBLE..LISTING_BLOCK : blob
+  PREAMBLE..LISTING_BLOCK --> PREAMBLE..LISTING_BLOCK..NL : \\n
+  PREAMBLE..LISTING_BLOCK..NL --> PREAMBLE..LISTING_BLOCK : blob
+  PREAMBLE..LISTING_BLOCK..NL --> PREAMBLE : \----
+  
+  @enduml
+
+   */
+
   private int parseLineEnd() {
     return switch (state) {
       case MAYBE | ATTR -> state;
@@ -344,6 +352,10 @@ class Pass1 {
 
       case PREAMBLE -> state;
 
+      case PREAMBLE | LISTING_BLOCK | START -> state;
+
+      case PREAMBLE | LISTING_BLOCK -> state;
+
       case PREAMBLE | PARAGRAPH -> PREAMBLE | PARAGRAPH | NL;
 
       case PREAMBLE | PARAGRAPH | NL -> {
@@ -353,14 +365,6 @@ class Pass1 {
         );
 
         yield PREAMBLE;
-      }
-
-      case PREAMBLE | LISTING_BLOCK | MAYBE -> PREAMBLE | LISTING_BLOCK;
-
-      case PREAMBLE | LISTING_BLOCK -> {
-        tokenStart = tokenIndex;
-
-        yield PREAMBLE | LISTING_BLOCK | NL;
       }
 
       case SECTION -> state;
@@ -392,7 +396,7 @@ class Pass1 {
   private int parseLineEndEof() {
     return switch (state) {
       case DOCUMENT | HEADING -> {
-        addCode(
+        add(
           Code.TOKENS, tokenStart, tokenIndex,
           Code.HEADING_END,
           Code.DOCUMENT_END
@@ -451,10 +455,10 @@ class Pass1 {
 
         pushSection(dashes);
 
-        yield PREAMBLE | LISTING_BLOCK | MAYBE;
+        yield PREAMBLE | LISTING_BLOCK | START;
       }
 
-      case PREAMBLE | LISTING_BLOCK | NL -> {
+      case PREAMBLE | LISTING_BLOCK -> {
         var current = popSection();
 
         if (current != dashes) {
@@ -463,7 +467,12 @@ class Pass1 {
           throw new UnsupportedOperationException("Implement me :: literal dashes?");
         }
 
-        add(Code.LISTING_BLOCK_END);
+        var tokenEnd = tokenIndex - 1; // ignore last LF
+
+        add(
+          Code.VERBATIM, tokenStart, tokenEnd,
+          Code.LISTING_BLOCK_END
+        );
 
         yield PREAMBLE;
       }
@@ -507,6 +516,14 @@ class Pass1 {
 
         yield PREAMBLE | PARAGRAPH;
       }
+
+      case PREAMBLE | LISTING_BLOCK | START -> {
+        tokenStart = tokenIndex;
+
+        yield PREAMBLE | LISTING_BLOCK;
+      }
+
+      case PREAMBLE | LISTING_BLOCK -> state;
 
       case PREAMBLE | PARAGRAPH -> state;
 
