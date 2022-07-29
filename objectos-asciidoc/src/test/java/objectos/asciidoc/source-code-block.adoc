@@ -4,3 +4,12 @@
 ----   
 break;
 ----
+
+== Test case 02
+
+[source,java]
+----
+class A {
+
+}
+----

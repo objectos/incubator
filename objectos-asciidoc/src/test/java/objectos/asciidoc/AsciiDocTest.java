@@ -1326,13 +1326,13 @@ public class AsciiDocTest {
   public final void sourceCodeBlock02() {
     test(
       """
-          [source,java]
-          ----
-          class A {
+      [source,java]
+      ----
+      class A {
 
-          }
-          ----
-          """,
+      }
+      ----
+      """,
 
       p0(
         Token.ATTR_LIST_START,
