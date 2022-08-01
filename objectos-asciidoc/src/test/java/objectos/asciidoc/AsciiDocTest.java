@@ -1480,7 +1480,7 @@ public class AsciiDocTest {
     );
   }
 
-  @Test(enabled = false, description = //
+  @Test(description = //
   """
   unordered list
 
@@ -1499,7 +1499,7 @@ public class AsciiDocTest {
   fgh
   '''
 
-  L0: ^ - SP W2,3 $ LF
+  L0: - B2,7 LF
       ^ W4,7 $ LF
       ^ - SP W10,11 $ LF
       ^ W12,15 $ LF
@@ -1517,6 +1517,57 @@ public class AsciiDocTest {
       DOC_END
   """)
   public final void unorderedList02() {
+    test(
+      """
+      - a
+      bcd
+      - e
+      fgh
+      """,
+
+      p0(
+        Token.ULIST_HYPHEN, Token.BLOB, 2, 3, Token.LF,
+        Token.BLOB, 4, 7, Token.LF,
+        Token.ULIST_HYPHEN, Token.BLOB, 10, 11, Token.LF,
+        Token.BLOB, 12, 15, Token.LF,
+
+        Token.EOF
+      ),
+
+      p1(
+        Code.DOCUMENT_START,
+        Code.PREAMBLE_START,
+        Code.ULIST_START,
+
+        Code.LI_START, Code.TOKENS, 1, 8, Code.LI_END,
+
+        Code.LI_START, Code.TOKENS, 10, 17, Code.LI_END,
+
+        Code.ULIST_END,
+        Code.PREAMBLE_END,
+        Code.DOCUMENT_END
+      ),
+
+      p2(
+        t(Text.REGULAR, 2, 7),
+        t(Text.REGULAR, 10, 15)
+      ),
+
+      """
+      <body>
+      <div id="header">
+      </div>
+      <div id="content">
+      <div class="ulist">
+      <ul>
+      <li><p>a bcd</p></li>
+      <li><p>e fgh</p></li>
+      </ul>
+      </div>
+      </div>
+      </body>
+      """
+    );
   }
 
   @Test(enabled = false, description = //

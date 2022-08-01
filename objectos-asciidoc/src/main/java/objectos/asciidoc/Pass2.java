@@ -178,6 +178,12 @@ class Pass2 {
         yield ITALIC;
       }
 
+      case REGULAR -> {
+        regularEnd = end;
+
+        yield state;
+      }
+
       default -> uoe();
     };
   }
