@@ -43,7 +43,8 @@ final class Token {
 
   static final int SEPARATOR = -17;
 
-  static final int ULIST_HYPHEN = -18;
+  static final int ULIST_ASTERISK = -18;
+  static final int ULIST_HYPHEN = -19;
 
   private Token() {}
 

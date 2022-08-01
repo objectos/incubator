@@ -223,6 +223,8 @@ class Pass1 {
 
         case Token.SEPARATOR -> parseSeparator();
 
+        case Token.ULIST_ASTERISK -> parseUlistAsterisk(next());
+
         case Token.ULIST_HYPHEN -> parseUlistHyphen();
 
         default -> throw new UnsupportedOperationException("Implement me :: token=" + token);
@@ -392,24 +394,6 @@ class Pass1 {
     };
   }
 
-  /*
-  
-  @startuml
-  hide empty description
-
-  [*] --> MAYBE
-
-  MAYBE --> PREAMBLE..LISTING_BLOCK..START : \----
-  PREAMBLE..LISTING_BLOCK..START --> PREAMBLE..LISTING_BLOCK : \\n \n tokenStart=tokenIndex
-  PREAMBLE..LISTING_BLOCK --> PREAMBLE..LISTING_BLOCK : blob
-  PREAMBLE..LISTING_BLOCK --> PREAMBLE..LISTING_BLOCK..NL : \\n
-  PREAMBLE..LISTING_BLOCK..NL --> PREAMBLE..LISTING_BLOCK : blob
-  PREAMBLE..LISTING_BLOCK..NL --> PREAMBLE : \----
-  
-  @enduml
-
-   */
-
   private int parseLineEndEof() {
     return switch (state) {
       case DOCUMENT | HEADING -> {
@@ -448,6 +432,9 @@ class Pass1 {
       case PREAMBLE | ULIST | NL -> {
         var tokenEnd = tokenIndex - 1; // ignore NL
 
+        popSection(); // count
+        popSection(); // symbol
+
         add(
           Code.TOKENS, tokenStart, tokenEnd,
           Code.LI_END,
@@ -478,6 +465,24 @@ class Pass1 {
       default -> uoe();
     };
   }
+
+  /*
+  
+  @startuml
+  hide empty description
+
+  [*] --> MAYBE
+
+  MAYBE --> PREAMBLE..LISTING_BLOCK..START : \----
+  PREAMBLE..LISTING_BLOCK..START --> PREAMBLE..LISTING_BLOCK : \\n \n tokenStart=tokenIndex
+  PREAMBLE..LISTING_BLOCK --> PREAMBLE..LISTING_BLOCK : blob
+  PREAMBLE..LISTING_BLOCK --> PREAMBLE..LISTING_BLOCK..NL : \\n
+  PREAMBLE..LISTING_BLOCK..NL --> PREAMBLE..LISTING_BLOCK : blob
+  PREAMBLE..LISTING_BLOCK..NL --> PREAMBLE : \----
+  
+  @enduml
+
+   */
 
   private int parseListingBlockDelim(int dashes) {
     return switch (state) {
@@ -584,27 +589,54 @@ class Pass1 {
     };
   }
 
-  private int parseUlistHyphen() {
+  private int parseUlist(char symbol, int count) {
     return switch (state) {
       case MAYBE -> {
         add(Code.PREAMBLE_START, Code.ULIST_START, Code.LI_START);
+
+        pushSection(symbol);
+        pushSection(count);
 
         yield PREAMBLE | ULIST | START;
       }
 
       case PREAMBLE | ULIST | NL -> {
+        int prevCount = popSection();
+        int prevSymbol = popSection();
+
         var tokenEnd = tokenIndex - 1; // ignore NL
 
-        add(
-          Code.TOKENS, tokenStart, tokenEnd,
-          Code.LI_END, Code.LI_START
-        );
+        if (prevSymbol == symbol && prevCount == count) {
+          pushSection(prevSymbol);
+          pushSection(prevCount);
+
+          add(
+            Code.TOKENS, tokenStart, tokenEnd,
+            Code.LI_END, Code.LI_START
+          );
+        } else {
+          pushSection(symbol);
+          pushSection(count);
+
+          add(
+            Code.TOKENS, tokenStart, tokenEnd,
+            Code.LI_END, Code.ULIST_START, Code.LI_START
+          );
+        }
 
         yield PREAMBLE | ULIST | START;
       }
 
       default -> uoe();
     };
+  }
+
+  private int parseUlistAsterisk(int count) {
+    return parseUlist('*', count);
+  }
+
+  private int parseUlistHyphen() {
+    return parseUlist('-', 1);
   }
 
   private int popSection() {

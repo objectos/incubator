@@ -52,8 +52,6 @@ class Pass0 implements Pass1.Source, Pass2.Source {
   private static final int LISTING_BLOCK = 16;
   private static final int LISTING_BLOCK_OR_LIST = 17;
 
-  private static final int LIST = 18;
-
   private String source;
 
   private int sourceIndex;
@@ -409,7 +407,11 @@ class Pass0 implements Pass1.Source, Pass2.Source {
         yield advance(LINE_START);
       }
 
-      case ' ', '\t', '\f', '\u000B' -> advance(LIST);
+      case ' ', '\t', '\f', '\u000B' -> {
+        add(Token.ULIST_ASTERISK, counter);
+
+        yield advance(LINE_START_LIKE);
+      }
 
       default -> {
         var endIndex = sourceIndex - 1;
@@ -609,7 +611,11 @@ class Pass0 implements Pass1.Source, Pass2.Source {
         yield advance(HEADING_START);
       }
 
-      case '*' -> advance(BOLD_OR_LIST);
+      case '*' -> {
+        counter = 1;
+
+        yield advance(BOLD_OR_LIST);
+      }
 
       case '[' -> {
         attributeNameStart = sourceIndex + 1;

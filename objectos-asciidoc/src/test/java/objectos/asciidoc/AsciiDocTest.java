@@ -1500,21 +1500,10 @@ public class AsciiDocTest {
   '''
 
   L0: - B2,7 LF
-      ^ W4,7 $ LF
-      ^ - SP W10,11 $ LF
-      ^ W12,15 $ LF
-      ^ $ EOF
-
-  P1: DOC_START
-      PREAMBLE_START
-      ULIST_START
-      LI_START 1
-      PARAGRAPH P0 start end
-      LI_START 1
-      PARAGRAPH P0 start end
-      ULIST_END
-      PREAMBLE_END
-      DOC_END
+      B4,7 LF
+      - B10,11 $ LF
+      B12,15 LF
+      EOF
   """)
   public final void unorderedList02() {
     test(
@@ -1570,6 +1559,84 @@ public class AsciiDocTest {
     );
   }
 
+  @Test(description = //
+  """
+  unordered list
+
+  - simple elements
+  - dash
+  - single level
+
+  0123
+  4567
+  8901
+  '''
+  * a
+  * b
+  * c
+  '''
+
+  P0: - B2,3 LF
+      - B6,7 LF
+      - B10,11 LF
+      EOF
+  """)
+  public final void unorderedList03() {
+    test(
+      """
+      * a
+      * b
+      * c
+      """,
+
+      p0(
+        Token.ULIST_ASTERISK, 1, Token.BLOB, 2, 3, Token.LF,
+        Token.ULIST_ASTERISK, 1, Token.BLOB, 6, 7, Token.LF,
+        Token.ULIST_ASTERISK, 1, Token.BLOB, 10, 11, Token.LF,
+
+        Token.EOF
+      ),
+
+      p1(
+        Code.DOCUMENT_START,
+        Code.PREAMBLE_START,
+        Code.ULIST_START,
+
+        Code.LI_START, Code.TOKENS, 2, 5, Code.LI_END,
+
+        Code.LI_START, Code.TOKENS, 8, 11, Code.LI_END,
+
+        Code.LI_START, Code.TOKENS, 14, 17, Code.LI_END,
+
+        Code.ULIST_END,
+        Code.PREAMBLE_END,
+        Code.DOCUMENT_END
+      ),
+
+      p2(
+        t(Text.REGULAR, 2, 3),
+        t(Text.REGULAR, 6, 7),
+        t(Text.REGULAR, 10, 11)
+      ),
+
+      """
+      <body>
+      <div id="header">
+      </div>
+      <div id="content">
+      <div class="ulist">
+      <ul>
+      <li><p>a</p></li>
+      <li><p>b</p></li>
+      <li><p>c</p></li>
+      </ul>
+      </div>
+      </div>
+      </body>
+      """
+    );
+  }
+
   @Test(enabled = false, description = //
   """
   unordered list
@@ -1611,7 +1678,7 @@ public class AsciiDocTest {
       PREAMBLE_END
       DOC_END
   """)
-  public final void unorderedList03() {
+  public final void unorderedList04() {
   }
 
   @Test(enabled = false, description = //
@@ -1644,7 +1711,7 @@ public class AsciiDocTest {
       ^ R12,15 $ LF
       ^ $ EOF
   """)
-  public final void unorderedList04() {
+  public final void unorderedList05() {
   }
 
   final String normalize(String html) {
