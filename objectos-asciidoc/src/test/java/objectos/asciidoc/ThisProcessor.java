@@ -27,6 +27,8 @@ class ThisProcessor implements AsciiDoc.Processor {
 
   private int level;
 
+  private int listItem;
+
   private int sectionCount;
 
   private int state;
@@ -106,6 +108,8 @@ class ThisProcessor implements AsciiDoc.Processor {
   @Override
   public final void documentStart() {
     level = 0;
+
+    listItem = 0;
 
     sectionCount = 0;
 
@@ -206,12 +210,20 @@ class ThisProcessor implements AsciiDoc.Processor {
 
   @Override
   public final void listItemEnd() {
-    sb.append("</p></li>");
+    if (listItem > 0) {
+      sb.append("</p>");
+
+      listItem--;
+    }
+
+    sb.append("</li>");
   }
 
   @Override
   public final void listItemStart() {
     sb.append("\n<li><p>");
+
+    listItem++;
   }
 
   @Override
@@ -312,17 +324,24 @@ class ThisProcessor implements AsciiDoc.Processor {
 
   @Override
   public final String toString() {
-    return result.toString();
+    var s = result.toString();
+    return s;
   }
 
   @Override
   public final void unorderedListEnd() {
-    sb.append("</div>\n");
     sb.append("</ul>");
+    sb.append("</div>");
   }
 
   @Override
   public final void unorderedListStart() {
+    if (listItem > 0) {
+      sb.append("</p>");
+
+      listItem--;
+    }
+
     sb.append("<div class=\"ulist\">\n");
     sb.append("<ul>");
   }

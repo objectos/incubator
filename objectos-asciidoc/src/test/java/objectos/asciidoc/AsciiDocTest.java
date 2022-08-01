@@ -1637,7 +1637,7 @@ public class AsciiDocTest {
     );
   }
 
-  @Test(enabled = false, description = //
+  @Test(description = //
   """
   unordered list
 
@@ -1655,30 +1655,79 @@ public class AsciiDocTest {
   * d
   '''
 
-  P0: ^ * SP W2,3 $ LF
-      ^ * * SP W7,8 $ LF
-      ^ * * SP W12,13 $ LF
-      ^ * SP W16,17 $ LF
-      ^ $ EOF
-
-  P1: DOC_START
-      PREAMBLE_START
-      ULIST_START
-      LI_START
-      PARAGRAPH P0 start end
-      ULIST_START
-      LI_START
-      PARAGRAPH P0 start end
-      LI_START
-      PARAGRAPH P0 start end
-      ULIST_END
-      LI_START
-      PARAGRAPH P0 start end
-      ULIST_END
-      PREAMBLE_END
-      DOC_END
+  P0: * B2,3 $ LF
+      ** B7,8 $ LF
+      ** B12,13 $ LF
+      * B16,17 $ LF
+      EOF
   """)
   public final void unorderedList04() {
+    test(
+      """
+      * a
+      ** b
+      ** c
+      * d
+      """,
+
+      p0(
+        Token.ULIST_ASTERISK, 1, Token.BLOB, 2, 3, Token.LF,
+        Token.ULIST_ASTERISK, 2, Token.BLOB, 7, 8, Token.LF,
+        Token.ULIST_ASTERISK, 2, Token.BLOB, 12, 13, Token.LF,
+        Token.ULIST_ASTERISK, 1, Token.BLOB, 16, 17, Token.LF,
+
+        Token.EOF
+      ),
+
+      p1(
+        Code.DOCUMENT_START,
+        Code.PREAMBLE_START,
+        Code.ULIST_START,
+
+        Code.LI_START, Code.TOKENS, 2, 5,
+
+        Code.ULIST_START,
+        Code.LI_START, Code.TOKENS, 8, 11, Code.LI_END,
+
+        Code.LI_START, Code.TOKENS, 14, 17, Code.LI_END,
+        Code.ULIST_END,
+        Code.LI_END,
+
+        Code.LI_START, Code.TOKENS, 20, 23, Code.LI_END,
+
+        Code.ULIST_END,
+        Code.PREAMBLE_END,
+        Code.DOCUMENT_END
+      ),
+
+      p2(
+        t(Text.REGULAR, 2, 3),
+        t(Text.REGULAR, 7, 8),
+        t(Text.REGULAR, 12, 13),
+        t(Text.REGULAR, 16, 17)
+      ),
+
+      """
+      <body>
+      <div id="header">
+      </div>
+      <div id="content">
+      <div class="ulist">
+      <ul>
+      <li><p>a</p>
+      <div class="ulist">
+      <ul>
+      <li><p>b</p></li>
+      <li><p>c</p></li>
+      </ul>
+      </div></li>
+      <li><p>d</p></li>
+      </ul>
+      </div>
+      </div>
+      </body>
+      """
+    );
   }
 
   @Test(enabled = false, description = //

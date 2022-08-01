@@ -62,6 +62,10 @@ class Pass1 {
 
   private int codeIndex;
 
+  private int[] list;
+
+  private int listIndex = -1;
+
   private int[] section;
 
   private int sectionIndex = -1;
@@ -76,6 +80,8 @@ class Pass1 {
 
   Pass1() {
     code = new int[512];
+
+    list = new int[8];
 
     section = new int[8];
   }
@@ -97,6 +103,8 @@ class Pass1 {
     this.source = source;
 
     codeIndex = 0;
+
+    listIndex = -1;
 
     sectionIndex = -1;
 
@@ -432,8 +440,7 @@ class Pass1 {
       case PREAMBLE | ULIST | NL -> {
         var tokenEnd = tokenIndex - 1; // ignore NL
 
-        popSection(); // count
-        popSection(); // symbol
+        popList();
 
         add(
           Code.TOKENS, tokenStart, tokenEnd,
@@ -467,21 +474,21 @@ class Pass1 {
   }
 
   /*
-  
+
   @startuml
   hide empty description
-
+  
   [*] --> MAYBE
-
+  
   MAYBE --> PREAMBLE..LISTING_BLOCK..START : \----
   PREAMBLE..LISTING_BLOCK..START --> PREAMBLE..LISTING_BLOCK : \\n \n tokenStart=tokenIndex
   PREAMBLE..LISTING_BLOCK --> PREAMBLE..LISTING_BLOCK : blob
   PREAMBLE..LISTING_BLOCK --> PREAMBLE..LISTING_BLOCK..NL : \\n
   PREAMBLE..LISTING_BLOCK..NL --> PREAMBLE..LISTING_BLOCK : blob
   PREAMBLE..LISTING_BLOCK..NL --> PREAMBLE : \----
-  
-  @enduml
 
+  @enduml
+  
    */
 
   private int parseListingBlockDelim(int dashes) {
@@ -594,34 +601,39 @@ class Pass1 {
       case MAYBE -> {
         add(Code.PREAMBLE_START, Code.ULIST_START, Code.LI_START);
 
-        pushSection(symbol);
-        pushSection(count);
+        pushList(symbol, count);
 
         yield PREAMBLE | ULIST | START;
       }
 
       case PREAMBLE | ULIST | NL -> {
-        int prevCount = popSection();
-        int prevSymbol = popSection();
+        var prevSymbol = peekListSymbol();
+        var prevCount = peekListCount();
 
         var tokenEnd = tokenIndex - 1; // ignore NL
 
-        if (prevSymbol == symbol && prevCount == count) {
-          pushSection(prevSymbol);
-          pushSection(prevCount);
+        add(Code.TOKENS, tokenStart, tokenEnd);
 
-          add(
-            Code.TOKENS, tokenStart, tokenEnd,
-            Code.LI_END, Code.LI_START
-          );
+        if (prevSymbol == symbol) {
+          if (prevCount == count) {
+            add(Code.LI_END, Code.LI_START);
+          }
+
+          else if (prevCount < count) {
+            pushList(symbol, count);
+
+            add(Code.ULIST_START, Code.LI_START);
+          }
+
+          else {
+            popList();
+
+            add(Code.LI_END, Code.ULIST_END, Code.LI_END, Code.LI_START);
+          }
         } else {
-          pushSection(symbol);
-          pushSection(count);
+          pushList(symbol, count);
 
-          add(
-            Code.TOKENS, tokenStart, tokenEnd,
-            Code.LI_END, Code.ULIST_START, Code.LI_START
-          );
+          add(Code.LI_END, Code.ULIST_START, Code.LI_START);
         }
 
         yield PREAMBLE | ULIST | START;
@@ -639,8 +651,27 @@ class Pass1 {
     return parseUlist('-', 1);
   }
 
+  private int peekListCount() {
+    return list[listIndex - 1];
+  }
+
+  private char peekListSymbol() {
+    return (char) list[listIndex];
+  }
+
+  private void popList() {
+    listIndex -= 2;
+  }
+
   private int popSection() {
     return section[sectionIndex--];
+  }
+
+  private void pushList(char symbol, int count) {
+    list = IntArrays.copyIfNecessary(list, listIndex + 2);
+
+    list[++listIndex] = count;
+    list[++listIndex] = symbol;
   }
 
   private void pushSection(int level) {

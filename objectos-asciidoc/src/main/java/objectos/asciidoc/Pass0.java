@@ -413,6 +413,12 @@ class Pass0 implements Pass1.Source, Pass2.Source {
         yield advance(LINE_START_LIKE);
       }
 
+      case '*' -> {
+        counter++;
+
+        yield advance(state);
+      }
+
       default -> {
         var endIndex = sourceIndex - 1;
 
