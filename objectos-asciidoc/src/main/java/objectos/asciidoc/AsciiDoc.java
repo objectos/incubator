@@ -45,6 +45,10 @@ public class AsciiDoc {
 
     void listingBlockStart();
 
+    void listItemEnd();
+
+    void listItemStart();
+
     void monospaceEnd();
 
     void monospaceStart();
@@ -68,6 +72,10 @@ public class AsciiDoc {
     void sourceCodeBlockStart(String language);
 
     void text(String s);
+
+    void unorderedListEnd();
+
+    void unorderedListStart();
 
   }
 
@@ -163,6 +171,14 @@ public class AsciiDoc {
         case Code.LISTING_BLOCK_END -> { processListingBlockEnd(); attrClear(); }
 
         case Code.VERBATIM -> processVerbatim(nextCode(), nextCode());
+
+        case Code.ULIST_START -> processor.unorderedListStart();
+
+        case Code.ULIST_END -> processor.unorderedListEnd();
+
+        case Code.LI_START -> processor.listItemStart();
+
+        case Code.LI_END -> processor.listItemEnd();
 
         default -> throw new UnsupportedOperationException("Implement me :: code=" + code);
       }

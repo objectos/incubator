@@ -48,3 +48,12 @@ Nested list with indenting
  ** b
  ** c
 * d
+
+multi paragraph
+
+- a
+b c
++
+d e f
+
+- g h i

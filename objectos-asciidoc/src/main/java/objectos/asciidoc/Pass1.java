@@ -52,6 +52,8 @@ class Pass1 {
 
   private static final int LISTING_BLOCK = 1 << 9;
 
+  private static final int ULIST = 1 << 10;
+
   private int attrCount;
 
   private int[] code;
@@ -138,7 +140,6 @@ class Pass1 {
     code[codeIndex++] = p1;
   }
 
-  @SuppressWarnings("unused")
   private void add(int p0, int p1, int p2) {
     code = IntArrays.copyIfNecessary(code, codeIndex + 2);
 
@@ -177,6 +178,18 @@ class Pass1 {
     code[codeIndex++] = p5;
   }
 
+  private void add(int p0, int p1, int p2, int p3, int p4, int p5, int p6) {
+    code = IntArrays.copyIfNecessary(code, codeIndex + 7);
+
+    code[codeIndex++] = p0;
+    code[codeIndex++] = p1;
+    code[codeIndex++] = p2;
+    code[codeIndex++] = p3;
+    code[codeIndex++] = p4;
+    code[codeIndex++] = p5;
+    code[codeIndex++] = p6;
+  }
+
   private void execute0() {
     add(Code.DOCUMENT_START);
 
@@ -209,6 +222,8 @@ class Pass1 {
         case Token.LISTING_BLOCK_DELIM -> parseListingBlockDelim(next());
 
         case Token.SEPARATOR -> parseSeparator();
+
+        case Token.ULIST_HYPHEN -> parseUlistHyphen();
 
         default -> throw new UnsupportedOperationException("Implement me :: token=" + token);
       };
@@ -317,24 +332,6 @@ class Pass1 {
     };
   }
 
-  /*
-  
-  @startuml
-  hide empty description
-
-  [*] --> MAYBE
-
-  MAYBE --> PREAMBLE..LISTING_BLOCK..START : \----
-  PREAMBLE..LISTING_BLOCK..START --> PREAMBLE..LISTING_BLOCK : \\n \n tokenStart=tokenIndex
-  PREAMBLE..LISTING_BLOCK --> PREAMBLE..LISTING_BLOCK : blob
-  PREAMBLE..LISTING_BLOCK --> PREAMBLE..LISTING_BLOCK..NL : \\n
-  PREAMBLE..LISTING_BLOCK..NL --> PREAMBLE..LISTING_BLOCK : blob
-  PREAMBLE..LISTING_BLOCK..NL --> PREAMBLE : \----
-  
-  @enduml
-
-   */
-
   private int parseLineEnd() {
     return switch (state) {
       case MAYBE | ATTR -> state;
@@ -367,6 +364,8 @@ class Pass1 {
         yield PREAMBLE;
       }
 
+      case PREAMBLE | ULIST -> PREAMBLE | ULIST | NL;
+
       case SECTION -> state;
 
       case SECTION | HEADING -> {
@@ -392,6 +391,24 @@ class Pass1 {
       default -> uoe();
     };
   }
+
+  /*
+
+  @startuml
+  hide empty description
+  
+  [*] --> MAYBE
+  
+  MAYBE --> PREAMBLE..LISTING_BLOCK..START : \----
+  PREAMBLE..LISTING_BLOCK..START --> PREAMBLE..LISTING_BLOCK : \\n \n tokenStart=tokenIndex
+  PREAMBLE..LISTING_BLOCK --> PREAMBLE..LISTING_BLOCK : blob
+  PREAMBLE..LISTING_BLOCK --> PREAMBLE..LISTING_BLOCK..NL : \\n
+  PREAMBLE..LISTING_BLOCK..NL --> PREAMBLE..LISTING_BLOCK : blob
+  PREAMBLE..LISTING_BLOCK..NL --> PREAMBLE : \----
+
+  @enduml
+  
+   */
 
   private int parseLineEndEof() {
     return switch (state) {
@@ -421,6 +438,20 @@ class Pass1 {
         add(
           Code.TOKENS, tokenStart, tokenIndex,
           Code.PARAGRAPH_END,
+          Code.PREAMBLE_END,
+          Code.DOCUMENT_END
+        );
+
+        yield EOF;
+      }
+
+      case PREAMBLE | ULIST | NL -> {
+        var tokenEnd = tokenIndex - 1; // ignore NL
+
+        add(
+          Code.TOKENS, tokenStart, tokenEnd,
+          Code.LI_END,
+          Code.ULIST_END,
           Code.PREAMBLE_END,
           Code.DOCUMENT_END
         );
@@ -527,6 +558,12 @@ class Pass1 {
 
       case PREAMBLE | PARAGRAPH -> state;
 
+      case PREAMBLE | ULIST | START -> {
+        tokenStart = tokenIndex;
+
+        yield PREAMBLE | ULIST;
+      }
+
       case SECTION -> {
         tokenStart = tokenIndex;
 
@@ -539,6 +576,29 @@ class Pass1 {
         tokenStart = tokenIndex;
 
         yield state;
+      }
+
+      default -> uoe();
+    };
+  }
+
+  private int parseUlistHyphen() {
+    return switch (state) {
+      case MAYBE -> {
+        add(Code.PREAMBLE_START, Code.ULIST_START, Code.LI_START);
+
+        yield PREAMBLE | ULIST | START;
+      }
+
+      case PREAMBLE | ULIST | NL -> {
+        var tokenEnd = tokenIndex - 1; // ignore NL
+
+        add(
+          Code.TOKENS, tokenStart, tokenEnd,
+          Code.LI_END, Code.LI_START
+        );
+
+        yield PREAMBLE | ULIST | START;
       }
 
       default -> uoe();

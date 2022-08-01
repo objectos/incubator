@@ -41,6 +41,12 @@ final class Code {
 
   static final int VERBATIM = -15;
 
+  static final int ULIST_START = -16;
+  static final int ULIST_END = -17;
+
+  static final int LI_START = -18;
+  static final int LI_END = -19;
+
   private Code() {}
 
 }

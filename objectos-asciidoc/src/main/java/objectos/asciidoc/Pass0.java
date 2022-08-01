@@ -50,8 +50,9 @@ class Pass0 implements Pass1.Source, Pass2.Source {
   private static final int ATTR_LIST_END = 15;
 
   private static final int LISTING_BLOCK = 16;
+  private static final int LISTING_BLOCK_OR_LIST = 17;
 
-  private static final int LIST = 17;
+  private static final int LIST = 18;
 
   private String source;
 
@@ -255,6 +256,8 @@ class Pass0 implements Pass1.Source, Pass2.Source {
       case ATTR_NAME -> stateAttrName();
 
       case LISTING_BLOCK -> stateListingBlock();
+
+      case LISTING_BLOCK_OR_LIST -> stateListingBlockOrList();
 
       default -> uoe();
     };
@@ -597,7 +600,7 @@ class Pass0 implements Pass1.Source, Pass2.Source {
       case '-' -> {
         counter = 1;
 
-        yield advance(LISTING_BLOCK);
+        yield advance(LISTING_BLOCK_OR_LIST);
       }
 
       case '=' -> {
@@ -660,7 +663,10 @@ class Pass0 implements Pass1.Source, Pass2.Source {
         if (counter >= 4) {
           add(Token.LISTING_BLOCK_DELIM, counter, Token.LF);
         } else {
-          add(Token.LF);
+          add(
+            Token.BLOB, blobStart, sourceIndex,
+            Token.LF
+          );
         }
 
         yield advance(LINE_START);
@@ -676,6 +682,42 @@ class Pass0 implements Pass1.Source, Pass2.Source {
         counter++;
 
         yield advance(state);
+      }
+
+      default -> advance(BLOB);
+    };
+  }
+
+  private int stateListingBlockOrList() {
+    if (!hasChar()) {
+      add(
+        Token.BLOB, blobStart, sourceIndex,
+        Token.EOF
+      );
+
+      return EOF;
+    }
+
+    return switch (peek()) {
+      case '\n' -> {
+        add(
+          Token.BLOB, blobStart, sourceIndex,
+          Token.LF
+        );
+
+        yield advance(LINE_START);
+      }
+
+      case ' ', '\t', '\f', '\u000B' -> {
+        add(Token.ULIST_HYPHEN);
+
+        yield advance(LINE_START_LIKE);
+      }
+
+      case '-' -> {
+        counter++;
+
+        yield advance(LISTING_BLOCK);
       }
 
       default -> advance(BLOB);

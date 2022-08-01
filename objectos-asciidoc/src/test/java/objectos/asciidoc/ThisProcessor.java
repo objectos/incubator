@@ -205,6 +205,16 @@ class ThisProcessor implements AsciiDoc.Processor {
   }
 
   @Override
+  public final void listItemEnd() {
+    sb.append("</p></li>");
+  }
+
+  @Override
+  public final void listItemStart() {
+    sb.append("\n<li><p>");
+  }
+
+  @Override
   public final void monospaceEnd() {
     sb.append("</code>");
   }
@@ -303,5 +313,17 @@ class ThisProcessor implements AsciiDoc.Processor {
   @Override
   public final String toString() {
     return result.toString();
+  }
+
+  @Override
+  public final void unorderedListEnd() {
+    sb.append("</div>\n");
+    sb.append("</ul>");
+  }
+
+  @Override
+  public final void unorderedListStart() {
+    sb.append("<div class=\"ulist\">\n");
+    sb.append("<ul>");
   }
 }
