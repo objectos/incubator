@@ -1406,9 +1406,9 @@ public class AsciiDocTest {
   - c
   '''
 
-  P0: - B2,3 LF
-      - B6,7 LF
-      - B10,11 LF
+  P0: -0,1 B2,3 LF
+      -4,5 B6,7 LF
+      -8,9 B10,11 LF
       EOF
 
   P1: DOC_START
@@ -1433,9 +1433,9 @@ public class AsciiDocTest {
       """,
 
       p0(
-        Token.ULIST_HYPHEN, Token.BLOB, 2, 3, Token.LF,
-        Token.ULIST_HYPHEN, Token.BLOB, 6, 7, Token.LF,
-        Token.ULIST_HYPHEN, Token.BLOB, 10, 11, Token.LF,
+        Token.ULIST_HYPHEN, 0, 1, Token.BLOB, 2, 3, Token.LF,
+        Token.ULIST_HYPHEN, 4, 5, Token.BLOB, 6, 7, Token.LF,
+        Token.ULIST_HYPHEN, 8, 9, Token.BLOB, 10, 11, Token.LF,
 
         Token.EOF
       ),
@@ -1445,11 +1445,11 @@ public class AsciiDocTest {
         Code.PREAMBLE_START,
         Code.ULIST_START,
 
-        Code.LI_START, Code.TOKENS, 1, 4, Code.LI_END,
+        Code.LI_START, Code.TOKENS, 3, 6, Code.LI_END,
 
-        Code.LI_START, Code.TOKENS, 6, 9, Code.LI_END,
+        Code.LI_START, Code.TOKENS, 10, 13, Code.LI_END,
 
-        Code.LI_START, Code.TOKENS, 11, 14, Code.LI_END,
+        Code.LI_START, Code.TOKENS, 17, 20, Code.LI_END,
 
         Code.ULIST_END,
         Code.PREAMBLE_END,
@@ -1499,9 +1499,9 @@ public class AsciiDocTest {
   fgh
   '''
 
-  L0: - B2,7 LF
+  L0: -0,1 B2,7 LF
       B4,7 LF
-      - B10,11 $ LF
+      -8,9 B10,11 $ LF
       B12,15 LF
       EOF
   """)
@@ -1515,9 +1515,9 @@ public class AsciiDocTest {
       """,
 
       p0(
-        Token.ULIST_HYPHEN, Token.BLOB, 2, 3, Token.LF,
+        Token.ULIST_HYPHEN, 0, 1, Token.BLOB, 2, 3, Token.LF,
         Token.BLOB, 4, 7, Token.LF,
-        Token.ULIST_HYPHEN, Token.BLOB, 10, 11, Token.LF,
+        Token.ULIST_HYPHEN, 8, 9, Token.BLOB, 10, 11, Token.LF,
         Token.BLOB, 12, 15, Token.LF,
 
         Token.EOF
@@ -1528,9 +1528,9 @@ public class AsciiDocTest {
         Code.PREAMBLE_START,
         Code.ULIST_START,
 
-        Code.LI_START, Code.TOKENS, 1, 8, Code.LI_END,
+        Code.LI_START, Code.TOKENS, 3, 10, Code.LI_END,
 
-        Code.LI_START, Code.TOKENS, 10, 17, Code.LI_END,
+        Code.LI_START, Code.TOKENS, 14, 21, Code.LI_END,
 
         Code.ULIST_END,
         Code.PREAMBLE_END,
@@ -1576,9 +1576,9 @@ public class AsciiDocTest {
   * c
   '''
 
-  P0: - B2,3 LF
-      - B6,7 LF
-      - B10,11 LF
+  P0: *0,1 B2,3 LF
+      *4,5 B6,7 LF
+      *8,9 B10,11 LF
       EOF
   """)
   public final void unorderedList03() {
@@ -1590,9 +1590,9 @@ public class AsciiDocTest {
       """,
 
       p0(
-        Token.ULIST_ASTERISK, 1, Token.BLOB, 2, 3, Token.LF,
-        Token.ULIST_ASTERISK, 1, Token.BLOB, 6, 7, Token.LF,
-        Token.ULIST_ASTERISK, 1, Token.BLOB, 10, 11, Token.LF,
+        Token.ULIST_ASTERISK, 1, 0, 1, Token.BLOB, 2, 3, Token.LF,
+        Token.ULIST_ASTERISK, 1, 4, 5, Token.BLOB, 6, 7, Token.LF,
+        Token.ULIST_ASTERISK, 1, 8, 9, Token.BLOB, 10, 11, Token.LF,
 
         Token.EOF
       ),
@@ -1602,11 +1602,11 @@ public class AsciiDocTest {
         Code.PREAMBLE_START,
         Code.ULIST_START,
 
-        Code.LI_START, Code.TOKENS, 2, 5, Code.LI_END,
+        Code.LI_START, Code.TOKENS, 4, 7, Code.LI_END,
 
-        Code.LI_START, Code.TOKENS, 8, 11, Code.LI_END,
+        Code.LI_START, Code.TOKENS, 12, 15, Code.LI_END,
 
-        Code.LI_START, Code.TOKENS, 14, 17, Code.LI_END,
+        Code.LI_START, Code.TOKENS, 20, 23, Code.LI_END,
 
         Code.ULIST_END,
         Code.PREAMBLE_END,
@@ -1655,10 +1655,10 @@ public class AsciiDocTest {
   * d
   '''
 
-  P0: * B2,3 $ LF
-      ** B7,8 $ LF
-      ** B12,13 $ LF
-      * B16,17 $ LF
+  P0: *0,1 B2,3 $ LF
+      **4,6 B7,8 $ LF
+      **9,11 B12,13 $ LF
+      *14,15 B16,17 $ LF
       EOF
   """)
   public final void unorderedList04() {
@@ -1671,10 +1671,103 @@ public class AsciiDocTest {
       """,
 
       p0(
+        Token.ULIST_ASTERISK, 1, 0, 1, Token.BLOB, 2, 3, Token.LF,
+        Token.ULIST_ASTERISK, 2, 4, 6, Token.BLOB, 7, 8, Token.LF,
+        Token.ULIST_ASTERISK, 2, 9, 11, Token.BLOB, 12, 13, Token.LF,
+        Token.ULIST_ASTERISK, 1, 14, 15, Token.BLOB, 16, 17, Token.LF,
+
+        Token.EOF
+      ),
+
+      p1(
+        Code.DOCUMENT_START,
+        Code.PREAMBLE_START,
+        Code.ULIST_START,
+
+        Code.LI_START, Code.TOKENS, 4, 7,
+
+        Code.ULIST_START,
+        Code.LI_START, Code.TOKENS, 12, 15, Code.LI_END,
+
+        Code.LI_START, Code.TOKENS, 20, 23, Code.LI_END,
+        Code.ULIST_END,
+        Code.LI_END,
+
+        Code.LI_START, Code.TOKENS, 28, 31, Code.LI_END,
+
+        Code.ULIST_END,
+        Code.PREAMBLE_END,
+        Code.DOCUMENT_END
+      ),
+
+      p2(
+        t(Text.REGULAR, 2, 3),
+        t(Text.REGULAR, 7, 8),
+        t(Text.REGULAR, 12, 13),
+        t(Text.REGULAR, 16, 17)
+      ),
+
+      """
+      <body>
+      <div id="header">
+      </div>
+      <div id="content">
+      <div class="ulist">
+      <ul>
+      <li><p>a</p>
+      <div class="ulist">
+      <ul>
+      <li><p>b</p></li>
+      <li><p>c</p></li>
+      </ul>
+      </div></li>
+      <li><p>d</p></li>
+      </ul>
+      </div>
+      </div>
+      </body>
+      """
+    );
+  }
+
+  @Test(enabled = false, description = //
+  """
+  unordered list
+
+  - indented nested unordered list
+  - asterisk
+
+  0123
+  456789
+  012345
+  6789
+  '''
+  * a
+   ** b
+   ** c
+  * d
+  '''
+
+  P0: * B2,3 LF
+      ** B8,9 LF
+      ** B14,15 LF
+      * B18,19 LF
+      EOF
+  """)
+  public final void unorderedList05() {
+    test(
+      """
+      * a
+       ** b
+       ** c
+      * d
+      """,
+
+      p0(
         Token.ULIST_ASTERISK, 1, Token.BLOB, 2, 3, Token.LF,
-        Token.ULIST_ASTERISK, 2, Token.BLOB, 7, 8, Token.LF,
-        Token.ULIST_ASTERISK, 2, Token.BLOB, 12, 13, Token.LF,
-        Token.ULIST_ASTERISK, 1, Token.BLOB, 16, 17, Token.LF,
+        Token.ULIST_ASTERISK, 2, Token.BLOB, 8, 9, Token.LF,
+        Token.ULIST_ASTERISK, 2, Token.BLOB, 14, 15, Token.LF,
+        Token.ULIST_ASTERISK, 1, Token.BLOB, 18, 19, Token.LF,
 
         Token.EOF
       ),
@@ -1728,39 +1821,6 @@ public class AsciiDocTest {
       </body>
       """
     );
-  }
-
-  @Test(enabled = false, description = //
-  """
-  unordered list
-
-  - indented nested unordered list
-  - asterisk
-
-  0123
-  4567
-  8901
-  2345
-  '''
-  - a
-  bcd
-  - e
-  fgh
-  '''
-
-  L0: ^ - SP W2,3 $ LF
-      ^ W4,7 $ LF
-      ^ - SP W10,11 $ LF
-      ^ W12,15 $ LF
-      ^ $ EOF
-
-  L1: ^ UL1 R2,3 $ LF
-      ^ R4,7 $ LF
-      ^ UL1 R10,11 $ LF
-      ^ R12,15 $ LF
-      ^ $ EOF
-  """)
-  public final void unorderedList05() {
   }
 
   final String normalize(String html) {

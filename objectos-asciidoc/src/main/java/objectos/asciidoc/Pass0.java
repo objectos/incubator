@@ -52,6 +52,8 @@ class Pass0 implements Pass1.Source, Pass2.Source {
   private static final int LISTING_BLOCK = 16;
   private static final int LISTING_BLOCK_OR_LIST = 17;
 
+  private static final int LITERAL_OR_LIST = 18;
+
   private String source;
 
   private int sourceIndex;
@@ -257,6 +259,8 @@ class Pass0 implements Pass1.Source, Pass2.Source {
 
       case LISTING_BLOCK_OR_LIST -> stateListingBlockOrList();
 
+      case LITERAL_OR_LIST -> stateLiteralOrList();
+
       default -> uoe();
     };
   }
@@ -408,7 +412,7 @@ class Pass0 implements Pass1.Source, Pass2.Source {
       }
 
       case ' ', '\t', '\f', '\u000B' -> {
-        add(Token.ULIST_ASTERISK, counter);
+        add(Token.ULIST_ASTERISK, counter, lineStart, sourceIndex);
 
         yield advance(LINE_START_LIKE);
       }
@@ -605,6 +609,12 @@ class Pass0 implements Pass1.Source, Pass2.Source {
         yield advance(state);
       }
 
+      case ' ', '\t', '\f', '\u000B' -> {
+        counter = 1;
+
+        yield advance(LITERAL_OR_LIST);
+      }
+
       case '-' -> {
         counter = 1;
 
@@ -721,7 +731,7 @@ class Pass0 implements Pass1.Source, Pass2.Source {
       }
 
       case ' ', '\t', '\f', '\u000B' -> {
-        add(Token.ULIST_HYPHEN);
+        add(Token.ULIST_HYPHEN, lineStart, sourceIndex);
 
         yield advance(LINE_START_LIKE);
       }
@@ -733,6 +743,36 @@ class Pass0 implements Pass1.Source, Pass2.Source {
       }
 
       default -> advance(BLOB);
+    };
+  }
+
+  private int stateLiteralOrList() {
+    if (!hasChar()) {
+      add(Token.EOF);
+
+      return EOF;
+    }
+
+    return switch (peek()) {
+      case '\n' -> {
+        add(Token.LF);
+
+        yield advance(LINE_START);
+      }
+
+      case ' ', '\t', '\f', '\u000B' -> {
+        counter++;
+
+        yield advance(state);
+      }
+
+      case '*' -> {
+        counter++;
+
+        yield advance(BOLD_OR_LIST);
+      }
+
+      default -> uoe();
     };
   }
 

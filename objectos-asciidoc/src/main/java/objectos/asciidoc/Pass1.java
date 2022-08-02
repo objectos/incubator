@@ -231,9 +231,9 @@ class Pass1 {
 
         case Token.SEPARATOR -> parseSeparator();
 
-        case Token.ULIST_ASTERISK -> parseUlistAsterisk(next());
+        case Token.ULIST_ASTERISK -> parseUlistAsterisk(next(), next(), next());
 
-        case Token.ULIST_HYPHEN -> parseUlistHyphen();
+        case Token.ULIST_HYPHEN -> parseUlistHyphen(next(), next());
 
         default -> throw new UnsupportedOperationException("Implement me :: token=" + token);
       };
@@ -474,21 +474,21 @@ class Pass1 {
   }
 
   /*
-
+  
   @startuml
   hide empty description
-  
+
   [*] --> MAYBE
-  
+
   MAYBE --> PREAMBLE..LISTING_BLOCK..START : \----
   PREAMBLE..LISTING_BLOCK..START --> PREAMBLE..LISTING_BLOCK : \\n \n tokenStart=tokenIndex
   PREAMBLE..LISTING_BLOCK --> PREAMBLE..LISTING_BLOCK : blob
   PREAMBLE..LISTING_BLOCK --> PREAMBLE..LISTING_BLOCK..NL : \\n
   PREAMBLE..LISTING_BLOCK..NL --> PREAMBLE..LISTING_BLOCK : blob
   PREAMBLE..LISTING_BLOCK..NL --> PREAMBLE : \----
-
-  @enduml
   
+  @enduml
+
    */
 
   private int parseListingBlockDelim(int dashes) {
@@ -643,11 +643,11 @@ class Pass1 {
     };
   }
 
-  private int parseUlistAsterisk(int count) {
+  private int parseUlistAsterisk(int count, int start, int end) {
     return parseUlist('*', count);
   }
 
-  private int parseUlistHyphen() {
+  private int parseUlistHyphen(int start, int end) {
     return parseUlist('-', 1);
   }
 
