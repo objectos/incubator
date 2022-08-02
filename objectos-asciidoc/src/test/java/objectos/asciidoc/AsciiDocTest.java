@@ -1730,7 +1730,7 @@ public class AsciiDocTest {
     );
   }
 
-  @Test(enabled = false, description = //
+  @Test(description = //
   """
   unordered list
 
@@ -1764,10 +1764,10 @@ public class AsciiDocTest {
       """,
 
       p0(
-        Token.ULIST_ASTERISK, 1, Token.BLOB, 2, 3, Token.LF,
-        Token.ULIST_ASTERISK, 2, Token.BLOB, 8, 9, Token.LF,
-        Token.ULIST_ASTERISK, 2, Token.BLOB, 14, 15, Token.LF,
-        Token.ULIST_ASTERISK, 1, Token.BLOB, 18, 19, Token.LF,
+        Token.ULIST_ASTERISK, 1, 0, 1, Token.BLOB, 2, 3, Token.LF,
+        Token.ULIST_ASTERISK, 2, 4, 7, Token.BLOB, 8, 9, Token.LF,
+        Token.ULIST_ASTERISK, 2, 10, 13, Token.BLOB, 14, 15, Token.LF,
+        Token.ULIST_ASTERISK, 1, 16, 17, Token.BLOB, 18, 19, Token.LF,
 
         Token.EOF
       ),
@@ -1777,16 +1777,16 @@ public class AsciiDocTest {
         Code.PREAMBLE_START,
         Code.ULIST_START,
 
-        Code.LI_START, Code.TOKENS, 2, 5,
+        Code.LI_START, Code.TOKENS, 4, 7,
 
         Code.ULIST_START,
-        Code.LI_START, Code.TOKENS, 8, 11, Code.LI_END,
+        Code.LI_START, Code.TOKENS, 12, 15, Code.LI_END,
 
-        Code.LI_START, Code.TOKENS, 14, 17, Code.LI_END,
+        Code.LI_START, Code.TOKENS, 20, 23, Code.LI_END,
         Code.ULIST_END,
         Code.LI_END,
 
-        Code.LI_START, Code.TOKENS, 20, 23, Code.LI_END,
+        Code.LI_START, Code.TOKENS, 28, 31, Code.LI_END,
 
         Code.ULIST_END,
         Code.PREAMBLE_END,
@@ -1795,9 +1795,9 @@ public class AsciiDocTest {
 
       p2(
         t(Text.REGULAR, 2, 3),
-        t(Text.REGULAR, 7, 8),
-        t(Text.REGULAR, 12, 13),
-        t(Text.REGULAR, 16, 17)
+        t(Text.REGULAR, 8, 9),
+        t(Text.REGULAR, 14, 15),
+        t(Text.REGULAR, 18, 19)
       ),
 
       """
