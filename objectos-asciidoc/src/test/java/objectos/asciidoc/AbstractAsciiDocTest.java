@@ -16,34 +16,31 @@
 package objectos.asciidoc;
 
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
 
-public class Pass1Test extends AsciiDocTest {
+public abstract class AbstractAsciiDocTest {
 
-  private Pass1 pass1;
+  private final AsciiDocTest outer;
+
+  AbstractAsciiDocTest(AsciiDocTest outer) {
+    this.outer = outer;
+  }
 
   @BeforeClass
-  @Override
   public void _beforeClass() {
-    if (pass1 == null) {
-      pass1 = new Pass1();
-    }
+    outer._beforeClass();
   }
 
-  @Test(enabled = false)
-  public void _enableCodeMinings() {
-  }
+  final int[] p0(int... values) { return values; }
 
-  @Override
+  final int[] p1(int... values) { return values; }
+
+  final int[][] p2(int[]... values) { return values; }
+
+  final int[] t(int... values) { return values; }
+
   final void test(
       String source, int[] expected0, int[] expected1, int[][] expected2, String expectedHtml) {
-    var s = new ArrayPass1Source(expected0);
-
-    pass1.execute(s);
-
-    int[] result = pass1.toCode();
-
-    testArrays(result, expected1, "Process (1) assertion failed");
+    outer.test(source, expected0, expected1, expected2, expectedHtml);
   }
 
 }

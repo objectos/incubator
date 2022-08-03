@@ -22,6 +22,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
 
 public class AsciiDocTest {
@@ -32,9 +33,18 @@ public class AsciiDocTest {
 
   @BeforeClass
   public void _beforeClass() {
-    asciiDoc = AsciiDoc.create();
+    if (asciiDoc == null) {
+      asciiDoc = AsciiDoc.create();
 
-    processor = new ThisProcessor();
+      processor = new ThisProcessor();
+    }
+  }
+
+  @Factory
+  public Object[] _factory() {
+    return new Object[] {
+        new InlineMacroTest(this)
+    };
   }
 
   @Test(description = //

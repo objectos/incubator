@@ -54,6 +54,8 @@ class Pass1 {
 
   private static final int ULIST = 1 << 10;
 
+  private static final int INLINE_MACRO = 1 << 11;
+
   private int attrCount;
 
   private int[] code;
@@ -213,7 +215,7 @@ class Pass1 {
 
         case Token.HEADING -> parseHeading(next(), next(), next());
 
-        case Token.BLOB -> parseTokens(next(), next());
+        case Token.BLOB -> parseBlob(next(), next());
 
         case Token.ATTR_LIST_START -> parseAttrListStart();
 
@@ -234,6 +236,8 @@ class Pass1 {
         case Token.ULIST_ASTERISK -> parseUlistAsterisk(next(), next(), next());
 
         case Token.ULIST_HYPHEN -> parseUlistHyphen(next(), next());
+
+        case Token.INLINE_MACRO -> parseInlineMacro(next(), next());
 
         default -> throw new UnsupportedOperationException("Implement me :: token=" + token);
       };
@@ -262,6 +266,12 @@ class Pass1 {
     return switch (state) {
       case MAYBE -> MAYBE | ATTR;
 
+      case PREAMBLE | PARAGRAPH | INLINE_MACRO -> {
+        tokenStart = source.tokenCursor();
+
+        yield PREAMBLE | PARAGRAPH;
+      }
+
       default -> uoe();
     };
   }
@@ -271,6 +281,8 @@ class Pass1 {
 
     return switch (state) {
       case MAYBE -> state | ATTR;
+
+      case PREAMBLE | PARAGRAPH | INLINE_MACRO -> state | ATTR;
 
       default -> uoe();
     };
@@ -287,6 +299,18 @@ class Pass1 {
       }
 
       default -> uoe(attr);
+    };
+  }
+
+  private int parseBlob(int start, int end) {
+    return switch (state) {
+      case PREAMBLE | PARAGRAPH | INLINE_MACRO | START -> {
+        add(Code.MACRO_TARGET, start, end);
+
+        yield PREAMBLE | PARAGRAPH | INLINE_MACRO;
+      }
+
+      default -> parseTokens(start, end);
     };
   }
 
@@ -336,6 +360,21 @@ class Pass1 {
         );
 
         yield SECTION | HEADING;
+      }
+
+      default -> uoe();
+    };
+  }
+
+  private int parseInlineMacro(int start, int end) {
+    return switch (state) {
+      case MAYBE -> {
+        add(
+          Code.PREAMBLE_START, Code.PARAGRAPH_START,
+          Code.INLINE_MACRO, start, end
+        );
+
+        yield PREAMBLE | PARAGRAPH | INLINE_MACRO | START;
       }
 
       default -> uoe();

@@ -25,7 +25,9 @@ public class Pass0Test extends AsciiDocTest {
   @BeforeClass
   @Override
   public void _beforeClass() {
-    pass0 = new Pass0();
+    if (pass0 == null) {
+      pass0 = new Pass0();
+    }
   }
 
   @Test(enabled = false)

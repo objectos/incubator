@@ -195,6 +195,15 @@ class ThisProcessor implements AsciiDoc.Processor {
   }
 
   @Override
+  public final void link(String href, String text) {
+    sb.append("<a href=\"");
+    sb.append(href);
+    sb.append("\">");
+    sb.append(text);
+    sb.append("</a>");
+  }
+
+  @Override
   public final void listingBlockEnd() {
     sb.append("</pre>");
     sb.append("</div>");

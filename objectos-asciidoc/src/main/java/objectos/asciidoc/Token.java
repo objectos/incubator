@@ -46,6 +46,8 @@ final class Token {
   static final int ULIST_ASTERISK = -18;
   static final int ULIST_HYPHEN = -19;
 
+  static final int INLINE_MACRO = -20;
+
   private Token() {}
 
 }

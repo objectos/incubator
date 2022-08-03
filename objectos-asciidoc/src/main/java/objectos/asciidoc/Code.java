@@ -47,6 +47,9 @@ final class Code {
   static final int LI_START = -18;
   static final int LI_END = -19;
 
+  static final int INLINE_MACRO = -20;
+  static final int MACRO_TARGET = -21;
+
   private Code() {}
 
 }

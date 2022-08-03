@@ -41,6 +41,8 @@ public class AsciiDoc {
 
     void lineFeed();
 
+    void link(String href, String text);
+
     void listingBlockEnd();
 
     void listingBlockStart();
@@ -180,6 +182,8 @@ public class AsciiDoc {
 
         case Code.LI_END -> processor.listItemEnd();
 
+        case Code.INLINE_MACRO -> processInlineMacro();
+
         default -> throw new UnsupportedOperationException("Implement me :: code=" + code);
       }
     }
@@ -206,6 +210,64 @@ public class AsciiDoc {
   private boolean hasCode() { return pass1.hasCode(); }
 
   private int nextCode() { return pass1.nextCode(); }
+
+  private void processInlineMacro() {
+    var name = source.substring(nextCode(), nextCode());
+
+    var maybeTarget = nextCode();
+
+    if (maybeTarget != Code.MACRO_TARGET) {
+      throw new UnsupportedOperationException("Implement me");
+    }
+
+    var target = source.substring(nextCode(), nextCode());
+
+    processInlineMacroAttrMap();
+
+    switch (name) {
+      case "https" -> processInlineMacroUrl(name, target);
+
+      default -> throw new UnsupportedOperationException("Implement me :: inlinemacro=" + name);
+    }
+  }
+
+  private void processInlineMacroAttrMap() {
+    attrMap.clear();
+
+    loop: while (hasCode()) {
+      int cursor = pass1.codeCursor();
+
+      int peek = pass1.codeAt(cursor);
+
+      switch (peek) {
+        case Code.ATTR_POSITIONAL -> {
+          nextCode();
+
+          var index = nextCode();
+          var value = source.substring(nextCode(), nextCode());
+
+          attrMap.put(Integer.toString(index), value);
+        }
+        default -> { break loop; }
+      }
+    }
+  }
+
+  private void processInlineMacroUrl(String protocol, String target) {
+    var size = attrMap.size();
+
+    switch (size) {
+      case 0 -> uoe(size);
+
+      case 1 -> {
+        var text = attrMap.get("1");
+
+        processor.link(protocol + ":" + target, text);
+      }
+
+      default -> uoe(size);
+    }
+  }
 
   private void processListingBlockEnd() {
     var style = attrMap.getOrDefault(AttrName.STYLE, "");

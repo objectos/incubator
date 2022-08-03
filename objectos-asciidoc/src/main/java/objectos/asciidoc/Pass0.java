@@ -54,6 +54,9 @@ class Pass0 implements Pass1.Source, Pass2.Source {
 
   private static final int LITERAL_OR_LIST = 18;
 
+  private static final int MACRO_ANY_START = 19;
+  private static final int MACRO_INLINE = 20;
+
   private String source;
 
   private int sourceIndex;
@@ -72,7 +75,9 @@ class Pass0 implements Pass1.Source, Pass2.Source {
 
   private int blobStart;
 
-  private int attributeNameStart;
+  private int boundaryStart;
+
+  private int auxiliaryStart;
 
   Pass0() {
     token = new int[512];
@@ -223,6 +228,10 @@ class Pass0 implements Pass1.Source, Pass2.Source {
     return BLOB;
   }
 
+  private void rollbackMacro(int token) {
+    throw new UnsupportedOperationException("Implement me");
+  }
+
   private int state(int state) {
     return switch (state) {
       case LINE_START -> stateLineStart();
@@ -261,6 +270,10 @@ class Pass0 implements Pass1.Source, Pass2.Source {
 
       case LITERAL_OR_LIST -> stateLiteralOrList();
 
+      case MACRO_ANY_START -> stateMacroAnyStart();
+
+      case MACRO_INLINE -> stateMacroInline();
+
       default -> uoe();
     };
   }
@@ -295,17 +308,17 @@ class Pass0 implements Pass1.Source, Pass2.Source {
 
       case ',' -> {
         add(
-          Token.ATTR_VALUE, attributeNameStart, sourceIndex,
+          Token.ATTR_VALUE, auxiliaryStart, sourceIndex,
           Token.SEPARATOR
         );
 
-        attributeNameStart = sourceIndex + 1;
+        auxiliaryStart = sourceIndex + 1;
 
         yield advance(ATTR_NAME);
       }
 
       case ']' -> {
-        add(Token.ATTR_VALUE, attributeNameStart, sourceIndex);
+        add(Token.ATTR_VALUE, auxiliaryStart, sourceIndex);
 
         yield advance(ATTR_LIST_END);
       }
@@ -338,9 +351,23 @@ class Pass0 implements Pass1.Source, Pass2.Source {
         yield advance(LINE_START);
       }
 
-      case ' ' -> advance(SPACE_LIKE);
+      case ' ', '\t', '\f', '\u000B' -> advance(SPACE_LIKE);
 
       case '*' -> advance(BOLD_END);
+
+      case ':' -> {
+        // rollback index
+        tokenCursor = tokenIndex;
+
+        if (boundaryStart != lineStart) {
+          throw new UnsupportedOperationException("Implement me");
+        }
+
+        // assume inline macro for now
+        add(Token.INLINE_MACRO, boundaryStart, sourceIndex);
+
+        yield advance(MACRO_ANY_START);
+      }
 
       case ']' -> advance(ATTR_LIST_END);
 
@@ -600,7 +627,7 @@ class Pass0 implements Pass1.Source, Pass2.Source {
       return EOF;
     }
 
-    lineStart = blobStart = sourceIndex;
+    lineStart = blobStart = boundaryStart = sourceIndex;
 
     return switch (peek()) {
       case '\n' -> {
@@ -630,7 +657,7 @@ class Pass0 implements Pass1.Source, Pass2.Source {
       }
 
       case '[' -> {
-        attributeNameStart = sourceIndex + 1;
+        auxiliaryStart = sourceIndex + 1;
 
         tokenCursor = tokenIndex;
 
@@ -772,6 +799,61 @@ class Pass0 implements Pass1.Source, Pass2.Source {
     };
   }
 
+  private int stateMacroAnyStart() {
+    if (!hasChar()) {
+      rollbackMacro(Token.EOF);
+
+      return EOF;
+    }
+
+    auxiliaryStart = sourceIndex;
+
+    return switch (peek()) {
+      case '\n' -> {
+        rollbackMacro(Token.LF);
+
+        yield advance(LINE_START);
+      }
+
+      case ':' -> {
+        // replace Token.INLINE_MACRO
+
+        yield uoe();
+      }
+
+      default -> advance(MACRO_INLINE);
+    };
+  }
+
+  private int stateMacroInline() {
+    if (!hasChar()) {
+      rollbackMacro(Token.EOF);
+
+      return EOF;
+    }
+
+    return switch (peek()) {
+      case '\n' -> {
+        rollbackMacro(Token.LF);
+
+        yield advance(LINE_START);
+      }
+
+      case '[' -> {
+        add(
+          Token.BLOB, auxiliaryStart, sourceIndex,
+          Token.ATTR_LIST_START
+        );
+
+        auxiliaryStart = sourceIndex + 1;
+
+        yield advance(ATTR_NAME);
+      }
+
+      default -> advance(state);
+    };
+  }
+
   private int stateMonoEnd() {
     var endIndex = sourceIndex - 1;
 
@@ -859,6 +941,8 @@ class Pass0 implements Pass1.Source, Pass2.Source {
       return EOF;
     }
 
+    boundaryStart = sourceIndex;
+
     return switch (peek()) {
       case '\n' -> {
         add(
@@ -869,7 +953,7 @@ class Pass0 implements Pass1.Source, Pass2.Source {
         yield advance(LINE_START);
       }
 
-      case ' ' -> advance(state);
+      case ' ', '\t', '\f', '\u000B' -> advance(state);
 
       case '*' -> advance(BOLD_START);
 
