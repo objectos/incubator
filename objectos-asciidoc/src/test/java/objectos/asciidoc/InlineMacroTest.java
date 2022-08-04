@@ -17,7 +17,7 @@ package objectos.asciidoc;
 
 import org.testng.annotations.Test;
 
-class InlineMacroTest extends AbstractAsciiDocTest {
+final class InlineMacroTest extends AbstractAsciiDocTest {
 
   InlineMacroTest(AsciiDocTest outer) { super(outer); }
 

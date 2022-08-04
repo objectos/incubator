@@ -490,21 +490,21 @@ class Pass1 {
   }
 
   /*
-  
+
   @startuml
   hide empty description
-
+  
   [*] --> MAYBE
-
+  
   MAYBE --> PREAMBLE..LISTING_BLOCK..START : \----
   PREAMBLE..LISTING_BLOCK..START --> PREAMBLE..LISTING_BLOCK : \\n \n tokenStart=tokenIndex
   PREAMBLE..LISTING_BLOCK --> PREAMBLE..LISTING_BLOCK : blob
   PREAMBLE..LISTING_BLOCK --> PREAMBLE..LISTING_BLOCK..NL : \\n
   PREAMBLE..LISTING_BLOCK..NL --> PREAMBLE..LISTING_BLOCK : blob
   PREAMBLE..LISTING_BLOCK..NL --> PREAMBLE : \----
-  
-  @enduml
 
+  @enduml
+  
    */
 
   private int parseLineEndEof() {
@@ -664,6 +664,8 @@ class Pass1 {
       case PREAMBLE | LISTING_BLOCK -> state;
 
       case PREAMBLE | PARAGRAPH -> state;
+
+      case PREAMBLE | PARAGRAPH | NL -> PREAMBLE | PARAGRAPH;
 
       case PREAMBLE | ULIST | START -> {
         tokenStart = tokenIndex;

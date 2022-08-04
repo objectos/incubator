@@ -17,84 +17,61 @@ package objectos.asciidoc;
 
 import org.testng.annotations.Test;
 
-final class DocumentAttributeTest extends AbstractAsciiDocTest {
+final class ParagraphTest extends AbstractAsciiDocTest {
 
-  DocumentAttributeTest(AsciiDocTest outer) { super(outer); }
+  ParagraphTest(AsciiDocTest outer) { super(outer); }
 
   @Test(description = //
   """
-  Objectos Docs v0002/index doc header
+  two lines paragraph
 
   0123
-  456789
-  012345
-  6
-  78
+  4567
   '''
-  = a
-  :b: c
-  :d: e
-
-  f
+  abc
+  def
   '''
 
-  P0: H1-0,2 B2,3 LF
-      AN5,6 AV8,9 LF
-      AN11,12 AV14,15 LF
-      LF
-      B17,18 LF
+  P0: B0,3 LF
+      B4,7 LF
       EOF
   """)
   public void testCase01() {
     test(
       """
-      = a
-      :b: c
-      :d: e
-
-      f
+      abc
+      def
       """,
 
       p0(
-        Token.HEADING, 1, 0, 2, Token.BLOB, 2, 3, Token.LF,
-        Token.DOCATTR, 5, 6, Token.BLOB, 8, 9, Token.LF,
-        Token.DOCATTR, 11, 12, Token.BLOB, 14, 15, Token.LF,
-        Token.LF,
-        Token.BLOB, 17, 18, Token.LF,
+        Token.BLOB, 0, 3, Token.LF,
+        Token.BLOB, 4, 7, Token.LF,
         Token.EOF
       ),
 
       p1(
         Code.DOCUMENT_START,
-        Code.HEADING_START, 1,
-        Code.TOKENS, 4, 7,
-        Code.HEADING_END,
         Code.PREAMBLE_START,
         Code.PARAGRAPH_START,
-        Code.TOKENS, 23, 27,
+        Code.TOKENS, 0, 8,
         Code.PARAGRAPH_END,
         Code.PREAMBLE_END,
         Code.DOCUMENT_END
       ),
 
-      docAttr(
-        "b", "c",
-        "d", "e"
-      ),
+      docAttr(),
 
       p2(
-        t(Text.REGULAR, 2, 3),
-        t(Text.REGULAR, 17, 18)
+        t(Text.REGULAR, 0, 7)
       ),
 
       """
       <body>
       <div id="header">
-      <h1>a</h1>
       </div>
       <div id="content">
       <div class="paragraph">
-      <p>f</p>
+      <p>abc def</p>
       </div>
       </div>
       </body>
