@@ -152,4 +152,113 @@ final class InlineMacroTest extends AbstractAsciiDocTest {
     );
   }
 
+  @Test(enabled = false, description = //
+  """
+  inline macro
+
+  - unordered list
+  - section
+
+  01234
+  5
+  678901234
+  567890123
+  '''
+  == A
+
+  * i:b[c]
+  * i:d[e]
+  '''
+  """)
+  public void testCase03() {
+    test(
+      """
+      == A
+
+      * i:b[c]
+      * i:d[e]
+      """,
+
+      p0(
+        Token.HEADING, 2, 0, 3, Token.BLOB, 3, 4, Token.LF,
+        Token.LF,
+
+        Token.ULIST_ASTERISK, 1, 6, 7,
+        Token.INLINE_MACRO, 8, 9, Token.BLOB, 10, 11,
+        Token.ATTR_LIST_START, Token.ATTR_VALUE, 12, 13, Token.ATTR_LIST_END,
+        Token.LF,
+
+        Token.ULIST_ASTERISK, 1, 15, 16,
+        Token.INLINE_MACRO, 17, 18, Token.BLOB, 19, 20,
+        Token.ATTR_LIST_START, Token.ATTR_VALUE, 21, 22, Token.ATTR_LIST_END,
+        Token.LF,
+
+        Token.EOF
+      ),
+
+      p1(
+        Code.DOCUMENT_START,
+        Code.SECTION_START, 1,
+        Code.HEADING_START, 2,
+        Code.TOKENS, 1, 2,
+        Code.HEADING_END,
+
+        Code.ULIST_START,
+        Code.INLINE_MACRO, 0, 5,
+        Code.MACRO_TARGET, 6, 19,
+        Code.ATTR_POSITIONAL, 1, 20, 22,
+        Code.TOKENS, 11, 12,
+        Code.ULIST_END,
+
+        Code.ULIST_START,
+        Code.LI_START,
+        Code.MACRO_TARGET, 6, 19,
+        Code.ATTR_POSITIONAL, 1, 20, 22,
+        Code.TOKENS, 18, 21,
+        Code.LI_END,
+
+        Code.LI_START,
+        Code.MACRO_TARGET, 6, 19,
+        Code.ATTR_POSITIONAL, 1, 20, 22,
+        Code.TOKENS, 18, 21,
+        Code.LI_END,
+        Code.ULIST_END,
+        Code.SECTION_END,
+        Code.DOCUMENT_END
+      ),
+
+      docAttr(),
+
+      p2(
+        t(Text.REGULAR, 3, 4),
+        t(Text.REGULAR, 6, 10),
+        t(Text.REGULAR, 14, 15),
+        t(Text.REGULAR, 18, 19)
+      ),
+
+      """
+      <body>
+      <div id="header">
+      </div>
+      <div id="content">
+        <div class="sect1">
+          <h2 id="_a">A</h2>
+          <div class="sectionbody">
+            <div class="paragraph">
+              <p>b c:</p>
+            </div>
+            <div class="ulist">
+              <ul>
+              <li><p>d</p></li>
+              <li><p>e</p></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      </body>
+      """
+    );
+  }
+
 }

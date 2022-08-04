@@ -378,7 +378,11 @@ class Pass0 implements Pass1.Source, Pass2.Source {
         yield advance(LINE_START);
       }
 
-      case ' ', '\t', '\f', '\u000B' -> advance(SPACE_LIKE);
+      case ' ', '\t', '\f', '\u000B' -> {
+        boundaryStart = sourceIndex;
+
+        yield advance(SPACE_LIKE);
+      }
 
       case '*' -> advance(BOLD_END);
 
@@ -450,20 +454,14 @@ class Pass0 implements Pass1.Source, Pass2.Source {
 
   private int stateBoldOrList() {
     if (!hasChar()) {
-      add(
-        Token.BLOB, blobStart, sourceIndex,
-        Token.EOF
-      );
+      add(Token.BLOB, blobStart, sourceIndex, Token.EOF);
 
       return EOF;
     }
 
     return switch (peek()) {
       case '\n' -> {
-        add(
-          Token.BLOB, blobStart, sourceIndex,
-          Token.LF
-        );
+        add(Token.BLOB, blobStart, sourceIndex, Token.LF);
 
         yield advance(LINE_START);
       }
@@ -776,7 +774,7 @@ class Pass0 implements Pass1.Source, Pass2.Source {
       return EOF;
     }
 
-    blobStart = sourceIndex;
+    blobStart = boundaryStart = sourceIndex;
 
     return stateBlob0();
   }
@@ -941,6 +939,8 @@ class Pass0 implements Pass1.Source, Pass2.Source {
     if (!hasChar()) {
       return rollbackMacro();
     }
+
+    auxiliaryStart = sourceIndex;
 
     return switch (peek()) {
       case '\n' -> rollbackMacro();
