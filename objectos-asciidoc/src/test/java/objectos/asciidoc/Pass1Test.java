@@ -15,6 +15,9 @@
  */
 package objectos.asciidoc;
 
+import static org.testng.Assert.assertEquals;
+
+import java.util.Map;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -36,14 +39,27 @@ public class Pass1Test extends AsciiDocTest {
 
   @Override
   final void test(
-      String source, int[] expected0, int[] expected1, int[][] expected2, String expectedHtml) {
-    var s = new ArrayPass1Source(expected0);
+      String source,
+      int[] p0,
+      int[] p1, Map<String, String> docAttr,
+      int[][] p2,
+      String expectedHtml) {
+    var s = new ArrayPass1Source(source, p0);
 
     pass1.execute(s);
 
     int[] result = pass1.toCode();
 
-    testArrays(result, expected1, "Process (1) assertion failed");
+    testArrays(result, p1, "Process (1) assertion failed");
+
+    for (var entry : docAttr.entrySet()) {
+      var key = entry.getKey();
+      var expected = entry.getValue();
+
+      var actual = pass1.attribute(key);
+
+      assertEquals(actual, expected, "key=" + key);
+    }
   }
 
 }

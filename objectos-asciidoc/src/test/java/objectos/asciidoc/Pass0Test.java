@@ -15,6 +15,7 @@
  */
 package objectos.asciidoc;
 
+import java.util.Map;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -36,12 +37,16 @@ public class Pass0Test extends AsciiDocTest {
 
   @Override
   final void test(
-      String source, int[] expected0, int[] expected1, int[][] expected2, String expectedHtml) {
+      String source,
+      int[] p0,
+      int[] p1, Map<String, String> docAttr,
+      int[][] p2,
+      String expectedHtml) {
     pass0.execute(source);
 
     int[] result = pass0.toToken();
 
-    testArrays(result, expected0, "Process (0) assertion failed");
+    testArrays(result, p0, "Process (0) assertion failed");
   }
 
 }

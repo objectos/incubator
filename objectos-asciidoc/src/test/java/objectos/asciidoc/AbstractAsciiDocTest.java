@@ -15,6 +15,8 @@
  */
 package objectos.asciidoc;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
 import org.testng.annotations.BeforeClass;
 
 public abstract class AbstractAsciiDocTest {
@@ -30,6 +32,21 @@ public abstract class AbstractAsciiDocTest {
     outer._beforeClass();
   }
 
+  final Map<String, String> docAttr(String... pairs) {
+    var map = new LinkedHashMap<String, String>(pairs.length);
+
+    var index = 0;
+
+    while (index < pairs.length) {
+      var key = pairs[index++];
+      var value = pairs[index++];
+
+      map.put(key, value);
+    }
+
+    return map;
+  }
+
   final int[] p0(int... values) { return values; }
 
   final int[] p1(int... values) { return values; }
@@ -39,8 +56,12 @@ public abstract class AbstractAsciiDocTest {
   final int[] t(int... values) { return values; }
 
   final void test(
-      String source, int[] expected0, int[] expected1, int[][] expected2, String expectedHtml) {
-    outer.test(source, expected0, expected1, expected2, expectedHtml);
+      String source,
+      int[] p0,
+      int[] p1, Map<String, String> docAttr,
+      int[][] p2,
+      String expectedHtml) {
+    outer.test(source, p0, p1, docAttr, p2, expectedHtml);
   }
 
 }

@@ -87,6 +87,16 @@ class ThisProcessor implements AsciiDoc.Processor {
         </div>
         """.formatted(content);
 
+      case HEADER | PREAMBLE -> """
+        <div id="header">
+        %s
+        </div>
+
+        <div id="content">
+        %s
+        </div>
+        """.formatted(header, preamble);
+
       case HEADER | PREAMBLE | CONTENT -> """
         <div id="header">
         %s
@@ -101,7 +111,8 @@ class ThisProcessor implements AsciiDoc.Processor {
         </div>
         """.formatted(header, preamble, content);
 
-      default -> throw new UnsupportedOperationException("Implement me :: state=" + state);
+      default -> throw new UnsupportedOperationException(
+        "Implement me :: state=" + Integer.toBinaryString(state));
     };
   }
 

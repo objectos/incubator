@@ -15,6 +15,7 @@
  */
 package objectos.asciidoc;
 
+import java.util.Map;
 import org.asciidoctor.Asciidoctor;
 import org.asciidoctor.Options;
 import org.jsoup.Jsoup;
@@ -43,7 +44,11 @@ public class AsciidoctorTest extends AsciiDocTest {
 
   @Override
   final void test(
-      String source, int[] expected0, int[] expected1, int[][] expected2, String expectedHtml) {
+      String source,
+      int[] p0,
+      int[] p1, Map<String, String> docAttr,
+      int[][] p2,
+      String expectedHtml) {
     var html = asciidoctor.convert(source, options);
 
     var document = Jsoup.parse(html);

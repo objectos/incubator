@@ -17,66 +17,84 @@ package objectos.asciidoc;
 
 import org.testng.annotations.Test;
 
-class InlineMacroTest extends AbstractAsciiDocTest {
+public class DocumentAttributeTest extends AbstractAsciiDocTest {
 
-  InlineMacroTest(AsciiDocTest outer) { super(outer); }
+  DocumentAttributeTest(AsciiDocTest outer) { super(outer); }
 
   @Test(description = //
   """
-  https link
+  Objectos Docs v0002/index doc header
 
-            1         2
-  012345678901234567890123
+  0123
+  456789
+  012345
+  6
+  78
   '''
-  https://example.com[Ex]
+  = a
+  :b: c
+  :d: e
+
+  f
   '''
 
-  P0: IM-0,5 T-6,19 [ AVAL20,22 ] LF
+  P0: H1-0,2 B2,3 LF
+      AN5,6 AV8,9 LF
+      AN11,12 AV14,15 LF
+      LF
+      B17,18 LF
       EOF
   """)
   public void testCase01() {
     test(
       """
-      https://example.com[Ex]
+      = a
+      :b: c
+      :d: e
+
+      f
       """,
 
       p0(
-        Token.INLINE_MACRO, 0, 5,
-        Token.BLOB, 6, 19,
-        Token.ATTR_LIST_START,
-        Token.ATTR_VALUE, 20, 22,
-        Token.ATTR_LIST_END,
+        Token.HEADING, 1, 0, 2, Token.BLOB, 2, 3, Token.LF,
+        Token.DOCATTR, 5, 6, Token.BLOB, 8, 9, Token.LF,
+        Token.DOCATTR, 11, 12, Token.BLOB, 14, 15, Token.LF,
         Token.LF,
-
+        Token.BLOB, 17, 18, Token.LF,
         Token.EOF
       ),
 
       p1(
         Code.DOCUMENT_START,
+        Code.HEADING_START, 1,
+        Code.TOKENS, 4, 7,
+        Code.HEADING_END,
         Code.PREAMBLE_START,
         Code.PARAGRAPH_START,
-        Code.INLINE_MACRO, 0, 5,
-        Code.MACRO_TARGET, 6, 19,
-        Code.ATTR_POSITIONAL, 1, 20, 22,
-        Code.TOKENS, 11, 12,
+        Code.TOKENS, 23, 27,
         Code.PARAGRAPH_END,
         Code.PREAMBLE_END,
         Code.DOCUMENT_END
       ),
 
-      docAttr(),
+      docAttr(
+        "b", "c",
+        "d", "e"
+      ),
 
       p2(
-        t()
+        t(Text.REGULAR, 2, 3),
+        t(Text.REGULAR, 17, 18)
       ),
 
       """
       <body>
       <div id="header">
+      <h1>a</h1>
       </div>
       <div id="content">
       <div class="paragraph">
-      <p><a href="https://example.com">Ex</a></p>
+      <p>f</p>
       </div>
       </div>
       </body>

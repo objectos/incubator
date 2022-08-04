@@ -16,7 +16,9 @@
 package objectos.asciidoc;
 
 import java.util.Arrays;
+import java.util.Map;
 import objectos.lang.Check;
+import objectos.util.GrowableMap;
 import objectos.util.IntArrays;
 
 class Pass1 {
@@ -25,6 +27,8 @@ class Pass1 {
     boolean hasToken();
 
     int nextToken();
+
+    String substring(int start, int end);
 
     int tokenCursor();
   }
@@ -58,11 +62,17 @@ class Pass1 {
 
   private int attrCount;
 
+  private String attributeName;
+
+  private final StringBuilder attributeValue = new StringBuilder();
+
   private int[] code;
 
   private int codeCursor;
 
   private int codeIndex;
+
+  private final Map<String, String> docattr = new GrowableMap<>();
 
   private int[] list;
 
@@ -106,6 +116,8 @@ class Pass1 {
 
     codeIndex = 0;
 
+    docattr.clear();
+
     listIndex = -1;
 
     sectionIndex = -1;
@@ -115,6 +127,10 @@ class Pass1 {
     execute0();
 
     codeCursor = 0;
+  }
+
+  final String attribute(String key) {
+    return docattr.get(key);
   }
 
   final int codeAt(int index) {
@@ -239,6 +255,8 @@ class Pass1 {
 
         case Token.INLINE_MACRO -> parseInlineMacro(next(), next());
 
+        case Token.DOCATTR -> parseDocattr(next(), next());
+
         default -> throw new UnsupportedOperationException("Implement me :: token=" + token);
       };
     }
@@ -304,6 +322,14 @@ class Pass1 {
 
   private int parseBlob(int start, int end) {
     return switch (state) {
+      case DOCUMENT | METADATA -> {
+        var s = source.substring(start, end);
+
+        attributeValue.append(s);
+
+        yield state;
+      }
+
       case PREAMBLE | PARAGRAPH | INLINE_MACRO | START -> {
         add(Code.MACRO_TARGET, start, end);
 
@@ -311,6 +337,20 @@ class Pass1 {
       }
 
       default -> parseTokens(start, end);
+    };
+  }
+
+  private int parseDocattr(int start, int end) {
+    return switch (state) {
+      case MAYBE | DOCUMENT | METADATA -> {
+        attributeName = source.substring(start, end);
+
+        attributeValue.setLength(0);
+
+        yield DOCUMENT | METADATA;
+      }
+
+      default -> uoe();
     };
   }
 
@@ -396,6 +436,14 @@ class Pass1 {
 
       case MAYBE | DOCUMENT | METADATA -> MAYBE | PREAMBLE;
 
+      case DOCUMENT | METADATA -> {
+        var value = attributeValue.toString();
+
+        docattr.put(attributeName, value);
+
+        yield MAYBE | DOCUMENT | METADATA;
+      }
+
       case PREAMBLE -> state;
 
       case PREAMBLE | LISTING_BLOCK | START -> state;
@@ -440,6 +488,24 @@ class Pass1 {
       default -> uoe();
     };
   }
+
+  /*
+
+  @startuml
+  hide empty description
+  
+  [*] --> MAYBE
+  
+  MAYBE --> PREAMBLE..LISTING_BLOCK..START : \----
+  PREAMBLE..LISTING_BLOCK..START --> PREAMBLE..LISTING_BLOCK : \\n \n tokenStart=tokenIndex
+  PREAMBLE..LISTING_BLOCK --> PREAMBLE..LISTING_BLOCK : blob
+  PREAMBLE..LISTING_BLOCK --> PREAMBLE..LISTING_BLOCK..NL : \\n
+  PREAMBLE..LISTING_BLOCK..NL --> PREAMBLE..LISTING_BLOCK : blob
+  PREAMBLE..LISTING_BLOCK..NL --> PREAMBLE : \----
+
+  @enduml
+  
+   */
 
   private int parseLineEndEof() {
     return switch (state) {
@@ -511,24 +577,6 @@ class Pass1 {
       default -> uoe();
     };
   }
-
-  /*
-  
-  @startuml
-  hide empty description
-
-  [*] --> MAYBE
-
-  MAYBE --> PREAMBLE..LISTING_BLOCK..START : \----
-  PREAMBLE..LISTING_BLOCK..START --> PREAMBLE..LISTING_BLOCK : \\n \n tokenStart=tokenIndex
-  PREAMBLE..LISTING_BLOCK --> PREAMBLE..LISTING_BLOCK : blob
-  PREAMBLE..LISTING_BLOCK --> PREAMBLE..LISTING_BLOCK..NL : \\n
-  PREAMBLE..LISTING_BLOCK..NL --> PREAMBLE..LISTING_BLOCK : blob
-  PREAMBLE..LISTING_BLOCK..NL --> PREAMBLE : \----
-  
-  @enduml
-
-   */
 
   private int parseListingBlockDelim(int dashes) {
     return switch (state) {

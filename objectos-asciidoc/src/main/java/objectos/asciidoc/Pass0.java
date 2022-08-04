@@ -57,6 +57,10 @@ class Pass0 implements Pass1.Source, Pass2.Source {
   private static final int MACRO_ANY_START = 19;
   private static final int MACRO_INLINE = 20;
 
+  private static final int DOCATTR_NAME = 21;
+  private static final int DOCATTR_NAME_NEXT = 22;
+  private static final int DOCATTR_VALUE = 23;
+
   private String source;
 
   private int sourceIndex;
@@ -71,13 +75,15 @@ class Pass0 implements Pass1.Source, Pass2.Source {
 
   private int counter;
 
-  private int lineStart;
+  // aux states
+
+  private int auxiliaryStart;
 
   private int blobStart;
 
   private int boundaryStart;
 
-  private int auxiliaryStart;
+  private int lineStart;
 
   Pass0() {
     token = new int[512];
@@ -117,6 +123,11 @@ class Pass0 implements Pass1.Source, Pass2.Source {
 
   @Override
   public final int nextToken() { return token[tokenCursor++]; }
+
+  @Override
+  public final String substring(int start, int end) {
+    return source.substring(start, end);
+  }
 
   @Override
   public final int token(int index) { return token[index]; }
@@ -273,6 +284,12 @@ class Pass0 implements Pass1.Source, Pass2.Source {
       case MACRO_ANY_START -> stateMacroAnyStart();
 
       case MACRO_INLINE -> stateMacroInline();
+
+      case DOCATTR_NAME -> stateDocattrName();
+
+      case DOCATTR_NAME_NEXT -> stateDocattrNameNext();
+
+      case DOCATTR_VALUE -> stateDocattrValue();
 
       default -> uoe();
     };
@@ -468,20 +485,14 @@ class Pass0 implements Pass1.Source, Pass2.Source {
 
   private int stateBoldStart() {
     if (!hasChar()) {
-      add(
-        Token.BLOB, blobStart, sourceIndex,
-        Token.EOF
-      );
+      add(Token.BLOB, blobStart, sourceIndex, Token.EOF);
 
       return EOF;
     }
 
     return switch (peek()) {
       case '\n' -> {
-        add(
-          Token.BLOB, blobStart, sourceIndex,
-          Token.LF
-        );
+        add(Token.BLOB, blobStart, sourceIndex, Token.LF);
 
         yield advance(LINE_START);
       }
@@ -497,6 +508,75 @@ class Pass0 implements Pass1.Source, Pass2.Source {
 
         add(Token.BOLD_START, endIndex);
 
+        blobStart = sourceIndex;
+
+        yield advance(BLOB);
+      }
+    };
+  }
+
+  private int stateDocattrName() {
+    if (!hasChar()) {
+      add(Token.BLOB, blobStart, sourceIndex, Token.EOF);
+
+      return EOF;
+    }
+
+    var c = peek();
+
+    var next = stateDocattrNameIs(c) ? DOCATTR_NAME_NEXT : BLOB;
+
+    return advance(next);
+  }
+
+  private boolean stateDocattrNameIs(char c) {
+    return ('a' <= c && c <= 'z')
+        || (c == '_')
+        || ('A' <= c && c <= 'Z')
+        || ('0' <= c && c <= '9');
+  }
+
+  private int stateDocattrNameNext() {
+    if (!hasChar()) {
+      add(Token.BLOB, blobStart, sourceIndex, Token.EOF);
+
+      return EOF;
+    }
+
+    var c = peek();
+
+    if (c == ':') {
+      add(Token.DOCATTR, lineStart + 1, sourceIndex);
+
+      return advance(DOCATTR_VALUE);
+    } else if (stateDocattrNameNextIs(c)) {
+      return advance(state);
+    } else {
+      return advance(BLOB);
+    }
+  }
+
+  private boolean stateDocattrNameNextIs(char c) {
+    return (c == '-') || stateDocattrNameIs(c);
+  }
+
+  private int stateDocattrValue() {
+    if (!hasChar()) {
+      add(Token.EOF);
+
+      return EOF;
+    }
+
+    return switch (peek()) {
+      case '\n' -> {
+        add(Token.LF);
+
+        yield advance(LINE_START);
+      }
+
+      case ' ', '\t', '\f', '\u000B' -> advance(state);
+
+      default -> {
         blobStart = sourceIndex;
 
         yield advance(BLOB);
@@ -643,6 +723,8 @@ class Pass0 implements Pass1.Source, Pass2.Source {
 
         yield advance(LISTING_BLOCK_OR_LIST);
       }
+
+      case ':' -> advance(DOCATTR_NAME);
 
       case '=' -> {
         counter = 1;

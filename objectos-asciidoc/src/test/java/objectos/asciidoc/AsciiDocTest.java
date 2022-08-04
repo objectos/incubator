@@ -18,6 +18,8 @@ package objectos.asciidoc;
 import static org.testng.Assert.assertEquals;
 
 import java.util.Arrays;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -43,6 +45,7 @@ public class AsciiDocTest {
   @Factory
   public Object[] _factory() {
     return new Object[] {
+        new DocumentAttributeTest(this),
         new InlineMacroTest(this)
     };
   }
@@ -97,6 +100,8 @@ public class AsciiDocTest {
         Code.PREAMBLE_END,
         Code.DOCUMENT_END
       ),
+
+      docAttr(),
 
       p2(
         t(
@@ -180,6 +185,8 @@ public class AsciiDocTest {
         Code.DOCUMENT_END
       ),
 
+      docAttr(),
+
       p2(
         t(
           Text.BOLD_START,
@@ -247,6 +254,8 @@ public class AsciiDocTest {
         Code.DOCUMENT_END
       ),
 
+      docAttr(),
+
       p2(
         t(Text.REGULAR, 2, 14)
       ),
@@ -302,6 +311,8 @@ public class AsciiDocTest {
         Code.HEADING_END,
         Code.DOCUMENT_END
       ),
+
+      docAttr(),
 
       p2(
         t(Text.REGULAR, 2, 14)
@@ -360,6 +371,8 @@ public class AsciiDocTest {
         Code.PREAMBLE_END,
         Code.DOCUMENT_END
       ),
+
+      docAttr(),
 
       p2(
         t(Text.REGULAR, 0, 10)
@@ -429,6 +442,8 @@ public class AsciiDocTest {
         Code.PREAMBLE_END,
         Code.DOCUMENT_END
       ),
+
+      docAttr(),
 
       p2(
         t(
@@ -511,6 +526,8 @@ public class AsciiDocTest {
         Code.DOCUMENT_END
       ),
 
+      docAttr(),
+
       p2(
         t(
           Text.ITALIC_START,
@@ -590,6 +607,8 @@ public class AsciiDocTest {
         Code.DOCUMENT_END
       ),
 
+      docAttr(),
+
       p2(),
 
       """
@@ -658,6 +677,8 @@ public class AsciiDocTest {
         Code.PREAMBLE_END,
         Code.DOCUMENT_END
       ),
+
+      docAttr(),
 
       p2(
         t(
@@ -740,6 +761,8 @@ public class AsciiDocTest {
         Code.PREAMBLE_END,
         Code.DOCUMENT_END
       ),
+
+      docAttr(),
 
       p2(
         t(
@@ -932,6 +955,8 @@ public class AsciiDocTest {
         Code.DOCUMENT_END
       ),
 
+      docAttr(),
+
       p2(
         t(Text.REGULAR, 2, 5),
         t(Text.REGULAR, 7, 12),
@@ -1097,6 +1122,8 @@ public class AsciiDocTest {
         Code.DOCUMENT_END
       ),
 
+      docAttr(),
+
       p2(
         t(Text.REGULAR, 2, 5),
         t(Text.REGULAR, 7, 12),
@@ -1200,6 +1227,8 @@ public class AsciiDocTest {
         Code.DOCUMENT_END
       ),
 
+      docAttr(),
+
       p2(
         t(Text.REGULAR, 9, 11),
         t(Text.REGULAR, 13, 18)
@@ -1287,6 +1316,8 @@ public class AsciiDocTest {
         Code.PREAMBLE_END,
         Code.DOCUMENT_END
       ),
+
+      docAttr(),
 
       p2(),
 
@@ -1379,6 +1410,8 @@ public class AsciiDocTest {
         Code.DOCUMENT_END
       ),
 
+      docAttr(),
+
       p2(),
 
       """
@@ -1466,6 +1499,8 @@ public class AsciiDocTest {
         Code.DOCUMENT_END
       ),
 
+      docAttr(),
+
       p2(
         t(Text.REGULAR, 2, 3),
         t(Text.REGULAR, 6, 7),
@@ -1547,6 +1582,8 @@ public class AsciiDocTest {
         Code.DOCUMENT_END
       ),
 
+      docAttr(),
+
       p2(
         t(Text.REGULAR, 2, 7),
         t(Text.REGULAR, 10, 15)
@@ -1622,6 +1659,8 @@ public class AsciiDocTest {
         Code.PREAMBLE_END,
         Code.DOCUMENT_END
       ),
+
+      docAttr(),
 
       p2(
         t(Text.REGULAR, 2, 3),
@@ -1709,6 +1748,8 @@ public class AsciiDocTest {
         Code.PREAMBLE_END,
         Code.DOCUMENT_END
       ),
+
+      docAttr(),
 
       p2(
         t(Text.REGULAR, 2, 3),
@@ -1803,6 +1844,8 @@ public class AsciiDocTest {
         Code.DOCUMENT_END
       ),
 
+      docAttr(),
+
       p2(
         t(Text.REGULAR, 2, 3),
         t(Text.REGULAR, 8, 9),
@@ -1842,7 +1885,11 @@ public class AsciiDocTest {
   }
 
   void test(
-      String source, int[] expected0, int[] expected1, int[][] expected2, String expectedHtml) {
+      String source,
+      int[] p0,
+      int[] p1, Map<String, String> docAttr,
+      int[][] p2,
+      String expectedHtml) {
     asciiDoc.process(source, processor);
 
     var result = processor.toString();
@@ -1864,6 +1911,21 @@ public class AsciiDocTest {
 
   final void testHtml(String result, String expected) {
     assertEquals(normalize(result), normalize(expected));
+  }
+
+  private Map<String, String> docAttr(String... pairs) {
+    var map = new LinkedHashMap<String, String>(pairs.length);
+
+    var index = 0;
+
+    while (index < pairs.length) {
+      var key = pairs[index++];
+      var value = pairs[index++];
+
+      map.put(key, value);
+    }
+
+    return map;
   }
 
   private int[] p0(int... values) { return values; }
