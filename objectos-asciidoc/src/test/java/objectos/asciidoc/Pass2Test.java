@@ -44,6 +44,10 @@ public class Pass2Test extends AsciiDocTest {
       int[] p1, Map<String, String> docAttr,
       int[][] p2,
       String expectedHtml) {
+    if (p2 == null) {
+      return;
+    }
+
     var s = new ArrayPass2Source(p0);
 
     var index = 0;

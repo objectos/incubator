@@ -55,15 +55,18 @@ class Pass0 implements Pass1.Source, Pass2.Source {
   private static final int LITERAL_OR_LIST = 18;
 
   private static final int MACRO_ANY_START = 19;
-  private static final int MACRO_INLINE = 20;
+  private static final int MACRO_INLINE_START = 20;
+  private static final int MACRO_INLINE = 21;
 
-  private static final int DOCATTR_NAME = 21;
-  private static final int DOCATTR_NAME_NEXT = 22;
-  private static final int DOCATTR_VALUE = 23;
+  private static final int DOCATTR_NAME = 22;
+  private static final int DOCATTR_NAME_NEXT = 23;
+  private static final int DOCATTR_VALUE = 24;
 
   private String source;
 
   private int sourceIndex;
+
+  private int sourceRollback;
 
   private int state;
 
@@ -72,6 +75,8 @@ class Pass0 implements Pass1.Source, Pass2.Source {
   private int tokenCursor;
 
   private int tokenIndex;
+
+  private int tokenRollback;
 
   private int counter;
 
@@ -239,8 +244,17 @@ class Pass0 implements Pass1.Source, Pass2.Source {
     return BLOB;
   }
 
-  private void rollbackMacro(int token) {
-    throw new UnsupportedOperationException("Implement me");
+  private int rollbackMacro() {
+    return rollbackMacro(0);
+  }
+
+  private int rollbackMacro(int skip) {
+    sourceIndex = sourceRollback;
+    sourceIndex += skip + 1; // skips initial ':' + additional skips
+
+    tokenIndex = tokenRollback;
+
+    return BLOB;
   }
 
   private int state(int state) {
@@ -282,6 +296,8 @@ class Pass0 implements Pass1.Source, Pass2.Source {
       case LITERAL_OR_LIST -> stateLiteralOrList();
 
       case MACRO_ANY_START -> stateMacroAnyStart();
+
+      case MACRO_INLINE_START -> stateMacroInlineStart();
 
       case MACRO_INLINE -> stateMacroInline();
 
@@ -346,10 +362,7 @@ class Pass0 implements Pass1.Source, Pass2.Source {
 
   private int stateBlob() {
     if (!hasChar()) {
-      add(
-        Token.BLOB, blobStart, sourceIndex,
-        Token.EOF
-      );
+      add(Token.BLOB, blobStart, sourceIndex, Token.EOF);
 
       return EOF;
     }
@@ -360,10 +373,7 @@ class Pass0 implements Pass1.Source, Pass2.Source {
   private int stateBlob0() {
     return switch (peek()) {
       case '\n' -> {
-        add(
-          Token.BLOB, blobStart, sourceIndex,
-          Token.LF
-        );
+        add(Token.BLOB, blobStart, sourceIndex, Token.LF);
 
         yield advance(LINE_START);
       }
@@ -373,11 +383,14 @@ class Pass0 implements Pass1.Source, Pass2.Source {
       case '*' -> advance(BOLD_END);
 
       case ':' -> {
-        // rollback index
-        tokenCursor = tokenIndex;
+        sourceRollback = sourceIndex;
+        tokenRollback = tokenIndex;
 
         if (boundaryStart != lineStart) {
-          throw new UnsupportedOperationException("Implement me");
+          // if this is a macro then it must be inline, otherwise error?
+          add(Token.INLINE_MACRO, boundaryStart, sourceIndex);
+
+          yield advance(MACRO_INLINE_START);
         }
 
         // assume inline macro for now
@@ -883,19 +896,13 @@ class Pass0 implements Pass1.Source, Pass2.Source {
 
   private int stateMacroAnyStart() {
     if (!hasChar()) {
-      rollbackMacro(Token.EOF);
-
-      return EOF;
+      return rollbackMacro();
     }
 
     auxiliaryStart = sourceIndex;
 
     return switch (peek()) {
-      case '\n' -> {
-        rollbackMacro(Token.LF);
-
-        yield advance(LINE_START);
-      }
+      case '\n' -> rollbackMacro();
 
       case ':' -> {
         // replace Token.INLINE_MACRO
@@ -909,17 +916,11 @@ class Pass0 implements Pass1.Source, Pass2.Source {
 
   private int stateMacroInline() {
     if (!hasChar()) {
-      rollbackMacro(Token.EOF);
-
-      return EOF;
+      return rollbackMacro();
     }
 
     return switch (peek()) {
-      case '\n' -> {
-        rollbackMacro(Token.LF);
-
-        yield advance(LINE_START);
-      }
+      case '\n' -> rollbackMacro();
 
       case '[' -> {
         add(
@@ -933,6 +934,20 @@ class Pass0 implements Pass1.Source, Pass2.Source {
       }
 
       default -> advance(state);
+    };
+  }
+
+  private int stateMacroInlineStart() {
+    if (!hasChar()) {
+      return rollbackMacro();
+    }
+
+    return switch (peek()) {
+      case '\n' -> rollbackMacro();
+
+      case ':' -> rollbackMacro(1);
+
+      default -> advance(MACRO_INLINE);
     };
   }
 

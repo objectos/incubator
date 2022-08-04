@@ -42,6 +42,10 @@ public class Pass0Test extends AsciiDocTest {
       int[] p1, Map<String, String> docAttr,
       int[][] p2,
       String expectedHtml) {
+    if (p0 == null) {
+      return;
+    }
+
     pass0.execute(source);
 
     int[] result = pass0.toToken();

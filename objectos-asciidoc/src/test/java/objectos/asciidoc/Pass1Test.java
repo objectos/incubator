@@ -44,6 +44,10 @@ public class Pass1Test extends AsciiDocTest {
       int[] p1, Map<String, String> docAttr,
       int[][] p2,
       String expectedHtml) {
+    if (p1 == null) {
+      return;
+    }
+
     var s = new ArrayPass1Source(source, p0);
 
     pass1.execute(s);

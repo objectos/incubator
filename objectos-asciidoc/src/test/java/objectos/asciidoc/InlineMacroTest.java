@@ -84,4 +84,72 @@ class InlineMacroTest extends AbstractAsciiDocTest {
     );
   }
 
+  @Test(description = //
+  """
+  Not an inline macro
+
+  0123456789
+  0
+  1234
+  '''
+  see this:
+
+  foo
+  '''
+
+  P0: B0,9 LF
+      LF
+      B11,14 LF
+      EOF
+  """)
+  public void testCase02() {
+    test(
+      """
+      see this:
+
+      foo
+      """,
+
+      p0(
+        Token.BLOB, 0, 9, Token.LF,
+        Token.LF,
+        Token.BLOB, 11, 14, Token.LF,
+
+        Token.EOF
+      ),
+
+      p1(
+        Code.DOCUMENT_START,
+        Code.PREAMBLE_START,
+        Code.PARAGRAPH_START,
+        Code.TOKENS, 0, 4,
+        Code.PARAGRAPH_END,
+        Code.PARAGRAPH_START,
+        Code.TOKENS, 5, 9,
+        Code.PARAGRAPH_END,
+        Code.PREAMBLE_END,
+        Code.DOCUMENT_END
+      ),
+
+      docAttr(),
+
+      skip(p2()),
+
+      """
+      <body>
+      <div id="header">
+      </div>
+      <div id="content">
+      <div class="paragraph">
+      <p>see this:</p>
+      </div>
+      <div class="paragraph">
+      <p>foo</p>
+      </div>
+      </div>
+      </body>
+      """
+    );
+  }
+
 }

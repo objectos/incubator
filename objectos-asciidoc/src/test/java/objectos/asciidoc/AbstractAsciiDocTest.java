@@ -53,6 +53,10 @@ public abstract class AbstractAsciiDocTest {
 
   final int[][] p2(int[]... values) { return values; }
 
+  final <T> T skip(T value) {
+    return null;
+  }
+
   final int[] t(int... values) { return values; }
 
   final void test(
