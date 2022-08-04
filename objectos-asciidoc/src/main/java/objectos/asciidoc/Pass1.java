@@ -204,18 +204,6 @@ class Pass1 {
     code[codeIndex++] = p5;
   }
 
-  private void add(int p0, int p1, int p2, int p3, int p4, int p5, int p6) {
-    code = IntArrays.copyIfNecessary(code, codeIndex + 7);
-
-    code[codeIndex++] = p0;
-    code[codeIndex++] = p1;
-    code[codeIndex++] = p2;
-    code[codeIndex++] = p3;
-    code[codeIndex++] = p4;
-    code[codeIndex++] = p5;
-    code[codeIndex++] = p6;
-  }
-
   private void execute0() {
     add(Code.DOCUMENT_START);
 
@@ -264,6 +252,8 @@ class Pass1 {
     if (state != EOF) {
       throw new UnsupportedOperationException("Implement me :: state=" + state);
     }
+
+    add(Code.DOCUMENT_END);
   }
 
   private boolean hasNext() {
@@ -357,53 +347,37 @@ class Pass1 {
   private int parseHeading(int level, int start, int end) {
     return switch (state) {
       case MAYBE -> {
-        add(Code.HEADING_START, level);
+        if (level == 1) {
+          add(Code.HEADING_START, level);
 
-        yield DOCUMENT | HEADING;
+          yield DOCUMENT | HEADING;
+        } else {
+          yield parseHeadingSection(level);
+        }
       }
 
-      case MAYBE | ATTR -> {
-        var section = level - 1;
-
-        pushSection(section);
-
-        add(
-          Code.SECTION_START, section,
-          Code.HEADING_START, level
-        );
-
-        yield SECTION | HEADING;
-      }
+      case MAYBE | ATTR -> parseHeadingSection(level);
 
       case PREAMBLE -> {
-        var section = level - 1;
+        add(Code.PREAMBLE_END);
 
-        pushSection(section);
-
-        add(
-          Code.PREAMBLE_END,
-          Code.SECTION_START, section,
-          Code.HEADING_START, level
-        );
-
-        yield SECTION | HEADING;
+        yield parseHeadingSection(level);
       }
 
-      case SECTION -> {
-        var section = level - 1;
-
-        pushSection(section);
-
-        add(
-          Code.SECTION_START, section,
-          Code.HEADING_START, level
-        );
-
-        yield SECTION | HEADING;
-      }
+      case SECTION -> parseHeadingSection(level);
 
       default -> uoe();
     };
+  }
+
+  private int parseHeadingSection(int level) {
+    var section = level - 1;
+
+    pushSection(section);
+
+    add(Code.SECTION_START, section, Code.HEADING_START, level);
+
+    return SECTION | HEADING;
   }
 
   private int parseInlineMacro(int start, int end) {
@@ -485,6 +459,8 @@ class Pass1 {
         yield SECTION;
       }
 
+      case SECTION | ULIST -> SECTION | ULIST | NL;
+
       default -> uoe();
     };
   }
@@ -510,23 +486,15 @@ class Pass1 {
   private int parseLineEndEof() {
     return switch (state) {
       case DOCUMENT | HEADING -> {
-        add(
-          Code.TOKENS, tokenStart, tokenIndex,
-          Code.HEADING_END,
-          Code.DOCUMENT_END
-        );
+        add(Code.TOKENS, tokenStart, tokenIndex, Code.HEADING_END);
 
         yield EOF;
       }
 
-      case MAYBE | DOCUMENT | METADATA -> {
-        add(Code.DOCUMENT_END);
-
-        yield EOF;
-      }
+      case MAYBE | DOCUMENT | METADATA -> EOF;
 
       case PREAMBLE -> {
-        add(Code.PREAMBLE_END, Code.DOCUMENT_END);
+        add(Code.PREAMBLE_END);
 
         yield EOF;
       }
@@ -535,28 +503,13 @@ class Pass1 {
         add(
           Code.TOKENS, tokenStart, tokenIndex,
           Code.PARAGRAPH_END,
-          Code.PREAMBLE_END,
-          Code.DOCUMENT_END
+          Code.PREAMBLE_END
         );
 
         yield EOF;
       }
 
-      case PREAMBLE | ULIST | NL -> {
-        var tokenEnd = tokenIndex - 1; // ignore NL
-
-        popList();
-
-        add(
-          Code.TOKENS, tokenStart, tokenEnd,
-          Code.LI_END,
-          Code.ULIST_END,
-          Code.PREAMBLE_END,
-          Code.DOCUMENT_END
-        );
-
-        yield EOF;
-      }
+      case PREAMBLE | ULIST | NL -> parseLineEndEofUlistNl(Code.PREAMBLE_END);
 
       case SECTION | PARAGRAPH | NL -> {
         add(
@@ -569,13 +522,28 @@ class Pass1 {
           add(Code.SECTION_END);
         }
 
-        add(Code.DOCUMENT_END);
-
         yield EOF;
       }
 
+      case SECTION | ULIST | NL -> parseLineEndEofUlistNl(Code.SECTION_END);
+
       default -> uoe();
     };
+  }
+
+  private int parseLineEndEofUlistNl(int lastCode) {
+    var tokenEnd = tokenIndex - 1; // ignore NL
+
+    popList();
+
+    add(
+      Code.TOKENS, tokenStart, tokenEnd,
+      Code.LI_END,
+      Code.ULIST_END,
+      lastCode
+    );
+
+    return EOF;
   }
 
   private int parseListingBlockDelim(int dashes) {
@@ -689,6 +657,12 @@ class Pass1 {
         yield state;
       }
 
+      case SECTION | ULIST | START -> {
+        tokenStart = tokenIndex;
+
+        yield SECTION | ULIST;
+      }
+
       default -> uoe();
     };
   }
@@ -703,38 +677,17 @@ class Pass1 {
         yield PREAMBLE | ULIST | START;
       }
 
-      case PREAMBLE | ULIST | NL -> {
-        var prevSymbol = peekListSymbol();
-        var prevCount = peekListCount();
+      case PREAMBLE | ULIST | NL -> parseUlistNl(symbol, count, PREAMBLE | ULIST | START);
 
-        var tokenEnd = tokenIndex - 1; // ignore NL
+      case SECTION -> {
+        add(Code.ULIST_START, Code.LI_START);
 
-        add(Code.TOKENS, tokenStart, tokenEnd);
+        pushList(symbol, count);
 
-        if (prevSymbol == symbol) {
-          if (prevCount == count) {
-            add(Code.LI_END, Code.LI_START);
-          }
-
-          else if (prevCount < count) {
-            pushList(symbol, count);
-
-            add(Code.ULIST_START, Code.LI_START);
-          }
-
-          else {
-            popList();
-
-            add(Code.LI_END, Code.ULIST_END, Code.LI_END, Code.LI_START);
-          }
-        } else {
-          pushList(symbol, count);
-
-          add(Code.LI_END, Code.ULIST_START, Code.LI_START);
-        }
-
-        yield PREAMBLE | ULIST | START;
+        yield SECTION | ULIST | START;
       }
+
+      case SECTION | ULIST | NL -> parseUlistNl(symbol, count, SECTION | ULIST | START);
 
       default -> uoe();
     };
@@ -746,6 +699,39 @@ class Pass1 {
 
   private int parseUlistHyphen(int start, int end) {
     return parseUlist('-', 1);
+  }
+
+  private int parseUlistNl(char symbol, int count, int nextState) {
+    var prevSymbol = peekListSymbol();
+    var prevCount = peekListCount();
+
+    var tokenEnd = tokenIndex - 1; // ignore NL
+
+    add(Code.TOKENS, tokenStart, tokenEnd);
+
+    if (prevSymbol == symbol) {
+      if (prevCount == count) {
+        add(Code.LI_END, Code.LI_START);
+      }
+
+      else if (prevCount < count) {
+        pushList(symbol, count);
+
+        add(Code.ULIST_START, Code.LI_START);
+      }
+
+      else {
+        popList();
+
+        add(Code.LI_END, Code.ULIST_END, Code.LI_END, Code.LI_START);
+      }
+    } else {
+      pushList(symbol, count);
+
+      add(Code.LI_END, Code.ULIST_START, Code.LI_START);
+    }
+
+    return nextState;
   }
 
   private int peekListCount() {
