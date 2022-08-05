@@ -15,14 +15,34 @@
  */
 package objectos.asciidoc;
 
+import java.util.HashMap;
 import java.util.Map;
 import org.asciidoctor.Asciidoctor;
 import org.asciidoctor.Options;
+import org.asciidoctor.ast.ContentNode;
+import org.asciidoctor.extension.InlineMacroProcessor;
+import org.asciidoctor.extension.Name;
 import org.jsoup.Jsoup;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 public class AsciidoctorTest extends AsciiDocTest {
+
+  @Name("i")
+  static final class IInlineMacro extends InlineMacroProcessor {
+    @Override
+    public final Object process(ContentNode parent, String target, Map<String, Object> attributes) {
+      var href = target;
+
+      var text = (String) attributes.get("1");
+
+      var options = new HashMap<String, Object>();
+      options.put("type", ":link");
+      options.put("target", href);
+
+      return createPhraseNode(parent, "anchor", text, attributes, options);
+    }
+  }
 
   private Asciidoctor asciidoctor;
 
@@ -32,6 +52,10 @@ public class AsciidoctorTest extends AsciiDocTest {
   @Override
   public void _beforeClass() {
     asciidoctor = Asciidoctor.Factory.create();
+
+    var registry = asciidoctor.javaExtensionRegistry();
+
+    registry.inlineMacro(new IInlineMacro());
 
     options = Options.builder()
         .headerFooter(true)

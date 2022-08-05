@@ -15,6 +15,8 @@
  */
 package objectos.asciidoc;
 
+import objectos.util.UnmodifiableMap;
+
 class ThisProcessor implements AsciiDoc.Processor {
 
   private static final int START = 0;
@@ -188,6 +190,23 @@ class ThisProcessor implements AsciiDoc.Processor {
     };
 
     this.level = level;
+  }
+
+  @Override
+  public final void inlineMacro(
+      String name, String target, UnmodifiableMap<String, String> attributes) {
+    switch (name) {
+      case "i" -> {
+        var href = target;
+        var text = attributes.getOrDefault("1", "");
+
+        sb.append("<a href=\"");
+        sb.append(href);
+        sb.append("\">");
+        sb.append(text);
+        sb.append("</a>");
+      }
+    }
   }
 
   @Override

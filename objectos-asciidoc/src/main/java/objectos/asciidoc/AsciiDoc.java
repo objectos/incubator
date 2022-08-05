@@ -15,9 +15,9 @@
  */
 package objectos.asciidoc;
 
-import java.util.HashMap;
-import java.util.Map;
 import objectos.lang.Check;
+import objectos.util.GrowableMap;
+import objectos.util.UnmodifiableMap;
 
 public class AsciiDoc {
 
@@ -34,6 +34,8 @@ public class AsciiDoc {
     void headingEnd();
 
     void headingStart(int level);
+
+    void inlineMacro(String name, String target, UnmodifiableMap<String, String> attributes);
 
     void italicEnd();
 
@@ -111,7 +113,7 @@ public class AsciiDoc {
 
   private int attrEnd;
 
-  private final Map<String, String> attrMap = new HashMap<>();
+  private final GrowableMap<String, String> attrMap = new GrowableMap<>();
 
   private AsciiDoc() {
   }
@@ -227,8 +229,14 @@ public class AsciiDoc {
     switch (name) {
       case "https" -> processInlineMacroUrl(name, target);
 
-      default -> throw new UnsupportedOperationException("Implement me :: inlinemacro=" + name);
+      default -> processInlineMacroAny(name, target);
     }
+  }
+
+  private void processInlineMacroAny(String name, String target) {
+    var copy = attrMap.toUnmodifiableMap();
+
+    processor.inlineMacro(name, target, copy);
   }
 
   private void processInlineMacroAttrMap() {

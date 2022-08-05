@@ -152,7 +152,7 @@ final class InlineMacroTest extends AbstractAsciiDocTest {
     );
   }
 
-  @Test(enabled = false, description = //
+  @Test(description = //
   """
   inline macro
 
@@ -200,28 +200,22 @@ final class InlineMacroTest extends AbstractAsciiDocTest {
         Code.DOCUMENT_START,
         Code.SECTION_START, 1,
         Code.HEADING_START, 2,
-        Code.TOKENS, 1, 2,
+        Code.TOKENS, 4, 7,
         Code.HEADING_END,
 
         Code.ULIST_START,
-        Code.INLINE_MACRO, 0, 5,
-        Code.MACRO_TARGET, 6, 19,
-        Code.ATTR_POSITIONAL, 1, 20, 22,
-        Code.TOKENS, 11, 12,
-        Code.ULIST_END,
-
-        Code.ULIST_START,
         Code.LI_START,
-        Code.MACRO_TARGET, 6, 19,
-        Code.ATTR_POSITIONAL, 1, 20, 22,
-        Code.TOKENS, 18, 21,
+        Code.INLINE_MACRO, 8, 9,
+        Code.MACRO_TARGET, 10, 11,
+        Code.ATTR_POSITIONAL, 1, 12, 13,
         Code.LI_END,
 
         Code.LI_START,
-        Code.MACRO_TARGET, 6, 19,
-        Code.ATTR_POSITIONAL, 1, 20, 22,
-        Code.TOKENS, 18, 21,
+        Code.INLINE_MACRO, 17, 18,
+        Code.MACRO_TARGET, 19, 20,
+        Code.ATTR_POSITIONAL, 1, 21, 22,
         Code.LI_END,
+
         Code.ULIST_END,
         Code.SECTION_END,
         Code.DOCUMENT_END
@@ -230,10 +224,7 @@ final class InlineMacroTest extends AbstractAsciiDocTest {
       docAttr(),
 
       p2(
-        t(Text.REGULAR, 3, 4),
-        t(Text.REGULAR, 6, 10),
-        t(Text.REGULAR, 14, 15),
-        t(Text.REGULAR, 18, 19)
+        t(Text.REGULAR, 3, 4)
       ),
 
       """
@@ -244,13 +235,10 @@ final class InlineMacroTest extends AbstractAsciiDocTest {
         <div class="sect1">
           <h2 id="_a">A</h2>
           <div class="sectionbody">
-            <div class="paragraph">
-              <p>b c:</p>
-            </div>
             <div class="ulist">
               <ul>
-              <li><p>d</p></li>
-              <li><p>e</p></li>
+                <li><p><a href="b">c</a></p></li>
+                <li><p><a href="d">e</a></p></li>
               </ul>
             </div>
           </div>
