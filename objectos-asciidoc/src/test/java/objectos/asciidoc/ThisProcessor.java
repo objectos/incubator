@@ -315,6 +315,7 @@ class ThisProcessor implements AsciiDoc.Processor {
       case START -> CONTENT;
       case HEADER | PREAMBLE -> HEADER | PREAMBLE | CONTENT;
       case HEADER | PREAMBLE | CONTENT -> state;
+      case CONTENT -> state;
       default -> throw new UnsupportedOperationException("Implement me :: state=" + state);
     };
 

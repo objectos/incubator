@@ -140,6 +140,9 @@ class Pass0 implements Pass1.Source, Pass2.Source {
   @Override
   public final int tokenCursor() { return tokenCursor; }
 
+  @Override
+  public final void tokenCursor(int value) { tokenCursor = value; }
+
   final String source(int beginIndex, int endIndex) {
     return source.substring(beginIndex, endIndex);
   }

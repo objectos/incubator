@@ -31,6 +31,8 @@ class Pass1 {
     String substring(int start, int end);
 
     int tokenCursor();
+
+    void tokenCursor(int value);
   }
 
   private static final int DOCUMENT = 1;
@@ -369,9 +371,39 @@ class Pass1 {
       }
 
       case SECTION -> {
-        push(ctx);
+        var section = level - 1;
 
-        parseHeadingSection(level);
+        var prevSection = popSection();
+
+        if (section > prevSection) {
+          push(ctx);
+
+          parseHeadingSection(level);
+        }
+
+        else if (section == prevSection) {
+          add(Code.SECTION_END);
+
+          parseHeadingSection(level);
+        }
+
+        else {
+          throw new UnsupportedOperationException("Implement me");
+        }
+      }
+
+      case ULIST -> {
+        popList();
+
+        var tokenEnd = tokenIndex - 1;
+
+        if (tokenStart < tokenEnd) {
+          add(Code.TOKENS, tokenStart, tokenEnd);
+        }
+
+        add(Code.LI_END, Code.ULIST_END);
+
+        source.tokenCursor(tokenIndex);
       }
 
       default -> uoe(ctx);
@@ -470,12 +502,11 @@ class Pass1 {
       }
 
       case ULIST -> {
-
         popList();
 
         var tokenEnd = tokenIndex - 1; // ignore NL
 
-        if (tokenStart != tokenEnd) {
+        if (tokenStart < tokenEnd) {
           add(Code.TOKENS, tokenStart, tokenEnd);
         }
 
@@ -594,7 +625,7 @@ class Pass1 {
 
         var tokenEnd = tokenIndex - 1; // ignore NL
 
-        if (tokenStart != tokenEnd) {
+        if (tokenStart < tokenEnd) {
           add(Code.TOKENS, tokenStart, tokenEnd);
         }
 

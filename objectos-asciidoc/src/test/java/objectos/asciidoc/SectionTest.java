@@ -1,7 +1,17 @@
 /*
- * Copyright 2022 Objectos Software LTDA.
+ * Copyright (C) 2021-2022 Objectos Software LTDA.
  *
- * Reprodução parcial ou total proibida.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 package objectos.asciidoc;
 
@@ -399,7 +409,7 @@ final class SectionTest extends AbstractAsciiDocTest {
     );
   }
 
-  @Test(enabled = false, description = //
+  @Test(description = //
   """
   section
 
@@ -468,12 +478,12 @@ final class SectionTest extends AbstractAsciiDocTest {
         Code.HEADING_START, 2, Code.TOKENS, 4, 7, Code.HEADING_END,
         Code.ULIST_START,
         Code.LI_START, Code.TOKENS, 13, 16, Code.LI_END,
-        Code.LI_START, Code.TOKENS, 21, 24, Code.LI_END,
+        Code.LI_START, Code.TOKENS, 21, 25, Code.LI_END,
         Code.ULIST_END,
         Code.SECTION_END,
-        Code.SECTION_START, 2,
-        Code.HEADING_START, 3, Code.TOKENS, 32, 35, Code.HEADING_END,
-        Code.PARAGRAPH_START, Code.TOKENS, 37, 41, Code.PARAGRAPH_END,
+        Code.SECTION_START, 1,
+        Code.HEADING_START, 2, Code.TOKENS, 30, 33, Code.HEADING_END,
+        Code.PARAGRAPH_START, Code.TOKENS, 35, 39, Code.PARAGRAPH_END,
         Code.SECTION_END,
         Code.DOCUMENT_END
       ),
@@ -481,39 +491,35 @@ final class SectionTest extends AbstractAsciiDocTest {
       docAttr(),
 
       p2(
-        t(Text.REGULAR, 2, 5),
-        t(Text.REGULAR, 7, 12),
-        t(Text.REGULAR, 17, 19),
-        t(Text.REGULAR, 21, 26),
-        t(Text.REGULAR, 32, 33),
-        t(Text.REGULAR, 35, 40)
+        t(Text.REGULAR, 3, 5),
+        t(Text.REGULAR, 9, 10),
+        t(Text.REGULAR, 13, 14),
+        t(Text.REGULAR, 19, 21),
+        t(Text.REGULAR, 23, 24)
       ),
 
       """
       <div id="header">
-      <h1>doc</h1>
       </div>
       <div id="content">
-      <div id="preamble">
-      <div class="sectionbody">
-      <div class="paragraph">
-      <p>pream</p>
-      </div>
-      </div>
+      <div class="sect1">
+       <h2 id="_l1">L1</h2>
+       <div class="sectionbody">
+        <div class="ulist">
+         <ul>
+          <li><p>a</p></li>
+          <li><p>b</p></li>
+         </ul>
+        </div>
+       </div>
       </div>
       <div class="sect1">
-      <h2 id="_l1">L1</h2>
-      <div class="sectionbody">
-      <div class="paragraph">
-      <p>sect1</p>
-      </div>
-      <div class="sect2">
-      <h3 id="_2">2</h3>
-      <div class="paragraph">
-      <p>sect2</p>
-      </div>
-      </div>
-      </div>
+       <h2 id="_l2">L2</h2>
+       <div class="sectionbody">
+        <div class="paragraph">
+         <p>c</p>
+        </div>
+       </div>
       </div>
       </div>
       """
