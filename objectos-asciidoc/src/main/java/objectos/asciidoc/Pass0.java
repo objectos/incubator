@@ -47,20 +47,21 @@ class Pass0 implements Pass1.Source, Pass2.Source {
   private static final int MONO_END = 13;
 
   private static final int ATTR_NAME = 14;
-  private static final int ATTR_LIST_END = 15;
+  private static final int ATTR_QUOTES = 15;
+  private static final int ATTR_LIST_END = 16;
 
-  private static final int LISTING_BLOCK = 16;
-  private static final int LISTING_BLOCK_OR_LIST = 17;
+  private static final int LISTING_BLOCK = 17;
+  private static final int LISTING_BLOCK_OR_LIST = 18;
 
-  private static final int LITERAL_OR_LIST = 18;
+  private static final int LITERAL_OR_LIST = 19;
 
-  private static final int MACRO_ANY_START = 19;
-  private static final int MACRO_INLINE_START = 20;
-  private static final int MACRO_INLINE = 21;
+  private static final int MACRO_ANY_START = 20;
+  private static final int MACRO_INLINE_START = 21;
+  private static final int MACRO_INLINE = 22;
 
-  private static final int DOCATTR_NAME = 22;
-  private static final int DOCATTR_NAME_NEXT = 23;
-  private static final int DOCATTR_VALUE = 24;
+  private static final int DOCATTR_NAME = 23;
+  private static final int DOCATTR_NAME_NEXT = 24;
+  private static final int DOCATTR_VALUE = 25;
 
   private static final int _ATTRLIST_BLOCK = 1;
   private static final int _ATTRLIST_INLINE_MACRO = 2;
@@ -304,6 +305,8 @@ class Pass0 implements Pass1.Source, Pass2.Source {
 
       case ATTR_NAME -> stateAttrName();
 
+      case ATTR_QUOTES -> stateAttrQuotes();
+
       case LISTING_BLOCK -> stateListingBlock();
 
       case LISTING_BLOCK_OR_LIST -> stateListingBlockOrList();
@@ -372,6 +375,8 @@ class Pass0 implements Pass1.Source, Pass2.Source {
     return switch (peek()) {
       case '\n' -> rollbackAttributes();
 
+      case '"' -> advance(ATTR_QUOTES);
+
       case ',' -> {
         add(
           Token.ATTR_VALUE, auxiliaryStart, sourceIndex,
@@ -384,9 +389,32 @@ class Pass0 implements Pass1.Source, Pass2.Source {
       }
 
       case ']' -> {
-        add(Token.ATTR_VALUE, auxiliaryStart, sourceIndex);
+        if (auxiliaryStart < sourceIndex) {
+          add(Token.ATTR_VALUE, auxiliaryStart, sourceIndex);
+        }
 
         yield advance(ATTR_LIST_END);
+      }
+
+      default -> advance(state);
+    };
+  }
+
+  private int stateAttrQuotes() {
+    if (!hasChar()) {
+      return rollbackAttributes();
+    }
+
+    return switch (peek()) {
+      case '\n' -> rollbackAttributes();
+
+      case '"' -> {
+        // trim initial quote from value
+        add(Token.ATTR_VALUE, auxiliaryStart + 1, sourceIndex);
+
+        auxiliaryStart = sourceIndex + 1;
+
+        yield advance(ATTR_NAME);
       }
 
       default -> advance(state);

@@ -45,6 +45,7 @@ public class AsciiDocTest {
   @Factory
   public Object[] _factory() {
     return new Object[] {
+        new AttributeListTest(this),
         new DocumentAttributeTest(this),
         new InlineMacroTest(this),
         new ParagraphTest(this),
