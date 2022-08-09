@@ -111,7 +111,9 @@ final class InlineMacroTest extends AbstractAsciiDocTest {
       """,
 
       p0(
-        Token.BLOB, 0, 9, Token.LF,
+        Token.BLOB, 0, 4,
+        Token.BLOB, 4, 9,
+        Token.LF,
         Token.LF,
         Token.BLOB, 11, 14, Token.LF,
 
@@ -122,10 +124,10 @@ final class InlineMacroTest extends AbstractAsciiDocTest {
         Code.DOCUMENT_START,
         Code.PREAMBLE_START,
         Code.PARAGRAPH_START,
-        Code.TOKENS, 0, 4,
+        Code.TOKENS, 0, 7,
         Code.PARAGRAPH_END,
         Code.PARAGRAPH_START,
-        Code.TOKENS, 5, 9,
+        Code.TOKENS, 8, 12,
         Code.PARAGRAPH_END,
         Code.PREAMBLE_END,
         Code.DOCUMENT_END
@@ -249,4 +251,81 @@ final class InlineMacroTest extends AbstractAsciiDocTest {
     );
   }
 
+  @Test(enabled = true, description = //
+  """
+  imacro ends the sentence
+
+  0123456789
+  0
+  12
+  '''
+  a i:b[c].
+
+  d
+  '''
+  """)
+  public void testCase04() {
+    test(
+      """
+      a i:b[c].
+
+      d
+      """,
+
+      p0(
+        Token.BLOB, 0, 2,
+        Token.INLINE_MACRO, 2, 3,
+        Token.BLOB, 4, 5,
+        Token.ATTR_LIST_START,
+        Token.ATTR_VALUE, 6, 7,
+        Token.ATTR_LIST_END,
+        Token.BLOB, 8, 9,
+        Token.LF,
+        Token.LF,
+        Token.BLOB, 11, 12, Token.LF,
+
+        Token.EOF
+      ),
+
+      p1(
+        Code.DOCUMENT_START,
+        Code.PREAMBLE_START,
+        Code.PARAGRAPH_START,
+        Code.TOKENS, 0, 2,
+        Code.INLINE_MACRO, 2, 3,
+        Code.MACRO_TARGET, 4, 5,
+        Code.ATTR_POSITIONAL, 1, 6, 7,
+        Code.TOKENS, 14, 18,
+        Code.PARAGRAPH_END,
+        Code.PARAGRAPH_START,
+        Code.TOKENS, 19, 23,
+        Code.PARAGRAPH_END,
+        Code.PREAMBLE_END,
+        Code.DOCUMENT_END
+      ),
+
+      docAttr(),
+
+      p2(
+        t(Text.REGULAR, 0, 2),
+        t(Text.REGULAR, 8, 9),
+        t(Text.REGULAR, 11, 12)
+      ),
+
+      """
+      <body>
+      <div id="header">
+      </div>
+      <div id="content">
+      <div class="paragraph">
+       <p>a <a href="b">c</a>.</p>
+      </div>
+      <div class="paragraph">
+       <p>d</p>
+      </div>
+      </div>
+      </body>
+      """
+    );
+  }
 }

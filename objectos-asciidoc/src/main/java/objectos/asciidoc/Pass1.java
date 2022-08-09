@@ -197,6 +197,17 @@ class Pass1 {
     code[codeIndex++] = p4;
   }
 
+  private void add(int p0, int p1, int p2, int p3, int p4, int p5) {
+    code = IntArrays.copyIfNecessary(code, codeIndex + 5);
+
+    code[codeIndex++] = p0;
+    code[codeIndex++] = p1;
+    code[codeIndex++] = p2;
+    code[codeIndex++] = p3;
+    code[codeIndex++] = p4;
+    code[codeIndex++] = p5;
+  }
+
   private void execute0() {
     add(Code.DOCUMENT_START);
     push(DOCUMENT);
@@ -435,6 +446,17 @@ class Pass1 {
         );
 
         push(ctx, PREAMBLE, PARAGRAPH, INLINE_MACRO);
+      }
+
+      case PARAGRAPH -> {
+        var tokenEnd = tokenIndex - 1; // do not add INLINE_MACRO
+
+        add(
+          Code.TOKENS, tokenStart, tokenEnd,
+          Code.INLINE_MACRO, start, end
+        );
+
+        push(ctx, INLINE_MACRO);
       }
 
       case ULIST -> {

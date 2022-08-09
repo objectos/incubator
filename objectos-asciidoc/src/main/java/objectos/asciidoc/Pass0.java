@@ -62,6 +62,9 @@ class Pass0 implements Pass1.Source, Pass2.Source {
   private static final int DOCATTR_NAME_NEXT = 23;
   private static final int DOCATTR_VALUE = 24;
 
+  private static final int _ATTRLIST_BLOCK = 1;
+  private static final int _ATTRLIST_INLINE_MACRO = 2;
+
   private String source;
 
   private int sourceIndex;
@@ -81,6 +84,8 @@ class Pass0 implements Pass1.Source, Pass2.Source {
   private int counter;
 
   // aux states
+
+  private int attrlist;
 
   private int auxiliaryStart;
 
@@ -115,6 +120,12 @@ class Pass0 implements Pass1.Source, Pass2.Source {
     tokenIndex = 0;
 
     state = LINE_START;
+
+    attrlist = 0;
+    auxiliaryStart = 0;
+    blobStart = 0;
+    boundaryStart = 0;
+    lineStart = 0;
 
     while (state != EOF) {
       state = state(state);
@@ -239,10 +250,11 @@ class Pass0 implements Pass1.Source, Pass2.Source {
   private char peek() { return source.charAt(sourceIndex); }
 
   private int rollbackAttributes() {
-    sourceIndex = lineStart;
+    attrlist = 0;
+    sourceIndex = sourceRollback;
     sourceIndex++; // skips initial '['
 
-    tokenIndex = tokenCursor;
+    tokenIndex = tokenRollback;
 
     return BLOB;
   }
@@ -318,6 +330,8 @@ class Pass0 implements Pass1.Source, Pass2.Source {
     if (!hasChar()) {
       add(Token.ATTR_LIST_END, Token.EOF);
 
+      attrlist = 0;
+
       return EOF;
     }
 
@@ -325,12 +339,28 @@ class Pass0 implements Pass1.Source, Pass2.Source {
       case '\n' -> {
         add(Token.ATTR_LIST_END, Token.LF);
 
+        attrlist = 0;
+
         yield advance(LINE_START);
       }
 
       case ' ', '\t', '\f', '\u000B' -> advance(ATTR_LIST_END);
 
-      default -> rollbackAttributes();
+      default -> switch (attrlist) {
+        case _ATTRLIST_BLOCK -> rollbackAttributes();
+
+        case _ATTRLIST_INLINE_MACRO -> {
+          add(Token.ATTR_LIST_END);
+
+          attrlist = 0;
+
+          blobStart = sourceIndex;
+
+          yield advance(BLOB);
+        }
+
+        default -> throw new UnsupportedOperationException("Implement me :: attrlist=" + attrlist);
+      };
     };
   }
 
@@ -390,6 +420,12 @@ class Pass0 implements Pass1.Source, Pass2.Source {
       case '*' -> advance(BOLD_END);
 
       case ':' -> {
+        if (blobStart < boundaryStart) {
+          add(Token.BLOB, blobStart, boundaryStart);
+
+          blobStart = boundaryStart;
+        }
+
         sourceRollback = sourceIndex;
         tokenRollback = tokenIndex;
 
@@ -721,6 +757,7 @@ class Pass0 implements Pass1.Source, Pass2.Source {
       return EOF;
     }
 
+    attrlist = 0;
     lineStart = blobStart = boundaryStart = sourceIndex;
 
     return switch (peek()) {
@@ -753,9 +790,10 @@ class Pass0 implements Pass1.Source, Pass2.Source {
       }
 
       case '[' -> {
+        attrlist = _ATTRLIST_BLOCK;
+        sourceRollback = sourceIndex;
         auxiliaryStart = sourceIndex + 1;
-
-        tokenCursor = tokenIndex;
+        tokenRollback = tokenIndex;
 
         add(Token.ATTR_LIST_START);
 
@@ -928,7 +966,7 @@ class Pass0 implements Pass1.Source, Pass2.Source {
           Token.BLOB, auxiliaryStart, sourceIndex,
           Token.ATTR_LIST_START
         );
-
+        attrlist = _ATTRLIST_INLINE_MACRO;
         auxiliaryStart = sourceIndex + 1;
 
         yield advance(ATTR_NAME);
