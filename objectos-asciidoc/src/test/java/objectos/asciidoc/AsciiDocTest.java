@@ -49,6 +49,7 @@ public class AsciiDocTest {
         new DocumentAttributeTest(this),
         new InlineMacroTest(this),
         new ParagraphTest(this),
+        new PreambleTest(this),
         new SectionTest(this),
         new UnorderedListTest(this)
     };

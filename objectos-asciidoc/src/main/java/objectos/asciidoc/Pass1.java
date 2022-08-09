@@ -633,7 +633,7 @@ class Pass1 {
         push(ctx, PREAMBLE, ULIST, _TOKEN_START);
       }
 
-      case SECTION -> {
+      case PREAMBLE, SECTION -> {
         add(Code.ULIST_START, Code.LI_START);
 
         pushList(symbol, count);
