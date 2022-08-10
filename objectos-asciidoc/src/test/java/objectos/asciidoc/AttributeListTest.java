@@ -42,7 +42,9 @@ final class AttributeListTest extends AbstractAsciiDocTest {
         Token.INLINE_MACRO, 0, 1,
         Token.BLOB, 2, 3,
         Token.ATTR_LIST_START,
+        Token.DQUOTE,
         Token.ATTR_VALUE, 5, 9,
+        Token.DQUOTE,
         Token.ATTR_LIST_END,
         Token.LF,
 
@@ -56,7 +58,7 @@ final class AttributeListTest extends AbstractAsciiDocTest {
         Code.INLINE_MACRO, 0, 1,
         Code.MACRO_TARGET, 2, 3,
         Code.ATTR_POSITIONAL, 1, 5, 9,
-        Code.TOKENS, 11, 12,
+        Code.TOKENS, 13, 14,
         Code.PARAGRAPH_END,
         Code.PREAMBLE_END,
         Code.DOCUMENT_END

@@ -51,6 +51,8 @@ final class Token {
 
   static final int DOCATTR = -22;
 
+  static final int DQUOTE = -23;
+
   private Token() {}
 
 }

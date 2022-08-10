@@ -51,7 +51,8 @@ public class AsciiDocTest {
         new ParagraphTest(this),
         new PreambleTest(this),
         new SectionTest(this),
-        new UnorderedListTest(this)
+        new UnorderedListTest(this),
+        new UrlMacroTest(this)
     };
   }
 
@@ -905,7 +906,7 @@ public class AsciiDocTest {
       p0(
         Token.ATTR_LIST_START,
         Token.ATTR_VALUE, 1, 1,
-        Token.SEPARATOR,
+        Token.SEPARATOR, 1, 2,
         Token.ATTR_VALUE, 2, 6,
         Token.ATTR_LIST_END,
         Token.LF,
@@ -928,7 +929,7 @@ public class AsciiDocTest {
         Code.ATTR_POSITIONAL, 2, 2, 6,
         Code.PREAMBLE_START,
         Code.LISTING_BLOCK_START,
-        Code.VERBATIM, 13, 16,
+        Code.VERBATIM, 15, 18,
         Code.LISTING_BLOCK_END,
         Code.PREAMBLE_END,
         Code.DOCUMENT_END
@@ -995,7 +996,7 @@ public class AsciiDocTest {
       p0(
         Token.ATTR_LIST_START,
         Token.ATTR_VALUE, 1, 7,
-        Token.SEPARATOR,
+        Token.SEPARATOR, 7, 8,
         Token.ATTR_VALUE, 8, 12,
         Token.ATTR_LIST_END,
         Token.LF,
@@ -1021,7 +1022,7 @@ public class AsciiDocTest {
         Code.ATTR_POSITIONAL, 2, 8, 12,
         Code.PREAMBLE_START,
         Code.LISTING_BLOCK_START,
-        Code.VERBATIM, 13, 21,
+        Code.VERBATIM, 15, 23,
         Code.LISTING_BLOCK_END,
         Code.PREAMBLE_END,
         Code.DOCUMENT_END

@@ -17,6 +17,7 @@ package objectos.asciidoc;
 
 import java.util.Arrays;
 import java.util.Map;
+import java.util.Set;
 import objectos.lang.Check;
 import objectos.util.GrowableMap;
 import objectos.util.IntArrays;
@@ -35,6 +36,8 @@ class Pass1 {
     void tokenCursor(int value);
   }
 
+  private static final Set<String> URL_MACROS = Set.of("https");
+
   private static final int DOCUMENT = 1;
 
   private static final int HEADING = 2;
@@ -46,19 +49,21 @@ class Pass1 {
   private static final int SECTION = 5;
 
   private static final int BLOCK_ATTRLIST = 6;
-  private static final int MACRO_ATTRLIST = 7;
+  private static final int LINK_ATTRLIST = 7;
+  private static final int MACRO_ATTRLIST = 8;
 
-  private static final int PARAGRAPH = 8;
-  private static final int PARAGRAPH_NL = 9;
+  private static final int PARAGRAPH = 9;
+  private static final int PARAGRAPH_NL = 10;
 
-  private static final int LISTING_BLOCK = 10;
+  private static final int LISTING_BLOCK = 11;
 
-  private static final int ULIST = 11;
+  private static final int ULIST = 12;
 
-  private static final int INLINE_MACRO = 12;
+  private static final int INLINE_MACRO = 13;
+  private static final int URL_MACRO = 14;
 
-  private static final int _SKIP_NL = 13;
-  private static final int _TOKEN_START = 14;
+  private static final int _SKIP_NL = 15;
+  private static final int _TOKEN_START = 16;
 
   private int attrCount;
 
@@ -187,27 +192,6 @@ class Pass1 {
     code[codeIndex++] = p3;
   }
 
-  private void add(int p0, int p1, int p2, int p3, int p4) {
-    code = IntArrays.copyIfNecessary(code, codeIndex + 4);
-
-    code[codeIndex++] = p0;
-    code[codeIndex++] = p1;
-    code[codeIndex++] = p2;
-    code[codeIndex++] = p3;
-    code[codeIndex++] = p4;
-  }
-
-  private void add(int p0, int p1, int p2, int p3, int p4, int p5) {
-    code = IntArrays.copyIfNecessary(code, codeIndex + 5);
-
-    code[codeIndex++] = p0;
-    code[codeIndex++] = p1;
-    code[codeIndex++] = p2;
-    code[codeIndex++] = p3;
-    code[codeIndex++] = p4;
-    code[codeIndex++] = p5;
-  }
-
   private void execute0() {
     add(Code.DOCUMENT_START);
     push(DOCUMENT);
@@ -232,6 +216,8 @@ class Pass1 {
 
         case Token.ATTR_VALUE -> parseAttrValue(next(), next());
 
+        case Token.DQUOTE -> {}
+
         case Token.BOLD_START, Token.BOLD_END -> parseTokens(next());
 
         case Token.ITALIC_START, Token.ITALIC_END -> parseTokens(next());
@@ -240,7 +226,7 @@ class Pass1 {
 
         case Token.LISTING_BLOCK_DELIM -> parseListingBlockDelim(next());
 
-        case Token.SEPARATOR -> parseSeparator();
+        case Token.SEPARATOR -> parseSeparator(next(), next());
 
         case Token.ULIST_ASTERISK -> parseUlistAsterisk(next(), next(), next());
 
@@ -309,6 +295,8 @@ class Pass1 {
 
       case INLINE_MACRO -> push(MACRO_ATTRLIST);
 
+      case URL_MACRO -> push(LINK_ATTRLIST);
+
       default -> uoe();
     }
   }
@@ -338,6 +326,8 @@ class Pass1 {
       case INLINE_MACRO -> {
         add(Code.MACRO_TARGET, start, end);
       }
+
+      case URL_MACRO -> add(end);
 
       default -> parseTokens(start, end);
     }
@@ -440,32 +430,32 @@ class Pass1 {
 
     switch (ctx) {
       case DOCUMENT -> {
-        add(
-          Code.PREAMBLE_START, Code.PARAGRAPH_START,
-          Code.INLINE_MACRO, start, end
-        );
-
-        push(ctx, PREAMBLE, PARAGRAPH, INLINE_MACRO);
+        add(Code.PREAMBLE_START, Code.PARAGRAPH_START);
+        push(ctx, PREAMBLE, PARAGRAPH);
       }
 
       case PARAGRAPH -> {
         var tokenEnd = tokenIndex - 1; // do not add INLINE_MACRO
 
-        add(
-          Code.TOKENS, tokenStart, tokenEnd,
-          Code.INLINE_MACRO, start, end
-        );
-
-        push(ctx, INLINE_MACRO);
+        add(Code.TOKENS, tokenStart, tokenEnd);
+        push(ctx);
       }
 
       case ULIST -> {
-        add(Code.INLINE_MACRO, start, end);
-
-        push(ctx, INLINE_MACRO);
+        push(ctx);
       }
 
       default -> uoe(ctx);
+    }
+
+    var name = source.substring(start, end);
+
+    if (URL_MACROS.contains(name)) {
+      add(Code.URL_MACRO, start);
+      push(URL_MACRO);
+    } else {
+      add(Code.INLINE_MACRO, start, end);
+      push(INLINE_MACRO);
     }
   }
 
@@ -571,7 +561,7 @@ class Pass1 {
     }
   }
 
-  private void parseSeparator() {
+  private void parseSeparator(int start, int end) {
     switch (peek()) {
       case BLOCK_ATTRLIST -> { attrCount++; }
 

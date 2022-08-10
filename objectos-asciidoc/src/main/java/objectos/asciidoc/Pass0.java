@@ -48,20 +48,21 @@ class Pass0 implements Pass1.Source, Pass2.Source {
 
   private static final int ATTR_NAME = 14;
   private static final int ATTR_QUOTES = 15;
-  private static final int ATTR_LIST_END = 16;
+  private static final int ATTR_SEPARATOR = 16;
+  private static final int ATTR_LIST_END = 17;
 
-  private static final int LISTING_BLOCK = 17;
-  private static final int LISTING_BLOCK_OR_LIST = 18;
+  private static final int LISTING_BLOCK = 18;
+  private static final int LISTING_BLOCK_OR_LIST = 19;
 
-  private static final int LITERAL_OR_LIST = 19;
+  private static final int LITERAL_OR_LIST = 20;
 
-  private static final int MACRO_ANY_START = 20;
-  private static final int MACRO_INLINE_START = 21;
-  private static final int MACRO_INLINE = 22;
+  private static final int MACRO_ANY_START = 21;
+  private static final int MACRO_INLINE_START = 22;
+  private static final int MACRO_INLINE = 23;
 
-  private static final int DOCATTR_NAME = 23;
-  private static final int DOCATTR_NAME_NEXT = 24;
-  private static final int DOCATTR_VALUE = 25;
+  private static final int DOCATTR_NAME = 24;
+  private static final int DOCATTR_NAME_NEXT = 25;
+  private static final int DOCATTR_VALUE = 26;
 
   private static final int _ATTRLIST_BLOCK = 1;
   private static final int _ATTRLIST_INLINE_MACRO = 2;
@@ -307,6 +308,8 @@ class Pass0 implements Pass1.Source, Pass2.Source {
 
       case ATTR_QUOTES -> stateAttrQuotes();
 
+      case ATTR_SEPARATOR -> stateAttrSeparator();
+
       case LISTING_BLOCK -> stateListingBlock();
 
       case LISTING_BLOCK_OR_LIST -> stateListingBlockOrList();
@@ -375,17 +378,18 @@ class Pass0 implements Pass1.Source, Pass2.Source {
     return switch (peek()) {
       case '\n' -> rollbackAttributes();
 
-      case '"' -> advance(ATTR_QUOTES);
+      case '"' -> {
+        add(Token.DQUOTE);
+
+        yield advance(ATTR_QUOTES);
+      }
 
       case ',' -> {
-        add(
-          Token.ATTR_VALUE, auxiliaryStart, sourceIndex,
-          Token.SEPARATOR
-        );
+        add(Token.ATTR_VALUE, auxiliaryStart, sourceIndex);
 
-        auxiliaryStart = sourceIndex + 1;
+        auxiliaryStart = sourceIndex;
 
-        yield advance(ATTR_NAME);
+        yield advance(ATTR_SEPARATOR);
       }
 
       case ']' -> {
@@ -410,7 +414,7 @@ class Pass0 implements Pass1.Source, Pass2.Source {
 
       case '"' -> {
         // trim initial quote from value
-        add(Token.ATTR_VALUE, auxiliaryStart + 1, sourceIndex);
+        add(Token.ATTR_VALUE, auxiliaryStart + 1, sourceIndex, Token.DQUOTE);
 
         auxiliaryStart = sourceIndex + 1;
 
@@ -418,6 +422,26 @@ class Pass0 implements Pass1.Source, Pass2.Source {
       }
 
       default -> advance(state);
+    };
+  }
+
+  private int stateAttrSeparator() {
+    if (!hasChar()) {
+      return rollbackAttributes();
+    }
+
+    return switch (peek()) {
+      case '\n' -> rollbackAttributes();
+
+      case ' ', '\t', '\f', '\u000B' -> advance(state);
+
+      default -> {
+        add(Token.SEPARATOR, auxiliaryStart, sourceIndex);
+
+        auxiliaryStart = sourceIndex;
+
+        yield advance(ATTR_NAME);
+      }
     };
   }
 
@@ -457,7 +481,7 @@ class Pass0 implements Pass1.Source, Pass2.Source {
         sourceRollback = sourceIndex;
         tokenRollback = tokenIndex;
 
-        if (boundaryStart != lineStart) {
+        if (boundaryStart > lineStart) {
           // if this is a macro then it must be inline, otherwise error?
           add(Token.INLINE_MACRO, boundaryStart, sourceIndex);
 
@@ -990,11 +1014,10 @@ class Pass0 implements Pass1.Source, Pass2.Source {
       case '\n' -> rollbackMacro();
 
       case '[' -> {
-        add(
-          Token.BLOB, auxiliaryStart, sourceIndex,
-          Token.ATTR_LIST_START
-        );
+        add(Token.BLOB, auxiliaryStart, sourceIndex, Token.ATTR_LIST_START);
+
         attrlist = _ATTRLIST_INLINE_MACRO;
+
         auxiliaryStart = sourceIndex + 1;
 
         yield advance(ATTR_NAME);

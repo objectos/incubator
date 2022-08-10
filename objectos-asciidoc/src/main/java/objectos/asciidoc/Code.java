@@ -50,6 +50,8 @@ final class Code {
   static final int INLINE_MACRO = -20;
   static final int MACRO_TARGET = -21;
 
+  static final int URL_MACRO = -22;
+
   private Code() {}
 
 }
