@@ -33,7 +33,7 @@ public class DocsMigrationTest {
 
   @Test(enabled = false)
   public void index() throws IOException {
-    Document doc = processor.load("v0002", "index");
+    var doc = processor.load("v0002", "index");
 
     assertEquals(
       normalize(doc),
@@ -41,10 +41,30 @@ public class DocsMigrationTest {
     );
   }
 
+  @Test(enabled = false)
+  public void introIndex() throws IOException {
+    var doc = processor.load("v0002", "intro/index");
+
+    assertEquals(
+      normalize(doc),
+      load("v0002/intro/index.html")
+    );
+  }
+
+  @Test(enabled = false)
+  public void introOverview() throws IOException {
+    var doc = processor.load("v0002", "intro/overview");
+
+    assertEquals(
+      normalize(doc),
+      load("v0002/intro/overview.html")
+    );
+  }
+
   private String load(String resourceName) throws IOException {
     var c = getClass();
 
-    try (var in = c.getResourceAsStream("v0002/index.html")) {
+    try (var in = c.getResourceAsStream(resourceName)) {
       var soup = Jsoup.parse(in, "UTF-8", "");
 
       var article = soup.selectFirst("article");
