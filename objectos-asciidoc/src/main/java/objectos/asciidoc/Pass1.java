@@ -25,49 +25,16 @@ import objectos.util.IntArrays;
 class Pass1 {
 
   interface Source {
-    boolean hasToken();
-
-    int nextToken();
-
     String substring(int start, int end);
 
-    int tokenCursor();
+    int tokenAt(int index);
 
-    void tokenCursor(int value);
+    int tokens();
   }
 
   private static final Set<String> URL_MACROS = Set.of("https");
 
-  private static final int DOCUMENT = 1;
-
-  private static final int HEADING = 2;
-
-  private static final int DOCATTR = 3;
-
-  private static final int PREAMBLE = 4;
-
-  private static final int SECTION = 5;
-
-  private static final int BLOCK_ATTRLIST = 6;
-  private static final int LINK_ATTRLIST = 7;
-  private static final int MACRO_ATTRLIST = 8;
-
-  private static final int PARAGRAPH = 9;
-  private static final int PARAGRAPH_NL = 10;
-
-  private static final int LISTING_BLOCK = 11;
-
-  private static final int ULIST = 12;
-
-  private static final int INLINE_MACRO = 13;
-  private static final int URL_MACRO = 14;
-
-  private static final int _SKIP_NL = 15;
-  private static final int _TOKEN_START = 16;
-
   private int attrCount;
-
-  private String attributeName;
 
   private final StringBuilder attributeValue = new StringBuilder();
 
@@ -76,10 +43,6 @@ class Pass1 {
   private int codeCursor;
 
   private int codeIndex;
-
-  private int[] context;
-
-  private int contextIndex = -1;
 
   private final Map<String, String> docattr = new GrowableMap<>();
 
@@ -97,10 +60,12 @@ class Pass1 {
 
   private int tokenStart;
 
+  private int tokenLength;
+
+  boolean running = false;
+
   Pass1() {
     code = new int[512];
-
-    context = new int[32];
 
     list = new int[8];
 
@@ -109,7 +74,7 @@ class Pass1 {
 
   public final void execute(Source source) {
     Check.state(
-      contextIndex == -1,
+      !running,
 
       """
       Concurrent pass (1) is not supported.
@@ -121,19 +86,11 @@ class Pass1 {
       """
     );
 
-    this.source = source;
+    running = true;
 
-    codeIndex = 0;
+    reset(source);
 
-    contextIndex = -1;
-
-    docattr.clear();
-
-    listIndex = -1;
-
-    sectionIndex = -1;
-
-    execute0();
+    executeDocument();
 
     codeCursor = 0;
   }
@@ -192,200 +149,536 @@ class Pass1 {
     code[codeIndex++] = p3;
   }
 
-  private void execute0() {
-    add(Code.DOCUMENT_START);
-    push(DOCUMENT);
+  private void executeBlockAttributeList() {
+    tokenIndex++; // Token.ATTR_LIST_START
 
-    while (hasNext()) {
-      tokenIndex = source.tokenCursor();
-
-      var token = next();
-
-      switch (token) {
-        case Token.LF -> parseLineEnd();
-
-        case Token.EOF -> parseLineEndEof();
-
-        case Token.HEADING -> parseHeading(next(), next(), next());
-
-        case Token.BLOB -> parseBlob(next(), next());
-
-        case Token.ATTR_LIST_START -> parseAttrListStart();
-
-        case Token.ATTR_LIST_END -> parseAttrListEnd();
-
-        case Token.ATTR_VALUE -> parseAttrValue(next(), next());
-
-        case Token.DQUOTE -> {}
-
-        case Token.BOLD_START, Token.BOLD_END -> parseTokens(next());
-
-        case Token.ITALIC_START, Token.ITALIC_END -> parseTokens(next());
-
-        case Token.MONO_START, Token.MONO_END -> parseTokens(next());
-
-        case Token.LISTING_BLOCK_DELIM -> parseListingBlockDelim(next());
-
-        case Token.SEPARATOR -> parseSeparator(next(), next());
-
-        case Token.ULIST_ASTERISK -> parseUlistAsterisk(next(), next(), next());
-
-        case Token.ULIST_HYPHEN -> parseUlistHyphen(next(), next());
-
-        case Token.INLINE_MACRO -> parseInlineMacro(next(), next());
-
-        case Token.DOCATTR -> parseDocattr(next(), next());
-
-        default -> throw new UnsupportedOperationException("Implement me :: token=" + token);
-      }
-    }
-
-    while (contextIndex >= 0) {
-      int ctx = pop();
-
-      switch (ctx) {
-        case DOCUMENT -> add(Code.DOCUMENT_END);
-
-        case HEADING -> add(Code.HEADING_END);
-
-        case PREAMBLE -> add(Code.PREAMBLE_END);
-
-        case SECTION -> add(Code.SECTION_END);
-
-        case PARAGRAPH -> add(Code.PARAGRAPH_END);
-
-        default -> throw new UnsupportedOperationException("Implement me :: ctx=" + ctx);
-      }
-    }
-  }
-
-  private boolean hasNext() {
-    return source.hasToken();
-  }
-
-  private int next() {
-    return source.nextToken();
-  }
-
-  private void parseAttrListEnd() {
-    int ctx = pop();
-
-    switch (ctx) {
-      case BLOCK_ATTRLIST -> push(_SKIP_NL);
-
-      case MACRO_ATTRLIST -> {
-        int macro = pop();
-
-        if (macro != INLINE_MACRO) {
-          throw new UnsupportedOperationException("Implement me :: not a macro, got=" + macro);
-        }
-
-        tokenStart = source.tokenCursor();
-      }
-
-      default -> uoe(ctx);
-    }
-  }
-
-  private void parseAttrListStart() {
     attrCount = 1;
 
-    switch (peek()) {
-      case DOCUMENT -> push(BLOCK_ATTRLIST);
+    loop: do {
 
-      case INLINE_MACRO -> push(MACRO_ATTRLIST);
+      var token = tokenAt(tokenIndex);
 
-      case URL_MACRO -> push(LINK_ATTRLIST);
+      switch (token) {
+        case Token.DQUOTE -> tokenIndex++;
 
-      default -> uoe();
+        case Token.ATTR_VALUE -> {
+          tokenIndex++;
+
+          var start = tokenAt(tokenIndex++);
+          var end = tokenAt(tokenIndex++);
+
+          add(Code.ATTR_POSITIONAL, attrCount, start, end);
+        }
+
+        case Token.SEPARATOR -> {
+          attrCount++;
+
+          tokenIndex += 3; // Token.SEPARATOR, start, end
+        }
+
+        case Token.ATTR_LIST_END -> {
+          tokenIndex++;
+
+          break loop;
+        }
+
+        default -> uoeToken(token);
+      }
+
+    } while (hasToken());
+  }
+
+  private void executeBlocks() {
+    loop: do {
+
+      var token = tokenAt(tokenIndex);
+
+      switch (token) {
+        case //
+            Token.BLOB, //
+            Token.BOLD_START, //
+            Token.ITALIC_START, //
+            Token.MONO_START, //
+            Token.INLINE_MACRO -> executeParagraph();
+
+        case Token.ATTR_LIST_START -> executeBlockAttributeList();
+
+        case Token.LISTING_BLOCK_DELIM -> executeListingBlock();
+
+        case Token.ULIST_ASTERISK -> executeUnorderedListAsteriskStart();
+
+        case Token.ULIST_HYPHEN -> executeUnorderedListHyphenStart();
+
+        case Token.HEADING -> { break loop; }
+
+        case Token.LF -> { tokenIndex++; }
+
+        case Token.EOF -> { tokenIndex++; break loop; }
+
+        default -> uoeToken(token);
+      }
+
+    } while (hasToken());
+  }
+
+  private void executeDocument() {
+    add(Code.DOCUMENT_START);
+
+    if (hasToken()) {
+      executeHeader();
+    }
+
+    if (hasToken()) {
+      executePreamble();
+    }
+
+    if (hasToken()) {
+      executeSections();
+    }
+
+    add(Code.DOCUMENT_END);
+  }
+
+  private void executeDocumentAttributes() {
+    loop: do {
+
+      var token = tokenAt(tokenIndex);
+
+      switch (token) {
+        case Token.EOF -> { tokenIndex++; break loop; }
+
+        case Token.DOCATTR -> executeDocumentAttributes0();
+
+        default -> { break loop; }
+      }
+
+    } while (hasToken());
+  }
+
+  private void executeDocumentAttributes0() {
+    tokenIndex++; // skip Token.DOCATTR
+
+    var start = tokenAt(tokenIndex++);
+    var end = tokenAt(tokenIndex++);
+
+    var attributeName = source.substring(start, end);
+
+    attributeValue.setLength(0);
+
+    loop: do {
+
+      var token = tokenAt(tokenIndex);
+
+      switch (token) {
+        case Token.BLOB -> {
+          tokenIndex++; // skip Token.BLOB
+
+          var s = source.substring(
+            tokenAt(tokenIndex++),
+            tokenAt(tokenIndex++)
+          );
+
+          attributeValue.append(s);
+        }
+
+        case Token.LF -> {
+          var value = attributeValue.toString();
+
+          docattr.put(attributeName, value);
+
+          tokenIndex++;
+
+          break loop;
+        }
+
+        default -> uoeToken(token);
+      }
+
+    } while (hasToken());
+  }
+
+  private void executeHeader() {
+    var token = tokenAt(tokenIndex);
+
+    if (token != Token.HEADING) {
+      return;
+    }
+
+    var level = tokenAt(tokenIndex + 1);
+
+    if (level != 1) {
+      return;
+    }
+
+    tokenIndex += 2;
+
+    executeHeading(level);
+
+    if (hasToken()) {
+      executeDocumentAttributes();
     }
   }
 
-  private void parseAttrValue(int start, int end) {
-    int ctx = pop();
+  private void executeHeading(int level) {
+    tokenIndex += 2; // skip start,end
 
-    switch (ctx) {
-      case BLOCK_ATTRLIST, MACRO_ATTRLIST -> {
-        add(Code.ATTR_POSITIONAL, attrCount, start, end);
+    add(Code.HEADING_START, level);
 
-        push(ctx);
+    tokenStart = tokenIndex;
+
+    loop: do {
+
+      var token = tokenAt(tokenIndex);
+
+      switch (token) {
+        case Token.BLOB -> tokenIndex += 3;
+
+        case Token.BOLD_START, Token.BOLD_END -> tokenIndex += 2;
+
+        case Token.ITALIC_START, Token.ITALIC_END -> tokenIndex += 2;
+
+        case Token.MONO_START, Token.MONO_END -> tokenIndex += 2;
+
+        case Token.INLINE_MACRO -> { executeInlineMacro(); tokenStart = tokenIndex; }
+
+        case Token.LF, Token.EOF -> {
+          add(Code.TOKENS, tokenStart, tokenIndex);
+
+          tokenIndex++;
+
+          break loop;
+        }
+
+        default -> uoeToken(token);
       }
 
-      default -> uoe(ctx);
+    } while (hasToken());
+
+    add(Code.HEADING_END);
+  }
+
+  private void executeInlineMacro() {
+    var tokenEnd = tokenIndex - 1;
+
+    if (tokenStart < tokenEnd) {
+      add(Code.TOKENS, tokenStart, tokenEnd);
+    }
+
+    var start = tokenAt(++tokenIndex);
+    var end = tokenAt(++tokenIndex);
+
+    var name = source.substring(start, end);
+
+    if (URL_MACROS.contains(name)) {
+      throw new UnsupportedOperationException("Implement me");
+    } else {
+      add(Code.INLINE_MACRO, start, end);
+
+      // target
+      var blob = tokenAt(++tokenIndex);
+
+      if (blob != Token.BLOB) {
+        throw new UnsupportedOperationException("Implement me");
+      }
+
+      start = tokenAt(++tokenIndex);
+      end = tokenAt(++tokenIndex);
+
+      add(Code.MACRO_TARGET, start, end);
+
+      // attrlist
+      var attrlist = tokenAt(++tokenIndex);
+
+      if (attrlist != Token.ATTR_LIST_START) {
+        throw new UnsupportedOperationException("Implement me");
+      }
+
+      executeBlockAttributeList();
     }
   }
 
-  private void parseBlob(int start, int end) {
-    switch (peek()) {
-      case DOCATTR -> {
-        var s = source.substring(start, end);
+  private void executeListingBlock() {
+    add(Code.LISTING_BLOCK_START);
 
-        attributeValue.append(s);
-      }
+    tokenIndex++; // Token.LISTING_BLOCK_START
 
-      case INLINE_MACRO -> {
-        add(Code.MACRO_TARGET, start, end);
-      }
+    var dashes = tokenAt(tokenIndex++);
 
-      case URL_MACRO -> add(end);
+    pushSection(dashes);
 
-      default -> parseTokens(start, end);
+    var token = tokenAt(tokenIndex++);
+
+    if (token != Token.LF) {
+      throw new UnsupportedOperationException("Implement me");
     }
+
+    tokenStart = tokenIndex;
+
+    loop: do {
+
+      token = tokenAt(tokenIndex);
+
+      switch (token) {
+        case Token.BLOB -> tokenIndex += 3;
+
+        case Token.LF -> tokenIndex += 1;
+
+        case Token.LISTING_BLOCK_DELIM -> {
+          tokenIndex++;
+
+          dashes = tokenAt(tokenIndex);
+
+          var previous = popSection();
+
+          if (dashes != previous) {
+            pushSection(previous);
+
+            throw new UnsupportedOperationException("Implement me :: literal dashes?");
+          }
+
+          var tokenEnd = tokenIndex - 2; // dashes, last LF
+
+          add(Code.VERBATIM, tokenStart, tokenEnd);
+
+          tokenIndex++;
+
+          break loop;
+        }
+
+        default -> uoeToken(token);
+      }
+
+    } while (hasToken());
+
+    add(Code.LISTING_BLOCK_END);
   }
 
-  private void parseDocattr(int start, int end) {
-    int ctx = pop();
+  private void executeListItem() {
+    add(Code.LI_START);
 
-    switch (ctx) {
-      case DOCUMENT -> {
-        attributeName = source.substring(start, end);
+    tokenStart = tokenIndex;
 
-        attributeValue.setLength(0);
+    var tokenEnd = tokenIndex;
 
-        push(ctx, DOCATTR);
+    var newLine = false;
+
+    loop: do {
+
+      var token = source.tokenAt(tokenIndex);
+
+      switch (token) {
+        case Token.BLOB -> { tokenIndex += 3; newLine = false; }
+
+        case Token.INLINE_MACRO -> {
+          executeInlineMacro();
+
+          newLine = false;
+
+          tokenStart = tokenIndex;
+        }
+
+        case Token.ULIST_ASTERISK -> {
+          var count = tokenAt(tokenIndex + 1);
+
+          if (shouldNest('*', count)) {
+            if (tokenStart < tokenEnd) {
+              add(Code.TOKENS, tokenStart, tokenEnd);
+            }
+
+            executeUnorderedListAsteriskStart();
+          }
+
+          break loop;
+        }
+
+        case Token.ULIST_HYPHEN -> {
+          if (shouldNest('-', 1)) {
+            if (tokenStart < tokenEnd) {
+              add(Code.TOKENS, tokenStart, tokenEnd);
+            }
+
+            executeUnorderedListHyphenStart();
+          }
+
+          break loop;
+        }
+
+        case Token.LF -> { tokenEnd = tokenIndex++; newLine = true; }
+
+        case Token.EOF -> {
+          if (!newLine) {
+            tokenEnd = tokenIndex;
+          }
+
+          tokenIndex++;
+
+          break loop;
+        }
+
+        case Token.HEADING -> { break loop; }
+
+        default -> uoeToken(token);
       }
 
-      default -> uoe(ctx);
+    } while (hasToken());
+
+    if (tokenStart < tokenEnd) {
+      add(Code.TOKENS, tokenStart, tokenEnd);
     }
+
+    add(Code.LI_END);
   }
 
-  private void parseHeading(int level, int start, int end) {
-    int ctx = pop();
+  private void executeParagraph() {
+    add(Code.PARAGRAPH_START);
 
-    switch (ctx) {
-      case DOCUMENT -> {
-        if (level == 1) {
-          add(Code.HEADING_START, level);
+    tokenStart = tokenIndex;
 
-          push(ctx, HEADING, _TOKEN_START);
+    var newLine = false;
+
+    loop: do {
+
+      var token = tokenAt(tokenIndex);
+
+      switch (token) {
+        case Token.BLOB -> { tokenIndex += 3; newLine = false; }
+
+        case Token.BOLD_START, Token.BOLD_END -> { tokenIndex += 2; newLine = false; }
+
+        case Token.ITALIC_START, Token.ITALIC_END -> { tokenIndex += 2; newLine = false; }
+
+        case Token.MONO_START, Token.MONO_END -> { tokenIndex += 2; newLine = false; }
+
+        case Token.INLINE_MACRO -> {
+          executeInlineMacro();
+
+          newLine = false;
+
+          tokenStart = tokenIndex;
+        }
+
+        case Token.LF -> {
+          if (newLine) {
+            add(Code.TOKENS, tokenStart, tokenIndex);
+
+            tokenIndex++;
+
+            break loop;
+          } else {
+            newLine = true;
+
+            tokenIndex++;
+          }
+        }
+
+        case Token.EOF -> {
+          add(Code.TOKENS, tokenStart, tokenIndex);
+
+          tokenIndex++;
+
+          break loop;
+        }
+
+        default -> uoeToken(token);
+      }
+
+    } while (hasToken());
+
+    add(Code.PARAGRAPH_END);
+  }
+
+  private void executePreamble() {
+    var token = tokenAt(tokenIndex);
+
+    while (token == Token.LF) {
+      tokenIndex++;
+
+      token = tokenAt(tokenIndex);
+    }
+
+    switch (token) {
+      case Token.EOF -> {
+        tokenIndex++;
+
+        return;
+      }
+
+      case Token.HEADING -> {
+        return;
+      }
+
+      case Token.ATTR_LIST_START -> {
+        var offset = 1;
+
+        while (tokenAt(tokenIndex + offset) != Token.ATTR_LIST_END) {
+          offset++;
+        }
+
+        offset++;
+
+        if (tokenAt(tokenIndex + offset) != Token.LF) {
+          throw new UnsupportedOperationException("Implement me");
+        }
+
+        offset++;
+
+        var maybeHeading = tokenAt(tokenIndex + offset);
+
+        if (maybeHeading == Token.HEADING) {
+          return;
+        }
+      }
+    }
+
+    add(Code.PREAMBLE_START);
+
+    executeBlocks();
+
+    add(Code.PREAMBLE_END);
+  }
+
+  private void executeSections() {
+    do {
+
+      var token = tokenAt(tokenIndex++);
+
+      if (token == Token.ATTR_LIST_START) {
+        tokenIndex--;
+
+        executeBlockAttributeList();
+
+        var nl = tokenAt(tokenIndex++);
+
+        if (nl != Token.LF) {
+          throw new UnsupportedOperationException("Implement me");
         } else {
-          push(ctx);
-
-          parseHeadingSection(level);
+          token = tokenAt(tokenIndex++);
         }
       }
 
-      case PREAMBLE -> {
-        add(Code.PREAMBLE_END);
-
-        parseHeadingSection(level);
+      if (token != Token.HEADING) {
+        throw new UnsupportedOperationException("Implement me :: token=" + token);
       }
 
-      case SECTION -> {
-        var section = level - 1;
+      var level = tokenAt(tokenIndex++);
 
+      var section = level - 1;
+
+      if (!hasSection()) {
+        pushSection(section);
+      } else {
         var prevSection = popSection();
 
         if (section > prevSection) {
-          push(ctx);
+          pushSection(prevSection);
 
-          parseHeadingSection(level);
+          pushSection(section);
         }
 
         else if (section == prevSection) {
           add(Code.SECTION_END);
 
-          parseHeadingSection(level);
+          pushSection(section);
         }
 
         else {
@@ -393,293 +686,93 @@ class Pass1 {
         }
       }
 
-      case ULIST -> {
-        popList();
+      add(Code.SECTION_START, section);
 
-        var tokenEnd = tokenIndex - 1;
+      executeHeading(level);
 
-        if (tokenStart < tokenEnd) {
-          add(Code.TOKENS, tokenStart, tokenEnd);
-        }
+      executeBlocks();
 
-        add(Code.LI_END, Code.ULIST_END);
+    } while (hasToken());
 
-        source.tokenCursor(tokenIndex);
-      }
+    while (hasSection()) {
+      add(Code.SECTION_END);
 
-      default -> uoe(ctx);
+      popSection();
     }
   }
 
-  private void parseHeadingSection(int level) {
-    var section = level - 1;
+  private void executeUnorderedList(char symbol, int count) {
+    add(Code.ULIST_START);
 
-    pushSection(section);
+    pushList(symbol, count);
 
-    add(Code.SECTION_START, section, Code.HEADING_START, level);
+    loop: do {
 
-    push(SECTION, HEADING, _TOKEN_START);
-  }
+      var token = source.tokenAt(tokenIndex);
 
-  private void parseInlineMacro(int start, int end) {
-    int ctx = pop();
+      switch (token) {
+        case Token.BLOB, Token.INLINE_MACRO -> executeListItem();
 
-    if (ctx == _TOKEN_START) {
-      ctx = pop();
-    }
+        case Token.ULIST_ASTERISK -> {
+          var _count = tokenAt(tokenIndex + 1);
 
-    switch (ctx) {
-      case DOCUMENT -> {
-        add(Code.PREAMBLE_START, Code.PARAGRAPH_START);
-        push(ctx, PREAMBLE, PARAGRAPH);
-      }
+          tokenIndex += 4; // Token.ULIST_ASTERISK, count, start, end
 
-      case PARAGRAPH -> {
-        var tokenEnd = tokenIndex - 1; // do not add INLINE_MACRO
-
-        add(Code.TOKENS, tokenStart, tokenEnd);
-        push(ctx);
-      }
-
-      case ULIST -> {
-        push(ctx);
-      }
-
-      default -> uoe(ctx);
-    }
-
-    var name = source.substring(start, end);
-
-    if (URL_MACROS.contains(name)) {
-      add(Code.URL_MACRO, start);
-      push(URL_MACRO);
-    } else {
-      add(Code.INLINE_MACRO, start, end);
-      push(INLINE_MACRO);
-    }
-  }
-
-  private void parseLineEnd() {
-    int ctx = pop();
-
-    switch (ctx) {
-      case DOCUMENT -> {
-        add(Code.PREAMBLE_START);
-
-        push(ctx, PREAMBLE);
-      }
-
-      case HEADING -> add(Code.TOKENS, tokenStart, tokenIndex, Code.HEADING_END);
-
-      case DOCATTR -> {
-        var value = attributeValue.toString();
-
-        docattr.put(attributeName, value);
-      }
-
-      case SECTION -> push(ctx);
-
-      case PARAGRAPH -> push(ctx, PARAGRAPH_NL);
-
-      case PARAGRAPH_NL -> {
-        add(Code.TOKENS, tokenStart, tokenIndex, Code.PARAGRAPH_END);
-
-        pop(); // pop PARAGRAPH
-      }
-
-      case LISTING_BLOCK -> push(ctx);
-
-      case ULIST -> push(ctx);
-
-      case _SKIP_NL -> {}
-
-      default -> uoe(ctx);
-    }
-  }
-
-  private void parseLineEndEof() {
-    int ctx = pop();
-
-    switch (ctx) {
-      case DOCUMENT, PREAMBLE -> push(ctx);
-
-      case HEADING -> {
-        push(ctx);
-
-        add(Code.TOKENS, tokenStart, tokenIndex);
-      }
-
-      case PARAGRAPH_NL -> {
-        add(Code.TOKENS, tokenStart, tokenIndex);
-      }
-
-      case ULIST -> {
-        popList();
-
-        var tokenEnd = tokenIndex - 1; // ignore NL
-
-        if (tokenStart < tokenEnd) {
-          add(Code.TOKENS, tokenStart, tokenEnd);
-        }
-
-        add(Code.LI_END, Code.ULIST_END);
-      }
-
-      default -> uoe(ctx);
-    }
-  }
-
-  private void parseListingBlockDelim(int dashes) {
-    var ctx = pop();
-
-    switch (ctx) {
-      case DOCUMENT -> {
-        add(Code.PREAMBLE_START, Code.LISTING_BLOCK_START);
-
-        pushSection(dashes);
-
-        push(ctx, PREAMBLE, LISTING_BLOCK, _TOKEN_START, _SKIP_NL);
-      }
-
-      case LISTING_BLOCK -> {
-        var current = popSection();
-
-        if (current != dashes) {
-          pushSection(current);
-
-          throw new UnsupportedOperationException("Implement me :: literal dashes?");
-        }
-
-        var tokenEnd = tokenIndex - 1; // ignore last LF
-
-        add(Code.VERBATIM, tokenStart, tokenEnd, Code.LISTING_BLOCK_END);
-
-        push(_SKIP_NL);
-      }
-
-      default -> uoe(ctx);
-    }
-  }
-
-  private void parseSeparator(int start, int end) {
-    switch (peek()) {
-      case BLOCK_ATTRLIST -> { attrCount++; }
-
-      default -> uoe();
-    }
-  }
-
-  private void parseTokens(int v0) {
-    parseTokens(v0, 0);
-  }
-
-  private void parseTokens(int v0, int v1) {
-    int ctx = pop();
-
-    switch (ctx) {
-      case DOCUMENT -> {
-        tokenStart = tokenIndex;
-
-        add(Code.PREAMBLE_START, Code.PARAGRAPH_START);
-
-        push(ctx, PREAMBLE, PARAGRAPH);
-      }
-
-      case PREAMBLE -> {
-        tokenStart = tokenIndex;
-
-        add(Code.PARAGRAPH_START);
-
-        push(ctx, PARAGRAPH);
-      }
-
-      case SECTION -> {
-        tokenStart = tokenIndex;
-
-        add(Code.PARAGRAPH_START);
-
-        push(ctx, PARAGRAPH);
-      }
-
-      case PARAGRAPH, LISTING_BLOCK, ULIST -> push(ctx);
-
-      case PARAGRAPH_NL -> {}
-
-      case _TOKEN_START -> { tokenStart = tokenIndex; }
-
-      default -> uoe(ctx);
-    }
-  }
-
-  private void parseUlist(char symbol, int count) {
-    int ctx = pop();
-
-    switch (ctx) {
-      case DOCUMENT -> {
-        add(Code.PREAMBLE_START, Code.ULIST_START, Code.LI_START);
-
-        pushList(symbol, count);
-
-        push(ctx, PREAMBLE, ULIST, _TOKEN_START);
-      }
-
-      case PREAMBLE, SECTION -> {
-        add(Code.ULIST_START, Code.LI_START);
-
-        pushList(symbol, count);
-
-        push(ctx, ULIST, _TOKEN_START);
-      }
-
-      case ULIST -> {
-        var prevSymbol = peekListSymbol();
-        var prevCount = peekListCount();
-
-        var tokenEnd = tokenIndex - 1; // ignore NL
-
-        if (tokenStart < tokenEnd) {
-          add(Code.TOKENS, tokenStart, tokenEnd);
-        }
-
-        if (prevSymbol == symbol) {
-          if (prevCount == count) {
-            add(Code.LI_END, Code.LI_START);
+          if (sameList('*', _count)) {
+            executeListItem();
+          } else {
+            break loop;
           }
-
-          else if (prevCount < count) {
-            pushList(symbol, count);
-
-            add(Code.ULIST_START, Code.LI_START);
-          }
-
-          else {
-            popList();
-
-            add(Code.LI_END, Code.ULIST_END, Code.LI_END, Code.LI_START);
-          }
-        } else {
-          pushList(symbol, count);
-
-          add(Code.LI_END, Code.ULIST_START, Code.LI_START);
         }
 
-        push(ctx, _TOKEN_START);
+        case Token.ULIST_HYPHEN -> {
+          tokenIndex += 3; // Token.ULIST_HYPHEN, start, end
+
+          if (sameList('-', 1)) {
+            executeListItem();
+          } else {
+            break loop;
+          }
+        }
+
+        case Token.HEADING -> { break loop; }
+
+        default -> uoeToken(token);
       }
 
-      default -> uoe(ctx);
-    }
+    } while (hasToken());
+
+    popList();
+
+    add(Code.ULIST_END);
   }
 
-  private void parseUlistAsterisk(int count, int start, int end) {
-    parseUlist('*', count);
+  private void executeUnorderedListAsteriskStart() {
+    tokenIndex++;
+
+    var count = tokenAt(tokenIndex++);
+
+    tokenIndex += 2; // start, end
+
+    executeUnorderedList('*', count);
   }
 
-  private void parseUlistHyphen(int start, int end) {
-    parseUlist('-', 1);
+  private void executeUnorderedListHyphenStart() {
+    tokenIndex += 3; // Token.ULIST_HYPHEN, start, end
+
+    executeUnorderedList('-', 1);
   }
 
-  private int peek() {
-    return context[contextIndex];
+  private boolean hasList() {
+    return listIndex >= 0;
+  }
+
+  private boolean hasSection() {
+    return sectionIndex >= 0;
+  }
+
+  private boolean hasToken() {
+    return tokenIndex < tokenLength;
   }
 
   private int peekListCount() {
@@ -690,58 +783,12 @@ class Pass1 {
     return (char) list[listIndex];
   }
 
-  private int pop() {
-    return context[contextIndex--];
-  }
-
   private void popList() {
     listIndex -= 2;
   }
 
   private int popSection() {
     return section[sectionIndex--];
-  }
-
-  private void push(int c0) {
-    contextIndex++;
-
-    context = IntArrays.copyIfNecessary(context, contextIndex);
-
-    context[contextIndex] = c0;
-  }
-
-  private void push(int c0, int c1) {
-    context = IntArrays.copyIfNecessary(context, contextIndex + 2);
-
-    context[++contextIndex] = c0;
-    context[++contextIndex] = c1;
-  }
-
-  private void push(int c0, int c1, int c2) {
-    context = IntArrays.copyIfNecessary(context, contextIndex + 3);
-
-    context[++contextIndex] = c0;
-    context[++contextIndex] = c1;
-    context[++contextIndex] = c2;
-  }
-
-  private void push(int c0, int c1, int c2, int c3) {
-    context = IntArrays.copyIfNecessary(context, contextIndex + 4);
-
-    context[++contextIndex] = c0;
-    context[++contextIndex] = c1;
-    context[++contextIndex] = c2;
-    context[++contextIndex] = c3;
-  }
-
-  private void push(int c0, int c1, int c2, int c3, int c4) {
-    context = IntArrays.copyIfNecessary(context, contextIndex + 5);
-
-    context[++contextIndex] = c0;
-    context[++contextIndex] = c1;
-    context[++contextIndex] = c2;
-    context[++contextIndex] = c3;
-    context[++contextIndex] = c4;
   }
 
   private void pushList(char symbol, int count) {
@@ -759,22 +806,52 @@ class Pass1 {
     section[sectionIndex] = level;
   }
 
-  private void uoe() {
-    if (contextIndex == -1) {
-      throw new UnsupportedOperationException("Implement me :: stack=[]");
-    }
+  private void reset(Source source) {
+    this.source = source;
 
-    var length = contextIndex + 1;
+    codeIndex = 0;
 
-    int[] copy = Arrays.copyOf(context, length);
+    docattr.clear();
 
-    throw new UnsupportedOperationException("Implement me :: stack=" + Arrays.toString(copy));
+    listIndex = -1;
+
+    sectionIndex = -1;
+
+    tokenIndex = 0;
+
+    tokenLength = source.tokens();
   }
 
-  private void uoe(int value) {
-    push(value);
+  private boolean sameList(char symbol, int count) {
+    var prevSymbol = peekListSymbol();
+    var prevCount = peekListCount();
 
-    uoe();
+    return symbol == prevSymbol
+        && count == prevCount;
+  }
+
+  private boolean shouldNest(char symbol, int count) {
+    if (!hasList()) {
+      return false;
+    }
+
+    var prevSymbol = peekListSymbol();
+
+    if (prevSymbol != symbol) {
+      return true;
+    }
+
+    var prevCount = peekListCount();
+
+    return count > prevCount;
+  }
+
+  private int tokenAt(int index) {
+    return source.tokenAt(index);
+  }
+
+  private void uoeToken(int token) {
+    throw new UnsupportedOperationException("Implement me :: token=" + token);
   }
 
 }

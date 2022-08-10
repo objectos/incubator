@@ -925,9 +925,9 @@ public class AsciiDocTest {
 
       p1(
         Code.DOCUMENT_START,
+        Code.PREAMBLE_START,
         Code.ATTR_POSITIONAL, 1, 1, 1,
         Code.ATTR_POSITIONAL, 2, 2, 6,
-        Code.PREAMBLE_START,
         Code.LISTING_BLOCK_START,
         Code.VERBATIM, 15, 18,
         Code.LISTING_BLOCK_END,
@@ -1018,9 +1018,9 @@ public class AsciiDocTest {
 
       p1(
         Code.DOCUMENT_START,
+        Code.PREAMBLE_START,
         Code.ATTR_POSITIONAL, 1, 1, 7,
         Code.ATTR_POSITIONAL, 2, 8, 12,
-        Code.PREAMBLE_START,
         Code.LISTING_BLOCK_START,
         Code.VERBATIM, 15, 23,
         Code.LISTING_BLOCK_END,

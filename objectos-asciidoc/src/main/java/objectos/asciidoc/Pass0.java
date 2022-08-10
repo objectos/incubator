@@ -77,8 +77,6 @@ class Pass0 implements Pass1.Source, Pass2.Source {
 
   private int[] token;
 
-  private int tokenCursor;
-
   private int tokenIndex;
 
   private int tokenRollback;
@@ -132,15 +130,7 @@ class Pass0 implements Pass1.Source, Pass2.Source {
     while (state != EOF) {
       state = state(state);
     }
-
-    tokenCursor = 0;
   }
-
-  @Override
-  public final boolean hasToken() { return tokenCursor < tokenIndex; }
-
-  @Override
-  public final int nextToken() { return token[tokenCursor++]; }
 
   @Override
   public final String substring(int start, int end) {
@@ -151,10 +141,10 @@ class Pass0 implements Pass1.Source, Pass2.Source {
   public final int token(int index) { return token[index]; }
 
   @Override
-  public final int tokenCursor() { return tokenCursor; }
+  public final int tokenAt(int index) { return token[index]; }
 
   @Override
-  public final void tokenCursor(int value) { tokenCursor = value; }
+  public final int tokens() { return tokenIndex; }
 
   final String source(int beginIndex, int endIndex) {
     return source.substring(beginIndex, endIndex);

@@ -131,6 +131,8 @@ public class AsciiDoc {
     pass1.execute(pass0);
 
     process0();
+
+    pass1.running = false;
   }
 
   final void process0() {

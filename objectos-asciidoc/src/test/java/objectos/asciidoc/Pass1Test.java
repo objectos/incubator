@@ -54,6 +54,8 @@ public class Pass1Test extends AsciiDocTest {
 
     int[] result = pass1.toCode();
 
+    pass1.running = false;
+
     testArrays(result, p1, "Process (1) assertion failed");
 
     for (var entry : docAttr.entrySet()) {

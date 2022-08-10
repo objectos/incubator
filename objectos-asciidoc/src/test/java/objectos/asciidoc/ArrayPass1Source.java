@@ -19,8 +19,6 @@ class ArrayPass1Source implements Pass1.Source {
 
   private final int[] token;
 
-  private int cursor;
-
   private final String source;
 
   ArrayPass1Source(String source, int[] token) {
@@ -30,18 +28,12 @@ class ArrayPass1Source implements Pass1.Source {
   }
 
   @Override
-  public final boolean hasToken() { return cursor < token.length; }
-
-  @Override
-  public final int nextToken() { return token[cursor++]; }
-
-  @Override
   public final String substring(int start, int end) { return source.substring(start, end); }
 
   @Override
-  public final int tokenCursor() { return cursor; }
+  public final int tokenAt(int index) { return token[index]; }
 
   @Override
-  public final void tokenCursor(int value) { cursor = value; }
+  public final int tokens() { return token.length; }
 
 }
