@@ -532,25 +532,44 @@ class Pass1 {
 
     var tokenEnd = tokenIndex;
 
-    var newLine = false;
+    var newLine = 0;
 
     loop: do {
 
       var token = source.tokenAt(tokenIndex);
 
       switch (token) {
-        case Token.BLOB -> { tokenIndex += 3; newLine = false; }
+        case Token.BLOB -> {
+          if (newLine > 1) {
+            tokenEnd = tokenIndex - newLine;
 
-        case Token.BOLD_START, Token.BOLD_END -> { tokenIndex += 2; newLine = false; }
+            break loop;
+          }
 
-        case Token.ITALIC_START, Token.ITALIC_END -> { tokenIndex += 2; newLine = false; }
+          tokenIndex += 3;
 
-        case Token.MONO_START, Token.MONO_END -> { tokenIndex += 2; newLine = false; }
+          newLine = 0;
+        }
+
+        case //
+            Token.BOLD_START, Token.BOLD_END, //
+            Token.ITALIC_START, Token.ITALIC_END, //
+            Token.MONO_START, Token.MONO_END -> {
+          if (newLine > 1) {
+            tokenEnd = tokenIndex - newLine;
+
+            break loop;
+          }
+
+          tokenIndex += 2;
+
+          newLine = 0;
+        }
 
         case Token.INLINE_MACRO -> {
           executeInlineMacro();
 
-          newLine = false;
+          newLine = 0;
 
           tokenStart = tokenIndex;
         }
@@ -581,10 +600,14 @@ class Pass1 {
           break loop;
         }
 
-        case Token.LF -> { tokenEnd = tokenIndex++; newLine = true; }
+        case Token.LF -> {
+          tokenEnd = tokenIndex++;
+
+          newLine++;
+        }
 
         case Token.EOF -> {
-          if (!newLine) {
+          if (newLine == 0) {
             tokenEnd = tokenIndex;
           }
 
@@ -605,6 +628,42 @@ class Pass1 {
     }
 
     add(Code.LI_END);
+  }
+
+  private void executeListItems() {
+    loop: do {
+
+      var token = source.tokenAt(tokenIndex);
+
+      switch (token) {
+        case Token.ULIST_ASTERISK -> {
+          var _count = tokenAt(tokenIndex + 1);
+
+          if (sameList('*', _count)) {
+            tokenIndex += 4; // Token.ULIST_ASTERISK, count, start, end
+
+            executeListItem();
+          } else {
+            break loop;
+          }
+        }
+
+        case Token.ULIST_HYPHEN -> {
+          if (sameList('-', 1)) {
+            tokenIndex += 3; // Token.ULIST_HYPHEN, start, end
+
+            executeListItem();
+          } else {
+            break loop;
+          }
+        }
+
+        case Token.HEADING, Token.BLOB, Token.MONO_START, Token.INLINE_MACRO -> { break loop; }
+
+        default -> uoeToken(token);
+      }
+
+    } while (hasToken());
   }
 
   private void executeParagraph() {
@@ -784,41 +843,7 @@ class Pass1 {
 
     pushList(symbol, count);
 
-    loop: do {
-
-      var token = source.tokenAt(tokenIndex);
-
-      switch (token) {
-        case Token.BLOB, Token.MONO_START, Token.INLINE_MACRO -> executeListItem();
-
-        case Token.ULIST_ASTERISK -> {
-          var _count = tokenAt(tokenIndex + 1);
-
-          tokenIndex += 4; // Token.ULIST_ASTERISK, count, start, end
-
-          if (sameList('*', _count)) {
-            executeListItem();
-          } else {
-            break loop;
-          }
-        }
-
-        case Token.ULIST_HYPHEN -> {
-          tokenIndex += 3; // Token.ULIST_HYPHEN, start, end
-
-          if (sameList('-', 1)) {
-            executeListItem();
-          } else {
-            break loop;
-          }
-        }
-
-        case Token.HEADING -> { break loop; }
-
-        default -> uoeToken(token);
-      }
-
-    } while (hasToken());
+    executeListItems();
 
     popList();
 
@@ -826,18 +851,12 @@ class Pass1 {
   }
 
   private void executeUnorderedListAsteriskStart() {
-    tokenIndex++;
-
-    var count = tokenAt(tokenIndex++);
-
-    tokenIndex += 2; // start, end
+    var count = tokenAt(tokenIndex + 1);
 
     executeUnorderedList('*', count);
   }
 
   private void executeUnorderedListHyphenStart() {
-    tokenIndex += 3; // Token.ULIST_HYPHEN, start, end
-
     executeUnorderedList('-', 1);
   }
 
