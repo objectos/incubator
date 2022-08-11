@@ -149,21 +149,19 @@ class Pass1 {
     code[codeIndex++] = p3;
   }
 
-  private void executeBlockAttributeList() {
+  private void executeAttributeListBlock() {
     tokenIndex++; // Token.ATTR_LIST_START
 
     attrCount = 1;
 
     loop: do {
 
-      var token = tokenAt(tokenIndex);
+      var token = tokenAt(tokenIndex++);
 
       switch (token) {
-        case Token.DQUOTE -> tokenIndex++;
+        case Token.DQUOTE -> {}
 
         case Token.ATTR_VALUE -> {
-          tokenIndex++;
-
           var start = tokenAt(tokenIndex++);
           var end = tokenAt(tokenIndex++);
 
@@ -173,11 +171,64 @@ class Pass1 {
         case Token.SEPARATOR -> {
           attrCount++;
 
-          tokenIndex += 3; // Token.SEPARATOR, start, end
+          tokenIndex += 2; // start, end
+        }
+
+        case Token.ATTR_LIST_END -> { break loop; }
+
+        default -> uoeToken(token);
+      }
+
+    } while (hasToken());
+  }
+
+  private void executeAttributeListLink() {
+    tokenIndex++; // Token.ATTR_LIST_START
+
+    attrCount = 1;
+
+    var token = tokenAt(tokenIndex++);
+
+    switch (token) {
+      case Token.ATTR_VALUE -> executeAttributeListLinkText();
+
+      default -> uoeToken(token);
+    }
+  }
+
+  private void executeAttributeListLinkText() {
+    var start = tokenAt(tokenIndex++);
+    var end = tokenAt(tokenIndex++);
+
+    var token = tokenAt(tokenIndex++);
+
+    switch (token) {
+      case Token.ATTR_LIST_END -> add(Code.ATTR_POSITIONAL, 1, start, end);
+
+      case Token.SEPARATOR -> executeAttributeListLinkTextComma(start);
+
+      default -> uoeToken(token);
+    }
+  }
+
+  private void executeAttributeListLinkTextComma(int start) {
+    /*var commaStart =*/ tokenAt(tokenIndex++);
+    var commaEnd = tokenAt(tokenIndex++);
+    var end = commaEnd;
+
+    loop: do {
+
+      var token = tokenAt(tokenIndex++);
+
+      switch (token) {
+        case Token.ATTR_VALUE -> {
+          tokenIndex++;
+
+          end = tokenAt(tokenIndex++);
         }
 
         case Token.ATTR_LIST_END -> {
-          tokenIndex++;
+          add(Code.ATTR_POSITIONAL, 1, start, end);
 
           break loop;
         }
@@ -201,7 +252,7 @@ class Pass1 {
             Token.MONO_START, //
             Token.INLINE_MACRO -> executeParagraph();
 
-        case Token.ATTR_LIST_START -> executeBlockAttributeList();
+        case Token.ATTR_LIST_START -> executeAttributeListBlock();
 
         case Token.LISTING_BLOCK_DELIM -> executeListingBlock();
 
@@ -364,36 +415,57 @@ class Pass1 {
       add(Code.TOKENS, tokenStart, tokenEnd);
     }
 
-    var start = tokenAt(++tokenIndex);
-    var end = tokenAt(++tokenIndex);
+    tokenIndex++; // Token.INLINE_MACRO;
+
+    var start = tokenAt(tokenIndex++);
+    var end = tokenAt(tokenIndex++);
 
     var name = source.substring(start, end);
 
     if (URL_MACROS.contains(name)) {
-      throw new UnsupportedOperationException("Implement me");
-    } else {
-      add(Code.INLINE_MACRO, start, end);
-
       // target
-      var blob = tokenAt(++tokenIndex);
+      var blob = tokenAt(tokenIndex++);
 
       if (blob != Token.BLOB) {
         throw new UnsupportedOperationException("Implement me");
       }
 
-      start = tokenAt(++tokenIndex);
-      end = tokenAt(++tokenIndex);
+      tokenIndex++; // start
+      end = tokenAt(tokenIndex++);
 
-      add(Code.MACRO_TARGET, start, end);
+      add(Code.URL_MACRO, start, end);
 
       // attrlist
-      var attrlist = tokenAt(++tokenIndex);
+      var attrlist = tokenAt(tokenIndex);
 
       if (attrlist != Token.ATTR_LIST_START) {
         throw new UnsupportedOperationException("Implement me");
       }
 
-      executeBlockAttributeList();
+      executeAttributeListLink();
+    } else {
+      add(Code.INLINE_MACRO, start, end);
+
+      // target
+      var blob = tokenAt(tokenIndex++);
+
+      if (blob != Token.BLOB) {
+        throw new UnsupportedOperationException("Implement me");
+      }
+
+      start = tokenAt(tokenIndex++);
+      end = tokenAt(tokenIndex++);
+
+      add(Code.MACRO_TARGET, start, end);
+
+      // attrlist
+      var attrlist = tokenAt(tokenIndex);
+
+      if (attrlist != Token.ATTR_LIST_START) {
+        throw new UnsupportedOperationException("Implement me");
+      }
+
+      executeAttributeListBlock();
     }
   }
 
@@ -645,7 +717,7 @@ class Pass1 {
       if (token == Token.ATTR_LIST_START) {
         tokenIndex--;
 
-        executeBlockAttributeList();
+        executeAttributeListBlock();
 
         var nl = tokenAt(tokenIndex++);
 

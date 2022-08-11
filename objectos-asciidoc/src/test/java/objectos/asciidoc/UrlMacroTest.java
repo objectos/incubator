@@ -21,7 +21,7 @@ final class UrlMacroTest extends AbstractAsciiDocTest {
 
   UrlMacroTest(AsciiDocTest outer) { super(outer); }
 
-  @Test(enabled = false, description = //
+  @Test(description = //
   """
   - https
   - well-formed
@@ -84,7 +84,7 @@ final class UrlMacroTest extends AbstractAsciiDocTest {
     );
   }
 
-  @Test(enabled = false, description = //
+  @Test(description = //
   """
   - https
   - well-formed
@@ -120,7 +120,7 @@ final class UrlMacroTest extends AbstractAsciiDocTest {
         Code.PARAGRAPH_START,
         Code.URL_MACRO, 0, 9,
         Code.ATTR_POSITIONAL, 1, 10, 14,
-        Code.TOKENS, 14, 15,
+        Code.TOKENS, 17, 18,
         Code.PARAGRAPH_END,
         Code.PREAMBLE_END,
         Code.DOCUMENT_END

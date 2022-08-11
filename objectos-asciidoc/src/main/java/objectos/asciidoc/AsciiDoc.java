@@ -186,7 +186,9 @@ public class AsciiDoc {
 
         case Code.LI_END -> processor.listItemEnd();
 
-        case Code.INLINE_MACRO -> processInlineMacro();
+        case Code.INLINE_MACRO -> processMacroInline();
+
+        case Code.URL_MACRO -> processMacroUrl();
 
         default -> throw new UnsupportedOperationException("Implement me :: code=" + code);
       }
@@ -214,70 +216,6 @@ public class AsciiDoc {
   private boolean hasCode() { return pass1.hasCode(); }
 
   private int nextCode() { return pass1.nextCode(); }
-
-  private void processInlineMacro() {
-    var name = source.substring(nextCode(), nextCode());
-
-    var maybeTarget = nextCode();
-
-    if (maybeTarget != Code.MACRO_TARGET) {
-      throw new UnsupportedOperationException("Implement me");
-    }
-
-    var target = source.substring(nextCode(), nextCode());
-
-    processInlineMacroAttrMap();
-
-    switch (name) {
-      case "https" -> processInlineMacroUrl(name, target);
-
-      default -> processInlineMacroAny(name, target);
-    }
-  }
-
-  private void processInlineMacroAny(String name, String target) {
-    var copy = attrMap.toUnmodifiableMap();
-
-    processor.inlineMacro(name, target, copy);
-  }
-
-  private void processInlineMacroAttrMap() {
-    attrMap.clear();
-
-    loop: while (hasCode()) {
-      int cursor = pass1.codeCursor();
-
-      int peek = pass1.codeAt(cursor);
-
-      switch (peek) {
-        case Code.ATTR_POSITIONAL -> {
-          nextCode();
-
-          var index = nextCode();
-          var value = source.substring(nextCode(), nextCode());
-
-          attrMap.put(Integer.toString(index), value);
-        }
-        default -> { break loop; }
-      }
-    }
-  }
-
-  private void processInlineMacroUrl(String protocol, String target) {
-    var size = attrMap.size();
-
-    switch (size) {
-      case 0 -> uoe(size);
-
-      case 1 -> {
-        var text = attrMap.get("1");
-
-        processor.link(protocol + ":" + target, text);
-      }
-
-      default -> uoe(size);
-    }
-  }
 
   private void processListingBlockEnd() {
     var style = attrMap.getOrDefault(AttrName.STYLE, "");
@@ -345,6 +283,70 @@ public class AsciiDoc {
       }
 
       default -> uoe(position);
+    }
+  }
+
+  private void processMacroInline() {
+    var name = source.substring(nextCode(), nextCode());
+
+    var maybeTarget = nextCode();
+
+    if (maybeTarget != Code.MACRO_TARGET) {
+      throw new UnsupportedOperationException("Implement me");
+    }
+
+    var target = source.substring(nextCode(), nextCode());
+
+    processMacroInlineAttrMap();
+
+    processMacroInlineAny(name, target);
+  }
+
+  private void processMacroInlineAny(String name, String target) {
+    var copy = attrMap.toUnmodifiableMap();
+
+    processor.inlineMacro(name, target, copy);
+  }
+
+  private void processMacroInlineAttrMap() {
+    attrMap.clear();
+
+    loop: while (hasCode()) {
+      int cursor = pass1.codeCursor();
+
+      int peek = pass1.codeAt(cursor);
+
+      switch (peek) {
+        case Code.ATTR_POSITIONAL -> {
+          nextCode();
+
+          var index = nextCode();
+          var value = source.substring(nextCode(), nextCode());
+
+          attrMap.put(Integer.toString(index), value);
+        }
+        default -> { break loop; }
+      }
+    }
+  }
+
+  private void processMacroUrl() {
+    var href = source.substring(nextCode(), nextCode());
+
+    processMacroInlineAttrMap();
+
+    var size = attrMap.size();
+
+    switch (size) {
+      case 0 -> uoe(size);
+
+      case 1 -> {
+        var text = attrMap.get("1");
+
+        processor.link(href, text);
+      }
+
+      default -> uoe(size);
     }
   }
 
