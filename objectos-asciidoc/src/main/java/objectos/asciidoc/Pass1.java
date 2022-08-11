@@ -541,6 +541,12 @@ class Pass1 {
       switch (token) {
         case Token.BLOB -> { tokenIndex += 3; newLine = false; }
 
+        case Token.BOLD_START, Token.BOLD_END -> { tokenIndex += 2; newLine = false; }
+
+        case Token.ITALIC_START, Token.ITALIC_END -> { tokenIndex += 2; newLine = false; }
+
+        case Token.MONO_START, Token.MONO_END -> { tokenIndex += 2; newLine = false; }
+
         case Token.INLINE_MACRO -> {
           executeInlineMacro();
 
@@ -783,7 +789,7 @@ class Pass1 {
       var token = source.tokenAt(tokenIndex);
 
       switch (token) {
-        case Token.BLOB, Token.INLINE_MACRO -> executeListItem();
+        case Token.BLOB, Token.MONO_START, Token.INLINE_MACRO -> executeListItem();
 
         case Token.ULIST_ASTERISK -> {
           var _count = tokenAt(tokenIndex + 1);
