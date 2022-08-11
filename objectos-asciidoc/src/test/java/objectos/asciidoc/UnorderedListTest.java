@@ -518,7 +518,7 @@ final class UnorderedListTest extends AbstractAsciiDocTest {
         Code.TOKENS, 4, 7,
         Code.HEADING_END,
         Code.PARAGRAPH_START,
-        Code.TOKENS, 9, 16,
+        Code.TOKENS, 9, 15,
         Code.PARAGRAPH_END,
 
         Code.ULIST_START,
@@ -677,7 +677,7 @@ final class UnorderedListTest extends AbstractAsciiDocTest {
         Code.ULIST_END,
 
         Code.PARAGRAPH_START,
-        Code.TOKENS, 17, 21,
+        Code.TOKENS, 17, 20,
         Code.PARAGRAPH_END,
 
         Code.PREAMBLE_END,

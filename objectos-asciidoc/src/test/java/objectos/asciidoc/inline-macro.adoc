@@ -1,0 +1,7 @@
+= Inline macros
+
+== Test case 04
+
+a i:b[c].
+
+d

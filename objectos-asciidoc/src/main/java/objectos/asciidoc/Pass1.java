@@ -393,6 +393,7 @@ class Pass1 {
         case Token.INLINE_MACRO -> { executeInlineMacro(); tokenStart = tokenIndex; }
 
         case Token.LF, Token.EOF -> {
+          // do not include LF/EOF in heading
           add(Code.TOKENS, tokenStart, tokenIndex);
 
           tokenIndex++;
@@ -409,7 +410,7 @@ class Pass1 {
   }
 
   private void executeInlineMacro() {
-    var tokenEnd = tokenIndex - 1;
+    var tokenEnd = tokenIndex;
 
     if (tokenStart < tokenEnd) {
       add(Code.TOKENS, tokenStart, tokenEnd);
@@ -671,45 +672,51 @@ class Pass1 {
 
     tokenStart = tokenIndex;
 
-    var newLine = false;
+    var newLine = 0;
 
     loop: do {
 
       var token = tokenAt(tokenIndex);
 
       switch (token) {
-        case Token.BLOB -> { tokenIndex += 3; newLine = false; }
+        case Token.BLOB -> { tokenIndex += 3; newLine = 0; }
 
-        case Token.BOLD_START, Token.BOLD_END -> { tokenIndex += 2; newLine = false; }
+        case Token.BOLD_START, Token.BOLD_END -> { tokenIndex += 2; newLine = 0; }
 
-        case Token.ITALIC_START, Token.ITALIC_END -> { tokenIndex += 2; newLine = false; }
+        case Token.ITALIC_START, Token.ITALIC_END -> { tokenIndex += 2; newLine = 0; }
 
-        case Token.MONO_START, Token.MONO_END -> { tokenIndex += 2; newLine = false; }
+        case Token.MONO_START, Token.MONO_END -> { tokenIndex += 2; newLine = 0; }
 
         case Token.INLINE_MACRO -> {
           executeInlineMacro();
 
-          newLine = false;
+          newLine = 0;
 
           tokenStart = tokenIndex;
         }
 
         case Token.LF -> {
-          if (newLine) {
-            add(Code.TOKENS, tokenStart, tokenIndex);
+          tokenIndex++;
 
-            tokenIndex++;
+          newLine++;
+
+          if (newLine > 1) {
+            var tokenEnd = tokenIndex - newLine;
+
+            add(Code.TOKENS, tokenStart, tokenEnd);
 
             break loop;
-          } else {
-            newLine = true;
-
-            tokenIndex++;
           }
         }
 
         case Token.EOF -> {
-          add(Code.TOKENS, tokenStart, tokenIndex);
+          var tokenEnd = tokenIndex;
+
+          if (newLine > 0) {
+            tokenEnd -= newLine;
+          }
+
+          add(Code.TOKENS, tokenStart, tokenEnd);
 
           tokenIndex++;
 

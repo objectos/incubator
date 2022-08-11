@@ -123,7 +123,9 @@ class Pass2 {
       state = switch (token) {
         case Token.BLOB -> executeBlob(nextToken(), nextToken());
 
-        case Token.EOF, Token.LF -> executeLf();
+        case Token.EOF -> state;
+
+        case Token.LF -> executeLf();
 
         case Token.BOLD_START -> executeBoldStart(nextToken());
 
@@ -264,7 +266,13 @@ class Pass2 {
 
   private int executeLf() {
     return switch (state) {
-      case START, REGULAR -> state;
+      case START -> state;
+
+      case REGULAR -> {
+        regularEnd++;
+
+        yield state;
+      }
 
       default -> uoe();
     };
@@ -288,7 +296,7 @@ class Pass2 {
   }
 
   private boolean hasToken() {
-    return sourceIndex <= sourceLast;
+    return sourceIndex < sourceLast;
   }
 
   private int nextToken() {

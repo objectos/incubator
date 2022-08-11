@@ -58,7 +58,7 @@ final class UrlMacroTest extends AbstractAsciiDocTest {
         Code.PARAGRAPH_START,
         Code.URL_MACRO, 0, 19,
         Code.ATTR_POSITIONAL, 1, 20, 22,
-        Code.TOKENS, 11, 12,
+        Code.TOKENS, 11, 11,
         Code.PARAGRAPH_END,
         Code.PREAMBLE_END,
         Code.DOCUMENT_END
@@ -120,7 +120,7 @@ final class UrlMacroTest extends AbstractAsciiDocTest {
         Code.PARAGRAPH_START,
         Code.URL_MACRO, 0, 9,
         Code.ATTR_POSITIONAL, 1, 10, 14,
-        Code.TOKENS, 17, 18,
+        Code.TOKENS, 17, 17,
         Code.PARAGRAPH_END,
         Code.PREAMBLE_END,
         Code.DOCUMENT_END

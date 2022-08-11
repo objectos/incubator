@@ -71,7 +71,7 @@ final class DocumentAttributeTest extends AbstractAsciiDocTest {
         Code.HEADING_END,
         Code.PREAMBLE_START,
         Code.PARAGRAPH_START,
-        Code.TOKENS, 23, 27,
+        Code.TOKENS, 23, 26,
         Code.PARAGRAPH_END,
         Code.PREAMBLE_END,
         Code.DOCUMENT_END
