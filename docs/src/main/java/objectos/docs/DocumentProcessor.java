@@ -94,7 +94,11 @@ final class DocumentProcessor implements AsciiDoc.Processor {
 
   @Override
   public final void link(String href, String text) {
-    throw new UnsupportedOperationException("Implement me");
+    html.append("<a href=\"");
+    html.append(href);
+    html.append("\">");
+    html.append(text);
+    html.append("</a>");
   }
 
   @Override
@@ -143,14 +147,18 @@ final class DocumentProcessor implements AsciiDoc.Processor {
   }
 
   @Override
-  public final void monospaceEnd() {}
+  public final void monospaceEnd() {
+    html.append("</code>");
+  }
 
   @Override
-  public final void monospaceStart() {}
+  public final void monospaceStart() {
+    html.append("<code>");
+  }
 
   @Override
   public final void paragraphEnd() {
-    html.append("</p>\n");
+    html.append("</p>");
   }
 
   @Override
@@ -166,17 +174,17 @@ final class DocumentProcessor implements AsciiDoc.Processor {
 
   @Override
   public final void sectionEnd() {
-    html.append("</section>\n");
+    //html.append("</section>\n");
   }
 
   @Override
   public final void sectionStart(int level) {
-    html.append("<section>\n");
+    //html.append("<section>\n");
   }
 
   @Override
   public final void sectionStart(int level, String style) {
-    html.append("<section>\n");
+    //html.append("<section>\n");
   }
 
   @Override
@@ -193,12 +201,12 @@ final class DocumentProcessor implements AsciiDoc.Processor {
 
   @Override
   public final void unorderedListEnd() {
-    html.append("</ul>\n");
+    html.append("</ul>");
   }
 
   @Override
   public final void unorderedListStart() {
-    html.append("<ul>\n");
+    html.append("\n<ul>");
   }
 
 }

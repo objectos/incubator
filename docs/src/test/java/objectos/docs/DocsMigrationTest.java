@@ -51,11 +51,11 @@ public class DocsMigrationTest {
     );
   }
 
-  @Test(enabled = false)
+  @Test
   public void introOverview() throws IOException {
     var doc = processor.load("v0002", "intro/overview");
 
-    assertEquals(
+    test(
       normalize(doc),
       load("v0002/intro/overview.html")
     );
@@ -83,6 +83,33 @@ public class DocsMigrationTest {
     var article = body.selectFirst("article");
 
     return article.toString();
+  }
+
+  private void test(String actual, String expected) {
+    if (!actual.equals(expected)) {
+      int len = Math.min(actual.length(), expected.length());
+
+      var sba = new StringBuilder(len);
+      var sbe = new StringBuilder(len);
+
+      for (int i = 0; i < len; i++) {
+        char ca = actual.charAt(i);
+        sba.append(ca);
+
+        char ce = expected.charAt(i);
+        sbe.append(ce);
+
+        assertEquals(ca, ce, """
+        index=%d
+
+        actual
+        %s
+
+        expected
+        %s
+        """.formatted(i, sba, sbe));
+      }
+    }
   }
 
 }
