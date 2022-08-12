@@ -846,14 +846,10 @@ class Pass1 {
           pushSection(section);
         }
 
-        else if (section == prevSection) {
+        else {
           add(Code.SECTION_END);
 
           pushSection(section);
-        }
-
-        else {
-          throw new UnsupportedOperationException("Implement me");
         }
       }
 

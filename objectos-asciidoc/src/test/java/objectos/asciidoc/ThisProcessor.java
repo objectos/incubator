@@ -31,8 +31,6 @@ class ThisProcessor implements AsciiDoc.Processor {
 
   private int listItem;
 
-  private int sectionCount;
-
   private int state;
 
   private String result;
@@ -48,6 +46,8 @@ class ThisProcessor implements AsciiDoc.Processor {
   private final StringBuilder content = new StringBuilder();
 
   private StringBuilder sb;
+
+  private int sectionLevel;
 
   @Override
   public final void boldEnd() {
@@ -124,7 +124,7 @@ class ThisProcessor implements AsciiDoc.Processor {
 
     listItem = 0;
 
-    sectionCount = 0;
+    sectionLevel = 0;
 
     state = START;
 
@@ -154,7 +154,7 @@ class ThisProcessor implements AsciiDoc.Processor {
       case HEADER | PREAMBLE | CONTENT, CONTENT -> {
         sb.insert(headingIdIndex, headingId);
 
-        if (sectionCount == 1) {
+        if (sectionLevel == 1) {
           content.append("<div class=\"sectionbody\">\n");
         }
       }
@@ -301,12 +301,12 @@ class ThisProcessor implements AsciiDoc.Processor {
 
   @Override
   public final void sectionEnd() {
-    if (sectionCount == 1) {
+    if (sectionLevel == 1) {
       sb.append("</div>\n"); // section body
     }
     sb.append("</div>\n"); // section
 
-    sectionCount--;
+    sectionLevel = 0;
   }
 
   @Override
@@ -325,7 +325,7 @@ class ThisProcessor implements AsciiDoc.Processor {
     sb.append(level);
     sb.append("\">\n");
 
-    sectionCount++;
+    sectionLevel = level;
   }
 
   @Override
