@@ -172,6 +172,17 @@ public class AsciiDoc {
           attrEnd = pass1.codeCursor();
         }
 
+        case Code.ATTR_NAMED -> {
+          attrSet();
+
+          nextCode(); // name start
+          nextCode(); // name end
+          nextCode(); // val start
+          nextCode(); // val end
+
+          attrEnd = pass1.codeCursor();
+        }
+
         case Code.LISTING_BLOCK_START -> processListingBlockStart();
 
         case Code.LISTING_BLOCK_END -> { processListingBlockEnd(); attrClear(); }

@@ -35,22 +35,23 @@ final class Code {
   static final int SECTION_END = -11;
 
   static final int ATTR_POSITIONAL = -12;
+  static final int ATTR_NAMED = -13;
 
-  static final int LISTING_BLOCK_START = -13;
-  static final int LISTING_BLOCK_END = -14;
+  static final int LISTING_BLOCK_START = -14;
+  static final int LISTING_BLOCK_END = -15;
 
-  static final int VERBATIM = -15;
+  static final int VERBATIM = -16;
 
-  static final int ULIST_START = -16;
-  static final int ULIST_END = -17;
+  static final int ULIST_START = -17;
+  static final int ULIST_END = -18;
 
-  static final int LI_START = -18;
-  static final int LI_END = -19;
+  static final int LI_START = -19;
+  static final int LI_END = -20;
 
-  static final int INLINE_MACRO = -20;
-  static final int MACRO_TARGET = -21;
+  static final int INLINE_MACRO = -21;
+  static final int MACRO_TARGET = -22;
 
-  static final int URL_MACRO = -22;
+  static final int URL_MACRO = -23;
 
   private Code() {}
 

@@ -47,22 +47,23 @@ class Pass0 implements Pass1.Source, Pass2.Source {
   private static final int MONO_END = 13;
 
   private static final int ATTR_NAME = 14;
-  private static final int ATTR_QUOTES = 15;
-  private static final int ATTR_SEPARATOR = 16;
-  private static final int ATTR_LIST_END = 17;
+  private static final int ATTR_VALUE = 15;
+  private static final int ATTR_QUOTES = 16;
+  private static final int ATTR_SEPARATOR = 17;
+  private static final int ATTR_LIST_END = 18;
 
-  private static final int LISTING_BLOCK = 18;
-  private static final int LISTING_BLOCK_OR_LIST = 19;
+  private static final int LISTING_BLOCK = 19;
+  private static final int LISTING_BLOCK_OR_LIST = 20;
 
-  private static final int LITERAL_OR_LIST = 20;
+  private static final int LITERAL_OR_LIST = 21;
 
-  private static final int MACRO_ANY_START = 21;
-  private static final int MACRO_INLINE_START = 22;
-  private static final int MACRO_INLINE = 23;
+  private static final int MACRO_ANY_START = 22;
+  private static final int MACRO_INLINE_START = 23;
+  private static final int MACRO_INLINE = 24;
 
-  private static final int DOCATTR_NAME = 24;
-  private static final int DOCATTR_NAME_NEXT = 25;
-  private static final int DOCATTR_VALUE = 26;
+  private static final int DOCATTR_NAME = 25;
+  private static final int DOCATTR_NAME_NEXT = 26;
+  private static final int DOCATTR_VALUE = 27;
 
   private static final int _ATTRLIST_BLOCK = 1;
   private static final int _ATTRLIST_INLINE_MACRO = 2;
@@ -296,6 +297,8 @@ class Pass0 implements Pass1.Source, Pass2.Source {
 
       case ATTR_NAME -> stateAttrName();
 
+      case ATTR_VALUE -> stateAttrValue();
+
       case ATTR_QUOTES -> stateAttrQuotes();
 
       case ATTR_SEPARATOR -> stateAttrSeparator();
@@ -382,6 +385,14 @@ class Pass0 implements Pass1.Source, Pass2.Source {
         yield advance(ATTR_SEPARATOR);
       }
 
+      case '=' -> {
+        add(Token.ATTR_NAME, auxiliaryStart, sourceIndex);
+
+        auxiliaryStart = sourceIndex + 1; // skip '='
+
+        yield advance(ATTR_VALUE);
+      }
+
       case ']' -> {
         if (auxiliaryStart < sourceIndex) {
           add(Token.ATTR_VALUE, auxiliaryStart, sourceIndex);
@@ -432,6 +443,40 @@ class Pass0 implements Pass1.Source, Pass2.Source {
 
         yield advance(ATTR_NAME);
       }
+    };
+  }
+
+  private int stateAttrValue() {
+    if (!hasChar()) {
+      return rollbackAttributes();
+    }
+
+    return switch (peek()) {
+      case '\n' -> rollbackAttributes();
+
+      case '"' -> {
+        add(Token.DQUOTE);
+
+        yield advance(ATTR_QUOTES);
+      }
+
+      case ',' -> {
+        add(Token.ATTR_VALUE, auxiliaryStart, sourceIndex);
+
+        auxiliaryStart = sourceIndex;
+
+        yield advance(ATTR_SEPARATOR);
+      }
+
+      case ']' -> {
+        if (auxiliaryStart < sourceIndex) {
+          add(Token.ATTR_VALUE, auxiliaryStart, sourceIndex);
+        }
+
+        yield advance(ATTR_LIST_END);
+      }
+
+      default -> advance(state);
     };
   }
 

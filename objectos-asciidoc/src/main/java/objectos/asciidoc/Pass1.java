@@ -149,6 +149,16 @@ class Pass1 {
     code[codeIndex++] = p3;
   }
 
+  private void add(int p0, int p1, int p2, int p3, int p4) {
+    code = IntArrays.copyIfNecessary(code, codeIndex + 4);
+
+    code[codeIndex++] = p0;
+    code[codeIndex++] = p1;
+    code[codeIndex++] = p2;
+    code[codeIndex++] = p3;
+    code[codeIndex++] = p4;
+  }
+
   private void executeAttributeListBlock() {
     tokenIndex++; // Token.ATTR_LIST_START
 
@@ -160,6 +170,23 @@ class Pass1 {
 
       switch (token) {
         case Token.DQUOTE -> {}
+
+        case Token.ATTR_NAME -> {
+          var nameStart = tokenAt(tokenIndex++);
+          var nameEnd = tokenAt(tokenIndex++);
+
+          var value = tokenAt(tokenIndex++);
+
+          if (value != Token.ATTR_VALUE) {
+            throw new UnsupportedOperationException(
+              "Implement me :: expecting Token.ATTR_VALUE but found=" + value);
+          }
+
+          var valStart = tokenAt(tokenIndex++);
+          var valEnd = tokenAt(tokenIndex++);
+
+          add(Code.ATTR_NAMED, nameStart, nameEnd, valStart, valEnd);
+        }
 
         case Token.ATTR_VALUE -> {
           var start = tokenAt(tokenIndex++);

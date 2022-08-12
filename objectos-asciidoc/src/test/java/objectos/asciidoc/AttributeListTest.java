@@ -84,4 +84,70 @@ final class AttributeListTest extends AbstractAsciiDocTest {
     );
   }
 
+  @Test(description = //
+  """
+  Named attribute
+
+  - well-formed
+
+  012345678
+  90
+  '''
+  [,a,b=c]
+  d
+  '''
+  """)
+  public void testCase02() {
+    test(
+      """
+      [,a,b=c]
+      d
+      """,
+
+      p0(
+        Token.ATTR_LIST_START,
+        Token.ATTR_VALUE, 1, 1,
+        Token.SEPARATOR, 1, 2,
+        Token.ATTR_VALUE, 2, 3,
+        Token.SEPARATOR, 3, 4,
+        Token.ATTR_NAME, 4, 5,
+        Token.ATTR_VALUE, 6, 7,
+        Token.ATTR_LIST_END, Token.LF,
+        Token.BLOB, 9, 10, Token.LF,
+        Token.EOF
+      ),
+
+      p1(
+        Code.DOCUMENT_START,
+        Code.PREAMBLE_START,
+        Code.ATTR_POSITIONAL, 1, 1, 1,
+        Code.ATTR_POSITIONAL, 2, 2, 3,
+        Code.ATTR_NAMED, 4, 5, 6, 7,
+        Code.PARAGRAPH_START,
+        Code.TOKENS, 21, 24,
+        Code.PARAGRAPH_END,
+        Code.PREAMBLE_END,
+        Code.DOCUMENT_END
+      ),
+
+      docAttr(),
+
+      p2(
+        t(Text.REGULAR, 9, 10)
+      ),
+
+      """
+      <body>
+      <div id="header">
+      </div>
+      <div id="content">
+      <div class="paragraph">
+      <p>d</p>
+      </div>
+      </div>
+      </body>
+      """
+    );
+  }
+
 }
