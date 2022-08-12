@@ -492,7 +492,7 @@ class Pass1 {
       token = tokenAt(tokenIndex);
 
       switch (token) {
-        case Token.BLOB -> tokenIndex += 3;
+        case Token.BLOB, Token.LITERALI -> tokenIndex += 3;
 
         case Token.LF -> tokenIndex += 1;
 

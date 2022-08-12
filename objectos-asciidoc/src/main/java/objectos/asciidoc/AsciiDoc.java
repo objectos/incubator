@@ -437,7 +437,7 @@ public class AsciiDoc {
       int token = pass0.token(index++);
 
       switch (token) {
-        case Token.BLOB -> {
+        case Token.BLOB, Token.LITERALI -> {
           var begin = pass0.token(index++);
           var end = pass0.token(index++);
 

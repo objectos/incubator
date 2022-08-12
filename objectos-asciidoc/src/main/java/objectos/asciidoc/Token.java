@@ -53,6 +53,8 @@ final class Token {
 
   static final int DQUOTE = -23;
 
+  static final int LITERALI = -24;
+
   private Token() {}
 
 }

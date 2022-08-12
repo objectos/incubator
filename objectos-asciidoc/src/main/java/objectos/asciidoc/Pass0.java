@@ -809,7 +809,11 @@ class Pass0 implements Pass1.Source, Pass2.Source {
         yield advance(state);
       }
 
-      case ' ', '\t', '\f', '\u000B' -> advance(LITERAL_OR_LIST);
+      case ' ', '\t', '\f', '\u000B' -> {
+        counter = 1;
+
+        yield advance(LITERAL_OR_LIST);
+      }
 
       case '-' -> {
         counter = 1;
@@ -971,7 +975,14 @@ class Pass0 implements Pass1.Source, Pass2.Source {
         yield advance(BOLD_OR_LIST);
       }
 
-      default -> uoe();
+      default -> {
+        var start = sourceIndex - counter;
+
+        add(Token.LITERALI, start, sourceIndex);
+
+        // do not advance!
+        yield LINE_START_LIKE;
+      }
     };
   }
 
@@ -1145,7 +1156,7 @@ class Pass0 implements Pass1.Source, Pass2.Source {
   }
 
   private int uoe() {
-    throw new UnsupportedOperationException("Implement me :: state=" + state);
+    throw new UnsupportedOperationException("Implement me :: state=" + state + ";peek=" + peek());
   }
 
 }
