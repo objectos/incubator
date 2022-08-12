@@ -29,7 +29,14 @@ final class DocumentProcessor implements AsciiDoc.Processor {
 
   private final StringBuilder html = new StringBuilder();
 
+  private final JavaRenderer javaRenderer = new JavaRenderer();
+  private final XmlRenderer xmlRenderer = new XmlRenderer();
+
   private int headingLevel;
+
+  private int languageMark;
+
+  private LanguageRenderer languageRenderer;
 
   @Override
   public final void boldEnd() {}
@@ -90,7 +97,11 @@ final class DocumentProcessor implements AsciiDoc.Processor {
   public final void italicStart() {}
 
   @Override
-  public final void lineFeed() {}
+  public final void lineFeed() {
+    if (languageRenderer != null) {
+      html.append('\n');
+    }
+  }
 
   @Override
   public final void link(String href, String text) {
@@ -102,10 +113,14 @@ final class DocumentProcessor implements AsciiDoc.Processor {
   }
 
   @Override
-  public final void listingBlockEnd() {}
+  public final void listingBlockEnd() {
+    throw new UnsupportedOperationException("Implement me");
+  }
 
   @Override
-  public final void listingBlockStart() {}
+  public final void listingBlockStart() {
+    throw new UnsupportedOperationException("Implement me");
+  }
 
   @Override
   public final void listItemEnd() {
@@ -188,15 +203,36 @@ final class DocumentProcessor implements AsciiDoc.Processor {
   }
 
   @Override
-  public final void sourceCodeBlockEnd() {}
+  public final void sourceCodeBlockEnd() {
+    var source = html.substring(languageMark, html.length());
+
+    html.setLength(languageMark);
+
+    languageRenderer.render(this, source);
+
+    languageRenderer = null;
+  }
 
   @Override
-  public final void sourceCodeBlockStart(String language) {}
+  public final void sourceCodeBlockStart(String language) {
+    languageMark = html.length();
+
+    languageRenderer = switch (language) {
+      case "java" -> javaRenderer;
+
+      case "xml" -> xmlRenderer;
+
+      default -> throw new UnsupportedOperationException("Implement me :: lang=" + language);
+    };
+  }
 
   @Override
   public final void text(String s) {
-    // TODO escape?
-    html.append(s);
+    if (languageRenderer != null) {
+      raw(s);
+    } else {
+      escape(s);
+    }
   }
 
   @Override
@@ -207,6 +243,37 @@ final class DocumentProcessor implements AsciiDoc.Processor {
   @Override
   public final void unorderedListStart() {
     html.append("\n<ul>");
+  }
+
+  final void escape(String s) {
+    for (int i = 0, len = s.length(); i < len; i++) {
+      var c = s.charAt(i);
+
+      switch (c) {
+        default:
+          html.append(c);
+          break;
+        case '"':
+          html.append("&quot;");
+          break;
+        case '&':
+          html.append("&amp;");
+          break;
+        case '<':
+          html.append("&lt;");
+          break;
+        case '>':
+          html.append("&gt;");
+          break;
+        case '\u00A9':
+          html.append("&copy;");
+          break;
+      }
+    }
+  }
+
+  final void raw(String s) {
+    html.append(s);
   }
 
 }

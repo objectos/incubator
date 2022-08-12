@@ -18,7 +18,11 @@ package objectos.docs;
 import static org.testng.Assert.assertEquals;
 
 import java.io.IOException;
+import objectos.docs.style.JavaCss;
+import objectos.docs.style.SyntaxCss;
+import objectos.docs.style.XmlCss;
 import org.jsoup.Jsoup;
+import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -51,9 +55,20 @@ public class DocsMigrationTest {
     );
   }
 
-  @Test(enabled = false)
+  @Test
   public void introInstallation() throws IOException {
-    test("v0002", "intro/installation");
+    test(
+      "v0002", "intro/installation",
+
+      "v0c", SyntaxCss._PRE.className(),
+      "ijr", XmlCss._TEXT.className(),
+      "jsy", XmlCss._SYMBOL.className(),
+      "hxt", XmlCss._TAG_NAME.className(),
+
+      "pxr", JavaCss._IDENTIFIER.className(),
+      "eei", JavaCss._WS.className(),
+      "erx", JavaCss._TOKEN.className()
+    );
   }
 
   @Test
@@ -99,36 +114,61 @@ public class DocsMigrationTest {
     return article.toString();
   }
 
-  private void test(String slug, String key) throws IOException {
+  private void test(String slug, String key, String... replacements) throws IOException {
     var doc = processor.load(slug, key);
 
     var actual = normalize(doc);
 
     var expected = load(slug, key);
 
+    var rep = 0;
+
+    while (rep < replacements.length) {
+      expected = expected.replace(
+        replacements[rep++],
+        replacements[rep++]
+      );
+    }
+
     if (!actual.equals(expected)) {
       int len = Math.min(actual.length(), expected.length());
 
-      var sba = new StringBuilder(len);
-      var sbe = new StringBuilder(len);
+      var index = 0;
 
       for (int i = 0; i < len; i++) {
         char ca = actual.charAt(i);
-        sba.append(ca);
-
         char ce = expected.charAt(i);
-        sbe.append(ce);
 
-        assertEquals(ca, ce, """
-        index=%d
+        if (ca == ce) {
+          continue;
+        }
 
-        actual
-        %s
+        index = i;
 
-        expected
-        %s
-        """.formatted(i, sba, sbe));
+        break;
       }
+
+      var start = Math.max(0, index - 20);
+
+      var end = Math.min(len, index + 30);
+
+      Assert.fail(
+        """
+
+        ----
+        %s
+        %s
+        ----
+        %s
+        ----
+        %s
+        ----
+        """.formatted(
+          actual.substring(start, end),
+          expected.subSequence(start, end),
+          actual,
+          expected
+        ));
     }
   }
 
