@@ -1,0 +1,142 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta http-equiv="x-ua-compatible" content="ie=edge"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico"><style>*{box-sizing:border-box;margin:0;padding:0}a{color:inherit;text-decoration:inherit}body{margin:0 auto;min-height:100%}code,pre{font-family:ui-monospace,"Liberation Mono","Cascadia Mono","Segoe UI Mono",Menlo,Monaco,Consolas,monospace}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}html{color:black;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Liberation Sans",sans-serif;font-size:16px;line-height:1.5;min-height:100%}table{width:100%}ul,ol{list-style-type:none}article{color:#212529}article blockquote{font-style:italic;padding-left:2.5rem}article h1{font-size:1.875rem;font-weight:600;letter-spacing:-0.5px;line-height:1.3;margin-bottom:1rem}article h1+p{margin-top:1.75rem}article h2{font-size:1.5rem;font-weight:600;margin-bottom:1rem;margin-top:3.5rem}article h3{border-bottom:1px solid #dee2e6;font-size:1.25rem;font-weight:500;letter-spacing:-0.25px;margin-bottom:1rem;margin-top:2rem}article p{margin:1rem 0}article a{color:#1971c2}article a:hover{text-decoration:underline}article p code,article ol code,article ul code{font-size:.875rem;font-weight:500;line-height:.875rem}article pre>code{font-size:.875rem;font-weight:500}article ol{list-style:decimal;padding-left:2.5rem}article ul{list-style:disc;padding-left:2.5rem}article li{margin:.75rem 0}#aho{padding:2rem 0}#aho>ol{align-items:center;display:flex;font-size:.875rem}#aho>ol li{align-items:center;display:flex}#aho>ol a{display:block}#aho>ol svg{display:block}body{max-width:768px;padding:1rem}@media screen and (min-width:768px){body{padding:1.5rem}}#mgc{border-top:1px solid #dee2e6;display:flex;margin-top:5rem;padding:.5rem 0 1rem}#mgc a{align-items:center;color:#1971c2;display:flex}#mgc a:hover span{text-decoration:underline}#mgc>div{flex-grow:1}#mgc svg{display:block}#qpz{text-align:right}#qpz svg{margin-left:.5rem}#gcl{text-align:left}#gcl svg{margin-right:.5rem}.bhi{flex-grow:1;font-weight:500}.bhi>div{font-size:.875rem}.bhi>span{display:none}@media screen and (min-width:768px){#mgc{padding:2.5rem 0 5rem}#mgc svg{margin-top:1.25rem}.bhi>span{display:inline}}.jyf{background-color:#f8f9fa;border:1px solid #e9ecef;border-radius:.5rem;overflow-x:auto;padding:1.5rem}.juq{color:#c2255c}.wjs{color:#9c36b5}.qbr{color:#f03e3e}.iec{color:#4263eb}.uc6{color:#2b8a3e}.jrq,.cyc{color:#4263eb}#bwd{background-color:#f8f0fc;border-radius:.5rem;font-size:.875rem;margin-bottom:.5rem;padding:.75rem}</style></head><body><div id="bwd"><p>You are reading the documentation for the unreleased development version of Objectos.
+
+Please note that this is a work in progress. It might be incomplete and may
+change without notice.</p></div><nav id="aho"><ol><li><a href="/next/index.html">Home</a></li><li><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" height="16" width="16"><path fill="none" d="M0 0h24v24H0z"></path><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg><a href="/next/objectos-lang/index.html">Objectos Lang</a></li><li><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" height="16" width="16"><path fill="none" d="M0 0h24v24H0z"></path><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg><a href="/next/objectos-lang/note-sink-api/index.html">The note sink API</a></li><li><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" height="16" width="16"><path fill="none" d="M0 0h24v24H0z"></path><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg><a href="/next/objectos-lang/note-sink-api/the-note-sink-interface.html">Using the NoteSink interface</a></li></ol></nav><main><article><h1>Using the <code>NoteSink</code> interface</h1>
+<p>After declaring your note instances you can send them by using the <code>NoteSink</code> interface.</p>
+<p>In this section we will give you instructions on how to use the <code>NoteSink</code> interface.</p>
+<h2>Obtaining <code>NoteSink</code> instances</h2>
+<p>As seen in the previous section notes are bound to a particular class as, by default,
+their source is set to the fully qualified name of the class in which the note was declared.</p>
+<p>The first thing to know about <code>NoteSink</code> instances is that, unlike notes,
+<code>NoteSink</code> instances <em>are not bound</em> to a particular class. Typically
+<code>NoteSink</code> instances <strong>will not be</strong> <code>static final</code> fields of a class.</p>
+<p>Next we will discuss the recommended strategies for obtaining <code>NoteSink</code> instances.</p>
+<h3>Via constructor</h3>
+<p>This is the recommended way to obtain <code>NoteSink</code> instances. In particular for
+the long-lived objects of your Java application.</p>
+<pre class="jyf"><code><span class="iec">import</span><span class="tu9"> </span><span class="igz">objectos</span><span class="nhu">.</span><span class="igz">lang</span><span class="nhu">.</span><span class="nhu">*</span><span class="nhu">;</span><span class="tu9">
+
+</span><span class="iec">public</span><span class="tu9"> </span><span class="iec">class</span><span class="tu9"> </span><span class="igz">Service</span><span class="tu9"> </span><span class="nhu">{</span><span class="tu9">
+  </span><span class="iec">private</span><span class="tu9"> </span><span class="iec">final</span><span class="tu9"> </span><span class="igz">NoteSink</span><span class="tu9"> </span><span class="igz">sink</span><span class="nhu">;</span><span class="tu9">
+
+  </span><span class="igz">Service</span><span class="nhu">(</span><span class="igz">NoteSink</span><span class="tu9"> </span><span class="igz">sink</span><span class="nhu">)</span><span class="tu9"> </span><span class="nhu">{</span><span class="tu9">
+    </span><span class="iec">this</span><span class="nhu">.</span><span class="igz">sink</span><span class="tu9"> </span><span class="nhu">=</span><span class="tu9"> </span><span class="igz">sink</span><span class="nhu">;</span><span class="tu9">
+  </span><span class="nhu">}</span><span class="tu9">
+</span><span class="nhu">}</span></code></pre>
+<h3>Via method parameter</h3>
+<p>If you are concerned about object size and garbage creation, storing the <code>NoteSink</code>
+in an instance field might be problematic. If the class or the method where the
+noting takes place is not part of a public API, you can pass the <code>NoteSink</code> via a method parameter.</p>
+<pre class="jyf"><code><span class="iec">import</span><span class="tu9"> </span><span class="igz">objectos</span><span class="nhu">.</span><span class="igz">lang</span><span class="nhu">.</span><span class="nhu">*</span><span class="nhu">;</span><span class="tu9">
+
+</span><span class="iec">public</span><span class="tu9"> </span><span class="iec">class</span><span class="tu9"> </span><span class="igz">ShortLived</span><span class="tu9"> </span><span class="nhu">{</span><span class="tu9">
+  </span><span class="iec">void</span><span class="tu9"> </span><span class="igz">internalMethod</span><span class="nhu">(</span><span class="igz">NoteSink</span><span class="tu9"> </span><span class="igz">sink</span><span class="nhu">)</span><span class="tu9"> </span><span class="nhu">{</span><span class="tu9">
+    </span><span class="wjs">// use sink here</span><span class="tu9">
+  </span><span class="nhu">}</span><span class="tu9">
+</span><span class="nhu">}</span></code></pre>
+<h3>Via setter method</h3>
+<p>The previous option might not work for you if the method where the noting takes place
+is part of the exported API. In this case you can use a setter method for the <code>NoteSink</code> instance.</p>
+<pre class="jyf"><code><span class="iec">import</span><span class="tu9"> </span><span class="igz">objectos</span><span class="nhu">.</span><span class="igz">lang</span><span class="nhu">.</span><span class="nhu">*</span><span class="nhu">;</span><span class="tu9">
+
+</span><span class="iec">public</span><span class="tu9"> </span><span class="iec">class</span><span class="tu9"> </span><span class="igz">Setter</span><span class="tu9"> </span><span class="nhu">{</span><span class="tu9">
+  </span><span class="iec">private</span><span class="tu9"> </span><span class="igz">NoteSink</span><span class="tu9"> </span><span class="igz">sink</span><span class="tu9"> </span><span class="nhu">=</span><span class="tu9"> </span><span class="igz">NoOpNoteSink</span><span class="nhu">.</span><span class="igz">getInstance</span><span class="nhu">(</span><span class="nhu">)</span><span class="nhu">;</span><span class="tu9">
+
+  </span><span class="iec">void</span><span class="tu9"> </span><span class="igz">setNoteSink</span><span class="nhu">(</span><span class="igz">NoteSink</span><span class="tu9"> </span><span class="igz">sink</span><span class="nhu">)</span><span class="tu9"> </span><span class="nhu">{</span><span class="tu9">
+    </span><span class="iec">if</span><span class="tu9"> </span><span class="nhu">(</span><span class="igz">sink</span><span class="tu9"> </span><span class="nhu">=</span><span class="nhu">=</span><span class="tu9"> </span><span class="iec">null</span><span class="nhu">)</span><span class="tu9"> </span><span class="nhu">{</span><span class="tu9">
+      </span><span class="iec">throw</span><span class="tu9"> </span><span class="iec">new</span><span class="tu9"> </span><span class="igz">NullPointerException</span><span class="nhu">(</span><span class="uc6">&quot;sink == null&quot;</span><span class="nhu">)</span><span class="nhu">;</span><span class="tu9">
+    </span><span class="nhu">}</span><span class="tu9">
+
+    </span><span class="iec">this</span><span class="nhu">.</span><span class="igz">sink</span><span class="tu9"> </span><span class="nhu">=</span><span class="tu9"> </span><span class="igz">sink</span><span class="nhu">;</span><span class="tu9">
+  </span><span class="nhu">}</span><span class="tu9">
+</span><span class="nhu">}</span></code></pre>
+<p>You must be aware this strategy is error-prone:</p>
+<ul>
+<li>you must null-check before setting the <code>sink</code> field value;</li>
+<li>you must set the <code>sink</code> to a default value to avoid null-pointer exceptions. Typically this
+will be the <a href="/next/objectos-lang/note-sink-api/the-no-op-note-sink.html"><code>NoOpNoteSink</code></a>; and</li>
+<li>depending on your requirements, you might need some sort of synchronization.</li>
+</ul>
+<h3>Via static factory</h3>
+<p>As a last resort, you can create your own static factory. Since we consider it a last
+resort, Objectos Lang does not provide one out-of-the-box. A minimal example is:</p>
+<pre class="jyf"><code><span class="iec">import</span><span class="tu9"> </span><span class="igz">objectos</span><span class="nhu">.</span><span class="igz">lang</span><span class="nhu">.</span><span class="nhu">*</span><span class="nhu">;</span><span class="tu9">
+
+</span><span class="iec">public</span><span class="tu9"> </span><span class="iec">final</span><span class="tu9"> </span><span class="iec">class</span><span class="tu9"> </span><span class="igz">StaticNoteSink</span><span class="tu9"> </span><span class="nhu">{</span><span class="tu9">
+  </span><span class="iec">private</span><span class="tu9"> </span><span class="iec">static</span><span class="tu9"> </span><span class="igz">NoteSink</span><span class="tu9"> </span><span class="igz">SINK</span><span class="tu9"> </span><span class="nhu">=</span><span class="tu9"> </span><span class="igz">NoOpNoteSink</span><span class="nhu">.</span><span class="igz">getInstance</span><span class="nhu">(</span><span class="nhu">)</span><span class="nhu">;</span><span class="tu9">
+
+  </span><span class="iec">private</span><span class="tu9"> </span><span class="igz">StaticNoteSink</span><span class="nhu">(</span><span class="nhu">)</span><span class="tu9"> </span><span class="nhu">{</span><span class="nhu">}</span><span class="tu9">
+
+  </span><span class="iec">public</span><span class="tu9"> </span><span class="iec">static</span><span class="tu9"> </span><span class="igz">NoteSink</span><span class="tu9"> </span><span class="igz">get</span><span class="nhu">(</span><span class="nhu">)</span><span class="tu9"> </span><span class="nhu">{</span><span class="tu9">
+    </span><span class="iec">return</span><span class="tu9"> </span><span class="igz">SINK</span><span class="nhu">;</span><span class="tu9">
+  </span><span class="nhu">}</span><span class="tu9">
+
+  </span><span class="iec">public</span><span class="tu9"> </span><span class="iec">static</span><span class="tu9"> </span><span class="iec">void</span><span class="tu9"> </span><span class="igz">set</span><span class="nhu">(</span><span class="igz">NoteSink</span><span class="tu9"> </span><span class="igz">sink</span><span class="nhu">)</span><span class="tu9"> </span><span class="nhu">{</span><span class="tu9">
+    </span><span class="iec">if</span><span class="tu9"> </span><span class="nhu">(</span><span class="igz">sink</span><span class="tu9"> </span><span class="nhu">=</span><span class="nhu">=</span><span class="tu9"> </span><span class="iec">null</span><span class="nhu">)</span><span class="tu9"> </span><span class="nhu">{</span><span class="tu9">
+      </span><span class="iec">throw</span><span class="tu9"> </span><span class="iec">new</span><span class="tu9"> </span><span class="igz">NullPointerException</span><span class="nhu">(</span><span class="uc6">&quot;sink == null&quot;</span><span class="nhu">)</span><span class="nhu">;</span><span class="tu9">
+    </span><span class="nhu">}</span><span class="tu9">
+
+    </span><span class="igz">SINK</span><span class="tu9"> </span><span class="nhu">=</span><span class="tu9"> </span><span class="igz">sink</span><span class="nhu">;</span><span class="tu9">
+  </span><span class="nhu">}</span><span class="tu9">
+</span><span class="nhu">}</span></code></pre>
+<p>During application initialization, set the static factory with a proper <code>NoteSink</code> instance.
+Then, in the class where noting is needed, you can obtain the sink from the factory.</p>
+<pre class="jyf"><code><span class="iec">import</span><span class="tu9"> </span><span class="igz">objectos</span><span class="nhu">.</span><span class="igz">lang</span><span class="nhu">.</span><span class="nhu">*</span><span class="nhu">;</span><span class="tu9">
+
+</span><span class="iec">public</span><span class="tu9"> </span><span class="iec">class</span><span class="tu9"> </span><span class="igz">Service</span><span class="tu9"> </span><span class="nhu">{</span><span class="tu9">
+  </span><span class="iec">private</span><span class="tu9"> </span><span class="iec">static</span><span class="tu9"> </span><span class="iec">final</span><span class="tu9"> </span><span class="igz">NoteSink</span><span class="tu9"> </span><span class="igz">SINK</span><span class="tu9"> </span><span class="nhu">=</span><span class="tu9"> </span><span class="igz">StaticNoteSink</span><span class="nhu">.</span><span class="igz">get</span><span class="nhu">(</span><span class="nhu">)</span><span class="nhu">;</span><span class="tu9">
+</span><span class="nhu">}</span></code></pre>
+<p>Consider using this strategy as a last resort as it can make using sinks
+for debugging more complicated. Also this strategy is error-prone for the same reasons as
+the <em>setter method</em> strategy.</p>
+<h2>Sending notes</h2>
+<p>Now that you have:</p>
+<ul>
+<li>your notes declared; and</li>
+<li>obtained a <code>NoteSink</code> instance.</li>
+</ul>
+<p>You can send notes.</p>
+<p>To send notes you invoke one of the <code>send</code> methods from the <code>NoteSink</code> interface.
+The <code>NoteSink</code> interface provides a different <code>send</code> method for each <code>Note</code> subclass.</p>
+<h3><code>Note0</code></h3>
+<p>Notes of the <code>Note0</code> are not parameterized:</p>
+<pre class="jyf"><code><span class="iec">static</span><span class="tu9"> </span><span class="iec">final</span><span class="tu9"> </span><span class="igz">Note0</span><span class="tu9"> </span><span class="igz">NOTE</span><span class="tu9"> </span><span class="nhu">=</span><span class="tu9"> </span><span class="igz">Note0</span><span class="nhu">.</span><span class="igz">info</span><span class="nhu">(</span><span class="nhu">)</span><span class="nhu">;</span></code></pre>
+<p>To send a note you invoke the <code>send</code> method passing the note as a parameter:</p>
+<pre class="jyf"><code><span class="igz">sink</span><span class="nhu">.</span><span class="igz">send</span><span class="nhu">(</span><span class="igz">NOTE</span><span class="nhu">)</span><span class="nhu">;</span></code></pre>
+<h3><code>Note1</code></h3>
+<p>Notes of the <code>Note1</code> class have a single type argument.
+In order to send these notes you must pass an object
+of the same type as the type argument of the note.</p>
+<p>For example, if the note is parameterized with a hypothetical <code>Result</code> type:</p>
+<pre class="jyf"><code><span class="iec">static</span><span class="tu9"> </span><span class="iec">final</span><span class="tu9"> </span><span class="igz">Note1</span><span class="nhu">&lt;</span><span class="igz">Result</span><span class="nhu">&gt;</span><span class="tu9"> </span><span class="igz">NOTE</span><span class="tu9"> </span><span class="nhu">=</span><span class="tu9"> </span><span class="igz">Note1</span><span class="nhu">.</span><span class="igz">info</span><span class="nhu">(</span><span class="nhu">)</span><span class="nhu">;</span></code></pre>
+<p>You must invoke the <code>send</code> method passing, along with the note itself, a <code>Result</code> instance:</p>
+<pre class="jyf"><code><span class="igz">Result</span><span class="tu9"> </span><span class="igz">result</span><span class="tu9"> </span><span class="nhu">=</span><span class="tu9"> </span><span class="igz">computeResult</span><span class="nhu">(</span><span class="nhu">)</span><span class="nhu">;</span><span class="tu9">
+</span><span class="igz">sink</span><span class="nhu">.</span><span class="igz">send</span><span class="nhu">(</span><span class="igz">NOTE</span><span class="nhu">,</span><span class="tu9"> </span><span class="igz">result</span><span class="nhu">)</span><span class="nhu">;</span></code></pre>
+<h3><code>Note2</code></h3>
+<p>In a similar way, invoking the <code>send</code> method with <code>Note2</code> notes requires you to
+pass, along with the note instance itself, two additional objects.
+The two objects must have the same types, in order, as those declared as
+type arguments of the note.</p>
+<p>So, if the note is declared as:</p>
+<pre class="jyf"><code><span class="iec">static</span><span class="tu9"> </span><span class="iec">final</span><span class="tu9"> </span><span class="igz">Note2</span><span class="nhu">&lt;</span><span class="igz">Data</span><span class="nhu">,</span><span class="tu9"> </span><span class="igz">Result</span><span class="nhu">&gt;</span><span class="tu9"> </span><span class="igz">NOTE</span><span class="tu9"> </span><span class="nhu">=</span><span class="tu9"> </span><span class="igz">Note2</span><span class="nhu">.</span><span class="igz">info</span><span class="nhu">(</span><span class="nhu">)</span><span class="nhu">;</span></code></pre>
+<p>Then the <code>send</code> method must be invoked with the arguments in the following order:</p>
+<ul>
+<li>the note itself;</li>
+<li>a <code>Data</code> object; and</li>
+<li>a <code>Result</code> object.</li>
+</ul>
+<pre class="jyf"><code><span class="igz">Data</span><span class="tu9"> </span><span class="igz">input</span><span class="tu9"> </span><span class="nhu">=</span><span class="tu9"> </span><span class="igz">getInput</span><span class="nhu">(</span><span class="nhu">)</span><span class="nhu">;</span><span class="tu9">
+</span><span class="igz">Result</span><span class="tu9"> </span><span class="igz">result</span><span class="tu9"> </span><span class="nhu">=</span><span class="tu9"> </span><span class="igz">compute</span><span class="nhu">(</span><span class="igz">input</span><span class="nhu">)</span><span class="nhu">;</span><span class="tu9">
+</span><span class="igz">sink</span><span class="nhu">.</span><span class="igz">send</span><span class="nhu">(</span><span class="igz">NOTE</span><span class="nhu">,</span><span class="tu9"> </span><span class="igz">input</span><span class="nhu">,</span><span class="tu9"> </span><span class="igz">result</span><span class="nhu">)</span><span class="nhu">;</span></code></pre>
+<p>If we were to reverse the order of the type arguments in the note declaration:</p>
+<pre class="jyf"><code><span class="iec">static</span><span class="tu9"> </span><span class="iec">final</span><span class="tu9"> </span><span class="igz">Note2</span><span class="nhu">&lt;</span><span class="igz">Result</span><span class="nhu">,</span><span class="tu9"> </span><span class="igz">Data</span><span class="nhu">&gt;</span><span class="tu9"> </span><span class="igz">NOTE</span><span class="tu9"> </span><span class="nhu">=</span><span class="tu9"> </span><span class="igz">Note2</span><span class="nhu">.</span><span class="igz">info</span><span class="nhu">(</span><span class="nhu">)</span><span class="nhu">;</span></code></pre>
+<p>Then the <code>send</code> method invocation needs to be changed to:</p>
+<pre class="jyf"><code><span class="igz">sink</span><span class="nhu">.</span><span class="igz">send</span><span class="nhu">(</span><span class="igz">NOTE</span><span class="nhu">,</span><span class="tu9"> </span><span class="igz">result</span><span class="nhu">,</span><span class="tu9"> </span><span class="igz">input</span><span class="nhu">)</span><span class="nhu">;</span></code></pre>
+<h3><code>Note3</code></h3>
+<p>Logging <code>Note3</code> notes work in a similar way as <code>Note2</code>. If the note is parameterized,
+in order, with the hypothetical types <code>A</code>, <code>B</code> and <code>C</code>:</p>
+<pre class="jyf"><code><span class="iec">static</span><span class="tu9"> </span><span class="iec">final</span><span class="tu9"> </span><span class="igz">Note3</span><span class="nhu">&lt;</span><span class="igz">A</span><span class="nhu">,</span><span class="tu9"> </span><span class="igz">B</span><span class="nhu">,</span><span class="tu9"> </span><span class="igz">C</span><span class="nhu">&gt;</span><span class="tu9"> </span><span class="igz">NOTE</span><span class="tu9"> </span><span class="nhu">=</span><span class="tu9"> </span><span class="igz">Note3</span><span class="nhu">.</span><span class="igz">info</span><span class="nhu">(</span><span class="nhu">)</span><span class="nhu">;</span></code></pre>
+<p>Then a <code>send</code> method invocation would need to be:</p>
+<pre class="jyf"><code><span class="igz">sink</span><span class="nhu">.</span><span class="igz">send</span><span class="nhu">(</span><span class="igz">NOTE</span><span class="nhu">,</span><span class="tu9"> </span><span class="igz">a</span><span class="nhu">,</span><span class="tu9"> </span><span class="igz">b</span><span class="nhu">,</span><span class="tu9"> </span><span class="igz">c</span><span class="nhu">)</span><span class="nhu">;</span></code></pre>
+<p>Where <code>a</code>, <code>b</code> and <code>c</code> are objects of types <code>A</code>, <code>B</code> and <code>C</code> respectively.</p>
+</article></main><nav id="mgc"><div id="gcl"><a href="/next/objectos-lang/note-sink-api/creating-notes.html"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" height="16" width="16"><path fill="none" d="M0 0h24v24H0z"></path><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"></path></svg><div class="bhi"><div>Previous</div><span>Creating notes</span></div></a></div><div id="qpz"><a href="/next/objectos-lang/note-sink-api/the-no-op-note-sink.html"><div class="bhi"><div>Next</div><span>The NoOpNoteSink</span></div><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" height="16" width="16"><path fill="none" d="M0 0h24v24H0z"></path><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"></path></svg></a></div></nav></body></html>

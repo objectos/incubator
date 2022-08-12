@@ -51,17 +51,31 @@ public class DocsMigrationTest {
     );
   }
 
+  @Test(enabled = false)
+  public void introInstallation() throws IOException {
+    test("v0002", "intro/installation");
+  }
+
   @Test
   public void introOverview() throws IOException {
-    var doc = processor.load("v0002", "intro/overview");
-
-    test(
-      normalize(doc),
-      load("v0002/intro/overview.html")
-    );
+    test("v0002", "intro/overview");
   }
 
   private String load(String resourceName) throws IOException {
+    var c = getClass();
+
+    try (var in = c.getResourceAsStream(resourceName)) {
+      var soup = Jsoup.parse(in, "UTF-8", "");
+
+      var article = soup.selectFirst("article");
+
+      return article.toString();
+    }
+  }
+
+  private String load(String slug, String key) throws IOException {
+    var resourceName = slug + "/" + key + ".html";
+
     var c = getClass();
 
     try (var in = c.getResourceAsStream(resourceName)) {
@@ -85,7 +99,13 @@ public class DocsMigrationTest {
     return article.toString();
   }
 
-  private void test(String actual, String expected) {
+  private void test(String slug, String key) throws IOException {
+    var doc = processor.load(slug, key);
+
+    var actual = normalize(doc);
+
+    var expected = load(slug, key);
+
     if (!actual.equals(expected)) {
       int len = Math.min(actual.length(), expected.length());
 
