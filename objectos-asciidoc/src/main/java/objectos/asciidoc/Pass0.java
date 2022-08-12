@@ -639,7 +639,7 @@ class Pass0 implements Pass1.Source, Pass2.Source {
       default -> {
         var endIndex = sourceIndex - 1;
 
-        if (blobStart != lineStart) {
+        if (blobStart < endIndex) {
           add(Token.BLOB, blobStart, endIndex);
         }
 
@@ -779,10 +779,7 @@ class Pass0 implements Pass1.Source, Pass2.Source {
       return advance(BLOB);
     }
 
-    add(
-      Token.BLOB, blobStart, endIndex,
-      Token.ITALIC_END, endIndex
-    );
+    add(Token.BLOB, blobStart, endIndex, Token.ITALIC_END, endIndex);
 
     blobStart = sourceIndex;
 
@@ -824,7 +821,7 @@ class Pass0 implements Pass1.Source, Pass2.Source {
       default -> {
         var endIndex = sourceIndex - 1;
 
-        if (blobStart != lineStart) {
+        if (blobStart < endIndex) {
           add(Token.BLOB, blobStart, endIndex);
         }
 
@@ -1130,20 +1127,14 @@ class Pass0 implements Pass1.Source, Pass2.Source {
 
   private int stateMonoStart() {
     if (!hasChar()) {
-      add(
-        Token.BLOB, blobStart, sourceIndex,
-        Token.EOF
-      );
+      add(Token.BLOB, blobStart, sourceIndex, Token.EOF);
 
       return EOF;
     }
 
     return switch (peek()) {
       case '\n' -> {
-        add(
-          Token.BLOB, blobStart, sourceIndex,
-          Token.LF
-        );
+        add(Token.BLOB, blobStart, sourceIndex, Token.LF);
 
         yield advance(LINE_START);
       }
@@ -1153,7 +1144,7 @@ class Pass0 implements Pass1.Source, Pass2.Source {
       default -> {
         var endIndex = sourceIndex - 1;
 
-        if (blobStart != lineStart) {
+        if (blobStart < endIndex) {
           add(Token.BLOB, blobStart, endIndex);
         }
 
@@ -1168,10 +1159,7 @@ class Pass0 implements Pass1.Source, Pass2.Source {
 
   private int stateSpaceLike() {
     if (!hasChar()) {
-      add(
-        Token.BLOB, blobStart, sourceIndex,
-        Token.EOF
-      );
+      add(Token.BLOB, blobStart, sourceIndex, Token.EOF);
 
       return EOF;
     }
@@ -1180,19 +1168,28 @@ class Pass0 implements Pass1.Source, Pass2.Source {
 
     return switch (peek()) {
       case '\n' -> {
-        add(
-          Token.BLOB, blobStart, sourceIndex,
-          Token.LF
-        );
+        add(Token.BLOB, blobStart, sourceIndex, Token.LF);
 
         yield advance(LINE_START);
       }
 
       case ' ', '\t', '\f', '\u000B' -> advance(state);
 
-      case '*' -> advance(BOLD_START);
+      case '*' -> {
+        //        if (blobStart < sourceIndex) {
+        //          add(Token.BLOB, blobStart, sourceIndex);
+        //        }
 
-      case '_' -> advance(ITALIC_START);
+        yield advance(BOLD_START);
+      }
+
+      case '_' -> {
+        //        if (blobStart < sourceIndex) {
+        //          add(Token.BLOB, blobStart, sourceIndex);
+        //        }
+
+        yield advance(ITALIC_START);
+      }
 
       case '`' -> advance(MONO_START);
 
