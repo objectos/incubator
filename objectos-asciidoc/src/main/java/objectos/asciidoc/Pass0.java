@@ -728,6 +728,7 @@ class Pass0 implements Pass1.Source, Pass2.Source {
 
     return switch (peek()) {
       case ' ' -> advance(state);
+
       default -> {
         add(Token.HEADING, counter, lineStart, sourceIndex);
 
@@ -905,7 +906,15 @@ class Pass0 implements Pass1.Source, Pass2.Source {
 
     blobStart = boundaryStart = sourceIndex;
 
-    return stateBlob0();
+    return switch (peek()) {
+      case '*' -> advance(BOLD_START);
+
+      case '_' -> advance(ITALIC_START);
+
+      case '`' -> advance(MONO_START);
+
+      default -> BLOB;
+    };
   }
 
   private int stateListingBlock() {
