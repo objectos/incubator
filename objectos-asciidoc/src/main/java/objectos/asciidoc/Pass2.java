@@ -37,6 +37,8 @@ class Pass2 {
 
   private static final int ITALIC = 1 << 4;
 
+  private static final int CONSTRAINED_END = 1 << 5;
+
   private Source source;
 
   private int sourceIndex;
@@ -148,7 +150,7 @@ class Pass2 {
 
   private int executeBlob(int start, int end) {
     return switch (state) {
-      case START -> {
+      case START, CONSTRAINED_END -> {
         addText(Text.REGULAR, start);
 
         regularEnd = end;
@@ -190,14 +192,9 @@ class Pass2 {
     };
   }
 
-  private int executeBoldEnd(int nextToken) {
+  private int executeBoldEnd(int index) {
     return switch (state) {
-      case BOLD -> {
-        addText(regularEnd);
-        addText(Text.BOLD_END);
-
-        yield START;
-      }
+      case BOLD -> toConstrainedEnd(Text.BOLD_END, index);
 
       default -> uoe();
     };
@@ -236,7 +233,8 @@ class Pass2 {
 
   private int executeEof() {
     return switch (state) {
-      case START -> EOF;
+      case START, CONSTRAINED_END -> EOF;
+
       case REGULAR -> {
         addText(regularEnd);
 
@@ -247,14 +245,9 @@ class Pass2 {
     };
   }
 
-  private int executeItalicEnd(int nextToken) {
+  private int executeItalicEnd(int index) {
     return switch (state) {
-      case ITALIC -> {
-        addText(regularEnd);
-        addText(Text.ITALIC_END);
-
-        yield START;
-      }
+      case ITALIC -> toConstrainedEnd(Text.ITALIC_END, index);
 
       default -> uoe();
     };
@@ -268,6 +261,14 @@ class Pass2 {
     return switch (state) {
       case START -> state;
 
+      case CONSTRAINED_END -> {
+        addText(Text.REGULAR, sourceMark);
+
+        regularEnd = sourceMark;
+
+        yield REGULAR;
+      }
+
       case REGULAR -> {
         regularEnd++;
 
@@ -280,12 +281,7 @@ class Pass2 {
 
   private int executeMonoEnd(int index) {
     return switch (state) {
-      case MONOSPACE -> {
-        addText(regularEnd);
-        addText(Text.MONOSPACE_END);
-
-        yield START;
-      }
+      case MONOSPACE -> toConstrainedEnd(Text.MONOSPACE_END, index);
 
       default -> uoe();
     };
@@ -321,6 +317,15 @@ class Pass2 {
     sourceIndex = sourceMark;
 
     return found;
+  }
+
+  private int toConstrainedEnd(int text, int index) {
+    addText(regularEnd);
+    addText(text);
+
+    sourceMark = index + 1;
+
+    return CONSTRAINED_END;
   }
 
   private int uoe() {
