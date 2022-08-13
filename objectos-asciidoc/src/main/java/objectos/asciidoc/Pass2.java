@@ -25,48 +25,47 @@ class Pass2 {
     int token(int index);
   }
 
-  private static final int EOF = 0;
+  private static final int START = -1;
 
-  private static final int START = 1 << 0;
+  private static final int REGULAR = -2;
 
-  private static final int REGULAR = 1 << 1;
+  private static final int MONOSPACE = -3;
 
-  private static final int MONOSPACE = 1 << 2;
+  private static final int BOLD = -4;
 
-  private static final int BOLD = 1 << 3;
+  private static final int ITALIC = -5;
 
-  private static final int ITALIC = 1 << 4;
+  private static final int CONSTRAINED_END = -6;
 
-  private static final int CONSTRAINED_END = 1 << 5;
+  private int[] context;
+
+  private int contextIndex;
 
   private Source source;
 
   private int sourceIndex;
 
-  @SuppressWarnings("unused")
-  private int sourceFirst;
-
   private int sourceLast;
-
-  private int sourceMark;
 
   private int[] text;
 
   private int textIndex;
 
-  private int state;
-
-  private int regularEnd;
-
   private int textCursor;
 
+  private int tokenIndex;
+
+  boolean running;
+
   Pass2() {
+    context = new int[16];
+
     text = new int[128];
   }
 
   public final void execute(Source source, int first, int last) {
     Check.state(
-      state == EOF,
+      !running,
 
       """
       Concurrent pass (2) is not supported.
@@ -78,15 +77,19 @@ class Pass2 {
       """
     );
 
+    running = true;
+
+    contextIndex = -1;
+
+    push(START);
+
     textIndex = 0;
 
     this.source = source;
 
-    sourceIndex = sourceFirst = first;
+    sourceIndex = first;
 
     sourceLast = last;
-
-    state = START;
 
     execute0();
 
@@ -111,21 +114,24 @@ class Pass2 {
     text[textIndex++] = t0;
   }
 
-  private void addText(int t0, int t1) {
-    text = IntArrays.copyIfNecessary(text, textIndex + 1);
+  private void addText(int t0, int t1, int t2) {
+    text = IntArrays.copyIfNecessary(text, textIndex + 2);
 
     text[textIndex++] = t0;
     text[textIndex++] = t1;
+    text[textIndex++] = t2;
   }
 
   private void execute0() {
-    while (hasToken()) {
+    loop: while (hasToken()) {
+      tokenIndex = sourceIndex;
+
       var token = nextToken();
 
-      state = switch (token) {
+      switch (token) {
         case Token.BLOB -> executeBlob(nextToken(), nextToken());
 
-        case Token.EOF -> state;
+        case Token.EOF -> { break loop; }
 
         case Token.LF -> executeLf();
 
@@ -142,153 +148,223 @@ class Pass2 {
         case Token.MONO_END -> executeMonoEnd(nextToken());
 
         default -> uoe(token);
-      };
+      }
     }
 
-    state = executeEof();
+    executeEof();
   }
 
-  private int executeBlob(int start, int end) {
-    return switch (state) {
-      case START, CONSTRAINED_END -> {
-        addText(Text.REGULAR, start);
+  private void executeBlob(int start, int end) {
+    var ctx = pop();
 
-        regularEnd = end;
-
-        yield REGULAR;
-      }
-
-      case MONOSPACE | START -> {
-        addText(Text.REGULAR, start);
-
-        regularEnd = end;
-
-        yield MONOSPACE;
-      }
-
-      case BOLD | START -> {
-        addText(Text.REGULAR, start);
-
-        regularEnd = end;
-
-        yield BOLD;
-      }
-
-      case ITALIC | START -> {
-        addText(Text.REGULAR, start);
-
-        regularEnd = end;
-
-        yield ITALIC;
-      }
-
-      case REGULAR -> {
-        regularEnd = end;
-
-        yield state;
-      }
-
-      default -> uoe();
-    };
-  }
-
-  private int executeBoldEnd(int index) {
-    return switch (state) {
-      case BOLD -> toConstrainedEnd(Text.BOLD_END, index);
-
-      default -> uoe();
-    };
-  }
-
-  private int executeBoldStart(int index) {
-    return executeConstrainedStart(Text.BOLD_START, Token.BOLD_END, BOLD);
-  }
-
-  private int executeConstrainedStart(int startCode, int endToken, int nextState) {
-    return switch (state) {
+    switch (ctx) {
       case START -> {
-        if (searchToken(endToken)) {
-          addText(startCode);
+        addText(Text.REGULAR, start, end);
 
-          yield nextState | START;
-        } else {
-          yield REGULAR;
-        }
+        push(ctx, REGULAR);
       }
 
       case REGULAR -> {
-        if (searchToken(endToken)) {
-          addText(regularEnd);
-          addText(startCode);
+        text[textIndex - 1] = end;
 
-          yield nextState | START;
-        } else {
-          yield REGULAR;
-        }
+        push(ctx);
       }
 
-      default -> uoe();
-    };
-  }
+      case BOLD, ITALIC, MONOSPACE -> {
+        addText(Text.REGULAR, start, end);
 
-  private int executeEof() {
-    return switch (state) {
-      case START, CONSTRAINED_END -> EOF;
-
-      case REGULAR -> {
-        addText(regularEnd);
-
-        yield EOF;
+        push(ctx, REGULAR);
       }
-
-      default -> uoe();
-    };
-  }
-
-  private int executeItalicEnd(int index) {
-    return switch (state) {
-      case ITALIC -> toConstrainedEnd(Text.ITALIC_END, index);
-
-      default -> uoe();
-    };
-  }
-
-  private int executeItalicStart(int index) {
-    return executeConstrainedStart(Text.ITALIC_START, Token.ITALIC_END, ITALIC);
-  }
-
-  private int executeLf() {
-    return switch (state) {
-      case START -> state;
 
       case CONSTRAINED_END -> {
-        addText(Text.REGULAR, sourceMark);
+        pop();
 
-        regularEnd = sourceMark;
+        addText(Text.REGULAR, start, end);
 
-        yield REGULAR;
+        push(REGULAR);
+      }
+
+      default -> uoe(ctx);
+    }
+  }
+
+  private void executeBoldEnd(int index) {
+    var ctx = pop();
+
+    switch (ctx) {
+      case REGULAR -> {
+        var maybeBold = pop();
+
+        if (maybeBold != BOLD) {
+          throw new UnsupportedOperationException("Implement me");
+        }
+
+        pop(); // tokenIndex
+        pop(); // textIndex
+
+        addText(Text.BOLD_END);
+
+        push(index + 1, CONSTRAINED_END);
+      }
+
+      default -> uoe(ctx);
+    }
+  }
+
+  private void executeBoldStart(int index) {
+    var ctx = pop();
+
+    switch (ctx) {
+      case START -> {
+        push(ctx, tokenIndex, textIndex, BOLD);
+
+        addText(Text.BOLD_START);
       }
 
       case REGULAR -> {
-        regularEnd++;
+        push(tokenIndex, textIndex, BOLD);
 
-        yield state;
+        addText(Text.BOLD_START);
       }
 
-      default -> uoe();
-    };
+      default -> uoe(ctx);
+    }
   }
 
-  private int executeMonoEnd(int index) {
-    return switch (state) {
-      case MONOSPACE -> toConstrainedEnd(Text.MONOSPACE_END, index);
+  private void executeEof() {
+    var ctx = pop();
 
-      default -> uoe();
-    };
+    switch (ctx) {
+      case START -> {}
+
+      case REGULAR -> {
+        var start = pop();
+
+        if (start != START) {
+          throw new UnsupportedOperationException("Implement me");
+        }
+      }
+
+      case CONSTRAINED_END -> {
+        pop(); // index
+
+        var start = pop();
+
+        if (start != START) {
+          throw new UnsupportedOperationException("Implement me :: start=" + start);
+        }
+      }
+
+      default -> uoe(ctx);
+    }
   }
 
-  private int executeMonoStart(int index) {
-    return executeConstrainedStart(Text.MONOSPACE_START, Token.MONO_END, MONOSPACE);
+  private void executeItalicEnd(int index) {
+    var ctx = pop();
+
+    switch (ctx) {
+      case REGULAR -> {
+        var maybeItalic = pop();
+
+        if (maybeItalic != ITALIC) {
+          throw new UnsupportedOperationException("Implement me");
+        }
+
+        pop(); // tokenIndex
+        pop(); // textIndex
+
+        addText(Text.ITALIC_END);
+
+        push(index + 1, CONSTRAINED_END);
+      }
+
+      default -> uoe(ctx);
+    }
+  }
+
+  private void executeItalicStart(int index) {
+    var ctx = pop();
+
+    switch (ctx) {
+      case START -> {
+        push(ctx, tokenIndex, textIndex, ITALIC);
+
+        addText(Text.ITALIC_START);
+      }
+
+      case REGULAR -> {
+        push(tokenIndex, textIndex, ITALIC);
+
+        addText(Text.ITALIC_START);
+      }
+
+      default -> uoe(ctx);
+    }
+  }
+
+  private void executeLf() {
+    var ctx = pop();
+
+    switch (ctx) {
+      case REGULAR -> {
+        text[textIndex - 1]++;
+
+        push(ctx);
+      }
+
+      case CONSTRAINED_END -> {
+        var sourceMark = pop();
+
+        addText(Text.REGULAR, sourceMark, sourceMark + 1);
+
+        push(REGULAR);
+      }
+
+      default -> uoe(ctx);
+    }
+  }
+
+  private void executeMonoEnd(int index) {
+    var ctx = pop();
+
+    switch (ctx) {
+      case REGULAR -> {
+        var maybeMono = pop();
+
+        if (maybeMono != MONOSPACE) {
+          throw new UnsupportedOperationException("Implement me");
+        }
+
+        pop(); // tokenIndex
+        pop(); // textIndex
+
+        addText(Text.MONOSPACE_END);
+
+        push(index + 1, CONSTRAINED_END);
+      }
+
+      default -> uoe(ctx);
+    }
+  }
+
+  private void executeMonoStart(int index) {
+    var ctx = pop();
+
+    switch (ctx) {
+      case START -> {
+        push(ctx, tokenIndex, textIndex, MONOSPACE);
+
+        addText(Text.MONOSPACE_START);
+      }
+
+      case REGULAR -> {
+        push(tokenIndex, textIndex, MONOSPACE);
+
+        addText(Text.MONOSPACE_START);
+      }
+
+      default -> uoe(ctx);
+    }
   }
 
   private boolean hasToken() {
@@ -299,43 +375,44 @@ class Pass2 {
     return source.token(sourceIndex++);
   }
 
-  private boolean searchToken(int token) {
-    sourceMark = sourceIndex;
-
-    var found = false;
-
-    while (hasToken()) {
-      var current = nextToken();
-
-      if (current < 0 && current == token) {
-        found = true;
-
-        break;
-      }
-    }
-
-    sourceIndex = sourceMark;
-
-    return found;
+  private int pop() {
+    return context[contextIndex--];
   }
 
-  private int toConstrainedEnd(int text, int index) {
-    addText(regularEnd);
-    addText(text);
+  private void push(int p0) {
+    contextIndex++;
 
-    sourceMark = index + 1;
+    context = IntArrays.copyIfNecessary(context, contextIndex);
 
-    return CONSTRAINED_END;
+    context[contextIndex] = p0;
   }
 
-  private int uoe() {
-    var s = Integer.toBinaryString(state);
+  private void push(int p0, int p1) {
+    context = IntArrays.copyIfNecessary(context, contextIndex + 2);
 
-    throw new UnsupportedOperationException("Implement me :: state=" + s);
+    context[++contextIndex] = p0;
+    context[++contextIndex] = p1;
   }
 
-  private int uoe(int t) {
-    throw new UnsupportedOperationException("Implement me :: state=" + state + "; token=" + t);
+  private void push(int p0, int p1, int p2) {
+    context = IntArrays.copyIfNecessary(context, contextIndex + 3);
+
+    context[++contextIndex] = p0;
+    context[++contextIndex] = p1;
+    context[++contextIndex] = p2;
+  }
+
+  private void push(int p0, int p1, int p2, int p3) {
+    context = IntArrays.copyIfNecessary(context, contextIndex + 4);
+
+    context[++contextIndex] = p0;
+    context[++contextIndex] = p1;
+    context[++contextIndex] = p2;
+    context[++contextIndex] = p3;
+  }
+
+  private int uoe(int ctx) {
+    throw new UnsupportedOperationException("Implement me :: ctx=" + ctx);
   }
 
 }

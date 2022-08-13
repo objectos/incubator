@@ -38,6 +38,8 @@ de`
 
 `abc`def`
 
+*ab _cd de* a_
+
 == monospace (constrained)
 
 `a` `b`, `c`; `d`. `e`

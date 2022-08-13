@@ -558,10 +558,11 @@ class Pass0 implements Pass1.Source, Pass2.Source {
       return advance(BLOB);
     }
 
-    add(
-      Token.BLOB, blobStart, endIndex,
-      Token.BOLD_END, endIndex
-    );
+    if (blobStart < endIndex) {
+      add(Token.BLOB, blobStart, endIndex);
+    }
+
+    add(Token.BOLD_END, endIndex);
 
     blobStart = sourceIndex;
 
@@ -636,20 +637,24 @@ class Pass0 implements Pass1.Source, Pass2.Source {
 
       case ' ', '\t', '\f', '\u000B' -> advance(SPACE_LIKE);
 
-      default -> {
-        var endIndex = sourceIndex - 1;
+      case '_' -> stateBoldStart0(ITALIC_START);
 
-        if (blobStart < endIndex) {
-          add(Token.BLOB, blobStart, endIndex);
-        }
-
-        add(Token.BOLD_START, endIndex);
-
-        blobStart = sourceIndex;
-
-        yield advance(BLOB);
-      }
+      default -> stateBoldStart0(BLOB);
     };
+  }
+
+  private int stateBoldStart0(int next) {
+    var endIndex = sourceIndex - 1;
+
+    if (blobStart < endIndex) {
+      add(Token.BLOB, blobStart, endIndex);
+    }
+
+    add(Token.BOLD_START, endIndex);
+
+    blobStart = sourceIndex;
+
+    return advance(next);
   }
 
   private int stateDocattrName() {
@@ -780,7 +785,11 @@ class Pass0 implements Pass1.Source, Pass2.Source {
       return advance(BLOB);
     }
 
-    add(Token.BLOB, blobStart, endIndex, Token.ITALIC_END, endIndex);
+    if (blobStart < endIndex) {
+      add(Token.BLOB, blobStart, endIndex);
+    }
+
+    add(Token.ITALIC_END, endIndex);
 
     blobStart = sourceIndex;
 
@@ -792,6 +801,8 @@ class Pass0 implements Pass1.Source, Pass2.Source {
       }
 
       case ' ', '\t', '\f', '\u000B' -> advance(SPACE_LIKE);
+
+      case '*' -> advance(BOLD_END);
 
       default -> advance(BLOB);
     };
@@ -1184,21 +1195,9 @@ class Pass0 implements Pass1.Source, Pass2.Source {
 
       case ' ', '\t', '\f', '\u000B' -> advance(state);
 
-      case '*' -> {
-        //        if (blobStart < sourceIndex) {
-        //          add(Token.BLOB, blobStart, sourceIndex);
-        //        }
+      case '*' -> advance(BOLD_START);
 
-        yield advance(BOLD_START);
-      }
-
-      case '_' -> {
-        //        if (blobStart < sourceIndex) {
-        //          add(Token.BLOB, blobStart, sourceIndex);
-        //        }
-
-        yield advance(ITALIC_START);
-      }
+      case '_' -> advance(ITALIC_START);
 
       case '`' -> advance(MONO_START);
 

@@ -441,6 +441,8 @@ public class AsciiDoc {
         default -> throw new UnsupportedOperationException("Implement me :: text=" + text);
       }
     }
+
+    pass2.running = false;
   }
 
   private void processVerbatim(int first, int last) {

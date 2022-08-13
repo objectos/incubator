@@ -64,6 +64,8 @@ public class Pass2Test extends AsciiDocTest {
 
       pass2.execute(s, first, last);
 
+      pass2.running = false;
+
       var result = pass2.toText();
 
       testArrays(result, p2[index], "Pass (2) assertion failed at index=" + index);
