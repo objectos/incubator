@@ -478,7 +478,7 @@ final class SectionTest extends AbstractAsciiDocTest {
         Code.HEADING_START, 2, Code.TOKENS, 4, 7, Code.HEADING_END,
         Code.ULIST_START,
         Code.LI_START, Code.TOKENS, 13, 16, Code.LI_END,
-        Code.LI_START, Code.TOKENS, 21, 25, Code.LI_END,
+        Code.LI_START, Code.TOKENS, 21, 24, Code.LI_END,
         Code.ULIST_END,
         Code.SECTION_END,
         Code.SECTION_START, 1,
@@ -493,7 +493,7 @@ final class SectionTest extends AbstractAsciiDocTest {
       p2(
         t(Text.REGULAR, 3, 5),
         t(Text.REGULAR, 9, 10),
-        t(Text.REGULAR, 13, 15),
+        t(Text.REGULAR, 13, 14),
         t(Text.REGULAR, 19, 21),
         t(Text.REGULAR, 23, 24)
       ),

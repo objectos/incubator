@@ -113,6 +113,15 @@ class ThisProcessor implements AsciiDoc.Processor {
         </div>
         """.formatted(header, preamble, content);
 
+      case PREAMBLE | CONTENT -> """
+        <div id="header">
+        </div>
+        <div id="content">
+        %s
+        %s
+        </div>
+        """.formatted(preamble, content);
+
       default -> throw new UnsupportedOperationException(
         "Implement me :: state=" + Integer.toBinaryString(state));
     };
@@ -151,7 +160,7 @@ class ThisProcessor implements AsciiDoc.Processor {
 
     switch (state) {
       case HEADER -> { /*noop*/ }
-      case HEADER | PREAMBLE | CONTENT, CONTENT -> {
+      case HEADER | PREAMBLE | CONTENT, PREAMBLE | CONTENT, CONTENT -> {
         sb.insert(headingIdIndex, headingId);
 
         if (sectionLevel == 1) {
@@ -315,6 +324,7 @@ class ThisProcessor implements AsciiDoc.Processor {
       case START -> CONTENT;
       case HEADER | PREAMBLE -> HEADER | PREAMBLE | CONTENT;
       case HEADER | PREAMBLE | CONTENT -> state;
+      case PREAMBLE -> PREAMBLE | CONTENT;
       case CONTENT -> state;
       default -> throw new UnsupportedOperationException("Implement me :: state=" + state);
     };

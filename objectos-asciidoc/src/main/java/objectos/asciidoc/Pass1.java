@@ -600,6 +600,7 @@ class Pass1 {
           newLine = 0;
 
           tokenStart = tokenIndex;
+          tokenEnd = tokenIndex;
         }
 
         case Token.ULIST_ASTERISK -> {
@@ -641,10 +642,18 @@ class Pass1 {
 
           tokenIndex++;
 
+          newLine = 0;
+
           break loop;
         }
 
-        case Token.HEADING -> { break loop; }
+        case Token.HEADING -> {
+          if (newLine > 1) {
+            tokenEnd = tokenIndex - newLine;
+          }
+
+          break loop;
+        }
 
         default -> uoeToken(token);
       }
