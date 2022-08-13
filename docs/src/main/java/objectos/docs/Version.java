@@ -37,7 +37,7 @@ record Version(String name,
 
       "intro/index",
       "intro/overview",
-      "intro/installation",
+      "intro/install",
 
       "objectos-lang/index",
       "objectos-lang/Check",
@@ -64,7 +64,7 @@ record Version(String name,
 
       "intro/index",
       "intro/overview",
-      "intro/installation",
+      "intro/install",
 
       "objectos-lang/index",
       "objectos-lang/Check",

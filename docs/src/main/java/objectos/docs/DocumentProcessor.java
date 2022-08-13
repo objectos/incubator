@@ -29,8 +29,9 @@ final class DocumentProcessor implements AsciiDoc.Processor {
 
   private final StringBuilder html = new StringBuilder();
 
-  private final JavaRenderer javaRenderer = new JavaRenderer();
-  private final XmlRenderer xmlRenderer = new XmlRenderer();
+  private final LanguageRenderer defaultRenderer = new DefaultRenderer();
+  private final LanguageRenderer javaRenderer = new JavaRenderer();
+  private final LanguageRenderer xmlRenderer = new XmlRenderer();
 
   private int headingLevel;
 
@@ -39,10 +40,14 @@ final class DocumentProcessor implements AsciiDoc.Processor {
   private LanguageRenderer languageRenderer;
 
   @Override
-  public final void boldEnd() {}
+  public final void boldEnd() {
+    html.append("</strong>");
+  }
 
   @Override
-  public final void boldStart() {}
+  public final void boldStart() {
+    html.append("<strong>");
+  }
 
   @Override
   public final void documentEnd() {
@@ -75,8 +80,7 @@ final class DocumentProcessor implements AsciiDoc.Processor {
       String name, String target, UnmodifiableMap<String, String> attributes) {
     switch (name) {
       case "ilink" -> {
-        //var href = pages.href(target);
-        var href = target;
+        var href = "/0.2/" + target + ".html";
 
         var text = (String) attributes.get("1");
 
@@ -91,10 +95,14 @@ final class DocumentProcessor implements AsciiDoc.Processor {
   }
 
   @Override
-  public final void italicEnd() {}
+  public final void italicEnd() {
+    html.append("</em>");
+  }
 
   @Override
-  public final void italicStart() {}
+  public final void italicStart() {
+    html.append("<em>");
+  }
 
   @Override
   public final void lineFeed() {
@@ -114,12 +122,12 @@ final class DocumentProcessor implements AsciiDoc.Processor {
 
   @Override
   public final void listingBlockEnd() {
-    throw new UnsupportedOperationException("Implement me");
+    sourceCodeBlockEnd();
   }
 
   @Override
   public final void listingBlockStart() {
-    throw new UnsupportedOperationException("Implement me");
+    sourceCodeBlockStart("default");
   }
 
   @Override
@@ -218,6 +226,8 @@ final class DocumentProcessor implements AsciiDoc.Processor {
     languageMark = html.length();
 
     languageRenderer = switch (language) {
+      case "default" -> defaultRenderer;
+
       case "java" -> javaRenderer;
 
       case "xml" -> xmlRenderer;

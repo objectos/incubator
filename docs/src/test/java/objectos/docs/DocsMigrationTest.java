@@ -15,8 +15,6 @@
  */
 package objectos.docs;
 
-import static org.testng.Assert.assertEquals;
-
 import java.io.IOException;
 import objectos.docs.style.JavaCss;
 import objectos.docs.style.SyntaxCss;
@@ -35,57 +33,46 @@ public class DocsMigrationTest {
     processor = new DocumentProcessor();
   }
 
-  @Test(enabled = false)
-  public void index() throws IOException {
-    var doc = processor.load("v0002", "index");
-
-    assertEquals(
-      normalize(doc),
-      load("v0002/index.html")
-    );
-  }
-
-  @Test(enabled = false)
-  public void introIndex() throws IOException {
-    var doc = processor.load("v0002", "intro/index");
-
-    assertEquals(
-      normalize(doc),
-      load("v0002/intro/index.html")
-    );
-  }
-
   @Test
-  public void introInstallation() throws IOException {
+  public void v0002() throws IOException {
+    var reps = new String[] {
+        "jyf", SyntaxCss._PRE.className(),
+        "njs", XmlCss._TEXT.className(),
+        "jrq", XmlCss._SYMBOL.className(),
+        "cyc", XmlCss._TAG_NAME.className(),
+
+        "igz", JavaCss._IDENTIFIER.className(),
+        "tu9", JavaCss._WS.className(),
+        "nhu", JavaCss._TOKEN.className(),
+        "iec", JavaCss._KEYWORD.className(),
+        "qbr", JavaCss._DIGITS.className(),
+        "uc6", JavaCss._STRING.className(),
+        "wjs", JavaCss._COMMENT.className(),
+        "juq", JavaCss._ANNOTATION.className()
+    };
+
     test(
-      "v0002", "intro/installation",
+      reps, "v0002",
+      "index",
 
-      "v0c", SyntaxCss._PRE.className(),
-      "ijr", XmlCss._TEXT.className(),
-      "jsy", XmlCss._SYMBOL.className(),
-      "hxt", XmlCss._TAG_NAME.className(),
+      "intro/index",
+      "intro/overview",
+      "intro/install",
 
-      "pxr", JavaCss._IDENTIFIER.className(),
-      "eei", JavaCss._WS.className(),
-      "erx", JavaCss._TOKEN.className()
+      "objectos-lang/index",
+      "objectos-lang/Check",
+      "objectos-lang/Equals",
+      "objectos-lang/HashCode"
+    //      "objectos-lang/ToString",
+    //      "objectos-lang/note-sink-api/index",
+    //      "objectos-lang/note-sink-api/creating-notes",
+    //      "objectos-lang/note-sink-api/the-note-sink-interface",
+    //      "objectos-lang/note-sink-api/the-no-op-note-sink",
+    //
+    //      "relnotes/index",
+    //      "relnotes/0.2.0",
+    //      "relnotes/0.1.0"
     );
-  }
-
-  @Test
-  public void introOverview() throws IOException {
-    test("v0002", "intro/overview");
-  }
-
-  private String load(String resourceName) throws IOException {
-    var c = getClass();
-
-    try (var in = c.getResourceAsStream(resourceName)) {
-      var soup = Jsoup.parse(in, "UTF-8", "");
-
-      var article = soup.selectFirst("article");
-
-      return article.toString();
-    }
   }
 
   private String load(String slug, String key) throws IOException {
@@ -115,7 +102,13 @@ public class DocsMigrationTest {
   }
 
   private void test(String slug, String key, String... replacements) throws IOException {
-    var doc = processor.load(slug, key);
+    Document doc;
+
+    try {
+      doc = processor.load(slug, key);
+    } catch (UnsupportedOperationException e) {
+      throw new IOException(key, e);
+    }
 
     var actual = normalize(doc);
 
@@ -155,6 +148,7 @@ public class DocsMigrationTest {
       Assert.fail(
         """
 
+        key=%s
         ----
         %s
         %s
@@ -164,11 +158,18 @@ public class DocsMigrationTest {
         %s
         ----
         """.formatted(
+          key,
           actual.substring(start, end),
           expected.subSequence(start, end),
           actual,
           expected
         ));
+    }
+  }
+
+  private void test(String[] reps, String slug, String... keys) throws IOException {
+    for (var key : keys) {
+      test(slug, key, reps);
     }
   }
 

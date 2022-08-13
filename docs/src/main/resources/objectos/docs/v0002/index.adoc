@@ -10,7 +10,7 @@ Here you will find tutorials, topic guides, how-to guides and the reference manu
 Read these to get started with Objectos:
 
 * ilink:intro/overview[What is Objectos?]
-* ilink:intro/installation[Installation]
+* ilink:intro/install[Installation]
 
 == Core libraries
 
