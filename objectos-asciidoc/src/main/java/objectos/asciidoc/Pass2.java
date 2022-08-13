@@ -137,15 +137,15 @@ class Pass2 {
 
         case Token.BOLD_START -> executeBoldStart(nextToken());
 
-        case Token.BOLD_END -> executeBoldEnd(nextToken());
+        case Token.BOLD_END -> executeConstrainedEnd(nextToken(), BOLD, Text.BOLD_END);
 
         case Token.ITALIC_START -> executeItalicStart(nextToken());
 
-        case Token.ITALIC_END -> executeItalicEnd(nextToken());
+        case Token.ITALIC_END -> executeConstrainedEnd(nextToken(), ITALIC, Text.ITALIC_END);
 
         case Token.MONO_START -> executeMonoStart(nextToken());
 
-        case Token.MONO_END -> executeMonoEnd(nextToken());
+        case Token.MONO_END -> executeConstrainedEnd(nextToken(), MONOSPACE, Text.MONOSPACE_END);
 
         default -> uoe(token);
       }
@@ -188,29 +188,6 @@ class Pass2 {
     }
   }
 
-  private void executeBoldEnd(int index) {
-    var ctx = pop();
-
-    switch (ctx) {
-      case REGULAR -> {
-        var maybeBold = pop();
-
-        if (maybeBold != BOLD) {
-          throw new UnsupportedOperationException("Implement me");
-        }
-
-        pop(); // tokenIndex
-        pop(); // textIndex
-
-        addText(Text.BOLD_END);
-
-        push(index + 1, CONSTRAINED_END);
-      }
-
-      default -> uoe(ctx);
-    }
-  }
-
   private void executeBoldStart(int index) {
     var ctx = pop();
 
@@ -229,6 +206,33 @@ class Pass2 {
 
       default -> uoe(ctx);
     }
+  }
+
+  private void executeConstrainedEnd(int index, int expected, int text) {
+    var ctx = pop();
+
+    switch (ctx) {
+      case REGULAR -> {}
+
+      case CONSTRAINED_END -> {
+        pop(); // index
+      }
+
+      default -> uoe(ctx);
+    }
+
+    var maybe = pop();
+
+    if (maybe != expected) {
+      throw new UnsupportedOperationException("Implement me");
+    }
+
+    pop(); // tokenIndex
+    pop(); // textIndex
+
+    addText(text);
+
+    push(index + 1, CONSTRAINED_END);
   }
 
   private void executeEof() {
@@ -259,47 +263,20 @@ class Pass2 {
     }
   }
 
-  private void executeItalicEnd(int index) {
-    var ctx = pop();
-
-    switch (ctx) {
-      case REGULAR -> {
-        var maybeItalic = pop();
-
-        if (maybeItalic != ITALIC) {
-          throw new UnsupportedOperationException("Implement me");
-        }
-
-        pop(); // tokenIndex
-        pop(); // textIndex
-
-        addText(Text.ITALIC_END);
-
-        push(index + 1, CONSTRAINED_END);
-      }
-
-      default -> uoe(ctx);
-    }
-  }
-
   private void executeItalicStart(int index) {
     var ctx = pop();
 
     switch (ctx) {
-      case START -> {
-        push(ctx, tokenIndex, textIndex, ITALIC);
+      case START, BOLD -> push(ctx);
 
-        addText(Text.ITALIC_START);
-      }
-
-      case REGULAR -> {
-        push(tokenIndex, textIndex, ITALIC);
-
-        addText(Text.ITALIC_START);
-      }
+      case REGULAR -> {}
 
       default -> uoe(ctx);
     }
+
+    push(tokenIndex, textIndex, ITALIC);
+
+    addText(Text.ITALIC_START);
   }
 
   private void executeLf() {
@@ -318,29 +295,6 @@ class Pass2 {
         addText(Text.REGULAR, sourceMark, sourceMark + 1);
 
         push(REGULAR);
-      }
-
-      default -> uoe(ctx);
-    }
-  }
-
-  private void executeMonoEnd(int index) {
-    var ctx = pop();
-
-    switch (ctx) {
-      case REGULAR -> {
-        var maybeMono = pop();
-
-        if (maybeMono != MONOSPACE) {
-          throw new UnsupportedOperationException("Implement me");
-        }
-
-        pop(); // tokenIndex
-        pop(); // textIndex
-
-        addText(Text.MONOSPACE_END);
-
-        push(index + 1, CONSTRAINED_END);
       }
 
       default -> uoe(ctx);

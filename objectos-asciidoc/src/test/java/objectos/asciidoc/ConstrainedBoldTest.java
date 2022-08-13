@@ -188,7 +188,7 @@ final class ConstrainedBoldTest extends AbstractAsciiDocTest {
     );
   }
 
-  @Test(enabled = false, description = //
+  @Test(description = //
   """
   bold enclosing italic
 
@@ -245,7 +245,7 @@ final class ConstrainedBoldTest extends AbstractAsciiDocTest {
       </div>
       <div id="content">
       <div class="paragraph">
-      <p><strong>a b</strong> <strong>c d</strong>, <strong>e f</strong></p>
+      <p>a <strong><em>b</em></strong>.</p>
       </div>
       </div>
       </body>
