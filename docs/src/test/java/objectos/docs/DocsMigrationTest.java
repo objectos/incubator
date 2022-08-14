@@ -62,8 +62,8 @@ public class DocsMigrationTest {
       "objectos-lang/index",
       "objectos-lang/Check",
       "objectos-lang/Equals",
-      "objectos-lang/HashCode"
-    //      "objectos-lang/ToString",
+      "objectos-lang/HashCode",
+      "objectos-lang/ToString"
     //      "objectos-lang/note-sink-api/index",
     //      "objectos-lang/note-sink-api/creating-notes",
     //      "objectos-lang/note-sink-api/the-note-sink-interface",
