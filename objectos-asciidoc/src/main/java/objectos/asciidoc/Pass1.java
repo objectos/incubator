@@ -521,6 +521,8 @@ class Pass1 {
       switch (token) {
         case Token.BLOB, Token.LITERALI -> tokenIndex += 3;
 
+        case Token.BOLD_END, Token.ITALIC_END, Token.MONO_END -> tokenIndex += 2;
+
         case Token.LF -> tokenIndex += 1;
 
         case Token.LISTING_BLOCK_DELIM -> {

@@ -457,6 +457,12 @@ public class AsciiDoc {
           text(begin, end);
         }
 
+        case Token.BOLD_END -> {
+          var pos = pass0.token(index++);
+
+          text(pos, pos + 1);
+        }
+
         case Token.LF -> processor.lineFeed();
 
         default -> uoe(token);

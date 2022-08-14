@@ -279,4 +279,76 @@ final class SourceCodeBlockTest extends AbstractAsciiDocTest {
     );
   }
 
+  @Test(description = //
+  """
+  source code block
+
+  - implict source style
+  - delimited
+  - contains Token.BOLD_END
+
+  01234
+  56789
+  0123
+  45678
+  '''
+  [,a]
+  ----
+  b*;
+  ----
+  '''
+  """)
+  public void testCase04() {
+    test(
+      """
+      [,a]
+      ----
+      b*;
+      ----
+      """,
+
+      p0(
+        Token.ATTR_LIST_START,
+        Token.ATTR_VALUE, 1, 1,
+        Token.SEPARATOR, 1, 2,
+        Token.ATTR_VALUE, 2, 3,
+        Token.ATTR_LIST_END, Token.LF,
+        Token.LISTING_BLOCK_DELIM, 4, Token.LF,
+        Token.BLOB, 10, 11, Token.BOLD_END, 11, Token.BLOB, 12, 13, Token.LF,
+        Token.LISTING_BLOCK_DELIM, 4, Token.LF,
+        Token.EOF
+      ),
+
+      p1(
+        Code.DOCUMENT_START,
+        Code.PREAMBLE_START,
+        Code.ATTR_POSITIONAL, 1, 1, 1,
+        Code.ATTR_POSITIONAL, 2, 2, 3,
+        Code.LISTING_BLOCK_START,
+        Code.VERBATIM, 15, 23,
+        Code.LISTING_BLOCK_END,
+        Code.PREAMBLE_END,
+        Code.DOCUMENT_END
+      ),
+
+      docAttr(),
+
+      p2(),
+
+      """
+      <body>
+      <div id="header">
+      </div>
+      <div id="content">
+      <div class="listingblock">
+      <div class="content">
+      <pre class="highlight"><code class="language-a" data-lang="a">b*;</code></pre>
+      </div>
+      </div>
+      </div>
+      </body>
+      """
+    );
+  }
+
 }
