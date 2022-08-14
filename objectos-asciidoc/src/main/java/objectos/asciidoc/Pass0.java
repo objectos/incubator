@@ -529,8 +529,6 @@ class Pass0 implements Pass1.Source, Pass2.Source {
         yield advance(MACRO_ANY_START);
       }
 
-      case ']' -> advance(ATTR_LIST_END);
-
       case '_' -> advance(ITALIC_END);
 
       case '`' -> advance(MONO_END);

@@ -50,6 +50,7 @@ public class AsciiDocTest {
         new ConstrainedMonospaceTest(this),
         new DocumentAttributeTest(this),
         new InlineMacroTest(this),
+        new ListingBlockTest(this),
         new ParagraphTest(this),
         new PreambleTest(this),
         new SectionTest(this),
@@ -393,75 +394,6 @@ public class AsciiDocTest {
       <div id="content">
       <div class="paragraph">
       <p><em>a b</em> <em>c d</em>, <em>e f</em></p>
-      </div>
-      </div>
-      </body>
-      """
-    );
-  }
-
-  @Test(description = //
-  """
-  listing block
-
-  - delimited
-  - single line
-
-  01234
-  56789
-  01234
-  '''
-  ----
-  code
-  ----
-  '''
-
-  P0: ^ LBD $ LF
-      ^ B5,9 $ LF
-      ^ LBD $ LF
-      ^ $ EOF
-  """)
-  public final void listingBlock01() {
-    test(
-      """
-      ----
-      code
-      ----
-      """,
-
-      p0(
-        Token.LISTING_BLOCK_DELIM, 4, Token.LF,
-
-        Token.BLOB, 5, 9, Token.LF,
-
-        Token.LISTING_BLOCK_DELIM, 4, Token.LF,
-
-        Token.EOF
-      ),
-
-      p1(
-        Code.DOCUMENT_START,
-        Code.PREAMBLE_START,
-        Code.LISTING_BLOCK_START,
-        Code.VERBATIM, 3, 6,
-        Code.LISTING_BLOCK_END,
-        Code.PREAMBLE_END,
-        Code.DOCUMENT_END
-      ),
-
-      docAttr(),
-
-      p2(),
-
-      """
-      <body>
-      <div id="header">
-      </div>
-      <div id="content">
-      <div class="listingblock">
-      <div class="content">
-      <pre>code</pre>
-      </div>
       </div>
       </div>
       </body>
