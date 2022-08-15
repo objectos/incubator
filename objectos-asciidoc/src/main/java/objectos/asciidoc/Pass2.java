@@ -112,6 +112,31 @@ class Pass2 {
     running = false;
   }
 
+  final AttrValue toAttrValue(String source) {
+    AttrValue res = AttrValue.EMPTY;
+
+    if (hasText()) {
+      var current = text[textCursor];
+      var length = textIndex - textCursor;
+
+      if (current == Text.REGULAR && length == 3) {
+        nextText();
+        var begin = nextText();
+        var end = nextText();
+
+        var s = source.substring(begin, end);
+
+        res = AttrValue.string(s);
+      } else {
+        int[] copy = toText();
+
+        res = AttrValue.text(copy, source);
+      }
+    }
+
+    return res;
+  }
+
   final int[] toText() {
     return Arrays.copyOf(text, textIndex);
   }

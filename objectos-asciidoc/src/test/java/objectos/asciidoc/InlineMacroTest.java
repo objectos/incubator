@@ -321,7 +321,7 @@ final class InlineMacroTest extends AbstractAsciiDocTest {
     );
   }
 
-  @Test(enabled = false, description = //
+  @Test(description = //
   """
   imacro + monospace
 
@@ -340,7 +340,9 @@ final class InlineMacroTest extends AbstractAsciiDocTest {
         Token.INLINE_MACRO, 0, 1,
         Token.BLOB, 2, 3,
         Token.ATTR_LIST_START,
-        Token.ATTR_VALUE_START, Token.MONO_START, 6, 7, Token.MONO_END, Token.ATTR_VALUE_END,
+        Token.ATTR_VALUE_START,
+        Token.MONO_START, 4, Token.BLOB, 5, 6, Token.MONO_END, 6,
+        Token.ATTR_VALUE_END,
         Token.ATTR_LIST_END,
         Token.LF,
         Token.EOF
@@ -350,7 +352,10 @@ final class InlineMacroTest extends AbstractAsciiDocTest {
         Code.DOCUMENT_START,
         Code.PREAMBLE_START,
         Code.PARAGRAPH_START,
-        Code.TOKENS, 0, 3,
+        Code.INLINE_MACRO, 0, 1,
+        Code.MACRO_TARGET, 2, 3,
+        Code.ATTR_POSITIONAL, 1, 8, 15,
+        Code.TOKENS, 17, 17,
         Code.PARAGRAPH_END,
         Code.PREAMBLE_END,
         Code.DOCUMENT_END
@@ -359,7 +364,7 @@ final class InlineMacroTest extends AbstractAsciiDocTest {
       docAttr(),
 
       p2(
-        t(Text.REGULAR, 0, 8)
+        t()
       ),
 
       """

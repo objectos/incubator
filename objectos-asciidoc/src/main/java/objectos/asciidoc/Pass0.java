@@ -48,22 +48,25 @@ class Pass0 implements Pass1.Source, Pass2.Source {
 
   private static final int ATTR_NAME = 14;
   private static final int ATTR_VALUE = 15;
-  private static final int ATTR_QUOTES = 16;
-  private static final int ATTR_SEPARATOR = 17;
-  private static final int ATTR_LIST_END = 18;
+  private static final int ATTR_VALUE_MONO_START = 16;
+  private static final int ATTR_VALUE_MONO_END = 17;
+  private static final int ATTR_VALUE_SPACE_LIKE = 18;
+  private static final int ATTR_QUOTES = 19;
+  private static final int ATTR_SEPARATOR = 20;
+  private static final int ATTR_LIST_END = 21;
 
-  private static final int LISTING_BLOCK = 19;
-  private static final int LISTING_BLOCK_OR_LIST = 20;
+  private static final int LISTING_BLOCK = 22;
+  private static final int LISTING_BLOCK_OR_LIST = 23;
 
-  private static final int LITERAL_OR_LIST = 21;
+  private static final int LITERAL_OR_LIST = 24;
 
-  private static final int MACRO_ANY_START = 22;
-  private static final int MACRO_INLINE_START = 23;
-  private static final int MACRO_INLINE = 24;
+  private static final int MACRO_ANY_START = 25;
+  private static final int MACRO_INLINE_START = 26;
+  private static final int MACRO_INLINE = 27;
 
-  private static final int DOCATTR_NAME = 25;
-  private static final int DOCATTR_NAME_NEXT = 26;
-  private static final int DOCATTR_VALUE = 27;
+  private static final int DOCATTR_NAME = 28;
+  private static final int DOCATTR_NAME_NEXT = 29;
+  private static final int DOCATTR_VALUE = 30;
 
   private static final int _ATTRLIST_BLOCK = 1;
   private static final int _ATTRLIST_INLINE_MACRO = 2;
@@ -299,6 +302,10 @@ class Pass0 implements Pass1.Source, Pass2.Source {
 
       case ATTR_VALUE -> stateAttrValue();
 
+      case ATTR_VALUE_MONO_START -> stateAttrValueMonoStart();
+
+      case ATTR_VALUE_MONO_END -> stateAttrValueMonoEnd();
+
       case ATTR_QUOTES -> stateAttrQuotes();
 
       case ATTR_SEPARATOR -> stateAttrSeparator();
@@ -388,7 +395,7 @@ class Pass0 implements Pass1.Source, Pass2.Source {
       }
 
       case '=' -> {
-        add(Token.ATTR_NAME, auxiliaryStart, sourceIndex);
+        add(Token.ATTR_NAME, auxiliaryStart, sourceIndex, Token.ATTR_VALUE_START);
 
         auxiliaryStart = sourceIndex + 1; // skip '='
 
@@ -404,6 +411,12 @@ class Pass0 implements Pass1.Source, Pass2.Source {
         }
 
         yield advance(ATTR_LIST_END);
+      }
+
+      case '`' -> {
+        add(Token.ATTR_VALUE_START);
+
+        yield advance(ATTR_VALUE_MONO_START);
       }
 
       default -> advance(state);
@@ -462,13 +475,12 @@ class Pass0 implements Pass1.Source, Pass2.Source {
     return switch (peek()) {
       case '\n' -> rollbackAttributes();
 
+      case ' ', '\t', '\f', '\u000B' -> advance(ATTR_VALUE_SPACE_LIKE);
+
       case '"' -> advance(ATTR_QUOTES);
 
       case ',' -> {
-        add(
-          Token.ATTR_VALUE_START,
-          Token.BLOB, auxiliaryStart, sourceIndex,
-          Token.ATTR_VALUE_END);
+        add(Token.BLOB, auxiliaryStart, sourceIndex, Token.ATTR_VALUE_END);
 
         auxiliaryStart = sourceIndex;
 
@@ -477,16 +489,61 @@ class Pass0 implements Pass1.Source, Pass2.Source {
 
       case ']' -> {
         if (auxiliaryStart < sourceIndex) {
-          add(
-            Token.ATTR_VALUE_START,
-            Token.BLOB, auxiliaryStart, sourceIndex,
-            Token.ATTR_VALUE_END);
+          add(Token.BLOB, auxiliaryStart, sourceIndex);
         }
+
+        add(Token.ATTR_VALUE_END);
 
         yield advance(ATTR_LIST_END);
       }
 
+      case '`' -> advance(ATTR_VALUE_MONO_END);
+
       default -> advance(state);
+    };
+  }
+
+  private int stateAttrValueMonoEnd() {
+    if (!hasChar()) {
+      return rollbackAttributes();
+    }
+
+    var c = peek();
+
+    if (!isWord(c)) {
+      var endIndex = sourceIndex - 1;
+
+      add(Token.BLOB, auxiliaryStart, endIndex, Token.MONO_END, endIndex);
+
+      auxiliaryStart = sourceIndex;
+    }
+
+    return ATTR_VALUE;
+  }
+
+  private int stateAttrValueMonoStart() {
+    if (!hasChar()) {
+      return rollbackAttributes();
+    }
+
+    return switch (peek()) {
+      case '\n' -> rollbackAttributes();
+
+      case ' ', '\t', '\f', '\u000B' -> advance(ATTR_VALUE_SPACE_LIKE);
+
+      default -> {
+        var endIndex = sourceIndex - 1;
+
+        if (auxiliaryStart < endIndex) {
+          add(Token.BLOB, auxiliaryStart, endIndex);
+        }
+
+        add(Token.MONO_START, endIndex);
+
+        auxiliaryStart = sourceIndex;
+
+        yield advance(ATTR_VALUE);
+      }
     };
   }
 

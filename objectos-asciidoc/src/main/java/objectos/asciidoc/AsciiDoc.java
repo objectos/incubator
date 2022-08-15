@@ -202,26 +202,7 @@ public class AsciiDoc {
   private void processAttrPositionalOrNamed(String name, int first, int last) {
     pass2.execute(pass0, first, last);
 
-    AttrValue value = AttrValue.EMPTY;
-
-    if (pass2.hasText()) {
-      var text = pass2.nextText();
-
-      if (text != Text.REGULAR) {
-        throw new UnsupportedOperationException("Implement me :: Text.REGULAR only, found=" + text);
-      }
-
-      var begin = pass2.nextText();
-      var end = pass2.nextText();
-
-      if (pass2.hasText()) {
-        throw new UnsupportedOperationException("Implement me :: single Text.REGULAR only");
-      }
-
-      var s = source.substring(begin, end);
-
-      value = AttrValue.text(s);
-    }
+    AttrValue value = pass2.toAttrValue(source);
 
     attrMap.put(name, value);
 

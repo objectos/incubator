@@ -38,7 +38,6 @@ final class Token {
   static final int ATTR_LIST_END = -14;
 
   static final int ATTR_NAME = -15;
-  static final int ATTR_VALUE = -16;
   static final int ATTR_VALUE_START = -16;
   static final int ATTR_VALUE_END = -17;
 
