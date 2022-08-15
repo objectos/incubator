@@ -52,6 +52,8 @@ final class Code {
   static final int MACRO_TARGET = -22;
 
   static final int URL_MACRO = -23;
+  static final int URL_TARGET_START = -24;
+  static final int URL_TARGET_END = -25;
 
   private Code() {}
 

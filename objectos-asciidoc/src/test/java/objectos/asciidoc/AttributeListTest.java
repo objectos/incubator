@@ -42,9 +42,7 @@ final class AttributeListTest extends AbstractAsciiDocTest {
         Token.INLINE_MACRO, 0, 1,
         Token.BLOB, 2, 3,
         Token.ATTR_LIST_START,
-        Token.DQUOTE,
-        Token.ATTR_VALUE, 5, 9,
-        Token.DQUOTE,
+        Token.ATTR_VALUE_START, Token.DQUOTE, 5, 9, Token.ATTR_VALUE_END,
         Token.ATTR_LIST_END,
         Token.LF,
 
@@ -57,7 +55,7 @@ final class AttributeListTest extends AbstractAsciiDocTest {
         Code.PARAGRAPH_START,
         Code.INLINE_MACRO, 0, 1,
         Code.MACRO_TARGET, 2, 3,
-        Code.ATTR_POSITIONAL, 1, 5, 9,
+        Code.ATTR_POSITIONAL, 1, 8, 11,
         Code.TOKENS, 13, 13,
         Code.PARAGRAPH_END,
         Code.PREAMBLE_END,
@@ -106,12 +104,12 @@ final class AttributeListTest extends AbstractAsciiDocTest {
 
       p0(
         Token.ATTR_LIST_START,
-        Token.ATTR_VALUE, 1, 1,
+        Token.ATTR_VALUE_START, Token.ATTR_VALUE_END,
         Token.SEPARATOR, 1, 2,
-        Token.ATTR_VALUE, 2, 3,
+        Token.ATTR_VALUE_START, Token.BLOB, 2, 3, Token.ATTR_VALUE_END,
         Token.SEPARATOR, 3, 4,
         Token.ATTR_NAME, 4, 5,
-        Token.ATTR_VALUE, 6, 7,
+        Token.ATTR_VALUE_START, Token.BLOB, 6, 7, Token.ATTR_VALUE_END,
         Token.ATTR_LIST_END, Token.LF,
         Token.BLOB, 9, 10, Token.LF,
         Token.EOF
@@ -120,11 +118,11 @@ final class AttributeListTest extends AbstractAsciiDocTest {
       p1(
         Code.DOCUMENT_START,
         Code.PREAMBLE_START,
-        Code.ATTR_POSITIONAL, 1, 1, 1,
-        Code.ATTR_POSITIONAL, 2, 2, 3,
-        Code.ATTR_NAMED, 4, 5, 6, 7,
+        Code.ATTR_POSITIONAL, 1, 2, 2,
+        Code.ATTR_POSITIONAL, 2, 7, 10,
+        Code.ATTR_NAMED, 4, 5, 18, 21,
         Code.PARAGRAPH_START,
-        Code.TOKENS, 21, 24,
+        Code.TOKENS, 24, 27,
         Code.PARAGRAPH_END,
         Code.PREAMBLE_END,
         Code.DOCUMENT_END

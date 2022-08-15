@@ -742,7 +742,7 @@ final class UnorderedListTest extends AbstractAsciiDocTest {
         Token.INLINE_MACRO, 6, 7,
         Token.BLOB, 8, 9,
         Token.ATTR_LIST_START,
-        Token.ATTR_VALUE, 10, 11,
+        Token.ATTR_VALUE_START, Token.BLOB, 10, 11, Token.ATTR_VALUE_END,
         Token.ATTR_LIST_END, Token.LF,
         Token.LF,
         Token.HEADING, 2, 14, 17, Token.BLOB, 17, 18, Token.LF,
@@ -758,14 +758,14 @@ final class UnorderedListTest extends AbstractAsciiDocTest {
         Code.LI_START,
         Code.INLINE_MACRO, 6, 7,
         Code.MACRO_TARGET, 8, 9,
-        Code.ATTR_POSITIONAL, 1, 10, 11,
+        Code.ATTR_POSITIONAL, 1, 20, 23,
         Code.LI_END,
 
         Code.ULIST_END,
         Code.PREAMBLE_END,
 
         Code.SECTION_START, 1,
-        Code.HEADING_START, 2, Code.TOKENS, 29, 32, Code.HEADING_END,
+        Code.HEADING_START, 2, Code.TOKENS, 31, 34, Code.HEADING_END,
         Code.SECTION_END,
         Code.DOCUMENT_END
       ),

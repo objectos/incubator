@@ -371,14 +371,16 @@ class Pass0 implements Pass1.Source, Pass2.Source {
     return switch (peek()) {
       case '\n' -> rollbackAttributes();
 
-      case '"' -> {
-        add(Token.DQUOTE);
-
-        yield advance(ATTR_QUOTES);
-      }
+      case '"' -> advance(ATTR_QUOTES);
 
       case ',' -> {
-        add(Token.ATTR_VALUE, auxiliaryStart, sourceIndex);
+        add(Token.ATTR_VALUE_START);
+
+        if (auxiliaryStart < sourceIndex) {
+          add(Token.BLOB, auxiliaryStart, sourceIndex);
+        }
+
+        add(Token.ATTR_VALUE_END);
 
         auxiliaryStart = sourceIndex;
 
@@ -395,7 +397,10 @@ class Pass0 implements Pass1.Source, Pass2.Source {
 
       case ']' -> {
         if (auxiliaryStart < sourceIndex) {
-          add(Token.ATTR_VALUE, auxiliaryStart, sourceIndex);
+          add(
+            Token.ATTR_VALUE_START,
+            Token.BLOB, auxiliaryStart, sourceIndex,
+            Token.ATTR_VALUE_END);
         }
 
         yield advance(ATTR_LIST_END);
@@ -415,7 +420,10 @@ class Pass0 implements Pass1.Source, Pass2.Source {
 
       case '"' -> {
         // trim initial quote from value
-        add(Token.ATTR_VALUE, auxiliaryStart + 1, sourceIndex, Token.DQUOTE);
+        add(
+          Token.ATTR_VALUE_START,
+          Token.DQUOTE, auxiliaryStart + 1, sourceIndex,
+          Token.ATTR_VALUE_END);
 
         auxiliaryStart = sourceIndex + 1;
 
@@ -454,14 +462,13 @@ class Pass0 implements Pass1.Source, Pass2.Source {
     return switch (peek()) {
       case '\n' -> rollbackAttributes();
 
-      case '"' -> {
-        add(Token.DQUOTE);
-
-        yield advance(ATTR_QUOTES);
-      }
+      case '"' -> advance(ATTR_QUOTES);
 
       case ',' -> {
-        add(Token.ATTR_VALUE, auxiliaryStart, sourceIndex);
+        add(
+          Token.ATTR_VALUE_START,
+          Token.BLOB, auxiliaryStart, sourceIndex,
+          Token.ATTR_VALUE_END);
 
         auxiliaryStart = sourceIndex;
 
@@ -470,7 +477,10 @@ class Pass0 implements Pass1.Source, Pass2.Source {
 
       case ']' -> {
         if (auxiliaryStart < sourceIndex) {
-          add(Token.ATTR_VALUE, auxiliaryStart, sourceIndex);
+          add(
+            Token.ATTR_VALUE_START,
+            Token.BLOB, auxiliaryStart, sourceIndex,
+            Token.ATTR_VALUE_END);
         }
 
         yield advance(ATTR_LIST_END);

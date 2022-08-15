@@ -55,7 +55,9 @@ class Pass2 {
 
   private int tokenIndex;
 
-  boolean running;
+  private boolean running;
+
+  private boolean processQuotes;
 
   Pass2() {
     context = new int[16];
@@ -104,6 +106,12 @@ class Pass2 {
     return text[textCursor++];
   }
 
+  final void reset() {
+    processQuotes = false;
+
+    running = false;
+  }
+
   final int[] toText() {
     return Arrays.copyOf(text, textIndex);
   }
@@ -131,6 +139,8 @@ class Pass2 {
       switch (token) {
         case Token.BLOB -> executeBlob(nextToken(), nextToken());
 
+        case Token.DQUOTE -> executeDquote(nextToken(), nextToken());
+
         case Token.EOF -> { break loop; }
 
         case Token.LF -> executeLf();
@@ -146,6 +156,10 @@ class Pass2 {
         case Token.MONO_START -> executeMonoStart(nextToken());
 
         case Token.MONO_END -> executeConstrainedEnd(nextToken(), MONOSPACE, Text.MONOSPACE_END);
+
+        case Token.ATTR_VALUE_START, Token.ATTR_VALUE_END -> {}
+
+        case Token.SEPARATOR -> executeBlob(nextToken(), nextToken());
 
         default -> uoe(token);
       }
@@ -233,6 +247,14 @@ class Pass2 {
     addText(text);
 
     push(index + 1, CONSTRAINED_END);
+  }
+
+  private void executeDquote(int start, int end) {
+    if (processQuotes) {
+      throw new UnsupportedOperationException("Implement me");
+    } else {
+      executeBlob(start, end);
+    }
   }
 
   private void executeEof() {

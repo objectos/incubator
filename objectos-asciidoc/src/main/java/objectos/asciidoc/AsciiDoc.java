@@ -15,11 +15,19 @@
  */
 package objectos.asciidoc;
 
+import java.util.Map;
 import objectos.lang.Check;
 import objectos.util.GrowableMap;
-import objectos.util.UnmodifiableMap;
 
 public class AsciiDoc {
+
+  public interface InlineMacroAttributes {
+
+    void render(String name);
+
+  }
+
+  public interface LinkText { void render(); }
 
   public interface Processor {
 
@@ -35,7 +43,7 @@ public class AsciiDoc {
 
     void headingStart(int level);
 
-    void inlineMacro(String name, String target, UnmodifiableMap<String, String> attributes);
+    void inlineMacro(String name, String target, InlineMacroAttributes attributes);
 
     void italicEnd();
 
@@ -43,7 +51,7 @@ public class AsciiDoc {
 
     void lineFeed();
 
-    void link(String href, String text);
+    void link(String href, LinkText text);
 
     void listingBlockEnd();
 
@@ -84,16 +92,10 @@ public class AsciiDoc {
   }
 
   private static class ListingBlock {
-    static final int START = 0;
-
     static final int SOURCE_CODE = 1 << 0;
   }
 
-  private static class Section {
-    static final int START = 0;
-
-    static final int STYLE_SOURCE = 1 << 0;
-  }
+  private final GrowableMap<String, AttrValue> attrMap = new GrowableMap<>();
 
   private final Pass0 pass0 = new Pass0();
 
@@ -106,14 +108,6 @@ public class AsciiDoc {
   private Processor processor;
 
   private int state;
-
-  private int index;
-
-  private int attrStart;
-
-  private int attrEnd;
-
-  private final GrowableMap<String, String> attrMap = new GrowableMap<>();
 
   private AsciiDoc() {
   }
@@ -154,147 +148,120 @@ public class AsciiDoc {
 
         case Code.SECTION_START -> processSectionStart(nextCode());
 
-        case Code.SECTION_END -> { processor.sectionEnd(); attrClear(); }
+        case Code.SECTION_END -> { processor.sectionEnd(); attrMap.clear(); }
 
         case Code.PARAGRAPH_START -> processor.paragraphStart();
 
-        case Code.PARAGRAPH_END -> { processor.paragraphEnd(); attrClear(); }
+        case Code.PARAGRAPH_END -> { processor.paragraphEnd(); attrMap.clear(); }
 
         case Code.TOKENS -> processTokens(nextCode(), nextCode());
 
-        case Code.ATTR_POSITIONAL -> {
-          attrSet();
+        case Code.ATTR_POSITIONAL -> processAttrPositional(nextCode(), nextCode(), nextCode());
 
-          nextCode(); // position
-          nextCode(); // start
-          nextCode(); // end
-
-          attrEnd = pass1.codeCursor();
-        }
-
-        case Code.ATTR_NAMED -> {
-          attrSet();
-
-          nextCode(); // name start
-          nextCode(); // name end
-          nextCode(); // val start
-          nextCode(); // val end
-
-          attrEnd = pass1.codeCursor();
-        }
+        case Code.ATTR_NAMED -> processAttrNamed(nextCode(), nextCode(), nextCode(), nextCode());
 
         case Code.LISTING_BLOCK_START -> processListingBlockStart();
 
-        case Code.LISTING_BLOCK_END -> { processListingBlockEnd(); attrClear(); }
+        case Code.LISTING_BLOCK_END -> { processListingBlockEnd(); attrMap.clear(); }
 
         case Code.VERBATIM -> processVerbatim(nextCode(), nextCode());
 
         case Code.ULIST_START -> processor.unorderedListStart();
 
-        case Code.ULIST_END -> processor.unorderedListEnd();
+        case Code.ULIST_END -> { processor.unorderedListEnd(); attrMap.clear(); }
 
         case Code.LI_START -> processor.listItemStart();
 
         case Code.LI_END -> processor.listItemEnd();
 
-        case Code.INLINE_MACRO -> processMacroInline();
+        case Code.INLINE_MACRO -> { processMacroInline(); attrMap.clear(); }
 
-        case Code.URL_MACRO -> processMacroUrl();
+        case Code.URL_MACRO -> { processMacroUrl(); attrMap.clear(); }
 
         default -> throw new UnsupportedOperationException("Implement me :: code=" + code);
       }
     }
   }
 
-  private boolean attr() {
-    return attrStart != Integer.MIN_VALUE;
-  }
-
-  private void attrClear() {
-    attrStart = Integer.MIN_VALUE;
-  }
-
-  private void attrSet() {
-    if (attrStart == Integer.MIN_VALUE) {
-      attrStart = pass1.codeCursor() - 1;
-    }
-  }
-
-  private int codeAt(int index) {
-    return pass1.codeAt(index);
-  }
-
   private boolean hasCode() { return pass1.hasCode(); }
 
   private int nextCode() { return pass1.nextCode(); }
 
-  private void processListingBlockEnd() {
-    var style = attrMap.getOrDefault(AttrName.STYLE, "");
+  private void processAttrNamed(int nameStart, int nameEnd, int first, int last) {
+    var name = source.substring(nameStart, nameEnd);
 
-    if (style.equals("source")) {
-      processor.sourceCodeBlockEnd();
-    } else {
-      processor.listingBlockEnd();
+    processAttrPositionalOrNamed(name, first, last);
+  }
+
+  private void processAttrPositional(int position, int first, int last) {
+    var name = Integer.toString(position);
+
+    processAttrPositionalOrNamed(name, first, last);
+  }
+
+  private void processAttrPositionalOrNamed(String name, int first, int last) {
+    pass2.execute(pass0, first, last);
+
+    AttrValue value = AttrValue.EMPTY;
+
+    if (pass2.hasText()) {
+      var text = pass2.nextText();
+
+      if (text != Text.REGULAR) {
+        throw new UnsupportedOperationException("Implement me :: Text.REGULAR only, found=" + text);
+      }
+
+      var begin = pass2.nextText();
+      var end = pass2.nextText();
+
+      if (pass2.hasText()) {
+        throw new UnsupportedOperationException("Implement me :: single Text.REGULAR only");
+      }
+
+      var s = source.substring(begin, end);
+
+      value = AttrValue.text(s);
+    }
+
+    attrMap.put(name, value);
+
+    pass2.reset();
+  }
+
+  private void processListingBlockEnd() {
+    switch (state) {
+      case ListingBlock.SOURCE_CODE -> processor.sourceCodeBlockEnd();
+
+      default -> processor.listingBlockEnd();
     }
   }
 
   private void processListingBlockStart() {
-    if (!attr()) {
+    if (attrMap.isEmpty()) {
       processor.listingBlockStart();
 
       return;
     }
 
-    attrMap.clear();
+    var style = stringAttr(AttrName.STYLE, "1");
 
-    state = ListingBlock.START;
+    switch (style) {
+      case "" -> processListingBlockStartMaybeSource();
 
-    for (index = attrStart; index < attrEnd;) {
-      var code = codeAt(index++);
+      case "source" -> processSourceCodeBlock();
 
-      switch (code) {
-        case Code.ATTR_POSITIONAL -> processListingBlockStartAttrPositional();
-
-        default -> uoe(code);
-      }
-    }
-
-    switch (state) {
-      case ListingBlock.START -> processor.listingBlockStart();
-
-      case ListingBlock.SOURCE_CODE -> {
-        var language = attrMap.getOrDefault(AttrName.LANGUAGE, "");
-
-        processor.sourceCodeBlockStart(language);
-      }
-
-      default -> uoe(state);
+      default -> throw new UnsupportedOperationException("Implement me :: state=" + state);
     }
   }
 
-  private void processListingBlockStartAttrPositional() {
-    var position = codeAt(index++);
-    var start = codeAt(index++);
-    var end = codeAt(index++);
-    var value = source.substring(start, end);
+  private void processListingBlockStartMaybeSource() {
+    var lang = stringAttr(AttrName.LANGUAGE, "2");
 
-    switch (position) {
-      case 1 -> {
-        if (value.equals("") || value.equals("source")) {
-          state = state | ListingBlock.SOURCE_CODE;
-
-          attrMap.put(AttrName.STYLE, "source");
-        } else {
-          throw new UnsupportedOperationException("Implement me");
-        }
-      }
-
-      case 2 -> {
-        attrMap.put(AttrName.LANGUAGE, value);
-      }
-
-      default -> uoe(position);
+    if (lang.equals("")) {
+      throw new UnsupportedOperationException("Implement me :: no lang found");
     }
+
+    processSourceCodeBlock(lang);
   }
 
   private void processMacroInline() {
@@ -314,28 +281,37 @@ public class AsciiDoc {
   }
 
   private void processMacroInlineAny(String name, String target) {
-    var copy = attrMap.toUnmodifiableMap();
+    class Impl implements InlineMacroAttributes {
+      final Map<String, AttrValue> copy = attrMap.toUnmodifiableMap();
 
-    processor.inlineMacro(name, target, copy);
+      @Override
+      public final void render(String name) {
+        Check.notNull(name, "name == null");
+
+        var attr = copy.getOrDefault(name, AttrValue.EMPTY);
+
+        attr.render(processor);
+      }
+    }
+
+    processor.inlineMacro(name, target, new Impl());
   }
 
   private void processMacroInlineAttrMap() {
     attrMap.clear();
 
     loop: while (hasCode()) {
-      int cursor = pass1.codeCursor();
+      var cursor = pass1.codeCursor();
 
-      int peek = pass1.codeAt(cursor);
+      var code = pass1.codeAt(cursor);
 
-      switch (peek) {
+      switch (code) {
         case Code.ATTR_POSITIONAL -> {
           nextCode();
 
-          var index = nextCode();
-          var value = source.substring(nextCode(), nextCode());
-
-          attrMap.put(Integer.toString(index), value);
+          processAttrPositional(nextCode(), nextCode(), nextCode());
         }
+
         default -> { break loop; }
       }
     }
@@ -344,72 +320,64 @@ public class AsciiDoc {
   private void processMacroUrl() {
     var href = source.substring(nextCode(), nextCode());
 
-    processMacroInlineAttrMap();
+    var start = nextCode();
 
-    var size = attrMap.size();
-
-    switch (size) {
-      case 0 -> uoe(size);
-
-      case 1 -> {
-        var text = attrMap.get("1");
-
-        processor.link(href, text);
-      }
-
-      default -> uoe(size);
+    if (start != Code.URL_TARGET_START) {
+      throw new UnsupportedOperationException(
+        "Implement me :: expected Code.URL_TARGET_START but found=" + start);
     }
+
+    var codeStart = pass1.codeCursor();
+
+    var end = Integer.MAX_VALUE;
+
+    do {
+      end = nextCode();
+    } while (hasCode() && end != Code.URL_TARGET_END);
+
+    if (end == Integer.MAX_VALUE) {
+      throw new UnsupportedOperationException("Implement me");
+    }
+
+    var codeEnd = pass1.codeCursor() - 1;
+
+    processor.link(href, () -> {
+      for (int index = codeStart; index < codeEnd;) {
+        var code = pass1.codeAt(index++);
+
+        switch (code) {
+          case Code.TOKENS -> processTokens(
+            pass1.codeAt(index++), pass1.codeAt(index++)
+          );
+
+          default -> throw new UnsupportedOperationException("Implement me :: code=" + code);
+        }
+      }
+    });
   }
 
   private void processSectionStart(int level) {
-    if (!attr()) {
+    if (attrMap.isEmpty()) {
       processor.sectionStart(level);
-
-      return;
-    }
-
-    attrMap.clear();
-
-    state = Section.START;
-
-    for (index = attrStart; index < attrEnd;) {
-      var code = codeAt(index++);
-
-      switch (code) {
-        case Code.ATTR_POSITIONAL -> processSectionStartAttrPositional();
-
-        default -> uoe(code);
-      }
-    }
-
-    switch (state) {
-      case Section.START -> {
-        var style = attrMap.getOrDefault(AttrName.STYLE, "");
-
-        processor.sectionStart(level, style);
-      }
-
-      default -> uoe(state);
+    } else {
+      processor.sectionStart(level);
     }
   }
 
-  private void processSectionStartAttrPositional() {
-    var position = codeAt(index++);
-    var start = codeAt(index++);
-    var end = codeAt(index++);
-    var value = source.substring(start, end);
+  private void processSourceCodeBlock() {
+    var lang = stringAttr(AttrName.LANGUAGE, "2");
 
-    switch (position) {
-      case 1 -> {
-        if (value.equals("source")) {
-          state = state | Section.STYLE_SOURCE;
-        } else {
-          attrMap.put(AttrName.STYLE, value);
-        }
-      }
-
-      default -> uoe(position);
+    if (lang.equals("")) {
+      throw new UnsupportedOperationException("Implement me :: no lang found");
     }
+
+    processSourceCodeBlock(lang);
+  }
+
+  private void processSourceCodeBlock(String lang) {
+    state = ListingBlock.SOURCE_CODE;
+
+    processor.sourceCodeBlockStart(lang);
   }
 
   private void processTokens(int first, int last) {
@@ -442,7 +410,7 @@ public class AsciiDoc {
       }
     }
 
-    pass2.running = false;
+    pass2.reset();
   }
 
   private void processVerbatim(int first, int last) {
@@ -468,6 +436,16 @@ public class AsciiDoc {
         default -> uoe(token);
       }
     }
+  }
+
+  private String stringAttr(String name, String alt) {
+    var attr = attrMap.get(name);
+
+    if (attr == null) {
+      attr = attrMap.getOrDefault(alt, AttrValue.EMPTY);
+    }
+
+    return attr.stringValue();
   }
 
   private void text(int begin, int end) {

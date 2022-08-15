@@ -359,7 +359,7 @@ final class SectionTest extends AbstractAsciiDocTest {
 
       p0(
         Token.ATTR_LIST_START,
-        Token.ATTR_VALUE, 1, 4,
+        Token.ATTR_VALUE_START, Token.BLOB, 1, 4, Token.ATTR_VALUE_END,
         Token.ATTR_LIST_END,
         Token.LF,
 
@@ -376,10 +376,10 @@ final class SectionTest extends AbstractAsciiDocTest {
       p1(
         Code.DOCUMENT_START,
 
-        Code.ATTR_POSITIONAL, 1, 1, 4,
+        Code.ATTR_POSITIONAL, 1, 2, 5,
         Code.SECTION_START, 1,
-        Code.HEADING_START, 2, Code.TOKENS, 10, 13, Code.HEADING_END,
-        Code.PARAGRAPH_START, Code.TOKENS, 15, 18, Code.PARAGRAPH_END,
+        Code.HEADING_START, 2, Code.TOKENS, 12, 15, Code.HEADING_END,
+        Code.PARAGRAPH_START, Code.TOKENS, 17, 20, Code.PARAGRAPH_END,
         Code.SECTION_END,
 
         Code.DOCUMENT_END

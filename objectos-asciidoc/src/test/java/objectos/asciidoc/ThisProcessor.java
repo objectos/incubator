@@ -15,7 +15,8 @@
  */
 package objectos.asciidoc;
 
-import objectos.util.UnmodifiableMap;
+import objectos.asciidoc.AsciiDoc.InlineMacroAttributes;
+import objectos.asciidoc.AsciiDoc.LinkText;
 
 class ThisProcessor implements AsciiDoc.Processor {
 
@@ -203,16 +204,15 @@ class ThisProcessor implements AsciiDoc.Processor {
 
   @Override
   public final void inlineMacro(
-      String name, String target, UnmodifiableMap<String, String> attributes) {
+      String name, String target, InlineMacroAttributes attributes) {
     switch (name) {
       case "i" -> {
         var href = target;
-        var text = attributes.getOrDefault("1", "");
 
         sb.append("<a href=\"");
         sb.append(href);
         sb.append("\">");
-        sb.append(text);
+        attributes.render("1");
         sb.append("</a>");
       }
     }
@@ -234,11 +234,11 @@ class ThisProcessor implements AsciiDoc.Processor {
   }
 
   @Override
-  public final void link(String href, String text) {
+  public final void link(String href, LinkText text) {
     sb.append("<a href=\"");
     sb.append(href);
     sb.append("\">");
-    sb.append(text);
+    text.render();
     sb.append("</a>");
   }
 

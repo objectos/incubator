@@ -104,7 +104,7 @@ final class ParagraphTest extends AbstractAsciiDocTest {
         Token.INLINE_MACRO, 4, 9,
         Token.BLOB, 10, 13,
         Token.ATTR_LIST_START,
-        Token.ATTR_VALUE, 14, 15,
+        Token.ATTR_VALUE_START, Token.BLOB, 14, 15, Token.ATTR_VALUE_END,
         Token.ATTR_LIST_END,
         Token.BLOB, 16, 17, Token.LF,
         Token.EOF
@@ -116,8 +116,8 @@ final class ParagraphTest extends AbstractAsciiDocTest {
         Code.PARAGRAPH_START,
         Code.TOKENS, 0, 4,
         Code.URL_MACRO, 4, 13,
-        Code.ATTR_POSITIONAL, 1, 14, 15,
-        Code.TOKENS, 15, 18,
+        Code.URL_TARGET_START, Code.TOKENS, 12, 15, Code.URL_TARGET_END,
+        Code.TOKENS, 17, 20,
         Code.PARAGRAPH_END,
         Code.PREAMBLE_END,
         Code.DOCUMENT_END
@@ -127,6 +127,7 @@ final class ParagraphTest extends AbstractAsciiDocTest {
 
       p2(
         t(Text.REGULAR, 0, 4),
+        t(Text.REGULAR, 14,15),
         t(Text.REGULAR, 16, 17)
       ),
 

@@ -64,7 +64,7 @@ public class Pass2Test extends AsciiDocTest {
 
       pass2.execute(s, first, last);
 
-      pass2.running = false;
+      pass2.reset();
 
       var result = pass2.toText();
 

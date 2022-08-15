@@ -39,21 +39,23 @@ final class Token {
 
   static final int ATTR_NAME = -15;
   static final int ATTR_VALUE = -16;
+  static final int ATTR_VALUE_START = -16;
+  static final int ATTR_VALUE_END = -17;
 
-  static final int LISTING_BLOCK_DELIM = -17;
+  static final int LISTING_BLOCK_DELIM = -18;
 
-  static final int SEPARATOR = -18;
+  static final int SEPARATOR = -19;
 
-  static final int ULIST_ASTERISK = -19;
-  static final int ULIST_HYPHEN = -20;
+  static final int ULIST_ASTERISK = -20;
+  static final int ULIST_HYPHEN = -21;
 
-  static final int INLINE_MACRO = -21;
+  static final int INLINE_MACRO = -22;
 
-  static final int DOCATTR = -22;
+  static final int DOCATTR = -23;
 
-  static final int DQUOTE = -23;
+  static final int DQUOTE = -24;
 
-  static final int LITERALI = -24;
+  static final int LITERALI = -25;
 
   private Token() {}
 

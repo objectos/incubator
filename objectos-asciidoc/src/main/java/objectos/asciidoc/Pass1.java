@@ -64,6 +64,8 @@ class Pass1 {
 
   boolean running = false;
 
+  private int tokenEnd;
+
   Pass1() {
     code = new int[512];
 
@@ -177,22 +179,20 @@ class Pass1 {
 
           var value = tokenAt(tokenIndex++);
 
-          if (value != Token.ATTR_VALUE) {
+          if (value != Token.ATTR_VALUE_START) {
             throw new UnsupportedOperationException(
-              "Implement me :: expecting Token.ATTR_VALUE but found=" + value);
+              "Implement me :: expecting Token.ATTR_VALUE_START but found=" + value);
           }
 
-          var valStart = tokenAt(tokenIndex++);
-          var valEnd = tokenAt(tokenIndex++);
+          executeAttributeValueEnd();
 
-          add(Code.ATTR_NAMED, nameStart, nameEnd, valStart, valEnd);
+          add(Code.ATTR_NAMED, nameStart, nameEnd, tokenStart, tokenEnd);
         }
 
-        case Token.ATTR_VALUE -> {
-          var start = tokenAt(tokenIndex++);
-          var end = tokenAt(tokenIndex++);
+        case Token.ATTR_VALUE_START -> {
+          executeAttributeValueEnd();
 
-          add(Code.ATTR_POSITIONAL, attrCount, start, end);
+          add(Code.ATTR_POSITIONAL, attrCount, tokenStart, tokenEnd);
         }
 
         case Token.SEPARATOR -> {
@@ -217,53 +217,59 @@ class Pass1 {
     var token = tokenAt(tokenIndex++);
 
     switch (token) {
-      case Token.ATTR_VALUE -> executeAttributeListLinkText();
+      case Token.ATTR_VALUE_START -> {
+        add(Code.URL_TARGET_START);
+
+        executeAttributeListLinkText();
+      }
 
       default -> uoeToken(token);
     }
   }
 
   private void executeAttributeListLinkText() {
-    var start = tokenAt(tokenIndex++);
-    var end = tokenAt(tokenIndex++);
+    executeAttributeValueEnd();
+
+    add(Code.TOKENS, tokenStart, tokenEnd);
 
     var token = tokenAt(tokenIndex++);
 
     switch (token) {
-      case Token.ATTR_LIST_END -> add(Code.ATTR_POSITIONAL, 1, start, end);
+      case Token.ATTR_LIST_END -> {
+        add(Code.URL_TARGET_END);
+      }
 
-      case Token.SEPARATOR -> executeAttributeListLinkTextComma(start);
+      case Token.SEPARATOR -> executeAttributeListLinkTextComma();
 
       default -> uoeToken(token);
     }
   }
 
-  private void executeAttributeListLinkTextComma(int start) {
-    /*var commaStart =*/ tokenAt(tokenIndex++);
+  private void executeAttributeListLinkTextComma() {
+    var commaStart = tokenAt(tokenIndex++);
     var commaEnd = tokenAt(tokenIndex++);
-    var end = commaEnd;
 
-    loop: do {
+    add(Code.TOKENS, commaStart, commaEnd);
 
-      var token = tokenAt(tokenIndex++);
+    var token = tokenAt(tokenIndex++);
 
-      switch (token) {
-        case Token.ATTR_VALUE -> {
-          tokenIndex++;
+    switch (token) {
+      case Token.ATTR_VALUE_START -> executeAttributeListLinkText();
 
-          end = tokenAt(tokenIndex++);
-        }
+      default -> uoeToken(token);
+    }
+  }
 
-        case Token.ATTR_LIST_END -> {
-          add(Code.ATTR_POSITIONAL, 1, start, end);
+  private void executeAttributeValueEnd() {
+    tokenStart = tokenIndex;
+    tokenEnd = 0;
+    var marker = 0;
 
-          break loop;
-        }
+    do {
+      tokenEnd = tokenIndex;
 
-        default -> uoeToken(token);
-      }
-
-    } while (hasToken());
+      marker = tokenAt(tokenIndex++);
+    } while (marker != Token.ATTR_VALUE_END);
   }
 
   private void executeBlocks() {

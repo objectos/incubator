@@ -45,7 +45,7 @@ final class UrlMacroTest extends AbstractAsciiDocTest {
         Token.INLINE_MACRO, 0, 5,
         Token.BLOB, 6, 19,
         Token.ATTR_LIST_START,
-        Token.ATTR_VALUE, 20, 22,
+        Token.ATTR_VALUE_START, Token.BLOB, 20, 22, Token.ATTR_VALUE_END,
         Token.ATTR_LIST_END,
         Token.LF,
 
@@ -57,8 +57,8 @@ final class UrlMacroTest extends AbstractAsciiDocTest {
         Code.PREAMBLE_START,
         Code.PARAGRAPH_START,
         Code.URL_MACRO, 0, 19,
-        Code.ATTR_POSITIONAL, 1, 20, 22,
-        Code.TOKENS, 11, 11,
+        Code.URL_TARGET_START, Code.TOKENS, 8, 11, Code.URL_TARGET_END,
+        Code.TOKENS, 13, 13,
         Code.PARAGRAPH_END,
         Code.PREAMBLE_END,
         Code.DOCUMENT_END
@@ -67,6 +67,7 @@ final class UrlMacroTest extends AbstractAsciiDocTest {
       docAttr(),
 
       p2(
+        t(Text.REGULAR, 20, 22),
         t()
       ),
 
@@ -105,9 +106,9 @@ final class UrlMacroTest extends AbstractAsciiDocTest {
         Token.INLINE_MACRO, 0, 5,
         Token.BLOB, 6, 9,
         Token.ATTR_LIST_START,
-        Token.ATTR_VALUE, 10, 11,
+        Token.ATTR_VALUE_START, Token.BLOB, 10, 11, Token.ATTR_VALUE_END,
         Token.SEPARATOR, 11, 13,
-        Token.ATTR_VALUE, 13, 14,
+        Token.ATTR_VALUE_START, Token.BLOB, 13, 14, Token.ATTR_VALUE_END,
         Token.ATTR_LIST_END,
         Token.LF,
 
@@ -119,8 +120,10 @@ final class UrlMacroTest extends AbstractAsciiDocTest {
         Code.PREAMBLE_START,
         Code.PARAGRAPH_START,
         Code.URL_MACRO, 0, 9,
-        Code.ATTR_POSITIONAL, 1, 10, 14,
-        Code.TOKENS, 17, 17,
+        Code.URL_TARGET_START,
+        Code.TOKENS, 8, 11, Code.TOKENS, 11, 13, Code.TOKENS, 16, 19,
+        Code.URL_TARGET_END,
+        Code.TOKENS, 21, 21,
         Code.PARAGRAPH_END,
         Code.PREAMBLE_END,
         Code.DOCUMENT_END
@@ -129,6 +132,9 @@ final class UrlMacroTest extends AbstractAsciiDocTest {
       docAttr(),
 
       p2(
+        t(Text.REGULAR, 10, 11),
+        t(Text.REGULAR, 11, 13),
+        t(Text.REGULAR, 13, 14),
         t()
       ),
 

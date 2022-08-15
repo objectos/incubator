@@ -124,12 +124,16 @@ final class InlineMacroTest extends AbstractAsciiDocTest {
 
         Token.ULIST_ASTERISK, 1, 6, 7,
         Token.INLINE_MACRO, 8, 9, Token.BLOB, 10, 11,
-        Token.ATTR_LIST_START, Token.ATTR_VALUE, 12, 13, Token.ATTR_LIST_END,
+        Token.ATTR_LIST_START,
+        Token.ATTR_VALUE_START, Token.BLOB, 12, 13, Token.ATTR_VALUE_END,
+        Token.ATTR_LIST_END,
         Token.LF,
 
         Token.ULIST_ASTERISK, 1, 15, 16,
         Token.INLINE_MACRO, 17, 18, Token.BLOB, 19, 20,
-        Token.ATTR_LIST_START, Token.ATTR_VALUE, 21, 22, Token.ATTR_LIST_END,
+        Token.ATTR_LIST_START,
+        Token.ATTR_VALUE_START, Token.BLOB, 21, 22, Token.ATTR_VALUE_END,
+        Token.ATTR_LIST_END,
         Token.LF,
 
         Token.EOF
@@ -146,13 +150,13 @@ final class InlineMacroTest extends AbstractAsciiDocTest {
         Code.LI_START,
         Code.INLINE_MACRO, 8, 9,
         Code.MACRO_TARGET, 10, 11,
-        Code.ATTR_POSITIONAL, 1, 12, 13,
+        Code.ATTR_POSITIONAL, 1, 21, 24,
         Code.LI_END,
 
         Code.LI_START,
         Code.INLINE_MACRO, 17, 18,
         Code.MACRO_TARGET, 19, 20,
-        Code.ATTR_POSITIONAL, 1, 21, 22,
+        Code.ATTR_POSITIONAL, 1, 39, 42,
         Code.LI_END,
 
         Code.ULIST_END,
@@ -214,7 +218,7 @@ final class InlineMacroTest extends AbstractAsciiDocTest {
         Token.INLINE_MACRO, 2, 3,
         Token.BLOB, 4, 5,
         Token.ATTR_LIST_START,
-        Token.ATTR_VALUE, 6, 7,
+        Token.ATTR_VALUE_START, Token.BLOB, 6, 7, Token.ATTR_VALUE_END,
         Token.ATTR_LIST_END,
         Token.BLOB, 8, 9,
         Token.LF,
@@ -231,11 +235,11 @@ final class InlineMacroTest extends AbstractAsciiDocTest {
         Code.TOKENS, 0, 3,
         Code.INLINE_MACRO, 2, 3,
         Code.MACRO_TARGET, 4, 5,
-        Code.ATTR_POSITIONAL, 1, 6, 7,
-        Code.TOKENS, 14, 17,
+        Code.ATTR_POSITIONAL, 1, 11, 14,
+        Code.TOKENS, 16, 19,
         Code.PARAGRAPH_END,
         Code.PARAGRAPH_START,
-        Code.TOKENS, 19, 22,
+        Code.TOKENS, 21, 24,
         Code.PARAGRAPH_END,
         Code.PREAMBLE_END,
         Code.DOCUMENT_END
@@ -310,6 +314,61 @@ final class InlineMacroTest extends AbstractAsciiDocTest {
       <div id="content">
       <div class="paragraph">
        <p>i:b c[d]</p>
+      </div>
+      </div>
+      </body>
+      """
+    );
+  }
+
+  @Test(enabled = false, description = //
+  """
+  imacro + monospace
+
+  012345678
+  '''
+  i:b[`c`]
+  '''
+  """)
+  public void testCase06() {
+    test(
+      """
+      i:b[`c`]
+      """,
+
+      p0(
+        Token.INLINE_MACRO, 0, 1,
+        Token.BLOB, 2, 3,
+        Token.ATTR_LIST_START,
+        Token.ATTR_VALUE_START, Token.MONO_START, 6, 7, Token.MONO_END, Token.ATTR_VALUE_END,
+        Token.ATTR_LIST_END,
+        Token.LF,
+        Token.EOF
+      ),
+
+      p1(
+        Code.DOCUMENT_START,
+        Code.PREAMBLE_START,
+        Code.PARAGRAPH_START,
+        Code.TOKENS, 0, 3,
+        Code.PARAGRAPH_END,
+        Code.PREAMBLE_END,
+        Code.DOCUMENT_END
+      ),
+
+      docAttr(),
+
+      p2(
+        t(Text.REGULAR, 0, 8)
+      ),
+
+      """
+      <body>
+      <div id="header">
+      </div>
+      <div id="content">
+      <div class="paragraph">
+       <p><a href="b"><code>c</code></a></p>
       </div>
       </div>
       </body>
