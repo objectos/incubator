@@ -306,6 +306,8 @@ class Pass0 implements Pass1.Source, Pass2.Source {
 
       case ATTR_VALUE_MONO_END -> stateAttrValueMonoEnd();
 
+      case ATTR_VALUE_SPACE_LIKE -> stateAttrValueSpaceLike();
+
       case ATTR_QUOTES -> stateAttrQuotes();
 
       case ATTR_SEPARATOR -> stateAttrSeparator();
@@ -544,6 +546,22 @@ class Pass0 implements Pass1.Source, Pass2.Source {
 
         yield advance(ATTR_VALUE);
       }
+    };
+  }
+
+  private int stateAttrValueSpaceLike() {
+    if (!hasChar()) {
+      return rollbackAttributes();
+    }
+
+    return switch (peek()) {
+      case '\n' -> rollbackAttributes();
+
+      case ' ', '\t', '\f', '\u000B' -> advance(state);
+
+      case '`' -> advance(ATTR_VALUE_MONO_START);
+
+      default -> advance(ATTR_VALUE);
     };
   }
 
