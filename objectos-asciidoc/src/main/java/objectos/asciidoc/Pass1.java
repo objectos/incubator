@@ -246,8 +246,9 @@ class Pass1 {
   }
 
   private void executeAttributeListLinkTextComma() {
-    var commaStart = tokenAt(tokenIndex++);
-    var commaEnd = tokenAt(tokenIndex++);
+    var commaStart = tokenIndex - 1;
+    tokenIndex += 2;
+    var commaEnd = tokenIndex;
 
     add(Code.TOKENS, commaStart, commaEnd);
 

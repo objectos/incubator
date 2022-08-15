@@ -323,13 +323,18 @@ public class AsciiDoc {
     var codeEnd = pass1.codeCursor() - 1;
 
     processor.link(href, () -> {
+      System.out.println("codeStart=" + codeStart + ";codeEnd=" + codeEnd);
+
       for (int index = codeStart; index < codeEnd;) {
         var code = pass1.codeAt(index++);
 
         switch (code) {
-          case Code.TOKENS -> processTokens(
-            pass1.codeAt(index++), pass1.codeAt(index++)
-          );
+          case Code.TOKENS -> {
+            var first = pass1.codeAt(index++);
+            var last = pass1.codeAt(index++);
+
+            processTokens(first, last);
+          }
 
           default -> throw new UnsupportedOperationException("Implement me :: code=" + code);
         }
