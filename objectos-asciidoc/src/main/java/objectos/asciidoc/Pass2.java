@@ -37,6 +37,8 @@ class Pass2 {
 
   private static final int CONSTRAINED_END = -6;
 
+  private static final int LF = -7;
+
   private int[] context;
 
   private int contextIndex;
@@ -223,6 +225,12 @@ class Pass2 {
         push(REGULAR);
       }
 
+      case LF -> {
+        addText(Text.REGULAR, start - 1, end);
+
+        push(REGULAR);
+      }
+
       default -> uoe(ctx);
     }
   }
@@ -330,6 +338,8 @@ class Pass2 {
     var ctx = pop();
 
     switch (ctx) {
+      case START -> push(ctx, LF);
+
       case REGULAR -> {
         text[textIndex - 1]++;
 

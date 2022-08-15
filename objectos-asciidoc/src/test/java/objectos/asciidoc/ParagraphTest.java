@@ -127,7 +127,7 @@ final class ParagraphTest extends AbstractAsciiDocTest {
 
       p2(
         t(Text.REGULAR, 0, 4),
-        t(Text.REGULAR, 14,15),
+        t(Text.REGULAR, 14, 15),
         t(Text.REGULAR, 16, 17)
       ),
 
@@ -204,6 +204,71 @@ final class ParagraphTest extends AbstractAsciiDocTest {
       <div id="content">
       <div class="paragraph">
       <p>abc d <code>e</code> f</p>
+      </div>
+      </div>
+      </body>
+      """
+    );
+  }
+
+  @Test(description = //
+  """
+  multiline paragraph. Line ends in a imacro.
+
+  012345678
+  90
+  '''
+  a i:b[c]
+  d
+  '''
+  """)
+  public void testCase04() {
+    test(
+      """
+      a i:b[c]
+      d
+      """,
+
+      p0(
+        Token.BLOB, 0, 2,
+        Token.INLINE_MACRO, 2, 3,
+        Token.BLOB, 4, 5,
+        Token.ATTR_LIST_START,
+        Token.ATTR_VALUE_START, Token.BLOB, 6, 7, Token.ATTR_VALUE_END,
+        Token.ATTR_LIST_END,
+        Token.LF,
+        Token.BLOB, 9, 10, Token.LF,
+        Token.EOF
+      ),
+
+      p1(
+        Code.DOCUMENT_START,
+        Code.PREAMBLE_START,
+        Code.PARAGRAPH_START,
+        Code.TOKENS, 0, 3,
+        Code.INLINE_MACRO, 2, 3,
+        Code.MACRO_TARGET, 4, 5,
+        Code.ATTR_POSITIONAL, 1, 11, 14,
+        Code.TOKENS, 16, 20,
+        Code.PARAGRAPH_END,
+        Code.PREAMBLE_END,
+        Code.DOCUMENT_END
+      ),
+
+      docAttr(),
+
+      p2(
+        t(Text.REGULAR, 0, 2),
+        t(Text.REGULAR, 8, 10)
+      ),
+
+      """
+      <body>
+      <div id="header">
+      </div>
+      <div id="content">
+      <div class="paragraph">
+      <p>a <a href="b">c</a> d</p>
       </div>
       </div>
       </body>
