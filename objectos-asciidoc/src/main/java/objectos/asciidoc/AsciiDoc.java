@@ -323,8 +323,6 @@ public class AsciiDoc {
     var codeEnd = pass1.codeCursor() - 1;
 
     processor.link(href, () -> {
-      System.out.println("codeStart=" + codeStart + ";codeEnd=" + codeEnd);
-
       for (int index = codeStart; index < codeEnd;) {
         var code = pass1.codeAt(index++);
 

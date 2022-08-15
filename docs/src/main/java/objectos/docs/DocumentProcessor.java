@@ -21,7 +21,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import objectos.asciidoc.AsciiDoc;
-import objectos.util.UnmodifiableMap;
+import objectos.asciidoc.AsciiDoc.InlineMacroAttributes;
+import objectos.asciidoc.AsciiDoc.LinkText;
 
 final class DocumentProcessor implements AsciiDoc.Processor {
 
@@ -77,17 +78,15 @@ final class DocumentProcessor implements AsciiDoc.Processor {
 
   @Override
   public final void inlineMacro(
-      String name, String target, UnmodifiableMap<String, String> attributes) {
+      String name, String target, InlineMacroAttributes attributes) {
     switch (name) {
       case "ilink" -> {
         var href = "/0.2/" + target + ".html";
 
-        var text = (String) attributes.get("1");
-
         html.append("<a href=\"");
         html.append(href);
         html.append("\">");
-        html.append(text);
+        attributes.render("1");
         html.append("</a>");
       }
       default -> throw new UnsupportedOperationException("Implement me :: name=" + name);
@@ -112,11 +111,11 @@ final class DocumentProcessor implements AsciiDoc.Processor {
   }
 
   @Override
-  public final void link(String href, String text) {
+  public final void link(String href, LinkText text) {
     html.append("<a href=\"");
     html.append(href);
     html.append("\">");
-    html.append(text);
+    text.render();
     html.append("</a>");
   }
 
