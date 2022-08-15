@@ -656,7 +656,7 @@ class Pass1 {
           break loop;
         }
 
-        case Token.HEADING -> {
+        case Token.HEADING, Token.ATTR_LIST_START -> {
           if (newLine > 1) {
             tokenEnd = tokenIndex - newLine;
           }
@@ -704,7 +704,12 @@ class Pass1 {
           }
         }
 
-        case Token.HEADING, Token.BLOB, Token.MONO_START, Token.INLINE_MACRO -> { break loop; }
+        case //
+            Token.HEADING, //
+            Token.ATTR_LIST_START, //
+            Token.BLOB, //
+            Token.MONO_START, //
+            Token.INLINE_MACRO -> { break loop; }
 
         default -> uoeToken(token);
       }
