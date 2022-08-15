@@ -2,6 +2,10 @@
 
 == Test case 04
 
-a i:b[c].
+a link:b[c].
 
 d
+
+== Test case 05
+
+link:b c[d]

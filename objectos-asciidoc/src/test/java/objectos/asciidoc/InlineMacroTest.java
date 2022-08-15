@@ -266,4 +266,55 @@ final class InlineMacroTest extends AbstractAsciiDocTest {
     );
   }
 
+  @Test(description = //
+  """
+  not imacro: target with spaces
+
+  012345678
+  '''
+  i:b c[d]
+  '''
+  """)
+  public void testCase05() {
+    test(
+      """
+      i:b c[d]
+      """,
+
+      p0(
+        Token.BLOB, 0, 8,
+        Token.LF,
+        Token.EOF
+      ),
+
+      p1(
+        Code.DOCUMENT_START,
+        Code.PREAMBLE_START,
+        Code.PARAGRAPH_START,
+        Code.TOKENS, 0, 3,
+        Code.PARAGRAPH_END,
+        Code.PREAMBLE_END,
+        Code.DOCUMENT_END
+      ),
+
+      docAttr(),
+
+      p2(
+        t(Text.REGULAR, 0, 8)
+      ),
+
+      """
+      <body>
+      <div id="header">
+      </div>
+      <div id="content">
+      <div class="paragraph">
+       <p>i:b c[d]</p>
+      </div>
+      </div>
+      </body>
+      """
+    );
+  }
+
 }

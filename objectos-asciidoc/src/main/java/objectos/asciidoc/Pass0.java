@@ -929,15 +929,9 @@ class Pass0 implements Pass1.Source, Pass2.Source {
   private int stateListingBlock() {
     if (!hasChar()) {
       if (counter >= 4) {
-        add(
-          Token.LISTING_BLOCK_DELIM, counter,
-          Token.EOF
-        );
+        add(Token.LISTING_BLOCK_DELIM, counter, Token.EOF);
       } else {
-        add(
-          Token.BLOB, blobStart, sourceIndex,
-          Token.EOF
-        );
+        add(Token.BLOB, blobStart, sourceIndex, Token.EOF);
       }
 
       return EOF;
@@ -948,10 +942,7 @@ class Pass0 implements Pass1.Source, Pass2.Source {
         if (counter >= 4) {
           add(Token.LISTING_BLOCK_DELIM, counter, Token.LF);
         } else {
-          add(
-            Token.BLOB, blobStart, sourceIndex,
-            Token.LF
-          );
+          add(Token.BLOB, blobStart, sourceIndex, Token.LF);
         }
 
         yield advance(LINE_START);
@@ -975,20 +966,14 @@ class Pass0 implements Pass1.Source, Pass2.Source {
 
   private int stateListingBlockOrList() {
     if (!hasChar()) {
-      add(
-        Token.BLOB, blobStart, sourceIndex,
-        Token.EOF
-      );
+      add(Token.BLOB, blobStart, sourceIndex, Token.EOF);
 
       return EOF;
     }
 
     return switch (peek()) {
       case '\n' -> {
-        add(
-          Token.BLOB, blobStart, sourceIndex,
-          Token.LF
-        );
+        add(Token.BLOB, blobStart, sourceIndex, Token.LF);
 
         yield advance(LINE_START);
       }
@@ -1073,6 +1058,8 @@ class Pass0 implements Pass1.Source, Pass2.Source {
 
     return switch (peek()) {
       case '\n' -> rollbackMacro();
+
+      case ' ', '\t', '\f', '\u000B' -> rollbackMacro();
 
       case '[' -> {
         add(Token.BLOB, auxiliaryStart, sourceIndex, Token.ATTR_LIST_START);
