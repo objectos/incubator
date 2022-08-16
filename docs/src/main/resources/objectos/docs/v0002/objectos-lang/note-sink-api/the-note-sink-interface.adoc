@@ -76,7 +76,7 @@ You must be aware this strategy is error-prone:
 
 * you must null-check before setting the `sink` field value;
 * you must set the `sink` to a default value to avoid null-pointer exceptions. Typically this
-will be the ilink:objectos-lang/note-sink-api/the-no-op-note-sink[`NoOpNoteSink`]; and
+will be the ilink:v0002/objectos-lang/note-sink-api/the-no-op-note-sink[`NoOpNoteSink`]; and
 * depending on your requirements, you might need some sort of synchronization.
 
 === Via static factory

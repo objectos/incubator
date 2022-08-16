@@ -81,7 +81,15 @@ final class DocumentProcessor implements AsciiDoc.Processor {
       String name, String target, InlineMacroAttributes attributes) {
     switch (name) {
       case "ilink" -> {
-        var href = "/0.2/" + target + ".html";
+        var first = target.indexOf('/');
+
+        var versionKey = target.substring(0, first);
+
+        var version = Version.parse(versionKey);
+
+        var key = target.substring(first + 1);
+
+        var href = "/" + version.slug() + "/" + key + ".html";
 
         html.append("<a href=\"");
         html.append(href);

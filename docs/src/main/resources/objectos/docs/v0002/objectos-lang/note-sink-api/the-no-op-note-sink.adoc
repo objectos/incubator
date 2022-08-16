@@ -24,7 +24,7 @@ var sink = NoOpNoteSink.getInstance();
 In classes where the `NoteSink` is defined as a mutable field, it is recommended you provide
 the `NoOpNoteSink` instance as a _default_ sink implementation.
 
-We saw two examples in the ilink:objectos-lang/note-sink-api/the-note-sink-interface[obtaining the `NoteSink` interface]
+We saw two examples in the ilink:v0002/objectos-lang/note-sink-api/the-note-sink-interface[obtaining the `NoteSink` interface]
 section:
 
 * via the setter method; and

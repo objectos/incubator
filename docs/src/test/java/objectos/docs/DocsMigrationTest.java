@@ -65,13 +65,13 @@ public class DocsMigrationTest {
       "objectos-lang/HashCode",
       "objectos-lang/ToString",
       "objectos-lang/note-sink-api/index",
-      "objectos-lang/note-sink-api/creating-notes"
-    //      "objectos-lang/note-sink-api/the-note-sink-interface",
-    //      "objectos-lang/note-sink-api/the-no-op-note-sink",
-    //
-    //      "relnotes/index",
-    //      "relnotes/0.2.0",
-    //      "relnotes/0.1.0"
+      "objectos-lang/note-sink-api/creating-notes",
+      "objectos-lang/note-sink-api/the-note-sink-interface",
+      "objectos-lang/note-sink-api/the-no-op-note-sink",
+
+      "relnotes/index",
+      "relnotes/0.2.0",
+      "relnotes/0.1.0"
     );
   }
 

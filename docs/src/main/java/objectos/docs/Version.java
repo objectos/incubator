@@ -145,4 +145,16 @@ record Version(String name,
     }
   }
 
+  public static Version parse(String key) {
+    return switch (key) {
+      case "v0001" -> V0_1_0;
+
+      case "v0002" -> V0_2_0;
+
+      case "next" -> NEXT;
+
+      default -> throw new UnsupportedOperationException("Implement me :: key=" + key);
+    };
+  }
+
 }
