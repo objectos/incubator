@@ -22,7 +22,7 @@ We *highly recommend* the use of the Objectos BOM POM.
 
 === Objectos Logging
 
-ilink:v0001/logging/index[Objectos Logging] provides a logging API for Java applications.
+ilink:logging/index[Objectos Logging] provides a logging API for Java applications.
 You log events and not string messages. Events can have type arguments so that log
 method invocations are type-safe. A hypothetical service that only logs "hello world!"
 could be written as:

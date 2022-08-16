@@ -28,93 +28,42 @@ public class DocsMigrationTest {
 
   private DocumentProcessor processor;
 
+  private String[] reps;
+
   @BeforeClass
   public void _beforeClass() {
     processor = new DocumentProcessor();
+
+    reps = new String[] {
+        "jyf", SyntaxCss._PRE.className(),
+        "njs", XmlCss._TEXT.className(),
+        "jrq", XmlCss._SYMBOL.className(),
+        "cyc", XmlCss._TAG_NAME.className(),
+
+        "igz", JavaCss._IDENTIFIER.className(),
+        "tu9", JavaCss._WS.className(),
+        "nhu", JavaCss._TOKEN.className(),
+        "iec", JavaCss._KEYWORD.className(),
+        "qbr", JavaCss._DIGITS.className(),
+        "uc6", JavaCss._STRING.className(),
+        "wjs", JavaCss._COMMENT.className(),
+        "juq", JavaCss._ANNOTATION.className()
+    };
+  }
+
+  @Test
+  public void next() throws IOException {
+    test(reps, Version.NEXT);
   }
 
   @Test
   public void v0001() throws IOException {
-    var reps = new String[] {
-        "jyf", SyntaxCss._PRE.className(),
-        "njs", XmlCss._TEXT.className(),
-        "jrq", XmlCss._SYMBOL.className(),
-        "cyc", XmlCss._TAG_NAME.className(),
-
-        "igz", JavaCss._IDENTIFIER.className(),
-        "tu9", JavaCss._WS.className(),
-        "nhu", JavaCss._TOKEN.className(),
-        "iec", JavaCss._KEYWORD.className(),
-        "qbr", JavaCss._DIGITS.className(),
-        "uc6", JavaCss._STRING.className(),
-        "wjs", JavaCss._COMMENT.className(),
-        "juq", JavaCss._ANNOTATION.className()
-    };
-
-    test(
-      reps, "v0001",
-      "index",
-
-      "intro/index",
-      "intro/overview",
-      "intro/install",
-
-      "logging/index",
-      "logging/getting-started/index",
-      "logging/getting-started/about-logging",
-      "logging/getting-started/objectos-logging",
-      "logging/getting-started/installing",
-      "logging/getting-started/quick-start",
-      "logging/logging-guide/index",
-      "logging/logging-guide/events",
-      "logging/logging-guide/logger",
-      "logging/no-op-logger/index",
-
-      "relnotes/index",
-      "relnotes/0.1.0"
-    );
+    test(reps, Version.V0_1_0);
   }
 
   @Test
   public void v0002() throws IOException {
-    var reps = new String[] {
-        "jyf", SyntaxCss._PRE.className(),
-        "njs", XmlCss._TEXT.className(),
-        "jrq", XmlCss._SYMBOL.className(),
-        "cyc", XmlCss._TAG_NAME.className(),
-
-        "igz", JavaCss._IDENTIFIER.className(),
-        "tu9", JavaCss._WS.className(),
-        "nhu", JavaCss._TOKEN.className(),
-        "iec", JavaCss._KEYWORD.className(),
-        "qbr", JavaCss._DIGITS.className(),
-        "uc6", JavaCss._STRING.className(),
-        "wjs", JavaCss._COMMENT.className(),
-        "juq", JavaCss._ANNOTATION.className()
-    };
-
-    test(
-      reps, "v0002",
-      "index",
-
-      "intro/index",
-      "intro/overview",
-      "intro/install",
-
-      "objectos-lang/index",
-      "objectos-lang/Check",
-      "objectos-lang/Equals",
-      "objectos-lang/HashCode",
-      "objectos-lang/ToString",
-      "objectos-lang/note-sink-api/index",
-      "objectos-lang/note-sink-api/creating-notes",
-      "objectos-lang/note-sink-api/the-note-sink-interface",
-      "objectos-lang/note-sink-api/the-no-op-note-sink",
-
-      "relnotes/index",
-      "relnotes/0.2.0",
-      "relnotes/0.1.0"
-    );
+    test(reps, Version.V0_2_0);
   }
 
   private String load(String slug, String key) throws IOException {
@@ -209,9 +158,15 @@ public class DocsMigrationTest {
     }
   }
 
-  private void test(String[] reps, String slug, String... keys) throws IOException {
-    for (var key : keys) {
-      test(slug, key, reps);
+  private void test(String[] reps, Version version) throws IOException {
+    var slug = version.slug();
+
+    processor.slug(slug);
+
+    var resourceDirectory = version.resourceDirectory();
+
+    for (var key : version.keys()) {
+      test(resourceDirectory, key, reps);
     }
   }
 

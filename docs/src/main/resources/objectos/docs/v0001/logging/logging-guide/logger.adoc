@@ -78,7 +78,7 @@ You must be aware this strategy is error-prone:
 
 * you must null-check before setting the logger field value;
 * you must set the logger to a default value to avoid null-pointer exceptions. Typically this
-will be the ilink:v0001/logging/no-op-logger/index[`NoOpLogger`]; and
+will be the ilink:logging/no-op-logger/index[`NoOpLogger`]; and
 * depending on your requirements, you might need to synchronize the access.
 
 === Via static factory

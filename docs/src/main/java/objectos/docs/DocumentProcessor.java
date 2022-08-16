@@ -40,6 +40,8 @@ final class DocumentProcessor implements AsciiDoc.Processor {
 
   private LanguageRenderer languageRenderer;
 
+  private String slug;
+
   @Override
   public final void boldEnd() {
     html.append("</strong>");
@@ -80,7 +82,7 @@ final class DocumentProcessor implements AsciiDoc.Processor {
   public final void inlineMacro(
       String name, String target, InlineMacroAttributes attributes) {
     switch (name) {
-      case "ilink" -> {
+      case "elink" -> {
         var first = target.indexOf('/');
 
         var versionKey = target.substring(0, first);
@@ -97,6 +99,17 @@ final class DocumentProcessor implements AsciiDoc.Processor {
         attributes.render("1");
         html.append("</a>");
       }
+
+      case "ilink" -> {
+        var href = "/" + slug + "/" + target + ".html";
+
+        html.append("<a href=\"");
+        html.append(href);
+        html.append("\">");
+        attributes.render("1");
+        html.append("</a>");
+      }
+
       default -> throw new UnsupportedOperationException("Implement me :: name=" + name);
     }
   }
@@ -291,6 +304,10 @@ final class DocumentProcessor implements AsciiDoc.Processor {
 
   final void raw(String s) {
     html.append(s);
+  }
+
+  final void slug(String slug) {
+    this.slug = slug;
   }
 
 }

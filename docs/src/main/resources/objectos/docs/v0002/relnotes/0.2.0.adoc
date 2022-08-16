@@ -11,7 +11,7 @@ Objectos 0.2.0 requires JDK 17 or later.
 
 == What's new in Objectos 0.2.0
 
-This release introduces the ilink:v0002/objectos-lang/index[Objectos Lang] library.
+This release introduces the ilink:objectos-lang/index[Objectos Lang] library.
 It provides:
 
 * a set of utilities for objects whose type is from the `java.lang` package; and
@@ -19,7 +19,7 @@ It provides:
 
 === The `Check` class
 
-The ilink:v0002/objectos-lang/Check[`Check`] class
+The ilink:objectos-lang/Check[`Check`] class
 helps verify if a method or constructor has been invoked correctly:
 
 [,java]
@@ -34,16 +34,16 @@ public void start(String name, int value) {
 If any of the check conditions
 does not evaluate to `true` then the check fails with a specific `RuntimeException` sub-type.
 
-You can find ilink:v0002/objectos-lang/Check[the full documentation here].
+You can find ilink:objectos-lang/Check[the full documentation here].
 
 === Utilities for overriding `java.lang.Object` methods
 
 Objectos Lang provides three utilities each for overriding one of the following
 `java.lang.Object` method:
 
-* ilink:v0002/objectos-lang/Equals[`equals`]
-* ilink:v0002/objectos-lang/HashCode[`hashCode`]
-* ilink:v0002/objectos-lang/ToString[`toString`]
+* ilink:objectos-lang/Equals[`equals`]
+* ilink:objectos-lang/HashCode[`hashCode`]
+* ilink:objectos-lang/ToString[`toString`]
 
 The following example show all of them in action:
 
@@ -88,9 +88,9 @@ class Edition implements ToString.Formattable {
 
 You can find the full documentation for each of the classes in the links below:
 
-* ilink:v0002/objectos-lang/Equals[`Equals`]
-* ilink:v0002/objectos-lang/HashCode[`HashCode`]
-* ilink:v0002/objectos-lang/ToString[`ToString`]
+* ilink:objectos-lang/Equals[`Equals`]
+* ilink:objectos-lang/HashCode[`HashCode`]
+* ilink:objectos-lang/ToString[`ToString`]
 
 === The note sink API
 
