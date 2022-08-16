@@ -392,6 +392,7 @@ public class AsciiDoc {
 
         case Text.CURVED_APOSTROPHE -> {
           processor.text("’");
+          //processor.text("'");
         }
 
         default -> throw new UnsupportedOperationException("Implement me :: text=" + text);

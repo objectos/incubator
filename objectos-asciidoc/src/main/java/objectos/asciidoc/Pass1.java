@@ -418,11 +418,11 @@ class Pass1 {
       switch (token) {
         case Token.BLOB -> tokenIndex += 3;
 
-        case Token.BOLD_START, Token.BOLD_END -> tokenIndex += 2;
-
-        case Token.ITALIC_START, Token.ITALIC_END -> tokenIndex += 2;
-
-        case Token.MONO_START, Token.MONO_END -> tokenIndex += 2;
+        case
+            Token.BOLD_START, Token.BOLD_END,
+            Token.ITALIC_START, Token.ITALIC_END,
+            Token.MONO_START, Token.MONO_END,
+            Token.APOSTROPHE -> tokenIndex += 2;
 
         case Token.INLINE_MACRO -> { executeInlineMacro(); tokenStart = tokenIndex; }
 

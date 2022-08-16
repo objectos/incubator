@@ -352,24 +352,32 @@ class Pass0 implements Pass1.Source, Pass2.Source {
         yield advance(LINE_START);
       }
 
-      case ' ', '\t', '\f', '\u000B' -> advance(ATTR_LIST_END);
+      case ' ', '\t', '\f', '\u000B' -> switch (attrlist) {
+        case _ATTRLIST_BLOCK -> advance(state);
+
+        case _ATTRLIST_INLINE_MACRO -> stateAttrListEndInlineMacro();
+
+        default -> throw new UnsupportedOperationException("Implement me :: attrlist=" + attrlist);
+      };
 
       default -> switch (attrlist) {
         case _ATTRLIST_BLOCK -> rollbackAttributes();
 
-        case _ATTRLIST_INLINE_MACRO -> {
-          add(Token.ATTR_LIST_END);
-
-          attrlist = 0;
-
-          blobStart = sourceIndex;
-
-          yield advance(BLOB);
-        }
+        case _ATTRLIST_INLINE_MACRO -> stateAttrListEndInlineMacro();
 
         default -> throw new UnsupportedOperationException("Implement me :: attrlist=" + attrlist);
       };
     };
+  }
+
+  private int stateAttrListEndInlineMacro() {
+    add(Token.ATTR_LIST_END);
+
+    attrlist = 0;
+
+    blobStart = sourceIndex;
+
+    return advance(BLOB);
   }
 
   private int stateAttrName() {
