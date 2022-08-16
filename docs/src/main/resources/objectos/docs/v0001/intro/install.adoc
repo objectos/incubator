@@ -23,7 +23,7 @@ section of your project's POM file like so:
         <dependency>
             <groupId>br.com.objectos</groupId>
             <artifactId>bom</artifactId>
-            <version>{objectos-version}</version>
+            <version>0.1.0</version>
             <type>pom</type>
             <scope>import</scope>
         </dependency>

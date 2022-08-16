@@ -24,7 +24,7 @@ var logger = NoOpLogger.getInstance();
 In classes where the `Logger` is defined as a mutable field, it is recommended you provide
 the `NoOpLogger` instance as a _default_ logger implementation.
 
-We saw two examples in the link:href:v0001.logging.LoggingGuideLogger[obtaining the `Logger` interface]
+We saw two examples in the ilink:v0001/logging/logging-guide/logger[obtaining the `Logger` interface]
 section:
 
 * via the setter method; and

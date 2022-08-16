@@ -233,7 +233,7 @@ final class DocumentProcessor implements AsciiDoc.Processor {
     languageMark = html.length();
 
     languageRenderer = switch (language) {
-      case "default" -> defaultRenderer;
+      case "default", "shell" -> defaultRenderer;
 
       case "java" -> javaRenderer;
 

@@ -588,10 +588,11 @@ class Pass1 {
           newLine = 0;
         }
 
-        case //
-            Token.BOLD_START, Token.BOLD_END, //
-            Token.ITALIC_START, Token.ITALIC_END, //
-            Token.MONO_START, Token.MONO_END -> {
+        case
+            Token.BOLD_START, Token.BOLD_END,
+            Token.ITALIC_START, Token.ITALIC_END,
+            Token.MONO_START, Token.MONO_END,
+            Token.APOSTROPHE -> {
           if (newLine > 1) {
             tokenEnd = tokenIndex - newLine;
 

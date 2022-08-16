@@ -24,7 +24,7 @@ $ cd o7log</code></pre>
 <pre class="jyf"><code>$ java HelloWorld.java</code></pre>
 <p>It should print:</p>
 <pre class="jyf"><code>Hello world!</code></pre>
-<p>Let's refactor our example to use Objectos Logging.</p>
+<p>Let’s refactor our example to use Objectos Logging.</p>
 <h2>4. Create a HELLO log event</h2>
 <p>Edit the <code>HelloWorld.java</code> and add the event:</p>
 <pre class="jyf"><code><span class="iec">import</span><span class="tu9"> </span><span class="igz">objectos</span><span class="nhu">.</span><span class="igz">logging</span><span class="nhu">.</span><span class="nhu">*</span><span class="nhu">;</span><span class="tu9">
@@ -40,7 +40,7 @@ $ cd o7log</code></pre>
 This way the event will be logged at the <code>INFO</code> level.</p>
 <h2>5. Create a logger implementation</h2>
 <p>As of the current release, Objectos logging only provides a simple no-operation <code>Logger</code>
-implementation. You cannot do much with a no-operation logger. Let's extend it so that
+implementation. You cannot do much with a no-operation logger. Let’s extend it so that
 it prints all events to <code>System.out</code>:</p>
 <pre class="jyf"><code><span class="iec">import</span><span class="tu9"> </span><span class="igz">objectos</span><span class="nhu">.</span><span class="igz">logging</span><span class="nhu">.</span><span class="nhu">*</span><span class="nhu">;</span><span class="tu9">
 
@@ -95,7 +95,7 @@ you pass, along with the event instance itself, a single <code>String</code> arg
   </span><span class="wjs">// notice the separate exclamation mark</span><span class="tu9">
   </span><span class="igz">logger</span><span class="nhu">.</span><span class="igz">log</span><span class="nhu">(</span><span class="igz">HELLO</span><span class="nhu">,</span><span class="tu9"> </span><span class="uc6">&quot;world&quot;</span><span class="nhu">,</span><span class="tu9"> </span><span class="uc6">&quot;!&quot;</span><span class="nhu">)</span><span class="nhu">;</span><span class="tu9">
 </span><span class="nhu">}</span></code></pre>
-<p>Let's try to run this version of our program:</p>
+<p>Let’s try to run this version of our program:</p>
 <pre class="jyf"><code>$ java -cp logging-0.1.0.jar HelloWorld.java</code></pre>
 <p>It should fail with a compilation error (the
 ellipsis <code>(...)</code> below indicates suppressed output):</p>
@@ -113,7 +113,7 @@ invocation like so:</p>
 
   </span><span class="igz">logger</span><span class="nhu">.</span><span class="igz">log</span><span class="nhu">(</span><span class="igz">HELLO</span><span class="nhu">)</span><span class="nhu">;</span><span class="tu9">
 </span><span class="nhu">}</span></code></pre>
-<p>Let's try to run this version of our program:</p>
+<p>Let’s try to run this version of our program:</p>
 <pre class="jyf"><code>$ java -cp logging-0.1.0.jar HelloWorld.java</code></pre>
 <p>And it fails again with a compilation error:</p>
 <pre class="jyf"><code>HelloWorld.java:10: error: no suitable method found for log(Event1&lt;String&gt;)

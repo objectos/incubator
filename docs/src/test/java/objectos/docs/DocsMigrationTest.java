@@ -34,6 +34,48 @@ public class DocsMigrationTest {
   }
 
   @Test
+  public void v0001() throws IOException {
+    var reps = new String[] {
+        "jyf", SyntaxCss._PRE.className(),
+        "njs", XmlCss._TEXT.className(),
+        "jrq", XmlCss._SYMBOL.className(),
+        "cyc", XmlCss._TAG_NAME.className(),
+
+        "igz", JavaCss._IDENTIFIER.className(),
+        "tu9", JavaCss._WS.className(),
+        "nhu", JavaCss._TOKEN.className(),
+        "iec", JavaCss._KEYWORD.className(),
+        "qbr", JavaCss._DIGITS.className(),
+        "uc6", JavaCss._STRING.className(),
+        "wjs", JavaCss._COMMENT.className(),
+        "juq", JavaCss._ANNOTATION.className()
+    };
+
+    test(
+      reps, "v0001",
+      "index",
+
+      "intro/index",
+      "intro/overview",
+      "intro/install",
+
+      "logging/index",
+      "logging/getting-started/index",
+      "logging/getting-started/about-logging",
+      "logging/getting-started/objectos-logging",
+      "logging/getting-started/installing",
+      "logging/getting-started/quick-start",
+      "logging/logging-guide/index",
+      "logging/logging-guide/events",
+      "logging/logging-guide/logger",
+      "logging/no-op-logger/index",
+
+      "relnotes/index",
+      "relnotes/0.1.0"
+    );
+  }
+
+  @Test
   public void v0002() throws IOException {
     var reps = new String[] {
         "jyf", SyntaxCss._PRE.className(),

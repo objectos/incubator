@@ -24,7 +24,7 @@ Download the Objectos Logging JAR file from Maven central:
 
 [,shell,subs=attributes+]
 ----
-$ wget https://search.maven.org/remotecontent?filepath=br/com/objectos/logging/{objectos-version}/logging-{objectos-version}.jar
+$ wget https://search.maven.org/remotecontent?filepath=br/com/objectos/logging/0.1.0/logging-0.1.0.jar
 ----
 
 == 3. Create and run `HelloWorld.java`
@@ -134,7 +134,7 @@ example using the class path as it makes for shorter command:
 
 [,shell]
 ----
-$ java -cp logging-{{version}}.jar HelloWorld.java
+$ java -cp logging-0.1.0.jar HelloWorld.java
 ----
 
 When you run this Java program you will see the output:
@@ -167,11 +167,11 @@ Let's try to run this version of our program:
 
 [,shell]
 ----
-$ java -cp logging-{{version}}.jar HelloWorld.java
+$ java -cp logging-0.1.0.jar HelloWorld.java
 ----
 
 It should fail with a compilation error (the
-ellipsis `+(...)+` below indicates suppressed output):
+ellipsis `(...)` below indicates suppressed output):
 
 [,shell]
 ----
@@ -200,7 +200,7 @@ Let's try to run this version of our program:
 
 [,shell]
 ----
-$ java -cp logging-{{version}}.jar HelloWorld.java
+$ java -cp logging-0.1.0.jar HelloWorld.java
 ----
 
 And it fails again with a compilation error:
