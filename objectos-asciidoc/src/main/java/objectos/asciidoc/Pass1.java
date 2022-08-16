@@ -16,7 +16,6 @@
 package objectos.asciidoc;
 
 import java.util.Arrays;
-import java.util.Map;
 import java.util.Set;
 import objectos.lang.Check;
 import objectos.util.GrowableMap;
@@ -44,7 +43,7 @@ class Pass1 {
 
   private int codeIndex;
 
-  private final Map<String, String> docattr = new GrowableMap<>();
+  private final GrowableMap<String, String> docattr = new GrowableMap<>();
 
   private int[] list;
 
@@ -95,6 +94,14 @@ class Pass1 {
     executeDocument();
 
     codeCursor = 0;
+  }
+
+  public final DocumentAttributes toDocumentAttributes() {
+    return switch (docattr.size()) {
+      case 0 -> DocumentAttributes.EMPTY;
+
+      default -> DocumentAttributes.wrap(docattr.toUnmodifiableMap());
+    };
   }
 
   final String attribute(String key) {

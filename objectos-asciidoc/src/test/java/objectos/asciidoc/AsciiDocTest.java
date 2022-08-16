@@ -421,6 +421,15 @@ public class AsciiDocTest {
     var result = processor.toString();
 
     testHtml(result, expectedHtml);
+
+    for (var entry : docAttr.entrySet()) {
+      var key = entry.getKey();
+      var expected = entry.getValue();
+
+      var actual = processor.attribute(key);
+
+      assertEquals(actual, expected, "key=" + key);
+    }
   }
 
   final void testArrays(int[] result, int[] expected, String header) {

@@ -21,14 +21,6 @@ import objectos.util.GrowableMap;
 
 public class AsciiDoc {
 
-  public interface InlineMacroAttributes {
-
-    void render(String name);
-
-  }
-
-  public interface LinkText { void render(); }
-
   public interface Processor {
 
     void boldEnd();
@@ -37,7 +29,7 @@ public class AsciiDoc {
 
     void documentEnd();
 
-    void documentStart();
+    void documentStart(DocumentAttributes attributes);
 
     void headingEnd();
 
@@ -134,7 +126,7 @@ public class AsciiDoc {
       int code = nextCode();
 
       switch (code) {
-        case Code.DOCUMENT_START -> processor.documentStart();
+        case Code.DOCUMENT_START -> processor.documentStart(pass1.toDocumentAttributes());
 
         case Code.DOCUMENT_END -> processor.documentEnd();
 

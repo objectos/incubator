@@ -15,9 +15,6 @@
  */
 package objectos.asciidoc;
 
-import objectos.asciidoc.AsciiDoc.InlineMacroAttributes;
-import objectos.asciidoc.AsciiDoc.LinkText;
-
 class ThisProcessor implements AsciiDoc.Processor {
 
   private static final int START = 0;
@@ -49,6 +46,8 @@ class ThisProcessor implements AsciiDoc.Processor {
   private StringBuilder sb;
 
   private int sectionLevel;
+
+  DocumentAttributes attributes;
 
   @Override
   public final void boldEnd() {
@@ -129,7 +128,9 @@ class ThisProcessor implements AsciiDoc.Processor {
   }
 
   @Override
-  public final void documentStart() {
+  public final void documentStart(DocumentAttributes attributes) {
+    this.attributes = attributes;
+
     level = 0;
 
     listItem = 0;
@@ -374,8 +375,7 @@ class ThisProcessor implements AsciiDoc.Processor {
 
   @Override
   public final String toString() {
-    var s = result.toString();
-    return s;
+    return result.toString();
   }
 
   @Override
@@ -394,5 +394,9 @@ class ThisProcessor implements AsciiDoc.Processor {
 
     sb.append("<div class=\"ulist\">\n");
     sb.append("<ul>");
+  }
+
+  final String attribute(String key) {
+    return attributes.getOrDefault(key, "");
   }
 }
