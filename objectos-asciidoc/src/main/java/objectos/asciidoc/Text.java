@@ -28,6 +28,8 @@ final class Text {
   static final int ITALIC_START = -6;
   static final int ITALIC_END = -7;
 
+  static final int CURVED_APOSTROPHE = -8;
+
   private Text() {}
 
 }

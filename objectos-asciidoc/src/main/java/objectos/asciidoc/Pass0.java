@@ -589,6 +589,26 @@ class Pass0 implements Pass1.Source, Pass2.Source {
         yield advance(SPACE_LIKE);
       }
 
+      case '\'' -> {
+        var prev = source.charAt(sourceIndex - 1); // safe, we are not at start of line/doc
+
+        if (isWord(prev)) {
+          var nextIndex = sourceIndex + 1;
+
+          if (nextIndex < source.length()) {
+            var next = source.charAt(nextIndex);
+
+            if (isWord(next)) {
+              add(Token.BLOB, blobStart, sourceIndex, Token.APOSTROPHE, sourceIndex);
+
+              blobStart = nextIndex;
+            }
+          }
+        }
+
+        yield advance(state);
+      }
+
       case '*' -> advance(BOLD_END);
 
       case ':' -> {
@@ -618,7 +638,7 @@ class Pass0 implements Pass1.Source, Pass2.Source {
 
       case '`' -> advance(MONO_END);
 
-      default -> advance(BLOB);
+      default -> advance(state);
     };
   }
 

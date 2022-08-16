@@ -188,11 +188,31 @@ class Pass2 {
 
         case Token.SEPARATOR -> executeBlob(nextToken(), nextToken());
 
+        case Token.APOSTROPHE -> executeApostrophe(nextToken());
+
         default -> uoe(token);
       }
     }
 
     executeEof();
+  }
+
+  private void executeApostrophe(int index) {
+    var ctx = pop();
+
+    switch (ctx) {
+      case REGULAR -> {
+        addText(Text.CURVED_APOSTROPHE);
+
+        var next = index + 1;
+
+        addText(Text.REGULAR, next, next);
+
+        push(ctx);
+      }
+
+      default -> uoe(ctx);
+    }
   }
 
   private void executeBlob(int start, int end) {

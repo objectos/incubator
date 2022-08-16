@@ -704,12 +704,14 @@ class Pass1 {
           }
         }
 
-        case //
-            Token.HEADING, //
-            Token.ATTR_LIST_START, //
-            Token.BLOB, //
-            Token.MONO_START, //
-            Token.INLINE_MACRO -> { break loop; }
+        case
+            Token.HEADING,
+            Token.ATTR_LIST_START,
+            Token.BLOB,
+            Token.MONO_START,
+            Token.INLINE_MACRO -> {
+          break loop;
+        }
 
         default -> uoeToken(token);
       }
@@ -731,11 +733,15 @@ class Pass1 {
       switch (token) {
         case Token.BLOB -> { tokenIndex += 3; newLine = 0; }
 
-        case Token.BOLD_START, Token.BOLD_END -> { tokenIndex += 2; newLine = 0; }
+        case
+            Token.BOLD_START, Token.BOLD_END,
+            Token.ITALIC_START, Token.ITALIC_END,
+            Token.MONO_START, Token.MONO_END,
+            Token.APOSTROPHE -> {
+          tokenIndex += 2;
 
-        case Token.ITALIC_START, Token.ITALIC_END -> { tokenIndex += 2; newLine = 0; }
-
-        case Token.MONO_START, Token.MONO_END -> { tokenIndex += 2; newLine = 0; }
+          newLine = 0;
+        }
 
         case Token.INLINE_MACRO -> {
           executeInlineMacro();

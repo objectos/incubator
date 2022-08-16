@@ -53,8 +53,9 @@ final class Token {
   static final int DOCATTR = -23;
 
   static final int DQUOTE = -24;
+  static final int APOSTROPHE = -25;
 
-  static final int LITERALI = -25;
+  static final int LITERALI = -26;
 
   private Token() {}
 

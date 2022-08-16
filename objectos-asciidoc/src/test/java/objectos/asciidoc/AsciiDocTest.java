@@ -50,6 +50,7 @@ public class AsciiDocTest {
         new ConstrainedMonospaceTest(this),
         new DocumentAttributeTest(this),
         new InlineMacroTest(this),
+        new LexerTest(this),
         new ListingBlockTest(this),
         new ParagraphTest(this),
         new PreambleTest(this),

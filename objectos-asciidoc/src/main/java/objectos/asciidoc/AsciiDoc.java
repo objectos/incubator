@@ -390,6 +390,10 @@ public class AsciiDoc {
 
         case Text.ITALIC_END -> processor.italicEnd();
 
+        case Text.CURVED_APOSTROPHE -> {
+          processor.text("’");
+        }
+
         default -> throw new UnsupportedOperationException("Implement me :: text=" + text);
       }
     }
