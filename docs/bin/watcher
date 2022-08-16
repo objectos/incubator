@@ -11,6 +11,7 @@ CLASS_PATH="target/classes"
 CLASS_PATH="$CLASS_PATH:target/lib/*"
 
 DEPS=(
+"br.com.objectos:objectos-asciidoc:0.3.0-SNAPSHOT"
 "br.com.objectos:objectos-util:0.3.0-SNAPSHOT"
 "br.com.objectos:objectos-lang:0.3.0-SNAPSHOT"
 "br.com.objectos:code:0.3.0-SNAPSHOT"
@@ -19,7 +20,6 @@ DEPS=(
 "br.com.objectos:html-spi:0.3.0-SNAPSHOT"
 "br.com.objectos:http-server:0.3.0-SNAPSHOT"
 "br.com.objectos:ssg:0.3.0-SNAPSHOT"
-"org.asciidoctor:asciidoctorj:2.5.4"
 "org.commonmark:commonmark:0.18.0"
 )
 
@@ -40,7 +40,5 @@ echo
 
 java \
 	--class-path $CLASS_PATH \
-	--add-opens java.base/sun.nio.ch=ALL-UNNAMED \
-	--add-opens java.base/java.io=ALL-UNNAMED \
 	objectos.docs.Docs \
 	"target/site"

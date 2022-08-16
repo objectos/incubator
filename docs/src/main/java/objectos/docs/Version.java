@@ -19,8 +19,6 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 import objectos.util.UnmodifiableList;
-import org.asciidoctor.Attributes;
-import org.asciidoctor.Options;
 
 record Version(String name,
                String slug,
@@ -128,16 +126,12 @@ record Version(String name,
   final void generate(Docs site) throws IOException {
     site.generateVersion0Start(slug);
 
-    var attributes = Attributes.builder()
-        .attribute("objectos-version", name)
-        .build();
-
-    var options = Options.builder()
-        .attributes(attributes)
-        .build();
+    //    var attributes = Attributes.builder()
+    //        .attribute("objectos-version", name)
+    //        .build();
 
     for (var key : keys) {
-      site.generateVersion1PrepareKey(resourceDirectory, key, options);
+      site.generateVersion1PrepareKey(resourceDirectory, key);
     }
 
     for (var key : keys) {

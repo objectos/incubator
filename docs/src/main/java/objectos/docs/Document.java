@@ -15,12 +15,14 @@
  */
 package objectos.docs;
 
-final class Document {
+import objectos.asciidoc.DocumentAttributes;
 
-  final String html;
+record Document(DocumentAttributes attributes,
+                String title,
+                String contents) {
 
-  public Document(String html) {
-    this.html = html;
+  public final String getAttribute(String key, String defaultValue) {
+    return attributes.getOrDefault(key, defaultValue);
   }
 
 }

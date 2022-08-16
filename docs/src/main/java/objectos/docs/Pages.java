@@ -23,7 +23,6 @@ import objectos.docs.ui.PageSwitcher;
 import objectos.ssg.SiteFragment;
 import objectos.util.GrowableList;
 import objectos.util.UnmodifiableList;
-import org.asciidoctor.ast.Document;
 
 final class Pages {
 
@@ -165,13 +164,13 @@ final class Pages {
   public final String templateName() {
     var document = document(current);
 
-    return (String) document.getAttribute("template", "ArticlePage");
+    return document.getAttribute("template", "ArticlePage");
   }
 
   public final String title(String key) {
     var doc = document(key);
 
-    return doc.getDoctitle();
+    return doc.title();
   }
 
   public final UnmodifiableList<String> trail() {

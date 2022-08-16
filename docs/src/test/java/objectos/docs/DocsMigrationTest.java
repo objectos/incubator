@@ -81,7 +81,7 @@ public class DocsMigrationTest {
   }
 
   private String normalize(Document doc) {
-    var source = doc.html;
+    var source = doc.contents();
 
     var document = Jsoup.parseBodyFragment(source);
 

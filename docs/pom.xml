@@ -42,27 +42,6 @@
 	</properties>
 
 	<build>
-		<pluginManagement>
-			<plugins>
-				<plugin>
-					<groupId>${project.groupId}</groupId>
-					<artifactId>ssg-maven-plugin</artifactId>
-					<version>${project.version}</version>
-					<executions>
-						<execution>
-							<id>site</id>
-							<goals>
-								<goal>site</goal>
-							</goals>
-							<phase>process-classes</phase>
-							<configuration>
-								<siteOutputDirectory>${project.build.outputDirectory}/site</siteOutputDirectory>
-							</configuration>
-						</execution>
-					</executions>
-				</plugin>
-			</plugins>
-		</pluginManagement>
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -84,14 +63,6 @@
 						<phase>none</phase>
 					</execution>
 				</executions>
-			</plugin>
-			<plugin>
-				<groupId>${project.groupId}</groupId>
-				<artifactId>ssg-maven-plugin</artifactId>
-				<version>${project.version}</version>
-				<configuration>
-					<siteClass>objectos.docs.DocsSite</siteClass>
-				</configuration>
 			</plugin>
 		</plugins>
 	</build>
@@ -123,11 +94,6 @@
 			<artifactId>objectos-asciidoc</artifactId>
 		</dependency>
 
-		<dependency>
-			<groupId>org.asciidoctor</groupId>
-			<artifactId>asciidoctorj</artifactId>
-			<version>2.5.4</version>
-		</dependency>
 		<dependency>
 			<groupId>org.commonmark</groupId>
 			<artifactId>commonmark</artifactId>

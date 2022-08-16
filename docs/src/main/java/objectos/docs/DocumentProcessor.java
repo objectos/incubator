@@ -21,12 +21,17 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import objectos.asciidoc.AsciiDoc;
-import objectos.asciidoc.AsciiDoc.InlineMacroAttributes;
-import objectos.asciidoc.AsciiDoc.LinkText;
+import objectos.asciidoc.DocumentAttributes;
+import objectos.asciidoc.InlineMacroAttributes;
+import objectos.asciidoc.LinkText;
 
 final class DocumentProcessor implements AsciiDoc.Processor {
 
   private final AsciiDoc asciiDoc = AsciiDoc.create();
+
+  private DocumentAttributes attributes;
+
+  private String doctitle;
 
   private final StringBuilder html = new StringBuilder();
 
@@ -35,6 +40,8 @@ final class DocumentProcessor implements AsciiDoc.Processor {
   private final LanguageRenderer xmlRenderer = new XmlRenderer();
 
   private int headingLevel;
+
+  private int headingStart;
 
   private int languageMark;
 
@@ -58,12 +65,18 @@ final class DocumentProcessor implements AsciiDoc.Processor {
   }
 
   @Override
-  public final void documentStart() {
+  public final void documentStart(DocumentAttributes attributes) {
+    this.attributes = attributes;
+
     html.append("<article>\n");
   }
 
   @Override
   public final void headingEnd() {
+    if (headingLevel == 1) {
+      doctitle = html.substring(headingStart, html.length());
+    }
+
     html.append("</h");
     html.append(headingLevel);
     html.append(">\n");
@@ -76,6 +89,10 @@ final class DocumentProcessor implements AsciiDoc.Processor {
     html.append(">");
 
     headingLevel = level;
+
+    if (headingLevel == 1) {
+      headingStart = html.length();
+    }
   }
 
   @Override
@@ -185,6 +202,10 @@ final class DocumentProcessor implements AsciiDoc.Processor {
     asciiDoc.process(contents, this);
 
     return new Document(
+      attributes,
+
+      doctitle,
+
       html.toString()
     );
   }

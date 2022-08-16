@@ -19,7 +19,6 @@ import static java.lang.System.err;
 import static java.lang.System.out;
 
 import br.com.objectos.html.tmpl.Template;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -27,12 +26,8 @@ import java.nio.file.Path;
 import java.util.List;
 import objectos.lang.Check;
 import objectos.util.UnmodifiableList;
-import org.asciidoctor.Asciidoctor;
-import org.asciidoctor.Options;
 
-public final class Docs extends DocsInjector implements AutoCloseable {
-
-  private final Asciidoctor asciidoctor = Asciidoctor.Factory.create();
+public final class Docs extends DocsInjector {
 
   private String baseHref = "";
 
@@ -43,6 +38,8 @@ public final class Docs extends DocsInjector implements AutoCloseable {
   private final NextBanner nextBanner = new NextBanner(this);
 
   private final Pages pages = new Pages();
+
+  private final DocumentProcessor processor = new DocumentProcessor();
 
   private final TableOfContents tableOfContents = new TableOfContents(this);
 
@@ -63,12 +60,6 @@ public final class Docs extends DocsInjector implements AutoCloseable {
       Version.V0_2_0,
 
       Version.V0_1_0
-    );
-
-    var registry = asciidoctor.javaExtensionRegistry();
-
-    registry.inlineMacro(
-      new InternalLinkInlineMacro(pages)
     );
   }
 
@@ -93,7 +84,9 @@ public final class Docs extends DocsInjector implements AutoCloseable {
 
     out.println("Running...");
 
-    try (var site = Docs.create(args[0])) {
+    try {
+      var site = Docs.create(args[0]);
+
       site.development();
 
       site.generate();
@@ -102,11 +95,6 @@ public final class Docs extends DocsInjector implements AutoCloseable {
 
       e.printStackTrace();
     }
-  }
-
-  @Override
-  public final void close() {
-    asciidoctor.shutdown();
   }
 
   public final void development() {
@@ -129,31 +117,21 @@ public final class Docs extends DocsInjector implements AutoCloseable {
 
     var document = pages.document();
 
-    for (var node : document.getBlocks()) {
-      var c = node.getContent();
-
-      if (c instanceof String s) {
-        sb.append(s);
-      } else {
-        throw new RuntimeException("Unexpected content: " + c.getClass());
-      }
-    }
-
-    return sb.toString();
+    return document.contents();
   }
 
   @Override
   final String $doctitle() {
     var document = pages.document();
 
-    return document.getDoctitle();
+    return document.title();
   }
 
   @Override
   final String $doctitle(String key) {
     var document = pages.document(key);
 
-    return document.getDoctitle();
+    return document.title();
   }
 
   @Override
@@ -181,9 +159,9 @@ public final class Docs extends DocsInjector implements AutoCloseable {
   final String $trailTitle(String key) {
     var document = pages.document(key);
 
-    var defaultValue = document.getDoctitle();
+    var defaultValue = document.title();
 
-    var title = (String) document.getAttribute("trail-title", defaultValue);
+    var title = document.getAttribute("trail-title", defaultValue);
 
     return pages.stripTags(title);
   }
@@ -194,36 +172,19 @@ public final class Docs extends DocsInjector implements AutoCloseable {
   final void generateVersion0Start(String slug) {
     pages.reset(baseHref, slug);
 
+    processor.slug(slug);
+
     tableOfContents.clear();
   }
 
-  final void generateVersion1PrepareKey(
-      String resourceDirectory, String key, Options options) throws IOException {
+  final void generateVersion1PrepareKey(String resourceDirectory, String key) throws IOException {
     // prepare
     pages.put(key);
 
     tableOfContents.put(key);
 
     // load document
-    var resourceName = resourceDirectory + "/" + key + ".adoc";
-
-    var output = new ByteArrayOutputStream();
-
-    var thisClass = getClass();
-
-    try (var input = thisClass.getResourceAsStream(resourceName)) {
-      input.transferTo(output);
-    } catch (IOException e) {
-      err.println("Failed to load a resource");
-
-      throw e;
-    }
-
-    var bytes = output.toByteArray();
-
-    var contents = new String(bytes, StandardCharsets.UTF_8);
-
-    var document = asciidoctor.load(contents, options);
+    var document = processor.load(resourceDirectory, key);
 
     // set document
     pages.set(key, document);
@@ -236,7 +197,9 @@ public final class Docs extends DocsInjector implements AutoCloseable {
 
     BaseTemplate tmpl = switch (templateName) {
       case "ArticlePage" -> articlePage;
+
       case "IndexPage" -> indexPage;
+
       default -> throw new IllegalArgumentException("Unexpected value: " + templateName);
     };
 
