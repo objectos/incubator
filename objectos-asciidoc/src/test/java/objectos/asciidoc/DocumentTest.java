@@ -40,7 +40,7 @@ public class DocumentTest extends AsciiDocTest {
       int[] p1, Map<String, String> docAttr,
       int[][] p2,
       String expectedHtml) {
-    Document document = asciiDoc.parse(source);
+    var document = asciiDoc.parse(source);
 
     for (var entry : docAttr.entrySet()) {
       var key = entry.getKey();
