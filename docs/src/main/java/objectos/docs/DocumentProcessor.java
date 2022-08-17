@@ -297,30 +297,7 @@ final class DocumentProcessor implements AsciiDoc.Processor {
   }
 
   final void escape(String s) {
-    for (int i = 0, len = s.length(); i < len; i++) {
-      var c = s.charAt(i);
-
-      switch (c) {
-        default:
-          html.append(c);
-          break;
-        case '"':
-          html.append("&quot;");
-          break;
-        case '&':
-          html.append("&amp;");
-          break;
-        case '<':
-          html.append("&lt;");
-          break;
-        case '>':
-          html.append("&gt;");
-          break;
-        case '\u00A9':
-          html.append("&copy;");
-          break;
-      }
-    }
+    HtmlEscape.to(s, html);
   }
 
   final void raw(String s) {
