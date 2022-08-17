@@ -31,7 +31,7 @@ public class AsciiDocTest {
 
   AsciiDoc asciiDoc;
 
-  private ThisProcessor processor;
+  ThisProcessor processor;
 
   @BeforeClass
   public void _beforeClass() {
