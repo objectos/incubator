@@ -172,7 +172,7 @@ public final class Docs extends DocsInjector {
   final void generateVersion0Start(String slug) {
     pages.reset(baseHref, slug);
 
-    processor.slug(baseHref + "/" +slug);
+    processor.slug(baseHref + "/" + slug);
 
     tableOfContents.clear();
   }
