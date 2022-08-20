@@ -15,7 +15,6 @@
  */
 package objectos.docs;
 
-import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 import objectos.util.UnmodifiableList;
@@ -122,22 +121,6 @@ record Version(String name,
   private static String slug(String s) { return s; }
 
   private static String resourceDirectory(String s) { return s; }
-
-  final void generate(Docs site) throws IOException {
-    site.generateVersion0Start(slug);
-
-    //    var attributes = Attributes.builder()
-    //        .attribute("objectos-version", name)
-    //        .build();
-
-    for (var key : keys) {
-      site.generateVersion1PrepareKey(resourceDirectory, key);
-    }
-
-    for (var key : keys) {
-      site.generateVersion2Write(slug, key);
-    }
-  }
 
   public static Version parse(String key) {
     return switch (key) {

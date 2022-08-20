@@ -18,7 +18,6 @@ package objectos.docs;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.NoSuchElementException;
-import java.util.regex.Pattern;
 import objectos.docs.ui.PageSwitcher;
 import objectos.ssg.SiteFragment;
 import objectos.util.GrowableList;
@@ -26,9 +25,7 @@ import objectos.util.UnmodifiableList;
 
 final class Pages {
 
-  static final Pattern STRIP_TAGS = Pattern.compile("<code>(.*?)</code>", Pattern.DOTALL);
-
-  private final Map<String, Document> documents = new HashMap<>();
+  private final Map<String, DocumentRecord> documents = new HashMap<>();
 
   private final Map<String, String> hrefs = new HashMap<>();
 
@@ -56,11 +53,11 @@ final class Pages {
     current = key;
   }
 
-  public final Document document() {
+  public final DocumentRecord document() {
     return document(current);
   }
 
-  public final Document document(String key) {
+  public final DocumentRecord document(String key) {
     return get0(documents, key);
   }
 
@@ -157,20 +154,16 @@ final class Pages {
     partsBuilder.clear();
   }
 
-  public final void set(String key, Document document) {
+  public final void set(String key, DocumentRecord document) {
     documents.put(key, document);
-  }
-
-  public final String templateName() {
-    var document = document(current);
-
-    return document.getAttribute("template", "ArticlePage");
   }
 
   public final String title(String key) {
     var doc = document(key);
 
-    return doc.title();
+    var title = doc.title();
+
+    return title.html();
   }
 
   public final UnmodifiableList<String> trail() {
@@ -183,10 +176,6 @@ final class Pages {
 
   public final void unset() {
     current = null;
-  }
-
-  final String stripTags(String string) {
-    return STRIP_TAGS.matcher(string).replaceAll("$1");
   }
 
   private <T> T get0(Map<String, T> map, String key) {

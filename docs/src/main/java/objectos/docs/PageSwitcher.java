@@ -58,7 +58,7 @@ final class PageSwitcher extends AbstractFragment {
         div("Next"),
 
         span(
-          raw(injector.$doctitle(nextKey))
+          //raw(injector.$doctitle(nextKey))
         )
       ),
 
@@ -104,7 +104,7 @@ final class PageSwitcher extends AbstractFragment {
         div("Previous"),
 
         span(
-          raw(injector.$doctitle(prevKey))
+          //raw(injector.$doctitle(prevKey))
         )
       )
     );

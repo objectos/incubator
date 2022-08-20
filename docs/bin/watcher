@@ -38,7 +38,10 @@ done
 
 echo
 
+rm -r "target/docs"
+
 java \
 	--class-path $CLASS_PATH \
 	objectos.docs.Docs \
-	"target/site"
+	"src/main/resources/objectos/docs" \
+	"target/docs"

@@ -19,13 +19,10 @@ import br.com.objectos.css.Css;
 import br.com.objectos.css.select.ClassSelector;
 import br.com.objectos.css.sheet.AbstractStyleSheet;
 import br.com.objectos.css.sheet.StyleSheet;
-import br.com.objectos.html.spi.type.TableValue;
-import br.com.objectos.html.spi.type.TbodyValue;
-import java.util.List;
 import objectos.docs.style.Colors;
 import objectos.docs.style.Spacing;
 
-final class VersionsPage extends BaseTemplate {
+final class VersionsTemplate extends DocsTemplate {
 
   private static final ClassSelector DATE = Css.randomDot(3);
 
@@ -58,14 +55,8 @@ final class VersionsPage extends BaseTemplate {
     }
   };
 
-  private final String baseHref;
-
-  private final List<Version> versions;
-
-  VersionsPage(String baseHref, List<Version> versions) {
-    this.baseHref = baseHref;
-
-    this.versions = versions;
+  VersionsTemplate(DocsInjector injector) {
+    super(injector);
   }
 
   @Override
@@ -92,9 +83,9 @@ final class VersionsPage extends BaseTemplate {
               t("Release date")
             )
           )
-        ),
+        )
 
-        tbody0()
+      //        tbody0()
       )
     );
   }
@@ -102,37 +93,34 @@ final class VersionsPage extends BaseTemplate {
   @Override
   final StyleSheet styleSheet() { return css; }
 
-  @Override
-  final String thisTitle() { return "All Objectos releases"; }
-
-  private TableValue tbody0() {
-    var size = versions.size();
-
-    var values = new TbodyValue[size];
-
-    for (int i = 0; i < size; i++) {
-      var version = versions.get(i);
-
-      var href = baseHref + "/" + version.slug() + "/index.html";
-
-      var date = version.releaseDate();
-
-      values[i] = tr(
-        td(
-          TITLE,
-
-          a(href(href), t(version.name()))
-        ),
-
-        td(
-          DATE,
-
-          t(date == null ? "unreleased" : date.toString())
-        )
-      );
-    }
-
-    return tbody(values);
-  }
+  //  private TableValue tbody0() {
+  //    var size = versions.size();
+  //
+  //    var values = new TbodyValue[size];
+  //
+  //    for (int i = 0; i < size; i++) {
+  //      var version = versions.get(i);
+  //
+  //      var href = baseHref + "/" + version.slug() + "/index.html";
+  //
+  //      var date = version.releaseDate();
+  //
+  //      values[i] = tr(
+  //        td(
+  //          TITLE,
+  //
+  //          a(href(href), t(version.name()))
+  //        ),
+  //
+  //        td(
+  //          DATE,
+  //
+  //          t(date == null ? "unreleased" : date.toString())
+  //        )
+  //      );
+  //    }
+  //
+  //    return tbody(values);
+  //  }
 
 }

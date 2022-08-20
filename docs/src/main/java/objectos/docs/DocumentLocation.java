@@ -15,30 +15,34 @@
  */
 package objectos.docs;
 
-import br.com.objectos.html.tmpl.AbstractFragment;
-import objectos.docs.style.NextBannerCss;
+import java.nio.file.Path;
 
-final class NextBanner extends AbstractFragment {
+record DocumentLocation(String writePath, String href) {
 
-  private final DocsInjector injector;
+  public static DocumentLocation of(String baseHref, String key) {
+    var index = key.indexOf('/');
 
-  NextBanner(DocsInjector injector) { this.injector = injector; }
+    var writePath = "";
 
-  public final boolean shouldRender() {
-    return injector.$isNext();
+    if (index > 0) {
+      var prefix = key.substring(0, index);
+
+      var version = Version.parse(prefix);
+
+      var shortKey = key.substring(index);
+
+      writePath = version.slug() + shortKey + ".html";
+    } else {
+      writePath = key + ".html";
+    }
+
+    return new DocumentLocation(
+      writePath, baseHref + "/" + writePath
+    );
   }
 
-  @Override
-  protected final void definition() {
-    div(
-      NextBannerCss._ID,
-
-      p("""
-        You are reading the documentation for the unreleased development version of Objectos.
-
-        Please note that this is a work in progress. It might be incomplete and may
-        change without notice.""")
-    );
+  public final Path resolvePath(Path target) {
+    return target.resolve(writePath);
   }
 
 }

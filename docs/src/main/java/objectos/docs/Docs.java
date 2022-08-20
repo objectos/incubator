@@ -15,130 +15,123 @@
  */
 package objectos.docs;
 
-import static java.lang.System.err;
 import static java.lang.System.out;
 
-import br.com.objectos.html.tmpl.Template;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.List;
+import java.nio.file.StandardOpenOption;
+import java.util.Map;
+import java.util.NoSuchElementException;
+import java.util.stream.Stream;
+import objectos.asciidoc.AsciiDoc;
 import objectos.lang.Check;
+import objectos.util.GrowableMap;
 import objectos.util.UnmodifiableList;
 
 public final class Docs extends DocsInjector {
 
+  private final AsciiDoc asciiDoc = AsciiDoc.create();
+
   private String baseHref = "";
 
-  private final ArticlePage articlePage = new ArticlePage(this);
+  private final Map<String, DocumentRecord> documents = new GrowableMap<>();
 
-  private final IndexPage indexPage = new IndexPage(this);
+  private final DocumentTitleProcessor documentTitleProcessor = new DocumentTitleProcessor();
 
   private final NextBanner nextBanner = new NextBanner(this);
 
   private final Pages pages = new Pages();
 
-  private final DocumentProcessor processor = new DocumentProcessor();
+  private IOException rethrow;
+
+  private final Path source;
 
   private final TableOfContents tableOfContents = new TableOfContents(this);
 
   private final Path target;
 
-  private final List<Version> versions;
+  private final Map<String, DocsTemplate> templates;
 
-  private final StringBuilder sb = new StringBuilder();
+  private String currentKey;
 
-  private Version version;
+  private DocumentRecord currentRecord;
 
-  private Docs(Path target) {
+  Docs(Path source, Path target) {
+    this.source = source;
+
     this.target = target;
 
-    versions = UnmodifiableList.of(
-      Version.NEXT,
+    templates = _templates(
+      new ArticleTemplate(this),
 
-      Version.V0_2_0,
+      new IndexPage(this),
 
-      Version.V0_1_0
+      new VersionsTemplate(this)
     );
   }
 
-  public static Docs create(String targetPathName) {
-    var target = Path.of(targetPathName);
-
-    target = target.toAbsolutePath();
-
-    Check.argument(Files.isDirectory(target), target, " is not a directory");
-
-    out.println("Resolved target path: " + target);
-
-    return new Docs(target);
-  }
-
-  public static void main(String[] args) {
-    if (args.length != 1) {
-      out.println("Invocation: java objectos.docs.DocsSite target-path");
+  public static void main(String[] args) throws IOException {
+    if (args.length != 2) {
+      out.println("Invocation: java objectos.docs.DocsSite source-path target-path");
 
       return;
     }
 
     out.println("Running...");
 
-    try {
-      var site = Docs.create(args[0]);
+    var source = main0ParseDirectory("source", args[0]);
 
-      site.development();
+    var target = main0ParseDirectory("target", args[1]);
 
-      site.generate();
-    } catch (IOException e) {
-      err.println("Failed to generate site");
+    var site = new Docs(source, target);
 
-      e.printStackTrace();
+    site.development();
+
+    site.execute();
+  }
+
+  private static Path main0ParseDirectory(String name, String pathName) throws IOException {
+    var path = Path.of(pathName);
+
+    path = path.toAbsolutePath();
+
+    if (!Files.exists(path)) {
+      Files.createDirectory(path);
     }
+
+    Check.argument(Files.isDirectory(path), path, " is not a directory");
+
+    out.println("Resolved " + name + " path: " + path);
+
+    return path;
   }
 
   public final void development() {
     baseHref = target.toString();
   }
 
-  public final void generate() throws IOException {
-    for (var v : versions) {
-      version = v;
+  public final void execute() throws IOException {
+    scan();
 
-      version.generate(this);
-    }
-
-    writeTemplate("versions.html", new VersionsPage(baseHref, versions));
+    generate();
   }
 
   @Override
-  final String $contents() {
-    sb.setLength(0);
+  final String $href() {
+    var location = currentRecord.location();
 
-    var document = pages.document();
-
-    return document.contents();
+    return location.href();
   }
-
-  @Override
-  final String $doctitle() {
-    var document = pages.document();
-
-    return document.title();
-  }
-
-  @Override
-  final String $doctitle(String key) {
-    var document = pages.document(key);
-
-    return document.title();
-  }
-
-  @Override
-  final String $href() { return pages.href(); }
 
   @Override
   final String $href(String key) { return pages.href(key); }
+
+  @Override
+  final boolean $isNext() {
+    return currentKey.startsWith("next/");
+  }
 
   @Override
   final NextBanner $nextBanner() { return nextBanner; }
@@ -159,69 +152,127 @@ public final class Docs extends DocsInjector {
   final String $trailTitle(String key) {
     var document = pages.document(key);
 
-    var defaultValue = document.title();
+    var title = document.title();
 
-    var title = document.getAttribute("trail-title", defaultValue);
-
-    return pages.stripTags(title);
+    return title.plain();
   }
 
-  @Override
-  final Version $version() { return version; }
+  private String _key(Path file, int length) {
+    var path = source.relativize(file);
 
-  final void generateVersion0Start(String slug) {
-    pages.reset(baseHref, slug);
+    var key = path.toString();
 
-    processor.slug(baseHref + "/" + slug);
-
-    tableOfContents.clear();
+    return key.substring(0, key.length() - length);
   }
 
-  final void generateVersion1PrepareKey(String resourceDirectory, String key) throws IOException {
-    // prepare
-    pages.put(key);
+  private DocsTemplate _template(String templateName) {
+    var tmpl = templates.get(templateName);
 
-    tableOfContents.put(key);
+    if (tmpl == null) {
+      throw new NoSuchElementException(templateName);
+    }
 
-    // load document
-    var document = processor.load(resourceDirectory, key);
-
-    // set document
-    pages.set(key, document);
+    return tmpl;
   }
 
-  final void generateVersion2Write(String slug, String key) throws IOException {
-    pages.current(key);
+  private Map<String, DocsTemplate> _templates(DocsTemplate... templates) {
+    var map = new GrowableMap<String, DocsTemplate>();
 
-    var templateName = pages.templateName();
+    for (var template : templates) {
+      var clazz = template.getClass();
 
-    BaseTemplate tmpl = switch (templateName) {
-      case "ArticlePage" -> articlePage;
+      var key = clazz.getSimpleName();
 
-      case "IndexPage" -> indexPage;
+      map.put(key, template);
+    }
 
-      default -> throw new IllegalArgumentException("Unexpected value: " + templateName);
-    };
-
-    writeTemplate(slug + "/" + key + ".html", tmpl);
+    return map.toUnmodifiableMap();
   }
 
-  private void writeTemplate(String pathName, Template tmpl) throws IOException {
-    var writePath = target.resolve(pathName);
-
-    var parent = writePath.getParent();
+  private void _write(Path file, String html) throws IOException {
+    var parent = file.getParent();
 
     Files.createDirectories(parent);
 
-    try (var writer = Files.newBufferedWriter(writePath, StandardCharsets.UTF_8)) {
-      var s = tmpl.toString();
+    Files.writeString(
+      file, html, StandardCharsets.UTF_8,
+      StandardOpenOption.CREATE_NEW, StandardOpenOption.WRITE
+    );
+  }
 
-      writer.write(s);
-    } catch (IOException e) {
-      err.println("Failed to write a file");
+  private void generate() throws IOException {
+    for (var entry : documents.entrySet()) {
+      currentKey = entry.getKey();
 
-      throw e;
+      currentRecord = entry.getValue();
+
+      var writePath = currentRecord.resolvePath(target);
+
+      var templateName = currentRecord.templateName();
+
+      var template = _template(templateName);
+
+      var html = template.generate(currentRecord);
+
+      _write(writePath, html);
     }
+  }
+
+  private void scan() throws IOException {
+    rethrow = null;
+
+    try (Stream<Path> walk = Files.walk(source)) {
+      walk.filter(Files::isRegularFile)
+          .forEach(this::scan);
+    }
+
+    if (rethrow != null) {
+      throw rethrow;
+    }
+  }
+
+  private void scan(Path file) {
+    try {
+      scan0(file);
+    } catch (IOException e) {
+      if (rethrow == null) {
+        rethrow = e;
+      } else {
+        rethrow.addSuppressed(e);
+      }
+    }
+  }
+
+  private void scan0(Path file) throws IOException {
+    var fileName = file.getFileName().toString();
+
+    int lastDot = fileName.lastIndexOf('.');
+
+    var extension = fileName.substring(lastDot);
+
+    switch (extension) {
+      case ".adoc" -> scan0AsciiDoc(file);
+
+      default -> throw new UnsupportedOperationException("Implement me :: extension=" + extension);
+    }
+  }
+
+  private void scan0AsciiDoc(Path file) throws IOException {
+    var key = _key(file, 5);
+
+    var source = Files.readString(file, StandardCharsets.UTF_8);
+
+    var document = asciiDoc.parse(source);
+
+    document.process(documentTitleProcessor);
+
+    var documentLocation = DocumentLocation.of(baseHref, key);
+
+    var documentTitle = documentTitleProcessor.create();
+
+    var value = new DocumentRecord(document, documentLocation, documentTitle);
+
+    documents.put(key, value);
   }
 
 }

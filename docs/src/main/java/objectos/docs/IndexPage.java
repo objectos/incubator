@@ -17,66 +17,57 @@ package objectos.docs;
 
 import br.com.objectos.css.sheet.StyleSheet;
 
-final class IndexPage extends BaseTemplate {
+final class IndexPage extends DocsTemplate {
 
   private final IndexCss css = new IndexCss();
 
-  private final DocsInjector injector;
-
-  IndexPage(DocsInjector injector) {
-    this.injector = injector;
-  }
+  IndexPage(DocsInjector injector) { super(injector); }
 
   @Override
   final void body0() {
-    var nextBanner = injector.$nextBanner();
-
-    var version = injector.$version();
-
-    body(
-      nextBanner.shouldRender() ? f(nextBanner) : noop(),
-
-      main(
-        article(
-          header(
-            IndexCss.HD,
-
-            h1("Documentation for Objectos developers"),
-
-            div(
-              IndexCss.HDV,
-
-              div(
-                t("Version", version.name()), t(" ["), a(href("../versions.html"), t("change")),
-                t("]")
-              ),
-
-              div(
-                t("API reference: "), a(href("api/index.html"), t("Javadocs"))
-              )
-            )
-          ),
-
-          raw(injector.$contents()),
-
-          section(
-            h2("Table of contents"),
-
-            f(injector.$tableOfContents())
-          )
-        )
-      )
-    );
+    //    var nextBanner = injector.$nextBanner();
+    //
+    //    var version = injector.$version();
+    //
+    //    body(
+    //      nextBanner.shouldRender() ? f(nextBanner) : noop(),
+    //
+    //      main(
+    //        article(
+    //          header(
+    //            IndexCss.HD,
+    //
+    //            h1("Documentation for Objectos developers"),
+    //
+    //            div(
+    //              IndexCss.HDV,
+    //
+    //              div(
+    //                t("Version", version.name()), t(" ["), a(href("../versions.html"), t("change")),
+    //                t("]")
+    //              ),
+    //
+    //              div(
+    //                t("API reference: "), a(href("api/index.html"), t("Javadocs"))
+    //              )
+    //            )
+    //          ),
+    //
+    //          raw(injector.$contents()),
+    //
+    //          section(
+    //            h2("Table of contents"),
+    //
+    //            f(injector.$tableOfContents())
+    //          )
+    //        )
+    //      )
+    //    );
   }
 
   @Override
   final StyleSheet styleSheet() {
     return css;
-  }
-
-  @Override
-  final String thisTitle() {
-    return injector.$doctitle();
   }
 
 }

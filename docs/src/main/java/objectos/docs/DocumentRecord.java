@@ -15,26 +15,19 @@
  */
 package objectos.docs;
 
-import objectos.util.UnmodifiableList;
+import java.nio.file.Path;
+import objectos.asciidoc.Document;
 
-abstract class DocsInjector {
+record DocumentRecord(Document document,
+                      DocumentLocation location,
+                      DocumentTitle title) {
 
-  abstract String $href();
+  public final String templateName() {
+    return document.getAttribute("template", "ArticleTemplate");
+  }
 
-  abstract String $href(String key);
-
-  abstract boolean $isNext();
-
-  abstract NextBanner $nextBanner();
-
-  abstract String $nextKey();
-
-  abstract String $prevKey();
-
-  abstract TableOfContents $tableOfContents();
-
-  abstract UnmodifiableList<String> $trail();
-
-  abstract String $trailTitle(String key);
+  public final Path resolvePath(Path target) {
+    return location.resolvePath(target);
+  }
 
 }

@@ -15,14 +15,4 @@
  */
 package objectos.docs;
 
-import objectos.asciidoc.DocumentAttributes;
-
-record Document(DocumentAttributes attributes,
-                String title,
-                String contents) {
-
-  public final String getAttribute(String key, String defaultValue) {
-    return attributes.getOrDefault(key, defaultValue);
-  }
-
-}
+record DocumentTitle(String html, String plain) {}

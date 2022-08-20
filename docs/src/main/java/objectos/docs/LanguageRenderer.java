@@ -20,18 +20,22 @@ import objectos.docs.style.SyntaxCss;
 
 abstract class LanguageRenderer {
 
-  private DocumentProcessor out;
+  private StringBuilder out;
 
-  public final void render(DocumentProcessor out, String literal) {
-    this.out = out;
+  public final void render(StringBuilder sb) {
+    var literal = sb.toString();
 
-    out.raw("\n<pre class=\"");
-    out.raw(SyntaxCss._PRE.className());
-    out.raw("\"><code>");
+    this.out = sb;
+
+    out.setLength(0);
+
+    out.append("\n<pre class=\"");
+    out.append(SyntaxCss._PRE.className());
+    out.append("\"><code>");
 
     renderImpl(literal);
 
-    out.raw("</code></pre>\n");
+    out.append("</code></pre>\n");
   }
 
   abstract void renderImpl(String literal);
@@ -41,15 +45,15 @@ abstract class LanguageRenderer {
   }
 
   final void span(ClassSelector clazz, String s) {
-    out.raw("<span class=\"");
-    out.raw(clazz.className());
-    out.raw("\">");
-    out.escape(s);
-    out.raw("</span>");
+    out.append("<span class=\"");
+    out.append(clazz.className());
+    out.append("\">");
+    HtmlEscape.to(s, out);
+    out.append("</span>");
   }
 
   final void text(String s) {
-    out.escape(s);
+    HtmlEscape.to(s, out);
   }
 
 }
