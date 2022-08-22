@@ -69,7 +69,7 @@ public final class Docs extends DocsInjector {
     templates = _templates(
       new ArticleTemplate(this),
 
-      new IndexPage(this),
+      new IndexTemplate(this),
 
       new VersionsTemplate(this)
     );
@@ -125,6 +125,19 @@ public final class Docs extends DocsInjector {
   final Document $document() { return currentRecord.document(); }
 
   @Override
+  final String $elink(String target) {
+    var first = target.indexOf('/');
+
+    var versionKey = target.substring(0, first);
+
+    var version = Version.parse(versionKey);
+
+    var key = target.substring(first + 1);
+
+    return baseHref + "/" + version.slug() + "/" + key + ".html";
+  }
+
+  @Override
   final String $href() {
     var location = currentRecord.location();
 
@@ -132,13 +145,15 @@ public final class Docs extends DocsInjector {
   }
 
   @Override
-  final String $href(String key) { return pages.href(key); }
+  final String $href(String key) {
+    return baseHref + "/" + key;
+  }
 
   @Override
   final String $ilink(String target) {
     Check.state(currentVersion != null, "currentVersion is not set");
 
-    return baseHref + "/" + currentVersion.slug() + "/" + target;
+    return baseHref + "/" + currentVersion.slug() + "/" + target + ".html";
   }
 
   @Override
@@ -170,6 +185,9 @@ public final class Docs extends DocsInjector {
 
     return title.plain();
   }
+
+  @Override
+  final Version $version() { return currentVersion; }
 
   private String _key(Path file, int length) {
     var path = source.relativize(file);

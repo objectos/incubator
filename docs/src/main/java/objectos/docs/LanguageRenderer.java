@@ -38,6 +38,9 @@ abstract class LanguageRenderer {
     out.append("</code></pre>\n");
   }
 
+  @Override
+  public final String toString() { return out.toString(); }
+
   abstract void renderImpl(String literal);
 
   final void span(ClassSelector clazz, char c) {

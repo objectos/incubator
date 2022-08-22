@@ -19,14 +19,17 @@ import br.com.objectos.css.Css;
 import br.com.objectos.css.select.ClassSelector;
 import br.com.objectos.css.sheet.AbstractStyleSheet;
 import br.com.objectos.css.sheet.StyleSheet;
+import br.com.objectos.html.spi.type.TableValue;
+import br.com.objectos.html.spi.type.TbodyValue;
+import java.util.List;
 import objectos.docs.style.Colors;
 import objectos.docs.style.Spacing;
 
 final class VersionsTemplate extends DocsTemplate {
 
-  private static final ClassSelector DATE = Css.randomDot(3);
+  static final ClassSelector DATE = Css.randomDot(3);
 
-  private static final ClassSelector TITLE = Css.randomDot(3);
+  static final ClassSelector TITLE = Css.randomDot(3);
 
   private final StyleSheet css = new AbstractStyleSheet() {
     @Override
@@ -83,9 +86,9 @@ final class VersionsTemplate extends DocsTemplate {
               t("Release date")
             )
           )
-        )
+        ),
 
-      //        tbody0()
+        tbody0()
       )
     );
   }
@@ -93,34 +96,36 @@ final class VersionsTemplate extends DocsTemplate {
   @Override
   final StyleSheet styleSheet() { return css; }
 
-  //  private TableValue tbody0() {
-  //    var size = versions.size();
-  //
-  //    var values = new TbodyValue[size];
-  //
-  //    for (int i = 0; i < size; i++) {
-  //      var version = versions.get(i);
-  //
-  //      var href = baseHref + "/" + version.slug() + "/index.html";
-  //
-  //      var date = version.releaseDate();
-  //
-  //      values[i] = tr(
-  //        td(
-  //          TITLE,
-  //
-  //          a(href(href), t(version.name()))
-  //        ),
-  //
-  //        td(
-  //          DATE,
-  //
-  //          t(date == null ? "unreleased" : date.toString())
-  //        )
-  //      );
-  //    }
-  //
-  //    return tbody(values);
-  //  }
+  private TableValue tbody0() {
+    var versions = List.of(Version.NEXT, Version.V0_2_0, Version.V0_1_0);
+
+    var size = versions.size();
+
+    var values = new TbodyValue[size];
+
+    for (int i = 0; i < size; i++) {
+      var version = versions.get(i);
+
+      var href = injector.$href(version.slug() + "/index.html");
+
+      var date = version.releaseDate();
+
+      values[i] = tr(
+        td(
+          TITLE,
+
+          a(href(href), t(version.name()))
+        ),
+
+        td(
+          DATE,
+
+          t(date == null ? "unreleased" : date.toString())
+        )
+      );
+    }
+
+    return tbody(values);
+  }
 
 }

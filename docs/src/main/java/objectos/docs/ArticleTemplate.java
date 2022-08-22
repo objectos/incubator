@@ -66,6 +66,8 @@ final class ArticleTemplate extends DocsTemplate {
   public final void sourceCodeBlockEnd() {
     languageRenderer.render(source);
 
+    raw(languageRenderer.toString());
+
     languageRenderer = null;
   }
 

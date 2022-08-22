@@ -15,7 +15,9 @@
  */
 package objectos.docs;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.UncheckedIOException;
 import java.net.URISyntaxException;
 import java.nio.file.FileVisitResult;
 import java.nio.file.Files;
@@ -25,6 +27,8 @@ import java.nio.file.attribute.BasicFileAttributes;
 import objectos.docs.style.JavaCss;
 import objectos.docs.style.SyntaxCss;
 import objectos.docs.style.XmlCss;
+import org.jsoup.Jsoup;
+import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -33,12 +37,13 @@ public class DocsTest {
 
   private Docs docs;
 
-  @SuppressWarnings("unused")
   private String[] reps;
 
   private Path source;
 
   private Path target;
+
+  private Path reshtm;
 
   @AfterClass(alwaysRun = true)
   public void _afterClass() throws IOException {
@@ -77,6 +82,8 @@ public class DocsTest {
 
     source = marker.getParent().getParent().getParent().getParent().getParent();
 
+    reshtm = source.resolve("src/test/resources/objectos/docs");
+
     source = source.resolve("src/main/resources/objectos/docs");
 
     target = Files.createTempDirectory("docs-migration-test-");
@@ -96,117 +103,122 @@ public class DocsTest {
         "qbr", JavaCss._DIGITS.className(),
         "uc6", JavaCss._STRING.className(),
         "wjs", JavaCss._COMMENT.className(),
-        "juq", JavaCss._ANNOTATION.className()
+        "juq", JavaCss._ANNOTATION.className(),
+
+        "eag", VersionsTemplate.TITLE.className(),
+        "vls", VersionsTemplate.DATE.className()
     };
   }
 
   @Test
   public void execute() throws IOException {
     docs.execute();
+
+    try (var walk = Files.walk(reshtm)) {
+      walk.filter(Files::isRegularFile)
+          .forEach(this::validate);
+    }
   }
 
-  //  private String load(String slug, String key) throws IOException {
-  //    var resourceName = slug + "/" + key + ".html";
-  //
-  //    var c = getClass();
-  //
-  //    try (var in = c.getResourceAsStream(resourceName)) {
-  //      var soup = Jsoup.parse(in, "UTF-8", "");
-  //
-  //      var article = soup.selectFirst("article");
-  //
-  //      return article.toString();
-  //    }
-  //  }
-  //
-  //  private String normalize(Document doc) {
-  //    var source = doc.contents();
-  //
-  //    var document = Jsoup.parseBodyFragment(source);
-  //
-  //    var body = document.body();
-  //
-  //    var article = body.selectFirst("article");
-  //
-  //    return article.toString();
-  //  }
-  //
-  //  private void test(String slug, String key, String... replacements) throws IOException {
-  //    Document doc;
-  //
-  //    try {
-  //      doc = processor.load(slug, key);
-  //    } catch (UnsupportedOperationException e) {
-  //      throw new IOException(key, e);
-  //    }
-  //
-  //    var actual = normalize(doc);
-  //
-  //    var expected = load(slug, key);
-  //
-  //    var rep = 0;
-  //
-  //    while (rep < replacements.length) {
-  //      expected = expected.replace(
-  //        replacements[rep++],
-  //        replacements[rep++]
-  //      );
-  //    }
-  //
-  //    if (!actual.equals(expected)) {
-  //      int len = Math.min(actual.length(), expected.length());
-  //
-  //      var index = 0;
-  //
-  //      for (int i = 0; i < len; i++) {
-  //        char ca = actual.charAt(i);
-  //        char ce = expected.charAt(i);
-  //
-  //        if (ca == ce) {
-  //          continue;
-  //        }
-  //
-  //        index = i;
-  //
-  //        break;
-  //      }
-  //
-  //      var start = Math.max(0, index - 20);
-  //
-  //      var end = Math.min(len, index + 30);
-  //
-  //      Assert.fail(
-  //        """
-  //
-  //        key=%s
-  //        ----
-  //        %s
-  //        %s
-  //        ----
-  //        %s
-  //        ----
-  //        %s
-  //        ----
-  //        """.formatted(
-  //          key,
-  //          actual.substring(start, end),
-  //          expected.subSequence(start, end),
-  //          actual,
-  //          expected
-  //        ));
-  //    }
-  //  }
-  //
-  //  private void test(String[] reps, Version version) throws IOException {
-  //    var slug = version.slug();
-  //
-  //    processor.slug(slug);
-  //
-  //    var resourceDirectory = version.resourceDirectory();
-  //
-  //    for (var key : version.keys()) {
-  //      test(resourceDirectory, key, reps);
-  //    }
-  //  }
+  private void validate(Path expected) {
+    try {
+      validate0(expected);
+    } catch (IOException e) {
+      throw new UncheckedIOException(e);
+    }
+  }
+
+  private void validate0(Path expected) throws IOException {
+    var path = reshtm.relativize(expected);
+
+    var generated = target.resolve(path);
+
+    var generatedHtml = validate0Html(generated);
+
+    var expectedHtml = validate0Html(expected);
+
+    validate0Test(path, generatedHtml, expectedHtml, reps);
+  }
+
+  private String validate0Html(Path path) throws IOException {
+    File file = path.toFile();
+
+    var soup = Jsoup.parse(file, "UTF-8", "");
+
+    var article = soup.selectFirst("article");
+
+    if (article == null) {
+      var body = soup.body();
+
+      Assert.fail(
+        """
+
+        key=%s
+        ----
+        %s
+        ----
+        """.formatted(path, body.toString())
+      );
+    }
+
+    return article.toString();
+  }
+
+  private void validate0Test(
+      Path key,
+      String actual, String expected, String... replacements)
+      throws IOException {
+    var rep = 0;
+
+    while (rep < replacements.length) {
+      expected = expected.replace(
+        replacements[rep++],
+        replacements[rep++]
+      );
+    }
+
+    if (!actual.equals(expected)) {
+      int len = Math.min(actual.length(), expected.length());
+
+      var index = 0;
+
+      for (int i = 0; i < len; i++) {
+        char ca = actual.charAt(i);
+        char ce = expected.charAt(i);
+
+        if (ca == ce) {
+          continue;
+        }
+
+        index = i;
+
+        break;
+      }
+
+      var start = Math.max(0, index - 20);
+
+      var end = Math.min(len, index + 30);
+
+      Assert.fail(
+        """
+
+        key=%s
+        ----
+        %s
+        %s
+        ----
+        %s
+        ----
+        %s
+        ----
+        """.formatted(
+          key,
+          actual.substring(start, end),
+          expected.subSequence(start, end),
+          actual,
+          expected
+        ));
+    }
+  }
 
 }

@@ -22,6 +22,8 @@ abstract class DocsInjector {
 
   abstract Document $document();
 
+  abstract String $elink(String target);
+
   abstract String $href();
 
   abstract String $href(String key);
@@ -43,5 +45,7 @@ abstract class DocsInjector {
   abstract UnmodifiableList<String> $trail();
 
   abstract String $trailTitle(String key);
+
+  abstract Version $version();
 
 }

@@ -42,12 +42,10 @@ abstract class DocsTemplate extends AbstractTemplate implements AsciiDoc.Process
 
   @Override
   public final void documentEnd() {
-    raw("\n</article>");
   }
 
   @Override
   public final void documentStart(DocumentAttributes attributes) {
-    raw("\n<article>\n");
   }
 
   @Override
@@ -71,15 +69,7 @@ abstract class DocsTemplate extends AbstractTemplate implements AsciiDoc.Process
       String name, String target, InlineMacroAttributes attributes) {
     switch (name) {
       case "elink" -> {
-        var first = target.indexOf('/');
-
-        var versionKey = target.substring(0, first);
-
-        var version = Version.parse(versionKey);
-
-        var key = target.substring(first + 1);
-
-        var href = "/" + version.slug() + "/" + key + ".html";
+        var href = injector.$elink(target);
 
         raw("<a href=\"");
         raw(href);

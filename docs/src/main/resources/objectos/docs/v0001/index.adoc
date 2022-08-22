@@ -1,6 +1,6 @@
 = Documentation for Objectos developers
 :trail-title: Home
-:template: IndexPage
+:template: IndexTemplate
 
 Welcome to the Objectos documentation.
 Here you will find tutorials, topic guides, how-to guides and the reference manuals of individual libraries.
