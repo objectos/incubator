@@ -134,4 +134,16 @@ record Version(String name,
     };
   }
 
+  public static Version parseCurrentKey(String key) {
+    var index = key.indexOf('/');
+
+    if (index > 0) {
+      var prefix = key.substring(0, index);
+
+      return parse(prefix);
+    } else {
+      return null;
+    }
+  }
+
 }

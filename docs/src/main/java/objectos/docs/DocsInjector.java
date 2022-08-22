@@ -15,13 +15,18 @@
  */
 package objectos.docs;
 
+import objectos.asciidoc.Document;
 import objectos.util.UnmodifiableList;
 
 abstract class DocsInjector {
 
+  abstract Document $document();
+
   abstract String $href();
 
   abstract String $href(String key);
+
+  abstract String $ilink(String target);
 
   abstract boolean $isNext();
 
@@ -32,6 +37,8 @@ abstract class DocsInjector {
   abstract String $prevKey();
 
   abstract TableOfContents $tableOfContents();
+
+  abstract DocumentTitle $title();
 
   abstract UnmodifiableList<String> $trail();
 

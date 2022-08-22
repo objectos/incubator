@@ -100,7 +100,7 @@ public class DocsTest {
     };
   }
 
-  @Test(enabled = false)
+  @Test
   public void execute() throws IOException {
     docs.execute();
   }

@@ -26,6 +26,7 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.stream.Stream;
 import objectos.asciidoc.AsciiDoc;
+import objectos.asciidoc.Document;
 import objectos.lang.Check;
 import objectos.util.GrowableMap;
 import objectos.util.UnmodifiableList;
@@ -57,6 +58,8 @@ public final class Docs extends DocsInjector {
   private String currentKey;
 
   private DocumentRecord currentRecord;
+
+  private Version currentVersion;
 
   Docs(Path source, Path target) {
     this.source = source;
@@ -119,6 +122,9 @@ public final class Docs extends DocsInjector {
   }
 
   @Override
+  final Document $document() { return currentRecord.document(); }
+
+  @Override
   final String $href() {
     var location = currentRecord.location();
 
@@ -129,9 +135,14 @@ public final class Docs extends DocsInjector {
   final String $href(String key) { return pages.href(key); }
 
   @Override
-  final boolean $isNext() {
-    return currentKey.startsWith("next/");
+  final String $ilink(String target) {
+    Check.state(currentVersion != null, "currentVersion is not set");
+
+    return baseHref + "/" + currentVersion.slug() + "/" + target;
   }
+
+  @Override
+  final boolean $isNext() { return currentKey.startsWith("next/"); }
 
   @Override
   final NextBanner $nextBanner() { return nextBanner; }
@@ -144,6 +155,9 @@ public final class Docs extends DocsInjector {
 
   @Override
   final TableOfContents $tableOfContents() { return tableOfContents; }
+
+  @Override
+  final DocumentTitle $title() { return currentRecord.title(); }
 
   @Override
   final UnmodifiableList<String> $trail() { return pages.trail(); }
@@ -206,13 +220,15 @@ public final class Docs extends DocsInjector {
 
       currentRecord = entry.getValue();
 
+      currentVersion = Version.parseCurrentKey(currentKey);
+
       var writePath = currentRecord.resolvePath(target);
 
       var templateName = currentRecord.templateName();
 
       var template = _template(templateName);
 
-      var html = template.generate(currentRecord);
+      var html = template.generate();
 
       _write(writePath, html);
     }

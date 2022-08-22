@@ -28,8 +28,6 @@ abstract class DocsTemplate extends AbstractTemplate implements AsciiDoc.Process
 
   private int headingLevel;
 
-  private DocumentRecord record;
-
   DocsTemplate(DocsInjector injector) { this.injector = injector; }
 
   @Override
@@ -72,33 +70,33 @@ abstract class DocsTemplate extends AbstractTemplate implements AsciiDoc.Process
   public final void inlineMacro(
       String name, String target, InlineMacroAttributes attributes) {
     switch (name) {
-      //      case "elink" -> {
-      //        var first = target.indexOf('/');
-      //
-      //        var versionKey = target.substring(0, first);
-      //
-      //        var version = Version.parse(versionKey);
-      //
-      //        var key = target.substring(first + 1);
-      //
-      //        var href = "/" + version.slug() + "/" + key + ".html";
-      //
-      //        raw("<a href=\"");
-      //        raw(href);
-      //        raw("\">");
-      //        attributes.render("1");
-      //        raw("</a>");
-      //      }
-      //
-      //      case "ilink" -> {
-      //        var href = "/" + slug + "/" + target + ".html";
-      //
-      //        raw("<a href=\"");
-      //        raw(href);
-      //        raw("\">");
-      //        attributes.render("1");
-      //        raw("</a>");
-      //      }
+      case "elink" -> {
+        var first = target.indexOf('/');
+
+        var versionKey = target.substring(0, first);
+
+        var version = Version.parse(versionKey);
+
+        var key = target.substring(first + 1);
+
+        var href = "/" + version.slug() + "/" + key + ".html";
+
+        raw("<a href=\"");
+        raw(href);
+        raw("\">");
+        attributes.render("1");
+        raw("</a>");
+      }
+
+      case "ilink" -> {
+        var href = injector.$ilink(target);
+
+        raw("<a href=\"");
+        raw(href);
+        raw("\">");
+        attributes.render("1");
+        raw("</a>");
+      }
 
       default -> throw new UnsupportedOperationException("Implement me :: name=" + name);
     }
@@ -212,14 +210,12 @@ abstract class DocsTemplate extends AbstractTemplate implements AsciiDoc.Process
 
   abstract void body0();
 
-  final String generate(DocumentRecord record) {
-    this.record = record;
-
+  final String generate() {
     return toString();
   }
 
   final void renderDocument() {
-    var document = record.document();
+    var document = injector.$document();
 
     document.process(this);
   }
@@ -232,7 +228,7 @@ abstract class DocsTemplate extends AbstractTemplate implements AsciiDoc.Process
     meta(name("viewport"), content("width=device-width, initial-scale=1, shrink-to-fit=no"));
     link(rel("shortcut icon"), type("vnd.microsoft.icon"), href("/favicon.ico"));
 
-    var title = record.title();
+    var title = injector.$title();
 
     title(title.plain());
 
