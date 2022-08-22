@@ -16,6 +16,7 @@
 package objectos.docs;
 
 import br.com.objectos.css.sheet.StyleSheet;
+import objectos.docs.style.SyntaxCss;
 
 final class ArticleTemplate extends DocsTemplate {
 
@@ -66,7 +67,10 @@ final class ArticleTemplate extends DocsTemplate {
   public final void sourceCodeBlockEnd() {
     languageRenderer.render(source);
 
-    raw(languageRenderer.toString());
+    pre(
+      SyntaxCss._PRE,
+      code(raw(languageRenderer.toString()))
+    );
 
     languageRenderer = null;
   }

@@ -16,11 +16,16 @@
 package objectos.docs;
 
 import br.com.objectos.css.sheet.StyleSheet;
+import br.com.objectos.html.element.StandardElementName;
+import br.com.objectos.html.spi.type.Value;
 import br.com.objectos.html.tmpl.AbstractTemplate;
+import java.util.Arrays;
 import objectos.asciidoc.AsciiDoc;
 import objectos.asciidoc.DocumentAttributes;
 import objectos.asciidoc.InlineMacroAttributes;
 import objectos.asciidoc.LinkText;
+import objectos.util.IntArrays;
+import objectos.util.ObjectArrays;
 
 abstract class DocsTemplate extends AbstractTemplate implements AsciiDoc.Processor {
 
@@ -28,16 +33,24 @@ abstract class DocsTemplate extends AbstractTemplate implements AsciiDoc.Process
 
   private int headingLevel;
 
+  private Value[] valueList = new Value[64];
+
+  private int valueListIndex = 0;
+
+  private int[] valueStack = new int[32];
+
+  private int valueStackIndex = -1;
+
   DocsTemplate(DocsInjector injector) { this.injector = injector; }
 
   @Override
   public final void boldEnd() {
-    raw("</strong>");
+    tagEnd(StandardElementName.STRONG);
   }
 
   @Override
   public final void boldStart() {
-    raw("<strong>");
+    tagStart();
   }
 
   @Override
@@ -46,22 +59,34 @@ abstract class DocsTemplate extends AbstractTemplate implements AsciiDoc.Process
 
   @Override
   public final void documentStart(DocumentAttributes attributes) {
+    valueListIndex = 0;
+
+    valueStackIndex = -1;
   }
 
   @Override
   public final void headingEnd() {
-    raw("</h");
-    raw(Integer.toString(headingLevel));
-    raw(">");
+    var tagName = switch (headingLevel) {
+      case 1 -> StandardElementName.H1;
+
+      case 2 -> StandardElementName.H2;
+
+      case 3 -> StandardElementName.H3;
+
+      case 4 -> StandardElementName.H4;
+
+      default -> throw new UnsupportedOperationException(
+        "Implement me :: headingLevel=" + headingLevel);
+    };
+
+    tagEnd(tagName);
   }
 
   @Override
   public final void headingStart(int level) {
-    raw("\n<h");
-    raw(Integer.toString(level));
-    raw(">");
-
     headingLevel = level;
+
+    tagStart();
   }
 
   @Override
@@ -71,21 +96,19 @@ abstract class DocsTemplate extends AbstractTemplate implements AsciiDoc.Process
       case "elink" -> {
         var href = injector.$elink(target);
 
-        raw("<a href=\"");
-        raw(href);
-        raw("\">");
+        tagStart();
+        addValue0(href(href));
         attributes.render("1");
-        raw("</a>");
+        tagEnd(StandardElementName.A);
       }
 
       case "ilink" -> {
         var href = injector.$ilink(target);
 
-        raw("<a href=\"");
-        raw(href);
-        raw("\">");
+        tagStart();
+        addValue0(href(href));
         attributes.render("1");
-        raw("</a>");
+        tagEnd(StandardElementName.A);
       }
 
       default -> throw new UnsupportedOperationException("Implement me :: name=" + name);
@@ -94,12 +117,12 @@ abstract class DocsTemplate extends AbstractTemplate implements AsciiDoc.Process
 
   @Override
   public final void italicEnd() {
-    raw("</em>");
+    tagEnd(StandardElementName.EM);
   }
 
   @Override
   public final void italicStart() {
-    raw("<em>");
+    tagStart();
   }
 
   @Override
@@ -107,11 +130,10 @@ abstract class DocsTemplate extends AbstractTemplate implements AsciiDoc.Process
 
   @Override
   public final void link(String href, LinkText text) {
-    raw("<a href=\"");
-    raw(href);
-    raw("\">");
+    tagStart();
+    addValue0(href(href));
     text.render();
-    raw("</a>");
+    tagEnd(StandardElementName.A);
   }
 
   @Override
@@ -122,32 +144,32 @@ abstract class DocsTemplate extends AbstractTemplate implements AsciiDoc.Process
 
   @Override
   public final void listItemEnd() {
-    raw("</li>");
+    tagEnd(StandardElementName.LI);
   }
 
   @Override
   public final void listItemStart() {
-    raw("\n<li>");
+    tagStart();
   }
 
   @Override
   public final void monospaceEnd() {
-    raw("</code>");
+    tagEnd(StandardElementName.CODE);
   }
 
   @Override
   public final void monospaceStart() {
-    raw("<code>");
+    tagStart();
   }
 
   @Override
   public final void paragraphEnd() {
-    raw("\n</p>\n");
+    tagEnd(StandardElementName.P);
   }
 
   @Override
   public final void paragraphStart() {
-    raw("<p>");
+    tagStart();
   }
 
   @Override
@@ -173,17 +195,17 @@ abstract class DocsTemplate extends AbstractTemplate implements AsciiDoc.Process
 
   @Override
   public void text(String s) {
-    t(s);
+    addValue0(t(s));
   }
 
   @Override
   public final void unorderedListEnd() {
-    raw("\n</ul>");
+    tagEnd(StandardElementName.UL);
   }
 
   @Override
   public final void unorderedListStart() {
-    raw("\n<ul>");
+    tagStart();
   }
 
   @Override
@@ -212,6 +234,12 @@ abstract class DocsTemplate extends AbstractTemplate implements AsciiDoc.Process
 
   abstract StyleSheet styleSheet();
 
+  private void addValue0(Value value) {
+    valueList = ObjectArrays.copyIfNecessary(valueList, valueListIndex);
+
+    valueList[valueListIndex++] = value;
+  }
+
   private void head0() {
     meta(charset("utf-8"));
     meta(httpEquiv("x-ua-compatible"), content("ie=edge"));
@@ -225,6 +253,32 @@ abstract class DocsTemplate extends AbstractTemplate implements AsciiDoc.Process
     style(
       raw(styleSheet().toString())
     );
+  }
+
+  private Value[] popValues() {
+    var start = valueStack[valueStackIndex--];
+
+    var values = Arrays.copyOfRange(valueList, start, valueListIndex);
+
+    valueListIndex = start;
+
+    return values;
+  }
+
+  private void tagEnd(StandardElementName name) {
+    var values = popValues();
+
+    var value = addStandardElement(name, values);
+
+    addValue0(value);
+  }
+
+  private void tagStart() {
+    valueStackIndex++;
+
+    valueStack = IntArrays.copyIfNecessary(valueStack, valueStackIndex);
+
+    valueStack[valueStackIndex] = valueListIndex;
   }
 
 }

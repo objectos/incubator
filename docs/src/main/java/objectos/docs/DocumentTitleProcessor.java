@@ -40,7 +40,11 @@ final class DocumentTitleProcessor extends SimpleAsciiDocProcessor {
 
   @Override
   public final void headingStart(int level) {
-    write = level == 1;
+    if (write = level == 1) {
+      html.setLength(0);
+
+      plain.setLength(0);
+    }
   }
 
   @Override

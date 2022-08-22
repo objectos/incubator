@@ -16,7 +16,6 @@
 package objectos.docs;
 
 import br.com.objectos.css.select.ClassSelector;
-import objectos.docs.style.SyntaxCss;
 
 abstract class LanguageRenderer {
 
@@ -29,13 +28,7 @@ abstract class LanguageRenderer {
 
     out.setLength(0);
 
-    out.append("\n<pre class=\"");
-    out.append(SyntaxCss._PRE.className());
-    out.append("\"><code>");
-
     renderImpl(literal);
-
-    out.append("</code></pre>\n");
   }
 
   @Override
