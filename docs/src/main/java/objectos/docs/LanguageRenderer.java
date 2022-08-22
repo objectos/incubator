@@ -19,20 +19,19 @@ import br.com.objectos.css.select.ClassSelector;
 
 abstract class LanguageRenderer {
 
-  private StringBuilder out;
+  interface Output {
+    void languageSpan(ClassSelector clazz, String contents);
 
-  public final void render(StringBuilder sb) {
-    var literal = sb.toString();
+    void languageText(String text);
+  }
 
-    this.out = sb;
+  private Output out;
 
-    out.setLength(0);
+  public final void render(Output output, String literal) {
+    this.out = output;
 
     renderImpl(literal);
   }
-
-  @Override
-  public final String toString() { return out.toString(); }
 
   abstract void renderImpl(String literal);
 
@@ -41,15 +40,11 @@ abstract class LanguageRenderer {
   }
 
   final void span(ClassSelector clazz, String s) {
-    out.append("<span class=\"");
-    out.append(clazz.className());
-    out.append("\">");
-    HtmlEscape.to(s, out);
-    out.append("</span>");
+    out.languageSpan(clazz, s);
   }
 
   final void text(String s) {
-    HtmlEscape.to(s, out);
+    out.languageText(s);
   }
 
 }

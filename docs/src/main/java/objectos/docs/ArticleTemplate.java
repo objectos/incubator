@@ -15,10 +15,12 @@
  */
 package objectos.docs;
 
+import br.com.objectos.css.select.ClassSelector;
 import br.com.objectos.css.sheet.StyleSheet;
+import br.com.objectos.html.element.StandardElementName;
 import objectos.docs.style.SyntaxCss;
 
-final class ArticleTemplate extends DocsTemplate {
+final class ArticleTemplate extends DocsTemplate implements LanguageRenderer.Output {
 
   private final ArticleCss css = new ArticleCss();
 
@@ -47,6 +49,16 @@ final class ArticleTemplate extends DocsTemplate {
   }
 
   @Override
+  public final void languageSpan(ClassSelector clazz, String contents) {
+    addValue0(span(clazz, t(contents)));
+  }
+
+  @Override
+  public final void languageText(String text) {
+    addValue0(t(text));
+  }
+
+  @Override
   public final void lineFeed() {
     if (languageRenderer != null) {
       source.append('\n');
@@ -65,12 +77,14 @@ final class ArticleTemplate extends DocsTemplate {
 
   @Override
   public final void sourceCodeBlockEnd() {
-    languageRenderer.render(source);
+    var literal = source.toString();
 
-    pre(
-      SyntaxCss._PRE,
-      code(raw(languageRenderer.toString()))
-    );
+    tagStart();
+    addValue0(SyntaxCss._PRE);
+    tagStart();
+    languageRenderer.render(this, literal);
+    tagEnd(StandardElementName.CODE);
+    tagEnd(StandardElementName.PRE);
 
     languageRenderer = null;
   }

@@ -16,6 +16,7 @@ DEPS=(
 "br.com.objectos:objectos-lang:0.3.0-SNAPSHOT"
 "br.com.objectos:code:0.3.0-SNAPSHOT"
 "br.com.objectos:code-boot:0.3.0-SNAPSHOT"
+"br.com.objectos:css:0.3.0-SNAPSHOT"
 "br.com.objectos:html:0.3.0-SNAPSHOT"
 "br.com.objectos:html-spi:0.3.0-SNAPSHOT"
 "br.com.objectos:http-server:0.3.0-SNAPSHOT"
@@ -38,7 +39,7 @@ done
 
 echo
 
-rm -r "target/docs"
+rm -rf "target/docs"
 
 java \
 	--class-path $CLASS_PATH \

@@ -75,6 +75,10 @@ abstract class DocsTemplate extends AbstractTemplate implements AsciiDoc.Process
 
       case 4 -> StandardElementName.H4;
 
+      case 5 -> StandardElementName.H5;
+
+      case 6 -> StandardElementName.H6;
+
       default -> throw new UnsupportedOperationException(
         "Implement me :: headingLevel=" + headingLevel);
     };
@@ -220,6 +224,12 @@ abstract class DocsTemplate extends AbstractTemplate implements AsciiDoc.Process
     );
   }
 
+  final void addValue0(Value value) {
+    valueList = ObjectArrays.copyIfNecessary(valueList, valueListIndex);
+
+    valueList[valueListIndex++] = value;
+  }
+
   abstract void body0();
 
   final String generate() {
@@ -234,10 +244,20 @@ abstract class DocsTemplate extends AbstractTemplate implements AsciiDoc.Process
 
   abstract StyleSheet styleSheet();
 
-  private void addValue0(Value value) {
-    valueList = ObjectArrays.copyIfNecessary(valueList, valueListIndex);
+  final void tagEnd(StandardElementName name) {
+    var values = popValues();
 
-    valueList[valueListIndex++] = value;
+    var value = addStandardElement(name, values);
+
+    addValue0(value);
+  }
+
+  final void tagStart() {
+    valueStackIndex++;
+
+    valueStack = IntArrays.copyIfNecessary(valueStack, valueStackIndex);
+
+    valueStack[valueStackIndex] = valueListIndex;
   }
 
   private void head0() {
@@ -263,22 +283,6 @@ abstract class DocsTemplate extends AbstractTemplate implements AsciiDoc.Process
     valueListIndex = start;
 
     return values;
-  }
-
-  private void tagEnd(StandardElementName name) {
-    var values = popValues();
-
-    var value = addStandardElement(name, values);
-
-    addValue0(value);
-  }
-
-  private void tagStart() {
-    valueStackIndex++;
-
-    valueStack = IntArrays.copyIfNecessary(valueStack, valueStackIndex);
-
-    valueStack[valueStackIndex] = valueListIndex;
   }
 
 }
