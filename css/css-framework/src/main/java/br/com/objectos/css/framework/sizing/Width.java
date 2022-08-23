@@ -12,6 +12,31 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ *
+ * Based on Tailwind CSS
+ *
+ * MIT License
+ *
+ * Copyright (c) Tailwind Labs, Inc.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ * Footer
  */
 package br.com.objectos.css.framework.sizing;
 
@@ -28,25 +53,43 @@ public final class Width extends AbstractStyleSheet {
 
   public static final ClassSelector px = Css.randomDot(5);
 
+  public static final ClassSelector zero = Css.randomDot(5);
+
   public static final ClassSelector v0 = Css.randomDot(5);
 
-  public static final ClassSelector v1 = Css.randomDot(5);
+  public static final ClassSelector v0_5 = Css.randomDot(5);
 
-  public static final ClassSelector v2 = Css.randomDot(5);
+  public static final ClassSelector v01 = Css.randomDot(5);
 
-  public static final ClassSelector v3 = Css.randomDot(5);
+  public static final ClassSelector v01_5 = Css.randomDot(5);
 
-  public static final ClassSelector v4 = Css.randomDot(5);
+  public static final ClassSelector v02 = Css.randomDot(5);
 
-  public static final ClassSelector v5 = Css.randomDot(5);
+  public static final ClassSelector v02_5 = Css.randomDot(5);
 
-  public static final ClassSelector v6 = Css.randomDot(5);
+  public static final ClassSelector v03 = Css.randomDot(5);
 
-  public static final ClassSelector v8 = Css.randomDot(5);
+  public static final ClassSelector v03_5 = Css.randomDot(5);
+
+  public static final ClassSelector v04 = Css.randomDot(5);
+
+  public static final ClassSelector v05 = Css.randomDot(5);
+
+  public static final ClassSelector v06 = Css.randomDot(5);
+
+  public static final ClassSelector v07 = Css.randomDot(5);
+
+  public static final ClassSelector v08 = Css.randomDot(5);
+
+  public static final ClassSelector v09 = Css.randomDot(5);
 
   public static final ClassSelector v10 = Css.randomDot(5);
 
+  public static final ClassSelector v11 = Css.randomDot(5);
+
   public static final ClassSelector v12 = Css.randomDot(5);
+
+  public static final ClassSelector v14 = Css.randomDot(5);
 
   public static final ClassSelector v16 = Css.randomDot(5);
 
@@ -54,15 +97,31 @@ public final class Width extends AbstractStyleSheet {
 
   public static final ClassSelector v24 = Css.randomDot(5);
 
+  public static final ClassSelector v28 = Css.randomDot(5);
+
   public static final ClassSelector v32 = Css.randomDot(5);
+
+  public static final ClassSelector v36 = Css.randomDot(5);
 
   public static final ClassSelector v40 = Css.randomDot(5);
 
+  public static final ClassSelector v44 = Css.randomDot(5);
+
   public static final ClassSelector v48 = Css.randomDot(5);
+
+  public static final ClassSelector v52 = Css.randomDot(5);
 
   public static final ClassSelector v56 = Css.randomDot(5);
 
+  public static final ClassSelector v60 = Css.randomDot(5);
+
   public static final ClassSelector v64 = Css.randomDot(5);
+
+  public static final ClassSelector v72 = Css.randomDot(5);
+
+  public static final ClassSelector v80 = Css.randomDot(5);
+
+  public static final ClassSelector v96 = Css.randomDot(5);
 
   public static final ClassSelector p1o2 = Css.randomDot(5);
 
@@ -131,44 +190,80 @@ public final class Width extends AbstractStyleSheet {
         width(px(1))
     );
     style(
+        zero,
+        width(zero())
+    );
+    style(
         v0,
         width(zero())
     );
     style(
-        v1,
+        v0_5,
+        width(rem(0.125))
+    );
+    style(
+        v01,
         width(rem(0.25))
     );
     style(
-        v2,
+        v01_5,
+        width(rem(0.375))
+    );
+    style(
+        v02,
         width(rem(0.5))
     );
     style(
-        v3,
+        v02_5,
+        width(rem(0.625))
+    );
+    style(
+        v03,
         width(rem(0.75))
     );
     style(
-        v4,
+        v03_5,
+        width(rem(0.875))
+    );
+    style(
+        v04,
         width(rem(1))
     );
     style(
-        v5,
+        v05,
         width(rem(1.25))
     );
     style(
-        v6,
+        v06,
         width(rem(1.5))
     );
     style(
-        v8,
+        v07,
+        width(rem(1.75))
+    );
+    style(
+        v08,
         width(rem(2))
+    );
+    style(
+        v09,
+        width(rem(2.25))
     );
     style(
         v10,
         width(rem(2.5))
     );
     style(
+        v11,
+        width(rem(2.75))
+    );
+    style(
         v12,
         width(rem(3))
+    );
+    style(
+        v14,
+        width(rem(3.5))
     );
     style(
         v16,
@@ -183,24 +278,56 @@ public final class Width extends AbstractStyleSheet {
         width(rem(6))
     );
     style(
+        v28,
+        width(rem(7))
+    );
+    style(
         v32,
         width(rem(8))
+    );
+    style(
+        v36,
+        width(rem(9))
     );
     style(
         v40,
         width(rem(10))
     );
     style(
+        v44,
+        width(rem(11))
+    );
+    style(
         v48,
         width(rem(12))
+    );
+    style(
+        v52,
+        width(rem(13))
     );
     style(
         v56,
         width(rem(14))
     );
     style(
+        v60,
+        width(rem(15))
+    );
+    style(
         v64,
         width(rem(16))
+    );
+    style(
+        v72,
+        width(rem(18))
+    );
+    style(
+        v80,
+        width(rem(20))
+    );
+    style(
+        v96,
+        width(rem(24))
     );
     style(
         p1o2,
@@ -328,43 +455,78 @@ public final class Width extends AbstractStyleSheet {
         ),
 
         style(
+            sm.zero,
+            width(zero())
+        ),
+
+        style(
             sm.v0,
             width(zero())
         ),
 
         style(
-            sm.v1,
+            sm.v0_5,
+            width(rem(0.125))
+        ),
+
+        style(
+            sm.v01,
             width(rem(0.25))
         ),
 
         style(
-            sm.v2,
+            sm.v01_5,
+            width(rem(0.375))
+        ),
+
+        style(
+            sm.v02,
             width(rem(0.5))
         ),
 
         style(
-            sm.v3,
+            sm.v02_5,
+            width(rem(0.625))
+        ),
+
+        style(
+            sm.v03,
             width(rem(0.75))
         ),
 
         style(
-            sm.v4,
+            sm.v03_5,
+            width(rem(0.875))
+        ),
+
+        style(
+            sm.v04,
             width(rem(1))
         ),
 
         style(
-            sm.v5,
+            sm.v05,
             width(rem(1.25))
         ),
 
         style(
-            sm.v6,
+            sm.v06,
             width(rem(1.5))
         ),
 
         style(
-            sm.v8,
+            sm.v07,
+            width(rem(1.75))
+        ),
+
+        style(
+            sm.v08,
             width(rem(2))
+        ),
+
+        style(
+            sm.v09,
+            width(rem(2.25))
         ),
 
         style(
@@ -373,8 +535,18 @@ public final class Width extends AbstractStyleSheet {
         ),
 
         style(
+            sm.v11,
+            width(rem(2.75))
+        ),
+
+        style(
             sm.v12,
             width(rem(3))
+        ),
+
+        style(
+            sm.v14,
+            width(rem(3.5))
         ),
 
         style(
@@ -393,8 +565,18 @@ public final class Width extends AbstractStyleSheet {
         ),
 
         style(
+            sm.v28,
+            width(rem(7))
+        ),
+
+        style(
             sm.v32,
             width(rem(8))
+        ),
+
+        style(
+            sm.v36,
+            width(rem(9))
         ),
 
         style(
@@ -403,8 +585,18 @@ public final class Width extends AbstractStyleSheet {
         ),
 
         style(
+            sm.v44,
+            width(rem(11))
+        ),
+
+        style(
             sm.v48,
             width(rem(12))
+        ),
+
+        style(
+            sm.v52,
+            width(rem(13))
         ),
 
         style(
@@ -413,8 +605,28 @@ public final class Width extends AbstractStyleSheet {
         ),
 
         style(
+            sm.v60,
+            width(rem(15))
+        ),
+
+        style(
             sm.v64,
             width(rem(16))
+        ),
+
+        style(
+            sm.v72,
+            width(rem(18))
+        ),
+
+        style(
+            sm.v80,
+            width(rem(20))
+        ),
+
+        style(
+            sm.v96,
+            width(rem(24))
         ),
 
         style(
@@ -571,43 +783,78 @@ public final class Width extends AbstractStyleSheet {
         ),
 
         style(
+            md.zero,
+            width(zero())
+        ),
+
+        style(
             md.v0,
             width(zero())
         ),
 
         style(
-            md.v1,
+            md.v0_5,
+            width(rem(0.125))
+        ),
+
+        style(
+            md.v01,
             width(rem(0.25))
         ),
 
         style(
-            md.v2,
+            md.v01_5,
+            width(rem(0.375))
+        ),
+
+        style(
+            md.v02,
             width(rem(0.5))
         ),
 
         style(
-            md.v3,
+            md.v02_5,
+            width(rem(0.625))
+        ),
+
+        style(
+            md.v03,
             width(rem(0.75))
         ),
 
         style(
-            md.v4,
+            md.v03_5,
+            width(rem(0.875))
+        ),
+
+        style(
+            md.v04,
             width(rem(1))
         ),
 
         style(
-            md.v5,
+            md.v05,
             width(rem(1.25))
         ),
 
         style(
-            md.v6,
+            md.v06,
             width(rem(1.5))
         ),
 
         style(
-            md.v8,
+            md.v07,
+            width(rem(1.75))
+        ),
+
+        style(
+            md.v08,
             width(rem(2))
+        ),
+
+        style(
+            md.v09,
+            width(rem(2.25))
         ),
 
         style(
@@ -616,8 +863,18 @@ public final class Width extends AbstractStyleSheet {
         ),
 
         style(
+            md.v11,
+            width(rem(2.75))
+        ),
+
+        style(
             md.v12,
             width(rem(3))
+        ),
+
+        style(
+            md.v14,
+            width(rem(3.5))
         ),
 
         style(
@@ -636,8 +893,18 @@ public final class Width extends AbstractStyleSheet {
         ),
 
         style(
+            md.v28,
+            width(rem(7))
+        ),
+
+        style(
             md.v32,
             width(rem(8))
+        ),
+
+        style(
+            md.v36,
+            width(rem(9))
         ),
 
         style(
@@ -646,8 +913,18 @@ public final class Width extends AbstractStyleSheet {
         ),
 
         style(
+            md.v44,
+            width(rem(11))
+        ),
+
+        style(
             md.v48,
             width(rem(12))
+        ),
+
+        style(
+            md.v52,
+            width(rem(13))
         ),
 
         style(
@@ -656,8 +933,28 @@ public final class Width extends AbstractStyleSheet {
         ),
 
         style(
+            md.v60,
+            width(rem(15))
+        ),
+
+        style(
             md.v64,
             width(rem(16))
+        ),
+
+        style(
+            md.v72,
+            width(rem(18))
+        ),
+
+        style(
+            md.v80,
+            width(rem(20))
+        ),
+
+        style(
+            md.v96,
+            width(rem(24))
         ),
 
         style(
@@ -814,43 +1111,78 @@ public final class Width extends AbstractStyleSheet {
         ),
 
         style(
+            lg.zero,
+            width(zero())
+        ),
+
+        style(
             lg.v0,
             width(zero())
         ),
 
         style(
-            lg.v1,
+            lg.v0_5,
+            width(rem(0.125))
+        ),
+
+        style(
+            lg.v01,
             width(rem(0.25))
         ),
 
         style(
-            lg.v2,
+            lg.v01_5,
+            width(rem(0.375))
+        ),
+
+        style(
+            lg.v02,
             width(rem(0.5))
         ),
 
         style(
-            lg.v3,
+            lg.v02_5,
+            width(rem(0.625))
+        ),
+
+        style(
+            lg.v03,
             width(rem(0.75))
         ),
 
         style(
-            lg.v4,
+            lg.v03_5,
+            width(rem(0.875))
+        ),
+
+        style(
+            lg.v04,
             width(rem(1))
         ),
 
         style(
-            lg.v5,
+            lg.v05,
             width(rem(1.25))
         ),
 
         style(
-            lg.v6,
+            lg.v06,
             width(rem(1.5))
         ),
 
         style(
-            lg.v8,
+            lg.v07,
+            width(rem(1.75))
+        ),
+
+        style(
+            lg.v08,
             width(rem(2))
+        ),
+
+        style(
+            lg.v09,
+            width(rem(2.25))
         ),
 
         style(
@@ -859,8 +1191,18 @@ public final class Width extends AbstractStyleSheet {
         ),
 
         style(
+            lg.v11,
+            width(rem(2.75))
+        ),
+
+        style(
             lg.v12,
             width(rem(3))
+        ),
+
+        style(
+            lg.v14,
+            width(rem(3.5))
         ),
 
         style(
@@ -879,8 +1221,18 @@ public final class Width extends AbstractStyleSheet {
         ),
 
         style(
+            lg.v28,
+            width(rem(7))
+        ),
+
+        style(
             lg.v32,
             width(rem(8))
+        ),
+
+        style(
+            lg.v36,
+            width(rem(9))
         ),
 
         style(
@@ -889,8 +1241,18 @@ public final class Width extends AbstractStyleSheet {
         ),
 
         style(
+            lg.v44,
+            width(rem(11))
+        ),
+
+        style(
             lg.v48,
             width(rem(12))
+        ),
+
+        style(
+            lg.v52,
+            width(rem(13))
         ),
 
         style(
@@ -899,8 +1261,28 @@ public final class Width extends AbstractStyleSheet {
         ),
 
         style(
+            lg.v60,
+            width(rem(15))
+        ),
+
+        style(
             lg.v64,
             width(rem(16))
+        ),
+
+        style(
+            lg.v72,
+            width(rem(18))
+        ),
+
+        style(
+            lg.v80,
+            width(rem(20))
+        ),
+
+        style(
+            lg.v96,
+            width(rem(24))
         ),
 
         style(
@@ -1057,43 +1439,78 @@ public final class Width extends AbstractStyleSheet {
         ),
 
         style(
+            xl.zero,
+            width(zero())
+        ),
+
+        style(
             xl.v0,
             width(zero())
         ),
 
         style(
-            xl.v1,
+            xl.v0_5,
+            width(rem(0.125))
+        ),
+
+        style(
+            xl.v01,
             width(rem(0.25))
         ),
 
         style(
-            xl.v2,
+            xl.v01_5,
+            width(rem(0.375))
+        ),
+
+        style(
+            xl.v02,
             width(rem(0.5))
         ),
 
         style(
-            xl.v3,
+            xl.v02_5,
+            width(rem(0.625))
+        ),
+
+        style(
+            xl.v03,
             width(rem(0.75))
         ),
 
         style(
-            xl.v4,
+            xl.v03_5,
+            width(rem(0.875))
+        ),
+
+        style(
+            xl.v04,
             width(rem(1))
         ),
 
         style(
-            xl.v5,
+            xl.v05,
             width(rem(1.25))
         ),
 
         style(
-            xl.v6,
+            xl.v06,
             width(rem(1.5))
         ),
 
         style(
-            xl.v8,
+            xl.v07,
+            width(rem(1.75))
+        ),
+
+        style(
+            xl.v08,
             width(rem(2))
+        ),
+
+        style(
+            xl.v09,
+            width(rem(2.25))
         ),
 
         style(
@@ -1102,8 +1519,18 @@ public final class Width extends AbstractStyleSheet {
         ),
 
         style(
+            xl.v11,
+            width(rem(2.75))
+        ),
+
+        style(
             xl.v12,
             width(rem(3))
+        ),
+
+        style(
+            xl.v14,
+            width(rem(3.5))
         ),
 
         style(
@@ -1122,8 +1549,18 @@ public final class Width extends AbstractStyleSheet {
         ),
 
         style(
+            xl.v28,
+            width(rem(7))
+        ),
+
+        style(
             xl.v32,
             width(rem(8))
+        ),
+
+        style(
+            xl.v36,
+            width(rem(9))
         ),
 
         style(
@@ -1132,8 +1569,18 @@ public final class Width extends AbstractStyleSheet {
         ),
 
         style(
+            xl.v44,
+            width(rem(11))
+        ),
+
+        style(
             xl.v48,
             width(rem(12))
+        ),
+
+        style(
+            xl.v52,
+            width(rem(13))
         ),
 
         style(
@@ -1142,8 +1589,28 @@ public final class Width extends AbstractStyleSheet {
         ),
 
         style(
+            xl.v60,
+            width(rem(15))
+        ),
+
+        style(
             xl.v64,
             width(rem(16))
+        ),
+
+        style(
+            xl.v72,
+            width(rem(18))
+        ),
+
+        style(
+            xl.v80,
+            width(rem(20))
+        ),
+
+        style(
+            xl.v96,
+            width(rem(24))
         ),
 
         style(
@@ -1294,25 +1761,43 @@ public final class Width extends AbstractStyleSheet {
 
     ClassSelector px = Css.randomDot(5);
 
+    ClassSelector zero = Css.randomDot(5);
+
     ClassSelector v0 = Css.randomDot(5);
 
-    ClassSelector v1 = Css.randomDot(5);
+    ClassSelector v0_5 = Css.randomDot(5);
 
-    ClassSelector v2 = Css.randomDot(5);
+    ClassSelector v01 = Css.randomDot(5);
 
-    ClassSelector v3 = Css.randomDot(5);
+    ClassSelector v01_5 = Css.randomDot(5);
 
-    ClassSelector v4 = Css.randomDot(5);
+    ClassSelector v02 = Css.randomDot(5);
 
-    ClassSelector v5 = Css.randomDot(5);
+    ClassSelector v02_5 = Css.randomDot(5);
 
-    ClassSelector v6 = Css.randomDot(5);
+    ClassSelector v03 = Css.randomDot(5);
 
-    ClassSelector v8 = Css.randomDot(5);
+    ClassSelector v03_5 = Css.randomDot(5);
+
+    ClassSelector v04 = Css.randomDot(5);
+
+    ClassSelector v05 = Css.randomDot(5);
+
+    ClassSelector v06 = Css.randomDot(5);
+
+    ClassSelector v07 = Css.randomDot(5);
+
+    ClassSelector v08 = Css.randomDot(5);
+
+    ClassSelector v09 = Css.randomDot(5);
 
     ClassSelector v10 = Css.randomDot(5);
 
+    ClassSelector v11 = Css.randomDot(5);
+
     ClassSelector v12 = Css.randomDot(5);
+
+    ClassSelector v14 = Css.randomDot(5);
 
     ClassSelector v16 = Css.randomDot(5);
 
@@ -1320,15 +1805,31 @@ public final class Width extends AbstractStyleSheet {
 
     ClassSelector v24 = Css.randomDot(5);
 
+    ClassSelector v28 = Css.randomDot(5);
+
     ClassSelector v32 = Css.randomDot(5);
+
+    ClassSelector v36 = Css.randomDot(5);
 
     ClassSelector v40 = Css.randomDot(5);
 
+    ClassSelector v44 = Css.randomDot(5);
+
     ClassSelector v48 = Css.randomDot(5);
+
+    ClassSelector v52 = Css.randomDot(5);
 
     ClassSelector v56 = Css.randomDot(5);
 
+    ClassSelector v60 = Css.randomDot(5);
+
     ClassSelector v64 = Css.randomDot(5);
+
+    ClassSelector v72 = Css.randomDot(5);
+
+    ClassSelector v80 = Css.randomDot(5);
+
+    ClassSelector v96 = Css.randomDot(5);
 
     ClassSelector p1o2 = Css.randomDot(5);
 
@@ -1394,25 +1895,43 @@ public final class Width extends AbstractStyleSheet {
 
     ClassSelector px = Css.randomDot(5);
 
+    ClassSelector zero = Css.randomDot(5);
+
     ClassSelector v0 = Css.randomDot(5);
 
-    ClassSelector v1 = Css.randomDot(5);
+    ClassSelector v0_5 = Css.randomDot(5);
 
-    ClassSelector v2 = Css.randomDot(5);
+    ClassSelector v01 = Css.randomDot(5);
 
-    ClassSelector v3 = Css.randomDot(5);
+    ClassSelector v01_5 = Css.randomDot(5);
 
-    ClassSelector v4 = Css.randomDot(5);
+    ClassSelector v02 = Css.randomDot(5);
 
-    ClassSelector v5 = Css.randomDot(5);
+    ClassSelector v02_5 = Css.randomDot(5);
 
-    ClassSelector v6 = Css.randomDot(5);
+    ClassSelector v03 = Css.randomDot(5);
 
-    ClassSelector v8 = Css.randomDot(5);
+    ClassSelector v03_5 = Css.randomDot(5);
+
+    ClassSelector v04 = Css.randomDot(5);
+
+    ClassSelector v05 = Css.randomDot(5);
+
+    ClassSelector v06 = Css.randomDot(5);
+
+    ClassSelector v07 = Css.randomDot(5);
+
+    ClassSelector v08 = Css.randomDot(5);
+
+    ClassSelector v09 = Css.randomDot(5);
 
     ClassSelector v10 = Css.randomDot(5);
 
+    ClassSelector v11 = Css.randomDot(5);
+
     ClassSelector v12 = Css.randomDot(5);
+
+    ClassSelector v14 = Css.randomDot(5);
 
     ClassSelector v16 = Css.randomDot(5);
 
@@ -1420,15 +1939,31 @@ public final class Width extends AbstractStyleSheet {
 
     ClassSelector v24 = Css.randomDot(5);
 
+    ClassSelector v28 = Css.randomDot(5);
+
     ClassSelector v32 = Css.randomDot(5);
+
+    ClassSelector v36 = Css.randomDot(5);
 
     ClassSelector v40 = Css.randomDot(5);
 
+    ClassSelector v44 = Css.randomDot(5);
+
     ClassSelector v48 = Css.randomDot(5);
+
+    ClassSelector v52 = Css.randomDot(5);
 
     ClassSelector v56 = Css.randomDot(5);
 
+    ClassSelector v60 = Css.randomDot(5);
+
     ClassSelector v64 = Css.randomDot(5);
+
+    ClassSelector v72 = Css.randomDot(5);
+
+    ClassSelector v80 = Css.randomDot(5);
+
+    ClassSelector v96 = Css.randomDot(5);
 
     ClassSelector p1o2 = Css.randomDot(5);
 
@@ -1494,25 +2029,43 @@ public final class Width extends AbstractStyleSheet {
 
     ClassSelector px = Css.randomDot(5);
 
+    ClassSelector zero = Css.randomDot(5);
+
     ClassSelector v0 = Css.randomDot(5);
 
-    ClassSelector v1 = Css.randomDot(5);
+    ClassSelector v0_5 = Css.randomDot(5);
 
-    ClassSelector v2 = Css.randomDot(5);
+    ClassSelector v01 = Css.randomDot(5);
 
-    ClassSelector v3 = Css.randomDot(5);
+    ClassSelector v01_5 = Css.randomDot(5);
 
-    ClassSelector v4 = Css.randomDot(5);
+    ClassSelector v02 = Css.randomDot(5);
 
-    ClassSelector v5 = Css.randomDot(5);
+    ClassSelector v02_5 = Css.randomDot(5);
 
-    ClassSelector v6 = Css.randomDot(5);
+    ClassSelector v03 = Css.randomDot(5);
 
-    ClassSelector v8 = Css.randomDot(5);
+    ClassSelector v03_5 = Css.randomDot(5);
+
+    ClassSelector v04 = Css.randomDot(5);
+
+    ClassSelector v05 = Css.randomDot(5);
+
+    ClassSelector v06 = Css.randomDot(5);
+
+    ClassSelector v07 = Css.randomDot(5);
+
+    ClassSelector v08 = Css.randomDot(5);
+
+    ClassSelector v09 = Css.randomDot(5);
 
     ClassSelector v10 = Css.randomDot(5);
 
+    ClassSelector v11 = Css.randomDot(5);
+
     ClassSelector v12 = Css.randomDot(5);
+
+    ClassSelector v14 = Css.randomDot(5);
 
     ClassSelector v16 = Css.randomDot(5);
 
@@ -1520,15 +2073,31 @@ public final class Width extends AbstractStyleSheet {
 
     ClassSelector v24 = Css.randomDot(5);
 
+    ClassSelector v28 = Css.randomDot(5);
+
     ClassSelector v32 = Css.randomDot(5);
+
+    ClassSelector v36 = Css.randomDot(5);
 
     ClassSelector v40 = Css.randomDot(5);
 
+    ClassSelector v44 = Css.randomDot(5);
+
     ClassSelector v48 = Css.randomDot(5);
+
+    ClassSelector v52 = Css.randomDot(5);
 
     ClassSelector v56 = Css.randomDot(5);
 
+    ClassSelector v60 = Css.randomDot(5);
+
     ClassSelector v64 = Css.randomDot(5);
+
+    ClassSelector v72 = Css.randomDot(5);
+
+    ClassSelector v80 = Css.randomDot(5);
+
+    ClassSelector v96 = Css.randomDot(5);
 
     ClassSelector p1o2 = Css.randomDot(5);
 
@@ -1594,25 +2163,43 @@ public final class Width extends AbstractStyleSheet {
 
     ClassSelector px = Css.randomDot(5);
 
+    ClassSelector zero = Css.randomDot(5);
+
     ClassSelector v0 = Css.randomDot(5);
 
-    ClassSelector v1 = Css.randomDot(5);
+    ClassSelector v0_5 = Css.randomDot(5);
 
-    ClassSelector v2 = Css.randomDot(5);
+    ClassSelector v01 = Css.randomDot(5);
 
-    ClassSelector v3 = Css.randomDot(5);
+    ClassSelector v01_5 = Css.randomDot(5);
 
-    ClassSelector v4 = Css.randomDot(5);
+    ClassSelector v02 = Css.randomDot(5);
 
-    ClassSelector v5 = Css.randomDot(5);
+    ClassSelector v02_5 = Css.randomDot(5);
 
-    ClassSelector v6 = Css.randomDot(5);
+    ClassSelector v03 = Css.randomDot(5);
 
-    ClassSelector v8 = Css.randomDot(5);
+    ClassSelector v03_5 = Css.randomDot(5);
+
+    ClassSelector v04 = Css.randomDot(5);
+
+    ClassSelector v05 = Css.randomDot(5);
+
+    ClassSelector v06 = Css.randomDot(5);
+
+    ClassSelector v07 = Css.randomDot(5);
+
+    ClassSelector v08 = Css.randomDot(5);
+
+    ClassSelector v09 = Css.randomDot(5);
 
     ClassSelector v10 = Css.randomDot(5);
 
+    ClassSelector v11 = Css.randomDot(5);
+
     ClassSelector v12 = Css.randomDot(5);
+
+    ClassSelector v14 = Css.randomDot(5);
 
     ClassSelector v16 = Css.randomDot(5);
 
@@ -1620,15 +2207,31 @@ public final class Width extends AbstractStyleSheet {
 
     ClassSelector v24 = Css.randomDot(5);
 
+    ClassSelector v28 = Css.randomDot(5);
+
     ClassSelector v32 = Css.randomDot(5);
+
+    ClassSelector v36 = Css.randomDot(5);
 
     ClassSelector v40 = Css.randomDot(5);
 
+    ClassSelector v44 = Css.randomDot(5);
+
     ClassSelector v48 = Css.randomDot(5);
+
+    ClassSelector v52 = Css.randomDot(5);
 
     ClassSelector v56 = Css.randomDot(5);
 
+    ClassSelector v60 = Css.randomDot(5);
+
     ClassSelector v64 = Css.randomDot(5);
+
+    ClassSelector v72 = Css.randomDot(5);
+
+    ClassSelector v80 = Css.randomDot(5);
+
+    ClassSelector v96 = Css.randomDot(5);
 
     ClassSelector p1o2 = Css.randomDot(5);
 
