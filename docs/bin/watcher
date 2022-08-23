@@ -1,14 +1,10 @@
 #!/bin/bash
 #
 # Copyright (C) 2021-2022 Objectos Software LTDA.
-#
-# This file is confidential. Reproduction in part or in total
-# is strictly forbidden.
 # 
 set -e
 
 CLASS_PATH="target/classes"
-CLASS_PATH="$CLASS_PATH:target/lib/*"
 
 DEPS=(
 "br.com.objectos:objectos-asciidoc:0.3.0-SNAPSHOT"

@@ -17,6 +17,10 @@ package objectos.docs;
 
 import static java.lang.System.out;
 
+import br.com.objectos.css.framework.Framework;
+import br.com.objectos.css.sheet.StyleSheet;
+import br.com.objectos.css.sheet.StyleSheetWriter;
+import br.com.objectos.html.tmpl.AbstractFragment;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -32,6 +36,10 @@ import objectos.util.GrowableMap;
 import objectos.util.UnmodifiableList;
 
 public final class Docs extends DocsInjector {
+
+  public interface TopBar {
+    AbstractFragment toFragment();
+  }
 
   private final AsciiDoc asciiDoc = AsciiDoc.create();
 
@@ -55,16 +63,28 @@ public final class Docs extends DocsInjector {
 
   private final Map<String, DocsTemplate> templates;
 
+  private final TopBar topBar;
+
+  private final StringBuilder stringBuilder = new StringBuilder();
+
+  private final StyleClassSet styleClassSet = new StyleClassSet();
+
+  private final StyleSheet styleSheet = new Framework();
+
+  private final StyleSheetWriter styleSheetWriter = StyleSheetWriter.ofPretty();
+
   private String currentKey;
 
   private DocumentRecord currentRecord;
 
   private Version currentVersion;
 
-  Docs(Path source, Path target) {
+  Docs(Path source, Path target, TopBar topBar) {
     this.source = source;
 
     this.target = target;
+
+    this.topBar = topBar;
 
     templates = _templates(
       new ArticleTemplate(this),
@@ -84,11 +104,13 @@ public final class Docs extends DocsInjector {
 
     out.println("Running...");
 
-    var source = main0ParseDirectory("source", args[0]);
+    var site = new Docs(
+      main0ParseDirectory("source", args[0]),
 
-    var target = main0ParseDirectory("target", args[1]);
+      main0ParseDirectory("target", args[1]),
 
-    var site = new Docs(source, target);
+      new DocsTopBar()
+    );
 
     site.development();
 
@@ -175,6 +197,9 @@ public final class Docs extends DocsInjector {
   final DocumentTitle $title() { return currentRecord.title(); }
 
   @Override
+  final AbstractFragment $topBar() { return topBar.toFragment(); }
+
+  @Override
   final UnmodifiableList<String> $trail() { return pages.trail(); }
 
   @Override
@@ -246,7 +271,23 @@ public final class Docs extends DocsInjector {
 
       var template = _template(templateName);
 
-      var html = template.generate();
+      template.rawStyle(null);
+
+      var firstPass = template.compile();
+
+      styleClassSet.clear();
+
+      firstPass.acceptTemplateVisitor(styleClassSet);
+
+      styleSheetWriter.filterClassSelectorsByName(styleClassSet);
+
+      stringBuilder.setLength(0);
+
+      styleSheetWriter.writeTo(styleSheet, stringBuilder);
+
+      template.rawStyle(stringBuilder.toString());
+
+      var html = template.toString();
 
       _write(writePath, html);
     }

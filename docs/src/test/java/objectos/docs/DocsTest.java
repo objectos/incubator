@@ -88,7 +88,7 @@ public class DocsTest {
 
     target = Files.createTempDirectory("docs-migration-test-");
 
-    docs = new Docs(source, target);
+    docs = new Docs(source, target, new DocsTopBar());
 
     reps = new String[] {
         "jyf", SyntaxCss._PRE.className(),
@@ -110,7 +110,7 @@ public class DocsTest {
     };
   }
 
-  @Test
+  @Test(enabled = false)
   public void execute() throws IOException {
     docs.execute();
 

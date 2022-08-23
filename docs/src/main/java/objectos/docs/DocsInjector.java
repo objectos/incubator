@@ -15,6 +15,7 @@
  */
 package objectos.docs;
 
+import br.com.objectos.html.tmpl.AbstractFragment;
 import objectos.asciidoc.Document;
 import objectos.util.UnmodifiableList;
 
@@ -41,6 +42,8 @@ abstract class DocsInjector {
   abstract TableOfContents $tableOfContents();
 
   abstract DocumentTitle $title();
+
+  abstract AbstractFragment $topBar();
 
   abstract UnmodifiableList<String> $trail();
 

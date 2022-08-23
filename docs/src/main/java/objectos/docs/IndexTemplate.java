@@ -24,12 +24,12 @@ final class IndexTemplate extends DocsTemplate {
   IndexTemplate(DocsInjector injector) { super(injector); }
 
   @Override
-  final void body0() {
+  final void main0() {
     var nextBanner = injector.$nextBanner();
 
     var version = injector.$version();
 
-    body(
+    div(
       nextBanner.shouldRender() ? f(nextBanner) : noop(),
 
       main(

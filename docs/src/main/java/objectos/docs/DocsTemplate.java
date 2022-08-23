@@ -33,6 +33,8 @@ abstract class DocsTemplate extends AbstractTemplate implements AsciiDoc.Process
 
   private int headingLevel;
 
+  private String rawStyle;
+
   private Value[] valueList = new Value[64];
 
   private int valueListIndex = 0;
@@ -87,7 +89,7 @@ abstract class DocsTemplate extends AbstractTemplate implements AsciiDoc.Process
   }
 
   @Override
-  public final void headingStart(int level) {
+  public void headingStart(int level) {
     headingLevel = level;
 
     tagStart();
@@ -172,7 +174,7 @@ abstract class DocsTemplate extends AbstractTemplate implements AsciiDoc.Process
   }
 
   @Override
-  public final void paragraphStart() {
+  public void paragraphStart() {
     tagStart();
   }
 
@@ -220,7 +222,11 @@ abstract class DocsTemplate extends AbstractTemplate implements AsciiDoc.Process
       head(
         f(this::head0)
       ),
-      f(this::body0)
+      body(
+        f(injector.$topBar()),
+
+        f(this::main0)
+      )
     );
   }
 
@@ -230,10 +236,26 @@ abstract class DocsTemplate extends AbstractTemplate implements AsciiDoc.Process
     valueList[valueListIndex++] = value;
   }
 
-  abstract void body0();
+  final void addValue0(Value... values) {
+    valueList = ObjectArrays.copyIfNecessary(valueList, valueListIndex + values.length - 1);
 
-  final String generate() {
-    return toString();
+    for (var value : values) {
+      valueList[valueListIndex++] = value;
+    }
+  }
+
+  final void addValue0(Value v0, Value v1, Value v2) {
+    valueList = ObjectArrays.copyIfNecessary(valueList, valueListIndex + 2);
+
+    valueList[valueListIndex++] = v0;
+    valueList[valueListIndex++] = v1;
+    valueList[valueListIndex++] = v2;
+  }
+
+  abstract void main0();
+
+  final void rawStyle(String rawStyle) {
+    this.rawStyle = rawStyle;
   }
 
   final void renderDocument() {
@@ -270,9 +292,9 @@ abstract class DocsTemplate extends AbstractTemplate implements AsciiDoc.Process
 
     title(title.plain());
 
-    style(
-      raw(styleSheet().toString())
-    );
+    if (rawStyle != null) {
+      style(raw(rawStyle));
+    }
   }
 
   private Value[] popValues() {

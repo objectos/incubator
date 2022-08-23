@@ -15,6 +15,8 @@
  */
 package objectos.docs;
 
+import objectos.asciidoc.DocumentAttributes;
+
 final class DocumentTitleProcessor extends SimpleAsciiDocProcessor {
 
   private final StringBuilder html = new StringBuilder();
@@ -34,17 +36,20 @@ final class DocumentTitleProcessor extends SimpleAsciiDocProcessor {
   }
 
   @Override
+  public final void documentStart(DocumentAttributes attr) {
+    html.setLength(0);
+
+    plain.setLength(0);
+  }
+
+  @Override
   public final void headingEnd() {
-    write = true;
+    write = false;
   }
 
   @Override
   public final void headingStart(int level) {
-    if (write = level == 1) {
-      html.setLength(0);
-
-      plain.setLength(0);
-    }
+    write = level == 1;
   }
 
   @Override

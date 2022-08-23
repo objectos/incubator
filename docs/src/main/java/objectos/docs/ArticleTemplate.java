@@ -15,6 +15,20 @@
  */
 package objectos.docs;
 
+import br.com.objectos.css.framework.border.BorderBottom;
+import br.com.objectos.css.framework.border.BorderColor;
+import br.com.objectos.css.framework.flexbox.Flex;
+import br.com.objectos.css.framework.layout.Display;
+import br.com.objectos.css.framework.sizing.MaxWidth;
+import br.com.objectos.css.framework.sizing.Width;
+import br.com.objectos.css.framework.spacing.MarginBottom;
+import br.com.objectos.css.framework.spacing.MarginX;
+import br.com.objectos.css.framework.spacing.PaddingBottom;
+import br.com.objectos.css.framework.spacing.PaddingLeft;
+import br.com.objectos.css.framework.spacing.PaddingRight;
+import br.com.objectos.css.framework.spacing.PaddingX;
+import br.com.objectos.css.framework.typography.FontSize;
+import br.com.objectos.css.framework.typography.FontWeight;
 import br.com.objectos.css.select.ClassSelector;
 import br.com.objectos.css.sheet.StyleSheet;
 import br.com.objectos.html.element.StandardElementName;
@@ -23,12 +37,6 @@ import objectos.docs.style.SyntaxCss;
 final class ArticleTemplate extends DocsTemplate implements LanguageRenderer.Output {
 
   private final ArticleCss css = new ArticleCss();
-
-  @SuppressWarnings("unused")
-  private final Breadcrumbs breadcrumbs;
-
-  @SuppressWarnings("unused")
-  private final PageSwitcher pageSwitcher;
 
   private final LanguageRenderer defaultRenderer = new DefaultRenderer();
 
@@ -40,12 +48,22 @@ final class ArticleTemplate extends DocsTemplate implements LanguageRenderer.Out
 
   private final StringBuilder source = new StringBuilder();
 
-  ArticleTemplate(DocsInjector injector) {
-    super(injector);
+  ArticleTemplate(DocsInjector injector) { super(injector); }
 
-    breadcrumbs = new Breadcrumbs(injector);
+  @Override
+  public final void headingStart(int level) {
+    super.headingStart(level);
 
-    pageSwitcher = new PageSwitcher(injector);
+    switch (level) {
+      case 1 -> addValue0(
+        BorderColor.gray300,
+        BorderBottom.v1,
+        FontSize.xLarge3,
+        FontWeight.bold,
+        MarginBottom.v04,
+        PaddingBottom.v01
+      );
+    }
   }
 
   @Override
@@ -73,6 +91,15 @@ final class ArticleTemplate extends DocsTemplate implements LanguageRenderer.Out
   @Override
   public final void listingBlockStart() {
     sourceCodeBlockStart("default");
+  }
+
+  @Override
+  public final void paragraphStart() {
+    super.paragraphStart();
+
+    addValue0(
+      MarginBottom.v04
+    );
   }
 
   @Override
@@ -114,21 +141,34 @@ final class ArticleTemplate extends DocsTemplate implements LanguageRenderer.Out
   }
 
   @Override
-  final void body0() {
-    var nextBanner = injector.$nextBanner();
+  final void main0() {
+    //    var nextBanner = injector.$nextBanner();
+    div(
+      //    nextBanner.shouldRender() ? f(nextBanner) : noop(),
+      Display.flex,
+      MarginX.auto,
+      MaxWidth.screenXl,
 
-    body(
-      nextBanner.shouldRender() ? f(nextBanner) : noop(),
+      nav(
+        Display.hidden,
+        Display.md.block,
+        Flex.md.none,
+        PaddingX.md.v06,
+        Width.md.v56,
+        Width.lg.v72,
 
-      //f(breadcrumbs),
+        t("Objectos v0.2.0")
+      ),
 
       main(
+        PaddingX.v04,
+        PaddingLeft.md.v0,
+        PaddingRight.md.v06,
+
         article(
           f(this::renderDocument)
         )
       )
-
-    //f(pageSwitcher)
     );
   }
 

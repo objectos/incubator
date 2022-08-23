@@ -63,7 +63,7 @@ final class VersionsTemplate extends DocsTemplate {
   }
 
   @Override
-  final void body0() {
+  final void main0() {
     article(
       header(
         h1("Versions")
