@@ -55,17 +55,16 @@ class TextTransform extends AbstractConfiguration {
   @Override
   protected final void configure() {
     property(
-        FrameworkGroup.TYPOGRAPHY,
-        simpleName("TextTransform"),
-        prefix(""),
-        methods("textTransform"),
-        valueSet(
-            v("uppercase", Keywords.uppercase),
-            v("lowercase", Keywords.lowercase),
-            v("capitalize", Keywords.capitalize),
-            v("none", Keywords.none)
-        ),
-        responsive
+      FrameworkGroup.TYPOGRAPHY,
+      simpleName("TextTransform"),
+      methods("textTransform"),
+      valueSet(
+        v("uppercase", Keywords.uppercase),
+        v("lowercase", Keywords.lowercase),
+        v("capitalize", Keywords.capitalize),
+        v("none", Keywords.none)
+      ),
+      responsive
     );
   }
 

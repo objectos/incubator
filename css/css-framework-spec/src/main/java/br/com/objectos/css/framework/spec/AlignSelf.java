@@ -55,18 +55,17 @@ class AlignSelf extends AbstractConfiguration {
   @Override
   protected final void configure() {
     property(
-        FrameworkGroup.FLEXBOX,
-        simpleName("AlignSelf"),
-        prefix("self"),
-        methods("alignSelf"),
-        valueSet(
-            v("auto", Keywords.auto),
-            v("start", Keywords.flexStart),
-            v("center", Keywords.center),
-            v("end", Keywords.flexEnd),
-            v("stretch", Keywords.stretch)
-        ),
-        responsive
+      FrameworkGroup.FLEXBOX,
+      simpleName("AlignSelf"),
+      methods("alignSelf"),
+      valueSet(
+        v("auto", Keywords.auto),
+        v("start", Keywords.flexStart),
+        v("center", Keywords.center),
+        v("end", Keywords.flexEnd),
+        v("stretch", Keywords.stretch)
+      ),
+      responsive
     );
   }
 

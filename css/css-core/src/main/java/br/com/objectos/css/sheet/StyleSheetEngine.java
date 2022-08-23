@@ -244,6 +244,7 @@ public abstract class StyleSheetEngine<E extends Exception> extends StyleSheetCo
 
         yield body.state;
       }
+
       case _DECLARATION_VALUES -> {
         visitBeforeNextDeclaration();
 
@@ -251,7 +252,9 @@ public abstract class StyleSheetEngine<E extends Exception> extends StyleSheetCo
 
         yield _DECLARATION_START;
       }
-      case _IGNORE_IF_SINGLE_SELECTOR -> _IGNORE_RULE;
+
+      case _IGNORE_IF_SINGLE_SELECTOR, _IGNORE_RULE -> _IGNORE_RULE;
+
       case _MEDIA_QUERY -> {
         visitLogicalExpressionStart(LogicalOperator.AND);
 
@@ -259,6 +262,7 @@ public abstract class StyleSheetEngine<E extends Exception> extends StyleSheetCo
 
         yield _MEDIA_QUERY_DECLARATION;
       }
+
       case _SELECTOR -> {
         visitBlockStart();
 
@@ -266,6 +270,7 @@ public abstract class StyleSheetEngine<E extends Exception> extends StyleSheetCo
 
         yield _DECLARATION_START;
       }
+
       default -> throw new IllegalArgumentException("Unexpected state: " + state);
     };
   }
@@ -374,11 +379,15 @@ public abstract class StyleSheetEngine<E extends Exception> extends StyleSheetCo
       case _DECLARATION_START -> {
         yield _DECLARATION_START;
       }
+
       case _DECLARATION_VALUES -> {
         visitMultiDeclarationSeparator();
 
         yield _DECLARATION_START;
       }
+
+      case _IGNORE_RULE -> state;
+
       default -> throw new IllegalArgumentException("Unexpected state: " + state);
     };
   }

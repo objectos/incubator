@@ -29,47 +29,46 @@ public class FontWeightTest extends AbstractCssMavenPluginFrameworkTest {
   @Test
   public void execute() {
     UnmodifiableMap<String, JavaFile> javaFiles = executeProperty(
-        new AbstractConfiguration() {
-          @Override
-          protected final void configure() {
-            packageName("br.com.objectos.css.framework");
+      new AbstractConfiguration() {
+        @Override
+        protected final void configure() {
+          packageName("br.com.objectos.css.framework");
 
-            property(
-                FrameworkGroup.TYPOGRAPHY,
-                simpleName("FontWeight"),
-                prefix("font"),
-                methods("fontWeight"),
-                valueSet(
-                    v("normal", 400)
-                )
-            );
-          }
+          property(
+            FrameworkGroup.TYPOGRAPHY,
+            simpleName("FontWeight"),
+            methods("fontWeight"),
+            valueSet(
+              v("normal", 400)
+            )
+          );
         }
+      }
     );
     assertEquals(javaFiles.size(), 1);
     testLines(
-        javaFiles.get("FontWeight"),
-        "package br.com.objectos.css.framework.typography;",
-        "",
-        "import br.com.objectos.code.annotations.Generated;",
-        "import br.com.objectos.css.Css;",
-        "import br.com.objectos.css.select.ClassSelector;",
-        "import br.com.objectos.css.sheet.AbstractStyleSheet;",
-        "",
-        "@Generated(\"br.com.objectos.css.maven.plugin.framework.FrameworkMojo\")",
-        "public final class FontWeight extends AbstractStyleSheet {",
-        "",
-        "  public static final ClassSelector normal = Css.dot(\"font-normal\");",
-        "",
-        "  @Override",
-        "  protected final void definition() {",
-        "    style(",
-        "        normal,",
-        "        fontWeight(400)",
-        "    );",
-        "  }",
-        "",
-        "}"
+      javaFiles.get("FontWeight"),
+      "package br.com.objectos.css.framework.typography;",
+      "",
+      "import br.com.objectos.code.annotations.Generated;",
+      "import br.com.objectos.css.Css;",
+      "import br.com.objectos.css.select.ClassSelector;",
+      "import br.com.objectos.css.sheet.AbstractStyleSheet;",
+      "",
+      "@Generated(\"br.com.objectos.css.maven.plugin.framework.FrameworkMojo\")",
+      "public final class FontWeight extends AbstractStyleSheet {",
+      "",
+      "  public static final ClassSelector normal = Css.randomDot(5);",
+      "",
+      "  @Override",
+      "  protected final void definition() {",
+      "    style(",
+      "        normal,",
+      "        fontWeight(400)",
+      "    );",
+      "  }",
+      "",
+      "}"
     );
   }
 

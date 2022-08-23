@@ -24,15 +24,15 @@ import br.com.objectos.css.sheet.AbstractStyleSheet;
 @Generated("br.com.objectos.css.maven.plugin.framework.FrameworkMojo")
 public final class AlignContent extends AbstractStyleSheet {
 
-  public static final ClassSelector start = Css.dot("content-start");
+  public static final ClassSelector start = Css.randomDot(5);
 
-  public static final ClassSelector center = Css.dot("content-center");
+  public static final ClassSelector center = Css.randomDot(5);
 
-  public static final ClassSelector end = Css.dot("content-end");
+  public static final ClassSelector end = Css.randomDot(5);
 
-  public static final ClassSelector between = Css.dot("content-between");
+  public static final ClassSelector between = Css.randomDot(5);
 
-  public static final ClassSelector around = Css.dot("content-around");
+  public static final ClassSelector around = Css.randomDot(5);
 
   @Override
   protected final void definition() {
@@ -172,57 +172,57 @@ public final class AlignContent extends AbstractStyleSheet {
 
   public interface sm {
 
-    ClassSelector start = Css.dot("sm-content-start");
+    ClassSelector start = Css.randomDot(5);
 
-    ClassSelector center = Css.dot("sm-content-center");
+    ClassSelector center = Css.randomDot(5);
 
-    ClassSelector end = Css.dot("sm-content-end");
+    ClassSelector end = Css.randomDot(5);
 
-    ClassSelector between = Css.dot("sm-content-between");
+    ClassSelector between = Css.randomDot(5);
 
-    ClassSelector around = Css.dot("sm-content-around");
+    ClassSelector around = Css.randomDot(5);
 
   }
 
   public interface md {
 
-    ClassSelector start = Css.dot("md-content-start");
+    ClassSelector start = Css.randomDot(5);
 
-    ClassSelector center = Css.dot("md-content-center");
+    ClassSelector center = Css.randomDot(5);
 
-    ClassSelector end = Css.dot("md-content-end");
+    ClassSelector end = Css.randomDot(5);
 
-    ClassSelector between = Css.dot("md-content-between");
+    ClassSelector between = Css.randomDot(5);
 
-    ClassSelector around = Css.dot("md-content-around");
+    ClassSelector around = Css.randomDot(5);
 
   }
 
   public interface lg {
 
-    ClassSelector start = Css.dot("lg-content-start");
+    ClassSelector start = Css.randomDot(5);
 
-    ClassSelector center = Css.dot("lg-content-center");
+    ClassSelector center = Css.randomDot(5);
 
-    ClassSelector end = Css.dot("lg-content-end");
+    ClassSelector end = Css.randomDot(5);
 
-    ClassSelector between = Css.dot("lg-content-between");
+    ClassSelector between = Css.randomDot(5);
 
-    ClassSelector around = Css.dot("lg-content-around");
+    ClassSelector around = Css.randomDot(5);
 
   }
 
   public interface xl {
 
-    ClassSelector start = Css.dot("xl-content-start");
+    ClassSelector start = Css.randomDot(5);
 
-    ClassSelector center = Css.dot("xl-content-center");
+    ClassSelector center = Css.randomDot(5);
 
-    ClassSelector end = Css.dot("xl-content-end");
+    ClassSelector end = Css.randomDot(5);
 
-    ClassSelector between = Css.dot("xl-content-between");
+    ClassSelector between = Css.randomDot(5);
 
-    ClassSelector around = Css.dot("xl-content-around");
+    ClassSelector around = Css.randomDot(5);
 
   }
 

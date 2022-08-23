@@ -54,23 +54,22 @@ class FontSize extends AbstractConfiguration {
   @Override
   protected final void configure() {
     property(
-        FrameworkGroup.TYPOGRAPHY,
-        simpleName("FontSize"),
-        prefix("fs"),
-        methods("fontSize"),
-        valueSet(
-            v("x-small", rem(0.75)),
-            v("small", rem(0.875)),
-            v("base", rem(1)),
-            v("large", rem(1.125)),
-            v("x-large", rem(1.25)),
-            v("x-large-2", rem(1.5)),
-            v("x-large-3", rem(1.875)),
-            v("x-large-4", rem(2.25)),
-            v("x-large-5", rem(3)),
-            v("x-large-6", rem(4))
-        ),
-        responsive
+      FrameworkGroup.TYPOGRAPHY,
+      simpleName("FontSize"),
+      methods("fontSize"),
+      valueSet(
+        v("x-small", rem(0.75)),
+        v("small", rem(0.875)),
+        v("base", rem(1)),
+        v("large", rem(1.125)),
+        v("x-large", rem(1.25)),
+        v("x-large-2", rem(1.5)),
+        v("x-large-3", rem(1.875)),
+        v("x-large-4", rem(2.25)),
+        v("x-large-5", rem(3)),
+        v("x-large-6", rem(4))
+      ),
+      responsive
     );
   }
 

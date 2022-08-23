@@ -55,26 +55,25 @@ class MaxWidth extends AbstractConfiguration {
   @Override
   protected final void configure() {
     property(
-        FrameworkGroup.SIZING,
-        simpleName("MaxWidth"),
-        prefix("max-w"),
-        methods("maxWidth"),
-        valueSet(
-            v("none", Keywords.none),
-            v("x-small", rem(20)),
-            v("small", rem(24)),
-            v("medium", rem(28)),
-            v("large", rem(32)),
-            v("x-large", rem(36)),
-            v("x-large-2", rem(42)),
-            v("x-large-3", rem(48)),
-            v("x-large-4", rem(56)),
-            v("x-large-5", rem(64)),
-            v("x-large-6", rem(72)),
-            v("full", pct(100)),
-            v("screen", responsive)
-        ),
-        responsive
+      FrameworkGroup.SIZING,
+      simpleName("MaxWidth"),
+      methods("maxWidth"),
+      valueSet(
+        v("none", Keywords.none),
+        v("x-small", rem(20)),
+        v("small", rem(24)),
+        v("medium", rem(28)),
+        v("large", rem(32)),
+        v("x-large", rem(36)),
+        v("x-large-2", rem(42)),
+        v("x-large-3", rem(48)),
+        v("x-large-4", rem(56)),
+        v("x-large-5", rem(64)),
+        v("x-large-6", rem(72)),
+        v("full", pct(100)),
+        v("screen", responsive)
+      ),
+      responsive
     );
   }
 

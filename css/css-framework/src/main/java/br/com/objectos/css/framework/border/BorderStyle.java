@@ -24,15 +24,15 @@ import br.com.objectos.css.sheet.AbstractStyleSheet;
 @Generated("br.com.objectos.css.maven.plugin.framework.FrameworkMojo")
 public final class BorderStyle extends AbstractStyleSheet {
 
-  public static final ClassSelector solid = Css.dot("border-solid");
+  public static final ClassSelector solid = Css.randomDot(5);
 
-  public static final ClassSelector dashed = Css.dot("border-dashed");
+  public static final ClassSelector dashed = Css.randomDot(5);
 
-  public static final ClassSelector dotted = Css.dot("border-dotted");
+  public static final ClassSelector dotted = Css.randomDot(5);
 
-  public static final ClassSelector doubleValue = Css.dot("border-double");
+  public static final ClassSelector doubleValue = Css.randomDot(5);
 
-  public static final ClassSelector none = Css.dot("border-none");
+  public static final ClassSelector none = Css.randomDot(5);
 
   @Override
   protected final void definition() {
@@ -172,57 +172,57 @@ public final class BorderStyle extends AbstractStyleSheet {
 
   public interface sm {
 
-    ClassSelector solid = Css.dot("sm-border-solid");
+    ClassSelector solid = Css.randomDot(5);
 
-    ClassSelector dashed = Css.dot("sm-border-dashed");
+    ClassSelector dashed = Css.randomDot(5);
 
-    ClassSelector dotted = Css.dot("sm-border-dotted");
+    ClassSelector dotted = Css.randomDot(5);
 
-    ClassSelector doubleValue = Css.dot("sm-border-double");
+    ClassSelector doubleValue = Css.randomDot(5);
 
-    ClassSelector none = Css.dot("sm-border-none");
+    ClassSelector none = Css.randomDot(5);
 
   }
 
   public interface md {
 
-    ClassSelector solid = Css.dot("md-border-solid");
+    ClassSelector solid = Css.randomDot(5);
 
-    ClassSelector dashed = Css.dot("md-border-dashed");
+    ClassSelector dashed = Css.randomDot(5);
 
-    ClassSelector dotted = Css.dot("md-border-dotted");
+    ClassSelector dotted = Css.randomDot(5);
 
-    ClassSelector doubleValue = Css.dot("md-border-double");
+    ClassSelector doubleValue = Css.randomDot(5);
 
-    ClassSelector none = Css.dot("md-border-none");
+    ClassSelector none = Css.randomDot(5);
 
   }
 
   public interface lg {
 
-    ClassSelector solid = Css.dot("lg-border-solid");
+    ClassSelector solid = Css.randomDot(5);
 
-    ClassSelector dashed = Css.dot("lg-border-dashed");
+    ClassSelector dashed = Css.randomDot(5);
 
-    ClassSelector dotted = Css.dot("lg-border-dotted");
+    ClassSelector dotted = Css.randomDot(5);
 
-    ClassSelector doubleValue = Css.dot("lg-border-double");
+    ClassSelector doubleValue = Css.randomDot(5);
 
-    ClassSelector none = Css.dot("lg-border-none");
+    ClassSelector none = Css.randomDot(5);
 
   }
 
   public interface xl {
 
-    ClassSelector solid = Css.dot("xl-border-solid");
+    ClassSelector solid = Css.randomDot(5);
 
-    ClassSelector dashed = Css.dot("xl-border-dashed");
+    ClassSelector dashed = Css.randomDot(5);
 
-    ClassSelector dotted = Css.dot("xl-border-dotted");
+    ClassSelector dotted = Css.randomDot(5);
 
-    ClassSelector doubleValue = Css.dot("xl-border-double");
+    ClassSelector doubleValue = Css.randomDot(5);
 
-    ClassSelector none = Css.dot("xl-border-none");
+    ClassSelector none = Css.randomDot(5);
 
   }
 

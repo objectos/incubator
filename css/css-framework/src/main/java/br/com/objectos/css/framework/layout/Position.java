@@ -24,15 +24,15 @@ import br.com.objectos.css.sheet.AbstractStyleSheet;
 @Generated("br.com.objectos.css.maven.plugin.framework.FrameworkMojo")
 public final class Position extends AbstractStyleSheet {
 
-  public static final ClassSelector staticPosition = Css.dot("static-position");
+  public static final ClassSelector staticPosition = Css.randomDot(5);
 
-  public static final ClassSelector fixed = Css.dot("fixed");
+  public static final ClassSelector fixed = Css.randomDot(5);
 
-  public static final ClassSelector absolute = Css.dot("absolute");
+  public static final ClassSelector absolute = Css.randomDot(5);
 
-  public static final ClassSelector relative = Css.dot("relative");
+  public static final ClassSelector relative = Css.randomDot(5);
 
-  public static final ClassSelector sticky = Css.dot("sticky");
+  public static final ClassSelector sticky = Css.randomDot(5);
 
   @Override
   protected final void definition() {
@@ -172,57 +172,57 @@ public final class Position extends AbstractStyleSheet {
 
   public interface sm {
 
-    ClassSelector staticPosition = Css.dot("sm-static-position");
+    ClassSelector staticPosition = Css.randomDot(5);
 
-    ClassSelector fixed = Css.dot("sm-fixed");
+    ClassSelector fixed = Css.randomDot(5);
 
-    ClassSelector absolute = Css.dot("sm-absolute");
+    ClassSelector absolute = Css.randomDot(5);
 
-    ClassSelector relative = Css.dot("sm-relative");
+    ClassSelector relative = Css.randomDot(5);
 
-    ClassSelector sticky = Css.dot("sm-sticky");
+    ClassSelector sticky = Css.randomDot(5);
 
   }
 
   public interface md {
 
-    ClassSelector staticPosition = Css.dot("md-static-position");
+    ClassSelector staticPosition = Css.randomDot(5);
 
-    ClassSelector fixed = Css.dot("md-fixed");
+    ClassSelector fixed = Css.randomDot(5);
 
-    ClassSelector absolute = Css.dot("md-absolute");
+    ClassSelector absolute = Css.randomDot(5);
 
-    ClassSelector relative = Css.dot("md-relative");
+    ClassSelector relative = Css.randomDot(5);
 
-    ClassSelector sticky = Css.dot("md-sticky");
+    ClassSelector sticky = Css.randomDot(5);
 
   }
 
   public interface lg {
 
-    ClassSelector staticPosition = Css.dot("lg-static-position");
+    ClassSelector staticPosition = Css.randomDot(5);
 
-    ClassSelector fixed = Css.dot("lg-fixed");
+    ClassSelector fixed = Css.randomDot(5);
 
-    ClassSelector absolute = Css.dot("lg-absolute");
+    ClassSelector absolute = Css.randomDot(5);
 
-    ClassSelector relative = Css.dot("lg-relative");
+    ClassSelector relative = Css.randomDot(5);
 
-    ClassSelector sticky = Css.dot("lg-sticky");
+    ClassSelector sticky = Css.randomDot(5);
 
   }
 
   public interface xl {
 
-    ClassSelector staticPosition = Css.dot("xl-static-position");
+    ClassSelector staticPosition = Css.randomDot(5);
 
-    ClassSelector fixed = Css.dot("xl-fixed");
+    ClassSelector fixed = Css.randomDot(5);
 
-    ClassSelector absolute = Css.dot("xl-absolute");
+    ClassSelector absolute = Css.randomDot(5);
 
-    ClassSelector relative = Css.dot("xl-relative");
+    ClassSelector relative = Css.randomDot(5);
 
-    ClassSelector sticky = Css.dot("xl-sticky");
+    ClassSelector sticky = Css.randomDot(5);
 
   }
 

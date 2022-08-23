@@ -57,66 +57,59 @@ class Padding extends AbstractConfiguration {
   @Override
   protected final void configure() {
     property(
-        FrameworkGroup.SPACING,
-        simpleName("Padding"),
-        prefix("p"),
-        methods("padding"),
-        spacing,
-        responsive
+      FrameworkGroup.SPACING,
+      simpleName("Padding"),
+      methods("padding"),
+      spacing,
+      responsive
     );
 
     property(
-        FrameworkGroup.SPACING,
-        simpleName("PaddingX"),
-        prefix("px"),
-        methods("paddingRight", "paddingLeft"),
-        spacing,
-        responsive
+      FrameworkGroup.SPACING,
+      simpleName("PaddingX"),
+      methods("paddingRight", "paddingLeft"),
+      spacing,
+      responsive
     );
 
     property(
-        FrameworkGroup.SPACING,
-        simpleName("PaddingY"),
-        prefix("py"),
-        methods("paddingTop", "paddingBottom"),
-        spacing,
-        responsive
+      FrameworkGroup.SPACING,
+      simpleName("PaddingY"),
+      methods("paddingTop", "paddingBottom"),
+      spacing,
+      responsive
     );
 
     property(
-        FrameworkGroup.SPACING,
-        simpleName("PaddingTop"),
-        prefix("pt"),
-        methods("paddingTop"),
-        spacing,
-        responsive
+      FrameworkGroup.SPACING,
+      simpleName("PaddingTop"),
+      methods("paddingTop"),
+      spacing,
+      responsive
     );
 
     property(
-        FrameworkGroup.SPACING,
-        simpleName("PaddingRight"),
-        prefix("pr"),
-        methods("paddingRight"),
-        spacing,
-        responsive
+      FrameworkGroup.SPACING,
+      simpleName("PaddingRight"),
+      methods("paddingRight"),
+      spacing,
+      responsive
     );
 
     property(
-        FrameworkGroup.SPACING,
-        simpleName("PaddingBottom"),
-        prefix("pb"),
-        methods("paddingBottom"),
-        spacing,
-        responsive
+      FrameworkGroup.SPACING,
+      simpleName("PaddingBottom"),
+      methods("paddingBottom"),
+      spacing,
+      responsive
     );
 
     property(
-        FrameworkGroup.SPACING,
-        simpleName("PaddingLeft"),
-        prefix("pl"),
-        methods("paddingLeft"),
-        spacing,
-        responsive
+      FrameworkGroup.SPACING,
+      simpleName("PaddingLeft"),
+      methods("paddingLeft"),
+      spacing,
+      responsive
     );
   }
 

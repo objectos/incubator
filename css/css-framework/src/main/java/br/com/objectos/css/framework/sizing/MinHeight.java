@@ -23,11 +23,11 @@ import br.com.objectos.css.sheet.AbstractStyleSheet;
 @Generated("br.com.objectos.css.maven.plugin.framework.FrameworkMojo")
 public final class MinHeight extends AbstractStyleSheet {
 
-  public static final ClassSelector v0 = Css.dot("min-h-0");
+  public static final ClassSelector v0 = Css.randomDot(5);
 
-  public static final ClassSelector full = Css.dot("min-h-full");
+  public static final ClassSelector full = Css.randomDot(5);
 
-  public static final ClassSelector screen = Css.dot("min-h-screen");
+  public static final ClassSelector screen = Css.randomDot(5);
 
   @Override
   protected final void definition() {
@@ -119,41 +119,41 @@ public final class MinHeight extends AbstractStyleSheet {
 
   public interface sm {
 
-    ClassSelector v0 = Css.dot("sm-min-h-0");
+    ClassSelector v0 = Css.randomDot(5);
 
-    ClassSelector full = Css.dot("sm-min-h-full");
+    ClassSelector full = Css.randomDot(5);
 
-    ClassSelector screen = Css.dot("sm-min-h-screen");
+    ClassSelector screen = Css.randomDot(5);
 
   }
 
   public interface md {
 
-    ClassSelector v0 = Css.dot("md-min-h-0");
+    ClassSelector v0 = Css.randomDot(5);
 
-    ClassSelector full = Css.dot("md-min-h-full");
+    ClassSelector full = Css.randomDot(5);
 
-    ClassSelector screen = Css.dot("md-min-h-screen");
+    ClassSelector screen = Css.randomDot(5);
 
   }
 
   public interface lg {
 
-    ClassSelector v0 = Css.dot("lg-min-h-0");
+    ClassSelector v0 = Css.randomDot(5);
 
-    ClassSelector full = Css.dot("lg-min-h-full");
+    ClassSelector full = Css.randomDot(5);
 
-    ClassSelector screen = Css.dot("lg-min-h-screen");
+    ClassSelector screen = Css.randomDot(5);
 
   }
 
   public interface xl {
 
-    ClassSelector v0 = Css.dot("xl-min-h-0");
+    ClassSelector v0 = Css.randomDot(5);
 
-    ClassSelector full = Css.dot("xl-min-h-full");
+    ClassSelector full = Css.randomDot(5);
 
-    ClassSelector screen = Css.dot("xl-min-h-screen");
+    ClassSelector screen = Css.randomDot(5);
 
   }
 

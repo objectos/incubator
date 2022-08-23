@@ -30,48 +30,47 @@ public class BackgroundSizeTest extends AbstractCssMavenPluginFrameworkTest {
   @Test
   public void execute() {
     UnmodifiableMap<String, JavaFile> javaFiles = executeProperty(
-        new AbstractConfiguration() {
-          @Override
-          protected final void configure() {
-            packageName("br.com.objectos.css.framework");
+      new AbstractConfiguration() {
+        @Override
+        protected final void configure() {
+          packageName("br.com.objectos.css.framework");
 
-            property(
-                FrameworkGroup.BACKGROUND,
-                simpleName("BackgroundSize"),
-                prefix("bg"),
-                methods("backgroundSize"),
-                valueSet(
-                    v("auto", Keywords.auto)
-                )
-            );
-          }
+          property(
+            FrameworkGroup.BACKGROUND,
+            simpleName("BackgroundSize"),
+            methods("backgroundSize"),
+            valueSet(
+              v("auto", Keywords.auto)
+            )
+          );
         }
+      }
     );
     assertEquals(javaFiles.size(), 1);
     testLines(
-        javaFiles.get("BackgroundSize"),
-        "package br.com.objectos.css.framework.background;",
-        "",
-        "import br.com.objectos.code.annotations.Generated;",
-        "import br.com.objectos.css.Css;",
-        "import br.com.objectos.css.keyword.Keywords;",
-        "import br.com.objectos.css.select.ClassSelector;",
-        "import br.com.objectos.css.sheet.AbstractStyleSheet;",
-        "",
-        "@Generated(\"br.com.objectos.css.maven.plugin.framework.FrameworkMojo\")",
-        "public final class BackgroundSize extends AbstractStyleSheet {",
-        "",
-        "  public static final ClassSelector auto = Css.dot(\"bg-auto\");",
-        "",
-        "  @Override",
-        "  protected final void definition() {",
-        "    style(",
-        "        auto,",
-        "        backgroundSize(Keywords.auto)",
-        "    );",
-        "  }",
-        "",
-        "}"
+      javaFiles.get("BackgroundSize"),
+      "package br.com.objectos.css.framework.background;",
+      "",
+      "import br.com.objectos.code.annotations.Generated;",
+      "import br.com.objectos.css.Css;",
+      "import br.com.objectos.css.keyword.Keywords;",
+      "import br.com.objectos.css.select.ClassSelector;",
+      "import br.com.objectos.css.sheet.AbstractStyleSheet;",
+      "",
+      "@Generated(\"br.com.objectos.css.maven.plugin.framework.FrameworkMojo\")",
+      "public final class BackgroundSize extends AbstractStyleSheet {",
+      "",
+      "  public static final ClassSelector auto = Css.randomDot(5);",
+      "",
+      "  @Override",
+      "  protected final void definition() {",
+      "    style(",
+      "        auto,",
+      "        backgroundSize(Keywords.auto)",
+      "    );",
+      "  }",
+      "",
+      "}"
     );
   }
 

@@ -16,12 +16,10 @@
 package br.com.objectos.css.maven.plugin.framework;
 
 import static br.com.objectos.code.java.Java.id;
-import static br.com.objectos.code.java.Java.l;
 
 import br.com.objectos.code.java.JavaNames;
 import br.com.objectos.code.java.expression.Argument;
 import br.com.objectos.code.java.expression.Identifier;
-import br.com.objectos.code.java.expression.Literal;
 import br.com.objectos.code.java.expression.MethodInvocation;
 import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkNamedValue;
 import br.com.objectos.css.type.Value;
@@ -47,23 +45,11 @@ abstract class NamedValue extends AbstractFrameworkObject implements FrameworkNa
         && equalsImpl(that);
   }
 
-  public final Literal getClassName(NamedAtMedia query, Prefix prefix) {
-    return l(query.toClassName(prefix.toClassName(name)));
-  }
-
-  public final Literal getClassName(Prefix prefix) {
-    return l(prefix.toClassName(name));
-  }
-
   public final Identifier getFieldName() {
     char firstChar = name.charAt(0);
     return Character.isDigit(firstChar)
         ? id(JavaNames.toValidMethodName('v' + name))
         : id(toJavaName());
-  }
-
-  public final Identifier getFieldName(Prefix prefix) {
-    return id(prefix.toFieldName(name));
   }
 
   @Override

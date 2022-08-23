@@ -23,15 +23,15 @@ import br.com.objectos.css.sheet.AbstractStyleSheet;
 @Generated("br.com.objectos.css.maven.plugin.framework.FrameworkMojo")
 public final class BorderRight extends AbstractStyleSheet {
 
-  public static final ClassSelector v0 = Css.dot("border-r-0");
+  public static final ClassSelector v0 = Css.randomDot(5);
 
-  public static final ClassSelector v1 = Css.dot("border-r-1");
+  public static final ClassSelector v1 = Css.randomDot(5);
 
-  public static final ClassSelector v2 = Css.dot("border-r-2");
+  public static final ClassSelector v2 = Css.randomDot(5);
 
-  public static final ClassSelector v4 = Css.dot("border-r-4");
+  public static final ClassSelector v4 = Css.randomDot(5);
 
-  public static final ClassSelector v8 = Css.dot("border-r-8");
+  public static final ClassSelector v8 = Css.randomDot(5);
 
   @Override
   protected final void definition() {
@@ -171,57 +171,57 @@ public final class BorderRight extends AbstractStyleSheet {
 
   public interface sm {
 
-    ClassSelector v0 = Css.dot("sm-border-r-0");
+    ClassSelector v0 = Css.randomDot(5);
 
-    ClassSelector v1 = Css.dot("sm-border-r-1");
+    ClassSelector v1 = Css.randomDot(5);
 
-    ClassSelector v2 = Css.dot("sm-border-r-2");
+    ClassSelector v2 = Css.randomDot(5);
 
-    ClassSelector v4 = Css.dot("sm-border-r-4");
+    ClassSelector v4 = Css.randomDot(5);
 
-    ClassSelector v8 = Css.dot("sm-border-r-8");
+    ClassSelector v8 = Css.randomDot(5);
 
   }
 
   public interface md {
 
-    ClassSelector v0 = Css.dot("md-border-r-0");
+    ClassSelector v0 = Css.randomDot(5);
 
-    ClassSelector v1 = Css.dot("md-border-r-1");
+    ClassSelector v1 = Css.randomDot(5);
 
-    ClassSelector v2 = Css.dot("md-border-r-2");
+    ClassSelector v2 = Css.randomDot(5);
 
-    ClassSelector v4 = Css.dot("md-border-r-4");
+    ClassSelector v4 = Css.randomDot(5);
 
-    ClassSelector v8 = Css.dot("md-border-r-8");
+    ClassSelector v8 = Css.randomDot(5);
 
   }
 
   public interface lg {
 
-    ClassSelector v0 = Css.dot("lg-border-r-0");
+    ClassSelector v0 = Css.randomDot(5);
 
-    ClassSelector v1 = Css.dot("lg-border-r-1");
+    ClassSelector v1 = Css.randomDot(5);
 
-    ClassSelector v2 = Css.dot("lg-border-r-2");
+    ClassSelector v2 = Css.randomDot(5);
 
-    ClassSelector v4 = Css.dot("lg-border-r-4");
+    ClassSelector v4 = Css.randomDot(5);
 
-    ClassSelector v8 = Css.dot("lg-border-r-8");
+    ClassSelector v8 = Css.randomDot(5);
 
   }
 
   public interface xl {
 
-    ClassSelector v0 = Css.dot("xl-border-r-0");
+    ClassSelector v0 = Css.randomDot(5);
 
-    ClassSelector v1 = Css.dot("xl-border-r-1");
+    ClassSelector v1 = Css.randomDot(5);
 
-    ClassSelector v2 = Css.dot("xl-border-r-2");
+    ClassSelector v2 = Css.randomDot(5);
 
-    ClassSelector v4 = Css.dot("xl-border-r-4");
+    ClassSelector v4 = Css.randomDot(5);
 
-    ClassSelector v8 = Css.dot("xl-border-r-8");
+    ClassSelector v8 = Css.randomDot(5);
 
   }
 

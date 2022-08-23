@@ -24,13 +24,13 @@ import br.com.objectos.css.sheet.AbstractStyleSheet;
 @Generated("br.com.objectos.css.maven.plugin.framework.FrameworkMojo")
 public final class TextTransform extends AbstractStyleSheet {
 
-  public static final ClassSelector uppercase = Css.dot("-uppercase");
+  public static final ClassSelector uppercase = Css.randomDot(5);
 
-  public static final ClassSelector lowercase = Css.dot("-lowercase");
+  public static final ClassSelector lowercase = Css.randomDot(5);
 
-  public static final ClassSelector capitalize = Css.dot("-capitalize");
+  public static final ClassSelector capitalize = Css.randomDot(5);
 
-  public static final ClassSelector none = Css.dot("-none");
+  public static final ClassSelector none = Css.randomDot(5);
 
   @Override
   protected final void definition() {
@@ -146,49 +146,49 @@ public final class TextTransform extends AbstractStyleSheet {
 
   public interface sm {
 
-    ClassSelector uppercase = Css.dot("sm--uppercase");
+    ClassSelector uppercase = Css.randomDot(5);
 
-    ClassSelector lowercase = Css.dot("sm--lowercase");
+    ClassSelector lowercase = Css.randomDot(5);
 
-    ClassSelector capitalize = Css.dot("sm--capitalize");
+    ClassSelector capitalize = Css.randomDot(5);
 
-    ClassSelector none = Css.dot("sm--none");
+    ClassSelector none = Css.randomDot(5);
 
   }
 
   public interface md {
 
-    ClassSelector uppercase = Css.dot("md--uppercase");
+    ClassSelector uppercase = Css.randomDot(5);
 
-    ClassSelector lowercase = Css.dot("md--lowercase");
+    ClassSelector lowercase = Css.randomDot(5);
 
-    ClassSelector capitalize = Css.dot("md--capitalize");
+    ClassSelector capitalize = Css.randomDot(5);
 
-    ClassSelector none = Css.dot("md--none");
+    ClassSelector none = Css.randomDot(5);
 
   }
 
   public interface lg {
 
-    ClassSelector uppercase = Css.dot("lg--uppercase");
+    ClassSelector uppercase = Css.randomDot(5);
 
-    ClassSelector lowercase = Css.dot("lg--lowercase");
+    ClassSelector lowercase = Css.randomDot(5);
 
-    ClassSelector capitalize = Css.dot("lg--capitalize");
+    ClassSelector capitalize = Css.randomDot(5);
 
-    ClassSelector none = Css.dot("lg--none");
+    ClassSelector none = Css.randomDot(5);
 
   }
 
   public interface xl {
 
-    ClassSelector uppercase = Css.dot("xl--uppercase");
+    ClassSelector uppercase = Css.randomDot(5);
 
-    ClassSelector lowercase = Css.dot("xl--lowercase");
+    ClassSelector lowercase = Css.randomDot(5);
 
-    ClassSelector capitalize = Css.dot("xl--capitalize");
+    ClassSelector capitalize = Css.randomDot(5);
 
-    ClassSelector none = Css.dot("xl--none");
+    ClassSelector none = Css.randomDot(5);
 
   }
 

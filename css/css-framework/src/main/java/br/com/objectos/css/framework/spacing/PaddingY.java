@@ -23,43 +23,43 @@ import br.com.objectos.css.sheet.AbstractStyleSheet;
 @Generated("br.com.objectos.css.maven.plugin.framework.FrameworkMojo")
 public final class PaddingY extends AbstractStyleSheet {
 
-  public static final ClassSelector px = Css.dot("py-px");
+  public static final ClassSelector px = Css.randomDot(5);
 
-  public static final ClassSelector v0 = Css.dot("py-0");
+  public static final ClassSelector v0 = Css.randomDot(5);
 
-  public static final ClassSelector v1 = Css.dot("py-1");
+  public static final ClassSelector v1 = Css.randomDot(5);
 
-  public static final ClassSelector v2 = Css.dot("py-2");
+  public static final ClassSelector v2 = Css.randomDot(5);
 
-  public static final ClassSelector v3 = Css.dot("py-3");
+  public static final ClassSelector v3 = Css.randomDot(5);
 
-  public static final ClassSelector v4 = Css.dot("py-4");
+  public static final ClassSelector v4 = Css.randomDot(5);
 
-  public static final ClassSelector v5 = Css.dot("py-5");
+  public static final ClassSelector v5 = Css.randomDot(5);
 
-  public static final ClassSelector v6 = Css.dot("py-6");
+  public static final ClassSelector v6 = Css.randomDot(5);
 
-  public static final ClassSelector v8 = Css.dot("py-8");
+  public static final ClassSelector v8 = Css.randomDot(5);
 
-  public static final ClassSelector v10 = Css.dot("py-10");
+  public static final ClassSelector v10 = Css.randomDot(5);
 
-  public static final ClassSelector v12 = Css.dot("py-12");
+  public static final ClassSelector v12 = Css.randomDot(5);
 
-  public static final ClassSelector v16 = Css.dot("py-16");
+  public static final ClassSelector v16 = Css.randomDot(5);
 
-  public static final ClassSelector v20 = Css.dot("py-20");
+  public static final ClassSelector v20 = Css.randomDot(5);
 
-  public static final ClassSelector v24 = Css.dot("py-24");
+  public static final ClassSelector v24 = Css.randomDot(5);
 
-  public static final ClassSelector v32 = Css.dot("py-32");
+  public static final ClassSelector v32 = Css.randomDot(5);
 
-  public static final ClassSelector v40 = Css.dot("py-40");
+  public static final ClassSelector v40 = Css.randomDot(5);
 
-  public static final ClassSelector v48 = Css.dot("py-48");
+  public static final ClassSelector v48 = Css.randomDot(5);
 
-  public static final ClassSelector v56 = Css.dot("py-56");
+  public static final ClassSelector v56 = Css.randomDot(5);
 
-  public static final ClassSelector v64 = Css.dot("py-64");
+  public static final ClassSelector v64 = Css.randomDot(5);
 
   @Override
   protected final void definition() {
@@ -630,169 +630,169 @@ public final class PaddingY extends AbstractStyleSheet {
 
   public interface sm {
 
-    ClassSelector px = Css.dot("sm-py-px");
+    ClassSelector px = Css.randomDot(5);
 
-    ClassSelector v0 = Css.dot("sm-py-0");
+    ClassSelector v0 = Css.randomDot(5);
 
-    ClassSelector v1 = Css.dot("sm-py-1");
+    ClassSelector v1 = Css.randomDot(5);
 
-    ClassSelector v2 = Css.dot("sm-py-2");
+    ClassSelector v2 = Css.randomDot(5);
 
-    ClassSelector v3 = Css.dot("sm-py-3");
+    ClassSelector v3 = Css.randomDot(5);
 
-    ClassSelector v4 = Css.dot("sm-py-4");
+    ClassSelector v4 = Css.randomDot(5);
 
-    ClassSelector v5 = Css.dot("sm-py-5");
+    ClassSelector v5 = Css.randomDot(5);
 
-    ClassSelector v6 = Css.dot("sm-py-6");
+    ClassSelector v6 = Css.randomDot(5);
 
-    ClassSelector v8 = Css.dot("sm-py-8");
+    ClassSelector v8 = Css.randomDot(5);
 
-    ClassSelector v10 = Css.dot("sm-py-10");
+    ClassSelector v10 = Css.randomDot(5);
 
-    ClassSelector v12 = Css.dot("sm-py-12");
+    ClassSelector v12 = Css.randomDot(5);
 
-    ClassSelector v16 = Css.dot("sm-py-16");
+    ClassSelector v16 = Css.randomDot(5);
 
-    ClassSelector v20 = Css.dot("sm-py-20");
+    ClassSelector v20 = Css.randomDot(5);
 
-    ClassSelector v24 = Css.dot("sm-py-24");
+    ClassSelector v24 = Css.randomDot(5);
 
-    ClassSelector v32 = Css.dot("sm-py-32");
+    ClassSelector v32 = Css.randomDot(5);
 
-    ClassSelector v40 = Css.dot("sm-py-40");
+    ClassSelector v40 = Css.randomDot(5);
 
-    ClassSelector v48 = Css.dot("sm-py-48");
+    ClassSelector v48 = Css.randomDot(5);
 
-    ClassSelector v56 = Css.dot("sm-py-56");
+    ClassSelector v56 = Css.randomDot(5);
 
-    ClassSelector v64 = Css.dot("sm-py-64");
+    ClassSelector v64 = Css.randomDot(5);
 
   }
 
   public interface md {
 
-    ClassSelector px = Css.dot("md-py-px");
+    ClassSelector px = Css.randomDot(5);
 
-    ClassSelector v0 = Css.dot("md-py-0");
+    ClassSelector v0 = Css.randomDot(5);
 
-    ClassSelector v1 = Css.dot("md-py-1");
+    ClassSelector v1 = Css.randomDot(5);
 
-    ClassSelector v2 = Css.dot("md-py-2");
+    ClassSelector v2 = Css.randomDot(5);
 
-    ClassSelector v3 = Css.dot("md-py-3");
+    ClassSelector v3 = Css.randomDot(5);
 
-    ClassSelector v4 = Css.dot("md-py-4");
+    ClassSelector v4 = Css.randomDot(5);
 
-    ClassSelector v5 = Css.dot("md-py-5");
+    ClassSelector v5 = Css.randomDot(5);
 
-    ClassSelector v6 = Css.dot("md-py-6");
+    ClassSelector v6 = Css.randomDot(5);
 
-    ClassSelector v8 = Css.dot("md-py-8");
+    ClassSelector v8 = Css.randomDot(5);
 
-    ClassSelector v10 = Css.dot("md-py-10");
+    ClassSelector v10 = Css.randomDot(5);
 
-    ClassSelector v12 = Css.dot("md-py-12");
+    ClassSelector v12 = Css.randomDot(5);
 
-    ClassSelector v16 = Css.dot("md-py-16");
+    ClassSelector v16 = Css.randomDot(5);
 
-    ClassSelector v20 = Css.dot("md-py-20");
+    ClassSelector v20 = Css.randomDot(5);
 
-    ClassSelector v24 = Css.dot("md-py-24");
+    ClassSelector v24 = Css.randomDot(5);
 
-    ClassSelector v32 = Css.dot("md-py-32");
+    ClassSelector v32 = Css.randomDot(5);
 
-    ClassSelector v40 = Css.dot("md-py-40");
+    ClassSelector v40 = Css.randomDot(5);
 
-    ClassSelector v48 = Css.dot("md-py-48");
+    ClassSelector v48 = Css.randomDot(5);
 
-    ClassSelector v56 = Css.dot("md-py-56");
+    ClassSelector v56 = Css.randomDot(5);
 
-    ClassSelector v64 = Css.dot("md-py-64");
+    ClassSelector v64 = Css.randomDot(5);
 
   }
 
   public interface lg {
 
-    ClassSelector px = Css.dot("lg-py-px");
+    ClassSelector px = Css.randomDot(5);
 
-    ClassSelector v0 = Css.dot("lg-py-0");
+    ClassSelector v0 = Css.randomDot(5);
 
-    ClassSelector v1 = Css.dot("lg-py-1");
+    ClassSelector v1 = Css.randomDot(5);
 
-    ClassSelector v2 = Css.dot("lg-py-2");
+    ClassSelector v2 = Css.randomDot(5);
 
-    ClassSelector v3 = Css.dot("lg-py-3");
+    ClassSelector v3 = Css.randomDot(5);
 
-    ClassSelector v4 = Css.dot("lg-py-4");
+    ClassSelector v4 = Css.randomDot(5);
 
-    ClassSelector v5 = Css.dot("lg-py-5");
+    ClassSelector v5 = Css.randomDot(5);
 
-    ClassSelector v6 = Css.dot("lg-py-6");
+    ClassSelector v6 = Css.randomDot(5);
 
-    ClassSelector v8 = Css.dot("lg-py-8");
+    ClassSelector v8 = Css.randomDot(5);
 
-    ClassSelector v10 = Css.dot("lg-py-10");
+    ClassSelector v10 = Css.randomDot(5);
 
-    ClassSelector v12 = Css.dot("lg-py-12");
+    ClassSelector v12 = Css.randomDot(5);
 
-    ClassSelector v16 = Css.dot("lg-py-16");
+    ClassSelector v16 = Css.randomDot(5);
 
-    ClassSelector v20 = Css.dot("lg-py-20");
+    ClassSelector v20 = Css.randomDot(5);
 
-    ClassSelector v24 = Css.dot("lg-py-24");
+    ClassSelector v24 = Css.randomDot(5);
 
-    ClassSelector v32 = Css.dot("lg-py-32");
+    ClassSelector v32 = Css.randomDot(5);
 
-    ClassSelector v40 = Css.dot("lg-py-40");
+    ClassSelector v40 = Css.randomDot(5);
 
-    ClassSelector v48 = Css.dot("lg-py-48");
+    ClassSelector v48 = Css.randomDot(5);
 
-    ClassSelector v56 = Css.dot("lg-py-56");
+    ClassSelector v56 = Css.randomDot(5);
 
-    ClassSelector v64 = Css.dot("lg-py-64");
+    ClassSelector v64 = Css.randomDot(5);
 
   }
 
   public interface xl {
 
-    ClassSelector px = Css.dot("xl-py-px");
+    ClassSelector px = Css.randomDot(5);
 
-    ClassSelector v0 = Css.dot("xl-py-0");
+    ClassSelector v0 = Css.randomDot(5);
 
-    ClassSelector v1 = Css.dot("xl-py-1");
+    ClassSelector v1 = Css.randomDot(5);
 
-    ClassSelector v2 = Css.dot("xl-py-2");
+    ClassSelector v2 = Css.randomDot(5);
 
-    ClassSelector v3 = Css.dot("xl-py-3");
+    ClassSelector v3 = Css.randomDot(5);
 
-    ClassSelector v4 = Css.dot("xl-py-4");
+    ClassSelector v4 = Css.randomDot(5);
 
-    ClassSelector v5 = Css.dot("xl-py-5");
+    ClassSelector v5 = Css.randomDot(5);
 
-    ClassSelector v6 = Css.dot("xl-py-6");
+    ClassSelector v6 = Css.randomDot(5);
 
-    ClassSelector v8 = Css.dot("xl-py-8");
+    ClassSelector v8 = Css.randomDot(5);
 
-    ClassSelector v10 = Css.dot("xl-py-10");
+    ClassSelector v10 = Css.randomDot(5);
 
-    ClassSelector v12 = Css.dot("xl-py-12");
+    ClassSelector v12 = Css.randomDot(5);
 
-    ClassSelector v16 = Css.dot("xl-py-16");
+    ClassSelector v16 = Css.randomDot(5);
 
-    ClassSelector v20 = Css.dot("xl-py-20");
+    ClassSelector v20 = Css.randomDot(5);
 
-    ClassSelector v24 = Css.dot("xl-py-24");
+    ClassSelector v24 = Css.randomDot(5);
 
-    ClassSelector v32 = Css.dot("xl-py-32");
+    ClassSelector v32 = Css.randomDot(5);
 
-    ClassSelector v40 = Css.dot("xl-py-40");
+    ClassSelector v40 = Css.randomDot(5);
 
-    ClassSelector v48 = Css.dot("xl-py-48");
+    ClassSelector v48 = Css.randomDot(5);
 
-    ClassSelector v56 = Css.dot("xl-py-56");
+    ClassSelector v56 = Css.randomDot(5);
 
-    ClassSelector v64 = Css.dot("xl-py-64");
+    ClassSelector v64 = Css.randomDot(5);
 
   }
 

@@ -55,16 +55,15 @@ class MinHeight extends AbstractConfiguration {
   @Override
   protected final void configure() {
     property(
-        FrameworkGroup.SIZING,
-        simpleName("MinHeight"),
-        prefix("min-h"),
-        methods("minHeight"),
-        valueSet(
-            v("0", Zero.INSTANCE),
-            v("full", pct(100)),
-            v("screen", vh(100))
-        ),
-        responsive
+      FrameworkGroup.SIZING,
+      simpleName("MinHeight"),
+      methods("minHeight"),
+      valueSet(
+        v("0", Zero.INSTANCE),
+        v("full", pct(100)),
+        v("screen", vh(100))
+      ),
+      responsive
     );
   }
 

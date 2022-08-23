@@ -54,22 +54,21 @@ class FontWeight extends AbstractConfiguration {
   @Override
   protected final void configure() {
     property(
-        FrameworkGroup.TYPOGRAPHY,
-        simpleName("FontWeight"),
-        prefix("fw"),
-        methods("fontWeight"),
-        valueSet(
-            v("hairline", 100),
-            v("thin", 200),
-            v("light", 300),
-            v("normal", 400),
-            v("medium", 500),
-            v("semibold", 600),
-            v("bold", 700),
-            v("extrabold", 800),
-            v("black", 900)
-        ),
-        responsive
+      FrameworkGroup.TYPOGRAPHY,
+      simpleName("FontWeight"),
+      methods("fontWeight"),
+      valueSet(
+        v("hairline", 100),
+        v("thin", 200),
+        v("light", 300),
+        v("normal", 400),
+        v("medium", 500),
+        v("semibold", 600),
+        v("bold", 700),
+        v("extrabold", 800),
+        v("black", 900)
+      ),
+      responsive
     );
   }
 

@@ -55,18 +55,17 @@ class Position extends AbstractConfiguration {
   @Override
   protected final void configure() {
     property(
-        FrameworkGroup.LAYOUT,
-        simpleName("Position"),
-        prefix(),
-        methods("position"),
-        valueSet(
-            v("static-position", Keywords.staticKw),
-            v("fixed", Keywords.fixed),
-            v("absolute", Keywords.absolute),
-            v("relative", Keywords.relative),
-            v("sticky", Keywords.sticky)
-        ),
-        responsive
+      FrameworkGroup.LAYOUT,
+      simpleName("Position"),
+      methods("position"),
+      valueSet(
+        v("static-position", Keywords.staticKw),
+        v("fixed", Keywords.fixed),
+        v("absolute", Keywords.absolute),
+        v("relative", Keywords.relative),
+        v("sticky", Keywords.sticky)
+      ),
+      responsive
     );
   }
 

@@ -39,10 +39,6 @@ class NamedAtMedia extends AbstractFrameworkObject implements FrameworkAtMedia {
     simpleName = id(JavaNames.toIdentifier(name));
   }
 
-  public final String toClassName(String className) {
-    return name + '-' + className;
-  }
-
   @Override
   final void acceptNamedAtMediaSetAdapter(NamedAtMediaSet.Adapter adapter) {
     adapter.setName(name);

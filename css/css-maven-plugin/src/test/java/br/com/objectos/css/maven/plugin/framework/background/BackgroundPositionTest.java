@@ -30,55 +30,54 @@ public class BackgroundPositionTest extends AbstractCssMavenPluginFrameworkTest 
   @Test
   public void execute() {
     UnmodifiableMap<String, JavaFile> javaFiles = executeProperty(
-        new AbstractConfiguration() {
-          @Override
-          protected final void configure() {
-            packageName("br.com.objectos.css.framework");
+      new AbstractConfiguration() {
+        @Override
+        protected final void configure() {
+          packageName("br.com.objectos.css.framework");
 
-            property(
-                FrameworkGroup.BACKGROUND,
-                simpleName("BackgroundPosition"),
-                prefix("bg"),
-                methods("backgroundPosition"),
-                valueSet(
-                    v("right-top", Keywords.right, Keywords.top),
-                    v("top", Keywords.top)
-                )
-            );
-          }
+          property(
+            FrameworkGroup.BACKGROUND,
+            simpleName("BackgroundPosition"),
+            methods("backgroundPosition"),
+            valueSet(
+              v("right-top", Keywords.right, Keywords.top),
+              v("top", Keywords.top)
+            )
+          );
         }
+      }
     );
     assertEquals(javaFiles.size(), 1);
     testLines(
-        javaFiles.get("BackgroundPosition"),
-        "package br.com.objectos.css.framework.background;",
-        "",
-        "import br.com.objectos.code.annotations.Generated;",
-        "import br.com.objectos.css.Css;",
-        "import br.com.objectos.css.keyword.Keywords;",
-        "import br.com.objectos.css.select.ClassSelector;",
-        "import br.com.objectos.css.sheet.AbstractStyleSheet;",
-        "",
-        "@Generated(\"br.com.objectos.css.maven.plugin.framework.FrameworkMojo\")",
-        "public final class BackgroundPosition extends AbstractStyleSheet {",
-        "",
-        "  public static final ClassSelector rightTop = Css.dot(\"bg-right-top\");",
-        "",
-        "  public static final ClassSelector top = Css.dot(\"bg-top\");",
-        "",
-        "  @Override",
-        "  protected final void definition() {",
-        "    style(",
-        "        rightTop,",
-        "        backgroundPosition(Keywords.right, Keywords.top)",
-        "    );",
-        "    style(",
-        "        top,",
-        "        backgroundPosition(Keywords.top)",
-        "    );",
-        "  }",
-        "",
-        "}"
+      javaFiles.get("BackgroundPosition"),
+      "package br.com.objectos.css.framework.background;",
+      "",
+      "import br.com.objectos.code.annotations.Generated;",
+      "import br.com.objectos.css.Css;",
+      "import br.com.objectos.css.keyword.Keywords;",
+      "import br.com.objectos.css.select.ClassSelector;",
+      "import br.com.objectos.css.sheet.AbstractStyleSheet;",
+      "",
+      "@Generated(\"br.com.objectos.css.maven.plugin.framework.FrameworkMojo\")",
+      "public final class BackgroundPosition extends AbstractStyleSheet {",
+      "",
+      "  public static final ClassSelector rightTop = Css.randomDot(5);",
+      "",
+      "  public static final ClassSelector top = Css.randomDot(5);",
+      "",
+      "  @Override",
+      "  protected final void definition() {",
+      "    style(",
+      "        rightTop,",
+      "        backgroundPosition(Keywords.right, Keywords.top)",
+      "    );",
+      "    style(",
+      "        top,",
+      "        backgroundPosition(Keywords.top)",
+      "    );",
+      "  }",
+      "",
+      "}"
     );
   }
 

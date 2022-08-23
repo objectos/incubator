@@ -24,25 +24,25 @@ import br.com.objectos.css.sheet.AbstractStyleSheet;
 @Generated("br.com.objectos.css.maven.plugin.framework.FrameworkMojo")
 public final class BoxShadow extends AbstractStyleSheet {
 
-  public static final ClassSelector xSmall = Css.dot("shadow-xSmall");
+  public static final ClassSelector xSmall = Css.randomDot(5);
 
-  public static final ClassSelector small = Css.dot("shadow-small");
+  public static final ClassSelector small = Css.randomDot(5);
 
-  public static final ClassSelector standard = Css.dot("shadow-standard");
+  public static final ClassSelector standard = Css.randomDot(5);
 
-  public static final ClassSelector medium = Css.dot("shadow-medium");
+  public static final ClassSelector medium = Css.randomDot(5);
 
-  public static final ClassSelector large = Css.dot("shadow-large");
+  public static final ClassSelector large = Css.randomDot(5);
 
-  public static final ClassSelector xLarge = Css.dot("shadow-xLarge");
+  public static final ClassSelector xLarge = Css.randomDot(5);
 
-  public static final ClassSelector xLarge2 = Css.dot("shadow-xLarge2");
+  public static final ClassSelector xLarge2 = Css.randomDot(5);
 
-  public static final ClassSelector inner = Css.dot("shadow-inner");
+  public static final ClassSelector inner = Css.randomDot(5);
 
-  public static final ClassSelector outline = Css.dot("shadow-outline");
+  public static final ClassSelector outline = Css.randomDot(5);
 
-  public static final ClassSelector none = Css.dot("shadow-none");
+  public static final ClassSelector none = Css.randomDot(5);
 
   @Override
   protected final void definition() {
@@ -362,97 +362,97 @@ public final class BoxShadow extends AbstractStyleSheet {
 
   public interface sm {
 
-    ClassSelector xSmall = Css.dot("sm-shadow-xSmall");
+    ClassSelector xSmall = Css.randomDot(5);
 
-    ClassSelector small = Css.dot("sm-shadow-small");
+    ClassSelector small = Css.randomDot(5);
 
-    ClassSelector standard = Css.dot("sm-shadow-standard");
+    ClassSelector standard = Css.randomDot(5);
 
-    ClassSelector medium = Css.dot("sm-shadow-medium");
+    ClassSelector medium = Css.randomDot(5);
 
-    ClassSelector large = Css.dot("sm-shadow-large");
+    ClassSelector large = Css.randomDot(5);
 
-    ClassSelector xLarge = Css.dot("sm-shadow-xLarge");
+    ClassSelector xLarge = Css.randomDot(5);
 
-    ClassSelector xLarge2 = Css.dot("sm-shadow-xLarge2");
+    ClassSelector xLarge2 = Css.randomDot(5);
 
-    ClassSelector inner = Css.dot("sm-shadow-inner");
+    ClassSelector inner = Css.randomDot(5);
 
-    ClassSelector outline = Css.dot("sm-shadow-outline");
+    ClassSelector outline = Css.randomDot(5);
 
-    ClassSelector none = Css.dot("sm-shadow-none");
+    ClassSelector none = Css.randomDot(5);
 
   }
 
   public interface md {
 
-    ClassSelector xSmall = Css.dot("md-shadow-xSmall");
+    ClassSelector xSmall = Css.randomDot(5);
 
-    ClassSelector small = Css.dot("md-shadow-small");
+    ClassSelector small = Css.randomDot(5);
 
-    ClassSelector standard = Css.dot("md-shadow-standard");
+    ClassSelector standard = Css.randomDot(5);
 
-    ClassSelector medium = Css.dot("md-shadow-medium");
+    ClassSelector medium = Css.randomDot(5);
 
-    ClassSelector large = Css.dot("md-shadow-large");
+    ClassSelector large = Css.randomDot(5);
 
-    ClassSelector xLarge = Css.dot("md-shadow-xLarge");
+    ClassSelector xLarge = Css.randomDot(5);
 
-    ClassSelector xLarge2 = Css.dot("md-shadow-xLarge2");
+    ClassSelector xLarge2 = Css.randomDot(5);
 
-    ClassSelector inner = Css.dot("md-shadow-inner");
+    ClassSelector inner = Css.randomDot(5);
 
-    ClassSelector outline = Css.dot("md-shadow-outline");
+    ClassSelector outline = Css.randomDot(5);
 
-    ClassSelector none = Css.dot("md-shadow-none");
+    ClassSelector none = Css.randomDot(5);
 
   }
 
   public interface lg {
 
-    ClassSelector xSmall = Css.dot("lg-shadow-xSmall");
+    ClassSelector xSmall = Css.randomDot(5);
 
-    ClassSelector small = Css.dot("lg-shadow-small");
+    ClassSelector small = Css.randomDot(5);
 
-    ClassSelector standard = Css.dot("lg-shadow-standard");
+    ClassSelector standard = Css.randomDot(5);
 
-    ClassSelector medium = Css.dot("lg-shadow-medium");
+    ClassSelector medium = Css.randomDot(5);
 
-    ClassSelector large = Css.dot("lg-shadow-large");
+    ClassSelector large = Css.randomDot(5);
 
-    ClassSelector xLarge = Css.dot("lg-shadow-xLarge");
+    ClassSelector xLarge = Css.randomDot(5);
 
-    ClassSelector xLarge2 = Css.dot("lg-shadow-xLarge2");
+    ClassSelector xLarge2 = Css.randomDot(5);
 
-    ClassSelector inner = Css.dot("lg-shadow-inner");
+    ClassSelector inner = Css.randomDot(5);
 
-    ClassSelector outline = Css.dot("lg-shadow-outline");
+    ClassSelector outline = Css.randomDot(5);
 
-    ClassSelector none = Css.dot("lg-shadow-none");
+    ClassSelector none = Css.randomDot(5);
 
   }
 
   public interface xl {
 
-    ClassSelector xSmall = Css.dot("xl-shadow-xSmall");
+    ClassSelector xSmall = Css.randomDot(5);
 
-    ClassSelector small = Css.dot("xl-shadow-small");
+    ClassSelector small = Css.randomDot(5);
 
-    ClassSelector standard = Css.dot("xl-shadow-standard");
+    ClassSelector standard = Css.randomDot(5);
 
-    ClassSelector medium = Css.dot("xl-shadow-medium");
+    ClassSelector medium = Css.randomDot(5);
 
-    ClassSelector large = Css.dot("xl-shadow-large");
+    ClassSelector large = Css.randomDot(5);
 
-    ClassSelector xLarge = Css.dot("xl-shadow-xLarge");
+    ClassSelector xLarge = Css.randomDot(5);
 
-    ClassSelector xLarge2 = Css.dot("xl-shadow-xLarge2");
+    ClassSelector xLarge2 = Css.randomDot(5);
 
-    ClassSelector inner = Css.dot("xl-shadow-inner");
+    ClassSelector inner = Css.randomDot(5);
 
-    ClassSelector outline = Css.dot("xl-shadow-outline");
+    ClassSelector outline = Css.randomDot(5);
 
-    ClassSelector none = Css.dot("xl-shadow-none");
+    ClassSelector none = Css.randomDot(5);
 
   }
 

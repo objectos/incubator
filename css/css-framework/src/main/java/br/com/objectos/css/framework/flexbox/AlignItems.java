@@ -24,15 +24,15 @@ import br.com.objectos.css.sheet.AbstractStyleSheet;
 @Generated("br.com.objectos.css.maven.plugin.framework.FrameworkMojo")
 public final class AlignItems extends AbstractStyleSheet {
 
-  public static final ClassSelector stretch = Css.dot("items-stretch");
+  public static final ClassSelector stretch = Css.randomDot(5);
 
-  public static final ClassSelector start = Css.dot("items-start");
+  public static final ClassSelector start = Css.randomDot(5);
 
-  public static final ClassSelector center = Css.dot("items-center");
+  public static final ClassSelector center = Css.randomDot(5);
 
-  public static final ClassSelector end = Css.dot("items-end");
+  public static final ClassSelector end = Css.randomDot(5);
 
-  public static final ClassSelector baseline = Css.dot("items-baseline");
+  public static final ClassSelector baseline = Css.randomDot(5);
 
   @Override
   protected final void definition() {
@@ -172,57 +172,57 @@ public final class AlignItems extends AbstractStyleSheet {
 
   public interface sm {
 
-    ClassSelector stretch = Css.dot("sm-items-stretch");
+    ClassSelector stretch = Css.randomDot(5);
 
-    ClassSelector start = Css.dot("sm-items-start");
+    ClassSelector start = Css.randomDot(5);
 
-    ClassSelector center = Css.dot("sm-items-center");
+    ClassSelector center = Css.randomDot(5);
 
-    ClassSelector end = Css.dot("sm-items-end");
+    ClassSelector end = Css.randomDot(5);
 
-    ClassSelector baseline = Css.dot("sm-items-baseline");
+    ClassSelector baseline = Css.randomDot(5);
 
   }
 
   public interface md {
 
-    ClassSelector stretch = Css.dot("md-items-stretch");
+    ClassSelector stretch = Css.randomDot(5);
 
-    ClassSelector start = Css.dot("md-items-start");
+    ClassSelector start = Css.randomDot(5);
 
-    ClassSelector center = Css.dot("md-items-center");
+    ClassSelector center = Css.randomDot(5);
 
-    ClassSelector end = Css.dot("md-items-end");
+    ClassSelector end = Css.randomDot(5);
 
-    ClassSelector baseline = Css.dot("md-items-baseline");
+    ClassSelector baseline = Css.randomDot(5);
 
   }
 
   public interface lg {
 
-    ClassSelector stretch = Css.dot("lg-items-stretch");
+    ClassSelector stretch = Css.randomDot(5);
 
-    ClassSelector start = Css.dot("lg-items-start");
+    ClassSelector start = Css.randomDot(5);
 
-    ClassSelector center = Css.dot("lg-items-center");
+    ClassSelector center = Css.randomDot(5);
 
-    ClassSelector end = Css.dot("lg-items-end");
+    ClassSelector end = Css.randomDot(5);
 
-    ClassSelector baseline = Css.dot("lg-items-baseline");
+    ClassSelector baseline = Css.randomDot(5);
 
   }
 
   public interface xl {
 
-    ClassSelector stretch = Css.dot("xl-items-stretch");
+    ClassSelector stretch = Css.randomDot(5);
 
-    ClassSelector start = Css.dot("xl-items-start");
+    ClassSelector start = Css.randomDot(5);
 
-    ClassSelector center = Css.dot("xl-items-center");
+    ClassSelector center = Css.randomDot(5);
 
-    ClassSelector end = Css.dot("xl-items-end");
+    ClassSelector end = Css.randomDot(5);
 
-    ClassSelector baseline = Css.dot("xl-items-baseline");
+    ClassSelector baseline = Css.randomDot(5);
 
   }
 

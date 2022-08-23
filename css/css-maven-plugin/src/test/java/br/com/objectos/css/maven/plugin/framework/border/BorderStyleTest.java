@@ -30,48 +30,47 @@ public class BorderStyleTest extends AbstractCssMavenPluginFrameworkTest {
   @Test
   public void execute() {
     UnmodifiableMap<String, JavaFile> javaFiles = executeProperty(
-        new AbstractConfiguration() {
-          @Override
-          protected final void configure() {
-            packageName("br.com.objectos.css.framework");
+      new AbstractConfiguration() {
+        @Override
+        protected final void configure() {
+          packageName("br.com.objectos.css.framework");
 
-            property(
-                FrameworkGroup.BORDER,
-                simpleName("BorderStyle"),
-                prefix("border"),
-                methods("borderStyle"),
-                valueSet(
-                    v("double", Keywords.doubleKw)
-                )
-            );
-          }
+          property(
+            FrameworkGroup.BORDER,
+            simpleName("BorderStyle"),
+            methods("borderStyle"),
+            valueSet(
+              v("double", Keywords.doubleKw)
+            )
+          );
         }
+      }
     );
     assertEquals(javaFiles.size(), 1);
     testLines(
-        javaFiles.get("BorderStyle"),
-        "package br.com.objectos.css.framework.border;",
-        "",
-        "import br.com.objectos.code.annotations.Generated;",
-        "import br.com.objectos.css.Css;",
-        "import br.com.objectos.css.keyword.Keywords;",
-        "import br.com.objectos.css.select.ClassSelector;",
-        "import br.com.objectos.css.sheet.AbstractStyleSheet;",
-        "",
-        "@Generated(\"br.com.objectos.css.maven.plugin.framework.FrameworkMojo\")",
-        "public final class BorderStyle extends AbstractStyleSheet {",
-        "",
-        "  public static final ClassSelector doubleValue = Css.dot(\"border-double\");",
-        "",
-        "  @Override",
-        "  protected final void definition() {",
-        "    style(",
-        "        doubleValue,",
-        "        borderStyle(Keywords.doubleKw)",
-        "    );",
-        "  }",
-        "",
-        "}"
+      javaFiles.get("BorderStyle"),
+      "package br.com.objectos.css.framework.border;",
+      "",
+      "import br.com.objectos.code.annotations.Generated;",
+      "import br.com.objectos.css.Css;",
+      "import br.com.objectos.css.keyword.Keywords;",
+      "import br.com.objectos.css.select.ClassSelector;",
+      "import br.com.objectos.css.sheet.AbstractStyleSheet;",
+      "",
+      "@Generated(\"br.com.objectos.css.maven.plugin.framework.FrameworkMojo\")",
+      "public final class BorderStyle extends AbstractStyleSheet {",
+      "",
+      "  public static final ClassSelector doubleValue = Css.randomDot(5);",
+      "",
+      "  @Override",
+      "  protected final void definition() {",
+      "    style(",
+      "        doubleValue,",
+      "        borderStyle(Keywords.doubleKw)",
+      "    );",
+      "  }",
+      "",
+      "}"
     );
   }
 }

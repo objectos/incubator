@@ -23,43 +23,43 @@ import br.com.objectos.css.sheet.AbstractStyleSheet;
 @Generated("br.com.objectos.css.maven.plugin.framework.FrameworkMojo")
 public final class Padding extends AbstractStyleSheet {
 
-  public static final ClassSelector px = Css.dot("p-px");
+  public static final ClassSelector px = Css.randomDot(5);
 
-  public static final ClassSelector v0 = Css.dot("p-0");
+  public static final ClassSelector v0 = Css.randomDot(5);
 
-  public static final ClassSelector v1 = Css.dot("p-1");
+  public static final ClassSelector v1 = Css.randomDot(5);
 
-  public static final ClassSelector v2 = Css.dot("p-2");
+  public static final ClassSelector v2 = Css.randomDot(5);
 
-  public static final ClassSelector v3 = Css.dot("p-3");
+  public static final ClassSelector v3 = Css.randomDot(5);
 
-  public static final ClassSelector v4 = Css.dot("p-4");
+  public static final ClassSelector v4 = Css.randomDot(5);
 
-  public static final ClassSelector v5 = Css.dot("p-5");
+  public static final ClassSelector v5 = Css.randomDot(5);
 
-  public static final ClassSelector v6 = Css.dot("p-6");
+  public static final ClassSelector v6 = Css.randomDot(5);
 
-  public static final ClassSelector v8 = Css.dot("p-8");
+  public static final ClassSelector v8 = Css.randomDot(5);
 
-  public static final ClassSelector v10 = Css.dot("p-10");
+  public static final ClassSelector v10 = Css.randomDot(5);
 
-  public static final ClassSelector v12 = Css.dot("p-12");
+  public static final ClassSelector v12 = Css.randomDot(5);
 
-  public static final ClassSelector v16 = Css.dot("p-16");
+  public static final ClassSelector v16 = Css.randomDot(5);
 
-  public static final ClassSelector v20 = Css.dot("p-20");
+  public static final ClassSelector v20 = Css.randomDot(5);
 
-  public static final ClassSelector v24 = Css.dot("p-24");
+  public static final ClassSelector v24 = Css.randomDot(5);
 
-  public static final ClassSelector v32 = Css.dot("p-32");
+  public static final ClassSelector v32 = Css.randomDot(5);
 
-  public static final ClassSelector v40 = Css.dot("p-40");
+  public static final ClassSelector v40 = Css.randomDot(5);
 
-  public static final ClassSelector v48 = Css.dot("p-48");
+  public static final ClassSelector v48 = Css.randomDot(5);
 
-  public static final ClassSelector v56 = Css.dot("p-56");
+  public static final ClassSelector v56 = Css.randomDot(5);
 
-  public static final ClassSelector v64 = Css.dot("p-64");
+  public static final ClassSelector v64 = Css.randomDot(5);
 
   @Override
   protected final void definition() {
@@ -535,169 +535,169 @@ public final class Padding extends AbstractStyleSheet {
 
   public interface sm {
 
-    ClassSelector px = Css.dot("sm-p-px");
+    ClassSelector px = Css.randomDot(5);
 
-    ClassSelector v0 = Css.dot("sm-p-0");
+    ClassSelector v0 = Css.randomDot(5);
 
-    ClassSelector v1 = Css.dot("sm-p-1");
+    ClassSelector v1 = Css.randomDot(5);
 
-    ClassSelector v2 = Css.dot("sm-p-2");
+    ClassSelector v2 = Css.randomDot(5);
 
-    ClassSelector v3 = Css.dot("sm-p-3");
+    ClassSelector v3 = Css.randomDot(5);
 
-    ClassSelector v4 = Css.dot("sm-p-4");
+    ClassSelector v4 = Css.randomDot(5);
 
-    ClassSelector v5 = Css.dot("sm-p-5");
+    ClassSelector v5 = Css.randomDot(5);
 
-    ClassSelector v6 = Css.dot("sm-p-6");
+    ClassSelector v6 = Css.randomDot(5);
 
-    ClassSelector v8 = Css.dot("sm-p-8");
+    ClassSelector v8 = Css.randomDot(5);
 
-    ClassSelector v10 = Css.dot("sm-p-10");
+    ClassSelector v10 = Css.randomDot(5);
 
-    ClassSelector v12 = Css.dot("sm-p-12");
+    ClassSelector v12 = Css.randomDot(5);
 
-    ClassSelector v16 = Css.dot("sm-p-16");
+    ClassSelector v16 = Css.randomDot(5);
 
-    ClassSelector v20 = Css.dot("sm-p-20");
+    ClassSelector v20 = Css.randomDot(5);
 
-    ClassSelector v24 = Css.dot("sm-p-24");
+    ClassSelector v24 = Css.randomDot(5);
 
-    ClassSelector v32 = Css.dot("sm-p-32");
+    ClassSelector v32 = Css.randomDot(5);
 
-    ClassSelector v40 = Css.dot("sm-p-40");
+    ClassSelector v40 = Css.randomDot(5);
 
-    ClassSelector v48 = Css.dot("sm-p-48");
+    ClassSelector v48 = Css.randomDot(5);
 
-    ClassSelector v56 = Css.dot("sm-p-56");
+    ClassSelector v56 = Css.randomDot(5);
 
-    ClassSelector v64 = Css.dot("sm-p-64");
+    ClassSelector v64 = Css.randomDot(5);
 
   }
 
   public interface md {
 
-    ClassSelector px = Css.dot("md-p-px");
+    ClassSelector px = Css.randomDot(5);
 
-    ClassSelector v0 = Css.dot("md-p-0");
+    ClassSelector v0 = Css.randomDot(5);
 
-    ClassSelector v1 = Css.dot("md-p-1");
+    ClassSelector v1 = Css.randomDot(5);
 
-    ClassSelector v2 = Css.dot("md-p-2");
+    ClassSelector v2 = Css.randomDot(5);
 
-    ClassSelector v3 = Css.dot("md-p-3");
+    ClassSelector v3 = Css.randomDot(5);
 
-    ClassSelector v4 = Css.dot("md-p-4");
+    ClassSelector v4 = Css.randomDot(5);
 
-    ClassSelector v5 = Css.dot("md-p-5");
+    ClassSelector v5 = Css.randomDot(5);
 
-    ClassSelector v6 = Css.dot("md-p-6");
+    ClassSelector v6 = Css.randomDot(5);
 
-    ClassSelector v8 = Css.dot("md-p-8");
+    ClassSelector v8 = Css.randomDot(5);
 
-    ClassSelector v10 = Css.dot("md-p-10");
+    ClassSelector v10 = Css.randomDot(5);
 
-    ClassSelector v12 = Css.dot("md-p-12");
+    ClassSelector v12 = Css.randomDot(5);
 
-    ClassSelector v16 = Css.dot("md-p-16");
+    ClassSelector v16 = Css.randomDot(5);
 
-    ClassSelector v20 = Css.dot("md-p-20");
+    ClassSelector v20 = Css.randomDot(5);
 
-    ClassSelector v24 = Css.dot("md-p-24");
+    ClassSelector v24 = Css.randomDot(5);
 
-    ClassSelector v32 = Css.dot("md-p-32");
+    ClassSelector v32 = Css.randomDot(5);
 
-    ClassSelector v40 = Css.dot("md-p-40");
+    ClassSelector v40 = Css.randomDot(5);
 
-    ClassSelector v48 = Css.dot("md-p-48");
+    ClassSelector v48 = Css.randomDot(5);
 
-    ClassSelector v56 = Css.dot("md-p-56");
+    ClassSelector v56 = Css.randomDot(5);
 
-    ClassSelector v64 = Css.dot("md-p-64");
+    ClassSelector v64 = Css.randomDot(5);
 
   }
 
   public interface lg {
 
-    ClassSelector px = Css.dot("lg-p-px");
+    ClassSelector px = Css.randomDot(5);
 
-    ClassSelector v0 = Css.dot("lg-p-0");
+    ClassSelector v0 = Css.randomDot(5);
 
-    ClassSelector v1 = Css.dot("lg-p-1");
+    ClassSelector v1 = Css.randomDot(5);
 
-    ClassSelector v2 = Css.dot("lg-p-2");
+    ClassSelector v2 = Css.randomDot(5);
 
-    ClassSelector v3 = Css.dot("lg-p-3");
+    ClassSelector v3 = Css.randomDot(5);
 
-    ClassSelector v4 = Css.dot("lg-p-4");
+    ClassSelector v4 = Css.randomDot(5);
 
-    ClassSelector v5 = Css.dot("lg-p-5");
+    ClassSelector v5 = Css.randomDot(5);
 
-    ClassSelector v6 = Css.dot("lg-p-6");
+    ClassSelector v6 = Css.randomDot(5);
 
-    ClassSelector v8 = Css.dot("lg-p-8");
+    ClassSelector v8 = Css.randomDot(5);
 
-    ClassSelector v10 = Css.dot("lg-p-10");
+    ClassSelector v10 = Css.randomDot(5);
 
-    ClassSelector v12 = Css.dot("lg-p-12");
+    ClassSelector v12 = Css.randomDot(5);
 
-    ClassSelector v16 = Css.dot("lg-p-16");
+    ClassSelector v16 = Css.randomDot(5);
 
-    ClassSelector v20 = Css.dot("lg-p-20");
+    ClassSelector v20 = Css.randomDot(5);
 
-    ClassSelector v24 = Css.dot("lg-p-24");
+    ClassSelector v24 = Css.randomDot(5);
 
-    ClassSelector v32 = Css.dot("lg-p-32");
+    ClassSelector v32 = Css.randomDot(5);
 
-    ClassSelector v40 = Css.dot("lg-p-40");
+    ClassSelector v40 = Css.randomDot(5);
 
-    ClassSelector v48 = Css.dot("lg-p-48");
+    ClassSelector v48 = Css.randomDot(5);
 
-    ClassSelector v56 = Css.dot("lg-p-56");
+    ClassSelector v56 = Css.randomDot(5);
 
-    ClassSelector v64 = Css.dot("lg-p-64");
+    ClassSelector v64 = Css.randomDot(5);
 
   }
 
   public interface xl {
 
-    ClassSelector px = Css.dot("xl-p-px");
+    ClassSelector px = Css.randomDot(5);
 
-    ClassSelector v0 = Css.dot("xl-p-0");
+    ClassSelector v0 = Css.randomDot(5);
 
-    ClassSelector v1 = Css.dot("xl-p-1");
+    ClassSelector v1 = Css.randomDot(5);
 
-    ClassSelector v2 = Css.dot("xl-p-2");
+    ClassSelector v2 = Css.randomDot(5);
 
-    ClassSelector v3 = Css.dot("xl-p-3");
+    ClassSelector v3 = Css.randomDot(5);
 
-    ClassSelector v4 = Css.dot("xl-p-4");
+    ClassSelector v4 = Css.randomDot(5);
 
-    ClassSelector v5 = Css.dot("xl-p-5");
+    ClassSelector v5 = Css.randomDot(5);
 
-    ClassSelector v6 = Css.dot("xl-p-6");
+    ClassSelector v6 = Css.randomDot(5);
 
-    ClassSelector v8 = Css.dot("xl-p-8");
+    ClassSelector v8 = Css.randomDot(5);
 
-    ClassSelector v10 = Css.dot("xl-p-10");
+    ClassSelector v10 = Css.randomDot(5);
 
-    ClassSelector v12 = Css.dot("xl-p-12");
+    ClassSelector v12 = Css.randomDot(5);
 
-    ClassSelector v16 = Css.dot("xl-p-16");
+    ClassSelector v16 = Css.randomDot(5);
 
-    ClassSelector v20 = Css.dot("xl-p-20");
+    ClassSelector v20 = Css.randomDot(5);
 
-    ClassSelector v24 = Css.dot("xl-p-24");
+    ClassSelector v24 = Css.randomDot(5);
 
-    ClassSelector v32 = Css.dot("xl-p-32");
+    ClassSelector v32 = Css.randomDot(5);
 
-    ClassSelector v40 = Css.dot("xl-p-40");
+    ClassSelector v40 = Css.randomDot(5);
 
-    ClassSelector v48 = Css.dot("xl-p-48");
+    ClassSelector v48 = Css.randomDot(5);
 
-    ClassSelector v56 = Css.dot("xl-p-56");
+    ClassSelector v56 = Css.randomDot(5);
 
-    ClassSelector v64 = Css.dot("xl-p-64");
+    ClassSelector v64 = Css.randomDot(5);
 
   }
 

@@ -24,15 +24,15 @@ import br.com.objectos.css.sheet.AbstractStyleSheet;
 @Generated("br.com.objectos.css.maven.plugin.framework.FrameworkMojo")
 public final class AlignSelf extends AbstractStyleSheet {
 
-  public static final ClassSelector auto = Css.dot("self-auto");
+  public static final ClassSelector auto = Css.randomDot(5);
 
-  public static final ClassSelector start = Css.dot("self-start");
+  public static final ClassSelector start = Css.randomDot(5);
 
-  public static final ClassSelector center = Css.dot("self-center");
+  public static final ClassSelector center = Css.randomDot(5);
 
-  public static final ClassSelector end = Css.dot("self-end");
+  public static final ClassSelector end = Css.randomDot(5);
 
-  public static final ClassSelector stretch = Css.dot("self-stretch");
+  public static final ClassSelector stretch = Css.randomDot(5);
 
   @Override
   protected final void definition() {
@@ -172,57 +172,57 @@ public final class AlignSelf extends AbstractStyleSheet {
 
   public interface sm {
 
-    ClassSelector auto = Css.dot("sm-self-auto");
+    ClassSelector auto = Css.randomDot(5);
 
-    ClassSelector start = Css.dot("sm-self-start");
+    ClassSelector start = Css.randomDot(5);
 
-    ClassSelector center = Css.dot("sm-self-center");
+    ClassSelector center = Css.randomDot(5);
 
-    ClassSelector end = Css.dot("sm-self-end");
+    ClassSelector end = Css.randomDot(5);
 
-    ClassSelector stretch = Css.dot("sm-self-stretch");
+    ClassSelector stretch = Css.randomDot(5);
 
   }
 
   public interface md {
 
-    ClassSelector auto = Css.dot("md-self-auto");
+    ClassSelector auto = Css.randomDot(5);
 
-    ClassSelector start = Css.dot("md-self-start");
+    ClassSelector start = Css.randomDot(5);
 
-    ClassSelector center = Css.dot("md-self-center");
+    ClassSelector center = Css.randomDot(5);
 
-    ClassSelector end = Css.dot("md-self-end");
+    ClassSelector end = Css.randomDot(5);
 
-    ClassSelector stretch = Css.dot("md-self-stretch");
+    ClassSelector stretch = Css.randomDot(5);
 
   }
 
   public interface lg {
 
-    ClassSelector auto = Css.dot("lg-self-auto");
+    ClassSelector auto = Css.randomDot(5);
 
-    ClassSelector start = Css.dot("lg-self-start");
+    ClassSelector start = Css.randomDot(5);
 
-    ClassSelector center = Css.dot("lg-self-center");
+    ClassSelector center = Css.randomDot(5);
 
-    ClassSelector end = Css.dot("lg-self-end");
+    ClassSelector end = Css.randomDot(5);
 
-    ClassSelector stretch = Css.dot("lg-self-stretch");
+    ClassSelector stretch = Css.randomDot(5);
 
   }
 
   public interface xl {
 
-    ClassSelector auto = Css.dot("xl-self-auto");
+    ClassSelector auto = Css.randomDot(5);
 
-    ClassSelector start = Css.dot("xl-self-start");
+    ClassSelector start = Css.randomDot(5);
 
-    ClassSelector center = Css.dot("xl-self-center");
+    ClassSelector center = Css.randomDot(5);
 
-    ClassSelector end = Css.dot("xl-self-end");
+    ClassSelector end = Css.randomDot(5);
 
-    ClassSelector stretch = Css.dot("xl-self-stretch");
+    ClassSelector stretch = Css.randomDot(5);
 
   }
 

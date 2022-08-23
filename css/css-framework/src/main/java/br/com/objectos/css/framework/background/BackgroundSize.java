@@ -24,11 +24,11 @@ import br.com.objectos.css.sheet.AbstractStyleSheet;
 @Generated("br.com.objectos.css.maven.plugin.framework.FrameworkMojo")
 public final class BackgroundSize extends AbstractStyleSheet {
 
-  public static final ClassSelector auto = Css.dot("bg-auto");
+  public static final ClassSelector auto = Css.randomDot(5);
 
-  public static final ClassSelector cover = Css.dot("bg-cover");
+  public static final ClassSelector cover = Css.randomDot(5);
 
-  public static final ClassSelector contain = Css.dot("bg-contain");
+  public static final ClassSelector contain = Css.randomDot(5);
 
   @Override
   protected final void definition() {
@@ -120,41 +120,41 @@ public final class BackgroundSize extends AbstractStyleSheet {
 
   public interface sm {
 
-    ClassSelector auto = Css.dot("sm-bg-auto");
+    ClassSelector auto = Css.randomDot(5);
 
-    ClassSelector cover = Css.dot("sm-bg-cover");
+    ClassSelector cover = Css.randomDot(5);
 
-    ClassSelector contain = Css.dot("sm-bg-contain");
+    ClassSelector contain = Css.randomDot(5);
 
   }
 
   public interface md {
 
-    ClassSelector auto = Css.dot("md-bg-auto");
+    ClassSelector auto = Css.randomDot(5);
 
-    ClassSelector cover = Css.dot("md-bg-cover");
+    ClassSelector cover = Css.randomDot(5);
 
-    ClassSelector contain = Css.dot("md-bg-contain");
+    ClassSelector contain = Css.randomDot(5);
 
   }
 
   public interface lg {
 
-    ClassSelector auto = Css.dot("lg-bg-auto");
+    ClassSelector auto = Css.randomDot(5);
 
-    ClassSelector cover = Css.dot("lg-bg-cover");
+    ClassSelector cover = Css.randomDot(5);
 
-    ClassSelector contain = Css.dot("lg-bg-contain");
+    ClassSelector contain = Css.randomDot(5);
 
   }
 
   public interface xl {
 
-    ClassSelector auto = Css.dot("xl-bg-auto");
+    ClassSelector auto = Css.randomDot(5);
 
-    ClassSelector cover = Css.dot("xl-bg-cover");
+    ClassSelector cover = Css.randomDot(5);
 
-    ClassSelector contain = Css.dot("xl-bg-contain");
+    ClassSelector contain = Css.randomDot(5);
 
   }
 

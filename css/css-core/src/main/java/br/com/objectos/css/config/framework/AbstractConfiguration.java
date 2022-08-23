@@ -24,7 +24,6 @@ import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkGroup;
 import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkMethodSet;
 import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkNamedValue;
 import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkNamedValueSet;
-import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkPrefix;
 import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkSimpleName;
 import br.com.objectos.css.property.StandardPropertyName;
 import br.com.objectos.css.type.Color;
@@ -99,31 +98,21 @@ public abstract class AbstractConfiguration implements Configuration {
     return dsl.getPercentage(value);
   }
 
-  protected final FrameworkPrefix prefix() {
-    return dsl.getPrefix();
-  }
-
-  protected final FrameworkPrefix prefix(String prefix) {
-    return dsl.getPrefix(prefix);
-  }
-
   protected final void property(
       FrameworkGroup group,
       FrameworkSimpleName simpleName,
-      FrameworkPrefix prefix,
       FrameworkMethodSet methods,
       FrameworkNamedValueSet values) {
-    property(group, simpleName, prefix, methods, values, mediaSet());
+    property(group, simpleName, methods, values, mediaSet());
   }
 
   protected final void property(
       FrameworkGroup group,
       FrameworkSimpleName simpleName,
-      FrameworkPrefix prefix,
       FrameworkMethodSet methods,
       FrameworkNamedValueSet values,
       FrameworkAtMediaSet queries) {
-    dsl.defineProperty(group, simpleName, prefix, methods, values, queries);
+    dsl.defineProperty(group, simpleName, methods, values, queries);
   }
 
   protected final Value px(int value) {

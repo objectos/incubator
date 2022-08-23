@@ -59,17 +59,16 @@ class Flex extends AbstractConfiguration {
     Value one = l(1);
 
     property(
-        FrameworkGroup.FLEXBOX,
-        simpleName("Flex"),
-        prefix("flex"),
-        methods("flex"),
-        valueSet(
-            v("initial", zero, one, Keywords.auto),
-            v("one", one, one, pct(0)),
-            v("auto", one, one, Keywords.auto),
-            v("none", Keywords.none)
-        ),
-        responsive
+      FrameworkGroup.FLEXBOX,
+      simpleName("Flex"),
+      methods("flex"),
+      valueSet(
+        v("initial", zero, one, Keywords.auto),
+        v("one", one, one, pct(0)),
+        v("auto", one, one, Keywords.auto),
+        v("none", Keywords.none)
+      ),
+      responsive
     );
   }
 

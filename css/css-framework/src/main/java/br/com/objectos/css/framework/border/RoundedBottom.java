@@ -23,17 +23,17 @@ import br.com.objectos.css.sheet.AbstractStyleSheet;
 @Generated("br.com.objectos.css.maven.plugin.framework.FrameworkMojo")
 public final class RoundedBottom extends AbstractStyleSheet {
 
-  public static final ClassSelector none = Css.dot("rounded-b-none");
+  public static final ClassSelector none = Css.randomDot(5);
 
-  public static final ClassSelector small = Css.dot("rounded-b-small");
+  public static final ClassSelector small = Css.randomDot(5);
 
-  public static final ClassSelector standard = Css.dot("rounded-b-standard");
+  public static final ClassSelector standard = Css.randomDot(5);
 
-  public static final ClassSelector medium = Css.dot("rounded-b-medium");
+  public static final ClassSelector medium = Css.randomDot(5);
 
-  public static final ClassSelector large = Css.dot("rounded-b-large");
+  public static final ClassSelector large = Css.randomDot(5);
 
-  public static final ClassSelector full = Css.dot("rounded-b-full");
+  public static final ClassSelector full = Css.randomDot(5);
 
   @Override
   protected final void definition() {
@@ -227,65 +227,65 @@ public final class RoundedBottom extends AbstractStyleSheet {
 
   public interface sm {
 
-    ClassSelector none = Css.dot("sm-rounded-b-none");
+    ClassSelector none = Css.randomDot(5);
 
-    ClassSelector small = Css.dot("sm-rounded-b-small");
+    ClassSelector small = Css.randomDot(5);
 
-    ClassSelector standard = Css.dot("sm-rounded-b-standard");
+    ClassSelector standard = Css.randomDot(5);
 
-    ClassSelector medium = Css.dot("sm-rounded-b-medium");
+    ClassSelector medium = Css.randomDot(5);
 
-    ClassSelector large = Css.dot("sm-rounded-b-large");
+    ClassSelector large = Css.randomDot(5);
 
-    ClassSelector full = Css.dot("sm-rounded-b-full");
+    ClassSelector full = Css.randomDot(5);
 
   }
 
   public interface md {
 
-    ClassSelector none = Css.dot("md-rounded-b-none");
+    ClassSelector none = Css.randomDot(5);
 
-    ClassSelector small = Css.dot("md-rounded-b-small");
+    ClassSelector small = Css.randomDot(5);
 
-    ClassSelector standard = Css.dot("md-rounded-b-standard");
+    ClassSelector standard = Css.randomDot(5);
 
-    ClassSelector medium = Css.dot("md-rounded-b-medium");
+    ClassSelector medium = Css.randomDot(5);
 
-    ClassSelector large = Css.dot("md-rounded-b-large");
+    ClassSelector large = Css.randomDot(5);
 
-    ClassSelector full = Css.dot("md-rounded-b-full");
+    ClassSelector full = Css.randomDot(5);
 
   }
 
   public interface lg {
 
-    ClassSelector none = Css.dot("lg-rounded-b-none");
+    ClassSelector none = Css.randomDot(5);
 
-    ClassSelector small = Css.dot("lg-rounded-b-small");
+    ClassSelector small = Css.randomDot(5);
 
-    ClassSelector standard = Css.dot("lg-rounded-b-standard");
+    ClassSelector standard = Css.randomDot(5);
 
-    ClassSelector medium = Css.dot("lg-rounded-b-medium");
+    ClassSelector medium = Css.randomDot(5);
 
-    ClassSelector large = Css.dot("lg-rounded-b-large");
+    ClassSelector large = Css.randomDot(5);
 
-    ClassSelector full = Css.dot("lg-rounded-b-full");
+    ClassSelector full = Css.randomDot(5);
 
   }
 
   public interface xl {
 
-    ClassSelector none = Css.dot("xl-rounded-b-none");
+    ClassSelector none = Css.randomDot(5);
 
-    ClassSelector small = Css.dot("xl-rounded-b-small");
+    ClassSelector small = Css.randomDot(5);
 
-    ClassSelector standard = Css.dot("xl-rounded-b-standard");
+    ClassSelector standard = Css.randomDot(5);
 
-    ClassSelector medium = Css.dot("xl-rounded-b-medium");
+    ClassSelector medium = Css.randomDot(5);
 
-    ClassSelector large = Css.dot("xl-rounded-b-large");
+    ClassSelector large = Css.randomDot(5);
 
-    ClassSelector full = Css.dot("xl-rounded-b-full");
+    ClassSelector full = Css.randomDot(5);
 
   }
 

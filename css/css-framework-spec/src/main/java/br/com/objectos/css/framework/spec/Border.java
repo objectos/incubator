@@ -59,80 +59,73 @@ class Border extends AbstractConfiguration {
   @Override
   protected final void configure() {
     property(
-        FrameworkGroup.BORDER,
-        simpleName("BorderColor"),
-        prefix("border"),
-        methods("borderColor"),
-        colors,
-        responsive
+      FrameworkGroup.BORDER,
+      simpleName("BorderColor"),
+      methods("borderColor"),
+      colors,
+      responsive
     );
 
     property(
-        FrameworkGroup.BORDER,
-        simpleName("BorderStyle"),
-        prefix("border"),
-        methods("borderStyle"),
-        valueSet(
-            v("solid", Keywords.solid),
-            v("dashed", Keywords.dashed),
-            v("dotted", Keywords.dotted),
-            v("double", Keywords.doubleKw),
-            v("none", Keywords.none)
-        ),
-        responsive
+      FrameworkGroup.BORDER,
+      simpleName("BorderStyle"),
+      methods("borderStyle"),
+      valueSet(
+        v("solid", Keywords.solid),
+        v("dashed", Keywords.dashed),
+        v("dotted", Keywords.dotted),
+        v("double", Keywords.doubleKw),
+        v("none", Keywords.none)
+      ),
+      responsive
     );
 
     FrameworkNamedValueSet width = valueSet(
-        v("0", Zero.INSTANCE),
-        v("1", px(1)),
-        v("2", px(2)),
-        v("4", px(4)),
-        v("8", px(8))
+      v("0", Zero.INSTANCE),
+      v("1", px(1)),
+      v("2", px(2)),
+      v("4", px(4)),
+      v("8", px(8))
     );
 
     property(
-        FrameworkGroup.BORDER,
-        simpleName("Border"),
-        prefix("border"),
-        methods("borderWidth"),
-        width,
-        responsive
+      FrameworkGroup.BORDER,
+      simpleName("Border"),
+      methods("borderWidth"),
+      width,
+      responsive
     );
 
     property(
-        FrameworkGroup.BORDER,
-        simpleName("BorderTop"),
-        prefix("border-t"),
-        methods("borderTopWidth"),
-        width,
-        responsive
+      FrameworkGroup.BORDER,
+      simpleName("BorderTop"),
+      methods("borderTopWidth"),
+      width,
+      responsive
     );
 
     property(
-        FrameworkGroup.BORDER,
-        simpleName("BorderRight"),
-        prefix("border-r"),
-        methods("borderRightWidth"),
-        width,
-        responsive
+      FrameworkGroup.BORDER,
+      simpleName("BorderRight"),
+      methods("borderRightWidth"),
+      width,
+      responsive
     );
 
     property(
-        FrameworkGroup.BORDER,
-        simpleName("BorderBottom"),
-        prefix("border-b"),
-        methods("borderBottomWidth"),
-        width,
-        responsive
+      FrameworkGroup.BORDER,
+      simpleName("BorderBottom"),
+      methods("borderBottomWidth"),
+      width,
+      responsive
     );
 
     property(
-        FrameworkGroup.BORDER,
-        simpleName("BorderLeft"),
-        prefix("border-l"),
-        methods("borderLeftWidth"),
-        width,
-        responsive
+      FrameworkGroup.BORDER,
+      simpleName("BorderLeft"),
+      methods("borderLeftWidth"),
+      width,
+      responsive
     );
   }
 

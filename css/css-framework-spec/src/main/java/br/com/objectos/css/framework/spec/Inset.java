@@ -57,71 +57,64 @@ class Inset extends AbstractConfiguration {
   @Override
   protected final void configure() {
     FrameworkNamedValueSet inset = valueSet(
-        v("0", Zero.INSTANCE),
-        v("auto", Keywords.auto)
+      v("0", Zero.INSTANCE),
+      v("auto", Keywords.auto)
     );
 
     property(
-        FrameworkGroup.LAYOUT,
-        simpleName("Inset"),
-        prefix("inset"),
-        methods("top", "right", "bottom", "left"),
-        inset,
-        responsive
+      FrameworkGroup.LAYOUT,
+      simpleName("Inset"),
+      methods("top", "right", "bottom", "left"),
+      inset,
+      responsive
     );
 
     property(
-        FrameworkGroup.LAYOUT,
-        simpleName("InsetX"),
-        prefix("inset-x"),
-        methods("right", "left"),
-        inset,
-        responsive
+      FrameworkGroup.LAYOUT,
+      simpleName("InsetX"),
+      methods("right", "left"),
+      inset,
+      responsive
     );
 
     property(
-        FrameworkGroup.LAYOUT,
-        simpleName("InsetY"),
-        prefix("inset-y"),
-        methods("top", "bottom"),
-        inset,
-        responsive
+      FrameworkGroup.LAYOUT,
+      simpleName("InsetY"),
+      methods("top", "bottom"),
+      inset,
+      responsive
     );
 
     property(
-        FrameworkGroup.LAYOUT,
-        simpleName("Top"),
-        prefix("top"),
-        methods("top"),
-        inset,
-        responsive
+      FrameworkGroup.LAYOUT,
+      simpleName("Top"),
+      methods("top"),
+      inset,
+      responsive
     );
 
     property(
-        FrameworkGroup.LAYOUT,
-        simpleName("Right"),
-        prefix("right"),
-        methods("right"),
-        inset,
-        responsive
+      FrameworkGroup.LAYOUT,
+      simpleName("Right"),
+      methods("right"),
+      inset,
+      responsive
     );
 
     property(
-        FrameworkGroup.LAYOUT,
-        simpleName("Bottom"),
-        prefix("bottom"),
-        methods("bottom"),
-        inset,
-        responsive
+      FrameworkGroup.LAYOUT,
+      simpleName("Bottom"),
+      methods("bottom"),
+      inset,
+      responsive
     );
 
     property(
-        FrameworkGroup.LAYOUT,
-        simpleName("Left"),
-        prefix("left"),
-        methods("left"),
-        inset,
-        responsive
+      FrameworkGroup.LAYOUT,
+      simpleName("Left"),
+      methods("left"),
+      inset,
+      responsive
     );
   }
 

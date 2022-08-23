@@ -24,13 +24,13 @@ import br.com.objectos.css.sheet.AbstractStyleSheet;
 @Generated("br.com.objectos.css.maven.plugin.framework.FrameworkMojo")
 public final class TextAlign extends AbstractStyleSheet {
 
-  public static final ClassSelector left = Css.dot("text-left");
+  public static final ClassSelector left = Css.randomDot(5);
 
-  public static final ClassSelector center = Css.dot("text-center");
+  public static final ClassSelector center = Css.randomDot(5);
 
-  public static final ClassSelector right = Css.dot("text-right");
+  public static final ClassSelector right = Css.randomDot(5);
 
-  public static final ClassSelector justify = Css.dot("text-justify");
+  public static final ClassSelector justify = Css.randomDot(5);
 
   @Override
   protected final void definition() {
@@ -146,49 +146,49 @@ public final class TextAlign extends AbstractStyleSheet {
 
   public interface sm {
 
-    ClassSelector left = Css.dot("sm-text-left");
+    ClassSelector left = Css.randomDot(5);
 
-    ClassSelector center = Css.dot("sm-text-center");
+    ClassSelector center = Css.randomDot(5);
 
-    ClassSelector right = Css.dot("sm-text-right");
+    ClassSelector right = Css.randomDot(5);
 
-    ClassSelector justify = Css.dot("sm-text-justify");
+    ClassSelector justify = Css.randomDot(5);
 
   }
 
   public interface md {
 
-    ClassSelector left = Css.dot("md-text-left");
+    ClassSelector left = Css.randomDot(5);
 
-    ClassSelector center = Css.dot("md-text-center");
+    ClassSelector center = Css.randomDot(5);
 
-    ClassSelector right = Css.dot("md-text-right");
+    ClassSelector right = Css.randomDot(5);
 
-    ClassSelector justify = Css.dot("md-text-justify");
+    ClassSelector justify = Css.randomDot(5);
 
   }
 
   public interface lg {
 
-    ClassSelector left = Css.dot("lg-text-left");
+    ClassSelector left = Css.randomDot(5);
 
-    ClassSelector center = Css.dot("lg-text-center");
+    ClassSelector center = Css.randomDot(5);
 
-    ClassSelector right = Css.dot("lg-text-right");
+    ClassSelector right = Css.randomDot(5);
 
-    ClassSelector justify = Css.dot("lg-text-justify");
+    ClassSelector justify = Css.randomDot(5);
 
   }
 
   public interface xl {
 
-    ClassSelector left = Css.dot("xl-text-left");
+    ClassSelector left = Css.randomDot(5);
 
-    ClassSelector center = Css.dot("xl-text-center");
+    ClassSelector center = Css.randomDot(5);
 
-    ClassSelector right = Css.dot("xl-text-right");
+    ClassSelector right = Css.randomDot(5);
 
-    ClassSelector justify = Css.dot("xl-text-justify");
+    ClassSelector justify = Css.randomDot(5);
 
   }
 

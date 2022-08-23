@@ -31,63 +31,62 @@ public class BoxShadowTest extends AbstractCssMavenPluginFrameworkTest {
   public void execute() {
     UnmodifiableMap<String, JavaFile> javaFiles;
     javaFiles = executeProperty(
-        new AbstractConfiguration() {
-          @Override
-          protected final void configure() {
-            packageName("br.com.objectos.css.framework");
+      new AbstractConfiguration() {
+        @Override
+        protected final void configure() {
+          packageName("br.com.objectos.css.framework");
 
-            property(
-                FrameworkGroup.EFFECTS,
-                simpleName("BoxShadow"),
-                prefix("shadow"),
-                methods("boxShadow"),
-                valueSet(
-                    v("standard",
-                        multi(_0, px(1), px(3), _0, rgba(0, 0, 0, 0.1)),
-                        multi(_0, px(1), px(2), _0, rgba(0, 0, 0, 0.06))
-                    ),
-                    v("none", Keywords.none)
-                )
-            );
-          }
+          property(
+            FrameworkGroup.EFFECTS,
+            simpleName("BoxShadow"),
+            methods("boxShadow"),
+            valueSet(
+              v("standard",
+                multi(_0, px(1), px(3), _0, rgba(0, 0, 0, 0.1)),
+                multi(_0, px(1), px(2), _0, rgba(0, 0, 0, 0.06))
+              ),
+              v("none", Keywords.none)
+            )
+          );
         }
+      }
     );
 
     assertEquals(javaFiles.size(), 1);
 
     testLines(
-        javaFiles.get("BoxShadow"),
-        "package br.com.objectos.css.framework.effects;",
-        "",
-        "import br.com.objectos.code.annotations.Generated;",
-        "import br.com.objectos.css.Css;",
-        "import br.com.objectos.css.keyword.Keywords;",
-        "import br.com.objectos.css.select.ClassSelector;",
-        "import br.com.objectos.css.sheet.AbstractStyleSheet;",
-        "",
-        "@Generated(\"br.com.objectos.css.maven.plugin.framework.FrameworkMojo\")",
-        "public final class BoxShadow extends AbstractStyleSheet {",
-        "",
-        "  public static final ClassSelector standard = Css.dot(\"shadow-standard\");",
-        "",
-        "  public static final ClassSelector none = Css.dot(\"shadow-none\");",
-        "",
-        "  @Override",
-        "  protected final void definition() {",
-        "    style(",
-        "        standard,",
-        "        boxShadow(",
-        "            boxShadow(zero(), px(1), px(3), zero(), rgba(0, 0, 0, 0.1)),",
-        "            boxShadow(zero(), px(1), px(2), zero(), rgba(0, 0, 0, 0.06))",
-        "        )",
-        "    );",
-        "    style(",
-        "        none,",
-        "        boxShadow(Keywords.none)",
-        "    );",
-        "  }",
-        "",
-        "}"
+      javaFiles.get("BoxShadow"),
+      "package br.com.objectos.css.framework.effects;",
+      "",
+      "import br.com.objectos.code.annotations.Generated;",
+      "import br.com.objectos.css.Css;",
+      "import br.com.objectos.css.keyword.Keywords;",
+      "import br.com.objectos.css.select.ClassSelector;",
+      "import br.com.objectos.css.sheet.AbstractStyleSheet;",
+      "",
+      "@Generated(\"br.com.objectos.css.maven.plugin.framework.FrameworkMojo\")",
+      "public final class BoxShadow extends AbstractStyleSheet {",
+      "",
+      "  public static final ClassSelector standard = Css.randomDot(5);",
+      "",
+      "  public static final ClassSelector none = Css.randomDot(5);",
+      "",
+      "  @Override",
+      "  protected final void definition() {",
+      "    style(",
+      "        standard,",
+      "        boxShadow(",
+      "            boxShadow(zero(), px(1), px(3), zero(), rgba(0, 0, 0, 0.1)),",
+      "            boxShadow(zero(), px(1), px(2), zero(), rgba(0, 0, 0, 0.06))",
+      "        )",
+      "    );",
+      "    style(",
+      "        none,",
+      "        boxShadow(Keywords.none)",
+      "    );",
+      "  }",
+      "",
+      "}"
     );
   }
 }

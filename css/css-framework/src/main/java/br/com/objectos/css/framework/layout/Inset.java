@@ -24,9 +24,9 @@ import br.com.objectos.css.sheet.AbstractStyleSheet;
 @Generated("br.com.objectos.css.maven.plugin.framework.FrameworkMojo")
 public final class Inset extends AbstractStyleSheet {
 
-  public static final ClassSelector v0 = Css.dot("inset-0");
+  public static final ClassSelector v0 = Css.randomDot(5);
 
-  public static final ClassSelector auto = Css.dot("inset-auto");
+  public static final ClassSelector auto = Css.randomDot(5);
 
   @Override
   protected final void definition() {
@@ -124,33 +124,33 @@ public final class Inset extends AbstractStyleSheet {
 
   public interface sm {
 
-    ClassSelector v0 = Css.dot("sm-inset-0");
+    ClassSelector v0 = Css.randomDot(5);
 
-    ClassSelector auto = Css.dot("sm-inset-auto");
+    ClassSelector auto = Css.randomDot(5);
 
   }
 
   public interface md {
 
-    ClassSelector v0 = Css.dot("md-inset-0");
+    ClassSelector v0 = Css.randomDot(5);
 
-    ClassSelector auto = Css.dot("md-inset-auto");
+    ClassSelector auto = Css.randomDot(5);
 
   }
 
   public interface lg {
 
-    ClassSelector v0 = Css.dot("lg-inset-0");
+    ClassSelector v0 = Css.randomDot(5);
 
-    ClassSelector auto = Css.dot("lg-inset-auto");
+    ClassSelector auto = Css.randomDot(5);
 
   }
 
   public interface xl {
 
-    ClassSelector v0 = Css.dot("xl-inset-0");
+    ClassSelector v0 = Css.randomDot(5);
 
-    ClassSelector auto = Css.dot("xl-inset-auto");
+    ClassSelector auto = Css.randomDot(5);
 
   }
 

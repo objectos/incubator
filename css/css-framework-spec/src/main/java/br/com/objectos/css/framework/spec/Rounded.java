@@ -56,105 +56,96 @@ class Rounded extends AbstractConfiguration {
   @Override
   protected final void configure() {
     FrameworkNamedValueSet radius = valueSet(
-        v("none", Zero.INSTANCE),
-        v("small", em(0.125)),
-        v("standard", em(0.25)),
-        v("medium", em(0.375)),
-        v("large", em(0.5)),
-        v("full", px(9999))
+      v("none", Zero.INSTANCE),
+      v("small", em(0.125)),
+      v("standard", em(0.25)),
+      v("medium", em(0.375)),
+      v("large", em(0.5)),
+      v("full", px(9999))
     );
 
     property(
-        FrameworkGroup.BORDER,
-        simpleName("Rounded"),
-        prefix("rounded"),
-        methods("borderRadius"),
-        radius,
-        responsive
+      FrameworkGroup.BORDER,
+      simpleName("Rounded"),
+      methods("borderRadius"),
+      radius,
+      responsive
     );
 
     property(
-        FrameworkGroup.BORDER,
-        simpleName("RoundedTop"),
-        prefix("rounded-t"),
-        methods(
-            "borderTopLeftRadius",
-            "borderTopRightRadius"
-        ),
-        radius,
-        responsive
+      FrameworkGroup.BORDER,
+      simpleName("RoundedTop"),
+      methods(
+        "borderTopLeftRadius",
+        "borderTopRightRadius"
+      ),
+      radius,
+      responsive
     );
 
     property(
-        FrameworkGroup.BORDER,
-        simpleName("RoundedRight"),
-        prefix("rounded-r"),
-        methods(
-            "borderTopRightRadius",
-            "borderBottomRightRadius"
-        ),
-        radius,
-        responsive
+      FrameworkGroup.BORDER,
+      simpleName("RoundedRight"),
+      methods(
+        "borderTopRightRadius",
+        "borderBottomRightRadius"
+      ),
+      radius,
+      responsive
     );
 
     property(
-        FrameworkGroup.BORDER,
-        simpleName("RoundedBottom"),
-        prefix("rounded-b"),
-        methods(
-            "borderBottomLeftRadius",
-            "borderBottomRightRadius"
-        ),
-        radius,
-        responsive
+      FrameworkGroup.BORDER,
+      simpleName("RoundedBottom"),
+      methods(
+        "borderBottomLeftRadius",
+        "borderBottomRightRadius"
+      ),
+      radius,
+      responsive
     );
 
     property(
-        FrameworkGroup.BORDER,
-        simpleName("RoundedLeft"),
-        prefix("rounded-l"),
-        methods(
-            "borderTopLeftRadius",
-            "borderBottomLeftRadius"
-        ),
-        radius,
-        responsive
+      FrameworkGroup.BORDER,
+      simpleName("RoundedLeft"),
+      methods(
+        "borderTopLeftRadius",
+        "borderBottomLeftRadius"
+      ),
+      radius,
+      responsive
     );
 
     property(
-        FrameworkGroup.BORDER,
-        simpleName("RoundedTopLeft"),
-        prefix("rounded-tl"),
-        methods("borderTopLeftRadius"),
-        radius,
-        responsive
+      FrameworkGroup.BORDER,
+      simpleName("RoundedTopLeft"),
+      methods("borderTopLeftRadius"),
+      radius,
+      responsive
     );
 
     property(
-        FrameworkGroup.BORDER,
-        simpleName("RoundedTopRight"),
-        prefix("rounded-tr"),
-        methods("borderTopRightRadius"),
-        radius,
-        responsive
+      FrameworkGroup.BORDER,
+      simpleName("RoundedTopRight"),
+      methods("borderTopRightRadius"),
+      radius,
+      responsive
     );
 
     property(
-        FrameworkGroup.BORDER,
-        simpleName("RoundedBottomRight"),
-        prefix("rounded-br"),
-        methods("borderBottomRightRadius"),
-        radius,
-        responsive
+      FrameworkGroup.BORDER,
+      simpleName("RoundedBottomRight"),
+      methods("borderBottomRightRadius"),
+      radius,
+      responsive
     );
 
     property(
-        FrameworkGroup.BORDER,
-        simpleName("RoundedBottomLeft"),
-        prefix("rounded-bl"),
-        methods("borderBottomLeftRadius"),
-        radius,
-        responsive
+      FrameworkGroup.BORDER,
+      simpleName("RoundedBottomLeft"),
+      methods("borderBottomLeftRadius"),
+      radius,
+      responsive
     );
   }
 

@@ -24,13 +24,13 @@ import br.com.objectos.css.sheet.AbstractStyleSheet;
 @Generated("br.com.objectos.css.maven.plugin.framework.FrameworkMojo")
 public final class TextDecoration extends AbstractStyleSheet {
 
-  public static final ClassSelector underline = Css.dot("-underline");
+  public static final ClassSelector underline = Css.randomDot(5);
 
-  public static final ClassSelector lineThrough = Css.dot("-line-through");
+  public static final ClassSelector lineThrough = Css.randomDot(5);
 
-  public static final ClassSelector strike = Css.dot("-strike");
+  public static final ClassSelector strike = Css.randomDot(5);
 
-  public static final ClassSelector none = Css.dot("-none");
+  public static final ClassSelector none = Css.randomDot(5);
 
   @Override
   protected final void definition() {
@@ -146,49 +146,49 @@ public final class TextDecoration extends AbstractStyleSheet {
 
   public interface sm {
 
-    ClassSelector underline = Css.dot("sm--underline");
+    ClassSelector underline = Css.randomDot(5);
 
-    ClassSelector lineThrough = Css.dot("sm--line-through");
+    ClassSelector lineThrough = Css.randomDot(5);
 
-    ClassSelector strike = Css.dot("sm--strike");
+    ClassSelector strike = Css.randomDot(5);
 
-    ClassSelector none = Css.dot("sm--none");
+    ClassSelector none = Css.randomDot(5);
 
   }
 
   public interface md {
 
-    ClassSelector underline = Css.dot("md--underline");
+    ClassSelector underline = Css.randomDot(5);
 
-    ClassSelector lineThrough = Css.dot("md--line-through");
+    ClassSelector lineThrough = Css.randomDot(5);
 
-    ClassSelector strike = Css.dot("md--strike");
+    ClassSelector strike = Css.randomDot(5);
 
-    ClassSelector none = Css.dot("md--none");
+    ClassSelector none = Css.randomDot(5);
 
   }
 
   public interface lg {
 
-    ClassSelector underline = Css.dot("lg--underline");
+    ClassSelector underline = Css.randomDot(5);
 
-    ClassSelector lineThrough = Css.dot("lg--line-through");
+    ClassSelector lineThrough = Css.randomDot(5);
 
-    ClassSelector strike = Css.dot("lg--strike");
+    ClassSelector strike = Css.randomDot(5);
 
-    ClassSelector none = Css.dot("lg--none");
+    ClassSelector none = Css.randomDot(5);
 
   }
 
   public interface xl {
 
-    ClassSelector underline = Css.dot("xl--underline");
+    ClassSelector underline = Css.randomDot(5);
 
-    ClassSelector lineThrough = Css.dot("xl--line-through");
+    ClassSelector lineThrough = Css.randomDot(5);
 
-    ClassSelector strike = Css.dot("xl--strike");
+    ClassSelector strike = Css.randomDot(5);
 
-    ClassSelector none = Css.dot("xl--none");
+    ClassSelector none = Css.randomDot(5);
 
   }
 

@@ -54,27 +54,26 @@ class Leading extends AbstractConfiguration {
   @Override
   protected final void configure() {
     property(
-        FrameworkGroup.TYPOGRAPHY,
-        simpleName("Leading"),
-        prefix("leading"),
-        methods("lineHeight"),
-        valueSet(
-            v("none", 1),
-            v("tight", 1.25),
-            v("snug", 1.375),
-            v("normal", 1.5),
-            v("relaxed", 1.625),
-            v("loose", 2),
-            v("3", rem(0.75)),
-            v("4", rem(1)),
-            v("5", rem(1.25)),
-            v("6", rem(1.5)),
-            v("7", rem(1.75)),
-            v("8", rem(2)),
-            v("9", rem(2.25)),
-            v("10", rem(2.5))
-        ),
-        responsive
+      FrameworkGroup.TYPOGRAPHY,
+      simpleName("Leading"),
+      methods("lineHeight"),
+      valueSet(
+        v("none", 1),
+        v("tight", 1.25),
+        v("snug", 1.375),
+        v("normal", 1.5),
+        v("relaxed", 1.625),
+        v("loose", 2),
+        v("3", rem(0.75)),
+        v("4", rem(1)),
+        v("5", rem(1.25)),
+        v("6", rem(1.5)),
+        v("7", rem(1.75)),
+        v("8", rem(2)),
+        v("9", rem(2.25)),
+        v("10", rem(2.5))
+      ),
+      responsive
     );
   }
 

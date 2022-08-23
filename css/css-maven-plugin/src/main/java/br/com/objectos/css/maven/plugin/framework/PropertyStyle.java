@@ -16,12 +16,12 @@
 package br.com.objectos.css.maven.plugin.framework;
 
 import static br.com.objectos.code.java.Java._final;
-import static br.com.objectos.code.java.Java._protected;
 import static br.com.objectos.code.java.Java._public;
 import static br.com.objectos.code.java.Java._static;
 import static br.com.objectos.code.java.Java.field;
 import static br.com.objectos.code.java.Java.init;
 import static br.com.objectos.code.java.Java.invoke;
+import static br.com.objectos.code.java.Java.l;
 import static br.com.objectos.code.java.Java.nl;
 
 import br.com.objectos.code.java.declaration.FieldCode;
@@ -29,60 +29,36 @@ import br.com.objectos.code.java.expression.ArgumentsElement;
 import br.com.objectos.code.java.expression.ExpressionName;
 import br.com.objectos.code.java.expression.Identifier;
 import br.com.objectos.code.java.expression.MethodInvocation;
-import br.com.objectos.code.java.type.NamedClass;
-import objectos.util.UnmodifiableList;
 import objectos.util.GrowableList;
+import objectos.util.UnmodifiableList;
 
 class PropertyStyle {
 
   private final UnmodifiableList<String> methodNames;
-  private final Prefix prefix;
   private final NamedValue value;
 
-  PropertyStyle(NamedValue value, Prefix prefix, UnmodifiableList<String> methodNames) {
+  PropertyStyle(NamedValue value, UnmodifiableList<String> methodNames) {
     this.value = value;
-    this.prefix = prefix;
     this.methodNames = methodNames;
   }
 
   public final FieldCode generateField() {
     return field(
-        _public(), _static(), _final(), FrameworkTypes._ClassSelector,
-        init(
-            value.getFieldName(),
-            FrameworkTypes._Css.invoke("dot", value.getClassName(prefix))
-        )
-    );
-  }
-
-  public final FieldCode generateField(PropertyClass pclass) {
-    return field(
-        _protected(), _static(), _final(), FrameworkTypes._ClassSelector,
-        init(
-            value.getFieldName(prefix),
-            pclass.className.id(value.getFieldName())
-        )
+      _public(), _static(), _final(), FrameworkTypes._ClassSelector,
+      init(
+        value.getFieldName(),
+        FrameworkTypes._Css.invoke("randomDot", l(5))
+      )
     );
   }
 
   public final FieldCode generateInterfaceField(NamedAtMedia query) {
     return field(
-        FrameworkTypes._ClassSelector,
-        init(
-            value.getFieldName(),
-            FrameworkTypes._Css.invoke("dot", value.getClassName(query, prefix))
-        )
-    );
-  }
-
-  public final FieldCode generateInterfaceField(
-      NamedAtMedia query, NamedClass propertyClassName) {
-    return field(
-        FrameworkTypes._ClassSelector,
-        init(
-            value.getFieldName(prefix),
-            propertyClassName.id(query.simpleName).id(value.getFieldName())
-        )
+      FrameworkTypes._ClassSelector,
+      init(
+        value.getFieldName(),
+        FrameworkTypes._Css.invoke("randomDot", l(5))
+      )
     );
   }
 

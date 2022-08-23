@@ -23,9 +23,9 @@ import br.com.objectos.css.sheet.AbstractStyleSheet;
 @Generated("br.com.objectos.css.maven.plugin.framework.FrameworkMojo")
 public final class MinWidth extends AbstractStyleSheet {
 
-  public static final ClassSelector v0 = Css.dot("min-w-0");
+  public static final ClassSelector v0 = Css.randomDot(5);
 
-  public static final ClassSelector full = Css.dot("min-w-full");
+  public static final ClassSelector full = Css.randomDot(5);
 
   @Override
   protected final void definition() {
@@ -93,33 +93,33 @@ public final class MinWidth extends AbstractStyleSheet {
 
   public interface sm {
 
-    ClassSelector v0 = Css.dot("sm-min-w-0");
+    ClassSelector v0 = Css.randomDot(5);
 
-    ClassSelector full = Css.dot("sm-min-w-full");
+    ClassSelector full = Css.randomDot(5);
 
   }
 
   public interface md {
 
-    ClassSelector v0 = Css.dot("md-min-w-0");
+    ClassSelector v0 = Css.randomDot(5);
 
-    ClassSelector full = Css.dot("md-min-w-full");
+    ClassSelector full = Css.randomDot(5);
 
   }
 
   public interface lg {
 
-    ClassSelector v0 = Css.dot("lg-min-w-0");
+    ClassSelector v0 = Css.randomDot(5);
 
-    ClassSelector full = Css.dot("lg-min-w-full");
+    ClassSelector full = Css.randomDot(5);
 
   }
 
   public interface xl {
 
-    ClassSelector v0 = Css.dot("xl-min-w-0");
+    ClassSelector v0 = Css.randomDot(5);
 
-    ClassSelector full = Css.dot("xl-min-w-full");
+    ClassSelector full = Css.randomDot(5);
 
   }
 

@@ -55,17 +55,16 @@ class TextAlign extends AbstractConfiguration {
   @Override
   protected final void configure() {
     property(
-        FrameworkGroup.TYPOGRAPHY,
-        simpleName("TextAlign"),
-        prefix("text"),
-        methods("textAlign"),
-        valueSet(
-            v("left", Keywords.left),
-            v("center", Keywords.center),
-            v("right", Keywords.right),
-            v("justify", Keywords.justify)
-        ),
-        responsive
+      FrameworkGroup.TYPOGRAPHY,
+      simpleName("TextAlign"),
+      methods("textAlign"),
+      valueSet(
+        v("left", Keywords.left),
+        v("center", Keywords.center),
+        v("right", Keywords.right),
+        v("justify", Keywords.justify)
+      ),
+      responsive
     );
   }
 

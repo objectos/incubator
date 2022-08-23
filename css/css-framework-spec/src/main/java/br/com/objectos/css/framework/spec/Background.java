@@ -58,44 +58,41 @@ class Background extends AbstractConfiguration {
   @Override
   protected final void configure() {
     property(
-        FrameworkGroup.BACKGROUND,
-        simpleName("BackgroundColor"),
-        prefix("bg"),
-        methods("backgroundColor"),
-        colors,
-        responsive
+      FrameworkGroup.BACKGROUND,
+      simpleName("BackgroundColor"),
+      methods("backgroundColor"),
+      colors,
+      responsive
     );
 
     property(
-        FrameworkGroup.BACKGROUND,
-        simpleName("BackgroundPosition"),
-        prefix("bg"),
-        methods("backgroundPosition"),
-        valueSet(
-            v("bottom", Keywords.bottom),
-            v("center", Keywords.center),
-            v("left", Keywords.left),
-            v("left-bottom", Keywords.left, Keywords.bottom),
-            v("left-top", Keywords.left, Keywords.top),
-            v("right", Keywords.right),
-            v("right-bottom", Keywords.right, Keywords.bottom),
-            v("right-top", Keywords.right, Keywords.top),
-            v("top", Keywords.top)
-        ),
-        responsive
+      FrameworkGroup.BACKGROUND,
+      simpleName("BackgroundPosition"),
+      methods("backgroundPosition"),
+      valueSet(
+        v("bottom", Keywords.bottom),
+        v("center", Keywords.center),
+        v("left", Keywords.left),
+        v("left-bottom", Keywords.left, Keywords.bottom),
+        v("left-top", Keywords.left, Keywords.top),
+        v("right", Keywords.right),
+        v("right-bottom", Keywords.right, Keywords.bottom),
+        v("right-top", Keywords.right, Keywords.top),
+        v("top", Keywords.top)
+      ),
+      responsive
     );
 
     property(
-        FrameworkGroup.BACKGROUND,
-        simpleName("BackgroundSize"),
-        prefix("bg"),
-        methods("backgroundSize"),
-        valueSet(
-            v("auto", Keywords.auto),
-            v("cover", Keywords.cover),
-            v("contain", Keywords.contain)
-        ),
-        responsive
+      FrameworkGroup.BACKGROUND,
+      simpleName("BackgroundSize"),
+      methods("backgroundSize"),
+      valueSet(
+        v("auto", Keywords.auto),
+        v("cover", Keywords.cover),
+        v("contain", Keywords.contain)
+      ),
+      responsive
     );
   }
 

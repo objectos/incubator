@@ -55,35 +55,34 @@ class BoxShadow extends AbstractConfiguration {
   @Override
   protected final void configure() {
     property(
-        FrameworkGroup.EFFECTS,
-        simpleName("BoxShadow"),
-        prefix("shadow"),
-        methods("boxShadow"),
-        valueSet(
-            v("xSmall", _0, _0, _0, px(1), rgba(0, 0, 0, 0.05)),
-            v("small", _0, px(1), px(2), _0, rgba(0, 0, 0, 0.05)),
-            v("standard",
-                multi(_0, px(1), px(3), _0, rgba(0, 0, 0, 0.1)),
-                multi(_0, px(1), px(2), _0, rgba(0, 0, 0, 0.06))
-            ),
-            v("medium",
-                multi(_0, px(4), px(6), px(-1), rgba(0, 0, 0, 0.1)),
-                multi(_0, px(2), px(4), px(-1), rgba(0, 0, 0, 0.06))
-            ),
-            v("large",
-                multi(_0, px(10), px(15), px(-3), rgba(0, 0, 0, 0.1)),
-                multi(_0, px(4), px(6), px(-2), rgba(0, 0, 0, 0.05))
-            ),
-            v("xLarge",
-                multi(_0, px(20), px(25), px(-5), rgba(0, 0, 0, 0.1)),
-                multi(_0, px(10), px(10), px(-5), rgba(0, 0, 0, 0.04))
-            ),
-            v("xLarge2", _0, px(25), px(50), px(-12), rgba(0, 0, 0, 0.25)),
-            v("inner", Keywords.inset, _0, px(2), px(4), _0, rgba(0, 0, 0, 0.06)),
-            v("outline", _0, _0, _0, px(3), rgba(66, 153, 225, 0.5)),
-            v("none", Keywords.none)
+      FrameworkGroup.EFFECTS,
+      simpleName("BoxShadow"),
+      methods("boxShadow"),
+      valueSet(
+        v("xSmall", _0, _0, _0, px(1), rgba(0, 0, 0, 0.05)),
+        v("small", _0, px(1), px(2), _0, rgba(0, 0, 0, 0.05)),
+        v("standard",
+          multi(_0, px(1), px(3), _0, rgba(0, 0, 0, 0.1)),
+          multi(_0, px(1), px(2), _0, rgba(0, 0, 0, 0.06))
         ),
-        responsive
+        v("medium",
+          multi(_0, px(4), px(6), px(-1), rgba(0, 0, 0, 0.1)),
+          multi(_0, px(2), px(4), px(-1), rgba(0, 0, 0, 0.06))
+        ),
+        v("large",
+          multi(_0, px(10), px(15), px(-3), rgba(0, 0, 0, 0.1)),
+          multi(_0, px(4), px(6), px(-2), rgba(0, 0, 0, 0.05))
+        ),
+        v("xLarge",
+          multi(_0, px(20), px(25), px(-5), rgba(0, 0, 0, 0.1)),
+          multi(_0, px(10), px(10), px(-5), rgba(0, 0, 0, 0.04))
+        ),
+        v("xLarge2", _0, px(25), px(50), px(-12), rgba(0, 0, 0, 0.25)),
+        v("inner", Keywords.inset, _0, px(2), px(4), _0, rgba(0, 0, 0, 0.06)),
+        v("outline", _0, _0, _0, px(3), rgba(66, 153, 225, 0.5)),
+        v("none", Keywords.none)
+      ),
+      responsive
     );
   }
 

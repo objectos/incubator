@@ -24,13 +24,13 @@ import br.com.objectos.css.sheet.AbstractStyleSheet;
 @Generated("br.com.objectos.css.maven.plugin.framework.FrameworkMojo")
 public final class Flex extends AbstractStyleSheet {
 
-  public static final ClassSelector initial = Css.dot("flex-initial");
+  public static final ClassSelector initial = Css.randomDot(5);
 
-  public static final ClassSelector one = Css.dot("flex-one");
+  public static final ClassSelector one = Css.randomDot(5);
 
-  public static final ClassSelector auto = Css.dot("flex-auto");
+  public static final ClassSelector auto = Css.randomDot(5);
 
-  public static final ClassSelector none = Css.dot("flex-none");
+  public static final ClassSelector none = Css.randomDot(5);
 
   @Override
   protected final void definition() {
@@ -146,49 +146,49 @@ public final class Flex extends AbstractStyleSheet {
 
   public interface sm {
 
-    ClassSelector initial = Css.dot("sm-flex-initial");
+    ClassSelector initial = Css.randomDot(5);
 
-    ClassSelector one = Css.dot("sm-flex-one");
+    ClassSelector one = Css.randomDot(5);
 
-    ClassSelector auto = Css.dot("sm-flex-auto");
+    ClassSelector auto = Css.randomDot(5);
 
-    ClassSelector none = Css.dot("sm-flex-none");
+    ClassSelector none = Css.randomDot(5);
 
   }
 
   public interface md {
 
-    ClassSelector initial = Css.dot("md-flex-initial");
+    ClassSelector initial = Css.randomDot(5);
 
-    ClassSelector one = Css.dot("md-flex-one");
+    ClassSelector one = Css.randomDot(5);
 
-    ClassSelector auto = Css.dot("md-flex-auto");
+    ClassSelector auto = Css.randomDot(5);
 
-    ClassSelector none = Css.dot("md-flex-none");
+    ClassSelector none = Css.randomDot(5);
 
   }
 
   public interface lg {
 
-    ClassSelector initial = Css.dot("lg-flex-initial");
+    ClassSelector initial = Css.randomDot(5);
 
-    ClassSelector one = Css.dot("lg-flex-one");
+    ClassSelector one = Css.randomDot(5);
 
-    ClassSelector auto = Css.dot("lg-flex-auto");
+    ClassSelector auto = Css.randomDot(5);
 
-    ClassSelector none = Css.dot("lg-flex-none");
+    ClassSelector none = Css.randomDot(5);
 
   }
 
   public interface xl {
 
-    ClassSelector initial = Css.dot("xl-flex-initial");
+    ClassSelector initial = Css.randomDot(5);
 
-    ClassSelector one = Css.dot("xl-flex-one");
+    ClassSelector one = Css.randomDot(5);
 
-    ClassSelector auto = Css.dot("xl-flex-auto");
+    ClassSelector auto = Css.randomDot(5);
 
-    ClassSelector none = Css.dot("xl-flex-none");
+    ClassSelector none = Css.randomDot(5);
 
   }
 

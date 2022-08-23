@@ -31,74 +31,72 @@ public class FrameworkTest extends AbstractCssMavenPluginFrameworkTest {
   @Test
   public void execute() {
     UnmodifiableMap<String, JavaFile> javaFiles = executeFramework(
-        new AbstractConfiguration() {
-          @Override
-          protected final void configure() {
-            packageName("br.com.objectos.css.framework");
+      new AbstractConfiguration() {
+        @Override
+        protected final void configure() {
+          packageName("br.com.objectos.css.framework");
 
-            FrameworkNamedValueSet colors = valueSet(
-                v("transparent", Color.transparent),
-                v("black", rgb(0x0)),
-                v("white", rgb(0xffffff)),
-                v("blue-400", rgb(0x63b3ed))
-            );
+          FrameworkNamedValueSet colors = valueSet(
+            v("transparent", Color.transparent),
+            v("black", rgb(0x0)),
+            v("white", rgb(0xffffff)),
+            v("blue-400", rgb(0x63b3ed))
+          );
 
-            property(
-                FrameworkGroup.BACKGROUND,
-                simpleName("BackgroundColor"),
-                prefix("bg"),
-                methods("backgroundColor"),
-                colors
-            );
-            
-            FrameworkNamedValueSet spacing = valueSet(
-                v("0", Zero.INSTANCE),
-                v("2", rem(0.5)),
-                v("8", rem(2))
-            );
+          property(
+            FrameworkGroup.BACKGROUND,
+            simpleName("BackgroundColor"),
+            methods("backgroundColor"),
+            colors
+          );
 
-            property(
-                FrameworkGroup.SIZING,
-                simpleName("Height"),
-                prefix("h"),
-                methods("height"),
-                valueSet(
-                    spacing,
-                    v("full", pct(100))
-                )
-            );
-          }
+          FrameworkNamedValueSet spacing = valueSet(
+            v("0", Zero.INSTANCE),
+            v("2", rem(0.5)),
+            v("8", rem(2))
+          );
+
+          property(
+            FrameworkGroup.SIZING,
+            simpleName("Height"),
+            methods("height"),
+            valueSet(
+              spacing,
+              v("full", pct(100))
+            )
+          );
         }
+      }
     );
     assertEquals(javaFiles.size(), 1);
     testLines(
-        javaFiles.get("AbstractFramework"),
-        "package br.com.objectos.css.framework;",
-        "",
-        "import br.com.objectos.code.annotations.Generated;",
-        "import br.com.objectos.css.framework.background.BackgroundColor;",
-        "import br.com.objectos.css.framework.sizing.Height;",        
-        "import br.com.objectos.css.sheet.AbstractStyleSheet;",
-        "",
-        "@Generated(\"br.com.objectos.css.maven.plugin.framework.FrameworkMojo\")",
-        "abstract class AbstractFramework extends AbstractStyleSheet {",
-        "",
-        "  @Override",
-        "  protected void definition() {",
-        "    background();",
-        "    sizing();",
-        "  }",
-        "",
-        "  protected void background() {",
-        "    install(new BackgroundColor());",
-        "  }",
-        "",
-        "  protected void sizing() {",
-        "    install(new Height());",
-        "  }",
-        "",
-        "}"
+      javaFiles.get("AbstractFramework"),
+      "package br.com.objectos.css.framework;",
+      "",
+      "import br.com.objectos.code.annotations.Generated;",
+      "import br.com.objectos.css.framework.background.BackgroundColor;",
+      "import br.com.objectos.css.framework.sizing.Height;",
+      "import br.com.objectos.css.sheet.AbstractStyleSheet;",
+      "",
+      "@Generated(\"br.com.objectos.css.maven.plugin.framework.FrameworkMojo\")",
+      "abstract class AbstractFramework extends AbstractStyleSheet {",
+      "",
+      "  @Override",
+      "  protected void definition() {",
+      "    background();",
+      "    sizing();",
+      "  }",
+      "",
+      "  protected void background() {",
+      "    install(new BackgroundColor());",
+      "  }",
+      "",
+      "  protected void sizing() {",
+      "    install(new Height());",
+      "  }",
+      "",
+      "}"
     );
   }
-  
+
 }

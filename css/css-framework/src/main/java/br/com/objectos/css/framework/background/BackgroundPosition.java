@@ -24,23 +24,23 @@ import br.com.objectos.css.sheet.AbstractStyleSheet;
 @Generated("br.com.objectos.css.maven.plugin.framework.FrameworkMojo")
 public final class BackgroundPosition extends AbstractStyleSheet {
 
-  public static final ClassSelector bottom = Css.dot("bg-bottom");
+  public static final ClassSelector bottom = Css.randomDot(5);
 
-  public static final ClassSelector center = Css.dot("bg-center");
+  public static final ClassSelector center = Css.randomDot(5);
 
-  public static final ClassSelector left = Css.dot("bg-left");
+  public static final ClassSelector left = Css.randomDot(5);
 
-  public static final ClassSelector leftBottom = Css.dot("bg-left-bottom");
+  public static final ClassSelector leftBottom = Css.randomDot(5);
 
-  public static final ClassSelector leftTop = Css.dot("bg-left-top");
+  public static final ClassSelector leftTop = Css.randomDot(5);
 
-  public static final ClassSelector right = Css.dot("bg-right");
+  public static final ClassSelector right = Css.randomDot(5);
 
-  public static final ClassSelector rightBottom = Css.dot("bg-right-bottom");
+  public static final ClassSelector rightBottom = Css.randomDot(5);
 
-  public static final ClassSelector rightTop = Css.dot("bg-right-top");
+  public static final ClassSelector rightTop = Css.randomDot(5);
 
-  public static final ClassSelector top = Css.dot("bg-top");
+  public static final ClassSelector top = Css.randomDot(5);
 
   @Override
   protected final void definition() {
@@ -276,89 +276,89 @@ public final class BackgroundPosition extends AbstractStyleSheet {
 
   public interface sm {
 
-    ClassSelector bottom = Css.dot("sm-bg-bottom");
+    ClassSelector bottom = Css.randomDot(5);
 
-    ClassSelector center = Css.dot("sm-bg-center");
+    ClassSelector center = Css.randomDot(5);
 
-    ClassSelector left = Css.dot("sm-bg-left");
+    ClassSelector left = Css.randomDot(5);
 
-    ClassSelector leftBottom = Css.dot("sm-bg-left-bottom");
+    ClassSelector leftBottom = Css.randomDot(5);
 
-    ClassSelector leftTop = Css.dot("sm-bg-left-top");
+    ClassSelector leftTop = Css.randomDot(5);
 
-    ClassSelector right = Css.dot("sm-bg-right");
+    ClassSelector right = Css.randomDot(5);
 
-    ClassSelector rightBottom = Css.dot("sm-bg-right-bottom");
+    ClassSelector rightBottom = Css.randomDot(5);
 
-    ClassSelector rightTop = Css.dot("sm-bg-right-top");
+    ClassSelector rightTop = Css.randomDot(5);
 
-    ClassSelector top = Css.dot("sm-bg-top");
+    ClassSelector top = Css.randomDot(5);
 
   }
 
   public interface md {
 
-    ClassSelector bottom = Css.dot("md-bg-bottom");
+    ClassSelector bottom = Css.randomDot(5);
 
-    ClassSelector center = Css.dot("md-bg-center");
+    ClassSelector center = Css.randomDot(5);
 
-    ClassSelector left = Css.dot("md-bg-left");
+    ClassSelector left = Css.randomDot(5);
 
-    ClassSelector leftBottom = Css.dot("md-bg-left-bottom");
+    ClassSelector leftBottom = Css.randomDot(5);
 
-    ClassSelector leftTop = Css.dot("md-bg-left-top");
+    ClassSelector leftTop = Css.randomDot(5);
 
-    ClassSelector right = Css.dot("md-bg-right");
+    ClassSelector right = Css.randomDot(5);
 
-    ClassSelector rightBottom = Css.dot("md-bg-right-bottom");
+    ClassSelector rightBottom = Css.randomDot(5);
 
-    ClassSelector rightTop = Css.dot("md-bg-right-top");
+    ClassSelector rightTop = Css.randomDot(5);
 
-    ClassSelector top = Css.dot("md-bg-top");
+    ClassSelector top = Css.randomDot(5);
 
   }
 
   public interface lg {
 
-    ClassSelector bottom = Css.dot("lg-bg-bottom");
+    ClassSelector bottom = Css.randomDot(5);
 
-    ClassSelector center = Css.dot("lg-bg-center");
+    ClassSelector center = Css.randomDot(5);
 
-    ClassSelector left = Css.dot("lg-bg-left");
+    ClassSelector left = Css.randomDot(5);
 
-    ClassSelector leftBottom = Css.dot("lg-bg-left-bottom");
+    ClassSelector leftBottom = Css.randomDot(5);
 
-    ClassSelector leftTop = Css.dot("lg-bg-left-top");
+    ClassSelector leftTop = Css.randomDot(5);
 
-    ClassSelector right = Css.dot("lg-bg-right");
+    ClassSelector right = Css.randomDot(5);
 
-    ClassSelector rightBottom = Css.dot("lg-bg-right-bottom");
+    ClassSelector rightBottom = Css.randomDot(5);
 
-    ClassSelector rightTop = Css.dot("lg-bg-right-top");
+    ClassSelector rightTop = Css.randomDot(5);
 
-    ClassSelector top = Css.dot("lg-bg-top");
+    ClassSelector top = Css.randomDot(5);
 
   }
 
   public interface xl {
 
-    ClassSelector bottom = Css.dot("xl-bg-bottom");
+    ClassSelector bottom = Css.randomDot(5);
 
-    ClassSelector center = Css.dot("xl-bg-center");
+    ClassSelector center = Css.randomDot(5);
 
-    ClassSelector left = Css.dot("xl-bg-left");
+    ClassSelector left = Css.randomDot(5);
 
-    ClassSelector leftBottom = Css.dot("xl-bg-left-bottom");
+    ClassSelector leftBottom = Css.randomDot(5);
 
-    ClassSelector leftTop = Css.dot("xl-bg-left-top");
+    ClassSelector leftTop = Css.randomDot(5);
 
-    ClassSelector right = Css.dot("xl-bg-right");
+    ClassSelector right = Css.randomDot(5);
 
-    ClassSelector rightBottom = Css.dot("xl-bg-right-bottom");
+    ClassSelector rightBottom = Css.randomDot(5);
 
-    ClassSelector rightTop = Css.dot("xl-bg-right-top");
+    ClassSelector rightTop = Css.randomDot(5);
 
-    ClassSelector top = Css.dot("xl-bg-top");
+    ClassSelector top = Css.randomDot(5);
 
   }
 

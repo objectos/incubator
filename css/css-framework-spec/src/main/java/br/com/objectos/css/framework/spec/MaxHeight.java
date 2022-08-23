@@ -54,15 +54,14 @@ class MaxHeight extends AbstractConfiguration {
   @Override
   protected final void configure() {
     property(
-        FrameworkGroup.SIZING,
-        simpleName("MaxHeight"),
-        prefix("max-h"),
-        methods("maxHeight"),
-        valueSet(
-            v("full", pct(100)),
-            v("screen", vh(100))
-        ),
-        responsive
+      FrameworkGroup.SIZING,
+      simpleName("MaxHeight"),
+      methods("maxHeight"),
+      valueSet(
+        v("full", pct(100)),
+        v("screen", vh(100))
+      ),
+      responsive
     );
   }
 

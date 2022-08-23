@@ -24,11 +24,11 @@ import br.com.objectos.css.sheet.AbstractStyleSheet;
 @Generated("br.com.objectos.css.maven.plugin.framework.FrameworkMojo")
 public final class Float extends AbstractStyleSheet {
 
-  public static final ClassSelector left = Css.dot("float-left");
+  public static final ClassSelector left = Css.randomDot(5);
 
-  public static final ClassSelector right = Css.dot("float-right");
+  public static final ClassSelector right = Css.randomDot(5);
 
-  public static final ClassSelector none = Css.dot("float-none");
+  public static final ClassSelector none = Css.randomDot(5);
 
   @Override
   protected final void definition() {
@@ -120,41 +120,41 @@ public final class Float extends AbstractStyleSheet {
 
   public interface sm {
 
-    ClassSelector left = Css.dot("sm-float-left");
+    ClassSelector left = Css.randomDot(5);
 
-    ClassSelector right = Css.dot("sm-float-right");
+    ClassSelector right = Css.randomDot(5);
 
-    ClassSelector none = Css.dot("sm-float-none");
+    ClassSelector none = Css.randomDot(5);
 
   }
 
   public interface md {
 
-    ClassSelector left = Css.dot("md-float-left");
+    ClassSelector left = Css.randomDot(5);
 
-    ClassSelector right = Css.dot("md-float-right");
+    ClassSelector right = Css.randomDot(5);
 
-    ClassSelector none = Css.dot("md-float-none");
+    ClassSelector none = Css.randomDot(5);
 
   }
 
   public interface lg {
 
-    ClassSelector left = Css.dot("lg-float-left");
+    ClassSelector left = Css.randomDot(5);
 
-    ClassSelector right = Css.dot("lg-float-right");
+    ClassSelector right = Css.randomDot(5);
 
-    ClassSelector none = Css.dot("lg-float-none");
+    ClassSelector none = Css.randomDot(5);
 
   }
 
   public interface xl {
 
-    ClassSelector left = Css.dot("xl-float-left");
+    ClassSelector left = Css.randomDot(5);
 
-    ClassSelector right = Css.dot("xl-float-right");
+    ClassSelector right = Css.randomDot(5);
 
-    ClassSelector none = Css.dot("xl-float-none");
+    ClassSelector none = Css.randomDot(5);
 
   }
 

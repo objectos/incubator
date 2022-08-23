@@ -31,66 +31,65 @@ public class PaddingXTest extends AbstractCssMavenPluginFrameworkTest {
   @Test
   public void execute() {
     UnmodifiableMap<String, JavaFile> javaFiles = executeProperty(
-        new AbstractConfiguration() {
-          @Override
-          protected final void configure() {
-            packageName("br.com.objectos.css.framework");
+      new AbstractConfiguration() {
+        @Override
+        protected final void configure() {
+          packageName("br.com.objectos.css.framework");
 
-            FrameworkNamedValueSet spacing = valueSet(
-                v("0", Zero.INSTANCE),
-                v("2", rem(0.5)),
-                v("8", rem(2))
-            );
+          FrameworkNamedValueSet spacing = valueSet(
+            v("0", Zero.INSTANCE),
+            v("2", rem(0.5)),
+            v("8", rem(2))
+          );
 
-            property(
-                FrameworkGroup.SPACING,
-                simpleName("PaddingX"),
-                prefix("px"),
-                methods("paddingRight", "paddingLeft"),
-                spacing
-            );
-          }
+          property(
+            FrameworkGroup.SPACING,
+            simpleName("PaddingX"),
+            methods("paddingRight", "paddingLeft"),
+            spacing
+          );
         }
+      }
     );
     assertEquals(javaFiles.size(), 1);
     testLines(
-        javaFiles.get("PaddingX"),
-        "package br.com.objectos.css.framework.spacing;",
-        "",
-        "import br.com.objectos.code.annotations.Generated;",
-        "import br.com.objectos.css.Css;",
-        "import br.com.objectos.css.select.ClassSelector;",
-        "import br.com.objectos.css.sheet.AbstractStyleSheet;",
-        "",
-        "@Generated(\"br.com.objectos.css.maven.plugin.framework.FrameworkMojo\")",
-        "public final class PaddingX extends AbstractStyleSheet {",
-        "",
-        "  public static final ClassSelector v0 = Css.dot(\"px-0\");",
-        "",
-        "  public static final ClassSelector v2 = Css.dot(\"px-2\");",
-        "",
-        "  public static final ClassSelector v8 = Css.dot(\"px-8\");",
-        "",
-        "  @Override",
-        "  protected final void definition() {",
-        "    style(",
-        "        v0,",
-        "        paddingRight(zero()),",
-        "        paddingLeft(zero())",
-        "    );",
-        "    style(",
-        "        v2,",
-        "        paddingRight(rem(0.5)),",
-        "        paddingLeft(rem(0.5))",
-        "    );",
-        "    style(",
-        "        v8,",
-        "        paddingRight(rem(2)),",
-        "        paddingLeft(rem(2))",
-        "    );",
-        "  }",
-        "",
-        "}"
+      javaFiles.get("PaddingX"),
+      "package br.com.objectos.css.framework.spacing;",
+      "",
+      "import br.com.objectos.code.annotations.Generated;",
+      "import br.com.objectos.css.Css;",
+      "import br.com.objectos.css.select.ClassSelector;",
+      "import br.com.objectos.css.sheet.AbstractStyleSheet;",
+      "",
+      "@Generated(\"br.com.objectos.css.maven.plugin.framework.FrameworkMojo\")",
+      "public final class PaddingX extends AbstractStyleSheet {",
+      "",
+      "  public static final ClassSelector v0 = Css.randomDot(5);",
+      "",
+      "  public static final ClassSelector v2 = Css.randomDot(5);",
+      "",
+      "  public static final ClassSelector v8 = Css.randomDot(5);",
+      "",
+      "  @Override",
+      "  protected final void definition() {",
+      "    style(",
+      "        v0,",
+      "        paddingRight(zero()),",
+      "        paddingLeft(zero())",
+      "    );",
+      "    style(",
+      "        v2,",
+      "        paddingRight(rem(0.5)),",
+      "        paddingLeft(rem(0.5))",
+      "    );",
+      "    style(",
+      "        v8,",
+      "        paddingRight(rem(2)),",
+      "        paddingLeft(rem(2))",
+      "    );",
+      "  }",
+      "",
+      "}"
     );
   }
 

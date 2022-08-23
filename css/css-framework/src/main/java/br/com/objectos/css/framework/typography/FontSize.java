@@ -23,25 +23,25 @@ import br.com.objectos.css.sheet.AbstractStyleSheet;
 @Generated("br.com.objectos.css.maven.plugin.framework.FrameworkMojo")
 public final class FontSize extends AbstractStyleSheet {
 
-  public static final ClassSelector xSmall = Css.dot("fs-x-small");
+  public static final ClassSelector xSmall = Css.randomDot(5);
 
-  public static final ClassSelector small = Css.dot("fs-small");
+  public static final ClassSelector small = Css.randomDot(5);
 
-  public static final ClassSelector base = Css.dot("fs-base");
+  public static final ClassSelector base = Css.randomDot(5);
 
-  public static final ClassSelector large = Css.dot("fs-large");
+  public static final ClassSelector large = Css.randomDot(5);
 
-  public static final ClassSelector xLarge = Css.dot("fs-x-large");
+  public static final ClassSelector xLarge = Css.randomDot(5);
 
-  public static final ClassSelector xLarge2 = Css.dot("fs-x-large-2");
+  public static final ClassSelector xLarge2 = Css.randomDot(5);
 
-  public static final ClassSelector xLarge3 = Css.dot("fs-x-large-3");
+  public static final ClassSelector xLarge3 = Css.randomDot(5);
 
-  public static final ClassSelector xLarge4 = Css.dot("fs-x-large-4");
+  public static final ClassSelector xLarge4 = Css.randomDot(5);
 
-  public static final ClassSelector xLarge5 = Css.dot("fs-x-large-5");
+  public static final ClassSelector xLarge5 = Css.randomDot(5);
 
-  public static final ClassSelector xLarge6 = Css.dot("fs-x-large-6");
+  public static final ClassSelector xLarge6 = Css.randomDot(5);
 
   @Override
   protected final void definition() {
@@ -301,97 +301,97 @@ public final class FontSize extends AbstractStyleSheet {
 
   public interface sm {
 
-    ClassSelector xSmall = Css.dot("sm-fs-x-small");
+    ClassSelector xSmall = Css.randomDot(5);
 
-    ClassSelector small = Css.dot("sm-fs-small");
+    ClassSelector small = Css.randomDot(5);
 
-    ClassSelector base = Css.dot("sm-fs-base");
+    ClassSelector base = Css.randomDot(5);
 
-    ClassSelector large = Css.dot("sm-fs-large");
+    ClassSelector large = Css.randomDot(5);
 
-    ClassSelector xLarge = Css.dot("sm-fs-x-large");
+    ClassSelector xLarge = Css.randomDot(5);
 
-    ClassSelector xLarge2 = Css.dot("sm-fs-x-large-2");
+    ClassSelector xLarge2 = Css.randomDot(5);
 
-    ClassSelector xLarge3 = Css.dot("sm-fs-x-large-3");
+    ClassSelector xLarge3 = Css.randomDot(5);
 
-    ClassSelector xLarge4 = Css.dot("sm-fs-x-large-4");
+    ClassSelector xLarge4 = Css.randomDot(5);
 
-    ClassSelector xLarge5 = Css.dot("sm-fs-x-large-5");
+    ClassSelector xLarge5 = Css.randomDot(5);
 
-    ClassSelector xLarge6 = Css.dot("sm-fs-x-large-6");
+    ClassSelector xLarge6 = Css.randomDot(5);
 
   }
 
   public interface md {
 
-    ClassSelector xSmall = Css.dot("md-fs-x-small");
+    ClassSelector xSmall = Css.randomDot(5);
 
-    ClassSelector small = Css.dot("md-fs-small");
+    ClassSelector small = Css.randomDot(5);
 
-    ClassSelector base = Css.dot("md-fs-base");
+    ClassSelector base = Css.randomDot(5);
 
-    ClassSelector large = Css.dot("md-fs-large");
+    ClassSelector large = Css.randomDot(5);
 
-    ClassSelector xLarge = Css.dot("md-fs-x-large");
+    ClassSelector xLarge = Css.randomDot(5);
 
-    ClassSelector xLarge2 = Css.dot("md-fs-x-large-2");
+    ClassSelector xLarge2 = Css.randomDot(5);
 
-    ClassSelector xLarge3 = Css.dot("md-fs-x-large-3");
+    ClassSelector xLarge3 = Css.randomDot(5);
 
-    ClassSelector xLarge4 = Css.dot("md-fs-x-large-4");
+    ClassSelector xLarge4 = Css.randomDot(5);
 
-    ClassSelector xLarge5 = Css.dot("md-fs-x-large-5");
+    ClassSelector xLarge5 = Css.randomDot(5);
 
-    ClassSelector xLarge6 = Css.dot("md-fs-x-large-6");
+    ClassSelector xLarge6 = Css.randomDot(5);
 
   }
 
   public interface lg {
 
-    ClassSelector xSmall = Css.dot("lg-fs-x-small");
+    ClassSelector xSmall = Css.randomDot(5);
 
-    ClassSelector small = Css.dot("lg-fs-small");
+    ClassSelector small = Css.randomDot(5);
 
-    ClassSelector base = Css.dot("lg-fs-base");
+    ClassSelector base = Css.randomDot(5);
 
-    ClassSelector large = Css.dot("lg-fs-large");
+    ClassSelector large = Css.randomDot(5);
 
-    ClassSelector xLarge = Css.dot("lg-fs-x-large");
+    ClassSelector xLarge = Css.randomDot(5);
 
-    ClassSelector xLarge2 = Css.dot("lg-fs-x-large-2");
+    ClassSelector xLarge2 = Css.randomDot(5);
 
-    ClassSelector xLarge3 = Css.dot("lg-fs-x-large-3");
+    ClassSelector xLarge3 = Css.randomDot(5);
 
-    ClassSelector xLarge4 = Css.dot("lg-fs-x-large-4");
+    ClassSelector xLarge4 = Css.randomDot(5);
 
-    ClassSelector xLarge5 = Css.dot("lg-fs-x-large-5");
+    ClassSelector xLarge5 = Css.randomDot(5);
 
-    ClassSelector xLarge6 = Css.dot("lg-fs-x-large-6");
+    ClassSelector xLarge6 = Css.randomDot(5);
 
   }
 
   public interface xl {
 
-    ClassSelector xSmall = Css.dot("xl-fs-x-small");
+    ClassSelector xSmall = Css.randomDot(5);
 
-    ClassSelector small = Css.dot("xl-fs-small");
+    ClassSelector small = Css.randomDot(5);
 
-    ClassSelector base = Css.dot("xl-fs-base");
+    ClassSelector base = Css.randomDot(5);
 
-    ClassSelector large = Css.dot("xl-fs-large");
+    ClassSelector large = Css.randomDot(5);
 
-    ClassSelector xLarge = Css.dot("xl-fs-x-large");
+    ClassSelector xLarge = Css.randomDot(5);
 
-    ClassSelector xLarge2 = Css.dot("xl-fs-x-large-2");
+    ClassSelector xLarge2 = Css.randomDot(5);
 
-    ClassSelector xLarge3 = Css.dot("xl-fs-x-large-3");
+    ClassSelector xLarge3 = Css.randomDot(5);
 
-    ClassSelector xLarge4 = Css.dot("xl-fs-x-large-4");
+    ClassSelector xLarge4 = Css.randomDot(5);
 
-    ClassSelector xLarge5 = Css.dot("xl-fs-x-large-5");
+    ClassSelector xLarge5 = Css.randomDot(5);
 
-    ClassSelector xLarge6 = Css.dot("xl-fs-x-large-6");
+    ClassSelector xLarge6 = Css.randomDot(5);
 
   }
 

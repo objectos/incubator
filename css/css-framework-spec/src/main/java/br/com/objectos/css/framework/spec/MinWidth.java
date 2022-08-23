@@ -55,15 +55,14 @@ class MinWidth extends AbstractConfiguration {
   @Override
   protected final void configure() {
     property(
-        FrameworkGroup.SIZING,
-        simpleName("MinWidth"),
-        prefix("min-w"),
-        methods("minWidth"),
-        valueSet(
-            v("0", Zero.INSTANCE),
-            v("full", pct(100))
-        ),
-        responsive
+      FrameworkGroup.SIZING,
+      simpleName("MinWidth"),
+      methods("minWidth"),
+      valueSet(
+        v("0", Zero.INSTANCE),
+        v("full", pct(100))
+      ),
+      responsive
     );
   }
 

@@ -56,37 +56,34 @@ class Overflow extends AbstractConfiguration {
   @Override
   protected final void configure() {
     FrameworkNamedValueSet overflow = valueSet(
-        v("auto", Keywords.auto),
-        v("hidden", Keywords.hidden),
-        v("visible", Keywords.visible),
-        v("scroll", Keywords.scroll)
+      v("auto", Keywords.auto),
+      v("hidden", Keywords.hidden),
+      v("visible", Keywords.visible),
+      v("scroll", Keywords.scroll)
     );
 
     property(
-        FrameworkGroup.LAYOUT,
-        simpleName("Overflow"),
-        prefix("overflow"),
-        methods("overflow"),
-        overflow,
-        responsive
+      FrameworkGroup.LAYOUT,
+      simpleName("Overflow"),
+      methods("overflow"),
+      overflow,
+      responsive
     );
 
     property(
-        FrameworkGroup.LAYOUT,
-        simpleName("OverflowX"),
-        prefix("overflow-x"),
-        methods("overflowX"),
-        overflow,
-        responsive
+      FrameworkGroup.LAYOUT,
+      simpleName("OverflowX"),
+      methods("overflowX"),
+      overflow,
+      responsive
     );
 
     property(
-        FrameworkGroup.LAYOUT,
-        simpleName("OverflowY"),
-        prefix("overflow-y"),
-        methods("overflowY"),
-        overflow,
-        responsive
+      FrameworkGroup.LAYOUT,
+      simpleName("OverflowY"),
+      methods("overflowY"),
+      overflow,
+      responsive
     );
   }
 

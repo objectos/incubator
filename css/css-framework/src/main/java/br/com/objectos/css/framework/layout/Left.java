@@ -24,9 +24,9 @@ import br.com.objectos.css.sheet.AbstractStyleSheet;
 @Generated("br.com.objectos.css.maven.plugin.framework.FrameworkMojo")
 public final class Left extends AbstractStyleSheet {
 
-  public static final ClassSelector v0 = Css.dot("left-0");
+  public static final ClassSelector v0 = Css.randomDot(5);
 
-  public static final ClassSelector auto = Css.dot("left-auto");
+  public static final ClassSelector auto = Css.randomDot(5);
 
   @Override
   protected final void definition() {
@@ -94,33 +94,33 @@ public final class Left extends AbstractStyleSheet {
 
   public interface sm {
 
-    ClassSelector v0 = Css.dot("sm-left-0");
+    ClassSelector v0 = Css.randomDot(5);
 
-    ClassSelector auto = Css.dot("sm-left-auto");
+    ClassSelector auto = Css.randomDot(5);
 
   }
 
   public interface md {
 
-    ClassSelector v0 = Css.dot("md-left-0");
+    ClassSelector v0 = Css.randomDot(5);
 
-    ClassSelector auto = Css.dot("md-left-auto");
+    ClassSelector auto = Css.randomDot(5);
 
   }
 
   public interface lg {
 
-    ClassSelector v0 = Css.dot("lg-left-0");
+    ClassSelector v0 = Css.randomDot(5);
 
-    ClassSelector auto = Css.dot("lg-left-auto");
+    ClassSelector auto = Css.randomDot(5);
 
   }
 
   public interface xl {
 
-    ClassSelector v0 = Css.dot("xl-left-0");
+    ClassSelector v0 = Css.randomDot(5);
 
-    ClassSelector auto = Css.dot("xl-left-auto");
+    ClassSelector auto = Css.randomDot(5);
 
   }
 

@@ -24,191 +24,191 @@ import br.com.objectos.css.type.Color;
 @Generated("br.com.objectos.css.maven.plugin.framework.FrameworkMojo")
 public final class TextColor extends AbstractStyleSheet {
 
-  public static final ClassSelector transparent = Css.dot("text-transparent");
+  public static final ClassSelector transparent = Css.randomDot(5);
 
-  public static final ClassSelector black = Css.dot("text-black");
+  public static final ClassSelector black = Css.randomDot(5);
 
-  public static final ClassSelector white = Css.dot("text-white");
+  public static final ClassSelector white = Css.randomDot(5);
 
-  public static final ClassSelector gray100 = Css.dot("text-gray-100");
+  public static final ClassSelector gray100 = Css.randomDot(5);
 
-  public static final ClassSelector gray200 = Css.dot("text-gray-200");
+  public static final ClassSelector gray200 = Css.randomDot(5);
 
-  public static final ClassSelector gray300 = Css.dot("text-gray-300");
+  public static final ClassSelector gray300 = Css.randomDot(5);
 
-  public static final ClassSelector gray400 = Css.dot("text-gray-400");
+  public static final ClassSelector gray400 = Css.randomDot(5);
 
-  public static final ClassSelector gray500 = Css.dot("text-gray-500");
+  public static final ClassSelector gray500 = Css.randomDot(5);
 
-  public static final ClassSelector gray600 = Css.dot("text-gray-600");
+  public static final ClassSelector gray600 = Css.randomDot(5);
 
-  public static final ClassSelector gray700 = Css.dot("text-gray-700");
+  public static final ClassSelector gray700 = Css.randomDot(5);
 
-  public static final ClassSelector gray800 = Css.dot("text-gray-800");
+  public static final ClassSelector gray800 = Css.randomDot(5);
 
-  public static final ClassSelector gray900 = Css.dot("text-gray-900");
+  public static final ClassSelector gray900 = Css.randomDot(5);
 
-  public static final ClassSelector red100 = Css.dot("text-red-100");
+  public static final ClassSelector red100 = Css.randomDot(5);
 
-  public static final ClassSelector red200 = Css.dot("text-red-200");
+  public static final ClassSelector red200 = Css.randomDot(5);
 
-  public static final ClassSelector red300 = Css.dot("text-red-300");
+  public static final ClassSelector red300 = Css.randomDot(5);
 
-  public static final ClassSelector red400 = Css.dot("text-red-400");
+  public static final ClassSelector red400 = Css.randomDot(5);
 
-  public static final ClassSelector red500 = Css.dot("text-red-500");
+  public static final ClassSelector red500 = Css.randomDot(5);
 
-  public static final ClassSelector red600 = Css.dot("text-red-600");
+  public static final ClassSelector red600 = Css.randomDot(5);
 
-  public static final ClassSelector red700 = Css.dot("text-red-700");
+  public static final ClassSelector red700 = Css.randomDot(5);
 
-  public static final ClassSelector red800 = Css.dot("text-red-800");
+  public static final ClassSelector red800 = Css.randomDot(5);
 
-  public static final ClassSelector red900 = Css.dot("text-red-900");
+  public static final ClassSelector red900 = Css.randomDot(5);
 
-  public static final ClassSelector orange100 = Css.dot("text-orange-100");
+  public static final ClassSelector orange100 = Css.randomDot(5);
 
-  public static final ClassSelector orange200 = Css.dot("text-orange-200");
+  public static final ClassSelector orange200 = Css.randomDot(5);
 
-  public static final ClassSelector orange300 = Css.dot("text-orange-300");
+  public static final ClassSelector orange300 = Css.randomDot(5);
 
-  public static final ClassSelector orange400 = Css.dot("text-orange-400");
+  public static final ClassSelector orange400 = Css.randomDot(5);
 
-  public static final ClassSelector orange500 = Css.dot("text-orange-500");
+  public static final ClassSelector orange500 = Css.randomDot(5);
 
-  public static final ClassSelector orange600 = Css.dot("text-orange-600");
+  public static final ClassSelector orange600 = Css.randomDot(5);
 
-  public static final ClassSelector orange700 = Css.dot("text-orange-700");
+  public static final ClassSelector orange700 = Css.randomDot(5);
 
-  public static final ClassSelector orange800 = Css.dot("text-orange-800");
+  public static final ClassSelector orange800 = Css.randomDot(5);
 
-  public static final ClassSelector orange900 = Css.dot("text-orange-900");
+  public static final ClassSelector orange900 = Css.randomDot(5);
 
-  public static final ClassSelector yellow100 = Css.dot("text-yellow-100");
+  public static final ClassSelector yellow100 = Css.randomDot(5);
 
-  public static final ClassSelector yellow200 = Css.dot("text-yellow-200");
+  public static final ClassSelector yellow200 = Css.randomDot(5);
 
-  public static final ClassSelector yellow300 = Css.dot("text-yellow-300");
+  public static final ClassSelector yellow300 = Css.randomDot(5);
 
-  public static final ClassSelector yellow400 = Css.dot("text-yellow-400");
+  public static final ClassSelector yellow400 = Css.randomDot(5);
 
-  public static final ClassSelector yellow500 = Css.dot("text-yellow-500");
+  public static final ClassSelector yellow500 = Css.randomDot(5);
 
-  public static final ClassSelector yellow600 = Css.dot("text-yellow-600");
+  public static final ClassSelector yellow600 = Css.randomDot(5);
 
-  public static final ClassSelector yellow700 = Css.dot("text-yellow-700");
+  public static final ClassSelector yellow700 = Css.randomDot(5);
 
-  public static final ClassSelector yellow800 = Css.dot("text-yellow-800");
+  public static final ClassSelector yellow800 = Css.randomDot(5);
 
-  public static final ClassSelector yellow900 = Css.dot("text-yellow-900");
+  public static final ClassSelector yellow900 = Css.randomDot(5);
 
-  public static final ClassSelector green100 = Css.dot("text-green-100");
+  public static final ClassSelector green100 = Css.randomDot(5);
 
-  public static final ClassSelector green200 = Css.dot("text-green-200");
+  public static final ClassSelector green200 = Css.randomDot(5);
 
-  public static final ClassSelector green300 = Css.dot("text-green-300");
+  public static final ClassSelector green300 = Css.randomDot(5);
 
-  public static final ClassSelector green400 = Css.dot("text-green-400");
+  public static final ClassSelector green400 = Css.randomDot(5);
 
-  public static final ClassSelector green500 = Css.dot("text-green-500");
+  public static final ClassSelector green500 = Css.randomDot(5);
 
-  public static final ClassSelector green600 = Css.dot("text-green-600");
+  public static final ClassSelector green600 = Css.randomDot(5);
 
-  public static final ClassSelector green700 = Css.dot("text-green-700");
+  public static final ClassSelector green700 = Css.randomDot(5);
 
-  public static final ClassSelector green800 = Css.dot("text-green-800");
+  public static final ClassSelector green800 = Css.randomDot(5);
 
-  public static final ClassSelector green900 = Css.dot("text-green-900");
+  public static final ClassSelector green900 = Css.randomDot(5);
 
-  public static final ClassSelector teal100 = Css.dot("text-teal-100");
+  public static final ClassSelector teal100 = Css.randomDot(5);
 
-  public static final ClassSelector teal200 = Css.dot("text-teal-200");
+  public static final ClassSelector teal200 = Css.randomDot(5);
 
-  public static final ClassSelector teal300 = Css.dot("text-teal-300");
+  public static final ClassSelector teal300 = Css.randomDot(5);
 
-  public static final ClassSelector teal400 = Css.dot("text-teal-400");
+  public static final ClassSelector teal400 = Css.randomDot(5);
 
-  public static final ClassSelector teal500 = Css.dot("text-teal-500");
+  public static final ClassSelector teal500 = Css.randomDot(5);
 
-  public static final ClassSelector teal600 = Css.dot("text-teal-600");
+  public static final ClassSelector teal600 = Css.randomDot(5);
 
-  public static final ClassSelector teal700 = Css.dot("text-teal-700");
+  public static final ClassSelector teal700 = Css.randomDot(5);
 
-  public static final ClassSelector teal800 = Css.dot("text-teal-800");
+  public static final ClassSelector teal800 = Css.randomDot(5);
 
-  public static final ClassSelector teal900 = Css.dot("text-teal-900");
+  public static final ClassSelector teal900 = Css.randomDot(5);
 
-  public static final ClassSelector blue100 = Css.dot("text-blue-100");
+  public static final ClassSelector blue100 = Css.randomDot(5);
 
-  public static final ClassSelector blue200 = Css.dot("text-blue-200");
+  public static final ClassSelector blue200 = Css.randomDot(5);
 
-  public static final ClassSelector blue300 = Css.dot("text-blue-300");
+  public static final ClassSelector blue300 = Css.randomDot(5);
 
-  public static final ClassSelector blue400 = Css.dot("text-blue-400");
+  public static final ClassSelector blue400 = Css.randomDot(5);
 
-  public static final ClassSelector blue500 = Css.dot("text-blue-500");
+  public static final ClassSelector blue500 = Css.randomDot(5);
 
-  public static final ClassSelector blue600 = Css.dot("text-blue-600");
+  public static final ClassSelector blue600 = Css.randomDot(5);
 
-  public static final ClassSelector blue700 = Css.dot("text-blue-700");
+  public static final ClassSelector blue700 = Css.randomDot(5);
 
-  public static final ClassSelector blue800 = Css.dot("text-blue-800");
+  public static final ClassSelector blue800 = Css.randomDot(5);
 
-  public static final ClassSelector blue900 = Css.dot("text-blue-900");
+  public static final ClassSelector blue900 = Css.randomDot(5);
 
-  public static final ClassSelector indigo100 = Css.dot("text-indigo-100");
+  public static final ClassSelector indigo100 = Css.randomDot(5);
 
-  public static final ClassSelector indigo200 = Css.dot("text-indigo-200");
+  public static final ClassSelector indigo200 = Css.randomDot(5);
 
-  public static final ClassSelector indigo300 = Css.dot("text-indigo-300");
+  public static final ClassSelector indigo300 = Css.randomDot(5);
 
-  public static final ClassSelector indigo400 = Css.dot("text-indigo-400");
+  public static final ClassSelector indigo400 = Css.randomDot(5);
 
-  public static final ClassSelector indigo500 = Css.dot("text-indigo-500");
+  public static final ClassSelector indigo500 = Css.randomDot(5);
 
-  public static final ClassSelector indigo600 = Css.dot("text-indigo-600");
+  public static final ClassSelector indigo600 = Css.randomDot(5);
 
-  public static final ClassSelector indigo700 = Css.dot("text-indigo-700");
+  public static final ClassSelector indigo700 = Css.randomDot(5);
 
-  public static final ClassSelector indigo800 = Css.dot("text-indigo-800");
+  public static final ClassSelector indigo800 = Css.randomDot(5);
 
-  public static final ClassSelector indigo900 = Css.dot("text-indigo-900");
+  public static final ClassSelector indigo900 = Css.randomDot(5);
 
-  public static final ClassSelector purple100 = Css.dot("text-purple-100");
+  public static final ClassSelector purple100 = Css.randomDot(5);
 
-  public static final ClassSelector purple200 = Css.dot("text-purple-200");
+  public static final ClassSelector purple200 = Css.randomDot(5);
 
-  public static final ClassSelector purple300 = Css.dot("text-purple-300");
+  public static final ClassSelector purple300 = Css.randomDot(5);
 
-  public static final ClassSelector purple400 = Css.dot("text-purple-400");
+  public static final ClassSelector purple400 = Css.randomDot(5);
 
-  public static final ClassSelector purple500 = Css.dot("text-purple-500");
+  public static final ClassSelector purple500 = Css.randomDot(5);
 
-  public static final ClassSelector purple600 = Css.dot("text-purple-600");
+  public static final ClassSelector purple600 = Css.randomDot(5);
 
-  public static final ClassSelector purple700 = Css.dot("text-purple-700");
+  public static final ClassSelector purple700 = Css.randomDot(5);
 
-  public static final ClassSelector purple800 = Css.dot("text-purple-800");
+  public static final ClassSelector purple800 = Css.randomDot(5);
 
-  public static final ClassSelector purple900 = Css.dot("text-purple-900");
+  public static final ClassSelector purple900 = Css.randomDot(5);
 
-  public static final ClassSelector pink100 = Css.dot("text-pink-100");
+  public static final ClassSelector pink100 = Css.randomDot(5);
 
-  public static final ClassSelector pink200 = Css.dot("text-pink-200");
+  public static final ClassSelector pink200 = Css.randomDot(5);
 
-  public static final ClassSelector pink300 = Css.dot("text-pink-300");
+  public static final ClassSelector pink300 = Css.randomDot(5);
 
-  public static final ClassSelector pink400 = Css.dot("text-pink-400");
+  public static final ClassSelector pink400 = Css.randomDot(5);
 
-  public static final ClassSelector pink500 = Css.dot("text-pink-500");
+  public static final ClassSelector pink500 = Css.randomDot(5);
 
-  public static final ClassSelector pink600 = Css.dot("text-pink-600");
+  public static final ClassSelector pink600 = Css.randomDot(5);
 
-  public static final ClassSelector pink700 = Css.dot("text-pink-700");
+  public static final ClassSelector pink700 = Css.randomDot(5);
 
-  public static final ClassSelector pink800 = Css.dot("text-pink-800");
+  public static final ClassSelector pink800 = Css.randomDot(5);
 
-  public static final ClassSelector pink900 = Css.dot("text-pink-900");
+  public static final ClassSelector pink900 = Css.randomDot(5);
 
   @Override
   protected final void definition() {
@@ -2460,761 +2460,761 @@ public final class TextColor extends AbstractStyleSheet {
 
   public interface sm {
 
-    ClassSelector transparent = Css.dot("sm-text-transparent");
+    ClassSelector transparent = Css.randomDot(5);
 
-    ClassSelector black = Css.dot("sm-text-black");
+    ClassSelector black = Css.randomDot(5);
 
-    ClassSelector white = Css.dot("sm-text-white");
+    ClassSelector white = Css.randomDot(5);
 
-    ClassSelector gray100 = Css.dot("sm-text-gray-100");
+    ClassSelector gray100 = Css.randomDot(5);
 
-    ClassSelector gray200 = Css.dot("sm-text-gray-200");
+    ClassSelector gray200 = Css.randomDot(5);
 
-    ClassSelector gray300 = Css.dot("sm-text-gray-300");
+    ClassSelector gray300 = Css.randomDot(5);
 
-    ClassSelector gray400 = Css.dot("sm-text-gray-400");
+    ClassSelector gray400 = Css.randomDot(5);
 
-    ClassSelector gray500 = Css.dot("sm-text-gray-500");
+    ClassSelector gray500 = Css.randomDot(5);
 
-    ClassSelector gray600 = Css.dot("sm-text-gray-600");
+    ClassSelector gray600 = Css.randomDot(5);
 
-    ClassSelector gray700 = Css.dot("sm-text-gray-700");
+    ClassSelector gray700 = Css.randomDot(5);
 
-    ClassSelector gray800 = Css.dot("sm-text-gray-800");
+    ClassSelector gray800 = Css.randomDot(5);
 
-    ClassSelector gray900 = Css.dot("sm-text-gray-900");
+    ClassSelector gray900 = Css.randomDot(5);
 
-    ClassSelector red100 = Css.dot("sm-text-red-100");
+    ClassSelector red100 = Css.randomDot(5);
 
-    ClassSelector red200 = Css.dot("sm-text-red-200");
+    ClassSelector red200 = Css.randomDot(5);
 
-    ClassSelector red300 = Css.dot("sm-text-red-300");
+    ClassSelector red300 = Css.randomDot(5);
 
-    ClassSelector red400 = Css.dot("sm-text-red-400");
+    ClassSelector red400 = Css.randomDot(5);
 
-    ClassSelector red500 = Css.dot("sm-text-red-500");
+    ClassSelector red500 = Css.randomDot(5);
 
-    ClassSelector red600 = Css.dot("sm-text-red-600");
+    ClassSelector red600 = Css.randomDot(5);
 
-    ClassSelector red700 = Css.dot("sm-text-red-700");
+    ClassSelector red700 = Css.randomDot(5);
 
-    ClassSelector red800 = Css.dot("sm-text-red-800");
+    ClassSelector red800 = Css.randomDot(5);
 
-    ClassSelector red900 = Css.dot("sm-text-red-900");
+    ClassSelector red900 = Css.randomDot(5);
 
-    ClassSelector orange100 = Css.dot("sm-text-orange-100");
+    ClassSelector orange100 = Css.randomDot(5);
 
-    ClassSelector orange200 = Css.dot("sm-text-orange-200");
+    ClassSelector orange200 = Css.randomDot(5);
 
-    ClassSelector orange300 = Css.dot("sm-text-orange-300");
+    ClassSelector orange300 = Css.randomDot(5);
 
-    ClassSelector orange400 = Css.dot("sm-text-orange-400");
+    ClassSelector orange400 = Css.randomDot(5);
 
-    ClassSelector orange500 = Css.dot("sm-text-orange-500");
+    ClassSelector orange500 = Css.randomDot(5);
 
-    ClassSelector orange600 = Css.dot("sm-text-orange-600");
+    ClassSelector orange600 = Css.randomDot(5);
 
-    ClassSelector orange700 = Css.dot("sm-text-orange-700");
+    ClassSelector orange700 = Css.randomDot(5);
 
-    ClassSelector orange800 = Css.dot("sm-text-orange-800");
+    ClassSelector orange800 = Css.randomDot(5);
 
-    ClassSelector orange900 = Css.dot("sm-text-orange-900");
+    ClassSelector orange900 = Css.randomDot(5);
 
-    ClassSelector yellow100 = Css.dot("sm-text-yellow-100");
+    ClassSelector yellow100 = Css.randomDot(5);
 
-    ClassSelector yellow200 = Css.dot("sm-text-yellow-200");
+    ClassSelector yellow200 = Css.randomDot(5);
 
-    ClassSelector yellow300 = Css.dot("sm-text-yellow-300");
+    ClassSelector yellow300 = Css.randomDot(5);
 
-    ClassSelector yellow400 = Css.dot("sm-text-yellow-400");
+    ClassSelector yellow400 = Css.randomDot(5);
 
-    ClassSelector yellow500 = Css.dot("sm-text-yellow-500");
+    ClassSelector yellow500 = Css.randomDot(5);
 
-    ClassSelector yellow600 = Css.dot("sm-text-yellow-600");
+    ClassSelector yellow600 = Css.randomDot(5);
 
-    ClassSelector yellow700 = Css.dot("sm-text-yellow-700");
+    ClassSelector yellow700 = Css.randomDot(5);
 
-    ClassSelector yellow800 = Css.dot("sm-text-yellow-800");
+    ClassSelector yellow800 = Css.randomDot(5);
 
-    ClassSelector yellow900 = Css.dot("sm-text-yellow-900");
+    ClassSelector yellow900 = Css.randomDot(5);
 
-    ClassSelector green100 = Css.dot("sm-text-green-100");
+    ClassSelector green100 = Css.randomDot(5);
 
-    ClassSelector green200 = Css.dot("sm-text-green-200");
+    ClassSelector green200 = Css.randomDot(5);
 
-    ClassSelector green300 = Css.dot("sm-text-green-300");
+    ClassSelector green300 = Css.randomDot(5);
 
-    ClassSelector green400 = Css.dot("sm-text-green-400");
+    ClassSelector green400 = Css.randomDot(5);
 
-    ClassSelector green500 = Css.dot("sm-text-green-500");
+    ClassSelector green500 = Css.randomDot(5);
 
-    ClassSelector green600 = Css.dot("sm-text-green-600");
+    ClassSelector green600 = Css.randomDot(5);
 
-    ClassSelector green700 = Css.dot("sm-text-green-700");
+    ClassSelector green700 = Css.randomDot(5);
 
-    ClassSelector green800 = Css.dot("sm-text-green-800");
+    ClassSelector green800 = Css.randomDot(5);
 
-    ClassSelector green900 = Css.dot("sm-text-green-900");
+    ClassSelector green900 = Css.randomDot(5);
 
-    ClassSelector teal100 = Css.dot("sm-text-teal-100");
+    ClassSelector teal100 = Css.randomDot(5);
 
-    ClassSelector teal200 = Css.dot("sm-text-teal-200");
+    ClassSelector teal200 = Css.randomDot(5);
 
-    ClassSelector teal300 = Css.dot("sm-text-teal-300");
+    ClassSelector teal300 = Css.randomDot(5);
 
-    ClassSelector teal400 = Css.dot("sm-text-teal-400");
+    ClassSelector teal400 = Css.randomDot(5);
 
-    ClassSelector teal500 = Css.dot("sm-text-teal-500");
+    ClassSelector teal500 = Css.randomDot(5);
 
-    ClassSelector teal600 = Css.dot("sm-text-teal-600");
+    ClassSelector teal600 = Css.randomDot(5);
 
-    ClassSelector teal700 = Css.dot("sm-text-teal-700");
+    ClassSelector teal700 = Css.randomDot(5);
 
-    ClassSelector teal800 = Css.dot("sm-text-teal-800");
+    ClassSelector teal800 = Css.randomDot(5);
 
-    ClassSelector teal900 = Css.dot("sm-text-teal-900");
+    ClassSelector teal900 = Css.randomDot(5);
 
-    ClassSelector blue100 = Css.dot("sm-text-blue-100");
+    ClassSelector blue100 = Css.randomDot(5);
 
-    ClassSelector blue200 = Css.dot("sm-text-blue-200");
+    ClassSelector blue200 = Css.randomDot(5);
 
-    ClassSelector blue300 = Css.dot("sm-text-blue-300");
+    ClassSelector blue300 = Css.randomDot(5);
 
-    ClassSelector blue400 = Css.dot("sm-text-blue-400");
+    ClassSelector blue400 = Css.randomDot(5);
 
-    ClassSelector blue500 = Css.dot("sm-text-blue-500");
+    ClassSelector blue500 = Css.randomDot(5);
 
-    ClassSelector blue600 = Css.dot("sm-text-blue-600");
+    ClassSelector blue600 = Css.randomDot(5);
 
-    ClassSelector blue700 = Css.dot("sm-text-blue-700");
+    ClassSelector blue700 = Css.randomDot(5);
 
-    ClassSelector blue800 = Css.dot("sm-text-blue-800");
+    ClassSelector blue800 = Css.randomDot(5);
 
-    ClassSelector blue900 = Css.dot("sm-text-blue-900");
+    ClassSelector blue900 = Css.randomDot(5);
 
-    ClassSelector indigo100 = Css.dot("sm-text-indigo-100");
+    ClassSelector indigo100 = Css.randomDot(5);
 
-    ClassSelector indigo200 = Css.dot("sm-text-indigo-200");
+    ClassSelector indigo200 = Css.randomDot(5);
 
-    ClassSelector indigo300 = Css.dot("sm-text-indigo-300");
+    ClassSelector indigo300 = Css.randomDot(5);
 
-    ClassSelector indigo400 = Css.dot("sm-text-indigo-400");
+    ClassSelector indigo400 = Css.randomDot(5);
 
-    ClassSelector indigo500 = Css.dot("sm-text-indigo-500");
+    ClassSelector indigo500 = Css.randomDot(5);
 
-    ClassSelector indigo600 = Css.dot("sm-text-indigo-600");
+    ClassSelector indigo600 = Css.randomDot(5);
 
-    ClassSelector indigo700 = Css.dot("sm-text-indigo-700");
+    ClassSelector indigo700 = Css.randomDot(5);
 
-    ClassSelector indigo800 = Css.dot("sm-text-indigo-800");
+    ClassSelector indigo800 = Css.randomDot(5);
 
-    ClassSelector indigo900 = Css.dot("sm-text-indigo-900");
+    ClassSelector indigo900 = Css.randomDot(5);
 
-    ClassSelector purple100 = Css.dot("sm-text-purple-100");
+    ClassSelector purple100 = Css.randomDot(5);
 
-    ClassSelector purple200 = Css.dot("sm-text-purple-200");
+    ClassSelector purple200 = Css.randomDot(5);
 
-    ClassSelector purple300 = Css.dot("sm-text-purple-300");
+    ClassSelector purple300 = Css.randomDot(5);
 
-    ClassSelector purple400 = Css.dot("sm-text-purple-400");
+    ClassSelector purple400 = Css.randomDot(5);
 
-    ClassSelector purple500 = Css.dot("sm-text-purple-500");
+    ClassSelector purple500 = Css.randomDot(5);
 
-    ClassSelector purple600 = Css.dot("sm-text-purple-600");
+    ClassSelector purple600 = Css.randomDot(5);
 
-    ClassSelector purple700 = Css.dot("sm-text-purple-700");
+    ClassSelector purple700 = Css.randomDot(5);
 
-    ClassSelector purple800 = Css.dot("sm-text-purple-800");
+    ClassSelector purple800 = Css.randomDot(5);
 
-    ClassSelector purple900 = Css.dot("sm-text-purple-900");
+    ClassSelector purple900 = Css.randomDot(5);
 
-    ClassSelector pink100 = Css.dot("sm-text-pink-100");
+    ClassSelector pink100 = Css.randomDot(5);
 
-    ClassSelector pink200 = Css.dot("sm-text-pink-200");
+    ClassSelector pink200 = Css.randomDot(5);
 
-    ClassSelector pink300 = Css.dot("sm-text-pink-300");
+    ClassSelector pink300 = Css.randomDot(5);
 
-    ClassSelector pink400 = Css.dot("sm-text-pink-400");
+    ClassSelector pink400 = Css.randomDot(5);
 
-    ClassSelector pink500 = Css.dot("sm-text-pink-500");
+    ClassSelector pink500 = Css.randomDot(5);
 
-    ClassSelector pink600 = Css.dot("sm-text-pink-600");
+    ClassSelector pink600 = Css.randomDot(5);
 
-    ClassSelector pink700 = Css.dot("sm-text-pink-700");
+    ClassSelector pink700 = Css.randomDot(5);
 
-    ClassSelector pink800 = Css.dot("sm-text-pink-800");
+    ClassSelector pink800 = Css.randomDot(5);
 
-    ClassSelector pink900 = Css.dot("sm-text-pink-900");
+    ClassSelector pink900 = Css.randomDot(5);
 
   }
 
   public interface md {
 
-    ClassSelector transparent = Css.dot("md-text-transparent");
+    ClassSelector transparent = Css.randomDot(5);
 
-    ClassSelector black = Css.dot("md-text-black");
+    ClassSelector black = Css.randomDot(5);
 
-    ClassSelector white = Css.dot("md-text-white");
+    ClassSelector white = Css.randomDot(5);
 
-    ClassSelector gray100 = Css.dot("md-text-gray-100");
+    ClassSelector gray100 = Css.randomDot(5);
 
-    ClassSelector gray200 = Css.dot("md-text-gray-200");
+    ClassSelector gray200 = Css.randomDot(5);
 
-    ClassSelector gray300 = Css.dot("md-text-gray-300");
+    ClassSelector gray300 = Css.randomDot(5);
 
-    ClassSelector gray400 = Css.dot("md-text-gray-400");
+    ClassSelector gray400 = Css.randomDot(5);
 
-    ClassSelector gray500 = Css.dot("md-text-gray-500");
+    ClassSelector gray500 = Css.randomDot(5);
 
-    ClassSelector gray600 = Css.dot("md-text-gray-600");
+    ClassSelector gray600 = Css.randomDot(5);
 
-    ClassSelector gray700 = Css.dot("md-text-gray-700");
+    ClassSelector gray700 = Css.randomDot(5);
 
-    ClassSelector gray800 = Css.dot("md-text-gray-800");
+    ClassSelector gray800 = Css.randomDot(5);
 
-    ClassSelector gray900 = Css.dot("md-text-gray-900");
+    ClassSelector gray900 = Css.randomDot(5);
 
-    ClassSelector red100 = Css.dot("md-text-red-100");
+    ClassSelector red100 = Css.randomDot(5);
 
-    ClassSelector red200 = Css.dot("md-text-red-200");
+    ClassSelector red200 = Css.randomDot(5);
 
-    ClassSelector red300 = Css.dot("md-text-red-300");
+    ClassSelector red300 = Css.randomDot(5);
 
-    ClassSelector red400 = Css.dot("md-text-red-400");
+    ClassSelector red400 = Css.randomDot(5);
 
-    ClassSelector red500 = Css.dot("md-text-red-500");
+    ClassSelector red500 = Css.randomDot(5);
 
-    ClassSelector red600 = Css.dot("md-text-red-600");
+    ClassSelector red600 = Css.randomDot(5);
 
-    ClassSelector red700 = Css.dot("md-text-red-700");
+    ClassSelector red700 = Css.randomDot(5);
 
-    ClassSelector red800 = Css.dot("md-text-red-800");
+    ClassSelector red800 = Css.randomDot(5);
 
-    ClassSelector red900 = Css.dot("md-text-red-900");
+    ClassSelector red900 = Css.randomDot(5);
 
-    ClassSelector orange100 = Css.dot("md-text-orange-100");
+    ClassSelector orange100 = Css.randomDot(5);
 
-    ClassSelector orange200 = Css.dot("md-text-orange-200");
+    ClassSelector orange200 = Css.randomDot(5);
 
-    ClassSelector orange300 = Css.dot("md-text-orange-300");
+    ClassSelector orange300 = Css.randomDot(5);
 
-    ClassSelector orange400 = Css.dot("md-text-orange-400");
+    ClassSelector orange400 = Css.randomDot(5);
 
-    ClassSelector orange500 = Css.dot("md-text-orange-500");
+    ClassSelector orange500 = Css.randomDot(5);
 
-    ClassSelector orange600 = Css.dot("md-text-orange-600");
+    ClassSelector orange600 = Css.randomDot(5);
 
-    ClassSelector orange700 = Css.dot("md-text-orange-700");
+    ClassSelector orange700 = Css.randomDot(5);
 
-    ClassSelector orange800 = Css.dot("md-text-orange-800");
+    ClassSelector orange800 = Css.randomDot(5);
 
-    ClassSelector orange900 = Css.dot("md-text-orange-900");
+    ClassSelector orange900 = Css.randomDot(5);
 
-    ClassSelector yellow100 = Css.dot("md-text-yellow-100");
+    ClassSelector yellow100 = Css.randomDot(5);
 
-    ClassSelector yellow200 = Css.dot("md-text-yellow-200");
+    ClassSelector yellow200 = Css.randomDot(5);
 
-    ClassSelector yellow300 = Css.dot("md-text-yellow-300");
+    ClassSelector yellow300 = Css.randomDot(5);
 
-    ClassSelector yellow400 = Css.dot("md-text-yellow-400");
+    ClassSelector yellow400 = Css.randomDot(5);
 
-    ClassSelector yellow500 = Css.dot("md-text-yellow-500");
+    ClassSelector yellow500 = Css.randomDot(5);
 
-    ClassSelector yellow600 = Css.dot("md-text-yellow-600");
+    ClassSelector yellow600 = Css.randomDot(5);
 
-    ClassSelector yellow700 = Css.dot("md-text-yellow-700");
+    ClassSelector yellow700 = Css.randomDot(5);
 
-    ClassSelector yellow800 = Css.dot("md-text-yellow-800");
+    ClassSelector yellow800 = Css.randomDot(5);
 
-    ClassSelector yellow900 = Css.dot("md-text-yellow-900");
+    ClassSelector yellow900 = Css.randomDot(5);
 
-    ClassSelector green100 = Css.dot("md-text-green-100");
+    ClassSelector green100 = Css.randomDot(5);
 
-    ClassSelector green200 = Css.dot("md-text-green-200");
+    ClassSelector green200 = Css.randomDot(5);
 
-    ClassSelector green300 = Css.dot("md-text-green-300");
+    ClassSelector green300 = Css.randomDot(5);
 
-    ClassSelector green400 = Css.dot("md-text-green-400");
+    ClassSelector green400 = Css.randomDot(5);
 
-    ClassSelector green500 = Css.dot("md-text-green-500");
+    ClassSelector green500 = Css.randomDot(5);
 
-    ClassSelector green600 = Css.dot("md-text-green-600");
+    ClassSelector green600 = Css.randomDot(5);
 
-    ClassSelector green700 = Css.dot("md-text-green-700");
+    ClassSelector green700 = Css.randomDot(5);
 
-    ClassSelector green800 = Css.dot("md-text-green-800");
+    ClassSelector green800 = Css.randomDot(5);
 
-    ClassSelector green900 = Css.dot("md-text-green-900");
+    ClassSelector green900 = Css.randomDot(5);
 
-    ClassSelector teal100 = Css.dot("md-text-teal-100");
+    ClassSelector teal100 = Css.randomDot(5);
 
-    ClassSelector teal200 = Css.dot("md-text-teal-200");
+    ClassSelector teal200 = Css.randomDot(5);
 
-    ClassSelector teal300 = Css.dot("md-text-teal-300");
+    ClassSelector teal300 = Css.randomDot(5);
 
-    ClassSelector teal400 = Css.dot("md-text-teal-400");
+    ClassSelector teal400 = Css.randomDot(5);
 
-    ClassSelector teal500 = Css.dot("md-text-teal-500");
+    ClassSelector teal500 = Css.randomDot(5);
 
-    ClassSelector teal600 = Css.dot("md-text-teal-600");
+    ClassSelector teal600 = Css.randomDot(5);
 
-    ClassSelector teal700 = Css.dot("md-text-teal-700");
+    ClassSelector teal700 = Css.randomDot(5);
 
-    ClassSelector teal800 = Css.dot("md-text-teal-800");
+    ClassSelector teal800 = Css.randomDot(5);
 
-    ClassSelector teal900 = Css.dot("md-text-teal-900");
+    ClassSelector teal900 = Css.randomDot(5);
 
-    ClassSelector blue100 = Css.dot("md-text-blue-100");
+    ClassSelector blue100 = Css.randomDot(5);
 
-    ClassSelector blue200 = Css.dot("md-text-blue-200");
+    ClassSelector blue200 = Css.randomDot(5);
 
-    ClassSelector blue300 = Css.dot("md-text-blue-300");
+    ClassSelector blue300 = Css.randomDot(5);
 
-    ClassSelector blue400 = Css.dot("md-text-blue-400");
+    ClassSelector blue400 = Css.randomDot(5);
 
-    ClassSelector blue500 = Css.dot("md-text-blue-500");
+    ClassSelector blue500 = Css.randomDot(5);
 
-    ClassSelector blue600 = Css.dot("md-text-blue-600");
+    ClassSelector blue600 = Css.randomDot(5);
 
-    ClassSelector blue700 = Css.dot("md-text-blue-700");
+    ClassSelector blue700 = Css.randomDot(5);
 
-    ClassSelector blue800 = Css.dot("md-text-blue-800");
+    ClassSelector blue800 = Css.randomDot(5);
 
-    ClassSelector blue900 = Css.dot("md-text-blue-900");
+    ClassSelector blue900 = Css.randomDot(5);
 
-    ClassSelector indigo100 = Css.dot("md-text-indigo-100");
+    ClassSelector indigo100 = Css.randomDot(5);
 
-    ClassSelector indigo200 = Css.dot("md-text-indigo-200");
+    ClassSelector indigo200 = Css.randomDot(5);
 
-    ClassSelector indigo300 = Css.dot("md-text-indigo-300");
+    ClassSelector indigo300 = Css.randomDot(5);
 
-    ClassSelector indigo400 = Css.dot("md-text-indigo-400");
+    ClassSelector indigo400 = Css.randomDot(5);
 
-    ClassSelector indigo500 = Css.dot("md-text-indigo-500");
+    ClassSelector indigo500 = Css.randomDot(5);
 
-    ClassSelector indigo600 = Css.dot("md-text-indigo-600");
+    ClassSelector indigo600 = Css.randomDot(5);
 
-    ClassSelector indigo700 = Css.dot("md-text-indigo-700");
+    ClassSelector indigo700 = Css.randomDot(5);
 
-    ClassSelector indigo800 = Css.dot("md-text-indigo-800");
+    ClassSelector indigo800 = Css.randomDot(5);
 
-    ClassSelector indigo900 = Css.dot("md-text-indigo-900");
+    ClassSelector indigo900 = Css.randomDot(5);
 
-    ClassSelector purple100 = Css.dot("md-text-purple-100");
+    ClassSelector purple100 = Css.randomDot(5);
 
-    ClassSelector purple200 = Css.dot("md-text-purple-200");
+    ClassSelector purple200 = Css.randomDot(5);
 
-    ClassSelector purple300 = Css.dot("md-text-purple-300");
+    ClassSelector purple300 = Css.randomDot(5);
 
-    ClassSelector purple400 = Css.dot("md-text-purple-400");
+    ClassSelector purple400 = Css.randomDot(5);
 
-    ClassSelector purple500 = Css.dot("md-text-purple-500");
+    ClassSelector purple500 = Css.randomDot(5);
 
-    ClassSelector purple600 = Css.dot("md-text-purple-600");
+    ClassSelector purple600 = Css.randomDot(5);
 
-    ClassSelector purple700 = Css.dot("md-text-purple-700");
+    ClassSelector purple700 = Css.randomDot(5);
 
-    ClassSelector purple800 = Css.dot("md-text-purple-800");
+    ClassSelector purple800 = Css.randomDot(5);
 
-    ClassSelector purple900 = Css.dot("md-text-purple-900");
+    ClassSelector purple900 = Css.randomDot(5);
 
-    ClassSelector pink100 = Css.dot("md-text-pink-100");
+    ClassSelector pink100 = Css.randomDot(5);
 
-    ClassSelector pink200 = Css.dot("md-text-pink-200");
+    ClassSelector pink200 = Css.randomDot(5);
 
-    ClassSelector pink300 = Css.dot("md-text-pink-300");
+    ClassSelector pink300 = Css.randomDot(5);
 
-    ClassSelector pink400 = Css.dot("md-text-pink-400");
+    ClassSelector pink400 = Css.randomDot(5);
 
-    ClassSelector pink500 = Css.dot("md-text-pink-500");
+    ClassSelector pink500 = Css.randomDot(5);
 
-    ClassSelector pink600 = Css.dot("md-text-pink-600");
+    ClassSelector pink600 = Css.randomDot(5);
 
-    ClassSelector pink700 = Css.dot("md-text-pink-700");
+    ClassSelector pink700 = Css.randomDot(5);
 
-    ClassSelector pink800 = Css.dot("md-text-pink-800");
+    ClassSelector pink800 = Css.randomDot(5);
 
-    ClassSelector pink900 = Css.dot("md-text-pink-900");
+    ClassSelector pink900 = Css.randomDot(5);
 
   }
 
   public interface lg {
 
-    ClassSelector transparent = Css.dot("lg-text-transparent");
+    ClassSelector transparent = Css.randomDot(5);
 
-    ClassSelector black = Css.dot("lg-text-black");
+    ClassSelector black = Css.randomDot(5);
 
-    ClassSelector white = Css.dot("lg-text-white");
+    ClassSelector white = Css.randomDot(5);
 
-    ClassSelector gray100 = Css.dot("lg-text-gray-100");
+    ClassSelector gray100 = Css.randomDot(5);
 
-    ClassSelector gray200 = Css.dot("lg-text-gray-200");
+    ClassSelector gray200 = Css.randomDot(5);
 
-    ClassSelector gray300 = Css.dot("lg-text-gray-300");
+    ClassSelector gray300 = Css.randomDot(5);
 
-    ClassSelector gray400 = Css.dot("lg-text-gray-400");
+    ClassSelector gray400 = Css.randomDot(5);
 
-    ClassSelector gray500 = Css.dot("lg-text-gray-500");
+    ClassSelector gray500 = Css.randomDot(5);
 
-    ClassSelector gray600 = Css.dot("lg-text-gray-600");
+    ClassSelector gray600 = Css.randomDot(5);
 
-    ClassSelector gray700 = Css.dot("lg-text-gray-700");
+    ClassSelector gray700 = Css.randomDot(5);
 
-    ClassSelector gray800 = Css.dot("lg-text-gray-800");
+    ClassSelector gray800 = Css.randomDot(5);
 
-    ClassSelector gray900 = Css.dot("lg-text-gray-900");
+    ClassSelector gray900 = Css.randomDot(5);
 
-    ClassSelector red100 = Css.dot("lg-text-red-100");
+    ClassSelector red100 = Css.randomDot(5);
 
-    ClassSelector red200 = Css.dot("lg-text-red-200");
+    ClassSelector red200 = Css.randomDot(5);
 
-    ClassSelector red300 = Css.dot("lg-text-red-300");
+    ClassSelector red300 = Css.randomDot(5);
 
-    ClassSelector red400 = Css.dot("lg-text-red-400");
+    ClassSelector red400 = Css.randomDot(5);
 
-    ClassSelector red500 = Css.dot("lg-text-red-500");
+    ClassSelector red500 = Css.randomDot(5);
 
-    ClassSelector red600 = Css.dot("lg-text-red-600");
+    ClassSelector red600 = Css.randomDot(5);
 
-    ClassSelector red700 = Css.dot("lg-text-red-700");
+    ClassSelector red700 = Css.randomDot(5);
 
-    ClassSelector red800 = Css.dot("lg-text-red-800");
+    ClassSelector red800 = Css.randomDot(5);
 
-    ClassSelector red900 = Css.dot("lg-text-red-900");
+    ClassSelector red900 = Css.randomDot(5);
 
-    ClassSelector orange100 = Css.dot("lg-text-orange-100");
+    ClassSelector orange100 = Css.randomDot(5);
 
-    ClassSelector orange200 = Css.dot("lg-text-orange-200");
+    ClassSelector orange200 = Css.randomDot(5);
 
-    ClassSelector orange300 = Css.dot("lg-text-orange-300");
+    ClassSelector orange300 = Css.randomDot(5);
 
-    ClassSelector orange400 = Css.dot("lg-text-orange-400");
+    ClassSelector orange400 = Css.randomDot(5);
 
-    ClassSelector orange500 = Css.dot("lg-text-orange-500");
+    ClassSelector orange500 = Css.randomDot(5);
 
-    ClassSelector orange600 = Css.dot("lg-text-orange-600");
+    ClassSelector orange600 = Css.randomDot(5);
 
-    ClassSelector orange700 = Css.dot("lg-text-orange-700");
+    ClassSelector orange700 = Css.randomDot(5);
 
-    ClassSelector orange800 = Css.dot("lg-text-orange-800");
+    ClassSelector orange800 = Css.randomDot(5);
 
-    ClassSelector orange900 = Css.dot("lg-text-orange-900");
+    ClassSelector orange900 = Css.randomDot(5);
 
-    ClassSelector yellow100 = Css.dot("lg-text-yellow-100");
+    ClassSelector yellow100 = Css.randomDot(5);
 
-    ClassSelector yellow200 = Css.dot("lg-text-yellow-200");
+    ClassSelector yellow200 = Css.randomDot(5);
 
-    ClassSelector yellow300 = Css.dot("lg-text-yellow-300");
+    ClassSelector yellow300 = Css.randomDot(5);
 
-    ClassSelector yellow400 = Css.dot("lg-text-yellow-400");
+    ClassSelector yellow400 = Css.randomDot(5);
 
-    ClassSelector yellow500 = Css.dot("lg-text-yellow-500");
+    ClassSelector yellow500 = Css.randomDot(5);
 
-    ClassSelector yellow600 = Css.dot("lg-text-yellow-600");
+    ClassSelector yellow600 = Css.randomDot(5);
 
-    ClassSelector yellow700 = Css.dot("lg-text-yellow-700");
+    ClassSelector yellow700 = Css.randomDot(5);
 
-    ClassSelector yellow800 = Css.dot("lg-text-yellow-800");
+    ClassSelector yellow800 = Css.randomDot(5);
 
-    ClassSelector yellow900 = Css.dot("lg-text-yellow-900");
+    ClassSelector yellow900 = Css.randomDot(5);
 
-    ClassSelector green100 = Css.dot("lg-text-green-100");
+    ClassSelector green100 = Css.randomDot(5);
 
-    ClassSelector green200 = Css.dot("lg-text-green-200");
+    ClassSelector green200 = Css.randomDot(5);
 
-    ClassSelector green300 = Css.dot("lg-text-green-300");
+    ClassSelector green300 = Css.randomDot(5);
 
-    ClassSelector green400 = Css.dot("lg-text-green-400");
+    ClassSelector green400 = Css.randomDot(5);
 
-    ClassSelector green500 = Css.dot("lg-text-green-500");
+    ClassSelector green500 = Css.randomDot(5);
 
-    ClassSelector green600 = Css.dot("lg-text-green-600");
+    ClassSelector green600 = Css.randomDot(5);
 
-    ClassSelector green700 = Css.dot("lg-text-green-700");
+    ClassSelector green700 = Css.randomDot(5);
 
-    ClassSelector green800 = Css.dot("lg-text-green-800");
+    ClassSelector green800 = Css.randomDot(5);
 
-    ClassSelector green900 = Css.dot("lg-text-green-900");
+    ClassSelector green900 = Css.randomDot(5);
 
-    ClassSelector teal100 = Css.dot("lg-text-teal-100");
+    ClassSelector teal100 = Css.randomDot(5);
 
-    ClassSelector teal200 = Css.dot("lg-text-teal-200");
+    ClassSelector teal200 = Css.randomDot(5);
 
-    ClassSelector teal300 = Css.dot("lg-text-teal-300");
+    ClassSelector teal300 = Css.randomDot(5);
 
-    ClassSelector teal400 = Css.dot("lg-text-teal-400");
+    ClassSelector teal400 = Css.randomDot(5);
 
-    ClassSelector teal500 = Css.dot("lg-text-teal-500");
+    ClassSelector teal500 = Css.randomDot(5);
 
-    ClassSelector teal600 = Css.dot("lg-text-teal-600");
+    ClassSelector teal600 = Css.randomDot(5);
 
-    ClassSelector teal700 = Css.dot("lg-text-teal-700");
+    ClassSelector teal700 = Css.randomDot(5);
 
-    ClassSelector teal800 = Css.dot("lg-text-teal-800");
+    ClassSelector teal800 = Css.randomDot(5);
 
-    ClassSelector teal900 = Css.dot("lg-text-teal-900");
+    ClassSelector teal900 = Css.randomDot(5);
 
-    ClassSelector blue100 = Css.dot("lg-text-blue-100");
+    ClassSelector blue100 = Css.randomDot(5);
 
-    ClassSelector blue200 = Css.dot("lg-text-blue-200");
+    ClassSelector blue200 = Css.randomDot(5);
 
-    ClassSelector blue300 = Css.dot("lg-text-blue-300");
+    ClassSelector blue300 = Css.randomDot(5);
 
-    ClassSelector blue400 = Css.dot("lg-text-blue-400");
+    ClassSelector blue400 = Css.randomDot(5);
 
-    ClassSelector blue500 = Css.dot("lg-text-blue-500");
+    ClassSelector blue500 = Css.randomDot(5);
 
-    ClassSelector blue600 = Css.dot("lg-text-blue-600");
+    ClassSelector blue600 = Css.randomDot(5);
 
-    ClassSelector blue700 = Css.dot("lg-text-blue-700");
+    ClassSelector blue700 = Css.randomDot(5);
 
-    ClassSelector blue800 = Css.dot("lg-text-blue-800");
+    ClassSelector blue800 = Css.randomDot(5);
 
-    ClassSelector blue900 = Css.dot("lg-text-blue-900");
+    ClassSelector blue900 = Css.randomDot(5);
 
-    ClassSelector indigo100 = Css.dot("lg-text-indigo-100");
+    ClassSelector indigo100 = Css.randomDot(5);
 
-    ClassSelector indigo200 = Css.dot("lg-text-indigo-200");
+    ClassSelector indigo200 = Css.randomDot(5);
 
-    ClassSelector indigo300 = Css.dot("lg-text-indigo-300");
+    ClassSelector indigo300 = Css.randomDot(5);
 
-    ClassSelector indigo400 = Css.dot("lg-text-indigo-400");
+    ClassSelector indigo400 = Css.randomDot(5);
 
-    ClassSelector indigo500 = Css.dot("lg-text-indigo-500");
+    ClassSelector indigo500 = Css.randomDot(5);
 
-    ClassSelector indigo600 = Css.dot("lg-text-indigo-600");
+    ClassSelector indigo600 = Css.randomDot(5);
 
-    ClassSelector indigo700 = Css.dot("lg-text-indigo-700");
+    ClassSelector indigo700 = Css.randomDot(5);
 
-    ClassSelector indigo800 = Css.dot("lg-text-indigo-800");
+    ClassSelector indigo800 = Css.randomDot(5);
 
-    ClassSelector indigo900 = Css.dot("lg-text-indigo-900");
+    ClassSelector indigo900 = Css.randomDot(5);
 
-    ClassSelector purple100 = Css.dot("lg-text-purple-100");
+    ClassSelector purple100 = Css.randomDot(5);
 
-    ClassSelector purple200 = Css.dot("lg-text-purple-200");
+    ClassSelector purple200 = Css.randomDot(5);
 
-    ClassSelector purple300 = Css.dot("lg-text-purple-300");
+    ClassSelector purple300 = Css.randomDot(5);
 
-    ClassSelector purple400 = Css.dot("lg-text-purple-400");
+    ClassSelector purple400 = Css.randomDot(5);
 
-    ClassSelector purple500 = Css.dot("lg-text-purple-500");
+    ClassSelector purple500 = Css.randomDot(5);
 
-    ClassSelector purple600 = Css.dot("lg-text-purple-600");
+    ClassSelector purple600 = Css.randomDot(5);
 
-    ClassSelector purple700 = Css.dot("lg-text-purple-700");
+    ClassSelector purple700 = Css.randomDot(5);
 
-    ClassSelector purple800 = Css.dot("lg-text-purple-800");
+    ClassSelector purple800 = Css.randomDot(5);
 
-    ClassSelector purple900 = Css.dot("lg-text-purple-900");
+    ClassSelector purple900 = Css.randomDot(5);
 
-    ClassSelector pink100 = Css.dot("lg-text-pink-100");
+    ClassSelector pink100 = Css.randomDot(5);
 
-    ClassSelector pink200 = Css.dot("lg-text-pink-200");
+    ClassSelector pink200 = Css.randomDot(5);
 
-    ClassSelector pink300 = Css.dot("lg-text-pink-300");
+    ClassSelector pink300 = Css.randomDot(5);
 
-    ClassSelector pink400 = Css.dot("lg-text-pink-400");
+    ClassSelector pink400 = Css.randomDot(5);
 
-    ClassSelector pink500 = Css.dot("lg-text-pink-500");
+    ClassSelector pink500 = Css.randomDot(5);
 
-    ClassSelector pink600 = Css.dot("lg-text-pink-600");
+    ClassSelector pink600 = Css.randomDot(5);
 
-    ClassSelector pink700 = Css.dot("lg-text-pink-700");
+    ClassSelector pink700 = Css.randomDot(5);
 
-    ClassSelector pink800 = Css.dot("lg-text-pink-800");
+    ClassSelector pink800 = Css.randomDot(5);
 
-    ClassSelector pink900 = Css.dot("lg-text-pink-900");
+    ClassSelector pink900 = Css.randomDot(5);
 
   }
 
   public interface xl {
 
-    ClassSelector transparent = Css.dot("xl-text-transparent");
+    ClassSelector transparent = Css.randomDot(5);
 
-    ClassSelector black = Css.dot("xl-text-black");
+    ClassSelector black = Css.randomDot(5);
 
-    ClassSelector white = Css.dot("xl-text-white");
+    ClassSelector white = Css.randomDot(5);
 
-    ClassSelector gray100 = Css.dot("xl-text-gray-100");
+    ClassSelector gray100 = Css.randomDot(5);
 
-    ClassSelector gray200 = Css.dot("xl-text-gray-200");
+    ClassSelector gray200 = Css.randomDot(5);
 
-    ClassSelector gray300 = Css.dot("xl-text-gray-300");
+    ClassSelector gray300 = Css.randomDot(5);
 
-    ClassSelector gray400 = Css.dot("xl-text-gray-400");
+    ClassSelector gray400 = Css.randomDot(5);
 
-    ClassSelector gray500 = Css.dot("xl-text-gray-500");
+    ClassSelector gray500 = Css.randomDot(5);
 
-    ClassSelector gray600 = Css.dot("xl-text-gray-600");
+    ClassSelector gray600 = Css.randomDot(5);
 
-    ClassSelector gray700 = Css.dot("xl-text-gray-700");
+    ClassSelector gray700 = Css.randomDot(5);
 
-    ClassSelector gray800 = Css.dot("xl-text-gray-800");
+    ClassSelector gray800 = Css.randomDot(5);
 
-    ClassSelector gray900 = Css.dot("xl-text-gray-900");
+    ClassSelector gray900 = Css.randomDot(5);
 
-    ClassSelector red100 = Css.dot("xl-text-red-100");
+    ClassSelector red100 = Css.randomDot(5);
 
-    ClassSelector red200 = Css.dot("xl-text-red-200");
+    ClassSelector red200 = Css.randomDot(5);
 
-    ClassSelector red300 = Css.dot("xl-text-red-300");
+    ClassSelector red300 = Css.randomDot(5);
 
-    ClassSelector red400 = Css.dot("xl-text-red-400");
+    ClassSelector red400 = Css.randomDot(5);
 
-    ClassSelector red500 = Css.dot("xl-text-red-500");
+    ClassSelector red500 = Css.randomDot(5);
 
-    ClassSelector red600 = Css.dot("xl-text-red-600");
+    ClassSelector red600 = Css.randomDot(5);
 
-    ClassSelector red700 = Css.dot("xl-text-red-700");
+    ClassSelector red700 = Css.randomDot(5);
 
-    ClassSelector red800 = Css.dot("xl-text-red-800");
+    ClassSelector red800 = Css.randomDot(5);
 
-    ClassSelector red900 = Css.dot("xl-text-red-900");
+    ClassSelector red900 = Css.randomDot(5);
 
-    ClassSelector orange100 = Css.dot("xl-text-orange-100");
+    ClassSelector orange100 = Css.randomDot(5);
 
-    ClassSelector orange200 = Css.dot("xl-text-orange-200");
+    ClassSelector orange200 = Css.randomDot(5);
 
-    ClassSelector orange300 = Css.dot("xl-text-orange-300");
+    ClassSelector orange300 = Css.randomDot(5);
 
-    ClassSelector orange400 = Css.dot("xl-text-orange-400");
+    ClassSelector orange400 = Css.randomDot(5);
 
-    ClassSelector orange500 = Css.dot("xl-text-orange-500");
+    ClassSelector orange500 = Css.randomDot(5);
 
-    ClassSelector orange600 = Css.dot("xl-text-orange-600");
+    ClassSelector orange600 = Css.randomDot(5);
 
-    ClassSelector orange700 = Css.dot("xl-text-orange-700");
+    ClassSelector orange700 = Css.randomDot(5);
 
-    ClassSelector orange800 = Css.dot("xl-text-orange-800");
+    ClassSelector orange800 = Css.randomDot(5);
 
-    ClassSelector orange900 = Css.dot("xl-text-orange-900");
+    ClassSelector orange900 = Css.randomDot(5);
 
-    ClassSelector yellow100 = Css.dot("xl-text-yellow-100");
+    ClassSelector yellow100 = Css.randomDot(5);
 
-    ClassSelector yellow200 = Css.dot("xl-text-yellow-200");
+    ClassSelector yellow200 = Css.randomDot(5);
 
-    ClassSelector yellow300 = Css.dot("xl-text-yellow-300");
+    ClassSelector yellow300 = Css.randomDot(5);
 
-    ClassSelector yellow400 = Css.dot("xl-text-yellow-400");
+    ClassSelector yellow400 = Css.randomDot(5);
 
-    ClassSelector yellow500 = Css.dot("xl-text-yellow-500");
+    ClassSelector yellow500 = Css.randomDot(5);
 
-    ClassSelector yellow600 = Css.dot("xl-text-yellow-600");
+    ClassSelector yellow600 = Css.randomDot(5);
 
-    ClassSelector yellow700 = Css.dot("xl-text-yellow-700");
+    ClassSelector yellow700 = Css.randomDot(5);
 
-    ClassSelector yellow800 = Css.dot("xl-text-yellow-800");
+    ClassSelector yellow800 = Css.randomDot(5);
 
-    ClassSelector yellow900 = Css.dot("xl-text-yellow-900");
+    ClassSelector yellow900 = Css.randomDot(5);
 
-    ClassSelector green100 = Css.dot("xl-text-green-100");
+    ClassSelector green100 = Css.randomDot(5);
 
-    ClassSelector green200 = Css.dot("xl-text-green-200");
+    ClassSelector green200 = Css.randomDot(5);
 
-    ClassSelector green300 = Css.dot("xl-text-green-300");
+    ClassSelector green300 = Css.randomDot(5);
 
-    ClassSelector green400 = Css.dot("xl-text-green-400");
+    ClassSelector green400 = Css.randomDot(5);
 
-    ClassSelector green500 = Css.dot("xl-text-green-500");
+    ClassSelector green500 = Css.randomDot(5);
 
-    ClassSelector green600 = Css.dot("xl-text-green-600");
+    ClassSelector green600 = Css.randomDot(5);
 
-    ClassSelector green700 = Css.dot("xl-text-green-700");
+    ClassSelector green700 = Css.randomDot(5);
 
-    ClassSelector green800 = Css.dot("xl-text-green-800");
+    ClassSelector green800 = Css.randomDot(5);
 
-    ClassSelector green900 = Css.dot("xl-text-green-900");
+    ClassSelector green900 = Css.randomDot(5);
 
-    ClassSelector teal100 = Css.dot("xl-text-teal-100");
+    ClassSelector teal100 = Css.randomDot(5);
 
-    ClassSelector teal200 = Css.dot("xl-text-teal-200");
+    ClassSelector teal200 = Css.randomDot(5);
 
-    ClassSelector teal300 = Css.dot("xl-text-teal-300");
+    ClassSelector teal300 = Css.randomDot(5);
 
-    ClassSelector teal400 = Css.dot("xl-text-teal-400");
+    ClassSelector teal400 = Css.randomDot(5);
 
-    ClassSelector teal500 = Css.dot("xl-text-teal-500");
+    ClassSelector teal500 = Css.randomDot(5);
 
-    ClassSelector teal600 = Css.dot("xl-text-teal-600");
+    ClassSelector teal600 = Css.randomDot(5);
 
-    ClassSelector teal700 = Css.dot("xl-text-teal-700");
+    ClassSelector teal700 = Css.randomDot(5);
 
-    ClassSelector teal800 = Css.dot("xl-text-teal-800");
+    ClassSelector teal800 = Css.randomDot(5);
 
-    ClassSelector teal900 = Css.dot("xl-text-teal-900");
+    ClassSelector teal900 = Css.randomDot(5);
 
-    ClassSelector blue100 = Css.dot("xl-text-blue-100");
+    ClassSelector blue100 = Css.randomDot(5);
 
-    ClassSelector blue200 = Css.dot("xl-text-blue-200");
+    ClassSelector blue200 = Css.randomDot(5);
 
-    ClassSelector blue300 = Css.dot("xl-text-blue-300");
+    ClassSelector blue300 = Css.randomDot(5);
 
-    ClassSelector blue400 = Css.dot("xl-text-blue-400");
+    ClassSelector blue400 = Css.randomDot(5);
 
-    ClassSelector blue500 = Css.dot("xl-text-blue-500");
+    ClassSelector blue500 = Css.randomDot(5);
 
-    ClassSelector blue600 = Css.dot("xl-text-blue-600");
+    ClassSelector blue600 = Css.randomDot(5);
 
-    ClassSelector blue700 = Css.dot("xl-text-blue-700");
+    ClassSelector blue700 = Css.randomDot(5);
 
-    ClassSelector blue800 = Css.dot("xl-text-blue-800");
+    ClassSelector blue800 = Css.randomDot(5);
 
-    ClassSelector blue900 = Css.dot("xl-text-blue-900");
+    ClassSelector blue900 = Css.randomDot(5);
 
-    ClassSelector indigo100 = Css.dot("xl-text-indigo-100");
+    ClassSelector indigo100 = Css.randomDot(5);
 
-    ClassSelector indigo200 = Css.dot("xl-text-indigo-200");
+    ClassSelector indigo200 = Css.randomDot(5);
 
-    ClassSelector indigo300 = Css.dot("xl-text-indigo-300");
+    ClassSelector indigo300 = Css.randomDot(5);
 
-    ClassSelector indigo400 = Css.dot("xl-text-indigo-400");
+    ClassSelector indigo400 = Css.randomDot(5);
 
-    ClassSelector indigo500 = Css.dot("xl-text-indigo-500");
+    ClassSelector indigo500 = Css.randomDot(5);
 
-    ClassSelector indigo600 = Css.dot("xl-text-indigo-600");
+    ClassSelector indigo600 = Css.randomDot(5);
 
-    ClassSelector indigo700 = Css.dot("xl-text-indigo-700");
+    ClassSelector indigo700 = Css.randomDot(5);
 
-    ClassSelector indigo800 = Css.dot("xl-text-indigo-800");
+    ClassSelector indigo800 = Css.randomDot(5);
 
-    ClassSelector indigo900 = Css.dot("xl-text-indigo-900");
+    ClassSelector indigo900 = Css.randomDot(5);
 
-    ClassSelector purple100 = Css.dot("xl-text-purple-100");
+    ClassSelector purple100 = Css.randomDot(5);
 
-    ClassSelector purple200 = Css.dot("xl-text-purple-200");
+    ClassSelector purple200 = Css.randomDot(5);
 
-    ClassSelector purple300 = Css.dot("xl-text-purple-300");
+    ClassSelector purple300 = Css.randomDot(5);
 
-    ClassSelector purple400 = Css.dot("xl-text-purple-400");
+    ClassSelector purple400 = Css.randomDot(5);
 
-    ClassSelector purple500 = Css.dot("xl-text-purple-500");
+    ClassSelector purple500 = Css.randomDot(5);
 
-    ClassSelector purple600 = Css.dot("xl-text-purple-600");
+    ClassSelector purple600 = Css.randomDot(5);
 
-    ClassSelector purple700 = Css.dot("xl-text-purple-700");
+    ClassSelector purple700 = Css.randomDot(5);
 
-    ClassSelector purple800 = Css.dot("xl-text-purple-800");
+    ClassSelector purple800 = Css.randomDot(5);
 
-    ClassSelector purple900 = Css.dot("xl-text-purple-900");
+    ClassSelector purple900 = Css.randomDot(5);
 
-    ClassSelector pink100 = Css.dot("xl-text-pink-100");
+    ClassSelector pink100 = Css.randomDot(5);
 
-    ClassSelector pink200 = Css.dot("xl-text-pink-200");
+    ClassSelector pink200 = Css.randomDot(5);
 
-    ClassSelector pink300 = Css.dot("xl-text-pink-300");
+    ClassSelector pink300 = Css.randomDot(5);
 
-    ClassSelector pink400 = Css.dot("xl-text-pink-400");
+    ClassSelector pink400 = Css.randomDot(5);
 
-    ClassSelector pink500 = Css.dot("xl-text-pink-500");
+    ClassSelector pink500 = Css.randomDot(5);
 
-    ClassSelector pink600 = Css.dot("xl-text-pink-600");
+    ClassSelector pink600 = Css.randomDot(5);
 
-    ClassSelector pink700 = Css.dot("xl-text-pink-700");
+    ClassSelector pink700 = Css.randomDot(5);
 
-    ClassSelector pink800 = Css.dot("xl-text-pink-800");
+    ClassSelector pink800 = Css.randomDot(5);
 
-    ClassSelector pink900 = Css.dot("xl-text-pink-900");
+    ClassSelector pink900 = Css.randomDot(5);
 
   }
 

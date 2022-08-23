@@ -23,23 +23,23 @@ import br.com.objectos.css.sheet.AbstractStyleSheet;
 @Generated("br.com.objectos.css.maven.plugin.framework.FrameworkMojo")
 public final class FontWeight extends AbstractStyleSheet {
 
-  public static final ClassSelector hairline = Css.dot("fw-hairline");
+  public static final ClassSelector hairline = Css.randomDot(5);
 
-  public static final ClassSelector thin = Css.dot("fw-thin");
+  public static final ClassSelector thin = Css.randomDot(5);
 
-  public static final ClassSelector light = Css.dot("fw-light");
+  public static final ClassSelector light = Css.randomDot(5);
 
-  public static final ClassSelector normal = Css.dot("fw-normal");
+  public static final ClassSelector normal = Css.randomDot(5);
 
-  public static final ClassSelector medium = Css.dot("fw-medium");
+  public static final ClassSelector medium = Css.randomDot(5);
 
-  public static final ClassSelector semibold = Css.dot("fw-semibold");
+  public static final ClassSelector semibold = Css.randomDot(5);
 
-  public static final ClassSelector bold = Css.dot("fw-bold");
+  public static final ClassSelector bold = Css.randomDot(5);
 
-  public static final ClassSelector extrabold = Css.dot("fw-extrabold");
+  public static final ClassSelector extrabold = Css.randomDot(5);
 
-  public static final ClassSelector black = Css.dot("fw-black");
+  public static final ClassSelector black = Css.randomDot(5);
 
   @Override
   protected final void definition() {
@@ -275,89 +275,89 @@ public final class FontWeight extends AbstractStyleSheet {
 
   public interface sm {
 
-    ClassSelector hairline = Css.dot("sm-fw-hairline");
+    ClassSelector hairline = Css.randomDot(5);
 
-    ClassSelector thin = Css.dot("sm-fw-thin");
+    ClassSelector thin = Css.randomDot(5);
 
-    ClassSelector light = Css.dot("sm-fw-light");
+    ClassSelector light = Css.randomDot(5);
 
-    ClassSelector normal = Css.dot("sm-fw-normal");
+    ClassSelector normal = Css.randomDot(5);
 
-    ClassSelector medium = Css.dot("sm-fw-medium");
+    ClassSelector medium = Css.randomDot(5);
 
-    ClassSelector semibold = Css.dot("sm-fw-semibold");
+    ClassSelector semibold = Css.randomDot(5);
 
-    ClassSelector bold = Css.dot("sm-fw-bold");
+    ClassSelector bold = Css.randomDot(5);
 
-    ClassSelector extrabold = Css.dot("sm-fw-extrabold");
+    ClassSelector extrabold = Css.randomDot(5);
 
-    ClassSelector black = Css.dot("sm-fw-black");
+    ClassSelector black = Css.randomDot(5);
 
   }
 
   public interface md {
 
-    ClassSelector hairline = Css.dot("md-fw-hairline");
+    ClassSelector hairline = Css.randomDot(5);
 
-    ClassSelector thin = Css.dot("md-fw-thin");
+    ClassSelector thin = Css.randomDot(5);
 
-    ClassSelector light = Css.dot("md-fw-light");
+    ClassSelector light = Css.randomDot(5);
 
-    ClassSelector normal = Css.dot("md-fw-normal");
+    ClassSelector normal = Css.randomDot(5);
 
-    ClassSelector medium = Css.dot("md-fw-medium");
+    ClassSelector medium = Css.randomDot(5);
 
-    ClassSelector semibold = Css.dot("md-fw-semibold");
+    ClassSelector semibold = Css.randomDot(5);
 
-    ClassSelector bold = Css.dot("md-fw-bold");
+    ClassSelector bold = Css.randomDot(5);
 
-    ClassSelector extrabold = Css.dot("md-fw-extrabold");
+    ClassSelector extrabold = Css.randomDot(5);
 
-    ClassSelector black = Css.dot("md-fw-black");
+    ClassSelector black = Css.randomDot(5);
 
   }
 
   public interface lg {
 
-    ClassSelector hairline = Css.dot("lg-fw-hairline");
+    ClassSelector hairline = Css.randomDot(5);
 
-    ClassSelector thin = Css.dot("lg-fw-thin");
+    ClassSelector thin = Css.randomDot(5);
 
-    ClassSelector light = Css.dot("lg-fw-light");
+    ClassSelector light = Css.randomDot(5);
 
-    ClassSelector normal = Css.dot("lg-fw-normal");
+    ClassSelector normal = Css.randomDot(5);
 
-    ClassSelector medium = Css.dot("lg-fw-medium");
+    ClassSelector medium = Css.randomDot(5);
 
-    ClassSelector semibold = Css.dot("lg-fw-semibold");
+    ClassSelector semibold = Css.randomDot(5);
 
-    ClassSelector bold = Css.dot("lg-fw-bold");
+    ClassSelector bold = Css.randomDot(5);
 
-    ClassSelector extrabold = Css.dot("lg-fw-extrabold");
+    ClassSelector extrabold = Css.randomDot(5);
 
-    ClassSelector black = Css.dot("lg-fw-black");
+    ClassSelector black = Css.randomDot(5);
 
   }
 
   public interface xl {
 
-    ClassSelector hairline = Css.dot("xl-fw-hairline");
+    ClassSelector hairline = Css.randomDot(5);
 
-    ClassSelector thin = Css.dot("xl-fw-thin");
+    ClassSelector thin = Css.randomDot(5);
 
-    ClassSelector light = Css.dot("xl-fw-light");
+    ClassSelector light = Css.randomDot(5);
 
-    ClassSelector normal = Css.dot("xl-fw-normal");
+    ClassSelector normal = Css.randomDot(5);
 
-    ClassSelector medium = Css.dot("xl-fw-medium");
+    ClassSelector medium = Css.randomDot(5);
 
-    ClassSelector semibold = Css.dot("xl-fw-semibold");
+    ClassSelector semibold = Css.randomDot(5);
 
-    ClassSelector bold = Css.dot("xl-fw-bold");
+    ClassSelector bold = Css.randomDot(5);
 
-    ClassSelector extrabold = Css.dot("xl-fw-extrabold");
+    ClassSelector extrabold = Css.randomDot(5);
 
-    ClassSelector black = Css.dot("xl-fw-black");
+    ClassSelector black = Css.randomDot(5);
 
   }
 

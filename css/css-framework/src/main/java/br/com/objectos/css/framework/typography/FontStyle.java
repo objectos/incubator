@@ -24,9 +24,9 @@ import br.com.objectos.css.sheet.AbstractStyleSheet;
 @Generated("br.com.objectos.css.maven.plugin.framework.FrameworkMojo")
 public final class FontStyle extends AbstractStyleSheet {
 
-  public static final ClassSelector italic = Css.dot("fs-italic");
+  public static final ClassSelector italic = Css.randomDot(5);
 
-  public static final ClassSelector normal = Css.dot("fs-normal");
+  public static final ClassSelector normal = Css.randomDot(5);
 
   @Override
   protected final void definition() {
@@ -94,33 +94,33 @@ public final class FontStyle extends AbstractStyleSheet {
 
   public interface sm {
 
-    ClassSelector italic = Css.dot("sm-fs-italic");
+    ClassSelector italic = Css.randomDot(5);
 
-    ClassSelector normal = Css.dot("sm-fs-normal");
+    ClassSelector normal = Css.randomDot(5);
 
   }
 
   public interface md {
 
-    ClassSelector italic = Css.dot("md-fs-italic");
+    ClassSelector italic = Css.randomDot(5);
 
-    ClassSelector normal = Css.dot("md-fs-normal");
+    ClassSelector normal = Css.randomDot(5);
 
   }
 
   public interface lg {
 
-    ClassSelector italic = Css.dot("lg-fs-italic");
+    ClassSelector italic = Css.randomDot(5);
 
-    ClassSelector normal = Css.dot("lg-fs-normal");
+    ClassSelector normal = Css.randomDot(5);
 
   }
 
   public interface xl {
 
-    ClassSelector italic = Css.dot("xl-fs-italic");
+    ClassSelector italic = Css.randomDot(5);
 
-    ClassSelector normal = Css.dot("xl-fs-normal");
+    ClassSelector normal = Css.randomDot(5);
 
   }
 

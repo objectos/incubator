@@ -24,191 +24,191 @@ import br.com.objectos.css.type.Color;
 @Generated("br.com.objectos.css.maven.plugin.framework.FrameworkMojo")
 public final class BackgroundColor extends AbstractStyleSheet {
 
-  public static final ClassSelector transparent = Css.dot("bg-transparent");
+  public static final ClassSelector transparent = Css.randomDot(5);
 
-  public static final ClassSelector black = Css.dot("bg-black");
+  public static final ClassSelector black = Css.randomDot(5);
 
-  public static final ClassSelector white = Css.dot("bg-white");
+  public static final ClassSelector white = Css.randomDot(5);
 
-  public static final ClassSelector gray100 = Css.dot("bg-gray-100");
+  public static final ClassSelector gray100 = Css.randomDot(5);
 
-  public static final ClassSelector gray200 = Css.dot("bg-gray-200");
+  public static final ClassSelector gray200 = Css.randomDot(5);
 
-  public static final ClassSelector gray300 = Css.dot("bg-gray-300");
+  public static final ClassSelector gray300 = Css.randomDot(5);
 
-  public static final ClassSelector gray400 = Css.dot("bg-gray-400");
+  public static final ClassSelector gray400 = Css.randomDot(5);
 
-  public static final ClassSelector gray500 = Css.dot("bg-gray-500");
+  public static final ClassSelector gray500 = Css.randomDot(5);
 
-  public static final ClassSelector gray600 = Css.dot("bg-gray-600");
+  public static final ClassSelector gray600 = Css.randomDot(5);
 
-  public static final ClassSelector gray700 = Css.dot("bg-gray-700");
+  public static final ClassSelector gray700 = Css.randomDot(5);
 
-  public static final ClassSelector gray800 = Css.dot("bg-gray-800");
+  public static final ClassSelector gray800 = Css.randomDot(5);
 
-  public static final ClassSelector gray900 = Css.dot("bg-gray-900");
+  public static final ClassSelector gray900 = Css.randomDot(5);
 
-  public static final ClassSelector red100 = Css.dot("bg-red-100");
+  public static final ClassSelector red100 = Css.randomDot(5);
 
-  public static final ClassSelector red200 = Css.dot("bg-red-200");
+  public static final ClassSelector red200 = Css.randomDot(5);
 
-  public static final ClassSelector red300 = Css.dot("bg-red-300");
+  public static final ClassSelector red300 = Css.randomDot(5);
 
-  public static final ClassSelector red400 = Css.dot("bg-red-400");
+  public static final ClassSelector red400 = Css.randomDot(5);
 
-  public static final ClassSelector red500 = Css.dot("bg-red-500");
+  public static final ClassSelector red500 = Css.randomDot(5);
 
-  public static final ClassSelector red600 = Css.dot("bg-red-600");
+  public static final ClassSelector red600 = Css.randomDot(5);
 
-  public static final ClassSelector red700 = Css.dot("bg-red-700");
+  public static final ClassSelector red700 = Css.randomDot(5);
 
-  public static final ClassSelector red800 = Css.dot("bg-red-800");
+  public static final ClassSelector red800 = Css.randomDot(5);
 
-  public static final ClassSelector red900 = Css.dot("bg-red-900");
+  public static final ClassSelector red900 = Css.randomDot(5);
 
-  public static final ClassSelector orange100 = Css.dot("bg-orange-100");
+  public static final ClassSelector orange100 = Css.randomDot(5);
 
-  public static final ClassSelector orange200 = Css.dot("bg-orange-200");
+  public static final ClassSelector orange200 = Css.randomDot(5);
 
-  public static final ClassSelector orange300 = Css.dot("bg-orange-300");
+  public static final ClassSelector orange300 = Css.randomDot(5);
 
-  public static final ClassSelector orange400 = Css.dot("bg-orange-400");
+  public static final ClassSelector orange400 = Css.randomDot(5);
 
-  public static final ClassSelector orange500 = Css.dot("bg-orange-500");
+  public static final ClassSelector orange500 = Css.randomDot(5);
 
-  public static final ClassSelector orange600 = Css.dot("bg-orange-600");
+  public static final ClassSelector orange600 = Css.randomDot(5);
 
-  public static final ClassSelector orange700 = Css.dot("bg-orange-700");
+  public static final ClassSelector orange700 = Css.randomDot(5);
 
-  public static final ClassSelector orange800 = Css.dot("bg-orange-800");
+  public static final ClassSelector orange800 = Css.randomDot(5);
 
-  public static final ClassSelector orange900 = Css.dot("bg-orange-900");
+  public static final ClassSelector orange900 = Css.randomDot(5);
 
-  public static final ClassSelector yellow100 = Css.dot("bg-yellow-100");
+  public static final ClassSelector yellow100 = Css.randomDot(5);
 
-  public static final ClassSelector yellow200 = Css.dot("bg-yellow-200");
+  public static final ClassSelector yellow200 = Css.randomDot(5);
 
-  public static final ClassSelector yellow300 = Css.dot("bg-yellow-300");
+  public static final ClassSelector yellow300 = Css.randomDot(5);
 
-  public static final ClassSelector yellow400 = Css.dot("bg-yellow-400");
+  public static final ClassSelector yellow400 = Css.randomDot(5);
 
-  public static final ClassSelector yellow500 = Css.dot("bg-yellow-500");
+  public static final ClassSelector yellow500 = Css.randomDot(5);
 
-  public static final ClassSelector yellow600 = Css.dot("bg-yellow-600");
+  public static final ClassSelector yellow600 = Css.randomDot(5);
 
-  public static final ClassSelector yellow700 = Css.dot("bg-yellow-700");
+  public static final ClassSelector yellow700 = Css.randomDot(5);
 
-  public static final ClassSelector yellow800 = Css.dot("bg-yellow-800");
+  public static final ClassSelector yellow800 = Css.randomDot(5);
 
-  public static final ClassSelector yellow900 = Css.dot("bg-yellow-900");
+  public static final ClassSelector yellow900 = Css.randomDot(5);
 
-  public static final ClassSelector green100 = Css.dot("bg-green-100");
+  public static final ClassSelector green100 = Css.randomDot(5);
 
-  public static final ClassSelector green200 = Css.dot("bg-green-200");
+  public static final ClassSelector green200 = Css.randomDot(5);
 
-  public static final ClassSelector green300 = Css.dot("bg-green-300");
+  public static final ClassSelector green300 = Css.randomDot(5);
 
-  public static final ClassSelector green400 = Css.dot("bg-green-400");
+  public static final ClassSelector green400 = Css.randomDot(5);
 
-  public static final ClassSelector green500 = Css.dot("bg-green-500");
+  public static final ClassSelector green500 = Css.randomDot(5);
 
-  public static final ClassSelector green600 = Css.dot("bg-green-600");
+  public static final ClassSelector green600 = Css.randomDot(5);
 
-  public static final ClassSelector green700 = Css.dot("bg-green-700");
+  public static final ClassSelector green700 = Css.randomDot(5);
 
-  public static final ClassSelector green800 = Css.dot("bg-green-800");
+  public static final ClassSelector green800 = Css.randomDot(5);
 
-  public static final ClassSelector green900 = Css.dot("bg-green-900");
+  public static final ClassSelector green900 = Css.randomDot(5);
 
-  public static final ClassSelector teal100 = Css.dot("bg-teal-100");
+  public static final ClassSelector teal100 = Css.randomDot(5);
 
-  public static final ClassSelector teal200 = Css.dot("bg-teal-200");
+  public static final ClassSelector teal200 = Css.randomDot(5);
 
-  public static final ClassSelector teal300 = Css.dot("bg-teal-300");
+  public static final ClassSelector teal300 = Css.randomDot(5);
 
-  public static final ClassSelector teal400 = Css.dot("bg-teal-400");
+  public static final ClassSelector teal400 = Css.randomDot(5);
 
-  public static final ClassSelector teal500 = Css.dot("bg-teal-500");
+  public static final ClassSelector teal500 = Css.randomDot(5);
 
-  public static final ClassSelector teal600 = Css.dot("bg-teal-600");
+  public static final ClassSelector teal600 = Css.randomDot(5);
 
-  public static final ClassSelector teal700 = Css.dot("bg-teal-700");
+  public static final ClassSelector teal700 = Css.randomDot(5);
 
-  public static final ClassSelector teal800 = Css.dot("bg-teal-800");
+  public static final ClassSelector teal800 = Css.randomDot(5);
 
-  public static final ClassSelector teal900 = Css.dot("bg-teal-900");
+  public static final ClassSelector teal900 = Css.randomDot(5);
 
-  public static final ClassSelector blue100 = Css.dot("bg-blue-100");
+  public static final ClassSelector blue100 = Css.randomDot(5);
 
-  public static final ClassSelector blue200 = Css.dot("bg-blue-200");
+  public static final ClassSelector blue200 = Css.randomDot(5);
 
-  public static final ClassSelector blue300 = Css.dot("bg-blue-300");
+  public static final ClassSelector blue300 = Css.randomDot(5);
 
-  public static final ClassSelector blue400 = Css.dot("bg-blue-400");
+  public static final ClassSelector blue400 = Css.randomDot(5);
 
-  public static final ClassSelector blue500 = Css.dot("bg-blue-500");
+  public static final ClassSelector blue500 = Css.randomDot(5);
 
-  public static final ClassSelector blue600 = Css.dot("bg-blue-600");
+  public static final ClassSelector blue600 = Css.randomDot(5);
 
-  public static final ClassSelector blue700 = Css.dot("bg-blue-700");
+  public static final ClassSelector blue700 = Css.randomDot(5);
 
-  public static final ClassSelector blue800 = Css.dot("bg-blue-800");
+  public static final ClassSelector blue800 = Css.randomDot(5);
 
-  public static final ClassSelector blue900 = Css.dot("bg-blue-900");
+  public static final ClassSelector blue900 = Css.randomDot(5);
 
-  public static final ClassSelector indigo100 = Css.dot("bg-indigo-100");
+  public static final ClassSelector indigo100 = Css.randomDot(5);
 
-  public static final ClassSelector indigo200 = Css.dot("bg-indigo-200");
+  public static final ClassSelector indigo200 = Css.randomDot(5);
 
-  public static final ClassSelector indigo300 = Css.dot("bg-indigo-300");
+  public static final ClassSelector indigo300 = Css.randomDot(5);
 
-  public static final ClassSelector indigo400 = Css.dot("bg-indigo-400");
+  public static final ClassSelector indigo400 = Css.randomDot(5);
 
-  public static final ClassSelector indigo500 = Css.dot("bg-indigo-500");
+  public static final ClassSelector indigo500 = Css.randomDot(5);
 
-  public static final ClassSelector indigo600 = Css.dot("bg-indigo-600");
+  public static final ClassSelector indigo600 = Css.randomDot(5);
 
-  public static final ClassSelector indigo700 = Css.dot("bg-indigo-700");
+  public static final ClassSelector indigo700 = Css.randomDot(5);
 
-  public static final ClassSelector indigo800 = Css.dot("bg-indigo-800");
+  public static final ClassSelector indigo800 = Css.randomDot(5);
 
-  public static final ClassSelector indigo900 = Css.dot("bg-indigo-900");
+  public static final ClassSelector indigo900 = Css.randomDot(5);
 
-  public static final ClassSelector purple100 = Css.dot("bg-purple-100");
+  public static final ClassSelector purple100 = Css.randomDot(5);
 
-  public static final ClassSelector purple200 = Css.dot("bg-purple-200");
+  public static final ClassSelector purple200 = Css.randomDot(5);
 
-  public static final ClassSelector purple300 = Css.dot("bg-purple-300");
+  public static final ClassSelector purple300 = Css.randomDot(5);
 
-  public static final ClassSelector purple400 = Css.dot("bg-purple-400");
+  public static final ClassSelector purple400 = Css.randomDot(5);
 
-  public static final ClassSelector purple500 = Css.dot("bg-purple-500");
+  public static final ClassSelector purple500 = Css.randomDot(5);
 
-  public static final ClassSelector purple600 = Css.dot("bg-purple-600");
+  public static final ClassSelector purple600 = Css.randomDot(5);
 
-  public static final ClassSelector purple700 = Css.dot("bg-purple-700");
+  public static final ClassSelector purple700 = Css.randomDot(5);
 
-  public static final ClassSelector purple800 = Css.dot("bg-purple-800");
+  public static final ClassSelector purple800 = Css.randomDot(5);
 
-  public static final ClassSelector purple900 = Css.dot("bg-purple-900");
+  public static final ClassSelector purple900 = Css.randomDot(5);
 
-  public static final ClassSelector pink100 = Css.dot("bg-pink-100");
+  public static final ClassSelector pink100 = Css.randomDot(5);
 
-  public static final ClassSelector pink200 = Css.dot("bg-pink-200");
+  public static final ClassSelector pink200 = Css.randomDot(5);
 
-  public static final ClassSelector pink300 = Css.dot("bg-pink-300");
+  public static final ClassSelector pink300 = Css.randomDot(5);
 
-  public static final ClassSelector pink400 = Css.dot("bg-pink-400");
+  public static final ClassSelector pink400 = Css.randomDot(5);
 
-  public static final ClassSelector pink500 = Css.dot("bg-pink-500");
+  public static final ClassSelector pink500 = Css.randomDot(5);
 
-  public static final ClassSelector pink600 = Css.dot("bg-pink-600");
+  public static final ClassSelector pink600 = Css.randomDot(5);
 
-  public static final ClassSelector pink700 = Css.dot("bg-pink-700");
+  public static final ClassSelector pink700 = Css.randomDot(5);
 
-  public static final ClassSelector pink800 = Css.dot("bg-pink-800");
+  public static final ClassSelector pink800 = Css.randomDot(5);
 
-  public static final ClassSelector pink900 = Css.dot("bg-pink-900");
+  public static final ClassSelector pink900 = Css.randomDot(5);
 
   @Override
   protected final void definition() {
@@ -2460,761 +2460,761 @@ public final class BackgroundColor extends AbstractStyleSheet {
 
   public interface sm {
 
-    ClassSelector transparent = Css.dot("sm-bg-transparent");
+    ClassSelector transparent = Css.randomDot(5);
 
-    ClassSelector black = Css.dot("sm-bg-black");
+    ClassSelector black = Css.randomDot(5);
 
-    ClassSelector white = Css.dot("sm-bg-white");
+    ClassSelector white = Css.randomDot(5);
 
-    ClassSelector gray100 = Css.dot("sm-bg-gray-100");
+    ClassSelector gray100 = Css.randomDot(5);
 
-    ClassSelector gray200 = Css.dot("sm-bg-gray-200");
+    ClassSelector gray200 = Css.randomDot(5);
 
-    ClassSelector gray300 = Css.dot("sm-bg-gray-300");
+    ClassSelector gray300 = Css.randomDot(5);
 
-    ClassSelector gray400 = Css.dot("sm-bg-gray-400");
+    ClassSelector gray400 = Css.randomDot(5);
 
-    ClassSelector gray500 = Css.dot("sm-bg-gray-500");
+    ClassSelector gray500 = Css.randomDot(5);
 
-    ClassSelector gray600 = Css.dot("sm-bg-gray-600");
+    ClassSelector gray600 = Css.randomDot(5);
 
-    ClassSelector gray700 = Css.dot("sm-bg-gray-700");
+    ClassSelector gray700 = Css.randomDot(5);
 
-    ClassSelector gray800 = Css.dot("sm-bg-gray-800");
+    ClassSelector gray800 = Css.randomDot(5);
 
-    ClassSelector gray900 = Css.dot("sm-bg-gray-900");
+    ClassSelector gray900 = Css.randomDot(5);
 
-    ClassSelector red100 = Css.dot("sm-bg-red-100");
+    ClassSelector red100 = Css.randomDot(5);
 
-    ClassSelector red200 = Css.dot("sm-bg-red-200");
+    ClassSelector red200 = Css.randomDot(5);
 
-    ClassSelector red300 = Css.dot("sm-bg-red-300");
+    ClassSelector red300 = Css.randomDot(5);
 
-    ClassSelector red400 = Css.dot("sm-bg-red-400");
+    ClassSelector red400 = Css.randomDot(5);
 
-    ClassSelector red500 = Css.dot("sm-bg-red-500");
+    ClassSelector red500 = Css.randomDot(5);
 
-    ClassSelector red600 = Css.dot("sm-bg-red-600");
+    ClassSelector red600 = Css.randomDot(5);
 
-    ClassSelector red700 = Css.dot("sm-bg-red-700");
+    ClassSelector red700 = Css.randomDot(5);
 
-    ClassSelector red800 = Css.dot("sm-bg-red-800");
+    ClassSelector red800 = Css.randomDot(5);
 
-    ClassSelector red900 = Css.dot("sm-bg-red-900");
+    ClassSelector red900 = Css.randomDot(5);
 
-    ClassSelector orange100 = Css.dot("sm-bg-orange-100");
+    ClassSelector orange100 = Css.randomDot(5);
 
-    ClassSelector orange200 = Css.dot("sm-bg-orange-200");
+    ClassSelector orange200 = Css.randomDot(5);
 
-    ClassSelector orange300 = Css.dot("sm-bg-orange-300");
+    ClassSelector orange300 = Css.randomDot(5);
 
-    ClassSelector orange400 = Css.dot("sm-bg-orange-400");
+    ClassSelector orange400 = Css.randomDot(5);
 
-    ClassSelector orange500 = Css.dot("sm-bg-orange-500");
+    ClassSelector orange500 = Css.randomDot(5);
 
-    ClassSelector orange600 = Css.dot("sm-bg-orange-600");
+    ClassSelector orange600 = Css.randomDot(5);
 
-    ClassSelector orange700 = Css.dot("sm-bg-orange-700");
+    ClassSelector orange700 = Css.randomDot(5);
 
-    ClassSelector orange800 = Css.dot("sm-bg-orange-800");
+    ClassSelector orange800 = Css.randomDot(5);
 
-    ClassSelector orange900 = Css.dot("sm-bg-orange-900");
+    ClassSelector orange900 = Css.randomDot(5);
 
-    ClassSelector yellow100 = Css.dot("sm-bg-yellow-100");
+    ClassSelector yellow100 = Css.randomDot(5);
 
-    ClassSelector yellow200 = Css.dot("sm-bg-yellow-200");
+    ClassSelector yellow200 = Css.randomDot(5);
 
-    ClassSelector yellow300 = Css.dot("sm-bg-yellow-300");
+    ClassSelector yellow300 = Css.randomDot(5);
 
-    ClassSelector yellow400 = Css.dot("sm-bg-yellow-400");
+    ClassSelector yellow400 = Css.randomDot(5);
 
-    ClassSelector yellow500 = Css.dot("sm-bg-yellow-500");
+    ClassSelector yellow500 = Css.randomDot(5);
 
-    ClassSelector yellow600 = Css.dot("sm-bg-yellow-600");
+    ClassSelector yellow600 = Css.randomDot(5);
 
-    ClassSelector yellow700 = Css.dot("sm-bg-yellow-700");
+    ClassSelector yellow700 = Css.randomDot(5);
 
-    ClassSelector yellow800 = Css.dot("sm-bg-yellow-800");
+    ClassSelector yellow800 = Css.randomDot(5);
 
-    ClassSelector yellow900 = Css.dot("sm-bg-yellow-900");
+    ClassSelector yellow900 = Css.randomDot(5);
 
-    ClassSelector green100 = Css.dot("sm-bg-green-100");
+    ClassSelector green100 = Css.randomDot(5);
 
-    ClassSelector green200 = Css.dot("sm-bg-green-200");
+    ClassSelector green200 = Css.randomDot(5);
 
-    ClassSelector green300 = Css.dot("sm-bg-green-300");
+    ClassSelector green300 = Css.randomDot(5);
 
-    ClassSelector green400 = Css.dot("sm-bg-green-400");
+    ClassSelector green400 = Css.randomDot(5);
 
-    ClassSelector green500 = Css.dot("sm-bg-green-500");
+    ClassSelector green500 = Css.randomDot(5);
 
-    ClassSelector green600 = Css.dot("sm-bg-green-600");
+    ClassSelector green600 = Css.randomDot(5);
 
-    ClassSelector green700 = Css.dot("sm-bg-green-700");
+    ClassSelector green700 = Css.randomDot(5);
 
-    ClassSelector green800 = Css.dot("sm-bg-green-800");
+    ClassSelector green800 = Css.randomDot(5);
 
-    ClassSelector green900 = Css.dot("sm-bg-green-900");
+    ClassSelector green900 = Css.randomDot(5);
 
-    ClassSelector teal100 = Css.dot("sm-bg-teal-100");
+    ClassSelector teal100 = Css.randomDot(5);
 
-    ClassSelector teal200 = Css.dot("sm-bg-teal-200");
+    ClassSelector teal200 = Css.randomDot(5);
 
-    ClassSelector teal300 = Css.dot("sm-bg-teal-300");
+    ClassSelector teal300 = Css.randomDot(5);
 
-    ClassSelector teal400 = Css.dot("sm-bg-teal-400");
+    ClassSelector teal400 = Css.randomDot(5);
 
-    ClassSelector teal500 = Css.dot("sm-bg-teal-500");
+    ClassSelector teal500 = Css.randomDot(5);
 
-    ClassSelector teal600 = Css.dot("sm-bg-teal-600");
+    ClassSelector teal600 = Css.randomDot(5);
 
-    ClassSelector teal700 = Css.dot("sm-bg-teal-700");
+    ClassSelector teal700 = Css.randomDot(5);
 
-    ClassSelector teal800 = Css.dot("sm-bg-teal-800");
+    ClassSelector teal800 = Css.randomDot(5);
 
-    ClassSelector teal900 = Css.dot("sm-bg-teal-900");
+    ClassSelector teal900 = Css.randomDot(5);
 
-    ClassSelector blue100 = Css.dot("sm-bg-blue-100");
+    ClassSelector blue100 = Css.randomDot(5);
 
-    ClassSelector blue200 = Css.dot("sm-bg-blue-200");
+    ClassSelector blue200 = Css.randomDot(5);
 
-    ClassSelector blue300 = Css.dot("sm-bg-blue-300");
+    ClassSelector blue300 = Css.randomDot(5);
 
-    ClassSelector blue400 = Css.dot("sm-bg-blue-400");
+    ClassSelector blue400 = Css.randomDot(5);
 
-    ClassSelector blue500 = Css.dot("sm-bg-blue-500");
+    ClassSelector blue500 = Css.randomDot(5);
 
-    ClassSelector blue600 = Css.dot("sm-bg-blue-600");
+    ClassSelector blue600 = Css.randomDot(5);
 
-    ClassSelector blue700 = Css.dot("sm-bg-blue-700");
+    ClassSelector blue700 = Css.randomDot(5);
 
-    ClassSelector blue800 = Css.dot("sm-bg-blue-800");
+    ClassSelector blue800 = Css.randomDot(5);
 
-    ClassSelector blue900 = Css.dot("sm-bg-blue-900");
+    ClassSelector blue900 = Css.randomDot(5);
 
-    ClassSelector indigo100 = Css.dot("sm-bg-indigo-100");
+    ClassSelector indigo100 = Css.randomDot(5);
 
-    ClassSelector indigo200 = Css.dot("sm-bg-indigo-200");
+    ClassSelector indigo200 = Css.randomDot(5);
 
-    ClassSelector indigo300 = Css.dot("sm-bg-indigo-300");
+    ClassSelector indigo300 = Css.randomDot(5);
 
-    ClassSelector indigo400 = Css.dot("sm-bg-indigo-400");
+    ClassSelector indigo400 = Css.randomDot(5);
 
-    ClassSelector indigo500 = Css.dot("sm-bg-indigo-500");
+    ClassSelector indigo500 = Css.randomDot(5);
 
-    ClassSelector indigo600 = Css.dot("sm-bg-indigo-600");
+    ClassSelector indigo600 = Css.randomDot(5);
 
-    ClassSelector indigo700 = Css.dot("sm-bg-indigo-700");
+    ClassSelector indigo700 = Css.randomDot(5);
 
-    ClassSelector indigo800 = Css.dot("sm-bg-indigo-800");
+    ClassSelector indigo800 = Css.randomDot(5);
 
-    ClassSelector indigo900 = Css.dot("sm-bg-indigo-900");
+    ClassSelector indigo900 = Css.randomDot(5);
 
-    ClassSelector purple100 = Css.dot("sm-bg-purple-100");
+    ClassSelector purple100 = Css.randomDot(5);
 
-    ClassSelector purple200 = Css.dot("sm-bg-purple-200");
+    ClassSelector purple200 = Css.randomDot(5);
 
-    ClassSelector purple300 = Css.dot("sm-bg-purple-300");
+    ClassSelector purple300 = Css.randomDot(5);
 
-    ClassSelector purple400 = Css.dot("sm-bg-purple-400");
+    ClassSelector purple400 = Css.randomDot(5);
 
-    ClassSelector purple500 = Css.dot("sm-bg-purple-500");
+    ClassSelector purple500 = Css.randomDot(5);
 
-    ClassSelector purple600 = Css.dot("sm-bg-purple-600");
+    ClassSelector purple600 = Css.randomDot(5);
 
-    ClassSelector purple700 = Css.dot("sm-bg-purple-700");
+    ClassSelector purple700 = Css.randomDot(5);
 
-    ClassSelector purple800 = Css.dot("sm-bg-purple-800");
+    ClassSelector purple800 = Css.randomDot(5);
 
-    ClassSelector purple900 = Css.dot("sm-bg-purple-900");
+    ClassSelector purple900 = Css.randomDot(5);
 
-    ClassSelector pink100 = Css.dot("sm-bg-pink-100");
+    ClassSelector pink100 = Css.randomDot(5);
 
-    ClassSelector pink200 = Css.dot("sm-bg-pink-200");
+    ClassSelector pink200 = Css.randomDot(5);
 
-    ClassSelector pink300 = Css.dot("sm-bg-pink-300");
+    ClassSelector pink300 = Css.randomDot(5);
 
-    ClassSelector pink400 = Css.dot("sm-bg-pink-400");
+    ClassSelector pink400 = Css.randomDot(5);
 
-    ClassSelector pink500 = Css.dot("sm-bg-pink-500");
+    ClassSelector pink500 = Css.randomDot(5);
 
-    ClassSelector pink600 = Css.dot("sm-bg-pink-600");
+    ClassSelector pink600 = Css.randomDot(5);
 
-    ClassSelector pink700 = Css.dot("sm-bg-pink-700");
+    ClassSelector pink700 = Css.randomDot(5);
 
-    ClassSelector pink800 = Css.dot("sm-bg-pink-800");
+    ClassSelector pink800 = Css.randomDot(5);
 
-    ClassSelector pink900 = Css.dot("sm-bg-pink-900");
+    ClassSelector pink900 = Css.randomDot(5);
 
   }
 
   public interface md {
 
-    ClassSelector transparent = Css.dot("md-bg-transparent");
+    ClassSelector transparent = Css.randomDot(5);
 
-    ClassSelector black = Css.dot("md-bg-black");
+    ClassSelector black = Css.randomDot(5);
 
-    ClassSelector white = Css.dot("md-bg-white");
+    ClassSelector white = Css.randomDot(5);
 
-    ClassSelector gray100 = Css.dot("md-bg-gray-100");
+    ClassSelector gray100 = Css.randomDot(5);
 
-    ClassSelector gray200 = Css.dot("md-bg-gray-200");
+    ClassSelector gray200 = Css.randomDot(5);
 
-    ClassSelector gray300 = Css.dot("md-bg-gray-300");
+    ClassSelector gray300 = Css.randomDot(5);
 
-    ClassSelector gray400 = Css.dot("md-bg-gray-400");
+    ClassSelector gray400 = Css.randomDot(5);
 
-    ClassSelector gray500 = Css.dot("md-bg-gray-500");
+    ClassSelector gray500 = Css.randomDot(5);
 
-    ClassSelector gray600 = Css.dot("md-bg-gray-600");
+    ClassSelector gray600 = Css.randomDot(5);
 
-    ClassSelector gray700 = Css.dot("md-bg-gray-700");
+    ClassSelector gray700 = Css.randomDot(5);
 
-    ClassSelector gray800 = Css.dot("md-bg-gray-800");
+    ClassSelector gray800 = Css.randomDot(5);
 
-    ClassSelector gray900 = Css.dot("md-bg-gray-900");
+    ClassSelector gray900 = Css.randomDot(5);
 
-    ClassSelector red100 = Css.dot("md-bg-red-100");
+    ClassSelector red100 = Css.randomDot(5);
 
-    ClassSelector red200 = Css.dot("md-bg-red-200");
+    ClassSelector red200 = Css.randomDot(5);
 
-    ClassSelector red300 = Css.dot("md-bg-red-300");
+    ClassSelector red300 = Css.randomDot(5);
 
-    ClassSelector red400 = Css.dot("md-bg-red-400");
+    ClassSelector red400 = Css.randomDot(5);
 
-    ClassSelector red500 = Css.dot("md-bg-red-500");
+    ClassSelector red500 = Css.randomDot(5);
 
-    ClassSelector red600 = Css.dot("md-bg-red-600");
+    ClassSelector red600 = Css.randomDot(5);
 
-    ClassSelector red700 = Css.dot("md-bg-red-700");
+    ClassSelector red700 = Css.randomDot(5);
 
-    ClassSelector red800 = Css.dot("md-bg-red-800");
+    ClassSelector red800 = Css.randomDot(5);
 
-    ClassSelector red900 = Css.dot("md-bg-red-900");
+    ClassSelector red900 = Css.randomDot(5);
 
-    ClassSelector orange100 = Css.dot("md-bg-orange-100");
+    ClassSelector orange100 = Css.randomDot(5);
 
-    ClassSelector orange200 = Css.dot("md-bg-orange-200");
+    ClassSelector orange200 = Css.randomDot(5);
 
-    ClassSelector orange300 = Css.dot("md-bg-orange-300");
+    ClassSelector orange300 = Css.randomDot(5);
 
-    ClassSelector orange400 = Css.dot("md-bg-orange-400");
+    ClassSelector orange400 = Css.randomDot(5);
 
-    ClassSelector orange500 = Css.dot("md-bg-orange-500");
+    ClassSelector orange500 = Css.randomDot(5);
 
-    ClassSelector orange600 = Css.dot("md-bg-orange-600");
+    ClassSelector orange600 = Css.randomDot(5);
 
-    ClassSelector orange700 = Css.dot("md-bg-orange-700");
+    ClassSelector orange700 = Css.randomDot(5);
 
-    ClassSelector orange800 = Css.dot("md-bg-orange-800");
+    ClassSelector orange800 = Css.randomDot(5);
 
-    ClassSelector orange900 = Css.dot("md-bg-orange-900");
+    ClassSelector orange900 = Css.randomDot(5);
 
-    ClassSelector yellow100 = Css.dot("md-bg-yellow-100");
+    ClassSelector yellow100 = Css.randomDot(5);
 
-    ClassSelector yellow200 = Css.dot("md-bg-yellow-200");
+    ClassSelector yellow200 = Css.randomDot(5);
 
-    ClassSelector yellow300 = Css.dot("md-bg-yellow-300");
+    ClassSelector yellow300 = Css.randomDot(5);
 
-    ClassSelector yellow400 = Css.dot("md-bg-yellow-400");
+    ClassSelector yellow400 = Css.randomDot(5);
 
-    ClassSelector yellow500 = Css.dot("md-bg-yellow-500");
+    ClassSelector yellow500 = Css.randomDot(5);
 
-    ClassSelector yellow600 = Css.dot("md-bg-yellow-600");
+    ClassSelector yellow600 = Css.randomDot(5);
 
-    ClassSelector yellow700 = Css.dot("md-bg-yellow-700");
+    ClassSelector yellow700 = Css.randomDot(5);
 
-    ClassSelector yellow800 = Css.dot("md-bg-yellow-800");
+    ClassSelector yellow800 = Css.randomDot(5);
 
-    ClassSelector yellow900 = Css.dot("md-bg-yellow-900");
+    ClassSelector yellow900 = Css.randomDot(5);
 
-    ClassSelector green100 = Css.dot("md-bg-green-100");
+    ClassSelector green100 = Css.randomDot(5);
 
-    ClassSelector green200 = Css.dot("md-bg-green-200");
+    ClassSelector green200 = Css.randomDot(5);
 
-    ClassSelector green300 = Css.dot("md-bg-green-300");
+    ClassSelector green300 = Css.randomDot(5);
 
-    ClassSelector green400 = Css.dot("md-bg-green-400");
+    ClassSelector green400 = Css.randomDot(5);
 
-    ClassSelector green500 = Css.dot("md-bg-green-500");
+    ClassSelector green500 = Css.randomDot(5);
 
-    ClassSelector green600 = Css.dot("md-bg-green-600");
+    ClassSelector green600 = Css.randomDot(5);
 
-    ClassSelector green700 = Css.dot("md-bg-green-700");
+    ClassSelector green700 = Css.randomDot(5);
 
-    ClassSelector green800 = Css.dot("md-bg-green-800");
+    ClassSelector green800 = Css.randomDot(5);
 
-    ClassSelector green900 = Css.dot("md-bg-green-900");
+    ClassSelector green900 = Css.randomDot(5);
 
-    ClassSelector teal100 = Css.dot("md-bg-teal-100");
+    ClassSelector teal100 = Css.randomDot(5);
 
-    ClassSelector teal200 = Css.dot("md-bg-teal-200");
+    ClassSelector teal200 = Css.randomDot(5);
 
-    ClassSelector teal300 = Css.dot("md-bg-teal-300");
+    ClassSelector teal300 = Css.randomDot(5);
 
-    ClassSelector teal400 = Css.dot("md-bg-teal-400");
+    ClassSelector teal400 = Css.randomDot(5);
 
-    ClassSelector teal500 = Css.dot("md-bg-teal-500");
+    ClassSelector teal500 = Css.randomDot(5);
 
-    ClassSelector teal600 = Css.dot("md-bg-teal-600");
+    ClassSelector teal600 = Css.randomDot(5);
 
-    ClassSelector teal700 = Css.dot("md-bg-teal-700");
+    ClassSelector teal700 = Css.randomDot(5);
 
-    ClassSelector teal800 = Css.dot("md-bg-teal-800");
+    ClassSelector teal800 = Css.randomDot(5);
 
-    ClassSelector teal900 = Css.dot("md-bg-teal-900");
+    ClassSelector teal900 = Css.randomDot(5);
 
-    ClassSelector blue100 = Css.dot("md-bg-blue-100");
+    ClassSelector blue100 = Css.randomDot(5);
 
-    ClassSelector blue200 = Css.dot("md-bg-blue-200");
+    ClassSelector blue200 = Css.randomDot(5);
 
-    ClassSelector blue300 = Css.dot("md-bg-blue-300");
+    ClassSelector blue300 = Css.randomDot(5);
 
-    ClassSelector blue400 = Css.dot("md-bg-blue-400");
+    ClassSelector blue400 = Css.randomDot(5);
 
-    ClassSelector blue500 = Css.dot("md-bg-blue-500");
+    ClassSelector blue500 = Css.randomDot(5);
 
-    ClassSelector blue600 = Css.dot("md-bg-blue-600");
+    ClassSelector blue600 = Css.randomDot(5);
 
-    ClassSelector blue700 = Css.dot("md-bg-blue-700");
+    ClassSelector blue700 = Css.randomDot(5);
 
-    ClassSelector blue800 = Css.dot("md-bg-blue-800");
+    ClassSelector blue800 = Css.randomDot(5);
 
-    ClassSelector blue900 = Css.dot("md-bg-blue-900");
+    ClassSelector blue900 = Css.randomDot(5);
 
-    ClassSelector indigo100 = Css.dot("md-bg-indigo-100");
+    ClassSelector indigo100 = Css.randomDot(5);
 
-    ClassSelector indigo200 = Css.dot("md-bg-indigo-200");
+    ClassSelector indigo200 = Css.randomDot(5);
 
-    ClassSelector indigo300 = Css.dot("md-bg-indigo-300");
+    ClassSelector indigo300 = Css.randomDot(5);
 
-    ClassSelector indigo400 = Css.dot("md-bg-indigo-400");
+    ClassSelector indigo400 = Css.randomDot(5);
 
-    ClassSelector indigo500 = Css.dot("md-bg-indigo-500");
+    ClassSelector indigo500 = Css.randomDot(5);
 
-    ClassSelector indigo600 = Css.dot("md-bg-indigo-600");
+    ClassSelector indigo600 = Css.randomDot(5);
 
-    ClassSelector indigo700 = Css.dot("md-bg-indigo-700");
+    ClassSelector indigo700 = Css.randomDot(5);
 
-    ClassSelector indigo800 = Css.dot("md-bg-indigo-800");
+    ClassSelector indigo800 = Css.randomDot(5);
 
-    ClassSelector indigo900 = Css.dot("md-bg-indigo-900");
+    ClassSelector indigo900 = Css.randomDot(5);
 
-    ClassSelector purple100 = Css.dot("md-bg-purple-100");
+    ClassSelector purple100 = Css.randomDot(5);
 
-    ClassSelector purple200 = Css.dot("md-bg-purple-200");
+    ClassSelector purple200 = Css.randomDot(5);
 
-    ClassSelector purple300 = Css.dot("md-bg-purple-300");
+    ClassSelector purple300 = Css.randomDot(5);
 
-    ClassSelector purple400 = Css.dot("md-bg-purple-400");
+    ClassSelector purple400 = Css.randomDot(5);
 
-    ClassSelector purple500 = Css.dot("md-bg-purple-500");
+    ClassSelector purple500 = Css.randomDot(5);
 
-    ClassSelector purple600 = Css.dot("md-bg-purple-600");
+    ClassSelector purple600 = Css.randomDot(5);
 
-    ClassSelector purple700 = Css.dot("md-bg-purple-700");
+    ClassSelector purple700 = Css.randomDot(5);
 
-    ClassSelector purple800 = Css.dot("md-bg-purple-800");
+    ClassSelector purple800 = Css.randomDot(5);
 
-    ClassSelector purple900 = Css.dot("md-bg-purple-900");
+    ClassSelector purple900 = Css.randomDot(5);
 
-    ClassSelector pink100 = Css.dot("md-bg-pink-100");
+    ClassSelector pink100 = Css.randomDot(5);
 
-    ClassSelector pink200 = Css.dot("md-bg-pink-200");
+    ClassSelector pink200 = Css.randomDot(5);
 
-    ClassSelector pink300 = Css.dot("md-bg-pink-300");
+    ClassSelector pink300 = Css.randomDot(5);
 
-    ClassSelector pink400 = Css.dot("md-bg-pink-400");
+    ClassSelector pink400 = Css.randomDot(5);
 
-    ClassSelector pink500 = Css.dot("md-bg-pink-500");
+    ClassSelector pink500 = Css.randomDot(5);
 
-    ClassSelector pink600 = Css.dot("md-bg-pink-600");
+    ClassSelector pink600 = Css.randomDot(5);
 
-    ClassSelector pink700 = Css.dot("md-bg-pink-700");
+    ClassSelector pink700 = Css.randomDot(5);
 
-    ClassSelector pink800 = Css.dot("md-bg-pink-800");
+    ClassSelector pink800 = Css.randomDot(5);
 
-    ClassSelector pink900 = Css.dot("md-bg-pink-900");
+    ClassSelector pink900 = Css.randomDot(5);
 
   }
 
   public interface lg {
 
-    ClassSelector transparent = Css.dot("lg-bg-transparent");
+    ClassSelector transparent = Css.randomDot(5);
 
-    ClassSelector black = Css.dot("lg-bg-black");
+    ClassSelector black = Css.randomDot(5);
 
-    ClassSelector white = Css.dot("lg-bg-white");
+    ClassSelector white = Css.randomDot(5);
 
-    ClassSelector gray100 = Css.dot("lg-bg-gray-100");
+    ClassSelector gray100 = Css.randomDot(5);
 
-    ClassSelector gray200 = Css.dot("lg-bg-gray-200");
+    ClassSelector gray200 = Css.randomDot(5);
 
-    ClassSelector gray300 = Css.dot("lg-bg-gray-300");
+    ClassSelector gray300 = Css.randomDot(5);
 
-    ClassSelector gray400 = Css.dot("lg-bg-gray-400");
+    ClassSelector gray400 = Css.randomDot(5);
 
-    ClassSelector gray500 = Css.dot("lg-bg-gray-500");
+    ClassSelector gray500 = Css.randomDot(5);
 
-    ClassSelector gray600 = Css.dot("lg-bg-gray-600");
+    ClassSelector gray600 = Css.randomDot(5);
 
-    ClassSelector gray700 = Css.dot("lg-bg-gray-700");
+    ClassSelector gray700 = Css.randomDot(5);
 
-    ClassSelector gray800 = Css.dot("lg-bg-gray-800");
+    ClassSelector gray800 = Css.randomDot(5);
 
-    ClassSelector gray900 = Css.dot("lg-bg-gray-900");
+    ClassSelector gray900 = Css.randomDot(5);
 
-    ClassSelector red100 = Css.dot("lg-bg-red-100");
+    ClassSelector red100 = Css.randomDot(5);
 
-    ClassSelector red200 = Css.dot("lg-bg-red-200");
+    ClassSelector red200 = Css.randomDot(5);
 
-    ClassSelector red300 = Css.dot("lg-bg-red-300");
+    ClassSelector red300 = Css.randomDot(5);
 
-    ClassSelector red400 = Css.dot("lg-bg-red-400");
+    ClassSelector red400 = Css.randomDot(5);
 
-    ClassSelector red500 = Css.dot("lg-bg-red-500");
+    ClassSelector red500 = Css.randomDot(5);
 
-    ClassSelector red600 = Css.dot("lg-bg-red-600");
+    ClassSelector red600 = Css.randomDot(5);
 
-    ClassSelector red700 = Css.dot("lg-bg-red-700");
+    ClassSelector red700 = Css.randomDot(5);
 
-    ClassSelector red800 = Css.dot("lg-bg-red-800");
+    ClassSelector red800 = Css.randomDot(5);
 
-    ClassSelector red900 = Css.dot("lg-bg-red-900");
+    ClassSelector red900 = Css.randomDot(5);
 
-    ClassSelector orange100 = Css.dot("lg-bg-orange-100");
+    ClassSelector orange100 = Css.randomDot(5);
 
-    ClassSelector orange200 = Css.dot("lg-bg-orange-200");
+    ClassSelector orange200 = Css.randomDot(5);
 
-    ClassSelector orange300 = Css.dot("lg-bg-orange-300");
+    ClassSelector orange300 = Css.randomDot(5);
 
-    ClassSelector orange400 = Css.dot("lg-bg-orange-400");
+    ClassSelector orange400 = Css.randomDot(5);
 
-    ClassSelector orange500 = Css.dot("lg-bg-orange-500");
+    ClassSelector orange500 = Css.randomDot(5);
 
-    ClassSelector orange600 = Css.dot("lg-bg-orange-600");
+    ClassSelector orange600 = Css.randomDot(5);
 
-    ClassSelector orange700 = Css.dot("lg-bg-orange-700");
+    ClassSelector orange700 = Css.randomDot(5);
 
-    ClassSelector orange800 = Css.dot("lg-bg-orange-800");
+    ClassSelector orange800 = Css.randomDot(5);
 
-    ClassSelector orange900 = Css.dot("lg-bg-orange-900");
+    ClassSelector orange900 = Css.randomDot(5);
 
-    ClassSelector yellow100 = Css.dot("lg-bg-yellow-100");
+    ClassSelector yellow100 = Css.randomDot(5);
 
-    ClassSelector yellow200 = Css.dot("lg-bg-yellow-200");
+    ClassSelector yellow200 = Css.randomDot(5);
 
-    ClassSelector yellow300 = Css.dot("lg-bg-yellow-300");
+    ClassSelector yellow300 = Css.randomDot(5);
 
-    ClassSelector yellow400 = Css.dot("lg-bg-yellow-400");
+    ClassSelector yellow400 = Css.randomDot(5);
 
-    ClassSelector yellow500 = Css.dot("lg-bg-yellow-500");
+    ClassSelector yellow500 = Css.randomDot(5);
 
-    ClassSelector yellow600 = Css.dot("lg-bg-yellow-600");
+    ClassSelector yellow600 = Css.randomDot(5);
 
-    ClassSelector yellow700 = Css.dot("lg-bg-yellow-700");
+    ClassSelector yellow700 = Css.randomDot(5);
 
-    ClassSelector yellow800 = Css.dot("lg-bg-yellow-800");
+    ClassSelector yellow800 = Css.randomDot(5);
 
-    ClassSelector yellow900 = Css.dot("lg-bg-yellow-900");
+    ClassSelector yellow900 = Css.randomDot(5);
 
-    ClassSelector green100 = Css.dot("lg-bg-green-100");
+    ClassSelector green100 = Css.randomDot(5);
 
-    ClassSelector green200 = Css.dot("lg-bg-green-200");
+    ClassSelector green200 = Css.randomDot(5);
 
-    ClassSelector green300 = Css.dot("lg-bg-green-300");
+    ClassSelector green300 = Css.randomDot(5);
 
-    ClassSelector green400 = Css.dot("lg-bg-green-400");
+    ClassSelector green400 = Css.randomDot(5);
 
-    ClassSelector green500 = Css.dot("lg-bg-green-500");
+    ClassSelector green500 = Css.randomDot(5);
 
-    ClassSelector green600 = Css.dot("lg-bg-green-600");
+    ClassSelector green600 = Css.randomDot(5);
 
-    ClassSelector green700 = Css.dot("lg-bg-green-700");
+    ClassSelector green700 = Css.randomDot(5);
 
-    ClassSelector green800 = Css.dot("lg-bg-green-800");
+    ClassSelector green800 = Css.randomDot(5);
 
-    ClassSelector green900 = Css.dot("lg-bg-green-900");
+    ClassSelector green900 = Css.randomDot(5);
 
-    ClassSelector teal100 = Css.dot("lg-bg-teal-100");
+    ClassSelector teal100 = Css.randomDot(5);
 
-    ClassSelector teal200 = Css.dot("lg-bg-teal-200");
+    ClassSelector teal200 = Css.randomDot(5);
 
-    ClassSelector teal300 = Css.dot("lg-bg-teal-300");
+    ClassSelector teal300 = Css.randomDot(5);
 
-    ClassSelector teal400 = Css.dot("lg-bg-teal-400");
+    ClassSelector teal400 = Css.randomDot(5);
 
-    ClassSelector teal500 = Css.dot("lg-bg-teal-500");
+    ClassSelector teal500 = Css.randomDot(5);
 
-    ClassSelector teal600 = Css.dot("lg-bg-teal-600");
+    ClassSelector teal600 = Css.randomDot(5);
 
-    ClassSelector teal700 = Css.dot("lg-bg-teal-700");
+    ClassSelector teal700 = Css.randomDot(5);
 
-    ClassSelector teal800 = Css.dot("lg-bg-teal-800");
+    ClassSelector teal800 = Css.randomDot(5);
 
-    ClassSelector teal900 = Css.dot("lg-bg-teal-900");
+    ClassSelector teal900 = Css.randomDot(5);
 
-    ClassSelector blue100 = Css.dot("lg-bg-blue-100");
+    ClassSelector blue100 = Css.randomDot(5);
 
-    ClassSelector blue200 = Css.dot("lg-bg-blue-200");
+    ClassSelector blue200 = Css.randomDot(5);
 
-    ClassSelector blue300 = Css.dot("lg-bg-blue-300");
+    ClassSelector blue300 = Css.randomDot(5);
 
-    ClassSelector blue400 = Css.dot("lg-bg-blue-400");
+    ClassSelector blue400 = Css.randomDot(5);
 
-    ClassSelector blue500 = Css.dot("lg-bg-blue-500");
+    ClassSelector blue500 = Css.randomDot(5);
 
-    ClassSelector blue600 = Css.dot("lg-bg-blue-600");
+    ClassSelector blue600 = Css.randomDot(5);
 
-    ClassSelector blue700 = Css.dot("lg-bg-blue-700");
+    ClassSelector blue700 = Css.randomDot(5);
 
-    ClassSelector blue800 = Css.dot("lg-bg-blue-800");
+    ClassSelector blue800 = Css.randomDot(5);
 
-    ClassSelector blue900 = Css.dot("lg-bg-blue-900");
+    ClassSelector blue900 = Css.randomDot(5);
 
-    ClassSelector indigo100 = Css.dot("lg-bg-indigo-100");
+    ClassSelector indigo100 = Css.randomDot(5);
 
-    ClassSelector indigo200 = Css.dot("lg-bg-indigo-200");
+    ClassSelector indigo200 = Css.randomDot(5);
 
-    ClassSelector indigo300 = Css.dot("lg-bg-indigo-300");
+    ClassSelector indigo300 = Css.randomDot(5);
 
-    ClassSelector indigo400 = Css.dot("lg-bg-indigo-400");
+    ClassSelector indigo400 = Css.randomDot(5);
 
-    ClassSelector indigo500 = Css.dot("lg-bg-indigo-500");
+    ClassSelector indigo500 = Css.randomDot(5);
 
-    ClassSelector indigo600 = Css.dot("lg-bg-indigo-600");
+    ClassSelector indigo600 = Css.randomDot(5);
 
-    ClassSelector indigo700 = Css.dot("lg-bg-indigo-700");
+    ClassSelector indigo700 = Css.randomDot(5);
 
-    ClassSelector indigo800 = Css.dot("lg-bg-indigo-800");
+    ClassSelector indigo800 = Css.randomDot(5);
 
-    ClassSelector indigo900 = Css.dot("lg-bg-indigo-900");
+    ClassSelector indigo900 = Css.randomDot(5);
 
-    ClassSelector purple100 = Css.dot("lg-bg-purple-100");
+    ClassSelector purple100 = Css.randomDot(5);
 
-    ClassSelector purple200 = Css.dot("lg-bg-purple-200");
+    ClassSelector purple200 = Css.randomDot(5);
 
-    ClassSelector purple300 = Css.dot("lg-bg-purple-300");
+    ClassSelector purple300 = Css.randomDot(5);
 
-    ClassSelector purple400 = Css.dot("lg-bg-purple-400");
+    ClassSelector purple400 = Css.randomDot(5);
 
-    ClassSelector purple500 = Css.dot("lg-bg-purple-500");
+    ClassSelector purple500 = Css.randomDot(5);
 
-    ClassSelector purple600 = Css.dot("lg-bg-purple-600");
+    ClassSelector purple600 = Css.randomDot(5);
 
-    ClassSelector purple700 = Css.dot("lg-bg-purple-700");
+    ClassSelector purple700 = Css.randomDot(5);
 
-    ClassSelector purple800 = Css.dot("lg-bg-purple-800");
+    ClassSelector purple800 = Css.randomDot(5);
 
-    ClassSelector purple900 = Css.dot("lg-bg-purple-900");
+    ClassSelector purple900 = Css.randomDot(5);
 
-    ClassSelector pink100 = Css.dot("lg-bg-pink-100");
+    ClassSelector pink100 = Css.randomDot(5);
 
-    ClassSelector pink200 = Css.dot("lg-bg-pink-200");
+    ClassSelector pink200 = Css.randomDot(5);
 
-    ClassSelector pink300 = Css.dot("lg-bg-pink-300");
+    ClassSelector pink300 = Css.randomDot(5);
 
-    ClassSelector pink400 = Css.dot("lg-bg-pink-400");
+    ClassSelector pink400 = Css.randomDot(5);
 
-    ClassSelector pink500 = Css.dot("lg-bg-pink-500");
+    ClassSelector pink500 = Css.randomDot(5);
 
-    ClassSelector pink600 = Css.dot("lg-bg-pink-600");
+    ClassSelector pink600 = Css.randomDot(5);
 
-    ClassSelector pink700 = Css.dot("lg-bg-pink-700");
+    ClassSelector pink700 = Css.randomDot(5);
 
-    ClassSelector pink800 = Css.dot("lg-bg-pink-800");
+    ClassSelector pink800 = Css.randomDot(5);
 
-    ClassSelector pink900 = Css.dot("lg-bg-pink-900");
+    ClassSelector pink900 = Css.randomDot(5);
 
   }
 
   public interface xl {
 
-    ClassSelector transparent = Css.dot("xl-bg-transparent");
+    ClassSelector transparent = Css.randomDot(5);
 
-    ClassSelector black = Css.dot("xl-bg-black");
+    ClassSelector black = Css.randomDot(5);
 
-    ClassSelector white = Css.dot("xl-bg-white");
+    ClassSelector white = Css.randomDot(5);
 
-    ClassSelector gray100 = Css.dot("xl-bg-gray-100");
+    ClassSelector gray100 = Css.randomDot(5);
 
-    ClassSelector gray200 = Css.dot("xl-bg-gray-200");
+    ClassSelector gray200 = Css.randomDot(5);
 
-    ClassSelector gray300 = Css.dot("xl-bg-gray-300");
+    ClassSelector gray300 = Css.randomDot(5);
 
-    ClassSelector gray400 = Css.dot("xl-bg-gray-400");
+    ClassSelector gray400 = Css.randomDot(5);
 
-    ClassSelector gray500 = Css.dot("xl-bg-gray-500");
+    ClassSelector gray500 = Css.randomDot(5);
 
-    ClassSelector gray600 = Css.dot("xl-bg-gray-600");
+    ClassSelector gray600 = Css.randomDot(5);
 
-    ClassSelector gray700 = Css.dot("xl-bg-gray-700");
+    ClassSelector gray700 = Css.randomDot(5);
 
-    ClassSelector gray800 = Css.dot("xl-bg-gray-800");
+    ClassSelector gray800 = Css.randomDot(5);
 
-    ClassSelector gray900 = Css.dot("xl-bg-gray-900");
+    ClassSelector gray900 = Css.randomDot(5);
 
-    ClassSelector red100 = Css.dot("xl-bg-red-100");
+    ClassSelector red100 = Css.randomDot(5);
 
-    ClassSelector red200 = Css.dot("xl-bg-red-200");
+    ClassSelector red200 = Css.randomDot(5);
 
-    ClassSelector red300 = Css.dot("xl-bg-red-300");
+    ClassSelector red300 = Css.randomDot(5);
 
-    ClassSelector red400 = Css.dot("xl-bg-red-400");
+    ClassSelector red400 = Css.randomDot(5);
 
-    ClassSelector red500 = Css.dot("xl-bg-red-500");
+    ClassSelector red500 = Css.randomDot(5);
 
-    ClassSelector red600 = Css.dot("xl-bg-red-600");
+    ClassSelector red600 = Css.randomDot(5);
 
-    ClassSelector red700 = Css.dot("xl-bg-red-700");
+    ClassSelector red700 = Css.randomDot(5);
 
-    ClassSelector red800 = Css.dot("xl-bg-red-800");
+    ClassSelector red800 = Css.randomDot(5);
 
-    ClassSelector red900 = Css.dot("xl-bg-red-900");
+    ClassSelector red900 = Css.randomDot(5);
 
-    ClassSelector orange100 = Css.dot("xl-bg-orange-100");
+    ClassSelector orange100 = Css.randomDot(5);
 
-    ClassSelector orange200 = Css.dot("xl-bg-orange-200");
+    ClassSelector orange200 = Css.randomDot(5);
 
-    ClassSelector orange300 = Css.dot("xl-bg-orange-300");
+    ClassSelector orange300 = Css.randomDot(5);
 
-    ClassSelector orange400 = Css.dot("xl-bg-orange-400");
+    ClassSelector orange400 = Css.randomDot(5);
 
-    ClassSelector orange500 = Css.dot("xl-bg-orange-500");
+    ClassSelector orange500 = Css.randomDot(5);
 
-    ClassSelector orange600 = Css.dot("xl-bg-orange-600");
+    ClassSelector orange600 = Css.randomDot(5);
 
-    ClassSelector orange700 = Css.dot("xl-bg-orange-700");
+    ClassSelector orange700 = Css.randomDot(5);
 
-    ClassSelector orange800 = Css.dot("xl-bg-orange-800");
+    ClassSelector orange800 = Css.randomDot(5);
 
-    ClassSelector orange900 = Css.dot("xl-bg-orange-900");
+    ClassSelector orange900 = Css.randomDot(5);
 
-    ClassSelector yellow100 = Css.dot("xl-bg-yellow-100");
+    ClassSelector yellow100 = Css.randomDot(5);
 
-    ClassSelector yellow200 = Css.dot("xl-bg-yellow-200");
+    ClassSelector yellow200 = Css.randomDot(5);
 
-    ClassSelector yellow300 = Css.dot("xl-bg-yellow-300");
+    ClassSelector yellow300 = Css.randomDot(5);
 
-    ClassSelector yellow400 = Css.dot("xl-bg-yellow-400");
+    ClassSelector yellow400 = Css.randomDot(5);
 
-    ClassSelector yellow500 = Css.dot("xl-bg-yellow-500");
+    ClassSelector yellow500 = Css.randomDot(5);
 
-    ClassSelector yellow600 = Css.dot("xl-bg-yellow-600");
+    ClassSelector yellow600 = Css.randomDot(5);
 
-    ClassSelector yellow700 = Css.dot("xl-bg-yellow-700");
+    ClassSelector yellow700 = Css.randomDot(5);
 
-    ClassSelector yellow800 = Css.dot("xl-bg-yellow-800");
+    ClassSelector yellow800 = Css.randomDot(5);
 
-    ClassSelector yellow900 = Css.dot("xl-bg-yellow-900");
+    ClassSelector yellow900 = Css.randomDot(5);
 
-    ClassSelector green100 = Css.dot("xl-bg-green-100");
+    ClassSelector green100 = Css.randomDot(5);
 
-    ClassSelector green200 = Css.dot("xl-bg-green-200");
+    ClassSelector green200 = Css.randomDot(5);
 
-    ClassSelector green300 = Css.dot("xl-bg-green-300");
+    ClassSelector green300 = Css.randomDot(5);
 
-    ClassSelector green400 = Css.dot("xl-bg-green-400");
+    ClassSelector green400 = Css.randomDot(5);
 
-    ClassSelector green500 = Css.dot("xl-bg-green-500");
+    ClassSelector green500 = Css.randomDot(5);
 
-    ClassSelector green600 = Css.dot("xl-bg-green-600");
+    ClassSelector green600 = Css.randomDot(5);
 
-    ClassSelector green700 = Css.dot("xl-bg-green-700");
+    ClassSelector green700 = Css.randomDot(5);
 
-    ClassSelector green800 = Css.dot("xl-bg-green-800");
+    ClassSelector green800 = Css.randomDot(5);
 
-    ClassSelector green900 = Css.dot("xl-bg-green-900");
+    ClassSelector green900 = Css.randomDot(5);
 
-    ClassSelector teal100 = Css.dot("xl-bg-teal-100");
+    ClassSelector teal100 = Css.randomDot(5);
 
-    ClassSelector teal200 = Css.dot("xl-bg-teal-200");
+    ClassSelector teal200 = Css.randomDot(5);
 
-    ClassSelector teal300 = Css.dot("xl-bg-teal-300");
+    ClassSelector teal300 = Css.randomDot(5);
 
-    ClassSelector teal400 = Css.dot("xl-bg-teal-400");
+    ClassSelector teal400 = Css.randomDot(5);
 
-    ClassSelector teal500 = Css.dot("xl-bg-teal-500");
+    ClassSelector teal500 = Css.randomDot(5);
 
-    ClassSelector teal600 = Css.dot("xl-bg-teal-600");
+    ClassSelector teal600 = Css.randomDot(5);
 
-    ClassSelector teal700 = Css.dot("xl-bg-teal-700");
+    ClassSelector teal700 = Css.randomDot(5);
 
-    ClassSelector teal800 = Css.dot("xl-bg-teal-800");
+    ClassSelector teal800 = Css.randomDot(5);
 
-    ClassSelector teal900 = Css.dot("xl-bg-teal-900");
+    ClassSelector teal900 = Css.randomDot(5);
 
-    ClassSelector blue100 = Css.dot("xl-bg-blue-100");
+    ClassSelector blue100 = Css.randomDot(5);
 
-    ClassSelector blue200 = Css.dot("xl-bg-blue-200");
+    ClassSelector blue200 = Css.randomDot(5);
 
-    ClassSelector blue300 = Css.dot("xl-bg-blue-300");
+    ClassSelector blue300 = Css.randomDot(5);
 
-    ClassSelector blue400 = Css.dot("xl-bg-blue-400");
+    ClassSelector blue400 = Css.randomDot(5);
 
-    ClassSelector blue500 = Css.dot("xl-bg-blue-500");
+    ClassSelector blue500 = Css.randomDot(5);
 
-    ClassSelector blue600 = Css.dot("xl-bg-blue-600");
+    ClassSelector blue600 = Css.randomDot(5);
 
-    ClassSelector blue700 = Css.dot("xl-bg-blue-700");
+    ClassSelector blue700 = Css.randomDot(5);
 
-    ClassSelector blue800 = Css.dot("xl-bg-blue-800");
+    ClassSelector blue800 = Css.randomDot(5);
 
-    ClassSelector blue900 = Css.dot("xl-bg-blue-900");
+    ClassSelector blue900 = Css.randomDot(5);
 
-    ClassSelector indigo100 = Css.dot("xl-bg-indigo-100");
+    ClassSelector indigo100 = Css.randomDot(5);
 
-    ClassSelector indigo200 = Css.dot("xl-bg-indigo-200");
+    ClassSelector indigo200 = Css.randomDot(5);
 
-    ClassSelector indigo300 = Css.dot("xl-bg-indigo-300");
+    ClassSelector indigo300 = Css.randomDot(5);
 
-    ClassSelector indigo400 = Css.dot("xl-bg-indigo-400");
+    ClassSelector indigo400 = Css.randomDot(5);
 
-    ClassSelector indigo500 = Css.dot("xl-bg-indigo-500");
+    ClassSelector indigo500 = Css.randomDot(5);
 
-    ClassSelector indigo600 = Css.dot("xl-bg-indigo-600");
+    ClassSelector indigo600 = Css.randomDot(5);
 
-    ClassSelector indigo700 = Css.dot("xl-bg-indigo-700");
+    ClassSelector indigo700 = Css.randomDot(5);
 
-    ClassSelector indigo800 = Css.dot("xl-bg-indigo-800");
+    ClassSelector indigo800 = Css.randomDot(5);
 
-    ClassSelector indigo900 = Css.dot("xl-bg-indigo-900");
+    ClassSelector indigo900 = Css.randomDot(5);
 
-    ClassSelector purple100 = Css.dot("xl-bg-purple-100");
+    ClassSelector purple100 = Css.randomDot(5);
 
-    ClassSelector purple200 = Css.dot("xl-bg-purple-200");
+    ClassSelector purple200 = Css.randomDot(5);
 
-    ClassSelector purple300 = Css.dot("xl-bg-purple-300");
+    ClassSelector purple300 = Css.randomDot(5);
 
-    ClassSelector purple400 = Css.dot("xl-bg-purple-400");
+    ClassSelector purple400 = Css.randomDot(5);
 
-    ClassSelector purple500 = Css.dot("xl-bg-purple-500");
+    ClassSelector purple500 = Css.randomDot(5);
 
-    ClassSelector purple600 = Css.dot("xl-bg-purple-600");
+    ClassSelector purple600 = Css.randomDot(5);
 
-    ClassSelector purple700 = Css.dot("xl-bg-purple-700");
+    ClassSelector purple700 = Css.randomDot(5);
 
-    ClassSelector purple800 = Css.dot("xl-bg-purple-800");
+    ClassSelector purple800 = Css.randomDot(5);
 
-    ClassSelector purple900 = Css.dot("xl-bg-purple-900");
+    ClassSelector purple900 = Css.randomDot(5);
 
-    ClassSelector pink100 = Css.dot("xl-bg-pink-100");
+    ClassSelector pink100 = Css.randomDot(5);
 
-    ClassSelector pink200 = Css.dot("xl-bg-pink-200");
+    ClassSelector pink200 = Css.randomDot(5);
 
-    ClassSelector pink300 = Css.dot("xl-bg-pink-300");
+    ClassSelector pink300 = Css.randomDot(5);
 
-    ClassSelector pink400 = Css.dot("xl-bg-pink-400");
+    ClassSelector pink400 = Css.randomDot(5);
 
-    ClassSelector pink500 = Css.dot("xl-bg-pink-500");
+    ClassSelector pink500 = Css.randomDot(5);
 
-    ClassSelector pink600 = Css.dot("xl-bg-pink-600");
+    ClassSelector pink600 = Css.randomDot(5);
 
-    ClassSelector pink700 = Css.dot("xl-bg-pink-700");
+    ClassSelector pink700 = Css.randomDot(5);
 
-    ClassSelector pink800 = Css.dot("xl-bg-pink-800");
+    ClassSelector pink800 = Css.randomDot(5);
 
-    ClassSelector pink900 = Css.dot("xl-bg-pink-900");
+    ClassSelector pink900 = Css.randomDot(5);
 
   }
 

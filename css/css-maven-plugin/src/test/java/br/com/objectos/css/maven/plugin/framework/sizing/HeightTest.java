@@ -31,72 +31,71 @@ public class HeightTest extends AbstractCssMavenPluginFrameworkTest {
   @Test
   public void execute() {
     UnmodifiableMap<String, JavaFile> javaFiles = executeProperty(
-        new AbstractConfiguration() {
-          @Override
-          protected final void configure() {
-            packageName("br.com.objectos.css.framework");
+      new AbstractConfiguration() {
+        @Override
+        protected final void configure() {
+          packageName("br.com.objectos.css.framework");
 
-            FrameworkNamedValueSet spacing = valueSet(
-                v("0", Zero.INSTANCE),
-                v("2", rem(0.5)),
-                v("8", rem(2))
-            );
+          FrameworkNamedValueSet spacing = valueSet(
+            v("0", Zero.INSTANCE),
+            v("2", rem(0.5)),
+            v("8", rem(2))
+          );
 
-            property(
-                FrameworkGroup.SIZING,
-                simpleName("Height"),
-                prefix("h"),
-                methods("height"),
-                valueSet(
-                    spacing,
-                    v("full", pct(100))
-                )
-            );
-          }
+          property(
+            FrameworkGroup.SIZING,
+            simpleName("Height"),
+            methods("height"),
+            valueSet(
+              spacing,
+              v("full", pct(100))
+            )
+          );
         }
+      }
     );
     assertEquals(javaFiles.size(), 1);
     testLines(
-        javaFiles.get("Height"),
-        "package br.com.objectos.css.framework.sizing;",
-        "",
-        "import br.com.objectos.code.annotations.Generated;",
-        "import br.com.objectos.css.Css;",
-        "import br.com.objectos.css.select.ClassSelector;",
-        "import br.com.objectos.css.sheet.AbstractStyleSheet;",
-        "",
-        "@Generated(\"br.com.objectos.css.maven.plugin.framework.FrameworkMojo\")",
-        "public final class Height extends AbstractStyleSheet {",
-        "",
-        "  public static final ClassSelector v0 = Css.dot(\"h-0\");",
-        "",
-        "  public static final ClassSelector v2 = Css.dot(\"h-2\");",
-        "",
-        "  public static final ClassSelector v8 = Css.dot(\"h-8\");",
-        "",
-        "  public static final ClassSelector full = Css.dot(\"h-full\");",
-        "",
-        "  @Override",
-        "  protected final void definition() {",
-        "    style(",
-        "        v0,",
-        "        height(zero())",
-        "    );",
-        "    style(",
-        "        v2,",
-        "        height(rem(0.5))",
-        "    );",
-        "    style(",
-        "        v8,",
-        "        height(rem(2))",
-        "    );",
-        "    style(",
-        "        full,",
-        "        height(pct(100))",
-        "    );",
-        "  }",
-        "",
-        "}"
+      javaFiles.get("Height"),
+      "package br.com.objectos.css.framework.sizing;",
+      "",
+      "import br.com.objectos.code.annotations.Generated;",
+      "import br.com.objectos.css.Css;",
+      "import br.com.objectos.css.select.ClassSelector;",
+      "import br.com.objectos.css.sheet.AbstractStyleSheet;",
+      "",
+      "@Generated(\"br.com.objectos.css.maven.plugin.framework.FrameworkMojo\")",
+      "public final class Height extends AbstractStyleSheet {",
+      "",
+      "  public static final ClassSelector v0 = Css.randomDot(5);",
+      "",
+      "  public static final ClassSelector v2 = Css.randomDot(5);",
+      "",
+      "  public static final ClassSelector v8 = Css.randomDot(5);",
+      "",
+      "  public static final ClassSelector full = Css.randomDot(5);",
+      "",
+      "  @Override",
+      "  protected final void definition() {",
+      "    style(",
+      "        v0,",
+      "        height(zero())",
+      "    );",
+      "    style(",
+      "        v2,",
+      "        height(rem(0.5))",
+      "    );",
+      "    style(",
+      "        v8,",
+      "        height(rem(2))",
+      "    );",
+      "    style(",
+      "        full,",
+      "        height(pct(100))",
+      "    );",
+      "  }",
+      "",
+      "}"
     );
   }
 

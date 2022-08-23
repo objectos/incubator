@@ -24,37 +24,37 @@ import br.com.objectos.css.sheet.AbstractStyleSheet;
 @Generated("br.com.objectos.css.maven.plugin.framework.FrameworkMojo")
 public final class MaxWidth extends AbstractStyleSheet {
 
-  public static final ClassSelector none = Css.dot("max-w-none");
+  public static final ClassSelector none = Css.randomDot(5);
 
-  public static final ClassSelector xSmall = Css.dot("max-w-x-small");
+  public static final ClassSelector xSmall = Css.randomDot(5);
 
-  public static final ClassSelector small = Css.dot("max-w-small");
+  public static final ClassSelector small = Css.randomDot(5);
 
-  public static final ClassSelector medium = Css.dot("max-w-medium");
+  public static final ClassSelector medium = Css.randomDot(5);
 
-  public static final ClassSelector large = Css.dot("max-w-large");
+  public static final ClassSelector large = Css.randomDot(5);
 
-  public static final ClassSelector xLarge = Css.dot("max-w-x-large");
+  public static final ClassSelector xLarge = Css.randomDot(5);
 
-  public static final ClassSelector xLarge2 = Css.dot("max-w-x-large-2");
+  public static final ClassSelector xLarge2 = Css.randomDot(5);
 
-  public static final ClassSelector xLarge3 = Css.dot("max-w-x-large-3");
+  public static final ClassSelector xLarge3 = Css.randomDot(5);
 
-  public static final ClassSelector xLarge4 = Css.dot("max-w-x-large-4");
+  public static final ClassSelector xLarge4 = Css.randomDot(5);
 
-  public static final ClassSelector xLarge5 = Css.dot("max-w-x-large-5");
+  public static final ClassSelector xLarge5 = Css.randomDot(5);
 
-  public static final ClassSelector xLarge6 = Css.dot("max-w-x-large-6");
+  public static final ClassSelector xLarge6 = Css.randomDot(5);
 
-  public static final ClassSelector full = Css.dot("max-w-full");
+  public static final ClassSelector full = Css.randomDot(5);
 
-  public static final ClassSelector screenSm = Css.dot("max-w-screen-sm");
+  public static final ClassSelector screenSm = Css.randomDot(5);
 
-  public static final ClassSelector screenMd = Css.dot("max-w-screen-md");
+  public static final ClassSelector screenMd = Css.randomDot(5);
 
-  public static final ClassSelector screenLg = Css.dot("max-w-screen-lg");
+  public static final ClassSelector screenLg = Css.randomDot(5);
 
-  public static final ClassSelector screenXl = Css.dot("max-w-screen-xl");
+  public static final ClassSelector screenXl = Css.randomDot(5);
 
   @Override
   protected final void definition() {
@@ -458,145 +458,145 @@ public final class MaxWidth extends AbstractStyleSheet {
 
   public interface sm {
 
-    ClassSelector none = Css.dot("sm-max-w-none");
+    ClassSelector none = Css.randomDot(5);
 
-    ClassSelector xSmall = Css.dot("sm-max-w-x-small");
+    ClassSelector xSmall = Css.randomDot(5);
 
-    ClassSelector small = Css.dot("sm-max-w-small");
+    ClassSelector small = Css.randomDot(5);
 
-    ClassSelector medium = Css.dot("sm-max-w-medium");
+    ClassSelector medium = Css.randomDot(5);
 
-    ClassSelector large = Css.dot("sm-max-w-large");
+    ClassSelector large = Css.randomDot(5);
 
-    ClassSelector xLarge = Css.dot("sm-max-w-x-large");
+    ClassSelector xLarge = Css.randomDot(5);
 
-    ClassSelector xLarge2 = Css.dot("sm-max-w-x-large-2");
+    ClassSelector xLarge2 = Css.randomDot(5);
 
-    ClassSelector xLarge3 = Css.dot("sm-max-w-x-large-3");
+    ClassSelector xLarge3 = Css.randomDot(5);
 
-    ClassSelector xLarge4 = Css.dot("sm-max-w-x-large-4");
+    ClassSelector xLarge4 = Css.randomDot(5);
 
-    ClassSelector xLarge5 = Css.dot("sm-max-w-x-large-5");
+    ClassSelector xLarge5 = Css.randomDot(5);
 
-    ClassSelector xLarge6 = Css.dot("sm-max-w-x-large-6");
+    ClassSelector xLarge6 = Css.randomDot(5);
 
-    ClassSelector full = Css.dot("sm-max-w-full");
+    ClassSelector full = Css.randomDot(5);
 
-    ClassSelector screenSm = Css.dot("sm-max-w-screen-sm");
+    ClassSelector screenSm = Css.randomDot(5);
 
-    ClassSelector screenMd = Css.dot("sm-max-w-screen-md");
+    ClassSelector screenMd = Css.randomDot(5);
 
-    ClassSelector screenLg = Css.dot("sm-max-w-screen-lg");
+    ClassSelector screenLg = Css.randomDot(5);
 
-    ClassSelector screenXl = Css.dot("sm-max-w-screen-xl");
+    ClassSelector screenXl = Css.randomDot(5);
 
   }
 
   public interface md {
 
-    ClassSelector none = Css.dot("md-max-w-none");
+    ClassSelector none = Css.randomDot(5);
 
-    ClassSelector xSmall = Css.dot("md-max-w-x-small");
+    ClassSelector xSmall = Css.randomDot(5);
 
-    ClassSelector small = Css.dot("md-max-w-small");
+    ClassSelector small = Css.randomDot(5);
 
-    ClassSelector medium = Css.dot("md-max-w-medium");
+    ClassSelector medium = Css.randomDot(5);
 
-    ClassSelector large = Css.dot("md-max-w-large");
+    ClassSelector large = Css.randomDot(5);
 
-    ClassSelector xLarge = Css.dot("md-max-w-x-large");
+    ClassSelector xLarge = Css.randomDot(5);
 
-    ClassSelector xLarge2 = Css.dot("md-max-w-x-large-2");
+    ClassSelector xLarge2 = Css.randomDot(5);
 
-    ClassSelector xLarge3 = Css.dot("md-max-w-x-large-3");
+    ClassSelector xLarge3 = Css.randomDot(5);
 
-    ClassSelector xLarge4 = Css.dot("md-max-w-x-large-4");
+    ClassSelector xLarge4 = Css.randomDot(5);
 
-    ClassSelector xLarge5 = Css.dot("md-max-w-x-large-5");
+    ClassSelector xLarge5 = Css.randomDot(5);
 
-    ClassSelector xLarge6 = Css.dot("md-max-w-x-large-6");
+    ClassSelector xLarge6 = Css.randomDot(5);
 
-    ClassSelector full = Css.dot("md-max-w-full");
+    ClassSelector full = Css.randomDot(5);
 
-    ClassSelector screenSm = Css.dot("md-max-w-screen-sm");
+    ClassSelector screenSm = Css.randomDot(5);
 
-    ClassSelector screenMd = Css.dot("md-max-w-screen-md");
+    ClassSelector screenMd = Css.randomDot(5);
 
-    ClassSelector screenLg = Css.dot("md-max-w-screen-lg");
+    ClassSelector screenLg = Css.randomDot(5);
 
-    ClassSelector screenXl = Css.dot("md-max-w-screen-xl");
+    ClassSelector screenXl = Css.randomDot(5);
 
   }
 
   public interface lg {
 
-    ClassSelector none = Css.dot("lg-max-w-none");
+    ClassSelector none = Css.randomDot(5);
 
-    ClassSelector xSmall = Css.dot("lg-max-w-x-small");
+    ClassSelector xSmall = Css.randomDot(5);
 
-    ClassSelector small = Css.dot("lg-max-w-small");
+    ClassSelector small = Css.randomDot(5);
 
-    ClassSelector medium = Css.dot("lg-max-w-medium");
+    ClassSelector medium = Css.randomDot(5);
 
-    ClassSelector large = Css.dot("lg-max-w-large");
+    ClassSelector large = Css.randomDot(5);
 
-    ClassSelector xLarge = Css.dot("lg-max-w-x-large");
+    ClassSelector xLarge = Css.randomDot(5);
 
-    ClassSelector xLarge2 = Css.dot("lg-max-w-x-large-2");
+    ClassSelector xLarge2 = Css.randomDot(5);
 
-    ClassSelector xLarge3 = Css.dot("lg-max-w-x-large-3");
+    ClassSelector xLarge3 = Css.randomDot(5);
 
-    ClassSelector xLarge4 = Css.dot("lg-max-w-x-large-4");
+    ClassSelector xLarge4 = Css.randomDot(5);
 
-    ClassSelector xLarge5 = Css.dot("lg-max-w-x-large-5");
+    ClassSelector xLarge5 = Css.randomDot(5);
 
-    ClassSelector xLarge6 = Css.dot("lg-max-w-x-large-6");
+    ClassSelector xLarge6 = Css.randomDot(5);
 
-    ClassSelector full = Css.dot("lg-max-w-full");
+    ClassSelector full = Css.randomDot(5);
 
-    ClassSelector screenSm = Css.dot("lg-max-w-screen-sm");
+    ClassSelector screenSm = Css.randomDot(5);
 
-    ClassSelector screenMd = Css.dot("lg-max-w-screen-md");
+    ClassSelector screenMd = Css.randomDot(5);
 
-    ClassSelector screenLg = Css.dot("lg-max-w-screen-lg");
+    ClassSelector screenLg = Css.randomDot(5);
 
-    ClassSelector screenXl = Css.dot("lg-max-w-screen-xl");
+    ClassSelector screenXl = Css.randomDot(5);
 
   }
 
   public interface xl {
 
-    ClassSelector none = Css.dot("xl-max-w-none");
+    ClassSelector none = Css.randomDot(5);
 
-    ClassSelector xSmall = Css.dot("xl-max-w-x-small");
+    ClassSelector xSmall = Css.randomDot(5);
 
-    ClassSelector small = Css.dot("xl-max-w-small");
+    ClassSelector small = Css.randomDot(5);
 
-    ClassSelector medium = Css.dot("xl-max-w-medium");
+    ClassSelector medium = Css.randomDot(5);
 
-    ClassSelector large = Css.dot("xl-max-w-large");
+    ClassSelector large = Css.randomDot(5);
 
-    ClassSelector xLarge = Css.dot("xl-max-w-x-large");
+    ClassSelector xLarge = Css.randomDot(5);
 
-    ClassSelector xLarge2 = Css.dot("xl-max-w-x-large-2");
+    ClassSelector xLarge2 = Css.randomDot(5);
 
-    ClassSelector xLarge3 = Css.dot("xl-max-w-x-large-3");
+    ClassSelector xLarge3 = Css.randomDot(5);
 
-    ClassSelector xLarge4 = Css.dot("xl-max-w-x-large-4");
+    ClassSelector xLarge4 = Css.randomDot(5);
 
-    ClassSelector xLarge5 = Css.dot("xl-max-w-x-large-5");
+    ClassSelector xLarge5 = Css.randomDot(5);
 
-    ClassSelector xLarge6 = Css.dot("xl-max-w-x-large-6");
+    ClassSelector xLarge6 = Css.randomDot(5);
 
-    ClassSelector full = Css.dot("xl-max-w-full");
+    ClassSelector full = Css.randomDot(5);
 
-    ClassSelector screenSm = Css.dot("xl-max-w-screen-sm");
+    ClassSelector screenSm = Css.randomDot(5);
 
-    ClassSelector screenMd = Css.dot("xl-max-w-screen-md");
+    ClassSelector screenMd = Css.randomDot(5);
 
-    ClassSelector screenLg = Css.dot("xl-max-w-screen-lg");
+    ClassSelector screenLg = Css.randomDot(5);
 
-    ClassSelector screenXl = Css.dot("xl-max-w-screen-xl");
+    ClassSelector screenXl = Css.randomDot(5);
 
   }
 

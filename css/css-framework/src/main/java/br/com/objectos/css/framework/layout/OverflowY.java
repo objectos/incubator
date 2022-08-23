@@ -24,13 +24,13 @@ import br.com.objectos.css.sheet.AbstractStyleSheet;
 @Generated("br.com.objectos.css.maven.plugin.framework.FrameworkMojo")
 public final class OverflowY extends AbstractStyleSheet {
 
-  public static final ClassSelector auto = Css.dot("overflow-y-auto");
+  public static final ClassSelector auto = Css.randomDot(5);
 
-  public static final ClassSelector hidden = Css.dot("overflow-y-hidden");
+  public static final ClassSelector hidden = Css.randomDot(5);
 
-  public static final ClassSelector visible = Css.dot("overflow-y-visible");
+  public static final ClassSelector visible = Css.randomDot(5);
 
-  public static final ClassSelector scroll = Css.dot("overflow-y-scroll");
+  public static final ClassSelector scroll = Css.randomDot(5);
 
   @Override
   protected final void definition() {
@@ -146,49 +146,49 @@ public final class OverflowY extends AbstractStyleSheet {
 
   public interface sm {
 
-    ClassSelector auto = Css.dot("sm-overflow-y-auto");
+    ClassSelector auto = Css.randomDot(5);
 
-    ClassSelector hidden = Css.dot("sm-overflow-y-hidden");
+    ClassSelector hidden = Css.randomDot(5);
 
-    ClassSelector visible = Css.dot("sm-overflow-y-visible");
+    ClassSelector visible = Css.randomDot(5);
 
-    ClassSelector scroll = Css.dot("sm-overflow-y-scroll");
+    ClassSelector scroll = Css.randomDot(5);
 
   }
 
   public interface md {
 
-    ClassSelector auto = Css.dot("md-overflow-y-auto");
+    ClassSelector auto = Css.randomDot(5);
 
-    ClassSelector hidden = Css.dot("md-overflow-y-hidden");
+    ClassSelector hidden = Css.randomDot(5);
 
-    ClassSelector visible = Css.dot("md-overflow-y-visible");
+    ClassSelector visible = Css.randomDot(5);
 
-    ClassSelector scroll = Css.dot("md-overflow-y-scroll");
+    ClassSelector scroll = Css.randomDot(5);
 
   }
 
   public interface lg {
 
-    ClassSelector auto = Css.dot("lg-overflow-y-auto");
+    ClassSelector auto = Css.randomDot(5);
 
-    ClassSelector hidden = Css.dot("lg-overflow-y-hidden");
+    ClassSelector hidden = Css.randomDot(5);
 
-    ClassSelector visible = Css.dot("lg-overflow-y-visible");
+    ClassSelector visible = Css.randomDot(5);
 
-    ClassSelector scroll = Css.dot("lg-overflow-y-scroll");
+    ClassSelector scroll = Css.randomDot(5);
 
   }
 
   public interface xl {
 
-    ClassSelector auto = Css.dot("xl-overflow-y-auto");
+    ClassSelector auto = Css.randomDot(5);
 
-    ClassSelector hidden = Css.dot("xl-overflow-y-hidden");
+    ClassSelector hidden = Css.randomDot(5);
 
-    ClassSelector visible = Css.dot("xl-overflow-y-visible");
+    ClassSelector visible = Css.randomDot(5);
 
-    ClassSelector scroll = Css.dot("xl-overflow-y-scroll");
+    ClassSelector scroll = Css.randomDot(5);
 
   }
 

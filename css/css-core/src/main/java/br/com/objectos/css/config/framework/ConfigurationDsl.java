@@ -21,57 +21,6 @@ import br.com.objectos.css.type.Value;
 
 public interface ConfigurationDsl {
 
-  void defineProperty(
-      FrameworkGroup group,
-      FrameworkSimpleName simpleName,
-      FrameworkPrefix prefix,
-      FrameworkMethodSet methods,
-      FrameworkNamedValueSet values,
-      FrameworkAtMediaSet queries
-  );
-
-  FrameworkAtMedia getAtMedia(String name, FrameworkAtMediaElement... elements);
-
-  FrameworkAtMediaSet getAtMediaSet(FrameworkAtMedia... values);
-
-  FrameworkAtMediaDeclaration getDeclaration(StandardPropertyName propertyName, Value value);
-
-  Value getInt(int value);
-
-  Value getLength(LengthUnit unit, double value);
-
-  Value getLength(LengthUnit unit, int value);
-
-  FrameworkMethodSet getMethodSet(String... names);
-
-  FrameworMultiElement getMultiElement(Value... values);
-
-  FrameworkNamedValue getNamedValue(String name, double value);
-
-  FrameworkNamedValue getNamedValue(String name, FrameworkAtMediaSet queries);
-
-  FrameworkNamedValue getNamedValue(String name, FrameworMultiElement... elements);
-
-  FrameworkNamedValue getNamedValue(String name, int value);
-
-  FrameworkNamedValue getNamedValue(String name, Value... values);
-
-  FrameworkNamedValueSet getNamedValueSet(FrameworkNamedValue... values);
-
-  Value getPercentage(double value);
-
-  Value getPercentage(int value);
-
-  FrameworkPrefix getPrefix();
-
-  FrameworkPrefix getPrefix(String prefix);
-
-  Value getRgba(int r, int g, int b, double alpha);
-
-  FrameworkSimpleName getSimpleName(String name);
-
-  void setPackageName(String packageName);
-
   interface FrameworkAtMedia extends FrameworkObject {}
 
   interface FrameworkAtMediaDeclaration extends FrameworkAtMediaElement {}
@@ -110,10 +59,54 @@ public interface ConfigurationDsl {
     void acceptFrameworkObjectVisitor(Object visitor);
   }
 
-  interface FrameworkPrefix extends FrameworkObject {}
-
   interface FrameworkSimpleName extends FrameworkObject {}
 
   interface FrameworMultiElement extends FrameworkObject {}
+
+  void defineProperty(
+      FrameworkGroup group,
+      FrameworkSimpleName simpleName,
+      FrameworkMethodSet methods,
+      FrameworkNamedValueSet values,
+      FrameworkAtMediaSet queries
+  );
+
+  FrameworkAtMedia getAtMedia(String name, FrameworkAtMediaElement... elements);
+
+  FrameworkAtMediaSet getAtMediaSet(FrameworkAtMedia... values);
+
+  FrameworkAtMediaDeclaration getDeclaration(StandardPropertyName propertyName, Value value);
+
+  Value getInt(int value);
+
+  Value getLength(LengthUnit unit, double value);
+
+  Value getLength(LengthUnit unit, int value);
+
+  FrameworkMethodSet getMethodSet(String... names);
+
+  FrameworMultiElement getMultiElement(Value... values);
+
+  FrameworkNamedValue getNamedValue(String name, double value);
+
+  FrameworkNamedValue getNamedValue(String name, FrameworkAtMediaSet queries);
+
+  FrameworkNamedValue getNamedValue(String name, FrameworMultiElement... elements);
+
+  FrameworkNamedValue getNamedValue(String name, int value);
+
+  FrameworkNamedValue getNamedValue(String name, Value... values);
+
+  FrameworkNamedValueSet getNamedValueSet(FrameworkNamedValue... values);
+
+  Value getPercentage(double value);
+
+  Value getPercentage(int value);
+
+  Value getRgba(int r, int g, int b, double alpha);
+
+  FrameworkSimpleName getSimpleName(String name);
+
+  void setPackageName(String packageName);
 
 }

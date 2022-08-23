@@ -23,9 +23,9 @@ import br.com.objectos.css.sheet.AbstractStyleSheet;
 @Generated("br.com.objectos.css.maven.plugin.framework.FrameworkMojo")
 public final class MaxHeight extends AbstractStyleSheet {
 
-  public static final ClassSelector full = Css.dot("max-h-full");
+  public static final ClassSelector full = Css.randomDot(5);
 
-  public static final ClassSelector screen = Css.dot("max-h-screen");
+  public static final ClassSelector screen = Css.randomDot(5);
 
   @Override
   protected final void definition() {
@@ -93,33 +93,33 @@ public final class MaxHeight extends AbstractStyleSheet {
 
   public interface sm {
 
-    ClassSelector full = Css.dot("sm-max-h-full");
+    ClassSelector full = Css.randomDot(5);
 
-    ClassSelector screen = Css.dot("sm-max-h-screen");
+    ClassSelector screen = Css.randomDot(5);
 
   }
 
   public interface md {
 
-    ClassSelector full = Css.dot("md-max-h-full");
+    ClassSelector full = Css.randomDot(5);
 
-    ClassSelector screen = Css.dot("md-max-h-screen");
+    ClassSelector screen = Css.randomDot(5);
 
   }
 
   public interface lg {
 
-    ClassSelector full = Css.dot("lg-max-h-full");
+    ClassSelector full = Css.randomDot(5);
 
-    ClassSelector screen = Css.dot("lg-max-h-screen");
+    ClassSelector screen = Css.randomDot(5);
 
   }
 
   public interface xl {
 
-    ClassSelector full = Css.dot("xl-max-h-full");
+    ClassSelector full = Css.randomDot(5);
 
-    ClassSelector screen = Css.dot("xl-max-h-screen");
+    ClassSelector screen = Css.randomDot(5);
 
   }
 

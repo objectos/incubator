@@ -24,15 +24,15 @@ import br.com.objectos.css.sheet.AbstractStyleSheet;
 @Generated("br.com.objectos.css.maven.plugin.framework.FrameworkMojo")
 public final class JustifyContent extends AbstractStyleSheet {
 
-  public static final ClassSelector start = Css.dot("justify-start");
+  public static final ClassSelector start = Css.randomDot(5);
 
-  public static final ClassSelector center = Css.dot("justify-center");
+  public static final ClassSelector center = Css.randomDot(5);
 
-  public static final ClassSelector end = Css.dot("justify-end");
+  public static final ClassSelector end = Css.randomDot(5);
 
-  public static final ClassSelector between = Css.dot("justify-between");
+  public static final ClassSelector between = Css.randomDot(5);
 
-  public static final ClassSelector around = Css.dot("justify-around");
+  public static final ClassSelector around = Css.randomDot(5);
 
   @Override
   protected final void definition() {
@@ -172,57 +172,57 @@ public final class JustifyContent extends AbstractStyleSheet {
 
   public interface sm {
 
-    ClassSelector start = Css.dot("sm-justify-start");
+    ClassSelector start = Css.randomDot(5);
 
-    ClassSelector center = Css.dot("sm-justify-center");
+    ClassSelector center = Css.randomDot(5);
 
-    ClassSelector end = Css.dot("sm-justify-end");
+    ClassSelector end = Css.randomDot(5);
 
-    ClassSelector between = Css.dot("sm-justify-between");
+    ClassSelector between = Css.randomDot(5);
 
-    ClassSelector around = Css.dot("sm-justify-around");
+    ClassSelector around = Css.randomDot(5);
 
   }
 
   public interface md {
 
-    ClassSelector start = Css.dot("md-justify-start");
+    ClassSelector start = Css.randomDot(5);
 
-    ClassSelector center = Css.dot("md-justify-center");
+    ClassSelector center = Css.randomDot(5);
 
-    ClassSelector end = Css.dot("md-justify-end");
+    ClassSelector end = Css.randomDot(5);
 
-    ClassSelector between = Css.dot("md-justify-between");
+    ClassSelector between = Css.randomDot(5);
 
-    ClassSelector around = Css.dot("md-justify-around");
+    ClassSelector around = Css.randomDot(5);
 
   }
 
   public interface lg {
 
-    ClassSelector start = Css.dot("lg-justify-start");
+    ClassSelector start = Css.randomDot(5);
 
-    ClassSelector center = Css.dot("lg-justify-center");
+    ClassSelector center = Css.randomDot(5);
 
-    ClassSelector end = Css.dot("lg-justify-end");
+    ClassSelector end = Css.randomDot(5);
 
-    ClassSelector between = Css.dot("lg-justify-between");
+    ClassSelector between = Css.randomDot(5);
 
-    ClassSelector around = Css.dot("lg-justify-around");
+    ClassSelector around = Css.randomDot(5);
 
   }
 
   public interface xl {
 
-    ClassSelector start = Css.dot("xl-justify-start");
+    ClassSelector start = Css.randomDot(5);
 
-    ClassSelector center = Css.dot("xl-justify-center");
+    ClassSelector center = Css.randomDot(5);
 
-    ClassSelector end = Css.dot("xl-justify-end");
+    ClassSelector end = Css.randomDot(5);
 
-    ClassSelector between = Css.dot("xl-justify-between");
+    ClassSelector between = Css.randomDot(5);
 
-    ClassSelector around = Css.dot("xl-justify-around");
+    ClassSelector around = Css.randomDot(5);
 
   }
 

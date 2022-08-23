@@ -55,17 +55,16 @@ class TextDecoration extends AbstractConfiguration {
   @Override
   protected final void configure() {
     property(
-        FrameworkGroup.TYPOGRAPHY,
-        simpleName("TextDecoration"),
-        prefix(""),
-        methods("textDecoration"),
-        valueSet(
-            v("underline", Keywords.underline),
-            v("line-through", Keywords.lineThrough),
-            v("strike", Keywords.lineThrough),
-            v("none", Keywords.none)
-        ),
-        responsive
+      FrameworkGroup.TYPOGRAPHY,
+      simpleName("TextDecoration"),
+      methods("textDecoration"),
+      valueSet(
+        v("underline", Keywords.underline),
+        v("line-through", Keywords.lineThrough),
+        v("strike", Keywords.lineThrough),
+        v("none", Keywords.none)
+      ),
+      responsive
     );
   }
 

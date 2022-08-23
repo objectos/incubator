@@ -57,12 +57,11 @@ class TextColor extends AbstractConfiguration {
   @Override
   protected final void configure() {
     property(
-        FrameworkGroup.TYPOGRAPHY,
-        simpleName("TextColor"),
-        prefix("text"),
-        methods("color"),
-        colors,
-        responsive
+      FrameworkGroup.TYPOGRAPHY,
+      simpleName("TextColor"),
+      methods("color"),
+      colors,
+      responsive
     );
   }
 

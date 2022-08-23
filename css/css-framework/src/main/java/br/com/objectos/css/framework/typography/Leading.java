@@ -23,33 +23,33 @@ import br.com.objectos.css.sheet.AbstractStyleSheet;
 @Generated("br.com.objectos.css.maven.plugin.framework.FrameworkMojo")
 public final class Leading extends AbstractStyleSheet {
 
-  public static final ClassSelector none = Css.dot("leading-none");
+  public static final ClassSelector none = Css.randomDot(5);
 
-  public static final ClassSelector tight = Css.dot("leading-tight");
+  public static final ClassSelector tight = Css.randomDot(5);
 
-  public static final ClassSelector snug = Css.dot("leading-snug");
+  public static final ClassSelector snug = Css.randomDot(5);
 
-  public static final ClassSelector normal = Css.dot("leading-normal");
+  public static final ClassSelector normal = Css.randomDot(5);
 
-  public static final ClassSelector relaxed = Css.dot("leading-relaxed");
+  public static final ClassSelector relaxed = Css.randomDot(5);
 
-  public static final ClassSelector loose = Css.dot("leading-loose");
+  public static final ClassSelector loose = Css.randomDot(5);
 
-  public static final ClassSelector v3 = Css.dot("leading-3");
+  public static final ClassSelector v3 = Css.randomDot(5);
 
-  public static final ClassSelector v4 = Css.dot("leading-4");
+  public static final ClassSelector v4 = Css.randomDot(5);
 
-  public static final ClassSelector v5 = Css.dot("leading-5");
+  public static final ClassSelector v5 = Css.randomDot(5);
 
-  public static final ClassSelector v6 = Css.dot("leading-6");
+  public static final ClassSelector v6 = Css.randomDot(5);
 
-  public static final ClassSelector v7 = Css.dot("leading-7");
+  public static final ClassSelector v7 = Css.randomDot(5);
 
-  public static final ClassSelector v8 = Css.dot("leading-8");
+  public static final ClassSelector v8 = Css.randomDot(5);
 
-  public static final ClassSelector v9 = Css.dot("leading-9");
+  public static final ClassSelector v9 = Css.randomDot(5);
 
-  public static final ClassSelector v10 = Css.dot("leading-10");
+  public static final ClassSelector v10 = Css.randomDot(5);
 
   @Override
   protected final void definition() {
@@ -405,129 +405,129 @@ public final class Leading extends AbstractStyleSheet {
 
   public interface sm {
 
-    ClassSelector none = Css.dot("sm-leading-none");
+    ClassSelector none = Css.randomDot(5);
 
-    ClassSelector tight = Css.dot("sm-leading-tight");
+    ClassSelector tight = Css.randomDot(5);
 
-    ClassSelector snug = Css.dot("sm-leading-snug");
+    ClassSelector snug = Css.randomDot(5);
 
-    ClassSelector normal = Css.dot("sm-leading-normal");
+    ClassSelector normal = Css.randomDot(5);
 
-    ClassSelector relaxed = Css.dot("sm-leading-relaxed");
+    ClassSelector relaxed = Css.randomDot(5);
 
-    ClassSelector loose = Css.dot("sm-leading-loose");
+    ClassSelector loose = Css.randomDot(5);
 
-    ClassSelector v3 = Css.dot("sm-leading-3");
+    ClassSelector v3 = Css.randomDot(5);
 
-    ClassSelector v4 = Css.dot("sm-leading-4");
+    ClassSelector v4 = Css.randomDot(5);
 
-    ClassSelector v5 = Css.dot("sm-leading-5");
+    ClassSelector v5 = Css.randomDot(5);
 
-    ClassSelector v6 = Css.dot("sm-leading-6");
+    ClassSelector v6 = Css.randomDot(5);
 
-    ClassSelector v7 = Css.dot("sm-leading-7");
+    ClassSelector v7 = Css.randomDot(5);
 
-    ClassSelector v8 = Css.dot("sm-leading-8");
+    ClassSelector v8 = Css.randomDot(5);
 
-    ClassSelector v9 = Css.dot("sm-leading-9");
+    ClassSelector v9 = Css.randomDot(5);
 
-    ClassSelector v10 = Css.dot("sm-leading-10");
+    ClassSelector v10 = Css.randomDot(5);
 
   }
 
   public interface md {
 
-    ClassSelector none = Css.dot("md-leading-none");
+    ClassSelector none = Css.randomDot(5);
 
-    ClassSelector tight = Css.dot("md-leading-tight");
+    ClassSelector tight = Css.randomDot(5);
 
-    ClassSelector snug = Css.dot("md-leading-snug");
+    ClassSelector snug = Css.randomDot(5);
 
-    ClassSelector normal = Css.dot("md-leading-normal");
+    ClassSelector normal = Css.randomDot(5);
 
-    ClassSelector relaxed = Css.dot("md-leading-relaxed");
+    ClassSelector relaxed = Css.randomDot(5);
 
-    ClassSelector loose = Css.dot("md-leading-loose");
+    ClassSelector loose = Css.randomDot(5);
 
-    ClassSelector v3 = Css.dot("md-leading-3");
+    ClassSelector v3 = Css.randomDot(5);
 
-    ClassSelector v4 = Css.dot("md-leading-4");
+    ClassSelector v4 = Css.randomDot(5);
 
-    ClassSelector v5 = Css.dot("md-leading-5");
+    ClassSelector v5 = Css.randomDot(5);
 
-    ClassSelector v6 = Css.dot("md-leading-6");
+    ClassSelector v6 = Css.randomDot(5);
 
-    ClassSelector v7 = Css.dot("md-leading-7");
+    ClassSelector v7 = Css.randomDot(5);
 
-    ClassSelector v8 = Css.dot("md-leading-8");
+    ClassSelector v8 = Css.randomDot(5);
 
-    ClassSelector v9 = Css.dot("md-leading-9");
+    ClassSelector v9 = Css.randomDot(5);
 
-    ClassSelector v10 = Css.dot("md-leading-10");
+    ClassSelector v10 = Css.randomDot(5);
 
   }
 
   public interface lg {
 
-    ClassSelector none = Css.dot("lg-leading-none");
+    ClassSelector none = Css.randomDot(5);
 
-    ClassSelector tight = Css.dot("lg-leading-tight");
+    ClassSelector tight = Css.randomDot(5);
 
-    ClassSelector snug = Css.dot("lg-leading-snug");
+    ClassSelector snug = Css.randomDot(5);
 
-    ClassSelector normal = Css.dot("lg-leading-normal");
+    ClassSelector normal = Css.randomDot(5);
 
-    ClassSelector relaxed = Css.dot("lg-leading-relaxed");
+    ClassSelector relaxed = Css.randomDot(5);
 
-    ClassSelector loose = Css.dot("lg-leading-loose");
+    ClassSelector loose = Css.randomDot(5);
 
-    ClassSelector v3 = Css.dot("lg-leading-3");
+    ClassSelector v3 = Css.randomDot(5);
 
-    ClassSelector v4 = Css.dot("lg-leading-4");
+    ClassSelector v4 = Css.randomDot(5);
 
-    ClassSelector v5 = Css.dot("lg-leading-5");
+    ClassSelector v5 = Css.randomDot(5);
 
-    ClassSelector v6 = Css.dot("lg-leading-6");
+    ClassSelector v6 = Css.randomDot(5);
 
-    ClassSelector v7 = Css.dot("lg-leading-7");
+    ClassSelector v7 = Css.randomDot(5);
 
-    ClassSelector v8 = Css.dot("lg-leading-8");
+    ClassSelector v8 = Css.randomDot(5);
 
-    ClassSelector v9 = Css.dot("lg-leading-9");
+    ClassSelector v9 = Css.randomDot(5);
 
-    ClassSelector v10 = Css.dot("lg-leading-10");
+    ClassSelector v10 = Css.randomDot(5);
 
   }
 
   public interface xl {
 
-    ClassSelector none = Css.dot("xl-leading-none");
+    ClassSelector none = Css.randomDot(5);
 
-    ClassSelector tight = Css.dot("xl-leading-tight");
+    ClassSelector tight = Css.randomDot(5);
 
-    ClassSelector snug = Css.dot("xl-leading-snug");
+    ClassSelector snug = Css.randomDot(5);
 
-    ClassSelector normal = Css.dot("xl-leading-normal");
+    ClassSelector normal = Css.randomDot(5);
 
-    ClassSelector relaxed = Css.dot("xl-leading-relaxed");
+    ClassSelector relaxed = Css.randomDot(5);
 
-    ClassSelector loose = Css.dot("xl-leading-loose");
+    ClassSelector loose = Css.randomDot(5);
 
-    ClassSelector v3 = Css.dot("xl-leading-3");
+    ClassSelector v3 = Css.randomDot(5);
 
-    ClassSelector v4 = Css.dot("xl-leading-4");
+    ClassSelector v4 = Css.randomDot(5);
 
-    ClassSelector v5 = Css.dot("xl-leading-5");
+    ClassSelector v5 = Css.randomDot(5);
 
-    ClassSelector v6 = Css.dot("xl-leading-6");
+    ClassSelector v6 = Css.randomDot(5);
 
-    ClassSelector v7 = Css.dot("xl-leading-7");
+    ClassSelector v7 = Css.randomDot(5);
 
-    ClassSelector v8 = Css.dot("xl-leading-8");
+    ClassSelector v8 = Css.randomDot(5);
 
-    ClassSelector v9 = Css.dot("xl-leading-9");
+    ClassSelector v9 = Css.randomDot(5);
 
-    ClassSelector v10 = Css.dot("xl-leading-10");
+    ClassSelector v10 = Css.randomDot(5);
 
   }
 

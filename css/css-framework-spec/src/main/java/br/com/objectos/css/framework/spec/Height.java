@@ -58,17 +58,16 @@ class Height extends AbstractConfiguration {
   @Override
   protected final void configure() {
     property(
-        FrameworkGroup.SIZING,
-        simpleName("Height"),
-        prefix("h"),
-        methods("height"),
-        valueSet(
-            v("auto", Keywords.auto),
-            spacing,
-            v("full", pct(100)),
-            v("screen", vh(100))
-        ),
-        responsive
+      FrameworkGroup.SIZING,
+      simpleName("Height"),
+      methods("height"),
+      valueSet(
+        v("auto", Keywords.auto),
+        spacing,
+        v("full", pct(100)),
+        v("screen", vh(100))
+      ),
+      responsive
     );
   }
 

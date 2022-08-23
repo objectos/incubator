@@ -55,18 +55,17 @@ class AlignContent extends AbstractConfiguration {
   @Override
   protected final void configure() {
     property(
-        FrameworkGroup.FLEXBOX,
-        simpleName("AlignContent"),
-        prefix("content"),
-        methods("alignContent"),
-        valueSet(
-            v("start", Keywords.flexStart),
-            v("center", Keywords.center),
-            v("end", Keywords.flexEnd),
-            v("between", Keywords.spaceBetween),
-            v("around", Keywords.spaceAround)
-        ),
-        responsive
+      FrameworkGroup.FLEXBOX,
+      simpleName("AlignContent"),
+      methods("alignContent"),
+      valueSet(
+        v("start", Keywords.flexStart),
+        v("center", Keywords.center),
+        v("end", Keywords.flexEnd),
+        v("between", Keywords.spaceBetween),
+        v("around", Keywords.spaceAround)
+      ),
+      responsive
     );
   }
 

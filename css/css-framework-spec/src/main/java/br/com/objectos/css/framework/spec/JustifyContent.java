@@ -55,18 +55,17 @@ class JustifyContent extends AbstractConfiguration {
   @Override
   protected final void configure() {
     property(
-        FrameworkGroup.FLEXBOX,
-        simpleName("JustifyContent"),
-        prefix("justify"),
-        methods("justifyContent"),
-        valueSet(
-            v("start", Keywords.flexStart),
-            v("center", Keywords.center),
-            v("end", Keywords.flexEnd),
-            v("between", Keywords.spaceBetween),
-            v("around", Keywords.spaceAround)
-        ),
-        responsive
+      FrameworkGroup.FLEXBOX,
+      simpleName("JustifyContent"),
+      methods("justifyContent"),
+      valueSet(
+        v("start", Keywords.flexStart),
+        v("center", Keywords.center),
+        v("end", Keywords.flexEnd),
+        v("between", Keywords.spaceBetween),
+        v("around", Keywords.spaceAround)
+      ),
+      responsive
     );
   }
 

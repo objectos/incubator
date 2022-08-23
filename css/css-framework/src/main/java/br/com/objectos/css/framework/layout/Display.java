@@ -24,41 +24,41 @@ import br.com.objectos.css.sheet.AbstractStyleSheet;
 @Generated("br.com.objectos.css.maven.plugin.framework.FrameworkMojo")
 public final class Display extends AbstractStyleSheet {
 
-  public static final ClassSelector hidden = Css.dot("hidden");
+  public static final ClassSelector hidden = Css.randomDot(5);
 
-  public static final ClassSelector block = Css.dot("block");
+  public static final ClassSelector block = Css.randomDot(5);
 
-  public static final ClassSelector flowRoot = Css.dot("flow-root");
+  public static final ClassSelector flowRoot = Css.randomDot(5);
 
-  public static final ClassSelector inlineBlock = Css.dot("inline-block");
+  public static final ClassSelector inlineBlock = Css.randomDot(5);
 
-  public static final ClassSelector inline = Css.dot("inline");
+  public static final ClassSelector inline = Css.randomDot(5);
 
-  public static final ClassSelector flex = Css.dot("flex");
+  public static final ClassSelector flex = Css.randomDot(5);
 
-  public static final ClassSelector inlineFlex = Css.dot("inline-flex");
+  public static final ClassSelector inlineFlex = Css.randomDot(5);
 
-  public static final ClassSelector grid = Css.dot("grid");
+  public static final ClassSelector grid = Css.randomDot(5);
 
-  public static final ClassSelector inlineGrid = Css.dot("inline-grid");
+  public static final ClassSelector inlineGrid = Css.randomDot(5);
 
-  public static final ClassSelector table = Css.dot("table");
+  public static final ClassSelector table = Css.randomDot(5);
 
-  public static final ClassSelector tableCaption = Css.dot("table-caption");
+  public static final ClassSelector tableCaption = Css.randomDot(5);
 
-  public static final ClassSelector tableCell = Css.dot("table-cell");
+  public static final ClassSelector tableCell = Css.randomDot(5);
 
-  public static final ClassSelector tableColumn = Css.dot("table-column");
+  public static final ClassSelector tableColumn = Css.randomDot(5);
 
-  public static final ClassSelector tableColumnGroup = Css.dot("table-column-group");
+  public static final ClassSelector tableColumnGroup = Css.randomDot(5);
 
-  public static final ClassSelector tableFooterGroup = Css.dot("table-footer-group");
+  public static final ClassSelector tableFooterGroup = Css.randomDot(5);
 
-  public static final ClassSelector tableHeaderGroup = Css.dot("table-header-group");
+  public static final ClassSelector tableHeaderGroup = Css.randomDot(5);
 
-  public static final ClassSelector tableRowGroup = Css.dot("table-row-group");
+  public static final ClassSelector tableRowGroup = Css.randomDot(5);
 
-  public static final ClassSelector tableRow = Css.dot("table-row");
+  public static final ClassSelector tableRow = Css.randomDot(5);
 
   @Override
   protected final void definition() {
@@ -510,161 +510,161 @@ public final class Display extends AbstractStyleSheet {
 
   public interface sm {
 
-    ClassSelector hidden = Css.dot("sm-hidden");
+    ClassSelector hidden = Css.randomDot(5);
 
-    ClassSelector block = Css.dot("sm-block");
+    ClassSelector block = Css.randomDot(5);
 
-    ClassSelector flowRoot = Css.dot("sm-flow-root");
+    ClassSelector flowRoot = Css.randomDot(5);
 
-    ClassSelector inlineBlock = Css.dot("sm-inline-block");
+    ClassSelector inlineBlock = Css.randomDot(5);
 
-    ClassSelector inline = Css.dot("sm-inline");
+    ClassSelector inline = Css.randomDot(5);
 
-    ClassSelector flex = Css.dot("sm-flex");
+    ClassSelector flex = Css.randomDot(5);
 
-    ClassSelector inlineFlex = Css.dot("sm-inline-flex");
+    ClassSelector inlineFlex = Css.randomDot(5);
 
-    ClassSelector grid = Css.dot("sm-grid");
+    ClassSelector grid = Css.randomDot(5);
 
-    ClassSelector inlineGrid = Css.dot("sm-inline-grid");
+    ClassSelector inlineGrid = Css.randomDot(5);
 
-    ClassSelector table = Css.dot("sm-table");
+    ClassSelector table = Css.randomDot(5);
 
-    ClassSelector tableCaption = Css.dot("sm-table-caption");
+    ClassSelector tableCaption = Css.randomDot(5);
 
-    ClassSelector tableCell = Css.dot("sm-table-cell");
+    ClassSelector tableCell = Css.randomDot(5);
 
-    ClassSelector tableColumn = Css.dot("sm-table-column");
+    ClassSelector tableColumn = Css.randomDot(5);
 
-    ClassSelector tableColumnGroup = Css.dot("sm-table-column-group");
+    ClassSelector tableColumnGroup = Css.randomDot(5);
 
-    ClassSelector tableFooterGroup = Css.dot("sm-table-footer-group");
+    ClassSelector tableFooterGroup = Css.randomDot(5);
 
-    ClassSelector tableHeaderGroup = Css.dot("sm-table-header-group");
+    ClassSelector tableHeaderGroup = Css.randomDot(5);
 
-    ClassSelector tableRowGroup = Css.dot("sm-table-row-group");
+    ClassSelector tableRowGroup = Css.randomDot(5);
 
-    ClassSelector tableRow = Css.dot("sm-table-row");
+    ClassSelector tableRow = Css.randomDot(5);
 
   }
 
   public interface md {
 
-    ClassSelector hidden = Css.dot("md-hidden");
+    ClassSelector hidden = Css.randomDot(5);
 
-    ClassSelector block = Css.dot("md-block");
+    ClassSelector block = Css.randomDot(5);
 
-    ClassSelector flowRoot = Css.dot("md-flow-root");
+    ClassSelector flowRoot = Css.randomDot(5);
 
-    ClassSelector inlineBlock = Css.dot("md-inline-block");
+    ClassSelector inlineBlock = Css.randomDot(5);
 
-    ClassSelector inline = Css.dot("md-inline");
+    ClassSelector inline = Css.randomDot(5);
 
-    ClassSelector flex = Css.dot("md-flex");
+    ClassSelector flex = Css.randomDot(5);
 
-    ClassSelector inlineFlex = Css.dot("md-inline-flex");
+    ClassSelector inlineFlex = Css.randomDot(5);
 
-    ClassSelector grid = Css.dot("md-grid");
+    ClassSelector grid = Css.randomDot(5);
 
-    ClassSelector inlineGrid = Css.dot("md-inline-grid");
+    ClassSelector inlineGrid = Css.randomDot(5);
 
-    ClassSelector table = Css.dot("md-table");
+    ClassSelector table = Css.randomDot(5);
 
-    ClassSelector tableCaption = Css.dot("md-table-caption");
+    ClassSelector tableCaption = Css.randomDot(5);
 
-    ClassSelector tableCell = Css.dot("md-table-cell");
+    ClassSelector tableCell = Css.randomDot(5);
 
-    ClassSelector tableColumn = Css.dot("md-table-column");
+    ClassSelector tableColumn = Css.randomDot(5);
 
-    ClassSelector tableColumnGroup = Css.dot("md-table-column-group");
+    ClassSelector tableColumnGroup = Css.randomDot(5);
 
-    ClassSelector tableFooterGroup = Css.dot("md-table-footer-group");
+    ClassSelector tableFooterGroup = Css.randomDot(5);
 
-    ClassSelector tableHeaderGroup = Css.dot("md-table-header-group");
+    ClassSelector tableHeaderGroup = Css.randomDot(5);
 
-    ClassSelector tableRowGroup = Css.dot("md-table-row-group");
+    ClassSelector tableRowGroup = Css.randomDot(5);
 
-    ClassSelector tableRow = Css.dot("md-table-row");
+    ClassSelector tableRow = Css.randomDot(5);
 
   }
 
   public interface lg {
 
-    ClassSelector hidden = Css.dot("lg-hidden");
+    ClassSelector hidden = Css.randomDot(5);
 
-    ClassSelector block = Css.dot("lg-block");
+    ClassSelector block = Css.randomDot(5);
 
-    ClassSelector flowRoot = Css.dot("lg-flow-root");
+    ClassSelector flowRoot = Css.randomDot(5);
 
-    ClassSelector inlineBlock = Css.dot("lg-inline-block");
+    ClassSelector inlineBlock = Css.randomDot(5);
 
-    ClassSelector inline = Css.dot("lg-inline");
+    ClassSelector inline = Css.randomDot(5);
 
-    ClassSelector flex = Css.dot("lg-flex");
+    ClassSelector flex = Css.randomDot(5);
 
-    ClassSelector inlineFlex = Css.dot("lg-inline-flex");
+    ClassSelector inlineFlex = Css.randomDot(5);
 
-    ClassSelector grid = Css.dot("lg-grid");
+    ClassSelector grid = Css.randomDot(5);
 
-    ClassSelector inlineGrid = Css.dot("lg-inline-grid");
+    ClassSelector inlineGrid = Css.randomDot(5);
 
-    ClassSelector table = Css.dot("lg-table");
+    ClassSelector table = Css.randomDot(5);
 
-    ClassSelector tableCaption = Css.dot("lg-table-caption");
+    ClassSelector tableCaption = Css.randomDot(5);
 
-    ClassSelector tableCell = Css.dot("lg-table-cell");
+    ClassSelector tableCell = Css.randomDot(5);
 
-    ClassSelector tableColumn = Css.dot("lg-table-column");
+    ClassSelector tableColumn = Css.randomDot(5);
 
-    ClassSelector tableColumnGroup = Css.dot("lg-table-column-group");
+    ClassSelector tableColumnGroup = Css.randomDot(5);
 
-    ClassSelector tableFooterGroup = Css.dot("lg-table-footer-group");
+    ClassSelector tableFooterGroup = Css.randomDot(5);
 
-    ClassSelector tableHeaderGroup = Css.dot("lg-table-header-group");
+    ClassSelector tableHeaderGroup = Css.randomDot(5);
 
-    ClassSelector tableRowGroup = Css.dot("lg-table-row-group");
+    ClassSelector tableRowGroup = Css.randomDot(5);
 
-    ClassSelector tableRow = Css.dot("lg-table-row");
+    ClassSelector tableRow = Css.randomDot(5);
 
   }
 
   public interface xl {
 
-    ClassSelector hidden = Css.dot("xl-hidden");
+    ClassSelector hidden = Css.randomDot(5);
 
-    ClassSelector block = Css.dot("xl-block");
+    ClassSelector block = Css.randomDot(5);
 
-    ClassSelector flowRoot = Css.dot("xl-flow-root");
+    ClassSelector flowRoot = Css.randomDot(5);
 
-    ClassSelector inlineBlock = Css.dot("xl-inline-block");
+    ClassSelector inlineBlock = Css.randomDot(5);
 
-    ClassSelector inline = Css.dot("xl-inline");
+    ClassSelector inline = Css.randomDot(5);
 
-    ClassSelector flex = Css.dot("xl-flex");
+    ClassSelector flex = Css.randomDot(5);
 
-    ClassSelector inlineFlex = Css.dot("xl-inline-flex");
+    ClassSelector inlineFlex = Css.randomDot(5);
 
-    ClassSelector grid = Css.dot("xl-grid");
+    ClassSelector grid = Css.randomDot(5);
 
-    ClassSelector inlineGrid = Css.dot("xl-inline-grid");
+    ClassSelector inlineGrid = Css.randomDot(5);
 
-    ClassSelector table = Css.dot("xl-table");
+    ClassSelector table = Css.randomDot(5);
 
-    ClassSelector tableCaption = Css.dot("xl-table-caption");
+    ClassSelector tableCaption = Css.randomDot(5);
 
-    ClassSelector tableCell = Css.dot("xl-table-cell");
+    ClassSelector tableCell = Css.randomDot(5);
 
-    ClassSelector tableColumn = Css.dot("xl-table-column");
+    ClassSelector tableColumn = Css.randomDot(5);
 
-    ClassSelector tableColumnGroup = Css.dot("xl-table-column-group");
+    ClassSelector tableColumnGroup = Css.randomDot(5);
 
-    ClassSelector tableFooterGroup = Css.dot("xl-table-footer-group");
+    ClassSelector tableFooterGroup = Css.randomDot(5);
 
-    ClassSelector tableHeaderGroup = Css.dot("xl-table-header-group");
+    ClassSelector tableHeaderGroup = Css.randomDot(5);
 
-    ClassSelector tableRowGroup = Css.dot("xl-table-row-group");
+    ClassSelector tableRowGroup = Css.randomDot(5);
 
-    ClassSelector tableRow = Css.dot("xl-table-row");
+    ClassSelector tableRow = Css.randomDot(5);
 
   }
 

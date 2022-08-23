@@ -55,16 +55,15 @@ class Float extends AbstractConfiguration {
   @Override
   protected final void configure() {
     property(
-        FrameworkGroup.LAYOUT,
-        simpleName("Float"),
-        prefix("float"),
-        methods("floatTo"),
-        valueSet(
-            v("left", Keywords.left),
-            v("right", Keywords.right),
-            v("none", Keywords.none)
-        ),
-        responsive
+      FrameworkGroup.LAYOUT,
+      simpleName("Float"),
+      methods("floatTo"),
+      valueSet(
+        v("left", Keywords.left),
+        v("right", Keywords.right),
+        v("none", Keywords.none)
+      ),
+      responsive
     );
   }
 

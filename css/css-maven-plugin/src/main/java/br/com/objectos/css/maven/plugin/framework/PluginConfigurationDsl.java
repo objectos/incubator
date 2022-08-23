@@ -26,8 +26,8 @@ import br.com.objectos.css.type.Value;
 import java.util.EnumMap;
 import java.util.Map;
 import objectos.lang.Check;
-import objectos.util.UnmodifiableList;
 import objectos.util.GrowableList;
+import objectos.util.UnmodifiableList;
 
 class PluginConfigurationDsl implements ConfigurationDsl {
 
@@ -40,14 +40,12 @@ class PluginConfigurationDsl implements ConfigurationDsl {
   public final void defineProperty(
       FrameworkGroup group,
       FrameworkSimpleName simpleName,
-      FrameworkPrefix prefix,
       FrameworkMethodSet methods,
       FrameworkNamedValueSet values,
       FrameworkAtMediaSet queries) {
 
     Property.Builder b = new Property.Builder(packageName, group);
     simpleName.acceptFrameworkObjectVisitor(b);
-    prefix.acceptFrameworkObjectVisitor(b);
     methods.acceptFrameworkObjectVisitor(b);
     values.acceptFrameworkObjectVisitor(b);
     queries.acceptFrameworkObjectVisitor(b);
@@ -223,18 +221,6 @@ class PluginConfigurationDsl implements ConfigurationDsl {
         marker.markIntPercentage();
       }
     };
-  }
-
-  @Override
-  public final FrameworkPrefix getPrefix() {
-    return Prefix.nameless();
-  }
-
-  @Override
-  public final FrameworkPrefix getPrefix(String prefix) {
-    Check.notNull(prefix, "prefix == null");
-
-    return Prefix.named(prefix);
   }
 
   @Override

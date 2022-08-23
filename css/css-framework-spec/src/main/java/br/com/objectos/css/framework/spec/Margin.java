@@ -58,71 +58,64 @@ class Margin extends AbstractConfiguration {
   @Override
   protected final void configure() {
     FrameworkNamedValueSet margin = valueSet(
-        v("auto", Keywords.auto),
-        spacing
+      v("auto", Keywords.auto),
+      spacing
     );
 
     property(
-        FrameworkGroup.SPACING,
-        simpleName("Margin"),
-        prefix("m"),
-        methods("margin"),
-        margin,
-        responsive
+      FrameworkGroup.SPACING,
+      simpleName("Margin"),
+      methods("margin"),
+      margin,
+      responsive
     );
 
     property(
-        FrameworkGroup.SPACING,
-        simpleName("MarginX"),
-        prefix("mx"),
-        methods("marginRight", "marginLeft"),
-        margin,
-        responsive
+      FrameworkGroup.SPACING,
+      simpleName("MarginX"),
+      methods("marginRight", "marginLeft"),
+      margin,
+      responsive
     );
 
     property(
-        FrameworkGroup.SPACING,
-        simpleName("MarginY"),
-        prefix("my"),
-        methods("marginTop", "marginBottom"),
-        margin,
-        responsive
+      FrameworkGroup.SPACING,
+      simpleName("MarginY"),
+      methods("marginTop", "marginBottom"),
+      margin,
+      responsive
     );
 
     property(
-        FrameworkGroup.SPACING,
-        simpleName("MarginTop"),
-        prefix("mt"),
-        methods("marginTop"),
-        margin,
-        responsive
+      FrameworkGroup.SPACING,
+      simpleName("MarginTop"),
+      methods("marginTop"),
+      margin,
+      responsive
     );
 
     property(
-        FrameworkGroup.SPACING,
-        simpleName("MarginRight"),
-        prefix("mr"),
-        methods("marginRight"),
-        margin,
-        responsive
+      FrameworkGroup.SPACING,
+      simpleName("MarginRight"),
+      methods("marginRight"),
+      margin,
+      responsive
     );
 
     property(
-        FrameworkGroup.SPACING,
-        simpleName("MarginBottom"),
-        prefix("mb"),
-        methods("marginBottom"),
-        margin,
-        responsive
+      FrameworkGroup.SPACING,
+      simpleName("MarginBottom"),
+      methods("marginBottom"),
+      margin,
+      responsive
     );
 
     property(
-        FrameworkGroup.SPACING,
-        simpleName("MarginLeft"),
-        prefix("ml"),
-        methods("marginLeft"),
-        margin,
-        responsive
+      FrameworkGroup.SPACING,
+      simpleName("MarginLeft"),
+      methods("marginLeft"),
+      margin,
+      responsive
     );
   }
 

@@ -55,18 +55,17 @@ class AlignItems extends AbstractConfiguration {
   @Override
   protected final void configure() {
     property(
-        FrameworkGroup.FLEXBOX,
-        simpleName("AlignItems"),
-        prefix("items"),
-        methods("alignItems"),
-        valueSet(
-            v("stretch", Keywords.stretch),
-            v("start", Keywords.flexStart),
-            v("center", Keywords.center),
-            v("end", Keywords.flexEnd),
-            v("baseline", Keywords.baseline)
-        ),
-        responsive
+      FrameworkGroup.FLEXBOX,
+      simpleName("AlignItems"),
+      methods("alignItems"),
+      valueSet(
+        v("stretch", Keywords.stretch),
+        v("start", Keywords.flexStart),
+        v("center", Keywords.center),
+        v("end", Keywords.flexEnd),
+        v("baseline", Keywords.baseline)
+      ),
+      responsive
     );
   }
 

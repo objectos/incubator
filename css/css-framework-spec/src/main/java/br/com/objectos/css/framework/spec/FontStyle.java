@@ -55,15 +55,14 @@ class FontStyle extends AbstractConfiguration {
   @Override
   protected final void configure() {
     property(
-        FrameworkGroup.TYPOGRAPHY,
-        simpleName("FontStyle"),
-        prefix("fs"),
-        methods("fontStyle"),
-        valueSet(
-            v("italic", Keywords.italic),
-            v("normal", Keywords.normal)
-        ),
-        responsive
+      FrameworkGroup.TYPOGRAPHY,
+      simpleName("FontStyle"),
+      methods("fontStyle"),
+      valueSet(
+        v("italic", Keywords.italic),
+        v("normal", Keywords.normal)
+      ),
+      responsive
     );
   }
 
