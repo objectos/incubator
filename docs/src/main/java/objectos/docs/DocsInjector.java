@@ -43,6 +43,8 @@ abstract class DocsInjector {
 
   abstract DocumentTitle $title();
 
+  abstract DocumentTitle $title(String key);
+
   abstract AbstractFragment $topBar();
 
   abstract UnmodifiableList<String> $trail();

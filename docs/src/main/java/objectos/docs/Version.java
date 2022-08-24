@@ -16,111 +16,60 @@
 package objectos.docs;
 
 import java.time.LocalDate;
-import java.util.List;
-import objectos.util.UnmodifiableList;
 
-record Version(String name,
-               String slug,
-               String resourceDirectory,
-               LocalDate releaseDate,
-               List<String> keys) {
+enum Version {
 
-  static final Version NEXT = new Version(
-    name("0.3.0-SNAPSHOT"), slug("next"), resourceDirectory("next"),
-    unreleased(),
+  NEXT(
+      name("0.3.0-SNAPSHOT"), slug("next"), resourceDirectory("next"),
+      unreleased()
+  ),
 
-    keys(
-      "index",
+  V0_2_0(
+      name("0.2.0"), slug("0.2"), resourceDirectory("v0002"),
+      releaseDate(2022, 6, 13)
+  ),
 
-      "intro/index",
-      "intro/overview",
-      "intro/install",
+  V0_1_0(
+      name("0.1.0"), slug("0.1"), resourceDirectory("v0001"),
+      releaseDate(2022, 5, 16)
 
-      "objectos-lang/index",
-      "objectos-lang/Check",
-      "objectos-lang/Equals",
-      "objectos-lang/HashCode",
-      "objectos-lang/ToString",
-      "objectos-lang/note-sink-api/index",
-      "objectos-lang/note-sink-api/creating-notes",
-      "objectos-lang/note-sink-api/the-note-sink-interface",
-      "objectos-lang/note-sink-api/the-no-op-note-sink",
-
-      "relnotes/index",
-      "relnotes/0.2.0",
-      "relnotes/0.1.0"
-    )
+  //    ,    keys(
+  //      "index",
+  //
+  //      "intro/index",
+  //      "intro/overview",
+  //      "intro/install",
+  //
+  //      "logging/index",
+  //      "logging/getting-started/index",
+  //      "logging/getting-started/about-logging",
+  //      "logging/getting-started/objectos-logging",
+  //      "logging/getting-started/installing",
+  //      "logging/getting-started/quick-start",
+  //      "logging/logging-guide/index",
+  //      "logging/logging-guide/events",
+  //      "logging/logging-guide/logger",
+  //      "logging/no-op-logger/index",
+  //
+  //      "relnotes/index",
+  //      "relnotes/0.1.0"
+  //    )
   );
 
-  static final Version V0_2_0 = new Version(
-    name("0.2.0"), slug("0.2"), resourceDirectory("v0002"),
-    releaseDate(2022, 6, 13),
+  final String name;
 
-    keys(
-      "index",
+  final String slug;
 
-      "intro/index",
-      "intro/overview",
-      "intro/install",
+  final String resourceDirectory;
 
-      "objectos-lang/index",
-      "objectos-lang/Check",
-      "objectos-lang/Equals",
-      "objectos-lang/HashCode",
-      "objectos-lang/ToString",
-      "objectos-lang/note-sink-api/index",
-      "objectos-lang/note-sink-api/creating-notes",
-      "objectos-lang/note-sink-api/the-note-sink-interface",
-      "objectos-lang/note-sink-api/the-no-op-note-sink",
+  final LocalDate releaseDate;
 
-      "relnotes/index",
-      "relnotes/0.2.0",
-      "relnotes/0.1.0"
-    )
-  );
-
-  static final Version V0_1_0 = new Version(
-    name("0.1.0"), slug("0.1"), resourceDirectory("v0001"),
-    releaseDate(2022, 5, 16),
-
-    keys(
-      "index",
-
-      "intro/index",
-      "intro/overview",
-      "intro/install",
-
-      "logging/index",
-      "logging/getting-started/index",
-      "logging/getting-started/about-logging",
-      "logging/getting-started/objectos-logging",
-      "logging/getting-started/installing",
-      "logging/getting-started/quick-start",
-      "logging/logging-guide/index",
-      "logging/logging-guide/events",
-      "logging/logging-guide/logger",
-      "logging/no-op-logger/index",
-
-      "relnotes/index",
-      "relnotes/0.1.0"
-    )
-  );
-
-  private static UnmodifiableList<String> keys(String... keys) {
-    return UnmodifiableList.copyOf(keys);
+  private Version(String name, String slug, String resourceDirectory, LocalDate releaseDate) {
+    this.name = name;
+    this.slug = slug;
+    this.resourceDirectory = resourceDirectory;
+    this.releaseDate = releaseDate;
   }
-
-  private static LocalDate releaseDate(int year, int month, int day) {
-    return LocalDate.of(year, month, day);
-  }
-
-  private static LocalDate unreleased() { return null; }
-
-  private static String name(String s) { return s; }
-
-  private static String slug(String s) { return s; }
-
-  private static String resourceDirectory(String s) { return s; }
 
   public static Version parse(String key) {
     return switch (key) {
@@ -144,6 +93,22 @@ record Version(String name,
     } else {
       return null;
     }
+  }
+
+  private static String name(String s) { return s; }
+
+  private static LocalDate releaseDate(int year, int month, int day) {
+    return LocalDate.of(year, month, day);
+  }
+
+  private static String resourceDirectory(String s) { return s; }
+
+  private static String slug(String s) { return s; }
+
+  private static LocalDate unreleased() { return null; }
+
+  public final String fullName() {
+    return "Objectos v" + name;
   }
 
 }

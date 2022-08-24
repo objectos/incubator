@@ -31,7 +31,7 @@ record DocumentLocation(String writePath, String href) {
 
       var shortKey = key.substring(index);
 
-      writePath = version.slug() + shortKey + ".html";
+      writePath = version.slug + shortKey + ".html";
     } else {
       writePath = key + ".html";
     }

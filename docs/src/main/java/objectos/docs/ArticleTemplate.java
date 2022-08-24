@@ -32,6 +32,7 @@ import br.com.objectos.css.framework.typography.FontWeight;
 import br.com.objectos.css.select.ClassSelector;
 import br.com.objectos.css.sheet.StyleSheet;
 import br.com.objectos.html.element.StandardElementName;
+import br.com.objectos.html.spi.type.LiValue;
 import objectos.docs.style.SyntaxCss;
 
 final class ArticleTemplate extends DocsTemplate implements LanguageRenderer.Output {
@@ -143,6 +144,7 @@ final class ArticleTemplate extends DocsTemplate implements LanguageRenderer.Out
   @Override
   final void main0() {
     //    var nextBanner = injector.$nextBanner();
+
     div(
       //    nextBanner.shouldRender() ? f(nextBanner) : noop(),
       Display.flex,
@@ -157,7 +159,7 @@ final class ArticleTemplate extends DocsTemplate implements LanguageRenderer.Out
         Width.md.v56,
         Width.lg.v72,
 
-        t("Objectos v0.2.0")
+        f(this::leftBar)
       ),
 
       main(
@@ -175,6 +177,163 @@ final class ArticleTemplate extends DocsTemplate implements LanguageRenderer.Out
   @Override
   final StyleSheet styleSheet() {
     return css;
+  }
+
+  private void leftBar() {
+    var version = injector.$version();
+
+    h1(version.fullName());
+
+    switch (version) {
+      case NEXT -> {
+        ul(
+          li(leftLink("next/index")),
+
+          li(
+            h2("Introduction"),
+
+            ul(
+              li(leftLink("next/intro/index")),
+              li(leftLink("next/intro/overview")),
+              li(leftLink("next/intro/install"))
+            )
+          ),
+
+          li(
+            h2("Objectos Lang"),
+
+            ul(
+              li(leftLink("next/objectos-lang/index", "Introduction")),
+              li(leftLink("next/objectos-lang/Check")),
+              li(leftLink("next/objectos-lang/Equals")),
+              li(leftLink("next/objectos-lang/HashCode")),
+              li(leftLink("next/objectos-lang/ToString")),
+
+              li(
+                h3("Note sink API"),
+
+                li(leftLink("next/objectos-lang/note-sink-api/index")),
+                li(leftLink("next/objectos-lang/note-sink-api/creating-notes")),
+                li(leftLink("next/objectos-lang/note-sink-api/the-note-sink-interface")),
+                li(leftLink("next/objectos-lang/note-sink-api/the-no-op-note-sink"))
+              )
+            )
+          ),
+
+          li(
+            h2("Release Notes"),
+
+            ul(
+              li(leftLink("next/relnotes/0.2.0", "Objectos 0.2.0")),
+              li(leftLink("next/relnotes/0.1.0", "Objectos 0.1.0"))
+            )
+          )
+        );
+      }
+
+      case V0_2_0 -> {
+        ul(
+          li(leftLink("v0002/index")),
+
+          li(
+            h2("Introduction"),
+
+            ul(
+              li(leftLink("v0002/intro/index")),
+              li(leftLink("v0002/intro/overview")),
+              li(leftLink("v0002/intro/install"))
+            )
+          ),
+
+          li(
+            h2("Objectos Lang"),
+
+            ul(
+              li(leftLink("v0002/objectos-lang/index", "Introduction")),
+              li(leftLink("v0002/objectos-lang/Check")),
+              li(leftLink("v0002/objectos-lang/Equals")),
+              li(leftLink("v0002/objectos-lang/HashCode")),
+              li(leftLink("v0002/objectos-lang/ToString")),
+
+              li(
+                h3("Note sink API"),
+
+                li(leftLink("v0002/objectos-lang/note-sink-api/index")),
+                li(leftLink("v0002/objectos-lang/note-sink-api/creating-notes")),
+                li(leftLink("v0002/objectos-lang/note-sink-api/the-note-sink-interface")),
+                li(leftLink("v0002/objectos-lang/note-sink-api/the-no-op-note-sink"))
+              )
+            )
+          ),
+
+          li(
+            h2("Release Notes"),
+
+            ul(
+              li(leftLink("v0002/relnotes/0.2.0", "Objectos 0.2.0")),
+              li(leftLink("v0002/relnotes/0.1.0", "Objectos 0.1.0"))
+            )
+          )
+        );
+      }
+
+      case V0_1_0 -> {
+        ul(
+          li(leftLink("v0001/index")),
+
+          li(
+            h2("Introduction"),
+
+            ul(
+              li(leftLink("v0001/intro/index")),
+              li(leftLink("v0001/intro/overview")),
+              li(leftLink("v0001/intro/install"))
+            )
+          ),
+
+          li(
+            h2("Objectos Logging"),
+
+            ul(
+              li(leftLink("v0001/logging/index")),
+
+              li(leftLink("v0001/logging/getting-started/index")),
+              li(leftLink("v0001/logging/getting-started/about-logging")),
+              li(leftLink("v0001/logging/getting-started/objectos-logging")),
+              li(leftLink("v0001/logging/getting-started/installing")),
+              li(leftLink("v0001/logging/getting-started/quick-start")),
+
+              li(leftLink("v0001/logging/logging-guide/index")),
+              li(leftLink("v0001/logging/logging-guide/events")),
+              li(leftLink("v0001/logging/logging-guide/logger")),
+
+              li(leftLink("v0001/logging/no-op-logger/index"))
+            )
+          ),
+
+          li(
+            h2("Release Notes"),
+
+            ul(
+              li(leftLink("v0001/relnotes/0.1.0", "Objectos 0.1.0"))
+            )
+          )
+        );
+      }
+
+      default -> throw new UnsupportedOperationException("Implement me :: version=" + version);
+    }
+  }
+
+  private LiValue leftLink(String key) {
+    return a(
+      href(injector.$href(key)),
+      raw(injector.$title(key).html())
+    );
+  }
+
+  private LiValue leftLink(String key, String text) {
+    return a(href(injector.$href(key)), t(text));
   }
 
 }

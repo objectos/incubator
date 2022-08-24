@@ -106,9 +106,9 @@ final class VersionsTemplate extends DocsTemplate {
     for (int i = 0; i < size; i++) {
       var version = versions.get(i);
 
-      var href = injector.$href(version.slug() + "/index.html");
+      var href = injector.$href(version.resourceDirectory + "/index");
 
-      var date = version.releaseDate();
+      var date = version.releaseDate;
 
       values[i] = tr(
         td(

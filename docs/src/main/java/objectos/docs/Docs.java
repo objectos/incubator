@@ -156,7 +156,7 @@ public final class Docs extends DocsInjector {
 
     var key = target.substring(first + 1);
 
-    return baseHref + "/" + version.slug() + "/" + key + ".html";
+    return baseHref + "/" + version.slug + "/" + key + ".html";
   }
 
   @Override
@@ -168,14 +168,22 @@ public final class Docs extends DocsInjector {
 
   @Override
   final String $href(String key) {
-    return baseHref + "/" + key;
+    var record = documents.get(key);
+
+    if (record == null) {
+      throw new NoSuchElementException(key);
+    }
+
+    var location = record.location();
+
+    return location.href();
   }
 
   @Override
   final String $ilink(String target) {
     Check.state(currentVersion != null, "currentVersion is not set");
 
-    return baseHref + "/" + currentVersion.slug() + "/" + target + ".html";
+    return baseHref + "/" + currentVersion.slug + "/" + target + ".html";
   }
 
   @Override
@@ -195,6 +203,17 @@ public final class Docs extends DocsInjector {
 
   @Override
   final DocumentTitle $title() { return currentRecord.title(); }
+
+  @Override
+  final DocumentTitle $title(String key) {
+    var record = documents.get(key);
+
+    if (record == null) {
+      throw new NoSuchElementException(key);
+    }
+
+    return record.title();
+  }
 
   @Override
   final AbstractFragment $topBar() { return topBar.toFragment(); }
