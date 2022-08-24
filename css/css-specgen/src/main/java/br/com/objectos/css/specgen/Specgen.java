@@ -42,15 +42,15 @@ class Specgen extends AbstractSpecgen {
     p("background-repeat");
     p("background-size");
     p("border",
-        "border-top", "border-right", "border-bottom", "border-left");
+      "border-top", "border-right", "border-bottom", "border-left");
     p("border-collapse");
     p("border-color",
-        "border-top-color", "border-right-color", "border-bottom-color", "border-left-color");
+      "border-top-color", "border-right-color", "border-bottom-color", "border-left-color");
     p("border-radius");
     p("border-style",
-        "border-top-style", "border-right-style", "border-bottom-style", "border-left-style");
+      "border-top-style", "border-right-style", "border-bottom-style", "border-left-style");
     p("border-width",
-        "border-top-width", "border-right-width", "border-bottom-width", "border-left-width");
+      "border-top-width", "border-right-width", "border-bottom-width", "border-left-width");
     p("bottom");
     p("box-shadow");
     p("box-sizing");
@@ -78,7 +78,7 @@ class Specgen extends AbstractSpecgen {
 
     // H
     p("height",
-        "max-height", "max-width", "min-height", "min-width", "width");
+      "max-height", "max-width", "min-height", "min-width", "width");
 
     // J
     p("justify-content");
@@ -96,20 +96,21 @@ class Specgen extends AbstractSpecgen {
 
     // M
     p("margin",
-        "margin-top", "margin-right", "margin-bottom", "margin-left");
+      "margin-top", "margin-right", "margin-bottom", "margin-left");
 
     // O
+    p("opacity");
     p("outline");
     p("outline-color");
     p("outline-offset");
     p("outline-style");
     p("outline-width");
     p("overflow",
-        "overflow-block", "overflow-inline", "overflow-x", "overflow-y");
+      "overflow-block", "overflow-inline", "overflow-x", "overflow-y");
 
     // P
     p("padding",
-        "padding-top", "padding-right", "padding-bottom", "padding-left");
+      "padding-top", "padding-right", "padding-bottom", "padding-left");
     p("position");
 
     // R
@@ -117,12 +118,14 @@ class Specgen extends AbstractSpecgen {
     p("right");
 
     // T
+    p("tab-size");
     p("text-align");
     p("text-decoration");
     p("text-decoration-color");
     p("text-decoration-line");
     p("text-decoration-style");
     p("text-decoration-thickness");
+    p("text-indent");
     p("text-shadow");
     p("text-size-adjust");
     p("text-transform");

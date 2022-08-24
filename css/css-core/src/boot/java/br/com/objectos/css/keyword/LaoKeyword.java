@@ -9,7 +9,7 @@ public final class LaoKeyword extends StandardKeyword implements CounterStyleVal
   static final LaoKeyword INSTANCE = new LaoKeyword();
 
   private LaoKeyword() {
-    super(124, "lao", "lao");
+    super(126, "lao", "lao");
   }
 
 }

@@ -9,7 +9,7 @@ public final class MongolianKeyword extends StandardKeyword implements CounterSt
   static final MongolianKeyword INSTANCE = new MongolianKeyword();
 
   private MongolianKeyword() {
-    super(152, "mongolian", "mongolian");
+    super(154, "mongolian", "mongolian");
   }
 
 }

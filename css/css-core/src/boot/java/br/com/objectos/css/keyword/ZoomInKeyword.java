@@ -9,7 +9,7 @@ public final class ZoomInKeyword extends StandardKeyword implements CursorValue 
   static final ZoomInKeyword INSTANCE = new ZoomInKeyword();
 
   private ZoomInKeyword() {
-    super(279, "zoomIn", "zoom-in");
+    super(281, "zoomIn", "zoom-in");
   }
 
 }

@@ -11,7 +11,7 @@ public final class EndKeyword extends StandardKeyword implements ContentPosition
   static final EndKeyword INSTANCE = new EndKeyword();
 
   private EndKeyword() {
-    super(72, "end", "end");
+    super(73, "end", "end");
   }
 
 }

@@ -10,7 +10,7 @@ public final class ThickKeyword extends StandardKeyword implements LineWidthValu
   static final ThickKeyword INSTANCE = new ThickKeyword();
 
   private ThickKeyword() {
-    super(252, "thick", "thick");
+    super(254, "thick", "thick");
   }
 
 }

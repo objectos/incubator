@@ -10,7 +10,7 @@ public final class FixedKeyword extends StandardKeyword implements BackgroundAtt
   static final FixedKeyword INSTANCE = new FixedKeyword();
 
   private FixedKeyword() {
-    super(77, "fixed", "fixed");
+    super(78, "fixed", "fixed");
   }
 
 }

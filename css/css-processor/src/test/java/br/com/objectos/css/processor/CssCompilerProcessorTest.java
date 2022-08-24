@@ -29,38 +29,38 @@ public class CssCompilerProcessorTest {
   public void test() {
     Compilation compilation;
     compilation = javac(
-        processor(new CssCompilerProcessor(ResourcesFiler::getInstance)),
-        compilationUnit(
-            "@br.com.objectos.css.CssCompiler({",
-            "    \"Sheet\"",
-            "})",
-            "package code.css.compiler;"
-        )
+      processor(new CssCompilerProcessor(ResourcesFiler::getInstance)),
+      compilationUnit(
+        "@br.com.objectos.css.CssCompiler({",
+        "    \"Sheet\"",
+        "})",
+        "package code.css.compiler;"
+      )
     );
 
     compilation.assertWasSuccessful();
 
     Util.assertHasLines(
-        compilation.getJavaFile("code.css.compiler.Sheet").toString(),
+      compilation.getJavaFile("code.css.compiler.Sheet").toString(),
 
-        "package code.css.compiler;",
-        "",
-        "import br.com.objectos.code.annotations.Generated;",
-        "import br.com.objectos.css.sheet.AbstractStyleSheet;",
-        "",
-        "@Generated(\"br.com.objectos.css.processor.CssCompilerProcessor\")",
-        "public class Sheet extends AbstractStyleSheet {",
-        "",
-        "  @Override",
-        "  protected final void definition() {",
-        "    style(",
-        "        html,",
-        "",
-        "        margin(zero())",
-        "    );",
-        "  }",
-        "",
-        "}"
+      "package code.css.compiler;",
+      "",
+      "import br.com.objectos.code.annotations.Generated;",
+      "import br.com.objectos.css.sheet.AbstractStyleSheet;",
+      "",
+      "@Generated(\"br.com.objectos.css.processor.CssCompilerProcessor\")",
+      "public class Sheet extends AbstractStyleSheet {",
+      "",
+      "  @Override",
+      "  protected final void definition() {",
+      "    style(",
+      "        html,",
+      "",
+      "        margin(zero())",
+      "    );",
+      "  }",
+      "",
+      "}"
     );
   }
 

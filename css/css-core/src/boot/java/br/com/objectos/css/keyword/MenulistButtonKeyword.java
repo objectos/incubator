@@ -9,7 +9,7 @@ public final class MenulistButtonKeyword extends StandardKeyword implements Appe
   static final MenulistButtonKeyword INSTANCE = new MenulistButtonKeyword();
 
   private MenulistButtonKeyword() {
-    super(147, "menulistButton", "menulist-button");
+    super(149, "menulistButton", "menulist-button");
   }
 
 }

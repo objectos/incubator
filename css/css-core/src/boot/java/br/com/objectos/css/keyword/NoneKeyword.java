@@ -25,7 +25,7 @@ public final class NoneKeyword extends StandardKeyword implements AppearanceValu
   static final NoneKeyword INSTANCE = new NoneKeyword();
 
   private NoneKeyword() {
-    super(163, "none", "none");
+    super(165, "none", "none");
   }
 
 }

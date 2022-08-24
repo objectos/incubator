@@ -88,7 +88,7 @@ class Identifier extends ThisValue {
     StandardPropertyName propertyName = StandardPropertyName.getByName(name);
 
     if (propertyName == null) {
-      throw new UnsupportedOperationException("Implement me");
+      throw new UnsupportedOperationException("Implement me :: name=" + name);
     }
 
     return propertyName;

@@ -9,7 +9,7 @@ public final class EwResizeKeyword extends StandardKeyword implements CursorValu
   static final EwResizeKeyword INSTANCE = new EwResizeKeyword();
 
   private EwResizeKeyword() {
-    super(74, "ewResize", "ew-resize");
+    super(75, "ewResize", "ew-resize");
   }
 
 }

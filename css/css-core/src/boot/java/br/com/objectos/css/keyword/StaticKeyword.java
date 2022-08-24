@@ -9,7 +9,7 @@ public final class StaticKeyword extends StandardKeyword implements PositionValu
   static final StaticKeyword INSTANCE = new StaticKeyword();
 
   private StaticKeyword() {
-    super(228, "staticKw", "static");
+    super(230, "staticKw", "static");
   }
 
 }

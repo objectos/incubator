@@ -9,7 +9,7 @@ public final class LighterKeyword extends StandardKeyword implements FontWeightV
   static final LighterKeyword INSTANCE = new LighterKeyword();
 
   private LighterKeyword() {
-    super(130, "lighter", "lighter");
+    super(132, "lighter", "lighter");
   }
 
 }

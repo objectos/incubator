@@ -9,7 +9,7 @@ public final class PaddingBoxKeyword extends StandardKeyword implements BoxValue
   static final PaddingBoxKeyword INSTANCE = new PaddingBoxKeyword();
 
   private PaddingBoxKeyword() {
-    super(176, "paddingBox", "padding-box");
+    super(178, "paddingBox", "padding-box");
   }
 
 }

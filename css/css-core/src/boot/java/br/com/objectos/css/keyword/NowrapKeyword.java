@@ -10,7 +10,7 @@ public final class NowrapKeyword extends StandardKeyword implements FlexWrapValu
   static final NowrapKeyword INSTANCE = new NowrapKeyword();
 
   private NowrapKeyword() {
-    super(166, "nowrap", "nowrap");
+    super(168, "nowrap", "nowrap");
   }
 
 }

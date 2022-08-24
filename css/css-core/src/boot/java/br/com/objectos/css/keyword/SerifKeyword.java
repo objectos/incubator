@@ -9,7 +9,7 @@ public final class SerifKeyword extends StandardKeyword implements FontFamilyVal
   static final SerifKeyword INSTANCE = new SerifKeyword();
 
   private SerifKeyword() {
-    super(211, "serif", "serif");
+    super(213, "serif", "serif");
   }
 
 }

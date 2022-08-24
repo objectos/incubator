@@ -10,7 +10,7 @@ public final class InlineStartKeyword extends StandardKeyword implements ClearVa
   static final InlineStartKeyword INSTANCE = new InlineStartKeyword();
 
   private InlineStartKeyword() {
-    super(108, "inlineStart", "inline-start");
+    super(110, "inlineStart", "inline-start");
   }
 
 }

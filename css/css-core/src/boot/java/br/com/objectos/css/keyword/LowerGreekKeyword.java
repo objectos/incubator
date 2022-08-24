@@ -9,7 +9,7 @@ public final class LowerGreekKeyword extends StandardKeyword implements CounterS
   static final LowerGreekKeyword INSTANCE = new LowerGreekKeyword();
 
   private LowerGreekKeyword() {
-    super(137, "lowerGreek", "lower-greek");
+    super(139, "lowerGreek", "lower-greek");
   }
 
 }

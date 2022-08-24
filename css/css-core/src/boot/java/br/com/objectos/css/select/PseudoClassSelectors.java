@@ -102,7 +102,9 @@ public final class PseudoClassSelectors {
 
   public static final PseudoClassSelector _MOZ_FOCUSRING = new PseudoClassSelector(46, "-moz-focusring");
 
-  private static final PseudoClassSelector[] ARRAY = new PseudoClassSelector[] {ACTIVE, ANY_LINK, BLANK, CHECKED, CURRENT, DEFAULT, DEFINED, DISABLED, DROP, EMPTY, ENABLED, FIRST, FIRST_CHILD, FIRST_OF_TYPE, FULLSCREEN, FUTURE, FOCUS, FOCUS_VISIBLE, FOCUS_WITHIN, HOST, HOVER, INDETERMINATE, IN_RANGE, INVALID, LAST_CHILD, LAST_OF_TYPE, LEFT, LINK, LOCAL_LINK, ONLY_CHILD, ONLY_OF_TYPE, OPTIONAL, OUT_OF_RANGE, PAST, PLACEHOLDER_SHOWN, READ_ONLY, READ_WRITE, REQUIRED, RIGHT, ROOT, SCOPE, TARGET, TARGET_WITHIN, USER_INVALID, VALID, VISITED, _MOZ_FOCUSRING};
+  public static final PseudoClassSelector _MOZ_UI_INVALID = new PseudoClassSelector(47, "-moz-ui-invalid");
+
+  private static final PseudoClassSelector[] ARRAY = new PseudoClassSelector[] {ACTIVE, ANY_LINK, BLANK, CHECKED, CURRENT, DEFAULT, DEFINED, DISABLED, DROP, EMPTY, ENABLED, FIRST, FIRST_CHILD, FIRST_OF_TYPE, FULLSCREEN, FUTURE, FOCUS, FOCUS_VISIBLE, FOCUS_WITHIN, HOST, HOVER, INDETERMINATE, IN_RANGE, INVALID, LAST_CHILD, LAST_OF_TYPE, LEFT, LINK, LOCAL_LINK, ONLY_CHILD, ONLY_OF_TYPE, OPTIONAL, OUT_OF_RANGE, PAST, PLACEHOLDER_SHOWN, READ_ONLY, READ_WRITE, REQUIRED, RIGHT, ROOT, SCOPE, TARGET, TARGET_WITHIN, USER_INVALID, VALID, VISITED, _MOZ_FOCUSRING, _MOZ_UI_INVALID};
 
   private static final UnmodifiableMap<String, PseudoClassSelector> MAP = buildMap();
 
@@ -167,6 +169,7 @@ public final class PseudoClassSelectors {
     m.put("valid", VALID);
     m.put("visited", VISITED);
     m.put("-moz-focusring", _MOZ_FOCUSRING);
+    m.put("-moz-ui-invalid", _MOZ_UI_INVALID);
     return m.toUnmodifiableMap();
   }
 

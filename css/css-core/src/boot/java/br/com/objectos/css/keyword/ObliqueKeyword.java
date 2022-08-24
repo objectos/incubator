@@ -9,7 +9,7 @@ public final class ObliqueKeyword extends StandardKeyword implements FontStyleVa
   static final ObliqueKeyword INSTANCE = new ObliqueKeyword();
 
   private ObliqueKeyword() {
-    super(170, "oblique", "oblique");
+    super(172, "oblique", "oblique");
   }
 
 }

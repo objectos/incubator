@@ -9,7 +9,7 @@ public final class SansSerifKeyword extends StandardKeyword implements FontFamil
   static final SansSerifKeyword INSTANCE = new SansSerifKeyword();
 
   private SansSerifKeyword() {
-    super(204, "sansSerif", "sans-serif");
+    super(206, "sansSerif", "sans-serif");
   }
 
 }

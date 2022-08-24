@@ -9,7 +9,7 @@ public final class LowerArmenianKeyword extends StandardKeyword implements Count
   static final LowerArmenianKeyword INSTANCE = new LowerArmenianKeyword();
 
   private LowerArmenianKeyword() {
-    super(136, "lowerArmenian", "lower-armenian");
+    super(138, "lowerArmenian", "lower-armenian");
   }
 
 }

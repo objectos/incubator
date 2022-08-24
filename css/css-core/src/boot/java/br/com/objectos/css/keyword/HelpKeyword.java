@@ -9,7 +9,7 @@ public final class HelpKeyword extends StandardKeyword implements CursorValue {
   static final HelpKeyword INSTANCE = new HelpKeyword();
 
   private HelpKeyword() {
-    super(95, "help", "help");
+    super(97, "help", "help");
   }
 
 }

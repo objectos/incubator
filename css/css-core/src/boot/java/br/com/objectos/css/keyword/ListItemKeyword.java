@@ -9,7 +9,7 @@ public final class ListItemKeyword extends StandardKeyword implements DisplayLis
   static final ListItemKeyword INSTANCE = new ListItemKeyword();
 
   private ListItemKeyword() {
-    super(132, "listItem", "list-item");
+    super(134, "listItem", "list-item");
   }
 
 }

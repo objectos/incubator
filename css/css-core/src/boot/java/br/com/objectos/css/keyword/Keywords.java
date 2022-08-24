@@ -151,6 +151,8 @@ public final class Keywords {
 
   public static final EResizeKeyword eResize = EResizeKeyword.INSTANCE;
 
+  public static final EachLineKeyword eachLine = EachLineKeyword.INSTANCE;
+
   public static final EndKeyword end = EndKeyword.INSTANCE;
 
   public static final EthiopicNumericKeyword ethiopicNumeric = EthiopicNumericKeyword.INSTANCE;
@@ -194,6 +196,8 @@ public final class Keywords {
   public static final GujaratiKeyword gujarati = GujaratiKeyword.INSTANCE;
 
   public static final GurmukhiKeyword gurmukhi = GurmukhiKeyword.INSTANCE;
+
+  public static final HangingKeyword hanging = HangingKeyword.INSTANCE;
 
   public static final HebrewKeyword hebrew = HebrewKeyword.INSTANCE;
 
@@ -297,7 +301,7 @@ public final class Keywords {
 
   public static final MediumKeyword medium = MediumKeyword.INSTANCE;
 
-  public static final MenuKeyword menu = MenuKeyword.INSTANCE;
+  public static final MenuKeyword menuKw = MenuKeyword.INSTANCE;
 
   public static final MenulistKeyword menulist = MenulistKeyword.INSTANCE;
 
@@ -569,7 +573,7 @@ public final class Keywords {
 
   public static final ZoomOutKeyword zoomOut = ZoomOutKeyword.INSTANCE;
 
-  private static final StandardKeyword[] ARRAY = new StandardKeyword[] {mozArabicIndic, mozBengali, mozCjkEarthlyBranch, mozCjkHeavenlyStem, mozDevanagari, mozGujarati, mozGurmukhi, mozKannada, mozKhmer, mozLao, mozMalayalam, mozMyanmar, mozOriya, mozPersian, mozTamil, mozTelugu, mozThai, absolute, alias, allScroll, arabicIndic, armenian, auto, baseline, bengali, blink, block, bold, bolder, borderBox, both, bottom, breakSpaces, buttonKw, buttonBevel, cambodian, capitalize, caption, cell, center, checkbox, circle, cjkDecimal, cjkEarthlyBranch, cjkHeavenlyStem, cjkIdeographic, clip, closeQuote, colResize, collapse, column, columnReverse, contain, content, contentBox, contents, contextMenu, copy, cover, crosshair, cursive, dashed, decimal, decimalLeadingZero, defaultKw, devanagari, disc, disclosureClosed, disclosureOpen, dotted, doubleKw, eResize, end, ethiopicNumeric, ewResize, fantasy, first, fixed, flex, flexEnd, flexStart, flow, flowRoot, fromFont, fullSizeKana, fullWidth, georgian, grab, grabbing, grammarError, grid, groove, gujarati, gurmukhi, hebrew, help, hidden, hiragana, hiraganaIroha, horizontal, icon, inherit, initial, inline, inlineBlock, inlineEnd, inlineFlex, inlineGrid, inlineStart, inlineTable, inset, inside, invert, italic, japaneseFormal, japaneseInformal, justify, kannada, katakana, katakanaIroha, khmer, koreanHangulFormal, koreanHanjaFormal, koreanHanjaInformal, lao, large, larger, last, left, legacy, lighter, lineThrough, listItem, listbox, local, lowerAlpha, lowerArmenian, lowerGreek, lowerLatin, lowerRoman, lowercase, malayalam, matchParent, maxContent, medium, menu, menulist, menulistButton, messageBox, meter, middle, minContent, mongolian, monospace, move, myanmar, nResize, neResize, neswResize, noCloseQuote, noDrop, noOpenQuote, noRepeat, none, normal, notAllowed, nowrap, nsResize, nwResize, nwseResize, oblique, openQuote, oriya, outset, outside, overline, paddingBox, persian, pointer, preKw, preLine, preWrap, progressKw, progressBar, pushButton, radio, relative, repeat, repeatX, repeatY, ridge, right, round, row, rowResize, rowReverse, ruby, rubyBase, rubyBaseContainer, rubyText, rubyTextContainer, runIn, sResize, safe, sansSerif, scroll, seResize, searchfield, selfEnd, selfStart, separate, serif, simpChineseFormal, simpChineseInformal, sliderHorizontal, smallKw, smallCaps, smallCaption, smaller, solid, space, spaceAround, spaceBetween, spaceEvenly, spellingError, square, squareButton, start, staticKw, statusBar, sticky, stretch, subKw, superKw, swResize, tableKw, tableCaption, tableCell, tableColumn, tableColumnGroup, tableFooterGroup, tableHeaderGroup, tableRow, tableRowGroup, tamil, telugu, text, textBottom, textTop, textareaKw, textfield, thai, thick, thin, tibetan, top, tradChineseFormal, tradChineseInformal, underline, unsafe, unset, upperAlpha, upperArmenian, upperLatin, upperRoman, uppercase, vertical, verticalText, visible, wResize, wait, wavy, wrap, wrapReverse, xLarge, xSmall, xxLarge, xxSmall, xxxLarge, zoomIn, zoomOut};
+  private static final StandardKeyword[] ARRAY = new StandardKeyword[] {mozArabicIndic, mozBengali, mozCjkEarthlyBranch, mozCjkHeavenlyStem, mozDevanagari, mozGujarati, mozGurmukhi, mozKannada, mozKhmer, mozLao, mozMalayalam, mozMyanmar, mozOriya, mozPersian, mozTamil, mozTelugu, mozThai, absolute, alias, allScroll, arabicIndic, armenian, auto, baseline, bengali, blink, block, bold, bolder, borderBox, both, bottom, breakSpaces, buttonKw, buttonBevel, cambodian, capitalize, caption, cell, center, checkbox, circle, cjkDecimal, cjkEarthlyBranch, cjkHeavenlyStem, cjkIdeographic, clip, closeQuote, colResize, collapse, column, columnReverse, contain, content, contentBox, contents, contextMenu, copy, cover, crosshair, cursive, dashed, decimal, decimalLeadingZero, defaultKw, devanagari, disc, disclosureClosed, disclosureOpen, dotted, doubleKw, eResize, eachLine, end, ethiopicNumeric, ewResize, fantasy, first, fixed, flex, flexEnd, flexStart, flow, flowRoot, fromFont, fullSizeKana, fullWidth, georgian, grab, grabbing, grammarError, grid, groove, gujarati, gurmukhi, hanging, hebrew, help, hidden, hiragana, hiraganaIroha, horizontal, icon, inherit, initial, inline, inlineBlock, inlineEnd, inlineFlex, inlineGrid, inlineStart, inlineTable, inset, inside, invert, italic, japaneseFormal, japaneseInformal, justify, kannada, katakana, katakanaIroha, khmer, koreanHangulFormal, koreanHanjaFormal, koreanHanjaInformal, lao, large, larger, last, left, legacy, lighter, lineThrough, listItem, listbox, local, lowerAlpha, lowerArmenian, lowerGreek, lowerLatin, lowerRoman, lowercase, malayalam, matchParent, maxContent, medium, menuKw, menulist, menulistButton, messageBox, meter, middle, minContent, mongolian, monospace, move, myanmar, nResize, neResize, neswResize, noCloseQuote, noDrop, noOpenQuote, noRepeat, none, normal, notAllowed, nowrap, nsResize, nwResize, nwseResize, oblique, openQuote, oriya, outset, outside, overline, paddingBox, persian, pointer, preKw, preLine, preWrap, progressKw, progressBar, pushButton, radio, relative, repeat, repeatX, repeatY, ridge, right, round, row, rowResize, rowReverse, ruby, rubyBase, rubyBaseContainer, rubyText, rubyTextContainer, runIn, sResize, safe, sansSerif, scroll, seResize, searchfield, selfEnd, selfStart, separate, serif, simpChineseFormal, simpChineseInformal, sliderHorizontal, smallKw, smallCaps, smallCaption, smaller, solid, space, spaceAround, spaceBetween, spaceEvenly, spellingError, square, squareButton, start, staticKw, statusBar, sticky, stretch, subKw, superKw, swResize, tableKw, tableCaption, tableCell, tableColumn, tableColumnGroup, tableFooterGroup, tableHeaderGroup, tableRow, tableRowGroup, tamil, telugu, text, textBottom, textTop, textareaKw, textfield, thai, thick, thin, tibetan, top, tradChineseFormal, tradChineseInformal, underline, unsafe, unset, upperAlpha, upperArmenian, upperLatin, upperRoman, uppercase, vertical, verticalText, visible, wResize, wait, wavy, wrap, wrapReverse, xLarge, xSmall, xxLarge, xxSmall, xxxLarge, zoomIn, zoomOut};
 
   private static final UnmodifiableMap<String, StandardKeyword> MAP = buildMap();
 
@@ -665,6 +669,7 @@ public final class Keywords {
     m.put("dotted", dotted);
     m.put("double", doubleKw);
     m.put("e-resize", eResize);
+    m.put("each-line", eachLine);
     m.put("end", end);
     m.put("ethiopic-numeric", ethiopicNumeric);
     m.put("ew-resize", ewResize);
@@ -687,6 +692,7 @@ public final class Keywords {
     m.put("groove", groove);
     m.put("gujarati", gujarati);
     m.put("gurmukhi", gurmukhi);
+    m.put("hanging", hanging);
     m.put("hebrew", hebrew);
     m.put("help", help);
     m.put("hidden", hidden);
@@ -738,7 +744,7 @@ public final class Keywords {
     m.put("match-parent", matchParent);
     m.put("max-content", maxContent);
     m.put("medium", medium);
-    m.put("menu", menu);
+    m.put("menu", menuKw);
     m.put("menulist", menulist);
     m.put("menulist-button", menulistButton);
     m.put("message-box", messageBox);

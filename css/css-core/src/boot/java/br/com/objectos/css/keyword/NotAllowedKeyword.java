@@ -9,7 +9,7 @@ public final class NotAllowedKeyword extends StandardKeyword implements CursorVa
   static final NotAllowedKeyword INSTANCE = new NotAllowedKeyword();
 
   private NotAllowedKeyword() {
-    super(165, "notAllowed", "not-allowed");
+    super(167, "notAllowed", "not-allowed");
   }
 
 }

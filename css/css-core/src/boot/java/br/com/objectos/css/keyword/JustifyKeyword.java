@@ -9,7 +9,7 @@ public final class JustifyKeyword extends StandardKeyword implements TextAlignVa
   static final JustifyKeyword INSTANCE = new JustifyKeyword();
 
   private JustifyKeyword() {
-    super(116, "justify", "justify");
+    super(118, "justify", "justify");
   }
 
 }

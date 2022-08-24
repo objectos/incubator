@@ -9,7 +9,7 @@ public final class FantasyKeyword extends StandardKeyword implements FontFamilyV
   static final FantasyKeyword INSTANCE = new FantasyKeyword();
 
   private FantasyKeyword() {
-    super(75, "fantasy", "fantasy");
+    super(76, "fantasy", "fantasy");
   }
 
 }

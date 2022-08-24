@@ -62,6 +62,7 @@ import br.com.objectos.css.keyword.DisclosureOpenKeyword;
 import br.com.objectos.css.keyword.DottedKeyword;
 import br.com.objectos.css.keyword.DoubleKeyword;
 import br.com.objectos.css.keyword.EResizeKeyword;
+import br.com.objectos.css.keyword.EachLineKeyword;
 import br.com.objectos.css.keyword.EndKeyword;
 import br.com.objectos.css.keyword.EthiopicNumericKeyword;
 import br.com.objectos.css.keyword.EwResizeKeyword;
@@ -84,6 +85,7 @@ import br.com.objectos.css.keyword.GridKeyword;
 import br.com.objectos.css.keyword.GrooveKeyword;
 import br.com.objectos.css.keyword.GujaratiKeyword;
 import br.com.objectos.css.keyword.GurmukhiKeyword;
+import br.com.objectos.css.keyword.HangingKeyword;
 import br.com.objectos.css.keyword.HebrewKeyword;
 import br.com.objectos.css.keyword.HelpKeyword;
 import br.com.objectos.css.keyword.HiddenKeyword;
@@ -360,18 +362,22 @@ import br.com.objectos.css.type.OutlineValue;
 import br.com.objectos.css.type.OutlineWidthValue;
 import br.com.objectos.css.type.OverflowPosition;
 import br.com.objectos.css.type.OverflowValue;
+import br.com.objectos.css.type.PercentageType;
 import br.com.objectos.css.type.PositionValue;
 import br.com.objectos.css.type.ResizeValue;
 import br.com.objectos.css.type.RightValue;
 import br.com.objectos.css.type.SelfPosition;
 import br.com.objectos.css.type.SelfPositionOrLeftOrRight;
 import br.com.objectos.css.type.SystemFontValue;
+import br.com.objectos.css.type.TabSizeValue;
 import br.com.objectos.css.type.TextAlignValue;
 import br.com.objectos.css.type.TextDecorationLineKind;
 import br.com.objectos.css.type.TextDecorationLineValue;
 import br.com.objectos.css.type.TextDecorationStyleValue;
 import br.com.objectos.css.type.TextDecorationThicknessValue;
 import br.com.objectos.css.type.TextDecorationValue;
+import br.com.objectos.css.type.TextIndentOptionalValue;
+import br.com.objectos.css.type.TextIndentValue;
 import br.com.objectos.css.type.TextSizeAdjustValue;
 import br.com.objectos.css.type.TextTransformValue;
 import br.com.objectos.css.type.TopValue;
@@ -466,6 +472,8 @@ abstract class GeneratedStyleSheet {
   protected static final TypeSelector link = Css.link;
 
   protected static final TypeSelector main = Css.main;
+
+  protected static final TypeSelector menu = Css.menu;
 
   protected static final TypeSelector meta = Css.meta;
 
@@ -622,6 +630,8 @@ abstract class GeneratedStyleSheet {
   protected static final PseudoClassSelector VISITED = Css.VISITED;
 
   protected static final PseudoClassSelector _MOZ_FOCUSRING = Css._MOZ_FOCUSRING;
+
+  protected static final PseudoClassSelector _MOZ_UI_INVALID = Css._MOZ_UI_INVALID;
 
   protected static final PseudoElementSelector AFTER = Css.AFTER;
 
@@ -1153,6 +1163,8 @@ abstract class GeneratedStyleSheet {
 
   protected static final EResizeKeyword eResize = Keywords.eResize;
 
+  protected static final EachLineKeyword eachLine = Keywords.eachLine;
+
   protected static final EndKeyword end = Keywords.end;
 
   protected static final EthiopicNumericKeyword ethiopicNumeric = Keywords.ethiopicNumeric;
@@ -1196,6 +1208,8 @@ abstract class GeneratedStyleSheet {
   protected static final GujaratiKeyword gujarati = Keywords.gujarati;
 
   protected static final GurmukhiKeyword gurmukhi = Keywords.gurmukhi;
+
+  protected static final HangingKeyword hanging = Keywords.hanging;
 
   protected static final HebrewKeyword hebrew = Keywords.hebrew;
 
@@ -1299,7 +1313,7 @@ abstract class GeneratedStyleSheet {
 
   protected static final MediumKeyword medium = Keywords.medium;
 
-  protected static final MenuKeyword menu = Keywords.menu;
+  protected static final MenuKeyword menuKw = Keywords.menuKw;
 
   protected static final MenulistKeyword menulist = Keywords.menulist;
 
@@ -2561,6 +2575,22 @@ abstract class GeneratedStyleSheet {
     return addDeclaration(StandardPropertyName.MIN_WIDTH, 0);
   }
 
+  protected final OpacityDeclaration opacity(GlobalKeyword value) {
+    return addDeclaration(StandardPropertyName.OPACITY, value);
+  }
+
+  protected final OpacityDeclaration opacity(PercentageType value) {
+    return addDeclaration(StandardPropertyName.OPACITY, value);
+  }
+
+  protected final OpacityDeclaration opacity(int value) {
+    return addDeclaration(StandardPropertyName.OPACITY, value);
+  }
+
+  protected final OpacityDeclaration opacity(double value) {
+    return addDeclaration(StandardPropertyName.OPACITY, value);
+  }
+
   protected final OutlineColorDeclaration outlineColor(GlobalKeyword value) {
     return addDeclaration(StandardPropertyName.OUTLINE_COLOR, value);
   }
@@ -2729,6 +2759,30 @@ abstract class GeneratedStyleSheet {
     return addDeclaration(StandardPropertyName.RIGHT, value);
   }
 
+  protected final TabSizeDeclaration tabSize(GlobalKeyword value) {
+    return addDeclaration(StandardPropertyName.TAB_SIZE, value);
+  }
+
+  protected final TabSizeDeclaration tabSize(TabSizeValue value) {
+    return addDeclaration(StandardPropertyName.TAB_SIZE, value);
+  }
+
+  protected final TabSizeDeclaration tabSize(int value) {
+    return addDeclaration(StandardPropertyName.TAB_SIZE, value);
+  }
+
+  protected final MozTabSizeDeclaration mozTabSize(GlobalKeyword value) {
+    return addDeclaration(StandardPropertyName._MOZ_TAB_SIZE, value);
+  }
+
+  protected final MozTabSizeDeclaration mozTabSize(TabSizeValue value) {
+    return addDeclaration(StandardPropertyName._MOZ_TAB_SIZE, value);
+  }
+
+  protected final MozTabSizeDeclaration mozTabSize(int value) {
+    return addDeclaration(StandardPropertyName._MOZ_TAB_SIZE, value);
+  }
+
   protected final TextAlignDeclaration textAlign(GlobalKeyword value) {
     return addDeclaration(StandardPropertyName.TEXT_ALIGN, value);
   }
@@ -2795,6 +2849,22 @@ abstract class GeneratedStyleSheet {
 
   protected final TextDecorationDeclaration textDecoration(TextDecorationValue value1, TextDecorationValue value2, TextDecorationValue value3, TextDecorationValue value4) {
     return addDeclaration(StandardPropertyName.TEXT_DECORATION, value1, value2, value3, value4);
+  }
+
+  protected final TextIndentDeclaration textIndent(GlobalKeyword value) {
+    return addDeclaration(StandardPropertyName.TEXT_INDENT, value);
+  }
+
+  protected final TextIndentDeclaration textIndent(TextIndentValue value) {
+    return addDeclaration(StandardPropertyName.TEXT_INDENT, value);
+  }
+
+  protected final TextIndentDeclaration textIndent(TextIndentValue value, TextIndentOptionalValue option) {
+    return addDeclaration(StandardPropertyName.TEXT_INDENT, value, option);
+  }
+
+  protected final TextIndentDeclaration textIndent(TextIndentValue value, TextIndentOptionalValue option1, TextIndentOptionalValue option2) {
+    return addDeclaration(StandardPropertyName.TEXT_INDENT, value, option1, option2);
   }
 
   protected final TextShadowDeclaration textShadow(GlobalKeyword value) {
@@ -3253,6 +3323,8 @@ abstract class GeneratedStyleSheet {
 
   protected interface MinWidthDeclaration extends Declaration {}
 
+  protected interface OpacityDeclaration extends Declaration {}
+
   protected interface OutlineColorDeclaration extends Declaration {}
 
   protected interface OutlineOffsetDeclaration extends Declaration {}
@@ -3289,6 +3361,10 @@ abstract class GeneratedStyleSheet {
 
   protected interface RightDeclaration extends Declaration {}
 
+  protected interface TabSizeDeclaration extends Declaration {}
+
+  protected interface MozTabSizeDeclaration extends Declaration {}
+
   protected interface TextAlignDeclaration extends Declaration {}
 
   protected interface TextDecorationColorDeclaration extends Declaration {}
@@ -3300,6 +3376,8 @@ abstract class GeneratedStyleSheet {
   protected interface TextDecorationThicknessDeclaration extends Declaration {}
 
   protected interface TextDecorationDeclaration extends Declaration {}
+
+  protected interface TextIndentDeclaration extends Declaration {}
 
   protected interface TextShadowDeclaration extends Declaration {}
 
@@ -3319,7 +3397,7 @@ abstract class GeneratedStyleSheet {
 
   protected interface ZIndexDeclaration extends Declaration {}
 
-  interface AnyDeclaration extends AlignContentDeclaration, AlignItemsDeclaration, AlignSelfDeclaration, AppearanceDeclaration, MozAppearanceDeclaration, WebkitAppearanceDeclaration, BackgroundAttachmentDeclaration, BackgroundClipDeclaration, BackgroundColorDeclaration, BackgroundImageDeclaration, BackgroundOriginDeclaration, BackgroundPositionDeclaration, BackgroundRepeatDeclaration, BackgroundSizeDeclaration, BackgroundDeclaration, BorderCollapseDeclaration, BorderColorDeclaration, BorderTopColorDeclaration, BorderRightColorDeclaration, BorderBottomColorDeclaration, BorderLeftColorDeclaration, BorderRadiusDeclaration, BorderTopLeftRadiusDeclaration, BorderTopRightRadiusDeclaration, BorderBottomRightRadiusDeclaration, BorderBottomLeftRadiusDeclaration, BorderStyleDeclaration, BorderTopStyleDeclaration, BorderRightStyleDeclaration, BorderBottomStyleDeclaration, BorderLeftStyleDeclaration, BorderWidthDeclaration, BorderTopWidthDeclaration, BorderRightWidthDeclaration, BorderBottomWidthDeclaration, BorderLeftWidthDeclaration, BorderDeclaration, BorderTopDeclaration, BorderRightDeclaration, BorderBottomDeclaration, BorderLeftDeclaration, BottomDeclaration, BoxShadowMultiDeclaration, BoxShadowSingleDeclaration, BoxSizingDeclaration, ClearDeclaration, ColorDeclaration, ContentDeclaration, CursorDeclaration, DisplayDeclaration, FlexDeclaration, FlexBasisDeclaration, FlexDirectionDeclaration, FlexGrowDeclaration, FlexShrinkDeclaration, FlexWrapDeclaration, FlexFlowDeclaration, FloatDeclaration, FontFamilyMultiDeclaration, FontFamilySingleDeclaration, FontDeclaration, FontSizeDeclaration, FontStyleDeclaration, FontWeightDeclaration, HeightDeclaration, WidthDeclaration, JustifyContentDeclaration, JustifyItemsDeclaration, JustifySelfDeclaration, LeftDeclaration, LetterSpacingDeclaration, LineHeightDeclaration, ListStyleImageDeclaration, ListStylePositionDeclaration, ListStyleTypeDeclaration, ListStyleDeclaration, MarginDeclaration, MarginTopDeclaration, MarginRightDeclaration, MarginBottomDeclaration, MarginLeftDeclaration, MaxHeightDeclaration, MaxWidthDeclaration, MinHeightDeclaration, MinWidthDeclaration, OutlineColorDeclaration, OutlineOffsetDeclaration, OutlineStyleDeclaration, OutlineWidthDeclaration, OutlineDeclaration, OverflowDeclaration, OverflowBlockDeclaration, OverflowInlineDeclaration, OverflowXDeclaration, OverflowYDeclaration, PaddingDeclaration, PaddingTopDeclaration, PaddingRightDeclaration, PaddingBottomDeclaration, PaddingLeftDeclaration, PositionDeclaration, ResizeDeclaration, RightDeclaration, TextAlignDeclaration, TextDecorationColorDeclaration, TextDecorationLineDeclaration, TextDecorationStyleDeclaration, TextDecorationThicknessDeclaration, TextDecorationDeclaration, TextShadowDeclaration, TextSizeAdjustDeclaration, WebkitTextSizeAdjustDeclaration, TextTransformDeclaration, TopDeclaration, TransformDeclaration, VerticalAlignDeclaration, WhiteSpaceDeclaration, ZIndexDeclaration {}
+  interface AnyDeclaration extends AlignContentDeclaration, AlignItemsDeclaration, AlignSelfDeclaration, AppearanceDeclaration, MozAppearanceDeclaration, WebkitAppearanceDeclaration, BackgroundAttachmentDeclaration, BackgroundClipDeclaration, BackgroundColorDeclaration, BackgroundImageDeclaration, BackgroundOriginDeclaration, BackgroundPositionDeclaration, BackgroundRepeatDeclaration, BackgroundSizeDeclaration, BackgroundDeclaration, BorderCollapseDeclaration, BorderColorDeclaration, BorderTopColorDeclaration, BorderRightColorDeclaration, BorderBottomColorDeclaration, BorderLeftColorDeclaration, BorderRadiusDeclaration, BorderTopLeftRadiusDeclaration, BorderTopRightRadiusDeclaration, BorderBottomRightRadiusDeclaration, BorderBottomLeftRadiusDeclaration, BorderStyleDeclaration, BorderTopStyleDeclaration, BorderRightStyleDeclaration, BorderBottomStyleDeclaration, BorderLeftStyleDeclaration, BorderWidthDeclaration, BorderTopWidthDeclaration, BorderRightWidthDeclaration, BorderBottomWidthDeclaration, BorderLeftWidthDeclaration, BorderDeclaration, BorderTopDeclaration, BorderRightDeclaration, BorderBottomDeclaration, BorderLeftDeclaration, BottomDeclaration, BoxShadowMultiDeclaration, BoxShadowSingleDeclaration, BoxSizingDeclaration, ClearDeclaration, ColorDeclaration, ContentDeclaration, CursorDeclaration, DisplayDeclaration, FlexDeclaration, FlexBasisDeclaration, FlexDirectionDeclaration, FlexGrowDeclaration, FlexShrinkDeclaration, FlexWrapDeclaration, FlexFlowDeclaration, FloatDeclaration, FontFamilyMultiDeclaration, FontFamilySingleDeclaration, FontDeclaration, FontSizeDeclaration, FontStyleDeclaration, FontWeightDeclaration, HeightDeclaration, WidthDeclaration, JustifyContentDeclaration, JustifyItemsDeclaration, JustifySelfDeclaration, LeftDeclaration, LetterSpacingDeclaration, LineHeightDeclaration, ListStyleImageDeclaration, ListStylePositionDeclaration, ListStyleTypeDeclaration, ListStyleDeclaration, MarginDeclaration, MarginTopDeclaration, MarginRightDeclaration, MarginBottomDeclaration, MarginLeftDeclaration, MaxHeightDeclaration, MaxWidthDeclaration, MinHeightDeclaration, MinWidthDeclaration, OpacityDeclaration, OutlineColorDeclaration, OutlineOffsetDeclaration, OutlineStyleDeclaration, OutlineWidthDeclaration, OutlineDeclaration, OverflowDeclaration, OverflowBlockDeclaration, OverflowInlineDeclaration, OverflowXDeclaration, OverflowYDeclaration, PaddingDeclaration, PaddingTopDeclaration, PaddingRightDeclaration, PaddingBottomDeclaration, PaddingLeftDeclaration, PositionDeclaration, ResizeDeclaration, RightDeclaration, TabSizeDeclaration, MozTabSizeDeclaration, TextAlignDeclaration, TextDecorationColorDeclaration, TextDecorationLineDeclaration, TextDecorationStyleDeclaration, TextDecorationThicknessDeclaration, TextDecorationDeclaration, TextIndentDeclaration, TextShadowDeclaration, TextSizeAdjustDeclaration, WebkitTextSizeAdjustDeclaration, TextTransformDeclaration, TopDeclaration, TransformDeclaration, VerticalAlignDeclaration, WhiteSpaceDeclaration, ZIndexDeclaration {}
 
   interface AnyFunction extends RotateFunction, RotateXFunction, RotateYFunction, RotateZFunction {}
 

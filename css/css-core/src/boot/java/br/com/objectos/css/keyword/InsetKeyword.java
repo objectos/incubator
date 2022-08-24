@@ -9,7 +9,7 @@ public final class InsetKeyword extends StandardKeyword implements LineStyleValu
   static final InsetKeyword INSTANCE = new InsetKeyword();
 
   private InsetKeyword() {
-    super(110, "inset", "inset");
+    super(112, "inset", "inset");
   }
 
 }

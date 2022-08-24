@@ -9,7 +9,7 @@ public final class KoreanHanjaFormalKeyword extends StandardKeyword implements C
   static final KoreanHanjaFormalKeyword INSTANCE = new KoreanHanjaFormalKeyword();
 
   private KoreanHanjaFormalKeyword() {
-    super(122, "koreanHanjaFormal", "korean-hanja-formal");
+    super(124, "koreanHanjaFormal", "korean-hanja-formal");
   }
 
 }

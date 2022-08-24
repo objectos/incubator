@@ -9,7 +9,7 @@ public final class XLargeKeyword extends StandardKeyword implements FontSizeValu
   static final XLargeKeyword INSTANCE = new XLargeKeyword();
 
   private XLargeKeyword() {
-    super(274, "xLarge", "x-large");
+    super(276, "xLarge", "x-large");
   }
 
 }

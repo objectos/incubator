@@ -9,7 +9,7 @@ public final class SpaceKeyword extends StandardKeyword implements BackgroundRep
   static final SpaceKeyword INSTANCE = new SpaceKeyword();
 
   private SpaceKeyword() {
-    super(220, "space", "space");
+    super(222, "space", "space");
   }
 
 }

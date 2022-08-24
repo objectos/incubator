@@ -9,7 +9,7 @@ public final class InsideKeyword extends StandardKeyword implements ListStylePos
   static final InsideKeyword INSTANCE = new InsideKeyword();
 
   private InsideKeyword() {
-    super(111, "inside", "inside");
+    super(113, "inside", "inside");
   }
 
 }

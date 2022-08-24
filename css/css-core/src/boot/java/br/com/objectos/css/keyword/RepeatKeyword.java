@@ -9,7 +9,7 @@ public final class RepeatKeyword extends StandardKeyword implements BackgroundRe
   static final RepeatKeyword INSTANCE = new RepeatKeyword();
 
   private RepeatKeyword() {
-    super(187, "repeat", "repeat");
+    super(189, "repeat", "repeat");
   }
 
 }

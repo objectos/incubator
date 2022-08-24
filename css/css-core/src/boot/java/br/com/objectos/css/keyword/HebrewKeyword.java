@@ -9,7 +9,7 @@ public final class HebrewKeyword extends StandardKeyword implements CounterStyle
   static final HebrewKeyword INSTANCE = new HebrewKeyword();
 
   private HebrewKeyword() {
-    super(94, "hebrew", "hebrew");
+    super(96, "hebrew", "hebrew");
   }
 
 }

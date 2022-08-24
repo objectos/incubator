@@ -9,7 +9,7 @@ public final class RowKeyword extends StandardKeyword implements FlexDirectionVa
   static final RowKeyword INSTANCE = new RowKeyword();
 
   private RowKeyword() {
-    super(193, "row", "row");
+    super(195, "row", "row");
   }
 
 }

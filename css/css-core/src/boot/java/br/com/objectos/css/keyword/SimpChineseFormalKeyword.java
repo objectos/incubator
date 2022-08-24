@@ -9,7 +9,7 @@ public final class SimpChineseFormalKeyword extends StandardKeyword implements C
   static final SimpChineseFormalKeyword INSTANCE = new SimpChineseFormalKeyword();
 
   private SimpChineseFormalKeyword() {
-    super(212, "simpChineseFormal", "simp-chinese-formal");
+    super(214, "simpChineseFormal", "simp-chinese-formal");
   }
 
 }

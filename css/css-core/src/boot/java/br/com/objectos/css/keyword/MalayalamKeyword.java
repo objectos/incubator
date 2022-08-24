@@ -9,7 +9,7 @@ public final class MalayalamKeyword extends StandardKeyword implements CounterSt
   static final MalayalamKeyword INSTANCE = new MalayalamKeyword();
 
   private MalayalamKeyword() {
-    super(141, "malayalam", "malayalam");
+    super(143, "malayalam", "malayalam");
   }
 
 }

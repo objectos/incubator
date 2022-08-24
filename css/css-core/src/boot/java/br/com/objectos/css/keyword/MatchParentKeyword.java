@@ -9,7 +9,7 @@ public final class MatchParentKeyword extends StandardKeyword implements TextAli
   static final MatchParentKeyword INSTANCE = new MatchParentKeyword();
 
   private MatchParentKeyword() {
-    super(142, "matchParent", "match-parent");
+    super(144, "matchParent", "match-parent");
   }
 
 }

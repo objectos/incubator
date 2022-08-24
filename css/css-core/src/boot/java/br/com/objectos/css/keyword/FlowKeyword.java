@@ -9,7 +9,7 @@ public final class FlowKeyword extends StandardKeyword implements DisplayInsideV
   static final FlowKeyword INSTANCE = new FlowKeyword();
 
   private FlowKeyword() {
-    super(81, "flow", "flow");
+    super(82, "flow", "flow");
   }
 
 }

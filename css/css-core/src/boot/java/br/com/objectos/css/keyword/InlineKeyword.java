@@ -10,7 +10,7 @@ public final class InlineKeyword extends StandardKeyword implements DisplayOutsi
   static final InlineKeyword INSTANCE = new InlineKeyword();
 
   private InlineKeyword() {
-    super(103, "inline", "inline");
+    super(105, "inline", "inline");
   }
 
 }

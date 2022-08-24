@@ -9,7 +9,7 @@ public final class InlineFlexKeyword extends StandardKeyword implements DisplayL
   static final InlineFlexKeyword INSTANCE = new InlineFlexKeyword();
 
   private InlineFlexKeyword() {
-    super(106, "inlineFlex", "inline-flex");
+    super(108, "inlineFlex", "inline-flex");
   }
 
 }

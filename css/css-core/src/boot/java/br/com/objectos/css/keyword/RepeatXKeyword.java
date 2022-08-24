@@ -9,7 +9,7 @@ public final class RepeatXKeyword extends StandardKeyword implements BackgroundR
   static final RepeatXKeyword INSTANCE = new RepeatXKeyword();
 
   private RepeatXKeyword() {
-    super(188, "repeatX", "repeat-x");
+    super(190, "repeatX", "repeat-x");
   }
 
 }

@@ -9,7 +9,7 @@ public final class TableFooterGroupKeyword extends StandardKeyword implements Di
   static final TableFooterGroupKeyword INSTANCE = new TableFooterGroupKeyword();
 
   private TableFooterGroupKeyword() {
-    super(240, "tableFooterGroup", "table-footer-group");
+    super(242, "tableFooterGroup", "table-footer-group");
   }
 
 }

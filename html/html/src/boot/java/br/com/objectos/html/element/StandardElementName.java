@@ -89,6 +89,8 @@ public enum StandardElementName implements ElementName {
 
   MAIN(ElementKind.NORMAL, "main"),
 
+  MENU(ElementKind.NORMAL, "menu"),
+
   META(ElementKind.VOID, "meta"),
 
   NAV(ElementKind.NORMAL, "nav"),

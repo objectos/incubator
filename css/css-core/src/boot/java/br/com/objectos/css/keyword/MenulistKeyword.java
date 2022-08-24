@@ -9,7 +9,7 @@ public final class MenulistKeyword extends StandardKeyword implements Appearance
   static final MenulistKeyword INSTANCE = new MenulistKeyword();
 
   private MenulistKeyword() {
-    super(146, "menulist", "menulist");
+    super(148, "menulist", "menulist");
   }
 
 }

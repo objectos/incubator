@@ -9,7 +9,7 @@ public final class EthiopicNumericKeyword extends StandardKeyword implements Cou
   static final EthiopicNumericKeyword INSTANCE = new EthiopicNumericKeyword();
 
   private EthiopicNumericKeyword() {
-    super(73, "ethiopicNumeric", "ethiopic-numeric");
+    super(74, "ethiopicNumeric", "ethiopic-numeric");
   }
 
 }

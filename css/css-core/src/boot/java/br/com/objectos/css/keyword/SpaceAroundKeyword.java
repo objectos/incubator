@@ -9,7 +9,7 @@ public final class SpaceAroundKeyword extends StandardKeyword implements Content
   static final SpaceAroundKeyword INSTANCE = new SpaceAroundKeyword();
 
   private SpaceAroundKeyword() {
-    super(221, "spaceAround", "space-around");
+    super(223, "spaceAround", "space-around");
   }
 
 }

@@ -9,7 +9,7 @@ public final class LegacyKeyword extends StandardKeyword implements JustifyItems
   static final LegacyKeyword INSTANCE = new LegacyKeyword();
 
   private LegacyKeyword() {
-    super(129, "legacy", "legacy");
+    super(131, "legacy", "legacy");
   }
 
 }

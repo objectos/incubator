@@ -9,7 +9,7 @@ public final class TamilKeyword extends StandardKeyword implements CounterStyleV
   static final TamilKeyword INSTANCE = new TamilKeyword();
 
   private TamilKeyword() {
-    super(244, "tamil", "tamil");
+    super(246, "tamil", "tamil");
   }
 
 }

@@ -9,7 +9,7 @@ public final class WavyKeyword extends StandardKeyword implements TextDecoration
   static final WavyKeyword INSTANCE = new WavyKeyword();
 
   private WavyKeyword() {
-    super(271, "wavy", "wavy");
+    super(273, "wavy", "wavy");
   }
 
 }

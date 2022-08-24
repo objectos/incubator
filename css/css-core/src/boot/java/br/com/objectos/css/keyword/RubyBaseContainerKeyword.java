@@ -9,7 +9,7 @@ public final class RubyBaseContainerKeyword extends StandardKeyword implements D
   static final RubyBaseContainerKeyword INSTANCE = new RubyBaseContainerKeyword();
 
   private RubyBaseContainerKeyword() {
-    super(198, "rubyBaseContainer", "ruby-base-container");
+    super(200, "rubyBaseContainer", "ruby-base-container");
   }
 
 }

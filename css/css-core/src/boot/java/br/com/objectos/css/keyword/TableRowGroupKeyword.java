@@ -9,7 +9,7 @@ public final class TableRowGroupKeyword extends StandardKeyword implements Displ
   static final TableRowGroupKeyword INSTANCE = new TableRowGroupKeyword();
 
   private TableRowGroupKeyword() {
-    super(243, "tableRowGroup", "table-row-group");
+    super(245, "tableRowGroup", "table-row-group");
   }
 
 }

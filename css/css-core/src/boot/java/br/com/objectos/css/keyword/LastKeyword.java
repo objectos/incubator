@@ -9,7 +9,7 @@ public final class LastKeyword extends StandardKeyword implements BaselinePositi
   static final LastKeyword INSTANCE = new LastKeyword();
 
   private LastKeyword() {
-    super(127, "last", "last");
+    super(129, "last", "last");
   }
 
 }

@@ -9,7 +9,7 @@ public final class SwResizeKeyword extends StandardKeyword implements CursorValu
   static final SwResizeKeyword INSTANCE = new SwResizeKeyword();
 
   private SwResizeKeyword() {
-    super(234, "swResize", "sw-resize");
+    super(236, "swResize", "sw-resize");
   }
 
 }

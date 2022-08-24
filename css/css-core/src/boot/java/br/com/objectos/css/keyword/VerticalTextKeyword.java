@@ -9,7 +9,7 @@ public final class VerticalTextKeyword extends StandardKeyword implements Cursor
   static final VerticalTextKeyword INSTANCE = new VerticalTextKeyword();
 
   private VerticalTextKeyword() {
-    super(267, "verticalText", "vertical-text");
+    super(269, "verticalText", "vertical-text");
   }
 
 }

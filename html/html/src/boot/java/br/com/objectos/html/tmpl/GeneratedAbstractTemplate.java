@@ -182,6 +182,7 @@ import br.com.objectos.html.spi.type.LegendValue;
 import br.com.objectos.html.spi.type.LiValue;
 import br.com.objectos.html.spi.type.LinkValue;
 import br.com.objectos.html.spi.type.MainValue;
+import br.com.objectos.html.spi.type.MenuValue;
 import br.com.objectos.html.spi.type.MetaValue;
 import br.com.objectos.html.spi.type.NavValue;
 import br.com.objectos.html.spi.type.OlValue;
@@ -511,6 +512,14 @@ abstract class GeneratedAbstractTemplate {
 
   public final ElementName main(String text) {
     return addStandardElement(StandardElementName.MAIN, text);
+  }
+
+  public final ElementName menu(MenuValue... values) {
+    return addStandardElement(StandardElementName.MENU, values);
+  }
+
+  public final ElementName menu(String text) {
+    return addStandardElement(StandardElementName.MENU, text);
   }
 
   public final ElementName meta(MetaValue... values) {

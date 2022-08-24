@@ -9,7 +9,7 @@ public final class MyanmarKeyword extends StandardKeyword implements CounterStyl
   static final MyanmarKeyword INSTANCE = new MyanmarKeyword();
 
   private MyanmarKeyword() {
-    super(155, "myanmar", "myanmar");
+    super(157, "myanmar", "myanmar");
   }
 
 }

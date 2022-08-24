@@ -9,7 +9,7 @@ public final class MoveKeyword extends StandardKeyword implements CursorValue {
   static final MoveKeyword INSTANCE = new MoveKeyword();
 
   private MoveKeyword() {
-    super(154, "move", "move");
+    super(156, "move", "move");
   }
 
 }

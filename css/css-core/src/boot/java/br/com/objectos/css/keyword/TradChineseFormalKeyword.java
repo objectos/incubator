@@ -9,7 +9,7 @@ public final class TradChineseFormalKeyword extends StandardKeyword implements C
   static final TradChineseFormalKeyword INSTANCE = new TradChineseFormalKeyword();
 
   private TradChineseFormalKeyword() {
-    super(256, "tradChineseFormal", "trad-chinese-formal");
+    super(258, "tradChineseFormal", "trad-chinese-formal");
   }
 
 }

@@ -9,7 +9,7 @@ public final class InheritKeyword extends StandardKeyword implements GlobalKeywo
   static final InheritKeyword INSTANCE = new InheritKeyword();
 
   private InheritKeyword() {
-    super(101, "inherit", "inherit");
+    super(103, "inherit", "inherit");
   }
 
 }

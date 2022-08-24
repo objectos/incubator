@@ -9,7 +9,7 @@ public final class TeluguKeyword extends StandardKeyword implements CounterStyle
   static final TeluguKeyword INSTANCE = new TeluguKeyword();
 
   private TeluguKeyword() {
-    super(245, "telugu", "telugu");
+    super(247, "telugu", "telugu");
   }
 
 }

@@ -9,7 +9,7 @@ public final class LowerAlphaKeyword extends StandardKeyword implements CounterS
   static final LowerAlphaKeyword INSTANCE = new LowerAlphaKeyword();
 
   private LowerAlphaKeyword() {
-    super(135, "lowerAlpha", "lower-alpha");
+    super(137, "lowerAlpha", "lower-alpha");
   }
 
 }

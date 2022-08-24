@@ -9,7 +9,7 @@ public final class FromFontKeyword extends StandardKeyword implements TextDecora
   static final FromFontKeyword INSTANCE = new FromFontKeyword();
 
   private FromFontKeyword() {
-    super(83, "fromFont", "from-font");
+    super(84, "fromFont", "from-font");
   }
 
 }

@@ -9,7 +9,7 @@ public final class RowResizeKeyword extends StandardKeyword implements CursorVal
   static final RowResizeKeyword INSTANCE = new RowResizeKeyword();
 
   private RowResizeKeyword() {
-    super(194, "rowResize", "row-resize");
+    super(196, "rowResize", "row-resize");
   }
 
 }

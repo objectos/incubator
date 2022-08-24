@@ -10,7 +10,7 @@ public final class InlineEndKeyword extends StandardKeyword implements ClearValu
   static final InlineEndKeyword INSTANCE = new InlineEndKeyword();
 
   private InlineEndKeyword() {
-    super(105, "inlineEnd", "inline-end");
+    super(107, "inlineEnd", "inline-end");
   }
 
 }

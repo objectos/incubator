@@ -9,7 +9,7 @@ public final class SmallerKeyword extends StandardKeyword implements FontSizeVal
   static final SmallerKeyword INSTANCE = new SmallerKeyword();
 
   private SmallerKeyword() {
-    super(218, "smaller", "smaller");
+    super(220, "smaller", "smaller");
   }
 
 }

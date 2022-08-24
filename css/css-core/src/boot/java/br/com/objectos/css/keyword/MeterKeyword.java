@@ -9,7 +9,7 @@ public final class MeterKeyword extends StandardKeyword implements AppearanceVal
   static final MeterKeyword INSTANCE = new MeterKeyword();
 
   private MeterKeyword() {
-    super(149, "meter", "meter");
+    super(151, "meter", "meter");
   }
 
 }

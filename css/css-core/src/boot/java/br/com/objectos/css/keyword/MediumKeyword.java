@@ -11,7 +11,7 @@ public final class MediumKeyword extends StandardKeyword implements FontSizeValu
   static final MediumKeyword INSTANCE = new MediumKeyword();
 
   private MediumKeyword() {
-    super(144, "medium", "medium");
+    super(146, "medium", "medium");
   }
 
 }

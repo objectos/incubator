@@ -9,7 +9,7 @@ public final class RelativeKeyword extends StandardKeyword implements PositionVa
   static final RelativeKeyword INSTANCE = new RelativeKeyword();
 
   private RelativeKeyword() {
-    super(186, "relative", "relative");
+    super(188, "relative", "relative");
   }
 
 }

@@ -9,7 +9,7 @@ public final class JapaneseFormalKeyword extends StandardKeyword implements Coun
   static final JapaneseFormalKeyword INSTANCE = new JapaneseFormalKeyword();
 
   private JapaneseFormalKeyword() {
-    super(114, "japaneseFormal", "japanese-formal");
+    super(116, "japaneseFormal", "japanese-formal");
   }
 
 }

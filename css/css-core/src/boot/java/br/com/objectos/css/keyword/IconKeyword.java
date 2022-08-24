@@ -9,7 +9,7 @@ public final class IconKeyword extends StandardKeyword implements SystemFontValu
   static final IconKeyword INSTANCE = new IconKeyword();
 
   private IconKeyword() {
-    super(100, "icon", "icon");
+    super(102, "icon", "icon");
   }
 
 }

@@ -9,7 +9,7 @@ public final class NoOpenQuoteKeyword extends StandardKeyword implements Content
   static final NoOpenQuoteKeyword INSTANCE = new NoOpenQuoteKeyword();
 
   private NoOpenQuoteKeyword() {
-    super(161, "noOpenQuote", "no-open-quote");
+    super(163, "noOpenQuote", "no-open-quote");
   }
 
 }

@@ -9,7 +9,7 @@ public final class GeorgianKeyword extends StandardKeyword implements CounterSty
   static final GeorgianKeyword INSTANCE = new GeorgianKeyword();
 
   private GeorgianKeyword() {
-    super(86, "georgian", "georgian");
+    super(87, "georgian", "georgian");
   }
 
 }

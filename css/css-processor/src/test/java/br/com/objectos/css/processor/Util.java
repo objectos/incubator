@@ -22,7 +22,7 @@ final class Util {
   public static void assertHasLines(String string, String... expected) {
     String[] split = string.split("\n");
 
-    assertEquals(split, expected);
+    assertEquals(split, expected, string);
   }
 
 }

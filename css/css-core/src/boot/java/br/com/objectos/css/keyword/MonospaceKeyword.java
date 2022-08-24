@@ -9,7 +9,7 @@ public final class MonospaceKeyword extends StandardKeyword implements FontFamil
   static final MonospaceKeyword INSTANCE = new MonospaceKeyword();
 
   private MonospaceKeyword() {
-    super(153, "monospace", "monospace");
+    super(155, "monospace", "monospace");
   }
 
 }

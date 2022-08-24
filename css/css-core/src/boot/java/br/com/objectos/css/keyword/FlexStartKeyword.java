@@ -10,7 +10,7 @@ public final class FlexStartKeyword extends StandardKeyword implements ContentPo
   static final FlexStartKeyword INSTANCE = new FlexStartKeyword();
 
   private FlexStartKeyword() {
-    super(80, "flexStart", "flex-start");
+    super(81, "flexStart", "flex-start");
   }
 
 }

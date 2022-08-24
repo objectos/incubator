@@ -9,7 +9,7 @@ public final class OpenQuoteKeyword extends StandardKeyword implements ContentVa
   static final OpenQuoteKeyword INSTANCE = new OpenQuoteKeyword();
 
   private OpenQuoteKeyword() {
-    super(171, "openQuote", "open-quote");
+    super(173, "openQuote", "open-quote");
   }
 
 }

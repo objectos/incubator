@@ -9,7 +9,7 @@ public final class KatakanaKeyword extends StandardKeyword implements CounterSty
   static final KatakanaKeyword INSTANCE = new KatakanaKeyword();
 
   private KatakanaKeyword() {
-    super(118, "katakana", "katakana");
+    super(120, "katakana", "katakana");
   }
 
 }

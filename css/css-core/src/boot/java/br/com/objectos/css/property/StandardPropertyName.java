@@ -9,6 +9,8 @@ public enum StandardPropertyName implements PropertyName {
 
   _MOZ_APPEARANCE("mozAppearance", "-moz-appearance"),
 
+  _MOZ_TAB_SIZE("mozTabSize", "-moz-tab-size"),
+
   _WEBKIT_APPEARANCE("webkitAppearance", "-webkit-appearance"),
 
   _WEBKIT_TEXT_SIZE_ADJUST("webkitTextSizeAdjust", "-webkit-text-size-adjust"),
@@ -173,6 +175,8 @@ public enum StandardPropertyName implements PropertyName {
 
   MIN_WIDTH("minWidth", "min-width"),
 
+  OPACITY("opacity", "opacity"),
+
   OUTLINE("outline", "outline"),
 
   OUTLINE_COLOR("outlineColor", "outline-color"),
@@ -209,6 +213,8 @@ public enum StandardPropertyName implements PropertyName {
 
   RIGHT("right", "right"),
 
+  TAB_SIZE("tabSize", "tab-size"),
+
   TEXT_ALIGN("textAlign", "text-align"),
 
   TEXT_DECORATION("textDecoration", "text-decoration"),
@@ -220,6 +226,8 @@ public enum StandardPropertyName implements PropertyName {
   TEXT_DECORATION_STYLE("textDecorationStyle", "text-decoration-style"),
 
   TEXT_DECORATION_THICKNESS("textDecorationThickness", "text-decoration-thickness"),
+
+  TEXT_INDENT("textIndent", "text-indent"),
 
   TEXT_SHADOW("textShadow", "text-shadow"),
 
@@ -263,6 +271,7 @@ public enum StandardPropertyName implements PropertyName {
   private static UnmodifiableMap<String, StandardPropertyName> buildMap() {
     GrowableMap<String, StandardPropertyName> m = new GrowableMap<>();
     m.put("-moz-appearance", _MOZ_APPEARANCE);
+    m.put("-moz-tab-size", _MOZ_TAB_SIZE);
     m.put("-webkit-appearance", _WEBKIT_APPEARANCE);
     m.put("-webkit-text-size-adjust", _WEBKIT_TEXT_SIZE_ADJUST);
     m.put("align-content", ALIGN_CONTENT);
@@ -345,6 +354,7 @@ public enum StandardPropertyName implements PropertyName {
     m.put("max-width", MAX_WIDTH);
     m.put("min-height", MIN_HEIGHT);
     m.put("min-width", MIN_WIDTH);
+    m.put("opacity", OPACITY);
     m.put("outline", OUTLINE);
     m.put("outline-color", OUTLINE_COLOR);
     m.put("outline-offset", OUTLINE_OFFSET);
@@ -363,12 +373,14 @@ public enum StandardPropertyName implements PropertyName {
     m.put("position", POSITION);
     m.put("resize", RESIZE);
     m.put("right", RIGHT);
+    m.put("tab-size", TAB_SIZE);
     m.put("text-align", TEXT_ALIGN);
     m.put("text-decoration", TEXT_DECORATION);
     m.put("text-decoration-color", TEXT_DECORATION_COLOR);
     m.put("text-decoration-line", TEXT_DECORATION_LINE);
     m.put("text-decoration-style", TEXT_DECORATION_STYLE);
     m.put("text-decoration-thickness", TEXT_DECORATION_THICKNESS);
+    m.put("text-indent", TEXT_INDENT);
     m.put("text-shadow", TEXT_SHADOW);
     m.put("text-size-adjust", TEXT_SIZE_ADJUST);
     m.put("text-transform", TEXT_TRANSFORM);

@@ -13,10 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * Based on https://github.com/tailwindlabs/tailwindcss/blob/master/src/plugins/css/preflight.css
+ * Based on https://github.com/tailwindlabs/tailwindcss/blob/master/src/css/preflight.css
  *
- * Copyright (c) Adam Wathan <adam.wathan@gmail.com>
- * Copyright (c) Jonathan Reinink <jonathan@reinink.ca>
+ * MIT License
+ *
+ * Copyright (c) Nicolas Gallagher
+ * Copyright (c) Jonathan Neal
+ * Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (sindresorhus.com)
+ * Copyright (c) Adam Wathan
+ * Copyright (c) Jonathan Reinink
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -47,53 +52,24 @@ public class Preflight extends AbstractStyleSheet {
   @Override
   protected final void definition() {
     style(
-        blockquote, or(),
-        dl, or(),
-        dd, or(),
-        h1, or(),
-        h2, or(),
-        h3, or(),
-        h4, or(),
-        h5, or(),
-        h6, or(),
-        hr, or(),
-        figure, or(),
-        p, or(),
-        pre,
+        any(), or(),
+        BEFORE, or(),
+        AFTER,
 
-        margin(zero())
-    );
-    style(
-        button,
-
-        backgroundColor(transparent),
-        backgroundImage(none),
-        padding(zero())
-    );
-    style(
-        button, FOCUS,
-
-        outline(px(1), dotted),
-        outline(px(5), auto, keyword("-webkit-focus-ring-color"))
-    );
-    style(
-        fieldset,
-
-        margin(zero()),
-        padding(zero())
-    );
-    style(
-        ol, or(),
-        ul,
-
-        listStyle(none),
-        margin(zero()),
-        padding(zero())
+        boxSizing(borderBox),
+        borderWidth(zero()),
+        borderStyle(solid),
+        borderColor(currentcolor)
     );
     style(
         html,
 
+        lineHeight(1.5),
+        webkitTextSizeAdjust(pct(100)),
+        mozTabSize(4),
+        tabSize(4),
         fontFamily(
+            fontFamily(keyword("ui-sans-serif")),
             fontFamily(keyword("system-ui")),
             fontFamily(keyword("-apple-system")),
             fontFamily(keyword("BlinkMacSystemFont")),
@@ -107,50 +83,20 @@ public class Preflight extends AbstractStyleSheet {
             fontFamily(l("Segoe UI Emoji")),
             fontFamily(l("Segoe UI Symbol")),
             fontFamily(l("Noto Color Emoji"))
-        ),
-        lineHeight(1.5)
+        )
     );
     style(
-        any(), or(),
-        BEFORE, or(),
-        AFTER,
+        body,
 
-        boxSizing(borderBox),
-        borderWidth(zero()),
-        borderStyle(solid),
-        borderColor(currentcolor)
+        margin(zero()),
+        lineHeight(inherit)
     );
     style(
         hr,
 
+        height(zero()),
+        color(inherit),
         borderTopWidth(px(1))
-    );
-    style(
-        img,
-
-        borderStyle(solid)
-    );
-    style(
-        textarea,
-
-        resize(vertical)
-    );
-    style(
-        input, PLACEHOLDER, or(),
-        textarea, PLACEHOLDER,
-
-        color(hex("#a0aec0"))
-    );
-    style(
-        button, or(),
-        attr("role", eq("button")),
-
-        cursor(pointer)
-    );
-    style(
-        table,
-
-        borderCollapse(collapse)
     );
     style(
         h1, or(),
@@ -170,23 +116,19 @@ public class Preflight extends AbstractStyleSheet {
         textDecoration(inherit)
     );
     style(
-        button, or(),
-        input, or(),
-        optgroup, or(),
-        select, or(),
-        textarea,
+        b, or(),
+        strong,
 
-        padding(zero()),
-        lineHeight(inherit),
-        color(inherit)
+        fontWeight(bolder)
     );
     style(
-        pre, or(),
         code, or(),
         kbd, or(),
-        samp,
+        samp, or(),
+        pre,
 
         fontFamily(
+            fontFamily(keyword("ui-monospace")),
             fontFamily(keyword("SFMono-Regular")),
             fontFamily(keyword("Menlo")),
             fontFamily(keyword("Monaco")),
@@ -194,7 +136,186 @@ public class Preflight extends AbstractStyleSheet {
             fontFamily(l("Liberation Mono")),
             fontFamily(l("Courier New")),
             fontFamily(monospace)
-        )
+        ),
+        fontSize(em(1))
+    );
+    style(
+        small,
+
+        fontSize(pct(80))
+    );
+    style(
+        sub, or(),
+        sup,
+
+        fontSize(pct(75)),
+        lineHeight(zero()),
+        position(relative),
+        verticalAlign(baseline)
+    );
+    style(
+        sub,
+
+        bottom(em(-0.25))
+    );
+    style(
+        sup,
+
+        top(em(-0.5))
+    );
+    style(
+        table,
+
+        textIndent(zero()),
+        borderColor(inherit),
+        borderCollapse(collapse)
+    );
+    style(
+        button, or(),
+        input, or(),
+        optgroup, or(),
+        select, or(),
+        textarea,
+
+        fontFamily(inherit),
+        fontSize(pct(100)),
+        fontWeight(inherit),
+        lineHeight(inherit),
+        color(inherit),
+        margin(zero()),
+        padding(zero())
+    );
+    style(
+        button, or(),
+        select,
+
+        textTransform(none)
+    );
+    style(
+        button, or(),
+        attr("type", eq("button")), or(),
+        attr("type", eq("reset")), or(),
+        attr("type", eq("submit")),
+
+        webkitAppearance(buttonKw),
+        backgroundColor(transparent),
+        backgroundImage(none)
+    );
+    style(
+        _MOZ_FOCUSRING,
+
+        outline(auto)
+    );
+    style(
+        _MOZ_UI_INVALID,
+
+        boxShadow(none)
+    );
+    style(
+        progress,
+
+        verticalAlign(baseline)
+    );
+    style(
+        _WEBKIT_INNER_SPIN_BUTTON, or(),
+        _WEBKIT_OUTER_SPIN_BUTTON,
+
+        height(auto)
+    );
+    style(
+        attr("type", eq("search")),
+
+        webkitAppearance(textfield),
+        outlineOffset(px(-2))
+    );
+    style(
+        _WEBKIT_SEARCH_DECORATION,
+
+        webkitAppearance(none)
+    );
+    style(
+        _WEBKIT_FILE_UPLOAD_BUTTON,
+
+        webkitAppearance(buttonKw),
+        font(inherit)
+    );
+    style(
+        summary,
+
+        display(listItem)
+    );
+    style(
+        blockquote, or(),
+        dl, or(),
+        dd, or(),
+        h1, or(),
+        h2, or(),
+        h3, or(),
+        h4, or(),
+        h5, or(),
+        h6, or(),
+        hr, or(),
+        figure, or(),
+        p, or(),
+        pre,
+
+        margin(zero())
+    );
+    style(
+        fieldset,
+
+        margin(zero()),
+        padding(zero())
+    );
+    style(
+        legend,
+
+        padding(zero())
+    );
+    style(
+        ol, or(),
+        ul, or(),
+        menu,
+
+        listStyle(none),
+        margin(zero()),
+        padding(zero())
+    );
+    style(
+        textarea,
+
+        resize(vertical)
+    );
+    style(
+        input, PLACEHOLDER, or(),
+        textarea, PLACEHOLDER,
+
+        opacity(1),
+        color(hex("#9ca3af"))
+    );
+    style(
+        button, or(),
+        attr("role", eq("button")),
+
+        cursor(pointer)
+    );
+    style(
+        DISABLED,
+
+        cursor(defaultKw)
+    );
+    style(
+        img, or(),
+        svg,
+
+        display(block),
+        verticalAlign(middle)
+    );
+    style(
+        img,
+
+        maxWidth(pct(100)),
+        height(auto)
     );
   }
 

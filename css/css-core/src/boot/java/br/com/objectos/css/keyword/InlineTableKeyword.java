@@ -9,7 +9,7 @@ public final class InlineTableKeyword extends StandardKeyword implements Display
   static final InlineTableKeyword INSTANCE = new InlineTableKeyword();
 
   private InlineTableKeyword() {
-    super(109, "inlineTable", "inline-table");
+    super(111, "inlineTable", "inline-table");
   }
 
 }

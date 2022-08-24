@@ -9,7 +9,7 @@ public final class GrabKeyword extends StandardKeyword implements CursorValue {
   static final GrabKeyword INSTANCE = new GrabKeyword();
 
   private GrabKeyword() {
-    super(87, "grab", "grab");
+    super(88, "grab", "grab");
   }
 
 }

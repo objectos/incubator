@@ -9,7 +9,7 @@ public final class SmallCaptionKeyword extends StandardKeyword implements System
   static final SmallCaptionKeyword INSTANCE = new SmallCaptionKeyword();
 
   private SmallCaptionKeyword() {
-    super(217, "smallCaption", "small-caption");
+    super(219, "smallCaption", "small-caption");
   }
 
 }

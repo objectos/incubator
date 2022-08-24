@@ -40,13 +40,13 @@
  */
 package br.com.objectos.css.framework;
 
-import br.com.objectos.css.framework.reset.Reset;
+import br.com.objectos.css.framework.reset.Preflight;
 
 public class Framework extends AbstractFramework {
 
   @Override
   protected final void definition() {
-    install(new Reset());
+    install(new Preflight());
     super.definition();
   }
 

@@ -9,7 +9,7 @@ public final class InlineGridKeyword extends StandardKeyword implements DisplayL
   static final InlineGridKeyword INSTANCE = new InlineGridKeyword();
 
   private InlineGridKeyword() {
-    super(107, "inlineGrid", "inline-grid");
+    super(109, "inlineGrid", "inline-grid");
   }
 
 }

@@ -10,7 +10,7 @@ public final class MaxContentKeyword extends StandardKeyword implements HeightOr
   static final MaxContentKeyword INSTANCE = new MaxContentKeyword();
 
   private MaxContentKeyword() {
-    super(143, "maxContent", "max-content");
+    super(145, "maxContent", "max-content");
   }
 
 }

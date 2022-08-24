@@ -9,7 +9,7 @@ public final class RubyBaseKeyword extends StandardKeyword implements DisplayInt
   static final RubyBaseKeyword INSTANCE = new RubyBaseKeyword();
 
   private RubyBaseKeyword() {
-    super(197, "rubyBase", "ruby-base");
+    super(199, "rubyBase", "ruby-base");
   }
 
 }

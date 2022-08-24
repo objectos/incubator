@@ -9,7 +9,7 @@ public final class SliderHorizontalKeyword extends StandardKeyword implements Ap
   static final SliderHorizontalKeyword INSTANCE = new SliderHorizontalKeyword();
 
   private SliderHorizontalKeyword() {
-    super(214, "sliderHorizontal", "slider-horizontal");
+    super(216, "sliderHorizontal", "slider-horizontal");
   }
 
 }

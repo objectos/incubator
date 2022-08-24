@@ -9,7 +9,7 @@ public final class TibetanKeyword extends StandardKeyword implements CounterStyl
   static final TibetanKeyword INSTANCE = new TibetanKeyword();
 
   private TibetanKeyword() {
-    super(254, "tibetan", "tibetan");
+    super(256, "tibetan", "tibetan");
   }
 
 }

@@ -9,7 +9,7 @@ public final class MiddleKeyword extends StandardKeyword implements VerticalAlig
   static final MiddleKeyword INSTANCE = new MiddleKeyword();
 
   private MiddleKeyword() {
-    super(150, "middle", "middle");
+    super(152, "middle", "middle");
   }
 
 }

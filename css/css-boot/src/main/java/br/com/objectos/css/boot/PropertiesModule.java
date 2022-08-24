@@ -97,6 +97,7 @@ class PropertiesModule extends CssSpec {
     install(new MaxHeightPropertyModule());
 
     // O
+    install(new OpacityPropertyModule());
     install(new OutlineColorPropertyModule());
     install(new OutlineOffsetPropertyModule());
     install(new OutlineStylePropertyModule());
@@ -114,14 +115,15 @@ class PropertiesModule extends CssSpec {
     install(new RightPropertyModule());
 
     // T
+    install(new TabSizePropertyModule());
     install(new TextAlignPropertyModule());
-
     install(new TextDecorationColorPropertyModule());
     install(new TextDecorationLinePropertyModule());
     install(new TextDecorationStylePropertyModule());
     install(new TextDecorationThicknessPropertyModule());
     install(new TextDecorationPropertyModule()); // must come after
                                                  // color/line/style/thickness
+    install(new TextIndentPropertyModule());
     install(new TextShadowPropertyModule());
     install(new TextSizeAdjustPropertyModule());
     install(new TextTransformPropertyModule());

@@ -10,7 +10,7 @@ public final class SolidKeyword extends StandardKeyword implements LineStyleValu
   static final SolidKeyword INSTANCE = new SolidKeyword();
 
   private SolidKeyword() {
-    super(219, "solid", "solid");
+    super(221, "solid", "solid");
   }
 
 }

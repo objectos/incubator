@@ -9,7 +9,7 @@ public final class WaitKeyword extends StandardKeyword implements CursorValue {
   static final WaitKeyword INSTANCE = new WaitKeyword();
 
   private WaitKeyword() {
-    super(270, "wait", "wait");
+    super(272, "wait", "wait");
   }
 
 }

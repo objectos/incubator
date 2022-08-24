@@ -9,7 +9,7 @@ public final class ProgressBarKeyword extends StandardKeyword implements Appeara
   static final ProgressBarKeyword INSTANCE = new ProgressBarKeyword();
 
   private ProgressBarKeyword() {
-    super(183, "progressBar", "progress-bar");
+    super(185, "progressBar", "progress-bar");
   }
 
 }

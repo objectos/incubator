@@ -9,7 +9,7 @@ public final class FullSizeKanaKeyword extends StandardKeyword implements TextTr
   static final FullSizeKanaKeyword INSTANCE = new FullSizeKanaKeyword();
 
   private FullSizeKanaKeyword() {
-    super(84, "fullSizeKana", "full-size-kana");
+    super(85, "fullSizeKana", "full-size-kana");
   }
 
 }

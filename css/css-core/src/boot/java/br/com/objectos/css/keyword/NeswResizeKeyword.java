@@ -9,7 +9,7 @@ public final class NeswResizeKeyword extends StandardKeyword implements CursorVa
   static final NeswResizeKeyword INSTANCE = new NeswResizeKeyword();
 
   private NeswResizeKeyword() {
-    super(158, "neswResize", "nesw-resize");
+    super(160, "neswResize", "nesw-resize");
   }
 
 }

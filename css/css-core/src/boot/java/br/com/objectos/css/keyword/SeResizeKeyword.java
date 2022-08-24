@@ -9,7 +9,7 @@ public final class SeResizeKeyword extends StandardKeyword implements CursorValu
   static final SeResizeKeyword INSTANCE = new SeResizeKeyword();
 
   private SeResizeKeyword() {
-    super(206, "seResize", "se-resize");
+    super(208, "seResize", "se-resize");
   }
 
 }

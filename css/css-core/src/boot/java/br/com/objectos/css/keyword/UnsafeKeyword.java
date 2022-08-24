@@ -9,7 +9,7 @@ public final class UnsafeKeyword extends StandardKeyword implements OverflowPosi
   static final UnsafeKeyword INSTANCE = new UnsafeKeyword();
 
   private UnsafeKeyword() {
-    super(259, "unsafe", "unsafe");
+    super(261, "unsafe", "unsafe");
   }
 
 }

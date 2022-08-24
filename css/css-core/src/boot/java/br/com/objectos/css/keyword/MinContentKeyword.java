@@ -10,7 +10,7 @@ public final class MinContentKeyword extends StandardKeyword implements HeightOr
   static final MinContentKeyword INSTANCE = new MinContentKeyword();
 
   private MinContentKeyword() {
-    super(151, "minContent", "min-content");
+    super(153, "minContent", "min-content");
   }
 
 }

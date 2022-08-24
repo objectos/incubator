@@ -9,7 +9,7 @@ public final class PersianKeyword extends StandardKeyword implements CounterStyl
   static final PersianKeyword INSTANCE = new PersianKeyword();
 
   private PersianKeyword() {
-    super(177, "persian", "persian");
+    super(179, "persian", "persian");
   }
 
 }

@@ -9,7 +9,7 @@ public final class UpperArmenianKeyword extends StandardKeyword implements Count
   static final UpperArmenianKeyword INSTANCE = new UpperArmenianKeyword();
 
   private UpperArmenianKeyword() {
-    super(262, "upperArmenian", "upper-armenian");
+    super(264, "upperArmenian", "upper-armenian");
   }
 
 }

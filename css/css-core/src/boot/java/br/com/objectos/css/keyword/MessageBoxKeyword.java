@@ -9,7 +9,7 @@ public final class MessageBoxKeyword extends StandardKeyword implements SystemFo
   static final MessageBoxKeyword INSTANCE = new MessageBoxKeyword();
 
   private MessageBoxKeyword() {
-    super(148, "messageBox", "message-box");
+    super(150, "messageBox", "message-box");
   }
 
 }

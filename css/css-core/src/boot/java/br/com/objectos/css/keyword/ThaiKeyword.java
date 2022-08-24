@@ -9,7 +9,7 @@ public final class ThaiKeyword extends StandardKeyword implements CounterStyleVa
   static final ThaiKeyword INSTANCE = new ThaiKeyword();
 
   private ThaiKeyword() {
-    super(251, "thai", "thai");
+    super(253, "thai", "thai");
   }
 
 }

@@ -9,7 +9,7 @@ public final class UppercaseKeyword extends StandardKeyword implements TextTrans
   static final UppercaseKeyword INSTANCE = new UppercaseKeyword();
 
   private UppercaseKeyword() {
-    super(265, "uppercase", "uppercase");
+    super(267, "uppercase", "uppercase");
   }
 
 }
