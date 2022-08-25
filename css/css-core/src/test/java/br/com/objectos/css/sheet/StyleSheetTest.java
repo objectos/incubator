@@ -104,6 +104,162 @@ public class StyleSheetTest {
     );
   }
 
+  @Test(description = //
+  """
+  # filterClassSelectorsByName test case #01
+
+  - result will be non-empty
+  - filtered out in the middle
+  """)
+  public void filterClassSelectorsByName01() {
+    var css = new AbstractStyleSheet() {
+      @Override
+      protected final void definition() {
+        style(cn("a"), border(zero()));
+        style(b, zIndex(1));
+        style(cn("b"), margin(zero()));
+        style(Css.dot("c"), padding(zero()));
+      }
+    };
+
+    var keep = Set.of("a", "c");
+
+    minified.filterClassSelectorsByName(keep::contains);
+
+    test(minified, css, ".a{border:0}b{z-index:1}.c{padding:0}");
+
+    pretty.filterClassSelectorsByName(keep::contains);
+
+    test(pretty, css,
+      """
+      .a {
+        border: 0;
+      }
+
+      b {
+        z-index: 1;
+      }
+
+      .c {
+        padding: 0;
+      }"""
+    );
+  }
+
+  @Test(description = //
+  """
+  # filterClassSelectorsByName test case #02
+
+  - result will be empty
+  """)
+  public void filterClassSelectorsByName02() {
+    var css = new AbstractStyleSheet() {
+      @Override
+      protected final void definition() {
+        style(cn("a"), border(zero()));
+      }
+    };
+
+    var keep = Set.of("b", "c");
+
+    minified.filterClassSelectorsByName(keep::contains);
+
+    test(minified, css, "");
+
+    pretty.filterClassSelectorsByName(keep::contains);
+
+    test(pretty, css, "");
+  }
+
+  @Test(description = //
+  """
+  # filterClassSelectorsByName test case #03
+
+  - media queries
+  """)
+  public void filterClassSelectorsByName03() {
+    var css = new AbstractStyleSheet() {
+      @Override
+      protected final void definition() {
+        style(
+          cn("a"),
+          zIndex(0)
+        );
+
+        media(
+          screen, minWidth(px(800)),
+
+          style(
+            cn("b"),
+            zIndex(1)
+          ),
+
+          style(
+            cn("c"),
+            zIndex(2)
+          )
+        );
+      }
+    };
+
+    var keep = Set.of("a", "b");
+
+    minified.filterClassSelectorsByName(keep::contains);
+
+    test(minified, css, ".a{z-index:0}@media screen and (min-width:800px){.b{z-index:1}}");
+
+    pretty.filterClassSelectorsByName(keep::contains);
+
+    test(pretty, css,
+      """
+      .a {
+        z-index: 0;
+      }
+
+      @media screen and (min-width: 800px) {
+        .b {
+          z-index: 1;
+        }
+      }""");
+  }
+
+  @Test(description = //
+  """
+  # filterClassSelectorsByName test case #04
+
+  - hover state
+  """)
+  public void filterClassSelectorsByName04() {
+    var css = new AbstractStyleSheet() {
+      @Override
+      protected final void definition() {
+        style(
+          cn("a"), HOVER,
+          zIndex(0)
+        );
+
+        style(
+          cn("b"),
+          zIndex(1)
+        );
+      }
+    };
+
+    var keep = Set.of("a");
+
+    minified.filterClassSelectorsByName(keep::contains);
+
+    test(minified, css, ".a:hover{z-index:0}");
+
+    pretty.filterClassSelectorsByName(keep::contains);
+
+    test(pretty, css,
+      """
+      .a:hover {
+        z-index: 0;
+      }""");
+  }
+
   @Test
   public void testCase00() {
     test(
@@ -701,125 +857,6 @@ public class StyleSheetTest {
         "}"
       )
     );
-  }
-
-  @Test(description = //
-  """
-  # filterClassSelectorsByName test case #01
-
-  - result will be non-empty
-  - filtered out in the middle
-  """)
-  public void testCase36() {
-    var css = new AbstractStyleSheet() {
-      @Override
-      protected final void definition() {
-        style(cn("a"), border(zero()));
-        style(b, zIndex(1));
-        style(cn("b"), margin(zero()));
-        style(Css.dot("c"), padding(zero()));
-      }
-    };
-
-    var keep = Set.of("a", "c");
-
-    minified.filterClassSelectorsByName(keep::contains);
-
-    test(minified, css, ".a{border:0}b{z-index:1}.c{padding:0}");
-
-    pretty.filterClassSelectorsByName(keep::contains);
-
-    test(pretty, css,
-      """
-      .a {
-        border: 0;
-      }
-
-      b {
-        z-index: 1;
-      }
-
-      .c {
-        padding: 0;
-      }"""
-    );
-  }
-
-  @Test(description = //
-  """
-  # filterClassSelectorsByName test case #02
-
-  - result will be empty
-  """)
-  public void testCase37() {
-    var css = new AbstractStyleSheet() {
-      @Override
-      protected final void definition() {
-        style(cn("a"), border(zero()));
-      }
-    };
-
-    var keep = Set.of("b", "c");
-
-    minified.filterClassSelectorsByName(keep::contains);
-
-    test(minified, css, "");
-
-    pretty.filterClassSelectorsByName(keep::contains);
-
-    test(pretty, css, "");
-  }
-
-  @Test(description = //
-  """
-  # filterClassSelectorsByName test case #03
-
-  - media queries
-  """)
-  public void testCase38() {
-    var css = new AbstractStyleSheet() {
-      @Override
-      protected final void definition() {
-        style(
-          cn("a"),
-          zIndex(0)
-        );
-
-        media(
-          screen, minWidth(px(800)),
-
-          style(
-            cn("b"),
-            zIndex(1)
-          ),
-
-          style(
-            cn("c"),
-            zIndex(2)
-          )
-        );
-      }
-    };
-
-    var keep = Set.of("a", "b");
-
-    minified.filterClassSelectorsByName(keep::contains);
-
-    test(minified, css, ".a{z-index:0}@media screen and (min-width:800px){.b{z-index:1}}");
-
-    pretty.filterClassSelectorsByName(keep::contains);
-
-    test(pretty, css,
-      """
-      .a {
-        z-index: 0;
-      }
-
-      @media screen and (min-width: 800px) {
-        .b {
-          z-index: 1;
-        }
-      }""");
   }
 
   @Test

@@ -65,6 +65,7 @@ import br.com.objectos.css.framework.flexbox.AlignContent;
 import br.com.objectos.css.framework.flexbox.AlignItems;
 import br.com.objectos.css.framework.flexbox.AlignSelf;
 import br.com.objectos.css.framework.flexbox.Flex;
+import br.com.objectos.css.framework.flexbox.FlexDirection;
 import br.com.objectos.css.framework.flexbox.JustifyContent;
 import br.com.objectos.css.framework.layout.Bottom;
 import br.com.objectos.css.framework.layout.Display;
@@ -158,6 +159,7 @@ abstract class AbstractFramework extends AbstractStyleSheet {
     install(new AlignItems());
     install(new AlignSelf());
     install(new Flex());
+    install(new FlexDirection());
     install(new JustifyContent());
   }
 

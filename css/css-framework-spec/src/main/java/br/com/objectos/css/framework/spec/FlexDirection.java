@@ -43,30 +43,26 @@ import br.com.objectos.css.config.framework.AbstractConfiguration;
 import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkAtMediaSet;
 import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkGroup;
 import br.com.objectos.css.keyword.Keywords;
-import br.com.objectos.css.type.Value;
 
-final class Flex extends AbstractConfiguration {
+final class FlexDirection extends AbstractConfiguration {
 
   private final FrameworkAtMediaSet responsive;
 
-  Flex(FrameworkAtMediaSet responsive) {
+  FlexDirection(FrameworkAtMediaSet responsive) {
     this.responsive = responsive;
   }
 
   @Override
   protected final void configure() {
-    Value zero = l(0);
-    Value one = l(1);
-
     property(
       FrameworkGroup.FLEXBOX,
-      simpleName("Flex"),
-      methods("flex"),
+      simpleName("FlexDirection"),
+      methods("flexDirection"),
       valueSet(
-        v("initial", zero, one, Keywords.auto),
-        v("one", one, one, pct(0)),
-        v("auto", one, one, Keywords.auto),
-        v("none", Keywords.none)
+        v("row", Keywords.row),
+        v("row-reverse", Keywords.rowReverse),
+        v("column", Keywords.column),
+        v("column-reverse", Keywords.columnReverse)
       ),
       responsive
     );
