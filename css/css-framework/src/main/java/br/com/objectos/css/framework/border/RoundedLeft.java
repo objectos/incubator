@@ -248,6 +248,45 @@ public final class RoundedLeft extends AbstractStyleSheet {
             borderBottomLeftRadius(px(9999))
         )
     );
+    media(
+        AbstractStyleSheet.screen, minWidth(px(1440)),
+
+        style(
+            x2l.none,
+            borderTopLeftRadius(zero()),
+            borderBottomLeftRadius(zero())
+        ),
+
+        style(
+            x2l.small,
+            borderTopLeftRadius(em(0.125)),
+            borderBottomLeftRadius(em(0.125))
+        ),
+
+        style(
+            x2l.standard,
+            borderTopLeftRadius(em(0.25)),
+            borderBottomLeftRadius(em(0.25))
+        ),
+
+        style(
+            x2l.medium,
+            borderTopLeftRadius(em(0.375)),
+            borderBottomLeftRadius(em(0.375))
+        ),
+
+        style(
+            x2l.large,
+            borderTopLeftRadius(em(0.5)),
+            borderBottomLeftRadius(em(0.5))
+        ),
+
+        style(
+            x2l.full,
+            borderTopLeftRadius(px(9999)),
+            borderBottomLeftRadius(px(9999))
+        )
+    );
   }
 
   public interface sm {
@@ -299,6 +338,22 @@ public final class RoundedLeft extends AbstractStyleSheet {
   }
 
   public interface xl {
+
+    ClassSelector none = Css.randomDot(5);
+
+    ClassSelector small = Css.randomDot(5);
+
+    ClassSelector standard = Css.randomDot(5);
+
+    ClassSelector medium = Css.randomDot(5);
+
+    ClassSelector large = Css.randomDot(5);
+
+    ClassSelector full = Css.randomDot(5);
+
+  }
+
+  public interface x2l {
 
     ClassSelector none = Css.randomDot(5);
 

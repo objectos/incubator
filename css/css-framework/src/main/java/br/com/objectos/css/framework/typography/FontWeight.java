@@ -296,6 +296,54 @@ public final class FontWeight extends AbstractStyleSheet {
             fontWeight(900)
         )
     );
+    media(
+        AbstractStyleSheet.screen, minWidth(px(1440)),
+
+        style(
+            x2l.hairline,
+            fontWeight(100)
+        ),
+
+        style(
+            x2l.thin,
+            fontWeight(200)
+        ),
+
+        style(
+            x2l.light,
+            fontWeight(300)
+        ),
+
+        style(
+            x2l.normal,
+            fontWeight(400)
+        ),
+
+        style(
+            x2l.medium,
+            fontWeight(500)
+        ),
+
+        style(
+            x2l.semibold,
+            fontWeight(600)
+        ),
+
+        style(
+            x2l.bold,
+            fontWeight(700)
+        ),
+
+        style(
+            x2l.extrabold,
+            fontWeight(800)
+        ),
+
+        style(
+            x2l.black,
+            fontWeight(900)
+        )
+    );
   }
 
   public interface sm {
@@ -365,6 +413,28 @@ public final class FontWeight extends AbstractStyleSheet {
   }
 
   public interface xl {
+
+    ClassSelector hairline = Css.randomDot(5);
+
+    ClassSelector thin = Css.randomDot(5);
+
+    ClassSelector light = Css.randomDot(5);
+
+    ClassSelector normal = Css.randomDot(5);
+
+    ClassSelector medium = Css.randomDot(5);
+
+    ClassSelector semibold = Css.randomDot(5);
+
+    ClassSelector bold = Css.randomDot(5);
+
+    ClassSelector extrabold = Css.randomDot(5);
+
+    ClassSelector black = Css.randomDot(5);
+
+  }
+
+  public interface x2l {
 
     ClassSelector hairline = Css.randomDot(5);
 

@@ -426,6 +426,79 @@ public final class Leading extends AbstractStyleSheet {
             lineHeight(rem(2.5))
         )
     );
+    media(
+        AbstractStyleSheet.screen, minWidth(px(1440)),
+
+        style(
+            x2l.none,
+            lineHeight(1)
+        ),
+
+        style(
+            x2l.tight,
+            lineHeight(1.25)
+        ),
+
+        style(
+            x2l.snug,
+            lineHeight(1.375)
+        ),
+
+        style(
+            x2l.normal,
+            lineHeight(1.5)
+        ),
+
+        style(
+            x2l.relaxed,
+            lineHeight(1.625)
+        ),
+
+        style(
+            x2l.loose,
+            lineHeight(2)
+        ),
+
+        style(
+            x2l.v3,
+            lineHeight(rem(0.75))
+        ),
+
+        style(
+            x2l.v4,
+            lineHeight(rem(1))
+        ),
+
+        style(
+            x2l.v5,
+            lineHeight(rem(1.25))
+        ),
+
+        style(
+            x2l.v6,
+            lineHeight(rem(1.5))
+        ),
+
+        style(
+            x2l.v7,
+            lineHeight(rem(1.75))
+        ),
+
+        style(
+            x2l.v8,
+            lineHeight(rem(2))
+        ),
+
+        style(
+            x2l.v9,
+            lineHeight(rem(2.25))
+        ),
+
+        style(
+            x2l.v10,
+            lineHeight(rem(2.5))
+        )
+    );
   }
 
   public interface sm {
@@ -525,6 +598,38 @@ public final class Leading extends AbstractStyleSheet {
   }
 
   public interface xl {
+
+    ClassSelector none = Css.randomDot(5);
+
+    ClassSelector tight = Css.randomDot(5);
+
+    ClassSelector snug = Css.randomDot(5);
+
+    ClassSelector normal = Css.randomDot(5);
+
+    ClassSelector relaxed = Css.randomDot(5);
+
+    ClassSelector loose = Css.randomDot(5);
+
+    ClassSelector v3 = Css.randomDot(5);
+
+    ClassSelector v4 = Css.randomDot(5);
+
+    ClassSelector v5 = Css.randomDot(5);
+
+    ClassSelector v6 = Css.randomDot(5);
+
+    ClassSelector v7 = Css.randomDot(5);
+
+    ClassSelector v8 = Css.randomDot(5);
+
+    ClassSelector v9 = Css.randomDot(5);
+
+    ClassSelector v10 = Css.randomDot(5);
+
+  }
+
+  public interface x2l {
 
     ClassSelector none = Css.randomDot(5);
 

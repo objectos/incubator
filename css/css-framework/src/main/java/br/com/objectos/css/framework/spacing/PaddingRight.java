@@ -998,6 +998,189 @@ public final class PaddingRight extends AbstractStyleSheet {
             paddingRight(rem(24))
         )
     );
+    media(
+        AbstractStyleSheet.screen, minWidth(px(1440)),
+
+        style(
+            x2l.px,
+            paddingRight(px(1))
+        ),
+
+        style(
+            x2l.zero,
+            paddingRight(zero())
+        ),
+
+        style(
+            x2l.v0,
+            paddingRight(zero())
+        ),
+
+        style(
+            x2l.v0_5,
+            paddingRight(rem(0.125))
+        ),
+
+        style(
+            x2l.v01,
+            paddingRight(rem(0.25))
+        ),
+
+        style(
+            x2l.v01_5,
+            paddingRight(rem(0.375))
+        ),
+
+        style(
+            x2l.v02,
+            paddingRight(rem(0.5))
+        ),
+
+        style(
+            x2l.v02_5,
+            paddingRight(rem(0.625))
+        ),
+
+        style(
+            x2l.v03,
+            paddingRight(rem(0.75))
+        ),
+
+        style(
+            x2l.v03_5,
+            paddingRight(rem(0.875))
+        ),
+
+        style(
+            x2l.v04,
+            paddingRight(rem(1))
+        ),
+
+        style(
+            x2l.v05,
+            paddingRight(rem(1.25))
+        ),
+
+        style(
+            x2l.v06,
+            paddingRight(rem(1.5))
+        ),
+
+        style(
+            x2l.v07,
+            paddingRight(rem(1.75))
+        ),
+
+        style(
+            x2l.v08,
+            paddingRight(rem(2))
+        ),
+
+        style(
+            x2l.v09,
+            paddingRight(rem(2.25))
+        ),
+
+        style(
+            x2l.v10,
+            paddingRight(rem(2.5))
+        ),
+
+        style(
+            x2l.v11,
+            paddingRight(rem(2.75))
+        ),
+
+        style(
+            x2l.v12,
+            paddingRight(rem(3))
+        ),
+
+        style(
+            x2l.v14,
+            paddingRight(rem(3.5))
+        ),
+
+        style(
+            x2l.v16,
+            paddingRight(rem(4))
+        ),
+
+        style(
+            x2l.v20,
+            paddingRight(rem(5))
+        ),
+
+        style(
+            x2l.v24,
+            paddingRight(rem(6))
+        ),
+
+        style(
+            x2l.v28,
+            paddingRight(rem(7))
+        ),
+
+        style(
+            x2l.v32,
+            paddingRight(rem(8))
+        ),
+
+        style(
+            x2l.v36,
+            paddingRight(rem(9))
+        ),
+
+        style(
+            x2l.v40,
+            paddingRight(rem(10))
+        ),
+
+        style(
+            x2l.v44,
+            paddingRight(rem(11))
+        ),
+
+        style(
+            x2l.v48,
+            paddingRight(rem(12))
+        ),
+
+        style(
+            x2l.v52,
+            paddingRight(rem(13))
+        ),
+
+        style(
+            x2l.v56,
+            paddingRight(rem(14))
+        ),
+
+        style(
+            x2l.v60,
+            paddingRight(rem(15))
+        ),
+
+        style(
+            x2l.v64,
+            paddingRight(rem(16))
+        ),
+
+        style(
+            x2l.v72,
+            paddingRight(rem(18))
+        ),
+
+        style(
+            x2l.v80,
+            paddingRight(rem(20))
+        ),
+
+        style(
+            x2l.v96,
+            paddingRight(rem(24))
+        )
+    );
   }
 
   public interface sm {
@@ -1229,6 +1412,82 @@ public final class PaddingRight extends AbstractStyleSheet {
   }
 
   public interface xl {
+
+    ClassSelector px = Css.randomDot(5);
+
+    ClassSelector zero = Css.randomDot(5);
+
+    ClassSelector v0 = Css.randomDot(5);
+
+    ClassSelector v0_5 = Css.randomDot(5);
+
+    ClassSelector v01 = Css.randomDot(5);
+
+    ClassSelector v01_5 = Css.randomDot(5);
+
+    ClassSelector v02 = Css.randomDot(5);
+
+    ClassSelector v02_5 = Css.randomDot(5);
+
+    ClassSelector v03 = Css.randomDot(5);
+
+    ClassSelector v03_5 = Css.randomDot(5);
+
+    ClassSelector v04 = Css.randomDot(5);
+
+    ClassSelector v05 = Css.randomDot(5);
+
+    ClassSelector v06 = Css.randomDot(5);
+
+    ClassSelector v07 = Css.randomDot(5);
+
+    ClassSelector v08 = Css.randomDot(5);
+
+    ClassSelector v09 = Css.randomDot(5);
+
+    ClassSelector v10 = Css.randomDot(5);
+
+    ClassSelector v11 = Css.randomDot(5);
+
+    ClassSelector v12 = Css.randomDot(5);
+
+    ClassSelector v14 = Css.randomDot(5);
+
+    ClassSelector v16 = Css.randomDot(5);
+
+    ClassSelector v20 = Css.randomDot(5);
+
+    ClassSelector v24 = Css.randomDot(5);
+
+    ClassSelector v28 = Css.randomDot(5);
+
+    ClassSelector v32 = Css.randomDot(5);
+
+    ClassSelector v36 = Css.randomDot(5);
+
+    ClassSelector v40 = Css.randomDot(5);
+
+    ClassSelector v44 = Css.randomDot(5);
+
+    ClassSelector v48 = Css.randomDot(5);
+
+    ClassSelector v52 = Css.randomDot(5);
+
+    ClassSelector v56 = Css.randomDot(5);
+
+    ClassSelector v60 = Css.randomDot(5);
+
+    ClassSelector v64 = Css.randomDot(5);
+
+    ClassSelector v72 = Css.randomDot(5);
+
+    ClassSelector v80 = Css.randomDot(5);
+
+    ClassSelector v96 = Css.randomDot(5);
+
+  }
+
+  public interface x2l {
 
     ClassSelector px = Css.randomDot(5);
 

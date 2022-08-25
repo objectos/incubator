@@ -167,6 +167,29 @@ public final class TextAlign extends AbstractStyleSheet {
             textAlign(Keywords.justify)
         )
     );
+    media(
+        AbstractStyleSheet.screen, minWidth(px(1440)),
+
+        style(
+            x2l.left,
+            textAlign(Keywords.left)
+        ),
+
+        style(
+            x2l.center,
+            textAlign(Keywords.center)
+        ),
+
+        style(
+            x2l.right,
+            textAlign(Keywords.right)
+        ),
+
+        style(
+            x2l.justify,
+            textAlign(Keywords.justify)
+        )
+    );
   }
 
   public interface sm {
@@ -206,6 +229,18 @@ public final class TextAlign extends AbstractStyleSheet {
   }
 
   public interface xl {
+
+    ClassSelector left = Css.randomDot(5);
+
+    ClassSelector center = Css.randomDot(5);
+
+    ClassSelector right = Css.randomDot(5);
+
+    ClassSelector justify = Css.randomDot(5);
+
+  }
+
+  public interface x2l {
 
     ClassSelector left = Css.randomDot(5);
 

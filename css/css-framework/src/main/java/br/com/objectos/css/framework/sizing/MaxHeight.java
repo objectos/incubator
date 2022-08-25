@@ -114,6 +114,19 @@ public final class MaxHeight extends AbstractStyleSheet {
             maxHeight(vh(100))
         )
     );
+    media(
+        AbstractStyleSheet.screen, minWidth(px(1440)),
+
+        style(
+            x2l.full,
+            maxHeight(pct(100))
+        ),
+
+        style(
+            x2l.screen,
+            maxHeight(vh(100))
+        )
+    );
   }
 
   public interface sm {
@@ -141,6 +154,14 @@ public final class MaxHeight extends AbstractStyleSheet {
   }
 
   public interface xl {
+
+    ClassSelector full = Css.randomDot(5);
+
+    ClassSelector screen = Css.randomDot(5);
+
+  }
+
+  public interface x2l {
 
     ClassSelector full = Css.randomDot(5);
 

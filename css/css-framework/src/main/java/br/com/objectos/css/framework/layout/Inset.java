@@ -145,6 +145,25 @@ public final class Inset extends AbstractStyleSheet {
             left(Keywords.auto)
         )
     );
+    media(
+        AbstractStyleSheet.screen, minWidth(px(1440)),
+
+        style(
+            x2l.v0,
+            top(zero()),
+            right(zero()),
+            bottom(zero()),
+            left(zero())
+        ),
+
+        style(
+            x2l.auto,
+            top(Keywords.auto),
+            right(Keywords.auto),
+            bottom(Keywords.auto),
+            left(Keywords.auto)
+        )
+    );
   }
 
   public interface sm {
@@ -172,6 +191,14 @@ public final class Inset extends AbstractStyleSheet {
   }
 
   public interface xl {
+
+    ClassSelector v0 = Css.randomDot(5);
+
+    ClassSelector auto = Css.randomDot(5);
+
+  }
+
+  public interface x2l {
 
     ClassSelector v0 = Css.randomDot(5);
 

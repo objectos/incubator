@@ -140,6 +140,24 @@ public final class MinHeight extends AbstractStyleSheet {
             minHeight(vh(100))
         )
     );
+    media(
+        AbstractStyleSheet.screen, minWidth(px(1440)),
+
+        style(
+            x2l.v0,
+            minHeight(zero())
+        ),
+
+        style(
+            x2l.full,
+            minHeight(pct(100))
+        ),
+
+        style(
+            x2l.screen,
+            minHeight(vh(100))
+        )
+    );
   }
 
   public interface sm {
@@ -173,6 +191,16 @@ public final class MinHeight extends AbstractStyleSheet {
   }
 
   public interface xl {
+
+    ClassSelector v0 = Css.randomDot(5);
+
+    ClassSelector full = Css.randomDot(5);
+
+    ClassSelector screen = Css.randomDot(5);
+
+  }
+
+  public interface x2l {
 
     ClassSelector v0 = Css.randomDot(5);
 

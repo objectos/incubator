@@ -167,6 +167,29 @@ public final class TextDecoration extends AbstractStyleSheet {
             textDecoration(Keywords.none)
         )
     );
+    media(
+        AbstractStyleSheet.screen, minWidth(px(1440)),
+
+        style(
+            x2l.underline,
+            textDecoration(Keywords.underline)
+        ),
+
+        style(
+            x2l.lineThrough,
+            textDecoration(Keywords.lineThrough)
+        ),
+
+        style(
+            x2l.strike,
+            textDecoration(Keywords.lineThrough)
+        ),
+
+        style(
+            x2l.none,
+            textDecoration(Keywords.none)
+        )
+    );
   }
 
   public interface sm {
@@ -206,6 +229,18 @@ public final class TextDecoration extends AbstractStyleSheet {
   }
 
   public interface xl {
+
+    ClassSelector underline = Css.randomDot(5);
+
+    ClassSelector lineThrough = Css.randomDot(5);
+
+    ClassSelector strike = Css.randomDot(5);
+
+    ClassSelector none = Css.randomDot(5);
+
+  }
+
+  public interface x2l {
 
     ClassSelector underline = Css.randomDot(5);
 

@@ -115,6 +115,19 @@ public final class Left extends AbstractStyleSheet {
             left(Keywords.auto)
         )
     );
+    media(
+        AbstractStyleSheet.screen, minWidth(px(1440)),
+
+        style(
+            x2l.v0,
+            left(zero())
+        ),
+
+        style(
+            x2l.auto,
+            left(Keywords.auto)
+        )
+    );
   }
 
   public interface sm {
@@ -142,6 +155,14 @@ public final class Left extends AbstractStyleSheet {
   }
 
   public interface xl {
+
+    ClassSelector v0 = Css.randomDot(5);
+
+    ClassSelector auto = Css.randomDot(5);
+
+  }
+
+  public interface x2l {
 
     ClassSelector v0 = Css.randomDot(5);
 

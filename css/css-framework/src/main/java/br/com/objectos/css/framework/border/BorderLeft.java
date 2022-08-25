@@ -192,6 +192,34 @@ public final class BorderLeft extends AbstractStyleSheet {
             borderLeftWidth(px(8))
         )
     );
+    media(
+        AbstractStyleSheet.screen, minWidth(px(1440)),
+
+        style(
+            x2l.v0,
+            borderLeftWidth(zero())
+        ),
+
+        style(
+            x2l.v1,
+            borderLeftWidth(px(1))
+        ),
+
+        style(
+            x2l.v2,
+            borderLeftWidth(px(2))
+        ),
+
+        style(
+            x2l.v4,
+            borderLeftWidth(px(4))
+        ),
+
+        style(
+            x2l.v8,
+            borderLeftWidth(px(8))
+        )
+    );
   }
 
   public interface sm {
@@ -237,6 +265,20 @@ public final class BorderLeft extends AbstractStyleSheet {
   }
 
   public interface xl {
+
+    ClassSelector v0 = Css.randomDot(5);
+
+    ClassSelector v1 = Css.randomDot(5);
+
+    ClassSelector v2 = Css.randomDot(5);
+
+    ClassSelector v4 = Css.randomDot(5);
+
+    ClassSelector v8 = Css.randomDot(5);
+
+  }
+
+  public interface x2l {
 
     ClassSelector v0 = Css.randomDot(5);
 

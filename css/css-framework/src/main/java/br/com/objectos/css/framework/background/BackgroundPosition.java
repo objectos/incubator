@@ -297,6 +297,54 @@ public final class BackgroundPosition extends AbstractStyleSheet {
             backgroundPosition(Keywords.top)
         )
     );
+    media(
+        AbstractStyleSheet.screen, minWidth(px(1440)),
+
+        style(
+            x2l.bottom,
+            backgroundPosition(Keywords.bottom)
+        ),
+
+        style(
+            x2l.center,
+            backgroundPosition(Keywords.center)
+        ),
+
+        style(
+            x2l.left,
+            backgroundPosition(Keywords.left)
+        ),
+
+        style(
+            x2l.leftBottom,
+            backgroundPosition(Keywords.left, Keywords.bottom)
+        ),
+
+        style(
+            x2l.leftTop,
+            backgroundPosition(Keywords.left, Keywords.top)
+        ),
+
+        style(
+            x2l.right,
+            backgroundPosition(Keywords.right)
+        ),
+
+        style(
+            x2l.rightBottom,
+            backgroundPosition(Keywords.right, Keywords.bottom)
+        ),
+
+        style(
+            x2l.rightTop,
+            backgroundPosition(Keywords.right, Keywords.top)
+        ),
+
+        style(
+            x2l.top,
+            backgroundPosition(Keywords.top)
+        )
+    );
   }
 
   public interface sm {
@@ -366,6 +414,28 @@ public final class BackgroundPosition extends AbstractStyleSheet {
   }
 
   public interface xl {
+
+    ClassSelector bottom = Css.randomDot(5);
+
+    ClassSelector center = Css.randomDot(5);
+
+    ClassSelector left = Css.randomDot(5);
+
+    ClassSelector leftBottom = Css.randomDot(5);
+
+    ClassSelector leftTop = Css.randomDot(5);
+
+    ClassSelector right = Css.randomDot(5);
+
+    ClassSelector rightBottom = Css.randomDot(5);
+
+    ClassSelector rightTop = Css.randomDot(5);
+
+    ClassSelector top = Css.randomDot(5);
+
+  }
+
+  public interface x2l {
 
     ClassSelector bottom = Css.randomDot(5);
 

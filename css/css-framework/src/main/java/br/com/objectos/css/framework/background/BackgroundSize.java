@@ -141,6 +141,24 @@ public final class BackgroundSize extends AbstractStyleSheet {
             backgroundSize(Keywords.contain)
         )
     );
+    media(
+        AbstractStyleSheet.screen, minWidth(px(1440)),
+
+        style(
+            x2l.auto,
+            backgroundSize(Keywords.auto)
+        ),
+
+        style(
+            x2l.cover,
+            backgroundSize(Keywords.cover)
+        ),
+
+        style(
+            x2l.contain,
+            backgroundSize(Keywords.contain)
+        )
+    );
   }
 
   public interface sm {
@@ -174,6 +192,16 @@ public final class BackgroundSize extends AbstractStyleSheet {
   }
 
   public interface xl {
+
+    ClassSelector auto = Css.randomDot(5);
+
+    ClassSelector cover = Css.randomDot(5);
+
+    ClassSelector contain = Css.randomDot(5);
+
+  }
+
+  public interface x2l {
 
     ClassSelector auto = Css.randomDot(5);
 

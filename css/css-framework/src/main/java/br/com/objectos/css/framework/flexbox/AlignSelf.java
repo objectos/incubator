@@ -193,6 +193,34 @@ public final class AlignSelf extends AbstractStyleSheet {
             alignSelf(Keywords.stretch)
         )
     );
+    media(
+        AbstractStyleSheet.screen, minWidth(px(1440)),
+
+        style(
+            x2l.auto,
+            alignSelf(Keywords.auto)
+        ),
+
+        style(
+            x2l.start,
+            alignSelf(Keywords.flexStart)
+        ),
+
+        style(
+            x2l.center,
+            alignSelf(Keywords.center)
+        ),
+
+        style(
+            x2l.end,
+            alignSelf(Keywords.flexEnd)
+        ),
+
+        style(
+            x2l.stretch,
+            alignSelf(Keywords.stretch)
+        )
+    );
   }
 
   public interface sm {
@@ -238,6 +266,20 @@ public final class AlignSelf extends AbstractStyleSheet {
   }
 
   public interface xl {
+
+    ClassSelector auto = Css.randomDot(5);
+
+    ClassSelector start = Css.randomDot(5);
+
+    ClassSelector center = Css.randomDot(5);
+
+    ClassSelector end = Css.randomDot(5);
+
+    ClassSelector stretch = Css.randomDot(5);
+
+  }
+
+  public interface x2l {
 
     ClassSelector auto = Css.randomDot(5);
 

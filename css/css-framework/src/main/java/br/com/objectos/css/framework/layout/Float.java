@@ -141,6 +141,24 @@ public final class Float extends AbstractStyleSheet {
             floatTo(Keywords.none)
         )
     );
+    media(
+        AbstractStyleSheet.screen, minWidth(px(1440)),
+
+        style(
+            x2l.left,
+            floatTo(Keywords.left)
+        ),
+
+        style(
+            x2l.right,
+            floatTo(Keywords.right)
+        ),
+
+        style(
+            x2l.none,
+            floatTo(Keywords.none)
+        )
+    );
   }
 
   public interface sm {
@@ -174,6 +192,16 @@ public final class Float extends AbstractStyleSheet {
   }
 
   public interface xl {
+
+    ClassSelector left = Css.randomDot(5);
+
+    ClassSelector right = Css.randomDot(5);
+
+    ClassSelector none = Css.randomDot(5);
+
+  }
+
+  public interface x2l {
 
     ClassSelector left = Css.randomDot(5);
 

@@ -2481,6 +2481,474 @@ public final class BorderColor extends AbstractStyleSheet {
             borderColor(hex("#702459"))
         )
     );
+    media(
+        AbstractStyleSheet.screen, minWidth(px(1440)),
+
+        style(
+            x2l.transparent,
+            borderColor(Color.transparent)
+        ),
+
+        style(
+            x2l.black,
+            borderColor(hex("#000000"))
+        ),
+
+        style(
+            x2l.white,
+            borderColor(hex("#ffffff"))
+        ),
+
+        style(
+            x2l.gray100,
+            borderColor(hex("#f7fafc"))
+        ),
+
+        style(
+            x2l.gray200,
+            borderColor(hex("#edf2f7"))
+        ),
+
+        style(
+            x2l.gray300,
+            borderColor(hex("#e2e8f0"))
+        ),
+
+        style(
+            x2l.gray400,
+            borderColor(hex("#cbd5e0"))
+        ),
+
+        style(
+            x2l.gray500,
+            borderColor(hex("#a0aec0"))
+        ),
+
+        style(
+            x2l.gray600,
+            borderColor(hex("#718096"))
+        ),
+
+        style(
+            x2l.gray700,
+            borderColor(hex("#4a5568"))
+        ),
+
+        style(
+            x2l.gray800,
+            borderColor(hex("#2d3748"))
+        ),
+
+        style(
+            x2l.gray900,
+            borderColor(hex("#1a202c"))
+        ),
+
+        style(
+            x2l.red100,
+            borderColor(hex("#fff5f5"))
+        ),
+
+        style(
+            x2l.red200,
+            borderColor(hex("#fed7d7"))
+        ),
+
+        style(
+            x2l.red300,
+            borderColor(hex("#feb2b2"))
+        ),
+
+        style(
+            x2l.red400,
+            borderColor(hex("#fc8181"))
+        ),
+
+        style(
+            x2l.red500,
+            borderColor(hex("#f56565"))
+        ),
+
+        style(
+            x2l.red600,
+            borderColor(hex("#e53e3e"))
+        ),
+
+        style(
+            x2l.red700,
+            borderColor(hex("#c53030"))
+        ),
+
+        style(
+            x2l.red800,
+            borderColor(hex("#9b2c2c"))
+        ),
+
+        style(
+            x2l.red900,
+            borderColor(hex("#742a2a"))
+        ),
+
+        style(
+            x2l.orange100,
+            borderColor(hex("#fffaf0"))
+        ),
+
+        style(
+            x2l.orange200,
+            borderColor(hex("#feebc8"))
+        ),
+
+        style(
+            x2l.orange300,
+            borderColor(hex("#fbd38d"))
+        ),
+
+        style(
+            x2l.orange400,
+            borderColor(hex("#f6ad55"))
+        ),
+
+        style(
+            x2l.orange500,
+            borderColor(hex("#ed8936"))
+        ),
+
+        style(
+            x2l.orange600,
+            borderColor(hex("#dd6b20"))
+        ),
+
+        style(
+            x2l.orange700,
+            borderColor(hex("#c05621"))
+        ),
+
+        style(
+            x2l.orange800,
+            borderColor(hex("#9c4221"))
+        ),
+
+        style(
+            x2l.orange900,
+            borderColor(hex("#7b341e"))
+        ),
+
+        style(
+            x2l.yellow100,
+            borderColor(hex("#fffff0"))
+        ),
+
+        style(
+            x2l.yellow200,
+            borderColor(hex("#fefcbf"))
+        ),
+
+        style(
+            x2l.yellow300,
+            borderColor(hex("#faf089"))
+        ),
+
+        style(
+            x2l.yellow400,
+            borderColor(hex("#f6e05e"))
+        ),
+
+        style(
+            x2l.yellow500,
+            borderColor(hex("#ecc94b"))
+        ),
+
+        style(
+            x2l.yellow600,
+            borderColor(hex("#d69e2e"))
+        ),
+
+        style(
+            x2l.yellow700,
+            borderColor(hex("#b7791f"))
+        ),
+
+        style(
+            x2l.yellow800,
+            borderColor(hex("#975a16"))
+        ),
+
+        style(
+            x2l.yellow900,
+            borderColor(hex("#744210"))
+        ),
+
+        style(
+            x2l.green100,
+            borderColor(hex("#f0fff4"))
+        ),
+
+        style(
+            x2l.green200,
+            borderColor(hex("#c6f6d5"))
+        ),
+
+        style(
+            x2l.green300,
+            borderColor(hex("#9ae6b4"))
+        ),
+
+        style(
+            x2l.green400,
+            borderColor(hex("#68d391"))
+        ),
+
+        style(
+            x2l.green500,
+            borderColor(hex("#48bb78"))
+        ),
+
+        style(
+            x2l.green600,
+            borderColor(hex("#38a169"))
+        ),
+
+        style(
+            x2l.green700,
+            borderColor(hex("#2f855a"))
+        ),
+
+        style(
+            x2l.green800,
+            borderColor(hex("#276749"))
+        ),
+
+        style(
+            x2l.green900,
+            borderColor(hex("#22543d"))
+        ),
+
+        style(
+            x2l.teal100,
+            borderColor(hex("#e6fffa"))
+        ),
+
+        style(
+            x2l.teal200,
+            borderColor(hex("#b2f5ea"))
+        ),
+
+        style(
+            x2l.teal300,
+            borderColor(hex("#81e6d9"))
+        ),
+
+        style(
+            x2l.teal400,
+            borderColor(hex("#4fd1c5"))
+        ),
+
+        style(
+            x2l.teal500,
+            borderColor(hex("#38b2ac"))
+        ),
+
+        style(
+            x2l.teal600,
+            borderColor(hex("#319795"))
+        ),
+
+        style(
+            x2l.teal700,
+            borderColor(hex("#2c7a7b"))
+        ),
+
+        style(
+            x2l.teal800,
+            borderColor(hex("#285e61"))
+        ),
+
+        style(
+            x2l.teal900,
+            borderColor(hex("#234e52"))
+        ),
+
+        style(
+            x2l.blue100,
+            borderColor(hex("#ebf8ff"))
+        ),
+
+        style(
+            x2l.blue200,
+            borderColor(hex("#bee3f8"))
+        ),
+
+        style(
+            x2l.blue300,
+            borderColor(hex("#90cdf4"))
+        ),
+
+        style(
+            x2l.blue400,
+            borderColor(hex("#63b3ed"))
+        ),
+
+        style(
+            x2l.blue500,
+            borderColor(hex("#4299e1"))
+        ),
+
+        style(
+            x2l.blue600,
+            borderColor(hex("#3182ce"))
+        ),
+
+        style(
+            x2l.blue700,
+            borderColor(hex("#2b6cb0"))
+        ),
+
+        style(
+            x2l.blue800,
+            borderColor(hex("#2c5282"))
+        ),
+
+        style(
+            x2l.blue900,
+            borderColor(hex("#2a4365"))
+        ),
+
+        style(
+            x2l.indigo100,
+            borderColor(hex("#ebf4ff"))
+        ),
+
+        style(
+            x2l.indigo200,
+            borderColor(hex("#c3dafe"))
+        ),
+
+        style(
+            x2l.indigo300,
+            borderColor(hex("#a3bffa"))
+        ),
+
+        style(
+            x2l.indigo400,
+            borderColor(hex("#7f9cf5"))
+        ),
+
+        style(
+            x2l.indigo500,
+            borderColor(hex("#667eea"))
+        ),
+
+        style(
+            x2l.indigo600,
+            borderColor(hex("#5a67d8"))
+        ),
+
+        style(
+            x2l.indigo700,
+            borderColor(hex("#4c51bf"))
+        ),
+
+        style(
+            x2l.indigo800,
+            borderColor(hex("#434190"))
+        ),
+
+        style(
+            x2l.indigo900,
+            borderColor(hex("#3c366b"))
+        ),
+
+        style(
+            x2l.purple100,
+            borderColor(hex("#faf5ff"))
+        ),
+
+        style(
+            x2l.purple200,
+            borderColor(hex("#e9d8fd"))
+        ),
+
+        style(
+            x2l.purple300,
+            borderColor(hex("#d6bcfa"))
+        ),
+
+        style(
+            x2l.purple400,
+            borderColor(hex("#b794f4"))
+        ),
+
+        style(
+            x2l.purple500,
+            borderColor(hex("#9f7aea"))
+        ),
+
+        style(
+            x2l.purple600,
+            borderColor(hex("#805ad5"))
+        ),
+
+        style(
+            x2l.purple700,
+            borderColor(hex("#6b46c1"))
+        ),
+
+        style(
+            x2l.purple800,
+            borderColor(hex("#553c9a"))
+        ),
+
+        style(
+            x2l.purple900,
+            borderColor(hex("#44337a"))
+        ),
+
+        style(
+            x2l.pink100,
+            borderColor(hex("#fff5f7"))
+        ),
+
+        style(
+            x2l.pink200,
+            borderColor(hex("#fed7e2"))
+        ),
+
+        style(
+            x2l.pink300,
+            borderColor(hex("#fbb6ce"))
+        ),
+
+        style(
+            x2l.pink400,
+            borderColor(hex("#f687b3"))
+        ),
+
+        style(
+            x2l.pink500,
+            borderColor(hex("#ed64a6"))
+        ),
+
+        style(
+            x2l.pink600,
+            borderColor(hex("#d53f8c"))
+        ),
+
+        style(
+            x2l.pink700,
+            borderColor(hex("#b83280"))
+        ),
+
+        style(
+            x2l.pink800,
+            borderColor(hex("#97266d"))
+        ),
+
+        style(
+            x2l.pink900,
+            borderColor(hex("#702459"))
+        )
+    );
   }
 
   public interface sm {
@@ -3054,6 +3522,196 @@ public final class BorderColor extends AbstractStyleSheet {
   }
 
   public interface xl {
+
+    ClassSelector transparent = Css.randomDot(5);
+
+    ClassSelector black = Css.randomDot(5);
+
+    ClassSelector white = Css.randomDot(5);
+
+    ClassSelector gray100 = Css.randomDot(5);
+
+    ClassSelector gray200 = Css.randomDot(5);
+
+    ClassSelector gray300 = Css.randomDot(5);
+
+    ClassSelector gray400 = Css.randomDot(5);
+
+    ClassSelector gray500 = Css.randomDot(5);
+
+    ClassSelector gray600 = Css.randomDot(5);
+
+    ClassSelector gray700 = Css.randomDot(5);
+
+    ClassSelector gray800 = Css.randomDot(5);
+
+    ClassSelector gray900 = Css.randomDot(5);
+
+    ClassSelector red100 = Css.randomDot(5);
+
+    ClassSelector red200 = Css.randomDot(5);
+
+    ClassSelector red300 = Css.randomDot(5);
+
+    ClassSelector red400 = Css.randomDot(5);
+
+    ClassSelector red500 = Css.randomDot(5);
+
+    ClassSelector red600 = Css.randomDot(5);
+
+    ClassSelector red700 = Css.randomDot(5);
+
+    ClassSelector red800 = Css.randomDot(5);
+
+    ClassSelector red900 = Css.randomDot(5);
+
+    ClassSelector orange100 = Css.randomDot(5);
+
+    ClassSelector orange200 = Css.randomDot(5);
+
+    ClassSelector orange300 = Css.randomDot(5);
+
+    ClassSelector orange400 = Css.randomDot(5);
+
+    ClassSelector orange500 = Css.randomDot(5);
+
+    ClassSelector orange600 = Css.randomDot(5);
+
+    ClassSelector orange700 = Css.randomDot(5);
+
+    ClassSelector orange800 = Css.randomDot(5);
+
+    ClassSelector orange900 = Css.randomDot(5);
+
+    ClassSelector yellow100 = Css.randomDot(5);
+
+    ClassSelector yellow200 = Css.randomDot(5);
+
+    ClassSelector yellow300 = Css.randomDot(5);
+
+    ClassSelector yellow400 = Css.randomDot(5);
+
+    ClassSelector yellow500 = Css.randomDot(5);
+
+    ClassSelector yellow600 = Css.randomDot(5);
+
+    ClassSelector yellow700 = Css.randomDot(5);
+
+    ClassSelector yellow800 = Css.randomDot(5);
+
+    ClassSelector yellow900 = Css.randomDot(5);
+
+    ClassSelector green100 = Css.randomDot(5);
+
+    ClassSelector green200 = Css.randomDot(5);
+
+    ClassSelector green300 = Css.randomDot(5);
+
+    ClassSelector green400 = Css.randomDot(5);
+
+    ClassSelector green500 = Css.randomDot(5);
+
+    ClassSelector green600 = Css.randomDot(5);
+
+    ClassSelector green700 = Css.randomDot(5);
+
+    ClassSelector green800 = Css.randomDot(5);
+
+    ClassSelector green900 = Css.randomDot(5);
+
+    ClassSelector teal100 = Css.randomDot(5);
+
+    ClassSelector teal200 = Css.randomDot(5);
+
+    ClassSelector teal300 = Css.randomDot(5);
+
+    ClassSelector teal400 = Css.randomDot(5);
+
+    ClassSelector teal500 = Css.randomDot(5);
+
+    ClassSelector teal600 = Css.randomDot(5);
+
+    ClassSelector teal700 = Css.randomDot(5);
+
+    ClassSelector teal800 = Css.randomDot(5);
+
+    ClassSelector teal900 = Css.randomDot(5);
+
+    ClassSelector blue100 = Css.randomDot(5);
+
+    ClassSelector blue200 = Css.randomDot(5);
+
+    ClassSelector blue300 = Css.randomDot(5);
+
+    ClassSelector blue400 = Css.randomDot(5);
+
+    ClassSelector blue500 = Css.randomDot(5);
+
+    ClassSelector blue600 = Css.randomDot(5);
+
+    ClassSelector blue700 = Css.randomDot(5);
+
+    ClassSelector blue800 = Css.randomDot(5);
+
+    ClassSelector blue900 = Css.randomDot(5);
+
+    ClassSelector indigo100 = Css.randomDot(5);
+
+    ClassSelector indigo200 = Css.randomDot(5);
+
+    ClassSelector indigo300 = Css.randomDot(5);
+
+    ClassSelector indigo400 = Css.randomDot(5);
+
+    ClassSelector indigo500 = Css.randomDot(5);
+
+    ClassSelector indigo600 = Css.randomDot(5);
+
+    ClassSelector indigo700 = Css.randomDot(5);
+
+    ClassSelector indigo800 = Css.randomDot(5);
+
+    ClassSelector indigo900 = Css.randomDot(5);
+
+    ClassSelector purple100 = Css.randomDot(5);
+
+    ClassSelector purple200 = Css.randomDot(5);
+
+    ClassSelector purple300 = Css.randomDot(5);
+
+    ClassSelector purple400 = Css.randomDot(5);
+
+    ClassSelector purple500 = Css.randomDot(5);
+
+    ClassSelector purple600 = Css.randomDot(5);
+
+    ClassSelector purple700 = Css.randomDot(5);
+
+    ClassSelector purple800 = Css.randomDot(5);
+
+    ClassSelector purple900 = Css.randomDot(5);
+
+    ClassSelector pink100 = Css.randomDot(5);
+
+    ClassSelector pink200 = Css.randomDot(5);
+
+    ClassSelector pink300 = Css.randomDot(5);
+
+    ClassSelector pink400 = Css.randomDot(5);
+
+    ClassSelector pink500 = Css.randomDot(5);
+
+    ClassSelector pink600 = Css.randomDot(5);
+
+    ClassSelector pink700 = Css.randomDot(5);
+
+    ClassSelector pink800 = Css.randomDot(5);
+
+    ClassSelector pink900 = Css.randomDot(5);
+
+  }
+
+  public interface x2l {
 
     ClassSelector transparent = Css.randomDot(5);
 

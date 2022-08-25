@@ -193,6 +193,34 @@ public final class BorderStyle extends AbstractStyleSheet {
             borderStyle(Keywords.none)
         )
     );
+    media(
+        AbstractStyleSheet.screen, minWidth(px(1440)),
+
+        style(
+            x2l.solid,
+            borderStyle(Keywords.solid)
+        ),
+
+        style(
+            x2l.dashed,
+            borderStyle(Keywords.dashed)
+        ),
+
+        style(
+            x2l.dotted,
+            borderStyle(Keywords.dotted)
+        ),
+
+        style(
+            x2l.doubleValue,
+            borderStyle(Keywords.doubleKw)
+        ),
+
+        style(
+            x2l.none,
+            borderStyle(Keywords.none)
+        )
+    );
   }
 
   public interface sm {
@@ -238,6 +266,20 @@ public final class BorderStyle extends AbstractStyleSheet {
   }
 
   public interface xl {
+
+    ClassSelector solid = Css.randomDot(5);
+
+    ClassSelector dashed = Css.randomDot(5);
+
+    ClassSelector dotted = Css.randomDot(5);
+
+    ClassSelector doubleValue = Css.randomDot(5);
+
+    ClassSelector none = Css.randomDot(5);
+
+  }
+
+  public interface x2l {
 
     ClassSelector solid = Css.randomDot(5);
 

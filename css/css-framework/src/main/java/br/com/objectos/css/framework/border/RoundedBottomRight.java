@@ -218,6 +218,39 @@ public final class RoundedBottomRight extends AbstractStyleSheet {
             borderBottomRightRadius(px(9999))
         )
     );
+    media(
+        AbstractStyleSheet.screen, minWidth(px(1440)),
+
+        style(
+            x2l.none,
+            borderBottomRightRadius(zero())
+        ),
+
+        style(
+            x2l.small,
+            borderBottomRightRadius(em(0.125))
+        ),
+
+        style(
+            x2l.standard,
+            borderBottomRightRadius(em(0.25))
+        ),
+
+        style(
+            x2l.medium,
+            borderBottomRightRadius(em(0.375))
+        ),
+
+        style(
+            x2l.large,
+            borderBottomRightRadius(em(0.5))
+        ),
+
+        style(
+            x2l.full,
+            borderBottomRightRadius(px(9999))
+        )
+    );
   }
 
   public interface sm {
@@ -269,6 +302,22 @@ public final class RoundedBottomRight extends AbstractStyleSheet {
   }
 
   public interface xl {
+
+    ClassSelector none = Css.randomDot(5);
+
+    ClassSelector small = Css.randomDot(5);
+
+    ClassSelector standard = Css.randomDot(5);
+
+    ClassSelector medium = Css.randomDot(5);
+
+    ClassSelector large = Css.randomDot(5);
+
+    ClassSelector full = Css.randomDot(5);
+
+  }
+
+  public interface x2l {
 
     ClassSelector none = Css.randomDot(5);
 

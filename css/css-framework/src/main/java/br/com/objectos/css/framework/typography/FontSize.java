@@ -322,6 +322,59 @@ public final class FontSize extends AbstractStyleSheet {
             fontSize(rem(4))
         )
     );
+    media(
+        AbstractStyleSheet.screen, minWidth(px(1440)),
+
+        style(
+            x2l.xSmall,
+            fontSize(rem(0.75))
+        ),
+
+        style(
+            x2l.small,
+            fontSize(rem(0.875))
+        ),
+
+        style(
+            x2l.base,
+            fontSize(rem(1))
+        ),
+
+        style(
+            x2l.large,
+            fontSize(rem(1.125))
+        ),
+
+        style(
+            x2l.xLarge,
+            fontSize(rem(1.25))
+        ),
+
+        style(
+            x2l.xLarge2,
+            fontSize(rem(1.5))
+        ),
+
+        style(
+            x2l.xLarge3,
+            fontSize(rem(1.875))
+        ),
+
+        style(
+            x2l.xLarge4,
+            fontSize(rem(2.25))
+        ),
+
+        style(
+            x2l.xLarge5,
+            fontSize(rem(3))
+        ),
+
+        style(
+            x2l.xLarge6,
+            fontSize(rem(4))
+        )
+    );
   }
 
   public interface sm {
@@ -397,6 +450,30 @@ public final class FontSize extends AbstractStyleSheet {
   }
 
   public interface xl {
+
+    ClassSelector xSmall = Css.randomDot(5);
+
+    ClassSelector small = Css.randomDot(5);
+
+    ClassSelector base = Css.randomDot(5);
+
+    ClassSelector large = Css.randomDot(5);
+
+    ClassSelector xLarge = Css.randomDot(5);
+
+    ClassSelector xLarge2 = Css.randomDot(5);
+
+    ClassSelector xLarge3 = Css.randomDot(5);
+
+    ClassSelector xLarge4 = Css.randomDot(5);
+
+    ClassSelector xLarge5 = Css.randomDot(5);
+
+    ClassSelector xLarge6 = Css.randomDot(5);
+
+  }
+
+  public interface x2l {
 
     ClassSelector xSmall = Css.randomDot(5);
 

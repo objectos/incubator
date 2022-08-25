@@ -193,6 +193,34 @@ public final class AlignItems extends AbstractStyleSheet {
             alignItems(Keywords.baseline)
         )
     );
+    media(
+        AbstractStyleSheet.screen, minWidth(px(1440)),
+
+        style(
+            x2l.stretch,
+            alignItems(Keywords.stretch)
+        ),
+
+        style(
+            x2l.start,
+            alignItems(Keywords.flexStart)
+        ),
+
+        style(
+            x2l.center,
+            alignItems(Keywords.center)
+        ),
+
+        style(
+            x2l.end,
+            alignItems(Keywords.flexEnd)
+        ),
+
+        style(
+            x2l.baseline,
+            alignItems(Keywords.baseline)
+        )
+    );
   }
 
   public interface sm {
@@ -238,6 +266,20 @@ public final class AlignItems extends AbstractStyleSheet {
   }
 
   public interface xl {
+
+    ClassSelector stretch = Css.randomDot(5);
+
+    ClassSelector start = Css.randomDot(5);
+
+    ClassSelector center = Css.randomDot(5);
+
+    ClassSelector end = Css.randomDot(5);
+
+    ClassSelector baseline = Css.randomDot(5);
+
+  }
+
+  public interface x2l {
 
     ClassSelector stretch = Css.randomDot(5);
 

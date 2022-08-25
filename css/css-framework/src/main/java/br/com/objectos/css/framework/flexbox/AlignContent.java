@@ -193,6 +193,34 @@ public final class AlignContent extends AbstractStyleSheet {
             alignContent(Keywords.spaceAround)
         )
     );
+    media(
+        AbstractStyleSheet.screen, minWidth(px(1440)),
+
+        style(
+            x2l.start,
+            alignContent(Keywords.flexStart)
+        ),
+
+        style(
+            x2l.center,
+            alignContent(Keywords.center)
+        ),
+
+        style(
+            x2l.end,
+            alignContent(Keywords.flexEnd)
+        ),
+
+        style(
+            x2l.between,
+            alignContent(Keywords.spaceBetween)
+        ),
+
+        style(
+            x2l.around,
+            alignContent(Keywords.spaceAround)
+        )
+    );
   }
 
   public interface sm {
@@ -238,6 +266,20 @@ public final class AlignContent extends AbstractStyleSheet {
   }
 
   public interface xl {
+
+    ClassSelector start = Css.randomDot(5);
+
+    ClassSelector center = Css.randomDot(5);
+
+    ClassSelector end = Css.randomDot(5);
+
+    ClassSelector between = Css.randomDot(5);
+
+    ClassSelector around = Css.randomDot(5);
+
+  }
+
+  public interface x2l {
 
     ClassSelector start = Css.randomDot(5);
 

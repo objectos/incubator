@@ -58,7 +58,8 @@ public class FrameworkConfiguration extends AbstractConfiguration {
       media("sm", SCREEN, declaration(MIN_WIDTH, px(640))),
       media("md", SCREEN, declaration(MIN_WIDTH, px(768))),
       media("lg", SCREEN, declaration(MIN_WIDTH, px(1024))),
-      media("xl", SCREEN, declaration(MIN_WIDTH, px(1280)))
+      media("xl", SCREEN, declaration(MIN_WIDTH, px(1280))),
+      media("x2l", SCREEN, declaration(MIN_WIDTH, px(1440)))
     );
 
     FrameworkNamedValueSet colors = defineColors();

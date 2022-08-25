@@ -193,6 +193,34 @@ public final class Position extends AbstractStyleSheet {
             position(Keywords.sticky)
         )
     );
+    media(
+        AbstractStyleSheet.screen, minWidth(px(1440)),
+
+        style(
+            x2l.staticPosition,
+            position(Keywords.staticKw)
+        ),
+
+        style(
+            x2l.fixed,
+            position(Keywords.fixed)
+        ),
+
+        style(
+            x2l.absolute,
+            position(Keywords.absolute)
+        ),
+
+        style(
+            x2l.relative,
+            position(Keywords.relative)
+        ),
+
+        style(
+            x2l.sticky,
+            position(Keywords.sticky)
+        )
+    );
   }
 
   public interface sm {
@@ -238,6 +266,20 @@ public final class Position extends AbstractStyleSheet {
   }
 
   public interface xl {
+
+    ClassSelector staticPosition = Css.randomDot(5);
+
+    ClassSelector fixed = Css.randomDot(5);
+
+    ClassSelector absolute = Css.randomDot(5);
+
+    ClassSelector relative = Css.randomDot(5);
+
+    ClassSelector sticky = Css.randomDot(5);
+
+  }
+
+  public interface x2l {
 
     ClassSelector staticPosition = Css.randomDot(5);
 

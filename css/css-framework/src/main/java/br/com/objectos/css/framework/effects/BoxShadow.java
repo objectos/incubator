@@ -383,6 +383,71 @@ public final class BoxShadow extends AbstractStyleSheet {
             boxShadow(Keywords.none)
         )
     );
+    media(
+        AbstractStyleSheet.screen, minWidth(px(1440)),
+
+        style(
+            x2l.xSmall,
+            boxShadow(zero(), zero(), zero(), px(1), rgba(0, 0, 0, 0.05))
+        ),
+
+        style(
+            x2l.small,
+            boxShadow(zero(), px(1), px(2), zero(), rgba(0, 0, 0, 0.05))
+        ),
+
+        style(
+            x2l.standard,
+            boxShadow(
+                boxShadow(zero(), px(1), px(3), zero(), rgba(0, 0, 0, 0.1)),
+                boxShadow(zero(), px(1), px(2), zero(), rgba(0, 0, 0, 0.06))
+            )
+        ),
+
+        style(
+            x2l.medium,
+            boxShadow(
+                boxShadow(zero(), px(4), px(6), px(-1), rgba(0, 0, 0, 0.1)),
+                boxShadow(zero(), px(2), px(4), px(-1), rgba(0, 0, 0, 0.06))
+            )
+        ),
+
+        style(
+            x2l.large,
+            boxShadow(
+                boxShadow(zero(), px(10), px(15), px(-3), rgba(0, 0, 0, 0.1)),
+                boxShadow(zero(), px(4), px(6), px(-2), rgba(0, 0, 0, 0.05))
+            )
+        ),
+
+        style(
+            x2l.xLarge,
+            boxShadow(
+                boxShadow(zero(), px(20), px(25), px(-5), rgba(0, 0, 0, 0.1)),
+                boxShadow(zero(), px(10), px(10), px(-5), rgba(0, 0, 0, 0.04))
+            )
+        ),
+
+        style(
+            x2l.xLarge2,
+            boxShadow(zero(), px(25), px(50), px(-12), rgba(0, 0, 0, 0.25))
+        ),
+
+        style(
+            x2l.inner,
+            boxShadow(Keywords.inset, zero(), px(2), px(4), zero(), rgba(0, 0, 0, 0.06))
+        ),
+
+        style(
+            x2l.outline,
+            boxShadow(zero(), zero(), zero(), px(3), rgba(66, 153, 225, 0.5))
+        ),
+
+        style(
+            x2l.none,
+            boxShadow(Keywords.none)
+        )
+    );
   }
 
   public interface sm {
@@ -458,6 +523,30 @@ public final class BoxShadow extends AbstractStyleSheet {
   }
 
   public interface xl {
+
+    ClassSelector xSmall = Css.randomDot(5);
+
+    ClassSelector small = Css.randomDot(5);
+
+    ClassSelector standard = Css.randomDot(5);
+
+    ClassSelector medium = Css.randomDot(5);
+
+    ClassSelector large = Css.randomDot(5);
+
+    ClassSelector xLarge = Css.randomDot(5);
+
+    ClassSelector xLarge2 = Css.randomDot(5);
+
+    ClassSelector inner = Css.randomDot(5);
+
+    ClassSelector outline = Css.randomDot(5);
+
+    ClassSelector none = Css.randomDot(5);
+
+  }
+
+  public interface x2l {
 
     ClassSelector xSmall = Css.randomDot(5);
 

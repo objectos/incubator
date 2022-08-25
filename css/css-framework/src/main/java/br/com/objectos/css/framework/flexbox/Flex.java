@@ -167,6 +167,29 @@ public final class Flex extends AbstractStyleSheet {
             flex(Keywords.none)
         )
     );
+    media(
+        AbstractStyleSheet.screen, minWidth(px(1440)),
+
+        style(
+            x2l.initial,
+            flex(l(0), l(1), Keywords.auto)
+        ),
+
+        style(
+            x2l.one,
+            flex(l(1), l(1), pct(0))
+        ),
+
+        style(
+            x2l.auto,
+            flex(l(1), l(1), Keywords.auto)
+        ),
+
+        style(
+            x2l.none,
+            flex(Keywords.none)
+        )
+    );
   }
 
   public interface sm {
@@ -206,6 +229,18 @@ public final class Flex extends AbstractStyleSheet {
   }
 
   public interface xl {
+
+    ClassSelector initial = Css.randomDot(5);
+
+    ClassSelector one = Css.randomDot(5);
+
+    ClassSelector auto = Css.randomDot(5);
+
+    ClassSelector none = Css.randomDot(5);
+
+  }
+
+  public interface x2l {
 
     ClassSelector initial = Css.randomDot(5);
 

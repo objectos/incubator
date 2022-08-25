@@ -193,6 +193,34 @@ public final class JustifyContent extends AbstractStyleSheet {
             justifyContent(Keywords.spaceAround)
         )
     );
+    media(
+        AbstractStyleSheet.screen, minWidth(px(1440)),
+
+        style(
+            x2l.start,
+            justifyContent(Keywords.flexStart)
+        ),
+
+        style(
+            x2l.center,
+            justifyContent(Keywords.center)
+        ),
+
+        style(
+            x2l.end,
+            justifyContent(Keywords.flexEnd)
+        ),
+
+        style(
+            x2l.between,
+            justifyContent(Keywords.spaceBetween)
+        ),
+
+        style(
+            x2l.around,
+            justifyContent(Keywords.spaceAround)
+        )
+    );
   }
 
   public interface sm {
@@ -238,6 +266,20 @@ public final class JustifyContent extends AbstractStyleSheet {
   }
 
   public interface xl {
+
+    ClassSelector start = Css.randomDot(5);
+
+    ClassSelector center = Css.randomDot(5);
+
+    ClassSelector end = Css.randomDot(5);
+
+    ClassSelector between = Css.randomDot(5);
+
+    ClassSelector around = Css.randomDot(5);
+
+  }
+
+  public interface x2l {
 
     ClassSelector start = Css.randomDot(5);
 

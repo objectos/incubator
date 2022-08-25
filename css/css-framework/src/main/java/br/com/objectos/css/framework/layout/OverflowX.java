@@ -167,6 +167,29 @@ public final class OverflowX extends AbstractStyleSheet {
             overflowX(Keywords.scroll)
         )
     );
+    media(
+        AbstractStyleSheet.screen, minWidth(px(1440)),
+
+        style(
+            x2l.auto,
+            overflowX(Keywords.auto)
+        ),
+
+        style(
+            x2l.hidden,
+            overflowX(Keywords.hidden)
+        ),
+
+        style(
+            x2l.visible,
+            overflowX(Keywords.visible)
+        ),
+
+        style(
+            x2l.scroll,
+            overflowX(Keywords.scroll)
+        )
+    );
   }
 
   public interface sm {
@@ -206,6 +229,18 @@ public final class OverflowX extends AbstractStyleSheet {
   }
 
   public interface xl {
+
+    ClassSelector auto = Css.randomDot(5);
+
+    ClassSelector hidden = Css.randomDot(5);
+
+    ClassSelector visible = Css.randomDot(5);
+
+    ClassSelector scroll = Css.randomDot(5);
+
+  }
+
+  public interface x2l {
 
     ClassSelector auto = Css.randomDot(5);
 

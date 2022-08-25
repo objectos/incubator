@@ -115,6 +115,19 @@ public final class FontStyle extends AbstractStyleSheet {
             fontStyle(Keywords.normal)
         )
     );
+    media(
+        AbstractStyleSheet.screen, minWidth(px(1440)),
+
+        style(
+            x2l.italic,
+            fontStyle(Keywords.italic)
+        ),
+
+        style(
+            x2l.normal,
+            fontStyle(Keywords.normal)
+        )
+    );
   }
 
   public interface sm {
@@ -142,6 +155,14 @@ public final class FontStyle extends AbstractStyleSheet {
   }
 
   public interface xl {
+
+    ClassSelector italic = Css.randomDot(5);
+
+    ClassSelector normal = Css.randomDot(5);
+
+  }
+
+  public interface x2l {
 
     ClassSelector italic = Css.randomDot(5);
 

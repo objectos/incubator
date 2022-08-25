@@ -167,6 +167,29 @@ public final class TextTransform extends AbstractStyleSheet {
             textTransform(Keywords.none)
         )
     );
+    media(
+        AbstractStyleSheet.screen, minWidth(px(1440)),
+
+        style(
+            x2l.uppercase,
+            textTransform(Keywords.uppercase)
+        ),
+
+        style(
+            x2l.lowercase,
+            textTransform(Keywords.lowercase)
+        ),
+
+        style(
+            x2l.capitalize,
+            textTransform(Keywords.capitalize)
+        ),
+
+        style(
+            x2l.none,
+            textTransform(Keywords.none)
+        )
+    );
   }
 
   public interface sm {
@@ -206,6 +229,18 @@ public final class TextTransform extends AbstractStyleSheet {
   }
 
   public interface xl {
+
+    ClassSelector uppercase = Css.randomDot(5);
+
+    ClassSelector lowercase = Css.randomDot(5);
+
+    ClassSelector capitalize = Css.randomDot(5);
+
+    ClassSelector none = Css.randomDot(5);
+
+  }
+
+  public interface x2l {
 
     ClassSelector uppercase = Css.randomDot(5);
 

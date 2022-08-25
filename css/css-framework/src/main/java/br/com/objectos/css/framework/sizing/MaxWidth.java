@@ -81,6 +81,8 @@ public final class MaxWidth extends AbstractStyleSheet {
 
   public static final ClassSelector screenXl = Css.randomDot(5);
 
+  public static final ClassSelector screenX2l = Css.randomDot(5);
+
   @Override
   protected final void definition() {
     style(
@@ -146,6 +148,10 @@ public final class MaxWidth extends AbstractStyleSheet {
     style(
         screenXl,
         maxWidth(px(1280))
+    );
+    style(
+        screenX2l,
+        maxWidth(px(1440))
     );
     media(
         AbstractStyleSheet.screen, minWidth(px(640)),
@@ -228,6 +234,11 @@ public final class MaxWidth extends AbstractStyleSheet {
         style(
             sm.screenXl,
             maxWidth(px(1280))
+        ),
+
+        style(
+            sm.screenX2l,
+            maxWidth(px(1440))
         )
     );
     media(
@@ -311,6 +322,11 @@ public final class MaxWidth extends AbstractStyleSheet {
         style(
             md.screenXl,
             maxWidth(px(1280))
+        ),
+
+        style(
+            md.screenX2l,
+            maxWidth(px(1440))
         )
     );
     media(
@@ -394,6 +410,11 @@ public final class MaxWidth extends AbstractStyleSheet {
         style(
             lg.screenXl,
             maxWidth(px(1280))
+        ),
+
+        style(
+            lg.screenX2l,
+            maxWidth(px(1440))
         )
     );
     media(
@@ -477,6 +498,99 @@ public final class MaxWidth extends AbstractStyleSheet {
         style(
             xl.screenXl,
             maxWidth(px(1280))
+        ),
+
+        style(
+            xl.screenX2l,
+            maxWidth(px(1440))
+        )
+    );
+    media(
+        AbstractStyleSheet.screen, minWidth(px(1440)),
+
+        style(
+            x2l.none,
+            maxWidth(Keywords.none)
+        ),
+
+        style(
+            x2l.xSmall,
+            maxWidth(rem(20))
+        ),
+
+        style(
+            x2l.small,
+            maxWidth(rem(24))
+        ),
+
+        style(
+            x2l.medium,
+            maxWidth(rem(28))
+        ),
+
+        style(
+            x2l.large,
+            maxWidth(rem(32))
+        ),
+
+        style(
+            x2l.xLarge,
+            maxWidth(rem(36))
+        ),
+
+        style(
+            x2l.xLarge2,
+            maxWidth(rem(42))
+        ),
+
+        style(
+            x2l.xLarge3,
+            maxWidth(rem(48))
+        ),
+
+        style(
+            x2l.xLarge4,
+            maxWidth(rem(56))
+        ),
+
+        style(
+            x2l.xLarge5,
+            maxWidth(rem(64))
+        ),
+
+        style(
+            x2l.xLarge6,
+            maxWidth(rem(72))
+        ),
+
+        style(
+            x2l.full,
+            maxWidth(pct(100))
+        ),
+
+        style(
+            x2l.screenSm,
+            maxWidth(px(640))
+        ),
+
+        style(
+            x2l.screenMd,
+            maxWidth(px(768))
+        ),
+
+        style(
+            x2l.screenLg,
+            maxWidth(px(1024))
+        ),
+
+        style(
+            x2l.screenXl,
+            maxWidth(px(1280))
+        ),
+
+        style(
+            x2l.screenX2l,
+            maxWidth(px(1440))
         )
     );
   }
@@ -515,6 +629,8 @@ public final class MaxWidth extends AbstractStyleSheet {
 
     ClassSelector screenXl = Css.randomDot(5);
 
+    ClassSelector screenX2l = Css.randomDot(5);
+
   }
 
   public interface md {
@@ -550,6 +666,8 @@ public final class MaxWidth extends AbstractStyleSheet {
     ClassSelector screenLg = Css.randomDot(5);
 
     ClassSelector screenXl = Css.randomDot(5);
+
+    ClassSelector screenX2l = Css.randomDot(5);
 
   }
 
@@ -587,6 +705,8 @@ public final class MaxWidth extends AbstractStyleSheet {
 
     ClassSelector screenXl = Css.randomDot(5);
 
+    ClassSelector screenX2l = Css.randomDot(5);
+
   }
 
   public interface xl {
@@ -622,6 +742,46 @@ public final class MaxWidth extends AbstractStyleSheet {
     ClassSelector screenLg = Css.randomDot(5);
 
     ClassSelector screenXl = Css.randomDot(5);
+
+    ClassSelector screenX2l = Css.randomDot(5);
+
+  }
+
+  public interface x2l {
+
+    ClassSelector none = Css.randomDot(5);
+
+    ClassSelector xSmall = Css.randomDot(5);
+
+    ClassSelector small = Css.randomDot(5);
+
+    ClassSelector medium = Css.randomDot(5);
+
+    ClassSelector large = Css.randomDot(5);
+
+    ClassSelector xLarge = Css.randomDot(5);
+
+    ClassSelector xLarge2 = Css.randomDot(5);
+
+    ClassSelector xLarge3 = Css.randomDot(5);
+
+    ClassSelector xLarge4 = Css.randomDot(5);
+
+    ClassSelector xLarge5 = Css.randomDot(5);
+
+    ClassSelector xLarge6 = Css.randomDot(5);
+
+    ClassSelector full = Css.randomDot(5);
+
+    ClassSelector screenSm = Css.randomDot(5);
+
+    ClassSelector screenMd = Css.randomDot(5);
+
+    ClassSelector screenLg = Css.randomDot(5);
+
+    ClassSelector screenXl = Css.randomDot(5);
+
+    ClassSelector screenX2l = Css.randomDot(5);
 
   }
 

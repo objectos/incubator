@@ -1753,6 +1753,334 @@ public final class Width extends AbstractStyleSheet {
             width(vw(100))
         )
     );
+    media(
+        AbstractStyleSheet.screen, minWidth(px(1440)),
+
+        style(
+            x2l.auto,
+            width(Keywords.auto)
+        ),
+
+        style(
+            x2l.px,
+            width(px(1))
+        ),
+
+        style(
+            x2l.zero,
+            width(zero())
+        ),
+
+        style(
+            x2l.v0,
+            width(zero())
+        ),
+
+        style(
+            x2l.v0_5,
+            width(rem(0.125))
+        ),
+
+        style(
+            x2l.v01,
+            width(rem(0.25))
+        ),
+
+        style(
+            x2l.v01_5,
+            width(rem(0.375))
+        ),
+
+        style(
+            x2l.v02,
+            width(rem(0.5))
+        ),
+
+        style(
+            x2l.v02_5,
+            width(rem(0.625))
+        ),
+
+        style(
+            x2l.v03,
+            width(rem(0.75))
+        ),
+
+        style(
+            x2l.v03_5,
+            width(rem(0.875))
+        ),
+
+        style(
+            x2l.v04,
+            width(rem(1))
+        ),
+
+        style(
+            x2l.v05,
+            width(rem(1.25))
+        ),
+
+        style(
+            x2l.v06,
+            width(rem(1.5))
+        ),
+
+        style(
+            x2l.v07,
+            width(rem(1.75))
+        ),
+
+        style(
+            x2l.v08,
+            width(rem(2))
+        ),
+
+        style(
+            x2l.v09,
+            width(rem(2.25))
+        ),
+
+        style(
+            x2l.v10,
+            width(rem(2.5))
+        ),
+
+        style(
+            x2l.v11,
+            width(rem(2.75))
+        ),
+
+        style(
+            x2l.v12,
+            width(rem(3))
+        ),
+
+        style(
+            x2l.v14,
+            width(rem(3.5))
+        ),
+
+        style(
+            x2l.v16,
+            width(rem(4))
+        ),
+
+        style(
+            x2l.v20,
+            width(rem(5))
+        ),
+
+        style(
+            x2l.v24,
+            width(rem(6))
+        ),
+
+        style(
+            x2l.v28,
+            width(rem(7))
+        ),
+
+        style(
+            x2l.v32,
+            width(rem(8))
+        ),
+
+        style(
+            x2l.v36,
+            width(rem(9))
+        ),
+
+        style(
+            x2l.v40,
+            width(rem(10))
+        ),
+
+        style(
+            x2l.v44,
+            width(rem(11))
+        ),
+
+        style(
+            x2l.v48,
+            width(rem(12))
+        ),
+
+        style(
+            x2l.v52,
+            width(rem(13))
+        ),
+
+        style(
+            x2l.v56,
+            width(rem(14))
+        ),
+
+        style(
+            x2l.v60,
+            width(rem(15))
+        ),
+
+        style(
+            x2l.v64,
+            width(rem(16))
+        ),
+
+        style(
+            x2l.v72,
+            width(rem(18))
+        ),
+
+        style(
+            x2l.v80,
+            width(rem(20))
+        ),
+
+        style(
+            x2l.v96,
+            width(rem(24))
+        ),
+
+        style(
+            x2l.p1o2,
+            width(pct(50))
+        ),
+
+        style(
+            x2l.p1o3,
+            width(pct(33.333333))
+        ),
+
+        style(
+            x2l.p2o3,
+            width(pct(66.666667))
+        ),
+
+        style(
+            x2l.p1o4,
+            width(pct(25))
+        ),
+
+        style(
+            x2l.p2o4,
+            width(pct(50))
+        ),
+
+        style(
+            x2l.p3o4,
+            width(pct(75))
+        ),
+
+        style(
+            x2l.p1o5,
+            width(pct(20))
+        ),
+
+        style(
+            x2l.p2o5,
+            width(pct(40))
+        ),
+
+        style(
+            x2l.p3o5,
+            width(pct(60))
+        ),
+
+        style(
+            x2l.p4o5,
+            width(pct(80))
+        ),
+
+        style(
+            x2l.p1o6,
+            width(pct(16.666667))
+        ),
+
+        style(
+            x2l.p2o6,
+            width(pct(33.333333))
+        ),
+
+        style(
+            x2l.p3o6,
+            width(pct(50))
+        ),
+
+        style(
+            x2l.p4o6,
+            width(pct(66.666667))
+        ),
+
+        style(
+            x2l.p5o6,
+            width(pct(83.333333))
+        ),
+
+        style(
+            x2l.p1o12,
+            width(pct(8.333333))
+        ),
+
+        style(
+            x2l.p2o12,
+            width(pct(16.666667))
+        ),
+
+        style(
+            x2l.p3o12,
+            width(pct(25))
+        ),
+
+        style(
+            x2l.p4o12,
+            width(pct(33.333333))
+        ),
+
+        style(
+            x2l.p5o12,
+            width(pct(41.666667))
+        ),
+
+        style(
+            x2l.p6o12,
+            width(pct(50))
+        ),
+
+        style(
+            x2l.p7o12,
+            width(pct(58.333333))
+        ),
+
+        style(
+            x2l.p8o12,
+            width(pct(66.666667))
+        ),
+
+        style(
+            x2l.p9o12,
+            width(pct(75))
+        ),
+
+        style(
+            x2l.p10o12,
+            width(pct(83.333333))
+        ),
+
+        style(
+            x2l.p11o12,
+            width(pct(91.666667))
+        ),
+
+        style(
+            x2l.full,
+            width(pct(100))
+        ),
+
+        style(
+            x2l.screen,
+            width(vw(100))
+        )
+    );
   }
 
   public interface sm {
@@ -2158,6 +2486,140 @@ public final class Width extends AbstractStyleSheet {
   }
 
   public interface xl {
+
+    ClassSelector auto = Css.randomDot(5);
+
+    ClassSelector px = Css.randomDot(5);
+
+    ClassSelector zero = Css.randomDot(5);
+
+    ClassSelector v0 = Css.randomDot(5);
+
+    ClassSelector v0_5 = Css.randomDot(5);
+
+    ClassSelector v01 = Css.randomDot(5);
+
+    ClassSelector v01_5 = Css.randomDot(5);
+
+    ClassSelector v02 = Css.randomDot(5);
+
+    ClassSelector v02_5 = Css.randomDot(5);
+
+    ClassSelector v03 = Css.randomDot(5);
+
+    ClassSelector v03_5 = Css.randomDot(5);
+
+    ClassSelector v04 = Css.randomDot(5);
+
+    ClassSelector v05 = Css.randomDot(5);
+
+    ClassSelector v06 = Css.randomDot(5);
+
+    ClassSelector v07 = Css.randomDot(5);
+
+    ClassSelector v08 = Css.randomDot(5);
+
+    ClassSelector v09 = Css.randomDot(5);
+
+    ClassSelector v10 = Css.randomDot(5);
+
+    ClassSelector v11 = Css.randomDot(5);
+
+    ClassSelector v12 = Css.randomDot(5);
+
+    ClassSelector v14 = Css.randomDot(5);
+
+    ClassSelector v16 = Css.randomDot(5);
+
+    ClassSelector v20 = Css.randomDot(5);
+
+    ClassSelector v24 = Css.randomDot(5);
+
+    ClassSelector v28 = Css.randomDot(5);
+
+    ClassSelector v32 = Css.randomDot(5);
+
+    ClassSelector v36 = Css.randomDot(5);
+
+    ClassSelector v40 = Css.randomDot(5);
+
+    ClassSelector v44 = Css.randomDot(5);
+
+    ClassSelector v48 = Css.randomDot(5);
+
+    ClassSelector v52 = Css.randomDot(5);
+
+    ClassSelector v56 = Css.randomDot(5);
+
+    ClassSelector v60 = Css.randomDot(5);
+
+    ClassSelector v64 = Css.randomDot(5);
+
+    ClassSelector v72 = Css.randomDot(5);
+
+    ClassSelector v80 = Css.randomDot(5);
+
+    ClassSelector v96 = Css.randomDot(5);
+
+    ClassSelector p1o2 = Css.randomDot(5);
+
+    ClassSelector p1o3 = Css.randomDot(5);
+
+    ClassSelector p2o3 = Css.randomDot(5);
+
+    ClassSelector p1o4 = Css.randomDot(5);
+
+    ClassSelector p2o4 = Css.randomDot(5);
+
+    ClassSelector p3o4 = Css.randomDot(5);
+
+    ClassSelector p1o5 = Css.randomDot(5);
+
+    ClassSelector p2o5 = Css.randomDot(5);
+
+    ClassSelector p3o5 = Css.randomDot(5);
+
+    ClassSelector p4o5 = Css.randomDot(5);
+
+    ClassSelector p1o6 = Css.randomDot(5);
+
+    ClassSelector p2o6 = Css.randomDot(5);
+
+    ClassSelector p3o6 = Css.randomDot(5);
+
+    ClassSelector p4o6 = Css.randomDot(5);
+
+    ClassSelector p5o6 = Css.randomDot(5);
+
+    ClassSelector p1o12 = Css.randomDot(5);
+
+    ClassSelector p2o12 = Css.randomDot(5);
+
+    ClassSelector p3o12 = Css.randomDot(5);
+
+    ClassSelector p4o12 = Css.randomDot(5);
+
+    ClassSelector p5o12 = Css.randomDot(5);
+
+    ClassSelector p6o12 = Css.randomDot(5);
+
+    ClassSelector p7o12 = Css.randomDot(5);
+
+    ClassSelector p8o12 = Css.randomDot(5);
+
+    ClassSelector p9o12 = Css.randomDot(5);
+
+    ClassSelector p10o12 = Css.randomDot(5);
+
+    ClassSelector p11o12 = Css.randomDot(5);
+
+    ClassSelector full = Css.randomDot(5);
+
+    ClassSelector screen = Css.randomDot(5);
+
+  }
+
+  public interface x2l {
 
     ClassSelector auto = Css.randomDot(5);
 

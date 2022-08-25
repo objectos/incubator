@@ -114,6 +114,19 @@ public final class MinWidth extends AbstractStyleSheet {
             minWidth(pct(100))
         )
     );
+    media(
+        AbstractStyleSheet.screen, minWidth(px(1440)),
+
+        style(
+            x2l.v0,
+            minWidth(zero())
+        ),
+
+        style(
+            x2l.full,
+            minWidth(pct(100))
+        )
+    );
   }
 
   public interface sm {
@@ -141,6 +154,14 @@ public final class MinWidth extends AbstractStyleSheet {
   }
 
   public interface xl {
+
+    ClassSelector v0 = Css.randomDot(5);
+
+    ClassSelector full = Css.randomDot(5);
+
+  }
+
+  public interface x2l {
 
     ClassSelector v0 = Css.randomDot(5);
 

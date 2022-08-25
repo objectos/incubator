@@ -531,6 +531,99 @@ public final class Display extends AbstractStyleSheet {
             display(Keywords.tableRow)
         )
     );
+    media(
+        AbstractStyleSheet.screen, minWidth(px(1440)),
+
+        style(
+            x2l.hidden,
+            display(Keywords.none)
+        ),
+
+        style(
+            x2l.block,
+            display(Keywords.block)
+        ),
+
+        style(
+            x2l.flowRoot,
+            display(Keywords.flowRoot)
+        ),
+
+        style(
+            x2l.inlineBlock,
+            display(Keywords.inlineBlock)
+        ),
+
+        style(
+            x2l.inline,
+            display(Keywords.inline)
+        ),
+
+        style(
+            x2l.flex,
+            display(Keywords.flex)
+        ),
+
+        style(
+            x2l.inlineFlex,
+            display(Keywords.inlineFlex)
+        ),
+
+        style(
+            x2l.grid,
+            display(Keywords.grid)
+        ),
+
+        style(
+            x2l.inlineGrid,
+            display(Keywords.inlineGrid)
+        ),
+
+        style(
+            x2l.table,
+            display(Keywords.tableKw)
+        ),
+
+        style(
+            x2l.tableCaption,
+            display(Keywords.tableCaption)
+        ),
+
+        style(
+            x2l.tableCell,
+            display(Keywords.tableCell)
+        ),
+
+        style(
+            x2l.tableColumn,
+            display(Keywords.tableColumn)
+        ),
+
+        style(
+            x2l.tableColumnGroup,
+            display(Keywords.tableColumnGroup)
+        ),
+
+        style(
+            x2l.tableFooterGroup,
+            display(Keywords.tableFooterGroup)
+        ),
+
+        style(
+            x2l.tableHeaderGroup,
+            display(Keywords.tableHeaderGroup)
+        ),
+
+        style(
+            x2l.tableRowGroup,
+            display(Keywords.tableRowGroup)
+        ),
+
+        style(
+            x2l.tableRow,
+            display(Keywords.tableRow)
+        )
+    );
   }
 
   public interface sm {
@@ -654,6 +747,46 @@ public final class Display extends AbstractStyleSheet {
   }
 
   public interface xl {
+
+    ClassSelector hidden = Css.randomDot(5);
+
+    ClassSelector block = Css.randomDot(5);
+
+    ClassSelector flowRoot = Css.randomDot(5);
+
+    ClassSelector inlineBlock = Css.randomDot(5);
+
+    ClassSelector inline = Css.randomDot(5);
+
+    ClassSelector flex = Css.randomDot(5);
+
+    ClassSelector inlineFlex = Css.randomDot(5);
+
+    ClassSelector grid = Css.randomDot(5);
+
+    ClassSelector inlineGrid = Css.randomDot(5);
+
+    ClassSelector table = Css.randomDot(5);
+
+    ClassSelector tableCaption = Css.randomDot(5);
+
+    ClassSelector tableCell = Css.randomDot(5);
+
+    ClassSelector tableColumn = Css.randomDot(5);
+
+    ClassSelector tableColumnGroup = Css.randomDot(5);
+
+    ClassSelector tableFooterGroup = Css.randomDot(5);
+
+    ClassSelector tableHeaderGroup = Css.randomDot(5);
+
+    ClassSelector tableRowGroup = Css.randomDot(5);
+
+    ClassSelector tableRow = Css.randomDot(5);
+
+  }
+
+  public interface x2l {
 
     ClassSelector hidden = Css.randomDot(5);
 
