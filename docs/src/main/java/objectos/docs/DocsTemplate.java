@@ -31,8 +31,6 @@ abstract class DocsTemplate extends AbstractTemplate implements AsciiDoc.Process
 
   final DocsInjector injector;
 
-  private int headingLevel;
-
   private String rawStyle;
 
   private Value[] valueList = new Value[64];
@@ -67,8 +65,8 @@ abstract class DocsTemplate extends AbstractTemplate implements AsciiDoc.Process
   }
 
   @Override
-  public final void headingEnd() {
-    var tagName = switch (headingLevel) {
+  public void headingEnd(int level) {
+    var tagName = switch (level) {
       case 1 -> StandardElementName.H1;
 
       case 2 -> StandardElementName.H2;
@@ -82,7 +80,7 @@ abstract class DocsTemplate extends AbstractTemplate implements AsciiDoc.Process
       case 6 -> StandardElementName.H6;
 
       default -> throw new UnsupportedOperationException(
-        "Implement me :: headingLevel=" + headingLevel);
+        "Implement me :: headingLevel=" + level);
     };
 
     tagEnd(tagName);
@@ -90,8 +88,6 @@ abstract class DocsTemplate extends AbstractTemplate implements AsciiDoc.Process
 
   @Override
   public void headingStart(int level) {
-    headingLevel = level;
-
     tagStart();
   }
 

@@ -26,6 +26,7 @@ import br.com.objectos.css.framework.spacing.MarginX;
 import br.com.objectos.css.framework.spacing.PaddingBottom;
 import br.com.objectos.css.framework.spacing.PaddingLeft;
 import br.com.objectos.css.framework.spacing.PaddingRight;
+import br.com.objectos.css.framework.spacing.PaddingTop;
 import br.com.objectos.css.framework.spacing.PaddingX;
 import br.com.objectos.css.framework.typography.FontSize;
 import br.com.objectos.css.framework.typography.FontWeight;
@@ -52,18 +53,27 @@ final class ArticleTemplate extends DocsTemplate implements LanguageRenderer.Out
   ArticleTemplate(DocsInjector injector) { super(injector); }
 
   @Override
+  public final void headingEnd(int level) {
+    super.headingEnd(level); // </hx>
+  }
+
+  @Override
   public final void headingStart(int level) {
     super.headingStart(level);
 
     switch (level) {
-      case 1 -> addValue0(
-        BorderColor.gray300,
-        BorderBottom.v1,
-        FontSize.xLarge3,
-        FontWeight.bold,
-        MarginBottom.v04,
-        PaddingBottom.v01
-      );
+      case 1 -> {
+        tagStart(); // <h1>
+
+        addValue0(
+          BorderColor.gray300,
+          BorderBottom.v1,
+          FontSize.xLarge3,
+          FontWeight.bold,
+          MarginBottom.v04,
+          PaddingBottom.v01
+        );
+      }
     }
   }
 
@@ -149,7 +159,8 @@ final class ArticleTemplate extends DocsTemplate implements LanguageRenderer.Out
       //    nextBanner.shouldRender() ? f(nextBanner) : noop(),
       Display.flex,
       MarginX.auto,
-      MaxWidth.screenXl,
+      MaxWidth.screenX2l,
+      PaddingTop.v06,
 
       nav(
         Display.hidden,

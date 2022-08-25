@@ -38,7 +38,7 @@ final class DocsTopBar extends AbstractFragment implements Docs.TopBar {
 
       nav(
         MarginX.auto,
-        MaxWidth.screenXl,
+        MaxWidth.screenX2l,
 
         a(
           href("https://www.objectos.com.br/index.html"),

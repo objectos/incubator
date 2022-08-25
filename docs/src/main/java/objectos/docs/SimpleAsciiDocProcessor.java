@@ -35,7 +35,7 @@ public class SimpleAsciiDocProcessor implements AsciiDoc.Processor {
   public void documentStart(DocumentAttributes attributes) {}
 
   @Override
-  public void headingEnd() {}
+  public void headingEnd(int level) {}
 
   @Override
   public void headingStart(int level) {}

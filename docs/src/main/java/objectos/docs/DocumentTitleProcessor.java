@@ -43,7 +43,7 @@ final class DocumentTitleProcessor extends SimpleAsciiDocProcessor {
   }
 
   @Override
-  public final void headingEnd() {
+  public final void headingEnd(int level) {
     write = false;
   }
 
