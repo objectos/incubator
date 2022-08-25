@@ -188,8 +188,7 @@ class PluginConfigurationDsl implements ConfigurationDsl {
   public final FrameworkNamedValue getNamedValue(String name, Value... values) {
     Check.notNull(name, "name == null");
 
-    UnmodifiableList<Value> arguments;
-    arguments = UnmodifiableList.copyOf(values);
+    var arguments = UnmodifiableList.copyOf(values);
 
     return new NamedArguments(name, arguments);
   }

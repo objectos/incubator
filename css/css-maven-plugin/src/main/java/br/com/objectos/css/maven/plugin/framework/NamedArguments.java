@@ -20,8 +20,8 @@ import static br.com.objectos.code.java.Java.invoke;
 import br.com.objectos.code.java.expression.Argument;
 import br.com.objectos.code.java.expression.MethodInvocation;
 import br.com.objectos.css.type.Value;
-import objectos.util.UnmodifiableList;
 import objectos.util.GrowableList;
+import objectos.util.UnmodifiableList;
 
 class NamedArguments extends NamedValue {
 
@@ -34,11 +34,10 @@ class NamedArguments extends NamedValue {
 
   @Override
   public final MethodInvocation invokePropertyMethod(String methodName) {
-    GrowableList<Argument> arguments;
-    arguments = new GrowableList<>();
+    var arguments = new GrowableList<Argument>();
 
-    for (Value v : values) {
-      Argument argument = toArgument(v);
+    for (var v : values) {
+      var argument = toArgument(v);
 
       arguments.add(argument);
     }
