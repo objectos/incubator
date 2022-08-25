@@ -28,6 +28,7 @@ import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.util.Map;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 import java.util.stream.Stream;
 import objectos.asciidoc.AsciiDoc;
 import objectos.asciidoc.Document;
@@ -185,6 +186,9 @@ public final class Docs extends DocsInjector {
 
     return baseHref + "/" + currentVersion.slug + "/" + target + ".html";
   }
+
+  @Override
+  final boolean $isCurrentKey(String key) { return Objects.equals(currentKey, key); }
 
   @Override
   final boolean $isNext() { return currentKey.startsWith("next/"); }

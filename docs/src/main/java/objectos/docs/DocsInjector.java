@@ -31,6 +31,8 @@ abstract class DocsInjector {
 
   abstract String $ilink(String target);
 
+  abstract boolean $isCurrentKey(String key);
+
   abstract boolean $isNext();
 
   abstract NextBanner $nextBanner();
