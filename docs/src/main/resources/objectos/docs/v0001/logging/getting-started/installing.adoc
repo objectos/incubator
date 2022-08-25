@@ -1,4 +1,5 @@
 = Installing Objectos Logging
+:toc-title: Installing
 
 In order to use Objectos Logging in your Java project you need to have it
 installed in your system.

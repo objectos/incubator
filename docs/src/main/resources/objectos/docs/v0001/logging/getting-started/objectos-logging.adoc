@@ -1,4 +1,5 @@
 = Logging with Objectos Logging
+:toc-title: Logging
 
 In this section we will give you an overview of how Objectos Logging approaches
 logging.

@@ -32,7 +32,7 @@ final class DocsTopBar extends AbstractFragment implements Docs.TopBar {
   @Override
   protected final void definition() {
     header(
-      BorderColor.gray300,
+      BorderColor.slate200,
       BorderBottom.v1,
       Flex.none,
       Height.v16,

@@ -17,7 +17,6 @@ package objectos.docs;
 
 import static java.lang.System.out;
 
-import br.com.objectos.css.framework.Framework;
 import br.com.objectos.css.sheet.StyleSheet;
 import br.com.objectos.css.sheet.StyleSheetWriter;
 import br.com.objectos.html.tmpl.AbstractFragment;
@@ -70,7 +69,7 @@ public final class Docs extends DocsInjector {
 
   private final StyleClassSet styleClassSet = new StyleClassSet();
 
-  private final StyleSheet styleSheet = new Framework();
+  private final StyleSheet styleSheet = new DocsCss();
 
   private final StyleSheetWriter styleSheetWriter = StyleSheetWriter.ofPretty();
 

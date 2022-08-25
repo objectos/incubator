@@ -15,4 +15,4 @@
  */
 package objectos.docs;
 
-record DocumentTitle(String html, String plain) {}
+record DocumentTitle(String html, String plain, String toc) {}

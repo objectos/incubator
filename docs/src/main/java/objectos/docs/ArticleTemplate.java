@@ -41,6 +41,7 @@ import br.com.objectos.css.select.ClassSelector;
 import br.com.objectos.css.sheet.StyleSheet;
 import br.com.objectos.html.element.ElementName;
 import br.com.objectos.html.element.StandardElementName;
+import br.com.objectos.html.spi.type.AValue;
 import objectos.docs.style.SyntaxCss;
 
 final class ArticleTemplate extends DocsTemplate implements LanguageRenderer.Output {
@@ -170,7 +171,7 @@ final class ArticleTemplate extends DocsTemplate implements LanguageRenderer.Out
         MinHeight.full,
 
         nav(
-          BorderColor.md.gray300,
+          BorderColor.md.slate200,
           BorderRight.md.v1,
           Display.hidden,
           Display.md.block,
@@ -182,7 +183,7 @@ final class ArticleTemplate extends DocsTemplate implements LanguageRenderer.Out
           PaddingTop.v06,
           TextColor.stone800,
           Width.md.v56,
-          Width.lg.v72,
+          DocsCss.LG_WIDTH_70,
 
           f(this::_leftBar)
         ),
@@ -215,127 +216,34 @@ final class ArticleTemplate extends DocsTemplate implements LanguageRenderer.Out
     switch (version) {
       case NEXT -> {
         ul(
-          li0("next/index"),
-
-          li(
-            h2("Introduction"),
-
-            ul(
-              li0("next/intro/index"),
-              li0("next/intro/overview"),
-              li0("next/intro/install")
-            )
-          ),
-
-          li(
-            h2("Objectos Lang"),
-
-            ul(
-              li0("next/objectos-lang/index"),
-              li0("next/objectos-lang/Check"),
-              li0("next/objectos-lang/Equals"),
-              li0("next/objectos-lang/HashCode"),
-              li0("next/objectos-lang/ToString"),
-
-              li(
-                h3("Note sink API"),
-
-                li0("next/objectos-lang/note-sink-api/index"),
-                li0("next/objectos-lang/note-sink-api/creating-notes"),
-                li0("next/objectos-lang/note-sink-api/the-note-sink-interface"),
-                li0("next/objectos-lang/note-sink-api/the-no-op-note-sink")
-              )
-            )
-          ),
-
-          li(
-            h2("Release Notes"),
-
-            ul(
-              li0("next/relnotes/0.2.0"),
-              li0("next/relnotes/0.1.0")
-            )
-          )
-        );
-      }
-
-      case V0_2_0 -> {
-        ul(
-          li0("v0002/index"),
-
-          li(
-            h2("Introduction"),
-
-            ul(
-              li0("v0002/intro/index"),
-              li0("v0002/intro/overview"),
-              li0("v0002/intro/install")
-            )
-          ),
-
-          li(
-            h2("Objectos Lang"),
-
-            ul(
-              li0("v0002/objectos-lang/index"),
-              li0("v0002/objectos-lang/Check"),
-              li0("v0002/objectos-lang/Equals"),
-              li0("v0002/objectos-lang/HashCode"),
-              li0("v0002/objectos-lang/ToString"),
-
-              li(
-                h3("Note sink API"),
-
-                li0("v0002/objectos-lang/note-sink-api/index"),
-                li0("v0002/objectos-lang/note-sink-api/creating-notes"),
-                li0("v0002/objectos-lang/note-sink-api/the-note-sink-interface"),
-                li0("v0002/objectos-lang/note-sink-api/the-no-op-note-sink")
-              )
-            )
-          ),
-
-          li(
-            h2("Release Notes"),
-
-            ul(
-              li0("v0002/relnotes/0.2.0"),
-              li0("v0002/relnotes/0.1.0")
-            )
-          )
-        );
-      }
-
-      case V0_1_0 -> {
-        ul(
-          li0("v0001/index"),
+          li(a0("next/index")),
 
           li(
             h2v0("Introduction"),
 
             ul(
-              li0("v0001/intro/index"),
-              li0("v0001/intro/overview"),
-              li0("v0001/intro/install")
+              li(a0("next/intro/overview")),
+              li(a0("next/intro/install"))
             )
           ),
 
           li(
-            h2v0("Objectos Logging"),
+            h2v0("Objectos Lang"),
 
             ul(
-              li0("v0001/logging/index"),
+              li(a0("next/objectos-lang/index")),
+              li(a0("next/objectos-lang/Check")),
+              li(a0("next/objectos-lang/Equals")),
+              li(a0("next/objectos-lang/HashCode")),
+              li(a0("next/objectos-lang/ToString")),
 
-              li0("v0001/logging/getting-started/index"),
-              li0("v0001/logging/getting-started/about-logging"),
-              li0("v0001/logging/getting-started/objectos-logging"),
-              li0("v0001/logging/getting-started/installing"),
-              li0("v0001/logging/getting-started/quick-start"),
-
-              li0("v0001/logging/logging-guide/index"),
-              li0("v0001/logging/logging-guide/events"),
-              li0("v0001/logging/logging-guide/logger"),
-
-              li0("v0001/logging/no-op-logger/index")
+              li(a0("next/objectos-lang/note-sink-api/index"),
+                ul(
+                  li(a1("next/objectos-lang/note-sink-api/creating-notes")),
+                  li(a1("next/objectos-lang/note-sink-api/the-note-sink-interface")),
+                  li(a1("next/objectos-lang/note-sink-api/the-no-op-note-sink"))
+                )
+              )
             )
           ),
 
@@ -343,7 +251,102 @@ final class ArticleTemplate extends DocsTemplate implements LanguageRenderer.Out
             h2v0("Release Notes"),
 
             ul(
-              li0("v0001/relnotes/0.1.0")
+              li(a0("next/relnotes/0.2.0")),
+              li(a0("next/relnotes/0.1.0"))
+            )
+          )
+        );
+      }
+
+      case V0_2_0 -> {
+        ul(
+          li(a0("v0002/index")),
+
+          li(
+            h2v0("Introduction"),
+
+            ul(
+              li(a0("v0002/intro/overview")),
+              li(a0("v0002/intro/install"))
+            )
+          ),
+
+          li(
+            h2v0("Objectos Lang"),
+
+            ul(
+              li(a0("v0002/objectos-lang/index")),
+              li(a0("v0002/objectos-lang/Check")),
+              li(a0("v0002/objectos-lang/Equals")),
+              li(a0("v0002/objectos-lang/HashCode")),
+              li(a0("v0002/objectos-lang/ToString")),
+
+              li(a0("v0002/objectos-lang/note-sink-api/index"),
+
+                ul(
+                  li(a1("v0002/objectos-lang/note-sink-api/creating-notes")),
+                  li(a1("v0002/objectos-lang/note-sink-api/the-note-sink-interface")),
+                  li(a1("v0002/objectos-lang/note-sink-api/the-no-op-note-sink"))
+                )
+              )
+            )
+          ),
+
+          li(
+            h2v0("Release Notes"),
+
+            ul(
+              li(a0("v0002/relnotes/0.2.0")),
+              li(a0("v0002/relnotes/0.1.0"))
+            )
+          )
+        );
+      }
+
+      case V0_1_0 -> {
+        ul(
+          li(a0("v0001/index")),
+
+          li(
+            h2v0("Introduction"),
+
+            ul(
+              li(a0("v0001/intro/overview")),
+              li(a0("v0001/intro/install"))
+            )
+          ),
+
+          li(
+            h2v0("Objectos Logging"),
+
+            ul(
+              li(a0("v0001/logging/index")),
+
+              li(a0("v0001/logging/getting-started/index"),
+                ul(
+                  li(a1("v0001/logging/getting-started/about-logging")),
+                  li(a1("v0001/logging/getting-started/objectos-logging")),
+                  li(a1("v0001/logging/getting-started/installing")),
+                  li(a1("v0001/logging/getting-started/quick-start"))
+                )
+              ),
+
+              li(a0("v0001/logging/logging-guide/index"),
+                ul(
+                  li(a1("v0001/logging/logging-guide/events")),
+                  li(a1("v0001/logging/logging-guide/logger"))
+                )
+              ),
+
+              li(a0("v0001/logging/no-op-logger/index"))
+            )
+          ),
+
+          li(
+            h2v0("Release Notes"),
+
+            ul(
+              li(a0("v0001/relnotes/0.1.0"))
             )
           )
         );
@@ -353,19 +356,15 @@ final class ArticleTemplate extends DocsTemplate implements LanguageRenderer.Out
     }
   }
 
-  private ElementName h2v0(String text) {
-    return h2(
-      FontWeight.semibold,
-      PaddingTop.v06,
-      PaddingX.v04,
-      TextColor.black,
-      TextTransform.uppercase,
-
-      t(text)
-    );
+  private ElementName a0(String key) {
+    return aimpl(key, noop());
   }
 
-  private ElementName li0(String key) {
+  private ElementName a1(String key) {
+    return aimpl(key, PaddingLeft.v06);
+  }
+
+  private ElementName aimpl(String key, AValue level) {
     var selected = injector.$isCurrentKey(key);
 
     var bg = selected ? BackgroundColor.slate200 : BackgroundColor.hover.gray100;
@@ -373,17 +372,28 @@ final class ArticleTemplate extends DocsTemplate implements LanguageRenderer.Out
 
     var href = injector.$href(key);
 
-    var text = injector.$title(key).html();
+    var text = injector.$title(key).toc();
 
-    return li(
-      a(
-        bg, fc,
-        PaddingX.v04,
-        PaddingY.v01,
-        Display.flex,
+    return a(
+      bg, fc, level,
+      PaddingX.v03,
+      PaddingY.v01,
+      Display.block,
 
-        href(href), raw(text)
-      )
+      href(href), raw(text)
+    );
+  }
+
+  private ElementName h2v0(String text) {
+    return h2(
+      FontWeight.semibold,
+      PaddingBottom.v01,
+      PaddingTop.v06,
+      PaddingX.v03,
+      TextColor.black,
+      TextTransform.uppercase,
+
+      t(text)
     );
   }
 

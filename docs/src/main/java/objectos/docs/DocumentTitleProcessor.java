@@ -23,6 +23,8 @@ final class DocumentTitleProcessor extends SimpleAsciiDocProcessor {
 
   private final StringBuilder plain = new StringBuilder();
 
+  private DocumentAttributes attributes;
+
   private boolean write;
 
   @Override
@@ -40,6 +42,8 @@ final class DocumentTitleProcessor extends SimpleAsciiDocProcessor {
     html.setLength(0);
 
     plain.setLength(0);
+
+    attributes = attr;
   }
 
   @Override
@@ -81,7 +85,13 @@ final class DocumentTitleProcessor extends SimpleAsciiDocProcessor {
   }
 
   final DocumentTitle create() {
-    return new DocumentTitle(html.toString(), plain.toString());
+    var altTitle = html.toString();
+
+    return new DocumentTitle(
+      html.toString(),
+      plain.toString(),
+      attributes.getOrDefault("toc-title", altTitle)
+    );
   }
 
   private void tag(String string) {

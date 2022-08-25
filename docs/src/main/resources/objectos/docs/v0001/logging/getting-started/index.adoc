@@ -1,4 +1,5 @@
 = Getting started with Objectos Logging
+:toc-title: Getting started
 
 Welcome to Objectos Logging.
 

@@ -1,4 +1,5 @@
 = Objectos Lang
+:toc-title: Overview
 
 Objectos Lang provides:
 

@@ -1,4 +1,5 @@
 = Documentation for Objectos developers
+:toc-title: Home
 
 Welcome to the Objectos documentation.
 Here you will find tutorials, topic guides, how-to guides and the reference manuals of individual libraries.

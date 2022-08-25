@@ -1,4 +1,5 @@
 = Objectos 0.2.0 release notes
+:toc-title: Objectos 0.2.0
 
 _June 13, 2022_
 
