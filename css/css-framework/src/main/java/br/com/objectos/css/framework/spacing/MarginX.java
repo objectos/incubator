@@ -57,7 +57,7 @@ public final class MarginX extends AbstractStyleSheet {
 
   public static final ClassSelector v0 = Css.randomDot(5);
 
-  public static final ClassSelector v0_5 = Css.randomDot(5);
+  public static final ClassSelector v00_5 = Css.randomDot(5);
 
   public static final ClassSelector v01 = Css.randomDot(5);
 
@@ -117,6 +117,8 @@ public final class MarginX extends AbstractStyleSheet {
 
   public static final ClassSelector v64 = Css.randomDot(5);
 
+  public static final ClassSelector v68 = Css.randomDot(5);
+
   public static final ClassSelector v72 = Css.randomDot(5);
 
   public static final ClassSelector v80 = Css.randomDot(5);
@@ -146,7 +148,7 @@ public final class MarginX extends AbstractStyleSheet {
         marginLeft(zero())
     );
     style(
-        v0_5,
+        v00_5,
         marginRight(rem(0.125)),
         marginLeft(rem(0.125))
     );
@@ -296,6 +298,11 @@ public final class MarginX extends AbstractStyleSheet {
         marginLeft(rem(16))
     );
     style(
+        v68,
+        marginRight(rem(17)),
+        marginLeft(rem(17))
+    );
+    style(
         v72,
         marginRight(rem(18)),
         marginLeft(rem(18))
@@ -338,7 +345,7 @@ public final class MarginX extends AbstractStyleSheet {
         ),
 
         style(
-            sm.v0_5,
+            sm.v00_5,
             marginRight(rem(0.125)),
             marginLeft(rem(0.125))
         ),
@@ -518,6 +525,12 @@ public final class MarginX extends AbstractStyleSheet {
         ),
 
         style(
+            sm.v68,
+            marginRight(rem(17)),
+            marginLeft(rem(17))
+        ),
+
+        style(
             sm.v72,
             marginRight(rem(18)),
             marginLeft(rem(18))
@@ -563,7 +576,7 @@ public final class MarginX extends AbstractStyleSheet {
         ),
 
         style(
-            md.v0_5,
+            md.v00_5,
             marginRight(rem(0.125)),
             marginLeft(rem(0.125))
         ),
@@ -743,6 +756,12 @@ public final class MarginX extends AbstractStyleSheet {
         ),
 
         style(
+            md.v68,
+            marginRight(rem(17)),
+            marginLeft(rem(17))
+        ),
+
+        style(
             md.v72,
             marginRight(rem(18)),
             marginLeft(rem(18))
@@ -788,7 +807,7 @@ public final class MarginX extends AbstractStyleSheet {
         ),
 
         style(
-            lg.v0_5,
+            lg.v00_5,
             marginRight(rem(0.125)),
             marginLeft(rem(0.125))
         ),
@@ -968,6 +987,12 @@ public final class MarginX extends AbstractStyleSheet {
         ),
 
         style(
+            lg.v68,
+            marginRight(rem(17)),
+            marginLeft(rem(17))
+        ),
+
+        style(
             lg.v72,
             marginRight(rem(18)),
             marginLeft(rem(18))
@@ -1013,7 +1038,7 @@ public final class MarginX extends AbstractStyleSheet {
         ),
 
         style(
-            xl.v0_5,
+            xl.v00_5,
             marginRight(rem(0.125)),
             marginLeft(rem(0.125))
         ),
@@ -1193,6 +1218,12 @@ public final class MarginX extends AbstractStyleSheet {
         ),
 
         style(
+            xl.v68,
+            marginRight(rem(17)),
+            marginLeft(rem(17))
+        ),
+
+        style(
             xl.v72,
             marginRight(rem(18)),
             marginLeft(rem(18))
@@ -1238,7 +1269,7 @@ public final class MarginX extends AbstractStyleSheet {
         ),
 
         style(
-            x2l.v0_5,
+            x2l.v00_5,
             marginRight(rem(0.125)),
             marginLeft(rem(0.125))
         ),
@@ -1418,6 +1449,12 @@ public final class MarginX extends AbstractStyleSheet {
         ),
 
         style(
+            x2l.v68,
+            marginRight(rem(17)),
+            marginLeft(rem(17))
+        ),
+
+        style(
             x2l.v72,
             marginRight(rem(18)),
             marginLeft(rem(18))
@@ -1447,7 +1484,7 @@ public final class MarginX extends AbstractStyleSheet {
 
     ClassSelector v0 = Css.randomDot(5);
 
-    ClassSelector v0_5 = Css.randomDot(5);
+    ClassSelector v00_5 = Css.randomDot(5);
 
     ClassSelector v01 = Css.randomDot(5);
 
@@ -1506,6 +1543,8 @@ public final class MarginX extends AbstractStyleSheet {
     ClassSelector v60 = Css.randomDot(5);
 
     ClassSelector v64 = Css.randomDot(5);
+
+    ClassSelector v68 = Css.randomDot(5);
 
     ClassSelector v72 = Css.randomDot(5);
 
@@ -1525,7 +1564,7 @@ public final class MarginX extends AbstractStyleSheet {
 
     ClassSelector v0 = Css.randomDot(5);
 
-    ClassSelector v0_5 = Css.randomDot(5);
+    ClassSelector v00_5 = Css.randomDot(5);
 
     ClassSelector v01 = Css.randomDot(5);
 
@@ -1584,6 +1623,8 @@ public final class MarginX extends AbstractStyleSheet {
     ClassSelector v60 = Css.randomDot(5);
 
     ClassSelector v64 = Css.randomDot(5);
+
+    ClassSelector v68 = Css.randomDot(5);
 
     ClassSelector v72 = Css.randomDot(5);
 
@@ -1603,7 +1644,7 @@ public final class MarginX extends AbstractStyleSheet {
 
     ClassSelector v0 = Css.randomDot(5);
 
-    ClassSelector v0_5 = Css.randomDot(5);
+    ClassSelector v00_5 = Css.randomDot(5);
 
     ClassSelector v01 = Css.randomDot(5);
 
@@ -1662,6 +1703,8 @@ public final class MarginX extends AbstractStyleSheet {
     ClassSelector v60 = Css.randomDot(5);
 
     ClassSelector v64 = Css.randomDot(5);
+
+    ClassSelector v68 = Css.randomDot(5);
 
     ClassSelector v72 = Css.randomDot(5);
 
@@ -1681,7 +1724,7 @@ public final class MarginX extends AbstractStyleSheet {
 
     ClassSelector v0 = Css.randomDot(5);
 
-    ClassSelector v0_5 = Css.randomDot(5);
+    ClassSelector v00_5 = Css.randomDot(5);
 
     ClassSelector v01 = Css.randomDot(5);
 
@@ -1740,6 +1783,8 @@ public final class MarginX extends AbstractStyleSheet {
     ClassSelector v60 = Css.randomDot(5);
 
     ClassSelector v64 = Css.randomDot(5);
+
+    ClassSelector v68 = Css.randomDot(5);
 
     ClassSelector v72 = Css.randomDot(5);
 
@@ -1759,7 +1804,7 @@ public final class MarginX extends AbstractStyleSheet {
 
     ClassSelector v0 = Css.randomDot(5);
 
-    ClassSelector v0_5 = Css.randomDot(5);
+    ClassSelector v00_5 = Css.randomDot(5);
 
     ClassSelector v01 = Css.randomDot(5);
 
@@ -1818,6 +1863,8 @@ public final class MarginX extends AbstractStyleSheet {
     ClassSelector v60 = Css.randomDot(5);
 
     ClassSelector v64 = Css.randomDot(5);
+
+    ClassSelector v68 = Css.randomDot(5);
 
     ClassSelector v72 = Css.randomDot(5);
 

@@ -371,7 +371,7 @@ public class FrameworkConfiguration extends AbstractConfiguration {
       v("px", px(1)),
       v("zero", Zero.INSTANCE),
       v("0", Zero.INSTANCE),
-      v("0_5", rem(0.125)),
+      v("00_5", rem(0.125)),
       v("01", rem(0.25)),
       v("01_5", rem(0.375)),
       v("02", rem(0.5)),
@@ -401,6 +401,7 @@ public class FrameworkConfiguration extends AbstractConfiguration {
       v("56", rem(14)),
       v("60", rem(15)),
       v("64", rem(16)),
+      v("68", rem(17)),
       v("72", rem(18)),
       v("80", rem(20)),
       v("96", rem(24))

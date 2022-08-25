@@ -57,7 +57,7 @@ public final class Height extends AbstractStyleSheet {
 
   public static final ClassSelector v0 = Css.randomDot(5);
 
-  public static final ClassSelector v0_5 = Css.randomDot(5);
+  public static final ClassSelector v00_5 = Css.randomDot(5);
 
   public static final ClassSelector v01 = Css.randomDot(5);
 
@@ -117,6 +117,8 @@ public final class Height extends AbstractStyleSheet {
 
   public static final ClassSelector v64 = Css.randomDot(5);
 
+  public static final ClassSelector v68 = Css.randomDot(5);
+
   public static final ClassSelector v72 = Css.randomDot(5);
 
   public static final ClassSelector v80 = Css.randomDot(5);
@@ -146,7 +148,7 @@ public final class Height extends AbstractStyleSheet {
         height(zero())
     );
     style(
-        v0_5,
+        v00_5,
         height(rem(0.125))
     );
     style(
@@ -266,6 +268,10 @@ public final class Height extends AbstractStyleSheet {
         height(rem(16))
     );
     style(
+        v68,
+        height(rem(17))
+    );
+    style(
         v72,
         height(rem(18))
     );
@@ -309,7 +315,7 @@ public final class Height extends AbstractStyleSheet {
         ),
 
         style(
-            sm.v0_5,
+            sm.v00_5,
             height(rem(0.125))
         ),
 
@@ -459,6 +465,11 @@ public final class Height extends AbstractStyleSheet {
         ),
 
         style(
+            sm.v68,
+            height(rem(17))
+        ),
+
+        style(
             sm.v72,
             height(rem(18))
         ),
@@ -507,7 +518,7 @@ public final class Height extends AbstractStyleSheet {
         ),
 
         style(
-            md.v0_5,
+            md.v00_5,
             height(rem(0.125))
         ),
 
@@ -657,6 +668,11 @@ public final class Height extends AbstractStyleSheet {
         ),
 
         style(
+            md.v68,
+            height(rem(17))
+        ),
+
+        style(
             md.v72,
             height(rem(18))
         ),
@@ -705,7 +721,7 @@ public final class Height extends AbstractStyleSheet {
         ),
 
         style(
-            lg.v0_5,
+            lg.v00_5,
             height(rem(0.125))
         ),
 
@@ -855,6 +871,11 @@ public final class Height extends AbstractStyleSheet {
         ),
 
         style(
+            lg.v68,
+            height(rem(17))
+        ),
+
+        style(
             lg.v72,
             height(rem(18))
         ),
@@ -903,7 +924,7 @@ public final class Height extends AbstractStyleSheet {
         ),
 
         style(
-            xl.v0_5,
+            xl.v00_5,
             height(rem(0.125))
         ),
 
@@ -1053,6 +1074,11 @@ public final class Height extends AbstractStyleSheet {
         ),
 
         style(
+            xl.v68,
+            height(rem(17))
+        ),
+
+        style(
             xl.v72,
             height(rem(18))
         ),
@@ -1101,7 +1127,7 @@ public final class Height extends AbstractStyleSheet {
         ),
 
         style(
-            x2l.v0_5,
+            x2l.v00_5,
             height(rem(0.125))
         ),
 
@@ -1251,6 +1277,11 @@ public final class Height extends AbstractStyleSheet {
         ),
 
         style(
+            x2l.v68,
+            height(rem(17))
+        ),
+
+        style(
             x2l.v72,
             height(rem(18))
         ),
@@ -1287,7 +1318,7 @@ public final class Height extends AbstractStyleSheet {
 
     ClassSelector v0 = Css.randomDot(5);
 
-    ClassSelector v0_5 = Css.randomDot(5);
+    ClassSelector v00_5 = Css.randomDot(5);
 
     ClassSelector v01 = Css.randomDot(5);
 
@@ -1346,6 +1377,8 @@ public final class Height extends AbstractStyleSheet {
     ClassSelector v60 = Css.randomDot(5);
 
     ClassSelector v64 = Css.randomDot(5);
+
+    ClassSelector v68 = Css.randomDot(5);
 
     ClassSelector v72 = Css.randomDot(5);
 
@@ -1369,7 +1402,7 @@ public final class Height extends AbstractStyleSheet {
 
     ClassSelector v0 = Css.randomDot(5);
 
-    ClassSelector v0_5 = Css.randomDot(5);
+    ClassSelector v00_5 = Css.randomDot(5);
 
     ClassSelector v01 = Css.randomDot(5);
 
@@ -1428,6 +1461,8 @@ public final class Height extends AbstractStyleSheet {
     ClassSelector v60 = Css.randomDot(5);
 
     ClassSelector v64 = Css.randomDot(5);
+
+    ClassSelector v68 = Css.randomDot(5);
 
     ClassSelector v72 = Css.randomDot(5);
 
@@ -1451,7 +1486,7 @@ public final class Height extends AbstractStyleSheet {
 
     ClassSelector v0 = Css.randomDot(5);
 
-    ClassSelector v0_5 = Css.randomDot(5);
+    ClassSelector v00_5 = Css.randomDot(5);
 
     ClassSelector v01 = Css.randomDot(5);
 
@@ -1510,6 +1545,8 @@ public final class Height extends AbstractStyleSheet {
     ClassSelector v60 = Css.randomDot(5);
 
     ClassSelector v64 = Css.randomDot(5);
+
+    ClassSelector v68 = Css.randomDot(5);
 
     ClassSelector v72 = Css.randomDot(5);
 
@@ -1533,7 +1570,7 @@ public final class Height extends AbstractStyleSheet {
 
     ClassSelector v0 = Css.randomDot(5);
 
-    ClassSelector v0_5 = Css.randomDot(5);
+    ClassSelector v00_5 = Css.randomDot(5);
 
     ClassSelector v01 = Css.randomDot(5);
 
@@ -1592,6 +1629,8 @@ public final class Height extends AbstractStyleSheet {
     ClassSelector v60 = Css.randomDot(5);
 
     ClassSelector v64 = Css.randomDot(5);
+
+    ClassSelector v68 = Css.randomDot(5);
 
     ClassSelector v72 = Css.randomDot(5);
 
@@ -1615,7 +1654,7 @@ public final class Height extends AbstractStyleSheet {
 
     ClassSelector v0 = Css.randomDot(5);
 
-    ClassSelector v0_5 = Css.randomDot(5);
+    ClassSelector v00_5 = Css.randomDot(5);
 
     ClassSelector v01 = Css.randomDot(5);
 
@@ -1674,6 +1713,8 @@ public final class Height extends AbstractStyleSheet {
     ClassSelector v60 = Css.randomDot(5);
 
     ClassSelector v64 = Css.randomDot(5);
+
+    ClassSelector v68 = Css.randomDot(5);
 
     ClassSelector v72 = Css.randomDot(5);
 

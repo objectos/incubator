@@ -54,7 +54,7 @@ public final class PaddingY extends AbstractStyleSheet {
 
   public static final ClassSelector v0 = Css.randomDot(5);
 
-  public static final ClassSelector v0_5 = Css.randomDot(5);
+  public static final ClassSelector v00_5 = Css.randomDot(5);
 
   public static final ClassSelector v01 = Css.randomDot(5);
 
@@ -114,6 +114,8 @@ public final class PaddingY extends AbstractStyleSheet {
 
   public static final ClassSelector v64 = Css.randomDot(5);
 
+  public static final ClassSelector v68 = Css.randomDot(5);
+
   public static final ClassSelector v72 = Css.randomDot(5);
 
   public static final ClassSelector v80 = Css.randomDot(5);
@@ -138,7 +140,7 @@ public final class PaddingY extends AbstractStyleSheet {
         paddingBottom(zero())
     );
     style(
-        v0_5,
+        v00_5,
         paddingTop(rem(0.125)),
         paddingBottom(rem(0.125))
     );
@@ -288,6 +290,11 @@ public final class PaddingY extends AbstractStyleSheet {
         paddingBottom(rem(16))
     );
     style(
+        v68,
+        paddingTop(rem(17)),
+        paddingBottom(rem(17))
+    );
+    style(
         v72,
         paddingTop(rem(18)),
         paddingBottom(rem(18))
@@ -324,7 +331,7 @@ public final class PaddingY extends AbstractStyleSheet {
         ),
 
         style(
-            sm.v0_5,
+            sm.v00_5,
             paddingTop(rem(0.125)),
             paddingBottom(rem(0.125))
         ),
@@ -504,6 +511,12 @@ public final class PaddingY extends AbstractStyleSheet {
         ),
 
         style(
+            sm.v68,
+            paddingTop(rem(17)),
+            paddingBottom(rem(17))
+        ),
+
+        style(
             sm.v72,
             paddingTop(rem(18)),
             paddingBottom(rem(18))
@@ -543,7 +556,7 @@ public final class PaddingY extends AbstractStyleSheet {
         ),
 
         style(
-            md.v0_5,
+            md.v00_5,
             paddingTop(rem(0.125)),
             paddingBottom(rem(0.125))
         ),
@@ -723,6 +736,12 @@ public final class PaddingY extends AbstractStyleSheet {
         ),
 
         style(
+            md.v68,
+            paddingTop(rem(17)),
+            paddingBottom(rem(17))
+        ),
+
+        style(
             md.v72,
             paddingTop(rem(18)),
             paddingBottom(rem(18))
@@ -762,7 +781,7 @@ public final class PaddingY extends AbstractStyleSheet {
         ),
 
         style(
-            lg.v0_5,
+            lg.v00_5,
             paddingTop(rem(0.125)),
             paddingBottom(rem(0.125))
         ),
@@ -942,6 +961,12 @@ public final class PaddingY extends AbstractStyleSheet {
         ),
 
         style(
+            lg.v68,
+            paddingTop(rem(17)),
+            paddingBottom(rem(17))
+        ),
+
+        style(
             lg.v72,
             paddingTop(rem(18)),
             paddingBottom(rem(18))
@@ -981,7 +1006,7 @@ public final class PaddingY extends AbstractStyleSheet {
         ),
 
         style(
-            xl.v0_5,
+            xl.v00_5,
             paddingTop(rem(0.125)),
             paddingBottom(rem(0.125))
         ),
@@ -1161,6 +1186,12 @@ public final class PaddingY extends AbstractStyleSheet {
         ),
 
         style(
+            xl.v68,
+            paddingTop(rem(17)),
+            paddingBottom(rem(17))
+        ),
+
+        style(
             xl.v72,
             paddingTop(rem(18)),
             paddingBottom(rem(18))
@@ -1200,7 +1231,7 @@ public final class PaddingY extends AbstractStyleSheet {
         ),
 
         style(
-            x2l.v0_5,
+            x2l.v00_5,
             paddingTop(rem(0.125)),
             paddingBottom(rem(0.125))
         ),
@@ -1380,6 +1411,12 @@ public final class PaddingY extends AbstractStyleSheet {
         ),
 
         style(
+            x2l.v68,
+            paddingTop(rem(17)),
+            paddingBottom(rem(17))
+        ),
+
+        style(
             x2l.v72,
             paddingTop(rem(18)),
             paddingBottom(rem(18))
@@ -1407,7 +1444,7 @@ public final class PaddingY extends AbstractStyleSheet {
 
     ClassSelector v0 = Css.randomDot(5);
 
-    ClassSelector v0_5 = Css.randomDot(5);
+    ClassSelector v00_5 = Css.randomDot(5);
 
     ClassSelector v01 = Css.randomDot(5);
 
@@ -1466,6 +1503,8 @@ public final class PaddingY extends AbstractStyleSheet {
     ClassSelector v60 = Css.randomDot(5);
 
     ClassSelector v64 = Css.randomDot(5);
+
+    ClassSelector v68 = Css.randomDot(5);
 
     ClassSelector v72 = Css.randomDot(5);
 
@@ -1483,7 +1522,7 @@ public final class PaddingY extends AbstractStyleSheet {
 
     ClassSelector v0 = Css.randomDot(5);
 
-    ClassSelector v0_5 = Css.randomDot(5);
+    ClassSelector v00_5 = Css.randomDot(5);
 
     ClassSelector v01 = Css.randomDot(5);
 
@@ -1542,6 +1581,8 @@ public final class PaddingY extends AbstractStyleSheet {
     ClassSelector v60 = Css.randomDot(5);
 
     ClassSelector v64 = Css.randomDot(5);
+
+    ClassSelector v68 = Css.randomDot(5);
 
     ClassSelector v72 = Css.randomDot(5);
 
@@ -1559,7 +1600,7 @@ public final class PaddingY extends AbstractStyleSheet {
 
     ClassSelector v0 = Css.randomDot(5);
 
-    ClassSelector v0_5 = Css.randomDot(5);
+    ClassSelector v00_5 = Css.randomDot(5);
 
     ClassSelector v01 = Css.randomDot(5);
 
@@ -1618,6 +1659,8 @@ public final class PaddingY extends AbstractStyleSheet {
     ClassSelector v60 = Css.randomDot(5);
 
     ClassSelector v64 = Css.randomDot(5);
+
+    ClassSelector v68 = Css.randomDot(5);
 
     ClassSelector v72 = Css.randomDot(5);
 
@@ -1635,7 +1678,7 @@ public final class PaddingY extends AbstractStyleSheet {
 
     ClassSelector v0 = Css.randomDot(5);
 
-    ClassSelector v0_5 = Css.randomDot(5);
+    ClassSelector v00_5 = Css.randomDot(5);
 
     ClassSelector v01 = Css.randomDot(5);
 
@@ -1694,6 +1737,8 @@ public final class PaddingY extends AbstractStyleSheet {
     ClassSelector v60 = Css.randomDot(5);
 
     ClassSelector v64 = Css.randomDot(5);
+
+    ClassSelector v68 = Css.randomDot(5);
 
     ClassSelector v72 = Css.randomDot(5);
 
@@ -1711,7 +1756,7 @@ public final class PaddingY extends AbstractStyleSheet {
 
     ClassSelector v0 = Css.randomDot(5);
 
-    ClassSelector v0_5 = Css.randomDot(5);
+    ClassSelector v00_5 = Css.randomDot(5);
 
     ClassSelector v01 = Css.randomDot(5);
 
@@ -1770,6 +1815,8 @@ public final class PaddingY extends AbstractStyleSheet {
     ClassSelector v60 = Css.randomDot(5);
 
     ClassSelector v64 = Css.randomDot(5);
+
+    ClassSelector v68 = Css.randomDot(5);
 
     ClassSelector v72 = Css.randomDot(5);
 
