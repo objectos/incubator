@@ -17,6 +17,7 @@ package objectos.docs;
 
 import br.com.objectos.css.framework.border.BorderBottom;
 import br.com.objectos.css.framework.border.BorderColor;
+import br.com.objectos.css.framework.flexbox.Flex;
 import br.com.objectos.css.framework.sizing.Height;
 import br.com.objectos.css.framework.sizing.MaxWidth;
 import br.com.objectos.css.framework.spacing.MarginX;
@@ -33,6 +34,7 @@ final class DocsTopBar extends AbstractFragment implements Docs.TopBar {
     header(
       BorderColor.gray300,
       BorderBottom.v1,
+      Flex.none,
       Height.v16,
       PaddingY.v02,
 

@@ -18,9 +18,12 @@ package objectos.docs;
 import br.com.objectos.css.framework.background.BackgroundColor;
 import br.com.objectos.css.framework.border.BorderBottom;
 import br.com.objectos.css.framework.border.BorderColor;
+import br.com.objectos.css.framework.border.BorderRight;
 import br.com.objectos.css.framework.flexbox.Flex;
+import br.com.objectos.css.framework.flexbox.FlexGrow;
 import br.com.objectos.css.framework.layout.Display;
 import br.com.objectos.css.framework.sizing.MaxWidth;
+import br.com.objectos.css.framework.sizing.MinHeight;
 import br.com.objectos.css.framework.sizing.Width;
 import br.com.objectos.css.framework.spacing.MarginBottom;
 import br.com.objectos.css.framework.spacing.MarginX;
@@ -157,37 +160,43 @@ final class ArticleTemplate extends DocsTemplate implements LanguageRenderer.Out
 
   @Override
   final void main0() {
-    //    var nextBanner = injector.$nextBanner();
-
     div(
-      //    nextBanner.shouldRender() ? f(nextBanner) : noop(),
-      Display.flex,
-      MarginX.auto,
-      MaxWidth.screenX2l,
-      PaddingTop.v06,
+      FlexGrow.one,
 
-      nav(
-        Display.hidden,
-        Display.md.block,
-        Flex.md.none,
-        FontSize.small,
-        FontWeight.normal,
-        PaddingLeft.md.v02,
-        PaddingRight.md.v04,
-        TextColor.stone800,
-        Width.md.v56,
-        Width.lg.v72,
+      div(
+        Display.flex,
+        MarginX.auto,
+        MaxWidth.screenX2l,
+        MinHeight.full,
 
-        f(this::_leftBar)
-      ),
+        nav(
+          BorderColor.md.gray300,
+          BorderRight.md.v1,
+          Display.hidden,
+          Display.md.block,
+          Flex.md.none,
+          FontSize.small,
+          FontWeight.normal,
+          PaddingLeft.md.v02,
+          PaddingRight.md.v02,
+          PaddingTop.v06,
+          TextColor.stone800,
+          Width.md.v56,
+          Width.lg.v72,
 
-      main(
-        PaddingX.v04,
-        PaddingLeft.md.v0,
-        PaddingRight.md.v06,
+          f(this::_leftBar)
+        ),
 
-        article(
-          f(this::renderDocument)
+        main(
+          FlexGrow.one,
+          PaddingX.v04,
+          PaddingLeft.md.v0,
+          PaddingRight.md.v06,
+          PaddingTop.v06,
+
+          article(
+            f(this::renderDocument)
+          )
         )
       )
     );
@@ -359,7 +368,7 @@ final class ArticleTemplate extends DocsTemplate implements LanguageRenderer.Out
   private ElementName li0(String key) {
     var selected = injector.$isCurrentKey(key);
 
-    var bg = selected ? BackgroundColor.gray100 : noop();
+    var bg = selected ? BackgroundColor.slate200 : BackgroundColor.hover.gray100;
     var fc = selected ? TextColor.black : noop();
 
     var href = injector.$href(key);
@@ -370,7 +379,7 @@ final class ArticleTemplate extends DocsTemplate implements LanguageRenderer.Out
       a(
         bg, fc,
         PaddingX.v04,
-        PaddingY.v0_5,
+        PaddingY.v01,
         Display.flex,
 
         href(href), raw(text)

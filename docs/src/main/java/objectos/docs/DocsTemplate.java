@@ -15,6 +15,9 @@
  */
 package objectos.docs;
 
+import br.com.objectos.css.framework.flexbox.FlexDirection;
+import br.com.objectos.css.framework.layout.Display;
+import br.com.objectos.css.framework.sizing.MinHeight;
 import br.com.objectos.css.sheet.StyleSheet;
 import br.com.objectos.html.element.StandardElementName;
 import br.com.objectos.html.spi.type.Value;
@@ -219,6 +222,10 @@ abstract class DocsTemplate extends AbstractTemplate implements AsciiDoc.Process
         f(this::head0)
       ),
       body(
+        Display.flex,
+        FlexDirection.column,
+        MinHeight.screen,
+
         f(injector.$topBar()),
 
         f(this::main0)
