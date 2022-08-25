@@ -144,7 +144,7 @@ final class InlineMacroTest extends AbstractAsciiDocTest {
         Code.SECTION_START, 1,
         Code.HEADING_START, 2,
         Code.TOKENS, 4, 7,
-        Code.HEADING_END,
+        Code.HEADING_END, 2,
 
         Code.ULIST_START,
         Code.LI_START,

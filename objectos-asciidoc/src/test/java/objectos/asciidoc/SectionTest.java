@@ -100,13 +100,13 @@ final class SectionTest extends AbstractAsciiDocTest {
 
       p1(
         Code.DOCUMENT_START,
-        Code.HEADING_START, 1, Code.TOKENS, 4, 7, Code.HEADING_END,
+        Code.HEADING_START, 1, Code.TOKENS, 4, 7, Code.HEADING_END, 1,
         Code.PREAMBLE_START,
         Code.PARAGRAPH_START, Code.TOKENS, 9, 12, Code.PARAGRAPH_END,
         Code.PREAMBLE_END,
 
         Code.SECTION_START, 1,
-        Code.HEADING_START, 2, Code.TOKENS, 18, 21, Code.HEADING_END,
+        Code.HEADING_START, 2, Code.TOKENS, 18, 21, Code.HEADING_END, 2,
         Code.PARAGRAPH_START, Code.TOKENS, 23, 26, Code.PARAGRAPH_END,
         Code.SECTION_END,
 
@@ -261,17 +261,17 @@ final class SectionTest extends AbstractAsciiDocTest {
 
       p1(
         Code.DOCUMENT_START,
-        Code.HEADING_START, 1, Code.TOKENS, 4, 7, Code.HEADING_END,
+        Code.HEADING_START, 1, Code.TOKENS, 4, 7, Code.HEADING_END, 1,
         Code.PREAMBLE_START,
         Code.PARAGRAPH_START, Code.TOKENS, 9, 12, Code.PARAGRAPH_END,
         Code.PREAMBLE_END,
 
         Code.SECTION_START, 1,
-        Code.HEADING_START, 2, Code.TOKENS, 18, 21, Code.HEADING_END,
+        Code.HEADING_START, 2, Code.TOKENS, 18, 21, Code.HEADING_END, 2,
         Code.PARAGRAPH_START, Code.TOKENS, 23, 26, Code.PARAGRAPH_END,
 
         Code.SECTION_START, 2,
-        Code.HEADING_START, 3, Code.TOKENS, 32, 35, Code.HEADING_END,
+        Code.HEADING_START, 3, Code.TOKENS, 32, 35, Code.HEADING_END, 3,
         Code.PARAGRAPH_START, Code.TOKENS, 37, 40, Code.PARAGRAPH_END,
 
         Code.SECTION_END,
@@ -378,7 +378,7 @@ final class SectionTest extends AbstractAsciiDocTest {
 
         Code.ATTR_POSITIONAL, 1, 2, 5,
         Code.SECTION_START, 1,
-        Code.HEADING_START, 2, Code.TOKENS, 12, 15, Code.HEADING_END,
+        Code.HEADING_START, 2, Code.TOKENS, 12, 15, Code.HEADING_END, 2,
         Code.PARAGRAPH_START, Code.TOKENS, 17, 20, Code.PARAGRAPH_END,
         Code.SECTION_END,
 
@@ -475,14 +475,14 @@ final class SectionTest extends AbstractAsciiDocTest {
       p1(
         Code.DOCUMENT_START,
         Code.SECTION_START, 1,
-        Code.HEADING_START, 2, Code.TOKENS, 4, 7, Code.HEADING_END,
+        Code.HEADING_START, 2, Code.TOKENS, 4, 7, Code.HEADING_END, 2,
         Code.ULIST_START,
         Code.LI_START, Code.TOKENS, 13, 16, Code.LI_END,
         Code.LI_START, Code.TOKENS, 21, 24, Code.LI_END,
         Code.ULIST_END,
         Code.SECTION_END,
         Code.SECTION_START, 1,
-        Code.HEADING_START, 2, Code.TOKENS, 30, 33, Code.HEADING_END,
+        Code.HEADING_START, 2, Code.TOKENS, 30, 33, Code.HEADING_END, 2,
         Code.PARAGRAPH_START, Code.TOKENS, 35, 38, Code.PARAGRAPH_END,
         Code.SECTION_END,
         Code.DOCUMENT_END
@@ -573,11 +573,11 @@ final class SectionTest extends AbstractAsciiDocTest {
       p1(
         Code.DOCUMENT_START,
         Code.SECTION_START, 2,
-        Code.HEADING_START, 3, Code.TOKENS, 4, 7, Code.HEADING_END,
+        Code.HEADING_START, 3, Code.TOKENS, 4, 7, Code.HEADING_END, 3,
         Code.PARAGRAPH_START, Code.TOKENS, 9, 12, Code.PARAGRAPH_END,
         Code.SECTION_END,
         Code.SECTION_START, 1,
-        Code.HEADING_START, 2, Code.TOKENS, 18, 21, Code.HEADING_END,
+        Code.HEADING_START, 2, Code.TOKENS, 18, 21, Code.HEADING_END, 2,
         Code.PARAGRAPH_START, Code.TOKENS, 23, 26, Code.PARAGRAPH_END,
         Code.SECTION_END,
         Code.DOCUMENT_END
@@ -646,7 +646,7 @@ final class SectionTest extends AbstractAsciiDocTest {
       p1(
         Code.DOCUMENT_START,
         Code.SECTION_START, 1,
-        Code.HEADING_START, 2, Code.TOKENS, 4, 11, Code.HEADING_END,
+        Code.HEADING_START, 2, Code.TOKENS, 4, 11, Code.HEADING_END, 2,
         Code.PARAGRAPH_START, Code.TOKENS, 13, 16, Code.PARAGRAPH_END,
         Code.SECTION_END,
         Code.DOCUMENT_END

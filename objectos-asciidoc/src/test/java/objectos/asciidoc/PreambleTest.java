@@ -64,7 +64,7 @@ final class PreambleTest extends AbstractAsciiDocTest {
 
       p1(
         Code.DOCUMENT_START,
-        Code.HEADING_START, 1, Code.TOKENS, 4, 7, Code.HEADING_END,
+        Code.HEADING_START, 1, Code.TOKENS, 4, 7, Code.HEADING_END, 1,
         Code.PREAMBLE_START,
         Code.PARAGRAPH_START, Code.TOKENS, 9, 12, Code.PARAGRAPH_END,
 

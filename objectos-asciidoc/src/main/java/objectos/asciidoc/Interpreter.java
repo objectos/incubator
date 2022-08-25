@@ -59,7 +59,7 @@ abstract class Interpreter {
 
         case Code.HEADING_START -> processor.headingStart(nextCode());
 
-        case Code.HEADING_END -> processor.headingEnd();
+        case Code.HEADING_END -> processor.headingEnd(nextCode());
 
         case Code.PREAMBLE_START -> processor.preambleStart();
 

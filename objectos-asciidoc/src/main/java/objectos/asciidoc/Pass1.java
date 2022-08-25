@@ -447,7 +447,7 @@ class Pass1 {
 
     } while (hasToken());
 
-    add(Code.HEADING_END);
+    add(Code.HEADING_END, level);
   }
 
   private void executeInlineMacro() {

@@ -29,7 +29,7 @@ public class AsciiDoc extends Interpreter {
 
     void documentStart(DocumentAttributes attributes);
 
-    void headingEnd();
+    void headingEnd(int level);
 
     void headingStart(int level);
 

@@ -25,8 +25,6 @@ class ThisProcessor implements AsciiDoc.Processor {
 
   private static final int CONTENT = 1 << 2;
 
-  private int level;
-
   private int listItem;
 
   private int state;
@@ -131,8 +129,6 @@ class ThisProcessor implements AsciiDoc.Processor {
   public final void documentStart(DocumentAttributes attributes) {
     this.attributes = attributes;
 
-    level = 0;
-
     listItem = 0;
 
     sectionLevel = 0;
@@ -155,7 +151,7 @@ class ThisProcessor implements AsciiDoc.Processor {
   }
 
   @Override
-  public final void headingEnd() {
+  public final void headingEnd(int level) {
     sb.append("</h");
     sb.append(level);
     sb.append(">\n");
@@ -199,8 +195,6 @@ class ThisProcessor implements AsciiDoc.Processor {
         yield content;
       }
     };
-
-    this.level = level;
   }
 
   @Override
