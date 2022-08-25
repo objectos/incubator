@@ -59,6 +59,12 @@ public interface ConfigurationDsl {
     void acceptFrameworkObjectVisitor(Object visitor);
   }
 
+  enum FrameworkPropertyState {
+
+    HOVER;
+
+  }
+
   interface FrameworkSimpleName extends FrameworkObject {}
 
   interface FrameworMultiElement extends FrameworkObject {}
@@ -68,7 +74,8 @@ public interface ConfigurationDsl {
       FrameworkSimpleName simpleName,
       FrameworkMethodSet methods,
       FrameworkNamedValueSet values,
-      FrameworkAtMediaSet queries
+      FrameworkAtMediaSet queries,
+      FrameworkPropertyState... states
   );
 
   FrameworkAtMedia getAtMedia(String name, FrameworkAtMediaElement... elements);

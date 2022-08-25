@@ -19,21 +19,20 @@ import static br.com.objectos.css.property.StandardPropertyName.MIN_WIDTH;
 import static br.com.objectos.css.sheet.MediaType.SCREEN;
 import static org.testng.Assert.assertEquals;
 
-import br.com.objectos.code.java.io.JavaFile;
 import br.com.objectos.css.config.framework.AbstractConfiguration;
 import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkAtMediaSet;
 import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkGroup;
 import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkNamedValueSet;
+import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkPropertyState;
 import br.com.objectos.css.maven.plugin.framework.AbstractCssMavenPluginFrameworkTest;
 import br.com.objectos.css.type.Color;
-import objectos.util.UnmodifiableMap;
 import org.testng.annotations.Test;
 
 public class BackgroundColorTest extends AbstractCssMavenPluginFrameworkTest {
 
   @Test
   public void execute() {
-    UnmodifiableMap<String, JavaFile> javaFiles = executeProperty(
+    var javaFiles = executeProperty(
       new AbstractConfiguration() {
         @Override
         protected final void configure() {
@@ -55,12 +54,15 @@ public class BackgroundColorTest extends AbstractCssMavenPluginFrameworkTest {
             simpleName("BackgroundColor"),
             methods("backgroundColor"),
             colors,
-            responsive
+            responsive,
+            FrameworkPropertyState.HOVER
           );
         }
       }
     );
+
     assertEquals(javaFiles.size(), 1);
+
     testLines(
       javaFiles.get("BackgroundColor"),
       "package br.com.objectos.css.framework.background;",
@@ -100,6 +102,22 @@ public class BackgroundColorTest extends AbstractCssMavenPluginFrameworkTest {
       "        blue400,",
       "        backgroundColor(hex(\"#63b3ed\"))",
       "    );",
+      "    style(",
+      "        hover.transparent, HOVER,",
+      "        backgroundColor(Color.transparent)",
+      "    );",
+      "    style(",
+      "        hover.black, HOVER,",
+      "        backgroundColor(hex(\"#000000\"))",
+      "    );",
+      "    style(",
+      "        hover.white, HOVER,",
+      "        backgroundColor(hex(\"#ffffff\"))",
+      "    );",
+      "    style(",
+      "        hover.blue400, HOVER,",
+      "        backgroundColor(hex(\"#63b3ed\"))",
+      "    );",
       "    media(",
       "        AbstractStyleSheet.screen, minWidth(px(768)),",
       "",
@@ -123,6 +141,18 @@ public class BackgroundColorTest extends AbstractCssMavenPluginFrameworkTest {
       "            backgroundColor(hex(\"#63b3ed\"))",
       "        )",
       "    );",
+      "  }",
+      "",
+      "  public interface hover {",
+      "",
+      "    ClassSelector transparent = Css.randomDot(5);",
+      "",
+      "    ClassSelector black = Css.randomDot(5);",
+      "",
+      "    ClassSelector white = Css.randomDot(5);",
+      "",
+      "    ClassSelector blue400 = Css.randomDot(5);",
+      "",
       "  }",
       "",
       "  public interface md {",

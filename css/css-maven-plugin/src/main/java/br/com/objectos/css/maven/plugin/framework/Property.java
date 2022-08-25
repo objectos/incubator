@@ -18,6 +18,7 @@ package br.com.objectos.css.maven.plugin.framework;
 import br.com.objectos.code.java.declaration.PackageName;
 import br.com.objectos.code.java.type.NamedClass;
 import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkGroup;
+import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkPropertyState;
 import objectos.util.GrowableList;
 import objectos.util.UnmodifiableList;
 
@@ -26,16 +27,27 @@ class Property extends PropertyClass.Builder {
   static class Builder {
 
     private NamedClass className;
+
     private final FrameworkGroup group;
+
     private UnmodifiableList<String> methodNames;
+
     private final PackageName packageName;
 
     private final GrowableList<NamedAtMedia> queries = new GrowableList<>();
+
     private final GrowableList<NamedValue> values = new GrowableList<>();
 
-    Builder(PackageName packageName, FrameworkGroup group) {
+    final UnmodifiableList<FrameworkPropertyState> states;
+
+    Builder(PackageName packageName,
+            FrameworkGroup group,
+            UnmodifiableList<FrameworkPropertyState> states) {
       this.packageName = packageName;
+
       this.group = group;
+
+      this.states = states;
     }
 
     public final Property build() {
@@ -59,15 +71,12 @@ class Property extends PropertyClass.Builder {
     }
 
     final UnmodifiableList<PropertyStyle> styles() {
-      GrowableList<PropertyStyle> builder;
-      builder = new GrowableList<>();
+      var builder = new GrowableList<PropertyStyle>();
 
       for (int i = 0; i < values.size(); i++) {
-        NamedValue value;
-        value = values.get(i);
+        var value = values.get(i);
 
-        PropertyStyle style;
-        style = toPropertyStyle(value);
+        var style = toPropertyStyle(value);
 
         builder.add(style);
       }
@@ -88,31 +97,33 @@ class Property extends PropertyClass.Builder {
 
   private final UnmodifiableList<NamedAtMedia> queries;
 
+  private final UnmodifiableList<FrameworkPropertyState> states;
+
   private final UnmodifiableList<PropertyStyle> styles;
 
   private Property(Builder builder) {
     group = builder.group;
+
     className = builder.className;
+
+    states = builder.states;
+
     styles = builder.styles();
+
     queries = builder.queries.toUnmodifiableList();
   }
 
-  public final PropertyClass toPropertyClass() {
-    return build();
-  }
+  public final PropertyClass toPropertyClass() { return build(); }
 
   @Override
-  final NamedClass className() {
-    return className;
-  }
+  final NamedClass className() { return className; }
 
   @Override
   final UnmodifiableList<PropertyAtMedia> queries() {
-    GrowableList<PropertyAtMedia> medias;
-    medias = new GrowableList<>();
+    var medias = new GrowableList<PropertyAtMedia>();
 
-    for (NamedAtMedia query : queries) {
-      PropertyAtMedia m = toPropertyMediaQuery(query);
+    for (var query : queries) {
+      var m = toPropertyMediaQuery(query);
 
       medias.add(m);
     }
@@ -121,9 +132,20 @@ class Property extends PropertyClass.Builder {
   }
 
   @Override
-  final UnmodifiableList<PropertyStyle> styles() {
-    return styles;
+  final UnmodifiableList<PropertyState> states() {
+    var result = new GrowableList<PropertyState>();
+
+    for (var state : states) {
+      var s = new PropertyState(state, styles);
+
+      result.add(s);
+    }
+
+    return result.toUnmodifiableList();
   }
+
+  @Override
+  final UnmodifiableList<PropertyStyle> styles() { return styles; }
 
   private PropertyAtMedia toPropertyMediaQuery(NamedAtMedia query) {
     return new PropertyAtMedia(query, styles);

@@ -35,6 +35,7 @@ import objectos.util.UnmodifiableList;
 class PropertyStyle {
 
   private final UnmodifiableList<String> methodNames;
+
   private final NamedValue value;
 
   PropertyStyle(NamedValue value, UnmodifiableList<String> methodNames) {
@@ -52,7 +53,7 @@ class PropertyStyle {
     );
   }
 
-  public final FieldCode generateInterfaceField(NamedAtMedia query) {
+  public final FieldCode generateInterfaceField() {
     return field(
       FrameworkTypes._ClassSelector,
       init(
@@ -63,24 +64,40 @@ class PropertyStyle {
   }
 
   public final MethodInvocation generateMethodInvocation() {
-    return generateMethodInvocation0(value.getFieldName());
+    return generateMethodInvocation0(value.getFieldName(), null);
   }
 
   public final MethodInvocation generateMethodInvocation(Identifier simpleName) {
-    return generateMethodInvocation0(simpleName.id(value.getFieldName()));
+    var fieldName = value.getFieldName();
+
+    var id = simpleName.id(fieldName);
+
+    return generateMethodInvocation0(id, null);
   }
 
-  private MethodInvocation generateMethodInvocation0(ExpressionName name) {
-    GrowableList<ArgumentsElement> args;
-    args = new GrowableList<>();
+  public final MethodInvocation generateMethodInvocation(
+      Identifier simpleName, Identifier argumentName) {
+    var fieldName = value.getFieldName();
+
+    var id = simpleName.id(fieldName);
+
+    return generateMethodInvocation0(id, argumentName);
+  }
+
+  private MethodInvocation generateMethodInvocation0(ExpressionName arg1, ExpressionName arg2) {
+    var args = new GrowableList<ArgumentsElement>();
 
     args.add(nl());
-    args.add(name);
+    args.add(arg1);
+
+    if (arg2 != null) {
+      args.add(arg2);
+    }
+
     args.add(nl());
 
-    for (String methodName : methodNames) {
-      MethodInvocation propertyMethod;
-      propertyMethod = value.invokePropertyMethod(methodName);
+    for (var methodName : methodNames) {
+      var propertyMethod = value.invokePropertyMethod(methodName);
 
       args.add(propertyMethod);
 

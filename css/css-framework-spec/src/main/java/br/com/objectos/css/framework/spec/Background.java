@@ -43,6 +43,7 @@ import br.com.objectos.css.config.framework.AbstractConfiguration;
 import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkAtMediaSet;
 import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkGroup;
 import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkNamedValueSet;
+import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkPropertyState;
 import br.com.objectos.css.keyword.Keywords;
 
 class Background extends AbstractConfiguration {
@@ -62,7 +63,8 @@ class Background extends AbstractConfiguration {
       simpleName("BackgroundColor"),
       methods("backgroundColor"),
       colors,
-      responsive
+      responsive,
+      FrameworkPropertyState.HOVER
     );
 
     property(

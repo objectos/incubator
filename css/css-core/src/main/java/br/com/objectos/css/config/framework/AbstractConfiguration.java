@@ -24,6 +24,7 @@ import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkGroup;
 import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkMethodSet;
 import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkNamedValue;
 import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkNamedValueSet;
+import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkPropertyState;
 import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkSimpleName;
 import br.com.objectos.css.property.StandardPropertyName;
 import br.com.objectos.css.type.Color;
@@ -111,8 +112,9 @@ public abstract class AbstractConfiguration implements Configuration {
       FrameworkSimpleName simpleName,
       FrameworkMethodSet methods,
       FrameworkNamedValueSet values,
-      FrameworkAtMediaSet queries) {
-    dsl.defineProperty(group, simpleName, methods, values, queries);
+      FrameworkAtMediaSet queries,
+      FrameworkPropertyState... states) {
+    dsl.defineProperty(group, simpleName, methods, values, queries, states);
   }
 
   protected final Value px(int value) {

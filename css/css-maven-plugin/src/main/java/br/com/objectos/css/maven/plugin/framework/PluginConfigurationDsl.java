@@ -42,16 +42,25 @@ class PluginConfigurationDsl implements ConfigurationDsl {
       FrameworkSimpleName simpleName,
       FrameworkMethodSet methods,
       FrameworkNamedValueSet values,
-      FrameworkAtMediaSet queries) {
+      FrameworkAtMediaSet queries,
+      FrameworkPropertyState... states) {
 
-    Property.Builder b = new Property.Builder(packageName, group);
-    simpleName.acceptFrameworkObjectVisitor(b);
-    methods.acceptFrameworkObjectVisitor(b);
-    values.acceptFrameworkObjectVisitor(b);
-    queries.acceptFrameworkObjectVisitor(b);
-    Property property = b.build();
+    var statesCopy = UnmodifiableList.copyOf(states);
 
-    PropertyClass propertyClass = property.toPropertyClass();
+    var builder = new Property.Builder(packageName, group, statesCopy);
+
+    simpleName.acceptFrameworkObjectVisitor(builder);
+
+    methods.acceptFrameworkObjectVisitor(builder);
+
+    values.acceptFrameworkObjectVisitor(builder);
+
+    queries.acceptFrameworkObjectVisitor(builder);
+
+    var property = builder.build();
+
+    var propertyClass = property.toPropertyClass();
+
     groupMap.computeIfAbsent(group, k -> new GrowableList<>()).add(propertyClass);
 
   }

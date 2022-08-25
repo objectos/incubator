@@ -1389,6 +1389,898 @@ public final class BackgroundColor extends AbstractStyleSheet {
         rose900,
         backgroundColor(hex("#881337"))
     );
+    style(
+        hover.transparent, HOVER,
+        backgroundColor(Color.transparent)
+    );
+    style(
+        hover.black, HOVER,
+        backgroundColor(hex("#000000"))
+    );
+    style(
+        hover.white, HOVER,
+        backgroundColor(hex("#ffffff"))
+    );
+    style(
+        hover.slate050, HOVER,
+        backgroundColor(hex("#f8fafc"))
+    );
+    style(
+        hover.slate100, HOVER,
+        backgroundColor(hex("#f1f5f9"))
+    );
+    style(
+        hover.slate200, HOVER,
+        backgroundColor(hex("#e2e8f0"))
+    );
+    style(
+        hover.slate300, HOVER,
+        backgroundColor(hex("#cbd5e1"))
+    );
+    style(
+        hover.slate400, HOVER,
+        backgroundColor(hex("#94a3b8"))
+    );
+    style(
+        hover.slate500, HOVER,
+        backgroundColor(hex("#64748b"))
+    );
+    style(
+        hover.slate600, HOVER,
+        backgroundColor(hex("#475569"))
+    );
+    style(
+        hover.slate700, HOVER,
+        backgroundColor(hex("#334155"))
+    );
+    style(
+        hover.slate800, HOVER,
+        backgroundColor(hex("#1e293b"))
+    );
+    style(
+        hover.slate900, HOVER,
+        backgroundColor(hex("#0f172a"))
+    );
+    style(
+        hover.gray050, HOVER,
+        backgroundColor(hex("#f9fafb"))
+    );
+    style(
+        hover.gray100, HOVER,
+        backgroundColor(hex("#f3f4f6"))
+    );
+    style(
+        hover.gray200, HOVER,
+        backgroundColor(hex("#e5e7eb"))
+    );
+    style(
+        hover.gray300, HOVER,
+        backgroundColor(hex("#d1d5db"))
+    );
+    style(
+        hover.gray400, HOVER,
+        backgroundColor(hex("#9ca3af"))
+    );
+    style(
+        hover.gray500, HOVER,
+        backgroundColor(hex("#6b7280"))
+    );
+    style(
+        hover.gray600, HOVER,
+        backgroundColor(hex("#4b5563"))
+    );
+    style(
+        hover.gray700, HOVER,
+        backgroundColor(hex("#374151"))
+    );
+    style(
+        hover.gray800, HOVER,
+        backgroundColor(hex("#1f2937"))
+    );
+    style(
+        hover.gray900, HOVER,
+        backgroundColor(hex("#111827"))
+    );
+    style(
+        hover.zinc050, HOVER,
+        backgroundColor(hex("#fafafa"))
+    );
+    style(
+        hover.zinc100, HOVER,
+        backgroundColor(hex("#f4f4f5"))
+    );
+    style(
+        hover.zinc200, HOVER,
+        backgroundColor(hex("#e4e4e7"))
+    );
+    style(
+        hover.zinc300, HOVER,
+        backgroundColor(hex("#d4d4d8"))
+    );
+    style(
+        hover.zinc400, HOVER,
+        backgroundColor(hex("#a1a1aa"))
+    );
+    style(
+        hover.zinc500, HOVER,
+        backgroundColor(hex("#71717a"))
+    );
+    style(
+        hover.zinc600, HOVER,
+        backgroundColor(hex("#52525b"))
+    );
+    style(
+        hover.zinc700, HOVER,
+        backgroundColor(hex("#3f3f46"))
+    );
+    style(
+        hover.zinc800, HOVER,
+        backgroundColor(hex("#27272a"))
+    );
+    style(
+        hover.zinc900, HOVER,
+        backgroundColor(hex("#18181b"))
+    );
+    style(
+        hover.neutral050, HOVER,
+        backgroundColor(hex("#fafafa"))
+    );
+    style(
+        hover.neutral100, HOVER,
+        backgroundColor(hex("#f5f5f5"))
+    );
+    style(
+        hover.neutral200, HOVER,
+        backgroundColor(hex("#e5e5e5"))
+    );
+    style(
+        hover.neutral300, HOVER,
+        backgroundColor(hex("#d4d4d4"))
+    );
+    style(
+        hover.neutral400, HOVER,
+        backgroundColor(hex("#a3a3a3"))
+    );
+    style(
+        hover.neutral500, HOVER,
+        backgroundColor(hex("#737373"))
+    );
+    style(
+        hover.neutral600, HOVER,
+        backgroundColor(hex("#525252"))
+    );
+    style(
+        hover.neutral700, HOVER,
+        backgroundColor(hex("#404040"))
+    );
+    style(
+        hover.neutral800, HOVER,
+        backgroundColor(hex("#262626"))
+    );
+    style(
+        hover.neutral900, HOVER,
+        backgroundColor(hex("#171717"))
+    );
+    style(
+        hover.stone050, HOVER,
+        backgroundColor(hex("#fafaf9"))
+    );
+    style(
+        hover.stone100, HOVER,
+        backgroundColor(hex("#f5f5f4"))
+    );
+    style(
+        hover.stone200, HOVER,
+        backgroundColor(hex("#e7e5e4"))
+    );
+    style(
+        hover.stone300, HOVER,
+        backgroundColor(hex("#d6d3d1"))
+    );
+    style(
+        hover.stone400, HOVER,
+        backgroundColor(hex("#a8a29e"))
+    );
+    style(
+        hover.stone500, HOVER,
+        backgroundColor(hex("#78716c"))
+    );
+    style(
+        hover.stone600, HOVER,
+        backgroundColor(hex("#57534e"))
+    );
+    style(
+        hover.stone700, HOVER,
+        backgroundColor(hex("#44403c"))
+    );
+    style(
+        hover.stone800, HOVER,
+        backgroundColor(hex("#292524"))
+    );
+    style(
+        hover.stone900, HOVER,
+        backgroundColor(hex("#1c1917"))
+    );
+    style(
+        hover.red050, HOVER,
+        backgroundColor(hex("#fef2f2"))
+    );
+    style(
+        hover.red100, HOVER,
+        backgroundColor(hex("#fee2e2"))
+    );
+    style(
+        hover.red200, HOVER,
+        backgroundColor(hex("#fecaca"))
+    );
+    style(
+        hover.red300, HOVER,
+        backgroundColor(hex("#fca5a5"))
+    );
+    style(
+        hover.red400, HOVER,
+        backgroundColor(hex("#f87171"))
+    );
+    style(
+        hover.red500, HOVER,
+        backgroundColor(hex("#ef4444"))
+    );
+    style(
+        hover.red600, HOVER,
+        backgroundColor(hex("#dc2626"))
+    );
+    style(
+        hover.red700, HOVER,
+        backgroundColor(hex("#b91c1c"))
+    );
+    style(
+        hover.red800, HOVER,
+        backgroundColor(hex("#991b1b"))
+    );
+    style(
+        hover.red900, HOVER,
+        backgroundColor(hex("#7f1d1d"))
+    );
+    style(
+        hover.orange050, HOVER,
+        backgroundColor(hex("#fff7ed"))
+    );
+    style(
+        hover.orange100, HOVER,
+        backgroundColor(hex("#ffedd5"))
+    );
+    style(
+        hover.orange200, HOVER,
+        backgroundColor(hex("#fed7aa"))
+    );
+    style(
+        hover.orange300, HOVER,
+        backgroundColor(hex("#fdba74"))
+    );
+    style(
+        hover.orange400, HOVER,
+        backgroundColor(hex("#fb923c"))
+    );
+    style(
+        hover.orange500, HOVER,
+        backgroundColor(hex("#f97316"))
+    );
+    style(
+        hover.orange600, HOVER,
+        backgroundColor(hex("#ea580c"))
+    );
+    style(
+        hover.orange700, HOVER,
+        backgroundColor(hex("#c2410c"))
+    );
+    style(
+        hover.orange800, HOVER,
+        backgroundColor(hex("#9a3412"))
+    );
+    style(
+        hover.orange900, HOVER,
+        backgroundColor(hex("#7c2d12"))
+    );
+    style(
+        hover.amber050, HOVER,
+        backgroundColor(hex("#fffbeb"))
+    );
+    style(
+        hover.amber100, HOVER,
+        backgroundColor(hex("#fef3c7"))
+    );
+    style(
+        hover.amber200, HOVER,
+        backgroundColor(hex("#fde68a"))
+    );
+    style(
+        hover.amber300, HOVER,
+        backgroundColor(hex("#fcd34d"))
+    );
+    style(
+        hover.amber400, HOVER,
+        backgroundColor(hex("#fbbf24"))
+    );
+    style(
+        hover.amber500, HOVER,
+        backgroundColor(hex("#f59e0b"))
+    );
+    style(
+        hover.amber600, HOVER,
+        backgroundColor(hex("#d97706"))
+    );
+    style(
+        hover.amber700, HOVER,
+        backgroundColor(hex("#b45309"))
+    );
+    style(
+        hover.amber800, HOVER,
+        backgroundColor(hex("#92400e"))
+    );
+    style(
+        hover.amber900, HOVER,
+        backgroundColor(hex("#78350f"))
+    );
+    style(
+        hover.yellow050, HOVER,
+        backgroundColor(hex("#fefce8"))
+    );
+    style(
+        hover.yellow100, HOVER,
+        backgroundColor(hex("#fef9c3"))
+    );
+    style(
+        hover.yellow200, HOVER,
+        backgroundColor(hex("#fef08a"))
+    );
+    style(
+        hover.yellow300, HOVER,
+        backgroundColor(hex("#fde047"))
+    );
+    style(
+        hover.yellow400, HOVER,
+        backgroundColor(hex("#facc15"))
+    );
+    style(
+        hover.yellow500, HOVER,
+        backgroundColor(hex("#eab308"))
+    );
+    style(
+        hover.yellow600, HOVER,
+        backgroundColor(hex("#ca8a04"))
+    );
+    style(
+        hover.yellow700, HOVER,
+        backgroundColor(hex("#a16207"))
+    );
+    style(
+        hover.yellow800, HOVER,
+        backgroundColor(hex("#854d0e"))
+    );
+    style(
+        hover.yellow900, HOVER,
+        backgroundColor(hex("#713f12"))
+    );
+    style(
+        hover.lime050, HOVER,
+        backgroundColor(hex("#f7fee7"))
+    );
+    style(
+        hover.lime100, HOVER,
+        backgroundColor(hex("#ecfccb"))
+    );
+    style(
+        hover.lime200, HOVER,
+        backgroundColor(hex("#d9f99d"))
+    );
+    style(
+        hover.lime300, HOVER,
+        backgroundColor(hex("#bef264"))
+    );
+    style(
+        hover.lime400, HOVER,
+        backgroundColor(hex("#a3e635"))
+    );
+    style(
+        hover.lime500, HOVER,
+        backgroundColor(hex("#84cc16"))
+    );
+    style(
+        hover.lime600, HOVER,
+        backgroundColor(hex("#65a30d"))
+    );
+    style(
+        hover.lime700, HOVER,
+        backgroundColor(hex("#4d7c0f"))
+    );
+    style(
+        hover.lime800, HOVER,
+        backgroundColor(hex("#3f6212"))
+    );
+    style(
+        hover.lime900, HOVER,
+        backgroundColor(hex("#365314"))
+    );
+    style(
+        hover.green050, HOVER,
+        backgroundColor(hex("#f0fdf4"))
+    );
+    style(
+        hover.green100, HOVER,
+        backgroundColor(hex("#dcfce7"))
+    );
+    style(
+        hover.green200, HOVER,
+        backgroundColor(hex("#bbf7d0"))
+    );
+    style(
+        hover.green300, HOVER,
+        backgroundColor(hex("#86efac"))
+    );
+    style(
+        hover.green400, HOVER,
+        backgroundColor(hex("#4ade80"))
+    );
+    style(
+        hover.green500, HOVER,
+        backgroundColor(hex("#22c55e"))
+    );
+    style(
+        hover.green600, HOVER,
+        backgroundColor(hex("#16a34a"))
+    );
+    style(
+        hover.green700, HOVER,
+        backgroundColor(hex("#15803d"))
+    );
+    style(
+        hover.green800, HOVER,
+        backgroundColor(hex("#166534"))
+    );
+    style(
+        hover.green900, HOVER,
+        backgroundColor(hex("#14532d"))
+    );
+    style(
+        hover.emerald050, HOVER,
+        backgroundColor(hex("#ecfdf5"))
+    );
+    style(
+        hover.emerald100, HOVER,
+        backgroundColor(hex("#d1fae5"))
+    );
+    style(
+        hover.emerald200, HOVER,
+        backgroundColor(hex("#a7f3d0"))
+    );
+    style(
+        hover.emerald300, HOVER,
+        backgroundColor(hex("#6ee7b7"))
+    );
+    style(
+        hover.emerald400, HOVER,
+        backgroundColor(hex("#34d399"))
+    );
+    style(
+        hover.emerald500, HOVER,
+        backgroundColor(hex("#10b981"))
+    );
+    style(
+        hover.emerald600, HOVER,
+        backgroundColor(hex("#059669"))
+    );
+    style(
+        hover.emerald700, HOVER,
+        backgroundColor(hex("#047857"))
+    );
+    style(
+        hover.emerald800, HOVER,
+        backgroundColor(hex("#065f46"))
+    );
+    style(
+        hover.emerald900, HOVER,
+        backgroundColor(hex("#064e3b"))
+    );
+    style(
+        hover.teal050, HOVER,
+        backgroundColor(hex("#f0fdfa"))
+    );
+    style(
+        hover.teal100, HOVER,
+        backgroundColor(hex("#ccfbf1"))
+    );
+    style(
+        hover.teal200, HOVER,
+        backgroundColor(hex("#99f6e4"))
+    );
+    style(
+        hover.teal300, HOVER,
+        backgroundColor(hex("#5eead4"))
+    );
+    style(
+        hover.teal400, HOVER,
+        backgroundColor(hex("#2dd4bf"))
+    );
+    style(
+        hover.teal500, HOVER,
+        backgroundColor(hex("#14b8a6"))
+    );
+    style(
+        hover.teal600, HOVER,
+        backgroundColor(hex("#0d9488"))
+    );
+    style(
+        hover.teal700, HOVER,
+        backgroundColor(hex("#0f766e"))
+    );
+    style(
+        hover.teal800, HOVER,
+        backgroundColor(hex("#115e59"))
+    );
+    style(
+        hover.teal900, HOVER,
+        backgroundColor(hex("#134e4a"))
+    );
+    style(
+        hover.cyan050, HOVER,
+        backgroundColor(hex("#ecfeff"))
+    );
+    style(
+        hover.cyan100, HOVER,
+        backgroundColor(hex("#cffafe"))
+    );
+    style(
+        hover.cyan200, HOVER,
+        backgroundColor(hex("#a5f3fc"))
+    );
+    style(
+        hover.cyan300, HOVER,
+        backgroundColor(hex("#67e8f9"))
+    );
+    style(
+        hover.cyan400, HOVER,
+        backgroundColor(hex("#22d3ee"))
+    );
+    style(
+        hover.cyan500, HOVER,
+        backgroundColor(hex("#06b6d4"))
+    );
+    style(
+        hover.cyan600, HOVER,
+        backgroundColor(hex("#0891b2"))
+    );
+    style(
+        hover.cyan700, HOVER,
+        backgroundColor(hex("#0e7490"))
+    );
+    style(
+        hover.cyan800, HOVER,
+        backgroundColor(hex("#155e75"))
+    );
+    style(
+        hover.cyan900, HOVER,
+        backgroundColor(hex("#164e63"))
+    );
+    style(
+        hover.sky050, HOVER,
+        backgroundColor(hex("#f0f9ff"))
+    );
+    style(
+        hover.sky100, HOVER,
+        backgroundColor(hex("#e0f2fe"))
+    );
+    style(
+        hover.sky200, HOVER,
+        backgroundColor(hex("#bae6fd"))
+    );
+    style(
+        hover.sky300, HOVER,
+        backgroundColor(hex("#7dd3fc"))
+    );
+    style(
+        hover.sky400, HOVER,
+        backgroundColor(hex("#38bdf8"))
+    );
+    style(
+        hover.sky500, HOVER,
+        backgroundColor(hex("#0ea5e9"))
+    );
+    style(
+        hover.sky600, HOVER,
+        backgroundColor(hex("#0284c7"))
+    );
+    style(
+        hover.sky700, HOVER,
+        backgroundColor(hex("#0369a1"))
+    );
+    style(
+        hover.sky800, HOVER,
+        backgroundColor(hex("#075985"))
+    );
+    style(
+        hover.sky900, HOVER,
+        backgroundColor(hex("#0c4a6e"))
+    );
+    style(
+        hover.blue050, HOVER,
+        backgroundColor(hex("#eff6ff"))
+    );
+    style(
+        hover.blue100, HOVER,
+        backgroundColor(hex("#dbeafe"))
+    );
+    style(
+        hover.blue200, HOVER,
+        backgroundColor(hex("#bfdbfe"))
+    );
+    style(
+        hover.blue300, HOVER,
+        backgroundColor(hex("#93c5fd"))
+    );
+    style(
+        hover.blue400, HOVER,
+        backgroundColor(hex("#60a5fa"))
+    );
+    style(
+        hover.blue500, HOVER,
+        backgroundColor(hex("#3b82f6"))
+    );
+    style(
+        hover.blue600, HOVER,
+        backgroundColor(hex("#2563eb"))
+    );
+    style(
+        hover.blue700, HOVER,
+        backgroundColor(hex("#1d4ed8"))
+    );
+    style(
+        hover.blue800, HOVER,
+        backgroundColor(hex("#1e40af"))
+    );
+    style(
+        hover.blue900, HOVER,
+        backgroundColor(hex("#1e3a8a"))
+    );
+    style(
+        hover.indigo050, HOVER,
+        backgroundColor(hex("#eef2ff"))
+    );
+    style(
+        hover.indigo100, HOVER,
+        backgroundColor(hex("#e0e7ff"))
+    );
+    style(
+        hover.indigo200, HOVER,
+        backgroundColor(hex("#c7d2fe"))
+    );
+    style(
+        hover.indigo300, HOVER,
+        backgroundColor(hex("#a5b4fc"))
+    );
+    style(
+        hover.indigo400, HOVER,
+        backgroundColor(hex("#818cf8"))
+    );
+    style(
+        hover.indigo500, HOVER,
+        backgroundColor(hex("#6366f1"))
+    );
+    style(
+        hover.indigo600, HOVER,
+        backgroundColor(hex("#4f46e5"))
+    );
+    style(
+        hover.indigo700, HOVER,
+        backgroundColor(hex("#4338ca"))
+    );
+    style(
+        hover.indigo800, HOVER,
+        backgroundColor(hex("#3730a3"))
+    );
+    style(
+        hover.indigo900, HOVER,
+        backgroundColor(hex("#312e81"))
+    );
+    style(
+        hover.violet050, HOVER,
+        backgroundColor(hex("#f5f3ff"))
+    );
+    style(
+        hover.violet100, HOVER,
+        backgroundColor(hex("#ede9fe"))
+    );
+    style(
+        hover.violet200, HOVER,
+        backgroundColor(hex("#ddd6fe"))
+    );
+    style(
+        hover.violet300, HOVER,
+        backgroundColor(hex("#c4b5fd"))
+    );
+    style(
+        hover.violet400, HOVER,
+        backgroundColor(hex("#a78bfa"))
+    );
+    style(
+        hover.violet500, HOVER,
+        backgroundColor(hex("#8b5cf6"))
+    );
+    style(
+        hover.violet600, HOVER,
+        backgroundColor(hex("#7c3aed"))
+    );
+    style(
+        hover.violet700, HOVER,
+        backgroundColor(hex("#6d28d9"))
+    );
+    style(
+        hover.violet800, HOVER,
+        backgroundColor(hex("#5b21b6"))
+    );
+    style(
+        hover.violet900, HOVER,
+        backgroundColor(hex("#4c1d95"))
+    );
+    style(
+        hover.purple050, HOVER,
+        backgroundColor(hex("#faf5ff"))
+    );
+    style(
+        hover.purple100, HOVER,
+        backgroundColor(hex("#f3e8ff"))
+    );
+    style(
+        hover.purple200, HOVER,
+        backgroundColor(hex("#e9d5ff"))
+    );
+    style(
+        hover.purple300, HOVER,
+        backgroundColor(hex("#d8b4fe"))
+    );
+    style(
+        hover.purple400, HOVER,
+        backgroundColor(hex("#c084fc"))
+    );
+    style(
+        hover.purple500, HOVER,
+        backgroundColor(hex("#a855f7"))
+    );
+    style(
+        hover.purple600, HOVER,
+        backgroundColor(hex("#9333ea"))
+    );
+    style(
+        hover.purple700, HOVER,
+        backgroundColor(hex("#7e22ce"))
+    );
+    style(
+        hover.purple800, HOVER,
+        backgroundColor(hex("#6b21a8"))
+    );
+    style(
+        hover.purple900, HOVER,
+        backgroundColor(hex("#581c87"))
+    );
+    style(
+        hover.fuchsia050, HOVER,
+        backgroundColor(hex("#fdf4ff"))
+    );
+    style(
+        hover.fuchsia100, HOVER,
+        backgroundColor(hex("#fae8ff"))
+    );
+    style(
+        hover.fuchsia200, HOVER,
+        backgroundColor(hex("#f5d0fe"))
+    );
+    style(
+        hover.fuchsia300, HOVER,
+        backgroundColor(hex("#f0abfc"))
+    );
+    style(
+        hover.fuchsia400, HOVER,
+        backgroundColor(hex("#e879f9"))
+    );
+    style(
+        hover.fuchsia500, HOVER,
+        backgroundColor(hex("#d946ef"))
+    );
+    style(
+        hover.fuchsia600, HOVER,
+        backgroundColor(hex("#c026d3"))
+    );
+    style(
+        hover.fuchsia700, HOVER,
+        backgroundColor(hex("#a21caf"))
+    );
+    style(
+        hover.fuchsia800, HOVER,
+        backgroundColor(hex("#86198f"))
+    );
+    style(
+        hover.fuchsia900, HOVER,
+        backgroundColor(hex("#701a75"))
+    );
+    style(
+        hover.pink050, HOVER,
+        backgroundColor(hex("#fdf2f8"))
+    );
+    style(
+        hover.pink100, HOVER,
+        backgroundColor(hex("#fce7f3"))
+    );
+    style(
+        hover.pink200, HOVER,
+        backgroundColor(hex("#fbcfe8"))
+    );
+    style(
+        hover.pink300, HOVER,
+        backgroundColor(hex("#f9a8d4"))
+    );
+    style(
+        hover.pink400, HOVER,
+        backgroundColor(hex("#f472b6"))
+    );
+    style(
+        hover.pink500, HOVER,
+        backgroundColor(hex("#ec4899"))
+    );
+    style(
+        hover.pink600, HOVER,
+        backgroundColor(hex("#db2777"))
+    );
+    style(
+        hover.pink700, HOVER,
+        backgroundColor(hex("#be185d"))
+    );
+    style(
+        hover.pink800, HOVER,
+        backgroundColor(hex("#9d174d"))
+    );
+    style(
+        hover.pink900, HOVER,
+        backgroundColor(hex("#831843"))
+    );
+    style(
+        hover.rose050, HOVER,
+        backgroundColor(hex("#fff1f2"))
+    );
+    style(
+        hover.rose100, HOVER,
+        backgroundColor(hex("#ffe4e6"))
+    );
+    style(
+        hover.rose200, HOVER,
+        backgroundColor(hex("#fecdd3"))
+    );
+    style(
+        hover.rose300, HOVER,
+        backgroundColor(hex("#fda4af"))
+    );
+    style(
+        hover.rose400, HOVER,
+        backgroundColor(hex("#fb7185"))
+    );
+    style(
+        hover.rose500, HOVER,
+        backgroundColor(hex("#f43f5e"))
+    );
+    style(
+        hover.rose600, HOVER,
+        backgroundColor(hex("#e11d48"))
+    );
+    style(
+        hover.rose700, HOVER,
+        backgroundColor(hex("#be123c"))
+    );
+    style(
+        hover.rose800, HOVER,
+        backgroundColor(hex("#9f1239"))
+    );
+    style(
+        hover.rose900, HOVER,
+        backgroundColor(hex("#881337"))
+    );
     media(
         AbstractStyleSheet.screen, minWidth(px(640)),
 
@@ -6979,6 +7871,456 @@ public final class BackgroundColor extends AbstractStyleSheet {
             backgroundColor(hex("#881337"))
         )
     );
+  }
+
+  public interface hover {
+
+    ClassSelector transparent = Css.randomDot(5);
+
+    ClassSelector black = Css.randomDot(5);
+
+    ClassSelector white = Css.randomDot(5);
+
+    ClassSelector slate050 = Css.randomDot(5);
+
+    ClassSelector slate100 = Css.randomDot(5);
+
+    ClassSelector slate200 = Css.randomDot(5);
+
+    ClassSelector slate300 = Css.randomDot(5);
+
+    ClassSelector slate400 = Css.randomDot(5);
+
+    ClassSelector slate500 = Css.randomDot(5);
+
+    ClassSelector slate600 = Css.randomDot(5);
+
+    ClassSelector slate700 = Css.randomDot(5);
+
+    ClassSelector slate800 = Css.randomDot(5);
+
+    ClassSelector slate900 = Css.randomDot(5);
+
+    ClassSelector gray050 = Css.randomDot(5);
+
+    ClassSelector gray100 = Css.randomDot(5);
+
+    ClassSelector gray200 = Css.randomDot(5);
+
+    ClassSelector gray300 = Css.randomDot(5);
+
+    ClassSelector gray400 = Css.randomDot(5);
+
+    ClassSelector gray500 = Css.randomDot(5);
+
+    ClassSelector gray600 = Css.randomDot(5);
+
+    ClassSelector gray700 = Css.randomDot(5);
+
+    ClassSelector gray800 = Css.randomDot(5);
+
+    ClassSelector gray900 = Css.randomDot(5);
+
+    ClassSelector zinc050 = Css.randomDot(5);
+
+    ClassSelector zinc100 = Css.randomDot(5);
+
+    ClassSelector zinc200 = Css.randomDot(5);
+
+    ClassSelector zinc300 = Css.randomDot(5);
+
+    ClassSelector zinc400 = Css.randomDot(5);
+
+    ClassSelector zinc500 = Css.randomDot(5);
+
+    ClassSelector zinc600 = Css.randomDot(5);
+
+    ClassSelector zinc700 = Css.randomDot(5);
+
+    ClassSelector zinc800 = Css.randomDot(5);
+
+    ClassSelector zinc900 = Css.randomDot(5);
+
+    ClassSelector neutral050 = Css.randomDot(5);
+
+    ClassSelector neutral100 = Css.randomDot(5);
+
+    ClassSelector neutral200 = Css.randomDot(5);
+
+    ClassSelector neutral300 = Css.randomDot(5);
+
+    ClassSelector neutral400 = Css.randomDot(5);
+
+    ClassSelector neutral500 = Css.randomDot(5);
+
+    ClassSelector neutral600 = Css.randomDot(5);
+
+    ClassSelector neutral700 = Css.randomDot(5);
+
+    ClassSelector neutral800 = Css.randomDot(5);
+
+    ClassSelector neutral900 = Css.randomDot(5);
+
+    ClassSelector stone050 = Css.randomDot(5);
+
+    ClassSelector stone100 = Css.randomDot(5);
+
+    ClassSelector stone200 = Css.randomDot(5);
+
+    ClassSelector stone300 = Css.randomDot(5);
+
+    ClassSelector stone400 = Css.randomDot(5);
+
+    ClassSelector stone500 = Css.randomDot(5);
+
+    ClassSelector stone600 = Css.randomDot(5);
+
+    ClassSelector stone700 = Css.randomDot(5);
+
+    ClassSelector stone800 = Css.randomDot(5);
+
+    ClassSelector stone900 = Css.randomDot(5);
+
+    ClassSelector red050 = Css.randomDot(5);
+
+    ClassSelector red100 = Css.randomDot(5);
+
+    ClassSelector red200 = Css.randomDot(5);
+
+    ClassSelector red300 = Css.randomDot(5);
+
+    ClassSelector red400 = Css.randomDot(5);
+
+    ClassSelector red500 = Css.randomDot(5);
+
+    ClassSelector red600 = Css.randomDot(5);
+
+    ClassSelector red700 = Css.randomDot(5);
+
+    ClassSelector red800 = Css.randomDot(5);
+
+    ClassSelector red900 = Css.randomDot(5);
+
+    ClassSelector orange050 = Css.randomDot(5);
+
+    ClassSelector orange100 = Css.randomDot(5);
+
+    ClassSelector orange200 = Css.randomDot(5);
+
+    ClassSelector orange300 = Css.randomDot(5);
+
+    ClassSelector orange400 = Css.randomDot(5);
+
+    ClassSelector orange500 = Css.randomDot(5);
+
+    ClassSelector orange600 = Css.randomDot(5);
+
+    ClassSelector orange700 = Css.randomDot(5);
+
+    ClassSelector orange800 = Css.randomDot(5);
+
+    ClassSelector orange900 = Css.randomDot(5);
+
+    ClassSelector amber050 = Css.randomDot(5);
+
+    ClassSelector amber100 = Css.randomDot(5);
+
+    ClassSelector amber200 = Css.randomDot(5);
+
+    ClassSelector amber300 = Css.randomDot(5);
+
+    ClassSelector amber400 = Css.randomDot(5);
+
+    ClassSelector amber500 = Css.randomDot(5);
+
+    ClassSelector amber600 = Css.randomDot(5);
+
+    ClassSelector amber700 = Css.randomDot(5);
+
+    ClassSelector amber800 = Css.randomDot(5);
+
+    ClassSelector amber900 = Css.randomDot(5);
+
+    ClassSelector yellow050 = Css.randomDot(5);
+
+    ClassSelector yellow100 = Css.randomDot(5);
+
+    ClassSelector yellow200 = Css.randomDot(5);
+
+    ClassSelector yellow300 = Css.randomDot(5);
+
+    ClassSelector yellow400 = Css.randomDot(5);
+
+    ClassSelector yellow500 = Css.randomDot(5);
+
+    ClassSelector yellow600 = Css.randomDot(5);
+
+    ClassSelector yellow700 = Css.randomDot(5);
+
+    ClassSelector yellow800 = Css.randomDot(5);
+
+    ClassSelector yellow900 = Css.randomDot(5);
+
+    ClassSelector lime050 = Css.randomDot(5);
+
+    ClassSelector lime100 = Css.randomDot(5);
+
+    ClassSelector lime200 = Css.randomDot(5);
+
+    ClassSelector lime300 = Css.randomDot(5);
+
+    ClassSelector lime400 = Css.randomDot(5);
+
+    ClassSelector lime500 = Css.randomDot(5);
+
+    ClassSelector lime600 = Css.randomDot(5);
+
+    ClassSelector lime700 = Css.randomDot(5);
+
+    ClassSelector lime800 = Css.randomDot(5);
+
+    ClassSelector lime900 = Css.randomDot(5);
+
+    ClassSelector green050 = Css.randomDot(5);
+
+    ClassSelector green100 = Css.randomDot(5);
+
+    ClassSelector green200 = Css.randomDot(5);
+
+    ClassSelector green300 = Css.randomDot(5);
+
+    ClassSelector green400 = Css.randomDot(5);
+
+    ClassSelector green500 = Css.randomDot(5);
+
+    ClassSelector green600 = Css.randomDot(5);
+
+    ClassSelector green700 = Css.randomDot(5);
+
+    ClassSelector green800 = Css.randomDot(5);
+
+    ClassSelector green900 = Css.randomDot(5);
+
+    ClassSelector emerald050 = Css.randomDot(5);
+
+    ClassSelector emerald100 = Css.randomDot(5);
+
+    ClassSelector emerald200 = Css.randomDot(5);
+
+    ClassSelector emerald300 = Css.randomDot(5);
+
+    ClassSelector emerald400 = Css.randomDot(5);
+
+    ClassSelector emerald500 = Css.randomDot(5);
+
+    ClassSelector emerald600 = Css.randomDot(5);
+
+    ClassSelector emerald700 = Css.randomDot(5);
+
+    ClassSelector emerald800 = Css.randomDot(5);
+
+    ClassSelector emerald900 = Css.randomDot(5);
+
+    ClassSelector teal050 = Css.randomDot(5);
+
+    ClassSelector teal100 = Css.randomDot(5);
+
+    ClassSelector teal200 = Css.randomDot(5);
+
+    ClassSelector teal300 = Css.randomDot(5);
+
+    ClassSelector teal400 = Css.randomDot(5);
+
+    ClassSelector teal500 = Css.randomDot(5);
+
+    ClassSelector teal600 = Css.randomDot(5);
+
+    ClassSelector teal700 = Css.randomDot(5);
+
+    ClassSelector teal800 = Css.randomDot(5);
+
+    ClassSelector teal900 = Css.randomDot(5);
+
+    ClassSelector cyan050 = Css.randomDot(5);
+
+    ClassSelector cyan100 = Css.randomDot(5);
+
+    ClassSelector cyan200 = Css.randomDot(5);
+
+    ClassSelector cyan300 = Css.randomDot(5);
+
+    ClassSelector cyan400 = Css.randomDot(5);
+
+    ClassSelector cyan500 = Css.randomDot(5);
+
+    ClassSelector cyan600 = Css.randomDot(5);
+
+    ClassSelector cyan700 = Css.randomDot(5);
+
+    ClassSelector cyan800 = Css.randomDot(5);
+
+    ClassSelector cyan900 = Css.randomDot(5);
+
+    ClassSelector sky050 = Css.randomDot(5);
+
+    ClassSelector sky100 = Css.randomDot(5);
+
+    ClassSelector sky200 = Css.randomDot(5);
+
+    ClassSelector sky300 = Css.randomDot(5);
+
+    ClassSelector sky400 = Css.randomDot(5);
+
+    ClassSelector sky500 = Css.randomDot(5);
+
+    ClassSelector sky600 = Css.randomDot(5);
+
+    ClassSelector sky700 = Css.randomDot(5);
+
+    ClassSelector sky800 = Css.randomDot(5);
+
+    ClassSelector sky900 = Css.randomDot(5);
+
+    ClassSelector blue050 = Css.randomDot(5);
+
+    ClassSelector blue100 = Css.randomDot(5);
+
+    ClassSelector blue200 = Css.randomDot(5);
+
+    ClassSelector blue300 = Css.randomDot(5);
+
+    ClassSelector blue400 = Css.randomDot(5);
+
+    ClassSelector blue500 = Css.randomDot(5);
+
+    ClassSelector blue600 = Css.randomDot(5);
+
+    ClassSelector blue700 = Css.randomDot(5);
+
+    ClassSelector blue800 = Css.randomDot(5);
+
+    ClassSelector blue900 = Css.randomDot(5);
+
+    ClassSelector indigo050 = Css.randomDot(5);
+
+    ClassSelector indigo100 = Css.randomDot(5);
+
+    ClassSelector indigo200 = Css.randomDot(5);
+
+    ClassSelector indigo300 = Css.randomDot(5);
+
+    ClassSelector indigo400 = Css.randomDot(5);
+
+    ClassSelector indigo500 = Css.randomDot(5);
+
+    ClassSelector indigo600 = Css.randomDot(5);
+
+    ClassSelector indigo700 = Css.randomDot(5);
+
+    ClassSelector indigo800 = Css.randomDot(5);
+
+    ClassSelector indigo900 = Css.randomDot(5);
+
+    ClassSelector violet050 = Css.randomDot(5);
+
+    ClassSelector violet100 = Css.randomDot(5);
+
+    ClassSelector violet200 = Css.randomDot(5);
+
+    ClassSelector violet300 = Css.randomDot(5);
+
+    ClassSelector violet400 = Css.randomDot(5);
+
+    ClassSelector violet500 = Css.randomDot(5);
+
+    ClassSelector violet600 = Css.randomDot(5);
+
+    ClassSelector violet700 = Css.randomDot(5);
+
+    ClassSelector violet800 = Css.randomDot(5);
+
+    ClassSelector violet900 = Css.randomDot(5);
+
+    ClassSelector purple050 = Css.randomDot(5);
+
+    ClassSelector purple100 = Css.randomDot(5);
+
+    ClassSelector purple200 = Css.randomDot(5);
+
+    ClassSelector purple300 = Css.randomDot(5);
+
+    ClassSelector purple400 = Css.randomDot(5);
+
+    ClassSelector purple500 = Css.randomDot(5);
+
+    ClassSelector purple600 = Css.randomDot(5);
+
+    ClassSelector purple700 = Css.randomDot(5);
+
+    ClassSelector purple800 = Css.randomDot(5);
+
+    ClassSelector purple900 = Css.randomDot(5);
+
+    ClassSelector fuchsia050 = Css.randomDot(5);
+
+    ClassSelector fuchsia100 = Css.randomDot(5);
+
+    ClassSelector fuchsia200 = Css.randomDot(5);
+
+    ClassSelector fuchsia300 = Css.randomDot(5);
+
+    ClassSelector fuchsia400 = Css.randomDot(5);
+
+    ClassSelector fuchsia500 = Css.randomDot(5);
+
+    ClassSelector fuchsia600 = Css.randomDot(5);
+
+    ClassSelector fuchsia700 = Css.randomDot(5);
+
+    ClassSelector fuchsia800 = Css.randomDot(5);
+
+    ClassSelector fuchsia900 = Css.randomDot(5);
+
+    ClassSelector pink050 = Css.randomDot(5);
+
+    ClassSelector pink100 = Css.randomDot(5);
+
+    ClassSelector pink200 = Css.randomDot(5);
+
+    ClassSelector pink300 = Css.randomDot(5);
+
+    ClassSelector pink400 = Css.randomDot(5);
+
+    ClassSelector pink500 = Css.randomDot(5);
+
+    ClassSelector pink600 = Css.randomDot(5);
+
+    ClassSelector pink700 = Css.randomDot(5);
+
+    ClassSelector pink800 = Css.randomDot(5);
+
+    ClassSelector pink900 = Css.randomDot(5);
+
+    ClassSelector rose050 = Css.randomDot(5);
+
+    ClassSelector rose100 = Css.randomDot(5);
+
+    ClassSelector rose200 = Css.randomDot(5);
+
+    ClassSelector rose300 = Css.randomDot(5);
+
+    ClassSelector rose400 = Css.randomDot(5);
+
+    ClassSelector rose500 = Css.randomDot(5);
+
+    ClassSelector rose600 = Css.randomDot(5);
+
+    ClassSelector rose700 = Css.randomDot(5);
+
+    ClassSelector rose800 = Css.randomDot(5);
+
+    ClassSelector rose900 = Css.randomDot(5);
+
   }
 
   public interface sm {

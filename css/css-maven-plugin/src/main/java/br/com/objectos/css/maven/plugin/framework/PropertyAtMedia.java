@@ -19,7 +19,6 @@ import static br.com.objectos.code.java.Java.expressionName;
 import static br.com.objectos.code.java.Java.invoke;
 import static br.com.objectos.code.java.Java.nl;
 
-import br.com.objectos.code.java.declaration.FieldCode;
 import br.com.objectos.code.java.declaration.InterfaceCode;
 import br.com.objectos.code.java.declaration.Modifiers;
 import br.com.objectos.code.java.expression.Argument;
@@ -28,12 +27,39 @@ import br.com.objectos.code.java.expression.ExpressionName;
 import br.com.objectos.code.java.expression.MethodInvocation;
 import br.com.objectos.css.sheet.AbstractStyleSheet;
 import br.com.objectos.css.sheet.MediaType;
-import objectos.util.UnmodifiableList;
 import objectos.util.GrowableList;
+import objectos.util.UnmodifiableList;
 
 class PropertyAtMedia {
 
+  public class Invocation implements MediaType.Visitor {
+
+    private final GrowableList<ArgumentsElement> arguments = new GrowableList<>();
+
+    public final void addArgument(Argument argument) {
+      arguments.add(argument);
+    }
+
+    public final void addNewLine() {
+      arguments.add(nl());
+    }
+
+    @Override
+    public final void visitMediaType(MediaType type) {
+      ExpressionName fieldName;
+      fieldName = expressionName(AbstractStyleSheet.class, type.getName());
+
+      arguments.add(fieldName);
+    }
+
+    private MethodInvocation build() {
+      return invoke("media", arguments);
+    }
+
+  }
+
   private final NamedAtMedia media;
+
   private final UnmodifiableList<PropertyStyle> styles;
 
   PropertyAtMedia(NamedAtMedia query, UnmodifiableList<PropertyStyle> styles) {
@@ -42,19 +68,16 @@ class PropertyAtMedia {
   }
 
   public final InterfaceCode generateIface() {
-    InterfaceCode.Builder b;
-    b = InterfaceCode.builder();
+    var b = InterfaceCode.builder();
 
     b.addModifier(Modifiers.PUBLIC);
 
     b.simpleName(media.simpleName.name());
 
     for (int i = 0; i < styles.size(); i++) {
-      PropertyStyle style;
-      style = styles.get(i);
+      var style = styles.get(i);
 
-      FieldCode field;
-      field = style.generateInterfaceField(media);
+      var field = style.generateInterfaceField();
 
       b.addField(field);
     }
@@ -86,32 +109,6 @@ class PropertyAtMedia {
     invocation.addNewLine();
 
     return invocation.build();
-  }
-
-  public class Invocation implements MediaType.Visitor {
-
-    private final GrowableList<ArgumentsElement> arguments = new GrowableList<>();
-
-    public final void addArgument(Argument argument) {
-      arguments.add(argument);
-    }
-
-    public final void addNewLine() {
-      arguments.add(nl());
-    }
-
-    @Override
-    public final void visitMediaType(MediaType type) {
-      ExpressionName fieldName;
-      fieldName = expressionName(AbstractStyleSheet.class, type.getName());
-
-      arguments.add(fieldName);
-    }
-
-    private MethodInvocation build() {
-      return invoke("media", arguments);
-    }
-
   }
 
 }

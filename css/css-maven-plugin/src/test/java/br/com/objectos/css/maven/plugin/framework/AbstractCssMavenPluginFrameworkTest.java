@@ -19,10 +19,25 @@ import static org.testng.Assert.assertEquals;
 
 import br.com.objectos.code.java.io.JavaFile;
 import br.com.objectos.css.config.framework.Configuration;
-import objectos.util.UnmodifiableMap;
 import objectos.util.GrowableMap;
+import objectos.util.UnmodifiableMap;
 
 public abstract class AbstractCssMavenPluginFrameworkTest {
+
+  private static class ThisConfigurationAdapter implements ConfigurationAdapter {
+
+    private final GrowableMap<String, JavaFile> map = new GrowableMap<>();
+
+    @Override
+    public final void writeJavaFile(JavaFile file) {
+      map.put(file.simpleName(), file);
+    }
+
+    final UnmodifiableMap<String, JavaFile> toMap() {
+      return map.toUnmodifiableMap();
+    }
+
+  }
 
   protected final UnmodifiableMap<String, JavaFile> executeFramework(Configuration config) {
     ThisConfigurationAdapter adapter = new ThisConfigurationAdapter();
@@ -47,22 +62,7 @@ public abstract class AbstractCssMavenPluginFrameworkTest {
   private void assertHasLines(String string, String[] expected) {
     String[] split = string.split("\n");
 
-    assertEquals(split, expected);
-  }
-
-  private static class ThisConfigurationAdapter implements ConfigurationAdapter {
-
-    private final GrowableMap<String, JavaFile> map = new GrowableMap<>();
-
-    @Override
-    public final void writeJavaFile(JavaFile file) {
-      map.put(file.simpleName(), file);
-    }
-
-    final UnmodifiableMap<String, JavaFile> toMap() {
-      return map.toUnmodifiableMap();
-    }
-
+    assertEquals(split, expected, string);
   }
 
 }
