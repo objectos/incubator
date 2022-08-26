@@ -35,6 +35,7 @@ import br.com.objectos.css.framework.spacing.PaddingX;
 import br.com.objectos.css.framework.spacing.PaddingY;
 import br.com.objectos.css.framework.typography.FontSize;
 import br.com.objectos.css.framework.typography.FontWeight;
+import br.com.objectos.css.framework.typography.LetterSpacing;
 import br.com.objectos.css.framework.typography.TextColor;
 import br.com.objectos.css.framework.typography.TextTransform;
 import br.com.objectos.css.select.ClassSelector;
@@ -62,26 +63,39 @@ final class ArticleTemplate extends DocsTemplate implements LanguageRenderer.Out
 
   @Override
   public final void headingEnd(int level) {
-    super.headingEnd(level); // </hx>
+    switch (level) {
+      case 1 -> {
+        tagEnd(StandardElementName.H1);
+
+        tagEnd(StandardElementName.HEADER);
+      }
+
+      default -> super.headingEnd(level);
+    }
   }
 
   @Override
   public final void headingStart(int level) {
-    super.headingStart(level);
-
     switch (level) {
       case 1 -> {
+        tagStart(); // <header>
+
+        addValue0(
+          BorderColor.slate400,
+          BorderBottom.v1,
+          MarginBottom.v10,
+          PaddingBottom.v08
+        );
+
         tagStart(); // <h1>
 
         addValue0(
-          BorderColor.gray300,
-          BorderBottom.v1,
           FontSize.xLarge3,
-          FontWeight.bold,
-          MarginBottom.v04,
-          PaddingBottom.v01
+          LetterSpacing.tight
         );
       }
+
+      default -> super.headingStart(level);
     }
   }
 
@@ -191,9 +205,10 @@ final class ArticleTemplate extends DocsTemplate implements LanguageRenderer.Out
         main(
           FlexGrow.one,
           PaddingX.v04,
-          PaddingLeft.md.v0,
-          PaddingRight.md.v06,
           PaddingTop.v06,
+
+          PaddingTop.lg.v08,
+          PaddingLeft.lg.v10,
 
           article(
             f(this::renderDocument)
