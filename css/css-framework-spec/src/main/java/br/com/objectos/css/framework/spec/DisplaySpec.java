@@ -44,11 +44,11 @@ import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkAtMediaSet
 import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkGroup;
 import br.com.objectos.css.keyword.Keywords;
 
-class Float extends AbstractConfiguration {
+final class DisplaySpec extends AbstractConfiguration {
 
   private final FrameworkAtMediaSet responsive;
 
-  Float(FrameworkAtMediaSet responsive) {
+  DisplaySpec(FrameworkAtMediaSet responsive) {
     this.responsive = responsive;
   }
 
@@ -56,12 +56,27 @@ class Float extends AbstractConfiguration {
   protected final void configure() {
     property(
       FrameworkGroup.LAYOUT,
-      simpleName("Float"),
-      methods("floatTo"),
+      simpleName("Display"),
+      methods("display"),
       valueSet(
-        v("left", Keywords.left),
-        v("right", Keywords.right),
-        v("none", Keywords.none)
+        v("hidden", Keywords.none),
+        v("block", Keywords.block),
+        v("flow-root", Keywords.flowRoot),
+        v("inline-block", Keywords.inlineBlock),
+        v("inline", Keywords.inline),
+        v("flex", Keywords.flex),
+        v("inline-flex", Keywords.inlineFlex),
+        v("grid", Keywords.grid),
+        v("inline-grid", Keywords.inlineGrid),
+        v("table", Keywords.tableKw),
+        v("table-caption", Keywords.tableCaption),
+        v("table-cell", Keywords.tableCell),
+        v("table-column", Keywords.tableColumn),
+        v("table-column-group", Keywords.tableColumnGroup),
+        v("table-footer-group", Keywords.tableFooterGroup),
+        v("table-header-group", Keywords.tableHeaderGroup),
+        v("table-row-group", Keywords.tableRowGroup),
+        v("table-row", Keywords.tableRow)
       ),
       responsive
     );

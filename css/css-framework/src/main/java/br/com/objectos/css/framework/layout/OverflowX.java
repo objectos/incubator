@@ -53,6 +53,8 @@ public final class OverflowX extends AbstractStyleSheet {
 
   public static final ClassSelector hidden = Css.randomDot(5);
 
+  public static final ClassSelector clip = Css.randomDot(5);
+
   public static final ClassSelector visible = Css.randomDot(5);
 
   public static final ClassSelector scroll = Css.randomDot(5);
@@ -66,6 +68,10 @@ public final class OverflowX extends AbstractStyleSheet {
     style(
         hidden,
         overflowX(Keywords.hidden)
+    );
+    style(
+        clip,
+        overflowX(Keywords.clip)
     );
     style(
         visible,
@@ -86,6 +92,11 @@ public final class OverflowX extends AbstractStyleSheet {
         style(
             sm.hidden,
             overflowX(Keywords.hidden)
+        ),
+
+        style(
+            sm.clip,
+            overflowX(Keywords.clip)
         ),
 
         style(
@@ -112,6 +123,11 @@ public final class OverflowX extends AbstractStyleSheet {
         ),
 
         style(
+            md.clip,
+            overflowX(Keywords.clip)
+        ),
+
+        style(
             md.visible,
             overflowX(Keywords.visible)
         ),
@@ -132,6 +148,11 @@ public final class OverflowX extends AbstractStyleSheet {
         style(
             lg.hidden,
             overflowX(Keywords.hidden)
+        ),
+
+        style(
+            lg.clip,
+            overflowX(Keywords.clip)
         ),
 
         style(
@@ -158,6 +179,11 @@ public final class OverflowX extends AbstractStyleSheet {
         ),
 
         style(
+            xl.clip,
+            overflowX(Keywords.clip)
+        ),
+
+        style(
             xl.visible,
             overflowX(Keywords.visible)
         ),
@@ -181,6 +207,11 @@ public final class OverflowX extends AbstractStyleSheet {
         ),
 
         style(
+            x2l.clip,
+            overflowX(Keywords.clip)
+        ),
+
+        style(
             x2l.visible,
             overflowX(Keywords.visible)
         ),
@@ -198,6 +229,8 @@ public final class OverflowX extends AbstractStyleSheet {
 
     ClassSelector hidden = Css.randomDot(5);
 
+    ClassSelector clip = Css.randomDot(5);
+
     ClassSelector visible = Css.randomDot(5);
 
     ClassSelector scroll = Css.randomDot(5);
@@ -209,6 +242,8 @@ public final class OverflowX extends AbstractStyleSheet {
     ClassSelector auto = Css.randomDot(5);
 
     ClassSelector hidden = Css.randomDot(5);
+
+    ClassSelector clip = Css.randomDot(5);
 
     ClassSelector visible = Css.randomDot(5);
 
@@ -222,6 +257,8 @@ public final class OverflowX extends AbstractStyleSheet {
 
     ClassSelector hidden = Css.randomDot(5);
 
+    ClassSelector clip = Css.randomDot(5);
+
     ClassSelector visible = Css.randomDot(5);
 
     ClassSelector scroll = Css.randomDot(5);
@@ -234,6 +271,8 @@ public final class OverflowX extends AbstractStyleSheet {
 
     ClassSelector hidden = Css.randomDot(5);
 
+    ClassSelector clip = Css.randomDot(5);
+
     ClassSelector visible = Css.randomDot(5);
 
     ClassSelector scroll = Css.randomDot(5);
@@ -245,6 +284,8 @@ public final class OverflowX extends AbstractStyleSheet {
     ClassSelector auto = Css.randomDot(5);
 
     ClassSelector hidden = Css.randomDot(5);
+
+    ClassSelector clip = Css.randomDot(5);
 
     ClassSelector visible = Css.randomDot(5);
 

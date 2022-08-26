@@ -42,42 +42,48 @@ package br.com.objectos.css.framework.spec;
 import br.com.objectos.css.config.framework.AbstractConfiguration;
 import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkAtMediaSet;
 import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkGroup;
+import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkNamedValueSet;
 import br.com.objectos.css.keyword.Keywords;
 
-class Display extends AbstractConfiguration {
+final class OverflowSpec extends AbstractConfiguration {
 
   private final FrameworkAtMediaSet responsive;
 
-  Display(FrameworkAtMediaSet responsive) {
+  OverflowSpec(FrameworkAtMediaSet responsive) {
     this.responsive = responsive;
   }
 
   @Override
   protected final void configure() {
+    FrameworkNamedValueSet overflow = valueSet(
+      v("auto", Keywords.auto),
+      v("hidden", Keywords.hidden),
+      v("clip", Keywords.clip),
+      v("visible", Keywords.visible),
+      v("scroll", Keywords.scroll)
+    );
+
     property(
       FrameworkGroup.LAYOUT,
-      simpleName("Display"),
-      methods("display"),
-      valueSet(
-        v("hidden", Keywords.none),
-        v("block", Keywords.block),
-        v("flow-root", Keywords.flowRoot),
-        v("inline-block", Keywords.inlineBlock),
-        v("inline", Keywords.inline),
-        v("flex", Keywords.flex),
-        v("inline-flex", Keywords.inlineFlex),
-        v("grid", Keywords.grid),
-        v("inline-grid", Keywords.inlineGrid),
-        v("table", Keywords.tableKw),
-        v("table-caption", Keywords.tableCaption),
-        v("table-cell", Keywords.tableCell),
-        v("table-column", Keywords.tableColumn),
-        v("table-column-group", Keywords.tableColumnGroup),
-        v("table-footer-group", Keywords.tableFooterGroup),
-        v("table-header-group", Keywords.tableHeaderGroup),
-        v("table-row-group", Keywords.tableRowGroup),
-        v("table-row", Keywords.tableRow)
-      ),
+      simpleName("Overflow"),
+      methods("overflow"),
+      overflow,
+      responsive
+    );
+
+    property(
+      FrameworkGroup.LAYOUT,
+      simpleName("OverflowX"),
+      methods("overflowX"),
+      overflow,
+      responsive
+    );
+
+    property(
+      FrameworkGroup.LAYOUT,
+      simpleName("OverflowY"),
+      methods("overflowY"),
+      overflow,
       responsive
     );
   }

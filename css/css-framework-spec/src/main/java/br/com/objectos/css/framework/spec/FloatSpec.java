@@ -42,47 +42,27 @@ package br.com.objectos.css.framework.spec;
 import br.com.objectos.css.config.framework.AbstractConfiguration;
 import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkAtMediaSet;
 import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkGroup;
-import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkNamedValueSet;
 import br.com.objectos.css.keyword.Keywords;
 
-class Overflow extends AbstractConfiguration {
+final class FloatSpec extends AbstractConfiguration {
 
   private final FrameworkAtMediaSet responsive;
 
-  Overflow(FrameworkAtMediaSet responsive) {
+  FloatSpec(FrameworkAtMediaSet responsive) {
     this.responsive = responsive;
   }
 
   @Override
   protected final void configure() {
-    FrameworkNamedValueSet overflow = valueSet(
-      v("auto", Keywords.auto),
-      v("hidden", Keywords.hidden),
-      v("visible", Keywords.visible),
-      v("scroll", Keywords.scroll)
-    );
-
     property(
       FrameworkGroup.LAYOUT,
-      simpleName("Overflow"),
-      methods("overflow"),
-      overflow,
-      responsive
-    );
-
-    property(
-      FrameworkGroup.LAYOUT,
-      simpleName("OverflowX"),
-      methods("overflowX"),
-      overflow,
-      responsive
-    );
-
-    property(
-      FrameworkGroup.LAYOUT,
-      simpleName("OverflowY"),
-      methods("overflowY"),
-      overflow,
+      simpleName("Float"),
+      methods("floatTo"),
+      valueSet(
+        v("left", Keywords.left),
+        v("right", Keywords.right),
+        v("none", Keywords.none)
+      ),
       responsive
     );
   }
