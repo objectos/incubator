@@ -42,12 +42,13 @@ package br.com.objectos.css.framework.spec;
 import br.com.objectos.css.config.framework.AbstractConfiguration;
 import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkAtMediaSet;
 import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkGroup;
+import br.com.objectos.css.keyword.Keywords;
 
-final class LetterSpacing extends AbstractConfiguration {
+final class ListStylePosition extends AbstractConfiguration {
 
   private final FrameworkAtMediaSet responsive;
 
-  LetterSpacing(FrameworkAtMediaSet responsive) {
+  ListStylePosition(FrameworkAtMediaSet responsive) {
     this.responsive = responsive;
   }
 
@@ -55,15 +56,11 @@ final class LetterSpacing extends AbstractConfiguration {
   protected final void configure() {
     property(
       FrameworkGroup.TYPOGRAPHY,
-      simpleName("LetterSpacing"),
-      methods("letterSpacing"),
+      simpleName("ListStylePosition"),
+      methods("listStylePosition"),
       valueSet(
-        v("tighter", rem(-0.05)),
-        v("tight", rem(-0.025)),
-        v("normal", rem(0)),
-        v("wide", rem(0.025)),
-        v("wider", rem(0.05)),
-        v("widest", rem(0.1))
+        v("inside", Keywords.inside),
+        v("outside", Keywords.outside)
       ),
       responsive
     );

@@ -106,6 +106,8 @@ import br.com.objectos.css.framework.typography.FontStyle;
 import br.com.objectos.css.framework.typography.FontWeight;
 import br.com.objectos.css.framework.typography.Leading;
 import br.com.objectos.css.framework.typography.LetterSpacing;
+import br.com.objectos.css.framework.typography.ListStylePosition;
+import br.com.objectos.css.framework.typography.ListStyleType;
 import br.com.objectos.css.framework.typography.TextAlign;
 import br.com.objectos.css.framework.typography.TextColor;
 import br.com.objectos.css.framework.typography.TextDecoration;
@@ -214,6 +216,8 @@ abstract class AbstractFramework extends AbstractStyleSheet {
     install(new FontWeight());
     install(new Leading());
     install(new LetterSpacing());
+    install(new ListStylePosition());
+    install(new ListStyleType());
     install(new TextAlign());
     install(new TextColor());
     install(new TextDecoration());
