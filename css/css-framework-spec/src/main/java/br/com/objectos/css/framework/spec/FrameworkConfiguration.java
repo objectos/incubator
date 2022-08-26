@@ -109,12 +109,12 @@ public class FrameworkConfiguration extends AbstractConfiguration {
     install(new FontStyle(responsive));
     install(new FontWeight(responsive));
     install(new Leading(responsive));
-    install(new LetterSpacing(responsive));
-    install(new ListStylePosition(responsive));
-    install(new ListStyleType(responsive));
+    install(new LetterSpacingSpec(responsive));
+    install(new ListStylePositionSpec(responsive));
+    install(new ListStyleTypeSpec(responsive));
     install(new TextAlign(responsive));
-    install(new TextColor(colors, responsive));
-    install(new TextDecoration(responsive));
+    install(new TextColorSpec(colors, responsive));
+    install(new TextDecorationSpec(responsive));
     install(new TextTransform(responsive));
   }
 

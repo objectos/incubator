@@ -42,13 +42,14 @@ package br.com.objectos.css.framework.spec;
 import br.com.objectos.css.config.framework.AbstractConfiguration;
 import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkAtMediaSet;
 import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkGroup;
+import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkPropertyState;
 import br.com.objectos.css.keyword.Keywords;
 
-class TextDecoration extends AbstractConfiguration {
+final class TextDecorationSpec extends AbstractConfiguration {
 
   private final FrameworkAtMediaSet responsive;
 
-  TextDecoration(FrameworkAtMediaSet responsive) {
+  TextDecorationSpec(FrameworkAtMediaSet responsive) {
     this.responsive = responsive;
   }
 
@@ -64,7 +65,8 @@ class TextDecoration extends AbstractConfiguration {
         v("strike", Keywords.lineThrough),
         v("none", Keywords.none)
       ),
-      responsive
+      responsive,
+      FrameworkPropertyState.HOVER
     );
   }
 

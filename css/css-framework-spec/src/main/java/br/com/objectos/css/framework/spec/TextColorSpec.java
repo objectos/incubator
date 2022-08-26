@@ -42,13 +42,16 @@ package br.com.objectos.css.framework.spec;
 import br.com.objectos.css.config.framework.AbstractConfiguration;
 import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkAtMediaSet;
 import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkGroup;
-import br.com.objectos.css.keyword.Keywords;
+import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkNamedValueSet;
+import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkPropertyState;
 
-final class ListStyleType extends AbstractConfiguration {
+final class TextColorSpec extends AbstractConfiguration {
 
+  private final FrameworkNamedValueSet colors;
   private final FrameworkAtMediaSet responsive;
 
-  ListStyleType(FrameworkAtMediaSet responsive) {
+  TextColorSpec(FrameworkNamedValueSet colors, FrameworkAtMediaSet responsive) {
+    this.colors = colors;
     this.responsive = responsive;
   }
 
@@ -56,14 +59,11 @@ final class ListStyleType extends AbstractConfiguration {
   protected final void configure() {
     property(
       FrameworkGroup.TYPOGRAPHY,
-      simpleName("ListStyleType"),
-      methods("listStyleType"),
-      valueSet(
-        v("none", Keywords.none),
-        v("disc", Keywords.disc),
-        v("decimal", Keywords.decimal)
-      ),
-      responsive
+      simpleName("TextColor"),
+      methods("color"),
+      colors,
+      responsive,
+      FrameworkPropertyState.HOVER
     );
   }
 

@@ -44,11 +44,11 @@ import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkAtMediaSet
 import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkGroup;
 import br.com.objectos.css.keyword.Keywords;
 
-final class ListStylePosition extends AbstractConfiguration {
+final class ListStylePositionSpec extends AbstractConfiguration {
 
   private final FrameworkAtMediaSet responsive;
 
-  ListStylePosition(FrameworkAtMediaSet responsive) {
+  ListStylePositionSpec(FrameworkAtMediaSet responsive) {
     this.responsive = responsive;
   }
 

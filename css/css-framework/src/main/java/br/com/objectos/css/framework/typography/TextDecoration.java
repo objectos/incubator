@@ -75,6 +75,22 @@ public final class TextDecoration extends AbstractStyleSheet {
         none,
         textDecoration(Keywords.none)
     );
+    style(
+        hover.underline, HOVER,
+        textDecoration(Keywords.underline)
+    );
+    style(
+        hover.lineThrough, HOVER,
+        textDecoration(Keywords.lineThrough)
+    );
+    style(
+        hover.strike, HOVER,
+        textDecoration(Keywords.lineThrough)
+    );
+    style(
+        hover.none, HOVER,
+        textDecoration(Keywords.none)
+    );
     media(
         AbstractStyleSheet.screen, minWidth(px(640)),
 
@@ -190,6 +206,18 @@ public final class TextDecoration extends AbstractStyleSheet {
             textDecoration(Keywords.none)
         )
     );
+  }
+
+  public interface hover {
+
+    ClassSelector underline = Css.randomDot(5);
+
+    ClassSelector lineThrough = Css.randomDot(5);
+
+    ClassSelector strike = Css.randomDot(5);
+
+    ClassSelector none = Css.randomDot(5);
+
   }
 
   public interface sm {
