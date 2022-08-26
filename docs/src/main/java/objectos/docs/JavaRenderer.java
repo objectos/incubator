@@ -18,7 +18,6 @@ package objectos.docs;
 import br.com.objectos.css.select.ClassSelector;
 import java.util.Set;
 import javax.lang.model.SourceVersion;
-import objectos.docs.style.JavaCss;
 
 final class JavaRenderer extends LanguageRenderer {
 
@@ -130,7 +129,7 @@ final class JavaRenderer extends LanguageRenderer {
     String a;
     a = makeString();
 
-    span(JavaCss._ANNOTATION, a);
+    span(JavaStyles._ANNOTATION, a);
 
     return _START;
   }
@@ -180,7 +179,7 @@ final class JavaRenderer extends LanguageRenderer {
     String c;
     c = makeString();
 
-    span(JavaCss._COMMENT, c);
+    span(JavaStyles._COMMENT, c);
 
     return _START;
   }
@@ -203,10 +202,10 @@ final class JavaRenderer extends LanguageRenderer {
     id = makeString();
 
     ClassSelector type;
-    type = JavaCss._IDENTIFIER;
+    type = JavaStyles._IDENTIFIER;
 
     if (SourceVersion.isKeyword(id, sourceVersion) || CONTEXTUAL_KEYWORDS.contains(id)) {
-      type = JavaCss._KEYWORD;
+      type = JavaStyles._KEYWORD;
     }
 
     span(type, id);
@@ -242,7 +241,7 @@ final class JavaRenderer extends LanguageRenderer {
     String lit;
     lit = makeString();
 
-    span(JavaCss._DIGITS, lit);
+    span(JavaStyles._DIGITS, lit);
 
     return _START;
   }
@@ -322,7 +321,7 @@ final class JavaRenderer extends LanguageRenderer {
         "Implement me: string missing closing quote: " + lit);
     }
 
-    span(JavaCss._STRING, lit);
+    span(JavaStyles._STRING, lit);
 
     return _START;
   }
@@ -362,7 +361,7 @@ final class JavaRenderer extends LanguageRenderer {
         "Implement me: string missing closing quote: " + lit);
     }
 
-    span(JavaCss._STRING, lit);
+    span(JavaStyles._STRING, lit);
 
     return _START;
   }
@@ -371,7 +370,7 @@ final class JavaRenderer extends LanguageRenderer {
     String t;
     t = makeString();
 
-    span(JavaCss._TOKEN, t);
+    span(JavaStyles._TOKEN, t);
 
     return _START;
   }
@@ -393,7 +392,7 @@ final class JavaRenderer extends LanguageRenderer {
     String ws;
     ws = makeString();
 
-    span(JavaCss._WS, ws);
+    span(JavaStyles._WS, ws);
 
     return _START;
   }

@@ -15,8 +15,6 @@
  */
 package objectos.docs;
 
-import objectos.docs.style.XmlCss;
-
 final class XmlRenderer extends LanguageRenderer {
 
   private static final byte _ELEMENT_CONTENT = 0;
@@ -65,7 +63,7 @@ final class XmlRenderer extends LanguageRenderer {
     if (c == '<') {
       var t = makeString();
 
-      span(XmlCss._TEXT, t);
+      span(XmlStyles._TEXT, t);
 
       stringBuilder.append(c);
 
@@ -81,9 +79,9 @@ final class XmlRenderer extends LanguageRenderer {
     if (c == '>') {
       var tagName = makeString();
 
-      span(XmlCss._TAG_NAME, tagName);
+      span(XmlStyles._TAG_NAME, tagName);
 
-      span(XmlCss._SYMBOL, c);
+      span(XmlStyles._SYMBOL, c);
 
       return _ELEMENT_CONTENT;
     }
@@ -109,7 +107,7 @@ final class XmlRenderer extends LanguageRenderer {
       default:
         var symbol = makeString();
 
-        span(XmlCss._SYMBOL, symbol);
+        span(XmlStyles._SYMBOL, symbol);
 
         stringBuilder.append(c);
 

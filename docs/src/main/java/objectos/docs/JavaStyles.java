@@ -16,29 +16,27 @@
 package objectos.docs;
 
 import br.com.objectos.css.Css;
-import br.com.objectos.css.framework.Framework;
+import br.com.objectos.css.framework.typography.TextColor;
 import br.com.objectos.css.select.ClassSelector;
-import br.com.objectos.css.sheet.AbstractStyleSheet;
 
-final class DocsCss extends AbstractStyleSheet {
+final class JavaStyles {
 
-  static final ClassSelector XL_WIDTH_70 = Css.randomDot(3);
+  public static final ClassSelector _ANNOTATION = TextColor.pink600;
 
-  private final Framework framework = new Framework();
+  public static final ClassSelector _COMMENT = TextColor.fuchsia700;
 
-  @Override
-  protected final void definition() {
-    install(framework);
+  public static final ClassSelector _IDENTIFIER = Css.randomDot(3);
 
-    media(
-      screen, minWidth(px(1280)),
+  public static final ClassSelector _KEYWORD = TextColor.blue600;
 
-      style(
-        XL_WIDTH_70,
+  public static final ClassSelector _DIGITS = TextColor.red600;
 
-        width(rem(17.5))
-      )
-    );
-  }
+  public static final ClassSelector _STRING = TextColor.green700;
+
+  public static final ClassSelector _TOKEN = Css.randomDot(3);
+
+  public static final ClassSelector _WS = Css.randomDot(3);
+
+  private JavaStyles() {}
 
 }

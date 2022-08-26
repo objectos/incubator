@@ -23,13 +23,16 @@ import br.com.objectos.css.framework.flexbox.Flex;
 import br.com.objectos.css.framework.flexbox.FlexDirection;
 import br.com.objectos.css.framework.flexbox.FlexGrow;
 import br.com.objectos.css.framework.layout.Display;
+import br.com.objectos.css.framework.layout.OverflowX;
 import br.com.objectos.css.framework.sizing.MaxWidth;
 import br.com.objectos.css.framework.sizing.MinHeight;
+import br.com.objectos.css.framework.sizing.MinWidth;
 import br.com.objectos.css.framework.sizing.Width;
 import br.com.objectos.css.framework.spacing.MarginBottom;
 import br.com.objectos.css.framework.spacing.MarginTop;
 import br.com.objectos.css.framework.spacing.MarginX;
 import br.com.objectos.css.framework.spacing.MarginY;
+import br.com.objectos.css.framework.spacing.Padding;
 import br.com.objectos.css.framework.spacing.PaddingBottom;
 import br.com.objectos.css.framework.spacing.PaddingLeft;
 import br.com.objectos.css.framework.spacing.PaddingRight;
@@ -102,8 +105,9 @@ final class ArticleTemplate extends DocsTemplate implements LanguageRenderer.Out
         tagStart();
 
         addValue0(
+          FlexDirection.rowReverse,
           Display.flex,
-          FlexDirection.rowReverse
+          MaxWidth.full
         );
 
         // TOC
@@ -127,6 +131,7 @@ final class ArticleTemplate extends DocsTemplate implements LanguageRenderer.Out
 
         addValue0(
           FlexGrow.one,
+          MinWidth.v0,
           PaddingRight.xl.v10
         );
       }
@@ -250,7 +255,11 @@ final class ArticleTemplate extends DocsTemplate implements LanguageRenderer.Out
 
     tagStart();
     addValue0(
-      BackgroundColor.slate100
+      BackgroundColor.gray100,
+      FontSize.small,
+      OverflowX.auto,
+      MY_DEFAULT,
+      Padding.v03
     );
     tagStart();
     languageRenderer.render(this, literal);
@@ -325,6 +334,7 @@ final class ArticleTemplate extends DocsTemplate implements LanguageRenderer.Out
 
         main(
           FlexGrow.one,
+          MinWidth.v0,
           PaddingX.v04,
           PaddingTop.v06,
 
