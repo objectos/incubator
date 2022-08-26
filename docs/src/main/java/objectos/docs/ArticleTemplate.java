@@ -20,6 +20,7 @@ import br.com.objectos.css.framework.border.BorderBottom;
 import br.com.objectos.css.framework.border.BorderColor;
 import br.com.objectos.css.framework.border.BorderRight;
 import br.com.objectos.css.framework.flexbox.Flex;
+import br.com.objectos.css.framework.flexbox.FlexDirection;
 import br.com.objectos.css.framework.flexbox.FlexGrow;
 import br.com.objectos.css.framework.layout.Display;
 import br.com.objectos.css.framework.sizing.MaxWidth;
@@ -43,7 +44,7 @@ import br.com.objectos.css.sheet.StyleSheet;
 import br.com.objectos.html.element.ElementName;
 import br.com.objectos.html.element.StandardElementName;
 import br.com.objectos.html.spi.type.AValue;
-import objectos.docs.style.SyntaxCss;
+import objectos.asciidoc.DocumentAttributes;
 
 final class ArticleTemplate extends DocsTemplate implements LanguageRenderer.Output {
 
@@ -59,7 +60,25 @@ final class ArticleTemplate extends DocsTemplate implements LanguageRenderer.Out
 
   private final StringBuilder source = new StringBuilder();
 
+  private boolean containerStarted;
+
   ArticleTemplate(DocsInjector injector) { super(injector); }
+
+  @Override
+  public final void documentEnd() {
+    if (containerStarted) {
+      tagEnd(StandardElementName.DIV); // contents
+
+      tagEnd(StandardElementName.DIV); // container
+    }
+  }
+
+  @Override
+  public final void documentStart(DocumentAttributes attributes) {
+    super.documentStart(attributes);
+
+    containerStarted = false;
+  }
 
   @Override
   public final void headingEnd(int level) {
@@ -68,6 +87,41 @@ final class ArticleTemplate extends DocsTemplate implements LanguageRenderer.Out
         tagEnd(StandardElementName.H1);
 
         tagEnd(StandardElementName.HEADER);
+
+        containerStarted = true;
+
+        // container
+
+        tagStart();
+
+        addValue0(
+          Display.flex,
+          FlexDirection.rowReverse
+        );
+
+        // TOC
+
+        tagStart();
+
+        addValue0(
+          Display.hidden,
+          Display.xl.block,
+          Flex.xl.none,
+          Width.xl.v64
+        );
+
+        addValue0(raw("&nbsp;"));
+
+        tagEnd(StandardElementName.DIV);
+
+        // contents
+
+        tagStart();
+
+        addValue0(
+          FlexGrow.one,
+          PaddingRight.xl.v10
+        );
       }
 
       default -> super.headingEnd(level);
@@ -140,7 +194,9 @@ final class ArticleTemplate extends DocsTemplate implements LanguageRenderer.Out
     var literal = source.toString();
 
     tagStart();
-    addValue0(SyntaxCss._PRE);
+    addValue0(
+      BackgroundColor.slate100
+    );
     tagStart();
     languageRenderer.render(this, literal);
     tagEnd(StandardElementName.CODE);
@@ -185,19 +241,19 @@ final class ArticleTemplate extends DocsTemplate implements LanguageRenderer.Out
         MinHeight.full,
 
         nav(
-          BorderColor.md.slate200,
-          BorderRight.md.v1,
+          BorderColor.lg.slate200,
+          BorderRight.lg.v1,
           Display.hidden,
-          Display.md.block,
-          Flex.md.none,
+          Display.lg.block,
+          Flex.lg.none,
           FontSize.small,
           FontWeight.normal,
-          PaddingLeft.md.v02,
-          PaddingRight.md.v02,
+          PaddingLeft.lg.v02,
+          PaddingRight.lg.v02,
           PaddingTop.v06,
           TextColor.stone800,
-          Width.md.v56,
-          DocsCss.LG_WIDTH_70,
+          Width.lg.v56,
+          DocsCss.XL_WIDTH_70,
 
           f(this::_leftBar)
         ),
@@ -207,8 +263,8 @@ final class ArticleTemplate extends DocsTemplate implements LanguageRenderer.Out
           PaddingX.v04,
           PaddingTop.v06,
 
-          PaddingTop.lg.v08,
-          PaddingLeft.lg.v10,
+          PaddingTop.xl.v08,
+          PaddingLeft.xl.v10,
 
           article(
             f(this::renderDocument)

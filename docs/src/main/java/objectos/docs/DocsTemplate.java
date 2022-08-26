@@ -57,11 +57,11 @@ abstract class DocsTemplate extends AbstractTemplate implements AsciiDoc.Process
   }
 
   @Override
-  public final void documentEnd() {
+  public void documentEnd() {
   }
 
   @Override
-  public final void documentStart(DocumentAttributes attributes) {
+  public void documentStart(DocumentAttributes attributes) {
     valueListIndex = 0;
 
     valueStackIndex = -1;

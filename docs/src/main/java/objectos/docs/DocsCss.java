@@ -12,7 +12,7 @@ import br.com.objectos.css.sheet.AbstractStyleSheet;
 
 final class DocsCss extends AbstractStyleSheet {
 
-  static final ClassSelector LG_WIDTH_70 = Css.randomDot(3);
+  static final ClassSelector XL_WIDTH_70 = Css.randomDot(3);
 
   private final Framework framework = new Framework();
 
@@ -21,10 +21,10 @@ final class DocsCss extends AbstractStyleSheet {
     install(framework);
 
     media(
-      screen, minWidth(px(1024)),
+      screen, minWidth(px(1280)),
 
       style(
-        LG_WIDTH_70,
+        XL_WIDTH_70,
 
         width(rem(17.5))
       )
