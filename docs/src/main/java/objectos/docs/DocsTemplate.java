@@ -18,6 +18,8 @@ package objectos.docs;
 import br.com.objectos.css.framework.flexbox.FlexDirection;
 import br.com.objectos.css.framework.layout.Display;
 import br.com.objectos.css.framework.sizing.MinHeight;
+import br.com.objectos.css.framework.typography.TextColor;
+import br.com.objectos.css.framework.typography.TextDecoration;
 import br.com.objectos.css.sheet.StyleSheet;
 import br.com.objectos.html.element.StandardElementName;
 import br.com.objectos.html.spi.type.Value;
@@ -102,7 +104,7 @@ abstract class DocsTemplate extends AbstractTemplate implements AsciiDoc.Process
         var href = injector.$elink(target);
 
         tagStart();
-        addValue0(href(href));
+        linkValues(href);
         attributes.render("1");
         tagEnd(StandardElementName.A);
       }
@@ -111,7 +113,7 @@ abstract class DocsTemplate extends AbstractTemplate implements AsciiDoc.Process
         var href = injector.$ilink(target);
 
         tagStart();
-        addValue0(href(href));
+        linkValues(href);
         attributes.render("1");
         tagEnd(StandardElementName.A);
       }
@@ -136,7 +138,7 @@ abstract class DocsTemplate extends AbstractTemplate implements AsciiDoc.Process
   @Override
   public final void link(String href, LinkText text) {
     tagStart();
-    addValue0(href(href));
+    linkValues(href);
     text.render();
     tagEnd(StandardElementName.A);
   }
@@ -153,7 +155,7 @@ abstract class DocsTemplate extends AbstractTemplate implements AsciiDoc.Process
   }
 
   @Override
-  public final void listItemStart() {
+  public void listItemStart() {
     tagStart();
   }
 
@@ -163,7 +165,7 @@ abstract class DocsTemplate extends AbstractTemplate implements AsciiDoc.Process
   }
 
   @Override
-  public final void monospaceStart() {
+  public void monospaceStart() {
     tagStart();
   }
 
@@ -209,7 +211,7 @@ abstract class DocsTemplate extends AbstractTemplate implements AsciiDoc.Process
   }
 
   @Override
-  public final void unorderedListStart() {
+  public void unorderedListStart() {
     tagStart();
   }
 
@@ -253,6 +255,17 @@ abstract class DocsTemplate extends AbstractTemplate implements AsciiDoc.Process
     valueList[valueListIndex++] = v0;
     valueList[valueListIndex++] = v1;
     valueList[valueListIndex++] = v2;
+  }
+
+  void linkValues(String href) {
+    addValue0(
+      TextColor.blue600,
+      TextColor.hover.blue900,
+      TextDecoration.underline,
+      TextDecoration.hover.none,
+
+      href(href)
+    );
   }
 
   abstract void main0();

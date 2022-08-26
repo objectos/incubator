@@ -27,7 +27,9 @@ import br.com.objectos.css.framework.sizing.MaxWidth;
 import br.com.objectos.css.framework.sizing.MinHeight;
 import br.com.objectos.css.framework.sizing.Width;
 import br.com.objectos.css.framework.spacing.MarginBottom;
+import br.com.objectos.css.framework.spacing.MarginTop;
 import br.com.objectos.css.framework.spacing.MarginX;
+import br.com.objectos.css.framework.spacing.MarginY;
 import br.com.objectos.css.framework.spacing.PaddingBottom;
 import br.com.objectos.css.framework.spacing.PaddingLeft;
 import br.com.objectos.css.framework.spacing.PaddingRight;
@@ -37,6 +39,7 @@ import br.com.objectos.css.framework.spacing.PaddingY;
 import br.com.objectos.css.framework.typography.FontSize;
 import br.com.objectos.css.framework.typography.FontWeight;
 import br.com.objectos.css.framework.typography.LetterSpacing;
+import br.com.objectos.css.framework.typography.ListStyleType;
 import br.com.objectos.css.framework.typography.TextColor;
 import br.com.objectos.css.framework.typography.TextTransform;
 import br.com.objectos.css.select.ClassSelector;
@@ -47,6 +50,8 @@ import br.com.objectos.html.spi.type.AValue;
 import objectos.asciidoc.DocumentAttributes;
 
 final class ArticleTemplate extends DocsTemplate implements LanguageRenderer.Output {
+
+  private static final ClassSelector MY_DEFAULT = MarginY.v03;
 
   private final ArticleCss css = new ArticleCss();
 
@@ -61,6 +66,8 @@ final class ArticleTemplate extends DocsTemplate implements LanguageRenderer.Out
   private final StringBuilder source = new StringBuilder();
 
   private boolean containerStarted;
+
+  private boolean heading;
 
   ArticleTemplate(DocsInjector injector) { super(injector); }
 
@@ -126,10 +133,14 @@ final class ArticleTemplate extends DocsTemplate implements LanguageRenderer.Out
 
       default -> super.headingEnd(level);
     }
+
+    heading = false;
   }
 
   @Override
   public final void headingStart(int level) {
+    heading = true;
+
     switch (level) {
       case 1 -> {
         tagStart(); // <header>
@@ -146,6 +157,27 @@ final class ArticleTemplate extends DocsTemplate implements LanguageRenderer.Out
         addValue0(
           FontSize.xLarge3,
           LetterSpacing.tight
+        );
+      }
+
+      case 2 -> {
+        tagStart(); // <h2>
+
+        addValue0(
+          FontSize.xLarge2,
+          MarginTop.v10
+        );
+      }
+
+      case 3 -> {
+        tagStart(); // <h3>
+
+        addValue0(
+          BorderBottom.v1,
+          BorderColor.slate300,
+          FontSize.large,
+          MarginTop.v06,
+          MY_DEFAULT
         );
       }
 
@@ -181,11 +213,34 @@ final class ArticleTemplate extends DocsTemplate implements LanguageRenderer.Out
   }
 
   @Override
+  public final void listItemStart() {
+    super.listItemStart();
+
+    addValue0(
+      MY_DEFAULT
+    );
+  }
+
+  @Override
+  public final void monospaceStart() {
+    super.monospaceStart();
+
+    if (!heading) {
+      addValue0(
+        BackgroundColor.gray100,
+        FontSize.small,
+        PaddingX.v01,
+        PaddingY.v00_5
+      );
+    }
+  }
+
+  @Override
   public final void paragraphStart() {
     super.paragraphStart();
 
     addValue0(
-      MarginBottom.v04
+      MY_DEFAULT
     );
   }
 
@@ -227,6 +282,16 @@ final class ArticleTemplate extends DocsTemplate implements LanguageRenderer.Out
     } else {
       super.text(s);
     }
+  }
+
+  @Override
+  public final void unorderedListStart() {
+    super.unorderedListStart();
+
+    addValue0(
+      ListStyleType.disc,
+      PaddingLeft.v08
+    );
   }
 
   @Override
