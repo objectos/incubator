@@ -22,7 +22,8 @@ class StyleSheetCompiler extends StyleSheetVisitor {
 
   int[] codes;
 
-  private int codesIndex;
+  int codesIndex;
+
   int cursor;
 
   // multi stack

@@ -24,87 +24,6 @@ import objectos.util.GrowableList;
 
 public abstract class Selector implements IsNonTerminal {
 
-  Selector() {}
-
-  public static Builder builder() {
-    return new Builder();
-  }
-
-  static Selector checkIsSelector(Object o, String name) {
-    Check.argument((o instanceof Selector), name + " not instanceof Selector");
-    return (Selector) o;
-  }
-
-  public abstract void acceptRuleElementList(GrowableList<RuleElement> elements);
-
-  public abstract <R, P> R acceptSelectorVisitor(SelectorVisitor<R, P> visitor, P p);
-
-  public abstract boolean matches(Selectable element);
-
-  @Override
-  public abstract String toString();
-
-  final void acceptRuleElementListImpl(
-      GrowableList<RuleElement> elements, UnmodifiableList<Selector> list, Combinator combinator) {
-    if (list.isEmpty()) {
-      return;
-    }
-
-    Selector first;
-    first = list.get(0);
-
-    first.acceptRuleElementList(elements);
-
-    for (int i = 1; i < list.size(); i++) {
-      elements.add(combinator);
-
-      Selector next;
-      next = list.get(i);
-
-      next.acceptRuleElementList(elements);
-    }
-  }
-
-  AdjacentSiblingSelector newAdjacentSiblingSelectorWithPrevious(Selector previous) {
-    return new AdjacentSiblingSelector(UnmodifiableList.of(previous, this));
-  }
-
-  ChildSelector newChildSelectorWithParent(Selector parent) {
-    return new ChildSelector(UnmodifiableList.of(parent, this));
-  }
-
-  DescendantSelector newDescendantSelectorWithAncestor(Selector ancestor) {
-    return new DescendantSelector(UnmodifiableList.of(ancestor, this));
-  }
-
-  GeneralSiblingSelector newGeneralSiblingSelectorWithPrevious(Selector previous) {
-    return new GeneralSiblingSelector(UnmodifiableList.of(previous, this));
-  }
-
-  SelectorList newSelectorListWithHead(Selector head) {
-    return new SelectorList(UnmodifiableList.of(head, this));
-  }
-
-  final Stream<? extends Selectable> parentStream(Selectable element) {
-    return element.parent()
-        .map(el -> Stream.concat(Stream.of(el), parentStream(el)))
-        .orElse(Stream.of());
-  }
-
-  void uncheckedAddAttributeSelector(AttributeSelector selector) {}
-
-  void uncheckedAddAttributeValueSelector(AttributeValueSelector selector) {}
-
-  void uncheckedAddClassSelector(ClassSelector selector) {}
-
-  void uncheckedAddIdSelector(IdSelector selector) {}
-
-  void uncheckedAddPseudoClassSelector(PseudoClassSelector selector) {}
-
-  void uncheckedAddPseudoElementSelector(PseudoElementSelector selector) {}
-
-  void uncheckedAddTypeSelector(TypeSelector selector) {}
-
   public static class Builder extends ModeDsl implements BuilderDsl {
 
     private GrowableList<Selector> combinatorList;
@@ -132,6 +51,20 @@ public abstract class Selector implements IsNonTerminal {
 
     public final Selector build() {
       return mode.build(this);
+    }
+
+    public final void reset() {
+      if (combinatorList != null) {
+        combinatorList.clear();
+      }
+
+      if (compoundList != null) {
+        compoundList.clear();
+      }
+
+      currentCombinator = null;
+
+      mode = Mode.start();
     }
 
     @Override
@@ -242,5 +175,86 @@ public abstract class Selector implements IsNonTerminal {
     void addUniversalSelector(UniversalSelector selector);
 
   }
+
+  Selector() {}
+
+  public static Builder builder() {
+    return new Builder();
+  }
+
+  static Selector checkIsSelector(Object o, String name) {
+    Check.argument((o instanceof Selector), name + " not instanceof Selector");
+    return (Selector) o;
+  }
+
+  public abstract void acceptRuleElementList(GrowableList<RuleElement> elements);
+
+  public abstract <R, P> R acceptSelectorVisitor(SelectorVisitor<R, P> visitor, P p);
+
+  public abstract boolean matches(Selectable element);
+
+  @Override
+  public abstract String toString();
+
+  final void acceptRuleElementListImpl(
+      GrowableList<RuleElement> elements, UnmodifiableList<Selector> list, Combinator combinator) {
+    if (list.isEmpty()) {
+      return;
+    }
+
+    Selector first;
+    first = list.get(0);
+
+    first.acceptRuleElementList(elements);
+
+    for (int i = 1; i < list.size(); i++) {
+      elements.add(combinator);
+
+      Selector next;
+      next = list.get(i);
+
+      next.acceptRuleElementList(elements);
+    }
+  }
+
+  AdjacentSiblingSelector newAdjacentSiblingSelectorWithPrevious(Selector previous) {
+    return new AdjacentSiblingSelector(UnmodifiableList.of(previous, this));
+  }
+
+  ChildSelector newChildSelectorWithParent(Selector parent) {
+    return new ChildSelector(UnmodifiableList.of(parent, this));
+  }
+
+  DescendantSelector newDescendantSelectorWithAncestor(Selector ancestor) {
+    return new DescendantSelector(UnmodifiableList.of(ancestor, this));
+  }
+
+  GeneralSiblingSelector newGeneralSiblingSelectorWithPrevious(Selector previous) {
+    return new GeneralSiblingSelector(UnmodifiableList.of(previous, this));
+  }
+
+  SelectorList newSelectorListWithHead(Selector head) {
+    return new SelectorList(UnmodifiableList.of(head, this));
+  }
+
+  final Stream<? extends Selectable> parentStream(Selectable element) {
+    return element.parent()
+        .map(el -> Stream.concat(Stream.of(el), parentStream(el)))
+        .orElse(Stream.of());
+  }
+
+  void uncheckedAddAttributeSelector(AttributeSelector selector) {}
+
+  void uncheckedAddAttributeValueSelector(AttributeValueSelector selector) {}
+
+  void uncheckedAddClassSelector(ClassSelector selector) {}
+
+  void uncheckedAddIdSelector(IdSelector selector) {}
+
+  void uncheckedAddPseudoClassSelector(PseudoClassSelector selector) {}
+
+  void uncheckedAddPseudoElementSelector(PseudoElementSelector selector) {}
+
+  void uncheckedAddTypeSelector(TypeSelector selector) {}
 
 }

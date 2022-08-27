@@ -23,6 +23,8 @@ import br.com.objectos.css.select.AttributeValueOperator;
 import br.com.objectos.css.select.Combinator;
 import br.com.objectos.css.select.PseudoClassSelectors;
 import br.com.objectos.css.select.PseudoElementSelectors;
+import br.com.objectos.css.select.Selector;
+import br.com.objectos.css.select.SelectorFactory;
 import br.com.objectos.css.select.SimpleSelector;
 import br.com.objectos.css.select.TypeSelectors;
 import br.com.objectos.css.select.UniversalSelector;
@@ -59,17 +61,17 @@ public abstract class StyleSheetEngine<E extends Exception> extends StyleSheetCo
 
   private static final int _FUNCTION_VALUES = 8;
 
-  private static final int _IGNORE_IF_SINGLE_SELECTOR = 9;
-
   private static final int _IGNORE_RULE = 10;
 
-  private static final int _MEDIA_QUERY = 11;
+  private static final int _MAYBE_IGNORE_SELECTOR = 11;
 
-  private static final int _MEDIA_QUERY_DECLARATION = 12;
+  private static final int _MEDIA_QUERY = 12;
 
-  private static final int _SELECTOR = 13;
+  private static final int _MEDIA_QUERY_DECLARATION = 13;
 
-  static final int _SHEET_BODY = 14;
+  private static final int _SELECTOR = 14;
+
+  static final int _SHEET_BODY = 15;
 
   private static final Predicate<String> CLASS_SELECTORS_ALWAYS_TRUE = (s) -> true;
 
@@ -83,7 +85,7 @@ public abstract class StyleSheetEngine<E extends Exception> extends StyleSheetCo
 
   private Predicate<String> classSelectorsByName;
 
-  private String currentClassName;
+  private final Selector.Builder maybeIgnoreSelector = Selector.builder();
 
   protected StyleSheetEngine() {}
 
@@ -230,7 +232,7 @@ public abstract class StyleSheetEngine<E extends Exception> extends StyleSheetCo
   }
 
   private void doDeclarationStart() throws E {
-    var code = getCode();
+    var code = nextCode();
 
     var name = StandardPropertyName.getByCode(code);
 
@@ -253,7 +255,13 @@ public abstract class StyleSheetEngine<E extends Exception> extends StyleSheetCo
         yield _DECLARATION_START;
       }
 
-      case _IGNORE_IF_SINGLE_SELECTOR, _IGNORE_RULE -> _IGNORE_RULE;
+      case _IGNORE_RULE -> state;
+
+      case _MAYBE_IGNORE_SELECTOR -> {
+        maybeIgnoreSelector.reset();
+
+        yield _IGNORE_RULE;
+      }
 
       case _MEDIA_QUERY -> {
         visitLogicalExpressionStart(LogicalOperator.AND);
@@ -276,7 +284,7 @@ public abstract class StyleSheetEngine<E extends Exception> extends StyleSheetCo
   }
 
   private void doFlowJmp() {
-    int jumpTo = getCode();
+    int jumpTo = nextCode();
 
     pushCall();
 
@@ -298,12 +306,13 @@ public abstract class StyleSheetEngine<E extends Exception> extends StyleSheetCo
 
         yield _DECLARATION_VALUES;
       }
+
       default -> throw new IllegalArgumentException("Unexpected state: " + state);
     };
   }
 
   private void doFunctionStart() throws E {
-    var code = getCode();
+    var code = nextCode();
 
     var name = StandardFunctionName.getByCode(code);
 
@@ -313,6 +322,7 @@ public abstract class StyleSheetEngine<E extends Exception> extends StyleSheetCo
 
         yield _FUNCTION_START;
       }
+
       case _DECLARATION_VALUES -> {
         visitBeforeNextValue();
 
@@ -320,6 +330,7 @@ public abstract class StyleSheetEngine<E extends Exception> extends StyleSheetCo
 
         yield _FUNCTION_START;
       }
+
       default -> throw new IllegalArgumentException("Unexpected state: " + state);
     };
   }
@@ -335,6 +346,7 @@ public abstract class StyleSheetEngine<E extends Exception> extends StyleSheetCo
 
         yield body.state;
       }
+
       default -> throw new IllegalArgumentException("Unexpected state: " + state);
     };
   }
@@ -348,6 +360,7 @@ public abstract class StyleSheetEngine<E extends Exception> extends StyleSheetCo
 
         yield _AT_MEDIA_START;
       }
+
       case _START -> {
         pushBody(Body.SHEET);
 
@@ -355,6 +368,7 @@ public abstract class StyleSheetEngine<E extends Exception> extends StyleSheetCo
 
         yield _AT_MEDIA_START;
       }
+
       default -> throw new IllegalArgumentException("Unexpected state: " + state);
     };
   }
@@ -362,7 +376,7 @@ public abstract class StyleSheetEngine<E extends Exception> extends StyleSheetCo
   private void doMediaType() throws E {
     state = switch (state) {
       case _AT_MEDIA_START -> {
-        var code = getCode();
+        var code = nextCode();
 
         var type = MediaType.getByCode(code);
 
@@ -370,15 +384,14 @@ public abstract class StyleSheetEngine<E extends Exception> extends StyleSheetCo
 
         yield _MEDIA_QUERY;
       }
+
       default -> throw new IllegalArgumentException("Unexpected state: " + state);
     };
   }
 
   private void doMultiDeclarationSeparator() throws E {
     state = switch (state) {
-      case _DECLARATION_START -> {
-        yield _DECLARATION_START;
-      }
+      case _DECLARATION_START -> state;
 
       case _DECLARATION_VALUES -> {
         visitMultiDeclarationSeparator();
@@ -403,11 +416,13 @@ public abstract class StyleSheetEngine<E extends Exception> extends StyleSheetCo
 
         yield body.state;
       }
+
       case _IGNORE_RULE -> {
         var body = peekBody();
 
         yield body.state;
       }
+
       case _SELECTOR -> {
         visitEmptyBlock();
 
@@ -415,6 +430,7 @@ public abstract class StyleSheetEngine<E extends Exception> extends StyleSheetCo
 
         yield body.state;
       }
+
       default -> throw new IllegalArgumentException("Unexpected state: " + state);
     };
   }
@@ -422,6 +438,7 @@ public abstract class StyleSheetEngine<E extends Exception> extends StyleSheetCo
   private void doRuleStart() throws E {
     state = switch (state) {
       case _AT_MEDIA_BODY, _SHEET_BODY -> state;
+
       case _MEDIA_QUERY -> {
         pushBody(Body.MEDIA);
 
@@ -429,82 +446,63 @@ public abstract class StyleSheetEngine<E extends Exception> extends StyleSheetCo
 
         yield state;
       }
+
       case _START -> {
         pushBody(Body.SHEET);
 
         yield state;
       }
+
       default -> throw new IllegalArgumentException("Unexpected state: " + state);
     };
   }
 
-  private void doSelector0(Action<E> action) throws E {
+  private void doSelector0() throws E {
     switch (state) {
-      case _AT_MEDIA_BODY:
+      case _AT_MEDIA_BODY -> {
         visitBeforeNextStatement();
 
         visitRuleStart();
+      }
 
-        action.execute();
+      case _MEDIA_QUERY -> visitRuleStart();
 
-        break;
-      case _IGNORE_IF_SINGLE_SELECTOR:
-        visitRuleStart();
-
-        visitClassSelector(currentClassName);
-
-        currentClassName = null;
-
-        action.execute();
-
-        break;
-      case _MEDIA_QUERY:
-        visitRuleStart();
-
-        action.execute();
-
-        break;
-      case _SHEET_BODY:
+      case _SHEET_BODY -> {
         visitBeforeNextStatement();
 
         visitRuleStart();
+      }
 
-        action.execute();
+      case _SELECTOR -> {}
 
-        break;
-      case _SELECTOR:
-        action.execute();
+      case _START -> visitRuleStart();
 
-        break;
-      case _START:
-        visitRuleStart();
-
-        action.execute();
-
-        break;
-      default:
-        throw new IllegalArgumentException("Unexpected state: " + state);
+      default -> throw new IllegalArgumentException("Unexpected state: " + state);
     }
 
     state = _SELECTOR;
   }
 
   private void doSelectorAttribute() throws E {
+    doSelector0();
+
     var attributeName = getString();
 
-    doSelector0(() -> visitAttributeSelector(attributeName));
+    visitAttributeSelector(attributeName);
   }
 
   private void doSelectorAttributeValue() throws E {
+    doSelector0();
+
     var attributeName = getString();
 
-    var opCode = getCode();
+    var opCode = nextCode();
 
     var operator = AttributeValueOperator.getByCode(opCode);
 
     var value = getString();
 
-    doSelector0(() -> visitAttributeValueSelector(attributeName, operator, value));
+    visitAttributeValueSelector(attributeName, operator, value);
   }
 
   private void doSelectorClass() throws E {
@@ -513,61 +511,89 @@ public abstract class StyleSheetEngine<E extends Exception> extends StyleSheetCo
     state = switch (state) {
       case _AT_MEDIA_BODY, _MEDIA_QUERY, _SHEET_BODY, _START:
         if (!classSelectorsByName.test(className)) {
-          currentClassName = className;
+          maybeIgnoreSelector.reset();
 
-          yield _IGNORE_IF_SINGLE_SELECTOR;
+          maybeIgnoreSelector.addSimpleSelector(
+            SelectorFactory.dot(className)
+          );
+
+          yield _MAYBE_IGNORE_SELECTOR;
         }
 
         // fall through
       default:
-        doSelector0(() -> visitClassSelector(className));
+        doSelector0();
+
+        visitClassSelector(className);
 
         yield state;
     };
   }
 
   private void doSelectorCombinator() throws E {
-    var code = getCode();
+    doSelector0();
+
+    var code = nextCode();
 
     var combinator = Combinator.getByCode(code);
 
-    doSelector0(() -> visitCombinator(combinator));
+    visitCombinator(combinator);
   }
 
   private void doSelectorId() throws E {
+    doSelector0();
+
     var id = getString();
 
-    doSelector0(() -> visitIdSelector(id));
+    visitIdSelector(id);
   }
 
   private void doSelectorPseudoClass() throws E {
-    var code = getCode();
+    var code = nextCode();
 
     var selector = PseudoClassSelectors.getByCode(code);
 
-    doSelector0(() -> visitSimpleSelector(selector));
+    switch (state) {
+      case _MAYBE_IGNORE_SELECTOR -> {
+        maybeIgnoreSelector.addSimpleSelector(
+          selector
+        );
+      }
+
+      default -> {
+        doSelector0();
+
+        visitSimpleSelector(selector);
+      }
+    }
   }
 
   private void doSelectorPseudoElement() throws E {
-    var code = getCode();
+    doSelector0();
+
+    var code = nextCode();
 
     var selector = PseudoElementSelectors.getByCode(code);
 
-    doSelector0(() -> visitSimpleSelector(selector));
+    visitSimpleSelector(selector);
   }
 
   private void doSelectorType() throws E {
-    var code = getCode();
+    doSelector0();
+
+    var code = nextCode();
 
     var selector = TypeSelectors.getByCode(code);
 
-    doSelector0(() -> visitSimpleSelector(selector));
+    visitSimpleSelector(selector);
   }
 
   private void doSelectorUniversal() throws E {
+    doSelector0();
+
     var selector = UniversalSelector.getInstance();
 
-    doSelector0(() -> visitUniversalSelector(selector));
+    visitUniversalSelector(selector);
   }
 
   private <T> void doValue0(Action<E> action) throws E {
@@ -577,6 +603,7 @@ public abstract class StyleSheetEngine<E extends Exception> extends StyleSheetCo
 
         yield _DECLARATION_VALUES;
       }
+
       case _DECLARATION_VALUES -> {
         visitBeforeNextValue();
 
@@ -584,11 +611,13 @@ public abstract class StyleSheetEngine<E extends Exception> extends StyleSheetCo
 
         yield _DECLARATION_VALUES;
       }
+
       case _FUNCTION_START -> {
         action.execute();
 
         yield _FUNCTION_VALUES;
       }
+
       case _FUNCTION_VALUES -> {
         visitBeforeNextValue();
 
@@ -596,7 +625,9 @@ public abstract class StyleSheetEngine<E extends Exception> extends StyleSheetCo
 
         yield _FUNCTION_VALUES;
       }
-      case _IGNORE_RULE -> _IGNORE_RULE;
+
+      case _IGNORE_RULE -> state;
+
       case _MEDIA_QUERY_DECLARATION -> {
         action.execute();
 
@@ -604,6 +635,7 @@ public abstract class StyleSheetEngine<E extends Exception> extends StyleSheetCo
 
         yield _MEDIA_QUERY;
       }
+
       default -> throw new IllegalArgumentException("Unexpected state: " + state);
     };
   }
@@ -619,7 +651,7 @@ public abstract class StyleSheetEngine<E extends Exception> extends StyleSheetCo
   private void doValueAngleInt() throws E {
     var unit = getAngleUnit();
 
-    var value = getCode();
+    var value = nextCode();
 
     doValue0(() -> visitAngle(unit, value));
   }
@@ -631,7 +663,7 @@ public abstract class StyleSheetEngine<E extends Exception> extends StyleSheetCo
   }
 
   private void doValueColorName() throws E {
-    var code = getCode();
+    var code = nextCode();
 
     var color = Color.getByCode(code);
 
@@ -645,13 +677,13 @@ public abstract class StyleSheetEngine<E extends Exception> extends StyleSheetCo
   }
 
   private void doValueInt() throws E {
-    var value = getCode();
+    var value = nextCode();
 
     doValue0(() -> visitInt(value));
   }
 
   private void doValueKeyword() throws E {
-    var code = getCode();
+    var code = nextCode();
 
     var keyword = Keywords.getByCode(code);
 
@@ -675,7 +707,7 @@ public abstract class StyleSheetEngine<E extends Exception> extends StyleSheetCo
   private void doValueLengthInt() throws E {
     var unit = getLengthUnit();
 
-    var value = getCode();
+    var value = nextCode();
 
     doValue0(() -> visitLength(unit, value));
   }
@@ -687,13 +719,13 @@ public abstract class StyleSheetEngine<E extends Exception> extends StyleSheetCo
   }
 
   private void doValuePercentageInt() throws E {
-    var value = getCode();
+    var value = nextCode();
 
     doValue0(() -> visitPercentage(value));
   }
 
   private void doValueRgbaDouble() throws E {
-    var doubleStartIndex = getCode();
+    var doubleStartIndex = nextCode();
 
     var r = getDouble(doubleStartIndex++);
     var g = getDouble(doubleStartIndex++);
@@ -704,16 +736,16 @@ public abstract class StyleSheetEngine<E extends Exception> extends StyleSheetCo
   }
 
   private void doValueRgbaInt() throws E {
-    var r = getCode();
-    var g = getCode();
-    var b = getCode();
+    var r = nextCode();
+    var g = nextCode();
+    var b = nextCode();
     var alpha = getDouble();
 
     doValue0(() -> visitRgba(r, g, b, alpha));
   }
 
   private void doValueRgbDouble() throws E {
-    var doubleStartIndex = getCode();
+    var doubleStartIndex = nextCode();
 
     var r = getDouble(doubleStartIndex++);
     var g = getDouble(doubleStartIndex++);
@@ -723,7 +755,7 @@ public abstract class StyleSheetEngine<E extends Exception> extends StyleSheetCo
   }
 
   private void doValueRgbDoubleAlpha() throws E {
-    var doubleStartIndex = getCode();
+    var doubleStartIndex = nextCode();
 
     var r = getDouble(doubleStartIndex++);
     var g = getDouble(doubleStartIndex++);
@@ -734,17 +766,17 @@ public abstract class StyleSheetEngine<E extends Exception> extends StyleSheetCo
   }
 
   private void doValueRgbInt() throws E {
-    var r = getCode();
-    var g = getCode();
-    var b = getCode();
+    var r = nextCode();
+    var g = nextCode();
+    var b = nextCode();
 
     doValue0(() -> visitRgb(r, g, b));
   }
 
   private void doValueRgbIntAlpha() throws E {
-    var r = getCode();
-    var g = getCode();
-    var b = getCode();
+    var r = nextCode();
+    var g = nextCode();
+    var b = nextCode();
     var alpha = getDouble();
 
     doValue0(() -> visitRgb(r, g, b, alpha));
@@ -763,159 +795,105 @@ public abstract class StyleSheetEngine<E extends Exception> extends StyleSheetCo
   }
 
   private void execute0() throws E {
-    int code;
-    code = getCode();
+    var code = nextCode();
 
     switch (code) {
-      case ByteCode.DECLARATION_START:
-        doDeclarationStart();
-        break;
+      case ByteCode.DECLARATION_START -> doDeclarationStart();
 
-      case ByteCode.FLOW_JMP:
-        doFlowJmp();
-        break;
-      case ByteCode.FLOW_RETURN:
-        doFlowReturn();
-        break;
+      case ByteCode.FLOW_JMP -> doFlowJmp();
 
-      case ByteCode.FUNCTION_END:
-        doFunctionEnd();
-        break;
-      case ByteCode.FUNCTION_START:
-        doFunctionStart();
-        break;
+      case ByteCode.FLOW_RETURN -> doFlowReturn();
 
-      case ByteCode.MEDIA_END:
-        doMediaEnd();
-        break;
-      case ByteCode.MEDIA_START:
-        doMediaStart();
-        break;
-      case ByteCode.MEDIA_TYPE:
-        doMediaType();
-        break;
+      case ByteCode.FUNCTION_END -> doFunctionEnd();
 
-      case ByteCode.MULTI_DECLARATION_SEPARATOR:
-        doMultiDeclarationSeparator();
-        break;
+      case ByteCode.FUNCTION_START -> doFunctionStart();
 
-      case ByteCode.SELECTOR_ATTRIBUTE:
-        doSelectorAttribute();
-        break;
-      case ByteCode.SELECTOR_ATTRIBUTE_VALUE:
-        doSelectorAttributeValue();
-        break;
-      case ByteCode.SELECTOR_CLASS:
-        doSelectorClass();
-        break;
-      case ByteCode.SELECTOR_COMBINATOR:
-        doSelectorCombinator();
-        break;
-      case ByteCode.SELECTOR_ID:
-        doSelectorId();
-        break;
-      case ByteCode.SELECTOR_PSEUDO_CLASS:
-        doSelectorPseudoClass();
-        break;
-      case ByteCode.SELECTOR_PSEUDO_ELEMENT:
-        doSelectorPseudoElement();
-        break;
-      case ByteCode.SELECTOR_TYPE:
-        doSelectorType();
-        break;
-      case ByteCode.SELECTOR_UNIVERSAL:
-        doSelectorUniversal();
-        break;
+      case ByteCode.MEDIA_END -> doMediaEnd();
 
-      case ByteCode.ROOT:
-        // noop
-        break;
-      case ByteCode.RULE_END:
-        doRuleEnd();
-        break;
-      case ByteCode.RULE_START:
-        doRuleStart();
-        break;
+      case ByteCode.MEDIA_START -> doMediaStart();
 
-      case ByteCode.VALUE_ANGLE_DOUBLE:
-        doValueAngleDouble();
-        break;
-      case ByteCode.VALUE_ANGLE_INT:
-        doValueAngleInt();
-        break;
-      case ByteCode.VALUE_COLOR_HEX:
-        doValueColorHex();
-        break;
-      case ByteCode.VALUE_COLOR_NAME:
-        doValueColorName();
-        break;
-      case ByteCode.VALUE_DOUBLE:
-        doValueDouble();
-        break;
-      case ByteCode.VALUE_INT:
-        doValueInt();
-        break;
-      case ByteCode.VALUE_LENGTH_DOUBLE:
-        doValueLengthDouble();
-        break;
-      case ByteCode.VALUE_LENGTH_INT:
-        doValueLengthInt();
-        break;
-      case ByteCode.VALUE_KEYWORD:
-        doValueKeyword();
-        break;
-      case ByteCode.VALUE_KEYWORD_CUSTOM:
-        doValueKeywordCustom();
-        break;
-      case ByteCode.VALUE_PERCENTAGE_DOUBLE:
-        doValuePercentageDouble();
-        break;
-      case ByteCode.VALUE_PERCENTAGE_INT:
-        doValuePercentageInt();
-        break;
-      case ByteCode.VALUE_RGB_DOUBLE:
-        doValueRgbDouble();
-        break;
-      case ByteCode.VALUE_RGB_DOUBLE_ALPHA:
-        doValueRgbDoubleAlpha();
-        break;
-      case ByteCode.VALUE_RGB_INT:
-        doValueRgbInt();
-        break;
-      case ByteCode.VALUE_RGB_INT_ALPHA:
-        doValueRgbIntAlpha();
-        break;
-      case ByteCode.VALUE_RGBA_DOUBLE:
-        doValueRgbaDouble();
-        break;
-      case ByteCode.VALUE_RGBA_INT:
-        doValueRgbaInt();
-        break;
-      case ByteCode.VALUE_STRING:
-        doValueString();
-        break;
-      case ByteCode.VALUE_URI:
-        doValueUri();
-        break;
-      default:
-        throw new UnsupportedOperationException("Implement me: " + code);
+      case ByteCode.MEDIA_TYPE -> doMediaType();
+
+      case ByteCode.MULTI_DECLARATION_SEPARATOR -> doMultiDeclarationSeparator();
+
+      case ByteCode.SELECTOR_ATTRIBUTE -> doSelectorAttribute();
+
+      case ByteCode.SELECTOR_ATTRIBUTE_VALUE -> doSelectorAttributeValue();
+
+      case ByteCode.SELECTOR_CLASS -> doSelectorClass();
+
+      case ByteCode.SELECTOR_COMBINATOR -> doSelectorCombinator();
+
+      case ByteCode.SELECTOR_ID -> doSelectorId();
+
+      case ByteCode.SELECTOR_PSEUDO_CLASS -> doSelectorPseudoClass();
+
+      case ByteCode.SELECTOR_PSEUDO_ELEMENT -> doSelectorPseudoElement();
+
+      case ByteCode.SELECTOR_TYPE -> doSelectorType();
+
+      case ByteCode.SELECTOR_UNIVERSAL -> doSelectorUniversal();
+
+      case ByteCode.ROOT -> { /*noop*/ }
+
+      case ByteCode.RULE_END -> doRuleEnd();
+
+      case ByteCode.RULE_START -> doRuleStart();
+
+      case ByteCode.VALUE_ANGLE_DOUBLE -> doValueAngleDouble();
+
+      case ByteCode.VALUE_ANGLE_INT -> doValueAngleInt();
+
+      case ByteCode.VALUE_COLOR_HEX -> doValueColorHex();
+
+      case ByteCode.VALUE_COLOR_NAME -> doValueColorName();
+
+      case ByteCode.VALUE_DOUBLE -> doValueDouble();
+
+      case ByteCode.VALUE_INT -> doValueInt();
+
+      case ByteCode.VALUE_LENGTH_DOUBLE -> doValueLengthDouble();
+
+      case ByteCode.VALUE_LENGTH_INT -> doValueLengthInt();
+
+      case ByteCode.VALUE_KEYWORD -> doValueKeyword();
+
+      case ByteCode.VALUE_KEYWORD_CUSTOM -> doValueKeywordCustom();
+
+      case ByteCode.VALUE_PERCENTAGE_DOUBLE -> doValuePercentageDouble();
+
+      case ByteCode.VALUE_PERCENTAGE_INT -> doValuePercentageInt();
+
+      case ByteCode.VALUE_RGB_DOUBLE -> doValueRgbDouble();
+
+      case ByteCode.VALUE_RGB_DOUBLE_ALPHA -> doValueRgbDoubleAlpha();
+
+      case ByteCode.VALUE_RGB_INT -> doValueRgbInt();
+
+      case ByteCode.VALUE_RGB_INT_ALPHA -> doValueRgbIntAlpha();
+
+      case ByteCode.VALUE_RGBA_DOUBLE -> doValueRgbaDouble();
+
+      case ByteCode.VALUE_RGBA_INT -> doValueRgbaInt();
+
+      case ByteCode.VALUE_STRING -> doValueString();
+
+      case ByteCode.VALUE_URI -> doValueUri();
+
+      default -> throw new UnsupportedOperationException("Implement me: " + code);
     }
   }
 
   private AngleUnit getAngleUnit() {
     int unitCode;
-    unitCode = getCode();
+    unitCode = nextCode();
 
     return AngleUnit.getByCode(unitCode);
   }
 
-  private int getCode() {
-    return codes[cursor++];
-  }
-
   private double getDouble() {
     int index;
-    index = getCode();
+    index = nextCode();
 
     return getDouble(index);
   }
@@ -926,17 +904,21 @@ public abstract class StyleSheetEngine<E extends Exception> extends StyleSheetCo
 
   private LengthUnit getLengthUnit() {
     int unitCode;
-    unitCode = getCode();
+    unitCode = nextCode();
 
     return LengthUnit.getByCode(unitCode);
   }
 
   private String getString() {
-    return getString(getCode());
+    return getString(nextCode());
   }
 
   private String getString(int index) {
     return strings.get(index);
+  }
+
+  private int nextCode() {
+    return codes[cursor++];
   }
 
   private int popCall() {

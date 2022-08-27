@@ -260,6 +260,50 @@ public class StyleSheetTest {
       }""");
   }
 
+  @Test(description = //
+  """
+  # filterClassSelectorsByName test case #05
+
+  - hover state (multiple)
+  """)
+  public void filterClassSelectorsByName05() {
+    var css = new AbstractStyleSheet() {
+      @Override
+      protected final void definition() {
+        style(
+          cn("a"), HOVER,
+          zIndex(0)
+        );
+        style(
+          cn("b"), HOVER,
+          zIndex(1)
+        );
+        style(
+          cn("c"),
+          zIndex(2)
+        );
+      }
+    };
+
+    var keep = Set.of("a", "c");
+
+    minified.filterClassSelectorsByName(keep::contains);
+
+    test(minified, css, ".a:hover{z-index:0}.c{z-index:2}");
+
+    pretty.filterClassSelectorsByName(keep::contains);
+
+    test(pretty, css,
+      """
+      .a:hover {
+        z-index: 0;
+      }
+
+      .c {
+        z-index: 2;
+      }""");
+  }
+
   @Test
   public void testCase00() {
     test(
