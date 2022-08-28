@@ -41,7 +41,6 @@ import br.com.objectos.css.type.StringType;
 import br.com.objectos.css.type.UriType;
 import br.com.objectos.css.type.Value;
 import br.com.objectos.css.type.Zero;
-import java.io.IOException;
 import objectos.lang.Check;
 
 public abstract class AbstractStyleSheet extends GeneratedStyleSheet
@@ -229,32 +228,16 @@ public abstract class AbstractStyleSheet extends GeneratedStyleSheet
 
   @Override
   public final String printMinified() {
-    try {
-      var writer = StyleSheetWriter.ofMinified();
+    var writer = StyleSheetWriter.ofMinified();
 
-      var out = new StringBuilder();
-
-      writer.writeTo(this, out);
-
-      return out.toString();
-    } catch (IOException e) {
-      throw new AssertionError("StringBuilder does not throw IOException", e);
-    }
+    return writer.toString(this);
   }
 
   @Override
   public final String toString() {
-    try {
-      var writer = StyleSheetWriter.ofPretty();
+    var writer = StyleSheetWriter.ofPretty();
 
-      var out = new StringBuilder();
-
-      writer.writeTo(this, out);
-
-      return out.toString();
-    } catch (IOException e) {
-      throw new AssertionError("StringBuilder does not throw IOException", e);
-    }
+    return writer.toString(this);
   }
 
   protected final RuleElement _webkitTextSizeAdjust(PercentageType pct) {

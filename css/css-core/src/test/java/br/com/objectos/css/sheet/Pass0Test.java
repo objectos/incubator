@@ -29,16 +29,16 @@ import br.com.objectos.css.sheet.ex.TestCase25;
 import br.com.objectos.css.sheet.ex.TestCase27;
 import br.com.objectos.css.sheet.ex.TestCase32;
 import java.util.Arrays;
-import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class StyleSheetVisitorTest {
+public class Pass0Test {
 
-  private StyleSheetVisitor visitor;
+  private final Pass0 pass = new Pass0();
 
-  @BeforeClass
-  public void _beforeClass() {
-    visitor = new StyleSheetVisitor();
+  @BeforeMethod
+  public void _beforeMethod() {
+    pass.close();
   }
 
   @Test
@@ -231,17 +231,15 @@ public class StyleSheetVisitorTest {
   }
 
   private void dsl(StyleSheet sheet) {
-    visitor.reset();
-
-    sheet.eval(visitor);
+    sheet.eval(pass);
   }
 
   private void testChars(String expected) {
-    assertEquals(visitor.strings.join(), expected);
+    assertEquals(pass.strings.join(), expected);
   }
 
   private void testProtos(int... expected) {
-    int[] protos = visitor.getProtos();
+    int[] protos = pass.getProtos();
 
     try {
       assertEquals(protos, expected);

@@ -18,69 +18,65 @@ package br.com.objectos.css.sheet;
 import br.com.objectos.css.property.StandardPropertyName;
 import br.com.objectos.css.select.Combinator;
 import br.com.objectos.css.type.ColorHex;
-import java.io.IOException;
 
 final class MinifiedStyleSheetWriter extends StyleSheetWriter {
 
   @Override
-  public final void visitAfterLastDeclaration() throws IOException {
-    // noop
-  }
+  public final void visitAfterLastDeclaration() { /* noop */ }
 
   @Override
-  public final void visitBeforeNextDeclaration() throws IOException {
+  public final void visitBeforeNextDeclaration() {
     write(';');
   }
 
   @Override
-  public final void visitBeforeNextStatement() throws IOException {
-    // noop
-  }
-
-  @Override
-  public final void visitBlockEnd() throws IOException {
-    write('}');
-  }
-
-  @Override
-  public final void visitBlockStart() throws IOException {
+  public final void visitBlockStart() {
     write('{');
   }
 
   @Override
-  public final void visitCombinator(Combinator combinator) throws IOException {
+  public final void visitCombinator(Combinator combinator) {
     write(combinator.symbol);
   }
 
   @Override
-  public final void visitDeclarationStart(StandardPropertyName name) throws IOException {
+  public final void visitDeclarationStart(StandardPropertyName name) {
     write(name.getName());
     write(':');
   }
 
   @Override
-  public final void visitEmptyBlock() throws IOException {
+  public final void visitEmptyBlock() {
     visitBlockStart();
-    visitBlockEnd();
+    visitRuleEnd();
   }
 
   @Override
-  public final void visitMultiDeclarationSeparator() throws IOException {
+  public final void visitMediaEnd() {
+    write('}');
+
+    super.visitMediaEnd();
+  }
+
+  @Override
+  public final void visitMultiDeclarationSeparator() {
     write(',');
   }
 
   @Override
-  public final void visitRuleStart() throws IOException {
-    // noop
+  public final void visitRuleEnd() {
+    write('}');
+
+    super.visitRuleEnd();
   }
 
   @Override
-  public final void writeComma() throws IOException {
+  public final void writeComma() {
     write(',');
   }
 
   @Override
-  final void quoteIfNecessary(String value) throws IOException {
+  final void quoteIfNecessary(String value) {
     boolean shouldQuote = false;
 
     char[] array;
@@ -107,7 +103,10 @@ final class MinifiedStyleSheetWriter extends StyleSheetWriter {
   }
 
   @Override
-  final void writeDoubleImpl(double value) throws IOException {
+  final void writeBlockSeparator() { /* noop */ }
+
+  @Override
+  final void writeDoubleImpl(double value) {
     String string = Double.toString(value);
 
     if (string.startsWith("0.")) {
@@ -118,12 +117,10 @@ final class MinifiedStyleSheetWriter extends StyleSheetWriter {
   }
 
   @Override
-  final void writeFirstValuePrefix() throws IOException {
-    // noop
-  }
+  final void writeFirstValuePrefix() { /* noop */ }
 
   @Override
-  final void writeValueColorHex(String value) throws IOException {
+  final void writeValueColorHex(String value) {
     ColorHex color;
     color = ColorHex.of(value);
 

@@ -18,13 +18,11 @@ package br.com.objectos.css.sheet;
 import objectos.lang.Check;
 import objectos.util.IntArrays;
 
-class StyleSheetCompiler extends StyleSheetVisitor {
+final class Pass1 implements AutoCloseable {
 
-  int[] codes;
+  private int[] codes;
 
-  int codesIndex;
-
-  int cursor;
+  private int codesIndex;
 
   // multi stack
   private int[] multi;
@@ -35,7 +33,9 @@ class StyleSheetCompiler extends StyleSheetVisitor {
 
   private int stackIndex = -1;
 
-  public StyleSheetCompiler() {
+  private PassSource source;
+
+  public Pass1() {
     codes = new int[1024];
 
     stack = new int[64];
@@ -43,36 +43,26 @@ class StyleSheetCompiler extends StyleSheetVisitor {
     multi = new int[8];
   }
 
-  public final void compile() {
-    addProto(ByteProto.ROOT_END);
-
-    for (int i = objectsLength - 1; i >= 0; i--) {
-      addProto(objects[i]);
-    }
-
-    addProto(ByteProto.ROOT_START);
-
-    cursor = protosLength;
-
-    while (cursor > 0) {
-      var proto = getProto();
-
-      processByteProto(proto);
-    }
-  }
-
   @Override
-  void reset() {
-    super.reset();
-
+  public final void close() {
     codesIndex = 0;
-
-    cursor = 0;
 
     multiIndex = -1;
 
     stackIndex = -1;
   }
+
+  public final void execute(PassSource source) {
+    this.source = source;
+
+    while (source.hasProto()) {
+      var proto = source.nextProto();
+
+      processByteProto(proto);
+    }
+  }
+
+  final int codeAt(int index) { return codes[index]; }
 
   void setJumpToSlot() {
     int returnTo = codesIndex;
@@ -154,7 +144,7 @@ class StyleSheetCompiler extends StyleSheetVisitor {
     setCode(returnTo);
 
     addCode(ByteCode.DECLARATION_START);
-    addCode(getProto());
+    addCode(source.nextProto());
   }
 
   private void doDeclarationStart() {
@@ -164,7 +154,7 @@ class StyleSheetCompiler extends StyleSheetVisitor {
       setCode(returnTo);
 
       addCode(ByteCode.DECLARATION_START);
-      addCode(getProto());
+      addCode(source.nextProto());
     } else {
       int returnTo = codesIndex;
       codesIndex = peekMulti();
@@ -173,7 +163,7 @@ class StyleSheetCompiler extends StyleSheetVisitor {
 
       addCode(ByteCode.MULTI_DECLARATION_SEPARATOR);
       // consume property name
-      getProto();
+      source.nextProto();
     }
   }
 
@@ -192,12 +182,12 @@ class StyleSheetCompiler extends StyleSheetVisitor {
 
     addCode(ByteCode.FUNCTION_START);
 
-    addCode(getProto());
+    addCode(source.nextProto());
   }
 
   private void doMarkedString() {
     int startIndex;
-    startIndex = getProto();
+    startIndex = source.nextProto();
 
     addMarked(startIndex);
   }
@@ -221,7 +211,7 @@ class StyleSheetCompiler extends StyleSheetVisitor {
 
   private void doMediaType() {
     addCode(ByteCode.MEDIA_TYPE);
-    addCode(getProto());
+    addCode(source.nextProto());
   }
 
   private void doRootEnd() {
@@ -263,15 +253,15 @@ class StyleSheetCompiler extends StyleSheetVisitor {
     int returnTo = popAndSetCode();
 
     // name
-    addCode(getProto()); // start index
+    addCode(source.nextProto()); // start index
     Check.state(
-      getProto() == ByteProto.SELECTOR_ATTRIBUTE_VALUE_ELEMENT,
+      source.nextProto() == ByteProto.SELECTOR_ATTRIBUTE_VALUE_ELEMENT,
       "expected ", ByteProto.SELECTOR_ATTRIBUTE_VALUE_ELEMENT
     );
     // operator
-    addCode(getProto());
+    addCode(source.nextProto());
     // value
-    addCode(getProto()); // start index
+    addCode(source.nextProto()); // start index
 
     setCode(returnTo);
   }
@@ -299,12 +289,12 @@ class StyleSheetCompiler extends StyleSheetVisitor {
 
   private void doSelectorClassObj() {
     addCode(ByteCode.SELECTOR_CLASS);
-    addCode(getProto()); // start index
+    addCode(source.nextProto()); // start index
   }
 
   private void doSelectorCombinator() {
     addCode(ByteCode.SELECTOR_COMBINATOR);
-    addCode(getProto());
+    addCode(source.nextProto());
   }
 
   private void doSelectorId() {
@@ -319,22 +309,22 @@ class StyleSheetCompiler extends StyleSheetVisitor {
 
   private void doSelectorIdObj() {
     addCode(ByteCode.SELECTOR_ID);
-    addCode(getProto()); // start index
+    addCode(source.nextProto()); // start index
   }
 
   private void doSelectorPseudoClassObj() {
     addCode(ByteCode.SELECTOR_PSEUDO_CLASS);
-    addCode(getProto());
+    addCode(source.nextProto());
   }
 
   private void doSelectorPseudoElementObj() {
     addCode(ByteCode.SELECTOR_PSEUDO_ELEMENT);
-    addCode(getProto());
+    addCode(source.nextProto());
   }
 
   private void doSelectorTypeObj() {
     addCode(ByteCode.SELECTOR_TYPE);
-    addCode(getProto());
+    addCode(source.nextProto());
   }
 
   private void doSelectorUniversalObj() {
@@ -343,10 +333,10 @@ class StyleSheetCompiler extends StyleSheetVisitor {
 
   private void doValueAngleDouble() {
     int unit;
-    unit = getProto();
+    unit = source.nextProto();
 
     int doubleIndex;
-    doubleIndex = getProto();
+    doubleIndex = source.nextProto();
 
     addMarked(unit, doubleIndex);
   }
@@ -360,10 +350,10 @@ class StyleSheetCompiler extends StyleSheetVisitor {
 
   private void doValueAngleInt() {
     int unit;
-    unit = getProto();
+    unit = source.nextProto();
 
     int value;
-    value = getProto();
+    value = source.nextProto();
 
     addMarked(unit, value);
   }
@@ -387,17 +377,17 @@ class StyleSheetCompiler extends StyleSheetVisitor {
 
   private void doValueColorNamed() {
     addCode(ByteCode.VALUE_COLOR_NAME);
-    addCode(getProto());
+    addCode(source.nextProto());
   }
 
   private void doValueDouble() {
     addCode(ByteCode.VALUE_DOUBLE);
-    addCode(getProto());
+    addCode(source.nextProto());
   }
 
   private void doValueDoubleDsl() {
     int doubleIndex;
-    doubleIndex = getProto();
+    doubleIndex = source.nextProto();
 
     addMarked(doubleIndex);
   }
@@ -416,12 +406,12 @@ class StyleSheetCompiler extends StyleSheetVisitor {
 
   private void doValueInt() {
     addCode(ByteCode.VALUE_INT);
-    addCode(getProto());
+    addCode(source.nextProto());
   }
 
   private void doValueIntDsl() {
     int intValue;
-    intValue = getProto();
+    intValue = source.nextProto();
 
     addMarked(intValue);
   }
@@ -434,7 +424,7 @@ class StyleSheetCompiler extends StyleSheetVisitor {
 
   private void doValueKeyword() {
     addCode(ByteCode.VALUE_KEYWORD);
-    addCode(getProto());
+    addCode(source.nextProto());
   }
 
   private void doValueKeywordCustom() {
@@ -449,10 +439,10 @@ class StyleSheetCompiler extends StyleSheetVisitor {
 
   private void doValueLengthDouble() {
     int unit;
-    unit = getProto();
+    unit = source.nextProto();
 
     int doubleIndex;
-    doubleIndex = getProto();
+    doubleIndex = source.nextProto();
 
     addMarked(unit, doubleIndex);
   }
@@ -466,10 +456,10 @@ class StyleSheetCompiler extends StyleSheetVisitor {
 
   private void doValueLengthInt() {
     int unit;
-    unit = getProto();
+    unit = source.nextProto();
 
     int value;
-    value = getProto();
+    value = source.nextProto();
 
     addMarked(unit, value);
   }
@@ -483,7 +473,7 @@ class StyleSheetCompiler extends StyleSheetVisitor {
 
   private void doValuePercentageDouble() {
     int doubleIndex;
-    doubleIndex = getProto();
+    doubleIndex = source.nextProto();
 
     addMarked(doubleIndex);
   }
@@ -496,7 +486,7 @@ class StyleSheetCompiler extends StyleSheetVisitor {
 
   private void doValuePercentageInt() {
     int value;
-    value = getProto();
+    value = source.nextProto();
 
     addMarked(value);
   }
@@ -509,7 +499,7 @@ class StyleSheetCompiler extends StyleSheetVisitor {
 
   private void doValueRgbaDouble() {
     int doubleStartIndex;
-    doubleStartIndex = getProto();
+    doubleStartIndex = source.nextProto();
 
     addMarked(doubleStartIndex);
   }
@@ -522,16 +512,16 @@ class StyleSheetCompiler extends StyleSheetVisitor {
 
   private void doValueRgbaInt() {
     int r;
-    r = getProto();
+    r = source.nextProto();
 
     int g;
-    g = getProto();
+    g = source.nextProto();
 
     int b;
-    b = getProto();
+    b = source.nextProto();
 
     int alphaDoubleIndexa;
-    alphaDoubleIndexa = getProto();
+    alphaDoubleIndexa = source.nextProto();
 
     addMarked(r, g, b, alphaDoubleIndexa);
   }
@@ -547,14 +537,14 @@ class StyleSheetCompiler extends StyleSheetVisitor {
 
   private void doValueRgbDouble() {
     int doubleStartIndex;
-    doubleStartIndex = getProto();
+    doubleStartIndex = source.nextProto();
 
     addMarked(doubleStartIndex);
   }
 
   private void doValueRgbDoubleAlpha() {
     int doubleStartIndex;
-    doubleStartIndex = getProto();
+    doubleStartIndex = source.nextProto();
 
     addMarked(doubleStartIndex);
   }
@@ -573,13 +563,13 @@ class StyleSheetCompiler extends StyleSheetVisitor {
 
   private void doValueRgbInt() {
     int r;
-    r = getProto();
+    r = source.nextProto();
 
     int g;
-    g = getProto();
+    g = source.nextProto();
 
     int b;
-    b = getProto();
+    b = source.nextProto();
 
     addMarked(r, g, b);
   }
@@ -607,7 +597,7 @@ class StyleSheetCompiler extends StyleSheetVisitor {
 
   private void doValueString() {
     addCode(ByteCode.VALUE_STRING);
-    addCode(getProto()); // start index
+    addCode(source.nextProto()); // start index
   }
 
   private void doValueStringDsl() {
@@ -628,10 +618,6 @@ class StyleSheetCompiler extends StyleSheetVisitor {
     addCode(ByteCode.VALUE_URI);
     pushCode();
     addCode(0); // start index
-  }
-
-  private int getProto() {
-    return getProto(--cursor);
   }
 
   private boolean isMulti() {

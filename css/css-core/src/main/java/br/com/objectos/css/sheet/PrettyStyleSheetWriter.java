@@ -17,7 +17,6 @@ package br.com.objectos.css.sheet;
 
 import br.com.objectos.css.property.StandardPropertyName;
 import br.com.objectos.css.select.Combinator;
-import java.io.IOException;
 
 final class PrettyStyleSheetWriter extends StyleSheetWriter {
   private static class Indentation {
@@ -43,7 +42,7 @@ final class PrettyStyleSheetWriter extends StyleSheetWriter {
       level++;
     }
 
-    public void write(StyleSheetWriter writer) throws IOException {
+    public void write(StyleSheetWriter writer) {
       int count = level * n;
       for (int i = 0; i < count; i++) {
         writer.write(c);
@@ -62,32 +61,18 @@ final class PrettyStyleSheetWriter extends StyleSheetWriter {
   }
 
   @Override
-  public void visitAfterLastDeclaration() throws IOException {
+  public void visitAfterLastDeclaration() {
     write(';');
   }
 
   @Override
-  public void visitBeforeNextDeclaration() throws IOException {
+  public void visitBeforeNextDeclaration() {
     visitAfterLastDeclaration();
     writeNewLine();
   }
 
   @Override
-  public void visitBeforeNextStatement() throws IOException {
-    writeNewLine();
-    writeNewLine();
-  }
-
-  @Override
-  public void visitBlockEnd() throws IOException {
-    writeNewLine();
-    unindent();
-    writeIndentation();
-    write('}');
-  }
-
-  @Override
-  public void visitBlockStart() throws IOException {
+  public void visitBlockStart() {
     write(' ');
     write('{');
     writeNewLine();
@@ -95,23 +80,25 @@ final class PrettyStyleSheetWriter extends StyleSheetWriter {
   }
 
   @Override
-  public void visitCombinator(Combinator combinator) throws IOException {
+  public void visitCombinator(Combinator combinator) {
     switch (combinator) {
+      case DESCENDANT -> write(' ');
+
+      case LIST -> {
+        write(',');
+        write(' ');
+      }
+
       default -> {
         write(' ');
         write(combinator.symbol);
-        write(' ');
-      }
-      case DESCENDANT -> write(' ');
-      case LIST -> {
-        write(',');
         write(' ');
       }
     }
   }
 
   @Override
-  public void visitDeclarationStart(StandardPropertyName name) throws IOException {
+  public void visitDeclarationStart(StandardPropertyName name) {
     writeIndentation();
     write(name.getName());
     write(':');
@@ -119,49 +106,77 @@ final class PrettyStyleSheetWriter extends StyleSheetWriter {
   }
 
   @Override
-  public void visitEmptyBlock() throws IOException {
+  public void visitEmptyBlock() {
     write(' ');
     write('{');
     write('}');
   }
 
   @Override
-  public void visitMultiDeclarationSeparator() throws IOException {
+  public final void visitMediaEnd() {
+    writeNewLine();
+    unindent();
+    writeIndentation();
+    write('}');
+
+    super.visitMediaEnd();
+  }
+
+  @Override
+  public void visitMultiDeclarationSeparator() {
     write(',');
     write(' ');
   }
 
   @Override
-  public void visitRuleStart() throws IOException {
+  public final void visitRuleEnd() {
+    writeNewLine();
+    unindent();
+    writeIndentation();
+    write('}');
+
+    super.visitRuleEnd();
+  }
+
+  @Override
+  public void visitRuleStart() {
+    super.visitRuleStart();
+
     writeIndentation();
   }
 
   @Override
-  public void writeComma() throws IOException {
+  public void writeComma() {
     write(',');
     write(' ');
   }
 
-  public void writeIndentation() throws IOException {
+  public void writeIndentation() {
     indentation.write(this);
   }
 
-  public void writeNewLine() throws IOException {
+  public void writeNewLine() {
     write(System.lineSeparator());
   }
 
   @Override
-  final void quoteIfNecessary(String value) throws IOException {
+  final void quoteIfNecessary(String value) {
     quote(value);
   }
 
   @Override
-  final void writeFirstValuePrefix() throws IOException {
+  final void writeBlockSeparator() {
+    writeNewLine();
+    writeNewLine();
+  }
+
+  @Override
+  final void writeFirstValuePrefix() {
     write(' ');
   }
 
   @Override
-  final void writeValueColorHex(String value) throws IOException {
+  final void writeValueColorHex(String value) {
     write(value);
   }
 }

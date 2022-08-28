@@ -41,29 +41,32 @@ import objectos.util.GrowableList;
 import objectos.util.IntArrays;
 import objectos.util.UnmodifiableList;
 
-class StyleSheetVisitor implements StyleEngine {
+final class Pass0 implements AutoCloseable, StyleEngine {
 
-  double[] doubles;
+  private double[] doubles;
+
   private int doublesLength;
 
-  int[] objects;
-  int objectsLength;
+  private int[] objects;
 
-  int[] protos;
-  int protosLength;
+  private int objectsLength;
 
-  GrowableList<String> strings;
+  private int[] protos;
+
+  private int protosCursor;
+
+  private int protosLength;
+
+  final GrowableList<String> strings = new GrowableList<>();
 
   private GrowableList<RuleElement> rulePrefix;
 
-  StyleSheetVisitor() {
+  Pass0() {
     doubles = new double[10];
 
     objects = new int[128];
 
     protos = new int[128];
-
-    strings = new GrowableList<>();
   }
 
   @Override
@@ -352,6 +355,21 @@ class StyleSheetVisitor implements StyleEngine {
   }
 
   @Override
+  public final void close() {
+    doublesLength = 0;
+
+    objectsLength = 0;
+
+    protosLength = 0;
+
+    strings.clear();
+
+    if (rulePrefix != null) {
+      rulePrefix.clear();
+    }
+  }
+
+  @Override
   public final void createAngle(AngleUnit unit, double value) {
     addDoubleProto(value);
     addProto(unit.getCode());
@@ -545,6 +563,18 @@ class StyleSheetVisitor implements StyleEngine {
     );
   }
 
+  public final void evalDone() {
+    addProto(ByteProto.ROOT_END);
+
+    for (int i = objectsLength - 1; i >= 0; i--) {
+      addProto(objects[i]);
+    }
+
+    addProto(ByteProto.ROOT_START);
+
+    protosCursor = protosLength;
+  }
+
   @Override
   public final void markAttributeValueElement() {
     int proto = getLastProto();
@@ -675,6 +705,8 @@ class StyleSheetVisitor implements StyleEngine {
     protos[protosLength++] = code;
   }
 
+  final double doubleAt(int index) { return doubles[index]; }
+
   final double[] getDoubles() {
     return Arrays.copyOf(doubles, doublesLength);
   }
@@ -687,19 +719,11 @@ class StyleSheetVisitor implements StyleEngine {
     return Arrays.copyOf(protos, protosLength);
   }
 
-  void reset() {
-    doublesLength = 0;
+  final boolean hasProto() { return protosCursor > 0; }
 
-    objectsLength = 0;
+  final int nextProto() { return protos[--protosCursor]; }
 
-    protosLength = 0;
-
-    strings.clear();
-
-    if (rulePrefix != null) {
-      rulePrefix.clear();
-    }
-  }
+  final String stringAt(int index) { return strings.get(index); }
 
   private void acceptMediaQueryElement0(AtMediaElement element) {
     // TODO use pattern matching when possible

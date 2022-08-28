@@ -23,31 +23,26 @@ import br.com.objectos.css.select.UniversalSelector;
 import br.com.objectos.css.type.AngleUnit;
 import br.com.objectos.css.type.ColorName;
 import br.com.objectos.css.type.LengthUnit;
-import java.io.IOException;
+import java.util.function.Predicate;
 import objectos.lang.Check;
 
-public abstract class StyleSheetWriter extends StyleSheetEngine<IOException> {
+public abstract class StyleSheetWriter implements StyleSheet.Processor {
 
-  private enum NoOpAppendable implements Appendable {
-    INSTANCE;
+  private static final Predicate<String> CLASS_SELECTORS_ALWAYS_TRUE = (s) -> true;
 
-    @Override
-    public final Appendable append(char c) throws IOException {
-      return this;
-    }
+  private final StyleSheetEngine engine = new StyleSheetEngine();
 
-    @Override
-    public final Appendable append(CharSequence csq) throws IOException {
-      return this;
-    }
+  private final StringBuilder out = new StringBuilder();
 
-    @Override
-    public final Appendable append(CharSequence csq, int start, int end) throws IOException {
-      return this;
-    }
-  }
+  private Predicate<String> classSelectorsByName;
 
-  Appendable out = NoOpAppendable.INSTANCE;
+  private boolean ignoreRule;
+
+  private int mediaStart;
+
+  private int ruleCount;
+
+  private int ruleStart;
 
   StyleSheetWriter() {}
 
@@ -60,55 +55,57 @@ public abstract class StyleSheetWriter extends StyleSheetEngine<IOException> {
   }
 
   public static String toMinifiedString(StyleSheet sheet) {
-    try {
-      var writer = StyleSheetWriter.ofMinified();
+    var writer = StyleSheetWriter.ofMinified();
 
-      var out = new StringBuilder();
+    return writer.toString(sheet);
+  }
 
-      writer.writeTo(sheet, out);
-
-      return out.toString();
-    } catch (IOException e) {
-      throw new AssertionError("StringBuilder does not throw IOException", e);
+  public final void clear() {
+    if (classSelectorsByName != null) {
+      classSelectorsByName = null;
     }
   }
 
-  public final void writeTo(StyleSheet sheet, Appendable out) throws IOException {
-    Check.notNull(sheet, "sheet == null");
-    this.out = Check.notNull(out, "out == null");
+  public final void filterClassSelectorsByName(Predicate<String> predicate) {
+    classSelectorsByName = Check.notNull(predicate, "predicate == null");
+  }
 
-    reset();
+  public final String toString(StyleSheet sheet) {
+    if (classSelectorsByName == null) {
+      classSelectorsByName = CLASS_SELECTORS_ALWAYS_TRUE;
+    }
 
-    sheet.eval(this);
+    out.setLength(0);
 
-    compile();
+    ruleCount = 0;
 
-    execute();
+    engine.process(sheet, this);
+
+    return out.toString();
   }
 
   @Override
-  protected void visitAngle(AngleUnit unit, double value) throws IOException {
+  public void visitAngle(AngleUnit unit, double value) {
     writeDouble(value);
     write(unit.getName());
   }
 
   @Override
-  protected void visitAngle(AngleUnit unit, int value) throws IOException {
+  public void visitAngle(AngleUnit unit, int value) {
     writeInt(value);
     write(unit.getName());
   }
 
   @Override
-  protected void visitAttributeSelector(String attributeName) throws IOException {
+  public void visitAttributeSelector(String attributeName) {
     write('[');
     write(attributeName);
     write(']');
   }
 
   @Override
-  protected void visitAttributeValueSelector(
-      String attributeName, AttributeValueOperator operator, String value)
-      throws IOException {
+  public void visitAttributeValueSelector(
+      String attributeName, AttributeValueOperator operator, String value) {
     write('[');
     write(attributeName);
     write(operator.getSymbol());
@@ -117,82 +114,84 @@ public abstract class StyleSheetWriter extends StyleSheetEngine<IOException> {
   }
 
   @Override
-  protected void visitBeforeNextValue() throws IOException {
+  public void visitBeforeNextValue() {
     write(' ');
   }
 
   @Override
-  protected void visitClassSelector(String className) throws IOException {
+  public void visitClassSelector(String className) {
+    ignoreRule = !classSelectorsByName.test(className);
+
     write('.');
     write(className);
   }
 
   @Override
-  protected void visitColor(ColorName value) throws IOException {
+  public void visitColor(ColorName value) {
     write(value.getName());
   }
 
   @Override
-  protected void visitColor(String value) throws IOException {
+  public void visitColor(String value) {
     writeValueColorHex(value);
   }
 
   @Override
-  protected void visitDouble(double value) throws IOException {
+  public void visitDouble(double value) {
     writeDoubleImpl(value);
   }
 
   @Override
-  protected void visitFunctionEnd() throws IOException {
+  public void visitFunctionEnd() {
     write(')');
   }
 
   @Override
-  protected void visitFunctionStart(StandardFunctionName name) throws IOException {
+  public void visitFunctionStart(StandardFunctionName name) {
     write(name.getName());
     write('(');
   }
 
   @Override
-  protected void visitIdSelector(String id) throws IOException {
+  public void visitIdSelector(String id) {
     write('#');
     write(id);
   }
 
   @Override
-  protected void visitInt(int value) throws IOException {
+  public void visitInt(int value) {
     write(Integer.toString(value));
   }
 
   @Override
-  protected void visitKeyword(StandardKeyword value) throws IOException {
+  public void visitKeyword(StandardKeyword value) {
     write(value.getName());
   }
 
   @Override
-  protected void visitKeyword(String keyword) throws IOException {
+  public void visitKeyword(String keyword) {
     write(keyword);
   }
 
   @Override
-  protected void visitLength(LengthUnit unit, double value) throws IOException {
+  public void visitLength(LengthUnit unit, double value) {
     writeDouble(value);
     write(unit.getName());
   }
 
   @Override
-  protected void visitLength(LengthUnit unit, int value) throws IOException {
+  public void visitLength(LengthUnit unit, int value) {
     writeInt(value);
     write(unit.getName());
   }
 
   @Override
-  protected void visitLogicalExpressionEnd() throws IOException {
+  public void visitLogicalExpressionEnd() {
     write(')');
   }
 
   @Override
-  protected void visitLogicalExpressionStart(LogicalOperator operator) throws IOException {
+  public void visitLogicalExpressionStart(LogicalOperator operator) {
     write(' ');
     write(operator.getName());
     write(' ');
@@ -200,30 +199,43 @@ public abstract class StyleSheetWriter extends StyleSheetEngine<IOException> {
   }
 
   @Override
-  protected void visitMediaStart() throws IOException {
+  public void visitMediaEnd() {
+    if (ruleCount == 0) {
+      out.setLength(mediaStart);
+    }
+  }
+
+  @Override
+  public final void visitMediaStart() {
+    mediaStart = out.length();
+
+    blockSeparatorIfNecessary();
+
+    ruleCount = 0;
+
     write("@media");
   }
 
   @Override
-  protected void visitMediaType(MediaType type) throws IOException {
+  public void visitMediaType(MediaType type) {
     write(' ');
     write(type.getName());
   }
 
   @Override
-  protected void visitPercentage(double value) throws IOException {
+  public void visitPercentage(double value) {
     writeDouble(value);
     write('%');
   }
 
   @Override
-  protected void visitPercentage(int value) throws IOException {
+  public void visitPercentage(int value) {
     writeInt(value);
     write('%');
   }
 
   @Override
-  protected void visitRgb(double r, double g, double b) throws IOException {
+  public void visitRgb(double r, double g, double b) {
     writeRgbStart();
     writeDouble(r);
     writeComma();
@@ -234,7 +246,7 @@ public abstract class StyleSheetWriter extends StyleSheetEngine<IOException> {
   }
 
   @Override
-  protected void visitRgb(double r, double g, double b, double alpha) throws IOException {
+  public void visitRgb(double r, double g, double b, double alpha) {
     writeRgbStart();
     writeDouble(r);
     writeComma();
@@ -247,7 +259,7 @@ public abstract class StyleSheetWriter extends StyleSheetEngine<IOException> {
   }
 
   @Override
-  protected void visitRgb(int r, int g, int b) throws IOException {
+  public void visitRgb(int r, int g, int b) {
     writeRgbStart();
     writeInt(r);
     writeComma();
@@ -258,7 +270,7 @@ public abstract class StyleSheetWriter extends StyleSheetEngine<IOException> {
   }
 
   @Override
-  protected void visitRgb(int r, int g, int b, double alpha) throws IOException {
+  public void visitRgb(int r, int g, int b, double alpha) {
     writeRgbStart();
     writeInt(r);
     writeComma();
@@ -271,7 +283,7 @@ public abstract class StyleSheetWriter extends StyleSheetEngine<IOException> {
   }
 
   @Override
-  protected void visitRgba(double r, double g, double b, double alpha) throws IOException {
+  public void visitRgba(double r, double g, double b, double alpha) {
     writeRgbaStart();
     writeDouble(r);
     writeComma();
@@ -284,7 +296,7 @@ public abstract class StyleSheetWriter extends StyleSheetEngine<IOException> {
   }
 
   @Override
-  protected void visitRgba(int r, int g, int b, double alpha) throws IOException {
+  public void visitRgba(int r, int g, int b, double alpha) {
     writeRgbaStart();
     writeInt(r);
     writeComma();
@@ -297,56 +309,76 @@ public abstract class StyleSheetWriter extends StyleSheetEngine<IOException> {
   }
 
   @Override
-  protected void visitSimpleSelector(SimpleSelector selector) throws IOException {
+  public void visitRuleEnd() {
+    if (ignoreRule) {
+      out.setLength(ruleStart);
+
+      ignoreRule = false;
+    } else {
+      ruleCount++;
+    }
+  }
+
+  @Override
+  public void visitRuleStart() {
+    ruleStart = out.length();
+
+    blockSeparatorIfNecessary();
+  }
+
+  @Override
+  public void visitSimpleSelector(SimpleSelector selector) {
     write(selector.toString());
   }
 
   @Override
-  protected void visitString(String value) throws IOException {
+  public void visitString(String value) {
     quoteIfNecessary(value);
   }
 
   @Override
-  protected void visitUniversalSelector(UniversalSelector selector) throws IOException {
+  public void visitUniversalSelector(UniversalSelector selector) {
     write('*');
   }
 
   @Override
-  protected void visitUri(String value) throws IOException {
+  public void visitUri(String value) {
     write("url(");
     quoteIfNecessary(value);
     write(')');
   }
 
-  final void quote(String value) throws IOException {
+  final void quote(String value) {
     write('"');
     write(value);
     write('"');
   }
 
-  abstract void quoteIfNecessary(String value) throws IOException;
+  abstract void quoteIfNecessary(String value);
 
-  final void write(char c) throws IOException {
+  final void write(char c) {
     out.append(c);
   }
 
-  final void write(String s) throws IOException {
+  final void write(String s) {
     out.append(s);
   }
 
-  abstract void writeComma() throws IOException;
+  abstract void writeBlockSeparator();
 
-  void writeDoubleImpl(double value) throws IOException {
+  abstract void writeComma();
+
+  void writeDoubleImpl(double value) {
     write(Double.toString(value));
   }
 
-  abstract void writeFirstValuePrefix() throws IOException;
+  abstract void writeFirstValuePrefix();
 
-  final void writeInt(int value) throws IOException {
+  final void writeInt(int value) {
     write(Integer.toString(value));
   }
 
-  final void writeUrl(String src) throws IOException {
+  final void writeUrl(String src) {
     write("url(");
     write('"');
     write(src);
@@ -354,7 +386,13 @@ public abstract class StyleSheetWriter extends StyleSheetEngine<IOException> {
     write(')');
   }
 
-  abstract void writeValueColorHex(String value) throws IOException;
+  abstract void writeValueColorHex(String value);
+
+  private void blockSeparatorIfNecessary() {
+    if (ruleCount > 0) {
+      writeBlockSeparator();
+    }
+  }
 
   private boolean isIntWithinTolerance(double value) {
     int whole;
@@ -377,7 +415,7 @@ public abstract class StyleSheetWriter extends StyleSheetEngine<IOException> {
     return abs < 1e-5;
   }
 
-  private void writeDouble(double value) throws IOException {
+  private void writeDouble(double value) {
     if (isZeroWithinTolerance(value)) {
       write('0');
     }
@@ -391,11 +429,11 @@ public abstract class StyleSheetWriter extends StyleSheetEngine<IOException> {
     }
   }
 
-  private void writeRgbaStart() throws IOException {
+  private void writeRgbaStart() {
     write("rgba(");
   }
 
-  private void writeRgbStart() throws IOException {
+  private void writeRgbStart() {
     write("rgb(");
   }
 

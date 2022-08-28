@@ -15,16 +15,16 @@
  */
 package br.com.objectos.css.sheet;
 
-enum Body {
+abstract class PassSource {
 
-  SHEET(Pass2._SHEET_BODY),
+  abstract int codeAt(int index);
 
-  MEDIA(Pass2._AT_MEDIA_BODY);
+  abstract double doubleAt(int index);
 
-  final int state;
+  abstract boolean hasProto();
 
-  Body(int state) {
-    this.state = state;
-  }
+  abstract int nextProto();
+
+  abstract String stringAt(int index);
 
 }

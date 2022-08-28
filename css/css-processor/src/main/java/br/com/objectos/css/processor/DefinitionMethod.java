@@ -42,7 +42,7 @@ import br.com.objectos.css.type.ColorName;
 import br.com.objectos.css.type.LengthUnit;
 import objectos.util.GrowableList;
 
-class DefinitionMethod extends StyleSheetEngine<RuntimeException> {
+class DefinitionMethod implements StyleSheet.Processor {
 
   private final GrowableList<BlockStatement> statements = new GrowableList<>();
   private StyleMethodInvocation style;
@@ -50,14 +50,11 @@ class DefinitionMethod extends StyleSheetEngine<RuntimeException> {
   private DefinitionMethod() {}
 
   public static MethodCode of(StyleSheet sheet) {
-    DefinitionMethod method;
-    method = new DefinitionMethod();
+    var method = new DefinitionMethod();
 
-    sheet.eval(method);
+    var engine = new StyleSheetEngine();
 
-    method.compile();
-
-    method.execute();
+    engine.process(sheet, method);
 
     return method.build();
   }
@@ -90,18 +87,8 @@ class DefinitionMethod extends StyleSheetEngine<RuntimeException> {
   }
 
   @Override
-  public final void visitBeforeNextStatement() {
-    // noop
-  }
-
-  @Override
   public final void visitBeforeNextValue() {
     // noop
-  }
-
-  @Override
-  public final void visitBlockEnd() {
-    buildRule();
   }
 
   @Override
@@ -191,6 +178,11 @@ class DefinitionMethod extends StyleSheetEngine<RuntimeException> {
   }
 
   @Override
+  public void visitMediaEnd() {
+    throw new UnsupportedOperationException("Implement me");
+  }
+
+  @Override
   public void visitMediaStart() {
     throw new UnsupportedOperationException("Implement me");
   }
@@ -243,6 +235,11 @@ class DefinitionMethod extends StyleSheetEngine<RuntimeException> {
   @Override
   public final void visitRgba(int r, int g, int b, double alpha) {
     style.addRgba(r, g, b, alpha);
+  }
+
+  @Override
+  public final void visitRuleEnd() {
+    buildRule();
   }
 
   @Override

@@ -56,9 +56,9 @@ import br.com.objectos.css.sheet.ex.TestCase33;
 import br.com.objectos.css.sheet.ex.TestCase34;
 import br.com.objectos.css.sheet.ex.TestCase35;
 import br.com.objectos.css.sheet.ex.TransformTestCase;
-import java.io.IOException;
 import java.util.Set;
 import objectos.util.UnmodifiableList;
+import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -69,15 +69,11 @@ public class StyleSheetTest {
 
   private StyleSheetWriter pretty;
 
-  private StringBuilder out;
-
   @BeforeClass
   public void _beforeClass() {
     minified = StyleSheetWriter.ofMinified();
 
     pretty = StyleSheetWriter.ofPretty();
-
-    out = new StringBuilder();
   }
 
   @BeforeMethod
@@ -304,6 +300,101 @@ public class StyleSheetTest {
       }""");
   }
 
+  @Test(description = //
+  """
+  # filterClassSelectorsByName test case #06
+
+  - media queries: skip empty media query
+  """)
+  public void filterClassSelectorsByName06() {
+    var css = new AbstractStyleSheet() {
+      @Override
+      protected final void definition() {
+        media(
+          screen, minWidth(px(800)),
+
+          style(
+            cn("a"),
+            zIndex(0)
+          )
+        );
+        media(
+          screen, minWidth(px(1024)),
+
+          style(
+            cn("b"),
+            zIndex(1)
+          )
+        );
+      }
+    };
+
+    var keep = Set.of("b");
+
+    minified.filterClassSelectorsByName(keep::contains);
+
+    test(minified, css, "@media screen and (min-width:1024px){.b{z-index:1}}");
+
+    pretty.filterClassSelectorsByName(keep::contains);
+
+    test(pretty, css,
+      """
+      @media screen and (min-width: 1024px) {
+        .b {
+          z-index: 1;
+        }
+      }""");
+  }
+
+  @Test(description = //
+  """
+  # filterClassSelectorsByName test case #07
+
+  - media queries
+  - keep only non-query rules
+  """)
+  public void filterClassSelectorsByName07() {
+    var css = new AbstractStyleSheet() {
+      @Override
+      protected final void definition() {
+        style(
+          cn("a"),
+          zIndex(0)
+        );
+        media(
+          screen, minWidth(px(800)),
+
+          style(
+            cn("b"),
+            zIndex(1)
+          )
+        );
+        media(
+          screen, minWidth(px(1024)),
+
+          style(
+            cn("c"),
+            zIndex(2)
+          )
+        );
+      }
+    };
+
+    var keep = Set.of("a");
+
+    minified.filterClassSelectorsByName(keep::contains);
+
+    test(minified, css, ".a{z-index:0}");
+
+    pretty.filterClassSelectorsByName(keep::contains);
+
+    test(pretty, css,
+      """
+      .a {
+        z-index: 0;
+      }""");
+  }
+
   @Test
   public void testCase00() {
     test(
@@ -362,7 +453,6 @@ public class StyleSheetTest {
       new TestCase04(),
       minified(
         "body.dsl.obj{}"
-
       ),
       pretty(
         "body.dsl.obj {}"
@@ -933,32 +1023,27 @@ public class StyleSheetTest {
   }
 
   private void test(StyleSheet sheet, String minifiedOutput, String prettyOutput) {
-    try {
-      out.setLength(0);
+    assertEquals(minified.toString(sheet), minifiedOutput, "MinifiedStyleSheetWriter");
 
-      minified.writeTo(sheet, out);
-
-      assertEquals(out.toString(), minifiedOutput, "MinifiedStyleSheetWriter");
-
-      out.setLength(0);
-
-      pretty.writeTo(sheet, out);
-
-      assertEquals(out.toString(), prettyOutput, "PrettyStyleSheetWriter");
-    } catch (IOException e) {
-      throw new AssertionError("StringBuilder does not throw IOException", e);
-    }
+    assertEquals(pretty.toString(sheet), prettyOutput, "PrettyStyleSheetWriter");
   }
 
   private void test(StyleSheetWriter writer, StyleSheet sheet, String expected) {
-    try {
-      out.setLength(0);
+    var actual = writer.toString(sheet);
 
-      writer.writeTo(sheet, out);
+    if (!actual.equals(expected)) {
+      Assert.fail(
+        """
 
-      assertEquals(out.toString(), expected);
-    } catch (IOException e) {
-      throw new AssertionError("StringBuilder does not throw IOException", e);
+        -------
+        Actual:
+        %s
+        -------
+        Expected:
+        %s
+        -------
+        """.formatted(actual, expected)
+      );
     }
   }
 
