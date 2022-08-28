@@ -65,8 +65,6 @@ public final class Docs extends DocsInjector {
 
   private final TopBar topBar;
 
-  private final StringBuilder stringBuilder = new StringBuilder();
-
   private final StyleClassSet styleClassSet = new StyleClassSet();
 
   private final StyleSheet styleSheet = new DocsCss();
@@ -303,11 +301,7 @@ public final class Docs extends DocsInjector {
 
       styleSheetWriter.filterClassSelectorsByName(styleClassSet);
 
-      stringBuilder.setLength(0);
-
-      styleSheetWriter.writeTo(styleSheet, stringBuilder);
-
-      template.rawStyle(stringBuilder.toString());
+      template.rawStyle(styleSheetWriter.toString(styleSheet));
 
       var html = template.toString();
 
