@@ -42,80 +42,63 @@ package br.com.objectos.css.framework.spec;
 import br.com.objectos.css.config.framework.AbstractConfiguration;
 import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkAtMediaSet;
 import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkGroup;
-import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkNamedValueSet;
+import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkPropertyState;
 import br.com.objectos.css.keyword.Keywords;
 
-class Inset extends AbstractConfiguration {
+final class CursorSpec extends AbstractConfiguration {
 
-  private final FrameworkNamedValueSet spacing;
   private final FrameworkAtMediaSet responsive;
 
-  Inset(FrameworkNamedValueSet spacing, FrameworkAtMediaSet responsive) {
-    this.spacing = spacing;
+  CursorSpec(FrameworkAtMediaSet responsive) {
     this.responsive = responsive;
   }
 
   @Override
   protected final void configure() {
-    var inset = valueSet(
-      spacing,
-      v("auto", Keywords.auto)
-    );
-
     property(
-      FrameworkGroup.LAYOUT,
-      simpleName("Inset"),
-      methods("top", "right", "bottom", "left"),
-      inset,
-      responsive
-    );
-
-    property(
-      FrameworkGroup.LAYOUT,
-      simpleName("InsetX"),
-      methods("right", "left"),
-      inset,
-      responsive
-    );
-
-    property(
-      FrameworkGroup.LAYOUT,
-      simpleName("InsetY"),
-      methods("top", "bottom"),
-      inset,
-      responsive
-    );
-
-    property(
-      FrameworkGroup.LAYOUT,
-      simpleName("Top"),
-      methods("top"),
-      inset,
-      responsive
-    );
-
-    property(
-      FrameworkGroup.LAYOUT,
-      simpleName("Right"),
-      methods("right"),
-      inset,
-      responsive
-    );
-
-    property(
-      FrameworkGroup.LAYOUT,
-      simpleName("Bottom"),
-      methods("bottom"),
-      inset,
-      responsive
-    );
-
-    property(
-      FrameworkGroup.LAYOUT,
-      simpleName("Left"),
-      methods("left"),
-      inset,
-      responsive
+      FrameworkGroup.INTERACTIVITY,
+      simpleName("Cursor"),
+      methods("cursor"),
+      valueSet(
+        v("auto", Keywords.auto),
+        v("defaultCursor", Keywords.defaultKw),
+        v("pointer", Keywords.pointer),
+        v("wait", Keywords.wait),
+        v("text", Keywords.text),
+        v("move", Keywords.move),
+        v("help", Keywords.help),
+        v("not-allowed", Keywords.notAllowed),
+        v("none", Keywords.none),
+        v("context-menu", Keywords.contextMenu),
+        //v("progress", Keywords.progress),
+        v("cell", Keywords.cell),
+        v("crosshair", Keywords.crosshair),
+        v("vertical-text", Keywords.verticalText),
+        v("alias", Keywords.alias),
+        v("copy", Keywords.copy),
+        v("no-drop", Keywords.noDrop),
+        v("grab", Keywords.grab),
+        v("grabbing", Keywords.grabbing),
+        v("all-scroll", Keywords.allScroll),
+        v("col-resize", Keywords.colResize),
+        v("row-resize", Keywords.rowResize),
+        v("n-resize", Keywords.nResize),
+        v("e-resize", Keywords.eResize),
+        v("s-resize", Keywords.sResize),
+        v("w-resize", Keywords.wResize),
+        v("ne-resize", Keywords.neResize),
+        v("nw-resize", Keywords.nwResize),
+        v("se-resize", Keywords.seResize),
+        v("sw-resize", Keywords.swResize),
+        v("ew-resize", Keywords.ewResize),
+        v("ns-resize", Keywords.nsResize),
+        v("nesw-resize", Keywords.neswResize),
+        v("nwse-resize", Keywords.nwseResize),
+        v("zoom-in", Keywords.zoomIn),
+        v("zoom-out", Keywords.zoomOut)
+      ),
+      responsive,
+      FrameworkPropertyState.HOVER
     );
   }
 

@@ -83,10 +83,13 @@ public class FrameworkConfiguration extends AbstractConfiguration {
     install(new FlexGrow(responsive));
     install(new JustifyContent(responsive));
 
+    // interactivity
+    install(new CursorSpec(responsive));
+
     // layout
     install(new DisplaySpec(responsive));
     install(new FloatSpec(responsive));
-    install(new Inset(spacing, responsive));
+    install(new InsetSpec(spacing, responsive));
     install(new OverflowSpec(responsive));
     install(new Position(responsive));
 

@@ -39,6 +39,8 @@ public interface ConfigurationDsl {
 
     FLEXBOX,
 
+    INTERACTIVITY,
+
     LAYOUT,
 
     SIZING,

@@ -68,6 +68,7 @@ import br.com.objectos.css.framework.flexbox.Flex;
 import br.com.objectos.css.framework.flexbox.FlexDirection;
 import br.com.objectos.css.framework.flexbox.FlexGrow;
 import br.com.objectos.css.framework.flexbox.JustifyContent;
+import br.com.objectos.css.framework.interactivity.Cursor;
 import br.com.objectos.css.framework.layout.Bottom;
 import br.com.objectos.css.framework.layout.Display;
 import br.com.objectos.css.framework.layout.Float;
@@ -123,6 +124,7 @@ abstract class AbstractFramework extends AbstractStyleSheet {
     border();
     effects();
     flexbox();
+    interactivity();
     layout();
     sizing();
     spacing();
@@ -166,6 +168,10 @@ abstract class AbstractFramework extends AbstractStyleSheet {
     install(new FlexDirection());
     install(new FlexGrow());
     install(new JustifyContent());
+  }
+
+  protected void interactivity() {
+    install(new Cursor());
   }
 
   protected void layout() {
