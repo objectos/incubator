@@ -16,14 +16,26 @@
 package objectos.docs;
 
 import br.com.objectos.css.Css;
+import br.com.objectos.css.framework.background.BackgroundColor;
+import br.com.objectos.css.framework.border.Border;
+import br.com.objectos.css.framework.border.BorderColor;
+import br.com.objectos.css.framework.border.Rounded;
+import br.com.objectos.css.framework.flexbox.JustifyContent;
+import br.com.objectos.css.framework.layout.Display;
+import br.com.objectos.css.framework.sizing.MaxWidth;
+import br.com.objectos.css.framework.spacing.MarginBottom;
+import br.com.objectos.css.framework.spacing.MarginLeft;
+import br.com.objectos.css.framework.spacing.MarginRight;
+import br.com.objectos.css.framework.spacing.MarginTop;
+import br.com.objectos.css.framework.spacing.MarginX;
+import br.com.objectos.css.framework.spacing.Padding;
+import br.com.objectos.css.framework.spacing.PaddingX;
+import br.com.objectos.css.framework.typography.FontSize;
+import br.com.objectos.css.framework.typography.LetterSpacing;
+import br.com.objectos.css.framework.typography.TextAlign;
+import br.com.objectos.css.framework.typography.TextColor;
 import br.com.objectos.css.select.ClassSelector;
-import br.com.objectos.css.sheet.AbstractStyleSheet;
-import br.com.objectos.css.sheet.StyleSheet;
-import br.com.objectos.html.spi.type.TableValue;
-import br.com.objectos.html.spi.type.TbodyValue;
-import java.util.List;
-import objectos.docs.style.Colors;
-import objectos.docs.style.Spacing;
+import br.com.objectos.html.element.StandardElementName;
 
 final class VersionsTemplate extends DocsTemplate {
 
@@ -31,101 +43,125 @@ final class VersionsTemplate extends DocsTemplate {
 
   static final ClassSelector TITLE = Css.randomDot(3);
 
-  private final StyleSheet css = new AbstractStyleSheet() {
-    @Override
-    protected final void definition() {
-      install(new ArticleCss());
-
-      style(h1,
-
-        margin(Spacing.V16, zero()));
-
-      style(table, sp(), td,
-
-        paddingTop(Spacing.V02), verticalAlign(baseline));
-
-      style(thead, sp(), th,
-
-        borderBottom(px(1), solid, Colors.GRAY2));
-
-      style(DATE,
-
-        textAlign(center), width(Spacing.V28));
-
-      style(TITLE,
-
-        textAlign(left));
-    }
-  };
-
   VersionsTemplate(DocsInjector injector) {
     super(injector);
   }
 
   @Override
-  final void main0() {
-    article(
-      header(
-        h1("Versions")
-      ),
+  public final void headingStart(int level) {
+    switch (level) {
+      case 1 -> {
+        tagStart(); // <h1>
 
-      p("Choose the version of the Objectos documentation from the list below."),
+        addValue0(
+          FontSize.xLarge4,
+          FontSize.md.xLarge5,
+          LetterSpacing.tight,
+          MarginTop.v14
+        );
+      }
 
-      table(
-        thead(
-          tr(
-            th(
-              TITLE,
+      default -> super.headingStart(level);
+    }
+  }
 
-              t("Version")
-            ),
+  @Override
+  public void preambleEnd() {
+    tagEnd(StandardElementName.DIV);
+  }
 
-            th(
-              DATE,
+  @Override
+  public void preambleStart() {
+    tagStart(); // <div>
 
-              t("Release date")
-            )
-          )
-        ),
-
-        tbody0()
-      )
+    addValue0(
+      FontSize.xLarge,
+      MarginBottom.v10,
+      MarginTop.v02,
+      TextColor.gray800
     );
   }
 
   @Override
-  final StyleSheet styleSheet() { return css; }
+  final void main0() {
+    main(
+      PaddingX.v04,
+      PaddingX.md.v06,
 
-  private TableValue tbody0() {
-    var versions = List.of(Version.NEXT, Version.V0_2_0, Version.V0_1_0);
+      header(
+        MarginX.auto,
+        MaxWidth.screenX2l,
 
-    var size = versions.size();
+        f(this::renderDocument)
+      ),
 
-    var values = new TbodyValue[size];
+      section(
+        MarginX.auto,
+        MaxWidth.screenX2l,
 
-    for (int i = 0; i < size; i++) {
-      var version = versions.get(i);
+        h2(
+          FontSize.xLarge2,
+          LetterSpacing.tight,
+          MarginTop.v14,
 
-      var href = injector.$href(version.resourceDirectory + "/index");
-
-      var date = version.releaseDate;
-
-      values[i] = tr(
-        td(
-          TITLE,
-
-          a(href(href), t(version.name()))
+          t("v0.x series")
         ),
 
-        td(
-          DATE,
+        p(t("Our current release stream.")),
 
-          t(date == null ? "unreleased" : date.toString())
+        div(
+          Display.lg.flex,
+          MarginTop.v10,
+
+          f(this::v0x)
+        )
+      )
+    );
+  }
+
+  private void v0x() {
+    for (var version : Version.VALUES) {
+      a(
+        BackgroundColor.hover.gray100,
+        Border.v1,
+        BorderColor.gray300,
+        Display.block,
+        MarginLeft.lg.v04,
+        MarginLeft.firstChild.v0,
+        MarginTop.v04,
+        Padding.v03,
+        Padding.lg.v08,
+        Rounded.medium,
+
+        href(injector.$href(version.key("index"))),
+
+        div(
+          Display.flex,
+          Display.lg.block,
+          JustifyContent.between,
+          TextAlign.lg.center,
+
+          h3(
+            MarginBottom.lg.v06,
+
+            t("Version "), t(version.name)
+          ),
+
+          dl(
+            Display.md.flex,
+            Display.lg.block,
+
+            dt(
+              MarginRight.md.v02,
+              MarginRight.lg.v0,
+
+              t("Release date")
+            ),
+            dl(version.releaseDateString())
+          )
         )
       );
     }
-
-    return tbody(values);
   }
 
 }

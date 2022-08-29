@@ -15,11 +15,7 @@
  */
 package objectos.docs;
 
-import br.com.objectos.css.sheet.StyleSheet;
-
 final class IndexTemplate extends DocsTemplate {
-
-  private final IndexCss css = new IndexCss();
 
   IndexTemplate(DocsInjector injector) { super(injector); }
 
@@ -61,11 +57,6 @@ final class IndexTemplate extends DocsTemplate {
         )
       )
     );
-  }
-
-  @Override
-  final StyleSheet styleSheet() {
-    return css;
   }
 
 }

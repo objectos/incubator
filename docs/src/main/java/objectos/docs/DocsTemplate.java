@@ -20,7 +20,6 @@ import br.com.objectos.css.framework.layout.Display;
 import br.com.objectos.css.framework.sizing.MinHeight;
 import br.com.objectos.css.framework.typography.TextColor;
 import br.com.objectos.css.framework.typography.TextDecoration;
-import br.com.objectos.css.sheet.StyleSheet;
 import br.com.objectos.html.element.StandardElementName;
 import br.com.objectos.html.spi.type.Value;
 import br.com.objectos.html.tmpl.AbstractTemplate;
@@ -180,10 +179,10 @@ abstract class DocsTemplate extends AbstractTemplate implements AsciiDoc.Process
   }
 
   @Override
-  public final void preambleEnd() {}
+  public void preambleEnd() {}
 
   @Override
-  public final void preambleStart() {}
+  public void preambleStart() {}
 
   @Override
   public final void sectionEnd() {}
@@ -279,8 +278,6 @@ abstract class DocsTemplate extends AbstractTemplate implements AsciiDoc.Process
 
     document.process(this);
   }
-
-  abstract StyleSheet styleSheet();
 
   final void tagEnd(StandardElementName name) {
     var values = popValues();

@@ -16,59 +16,41 @@
 package objectos.docs;
 
 import java.time.LocalDate;
+import objectos.util.UnmodifiableList;
 
 enum Version {
 
-  NEXT(
-      name("0.3.0-SNAPSHOT"), slug("next"), resourceDirectory("next"),
-      unreleased()
-  ),
+  NEXT(name("0.3.0"), slug("next"), directory("next"),
+      unreleased(), Status.DEVELOPMENT),
 
-  V0_2_0(
-      name("0.2.0"), slug("0.2"), resourceDirectory("v0002"),
-      releaseDate(2022, 6, 13)
-  ),
+  V0_2_0(name("0.2.0"), slug("0.2"), directory("v0002"),
+      releaseDate(2022, 6, 13), Status.LATEST),
 
-  V0_1_0(
-      name("0.1.0"), slug("0.1"), resourceDirectory("v0001"),
-      releaseDate(2022, 5, 16)
+  V0_1_0(name("0.1.0"), slug("0.1"), directory("v0001"),
+      releaseDate(2022, 5, 16), Status.UNSUPPORTED);
 
-  //    ,    keys(
-  //      "index",
-  //
-  //      "intro/index",
-  //      "intro/overview",
-  //      "intro/install",
-  //
-  //      "logging/index",
-  //      "logging/getting-started/index",
-  //      "logging/getting-started/about-logging",
-  //      "logging/getting-started/objectos-logging",
-  //      "logging/getting-started/installing",
-  //      "logging/getting-started/quick-start",
-  //      "logging/logging-guide/index",
-  //      "logging/logging-guide/events",
-  //      "logging/logging-guide/logger",
-  //      "logging/no-op-logger/index",
-  //
-  //      "relnotes/index",
-  //      "relnotes/0.1.0"
-  //    )
-  );
+  static final UnmodifiableList<Version> VALUES = UnmodifiableList.copyOf(values());
 
   final String name;
 
   final String slug;
 
-  final String resourceDirectory;
+  final String directory;
 
   final LocalDate releaseDate;
 
-  private Version(String name, String slug, String resourceDirectory, LocalDate releaseDate) {
+  final Status status;
+
+  private Version(String name,
+                  String slug,
+                  String directory,
+                  LocalDate releaseDate,
+                  Status status) {
     this.name = name;
     this.slug = slug;
-    this.resourceDirectory = resourceDirectory;
+    this.directory = directory;
     this.releaseDate = releaseDate;
+    this.status = status;
   }
 
   public static Version parse(String key) {
@@ -95,20 +77,26 @@ enum Version {
     }
   }
 
+  private static String directory(String s) { return s; }
+
   private static String name(String s) { return s; }
 
   private static LocalDate releaseDate(int year, int month, int day) {
     return LocalDate.of(year, month, day);
   }
 
-  private static String resourceDirectory(String s) { return s; }
-
   private static String slug(String s) { return s; }
 
   private static LocalDate unreleased() { return null; }
 
-  public final String fullName() {
-    return "Objectos v" + name;
+  final String key(String value) {
+    return directory + "/" + value;
+  }
+
+  final String releaseDateString() {
+    return releaseDate == null
+        ? "unreleased"
+        : releaseDate.toString();
   }
 
 }

@@ -19,9 +19,12 @@ import br.com.objectos.css.framework.background.BackgroundColor;
 import br.com.objectos.css.framework.border.BorderBottom;
 import br.com.objectos.css.framework.border.BorderColor;
 import br.com.objectos.css.framework.border.BorderRight;
+import br.com.objectos.css.framework.border.Rounded;
+import br.com.objectos.css.framework.flexbox.AlignItems;
 import br.com.objectos.css.framework.flexbox.Flex;
 import br.com.objectos.css.framework.flexbox.FlexDirection;
 import br.com.objectos.css.framework.flexbox.FlexGrow;
+import br.com.objectos.css.framework.flexbox.JustifyContent;
 import br.com.objectos.css.framework.layout.Display;
 import br.com.objectos.css.framework.layout.OverflowX;
 import br.com.objectos.css.framework.sizing.MaxWidth;
@@ -46,7 +49,6 @@ import br.com.objectos.css.framework.typography.ListStyleType;
 import br.com.objectos.css.framework.typography.TextColor;
 import br.com.objectos.css.framework.typography.TextTransform;
 import br.com.objectos.css.select.ClassSelector;
-import br.com.objectos.css.sheet.StyleSheet;
 import br.com.objectos.html.element.ElementName;
 import br.com.objectos.html.element.StandardElementName;
 import br.com.objectos.html.spi.type.AValue;
@@ -55,8 +57,6 @@ import objectos.asciidoc.DocumentAttributes;
 final class ArticleTemplate extends DocsTemplate implements LanguageRenderer.Output {
 
   private static final ClassSelector MY_DEFAULT = MarginY.v03;
-
-  private final ArticleCss css = new ArticleCss();
 
   private final LanguageRenderer defaultRenderer = new DefaultRenderer();
 
@@ -349,15 +349,29 @@ final class ArticleTemplate extends DocsTemplate implements LanguageRenderer.Out
     );
   }
 
-  @Override
-  final StyleSheet styleSheet() {
-    return css;
-  }
-
   private void _leftBar() {
     var version = injector.$version();
 
-    h1(version.fullName());
+    div(
+      AlignItems.center,
+      Display.flex,
+      JustifyContent.between,
+      MarginBottom.v04,
+      PaddingX.v03,
+
+      div("Version " + version.name),
+
+      a(
+        BackgroundColor.gray400,
+        BackgroundColor.hover.gray500,
+        PaddingX.v02,
+        PaddingY.v01,
+        Rounded.standard,
+        TextColor.white,
+
+        href(injector.$href("versions")), t("Change")
+      )
+    );
 
     switch (version) {
       case NEXT -> {
