@@ -43,6 +43,7 @@ import br.com.objectos.css.config.framework.AbstractConfiguration;
 import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkAtMediaSet;
 import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkGroup;
 import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkNamedValueSet;
+import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkPropertyState;
 import br.com.objectos.css.keyword.Keywords;
 
 class Margin extends AbstractConfiguration {
@@ -57,7 +58,7 @@ class Margin extends AbstractConfiguration {
 
   @Override
   protected final void configure() {
-    FrameworkNamedValueSet margin = valueSet(
+    var margin = valueSet(
       v("auto", Keywords.auto),
       spacing
     );
@@ -67,7 +68,8 @@ class Margin extends AbstractConfiguration {
       simpleName("Margin"),
       methods("margin"),
       margin,
-      responsive
+      responsive,
+      FrameworkPropertyState.FIRST_CHILD
     );
 
     property(
@@ -75,7 +77,8 @@ class Margin extends AbstractConfiguration {
       simpleName("MarginX"),
       methods("marginRight", "marginLeft"),
       margin,
-      responsive
+      responsive,
+      FrameworkPropertyState.FIRST_CHILD
     );
 
     property(
@@ -83,7 +86,8 @@ class Margin extends AbstractConfiguration {
       simpleName("MarginY"),
       methods("marginTop", "marginBottom"),
       margin,
-      responsive
+      responsive,
+      FrameworkPropertyState.FIRST_CHILD
     );
 
     property(
@@ -91,7 +95,8 @@ class Margin extends AbstractConfiguration {
       simpleName("MarginTop"),
       methods("marginTop"),
       margin,
-      responsive
+      responsive,
+      FrameworkPropertyState.FIRST_CHILD
     );
 
     property(
@@ -99,7 +104,8 @@ class Margin extends AbstractConfiguration {
       simpleName("MarginRight"),
       methods("marginRight"),
       margin,
-      responsive
+      responsive,
+      FrameworkPropertyState.FIRST_CHILD
     );
 
     property(
@@ -107,7 +113,8 @@ class Margin extends AbstractConfiguration {
       simpleName("MarginBottom"),
       methods("marginBottom"),
       margin,
-      responsive
+      responsive,
+      FrameworkPropertyState.FIRST_CHILD
     );
 
     property(
@@ -115,7 +122,8 @@ class Margin extends AbstractConfiguration {
       simpleName("MarginLeft"),
       methods("marginLeft"),
       margin,
-      responsive
+      responsive,
+      FrameworkPropertyState.FIRST_CHILD
     );
   }
 

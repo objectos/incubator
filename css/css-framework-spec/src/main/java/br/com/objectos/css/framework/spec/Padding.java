@@ -43,6 +43,7 @@ import br.com.objectos.css.config.framework.AbstractConfiguration;
 import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkAtMediaSet;
 import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkGroup;
 import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkNamedValueSet;
+import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkPropertyState;
 
 class Padding extends AbstractConfiguration {
 
@@ -61,7 +62,8 @@ class Padding extends AbstractConfiguration {
       simpleName("Padding"),
       methods("padding"),
       spacing,
-      responsive
+      responsive,
+      FrameworkPropertyState.FIRST_CHILD
     );
 
     property(
@@ -69,7 +71,8 @@ class Padding extends AbstractConfiguration {
       simpleName("PaddingX"),
       methods("paddingRight", "paddingLeft"),
       spacing,
-      responsive
+      responsive,
+      FrameworkPropertyState.FIRST_CHILD
     );
 
     property(
@@ -77,7 +80,8 @@ class Padding extends AbstractConfiguration {
       simpleName("PaddingY"),
       methods("paddingTop", "paddingBottom"),
       spacing,
-      responsive
+      responsive,
+      FrameworkPropertyState.FIRST_CHILD
     );
 
     property(
@@ -85,7 +89,8 @@ class Padding extends AbstractConfiguration {
       simpleName("PaddingTop"),
       methods("paddingTop"),
       spacing,
-      responsive
+      responsive,
+      FrameworkPropertyState.FIRST_CHILD
     );
 
     property(
@@ -93,7 +98,8 @@ class Padding extends AbstractConfiguration {
       simpleName("PaddingRight"),
       methods("paddingRight"),
       spacing,
-      responsive
+      responsive,
+      FrameworkPropertyState.FIRST_CHILD
     );
 
     property(
@@ -101,7 +107,8 @@ class Padding extends AbstractConfiguration {
       simpleName("PaddingBottom"),
       methods("paddingBottom"),
       spacing,
-      responsive
+      responsive,
+      FrameworkPropertyState.FIRST_CHILD
     );
 
     property(
@@ -109,7 +116,8 @@ class Padding extends AbstractConfiguration {
       simpleName("PaddingLeft"),
       methods("paddingLeft"),
       spacing,
-      responsive
+      responsive,
+      FrameworkPropertyState.FIRST_CHILD
     );
   }
 

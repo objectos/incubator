@@ -43,7 +43,6 @@ import static br.com.objectos.css.property.StandardPropertyName.MIN_WIDTH;
 import static br.com.objectos.css.sheet.MediaType.SCREEN;
 
 import br.com.objectos.css.config.framework.AbstractConfiguration;
-import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkAtMediaSet;
 import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkNamedValueSet;
 import br.com.objectos.css.type.Color;
 import br.com.objectos.css.type.Zero;
@@ -54,7 +53,7 @@ public class FrameworkConfiguration extends AbstractConfiguration {
   protected final void configure() {
     packageName("br.com.objectos.css.framework");
 
-    FrameworkAtMediaSet responsive = mediaSet(
+    var responsive = mediaSet(
       media("sm", SCREEN, declaration(MIN_WIDTH, px(640))),
       media("md", SCREEN, declaration(MIN_WIDTH, px(768))),
       media("lg", SCREEN, declaration(MIN_WIDTH, px(1024))),
@@ -62,8 +61,8 @@ public class FrameworkConfiguration extends AbstractConfiguration {
       media("x2l", SCREEN, declaration(MIN_WIDTH, px(1440)))
     );
 
-    FrameworkNamedValueSet colors = defineColors();
-    FrameworkNamedValueSet spacing = defineSpacing();
+    var colors = defineColors();
+    var spacing = defineSpacing();
 
     // background
     install(new Background(colors, responsive));

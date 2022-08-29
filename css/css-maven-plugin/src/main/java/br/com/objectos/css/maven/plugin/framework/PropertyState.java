@@ -36,7 +36,7 @@ final class PropertyState {
 
     argumentName = Java.id(name);
 
-    interfaceName = Java.id(name.toLowerCase());
+    interfaceName = Java.id(value.interfaceName());
 
     this.styles = styles;
   }

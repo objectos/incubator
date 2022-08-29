@@ -61,7 +61,17 @@ public interface ConfigurationDsl {
 
   enum FrameworkPropertyState {
 
-    HOVER;
+    FIRST_CHILD("firstChild"),
+
+    HOVER("hover");
+
+    private final String interfaceName;
+
+    private FrameworkPropertyState(String interfaceName) { this.interfaceName = interfaceName; }
+
+    public final String interfaceName() {
+      return interfaceName;
+    }
 
   }
 

@@ -279,6 +279,158 @@ public final class MarginRight extends AbstractStyleSheet {
         v96,
         marginRight(rem(24))
     );
+    style(
+        firstChild.auto, FIRST_CHILD,
+        marginRight(Keywords.auto)
+    );
+    style(
+        firstChild.px, FIRST_CHILD,
+        marginRight(px(1))
+    );
+    style(
+        firstChild.zero, FIRST_CHILD,
+        marginRight(zero())
+    );
+    style(
+        firstChild.v0, FIRST_CHILD,
+        marginRight(zero())
+    );
+    style(
+        firstChild.v00_5, FIRST_CHILD,
+        marginRight(rem(0.125))
+    );
+    style(
+        firstChild.v01, FIRST_CHILD,
+        marginRight(rem(0.25))
+    );
+    style(
+        firstChild.v01_5, FIRST_CHILD,
+        marginRight(rem(0.375))
+    );
+    style(
+        firstChild.v02, FIRST_CHILD,
+        marginRight(rem(0.5))
+    );
+    style(
+        firstChild.v02_5, FIRST_CHILD,
+        marginRight(rem(0.625))
+    );
+    style(
+        firstChild.v03, FIRST_CHILD,
+        marginRight(rem(0.75))
+    );
+    style(
+        firstChild.v03_5, FIRST_CHILD,
+        marginRight(rem(0.875))
+    );
+    style(
+        firstChild.v04, FIRST_CHILD,
+        marginRight(rem(1))
+    );
+    style(
+        firstChild.v05, FIRST_CHILD,
+        marginRight(rem(1.25))
+    );
+    style(
+        firstChild.v06, FIRST_CHILD,
+        marginRight(rem(1.5))
+    );
+    style(
+        firstChild.v07, FIRST_CHILD,
+        marginRight(rem(1.75))
+    );
+    style(
+        firstChild.v08, FIRST_CHILD,
+        marginRight(rem(2))
+    );
+    style(
+        firstChild.v09, FIRST_CHILD,
+        marginRight(rem(2.25))
+    );
+    style(
+        firstChild.v10, FIRST_CHILD,
+        marginRight(rem(2.5))
+    );
+    style(
+        firstChild.v11, FIRST_CHILD,
+        marginRight(rem(2.75))
+    );
+    style(
+        firstChild.v12, FIRST_CHILD,
+        marginRight(rem(3))
+    );
+    style(
+        firstChild.v14, FIRST_CHILD,
+        marginRight(rem(3.5))
+    );
+    style(
+        firstChild.v16, FIRST_CHILD,
+        marginRight(rem(4))
+    );
+    style(
+        firstChild.v20, FIRST_CHILD,
+        marginRight(rem(5))
+    );
+    style(
+        firstChild.v24, FIRST_CHILD,
+        marginRight(rem(6))
+    );
+    style(
+        firstChild.v28, FIRST_CHILD,
+        marginRight(rem(7))
+    );
+    style(
+        firstChild.v32, FIRST_CHILD,
+        marginRight(rem(8))
+    );
+    style(
+        firstChild.v36, FIRST_CHILD,
+        marginRight(rem(9))
+    );
+    style(
+        firstChild.v40, FIRST_CHILD,
+        marginRight(rem(10))
+    );
+    style(
+        firstChild.v44, FIRST_CHILD,
+        marginRight(rem(11))
+    );
+    style(
+        firstChild.v48, FIRST_CHILD,
+        marginRight(rem(12))
+    );
+    style(
+        firstChild.v52, FIRST_CHILD,
+        marginRight(rem(13))
+    );
+    style(
+        firstChild.v56, FIRST_CHILD,
+        marginRight(rem(14))
+    );
+    style(
+        firstChild.v60, FIRST_CHILD,
+        marginRight(rem(15))
+    );
+    style(
+        firstChild.v64, FIRST_CHILD,
+        marginRight(rem(16))
+    );
+    style(
+        firstChild.v68, FIRST_CHILD,
+        marginRight(rem(17))
+    );
+    style(
+        firstChild.v72, FIRST_CHILD,
+        marginRight(rem(18))
+    );
+    style(
+        firstChild.v80, FIRST_CHILD,
+        marginRight(rem(20))
+    );
+    style(
+        firstChild.v96, FIRST_CHILD,
+        marginRight(rem(24))
+    );
     media(
         AbstractStyleSheet.screen, minWidth(px(640)),
 
@@ -1244,6 +1396,86 @@ public final class MarginRight extends AbstractStyleSheet {
             marginRight(rem(24))
         )
     );
+  }
+
+  public interface firstChild {
+
+    ClassSelector auto = Css.randomDot(5);
+
+    ClassSelector px = Css.randomDot(5);
+
+    ClassSelector zero = Css.randomDot(5);
+
+    ClassSelector v0 = Css.randomDot(5);
+
+    ClassSelector v00_5 = Css.randomDot(5);
+
+    ClassSelector v01 = Css.randomDot(5);
+
+    ClassSelector v01_5 = Css.randomDot(5);
+
+    ClassSelector v02 = Css.randomDot(5);
+
+    ClassSelector v02_5 = Css.randomDot(5);
+
+    ClassSelector v03 = Css.randomDot(5);
+
+    ClassSelector v03_5 = Css.randomDot(5);
+
+    ClassSelector v04 = Css.randomDot(5);
+
+    ClassSelector v05 = Css.randomDot(5);
+
+    ClassSelector v06 = Css.randomDot(5);
+
+    ClassSelector v07 = Css.randomDot(5);
+
+    ClassSelector v08 = Css.randomDot(5);
+
+    ClassSelector v09 = Css.randomDot(5);
+
+    ClassSelector v10 = Css.randomDot(5);
+
+    ClassSelector v11 = Css.randomDot(5);
+
+    ClassSelector v12 = Css.randomDot(5);
+
+    ClassSelector v14 = Css.randomDot(5);
+
+    ClassSelector v16 = Css.randomDot(5);
+
+    ClassSelector v20 = Css.randomDot(5);
+
+    ClassSelector v24 = Css.randomDot(5);
+
+    ClassSelector v28 = Css.randomDot(5);
+
+    ClassSelector v32 = Css.randomDot(5);
+
+    ClassSelector v36 = Css.randomDot(5);
+
+    ClassSelector v40 = Css.randomDot(5);
+
+    ClassSelector v44 = Css.randomDot(5);
+
+    ClassSelector v48 = Css.randomDot(5);
+
+    ClassSelector v52 = Css.randomDot(5);
+
+    ClassSelector v56 = Css.randomDot(5);
+
+    ClassSelector v60 = Css.randomDot(5);
+
+    ClassSelector v64 = Css.randomDot(5);
+
+    ClassSelector v68 = Css.randomDot(5);
+
+    ClassSelector v72 = Css.randomDot(5);
+
+    ClassSelector v80 = Css.randomDot(5);
+
+    ClassSelector v96 = Css.randomDot(5);
+
   }
 
   public interface sm {
