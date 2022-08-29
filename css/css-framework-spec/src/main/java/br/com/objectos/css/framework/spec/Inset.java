@@ -44,20 +44,21 @@ import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkAtMediaSet
 import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkGroup;
 import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkNamedValueSet;
 import br.com.objectos.css.keyword.Keywords;
-import br.com.objectos.css.type.Zero;
 
 class Inset extends AbstractConfiguration {
 
+  private final FrameworkNamedValueSet spacing;
   private final FrameworkAtMediaSet responsive;
 
-  Inset(FrameworkAtMediaSet responsive) {
+  Inset(FrameworkNamedValueSet spacing, FrameworkAtMediaSet responsive) {
+    this.spacing = spacing;
     this.responsive = responsive;
   }
 
   @Override
   protected final void configure() {
-    FrameworkNamedValueSet inset = valueSet(
-      v("0", Zero.INSTANCE),
+    var inset = valueSet(
+      spacing,
       v("auto", Keywords.auto)
     );
 

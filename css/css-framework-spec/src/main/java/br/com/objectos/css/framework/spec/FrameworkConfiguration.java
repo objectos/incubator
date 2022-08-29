@@ -86,7 +86,7 @@ public class FrameworkConfiguration extends AbstractConfiguration {
     // layout
     install(new DisplaySpec(responsive));
     install(new FloatSpec(responsive));
-    install(new Inset(responsive));
+    install(new Inset(spacing, responsive));
     install(new OverflowSpec(responsive));
     install(new Position(responsive));
 
