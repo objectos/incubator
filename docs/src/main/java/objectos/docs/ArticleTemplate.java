@@ -15,18 +15,27 @@
  */
 package objectos.docs;
 
+import br.com.objectos.css.Css;
 import br.com.objectos.css.framework.background.BackgroundColor;
 import br.com.objectos.css.framework.border.BorderBottom;
 import br.com.objectos.css.framework.border.BorderColor;
 import br.com.objectos.css.framework.border.BorderRight;
 import br.com.objectos.css.framework.border.Rounded;
+import br.com.objectos.css.framework.effects.Opacity;
 import br.com.objectos.css.framework.flexbox.AlignItems;
 import br.com.objectos.css.framework.flexbox.Flex;
 import br.com.objectos.css.framework.flexbox.FlexDirection;
 import br.com.objectos.css.framework.flexbox.FlexGrow;
 import br.com.objectos.css.framework.flexbox.JustifyContent;
+import br.com.objectos.css.framework.interactivity.Cursor;
 import br.com.objectos.css.framework.layout.Display;
+import br.com.objectos.css.framework.layout.Left;
 import br.com.objectos.css.framework.layout.OverflowX;
+import br.com.objectos.css.framework.layout.OverflowY;
+import br.com.objectos.css.framework.layout.Position;
+import br.com.objectos.css.framework.layout.Top;
+import br.com.objectos.css.framework.layout.ZIndex;
+import br.com.objectos.css.framework.sizing.Height;
 import br.com.objectos.css.framework.sizing.MaxWidth;
 import br.com.objectos.css.framework.sizing.MinHeight;
 import br.com.objectos.css.framework.sizing.MinWidth;
@@ -49,12 +58,19 @@ import br.com.objectos.css.framework.typography.ListStyleType;
 import br.com.objectos.css.framework.typography.TextColor;
 import br.com.objectos.css.framework.typography.TextTransform;
 import br.com.objectos.css.select.ClassSelector;
+import br.com.objectos.css.select.IdSelector;
 import br.com.objectos.html.element.ElementName;
 import br.com.objectos.html.element.StandardElementName;
 import br.com.objectos.html.spi.type.AValue;
 import objectos.asciidoc.DocumentAttributes;
 
 final class ArticleTemplate extends DocsTemplate implements LanguageRenderer.Output {
+
+  private static final IdSelector BACKDROP = Css.randomHash(3);
+
+  private static final IdSelector CLICK_OPEN = Css.randomHash(3);
+
+  private static final IdSelector NAV = Css.randomHash(3);
 
   private static final ClassSelector MY_DEFAULT = MarginY.v03;
 
@@ -304,7 +320,99 @@ final class ArticleTemplate extends DocsTemplate implements LanguageRenderer.Out
   }
 
   @Override
+  final void head0() {
+    super.head0();
+
+    script(raw("""
+    function onClick(id, listener) {
+      const el = document.getElementById(id);
+
+      el.addEventListener("click", listener);
+    }
+
+    function setStyle(id, propName, value) {
+      const el = document.getElementById(id);
+
+      el.style[propName] = value;
+    }
+
+    function menuCloseClicked(event) {
+      setStyle("{backdrop}", "display", null);
+      setStyle("{body}", "overflow", null);
+      //setStyle("{menuClose}", "display", null);
+      setStyle("{menuOpen}", "display", null);
+      setStyle("{leftPanel}", "display", null);
+    }
+
+    function menuOpenClicked(event) {
+      setStyle("{backdrop}", "display", "block");
+      setStyle("{body}", "overflow", "hidden");
+      //setStyle("{menuClose}", "display", "flex");
+      setStyle("{menuOpen}", "display", "none");
+      setStyle("{leftPanel}", "display", "block");
+    }
+
+    function domLoaded() {
+      onClick("{backdrop}", menuCloseClicked);
+      //onClick("{menuClose}", menuCloseClicked);
+      onClick("{menuOpen}", menuOpenClicked);
+    }
+
+    window.addEventListener('DOMContentLoaded', domLoaded);
+    """
+        .replace("{backdrop}", BACKDROP.id())
+        .replace("{body}", BODY.id())
+        .replace("{menuOpen}", CLICK_OPEN.id())
+        .replace("{leftPanel}", NAV.id())));
+  }
+
+  @Override
   final void main0() {
+    div(
+      div(
+        BACKDROP,
+
+        BackgroundColor.black,
+        Display.hidden,
+        Opacity.v050,
+        Position.fixed,
+        Top.v0,
+
+        Height.screen,
+        Width.screen,
+        ZIndex.v10
+      ),
+
+      span(
+        CLICK_OPEN,
+
+        Cursor.hover.pointer,
+        Display.inlineBlock,
+        Display.lg.hidden,
+        Padding.v01,
+        Position.absolute,
+
+        Left.v03,
+        Top.v04,
+
+        svg(
+          Display.inlineBlock,
+          Height.v06,
+          Width.v06,
+
+          xmlns("http://www.w3.org/2000/svg"),
+          width("16"),
+          height("16"),
+          fill("currentColor"),
+          viewBox("0 0 16 16"),
+          path(
+            fillRule("evenodd"),
+            d("M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z")
+          )
+        )
+      )
+    );
+
     div(
       FlexGrow.one,
 
@@ -315,10 +423,25 @@ final class ArticleTemplate extends DocsTemplate implements LanguageRenderer.Out
         MinHeight.full,
 
         nav(
+          NAV,
+
+          // hidden
+          BackgroundColor.white,
+          Display.hidden,
+          Height.full,
+          OverflowY.auto,
+          Position.fixed,
+          Top.v0,
+          Width.v72,
+          ZIndex.v20,
+
+          // shown
+          Display.lg.block,
+          Position.lg.staticPosition,
+
+          // common
           BorderColor.lg.slate200,
           BorderRight.lg.v1,
-          Display.hidden,
-          Display.lg.block,
           Flex.lg.none,
           FontSize.small,
           FontWeight.normal,
@@ -364,6 +487,7 @@ final class ArticleTemplate extends DocsTemplate implements LanguageRenderer.Out
       a(
         BackgroundColor.gray400,
         BackgroundColor.hover.gray500,
+        FontSize.xSmall,
         PaddingX.v02,
         PaddingY.v01,
         Rounded.standard,

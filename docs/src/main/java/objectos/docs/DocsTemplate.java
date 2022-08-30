@@ -15,11 +15,13 @@
  */
 package objectos.docs;
 
+import br.com.objectos.css.Css;
 import br.com.objectos.css.framework.flexbox.FlexDirection;
 import br.com.objectos.css.framework.layout.Display;
 import br.com.objectos.css.framework.sizing.MinHeight;
 import br.com.objectos.css.framework.typography.TextColor;
 import br.com.objectos.css.framework.typography.TextDecoration;
+import br.com.objectos.css.select.IdSelector;
 import br.com.objectos.html.element.StandardElementName;
 import br.com.objectos.html.spi.type.Value;
 import br.com.objectos.html.tmpl.AbstractTemplate;
@@ -32,6 +34,8 @@ import objectos.util.IntArrays;
 import objectos.util.ObjectArrays;
 
 abstract class DocsTemplate extends AbstractTemplate implements AsciiDoc.Processor {
+
+  static final IdSelector BODY = Css.randomHash(3);
 
   final DocsInjector injector;
 
@@ -223,6 +227,8 @@ abstract class DocsTemplate extends AbstractTemplate implements AsciiDoc.Process
         f(this::head0)
       ),
       body(
+        BODY,
+
         Display.flex,
         FlexDirection.column,
         MinHeight.screen,
@@ -254,6 +260,21 @@ abstract class DocsTemplate extends AbstractTemplate implements AsciiDoc.Process
     valueList[valueListIndex++] = v0;
     valueList[valueListIndex++] = v1;
     valueList[valueListIndex++] = v2;
+  }
+
+  void head0() {
+    meta(charset("utf-8"));
+    meta(httpEquiv("x-ua-compatible"), content("ie=edge"));
+    meta(name("viewport"), content("width=device-width, initial-scale=1, shrink-to-fit=no"));
+    link(rel("shortcut icon"), type("vnd.microsoft.icon"), href("/favicon.ico"));
+
+    var title = injector.$title();
+
+    title(title.plain());
+
+    if (rawStyle != null) {
+      style(raw(rawStyle));
+    }
   }
 
   void linkValues(String href) {
@@ -293,21 +314,6 @@ abstract class DocsTemplate extends AbstractTemplate implements AsciiDoc.Process
     valueStack = IntArrays.copyIfNecessary(valueStack, valueStackIndex);
 
     valueStack[valueStackIndex] = valueListIndex;
-  }
-
-  private void head0() {
-    meta(charset("utf-8"));
-    meta(httpEquiv("x-ua-compatible"), content("ie=edge"));
-    meta(name("viewport"), content("width=device-width, initial-scale=1, shrink-to-fit=no"));
-    link(rel("shortcut icon"), type("vnd.microsoft.icon"), href("/favicon.ico"));
-
-    var title = injector.$title();
-
-    title(title.plain());
-
-    if (rawStyle != null) {
-      style(raw(rawStyle));
-    }
   }
 
   private Value[] popValues() {
