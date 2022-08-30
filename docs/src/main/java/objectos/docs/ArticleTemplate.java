@@ -55,6 +55,7 @@ import br.com.objectos.css.framework.typography.FontSize;
 import br.com.objectos.css.framework.typography.FontWeight;
 import br.com.objectos.css.framework.typography.LetterSpacing;
 import br.com.objectos.css.framework.typography.ListStyleType;
+import br.com.objectos.css.framework.typography.TextAlign;
 import br.com.objectos.css.framework.typography.TextColor;
 import br.com.objectos.css.framework.typography.TextTransform;
 import br.com.objectos.css.select.ClassSelector;
@@ -368,6 +369,29 @@ final class ArticleTemplate extends DocsTemplate implements LanguageRenderer.Out
 
   @Override
   final void main0() {
+    var version = injector.$version();
+
+    if (version.status == Status.DEVELOPMENT) {
+      div(
+        BackgroundColor.orange100,
+        PaddingY.v02,
+
+        div(
+          FontSize.small,
+          MarginX.auto,
+          MaxWidth.screenX2l,
+          PaddingX.v04,
+          TextAlign.center,
+
+          p("""
+          You are reading the documentation for the unreleased development version of Objectos.
+
+          Please note that this is a work in progress. It might be incomplete and may
+          change without notice.""")
+        )
+      );
+    }
+
     div(
       div(
         BACKDROP,
