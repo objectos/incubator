@@ -92,6 +92,7 @@ public class FrameworkConfiguration extends AbstractConfiguration {
     install(new InsetSpec(spacing, responsive));
     install(new OverflowSpec(responsive));
     install(new Position(responsive));
+    install(new ZIndexSpec(responsive));
 
     // sizing
     install(new HeightSpec(spacing, responsive));

@@ -82,6 +82,7 @@ import br.com.objectos.css.framework.layout.OverflowY;
 import br.com.objectos.css.framework.layout.Position;
 import br.com.objectos.css.framework.layout.Right;
 import br.com.objectos.css.framework.layout.Top;
+import br.com.objectos.css.framework.layout.ZIndex;
 import br.com.objectos.css.framework.sizing.Height;
 import br.com.objectos.css.framework.sizing.MaxHeight;
 import br.com.objectos.css.framework.sizing.MaxWidth;
@@ -188,6 +189,7 @@ abstract class AbstractFramework extends AbstractStyleSheet {
     install(new OverflowX());
     install(new OverflowY());
     install(new Position());
+    install(new ZIndex());
   }
 
   protected void sizing() {

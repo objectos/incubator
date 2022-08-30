@@ -42,62 +42,34 @@ package br.com.objectos.css.framework.spec;
 import br.com.objectos.css.config.framework.AbstractConfiguration;
 import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkAtMediaSet;
 import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkGroup;
-import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkNamedValueSet;
 import br.com.objectos.css.keyword.Keywords;
+import br.com.objectos.css.type.Zero;
 
-final class WidthSpec extends AbstractConfiguration {
+class ZIndexSpec extends AbstractConfiguration {
 
-  private final FrameworkNamedValueSet spacing;
   private final FrameworkAtMediaSet responsive;
 
-  WidthSpec(FrameworkNamedValueSet spacing, FrameworkAtMediaSet responsive) {
-    this.spacing = spacing;
+  ZIndexSpec(FrameworkAtMediaSet responsive) {
     this.responsive = responsive;
   }
 
   @Override
   protected final void configure() {
-    FrameworkNamedValueSet width = valueSet(
+    var index = valueSet(
       v("auto", Keywords.auto),
-      spacing,
-      v("p1o2", pct(50)),
-      v("p1o3", pct(33.333333)),
-      v("p2o3", pct(66.666667)),
-      v("p1o4", pct(25)),
-      v("p2o4", pct(50)),
-      v("p3o4", pct(75)),
-      v("p1o5", pct(20)),
-      v("p2o5", pct(40)),
-      v("p3o5", pct(60)),
-      v("p4o5", pct(80)),
-      v("p1o6", pct(16.666667)),
-      v("p2o6", pct(33.333333)),
-      v("p3o6", pct(50)),
-      v("p4o6", pct(66.666667)),
-      v("p5o6", pct(83.333333)),
-      v("p1o12", pct(8.333333)),
-      v("p2o12", pct(16.666667)),
-      v("p3o12", pct(25)),
-      v("p4o12", pct(33.333333)),
-      v("p5o12", pct(41.666667)),
-      v("p6o12", pct(50)),
-      v("p7o12", pct(58.333333)),
-      v("p8o12", pct(66.666667)),
-      v("p9o12", pct(75)),
-      v("p10o12", pct(83.333333)),
-      v("p11o12", pct(91.666667)),
-      v("full", pct(100)),
-      v("screen", vw(100)),
-      v("min", Keywords.minContent),
-      v("max", Keywords.maxContent)
-    //v("fit", Keywords.fitContent)
+      v("00", Zero.INSTANCE),
+      v("10", 10),
+      v("20", 20),
+      v("30", 30),
+      v("40", 40),
+      v("50", 50)
     );
 
     property(
-      FrameworkGroup.SIZING,
-      simpleName("Width"),
-      methods("width"),
-      width,
+      FrameworkGroup.LAYOUT,
+      simpleName("ZIndex"),
+      methods("zIndex"),
+      index,
       responsive
     );
   }
