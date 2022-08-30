@@ -41,11 +41,11 @@ abstract class DocsInjector {
 
   abstract String $prevKey();
 
+  abstract DocumentRecord $record(String key);
+
   abstract TableOfContents $tableOfContents();
 
   abstract DocumentTitle $title();
-
-  abstract DocumentTitle $title(String key);
 
   abstract AbstractFragment $topBar();
 

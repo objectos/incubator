@@ -179,9 +179,9 @@ public final class Docs extends DocsInjector {
 
   @Override
   final String $ilink(String target) {
-    Check.state(currentVersion != null, "currentVersion is not set");
+    var key = toKey(target);
 
-    return baseHref + "/" + currentVersion.slug + "/" + target + ".html";
+    return $href(key);
   }
 
   @Override
@@ -200,21 +200,21 @@ public final class Docs extends DocsInjector {
   final String $prevKey() { return pages.prevKey(); }
 
   @Override
-  final TableOfContents $tableOfContents() { return tableOfContents; }
-
-  @Override
-  final DocumentTitle $title() { return currentRecord.title(); }
-
-  @Override
-  final DocumentTitle $title(String key) {
+  final DocumentRecord $record(String key) {
     var record = documents.get(key);
 
     if (record == null) {
       throw new NoSuchElementException(key);
     }
 
-    return record.title();
+    return record;
   }
+
+  @Override
+  final TableOfContents $tableOfContents() { return tableOfContents; }
+
+  @Override
+  final DocumentTitle $title() { return currentRecord.title(); }
 
   @Override
   final AbstractFragment $topBar() { return topBar.toFragment(); }
@@ -364,6 +364,12 @@ public final class Docs extends DocsInjector {
     var value = new DocumentRecord(document, documentLocation, documentTitle);
 
     documents.put(key, value);
+  }
+
+  private String toKey(String target) {
+    Check.state(currentVersion != null, "currentVersion is not set");
+
+    return currentVersion.directory + "/" + target;
   }
 
 }

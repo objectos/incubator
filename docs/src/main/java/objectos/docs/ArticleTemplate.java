@@ -479,7 +479,7 @@ final class ArticleTemplate extends DocsTemplate implements LanguageRenderer.Out
       AlignItems.center,
       Display.flex,
       JustifyContent.between,
-      MarginBottom.v04,
+      MarginBottom.v02,
       PaddingX.v03,
 
       div("Version " + version.name),
@@ -493,7 +493,36 @@ final class ArticleTemplate extends DocsTemplate implements LanguageRenderer.Out
         Rounded.standard,
         TextColor.white,
 
-        href(injector.$href("versions")), t("Change")
+        href(injector.$record("versions").location().href()), t("Change")
+      )
+    );
+
+    a(
+      BackgroundColor.hover.gray100,
+      Display.flex,
+      AlignItems.center,
+      JustifyContent.between,
+      MarginBottom.v04,
+      PaddingX.v03,
+      PaddingY.v01,
+
+      href(injector.$elink(version.directory + "/api/index")),
+
+      span(
+        t("Javadocs")
+      ),
+
+      svg(
+        xmlns("http://www.w3.org/2000/svg"),
+        width("16"),
+        height("16"),
+        fill("currentColor"),
+        viewBox("0 0 16 16"),
+
+        path(fillRule("evenodd"),
+          d("M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z")),
+        path(fillRule("evenodd"),
+          d("M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"))
       )
     );
 
@@ -649,14 +678,16 @@ final class ArticleTemplate extends DocsTemplate implements LanguageRenderer.Out
   }
 
   private ElementName aimpl(String key, AValue level) {
+    var record = injector.$record(key);
+
+    var href = record.location().href();
+
+    var text = record.title().toc();
+
     var selected = injector.$isCurrentKey(key);
 
     var bg = selected ? BackgroundColor.slate200 : BackgroundColor.hover.gray100;
     var fc = selected ? TextColor.black : noop();
-
-    var href = injector.$href(key);
-
-    var text = injector.$title(key).toc();
 
     return a(
       bg, fc, level,
