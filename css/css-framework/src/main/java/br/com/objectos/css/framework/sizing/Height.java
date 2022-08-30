@@ -49,8 +49,6 @@ import br.com.objectos.css.sheet.AbstractStyleSheet;
 @Generated("br.com.objectos.css.maven.plugin.framework.FrameworkMojo")
 public final class Height extends AbstractStyleSheet {
 
-  public static final ClassSelector auto = Css.randomDot(5);
-
   public static final ClassSelector px = Css.randomDot(5);
 
   public static final ClassSelector zero = Css.randomDot(5);
@@ -125,16 +123,48 @@ public final class Height extends AbstractStyleSheet {
 
   public static final ClassSelector v96 = Css.randomDot(5);
 
+  public static final ClassSelector auto = Css.randomDot(5);
+
+  public static final ClassSelector p1o2 = Css.randomDot(5);
+
+  public static final ClassSelector p1o3 = Css.randomDot(5);
+
+  public static final ClassSelector p2o3 = Css.randomDot(5);
+
+  public static final ClassSelector p1o4 = Css.randomDot(5);
+
+  public static final ClassSelector p2o4 = Css.randomDot(5);
+
+  public static final ClassSelector p3o4 = Css.randomDot(5);
+
+  public static final ClassSelector p1o5 = Css.randomDot(5);
+
+  public static final ClassSelector p2o5 = Css.randomDot(5);
+
+  public static final ClassSelector p3o5 = Css.randomDot(5);
+
+  public static final ClassSelector p4o5 = Css.randomDot(5);
+
+  public static final ClassSelector p1o6 = Css.randomDot(5);
+
+  public static final ClassSelector p2o6 = Css.randomDot(5);
+
+  public static final ClassSelector p3o6 = Css.randomDot(5);
+
+  public static final ClassSelector p4o6 = Css.randomDot(5);
+
+  public static final ClassSelector p5o6 = Css.randomDot(5);
+
   public static final ClassSelector full = Css.randomDot(5);
 
   public static final ClassSelector screen = Css.randomDot(5);
 
+  public static final ClassSelector min = Css.randomDot(5);
+
+  public static final ClassSelector max = Css.randomDot(5);
+
   @Override
   protected final void definition() {
-    style(
-        auto,
-        height(Keywords.auto)
-    );
     style(
         px,
         height(px(1))
@@ -284,6 +314,70 @@ public final class Height extends AbstractStyleSheet {
         height(rem(24))
     );
     style(
+        auto,
+        height(Keywords.auto)
+    );
+    style(
+        p1o2,
+        height(pct(50))
+    );
+    style(
+        p1o3,
+        height(pct(33.333333))
+    );
+    style(
+        p2o3,
+        height(pct(66.666667))
+    );
+    style(
+        p1o4,
+        height(pct(25))
+    );
+    style(
+        p2o4,
+        height(pct(50))
+    );
+    style(
+        p3o4,
+        height(pct(75))
+    );
+    style(
+        p1o5,
+        height(pct(20))
+    );
+    style(
+        p2o5,
+        height(pct(40))
+    );
+    style(
+        p3o5,
+        height(pct(60))
+    );
+    style(
+        p4o5,
+        height(pct(80))
+    );
+    style(
+        p1o6,
+        height(pct(16.666667))
+    );
+    style(
+        p2o6,
+        height(pct(33.333333))
+    );
+    style(
+        p3o6,
+        height(pct(50))
+    );
+    style(
+        p4o6,
+        height(pct(66.666667))
+    );
+    style(
+        p5o6,
+        height(pct(83.333333))
+    );
+    style(
         full,
         height(pct(100))
     );
@@ -291,13 +385,16 @@ public final class Height extends AbstractStyleSheet {
         screen,
         height(vh(100))
     );
+    style(
+        min,
+        height(Keywords.minContent)
+    );
+    style(
+        max,
+        height(Keywords.maxContent)
+    );
     media(
         AbstractStyleSheet.screen, minWidth(px(640)),
-
-        style(
-            sm.auto,
-            height(Keywords.auto)
-        ),
 
         style(
             sm.px,
@@ -485,6 +582,86 @@ public final class Height extends AbstractStyleSheet {
         ),
 
         style(
+            sm.auto,
+            height(Keywords.auto)
+        ),
+
+        style(
+            sm.p1o2,
+            height(pct(50))
+        ),
+
+        style(
+            sm.p1o3,
+            height(pct(33.333333))
+        ),
+
+        style(
+            sm.p2o3,
+            height(pct(66.666667))
+        ),
+
+        style(
+            sm.p1o4,
+            height(pct(25))
+        ),
+
+        style(
+            sm.p2o4,
+            height(pct(50))
+        ),
+
+        style(
+            sm.p3o4,
+            height(pct(75))
+        ),
+
+        style(
+            sm.p1o5,
+            height(pct(20))
+        ),
+
+        style(
+            sm.p2o5,
+            height(pct(40))
+        ),
+
+        style(
+            sm.p3o5,
+            height(pct(60))
+        ),
+
+        style(
+            sm.p4o5,
+            height(pct(80))
+        ),
+
+        style(
+            sm.p1o6,
+            height(pct(16.666667))
+        ),
+
+        style(
+            sm.p2o6,
+            height(pct(33.333333))
+        ),
+
+        style(
+            sm.p3o6,
+            height(pct(50))
+        ),
+
+        style(
+            sm.p4o6,
+            height(pct(66.666667))
+        ),
+
+        style(
+            sm.p5o6,
+            height(pct(83.333333))
+        ),
+
+        style(
             sm.full,
             height(pct(100))
         ),
@@ -492,15 +669,20 @@ public final class Height extends AbstractStyleSheet {
         style(
             sm.screen,
             height(vh(100))
+        ),
+
+        style(
+            sm.min,
+            height(Keywords.minContent)
+        ),
+
+        style(
+            sm.max,
+            height(Keywords.maxContent)
         )
     );
     media(
         AbstractStyleSheet.screen, minWidth(px(768)),
-
-        style(
-            md.auto,
-            height(Keywords.auto)
-        ),
 
         style(
             md.px,
@@ -688,6 +870,86 @@ public final class Height extends AbstractStyleSheet {
         ),
 
         style(
+            md.auto,
+            height(Keywords.auto)
+        ),
+
+        style(
+            md.p1o2,
+            height(pct(50))
+        ),
+
+        style(
+            md.p1o3,
+            height(pct(33.333333))
+        ),
+
+        style(
+            md.p2o3,
+            height(pct(66.666667))
+        ),
+
+        style(
+            md.p1o4,
+            height(pct(25))
+        ),
+
+        style(
+            md.p2o4,
+            height(pct(50))
+        ),
+
+        style(
+            md.p3o4,
+            height(pct(75))
+        ),
+
+        style(
+            md.p1o5,
+            height(pct(20))
+        ),
+
+        style(
+            md.p2o5,
+            height(pct(40))
+        ),
+
+        style(
+            md.p3o5,
+            height(pct(60))
+        ),
+
+        style(
+            md.p4o5,
+            height(pct(80))
+        ),
+
+        style(
+            md.p1o6,
+            height(pct(16.666667))
+        ),
+
+        style(
+            md.p2o6,
+            height(pct(33.333333))
+        ),
+
+        style(
+            md.p3o6,
+            height(pct(50))
+        ),
+
+        style(
+            md.p4o6,
+            height(pct(66.666667))
+        ),
+
+        style(
+            md.p5o6,
+            height(pct(83.333333))
+        ),
+
+        style(
             md.full,
             height(pct(100))
         ),
@@ -695,15 +957,20 @@ public final class Height extends AbstractStyleSheet {
         style(
             md.screen,
             height(vh(100))
+        ),
+
+        style(
+            md.min,
+            height(Keywords.minContent)
+        ),
+
+        style(
+            md.max,
+            height(Keywords.maxContent)
         )
     );
     media(
         AbstractStyleSheet.screen, minWidth(px(1024)),
-
-        style(
-            lg.auto,
-            height(Keywords.auto)
-        ),
 
         style(
             lg.px,
@@ -891,6 +1158,86 @@ public final class Height extends AbstractStyleSheet {
         ),
 
         style(
+            lg.auto,
+            height(Keywords.auto)
+        ),
+
+        style(
+            lg.p1o2,
+            height(pct(50))
+        ),
+
+        style(
+            lg.p1o3,
+            height(pct(33.333333))
+        ),
+
+        style(
+            lg.p2o3,
+            height(pct(66.666667))
+        ),
+
+        style(
+            lg.p1o4,
+            height(pct(25))
+        ),
+
+        style(
+            lg.p2o4,
+            height(pct(50))
+        ),
+
+        style(
+            lg.p3o4,
+            height(pct(75))
+        ),
+
+        style(
+            lg.p1o5,
+            height(pct(20))
+        ),
+
+        style(
+            lg.p2o5,
+            height(pct(40))
+        ),
+
+        style(
+            lg.p3o5,
+            height(pct(60))
+        ),
+
+        style(
+            lg.p4o5,
+            height(pct(80))
+        ),
+
+        style(
+            lg.p1o6,
+            height(pct(16.666667))
+        ),
+
+        style(
+            lg.p2o6,
+            height(pct(33.333333))
+        ),
+
+        style(
+            lg.p3o6,
+            height(pct(50))
+        ),
+
+        style(
+            lg.p4o6,
+            height(pct(66.666667))
+        ),
+
+        style(
+            lg.p5o6,
+            height(pct(83.333333))
+        ),
+
+        style(
             lg.full,
             height(pct(100))
         ),
@@ -898,15 +1245,20 @@ public final class Height extends AbstractStyleSheet {
         style(
             lg.screen,
             height(vh(100))
+        ),
+
+        style(
+            lg.min,
+            height(Keywords.minContent)
+        ),
+
+        style(
+            lg.max,
+            height(Keywords.maxContent)
         )
     );
     media(
         AbstractStyleSheet.screen, minWidth(px(1280)),
-
-        style(
-            xl.auto,
-            height(Keywords.auto)
-        ),
 
         style(
             xl.px,
@@ -1094,6 +1446,86 @@ public final class Height extends AbstractStyleSheet {
         ),
 
         style(
+            xl.auto,
+            height(Keywords.auto)
+        ),
+
+        style(
+            xl.p1o2,
+            height(pct(50))
+        ),
+
+        style(
+            xl.p1o3,
+            height(pct(33.333333))
+        ),
+
+        style(
+            xl.p2o3,
+            height(pct(66.666667))
+        ),
+
+        style(
+            xl.p1o4,
+            height(pct(25))
+        ),
+
+        style(
+            xl.p2o4,
+            height(pct(50))
+        ),
+
+        style(
+            xl.p3o4,
+            height(pct(75))
+        ),
+
+        style(
+            xl.p1o5,
+            height(pct(20))
+        ),
+
+        style(
+            xl.p2o5,
+            height(pct(40))
+        ),
+
+        style(
+            xl.p3o5,
+            height(pct(60))
+        ),
+
+        style(
+            xl.p4o5,
+            height(pct(80))
+        ),
+
+        style(
+            xl.p1o6,
+            height(pct(16.666667))
+        ),
+
+        style(
+            xl.p2o6,
+            height(pct(33.333333))
+        ),
+
+        style(
+            xl.p3o6,
+            height(pct(50))
+        ),
+
+        style(
+            xl.p4o6,
+            height(pct(66.666667))
+        ),
+
+        style(
+            xl.p5o6,
+            height(pct(83.333333))
+        ),
+
+        style(
             xl.full,
             height(pct(100))
         ),
@@ -1101,15 +1533,20 @@ public final class Height extends AbstractStyleSheet {
         style(
             xl.screen,
             height(vh(100))
+        ),
+
+        style(
+            xl.min,
+            height(Keywords.minContent)
+        ),
+
+        style(
+            xl.max,
+            height(Keywords.maxContent)
         )
     );
     media(
         AbstractStyleSheet.screen, minWidth(px(1440)),
-
-        style(
-            x2l.auto,
-            height(Keywords.auto)
-        ),
 
         style(
             x2l.px,
@@ -1297,6 +1734,86 @@ public final class Height extends AbstractStyleSheet {
         ),
 
         style(
+            x2l.auto,
+            height(Keywords.auto)
+        ),
+
+        style(
+            x2l.p1o2,
+            height(pct(50))
+        ),
+
+        style(
+            x2l.p1o3,
+            height(pct(33.333333))
+        ),
+
+        style(
+            x2l.p2o3,
+            height(pct(66.666667))
+        ),
+
+        style(
+            x2l.p1o4,
+            height(pct(25))
+        ),
+
+        style(
+            x2l.p2o4,
+            height(pct(50))
+        ),
+
+        style(
+            x2l.p3o4,
+            height(pct(75))
+        ),
+
+        style(
+            x2l.p1o5,
+            height(pct(20))
+        ),
+
+        style(
+            x2l.p2o5,
+            height(pct(40))
+        ),
+
+        style(
+            x2l.p3o5,
+            height(pct(60))
+        ),
+
+        style(
+            x2l.p4o5,
+            height(pct(80))
+        ),
+
+        style(
+            x2l.p1o6,
+            height(pct(16.666667))
+        ),
+
+        style(
+            x2l.p2o6,
+            height(pct(33.333333))
+        ),
+
+        style(
+            x2l.p3o6,
+            height(pct(50))
+        ),
+
+        style(
+            x2l.p4o6,
+            height(pct(66.666667))
+        ),
+
+        style(
+            x2l.p5o6,
+            height(pct(83.333333))
+        ),
+
+        style(
             x2l.full,
             height(pct(100))
         ),
@@ -1304,14 +1821,22 @@ public final class Height extends AbstractStyleSheet {
         style(
             x2l.screen,
             height(vh(100))
+        ),
+
+        style(
+            x2l.min,
+            height(Keywords.minContent)
+        ),
+
+        style(
+            x2l.max,
+            height(Keywords.maxContent)
         )
     );
   }
 
   public interface sm {
 
-    ClassSelector auto = Css.randomDot(5);
-
     ClassSelector px = Css.randomDot(5);
 
     ClassSelector zero = Css.randomDot(5);
@@ -1386,16 +1911,50 @@ public final class Height extends AbstractStyleSheet {
 
     ClassSelector v96 = Css.randomDot(5);
 
+    ClassSelector auto = Css.randomDot(5);
+
+    ClassSelector p1o2 = Css.randomDot(5);
+
+    ClassSelector p1o3 = Css.randomDot(5);
+
+    ClassSelector p2o3 = Css.randomDot(5);
+
+    ClassSelector p1o4 = Css.randomDot(5);
+
+    ClassSelector p2o4 = Css.randomDot(5);
+
+    ClassSelector p3o4 = Css.randomDot(5);
+
+    ClassSelector p1o5 = Css.randomDot(5);
+
+    ClassSelector p2o5 = Css.randomDot(5);
+
+    ClassSelector p3o5 = Css.randomDot(5);
+
+    ClassSelector p4o5 = Css.randomDot(5);
+
+    ClassSelector p1o6 = Css.randomDot(5);
+
+    ClassSelector p2o6 = Css.randomDot(5);
+
+    ClassSelector p3o6 = Css.randomDot(5);
+
+    ClassSelector p4o6 = Css.randomDot(5);
+
+    ClassSelector p5o6 = Css.randomDot(5);
+
     ClassSelector full = Css.randomDot(5);
 
     ClassSelector screen = Css.randomDot(5);
+
+    ClassSelector min = Css.randomDot(5);
+
+    ClassSelector max = Css.randomDot(5);
 
   }
 
   public interface md {
 
-    ClassSelector auto = Css.randomDot(5);
-
     ClassSelector px = Css.randomDot(5);
 
     ClassSelector zero = Css.randomDot(5);
@@ -1470,16 +2029,50 @@ public final class Height extends AbstractStyleSheet {
 
     ClassSelector v96 = Css.randomDot(5);
 
+    ClassSelector auto = Css.randomDot(5);
+
+    ClassSelector p1o2 = Css.randomDot(5);
+
+    ClassSelector p1o3 = Css.randomDot(5);
+
+    ClassSelector p2o3 = Css.randomDot(5);
+
+    ClassSelector p1o4 = Css.randomDot(5);
+
+    ClassSelector p2o4 = Css.randomDot(5);
+
+    ClassSelector p3o4 = Css.randomDot(5);
+
+    ClassSelector p1o5 = Css.randomDot(5);
+
+    ClassSelector p2o5 = Css.randomDot(5);
+
+    ClassSelector p3o5 = Css.randomDot(5);
+
+    ClassSelector p4o5 = Css.randomDot(5);
+
+    ClassSelector p1o6 = Css.randomDot(5);
+
+    ClassSelector p2o6 = Css.randomDot(5);
+
+    ClassSelector p3o6 = Css.randomDot(5);
+
+    ClassSelector p4o6 = Css.randomDot(5);
+
+    ClassSelector p5o6 = Css.randomDot(5);
+
     ClassSelector full = Css.randomDot(5);
 
     ClassSelector screen = Css.randomDot(5);
+
+    ClassSelector min = Css.randomDot(5);
+
+    ClassSelector max = Css.randomDot(5);
 
   }
 
   public interface lg {
 
-    ClassSelector auto = Css.randomDot(5);
-
     ClassSelector px = Css.randomDot(5);
 
     ClassSelector zero = Css.randomDot(5);
@@ -1554,16 +2147,50 @@ public final class Height extends AbstractStyleSheet {
 
     ClassSelector v96 = Css.randomDot(5);
 
+    ClassSelector auto = Css.randomDot(5);
+
+    ClassSelector p1o2 = Css.randomDot(5);
+
+    ClassSelector p1o3 = Css.randomDot(5);
+
+    ClassSelector p2o3 = Css.randomDot(5);
+
+    ClassSelector p1o4 = Css.randomDot(5);
+
+    ClassSelector p2o4 = Css.randomDot(5);
+
+    ClassSelector p3o4 = Css.randomDot(5);
+
+    ClassSelector p1o5 = Css.randomDot(5);
+
+    ClassSelector p2o5 = Css.randomDot(5);
+
+    ClassSelector p3o5 = Css.randomDot(5);
+
+    ClassSelector p4o5 = Css.randomDot(5);
+
+    ClassSelector p1o6 = Css.randomDot(5);
+
+    ClassSelector p2o6 = Css.randomDot(5);
+
+    ClassSelector p3o6 = Css.randomDot(5);
+
+    ClassSelector p4o6 = Css.randomDot(5);
+
+    ClassSelector p5o6 = Css.randomDot(5);
+
     ClassSelector full = Css.randomDot(5);
 
     ClassSelector screen = Css.randomDot(5);
+
+    ClassSelector min = Css.randomDot(5);
+
+    ClassSelector max = Css.randomDot(5);
 
   }
 
   public interface xl {
 
-    ClassSelector auto = Css.randomDot(5);
-
     ClassSelector px = Css.randomDot(5);
 
     ClassSelector zero = Css.randomDot(5);
@@ -1638,16 +2265,50 @@ public final class Height extends AbstractStyleSheet {
 
     ClassSelector v96 = Css.randomDot(5);
 
+    ClassSelector auto = Css.randomDot(5);
+
+    ClassSelector p1o2 = Css.randomDot(5);
+
+    ClassSelector p1o3 = Css.randomDot(5);
+
+    ClassSelector p2o3 = Css.randomDot(5);
+
+    ClassSelector p1o4 = Css.randomDot(5);
+
+    ClassSelector p2o4 = Css.randomDot(5);
+
+    ClassSelector p3o4 = Css.randomDot(5);
+
+    ClassSelector p1o5 = Css.randomDot(5);
+
+    ClassSelector p2o5 = Css.randomDot(5);
+
+    ClassSelector p3o5 = Css.randomDot(5);
+
+    ClassSelector p4o5 = Css.randomDot(5);
+
+    ClassSelector p1o6 = Css.randomDot(5);
+
+    ClassSelector p2o6 = Css.randomDot(5);
+
+    ClassSelector p3o6 = Css.randomDot(5);
+
+    ClassSelector p4o6 = Css.randomDot(5);
+
+    ClassSelector p5o6 = Css.randomDot(5);
+
     ClassSelector full = Css.randomDot(5);
 
     ClassSelector screen = Css.randomDot(5);
+
+    ClassSelector min = Css.randomDot(5);
+
+    ClassSelector max = Css.randomDot(5);
 
   }
 
   public interface x2l {
 
-    ClassSelector auto = Css.randomDot(5);
-
     ClassSelector px = Css.randomDot(5);
 
     ClassSelector zero = Css.randomDot(5);
@@ -1722,9 +2383,45 @@ public final class Height extends AbstractStyleSheet {
 
     ClassSelector v96 = Css.randomDot(5);
 
+    ClassSelector auto = Css.randomDot(5);
+
+    ClassSelector p1o2 = Css.randomDot(5);
+
+    ClassSelector p1o3 = Css.randomDot(5);
+
+    ClassSelector p2o3 = Css.randomDot(5);
+
+    ClassSelector p1o4 = Css.randomDot(5);
+
+    ClassSelector p2o4 = Css.randomDot(5);
+
+    ClassSelector p3o4 = Css.randomDot(5);
+
+    ClassSelector p1o5 = Css.randomDot(5);
+
+    ClassSelector p2o5 = Css.randomDot(5);
+
+    ClassSelector p3o5 = Css.randomDot(5);
+
+    ClassSelector p4o5 = Css.randomDot(5);
+
+    ClassSelector p1o6 = Css.randomDot(5);
+
+    ClassSelector p2o6 = Css.randomDot(5);
+
+    ClassSelector p3o6 = Css.randomDot(5);
+
+    ClassSelector p4o6 = Css.randomDot(5);
+
+    ClassSelector p5o6 = Css.randomDot(5);
+
     ClassSelector full = Css.randomDot(5);
 
     ClassSelector screen = Css.randomDot(5);
+
+    ClassSelector min = Css.randomDot(5);
+
+    ClassSelector max = Css.randomDot(5);
 
   }
 

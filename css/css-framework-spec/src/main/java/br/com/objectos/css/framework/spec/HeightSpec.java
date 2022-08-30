@@ -45,28 +45,48 @@ import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkGroup;
 import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkNamedValueSet;
 import br.com.objectos.css.keyword.Keywords;
 
-class Height extends AbstractConfiguration {
+final class HeightSpec extends AbstractConfiguration {
 
   private final FrameworkNamedValueSet spacing;
   private final FrameworkAtMediaSet responsive;
 
-  Height(FrameworkNamedValueSet spacing, FrameworkAtMediaSet responsive) {
+  HeightSpec(FrameworkNamedValueSet spacing, FrameworkAtMediaSet responsive) {
     this.spacing = spacing;
     this.responsive = responsive;
   }
 
   @Override
   protected final void configure() {
+    var values = valueSet(
+      spacing,
+      v("auto", Keywords.auto),
+      v("p1o2", pct(50)),
+      v("p1o3", pct(33.333333)),
+      v("p2o3", pct(66.666667)),
+      v("p1o4", pct(25)),
+      v("p2o4", pct(50)),
+      v("p3o4", pct(75)),
+      v("p1o5", pct(20)),
+      v("p2o5", pct(40)),
+      v("p3o5", pct(60)),
+      v("p4o5", pct(80)),
+      v("p1o6", pct(16.666667)),
+      v("p2o6", pct(33.333333)),
+      v("p3o6", pct(50)),
+      v("p4o6", pct(66.666667)),
+      v("p5o6", pct(83.333333)),
+      v("full", pct(100)),
+      v("screen", vh(100)),
+      v("min", Keywords.minContent),
+      v("max", Keywords.maxContent)
+    //v("fit", Keywords.fitContent)
+    );
+
     property(
       FrameworkGroup.SIZING,
       simpleName("Height"),
       methods("height"),
-      valueSet(
-        v("auto", Keywords.auto),
-        spacing,
-        v("full", pct(100)),
-        v("screen", vh(100))
-      ),
+      values,
       responsive
     );
   }

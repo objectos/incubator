@@ -45,12 +45,12 @@ import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkGroup;
 import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkNamedValueSet;
 import br.com.objectos.css.keyword.Keywords;
 
-class Width extends AbstractConfiguration {
+class WidthSpec extends AbstractConfiguration {
 
   private final FrameworkNamedValueSet spacing;
   private final FrameworkAtMediaSet responsive;
 
-  Width(FrameworkNamedValueSet spacing, FrameworkAtMediaSet responsive) {
+  WidthSpec(FrameworkNamedValueSet spacing, FrameworkAtMediaSet responsive) {
     this.spacing = spacing;
     this.responsive = responsive;
   }
@@ -87,7 +87,10 @@ class Width extends AbstractConfiguration {
       v("p10o12", pct(83.333333)),
       v("p11o12", pct(91.666667)),
       v("full", pct(100)),
-      v("screen", vw(100))
+      v("screen", vw(100)),
+      v("min", Keywords.minContent),
+      v("max", Keywords.maxContent)
+    //v("fit", Keywords.fitContent)
     );
 
     property(

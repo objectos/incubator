@@ -181,6 +181,10 @@ public final class Width extends AbstractStyleSheet {
 
   public static final ClassSelector screen = Css.randomDot(5);
 
+  public static final ClassSelector min = Css.randomDot(5);
+
+  public static final ClassSelector max = Css.randomDot(5);
+
   @Override
   protected final void definition() {
     style(
@@ -446,6 +450,14 @@ public final class Width extends AbstractStyleSheet {
     style(
         screen,
         width(vw(100))
+    );
+    style(
+        min,
+        width(Keywords.minContent)
+    );
+    style(
+        max,
+        width(Keywords.maxContent)
     );
     media(
         AbstractStyleSheet.screen, minWidth(px(640)),
@@ -778,6 +790,16 @@ public final class Width extends AbstractStyleSheet {
         style(
             sm.screen,
             width(vw(100))
+        ),
+
+        style(
+            sm.min,
+            width(Keywords.minContent)
+        ),
+
+        style(
+            sm.max,
+            width(Keywords.maxContent)
         )
     );
     media(
@@ -1111,6 +1133,16 @@ public final class Width extends AbstractStyleSheet {
         style(
             md.screen,
             width(vw(100))
+        ),
+
+        style(
+            md.min,
+            width(Keywords.minContent)
+        ),
+
+        style(
+            md.max,
+            width(Keywords.maxContent)
         )
     );
     media(
@@ -1444,6 +1476,16 @@ public final class Width extends AbstractStyleSheet {
         style(
             lg.screen,
             width(vw(100))
+        ),
+
+        style(
+            lg.min,
+            width(Keywords.minContent)
+        ),
+
+        style(
+            lg.max,
+            width(Keywords.maxContent)
         )
     );
     media(
@@ -1777,6 +1819,16 @@ public final class Width extends AbstractStyleSheet {
         style(
             xl.screen,
             width(vw(100))
+        ),
+
+        style(
+            xl.min,
+            width(Keywords.minContent)
+        ),
+
+        style(
+            xl.max,
+            width(Keywords.maxContent)
         )
     );
     media(
@@ -2110,6 +2162,16 @@ public final class Width extends AbstractStyleSheet {
         style(
             x2l.screen,
             width(vw(100))
+        ),
+
+        style(
+            x2l.min,
+            width(Keywords.minContent)
+        ),
+
+        style(
+            x2l.max,
+            width(Keywords.maxContent)
         )
     );
   }
@@ -2248,6 +2310,10 @@ public final class Width extends AbstractStyleSheet {
 
     ClassSelector screen = Css.randomDot(5);
 
+    ClassSelector min = Css.randomDot(5);
+
+    ClassSelector max = Css.randomDot(5);
+
   }
 
   public interface md {
@@ -2383,6 +2449,10 @@ public final class Width extends AbstractStyleSheet {
     ClassSelector full = Css.randomDot(5);
 
     ClassSelector screen = Css.randomDot(5);
+
+    ClassSelector min = Css.randomDot(5);
+
+    ClassSelector max = Css.randomDot(5);
 
   }
 
@@ -2520,6 +2590,10 @@ public final class Width extends AbstractStyleSheet {
 
     ClassSelector screen = Css.randomDot(5);
 
+    ClassSelector min = Css.randomDot(5);
+
+    ClassSelector max = Css.randomDot(5);
+
   }
 
   public interface xl {
@@ -2656,6 +2730,10 @@ public final class Width extends AbstractStyleSheet {
 
     ClassSelector screen = Css.randomDot(5);
 
+    ClassSelector min = Css.randomDot(5);
+
+    ClassSelector max = Css.randomDot(5);
+
   }
 
   public interface x2l {
@@ -2791,6 +2869,10 @@ public final class Width extends AbstractStyleSheet {
     ClassSelector full = Css.randomDot(5);
 
     ClassSelector screen = Css.randomDot(5);
+
+    ClassSelector min = Css.randomDot(5);
+
+    ClassSelector max = Css.randomDot(5);
 
   }
 

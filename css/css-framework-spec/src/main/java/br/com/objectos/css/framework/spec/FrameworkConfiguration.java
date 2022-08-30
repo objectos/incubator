@@ -94,11 +94,11 @@ public class FrameworkConfiguration extends AbstractConfiguration {
     install(new Position(responsive));
 
     // sizing
-    install(new Height(spacing, responsive));
+    install(new HeightSpec(spacing, responsive));
     install(new MaxHeight(responsive));
     install(new MinHeight(responsive));
 
-    install(new Width(spacing, responsive));
+    install(new WidthSpec(spacing, responsive));
     install(new MaxWidth(responsive));
     install(new MinWidth(responsive));
 
