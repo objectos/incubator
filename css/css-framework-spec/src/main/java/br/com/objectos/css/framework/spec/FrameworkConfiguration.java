@@ -72,7 +72,8 @@ public class FrameworkConfiguration extends AbstractConfiguration {
     install(new Rounded(responsive));
 
     // effects
-    install(new BoxShadow(responsive));
+    install(new BoxShadowSpec(responsive));
+    install(new OpacitySpec(responsive));
 
     // flexbox
     install(new AlignContent(responsive));

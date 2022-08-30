@@ -42,33 +42,38 @@ package br.com.objectos.css.framework.spec;
 import br.com.objectos.css.config.framework.AbstractConfiguration;
 import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkAtMediaSet;
 import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkGroup;
-import br.com.objectos.css.keyword.Keywords;
 import br.com.objectos.css.type.Zero;
 
-final class ZIndexSpec extends AbstractConfiguration {
+final class OpacitySpec extends AbstractConfiguration {
 
   private final FrameworkAtMediaSet responsive;
 
-  ZIndexSpec(FrameworkAtMediaSet responsive) {
+  OpacitySpec(FrameworkAtMediaSet responsive) {
     this.responsive = responsive;
   }
 
   @Override
   protected final void configure() {
     var index = valueSet(
-      v("auto", Keywords.auto),
-      v("00", Zero.INSTANCE),
-      v("10", 10),
-      v("20", 20),
-      v("30", 30),
-      v("40", 40),
-      v("50", 50)
+      v("000", Zero.INSTANCE),
+      v("005", 0.05),
+      v("010", 0.1),
+      v("020", 0.2),
+      v("030", 0.3),
+      v("040", 0.4),
+      v("050", 0.5),
+      v("060", 0.6),
+      v("070", 0.7),
+      v("080", 0.8),
+      v("090", 0.9),
+      v("095", 0.95),
+      v("100", 1)
     );
 
     property(
-      FrameworkGroup.LAYOUT,
-      simpleName("ZIndex"),
-      methods("zIndex"),
+      FrameworkGroup.EFFECTS,
+      simpleName("Opacity"),
+      methods("opacity"),
       index,
       responsive
     );

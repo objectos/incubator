@@ -61,6 +61,7 @@ import br.com.objectos.css.framework.border.RoundedTop;
 import br.com.objectos.css.framework.border.RoundedTopLeft;
 import br.com.objectos.css.framework.border.RoundedTopRight;
 import br.com.objectos.css.framework.effects.BoxShadow;
+import br.com.objectos.css.framework.effects.Opacity;
 import br.com.objectos.css.framework.flexbox.AlignContent;
 import br.com.objectos.css.framework.flexbox.AlignItems;
 import br.com.objectos.css.framework.flexbox.AlignSelf;
@@ -159,6 +160,7 @@ abstract class AbstractFramework extends AbstractStyleSheet {
 
   protected void effects() {
     install(new BoxShadow());
+    install(new Opacity());
   }
 
   protected void flexbox() {

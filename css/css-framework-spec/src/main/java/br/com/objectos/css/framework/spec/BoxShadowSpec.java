@@ -44,11 +44,11 @@ import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkAtMediaSet
 import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkGroup;
 import br.com.objectos.css.keyword.Keywords;
 
-class BoxShadow extends AbstractConfiguration {
+final class BoxShadowSpec extends AbstractConfiguration {
 
   private final FrameworkAtMediaSet responsive;
 
-  BoxShadow(FrameworkAtMediaSet responsive) {
+  BoxShadowSpec(FrameworkAtMediaSet responsive) {
     this.responsive = responsive;
   }
 
