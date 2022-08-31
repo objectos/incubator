@@ -441,6 +441,7 @@ final class ArticleTemplate extends DocsTemplate implements LanguageRenderer.Out
       FlexGrow.one,
 
       div(
+        AlignItems.stretch,
         Display.flex,
         MarginX.auto,
         MaxWidth.screenX2l,
@@ -452,7 +453,7 @@ final class ArticleTemplate extends DocsTemplate implements LanguageRenderer.Out
           // hidden
           BackgroundColor.white,
           Display.hidden,
-          Height.full,
+          Height.screen,
           OverflowY.auto,
           Position.fixed,
           Top.v0,
@@ -461,6 +462,7 @@ final class ArticleTemplate extends DocsTemplate implements LanguageRenderer.Out
 
           // shown
           Display.lg.block,
+          Height.lg.auto,
           Position.lg.staticPosition,
 
           // common
@@ -469,6 +471,7 @@ final class ArticleTemplate extends DocsTemplate implements LanguageRenderer.Out
           Flex.lg.none,
           FontSize.small,
           FontWeight.normal,
+          PaddingBottom.v24, // to offset bottombar
           PaddingLeft.lg.v02,
           PaddingRight.lg.v02,
           PaddingTop.v06,
@@ -482,6 +485,7 @@ final class ArticleTemplate extends DocsTemplate implements LanguageRenderer.Out
         main(
           FlexGrow.one,
           MinWidth.v0,
+          PaddingBottom.v24, // to offset bottombar
           PaddingX.v04,
           PaddingTop.v06,
 
@@ -503,7 +507,7 @@ final class ArticleTemplate extends DocsTemplate implements LanguageRenderer.Out
       AlignItems.center,
       Display.flex,
       JustifyContent.between,
-      MarginBottom.v02,
+      MarginBottom.v01,
       PaddingX.v03,
 
       div("Version " + version.name),

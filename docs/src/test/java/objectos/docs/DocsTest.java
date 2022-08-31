@@ -88,7 +88,7 @@ public class DocsTest {
 
     target = Files.createTempDirectory("docs-migration-test-");
 
-    docs = new Docs(source, target, new DocsTopBar());
+    docs = new Docs(source, target, new DocsTopBar(), new DocsBottomBar());
 
     reps = new String[] {
         "jyf", SyntaxCss._PRE.className(),

@@ -37,13 +37,17 @@ import objectos.util.UnmodifiableList;
 
 public final class Docs extends DocsInjector {
 
+  public interface BottomBar {
+    AbstractFragment toFragment();
+  }
+
   public interface TopBar {
     AbstractFragment toFragment();
   }
 
   private final AsciiDoc asciiDoc = AsciiDoc.create();
 
-  private String baseHref = "";
+  private final BottomBar bottomBar;
 
   private final Map<String, DocumentRecord> documents = new GrowableMap<>();
 
@@ -52,8 +56,6 @@ public final class Docs extends DocsInjector {
   private final NextBanner nextBanner = new NextBanner(this);
 
   private final Pages pages = new Pages();
-
-  private IOException rethrow;
 
   private final Path source;
 
@@ -71,18 +73,24 @@ public final class Docs extends DocsInjector {
 
   private final StyleSheetWriter styleSheetWriter = StyleSheetWriter.ofPretty();
 
+  private String baseHref = "";
+
   private String currentKey;
 
   private DocumentRecord currentRecord;
 
   private Version currentVersion;
 
-  Docs(Path source, Path target, TopBar topBar) {
+  private IOException rethrow;
+
+  Docs(Path source, Path target, TopBar topBar, BottomBar bottomBar) {
     this.source = source;
 
     this.target = target;
 
     this.topBar = topBar;
+
+    this.bottomBar = bottomBar;
 
     templates = _templates(
       new ArticleTemplate(this),
@@ -107,7 +115,9 @@ public final class Docs extends DocsInjector {
 
       main0ParseDirectory("target", args[1]),
 
-      new DocsTopBar()
+      new DocsTopBar(),
+
+      new DocsBottomBar()
     );
 
     site.development();
@@ -140,6 +150,9 @@ public final class Docs extends DocsInjector {
 
     generate();
   }
+
+  @Override
+  final AbstractFragment $bottomBar() { return bottomBar.toFragment(); }
 
   @Override
   final Document $document() { return currentRecord.document(); }

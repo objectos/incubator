@@ -21,6 +21,8 @@ import objectos.util.UnmodifiableList;
 
 abstract class DocsInjector {
 
+  abstract AbstractFragment $bottomBar();
+
   abstract Document $document();
 
   abstract String $elink(String target);
