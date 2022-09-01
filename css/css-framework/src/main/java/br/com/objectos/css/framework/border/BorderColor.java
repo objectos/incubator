@@ -497,6 +497,16 @@ public final class BorderColor extends AbstractStyleSheet {
 
   @Override
   protected final void definition() {
+    definition0();
+    definition1();
+    definition2();
+    definition3();
+    definition4();
+    definition5();
+    definition6();
+  }
+
+  private void definition0() {
     style(
         transparent,
         borderColor(Color.transparent)
@@ -1389,6 +1399,904 @@ public final class BorderColor extends AbstractStyleSheet {
         rose900,
         borderColor(hex("#881337"))
     );
+  }
+
+  private void definition1() {
+    style(
+        hover.transparent, HOVER,
+        borderColor(Color.transparent)
+    );
+    style(
+        hover.black, HOVER,
+        borderColor(hex("#000000"))
+    );
+    style(
+        hover.white, HOVER,
+        borderColor(hex("#ffffff"))
+    );
+    style(
+        hover.slate050, HOVER,
+        borderColor(hex("#f8fafc"))
+    );
+    style(
+        hover.slate100, HOVER,
+        borderColor(hex("#f1f5f9"))
+    );
+    style(
+        hover.slate200, HOVER,
+        borderColor(hex("#e2e8f0"))
+    );
+    style(
+        hover.slate300, HOVER,
+        borderColor(hex("#cbd5e1"))
+    );
+    style(
+        hover.slate400, HOVER,
+        borderColor(hex("#94a3b8"))
+    );
+    style(
+        hover.slate500, HOVER,
+        borderColor(hex("#64748b"))
+    );
+    style(
+        hover.slate600, HOVER,
+        borderColor(hex("#475569"))
+    );
+    style(
+        hover.slate700, HOVER,
+        borderColor(hex("#334155"))
+    );
+    style(
+        hover.slate800, HOVER,
+        borderColor(hex("#1e293b"))
+    );
+    style(
+        hover.slate900, HOVER,
+        borderColor(hex("#0f172a"))
+    );
+    style(
+        hover.gray050, HOVER,
+        borderColor(hex("#f9fafb"))
+    );
+    style(
+        hover.gray100, HOVER,
+        borderColor(hex("#f3f4f6"))
+    );
+    style(
+        hover.gray200, HOVER,
+        borderColor(hex("#e5e7eb"))
+    );
+    style(
+        hover.gray300, HOVER,
+        borderColor(hex("#d1d5db"))
+    );
+    style(
+        hover.gray400, HOVER,
+        borderColor(hex("#9ca3af"))
+    );
+    style(
+        hover.gray500, HOVER,
+        borderColor(hex("#6b7280"))
+    );
+    style(
+        hover.gray600, HOVER,
+        borderColor(hex("#4b5563"))
+    );
+    style(
+        hover.gray700, HOVER,
+        borderColor(hex("#374151"))
+    );
+    style(
+        hover.gray800, HOVER,
+        borderColor(hex("#1f2937"))
+    );
+    style(
+        hover.gray900, HOVER,
+        borderColor(hex("#111827"))
+    );
+    style(
+        hover.zinc050, HOVER,
+        borderColor(hex("#fafafa"))
+    );
+    style(
+        hover.zinc100, HOVER,
+        borderColor(hex("#f4f4f5"))
+    );
+    style(
+        hover.zinc200, HOVER,
+        borderColor(hex("#e4e4e7"))
+    );
+    style(
+        hover.zinc300, HOVER,
+        borderColor(hex("#d4d4d8"))
+    );
+    style(
+        hover.zinc400, HOVER,
+        borderColor(hex("#a1a1aa"))
+    );
+    style(
+        hover.zinc500, HOVER,
+        borderColor(hex("#71717a"))
+    );
+    style(
+        hover.zinc600, HOVER,
+        borderColor(hex("#52525b"))
+    );
+    style(
+        hover.zinc700, HOVER,
+        borderColor(hex("#3f3f46"))
+    );
+    style(
+        hover.zinc800, HOVER,
+        borderColor(hex("#27272a"))
+    );
+    style(
+        hover.zinc900, HOVER,
+        borderColor(hex("#18181b"))
+    );
+    style(
+        hover.neutral050, HOVER,
+        borderColor(hex("#fafafa"))
+    );
+    style(
+        hover.neutral100, HOVER,
+        borderColor(hex("#f5f5f5"))
+    );
+    style(
+        hover.neutral200, HOVER,
+        borderColor(hex("#e5e5e5"))
+    );
+    style(
+        hover.neutral300, HOVER,
+        borderColor(hex("#d4d4d4"))
+    );
+    style(
+        hover.neutral400, HOVER,
+        borderColor(hex("#a3a3a3"))
+    );
+    style(
+        hover.neutral500, HOVER,
+        borderColor(hex("#737373"))
+    );
+    style(
+        hover.neutral600, HOVER,
+        borderColor(hex("#525252"))
+    );
+    style(
+        hover.neutral700, HOVER,
+        borderColor(hex("#404040"))
+    );
+    style(
+        hover.neutral800, HOVER,
+        borderColor(hex("#262626"))
+    );
+    style(
+        hover.neutral900, HOVER,
+        borderColor(hex("#171717"))
+    );
+    style(
+        hover.stone050, HOVER,
+        borderColor(hex("#fafaf9"))
+    );
+    style(
+        hover.stone100, HOVER,
+        borderColor(hex("#f5f5f4"))
+    );
+    style(
+        hover.stone200, HOVER,
+        borderColor(hex("#e7e5e4"))
+    );
+    style(
+        hover.stone300, HOVER,
+        borderColor(hex("#d6d3d1"))
+    );
+    style(
+        hover.stone400, HOVER,
+        borderColor(hex("#a8a29e"))
+    );
+    style(
+        hover.stone500, HOVER,
+        borderColor(hex("#78716c"))
+    );
+    style(
+        hover.stone600, HOVER,
+        borderColor(hex("#57534e"))
+    );
+    style(
+        hover.stone700, HOVER,
+        borderColor(hex("#44403c"))
+    );
+    style(
+        hover.stone800, HOVER,
+        borderColor(hex("#292524"))
+    );
+    style(
+        hover.stone900, HOVER,
+        borderColor(hex("#1c1917"))
+    );
+    style(
+        hover.red050, HOVER,
+        borderColor(hex("#fef2f2"))
+    );
+    style(
+        hover.red100, HOVER,
+        borderColor(hex("#fee2e2"))
+    );
+    style(
+        hover.red200, HOVER,
+        borderColor(hex("#fecaca"))
+    );
+    style(
+        hover.red300, HOVER,
+        borderColor(hex("#fca5a5"))
+    );
+    style(
+        hover.red400, HOVER,
+        borderColor(hex("#f87171"))
+    );
+    style(
+        hover.red500, HOVER,
+        borderColor(hex("#ef4444"))
+    );
+    style(
+        hover.red600, HOVER,
+        borderColor(hex("#dc2626"))
+    );
+    style(
+        hover.red700, HOVER,
+        borderColor(hex("#b91c1c"))
+    );
+    style(
+        hover.red800, HOVER,
+        borderColor(hex("#991b1b"))
+    );
+    style(
+        hover.red900, HOVER,
+        borderColor(hex("#7f1d1d"))
+    );
+    style(
+        hover.orange050, HOVER,
+        borderColor(hex("#fff7ed"))
+    );
+    style(
+        hover.orange100, HOVER,
+        borderColor(hex("#ffedd5"))
+    );
+    style(
+        hover.orange200, HOVER,
+        borderColor(hex("#fed7aa"))
+    );
+    style(
+        hover.orange300, HOVER,
+        borderColor(hex("#fdba74"))
+    );
+    style(
+        hover.orange400, HOVER,
+        borderColor(hex("#fb923c"))
+    );
+    style(
+        hover.orange500, HOVER,
+        borderColor(hex("#f97316"))
+    );
+    style(
+        hover.orange600, HOVER,
+        borderColor(hex("#ea580c"))
+    );
+    style(
+        hover.orange700, HOVER,
+        borderColor(hex("#c2410c"))
+    );
+    style(
+        hover.orange800, HOVER,
+        borderColor(hex("#9a3412"))
+    );
+    style(
+        hover.orange900, HOVER,
+        borderColor(hex("#7c2d12"))
+    );
+    style(
+        hover.amber050, HOVER,
+        borderColor(hex("#fffbeb"))
+    );
+    style(
+        hover.amber100, HOVER,
+        borderColor(hex("#fef3c7"))
+    );
+    style(
+        hover.amber200, HOVER,
+        borderColor(hex("#fde68a"))
+    );
+    style(
+        hover.amber300, HOVER,
+        borderColor(hex("#fcd34d"))
+    );
+    style(
+        hover.amber400, HOVER,
+        borderColor(hex("#fbbf24"))
+    );
+    style(
+        hover.amber500, HOVER,
+        borderColor(hex("#f59e0b"))
+    );
+    style(
+        hover.amber600, HOVER,
+        borderColor(hex("#d97706"))
+    );
+    style(
+        hover.amber700, HOVER,
+        borderColor(hex("#b45309"))
+    );
+    style(
+        hover.amber800, HOVER,
+        borderColor(hex("#92400e"))
+    );
+    style(
+        hover.amber900, HOVER,
+        borderColor(hex("#78350f"))
+    );
+    style(
+        hover.yellow050, HOVER,
+        borderColor(hex("#fefce8"))
+    );
+    style(
+        hover.yellow100, HOVER,
+        borderColor(hex("#fef9c3"))
+    );
+    style(
+        hover.yellow200, HOVER,
+        borderColor(hex("#fef08a"))
+    );
+    style(
+        hover.yellow300, HOVER,
+        borderColor(hex("#fde047"))
+    );
+    style(
+        hover.yellow400, HOVER,
+        borderColor(hex("#facc15"))
+    );
+    style(
+        hover.yellow500, HOVER,
+        borderColor(hex("#eab308"))
+    );
+    style(
+        hover.yellow600, HOVER,
+        borderColor(hex("#ca8a04"))
+    );
+    style(
+        hover.yellow700, HOVER,
+        borderColor(hex("#a16207"))
+    );
+    style(
+        hover.yellow800, HOVER,
+        borderColor(hex("#854d0e"))
+    );
+    style(
+        hover.yellow900, HOVER,
+        borderColor(hex("#713f12"))
+    );
+    style(
+        hover.lime050, HOVER,
+        borderColor(hex("#f7fee7"))
+    );
+    style(
+        hover.lime100, HOVER,
+        borderColor(hex("#ecfccb"))
+    );
+    style(
+        hover.lime200, HOVER,
+        borderColor(hex("#d9f99d"))
+    );
+    style(
+        hover.lime300, HOVER,
+        borderColor(hex("#bef264"))
+    );
+    style(
+        hover.lime400, HOVER,
+        borderColor(hex("#a3e635"))
+    );
+    style(
+        hover.lime500, HOVER,
+        borderColor(hex("#84cc16"))
+    );
+    style(
+        hover.lime600, HOVER,
+        borderColor(hex("#65a30d"))
+    );
+    style(
+        hover.lime700, HOVER,
+        borderColor(hex("#4d7c0f"))
+    );
+    style(
+        hover.lime800, HOVER,
+        borderColor(hex("#3f6212"))
+    );
+    style(
+        hover.lime900, HOVER,
+        borderColor(hex("#365314"))
+    );
+    style(
+        hover.green050, HOVER,
+        borderColor(hex("#f0fdf4"))
+    );
+    style(
+        hover.green100, HOVER,
+        borderColor(hex("#dcfce7"))
+    );
+    style(
+        hover.green200, HOVER,
+        borderColor(hex("#bbf7d0"))
+    );
+    style(
+        hover.green300, HOVER,
+        borderColor(hex("#86efac"))
+    );
+    style(
+        hover.green400, HOVER,
+        borderColor(hex("#4ade80"))
+    );
+    style(
+        hover.green500, HOVER,
+        borderColor(hex("#22c55e"))
+    );
+    style(
+        hover.green600, HOVER,
+        borderColor(hex("#16a34a"))
+    );
+    style(
+        hover.green700, HOVER,
+        borderColor(hex("#15803d"))
+    );
+    style(
+        hover.green800, HOVER,
+        borderColor(hex("#166534"))
+    );
+    style(
+        hover.green900, HOVER,
+        borderColor(hex("#14532d"))
+    );
+    style(
+        hover.emerald050, HOVER,
+        borderColor(hex("#ecfdf5"))
+    );
+    style(
+        hover.emerald100, HOVER,
+        borderColor(hex("#d1fae5"))
+    );
+    style(
+        hover.emerald200, HOVER,
+        borderColor(hex("#a7f3d0"))
+    );
+    style(
+        hover.emerald300, HOVER,
+        borderColor(hex("#6ee7b7"))
+    );
+    style(
+        hover.emerald400, HOVER,
+        borderColor(hex("#34d399"))
+    );
+    style(
+        hover.emerald500, HOVER,
+        borderColor(hex("#10b981"))
+    );
+    style(
+        hover.emerald600, HOVER,
+        borderColor(hex("#059669"))
+    );
+    style(
+        hover.emerald700, HOVER,
+        borderColor(hex("#047857"))
+    );
+    style(
+        hover.emerald800, HOVER,
+        borderColor(hex("#065f46"))
+    );
+    style(
+        hover.emerald900, HOVER,
+        borderColor(hex("#064e3b"))
+    );
+    style(
+        hover.teal050, HOVER,
+        borderColor(hex("#f0fdfa"))
+    );
+    style(
+        hover.teal100, HOVER,
+        borderColor(hex("#ccfbf1"))
+    );
+    style(
+        hover.teal200, HOVER,
+        borderColor(hex("#99f6e4"))
+    );
+    style(
+        hover.teal300, HOVER,
+        borderColor(hex("#5eead4"))
+    );
+    style(
+        hover.teal400, HOVER,
+        borderColor(hex("#2dd4bf"))
+    );
+    style(
+        hover.teal500, HOVER,
+        borderColor(hex("#14b8a6"))
+    );
+    style(
+        hover.teal600, HOVER,
+        borderColor(hex("#0d9488"))
+    );
+    style(
+        hover.teal700, HOVER,
+        borderColor(hex("#0f766e"))
+    );
+    style(
+        hover.teal800, HOVER,
+        borderColor(hex("#115e59"))
+    );
+    style(
+        hover.teal900, HOVER,
+        borderColor(hex("#134e4a"))
+    );
+    style(
+        hover.cyan050, HOVER,
+        borderColor(hex("#ecfeff"))
+    );
+    style(
+        hover.cyan100, HOVER,
+        borderColor(hex("#cffafe"))
+    );
+    style(
+        hover.cyan200, HOVER,
+        borderColor(hex("#a5f3fc"))
+    );
+    style(
+        hover.cyan300, HOVER,
+        borderColor(hex("#67e8f9"))
+    );
+    style(
+        hover.cyan400, HOVER,
+        borderColor(hex("#22d3ee"))
+    );
+    style(
+        hover.cyan500, HOVER,
+        borderColor(hex("#06b6d4"))
+    );
+    style(
+        hover.cyan600, HOVER,
+        borderColor(hex("#0891b2"))
+    );
+    style(
+        hover.cyan700, HOVER,
+        borderColor(hex("#0e7490"))
+    );
+    style(
+        hover.cyan800, HOVER,
+        borderColor(hex("#155e75"))
+    );
+    style(
+        hover.cyan900, HOVER,
+        borderColor(hex("#164e63"))
+    );
+    style(
+        hover.sky050, HOVER,
+        borderColor(hex("#f0f9ff"))
+    );
+    style(
+        hover.sky100, HOVER,
+        borderColor(hex("#e0f2fe"))
+    );
+    style(
+        hover.sky200, HOVER,
+        borderColor(hex("#bae6fd"))
+    );
+    style(
+        hover.sky300, HOVER,
+        borderColor(hex("#7dd3fc"))
+    );
+    style(
+        hover.sky400, HOVER,
+        borderColor(hex("#38bdf8"))
+    );
+    style(
+        hover.sky500, HOVER,
+        borderColor(hex("#0ea5e9"))
+    );
+    style(
+        hover.sky600, HOVER,
+        borderColor(hex("#0284c7"))
+    );
+    style(
+        hover.sky700, HOVER,
+        borderColor(hex("#0369a1"))
+    );
+    style(
+        hover.sky800, HOVER,
+        borderColor(hex("#075985"))
+    );
+    style(
+        hover.sky900, HOVER,
+        borderColor(hex("#0c4a6e"))
+    );
+    style(
+        hover.blue050, HOVER,
+        borderColor(hex("#eff6ff"))
+    );
+    style(
+        hover.blue100, HOVER,
+        borderColor(hex("#dbeafe"))
+    );
+    style(
+        hover.blue200, HOVER,
+        borderColor(hex("#bfdbfe"))
+    );
+    style(
+        hover.blue300, HOVER,
+        borderColor(hex("#93c5fd"))
+    );
+    style(
+        hover.blue400, HOVER,
+        borderColor(hex("#60a5fa"))
+    );
+    style(
+        hover.blue500, HOVER,
+        borderColor(hex("#3b82f6"))
+    );
+    style(
+        hover.blue600, HOVER,
+        borderColor(hex("#2563eb"))
+    );
+    style(
+        hover.blue700, HOVER,
+        borderColor(hex("#1d4ed8"))
+    );
+    style(
+        hover.blue800, HOVER,
+        borderColor(hex("#1e40af"))
+    );
+    style(
+        hover.blue900, HOVER,
+        borderColor(hex("#1e3a8a"))
+    );
+    style(
+        hover.indigo050, HOVER,
+        borderColor(hex("#eef2ff"))
+    );
+    style(
+        hover.indigo100, HOVER,
+        borderColor(hex("#e0e7ff"))
+    );
+    style(
+        hover.indigo200, HOVER,
+        borderColor(hex("#c7d2fe"))
+    );
+    style(
+        hover.indigo300, HOVER,
+        borderColor(hex("#a5b4fc"))
+    );
+    style(
+        hover.indigo400, HOVER,
+        borderColor(hex("#818cf8"))
+    );
+    style(
+        hover.indigo500, HOVER,
+        borderColor(hex("#6366f1"))
+    );
+    style(
+        hover.indigo600, HOVER,
+        borderColor(hex("#4f46e5"))
+    );
+    style(
+        hover.indigo700, HOVER,
+        borderColor(hex("#4338ca"))
+    );
+    style(
+        hover.indigo800, HOVER,
+        borderColor(hex("#3730a3"))
+    );
+    style(
+        hover.indigo900, HOVER,
+        borderColor(hex("#312e81"))
+    );
+    style(
+        hover.violet050, HOVER,
+        borderColor(hex("#f5f3ff"))
+    );
+    style(
+        hover.violet100, HOVER,
+        borderColor(hex("#ede9fe"))
+    );
+    style(
+        hover.violet200, HOVER,
+        borderColor(hex("#ddd6fe"))
+    );
+    style(
+        hover.violet300, HOVER,
+        borderColor(hex("#c4b5fd"))
+    );
+    style(
+        hover.violet400, HOVER,
+        borderColor(hex("#a78bfa"))
+    );
+    style(
+        hover.violet500, HOVER,
+        borderColor(hex("#8b5cf6"))
+    );
+    style(
+        hover.violet600, HOVER,
+        borderColor(hex("#7c3aed"))
+    );
+    style(
+        hover.violet700, HOVER,
+        borderColor(hex("#6d28d9"))
+    );
+    style(
+        hover.violet800, HOVER,
+        borderColor(hex("#5b21b6"))
+    );
+    style(
+        hover.violet900, HOVER,
+        borderColor(hex("#4c1d95"))
+    );
+    style(
+        hover.purple050, HOVER,
+        borderColor(hex("#faf5ff"))
+    );
+    style(
+        hover.purple100, HOVER,
+        borderColor(hex("#f3e8ff"))
+    );
+    style(
+        hover.purple200, HOVER,
+        borderColor(hex("#e9d5ff"))
+    );
+    style(
+        hover.purple300, HOVER,
+        borderColor(hex("#d8b4fe"))
+    );
+    style(
+        hover.purple400, HOVER,
+        borderColor(hex("#c084fc"))
+    );
+    style(
+        hover.purple500, HOVER,
+        borderColor(hex("#a855f7"))
+    );
+    style(
+        hover.purple600, HOVER,
+        borderColor(hex("#9333ea"))
+    );
+    style(
+        hover.purple700, HOVER,
+        borderColor(hex("#7e22ce"))
+    );
+    style(
+        hover.purple800, HOVER,
+        borderColor(hex("#6b21a8"))
+    );
+    style(
+        hover.purple900, HOVER,
+        borderColor(hex("#581c87"))
+    );
+    style(
+        hover.fuchsia050, HOVER,
+        borderColor(hex("#fdf4ff"))
+    );
+    style(
+        hover.fuchsia100, HOVER,
+        borderColor(hex("#fae8ff"))
+    );
+    style(
+        hover.fuchsia200, HOVER,
+        borderColor(hex("#f5d0fe"))
+    );
+    style(
+        hover.fuchsia300, HOVER,
+        borderColor(hex("#f0abfc"))
+    );
+    style(
+        hover.fuchsia400, HOVER,
+        borderColor(hex("#e879f9"))
+    );
+    style(
+        hover.fuchsia500, HOVER,
+        borderColor(hex("#d946ef"))
+    );
+    style(
+        hover.fuchsia600, HOVER,
+        borderColor(hex("#c026d3"))
+    );
+    style(
+        hover.fuchsia700, HOVER,
+        borderColor(hex("#a21caf"))
+    );
+    style(
+        hover.fuchsia800, HOVER,
+        borderColor(hex("#86198f"))
+    );
+    style(
+        hover.fuchsia900, HOVER,
+        borderColor(hex("#701a75"))
+    );
+    style(
+        hover.pink050, HOVER,
+        borderColor(hex("#fdf2f8"))
+    );
+    style(
+        hover.pink100, HOVER,
+        borderColor(hex("#fce7f3"))
+    );
+    style(
+        hover.pink200, HOVER,
+        borderColor(hex("#fbcfe8"))
+    );
+    style(
+        hover.pink300, HOVER,
+        borderColor(hex("#f9a8d4"))
+    );
+    style(
+        hover.pink400, HOVER,
+        borderColor(hex("#f472b6"))
+    );
+    style(
+        hover.pink500, HOVER,
+        borderColor(hex("#ec4899"))
+    );
+    style(
+        hover.pink600, HOVER,
+        borderColor(hex("#db2777"))
+    );
+    style(
+        hover.pink700, HOVER,
+        borderColor(hex("#be185d"))
+    );
+    style(
+        hover.pink800, HOVER,
+        borderColor(hex("#9d174d"))
+    );
+    style(
+        hover.pink900, HOVER,
+        borderColor(hex("#831843"))
+    );
+    style(
+        hover.rose050, HOVER,
+        borderColor(hex("#fff1f2"))
+    );
+    style(
+        hover.rose100, HOVER,
+        borderColor(hex("#ffe4e6"))
+    );
+    style(
+        hover.rose200, HOVER,
+        borderColor(hex("#fecdd3"))
+    );
+    style(
+        hover.rose300, HOVER,
+        borderColor(hex("#fda4af"))
+    );
+    style(
+        hover.rose400, HOVER,
+        borderColor(hex("#fb7185"))
+    );
+    style(
+        hover.rose500, HOVER,
+        borderColor(hex("#f43f5e"))
+    );
+    style(
+        hover.rose600, HOVER,
+        borderColor(hex("#e11d48"))
+    );
+    style(
+        hover.rose700, HOVER,
+        borderColor(hex("#be123c"))
+    );
+    style(
+        hover.rose800, HOVER,
+        borderColor(hex("#9f1239"))
+    );
+    style(
+        hover.rose900, HOVER,
+        borderColor(hex("#881337"))
+    );
+  }
+
+  private void definition2() {
     media(
         AbstractStyleSheet.screen, minWidth(px(640)),
 
@@ -2507,6 +3415,9 @@ public final class BorderColor extends AbstractStyleSheet {
             borderColor(hex("#881337"))
         )
     );
+  }
+
+  private void definition3() {
     media(
         AbstractStyleSheet.screen, minWidth(px(768)),
 
@@ -3625,6 +4536,9 @@ public final class BorderColor extends AbstractStyleSheet {
             borderColor(hex("#881337"))
         )
     );
+  }
+
+  private void definition4() {
     media(
         AbstractStyleSheet.screen, minWidth(px(1024)),
 
@@ -4743,6 +5657,9 @@ public final class BorderColor extends AbstractStyleSheet {
             borderColor(hex("#881337"))
         )
     );
+  }
+
+  private void definition5() {
     media(
         AbstractStyleSheet.screen, minWidth(px(1280)),
 
@@ -5861,6 +6778,9 @@ public final class BorderColor extends AbstractStyleSheet {
             borderColor(hex("#881337"))
         )
     );
+  }
+
+  private void definition6() {
     media(
         AbstractStyleSheet.screen, minWidth(px(1440)),
 
@@ -6979,6 +7899,456 @@ public final class BorderColor extends AbstractStyleSheet {
             borderColor(hex("#881337"))
         )
     );
+  }
+
+  public interface hover {
+
+    ClassSelector transparent = Css.randomDot(5);
+
+    ClassSelector black = Css.randomDot(5);
+
+    ClassSelector white = Css.randomDot(5);
+
+    ClassSelector slate050 = Css.randomDot(5);
+
+    ClassSelector slate100 = Css.randomDot(5);
+
+    ClassSelector slate200 = Css.randomDot(5);
+
+    ClassSelector slate300 = Css.randomDot(5);
+
+    ClassSelector slate400 = Css.randomDot(5);
+
+    ClassSelector slate500 = Css.randomDot(5);
+
+    ClassSelector slate600 = Css.randomDot(5);
+
+    ClassSelector slate700 = Css.randomDot(5);
+
+    ClassSelector slate800 = Css.randomDot(5);
+
+    ClassSelector slate900 = Css.randomDot(5);
+
+    ClassSelector gray050 = Css.randomDot(5);
+
+    ClassSelector gray100 = Css.randomDot(5);
+
+    ClassSelector gray200 = Css.randomDot(5);
+
+    ClassSelector gray300 = Css.randomDot(5);
+
+    ClassSelector gray400 = Css.randomDot(5);
+
+    ClassSelector gray500 = Css.randomDot(5);
+
+    ClassSelector gray600 = Css.randomDot(5);
+
+    ClassSelector gray700 = Css.randomDot(5);
+
+    ClassSelector gray800 = Css.randomDot(5);
+
+    ClassSelector gray900 = Css.randomDot(5);
+
+    ClassSelector zinc050 = Css.randomDot(5);
+
+    ClassSelector zinc100 = Css.randomDot(5);
+
+    ClassSelector zinc200 = Css.randomDot(5);
+
+    ClassSelector zinc300 = Css.randomDot(5);
+
+    ClassSelector zinc400 = Css.randomDot(5);
+
+    ClassSelector zinc500 = Css.randomDot(5);
+
+    ClassSelector zinc600 = Css.randomDot(5);
+
+    ClassSelector zinc700 = Css.randomDot(5);
+
+    ClassSelector zinc800 = Css.randomDot(5);
+
+    ClassSelector zinc900 = Css.randomDot(5);
+
+    ClassSelector neutral050 = Css.randomDot(5);
+
+    ClassSelector neutral100 = Css.randomDot(5);
+
+    ClassSelector neutral200 = Css.randomDot(5);
+
+    ClassSelector neutral300 = Css.randomDot(5);
+
+    ClassSelector neutral400 = Css.randomDot(5);
+
+    ClassSelector neutral500 = Css.randomDot(5);
+
+    ClassSelector neutral600 = Css.randomDot(5);
+
+    ClassSelector neutral700 = Css.randomDot(5);
+
+    ClassSelector neutral800 = Css.randomDot(5);
+
+    ClassSelector neutral900 = Css.randomDot(5);
+
+    ClassSelector stone050 = Css.randomDot(5);
+
+    ClassSelector stone100 = Css.randomDot(5);
+
+    ClassSelector stone200 = Css.randomDot(5);
+
+    ClassSelector stone300 = Css.randomDot(5);
+
+    ClassSelector stone400 = Css.randomDot(5);
+
+    ClassSelector stone500 = Css.randomDot(5);
+
+    ClassSelector stone600 = Css.randomDot(5);
+
+    ClassSelector stone700 = Css.randomDot(5);
+
+    ClassSelector stone800 = Css.randomDot(5);
+
+    ClassSelector stone900 = Css.randomDot(5);
+
+    ClassSelector red050 = Css.randomDot(5);
+
+    ClassSelector red100 = Css.randomDot(5);
+
+    ClassSelector red200 = Css.randomDot(5);
+
+    ClassSelector red300 = Css.randomDot(5);
+
+    ClassSelector red400 = Css.randomDot(5);
+
+    ClassSelector red500 = Css.randomDot(5);
+
+    ClassSelector red600 = Css.randomDot(5);
+
+    ClassSelector red700 = Css.randomDot(5);
+
+    ClassSelector red800 = Css.randomDot(5);
+
+    ClassSelector red900 = Css.randomDot(5);
+
+    ClassSelector orange050 = Css.randomDot(5);
+
+    ClassSelector orange100 = Css.randomDot(5);
+
+    ClassSelector orange200 = Css.randomDot(5);
+
+    ClassSelector orange300 = Css.randomDot(5);
+
+    ClassSelector orange400 = Css.randomDot(5);
+
+    ClassSelector orange500 = Css.randomDot(5);
+
+    ClassSelector orange600 = Css.randomDot(5);
+
+    ClassSelector orange700 = Css.randomDot(5);
+
+    ClassSelector orange800 = Css.randomDot(5);
+
+    ClassSelector orange900 = Css.randomDot(5);
+
+    ClassSelector amber050 = Css.randomDot(5);
+
+    ClassSelector amber100 = Css.randomDot(5);
+
+    ClassSelector amber200 = Css.randomDot(5);
+
+    ClassSelector amber300 = Css.randomDot(5);
+
+    ClassSelector amber400 = Css.randomDot(5);
+
+    ClassSelector amber500 = Css.randomDot(5);
+
+    ClassSelector amber600 = Css.randomDot(5);
+
+    ClassSelector amber700 = Css.randomDot(5);
+
+    ClassSelector amber800 = Css.randomDot(5);
+
+    ClassSelector amber900 = Css.randomDot(5);
+
+    ClassSelector yellow050 = Css.randomDot(5);
+
+    ClassSelector yellow100 = Css.randomDot(5);
+
+    ClassSelector yellow200 = Css.randomDot(5);
+
+    ClassSelector yellow300 = Css.randomDot(5);
+
+    ClassSelector yellow400 = Css.randomDot(5);
+
+    ClassSelector yellow500 = Css.randomDot(5);
+
+    ClassSelector yellow600 = Css.randomDot(5);
+
+    ClassSelector yellow700 = Css.randomDot(5);
+
+    ClassSelector yellow800 = Css.randomDot(5);
+
+    ClassSelector yellow900 = Css.randomDot(5);
+
+    ClassSelector lime050 = Css.randomDot(5);
+
+    ClassSelector lime100 = Css.randomDot(5);
+
+    ClassSelector lime200 = Css.randomDot(5);
+
+    ClassSelector lime300 = Css.randomDot(5);
+
+    ClassSelector lime400 = Css.randomDot(5);
+
+    ClassSelector lime500 = Css.randomDot(5);
+
+    ClassSelector lime600 = Css.randomDot(5);
+
+    ClassSelector lime700 = Css.randomDot(5);
+
+    ClassSelector lime800 = Css.randomDot(5);
+
+    ClassSelector lime900 = Css.randomDot(5);
+
+    ClassSelector green050 = Css.randomDot(5);
+
+    ClassSelector green100 = Css.randomDot(5);
+
+    ClassSelector green200 = Css.randomDot(5);
+
+    ClassSelector green300 = Css.randomDot(5);
+
+    ClassSelector green400 = Css.randomDot(5);
+
+    ClassSelector green500 = Css.randomDot(5);
+
+    ClassSelector green600 = Css.randomDot(5);
+
+    ClassSelector green700 = Css.randomDot(5);
+
+    ClassSelector green800 = Css.randomDot(5);
+
+    ClassSelector green900 = Css.randomDot(5);
+
+    ClassSelector emerald050 = Css.randomDot(5);
+
+    ClassSelector emerald100 = Css.randomDot(5);
+
+    ClassSelector emerald200 = Css.randomDot(5);
+
+    ClassSelector emerald300 = Css.randomDot(5);
+
+    ClassSelector emerald400 = Css.randomDot(5);
+
+    ClassSelector emerald500 = Css.randomDot(5);
+
+    ClassSelector emerald600 = Css.randomDot(5);
+
+    ClassSelector emerald700 = Css.randomDot(5);
+
+    ClassSelector emerald800 = Css.randomDot(5);
+
+    ClassSelector emerald900 = Css.randomDot(5);
+
+    ClassSelector teal050 = Css.randomDot(5);
+
+    ClassSelector teal100 = Css.randomDot(5);
+
+    ClassSelector teal200 = Css.randomDot(5);
+
+    ClassSelector teal300 = Css.randomDot(5);
+
+    ClassSelector teal400 = Css.randomDot(5);
+
+    ClassSelector teal500 = Css.randomDot(5);
+
+    ClassSelector teal600 = Css.randomDot(5);
+
+    ClassSelector teal700 = Css.randomDot(5);
+
+    ClassSelector teal800 = Css.randomDot(5);
+
+    ClassSelector teal900 = Css.randomDot(5);
+
+    ClassSelector cyan050 = Css.randomDot(5);
+
+    ClassSelector cyan100 = Css.randomDot(5);
+
+    ClassSelector cyan200 = Css.randomDot(5);
+
+    ClassSelector cyan300 = Css.randomDot(5);
+
+    ClassSelector cyan400 = Css.randomDot(5);
+
+    ClassSelector cyan500 = Css.randomDot(5);
+
+    ClassSelector cyan600 = Css.randomDot(5);
+
+    ClassSelector cyan700 = Css.randomDot(5);
+
+    ClassSelector cyan800 = Css.randomDot(5);
+
+    ClassSelector cyan900 = Css.randomDot(5);
+
+    ClassSelector sky050 = Css.randomDot(5);
+
+    ClassSelector sky100 = Css.randomDot(5);
+
+    ClassSelector sky200 = Css.randomDot(5);
+
+    ClassSelector sky300 = Css.randomDot(5);
+
+    ClassSelector sky400 = Css.randomDot(5);
+
+    ClassSelector sky500 = Css.randomDot(5);
+
+    ClassSelector sky600 = Css.randomDot(5);
+
+    ClassSelector sky700 = Css.randomDot(5);
+
+    ClassSelector sky800 = Css.randomDot(5);
+
+    ClassSelector sky900 = Css.randomDot(5);
+
+    ClassSelector blue050 = Css.randomDot(5);
+
+    ClassSelector blue100 = Css.randomDot(5);
+
+    ClassSelector blue200 = Css.randomDot(5);
+
+    ClassSelector blue300 = Css.randomDot(5);
+
+    ClassSelector blue400 = Css.randomDot(5);
+
+    ClassSelector blue500 = Css.randomDot(5);
+
+    ClassSelector blue600 = Css.randomDot(5);
+
+    ClassSelector blue700 = Css.randomDot(5);
+
+    ClassSelector blue800 = Css.randomDot(5);
+
+    ClassSelector blue900 = Css.randomDot(5);
+
+    ClassSelector indigo050 = Css.randomDot(5);
+
+    ClassSelector indigo100 = Css.randomDot(5);
+
+    ClassSelector indigo200 = Css.randomDot(5);
+
+    ClassSelector indigo300 = Css.randomDot(5);
+
+    ClassSelector indigo400 = Css.randomDot(5);
+
+    ClassSelector indigo500 = Css.randomDot(5);
+
+    ClassSelector indigo600 = Css.randomDot(5);
+
+    ClassSelector indigo700 = Css.randomDot(5);
+
+    ClassSelector indigo800 = Css.randomDot(5);
+
+    ClassSelector indigo900 = Css.randomDot(5);
+
+    ClassSelector violet050 = Css.randomDot(5);
+
+    ClassSelector violet100 = Css.randomDot(5);
+
+    ClassSelector violet200 = Css.randomDot(5);
+
+    ClassSelector violet300 = Css.randomDot(5);
+
+    ClassSelector violet400 = Css.randomDot(5);
+
+    ClassSelector violet500 = Css.randomDot(5);
+
+    ClassSelector violet600 = Css.randomDot(5);
+
+    ClassSelector violet700 = Css.randomDot(5);
+
+    ClassSelector violet800 = Css.randomDot(5);
+
+    ClassSelector violet900 = Css.randomDot(5);
+
+    ClassSelector purple050 = Css.randomDot(5);
+
+    ClassSelector purple100 = Css.randomDot(5);
+
+    ClassSelector purple200 = Css.randomDot(5);
+
+    ClassSelector purple300 = Css.randomDot(5);
+
+    ClassSelector purple400 = Css.randomDot(5);
+
+    ClassSelector purple500 = Css.randomDot(5);
+
+    ClassSelector purple600 = Css.randomDot(5);
+
+    ClassSelector purple700 = Css.randomDot(5);
+
+    ClassSelector purple800 = Css.randomDot(5);
+
+    ClassSelector purple900 = Css.randomDot(5);
+
+    ClassSelector fuchsia050 = Css.randomDot(5);
+
+    ClassSelector fuchsia100 = Css.randomDot(5);
+
+    ClassSelector fuchsia200 = Css.randomDot(5);
+
+    ClassSelector fuchsia300 = Css.randomDot(5);
+
+    ClassSelector fuchsia400 = Css.randomDot(5);
+
+    ClassSelector fuchsia500 = Css.randomDot(5);
+
+    ClassSelector fuchsia600 = Css.randomDot(5);
+
+    ClassSelector fuchsia700 = Css.randomDot(5);
+
+    ClassSelector fuchsia800 = Css.randomDot(5);
+
+    ClassSelector fuchsia900 = Css.randomDot(5);
+
+    ClassSelector pink050 = Css.randomDot(5);
+
+    ClassSelector pink100 = Css.randomDot(5);
+
+    ClassSelector pink200 = Css.randomDot(5);
+
+    ClassSelector pink300 = Css.randomDot(5);
+
+    ClassSelector pink400 = Css.randomDot(5);
+
+    ClassSelector pink500 = Css.randomDot(5);
+
+    ClassSelector pink600 = Css.randomDot(5);
+
+    ClassSelector pink700 = Css.randomDot(5);
+
+    ClassSelector pink800 = Css.randomDot(5);
+
+    ClassSelector pink900 = Css.randomDot(5);
+
+    ClassSelector rose050 = Css.randomDot(5);
+
+    ClassSelector rose100 = Css.randomDot(5);
+
+    ClassSelector rose200 = Css.randomDot(5);
+
+    ClassSelector rose300 = Css.randomDot(5);
+
+    ClassSelector rose400 = Css.randomDot(5);
+
+    ClassSelector rose500 = Css.randomDot(5);
+
+    ClassSelector rose600 = Css.randomDot(5);
+
+    ClassSelector rose700 = Css.randomDot(5);
+
+    ClassSelector rose800 = Css.randomDot(5);
+
+    ClassSelector rose900 = Css.randomDot(5);
+
   }
 
   public interface sm {

@@ -70,6 +70,15 @@ public final class FontSize extends AbstractStyleSheet {
 
   @Override
   protected final void definition() {
+    definition0();
+    definition1();
+    definition2();
+    definition3();
+    definition4();
+    definition5();
+  }
+
+  private void definition0() {
     style(
         xSmall,
         fontSize(rem(0.75))
@@ -110,6 +119,9 @@ public final class FontSize extends AbstractStyleSheet {
         xLarge6,
         fontSize(rem(4))
     );
+  }
+
+  private void definition1() {
     media(
         AbstractStyleSheet.screen, minWidth(px(640)),
 
@@ -163,6 +175,9 @@ public final class FontSize extends AbstractStyleSheet {
             fontSize(rem(4))
         )
     );
+  }
+
+  private void definition2() {
     media(
         AbstractStyleSheet.screen, minWidth(px(768)),
 
@@ -216,6 +231,9 @@ public final class FontSize extends AbstractStyleSheet {
             fontSize(rem(4))
         )
     );
+  }
+
+  private void definition3() {
     media(
         AbstractStyleSheet.screen, minWidth(px(1024)),
 
@@ -269,6 +287,9 @@ public final class FontSize extends AbstractStyleSheet {
             fontSize(rem(4))
         )
     );
+  }
+
+  private void definition4() {
     media(
         AbstractStyleSheet.screen, minWidth(px(1280)),
 
@@ -322,6 +343,9 @@ public final class FontSize extends AbstractStyleSheet {
             fontSize(rem(4))
         )
     );
+  }
+
+  private void definition5() {
     media(
         AbstractStyleSheet.screen, minWidth(px(1440)),
 

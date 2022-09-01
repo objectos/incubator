@@ -17,20 +17,18 @@ package br.com.objectos.css.maven.plugin.framework.sizing;
 
 import static org.testng.Assert.assertEquals;
 
-import br.com.objectos.code.java.io.JavaFile;
 import br.com.objectos.css.config.framework.AbstractConfiguration;
 import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkGroup;
 import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkNamedValueSet;
 import br.com.objectos.css.maven.plugin.framework.AbstractCssMavenPluginFrameworkTest;
 import br.com.objectos.css.type.Zero;
-import objectos.util.UnmodifiableMap;
 import org.testng.annotations.Test;
 
 public class HeightTest extends AbstractCssMavenPluginFrameworkTest {
 
   @Test
   public void execute() {
-    UnmodifiableMap<String, JavaFile> javaFiles = executeProperty(
+    var javaFiles = executeProperty(
       new AbstractConfiguration() {
         @Override
         protected final void configure() {
@@ -54,9 +52,12 @@ public class HeightTest extends AbstractCssMavenPluginFrameworkTest {
         }
       }
     );
+
     assertEquals(javaFiles.size(), 1);
+
     testLines(
       javaFiles.get("Height"),
+
       "package br.com.objectos.css.framework.sizing;",
       "",
       "import br.com.objectos.code.annotations.Generated;",
@@ -77,6 +78,10 @@ public class HeightTest extends AbstractCssMavenPluginFrameworkTest {
       "",
       "  @Override",
       "  protected final void definition() {",
+      "    definition0();",
+      "  }",
+      "",
+      "  private void definition0() {",
       "    style(",
       "        v0,",
       "        height(zero())",

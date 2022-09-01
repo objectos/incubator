@@ -17,19 +17,17 @@ package br.com.objectos.css.maven.plugin.framework.background;
 
 import static org.testng.Assert.assertEquals;
 
-import br.com.objectos.code.java.io.JavaFile;
 import br.com.objectos.css.config.framework.AbstractConfiguration;
 import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkGroup;
 import br.com.objectos.css.keyword.Keywords;
 import br.com.objectos.css.maven.plugin.framework.AbstractCssMavenPluginFrameworkTest;
-import objectos.util.UnmodifiableMap;
 import org.testng.annotations.Test;
 
 public class BackgroundSizeTest extends AbstractCssMavenPluginFrameworkTest {
 
   @Test
   public void execute() {
-    UnmodifiableMap<String, JavaFile> javaFiles = executeProperty(
+    var javaFiles = executeProperty(
       new AbstractConfiguration() {
         @Override
         protected final void configure() {
@@ -46,31 +44,39 @@ public class BackgroundSizeTest extends AbstractCssMavenPluginFrameworkTest {
         }
       }
     );
+
     assertEquals(javaFiles.size(), 1);
-    testLines(
+
+    test(
       javaFiles.get("BackgroundSize"),
-      "package br.com.objectos.css.framework.background;",
-      "",
-      "import br.com.objectos.code.annotations.Generated;",
-      "import br.com.objectos.css.Css;",
-      "import br.com.objectos.css.keyword.Keywords;",
-      "import br.com.objectos.css.select.ClassSelector;",
-      "import br.com.objectos.css.sheet.AbstractStyleSheet;",
-      "",
-      "@Generated(\"br.com.objectos.css.maven.plugin.framework.FrameworkMojo\")",
-      "public final class BackgroundSize extends AbstractStyleSheet {",
-      "",
-      "  public static final ClassSelector auto = Css.randomDot(5);",
-      "",
-      "  @Override",
-      "  protected final void definition() {",
-      "    style(",
-      "        auto,",
-      "        backgroundSize(Keywords.auto)",
-      "    );",
-      "  }",
-      "",
-      "}"
+
+      """
+package br.com.objectos.css.framework.background;
+
+import br.com.objectos.code.annotations.Generated;
+import br.com.objectos.css.Css;
+import br.com.objectos.css.keyword.Keywords;
+import br.com.objectos.css.select.ClassSelector;
+import br.com.objectos.css.sheet.AbstractStyleSheet;
+
+@Generated("br.com.objectos.css.maven.plugin.framework.FrameworkMojo")
+public final class BackgroundSize extends AbstractStyleSheet {
+
+  public static final ClassSelector auto = Css.randomDot(5);
+
+  @Override
+  protected final void definition() {
+    definition0();
+  }
+
+  private void definition0() {
+    style(
+        auto,
+        backgroundSize(Keywords.auto)
+    );
+  }
+
+}"""
     );
   }
 

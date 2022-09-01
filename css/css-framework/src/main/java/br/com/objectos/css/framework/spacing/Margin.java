@@ -127,6 +127,16 @@ public final class Margin extends AbstractStyleSheet {
 
   @Override
   protected final void definition() {
+    definition0();
+    definition1();
+    definition2();
+    definition3();
+    definition4();
+    definition5();
+    definition6();
+  }
+
+  private void definition0() {
     style(
         auto,
         margin(Keywords.auto)
@@ -279,6 +289,9 @@ public final class Margin extends AbstractStyleSheet {
         v96,
         margin(rem(24))
     );
+  }
+
+  private void definition1() {
     style(
         firstChild.auto, FIRST_CHILD,
         margin(Keywords.auto)
@@ -431,6 +444,9 @@ public final class Margin extends AbstractStyleSheet {
         firstChild.v96, FIRST_CHILD,
         margin(rem(24))
     );
+  }
+
+  private void definition2() {
     media(
         AbstractStyleSheet.screen, minWidth(px(640)),
 
@@ -624,6 +640,9 @@ public final class Margin extends AbstractStyleSheet {
             margin(rem(24))
         )
     );
+  }
+
+  private void definition3() {
     media(
         AbstractStyleSheet.screen, minWidth(px(768)),
 
@@ -817,6 +836,9 @@ public final class Margin extends AbstractStyleSheet {
             margin(rem(24))
         )
     );
+  }
+
+  private void definition4() {
     media(
         AbstractStyleSheet.screen, minWidth(px(1024)),
 
@@ -1010,6 +1032,9 @@ public final class Margin extends AbstractStyleSheet {
             margin(rem(24))
         )
     );
+  }
+
+  private void definition5() {
     media(
         AbstractStyleSheet.screen, minWidth(px(1280)),
 
@@ -1203,6 +1228,9 @@ public final class Margin extends AbstractStyleSheet {
             margin(rem(24))
         )
     );
+  }
+
+  private void definition6() {
     media(
         AbstractStyleSheet.screen, minWidth(px(1440)),
 

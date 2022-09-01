@@ -17,18 +17,16 @@ package br.com.objectos.css.maven.plugin.framework.typography;
 
 import static org.testng.Assert.assertEquals;
 
-import br.com.objectos.code.java.io.JavaFile;
 import br.com.objectos.css.config.framework.AbstractConfiguration;
 import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkGroup;
 import br.com.objectos.css.maven.plugin.framework.AbstractCssMavenPluginFrameworkTest;
-import objectos.util.UnmodifiableMap;
 import org.testng.annotations.Test;
 
 public class FontWeightTest extends AbstractCssMavenPluginFrameworkTest {
 
   @Test
   public void execute() {
-    UnmodifiableMap<String, JavaFile> javaFiles = executeProperty(
+    var javaFiles = executeProperty(
       new AbstractConfiguration() {
         @Override
         protected final void configure() {
@@ -45,7 +43,9 @@ public class FontWeightTest extends AbstractCssMavenPluginFrameworkTest {
         }
       }
     );
+
     assertEquals(javaFiles.size(), 1);
+
     testLines(
       javaFiles.get("FontWeight"),
       "package br.com.objectos.css.framework.typography;",
@@ -62,6 +62,10 @@ public class FontWeightTest extends AbstractCssMavenPluginFrameworkTest {
       "",
       "  @Override",
       "  protected final void definition() {",
+      "    definition0();",
+      "  }",
+      "",
+      "  private void definition0() {",
       "    style(",
       "        normal,",
       "        fontWeight(400)",

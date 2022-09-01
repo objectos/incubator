@@ -84,6 +84,12 @@ public final class MarginLeft extends AbstractStyleSheet {
 
   @Override
   protected final void definition() {
+    definition0();
+    definition1();
+    definition2();
+  }
+
+  private void definition0() {
     style(
         v0,
         marginLeft(zero())
@@ -96,6 +102,9 @@ public final class MarginLeft extends AbstractStyleSheet {
         v8,
         marginLeft(rem(2))
     );
+  }
+
+  private void definition1() {
     style(
         firstChild.v0, FIRST_CHILD,
         marginLeft(zero())
@@ -108,6 +117,9 @@ public final class MarginLeft extends AbstractStyleSheet {
         firstChild.v8, FIRST_CHILD,
         marginLeft(rem(2))
     );
+  }
+
+  private void definition2() {
     media(
         AbstractStyleSheet.screen, minWidth(px(768)),
 

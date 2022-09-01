@@ -17,10 +17,12 @@ package br.com.objectos.css.maven.plugin.framework;
 
 import static br.com.objectos.code.java.Java.javaFile;
 
+import br.com.objectos.code.java.Java;
 import br.com.objectos.code.java.declaration.ClassCode;
 import br.com.objectos.code.java.declaration.MethodCode;
 import br.com.objectos.code.java.declaration.Modifiers;
 import br.com.objectos.code.java.type.NamedClass;
+import objectos.util.GrowableList;
 import objectos.util.UnmodifiableList;
 
 class PropertyClass {
@@ -87,27 +89,57 @@ class PropertyClass {
 
     definitionMethod.name("definition");
 
+    var privateMethods = new GrowableList<MethodCode.Builder>();
+
     if (!styles.isEmpty()) {
-      doStyles(c, definitionMethod);
+      var helperMethod = createHelperMethod(definitionMethod, privateMethods);
+
+      doStyles(c, helperMethod);
     }
 
     for (var state : states) {
       c.addType(state.generateIface());
 
-      state.acceptDefinitionMethod(definitionMethod);
+      var helperMethod = createHelperMethod(definitionMethod, privateMethods);
+
+      state.acceptDefinitionMethod(helperMethod);
     }
 
     for (var query : queries) {
       c.addType(query.generateIface());
 
+      var helperMethod = createHelperMethod(definitionMethod, privateMethods);
+
       var stmt = query.generateMediaMethodInvocation();
 
-      definitionMethod.addStatement(stmt);
+      helperMethod.addStatement(stmt);
     }
 
     c.addMethod(definitionMethod.build());
 
+    for (var privateMethod : privateMethods) {
+      c.addMethod(privateMethod.build());
+    }
+
     return c.build();
+  }
+
+  private MethodCode.Builder createHelperMethod(
+      MethodCode.Builder definitionMethod,
+      GrowableList<MethodCode.Builder> privateMethods) {
+    var m = MethodCode.builder();
+
+    m.addModifier(Modifiers.PRIVATE);
+
+    var methodName = "definition" + privateMethods.size();
+
+    m.name(methodName);
+
+    definitionMethod.addStatement(Java.invoke(methodName));
+
+    privateMethods.add(m);
+
+    return m;
   }
 
   private void doPropertyStyle(

@@ -47,6 +47,12 @@ import br.com.objectos.css.framework.background.BackgroundSize;
 import br.com.objectos.css.framework.border.Border;
 import br.com.objectos.css.framework.border.BorderBottom;
 import br.com.objectos.css.framework.border.BorderColor;
+import br.com.objectos.css.framework.border.BorderColorBottom;
+import br.com.objectos.css.framework.border.BorderColorLeft;
+import br.com.objectos.css.framework.border.BorderColorRight;
+import br.com.objectos.css.framework.border.BorderColorTop;
+import br.com.objectos.css.framework.border.BorderColorX;
+import br.com.objectos.css.framework.border.BorderColorY;
 import br.com.objectos.css.framework.border.BorderLeft;
 import br.com.objectos.css.framework.border.BorderRight;
 import br.com.objectos.css.framework.border.BorderStyle;
@@ -141,6 +147,12 @@ abstract class AbstractFramework extends AbstractStyleSheet {
 
   protected void border() {
     install(new BorderColor());
+    install(new BorderColorX());
+    install(new BorderColorY());
+    install(new BorderColorTop());
+    install(new BorderColorRight());
+    install(new BorderColorBottom());
+    install(new BorderColorLeft());
     install(new BorderStyle());
     install(new Border());
     install(new BorderTop());

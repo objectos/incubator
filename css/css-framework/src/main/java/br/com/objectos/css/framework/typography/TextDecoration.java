@@ -59,6 +59,16 @@ public final class TextDecoration extends AbstractStyleSheet {
 
   @Override
   protected final void definition() {
+    definition0();
+    definition1();
+    definition2();
+    definition3();
+    definition4();
+    definition5();
+    definition6();
+  }
+
+  private void definition0() {
     style(
         underline,
         textDecoration(Keywords.underline)
@@ -75,6 +85,9 @@ public final class TextDecoration extends AbstractStyleSheet {
         none,
         textDecoration(Keywords.none)
     );
+  }
+
+  private void definition1() {
     style(
         hover.underline, HOVER,
         textDecoration(Keywords.underline)
@@ -91,6 +104,9 @@ public final class TextDecoration extends AbstractStyleSheet {
         hover.none, HOVER,
         textDecoration(Keywords.none)
     );
+  }
+
+  private void definition2() {
     media(
         AbstractStyleSheet.screen, minWidth(px(640)),
 
@@ -114,6 +130,9 @@ public final class TextDecoration extends AbstractStyleSheet {
             textDecoration(Keywords.none)
         )
     );
+  }
+
+  private void definition3() {
     media(
         AbstractStyleSheet.screen, minWidth(px(768)),
 
@@ -137,6 +156,9 @@ public final class TextDecoration extends AbstractStyleSheet {
             textDecoration(Keywords.none)
         )
     );
+  }
+
+  private void definition4() {
     media(
         AbstractStyleSheet.screen, minWidth(px(1024)),
 
@@ -160,6 +182,9 @@ public final class TextDecoration extends AbstractStyleSheet {
             textDecoration(Keywords.none)
         )
     );
+  }
+
+  private void definition5() {
     media(
         AbstractStyleSheet.screen, minWidth(px(1280)),
 
@@ -183,6 +208,9 @@ public final class TextDecoration extends AbstractStyleSheet {
             textDecoration(Keywords.none)
         )
     );
+  }
+
+  private void definition6() {
     media(
         AbstractStyleSheet.screen, minWidth(px(1440)),
 

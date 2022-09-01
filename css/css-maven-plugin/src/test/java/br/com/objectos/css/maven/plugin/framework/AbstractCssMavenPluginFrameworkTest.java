@@ -21,6 +21,7 @@ import br.com.objectos.code.java.io.JavaFile;
 import br.com.objectos.css.config.framework.Configuration;
 import objectos.util.GrowableMap;
 import objectos.util.UnmodifiableMap;
+import org.testng.Assert;
 
 public abstract class AbstractCssMavenPluginFrameworkTest {
 
@@ -53,6 +54,51 @@ public abstract class AbstractCssMavenPluginFrameworkTest {
     config.acceptConfigurationDsl(dsl);
     dsl.executeProperties(adapter);
     return adapter.toMap();
+  }
+
+  protected final void test(JavaFile file, String expected) {
+    var actual = file.toString();
+
+    if (!actual.equals(expected)) {
+      int len = Math.min(actual.length(), expected.length());
+
+      var index = 0;
+
+      for (int i = 0; i < len; i++) {
+        char ca = actual.charAt(i);
+        char ce = expected.charAt(i);
+
+        if (ca == ce) {
+          continue;
+        }
+
+        index = i;
+
+        break;
+      }
+
+      var start = Math.max(0, index - 20);
+
+      var end = Math.min(len, index + 30);
+
+      Assert.fail(
+        """
+
+          ----
+          %s
+          %s
+          ----
+          %s
+          ----
+          %s
+          ----
+          """.formatted(
+          actual.substring(start, end),
+          expected.subSequence(start, end),
+          actual,
+          expected
+        ));
+    }
   }
 
   protected final void testLines(Object o, String... expected) {

@@ -497,6 +497,16 @@ public final class BackgroundColor extends AbstractStyleSheet {
 
   @Override
   protected final void definition() {
+    definition0();
+    definition1();
+    definition2();
+    definition3();
+    definition4();
+    definition5();
+    definition6();
+  }
+
+  private void definition0() {
     style(
         transparent,
         backgroundColor(Color.transparent)
@@ -1389,6 +1399,9 @@ public final class BackgroundColor extends AbstractStyleSheet {
         rose900,
         backgroundColor(hex("#881337"))
     );
+  }
+
+  private void definition1() {
     style(
         hover.transparent, HOVER,
         backgroundColor(Color.transparent)
@@ -2281,6 +2294,9 @@ public final class BackgroundColor extends AbstractStyleSheet {
         hover.rose900, HOVER,
         backgroundColor(hex("#881337"))
     );
+  }
+
+  private void definition2() {
     media(
         AbstractStyleSheet.screen, minWidth(px(640)),
 
@@ -3399,6 +3415,9 @@ public final class BackgroundColor extends AbstractStyleSheet {
             backgroundColor(hex("#881337"))
         )
     );
+  }
+
+  private void definition3() {
     media(
         AbstractStyleSheet.screen, minWidth(px(768)),
 
@@ -4517,6 +4536,9 @@ public final class BackgroundColor extends AbstractStyleSheet {
             backgroundColor(hex("#881337"))
         )
     );
+  }
+
+  private void definition4() {
     media(
         AbstractStyleSheet.screen, minWidth(px(1024)),
 
@@ -5635,6 +5657,9 @@ public final class BackgroundColor extends AbstractStyleSheet {
             backgroundColor(hex("#881337"))
         )
     );
+  }
+
+  private void definition5() {
     media(
         AbstractStyleSheet.screen, minWidth(px(1280)),
 
@@ -6753,6 +6778,9 @@ public final class BackgroundColor extends AbstractStyleSheet {
             backgroundColor(hex("#881337"))
         )
     );
+  }
+
+  private void definition6() {
     media(
         AbstractStyleSheet.screen, minWidth(px(1440)),
 

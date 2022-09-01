@@ -42,30 +42,19 @@ package br.com.objectos.css.framework.spec;
 import br.com.objectos.css.config.framework.AbstractConfiguration;
 import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkAtMediaSet;
 import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkGroup;
-import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkNamedValueSet;
 import br.com.objectos.css.keyword.Keywords;
 import br.com.objectos.css.type.Zero;
 
-class Border extends AbstractConfiguration {
+final class BorderSpec extends AbstractConfiguration {
 
-  private final FrameworkNamedValueSet colors;
   private final FrameworkAtMediaSet responsive;
 
-  Border(FrameworkNamedValueSet colors, FrameworkAtMediaSet responsive) {
-    this.colors = colors;
+  BorderSpec(FrameworkAtMediaSet responsive) {
     this.responsive = responsive;
   }
 
   @Override
   protected final void configure() {
-    property(
-      FrameworkGroup.BORDER,
-      simpleName("BorderColor"),
-      methods("borderColor"),
-      colors,
-      responsive
-    );
-
     property(
       FrameworkGroup.BORDER,
       simpleName("BorderStyle"),
@@ -80,7 +69,7 @@ class Border extends AbstractConfiguration {
       responsive
     );
 
-    FrameworkNamedValueSet width = valueSet(
+    var width = valueSet(
       v("0", Zero.INSTANCE),
       v("1", px(1)),
       v("2", px(2)),
