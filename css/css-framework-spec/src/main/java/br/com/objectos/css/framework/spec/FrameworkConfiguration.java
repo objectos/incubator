@@ -122,6 +122,7 @@ public class FrameworkConfiguration extends AbstractConfiguration {
     install(new TextColorSpec(colors, responsive));
     install(new TextDecorationSpec(responsive));
     install(new TextTransform(responsive));
+    install(new VerticalAlignSpec(responsive));
   }
 
   private FrameworkNamedValueSet defineColors() {

@@ -13,11 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * Based on Tailwind CSS
+ * Based on:
+ * https://github.com/tailwindcss/tailwindcss/blob/master/stubs/defaultConfig.stub.js
  *
- * MIT License
- *
- * Copyright (c) Tailwind Labs, Inc.
+ * Copyright (c) Adam Wathan <adam.wathan@gmail.com>
+ * Copyright (c) Jonathan Reinink <jonathan@reinink.ca>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -36,66 +36,40 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
- * Footer
  */
-package br.com.objectos.css.framework.util;
+package br.com.objectos.css.framework.spec;
 
-import br.com.objectos.css.select.ClassSelector;
-import br.com.objectos.html.spi.tmpl.Marker;
-import br.com.objectos.html.spi.tmpl.Renderer;
-import br.com.objectos.html.spi.type.AnyElementValue;
-import objectos.lang.Equals;
-import objectos.util.UnmodifiableSet;
+import br.com.objectos.css.config.framework.AbstractConfiguration;
+import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkAtMediaSet;
+import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkGroup;
+import br.com.objectos.css.keyword.Keywords;
 
-public class ClassSet implements AnyElementValue {
+final class VerticalAlignSpec extends AbstractConfiguration {
 
-  private static final ClassSet EMPTY = new ClassSet(
-    UnmodifiableSet.of()
-  );
+  private final FrameworkAtMediaSet responsive;
 
-  private final UnmodifiableSet<ClassSelector> values;
-
-  private ClassSet(UnmodifiableSet<ClassSelector> values) {
-    this.values = values;
-  }
-
-  public static ClassSet of(ClassSelector... values) {
-    return switch (values.length) {
-      case 0 -> EMPTY;
-
-      default -> new ClassSet(
-        UnmodifiableSet.copyOf(values)
-      );
-    };
+  VerticalAlignSpec(FrameworkAtMediaSet responsive) {
+    this.responsive = responsive;
   }
 
   @Override
-  public final boolean equals(Object obj) {
-    return obj == this || obj instanceof ClassSet that
-        && Equals.of(values, that.values);
-  }
-
-  @Override
-  public final int hashCode() {
-    return values.hashCode();
-  }
-
-  @Override
-  public final void mark(Marker marker) {
-    if (!values.isEmpty()) {
-      for (var value : values) {
-        value.mark(marker);
-      }
-    }
-  }
-
-  @Override
-  public final void render(Renderer renderer) {
-    if (!values.isEmpty()) {
-      for (var value : values) {
-        value.render(renderer);
-      }
-    }
+  protected final void configure() {
+    property(
+      FrameworkGroup.TYPOGRAPHY,
+      simpleName("VerticalAlign"),
+      methods("verticalAlign"),
+      valueSet(
+        v("baseline", Keywords.baseline),
+        v("top", Keywords.top),
+        v("middle", Keywords.middle),
+        v("bottom", Keywords.bottom),
+        v("text-top", Keywords.textTop),
+        v("text-bottom", Keywords.textBottom),
+        v("sub-align", Keywords.subKw),
+        v("super-align", Keywords.superKw)
+      ),
+      responsive
+    );
   }
 
 }
