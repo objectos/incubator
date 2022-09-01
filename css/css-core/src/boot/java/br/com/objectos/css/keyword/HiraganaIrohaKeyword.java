@@ -9,7 +9,7 @@ public final class HiraganaIrohaKeyword extends StandardKeyword implements Count
   static final HiraganaIrohaKeyword INSTANCE = new HiraganaIrohaKeyword();
 
   private HiraganaIrohaKeyword() {
-    super(100, "hiraganaIroha", "hiragana-iroha");
+    super(101, "hiraganaIroha", "hiragana-iroha");
   }
 
 }

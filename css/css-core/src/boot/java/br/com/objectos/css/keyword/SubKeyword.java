@@ -9,7 +9,7 @@ public final class SubKeyword extends StandardKeyword implements VerticalAlignVa
   static final SubKeyword INSTANCE = new SubKeyword();
 
   private SubKeyword() {
-    super(234, "subKw", "sub");
+    super(236, "subKw", "sub");
   }
 
 }

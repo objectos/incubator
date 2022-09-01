@@ -9,7 +9,7 @@ public final class KatakanaIrohaKeyword extends StandardKeyword implements Count
   static final KatakanaIrohaKeyword INSTANCE = new KatakanaIrohaKeyword();
 
   private KatakanaIrohaKeyword() {
-    super(121, "katakanaIroha", "katakana-iroha");
+    super(122, "katakanaIroha", "katakana-iroha");
   }
 
 }

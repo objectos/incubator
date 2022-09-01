@@ -9,7 +9,7 @@ public final class SpellingErrorKeyword extends StandardKeyword implements TextD
   static final SpellingErrorKeyword INSTANCE = new SpellingErrorKeyword();
 
   private SpellingErrorKeyword() {
-    super(226, "spellingError", "spelling-error");
+    super(228, "spellingError", "spelling-error");
   }
 
 }

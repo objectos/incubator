@@ -9,7 +9,7 @@ public final class OriyaKeyword extends StandardKeyword implements CounterStyleV
   static final OriyaKeyword INSTANCE = new OriyaKeyword();
 
   private OriyaKeyword() {
-    super(174, "oriya", "oriya");
+    super(175, "oriya", "oriya");
   }
 
 }

@@ -9,7 +9,7 @@ public final class SpaceBetweenKeyword extends StandardKeyword implements Conten
   static final SpaceBetweenKeyword INSTANCE = new SpaceBetweenKeyword();
 
   private SpaceBetweenKeyword() {
-    super(224, "spaceBetween", "space-between");
+    super(226, "spaceBetween", "space-between");
   }
 
 }

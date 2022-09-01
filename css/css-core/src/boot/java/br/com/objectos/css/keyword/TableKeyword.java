@@ -9,7 +9,7 @@ public final class TableKeyword extends StandardKeyword implements DisplayInside
   static final TableKeyword INSTANCE = new TableKeyword();
 
   private TableKeyword() {
-    super(237, "tableKw", "table");
+    super(239, "tableKw", "table");
   }
 
 }

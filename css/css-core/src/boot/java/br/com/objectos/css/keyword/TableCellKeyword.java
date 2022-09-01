@@ -9,7 +9,7 @@ public final class TableCellKeyword extends StandardKeyword implements DisplayIn
   static final TableCellKeyword INSTANCE = new TableCellKeyword();
 
   private TableCellKeyword() {
-    super(239, "tableCell", "table-cell");
+    super(241, "tableCell", "table-cell");
   }
 
 }

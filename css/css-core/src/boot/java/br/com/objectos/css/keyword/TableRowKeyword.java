@@ -9,7 +9,7 @@ public final class TableRowKeyword extends StandardKeyword implements DisplayInt
   static final TableRowKeyword INSTANCE = new TableRowKeyword();
 
   private TableRowKeyword() {
-    super(244, "tableRow", "table-row");
+    super(246, "tableRow", "table-row");
   }
 
 }

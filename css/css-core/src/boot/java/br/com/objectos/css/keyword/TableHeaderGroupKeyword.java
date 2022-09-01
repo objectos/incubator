@@ -9,7 +9,7 @@ public final class TableHeaderGroupKeyword extends StandardKeyword implements Di
   static final TableHeaderGroupKeyword INSTANCE = new TableHeaderGroupKeyword();
 
   private TableHeaderGroupKeyword() {
-    super(243, "tableHeaderGroup", "table-header-group");
+    super(245, "tableHeaderGroup", "table-header-group");
   }
 
 }

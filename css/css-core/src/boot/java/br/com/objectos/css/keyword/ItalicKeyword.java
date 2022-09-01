@@ -9,7 +9,7 @@ public final class ItalicKeyword extends StandardKeyword implements FontStyleVal
   static final ItalicKeyword INSTANCE = new ItalicKeyword();
 
   private ItalicKeyword() {
-    super(115, "italic", "italic");
+    super(116, "italic", "italic");
   }
 
 }

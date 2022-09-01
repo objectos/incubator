@@ -9,7 +9,7 @@ public final class HangingKeyword extends StandardKeyword implements TextIndentO
   static final HangingKeyword INSTANCE = new HangingKeyword();
 
   private HangingKeyword() {
-    super(95, "hanging", "hanging");
+    super(96, "hanging", "hanging");
   }
 
 }

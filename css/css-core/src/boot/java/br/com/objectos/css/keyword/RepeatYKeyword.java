@@ -9,7 +9,7 @@ public final class RepeatYKeyword extends StandardKeyword implements BackgroundR
   static final RepeatYKeyword INSTANCE = new RepeatYKeyword();
 
   private RepeatYKeyword() {
-    super(191, "repeatY", "repeat-y");
+    super(192, "repeatY", "repeat-y");
   }
 
 }

@@ -9,7 +9,7 @@ public final class SmallCapsKeyword extends StandardKeyword implements FontVaria
   static final SmallCapsKeyword INSTANCE = new SmallCapsKeyword();
 
   private SmallCapsKeyword() {
-    super(218, "smallCaps", "small-caps");
+    super(220, "smallCaps", "small-caps");
   }
 
 }

@@ -9,7 +9,7 @@ public final class TextfieldKeyword extends StandardKeyword implements Appearanc
   static final TextfieldKeyword INSTANCE = new TextfieldKeyword();
 
   private TextfieldKeyword() {
-    super(252, "textfield", "textfield");
+    super(254, "textfield", "textfield");
   }
 
 }

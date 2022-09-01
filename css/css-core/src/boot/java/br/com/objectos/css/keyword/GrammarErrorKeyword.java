@@ -9,7 +9,7 @@ public final class GrammarErrorKeyword extends StandardKeyword implements TextDe
   static final GrammarErrorKeyword INSTANCE = new GrammarErrorKeyword();
 
   private GrammarErrorKeyword() {
-    super(90, "grammarError", "grammar-error");
+    super(91, "grammarError", "grammar-error");
   }
 
 }

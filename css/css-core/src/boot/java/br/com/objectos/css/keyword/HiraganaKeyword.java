@@ -9,7 +9,7 @@ public final class HiraganaKeyword extends StandardKeyword implements CounterSty
   static final HiraganaKeyword INSTANCE = new HiraganaKeyword();
 
   private HiraganaKeyword() {
-    super(99, "hiragana", "hiragana");
+    super(100, "hiragana", "hiragana");
   }
 
 }

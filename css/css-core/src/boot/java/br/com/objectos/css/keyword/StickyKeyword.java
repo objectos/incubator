@@ -9,7 +9,7 @@ public final class StickyKeyword extends StandardKeyword implements PositionValu
   static final StickyKeyword INSTANCE = new StickyKeyword();
 
   private StickyKeyword() {
-    super(232, "sticky", "sticky");
+    super(234, "sticky", "sticky");
   }
 
 }

@@ -15,7 +15,7 @@ public final class LeftKeyword extends StandardKeyword implements BackgroundPosi
   static final LeftKeyword INSTANCE = new LeftKeyword();
 
   private LeftKeyword() {
-    super(130, "left", "left");
+    super(131, "left", "left");
   }
 
 }

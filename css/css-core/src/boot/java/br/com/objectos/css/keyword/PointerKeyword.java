@@ -9,7 +9,7 @@ public final class PointerKeyword extends StandardKeyword implements CursorValue
   static final PointerKeyword INSTANCE = new PointerKeyword();
 
   private PointerKeyword() {
-    super(180, "pointer", "pointer");
+    super(181, "pointer", "pointer");
   }
 
 }

@@ -9,7 +9,7 @@ public final class InvertKeyword extends StandardKeyword implements OutlineColor
   static final InvertKeyword INSTANCE = new InvertKeyword();
 
   private InvertKeyword() {
-    super(114, "invert", "invert");
+    super(115, "invert", "invert");
   }
 
 }

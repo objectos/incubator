@@ -9,7 +9,7 @@ public final class ZoomOutKeyword extends StandardKeyword implements CursorValue
   static final ZoomOutKeyword INSTANCE = new ZoomOutKeyword();
 
   private ZoomOutKeyword() {
-    super(282, "zoomOut", "zoom-out");
+    super(284, "zoomOut", "zoom-out");
   }
 
 }

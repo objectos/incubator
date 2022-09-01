@@ -9,7 +9,7 @@ public final class WResizeKeyword extends StandardKeyword implements CursorValue
   static final WResizeKeyword INSTANCE = new WResizeKeyword();
 
   private WResizeKeyword() {
-    super(271, "wResize", "w-resize");
+    super(273, "wResize", "w-resize");
   }
 
 }

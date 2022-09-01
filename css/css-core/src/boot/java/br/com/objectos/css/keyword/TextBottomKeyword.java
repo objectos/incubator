@@ -9,7 +9,7 @@ public final class TextBottomKeyword extends StandardKeyword implements Vertical
   static final TextBottomKeyword INSTANCE = new TextBottomKeyword();
 
   private TextBottomKeyword() {
-    super(249, "textBottom", "text-bottom");
+    super(251, "textBottom", "text-bottom");
   }
 
 }

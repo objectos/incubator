@@ -99,6 +99,7 @@ class Specgen extends AbstractSpecgen {
       "margin-top", "margin-right", "margin-bottom", "margin-left");
 
     // O
+    p("object-fit");
     p("opacity");
     p("outline");
     p("outline-color");

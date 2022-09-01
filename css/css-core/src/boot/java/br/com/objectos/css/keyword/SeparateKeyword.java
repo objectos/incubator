@@ -9,7 +9,7 @@ public final class SeparateKeyword extends StandardKeyword implements BorderColl
   static final SeparateKeyword INSTANCE = new SeparateKeyword();
 
   private SeparateKeyword() {
-    super(212, "separate", "separate");
+    super(214, "separate", "separate");
   }
 
 }

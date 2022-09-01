@@ -9,7 +9,7 @@ public final class TextKeyword extends StandardKeyword implements CursorValue {
   static final TextKeyword INSTANCE = new TextKeyword();
 
   private TextKeyword() {
-    super(248, "text", "text");
+    super(250, "text", "text");
   }
 
 }

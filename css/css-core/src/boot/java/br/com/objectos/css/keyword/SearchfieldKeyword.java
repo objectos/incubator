@@ -9,7 +9,7 @@ public final class SearchfieldKeyword extends StandardKeyword implements Appeara
   static final SearchfieldKeyword INSTANCE = new SearchfieldKeyword();
 
   private SearchfieldKeyword() {
-    super(209, "searchfield", "searchfield");
+    super(211, "searchfield", "searchfield");
   }
 
 }

@@ -9,7 +9,7 @@ public final class OutsideKeyword extends StandardKeyword implements ListStylePo
   static final OutsideKeyword INSTANCE = new OutsideKeyword();
 
   private OutsideKeyword() {
-    super(176, "outside", "outside");
+    super(177, "outside", "outside");
   }
 
 }

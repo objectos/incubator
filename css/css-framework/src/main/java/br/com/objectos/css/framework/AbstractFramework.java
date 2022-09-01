@@ -85,6 +85,7 @@ import br.com.objectos.css.framework.layout.Inset;
 import br.com.objectos.css.framework.layout.InsetX;
 import br.com.objectos.css.framework.layout.InsetY;
 import br.com.objectos.css.framework.layout.Left;
+import br.com.objectos.css.framework.layout.ObjectFit;
 import br.com.objectos.css.framework.layout.Overflow;
 import br.com.objectos.css.framework.layout.OverflowX;
 import br.com.objectos.css.framework.layout.OverflowY;
@@ -205,6 +206,7 @@ abstract class AbstractFramework extends AbstractStyleSheet {
     install(new Right());
     install(new Bottom());
     install(new Left());
+    install(new ObjectFit());
     install(new Overflow());
     install(new OverflowX());
     install(new OverflowY());

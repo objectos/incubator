@@ -9,7 +9,7 @@ public final class OutsetKeyword extends StandardKeyword implements LineStyleVal
   static final OutsetKeyword INSTANCE = new OutsetKeyword();
 
   private OutsetKeyword() {
-    super(175, "outset", "outset");
+    super(176, "outset", "outset");
   }
 
 }

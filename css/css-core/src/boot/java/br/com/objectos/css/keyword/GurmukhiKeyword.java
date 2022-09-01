@@ -9,7 +9,7 @@ public final class GurmukhiKeyword extends StandardKeyword implements CounterSty
   static final GurmukhiKeyword INSTANCE = new GurmukhiKeyword();
 
   private GurmukhiKeyword() {
-    super(94, "gurmukhi", "gurmukhi");
+    super(95, "gurmukhi", "gurmukhi");
   }
 
 }

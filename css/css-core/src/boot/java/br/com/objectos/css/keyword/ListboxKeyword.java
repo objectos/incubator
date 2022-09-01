@@ -9,7 +9,7 @@ public final class ListboxKeyword extends StandardKeyword implements AppearanceV
   static final ListboxKeyword INSTANCE = new ListboxKeyword();
 
   private ListboxKeyword() {
-    super(135, "listbox", "listbox");
+    super(136, "listbox", "listbox");
   }
 
 }

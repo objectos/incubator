@@ -9,7 +9,7 @@ public final class SuperKeyword extends StandardKeyword implements VerticalAlign
   static final SuperKeyword INSTANCE = new SuperKeyword();
 
   private SuperKeyword() {
-    super(235, "superKw", "super");
+    super(237, "superKw", "super");
   }
 
 }

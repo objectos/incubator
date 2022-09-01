@@ -9,7 +9,7 @@ public final class TextTopKeyword extends StandardKeyword implements VerticalAli
   static final TextTopKeyword INSTANCE = new TextTopKeyword();
 
   private TextTopKeyword() {
-    super(250, "textTop", "text-top");
+    super(252, "textTop", "text-top");
   }
 
 }

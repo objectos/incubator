@@ -9,7 +9,7 @@ public final class UnderlineKeyword extends StandardKeyword implements TextDecor
   static final UnderlineKeyword INSTANCE = new UnderlineKeyword();
 
   private UnderlineKeyword() {
-    super(260, "underline", "underline");
+    super(262, "underline", "underline");
   }
 
 }

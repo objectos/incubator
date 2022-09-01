@@ -9,7 +9,7 @@ public final class LowerRomanKeyword extends StandardKeyword implements CounterS
   static final LowerRomanKeyword INSTANCE = new LowerRomanKeyword();
 
   private LowerRomanKeyword() {
-    super(141, "lowerRoman", "lower-roman");
+    super(142, "lowerRoman", "lower-roman");
   }
 
 }

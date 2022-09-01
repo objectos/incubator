@@ -9,7 +9,7 @@ public final class LocalKeyword extends StandardKeyword implements BackgroundAtt
   static final LocalKeyword INSTANCE = new LocalKeyword();
 
   private LocalKeyword() {
-    super(136, "local", "local");
+    super(137, "local", "local");
   }
 
 }

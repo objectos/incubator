@@ -9,7 +9,7 @@ public final class JapaneseInformalKeyword extends StandardKeyword implements Co
   static final JapaneseInformalKeyword INSTANCE = new JapaneseInformalKeyword();
 
   private JapaneseInformalKeyword() {
-    super(117, "japaneseInformal", "japanese-informal");
+    super(118, "japaneseInformal", "japanese-informal");
   }
 
 }

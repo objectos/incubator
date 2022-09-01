@@ -9,7 +9,7 @@ public final class HorizontalKeyword extends StandardKeyword implements ResizeVa
   static final HorizontalKeyword INSTANCE = new HorizontalKeyword();
 
   private HorizontalKeyword() {
-    super(101, "horizontal", "horizontal");
+    super(102, "horizontal", "horizontal");
   }
 
 }

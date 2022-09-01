@@ -9,7 +9,7 @@ public final class GrooveKeyword extends StandardKeyword implements LineStyleVal
   static final GrooveKeyword INSTANCE = new GrooveKeyword();
 
   private GrooveKeyword() {
-    super(92, "groove", "groove");
+    super(93, "groove", "groove");
   }
 
 }

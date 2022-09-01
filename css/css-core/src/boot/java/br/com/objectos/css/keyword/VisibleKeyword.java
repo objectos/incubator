@@ -9,7 +9,7 @@ public final class VisibleKeyword extends StandardKeyword implements OverflowVal
   static final VisibleKeyword INSTANCE = new VisibleKeyword();
 
   private VisibleKeyword() {
-    super(270, "visible", "visible");
+    super(272, "visible", "visible");
   }
 
 }

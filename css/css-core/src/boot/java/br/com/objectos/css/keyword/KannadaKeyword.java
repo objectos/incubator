@@ -9,7 +9,7 @@ public final class KannadaKeyword extends StandardKeyword implements CounterStyl
   static final KannadaKeyword INSTANCE = new KannadaKeyword();
 
   private KannadaKeyword() {
-    super(119, "kannada", "kannada");
+    super(120, "kannada", "kannada");
   }
 
 }

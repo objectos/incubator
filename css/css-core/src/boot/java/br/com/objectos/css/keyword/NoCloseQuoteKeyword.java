@@ -9,7 +9,7 @@ public final class NoCloseQuoteKeyword extends StandardKeyword implements Conten
   static final NoCloseQuoteKeyword INSTANCE = new NoCloseQuoteKeyword();
 
   private NoCloseQuoteKeyword() {
-    super(161, "noCloseQuote", "no-close-quote");
+    super(162, "noCloseQuote", "no-close-quote");
   }
 
 }

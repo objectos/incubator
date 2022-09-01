@@ -9,7 +9,7 @@ public final class MenuKeyword extends StandardKeyword implements SystemFontValu
   static final MenuKeyword INSTANCE = new MenuKeyword();
 
   private MenuKeyword() {
-    super(147, "menuKw", "menu");
+    super(148, "menuKw", "menu");
   }
 
 }

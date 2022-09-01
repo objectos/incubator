@@ -9,7 +9,7 @@ public final class RadioKeyword extends StandardKeyword implements AppearanceVal
   static final RadioKeyword INSTANCE = new RadioKeyword();
 
   private RadioKeyword() {
-    super(187, "radio", "radio");
+    super(188, "radio", "radio");
   }
 
 }

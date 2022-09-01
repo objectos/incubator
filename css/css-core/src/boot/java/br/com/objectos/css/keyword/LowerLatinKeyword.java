@@ -9,7 +9,7 @@ public final class LowerLatinKeyword extends StandardKeyword implements CounterS
   static final LowerLatinKeyword INSTANCE = new LowerLatinKeyword();
 
   private LowerLatinKeyword() {
-    super(140, "lowerLatin", "lower-latin");
+    super(141, "lowerLatin", "lower-latin");
   }
 
 }

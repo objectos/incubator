@@ -9,7 +9,7 @@ public final class WrapKeyword extends StandardKeyword implements FlexWrapValue 
   static final WrapKeyword INSTANCE = new WrapKeyword();
 
   private WrapKeyword() {
-    super(274, "wrap", "wrap");
+    super(276, "wrap", "wrap");
   }
 
 }

@@ -10,7 +10,7 @@ public final class ThinKeyword extends StandardKeyword implements LineWidthValue
   static final ThinKeyword INSTANCE = new ThinKeyword();
 
   private ThinKeyword() {
-    super(255, "thin", "thin");
+    super(257, "thin", "thin");
   }
 
 }

@@ -9,7 +9,7 @@ public final class UpperRomanKeyword extends StandardKeyword implements CounterS
   static final UpperRomanKeyword INSTANCE = new UpperRomanKeyword();
 
   private UpperRomanKeyword() {
-    super(266, "upperRoman", "upper-roman");
+    super(268, "upperRoman", "upper-roman");
   }
 
 }

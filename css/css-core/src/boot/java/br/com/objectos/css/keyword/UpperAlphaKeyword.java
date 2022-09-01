@@ -9,7 +9,7 @@ public final class UpperAlphaKeyword extends StandardKeyword implements CounterS
   static final UpperAlphaKeyword INSTANCE = new UpperAlphaKeyword();
 
   private UpperAlphaKeyword() {
-    super(263, "upperAlpha", "upper-alpha");
+    super(265, "upperAlpha", "upper-alpha");
   }
 
 }

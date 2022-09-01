@@ -9,7 +9,7 @@ public final class TableColumnKeyword extends StandardKeyword implements Display
   static final TableColumnKeyword INSTANCE = new TableColumnKeyword();
 
   private TableColumnKeyword() {
-    super(240, "tableColumn", "table-column");
+    super(242, "tableColumn", "table-column");
   }
 
 }

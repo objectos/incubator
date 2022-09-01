@@ -9,7 +9,7 @@ public final class FlexKeyword extends StandardKeyword implements DisplayInsideV
   static final FlexKeyword INSTANCE = new FlexKeyword();
 
   private FlexKeyword() {
-    super(79, "flex", "flex");
+    super(80, "flex", "flex");
   }
 
 }

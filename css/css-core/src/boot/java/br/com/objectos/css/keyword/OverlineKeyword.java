@@ -9,7 +9,7 @@ public final class OverlineKeyword extends StandardKeyword implements TextDecora
   static final OverlineKeyword INSTANCE = new OverlineKeyword();
 
   private OverlineKeyword() {
-    super(177, "overline", "overline");
+    super(178, "overline", "overline");
   }
 
 }

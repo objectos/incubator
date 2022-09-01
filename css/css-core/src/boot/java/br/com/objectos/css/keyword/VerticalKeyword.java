@@ -9,7 +9,7 @@ public final class VerticalKeyword extends StandardKeyword implements ResizeValu
   static final VerticalKeyword INSTANCE = new VerticalKeyword();
 
   private VerticalKeyword() {
-    super(268, "vertical", "vertical");
+    super(270, "vertical", "vertical");
   }
 
 }

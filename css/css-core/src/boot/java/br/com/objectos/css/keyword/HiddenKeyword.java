@@ -10,7 +10,7 @@ public final class HiddenKeyword extends StandardKeyword implements LineStyleVal
   static final HiddenKeyword INSTANCE = new HiddenKeyword();
 
   private HiddenKeyword() {
-    super(98, "hidden", "hidden");
+    super(99, "hidden", "hidden");
   }
 
 }

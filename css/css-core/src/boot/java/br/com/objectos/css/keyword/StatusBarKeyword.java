@@ -9,7 +9,7 @@ public final class StatusBarKeyword extends StandardKeyword implements SystemFon
   static final StatusBarKeyword INSTANCE = new StatusBarKeyword();
 
   private StatusBarKeyword() {
-    super(231, "statusBar", "status-bar");
+    super(233, "statusBar", "status-bar");
   }
 
 }

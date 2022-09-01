@@ -97,6 +97,7 @@ class PropertiesModule extends CssSpec {
     install(new MaxHeightPropertyModule());
 
     // O
+    install(new ObjectFitPropertyModule());
     install(new OpacityPropertyModule());
     install(new OutlineColorPropertyModule());
     install(new OutlineOffsetPropertyModule());

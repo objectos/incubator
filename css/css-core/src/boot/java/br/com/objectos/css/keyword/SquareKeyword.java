@@ -9,7 +9,7 @@ public final class SquareKeyword extends StandardKeyword implements CounterStyle
   static final SquareKeyword INSTANCE = new SquareKeyword();
 
   private SquareKeyword() {
-    super(227, "square", "square");
+    super(229, "square", "square");
   }
 
 }

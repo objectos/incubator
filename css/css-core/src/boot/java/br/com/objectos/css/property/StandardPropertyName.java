@@ -175,6 +175,8 @@ public enum StandardPropertyName implements PropertyName {
 
   MIN_WIDTH("minWidth", "min-width"),
 
+  OBJECT_FIT("objectFit", "object-fit"),
+
   OPACITY("opacity", "opacity"),
 
   OUTLINE("outline", "outline"),
@@ -354,6 +356,7 @@ public enum StandardPropertyName implements PropertyName {
     m.put("max-width", MAX_WIDTH);
     m.put("min-height", MIN_HEIGHT);
     m.put("min-width", MIN_WIDTH);
+    m.put("object-fit", OBJECT_FIT);
     m.put("opacity", OPACITY);
     m.put("outline", OUTLINE);
     m.put("outline-color", OUTLINE_COLOR);

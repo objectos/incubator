@@ -9,7 +9,7 @@ public final class KoreanHangulFormalKeyword extends StandardKeyword implements 
   static final KoreanHangulFormalKeyword INSTANCE = new KoreanHangulFormalKeyword();
 
   private KoreanHangulFormalKeyword() {
-    super(123, "koreanHangulFormal", "korean-hangul-formal");
+    super(124, "koreanHangulFormal", "korean-hangul-formal");
   }
 
 }

@@ -9,7 +9,7 @@ public final class LineThroughKeyword extends StandardKeyword implements TextDec
   static final LineThroughKeyword INSTANCE = new LineThroughKeyword();
 
   private LineThroughKeyword() {
-    super(133, "lineThrough", "line-through");
+    super(134, "lineThrough", "line-through");
   }
 
 }

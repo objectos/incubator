@@ -9,7 +9,7 @@ public final class FullWidthKeyword extends StandardKeyword implements TextTrans
   static final FullWidthKeyword INSTANCE = new FullWidthKeyword();
 
   private FullWidthKeyword() {
-    super(86, "fullWidth", "full-width");
+    super(87, "fullWidth", "full-width");
   }
 
 }

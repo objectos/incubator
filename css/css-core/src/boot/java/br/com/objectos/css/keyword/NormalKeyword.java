@@ -20,7 +20,7 @@ public final class NormalKeyword extends StandardKeyword implements AlignContent
   static final NormalKeyword INSTANCE = new NormalKeyword();
 
   private NormalKeyword() {
-    super(166, "normal", "normal");
+    super(167, "normal", "normal");
   }
 
 }

@@ -9,7 +9,7 @@ public final class LargerKeyword extends StandardKeyword implements FontSizeValu
   static final LargerKeyword INSTANCE = new LargerKeyword();
 
   private LargerKeyword() {
-    super(128, "larger", "larger");
+    super(129, "larger", "larger");
   }
 
 }

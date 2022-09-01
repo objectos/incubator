@@ -9,7 +9,7 @@ public final class XxxLargeKeyword extends StandardKeyword implements FontSizeVa
   static final XxxLargeKeyword INSTANCE = new XxxLargeKeyword();
 
   private XxxLargeKeyword() {
-    super(280, "xxxLarge", "xxx-large");
+    super(282, "xxxLarge", "xxx-large");
   }
 
 }

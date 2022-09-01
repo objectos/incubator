@@ -9,7 +9,7 @@ public final class KhmerKeyword extends StandardKeyword implements CounterStyleV
   static final KhmerKeyword INSTANCE = new KhmerKeyword();
 
   private KhmerKeyword() {
-    super(122, "khmer", "khmer");
+    super(123, "khmer", "khmer");
   }
 
 }

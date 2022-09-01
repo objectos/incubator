@@ -13,7 +13,7 @@ public final class StretchKeyword extends StandardKeyword implements AlignItemsV
   static final StretchKeyword INSTANCE = new StretchKeyword();
 
   private StretchKeyword() {
-    super(233, "stretch", "stretch");
+    super(235, "stretch", "stretch");
   }
 
 }

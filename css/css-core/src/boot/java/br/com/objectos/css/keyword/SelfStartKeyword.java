@@ -9,7 +9,7 @@ public final class SelfStartKeyword extends StandardKeyword implements SelfPosit
   static final SelfStartKeyword INSTANCE = new SelfStartKeyword();
 
   private SelfStartKeyword() {
-    super(211, "selfStart", "self-start");
+    super(213, "selfStart", "self-start");
   }
 
 }

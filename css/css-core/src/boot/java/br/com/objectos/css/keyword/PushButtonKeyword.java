@@ -9,7 +9,7 @@ public final class PushButtonKeyword extends StandardKeyword implements Appearan
   static final PushButtonKeyword INSTANCE = new PushButtonKeyword();
 
   private PushButtonKeyword() {
-    super(186, "pushButton", "push-button");
+    super(187, "pushButton", "push-button");
   }
 
 }

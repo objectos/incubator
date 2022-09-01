@@ -9,7 +9,7 @@ public final class InlineBlockKeyword extends StandardKeyword implements Display
   static final InlineBlockKeyword INSTANCE = new InlineBlockKeyword();
 
   private InlineBlockKeyword() {
-    super(106, "inlineBlock", "inline-block");
+    super(107, "inlineBlock", "inline-block");
   }
 
 }

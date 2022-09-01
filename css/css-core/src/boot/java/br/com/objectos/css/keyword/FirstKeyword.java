@@ -9,7 +9,7 @@ public final class FirstKeyword extends StandardKeyword implements BaselinePosit
   static final FirstKeyword INSTANCE = new FirstKeyword();
 
   private FirstKeyword() {
-    super(77, "first", "first");
+    super(78, "first", "first");
   }
 
 }

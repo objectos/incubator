@@ -9,7 +9,7 @@ public final class TableCaptionKeyword extends StandardKeyword implements Displa
   static final TableCaptionKeyword INSTANCE = new TableCaptionKeyword();
 
   private TableCaptionKeyword() {
-    super(238, "tableCaption", "table-caption");
+    super(240, "tableCaption", "table-caption");
   }
 
 }

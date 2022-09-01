@@ -9,7 +9,7 @@ public final class SafeKeyword extends StandardKeyword implements OverflowPositi
   static final SafeKeyword INSTANCE = new SafeKeyword();
 
   private SafeKeyword() {
-    super(205, "safe", "safe");
+    super(206, "safe", "safe");
   }
 
 }

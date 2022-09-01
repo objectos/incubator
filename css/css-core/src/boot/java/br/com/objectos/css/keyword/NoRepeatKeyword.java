@@ -9,7 +9,7 @@ public final class NoRepeatKeyword extends StandardKeyword implements Background
   static final NoRepeatKeyword INSTANCE = new NoRepeatKeyword();
 
   private NoRepeatKeyword() {
-    super(164, "noRepeat", "no-repeat");
+    super(165, "noRepeat", "no-repeat");
   }
 
 }

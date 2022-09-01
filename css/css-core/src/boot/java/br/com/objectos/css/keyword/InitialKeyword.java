@@ -9,7 +9,7 @@ public final class InitialKeyword extends StandardKeyword implements GlobalKeywo
   static final InitialKeyword INSTANCE = new InitialKeyword();
 
   private InitialKeyword() {
-    super(104, "initial", "initial");
+    super(105, "initial", "initial");
   }
 
 }

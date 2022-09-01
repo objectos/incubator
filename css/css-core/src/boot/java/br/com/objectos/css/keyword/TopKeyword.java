@@ -10,7 +10,7 @@ public final class TopKeyword extends StandardKeyword implements BackgroundPosit
   static final TopKeyword INSTANCE = new TopKeyword();
 
   private TopKeyword() {
-    super(257, "top", "top");
+    super(259, "top", "top");
   }
 
 }

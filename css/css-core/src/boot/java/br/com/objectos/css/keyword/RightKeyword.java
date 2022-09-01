@@ -15,7 +15,7 @@ public final class RightKeyword extends StandardKeyword implements BackgroundPos
   static final RightKeyword INSTANCE = new RightKeyword();
 
   private RightKeyword() {
-    super(193, "right", "right");
+    super(194, "right", "right");
   }
 
 }

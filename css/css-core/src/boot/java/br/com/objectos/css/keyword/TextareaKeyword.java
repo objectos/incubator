@@ -9,7 +9,7 @@ public final class TextareaKeyword extends StandardKeyword implements Appearance
   static final TextareaKeyword INSTANCE = new TextareaKeyword();
 
   private TextareaKeyword() {
-    super(251, "textareaKw", "textarea");
+    super(253, "textareaKw", "textarea");
   }
 
 }

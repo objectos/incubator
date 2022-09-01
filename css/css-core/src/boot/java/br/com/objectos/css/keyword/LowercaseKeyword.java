@@ -9,7 +9,7 @@ public final class LowercaseKeyword extends StandardKeyword implements TextTrans
   static final LowercaseKeyword INSTANCE = new LowercaseKeyword();
 
   private LowercaseKeyword() {
-    super(142, "lowercase", "lowercase");
+    super(143, "lowercase", "lowercase");
   }
 
 }

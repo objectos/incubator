@@ -9,7 +9,7 @@ public final class TradChineseInformalKeyword extends StandardKeyword implements
   static final TradChineseInformalKeyword INSTANCE = new TradChineseInformalKeyword();
 
   private TradChineseInformalKeyword() {
-    super(259, "tradChineseInformal", "trad-chinese-informal");
+    super(261, "tradChineseInformal", "trad-chinese-informal");
   }
 
 }

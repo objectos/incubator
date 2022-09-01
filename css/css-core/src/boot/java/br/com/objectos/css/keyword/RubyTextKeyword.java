@@ -9,7 +9,7 @@ public final class RubyTextKeyword extends StandardKeyword implements DisplayInt
   static final RubyTextKeyword INSTANCE = new RubyTextKeyword();
 
   private RubyTextKeyword() {
-    super(201, "rubyText", "ruby-text");
+    super(202, "rubyText", "ruby-text");
   }
 
 }

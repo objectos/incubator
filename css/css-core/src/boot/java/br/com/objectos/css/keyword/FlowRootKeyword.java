@@ -9,7 +9,7 @@ public final class FlowRootKeyword extends StandardKeyword implements DisplayIns
   static final FlowRootKeyword INSTANCE = new FlowRootKeyword();
 
   private FlowRootKeyword() {
-    super(83, "flowRoot", "flow-root");
+    super(84, "flowRoot", "flow-root");
   }
 
 }

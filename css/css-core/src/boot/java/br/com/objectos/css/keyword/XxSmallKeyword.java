@@ -9,7 +9,7 @@ public final class XxSmallKeyword extends StandardKeyword implements FontSizeVal
   static final XxSmallKeyword INSTANCE = new XxSmallKeyword();
 
   private XxSmallKeyword() {
-    super(279, "xxSmall", "xx-small");
+    super(281, "xxSmall", "xx-small");
   }
 
 }

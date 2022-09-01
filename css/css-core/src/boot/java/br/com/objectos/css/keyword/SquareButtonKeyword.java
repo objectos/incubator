@@ -9,7 +9,7 @@ public final class SquareButtonKeyword extends StandardKeyword implements Appear
   static final SquareButtonKeyword INSTANCE = new SquareButtonKeyword();
 
   private SquareButtonKeyword() {
-    super(228, "squareButton", "square-button");
+    super(230, "squareButton", "square-button");
   }
 
 }

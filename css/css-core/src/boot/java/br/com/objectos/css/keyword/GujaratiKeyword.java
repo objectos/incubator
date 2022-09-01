@@ -9,7 +9,7 @@ public final class GujaratiKeyword extends StandardKeyword implements CounterSty
   static final GujaratiKeyword INSTANCE = new GujaratiKeyword();
 
   private GujaratiKeyword() {
-    super(93, "gujarati", "gujarati");
+    super(94, "gujarati", "gujarati");
   }
 
 }

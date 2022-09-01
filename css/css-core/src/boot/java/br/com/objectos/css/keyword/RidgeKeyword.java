@@ -9,7 +9,7 @@ public final class RidgeKeyword extends StandardKeyword implements LineStyleValu
   static final RidgeKeyword INSTANCE = new RidgeKeyword();
 
   private RidgeKeyword() {
-    super(192, "ridge", "ridge");
+    super(193, "ridge", "ridge");
   }
 
 }

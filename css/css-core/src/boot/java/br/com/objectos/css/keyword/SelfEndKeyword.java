@@ -9,7 +9,7 @@ public final class SelfEndKeyword extends StandardKeyword implements SelfPositio
   static final SelfEndKeyword INSTANCE = new SelfEndKeyword();
 
   private SelfEndKeyword() {
-    super(210, "selfEnd", "self-end");
+    super(212, "selfEnd", "self-end");
   }
 
 }

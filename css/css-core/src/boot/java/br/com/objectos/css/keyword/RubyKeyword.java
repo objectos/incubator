@@ -9,7 +9,7 @@ public final class RubyKeyword extends StandardKeyword implements DisplayInsideV
   static final RubyKeyword INSTANCE = new RubyKeyword();
 
   private RubyKeyword() {
-    super(198, "ruby", "ruby");
+    super(199, "ruby", "ruby");
   }
 
 }

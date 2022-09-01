@@ -9,7 +9,7 @@ public final class ProgressKeyword extends StandardKeyword implements CursorValu
   static final ProgressKeyword INSTANCE = new ProgressKeyword();
 
   private ProgressKeyword() {
-    super(184, "progressKw", "progress");
+    super(185, "progressKw", "progress");
   }
 
 }

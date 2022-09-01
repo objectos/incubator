@@ -10,7 +10,7 @@ public final class FlexEndKeyword extends StandardKeyword implements ContentPosi
   static final FlexEndKeyword INSTANCE = new FlexEndKeyword();
 
   private FlexEndKeyword() {
-    super(80, "flexEnd", "flex-end");
+    super(81, "flexEnd", "flex-end");
   }
 
 }

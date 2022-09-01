@@ -9,7 +9,7 @@ public final class UpperLatinKeyword extends StandardKeyword implements CounterS
   static final UpperLatinKeyword INSTANCE = new UpperLatinKeyword();
 
   private UpperLatinKeyword() {
-    super(265, "upperLatin", "upper-latin");
+    super(267, "upperLatin", "upper-latin");
   }
 
 }

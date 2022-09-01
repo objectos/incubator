@@ -9,7 +9,7 @@ public final class TableColumnGroupKeyword extends StandardKeyword implements Di
   static final TableColumnGroupKeyword INSTANCE = new TableColumnGroupKeyword();
 
   private TableColumnGroupKeyword() {
-    super(241, "tableColumnGroup", "table-column-group");
+    super(243, "tableColumnGroup", "table-column-group");
   }
 
 }
