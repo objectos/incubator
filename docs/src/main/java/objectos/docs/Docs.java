@@ -32,6 +32,7 @@ import java.util.stream.Stream;
 import objectos.asciidoc.AsciiDoc;
 import objectos.asciidoc.Document;
 import objectos.lang.Check;
+import objectos.shared.StyleClassSet;
 import objectos.util.GrowableMap;
 import objectos.util.UnmodifiableList;
 
@@ -99,6 +100,15 @@ public final class Docs extends DocsInjector {
 
       new VersionsTemplate(this)
     );
+  }
+
+  public static Docs create(Path source, Path target, TopBar topBar, BottomBar bottomBar) {
+    Check.notNull(source, "source == null");
+    Check.notNull(target, "target == null");
+    Check.notNull(topBar, "topBar == null");
+    Check.notNull(bottomBar, "bottomBar == null");
+
+    return new Docs(source, target, topBar, bottomBar);
   }
 
   public static void main(String[] args) throws IOException {

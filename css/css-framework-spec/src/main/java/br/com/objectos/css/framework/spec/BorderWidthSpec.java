@@ -45,11 +45,11 @@ import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkGroup;
 import br.com.objectos.css.keyword.Keywords;
 import br.com.objectos.css.type.Zero;
 
-final class BorderSpec extends AbstractConfiguration {
+final class BorderWidthSpec extends AbstractConfiguration {
 
   private final FrameworkAtMediaSet responsive;
 
-  BorderSpec(FrameworkAtMediaSet responsive) {
+  BorderWidthSpec(FrameworkAtMediaSet responsive) {
     this.responsive = responsive;
   }
 
@@ -81,6 +81,22 @@ final class BorderSpec extends AbstractConfiguration {
       FrameworkGroup.BORDER,
       simpleName("Border"),
       methods("borderWidth"),
+      width,
+      responsive
+    );
+
+    property(
+      FrameworkGroup.BORDER,
+      simpleName("BorderX"),
+      methods("borderLeftWidth", "borderRightWidth"),
+      width,
+      responsive
+    );
+
+    property(
+      FrameworkGroup.BORDER,
+      simpleName("BorderY"),
+      methods("borderTopWidth", "borderBottomWidth"),
       width,
       responsive
     );

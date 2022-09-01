@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package objectos.docs;
+package objectos.shared;
 
 import br.com.objectos.html.attribute.AttributeName;
 import br.com.objectos.html.attribute.StandardAttributeName;
@@ -23,7 +23,9 @@ import java.util.function.Predicate;
 import objectos.util.GrowableSet;
 import objectos.util.UnmodifiableList;
 
-final class StyleClassSet extends SimpleCompiledTemplateVisitor implements Predicate<String> {
+public final class StyleClassSet
+    extends SimpleCompiledTemplateVisitor
+    implements Predicate<String> {
 
   private final Set<String> names = new GrowableSet<>();
 

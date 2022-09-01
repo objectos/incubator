@@ -69,7 +69,8 @@ public class FrameworkConfiguration extends AbstractConfiguration {
 
     // border
     install(new BorderColorSpec(colors, responsive));
-    install(new BorderSpec(responsive));
+    install(new BorderStyleSpec(responsive));
+    install(new BorderWidthSpec(responsive));
     install(new Rounded(responsive));
 
     // effects

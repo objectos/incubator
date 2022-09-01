@@ -69,6 +69,8 @@ final class ArticleTemplate extends DocsTemplate implements LanguageRenderer.Out
 
   private static final IdSelector BACKDROP = Css.randomHash(3);
 
+  private static final IdSelector CLICK_CLOSE = Css.randomHash(3);
+
   private static final IdSelector CLICK_OPEN = Css.randomHash(3);
 
   private static final IdSelector NAV = Css.randomHash(3);
@@ -340,7 +342,7 @@ final class ArticleTemplate extends DocsTemplate implements LanguageRenderer.Out
     function menuCloseClicked(event) {
       setStyle("{backdrop}", "display", null);
       setStyle("{body}", "overflow", null);
-      //setStyle("{menuClose}", "display", null);
+      setStyle("{menuClose}", "display", null);
       setStyle("{menuOpen}", "display", null);
       setStyle("{leftPanel}", "display", null);
     }
@@ -348,14 +350,14 @@ final class ArticleTemplate extends DocsTemplate implements LanguageRenderer.Out
     function menuOpenClicked(event) {
       setStyle("{backdrop}", "display", "block");
       setStyle("{body}", "overflow", "hidden");
-      //setStyle("{menuClose}", "display", "flex");
+      setStyle("{menuClose}", "display", "block");
       setStyle("{menuOpen}", "display", "none");
       setStyle("{leftPanel}", "display", "block");
     }
 
     function domLoaded() {
       onClick("{backdrop}", menuCloseClicked);
-      //onClick("{menuClose}", menuCloseClicked);
+      onClick("{menuClose}", menuCloseClicked);
       onClick("{menuOpen}", menuOpenClicked);
     }
 
@@ -363,6 +365,7 @@ final class ArticleTemplate extends DocsTemplate implements LanguageRenderer.Out
     """
         .replace("{backdrop}", BACKDROP.id())
         .replace("{body}", BODY.id())
+        .replace("{menuClose}", CLICK_CLOSE.id())
         .replace("{menuOpen}", CLICK_OPEN.id())
         .replace("{leftPanel}", NAV.id())));
   }
@@ -474,7 +477,6 @@ final class ArticleTemplate extends DocsTemplate implements LanguageRenderer.Out
           PaddingBottom.v24, // to offset bottombar
           PaddingLeft.lg.v02,
           PaddingRight.lg.v02,
-          PaddingTop.v06,
           TextColor.stone800,
           Width.lg.v56,
           DocsCss.XL_WIDTH_70,
@@ -505,10 +507,38 @@ final class ArticleTemplate extends DocsTemplate implements LanguageRenderer.Out
 
     div(
       AlignItems.center,
+      BorderColor.slate200,
+      BorderBottom.v1,
+      Display.flex,
+      Display.lg.hidden,
+      FlexDirection.rowReverse,
+      Height.v16,
+
+      svg(
+        CLICK_CLOSE,
+        Display.block,
+        Padding.v02,
+        Height.v12,
+        Width.v12,
+
+        xmlns("http://www.w3.org/2000/svg"),
+        width("16"),
+        height("16"),
+        fill("currentColor"),
+        viewBox("0 0 16 16"),
+        path(
+          d("M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z")
+        )
+      )
+    );
+
+    div(
+      AlignItems.center,
       Display.flex,
       JustifyContent.between,
       MarginBottom.v01,
       PaddingX.v03,
+      PaddingTop.v06,
 
       div("Version " + version.name),
 

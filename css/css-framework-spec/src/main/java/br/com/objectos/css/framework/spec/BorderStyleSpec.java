@@ -42,16 +42,13 @@ package br.com.objectos.css.framework.spec;
 import br.com.objectos.css.config.framework.AbstractConfiguration;
 import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkAtMediaSet;
 import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkGroup;
-import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkNamedValueSet;
-import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkPropertyState;
+import br.com.objectos.css.keyword.Keywords;
 
-final class BorderColorSpec extends AbstractConfiguration {
+final class BorderStyleSpec extends AbstractConfiguration {
 
-  private final FrameworkNamedValueSet colors;
   private final FrameworkAtMediaSet responsive;
 
-  BorderColorSpec(FrameworkNamedValueSet colors, FrameworkAtMediaSet responsive) {
-    this.colors = colors;
+  BorderStyleSpec(FrameworkAtMediaSet responsive) {
     this.responsive = responsive;
   }
 
@@ -59,65 +56,16 @@ final class BorderColorSpec extends AbstractConfiguration {
   protected final void configure() {
     property(
       FrameworkGroup.BORDER,
-      simpleName("BorderColor"),
-      methods("borderColor"),
-      colors,
-      responsive,
-      FrameworkPropertyState.HOVER
-    );
-
-    property(
-      FrameworkGroup.BORDER,
-      simpleName("BorderXColor"),
-      methods("borderRightColor", "borderLeftColor"),
-      colors,
-      responsive,
-      FrameworkPropertyState.HOVER
-    );
-
-    property(
-      FrameworkGroup.BORDER,
-      simpleName("BorderYColor"),
-      methods("borderTopColor", "borderBottomColor"),
-      colors,
-      responsive,
-      FrameworkPropertyState.HOVER
-    );
-
-    property(
-      FrameworkGroup.BORDER,
-      simpleName("BorderTopColor"),
-      methods("borderTopColor"),
-      colors,
-      responsive,
-      FrameworkPropertyState.HOVER
-    );
-
-    property(
-      FrameworkGroup.BORDER,
-      simpleName("BorderRightColor"),
-      methods("borderRightColor"),
-      colors,
-      responsive,
-      FrameworkPropertyState.HOVER
-    );
-
-    property(
-      FrameworkGroup.BORDER,
-      simpleName("BorderBottomColor"),
-      methods("borderBottomColor"),
-      colors,
-      responsive,
-      FrameworkPropertyState.HOVER
-    );
-
-    property(
-      FrameworkGroup.BORDER,
-      simpleName("BorderLeftColor"),
-      methods("borderLeftColor"),
-      colors,
-      responsive,
-      FrameworkPropertyState.HOVER
+      simpleName("BorderStyle"),
+      methods("borderStyle"),
+      valueSet(
+        v("solid", Keywords.solid),
+        v("dashed", Keywords.dashed),
+        v("dotted", Keywords.dotted),
+        v("double", Keywords.doubleKw),
+        v("none", Keywords.none)
+      ),
+      responsive
     );
   }
 
