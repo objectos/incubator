@@ -17,6 +17,7 @@ package objectos.shared;
 
 import br.com.objectos.css.framework.typography.TextColor;
 import br.com.objectos.css.framework.typography.TextDecoration;
+import br.com.objectos.css.select.ClassSelector;
 import br.com.objectos.html.element.StandardElementName;
 import br.com.objectos.html.spi.type.Value;
 import br.com.objectos.html.tmpl.AbstractTemplate;
@@ -28,6 +29,8 @@ import objectos.util.IntArrays;
 import objectos.util.ObjectArrays;
 
 public abstract class SharedTemplate extends AbstractTemplate implements AsciiDoc.Processor {
+
+  public static final ClassSelector LINK_COLOR = TextColor.blue600;
 
   private Value[] valueList = new Value[32];
 
@@ -202,7 +205,7 @@ public abstract class SharedTemplate extends AbstractTemplate implements AsciiDo
 
   protected void linkValues(String href) {
     addValue0(
-      TextColor.blue600,
+      LINK_COLOR,
       TextColor.hover.blue900,
       TextDecoration.underline,
       TextDecoration.hover.none,
