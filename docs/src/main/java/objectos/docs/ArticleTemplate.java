@@ -64,6 +64,10 @@ import br.com.objectos.html.element.ElementName;
 import br.com.objectos.html.element.StandardElementName;
 import br.com.objectos.html.spi.type.AValue;
 import objectos.asciidoc.DocumentAttributes;
+import objectos.shared.DefaultRenderer;
+import objectos.shared.JavaRenderer;
+import objectos.shared.LanguageRenderer;
+import objectos.shared.XmlRenderer;
 
 final class ArticleTemplate extends DocsTemplate implements LanguageRenderer.Output {
 

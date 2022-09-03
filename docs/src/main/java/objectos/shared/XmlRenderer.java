@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package objectos.docs;
+package objectos.shared;
 
-final class XmlRenderer extends LanguageRenderer {
+public final class XmlRenderer extends LanguageRenderer {
 
   private static final byte _ELEMENT_CONTENT = 0;
 

@@ -13,13 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package objectos.docs;
+package objectos.shared;
 
 import br.com.objectos.css.select.ClassSelector;
 import java.util.Set;
 import javax.lang.model.SourceVersion;
 
-final class JavaRenderer extends LanguageRenderer {
+public final class JavaRenderer extends LanguageRenderer {
 
   private static final Set<String> CONTEXTUAL_KEYWORDS = Set.of(
     "record",

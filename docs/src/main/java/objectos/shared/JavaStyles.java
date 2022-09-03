@@ -13,20 +13,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package objectos.docs;
+package objectos.shared;
 
 import br.com.objectos.css.Css;
 import br.com.objectos.css.framework.typography.TextColor;
 import br.com.objectos.css.select.ClassSelector;
 
-final class XmlStyles {
+final class JavaStyles {
 
-  public static final ClassSelector _TEXT = Css.randomDot(3);
+  public static final ClassSelector _ANNOTATION = TextColor.pink600;
 
-  public static final ClassSelector _TAG_NAME = TextColor.blue600;
+  public static final ClassSelector _COMMENT = TextColor.fuchsia700;
 
-  public static final ClassSelector _SYMBOL = TextColor.blue600;
+  public static final ClassSelector _IDENTIFIER = Css.randomDot(3);
 
-  private XmlStyles() {}
+  public static final ClassSelector _KEYWORD = TextColor.blue600;
+
+  public static final ClassSelector _DIGITS = TextColor.red600;
+
+  public static final ClassSelector _STRING = TextColor.green700;
+
+  public static final ClassSelector _TOKEN = Css.randomDot(3);
+
+  public static final ClassSelector _WS = Css.randomDot(3);
+
+  private JavaStyles() {}
 
 }

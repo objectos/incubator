@@ -13,38 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package objectos.docs;
+package objectos.shared;
 
+import br.com.objectos.css.Css;
+import br.com.objectos.css.framework.typography.TextColor;
 import br.com.objectos.css.select.ClassSelector;
 
-abstract class LanguageRenderer {
+final class XmlStyles {
 
-  interface Output {
-    void languageSpan(ClassSelector clazz, String contents);
+  public static final ClassSelector _TEXT = Css.randomDot(3);
 
-    void languageText(String text);
-  }
+  public static final ClassSelector _TAG_NAME = TextColor.blue600;
 
-  private Output out;
+  public static final ClassSelector _SYMBOL = TextColor.blue600;
 
-  public final void render(Output output, String literal) {
-    this.out = output;
-
-    renderImpl(literal);
-  }
-
-  abstract void renderImpl(String literal);
-
-  final void span(ClassSelector clazz, char c) {
-    span(clazz, Character.toString(c));
-  }
-
-  final void span(ClassSelector clazz, String s) {
-    out.languageSpan(clazz, s);
-  }
-
-  final void text(String s) {
-    out.languageText(s);
-  }
+  private XmlStyles() {}
 
 }

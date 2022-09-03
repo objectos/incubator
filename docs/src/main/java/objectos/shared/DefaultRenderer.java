@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package objectos.docs;
+package objectos.shared;
 
-final class DefaultRenderer extends LanguageRenderer {
+public final class DefaultRenderer extends LanguageRenderer {
 
   @Override
   final void renderImpl(String literal) {
