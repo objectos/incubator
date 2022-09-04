@@ -32,6 +32,7 @@ import java.util.stream.Stream;
 import objectos.asciidoc.AsciiDoc;
 import objectos.asciidoc.Document;
 import objectos.lang.Check;
+import objectos.shared.HtmlWriter;
 import objectos.shared.StyleClassSet;
 import objectos.util.GrowableMap;
 import objectos.util.UnmodifiableList;
@@ -53,6 +54,8 @@ public final class Docs extends DocsInjector {
   private final Map<String, DocumentRecord> documents = new GrowableMap<>();
 
   private final DocumentTitleProcessor documentTitleProcessor = new DocumentTitleProcessor();
+
+  private final HtmlWriter htmlWriter = new HtmlWriter();
 
   private final NextBanner nextBanner = new NextBanner(this);
 
@@ -326,7 +329,11 @@ public final class Docs extends DocsInjector {
 
       template.rawStyle(styleSheetWriter.toString(styleSheet));
 
-      var html = template.toString();
+      htmlWriter.reset();
+
+      htmlWriter.write(template);
+
+      var html = htmlWriter.toString();
 
       _write(writePath, html);
     }

@@ -208,7 +208,6 @@ public abstract class SharedTemplate extends AbstractTemplate implements AsciiDo
       LINK_COLOR,
       TextColor.hover.blue900,
       TextDecoration.underline,
-      TextDecoration.hover.none,
 
       href(href)
     );

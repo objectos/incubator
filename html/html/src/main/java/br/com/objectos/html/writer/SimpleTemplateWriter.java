@@ -17,7 +17,6 @@ package br.com.objectos.html.writer;
 
 import br.com.objectos.html.attribute.AttributeName;
 import br.com.objectos.html.element.ElementName;
-import br.com.objectos.html.tmpl.CompiledTemplate;
 import br.com.objectos.html.tmpl.CompiledTemplateVisitor;
 import br.com.objectos.html.tmpl.Template;
 import java.io.IOException;
@@ -27,11 +26,18 @@ import objectos.util.UnmodifiableList;
 
 public class SimpleTemplateWriter implements CompiledTemplateVisitor {
 
-  private final Appendable out;
+  private final StringBuilder out;
 
-  public SimpleTemplateWriter(Appendable out) {
+  public SimpleTemplateWriter(StringBuilder out) {
     this.out = Check.notNull(out, "out == null");
   }
+
+  public final void reset() {
+    out.setLength(0);
+  }
+
+  @Override
+  public final String toString() { return out.toString(); }
 
   @Override
   public final void visitAttribute(AttributeName name) {
@@ -39,13 +45,13 @@ public class SimpleTemplateWriter implements CompiledTemplateVisitor {
   }
 
   @Override
-  public final void visitAttribute(AttributeName name, UnmodifiableList<String> values) {
-    visitAttribute(name.getName(), values.join(" "));
+  public final void visitAttribute(AttributeName name, String value) {
+    visitAttribute(name.getName(), value);
   }
 
   @Override
-  public final void visitAttribute(AttributeName name, String value) {
-    visitAttribute(name.getName(), value);
+  public final void visitAttribute(AttributeName name, UnmodifiableList<String> values) {
+    visitAttribute(name.getName(), values.join(" "));
   }
 
   @Override
@@ -60,12 +66,12 @@ public class SimpleTemplateWriter implements CompiledTemplateVisitor {
     append(name);
     append('=');
     append('"');
-    append(value);
+    HtmlEscape.to(value, out);
     append('"');
   }
 
   @Override
-  public final void visitEndTag(ElementName element) {
+  public void visitEndTag(ElementName element) {
     visitEndTag(element.getName());
   }
 
@@ -83,7 +89,7 @@ public class SimpleTemplateWriter implements CompiledTemplateVisitor {
   }
 
   @Override
-  public final void visitStartTag(ElementName element) {
+  public void visitStartTag(ElementName element) {
     visitStartTag(element.getName());
   }
 
@@ -113,52 +119,21 @@ public class SimpleTemplateWriter implements CompiledTemplateVisitor {
   }
 
   public final void write(Template template) {
-    CompiledTemplate compiled = template.compile();
+    var compiled = template.compile();
+
     compiled.acceptTemplateVisitor(this);
   }
 
-  private void append(char c) {
-    try {
-      out.append(c);
-    } catch (IOException e) {
-      throw new UncheckedIOException(e);
-    }
+  protected final void append(char c) {
+    out.append(c);
   }
 
-  private void append(String s) {
-    try {
-      out.append(s);
-    } catch (IOException e) {
-      throw new UncheckedIOException(e);
-    }
+  protected final void append(String s) {
+    out.append(s);
   }
 
   private void visitText0(String text) throws IOException {
-    char[] charArray;
-    charArray = text.toCharArray();
-
-    for (char c : charArray) {
-      switch (c) {
-        default:
-          out.append(c);
-          break;
-        case '"':
-          out.append("&quot;");
-          break;
-        case '&':
-          out.append("&amp;");
-          break;
-        case '<':
-          out.append("&lt;");
-          break;
-        case '>':
-          out.append("&gt;");
-          break;
-        case '\u00A9':
-          out.append("&copy;");
-          break;
-      }
-    }
+    HtmlEscape.to(text, out);
   }
 
 }
