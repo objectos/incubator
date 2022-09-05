@@ -47,6 +47,10 @@ public final class Docs extends DocsInjector {
     AbstractFragment toFragment();
   }
 
+  public static final String INDEX = "docs/0.2/index";
+
+  public static final String OVERVIEW = "docs/0.2/intro/overview";
+
   private final AsciiDoc asciiDoc = AsciiDoc.create();
 
   private final BottomBar bottomBar;
