@@ -19,6 +19,7 @@ import br.com.objectos.css.Css;
 import br.com.objectos.css.framework.background.BackgroundColor;
 import br.com.objectos.css.framework.border.Border;
 import br.com.objectos.css.framework.border.BorderColor;
+import br.com.objectos.css.framework.border.BorderTop;
 import br.com.objectos.css.framework.border.Rounded;
 import br.com.objectos.css.framework.flexbox.JustifyContent;
 import br.com.objectos.css.framework.layout.Display;
@@ -29,6 +30,7 @@ import br.com.objectos.css.framework.spacing.MarginRight;
 import br.com.objectos.css.framework.spacing.MarginTop;
 import br.com.objectos.css.framework.spacing.MarginX;
 import br.com.objectos.css.framework.spacing.Padding;
+import br.com.objectos.css.framework.spacing.PaddingBottom;
 import br.com.objectos.css.framework.spacing.PaddingX;
 import br.com.objectos.css.framework.typography.FontSize;
 import br.com.objectos.css.framework.typography.LetterSpacing;
@@ -85,19 +87,22 @@ final class VersionsTemplate extends DocsTemplate {
   @Override
   final void main0() {
     main(
+      BorderColor.slate200,
+      BorderTop.v1,
+      PaddingBottom.v64,
       PaddingX.v04,
       PaddingX.md.v06,
 
       header(
         MarginX.auto,
-        MaxWidth.screenX2l,
+        MaxWidth.screenXl,
 
         f(this::renderDocument)
       ),
 
       section(
         MarginX.auto,
-        MaxWidth.screenX2l,
+        MaxWidth.screenXl,
 
         h2(
           FontSize.xLarge2,

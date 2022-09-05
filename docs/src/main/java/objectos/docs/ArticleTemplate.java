@@ -20,6 +20,7 @@ import br.com.objectos.css.framework.background.BackgroundColor;
 import br.com.objectos.css.framework.border.BorderBottom;
 import br.com.objectos.css.framework.border.BorderColor;
 import br.com.objectos.css.framework.border.BorderRight;
+import br.com.objectos.css.framework.border.BorderTop;
 import br.com.objectos.css.framework.border.Rounded;
 import br.com.objectos.css.framework.effects.Opacity;
 import br.com.objectos.css.framework.flexbox.AlignItems;
@@ -381,6 +382,8 @@ final class ArticleTemplate extends DocsTemplate implements LanguageRenderer.Out
     if (version.status == Status.DEVELOPMENT) {
       div(
         BackgroundColor.orange100,
+        BorderColor.slate200,
+        BorderTop.v1,
         PaddingY.v02,
 
         div(
@@ -395,6 +398,26 @@ final class ArticleTemplate extends DocsTemplate implements LanguageRenderer.Out
 
           Please note that this is a work in progress. It might be incomplete and may
           change without notice.""")
+        )
+      );
+    }
+
+    if (version.status == Status.UNSUPPORTED) {
+      div(
+        BackgroundColor.red100,
+        BorderColor.slate200,
+        BorderTop.v1,
+        PaddingY.v02,
+
+        div(
+          FontSize.small,
+          MarginX.auto,
+          MaxWidth.screenX2l,
+          PaddingX.v04,
+          TextAlign.center,
+
+          p("""
+          You are reading the documentation of an old and unsupported version of Objectos.""")
         )
       );
     }
@@ -445,6 +468,8 @@ final class ArticleTemplate extends DocsTemplate implements LanguageRenderer.Out
     );
 
     div(
+      BorderColor.slate200,
+      BorderTop.v1,
       FlexGrow.one,
 
       div(
