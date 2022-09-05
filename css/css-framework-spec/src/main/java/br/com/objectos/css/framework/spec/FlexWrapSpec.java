@@ -42,12 +42,13 @@ package br.com.objectos.css.framework.spec;
 import br.com.objectos.css.config.framework.AbstractConfiguration;
 import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkAtMediaSet;
 import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkGroup;
+import br.com.objectos.css.keyword.Keywords;
 
-final class FlexGrow extends AbstractConfiguration {
+final class FlexWrapSpec extends AbstractConfiguration {
 
   private final FrameworkAtMediaSet responsive;
 
-  FlexGrow(FrameworkAtMediaSet responsive) {
+  FlexWrapSpec(FrameworkAtMediaSet responsive) {
     this.responsive = responsive;
   }
 
@@ -55,11 +56,12 @@ final class FlexGrow extends AbstractConfiguration {
   protected final void configure() {
     property(
       FrameworkGroup.FLEXBOX,
-      simpleName("FlexGrow"),
-      methods("flexGrow"),
+      simpleName("FlexWrap"),
+      methods("flexWrap"),
       valueSet(
-        v("one", 1),
-        v("zero", 0)
+        v("wrap", Keywords.wrap),
+        v("wrap-reverse", Keywords.wrapReverse),
+        v("nowrap", Keywords.nowrap)
       ),
       responsive
     );

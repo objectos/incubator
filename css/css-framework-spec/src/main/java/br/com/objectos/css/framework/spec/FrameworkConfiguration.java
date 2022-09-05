@@ -83,7 +83,8 @@ public class FrameworkConfiguration extends AbstractConfiguration {
     install(new AlignSelf(responsive));
     install(new Flex(responsive));
     install(new FlexDirection(responsive));
-    install(new FlexGrow(responsive));
+    install(new FlexGrowSpec(responsive));
+    install(new FlexWrapSpec(responsive));
     install(new JustifyContent(responsive));
 
     // interactivity
