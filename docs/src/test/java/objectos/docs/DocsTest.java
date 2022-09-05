@@ -24,9 +24,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
-import objectos.docs.style.JavaCss;
-import objectos.docs.style.SyntaxCss;
-import objectos.docs.style.XmlCss;
 import org.jsoup.Jsoup;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -91,19 +88,19 @@ public class DocsTest {
     docs = new Docs(source, target, new DocsTopBar(), new DocsBottomBar());
 
     reps = new String[] {
-        "jyf", SyntaxCss._PRE.className(),
-        "njs", XmlCss._TEXT.className(),
-        "jrq", XmlCss._SYMBOL.className(),
-        "cyc", XmlCss._TAG_NAME.className(),
-
-        "igz", JavaCss._IDENTIFIER.className(),
-        "tu9", JavaCss._WS.className(),
-        "nhu", JavaCss._TOKEN.className(),
-        "iec", JavaCss._KEYWORD.className(),
-        "qbr", JavaCss._DIGITS.className(),
-        "uc6", JavaCss._STRING.className(),
-        "wjs", JavaCss._COMMENT.className(),
-        "juq", JavaCss._ANNOTATION.className(),
+        //        "jyf", SyntaxCss._PRE.className(),
+        //        "njs", XmlCss._TEXT.className(),
+        //        "jrq", XmlCss._SYMBOL.className(),
+        //        "cyc", XmlCss._TAG_NAME.className(),
+        //
+        //        "igz", JavaCss._IDENTIFIER.className(),
+        //        "tu9", JavaCss._WS.className(),
+        //        "nhu", JavaCss._TOKEN.className(),
+        //        "iec", JavaCss._KEYWORD.className(),
+        //        "qbr", JavaCss._DIGITS.className(),
+        //        "uc6", JavaCss._STRING.className(),
+        //        "wjs", JavaCss._COMMENT.className(),
+        //        "juq", JavaCss._ANNOTATION.className(),
 
         "eag", VersionsTemplate.TITLE.className(),
         "vls", VersionsTemplate.DATE.className()

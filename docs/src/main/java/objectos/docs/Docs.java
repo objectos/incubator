@@ -35,7 +35,6 @@ import objectos.lang.Check;
 import objectos.shared.HtmlWriter;
 import objectos.shared.StyleClassSet;
 import objectos.util.GrowableMap;
-import objectos.util.UnmodifiableList;
 
 public final class Docs extends DocsInjector {
 
@@ -51,6 +50,8 @@ public final class Docs extends DocsInjector {
 
   public static final String OVERVIEW = "docs/0.2/intro/overview";
 
+  public static final String LATEST = "0.2.0";
+
   private final AsciiDoc asciiDoc = AsciiDoc.create();
 
   private final BottomBar bottomBar;
@@ -61,13 +62,7 @@ public final class Docs extends DocsInjector {
 
   private final HtmlWriter htmlWriter = new HtmlWriter();
 
-  private final NextBanner nextBanner = new NextBanner(this);
-
-  private final Pages pages = new Pages();
-
   private final Path source;
-
-  private final TableOfContents tableOfContents = new TableOfContents(this);
 
   private final Path target;
 
@@ -102,8 +97,6 @@ public final class Docs extends DocsInjector {
 
     templates = _templates(
       new ArticleTemplate(this),
-
-      new IndexTemplate(this),
 
       new VersionsTemplate(this)
     );
@@ -221,15 +214,6 @@ public final class Docs extends DocsInjector {
   final boolean $isNext() { return currentKey.startsWith("next/"); }
 
   @Override
-  final NextBanner $nextBanner() { return nextBanner; }
-
-  @Override
-  final String $nextKey() { return pages.nextKey(); }
-
-  @Override
-  final String $prevKey() { return pages.prevKey(); }
-
-  @Override
   final DocumentRecord $record(String key) {
     var record = documents.get(key);
 
@@ -241,25 +225,10 @@ public final class Docs extends DocsInjector {
   }
 
   @Override
-  final TableOfContents $tableOfContents() { return tableOfContents; }
-
-  @Override
   final DocumentTitle $title() { return currentRecord.title(); }
 
   @Override
   final AbstractFragment $topBar() { return topBar.toFragment(); }
-
-  @Override
-  final UnmodifiableList<String> $trail() { return pages.trail(); }
-
-  @Override
-  final String $trailTitle(String key) {
-    var document = pages.document(key);
-
-    var title = document.title();
-
-    return title.plain();
-  }
 
   @Override
   final Version $version() { return currentVersion; }

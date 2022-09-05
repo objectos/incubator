@@ -17,7 +17,6 @@ package objectos.docs;
 
 import br.com.objectos.html.tmpl.AbstractFragment;
 import objectos.asciidoc.Document;
-import objectos.util.UnmodifiableList;
 
 abstract class DocsInjector {
 
@@ -37,23 +36,11 @@ abstract class DocsInjector {
 
   abstract boolean $isNext();
 
-  abstract NextBanner $nextBanner();
-
-  abstract String $nextKey();
-
-  abstract String $prevKey();
-
   abstract DocumentRecord $record(String key);
-
-  abstract TableOfContents $tableOfContents();
 
   abstract DocumentTitle $title();
 
   abstract AbstractFragment $topBar();
-
-  abstract UnmodifiableList<String> $trail();
-
-  abstract String $trailTitle(String key);
 
   abstract Version $version();
 
