@@ -161,6 +161,10 @@ public final class Docs extends DocsInjector {
     generate();
   }
 
+  public final void production() {
+    baseHref = "/docs";
+  }
+
   @Override
   final AbstractFragment $bottomBar() { return bottomBar.toFragment(); }
 
