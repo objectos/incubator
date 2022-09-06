@@ -15,9 +15,11 @@
  */
 package objectos.shared;
 
+import br.com.objectos.css.Css;
 import br.com.objectos.css.framework.typography.TextColor;
 import br.com.objectos.css.framework.typography.TextDecoration;
 import br.com.objectos.css.select.ClassSelector;
+import br.com.objectos.css.select.IdSelector;
 import br.com.objectos.html.element.StandardElementName;
 import br.com.objectos.html.spi.type.Value;
 import br.com.objectos.html.tmpl.AbstractTemplate;
@@ -29,6 +31,8 @@ import objectos.util.IntArrays;
 import objectos.util.ObjectArrays;
 
 public abstract class SharedTemplate extends AbstractTemplate implements AsciiDoc.Processor {
+
+  public static final IdSelector BODY = Css.randomHash(3);
 
   public static final ClassSelector LINK_COLOR = TextColor.blue600;
 

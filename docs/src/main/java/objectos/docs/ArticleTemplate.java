@@ -332,41 +332,43 @@ final class ArticleTemplate extends DocsTemplate implements LanguageRenderer.Out
     super.head0();
 
     script(raw("""
-    function onClick(id, listener) {
-      const el = document.getElementById(id);
+    (function() {
+      function onClick(id, listener) {
+        const el = document.getElementById(id);
 
-      el.addEventListener("click", listener);
-    }
+        el.addEventListener("click", listener);
+      }
 
-    function setStyle(id, propName, value) {
-      const el = document.getElementById(id);
+      function setStyle(id, propName, value) {
+        const el = document.getElementById(id);
 
-      el.style[propName] = value;
-    }
+        el.style[propName] = value;
+      }
 
-    function menuCloseClicked(event) {
-      setStyle("{backdrop}", "display", null);
-      setStyle("{body}", "overflow", null);
-      setStyle("{menuClose}", "display", null);
-      setStyle("{menuOpen}", "display", null);
-      setStyle("{leftPanel}", "display", null);
-    }
+      function menuCloseClicked(event) {
+        setStyle("{backdrop}", "display", null);
+        setStyle("{body}", "overflow", null);
+        setStyle("{menuClose}", "display", null);
+        setStyle("{menuOpen}", "display", null);
+        setStyle("{leftPanel}", "display", null);
+      }
 
-    function menuOpenClicked(event) {
-      setStyle("{backdrop}", "display", "block");
-      setStyle("{body}", "overflow", "hidden");
-      setStyle("{menuClose}", "display", "block");
-      setStyle("{menuOpen}", "display", "none");
-      setStyle("{leftPanel}", "display", "block");
-    }
+      function menuOpenClicked(event) {
+        setStyle("{backdrop}", "display", "block");
+        setStyle("{body}", "overflow", "hidden");
+        setStyle("{menuClose}", "display", "block");
+        setStyle("{menuOpen}", "display", "none");
+        setStyle("{leftPanel}", "display", "block");
+      }
 
-    function domLoaded() {
-      onClick("{backdrop}", menuCloseClicked);
-      onClick("{menuClose}", menuCloseClicked);
-      onClick("{menuOpen}", menuOpenClicked);
-    }
+      function domLoaded() {
+        onClick("{backdrop}", menuCloseClicked);
+        onClick("{menuClose}", menuCloseClicked);
+        onClick("{menuOpen}", menuOpenClicked);
+      }
 
-    window.addEventListener('DOMContentLoaded', domLoaded);
+      window.addEventListener('DOMContentLoaded', domLoaded);
+    })();
     """
         .replace("{backdrop}", BACKDROP.id())
         .replace("{body}", BODY.id())
@@ -545,6 +547,8 @@ final class ArticleTemplate extends DocsTemplate implements LanguageRenderer.Out
 
       svg(
         CLICK_CLOSE,
+
+        Cursor.hover.pointer,
         Display.block,
         Padding.v02,
         Height.v12,

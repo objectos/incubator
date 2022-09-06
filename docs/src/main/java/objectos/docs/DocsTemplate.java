@@ -15,17 +15,13 @@
  */
 package objectos.docs;
 
-import br.com.objectos.css.Css;
 import br.com.objectos.css.framework.flexbox.FlexDirection;
 import br.com.objectos.css.framework.layout.Display;
-import br.com.objectos.css.select.IdSelector;
 import br.com.objectos.html.element.StandardElementName;
 import objectos.asciidoc.InlineMacroAttributes;
 import objectos.shared.SharedTemplate;
 
 abstract class DocsTemplate extends SharedTemplate {
-
-  static final IdSelector BODY = Css.randomHash(3);
 
   final DocsInjector injector;
 

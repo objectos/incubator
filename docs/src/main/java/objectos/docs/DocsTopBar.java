@@ -25,6 +25,9 @@ import br.com.objectos.html.tmpl.AbstractFragment;
 final class DocsTopBar extends AbstractFragment implements Docs.TopBar {
 
   @Override
+  public final String javaScript() { return ""; }
+
+  @Override
   public final AbstractFragment toFragment() { return this; }
 
   @Override

@@ -43,6 +43,8 @@ public final class Docs extends DocsInjector {
   }
 
   public interface TopBar {
+    String javaScript();
+
     AbstractFragment toFragment();
   }
 
