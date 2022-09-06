@@ -57,6 +57,8 @@ abstract class DocsTemplate extends SharedTemplate {
 
   @Override
   protected final void definition() {
+    var topBar = injector.$topBar();
+
     doctype();
     html(
       lang("en"),
@@ -68,7 +70,7 @@ abstract class DocsTemplate extends SharedTemplate {
         Display.flex,
         FlexDirection.column,
 
-        f(injector.$topBar()),
+        f(topBar.toFragment()),
 
         f(this::main0),
 
@@ -89,6 +91,16 @@ abstract class DocsTemplate extends SharedTemplate {
 
     if (rawStyle != null) {
       style(raw(rawStyle));
+    }
+
+    var topBar = injector.$topBar();
+
+    var topBarJs = topBar.javaScript();
+
+    if (!topBarJs.isBlank()) {
+      script(
+        raw(topBarJs)
+      );
     }
   }
 

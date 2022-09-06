@@ -234,7 +234,7 @@ public final class Docs extends DocsInjector {
   final DocumentTitle $title() { return currentRecord.title(); }
 
   @Override
-  final AbstractFragment $topBar() { return topBar.toFragment(); }
+  final TopBar $topBar() { return topBar; }
 
   @Override
   final Version $version() { return currentVersion; }

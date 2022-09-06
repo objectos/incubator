@@ -17,6 +17,7 @@ package objectos.docs;
 
 import br.com.objectos.html.tmpl.AbstractFragment;
 import objectos.asciidoc.Document;
+import objectos.docs.Docs.TopBar;
 
 abstract class DocsInjector {
 
@@ -40,7 +41,7 @@ abstract class DocsInjector {
 
   abstract DocumentTitle $title();
 
-  abstract AbstractFragment $topBar();
+  abstract TopBar $topBar();
 
   abstract Version $version();
 
