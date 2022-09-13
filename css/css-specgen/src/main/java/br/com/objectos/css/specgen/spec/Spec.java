@@ -17,11 +17,28 @@ package br.com.objectos.css.specgen.spec;
 
 import objectos.lang.Check;
 import objectos.util.GrowableMap;
-import objectos.util.GrowableOrderedMap;
+import objectos.util.GrowableSequencedMap;
 import objectos.util.UnmodifiableList;
 import objectos.util.UnmodifiableMap;
 
 public class Spec {
+
+  public static class Builder {
+
+    private final GrowableMap<String, Property> properties = new GrowableSequencedMap<>();
+
+    public final Builder addProperty(Property property) {
+      properties.put(property.name(), property);
+      return this;
+    }
+
+    public Spec build() {
+      return new Spec(
+        properties.toUnmodifiableMap()
+      );
+    }
+
+  }
 
   private final UnmodifiableMap<String, Property> properties;
 
@@ -41,23 +58,6 @@ public class Spec {
 
   public final UnmodifiableList<Property> properties() {
     return UnmodifiableList.copyOf(properties.values());
-  }
-
-  public static class Builder {
-
-    private final GrowableMap<String, Property> properties = new GrowableOrderedMap<>();
-
-    public final Builder addProperty(Property property) {
-      properties.put(property.name(), property);
-      return this;
-    }
-
-    public Spec build() {
-      return new Spec(
-        properties.toUnmodifiableMap()
-      );
-    }
-
   }
 
 }
