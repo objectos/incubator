@@ -17,3 +17,4 @@ Built from scratch core utilities for Java applications.
 Core utilities are those that most Java applications will require:
 
 * ilink:objectos-lang/index[Objectos Lang]
+* ilink:objectos-util/index[Objectos Util]

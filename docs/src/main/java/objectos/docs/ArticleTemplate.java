@@ -652,6 +652,14 @@ final class ArticleTemplate extends DocsTemplate implements LanguageRenderer.Out
           ),
 
           li(
+            h2v0("Objectos Util"),
+
+            ul(
+              li(a0("next/objectos-util/index"))
+            )
+          ),
+
+          li(
             h2v0("Release Notes"),
 
             ul(
