@@ -1,0 +1,10 @@
+= Lists
+
+Objectos Utils provides two special-purpose array-backed `java.util.List` implementations:
+
+- `objectos.util.GrowableList`: a mutable grow-only implementation; and
+- `objectos.util.UnmodifiableList`: an unmodifiable implementation. 
+
+The primary use-case is to use the former as a builder of the latter.
+
+== An usage example

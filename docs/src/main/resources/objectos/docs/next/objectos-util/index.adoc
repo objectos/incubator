@@ -1,14 +1,16 @@
 = Objectos Util
 :toc-title: Overview
 
-Objectos Util provides a special-purpose (as opposed to general-purpose) collections API for the Objectos libraries themselves.
-In other words, Objectos itself is built on top of Objectos Util.
+Objectos Util is a Java library that provides :
 
-Objectos Util offers:
+* a special-purpose collections API; and
+* utility classes for operating on arrays of primitive values and arrays of object references.
 
-* growable `List`, `Set` and `Map` implementations;
-* unmodifiable `List`, `Set` and `Map` implementations; and
-* utilities for arrays of primitives and of object references.
+The primary goal of Objectos Util is to provide a collections API for the Objectos libraries themselves.
+
+You are welcome to use Objectos Util in your projects.
+Bear in mind though that implementations are special-purpose.
+In other words, _this is not a general-purpose collections library_.
 
 == Installation
 

@@ -1,7 +1,7 @@
 = Objectos Lang
 :toc-title: Overview
 
-Objectos Lang provides:
+Objectos Lang is a Java library that provides:
 
 * utilities for instances whose type is from the `java.lang` package; and
 * a type-safe note sink API.
