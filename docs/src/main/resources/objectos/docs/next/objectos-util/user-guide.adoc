@@ -10,6 +10,8 @@ Suppose you have the following Java record representing the metadata of a blog p
 
 [,java]
 ----
+import java.util.Set;
+
 public record Post(String title,
                    Set<String> tags) {}
 ----
@@ -19,6 +21,9 @@ One possible solution is:
 
 [,java]
 ----
+import objectos.lang.Check;
+import objectos.util.GrowableSet;
+
 public class PostBuilder {
   private String title = "Untitled";
 
@@ -48,7 +53,15 @@ public class PostBuilder {
 
 Notice how we have used a `GrowableSet` to provide an `UnmodifiableSet` instance to our `Post` instance.  
 
-== All implementations reject `null` values
+== Implementations reject `null` values
+
+One important thing to know about the Objectos Util collections is that they all reject `null` values.
+
+Additionally, all of the `java.util.Map` implementations also reject `null` keys.
+
+=== Using the `addWithNullMessage` method
+
+As 
 
 == All collections implements `objectos.lang.ToStringObject`
 
