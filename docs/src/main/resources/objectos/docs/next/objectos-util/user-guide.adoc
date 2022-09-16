@@ -1,0 +1,55 @@
+= User guide
+
+Objectos Util provides pairs of growable-unmodifiable implementations meant to be used in tandem.
+
+== Use the `Growable` as a builder of the `Unmodifiable`
+
+The primary use-case is to use a growable implementation as the builder of the unmodifiable one.
+
+Suppose you have the following Java record representing the metadata of a blog post:
+
+[,java]
+----
+public record Post(String title,
+                   Set<String> tags) {}
+----
+
+Let's create a builder for it.
+One possible solution is:  
+
+[,java]
+----
+public class PostBuilder {
+  private String title = "Untitled";
+
+  private final GrowableSet<String> tags = new GrowableSet<>();
+
+  public final Post build() {
+    return new Post(
+      title,
+
+      tags.toUnmodifiableSet()
+    );
+  }
+
+  public final PostBuilder tag(String tag) {
+    tags.add(tag);
+
+    return this;
+  }
+
+  public final PostBuilder title(String title) {
+    this.title = Check.notNull(title, "title == null");
+
+    return this;
+  }
+}
+----
+
+Notice how we have used a `GrowableSet` to provide an `UnmodifiableSet` instance to our `Post` instance.  
+
+== All implementations reject `null` values
+
+== All collections implements `objectos.lang.ToStringObject`
+
+== You cant create an UnmodifiableList or UnmodifiableSet directly

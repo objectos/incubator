@@ -1,7 +1,7 @@
 = Objectos Util
 :toc-title: Overview
 
-Objectos Util is a Java library that provides :
+Objectos Util is a Java library that provides:
 
 * a special-purpose collections API; and
 * utility classes for operating on arrays of primitive values and arrays of object references.
