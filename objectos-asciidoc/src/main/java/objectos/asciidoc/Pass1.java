@@ -533,11 +533,13 @@ class Pass1 {
       token = tokenAt(tokenIndex);
 
       switch (token) {
-        case Token.BLOB, Token.LITERALI -> tokenIndex += 3;
+        case Token.BLOB, Token.INLINE_MACRO, Token.LITERALI -> tokenIndex += 3;
 
         case Token.BOLD_END, Token.ITALIC_END, Token.MONO_END -> tokenIndex += 2;
 
-        case Token.LF -> tokenIndex += 1;
+        case Token.ATTR_LIST_START, Token.ATTR_LIST_END,
+            Token.ATTR_VALUE_START, Token.ATTR_VALUE_END,
+            Token.LF -> tokenIndex += 1;
 
         case Token.LISTING_BLOCK_DELIM -> {
           tokenIndex++;

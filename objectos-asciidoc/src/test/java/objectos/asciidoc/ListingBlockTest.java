@@ -149,4 +149,66 @@ final class ListingBlockTest extends AbstractAsciiDocTest {
     );
   }
 
+  @Test(description = //
+  """
+  listing block code with '[x]'
+
+  01234
+  5678901
+  23456
+  '''
+  ----
+  a: b[2]
+  ----
+  '''
+  """)
+  public void testCase03() {
+    test(
+      """
+      ----
+      a: b[2]
+      ----
+      """,
+
+      p0(
+        Token.LISTING_BLOCK_DELIM, 4, Token.LF,
+        Token.INLINE_MACRO, 5, 6,
+        Token.BLOB, 7, 9,
+        Token.ATTR_LIST_START, Token.ATTR_VALUE_START,
+        Token.BLOB, 10, 11,
+        Token.ATTR_VALUE_END, Token.ATTR_LIST_END, Token.LF,
+        Token.LISTING_BLOCK_DELIM, 4,
+        Token.LF, Token.EOF
+      ),
+
+      p1(
+        Code.DOCUMENT_START,
+        Code.PREAMBLE_START,
+        Code.LISTING_BLOCK_START,
+        Code.VERBATIM, 3, 16,
+        Code.LISTING_BLOCK_END,
+        Code.PREAMBLE_END,
+        Code.DOCUMENT_END
+      ),
+
+      docAttr(),
+
+      p2(),
+
+      """
+          <body>
+          <div id="header">
+          </div>
+          <div id="content">
+          <div class="listingblock">
+          <div class="content">
+          <pre>a: b[2]</pre>
+          </div>
+          </div>
+          </div>
+          </body>
+          """
+    );
+  }
+
 }

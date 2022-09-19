@@ -343,11 +343,23 @@ abstract class Interpreter {
           text(begin, end);
         }
 
+        case Token.INLINE_MACRO -> {
+          var begin = tokenAt(index++);
+          var end = tokenAt(index++);
+
+          text(begin, end + 1); // include the ':'
+        }
+
         case Token.BOLD_END -> {
           var pos = tokenAt(index++);
 
           text(pos, pos + 1);
         }
+
+        case Token.ATTR_LIST_START -> processor.text("[");
+        case Token.ATTR_LIST_END -> processor.text("]");
+
+        case Token.ATTR_VALUE_START, Token.ATTR_VALUE_END -> { /*noop*/ }
 
         case Token.LF -> processor.lineFeed();
 
