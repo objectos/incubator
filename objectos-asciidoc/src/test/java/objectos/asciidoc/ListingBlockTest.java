@@ -75,18 +75,18 @@ final class ListingBlockTest extends AbstractAsciiDocTest {
       p2(),
 
       """
-          <body>
-          <div id="header">
-          </div>
-          <div id="content">
-          <div class="listingblock">
-          <div class="content">
-          <pre>code</pre>
-          </div>
-          </div>
-          </div>
-          </body>
-          """
+      <body>
+      <div id="header">
+      </div>
+      <div id="content">
+      <div class="listingblock">
+      <div class="content">
+      <pre>code</pre>
+      </div>
+      </div>
+      </div>
+      </body>
+      """
     );
   }
 
@@ -134,18 +134,18 @@ final class ListingBlockTest extends AbstractAsciiDocTest {
       p2(),
 
       """
-          <body>
-          <div id="header">
-          </div>
-          <div id="content">
-          <div class="listingblock">
-          <div class="content">
-          <pre>foo]</pre>
-          </div>
-          </div>
-          </div>
-          </body>
-          """
+      <body>
+      <div id="header">
+      </div>
+      <div id="content">
+      <div class="listingblock">
+      <div class="content">
+      <pre>foo]</pre>
+      </div>
+      </div>
+      </div>
+      </body>
+      """
     );
   }
 
@@ -196,18 +196,18 @@ final class ListingBlockTest extends AbstractAsciiDocTest {
       p2(),
 
       """
-          <body>
-          <div id="header">
-          </div>
-          <div id="content">
-          <div class="listingblock">
-          <div class="content">
-          <pre>a: b[2]</pre>
-          </div>
-          </div>
-          </div>
-          </body>
-          """
+      <body>
+      <div id="header">
+      </div>
+      <div id="content">
+      <div class="listingblock">
+      <div class="content">
+      <pre>a: b[2]</pre>
+      </div>
+      </div>
+      </div>
+      </body>
+      """
     );
   }
 

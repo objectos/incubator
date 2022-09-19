@@ -15,4 +15,31 @@
  */
 package objectos.docs.util;
 
-public record Item(String name) {}
+import org.testng.annotations.Test;
+
+public class OrderBuilderTest {
+
+  @Test(
+      expectedExceptions = NullPointerException.class,
+      expectedExceptionsMessageRegExp = "item == null")
+  public void add() {
+    var builder = new OrderBuilder();
+
+    builder.add(null);
+  }
+
+  @Test(
+      expectedExceptions = NullPointerException.class,
+      expectedExceptionsMessageRegExp = "items\\[2\\] == null")
+  public void addAll() {
+    var builder = new OrderBuilder();
+
+    builder.addAll(
+      new Item("A"),
+      new Item("B"),
+      null,
+      new Item("D")
+    );
+  }
+
+}

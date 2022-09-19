@@ -15,4 +15,20 @@
  */
 package objectos.docs.util;
 
-public record Item(String name) {}
+import objectos.util.GrowableList;
+import org.testng.annotations.Test;
+
+public class GrowableCollectionExamples {
+
+  @Test(
+      expectedExceptions = NullPointerException.class,
+      expectedExceptionsMessageRegExp = "e == null")
+  public void add() {
+    var list = new GrowableList<String>();
+
+    String nullString = null;
+
+    list.add(nullString);
+  }
+
+}

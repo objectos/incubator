@@ -1,8 +1,12 @@
 = User guide
 
-Objectos Util provides pairs of growable-unmodifiable implementations meant to be used in tandem.
+Objectos Utils provides implementations that are _special-purpose_.
+
+They are not meant to be a replacement to the ones provided by the JDK.
 
 == Use the `Growable` as a builder of the `Unmodifiable`
+
+Objectos Util provides pairs of growable-unmodifiable implementations meant to be used in tandem.
 
 The primary use-case is to use a growable implementation as the builder of the unmodifiable one.
 
@@ -51,7 +55,7 @@ public class PostBuilder {
 }
 ----
 
-Notice how we have used a `GrowableSet` to provide an `UnmodifiableSet` instance to our `Post` instance.  
+Notice how we have used a `GrowableSet` to provide an `UnmodifiableSet` to our `Post` instance.  
 
 == Implementations reject `null` values
 
@@ -59,9 +63,119 @@ One important thing to know about the Objectos Util collections is that they all
 
 Additionally, all of the `java.util.Map` implementations also reject `null` keys.
 
+=== Using the `add` method
+
+A `GrowableList` or a `GrowableSet` instance will fail with a `NullPointerException` when the `add` method is invoked with a `null` element.
+
+For example, the following code
+
+[,java]
+----
+var list = new GrowableList<String>();
+
+String nullString = null;
+
+list.add(nullString);
+----
+
+Fails with an uncaught `NullPointerException`:
+
+----
+java.lang.NullPointerException: e == null
+	at objectos.lang.Check.notNull(Check.java:150)
+	at objectos.util.GrowableList.add(GrowableList.java:125)
+----
+
+With the `e == null` message.
+
 === Using the `addWithNullMessage` method
 
-As 
+Depending on your use-case, the `e == null` message from the `NullPointerException` might be cryptic.
+
+You can control the message via the `addWithNullMessage` method.
+This method is defined in the `GrowableCollection` interface.
+Both `GrowableList` and `GrowableSet` implements it.
+
+Take the following `OrderBuilder` example:
+
+[,java]
+----
+import objectos.util.GrowableList;
+
+public class OrderBuilder {
+  private final GrowableList<Item> items = new GrowableList<>();
+
+  public final void add(Item item) {
+    items.addWithNullMessage(item, "item == null");
+  }
+  
+  ...
+}
+----
+
+If the `OrderBuilder.add` method is invoked with a `null` item like so:
+
+[,java]
+----
+var builder = new OrderBuilder();
+
+builder.add(null);
+----
+
+It fails with a `NullPointerException` having the `item == null` message:
+
+----
+java.lang.NullPointerException: item == null
+	at objectos.lang.Check.notNull(Check.java:150)
+	at objectos.util.GrowableList.addWithNullMessage(GrowableList.java:249)
+----
+
+=== Using the `addWithNullMessage` method variant
+
+The `GrowableCollection` offers a `addWithNullMessage(String, int, String)` variant.
+It is meant to be used when adding a sequenced container such as an array, a `List` or an `Iterator`:  
+
+[,java]
+----
+import objectos.lang.Check;
+import objectos.util.GrowableList;
+
+public class OrderBuilder {
+  private final GrowableList<Item> items = new GrowableList<>();
+
+  ...
+
+  public final void addAll(Item... items) {
+    Check.notNull(items, "items == null");
+
+    for (int i = 0; i < items.length; i++) {
+      this.items.addWithNullMessage(items[i], "items[", i, "] == null");
+    }
+  }
+}
+----
+
+When the `OrderBuilder.addAll` method is invoked like so:
+
+[,java]
+----
+var builder = new OrderBuilder();
+
+builder.addAll(
+  new Item("A"),
+  new Item("B"),
+  null,
+  new Item("D")
+);
+----
+
+It fails with a `NullPointerException` having the `items[2] == null` message:
+
+----
+java.lang.NullPointerException: items[2] == null
+	at objectos.lang.Check.notNull(Check.java:189)
+	at objectos.util.GrowableList.addWithNullMessage(GrowableList.java:283)
+----
 
 == All collections implements `objectos.lang.ToStringObject`
 
