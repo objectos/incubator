@@ -15,7 +15,9 @@
  */
 package objectos.docs.util;
 
+import java.util.List;
 import objectos.util.GrowableList;
+import objectos.util.GrowableMap;
 import org.testng.annotations.Test;
 
 public class GrowableCollectionExamples {
@@ -29,6 +31,40 @@ public class GrowableCollectionExamples {
     String nullString = null;
 
     list.add(nullString);
+  }
+
+  @Test
+  public void toStringTest() {
+    var cities = new GrowableList<City>();
+
+    cities.add(new City("São Paulo"));
+    cities.add(new City("Piracicaba"));
+    cities.add(new City("São José dos Campos"));
+
+    System.out.println(cities);
+  }
+
+  @Test
+  public void toStringTest_map() {
+    var states = new GrowableMap<State, List<City>>();
+
+    var cities = new GrowableList<City>();
+
+    cities.add(new City("São Paulo"));
+    cities.add(new City("Piracicaba"));
+    cities.add(new City("São José dos Campos"));
+
+    states.put(new State("SP"), cities.toUnmodifiableList());
+
+    cities.clear();
+
+    cities.add(new City("Belém"));
+    cities.add(new City("Santarém"));
+    cities.add(new City("Tomé-Açu"));
+
+    states.put(new State("PA"), cities.toUnmodifiableList());
+
+    System.out.println(states);
   }
 
 }

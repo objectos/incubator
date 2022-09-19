@@ -179,4 +179,94 @@ java.lang.NullPointerException: items[2] == null
 
 == All collections implements `objectos.lang.ToStringObject`
 
+All of the Objectos Util provided implements the ilink:objectos-lang/ToString[`ToStringObject.Formattable`] interface.
+
+It means they all provide _human-readable_ string representations.
+The main use-case is to help during debugging sessions.
+
+=== `Collection` examples
+
+Consider the following Java record:
+
+[,java]
+----
+public record City(String name) {}
+----
+
+The following Java program:
+
+[,java]
+----
+var cities = new GrowableList<City>();
+
+cities.add(new City("São Paulo"));
+cities.add(new City("Piracicaba"));
+cities.add(new City("São José dos Campos"));
+
+System.out.println(cities);
+----
+
+Generates the output:
+
+----
+GrowableList [
+  0 = City[name=São Paulo]
+  1 = City[name=Piracicaba]
+  2 = City[name=São José dos Campos]
+]
+----
+
+=== `Map` examples
+
+The Objectos Util `java.util.Map` implementations also produce a _human-readable_ `toString` output.
+
+For example, consider the following that maps Brazilian states to a few of their cities: 
+
+[,java]
+----
+var states = new GrowableMap<State, List<City>>();
+
+var cities = new GrowableList<City>();
+
+cities.add(new City("São Paulo"));
+cities.add(new City("Piracicaba"));
+cities.add(new City("São José dos Campos"));
+
+states.put(new State("SP"), cities.toUnmodifiableList());
+
+cities.clear();
+
+cities.add(new City("Belém"));
+cities.add(new City("Santarém"));
+cities.add(new City("Tomé-Açu"));
+
+states.put(new State("PA"), cities.toUnmodifiableList());
+
+System.out.println(states);
+----
+
+It produces the following output:
+
+----
+GrowableMap [
+  State[abbr=SP] = UnmodifiableList [
+    0 = City[name=São Paulo]
+    1 = City[name=Piracicaba]
+    2 = City[name=São José dos Campos]
+  ]
+  State[abbr=PA] = UnmodifiableList [
+    0 = City[name=Belém]
+    1 = City[name=Santarém]
+    2 = City[name=Tomé-Açu]
+  ]
+]
+----
+
+Note that `State` is a Java record:
+
+[,java]
+----
+public record State(String abbr) {}
+----
+
 == You cant create an UnmodifiableList or UnmodifiableSet directly
