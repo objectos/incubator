@@ -1,0 +1,15 @@
+= Concatenating all of the elements into a string
+
+The `BaseCollection` provides three `join` methods that returns a `String`.
+They are:
+
+- `join()`
+- `join(String delimiter)`
+- `join(String delimiter, String prefix, String suffix)`
+
+They are for creating a string representation of the elements of a collection by joining all of the elements together.
+
+They are similar in functionality to the `joining` methods provided by the JDK `Collectors` class.
+As a design choice, the order of their parameters are also the same.
+
+== The `join` method
