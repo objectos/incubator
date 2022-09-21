@@ -28,9 +28,7 @@ public class GrowableCollectionExamples {
   public void add() {
     var list = new GrowableList<String>();
 
-    String nullString = null;
-
-    list.add(nullString);
+    list.add(null);
   }
 
   @Test
