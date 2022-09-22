@@ -13,3 +13,5 @@ They are similar in functionality to the `joining` methods provided by the JDK `
 As a design choice, the order of their parameters are also the same.
 
 == The `join` method
+
+Foo

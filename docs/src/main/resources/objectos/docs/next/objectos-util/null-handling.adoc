@@ -1,4 +1,4 @@
-= Implementations reject `null` values
+= Handling `null` values
 
 All of the the Objectos Util provided `java.util.Collection` implementations reject `null` values.
 
