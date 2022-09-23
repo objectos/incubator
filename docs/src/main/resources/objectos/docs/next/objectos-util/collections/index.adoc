@@ -1,4 +1,4 @@
-= User guide
+= Collections API
 
 Objectos Utils provides implementations that are _special-purpose_.
 

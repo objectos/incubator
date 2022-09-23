@@ -1,0 +1,4 @@
+= Limitations
+
+Objectos Utils provide a _special-purpose_ collections API.
+Compared to a _general-purpose_ implementation, its characteristics are limitations depending on the use-case: 

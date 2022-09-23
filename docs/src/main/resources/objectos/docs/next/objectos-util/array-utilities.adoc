@@ -1,0 +1,3 @@
+= Array Utilities
+
+Objectos Util provides utilities for working with arrays.
