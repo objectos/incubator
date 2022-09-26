@@ -1,5 +1,35 @@
 = Collections API
 
-Objectos Utils provides implementations that are _special-purpose_.
+Objectos Util provides a _special-purpose_ Collections API.
+It targets Objectos' use cases.
+Its primary goal is to provide a Collections API to the Objectos libraries themselves.
 
-They are not meant to be a replacement to the ones provided by the JDK.
+As such, it is not a replacement to the one provided by the JDK.
+It should neither be considered an improvement over the JDK Collections Framework.
+It contains a number of ilink:objectos-util/collections/limitations[limitations] when compared with a _general-purpose_ API.
+
+== User guide
+
+Before using the Collection API provided by Objectos Util please be aware of its limitations.
+The following article gives an overview 
+
+- ilink:objectos-util/collections/limitations[Limitations]
+
+Here's a summary of all of the articles available:
+
+- ilink:objectos-util/collections/builders[Building `Unmodifiable` instances]: 
+the main use-case of Objectos Util is using a `Growable` instance as a builder for `Unmodifiable` ones;
+
+- ilink:objectos-util/collections/of[Creating `Unmodifiable` instances directly]: 
+you can also create `Unmodifiable` instances directly by using one of the factory methods;
+
+- ilink:objectos-util/collections/null-handling[Handling `null` values]: 
+all of the implementations reject `null` values.
+`Map` implementations additionally reject `null` keys.
+This article describes how to control the message of the `NullPointerException`; 
+
+- ilink:objectos-util/collections/to-string[Human-readable `toString` output]: 
+all of the implementations provide a human-readable `toString` output;
+
+- ilink:objectos-util/collections/join-method[Creating an alternate string representation]: 
+the various `join` methods of the `BaseCollection` interface allow for creating an alternate string representation of all of the elements;

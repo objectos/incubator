@@ -1,4 +1,0 @@
-= Other convenience methods
-
-Objectos Utils provide a _special-purpose_ collections API.
-Collection implementations provides a few convenience methods targeting common Objectos' use-cases. 
