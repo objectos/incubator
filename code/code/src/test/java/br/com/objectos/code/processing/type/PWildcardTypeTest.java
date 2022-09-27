@@ -16,12 +16,22 @@ import br.com.objectos.code.java.type.NamedClass;
 import br.com.objectos.code.java.type.NamedWildcard;
 import br.com.objectos.code.model.element.ProcessingMethod;
 import br.com.objectos.code.model.element.ProcessingParameter;
+import br.com.objectos.code.util.GetOnly;
 import java.util.NoSuchElementException;
 import objectos.util.UnmodifiableList;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class PWildcardTypeTest extends AbstractPTypeMirrorTest {
+
+  private interface Generic<T> {}
+
+  private abstract static class Subject {
+    abstract void lower(Generic<? super Number> lower);
+    abstract void notOfType(Generic<Number> notOfType);
+    abstract void raw(Generic<?> raw);
+    abstract void upper(Generic<? extends Number> upper);
+  }
 
   @Test
   public void getBound() {
@@ -39,8 +49,8 @@ public class PWildcardTypeTest extends AbstractPTypeMirrorTest {
     upper = getOnlyTypeArgument(Subject.class, "upper").toWildcardType();
 
     assertEquals(
-        upper.getBound().getName(),
-        NamedClass.of(Number.class)
+      upper.getBound().getName(),
+      NamedClass.of(Number.class)
     );
   }
 
@@ -50,24 +60,24 @@ public class PWildcardTypeTest extends AbstractPTypeMirrorTest {
     raw = getOnlyTypeArgument(Subject.class, "raw");
 
     assertEquals(
-        raw.getName(),
-        NamedWildcard.unbound()
+      raw.getName(),
+      NamedWildcard.unbound()
     );
 
     PTypeMirror upper;
     upper = getOnlyTypeArgument(Subject.class, "upper");
 
     assertEquals(
-        upper.getName(),
-        NamedWildcard.extendsBound(NamedClass.of(Number.class))
+      upper.getName(),
+      NamedWildcard.extendsBound(NamedClass.of(Number.class))
     );
 
     PTypeMirror lower;
     lower = getOnlyTypeArgument(Subject.class, "lower");
 
     assertEquals(
-        lower.getName(),
-        NamedWildcard.superBound(NamedClass.of(Number.class))
+      lower.getName(),
+      NamedWildcard.superBound(NamedClass.of(Number.class))
     );
   }
 
@@ -114,7 +124,7 @@ public class PWildcardTypeTest extends AbstractPTypeMirrorTest {
     parameters = method.getParameters();
 
     ProcessingParameter only;
-    only = parameters.getOnly();
+    only = GetOnly.of(parameters);
 
     PTypeMirror parameterType;
     parameterType = only.getType();
@@ -125,16 +135,7 @@ public class PWildcardTypeTest extends AbstractPTypeMirrorTest {
     UnmodifiableList<PTypeMirror> typeArguments;
     typeArguments = declared.getTypeArguments();
 
-    return typeArguments.getOnly();
-  }
-
-  private interface Generic<T> {}
-
-  private abstract static class Subject {
-    abstract void lower(Generic<? super Number> lower);
-    abstract void notOfType(Generic<Number> notOfType);
-    abstract void raw(Generic<?> raw);
-    abstract void upper(Generic<? extends Number> upper);
+    return GetOnly.of(typeArguments);
   }
 
 }

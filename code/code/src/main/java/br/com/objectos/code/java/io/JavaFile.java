@@ -32,7 +32,40 @@ import objectos.util.GrowableList;
 
 public final class JavaFile {
 
+  public static class Builder {
+
+    private PackageName packageName = PackageName.unnamed();
+
+    private final GrowableList<TypeCode> types = new GrowableList<>();
+
+    private Builder() {}
+
+    public final Builder addType(TypeCode type) {
+      types.addWithNullMessage(type, "type == null");
+
+      return this;
+    }
+
+    public final JavaFile build() {
+      return new JavaFile(this);
+    }
+
+    public final Builder setPackage(PackageName packageName) {
+      this.packageName = Check.notNull(packageName, "packageName == null");
+
+      return this;
+    }
+
+    final TypeCode getOnly() {
+      Check.state(types.size() == 1, "Expected only one type");
+
+      return types.get(0);
+    }
+
+  }
+
   private final PackageName packageName;
+
   private final TypeCode typeCode;
 
   public JavaFile(PackageName packageName, TypeCode typeCode) {
@@ -42,7 +75,8 @@ public final class JavaFile {
 
   private JavaFile(Builder builder) {
     packageName = builder.packageName;
-    typeCode = builder.types.getOnly();
+
+    typeCode = builder.getOnly();
   }
 
   @Ignore("AggregatorGenProcessor")
@@ -100,30 +134,6 @@ public final class JavaFile {
     } finally {
       writer.close();
     }
-  }
-
-  public static class Builder {
-
-    private PackageName packageName = PackageName.unnamed();
-
-    private final GrowableList<TypeCode> types = new GrowableList<>();
-
-    private Builder() {}
-
-    public final Builder addType(TypeCode type) {
-      types.addWithNullMessage(type, "type == null");
-      return this;
-    }
-
-    public final JavaFile build() {
-      return new JavaFile(this);
-    }
-
-    public final Builder setPackage(PackageName packageName) {
-      this.packageName = Check.notNull(packageName, "packageName == null");
-      return this;
-    }
-
   }
 
 }

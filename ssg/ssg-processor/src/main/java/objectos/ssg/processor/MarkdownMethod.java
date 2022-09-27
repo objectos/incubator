@@ -31,13 +31,14 @@ import br.com.objectos.code.java.io.JavaFile;
 import br.com.objectos.code.java.type.NamedClass;
 import br.com.objectos.code.model.element.ProcessingMethod;
 import br.com.objectos.code.model.element.ProcessingType;
+import java.util.ArrayList;
 import java.util.List;
 import objectos.lang.Check;
 import objectos.util.ByteArrays;
+import objectos.util.GrowableList;
+import objectos.util.IntArrays;
 import objectos.util.UnmodifiableList;
 import objectos.util.UnmodifiableSet;
-import objectos.util.IntArrays;
-import objectos.util.GrowableList;
 import org.commonmark.node.BlockQuote;
 import org.commonmark.node.BulletList;
 import org.commonmark.node.Code;
@@ -100,7 +101,7 @@ class MarkdownMethod implements Visitor {
 
   MethodCode.Builder methodCode;
 
-  private final GrowableList<ArgumentsElement> arguments = new GrowableList<>();
+  private final List<ArgumentsElement> arguments = new ArrayList<>();
 
   private int[] argumentsStack = new int[2];
 
@@ -720,7 +721,7 @@ class MarkdownMethod implements Visitor {
       result.add(a);
     }
 
-    arguments.truncate(argsInitial);
+    arguments.subList(argsInitial, argsCurrent).clear();
 
     return result;
   }

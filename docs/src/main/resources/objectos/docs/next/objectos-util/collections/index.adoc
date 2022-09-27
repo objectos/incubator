@@ -32,4 +32,4 @@ This article describes how to control the message of the `NullPointerException`;
 all of the implementations provide a human-readable `toString` output;
 
 - ilink:objectos-util/collections/join-method[Creating an alternate string representation]: 
-the various `join` methods of the `BaseCollection` interface allow for creating an alternate string representation of all of the elements;
+the `join` methods from the `BaseCollection` interface allow for creating an alternate string representation of all of the elements;

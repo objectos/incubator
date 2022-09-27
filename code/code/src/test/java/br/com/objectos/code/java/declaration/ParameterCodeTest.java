@@ -17,13 +17,20 @@ import static org.testng.Assert.assertEquals;
 import br.com.objectos.code.java.expression.Identifier;
 import br.com.objectos.code.java.type.NamedClass;
 import br.com.objectos.code.util.AbstractCodeJavaTest;
+import br.com.objectos.code.util.GetOnly;
 import java.util.List;
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.VariableElement;
-import objectos.util.Lists;
 import org.testng.annotations.Test;
 
 public class ParameterCodeTest extends AbstractCodeJavaTest {
+
+  abstract class Subject {
+    void isVarArgs(int... values) {}
+
+    void notVarArgs(int[] values) {}
+    void type(String name) {}
+  }
 
   @Test
   public void ofFromVariableElement() {
@@ -75,14 +82,7 @@ public class ParameterCodeTest extends AbstractCodeJavaTest {
     List<? extends VariableElement> parameters;
     parameters = method.getParameters();
 
-    return Lists.getOnly(parameters);
-  }
-
-  abstract class Subject {
-    void isVarArgs(int... values) {}
-
-    void notVarArgs(int[] values) {}
-    void type(String name) {}
+    return GetOnly.of(parameters);
   }
 
 }
