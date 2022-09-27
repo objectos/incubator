@@ -1,3 +1,25 @@
 = Creating `Unmodifiable` instances with factory methods
 
-Write about List and Set of methods.
+You can create `Unmodifiable` instances directly by using one of the provided factory methods.
+
+Use the `UnmodifiableList::of` methods to create instances with a known number of elements:
+
+[,java]
+----
+UnmodifiableList.of();
+UnmodifiableList.of("One");
+UnmodifiableList.of("One", "Two");
+UnmodifiableList.of("One", "Two", "Three");
+// and so on...
+----
+
+The same works with `UnmodifiableSet`:
+
+[,java]
+----
+UnmodifiableSet.of();
+UnmodifiableSet.of("One");
+UnmodifiableSet.of("One", "Two", "Two");
+UnmodifiableSet.of("One", "Two", "Two", "Three");
+// and so on...
+----
