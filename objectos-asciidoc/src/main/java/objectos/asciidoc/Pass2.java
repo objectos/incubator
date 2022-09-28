@@ -144,13 +144,13 @@ class Pass2 {
   }
 
   private void addText(int t0) {
-    text = IntArrays.copyIfNecessary(text, textIndex);
+    text = IntArrays.growIfNecessary(text, textIndex);
 
     text[textIndex++] = t0;
   }
 
   private void addText(int t0, int t1, int t2) {
-    text = IntArrays.copyIfNecessary(text, textIndex + 2);
+    text = IntArrays.growIfNecessary(text, textIndex + 2);
 
     text[textIndex++] = t0;
     text[textIndex++] = t1;
@@ -413,20 +413,20 @@ class Pass2 {
   private void push(int p0) {
     contextIndex++;
 
-    context = IntArrays.copyIfNecessary(context, contextIndex);
+    context = IntArrays.growIfNecessary(context, contextIndex);
 
     context[contextIndex] = p0;
   }
 
   private void push(int p0, int p1) {
-    context = IntArrays.copyIfNecessary(context, contextIndex + 2);
+    context = IntArrays.growIfNecessary(context, contextIndex + 2);
 
     context[++contextIndex] = p0;
     context[++contextIndex] = p1;
   }
 
   private void push(int p0, int p1, int p2) {
-    context = IntArrays.copyIfNecessary(context, contextIndex + 3);
+    context = IntArrays.growIfNecessary(context, contextIndex + 3);
 
     context[++contextIndex] = p0;
     context[++contextIndex] = p1;
@@ -434,7 +434,7 @@ class Pass2 {
   }
 
   private void push(int p0, int p1, int p2, int p3) {
-    context = IntArrays.copyIfNecessary(context, contextIndex + 4);
+    context = IntArrays.growIfNecessary(context, contextIndex + 4);
 
     context[++contextIndex] = p0;
     context[++contextIndex] = p1;

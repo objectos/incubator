@@ -72,7 +72,7 @@ final class Pass1 implements AutoCloseable {
   }
 
   private void addCode(int code) {
-    codes = IntArrays.copyIfNecessary(codes, codesIndex);
+    codes = IntArrays.growIfNecessary(codes, codesIndex);
 
     codes[codesIndex++] = code;
   }
@@ -886,7 +886,7 @@ final class Pass1 implements AutoCloseable {
   private void pushCode() {
     stackIndex++;
 
-    stack = IntArrays.copyIfNecessary(stack, stackIndex);
+    stack = IntArrays.growIfNecessary(stack, stackIndex);
 
     stack[stackIndex] = codesIndex;
   }
@@ -894,7 +894,7 @@ final class Pass1 implements AutoCloseable {
   private void pushMulti() {
     multiIndex++;
 
-    multi = IntArrays.copyIfNecessary(multi, multiIndex);
+    multi = IntArrays.growIfNecessary(multi, multiIndex);
 
     multi[multiIndex] = codesIndex;
   }

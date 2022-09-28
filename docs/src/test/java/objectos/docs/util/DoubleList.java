@@ -23,7 +23,7 @@ public class DoubleList {
   private int cursor = 0;
 
   public boolean add(double value) {
-    values = DoubleArrays.copyIfNecessary(values, cursor);
+    values = DoubleArrays.growIfNecessary(values, cursor);
     values[cursor++] = value;
     return true;
   }

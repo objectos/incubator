@@ -757,7 +757,7 @@ final class Pass2 implements AutoCloseable {
   private void pushCall() {
     callIndex++;
 
-    call = IntArrays.copyIfNecessary(call, callIndex);
+    call = IntArrays.growIfNecessary(call, callIndex);
 
     call[callIndex] = cursor;
   }

@@ -129,20 +129,20 @@ class Pass1 {
   }
 
   private void add(int p0) {
-    code = IntArrays.copyIfNecessary(code, codeIndex);
+    code = IntArrays.growIfNecessary(code, codeIndex);
 
     code[codeIndex++] = p0;
   }
 
   private void add(int p0, int p1) {
-    code = IntArrays.copyIfNecessary(code, codeIndex + 1);
+    code = IntArrays.growIfNecessary(code, codeIndex + 1);
 
     code[codeIndex++] = p0;
     code[codeIndex++] = p1;
   }
 
   private void add(int p0, int p1, int p2) {
-    code = IntArrays.copyIfNecessary(code, codeIndex + 2);
+    code = IntArrays.growIfNecessary(code, codeIndex + 2);
 
     code[codeIndex++] = p0;
     code[codeIndex++] = p1;
@@ -150,7 +150,7 @@ class Pass1 {
   }
 
   private void add(int p0, int p1, int p2, int p3) {
-    code = IntArrays.copyIfNecessary(code, codeIndex + 3);
+    code = IntArrays.growIfNecessary(code, codeIndex + 3);
 
     code[codeIndex++] = p0;
     code[codeIndex++] = p1;
@@ -159,7 +159,7 @@ class Pass1 {
   }
 
   private void add(int p0, int p1, int p2, int p3, int p4) {
-    code = IntArrays.copyIfNecessary(code, codeIndex + 4);
+    code = IntArrays.growIfNecessary(code, codeIndex + 4);
 
     code[codeIndex++] = p0;
     code[codeIndex++] = p1;
@@ -958,7 +958,7 @@ class Pass1 {
   }
 
   private void pushList(char symbol, int count) {
-    list = IntArrays.copyIfNecessary(list, listIndex + 2);
+    list = IntArrays.growIfNecessary(list, listIndex + 2);
 
     list[++listIndex] = count;
     list[++listIndex] = symbol;
@@ -967,7 +967,7 @@ class Pass1 {
   private void pushSection(int level) {
     sectionIndex++;
 
-    section = IntArrays.copyIfNecessary(section, sectionIndex);
+    section = IntArrays.growIfNecessary(section, sectionIndex);
 
     section[sectionIndex] = level;
   }

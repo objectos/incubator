@@ -729,11 +729,11 @@ class MarkdownMethod implements Visitor {
   private void push(byte type) {
     stackIndex++;
 
-    argumentsStack = IntArrays.copyIfNecessary(argumentsStack, stackIndex);
+    argumentsStack = IntArrays.growIfNecessary(argumentsStack, stackIndex);
 
     argumentsStack[stackIndex] = arguments.size();
 
-    elementStack = ByteArrays.copyIfNecessary(elementStack, stackIndex);
+    elementStack = ByteArrays.growIfNecessary(elementStack, stackIndex);
 
     elementStack[stackIndex] = type;
   }

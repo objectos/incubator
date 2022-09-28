@@ -175,7 +175,7 @@ public class CommandParser {
   }
 
   final void put(int value) {
-    codes = IntArrays.copyIfNecessary(codes, codesLength);
+    codes = IntArrays.growIfNecessary(codes, codesLength);
 
     codes[codesLength++] = value;
   }

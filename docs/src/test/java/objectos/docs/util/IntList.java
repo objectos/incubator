@@ -23,7 +23,7 @@ public class IntList {
   private int cursor = 0;
 
   public boolean add(int value) {
-    data = IntArrays.copyIfNecessary(data, cursor);
+    data = IntArrays.growIfNecessary(data, cursor);
     data[cursor++] = value;
     return true;
   }

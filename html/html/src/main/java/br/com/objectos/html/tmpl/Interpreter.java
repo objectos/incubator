@@ -54,7 +54,7 @@ class Interpreter {
   private void addAttr(int code) {
     currentAttr = attrIndex;
 
-    attr = IntArrays.copyIfNecessary(attr, currentAttr);
+    attr = IntArrays.growIfNecessary(attr, currentAttr);
 
     if (attr[currentAttr] == null) {
       attr[currentAttr] = new int[CURRENT_ATTR_INC];
@@ -68,7 +68,7 @@ class Interpreter {
   }
 
   private void addCurrentAttr(int code) {
-    attr[currentAttr] = IntArrays.copyIfNecessary(attr[currentAttr], currentAttrIndex);
+    attr[currentAttr] = IntArrays.growIfNecessary(attr[currentAttr], currentAttrIndex);
 
     attr[currentAttr][currentAttrIndex++] = code;
   }
@@ -282,7 +282,7 @@ class Interpreter {
   private void pushCall() {
     callIndex++;
 
-    call = IntArrays.copyIfNecessary(call, callIndex);
+    call = IntArrays.growIfNecessary(call, callIndex);
 
     call[callIndex] = cursor;
   }

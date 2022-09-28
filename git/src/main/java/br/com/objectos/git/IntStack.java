@@ -53,7 +53,7 @@ final class IntStack {
   }
 
   public final void push(int value) {
-    values = IntArrays.copyIfNecessary(values, size);
+    values = IntArrays.growIfNecessary(values, size);
 
     values[size++] = value;
   }

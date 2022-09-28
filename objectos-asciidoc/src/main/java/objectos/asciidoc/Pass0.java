@@ -159,20 +159,20 @@ class Pass0 implements Pass1.Source, Pass2.Source {
   }
 
   private void add(int s0) {
-    token = IntArrays.copyIfNecessary(token, tokenIndex);
+    token = IntArrays.growIfNecessary(token, tokenIndex);
 
     token[tokenIndex++] = s0;
   }
 
   private void add(int s0, int s1) {
-    token = IntArrays.copyIfNecessary(token, tokenIndex + 1);
+    token = IntArrays.growIfNecessary(token, tokenIndex + 1);
 
     token[tokenIndex++] = s0;
     token[tokenIndex++] = s1;
   }
 
   private void add(int s0, int s1, int s2) {
-    token = IntArrays.copyIfNecessary(token, tokenIndex + 2);
+    token = IntArrays.growIfNecessary(token, tokenIndex + 2);
 
     token[tokenIndex++] = s0;
     token[tokenIndex++] = s1;
@@ -180,7 +180,7 @@ class Pass0 implements Pass1.Source, Pass2.Source {
   }
 
   private void add(int s0, int s1, int s2, int s3) {
-    token = IntArrays.copyIfNecessary(token, tokenIndex + 3);
+    token = IntArrays.growIfNecessary(token, tokenIndex + 3);
 
     token[tokenIndex++] = s0;
     token[tokenIndex++] = s1;
@@ -189,7 +189,7 @@ class Pass0 implements Pass1.Source, Pass2.Source {
   }
 
   private void add(int s0, int s1, int s2, int s3, int s4) {
-    token = IntArrays.copyIfNecessary(token, tokenIndex + 4);
+    token = IntArrays.growIfNecessary(token, tokenIndex + 4);
 
     token[tokenIndex++] = s0;
     token[tokenIndex++] = s1;
@@ -199,7 +199,7 @@ class Pass0 implements Pass1.Source, Pass2.Source {
   }
 
   private void add(int s0, int s1, int s2, int s3, int s4, int s5) {
-    token = IntArrays.copyIfNecessary(token, tokenIndex + 5);
+    token = IntArrays.growIfNecessary(token, tokenIndex + 5);
 
     token[tokenIndex++] = s0;
     token[tokenIndex++] = s1;

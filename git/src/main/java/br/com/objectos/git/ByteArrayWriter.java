@@ -171,7 +171,7 @@ final class ByteArrayWriter {
     int requiredIndex;
     requiredIndex = index + 8;
 
-    data = ByteArrays.copyIfNecessary(data, requiredIndex);
+    data = ByteArrays.growIfNecessary(data, requiredIndex);
 
     data[index++] = (byte) (value >>> 0);
 
@@ -220,7 +220,7 @@ final class ByteArrayWriter {
     int newLength;
     newLength = index + 1;
 
-    data = ByteArrays.copyIfNecessary(data, newLength);
+    data = ByteArrays.growIfNecessary(data, newLength);
 
     data[index] = value;
 
@@ -231,7 +231,7 @@ final class ByteArrayWriter {
     int newLength;
     newLength = index + bytes.length;
 
-    data = ByteArrays.copyIfNecessary(data, newLength);
+    data = ByteArrays.growIfNecessary(data, newLength);
 
     System.arraycopy(bytes, 0, data, index, bytes.length);
 
@@ -242,7 +242,7 @@ final class ByteArrayWriter {
     int newLength;
     newLength = index + length;
 
-    data = ByteArrays.copyIfNecessary(data, newLength);
+    data = ByteArrays.growIfNecessary(data, newLength);
 
     System.arraycopy(array, offset, data, index, length);
 
@@ -253,7 +253,7 @@ final class ByteArrayWriter {
     int newLength;
     newLength = index + other.size();
 
-    data = ByteArrays.copyIfNecessary(data, newLength);
+    data = ByteArrays.growIfNecessary(data, newLength);
 
     System.arraycopy(other.data, 0, data, index, other.size());
 
@@ -264,7 +264,7 @@ final class ByteArrayWriter {
     int newLength;
     newLength = index + size;
 
-    data = ByteArrays.copyIfNecessary(data, newLength);
+    data = ByteArrays.growIfNecessary(data, newLength);
 
     System.arraycopy(other.data, offset, data, index, size);
 
@@ -278,7 +278,7 @@ final class ByteArrayWriter {
     int requiredIndex;
     requiredIndex = index + bufferRemaining;
 
-    data = ByteArrays.copyIfNecessary(data, requiredIndex);
+    data = ByteArrays.growIfNecessary(data, requiredIndex);
 
     buffer.get(data, index, bufferRemaining);
 
@@ -296,7 +296,7 @@ final class ByteArrayWriter {
   }
 
   private int deflate0(Deflater deflater, int sizeHint) {
-    data = ByteArrays.copyIfNecessary(data, sizeHint);
+    data = ByteArrays.growIfNecessary(data, sizeHint);
 
     int remainingLength;
     remainingLength = remaining();
@@ -312,7 +312,7 @@ final class ByteArrayWriter {
     index += deflate;
 
     while (!deflater.finished()) {
-      data = ByteArrays.copyIfNecessary(data, index + 1);
+      data = ByteArrays.growIfNecessary(data, index + 1);
 
       remainingLength = remaining();
 

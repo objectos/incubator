@@ -377,7 +377,7 @@ final class TemplateDslImpl implements TemplateDsl {
   }
 
   private void addProto(int code) {
-    proto = IntArrays.copyIfNecessary(proto, protoLength);
+    proto = IntArrays.growIfNecessary(proto, protoLength);
 
     proto[protoLength++] = code;
   }

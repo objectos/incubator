@@ -186,13 +186,13 @@ public abstract class SharedTemplate extends AbstractTemplate implements AsciiDo
   }
 
   protected final void addValue0(Value value) {
-    valueList = ObjectArrays.copyIfNecessary(valueList, valueListIndex);
+    valueList = ObjectArrays.growIfNecessary(valueList, valueListIndex);
 
     valueList[valueListIndex++] = value;
   }
 
   protected final void addValue0(Value... values) {
-    valueList = ObjectArrays.copyIfNecessary(valueList, valueListIndex + values.length - 1);
+    valueList = ObjectArrays.growIfNecessary(valueList, valueListIndex + values.length - 1);
 
     for (var value : values) {
       valueList[valueListIndex++] = value;
@@ -200,7 +200,7 @@ public abstract class SharedTemplate extends AbstractTemplate implements AsciiDo
   }
 
   protected final void addValue0(Value v0, Value v1, Value v2) {
-    valueList = ObjectArrays.copyIfNecessary(valueList, valueListIndex + 2);
+    valueList = ObjectArrays.growIfNecessary(valueList, valueListIndex + 2);
 
     valueList[valueListIndex++] = v0;
     valueList[valueListIndex++] = v1;
@@ -228,7 +228,7 @@ public abstract class SharedTemplate extends AbstractTemplate implements AsciiDo
   protected final void tagStart() {
     valueStackIndex++;
 
-    valueStack = IntArrays.copyIfNecessary(valueStack, valueStackIndex);
+    valueStack = IntArrays.growIfNecessary(valueStack, valueStackIndex);
 
     valueStack[valueStackIndex] = valueListIndex;
   }

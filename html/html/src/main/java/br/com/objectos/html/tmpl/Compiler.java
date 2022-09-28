@@ -64,7 +64,7 @@ class Compiler {
   }
 
   private void addCode(int code) {
-    codes = IntArrays.copyIfNecessary(codes, codesIndex);
+    codes = IntArrays.growIfNecessary(codes, codesIndex);
 
     codes[codesIndex++] = code;
   }
@@ -418,7 +418,7 @@ class Compiler {
   private void pushElement() {
     elementIndex++;
 
-    element = IntArrays.copyIfNecessary(element, elementIndex);
+    element = IntArrays.growIfNecessary(element, elementIndex);
 
     element[elementIndex] = codesIndex;
   }

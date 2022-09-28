@@ -20,6 +20,8 @@ The following example uses the `IntArrays::growIfNecessary` method to create a b
 
 [,java]
 ----
+import objectos.util.IntArrays;
+
 public class IntList {
   private int[] data = IntArrays.empty();
 

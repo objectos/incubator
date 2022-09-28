@@ -127,7 +127,7 @@ final class FixedCpuWorkerThread extends Thread {
   }
 
   private void addSlot(int value) {
-    slots = IntArrays.copyIfNecessary(slots, slotsTail);
+    slots = IntArrays.growIfNecessary(slots, slotsTail);
 
     slots[slotsTail++] = value;
   }

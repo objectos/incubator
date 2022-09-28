@@ -694,13 +694,13 @@ final class Pass0 implements AutoCloseable, StyleEngine {
   }
 
   void addDouble(double value) {
-    doubles = DoubleArrays.copyIfNecessary(doubles, doublesLength);
+    doubles = DoubleArrays.growIfNecessary(doubles, doublesLength);
 
     doubles[doublesLength++] = value;
   }
 
   final void addProto(int code) {
-    protos = IntArrays.copyIfNecessary(protos, protosLength);
+    protos = IntArrays.growIfNecessary(protos, protosLength);
 
     protos[protosLength++] = code;
   }
@@ -826,7 +826,7 @@ final class Pass0 implements AutoCloseable, StyleEngine {
   }
 
   private void addObject(int code) {
-    objects = IntArrays.copyIfNecessary(objects, objectsLength);
+    objects = IntArrays.growIfNecessary(objects, objectsLength);
 
     objects[objectsLength++] = code;
   }

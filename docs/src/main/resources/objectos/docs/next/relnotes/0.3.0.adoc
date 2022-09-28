@@ -57,6 +57,8 @@ Here's a simple array list of `double` values:
 
 [,java]
 ----
+import objectos.util.DoubleArrays;
+
 public class DoubleList {
   private double[] values = DoubleArrays.empty();
 
