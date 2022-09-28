@@ -674,6 +674,7 @@ final class ArticleTemplate extends DocsTemplate implements LanguageRenderer.Out
             h2v0("Release Notes"),
 
             ul(
+              li(a0("next/relnotes/0.3.0")),
               li(a0("next/relnotes/0.2.0")),
               li(a0("next/relnotes/0.1.0"))
             )
