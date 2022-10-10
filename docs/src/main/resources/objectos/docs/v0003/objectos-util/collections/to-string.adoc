@@ -1,6 +1,6 @@
 = The `toString` output
 
-All of the Objectos Util provided collections implements the ilink:objectos-lang/ToString[`ToStringObject.Formattable`] interface.
+All of the Objectos Util provided collections implements the ilink:objectos-lang/ToString[`ToString.Formattable`] interface.
 
 In doing so their `toString` method provides _human-readable_ string representations.
 It is intended to help when:
