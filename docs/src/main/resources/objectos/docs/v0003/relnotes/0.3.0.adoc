@@ -1,0 +1,83 @@
+= Objectos 0.3.0 release notes
+:toc-title: Objectos 0.3.0
+
+_October 3, 2022_
+
+Welcome to Objectos 0.3.0, the second third release of the Objectos suite of Java libraries.
+
+== JDK compatibility
+
+Objectos 0.3.0 requires JDK 17 or later.
+
+== What's new in Objectos 0.3.0
+
+Objectos 0.3.0 introduces the ilink:objectos-util/index[Objectos Util] Java library.
+It provides:
+
+* a _special-purpose_ collections API; and
+* utility classes for operating on Java arrays.
+
+=== `Unmodifiable` collections
+
+Objectos Util provides unmodifiable implementations of:
+
+* `java.util.List`;
+* `java.util.Set`; and
+* `java.util.Map`.
+
+You can create them directly:
+
+[,java]
+----
+var libraries = UnmodifiableSet.of(
+    "Objectos Lang",
+    "Objectos Util");
+----
+
+Or you can use its `Growable` counterpart as a builder:
+
+[,java]
+----
+var builder = new GrowableList<String>();
+
+builder.add("0.1.0");
+builder.add("0.2.0");
+builder.add("0.3.0");
+
+var versions = builder.toUnmodifiableList();
+----
+
+You can find the ilink:objectos-util/index[full user guide here].
+
+=== Array utilities
+
+Objectos Util provides utilities for creating "growable" arrays.
+
+Here's a simple array list of `double` values:
+
+[,java]
+----
+import objectos.util.DoubleArrays;
+
+public class DoubleList {
+  private double[] values = DoubleArrays.empty();
+
+  private int cursor = 0;
+
+  public boolean add(double value) {
+    values = DoubleArrays.growIfNecessary(values, cursor);
+    values[cursor++] = value;
+    return true;
+  }
+
+  public double sum() {
+    var sum = 0d;
+    for (var value : values) {
+      sum += value;
+    }
+    return sum;
+  }
+}
+----
+
+You can find the ilink:objectos-util/array-utilities[full user guide here].

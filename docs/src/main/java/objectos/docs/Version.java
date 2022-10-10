@@ -20,11 +20,14 @@ import objectos.util.UnmodifiableList;
 
 enum Version {
 
-  NEXT(name("0.3.0"), slug("next"), directory("next"),
+  NEXT(name("0.4.0"), slug("next"), directory("next"),
       unreleased(), Status.DEVELOPMENT),
 
+  V0_3_0(name("0.3.0"), slug("0.3"), directory("v0003"),
+      releaseDate(2022, 10, 10), Status.LATEST),
+
   V0_2_0(name("0.2.0"), slug("0.2"), directory("v0002"),
-      releaseDate(2022, 6, 13), Status.LATEST),
+      releaseDate(2022, 6, 13), Status.UNSUPPORTED),
 
   V0_1_0(name("0.1.0"), slug("0.1"), directory("v0001"),
       releaseDate(2022, 5, 16), Status.UNSUPPORTED);
@@ -55,12 +58,10 @@ enum Version {
 
   public static Version parse(String key) {
     return switch (key) {
-      case "v0001" -> V0_1_0;
-
-      case "v0002" -> V0_2_0;
-
       case "next" -> NEXT;
-
+      case "v0003" -> V0_3_0;
+      case "v0002" -> V0_2_0;
+      case "v0001" -> V0_1_0;
       default -> throw new UnsupportedOperationException("Implement me :: key=" + key);
     };
   }

@@ -1,0 +1,138 @@
+= Objectos 0.2.0 release notes
+:toc-title: Objectos 0.2.0
+
+_June 13, 2022_
+
+Welcome to Objectos 0.2.0, the second public release of the
+Objectos suite of Java libraries.
+
+== JDK compatibility
+
+Objectos 0.2.0 requires JDK 17 or later.
+
+== What's new in Objectos 0.2.0
+
+This release introduces the ilink:objectos-lang/index[Objectos Lang] library.
+It provides:
+
+* a set of utilities for objects whose type is from the `java.lang` package; and
+* a note sink API
+
+=== The `Check` class
+
+The ilink:objectos-lang/Check[`Check`] class
+helps verify if a method or constructor has been invoked correctly:
+
+[,java]
+----
+public void start(String name, int value) {
+  Check.notNull(name, "name == null");
+  Check.argument(value > 0, "value must be positive");
+  Check.state(this.state == State.NEW, "cannot start: already started");
+}
+----
+
+If any of the check conditions
+does not evaluate to `true` then the check fails with a specific `RuntimeException` sub-type.
+
+You can find ilink:objectos-lang/Check[the full documentation here].
+
+=== Utilities for overriding `java.lang.Object` methods
+
+Objectos Lang provides three utilities each for overriding one of the following
+`java.lang.Object` method:
+
+* ilink:objectos-lang/Equals[`equals`]
+* ilink:objectos-lang/HashCode[`hashCode`]
+* ilink:objectos-lang/ToString[`toString`]
+
+The following example show all of them in action:
+
+[,java]
+----
+class Edition implements ToString.Formattable {
+  Book book;
+  Publisher publisher;
+  LocalDate date;
+
+  @Override
+  public boolean equals(Object o) {
+    return o == this || o instanceof Edition that
+      && Equals.of(
+        book, that.book,
+        publisher, that.publisher,
+        date, that.date
+      );
+  }
+
+  @Override
+  public int hashCode() {
+    return HashCode.of(book, publisher, date);
+  }
+
+  @Override
+  public void formatToString(StringBuilder sb, int level) {
+    ToString.format(
+      sb, level, this,
+      "book", book,
+      "publisher", publisher,
+      "date", date
+    );
+  }
+
+  @Override
+  public String toString() {
+    return ToString.of(this);
+  }
+}
+----
+
+You can find the full documentation for each of the classes in the links below:
+
+* ilink:objectos-lang/Equals[`Equals`]
+* ilink:objectos-lang/HashCode[`HashCode`]
+* ilink:objectos-lang/ToString[`ToString`]
+
+=== The note sink API
+
+Objectos Lang provides an API for defining and sending notes about events taking
+place during an application execution. Use it for logging or debugging.
+
+[,java]
+----
+import objectos.lang.*;
+
+public class Service {
+  static final Note1<String> SAY_HELLO = Note1.info();
+
+  private final NoteSink sink;
+
+  Service(NoteSink sink) { this.sink = sink; }
+
+  public void sayHelloWorld() {
+    sink.send(SAY_HELLO, "world!");
+  }
+}
+----
+
+== Changes from Objectos 0.1.0
+
+Notable changes from the previous release are listed in this section.
+
+=== Objectos Logging was moved to Objectos Lang
+
+Classes from the Objectos Logging artifact were moved to Objectos Lang.
+Additionally the classes were renamed:
+
+* `Event` was renamed to `Note`
+* `Logger` was renamed to `NoteSink`
+
+=== Objectos BOM POM artifact name renamed
+
+The Maven artifact for the Objectos BOM POM was renamed from:
+
+* `bom`
+
+To:
+
+* `objectos-bom`
