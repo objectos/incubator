@@ -684,14 +684,14 @@ final class ArticleTemplate extends DocsTemplate implements LanguageRenderer.Out
 
       case V0_3_0 -> {
         ul(
-          li(a0("next/index")),
+          li(a0("v0003/index")),
 
           li(
             h2v0("Introduction"),
 
             ul(
-              li(a0("next/intro/overview")),
-              li(a0("next/intro/install"))
+              li(a0("v0003/intro/overview")),
+              li(a0("v0003/intro/install"))
             )
           ),
 
@@ -699,17 +699,17 @@ final class ArticleTemplate extends DocsTemplate implements LanguageRenderer.Out
             h2v0("Objectos Lang"),
 
             ul(
-              li(a0("next/objectos-lang/index")),
-              li(a0("next/objectos-lang/Check")),
-              li(a0("next/objectos-lang/Equals")),
-              li(a0("next/objectos-lang/HashCode")),
-              li(a0("next/objectos-lang/ToString")),
+              li(a0("v0003/objectos-lang/index")),
+              li(a0("v0003/objectos-lang/Check")),
+              li(a0("v0003/objectos-lang/Equals")),
+              li(a0("v0003/objectos-lang/HashCode")),
+              li(a0("v0003/objectos-lang/ToString")),
 
-              li(a0("next/objectos-lang/note-sink-api/index"),
+              li(a0("v0003/objectos-lang/note-sink-api/index"),
                 ul(
-                  li(a1("next/objectos-lang/note-sink-api/creating-notes")),
-                  li(a1("next/objectos-lang/note-sink-api/the-note-sink-interface")),
-                  li(a1("next/objectos-lang/note-sink-api/the-no-op-note-sink"))
+                  li(a1("v0003/objectos-lang/note-sink-api/creating-notes")),
+                  li(a1("v0003/objectos-lang/note-sink-api/the-note-sink-interface")),
+                  li(a1("v0003/objectos-lang/note-sink-api/the-no-op-note-sink"))
                 )
               )
             )
@@ -719,16 +719,16 @@ final class ArticleTemplate extends DocsTemplate implements LanguageRenderer.Out
             h2v0("Objectos Util"),
 
             ul(
-              li(a0("next/objectos-util/index")),
-              li(a0("next/objectos-util/array-utilities")),
-              li(a0("next/objectos-util/collections/index"),
+              li(a0("v0003/objectos-util/index")),
+              li(a0("v0003/objectos-util/array-utilities")),
+              li(a0("v0003/objectos-util/collections/index"),
                 ul(
-                  li(a1("next/objectos-util/collections/limitations")),
-                  li(a1("next/objectos-util/collections/builders")),
-                  li(a1("next/objectos-util/collections/of")),
-                  li(a1("next/objectos-util/collections/null-handling")),
-                  li(a1("next/objectos-util/collections/to-string")),
-                  li(a1("next/objectos-util/collections/join-method"))
+                  li(a1("v0003/objectos-util/collections/limitations")),
+                  li(a1("v0003/objectos-util/collections/builders")),
+                  li(a1("v0003/objectos-util/collections/of")),
+                  li(a1("v0003/objectos-util/collections/null-handling")),
+                  li(a1("v0003/objectos-util/collections/to-string")),
+                  li(a1("v0003/objectos-util/collections/join-method"))
                 )
               )
             )
@@ -738,9 +738,9 @@ final class ArticleTemplate extends DocsTemplate implements LanguageRenderer.Out
             h2v0("Release Notes"),
 
             ul(
-              li(a0("next/relnotes/0.3.0")),
-              li(a0("next/relnotes/0.2.0")),
-              li(a0("next/relnotes/0.1.0"))
+              li(a0("v0003/relnotes/0.3.0")),
+              li(a0("v0003/relnotes/0.2.0")),
+              li(a0("v0003/relnotes/0.1.0"))
             )
           )
         );
