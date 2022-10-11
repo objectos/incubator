@@ -13,25 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package br.com.objectos.code.util;
+package br.com.objectos.code.processing.type;
 
-import br.com.objectos.latest.Concrete;
-import javax.lang.model.type.IntersectionType;
+import java.util.List;
+import javax.annotation.processing.ProcessingEnvironment;
+import javax.lang.model.element.AnnotationMirror;
+import javax.lang.model.type.TypeMirror;
 
-@Concrete.Bridge
-abstract class SimpleTypeVisitorJava8<R, P> extends SimpleTypeVisitorJava7<R, P> {
+abstract class PTypeMirrorJava8 extends PTypeMirrorJavaAny {
 
-  @Concrete.Constructor
-  protected SimpleTypeVisitorJava8() {}
-
-  @Concrete.Constructor
-  protected SimpleTypeVisitorJava8(R defaultValue) {
-    super(defaultValue);
+  PTypeMirrorJava8(ProcessingEnvironment processingEnv) {
+    super(processingEnv);
   }
 
   @Override
-  public R visitIntersection(IntersectionType t, P p) {
-    return defaultAction(t, p);
+  protected final List<? extends AnnotationMirror> getAnnotationMirrors() {
+    TypeMirror type;
+    type = getType();
+
+    return type.getAnnotationMirrors();
   }
 
 }

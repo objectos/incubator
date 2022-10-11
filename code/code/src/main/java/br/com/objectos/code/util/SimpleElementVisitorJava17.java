@@ -15,22 +15,18 @@
  */
 package br.com.objectos.code.util;
 
-import br.com.objectos.latest.Concrete;
-import javax.lang.model.element.ModuleElement;
+import javax.lang.model.element.RecordComponentElement;
 
-@Concrete.Bridge
-abstract class SimpleElementVisitorJava11<R, P> extends SimpleElementVisitorJava6<R, P> {
+abstract class SimpleElementVisitorJava17<R, P> extends SimpleElementVisitorJava11<R, P> {
 
-  @Concrete.Constructor
-  protected SimpleElementVisitorJava11() {}
+  protected SimpleElementVisitorJava17() {}
 
-  @Concrete.Constructor
-  protected SimpleElementVisitorJava11(R defaultValue) {
+  protected SimpleElementVisitorJava17(R defaultValue) {
     super(defaultValue);
   }
 
   @Override
-  public R visitModule(ModuleElement e, P p) {
+  public R visitRecordComponent(RecordComponentElement e, P p) {
     return defaultAction(e, p);
   }
 

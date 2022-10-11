@@ -15,22 +15,18 @@
  */
 package br.com.objectos.code.util;
 
-import br.com.objectos.latest.Concrete;
-import javax.lang.model.type.UnionType;
+import javax.lang.model.type.IntersectionType;
 
-@Concrete.Bridge
-abstract class SimpleTypeVisitorJava7<R, P> extends SimpleTypeVisitorJava6<R, P> {
+abstract class SimpleTypeVisitorJava8<R, P> extends SimpleTypeVisitorJava7<R, P> {
 
-  @Concrete.Constructor
-  protected SimpleTypeVisitorJava7() {}
+  protected SimpleTypeVisitorJava8() {}
 
-  @Concrete.Constructor
-  protected SimpleTypeVisitorJava7(R defaultValue) {
+  protected SimpleTypeVisitorJava8(R defaultValue) {
     super(defaultValue);
   }
 
   @Override
-  public R visitUnion(UnionType t, P p) {
+  public R visitIntersection(IntersectionType t, P p) {
     return defaultAction(t, p);
   }
 

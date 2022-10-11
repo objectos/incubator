@@ -13,25 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package br.com.objectos.code.util;
+package br.com.objectos.code.java.declaration;
 
-import br.com.objectos.latest.Concrete;
-import javax.lang.model.element.RecordComponentElement;
+import java.util.Map;
+import javax.lang.model.element.Modifier;
 
-@Concrete.Bridge
-abstract class SimpleElementVisitorJava17<R, P> extends SimpleElementVisitorJava11<R, P> {
+class ModifiersJavaxMapperHolderJava8 extends Modifiers.JavaxMapperHolder {
 
-  @Concrete.Constructor
-  protected SimpleElementVisitorJava17() {}
+  static final Modifiers.JavaxMapperHolder INSTANCE = new ModifiersJavaxMapperHolderJava8();
 
-  @Concrete.Constructor
-  protected SimpleElementVisitorJava17(R defaultValue) {
-    super(defaultValue);
-  }
+  ModifiersJavaxMapperHolderJava8() {}
 
   @Override
-  public R visitRecordComponent(RecordComponentElement e, P p) {
-    return defaultAction(e, p);
+  void addMore(Map<Modifier, br.com.objectos.code.java.declaration.Modifier> map) {
+    map.put(javax.lang.model.element.Modifier.DEFAULT, Modifiers._default());
   }
 
 }

@@ -32,8 +32,6 @@ module br.com.objectos.code {
   requires transitive br.com.objectos.fs;
   requires transitive java.compiler;
 
-  requires static br.com.objectos.latest;
-
   requires br.com.objectos.code.annotations;
   requires objectos.lang;
 }

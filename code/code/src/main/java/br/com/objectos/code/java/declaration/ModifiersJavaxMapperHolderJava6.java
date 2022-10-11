@@ -15,22 +15,18 @@
  */
 package br.com.objectos.code.java.declaration;
 
-import br.com.objectos.latest.Singleton;
 import java.util.Map;
 import javax.lang.model.element.Modifier;
 
-class ModifiersJavaxMapperHolderJava17 extends ModifiersJavaxMapperHolderJava8 {
+final class ModifiersJavaxMapperHolderJava6 extends Modifiers.JavaxMapperHolder {
 
-  @Singleton.Field
-  static final Modifiers.JavaxMapperHolder INSTANCE = new ModifiersJavaxMapperHolderJava17();
+  static final Modifiers.JavaxMapperHolder INSTANCE = new ModifiersJavaxMapperHolderJava6();
 
-  ModifiersJavaxMapperHolderJava17() {}
+  private ModifiersJavaxMapperHolderJava6() {}
 
   @Override
   final void addMore(Map<Modifier, br.com.objectos.code.java.declaration.Modifier> map) {
-    super.addMore(map);
-    map.put(javax.lang.model.element.Modifier.NON_SEALED, Modifiers._nonSealed());
-    map.put(javax.lang.model.element.Modifier.SEALED, Modifiers._sealed());
+    // noop
   }
 
 }

@@ -34,18 +34,6 @@
 	<build>
 		<plugins>
 			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<annotationProcessorPaths>
-						<annotationProcessorPath>
-							<groupId>${project.groupId}</groupId>
-							<artifactId>latest</artifactId>
-							<version>${project.version}</version>
-						</annotationProcessorPath>
-					</annotationProcessorPaths>
-				</configuration>
-			</plugin>
-			<plugin>
 				<groupId>com.mycila</groupId>
 				<artifactId>license-maven-plugin</artifactId>
 				<executions>
@@ -98,15 +86,16 @@
 		<dependency>
 			<groupId>br.com.objectos</groupId>
 			<artifactId>fs</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>br.com.objectos</groupId>
+					<artifactId>latest</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>br.com.objectos</groupId>
 			<artifactId>fs-testing</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>br.com.objectos</groupId>
-			<artifactId>latest</artifactId>
 		</dependency>
 
 		<dependency>

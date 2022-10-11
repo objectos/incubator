@@ -15,12 +15,10 @@
  */
 package br.com.objectos.code.util;
 
-import br.com.objectos.latest.Concrete;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementVisitor;
 import javax.lang.model.element.UnknownElementException;
 
-@Concrete(modifiers = "public", simpleName = "SimpleElementVisitor")
 abstract class AbstractSimpleElementVisitor<R, P> implements ElementVisitor<R, P> {
 
   private final R defaultValue;

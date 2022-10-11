@@ -13,22 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package br.com.objectos.code.java.declaration;
+package br.com.objectos.code.processing.type;
 
-import br.com.objectos.latest.Singleton;
-import java.util.Map;
-import javax.lang.model.element.Modifier;
+import java.util.Collections;
+import java.util.List;
+import javax.annotation.processing.ProcessingEnvironment;
+import javax.lang.model.element.AnnotationMirror;
 
-class ModifiersJavaxMapperHolderJava8 extends Modifiers.JavaxMapperHolder {
+abstract class PTypeMirrorJava6 extends PTypeMirrorJavaAny {
 
-  @Singleton.Field
-  static final Modifiers.JavaxMapperHolder INSTANCE = new ModifiersJavaxMapperHolderJava8();
-
-  ModifiersJavaxMapperHolderJava8() {}
+  PTypeMirrorJava6(ProcessingEnvironment processingEnv) {
+    super(processingEnv);
+  }
 
   @Override
-  void addMore(Map<Modifier, br.com.objectos.code.java.declaration.Modifier> map) {
-    map.put(javax.lang.model.element.Modifier.DEFAULT, Modifiers._default());
+  protected final List<? extends AnnotationMirror> getAnnotationMirrors() {
+    return Collections.emptyList();
   }
 
 }

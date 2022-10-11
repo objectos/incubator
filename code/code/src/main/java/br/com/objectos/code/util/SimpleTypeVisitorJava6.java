@@ -15,7 +15,6 @@
  */
 package br.com.objectos.code.util;
 
-import br.com.objectos.latest.Concrete;
 import javax.lang.model.type.ArrayType;
 import javax.lang.model.type.DeclaredType;
 import javax.lang.model.type.ErrorType;
@@ -26,13 +25,10 @@ import javax.lang.model.type.PrimitiveType;
 import javax.lang.model.type.TypeVariable;
 import javax.lang.model.type.WildcardType;
 
-@Concrete.Bridge
 abstract class SimpleTypeVisitorJava6<R, P> extends AbstractSimpleTypeVisitor<R, P> {
 
-  @Concrete.Constructor
   protected SimpleTypeVisitorJava6() {}
 
-  @Concrete.Constructor
   protected SimpleTypeVisitorJava6(R defaultValue) {
     super(defaultValue);
   }

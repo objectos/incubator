@@ -13,28 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package br.com.objectos.code.processing.type;
+package br.com.objectos.code.util;
 
-import br.com.objectos.latest.Concrete;
-import java.util.List;
-import javax.annotation.processing.ProcessingEnvironment;
-import javax.lang.model.element.AnnotationMirror;
-import javax.lang.model.type.TypeMirror;
+import javax.lang.model.type.UnionType;
 
-@Concrete.Bridge
-abstract class PTypeMirrorJava8 extends PTypeMirrorJavaAny {
+abstract class SimpleTypeVisitorJava7<R, P> extends SimpleTypeVisitorJava6<R, P> {
 
-  @Concrete.Constructor
-  PTypeMirrorJava8(ProcessingEnvironment processingEnv) {
-    super(processingEnv);
+  protected SimpleTypeVisitorJava7() {}
+
+  protected SimpleTypeVisitorJava7(R defaultValue) {
+    super(defaultValue);
   }
 
   @Override
-  protected final List<? extends AnnotationMirror> getAnnotationMirrors() {
-    TypeMirror type;
-    type = getType();
-
-    return type.getAnnotationMirrors();
+  public R visitUnion(UnionType t, P p) {
+    return defaultAction(t, p);
   }
 
 }

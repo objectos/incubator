@@ -15,20 +15,16 @@
  */
 package br.com.objectos.code.util;
 
-import br.com.objectos.latest.Concrete;
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.PackageElement;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.TypeParameterElement;
 import javax.lang.model.element.VariableElement;
 
-@Concrete.Bridge
 abstract class SimpleElementVisitorJava6<R, P> extends AbstractSimpleElementVisitor<R, P> {
 
-  @Concrete.Constructor
   protected SimpleElementVisitorJava6() {}
 
-  @Concrete.Constructor
   protected SimpleElementVisitorJava6(R defaultValue) {
     super(defaultValue);
   }
