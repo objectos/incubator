@@ -36,7 +36,7 @@
 	<properties>
 		<java.version>1.8</java.version>
 
-		<objectos.be.version>0.3.0-SNAPSHOT</objectos.be.version>
+		<objectos.be.version>0.4.0-SNAPSHOT</objectos.be.version>
 		<objectos.metainf.version>0.21.0-SNAPSHOT</objectos.metainf.version>
 	</properties>
 
