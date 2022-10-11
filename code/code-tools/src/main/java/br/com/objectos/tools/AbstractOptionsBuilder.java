@@ -15,10 +15,8 @@
  */
 package br.com.objectos.tools;
 
-import br.com.objectos.latest.Concrete;
 import objectos.util.UnmodifiableList;
 
-@Concrete(modifiers = "final", simpleName = "OptionsBuilder")
 abstract class AbstractOptionsBuilder implements JavacOptionVisitor {
 
   AbstractOptionsBuilder() {}

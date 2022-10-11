@@ -15,28 +15,10 @@
  */
 package br.com.objectos.tools;
 
-import br.com.objectos.latest.Concrete;
-import objectos.util.UnmodifiableList;
+final class OptionsBuilder extends OptionsBuilderJava11 {
 
-@Concrete.Bridge
-abstract class OptionsBuilderJava6 extends AbstractOptionsBuilder {
-
-  @Concrete.Constructor
-  OptionsBuilderJava6() {}
-
-  @Override
-  public final UnmodifiableList<String> build() {
-    return UnmodifiableList.of();
-  }
-
-  @Override
-  public final void visitAddModule(String moduleName) {
-    // noop
-  }
-
-  @Override
-  public final void visitPatchModuleWithTestClasses(String moduleName) {
-    // noop
+  OptionsBuilder() {
+    super();
   }
 
 }

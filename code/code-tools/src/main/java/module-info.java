@@ -18,8 +18,6 @@ module br.com.objectos.tools {
 
   requires transitive java.compiler;
 
-  requires static br.com.objectos.latest;
-
   requires objectos.lang;
   requires objectos.util;
 }

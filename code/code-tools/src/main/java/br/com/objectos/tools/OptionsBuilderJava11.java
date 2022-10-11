@@ -15,7 +15,6 @@
  */
 package br.com.objectos.tools;
 
-import br.com.objectos.latest.Concrete;
 import java.lang.module.Configuration;
 import java.lang.module.ModuleReference;
 import java.lang.module.ResolvedModule;
@@ -23,23 +22,77 @@ import java.net.URI;
 import java.nio.file.Path;
 import java.util.Optional;
 import java.util.Set;
-import objectos.util.UnmodifiableList;
-import objectos.util.UnmodifiableMap;
 import objectos.util.GrowableList;
 import objectos.util.GrowableMap;
+import objectos.util.UnmodifiableList;
+import objectos.util.UnmodifiableMap;
 
-@Concrete.Bridge
 abstract class OptionsBuilderJava11 extends AbstractOptionsBuilder {
 
+  private static class Config {
+
+    final UnmodifiableList<String> addModules;
+
+    final UnmodifiableMap<String, Path> modulePaths;
+
+    Config(ConfigBuilder builder) {
+      this.addModules = builder.getAddModules();
+      this.modulePaths = builder.getModulePaths();
+    }
+
+    final void addTo(OptionsBuilderJava11 builder) {
+      GrowableList<String> thatAddModules;
+      thatAddModules = builder.addModules;
+
+      thatAddModules.addAll(addModules);
+
+      GrowableList<String> thatModulePaths;
+      thatModulePaths = builder.modulePaths;
+
+      for (Path path : modulePaths.values()) {
+        String pathName;
+        pathName = path.toString();
+
+        thatModulePaths.add(pathName);
+      }
+    }
+
+  }
+
+  private static class ConfigBuilder {
+
+    private final GrowableList<String> addModules = new GrowableList<>();
+
+    private final GrowableMap<String, Path> modulePaths = new GrowableMap<>();
+
+    public final Config build() {
+      return new Config(this);
+    }
+
+    final void addModule(String name, Path path) {
+      modulePaths.put(name, path);
+
+      addModules.add(name);
+    }
+
+    final UnmodifiableList<String> getAddModules() {
+      return addModules.toUnmodifiableList();
+    }
+
+    final UnmodifiableMap<String, Path> getModulePaths() {
+      return modulePaths.toUnmodifiableMap();
+    }
+
+  }
+
   private static Config config = getConfig();
-
   private static final String PATH_SEPARATOR = System.getProperty("path.separator");
-
   private final GrowableList<String> addModules = new GrowableList<>();
+
   private final GrowableList<String> modulePaths = new GrowableList<>();
+
   private final GrowableList<String> patchModules = new GrowableList<>();
 
-  @Concrete.Constructor
   OptionsBuilderJava11() {}
 
   private static Config getConfig() {
@@ -180,62 +233,6 @@ abstract class OptionsBuilderJava11 extends AbstractOptionsBuilder {
 
       result.add(patchModule);
     }
-  }
-
-  private static class Config {
-
-    final UnmodifiableList<String> addModules;
-
-    final UnmodifiableMap<String, Path> modulePaths;
-
-    Config(ConfigBuilder builder) {
-      this.addModules = builder.getAddModules();
-      this.modulePaths = builder.getModulePaths();
-    }
-
-    final void addTo(OptionsBuilderJava11 builder) {
-      GrowableList<String> thatAddModules;
-      thatAddModules = builder.addModules;
-
-      thatAddModules.addAll(addModules);
-
-      GrowableList<String> thatModulePaths;
-      thatModulePaths = builder.modulePaths;
-
-      for (Path path : modulePaths.values()) {
-        String pathName;
-        pathName = path.toString();
-
-        thatModulePaths.add(pathName);
-      }
-    }
-
-  }
-
-  private static class ConfigBuilder {
-
-    private final GrowableList<String> addModules = new GrowableList<>();
-
-    private final GrowableMap<String, Path> modulePaths = new GrowableMap<>();
-
-    public final Config build() {
-      return new Config(this);
-    }
-
-    final void addModule(String name, Path path) {
-      modulePaths.put(name, path);
-
-      addModules.add(name);
-    }
-
-    final UnmodifiableList<String> getAddModules() {
-      return addModules.toUnmodifiableList();
-    }
-
-    final UnmodifiableMap<String, Path> getModulePaths() {
-      return modulePaths.toUnmodifiableMap();
-    }
-
   }
 
 }

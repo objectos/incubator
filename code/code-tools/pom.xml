@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+w<?xml version="1.0"?>
 <!--
 
     Copyright (C) 2014-2022 Objectos Software LTDA.
@@ -35,34 +35,12 @@
 	Objectos Code Tools provides easier access to javax.tools classes and functionality.
 	</description>
 
-	<build>
-		<plugins>
-			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<annotationProcessorPaths>
-						<annotationProcessorPath>
-							<groupId>${project.groupId}</groupId>
-							<artifactId>latest</artifactId>
-							<version>${project.version}</version>
-						</annotationProcessorPath>
-					</annotationProcessorPaths>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
-
 	<dependencies>
 		<dependency>
 			<groupId>br.com.objectos</groupId>
 			<artifactId>objectos-util</artifactId>
 		</dependency>
 
-		<dependency>
-			<groupId>br.com.objectos</groupId>
-			<artifactId>latest</artifactId>
-		</dependency>
-		
 		<dependency>
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
