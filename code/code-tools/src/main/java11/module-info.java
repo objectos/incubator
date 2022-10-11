@@ -15,7 +15,6 @@
  */
 module br.com.objectos.tools {
   exports br.com.objectos.tools;
-  exports br.com.objectos.code.testing.annotation.processing;
 
   requires transitive java.compiler;
 
@@ -23,5 +22,4 @@ module br.com.objectos.tools {
 
   requires objectos.lang;
   requires objectos.util;
-  requires br.com.objectos.fs;
 }

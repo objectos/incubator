@@ -60,11 +60,6 @@
 
 		<dependency>
 			<groupId>br.com.objectos</groupId>
-			<artifactId>fs</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>br.com.objectos</groupId>
 			<artifactId>latest</artifactId>
 		</dependency>
 		

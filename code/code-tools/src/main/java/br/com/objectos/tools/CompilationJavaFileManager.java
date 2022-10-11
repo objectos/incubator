@@ -15,7 +15,6 @@
  */
 package br.com.objectos.tools;
 
-import br.com.objectos.core.io.Resource;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.LinkedHashMap;
@@ -37,26 +36,6 @@ class CompilationJavaFileManager extends ForwardingJavaFileManager<JavaFileManag
 
   CompilationJavaFileManager(JavaCompiler compiler) {
     super(compiler.getStandardFileManager(null, Locale.getDefault(), Charset.defaultCharset()));
-  }
-
-  @Override
-  public final FileObject getFileForInput(
-      Location location, String packageName, String relativeName) throws IOException {
-    if (StandardLocation.SOURCE_PATH.equals(location)) {
-      String resourceName;
-      resourceName = getResourceName(packageName, relativeName);
-
-      resourceName = "code-testing/" + resourceName;
-
-      Resource resource;
-      resource = Resource.getResource(resourceName);
-
-      return new ResourceFileObject(relativeName, resource);
-    }
-
-    else {
-      return super.getFileForInput(location, packageName, relativeName);
-    }
   }
 
   @Override
