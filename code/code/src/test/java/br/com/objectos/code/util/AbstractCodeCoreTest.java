@@ -20,6 +20,7 @@ import br.com.objectos.code.model.element.ProcessingType;
 import java.io.Closeable;
 import java.io.InputStream;
 import java.io.Serializable;
+import java.nio.file.Path;
 import java.util.Collections;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -43,7 +44,39 @@ import org.testng.ITestResult;
 
 public abstract class AbstractCodeCoreTest implements IHookable {
 
+  public interface Function<F, T> {
+
+    T apply(F from);
+
+  }
+
+  public interface Predicate<T> {
+
+    boolean test(T o);
+
+  }
+
+  @TypeAnnotation
+  protected static abstract class Basic {
+    abstract String name();
+    abstract int value();
+  }
+
+  protected static abstract class Generic<//
+      U /* U meaning Unbounded */, //
+      B extends InputStream /* B meaning Bounded */, //
+      I extends InputStream & Closeable /* I as Intersection */> {}
+
+  @SuppressWarnings("serial")
+  protected abstract class InstanceOf extends Basic implements Serializable {}
+
+  protected static class Outer {
+    public static class Inner {}
+  }
+
   protected static final PackageName TESTING_ON = PackageName.named("testing.on");
+
+  protected static final Path TMPDIR = Path.of(System.getProperty("java.io.tmpdir"));
 
   protected ProcessingEnvironment processingEnv;
 
@@ -73,9 +106,9 @@ public abstract class AbstractCodeCoreTest implements IHookable {
       }
     }
     javac(
-        processor(new TestNgProcessor()),
-        patchModuleWithTestClasses("br.com.objectos.code"),
-        compilationUnit("class Dummy {}")
+      processor(new TestNgProcessor()),
+      patchModuleWithTestClasses("br.com.objectos.code"),
+      compilationUnit("class Dummy {}")
     );
   }
 
@@ -168,36 +201,6 @@ public abstract class AbstractCodeCoreTest implements IHookable {
         return from.toString();
       }
     };
-  }
-
-  public interface Function<F, T> {
-
-    T apply(F from);
-
-  }
-
-  public interface Predicate<T> {
-
-    boolean test(T o);
-
-  }
-
-  @TypeAnnotation
-  protected static abstract class Basic {
-    abstract String name();
-    abstract int value();
-  }
-
-  protected static abstract class Generic<//
-      U /* U meaning Unbounded */, //
-      B extends InputStream /* B meaning Bounded */, //
-      I extends InputStream & Closeable /* I as Intersection */> {}
-
-  @SuppressWarnings("serial")
-  protected abstract class InstanceOf extends Basic implements Serializable {}
-
-  protected static class Outer {
-    public static class Inner {}
   }
 
 }

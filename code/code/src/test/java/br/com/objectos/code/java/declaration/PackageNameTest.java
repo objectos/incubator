@@ -16,6 +16,7 @@ import br.com.objectos.code.util.AbstractCodeJavaTest;
 import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.testing.TmpDir;
 import java.io.IOException;
+import java.nio.file.Path;
 import org.testng.annotations.Test;
 
 public class PackageNameTest extends AbstractCodeJavaTest {
@@ -116,18 +117,35 @@ public class PackageNameTest extends AbstractCodeJavaTest {
   }
 
   @Test
+  public void resolve() {
+    var src = TMPDIR;
+
+    var packageName = PackageName.unnamed();
+
+    var unnamed = packageName.resolve(src);
+
+    assertEquals(unnamed, src);
+
+    packageName = PackageName._package("a.b");
+
+    var result = packageName.resolve(src);
+
+    assertEquals(result, TMPDIR.resolve(Path.of("a", "b")));
+  }
+
+  @Test
   public void simpleName() {
     assertEquals(
-        PackageName.unnamed().getSimpleName(),
-        ""
+      PackageName.unnamed().getSimpleName(),
+      ""
     );
     assertEquals(
-        PackageName.named("simple").getSimpleName(),
-        "simple"
+      PackageName.named("simple").getSimpleName(),
+      "simple"
     );
     assertEquals(
-        PackageName.named("fully.qualified.name").getSimpleName(),
-        "name"
+      PackageName.named("fully.qualified.name").getSimpleName(),
+      "name"
     );
   }
 

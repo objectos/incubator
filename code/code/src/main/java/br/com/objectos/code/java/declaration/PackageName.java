@@ -42,6 +42,7 @@ import br.com.objectos.code.model.element.ProcessingPackage;
 import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.ResolvedPath;
 import java.io.IOException;
+import java.nio.file.Path;
 import javax.lang.model.SourceVersion;
 import objectos.lang.Check;
 
@@ -67,8 +68,8 @@ public class PackageName implements NamedClassOrPackage, JavaFileCodeElement {
   public static PackageName named(String packageName) {
     Check.notNull(packageName, "packageName == null");
     Check.argument(
-        SourceVersion.isName(packageName),
-        packageName, " is not a valid package name"
+      SourceVersion.isName(packageName),
+      packageName, " is not a valid package name"
     );
     return new PackageName(packageName);
   }
@@ -195,10 +196,38 @@ public class PackageName implements NamedClassOrPackage, JavaFileCodeElement {
     Check.notNull(child, "child == null");
     String newPackage = canonicalName + "." + child;
     Check.argument(
-        SourceVersion.isName(newPackage),
-        newPackage, " is not a valid package name"
+      SourceVersion.isName(newPackage),
+      newPackage, " is not a valid package name"
     );
     return new PackageName(newPackage);
+  }
+
+  public final Path resolve(Path path) {
+    var result = path;
+
+    var beginIndex = 0;
+
+    var endIndex = canonicalName.indexOf('.', beginIndex);
+
+    while (endIndex > 0) {
+      var part = canonicalName.substring(beginIndex, endIndex);
+
+      result = result.resolve(part);
+
+      beginIndex = endIndex + 1;
+
+      endIndex = canonicalName.indexOf('.', beginIndex);
+    }
+
+    endIndex = canonicalName.length();
+
+    if (beginIndex < endIndex) {
+      var part = canonicalName.substring(beginIndex, endIndex);
+
+      result = result.resolve(part);
+    }
+
+    return result;
   }
 
   @Override
@@ -214,8 +243,8 @@ public class PackageName implements NamedClassOrPackage, JavaFileCodeElement {
     partBuilder.setLength(0);
 
     Check.argument(
-        SourceVersion.isIdentifier(part),
-        part, " is not a valid Java identifier"
+      SourceVersion.isIdentifier(part),
+      part, " is not a valid Java identifier"
     );
 
     ResolvedPath resolved;
