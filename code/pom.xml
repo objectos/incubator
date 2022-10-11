@@ -40,7 +40,6 @@
 
 	<modules>
 		<module>code</module>
-		<module>code-annotations</module>
 		<module>code-boot</module>
 		<module>code-jdt</module>
 		<module>code-processor</module>
