@@ -46,7 +46,6 @@
 		<module>code-processor</module>
 		<module>code-testing</module>
 		<module>code-testng</module>
-		<module>code-tools</module>
 	</modules>
 
 	<dependencyManagement>

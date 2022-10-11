@@ -87,7 +87,7 @@
 		</dependency>
 		<dependency>
 			<groupId>br.com.objectos</groupId>
-			<artifactId>code-tools</artifactId>
+			<artifactId>objectos-code-tools</artifactId>
 		</dependency>
 		
 		<dependency>
