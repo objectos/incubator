@@ -32,8 +32,8 @@ import java.io.UncheckedIOException;
 public class CssBoot extends StepAdapter {
 
   public static final AnnotationCode GENERATED = annotation(
-      Generated.class,
-      l(CssBoot.class.getCanonicalName())
+    Generated.class,
+    l(CssBoot.class.getCanonicalName())
   );
 
   private final Directory srcDirectory;
@@ -53,7 +53,7 @@ public class CssBoot extends StepAdapter {
     srcDirectory = resolved.toDirectoryCreateIfNotFound();
 
     CssBoot boot = new CssBoot(
-        srcDirectory
+      srcDirectory
     );
 
     boot.execute();
@@ -62,7 +62,7 @@ public class CssBoot extends StepAdapter {
   @Override
   public final void writeJavaFile(JavaFile javaFile) {
     try {
-      javaFile.writeTo(srcDirectory);
+      javaFile.writeTo(srcDirectory.toPath());
     } catch (IOException e) {
       throw new UncheckedIOException(e);
     }

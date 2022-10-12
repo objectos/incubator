@@ -13,34 +13,10 @@ import static org.testng.Assert.fail;
 
 import br.com.objectos.code.java.type.NamedClass;
 import br.com.objectos.code.util.AbstractCodeJavaTest;
-import br.com.objectos.fs.Directory;
-import br.com.objectos.fs.testing.TmpDir;
-import java.io.IOException;
 import java.nio.file.Path;
 import org.testng.annotations.Test;
 
 public class PackageNameTest extends AbstractCodeJavaTest {
-
-  @Test
-  public void getOrCreateJavaPackageDirectory() throws IOException {
-    Directory src;
-    src = TmpDir.create();
-
-    PackageName packageName;
-    packageName = PackageName.unnamed();
-
-    Directory unnamed;
-    unnamed = packageName.createSourceDirectory(src);
-
-    assertEquals(unnamed, src);
-
-    packageName = PackageName._package("a.b");
-
-    Directory bPackage;
-    bPackage = packageName.createSourceDirectory(src);
-
-    assertEquals(bPackage, src.getDirectory("a").getDirectory("b"));
-  }
 
   @Test
   public void nestedClass() {

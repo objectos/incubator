@@ -16,12 +16,8 @@
 package br.com.objectos.code.java.type;
 
 import br.com.objectos.code.java.declaration.PackageName;
-import br.com.objectos.fs.Directory;
-import java.io.IOException;
 
 public interface NamedClassOrPackage {
-
-  Directory createSourceDirectory(Directory directory) throws IOException;
 
   PackageName getPackage();
 

@@ -39,9 +39,6 @@ import br.com.objectos.code.java.io.JavaFileCodeElement;
 import br.com.objectos.code.java.type.NamedClass;
 import br.com.objectos.code.java.type.NamedClassOrPackage;
 import br.com.objectos.code.model.element.ProcessingPackage;
-import br.com.objectos.fs.Directory;
-import br.com.objectos.fs.ResolvedPath;
-import java.io.IOException;
 import java.nio.file.Path;
 import javax.lang.model.SourceVersion;
 import objectos.lang.Check;
@@ -116,39 +113,6 @@ public class PackageName implements NamedClassOrPackage, JavaFileCodeElement {
   @Override
   public final void acceptJavaFileBuilder(JavaFile.Builder builder) {
     builder.setPackage(this);
-  }
-
-  @Override
-  public final Directory createSourceDirectory(Directory directory) throws IOException {
-    Check.notNull(directory, "directory == null");
-
-    int length;
-    length = canonicalName.length();
-
-    Directory result;
-    result = directory;
-
-    StringBuilder partBuilder;
-    partBuilder = new StringBuilder(length);
-
-    for (int i = 0; i < length; i++) {
-      char c;
-      c = canonicalName.charAt(i);
-
-      if (c != '.') {
-        partBuilder.append(c);
-
-        continue;
-      }
-
-      result = createJavaPackageDirectory0(result, partBuilder);
-    }
-
-    if (partBuilder.length() > 0) {
-      result = createJavaPackageDirectory0(result, partBuilder);
-    }
-
-    return result;
   }
 
   @Override
@@ -233,24 +197,6 @@ public class PackageName implements NamedClassOrPackage, JavaFileCodeElement {
   @Override
   public final String toString() {
     return canonicalName;
-  }
-
-  private Directory createJavaPackageDirectory0(
-      Directory result, StringBuilder partBuilder) throws IOException {
-    String part;
-    part = partBuilder.toString();
-
-    partBuilder.setLength(0);
-
-    Check.argument(
-      SourceVersion.isIdentifier(part),
-      part, " is not a valid Java identifier"
-    );
-
-    ResolvedPath resolved;
-    resolved = result.resolve(part);
-
-    return resolved.toDirectoryCreateIfNotFound();
   }
 
 }

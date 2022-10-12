@@ -34,9 +34,6 @@ import br.com.objectos.code.java.expression.MethodInvocation;
 import br.com.objectos.code.java.expression.MethodReference;
 import br.com.objectos.code.java.expression.TypeWitness;
 import br.com.objectos.code.java.io.JavaFileImportSet;
-import br.com.objectos.fs.Directory;
-import br.com.objectos.fs.RegularFile;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -251,20 +248,6 @@ public class NamedClass extends NamedClassOrParameterized
   @Override
   public final int compareTo(NamedClass o) {
     return canonicalName.compareTo(o.canonicalName);
-  }
-
-  @Override
-  public final Directory createSourceDirectory(Directory directory) {
-    throw new UnsupportedOperationException("Cannot create directory: nested class name");
-  }
-
-  public final RegularFile createSourceFile(Directory directory) throws IOException {
-    Check.notNull(directory, "directory == null");
-
-    Directory sourceDirectory;
-    sourceDirectory = enclosingElement.createSourceDirectory(directory);
-
-    return sourceDirectory.getOrCreateRegularFile(simpleName + ".java");
   }
 
   @Override

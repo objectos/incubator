@@ -19,12 +19,9 @@ import br.com.objectos.code.annotations.Ignore;
 import br.com.objectos.code.java.declaration.PackageName;
 import br.com.objectos.code.java.declaration.TypeCode;
 import br.com.objectos.code.java.type.NamedClass;
-import br.com.objectos.core.io.Charsets;
-import br.com.objectos.core.io.Write;
-import br.com.objectos.fs.Directory;
-import br.com.objectos.fs.RegularFile;
 import java.io.IOException;
 import java.io.Writer;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import javax.annotation.processing.Filer;
 import javax.tools.JavaFileObject;
@@ -126,16 +123,6 @@ public final class JavaFile {
     return writer.toJavaFile();
   }
 
-  public final void writeTo(Directory directory) throws IOException {
-    NamedClass className = className();
-
-    RegularFile file = className.createSourceFile(directory);
-
-    file.truncate();
-
-    Write.string(file, Charsets.utf8(), toString());
-  }
-
   public final void writeTo(Filer filer) throws IOException {
     NamedClass className = className();
     JavaFileObject object = filer.createSourceFile(className.toString());
@@ -145,6 +132,16 @@ public final class JavaFile {
     } finally {
       writer.close();
     }
+  }
+
+  public final void writeTo(Path basedir) throws IOException {
+    var path = resolvePath(basedir);
+
+    var parent = path.getParent();
+
+    Files.createDirectories(parent);
+
+    Files.writeString(path, toString());
   }
 
 }

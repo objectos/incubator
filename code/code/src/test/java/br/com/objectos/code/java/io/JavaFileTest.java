@@ -184,9 +184,9 @@ public class JavaFileTest extends AbstractCodeJavaTest {
     PackageName b = PackageName.named("code.a.b");
     PackageName c = PackageName.named("code.a.b.c");
 
-    javaFile(a, clazzCode).writeTo(tempDir);
-    javaFile(b, clazzCode).writeTo(tempDir);
-    javaFile(c, clazzCode).writeTo(tempDir);
+    javaFile(a, clazzCode).writeTo(tempDir.toPath());
+    javaFile(b, clazzCode).writeTo(tempDir.toPath());
+    javaFile(c, clazzCode).writeTo(tempDir.toPath());
 
     ResolvedPath codeA;
     codeA = tempDir.resolve("code", "a");
@@ -218,7 +218,7 @@ public class JavaFileTest extends AbstractCodeJavaTest {
       "class WriteToDirectory {}"
     );
 
-    javaFile(c, _class(_public(), id("WriteToDirectory"))).writeTo(tempDir);
+    javaFile(c, _class(_public(), id("WriteToDirectory"))).writeTo(tempDir.toPath());
 
     testToString(
       Read.string(cDir.getRegularFile("WriteToDirectory.java"), Charsets.utf8()),

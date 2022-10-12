@@ -31,10 +31,33 @@ import java.util.function.Consumer;
 
 public class HtmlBoot {
 
+  private class JavaFileWriter implements Consumer<JavaFile> {
+
+    private final Directory srcDir;
+
+    JavaFileWriter(Directory srcDir) {
+      this.srcDir = srcDir;
+    }
+
+    @Override
+    public final void accept(JavaFile file) {
+      generateJavaFile(file);
+    }
+
+    private void generateJavaFile(JavaFile file) {
+      try {
+        file.writeTo(srcDir.toPath());
+      } catch (IOException e) {
+        throw new UncheckedIOException(e);
+      }
+    }
+
+  }
+
   @SuppressWarnings("exports")
   public static final AnnotationCode GENERATED = annotation(
-      br.com.objectos.code.annotations.Generated.class,
-      l(HtmlBoot.class.getCanonicalName())
+    br.com.objectos.code.annotations.Generated.class,
+    l(HtmlBoot.class.getCanonicalName())
   );
 
   private final Spec spec;
@@ -75,29 +98,6 @@ public class HtmlBoot {
         throw new IllegalArgumentException("Unknown module: " + moduleName);
     }
     dsl.execute(step);
-  }
-
-  private class JavaFileWriter implements Consumer<JavaFile> {
-
-    private final Directory srcDir;
-
-    JavaFileWriter(Directory srcDir) {
-      this.srcDir = srcDir;
-    }
-
-    @Override
-    public final void accept(JavaFile file) {
-      generateJavaFile(file);
-    }
-
-    private void generateJavaFile(JavaFile file) {
-      try {
-        file.writeTo(srcDir);
-      } catch (IOException e) {
-        throw new UncheckedIOException(e);
-      }
-    }
-
   }
 
 }

@@ -45,21 +45,6 @@ import org.apache.maven.plugins.annotations.Parameter;
 )
 public class ToJavaMojo extends AbstractMojo {
 
-  @Parameter(defaultValue = "${project.build.sourceDirectory}", required = true, readonly = true)
-  private File sourceDirectory;
-
-  private final ToJavaFile toJavaFile = ToJavaFile.generatedBy(getClass());
-
-  @Override
-  public final void execute() throws MojoExecutionException, MojoFailureException {
-    try {
-      Path sourceDirectoryPath = sourceDirectory.toPath();
-      Files.walkFileTree(sourceDirectoryPath, new ThisFileVisitor(sourceDirectoryPath));
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-  }
-
   private class ThisCssFile extends ToJavaFile.CssFile {
 
     private final Path file;
@@ -119,9 +104,24 @@ public class ToJavaMojo extends AbstractMojo {
       Directory directory;
       directory = LocalFs.getDirectory(sourceDirectory);
 
-      javaFile.writeTo(directory);
+      javaFile.writeTo(directory.toPath());
     }
 
+  }
+
+  @Parameter(defaultValue = "${project.build.sourceDirectory}", required = true, readonly = true)
+  private File sourceDirectory;
+
+  private final ToJavaFile toJavaFile = ToJavaFile.generatedBy(getClass());
+
+  @Override
+  public final void execute() throws MojoExecutionException, MojoFailureException {
+    try {
+      Path sourceDirectoryPath = sourceDirectory.toPath();
+      Files.walkFileTree(sourceDirectoryPath, new ThisFileVisitor(sourceDirectoryPath));
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 
 }

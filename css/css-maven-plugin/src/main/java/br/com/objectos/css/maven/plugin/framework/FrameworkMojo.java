@@ -48,9 +48,28 @@ import org.codehaus.plexus.classworlds.realm.ClassRealm;
 )
 public class FrameworkMojo extends AbstractMojo {
 
+  private class ThisAdapter implements ConfigurationAdapter {
+
+    private final Directory dir;
+
+    ThisAdapter(Directory dir) {
+      this.dir = dir;
+    }
+
+    @Override
+    public final void writeJavaFile(JavaFile file) {
+      try {
+        file.writeTo(dir.toPath());
+      } catch (IOException e) {
+        throw new UncheckedIOException(e);
+      }
+    }
+
+  }
+
   public static final AnnotationCode GENERATED = annotation(
-      Generated.class,
-      l(FrameworkMojo.class.getCanonicalName())
+    Generated.class,
+    l(FrameworkMojo.class.getCanonicalName())
   );
 
   @Parameter(required = true, readonly = true)
@@ -128,25 +147,6 @@ public class FrameworkMojo extends AbstractMojo {
     instance = constructor.newInstance();
 
     return (Configuration) instance;
-  }
-
-  private class ThisAdapter implements ConfigurationAdapter {
-
-    private final Directory dir;
-
-    ThisAdapter(Directory dir) {
-      this.dir = dir;
-    }
-
-    @Override
-    public final void writeJavaFile(JavaFile file) {
-      try {
-        file.writeTo(dir);
-      } catch (IOException e) {
-        throw new UncheckedIOException(e);
-      }
-    }
-
   }
 
 }
