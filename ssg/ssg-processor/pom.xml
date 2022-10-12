@@ -80,7 +80,7 @@
 
 		<dependency>
 			<groupId>br.com.objectos</groupId>
-			<artifactId>code</artifactId>
+			<artifactId>objectos-code</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>br.com.objectos</groupId>

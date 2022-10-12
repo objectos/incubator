@@ -163,7 +163,7 @@
 
 		<dependency>
 			<groupId>br.com.objectos</groupId>
-			<artifactId>code</artifactId>
+			<artifactId>objectos-code</artifactId>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
