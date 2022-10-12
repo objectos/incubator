@@ -18,9 +18,14 @@ import br.com.objectos.code.model.element.ProcessingMethod;
 import br.com.objectos.code.model.element.ProcessingPackage;
 import br.com.objectos.code.model.element.ProcessingType;
 import java.io.Closeable;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
+import java.nio.file.FileVisitResult;
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.SimpleFileVisitor;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.util.Collections;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -110,6 +115,34 @@ public abstract class AbstractCodeCoreTest implements IHookable {
       patchModuleWithTestClasses("br.com.objectos.code"),
       compilationUnit("class Dummy {}")
     );
+  }
+
+  protected final void deleteRecursively(Path directory) throws IOException {
+    if (directory == null) {
+      return;
+    }
+
+    Files.walkFileTree(directory, new SimpleFileVisitor<Path>() {
+      @Override
+      public final FileVisitResult postVisitDirectory(
+          Path dir, IOException e) throws IOException {
+        if (e == null) {
+          Files.delete(dir);
+
+          return FileVisitResult.CONTINUE;
+        } else {
+          throw e;
+        }
+      }
+
+      @Override
+      public final FileVisitResult visitFile(
+          Path file, BasicFileAttributes attrs) throws IOException {
+        Files.delete(file);
+
+        return FileVisitResult.CONTINUE;
+      }
+    });
   }
 
   protected final ProcessingMethod getDeclaredMethod(Class<?> type, String methodName) {

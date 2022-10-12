@@ -17,7 +17,6 @@ import br.com.objectos.code.processing.type.ModelTypeMarker;
 import br.com.objectos.code.util.AbstractCodeCoreTest;
 import br.com.objectos.code.util.Marker1;
 import br.com.objectos.code.util.PackageAnnotation;
-import br.com.objectos.core.io.Charsets;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import javax.lang.model.element.PackageElement;
@@ -57,7 +56,7 @@ public class ProcessingPackageTest extends AbstractCodeModelTest {
       in.transferTo(baos);
     }
 
-    var s = new String(baos.toByteArray(), Charsets.utf8());
+    var s = new String(baos.toByteArray());
 
     assertEquals(s, "got it!");
   }

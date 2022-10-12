@@ -11,15 +11,10 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
 import br.com.objectos.code.util.AbstractCodeCoreTest;
-import br.com.objectos.core.io.Charsets;
-import br.com.objectos.core.io.Read;
-import br.com.objectos.core.io.ReaderSource;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
 import java.net.URL;
-import java.nio.charset.Charset;
 import org.testng.annotations.Test;
 
 public class GetResourceTest {
@@ -35,15 +30,7 @@ public class GetResourceTest {
     ) {
       assertNotNull(in);
 
-      ReaderSource source;
-      source = new ReaderSource() {
-        @Override
-        public Reader openReader(Charset charset) throws IOException {
-          return new InputStreamReader(in, charset);
-        }
-      };
-
-      String txt = Read.string(source, Charsets.utf8());
+      String txt = readString(in);
 
       assertEquals(txt, "got it!");
     }
@@ -53,15 +40,7 @@ public class GetResourceTest {
     ) {
       assertNotNull(in);
 
-      ReaderSource source;
-      source = new ReaderSource() {
-        @Override
-        public Reader openReader(Charset charset) throws IOException {
-          return new InputStreamReader(in, charset);
-        }
-      };
-
-      String txt = Read.string(source, Charsets.utf8());
+      String txt = readString(in);
 
       assertEquals(txt, "got it!");
     }
@@ -71,6 +50,14 @@ public class GetResourceTest {
     URL url = loader.getResource("code-testing/get-resource.txt");
 
     assertNotNull(url);
+  }
+
+  private String readString(InputStream in) throws IOException {
+    var out = new ByteArrayOutputStream();
+
+    in.transferTo(out);
+
+    return new String(out.toByteArray());
   }
 
 }

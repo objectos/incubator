@@ -134,7 +134,7 @@ public final class JavaFile {
     }
   }
 
-  public final void writeTo(Path basedir) throws IOException {
+  public final Path writeTo(Path basedir) throws IOException {
     var path = resolvePath(basedir);
 
     var parent = path.getParent();
@@ -142,6 +142,8 @@ public final class JavaFile {
     Files.createDirectories(parent);
 
     Files.writeString(path, toString());
+
+    return path;
   }
 
 }

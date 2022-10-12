@@ -26,15 +26,11 @@ import br.com.objectos.code.java.declaration.ClassCode;
 import br.com.objectos.code.java.declaration.PackageName;
 import br.com.objectos.code.java.declaration.PackageNameFake;
 import br.com.objectos.code.util.AbstractCodeJavaTest;
-import br.com.objectos.core.io.Charsets;
-import br.com.objectos.core.io.Read;
-import br.com.objectos.fs.Directory;
-import br.com.objectos.fs.ResolvedPath;
-import br.com.objectos.fs.testing.TmpDir;
 import br.com.objectos.tools.Compilation;
 import java.io.Closeable;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Collections;
 import java.util.Set;
@@ -42,7 +38,6 @@ import javax.annotation.processing.AbstractProcessor;
 import javax.annotation.processing.RoundEnvironment;
 import javax.lang.model.element.TypeElement;
 import javax.tools.Diagnostic.Kind;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class JavaFileTest extends AbstractCodeJavaTest {
@@ -72,8 +67,6 @@ public class JavaFileTest extends AbstractCodeJavaTest {
       }
     }
   }
-
-  private Directory tempDir;
 
   @Test
   public void className() {
@@ -151,11 +144,6 @@ public class JavaFileTest extends AbstractCodeJavaTest {
     assertEquals(rc, TMPDIR.resolve(Path.of("code", "a", "b", "c", "WriteToDirectory.java")));
   }
 
-  @BeforeMethod
-  public void setUpTempDir() throws IOException {
-    tempDir = TmpDir.create();
-  }
-
   @Test(description = ""
       + "it should return the simpleName of the file, ie, "
       + "the filename without the .java extension")
@@ -184,48 +172,45 @@ public class JavaFileTest extends AbstractCodeJavaTest {
     PackageName b = PackageName.named("code.a.b");
     PackageName c = PackageName.named("code.a.b.c");
 
-    javaFile(a, clazzCode).writeTo(tempDir.toPath());
-    javaFile(b, clazzCode).writeTo(tempDir.toPath());
-    javaFile(c, clazzCode).writeTo(tempDir.toPath());
+    var tmp = Files.createTempDirectory(TMPDIR, "java-file-test-");
 
-    ResolvedPath codeA;
-    codeA = tempDir.resolve("code", "a");
+    try {
+      var ra = javaFile(a, clazzCode).writeTo(tmp);
+      var rb = javaFile(b, clazzCode).writeTo(tmp);
+      var rc = javaFile(c, clazzCode).writeTo(tmp);
 
-    codeA.createParents();
+      testToString(
+        Files.readString(ra),
+        "package code.a;",
+        "",
+        "class WriteToDirectory {}"
+      );
 
-    Directory aDir = codeA.toDirectory();
+      testToString(
+        Files.readString(rb),
+        "package code.a.b;",
+        "",
+        "class WriteToDirectory {}"
+      );
 
-    testToString(
-      Read.string(aDir.getRegularFile("WriteToDirectory.java"), Charsets.utf8()),
-      "package code.a;",
-      "",
-      "class WriteToDirectory {}"
-    );
+      testToString(
+        Files.readString(rc),
+        "package code.a.b.c;",
+        "",
+        "class WriteToDirectory {}"
+      );
 
-    Directory bDir = aDir.getDirectory("b");
-    testToString(
-      Read.string(bDir.getRegularFile("WriteToDirectory.java"), Charsets.utf8()),
-      "package code.a.b;",
-      "",
-      "class WriteToDirectory {}"
-    );
+      var rd = javaFile(c, _class(_public(), id("WriteToDirectory"))).writeTo(tmp);
 
-    Directory cDir = bDir.getDirectory("c");
-    testToString(
-      Read.string(cDir.getRegularFile("WriteToDirectory.java"), Charsets.utf8()),
-      "package code.a.b.c;",
-      "",
-      "class WriteToDirectory {}"
-    );
-
-    javaFile(c, _class(_public(), id("WriteToDirectory"))).writeTo(tempDir.toPath());
-
-    testToString(
-      Read.string(cDir.getRegularFile("WriteToDirectory.java"), Charsets.utf8()),
-      "package code.a.b.c;",
-      "",
-      "public class WriteToDirectory {}"
-    );
+      testToString(
+        Files.readString(rd),
+        "package code.a.b.c;",
+        "",
+        "public class WriteToDirectory {}"
+      );
+    } finally {
+      deleteRecursively(tmp);
+    }
   }
 
   @Test(description = ""
