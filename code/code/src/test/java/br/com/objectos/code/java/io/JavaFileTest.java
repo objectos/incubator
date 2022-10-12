@@ -35,6 +35,7 @@ import br.com.objectos.tools.Compilation;
 import java.io.Closeable;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Path;
 import java.util.Collections;
 import java.util.Set;
 import javax.annotation.processing.AbstractProcessor;
@@ -45,163 +46,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class JavaFileTest extends AbstractCodeJavaTest {
-
-  private Directory tempDir;
-
-  @Test
-  public void className() {
-    assertEquals(
-        javaFile(TESTING_CODE, _class(id("A"))).className(),
-        TESTING_CODE.nestedClass("A")
-    );
-    assertEquals(
-        javaFile(TESTING_OTHER, _enum(id("B"))).className(),
-        TESTING_OTHER.nestedClass("B")
-    );
-    assertEquals(
-        javaFile(TESTING_OTHER, _interface(id("C"))).className(),
-        TESTING_OTHER.nestedClass("C")
-    );
-  }
-
-  @Test(
-      description = ""
-          + "verify that the type parameters of class "
-          + "correctly generate import declarations"
-  )
-  public void classWithTypeParametersThatGenerateImport() {
-    testToString(
-        _class(
-            id("Subject"),
-            typeParam("I", t(InputStream.class), t(Closeable.class))
-        ).toJavaFile(TESTING_CODE),
-        "package testing.code;",
-        "",
-        "import java.io.Closeable;",
-        "import java.io.InputStream;",
-        "",
-        "class Subject<I extends InputStream & Closeable> {}"
-    );
-  }
-
-  @Test(description = ""
-      + "javaFile shorthand should honor _class() shorthand")
-  public void javaFileWithClass() {
-    testToString(
-        javaFile(
-            TESTING_CODE,
-            _class(id("Subject"))
-        ),
-        "package testing.code;",
-        "",
-        "class Subject {}"
-    );
-    testToString(
-        javaFile(
-            TESTING_CODE,
-            _class(id("Subject"), _extends(TESTING_CODE.nestedClass("Super")))
-        ),
-        "package testing.code;",
-        "",
-        "class Subject extends Super {}"
-    );
-  }
-
-  @BeforeMethod
-  public void setUpTempDir() throws IOException {
-    tempDir = TmpDir.create();
-  }
-
-  @Test(description = ""
-      + "it should return the simpleName of the file, ie, "
-      + "the filename without the .java extension")
-  public void simpleName() {
-    assertEquals(javaFile(TESTING_CODE, _class(id("A"))).simpleName(), "A");
-    assertEquals(javaFile(TESTING_OTHER, _enum(id("B"))).simpleName(), "B");
-    assertEquals(javaFile(TESTING_OTHER, _interface(id("C"))).simpleName(), "C");
-  }
-
-  @Test(description = ""
-      + "JavaFile built with an unnamed package should not render the package statement.")
-  public void unnamedPackage() {
-    testToString(
-        JavaFile.builder().addType(ClassCode.builder().build()).build(),
-        "class Unnamed {}"
-    );
-  }
-
-  @Test(description = ""
-      + "it should create the directory (package) structure if needed."
-      + "it should write itself to a new file (or overwrite it if it exists).")
-  public void writeToDirectory() throws IOException {
-    ClassCode clazzCode = _class(id("WriteToDirectory"));
-
-    PackageName a = PackageName.named("code.a");
-    PackageName b = PackageName.named("code.a.b");
-    PackageName c = PackageName.named("code.a.b.c");
-
-    javaFile(a, clazzCode).writeTo(tempDir);
-    javaFile(b, clazzCode).writeTo(tempDir);
-    javaFile(c, clazzCode).writeTo(tempDir);
-
-    ResolvedPath codeA;
-    codeA = tempDir.resolve("code", "a");
-
-    codeA.createParents();
-
-    Directory aDir = codeA.toDirectory();
-
-    testToString(
-        Read.string(aDir.getRegularFile("WriteToDirectory.java"), Charsets.utf8()),
-        "package code.a;",
-        "",
-        "class WriteToDirectory {}"
-    );
-
-    Directory bDir = aDir.getDirectory("b");
-    testToString(
-        Read.string(bDir.getRegularFile("WriteToDirectory.java"), Charsets.utf8()),
-        "package code.a.b;",
-        "",
-        "class WriteToDirectory {}"
-    );
-
-    Directory cDir = bDir.getDirectory("c");
-    testToString(
-        Read.string(cDir.getRegularFile("WriteToDirectory.java"), Charsets.utf8()),
-        "package code.a.b.c;",
-        "",
-        "class WriteToDirectory {}"
-    );
-
-    javaFile(c, _class(_public(), id("WriteToDirectory"))).writeTo(tempDir);
-
-    testToString(
-        Read.string(cDir.getRegularFile("WriteToDirectory.java"), Charsets.utf8()),
-        "package code.a.b.c;",
-        "",
-        "public class WriteToDirectory {}"
-    );
-  }
-
-  @Test(description = ""
-      + "it should write its contents to a javax.ann.proc.Filer")
-  public void writeToFiler() {
-    Compilation compilation = javac(
-        processor(new WriteToProcessor()),
-        compilationUnit(
-            "package testing.code;",
-            "class Dummy {}"
-        )
-    );
-    assertTrue(compilation.wasSuccessful());
-    testToString(
-        compilation.getJavaFile("testing.code.Subject"),
-        "package testing.code;",
-        "",
-        "class Subject {}"
-    );
-  }
 
   private class WriteToProcessor extends AbstractProcessor {
     @Override
@@ -227,6 +71,180 @@ public class JavaFileTest extends AbstractCodeJavaTest {
         processingEnv.getMessager().printMessage(Kind.ERROR, e.getMessage());
       }
     }
+  }
+
+  private Directory tempDir;
+
+  @Test
+  public void className() {
+    assertEquals(
+      javaFile(TESTING_CODE, _class(id("A"))).className(),
+      TESTING_CODE.nestedClass("A")
+    );
+    assertEquals(
+      javaFile(TESTING_OTHER, _enum(id("B"))).className(),
+      TESTING_OTHER.nestedClass("B")
+    );
+    assertEquals(
+      javaFile(TESTING_OTHER, _interface(id("C"))).className(),
+      TESTING_OTHER.nestedClass("C")
+    );
+  }
+
+  @Test(
+      description = ""
+          + "verify that the type parameters of class "
+          + "correctly generate import declarations"
+  )
+  public void classWithTypeParametersThatGenerateImport() {
+    testToString(
+      _class(
+        id("Subject"),
+        typeParam("I", t(InputStream.class), t(Closeable.class))
+      ).toJavaFile(TESTING_CODE),
+      "package testing.code;",
+      "",
+      "import java.io.Closeable;",
+      "import java.io.InputStream;",
+      "",
+      "class Subject<I extends InputStream & Closeable> {}"
+    );
+  }
+
+  @Test(description = ""
+      + "javaFile shorthand should honor _class() shorthand")
+  public void javaFileWithClass() {
+    testToString(
+      javaFile(
+        TESTING_CODE,
+        _class(id("Subject"))
+      ),
+      "package testing.code;",
+      "",
+      "class Subject {}"
+    );
+    testToString(
+      javaFile(
+        TESTING_CODE,
+        _class(id("Subject"), _extends(TESTING_CODE.nestedClass("Super")))
+      ),
+      "package testing.code;",
+      "",
+      "class Subject extends Super {}"
+    );
+  }
+
+  @Test
+  public void resolvePath() {
+    ClassCode clazzCode = _class(id("WriteToDirectory"));
+
+    PackageName a = PackageName.named("code.a");
+    PackageName b = PackageName.named("code.a.b");
+    PackageName c = PackageName.named("code.a.b.c");
+
+    var ra = javaFile(a, clazzCode).resolvePath(TMPDIR);
+    var rb = javaFile(b, clazzCode).resolvePath(TMPDIR);
+    var rc = javaFile(c, clazzCode).resolvePath(TMPDIR);
+
+    assertEquals(ra, TMPDIR.resolve(Path.of("code", "a", "WriteToDirectory.java")));
+    assertEquals(rb, TMPDIR.resolve(Path.of("code", "a", "b", "WriteToDirectory.java")));
+    assertEquals(rc, TMPDIR.resolve(Path.of("code", "a", "b", "c", "WriteToDirectory.java")));
+  }
+
+  @BeforeMethod
+  public void setUpTempDir() throws IOException {
+    tempDir = TmpDir.create();
+  }
+
+  @Test(description = ""
+      + "it should return the simpleName of the file, ie, "
+      + "the filename without the .java extension")
+  public void simpleName() {
+    assertEquals(javaFile(TESTING_CODE, _class(id("A"))).simpleName(), "A");
+    assertEquals(javaFile(TESTING_OTHER, _enum(id("B"))).simpleName(), "B");
+    assertEquals(javaFile(TESTING_OTHER, _interface(id("C"))).simpleName(), "C");
+  }
+
+  @Test(description = ""
+      + "JavaFile built with an unnamed package should not render the package statement.")
+  public void unnamedPackage() {
+    testToString(
+      JavaFile.builder().addType(ClassCode.builder().build()).build(),
+      "class Unnamed {}"
+    );
+  }
+
+  @Test(description = ""
+      + "it should create the directory (package) structure if needed."
+      + "it should write itself to a new file (or overwrite it if it exists).")
+  public void writeToDirectory() throws IOException {
+    ClassCode clazzCode = _class(id("WriteToDirectory"));
+
+    PackageName a = PackageName.named("code.a");
+    PackageName b = PackageName.named("code.a.b");
+    PackageName c = PackageName.named("code.a.b.c");
+
+    javaFile(a, clazzCode).writeTo(tempDir);
+    javaFile(b, clazzCode).writeTo(tempDir);
+    javaFile(c, clazzCode).writeTo(tempDir);
+
+    ResolvedPath codeA;
+    codeA = tempDir.resolve("code", "a");
+
+    codeA.createParents();
+
+    Directory aDir = codeA.toDirectory();
+
+    testToString(
+      Read.string(aDir.getRegularFile("WriteToDirectory.java"), Charsets.utf8()),
+      "package code.a;",
+      "",
+      "class WriteToDirectory {}"
+    );
+
+    Directory bDir = aDir.getDirectory("b");
+    testToString(
+      Read.string(bDir.getRegularFile("WriteToDirectory.java"), Charsets.utf8()),
+      "package code.a.b;",
+      "",
+      "class WriteToDirectory {}"
+    );
+
+    Directory cDir = bDir.getDirectory("c");
+    testToString(
+      Read.string(cDir.getRegularFile("WriteToDirectory.java"), Charsets.utf8()),
+      "package code.a.b.c;",
+      "",
+      "class WriteToDirectory {}"
+    );
+
+    javaFile(c, _class(_public(), id("WriteToDirectory"))).writeTo(tempDir);
+
+    testToString(
+      Read.string(cDir.getRegularFile("WriteToDirectory.java"), Charsets.utf8()),
+      "package code.a.b.c;",
+      "",
+      "public class WriteToDirectory {}"
+    );
+  }
+
+  @Test(description = ""
+      + "it should write its contents to a javax.ann.proc.Filer")
+  public void writeToFiler() {
+    Compilation compilation = javac(
+      processor(new WriteToProcessor()),
+      compilationUnit(
+        "package testing.code;",
+        "class Dummy {}"
+      )
+    );
+    assertTrue(compilation.wasSuccessful());
+    testToString(
+      compilation.getJavaFile("testing.code.Subject"),
+      "package testing.code;",
+      "",
+      "class Subject {}"
+    );
   }
 
 }

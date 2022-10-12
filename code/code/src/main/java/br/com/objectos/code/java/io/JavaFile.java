@@ -25,6 +25,7 @@ import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.RegularFile;
 import java.io.IOException;
 import java.io.Writer;
+import java.nio.file.Path;
 import javax.annotation.processing.Filer;
 import javax.tools.JavaFileObject;
 import objectos.lang.Check;
@@ -95,6 +96,16 @@ public final class JavaFile {
 
   public final NamedClass className() {
     return typeCode.className(packageName);
+  }
+
+  public final Path resolvePath(Path basedir) {
+    var packageDir = packageName.resolve(basedir);
+
+    var simpleName = typeCode.simpleName();
+
+    var fileName = simpleName + ".java";
+
+    return packageDir.resolve(fileName);
   }
 
   /**
