@@ -29,7 +29,6 @@ module br.com.objectos.code {
   exports br.com.objectos.code.util;
 
   requires transitive objectos.util;
-  requires transitive br.com.objectos.fs;
   requires transitive java.compiler;
 
   requires br.com.objectos.code.annotations;

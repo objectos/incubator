@@ -22,8 +22,6 @@ import br.com.objectos.code.annotations.Generated;
 import br.com.objectos.code.java.declaration.AnnotationCode;
 import br.com.objectos.code.java.io.JavaFile;
 import br.com.objectos.css.config.framework.Configuration;
-import br.com.objectos.fs.Directory;
-import br.com.objectos.fs.LocalFs;
 import java.io.File;
 import java.io.IOException;
 import java.io.UncheckedIOException;
@@ -31,6 +29,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.file.Path;
 import java.util.Set;
 import org.apache.maven.artifact.Artifact;
 import org.apache.maven.plugin.AbstractMojo;
@@ -50,16 +49,16 @@ public class FrameworkMojo extends AbstractMojo {
 
   private class ThisAdapter implements ConfigurationAdapter {
 
-    private final Directory dir;
+    private final Path dir;
 
-    ThisAdapter(Directory dir) {
+    ThisAdapter(Path dir) {
       this.dir = dir;
     }
 
     @Override
     public final void writeJavaFile(JavaFile file) {
       try {
-        file.writeTo(dir.toPath());
+        file.writeTo(dir);
       } catch (IOException e) {
         throw new UncheckedIOException(e);
       }
@@ -105,8 +104,8 @@ public class FrameworkMojo extends AbstractMojo {
       Configuration configuration = newConfiguration();
       configuration.acceptConfigurationDsl(dsl);
 
-      Directory dir;
-      dir = LocalFs.getDirectory(sourceDirectory);
+      Path dir;
+      dir = sourceDirectory.toPath();
 
       ConfigurationAdapter adapter = new ThisAdapter(dir);
       dsl.execute(adapter);
@@ -118,8 +117,6 @@ public class FrameworkMojo extends AbstractMojo {
     } catch (ClassNotFoundException e) {
       e.printStackTrace();
     } catch (MalformedURLException e) {
-      e.printStackTrace();
-    } catch (IOException e) {
       e.printStackTrace();
     } catch (InvocationTargetException e) {
       e.printStackTrace();

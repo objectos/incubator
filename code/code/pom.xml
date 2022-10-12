@@ -77,22 +77,11 @@
 			<groupId>br.com.objectos</groupId>
 			<artifactId>objectos-code-tools</artifactId>
 		</dependency>
-		
 		<dependency>
 			<groupId>br.com.objectos</groupId>
 			<artifactId>objectos-util</artifactId>
 		</dependency>
 
-		<dependency>
-			<groupId>br.com.objectos</groupId>
-			<artifactId>fs</artifactId>
-			<exclusions>
-				<exclusion>
-					<groupId>br.com.objectos</groupId>
-					<artifactId>latest</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
 		<dependency>
 			<groupId>br.com.objectos</groupId>
 			<artifactId>fs-testing</artifactId>

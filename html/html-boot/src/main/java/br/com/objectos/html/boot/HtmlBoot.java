@@ -20,22 +20,21 @@ import static br.com.objectos.code.java.Java.l;
 
 import br.com.objectos.code.java.declaration.AnnotationCode;
 import br.com.objectos.code.java.io.JavaFile;
-import br.com.objectos.fs.Directory;
-import br.com.objectos.fs.LocalFs;
 import br.com.objectos.html.boot.spec.Spec;
 import br.com.objectos.html.boot.spec.SpecDsl;
 import br.com.objectos.html.boot.spec.Step;
 import java.io.IOException;
 import java.io.UncheckedIOException;
+import java.nio.file.Path;
 import java.util.function.Consumer;
 
 public class HtmlBoot {
 
   private class JavaFileWriter implements Consumer<JavaFile> {
 
-    private final Directory srcDir;
+    private final Path srcDir;
 
-    JavaFileWriter(Directory srcDir) {
+    JavaFileWriter(Path srcDir) {
       this.srcDir = srcDir;
     }
 
@@ -46,7 +45,7 @@ public class HtmlBoot {
 
     private void generateJavaFile(JavaFile file) {
       try {
-        file.writeTo(srcDir.toPath());
+        file.writeTo(srcDir);
       } catch (IOException e) {
         throw new UncheckedIOException(e);
       }
@@ -80,8 +79,7 @@ public class HtmlBoot {
     SpecDsl dsl = new SpecDsl();
     spec.acceptSpecDsl(dsl);
 
-    Directory directory;
-    directory = LocalFs.getDirectory(srcDir);
+    var directory = Path.of(srcDir);
 
     JavaFileWriter writer;
     writer = new JavaFileWriter(directory);

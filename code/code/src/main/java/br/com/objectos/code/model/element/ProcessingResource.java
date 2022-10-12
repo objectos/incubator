@@ -15,14 +15,17 @@
  */
 package br.com.objectos.code.model.element;
 
-import br.com.objectos.core.io.InputStreamSource;
-import br.com.objectos.core.io.ReaderSource;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.Reader;
+import java.nio.charset.Charset;
 
-public interface ProcessingResource
-    extends
-    InputStreamSource,
-    ReaderSource {
+public interface ProcessingResource {
 
   String getName();
+
+  InputStream openInputStream() throws IOException;
+
+  Reader openReader(Charset charset) throws IOException;
 
 }

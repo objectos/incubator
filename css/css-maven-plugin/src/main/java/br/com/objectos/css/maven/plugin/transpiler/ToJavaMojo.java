@@ -19,8 +19,6 @@ import br.com.objectos.code.java.declaration.PackageName;
 import br.com.objectos.code.java.io.JavaFile;
 import br.com.objectos.code.java.type.NamedClass;
 import br.com.objectos.css.processor.ToJavaFile;
-import br.com.objectos.fs.Directory;
-import br.com.objectos.fs.LocalFs;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -101,10 +99,7 @@ public class ToJavaMojo extends AbstractMojo {
       JavaFile javaFile;
       javaFile = toJavaFile.generate(cssFile);
 
-      Directory directory;
-      directory = LocalFs.getDirectory(sourceDirectory);
-
-      javaFile.writeTo(directory.toPath());
+      javaFile.writeTo(sourceDirectoryPath);
     }
 
   }
