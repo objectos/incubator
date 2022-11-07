@@ -15,9 +15,9 @@
  */
 package br.com.objectos.css.specgen.mdn;
 
-import br.com.objectos.css.specgen.spec.Property;
-import br.com.objectos.css.specgen.spec.Spec;
-import br.com.objectos.css.specgen.spec.Spec.Builder;
+import br.com.objectos.css.specgen.Property;
+import br.com.objectos.css.specgen.Spec;
+import br.com.objectos.css.specgen.Spec.Builder;
 import java.io.IOException;
 import java.util.Optional;
 

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package br.com.objectos.css.specgen.spec;
+package br.com.objectos.css.specgen;
 
 import static br.com.objectos.code.java.Java.l;
 
@@ -24,8 +24,8 @@ import objectos.lang.ToString;
 
 public class ValueType implements ToString.Formattable {
 
-  private final String formal;
-  private final String name;
+  public final String formal;
+  public final String name;
 
   public ValueType(String name, String formal) {
     this.name = Check.notNull(name, "name == null");
@@ -62,6 +62,10 @@ public class ValueType implements ToString.Formattable {
   @Override
   public final int hashCode() {
     return Objects.hash(name, formal);
+  }
+
+  public final String join() {
+    return name + " = " + formal;
   }
 
   @Override

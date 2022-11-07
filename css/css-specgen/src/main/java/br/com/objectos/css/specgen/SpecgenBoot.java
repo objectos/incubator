@@ -15,83 +15,39 @@
  */
 package br.com.objectos.css.specgen;
 
-import static br.com.objectos.code.java.Java.annotation;
-import static br.com.objectos.code.java.Java.l;
-
-import br.com.objectos.code.annotations.Generated;
-import br.com.objectos.code.java.declaration.AnnotationCode;
-import br.com.objectos.code.java.io.JavaFile;
 import br.com.objectos.css.specgen.mdn.Mdn;
-import br.com.objectos.css.specgen.spec.Spec;
-import br.com.objectos.css.specgen.spec.StepAdapter;
-import br.com.objectos.fs.Directory;
-import br.com.objectos.fs.LocalFs;
-import br.com.objectos.fs.ResolvedPath;
 import java.io.IOException;
-import java.io.UncheckedIOException;
-import java.nio.file.Files;
+import java.nio.file.Path;
+import objectos.code.JavaSink;
+import objectos.code.JavaTemplate;
 
-public class SpecgenBoot extends StepAdapter {
+public final class SpecgenBoot extends Specgen {
 
-  static final AnnotationCode GENERATED = annotation(
-    Generated.class,
-    l(SpecgenBoot.class.getCanonicalName())
-  );
+  private final JavaSink javaSink;
 
-  private final Directory srcDirectory;
-
-  private SpecgenBoot(Directory srcDirectory) {
-    this.srcDirectory = srcDirectory;
-  }
+  public SpecgenBoot(JavaSink javaSink) { this.javaSink = javaSink; }
 
   public static void main(String[] args) throws IOException {
-    String srcDirectoryPath;
-    srcDirectoryPath = args[0];
+    var srcDirectoryPath = args[0];
 
-    ResolvedPath resolved;
-    resolved = LocalFs.resolve(srcDirectoryPath);
+    var srcDirectory = Path.of(srcDirectoryPath);
 
-    Directory srcDirectory;
-    srcDirectory = resolved.toDirectoryCreateIfNotFound();
+    var javaSink = JavaSink.ofDirectory(srcDirectory, JavaSink.skipExisting());
 
-    SpecgenBoot boot = new SpecgenBoot(
-      srcDirectory
-    );
+    var boot = new SpecgenBoot(javaSink);
 
     boot.execute();
   }
 
   @Override
-  public final void writeJavaFile(JavaFile javaFile) {
-    try {
-      if (shouldWrite(javaFile)) {
-        javaFile.writeTo(srcDirectory.toPath());
-      }
-    } catch (IOException e) {
-      throw new UncheckedIOException(e);
-    }
+  final void templateSink(JavaTemplate template) throws IOException {
+    javaSink.write(template);
   }
 
   private void execute() throws IOException {
-    Spec spec = Mdn.load();
+    var spec = Mdn.load();
 
-    Specgen specgen = new Specgen(spec);
-
-    specgen.execute(new PropertyModuleStep(this));
-  }
-
-  private boolean shouldWrite(JavaFile javaFile) throws IOException {
-    var basedir = srcDirectory.toPath();
-
-    var filePath = javaFile.resolvePath(basedir);
-
-    if (!Files.exists(filePath)) {
-      return true;
-    }
-
-    var s = Files.readString(filePath);
-
-    return !s.contains("@DoNotOverwrite");
+    generate(spec);
   }
 
 }

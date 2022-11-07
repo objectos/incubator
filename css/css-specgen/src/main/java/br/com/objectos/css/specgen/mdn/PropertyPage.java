@@ -15,9 +15,9 @@
  */
 package br.com.objectos.css.specgen.mdn;
 
-import br.com.objectos.css.specgen.spec.Property;
-import br.com.objectos.css.specgen.spec.ValueType;
 import objectos.util.UnmodifiableList;
+import br.com.objectos.css.specgen.Property;
+import br.com.objectos.css.specgen.ValueType;
 import objectos.util.GrowableList;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;

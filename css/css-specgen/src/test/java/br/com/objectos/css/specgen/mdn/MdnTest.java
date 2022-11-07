@@ -17,8 +17,8 @@ package br.com.objectos.css.specgen.mdn;
 
 import static org.testng.Assert.assertEquals;
 
-import br.com.objectos.css.specgen.spec.Property;
-import br.com.objectos.css.specgen.spec.Spec;
+import br.com.objectos.css.specgen.Property;
+import br.com.objectos.css.specgen.Spec;
 import java.io.IOException;
 import objectos.util.UnmodifiableList;
 import org.testng.annotations.Test;

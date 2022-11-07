@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package br.com.objectos.css.specgen.spec;
+package br.com.objectos.css.specgen;
 
 import objectos.lang.Check;
 import objectos.util.GrowableMap;

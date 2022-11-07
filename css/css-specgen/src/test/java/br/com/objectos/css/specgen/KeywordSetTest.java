@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package br.com.objectos.css.specgen.spec;
+package br.com.objectos.css.specgen;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
@@ -25,53 +25,53 @@ public class KeywordSetTest {
   @Test
   public void bottom() {
     test(
-        "<length> | <percentage> | auto",
-        "auto"
+      "<length> | <percentage> | auto",
+      "auto"
     );
   }
-  
+
   @Test
   public void flex() {
     test(
-        "none | [ <'flex-grow'> <'flex-shrink'>? || <'flex-basis'> ]",
-        "none"
+      "none | [ <'flex-grow'> <'flex-shrink'>? || <'flex-basis'> ]",
+      "none"
     );
   }
-  
+
   @Test
   public void height() {
     test(
-        "auto | <length> | <percentage> | min-content | max-content | fit-content(<length-percentage>)",
-        "auto",
-        "min-content",
-        "max-content"
+      "auto | <length> | <percentage> | min-content | max-content | fit-content(<length-percentage>)",
+      "auto",
+      "min-content",
+      "max-content"
     );
   }
-  
+
   @Test
   public void lineStyle() {
     test(
-        "none | hidden | dotted | dashed | solid | double | groove | ridge | inset | outset",
-        "none",
-        "hidden",
-        "dotted",
-        "dashed",
-        "solid",
-        "double",
-        "groove",
-        "ridge",
-        "inset",
-        "outset"
+      "none | hidden | dotted | dashed | solid | double | groove | ridge | inset | outset",
+      "none",
+      "hidden",
+      "dotted",
+      "dashed",
+      "solid",
+      "double",
+      "groove",
+      "ridge",
+      "inset",
+      "outset"
     );
   }
-  
+
   @Test
   public void rgb() {
     test(
-        "rgb( <percentage>{3} [ / <alpha-value> ]? ) | rgb( <number>{3} [ / <alpha-value> ]? ) | rgb( <percentage>#{3} , <alpha-value>? ) | rgb( <number>#{3} , <alpha-value>? )"
+      "rgb( <percentage>{3} [ / <alpha-value> ]? ) | rgb( <number>{3} [ / <alpha-value> ]? ) | rgb( <percentage>#{3} , <alpha-value>? ) | rgb( <number>#{3} , <alpha-value>? )"
     );
   }
-  
+
   private void test(String formal, String... expected) {
     KeywordSet.Builder b = KeywordSet.builder();
     b.parse("x", formal);
