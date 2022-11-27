@@ -31,7 +31,6 @@ class PropertyModuleTemplate extends JavaTemplate {
 
   private static final ClassName AbstractPropertyModule
       = ClassName.of(BOOT, "AbstractPropertyModule");
-  private static final ClassName Generated = ClassName.of(Generated.class);
   private static final ClassName Source = ClassName.of(BOOT_SPEC, "Source");
 
   private final String globalSig = "globalSig";
@@ -47,11 +46,11 @@ class PropertyModuleTemplate extends JavaTemplate {
     autoImports();
 
     _class(
-      annotation(Generated, s(SpecgenBoot.class.getCanonicalName())),
+      annotation(t(Generated.class), s(SpecgenBoot.class.getCanonicalName())),
       _final(), id(simpleName()), _extends(AbstractPropertyModule),
 
       method(
-        annotation(Override.class),
+        annotation(t(Override.class)),
         _final(), _void(), id("propertyDefinition"),
 
         include(this::def0keywords),
