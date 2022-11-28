@@ -40,7 +40,7 @@ public class AttributeSpecTest extends AbstractHtmlBootTest {
     assertEquals(res.name(), "class");
     assertEquals(res.kindSet(), UnmodifiableSet.of(AttributeKind.STRING));
     assertEquals(res.interfaceSet(), UnmodifiableSet.of(AttributeNames.GlobalAttributeName));
-    assertEquals(res.methodNameStream(), UnmodifiableList.of("_class"));
+    assertEquals(res.methodNames(), UnmodifiableList.of("_class"));
   }
 
   @Test
@@ -55,7 +55,7 @@ public class AttributeSpecTest extends AbstractHtmlBootTest {
     assertEquals(res.name(), "hidden");
     assertEquals(res.kindSet(), UnmodifiableSet.of(AttributeKind.BOOLEAN));
     assertEquals(res.interfaceSet(), UnmodifiableSet.of(AttributeNames.GlobalAttributeName));
-    assertEquals(res.methodNameStream(), UnmodifiableList.of("hidden"));
+    assertEquals(res.methodNames(), UnmodifiableList.of("hidden"));
   }
 
   @Test
@@ -95,7 +95,7 @@ public class AttributeSpecTest extends AbstractHtmlBootTest {
     assertEquals(res.name(), "id");
     assertEquals(res.kindSet(), UnmodifiableSet.of(AttributeKind.STRING));
     assertEquals(res.interfaceSet(), UnmodifiableSet.of(AttributeNames.GlobalAttributeName));
-    assertEquals(res.methodNameStream(), UnmodifiableList.of("id"));
+    assertEquals(res.methodNames(), UnmodifiableList.of("id"));
   }
 
 }

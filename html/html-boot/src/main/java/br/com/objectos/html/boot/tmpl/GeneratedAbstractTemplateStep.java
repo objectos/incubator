@@ -66,7 +66,7 @@ public class GeneratedAbstractTemplateStep extends AbstractJavaFileStep {
 
   @Override
   public final void attributeSpec(AttributeSpec attributeSpec) {
-    Iterable<String> names = attributeSpec.methodNameStream();
+    Iterable<String> names = attributeSpec.methodNames();
 
     for (String name : names) {
       if (templateSpec.shouldIncludeAttribute(name)) {

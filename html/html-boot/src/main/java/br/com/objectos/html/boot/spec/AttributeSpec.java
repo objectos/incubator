@@ -30,11 +30,29 @@ import objectos.util.UnmodifiableSet;
 
 public abstract class AttributeSpec {
 
+  private static class GlobalAttributeSpec extends AttributeSpec {
+
+    GlobalAttributeSpec(String name) {
+      super(name);
+      interfaceSet.add(AttributeNames.GlobalAttributeName);
+    }
+
+    @Override
+    final ElementAttributeSpec toElementAttributeSpec(ElementSpec parent) {
+      throw new IllegalArgumentException(name() + " attribute was already defined as global!");
+    }
+
+  }
+
   final Set<NamedClass> interfaceSet = new TreeSet<>();
+
+  public final String classSimpleName;
+
+  public final String constantName;
 
   private final NamedClass className;
 
-  private final Identifier constantName;
+  private final Identifier constantNameId;
 
   private final Set<AttributeKind> kindSet = new TreeSet<>();
 
@@ -44,8 +62,14 @@ public abstract class AttributeSpec {
 
   AttributeSpec(String name) {
     this.name = name;
+
+    classSimpleName = JavaNames.toValidClassName(name);
+
     this.className = StandardAttributeName.nestedClass(JavaNames.toValidClassName(name));
-    constantName = id(JavaNames.toIdentifier(name.toUpperCase()));
+
+    constantName = JavaNames.toIdentifier(name.toUpperCase());
+
+    constantNameId = id(constantName);
   }
 
   static AttributeSpec global(String name) {
@@ -67,7 +91,7 @@ public abstract class AttributeSpec {
   }
 
   public final Identifier constantName() {
-    return constantName;
+    return constantNameId;
   }
 
   public final Set<NamedClass> interfaceSet() {
@@ -92,7 +116,7 @@ public abstract class AttributeSpec {
     return kindSet;
   }
 
-  public final Iterable<String> methodNameStream() {
+  public final Iterable<String> methodNames() {
     return nameSet.isEmpty()
         ? UnmodifiableSet.of(methodName(name))
         : nameSet;
@@ -110,20 +134,6 @@ public abstract class AttributeSpec {
 
   private String methodName(String value) {
     return JavaNames.toValidMethodName(value);
-  }
-
-  private static class GlobalAttributeSpec extends AttributeSpec {
-
-    GlobalAttributeSpec(String name) {
-      super(name);
-      interfaceSet.add(AttributeNames.GlobalAttributeName);
-    }
-
-    @Override
-    final ElementAttributeSpec toElementAttributeSpec(ElementSpec parent) {
-      throw new IllegalArgumentException(name() + " attribute was already defined as global!");
-    }
-
   }
 
 }

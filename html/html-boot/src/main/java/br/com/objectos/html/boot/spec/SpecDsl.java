@@ -32,6 +32,10 @@ public class SpecDsl {
     text = new TextSpec(this);
   }
 
+  public final Iterable<AttributeSpec> attributes() {
+    return attributeMap.values();
+  }
+
   public final AttributeSpec attributeSpec(String name) {
     return attributeMap.get(name);
   }
@@ -47,6 +51,10 @@ public class SpecDsl {
   public final ElementAttributeSpec elementAttribute(ElementSpec parent, String name) {
     AttributeSpec attr = attributeMap.computeIfAbsent(name, this::elementAttribute0);
     return attr.toElementAttributeSpec(parent);
+  }
+
+  public final Iterable<ElementSpec> elements() {
+    return elementMap.values();
   }
 
   public final void execute(Step step) {
