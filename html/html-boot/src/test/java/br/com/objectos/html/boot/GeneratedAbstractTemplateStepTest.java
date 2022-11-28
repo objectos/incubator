@@ -22,12 +22,13 @@ import org.testng.annotations.Test;
 
 public class GeneratedAbstractTemplateStepTest {
 
-  @Test(description = ""
-      + "it should generate methods for each element."
-      + "for each element, it should generate attribute overloads.")
-  public void execute() {
-    var template = new GeneratedAbstractTemplateStep();
+  private final GeneratedAbstractTemplateStep template = new GeneratedAbstractTemplateStep();
 
+  @Test(description = """
+      it should generate methods for each element.
+      for each element, it should generate attribute overloads.
+      """)
+  public void execute() {
     template.spec = new AbstractSpec() {
       @Override
       protected final void definition() {
@@ -73,6 +74,60 @@ public class GeneratedAbstractTemplateStepTest {
 
         public final ElementName meta(MetaValue... values) {
           return addStandardElement(StandardElementName.META, values);
+        }
+
+        abstract <N extends StandardAttributeName> N addStandardAttribute(N name);
+
+        abstract <N extends StandardAttributeName> N addStandardAttribute(N name, String value);
+
+        abstract ElementName addStandardElement(StandardElementName name, String text);
+
+        abstract ElementName addStandardElement(StandardElementName name, Value[] values);
+      }
+      """
+    );
+  }
+
+  @Test(description = "it should generate methods for each attribute.")
+  public void executeAttributes() {
+    template.spec = new AbstractSpec() {
+      @Override
+      protected final void definition() {
+        template()
+            .maxLevel(1)
+            .maxArity(1)
+            .skipAttribute("title");
+
+        rootElement()
+            .attribute("s")
+            .attribute("b").booleanType()
+            .attribute("t").as("title")
+            .attributeEnd();
+      }
+    }.toSpecDsl();
+
+    assertEquals(
+      template.toString(),
+
+      """
+      package br.com.objectos.html.tmpl;
+
+      import br.com.objectos.code.annotations.Generated;
+      import br.com.objectos.html.attribute.StandardAttributeName;
+      import br.com.objectos.html.attribute.StandardAttributeName.B;
+      import br.com.objectos.html.attribute.StandardAttributeName.S;
+      import br.com.objectos.html.element.ElementName;
+      import br.com.objectos.html.element.StandardElementName;
+      import br.com.objectos.html.spi.type.Value;
+
+      @Generated("br.com.objectos.html.boot.HtmlBoot")
+      abstract class GeneratedAbstractTemplate {
+        public final B b() {
+          return addStandardAttribute(StandardAttributeName.B);
+        }
+
+        public final S s(String value) {
+          return addStandardAttribute(StandardAttributeName.S, value);
         }
 
         abstract <N extends StandardAttributeName> N addStandardAttribute(N name);
