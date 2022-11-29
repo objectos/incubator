@@ -217,7 +217,6 @@ import br.com.objectos.html.spi.type.UlValue;
 
 @Generated("br.com.objectos.html.boot.HtmlBoot")
 abstract class GeneratedAbstractTemplate {
-
   public final ElementName a(AValue... values) {
     return addStandardElement(StandardElementName.A, values);
   }
@@ -1321,5 +1320,4 @@ abstract class GeneratedAbstractTemplate {
   abstract ElementName addStandardElement(StandardElementName name, String text);
 
   abstract ElementName addStandardElement(StandardElementName name, br.com.objectos.html.spi.type.Value[] values);
-
 }

@@ -42,7 +42,10 @@ public class HtmlBoot {
   private void execute(String moduleName, String srcDir) throws IOException {
     var directory = Path.of(srcDir);
 
-    var sink = JavaSink.ofDirectory(directory);
+    var sink = JavaSink.ofDirectory(
+      directory,
+      JavaSink.overwriteExisting()
+    );
 
     switch (moduleName) {
       case "html" -> {
