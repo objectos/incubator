@@ -20,8 +20,6 @@ import static br.com.objectos.code.java.Java.id;
 import br.com.objectos.code.java.JavaNames;
 import br.com.objectos.code.java.expression.Identifier;
 import br.com.objectos.code.java.expression.IdentifierBuilder;
-import br.com.objectos.code.java.type.NamedClass;
-import br.com.objectos.html.boot.spi.type.SpiType;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -101,10 +99,6 @@ public class ElementSpec
   @Override
   public final ElementSpec classNameType() {
     throw new UnsupportedOperationException("Global attribute only");
-  }
-
-  public final NamedClass classNameValue() {
-    return SpiType.className(simpleName() + "Value");
   }
 
   @Override

@@ -64,21 +64,6 @@ public class SpecDsl {
     return elementMap.values();
   }
 
-  public final void execute(Step step) {
-    step.templateSpec(template);
-    step.textSpec(text);
-
-    for (ElementSpec elementSpec : elementMap.values()) {
-      step.elementSpec(elementSpec);
-    }
-
-    for (AttributeSpec attributeSpec : attributeMap.values()) {
-      step.attributeSpec(attributeSpec);
-    }
-
-    step.execute();
-  }
-
   public final AttributeSpec globalAttribute(String name) {
     if (attributeMap.containsKey(name)) {
       throw new IllegalArgumentException(name + " global attribute already defined!");

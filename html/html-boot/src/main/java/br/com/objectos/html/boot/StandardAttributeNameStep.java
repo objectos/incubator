@@ -15,7 +15,6 @@
  */
 package br.com.objectos.html.boot;
 
-import br.com.objectos.code.java.type.NamedClass;
 import br.com.objectos.html.boot.spec.AttributeSpec;
 import objectos.code.ClassName;
 import objectos.code.JavaModel.ClassDeclarationElement;
@@ -176,7 +175,6 @@ final class StandardAttributeNameStep extends ThisTemplate {
       return _implements(
         attribute.interfaceSet()
             .stream()
-            .map(NamedClass::getSimpleName)
             .map(sn -> ClassName.of(spi_type, sn))
             .toArray(ClassName[]::new)
       );

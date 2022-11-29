@@ -17,10 +17,22 @@ package br.com.objectos.html.boot;
 
 import br.com.objectos.code.annotations.Generated;
 import br.com.objectos.html.boot.spec.ElementSpec;
+import br.com.objectos.html.boot.spec.SpecDsl;
+import java.io.IOException;
+import objectos.code.JavaSink;
 
 final class ElementValueIfaceStep extends ThisTemplate {
 
   ElementSpec element;
+
+  @Override
+  public void write(JavaSink sink, SpecDsl spec) throws IOException {
+    for (var element : spec.elements()) {
+      this.element = element;
+
+      sink.write(this);
+    }
+  }
 
   @Override
   protected final void definition() {

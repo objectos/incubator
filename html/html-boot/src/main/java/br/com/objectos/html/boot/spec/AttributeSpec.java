@@ -15,13 +15,7 @@
  */
 package br.com.objectos.html.boot.spec;
 
-import static br.com.objectos.code.java.Java.id;
-import static br.com.objectos.html.boot.attribute.AttributeNames.StandardAttributeName;
-
 import br.com.objectos.code.java.JavaNames;
-import br.com.objectos.code.java.expression.Identifier;
-import br.com.objectos.code.java.type.NamedClass;
-import br.com.objectos.html.boot.attribute.AttributeNames;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -34,7 +28,6 @@ public abstract class AttributeSpec {
 
     GlobalAttributeSpec(String name) {
       super(name);
-      interfaceSet.add(AttributeNames.GlobalAttributeName);
     }
 
     @Override
@@ -47,15 +40,11 @@ public abstract class AttributeSpec {
 
   }
 
-  final Set<NamedClass> interfaceSet = new TreeSet<>();
+  final Set<String> interfaceSet = new TreeSet<>();
 
   public final String classSimpleName;
 
   public final String constantName;
-
-  private final NamedClass className;
-
-  private final Identifier constantNameId;
 
   private final Set<AttributeKind> kindSet = new TreeSet<>();
 
@@ -68,11 +57,7 @@ public abstract class AttributeSpec {
 
     classSimpleName = JavaNames.toValidClassName(name);
 
-    this.className = StandardAttributeName.nestedClass(JavaNames.toValidClassName(name));
-
     constantName = JavaNames.toIdentifier(name.toUpperCase());
-
-    constantNameId = id(constantName);
   }
 
   static AttributeSpec global(String name) {
@@ -89,19 +74,11 @@ public abstract class AttributeSpec {
     }
   }
 
-  public final NamedClass className() {
-    return className;
-  }
-
   public final String constantName() { return constantName; }
-
-  public final Identifier constantNameId() {
-    return constantNameId;
-  }
 
   public boolean global() { return false; }
 
-  public final Set<NamedClass> interfaceSet() {
+  public final Set<String> interfaceSet() {
     return interfaceSet;
   }
 

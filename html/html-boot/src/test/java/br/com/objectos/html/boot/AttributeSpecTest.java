@@ -17,11 +17,9 @@ package br.com.objectos.html.boot;
 
 import static org.testng.Assert.assertEquals;
 
-import br.com.objectos.html.boot.attribute.AttributeNames;
 import br.com.objectos.html.boot.spec.AttributeKind;
 import br.com.objectos.html.boot.spec.AttributeSpec;
 import br.com.objectos.html.boot.spec.SpecDsl;
-import br.com.objectos.html.boot.spi.type.SpiType;
 import objectos.util.UnmodifiableList;
 import objectos.util.UnmodifiableSet;
 import org.testng.annotations.Test;
@@ -39,7 +37,7 @@ public class AttributeSpecTest extends AbstractHtmlBootTest {
 
     assertEquals(res.name(), "class");
     assertEquals(res.kindSet(), UnmodifiableSet.of(AttributeKind.STRING));
-    assertEquals(res.interfaceSet(), UnmodifiableSet.of(AttributeNames.GlobalAttributeName));
+    assertEquals(res.interfaceSet(), UnmodifiableSet.of());
     assertEquals(res.methodNames(), UnmodifiableList.of("_class"));
   }
 
@@ -54,7 +52,7 @@ public class AttributeSpecTest extends AbstractHtmlBootTest {
 
     assertEquals(res.name(), "hidden");
     assertEquals(res.kindSet(), UnmodifiableSet.of(AttributeKind.BOOLEAN));
-    assertEquals(res.interfaceSet(), UnmodifiableSet.of(AttributeNames.GlobalAttributeName));
+    assertEquals(res.interfaceSet(), UnmodifiableSet.of());
     assertEquals(res.methodNames(), UnmodifiableList.of("hidden"));
   }
 
@@ -76,10 +74,7 @@ public class AttributeSpecTest extends AbstractHtmlBootTest {
     assertEquals(res.kindSet(), UnmodifiableSet.of(AttributeKind.STRING));
     assertEquals(
       res.interfaceSet(),
-      UnmodifiableSet.of(
-        SpiType.className("AValue"),
-        SpiType.className("LinkValue")
-      )
+      UnmodifiableSet.of("AValue", "LinkValue")
     );
   }
 
@@ -94,7 +89,7 @@ public class AttributeSpecTest extends AbstractHtmlBootTest {
 
     assertEquals(res.name(), "id");
     assertEquals(res.kindSet(), UnmodifiableSet.of(AttributeKind.STRING));
-    assertEquals(res.interfaceSet(), UnmodifiableSet.of(AttributeNames.GlobalAttributeName));
+    assertEquals(res.interfaceSet(), UnmodifiableSet.of());
     assertEquals(res.methodNames(), UnmodifiableList.of("id"));
   }
 
