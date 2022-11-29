@@ -38,6 +38,9 @@ public abstract class AttributeSpec {
     }
 
     @Override
+    public boolean global() { return true; }
+
+    @Override
     final ElementAttributeSpec toElementAttributeSpec(ElementSpec parent) {
       throw new IllegalArgumentException(name() + " attribute was already defined as global!");
     }
@@ -90,9 +93,13 @@ public abstract class AttributeSpec {
     return className;
   }
 
-  public final Identifier constantName() {
+  public final String constantName() { return constantName; }
+
+  public final Identifier constantNameId() {
     return constantNameId;
   }
+
+  public boolean global() { return false; }
 
   public final Set<NamedClass> interfaceSet() {
     return interfaceSet;

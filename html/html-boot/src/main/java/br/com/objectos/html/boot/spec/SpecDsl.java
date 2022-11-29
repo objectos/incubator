@@ -15,10 +15,13 @@
  */
 package br.com.objectos.html.boot.spec;
 
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
 public class SpecDsl {
+
+  private List<AttributeSpec> attributes;
 
   private final Map<String, AttributeSpec> attributeMap = new TreeMap<>();
   private final Map<String, CategorySpec> categoryMap = new TreeMap<>();
@@ -32,8 +35,12 @@ public class SpecDsl {
     text = new TextSpec(this);
   }
 
-  public final Iterable<AttributeSpec> attributes() {
-    return attributeMap.values();
+  public final List<AttributeSpec> attributes() {
+    if (attributes == null) {
+      attributes = List.copyOf(attributeMap.values());
+    }
+
+    return attributes;
   }
 
   public final AttributeSpec attributeSpec(String name) {

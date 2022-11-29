@@ -41,9 +41,9 @@ public class AttributeNames {
       = StandardAttributeName.toNamedArray();
 
   static final NamedParameterized namesMapTypeName = t(
-      t(UnmodifiableMap.class),
-      t(String.class),
-      StandardAttributeName
+    t(UnmodifiableMap.class),
+    t(String.class),
+    StandardAttributeName
   );
 
   private AttributeNames() {}

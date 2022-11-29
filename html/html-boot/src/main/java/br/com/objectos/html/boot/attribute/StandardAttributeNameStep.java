@@ -78,7 +78,7 @@ public class StandardAttributeNameStep extends AbstractJavaFileStep {
 
   @Override
   public final void attributeSpec(AttributeSpec attributeSpec) {
-    Identifier constantName = attributeSpec.constantName();
+    Identifier constantName = attributeSpec.constantNameId();
     constantNames.add(constantName);
 
     NamedClass className = attributeSpec.className();

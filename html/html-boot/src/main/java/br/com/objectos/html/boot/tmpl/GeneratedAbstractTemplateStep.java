@@ -175,7 +175,7 @@ public class GeneratedAbstractTemplateStep extends AbstractJavaFileStep {
     b.name(methodName);
 
     GrowableList<Argument> args = new GrowableList<>();
-    args.add(StandardAttributeName.id(attributeSpec.constantName()));
+    args.add(StandardAttributeName.id(attributeSpec.constantNameId()));
 
     AttributeKind kind = attributeSpec.kind();
     if (kind.isString()) {
