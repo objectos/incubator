@@ -19,7 +19,6 @@ import br.com.objectos.code.annotations.Generated;
 import br.com.objectos.html.boot.spec.AttributeKind;
 import br.com.objectos.html.boot.spec.AttributeSpec;
 import br.com.objectos.html.boot.spec.ElementSpec;
-import objectos.code.ClassName;
 
 final class GeneratedAbstractTemplateStep extends ThisTemplate {
 
@@ -40,28 +39,28 @@ final class GeneratedAbstractTemplateStep extends ThisTemplate {
       include(this::attrMethods),
 
       method(
-        _abstract(), tparam("N", t(attr_StandardAttributeName)),
+        _abstract(), tparam("N", t(attr, "StandardAttributeName")),
         tvar("N"), id("addStandardAttribute"),
         param(tvar("N"), id("name"))
       ),
 
       method(
-        _abstract(), tparam("N", t(attr_StandardAttributeName)),
+        _abstract(), tparam("N", t(attr, "StandardAttributeName")),
         tvar("N"), id("addStandardAttribute"),
         param(tvar("N"), id("name")),
-        param(t(jlang_String), id("value"))
+        param(t(String.class), id("value"))
       ),
 
       method(
-        _abstract(), t(element_ElementName), id("addStandardElement"),
-        param(t(element_StandardElementName), id("name")),
-        param(t(jlang_String), id("text"))
+        _abstract(), t(elem, "ElementName"), id("addStandardElement"),
+        param(t(elem, "StandardElementName"), id("name")),
+        param(t(String.class), id("text"))
       ),
 
       method(
-        _abstract(), t(element_ElementName), id("addStandardElement"),
-        param(t(element_StandardElementName), id("name")),
-        param(t(t(spi_type_Value), dim()), id("values"))
+        _abstract(), t(elem, "ElementName"), id("addStandardElement"),
+        param(t(elem, "StandardElementName"), id("name")),
+        param(t(t(spi_type, "Value"), dim()), id("values"))
       )
     );
   }
@@ -81,10 +80,8 @@ final class GeneratedAbstractTemplateStep extends ThisTemplate {
   }
 
   private void attrMethods(String name) {
-    var type = ClassName.of(attr_StandardAttributeName, attribute.classSimpleName);
-
     method(
-      _public(), _final(), t(type), id(name),
+      _public(), _final(), t(t(attr, "StandardAttributeName"), attribute.classSimpleName), id(name),
 
       include(this::attrMethodsParam),
 
@@ -95,7 +92,7 @@ final class GeneratedAbstractTemplateStep extends ThisTemplate {
   }
 
   private void attrMethodsInvokeArgs() {
-    n(attr_StandardAttributeName, attribute.constantName);
+    n(t(attr, "StandardAttributeName"), attribute.constantName);
 
     AttributeKind kind = attribute.kind();
 
@@ -108,7 +105,7 @@ final class GeneratedAbstractTemplateStep extends ThisTemplate {
     AttributeKind kind = attribute.kind();
 
     if (kind.isString()) {
-      param(t(jlang_String), id("value"));
+      param(t(String.class), id("value"));
     }
   }
 
@@ -118,30 +115,28 @@ final class GeneratedAbstractTemplateStep extends ThisTemplate {
     }
   }
 
-  private void elementMethods(ElementSpec element) {
-    var valueType = ClassName.of(spi_type, element.valueSimpleName());
-
+  private void elementMethods(ElementSpec el) {
     method(
-      _public(), _final(), t(element_ElementName), id(element.methodName()),
-      param(t(valueType), ellipsis(), id("values")),
+      _public(), _final(), t(elem, "ElementName"), id(el.methodName()),
+      param(t(spi_type, el.valueSimpleName()), ellipsis(), id("values")),
       _return(
         invoke(
           "addStandardElement",
-          n(element_StandardElementName, element.constantName), n("values")
+          n(t(elem, "StandardElementName"), el.constantName), n("values")
         )
       )
     );
 
     var template = spec.template();
 
-    if (template.shouldIncludeText(element)) {
+    if (template.shouldIncludeText(el)) {
       method(
-        _public(), _final(), t(element_ElementName), id(element.methodName()),
-        param(t(jlang_String), id("text")),
+        _public(), _final(), t(elem, "ElementName"), id(el.methodName()),
+        param(t(String.class), id("text")),
         _return(
           invoke(
             "addStandardElement",
-            n(element_StandardElementName, element.constantName), n("text")
+            n(t(elem, "StandardElementName"), el.constantName), n("text")
           )
         )
       );

@@ -20,18 +20,12 @@ import br.com.objectos.code.java.JavaNames;
 import java.util.List;
 import java.util.Set;
 import javax.lang.model.SourceVersion;
-import objectos.code.ClassName;
 import objectos.code.JavaTemplate;
-import objectos.code.PackageName;
 
 class PropertyModuleTemplate extends JavaTemplate {
 
-  private static final PackageName BOOT = PackageName.of("br.com.objectos.css.boot");
-  private static final PackageName BOOT_SPEC = PackageName.of(BOOT, "spec");
-
-  private static final ClassName AbstractPropertyModule
-      = ClassName.of(BOOT, "AbstractPropertyModule");
-  private static final ClassName Source = ClassName.of(BOOT_SPEC, "Source");
+  private static final String BOOT = "br.com.objectos.css.boot";
+  private static final String SPEC = "br.com.objectos.css.boot.spec";
 
   private final String globalSig = "globalSig";
 
@@ -41,13 +35,13 @@ class PropertyModuleTemplate extends JavaTemplate {
 
   @Override
   protected final void definition() {
-    _package("br.com.objectos.css.boot");
+    _package(BOOT);
 
     autoImports();
 
     _class(
       annotation(t(Generated.class), s(SpecgenBoot.class.getCanonicalName())),
-      _final(), id(simpleName()), _extends(AbstractPropertyModule),
+      _final(), id(simpleName()), _extends(t(BOOT, "AbstractPropertyModule")),
 
       method(
         annotation(t(Override.class)),
@@ -127,7 +121,7 @@ class PropertyModuleTemplate extends JavaTemplate {
   private void formalArgs(Property property) {
     nl();
 
-    n(Source, "MDN");
+    n(t(SPEC, "Source"), "MDN");
     nl();
 
     s(property.formal());

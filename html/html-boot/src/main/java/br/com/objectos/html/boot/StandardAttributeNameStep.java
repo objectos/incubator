@@ -16,8 +16,8 @@
 package br.com.objectos.html.boot;
 
 import br.com.objectos.html.boot.spec.AttributeSpec;
-import objectos.code.ClassName;
 import objectos.code.JavaModel.ClassDeclarationElement;
+import objectos.code.JavaModel.ClassType;
 import objectos.code.JavaModel.ExpressionName;
 import objectos.util.UnmodifiableMap;
 
@@ -32,45 +32,45 @@ final class StandardAttributeNameStep extends ThisTemplate {
     _class(
       generatedAnnotation(),
       _public(), _abstract(), id("StandardAttributeName"),
-      _implements(attr_AttributeName, spi_type_Value),
+      _implements(t(attr, "AttributeName"), t(spi_type, "Value")),
 
       include(this::constants),
 
       field(
-        _private(), _static(), _final(), t(t(attr_StandardAttributeName), dim()),
+        _private(), _static(), _final(), t(t(attr, "StandardAttributeName"), dim()),
         id("ARRAY"), a(constantNames())
       ),
 
       field(
         _private(), _static(), _final(),
-        t(t(UnmodifiableMap.class), t(jlang_String), t(attr_StandardAttributeName)),
+        t(t(UnmodifiableMap.class), t(String.class), t(attr, "StandardAttributeName")),
         id("MAP"), invoke("mapInit")
       ),
 
       field(_private(), _final(), _int(), id("code")),
 
-      field(_private(), _final(), t(attr_AttributeKind), id("kind")),
+      field(_private(), _final(), t(attr, "AttributeKind"), id("kind")),
 
-      field(_private(), _final(), t(jlang_String), id("name")),
+      field(_private(), _final(), t(String.class), id("name")),
 
       constructor(
         param(_int(), id("code")),
-        param(t(attr_AttributeKind), id("kind")),
-        param(t(jlang_String), id("name")),
+        param(t(attr, "AttributeKind"), id("kind")),
+        param(t(String.class), id("name")),
         assign(n(_this(), "code"), n("code")),
         assign(n(_this(), "kind"), n("kind")),
         assign(n(_this(), "name"), n("name"))
       ),
 
       method(
-        _public(), _static(), t(attr_StandardAttributeName), id("getByCode"),
+        _public(), _static(), t(attr, "StandardAttributeName"), id("getByCode"),
         param(_int(), id("code")),
         _return(aget(n("ARRAY"), n("code")))
       ),
 
       method(
-        _public(), _static(), t(attr_StandardAttributeName), id("getByName"),
-        param(t(jlang_String), id("name")),
+        _public(), _static(), t(attr, "StandardAttributeName"), id("getByName"),
+        param(t(String.class), id("name")),
         _return(invoke(n("MAP"), "get", n("name")))
       ),
 
@@ -81,9 +81,9 @@ final class StandardAttributeNameStep extends ThisTemplate {
 
       method(
         _private(), _static(),
-        t(t(UnmodifiableMap.class), t(jlang_String), t(attr_StandardAttributeName)),
+        t(t(UnmodifiableMap.class), t(String.class), t(attr, "StandardAttributeName")),
         id("mapInit"),
-        var("builder", _new(t(attr_NamesBuilder))),
+        var("builder", _new(t(attr, "NamesBuilder"))),
         include(this::mapInit),
         _return(invoke(n("builder"), "build"))
       ),
@@ -96,27 +96,27 @@ final class StandardAttributeNameStep extends ThisTemplate {
 
       method(
         annotation(t(Override.class)),
-        _public(), _final(), t(attr_AttributeKind), id("getKind"),
+        _public(), _final(), t(attr, "AttributeKind"), id("getKind"),
         _return(n("kind"))
       ),
 
       method(
         annotation(t(Override.class)),
-        _public(), _final(), t(jlang_String), id("getName"),
+        _public(), _final(), t(String.class), id("getName"),
         _return(n("name"))
       ),
 
       method(
         annotation(t(Override.class)),
         _public(), _final(), _void(), id("mark"),
-        param(t(spi_tmpl_Marker), id("marker")),
+        param(t(spi_tmpl, "Marker"), id("marker")),
         invoke(n("marker"), "markAttribute")
       ),
 
       method(
         annotation(t(Override.class)),
         _public(), _final(), _void(), id("render"),
-        param(t(spi_tmpl_Renderer), id("renderer"))
+        param(t(spi_tmpl, "Renderer"), id("renderer"))
       ),
 
       include(this::nameTypes)
@@ -132,11 +132,11 @@ final class StandardAttributeNameStep extends ThisTemplate {
 
   private void constants() {
     for (var attribute : spec.attributes()) {
-      var className = ClassName.of(attr_StandardAttributeName, attribute.classSimpleName);
+      var simpleName = attribute.classSimpleName;
 
       field(
-        _public(), _static(), _final(), t(className),
-        id(attribute.constantName), _new(t(className))
+        _public(), _static(), _final(), t(t(attr, "StandardAttributeName"), simpleName),
+        id(attribute.constantName), _new(t(t(attr, "StandardAttributeName"), simpleName))
       );
     }
   }
@@ -154,13 +154,14 @@ final class StandardAttributeNameStep extends ThisTemplate {
       var kind = attribute.kind();
 
       _class(
-        _public(), _static(), id(attribute.classSimpleName), _extends(attr_StandardAttributeName),
+        _public(), _static(), id(attribute.classSimpleName),
+        _extends(t(attr, "StandardAttributeName")),
         nameTypesImplements(attribute),
         constructor(
           _private(),
           _super(
             i(counter++),
-            n(attr_AttributeKind, kind.name()),
+            n(t(attr, "AttributeKind"), kind.name()),
             s(attribute.name())
           )
         )
@@ -170,13 +171,13 @@ final class StandardAttributeNameStep extends ThisTemplate {
 
   private ClassDeclarationElement nameTypesImplements(AttributeSpec attribute) {
     if (attribute.global()) {
-      return _implements(attr_GlobalAttributeName);
+      return _implements(t(attr, "GlobalAttributeName"));
     } else {
       return _implements(
         attribute.interfaceSet()
             .stream()
-            .map(sn -> ClassName.of(spi_type, sn))
-            .toArray(ClassName[]::new)
+            .map(sn -> t(spi_type, sn))
+            .toArray(ClassType[]::new)
       );
     }
   }

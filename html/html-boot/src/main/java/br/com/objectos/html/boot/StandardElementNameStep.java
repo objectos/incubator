@@ -19,35 +19,35 @@ final class StandardElementNameStep extends ThisTemplate {
 
   @Override
   protected final void definition() {
-    _package(elementPkg.name);
+    _package(elem);
 
     autoImports();
 
     _enum(
       generatedAnnotation(),
-      _public(), id("StandardElementName"), _implements(element_ElementName),
+      _public(), id("StandardElementName"), _implements(t(elem, "ElementName")),
 
       include(this::enumConstants),
 
       field(
         _private(), _static(), _final(),
-        t(t(element_StandardElementName), dim()),
-        id("ARRAY"), invoke(t(element_StandardElementName), "values")
+        t(t(elem, "StandardElementName"), dim()),
+        id("ARRAY"), invoke(t(elem, "StandardElementName"), "values")
       ),
 
-      field(_private(), _final(), t(element_ElementKind), id("kind")),
-      field(_private(), _final(), t(jlang_String), id("name")),
+      field(_private(), _final(), t(elem, "ElementKind"), id("kind")),
+      field(_private(), _final(), t(String.class), id("name")),
 
       constructor(
         _private(),
-        param(t(element_ElementKind), id("kind")),
-        param(t(jlang_String), id("name")),
+        param(t(elem, "ElementKind"), id("kind")),
+        param(t(String.class), id("name")),
         assign(n(_this(), "kind"), n("kind")),
         assign(n(_this(), "name"), n("name"))
       ),
 
       method(
-        _public(), _static(), t(element_StandardElementName), id("getByCode"),
+        _public(), _static(), t(elem, "StandardElementName"), id("getByCode"),
         param(_int(), id("code")),
         _return(aget(n("ARRAY"), n("code")))
       ),
@@ -65,27 +65,27 @@ final class StandardElementNameStep extends ThisTemplate {
 
       method(
         annotation(t(Override.class)),
-        _public(), _final(), t(element_ElementKind), id("getKind"),
+        _public(), _final(), t(elem, "ElementKind"), id("getKind"),
         _return(n("kind"))
       ),
 
       method(
         annotation(t(Override.class)),
-        _public(), _final(), t(jlang_String), id("getName"),
+        _public(), _final(), t(String.class), id("getName"),
         _return(n("name"))
       ),
 
       method(
         annotation(t(Override.class)),
         _public(), _final(), _void(), id("mark"),
-        param(t(spi_tmpl_Marker), id("marker")),
+        param(t(spi_tmpl, "Marker"), id("marker")),
         invoke(n("marker"), "markElement")
       ),
 
       method(
         annotation(t(Override.class)),
         _public(), _final(), _void(), id("render"),
-        param(t(spi_tmpl_Renderer), id("renderer"))
+        param(t(spi_tmpl, "Renderer"), id("renderer"))
       )
     );
   }
@@ -94,7 +94,7 @@ final class StandardElementNameStep extends ThisTemplate {
     for (var element : spec.elements()) {
       enumConstant(
         id(element.constantName),
-        n(element_ElementKind, element.hasEndTag() ? "NORMAL" : "VOID"),
+        n(t(elem, "ElementKind"), element.hasEndTag() ? "NORMAL" : "VOID"),
         s(element.name())
       );
     }

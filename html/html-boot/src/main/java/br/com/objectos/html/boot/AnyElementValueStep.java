@@ -16,13 +16,12 @@
 package br.com.objectos.html.boot;
 
 import br.com.objectos.code.annotations.Generated;
-import objectos.code.ClassName;
 
 final class AnyElementValueStep extends ThisTemplate {
 
   @Override
   protected final void definition() {
-    _package(spi_type.name);
+    _package(spi_type);
 
     autoImports();
 
@@ -35,9 +34,7 @@ final class AnyElementValueStep extends ThisTemplate {
 
   private void extendsClause() {
     for (var element : spec.elements()) {
-      var valueType = ClassName.of(spi_type, element.valueSimpleName());
-
-      _extends(valueType);
+      _extends(t(spi_type, element.valueSimpleName()));
     }
   }
 

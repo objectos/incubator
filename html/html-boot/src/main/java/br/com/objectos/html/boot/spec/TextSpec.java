@@ -17,16 +17,15 @@ package br.com.objectos.html.boot.spec;
 
 import java.util.Set;
 import java.util.TreeSet;
-import objectos.code.ClassName;
 
 public class TextSpec implements Child, Name {
 
-  private final ClassName className;
+  private final String className;
 
   private final Set<ElementSpec> parentSet = new TreeSet<>();
 
   TextSpec(SpecDsl dsl) {
-    className = ClassName.of(Object.class);
+    className = Object.class.toString();
   }
 
   @Override
