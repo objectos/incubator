@@ -33,21 +33,35 @@ public class ValueType implements ParameterType, Value {
 
   public final NamedClass className;
 
+  public final String simpleName;
+
   private final Set<NamedClass> interfaces = new TreeSet<>();
 
-  private ValueType(NamedClass className) {
-    this.className = className;
+  private final Set<String> interfaceNames = new TreeSet<>();
+
+  private ValueType(String simpleName) {
+    this.className = TypeNames.className(simpleName);
+
+    this.simpleName = simpleName;
 
     interfaces.add(TypeNames._Value);
+
+    interfaceNames.add("Value");
   }
 
   public static ValueType of(String simpleName) {
-    return new ValueType(TypeNames.className(simpleName));
+    return new ValueType(simpleName);
   }
 
   @Override
   public void acceptValueType(ValueType type) {
     interfaces.add(type.className);
+
+    interfaceNames.add(type.simpleName);
+  }
+
+  public final Iterable<String> interfaceNames() {
+    return interfaceNames;
   }
 
   @Override

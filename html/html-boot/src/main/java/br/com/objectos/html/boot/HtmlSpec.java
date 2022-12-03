@@ -50,7 +50,10 @@ class HtmlSpec extends AbstractSpec {
         .attribute("style").as("inlineStyle")
         .attribute("tabindex")
         .attribute("title")
-        .attribute("translate");
+        .attribute("translate")
+
+        .attribute("onclick")
+        .attribute("onsubmit");
 
     CategorySpec embedded = category("embedded");
     CategorySpec flow = category("flow");
@@ -485,6 +488,8 @@ class HtmlSpec extends AbstractSpec {
         .attribute("action")
         .attribute("enctype")
         .attribute("method")
+        .attribute("name")
+        .attribute("target")
         .attributeEnd();
 
     element("label")

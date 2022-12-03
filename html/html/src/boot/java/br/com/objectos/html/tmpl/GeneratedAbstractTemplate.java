@@ -74,6 +74,7 @@ import br.com.objectos.html.attribute.StandardAttributeName.Nomodule;
 import br.com.objectos.html.attribute.StandardAttributeName.Onafterprint;
 import br.com.objectos.html.attribute.StandardAttributeName.Onbeforeprint;
 import br.com.objectos.html.attribute.StandardAttributeName.Onbeforeunload;
+import br.com.objectos.html.attribute.StandardAttributeName.Onclick;
 import br.com.objectos.html.attribute.StandardAttributeName.Onhashchange;
 import br.com.objectos.html.attribute.StandardAttributeName.Onlanguagechange;
 import br.com.objectos.html.attribute.StandardAttributeName.Onmessage;
@@ -84,6 +85,7 @@ import br.com.objectos.html.attribute.StandardAttributeName.Onpageshow;
 import br.com.objectos.html.attribute.StandardAttributeName.Onpopstate;
 import br.com.objectos.html.attribute.StandardAttributeName.Onrejectionhandled;
 import br.com.objectos.html.attribute.StandardAttributeName.Onstorage;
+import br.com.objectos.html.attribute.StandardAttributeName.Onsubmit;
 import br.com.objectos.html.attribute.StandardAttributeName.Onunhandledrejection;
 import br.com.objectos.html.attribute.StandardAttributeName.Onunload;
 import br.com.objectos.html.attribute.StandardAttributeName.Opacity;
@@ -1053,6 +1055,10 @@ abstract class GeneratedAbstractTemplate {
     return addStandardAttribute(StandardAttributeName.ONBEFOREUNLOAD, value);
   }
 
+  public final Onclick onclick(String value) {
+    return addStandardAttribute(StandardAttributeName.ONCLICK, value);
+  }
+
   public final Onhashchange onhashchange(String value) {
     return addStandardAttribute(StandardAttributeName.ONHASHCHANGE, value);
   }
@@ -1091,6 +1097,10 @@ abstract class GeneratedAbstractTemplate {
 
   public final Onstorage onstorage(String value) {
     return addStandardAttribute(StandardAttributeName.ONSTORAGE, value);
+  }
+
+  public final Onsubmit onsubmit(String value) {
+    return addStandardAttribute(StandardAttributeName.ONSUBMIT, value);
   }
 
   public final Onunhandledrejection onunhandledrejection(String value) {
