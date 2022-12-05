@@ -190,4 +190,8 @@ public class CssSpecDsl {
     return type;
   }
 
+  final ValueType valueType(String name) {
+    return valueTypes.get(name);
+  }
+
 }
