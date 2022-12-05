@@ -74,8 +74,12 @@ public enum Primitive {
 
   public final NamedClass typeClassName() {
     return TypeNames.className(
-        JavaNames.toValidClassName(name().toLowerCase() + "Type")
+      typeSimpleName()
     );
+  }
+
+  public final String typeSimpleName() {
+    return JavaNames.toValidClassName(name().toLowerCase() + "Type");
   }
 
 }
