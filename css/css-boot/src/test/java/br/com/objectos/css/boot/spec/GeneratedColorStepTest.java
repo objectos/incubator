@@ -25,7 +25,7 @@ import org.testng.annotations.Test;
 
 public class GeneratedColorStepTest extends AbstractCssBootTest {
 
-  @Test
+  @Test(enabled = false)
   public void execute() {
     UnmodifiableMap<String, JavaFile> javaFiles;
     javaFiles = execute(
