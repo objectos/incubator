@@ -194,6 +194,10 @@ public class CssSpecDsl {
     return type;
   }
 
+  final Set<ColorName> colors() {
+    return colors;
+  }
+
   final Iterable<String> lengthUnits() {
     return lengthUnits;
   }
