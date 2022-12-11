@@ -7,6 +7,7 @@ import br.com.objectos.html.attribute.StandardAttributeName.Action;
 import br.com.objectos.html.attribute.StandardAttributeName.Align;
 import br.com.objectos.html.attribute.StandardAttributeName.AlignmentBaseline;
 import br.com.objectos.html.attribute.StandardAttributeName.Alt;
+import br.com.objectos.html.attribute.StandardAttributeName.AriaHidden;
 import br.com.objectos.html.attribute.StandardAttributeName.Async;
 import br.com.objectos.html.attribute.StandardAttributeName.Autocomplete;
 import br.com.objectos.html.attribute.StandardAttributeName.Autofocus;
@@ -786,6 +787,10 @@ abstract class GeneratedAbstractTemplate {
 
   public final Alt alt(String value) {
     return addStandardAttribute(StandardAttributeName.ALT, value);
+  }
+
+  public final AriaHidden ariaHidden(String value) {
+    return addStandardAttribute(StandardAttributeName.ARIAHIDDEN, value);
   }
 
   public final Async async() {

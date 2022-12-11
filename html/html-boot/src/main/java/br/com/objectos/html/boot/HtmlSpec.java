@@ -55,6 +55,7 @@ class HtmlSpec extends AbstractSpec {
         .attribute("onclick")
         .attribute("onsubmit")
 
+        .attribute("aria-hidden")
         .attribute("role");
 
     CategorySpec embedded = category("embedded");
