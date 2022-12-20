@@ -81,7 +81,7 @@ final class GeneratedAbstractTemplateStep extends ThisTemplate {
 
   private void attrMethods(String name) {
     method(
-      _public(), _final(), t(t(attr, "StandardAttributeName"), attribute.classSimpleName), id(name),
+      _public(), _final(), t(attr, "StandardAttributeName", attribute.classSimpleName), id(name),
 
       include(this::attrMethodsParam),
 

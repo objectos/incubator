@@ -25,7 +25,7 @@ final class StandardAttributeNameStep extends ThisTemplate {
 
   @Override
   protected final void definition() {
-    _package("br.com.objectos.html.attribute");
+    _package(attr);
 
     autoImports();
 
@@ -135,8 +135,8 @@ final class StandardAttributeNameStep extends ThisTemplate {
       var simpleName = attribute.classSimpleName;
 
       field(
-        _public(), _static(), _final(), t(t(attr, "StandardAttributeName"), simpleName),
-        id(attribute.constantName), _new(t(t(attr, "StandardAttributeName"), simpleName))
+        _public(), _static(), _final(), t(attr, "StandardAttributeName", simpleName),
+        id(attribute.constantName), _new(t(attr, "StandardAttributeName", simpleName))
       );
     }
   }
