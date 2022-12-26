@@ -104,6 +104,7 @@ class HtmlSpec extends AbstractSpec {
         .attribute("http-equiv")
         .attribute("content")
         .attribute("charset")
+        .attribute("property")
         .noEndTag();
 
     // <style> is not a flow stricly speaking, but according to spec:
