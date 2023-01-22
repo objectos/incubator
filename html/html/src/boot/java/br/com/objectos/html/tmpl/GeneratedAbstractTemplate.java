@@ -7,6 +7,7 @@ import br.com.objectos.html.attribute.StandardAttributeName.Action;
 import br.com.objectos.html.attribute.StandardAttributeName.Align;
 import br.com.objectos.html.attribute.StandardAttributeName.AlignmentBaseline;
 import br.com.objectos.html.attribute.StandardAttributeName.Alt;
+import br.com.objectos.html.attribute.StandardAttributeName.AriaHidden;
 import br.com.objectos.html.attribute.StandardAttributeName.Async;
 import br.com.objectos.html.attribute.StandardAttributeName.Autocomplete;
 import br.com.objectos.html.attribute.StandardAttributeName.Autofocus;
@@ -98,6 +99,7 @@ import br.com.objectos.html.attribute.StandardAttributeName.Overflow;
 import br.com.objectos.html.attribute.StandardAttributeName.PaintOrder;
 import br.com.objectos.html.attribute.StandardAttributeName.Placeholder;
 import br.com.objectos.html.attribute.StandardAttributeName.PointerEvents;
+import br.com.objectos.html.attribute.StandardAttributeName.Property;
 import br.com.objectos.html.attribute.StandardAttributeName.Readonly;
 import br.com.objectos.html.attribute.StandardAttributeName.Referrerpolicy;
 import br.com.objectos.html.attribute.StandardAttributeName.Rel;
@@ -789,6 +791,10 @@ abstract class GeneratedAbstractTemplate {
     return addStandardAttribute(StandardAttributeName.ALT, value);
   }
 
+  public final AriaHidden ariaHidden(String value) {
+    return addStandardAttribute(StandardAttributeName.ARIAHIDDEN, value);
+  }
+
   public final Async async() {
     return addStandardAttribute(StandardAttributeName.ASYNC);
   }
@@ -1155,6 +1161,10 @@ abstract class GeneratedAbstractTemplate {
 
   public final PointerEvents pointerEvents(String value) {
     return addStandardAttribute(StandardAttributeName.POINTEREVENTS, value);
+  }
+
+  public final Property property(String value) {
+    return addStandardAttribute(StandardAttributeName.PROPERTY, value);
   }
 
   public final Readonly readonly() {

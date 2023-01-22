@@ -55,6 +55,7 @@ class HtmlSpec extends AbstractSpec {
         .attribute("onclick")
         .attribute("onsubmit")
 
+        .attribute("aria-hidden")
         .attribute("role");
 
     CategorySpec embedded = category("embedded");
@@ -103,6 +104,7 @@ class HtmlSpec extends AbstractSpec {
         .attribute("http-equiv")
         .attribute("content")
         .attribute("charset")
+        .attribute("property")
         .noEndTag();
 
     // <style> is not a flow stricly speaking, but according to spec:
