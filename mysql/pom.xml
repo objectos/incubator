@@ -97,7 +97,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>br.com.objectos</groupId>
-			<artifactId>objectos-code-annotations</artifactId>
+			<artifactId>code-annotations</artifactId>
 		</dependency>
 
 		<dependency>
