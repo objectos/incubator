@@ -46,8 +46,12 @@ public class Framework extends AbstractFramework {
 
   @Override
   protected final void definition() {
-    install(new Preflight());
+    installReset();
     super.definition();
+  }
+
+  protected void installReset() {
+    install(new Preflight());
   }
 
 }
