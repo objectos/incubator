@@ -179,6 +179,8 @@ public abstract class StandardAttributeName implements AttributeName, Value {
 
   public static final Onbeforeunload ONBEFOREUNLOAD = new Onbeforeunload();
 
+  public static final Onclick ONCLICK = new Onclick();
+
   public static final Onhashchange ONHASHCHANGE = new Onhashchange();
 
   public static final Onlanguagechange ONLANGUAGECHANGE = new Onlanguagechange();
@@ -198,6 +200,8 @@ public abstract class StandardAttributeName implements AttributeName, Value {
   public static final Onrejectionhandled ONREJECTIONHANDLED = new Onrejectionhandled();
 
   public static final Onstorage ONSTORAGE = new Onstorage();
+
+  public static final Onsubmit ONSUBMIT = new Onsubmit();
 
   public static final Onunhandledrejection ONUNHANDLEDREJECTION = new Onunhandledrejection();
 
@@ -311,9 +315,9 @@ public abstract class StandardAttributeName implements AttributeName, Value {
 
   public static final Xmlns XMLNS = new Xmlns();
 
-  private static final StandardAttributeName[] ARRAY = new StandardAttributeName[] {ACCESSKEY, ACTION, ALIGNMENTBASELINE, ALT, ASYNC, AUTOCOMPLETE, AUTOFOCUS, BASELINESHIFT, CHARSET, CITE, CLASS, CLIPPATH, CLIPRULE, COLOR, COLORINTERPOLATION, COLORINTERPOLATIONFILTERS, COLS, CONTENT, CONTENTEDITABLE, CROSSORIGIN, CURSOR, D, DEFER, DIR, DIRECTION, DIRNAME, DISABLED, DISPLAY, DOMINANTBASELINE, DRAGGABLE, ENCTYPE, FILL, FILLOPACITY, FILLRULE, FILTER, FLOODCOLOR, FLOODOPACITY, FONTFAMILY, FONTSIZE, FONTSIZEADJUST, FONTSTRETCH, FONTSTYLE, FONTVARIANT, FONTWEIGHT, FOR, FORM, GLYPHORIENTATIONHORIZONTAL, GLYPHORIENTATIONVERTICAL, HEIGHT, HIDDEN, HREF, HTTPEQUIV, ID, IMAGERENDERING, INTEGRITY, LABEL, LANG, LETTERSPACING, LIGHTINGCOLOR, MARKEREND, MARKERMID, MARKERSTART, MASK, MASKTYPE, MAXLENGTH, MEDIA, METHOD, MINLENGTH, MULTIPLE, NAME, NOMODULE, ONAFTERPRINT, ONBEFOREPRINT, ONBEFOREUNLOAD, ONHASHCHANGE, ONLANGUAGECHANGE, ONMESSAGE, ONOFFLINE, ONONLINE, ONPAGEHIDE, ONPAGESHOW, ONPOPSTATE, ONREJECTIONHANDLED, ONSTORAGE, ONUNHANDLEDREJECTION, ONUNLOAD, OPACITY, OPEN, OVERFLOW, PAINTORDER, PLACEHOLDER, POINTEREVENTS, READONLY, REFERRERPOLICY, REL, REQUIRED, REV, REVERSED, ROWS, SELECTED, SHAPERENDERING, SIZE, SIZES, SPELLCHECK, SRC, SRCSET, START, STOPCOLOR, STOPOPACITY, STROKE, STROKEDASHARRAY, STROKEDASHOFFSET, STROKELINECAP, STROKELINEJOIN, STROKEMITERLIMIT, STROKEOPACITY, STROKEWIDTH, STYLE, TABINDEX, TARGET, TEXTANCHOR, TEXTDECORATION, TEXTOVERFLOW, TEXTRENDERING, TITLE, TRANSFORM, TRANSFORMORIGIN, TRANSLATE, TYPE, UNICODEBIDI, VALUE, VECTOREFFECT, VIEWBOX, VISIBILITY, WHITESPACE, WIDTH, WORDSPACING, WRAP, WRITINGMODE, XMLNS};
+  private static final StandardAttributeName[] ARRAY = new StandardAttributeName[] {ACCESSKEY, ACTION, ALIGNMENTBASELINE, ALT, ASYNC, AUTOCOMPLETE, AUTOFOCUS, BASELINESHIFT, CHARSET, CITE, CLASS, CLIPPATH, CLIPRULE, COLOR, COLORINTERPOLATION, COLORINTERPOLATIONFILTERS, COLS, CONTENT, CONTENTEDITABLE, CROSSORIGIN, CURSOR, D, DEFER, DIR, DIRECTION, DIRNAME, DISABLED, DISPLAY, DOMINANTBASELINE, DRAGGABLE, ENCTYPE, FILL, FILLOPACITY, FILLRULE, FILTER, FLOODCOLOR, FLOODOPACITY, FONTFAMILY, FONTSIZE, FONTSIZEADJUST, FONTSTRETCH, FONTSTYLE, FONTVARIANT, FONTWEIGHT, FOR, FORM, GLYPHORIENTATIONHORIZONTAL, GLYPHORIENTATIONVERTICAL, HEIGHT, HIDDEN, HREF, HTTPEQUIV, ID, IMAGERENDERING, INTEGRITY, LABEL, LANG, LETTERSPACING, LIGHTINGCOLOR, MARKEREND, MARKERMID, MARKERSTART, MASK, MASKTYPE, MAXLENGTH, MEDIA, METHOD, MINLENGTH, MULTIPLE, NAME, NOMODULE, ONAFTERPRINT, ONBEFOREPRINT, ONBEFOREUNLOAD, ONCLICK, ONHASHCHANGE, ONLANGUAGECHANGE, ONMESSAGE, ONOFFLINE, ONONLINE, ONPAGEHIDE, ONPAGESHOW, ONPOPSTATE, ONREJECTIONHANDLED, ONSTORAGE, ONSUBMIT, ONUNHANDLEDREJECTION, ONUNLOAD, OPACITY, OPEN, OVERFLOW, PAINTORDER, PLACEHOLDER, POINTEREVENTS, READONLY, REFERRERPOLICY, REL, REQUIRED, REV, REVERSED, ROWS, SELECTED, SHAPERENDERING, SIZE, SIZES, SPELLCHECK, SRC, SRCSET, START, STOPCOLOR, STOPOPACITY, STROKE, STROKEDASHARRAY, STROKEDASHOFFSET, STROKELINECAP, STROKELINEJOIN, STROKEMITERLIMIT, STROKEOPACITY, STROKEWIDTH, STYLE, TABINDEX, TARGET, TEXTANCHOR, TEXTDECORATION, TEXTOVERFLOW, TEXTRENDERING, TITLE, TRANSFORM, TRANSFORMORIGIN, TRANSLATE, TYPE, UNICODEBIDI, VALUE, VECTOREFFECT, VIEWBOX, VISIBILITY, WHITESPACE, WIDTH, WORDSPACING, WRAP, WRITINGMODE, XMLNS};
 
-  private static final UnmodifiableMap<String, StandardAttributeName> MAP = new NamesBuilder().put("accesskey", ACCESSKEY).put("action", ACTION).put("alignment-baseline", ALIGNMENTBASELINE).put("alt", ALT).put("async", ASYNC).put("autocomplete", AUTOCOMPLETE).put("autofocus", AUTOFOCUS).put("baseline-shift", BASELINESHIFT).put("charset", CHARSET).put("cite", CITE).put("class", CLASS).put("clip-path", CLIPPATH).put("clip-rule", CLIPRULE).put("color", COLOR).put("color-interpolation", COLORINTERPOLATION).put("color-interpolation-filters", COLORINTERPOLATIONFILTERS).put("cols", COLS).put("content", CONTENT).put("contenteditable", CONTENTEDITABLE).put("crossorigin", CROSSORIGIN).put("cursor", CURSOR).put("d", D).put("defer", DEFER).put("dir", DIR).put("direction", DIRECTION).put("dirname", DIRNAME).put("disabled", DISABLED).put("display", DISPLAY).put("dominant-baseline", DOMINANTBASELINE).put("draggable", DRAGGABLE).put("enctype", ENCTYPE).put("fill", FILL).put("fill-opacity", FILLOPACITY).put("fill-rule", FILLRULE).put("filter", FILTER).put("flood-color", FLOODCOLOR).put("flood-opacity", FLOODOPACITY).put("font-family", FONTFAMILY).put("font-size", FONTSIZE).put("font-size-adjust", FONTSIZEADJUST).put("font-stretch", FONTSTRETCH).put("font-style", FONTSTYLE).put("font-variant", FONTVARIANT).put("font-weight", FONTWEIGHT).put("for", FOR).put("form", FORM).put("glyph-orientation-horizontal", GLYPHORIENTATIONHORIZONTAL).put("glyph-orientation-vertical", GLYPHORIENTATIONVERTICAL).put("height", HEIGHT).put("hidden", HIDDEN).put("href", HREF).put("http-equiv", HTTPEQUIV).put("id", ID).put("image-rendering", IMAGERENDERING).put("integrity", INTEGRITY).put("label", LABEL).put("lang", LANG).put("letter-spacing", LETTERSPACING).put("lighting-color", LIGHTINGCOLOR).put("marker-end", MARKEREND).put("marker-mid", MARKERMID).put("marker-start", MARKERSTART).put("mask", MASK).put("mask-type", MASKTYPE).put("maxlength", MAXLENGTH).put("media", MEDIA).put("method", METHOD).put("minlength", MINLENGTH).put("multiple", MULTIPLE).put("name", NAME).put("nomodule", NOMODULE).put("onafterprint", ONAFTERPRINT).put("onbeforeprint", ONBEFOREPRINT).put("onbeforeunload", ONBEFOREUNLOAD).put("onhashchange", ONHASHCHANGE).put("onlanguagechange", ONLANGUAGECHANGE).put("onmessage", ONMESSAGE).put("onoffline", ONOFFLINE).put("ononline", ONONLINE).put("onpagehide", ONPAGEHIDE).put("onpageshow", ONPAGESHOW).put("onpopstate", ONPOPSTATE).put("onrejectionhandled", ONREJECTIONHANDLED).put("onstorage", ONSTORAGE).put("onunhandledrejection", ONUNHANDLEDREJECTION).put("onunload", ONUNLOAD).put("opacity", OPACITY).put("open", OPEN).put("overflow", OVERFLOW).put("paint-order", PAINTORDER).put("placeholder", PLACEHOLDER).put("pointer-events", POINTEREVENTS).put("readonly", READONLY).put("referrerpolicy", REFERRERPOLICY).put("rel", REL).put("required", REQUIRED).put("rev", REV).put("reversed", REVERSED).put("rows", ROWS).put("selected", SELECTED).put("shape-rendering", SHAPERENDERING).put("size", SIZE).put("sizes", SIZES).put("spellcheck", SPELLCHECK).put("src", SRC).put("srcset", SRCSET).put("start", START).put("stop-color", STOPCOLOR).put("stop-opacity", STOPOPACITY).put("stroke", STROKE).put("stroke-dasharray", STROKEDASHARRAY).put("stroke-dashoffset", STROKEDASHOFFSET).put("stroke-linecap", STROKELINECAP).put("stroke-linejoin", STROKELINEJOIN).put("stroke-miterlimit", STROKEMITERLIMIT).put("stroke-opacity", STROKEOPACITY).put("stroke-width", STROKEWIDTH).put("style", STYLE).put("tabindex", TABINDEX).put("target", TARGET).put("text-anchor", TEXTANCHOR).put("text-decoration", TEXTDECORATION).put("text-overflow", TEXTOVERFLOW).put("text-rendering", TEXTRENDERING).put("title", TITLE).put("transform", TRANSFORM).put("transform-origin", TRANSFORMORIGIN).put("translate", TRANSLATE).put("type", TYPE).put("unicode-bidi", UNICODEBIDI).put("value", VALUE).put("vector-effect", VECTOREFFECT).put("viewBox", VIEWBOX).put("visibility", VISIBILITY).put("white-space", WHITESPACE).put("width", WIDTH).put("word-spacing", WORDSPACING).put("wrap", WRAP).put("writing-mode", WRITINGMODE).put("xmlns", XMLNS).build();
+  private static final UnmodifiableMap<String, StandardAttributeName> MAP = new NamesBuilder().put("accesskey", ACCESSKEY).put("action", ACTION).put("alignment-baseline", ALIGNMENTBASELINE).put("alt", ALT).put("async", ASYNC).put("autocomplete", AUTOCOMPLETE).put("autofocus", AUTOFOCUS).put("baseline-shift", BASELINESHIFT).put("charset", CHARSET).put("cite", CITE).put("class", CLASS).put("clip-path", CLIPPATH).put("clip-rule", CLIPRULE).put("color", COLOR).put("color-interpolation", COLORINTERPOLATION).put("color-interpolation-filters", COLORINTERPOLATIONFILTERS).put("cols", COLS).put("content", CONTENT).put("contenteditable", CONTENTEDITABLE).put("crossorigin", CROSSORIGIN).put("cursor", CURSOR).put("d", D).put("defer", DEFER).put("dir", DIR).put("direction", DIRECTION).put("dirname", DIRNAME).put("disabled", DISABLED).put("display", DISPLAY).put("dominant-baseline", DOMINANTBASELINE).put("draggable", DRAGGABLE).put("enctype", ENCTYPE).put("fill", FILL).put("fill-opacity", FILLOPACITY).put("fill-rule", FILLRULE).put("filter", FILTER).put("flood-color", FLOODCOLOR).put("flood-opacity", FLOODOPACITY).put("font-family", FONTFAMILY).put("font-size", FONTSIZE).put("font-size-adjust", FONTSIZEADJUST).put("font-stretch", FONTSTRETCH).put("font-style", FONTSTYLE).put("font-variant", FONTVARIANT).put("font-weight", FONTWEIGHT).put("for", FOR).put("form", FORM).put("glyph-orientation-horizontal", GLYPHORIENTATIONHORIZONTAL).put("glyph-orientation-vertical", GLYPHORIENTATIONVERTICAL).put("height", HEIGHT).put("hidden", HIDDEN).put("href", HREF).put("http-equiv", HTTPEQUIV).put("id", ID).put("image-rendering", IMAGERENDERING).put("integrity", INTEGRITY).put("label", LABEL).put("lang", LANG).put("letter-spacing", LETTERSPACING).put("lighting-color", LIGHTINGCOLOR).put("marker-end", MARKEREND).put("marker-mid", MARKERMID).put("marker-start", MARKERSTART).put("mask", MASK).put("mask-type", MASKTYPE).put("maxlength", MAXLENGTH).put("media", MEDIA).put("method", METHOD).put("minlength", MINLENGTH).put("multiple", MULTIPLE).put("name", NAME).put("nomodule", NOMODULE).put("onafterprint", ONAFTERPRINT).put("onbeforeprint", ONBEFOREPRINT).put("onbeforeunload", ONBEFOREUNLOAD).put("onclick", ONCLICK).put("onhashchange", ONHASHCHANGE).put("onlanguagechange", ONLANGUAGECHANGE).put("onmessage", ONMESSAGE).put("onoffline", ONOFFLINE).put("ononline", ONONLINE).put("onpagehide", ONPAGEHIDE).put("onpageshow", ONPAGESHOW).put("onpopstate", ONPOPSTATE).put("onrejectionhandled", ONREJECTIONHANDLED).put("onstorage", ONSTORAGE).put("onsubmit", ONSUBMIT).put("onunhandledrejection", ONUNHANDLEDREJECTION).put("onunload", ONUNLOAD).put("opacity", OPACITY).put("open", OPEN).put("overflow", OVERFLOW).put("paint-order", PAINTORDER).put("placeholder", PLACEHOLDER).put("pointer-events", POINTEREVENTS).put("readonly", READONLY).put("referrerpolicy", REFERRERPOLICY).put("rel", REL).put("required", REQUIRED).put("rev", REV).put("reversed", REVERSED).put("rows", ROWS).put("selected", SELECTED).put("shape-rendering", SHAPERENDERING).put("size", SIZE).put("sizes", SIZES).put("spellcheck", SPELLCHECK).put("src", SRC).put("srcset", SRCSET).put("start", START).put("stop-color", STOPCOLOR).put("stop-opacity", STOPOPACITY).put("stroke", STROKE).put("stroke-dasharray", STROKEDASHARRAY).put("stroke-dashoffset", STROKEDASHOFFSET).put("stroke-linecap", STROKELINECAP).put("stroke-linejoin", STROKELINEJOIN).put("stroke-miterlimit", STROKEMITERLIMIT).put("stroke-opacity", STROKEOPACITY).put("stroke-width", STROKEWIDTH).put("style", STYLE).put("tabindex", TABINDEX).put("target", TARGET).put("text-anchor", TEXTANCHOR).put("text-decoration", TEXTDECORATION).put("text-overflow", TEXTOVERFLOW).put("text-rendering", TEXTRENDERING).put("title", TITLE).put("transform", TRANSFORM).put("transform-origin", TRANSFORMORIGIN).put("translate", TRANSLATE).put("type", TYPE).put("unicode-bidi", UNICODEBIDI).put("value", VALUE).put("vector-effect", VECTOREFFECT).put("viewBox", VIEWBOX).put("visibility", VISIBILITY).put("white-space", WHITESPACE).put("width", WIDTH).put("word-spacing", WORDSPACING).put("wrap", WRAP).put("writing-mode", WRITINGMODE).put("xmlns", XMLNS).build();
 
   private final int code;
 
@@ -914,7 +918,7 @@ public abstract class StandardAttributeName implements AttributeName, Value {
 
   }
 
-  public static class Name extends StandardAttributeName implements InputValue, MetaValue, SelectValue, TextareaValue {
+  public static class Name extends StandardAttributeName implements FormValue, InputValue, MetaValue, SelectValue, TextareaValue {
 
     private Name() {
       super(69, AttributeKind.STRING, "name");
@@ -954,10 +958,18 @@ public abstract class StandardAttributeName implements AttributeName, Value {
 
   }
 
+  public static class Onclick extends StandardAttributeName implements GlobalAttributeName {
+
+    private Onclick() {
+      super(74, AttributeKind.STRING, "onclick");
+    }
+
+  }
+
   public static class Onhashchange extends StandardAttributeName implements BodyValue {
 
     private Onhashchange() {
-      super(74, AttributeKind.STRING, "onhashchange");
+      super(75, AttributeKind.STRING, "onhashchange");
     }
 
   }
@@ -965,7 +977,7 @@ public abstract class StandardAttributeName implements AttributeName, Value {
   public static class Onlanguagechange extends StandardAttributeName implements BodyValue {
 
     private Onlanguagechange() {
-      super(75, AttributeKind.STRING, "onlanguagechange");
+      super(76, AttributeKind.STRING, "onlanguagechange");
     }
 
   }
@@ -973,7 +985,7 @@ public abstract class StandardAttributeName implements AttributeName, Value {
   public static class Onmessage extends StandardAttributeName implements BodyValue {
 
     private Onmessage() {
-      super(76, AttributeKind.STRING, "onmessage");
+      super(77, AttributeKind.STRING, "onmessage");
     }
 
   }
@@ -981,7 +993,7 @@ public abstract class StandardAttributeName implements AttributeName, Value {
   public static class Onoffline extends StandardAttributeName implements BodyValue {
 
     private Onoffline() {
-      super(77, AttributeKind.STRING, "onoffline");
+      super(78, AttributeKind.STRING, "onoffline");
     }
 
   }
@@ -989,7 +1001,7 @@ public abstract class StandardAttributeName implements AttributeName, Value {
   public static class Ononline extends StandardAttributeName implements BodyValue {
 
     private Ononline() {
-      super(78, AttributeKind.STRING, "ononline");
+      super(79, AttributeKind.STRING, "ononline");
     }
 
   }
@@ -997,7 +1009,7 @@ public abstract class StandardAttributeName implements AttributeName, Value {
   public static class Onpagehide extends StandardAttributeName implements BodyValue {
 
     private Onpagehide() {
-      super(79, AttributeKind.STRING, "onpagehide");
+      super(80, AttributeKind.STRING, "onpagehide");
     }
 
   }
@@ -1005,7 +1017,7 @@ public abstract class StandardAttributeName implements AttributeName, Value {
   public static class Onpageshow extends StandardAttributeName implements BodyValue {
 
     private Onpageshow() {
-      super(80, AttributeKind.STRING, "onpageshow");
+      super(81, AttributeKind.STRING, "onpageshow");
     }
 
   }
@@ -1013,7 +1025,7 @@ public abstract class StandardAttributeName implements AttributeName, Value {
   public static class Onpopstate extends StandardAttributeName implements BodyValue {
 
     private Onpopstate() {
-      super(81, AttributeKind.STRING, "onpopstate");
+      super(82, AttributeKind.STRING, "onpopstate");
     }
 
   }
@@ -1021,7 +1033,7 @@ public abstract class StandardAttributeName implements AttributeName, Value {
   public static class Onrejectionhandled extends StandardAttributeName implements BodyValue {
 
     private Onrejectionhandled() {
-      super(82, AttributeKind.STRING, "onrejectionhandled");
+      super(83, AttributeKind.STRING, "onrejectionhandled");
     }
 
   }
@@ -1029,7 +1041,15 @@ public abstract class StandardAttributeName implements AttributeName, Value {
   public static class Onstorage extends StandardAttributeName implements BodyValue {
 
     private Onstorage() {
-      super(83, AttributeKind.STRING, "onstorage");
+      super(84, AttributeKind.STRING, "onstorage");
+    }
+
+  }
+
+  public static class Onsubmit extends StandardAttributeName implements GlobalAttributeName {
+
+    private Onsubmit() {
+      super(85, AttributeKind.STRING, "onsubmit");
     }
 
   }
@@ -1037,7 +1057,7 @@ public abstract class StandardAttributeName implements AttributeName, Value {
   public static class Onunhandledrejection extends StandardAttributeName implements BodyValue {
 
     private Onunhandledrejection() {
-      super(84, AttributeKind.STRING, "onunhandledrejection");
+      super(86, AttributeKind.STRING, "onunhandledrejection");
     }
 
   }
@@ -1045,7 +1065,7 @@ public abstract class StandardAttributeName implements AttributeName, Value {
   public static class Onunload extends StandardAttributeName implements BodyValue {
 
     private Onunload() {
-      super(85, AttributeKind.STRING, "onunload");
+      super(87, AttributeKind.STRING, "onunload");
     }
 
   }
@@ -1053,7 +1073,7 @@ public abstract class StandardAttributeName implements AttributeName, Value {
   public static class Opacity extends StandardAttributeName implements ClipPathValue, DefsValue, GValue, PathValue, SvgValue {
 
     private Opacity() {
-      super(86, AttributeKind.STRING, "opacity");
+      super(88, AttributeKind.STRING, "opacity");
     }
 
   }
@@ -1061,7 +1081,7 @@ public abstract class StandardAttributeName implements AttributeName, Value {
   public static class Open extends StandardAttributeName implements DetailsValue {
 
     private Open() {
-      super(87, AttributeKind.BOOLEAN, "open");
+      super(89, AttributeKind.BOOLEAN, "open");
     }
 
   }
@@ -1069,7 +1089,7 @@ public abstract class StandardAttributeName implements AttributeName, Value {
   public static class Overflow extends StandardAttributeName implements ClipPathValue, DefsValue, GValue, PathValue, SvgValue {
 
     private Overflow() {
-      super(88, AttributeKind.STRING, "overflow");
+      super(90, AttributeKind.STRING, "overflow");
     }
 
   }
@@ -1077,7 +1097,7 @@ public abstract class StandardAttributeName implements AttributeName, Value {
   public static class PaintOrder extends StandardAttributeName implements ClipPathValue, DefsValue, GValue, PathValue, SvgValue {
 
     private PaintOrder() {
-      super(89, AttributeKind.STRING, "paint-order");
+      super(91, AttributeKind.STRING, "paint-order");
     }
 
   }
@@ -1085,7 +1105,7 @@ public abstract class StandardAttributeName implements AttributeName, Value {
   public static class Placeholder extends StandardAttributeName implements InputValue, TextareaValue {
 
     private Placeholder() {
-      super(90, AttributeKind.STRING, "placeholder");
+      super(92, AttributeKind.STRING, "placeholder");
     }
 
   }
@@ -1093,7 +1113,7 @@ public abstract class StandardAttributeName implements AttributeName, Value {
   public static class PointerEvents extends StandardAttributeName implements ClipPathValue, DefsValue, GValue, PathValue, SvgValue {
 
     private PointerEvents() {
-      super(91, AttributeKind.STRING, "pointer-events");
+      super(93, AttributeKind.STRING, "pointer-events");
     }
 
   }
@@ -1101,7 +1121,7 @@ public abstract class StandardAttributeName implements AttributeName, Value {
   public static class Readonly extends StandardAttributeName implements InputValue, TextareaValue {
 
     private Readonly() {
-      super(92, AttributeKind.BOOLEAN, "readonly");
+      super(94, AttributeKind.BOOLEAN, "readonly");
     }
 
   }
@@ -1109,7 +1129,7 @@ public abstract class StandardAttributeName implements AttributeName, Value {
   public static class Referrerpolicy extends StandardAttributeName implements LinkValue, ScriptValue {
 
     private Referrerpolicy() {
-      super(93, AttributeKind.STRING, "referrerpolicy");
+      super(95, AttributeKind.STRING, "referrerpolicy");
     }
 
   }
@@ -1117,7 +1137,7 @@ public abstract class StandardAttributeName implements AttributeName, Value {
   public static class Rel extends StandardAttributeName implements LinkValue {
 
     private Rel() {
-      super(94, AttributeKind.STRING, "rel");
+      super(96, AttributeKind.STRING, "rel");
     }
 
   }
@@ -1125,7 +1145,7 @@ public abstract class StandardAttributeName implements AttributeName, Value {
   public static class Required extends StandardAttributeName implements InputValue, SelectValue, TextareaValue {
 
     private Required() {
-      super(95, AttributeKind.BOOLEAN, "required");
+      super(97, AttributeKind.BOOLEAN, "required");
     }
 
   }
@@ -1133,7 +1153,7 @@ public abstract class StandardAttributeName implements AttributeName, Value {
   public static class Rev extends StandardAttributeName implements LinkValue {
 
     private Rev() {
-      super(96, AttributeKind.STRING, "rev");
+      super(98, AttributeKind.STRING, "rev");
     }
 
   }
@@ -1141,7 +1161,7 @@ public abstract class StandardAttributeName implements AttributeName, Value {
   public static class Reversed extends StandardAttributeName implements OlValue {
 
     private Reversed() {
-      super(97, AttributeKind.BOOLEAN, "reversed");
+      super(99, AttributeKind.BOOLEAN, "reversed");
     }
 
   }
@@ -1149,7 +1169,7 @@ public abstract class StandardAttributeName implements AttributeName, Value {
   public static class Rows extends StandardAttributeName implements TextareaValue {
 
     private Rows() {
-      super(98, AttributeKind.STRING, "rows");
+      super(100, AttributeKind.STRING, "rows");
     }
 
   }
@@ -1157,7 +1177,7 @@ public abstract class StandardAttributeName implements AttributeName, Value {
   public static class Selected extends StandardAttributeName implements OptionValue {
 
     private Selected() {
-      super(99, AttributeKind.BOOLEAN, "selected");
+      super(101, AttributeKind.BOOLEAN, "selected");
     }
 
   }
@@ -1165,7 +1185,7 @@ public abstract class StandardAttributeName implements AttributeName, Value {
   public static class ShapeRendering extends StandardAttributeName implements ClipPathValue, DefsValue, GValue, PathValue, SvgValue {
 
     private ShapeRendering() {
-      super(100, AttributeKind.STRING, "shape-rendering");
+      super(102, AttributeKind.STRING, "shape-rendering");
     }
 
   }
@@ -1173,7 +1193,7 @@ public abstract class StandardAttributeName implements AttributeName, Value {
   public static class Size extends StandardAttributeName implements SelectValue {
 
     private Size() {
-      super(101, AttributeKind.STRING, "size");
+      super(103, AttributeKind.STRING, "size");
     }
 
   }
@@ -1181,7 +1201,7 @@ public abstract class StandardAttributeName implements AttributeName, Value {
   public static class Sizes extends StandardAttributeName implements LinkValue {
 
     private Sizes() {
-      super(102, AttributeKind.STRING, "sizes");
+      super(104, AttributeKind.STRING, "sizes");
     }
 
   }
@@ -1189,7 +1209,7 @@ public abstract class StandardAttributeName implements AttributeName, Value {
   public static class Spellcheck extends StandardAttributeName implements GlobalAttributeName {
 
     private Spellcheck() {
-      super(103, AttributeKind.STRING, "spellcheck");
+      super(105, AttributeKind.STRING, "spellcheck");
     }
 
   }
@@ -1197,7 +1217,7 @@ public abstract class StandardAttributeName implements AttributeName, Value {
   public static class Src extends StandardAttributeName implements ImgValue, ScriptValue {
 
     private Src() {
-      super(104, AttributeKind.STRING, "src");
+      super(106, AttributeKind.STRING, "src");
     }
 
   }
@@ -1205,7 +1225,7 @@ public abstract class StandardAttributeName implements AttributeName, Value {
   public static class Srcset extends StandardAttributeName implements ImgValue {
 
     private Srcset() {
-      super(105, AttributeKind.STRING, "srcset");
+      super(107, AttributeKind.STRING, "srcset");
     }
 
   }
@@ -1213,7 +1233,7 @@ public abstract class StandardAttributeName implements AttributeName, Value {
   public static class Start extends StandardAttributeName implements OlValue {
 
     private Start() {
-      super(106, AttributeKind.STRING, "start");
+      super(108, AttributeKind.STRING, "start");
     }
 
   }
@@ -1221,7 +1241,7 @@ public abstract class StandardAttributeName implements AttributeName, Value {
   public static class StopColor extends StandardAttributeName implements ClipPathValue, DefsValue, GValue, PathValue, SvgValue {
 
     private StopColor() {
-      super(107, AttributeKind.STRING, "stop-color");
+      super(109, AttributeKind.STRING, "stop-color");
     }
 
   }
@@ -1229,7 +1249,7 @@ public abstract class StandardAttributeName implements AttributeName, Value {
   public static class StopOpacity extends StandardAttributeName implements ClipPathValue, DefsValue, GValue, PathValue, SvgValue {
 
     private StopOpacity() {
-      super(108, AttributeKind.STRING, "stop-opacity");
+      super(110, AttributeKind.STRING, "stop-opacity");
     }
 
   }
@@ -1237,7 +1257,7 @@ public abstract class StandardAttributeName implements AttributeName, Value {
   public static class Stroke extends StandardAttributeName implements ClipPathValue, DefsValue, GValue, PathValue, SvgValue {
 
     private Stroke() {
-      super(109, AttributeKind.STRING, "stroke");
+      super(111, AttributeKind.STRING, "stroke");
     }
 
   }
@@ -1245,7 +1265,7 @@ public abstract class StandardAttributeName implements AttributeName, Value {
   public static class StrokeDasharray extends StandardAttributeName implements ClipPathValue, DefsValue, GValue, PathValue, SvgValue {
 
     private StrokeDasharray() {
-      super(110, AttributeKind.STRING, "stroke-dasharray");
+      super(112, AttributeKind.STRING, "stroke-dasharray");
     }
 
   }
@@ -1253,7 +1273,7 @@ public abstract class StandardAttributeName implements AttributeName, Value {
   public static class StrokeDashoffset extends StandardAttributeName implements ClipPathValue, DefsValue, GValue, PathValue, SvgValue {
 
     private StrokeDashoffset() {
-      super(111, AttributeKind.STRING, "stroke-dashoffset");
+      super(113, AttributeKind.STRING, "stroke-dashoffset");
     }
 
   }
@@ -1261,7 +1281,7 @@ public abstract class StandardAttributeName implements AttributeName, Value {
   public static class StrokeLinecap extends StandardAttributeName implements ClipPathValue, DefsValue, GValue, PathValue, SvgValue {
 
     private StrokeLinecap() {
-      super(112, AttributeKind.STRING, "stroke-linecap");
+      super(114, AttributeKind.STRING, "stroke-linecap");
     }
 
   }
@@ -1269,7 +1289,7 @@ public abstract class StandardAttributeName implements AttributeName, Value {
   public static class StrokeLinejoin extends StandardAttributeName implements ClipPathValue, DefsValue, GValue, PathValue, SvgValue {
 
     private StrokeLinejoin() {
-      super(113, AttributeKind.STRING, "stroke-linejoin");
+      super(115, AttributeKind.STRING, "stroke-linejoin");
     }
 
   }
@@ -1277,7 +1297,7 @@ public abstract class StandardAttributeName implements AttributeName, Value {
   public static class StrokeMiterlimit extends StandardAttributeName implements ClipPathValue, DefsValue, GValue, PathValue, SvgValue {
 
     private StrokeMiterlimit() {
-      super(114, AttributeKind.STRING, "stroke-miterlimit");
+      super(116, AttributeKind.STRING, "stroke-miterlimit");
     }
 
   }
@@ -1285,7 +1305,7 @@ public abstract class StandardAttributeName implements AttributeName, Value {
   public static class StrokeOpacity extends StandardAttributeName implements ClipPathValue, DefsValue, GValue, PathValue, SvgValue {
 
     private StrokeOpacity() {
-      super(115, AttributeKind.STRING, "stroke-opacity");
+      super(117, AttributeKind.STRING, "stroke-opacity");
     }
 
   }
@@ -1293,7 +1313,7 @@ public abstract class StandardAttributeName implements AttributeName, Value {
   public static class StrokeWidth extends StandardAttributeName implements ClipPathValue, DefsValue, GValue, PathValue, SvgValue {
 
     private StrokeWidth() {
-      super(116, AttributeKind.STRING, "stroke-width");
+      super(118, AttributeKind.STRING, "stroke-width");
     }
 
   }
@@ -1301,7 +1321,7 @@ public abstract class StandardAttributeName implements AttributeName, Value {
   public static class Style extends StandardAttributeName implements GlobalAttributeName {
 
     private Style() {
-      super(117, AttributeKind.STRING, "style");
+      super(119, AttributeKind.STRING, "style");
     }
 
   }
@@ -1309,15 +1329,15 @@ public abstract class StandardAttributeName implements AttributeName, Value {
   public static class Tabindex extends StandardAttributeName implements GlobalAttributeName {
 
     private Tabindex() {
-      super(118, AttributeKind.STRING, "tabindex");
+      super(120, AttributeKind.STRING, "tabindex");
     }
 
   }
 
-  public static class Target extends StandardAttributeName implements AValue {
+  public static class Target extends StandardAttributeName implements AValue, FormValue {
 
     private Target() {
-      super(119, AttributeKind.STRING, "target");
+      super(121, AttributeKind.STRING, "target");
     }
 
   }
@@ -1325,7 +1345,7 @@ public abstract class StandardAttributeName implements AttributeName, Value {
   public static class TextAnchor extends StandardAttributeName implements ClipPathValue, DefsValue, GValue, PathValue, SvgValue {
 
     private TextAnchor() {
-      super(120, AttributeKind.STRING, "text-anchor");
+      super(122, AttributeKind.STRING, "text-anchor");
     }
 
   }
@@ -1333,7 +1353,7 @@ public abstract class StandardAttributeName implements AttributeName, Value {
   public static class TextDecoration extends StandardAttributeName implements ClipPathValue, DefsValue, GValue, PathValue, SvgValue {
 
     private TextDecoration() {
-      super(121, AttributeKind.STRING, "text-decoration");
+      super(123, AttributeKind.STRING, "text-decoration");
     }
 
   }
@@ -1341,7 +1361,7 @@ public abstract class StandardAttributeName implements AttributeName, Value {
   public static class TextOverflow extends StandardAttributeName implements ClipPathValue, DefsValue, GValue, PathValue, SvgValue {
 
     private TextOverflow() {
-      super(122, AttributeKind.STRING, "text-overflow");
+      super(124, AttributeKind.STRING, "text-overflow");
     }
 
   }
@@ -1349,7 +1369,7 @@ public abstract class StandardAttributeName implements AttributeName, Value {
   public static class TextRendering extends StandardAttributeName implements ClipPathValue, DefsValue, GValue, PathValue, SvgValue {
 
     private TextRendering() {
-      super(123, AttributeKind.STRING, "text-rendering");
+      super(125, AttributeKind.STRING, "text-rendering");
     }
 
   }
@@ -1357,7 +1377,7 @@ public abstract class StandardAttributeName implements AttributeName, Value {
   public static class Title extends StandardAttributeName implements GlobalAttributeName {
 
     private Title() {
-      super(124, AttributeKind.STRING, "title");
+      super(126, AttributeKind.STRING, "title");
     }
 
   }
@@ -1365,7 +1385,7 @@ public abstract class StandardAttributeName implements AttributeName, Value {
   public static class Transform extends StandardAttributeName implements ClipPathValue, GValue, PathValue, SvgValue {
 
     private Transform() {
-      super(125, AttributeKind.STRING, "transform");
+      super(127, AttributeKind.STRING, "transform");
     }
 
   }
@@ -1373,7 +1393,7 @@ public abstract class StandardAttributeName implements AttributeName, Value {
   public static class TransformOrigin extends StandardAttributeName implements ClipPathValue, DefsValue, GValue, PathValue, SvgValue {
 
     private TransformOrigin() {
-      super(126, AttributeKind.STRING, "transform-origin");
+      super(128, AttributeKind.STRING, "transform-origin");
     }
 
   }
@@ -1381,7 +1401,7 @@ public abstract class StandardAttributeName implements AttributeName, Value {
   public static class Translate extends StandardAttributeName implements GlobalAttributeName {
 
     private Translate() {
-      super(127, AttributeKind.STRING, "translate");
+      super(129, AttributeKind.STRING, "translate");
     }
 
   }
@@ -1389,7 +1409,7 @@ public abstract class StandardAttributeName implements AttributeName, Value {
   public static class Type extends StandardAttributeName implements ButtonValue, InputValue, LinkValue, OlValue, ScriptValue, StyleValue {
 
     private Type() {
-      super(128, AttributeKind.STRING, "type");
+      super(130, AttributeKind.STRING, "type");
     }
 
   }
@@ -1397,7 +1417,7 @@ public abstract class StandardAttributeName implements AttributeName, Value {
   public static class UnicodeBidi extends StandardAttributeName implements ClipPathValue, DefsValue, GValue, PathValue, SvgValue {
 
     private UnicodeBidi() {
-      super(129, AttributeKind.STRING, "unicode-bidi");
+      super(131, AttributeKind.STRING, "unicode-bidi");
     }
 
   }
@@ -1405,7 +1425,7 @@ public abstract class StandardAttributeName implements AttributeName, Value {
   public static class Value extends StandardAttributeName implements InputValue, OptionValue {
 
     private Value() {
-      super(130, AttributeKind.STRING, "value");
+      super(132, AttributeKind.STRING, "value");
     }
 
   }
@@ -1413,7 +1433,7 @@ public abstract class StandardAttributeName implements AttributeName, Value {
   public static class VectorEffect extends StandardAttributeName implements ClipPathValue, DefsValue, GValue, PathValue, SvgValue {
 
     private VectorEffect() {
-      super(131, AttributeKind.STRING, "vector-effect");
+      super(133, AttributeKind.STRING, "vector-effect");
     }
 
   }
@@ -1421,7 +1441,7 @@ public abstract class StandardAttributeName implements AttributeName, Value {
   public static class ViewBox extends StandardAttributeName implements SvgValue {
 
     private ViewBox() {
-      super(132, AttributeKind.STRING, "viewBox");
+      super(134, AttributeKind.STRING, "viewBox");
     }
 
   }
@@ -1429,7 +1449,7 @@ public abstract class StandardAttributeName implements AttributeName, Value {
   public static class Visibility extends StandardAttributeName implements ClipPathValue, DefsValue, GValue, PathValue, SvgValue {
 
     private Visibility() {
-      super(133, AttributeKind.STRING, "visibility");
+      super(135, AttributeKind.STRING, "visibility");
     }
 
   }
@@ -1437,7 +1457,7 @@ public abstract class StandardAttributeName implements AttributeName, Value {
   public static class WhiteSpace extends StandardAttributeName implements ClipPathValue, DefsValue, GValue, PathValue, SvgValue {
 
     private WhiteSpace() {
-      super(134, AttributeKind.STRING, "white-space");
+      super(136, AttributeKind.STRING, "white-space");
     }
 
   }
@@ -1445,7 +1465,7 @@ public abstract class StandardAttributeName implements AttributeName, Value {
   public static class Width extends StandardAttributeName implements ImgValue, SvgValue {
 
     private Width() {
-      super(135, AttributeKind.STRING, "width");
+      super(137, AttributeKind.STRING, "width");
     }
 
   }
@@ -1453,7 +1473,7 @@ public abstract class StandardAttributeName implements AttributeName, Value {
   public static class WordSpacing extends StandardAttributeName implements ClipPathValue, DefsValue, GValue, PathValue, SvgValue {
 
     private WordSpacing() {
-      super(136, AttributeKind.STRING, "word-spacing");
+      super(138, AttributeKind.STRING, "word-spacing");
     }
 
   }
@@ -1461,7 +1481,7 @@ public abstract class StandardAttributeName implements AttributeName, Value {
   public static class Wrap extends StandardAttributeName implements TextareaValue {
 
     private Wrap() {
-      super(137, AttributeKind.STRING, "wrap");
+      super(139, AttributeKind.STRING, "wrap");
     }
 
   }
@@ -1469,7 +1489,7 @@ public abstract class StandardAttributeName implements AttributeName, Value {
   public static class WritingMode extends StandardAttributeName implements ClipPathValue, DefsValue, GValue, PathValue, SvgValue {
 
     private WritingMode() {
-      super(138, AttributeKind.STRING, "writing-mode");
+      super(140, AttributeKind.STRING, "writing-mode");
     }
 
   }
@@ -1477,7 +1497,7 @@ public abstract class StandardAttributeName implements AttributeName, Value {
   public static class Xmlns extends StandardAttributeName implements SvgValue {
 
     private Xmlns() {
-      super(139, AttributeKind.STRING, "xmlns");
+      super(141, AttributeKind.STRING, "xmlns");
     }
 
   }
