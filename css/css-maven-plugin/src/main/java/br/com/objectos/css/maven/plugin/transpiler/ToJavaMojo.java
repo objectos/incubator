@@ -19,6 +19,8 @@ import br.com.objectos.code.java.declaration.PackageName;
 import br.com.objectos.code.java.io.JavaFile;
 import br.com.objectos.code.java.type.NamedClass;
 import br.com.objectos.css.processor.ToJavaFile;
+import br.com.objectos.fs.Directory;
+import br.com.objectos.fs.LocalFs;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -42,6 +44,21 @@ import org.apache.maven.plugins.annotations.Parameter;
     defaultPhase = LifecyclePhase.GENERATE_SOURCES
 )
 public class ToJavaMojo extends AbstractMojo {
+
+  @Parameter(defaultValue = "${project.build.sourceDirectory}", required = true, readonly = true)
+  private File sourceDirectory;
+
+  private final ToJavaFile toJavaFile = ToJavaFile.generatedBy(getClass());
+
+  @Override
+  public final void execute() throws MojoExecutionException, MojoFailureException {
+    try {
+      Path sourceDirectoryPath = sourceDirectory.toPath();
+      Files.walkFileTree(sourceDirectoryPath, new ThisFileVisitor(sourceDirectoryPath));
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
 
   private class ThisCssFile extends ToJavaFile.CssFile {
 
@@ -99,24 +116,12 @@ public class ToJavaMojo extends AbstractMojo {
       JavaFile javaFile;
       javaFile = toJavaFile.generate(cssFile);
 
-      javaFile.writeTo(sourceDirectoryPath);
+      Directory directory;
+      directory = LocalFs.getDirectory(sourceDirectory);
+
+      javaFile.writeTo(directory);
     }
 
-  }
-
-  @Parameter(defaultValue = "${project.build.sourceDirectory}", required = true, readonly = true)
-  private File sourceDirectory;
-
-  private final ToJavaFile toJavaFile = ToJavaFile.generatedBy(getClass());
-
-  @Override
-  public final void execute() throws MojoExecutionException, MojoFailureException {
-    try {
-      Path sourceDirectoryPath = sourceDirectory.toPath();
-      Files.walkFileTree(sourceDirectoryPath, new ThisFileVisitor(sourceDirectoryPath));
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
   }
 
 }

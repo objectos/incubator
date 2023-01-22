@@ -41,7 +41,7 @@ public abstract class Step {
 
   protected final void writeJavaFile(PackageName packageName, TypeCode code) {
     adapter.writeJavaFile(
-      javaFile(packageName, code)
+        javaFile(packageName, code)
     );
   }
 

@@ -23,21 +23,22 @@ import br.com.objectos.code.java.declaration.AnnotationCode;
 import br.com.objectos.code.java.io.JavaFile;
 import br.com.objectos.css.boot.spec.CssSpecDsl;
 import br.com.objectos.css.boot.spec.StepAdapter;
+import br.com.objectos.fs.Directory;
+import br.com.objectos.fs.LocalFs;
+import br.com.objectos.fs.ResolvedPath;
 import java.io.IOException;
 import java.io.UncheckedIOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 
 public class CssBoot extends StepAdapter {
 
   public static final AnnotationCode GENERATED = annotation(
-    Generated.class,
-    l(CssBoot.class.getCanonicalName())
+      Generated.class,
+      l(CssBoot.class.getCanonicalName())
   );
 
-  private final Path srcDirectory;
+  private final Directory srcDirectory;
 
-  CssBoot(Path srcDirectory) {
+  CssBoot(Directory srcDirectory) {
     this.srcDirectory = srcDirectory;
   }
 
@@ -45,12 +46,15 @@ public class CssBoot extends StepAdapter {
     String srcDirectoryPath;
     srcDirectoryPath = args[0];
 
-    Path resolved;
-    resolved = Path.of(srcDirectoryPath);
+    ResolvedPath resolved;
+    resolved = LocalFs.resolve(srcDirectoryPath);
 
-    Files.createDirectories(resolved);
+    Directory srcDirectory;
+    srcDirectory = resolved.toDirectoryCreateIfNotFound();
 
-    CssBoot boot = new CssBoot(resolved);
+    CssBoot boot = new CssBoot(
+        srcDirectory
+    );
 
     boot.execute();
   }
