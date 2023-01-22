@@ -23,5 +23,6 @@ module br.com.objectos.html.boot {
   requires br.com.objectos.code.annotations;
   requires objectos.lang;
   requires objectos.util;
+  requires br.com.objectos.fs;
   requires java.compiler;
 }
