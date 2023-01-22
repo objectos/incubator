@@ -88,7 +88,7 @@ public class TypeNames {
 
     _Value = className("Value");
 
-    _Value___ = VarArgs.of(ainit(_Value));
+    _Value___ = VarArgs.of(a(_Value));
 
     _Zero = className("Zero");
   }

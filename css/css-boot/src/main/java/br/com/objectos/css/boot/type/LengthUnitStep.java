@@ -90,7 +90,7 @@ public class LengthUnitStep extends Step {
 
       field(
         _private(), _static(), _final(),
-        ainit(TypeNames._LengthUnit),
+        a(TypeNames._LengthUnit),
         init(Ids.ARRAY, TypeNames._LengthUnit.invoke("values"))
       ),
 

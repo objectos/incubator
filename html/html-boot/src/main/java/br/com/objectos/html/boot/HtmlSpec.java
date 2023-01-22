@@ -50,13 +50,7 @@ class HtmlSpec extends AbstractSpec {
         .attribute("style").as("inlineStyle")
         .attribute("tabindex")
         .attribute("title")
-        .attribute("translate")
-
-        .attribute("onclick")
-        .attribute("onsubmit")
-
-        .attribute("aria-hidden")
-        .attribute("role");
+        .attribute("translate");
 
     CategorySpec embedded = category("embedded");
     CategorySpec flow = category("flow");
@@ -104,7 +98,6 @@ class HtmlSpec extends AbstractSpec {
         .attribute("http-equiv")
         .attribute("content")
         .attribute("charset")
-        .attribute("property")
         .noEndTag();
 
     // <style> is not a flow stricly speaking, but according to spec:
@@ -462,11 +455,6 @@ class HtmlSpec extends AbstractSpec {
     element("table")
         .category(flow)
         .category(palpable)
-        .attribute("align")
-        .attribute("border")
-        .attribute("cellpadding")
-        .attribute("cellspacing")
-        .attribute("width")
         .one(el("thead"))
         .zeroOrMore(el("tbody"));
 
@@ -497,8 +485,6 @@ class HtmlSpec extends AbstractSpec {
         .attribute("action")
         .attribute("enctype")
         .attribute("method")
-        .attribute("name")
-        .attribute("target")
         .attributeEnd();
 
     element("label")

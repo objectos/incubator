@@ -15,15 +15,24 @@
  */
 package br.com.objectos.html.boot.spec;
 
+import br.com.objectos.code.java.expression.Argument;
+import br.com.objectos.html.boot.attribute.AttributeNames;
+
 public enum AttributeKind {
 
-  STRING,
+  STRING(AttributeNames.AttributeKind.id("STRING")),
 
-  BOOLEAN,
+  BOOLEAN(AttributeNames.AttributeKind.id("BOOLEAN")),
 
-  ID,
+  ID(null),
 
-  CLASS_NAME;
+  CLASS_NAME(null);
+
+  private final Argument attributeNameFieldAccess;
+
+  private AttributeKind(Argument attributeNameFieldAccess) {
+    this.attributeNameFieldAccess = attributeNameFieldAccess;
+  }
 
   public final boolean isBoolean() {
     return BOOLEAN.equals(this);
@@ -31,6 +40,10 @@ public enum AttributeKind {
 
   public final boolean isString() {
     return STRING.equals(this);
+  }
+
+  public final Argument asAttributeNameFieldAccess() {
+    return attributeNameFieldAccess;
   }
 
 }

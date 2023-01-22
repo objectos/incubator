@@ -15,28 +15,16 @@
  */
 package br.com.objectos.css.specgen;
 
-import java.io.IOException;
-import java.util.List;
-import java.util.stream.Stream;
-import objectos.code.JavaTemplate;
+import br.com.objectos.css.specgen.spec.Spec;
 
-abstract class Specgen extends PropertyModuleTemplate {
+class Specgen extends AbstractSpecgen {
 
-  private Spec spec;
-
-  final void generate(Spec spec) throws IOException {
-    this.spec = spec;
-
-    try {
-      generate();
-    } finally {
-      this.spec = null;
-    }
+  Specgen(Spec spec) {
+    super(spec);
   }
 
-  abstract void templateSink(JavaTemplate template) throws IOException;
-
-  private void generate() throws IOException {
+  @Override
+  protected final void definition() {
     // A
     p("align-content");
     p("align-items");
@@ -153,24 +141,6 @@ abstract class Specgen extends PropertyModuleTemplate {
 
     // Z
     p("z-index");
-  }
-
-  private void p(String name) throws IOException {
-    var p = spec.getProperty(name);
-
-    set(p, List.of());
-
-    templateSink(this);
-  }
-
-  private void p(String name, String... more) throws IOException {
-    var p = spec.getProperty(name);
-
-    var group = Stream.of(more).map(spec::getProperty).toList();
-
-    set(p, group);
-
-    templateSink(this);
   }
 
 }

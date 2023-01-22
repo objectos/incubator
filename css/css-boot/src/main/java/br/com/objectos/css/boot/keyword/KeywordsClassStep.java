@@ -113,7 +113,7 @@ public class KeywordsClassStep extends Step {
 
         field(
             _private(), _static(), _final(), implArray,
-            init(Ids.ARRAY, _new(implArray, ainit(constantNames)))
+            init(Ids.ARRAY, _new(implArray, a(constantNames)))
         ),
 
         field(

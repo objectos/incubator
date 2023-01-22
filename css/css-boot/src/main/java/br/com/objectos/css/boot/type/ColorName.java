@@ -38,8 +38,8 @@ public class ColorName implements Comparable<ColorName> {
   public static ColorName of(String name) {
     Check.notNull(name, "name == null");
     return new ColorName(
-      name,
-      id(JavaNames.toIdentifier(name))
+        name,
+        id(JavaNames.toIdentifier(name))
     );
   }
 
@@ -57,7 +57,7 @@ public class ColorName implements Comparable<ColorName> {
     return name.compareTo(o.name);
   }
 
-  final Invoke invokePut(Callee callee) {
+  final MethodInvocation invokePut(Callee callee) {
     return invoke(callee, "put", l(name), identifier);
   }
 

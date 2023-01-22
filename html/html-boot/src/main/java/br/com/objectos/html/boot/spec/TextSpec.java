@@ -15,17 +15,18 @@
  */
 package br.com.objectos.html.boot.spec;
 
+import br.com.objectos.code.java.type.NamedClass;
 import java.util.Set;
 import java.util.TreeSet;
 
 public class TextSpec implements Child, Name {
 
-  private final String className;
+  private final NamedClass className;
 
   private final Set<ElementSpec> parentSet = new TreeSet<>();
 
   TextSpec(SpecDsl dsl) {
-    className = Object.class.toString();
+    className = NamedClass.object();
   }
 
   @Override
@@ -37,6 +38,10 @@ public class TextSpec implements Child, Name {
   public final TextSpec category(CategorySpec category) {
     category.add(this);
     return this;
+  }
+
+  public final NamedClass className() {
+    return className;
   }
 
   @Override

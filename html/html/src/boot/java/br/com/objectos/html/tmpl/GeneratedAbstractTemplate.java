@@ -4,17 +4,12 @@ import br.com.objectos.code.annotations.Generated;
 import br.com.objectos.html.attribute.StandardAttributeName;
 import br.com.objectos.html.attribute.StandardAttributeName.Accesskey;
 import br.com.objectos.html.attribute.StandardAttributeName.Action;
-import br.com.objectos.html.attribute.StandardAttributeName.Align;
 import br.com.objectos.html.attribute.StandardAttributeName.AlignmentBaseline;
 import br.com.objectos.html.attribute.StandardAttributeName.Alt;
-import br.com.objectos.html.attribute.StandardAttributeName.AriaHidden;
 import br.com.objectos.html.attribute.StandardAttributeName.Async;
 import br.com.objectos.html.attribute.StandardAttributeName.Autocomplete;
 import br.com.objectos.html.attribute.StandardAttributeName.Autofocus;
 import br.com.objectos.html.attribute.StandardAttributeName.BaselineShift;
-import br.com.objectos.html.attribute.StandardAttributeName.Border;
-import br.com.objectos.html.attribute.StandardAttributeName.Cellpadding;
-import br.com.objectos.html.attribute.StandardAttributeName.Cellspacing;
 import br.com.objectos.html.attribute.StandardAttributeName.Charset;
 import br.com.objectos.html.attribute.StandardAttributeName.Cite;
 import br.com.objectos.html.attribute.StandardAttributeName.Class;
@@ -79,7 +74,6 @@ import br.com.objectos.html.attribute.StandardAttributeName.Nomodule;
 import br.com.objectos.html.attribute.StandardAttributeName.Onafterprint;
 import br.com.objectos.html.attribute.StandardAttributeName.Onbeforeprint;
 import br.com.objectos.html.attribute.StandardAttributeName.Onbeforeunload;
-import br.com.objectos.html.attribute.StandardAttributeName.Onclick;
 import br.com.objectos.html.attribute.StandardAttributeName.Onhashchange;
 import br.com.objectos.html.attribute.StandardAttributeName.Onlanguagechange;
 import br.com.objectos.html.attribute.StandardAttributeName.Onmessage;
@@ -90,7 +84,6 @@ import br.com.objectos.html.attribute.StandardAttributeName.Onpageshow;
 import br.com.objectos.html.attribute.StandardAttributeName.Onpopstate;
 import br.com.objectos.html.attribute.StandardAttributeName.Onrejectionhandled;
 import br.com.objectos.html.attribute.StandardAttributeName.Onstorage;
-import br.com.objectos.html.attribute.StandardAttributeName.Onsubmit;
 import br.com.objectos.html.attribute.StandardAttributeName.Onunhandledrejection;
 import br.com.objectos.html.attribute.StandardAttributeName.Onunload;
 import br.com.objectos.html.attribute.StandardAttributeName.Opacity;
@@ -99,14 +92,12 @@ import br.com.objectos.html.attribute.StandardAttributeName.Overflow;
 import br.com.objectos.html.attribute.StandardAttributeName.PaintOrder;
 import br.com.objectos.html.attribute.StandardAttributeName.Placeholder;
 import br.com.objectos.html.attribute.StandardAttributeName.PointerEvents;
-import br.com.objectos.html.attribute.StandardAttributeName.Property;
 import br.com.objectos.html.attribute.StandardAttributeName.Readonly;
 import br.com.objectos.html.attribute.StandardAttributeName.Referrerpolicy;
 import br.com.objectos.html.attribute.StandardAttributeName.Rel;
 import br.com.objectos.html.attribute.StandardAttributeName.Required;
 import br.com.objectos.html.attribute.StandardAttributeName.Rev;
 import br.com.objectos.html.attribute.StandardAttributeName.Reversed;
-import br.com.objectos.html.attribute.StandardAttributeName.Role;
 import br.com.objectos.html.attribute.StandardAttributeName.Rows;
 import br.com.objectos.html.attribute.StandardAttributeName.Selected;
 import br.com.objectos.html.attribute.StandardAttributeName.ShapeRendering;
@@ -226,6 +217,7 @@ import br.com.objectos.html.spi.type.UlValue;
 
 @Generated("br.com.objectos.html.boot.HtmlBoot")
 abstract class GeneratedAbstractTemplate {
+
   public final ElementName a(AValue... values) {
     return addStandardElement(StandardElementName.A, values);
   }
@@ -778,20 +770,12 @@ abstract class GeneratedAbstractTemplate {
     return addStandardAttribute(StandardAttributeName.ACTION, value);
   }
 
-  public final Align align(String value) {
-    return addStandardAttribute(StandardAttributeName.ALIGN, value);
-  }
-
   public final AlignmentBaseline alignmentBaseline(String value) {
     return addStandardAttribute(StandardAttributeName.ALIGNMENTBASELINE, value);
   }
 
   public final Alt alt(String value) {
     return addStandardAttribute(StandardAttributeName.ALT, value);
-  }
-
-  public final AriaHidden ariaHidden(String value) {
-    return addStandardAttribute(StandardAttributeName.ARIAHIDDEN, value);
   }
 
   public final Async async() {
@@ -808,18 +792,6 @@ abstract class GeneratedAbstractTemplate {
 
   public final BaselineShift baselineShift(String value) {
     return addStandardAttribute(StandardAttributeName.BASELINESHIFT, value);
-  }
-
-  public final Border border(String value) {
-    return addStandardAttribute(StandardAttributeName.BORDER, value);
-  }
-
-  public final Cellpadding cellpadding(String value) {
-    return addStandardAttribute(StandardAttributeName.CELLPADDING, value);
-  }
-
-  public final Cellspacing cellspacing(String value) {
-    return addStandardAttribute(StandardAttributeName.CELLSPACING, value);
   }
 
   public final Charset charset(String value) {
@@ -1082,10 +1054,6 @@ abstract class GeneratedAbstractTemplate {
     return addStandardAttribute(StandardAttributeName.ONBEFOREUNLOAD, value);
   }
 
-  public final Onclick onclick(String value) {
-    return addStandardAttribute(StandardAttributeName.ONCLICK, value);
-  }
-
   public final Onhashchange onhashchange(String value) {
     return addStandardAttribute(StandardAttributeName.ONHASHCHANGE, value);
   }
@@ -1126,10 +1094,6 @@ abstract class GeneratedAbstractTemplate {
     return addStandardAttribute(StandardAttributeName.ONSTORAGE, value);
   }
 
-  public final Onsubmit onsubmit(String value) {
-    return addStandardAttribute(StandardAttributeName.ONSUBMIT, value);
-  }
-
   public final Onunhandledrejection onunhandledrejection(String value) {
     return addStandardAttribute(StandardAttributeName.ONUNHANDLEDREJECTION, value);
   }
@@ -1162,10 +1126,6 @@ abstract class GeneratedAbstractTemplate {
     return addStandardAttribute(StandardAttributeName.POINTEREVENTS, value);
   }
 
-  public final Property property(String value) {
-    return addStandardAttribute(StandardAttributeName.PROPERTY, value);
-  }
-
   public final Readonly readonly() {
     return addStandardAttribute(StandardAttributeName.READONLY);
   }
@@ -1188,10 +1148,6 @@ abstract class GeneratedAbstractTemplate {
 
   public final Reversed reversed() {
     return addStandardAttribute(StandardAttributeName.REVERSED);
-  }
-
-  public final Role role(String value) {
-    return addStandardAttribute(StandardAttributeName.ROLE, value);
   }
 
   public final Rows rows(String value) {
@@ -1365,4 +1321,5 @@ abstract class GeneratedAbstractTemplate {
   abstract ElementName addStandardElement(StandardElementName name, String text);
 
   abstract ElementName addStandardElement(StandardElementName name, br.com.objectos.html.spi.type.Value[] values);
+
 }

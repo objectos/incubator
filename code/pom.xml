@@ -39,6 +39,7 @@
 	<inceptionYear>2014</inceptionYear>
 
 	<modules>
+		<module>code</module>
 		<module>code-boot</module>
 		<module>code-jdt</module>
 		<module>code-processor</module>

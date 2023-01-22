@@ -115,15 +115,6 @@ class Compiler {
     codesIndex = returnTo;
   }
 
-  private void doBooleanStd(int code) {
-    int returnTo = codesIndex;
-
-    codesIndex = popAttribute();
-    addCode(code);
-
-    codesIndex = returnTo;
-  }
-
   private void doEndElement() {
     addCode(ByteCode.END_ELEMENT);
     addCode(currentElement);
@@ -161,12 +152,6 @@ class Compiler {
     pushAttribute();
     addCode(0); // index slot
     addCode(0); // name length slot
-  }
-
-  private void doMarkBooleanStd() {
-    addCode(ByteCode.BOOLEAN_STD);
-    pushAttribute();
-    addCode(0); // code slot
   }
 
   private void doMarkElementOrTag() {
@@ -291,8 +276,6 @@ class Compiler {
     codesIndex = returnTo;
   }
 
-  //
-
   private void doStringStd(int code, int vIndex, int vLength) {
     int returnTo = codesIndex;
 
@@ -309,6 +292,8 @@ class Compiler {
     addCode(index);
     addCode(length);
   }
+
+  //
 
   private void doTextElement(int index, int length) {
     int returnTo = codesIndex;
@@ -352,9 +337,6 @@ class Compiler {
       case ByteProto.BOOLEAN_ATTR:
         doBooleanAttribute(getProto(), getProto());
         break;
-      case ByteProto.BOOLEAN_STD:
-        doBooleanStd(getProto());
-        break;
       case ByteProto.END_ELEMENT:
         doEndElement();
         break;
@@ -366,9 +348,6 @@ class Compiler {
         break;
       case ByteProto.MARK_BOOLEAN_ATTR:
         doMarkBooleanAttr();
-        break;
-      case ByteProto.MARK_BOOLEAN_STD:
-        doMarkBooleanStd();
         break;
       case ByteProto.MARK_ELEMENT:
       case ByteProto.MARK_TAG:

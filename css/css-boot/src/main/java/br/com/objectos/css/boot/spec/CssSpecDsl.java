@@ -44,8 +44,6 @@ public class CssSpecDsl {
 
   private final Map<String, KeywordName> keywords = new TreeMap<>();
 
-  private final Set<String> lengthUnits = new TreeSet<>();
-
   private final Map<Primitive, PrimitiveType> primitives
       = new EnumMap<Primitive, PrimitiveType>(Primitive.class);
 
@@ -88,8 +86,6 @@ public class CssSpecDsl {
 
   public final void addLengthUnit(String unit) {
     step.addLengthUnit(unit);
-
-    lengthUnits.add(unit);
   }
 
   public final void addNamedColor(String name) {
@@ -192,18 +188,6 @@ public class CssSpecDsl {
     }
 
     return type;
-  }
-
-  final Set<ColorName> colors() {
-    return colors;
-  }
-
-  final Iterable<String> lengthUnits() {
-    return lengthUnits;
-  }
-
-  final ValueType valueType(String name) {
-    return valueTypes.get(name);
   }
 
 }

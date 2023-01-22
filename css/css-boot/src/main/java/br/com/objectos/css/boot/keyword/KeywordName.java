@@ -156,7 +156,7 @@ public class KeywordName
     );
   }
 
-  final Invoke invokePut(Identifier map) {
+  final MethodInvocation invokePut(Identifier map) {
     return invoke(map, "put", l(name), fieldName);
   }
 

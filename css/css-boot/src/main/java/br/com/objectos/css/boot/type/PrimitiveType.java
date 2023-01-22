@@ -30,43 +30,30 @@ import objectos.lang.Check;
 public class PrimitiveType implements ParameterType, Value {
 
   private final Set<NamedClass> interfaces = new TreeSet<>();
-
-  private final Set<String> interfaceNames = new TreeSet<>();
-
   private final Primitive kind;
 
   PrimitiveType(Primitive kind) {
     this.kind = kind;
-
-    interfaceNames.add("Value");
   }
 
   public static PrimitiveType of(Primitive kind) {
     Check.notNull(kind, "kind == null");
-
     return new PrimitiveType(kind);
   }
 
   @Override
   public final void acceptValueType(ValueType type) {
     interfaces.add(type.className);
-
-    interfaceNames.add(type.simpleName);
   }
 
   public final ExtendsMany extendsClause() {
     interfaces.add(TypeNames._Value);
-
     return _extends(interfaces);
-  }
-
-  public final Set<String> interfaceNames() {
-    return interfaceNames;
   }
 
   @Override
   public final NamedArray toNamedArray() {
-    return ainit(kind.typeClassName());
+    return a(kind.typeClassName());
   }
 
   @Override
@@ -76,10 +63,6 @@ public class PrimitiveType implements ParameterType, Value {
 
   public final NamedClass typeClassName() {
     return kind.typeClassName();
-  }
-
-  public final String typeSimpleName() {
-    return kind.typeSimpleName();
   }
 
 }

@@ -6,6 +6,7 @@ import br.com.objectos.html.spi.tmpl.Renderer;
 
 @Generated("br.com.objectos.html.boot.HtmlBoot")
 public enum StandardElementName implements ElementName {
+
   A(ElementKind.NORMAL, "a"),
 
   ABBR(ElementKind.NORMAL, "abbr"),
@@ -193,4 +194,5 @@ public enum StandardElementName implements ElementName {
 
   @Override
   public final void render(Renderer renderer) {}
+
 }

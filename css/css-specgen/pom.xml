@@ -65,7 +65,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>br.com.objectos</groupId>
-			<artifactId>objectos-code</artifactId>
+			<artifactId>code</artifactId>
 		</dependency>
 
 		<dependency>

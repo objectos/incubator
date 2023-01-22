@@ -23,7 +23,7 @@ class ElementAttributeSpec extends AttributeSpec {
 
   @Override
   final ElementAttributeSpec toElementAttributeSpec(ElementSpec parent) {
-    interfaceSet.add(parent.valueSimpleName());
+    interfaceSet.add(parent.classNameValue());
     return this;
   }
 
