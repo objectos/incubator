@@ -17,7 +17,8 @@ import br.com.objectos.code.processing.type.ModelTypeMarker;
 import br.com.objectos.code.util.AbstractCodeCoreTest;
 import br.com.objectos.code.util.Marker1;
 import br.com.objectos.code.util.PackageAnnotation;
-import java.io.ByteArrayOutputStream;
+import br.com.objectos.core.io.Charsets;
+import br.com.objectos.core.io.Read;
 import java.io.IOException;
 import javax.lang.model.element.PackageElement;
 import javax.lang.model.util.Elements;
@@ -50,15 +51,7 @@ public class ProcessingPackageTest extends AbstractCodeModelTest {
     ProcessingResource res;
     res = code.getResource(StandardLocation.CLASS_PATH, "get-resource.txt");
 
-    var baos = new ByteArrayOutputStream();
-
-    try (var in = res.openInputStream()) {
-      in.transferTo(baos);
-    }
-
-    var s = new String(baos.toByteArray());
-
-    assertEquals(s, "got it!");
+    assertEquals(Read.string(res, Charsets.utf8()), "got it!");
   }
 
   @Test
@@ -85,8 +78,8 @@ public class ProcessingPackageTest extends AbstractCodeModelTest {
     pkg00 = getProcessingPackage(ModelTypeMarker.class);
 
     assertEquals(
-      pkg00.toNamedPackage(),
-      PackageName.named("br.com.objectos.code.processing.type")
+        pkg00.toNamedPackage(),
+        PackageName.named("br.com.objectos.code.processing.type")
     );
   }
 

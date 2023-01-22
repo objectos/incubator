@@ -13,10 +13,33 @@ import static org.testng.Assert.fail;
 
 import br.com.objectos.code.java.type.NamedClass;
 import br.com.objectos.code.util.AbstractCodeJavaTest;
-import java.nio.file.Path;
+import br.com.objectos.fs.Directory;
+import br.com.objectos.fs.testing.TmpDir;
+import java.io.IOException;
 import org.testng.annotations.Test;
 
 public class PackageNameTest extends AbstractCodeJavaTest {
+
+  @Test
+  public void getOrCreateJavaPackageDirectory() throws IOException {
+    Directory src;
+    src = TmpDir.create();
+
+    PackageName packageName;
+    packageName = PackageName.unnamed();
+
+    Directory unnamed;
+    unnamed = packageName.createSourceDirectory(src);
+
+    assertEquals(unnamed, src);
+
+    packageName = PackageName._package("a.b");
+
+    Directory bPackage;
+    bPackage = packageName.createSourceDirectory(src);
+
+    assertEquals(bPackage, src.getDirectory("a").getDirectory("b"));
+  }
 
   @Test
   public void nestedClass() {
@@ -93,35 +116,18 @@ public class PackageNameTest extends AbstractCodeJavaTest {
   }
 
   @Test
-  public void resolve() {
-    var src = TMPDIR;
-
-    var packageName = PackageName.unnamed();
-
-    var unnamed = packageName.resolve(src);
-
-    assertEquals(unnamed, src);
-
-    packageName = PackageName._package("a.b");
-
-    var result = packageName.resolve(src);
-
-    assertEquals(result, TMPDIR.resolve(Path.of("a", "b")));
-  }
-
-  @Test
   public void simpleName() {
     assertEquals(
-      PackageName.unnamed().getSimpleName(),
-      ""
+        PackageName.unnamed().getSimpleName(),
+        ""
     );
     assertEquals(
-      PackageName.named("simple").getSimpleName(),
-      "simple"
+        PackageName.named("simple").getSimpleName(),
+        "simple"
     );
     assertEquals(
-      PackageName.named("fully.qualified.name").getSimpleName(),
-      "name"
+        PackageName.named("fully.qualified.name").getSimpleName(),
+        "name"
     );
   }
 

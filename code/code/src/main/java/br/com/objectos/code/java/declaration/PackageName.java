@@ -39,7 +39,9 @@ import br.com.objectos.code.java.io.JavaFileCodeElement;
 import br.com.objectos.code.java.type.NamedClass;
 import br.com.objectos.code.java.type.NamedClassOrPackage;
 import br.com.objectos.code.model.element.ProcessingPackage;
-import java.nio.file.Path;
+import br.com.objectos.fs.Directory;
+import br.com.objectos.fs.ResolvedPath;
+import java.io.IOException;
 import javax.lang.model.SourceVersion;
 import objectos.lang.Check;
 
@@ -65,8 +67,8 @@ public class PackageName implements NamedClassOrPackage, JavaFileCodeElement {
   public static PackageName named(String packageName) {
     Check.notNull(packageName, "packageName == null");
     Check.argument(
-      SourceVersion.isName(packageName),
-      packageName, " is not a valid package name"
+        SourceVersion.isName(packageName),
+        packageName, " is not a valid package name"
     );
     return new PackageName(packageName);
   }
@@ -116,6 +118,39 @@ public class PackageName implements NamedClassOrPackage, JavaFileCodeElement {
   }
 
   @Override
+  public final Directory createSourceDirectory(Directory directory) throws IOException {
+    Check.notNull(directory, "directory == null");
+
+    int length;
+    length = canonicalName.length();
+
+    Directory result;
+    result = directory;
+
+    StringBuilder partBuilder;
+    partBuilder = new StringBuilder(length);
+
+    for (int i = 0; i < length; i++) {
+      char c;
+      c = canonicalName.charAt(i);
+
+      if (c != '.') {
+        partBuilder.append(c);
+
+        continue;
+      }
+
+      result = createJavaPackageDirectory0(result, partBuilder);
+    }
+
+    if (partBuilder.length() > 0) {
+      result = createJavaPackageDirectory0(result, partBuilder);
+    }
+
+    return result;
+  }
+
+  @Override
   public final boolean equals(Object obj) {
     if (!(obj instanceof PackageName)) {
       return false;
@@ -160,43 +195,33 @@ public class PackageName implements NamedClassOrPackage, JavaFileCodeElement {
     Check.notNull(child, "child == null");
     String newPackage = canonicalName + "." + child;
     Check.argument(
-      SourceVersion.isName(newPackage),
-      newPackage, " is not a valid package name"
+        SourceVersion.isName(newPackage),
+        newPackage, " is not a valid package name"
     );
     return new PackageName(newPackage);
-  }
-
-  public final Path resolve(Path path) {
-    var result = path;
-
-    var beginIndex = 0;
-
-    var endIndex = canonicalName.indexOf('.', beginIndex);
-
-    while (endIndex > 0) {
-      var part = canonicalName.substring(beginIndex, endIndex);
-
-      result = result.resolve(part);
-
-      beginIndex = endIndex + 1;
-
-      endIndex = canonicalName.indexOf('.', beginIndex);
-    }
-
-    endIndex = canonicalName.length();
-
-    if (beginIndex < endIndex) {
-      var part = canonicalName.substring(beginIndex, endIndex);
-
-      result = result.resolve(part);
-    }
-
-    return result;
   }
 
   @Override
   public final String toString() {
     return canonicalName;
+  }
+
+  private Directory createJavaPackageDirectory0(
+      Directory result, StringBuilder partBuilder) throws IOException {
+    String part;
+    part = partBuilder.toString();
+
+    partBuilder.setLength(0);
+
+    Check.argument(
+        SourceVersion.isIdentifier(part),
+        part, " is not a valid Java identifier"
+    );
+
+    ResolvedPath resolved;
+    resolved = result.resolve(part);
+
+    return resolved.toDirectoryCreateIfNotFound();
   }
 
 }

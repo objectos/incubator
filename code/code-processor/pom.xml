@@ -49,11 +49,11 @@
 		</dependency>
 		<dependency>
 			<groupId>br.com.objectos</groupId>
-			<artifactId>objectos-code-annotations</artifactId>
+			<artifactId>code-annotations</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>br.com.objectos</groupId>
-			<artifactId>objectos-code-tools</artifactId>
+			<artifactId>code-tools</artifactId>
 		</dependency>
 
 		<dependency>

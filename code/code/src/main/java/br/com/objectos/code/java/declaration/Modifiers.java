@@ -16,45 +16,11 @@
 package br.com.objectos.code.java.declaration;
 
 import br.com.objectos.code.annotations.Ignore;
+import br.com.objectos.latest.Singleton;
 import java.util.EnumMap;
 import java.util.Map;
 
 public class Modifiers {
-
-  abstract static class JavaxMapperHolder {
-
-    private final Map<javax.lang.model.element.Modifier, Modifier> MAPPER;
-
-    JavaxMapperHolder() {
-      Map<javax.lang.model.element.Modifier, Modifier> map;
-      map = new EnumMap<javax.lang.model.element.Modifier, Modifier>(
-        javax.lang.model.element.Modifier.class
-      );
-
-      map.put(javax.lang.model.element.Modifier.ABSTRACT, _abstract());
-      map.put(javax.lang.model.element.Modifier.FINAL, _final());
-      map.put(javax.lang.model.element.Modifier.NATIVE, _native());
-      map.put(javax.lang.model.element.Modifier.PRIVATE, _private());
-      map.put(javax.lang.model.element.Modifier.PROTECTED, _protected());
-      map.put(javax.lang.model.element.Modifier.PUBLIC, _public());
-      map.put(javax.lang.model.element.Modifier.STATIC, _static());
-      map.put(javax.lang.model.element.Modifier.STRICTFP, _strictfp());
-      map.put(javax.lang.model.element.Modifier.SYNCHRONIZED, _synchronized());
-      map.put(javax.lang.model.element.Modifier.TRANSIENT, _transient());
-      map.put(javax.lang.model.element.Modifier.VOLATILE, _volatile());
-
-      addMore(map);
-
-      MAPPER = map;
-    }
-
-    abstract void addMore(Map<javax.lang.model.element.Modifier, Modifier> map);
-
-    final Modifier get(javax.lang.model.element.Modifier javaxModifier) {
-      return MAPPER.get(javaxModifier);
-    }
-
-  }
 
   public static final AbstractModifier ABSTRACT = AbstractModifier.INSTANCE;
 
@@ -145,6 +111,42 @@ public class Modifiers {
 
   public static Modifier of(javax.lang.model.element.Modifier javaxModifier) {
     return ModifiersJavaxMapperHolderSingleton.INSTANCE.get(javaxModifier);
+  }
+
+  @Singleton
+  abstract static class JavaxMapperHolder {
+
+    private final Map<javax.lang.model.element.Modifier, Modifier> MAPPER;
+
+    JavaxMapperHolder() {
+      Map<javax.lang.model.element.Modifier, Modifier> map;
+      map = new EnumMap<javax.lang.model.element.Modifier, Modifier>(
+          javax.lang.model.element.Modifier.class
+      );
+
+      map.put(javax.lang.model.element.Modifier.ABSTRACT, _abstract());
+      map.put(javax.lang.model.element.Modifier.FINAL, _final());
+      map.put(javax.lang.model.element.Modifier.NATIVE, _native());
+      map.put(javax.lang.model.element.Modifier.PRIVATE, _private());
+      map.put(javax.lang.model.element.Modifier.PROTECTED, _protected());
+      map.put(javax.lang.model.element.Modifier.PUBLIC, _public());
+      map.put(javax.lang.model.element.Modifier.STATIC, _static());
+      map.put(javax.lang.model.element.Modifier.STRICTFP, _strictfp());
+      map.put(javax.lang.model.element.Modifier.SYNCHRONIZED, _synchronized());
+      map.put(javax.lang.model.element.Modifier.TRANSIENT, _transient());
+      map.put(javax.lang.model.element.Modifier.VOLATILE, _volatile());
+
+      addMore(map);
+
+      MAPPER = map;
+    }
+
+    abstract void addMore(Map<javax.lang.model.element.Modifier, Modifier> map);
+
+    final Modifier get(javax.lang.model.element.Modifier javaxModifier) {
+      return MAPPER.get(javaxModifier);
+    }
+
   }
 
 }

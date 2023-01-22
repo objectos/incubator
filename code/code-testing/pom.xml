@@ -40,7 +40,7 @@
 		</dependency>
 		<dependency>
 			<groupId>br.com.objectos</groupId>
-			<artifactId>objectos-code-tools</artifactId>
+			<artifactId>code-tools</artifactId>
 			<scope>compile</scope>
 		</dependency>
 

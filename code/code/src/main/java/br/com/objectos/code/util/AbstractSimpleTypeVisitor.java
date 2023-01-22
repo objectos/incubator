@@ -15,10 +15,12 @@
  */
 package br.com.objectos.code.util;
 
+import br.com.objectos.latest.Concrete;
 import javax.lang.model.type.TypeMirror;
 import javax.lang.model.type.TypeVisitor;
 import javax.lang.model.type.UnknownTypeException;
 
+@Concrete(modifiers = "public", simpleName = "SimpleTypeVisitor")
 abstract class AbstractSimpleTypeVisitor<R, P> implements TypeVisitor<R, P> {
 
   private final R defaultValue;

@@ -20,6 +20,7 @@ import br.com.objectos.code.java.type.NamedType;
 import br.com.objectos.code.model.AnnotatedElementOrType;
 import br.com.objectos.code.model.element.ProcessingAnnotation;
 import br.com.objectos.code.util.SimpleTypeVisitor;
+import br.com.objectos.latest.Concrete;
 import java.util.Locale;
 import javax.annotation.processing.ProcessingEnvironment;
 import javax.lang.model.element.AnnotationMirror;
@@ -38,66 +39,8 @@ import javax.lang.model.util.Elements;
 import javax.lang.model.util.Types;
 import objectos.lang.Check;
 
+@Concrete(modifiers = "public abstract", simpleName = "PTypeMirror")
 abstract class PTypeMirrorJavaAny extends AnnotatedElementOrType {
-
-  private static class PTypeMirrorFactory
-      extends
-      SimpleTypeVisitor<PTypeMirror, ProcessingEnvironment> {
-
-    @Override
-    public final PTypeMirror visitArray(ArrayType t, ProcessingEnvironment p) {
-      return new PArrayType(p, t);
-    }
-
-    @Override
-    public final PTypeMirror visitDeclared(DeclaredType t, ProcessingEnvironment p) {
-      return new PDeclaredType(p, t);
-    }
-
-    @Override
-    public final PTypeMirror visitError(ErrorType t, ProcessingEnvironment p) {
-      return new PErrorType(p, t);
-    }
-
-    @Override
-    public final PTypeMirror visitNoType(NoType t, ProcessingEnvironment p) {
-      return new PNoType(p, t);
-    }
-
-    @Override
-    public final PTypeMirror visitPrimitive(PrimitiveType t, ProcessingEnvironment p) {
-      return new PPrimitiveType(p, t);
-    }
-
-    @Override
-    public final PTypeMirror visitTypeVariable(TypeVariable t, ProcessingEnvironment p) {
-      TypeMirror lowerBound;
-      lowerBound = t.getLowerBound();
-
-      Types types;
-      types = p.getTypeUtils();
-
-      NullType nullType;
-      nullType = types.getNullType();
-
-      if (!types.isSameType(lowerBound, nullType)) {
-        throw new AssertionError("TypeVariable has a lower bound: " + lowerBound);
-      }
-
-      return new PTypeVariable(p, t);
-    }
-
-    @Override
-    public final PTypeMirror visitWildcard(WildcardType t, ProcessingEnvironment p) {
-      return new PWildcardType(p, t);
-    }
-
-    @Override
-    protected final PTypeMirror defaultAction(TypeMirror e, ProcessingEnvironment p) {
-      throw new UnsupportedOperationException("Implement me");
-    }
-
-  }
 
   private static final PTypeMirrorFactory FACTORY = new PTypeMirrorFactory();
 
@@ -165,31 +108,31 @@ abstract class PTypeMirrorJavaAny extends AnnotatedElementOrType {
 
   public PArrayType toArrayType() {
     throw new AssertionError(
-      "Not a PArrayType instance. See isArrayType() method if necessary."
+        "Not a PArrayType instance. See isArrayType() method if necessary."
     );
   }
 
   public PDeclaredType toDeclaredType() {
     throw new AssertionError(
-      "Not a PDeclaredType instance. See isDeclaredType() method if necessary."
+        "Not a PDeclaredType instance. See isDeclaredType() method if necessary."
     );
   }
 
   public PErrorType toErrorType() {
     throw new AssertionError(
-      "Not a PErrorType instance. See isErrorType() method if necessary."
+        "Not a PErrorType instance. See isErrorType() method if necessary."
     );
   }
 
   public PNoType toNoType() {
     throw new AssertionError(
-      "Not a PNoType instance. See isNoType() method if necessary."
+        "Not a PNoType instance. See isNoType() method if necessary."
     );
   }
 
   public PPrimitiveType toPrimitiveType() {
     throw new AssertionError(
-      "Not a PPrimitiveType instance. See isPrimitiveType() method if necessary."
+        "Not a PPrimitiveType instance. See isPrimitiveType() method if necessary."
     );
   }
 
@@ -200,13 +143,13 @@ abstract class PTypeMirrorJavaAny extends AnnotatedElementOrType {
 
   public PTypeVariable toTypeVariable() {
     throw new AssertionError(
-      "Not a PTypeVariable instance. See isTypeVariable() method if necessary."
+        "Not a PTypeVariable instance. See isTypeVariable() method if necessary."
     );
   }
 
   public PWildcardType toWildcardType() {
     throw new AssertionError(
-      "Not a PWildcardType instance. See isWildcardType() method if necessary."
+        "Not a PWildcardType instance. See isWildcardType() method if necessary."
     );
   }
 
@@ -287,6 +230,65 @@ abstract class PTypeMirrorJavaAny extends AnnotatedElementOrType {
     types = processingEnv.getTypeUtils();
 
     return types.getPrimitiveType(kind);
+  }
+
+  private static class PTypeMirrorFactory
+      extends
+      SimpleTypeVisitor<PTypeMirror, ProcessingEnvironment> {
+
+    @Override
+    public final PTypeMirror visitArray(ArrayType t, ProcessingEnvironment p) {
+      return new PArrayType(p, t);
+    }
+
+    @Override
+    public final PTypeMirror visitDeclared(DeclaredType t, ProcessingEnvironment p) {
+      return new PDeclaredType(p, t);
+    }
+
+    @Override
+    public final PTypeMirror visitError(ErrorType t, ProcessingEnvironment p) {
+      return new PErrorType(p, t);
+    }
+
+    @Override
+    public final PTypeMirror visitNoType(NoType t, ProcessingEnvironment p) {
+      return new PNoType(p, t);
+    }
+
+    @Override
+    public final PTypeMirror visitPrimitive(PrimitiveType t, ProcessingEnvironment p) {
+      return new PPrimitiveType(p, t);
+    }
+
+    @Override
+    public final PTypeMirror visitTypeVariable(TypeVariable t, ProcessingEnvironment p) {
+      TypeMirror lowerBound;
+      lowerBound = t.getLowerBound();
+
+      Types types;
+      types = p.getTypeUtils();
+
+      NullType nullType;
+      nullType = types.getNullType();
+
+      if (!types.isSameType(lowerBound, nullType)) {
+        throw new AssertionError("TypeVariable has a lower bound: " + lowerBound);
+      }
+
+      return new PTypeVariable(p, t);
+    }
+
+    @Override
+    public final PTypeMirror visitWildcard(WildcardType t, ProcessingEnvironment p) {
+      return new PWildcardType(p, t);
+    }
+
+    @Override
+    protected final PTypeMirror defaultAction(TypeMirror e, ProcessingEnvironment p) {
+      throw new UnsupportedOperationException("Implement me");
+    }
+
   }
 
 }
