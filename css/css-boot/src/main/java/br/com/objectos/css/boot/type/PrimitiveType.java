@@ -66,7 +66,7 @@ public class PrimitiveType implements ParameterType, Value {
 
   @Override
   public final NamedArray toNamedArray() {
-    return a(kind.typeClassName());
+    return ainit(kind.typeClassName());
   }
 
   @Override

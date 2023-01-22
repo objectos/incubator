@@ -83,7 +83,7 @@ final class GeneratedColorStep extends ThisTemplate {
 
       field(
         _private(), _static(), _final(), t(t(type, "ColorName"), dim()),
-        id("ARRAY"), a(constantNames())
+        id("ARRAY"), ainit(constantNames())
       ),
 
       field(

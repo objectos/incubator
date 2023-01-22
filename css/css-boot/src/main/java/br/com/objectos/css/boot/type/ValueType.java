@@ -66,7 +66,7 @@ public class ValueType implements ParameterType, Value {
 
   @Override
   public final NamedArray toNamedArray() {
-    return a(className);
+    return ainit(className);
   }
 
   @Override

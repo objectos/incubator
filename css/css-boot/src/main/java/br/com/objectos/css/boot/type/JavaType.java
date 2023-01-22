@@ -36,12 +36,12 @@ public enum JavaType implements ParameterType {
   private final NamedType typeName;
 
   private JavaType(NamedClass typeName) {
-    this.arrayTypeName = a(typeName);
+    this.arrayTypeName = ainit(typeName);
     this.typeName = typeName;
   }
 
   private JavaType(NamedPrimitive typeName) {
-    this.arrayTypeName = a(typeName);
+    this.arrayTypeName = ainit(typeName);
     this.typeName = typeName;
   }
 

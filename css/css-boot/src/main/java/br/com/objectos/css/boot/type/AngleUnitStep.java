@@ -90,7 +90,7 @@ public class AngleUnitStep extends Step {
 
       field(
         _private(), _static(), _final(),
-        a(TypeNames._AngleUnit),
+        ainit(TypeNames._AngleUnit),
         init(Ids.ARRAY, TypeNames._AngleUnit.invoke("values"))
       ),
 

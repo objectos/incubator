@@ -57,7 +57,7 @@ public class ColorName implements Comparable<ColorName> {
     return name.compareTo(o.name);
   }
 
-  final MethodInvocation invokePut(Callee callee) {
+  final Invoke invokePut(Callee callee) {
     return invoke(callee, "put", l(name), identifier);
   }
 
