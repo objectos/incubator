@@ -48,6 +48,7 @@ import br.com.objectos.html.ex.TestCase27;
 import br.com.objectos.html.ex.TestCase28;
 import br.com.objectos.html.ex.TestCase29;
 import br.com.objectos.html.ex.TestCase30;
+import br.com.objectos.html.ex.TestCase31;
 import org.testng.annotations.Test;
 
 public class CompiledTemplateTest {
@@ -262,7 +263,7 @@ public class CompiledTemplateTest {
   public void testCase23() {
     int count = 1024;
     StringBuilder ul = new StringBuilder()
-      .append("<ul>");
+        .append("<ul>");
     for (int i = 0; i < count; i++) {
       ul.append("<li>");
       ul.append(i);
@@ -351,6 +352,14 @@ public class CompiledTemplateTest {
     testSimpleWriter(
       new TestCase30(),
       "<script>alert(\"hello world!\");</script>"
+    );
+  }
+
+  @Test
+  public void testCase31() {
+    testSimpleWriter(
+      new TestCase31(),
+      "<input type=\"email\" required>"
     );
   }
 

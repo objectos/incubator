@@ -4,12 +4,16 @@ import br.com.objectos.code.annotations.Generated;
 import br.com.objectos.html.attribute.StandardAttributeName;
 import br.com.objectos.html.attribute.StandardAttributeName.Accesskey;
 import br.com.objectos.html.attribute.StandardAttributeName.Action;
+import br.com.objectos.html.attribute.StandardAttributeName.Align;
 import br.com.objectos.html.attribute.StandardAttributeName.AlignmentBaseline;
 import br.com.objectos.html.attribute.StandardAttributeName.Alt;
 import br.com.objectos.html.attribute.StandardAttributeName.Async;
 import br.com.objectos.html.attribute.StandardAttributeName.Autocomplete;
 import br.com.objectos.html.attribute.StandardAttributeName.Autofocus;
 import br.com.objectos.html.attribute.StandardAttributeName.BaselineShift;
+import br.com.objectos.html.attribute.StandardAttributeName.Border;
+import br.com.objectos.html.attribute.StandardAttributeName.Cellpadding;
+import br.com.objectos.html.attribute.StandardAttributeName.Cellspacing;
 import br.com.objectos.html.attribute.StandardAttributeName.Charset;
 import br.com.objectos.html.attribute.StandardAttributeName.Cite;
 import br.com.objectos.html.attribute.StandardAttributeName.Class;
@@ -100,6 +104,7 @@ import br.com.objectos.html.attribute.StandardAttributeName.Rel;
 import br.com.objectos.html.attribute.StandardAttributeName.Required;
 import br.com.objectos.html.attribute.StandardAttributeName.Rev;
 import br.com.objectos.html.attribute.StandardAttributeName.Reversed;
+import br.com.objectos.html.attribute.StandardAttributeName.Role;
 import br.com.objectos.html.attribute.StandardAttributeName.Rows;
 import br.com.objectos.html.attribute.StandardAttributeName.Selected;
 import br.com.objectos.html.attribute.StandardAttributeName.ShapeRendering;
@@ -772,6 +777,10 @@ abstract class GeneratedAbstractTemplate {
     return addStandardAttribute(StandardAttributeName.ACTION, value);
   }
 
+  public final Align align(String value) {
+    return addStandardAttribute(StandardAttributeName.ALIGN, value);
+  }
+
   public final AlignmentBaseline alignmentBaseline(String value) {
     return addStandardAttribute(StandardAttributeName.ALIGNMENTBASELINE, value);
   }
@@ -794,6 +803,18 @@ abstract class GeneratedAbstractTemplate {
 
   public final BaselineShift baselineShift(String value) {
     return addStandardAttribute(StandardAttributeName.BASELINESHIFT, value);
+  }
+
+  public final Border border(String value) {
+    return addStandardAttribute(StandardAttributeName.BORDER, value);
+  }
+
+  public final Cellpadding cellpadding(String value) {
+    return addStandardAttribute(StandardAttributeName.CELLPADDING, value);
+  }
+
+  public final Cellspacing cellspacing(String value) {
+    return addStandardAttribute(StandardAttributeName.CELLSPACING, value);
   }
 
   public final Charset charset(String value) {
@@ -1158,6 +1179,10 @@ abstract class GeneratedAbstractTemplate {
 
   public final Reversed reversed() {
     return addStandardAttribute(StandardAttributeName.REVERSED);
+  }
+
+  public final Role role(String value) {
+    return addStandardAttribute(StandardAttributeName.ROLE, value);
   }
 
   public final Rows rows(String value) {

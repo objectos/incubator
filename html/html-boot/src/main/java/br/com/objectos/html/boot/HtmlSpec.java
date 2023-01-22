@@ -53,7 +53,9 @@ class HtmlSpec extends AbstractSpec {
         .attribute("translate")
 
         .attribute("onclick")
-        .attribute("onsubmit");
+        .attribute("onsubmit")
+
+        .attribute("role");
 
     CategorySpec embedded = category("embedded");
     CategorySpec flow = category("flow");
@@ -458,6 +460,11 @@ class HtmlSpec extends AbstractSpec {
     element("table")
         .category(flow)
         .category(palpable)
+        .attribute("align")
+        .attribute("border")
+        .attribute("cellpadding")
+        .attribute("cellspacing")
+        .attribute("width")
         .one(el("thead"))
         .zeroOrMore(el("tbody"));
 
