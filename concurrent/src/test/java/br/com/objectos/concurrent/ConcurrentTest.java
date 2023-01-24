@@ -289,7 +289,7 @@ public class ConcurrentTest implements IoTask {
 
     assertTrue(fixedCpuWorker.offer(job));
 
-    Thread.sleep(50);
+    Thread.sleep(100);
 
     assertTrue(jamWorkerJob.get() > 0);
 
