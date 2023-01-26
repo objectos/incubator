@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021-2022 Objectos Software LTDA.
+ * Copyright (C) 2021-2023 Objectos Software LTDA.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -357,9 +357,16 @@ abstract class Interpreter {
         }
 
         case Token.ATTR_LIST_START -> processor.text("[");
+
         case Token.ATTR_LIST_END -> processor.text("]");
 
         case Token.ATTR_VALUE_START, Token.ATTR_VALUE_END -> { /*noop*/ }
+
+        case Token.ITALIC_START -> {
+          tokenAt(index++); // consume pos
+
+          processor.text("_");
+        }
 
         case Token.LF -> processor.lineFeed();
 

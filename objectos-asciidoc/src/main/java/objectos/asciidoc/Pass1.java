@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021-2022 Objectos Software LTDA.
+ * Copyright (C) 2021-2023 Objectos Software LTDA.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -287,11 +287,11 @@ class Pass1 {
 
       switch (token) {
         case //
-            Token.BLOB, //
-            Token.BOLD_START, //
-            Token.ITALIC_START, //
-            Token.MONO_START, //
-            Token.INLINE_MACRO -> executeParagraph();
+             Token.BLOB, //
+             Token.BOLD_START, //
+             Token.ITALIC_START, //
+             Token.MONO_START, //
+             Token.INLINE_MACRO -> executeParagraph();
 
         case Token.ATTR_LIST_START -> executeAttributeListBlock();
 
@@ -426,10 +426,10 @@ class Pass1 {
         case Token.BLOB -> tokenIndex += 3;
 
         case
-            Token.BOLD_START, Token.BOLD_END,
-            Token.ITALIC_START, Token.ITALIC_END,
-            Token.MONO_START, Token.MONO_END,
-            Token.APOSTROPHE -> tokenIndex += 2;
+             Token.BOLD_START, Token.BOLD_END,
+             Token.ITALIC_START, Token.ITALIC_END,
+             Token.MONO_START, Token.MONO_END,
+             Token.APOSTROPHE -> tokenIndex += 2;
 
         case Token.INLINE_MACRO -> { executeInlineMacro(); tokenStart = tokenIndex; }
 
@@ -533,13 +533,20 @@ class Pass1 {
       token = tokenAt(tokenIndex);
 
       switch (token) {
-        case Token.BLOB, Token.INLINE_MACRO, Token.LITERALI -> tokenIndex += 3;
+        case Token.BLOB,
+             Token.INLINE_MACRO,
+             Token.LITERALI -> tokenIndex += 3;
 
-        case Token.BOLD_END, Token.ITALIC_END, Token.MONO_END -> tokenIndex += 2;
+        case Token.BOLD_END,
+             Token.ITALIC_END,
+             Token.ITALIC_START,
+             Token.MONO_END -> tokenIndex += 2;
 
-        case Token.ATTR_LIST_START, Token.ATTR_LIST_END,
-            Token.ATTR_VALUE_START, Token.ATTR_VALUE_END,
-            Token.LF -> tokenIndex += 1;
+        case Token.ATTR_LIST_START,
+             Token.ATTR_LIST_END,
+             Token.ATTR_VALUE_START,
+             Token.ATTR_VALUE_END,
+             Token.LF -> tokenIndex += 1;
 
         case Token.LISTING_BLOCK_DELIM -> {
           tokenIndex++;
@@ -598,10 +605,10 @@ class Pass1 {
         }
 
         case
-            Token.BOLD_START, Token.BOLD_END,
-            Token.ITALIC_START, Token.ITALIC_END,
-            Token.MONO_START, Token.MONO_END,
-            Token.APOSTROPHE -> {
+             Token.BOLD_START, Token.BOLD_END,
+             Token.ITALIC_START, Token.ITALIC_END,
+             Token.MONO_START, Token.MONO_END,
+             Token.APOSTROPHE -> {
           if (newLine > 1) {
             tokenEnd = tokenIndex - newLine;
 
@@ -715,11 +722,11 @@ class Pass1 {
         }
 
         case
-            Token.HEADING,
-            Token.ATTR_LIST_START,
-            Token.BLOB,
-            Token.MONO_START,
-            Token.INLINE_MACRO -> {
+             Token.HEADING,
+             Token.ATTR_LIST_START,
+             Token.BLOB,
+             Token.MONO_START,
+             Token.INLINE_MACRO -> {
           break loop;
         }
 
@@ -744,10 +751,10 @@ class Pass1 {
         case Token.BLOB -> { tokenIndex += 3; newLine = 0; }
 
         case
-            Token.BOLD_START, Token.BOLD_END,
-            Token.ITALIC_START, Token.ITALIC_END,
-            Token.MONO_START, Token.MONO_END,
-            Token.APOSTROPHE -> {
+             Token.BOLD_START, Token.BOLD_END,
+             Token.ITALIC_START, Token.ITALIC_END,
+             Token.MONO_START, Token.MONO_END,
+             Token.APOSTROPHE -> {
           tokenIndex += 2;
 
           newLine = 0;
