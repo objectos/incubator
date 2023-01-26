@@ -15,9 +15,127 @@
  */
 package objectos.docs;
 
+import br.com.objectos.html.tmpl.AbstractFragment;
+
 final class LeftBarNext extends LeftBarFragment {
 
-  public LeftBarNext(LeftBar injector) { super(injector); }
+  private static class ObjectosCode extends LeftBarFragment {
+    public ObjectosCode(LeftBar injector) { super(injector); }
+
+    @Override
+    final void definitionImpl() {
+      ul(
+        li(a0("next/index", "Back")),
+
+        li(
+          h2v0("Objectos Code"),
+
+          ul(
+            li(a0("next/objectos-code/index"))
+          )
+        )
+      );
+    }
+  }
+
+  private static class ObjectosLang extends LeftBarFragment {
+    public ObjectosLang(LeftBar injector) { super(injector); }
+
+    @Override
+    final void definitionImpl() {
+      ul(
+        li(a0("next/index", "Back")),
+
+        li(
+          h2v0("Objectos Lang"),
+
+          ul(
+            li(a0("next/objectos-lang/index")),
+            li(a0("next/objectos-lang/Check")),
+            li(a0("next/objectos-lang/Equals")),
+            li(a0("next/objectos-lang/HashCode")),
+            li(a0("next/objectos-lang/ToString")),
+
+            li(a0("next/objectos-lang/note-sink-api/index"),
+              ul(
+                li(a1("next/objectos-lang/note-sink-api/creating-notes")),
+                li(a1("next/objectos-lang/note-sink-api/the-note-sink-interface")),
+                li(a1("next/objectos-lang/note-sink-api/the-no-op-note-sink"))
+              )
+            )
+          )
+        )
+      );
+    }
+  }
+
+  private static class ObjectosUtil extends LeftBarFragment {
+    public ObjectosUtil(LeftBar injector) { super(injector); }
+
+    @Override
+    final void definitionImpl() {
+      ul(
+        li(a0("next/index", "Back")),
+
+        li(
+          h2v0("Objectos Util"),
+
+          ul(
+            li(a0("next/objectos-util/index")),
+            li(a0("next/objectos-util/array-utilities")),
+            li(a0("next/objectos-util/collections/index"),
+              ul(
+                li(a1("next/objectos-util/collections/limitations")),
+                li(a1("next/objectos-util/collections/builders")),
+                li(a1("next/objectos-util/collections/of")),
+                li(a1("next/objectos-util/collections/null-handling")),
+                li(a1("next/objectos-util/collections/to-string")),
+                li(a1("next/objectos-util/collections/join-method"))
+              )
+            )
+          )
+        )
+      );
+    }
+  }
+
+  private static final int OFFSET = "next/".length();
+
+  private final ObjectosCode objectosCode;
+
+  private final ObjectosLang objectosLang;
+
+  private final ObjectosUtil objectosUtil;
+
+  public LeftBarNext(LeftBar injector) {
+    super(injector);
+
+    objectosCode = new ObjectosCode(injector);
+
+    objectosLang = new ObjectosLang(injector);
+
+    objectosUtil = new ObjectosUtil(injector);
+  }
+
+  public final AbstractFragment get(String key) {
+    int slash = key.indexOf('/', OFFSET);
+
+    if (slash < 0) {
+      return this;
+    }
+
+    var component = key.substring(OFFSET, slash);
+
+    return switch (component) {
+      case "objectos-code" -> objectosCode;
+
+      case "objectos-lang" -> objectosLang;
+
+      case "objectos-util" -> objectosUtil;
+
+      default -> this;
+    };
+  }
 
   @Override
   final void definitionImpl() {
@@ -34,41 +152,12 @@ final class LeftBarNext extends LeftBarFragment {
       ),
 
       li(
-        h2v0("Objectos Lang"),
+        h2v0("Libraries"),
 
         ul(
-          li(a0("next/objectos-lang/index")),
-          li(a0("next/objectos-lang/Check")),
-          li(a0("next/objectos-lang/Equals")),
-          li(a0("next/objectos-lang/HashCode")),
-          li(a0("next/objectos-lang/ToString")),
-
-          li(a0("next/objectos-lang/note-sink-api/index"),
-            ul(
-              li(a1("next/objectos-lang/note-sink-api/creating-notes")),
-              li(a1("next/objectos-lang/note-sink-api/the-note-sink-interface")),
-              li(a1("next/objectos-lang/note-sink-api/the-no-op-note-sink"))
-            )
-          )
-        )
-      ),
-
-      li(
-        h2v0("Objectos Util"),
-
-        ul(
-          li(a0("next/objectos-util/index")),
-          li(a0("next/objectos-util/array-utilities")),
-          li(a0("next/objectos-util/collections/index"),
-            ul(
-              li(a1("next/objectos-util/collections/limitations")),
-              li(a1("next/objectos-util/collections/builders")),
-              li(a1("next/objectos-util/collections/of")),
-              li(a1("next/objectos-util/collections/null-handling")),
-              li(a1("next/objectos-util/collections/to-string")),
-              li(a1("next/objectos-util/collections/join-method"))
-            )
-          )
+          li(a0("next/objectos-code/index", "Objectos Code")),
+          li(a0("next/objectos-lang/index", "Objectos Lang")),
+          li(a0("next/objectos-util/index", "Objectos Util"))
         )
       ),
 

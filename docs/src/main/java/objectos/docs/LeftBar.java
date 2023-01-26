@@ -35,11 +35,11 @@ final class LeftBar {
     return switch (version) {
       case NEXT -> next.get(key);
 
-      case V0_3_0 -> v0003.get(key);
+      case V0_3_0 -> v0003;
 
-      case V0_2_0 -> v0002.get(key);
+      case V0_2_0 -> v0002;
 
-      case V0_1_0 -> v0001.get(key);
+      case V0_1_0 -> v0001;
     };
   }
 

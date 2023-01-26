@@ -138,13 +138,15 @@ abstract class LeftBarFragment extends AbstractFragment {
     return aimpl(key, noop());
   }
 
+  final ElementName a0(String key, String text) {
+    return aimpl(key, text, noop());
+  }
+
   final ElementName a1(String key) {
     return aimpl(key, PaddingLeft.v06);
   }
 
   abstract void definitionImpl();
-
-  AbstractFragment get(String key) { return this; }
 
   final ElementName h2v0(String text) {
     return h2(
@@ -165,6 +167,26 @@ abstract class LeftBarFragment extends AbstractFragment {
     var href = record.location().href();
 
     var text = record.title().toc();
+
+    var selected = injector.$isCurrentKey(key);
+
+    var bg = selected ? BackgroundColor.slate200 : BackgroundColor.hover.gray100;
+    var fc = selected ? TextColor.black : noop();
+
+    return a(
+      bg, fc, level,
+      PaddingX.v03,
+      PaddingY.v01,
+      Display.block,
+
+      href(href), raw(text)
+    );
+  }
+
+  private ElementName aimpl(String key, String text, AValue level) {
+    var record = injector.$record(key);
+
+    var href = record.location().href();
 
     var selected = injector.$isCurrentKey(key);
 
