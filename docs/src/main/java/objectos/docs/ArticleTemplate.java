@@ -21,13 +21,11 @@ import br.com.objectos.css.framework.border.BorderBottom;
 import br.com.objectos.css.framework.border.BorderColor;
 import br.com.objectos.css.framework.border.BorderRight;
 import br.com.objectos.css.framework.border.BorderTop;
-import br.com.objectos.css.framework.border.Rounded;
 import br.com.objectos.css.framework.effects.Opacity;
 import br.com.objectos.css.framework.flexbox.AlignItems;
 import br.com.objectos.css.framework.flexbox.Flex;
 import br.com.objectos.css.framework.flexbox.FlexDirection;
 import br.com.objectos.css.framework.flexbox.FlexGrow;
-import br.com.objectos.css.framework.flexbox.JustifyContent;
 import br.com.objectos.css.framework.interactivity.Cursor;
 import br.com.objectos.css.framework.layout.Display;
 import br.com.objectos.css.framework.layout.Left;
@@ -58,12 +56,9 @@ import br.com.objectos.css.framework.typography.LetterSpacing;
 import br.com.objectos.css.framework.typography.ListStyleType;
 import br.com.objectos.css.framework.typography.TextAlign;
 import br.com.objectos.css.framework.typography.TextColor;
-import br.com.objectos.css.framework.typography.TextTransform;
 import br.com.objectos.css.select.ClassSelector;
 import br.com.objectos.css.select.IdSelector;
-import br.com.objectos.html.element.ElementName;
 import br.com.objectos.html.element.StandardElementName;
-import br.com.objectos.html.spi.type.AValue;
 import objectos.asciidoc.DocumentAttributes;
 import objectos.shared.DefaultRenderer;
 import objectos.shared.JavaRenderer;
@@ -74,7 +69,7 @@ final class ArticleTemplate extends DocsTemplate implements LanguageRenderer.Out
 
   private static final IdSelector BACKDROP = Css.randomHash(3);
 
-  private static final IdSelector CLICK_CLOSE = Css.randomHash(3);
+  static final IdSelector CLICK_CLOSE = Css.randomHash(3);
 
   private static final IdSelector CLICK_OPEN = Css.randomHash(3);
 
@@ -512,7 +507,7 @@ final class ArticleTemplate extends DocsTemplate implements LanguageRenderer.Out
           Width.lg.v56,
           DocsCss.XL_WIDTH_70,
 
-          f(this::_leftBar)
+          f(injector.$leftBar())
         ),
 
         main(
@@ -530,360 +525,6 @@ final class ArticleTemplate extends DocsTemplate implements LanguageRenderer.Out
           )
         )
       )
-    );
-  }
-
-  private void _leftBar() {
-    var version = injector.$version();
-
-    div(
-      AlignItems.center,
-      BorderColor.slate200,
-      BorderBottom.v1,
-      Display.flex,
-      Display.lg.hidden,
-      FlexDirection.rowReverse,
-      Height.v16,
-
-      svg(
-        CLICK_CLOSE,
-
-        Cursor.hover.pointer,
-        Display.block,
-        Padding.v02,
-        Height.v12,
-        Width.v12,
-
-        xmlns("http://www.w3.org/2000/svg"),
-        width("16"),
-        height("16"),
-        fill("currentColor"),
-        viewBox("0 0 16 16"),
-        path(
-          d("M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z")
-        )
-      )
-    );
-
-    div(
-      AlignItems.center,
-      Display.flex,
-      JustifyContent.between,
-      MarginBottom.v01,
-      PaddingX.v03,
-      PaddingTop.v06,
-
-      div("Version " + version.name),
-
-      a(
-        BackgroundColor.gray400,
-        BackgroundColor.hover.gray500,
-        FontSize.xSmall,
-        PaddingX.v02,
-        PaddingY.v01,
-        Rounded.standard,
-        TextColor.white,
-
-        href(injector.$record("versions").location().href()), t("Change")
-      )
-    );
-
-    a(
-      BackgroundColor.hover.gray100,
-      Display.flex,
-      AlignItems.center,
-      JustifyContent.between,
-      MarginBottom.v04,
-      PaddingX.v03,
-      PaddingY.v01,
-
-      href(injector.$elink(version.directory + "/api/index")),
-
-      span(
-        t("Javadocs")
-      ),
-
-      svg(
-        xmlns("http://www.w3.org/2000/svg"),
-        width("16"),
-        height("16"),
-        fill("currentColor"),
-        viewBox("0 0 16 16"),
-
-        path(fillRule("evenodd"),
-          d("M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z")),
-        path(fillRule("evenodd"),
-          d("M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"))
-      )
-    );
-
-    switch (version) {
-      case NEXT -> {
-        ul(
-          li(a0("next/index")),
-
-          li(
-            h2v0("Introduction"),
-
-            ul(
-              li(a0("next/intro/overview")),
-              li(a0("next/intro/install"))
-            )
-          ),
-
-          li(
-            h2v0("Objectos Lang"),
-
-            ul(
-              li(a0("next/objectos-lang/index")),
-              li(a0("next/objectos-lang/Check")),
-              li(a0("next/objectos-lang/Equals")),
-              li(a0("next/objectos-lang/HashCode")),
-              li(a0("next/objectos-lang/ToString")),
-
-              li(a0("next/objectos-lang/note-sink-api/index"),
-                ul(
-                  li(a1("next/objectos-lang/note-sink-api/creating-notes")),
-                  li(a1("next/objectos-lang/note-sink-api/the-note-sink-interface")),
-                  li(a1("next/objectos-lang/note-sink-api/the-no-op-note-sink"))
-                )
-              )
-            )
-          ),
-
-          li(
-            h2v0("Objectos Util"),
-
-            ul(
-              li(a0("next/objectos-util/index")),
-              li(a0("next/objectos-util/array-utilities")),
-              li(a0("next/objectos-util/collections/index"),
-                ul(
-                  li(a1("next/objectos-util/collections/limitations")),
-                  li(a1("next/objectos-util/collections/builders")),
-                  li(a1("next/objectos-util/collections/of")),
-                  li(a1("next/objectos-util/collections/null-handling")),
-                  li(a1("next/objectos-util/collections/to-string")),
-                  li(a1("next/objectos-util/collections/join-method"))
-                )
-              )
-            )
-          ),
-
-          li(
-            h2v0("Release Notes"),
-
-            ul(
-              li(a0("next/relnotes/0.3.0")),
-              li(a0("next/relnotes/0.2.0")),
-              li(a0("next/relnotes/0.1.0"))
-            )
-          )
-        );
-      }
-
-      case V0_3_0 -> {
-        ul(
-          li(a0("v0003/index")),
-
-          li(
-            h2v0("Introduction"),
-
-            ul(
-              li(a0("v0003/intro/overview")),
-              li(a0("v0003/intro/install"))
-            )
-          ),
-
-          li(
-            h2v0("Objectos Lang"),
-
-            ul(
-              li(a0("v0003/objectos-lang/index")),
-              li(a0("v0003/objectos-lang/Check")),
-              li(a0("v0003/objectos-lang/Equals")),
-              li(a0("v0003/objectos-lang/HashCode")),
-              li(a0("v0003/objectos-lang/ToString")),
-
-              li(a0("v0003/objectos-lang/note-sink-api/index"),
-                ul(
-                  li(a1("v0003/objectos-lang/note-sink-api/creating-notes")),
-                  li(a1("v0003/objectos-lang/note-sink-api/the-note-sink-interface")),
-                  li(a1("v0003/objectos-lang/note-sink-api/the-no-op-note-sink"))
-                )
-              )
-            )
-          ),
-
-          li(
-            h2v0("Objectos Util"),
-
-            ul(
-              li(a0("v0003/objectos-util/index")),
-              li(a0("v0003/objectos-util/array-utilities")),
-              li(a0("v0003/objectos-util/collections/index"),
-                ul(
-                  li(a1("v0003/objectos-util/collections/limitations")),
-                  li(a1("v0003/objectos-util/collections/builders")),
-                  li(a1("v0003/objectos-util/collections/of")),
-                  li(a1("v0003/objectos-util/collections/null-handling")),
-                  li(a1("v0003/objectos-util/collections/to-string")),
-                  li(a1("v0003/objectos-util/collections/join-method"))
-                )
-              )
-            )
-          ),
-
-          li(
-            h2v0("Release Notes"),
-
-            ul(
-              li(a0("v0003/relnotes/0.3.0")),
-              li(a0("v0003/relnotes/0.2.0")),
-              li(a0("v0003/relnotes/0.1.0"))
-            )
-          )
-        );
-      }
-
-      case V0_2_0 -> {
-        ul(
-          li(a0("v0002/index")),
-
-          li(
-            h2v0("Introduction"),
-
-            ul(
-              li(a0("v0002/intro/overview")),
-              li(a0("v0002/intro/install"))
-            )
-          ),
-
-          li(
-            h2v0("Objectos Lang"),
-
-            ul(
-              li(a0("v0002/objectos-lang/index")),
-              li(a0("v0002/objectos-lang/Check")),
-              li(a0("v0002/objectos-lang/Equals")),
-              li(a0("v0002/objectos-lang/HashCode")),
-              li(a0("v0002/objectos-lang/ToString")),
-
-              li(a0("v0002/objectos-lang/note-sink-api/index"),
-
-                ul(
-                  li(a1("v0002/objectos-lang/note-sink-api/creating-notes")),
-                  li(a1("v0002/objectos-lang/note-sink-api/the-note-sink-interface")),
-                  li(a1("v0002/objectos-lang/note-sink-api/the-no-op-note-sink"))
-                )
-              )
-            )
-          ),
-
-          li(
-            h2v0("Release Notes"),
-
-            ul(
-              li(a0("v0002/relnotes/0.2.0")),
-              li(a0("v0002/relnotes/0.1.0"))
-            )
-          )
-        );
-      }
-
-      case V0_1_0 -> {
-        ul(
-          li(a0("v0001/index")),
-
-          li(
-            h2v0("Introduction"),
-
-            ul(
-              li(a0("v0001/intro/overview")),
-              li(a0("v0001/intro/install"))
-            )
-          ),
-
-          li(
-            h2v0("Objectos Logging"),
-
-            ul(
-              li(a0("v0001/logging/index")),
-
-              li(a0("v0001/logging/getting-started/index"),
-                ul(
-                  li(a1("v0001/logging/getting-started/about-logging")),
-                  li(a1("v0001/logging/getting-started/objectos-logging")),
-                  li(a1("v0001/logging/getting-started/installing")),
-                  li(a1("v0001/logging/getting-started/quick-start"))
-                )
-              ),
-
-              li(a0("v0001/logging/logging-guide/index"),
-                ul(
-                  li(a1("v0001/logging/logging-guide/events")),
-                  li(a1("v0001/logging/logging-guide/logger"))
-                )
-              ),
-
-              li(a0("v0001/logging/no-op-logger/index"))
-            )
-          ),
-
-          li(
-            h2v0("Release Notes"),
-
-            ul(
-              li(a0("v0001/relnotes/0.1.0"))
-            )
-          )
-        );
-      }
-
-      default -> throw new UnsupportedOperationException("Implement me :: version=" + version);
-    }
-  }
-
-  private ElementName a0(String key) {
-    return aimpl(key, noop());
-  }
-
-  private ElementName a1(String key) {
-    return aimpl(key, PaddingLeft.v06);
-  }
-
-  private ElementName aimpl(String key, AValue level) {
-    var record = injector.$record(key);
-
-    var href = record.location().href();
-
-    var text = record.title().toc();
-
-    var selected = injector.$isCurrentKey(key);
-
-    var bg = selected ? BackgroundColor.slate200 : BackgroundColor.hover.gray100;
-    var fc = selected ? TextColor.black : noop();
-
-    return a(
-      bg, fc, level,
-      PaddingX.v03,
-      PaddingY.v01,
-      Display.block,
-
-      href(href), raw(text)
-    );
-  }
-
-  private ElementName h2v0(String text) {
-    return h2(
-      FontWeight.semibold,
-      PaddingBottom.v01,
-      PaddingTop.v06,
-      PaddingX.v03,
-      TextColor.black,
-      TextTransform.uppercase,
-
-      t(text)
     );
   }
 

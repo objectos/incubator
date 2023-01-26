@@ -64,6 +64,8 @@ public final class Docs extends DocsInjector {
 
   private final HtmlWriter htmlWriter = new HtmlWriter();
 
+  private final LeftBar leftBar = new LeftBar(this);
+
   private final Path source;
 
   private final Path target;
@@ -81,6 +83,8 @@ public final class Docs extends DocsInjector {
   private String baseHref = "";
 
   private String currentKey;
+
+  private AbstractFragment currentLeftBar;
 
   private DocumentRecord currentRecord;
 
@@ -220,6 +224,9 @@ public final class Docs extends DocsInjector {
   final boolean $isNext() { return currentKey.startsWith("next/"); }
 
   @Override
+  final AbstractFragment $leftBar() { return currentLeftBar; }
+
+  @Override
   final DocumentRecord $record(String key) {
     var record = documents.get(key);
 
@@ -239,12 +246,12 @@ public final class Docs extends DocsInjector {
   @Override
   final Version $version() { return currentVersion; }
 
-  private String _key(Path file, int length) {
+  private String _key(Path file, int fileExtLength) {
     var path = source.relativize(file);
 
     var key = path.toString();
 
-    return key.substring(0, key.length() - length);
+    return key.substring(0, key.length() - fileExtLength);
   }
 
   private DocsTemplate _template(String templateName) {
@@ -289,6 +296,12 @@ public final class Docs extends DocsInjector {
       currentRecord = entry.getValue();
 
       currentVersion = Version.parseCurrentKey(currentKey);
+
+      if (currentVersion != null) {
+        currentLeftBar = leftBar.get(currentKey, currentVersion);
+      } else {
+        currentLeftBar = null;
+      }
 
       var writePath = currentRecord.resolvePath(target);
 

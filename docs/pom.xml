@@ -37,10 +37,6 @@
 
 	<inceptionYear>2022</inceptionYear>
 
-	<properties>
-		<objectos.license.copyrightYears>2022</objectos.license.copyrightYears>
-	</properties>
-
 	<build>
 		<plugins>
 			<plugin>

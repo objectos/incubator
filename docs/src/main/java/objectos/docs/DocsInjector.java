@@ -37,6 +37,8 @@ abstract class DocsInjector {
 
   abstract boolean $isNext();
 
+  abstract AbstractFragment $leftBar();
+
   abstract DocumentRecord $record(String key);
 
   abstract DocumentTitle $title();
