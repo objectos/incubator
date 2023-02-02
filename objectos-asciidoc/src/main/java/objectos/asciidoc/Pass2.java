@@ -291,7 +291,11 @@ class Pass2 {
     var maybe = pop();
 
     if (maybe != expected) {
-      throw new UnsupportedOperationException("Implement me");
+      addText(Text.REGULAR, index, index + 1);
+
+      push(ctx, maybe);
+
+      return;
     }
 
     pop(); // tokenIndex
