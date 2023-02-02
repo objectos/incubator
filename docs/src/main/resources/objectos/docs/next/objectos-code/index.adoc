@@ -1,14 +1,134 @@
 = Objectos Code
 :toc-title: Overview
 
-Objectos Code is cool!
+Objectos Code is a library for generating Java source code.
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas pretium magna vel fringilla posuere. Pellentesque malesuada, ante vitae iaculis ullamcorper, dolor nulla aliquet nisi, vitae sodales est diam a justo. Praesent tincidunt ex quis semper accumsan. Vivamus tempor consectetur ornare. Donec vitae felis elementum, efficitur nunc eu, porta enim. Pellentesque ex eros, lacinia id vestibulum a, interdum ac urna. Aliquam commodo efficitur risus, vel tempor neque fringilla quis. Quisque tincidunt elit et magna ultricies commodo. Nunc odio libero, tincidunt id velit nec, dictum posuere ligula. Ut vel ante pretium, tempus dolor et, condimentum risus. In id neque sed ipsum convallis tincidunt. Aliquam ut enim non nulla feugiat aliquet sed interdum erat. Nunc orci turpis, tempus vel ipsum quis, vehicula sodales dolor. Nunc non interdum diam. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+It introduces the concept of a "pure Java template";
+it feels like a traditional text-based template except it is a regular Java class.
 
-Proin accumsan mi a mollis volutpat. Donec sollicitudin velit et bibendum vulputate. Vivamus sed sapien vel nibh placerat finibus egestas at metus. Vestibulum interdum sagittis nibh vel fringilla. Vivamus semper tempus est id tristique. Fusce imperdiet auctor nisi quis sodales. Mauris dolor lectus, venenatis non nisi ac, dapibus volutpat lorem.
+== Tutorial
 
-Duis volutpat ex quis magna placerat scelerisque. Interdum et malesuada fames ac ante ipsum primis in faucibus. Duis et placerat elit. Vivamus consequat ipsum nunc. Pellentesque vel efficitur turpis. Integer vulputate dignissim ligula, ut volutpat est pretium eu. Sed sed augue vel metus suscipit scelerisque. Fusce porta nibh finibus nunc pellentesque molestie. In eget augue accumsan, facilisis erat non, sagittis arcu. Nam aliquet tortor in mi rhoncus, ut volutpat enim tristique. Sed mauris eros, placerat at leo quis, aliquam ultrices ante. Praesent placerat orci vitae euismod aliquam.
+This tutorial will give you an introduction on how to generate Java source code using Objectos Code.
 
-Praesent sed leo est. Donec pulvinar accumsan leo a iaculis. Mauris sodales porta mauris a efficitur. Cras eleifend sagittis nulla, at pellentesque purus tincidunt non. Praesent sapien neque, vestibulum fermentum velit at, fermentum pellentesque turpis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aenean sit amet ipsum sit amet odio sagittis hendrerit. Nullam facilisis eros et tincidunt venenatis.
+=== An empty class
 
-Nunc nec facilisis leo. Ut blandit augue ligula, at finibus nibh mollis nec. Vestibulum consectetur velit ex, sed consectetur neque convallis nec. Integer efficitur, ligula non elementum blandit, massa dui accumsan odio, ac auctor ligula eros nec dolor. Fusce rhoncus finibus nulla, sed tincidunt sapien viverra sed. Donec aliquet enim nulla, eu pretium risus euismod nec. Curabitur sem tellus, volutpat non volutpat et, lobortis a quam. Praesent in mi neque. Phasellus sed lacus non velit interdum consequat a consectetur mi. Mauris sollicitudin sapien erat, id luctus risus accumsan cursus. Fusce dolor mauris, dictum a efficitur eu, rhoncus ac tortor. Curabitur sollicitudin mi eros. Vivamus at nisi tempus, rhoncus nisl non, pellentesque quam. Ut nulla diam, ultricies non maximus quis, interdum quis magna.
+Let's start by generating a class that has an empty body.
+In other words, we want to generate the following:
+
+[,java]
+----
+class Tutorial {}
+----
+
+To use Objectos Code you have to:
+
+- extend the `JavaTemplate` class; and
+- provide the implementation of the `definition` method.
+
+In the latter, you use the provided embedded domain-specific language.
+Like so:
+
+[,java]
+----
+import objectos.code.JavaTemplate;
+
+public class Tutorial extends JavaTemplate {
+  @Override
+  protected final void definition() {
+    _class("Tutorial");
+    body();
+  }
+}
+----
+
+It starts by invoking the `_class` method.
+Notice that, as `class` is a reserved keyword in Java, the method name starts with the '_' (underscore) character.
+The string `"Tutorial"`, the name of the class we want to generate, is passed as the argument to the `_class` method.
+
+Next, we invoked the `body` method.
+No arguments were passed as we want to generate a class with an empty body.
+
+Right.
+Let's move to the next step.
+
+=== Adding a package declaration
+
+[,java]
+----
+package com.example;
+
+class Tutorial {}
+----
+
+[,java]
+----
+import objectos.code.JavaTemplate;
+
+public class Tutorial extends JavaTemplate {
+  @Override
+  protected final void definition() {
+    _package("com.example");
+  
+    _class("Tutorial");
+    body();
+  }
+}
+----
+
+=== Adding class modifiers
+
+We want our class:
+
+- to be public; and
+- to be annotated with a marker annotation.
+
+[,java]
+----
+package com.example;
+----
+
+[,java]
+----
+import java.io.IOException;
+import objectos.code.JavaTemplate;
+
+public class MyException extends JavaTemplate {
+  @Override
+  protected final void definition() {
+    code(
+      _package("com.example"),
+
+      autoImports(),
+
+      _public(), _class("MyException"), _extends(), t(IOException.class), body()
+    );
+  }
+}
+----
+
+It can be used to generate the following Java code:
+
+[,java]
+----
+package com.example;
+
+import java.io.IOException;
+
+public class MyException extends IOException {}
+----
+
+== Installation
+
+To use Objectos Code in your project add the following to your POM:
+
+[,xml]
+----
+<dependencies>
+    <dependency>
+        <groupId>br.com.objectos</groupId>
+        <artifactId>objectos-code</artifactId>
+    </dependency>
+</dependencies>
+----
+
+This assumes you are using the ilink:intro/install[Objectos BOM POM].

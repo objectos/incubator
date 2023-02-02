@@ -75,6 +75,10 @@
 		</dependency>
 		<dependency>
 			<groupId>br.com.objectos</groupId>
+			<artifactId>objectos-code</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>br.com.objectos</groupId>
 			<artifactId>css</artifactId>
 		</dependency>
 		<dependency>

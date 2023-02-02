@@ -49,7 +49,7 @@ final class DocsBottomBar extends AbstractFragment implements Docs.BottomBar {
           PaddingY.v32,
           TextAlign.center,
 
-          t("© 2010-2022 Objectos Software LTDA. All rights reserved.")
+          t("© 2010-2023 Objectos Software LTDA. All rights reserved.")
         )
       )
     );

@@ -1,0 +1,53 @@
+= Class Declarations
+
+This sections explains how to generate Java code containing classes.
+
+== Overview
+
+Consider the following Objectos Code template:
+
+[,java]
+----
+import java.io.IOException;
+import objectos.code.JavaTemplate;
+
+public class MyException extends JavaTemplate {
+  @Override
+  protected final void definition() {
+    code(
+      _package("com.example"),
+
+      autoImports(),
+
+      _public(), _class("MyException"), _extends(), t(IOException.class), body()
+    );
+  }
+}
+----
+
+It can be used to generate the following Java code:
+
+[,java]
+----
+package com.example;
+
+import java.io.IOException;
+
+public class MyException extends IOException {}
+----
+
+== Installation
+
+To use Objectos Code in your project add the following to your POM:
+
+[,xml]
+----
+<dependencies>
+    <dependency>
+        <groupId>br.com.objectos</groupId>
+        <artifactId>objectos-code</artifactId>
+    </dependency>
+</dependencies>
+----
+
+This assumes you are using the ilink:intro/install[Objectos BOM POM].
