@@ -25,7 +25,7 @@ To use Objectos Code you have to:
 - extend the `JavaTemplate` class; and
 - provide the implementation of the `definition` method.
 
-In the latter, you use the provided embedded domain-specific language.
+In the body of latter, you use the provided _embedded domain-specific language_ to define the Java file you will generate.
 Like so:
 
 [,java]
@@ -158,7 +158,50 @@ public class Tutorial extends JavaTemplate {
 }
 ----
 
-This tutorial will use the latter from now on.
+This tutorial will use the latter form from now on.
+
+=== Annotations
+
+Let's annotate our class with a hypothetical `Subject` annotation:
+
+[,java]
+----
+package com.example;
+
+import com.example.annotations.Subject;
+
+@Subject("Objectos Code")
+public final class Tutorial {}
+----
+
+The annotation is declared at a different package than our class.
+Therefore, we also need to add an import declaration.
+
+[,java]
+----
+import objectos.code.JavaTemplate;
+
+public class Tutorial extends JavaTemplate {
+  @Override
+  protected final void definition() {
+    // @formatter:off
+    _package("com.example");
+    
+    autoImports();
+
+    at(t("com.example.annotations", "Subject"), s("Objectos Code"));
+    _public(); _final(); _class("Tutorial"); _body();
+  }
+}
+----
+
+The `autoImports` instruction will automatically add any required import declaration.
+Please note that it *must* be declared after the package declaration and before the first top level declaration.
+
+The `at` method was used to annotate our class declaration:
+
+* the `t` method defines the annotation type; and
+* the `s` method declares the `"Objectos Code"` string literal.
 
 == Installation
 
