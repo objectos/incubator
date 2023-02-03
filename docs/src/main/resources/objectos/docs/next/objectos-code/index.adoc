@@ -303,18 +303,47 @@ public class Tutorial extends JavaTemplate {
 ----
 
 Let's see how this works.
+First, let's take a look at the constructor declarator:
 
 * notice that the `constructor` method is being invoked.
-It automatically add the enclosing type's simple name, `Tutorial` in our example, as the constructor's name;
+It automatically add the enclosing type's simple name, `Tutorial` in our example, as the constructor's name; and
 * the `constructor` method arguments define the parameter of our constructor.
-In other words, the `_int()` and the `_id("value")` arguments, generate the `int value` formal parameter;
-* next, a `block` method is invoked.
-It represents the constructors' body;
-* finally, the assignment expression statement.
-Notice how the expression name `n("value")` is automatically connected to the keyword `_this()`.
-The `gets()` method represents the simple assignment operator, i.e. the `=` (equals sign) operator.
+In other words, the `_int()` and the `_id("value")` arguments, generate the `int value` formal parameter.
+
+Now, let's look at the constructor body:
+
+* the constructor's body is represented by the `block` method;
+* it declares a single  assignment expression statement;
+* notice that the expression name `n("value")` will automatically chain to the keyword `_this()`.
+In other words, it will form the field access expression `this.value`;
+* the `gets()` method represents the simple assignment operator, i.e. the `=` (equals sign) operator;
+* the second expression name `n("value")` forms the right-hand side of the assignment; and
+* as the last statement in a block, the semicolon will be automatically added.
 
 === A method
+
+Next, let's add a method that reads our field value.
+The Java code we want to generate becomes the following:
+
+[,java]
+----
+package com.example;
+
+import com.example.annotations.Subject;
+
+@Subject("Objectos Code")
+public final class Tutorial {
+  private final int value;
+  
+  public Tutorial(int value) {
+    this.value = value;
+  }
+  
+  public int get() {
+    return value;
+  }
+}
+----
 
 And so we update our template to the following:
 
@@ -345,6 +374,22 @@ public class Tutorial extends JavaTemplate {
   }
 }
 ----
+
+Let's look at the method declaration in details:
+
+* the modifier is given by `_public()`;
+* the return type, by `_int()`;
+* the `method("get")` invocation represent the method's declarator.
+The `"get"` argument is the method's name; and
+If the method declared any parameter, it would be provided as additional arguments.
+
+And the method's body:
+
+* the method's body is represented by the `block` method invocation;
+* it declares a single `return` statement which starts with `_return()`;
+* it returns the expression name `n("value")`.
+Notice that, unlike the `_this()` keyword, the expression name will not chain to the `_return()` keyword.
+As `return.value` would not be valid Java code.
 
 == Installation
 
