@@ -203,6 +203,149 @@ The `at` method was used to annotate our class declaration:
 * the `t` method defines the annotation type; and
 * the `s` method declares the `"Objectos Code"` string literal.
 
+=== A field
+
+Let's now add a single field to our class.
+It should look like the following:
+
+[,java]
+----
+package com.example;
+
+import com.example.annotations.Subject;
+
+@Subject("Objectos Code")
+public final class Tutorial {
+  private final int value;
+}
+----
+
+As it is, this Java code would not compile.
+
+Don't worry, we will add a constructor as our next step.
+
+But, for now, we want to focus on adding the `int` field.
+So we modify our template to the following:
+
+[,java]
+----
+import objectos.code.JavaTemplate;
+
+public class Tutorial extends JavaTemplate {
+  @Override
+  protected final void definition() {
+    // @formatter:off
+    _package("com.example");
+    
+    autoImports();
+
+    at(t("com.example.annotations", "Subject"), s("Objectos Code"));
+    _public(); _final(); _class("Tutorial"); _body(
+      _private(), _final(), _int(), id("value")
+    );
+  }
+}
+----
+
+So for our field declaration:
+
+- the modifiers are given by the `_private()` and `_final()` methods;
+- the type is given by the `_int()` method; and
+- the name is given by the `id("value")` method.
+
+Note that, in this particular case, the semicolon after the field is added automatically.
+
+=== A constructor
+
+Let's add a constructor next.
+We want the generated Java code to be the following:
+
+[,java]
+----
+package com.example;
+
+import com.example.annotations.Subject;
+
+@Subject("Objectos Code")
+public final class Tutorial {
+  private final int value;
+  
+  public Tutorial(int value) {
+    this.value = value;
+  }
+}
+----
+
+Let's modify our `JavaTemplate` so it generates the constructor:
+
+[,java]
+----
+import objectos.code.JavaTemplate;
+
+public class Tutorial extends JavaTemplate {
+  @Override
+  protected final void definition() {
+    // @formatter:off
+    _package("com.example");
+    
+    autoImports();
+
+    at(t("com.example.annotations", "Subject"), s("Objectos Code"));
+    _public(); _final(); _class("Tutorial"); _body(
+      _private(), _final(), _int(), id("value"),
+      
+      _public(), constructor(_int(), id("value")), block(
+        _this(), n("value"), gets(), n("value")
+      )
+    );
+  }
+}
+----
+
+Let's see how this works.
+
+* notice that the `constructor` method is being invoked.
+It automatically add the enclosing type's simple name, `Tutorial` in our example, as the constructor's name;
+* the `constructor` method arguments define the parameter of our constructor.
+In other words, the `_int()` and the `_id("value")` arguments, generate the `int value` formal parameter;
+* next, a `block` method is invoked.
+It represents the constructors' body;
+* finally, the assignment expression statement.
+Notice how the expression name `n("value")` is automatically connected to the keyword `_this()`.
+The `gets()` method represents the simple assignment operator, i.e. the `=` (equals sign) operator.
+
+=== A method
+
+And so we update our template to the following:
+
+[,java]
+----
+import objectos.code.JavaTemplate;
+
+public class Tutorial extends JavaTemplate {
+  @Override
+  protected final void definition() {
+    // @formatter:off
+    _package("com.example");
+    
+    autoImports();
+
+    at(t("com.example.annotations", "Subject"), s("Objectos Code"));
+    _public(); _final(); _class("Tutorial"); _body(
+      _private(), _final(), _int(), id("value"),
+      
+      _public(), constructor(_int(), id("value")), block(
+        _this(), n("value"), gets(), n("value")
+      ),
+      
+      _public(), _int(), method("get"), block(
+        _return(), n("value")
+      )
+    );
+  }
+}
+----
+
 == Installation
 
 To use Objectos Code in your project add the following to your POM:
