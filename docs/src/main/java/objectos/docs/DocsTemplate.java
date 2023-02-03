@@ -30,7 +30,7 @@ abstract class DocsTemplate extends SharedTemplate {
   DocsTemplate(DocsInjector injector) { this.injector = injector; }
 
   @Override
-  public final void inlineMacro(
+  public void inlineMacro(
       String name, String target, InlineMacroAttributes attributes) {
     switch (name) {
       case "elink" -> {

@@ -33,15 +33,6 @@ final class LeftBarNext extends LeftBarFragment {
           ul(
             li(a0("next/objectos-code/index"))
           )
-        ),
-
-        li(
-          h2v0("Declarations"),
-
-          ul(
-            li(a0("next/objectos-code/declaration/compilation-unit")),
-            li(a0("next/objectos-code/declaration/class"))
-          )
         )
       );
     }

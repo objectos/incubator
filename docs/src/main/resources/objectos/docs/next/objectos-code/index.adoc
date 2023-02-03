@@ -4,7 +4,44 @@
 Objectos Code is a library for generating Java source code.
 
 It introduces the concept of a "pure Java template";
-it feels like a traditional text-based template except it is a regular Java class.
+it feels similar to a traditional text-based template except it is a regular Java class.
+
+The following Objectos Code template:
+
+[,java]
+----
+import objectos.code.JavaTemplate;
+
+public class Example extends JavaTemplate {
+  @Override
+  protected void definition() {
+    // @formatter:off
+    _package("com.example");
+
+    autoImports();
+
+    _public(); _class("HelloWorld"); body(
+      _public(), _static(), _void(),
+      method("main", t(t(String.class), dim()), id("args")), block(
+        t(System.class), n("out"), invoke("println", s("Hello, Objectos Code!"))
+      )
+    );
+  }
+}
+----
+
+Can be used to generate the following Java code:
+
+[,java]
+----
+package com.example;
+
+public class HelloWorld {
+  public static void main(String[] args) {
+    System.out.println("Hello, Objectos Code!");
+  }
+}
+----
 
 == Tutorial
 
@@ -115,7 +152,11 @@ public class Tutorial extends JavaTemplate {
 }
 ----
 
-With each "keyword" sitting at a different line, our template does not look like a regular Java file.
+So the `_public()` method adds the `public` modifier.
+Similarly, the `_final()` method adds the `final` modifier.
+
+But something looks off: each "keyword" is sitting at a different line.
+So our template does not look like a regular Java file.
 Let's improve that.
 
 === Optional: the `code` method
@@ -141,7 +182,8 @@ public class Tutorial extends JavaTemplate {
 Notice that the instructions are now arguments to the `code` method.
 Therefore, each instruction is now separated with a comma.
 
-Alternatively, you can use a `@formatter:off` comment tag to turn off your IDE code formatter:
+Alternatively, and depending on your IDE configuration,
+you can use a `@formatter:off` comment tag to turn off your IDE code formatter:
 
 [,java]
 ----
@@ -176,6 +218,9 @@ public final class Tutorial {}
 
 The annotation is declared at a different package than our class.
 Therefore, we also need to add an import declaration.
+
+So we modify our Objectos Code template.
+Like so:
 
 [,java]
 ----
@@ -306,9 +351,8 @@ Let's see how this works.
 First, let's take a look at the constructor declarator:
 
 * notice that the `constructor` method is being invoked.
-It automatically add the enclosing type's simple name, `Tutorial` in our example, as the constructor's name; and
-* the `constructor` method arguments define the parameter of our constructor.
-In other words, the `_int()` and the `_id("value")` arguments, generate the `int value` formal parameter.
+It automatically adds the simple name of the enclosing type, `Tutorial` in our case, as the constructor's name; and
+* the `_int()` and the `_id("value")` arguments, generate the `int value` formal parameter.
 
 Now, let's look at the constructor body:
 
@@ -380,8 +424,7 @@ Let's look at the method declaration in details:
 * the modifier is given by `_public()`;
 * the return type, by `_int()`;
 * the `method("get")` invocation represent the method's declarator.
-The `"get"` argument is the method's name; and
-If the method declared any parameter, it would be provided as additional arguments.
+The `"get"` argument is the method's name.
 
 And the method's body:
 
