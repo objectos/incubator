@@ -3,7 +3,7 @@
 
 _October 3, 2022_
 
-Welcome to Objectos 0.3.0, the second third release of the Objectos suite of Java libraries.
+Welcome to Objectos 0.3.0, the third release of the Objectos suite of Java libraries.
 
 == JDK compatibility
 

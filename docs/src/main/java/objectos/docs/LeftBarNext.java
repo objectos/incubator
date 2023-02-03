@@ -143,15 +143,6 @@ final class LeftBarNext extends LeftBarFragment {
       li(a0("next/index")),
 
       li(
-        h2v0("Introduction"),
-
-        ul(
-          li(a0("next/intro/overview")),
-          li(a0("next/intro/install"))
-        )
-      ),
-
-      li(
         h2v0("Libraries"),
 
         ul(
@@ -162,9 +153,19 @@ final class LeftBarNext extends LeftBarFragment {
       ),
 
       li(
+        h2v0("New to Objectos"),
+
+        ul(
+          li(a0("next/intro/overview")),
+          li(a0("next/intro/install"))
+        )
+      ),
+
+      li(
         h2v0("Release Notes"),
 
         ul(
+          li(a0("next/relnotes/0.4.0")),
           li(a0("next/relnotes/0.3.0")),
           li(a0("next/relnotes/0.2.0")),
           li(a0("next/relnotes/0.1.0"))
