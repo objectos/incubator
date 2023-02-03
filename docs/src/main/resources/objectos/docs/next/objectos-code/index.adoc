@@ -153,7 +153,7 @@ public class Tutorial extends JavaTemplate {
     // @formatter:off
     _package("com.example");
 
-    _public(); _final(); _class("Tutorial"); _body();
+    _public(); _final(); _class("Tutorial"); body();
   }
 }
 ----
@@ -190,7 +190,7 @@ public class Tutorial extends JavaTemplate {
     autoImports();
 
     at(t("com.example.annotations", "Subject"), s("Objectos Code"));
-    _public(); _final(); _class("Tutorial"); _body();
+    _public(); _final(); _class("Tutorial"); body();
   }
 }
 ----
@@ -240,7 +240,7 @@ public class Tutorial extends JavaTemplate {
     autoImports();
 
     at(t("com.example.annotations", "Subject"), s("Objectos Code"));
-    _public(); _final(); _class("Tutorial"); _body(
+    _public(); _final(); _class("Tutorial"); body(
       _private(), _final(), _int(), id("value")
     );
   }
@@ -291,7 +291,7 @@ public class Tutorial extends JavaTemplate {
     autoImports();
 
     at(t("com.example.annotations", "Subject"), s("Objectos Code"));
-    _public(); _final(); _class("Tutorial"); _body(
+    _public(); _final(); _class("Tutorial"); body(
       _private(), _final(), _int(), id("value"),
       
       _public(), constructor(_int(), id("value")), block(
@@ -360,7 +360,7 @@ public class Tutorial extends JavaTemplate {
     autoImports();
 
     at(t("com.example.annotations", "Subject"), s("Objectos Code"));
-    _public(); _final(); _class("Tutorial"); _body(
+    _public(); _final(); _class("Tutorial"); body(
       _private(), _final(), _int(), id("value"),
       
       _public(), constructor(_int(), id("value")), block(
@@ -390,6 +390,107 @@ And the method's body:
 * it returns the expression name `n("value")`.
 Notice that, unlike the `_this()` keyword, the expression name will not chain to the `_return()` keyword.
 As `return.value` would not be valid Java code.
+
+=== The `include` directive
+
+Suppose now we need to generate a number of constant values in our class.
+But we will only know the exact number number of constants at runtime.
+
+In other words, we want our class to have `static final` fields like the following:
+
+[,java]
+----
+package com.example;
+
+import com.example.annotations.Subject;
+
+@Subject("Objectos Code")
+public final class Tutorial {
+  public static final int ONE = 1;
+  
+  public static final int TWO = 2;
+  
+  public static final int THREE = 3;
+
+  private final int value;
+  
+  public Tutorial(int value) {
+    this.value = value;
+  }
+  
+  public int get() {
+    return value;
+  }
+}
+----
+
+But the exact number of fields will only be known at runtime.
+For simplicity, we will generate three constants but the idea remains basically the same.
+
+In this case we will use the `include` directive and a method reference.
+Like so:
+
+[,java]
+----
+import java.util.LinkedHashMap;
+import objectos.code.JavaTemplate;
+
+public class Tutorial extends JavaTemplate {
+  @Override
+  protected final void definition() {
+    // @formatter:off
+    _package("com.example");
+    
+    autoImports();
+
+    at(t("com.example.annotations", "Subject"), s("Objectos Code"));
+    _public(); _final(); _class("Tutorial"); body(
+      include(this::constants),
+    
+      _private(), _final(), _int(), id("value"),
+      
+      _public(), constructor(_int(), id("value")), block(
+        _this(), n("value"), gets(), n("value")
+      ),
+      
+      _public(), _int(), method("get"), block(
+        _return(), n("value")
+      )
+    );
+    // @formatter:on
+  }
+  
+  private void constants() {
+    var constants = new LinkedHashMap<String, Integer>();
+    
+    constants.put("ONE", 1);
+    constants.put("TWO", 2);
+    constants.put("THREE", 3);
+    
+    for (var entry : constants.entrySet()) {
+      var name = entry.getKey();
+      var value = entry.getValue();
+      
+      // @formatter:off
+      _public(); _static(); _final(); _int(); id(name); i(value.intValue());
+      // @formatter:on
+    }
+  }
+}
+----
+
+Notice the `include` method invocation at the beginning of the body of our class.
+The argument is a method reference.
+It references the private `constants` method.
+
+The `constants` method iterates over the entries of a `Map` instance.
+Using the key and the value of each entry, it declares the field:
+
+* the field modifiers are given by `_public()`, `_static()` and `_final()`;
+* the field type, by `_int()`;
+* the field name, by `id(name)`; and
+* the field is initialized with the `int` literal expression: `i(value.intValue())`.
+The `Integer::intValue` is explicitly called just to indicate that the `i` method accepts an `int` value.
 
 == Installation
 
