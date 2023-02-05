@@ -1,0 +1,126 @@
+= Concatenating all of the elements into a string
+
+The `BaseCollection` provides three `join` methods that returns a `String`.
+They are:
+
+- `join()`
+- `join(String delimiter)`
+- `join(String delimiter, String prefix, String suffix)`
+
+They are for creating a string representation of the elements of a collection by joining all of the elements together.
+
+They are similar in functionality to the `joining` methods provided by the JDK `Collectors` class.
+As a design choice, the order of their parameters are also the same.
+
+== In a nutshell
+
+The following example illustrate all of the three methods:
+
+[,java]
+----
+var abc = new GrowableList<String>();
+
+abc.add("A");
+abc.add("B");
+abc.add("C");
+
+assertEquals(abc.join(), "ABC");
+assertEquals(abc.join(", "), "A, B, C");
+assertEquals(abc.join(", ", "[", "]"), "[A, B, C]");
+----
+
+== The `join()` method
+
+The `join` method simply concatenates the `toString` outputs of all of the elements in the collection.
+It does so in _iteration order_.
+
+Consider the following example:
+
+[,java]
+----
+var selectors = new GrowableList<String>();
+
+selectors.add("#foo");
+selectors.add(".bar");
+selectors.add(":hover");
+
+assertEquals(
+  selectors.join(),
+  "#foo.bar:hover"
+);
+----
+
+The `selectors` list contains three independent CSS selectors.
+It uses the `join()` method to create a single selector that is a combination of the three.
+
+== The `join(delimiter)` method
+
+This version of the `join` method has a `delimiter` parameter.
+It concatenates the `toString` outputs of all of the elements in the collection.
+It separates each output by the specified `delimiter`.
+
+Here's an example:
+
+[,java]
+----
+var modifiers = new GrowableList<String>();
+
+modifiers.add("private");
+modifiers.add("static");
+modifiers.add("final");
+
+assertEquals(
+  modifiers.join(" "),
+  "private static final"
+);
+----
+
+The `modifiers` list contains the names of three Java modifiers.
+It invokes the `join` method with a string containing a single space character as the separator.
+The resulting string `private static final` could be used as the modifier of a field or a method in a Java source file.
+
+== The `join(delimiter, prefix, suffix)` method
+
+The difference of this version to the previous one is that it adds both a `prefix` and a `suffix` to the resulting string.
+
+Take the following example:
+
+[,java]
+----
+var typeArguments = new GrowableList<String>();
+
+typeArguments.add("Integer");
+typeArguments.add("String");
+
+assertEquals(
+  typeArguments.join(", ", "Map<", ">"),
+  "Map<Integer, String>"
+);
+----
+
+The `typeArguments` list contains the simple names of two Java types.
+The `join` method is used to create a parameterized `Map` type declaration. 
+
+== All methods uses the _iteration order_
+
+All of the `join` methods uses the _iteration order_.
+In other words, the resulting string will have the elements in the same order as returned by the collection's `Iterator`.
+
+As an example, the following uses the `join` method in a `GrowableSet`:
+
+[,java]
+----
+var modifiers = new GrowableSet<String>();
+
+modifiers.add("private");
+modifiers.add("static");
+modifiers.add("final");
+
+assertEquals(
+  modifiers.join(" "),
+  "private final static"
+);
+----
+
+Note how the order in the resulting string is *different* than the _insertion order_.
+It is because it uses the _iteration order_ instead. 

@@ -21,11 +21,13 @@ final class LeftBar {
 
   private final LeftBarNext next = new LeftBarNext(this);
 
-  private final LeftBarV0003 v0003 = new LeftBarV0003(this);
+  private final LeftBarV000400 v000400 = new LeftBarV000400(this);
 
-  private final LeftBarV0002 v0002 = new LeftBarV0002(this);
+  private final AbstractFragment v0003 = new LeftBarV0003(this);
 
-  private final LeftBarV0001 v0001 = new LeftBarV0001(this);
+  private final AbstractFragment v0002 = new LeftBarV0002(this);
+
+  private final AbstractFragment v0001 = new LeftBarV0001(this);
 
   private final DocsInjector injector;
 
@@ -34,6 +36,8 @@ final class LeftBar {
   public final AbstractFragment get(String key, Version version) {
     return switch (version) {
       case NEXT -> next.get(key);
+
+      case V0_4_0 -> v000400.get(key);
 
       case V0_3_0 -> v0003;
 
