@@ -1,7 +1,7 @@
 = Objectos 0.4.0 release notes
 :toc-title: Objectos 0.4.0
 
-_February 4, 2023_
+_February 5, 2023_
 
 Welcome to Objectos 0.4.0, the latest release of the Objectos suite of Java libraries.
 

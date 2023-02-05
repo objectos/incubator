@@ -24,7 +24,7 @@ enum Version {
       unreleased(), Status.DEVELOPMENT),
 
   V0_4_0(name("0.4.0"), slug("0.4.0"), directory("v000400"),
-      releaseDate(2023, 2, 3), Status.LATEST),
+      releaseDate(2023, 2, 5), Status.LATEST),
 
   V0_3_0(name("0.3.0"), slug("0.3"), directory("v0003"),
       releaseDate(2022, 10, 10), Status.UNSUPPORTED),
