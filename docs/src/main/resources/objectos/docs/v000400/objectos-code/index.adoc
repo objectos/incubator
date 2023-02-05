@@ -43,6 +43,16 @@ public class HelloWorld {
 }
 ----
 
+== Alpha quality
+
+Please note that Objectos Code is a work in progress and this release is marked as alpha quality.
+
+Apart from not being stable yet, it doesn't support a large number of Java statements and expressions.
+For example, all of the control flow statements, like the `if`, `for`, `while` statements, are not supported yet.
+
+Additionally, this documentation is also a work in progress.
+In other words, it does not cover all of the implemented features yet.
+
 == Tutorial
 
 This tutorial will give you an introduction on how to generate Java source code using Objectos Code.
