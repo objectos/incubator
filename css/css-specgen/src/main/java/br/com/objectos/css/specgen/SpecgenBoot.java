@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2023 Objectos Software LTDA.
+ * Copyright (C) 2016-2022 Objectos Software LTDA.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,80 +15,39 @@
  */
 package br.com.objectos.css.specgen;
 
-import static br.com.objectos.code.java.Java.annotation;
-import static br.com.objectos.code.java.Java.l;
-
-import br.com.objectos.code.annotations.Generated;
-import br.com.objectos.code.java.declaration.AnnotationCode;
-import br.com.objectos.code.java.io.JavaFile;
-import br.com.objectos.code.java.type.NamedClass;
-import br.com.objectos.core.io.Read;
 import br.com.objectos.css.specgen.mdn.Mdn;
-import br.com.objectos.css.specgen.spec.Spec;
-import br.com.objectos.css.specgen.spec.StepAdapter;
-import br.com.objectos.fs.Directory;
-import br.com.objectos.fs.LocalFs;
-import br.com.objectos.fs.RegularFile;
-import br.com.objectos.fs.ResolvedPath;
 import java.io.IOException;
-import java.io.UncheckedIOException;
-import java.nio.charset.Charset;
+import java.nio.file.Path;
+import objectos.code.JavaSink;
+import objectos.code.JavaTemplate;
 
-public class SpecgenBoot extends StepAdapter {
+public final class SpecgenBoot extends Specgen {
 
-  static final AnnotationCode GENERATED = annotation(
-      Generated.class,
-      l(SpecgenBoot.class.getCanonicalName())
-  );
+  private final JavaSink javaSink;
 
-  private final Directory srcDirectory;
-
-  private SpecgenBoot(Directory srcDirectory) {
-    this.srcDirectory = srcDirectory;
-  }
+  public SpecgenBoot(JavaSink javaSink) { this.javaSink = javaSink; }
 
   public static void main(String[] args) throws IOException {
-    String srcDirectoryPath;
-    srcDirectoryPath = args[0];
+    var srcDirectoryPath = args[0];
 
-    ResolvedPath resolved;
-    resolved = LocalFs.resolve(srcDirectoryPath);
+    var srcDirectory = Path.of(srcDirectoryPath);
 
-    Directory srcDirectory;
-    srcDirectory = resolved.toDirectoryCreateIfNotFound();
+    var javaSink = JavaSink.ofDirectory(srcDirectory, JavaSink.skipExisting());
 
-    SpecgenBoot boot = new SpecgenBoot(
-        srcDirectory
-    );
+    var boot = new SpecgenBoot(javaSink);
 
     boot.execute();
   }
 
   @Override
-  public final void writeJavaFile(JavaFile javaFile) {
-    try {
-      if (shouldWrite(javaFile)) {
-        javaFile.writeTo(srcDirectory);
-      }
-    } catch (IOException e) {
-      throw new UncheckedIOException(e);
-    }
+  final void templateSink(JavaTemplate template) throws IOException {
+    javaSink.write(template);
   }
 
   private void execute() throws IOException {
-    Spec spec = Mdn.load();
-    Specgen specgen = new Specgen(spec);
-    specgen.execute(new PropertyModuleStep(this));
-  }
+    var spec = Mdn.load();
 
-  private boolean shouldWrite(JavaFile javaFile) throws IOException {
-    NamedClass className = javaFile.className();
-
-    RegularFile sourceFile = className.createSourceFile(srcDirectory);
-
-    String s = Read.string(sourceFile, Charset.defaultCharset());
-
-    return !s.contains("@DoNotOverwrite");
+    generate(spec);
   }
 
 }

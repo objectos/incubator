@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2023 Objectos Software LTDA.
+ * Copyright (C) 2016-2022 Objectos Software LTDA.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,10 +18,10 @@ package br.com.objectos.css.specgen.mdn;
 import br.com.objectos.core.io.Charsets;
 import br.com.objectos.core.io.Read;
 import br.com.objectos.core.io.Resource;
-import br.com.objectos.css.specgen.spec.Property;
-import br.com.objectos.css.specgen.spec.Spec;
-import br.com.objectos.css.specgen.spec.Spec.Builder;
-import br.com.objectos.css.specgen.spec.ValueType;
+import br.com.objectos.css.specgen.Property;
+import br.com.objectos.css.specgen.Spec;
+import br.com.objectos.css.specgen.ValueType;
+import br.com.objectos.css.specgen.Spec.Builder;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.Files;

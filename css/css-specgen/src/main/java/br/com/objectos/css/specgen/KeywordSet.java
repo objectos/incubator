@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2023 Objectos Software LTDA.
+ * Copyright (C) 2016-2022 Objectos Software LTDA.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,64 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package br.com.objectos.css.specgen.spec;
+package br.com.objectos.css.specgen;
 
-import static br.com.objectos.code.java.Java._var;
-import static br.com.objectos.code.java.Java.id;
-import static br.com.objectos.code.java.Java.invoke;
-import static br.com.objectos.code.java.Java.l;
-
-import br.com.objectos.code.java.JavaNames;
-import br.com.objectos.code.java.declaration.MethodCode;
-import br.com.objectos.code.java.expression.Identifier;
-import br.com.objectos.css.specgen.Types;
 import java.util.Set;
 import java.util.TreeSet;
-import javax.lang.model.SourceVersion;
 
 public class KeywordSet {
-
-  private final Set<String> values;
-
-  private KeywordSet(Builder builder) {
-    values = builder.values();
-  }
-
-  public static Builder builder() {
-    return new Builder();
-  }
-
-  public final void acceptPropertyDefinitionMethod(MethodCode.Builder builder) {
-    for (String value : values) {
-      builder.addStatement(
-        _var(Types.KeywordName, identifier(value), invoke("keyword", l(value)))
-      );
-    }
-  }
-
-  public final boolean contains(String... strings) {
-    for (String s : strings) {
-      if (!values.contains(s)) {
-        return false;
-      }
-    }
-
-    return true;
-  }
-
-  public final int size() {
-    return values.size();
-  }
-
-  private Identifier identifier(String value) {
-    String candidate = JavaNames.toValidMethodName(value);
-
-    if (SourceVersion.isKeyword(candidate)) {
-      candidate = candidate + "Kw";
-    }
-
-    return id(candidate);
-  }
 
   public static class Builder {
 
@@ -152,6 +100,30 @@ public class KeywordSet {
       sb.setLength(0);
     }
 
+  }
+
+  public final Set<String> values;
+
+  private KeywordSet(Builder builder) {
+    values = builder.values();
+  }
+
+  public static Builder builder() {
+    return new Builder();
+  }
+
+  public final boolean contains(String... strings) {
+    for (String s : strings) {
+      if (!values.contains(s)) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
+  public final int size() {
+    return values.size();
   }
 
 }

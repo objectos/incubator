@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2023 Objectos Software LTDA.
+ * Copyright (C) 2016-2022 Objectos Software LTDA.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,8 +17,8 @@ package br.com.objectos.css.specgen.mdn;
 
 import static org.testng.Assert.assertEquals;
 
-import br.com.objectos.css.specgen.spec.Property;
-import br.com.objectos.css.specgen.spec.Spec;
+import br.com.objectos.css.specgen.Property;
+import br.com.objectos.css.specgen.Spec;
 import java.io.IOException;
 import objectos.util.UnmodifiableList;
 import org.testng.annotations.Test;
