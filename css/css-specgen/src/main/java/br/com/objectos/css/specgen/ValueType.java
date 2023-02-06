@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2022 Objectos Software LTDA.
+ * Copyright (C) 2016-2023 Objectos Software LTDA.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,9 +15,6 @@
  */
 package br.com.objectos.css.specgen;
 
-import static br.com.objectos.code.java.Java.l;
-
-import br.com.objectos.code.java.expression.Literal;
 import java.util.Objects;
 import objectos.lang.Check;
 import objectos.lang.ToString;
@@ -44,10 +41,6 @@ public class ValueType implements ToString.Formattable {
     ValueType that = (ValueType) obj;
     return name.equals(that.name)
         && formal.equals(that.formal);
-  }
-
-  public final Literal formalLiteral() {
-    return l(name + " = " + formal);
   }
 
   @Override

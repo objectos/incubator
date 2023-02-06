@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2022 Objectos Software LTDA.
+ * Copyright (C) 2016-2023 Objectos Software LTDA.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,18 +35,15 @@ class PropertyModuleTemplate extends JavaTemplate {
 
   @Override
   protected final void definition() {
+    // @formatter:off
     _package(BOOT);
 
     autoImports();
 
-    _class(
-      annotation(t(Generated.class), s(SpecgenBoot.class.getCanonicalName())),
-      _final(), id(simpleName()), _extends(t(BOOT, "AbstractPropertyModule")),
-
-      method(
-        annotation(t(Override.class)),
-        _final(), _void(), id("propertyDefinition"),
-
+    at(t(Generated.class), s(SpecgenBoot.class.getCanonicalName()));
+    _final(); _class(simpleName()); _extends(); t(BOOT, "AbstractPropertyModule"); body(
+      at(t(Override.class)),
+      _final(), _void(), method("propertyDefinition"), block(
         include(this::def0keywords),
 
         include(this::def1MainProperty),
@@ -54,6 +51,7 @@ class PropertyModuleTemplate extends JavaTemplate {
         include(this::def2GroupProperties)
       )
     );
+    // @formatter:on
   }
 
   final void set(Property property, List<Property> group) {
@@ -70,7 +68,9 @@ class PropertyModuleTemplate extends JavaTemplate {
         id = id + "Kw";
       }
 
-      var(id, invoke("keyword", s(keyword)));
+      // @formatter:off
+      _var(); id(id); invoke("keyword", s(keyword)); end();
+      // @formatter:on
     }
   }
 
@@ -78,19 +78,21 @@ class PropertyModuleTemplate extends JavaTemplate {
     invoke(
       "property", nl(),
 
-      s(property.name()), nl(),
+      s(property.name()), end(), nl(),
 
       nl(),
 
       invoke(
         "formal",
         include(() -> formalArgs(property))
-      ), nl(),
+      ), end(), nl(),
 
       nl(),
 
       n(globalSig), nl()
     );
+
+    end();
   }
 
   private void def2GroupProperties() {
@@ -103,25 +105,29 @@ class PropertyModuleTemplate extends JavaTemplate {
     invoke(
       "property", nl(),
 
-      invoke("names", include(this::namesArgs)), nl(),
+      invoke("names", include(this::namesArgs)), end(), nl(),
 
       nl(),
 
       invoke(
         "formal",
         include(() -> formalArgs(first))
-      ), nl(),
+      ), end(), nl(),
 
       nl(),
 
       n(globalSig), nl()
     );
+
+    end();
   }
 
   private void formalArgs(Property property) {
     nl();
 
-    n(t(SPEC, "Source"), "MDN");
+    // @formatter:off
+    t(SPEC, "Source"); n("MDN");
+    // @formatter:on
     nl();
 
     s(property.formal());

@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!--
 
-    Copyright (C) 2016-2022 Objectos Software LTDA.
+    Copyright (C) 2016-2023 Objectos Software LTDA.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -23,7 +23,7 @@
 	<parent>
 		<groupId>br.com.objectos</groupId>
 		<artifactId>css-parent</artifactId>
-		<version>0.4.0-SNAPSHOT</version>
+		<version>0.4.1-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 
@@ -66,6 +66,10 @@
 		<dependency>
 			<groupId>br.com.objectos</groupId>
 			<artifactId>objectos-code</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>br.com.objectos</groupId>
+			<artifactId>code</artifactId>
 		</dependency>
 
 		<dependency>
