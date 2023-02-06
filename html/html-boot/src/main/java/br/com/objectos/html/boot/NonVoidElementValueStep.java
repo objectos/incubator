@@ -13,25 +13,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package br.com.objectos.html.boot.spec;
+package br.com.objectos.html.boot;
 
-public abstract class AbstractStep implements Step {
+import br.com.objectos.code.annotations.Generated;
 
-  protected AbstractStep() {}
-
-  @Override
-  public void attributeSpec(AttributeSpec attributeSpec) {}
+final class NonVoidElementValueStep extends ThisTemplate {
 
   @Override
-  public void elementSpec(ElementSpec elementSpec) {}
+  protected final void definition() {
+    // @formatter:off
+    _package(spi_type);
 
-  @Override
-  public void execute() {}
+    autoImports();
 
-  @Override
-  public void templateSpec(TemplateSpec template) {}
+    at(t(Generated.class), s(HtmlBoot.class.getCanonicalName()));
+    _public(); _interface("NonVoidElementValue"); _extends(); extendsClause(); body();
+    // @formatter:on
+  }
 
-  @Override
-  public void textSpec(TextSpec text) {}
+  private void extendsClause() {
+    for (var element : spec.elements()) {
+      if (element.hasEndTag()) {
+        t(spi_type, element.valueSimpleName());
+      }
+    }
+  }
 
 }

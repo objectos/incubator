@@ -15,19 +15,32 @@
  */
 package br.com.objectos.html.boot;
 
-import br.com.objectos.html.boot.spec.AttributeSpec;
+import br.com.objectos.code.annotations.Generated;
 import br.com.objectos.html.boot.spec.SpecDsl;
+import java.io.IOException;
+import objectos.code.JavaSink;
+import objectos.code.JavaTemplate;
 
-public abstract class AbstractHtmlBootTest {
+abstract class ThisTemplate extends JavaTemplate {
 
-  SpecDsl specDsl;
+  static final String attr = "br.com.objectos.html.attribute";
 
-  protected final SpecDsl specDsl() {
-    return specDsl = new SpecDsl();
+  static final String elem = "br.com.objectos.html.element";
+
+  static final String spi_tmpl = "br.com.objectos.html.spi.tmpl";
+
+  static final String spi_type = "br.com.objectos.html.spi.type";
+
+  SpecDsl spec;
+
+  public void write(JavaSink sink, SpecDsl spec) throws IOException {
+    this.spec = spec;
+
+    sink.write(this);
   }
 
-  final AttributeSpec attributeSpec(String name) {
-    return specDsl.attributeSpec(name);
+  final void generatedAnnotation() {
+    at(t(Generated.class), s(HtmlBoot.class.getCanonicalName()));
   }
 
 }

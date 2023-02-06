@@ -15,13 +15,7 @@
  */
 package br.com.objectos.html.boot.spec;
 
-import static br.com.objectos.code.java.Java.id;
-import static br.com.objectos.html.boot.attribute.AttributeNames.StandardAttributeName;
-
 import br.com.objectos.code.java.JavaNames;
-import br.com.objectos.code.java.expression.Identifier;
-import br.com.objectos.code.java.type.NamedClass;
-import br.com.objectos.html.boot.attribute.AttributeNames;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -30,11 +24,27 @@ import objectos.util.UnmodifiableSet;
 
 public abstract class AttributeSpec {
 
-  final Set<NamedClass> interfaceSet = new TreeSet<>();
+  private static class GlobalAttributeSpec extends AttributeSpec {
 
-  private final NamedClass className;
+    GlobalAttributeSpec(String name) {
+      super(name);
+    }
 
-  private final Identifier constantName;
+    @Override
+    public boolean global() { return true; }
+
+    @Override
+    final ElementAttributeSpec toElementAttributeSpec(ElementSpec parent) {
+      throw new IllegalArgumentException(name() + " attribute was already defined as global!");
+    }
+
+  }
+
+  final Set<String> interfaceSet = new TreeSet<>();
+
+  public final String classSimpleName;
+
+  public final String constantName;
 
   private final Set<AttributeKind> kindSet = new TreeSet<>();
 
@@ -44,8 +54,10 @@ public abstract class AttributeSpec {
 
   AttributeSpec(String name) {
     this.name = name;
-    this.className = StandardAttributeName.nestedClass(JavaNames.toValidClassName(name));
-    constantName = id(JavaNames.toIdentifier(name.toUpperCase()));
+
+    classSimpleName = JavaNames.toValidClassName(name);
+
+    constantName = JavaNames.toIdentifier(name.toUpperCase());
   }
 
   static AttributeSpec global(String name) {
@@ -62,15 +74,11 @@ public abstract class AttributeSpec {
     }
   }
 
-  public final NamedClass className() {
-    return className;
-  }
+  public final String constantName() { return constantName; }
 
-  public final Identifier constantName() {
-    return constantName;
-  }
+  public boolean global() { return false; }
 
-  public final Set<NamedClass> interfaceSet() {
+  public final Set<String> interfaceSet() {
     return interfaceSet;
   }
 
@@ -92,7 +100,7 @@ public abstract class AttributeSpec {
     return kindSet;
   }
 
-  public final Iterable<String> methodNameStream() {
+  public final Iterable<String> methodNames() {
     return nameSet.isEmpty()
         ? UnmodifiableSet.of(methodName(name))
         : nameSet;
@@ -110,20 +118,6 @@ public abstract class AttributeSpec {
 
   private String methodName(String value) {
     return JavaNames.toValidMethodName(value);
-  }
-
-  private static class GlobalAttributeSpec extends AttributeSpec {
-
-    GlobalAttributeSpec(String name) {
-      super(name);
-      interfaceSet.add(AttributeNames.GlobalAttributeName);
-    }
-
-    @Override
-    final ElementAttributeSpec toElementAttributeSpec(ElementSpec parent) {
-      throw new IllegalArgumentException(name() + " attribute was already defined as global!");
-    }
-
   }
 
 }

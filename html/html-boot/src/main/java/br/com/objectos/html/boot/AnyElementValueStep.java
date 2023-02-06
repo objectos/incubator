@@ -13,14 +13,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package br.com.objectos.html.boot.spec;
+package br.com.objectos.html.boot;
 
-import br.com.objectos.code.java.io.JavaFile;
-import java.util.function.Consumer;
+import br.com.objectos.code.annotations.Generated;
 
-@FunctionalInterface
-public interface StepFactory {
+final class AnyElementValueStep extends ThisTemplate {
 
-  Step get(Consumer<JavaFile> javaFileWriter);
+  @Override
+  protected final void definition() {
+    // @formatter:off
+    _package(spi_type);
+
+    autoImports();
+
+    at(t(Generated.class), s(HtmlBoot.class.getCanonicalName()));
+    _public(); _interface("AnyElementValue"); _extends(); extendsClause(); body();
+    // @formatter:on
+  }
+
+  private void extendsClause() {
+    for (var element : spec.elements()) {
+      t(spi_type, element.valueSimpleName());
+    }
+  }
 
 }

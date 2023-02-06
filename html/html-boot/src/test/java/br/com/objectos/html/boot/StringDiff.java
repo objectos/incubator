@@ -13,18 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package br.com.objectos.html.boot.spec;
+package br.com.objectos.html.boot;
 
-public interface Step {
+public class StringDiff {
 
-  void attributeSpec(AttributeSpec attributeSpec);
+  public static void test(String a, String b) {
+    int length = Math.min(a.length(), b.length());
 
-  void elementSpec(ElementSpec elementSpec);
+    for (int i = 0; i < length; i++) {
+      var ca = a.charAt(i);
+      var cb = b.charAt(i);
 
-  void execute();
-
-  void templateSpec(TemplateSpec template);
-  
-  void textSpec(TextSpec text);
+      if (ca != cb) {
+        System.out.println("Diff at index=" + i + ";char a = " + ca + ";charb = " + cb);
+      }
+    }
+  }
 
 }

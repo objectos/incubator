@@ -20,8 +20,6 @@ import static br.com.objectos.code.java.Java.id;
 import br.com.objectos.code.java.JavaNames;
 import br.com.objectos.code.java.expression.Identifier;
 import br.com.objectos.code.java.expression.IdentifierBuilder;
-import br.com.objectos.code.java.type.NamedClass;
-import br.com.objectos.html.boot.spi.type.SpiType;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -35,17 +33,20 @@ public class ElementSpec
   private ElementAttributeSpec attribute;
 
   private ContentModel childSpec = ContentModel.start();
-  private final Identifier constantName;
+  private final Identifier constantNameId;
   private final SpecDsl dsl;
 
   private boolean hasEndTag = true;
   private final String name;
   private final Set<ElementSpec> parentSet = new TreeSet<>();
 
+  public final String constantName;
+
   ElementSpec(SpecDsl dsl, String name) {
     this.dsl = dsl;
     this.name = name;
-    constantName = id(JavaNames.toIdentifier(name.toUpperCase()));
+    constantName = JavaNames.toIdentifier(name.toUpperCase());
+    constantNameId = id(constantName);
   }
 
   // DSL methods
@@ -100,17 +101,13 @@ public class ElementSpec
     throw new UnsupportedOperationException("Global attribute only");
   }
 
-  public final NamedClass classNameValue() {
-    return SpiType.className(simpleName() + "Value");
-  }
-
   @Override
   public final int compareTo(ElementSpec o) {
     return name.compareTo(o.name);
   }
 
   public final Identifier constantName() {
-    return constantName;
+    return constantNameId;
   }
 
   public final ElementSpec contentModel(CategorySpec category) {
@@ -198,6 +195,10 @@ public class ElementSpec
 
   public final String simpleName() {
     return JavaNames.toValidClassName(name);
+  }
+
+  public final String valueSimpleName() {
+    return simpleName() + "Value";
   }
 
   public final ElementSpec zeroOrMore(Child el) {

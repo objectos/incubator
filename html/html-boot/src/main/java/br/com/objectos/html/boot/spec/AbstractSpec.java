@@ -32,11 +32,19 @@ public abstract class AbstractSpec implements Spec {
     }
   }
 
-  protected abstract void definition();
+  public final SpecDsl toSpecDsl() {
+    var dsl = new SpecDsl();
+
+    acceptSpecDsl(dsl);
+
+    return dsl;
+  }
 
   protected final CategorySpec category(String name) {
     return dsl.category(name);
   }
+
+  protected abstract void definition();
 
   protected final ElementSpec el(String name) {
     return dsl.element(name);
@@ -49,7 +57,7 @@ public abstract class AbstractSpec implements Spec {
   protected final RootElementSpec rootElement() {
     return dsl.rootElement();
   }
-  
+
   protected final TemplateSpec template() {
     return dsl.template();
   }
