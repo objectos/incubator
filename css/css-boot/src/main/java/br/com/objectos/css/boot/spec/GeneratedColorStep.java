@@ -15,61 +15,15 @@
  */
 package br.com.objectos.css.boot.spec;
 
+import objectos.util.GrowableMap;
 import objectos.util.UnmodifiableMap;
 
 final class GeneratedColorStep extends ThisTemplate {
 
   CssSpecDsl spec;
 
-  //  private final GrowableList<FieldCode> colors = new GrowableList<>();
-  //  private final GrowableList<VariableInitializer> constantNames = new GrowableList<>();
-  //  private final GrowableList<BlockStatement> mapStatements = new GrowableList<>();
-  //
-  //  @Override
-  //  public final void addColorName(ColorName colorName) {
-  //    colorName.assertIdentifierIsEqualToName();
-  //
-  //    colors.add(
-  //      field(
-  //        _public(), _static(), _final(), TypeNames._ColorName,
-  //        init(
-  //          colorName.identifier,
-  //          _new(
-  //            TypeNames._ColorName, getCode(), l(colorName.name)
-  //          )
-  //        )
-  //      )
-  //    );
-  //
-  //    constantNames.add(colorName.identifier);
-  //
-  //    mapStatements.add(colorName.invokePut(Ids.m));
-  //  }
-  //
-  //  @Override
-  //  public final void execute() {
-  //    writeJavaFile(
-  //      TypeNames.PACKAGE,
-  //      classCode()
-  //    );
-  //  }
-
   @Override
   protected final void definition() {
-    //    NamedClass implName;
-    //    implName = TypeNames._ColorName;
-    //
-    //    NamedArray implArray = implName.toNamedArray();
-    //
-    //    UnmodifiableList<NamedClass> mapTypeArgs;
-    //    mapTypeArgs = UnmodifiableList.of(Types._String, implName);
-    //
-    //    NamedClassOrParameterized implGrowableMap;
-    //    implGrowableMap = t(Types._GrowableMap, mapTypeArgs);
-    //
-    //    NamedClassOrParameterized implUnmodifiableMap;
-    //    implUnmodifiableMap = t(Types._UnmodifiableMap, mapTypeArgs);
-    //
     _package(type);
 
     autoImports();
@@ -80,43 +34,57 @@ final class GeneratedColorStep extends ThisTemplate {
     body(
       include(this::colorFields),
 
-      _private(), _static(), _final(), t(t(type, "ColorName"), dim()),
+      _private(), _static(), _final(),
+      t(t(type, "ColorName"), dim()),
       id("ARRAY"), ainit(include(this::constantNames)),
 
       _private(), _static(), _final(),
       t(t(UnmodifiableMap.class), t(String.class), t(type, "ColorName")),
       id("MAP"), invoke("buildMap"),
 
-      _public(), _static(), t(type, "ColorName"), method("getByCode", _int(), id("code")), block(
+      _public(), _static(),
+      t(type, "ColorName"),
+      method("getByCode", _int(), id("code")),
+      block(
         _return(), n("ARRAY"), dim(n("code"))
+      ),
+
+      _public(), _static(),
+      t(type, "ColorName"),
+      method("getByName", t(String.class), id("name")),
+      block(
+        _var(), id("c"), n("MAP"), invoke("get", n("name")),
+        _if(n("c"), equalTo(), _null()), block(
+          _throw(), _new(t(IllegalArgumentException.class), n("name"))
+        ),
+        _return(), n("c")
+      ),
+
+      _public(), _static(),
+      _boolean(),
+      method("isColor", t(String.class), id("name")),
+      block(
+        _return(), n("MAP"), invoke("containsKey", n("name"))
+      ),
+
+      _private(), _static(),
+      t(t(UnmodifiableMap.class), t(String.class), t(type, "ColorName")),
+      method("buildMap"),
+      block(
+        _var(), id("m"), _new(t(t(GrowableMap.class), t(String.class), t(type, "ColorName"))),
+        end(),
+        include(this::mapStatements),
+        _return(), n("m"), invoke("toUnmodifiableMap")
       )
-    //      ,
-    //
-    //      method(
-    //        _public(), _static(), t(type, "ColorName"), id("getByName"),
-    //        param(t(String.class), id("name")),
-    //
-    //        var("c", invoke(n("MAP"), "get", n("name"))),
-    //        _if(eq(Ids.c, _null()),
-    //          _throw(_new(t(IllegalArgumentException.class), Ids.name))
-    //        ),
-    //        _return(n("c"))
-    //      ),
-    //
-    //      method(
-    //        _public(), _static(), _boolean(), Ids.isColor,
-    //        param(Types._String, Ids.name),
-    //
-    //        _return(invoke(Ids.MAP, "containsKey", Ids.name))
-    //      ),
-    //
-    //      method(
-    //        _private(), _static(), implUnmodifiableMap, Ids.buildMap,
-    //        _var(implGrowableMap, Ids.m, Types._newGrowableMap()),
-    //        statements(mapStatements),
-    //        _return(invoke(Ids.m, "toUnmodifiableMap"))
-    //      )
     );
+  }
+
+  private void mapStatements() {
+    var colors = spec.colors();
+
+    for (var color : colors) {
+      code(n("m"), invoke("put", s(color.name), end(), n(color.identifier.name())), end());
+    }
   }
 
   private void colorFields() {
@@ -148,9 +116,5 @@ final class GeneratedColorStep extends ThisTemplate {
       nl();
     }
   }
-
-  //  private Literal getCode() {
-  //    return l(colors.size());
-  //  }
 
 }

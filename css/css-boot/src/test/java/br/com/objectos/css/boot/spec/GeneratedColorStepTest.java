@@ -17,31 +17,23 @@ package br.com.objectos.css.boot.spec;
 
 import static org.testng.Assert.assertEquals;
 
-import br.com.objectos.code.java.io.JavaFile;
-import br.com.objectos.css.boot.AbstractCssBootTest;
-import br.com.objectos.css.boot.type.GeneratedColorStep;
-import objectos.util.UnmodifiableMap;
 import org.testng.annotations.Test;
 
-public class GeneratedColorStepTest extends AbstractCssBootTest {
+public class GeneratedColorStepTest {
 
-  @Test(enabled = false)
+  @Test
   public void execute() {
-    UnmodifiableMap<String, JavaFile> javaFiles;
-    javaFiles = execute(
-      GeneratedColorStep::new,
-      new CssSpec() {
-        @Override
-        protected final void definition() {
-          namedColors("transparent", "ButtonText");
-        }
+    var template = new GeneratedColorStep();
+
+    template.spec = new CssSpec() {
+      @Override
+      protected final void definition() {
+        namedColors("transparent", "ButtonText");
       }
-    );
+    }.toSpecDsl();
 
-    assertEquals(javaFiles.size(), 1);
-
-    testLines(
-      javaFiles.get("GeneratedColor"),
+    assertEquals(
+      template.toString(),
 
       """
       package br.com.objectos.css.type;
@@ -56,7 +48,10 @@ public class GeneratedColorStepTest extends AbstractCssBootTest {
 
         public static final ColorName transparent = new ColorName(1, "transparent");
 
-        private static final ColorName[] ARRAY = new ColorName[] {ButtonText, transparent};
+        private static final ColorName[] ARRAY = {
+          ButtonText,
+          transparent
+        };
 
         private static final UnmodifiableMap<String, ColorName> MAP = buildMap();
 
@@ -65,7 +60,7 @@ public class GeneratedColorStepTest extends AbstractCssBootTest {
         }
 
         public static ColorName getByName(String name) {
-          ColorName c = MAP.get(name);
+          var c = MAP.get(name);
           if (c == null) {
             throw new IllegalArgumentException(name);
           }
@@ -77,7 +72,7 @@ public class GeneratedColorStepTest extends AbstractCssBootTest {
         }
 
         private static UnmodifiableMap<String, ColorName> buildMap() {
-          GrowableMap<String, ColorName> m = new GrowableMap<>();
+          var m = new GrowableMap<String, ColorName>();
           m.put("ButtonText", ButtonText);
           m.put("transparent", transparent);
           return m.toUnmodifiableMap();
