@@ -36,6 +36,8 @@ import objectos.util.GrowableSet;
 
 public class CssSpecDsl {
 
+  private final Set<String> angleUnits = new TreeSet<>();
+
   private final Set<ColorName> colors = new TreeSet<>();
 
   private final GrowableSet<String> elementNames = new GrowableSet<>();
@@ -60,6 +62,8 @@ public class CssSpecDsl {
   }
 
   public final void addAngleUnit(String unit) {
+    angleUnits.add(unit);
+
     step.addAngleUnit(unit);
   }
 
@@ -192,6 +196,10 @@ public class CssSpecDsl {
     }
 
     return type;
+  }
+
+  final Set<String> angleUnits() {
+    return angleUnits;
   }
 
   final Set<ColorName> colors() {
