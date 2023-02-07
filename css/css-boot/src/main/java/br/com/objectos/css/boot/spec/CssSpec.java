@@ -30,6 +30,10 @@ import objectos.lang.Check;
 
 public abstract class CssSpec {
 
+  protected enum FormalDefinition {
+    INSTANCE;
+  }
+
   private CssSpecDsl dsl;
 
   protected CssSpec() {}
@@ -172,7 +176,7 @@ public abstract class CssSpec {
       ParameterType type4, String name4,
       ParameterType type5, String name5) {
     return MethodSignature.of(
-        type0, name0, type1, name1, type2, name2, type3, name3, type4, name4, type5, name5
+      type0, name0, type1, name1, type2, name2, type3, name3, type4, name4, type5, name5
     );
   }
 
@@ -193,6 +197,16 @@ public abstract class CssSpec {
     return dsl.getValueType(name, values);
   }
 
+  final CssSpecDsl toSpecDsl() {
+    var step = new NoOpStep();
+
+    var dsl = new CssSpecDsl(step);
+
+    acceptCssSpecDsl(dsl);
+
+    return dsl;
+  }
+
   private void property(
       PropertyKind kind, String name, Identifier identifier,
       FormalDefinition definition, MethodSignature... signatures) {
@@ -201,10 +215,6 @@ public abstract class CssSpec {
     property = kind.get(name, identifier);
 
     dsl.addProperty(property, signatures);
-  }
-
-  protected enum FormalDefinition {
-    INSTANCE;
   }
 
 }

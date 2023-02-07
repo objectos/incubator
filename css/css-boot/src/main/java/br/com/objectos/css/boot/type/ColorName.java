@@ -38,8 +38,8 @@ public class ColorName implements Comparable<ColorName> {
   public static ColorName of(String name) {
     Check.notNull(name, "name == null");
     return new ColorName(
-        name,
-        id(JavaNames.toIdentifier(name))
+      name,
+      id(JavaNames.toIdentifier(name))
     );
   }
 

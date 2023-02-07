@@ -25,20 +25,22 @@ import br.com.objectos.css.boot.spec.CssSpecDsl;
 import br.com.objectos.css.boot.spec.StepAdapter;
 import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.LocalFs;
-import br.com.objectos.fs.ResolvedPath;
+import java.io.File;
 import java.io.IOException;
 import java.io.UncheckedIOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 public class CssBoot extends StepAdapter {
 
   public static final AnnotationCode GENERATED = annotation(
-      Generated.class,
-      l(CssBoot.class.getCanonicalName())
+    Generated.class,
+    l(CssBoot.class.getCanonicalName())
   );
 
-  private final Directory srcDirectory;
+  private final Path srcDirectory;
 
-  CssBoot(Directory srcDirectory) {
+  CssBoot(Path srcDirectory) {
     this.srcDirectory = srcDirectory;
   }
 
@@ -46,15 +48,12 @@ public class CssBoot extends StepAdapter {
     String srcDirectoryPath;
     srcDirectoryPath = args[0];
 
-    ResolvedPath resolved;
-    resolved = LocalFs.resolve(srcDirectoryPath);
+    Path resolved;
+    resolved = Path.of(srcDirectoryPath);
 
-    Directory srcDirectory;
-    srcDirectory = resolved.toDirectoryCreateIfNotFound();
+    Files.createDirectories(resolved);
 
-    CssBoot boot = new CssBoot(
-        srcDirectory
-    );
+    CssBoot boot = new CssBoot(resolved);
 
     boot.execute();
   }
@@ -62,7 +61,9 @@ public class CssBoot extends StepAdapter {
   @Override
   public final void writeJavaFile(JavaFile javaFile) {
     try {
-      javaFile.writeTo(srcDirectory);
+      File file = srcDirectory.toFile();
+      Directory dir = LocalFs.getDirectory(file);
+      javaFile.writeTo(dir);
     } catch (IOException e) {
       throw new UncheckedIOException(e);
     }
