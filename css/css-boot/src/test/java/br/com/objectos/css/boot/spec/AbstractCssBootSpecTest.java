@@ -20,13 +20,13 @@ import objectos.code.JavaTemplate;
 import objectos.util.GrowableList;
 import org.testng.annotations.BeforeMethod;
 
-public abstract class AbstractCssBootSpectTest {
+public abstract class AbstractCssBootSpecTest {
 
   final StepAdapter adapter = new ThisStepAdapter();
 
   final GrowableList<String> resultList = new GrowableList<>();
 
-  protected AbstractCssBootSpectTest() {}
+  protected AbstractCssBootSpecTest() {}
 
   final void execute(Step step, CssSpec spec) {
     var dsl = new CssSpecDsl(step);

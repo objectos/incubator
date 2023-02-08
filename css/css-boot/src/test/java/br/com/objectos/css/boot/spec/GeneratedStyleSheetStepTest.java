@@ -25,7 +25,7 @@ import br.com.objectos.css.boot.type.PrimitiveType;
 import br.com.objectos.css.boot.type.ValueType;
 import org.testng.annotations.Test;
 
-public class GeneratedStyleSheetStepTest extends AbstractCssBootSpectTest {
+public class GeneratedStyleSheetStepTest extends AbstractCssBootSpecTest {
 
   @Test(description = ""
       + "it should generate: "

@@ -19,17 +19,18 @@ import static org.testng.Assert.assertEquals;
 
 import org.testng.annotations.Test;
 
-public class GeneratedColorStepTest extends AbstractCssBootSpecTest {
+public class TypeSelectorsGenTest extends AbstractCssBootSpecTest {
 
   @Test
-  public void execute() {
+  public void generateJavaFile() {
     execute(
-      new GeneratedColorStep(adapter),
+      new TypeSelectorsGen(adapter),
 
       new CssSpec() {
         @Override
         protected final void definition() {
-          namedColors("transparent", "ButtonText");
+          elementName("a");
+          elementName("div");
         }
       }
     );
@@ -40,45 +41,42 @@ public class GeneratedColorStepTest extends AbstractCssBootSpecTest {
       resultList.get(0),
 
       """
-      package br.com.objectos.css.type;
+      package br.com.objectos.css.select;
 
       import br.com.objectos.code.annotations.Generated;
+      import br.com.objectos.code.annotations.Ignore;
       import objectos.util.GrowableMap;
       import objectos.util.UnmodifiableMap;
 
       @Generated("br.com.objectos.css.boot.CssBoot")
-      abstract class GeneratedColor {
-        public static final ColorName ButtonText = new ColorName(0, "ButtonText");
+      public final class TypeSelectors {
+        public static final TypeSelector a = new TypeSelector(0, "a");
 
-        public static final ColorName transparent = new ColorName(1, "transparent");
+        public static final TypeSelector div = new TypeSelector(1, "div");
 
-        private static final ColorName[] ARRAY = {
-          ButtonText,
-          transparent
+        private static final TypeSelector[] ARRAY = {
+          a,
+          div
         };
 
-        private static final UnmodifiableMap<String, ColorName> MAP = buildMap();
+        private static final UnmodifiableMap<String, TypeSelector> MAP = buildMap();
 
-        public static ColorName getByCode(int code) {
+        private TypeSelectors() {}
+
+        @Ignore
+        public static TypeSelector getByCode(int code) {
           return ARRAY[code];
         }
 
-        public static ColorName getByName(String name) {
-          var c = MAP.get(name);
-          if (c == null) {
-            throw new IllegalArgumentException(name);
-          }
-          return c;
+        @Ignore
+        public static TypeSelector getByName(String name) {
+          return MAP.get(name);
         }
 
-        public static boolean isColor(String name) {
-          return MAP.containsKey(name);
-        }
-
-        private static UnmodifiableMap<String, ColorName> buildMap() {
-          var m = new GrowableMap<String, ColorName>();
-          m.put("ButtonText", ButtonText);
-          m.put("transparent", transparent);
+        private static UnmodifiableMap<String, TypeSelector> buildMap() {
+          var m = new GrowableMap<String, TypeSelector>();
+          m.put("a", a);
+          m.put("div", div);
           return m.toUnmodifiableMap();
         }
       }

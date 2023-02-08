@@ -19,7 +19,7 @@ import static org.testng.Assert.assertEquals;
 
 import org.testng.annotations.Test;
 
-public class LengthUnitStepTest extends AbstractCssBootSpectTest {
+public class LengthUnitStepTest extends AbstractCssBootSpecTest {
 
   @Test(description = "it should generate an enum constant for each unit.")
   public void execute() {

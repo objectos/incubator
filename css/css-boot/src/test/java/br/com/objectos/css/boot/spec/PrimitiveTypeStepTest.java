@@ -21,7 +21,7 @@ import br.com.objectos.css.boot.type.Primitive;
 import br.com.objectos.css.boot.type.PrimitiveType;
 import org.testng.annotations.Test;
 
-public class PrimitiveTypeStepTest extends AbstractCssBootSpectTest {
+public class PrimitiveTypeStepTest extends AbstractCssBootSpecTest {
 
   @Test
   public void execute() {
