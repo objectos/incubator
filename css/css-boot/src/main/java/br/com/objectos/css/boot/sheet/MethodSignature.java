@@ -35,9 +35,9 @@ import br.com.objectos.css.boot.spec.Ids;
 import br.com.objectos.css.boot.type.TypeNames;
 import objectos.lang.Check;
 
-public abstract class MethodSignature implements Comparable<MethodSignature> {
+public abstract sealed class MethodSignature implements Comparable<MethodSignature> {
 
-  public static class Abstract1 extends MethodSignature {
+  public static final class Abstract1 extends MethodSignature {
 
     public final Identifier name;
     public final ParameterType type;
@@ -63,7 +63,7 @@ public abstract class MethodSignature implements Comparable<MethodSignature> {
 
   }
 
-  public static class SigHash extends MethodSignature {
+  public static final class SigHash extends MethodSignature {
 
     static final SigHash INSTANCE = new SigHash();
 
@@ -97,7 +97,7 @@ public abstract class MethodSignature implements Comparable<MethodSignature> {
 
   }
 
-  public static class Signature1 extends MethodSignature {
+  public static final class Signature1 extends MethodSignature {
 
     public final Identifier name;
     public final ParameterType type;
@@ -125,7 +125,7 @@ public abstract class MethodSignature implements Comparable<MethodSignature> {
 
   }
 
-  public static class Signature2 extends MethodSignature {
+  public static final class Signature2 extends MethodSignature {
 
     public final Identifier name0;
     public final Identifier name1;
@@ -161,7 +161,7 @@ public abstract class MethodSignature implements Comparable<MethodSignature> {
 
   }
 
-  public static class Signature3 extends MethodSignature {
+  public static final class Signature3 extends MethodSignature {
 
     public final Identifier name0;
     public final Identifier name1;
@@ -204,7 +204,7 @@ public abstract class MethodSignature implements Comparable<MethodSignature> {
 
   }
 
-  public static class Signature4 extends MethodSignature {
+  public static final class Signature4 extends MethodSignature {
 
     public final Identifier name0;
     public final Identifier name1;
@@ -255,7 +255,7 @@ public abstract class MethodSignature implements Comparable<MethodSignature> {
 
   }
 
-  public static class Signature5 extends MethodSignature {
+  public static final class Signature5 extends MethodSignature {
 
     public final Identifier name0;
     public final Identifier name1;
@@ -315,7 +315,7 @@ public abstract class MethodSignature implements Comparable<MethodSignature> {
 
   }
 
-  public static class Signature6 extends MethodSignature {
+  public static final class Signature6 extends MethodSignature {
 
     public final Identifier name0;
     public final Identifier name1;
@@ -382,7 +382,7 @@ public abstract class MethodSignature implements Comparable<MethodSignature> {
 
   }
 
-  public static class SigZero extends MethodSignature {
+  public static final class SigZero extends MethodSignature {
 
     static final SigZero INSTANCE = new SigZero();
 

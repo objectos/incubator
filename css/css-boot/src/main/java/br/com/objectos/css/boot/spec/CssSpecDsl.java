@@ -38,8 +38,6 @@ public class CssSpecDsl {
 
   final Set<String> angleUnits = new TreeSet<>();
 
-  final Set<ColorName> colors = new TreeSet<>();
-
   final GrowableSet<String> elementNames = new GrowableSet<>();
 
   private final Map<String, FunctionName> functions = new TreeMap<>();
@@ -103,8 +101,6 @@ public class CssSpecDsl {
     colorName = ColorName.of(name);
 
     step.addColorName(colorName);
-
-    colors.add(colorName);
   }
 
   public final void addProperty(Property property, MethodSignature[] signatures) {
@@ -135,10 +131,6 @@ public class CssSpecDsl {
   }
 
   public final void execute() {
-    for (ColorName color : colors) {
-      step.addColorName(color);
-    }
-
     for (FunctionName function : functions.values()) {
       step.addFunction(function);
     }

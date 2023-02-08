@@ -31,6 +31,8 @@ abstract class ThisTemplate extends JavaTemplate implements Step {
 
   static final String css = "br.com.objectos.css";
 
+  static final String function = "br.com.objectos.css.function";
+
   static final String keyword = "br.com.objectos.css.keyword";
 
   static final String property = "br.com.objectos.css.property";

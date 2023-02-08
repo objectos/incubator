@@ -23,11 +23,25 @@ public interface FunctionOrProperty {
 
   String addMethodName();
 
+  String enumName();
+
   Identifier getMethodName();
 
   NamedClass getMultiDeclarationName();
 
   NamedClass getSingleDeclarationName();
+
+  default String methodName() {
+    return getMethodName().name();
+  }
+
+  default String multiDeclarationSimpleName() {
+    return getMultiDeclarationName().getSimpleName();
+  }
+
+  default String singleDeclarationSimpleName() {
+    return getSingleDeclarationName().getSimpleName();
+  }
 
   ExpressionName standardPropertyName();
 

@@ -64,6 +64,13 @@ public final class FunctionName implements FunctionOrProperty, Value {
     return "addFunction";
   }
 
+  @Override
+  public final String enumName() {
+    var uppercase = name.replace('-', '_').toUpperCase(Locale.US);
+
+    return JavaNames.toIdentifier(uppercase);
+  }
+
   public final Identifier getEnumName() {
     String uppercase;
     uppercase = name.replace('-', '_').toUpperCase(Locale.US);
