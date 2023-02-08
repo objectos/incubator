@@ -45,7 +45,7 @@ public class Property implements Comparable<Property>, FunctionOrProperty, ToStr
 
   private Identifier methodName;
 
-  private final String name;
+  public final String name;
 
   private Literal nameLiteral;
 
@@ -84,6 +84,7 @@ public class Property implements Comparable<Property>, FunctionOrProperty, ToStr
     return name.compareTo(o.name);
   }
 
+  @Override
   public final String enumName() { return getEnumName().name(); }
 
   @Override
@@ -158,14 +159,17 @@ public class Property implements Comparable<Property>, FunctionOrProperty, ToStr
     return name.hashCode();
   }
 
+  @Override
   public final String methodName() {
     return getMethodName().name();
   }
 
+  @Override
   public final String multiDeclarationSimpleName() {
     return JavaNames.toValidClassName(name + "MultiDeclaration");
   }
 
+  @Override
   public final String singleDeclarationSimpleName() {
     var singleSuffix = kind.getSingleSuffix();
 
