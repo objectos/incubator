@@ -59,6 +59,8 @@ public class KeywordName
 
   public final NamedClass className;
 
+  public final String simpleName;
+
   public final Identifier fieldName;
   private final Set<NamedClass> interfaces = new TreeSet<>();
 
@@ -66,7 +68,11 @@ public class KeywordName
 
   private KeywordName(String name, String fieldName) {
     this.name = name;
-    className = KeywordNames.className(JavaNames.toValidClassName(name) + "Keyword");
+
+    this.simpleName = JavaNames.toValidClassName(name) + "Keyword";
+
+    className = KeywordNames.className(simpleName);
+
     this.fieldName = id(fieldName);
   }
 

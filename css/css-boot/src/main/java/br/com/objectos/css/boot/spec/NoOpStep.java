@@ -15,7 +15,7 @@
  */
 package br.com.objectos.css.boot.spec;
 
-final class NoOpStep extends Step {
+final class NoOpStep extends AbstractStep {
 
   NoOpStep() { super(null); }
 

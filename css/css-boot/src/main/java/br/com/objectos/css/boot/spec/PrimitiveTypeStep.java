@@ -21,6 +21,17 @@ final class PrimitiveTypeStep extends ThisTemplate {
 
   PrimitiveType primitiveType;
 
+  PrimitiveTypeStep(StepAdapter adapter) {
+    super(adapter);
+  }
+
+  @Override
+  public final void addPrimitiveType(PrimitiveType type) {
+    primitiveType = type;
+
+    writeSelf();
+  }
+
   @Override
   protected final void definition() {
     _package(type);

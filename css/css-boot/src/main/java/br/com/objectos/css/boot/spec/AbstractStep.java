@@ -15,8 +15,8 @@
  */
 package br.com.objectos.css.boot.spec;
 
-import br.com.objectos.code.annotations.Generated;
-import br.com.objectos.css.boot.CssBoot;
+import br.com.objectos.code.java.declaration.PackageName;
+import br.com.objectos.code.java.declaration.TypeCode;
 import br.com.objectos.css.boot.function.FunctionName;
 import br.com.objectos.css.boot.keyword.KeywordName;
 import br.com.objectos.css.boot.property.Property;
@@ -25,25 +25,12 @@ import br.com.objectos.css.boot.sheet.MethodSignature;
 import br.com.objectos.css.boot.type.ColorName;
 import br.com.objectos.css.boot.type.PrimitiveType;
 import br.com.objectos.css.boot.type.ValueType;
-import objectos.code.JavaTemplate;
 
-abstract class ThisTemplate extends JavaTemplate implements Step {
-
-  static final String css = "br.com.objectos.css";
-
-  static final String keyword = "br.com.objectos.css.keyword";
-
-  static final String property = "br.com.objectos.css.property";
-
-  static final String select = "br.com.objectos.css.select";
-
-  static final String sheet = "br.com.objectos.css.sheet";
-
-  static final String type = "br.com.objectos.css.type";
+public abstract class AbstractStep implements Step {
 
   private final StepAdapter adapter;
 
-  ThisTemplate(StepAdapter adapter) {
+  protected AbstractStep(StepAdapter adapter) {
     this.adapter = adapter;
   }
 
@@ -86,14 +73,8 @@ abstract class ThisTemplate extends JavaTemplate implements Step {
   @Override
   public void execute() {}
 
-  protected void definition() {}
-
-  final void writeSelf() {
-    adapter.write(this);
-  }
-
-  final void generatedAnnotation() {
-    at(t(Generated.class), s(CssBoot.class.getCanonicalName()));
+  protected final void writeJavaFile(PackageName packageName, TypeCode code) {
+    adapter.writeJavaFile(packageName, code);
   }
 
 }

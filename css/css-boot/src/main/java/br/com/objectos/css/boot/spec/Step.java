@@ -15,8 +15,6 @@
  */
 package br.com.objectos.css.boot.spec;
 
-import br.com.objectos.code.java.declaration.PackageName;
-import br.com.objectos.code.java.declaration.TypeCode;
 import br.com.objectos.css.boot.function.FunctionName;
 import br.com.objectos.css.boot.keyword.KeywordName;
 import br.com.objectos.css.boot.property.Property;
@@ -26,42 +24,32 @@ import br.com.objectos.css.boot.type.ColorName;
 import br.com.objectos.css.boot.type.PrimitiveType;
 import br.com.objectos.css.boot.type.ValueType;
 
-public abstract class Step {
+public interface Step {
 
-  private final StepAdapter adapter;
+  void addAngleUnit(String unit);
 
-  protected Step(StepAdapter adapter) {
-    this.adapter = adapter;
-  }
+  void addColorName(ColorName colorName);
 
-  public void addAngleUnit(String unit) {}
+  void addElementName(String elementName);
 
-  public void addColorName(ColorName colorName) {}
+  void addFunction(FunctionName function);
 
-  public void addElementName(String elementName) {}
+  void addKeyword(KeywordName keyword);
 
-  public void addFunction(FunctionName function) {}
+  void addLengthUnit(String unit);
 
-  public void addKeyword(KeywordName keyword) {}
+  void addMethodSignature(FunctionOrProperty property, MethodSignature signature);
 
-  public void addLengthUnit(String unit) {}
+  void addPrimitiveType(PrimitiveType type);
 
-  public void addMethodSignature(FunctionOrProperty property, MethodSignature signature) {}
+  void addProperty(Property property);
 
-  public void addPrimitiveType(PrimitiveType type) {}
+  void addPseudoClass(String name);
 
-  public void addProperty(Property property) {}
+  void addPseudoElement(String name);
 
-  public void addPseudoClass(String name) {}
+  void addValueType(ValueType type);
 
-  public void addPseudoElement(String name) {}
-
-  public void addValueType(ValueType type) {}
-
-  public void execute() {}
-
-  protected final void writeJavaFile(PackageName packageName, TypeCode code) {
-    adapter.writeJavaFile(packageName, code);
-  }
+  void execute();
 
 }

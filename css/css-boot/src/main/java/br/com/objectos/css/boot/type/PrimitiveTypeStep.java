@@ -20,10 +20,10 @@ import static br.com.objectos.code.java.Java._public;
 
 import br.com.objectos.code.java.declaration.InterfaceCode;
 import br.com.objectos.css.boot.CssBoot;
-import br.com.objectos.css.boot.spec.Step;
+import br.com.objectos.css.boot.spec.AbstractStep;
 import br.com.objectos.css.boot.spec.StepAdapter;
 
-public class PrimitiveTypeStep extends Step {
+public class PrimitiveTypeStep extends AbstractStep {
 
   public PrimitiveTypeStep(StepAdapter adapter) {
     super(adapter);

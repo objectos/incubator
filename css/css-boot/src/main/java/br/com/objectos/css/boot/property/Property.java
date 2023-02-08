@@ -28,6 +28,7 @@ import br.com.objectos.code.java.expression.Literal;
 import br.com.objectos.code.java.type.NamedClass;
 import br.com.objectos.css.boot.sheet.FunctionOrProperty;
 import br.com.objectos.css.boot.sheet.GeneratedStyleSheetStep;
+import br.com.objectos.css.boot.sheet.MethodSignature;
 import br.com.objectos.css.boot.sheet.SheetNames;
 import java.util.Locale;
 import objectos.lang.ToString;
@@ -40,13 +41,15 @@ public class Property implements Comparable<Property>, FunctionOrProperty, ToStr
 
   private NamedClass hashDeclarationName;
 
-  private final PropertyKind kind;
+  public final PropertyKind kind;
 
   private Identifier methodName;
 
   private final String name;
 
   private Literal nameLiteral;
+
+  public MethodSignature[] signatures;
 
   Property(PropertyKind kind, String name) {
     this.kind = kind;
@@ -80,6 +83,8 @@ public class Property implements Comparable<Property>, FunctionOrProperty, ToStr
   public final int compareTo(Property o) {
     return name.compareTo(o.name);
   }
+
+  public final String enumName() { return getEnumName().name(); }
 
   @Override
   public final boolean equals(Object obj) {
@@ -153,6 +158,20 @@ public class Property implements Comparable<Property>, FunctionOrProperty, ToStr
     return name.hashCode();
   }
 
+  public final String methodName() {
+    return getMethodName().name();
+  }
+
+  public final String multiDeclarationSimpleName() {
+    return JavaNames.toValidClassName(name + "MultiDeclaration");
+  }
+
+  public final String singleDeclarationSimpleName() {
+    var singleSuffix = kind.getSingleSuffix();
+
+    return JavaNames.toValidClassName(name + singleSuffix);
+  }
+
   @Override
   public final ExpressionName standardPropertyName() {
     return PropertyNames.StandardPropertyName.id(getEnumName());
@@ -224,11 +243,9 @@ public class Property implements Comparable<Property>, FunctionOrProperty, ToStr
   }
 
   private NamedClass getSingleDeclarationName0() {
-    String singleSuffix;
-    singleSuffix = kind.getSingleSuffix();
+    var singleSuffix = kind.getSingleSuffix();
 
-    String simpleName;
-    simpleName = JavaNames.toValidClassName(name + singleSuffix);
+    var simpleName = JavaNames.toValidClassName(name + singleSuffix);
 
     return SheetNames._GeneratedStyleSheet.nestedClass(simpleName);
   }

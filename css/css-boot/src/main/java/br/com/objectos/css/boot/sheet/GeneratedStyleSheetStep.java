@@ -51,13 +51,13 @@ import br.com.objectos.css.boot.select.PseudoClassSelectorsGen;
 import br.com.objectos.css.boot.select.PseudoElementSelectorsGen;
 import br.com.objectos.css.boot.select.TypeSelectorsGen;
 import br.com.objectos.css.boot.spec.Ids;
-import br.com.objectos.css.boot.spec.Step;
+import br.com.objectos.css.boot.spec.AbstractStep;
 import br.com.objectos.css.boot.spec.StepAdapter;
 import br.com.objectos.css.boot.spec.Types;
 import br.com.objectos.css.boot.type.ColorName;
 import br.com.objectos.css.boot.type.TypeNames;
 
-public class GeneratedStyleSheetStep extends Step {
+public class GeneratedStyleSheetStep extends AbstractStep {
 
   private final InterfaceCode.Builder anyDeclaration;
 

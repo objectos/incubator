@@ -16,10 +16,28 @@
 package br.com.objectos.css.boot.spec;
 
 import java.util.Locale;
+import java.util.Set;
+import java.util.TreeSet;
 
 final class LengthUnitStep extends ThisTemplate {
 
-  CssSpecDsl spec;
+  private final Set<String> simpleNames = new TreeSet<>();
+
+  LengthUnitStep(StepAdapter adapter) {
+    super(adapter);
+  }
+
+  @Override
+  public final void addLengthUnit(String unit) {
+    var simpleName = unit.toUpperCase();
+
+    simpleNames.add(simpleName);
+  }
+
+  @Override
+  public final void execute() {
+    writeSelf();
+  }
 
   @Override
   protected final void definition() {
@@ -61,9 +79,7 @@ final class LengthUnitStep extends ThisTemplate {
   }
 
   private void constants() {
-    for (var unit : spec.lengthUnits()) {
-      var simpleName = unit.toUpperCase();
-
+    for (var simpleName : simpleNames) {
       enumConstant(simpleName);
     }
   }

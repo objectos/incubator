@@ -19,22 +19,25 @@ import static org.testng.Assert.assertEquals;
 
 import org.testng.annotations.Test;
 
-public class LengthUnitStepTest {
+public class LengthUnitStepTest extends AbstractCssBootSpectTest {
 
-  @Test(description = ""
-      + "it should generate an enum constant for each unit.")
+  @Test(description = "it should generate an enum constant for each unit.")
   public void execute() {
-    var template = new LengthUnitStep();
+    execute(
+      new LengthUnitStep(adapter),
 
-    template.spec = new CssSpec() {
-      @Override
-      protected final void definition() {
-        lengthUnits("px", "em");
+      new CssSpec() {
+        @Override
+        protected final void definition() {
+          lengthUnits("px", "em");
+        }
       }
-    }.toSpecDsl();
+    );
+
+    assertEquals(resultList.size(), 1);
 
     assertEquals(
-      template.toString(),
+      resultList.get(0),
 
       """
       package br.com.objectos.css.type;

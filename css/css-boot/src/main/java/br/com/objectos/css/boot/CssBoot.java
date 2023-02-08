@@ -30,6 +30,7 @@ import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import objectos.code.JavaTemplate;
 
 public class CssBoot extends StepAdapter {
 
@@ -56,6 +57,11 @@ public class CssBoot extends StepAdapter {
     CssBoot boot = new CssBoot(resolved);
 
     boot.execute();
+  }
+
+  @Override
+  public final void write(JavaTemplate template) {
+    throw new UnsupportedOperationException("Implement me");
   }
 
   @Override

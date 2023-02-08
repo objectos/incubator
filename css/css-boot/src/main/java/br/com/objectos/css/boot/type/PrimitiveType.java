@@ -33,7 +33,7 @@ public class PrimitiveType implements ParameterType, Value {
 
   private final Set<String> interfaceNames = new TreeSet<>();
 
-  private final Primitive kind;
+  public final Primitive kind;
 
   PrimitiveType(Primitive kind) {
     this.kind = kind;

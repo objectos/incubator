@@ -52,14 +52,14 @@ import br.com.objectos.code.java.type.NamedClass;
 import br.com.objectos.code.java.type.NamedClassOrParameterized;
 import br.com.objectos.css.boot.CssBoot;
 import br.com.objectos.css.boot.spec.Ids;
-import br.com.objectos.css.boot.spec.Step;
+import br.com.objectos.css.boot.spec.AbstractStep;
 import br.com.objectos.css.boot.spec.StepAdapter;
 import br.com.objectos.css.boot.spec.Types;
 import java.util.Map;
 import java.util.TreeMap;
 import objectos.util.UnmodifiableList;
 
-public class StandardPropertyNameStep extends Step {
+public class StandardPropertyNameStep extends AbstractStep {
 
   private final Map<String, EnumConstantCode> constants = new TreeMap<>();
 

@@ -21,30 +21,32 @@ import br.com.objectos.css.boot.type.Primitive;
 import br.com.objectos.css.boot.type.PrimitiveType;
 import org.testng.annotations.Test;
 
-public class PrimitiveTypeStepTest {
+public class PrimitiveTypeStepTest extends AbstractCssBootSpectTest {
 
   @Test
   public void execute() {
-    var template = new PrimitiveTypeStep();
+    execute(
+      new PrimitiveTypeStep(adapter),
 
-    var spec = new CssSpec() {
-      @Override
-      protected final void definition() {
-        PrimitiveType length = primitive(Primitive.LENGTH);
-        PrimitiveType percentage = primitive(Primitive.PERCENTAGE);
+      new CssSpec() {
+        @Override
+        protected final void definition() {
+          PrimitiveType length = primitive(Primitive.LENGTH);
+          PrimitiveType percentage = primitive(Primitive.PERCENTAGE);
 
-        property(
-          "bottom",
-          formal("", Source.MANUAL_ENTRY),
-          sig(t("BottomValue", length, percentage), "value")
-        );
+          property(
+            "bottom",
+            formal("", Source.MANUAL_ENTRY),
+            sig(t("BottomValue", length, percentage), "value")
+          );
+        }
       }
-    }.toSpecDsl();
+    );
 
-    template.primitiveType = spec.getPrimitive(Primitive.LENGTH);
+    assertEquals(resultList.size(), 2);
 
     assertEquals(
-      template.toString(),
+      resultList.get(0),
 
       """
       package br.com.objectos.css.type;
@@ -56,10 +58,8 @@ public class PrimitiveTypeStepTest {
       """
     );
 
-    template.primitiveType = spec.getPrimitive(Primitive.PERCENTAGE);
-
     assertEquals(
-      template.toString(),
+      resultList.get(1),
 
       """
       package br.com.objectos.css.type;

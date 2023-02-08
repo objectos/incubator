@@ -21,6 +21,17 @@ final class ValueTypeIfaceStep extends ThisTemplate {
 
   ValueType valueType;
 
+  ValueTypeIfaceStep(StepAdapter adapter) {
+    super(adapter);
+  }
+
+  @Override
+  public final void addValueType(ValueType type) {
+    valueType = type;
+
+    writeSelf();
+  }
+
   @Override
   protected final void definition() {
     _package(type);

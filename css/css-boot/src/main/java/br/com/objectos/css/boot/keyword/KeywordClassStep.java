@@ -15,10 +15,10 @@
  */
 package br.com.objectos.css.boot.keyword;
 
-import br.com.objectos.css.boot.spec.Step;
+import br.com.objectos.css.boot.spec.AbstractStep;
 import br.com.objectos.css.boot.spec.StepAdapter;
 
-public class KeywordClassStep extends Step {
+public class KeywordClassStep extends AbstractStep {
 
   private int code;
 

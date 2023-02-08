@@ -19,21 +19,25 @@ import static org.testng.Assert.assertEquals;
 
 import org.testng.annotations.Test;
 
-public class AngleUnitStepTest {
+public class AngleUnitStepTest extends AbstractCssBootSpectTest {
 
   @Test(description = "it should generate an enum constant for each unit.")
   public void execute() {
-    var template = new AngleUnitStep();
+    execute(
+      new AngleUnitStep(adapter),
 
-    template.spec = new CssSpec() {
-      @Override
-      protected final void definition() {
-        angleUnits("deg", "turn");
+      new CssSpec() {
+        @Override
+        protected final void definition() {
+          angleUnits("deg", "turn");
+        }
       }
-    }.toSpecDsl();
+    );
+
+    assertEquals(resultList.size(), 1);
 
     assertEquals(
-      template.toString(),
+      resultList.get(0),
 
       """
       package br.com.objectos.css.type;

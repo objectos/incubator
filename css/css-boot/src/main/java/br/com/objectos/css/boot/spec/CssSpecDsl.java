@@ -36,22 +36,24 @@ import objectos.util.GrowableSet;
 
 public class CssSpecDsl {
 
-  private final Set<String> angleUnits = new TreeSet<>();
+  final Set<String> angleUnits = new TreeSet<>();
 
-  private final Set<ColorName> colors = new TreeSet<>();
+  final Set<ColorName> colors = new TreeSet<>();
 
-  private final GrowableSet<String> elementNames = new GrowableSet<>();
+  final GrowableSet<String> elementNames = new GrowableSet<>();
 
   private final Map<String, FunctionName> functions = new TreeMap<>();
 
-  private final Map<String, KeywordName> keywords = new TreeMap<>();
-
-  private final Set<String> lengthUnits = new TreeSet<>();
+  final Map<String, KeywordName> keywords = new TreeMap<>();
 
   private final Map<Primitive, PrimitiveType> primitives
       = new EnumMap<Primitive, PrimitiveType>(Primitive.class);
 
-  private final GrowableSet<String> properties = new GrowableSet<>();
+  final Map<String, Property> propertyMap = new TreeMap<>();
+
+  final GrowableSet<String> pseudoClasses = new GrowableSet<>();
+
+  final GrowableSet<String> pseudoElements = new GrowableSet<>();
 
   private final Step step;
 
@@ -83,6 +85,8 @@ public class CssSpecDsl {
 
     Arrays.sort(signatures);
 
+    function.signatures = signatures;
+
     for (MethodSignature signature : signatures) {
       step.addMethodSignature(function, signature);
     }
@@ -92,13 +96,13 @@ public class CssSpecDsl {
 
   public final void addLengthUnit(String unit) {
     step.addLengthUnit(unit);
-
-    lengthUnits.add(unit);
   }
 
   public final void addNamedColor(String name) {
     ColorName colorName;
     colorName = ColorName.of(name);
+
+    step.addColorName(colorName);
 
     colors.add(colorName);
   }
@@ -107,7 +111,9 @@ public class CssSpecDsl {
     String name;
     name = property.getName();
 
-    Check.argument(properties.add(name), "property already defined: ", name);
+    Check.argument(!propertyMap.containsKey(name), "property already defined: ", name);
+
+    propertyMap.put(name, property);
 
     step.addProperty(property);
 
@@ -116,6 +122,8 @@ public class CssSpecDsl {
     for (MethodSignature signature : signatures) {
       step.addMethodSignature(property, signature);
     }
+
+    property.signatures = signatures;
   }
 
   public final void addPseudoClass(String name) {
@@ -188,6 +196,7 @@ public class CssSpecDsl {
 
     if (type == null) {
       type = ValueType.of(name);
+
       valueTypes.put(name, type);
 
       for (Value value : values) {
@@ -196,18 +205,6 @@ public class CssSpecDsl {
     }
 
     return type;
-  }
-
-  final Set<String> angleUnits() {
-    return angleUnits;
-  }
-
-  final Set<ColorName> colors() {
-    return colors;
-  }
-
-  final Iterable<String> lengthUnits() {
-    return lengthUnits;
   }
 
   final ValueType valueType(String name) {

@@ -28,6 +28,7 @@ import br.com.objectos.code.java.expression.Identifier;
 import br.com.objectos.code.java.expression.Literal;
 import br.com.objectos.code.java.type.NamedClass;
 import br.com.objectos.css.boot.sheet.FunctionOrProperty;
+import br.com.objectos.css.boot.sheet.MethodSignature;
 import br.com.objectos.css.boot.type.Value;
 import br.com.objectos.css.boot.type.ValueType;
 import java.util.Locale;
@@ -39,6 +40,8 @@ public final class FunctionName implements FunctionOrProperty, Value {
   private final Set<NamedClass> interfaces = new TreeSet<>();
 
   private final String name;
+
+  public MethodSignature[] signatures;
 
   FunctionName(String name) {
     this.name = name;

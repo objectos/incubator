@@ -15,10 +15,10 @@
  */
 package br.com.objectos.css.boot.type;
 
-import br.com.objectos.css.boot.spec.Step;
+import br.com.objectos.css.boot.spec.AbstractStep;
 import br.com.objectos.css.boot.spec.StepAdapter;
 
-public class ValueTypeIfaceStep extends Step {
+public class ValueTypeIfaceStep extends AbstractStep {
 
   public ValueTypeIfaceStep(StepAdapter adapter) {
     super(adapter);

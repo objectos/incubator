@@ -18,15 +18,16 @@ package br.com.objectos.css.boot;
 import static org.testng.Assert.assertEquals;
 
 import br.com.objectos.code.java.io.JavaFile;
+import br.com.objectos.css.boot.spec.AbstractStep;
 import br.com.objectos.css.boot.spec.CssSpec;
 import br.com.objectos.css.boot.spec.CssSpecDsl;
-import br.com.objectos.css.boot.spec.Step;
 import br.com.objectos.css.boot.spec.StepAdapter;
 import java.util.Arrays;
 import java.util.List;
-import objectos.util.UnmodifiableMap;
+import objectos.code.JavaTemplate;
 import objectos.util.GrowableList;
 import objectos.util.GrowableMap;
+import objectos.util.UnmodifiableMap;
 import org.testng.annotations.BeforeMethod;
 
 public abstract class AbstractCssBootTest {
@@ -42,7 +43,7 @@ public abstract class AbstractCssBootTest {
 
   protected final UnmodifiableMap<String, JavaFile> execute(StepFactory factory, CssSpec spec) {
     ThisStepAdapter stepAdapter = new ThisStepAdapter();
-    Step step = factory.get(stepAdapter);
+    AbstractStep step = factory.get(stepAdapter);
 
     CssSpecDsl dsl = new CssSpecDsl(step);
     spec.acceptCssSpecDsl(dsl);
@@ -68,13 +69,15 @@ public abstract class AbstractCssBootTest {
   @FunctionalInterface
   protected interface StepFactory {
 
-    Step get(StepAdapter adapter);
+    AbstractStep get(StepAdapter adapter);
 
   }
 
   private static class ThisStepAdapter extends StepAdapter {
 
     private final GrowableMap<String, JavaFile> javaFiles = new GrowableMap<>();
+
+    private final List<JavaTemplate> templates = new GrowableList<>();
 
     public UnmodifiableMap<String, JavaFile> toMap() {
       return javaFiles.toUnmodifiableMap();
@@ -83,6 +86,11 @@ public abstract class AbstractCssBootTest {
     @Override
     public void writeJavaFile(JavaFile javaFile) {
       javaFiles.put(javaFile.simpleName(), javaFile);
+    }
+
+    @Override
+    public final void write(JavaTemplate template) {
+      templates.add(template);
     }
 
   }

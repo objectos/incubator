@@ -15,12 +15,31 @@
  */
 package br.com.objectos.css.boot.spec;
 
+import br.com.objectos.css.boot.type.ColorName;
+import java.util.Set;
+import java.util.TreeSet;
 import objectos.util.GrowableMap;
 import objectos.util.UnmodifiableMap;
 
 final class GeneratedColorStep extends ThisTemplate {
 
-  CssSpecDsl spec;
+  private final Set<ColorName> colorNames = new TreeSet<>();
+
+  GeneratedColorStep(StepAdapter adapter) {
+    super(adapter);
+  }
+
+  @Override
+  public final void addColorName(ColorName colorName) {
+    colorName.assertIdentifierIsEqualToName();
+
+    colorNames.add(colorName);
+  }
+
+  @Override
+  public final void execute() {
+    writeSelf();
+  }
 
   @Override
   protected final void definition() {
@@ -79,22 +98,10 @@ final class GeneratedColorStep extends ThisTemplate {
     );
   }
 
-  private void mapStatements() {
-    var colors = spec.colors();
-
-    for (var color : colors) {
-      code(n("m"), invoke("put", s(color.name), end(), n(color.identifier.name())), end());
-    }
-  }
-
   private void colorFields() {
-    var colors = spec.colors();
-
     int code = 0;
 
-    for (var color : colors) {
-      color.assertIdentifierIsEqualToName();
-
+    for (var color : colorNames) {
       _public();
       _static();
       _final();
@@ -107,13 +114,17 @@ final class GeneratedColorStep extends ThisTemplate {
   private void constantNames() {
     nl();
 
-    var colors = spec.colors();
-
-    for (var color : colors) {
+    for (var color : colorNames) {
       n(color.name);
       end();
 
       nl();
+    }
+  }
+
+  private void mapStatements() {
+    for (var color : colorNames) {
+      code(n("m"), invoke("put", s(color.name), end(), n(color.identifier.name())), end());
     }
   }
 

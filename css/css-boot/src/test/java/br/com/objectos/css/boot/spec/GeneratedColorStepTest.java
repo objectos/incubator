@@ -19,21 +19,25 @@ import static org.testng.Assert.assertEquals;
 
 import org.testng.annotations.Test;
 
-public class GeneratedColorStepTest {
+public class GeneratedColorStepTest extends AbstractCssBootSpectTest {
 
   @Test
   public void execute() {
-    var template = new GeneratedColorStep();
+    execute(
+      new GeneratedColorStep(adapter),
 
-    template.spec = new CssSpec() {
-      @Override
-      protected final void definition() {
-        namedColors("transparent", "ButtonText");
+      new CssSpec() {
+        @Override
+        protected final void definition() {
+          namedColors("transparent", "ButtonText");
+        }
       }
-    }.toSpecDsl();
+    );
+
+    assertEquals(resultList.size(), 1);
 
     assertEquals(
-      template.toString(),
+      resultList.get(0),
 
       """
       package br.com.objectos.css.type;

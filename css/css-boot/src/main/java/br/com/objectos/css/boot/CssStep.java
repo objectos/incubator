@@ -29,7 +29,7 @@ import br.com.objectos.css.boot.select.TypeSelectorsGen;
 import br.com.objectos.css.boot.sheet.FunctionOrProperty;
 import br.com.objectos.css.boot.sheet.GeneratedStyleSheetStep;
 import br.com.objectos.css.boot.sheet.MethodSignature;
-import br.com.objectos.css.boot.spec.Step;
+import br.com.objectos.css.boot.spec.AbstractStep;
 import br.com.objectos.css.boot.spec.StepAdapter;
 import br.com.objectos.css.boot.type.AngleUnitStep;
 import br.com.objectos.css.boot.type.ColorName;
@@ -40,7 +40,7 @@ import br.com.objectos.css.boot.type.PrimitiveTypeStep;
 import br.com.objectos.css.boot.type.ValueType;
 import br.com.objectos.css.boot.type.ValueTypeIfaceStep;
 
-class CssStep extends Step {
+class CssStep extends AbstractStep {
 
   private final AngleUnitStep angleUnitStep;
 

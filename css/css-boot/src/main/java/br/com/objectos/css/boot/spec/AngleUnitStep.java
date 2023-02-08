@@ -16,10 +16,26 @@
 package br.com.objectos.css.boot.spec;
 
 import java.util.Locale;
+import java.util.Set;
+import java.util.TreeSet;
 
 final class AngleUnitStep extends ThisTemplate {
 
-  CssSpecDsl spec;
+  private final Set<String> simpleNames = new TreeSet<>();
+
+  AngleUnitStep(StepAdapter adapter) { super(adapter); }
+
+  @Override
+  public final void addAngleUnit(String unit) {
+    var simpleName = unit.toUpperCase();
+
+    simpleNames.add(simpleName);
+  }
+
+  @Override
+  public final void execute() {
+    writeSelf();
+  }
 
   @Override
   protected final void definition() {
@@ -75,10 +91,8 @@ final class AngleUnitStep extends ThisTemplate {
   }
 
   private void constants() {
-    var angleUnits = spec.angleUnits();
-
-    for (var unit : angleUnits) {
-      enumConstant(unit.toUpperCase());
+    for (var unit : simpleNames) {
+      enumConstant(unit);
     }
   }
 

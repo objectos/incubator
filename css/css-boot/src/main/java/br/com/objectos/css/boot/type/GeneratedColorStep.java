@@ -52,13 +52,13 @@ import br.com.objectos.code.java.type.NamedClass;
 import br.com.objectos.code.java.type.NamedClassOrParameterized;
 import br.com.objectos.css.boot.CssBoot;
 import br.com.objectos.css.boot.spec.Ids;
-import br.com.objectos.css.boot.spec.Step;
+import br.com.objectos.css.boot.spec.AbstractStep;
 import br.com.objectos.css.boot.spec.StepAdapter;
 import br.com.objectos.css.boot.spec.Types;
 import objectos.util.UnmodifiableList;
 import objectos.util.GrowableList;
 
-public class GeneratedColorStep extends Step {
+public class GeneratedColorStep extends AbstractStep {
 
   private final GrowableList<FieldCode> colors = new GrowableList<>();
   private final GrowableList<VariableInitializer> constantNames = new GrowableList<>();

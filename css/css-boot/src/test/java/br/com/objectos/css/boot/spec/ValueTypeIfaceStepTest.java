@@ -20,36 +20,37 @@ import static org.testng.Assert.assertEquals;
 import br.com.objectos.css.boot.keyword.KeywordName;
 import org.testng.annotations.Test;
 
-public class ValueTypeIfaceStepTest {
+public class ValueTypeIfaceStepTest extends AbstractCssBootSpectTest {
 
   @Test(description = "it should generate a Value interface for each ValueType defined")
   public void execute() {
-    var template = new ValueTypeIfaceStep();
+    execute(
+      new ValueTypeIfaceStep(adapter),
+      new CssSpec() {
+        @Override
+        protected final void definition() {
+          KeywordName auto = keyword("auto");
+          KeywordName none = keyword("none");
 
-    var spec = new CssSpec() {
-      @Override
-      protected final void definition() {
-        KeywordName auto = keyword("auto");
-        KeywordName none = keyword("none");
+          property(
+            "clear",
+            formal("", Source.MANUAL_ENTRY),
+            sig(t("ClearValue", none), "value")
+          );
 
-        property(
-          "clear",
-          formal("", Source.MANUAL_ENTRY),
-          sig(t("ClearValue", none), "value")
-        );
-
-        property(
-          "top",
-          formal("", Source.MANUAL_ENTRY),
-          sig(t("TopValue", auto), "value")
-        );
+          property(
+            "top",
+            formal("", Source.MANUAL_ENTRY),
+            sig(t("TopValue", auto), "value")
+          );
+        }
       }
-    }.toSpecDsl();
+    );
 
-    template.valueType = spec.valueType("ClearValue");
+    assertEquals(resultList.size(), 2);
 
     assertEquals(
-      template.toString(),
+      resultList.get(0),
 
       """
       package br.com.objectos.css.type;
@@ -61,10 +62,8 @@ public class ValueTypeIfaceStepTest {
       """
     );
 
-    template.valueType = spec.valueType("TopValue");
-
     assertEquals(
-      template.toString(),
+      resultList.get(1),
 
       """
       package br.com.objectos.css.type;

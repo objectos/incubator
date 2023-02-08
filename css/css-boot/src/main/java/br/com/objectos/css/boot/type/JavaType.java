@@ -33,6 +33,7 @@ public enum JavaType implements ParameterType {
   STRING(t(String.class));
 
   private final NamedArray arrayTypeName;
+
   private final NamedType typeName;
 
   private JavaType(NamedClass typeName) {

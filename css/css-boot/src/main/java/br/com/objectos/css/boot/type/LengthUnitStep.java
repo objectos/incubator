@@ -44,14 +44,14 @@ import br.com.objectos.code.java.declaration.EnumConstantCode;
 import br.com.objectos.code.java.expression.Identifier;
 import br.com.objectos.css.boot.CssBoot;
 import br.com.objectos.css.boot.spec.Ids;
-import br.com.objectos.css.boot.spec.Step;
+import br.com.objectos.css.boot.spec.AbstractStep;
 import br.com.objectos.css.boot.spec.StepAdapter;
 import br.com.objectos.css.boot.spec.Types;
 import java.util.Locale;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class LengthUnitStep extends Step {
+public class LengthUnitStep extends AbstractStep {
 
   private final Map<String, EnumConstantCode> constants = new TreeMap<>();
 

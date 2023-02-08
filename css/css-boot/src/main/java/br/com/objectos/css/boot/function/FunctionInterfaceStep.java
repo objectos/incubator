@@ -15,10 +15,10 @@
  */
 package br.com.objectos.css.boot.function;
 
-import br.com.objectos.css.boot.spec.Step;
+import br.com.objectos.css.boot.spec.AbstractStep;
 import br.com.objectos.css.boot.spec.StepAdapter;
 
-public class FunctionInterfaceStep extends Step {
+public class FunctionInterfaceStep extends AbstractStep {
 
   public FunctionInterfaceStep(StepAdapter adapter) {
     super(adapter);
