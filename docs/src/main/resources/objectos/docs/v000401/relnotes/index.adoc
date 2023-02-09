@@ -8,6 +8,7 @@ in the release notes.
 
 == 0.x releases
 
+* ilink:relnotes/0.4.1[Objectos 0.4.1 release notes]
 * ilink:relnotes/0.4.0[Objectos 0.4.0 release notes]
 * ilink:relnotes/0.3.0[Objectos 0.3.0 release notes]
 * ilink:relnotes/0.2.0[Objectos 0.2.0 release notes]

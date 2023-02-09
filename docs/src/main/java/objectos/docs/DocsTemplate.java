@@ -51,6 +51,13 @@ abstract class DocsTemplate extends SharedTemplate {
         tagEnd(StandardElementName.A);
       }
 
+      case "issue" -> {
+        tagStart();
+        linkValues("https://github.com/objectos/objectos/issues/" + target);
+        text("#" + target);
+        tagEnd(StandardElementName.A);
+      }
+
       default -> throw new UnsupportedOperationException("Implement me :: name=" + name);
     }
   }
