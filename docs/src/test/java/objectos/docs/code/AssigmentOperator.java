@@ -37,6 +37,43 @@ public class AssigmentOperator extends JavaTemplate {
         invoke("m"), n("foo"), gets(), invoke("n"), end(),
 
         invoke("foo", n("i"), gets(), n("j"))
+      ),
+
+      _void(), method("expressionName"), block(
+        n("x"), gets(), n("value"), end(),
+
+        n("foo"), n("y"), gets(), n("value"),
+
+        t("com.example", "MyType"), n("field"), gets(), n("value")
+      ),
+
+      _void(), method("fieldAccess"), block(
+        _this(), n("x"), gets(), n("x"),
+        _this(), n("y"), gets(), n("y"), end(),
+
+        invoke("point"), n("x"), gets(), n("valueX"), end(),
+        invoke("point"), n("y"), gets(), n("valueY"), end(),
+
+        n("a"), invoke("b"), n("x"), gets(), n("value")
+      ),
+
+      _void(), method("arrayAccess"), block(
+        n("elements"), dim(i(0)), gets(), n("e0"), end(),
+        n("elements"), dim(i(1)), gets(), n("e1"), end(),
+        n("elements"), dim(i(2)), gets(), n("e2"), end(),
+
+        n("multi"), dim(n("x")), dim(n("y")), gets(), n("value"), end(),
+
+        invoke("arrayRef"), dim(invoke("index")), gets(), n("value"), end()
+      ),
+
+      _void(), method("rhs"), block(
+        n("a"), gets(), n("b"), gets(), n("c"), end(),
+        n("name"), gets(), invoke("foo"), n("name"), gets(), n("value"), end(),
+
+        n("index"), gets(), i(123), end(),
+        n("name"), gets(), s("Some Name"), end(),
+        n("foo"), gets(), _new(t("com.example", "Foo")), end()
       )
     );
   }

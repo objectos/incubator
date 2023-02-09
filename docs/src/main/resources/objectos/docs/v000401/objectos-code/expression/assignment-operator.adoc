@@ -87,7 +87,7 @@ An useful example is when using the `_this()` instruction, like so:
 
 [,java]
 ----
-_this(), n("x"), gets(), n("x")
+_this(), n("x"), gets(), n("x"),
 _this(), n("y"), gets(), n("y")
 
 this.x = x;
@@ -98,8 +98,8 @@ In the following example the reference is returned by a method invocation:
 
 [,java]
 ----
-invoke("point"), n("x"), gets(), n("valueX")
-invoke("point"), n("y"), gets(), n("valueY")
+invoke("point"), n("x"), gets(), n("valueX"), end(),
+invoke("point"), n("y"), gets(), n("valueY"), end()
 
 point().x = valueX;
 point().y = valueY;
@@ -109,12 +109,75 @@ The primary expression can also start with an expression name:
 
 [,java]
 ----
-n("a"), invoke("b"), n("x") gets(), n("value") 
+n("a"), invoke("b"), n("x"), gets(), n("value"), end() 
 
 n.b().x = value;
 ----
 
 Let's look at array access expressions next.
+
+=== LHS is an array access expression
+
+In Objectos Code, to assign values to the components of an array reference you write the following:
+
+[,java]
+----
+n("elements"), dim(i(0)), gets(), n("e0"), end(),
+n("elements"), dim(i(1)), gets(), n("e1"), end(),
+n("elements"), dim(i(2)), gets(), n("e2"), end()
+
+elements[0] = e0;
+elements[1] = e1;
+elements[2] = e2;
+----
+
+It also works with multidimensional arrays:
+
+[,java]
+----
+n("multi"), dim(n("x")), dim(n("y")), gets(), n("value"), end()
+
+mulit[x][y] = value;
+----
+
+The array reference might be given by a method invocation expression:
+
+[,java]
+----
+invoke("arrayRef"), dim(invoke("index")), gets(), n("value"), end()
+
+arrayRef()[index()] = value;
+----
+
+Next, let's look at the right-hand side of the expression.
+
+=== Other RHS examples
+
+An assignment expression can be the RHS of another assignment expression:
+
+[,java]
+----
+n("a"), gets(), n("b"), gets(), n("c"), end(),
+n("name"), gets(), invoke("foo"), n("name"), gets(), n("value"), end()
+
+a = b = c;
+name = foo().name = value;
+----
+
+More generally, any expression can be at the RHS:
+
+[,java]
+----
+n("index"), gets(), i(123), end(),
+n("name"), gets(), s("Some Name"), end(),
+n("foo"), gets(), _new(t("com.example", "Foo")), end()
+
+index = 123;
+name = "Some Name";
+foo = new com.example.Foo();
+----
+
+We will look at the compound assignment operators at the next section.
 
 == Compound assignment operators
 
