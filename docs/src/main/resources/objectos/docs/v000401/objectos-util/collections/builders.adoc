@@ -1,0 +1,93 @@
+= Building `Unmodifiable` instances using a `Growable` collection
+
+Objectos Util provides pairs of growable-unmodifiable implementations meant to be used in tandem:
+
+- create a `Growable` instance;
+- add elements (or key-value pairs) to it; and
+- use the appropriate method and create an `Unmodifiable` copy.
+
+This is, in fact, the primary reason for the creation of Objectos Util.
+
+== Simple example
+
+As a first example, let's create an unmodifiable list.
+It will contain the parts of a hypothetical Maven command invocation:
+
+[,java]
+----
+var builder = new GrowableList<String>();
+
+builder.add("mvn");
+builder.add("-am");
+builder.add("-pl");
+builder.add(":objectos-util");
+builder.add("verify");
+
+UnmodifiableList<String> command = builder.toUnmodifiableList(); 
+----
+
+Note the invocation of the `toUnmodifiableList` method.
+The method is a member of the `GrowableList` class and returns an instance of `UnmodifiableList`.
+
+The returned `command` list is an unmodifiable _copy_ of the source list.
+
+== Creating the `Unmodifiable` copy
+
+All of the `Growable` classes provide a method that creates and returns an `Unmodifiable` copy of the source container.
+The methods are:
+
+- `GrowableList::toUnmodifiableList` returns an `UnmodifiableList`
+- `GrowableSet::toUnmodifiableSet` returns an `UnmodifiableSet`
+- `GrowableMap::toUnmodifiableMap` returns an `UnmodifiableMap`
+- `GrowableSequencedMap::toUnmodifiableMap` returns an `UnmodifiableSequencedMap`
+
+We have already seen an `UnmodifiableList` example. 
+
+== A more complete example
+
+Suppose you have the following Java record representing the metadata of a blog post:
+
+[,java]
+----
+import java.util.Set;
+
+public record Post(String title,
+                   Set<String> tags) {}
+----
+
+When creating a builder for it one possible solution is:  
+
+[,java]
+----
+import objectos.lang.Check;
+import objectos.util.GrowableSet;
+
+public class PostBuilder {
+  private String title = "Untitled";
+
+  private final GrowableSet<String> tags = new GrowableSet<>();
+
+  public final Post build() {
+    return new Post(
+      title,
+
+      tags.toUnmodifiableSet()
+    );
+  }
+
+  public final PostBuilder tag(String tag) {
+    tags.add(tag);
+
+    return this;
+  }
+
+  public final PostBuilder title(String title) {
+    this.title = Check.notNull(title, "title == null");
+
+    return this;
+  }
+}
+----
+
+Notice the `build` method.
+It uses the `GrowableSet` to provide an `UnmodifiableSet` to the `Post` instance.

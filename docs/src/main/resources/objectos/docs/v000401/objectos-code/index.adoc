@@ -1,0 +1,564 @@
+= Objectos Code
+:toc-title: Overview
+
+_This API is experimental and might change substantially between releases_
+
+Objectos Code is a library for generating Java source code.
+
+It introduces the concept of a "pure Java template";
+it feels similar to a traditional text-based template except it is a regular Java class.
+
+The following Objectos Code template:
+
+[,java]
+----
+import objectos.code.JavaTemplate;
+
+public class Example extends JavaTemplate {
+  @Override
+  protected void definition() {
+    // @formatter:off
+    _package("com.example");
+
+    autoImports();
+
+    _public(); _class("HelloWorld"); body(
+      _public(), _static(), _void(),
+      method("main", t(t(String.class), dim()), id("args")), block(
+        t(System.class), n("out"), invoke("println", s("Hello, Objectos Code!"))
+      )
+    );
+  }
+}
+----
+
+Can be used to generate the following Java code:
+
+[,java]
+----
+package com.example;
+
+public class HelloWorld {
+  public static void main(String[] args) {
+    System.out.println("Hello, Objectos Code!");
+  }
+}
+----
+
+== Alpha quality
+
+Please note that Objectos Code is a work in progress and this release is marked as alpha quality.
+
+Apart from not being stable yet, it doesn't support a large number of Java statements and expressions.
+For example, all of the control flow statements, like the `if`, `for`, `while` statements, are not supported yet.
+
+Additionally, this documentation is also a work in progress.
+In other words, it does not cover all of the implemented features yet.
+
+== Tutorial
+
+This tutorial will give you an introduction on how to generate Java source code using Objectos Code.
+
+=== An empty class
+
+Let's start by generating a class that has an empty body.
+In other words, we want to generate the following:
+
+[,java]
+----
+class Tutorial {}
+----
+
+To use Objectos Code you have to:
+
+- extend the `JavaTemplate` class; and
+- provide the implementation of the `definition` method.
+
+In the body of latter, you use the provided _embedded domain-specific language_ to define the Java file you will generate.
+Like so:
+
+[,java]
+----
+import objectos.code.JavaTemplate;
+
+public class Tutorial extends JavaTemplate {
+  @Override
+  protected final void definition() {
+    _class("Tutorial");
+    body();
+  }
+}
+----
+
+It starts by invoking the `_class` method.
+Notice that, as `class` is a reserved keyword in Java, the method name starts with the '_' (underscore) character.
+The string `"Tutorial"`, the name of the class we want to generate, is passed as the argument to the `_class` method.
+
+Next, we invoked the `body` method.
+No arguments were passed as we want to generate a class with an empty body.
+
+Right.
+Let's move to the next step.
+
+=== The package declaration
+
+Let's add a package declaration to our generated Java source file.
+We want our class to be in the `com.example` package, like so:
+
+[,java]
+----
+package com.example;
+
+class Tutorial {}
+----
+
+In our template, we invoke the `_package` method:
+
+[,java]
+----
+import objectos.code.JavaTemplate;
+
+public class Tutorial extends JavaTemplate {
+  @Override
+  protected final void definition() {
+    _package("com.example");
+  
+    _class("Tutorial");
+    body();
+  }
+}
+----
+
+Once again, the `_package` method name begins with an underscore character.
+
+=== The class modifiers
+
+Let's add modifiers to our class.
+
+We want the generated class to be the following:
+
+[,java]
+----
+package com.example;
+
+public final class Tutorial {}
+----
+
+Our class is now both `public` and `final`.
+So we need to add the same "keywords" to our template: 
+
+[,java]
+----
+import objectos.code.JavaTemplate;
+
+public class Tutorial extends JavaTemplate {
+  @Override
+  protected final void definition() {
+    _package("com.example");
+
+    _public();
+    _final();
+    _class("Tutorial");
+    body();
+  }
+}
+----
+
+So the `_public()` method adds the `public` modifier.
+Similarly, the `_final()` method adds the `final` modifier.
+
+But something looks off: each "keyword" is sitting at a different line.
+So our template does not look like a regular Java file.
+Let's improve that.
+
+=== Optional: the `code` method
+
+We can group all of our template instructions in a single `code` method invocation like so:
+
+[,java]
+----
+import objectos.code.JavaTemplate;
+
+public class Tutorial extends JavaTemplate {
+  @Override
+  protected final void definition() {
+    code(
+      _package("com.example"),
+
+      _public(), _final(), _class("Tutorial"), body()
+    );
+  }
+}
+----
+
+Notice that the instructions are now arguments to the `code` method.
+Therefore, each instruction is now separated with a comma.
+
+Alternatively, and depending on your IDE configuration,
+you can use a `@formatter:off` comment tag to turn off your IDE code formatter:
+
+[,java]
+----
+import objectos.code.JavaTemplate;
+
+public class Tutorial extends JavaTemplate {
+  @Override
+  protected final void definition() {
+    // @formatter:off
+    _package("com.example");
+
+    _public(); _final(); _class("Tutorial"); body();
+  }
+}
+----
+
+This tutorial will use the latter form from now on.
+
+=== Annotations
+
+Let's annotate our class with a hypothetical `Subject` annotation:
+
+[,java]
+----
+package com.example;
+
+import com.example.annotations.Subject;
+
+@Subject("Objectos Code")
+public final class Tutorial {}
+----
+
+The annotation is declared at a different package than our class.
+Therefore, we also need to add an import declaration.
+
+So we modify our Objectos Code template.
+Like so:
+
+[,java]
+----
+import objectos.code.JavaTemplate;
+
+public class Tutorial extends JavaTemplate {
+  @Override
+  protected final void definition() {
+    // @formatter:off
+    _package("com.example");
+    
+    autoImports();
+
+    at(t("com.example.annotations", "Subject"), s("Objectos Code"));
+    _public(); _final(); _class("Tutorial"); body();
+  }
+}
+----
+
+The `autoImports` instruction will automatically add any required import declaration.
+Please note that it *must* be declared after the package declaration and before the first top level declaration.
+
+The `at` method was used to annotate our class declaration:
+
+* the `t` method defines the annotation type; and
+* the `s` method declares the `"Objectos Code"` string literal.
+
+=== A field
+
+Let's now add a single field to our class.
+It should look like the following:
+
+[,java]
+----
+package com.example;
+
+import com.example.annotations.Subject;
+
+@Subject("Objectos Code")
+public final class Tutorial {
+  private final int value;
+}
+----
+
+As it is, this Java code would not compile.
+
+Don't worry, we will add a constructor as our next step.
+
+But, for now, we want to focus on adding the `int` field.
+So we modify our template to the following:
+
+[,java]
+----
+import objectos.code.JavaTemplate;
+
+public class Tutorial extends JavaTemplate {
+  @Override
+  protected final void definition() {
+    // @formatter:off
+    _package("com.example");
+    
+    autoImports();
+
+    at(t("com.example.annotations", "Subject"), s("Objectos Code"));
+    _public(); _final(); _class("Tutorial"); body(
+      _private(), _final(), _int(), id("value")
+    );
+  }
+}
+----
+
+So for our field declaration:
+
+- the modifiers are given by the `_private()` and `_final()` methods;
+- the type is given by the `_int()` method; and
+- the name is given by the `id("value")` method.
+
+Note that, in this particular case, the semicolon after the field is added automatically.
+
+=== A constructor
+
+Let's add a constructor next.
+We want the generated Java code to be the following:
+
+[,java]
+----
+package com.example;
+
+import com.example.annotations.Subject;
+
+@Subject("Objectos Code")
+public final class Tutorial {
+  private final int value;
+  
+  public Tutorial(int value) {
+    this.value = value;
+  }
+}
+----
+
+Let's modify our `JavaTemplate` so it generates the constructor:
+
+[,java]
+----
+import objectos.code.JavaTemplate;
+
+public class Tutorial extends JavaTemplate {
+  @Override
+  protected final void definition() {
+    // @formatter:off
+    _package("com.example");
+    
+    autoImports();
+
+    at(t("com.example.annotations", "Subject"), s("Objectos Code"));
+    _public(); _final(); _class("Tutorial"); body(
+      _private(), _final(), _int(), id("value"),
+      
+      _public(), constructor(_int(), id("value")), block(
+        _this(), n("value"), gets(), n("value")
+      )
+    );
+  }
+}
+----
+
+Let's see how this works.
+First, let's take a look at the constructor declarator:
+
+* notice that the `constructor` method is being invoked.
+It automatically adds the simple name of the enclosing type, `Tutorial` in our case, as the constructor's name; and
+* the `_int()` and the `_id("value")` arguments, generate the `int value` formal parameter.
+
+Now, let's look at the constructor body:
+
+* the constructor's body is represented by the `block` method;
+* it declares a single  assignment expression statement;
+* notice that the expression name `n("value")` will automatically chain to the keyword `_this()`.
+In other words, it will form the field access expression `this.value`;
+* the `gets()` method represents the simple assignment operator, i.e. the `=` (equals sign) operator;
+* the second expression name `n("value")` forms the right-hand side of the assignment; and
+* as the last statement in a block, the semicolon will be automatically added.
+
+=== A method
+
+Next, let's add a method that reads our field value.
+The Java code we want to generate becomes the following:
+
+[,java]
+----
+package com.example;
+
+import com.example.annotations.Subject;
+
+@Subject("Objectos Code")
+public final class Tutorial {
+  private final int value;
+  
+  public Tutorial(int value) {
+    this.value = value;
+  }
+  
+  public int get() {
+    return value;
+  }
+}
+----
+
+And so we update our template to the following:
+
+[,java]
+----
+import objectos.code.JavaTemplate;
+
+public class Tutorial extends JavaTemplate {
+  @Override
+  protected final void definition() {
+    // @formatter:off
+    _package("com.example");
+    
+    autoImports();
+
+    at(t("com.example.annotations", "Subject"), s("Objectos Code"));
+    _public(); _final(); _class("Tutorial"); body(
+      _private(), _final(), _int(), id("value"),
+      
+      _public(), constructor(_int(), id("value")), block(
+        _this(), n("value"), gets(), n("value")
+      ),
+      
+      _public(), _int(), method("get"), block(
+        _return(), n("value")
+      )
+    );
+  }
+}
+----
+
+Let's look at the method declaration in details:
+
+* the modifier is given by `_public()`;
+* the return type, by `_int()`;
+* the `method("get")` invocation represent the method's declarator.
+The `"get"` argument is the method's name.
+
+And the method's body:
+
+* the method's body is represented by the `block` method invocation;
+* it declares a single `return` statement which starts with `_return()`;
+* it returns the expression name `n("value")`.
+Notice that, unlike the `_this()` keyword, the expression name will not chain to the `_return()` keyword.
+As `return.value` would not be valid Java code.
+
+=== The `include` directive
+
+Suppose now we need to generate a number of constant values in our class.
+But we will only know the exact number number of constants at runtime.
+
+In other words, we want our class to have `static final` fields like the following:
+
+[,java]
+----
+package com.example;
+
+import com.example.annotations.Subject;
+
+@Subject("Objectos Code")
+public final class Tutorial {
+  public static final int ONE = 1;
+  
+  public static final int TWO = 2;
+  
+  public static final int THREE = 3;
+
+  private final int value;
+  
+  public Tutorial(int value) {
+    this.value = value;
+  }
+  
+  public int get() {
+    return value;
+  }
+}
+----
+
+But the exact number of fields will only be known at runtime.
+For simplicity, we will generate three constants but the idea remains basically the same.
+
+In this case we will use the `include` directive and a method reference.
+Like so:
+
+[,java]
+----
+import java.util.LinkedHashMap;
+import objectos.code.JavaTemplate;
+
+public class Tutorial extends JavaTemplate {
+  @Override
+  protected final void definition() {
+    // @formatter:off
+    _package("com.example");
+    
+    autoImports();
+
+    at(t("com.example.annotations", "Subject"), s("Objectos Code"));
+    _public(); _final(); _class("Tutorial"); body(
+      include(this::constants),
+    
+      _private(), _final(), _int(), id("value"),
+      
+      _public(), constructor(_int(), id("value")), block(
+        _this(), n("value"), gets(), n("value")
+      ),
+      
+      _public(), _int(), method("get"), block(
+        _return(), n("value")
+      )
+    );
+    // @formatter:on
+  }
+  
+  private void constants() {
+    var constants = new LinkedHashMap<String, Integer>();
+    
+    constants.put("ONE", 1);
+    constants.put("TWO", 2);
+    constants.put("THREE", 3);
+    
+    for (var entry : constants.entrySet()) {
+      var name = entry.getKey();
+      var value = entry.getValue();
+      
+      // @formatter:off
+      _public(); _static(); _final(); _int(); id(name); i(value.intValue());
+      // @formatter:on
+    }
+  }
+}
+----
+
+Notice the `include` method invocation at the beginning of the body of our class.
+The argument is a method reference.
+It references the private `constants` method.
+
+The `constants` method iterates over the entries of a `Map` instance.
+Using the key and the value of each entry, it declares the field:
+
+* the field modifiers are given by `_public()`, `_static()` and `_final()`;
+* the field type, by `_int()`;
+* the field name, by `id(name)`; and
+* the field is initialized with the `int` literal expression: `i(value.intValue())`.
+The `Integer::intValue` is explicitly called just to indicate that the `i` method accepts an `int` value.
+
+== Installation
+
+To use Objectos Code in your project add the following to your POM:
+
+[,xml]
+----
+<dependencies>
+    <dependency>
+        <groupId>br.com.objectos</groupId>
+        <artifactId>objectos-code</artifactId>
+    </dependency>
+</dependencies>
+----
+
+This assumes you are using the ilink:intro/install[Objectos BOM POM].

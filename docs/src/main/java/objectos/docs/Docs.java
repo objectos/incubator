@@ -28,6 +28,7 @@ import java.nio.file.StandardOpenOption;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Objects;
+import java.util.function.Predicate;
 import java.util.stream.Stream;
 import objectos.asciidoc.AsciiDoc;
 import objectos.asciidoc.Document;
@@ -48,11 +49,11 @@ public final class Docs extends DocsInjector {
     AbstractFragment toFragment();
   }
 
-  public static final String INDEX = "docs/0.4.0/index";
+  public static final String INDEX = "docs/0.4.1/index";
 
-  public static final String OVERVIEW = "docs/0.4.0/intro/overview";
+  public static final String OVERVIEW = "docs/0.4.1/intro/overview";
 
-  public static final String LATEST = "0.4.0";
+  public static final String LATEST = "0.4.1";
 
   private final AsciiDoc asciiDoc = AsciiDoc.create();
 
@@ -92,6 +93,8 @@ public final class Docs extends DocsInjector {
 
   private IOException rethrow;
 
+  private Predicate<Path> sourceFilter = (path) -> true;
+
   Docs(Path source, Path target, TopBar topBar, BottomBar bottomBar) {
     this.source = source;
 
@@ -118,8 +121,8 @@ public final class Docs extends DocsInjector {
   }
 
   public static void main(String[] args) throws IOException {
-    if (args.length != 2) {
-      out.println("Invocation: java objectos.docs.DocsSite source-path target-path");
+    if (args.length < 2 || args.length > 3) {
+      out.println("Invocation: java objectos.docs.DocsSite source-path target-path [key]");
 
       return;
     }
@@ -138,7 +141,19 @@ public final class Docs extends DocsInjector {
 
     site.development();
 
+    site.parseArgs(args);
+
     site.execute();
+  }
+
+  private void parseArgs(String[] args) {
+    if (args.length == 3) {
+      leftBar.skip();
+
+      var a = args[2];
+
+      sourceFilter = (path) -> path.endsWith(a);
+    }
   }
 
   private static Path main0ParseDirectory(String name, String pathName) throws IOException {
@@ -335,7 +350,8 @@ public final class Docs extends DocsInjector {
     rethrow = null;
 
     try (Stream<Path> walk = Files.walk(source)) {
-      walk.filter(Files::isRegularFile)
+      walk.filter(sourceFilter)
+          .filter(Files::isRegularFile)
           .forEach(this::scan);
     }
 

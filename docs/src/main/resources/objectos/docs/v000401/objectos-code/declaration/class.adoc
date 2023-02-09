@@ -1,0 +1,7 @@
+= Class Declarations
+
+This sections explains how to generate Java code containing classes.
+
+== Overview
+
+TODO
