@@ -668,65 +668,43 @@ abstract class GeneratedStyleSheet {
 
   protected static final PseudoElementSelector _WEBKIT_FILE_UPLOAD_BUTTON = Css._WEBKIT_FILE_UPLOAD_BUTTON;
 
-  protected static final Color ActiveBorder = Color.ActiveBorder;
+  protected static final Color black = Color.black;
 
-  protected static final Color ActiveCaption = Color.ActiveCaption;
+  protected static final Color silver = Color.silver;
 
-  protected static final Color AppWorkspace = Color.AppWorkspace;
+  protected static final Color gray = Color.gray;
 
-  protected static final Color Background = Color.Background;
+  protected static final Color white = Color.white;
 
-  protected static final Color ButtonFace = Color.ButtonFace;
+  protected static final Color maroon = Color.maroon;
 
-  protected static final Color ButtonHighlight = Color.ButtonHighlight;
+  protected static final Color red = Color.red;
 
-  protected static final Color ButtonShadow = Color.ButtonShadow;
+  protected static final Color purple = Color.purple;
 
-  protected static final Color ButtonText = Color.ButtonText;
+  protected static final Color fuchsia = Color.fuchsia;
 
-  protected static final Color CaptionText = Color.CaptionText;
+  protected static final Color green = Color.green;
 
-  protected static final Color GrayText = Color.GrayText;
+  protected static final Color lime = Color.lime;
 
-  protected static final Color Highlight = Color.Highlight;
+  protected static final Color olive = Color.olive;
 
-  protected static final Color HighlightText = Color.HighlightText;
+  protected static final Color yellow = Color.yellow;
 
-  protected static final Color InactiveBorder = Color.InactiveBorder;
+  protected static final Color navy = Color.navy;
 
-  protected static final Color InactiveCaption = Color.InactiveCaption;
+  protected static final Color blue = Color.blue;
 
-  protected static final Color InactiveCaptionText = Color.InactiveCaptionText;
+  protected static final Color teal = Color.teal;
 
-  protected static final Color InfoBackground = Color.InfoBackground;
+  protected static final Color aqua = Color.aqua;
 
-  protected static final Color InfoText = Color.InfoText;
-
-  protected static final Color MenuText = Color.MenuText;
-
-  protected static final Color Scrollbar = Color.Scrollbar;
-
-  protected static final Color ThreeDDarkShadow = Color.ThreeDDarkShadow;
-
-  protected static final Color ThreeDFace = Color.ThreeDFace;
-
-  protected static final Color ThreeDHighlight = Color.ThreeDHighlight;
-
-  protected static final Color ThreeDLightShadow = Color.ThreeDLightShadow;
-
-  protected static final Color ThreeDShadow = Color.ThreeDShadow;
-
-  protected static final Color Window = Color.Window;
-
-  protected static final Color WindowFrame = Color.WindowFrame;
-
-  protected static final Color WindowText = Color.WindowText;
+  protected static final Color orange = Color.orange;
 
   protected static final Color aliceblue = Color.aliceblue;
 
   protected static final Color antiquewhite = Color.antiquewhite;
-
-  protected static final Color aqua = Color.aqua;
 
   protected static final Color aquamarine = Color.aquamarine;
 
@@ -736,11 +714,7 @@ abstract class GeneratedStyleSheet {
 
   protected static final Color bisque = Color.bisque;
 
-  protected static final Color black = Color.black;
-
   protected static final Color blanchedalmond = Color.blanchedalmond;
-
-  protected static final Color blue = Color.blue;
 
   protected static final Color blueviolet = Color.blueviolet;
 
@@ -761,8 +735,6 @@ abstract class GeneratedStyleSheet {
   protected static final Color cornsilk = Color.cornsilk;
 
   protected static final Color crimson = Color.crimson;
-
-  protected static final Color currentcolor = Color.currentcolor;
 
   protected static final Color cyan = Color.cyan;
 
@@ -820,8 +792,6 @@ abstract class GeneratedStyleSheet {
 
   protected static final Color forestgreen = Color.forestgreen;
 
-  protected static final Color fuchsia = Color.fuchsia;
-
   protected static final Color gainsboro = Color.gainsboro;
 
   protected static final Color ghostwhite = Color.ghostwhite;
@@ -829,10 +799,6 @@ abstract class GeneratedStyleSheet {
   protected static final Color gold = Color.gold;
 
   protected static final Color goldenrod = Color.goldenrod;
-
-  protected static final Color gray = Color.gray;
-
-  protected static final Color green = Color.green;
 
   protected static final Color greenyellow = Color.greenyellow;
 
@@ -888,15 +854,11 @@ abstract class GeneratedStyleSheet {
 
   protected static final Color lightyellow = Color.lightyellow;
 
-  protected static final Color lime = Color.lime;
-
   protected static final Color limegreen = Color.limegreen;
 
   protected static final Color linen = Color.linen;
 
   protected static final Color magenta = Color.magenta;
-
-  protected static final Color maroon = Color.maroon;
 
   protected static final Color mediumaquamarine = Color.mediumaquamarine;
 
@@ -926,15 +888,9 @@ abstract class GeneratedStyleSheet {
 
   protected static final Color navajowhite = Color.navajowhite;
 
-  protected static final Color navy = Color.navy;
-
   protected static final Color oldlace = Color.oldlace;
 
-  protected static final Color olive = Color.olive;
-
   protected static final Color olivedrab = Color.olivedrab;
-
-  protected static final Color orange = Color.orange;
 
   protected static final Color orangered = Color.orangered;
 
@@ -960,12 +916,6 @@ abstract class GeneratedStyleSheet {
 
   protected static final Color powderblue = Color.powderblue;
 
-  protected static final Color purple = Color.purple;
-
-  protected static final Color rebeccapurple = Color.rebeccapurple;
-
-  protected static final Color red = Color.red;
-
   protected static final Color rosybrown = Color.rosybrown;
 
   protected static final Color royalblue = Color.royalblue;
@@ -981,8 +931,6 @@ abstract class GeneratedStyleSheet {
   protected static final Color seashell = Color.seashell;
 
   protected static final Color sienna = Color.sienna;
-
-  protected static final Color silver = Color.silver;
 
   protected static final Color skyblue = Color.skyblue;
 
@@ -1000,13 +948,9 @@ abstract class GeneratedStyleSheet {
 
   protected static final Color tan = Color.tan;
 
-  protected static final Color teal = Color.teal;
-
   protected static final Color thistle = Color.thistle;
 
   protected static final Color tomato = Color.tomato;
-
-  protected static final Color transparent = Color.transparent;
 
   protected static final Color turquoise = Color.turquoise;
 
@@ -1014,13 +958,69 @@ abstract class GeneratedStyleSheet {
 
   protected static final Color wheat = Color.wheat;
 
-  protected static final Color white = Color.white;
-
   protected static final Color whitesmoke = Color.whitesmoke;
 
-  protected static final Color yellow = Color.yellow;
-
   protected static final Color yellowgreen = Color.yellowgreen;
+
+  protected static final Color rebeccapurple = Color.rebeccapurple;
+
+  protected static final Color currentcolor = Color.currentcolor;
+
+  protected static final Color transparent = Color.transparent;
+
+  protected static final Color ActiveBorder = Color.ActiveBorder;
+
+  protected static final Color ActiveCaption = Color.ActiveCaption;
+
+  protected static final Color AppWorkspace = Color.AppWorkspace;
+
+  protected static final Color Background = Color.Background;
+
+  protected static final Color ButtonFace = Color.ButtonFace;
+
+  protected static final Color ButtonHighlight = Color.ButtonHighlight;
+
+  protected static final Color ButtonShadow = Color.ButtonShadow;
+
+  protected static final Color ButtonText = Color.ButtonText;
+
+  protected static final Color CaptionText = Color.CaptionText;
+
+  protected static final Color GrayText = Color.GrayText;
+
+  protected static final Color Highlight = Color.Highlight;
+
+  protected static final Color HighlightText = Color.HighlightText;
+
+  protected static final Color InactiveBorder = Color.InactiveBorder;
+
+  protected static final Color InactiveCaption = Color.InactiveCaption;
+
+  protected static final Color InactiveCaptionText = Color.InactiveCaptionText;
+
+  protected static final Color InfoBackground = Color.InfoBackground;
+
+  protected static final Color InfoText = Color.InfoText;
+
+  protected static final Color MenuText = Color.MenuText;
+
+  protected static final Color Scrollbar = Color.Scrollbar;
+
+  protected static final Color ThreeDDarkShadow = Color.ThreeDDarkShadow;
+
+  protected static final Color ThreeDFace = Color.ThreeDFace;
+
+  protected static final Color ThreeDHighlight = Color.ThreeDHighlight;
+
+  protected static final Color ThreeDLightShadow = Color.ThreeDLightShadow;
+
+  protected static final Color ThreeDShadow = Color.ThreeDShadow;
+
+  protected static final Color Window = Color.Window;
+
+  protected static final Color WindowFrame = Color.WindowFrame;
+
+  protected static final Color WindowText = Color.WindowText;
 
   protected static final MozArabicIndicKeyword mozArabicIndic = Keywords.mozArabicIndic;
 
