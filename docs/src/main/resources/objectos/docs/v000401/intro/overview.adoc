@@ -1,8 +1,9 @@
 = What is Objectos?
 
 Objectos is a suite of open-source Java libraries. It is currently under construction and
-still does very little. In this third public release it provides:
+still does very little. In the 0.4.x release series it provides:
 
+* an API for generating Java source code;
 * a set of utilities for objects whose type is from the `java.lang` package;
 * a note sink API; and
 * a special-purpose collections API.

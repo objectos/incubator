@@ -173,6 +173,7 @@ final class LeftBarV000401 extends LeftBarFragment {
         h2v0("Release Notes"),
 
         ul(
+          li(a0("v000401/relnotes/0.4.1")),
           li(a0("v000401/relnotes/0.4.0")),
           li(a0("v000401/relnotes/0.3.0")),
           li(a0("v000401/relnotes/0.2.0")),
