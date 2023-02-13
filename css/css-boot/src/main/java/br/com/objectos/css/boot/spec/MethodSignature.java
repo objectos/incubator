@@ -13,9 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package br.com.objectos.css.boot.sheet;
+package br.com.objectos.css.boot.spec;
 
-import br.com.objectos.css.boot.property.ParameterType;
 import objectos.lang.Check;
 
 public abstract sealed class MethodSignature implements Comparable<MethodSignature> {

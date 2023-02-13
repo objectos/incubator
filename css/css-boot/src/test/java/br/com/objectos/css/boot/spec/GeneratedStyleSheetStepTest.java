@@ -17,12 +17,6 @@ package br.com.objectos.css.boot.spec;
 
 import static org.testng.Assert.assertEquals;
 
-import br.com.objectos.css.boot.function.FunctionName;
-import br.com.objectos.css.boot.keyword.KeywordName;
-import br.com.objectos.css.boot.type.JavaType;
-import br.com.objectos.css.boot.type.Primitive;
-import br.com.objectos.css.boot.type.PrimitiveType;
-import br.com.objectos.css.boot.type.ValueType;
 import org.testng.annotations.Test;
 
 public class GeneratedStyleSheetStepTest extends AbstractCssBootSpecTest {

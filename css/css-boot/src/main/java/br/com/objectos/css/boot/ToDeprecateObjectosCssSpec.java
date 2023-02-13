@@ -15,7 +15,7 @@
  */
 package br.com.objectos.css.boot;
 
-import br.com.objectos.css.boot.select.Prefix;
+import br.com.objectos.css.boot.spec.Prefix;
 import br.com.objectos.css.boot.spec.Source;
 
 public class ToDeprecateObjectosCssSpec extends ToDeprecateCssSpec {

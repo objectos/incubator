@@ -15,8 +15,6 @@
  */
 package br.com.objectos.css.boot.spec;
 
-import br.com.objectos.css.boot.function.FunctionName;
-
 final class FunctionInterfaceStep extends ThisTemplate {
 
   private FunctionName functionName;

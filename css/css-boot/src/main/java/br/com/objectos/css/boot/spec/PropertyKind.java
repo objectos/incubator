@@ -13,16 +13,33 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package br.com.objectos.css.boot.type;
+package br.com.objectos.css.boot.spec;
 
-import br.com.objectos.css.boot.property.ParameterType;
+import objectos.lang.Check;
 
-public enum JavaType implements ParameterType {
+public enum PropertyKind {
 
-  INT,
+  HASH("SingleDeclaration"),
 
-  DOUBLE,
+  STANDARD("Declaration");
 
-  STRING;
+  private final String singleSuffix;
+
+  private PropertyKind(String singleSuffix) {
+    this.singleSuffix = singleSuffix;
+  }
+
+  public final Property get(String name) {
+    return get(name, null);
+  }
+
+  public final Property get(String name, String identifier) {
+    Check.notNull(name, "name == null");
+    return new Property(this, name, identifier);
+  }
+
+  final String getSingleSuffix() {
+    return singleSuffix;
+  }
 
 }

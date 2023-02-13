@@ -17,8 +17,6 @@ package br.com.objectos.css.boot.spec;
 
 import static org.testng.Assert.assertEquals;
 
-import br.com.objectos.css.boot.type.Primitive;
-import br.com.objectos.css.boot.type.PrimitiveType;
 import org.testng.annotations.Test;
 
 public class PrimitiveTypeStepTest extends AbstractCssBootSpecTest {

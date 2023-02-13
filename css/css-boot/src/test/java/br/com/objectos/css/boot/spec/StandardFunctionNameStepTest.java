@@ -17,7 +17,6 @@ package br.com.objectos.css.boot.spec;
 
 import static org.testng.Assert.assertEquals;
 
-import br.com.objectos.css.boot.type.Primitive;
 import org.testng.annotations.Test;
 
 public class StandardFunctionNameStepTest extends AbstractCssBootSpecTest {

@@ -13,15 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package br.com.objectos.css.boot.type;
+package br.com.objectos.css.boot.spec;
 
-import br.com.objectos.css.boot.property.ParameterType;
 import java.util.Set;
 import java.util.TreeSet;
 
-public class ValueType implements ParameterType, Value {
+public final class ValueType implements ParameterType, Value {
 
-  public final String simpleName;
+  final String simpleName;
 
   private final Set<String> interfaceNames = new TreeSet<>();
 

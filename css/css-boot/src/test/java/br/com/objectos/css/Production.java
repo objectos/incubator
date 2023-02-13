@@ -15,7 +15,7 @@
  */
 package br.com.objectos.css;
 
-import br.com.objectos.css.boot.select.Prefix;
+import br.com.objectos.css.boot.spec.Prefix;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

@@ -15,8 +15,6 @@
  */
 package br.com.objectos.css.boot.spec;
 
-import br.com.objectos.css.boot.type.PrimitiveType;
-
 final class PrimitiveTypeStep extends ThisTemplate {
 
   PrimitiveType primitiveType;

@@ -15,15 +15,6 @@
  */
 package br.com.objectos.css.boot.spec;
 
-import br.com.objectos.css.boot.function.FunctionName;
-import br.com.objectos.css.boot.keyword.KeywordName;
-import br.com.objectos.css.boot.property.Property;
-import br.com.objectos.css.boot.sheet.FunctionOrProperty;
-import br.com.objectos.css.boot.sheet.MethodSignature;
-import br.com.objectos.css.boot.type.ColorName;
-import br.com.objectos.css.boot.type.PrimitiveType;
-import br.com.objectos.css.boot.type.ValueType;
-
 public final class CssStep implements Step {
 
   private final AngleUnitStep angleUnitStep;

@@ -15,8 +15,6 @@
  */
 package br.com.objectos.css.boot.spec;
 
-import br.com.objectos.css.boot.keyword.KeywordName;
-
 final class KeywordClassStep extends ThisTemplate {
 
   private int code;

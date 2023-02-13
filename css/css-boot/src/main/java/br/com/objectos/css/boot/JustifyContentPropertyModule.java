@@ -17,7 +17,7 @@ package br.com.objectos.css.boot;
 
 import br.com.objectos.code.annotations.Generated;
 import br.com.objectos.css.boot.spec.Source;
-import br.com.objectos.css.boot.type.ValueType;
+import br.com.objectos.css.boot.spec.ValueType;
 
 @Generated("br.com.objectos.css.specgen.SpecgenBoot")
 @DoNotOverwrite

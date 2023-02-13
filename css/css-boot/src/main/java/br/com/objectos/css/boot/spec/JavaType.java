@@ -13,18 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package br.com.objectos.css.boot.sheet;
+package br.com.objectos.css.boot.spec;
 
-public interface FunctionOrProperty {
+public enum JavaType implements ParameterType {
 
-  String addMethodName();
+  INT,
 
-  String enumName();
+  DOUBLE,
 
-  String methodName();
-
-  String multiDeclarationSimpleName();
-
-  String singleDeclarationSimpleName();
+  STRING;
 
 }

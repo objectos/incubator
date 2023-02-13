@@ -15,7 +15,6 @@
  */
 package br.com.objectos.css.boot.spec;
 
-import br.com.objectos.css.boot.type.ColorName;
 import java.util.Set;
 import java.util.TreeSet;
 import objectos.util.GrowableMap;

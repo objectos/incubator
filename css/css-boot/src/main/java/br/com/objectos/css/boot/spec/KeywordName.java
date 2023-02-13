@@ -13,12 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package br.com.objectos.css.boot.keyword;
+package br.com.objectos.css.boot.spec;
 
-import br.com.objectos.css.boot.property.ParameterType;
-import br.com.objectos.css.boot.type.PrimitiveType;
-import br.com.objectos.css.boot.type.Value;
-import br.com.objectos.css.boot.type.ValueType;
 import br.com.objectos.css.boot.util.JavaNames;
 import java.util.Set;
 import java.util.TreeSet;
@@ -26,20 +22,20 @@ import javax.lang.model.SourceVersion;
 import objectos.lang.Check;
 import objectos.lang.ToString;
 
-public class KeywordName
+public final class KeywordName
     implements
     Comparable<KeywordName>,
     ParameterType,
     Value,
     ToString.Formattable {
 
-  public final String simpleName;
+  final String simpleName;
 
-  public final String fieldName;
+  final String fieldName;
 
-  public final Set<String> interfaceSet = new TreeSet<>();
+  final Set<String> interfaceSet = new TreeSet<>();
 
-  public final String name;
+  final String name;
 
   private KeywordName(String name, String fieldName) {
     this.name = name;

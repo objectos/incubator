@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package br.com.objectos.css.boot.select;
+package br.com.objectos.css.boot.spec;
 
 import java.util.Collections;
 import java.util.HashMap;

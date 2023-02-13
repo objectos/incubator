@@ -13,23 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package br.com.objectos.css.boot.property;
+package br.com.objectos.css.boot.spec;
 
-import br.com.objectos.css.boot.sheet.FunctionOrProperty;
-import br.com.objectos.css.boot.sheet.MethodSignature;
 import br.com.objectos.css.boot.util.JavaNames;
 import java.util.Locale;
 import objectos.lang.ToString;
 
-public class Property implements Comparable<Property>, FunctionOrProperty, ToString.Formattable {
+public final class Property
+    implements Comparable<Property>, FunctionOrProperty, ToString.Formattable {
 
-  public final PropertyKind kind;
+  final PropertyKind kind;
 
   private String methodName;
 
-  public final String name;
+  final String name;
 
-  public MethodSignature[] signatures;
+  MethodSignature[] signatures;
 
   Property(PropertyKind kind, String name) {
     this.kind = kind;

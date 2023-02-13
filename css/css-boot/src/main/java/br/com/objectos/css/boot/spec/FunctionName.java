@@ -13,18 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package br.com.objectos.css.boot.function;
+package br.com.objectos.css.boot.spec;
 
-import br.com.objectos.css.boot.sheet.FunctionOrProperty;
-import br.com.objectos.css.boot.sheet.MethodSignature;
-import br.com.objectos.css.boot.type.Value;
-import br.com.objectos.css.boot.type.ValueType;
 import br.com.objectos.css.boot.util.JavaNames;
 import java.util.Locale;
 import java.util.Set;
 import java.util.TreeSet;
 
-public final class FunctionName implements FunctionOrProperty, Value {
+final class FunctionName implements FunctionOrProperty, Value {
 
   public final Set<String> interfaceSet = new TreeSet<>();
 

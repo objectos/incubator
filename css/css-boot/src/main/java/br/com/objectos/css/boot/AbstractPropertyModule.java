@@ -15,13 +15,13 @@
  */
 package br.com.objectos.css.boot;
 
-import br.com.objectos.css.boot.keyword.KeywordName;
-import br.com.objectos.css.boot.property.ParameterType;
-import br.com.objectos.css.boot.sheet.MethodSignature;
 import br.com.objectos.css.boot.spec.CssSpec;
-import br.com.objectos.css.boot.type.Primitive;
-import br.com.objectos.css.boot.type.PrimitiveType;
-import br.com.objectos.css.boot.type.ValueType;
+import br.com.objectos.css.boot.spec.KeywordName;
+import br.com.objectos.css.boot.spec.MethodSignature;
+import br.com.objectos.css.boot.spec.ParameterType;
+import br.com.objectos.css.boot.spec.Primitive;
+import br.com.objectos.css.boot.spec.PrimitiveType;
+import br.com.objectos.css.boot.spec.ValueType;
 
 abstract class AbstractPropertyModule extends CssSpec {
 

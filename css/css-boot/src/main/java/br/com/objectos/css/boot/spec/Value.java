@@ -13,33 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package br.com.objectos.css.boot.property;
+package br.com.objectos.css.boot.spec;
 
-import objectos.lang.Check;
+public interface Value {
 
-public enum PropertyKind {
-
-  HASH("SingleDeclaration"),
-
-  STANDARD("Declaration");
-
-  private final String singleSuffix;
-
-  private PropertyKind(String singleSuffix) {
-    this.singleSuffix = singleSuffix;
-  }
-
-  public final Property get(String name) {
-    return get(name, null);
-  }
-
-  public final Property get(String name, String identifier) {
-    Check.notNull(name, "name == null");
-    return new Property(this, name, identifier);
-  }
-
-  final String getSingleSuffix() {
-    return singleSuffix;
-  }
+  void acceptValueType(ValueType type);
 
 }

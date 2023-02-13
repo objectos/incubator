@@ -13,10 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package br.com.objectos.css.boot.type;
+package br.com.objectos.css.boot.spec;
 
-public interface Value {
+interface FunctionOrProperty {
 
-  void acceptValueType(ValueType type);
+  String addMethodName();
+
+  String enumName();
+
+  String methodName();
+
+  String multiDeclarationSimpleName();
+
+  String singleDeclarationSimpleName();
 
 }

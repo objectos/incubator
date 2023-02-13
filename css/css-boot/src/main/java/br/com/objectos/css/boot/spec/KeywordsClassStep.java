@@ -15,7 +15,6 @@
  */
 package br.com.objectos.css.boot.spec;
 
-import br.com.objectos.css.boot.keyword.KeywordName;
 import java.util.List;
 import objectos.util.GrowableList;
 import objectos.util.GrowableMap;

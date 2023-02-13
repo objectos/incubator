@@ -17,6 +17,7 @@ package br.com.objectos.css.boot.select;
 
 import static org.testng.Assert.assertEquals;
 
+import br.com.objectos.css.boot.spec.Prefix;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 

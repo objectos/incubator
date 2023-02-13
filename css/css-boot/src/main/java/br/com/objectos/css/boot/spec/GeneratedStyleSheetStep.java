@@ -15,26 +15,15 @@
  */
 package br.com.objectos.css.boot.spec;
 
-import br.com.objectos.css.boot.function.FunctionName;
-import br.com.objectos.css.boot.keyword.KeywordName;
-import br.com.objectos.css.boot.property.ParameterType;
-import br.com.objectos.css.boot.property.Property;
-import br.com.objectos.css.boot.property.PropertyKind;
-import br.com.objectos.css.boot.sheet.FunctionOrProperty;
-import br.com.objectos.css.boot.sheet.MethodSignature;
-import br.com.objectos.css.boot.sheet.MethodSignature.Abstract1;
-import br.com.objectos.css.boot.sheet.MethodSignature.SigHash;
-import br.com.objectos.css.boot.sheet.MethodSignature.SigZero;
-import br.com.objectos.css.boot.sheet.MethodSignature.Signature1;
-import br.com.objectos.css.boot.sheet.MethodSignature.Signature2;
-import br.com.objectos.css.boot.sheet.MethodSignature.Signature3;
-import br.com.objectos.css.boot.sheet.MethodSignature.Signature4;
-import br.com.objectos.css.boot.sheet.MethodSignature.Signature5;
-import br.com.objectos.css.boot.sheet.MethodSignature.Signature6;
-import br.com.objectos.css.boot.type.ColorName;
-import br.com.objectos.css.boot.type.JavaType;
-import br.com.objectos.css.boot.type.PrimitiveType;
-import br.com.objectos.css.boot.type.ValueType;
+import br.com.objectos.css.boot.spec.MethodSignature.Abstract1;
+import br.com.objectos.css.boot.spec.MethodSignature.SigHash;
+import br.com.objectos.css.boot.spec.MethodSignature.SigZero;
+import br.com.objectos.css.boot.spec.MethodSignature.Signature1;
+import br.com.objectos.css.boot.spec.MethodSignature.Signature2;
+import br.com.objectos.css.boot.spec.MethodSignature.Signature3;
+import br.com.objectos.css.boot.spec.MethodSignature.Signature4;
+import br.com.objectos.css.boot.spec.MethodSignature.Signature5;
+import br.com.objectos.css.boot.spec.MethodSignature.Signature6;
 import br.com.objectos.css.boot.util.JavaNames;
 import java.util.List;
 import objectos.util.GrowableList;

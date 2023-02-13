@@ -15,8 +15,6 @@
  */
 package br.com.objectos.css.boot.spec;
 
-import br.com.objectos.css.boot.type.ValueType;
-
 final class ValueTypeIfaceStep extends ThisTemplate {
 
   ValueType valueType;

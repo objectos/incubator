@@ -15,8 +15,8 @@
  */
 package br.com.objectos.css.boot;
 
-import br.com.objectos.css.boot.keyword.KeywordName;
-import br.com.objectos.css.boot.type.ValueType;
+import br.com.objectos.css.boot.spec.KeywordName;
+import br.com.objectos.css.boot.spec.ValueType;
 
 abstract class AbstractAlignOrJustifyPropertyModule extends AbstractPropertyModule {
 

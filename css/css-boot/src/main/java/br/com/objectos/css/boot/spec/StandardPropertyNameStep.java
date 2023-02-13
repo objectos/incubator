@@ -15,7 +15,6 @@
  */
 package br.com.objectos.css.boot.spec;
 
-import br.com.objectos.css.boot.property.Property;
 import java.util.Map;
 import java.util.TreeMap;
 import objectos.util.GrowableMap;
