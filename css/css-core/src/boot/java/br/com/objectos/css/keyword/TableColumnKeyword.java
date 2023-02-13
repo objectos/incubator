@@ -5,11 +5,9 @@ import br.com.objectos.css.type.DisplayInternalValue;
 
 @Generated("br.com.objectos.css.boot.CssBoot")
 public final class TableColumnKeyword extends StandardKeyword implements DisplayInternalValue {
-
   static final TableColumnKeyword INSTANCE = new TableColumnKeyword();
 
   private TableColumnKeyword() {
     super(242, "tableColumn", "table-column");
   }
-
 }

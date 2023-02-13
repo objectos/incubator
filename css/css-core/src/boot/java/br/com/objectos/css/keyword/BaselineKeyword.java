@@ -10,11 +10,9 @@ import br.com.objectos.css.type.VerticalAlignValue;
 
 @Generated("br.com.objectos.css.boot.CssBoot")
 public final class BaselineKeyword extends StandardKeyword implements AlignContentValue, AlignItemsValue, AlignSelfValue, JustifyItemsValue, JustifySelfValue, VerticalAlignValue {
-
   static final BaselineKeyword INSTANCE = new BaselineKeyword();
 
   private BaselineKeyword() {
     super(23, "baseline", "baseline");
   }
-
 }

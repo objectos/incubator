@@ -6,11 +6,9 @@ import br.com.objectos.css.type.OutlineWidthValue;
 
 @Generated("br.com.objectos.css.boot.CssBoot")
 public final class ThinKeyword extends StandardKeyword implements LineWidthValue, OutlineWidthValue {
-
   static final ThinKeyword INSTANCE = new ThinKeyword();
 
   private ThinKeyword() {
     super(257, "thin", "thin");
   }
-
 }

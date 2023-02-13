@@ -5,11 +5,9 @@ import br.com.objectos.css.type.GlobalKeyword;
 
 @Generated("br.com.objectos.css.boot.CssBoot")
 public final class InheritKeyword extends StandardKeyword implements GlobalKeyword {
-
   static final InheritKeyword INSTANCE = new InheritKeyword();
 
   private InheritKeyword() {
     super(104, "inherit", "inherit");
   }
-
 }

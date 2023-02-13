@@ -6,11 +6,9 @@ import br.com.objectos.css.type.OverflowValue;
 
 @Generated("br.com.objectos.css.boot.CssBoot")
 public final class ScrollKeyword extends StandardKeyword implements BackgroundAttachmentValue, OverflowValue {
-
   static final ScrollKeyword INSTANCE = new ScrollKeyword();
 
   private ScrollKeyword() {
     super(209, "scroll", "scroll");
   }
-
 }

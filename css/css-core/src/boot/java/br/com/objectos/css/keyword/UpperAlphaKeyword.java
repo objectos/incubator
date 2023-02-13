@@ -5,11 +5,9 @@ import br.com.objectos.css.type.CounterStyleValue;
 
 @Generated("br.com.objectos.css.boot.CssBoot")
 public final class UpperAlphaKeyword extends StandardKeyword implements CounterStyleValue {
-
   static final UpperAlphaKeyword INSTANCE = new UpperAlphaKeyword();
 
   private UpperAlphaKeyword() {
     super(265, "upperAlpha", "upper-alpha");
   }
-
 }

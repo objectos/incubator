@@ -13,34 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package br.com.objectos.css.boot;
+package br.com.objectos.css.boot.spec;
 
-import br.com.objectos.css.boot.function.FunctionInterfaceStep;
 import br.com.objectos.css.boot.function.FunctionName;
-import br.com.objectos.css.boot.function.StandardFunctionNameStep;
-import br.com.objectos.css.boot.keyword.KeywordClassStep;
 import br.com.objectos.css.boot.keyword.KeywordName;
-import br.com.objectos.css.boot.keyword.KeywordsClassStep;
 import br.com.objectos.css.boot.property.Property;
-import br.com.objectos.css.boot.property.StandardPropertyNameStep;
-import br.com.objectos.css.boot.select.PseudoClassSelectorsGen;
-import br.com.objectos.css.boot.select.PseudoElementSelectorsGen;
-import br.com.objectos.css.boot.select.TypeSelectorsGen;
 import br.com.objectos.css.boot.sheet.FunctionOrProperty;
-import br.com.objectos.css.boot.sheet.GeneratedStyleSheetStep;
 import br.com.objectos.css.boot.sheet.MethodSignature;
-import br.com.objectos.css.boot.spec.AbstractStep;
-import br.com.objectos.css.boot.spec.StepAdapter;
-import br.com.objectos.css.boot.type.AngleUnitStep;
 import br.com.objectos.css.boot.type.ColorName;
-import br.com.objectos.css.boot.type.GeneratedColorStep;
-import br.com.objectos.css.boot.type.LengthUnitStep;
 import br.com.objectos.css.boot.type.PrimitiveType;
-import br.com.objectos.css.boot.type.PrimitiveTypeStep;
 import br.com.objectos.css.boot.type.ValueType;
-import br.com.objectos.css.boot.type.ValueTypeIfaceStep;
 
-class CssStep extends AbstractStep {
+public final class CssStep extends AbstractStep {
 
   private final AngleUnitStep angleUnitStep;
 
@@ -70,7 +54,7 @@ class CssStep extends AbstractStep {
 
   private final ValueTypeIfaceStep valueTypeIfaceStep;
 
-  CssStep(StepAdapter adapter) {
+  public CssStep(StepAdapter adapter) {
     super(adapter);
 
     angleUnitStep = new AngleUnitStep(adapter);

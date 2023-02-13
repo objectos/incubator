@@ -5,11 +5,9 @@ import br.com.objectos.css.type.CounterStyleValue;
 
 @Generated("br.com.objectos.css.boot.CssBoot")
 public final class CjkIdeographicKeyword extends StandardKeyword implements CounterStyleValue {
-
   static final CjkIdeographicKeyword INSTANCE = new CjkIdeographicKeyword();
 
   private CjkIdeographicKeyword() {
     super(45, "cjkIdeographic", "cjk-ideographic");
   }
-
 }

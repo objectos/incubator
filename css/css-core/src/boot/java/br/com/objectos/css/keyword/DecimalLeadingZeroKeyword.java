@@ -5,11 +5,9 @@ import br.com.objectos.css.type.CounterStyleValue;
 
 @Generated("br.com.objectos.css.boot.CssBoot")
 public final class DecimalLeadingZeroKeyword extends StandardKeyword implements CounterStyleValue {
-
   static final DecimalLeadingZeroKeyword INSTANCE = new DecimalLeadingZeroKeyword();
 
   private DecimalLeadingZeroKeyword() {
     super(63, "decimalLeadingZero", "decimal-leading-zero");
   }
-
 }

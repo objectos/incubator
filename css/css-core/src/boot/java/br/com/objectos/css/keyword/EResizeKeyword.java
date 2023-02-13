@@ -5,11 +5,9 @@ import br.com.objectos.css.type.CursorValue;
 
 @Generated("br.com.objectos.css.boot.CssBoot")
 public final class EResizeKeyword extends StandardKeyword implements CursorValue {
-
   static final EResizeKeyword INSTANCE = new EResizeKeyword();
 
   private EResizeKeyword() {
     super(71, "eResize", "e-resize");
   }
-
 }

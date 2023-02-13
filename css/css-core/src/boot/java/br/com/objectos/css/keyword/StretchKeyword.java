@@ -9,11 +9,9 @@ import br.com.objectos.css.type.JustifySelfValue;
 
 @Generated("br.com.objectos.css.boot.CssBoot")
 public final class StretchKeyword extends StandardKeyword implements AlignItemsValue, AlignSelfValue, ContentDistribution, JustifyItemsValue, JustifySelfValue {
-
   static final StretchKeyword INSTANCE = new StretchKeyword();
 
   private StretchKeyword() {
     super(235, "stretch", "stretch");
   }
-
 }

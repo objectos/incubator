@@ -9,11 +9,9 @@ import br.com.objectos.css.type.TextAlignValue;
 
 @Generated("br.com.objectos.css.boot.CssBoot")
 public final class CenterKeyword extends StandardKeyword implements BackgroundPositionValue, ContentPosition, JustifyLegacyValue, SelfPosition, TextAlignValue {
-
   static final CenterKeyword INSTANCE = new CenterKeyword();
 
   private CenterKeyword() {
     super(39, "center", "center");
   }
-
 }

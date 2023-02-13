@@ -5,7 +5,6 @@ import java.util.Locale;
 
 @Generated("br.com.objectos.css.boot.CssBoot")
 public enum LengthUnit {
-
   CH,
 
   CM,
@@ -59,5 +58,4 @@ public enum LengthUnit {
   public final String getName() {
     return name;
   }
-
 }

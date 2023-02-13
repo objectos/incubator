@@ -5,11 +5,9 @@ import br.com.objectos.css.type.CounterStyleValue;
 
 @Generated("br.com.objectos.css.boot.CssBoot")
 public final class MozMalayalamKeyword extends StandardKeyword implements CounterStyleValue {
-
   static final MozMalayalamKeyword INSTANCE = new MozMalayalamKeyword();
 
   private MozMalayalamKeyword() {
     super(10, "mozMalayalam", "-moz-malayalam");
   }
-
 }

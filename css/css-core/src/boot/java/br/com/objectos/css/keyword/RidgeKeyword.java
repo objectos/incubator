@@ -5,11 +5,9 @@ import br.com.objectos.css.type.LineStyleValue;
 
 @Generated("br.com.objectos.css.boot.CssBoot")
 public final class RidgeKeyword extends StandardKeyword implements LineStyleValue {
-
   static final RidgeKeyword INSTANCE = new RidgeKeyword();
 
   private RidgeKeyword() {
     super(193, "ridge", "ridge");
   }
-
 }

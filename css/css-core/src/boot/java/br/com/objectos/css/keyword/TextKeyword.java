@@ -5,11 +5,9 @@ import br.com.objectos.css.type.CursorValue;
 
 @Generated("br.com.objectos.css.boot.CssBoot")
 public final class TextKeyword extends StandardKeyword implements CursorValue {
-
   static final TextKeyword INSTANCE = new TextKeyword();
 
   private TextKeyword() {
     super(250, "text", "text");
   }
-
 }

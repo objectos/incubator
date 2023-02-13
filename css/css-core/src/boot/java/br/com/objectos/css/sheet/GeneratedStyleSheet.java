@@ -393,7 +393,6 @@ import br.com.objectos.css.type.Zero;
 
 @Generated("br.com.objectos.css.boot.CssBoot")
 abstract class GeneratedStyleSheet {
-
   protected static final TypeSelector a = Css.a;
 
   protected static final TypeSelector abbr = Css.abbr;
@@ -1593,6 +1592,158 @@ abstract class GeneratedStyleSheet {
   protected static final ZoomOutKeyword zoomOut = Keywords.zoomOut;
 
   GeneratedStyleSheet() {}
+
+  protected final AngleType deg(double value) {
+    return getAngle(AngleUnit.DEG, value);
+  }
+
+  protected final AngleType deg(int value) {
+    return getAngle(AngleUnit.DEG, value);
+  }
+
+  protected final AngleType grad(double value) {
+    return getAngle(AngleUnit.GRAD, value);
+  }
+
+  protected final AngleType grad(int value) {
+    return getAngle(AngleUnit.GRAD, value);
+  }
+
+  protected final AngleType rad(double value) {
+    return getAngle(AngleUnit.RAD, value);
+  }
+
+  protected final AngleType rad(int value) {
+    return getAngle(AngleUnit.RAD, value);
+  }
+
+  protected final AngleType turn(double value) {
+    return getAngle(AngleUnit.TURN, value);
+  }
+
+  protected final AngleType turn(int value) {
+    return getAngle(AngleUnit.TURN, value);
+  }
+
+  protected final LengthType em(double value) {
+    return getLength(LengthUnit.EM, value);
+  }
+
+  protected final LengthType em(int value) {
+    return getLength(LengthUnit.EM, value);
+  }
+
+  protected final LengthType ex(double value) {
+    return getLength(LengthUnit.EX, value);
+  }
+
+  protected final LengthType ex(int value) {
+    return getLength(LengthUnit.EX, value);
+  }
+
+  protected final LengthType ch(double value) {
+    return getLength(LengthUnit.CH, value);
+  }
+
+  protected final LengthType ch(int value) {
+    return getLength(LengthUnit.CH, value);
+  }
+
+  protected final LengthType rem(double value) {
+    return getLength(LengthUnit.REM, value);
+  }
+
+  protected final LengthType rem(int value) {
+    return getLength(LengthUnit.REM, value);
+  }
+
+  protected final LengthType vw(double value) {
+    return getLength(LengthUnit.VW, value);
+  }
+
+  protected final LengthType vw(int value) {
+    return getLength(LengthUnit.VW, value);
+  }
+
+  protected final LengthType vh(double value) {
+    return getLength(LengthUnit.VH, value);
+  }
+
+  protected final LengthType vh(int value) {
+    return getLength(LengthUnit.VH, value);
+  }
+
+  protected final LengthType vmin(double value) {
+    return getLength(LengthUnit.VMIN, value);
+  }
+
+  protected final LengthType vmin(int value) {
+    return getLength(LengthUnit.VMIN, value);
+  }
+
+  protected final LengthType vmax(double value) {
+    return getLength(LengthUnit.VMAX, value);
+  }
+
+  protected final LengthType vmax(int value) {
+    return getLength(LengthUnit.VMAX, value);
+  }
+
+  protected final LengthType cm(double value) {
+    return getLength(LengthUnit.CM, value);
+  }
+
+  protected final LengthType cm(int value) {
+    return getLength(LengthUnit.CM, value);
+  }
+
+  protected final LengthType mm(double value) {
+    return getLength(LengthUnit.MM, value);
+  }
+
+  protected final LengthType mm(int value) {
+    return getLength(LengthUnit.MM, value);
+  }
+
+  protected final LengthType q(double value) {
+    return getLength(LengthUnit.Q, value);
+  }
+
+  protected final LengthType q(int value) {
+    return getLength(LengthUnit.Q, value);
+  }
+
+  protected final LengthType in(double value) {
+    return getLength(LengthUnit.IN, value);
+  }
+
+  protected final LengthType in(int value) {
+    return getLength(LengthUnit.IN, value);
+  }
+
+  protected final LengthType pt(double value) {
+    return getLength(LengthUnit.PT, value);
+  }
+
+  protected final LengthType pt(int value) {
+    return getLength(LengthUnit.PT, value);
+  }
+
+  protected final LengthType pc(double value) {
+    return getLength(LengthUnit.PC, value);
+  }
+
+  protected final LengthType pc(int value) {
+    return getLength(LengthUnit.PC, value);
+  }
+
+  protected final LengthType px(double value) {
+    return getLength(LengthUnit.PX, value);
+  }
+
+  protected final LengthType px(int value) {
+    return getLength(LengthUnit.PX, value);
+  }
 
   protected final AlignContentDeclaration alignContent(GlobalKeyword value) {
     return addDeclaration(StandardPropertyName.ALIGN_CONTENT, value);
@@ -2986,158 +3137,6 @@ abstract class GeneratedStyleSheet {
     return addDeclaration(StandardPropertyName.Z_INDEX, value);
   }
 
-  protected final AngleType deg(double value) {
-    return getAngle(AngleUnit.DEG, value);
-  }
-
-  protected final AngleType deg(int value) {
-    return getAngle(AngleUnit.DEG, value);
-  }
-
-  protected final AngleType grad(double value) {
-    return getAngle(AngleUnit.GRAD, value);
-  }
-
-  protected final AngleType grad(int value) {
-    return getAngle(AngleUnit.GRAD, value);
-  }
-
-  protected final AngleType rad(double value) {
-    return getAngle(AngleUnit.RAD, value);
-  }
-
-  protected final AngleType rad(int value) {
-    return getAngle(AngleUnit.RAD, value);
-  }
-
-  protected final AngleType turn(double value) {
-    return getAngle(AngleUnit.TURN, value);
-  }
-
-  protected final AngleType turn(int value) {
-    return getAngle(AngleUnit.TURN, value);
-  }
-
-  protected final LengthType em(double value) {
-    return getLength(LengthUnit.EM, value);
-  }
-
-  protected final LengthType em(int value) {
-    return getLength(LengthUnit.EM, value);
-  }
-
-  protected final LengthType ex(double value) {
-    return getLength(LengthUnit.EX, value);
-  }
-
-  protected final LengthType ex(int value) {
-    return getLength(LengthUnit.EX, value);
-  }
-
-  protected final LengthType ch(double value) {
-    return getLength(LengthUnit.CH, value);
-  }
-
-  protected final LengthType ch(int value) {
-    return getLength(LengthUnit.CH, value);
-  }
-
-  protected final LengthType rem(double value) {
-    return getLength(LengthUnit.REM, value);
-  }
-
-  protected final LengthType rem(int value) {
-    return getLength(LengthUnit.REM, value);
-  }
-
-  protected final LengthType vw(double value) {
-    return getLength(LengthUnit.VW, value);
-  }
-
-  protected final LengthType vw(int value) {
-    return getLength(LengthUnit.VW, value);
-  }
-
-  protected final LengthType vh(double value) {
-    return getLength(LengthUnit.VH, value);
-  }
-
-  protected final LengthType vh(int value) {
-    return getLength(LengthUnit.VH, value);
-  }
-
-  protected final LengthType vmin(double value) {
-    return getLength(LengthUnit.VMIN, value);
-  }
-
-  protected final LengthType vmin(int value) {
-    return getLength(LengthUnit.VMIN, value);
-  }
-
-  protected final LengthType vmax(double value) {
-    return getLength(LengthUnit.VMAX, value);
-  }
-
-  protected final LengthType vmax(int value) {
-    return getLength(LengthUnit.VMAX, value);
-  }
-
-  protected final LengthType cm(double value) {
-    return getLength(LengthUnit.CM, value);
-  }
-
-  protected final LengthType cm(int value) {
-    return getLength(LengthUnit.CM, value);
-  }
-
-  protected final LengthType mm(double value) {
-    return getLength(LengthUnit.MM, value);
-  }
-
-  protected final LengthType mm(int value) {
-    return getLength(LengthUnit.MM, value);
-  }
-
-  protected final LengthType q(double value) {
-    return getLength(LengthUnit.Q, value);
-  }
-
-  protected final LengthType q(int value) {
-    return getLength(LengthUnit.Q, value);
-  }
-
-  protected final LengthType in(double value) {
-    return getLength(LengthUnit.IN, value);
-  }
-
-  protected final LengthType in(int value) {
-    return getLength(LengthUnit.IN, value);
-  }
-
-  protected final LengthType pt(double value) {
-    return getLength(LengthUnit.PT, value);
-  }
-
-  protected final LengthType pt(int value) {
-    return getLength(LengthUnit.PT, value);
-  }
-
-  protected final LengthType pc(double value) {
-    return getLength(LengthUnit.PC, value);
-  }
-
-  protected final LengthType pc(int value) {
-    return getLength(LengthUnit.PC, value);
-  }
-
-  protected final LengthType px(double value) {
-    return getLength(LengthUnit.PX, value);
-  }
-
-  protected final LengthType px(int value) {
-    return getLength(LengthUnit.PX, value);
-  }
-
   abstract AnyDeclaration addDeclaration(StandardPropertyName name, int value);
 
   abstract AnyDeclaration addDeclaration(StandardPropertyName name, double value);
@@ -3417,5 +3416,4 @@ abstract class GeneratedStyleSheet {
   interface AnyDeclaration extends AlignContentDeclaration, AlignItemsDeclaration, AlignSelfDeclaration, AppearanceDeclaration, MozAppearanceDeclaration, WebkitAppearanceDeclaration, BackgroundAttachmentDeclaration, BackgroundClipDeclaration, BackgroundColorDeclaration, BackgroundImageDeclaration, BackgroundOriginDeclaration, BackgroundPositionDeclaration, BackgroundRepeatDeclaration, BackgroundSizeDeclaration, BackgroundDeclaration, BorderCollapseDeclaration, BorderColorDeclaration, BorderTopColorDeclaration, BorderRightColorDeclaration, BorderBottomColorDeclaration, BorderLeftColorDeclaration, BorderRadiusDeclaration, BorderTopLeftRadiusDeclaration, BorderTopRightRadiusDeclaration, BorderBottomRightRadiusDeclaration, BorderBottomLeftRadiusDeclaration, BorderStyleDeclaration, BorderTopStyleDeclaration, BorderRightStyleDeclaration, BorderBottomStyleDeclaration, BorderLeftStyleDeclaration, BorderWidthDeclaration, BorderTopWidthDeclaration, BorderRightWidthDeclaration, BorderBottomWidthDeclaration, BorderLeftWidthDeclaration, BorderDeclaration, BorderTopDeclaration, BorderRightDeclaration, BorderBottomDeclaration, BorderLeftDeclaration, BottomDeclaration, BoxShadowMultiDeclaration, BoxShadowSingleDeclaration, BoxSizingDeclaration, ClearDeclaration, ColorDeclaration, ContentDeclaration, CursorDeclaration, DisplayDeclaration, FlexDeclaration, FlexBasisDeclaration, FlexDirectionDeclaration, FlexGrowDeclaration, FlexShrinkDeclaration, FlexWrapDeclaration, FlexFlowDeclaration, FloatDeclaration, FontFamilyMultiDeclaration, FontFamilySingleDeclaration, FontDeclaration, FontSizeDeclaration, FontStyleDeclaration, FontWeightDeclaration, HeightDeclaration, WidthDeclaration, JustifyContentDeclaration, JustifyItemsDeclaration, JustifySelfDeclaration, LeftDeclaration, LetterSpacingDeclaration, LineHeightDeclaration, ListStyleImageDeclaration, ListStylePositionDeclaration, ListStyleTypeDeclaration, ListStyleDeclaration, MarginDeclaration, MarginTopDeclaration, MarginRightDeclaration, MarginBottomDeclaration, MarginLeftDeclaration, MaxHeightDeclaration, MaxWidthDeclaration, MinHeightDeclaration, MinWidthDeclaration, ObjectFitDeclaration, OpacityDeclaration, OutlineColorDeclaration, OutlineOffsetDeclaration, OutlineStyleDeclaration, OutlineWidthDeclaration, OutlineDeclaration, OverflowDeclaration, OverflowBlockDeclaration, OverflowInlineDeclaration, OverflowXDeclaration, OverflowYDeclaration, PaddingDeclaration, PaddingTopDeclaration, PaddingRightDeclaration, PaddingBottomDeclaration, PaddingLeftDeclaration, PositionDeclaration, ResizeDeclaration, RightDeclaration, TabSizeDeclaration, MozTabSizeDeclaration, TextAlignDeclaration, TextDecorationColorDeclaration, TextDecorationLineDeclaration, TextDecorationStyleDeclaration, TextDecorationThicknessDeclaration, TextDecorationDeclaration, TextIndentDeclaration, TextShadowDeclaration, TextSizeAdjustDeclaration, WebkitTextSizeAdjustDeclaration, TextTransformDeclaration, TopDeclaration, TransformDeclaration, VerticalAlignDeclaration, WhiteSpaceDeclaration, ZIndexDeclaration {}
 
   interface AnyFunction extends RotateFunction, RotateXFunction, RotateYFunction, RotateZFunction {}
-
 }

@@ -5,11 +5,9 @@ import br.com.objectos.css.type.CounterStyleValue;
 
 @Generated("br.com.objectos.css.boot.CssBoot")
 public final class DiscKeyword extends StandardKeyword implements CounterStyleValue {
-
   static final DiscKeyword INSTANCE = new DiscKeyword();
 
   private DiscKeyword() {
     super(66, "disc", "disc");
   }
-
 }

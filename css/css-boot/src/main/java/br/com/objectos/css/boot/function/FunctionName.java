@@ -39,6 +39,8 @@ public final class FunctionName implements FunctionOrProperty, Value {
 
   private final Set<NamedClass> interfaces = new TreeSet<>();
 
+  public final Set<String> interfaceSet = new TreeSet<>();
+
   private final String name;
 
   public MethodSignature[] signatures;
@@ -53,6 +55,8 @@ public final class FunctionName implements FunctionOrProperty, Value {
 
   @Override
   public final void acceptValueType(ValueType type) {
+    interfaceSet.add(type.simpleName);
+
     NamedClass className;
     className = type.className;
 

@@ -6,7 +6,6 @@ import objectos.util.UnmodifiableMap;
 
 @Generated("br.com.objectos.css.boot.CssBoot")
 public enum StandardPropertyName implements PropertyName {
-
   _MOZ_APPEARANCE("mozAppearance", "-moz-appearance"),
 
   _MOZ_TAB_SIZE("mozTabSize", "-moz-tab-size"),
@@ -271,7 +270,7 @@ public enum StandardPropertyName implements PropertyName {
   }
 
   private static UnmodifiableMap<String, StandardPropertyName> buildMap() {
-    GrowableMap<String, StandardPropertyName> m = new GrowableMap<>();
+    var m = new GrowableMap<String, StandardPropertyName>();
     m.put("-moz-appearance", _MOZ_APPEARANCE);
     m.put("-moz-tab-size", _MOZ_TAB_SIZE);
     m.put("-webkit-appearance", _WEBKIT_APPEARANCE);
@@ -413,5 +412,4 @@ public enum StandardPropertyName implements PropertyName {
   public final String getName() {
     return name;
   }
-
 }

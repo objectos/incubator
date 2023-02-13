@@ -6,11 +6,9 @@ import br.com.objectos.css.type.ObjectFitValue;
 
 @Generated("br.com.objectos.css.boot.CssBoot")
 public final class CoverKeyword extends StandardKeyword implements BackgroundSizeArity1Value, ObjectFitValue {
-
   static final CoverKeyword INSTANCE = new CoverKeyword();
 
   private CoverKeyword() {
     super(58, "cover", "cover");
   }
-
 }

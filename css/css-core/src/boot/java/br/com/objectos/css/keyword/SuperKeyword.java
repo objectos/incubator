@@ -5,11 +5,9 @@ import br.com.objectos.css.type.VerticalAlignValue;
 
 @Generated("br.com.objectos.css.boot.CssBoot")
 public final class SuperKeyword extends StandardKeyword implements VerticalAlignValue {
-
   static final SuperKeyword INSTANCE = new SuperKeyword();
 
   private SuperKeyword() {
     super(237, "superKw", "super");
   }
-
 }

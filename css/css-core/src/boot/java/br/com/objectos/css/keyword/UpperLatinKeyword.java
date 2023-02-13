@@ -5,11 +5,9 @@ import br.com.objectos.css.type.CounterStyleValue;
 
 @Generated("br.com.objectos.css.boot.CssBoot")
 public final class UpperLatinKeyword extends StandardKeyword implements CounterStyleValue {
-
   static final UpperLatinKeyword INSTANCE = new UpperLatinKeyword();
 
   private UpperLatinKeyword() {
     super(267, "upperLatin", "upper-latin");
   }
-
 }

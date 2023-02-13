@@ -5,11 +5,9 @@ import br.com.objectos.css.type.FlexDirectionValue;
 
 @Generated("br.com.objectos.css.boot.CssBoot")
 public final class RowReverseKeyword extends StandardKeyword implements FlexDirectionValue {
-
   static final RowReverseKeyword INSTANCE = new RowReverseKeyword();
 
   private RowReverseKeyword() {
     super(198, "rowReverse", "row-reverse");
   }
-
 }

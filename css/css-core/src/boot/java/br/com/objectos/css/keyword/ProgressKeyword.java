@@ -5,11 +5,9 @@ import br.com.objectos.css.type.CursorValue;
 
 @Generated("br.com.objectos.css.boot.CssBoot")
 public final class ProgressKeyword extends StandardKeyword implements CursorValue {
-
   static final ProgressKeyword INSTANCE = new ProgressKeyword();
 
   private ProgressKeyword() {
     super(185, "progressKw", "progress");
   }
-
 }

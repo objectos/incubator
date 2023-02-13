@@ -5,11 +5,9 @@ import br.com.objectos.css.type.CursorValue;
 
 @Generated("br.com.objectos.css.boot.CssBoot")
 public final class CellKeyword extends StandardKeyword implements CursorValue {
-
   static final CellKeyword INSTANCE = new CellKeyword();
 
   private CellKeyword() {
     super(38, "cell", "cell");
   }
-
 }

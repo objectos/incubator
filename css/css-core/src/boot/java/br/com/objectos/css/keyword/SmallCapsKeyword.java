@@ -5,11 +5,9 @@ import br.com.objectos.css.type.FontVariantCss21Value;
 
 @Generated("br.com.objectos.css.boot.CssBoot")
 public final class SmallCapsKeyword extends StandardKeyword implements FontVariantCss21Value {
-
   static final SmallCapsKeyword INSTANCE = new SmallCapsKeyword();
 
   private SmallCapsKeyword() {
     super(220, "smallCaps", "small-caps");
   }
-
 }

@@ -6,11 +6,9 @@ import br.com.objectos.css.type.SelfPosition;
 
 @Generated("br.com.objectos.css.boot.CssBoot")
 public final class FlexStartKeyword extends StandardKeyword implements ContentPosition, SelfPosition {
-
   static final FlexStartKeyword INSTANCE = new FlexStartKeyword();
 
   private FlexStartKeyword() {
     super(82, "flexStart", "flex-start");
   }
-
 }

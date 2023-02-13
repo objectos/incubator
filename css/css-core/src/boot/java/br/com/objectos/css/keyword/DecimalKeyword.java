@@ -5,11 +5,9 @@ import br.com.objectos.css.type.CounterStyleValue;
 
 @Generated("br.com.objectos.css.boot.CssBoot")
 public final class DecimalKeyword extends StandardKeyword implements CounterStyleValue {
-
   static final DecimalKeyword INSTANCE = new DecimalKeyword();
 
   private DecimalKeyword() {
     super(62, "decimal", "decimal");
   }
-
 }

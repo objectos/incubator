@@ -6,11 +6,9 @@ import br.com.objectos.css.type.MaxHeightOrWidthValue;
 
 @Generated("br.com.objectos.css.boot.CssBoot")
 public final class MaxContentKeyword extends StandardKeyword implements HeightOrWidthValue, MaxHeightOrWidthValue {
-
   static final MaxContentKeyword INSTANCE = new MaxContentKeyword();
 
   private MaxContentKeyword() {
     super(146, "maxContent", "max-content");
   }
-
 }

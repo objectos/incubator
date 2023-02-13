@@ -5,11 +5,9 @@ import br.com.objectos.css.type.CursorValue;
 
 @Generated("br.com.objectos.css.boot.CssBoot")
 public final class NsResizeKeyword extends StandardKeyword implements CursorValue {
-
   static final NsResizeKeyword INSTANCE = new NsResizeKeyword();
 
   private NsResizeKeyword() {
     super(170, "nsResize", "ns-resize");
   }
-
 }

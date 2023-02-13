@@ -5,11 +5,9 @@ import br.com.objectos.css.type.WhiteSpaceValue;
 
 @Generated("br.com.objectos.css.boot.CssBoot")
 public final class PreLineKeyword extends StandardKeyword implements WhiteSpaceValue {
-
   static final PreLineKeyword INSTANCE = new PreLineKeyword();
 
   private PreLineKeyword() {
     super(183, "preLine", "pre-line");
   }
-
 }

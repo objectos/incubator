@@ -5,11 +5,9 @@ import br.com.objectos.css.type.DisplayInternalValue;
 
 @Generated("br.com.objectos.css.boot.CssBoot")
 public final class TableCaptionKeyword extends StandardKeyword implements DisplayInternalValue {
-
   static final TableCaptionKeyword INSTANCE = new TableCaptionKeyword();
 
   private TableCaptionKeyword() {
     super(240, "tableCaption", "table-caption");
   }
-
 }

@@ -5,11 +5,9 @@ import br.com.objectos.css.type.TextTransformValue;
 
 @Generated("br.com.objectos.css.boot.CssBoot")
 public final class LowercaseKeyword extends StandardKeyword implements TextTransformValue {
-
   static final LowercaseKeyword INSTANCE = new LowercaseKeyword();
 
   private LowercaseKeyword() {
     super(143, "lowercase", "lowercase");
   }
-
 }

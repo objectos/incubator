@@ -5,11 +5,9 @@ import br.com.objectos.css.type.ContentDistribution;
 
 @Generated("br.com.objectos.css.boot.CssBoot")
 public final class SpaceBetweenKeyword extends StandardKeyword implements ContentDistribution {
-
   static final SpaceBetweenKeyword INSTANCE = new SpaceBetweenKeyword();
 
   private SpaceBetweenKeyword() {
     super(226, "spaceBetween", "space-between");
   }
-
 }

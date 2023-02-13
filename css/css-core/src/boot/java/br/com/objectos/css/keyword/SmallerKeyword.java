@@ -5,11 +5,9 @@ import br.com.objectos.css.type.FontSizeValue;
 
 @Generated("br.com.objectos.css.boot.CssBoot")
 public final class SmallerKeyword extends StandardKeyword implements FontSizeValue {
-
   static final SmallerKeyword INSTANCE = new SmallerKeyword();
 
   private SmallerKeyword() {
     super(222, "smaller", "smaller");
   }
-
 }

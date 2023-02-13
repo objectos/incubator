@@ -5,11 +5,9 @@ import br.com.objectos.css.type.ResizeValue;
 
 @Generated("br.com.objectos.css.boot.CssBoot")
 public final class HorizontalKeyword extends StandardKeyword implements ResizeValue {
-
   static final HorizontalKeyword INSTANCE = new HorizontalKeyword();
 
   private HorizontalKeyword() {
     super(102, "horizontal", "horizontal");
   }
-
 }

@@ -16,11 +16,9 @@ import br.com.objectos.css.type.WhiteSpaceValue;
 
 @Generated("br.com.objectos.css.boot.CssBoot")
 public final class NormalKeyword extends StandardKeyword implements AlignContentValue, AlignItemsValue, AlignSelfValue, ContentValue, FontStyleValue, FontVariantCss21Value, FontWeightValue, JustifyContentValue, JustifyItemsValue, JustifySelfValue, LineHeightValue, WhiteSpaceValue {
-
   static final NormalKeyword INSTANCE = new NormalKeyword();
 
   private NormalKeyword() {
     super(167, "normal", "normal");
   }
-
 }

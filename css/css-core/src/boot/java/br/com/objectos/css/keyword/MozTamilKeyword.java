@@ -5,11 +5,9 @@ import br.com.objectos.css.type.CounterStyleValue;
 
 @Generated("br.com.objectos.css.boot.CssBoot")
 public final class MozTamilKeyword extends StandardKeyword implements CounterStyleValue {
-
   static final MozTamilKeyword INSTANCE = new MozTamilKeyword();
 
   private MozTamilKeyword() {
     super(14, "mozTamil", "-moz-tamil");
   }
-
 }

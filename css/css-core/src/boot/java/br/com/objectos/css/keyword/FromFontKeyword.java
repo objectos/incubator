@@ -5,11 +5,9 @@ import br.com.objectos.css.type.TextDecorationThicknessValue;
 
 @Generated("br.com.objectos.css.boot.CssBoot")
 public final class FromFontKeyword extends StandardKeyword implements TextDecorationThicknessValue {
-
   static final FromFontKeyword INSTANCE = new FromFontKeyword();
 
   private FromFontKeyword() {
     super(85, "fromFont", "from-font");
   }
-
 }

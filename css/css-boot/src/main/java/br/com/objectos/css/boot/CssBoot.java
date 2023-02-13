@@ -22,14 +22,13 @@ import br.com.objectos.code.annotations.Generated;
 import br.com.objectos.code.java.declaration.AnnotationCode;
 import br.com.objectos.code.java.io.JavaFile;
 import br.com.objectos.css.boot.spec.CssSpecDsl;
+import br.com.objectos.css.boot.spec.CssStep;
 import br.com.objectos.css.boot.spec.StepAdapter;
-import br.com.objectos.fs.Directory;
-import br.com.objectos.fs.LocalFs;
-import java.io.File;
 import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import objectos.code.JavaSink;
 import objectos.code.JavaTemplate;
 
 public class CssBoot extends StepAdapter {
@@ -39,47 +38,50 @@ public class CssBoot extends StepAdapter {
     l(CssBoot.class.getCanonicalName())
   );
 
-  private final Path srcDirectory;
+  private final JavaSink sink;
 
-  CssBoot(Path srcDirectory) {
-    this.srcDirectory = srcDirectory;
+  CssBoot(JavaSink sink) {
+    this.sink = sink;
   }
 
   public static void main(String[] args) throws IOException {
-    String srcDirectoryPath;
-    srcDirectoryPath = args[0];
+    var srcDirectoryPath = args[0];
 
-    Path resolved;
-    resolved = Path.of(srcDirectoryPath);
+    var resolved = Path.of(srcDirectoryPath);
 
     Files.createDirectories(resolved);
 
-    CssBoot boot = new CssBoot(resolved);
+    var sink = JavaSink.ofDirectory(
+      resolved,
+      JavaSink.overwriteExisting()
+    );
+
+    var boot = new CssBoot(sink);
 
     boot.execute();
   }
 
   @Override
   public final void write(JavaTemplate template) {
-    throw new UnsupportedOperationException("Implement me");
-  }
-
-  @Override
-  public final void writeJavaFile(JavaFile javaFile) {
     try {
-      File file = srcDirectory.toFile();
-      Directory dir = LocalFs.getDirectory(file);
-      javaFile.writeTo(dir);
+      sink.write(template);
     } catch (IOException e) {
       throw new UncheckedIOException(e);
     }
   }
 
-  private void execute() {
-    CssStep step = new CssStep(this);
-    CssSpecDsl dsl = new CssSpecDsl(step);
+  @Override
+  public final void writeJavaFile(JavaFile javaFile) {
+    throw new UnsupportedOperationException();
+  }
 
-    CssModule module = new CssModule();
+  private void execute() {
+    var step = new CssStep(this);
+
+    var dsl = new CssSpecDsl(step);
+
+    var module = new CssModule();
+
     module.acceptCssSpecDsl(dsl);
 
     dsl.execute();

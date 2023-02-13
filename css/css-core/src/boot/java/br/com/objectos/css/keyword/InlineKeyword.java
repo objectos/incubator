@@ -6,11 +6,9 @@ import br.com.objectos.css.type.ResizeValue;
 
 @Generated("br.com.objectos.css.boot.CssBoot")
 public final class InlineKeyword extends StandardKeyword implements DisplayOutsideValue, ResizeValue {
-
   static final InlineKeyword INSTANCE = new InlineKeyword();
 
   private InlineKeyword() {
     super(106, "inline", "inline");
   }
-
 }

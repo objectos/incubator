@@ -5,11 +5,9 @@ import br.com.objectos.css.type.CursorValue;
 
 @Generated("br.com.objectos.css.boot.CssBoot")
 public final class ColResizeKeyword extends StandardKeyword implements CursorValue {
-
   static final ColResizeKeyword INSTANCE = new ColResizeKeyword();
 
   private ColResizeKeyword() {
     super(48, "colResize", "col-resize");
   }
-
 }

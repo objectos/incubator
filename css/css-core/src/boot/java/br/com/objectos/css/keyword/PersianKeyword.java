@@ -5,11 +5,9 @@ import br.com.objectos.css.type.CounterStyleValue;
 
 @Generated("br.com.objectos.css.boot.CssBoot")
 public final class PersianKeyword extends StandardKeyword implements CounterStyleValue {
-
   static final PersianKeyword INSTANCE = new PersianKeyword();
 
   private PersianKeyword() {
     super(180, "persian", "persian");
   }
-
 }

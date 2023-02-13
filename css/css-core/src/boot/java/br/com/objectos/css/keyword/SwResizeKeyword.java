@@ -5,11 +5,9 @@ import br.com.objectos.css.type.CursorValue;
 
 @Generated("br.com.objectos.css.boot.CssBoot")
 public final class SwResizeKeyword extends StandardKeyword implements CursorValue {
-
   static final SwResizeKeyword INSTANCE = new SwResizeKeyword();
 
   private SwResizeKeyword() {
     super(238, "swResize", "sw-resize");
   }
-
 }

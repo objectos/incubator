@@ -7,11 +7,9 @@ import br.com.objectos.css.type.TextAlignValue;
 
 @Generated("br.com.objectos.css.boot.CssBoot")
 public final class StartKeyword extends StandardKeyword implements ContentPosition, SelfPosition, TextAlignValue {
-
   static final StartKeyword INSTANCE = new StartKeyword();
 
   private StartKeyword() {
     super(231, "start", "start");
   }
-
 }

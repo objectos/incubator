@@ -5,11 +5,9 @@ import br.com.objectos.css.type.CounterStyleValue;
 
 @Generated("br.com.objectos.css.boot.CssBoot")
 public final class MozGujaratiKeyword extends StandardKeyword implements CounterStyleValue {
-
   static final MozGujaratiKeyword INSTANCE = new MozGujaratiKeyword();
 
   private MozGujaratiKeyword() {
     super(5, "mozGujarati", "-moz-gujarati");
   }
-
 }

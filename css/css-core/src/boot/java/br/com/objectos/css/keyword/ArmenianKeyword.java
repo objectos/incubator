@@ -5,11 +5,9 @@ import br.com.objectos.css.type.CounterStyleValue;
 
 @Generated("br.com.objectos.css.boot.CssBoot")
 public final class ArmenianKeyword extends StandardKeyword implements CounterStyleValue {
-
   static final ArmenianKeyword INSTANCE = new ArmenianKeyword();
 
   private ArmenianKeyword() {
     super(21, "armenian", "armenian");
   }
-
 }

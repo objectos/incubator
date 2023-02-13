@@ -5,11 +5,9 @@ import br.com.objectos.css.type.SystemFontValue;
 
 @Generated("br.com.objectos.css.boot.CssBoot")
 public final class StatusBarKeyword extends StandardKeyword implements SystemFontValue {
-
   static final StatusBarKeyword INSTANCE = new StatusBarKeyword();
 
   private StatusBarKeyword() {
     super(233, "statusBar", "status-bar");
   }
-
 }

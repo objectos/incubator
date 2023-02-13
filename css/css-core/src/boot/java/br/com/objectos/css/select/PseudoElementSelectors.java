@@ -5,9 +5,8 @@ import br.com.objectos.code.annotations.Ignore;
 import objectos.util.GrowableMap;
 import objectos.util.UnmodifiableMap;
 
-@Generated("br.com.objectos.css.boot.select.PseudoElementSelectorsGen")
+@Generated("br.com.objectos.css.boot.CssBoot")
 public final class PseudoElementSelectors {
-
   public static final PseudoElementSelector AFTER = new PseudoElementSelector(0, "after");
 
   public static final PseudoElementSelector BACKDROP = new PseudoElementSelector(1, "backdrop");
@@ -40,7 +39,24 @@ public final class PseudoElementSelectors {
 
   public static final PseudoElementSelector _WEBKIT_FILE_UPLOAD_BUTTON = new PseudoElementSelector(15, "-webkit-file-upload-button");
 
-  private static final PseudoElementSelector[] ARRAY = new PseudoElementSelector[] {AFTER, BACKDROP, BEFORE, CUE, FIRST_LETTER, FIRST_LINE, GRAMMAR_ERROR, MARKER, PLACEHOLDER, SELECTION, SPELLING_ERROR, _MOZ_FOCUS_INNER, _WEBKIT_INNER_SPIN_BUTTON, _WEBKIT_OUTER_SPIN_BUTTON, _WEBKIT_SEARCH_DECORATION, _WEBKIT_FILE_UPLOAD_BUTTON};
+  private static final PseudoElementSelector[] ARRAY = {
+    AFTER,
+    BACKDROP,
+    BEFORE,
+    CUE,
+    FIRST_LETTER,
+    FIRST_LINE,
+    GRAMMAR_ERROR,
+    MARKER,
+    PLACEHOLDER,
+    SELECTION,
+    SPELLING_ERROR,
+    _MOZ_FOCUS_INNER,
+    _WEBKIT_INNER_SPIN_BUTTON,
+    _WEBKIT_OUTER_SPIN_BUTTON,
+    _WEBKIT_SEARCH_DECORATION,
+    _WEBKIT_FILE_UPLOAD_BUTTON
+  };
 
   private static final UnmodifiableMap<String, PseudoElementSelector> MAP = buildMap();
 
@@ -57,7 +73,7 @@ public final class PseudoElementSelectors {
   }
 
   private static UnmodifiableMap<String, PseudoElementSelector> buildMap() {
-    GrowableMap<String, PseudoElementSelector> m = new GrowableMap<>();
+    var m = new GrowableMap<String, PseudoElementSelector>();
     m.put("after", AFTER);
     m.put("backdrop", BACKDROP);
     m.put("before", BEFORE);
@@ -76,5 +92,4 @@ public final class PseudoElementSelectors {
     m.put("-webkit-file-upload-button", _WEBKIT_FILE_UPLOAD_BUTTON);
     return m.toUnmodifiableMap();
   }
-
 }

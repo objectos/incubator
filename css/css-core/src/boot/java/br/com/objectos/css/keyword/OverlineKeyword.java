@@ -5,11 +5,9 @@ import br.com.objectos.css.type.TextDecorationLineKind;
 
 @Generated("br.com.objectos.css.boot.CssBoot")
 public final class OverlineKeyword extends StandardKeyword implements TextDecorationLineKind {
-
   static final OverlineKeyword INSTANCE = new OverlineKeyword();
 
   private OverlineKeyword() {
     super(178, "overline", "overline");
   }
-
 }

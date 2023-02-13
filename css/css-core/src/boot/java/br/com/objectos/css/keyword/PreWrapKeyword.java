@@ -5,11 +5,9 @@ import br.com.objectos.css.type.WhiteSpaceValue;
 
 @Generated("br.com.objectos.css.boot.CssBoot")
 public final class PreWrapKeyword extends StandardKeyword implements WhiteSpaceValue {
-
   static final PreWrapKeyword INSTANCE = new PreWrapKeyword();
 
   private PreWrapKeyword() {
     super(184, "preWrap", "pre-wrap");
   }
-
 }

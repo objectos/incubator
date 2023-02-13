@@ -5,11 +5,9 @@ import br.com.objectos.css.type.DisplayLegacyValue;
 
 @Generated("br.com.objectos.css.boot.CssBoot")
 public final class InlineBlockKeyword extends StandardKeyword implements DisplayLegacyValue {
-
   static final InlineBlockKeyword INSTANCE = new InlineBlockKeyword();
 
   private InlineBlockKeyword() {
     super(107, "inlineBlock", "inline-block");
   }
-
 }

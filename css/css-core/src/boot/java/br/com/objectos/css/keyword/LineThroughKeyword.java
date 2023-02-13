@@ -5,11 +5,9 @@ import br.com.objectos.css.type.TextDecorationLineKind;
 
 @Generated("br.com.objectos.css.boot.CssBoot")
 public final class LineThroughKeyword extends StandardKeyword implements TextDecorationLineKind {
-
   static final LineThroughKeyword INSTANCE = new LineThroughKeyword();
 
   private LineThroughKeyword() {
     super(134, "lineThrough", "line-through");
   }
-
 }

@@ -5,11 +5,9 @@ import br.com.objectos.css.type.CounterStyleValue;
 
 @Generated("br.com.objectos.css.boot.CssBoot")
 public final class CircleKeyword extends StandardKeyword implements CounterStyleValue {
-
   static final CircleKeyword INSTANCE = new CircleKeyword();
 
   private CircleKeyword() {
     super(41, "circle", "circle");
   }
-
 }

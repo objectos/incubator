@@ -6,11 +6,9 @@ import br.com.objectos.css.type.OverflowValue;
 
 @Generated("br.com.objectos.css.boot.CssBoot")
 public final class HiddenKeyword extends StandardKeyword implements LineStyleValue, OverflowValue {
-
   static final HiddenKeyword INSTANCE = new HiddenKeyword();
 
   private HiddenKeyword() {
     super(99, "hidden", "hidden");
   }
-
 }

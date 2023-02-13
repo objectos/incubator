@@ -6,11 +6,9 @@ import br.com.objectos.css.type.VerticalAlignValue;
 
 @Generated("br.com.objectos.css.boot.CssBoot")
 public final class TopKeyword extends StandardKeyword implements BackgroundPositionValue, VerticalAlignValue {
-
   static final TopKeyword INSTANCE = new TopKeyword();
 
   private TopKeyword() {
     super(259, "top", "top");
   }
-
 }

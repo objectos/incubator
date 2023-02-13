@@ -5,11 +5,9 @@ import br.com.objectos.css.type.LineStyleValue;
 
 @Generated("br.com.objectos.css.boot.CssBoot")
 public final class GrooveKeyword extends StandardKeyword implements LineStyleValue {
-
   static final GrooveKeyword INSTANCE = new GrooveKeyword();
 
   private GrooveKeyword() {
     super(93, "groove", "groove");
   }
-
 }

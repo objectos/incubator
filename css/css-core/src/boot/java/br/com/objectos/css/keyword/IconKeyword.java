@@ -5,11 +5,9 @@ import br.com.objectos.css.type.SystemFontValue;
 
 @Generated("br.com.objectos.css.boot.CssBoot")
 public final class IconKeyword extends StandardKeyword implements SystemFontValue {
-
   static final IconKeyword INSTANCE = new IconKeyword();
 
   private IconKeyword() {
     super(103, "icon", "icon");
   }
-
 }

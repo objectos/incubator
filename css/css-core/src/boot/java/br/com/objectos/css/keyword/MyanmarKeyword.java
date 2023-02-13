@@ -5,11 +5,9 @@ import br.com.objectos.css.type.CounterStyleValue;
 
 @Generated("br.com.objectos.css.boot.CssBoot")
 public final class MyanmarKeyword extends StandardKeyword implements CounterStyleValue {
-
   static final MyanmarKeyword INSTANCE = new MyanmarKeyword();
 
   private MyanmarKeyword() {
     super(158, "myanmar", "myanmar");
   }
-
 }

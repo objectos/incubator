@@ -5,11 +5,9 @@ import br.com.objectos.css.type.FontStyleValue;
 
 @Generated("br.com.objectos.css.boot.CssBoot")
 public final class ObliqueKeyword extends StandardKeyword implements FontStyleValue {
-
   static final ObliqueKeyword INSTANCE = new ObliqueKeyword();
 
   private ObliqueKeyword() {
     super(173, "oblique", "oblique");
   }
-
 }

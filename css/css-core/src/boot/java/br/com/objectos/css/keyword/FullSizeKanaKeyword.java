@@ -5,11 +5,9 @@ import br.com.objectos.css.type.TextTransformValue;
 
 @Generated("br.com.objectos.css.boot.CssBoot")
 public final class FullSizeKanaKeyword extends StandardKeyword implements TextTransformValue {
-
   static final FullSizeKanaKeyword INSTANCE = new FullSizeKanaKeyword();
 
   private FullSizeKanaKeyword() {
     super(86, "fullSizeKana", "full-size-kana");
   }
-
 }

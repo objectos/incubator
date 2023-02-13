@@ -5,11 +5,9 @@ import br.com.objectos.css.type.CounterStyleValue;
 
 @Generated("br.com.objectos.css.boot.CssBoot")
 public final class JapaneseFormalKeyword extends StandardKeyword implements CounterStyleValue {
-
   static final JapaneseFormalKeyword INSTANCE = new JapaneseFormalKeyword();
 
   private JapaneseFormalKeyword() {
     super(117, "japaneseFormal", "japanese-formal");
   }
-
 }

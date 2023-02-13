@@ -5,11 +5,9 @@ import br.com.objectos.css.type.CounterStyleValue;
 
 @Generated("br.com.objectos.css.boot.CssBoot")
 public final class DevanagariKeyword extends StandardKeyword implements CounterStyleValue {
-
   static final DevanagariKeyword INSTANCE = new DevanagariKeyword();
 
   private DevanagariKeyword() {
     super(65, "devanagari", "devanagari");
   }
-
 }

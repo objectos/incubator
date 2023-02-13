@@ -5,11 +5,9 @@ import br.com.objectos.css.type.CounterStyleValue;
 
 @Generated("br.com.objectos.css.boot.CssBoot")
 public final class SquareKeyword extends StandardKeyword implements CounterStyleValue {
-
   static final SquareKeyword INSTANCE = new SquareKeyword();
 
   private SquareKeyword() {
     super(229, "square", "square");
   }
-
 }

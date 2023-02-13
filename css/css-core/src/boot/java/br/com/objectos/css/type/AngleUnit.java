@@ -5,7 +5,6 @@ import java.util.Locale;
 
 @Generated("br.com.objectos.css.boot.CssBoot")
 public enum AngleUnit {
-
   DEG,
 
   GRAD,
@@ -37,5 +36,4 @@ public enum AngleUnit {
   public final String getName() {
     return name;
   }
-
 }

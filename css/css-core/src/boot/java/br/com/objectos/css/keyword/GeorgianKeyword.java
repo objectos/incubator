@@ -5,11 +5,9 @@ import br.com.objectos.css.type.CounterStyleValue;
 
 @Generated("br.com.objectos.css.boot.CssBoot")
 public final class GeorgianKeyword extends StandardKeyword implements CounterStyleValue {
-
   static final GeorgianKeyword INSTANCE = new GeorgianKeyword();
 
   private GeorgianKeyword() {
     super(88, "georgian", "georgian");
   }
-
 }

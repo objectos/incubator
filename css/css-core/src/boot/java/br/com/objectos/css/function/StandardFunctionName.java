@@ -6,7 +6,6 @@ import objectos.util.UnmodifiableMap;
 
 @Generated("br.com.objectos.css.boot.CssBoot")
 public enum StandardFunctionName implements FunctionName {
-
   ROTATE("rotate", "rotate"),
 
   ROTATEX("rotateX", "rotateX"),
@@ -37,7 +36,7 @@ public enum StandardFunctionName implements FunctionName {
   }
 
   private static UnmodifiableMap<String, StandardFunctionName> buildMap() {
-    GrowableMap<String, StandardFunctionName> m = new GrowableMap<>();
+    var m = new GrowableMap<String, StandardFunctionName>();
     m.put("rotate", ROTATE);
     m.put("rotateX", ROTATEX);
     m.put("rotateY", ROTATEY);
@@ -62,5 +61,4 @@ public enum StandardFunctionName implements FunctionName {
   public final String getName() {
     return name;
   }
-
 }

@@ -7,11 +7,9 @@ import br.com.objectos.css.type.TextAlignValue;
 
 @Generated("br.com.objectos.css.boot.CssBoot")
 public final class EndKeyword extends StandardKeyword implements ContentPosition, SelfPosition, TextAlignValue {
-
   static final EndKeyword INSTANCE = new EndKeyword();
 
   private EndKeyword() {
     super(73, "end", "end");
   }
-
 }

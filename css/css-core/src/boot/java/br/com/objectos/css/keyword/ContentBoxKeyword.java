@@ -6,11 +6,9 @@ import br.com.objectos.css.type.BoxValue;
 
 @Generated("br.com.objectos.css.boot.CssBoot")
 public final class ContentBoxKeyword extends StandardKeyword implements BoxSizingValue, BoxValue {
-
   static final ContentBoxKeyword INSTANCE = new ContentBoxKeyword();
 
   private ContentBoxKeyword() {
     super(54, "contentBox", "content-box");
   }
-
 }

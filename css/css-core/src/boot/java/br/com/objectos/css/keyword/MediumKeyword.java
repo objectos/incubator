@@ -7,11 +7,9 @@ import br.com.objectos.css.type.OutlineWidthValue;
 
 @Generated("br.com.objectos.css.boot.CssBoot")
 public final class MediumKeyword extends StandardKeyword implements FontSizeValue, LineWidthValue, OutlineWidthValue {
-
   static final MediumKeyword INSTANCE = new MediumKeyword();
 
   private MediumKeyword() {
     super(147, "medium", "medium");
   }
-
 }

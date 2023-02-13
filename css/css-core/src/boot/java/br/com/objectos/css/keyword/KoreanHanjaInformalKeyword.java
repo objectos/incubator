@@ -5,11 +5,9 @@ import br.com.objectos.css.type.CounterStyleValue;
 
 @Generated("br.com.objectos.css.boot.CssBoot")
 public final class KoreanHanjaInformalKeyword extends StandardKeyword implements CounterStyleValue {
-
   static final KoreanHanjaInformalKeyword INSTANCE = new KoreanHanjaInformalKeyword();
 
   private KoreanHanjaInformalKeyword() {
     super(126, "koreanHanjaInformal", "korean-hanja-informal");
   }
-
 }

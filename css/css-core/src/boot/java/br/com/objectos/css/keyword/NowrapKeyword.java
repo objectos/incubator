@@ -6,11 +6,9 @@ import br.com.objectos.css.type.WhiteSpaceValue;
 
 @Generated("br.com.objectos.css.boot.CssBoot")
 public final class NowrapKeyword extends StandardKeyword implements FlexWrapValue, WhiteSpaceValue {
-
   static final NowrapKeyword INSTANCE = new NowrapKeyword();
 
   private NowrapKeyword() {
     super(169, "nowrap", "nowrap");
   }
-
 }

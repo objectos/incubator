@@ -5,11 +5,9 @@ import br.com.objectos.css.type.BackgroundAttachmentValue;
 
 @Generated("br.com.objectos.css.boot.CssBoot")
 public final class LocalKeyword extends StandardKeyword implements BackgroundAttachmentValue {
-
   static final LocalKeyword INSTANCE = new LocalKeyword();
 
   private LocalKeyword() {
     super(137, "local", "local");
   }
-
 }

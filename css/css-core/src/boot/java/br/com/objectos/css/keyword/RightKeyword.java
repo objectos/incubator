@@ -11,11 +11,9 @@ import br.com.objectos.css.type.TextAlignValue;
 
 @Generated("br.com.objectos.css.boot.CssBoot")
 public final class RightKeyword extends StandardKeyword implements BackgroundPositionValue, ClearValue, ContentPositionOrLeftOrRight, FloatValue, JustifyLegacyValue, SelfPositionOrLeftOrRight, TextAlignValue {
-
   static final RightKeyword INSTANCE = new RightKeyword();
 
   private RightKeyword() {
     super(194, "right", "right");
   }
-
 }

@@ -5,9 +5,8 @@ import br.com.objectos.code.annotations.Ignore;
 import objectos.util.GrowableMap;
 import objectos.util.UnmodifiableMap;
 
-@Generated("br.com.objectos.css.boot.select.TypeSelectorsGen")
+@Generated("br.com.objectos.css.boot.CssBoot")
 public final class TypeSelectors {
-
   public static final TypeSelector a = new TypeSelector(0, "a");
 
   public static final TypeSelector abbr = new TypeSelector(1, "abbr");
@@ -154,7 +153,81 @@ public final class TypeSelectors {
 
   public static final TypeSelector ul = new TypeSelector(72, "ul");
 
-  private static final TypeSelector[] ARRAY = new TypeSelector[] {a, abbr, article, b, blockquote, body, br, button, clipPath, code, dd, defs, details, div, dl, dt, em, fieldset, figure, footer, form, g, h1, h2, h3, h4, h5, h6, head, header, hgroup, hr, html, img, input, kbd, label, legend, li, link, main, menu, meta, nav, ol, optgroup, option, p, path, pre, progress, samp, script, section, select, small, span, strong, style, sub, summary, sup, svg, table, tbody, td, template, textarea, th, thead, title, tr, ul};
+  private static final TypeSelector[] ARRAY = {
+    a,
+    abbr,
+    article,
+    b,
+    blockquote,
+    body,
+    br,
+    button,
+    clipPath,
+    code,
+    dd,
+    defs,
+    details,
+    div,
+    dl,
+    dt,
+    em,
+    fieldset,
+    figure,
+    footer,
+    form,
+    g,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    head,
+    header,
+    hgroup,
+    hr,
+    html,
+    img,
+    input,
+    kbd,
+    label,
+    legend,
+    li,
+    link,
+    main,
+    menu,
+    meta,
+    nav,
+    ol,
+    optgroup,
+    option,
+    p,
+    path,
+    pre,
+    progress,
+    samp,
+    script,
+    section,
+    select,
+    small,
+    span,
+    strong,
+    style,
+    sub,
+    summary,
+    sup,
+    svg,
+    table,
+    tbody,
+    td,
+    template,
+    textarea,
+    th,
+    thead,
+    title,
+    tr,
+    ul
+  };
 
   private static final UnmodifiableMap<String, TypeSelector> MAP = buildMap();
 
@@ -171,7 +244,7 @@ public final class TypeSelectors {
   }
 
   private static UnmodifiableMap<String, TypeSelector> buildMap() {
-    GrowableMap<String, TypeSelector> m = new GrowableMap<>();
+    var m = new GrowableMap<String, TypeSelector>();
     m.put("a", a);
     m.put("abbr", abbr);
     m.put("article", article);
@@ -247,5 +320,4 @@ public final class TypeSelectors {
     m.put("ul", ul);
     return m.toUnmodifiableMap();
   }
-
 }

@@ -5,11 +5,9 @@ import br.com.objectos.css.type.CursorValue;
 
 @Generated("br.com.objectos.css.boot.CssBoot")
 public final class VerticalTextKeyword extends StandardKeyword implements CursorValue {
-
   static final VerticalTextKeyword INSTANCE = new VerticalTextKeyword();
 
   private VerticalTextKeyword() {
     super(271, "verticalText", "vertical-text");
   }
-
 }
