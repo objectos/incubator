@@ -41,9 +41,6 @@ public class NonVoidElementValueStepTest {
       """
       package br.com.objectos.html.spi.type;
 
-      import br.com.objectos.code.annotations.Generated;
-
-      @Generated("br.com.objectos.html.boot.HtmlBoot")
       public interface NonVoidElementValue extends DivValue, SpanValue {}
       """
     );

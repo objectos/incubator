@@ -15,7 +15,6 @@
  */
 package br.com.objectos.html.boot;
 
-import br.com.objectos.code.annotations.Generated;
 import br.com.objectos.html.boot.spec.AttributeKind;
 import br.com.objectos.html.boot.spec.AttributeSpec;
 import br.com.objectos.html.boot.spec.ElementSpec;
@@ -31,7 +30,6 @@ final class GeneratedAbstractTemplateStep extends ThisTemplate {
 
     autoImports();
 
-    at(t(Generated.class), s(HtmlBoot.class.getCanonicalName()));
     _abstract(); _class("GeneratedAbstractTemplate"); body(
       include(this::elementMethods),
 

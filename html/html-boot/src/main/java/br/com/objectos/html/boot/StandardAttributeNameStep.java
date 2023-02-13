@@ -27,7 +27,6 @@ final class StandardAttributeNameStep extends ThisTemplate {
 
     autoImports();
 
-    generatedAnnotation();
     _public(); _abstract(); _class("StandardAttributeName"); _implements();
     t(attr, "AttributeName"); t(spi_type, "Value"); body(
       include(this::constants),

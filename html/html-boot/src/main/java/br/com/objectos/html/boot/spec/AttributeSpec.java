@@ -15,7 +15,7 @@
  */
 package br.com.objectos.html.boot.spec;
 
-import br.com.objectos.code.java.JavaNames;
+import br.com.objectos.html.boot.util.JavaNames;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.Set;

@@ -49,7 +49,6 @@ public class GeneratedAbstractTemplateStepTest {
       """
       package br.com.objectos.html.tmpl;
 
-      import br.com.objectos.code.annotations.Generated;
       import br.com.objectos.html.attribute.StandardAttributeName;
       import br.com.objectos.html.element.ElementName;
       import br.com.objectos.html.element.StandardElementName;
@@ -58,7 +57,6 @@ public class GeneratedAbstractTemplateStepTest {
       import br.com.objectos.html.spi.type.MetaValue;
       import br.com.objectos.html.spi.type.Value;
 
-      @Generated("br.com.objectos.html.boot.HtmlBoot")
       abstract class GeneratedAbstractTemplate {
         public final ElementName div(DivValue... values) {
           return addStandardElement(StandardElementName.DIV, values);
@@ -112,7 +110,6 @@ public class GeneratedAbstractTemplateStepTest {
       """
       package br.com.objectos.html.tmpl;
 
-      import br.com.objectos.code.annotations.Generated;
       import br.com.objectos.html.attribute.StandardAttributeName;
       import br.com.objectos.html.attribute.StandardAttributeName.B;
       import br.com.objectos.html.attribute.StandardAttributeName.S;
@@ -120,7 +117,6 @@ public class GeneratedAbstractTemplateStepTest {
       import br.com.objectos.html.element.StandardElementName;
       import br.com.objectos.html.spi.type.Value;
 
-      @Generated("br.com.objectos.html.boot.HtmlBoot")
       abstract class GeneratedAbstractTemplate {
         public final B b() {
           return addStandardAttribute(StandardAttributeName.B);

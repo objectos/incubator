@@ -40,11 +40,9 @@ public class StandardElementNameStepTest {
       """
       package br.com.objectos.html.element;
 
-      import br.com.objectos.code.annotations.Generated;
       import br.com.objectos.html.spi.tmpl.Marker;
       import br.com.objectos.html.spi.tmpl.Renderer;
 
-      @Generated("br.com.objectos.html.boot.HtmlBoot")
       public enum StandardElementName implements ElementName {
         DIV(ElementKind.NORMAL, "div"),
 

@@ -15,11 +15,7 @@
  */
 package br.com.objectos.html.boot.spec;
 
-import static br.com.objectos.code.java.Java.id;
-
-import br.com.objectos.code.java.JavaNames;
-import br.com.objectos.code.java.expression.Identifier;
-import br.com.objectos.code.java.expression.IdentifierBuilder;
+import br.com.objectos.html.boot.util.JavaNames;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -33,7 +29,6 @@ public class ElementSpec
   private ElementAttributeSpec attribute;
 
   private ContentModel childSpec = ContentModel.start();
-  private final Identifier constantNameId;
   private final SpecDsl dsl;
 
   private boolean hasEndTag = true;
@@ -46,7 +41,6 @@ public class ElementSpec
     this.dsl = dsl;
     this.name = name;
     constantName = JavaNames.toIdentifier(name.toUpperCase());
-    constantNameId = id(constantName);
   }
 
   // DSL methods
@@ -106,10 +100,6 @@ public class ElementSpec
     return name.compareTo(o.name);
   }
 
-  public final Identifier constantName() {
-    return constantNameId;
-  }
-
   public final ElementSpec contentModel(CategorySpec category) {
     stringKindIfNecessary();
     childSpec = childSpec.category(category);
@@ -159,13 +149,6 @@ public class ElementSpec
 
   public final String methodName() {
     return name;
-  }
-
-  public final Identifier methodName(int level) {
-    return new IdentifierBuilder()
-        .repeat('_', level * 2)
-        .append(methodName())
-        .build();
   }
 
   @Override

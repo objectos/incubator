@@ -15,8 +15,6 @@
  */
 package br.com.objectos.html.boot;
 
-import br.com.objectos.code.annotations.Generated;
-
 final class AnyElementValueStep extends ThisTemplate {
 
   @Override
@@ -26,7 +24,6 @@ final class AnyElementValueStep extends ThisTemplate {
 
     autoImports();
 
-    at(t(Generated.class), s(HtmlBoot.class.getCanonicalName()));
     _public(); _interface("AnyElementValue"); _extends(); extendsClause(); body();
     // @formatter:on
   }

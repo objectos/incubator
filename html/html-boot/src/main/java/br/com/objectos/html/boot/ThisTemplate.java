@@ -15,7 +15,6 @@
  */
 package br.com.objectos.html.boot;
 
-import br.com.objectos.code.annotations.Generated;
 import br.com.objectos.html.boot.spec.SpecDsl;
 import java.io.IOException;
 import objectos.code.JavaSink;
@@ -37,10 +36,6 @@ abstract class ThisTemplate extends JavaTemplate {
     this.spec = spec;
 
     sink.write(this);
-  }
-
-  final void generatedAnnotation() {
-    at(t(Generated.class), s(HtmlBoot.class.getCanonicalName()));
   }
 
 }

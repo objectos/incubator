@@ -19,8 +19,6 @@
 module br.com.objectos.html.boot {
   exports br.com.objectos.html.boot;
 
-  requires br.com.objectos.code;
-  requires br.com.objectos.code.annotations;
   requires objectos.code;
   requires objectos.lang;
   requires objectos.util;

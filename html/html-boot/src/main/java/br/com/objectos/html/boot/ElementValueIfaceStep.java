@@ -15,7 +15,6 @@
  */
 package br.com.objectos.html.boot;
 
-import br.com.objectos.code.annotations.Generated;
 import br.com.objectos.html.boot.spec.ElementSpec;
 import br.com.objectos.html.boot.spec.SpecDsl;
 import java.io.IOException;
@@ -41,7 +40,6 @@ final class ElementValueIfaceStep extends ThisTemplate {
 
     autoImports();
 
-    at(t(Generated.class), s(HtmlBoot.class.getCanonicalName()));
     _public(); _interface(element.valueSimpleName()); _extends(); t(spi_type, "Value"); body();
     // @formatter:on
   }

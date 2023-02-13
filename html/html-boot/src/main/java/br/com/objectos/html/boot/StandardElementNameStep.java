@@ -24,7 +24,6 @@ final class StandardElementNameStep extends ThisTemplate {
 
     autoImports();
 
-    generatedAnnotation();
     _public(); _enum("StandardElementName"); _implements(); t(elem, "ElementName"); body(
       include(this::enumConstants),
 
