@@ -62,9 +62,12 @@ public class KeywordName
   public final String simpleName;
 
   public final Identifier fieldName;
+
   private final Set<NamedClass> interfaces = new TreeSet<>();
 
-  private final String name;
+  public final Set<String> interfaceSet = new TreeSet<>();
+
+  public final String name;
 
   private KeywordName(String name, String fieldName) {
     this.name = name;
@@ -95,12 +98,20 @@ public class KeywordName
   }
 
   public final void acceptPritiveType(PrimitiveType type) {
-    interfaces.add(type.typeClassName());
+    var cn = type.typeClassName();
+
+    interfaces.add(cn);
+
+    interfaceSet.add(cn.getSimpleName());
   }
 
   @Override
   public final void acceptValueType(ValueType type) {
-    interfaces.add(type.className);
+    var cn = type.className;
+
+    interfaces.add(cn);
+
+    interfaceSet.add(cn.getSimpleName());
   }
 
   @Override
