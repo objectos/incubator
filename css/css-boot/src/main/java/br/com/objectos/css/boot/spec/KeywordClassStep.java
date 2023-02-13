@@ -52,7 +52,7 @@ final class KeywordClassStep extends ThisTemplate {
       id("INSTANCE"), _new(t(keyword, keywordName.simpleName)),
 
       _private(), constructor(), block(
-        _super(i(code++), s(keywordName.fieldName.name()), s(keywordName.name))
+        _super(i(code++), s(keywordName.fieldName), s(keywordName.name))
       )
     );
   }

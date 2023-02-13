@@ -15,8 +15,6 @@
  */
 package br.com.objectos.css.boot;
 
-import static br.com.objectos.code.java.Java.id;
-
 import br.com.objectos.code.annotations.Generated;
 import br.com.objectos.css.boot.keyword.KeywordName;
 import br.com.objectos.css.boot.spec.Source;
@@ -34,16 +32,16 @@ final class FloatPropertyModule extends AbstractPropertyModule {
     KeywordName right = keyword("right");
 
     property(
-        "float", id("floatTo"),
+      "float", "floatTo",
 
-        formal(
-            Source.MDN,
-            "left | right | none | inline-start | inline-end"
-        ),
+      formal(
+        Source.MDN,
+        "left | right | none | inline-start | inline-end"
+      ),
 
-        globalSig,
+      globalSig,
 
-        sig(t("FloatValue", left, right, none, inlineStart, inlineEnd), "value")
+      sig(t("FloatValue", left, right, none, inlineStart, inlineEnd), "value")
     );
   }
 

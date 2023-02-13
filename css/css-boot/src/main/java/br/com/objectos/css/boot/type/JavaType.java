@@ -15,45 +15,14 @@
  */
 package br.com.objectos.css.boot.type;
 
-import static br.com.objectos.code.java.Java.a;
-import static br.com.objectos.code.java.Java.t;
-
-import br.com.objectos.code.java.type.NamedArray;
-import br.com.objectos.code.java.type.NamedClass;
-import br.com.objectos.code.java.type.NamedPrimitive;
-import br.com.objectos.code.java.type.NamedType;
 import br.com.objectos.css.boot.property.ParameterType;
 
 public enum JavaType implements ParameterType {
 
-  INT(NamedPrimitive.INT),
+  INT,
 
-  DOUBLE(NamedPrimitive.DOUBLE),
+  DOUBLE,
 
-  STRING(t(String.class));
-
-  private final NamedArray arrayTypeName;
-
-  private final NamedType typeName;
-
-  private JavaType(NamedClass typeName) {
-    this.arrayTypeName = a(typeName);
-    this.typeName = typeName;
-  }
-
-  private JavaType(NamedPrimitive typeName) {
-    this.arrayTypeName = a(typeName);
-    this.typeName = typeName;
-  }
-
-  @Override
-  public final NamedArray toNamedArray() {
-    return arrayTypeName;
-  }
-
-  @Override
-  public final NamedType toNamedType() {
-    return typeName;
-  }
+  STRING;
 
 }

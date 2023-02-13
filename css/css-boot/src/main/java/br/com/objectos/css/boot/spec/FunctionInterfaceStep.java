@@ -39,7 +39,7 @@ final class FunctionInterfaceStep extends ThisTemplate {
     autoImports();
 
     _public();
-    _interface(functionName.getSingleDeclarationName().getSimpleName());
+    _interface(functionName.singleDeclarationSimpleName());
     superInterfaces();
     body();
   }

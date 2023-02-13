@@ -15,12 +15,6 @@
  */
 package br.com.objectos.css.boot;
 
-import static br.com.objectos.code.java.Java.annotation;
-import static br.com.objectos.code.java.Java.l;
-
-import br.com.objectos.code.annotations.Generated;
-import br.com.objectos.code.java.declaration.AnnotationCode;
-import br.com.objectos.code.java.io.JavaFile;
 import br.com.objectos.css.boot.spec.CssSpecDsl;
 import br.com.objectos.css.boot.spec.CssStep;
 import br.com.objectos.css.boot.spec.StepAdapter;
@@ -32,11 +26,6 @@ import objectos.code.JavaSink;
 import objectos.code.JavaTemplate;
 
 public class CssBoot extends StepAdapter {
-
-  public static final AnnotationCode GENERATED = annotation(
-    Generated.class,
-    l(CssBoot.class.getCanonicalName())
-  );
 
   private final JavaSink sink;
 
@@ -68,11 +57,6 @@ public class CssBoot extends StepAdapter {
     } catch (IOException e) {
       throw new UncheckedIOException(e);
     }
-  }
-
-  @Override
-  public final void writeJavaFile(JavaFile javaFile) {
-    throw new UnsupportedOperationException();
   }
 
   private void execute() {

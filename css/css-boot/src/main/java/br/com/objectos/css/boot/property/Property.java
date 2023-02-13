@@ -15,39 +15,19 @@
  */
 package br.com.objectos.css.boot.property;
 
-import static br.com.objectos.code.java.Java._extends;
-import static br.com.objectos.code.java.Java._interface;
-import static br.com.objectos.code.java.Java._protected;
-import static br.com.objectos.code.java.Java.id;
-import static br.com.objectos.code.java.Java.l;
-
-import br.com.objectos.code.java.JavaNames;
-import br.com.objectos.code.java.expression.ExpressionName;
-import br.com.objectos.code.java.expression.Identifier;
-import br.com.objectos.code.java.expression.Literal;
-import br.com.objectos.code.java.type.NamedClass;
 import br.com.objectos.css.boot.sheet.FunctionOrProperty;
-import br.com.objectos.css.boot.sheet.GeneratedStyleSheetStep;
 import br.com.objectos.css.boot.sheet.MethodSignature;
-import br.com.objectos.css.boot.sheet.SheetNames;
+import br.com.objectos.css.boot.util.JavaNames;
 import java.util.Locale;
 import objectos.lang.ToString;
 
 public class Property implements Comparable<Property>, FunctionOrProperty, ToString.Formattable {
 
-  private NamedClass declarationName;
-
-  private Identifier enumName;
-
-  private NamedClass hashDeclarationName;
-
   public final PropertyKind kind;
 
-  private Identifier methodName;
+  private String methodName;
 
   public final String name;
-
-  private Literal nameLiteral;
 
   public MethodSignature[] signatures;
 
@@ -56,22 +36,10 @@ public class Property implements Comparable<Property>, FunctionOrProperty, ToStr
     this.name = name;
   }
 
-  Property(PropertyKind kind, String name, Identifier methodName) {
+  Property(PropertyKind kind, String name, String methodName) {
     this(kind, name);
-    this.methodName = methodName;
-  }
 
-  public final void acceptGeneratedStyleSheetStep(GeneratedStyleSheetStep step) {
-    switch (kind) {
-      case STANDARD:
-        acceptGeneratedStyleSheetStep0Standard(step);
-        return;
-      case HASH:
-        acceptGeneratedStyleSheetStep0Hash(step);
-        return;
-      default:
-        throw new AssertionError("Unexpected kind: " + kind);
-    }
+    this.methodName = methodName;
   }
 
   @Override
@@ -85,7 +53,11 @@ public class Property implements Comparable<Property>, FunctionOrProperty, ToStr
   }
 
   @Override
-  public final String enumName() { return getEnumName().name(); }
+  public final String enumName() {
+    var uppercase = name.replace('-', '_').toUpperCase(Locale.US);
+
+    return JavaNames.toIdentifier(uppercase);
+  }
 
   @Override
   public final boolean equals(Object obj) {
@@ -107,51 +79,8 @@ public class Property implements Comparable<Property>, FunctionOrProperty, ToStr
     );
   }
 
-  public final Identifier getEnumName() {
-    if (enumName == null) {
-      enumName = getEnumName0();
-    }
-
-    return enumName;
-  }
-
-  @Override
-  public final Identifier getMethodName() {
-    if (methodName == null) {
-      methodName = getMethodName0();
-    }
-
-    return methodName;
-  }
-
-  @Override
-  public final NamedClass getMultiDeclarationName() {
-    if (hashDeclarationName == null) {
-      hashDeclarationName = getMultiDeclarationName0();
-    }
-
-    return hashDeclarationName;
-  }
-
   public final String getName() {
     return name;
-  }
-
-  public final Literal getNameLiteral() {
-    if (nameLiteral == null) {
-      nameLiteral = l(name);
-    }
-
-    return nameLiteral;
-  }
-
-  @Override
-  public final NamedClass getSingleDeclarationName() {
-    if (declarationName == null) {
-      declarationName = getSingleDeclarationName0();
-    }
-
-    return declarationName;
   }
 
   @Override
@@ -161,7 +90,11 @@ public class Property implements Comparable<Property>, FunctionOrProperty, ToStr
 
   @Override
   public final String methodName() {
-    return getMethodName().name();
+    if (methodName == null) {
+      methodName = JavaNames.toValidMethodName(name);
+    }
+
+    return methodName;
   }
 
   @Override
@@ -177,81 +110,8 @@ public class Property implements Comparable<Property>, FunctionOrProperty, ToStr
   }
 
   @Override
-  public final ExpressionName standardPropertyName() {
-    return PropertyNames.StandardPropertyName.id(getEnumName());
-  }
-
-  @Override
   public final String toString() {
     return ToString.of(this);
-  }
-
-  private void acceptGeneratedStyleSheetStep0Hash(GeneratedStyleSheetStep step) {
-    step.addType(
-      _interface(
-        _protected(), getMultiDeclarationName(),
-        _extends(SheetNames._Declaration)
-      )
-    );
-
-    step.addType(
-      _interface(
-        _protected(), getSingleDeclarationName(),
-        _extends(SheetNames._MultiDeclarationElement)
-      )
-    );
-
-    step.addAnyDeclarationExtends(
-      getMultiDeclarationName()
-    );
-    step.addAnyDeclarationExtends(
-      getSingleDeclarationName()
-    );
-  }
-
-  private void acceptGeneratedStyleSheetStep0Standard(GeneratedStyleSheetStep step) {
-    step.addType(
-      _interface(
-        _protected(), getSingleDeclarationName(),
-        _extends(SheetNames._Declaration)
-      )
-    );
-
-    step.addAnyDeclarationExtends(
-      getSingleDeclarationName()
-    );
-  }
-
-  private Identifier getEnumName0() {
-    String uppercase;
-    uppercase = name.replace('-', '_').toUpperCase(Locale.US);
-
-    String enumSimpleName;
-    enumSimpleName = JavaNames.toIdentifier(uppercase);
-
-    return id(enumSimpleName);
-  }
-
-  private Identifier getMethodName0() {
-    String javaName;
-    javaName = JavaNames.toValidMethodName(name);
-
-    return id(javaName);
-  }
-
-  private NamedClass getMultiDeclarationName0() {
-    String simpleName;
-    simpleName = JavaNames.toValidClassName(name + "MultiDeclaration");
-
-    return SheetNames._GeneratedStyleSheet.nestedClass(simpleName);
-  }
-
-  private NamedClass getSingleDeclarationName0() {
-    var singleSuffix = kind.getSingleSuffix();
-
-    var simpleName = JavaNames.toValidClassName(name + singleSuffix);
-
-    return SheetNames._GeneratedStyleSheet.nestedClass(simpleName);
   }
 
 }

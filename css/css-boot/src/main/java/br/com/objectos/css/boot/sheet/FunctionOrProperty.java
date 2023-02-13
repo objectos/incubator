@@ -15,34 +15,16 @@
  */
 package br.com.objectos.css.boot.sheet;
 
-import br.com.objectos.code.java.expression.ExpressionName;
-import br.com.objectos.code.java.expression.Identifier;
-import br.com.objectos.code.java.type.NamedClass;
-
 public interface FunctionOrProperty {
 
   String addMethodName();
 
   String enumName();
 
-  Identifier getMethodName();
+  String methodName();
 
-  NamedClass getMultiDeclarationName();
+  String multiDeclarationSimpleName();
 
-  NamedClass getSingleDeclarationName();
-
-  default String methodName() {
-    return getMethodName().name();
-  }
-
-  default String multiDeclarationSimpleName() {
-    return getMultiDeclarationName().getSimpleName();
-  }
-
-  default String singleDeclarationSimpleName() {
-    return getSingleDeclarationName().getSimpleName();
-  }
-
-  ExpressionName standardPropertyName();
+  String singleDeclarationSimpleName();
 
 }

@@ -16,7 +16,7 @@
 package br.com.objectos.css.boot.spec;
 
 import br.com.objectos.code.annotations.Ignore;
-import br.com.objectos.code.java.JavaNames;
+import br.com.objectos.css.boot.util.JavaNames;
 import java.util.List;
 import objectos.util.GrowableList;
 import objectos.util.GrowableMap;

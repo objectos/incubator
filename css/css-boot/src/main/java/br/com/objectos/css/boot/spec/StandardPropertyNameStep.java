@@ -133,20 +133,20 @@ final class StandardPropertyNameStep extends ThisTemplate {
 
   private void constants() {
     for (var property : propertyMap.values()) {
-      var enumName = property.getEnumName();
+      var enumName = property.enumName();
 
-      var methodName = property.getMethodName();
+      var methodName = property.methodName();
 
-      enumConstant(enumName.name(), s(methodName.name()), s(property.name));
+      enumConstant(enumName, s(methodName), s(property.name));
     }
   }
 
   private void mapStatements() {
     for (var property : propertyMap.values()) {
-      var enumName = property.getEnumName();
+      var enumName = property.enumName();
 
       n("m");
-      invoke("put", s(property.name), end(), n(enumName.name()));
+      invoke("put", s(property.name), end(), n(enumName));
       end();
     }
   }

@@ -15,11 +15,6 @@
  */
 package br.com.objectos.css.boot.spec;
 
-import static br.com.objectos.code.java.Java.javaFile;
-
-import br.com.objectos.code.java.declaration.PackageName;
-import br.com.objectos.code.java.declaration.TypeCode;
-import br.com.objectos.code.java.io.JavaFile;
 import objectos.code.JavaTemplate;
 
 public abstract class StepAdapter {
@@ -27,13 +22,5 @@ public abstract class StepAdapter {
   protected StepAdapter() {}
 
   public abstract void write(JavaTemplate template);
-
-  public abstract void writeJavaFile(JavaFile javaFile);
-
-  protected final void writeJavaFile(PackageName packageName, TypeCode code) {
-    writeJavaFile(
-      javaFile(packageName, code)
-    );
-  }
 
 }

@@ -24,7 +24,7 @@ import br.com.objectos.css.boot.type.ColorName;
 import br.com.objectos.css.boot.type.PrimitiveType;
 import br.com.objectos.css.boot.type.ValueType;
 
-public final class CssStep extends AbstractStep {
+public final class CssStep implements Step {
 
   private final AngleUnitStep angleUnitStep;
 
@@ -55,8 +55,6 @@ public final class CssStep extends AbstractStep {
   private final ValueTypeIfaceStep valueTypeIfaceStep;
 
   public CssStep(StepAdapter adapter) {
-    super(adapter);
-
     angleUnitStep = new AngleUnitStep(adapter);
 
     functionInterfaceStep = new FunctionInterfaceStep(adapter);

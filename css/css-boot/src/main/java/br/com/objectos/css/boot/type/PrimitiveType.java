@@ -15,21 +15,12 @@
  */
 package br.com.objectos.css.boot.type;
 
-import static br.com.objectos.code.java.Java._extends;
-import static br.com.objectos.code.java.Java.a;
-
-import br.com.objectos.code.java.declaration.ExtendsMany;
-import br.com.objectos.code.java.type.NamedArray;
-import br.com.objectos.code.java.type.NamedClass;
-import br.com.objectos.code.java.type.NamedType;
 import br.com.objectos.css.boot.property.ParameterType;
 import java.util.Set;
 import java.util.TreeSet;
 import objectos.lang.Check;
 
 public class PrimitiveType implements ParameterType, Value {
-
-  private final Set<NamedClass> interfaces = new TreeSet<>();
 
   private final Set<String> interfaceNames = new TreeSet<>();
 
@@ -49,33 +40,11 @@ public class PrimitiveType implements ParameterType, Value {
 
   @Override
   public final void acceptValueType(ValueType type) {
-    interfaces.add(type.className);
-
     interfaceNames.add(type.simpleName);
-  }
-
-  public final ExtendsMany extendsClause() {
-    interfaces.add(TypeNames._Value);
-
-    return _extends(interfaces);
   }
 
   public final Set<String> interfaceNames() {
     return interfaceNames;
-  }
-
-  @Override
-  public final NamedArray toNamedArray() {
-    return a(kind.typeClassName());
-  }
-
-  @Override
-  public final NamedType toNamedType() {
-    return kind.typeClassName();
-  }
-
-  public final NamedClass typeClassName() {
-    return kind.typeClassName();
   }
 
   public final String typeSimpleName() {

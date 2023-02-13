@@ -106,7 +106,7 @@ final class GeneratedColorStep extends ThisTemplate {
       _static();
       _final();
       t(type, "ColorName");
-      id(color.identifier.name());
+      id(color.identifier);
       _new(t(type, "ColorName"), i(code++), s(color.name));
     }
   }
@@ -124,7 +124,7 @@ final class GeneratedColorStep extends ThisTemplate {
 
   private void mapStatements() {
     for (var color : colorNames) {
-      code(n("m"), invoke("put", s(color.name), end(), n(color.identifier.name())), end());
+      code(n("m"), invoke("put", s(color.name), end(), n(color.identifier)), end());
     }
   }
 

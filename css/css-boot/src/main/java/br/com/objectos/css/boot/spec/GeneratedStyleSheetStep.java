@@ -15,7 +15,6 @@
  */
 package br.com.objectos.css.boot.spec;
 
-import br.com.objectos.code.java.JavaNames;
 import br.com.objectos.css.boot.function.FunctionName;
 import br.com.objectos.css.boot.keyword.KeywordName;
 import br.com.objectos.css.boot.property.ParameterType;
@@ -36,6 +35,7 @@ import br.com.objectos.css.boot.type.ColorName;
 import br.com.objectos.css.boot.type.JavaType;
 import br.com.objectos.css.boot.type.PrimitiveType;
 import br.com.objectos.css.boot.type.ValueType;
+import br.com.objectos.css.boot.util.JavaNames;
 import java.util.List;
 import objectos.util.GrowableList;
 
@@ -56,7 +56,7 @@ final class GeneratedStyleSheetStep extends ThisTemplate {
       t(sheet, "GeneratedStyleSheet", property.singleDeclarationSimpleName());
       method(
         property.methodName(),
-        t(signature.type), id(signature.name.name())
+        t(signature.type), id(signature.name)
       );
     }
   }
@@ -126,13 +126,13 @@ final class GeneratedStyleSheetStep extends ThisTemplate {
       funcOrPropSingle();
       method(
         property.methodName(),
-        t(signature.type), id(signature.name.name())
+        t(signature.type), id(signature.name)
       );
       block(
         _return(), invoke(
           property.addMethodName(),
           funcOrProp(), n(property.enumName()), end(),
-          n(signature.name.name()), end()
+          n(signature.name), end()
         )
       );
     }
@@ -153,15 +153,15 @@ final class GeneratedStyleSheetStep extends ThisTemplate {
       funcOrPropSingle();
       method(
         property.methodName(),
-        t(signature.type0), id(signature.name0.name()),
-        t(signature.type1), id(signature.name1.name())
+        t(signature.type0), id(signature.name0),
+        t(signature.type1), id(signature.name1)
       );
       block(
         _return(), invoke(
           property.addMethodName(),
           funcOrProp(), n(property.enumName()), end(),
-          n(signature.name0.name()), end(),
-          n(signature.name1.name()), end()
+          n(signature.name0), end(),
+          n(signature.name1), end()
         )
       );
     }
@@ -182,17 +182,17 @@ final class GeneratedStyleSheetStep extends ThisTemplate {
       funcOrPropSingle();
       method(
         property.methodName(),
-        t(signature.type0), id(signature.name0.name()),
-        t(signature.type1), id(signature.name1.name()),
-        t(signature.type2), id(signature.name2.name())
+        t(signature.type0), id(signature.name0),
+        t(signature.type1), id(signature.name1),
+        t(signature.type2), id(signature.name2)
       );
       block(
         _return(), invoke(
           property.addMethodName(),
           funcOrProp(), n(property.enumName()), end(),
-          n(signature.name0.name()), end(),
-          n(signature.name1.name()), end(),
-          n(signature.name2.name()), end()
+          n(signature.name0), end(),
+          n(signature.name1), end(),
+          n(signature.name2), end()
         )
       );
     }
@@ -213,19 +213,19 @@ final class GeneratedStyleSheetStep extends ThisTemplate {
       funcOrPropSingle();
       method(
         property.methodName(),
-        t(signature.type0), id(signature.name0.name()),
-        t(signature.type1), id(signature.name1.name()),
-        t(signature.type2), id(signature.name2.name()),
-        t(signature.type3), id(signature.name3.name())
+        t(signature.type0), id(signature.name0),
+        t(signature.type1), id(signature.name1),
+        t(signature.type2), id(signature.name2),
+        t(signature.type3), id(signature.name3)
       );
       block(
         _return(), invoke(
           property.addMethodName(),
           funcOrProp(), n(property.enumName()), end(),
-          n(signature.name0.name()), end(),
-          n(signature.name1.name()), end(),
-          n(signature.name2.name()), end(),
-          n(signature.name3.name()), end()
+          n(signature.name0), end(),
+          n(signature.name1), end(),
+          n(signature.name2), end(),
+          n(signature.name3), end()
         )
       );
     }
@@ -246,21 +246,21 @@ final class GeneratedStyleSheetStep extends ThisTemplate {
       funcOrPropSingle();
       method(
         property.methodName(),
-        t(signature.type0), id(signature.name0.name()),
-        t(signature.type1), id(signature.name1.name()),
-        t(signature.type2), id(signature.name2.name()),
-        t(signature.type3), id(signature.name3.name()),
-        t(signature.type4), id(signature.name4.name())
+        t(signature.type0), id(signature.name0),
+        t(signature.type1), id(signature.name1),
+        t(signature.type2), id(signature.name2),
+        t(signature.type3), id(signature.name3),
+        t(signature.type4), id(signature.name4)
       );
       block(
         _return(), invoke(
           property.addMethodName(),
           funcOrProp(), n(property.enumName()), end(),
-          n(signature.name0.name()), end(),
-          n(signature.name1.name()), end(),
-          n(signature.name2.name()), end(),
-          n(signature.name3.name()), end(),
-          n(signature.name4.name()), end()
+          n(signature.name0), end(),
+          n(signature.name1), end(),
+          n(signature.name2), end(),
+          n(signature.name3), end(),
+          n(signature.name4), end()
         )
       );
     }
@@ -281,23 +281,23 @@ final class GeneratedStyleSheetStep extends ThisTemplate {
       funcOrPropSingle();
       method(
         property.methodName(),
-        t(signature.type0), id(signature.name0.name()),
-        t(signature.type1), id(signature.name1.name()),
-        t(signature.type2), id(signature.name2.name()),
-        t(signature.type3), id(signature.name3.name()),
-        t(signature.type4), id(signature.name4.name()),
-        t(signature.type5), id(signature.name5.name())
+        t(signature.type0), id(signature.name0),
+        t(signature.type1), id(signature.name1),
+        t(signature.type2), id(signature.name2),
+        t(signature.type3), id(signature.name3),
+        t(signature.type4), id(signature.name4),
+        t(signature.type5), id(signature.name5)
       );
       block(
         _return(), invoke(
           property.addMethodName(),
           funcOrProp(), n(property.enumName()), end(),
-          n(signature.name0.name()), end(),
-          n(signature.name1.name()), end(),
-          n(signature.name2.name()), end(),
-          n(signature.name3.name()), end(),
-          n(signature.name4.name()), end(),
-          n(signature.name5.name()), end()
+          n(signature.name0), end(),
+          n(signature.name1), end(),
+          n(signature.name2), end(),
+          n(signature.name3), end(),
+          n(signature.name4), end(),
+          n(signature.name5), end()
         )
       );
     }
@@ -361,9 +361,7 @@ final class GeneratedStyleSheetStep extends ThisTemplate {
 
   @Override
   public final void addColorName(ColorName colorName) {
-    br.com.objectos.code.java.expression.Identifier id = colorName.identifier;
-
-    colorList.add(id.name());
+    colorList.add(colorName.identifier);
   }
 
   @Override
@@ -722,9 +720,7 @@ final class GeneratedStyleSheetStep extends ThisTemplate {
     }
 
     for (var kw : keywordList) {
-      br.com.objectos.code.java.expression.Identifier fieldName = kw.fieldName;
-
-      var id = fieldName.name();
+      var id = kw.fieldName;
 
       _protected();
       _static();

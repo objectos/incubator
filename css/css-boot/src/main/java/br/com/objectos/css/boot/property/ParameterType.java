@@ -15,13 +15,4 @@
  */
 package br.com.objectos.css.boot.property;
 
-import br.com.objectos.code.java.type.NamedArray;
-import br.com.objectos.code.java.type.NamedType;
-
-public interface ParameterType {
-
-  NamedArray toNamedArray();
-
-  NamedType toNamedType();
-
-}
+public interface ParameterType {}

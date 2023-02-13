@@ -15,8 +15,7 @@
  */
 package br.com.objectos.css.boot.type;
 
-import br.com.objectos.code.java.JavaNames;
-import br.com.objectos.code.java.type.NamedClass;
+import br.com.objectos.css.boot.util.JavaNames;
 import java.util.HashMap;
 import java.util.Map;
 import objectos.lang.Check;
@@ -70,12 +69,6 @@ public enum Primitive {
     map.put("string", STRING);
 
     return map;
-  }
-
-  public final NamedClass typeClassName() {
-    return TypeNames.className(
-      typeSimpleName()
-    );
   }
 
   public final String typeSimpleName() {

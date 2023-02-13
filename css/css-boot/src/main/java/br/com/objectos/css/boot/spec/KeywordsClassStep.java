@@ -101,7 +101,7 @@ final class KeywordsClassStep extends ThisTemplate {
     for (var kw : keywordList) {
       n("m");
 
-      invoke("put", s(kw.name), end(), n(kw.fieldName.name()));
+      invoke("put", s(kw.name), end(), n(kw.fieldName));
 
       end();
     }
@@ -111,7 +111,7 @@ final class KeywordsClassStep extends ThisTemplate {
     nl();
 
     for (var kw : keywordList) {
-      n(kw.fieldName.name());
+      n(kw.fieldName);
       end();
 
       nl();
@@ -124,7 +124,7 @@ final class KeywordsClassStep extends ThisTemplate {
       _static();
       _final();
       t(keyword, kw.simpleName);
-      id(kw.fieldName.name());
+      id(kw.fieldName);
       t(keyword, kw.simpleName);
       n("INSTANCE");
     }

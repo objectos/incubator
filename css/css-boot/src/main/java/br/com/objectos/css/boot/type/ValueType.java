@@ -15,36 +15,18 @@
  */
 package br.com.objectos.css.boot.type;
 
-import static br.com.objectos.code.java.Java._extends;
-import static br.com.objectos.code.java.Java._interface;
-import static br.com.objectos.code.java.Java._public;
-import static br.com.objectos.code.java.Java.a;
-
-import br.com.objectos.code.java.declaration.InterfaceCode;
-import br.com.objectos.code.java.type.NamedArray;
-import br.com.objectos.code.java.type.NamedClass;
-import br.com.objectos.code.java.type.NamedType;
-import br.com.objectos.css.boot.CssBoot;
 import br.com.objectos.css.boot.property.ParameterType;
 import java.util.Set;
 import java.util.TreeSet;
 
 public class ValueType implements ParameterType, Value {
 
-  public final NamedClass className;
-
   public final String simpleName;
-
-  private final Set<NamedClass> interfaces = new TreeSet<>();
 
   private final Set<String> interfaceNames = new TreeSet<>();
 
   private ValueType(String simpleName) {
-    this.className = TypeNames.className(simpleName);
-
     this.simpleName = simpleName;
-
-    interfaces.add(TypeNames._Value);
 
     interfaceNames.add("Value");
   }
@@ -55,30 +37,11 @@ public class ValueType implements ParameterType, Value {
 
   @Override
   public void acceptValueType(ValueType type) {
-    interfaces.add(type.className);
-
     interfaceNames.add(type.simpleName);
   }
 
   public final Iterable<String> interfaceNames() {
     return interfaceNames;
-  }
-
-  @Override
-  public final NamedArray toNamedArray() {
-    return a(className);
-  }
-
-  @Override
-  public final NamedType toNamedType() {
-    return className;
-  }
-
-  final InterfaceCode generate() {
-    return _interface(
-      CssBoot.GENERATED,
-      _public(), className, _extends(interfaces)
-    );
   }
 
 }

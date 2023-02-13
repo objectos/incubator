@@ -15,7 +15,6 @@
  */
 package br.com.objectos.css.boot.spec;
 
-import br.com.objectos.code.java.io.JavaFile;
 import objectos.code.JavaTemplate;
 import objectos.util.GrowableList;
 import org.testng.annotations.BeforeMethod;
@@ -42,11 +41,6 @@ public abstract class AbstractCssBootSpecTest {
   }
 
   private class ThisStepAdapter extends StepAdapter {
-    @Override
-    public void writeJavaFile(JavaFile javaFile) {
-      throw new UnsupportedOperationException();
-    }
-
     @Override
     public final void write(JavaTemplate template) {
       var result = template.toString();

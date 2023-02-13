@@ -15,50 +15,38 @@
  */
 package br.com.objectos.css.boot.type;
 
-import static br.com.objectos.code.java.Java.id;
-import static br.com.objectos.code.java.Java.invoke;
-import static br.com.objectos.code.java.Java.l;
-
-import br.com.objectos.code.java.JavaNames;
-import br.com.objectos.code.java.expression.Callee;
-import br.com.objectos.code.java.expression.Identifier;
-import br.com.objectos.code.java.expression.MethodInvocation;
+import br.com.objectos.css.boot.util.JavaNames;
 import objectos.lang.Check;
 
 public class ColorName implements Comparable<ColorName> {
 
-  public final Identifier identifier;
   public final String name;
 
-  private ColorName(String name, Identifier identifier) {
+  public final String identifier;
+
+  private ColorName(String name, String identifier) {
     this.name = name;
+
     this.identifier = identifier;
   }
 
   public static ColorName of(String name) {
     Check.notNull(name, "name == null");
+
     return new ColorName(
-      name,
-      id(JavaNames.toIdentifier(name))
+      name, JavaNames.toIdentifier(name)
     );
   }
 
   public final void assertIdentifierIsEqualToName() {
-    String javaName;
-    javaName = identifier.name();
-
-    if (!name.equals(javaName)) {
-      throw new AssertionError("Not equal: " + name + " != " + javaName);
+    if (!name.equals(identifier)) {
+      throw new AssertionError("Not equal: " + name + " != " + identifier);
     }
   }
 
   @Override
   public final int compareTo(ColorName o) {
     return name.compareTo(o.name);
-  }
-
-  final MethodInvocation invokePut(Callee callee) {
-    return invoke(callee, "put", l(name), identifier);
   }
 
 }

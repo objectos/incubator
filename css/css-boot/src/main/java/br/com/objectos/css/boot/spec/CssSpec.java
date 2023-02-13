@@ -15,7 +15,6 @@
  */
 package br.com.objectos.css.boot.spec;
 
-import br.com.objectos.code.java.expression.Identifier;
 import br.com.objectos.css.boot.function.FunctionName;
 import br.com.objectos.css.boot.keyword.KeywordName;
 import br.com.objectos.css.boot.property.ParameterType;
@@ -105,7 +104,7 @@ public abstract class CssSpec {
   }
 
   protected final void property(
-      String name, Identifier identifier,
+      String name, String identifier,
       FormalDefinition definition, MethodSignature... signatures) {
     property(PropertyKind.STANDARD, name, identifier, definition, signatures);
   }
@@ -197,18 +196,8 @@ public abstract class CssSpec {
     return dsl.getValueType(name, values);
   }
 
-  final CssSpecDsl toSpecDsl() {
-    var step = new NoOpStep();
-
-    var dsl = new CssSpecDsl(step);
-
-    acceptCssSpecDsl(dsl);
-
-    return dsl;
-  }
-
   private void property(
-      PropertyKind kind, String name, Identifier identifier,
+      PropertyKind kind, String name, String identifier,
       FormalDefinition definition, MethodSignature... signatures) {
     // ignore definition for now
     Property property;
