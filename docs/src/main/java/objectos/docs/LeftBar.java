@@ -21,9 +21,7 @@ final class LeftBar {
 
   private final LeftBarNext next = new LeftBarNext(this);
 
-  private final LeftBarV000401 v000401 = new LeftBarV000401(this);
-
-  private final LeftBarV000400 v000400 = new LeftBarV000400(this);
+  private final LeftBarV0004 v0004 = new LeftBarV0004(this);
 
   private final AbstractFragment v0003 = new LeftBarV0003(this);
 
@@ -44,9 +42,7 @@ final class LeftBar {
       return switch (version) {
         case NEXT -> next.get(key);
 
-        case V0_4_1 -> v000401.get(key);
-
-        case V0_4_0 -> v000400.get(key);
+        case V0_4_X -> v0004.get(key);
 
         case V0_3_0 -> v0003;
 

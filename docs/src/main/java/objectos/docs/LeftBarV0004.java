@@ -17,7 +17,7 @@ package objectos.docs;
 
 import br.com.objectos.html.tmpl.AbstractFragment;
 
-final class LeftBarV000401 extends LeftBarFragment {
+final class LeftBarV0004 extends LeftBarFragment {
 
   private static class ObjectosCode extends LeftBarFragment {
     public ObjectosCode(LeftBar injector) { super(injector); }
@@ -25,13 +25,14 @@ final class LeftBarV000401 extends LeftBarFragment {
     @Override
     final void definitionImpl() {
       ul(
-        li(a0("v000401/index", "Back")),
+        li(a0("v0004/index", "Back")),
 
         li(
           h2v0("Objectos Code"),
 
           ul(
-            li(a0("v000401/objectos-code/index"))
+            li(a0("v0004/objectos-code/index")),
+            li(a0("v0004/objectos-code/java-template"))
           )
         ),
 
@@ -39,7 +40,7 @@ final class LeftBarV000401 extends LeftBarFragment {
           h2v0("Expressions"),
 
           ul(
-            li(a0("v000401/objectos-code/expression/assignment-operator"))
+            li(a0("v0004/objectos-code/expression/assignment-operator"))
           )
         )
       );
@@ -52,23 +53,23 @@ final class LeftBarV000401 extends LeftBarFragment {
     @Override
     final void definitionImpl() {
       ul(
-        li(a0("v000401/index", "Back")),
+        li(a0("v0004/index", "Back")),
 
         li(
           h2v0("Objectos Lang"),
 
           ul(
-            li(a0("v000401/objectos-lang/index")),
-            li(a0("v000401/objectos-lang/Check")),
-            li(a0("v000401/objectos-lang/Equals")),
-            li(a0("v000401/objectos-lang/HashCode")),
-            li(a0("v000401/objectos-lang/ToString")),
+            li(a0("v0004/objectos-lang/index")),
+            li(a0("v0004/objectos-lang/Check")),
+            li(a0("v0004/objectos-lang/Equals")),
+            li(a0("v0004/objectos-lang/HashCode")),
+            li(a0("v0004/objectos-lang/ToString")),
 
-            li(a0("v000401/objectos-lang/note-sink-api/index"),
+            li(a0("v0004/objectos-lang/note-sink-api/index"),
               ul(
-                li(a1("v000401/objectos-lang/note-sink-api/creating-notes")),
-                li(a1("v000401/objectos-lang/note-sink-api/the-note-sink-interface")),
-                li(a1("v000401/objectos-lang/note-sink-api/the-no-op-note-sink"))
+                li(a1("v0004/objectos-lang/note-sink-api/creating-notes")),
+                li(a1("v0004/objectos-lang/note-sink-api/the-note-sink-interface")),
+                li(a1("v0004/objectos-lang/note-sink-api/the-no-op-note-sink"))
               )
             )
           )
@@ -83,22 +84,22 @@ final class LeftBarV000401 extends LeftBarFragment {
     @Override
     final void definitionImpl() {
       ul(
-        li(a0("v000401/index", "Back")),
+        li(a0("v0004/index", "Back")),
 
         li(
           h2v0("Objectos Util"),
 
           ul(
-            li(a0("v000401/objectos-util/index")),
-            li(a0("v000401/objectos-util/array-utilities")),
-            li(a0("v000401/objectos-util/collections/index"),
+            li(a0("v0004/objectos-util/index")),
+            li(a0("v0004/objectos-util/array-utilities")),
+            li(a0("v0004/objectos-util/collections/index"),
               ul(
-                li(a1("v000401/objectos-util/collections/limitations")),
-                li(a1("v000401/objectos-util/collections/builders")),
-                li(a1("v000401/objectos-util/collections/of")),
-                li(a1("v000401/objectos-util/collections/null-handling")),
-                li(a1("v000401/objectos-util/collections/to-string")),
-                li(a1("v000401/objectos-util/collections/join-method"))
+                li(a1("v0004/objectos-util/collections/limitations")),
+                li(a1("v0004/objectos-util/collections/builders")),
+                li(a1("v0004/objectos-util/collections/of")),
+                li(a1("v0004/objectos-util/collections/null-handling")),
+                li(a1("v0004/objectos-util/collections/to-string")),
+                li(a1("v0004/objectos-util/collections/join-method"))
               )
             )
           )
@@ -107,7 +108,7 @@ final class LeftBarV000401 extends LeftBarFragment {
     }
   }
 
-  private static final int OFFSET = "v000401/".length();
+  private static final int OFFSET = "v0004/".length();
 
   private final ObjectosCode objectosCode;
 
@@ -115,7 +116,7 @@ final class LeftBarV000401 extends LeftBarFragment {
 
   private final ObjectosUtil objectosUtil;
 
-  public LeftBarV000401(LeftBar injector) {
+  public LeftBarV0004(LeftBar injector) {
     super(injector);
 
     objectosCode = new ObjectosCode(injector);
@@ -148,15 +149,15 @@ final class LeftBarV000401 extends LeftBarFragment {
   @Override
   final void definitionImpl() {
     ul(
-      li(a0("v000401/index")),
+      li(a0("v0004/index")),
 
       li(
         h2v0("Libraries"),
 
         ul(
-          li(a0("v000401/objectos-code/index", "Objectos Code")),
-          li(a0("v000401/objectos-lang/index", "Objectos Lang")),
-          li(a0("v000401/objectos-util/index", "Objectos Util"))
+          li(a0("v0004/objectos-code/index", "Objectos Code")),
+          li(a0("v0004/objectos-lang/index", "Objectos Lang")),
+          li(a0("v0004/objectos-util/index", "Objectos Util"))
         )
       ),
 
@@ -164,8 +165,8 @@ final class LeftBarV000401 extends LeftBarFragment {
         h2v0("New to Objectos"),
 
         ul(
-          li(a0("v000401/intro/overview")),
-          li(a0("v000401/intro/install"))
+          li(a0("v0004/intro/overview")),
+          li(a0("v0004/intro/install"))
         )
       ),
 
@@ -173,11 +174,12 @@ final class LeftBarV000401 extends LeftBarFragment {
         h2v0("Release Notes"),
 
         ul(
-          li(a0("v000401/relnotes/0.4.1")),
-          li(a0("v000401/relnotes/0.4.0")),
-          li(a0("v000401/relnotes/0.3.0")),
-          li(a0("v000401/relnotes/0.2.0")),
-          li(a0("v000401/relnotes/0.1.0"))
+          li(a0("v0004/relnotes/0.4.2")),
+          li(a0("v0004/relnotes/0.4.1")),
+          li(a0("v0004/relnotes/0.4.0")),
+          li(a0("v0004/relnotes/0.3.0")),
+          li(a0("v0004/relnotes/0.2.0")),
+          li(a0("v0004/relnotes/0.1.0"))
         )
       )
     );

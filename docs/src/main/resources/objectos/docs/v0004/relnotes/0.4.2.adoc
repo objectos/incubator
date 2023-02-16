@@ -1,0 +1,7 @@
+= Objectos 0.4.2 release notes
+:toc-title: Objectos 0.4.2
+
+_February 17, 2023_
+
+Welcome to Objectos 0.4.2.
+This is a minor release which focuses solely on Objectos Code.
