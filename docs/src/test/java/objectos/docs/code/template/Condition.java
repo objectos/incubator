@@ -15,54 +15,38 @@
  */
 package objectos.docs.code.template;
 
-import java.util.Set;
-import java.util.TreeSet;
 import objectos.code.JavaTemplate;
 
-public class TagTemplate extends JavaTemplate {
+public class Condition extends JavaTemplate {
 
-  private final Set<String> tagNames = new TreeSet<>();
+  boolean generate;
 
   public static void main(String[] args) {
-    var tmpl = new TagTemplate();
+    var tmpl = new Condition();
 
-    tmpl.add("div");
-    tmpl.add("a");
-    tmpl.add("ul");
-    tmpl.add("li");
-    tmpl.add("table");
+    tmpl.generate = false;
 
     System.out.println(tmpl);
-  }
 
-  public final void add(String name) {
-    tagNames.add(name);
+    tmpl.generate = true;
+
+    System.out.println(tmpl);
   }
 
   @Override
   protected final void definition() {
     // @formatter:off
-    _package("com.example");
-
-    autoImports();
-
-    _public(); _enum("Tag"); body(
-      include(this::constants),
-
-      _private(), _final(), t(String.class), id("name"),
-
-      _private(), constructor(t(String.class), id("name")), block(
-        _this(), n("name"), gets(), n("name")
-      )
+    _class("Condition"); body(
+      _abstract(), _void(), method("foo", include(this::parameters))
     );
     // @formatter:on
   }
 
-  private void constants() {
-    for (var tagName : tagNames) {
-      var fieldName = tagName.toUpperCase();
+  private void parameters() {
+    code(_int(), id("always"));
 
-      enumConstant(fieldName, s(tagName));
+    if (generate) {
+      code(_int(), id("maybe"));
     }
   }
 

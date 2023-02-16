@@ -120,4 +120,87 @@ Which generates the enum listed at the beginning of this section.
 
 == Conditionally generating a construct
 
-TODO
+You can use the `include` instruction to conditionally generate a construct.
+
+Consider the following template:
+
+[,java]
+----
+import objectos.code.JavaTemplate;
+
+public class Condition extends JavaTemplate {
+  boolean generate;
+
+  @Override
+  protected final void definition() {
+    // @formatter:off
+    _class("Condition"); body(
+      _abstract(), _void(), method("foo", include(this::parameters))
+    );
+    // @formatter:on
+  }
+
+  private void parameters() {
+    code(_int(), id("always"));
+
+    if (generate) {
+      code(_int(), id("maybe"));
+    }
+  }
+}
+----
+
+It generates a class named `Condition` containing a single abstract method named `foo`.
+
+The `foo` method declaration contains an `include` instruction:
+
+[,java]
+----
+method("foo", include(this::parameters))
+----
+
+The `include` delegates the method's formal parameters declaration to the `parameters` private method:
+
+[,java]
+----
+private void parameters() {
+  code(_int(), id("always"));
+
+  if (generate) {
+    code(_int(), id("maybe"));
+  }
+}
+----
+
+The `parameters` method may generate one or two `int` parameters:
+
+* the `always` parameter is always generated; and
+* the `maybe` parameter is generated depending on the value of the `generate` instance variable.
+
+The following illustrates the conditional generation of the `maybe` parameter:
+
+[,java]
+----
+var tmpl = new Condition();
+
+tmpl.generate = false;
+
+System.out.println(tmpl);
+
+tmpl.generate = true;
+
+System.out.println(tmpl);
+----
+
+Which prints:
+
+[,java]
+----
+class Condition {
+  abstract void foo(int always);
+}
+
+class Condition {
+  abstract void foo(int always, int maybe);
+}
+----
