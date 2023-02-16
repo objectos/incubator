@@ -1,5 +1,5 @@
 = Objectos Code
-:toc-title: Overview
+:toc-title: Get Started
 
 _This API is experimental and might change substantially between releases_
 
