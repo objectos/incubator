@@ -6,3 +6,23 @@ _February 17, 2023_
 Welcome to Objectos 0.4.2.
 This is a minor release which focuses solely on Objectos Code.
 
+== New Features
+
+* Add the `_else()` instruction to the `if` statement issue:191[]
+* Express the `x.y` name with the `n("x").n("y")` syntax issue:193[]
+* Express the `StandardCharsets.UTF_8` name with the `t(StandardCharsets.class).n("UTF_8")` syntax issue:194[]
+* Express primary.identifier field access expression with the `v("method").n("foo")` syntax issue:195[]
+* Express chained methods with the `v("a").v("b")` syntax. issue:196[]
+* Express `a[x][y]` with the `n("a").dim(n("x")).dim(n("y"))` syntax issue:198[]
+* New method declaration: `method()` invoked with no args issue:199[]
+* New method declaration: syntax to set the method name issue:200[]
+* New method declaration: syntax to add modifiers issue:201[]
+* Annotation: the `annotation(Override.class)` syntax issue:202[]
+* Method declaration: the `returnType(String.class)` instruction issue:203[]
+* Formal parameters: the shorthand `parameter` instruction issue:204[]
+* Method declaration: the `returnType(JavaTemplate.Type)` instruction issue:205[]
+* Method declaration: the shorthand `method` instruction issue:206[]
+
+== Documentation
+
+* Docs / Objectos Code / Java Template issue:208[]
