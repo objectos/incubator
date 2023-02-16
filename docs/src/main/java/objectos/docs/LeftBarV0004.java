@@ -42,7 +42,7 @@ final class LeftBarV0004 extends LeftBarFragment {
             li(a0("v0004/objectos-code/template/index")),
             li(a0("v0004/objectos-code/template/auto-imports")),
             li(a0("v0004/objectos-code/template/include")),
-            li(a0("v0004/objectos-code/template/recommendations"))
+            li(a0("v0004/objectos-code/template/recommended-usage"))
           )
         ),
 
