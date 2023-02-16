@@ -1,7 +1,9 @@
 = The `include` instruction
 
 The `JavaTemplate` class provides a template system for generating Java files.
-Being a regular Java class itself, the `JavaTemplate` allows you to use Java constructs in your template.
+
+As the `JavaTemplate` is a regular Java class you can use Java constructs in your template.
+For example, you can use Java `for` loops and `if` statements in your template.
 
 In other words, instead of writing something like the following:
 
@@ -11,7 +13,7 @@ private static final {{type}} {{name}};
 {{/fields}}
 ----
 
-You would use a plain Java `for` loop:
+You write a plain Java `for` loop:
 
 [,java]
 ----
@@ -27,36 +29,9 @@ To achieve this, the `JavaTemplate` provides the `include` instruction.
 
 == Generating code based on the elements of a collection
 
-Suppose you need to generate a Java class file similar to the following:
+You should use the `include` instruction when you need to generate a number of constructs based on the elements of a collection.
 
-[,java]
-----
-public enum Tag {
-  A("a"),
-
-  DIV("div"),
-
-  LI("li"),
-
-  TABLE("table"),
-
-  UL("ul");
-
-  private final String name;
-
-  private Tag(String name) {
-    this.name = name;
-  }
-}
-----
-
-It is an enum class representing a few of the HTML tags.
-
-Suppose now that the names of the tags come from an external source.
-In other words, the programmer does not know in advance how many names there will be.
-
-The following `JavaTemplate` declares a `Set` to hold (and sort) the names of the tags.
-Then, it uses an `include` instruction to iterate over the elements of the set and generate the enum constants:
+As an example, consider the following `JavaTemplate`:
 
 [,java]
 ----
@@ -100,8 +75,36 @@ public class TagTemplate extends JavaTemplate {
 }
 ----
 
-Notice how an `include` instruction is declared inside the `body` of the `_enum`.
-It then can be used like the following:
+It generates a Java `enum` class named `Tag`.
+The enum constants are generated based on the values of the `tagNames` collection.
+
+Note how the first instruction of the enum's body is an `include` instruction:
+
+[,java]
+----
+_public(); _enum("Tag"); body(
+  include(this::constants),
+  ...
+);
+----
+
+The included partial is a reference to the `constants` method:
+
+[,java]
+----
+private void constants() {
+  for (var tagName : tagNames) {
+    var fieldName = tagName.toUpperCase();
+
+    enumConstant(fieldName, s(tagName));
+  }
+}
+----
+
+The `constants` method iterates over the elements of the `tagNames` set.
+For each element in the set it generates an enum constant.
+
+The following illustrate a use of our `TagTemplate` class: 
 
 [,java]
 ----
@@ -113,14 +116,37 @@ tmpl.add("ul");
 tmpl.add("li");
 tmpl.add("table");
 
-System.out.println(tmpl.toString());
+System.out.println(tmpl);
 ----
 
-Which generates the enum listed at the beginning of this section.
+When executed, it prints:
+
+[,java]
+----
+public enum Tag {
+  A("a"),
+
+  DIV("div"),
+
+  LI("li"),
+
+  TABLE("table"),
+
+  UL("ul");
+
+  private final String name;
+
+  private Tag(String name) {
+    this.name = name;
+  }
+}
+----
+
+So the enum constants were generated based on the values of a collection.
 
 == Conditionally generating a construct
 
-You can use the `include` instruction to conditionally generate a construct.
+You should use the `include` instruction when you need to conditionally generate a construct.
 
 Consider the following template:
 
@@ -204,3 +230,5 @@ class Condition {
   abstract void foo(int always, int maybe);
 }
 ----
+
+So you can use the `include` instruction to conditionally generate a Java construct.
