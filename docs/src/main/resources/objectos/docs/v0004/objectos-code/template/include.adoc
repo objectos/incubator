@@ -1,58 +1,76 @@
 = The `include` instruction
 
-You declare the source code to be generated in a `JavaTemplate` class.
-A `JavaTemplate` instance represents a Java compilation unit.
+The `JavaTemplate` class provides a template system for generating Java files.
+Being a regular Java class itself, the `JavaTemplate` allows you to use Java constructs in your template.
 
-You use it by extending it and implementing the `definition` method.
-Use the provided _embedeed domain-specific language_ in the latter to declare the contents of the Java file you want to generate:
+In other words, instead of writing something like the following:
+
+----
+{{#fields}}
+private static final {{type}} {{name}};
+{{/fields}}
+----
+
+You would use a plain Java `for` loop:
 
 [,java]
 ----
-import objectos.code.JavaTemplate;
+for (var field : fields) {
+  code(
+    _private(), _static(), _final(), 
+    t(field.type), id(field.name)
+  );
+}
+----
 
-public class MyTemplate extends JavaTemplate {
-  @Override
-  protected final void definition() {
-    _package("com.example");
+To achieve this, the `JavaTemplate` provides the `include` instruction.
 
-    autoImports();
+== Generating code based on the elements of a collection
 
-    _public();
-    _class("Empty");
-    body();
+Suppose you need to generate a Java class file similar to the following:
+
+[,java]
+----
+public enum Tag {
+  A("a"),
+
+  DIV("div"),
+
+  LI("li"),
+
+  TABLE("table"),
+
+  UL("ul");
+
+  private final String name;
+
+  private Tag(String name) {
+    this.name = name;
   }
-} 
+}
 ----
 
-Which can be used to generate the following Java code:
+It is an enum class representing a few of the HTML tags.
+
+Suppose now that the names of the tags come from an external source.
+In other words, the programmer does not know in advance how many names there will be.
+
+The following `JavaTemplate` declares a `Set` to hold (and sort) the names of the tags.
+Then, it uses an `include` instruction to iterate over the elements of the set and generate the enum constants:
 
 [,java]
 ----
-package com.example;
-
-public class Empty {}
-----
-
-Let's discuss some of its features.
-
-== Features
-
-The `JavaTemplate` class provides the programmer with two features:
-
-- import declarations are automatically generated; and
-- allow for control flow via the `include` instruction.
-
-=== The `autoImports` instruction
-
-Consider the following template that generates a `AutoImports` class containing two fields: 
-
-[,java]
-----
-import java.io.IOException;
-import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 import objectos.code.JavaTemplate;
 
-public class AutoImportsOn extends JavaTemplate {
+public class TagTemplate extends JavaTemplate {
+  private final Set<String> tagNames = new TreeSet<>();
+
+  public final void add(String name) {
+    tagNames.add(name);
+  }
+
   @Override
   protected final void definition() {
     // @formatter:off
@@ -60,123 +78,46 @@ public class AutoImportsOn extends JavaTemplate {
 
     autoImports();
 
-    _public(); _class("AutoImports"); body(
-      t(t(List.class), t(IOException.class)), id("a"),
+    _public(); _enum("Tag"); body(
+      include(this::constants),
 
-      t(String.class), id("b")
+      _private(), _final(), t(String.class), id("name"),
+
+      _private(), constructor(t(String.class), id("name")), block(
+        _this(), n("name"), gets(), n("name")
+      )
     );
+    // @formatter:on
+  }
+
+  private void constants() {
+    for (var tagName : tagNames) {
+      var fieldName = tagName.toUpperCase();
+
+      enumConstant(fieldName, s(tagName));
+    }
   }
 }
 ----
 
-Notice that the `autoImports` instruction is enabled.
-It generates the following Java code:
+Notice how an `include` instruction is declared inside the `body` of the `_enum`.
+It then can be used like the following:
 
 [,java]
 ----
-package com.example;
+var tmpl = new TagTemplate();
 
-import java.io.IOException;
-import java.util.List;
+tmpl.add("div");
+tmpl.add("a");
+tmpl.add("ul");
+tmpl.add("li");
+tmpl.add("table");
 
-public class AutoImports {
-  List<IOException> a;
-
-  String b;
-}
+System.out.println(tmpl.toString());
 ----
 
-Notice that the import declarations were generates.
-On the other hand, if we omit the `autoImports` instruction, like so:
+Which generates the enum listed at the beginning of this section.
 
-[,java]
-----
-_package("com.example");
-
-_public(); _class("AutoImports"); body(
-  t(t(List.class), t(IOException.class)), id("a"),
-
-  t(String.class), id("b")
-);
-----
-
-Then the following is generated:
-
-[,java]
-----
-package com.example;
-
-public class AutoImports {
-  java.util.List<java.io.IOException> a;
-
-  java.lang.String b;
-}
-----
-
-Notice how _all_ types are declared in their fully qualified names,
-including the ones from the `java.lang` package.
-
-=== The `autoImports` and name conflicts
-
-In the case of conflict, the first type declared is imported.
-Any subsequent type is declare in its fully qualified name.
-
-To illustrate consider the following example:
-
-[,java]
-----
-_package("com.example");
-
-autoImports();
-
-_public(); _class("AutoImports"); body(
-  t(t(java.awt.List.class), t(String.class)), id("a"),
-
-  t(t(java.util.List.class), t(String.class)), id("b"),
-
-  t(t("com.example", "List"), t(String.class)), id("c")
-);
-----
-
-It declares three `List` fields.
-However, each `List` type is of a different package.
-
-The code above generates the following:
-
-[,java]
-----
-package com.example;
-
-import java.awt.List;
-
-public class AutoImports {
-  List<String> a;
-
-  java.util.List<String> b;
-
-  com.example.List<String> c;
-}
-----
-
-So the first `List` encountered is imported.
-The remaining ones are declared in full name. 
-
-=== The `include` instruction
-
-TODO
-
-== Recommended usage
-
-TODO
-
-=== Instances are meant to be reused (in a single-threaded environment) 
-
-TODO
-
-=== It should have all the data
-
-TODO
-
-== Where to go from here?
+== Conditionally generating a construct
 
 TODO
