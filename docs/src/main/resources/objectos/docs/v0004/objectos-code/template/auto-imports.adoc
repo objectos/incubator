@@ -1,0 +1,149 @@
+= The `autoImports` instruction
+
+By default the `JavaTemplate` class will write the fully qualified name of any declared type it encounters.
+Alternatively, it can automatically generate any required import declaration instead.
+
+The `autoImports` instruction is used to enable the automatic generation of import declarations. 
+
+== Enabling automatic import generation
+
+The following template generates a class containing two fields: 
+
+[,java]
+----
+import java.io.IOException;
+import java.util.List;
+import objectos.code.JavaTemplate;
+
+public class AutoImportsOn extends JavaTemplate {
+  @Override
+  protected final void definition() {
+    // @formatter:off
+    _package("com.example");
+
+    autoImports();
+
+    _public(); _class("AutoImports"); body(
+      t(t(List.class), t(IOException.class)), id("a"),
+
+      t(String.class), id("b")
+    );
+  }
+}
+----
+
+Notice that the `autoImports` instruction is enabled.
+It generates the following Java code:
+
+[,java]
+----
+package com.example;
+
+import java.io.IOException;
+import java.util.List;
+
+public class AutoImports {
+  List<IOException> a;
+
+  String b;
+}
+----
+
+So, by declaring the `autoImports` instructions, import declarations were generated for the types:
+
+- `java.io.IOException`; and
+- `java.util.List`.
+
+The `String` type belongs to the `java.lang` package.
+The latter is implicitly imported by all Java compilation units.
+For this reason an import declaration for the former is not generated.
+
+Next, let's look at the output when the `autoImports` instruction is not declared. 
+
+== Generation without `autoImports`
+
+Let's omit the `autoImports` instruction from our previous example:
+
+[,java]
+----
+_package("com.example");
+
+_public(); _class("AutoImports"); body(
+  t(t(List.class), t(IOException.class)), id("a"),
+
+  t(String.class), id("b")
+);
+----
+
+In this case, it generates the following Java code:
+
+[,java]
+----
+package com.example;
+
+public class AutoImports {
+  java.util.List<java.io.IOException> a;
+
+  java.lang.String b;
+}
+----
+
+Notice how _all_ types are declared in their fully qualified names.
+All of them, including the ones from the `java.lang` package.
+
+== Name conflicts
+
+Suppose two distinct types having the same simple name. 
+For example, consider the following `List` types:
+
+* `java.awt.List`; and
+* `java.util.List`.
+
+A single compilation unit containing import declarations for both types might lead to a name conflict;
+the simple name `List` becomes ambiguous.
+ 
+The `JavaTemplate` class handles cases likes this in the following way:
+
+* the first type it encounters is imported; and
+* any subsequent type is declared in its fully qualified name.
+
+To illustrate consider the following example:
+
+[,java]
+----
+_package("com.example");
+
+autoImports();
+
+_public(); _class("AutoImports"); body(
+  t(t(java.awt.List.class), t(String.class)), id("a"),
+
+  t(t(java.util.List.class), t(String.class)), id("b"),
+
+  t(t("com.example", "List"), t(String.class)), id("c")
+);
+----
+
+It declares three `List` fields.
+The three `List` types are distinct.
+One of them is from the same package of the compilation unit.
+
+The code above generates the following:
+
+[,java]
+----
+package com.example;
+
+import java.awt.List;
+
+public class AutoImports {
+  List<String> a;
+
+  java.util.List<String> b;
+
+  com.example.List<String> c;
+}
+----
+
+So the first `List` encountered is imported.
+The remaining ones are declared in their fully qualified name. 

@@ -31,8 +31,18 @@ final class LeftBarV0004 extends LeftBarFragment {
           h2v0("Objectos Code"),
 
           ul(
-            li(a0("v0004/objectos-code/index")),
-            li(a0("v0004/objectos-code/java-template"))
+            li(a0("v0004/objectos-code/index"))
+          )
+        ),
+
+        li(
+          h2v0("Java Template"),
+
+          ul(
+            li(a0("v0004/objectos-code/template/index")),
+            li(a0("v0004/objectos-code/template/auto-imports")),
+            li(a0("v0004/objectos-code/template/include")),
+            li(a0("v0004/objectos-code/template/recommendations"))
           )
         ),
 

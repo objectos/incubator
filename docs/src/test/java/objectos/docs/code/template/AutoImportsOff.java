@@ -13,25 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package objectos.docs.code;
+package objectos.docs.code.template;
 
 import java.io.IOException;
 import java.util.List;
 import objectos.code.JavaTemplate;
 
 // objectos-code/java-template.adoc
-public class JavaTemplateAutoImportsOn extends JavaTemplate {
+public class AutoImportsOff extends JavaTemplate {
 
   public static void main(String[] args) {
-    System.out.println(new JavaTemplateAutoImportsOn());
+    System.out.println(new AutoImportsOff());
   }
 
   @Override
   protected final void definition() {
     // @formatter:off
     _package("com.example");
-
-    autoImports();
 
     _public(); _class("AutoImports"); body(
       t(t(List.class), t(IOException.class)), id("a"),

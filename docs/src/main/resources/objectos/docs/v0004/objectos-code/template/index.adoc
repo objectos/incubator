@@ -1,4 +1,5 @@
 = The `JavaTemplate` class
+:toc-title: Overview
 
 You declare the source code to be generated in a `JavaTemplate` class.
 A `JavaTemplate` instance represents a Java compilation unit.

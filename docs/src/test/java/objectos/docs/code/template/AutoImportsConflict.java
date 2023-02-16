@@ -13,15 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package objectos.docs.code;
+package objectos.docs.code.template;
 
 import objectos.code.JavaTemplate;
 
 // objectos-code/java-template.adoc
-public class JavaTemplateAutoImportsConflict extends JavaTemplate {
+public class AutoImportsConflict extends JavaTemplate {
 
   public static void main(String[] args) {
-    System.out.println(new JavaTemplateAutoImportsConflict());
+    System.out.println(new AutoImportsConflict());
   }
 
   @Override
