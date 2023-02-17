@@ -1,6 +1,5 @@
 package br.com.objectos.html.tmpl;
 
-import br.com.objectos.code.annotations.Generated;
 import br.com.objectos.html.attribute.StandardAttributeName;
 import br.com.objectos.html.attribute.StandardAttributeName.Accesskey;
 import br.com.objectos.html.attribute.StandardAttributeName.Action;
@@ -224,7 +223,6 @@ import br.com.objectos.html.spi.type.TitleValue;
 import br.com.objectos.html.spi.type.TrValue;
 import br.com.objectos.html.spi.type.UlValue;
 
-@Generated("br.com.objectos.html.boot.HtmlBoot")
 abstract class GeneratedAbstractTemplate {
   public final ElementName a(AValue... values) {
     return addStandardElement(StandardElementName.A, values);
