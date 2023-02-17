@@ -19,8 +19,6 @@ import br.com.objectos.html.tmpl.AbstractFragment;
 
 final class LeftBar {
 
-  private final LeftBarNext next = new LeftBarNext(this);
-
   private final LeftBarV0004 v0004 = new LeftBarV0004(this);
 
   private final AbstractFragment v0003 = new LeftBarV0003(this);
@@ -40,8 +38,6 @@ final class LeftBar {
       return NoOpLeftBar.INSTANCE;
     } else {
       return switch (version) {
-        case NEXT -> next.get(key);
-
         case V0_4_X -> v0004.get(key);
 
         case V0_3_0 -> v0003;

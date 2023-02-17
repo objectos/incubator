@@ -116,4 +116,4 @@ You should know that some of the operations specified by either:
 
 Might not be supported or might not have been implemented.
 
-Please refer to the elink:next/api/index[Javadocs].
+Please refer to the elink:v0003/api/index[Javadocs].

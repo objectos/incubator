@@ -49,11 +49,11 @@ public final class Docs extends DocsInjector {
     AbstractFragment toFragment();
   }
 
-  public static final String INDEX = "docs/0.4.1/index";
+  public static final String INDEX = "docs/0.4/index";
 
-  public static final String OVERVIEW = "docs/0.4.1/intro/overview";
+  public static final String OVERVIEW = "docs/0.4/intro/overview";
 
-  public static final String LATEST = "0.4.1";
+  public static final String LATEST = "0.4.2";
 
   private final AsciiDoc asciiDoc = AsciiDoc.create();
 
