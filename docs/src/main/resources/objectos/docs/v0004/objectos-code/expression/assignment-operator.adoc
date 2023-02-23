@@ -5,23 +5,21 @@ Here is a quick overview of the assignment operator in Objectos Code:
 [,java]
 ----
 // Objectos Code
-block(
-  n("a"), gets(), n("b"), end(),
-	
-  n("x"), gets(), n("y"), gets(), n("z"), end(),
-  
-  n("barArray"), dim(i(0)), gets(), _new(t("foo", "Bar")), end(),
-	
-  invoke("m"), n("foo"), gets(), invoke("n"), end(),
+method(
+  name("overview"),
 
-  invoke("foo", n("i"), gets(), n("j"))
-);
+  p(n("a"), IS, n("b")),
+  p(n("x"), IS, n("y"), IS, n("z")),
+  p(n("barArray"), dim(i(0)), IS, NEW, BAR),
+  p(v("m"), n("foo"), IS, v("n")),
+  p(v("foo"), arg(n("i"), IS, n("j")))
+)
 
 // Generated code
-{
+void overview() {
   a = b;
   x = y = z;
-  barArray[0] = new foo.Bar();
+  barArray[0] = new com.example.Bar();
   m().foo = n();
   foo(i = j);
 }
@@ -31,7 +29,7 @@ Next we will discuss each operator individually.
 
 == Simple assignment operator
 
-In Objectos Code, the `gets()` instruction represents the simple assignment operator `=`.
+In Objectos Code, the `IS` constant represents the simple assignment operator `=`.
 
 You use it between the left-hand side (LHS) and the right-hand side (RHS) of the https://docs.oracle.com/javase/specs/jls/se19/html/jls-15.html#jls-15.26.1[expression].
 
@@ -43,7 +41,7 @@ The following example assigns the value of the variable `value` to the variable 
 
 [,java]
 ----
-n("x"), gets(), n("value")
+p(n("x"), IS, n("value"));
 
 x = value;
 ----
@@ -52,7 +50,7 @@ If variable `x` is the field of the type of a variable `foo` our LHS becomes:
 
 [,java]
 ----
-n("foo"), n("y"), gets(), n("value")
+p(n("foo"), n("y"), IS, n("value"));
 
 foo.y = value;
 ----
@@ -62,7 +60,7 @@ The syntax is different though:
 
 [,java]
 ----
-t("com.example", "MyType"), n("field"), gets(), n("value")
+p(classType("com.example", "MyType"), n("field"), IS, n("value"));
 
 com.example.MyType.field = value;
 ----
@@ -87,8 +85,8 @@ An useful example is when using the `_this()` instruction, like so:
 
 [,java]
 ----
-_this(), n("x"), gets(), n("x"),
-_this(), n("y"), gets(), n("y")
+p(THIS, n("x"), IS, n("x"));
+p(THIS, n("y"), IS, n("y"));
 
 this.x = x;
 this.y = y;
@@ -98,8 +96,8 @@ In the following example the reference is returned by a method invocation:
 
 [,java]
 ----
-invoke("point"), n("x"), gets(), n("valueX"), end(),
-invoke("point"), n("y"), gets(), n("valueY"), end()
+p(v("point"), n("x"), IS, n("valueX"));
+p(v("point"), n("y"), IS, n("valueY"));
 
 point().x = valueX;
 point().y = valueY;
@@ -109,7 +107,7 @@ The primary expression can also start with an expression name:
 
 [,java]
 ----
-n("a"), invoke("b"), n("x"), gets(), n("value"), end() 
+p(n("a"), v("b"), n("x"), IS, n("value")); 
 
 n.b().x = value;
 ----
@@ -122,9 +120,9 @@ In Objectos Code, to assign values to the components of an array reference you w
 
 [,java]
 ----
-n("elements"), dim(i(0)), gets(), n("e0"), end(),
-n("elements"), dim(i(1)), gets(), n("e1"), end(),
-n("elements"), dim(i(2)), gets(), n("e2"), end()
+p(n("elements"), dim(i(0)), IS, n("e0"));
+p(n("elements"), dim(i(1)), IS, n("e1"));
+p(n("elements"), dim(i(2)), IS, n("e2"));
 
 elements[0] = e0;
 elements[1] = e1;
@@ -135,7 +133,7 @@ It also works with multidimensional arrays:
 
 [,java]
 ----
-n("multi"), dim(n("x")), dim(n("y")), gets(), n("value"), end()
+p(n("multi"), dim(n("x")), dim(n("y")), IS, n("value"));
 
 mulit[x][y] = value;
 ----
@@ -144,7 +142,7 @@ The array reference might be given by a method invocation expression:
 
 [,java]
 ----
-invoke("arrayRef"), dim(invoke("index")), gets(), n("value"), end()
+p(v("arrayRef"), dim(v("index")), IS, n("value"));
 
 arrayRef()[index()] = value;
 ----
@@ -157,8 +155,8 @@ An assignment expression can be the RHS of another assignment expression:
 
 [,java]
 ----
-n("a"), gets(), n("b"), gets(), n("c"), end(),
-n("name"), gets(), invoke("foo"), n("name"), gets(), n("value"), end()
+p(n("a"), IS, n("b"), IS, n("c"));
+p(n("name"), IS, v("foo"), n("name"), IS, n("value"));
 
 a = b = c;
 name = foo().name = value;
@@ -168,9 +166,9 @@ More generally, any expression can be at the RHS:
 
 [,java]
 ----
-n("index"), gets(), i(123), end(),
-n("name"), gets(), s("Some Name"), end(),
-n("foo"), gets(), _new(t("com.example", "Foo")), end()
+p(n("index"), IS, i(123));
+p(n("name"), IS, s("Some Name"));
+p(n("foo"), IS, NEW, classType("com.example", "Foo"));
 
 index = 123;
 name = "Some Name";

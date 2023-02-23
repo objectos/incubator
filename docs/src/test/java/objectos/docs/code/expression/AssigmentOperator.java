@@ -19,6 +19,10 @@ import objectos.code.JavaTemplate;
 
 public class AssigmentOperator extends JavaTemplate {
 
+  static final ClassTypeName FOO = classType("com.example", "Foo");
+
+  static final ClassTypeName MYTYPE = classType("com.example", "MyType");
+
   public static void main(String[] args) {
     System.out.println(new AssigmentOperator());
   }
@@ -27,53 +31,63 @@ public class AssigmentOperator extends JavaTemplate {
   protected final void definition() {
     _class("AssignmentOperator");
     body(
-      _void(), method("overview"), block(
-        n("a"), gets(), n("b"), end(),
+      method(
+        name("overview"),
 
-        n("x"), gets(), n("y"), gets(), n("z"), end(),
+        p(n("a"), IS, n("b")),
 
-        n("barArray"), dim(i(0)), gets(), _new(t("foo", "Bar")), end(),
+        p(n("x"), IS, n("y"), IS, n("z")),
 
-        invoke("m"), n("foo"), gets(), invoke("n"), end(),
+        p(n("barArray"), dim(i(0)), IS, NEW, classType("com.example", "Bar")),
 
-        invoke("foo", n("i"), gets(), n("j"))
+        p(v("m"), n("foo"), IS, v("n")),
+
+        p(v("foo"), arg(n("i"), IS, n("j")))
       ),
 
-      _void(), method("expressionName"), block(
-        n("x"), gets(), n("value"), end(),
+      method(
+        name("expressionName"),
 
-        n("foo"), n("y"), gets(), n("value"),
+        p(n("x"), IS, n("value")),
 
-        t("com.example", "MyType"), n("field"), gets(), n("value")
+        p(n("foo"), n("y"), IS, n("value")),
+
+        p(MYTYPE, n("field"), IS, n("value"))
       ),
 
-      _void(), method("fieldAccess"), block(
-        _this(), n("x"), gets(), n("x"),
-        _this(), n("y"), gets(), n("y"), end(),
+      method(
+        name("fieldAccess"),
 
-        invoke("point"), n("x"), gets(), n("valueX"), end(),
-        invoke("point"), n("y"), gets(), n("valueY"), end(),
+        p(THIS, n("x"), IS, n("x")),
+        p(THIS, n("y"), IS, n("y")),
 
-        n("a"), invoke("b"), n("x"), gets(), n("value")
+        p(v("point"), n("x"), IS, n("valueX")),
+        p(v("point"), n("y"), IS, n("valueY")),
+
+        p(n("a"), v("b"), n("x"), IS, n("value"))
       ),
 
-      _void(), method("arrayAccess"), block(
-        n("elements"), dim(i(0)), gets(), n("e0"), end(),
-        n("elements"), dim(i(1)), gets(), n("e1"), end(),
-        n("elements"), dim(i(2)), gets(), n("e2"), end(),
+      method(
+        name("arrayAccess"),
 
-        n("multi"), dim(n("x")), dim(n("y")), gets(), n("value"), end(),
+        p(n("elements"), dim(i(0)), IS, n("e0")),
+        p(n("elements"), dim(i(1)), IS, n("e1")),
+        p(n("elements"), dim(i(2)), IS, n("e2")),
 
-        invoke("arrayRef"), dim(invoke("index")), gets(), n("value"), end()
+        p(n("multi"), dim(n("x")), dim(n("y")), IS, n("value")),
+
+        p(v("arrayRef"), dim(v("index")), IS, n("value"))
       ),
 
-      _void(), method("rhs"), block(
-        n("a"), gets(), n("b"), gets(), n("c"), end(),
-        n("name"), gets(), invoke("foo"), n("name"), gets(), n("value"), end(),
+      method(
+        name("rhs"),
 
-        n("index"), gets(), i(123), end(),
-        n("name"), gets(), s("Some Name"), end(),
-        n("foo"), gets(), _new(t("com.example", "Foo")), end()
+        p(n("a"), IS, n("b"), IS, n("c")),
+        p(n("name"), IS, v("foo"), n("name"), IS, n("value")),
+
+        p(n("index"), IS, i(123)),
+        p(n("name"), IS, s("Some Name")),
+        p(n("foo"), IS, NEW, FOO)
       )
     );
   }
