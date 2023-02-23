@@ -1,0 +1,53 @@
+= The `return` statement
+
+You can generate a Java `return` statement using Objectos Code.
+
+The following Objectos Code:
+
+[,java]
+----
+p(RETURN, s("Objectos Code"));
+----
+
+Generates the following Java `return` statement:
+
+[,java]
+----
+return "Objectos Code";
+----
+
+The expression in the `return` statement can contain more than one part.
+
+The following Objectos Code:
+
+[,java]
+----
+p(RETURN, n("size"), EQ, i(0));
+----
+
+Generates the following Java code:
+
+[,java]
+----
+return size == 0;
+----
+
+Lastly, you can generate a Java `return` statement that has no expression.
+
+The following Objectos Code:
+
+[,java]
+----
+p(IF, arg(n("values"), v("isEmpty")), block(
+  p(RETURN)
+));
+----
+ 
+Can be used to generate the following Java code:
+ 
+[,java]
+----
+if (values.isEmpty()) {
+  return;
+}
+----

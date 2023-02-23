@@ -15,20 +15,19 @@
  */
 package objectos.docs.code.statement;
 
-import objectos.code.JavaTemplate;
-
-abstract class StatementExample extends JavaTemplate {
-  static final ClassTypeName SYSTEM = classType(System.class);
-
-  @Override
-  protected final void definition() {
-    autoImports();
-    _class("Statement");
-    body(
-      method(this::example)
-    );
+public class Return extends StatementExample {
+  public static void main(String[] args) {
+    System.out.println(new Return());
   }
 
-  abstract void example();
+  @Override
+  final void example() {
+    p(RETURN, s("Objectos Code"));
 
+    p(RETURN, n("size"), EQ, i(0));
+
+    p(IF, arg(n("values"), v("isEmpty")), block(
+      p(RETURN)
+    ));
+  }
 }
