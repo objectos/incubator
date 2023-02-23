@@ -47,6 +47,22 @@ final class LeftBarV0004 extends LeftBarFragment {
         ),
 
         li(
+          h2v0("Method declarations"),
+
+          ul(
+            li(a0("v0004/objectos-code/method/index"))
+          )
+        ),
+
+        li(
+          h2v0("Statements"),
+
+          ul(
+            li(a0("v0004/objectos-code/statement/index"))
+          )
+        ),
+
+        li(
           h2v0("Expressions"),
 
           ul(

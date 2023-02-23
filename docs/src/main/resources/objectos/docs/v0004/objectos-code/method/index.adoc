@@ -1,0 +1,37 @@
+= Method Declarations
+:toc-title: Overview
+
+Objectos Code provides the `method` instruction for adding a method declaration to a class or interface declaration.
+
+The following Objectos Code: 
+
+[,java]
+----
+import objectos.code.JavaTemplate;
+
+public class ToString extends JavaTemplate {
+  @Override
+  protected final void definition() {
+    _class("ToString");
+    body(
+      method(
+        annotation(Override.class),
+        PUBLIC, FINAL, STRING, name("toString"),
+        p(RETURN, s("Objectos Code"))
+      )
+    );
+  }
+}
+----
+
+Generates the following Java code:
+
+[,java]
+----
+class ToString {
+  @java.lang.Override
+  public final java.lang.String toString() {
+    return "Objectos Code";
+  }
+}
+----
