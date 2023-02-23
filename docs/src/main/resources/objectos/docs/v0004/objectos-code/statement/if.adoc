@@ -1,0 +1,191 @@
+= The `if` statement
+
+The following Objectos Code:
+
+[,java]
+----
+p(VAR, name("value"), v("get"));
+p(IF, arg(v("isType"), arg(n("value"))), block(
+  p(v("executeType"), arg(n("value")))
+), ELSE, IF, arg(n("value"), EQ, n("VAR")), block(
+  p(v("executeVar"), arg(n("value")))
+), ELSE, block(
+  p(v("executeError"), arg(n("value")))
+));
+----
+
+Generates the following Java code:
+
+[,java]
+----
+var value = get();
+if (isType(value)) {
+  executeType(value);
+} else if (value == VAR) {
+  executeVar(value);
+} else {
+  executeError(value);
+}
+----
+
+Please read the provided programmer's guide for more information on how to generate Java `if` statements using Objectos Code. 
+
+== Programmer's Guide
+
+Objectos Code supports generating Java `if` statements.
+These are the things you will need to know:
+
+* the `IF` and `ELSE` constants.
+They represent the `if` and the `else` Java keywords respectively;
+* the `arg` instruction.
+You define the `if` expression inside an `arg` instruction; and
+* the `block` instruction.
+Though not strictly required, the substatements of an `if` statement are typically blocks.
+
+Let's begin.
+
+=== The `if-then` statement
+
+Let's start with the following Objectos Code `if-then` statement:
+
+[,java]
+----
+p(IF, arg(n("active")), block(
+  p(v("execute"))
+));
+----
+
+Can be used to generate the following Java code:
+
+[,java]
+----
+if (active) {
+  execute();
+}
+----
+
+Notice that:
+
+* the `if` statement is defined in a `p` instruction;
+* the `IF` constant represents the `if` keyword;
+* the `arg` instruction holds the expression; and
+* the `block` instruction holds the statements to be executed when the expression evaluates to `true`.
+
+=== The `if-then-else` statement
+
+You can generate a Java `if` statement having an `else` clause: 
+
+[,java]
+----
+p(IF, arg(n("size"), EQ, i(0)), block(
+  p(RETURN, s("[]"))
+), ELSE, block(
+  p(RETURN, v("makeToString"))
+));
+----
+
+The Objectos Code above generates:
+
+[,java]
+----
+if (size == 0) {
+  return "[]";
+} else {
+  return makeToString();
+}
+----
+
+Things to notice:
+
+* the whole `if-then-else` statement is defined in a single `p` instruction; and
+* the `ELSE` constant represents the `else` keyword.
+
+=== Expression with many parts
+
+The expression of the `if` statement can have an arbitrary number of parts.
+In other words, the `arg` instruction can take many arguments.
+
+As an example, consider the following Objectos Code:
+
+[,java]
+----
+p(IF, arg(v("compute"), v("list"), v("size"), EQ, i(0)), block(
+  p(v("executeWhenEmpty"))
+));
+----
+
+Notice how the `arg` instruction has many arguments.
+
+It generates the following Java code:
+
+[,java]
+----
+if (compute().list().size() == 0) {
+  executeWhenEmpty();
+}
+----
+
+=== Block with many statements
+
+The `block` instruction can take many statements as well.
+
+The following Objectos Code:
+
+[,java]
+----
+p(IF, arg(n("active")), block(
+  p(v("stepOne")),
+  p(v("stepTwo")),
+  p(v("stepThree"))
+));
+----
+
+Generates the following Java code:
+
+[,java]
+----
+if (active) {
+  stepOne();
+  stepTwo();
+  stepThree();
+}
+----
+
+=== The short `if-then` statement
+
+You can also generate a short `if-then` statement.
+
+The following Objectos Code:
+
+[,java]
+----
+p(IF, arg(n("foo"), EQ, NULL), SYSTEM, n("out"), v("println"), arg(s("foo is null")));
+----
+
+Generates the following Java code:
+
+[,java]
+----
+if (foo == null) System.out.println("foo is null");
+----
+
+=== The short `if-then-else` statement
+
+Similarly, you can also generate a short `if-then-else` statement.
+
+The following Objectos Code:
+
+[,java]
+----
+p(
+  IF, arg(n("o"), EQ, NULL), n("s"), IS, s("null"),
+  ELSE, n("s"), IS, n("o"), v("toString")
+);
+----
+
+Generates the following Java code:
+
+[,java]
+----
+if (o == null) s = "null" else s = o.toString();
+----

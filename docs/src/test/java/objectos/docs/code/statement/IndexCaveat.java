@@ -15,22 +15,13 @@
  */
 package objectos.docs.code.statement;
 
-import objectos.code.JavaTemplate;
-
-public class IndexCaveat extends JavaTemplate {
+public class IndexCaveat extends StatementExample {
   public static void main(String[] args) {
     System.out.println(new IndexCaveat());
   }
 
   @Override
-  protected final void definition() {
-    _class("Index");
-    body(
-      method(this::example)
-    );
-  }
-
-  private void example() {
+  final void example() {
     p(VAR, RETURN, s("abc"));
   }
 }

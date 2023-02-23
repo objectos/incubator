@@ -58,7 +58,8 @@ final class LeftBarV0004 extends LeftBarFragment {
           h2v0("Statements"),
 
           ul(
-            li(a0("v0004/objectos-code/statement/index"))
+            li(a0("v0004/objectos-code/statement/index")),
+            li(a0("v0004/objectos-code/statement/if"))
           )
         ),
 

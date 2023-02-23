@@ -15,9 +15,7 @@
  */
 package objectos.docs.code.statement;
 
-import objectos.code.JavaTemplate;
-
-public class Index extends JavaTemplate {
+public class Index extends StatementExample {
   static final ClassTypeName SB = classType(StringBuilder.class);
 
   public static void main(String[] args) {
@@ -25,14 +23,7 @@ public class Index extends JavaTemplate {
   }
 
   @Override
-  protected final void definition() {
-    _class("Index");
-    body(
-      method(this::example)
-    );
-  }
-
-  private void example() {
+  final void example() {
     p(VAR, name("sb"), NEW, SB);
     p(n("sb"), v("append"), arg(s("Objectos Code")));
     p(RETURN, n("sb"), v("toString"));
