@@ -191,24 +191,12 @@ final class LeftBarV0004 extends LeftBarFragment {
       ),
 
       li(
-        h2v0("New to Objectos"),
+        h2v0("Project"),
 
         ul(
           li(a0("v0004/intro/overview")),
-          li(a0("v0004/intro/install"))
-        )
-      ),
-
-      li(
-        h2v0("Release Notes"),
-
-        ul(
-          li(a0("v0004/relnotes/0.4.2")),
-          li(a0("v0004/relnotes/0.4.1")),
-          li(a0("v0004/relnotes/0.4.0")),
-          li(a0("v0004/relnotes/0.3.0")),
-          li(a0("v0004/relnotes/0.2.0")),
-          li(a0("v0004/relnotes/0.1.0"))
+          li(a0("v0004/intro/install")),
+          li(a0("v0004/relnotes/index"))
         )
       )
     );

@@ -20,8 +20,8 @@ import objectos.util.UnmodifiableList;
 
 enum Version {
 
-  V0_4_X(name("0.4.2"), slug("0.4"), directory("v0004"),
-      releaseDate(2023, 2, 17), Status.LATEST),
+  V0_4_X(name("0.4.3"), slug("0.4"), directory("v0004"),
+      releaseDate(2023, 2, 24), Status.LATEST),
 
   //  V0_4_1(name("0.4.1"), slug("0.4.1"), directory("v000401"),
   //      releaseDate(2023, 2, 10), Status.UNSUPPORTED),
