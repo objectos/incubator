@@ -33,7 +33,7 @@ Please read the provided programmer's guide for more information on how to gener
 == Programmer's Guide
 
 Objectos Code supports generating Java `if` statements.
-These are the things you will need to know:
+These are the things you need to know:
 
 * the `IF` and `ELSE` constants.
 They represent the `if` and the `else` Java keywords respectively;

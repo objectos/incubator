@@ -68,6 +68,7 @@ final class LeftBarV0004 extends LeftBarFragment {
           h2v0("Expressions"),
 
           ul(
+            li(a0("v0004/objectos-code/expression/class-instance-creation")),
             li(a0("v0004/objectos-code/expression/assignment-operator"))
           )
         )
