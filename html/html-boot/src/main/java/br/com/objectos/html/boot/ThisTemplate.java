@@ -19,6 +19,7 @@ import java.io.IOException;
 import objectos.code.ClassTypeName;
 import objectos.code.JavaSink;
 import objectos.code.JavaTemplate;
+import objectos.util.UnmodifiableMap;
 
 abstract class ThisTemplate extends JavaTemplate {
 
@@ -26,7 +27,19 @@ abstract class ThisTemplate extends JavaTemplate {
 
   static final ClassTypeName STRING = ClassTypeName.of(String.class);
 
+  static final ClassTypeName UNMODIFIABLE_MAP = ClassTypeName.of(UnmodifiableMap.class);
+
   static final String attr = "br.com.objectos.html.attribute";
+
+  static final ClassTypeName ATTRIBUTE_KIND = ClassTypeName.of(attr, "AttributeKind");
+
+  static final ClassTypeName ATTRIBUTE_NAME = ClassTypeName.of(attr, "AttributeName");
+
+  static final ClassTypeName NAMES_BUILDER = ClassTypeName.of(attr, "NamesBuilder");
+
+  static final ClassTypeName GLB_ATTR_NAME = ClassTypeName.of(attr, "GlobalAttributeName");
+
+  static final ClassTypeName STD_ATTR_NAME = ClassTypeName.of(attr, "StandardAttributeName");
 
   static final String elem = "br.com.objectos.html.element";
 

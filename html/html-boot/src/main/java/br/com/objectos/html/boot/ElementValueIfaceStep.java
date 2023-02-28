@@ -38,7 +38,7 @@ final class ElementValueIfaceStep extends ThisTemplate {
     autoImports();
 
     interfaceDeclaration(
-      PUBLIC, name(element.valueTypeName), extendsClause(VALUE)
+      PUBLIC, name(element.className), extendsClause(VALUE)
     );
   }
 

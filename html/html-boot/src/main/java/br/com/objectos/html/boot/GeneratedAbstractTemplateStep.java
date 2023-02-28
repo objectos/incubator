@@ -111,7 +111,7 @@ final class GeneratedAbstractTemplateStep extends ThisTemplate {
   private void elementMethods(ElementSpec el) {
     // @formatter:off
     _public(); _final(); t(elem, "ElementName");
-    method(el.methodName(), t(spi_type, el.valueSimpleName()), ellipsis(), id("values"));
+    method(el.methodName(), t(spi_type, el.className.simpleName()), ellipsis(), id("values"));
     block(
       _return(),
       invoke(

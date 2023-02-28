@@ -39,17 +39,17 @@ final class ElementSpec
 
   private final Set<ElementSpec> parentSet = new TreeSet<>();
 
-  public final String constantName;
+  public final ClassTypeName className;
 
-  public final ClassTypeName valueTypeName;
+  public final String constantName;
 
   ElementSpec(SpecDsl dsl, String name) {
     this.dsl = dsl;
     this.name = name;
 
-    constantName = JavaNames.toIdentifier(name.toUpperCase());
+    className = ClassTypeName.of(ThisTemplate.spi_type, valueSimpleName());
 
-    valueTypeName = ClassTypeName.of(ThisTemplate.spi_type, valueSimpleName());
+    constantName = JavaNames.toIdentifier(name.toUpperCase());
   }
 
   // DSL methods
@@ -185,14 +185,6 @@ final class ElementSpec
     childSpec.prepare(this);
   }
 
-  public final String simpleName() {
-    return JavaNames.toValidClassName(name);
-  }
-
-  public final String valueSimpleName() {
-    return simpleName() + "Value";
-  }
-
   public final ElementSpec zeroOrMore(Child el) {
     stringKindIfNecessary();
 
@@ -208,10 +200,18 @@ final class ElementSpec
     attribute = null;
   }
 
+  private String simpleName() {
+    return JavaNames.toValidClassName(name);
+  }
+
   private void stringKindIfNecessary() {
     if (attribute != null) {
       setKind(AttributeKind.STRING);
     }
+  }
+
+  private String valueSimpleName() {
+    return simpleName() + "Value";
   }
 
 }

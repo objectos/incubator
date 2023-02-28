@@ -18,8 +18,11 @@ package br.com.objectos.html.boot;
 import br.com.objectos.html.boot.util.JavaNames;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
+import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 import java.util.TreeSet;
+import objectos.code.ClassTypeName;
 import objectos.util.UnmodifiableSet;
 
 abstract class AttributeSpec {
@@ -40,11 +43,14 @@ abstract class AttributeSpec {
 
   }
 
-  final Set<String> interfaceSet = new TreeSet<>();
+  public final ClassTypeName className;
 
+  @Deprecated
   public final String classSimpleName;
 
   public final String constantName;
+
+  public final Map<String, ClassTypeName> interfaceMap = new TreeMap<>();
 
   private final Set<AttributeKind> kindSet = new TreeSet<>();
 
@@ -56,6 +62,8 @@ abstract class AttributeSpec {
     this.name = name;
 
     classSimpleName = JavaNames.toValidClassName(name);
+
+    className = ClassTypeName.of(ThisTemplate.STD_ATTR_NAME, classSimpleName);
 
     constantName = JavaNames.toIdentifier(name.toUpperCase());
   }
@@ -78,9 +86,7 @@ abstract class AttributeSpec {
 
   public boolean global() { return false; }
 
-  public final Set<String> interfaceSet() {
-    return interfaceSet;
-  }
+  public final Iterable<ClassTypeName> interfaces() { return interfaceMap.values(); }
 
   public final AttributeKind kind() {
     Set<AttributeKind> s;
@@ -113,6 +119,8 @@ abstract class AttributeSpec {
   public final String simpleName() {
     return JavaNames.toValidClassName(name);
   }
+
+  final Set<String> interfaceSet() { return interfaceMap.keySet(); }
 
   abstract ElementAttributeSpec toElementAttributeSpec(ElementSpec parent);
 

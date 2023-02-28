@@ -15,156 +15,185 @@
  */
 package br.com.objectos.html.boot;
 
-import objectos.util.UnmodifiableMap;
+import objectos.code.ArrayTypeName;
+import objectos.code.ParameterizedTypeName;
+import objectos.code.tmpl.IncludeTarget;
 
 final class StandardAttributeNameStep extends ThisTemplate {
 
+  private static final ParameterizedTypeName MAP = ParameterizedTypeName.of(
+    UNMODIFIABLE_MAP, STRING, STD_ATTR_NAME
+  );
+
+  private int counter;
+
+  private AttributeSpec currentAttribute;
+
   @Override
   protected final void definition() {
-    // @formatter:off
-    _package(attr);
+    packageDeclaration(attr);
 
     autoImports();
 
-    _public(); _abstract(); _class("StandardAttributeName"); _implements();
-    t(attr, "AttributeName"); t(spi_type, "Value"); body(
-      include(this::constants),
-
-      _private(), _static(), _final(), t(t(attr, "StandardAttributeName"), dim()),
-      id("ARRAY"), ainit(include(this::constantNames)),
-
-      _private(), _static(), _final(),
-      t(t(UnmodifiableMap.class), t(String.class), t(attr, "StandardAttributeName")),
-      id("MAP"), invoke("mapInit"),
-
-      _private(), _final(), _int(), id("code"),
-
-      _private(), _final(), t(attr, "AttributeKind"), id("kind"),
-
-      _private(), _final(), t(String.class), id("name"),
-
-      constructor(
-        _int(), id("code"),
-        t(attr, "AttributeKind"), id("kind"),
-        t(String.class), id("name")
-      ), block(
-        _this(), n("code"), gets(), n("code"),
-        _this(), n("kind"), gets(), n("kind"),
-        _this(), n("name"), gets(), n("name")
-      ),
-
-      _public(), _static(), t(attr, "StandardAttributeName"),
-      method("getByCode", _int(), id("code")), block(
-        _return(), n("ARRAY"),dim(n("code"))
-      ),
-
-      _public(), _static(), t(attr, "StandardAttributeName"),
-      method("getByName", t(String.class), id("name")), block(
-        _return(), n("MAP"), invoke("get", n("name"))
-      ),
-
-      _public(), _static(), _int(), method("size"), block(
-        _return(), n("ARRAY"), n("length")
-      ),
-
-      _private(), _static(),
-      t(t(UnmodifiableMap.class), t(String.class), t(attr, "StandardAttributeName")),
-      method("mapInit"), block(
-        _var(), id("builder"), _new(t(attr, "NamesBuilder")), end(),
-        include(this::mapInit),
-        _return(), n("builder"), invoke("build")
-      ),
-
-      at(t(Override.class)),
-      _public(), _final(), _int(),  method("getCode"), block(
-        _return(), n("code")
-      ),
-
-      at(t(Override.class)),
-      _public(), _final(), t(attr, "AttributeKind"),  method("getKind"), block(
-        _return(), n("kind")
-      ),
-
-      at(t(Override.class)),
-      _public(), _final(), t(String.class), method("getName"), block(
-        _return(), n("name")
-      ),
-
-      at(t(Override.class)),
-      _public(), _final(), _void(), method("mark", t(spi_tmpl, "Marker"), id("marker")), block(
-        n("marker"), invoke("markAttribute")
-      ),
-
-      at(t(Override.class)),
-      _public(), _final(), _void(),
-      method("render", t(spi_tmpl, "Renderer"), id("renderer")), block(),
-
-      include(this::nameTypes)
-    );
-    // @formatter:on
+    classDeclaration(this::standardAttributeName);
   }
 
-  private void constantNames() {
-    nl();
+  private void standardAttributeName() {
+    modifiers(PUBLIC, ABSTRACT);
+    name(STD_ATTR_NAME);
+    implementsClause(ATTRIBUTE_NAME, VALUE);
+
+    for (var attribute : spec.attributes()) {
+      field(
+        PUBLIC, STATIC, FINAL, attribute.className, name(attribute.constantName),
+        NEW, attribute.className
+      );
+    }
+
+    field((IncludeTarget) this::standardAttributeNameArray);
+
+    field(
+      PRIVATE, STATIC, FINAL, MAP, name("MAP"), v("mapInit")
+    );
+
+    field(
+      PRIVATE, FINAL, INT, name("code")
+    );
+
+    field(
+      PRIVATE, FINAL, ATTRIBUTE_KIND, name("kind")
+    );
+
+    field(
+      PRIVATE, FINAL, STRING, name("name")
+    );
+
+    constructor(
+      parameter(INT, "code"),
+      parameter(ATTRIBUTE_KIND, "kind"),
+      parameter(STRING, "name"),
+
+      p(THIS, n("code"), IS, n("code")),
+      p(THIS, n("kind"), IS, n("kind")),
+      p(THIS, n("name"), IS, n("name"))
+    );
+
+    method(
+      PUBLIC, STATIC, STD_ATTR_NAME, name("getByCode"),
+      parameter(INT, "code"),
+      p(RETURN, n("ARRAY"), dim(n("code")))
+    );
+
+    method(
+      PUBLIC, STATIC, STD_ATTR_NAME, name("getByName"),
+      parameter(STRING, "name"),
+      p(RETURN, n("MAP"), v("get"), arg(n("name")))
+    );
+
+    method(
+      PUBLIC, STATIC, INT, name("size"),
+      p(RETURN, n("ARRAY"), n("length"))
+    );
+
+    method(this::standardAttributeNameMapInit);
+
+    method(
+      annotation(OVERRIDE),
+      PUBLIC, FINAL, INT, name("getCode"),
+      p(RETURN, n("code"))
+    );
+
+    method(
+      annotation(OVERRIDE),
+      PUBLIC, FINAL, ATTRIBUTE_KIND, name("getKind"),
+      p(RETURN, n("kind"))
+    );
+
+    method(
+      annotation(OVERRIDE),
+      PUBLIC, FINAL, STRING, name("getName"),
+      p(RETURN, n("name"))
+    );
+
+    method(
+      annotation(OVERRIDE),
+      PUBLIC, FINAL, VOID, name("mark"),
+      parameter(MARKER, "marker"),
+      p(n("marker"), v("markAttribute"))
+    );
+
+    method(
+      annotation(OVERRIDE),
+      PUBLIC, FINAL, VOID, name("render"),
+      parameter(RENDERER, "renderer")
+    );
+
+    for (var attribute : spec.attributes()) {
+      currentAttribute = attribute;
+
+      classDeclaration(this::standardAttributeNameType);
+    }
+  }
+
+  private void standardAttributeNameArray() {
+    modifiers(PRIVATE, STATIC, FINAL);
+
+    var arrayType = ArrayTypeName.of(STD_ATTR_NAME);
+
+    consume(arrayType);
+
+    name("ARRAY");
+
+    arrayInitializer();
+
+    consume(NL);
 
     var attributes = spec.attributes();
 
     for (var attribute : attributes) {
-      code(n(attribute.constantName()), end(), nl());
+      value(n(attribute.constantName()));
+
+      consume(NL);
     }
   }
 
-  private void constants() {
+  private void standardAttributeNameMapInit() {
+    modifiers(PRIVATE, STATIC);
+    returnType(MAP);
+    name("mapInit");
+    p(VAR, name("builder"), NEW, NAMES_BUILDER);
     for (var attribute : spec.attributes()) {
-      var simpleName = attribute.classSimpleName;
-
-      // @formatter:off
-      _public(); _static(); _final(); t(attr, "StandardAttributeName", simpleName);
-      id(attribute.constantName); _new(t(attr, "StandardAttributeName", simpleName));
-      // @formatter:off
+      p(n("builder"), v("put"), arg(s(attribute.name())), arg(n(attribute.constantName)));
     }
+    p(RETURN, n("builder"), v("build"));
   }
 
-  private void mapInit() {
-    for (var attribute : spec.attributes()) {
-      // @formatter:off
-      n("builder"); invoke("put", s(attribute.name()), end(), n(attribute.constantName)); end();
-      // @formatter:on
-    }
-  }
+  private void standardAttributeNameType() {
+    modifiers(PUBLIC, STATIC);
 
-  private void nameTypes() {
-    int counter = 0;
+    name(currentAttribute.className);
 
-    for (var attribute : spec.attributes()) {
-      var kind = attribute.kind();
+    extendsClause(STD_ATTR_NAME);
 
-      // @formatter:off
-      _public(); _static(); _class(attribute.classSimpleName);
-      _extends(); t(attr, "StandardAttributeName");
-      _implements(); nameTypesImplements(attribute); body(
-        _private(), constructor(), block(
-          _super(
-            i(counter++),
-            t(attr, "AttributeKind"), n(kind.name()),
-            s(attribute.name())
-          )
-        )
-      );
-      // @formatter:on
-    }
-  }
-
-  private void nameTypesImplements(AttributeSpec attribute) {
-    if (attribute.global()) {
-      t(attr, "GlobalAttributeName");
+    if (currentAttribute.global()) {
+      implementsClause(GLB_ATTR_NAME);
     } else {
-      var names = attribute.interfaceSet();
-
-      for (var sn : names) {
-        t(spi_type, sn);
+      for (var ifaceName : currentAttribute.interfaces()) {
+        implementsClause(ifaceName);
       }
     }
+
+    var kind = currentAttribute.kind();
+
+    constructor(
+      PRIVATE,
+      p(
+        SUPER,
+        arg(i(counter++)),
+        arg(ATTRIBUTE_KIND, n(kind.name())),
+        arg(s(currentAttribute.name()))
+      )
+    );
   }
 
 }

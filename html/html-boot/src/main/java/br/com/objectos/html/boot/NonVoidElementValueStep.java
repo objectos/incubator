@@ -31,7 +31,7 @@ final class NonVoidElementValueStep extends ThisTemplate {
   private void superInterfaces() {
     for (var element : spec.elements()) {
       if (element.hasEndTag()) {
-        extendsClause(element.valueTypeName);
+        extendsClause(element.className);
       }
     }
   }

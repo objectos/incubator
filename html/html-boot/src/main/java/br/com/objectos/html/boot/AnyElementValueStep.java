@@ -30,7 +30,7 @@ final class AnyElementValueStep extends ThisTemplate {
 
   private void superInterfaces() {
     for (var element : spec.elements()) {
-      extendsClause(element.valueTypeName);
+      extendsClause(element.className);
     }
   }
 
