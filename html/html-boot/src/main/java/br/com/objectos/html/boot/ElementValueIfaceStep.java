@@ -33,13 +33,13 @@ final class ElementValueIfaceStep extends ThisTemplate {
 
   @Override
   protected final void definition() {
-    // @formatter:off
-    _package(spi_type);
+    packageDeclaration(spi_type);
 
     autoImports();
 
-    _public(); _interface(element.valueSimpleName()); _extends(); t(spi_type, "Value"); body();
-    // @formatter:on
+    interfaceDeclaration(
+      PUBLIC, name(element.valueTypeName), extendsClause(VALUE)
+    );
   }
 
 }
