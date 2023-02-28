@@ -32,6 +32,8 @@ abstract class ThisTemplate extends JavaTemplate {
 
   static final ClassTypeName ANY_ELEMENT_VALUE = ClassTypeName.of(spi_type, "AnyElementValue");
 
+  static final ClassTypeName NON_VOID = ClassTypeName.of(spi_type, "NonVoidElementValue");
+
   static final ClassTypeName VALUE = ClassTypeName.of(spi_type, "Value");
 
   SpecDsl spec;
