@@ -15,77 +15,97 @@
  */
 package br.com.objectos.html.boot;
 
+import objectos.code.ArrayTypeName;
+
 final class StandardElementNameStep extends ThisTemplate {
 
   @Override
   protected final void definition() {
-    // @formatter:off
-    _package(elem);
+    packageDeclaration(elem);
 
     autoImports();
 
-    _public(); _enum("StandardElementName"); _implements(); t(elem, "ElementName"); body(
-      include(this::enumConstants),
-
-      _private(), _static(), _final(), t(t(elem, "StandardElementName"), dim()),
-      id("ARRAY"), t(elem, "StandardElementName"), invoke("values"),
-
-      _private(), _final(), t(elem, "ElementKind"), id("kind"),
-
-      _private(), _final(), t(String.class), id("name"),
-
-      _private(), constructor(
-        t(elem, "ElementKind"), id("kind"),
-        t(String.class), id("name")
-      ), block(
-        _this(), n("kind"), gets(), n("kind"),
-        _this(), n("name"), gets(), n("name")
-      ),
-
-      _public(), _static(), t(elem, "StandardElementName"),
-      method("getByCode", _int(), id("code")), block(
-        _return(), n("ARRAY"), dim(n("code"))
-      ),
-
-      _public(), _static(), _int(), method("size"), block(
-        _return(), n("ARRAY"), n("length")
-      ),
-
-      at(t(Override.class)),
-      _public(), _final(), _int(), method("getCode"), block(
-        _return(), invoke("ordinal")
-      ),
-
-      at(t(Override.class)),
-      _public(), _final(), t(elem, "ElementKind"), method("getKind"), block(
-        _return(), n("kind")
-      ),
-
-      at(t(Override.class)),
-      _public(), _final(), t(String.class), method("getName"), block(
-        _return(), n("name")
-      ),
-
-      at(t(Override.class)),
-      _public(), _final(), _void(),
-      method("mark", t(spi_tmpl, "Marker"), id("marker")), block(
-        n("marker"), invoke("markElement")
-      ),
-
-      at(t(Override.class)),
-      _public(), _final(), _void(),
-      method("render", t(spi_tmpl, "Renderer"), id("renderer")), block()
-    );
+    enumDeclaration(this::standardElementName);
   }
 
-  private void enumConstants() {
+  private void standardElementName() {
+    modifiers(PUBLIC);
+    name(STD_ELEMENT_NAME);
+    implementsClause(ELEMENT_NAME);
+
     for (var element : spec.elements()) {
       enumConstant(
         element.constantName,
-        t(elem, "ElementKind"), n(element.hasEndTag() ? "NORMAL" : "VOID"), end(),
-        s(element.name())
+        arg(ELEMENT_KIND, n(element.hasEndTag() ? "NORMAL" : "VOID")),
+        arg(s(element.name()))
       );
     }
+
+    var arrayType = ArrayTypeName.of(STD_ELEMENT_NAME);
+
+    field(
+      PRIVATE, STATIC, FINAL, arrayType, name("ARRAY"),
+      STD_ELEMENT_NAME, v("values")
+    );
+
+    field(
+      PRIVATE, FINAL, ELEMENT_KIND, name("kind")
+    );
+
+    field(
+      PRIVATE, FINAL, STRING, name("name")
+    );
+
+    constructor(
+      PRIVATE,
+      parameter(ELEMENT_KIND, "kind"),
+      parameter(STRING, "name"),
+
+      p(THIS, n("kind"), IS, n("kind")),
+      p(THIS, n("name"), IS, n("name"))
+    );
+
+    method(
+      PUBLIC, STATIC, STD_ELEMENT_NAME, name("getByCode"),
+      parameter(INT, "code"),
+      p(RETURN, n("ARRAY"), dim(n("code")))
+    );
+
+    method(
+      PUBLIC, STATIC, INT, name("size"),
+      p(RETURN, n("ARRAY"), n("length"))
+    );
+
+    method(
+      annotation(OVERRIDE),
+      PUBLIC, FINAL, INT, name("getCode"),
+      p(RETURN, v("ordinal"))
+    );
+
+    method(
+      annotation(OVERRIDE),
+      PUBLIC, FINAL, ELEMENT_KIND, name("getKind"),
+      p(RETURN, n("kind"))
+    );
+
+    method(
+      annotation(OVERRIDE),
+      PUBLIC, FINAL, STRING, name("getName"),
+      p(RETURN, n("name"))
+    );
+
+    method(
+      annotation(OVERRIDE),
+      PUBLIC, FINAL, VOID, name("mark"),
+      parameter(MARKER, "marker"),
+      p(n("marker"), v("markElement"))
+    );
+
+    method(
+      annotation(OVERRIDE),
+      PUBLIC, FINAL, VOID, name("render"),
+      parameter(RENDERER, "renderer")
+    );
   }
 
 }

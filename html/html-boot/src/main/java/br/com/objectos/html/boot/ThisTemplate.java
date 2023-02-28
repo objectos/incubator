@@ -22,11 +22,25 @@ import objectos.code.JavaTemplate;
 
 abstract class ThisTemplate extends JavaTemplate {
 
+  static final ClassTypeName OVERRIDE = ClassTypeName.of(Override.class);
+
+  static final ClassTypeName STRING = ClassTypeName.of(String.class);
+
   static final String attr = "br.com.objectos.html.attribute";
 
   static final String elem = "br.com.objectos.html.element";
 
+  static final ClassTypeName ELEMENT_KIND = ClassTypeName.of(elem, "ElementKind");
+
+  static final ClassTypeName ELEMENT_NAME = ClassTypeName.of(elem, "ElementName");
+
+  static final ClassTypeName STD_ELEMENT_NAME = ClassTypeName.of(elem, "StandardElementName");
+
   static final String spi_tmpl = "br.com.objectos.html.spi.tmpl";
+
+  static final ClassTypeName MARKER = ClassTypeName.of(spi_tmpl, "Marker");
+
+  static final ClassTypeName RENDERER = ClassTypeName.of(spi_tmpl, "Renderer");
 
   static final String spi_type = "br.com.objectos.html.spi.type";
 
