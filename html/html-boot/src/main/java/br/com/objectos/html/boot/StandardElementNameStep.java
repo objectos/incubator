@@ -58,8 +58,8 @@ final class StandardElementNameStep extends ThisTemplate {
 
     constructor(
       PRIVATE,
-      parameter(ELEMENT_KIND, "kind"),
-      parameter(STRING, "name"),
+      parameter(ELEMENT_KIND, name("kind")),
+      parameter(STRING, name("name")),
 
       p(THIS, n("kind"), IS, n("kind")),
       p(THIS, n("name"), IS, n("name"))
@@ -67,7 +67,7 @@ final class StandardElementNameStep extends ThisTemplate {
 
     method(
       PUBLIC, STATIC, STD_ELEMENT_NAME, name("getByCode"),
-      parameter(INT, "code"),
+      parameter(INT, name("code")),
       p(RETURN, n("ARRAY"), dim(n("code")))
     );
 
@@ -97,14 +97,14 @@ final class StandardElementNameStep extends ThisTemplate {
     method(
       annotation(OVERRIDE),
       PUBLIC, FINAL, VOID, name("mark"),
-      parameter(MARKER, "marker"),
+      parameter(MARKER, name("marker")),
       p(n("marker"), v("markElement"))
     );
 
     method(
       annotation(OVERRIDE),
       PUBLIC, FINAL, VOID, name("render"),
-      parameter(RENDERER, "renderer")
+      parameter(RENDERER, name("renderer"))
     );
   }
 

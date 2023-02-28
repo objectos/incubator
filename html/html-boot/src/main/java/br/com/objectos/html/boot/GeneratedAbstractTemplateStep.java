@@ -53,7 +53,7 @@ final class GeneratedAbstractTemplateStep extends ThisTemplate {
     AttributeKind kind = attribute.kind();
 
     if (kind.isString()) {
-      parameter(STRING, "value");
+      parameter(STRING, name("value"));
     }
   }
 
@@ -88,34 +88,34 @@ final class GeneratedAbstractTemplateStep extends ThisTemplate {
 
     method(
       ABSTRACT, typeParameter("N", STD_ATTR_NAME), N, name("addStandardAttribute"),
-      parameter(N, "name")
+      parameter(N, name("name"))
     );
 
     method(
       ABSTRACT, typeParameter("N", STD_ATTR_NAME), N, name("addStandardAttribute"),
-      parameter(N, "name"),
-      parameter(STRING, "value")
+      parameter(N, name("name")),
+      parameter(STRING, name("value"))
     );
 
     method(
       ABSTRACT, ELEMENT_NAME, name("addStandardElement"),
-      parameter(STD_ELEMENT_NAME, "name"),
-      parameter(STRING, "text")
+      parameter(STD_ELEMENT_NAME, name("name")),
+      parameter(STRING, name("text"))
     );
 
     var valueArray = ArrayTypeName.of(VALUE);
 
     method(
       ABSTRACT, ELEMENT_NAME, name("addStandardElement"),
-      parameter(STD_ELEMENT_NAME, "name"),
-      parameter(valueArray, "values")
+      parameter(STD_ELEMENT_NAME, name("name")),
+      parameter(valueArray, name("values"))
     );
   }
 
   private void elementTextMethod(ElementSpec element) {
     method(
       PUBLIC, FINAL, ELEMENT_NAME, name(element.methodName()),
-      parameter(STRING, "text"),
+      parameter(STRING, name("text")),
       p(
         RETURN,
         v("addStandardElement"),
@@ -128,7 +128,7 @@ final class GeneratedAbstractTemplateStep extends ThisTemplate {
   private void elementValuesMethod(ElementSpec element) {
     method(
       PUBLIC, FINAL, ELEMENT_NAME, name(element.methodName()),
-      parameter(element.className, ELLIPSIS, "values"),
+      parameter(element.className, ELLIPSIS, name("values")),
       p(
         RETURN,
         v("addStandardElement"),

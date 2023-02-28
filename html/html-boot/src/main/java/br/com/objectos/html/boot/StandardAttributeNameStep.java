@@ -73,9 +73,9 @@ final class StandardAttributeNameStep extends ThisTemplate {
     );
 
     constructor(
-      parameter(INT, "code"),
-      parameter(ATTRIBUTE_KIND, "kind"),
-      parameter(STRING, "name"),
+      parameter(INT, name("code")),
+      parameter(ATTRIBUTE_KIND, name("kind")),
+      parameter(STRING, name("name")),
 
       p(THIS, n("code"), IS, n("code")),
       p(THIS, n("kind"), IS, n("kind")),
@@ -84,13 +84,13 @@ final class StandardAttributeNameStep extends ThisTemplate {
 
     method(
       PUBLIC, STATIC, STD_ATTR_NAME, name("getByCode"),
-      parameter(INT, "code"),
+      parameter(INT, name("code")),
       p(RETURN, n("ARRAY"), dim(n("code")))
     );
 
     method(
       PUBLIC, STATIC, STD_ATTR_NAME, name("getByName"),
-      parameter(STRING, "name"),
+      parameter(STRING, name("name")),
       p(RETURN, n("MAP"), v("get"), arg(n("name")))
     );
 
@@ -125,14 +125,14 @@ final class StandardAttributeNameStep extends ThisTemplate {
     method(
       annotation(OVERRIDE),
       PUBLIC, FINAL, VOID, name("mark"),
-      parameter(MARKER, "marker"),
+      parameter(MARKER, name("marker")),
       p(n("marker"), v("markAttribute"))
     );
 
     method(
       annotation(OVERRIDE),
       PUBLIC, FINAL, VOID, name("render"),
-      parameter(RENDERER, "renderer")
+      parameter(RENDERER, name("renderer"))
     );
 
     for (var attribute : spec.attributes()) {
