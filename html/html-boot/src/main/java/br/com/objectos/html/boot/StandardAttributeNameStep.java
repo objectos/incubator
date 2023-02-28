@@ -17,7 +17,6 @@ package br.com.objectos.html.boot;
 
 import objectos.code.ArrayTypeName;
 import objectos.code.ParameterizedTypeName;
-import objectos.code.tmpl.IncludeTarget;
 
 final class StandardAttributeNameStep extends ThisTemplate {
 
@@ -35,14 +34,14 @@ final class StandardAttributeNameStep extends ThisTemplate {
 
     autoImports();
 
-    classDeclaration(this::standardAttributeName);
+    classDeclaration(
+      PUBLIC, ABSTRACT, name(STD_ATTR_NAME),
+      implementsClause(ATTRIBUTE_NAME, VALUE),
+      include(this::standardAttributeName)
+    );
   }
 
   private void standardAttributeName() {
-    modifiers(PUBLIC, ABSTRACT);
-    name(STD_ATTR_NAME);
-    implementsClause(ATTRIBUTE_NAME, VALUE);
-
     for (var attribute : spec.attributes()) {
       field(
         PUBLIC, STATIC, FINAL, attribute.className, name(attribute.constantName),
@@ -50,7 +49,12 @@ final class StandardAttributeNameStep extends ThisTemplate {
       );
     }
 
-    field((IncludeTarget) this::standardAttributeNameArray);
+    var arrayType = ArrayTypeName.of(STD_ATTR_NAME);
+
+    field(
+      PRIVATE, STATIC, FINAL, arrayType, name("ARRAY"),
+      arrayInitializer(), include(this::standardAttributeNameArray)
+    );
 
     field(
       PRIVATE, STATIC, FINAL, MAP, name("MAP"), v("mapInit")
@@ -95,7 +99,10 @@ final class StandardAttributeNameStep extends ThisTemplate {
       p(RETURN, n("ARRAY"), n("length"))
     );
 
-    method(this::standardAttributeNameMapInit);
+    method(
+      PRIVATE, STATIC, MAP, name("mapInit"),
+      include(this::standardAttributeNameMapInit)
+    );
 
     method(
       annotation(OVERRIDE),
@@ -131,21 +138,29 @@ final class StandardAttributeNameStep extends ThisTemplate {
     for (var attribute : spec.attributes()) {
       currentAttribute = attribute;
 
-      classDeclaration(this::standardAttributeNameType);
+      var kind = currentAttribute.kind();
+
+      classDeclaration(
+        PUBLIC, STATIC, name(currentAttribute.className), extendsClause(STD_ATTR_NAME),
+
+        currentAttribute.global()
+            ? implementsClause(GLB_ATTR_NAME)
+            : include(this::standardAttributeNameType),
+
+        constructor(
+          PRIVATE,
+          p(
+            SUPER,
+            arg(i(counter++)),
+            arg(ATTRIBUTE_KIND, n(kind.name())),
+            arg(s(currentAttribute.name()))
+          )
+        )
+      );
     }
   }
 
   private void standardAttributeNameArray() {
-    modifiers(PRIVATE, STATIC, FINAL);
-
-    var arrayType = ArrayTypeName.of(STD_ATTR_NAME);
-
-    consume(arrayType);
-
-    name("ARRAY");
-
-    arrayInitializer();
-
     consume(NL);
 
     var attributes = spec.attributes();
@@ -158,42 +173,19 @@ final class StandardAttributeNameStep extends ThisTemplate {
   }
 
   private void standardAttributeNameMapInit() {
-    modifiers(PRIVATE, STATIC);
-    returnType(MAP);
-    name("mapInit");
     p(VAR, name("builder"), NEW, NAMES_BUILDER);
+
     for (var attribute : spec.attributes()) {
       p(n("builder"), v("put"), arg(s(attribute.name())), arg(n(attribute.constantName)));
     }
+
     p(RETURN, n("builder"), v("build"));
   }
 
   private void standardAttributeNameType() {
-    modifiers(PUBLIC, STATIC);
-
-    name(currentAttribute.className);
-
-    extendsClause(STD_ATTR_NAME);
-
-    if (currentAttribute.global()) {
-      implementsClause(GLB_ATTR_NAME);
-    } else {
-      for (var ifaceName : currentAttribute.interfaces()) {
-        implementsClause(ifaceName);
-      }
+    for (var ifaceName : currentAttribute.interfaces()) {
+      implementsClause(ifaceName);
     }
-
-    var kind = currentAttribute.kind();
-
-    constructor(
-      PRIVATE,
-      p(
-        SUPER,
-        arg(i(counter++)),
-        arg(ATTRIBUTE_KIND, n(kind.name())),
-        arg(s(currentAttribute.name()))
-      )
-    );
   }
 
 }

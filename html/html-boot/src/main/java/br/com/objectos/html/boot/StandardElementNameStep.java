@@ -25,14 +25,14 @@ final class StandardElementNameStep extends ThisTemplate {
 
     autoImports();
 
-    enumDeclaration(this::standardElementName);
+    enumDeclaration(
+      PUBLIC, name(STD_ELEMENT_NAME), implementsClause(ELEMENT_NAME),
+
+      include(this::standardElementName)
+    );
   }
 
   private void standardElementName() {
-    modifiers(PUBLIC);
-    name(STD_ELEMENT_NAME);
-    implementsClause(ELEMENT_NAME);
-
     for (var element : spec.elements()) {
       enumConstant(
         element.constantName,
