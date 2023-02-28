@@ -15,8 +15,8 @@
  */
 package objectos.docs.code.statement;
 
+import objectos.code.ClassTypeName;
 import objectos.code.JavaTemplate;
-import objectos.code.type.ClassTypeName;
 
 abstract class StatementExample extends JavaTemplate {
   static final ClassTypeName SYSTEM = ClassTypeName.of(System.class);

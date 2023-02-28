@@ -17,9 +17,9 @@ package objectos.docs.code.expression;
 
 import java.io.UncheckedIOException;
 import java.util.HashMap;
+import objectos.code.ClassTypeName;
 import objectos.code.JavaTemplate;
-import objectos.code.type.ClassTypeName;
-import objectos.code.type.ParameterizedTypeName;
+import objectos.code.ParameterizedTypeName;
 
 public class ClassInstanceCreation extends JavaTemplate {
   static final ParameterizedTypeName HASHMAP = ParameterizedTypeName.of(

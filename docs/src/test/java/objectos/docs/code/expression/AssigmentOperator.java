@@ -15,8 +15,8 @@
  */
 package objectos.docs.code.expression;
 
+import objectos.code.ClassTypeName;
 import objectos.code.JavaTemplate;
-import objectos.code.type.ClassTypeName;
 
 public class AssigmentOperator extends JavaTemplate {
 
