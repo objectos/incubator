@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package br.com.objectos.html.boot.spec;
+package br.com.objectos.html.boot;
 
-public abstract class AbstractSpec implements Spec {
+abstract class AbstractSpec implements Spec {
 
   private SpecDsl dsl;
 

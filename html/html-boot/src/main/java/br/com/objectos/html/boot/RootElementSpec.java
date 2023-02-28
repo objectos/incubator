@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package br.com.objectos.html.boot.spec;
+package br.com.objectos.html.boot;
 
-public class RootElementSpec implements AttributeDsl<RootElementSpec> {
+final class RootElementSpec implements AttributeDsl<RootElementSpec> {
 
   private final SpecDsl dsl;
 

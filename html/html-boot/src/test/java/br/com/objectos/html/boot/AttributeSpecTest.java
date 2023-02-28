@@ -17,9 +17,6 @@ package br.com.objectos.html.boot;
 
 import static org.testng.Assert.assertEquals;
 
-import br.com.objectos.html.boot.spec.AttributeKind;
-import br.com.objectos.html.boot.spec.AttributeSpec;
-import br.com.objectos.html.boot.spec.SpecDsl;
 import objectos.util.UnmodifiableList;
 import objectos.util.UnmodifiableSet;
 import org.testng.annotations.Test;

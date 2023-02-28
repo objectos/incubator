@@ -17,7 +17,6 @@ package br.com.objectos.html.boot;
 
 import static org.testng.Assert.assertEquals;
 
-import br.com.objectos.html.boot.spec.AbstractSpec;
 import org.testng.annotations.Test;
 
 public class GeneratedAbstractTemplateStepTest {

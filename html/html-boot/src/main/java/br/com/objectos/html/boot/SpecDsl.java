@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package br.com.objectos.html.boot.spec;
+package br.com.objectos.html.boot;
 
 import java.util.List;
 import java.util.Map;
@@ -35,7 +35,18 @@ public class SpecDsl {
     text = new TextSpec(this);
   }
 
-  public final List<AttributeSpec> attributes() {
+  public final void prepare() {
+    for (ElementSpec element : elementMap.values()) {
+      element.prepare();
+    }
+  }
+
+  public final SpecDsl with(Spec spec) {
+    spec.acceptSpecDsl(this);
+    return this;
+  }
+
+  final List<AttributeSpec> attributes() {
     if (attributes == null) {
       attributes = List.copyOf(attributeMap.values());
     }
@@ -43,28 +54,28 @@ public class SpecDsl {
     return attributes;
   }
 
-  public final AttributeSpec attributeSpec(String name) {
+  final AttributeSpec attributeSpec(String name) {
     return attributeMap.get(name);
   }
 
-  public final CategorySpec category(String name) {
+  final CategorySpec category(String name) {
     return categoryMap.computeIfAbsent(name, this::category0);
   }
 
-  public final ElementSpec element(String name) {
+  final ElementSpec element(String name) {
     return elementMap.computeIfAbsent(name, this::element0);
   }
 
-  public final ElementAttributeSpec elementAttribute(ElementSpec parent, String name) {
+  final ElementAttributeSpec elementAttribute(ElementSpec parent, String name) {
     AttributeSpec attr = attributeMap.computeIfAbsent(name, this::elementAttribute0);
     return attr.toElementAttributeSpec(parent);
   }
 
-  public final Iterable<ElementSpec> elements() {
+  final Iterable<ElementSpec> elements() {
     return elementMap.values();
   }
 
-  public final AttributeSpec globalAttribute(String name) {
+  final AttributeSpec globalAttribute(String name) {
     if (attributeMap.containsKey(name)) {
       throw new IllegalArgumentException(name + " global attribute already defined!");
     }
@@ -73,27 +84,16 @@ public class SpecDsl {
     return attr;
   }
 
-  public final void prepare() {
-    for (ElementSpec element : elementMap.values()) {
-      element.prepare();
-    }
-  }
-
-  public final RootElementSpec rootElement() {
+  final RootElementSpec rootElement() {
     return new RootElementSpec(this);
   }
 
-  public final TemplateSpec template() {
+  final TemplateSpec template() {
     return template;
   }
 
-  public final TextSpec text() {
+  final TextSpec text() {
     return text;
-  }
-
-  public final SpecDsl with(Spec spec) {
-    spec.acceptSpecDsl(this);
-    return this;
   }
 
   private CategorySpec category0(String name) {

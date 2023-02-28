@@ -19,18 +19,18 @@ final class AnyElementValueStep extends ThisTemplate {
 
   @Override
   protected final void definition() {
-    // @formatter:off
-    _package(spi_type);
+    packageDeclaration(spi_type);
 
     autoImports();
 
-    _public(); _interface("AnyElementValue"); _extends(); extendsClause(); body();
-    // @formatter:on
+    interfaceDeclaration(
+      PUBLIC, name(ANY_ELEMENT_VALUE), include(this::superInterfaces)
+    );
   }
 
-  private void extendsClause() {
+  private void superInterfaces() {
     for (var element : spec.elements()) {
-      t(spi_type, element.valueSimpleName());
+      extendsClause(element.valueTypeName);
     }
   }
 

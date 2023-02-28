@@ -15,10 +15,6 @@
  */
 package br.com.objectos.html.boot;
 
-import br.com.objectos.html.boot.spec.AttributeKind;
-import br.com.objectos.html.boot.spec.AttributeSpec;
-import br.com.objectos.html.boot.spec.ElementSpec;
-
 final class GeneratedAbstractTemplateStep extends ThisTemplate {
 
   private AttributeSpec attribute;

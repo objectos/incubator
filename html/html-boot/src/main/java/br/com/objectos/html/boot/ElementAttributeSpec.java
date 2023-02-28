@@ -13,12 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package br.com.objectos.html.boot.spec;
+package br.com.objectos.html.boot;
 
-interface Child {
+class ElementAttributeSpec extends AttributeSpec {
 
-  Name addParent(ElementSpec elementSpec);
-  
-  String name();
+  ElementAttributeSpec(String name) {
+    super(name);
+  }
+
+  @Override
+  final ElementAttributeSpec toElementAttributeSpec(ElementSpec parent) {
+    interfaceSet.add(parent.valueSimpleName());
+    return this;
+  }
 
 }

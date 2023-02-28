@@ -13,12 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package br.com.objectos.html.boot.spec;
+package br.com.objectos.html.boot;
 
 import objectos.lang.Check;
 import objectos.util.GrowableSet;
 
-public class TemplateSpec {
+final class TemplateSpec {
 
   @SuppressWarnings("unused")
   private final SpecDsl dsl;

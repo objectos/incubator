@@ -15,8 +15,8 @@
  */
 package br.com.objectos.html.boot;
 
-import br.com.objectos.html.boot.spec.SpecDsl;
 import java.io.IOException;
+import objectos.code.ClassTypeName;
 import objectos.code.JavaSink;
 import objectos.code.JavaTemplate;
 
@@ -29,6 +29,8 @@ abstract class ThisTemplate extends JavaTemplate {
   static final String spi_tmpl = "br.com.objectos.html.spi.tmpl";
 
   static final String spi_type = "br.com.objectos.html.spi.type";
+
+  static final ClassTypeName ANY_ELEMENT_VALUE = ClassTypeName.of(spi_type, "AnyElementValue");
 
   SpecDsl spec;
 

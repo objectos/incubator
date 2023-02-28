@@ -15,8 +15,6 @@
  */
 package br.com.objectos.html.boot;
 
-import br.com.objectos.html.boot.spec.AbstractSpec;
-import br.com.objectos.html.boot.spec.CategorySpec;
 import java.util.Set;
 import objectos.util.UnmodifiableSet;
 

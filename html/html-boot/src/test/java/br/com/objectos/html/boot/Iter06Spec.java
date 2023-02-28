@@ -15,9 +15,6 @@
  */
 package br.com.objectos.html.boot;
 
-import br.com.objectos.html.boot.spec.AbstractSpec;
-import br.com.objectos.html.boot.spec.CategorySpec;
-
 class Iter06Spec extends AbstractSpec {
 
   static final Iter06Spec INSTANCE = new Iter06Spec();

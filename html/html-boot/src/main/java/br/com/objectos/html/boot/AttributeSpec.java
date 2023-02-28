@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package br.com.objectos.html.boot.spec;
+package br.com.objectos.html.boot;
 
 import br.com.objectos.html.boot.util.JavaNames;
 import java.util.Iterator;
@@ -22,7 +22,7 @@ import java.util.Set;
 import java.util.TreeSet;
 import objectos.util.UnmodifiableSet;
 
-public abstract class AttributeSpec {
+abstract class AttributeSpec {
 
   private static class GlobalAttributeSpec extends AttributeSpec {
 

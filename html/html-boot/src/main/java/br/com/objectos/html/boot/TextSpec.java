@@ -13,46 +13,53 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package br.com.objectos.html.boot.spec;
+package br.com.objectos.html.boot;
 
-import java.util.List;
-import objectos.util.GrowableList;
+import java.util.Set;
+import java.util.TreeSet;
 
-public class CategorySpec {
+final class TextSpec implements Child, Name {
 
-  private final List<Child> childSet = new GrowableList<>();
+  private final String className;
 
-  private final String name;
+  private final Set<ElementSpec> parentSet = new TreeSet<>();
 
-  CategorySpec(String name) {
-    this.name = name;
+  TextSpec(SpecDsl dsl) {
+    className = Object.class.toString();
   }
 
-  public final Iterable<Child> childStream() {
-    return childSet;
+  @Override
+  public final Name addParent(ElementSpec parent) {
+    parentSet.add(parent);
+    return this;
+  }
+
+  public final TextSpec category(CategorySpec category) {
+    category.add(this);
+    return this;
   }
 
   @Override
   public final boolean equals(Object obj) {
-    if (!(obj instanceof CategorySpec)) {
+    if (!(obj instanceof TextSpec)) {
       return false;
     }
-    CategorySpec that = (CategorySpec) obj;
-    return name.equals(that.name);
+    TextSpec that = (TextSpec) obj;
+    return className.equals(that.className);
   }
 
   @Override
   public final int hashCode() {
-    return name.hashCode();
+    return className.hashCode();
   }
 
+  @Override
   public final String name() {
-    return name;
+    return className.toString();
   }
 
-  final CategorySpec add(Child child) {
-    childSet.add(child);
-    return this;
+  public final Iterable<ElementSpec> parentStream() {
+    return parentSet;
   }
 
 }

@@ -13,13 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package br.com.objectos.html.boot.spec;
+package br.com.objectos.html.boot;
 
 import br.com.objectos.html.boot.util.JavaNames;
 import java.util.Set;
 import java.util.TreeSet;
+import objectos.code.ClassTypeName;
 
-public class ElementSpec
+final class ElementSpec
     implements
     AttributeDsl<ElementSpec>,
     Child,
@@ -29,18 +30,26 @@ public class ElementSpec
   private ElementAttributeSpec attribute;
 
   private ContentModel childSpec = ContentModel.start();
+
   private final SpecDsl dsl;
 
   private boolean hasEndTag = true;
+
   private final String name;
+
   private final Set<ElementSpec> parentSet = new TreeSet<>();
 
   public final String constantName;
 
+  public final ClassTypeName valueTypeName;
+
   ElementSpec(SpecDsl dsl, String name) {
     this.dsl = dsl;
     this.name = name;
+
     constantName = JavaNames.toIdentifier(name.toUpperCase());
+
+    valueTypeName = ClassTypeName.of(ThisTemplate.spi_type, valueSimpleName());
   }
 
   // DSL methods
@@ -186,8 +195,11 @@ public class ElementSpec
 
   public final ElementSpec zeroOrMore(Child el) {
     stringKindIfNecessary();
+
     Name name = el.addParent(this);
+
     childSpec = childSpec.zeroOrMore(name);
+
     return this;
   }
 

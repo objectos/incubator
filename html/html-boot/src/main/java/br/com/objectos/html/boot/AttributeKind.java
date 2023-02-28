@@ -13,18 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package br.com.objectos.html.boot.spec;
+package br.com.objectos.html.boot;
 
-class ElementAttributeSpec extends AttributeSpec {
+public enum AttributeKind {
 
-  ElementAttributeSpec(String name) {
-    super(name);
+  STRING,
+
+  BOOLEAN,
+
+  ID,
+
+  CLASS_NAME;
+
+  public final boolean isBoolean() {
+    return BOOLEAN.equals(this);
   }
 
-  @Override
-  final ElementAttributeSpec toElementAttributeSpec(ElementSpec parent) {
-    interfaceSet.add(parent.valueSimpleName());
-    return this;
+  public final boolean isString() {
+    return STRING.equals(this);
   }
 
 }

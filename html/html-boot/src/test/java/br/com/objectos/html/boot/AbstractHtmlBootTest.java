@@ -15,9 +15,6 @@
  */
 package br.com.objectos.html.boot;
 
-import br.com.objectos.html.boot.spec.AttributeSpec;
-import br.com.objectos.html.boot.spec.SpecDsl;
-
 public abstract class AbstractHtmlBootTest {
 
   SpecDsl specDsl;

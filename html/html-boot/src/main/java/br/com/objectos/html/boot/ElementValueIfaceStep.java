@@ -15,8 +15,6 @@
  */
 package br.com.objectos.html.boot;
 
-import br.com.objectos.html.boot.spec.ElementSpec;
-import br.com.objectos.html.boot.spec.SpecDsl;
 import java.io.IOException;
 import objectos.code.JavaSink;
 

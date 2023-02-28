@@ -13,13 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package br.com.objectos.html.boot.spec;
+package br.com.objectos.html.boot;
 
 import static org.testng.Assert.assertEquals;
 
-import br.com.objectos.html.boot.AbstractHtmlBootTest;
-import objectos.util.UnmodifiableList;
 import objectos.util.GrowableList;
+import objectos.util.UnmodifiableList;
 import org.testng.annotations.Test;
 
 public class SpecDslTest extends AbstractHtmlBootTest {

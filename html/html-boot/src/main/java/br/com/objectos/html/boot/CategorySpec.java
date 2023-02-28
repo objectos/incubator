@@ -13,53 +13,46 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package br.com.objectos.html.boot.spec;
+package br.com.objectos.html.boot;
 
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.List;
+import objectos.util.GrowableList;
 
-public class TextSpec implements Child, Name {
+final class CategorySpec {
 
-  private final String className;
+  private final List<Child> childSet = new GrowableList<>();
 
-  private final Set<ElementSpec> parentSet = new TreeSet<>();
+  private final String name;
 
-  TextSpec(SpecDsl dsl) {
-    className = Object.class.toString();
+  CategorySpec(String name) {
+    this.name = name;
   }
 
-  @Override
-  public final Name addParent(ElementSpec parent) {
-    parentSet.add(parent);
-    return this;
-  }
-
-  public final TextSpec category(CategorySpec category) {
-    category.add(this);
-    return this;
+  public final Iterable<Child> childStream() {
+    return childSet;
   }
 
   @Override
   public final boolean equals(Object obj) {
-    if (!(obj instanceof TextSpec)) {
+    if (!(obj instanceof CategorySpec)) {
       return false;
     }
-    TextSpec that = (TextSpec) obj;
-    return className.equals(that.className);
+    CategorySpec that = (CategorySpec) obj;
+    return name.equals(that.name);
   }
 
   @Override
   public final int hashCode() {
-    return className.hashCode();
+    return name.hashCode();
   }
 
-  @Override
   public final String name() {
-    return className.toString();
+    return name;
   }
 
-  public final Iterable<ElementSpec> parentStream() {
-    return parentSet;
+  final CategorySpec add(Child child) {
+    childSet.add(child);
+    return this;
   }
 
 }

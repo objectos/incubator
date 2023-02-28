@@ -15,7 +15,6 @@
  */
 package br.com.objectos.html.boot;
 
-import br.com.objectos.html.boot.spec.AttributeSpec;
 import objectos.util.UnmodifiableMap;
 
 final class StandardAttributeNameStep extends ThisTemplate {
