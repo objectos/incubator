@@ -15,126 +15,127 @@
  */
 package br.com.objectos.html.boot;
 
+import objectos.code.ArrayTypeName;
+import objectos.code.TypeVariableName;
+
 final class GeneratedAbstractTemplateStep extends ThisTemplate {
+
+  private static final TypeVariableName N = TypeVariableName.of("N");
 
   private AttributeSpec attribute;
 
   @Override
   protected final void definition() {
-    // @formatter:off
-    _package("br.com.objectos.html.tmpl");
+    packageDeclaration("br.com.objectos.html.tmpl");
 
     autoImports();
 
-    _abstract(); _class("GeneratedAbstractTemplate"); body(
-      include(this::elementMethods),
-
-      include(this::attrMethods),
-
-      _abstract(), tparam("N", t(attr, "StandardAttributeName")), tvar("N"),
-      method(
-        "addStandardAttribute",
-        tvar("N"), id("name")
-      ),
-
-      _abstract(), tparam("N", t(attr, "StandardAttributeName")), tvar("N"),
-      method(
-        "addStandardAttribute",
-        tvar("N"), id("name"),
-        t(String.class), id("value")
-      ),
-
-      _abstract(), t(elem, "ElementName"),
-      method(
-        "addStandardElement",
-        t(elem, "StandardElementName"), id("name"),
-        t(String.class), id("text")
-      ),
-
-      _abstract(), t(elem, "ElementName"),
-      method(
-        "addStandardElement",
-        t(elem, "StandardElementName"), id("name"),
-        t(t(spi_type, "Value"), dim()), id("values")
-      )
+    classDeclaration(
+      ABSTRACT, name("GeneratedAbstractTemplate"),
+      include(this::classBody)
     );
-    // @formatter:on
   }
 
-  private void attrMethods() {
+  private void attrMethod(String name) {
+    method(
+      PUBLIC, FINAL, attribute.className, name(name),
+      include(this::attrMethodParam),
+      p(
+        RETURN,
+        v("addStandardAttribute"),
+        arg(STD_ATTR_NAME, n(attribute.constantName)),
+        include(this::attrMethodValueArg)
+      )
+    );
+  }
+
+  private void attrMethodParam() {
+    AttributeKind kind = attribute.kind();
+
+    if (kind.isString()) {
+      parameter(STRING, "value");
+    }
+  }
+
+  private void attrMethodValueArg() {
+    AttributeKind kind = attribute.kind();
+
+    if (kind.isString()) {
+      arg(n("value"));
+    }
+  }
+
+  private void classBody() {
     var template = spec.template();
+
+    for (var element : spec.elements()) {
+      elementValuesMethod(element);
+
+      if (template.shouldIncludeText(element)) {
+        elementTextMethod(element);
+      }
+    }
 
     for (var attribute : spec.attributes()) {
       for (String name : attribute.methodNames()) {
         this.attribute = attribute;
 
         if (template.shouldIncludeAttribute(name)) {
-          attrMethods(name);
+          attrMethod(name);
         }
       }
     }
-  }
 
-  private void attrMethods(String name) {
-    // @formatter:off
-    _public(); _final(); t(attr, "StandardAttributeName", attribute.classSimpleName);
-    method(name, include(this::attrMethodsParam)); block(
-      _return(), invoke("addStandardAttribute", include(this::attrMethodsInvokeArgs))
+    method(
+      ABSTRACT, typeParameter("N", STD_ATTR_NAME), N, name("addStandardAttribute"),
+      parameter(N, "name")
     );
-    // @formatter:on
+
+    method(
+      ABSTRACT, typeParameter("N", STD_ATTR_NAME), N, name("addStandardAttribute"),
+      parameter(N, "name"),
+      parameter(STRING, "value")
+    );
+
+    method(
+      ABSTRACT, ELEMENT_NAME, name("addStandardElement"),
+      parameter(STD_ELEMENT_NAME, "name"),
+      parameter(STRING, "text")
+    );
+
+    var valueArray = ArrayTypeName.of(VALUE);
+
+    method(
+      ABSTRACT, ELEMENT_NAME, name("addStandardElement"),
+      parameter(STD_ELEMENT_NAME, "name"),
+      parameter(valueArray, "values")
+    );
   }
 
-  private void attrMethodsInvokeArgs() {
-    code(t(attr, "StandardAttributeName"), n(attribute.constantName), end());
-
-    AttributeKind kind = attribute.kind();
-
-    if (kind.isString()) {
-      n("value");
-    }
-  }
-
-  private void attrMethodsParam() {
-    AttributeKind kind = attribute.kind();
-
-    if (kind.isString()) {
-      code(t(String.class), id("value"));
-    }
-  }
-
-  private void elementMethods() {
-    for (var element : spec.elements()) {
-      elementMethods(element);
-    }
-  }
-
-  private void elementMethods(ElementSpec el) {
-    // @formatter:off
-    _public(); _final(); t(elem, "ElementName");
-    method(el.methodName(), t(spi_type, el.className.simpleName()), ellipsis(), id("values"));
-    block(
-      _return(),
-      invoke(
-        "addStandardElement",
-        t(elem, "StandardElementName"), n(el.constantName), end(), n("values")
+  private void elementTextMethod(ElementSpec element) {
+    method(
+      PUBLIC, FINAL, ELEMENT_NAME, name(element.methodName()),
+      parameter(STRING, "text"),
+      p(
+        RETURN,
+        v("addStandardElement"),
+        arg(STD_ELEMENT_NAME, n(element.constantName)),
+        arg(n("text"))
       )
     );
-    // @formatter:on
+  }
 
-    var template = spec.template();
-
-    if (template.shouldIncludeText(el)) {
-      // @formatter:off
-      _public(); _final(); t(elem, "ElementName");
-      method(el.methodName(), t(String.class), id("text")); block(
-        _return(),
-        invoke(
-          "addStandardElement",
-          t(elem, "StandardElementName"), n(el.constantName), end(), n("text")
-        )
-      );
-      // @formatter:on
-    }
+  private void elementValuesMethod(ElementSpec element) {
+    method(
+      PUBLIC, FINAL, ELEMENT_NAME, name(element.methodName()),
+      parameter(element.className, ELLIPSIS, "values"),
+      p(
+        RETURN,
+        v("addStandardElement"),
+        arg(STD_ELEMENT_NAME, n(element.constantName)),
+        arg(n("values"))
+      )
+    );
   }
 
 }
