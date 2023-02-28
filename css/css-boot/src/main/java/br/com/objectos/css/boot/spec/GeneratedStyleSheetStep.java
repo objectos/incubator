@@ -26,6 +26,7 @@ import br.com.objectos.css.boot.spec.MethodSignature.Signature5;
 import br.com.objectos.css.boot.spec.MethodSignature.Signature6;
 import br.com.objectos.css.boot.util.JavaNames;
 import java.util.List;
+import objectos.code.tmpl.ArgsPart;
 import objectos.util.GrowableList;
 
 final class GeneratedStyleSheetStep extends ThisTemplate {
@@ -83,7 +84,7 @@ final class GeneratedStyleSheetStep extends ThisTemplate {
 
     void execute() {}
 
-    final objectos.code.JavaTemplate.ArgsPart funcOrProp() {
+    final ArgsPart funcOrProp() {
       if (property instanceof FunctionName) {
         return t(ThisTemplate.function, "StandardFunctionName");
       } else {
@@ -91,7 +92,7 @@ final class GeneratedStyleSheetStep extends ThisTemplate {
       }
     }
 
-    final objectos.code.JavaTemplate.ArgsPart funcOrPropSingle() {
+    final ArgsPart funcOrPropSingle() {
       if (property instanceof FunctionName) {
         return t(ThisTemplate.function, property.singleDeclarationSimpleName());
       } else {

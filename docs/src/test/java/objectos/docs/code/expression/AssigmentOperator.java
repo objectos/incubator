@@ -16,12 +16,13 @@
 package objectos.docs.code.expression;
 
 import objectos.code.JavaTemplate;
+import objectos.code.type.ClassTypeName;
 
 public class AssigmentOperator extends JavaTemplate {
 
-  static final ClassTypeName FOO = classType("com.example", "Foo");
+  static final ClassTypeName FOO = ClassTypeName.of("com.example", "Foo");
 
-  static final ClassTypeName MYTYPE = classType("com.example", "MyType");
+  static final ClassTypeName MYTYPE = ClassTypeName.of("com.example", "MyType");
 
   public static void main(String[] args) {
     System.out.println(new AssigmentOperator());
@@ -38,7 +39,7 @@ public class AssigmentOperator extends JavaTemplate {
 
         p(n("x"), IS, n("y"), IS, n("z")),
 
-        p(n("barArray"), dim(i(0)), IS, NEW, classType("com.example", "Bar")),
+        p(n("barArray"), dim(i(0)), IS, NEW, ClassTypeName.of("com.example", "Bar")),
 
         p(v("m"), n("foo"), IS, v("n")),
 

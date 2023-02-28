@@ -16,9 +16,10 @@
 package objectos.docs.code.method;
 
 import objectos.code.JavaTemplate;
+import objectos.code.type.ClassTypeName;
 
 public class ToString extends JavaTemplate {
-  static final ClassTypeName STRING = classType(String.class);
+  static final ClassTypeName STRING = ClassTypeName.of(String.class);
 
   public static void main(String[] args) {
     System.out.println(new ToString());

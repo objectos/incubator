@@ -15,8 +15,10 @@
  */
 package objectos.docs.code.statement;
 
+import objectos.code.type.ClassTypeName;
+
 public class Index extends StatementExample {
-  static final ClassTypeName SB = classType(StringBuilder.class);
+  static final ClassTypeName SB = ClassTypeName.of(StringBuilder.class);
 
   public static void main(String[] args) {
     System.out.println(new Index());

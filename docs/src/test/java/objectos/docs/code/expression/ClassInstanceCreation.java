@@ -18,17 +18,19 @@ package objectos.docs.code.expression;
 import java.io.UncheckedIOException;
 import java.util.HashMap;
 import objectos.code.JavaTemplate;
+import objectos.code.type.ClassTypeName;
+import objectos.code.type.ParameterizedTypeName;
 
 public class ClassInstanceCreation extends JavaTemplate {
-  static final ParameterizedTypeName HASHMAP = parameterizedType(
-    classType(HashMap.class),
-    classType(Integer.class),
-    classType(String.class)
+  static final ParameterizedTypeName HASHMAP = ParameterizedTypeName.of(
+    ClassTypeName.of(HashMap.class),
+    ClassTypeName.of(Integer.class),
+    ClassTypeName.of(String.class)
   );
 
-  static final ClassTypeName SB = classType(StringBuilder.class);
+  static final ClassTypeName SB = ClassTypeName.of(StringBuilder.class);
 
-  static final ClassTypeName UIOE = classType(UncheckedIOException.class);
+  static final ClassTypeName UIOE = ClassTypeName.of(UncheckedIOException.class);
 
   public static void main(String[] args) {
     System.out.println(new ClassInstanceCreation());
