@@ -750,7 +750,7 @@ final class GeneratedStyleSheetStep extends ThisTemplate {
     }
   }
 
-  private objectos.code.JavaTemplate.ParameterElement t(ParameterType type) {
+  private objectos.code.tmpl.ParameterElement t(ParameterType type) {
     if (type instanceof JavaType t) {
       return switch (t) {
         case DOUBLE -> _double();

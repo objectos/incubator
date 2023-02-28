@@ -23,7 +23,7 @@ abstract class ExpressionExample extends JavaTemplate {
     autoImports();
     _class("Expression");
     body(
-      method(this::example)
+      method(include(this::example))
     );
   }
 

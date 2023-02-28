@@ -26,7 +26,7 @@ abstract class StatementExample extends JavaTemplate {
     autoImports();
     _class("Statement");
     body(
-      method(this::example)
+      method(include(this::example))
     );
   }
 
