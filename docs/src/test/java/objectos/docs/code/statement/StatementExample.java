@@ -24,8 +24,9 @@ abstract class StatementExample extends JavaTemplate {
   @Override
   protected final void definition() {
     autoImports();
-    _class("Statement");
-    body(
+
+    classDeclaration(
+      name("Statement"),
       method(include(this::example))
     );
   }

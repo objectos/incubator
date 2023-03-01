@@ -23,36 +23,36 @@ public class If extends StatementExample {
   @Override
   final void example() {
     p(VAR, name("value"), v("get"));
-    p(IF, argument(v("isType"), argument(n("value"))), block(
+    p(IF, condition(v("isType"), argument(n("value"))), block(
       p(v("executeType"), argument(n("value")))
-    ), ELSE, IF, argument(n("value"), EQ, n("VAR")), block(
+    ), ELSE, IF, condition(n("value"), EQ, n("VAR")), block(
       p(v("executeVar"), argument(n("value")))
     ), ELSE, block(
       p(v("executeError"), argument(n("value")))
     ));
 
-    p(IF, argument(n("active")), block(
+    p(IF, condition(n("active")), block(
       p(v("execute"))
     ));
 
-    p(IF, argument(v("compute"), v("list"), v("size"), EQ, i(0)), block(
+    p(IF, condition(v("compute"), v("list"), v("size"), EQ, i(0)), block(
       p(v("executeWhenEmpty"))
     ));
 
-    p(IF, argument(n("active")), block(
+    p(IF, condition(n("active")), block(
       p(v("stepOne")),
       p(v("stepTwo")),
       p(v("stepThree"))
     ));
 
-    p(IF, argument(n("size"), EQ, i(0)), block(
+    p(IF, condition(n("size"), EQ, i(0)), block(
       p(RETURN, s("[]"))
     ), ELSE, block(
       p(RETURN, v("makeToString"))
     ));
 
     p(
-      IF, argument(n("o"), EQ, NULL), n("s"), IS, s("null"),
+      IF, condition(n("o"), EQ, NULL), n("s"), IS, s("null"),
       ELSE, n("s"), IS, n("o"), v("toString")
     );
   }
