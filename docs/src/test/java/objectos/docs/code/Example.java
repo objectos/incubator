@@ -15,6 +15,7 @@
  */
 package objectos.docs.code;
 
+import objectos.code.ClassTypeName;
 import objectos.code.JavaTemplate;
 
 public class Example extends JavaTemplate {
@@ -22,17 +23,24 @@ public class Example extends JavaTemplate {
     System.out.println(new Example());
   }
 
+  private static final ClassTypeName STRING = ClassTypeName.of(String.class);
+
+  private static final ClassTypeName SYSTEM = ClassTypeName.of(System.class);
+
   @Override
   protected void definition() {
-    // @formatter:off
-    _package("com.example");
+    packageDeclaration("com.example");
 
     autoImports();
 
-    _public(); _class("HelloWorld"); body(
-      _public(), _static(), _void(),
-      method("main", t(t(String.class), dim()), id("args")), block(
-        t(System.class), n("out"), invoke("println", s("Hello, Objectos Code!"))
+    classDeclaration(
+      PUBLIC, name("HelloWorld"),
+
+      method(
+        PUBLIC, STATIC, VOID, name("main"),
+        parameter(STRING, ELLIPSIS, name("args")),
+
+        p(SYSTEM, n("out"), v("println"), argument(s("Hello, Objectos Code!")))
       )
     );
   }
