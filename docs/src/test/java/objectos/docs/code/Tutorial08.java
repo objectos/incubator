@@ -16,34 +16,49 @@
 package objectos.docs.code;
 
 import java.util.LinkedHashMap;
+import objectos.code.ClassTypeName;
 import objectos.code.JavaTemplate;
 
-public class Tutorial extends JavaTemplate {
+public class Tutorial08 extends JavaTemplate {
   public static void main(String[] args) {
-    System.out.println(new Tutorial());
+    System.out.println(new Tutorial08());
   }
+
+  private static final ClassTypeName SUBJECT
+      = ClassTypeName.of("com.example.annotations", "Subject");
+
   @Override
   protected final void definition() {
-    // @formatter:off
-    _package("com.example");
+    packageDeclaration("com.example");
 
     autoImports();
 
-    at(t("com.example.annotations", "Subject"), s("Objectos Code"));
-    _public(); _final(); _class("Tutorial"); body(
+    classDeclaration(
+      annotation(
+        SUBJECT,
+        annotationValue(s("Objectos Code"))
+      ),
+      PUBLIC, FINAL, name("Tutorial"),
+
       include(this::constants),
 
-      _private(), _final(), _int(), id("value"),
-
-      _public(), constructor(_int(), id("value")), block(
-        _this(), n("value"), gets(), n("value")
+      field(
+        PRIVATE, FINAL, INT, name("value")
       ),
 
-      _public(), _int(), method("get"), block(
-        _return(), n("value")
+      constructor(
+        PUBLIC,
+        parameter(INT, name("value")),
+
+        p(THIS, n("value"), IS, n("value"))
+      ),
+
+      method(
+        PUBLIC, INT, name("get"),
+
+        p(RETURN, n("value"))
       )
     );
-    // @formatter:on
   }
 
   private void constants() {
@@ -57,9 +72,9 @@ public class Tutorial extends JavaTemplate {
       var name = entry.getKey();
       var value = entry.getValue();
 
-      // @formatter:off
-      _public(); _static(); _final(); _int(); id(name); i(value.intValue());
-      // @formatter:on
+      field(
+        PUBLIC, STATIC, FINAL, INT, name(name), i(value.intValue())
+      );
     }
   }
 }
