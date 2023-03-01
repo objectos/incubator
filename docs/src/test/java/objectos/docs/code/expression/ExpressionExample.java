@@ -21,8 +21,10 @@ abstract class ExpressionExample extends JavaTemplate {
   @Override
   protected final void definition() {
     autoImports();
-    _class("Expression");
-    body(
+
+    classDeclaration(
+      name("Expression"),
+
       method(include(this::example))
     );
   }

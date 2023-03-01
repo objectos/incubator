@@ -27,8 +27,9 @@ public class ToString extends JavaTemplate {
 
   @Override
   protected final void definition() {
-    _class("ToString");
-    body(
+    classDeclaration(
+      name("ToString"),
+
       method(
         annotation(Override.class),
         PUBLIC, FINAL, STRING, name("toString"),

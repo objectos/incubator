@@ -38,12 +38,13 @@ public class ClassInstanceCreation extends JavaTemplate {
 
   @Override
   protected final void definition() {
-    _package("com.example");
+    packageDeclaration("com.example");
 
     autoImports();
 
-    _class("ClassInstanceCreation");
-    body(
+    classDeclaration(
+      name("ClassInstanceCreation"),
+
       method(
         name("example"),
         p(NEW, SB),
@@ -53,7 +54,8 @@ public class ClassInstanceCreation extends JavaTemplate {
 
         p(NEW, UIOE,
           argument(s("Failed to open %s"), v("formatted"), argument(n("file"))),
-          argument(n("cause")))
+          argument(n("cause"))
+        )
       )
     );
   }

@@ -4,15 +4,15 @@ Assuming the following type names are defined:
 
 [,java]
 ----
-static final ParameterizedTypeName HASHMAP = parameterizedType(
-  classType(HashMap.class),
-  classType(Integer.class),
-  classType(String.class)
+static final ParameterizedTypeName HASHMAP = ParameterizedTypeName.of(
+  ClassTypeName.of(HashMap.class),
+  ClassTypeName.of(Integer.class),
+  ClassTypeName.of(String.class)
 );
 
-static final ClassTypeName SB = classType(StringBuilder.class);
+static final ClassTypeName SB = ClassTypeName.of(StringBuilder.class);
 
-static final ClassTypeName UIOE = classType(UncheckedIOException.class);
+static final ClassTypeName UIOE = ClassTypeName.of(UncheckedIOException.class);
 ----
 
 Then the following shows how to generate Java class instance class creation expressions using Objectos Code: 
@@ -28,13 +28,13 @@ p(NEW, SB);
 new StringBuilder();
 
 // class creation + argument
-p(NEW, SB, s("Initial value"));
+p(NEW, SB, argument(s("Initial value")));
 new StringBuilder("Initial value");
 
 // class creation + arguments
 p(NEW, UIOE,
-  arg(s("Failed to open %s"), v("formatted"), arg(n("file"))),
-  arg(n("cause")));
+  argument(s("Failed to open %s"), v("formatted"), argument(n("file"))),
+  argument(n("cause")));
 new UncheckedIOException("Failed to open %s".formatted(file), cause);
 
 // class creation + parameterized type

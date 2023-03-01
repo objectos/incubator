@@ -26,7 +26,7 @@ public class Return extends StatementExample {
 
     p(RETURN, n("size"), EQ, i(0));
 
-    p(IF, argument(n("values"), v("isEmpty")), block(
+    p(IF, condition(n("values"), v("isEmpty")), block(
       p(RETURN)
     ));
   }

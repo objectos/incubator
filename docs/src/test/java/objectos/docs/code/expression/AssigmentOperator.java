@@ -30,8 +30,9 @@ public class AssigmentOperator extends JavaTemplate {
 
   @Override
   protected final void definition() {
-    _class("AssignmentOperator");
-    body(
+    classDeclaration(
+      name("AssignmentOperator"),
+
       method(
         name("overview"),
 

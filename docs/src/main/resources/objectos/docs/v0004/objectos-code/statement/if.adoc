@@ -5,12 +5,12 @@ The following Objectos Code:
 [,java]
 ----
 p(VAR, name("value"), v("get"));
-p(IF, arg(v("isType"), arg(n("value"))), block(
-  p(v("executeType"), arg(n("value")))
-), ELSE, IF, arg(n("value"), EQ, n("VAR")), block(
-  p(v("executeVar"), arg(n("value")))
+p(IF, condition(v("isType"), argument(n("value"))), block(
+  p(v("executeType"), argument(n("value")))
+), ELSE, IF, condition(n("value"), EQ, n("VAR")), block(
+  p(v("executeVar"), argument(n("value")))
 ), ELSE, block(
-  p(v("executeError"), arg(n("value")))
+  p(v("executeError"), argument(n("value")))
 ));
 ----
 
@@ -37,8 +37,8 @@ These are the things you need to know:
 
 * the `IF` and `ELSE` constants.
 They represent the `if` and the `else` Java keywords respectively;
-* the `arg` instruction.
-You define the `if` expression inside an `arg` instruction; and
+* the `condition` instruction.
+You define the `if` expression inside an `condition` instruction; and
 * the `block` instruction.
 Though not strictly required, the substatements of an `if` statement are typically blocks.
 
@@ -50,7 +50,7 @@ Let's start with the following Objectos Code `if-then` statement:
 
 [,java]
 ----
-p(IF, arg(n("active")), block(
+p(IF, condition(n("active")), block(
   p(v("execute"))
 ));
 ----
@@ -68,7 +68,7 @@ Notice that:
 
 * the `if` statement is defined in a `p` instruction;
 * the `IF` constant represents the `if` keyword;
-* the `arg` instruction holds the expression; and
+* the `condition` instruction holds the expression; and
 * the `block` instruction holds the statements to be executed when the expression evaluates to `true`.
 
 === The `if-then-else` statement
@@ -77,7 +77,7 @@ You can generate a Java `if` statement having an `else` clause:
 
 [,java]
 ----
-p(IF, arg(n("size"), EQ, i(0)), block(
+p(IF, condition(n("size"), EQ, i(0)), block(
   p(RETURN, s("[]"))
 ), ELSE, block(
   p(RETURN, v("makeToString"))
@@ -103,18 +103,18 @@ Things to notice:
 === Expression with many parts
 
 The expression of the `if` statement can have an arbitrary number of parts.
-In other words, the `arg` instruction can take many arguments.
+In other words, the `condition` instruction can take many arguments.
 
 As an example, consider the following Objectos Code:
 
 [,java]
 ----
-p(IF, arg(v("compute"), v("list"), v("size"), EQ, i(0)), block(
+p(IF, condition(v("compute"), v("list"), v("size"), EQ, i(0)), block(
   p(v("executeWhenEmpty"))
 ));
 ----
 
-Notice how the `arg` instruction has many arguments.
+Notice how the `condition` instruction has many arguments.
 
 It generates the following Java code:
 
@@ -133,7 +133,7 @@ The following Objectos Code:
 
 [,java]
 ----
-p(IF, arg(n("active")), block(
+p(IF, condition(n("active")), block(
   p(v("stepOne")),
   p(v("stepTwo")),
   p(v("stepThree"))
@@ -159,7 +159,7 @@ The following Objectos Code:
 
 [,java]
 ----
-p(IF, arg(n("foo"), EQ, NULL), SYSTEM, n("out"), v("println"), arg(s("foo is null")));
+p(IF, condition(n("foo"), EQ, NULL), SYSTEM, n("out"), v("println"), arg(s("foo is null")));
 ----
 
 Generates the following Java code:
@@ -178,7 +178,7 @@ The following Objectos Code:
 [,java]
 ----
 p(
-  IF, arg(n("o"), EQ, NULL), n("s"), IS, s("null"),
+  IF, condition(n("o"), EQ, NULL), n("s"), IS, s("null"),
   ELSE, n("s"), IS, n("o"), v("toString")
 );
 ----
