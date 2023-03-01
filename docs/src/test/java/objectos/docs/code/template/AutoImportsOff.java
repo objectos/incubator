@@ -15,12 +15,18 @@
  */
 package objectos.docs.code.template;
 
-import java.io.IOException;
-import java.util.List;
+import java.nio.file.Path;
+import java.time.LocalDate;
+import objectos.code.ClassTypeName;
 import objectos.code.JavaTemplate;
 
 // objectos-code/java-template.adoc
 public class AutoImportsOff extends JavaTemplate {
+  static final ClassTypeName LOCAL_DATE = ClassTypeName.of(LocalDate.class);
+
+  static final ClassTypeName PATH = ClassTypeName.of(Path.class);
+
+  static final ClassTypeName STRING = ClassTypeName.of(String.class);
 
   public static void main(String[] args) {
     System.out.println(new AutoImportsOff());
@@ -28,14 +34,22 @@ public class AutoImportsOff extends JavaTemplate {
 
   @Override
   protected final void definition() {
-    // @formatter:off
-    _package("com.example");
+    packageDeclaration("com.example");
 
-    _public(); _class("AutoImports"); body(
-      t(t(List.class), t(IOException.class)), id("a"),
+    classDeclaration(
+      PUBLIC, name("AutoImports"),
 
-      t(String.class), id("b")
+      field(
+        LOCAL_DATE, name("a")
+      ),
+
+      field(
+        PATH, name("b")
+      ),
+
+      field(
+        STRING, name("c")
+      )
     );
   }
-
 }

@@ -15,10 +15,16 @@
  */
 package objectos.docs.code.template;
 
+import objectos.code.ClassTypeName;
 import objectos.code.JavaTemplate;
 
 // objectos-code/java-template.adoc
 public class AutoImportsConflict extends JavaTemplate {
+  private static final ClassTypeName LIST_A = ClassTypeName.of(java.awt.List.class);
+
+  private static final ClassTypeName LIST_B = ClassTypeName.of(java.util.List.class);
+
+  private static final ClassTypeName LIST_C = ClassTypeName.of("com.example", "List");
 
   public static void main(String[] args) {
     System.out.println(new AutoImportsConflict());
@@ -26,18 +32,18 @@ public class AutoImportsConflict extends JavaTemplate {
 
   @Override
   protected final void definition() {
-    // @formatter:off
-    _package("com.example");
+    packageDeclaration("com.example");
 
     autoImports();
 
-    _public(); _class("AutoImports"); body(
-      t(t(java.awt.List.class), t(String.class)), id("a"),
+    classDeclaration(
+      PUBLIC, name("AutoImports"),
 
-      t(t(java.util.List.class), t(String.class)), id("b"),
+      field(LIST_A, name("a")),
 
-      t(t("com.example", "List"), t(String.class)), id("c")
+      field(LIST_B, name("b")),
+
+      field(LIST_C, name("c"))
     );
   }
-
 }

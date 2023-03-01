@@ -19,20 +19,18 @@ import objectos.code.JavaTemplate;
 
 // objectos-code/java-template.adoc
 public class MyTemplate extends JavaTemplate {
-
   public static void main(String[] args) {
     System.out.println(new MyTemplate());
   }
 
   @Override
   protected final void definition() {
-    _package("com.example");
+    packageDeclaration("com.example");
 
     autoImports();
 
-    _public();
-    _class("Empty");
-    body();
+    classDeclaration(
+      PUBLIC, name("Empty")
+    );
   }
-
 }
