@@ -43,7 +43,7 @@ public class AssigmentOperator extends JavaTemplate {
 
         p(v("m"), n("foo"), IS, v("n")),
 
-        p(v("foo"), arg(n("i"), IS, n("j")))
+        p(v("foo"), argument(n("i"), IS, n("j")))
       ),
 
       method(

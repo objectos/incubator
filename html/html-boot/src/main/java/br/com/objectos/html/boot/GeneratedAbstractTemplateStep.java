@@ -43,7 +43,7 @@ final class GeneratedAbstractTemplateStep extends ThisTemplate {
       p(
         RETURN,
         v("addStandardAttribute"),
-        arg(STD_ATTR_NAME, n(attribute.constantName)),
+        argument(STD_ATTR_NAME, n(attribute.constantName)),
         include(this::attrMethodValueArg)
       )
     );
@@ -61,7 +61,7 @@ final class GeneratedAbstractTemplateStep extends ThisTemplate {
     AttributeKind kind = attribute.kind();
 
     if (kind.isString()) {
-      arg(n("value"));
+      argument(n("value"));
     }
   }
 
@@ -119,8 +119,8 @@ final class GeneratedAbstractTemplateStep extends ThisTemplate {
       p(
         RETURN,
         v("addStandardElement"),
-        arg(STD_ELEMENT_NAME, n(element.constantName)),
-        arg(n("text"))
+        argument(STD_ELEMENT_NAME, n(element.constantName)),
+        argument(n("text"))
       )
     );
   }
@@ -132,8 +132,8 @@ final class GeneratedAbstractTemplateStep extends ThisTemplate {
       p(
         RETURN,
         v("addStandardElement"),
-        arg(STD_ELEMENT_NAME, n(element.constantName)),
-        arg(n("values"))
+        argument(STD_ELEMENT_NAME, n(element.constantName)),
+        argument(n("values"))
       )
     );
   }

@@ -23,36 +23,36 @@ public class If extends StatementExample {
   @Override
   final void example() {
     p(VAR, name("value"), v("get"));
-    p(IF, arg(v("isType"), arg(n("value"))), block(
-      p(v("executeType"), arg(n("value")))
-    ), ELSE, IF, arg(n("value"), EQ, n("VAR")), block(
-      p(v("executeVar"), arg(n("value")))
+    p(IF, argument(v("isType"), argument(n("value"))), block(
+      p(v("executeType"), argument(n("value")))
+    ), ELSE, IF, argument(n("value"), EQ, n("VAR")), block(
+      p(v("executeVar"), argument(n("value")))
     ), ELSE, block(
-      p(v("executeError"), arg(n("value")))
+      p(v("executeError"), argument(n("value")))
     ));
 
-    p(IF, arg(n("active")), block(
+    p(IF, argument(n("active")), block(
       p(v("execute"))
     ));
 
-    p(IF, arg(v("compute"), v("list"), v("size"), EQ, i(0)), block(
+    p(IF, argument(v("compute"), v("list"), v("size"), EQ, i(0)), block(
       p(v("executeWhenEmpty"))
     ));
 
-    p(IF, arg(n("active")), block(
+    p(IF, argument(n("active")), block(
       p(v("stepOne")),
       p(v("stepTwo")),
       p(v("stepThree"))
     ));
 
-    p(IF, arg(n("size"), EQ, i(0)), block(
+    p(IF, argument(n("size"), EQ, i(0)), block(
       p(RETURN, s("[]"))
     ), ELSE, block(
       p(RETURN, v("makeToString"))
     ));
 
     p(
-      IF, arg(n("o"), EQ, NULL), n("s"), IS, s("null"),
+      IF, argument(n("o"), EQ, NULL), n("s"), IS, s("null"),
       ELSE, n("s"), IS, n("o"), v("toString")
     );
   }

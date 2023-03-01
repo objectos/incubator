@@ -91,7 +91,7 @@ final class StandardAttributeNameStep extends ThisTemplate {
     method(
       PUBLIC, STATIC, STD_ATTR_NAME, name("getByName"),
       parameter(STRING, name("name")),
-      p(RETURN, n("MAP"), v("get"), arg(n("name")))
+      p(RETURN, n("MAP"), v("get"), argument(n("name")))
     );
 
     method(
@@ -151,9 +151,9 @@ final class StandardAttributeNameStep extends ThisTemplate {
           PRIVATE,
           p(
             SUPER,
-            arg(i(counter++)),
-            arg(ATTRIBUTE_KIND, n(kind.name())),
-            arg(s(currentAttribute.name()))
+            argument(i(counter++)),
+            argument(ATTRIBUTE_KIND, n(kind.name())),
+            argument(s(currentAttribute.name()))
           )
         )
       );
@@ -174,7 +174,7 @@ final class StandardAttributeNameStep extends ThisTemplate {
     p(VAR, name("builder"), NEW, NAMES_BUILDER);
 
     for (var attribute : spec.attributes()) {
-      p(n("builder"), v("put"), arg(s(attribute.name())), arg(n(attribute.constantName)));
+      p(n("builder"), v("put"), argument(s(attribute.name())), argument(n(attribute.constantName)));
     }
 
     p(RETURN, n("builder"), v("build"));

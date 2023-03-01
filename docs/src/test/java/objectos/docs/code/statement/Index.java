@@ -27,7 +27,7 @@ public class Index extends StatementExample {
   @Override
   final void example() {
     p(VAR, name("sb"), NEW, SB);
-    p(n("sb"), v("append"), arg(s("Objectos Code")));
+    p(n("sb"), v("append"), argument(s("Objectos Code")));
     p(RETURN, n("sb"), v("toString"));
   }
 }

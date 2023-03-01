@@ -35,9 +35,9 @@ final class StandardElementNameStep extends ThisTemplate {
   private void standardElementName() {
     for (var element : spec.elements()) {
       enumConstant(
-        element.constantName,
-        arg(ELEMENT_KIND, n(element.hasEndTag() ? "NORMAL" : "VOID")),
-        arg(s(element.name()))
+        name(element.constantName),
+        argument(ELEMENT_KIND, n(element.hasEndTag() ? "NORMAL" : "VOID")),
+        argument(s(element.name()))
       );
     }
 

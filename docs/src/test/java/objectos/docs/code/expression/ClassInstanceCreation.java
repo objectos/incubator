@@ -47,13 +47,13 @@ public class ClassInstanceCreation extends JavaTemplate {
       method(
         name("example"),
         p(NEW, SB),
-        p(NEW, SB, arg(s("Initial value"))),
+        p(NEW, SB, argument(s("Initial value"))),
 
         p(NEW, HASHMAP),
 
         p(NEW, UIOE,
-          arg(s("Failed to open %s"), v("formatted"), arg(n("file"))),
-          arg(n("cause")))
+          argument(s("Failed to open %s"), v("formatted"), argument(n("file"))),
+          argument(n("cause")))
       )
     );
   }
