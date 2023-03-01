@@ -17,9 +17,11 @@ package objectos.docs.code.template;
 
 import java.util.Set;
 import java.util.TreeSet;
+import objectos.code.ClassTypeName;
 import objectos.code.JavaTemplate;
 
 public class TagTemplate extends JavaTemplate {
+  private static final ClassTypeName STRING = ClassTypeName.of(String.class);
 
   private final Set<String> tagNames = new TreeSet<>();
 
@@ -41,29 +43,36 @@ public class TagTemplate extends JavaTemplate {
 
   @Override
   protected final void definition() {
-    // @formatter:off
-    _package("com.example");
+    packageDeclaration("com.example");
 
     autoImports();
 
-    _public(); _enum("Tag"); body(
+    enumDeclaration(
+      PUBLIC, name("Tag"),
+
       include(this::constants),
 
-      _private(), _final(), t(String.class), id("name"),
+      field(
+        PRIVATE, FINAL, STRING, name("name")
+      ),
 
-      _private(), constructor(t(String.class), id("name")), block(
-        _this(), n("name"), gets(), n("name")
+      constructor(
+        PRIVATE,
+        parameter(STRING, name("name")),
+
+        p(THIS, n("name"), IS, n("name"))
       )
     );
-    // @formatter:on
   }
 
   private void constants() {
     for (var tagName : tagNames) {
       var fieldName = tagName.toUpperCase();
 
-      enumConstant(fieldName, s(tagName));
+      enumConstant(
+        name(fieldName),
+        argument(s(tagName))
+      );
     }
   }
-
 }

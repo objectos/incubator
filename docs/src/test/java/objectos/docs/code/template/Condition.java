@@ -35,18 +35,22 @@ public class Condition extends JavaTemplate {
 
   @Override
   protected final void definition() {
-    // @formatter:off
-    _class("Condition"); body(
-      _abstract(), _void(), method("foo", include(this::parameters))
+    classDeclaration(
+      name("Condition"),
+
+      method(
+        ABSTRACT, VOID, name("foo"),
+
+        include(this::parameters)
+      )
     );
-    // @formatter:on
   }
 
   private void parameters() {
-    code(_int(), id("always"));
+    parameter(INT, name("always"));
 
     if (generate) {
-      code(_int(), id("maybe"));
+      parameter(INT, name("maybe"));
     }
   }
 
