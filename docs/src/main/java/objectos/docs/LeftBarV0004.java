@@ -54,7 +54,8 @@ final class LeftBarV0004 extends LeftBarFragment {
             li(a0("v0004/objectos-code/class/index")),
             li(a0("v0004/objectos-code/class/name")),
             li(a0("v0004/objectos-code/class/modifiers")),
-            li(a0("v0004/objectos-code/class/type-parameters"))
+            li(a0("v0004/objectos-code/class/type-parameters")),
+            li(a0("v0004/objectos-code/class/extends"))
           )
         ),
 
