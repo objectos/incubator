@@ -13,28 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package objectos.docs.code.method;
+package objectos.docs.code.declaration;
 
-import objectos.code.ClassTypeName;
 import objectos.code.JavaTemplate;
 
-public class ToString extends JavaTemplate {
-  static final ClassTypeName STRING = ClassTypeName.of(String.class);
-
+public class ClassDeclarationName04 extends JavaTemplate {
   public static void main(String[] args) {
-    System.out.println(new ToString());
+    System.out.println(new ClassDeclarationName04());
   }
 
   @Override
   protected final void definition() {
+    // executes normally
     classDeclaration(
-      name("ToString"),
-
-      method(
-        annotation(Override.class),
-        PUBLIC, FINAL, STRING, name("toString"),
-        p(RETURN, s("Objectos Code"))
-      )
+      name("return")
     );
   }
 }

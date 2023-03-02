@@ -7,9 +7,12 @@ The following Objectos Code:
 
 [,java]
 ----
+import objectos.code.ClassTypeName;
 import objectos.code.JavaTemplate;
 
 public class ToString extends JavaTemplate {
+  static final ClassTypeName STRING = ClassTypeName.of(String.class);
+  
   @Override
   protected final void definition() {
     classDeclaration(
