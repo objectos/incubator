@@ -131,7 +131,7 @@ import java.io.Serializable;
 class Generic<T extends Iterable & Serializable> {}
 ----
 
-== Generating type parameters dynamically
+== Including type parameters programmatically
 
 Use the `include` instruction to add type parameters to a class declaration programmatically.
 

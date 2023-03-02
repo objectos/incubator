@@ -59,7 +59,7 @@ Generates the following Java class declaration:
 public public final final class Duplicates {}
 ----
 
-== Including modifiers conditionally
+== Including modifiers programatically
 
 Use the `include` instruction if you need to generate a different set of modifiers based on a condition.
 

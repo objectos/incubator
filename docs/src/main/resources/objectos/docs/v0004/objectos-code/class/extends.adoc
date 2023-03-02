@@ -37,7 +37,7 @@ class MyInputStream extends InputStream {}
 == Generic superclass
 
 The `extendsClause` instruction also allows to define a generic superclass.
-You use a `ParameterizedTypeName` like so:
+Use a `ParameterizedTypeName` like so:
 
 [,java]
 ----

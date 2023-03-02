@@ -1,0 +1,248 @@
+= Class direct superinterfaces
+
+Use the `implementsClause` instruction to specify the direct superclass in your class declaration.
+
+The following Objectos Code:
+
+[,java]
+----
+import objectos.code.ClassTypeName;
+import objectos.code.JavaTemplate;
+
+public class ClassDeclarationImplements01 extends JavaTemplate {
+  static final ClassTypeName AUTO_CLOSEABLE
+      = ClassTypeName.of(AutoCloseable.class);
+
+  @Override
+  protected final void definition() {
+    autoImports();
+
+    classDeclaration(
+      name("Implements"),
+      implementsClause(AUTO_CLOSEABLE)
+    );
+  }
+}
+----
+
+Generates the following Java class declaration:
+
+[,java]
+----
+class Implements implements AutoCloseable {}
+----
+
+== Multiple superinterfaces
+
+You can specify multiple interfaces in a single `implementsClause` instructions.
+
+The following Objectos Code:
+
+[,java]
+----
+import objectos.code.ClassTypeName;
+import objectos.code.JavaTemplate;
+
+public class ClassDeclarationImplements02 extends JavaTemplate {
+  static final ClassTypeName A
+      = ClassTypeName.of("com.example", "A");
+  static final ClassTypeName B
+      = ClassTypeName.of("com.example", "B");
+  static final ClassTypeName C
+      = ClassTypeName.of("com.example", "C");
+  static final ClassTypeName D
+      = ClassTypeName.of("com.example", "D");
+
+  @Override
+  protected final void definition() {
+    autoImports();
+
+    classDeclaration(
+      name("Implements"),
+      implementsClause(A, B, C, D)
+    );
+  }
+}
+----
+
+Generates:
+
+[,java]
+----
+import com.example.A;
+import com.example.B;
+import com.example.C;
+import com.example.D;
+
+class Implements implements A, B, C, D {}
+----
+
+Alternatively, you can use multiple `implementsClause` instructions.
+
+The following Objectos Code will produce the same output:
+
+[,java]
+----
+import objectos.code.ClassTypeName;
+import objectos.code.JavaTemplate;
+
+public class ClassDeclarationImplements03 extends JavaTemplate {
+  static final ClassTypeName A
+      = ClassTypeName.of("com.example", "A");
+  static final ClassTypeName B
+      = ClassTypeName.of("com.example", "B");
+  static final ClassTypeName C
+      = ClassTypeName.of("com.example", "C");
+  static final ClassTypeName D
+      = ClassTypeName.of("com.example", "D");
+
+  @Override
+  protected final void definition() {
+    autoImports();
+
+    classDeclaration(
+      name("Implements"),
+      implementsClause(A),
+      implementsClause(B, C),
+      implementsClause(D)
+    );
+  }
+}
+----
+
+== Multiple superinterfaces: duplicates
+
+All of the interface names specified in `implementsCause` instructions are included in the generated output.
+In other words, the instruction does not filter out duplicates.
+
+The following Objectos Code:
+
+[,java]
+----
+import objectos.code.ClassTypeName;
+import objectos.code.JavaTemplate;
+
+public class ClassDeclarationImplements04 extends JavaTemplate {
+  static final ClassTypeName A
+      = ClassTypeName.of("com.example", "A");
+  static final ClassTypeName B
+      = ClassTypeName.of("com.example", "B");
+
+  @Override
+  protected final void definition() {
+    autoImports();
+
+    classDeclaration(
+      name("Implements"),
+      implementsClause(A),
+      implementsClause(A),
+      implementsClause(B, B)
+    );
+  }
+}
+----
+
+Generates:
+
+[,java]
+----
+import com.example.A;
+import com.example.B;
+
+class Implements implements A, A, B, B {}
+----
+
+== Generic superinterfaces
+
+The `implementsClause` instruction also allows to define generic superinterfaces.
+Use a `ParameterizedTypeName` like so:
+
+[,java]
+----
+import java.util.Map;
+import objectos.code.ClassTypeName;
+import objectos.code.JavaTemplate;
+import objectos.code.ParameterizedTypeName;
+import objectos.code.TypeVariableName;
+
+public class ClassDeclarationImplements05 extends JavaTemplate {
+  static final ParameterizedTypeName MAP_K_V
+      = ParameterizedTypeName.of(
+        ClassTypeName.of(Map.class),
+        TypeVariableName.of("K"),
+        TypeVariableName.of("V")
+      );
+
+  @Override
+  protected final void definition() {
+    autoImports();
+
+    classDeclaration(
+      name("MyMap"),
+      typeParameter("K"),
+      typeParameter("V"),
+      implementsClause(MAP_K_V)
+    );
+  }
+}
+----
+
+The Objectos Code template above generates:
+
+[,java]
+----
+import java.util.Map;
+
+class MyMap<K, V> implements Map<K, V> {}
+----
+
+== Including superinterfaces programmatically
+
+Use the `include` instruction to add superinterfaces to a class declaration programmatically.
+
+Consider the following Objectos Code template:
+
+[,java]
+----
+import java.util.List;
+import objectos.code.ClassTypeName;
+import objectos.code.JavaTemplate;
+
+public class ClassDeclarationImplements06 extends JavaTemplate {
+  final List<String> simpleNames = List.of("A", "B", "C");
+
+  @Override
+  protected final void definition() {
+    autoImports();
+
+    classDeclaration(
+      name("Programmatically"),
+      include(this::superinterfaces)
+    );
+  }
+
+  private void superinterfaces() {
+    for (var simpleName : simpleNames) {
+      implementsClause(
+        ClassTypeName.of("com.example", simpleName)
+      );
+    }
+  }
+}
+----
+
+It uses an `include` instruction to add the `superinterfaces` partial template.
+
+The `superinterfaces` method, our partial template, iterates over the `simpleNames` instance variable.
+For each simple name from the list, it adds an `implementsClause` instruction.
+
+The template generates: 
+
+[,java]
+----
+import com.example.A;
+import com.example.B;
+import com.example.C;
+
+class Programmatically implements A, B, C {}
+----
