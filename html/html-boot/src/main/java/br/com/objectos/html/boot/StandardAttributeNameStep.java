@@ -161,12 +161,12 @@ final class StandardAttributeNameStep extends ThisTemplate {
   }
 
   private void standardAttributeNameArray() {
-    consume(NL);
+    code(NL);
 
     for (var attribute : spec.attributes()) {
       value(n(attribute.constantName()));
 
-      consume(NL);
+      code(NL);
     }
   }
 
