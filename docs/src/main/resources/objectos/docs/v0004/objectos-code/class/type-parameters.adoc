@@ -1,0 +1,186 @@
+= Class type parameters
+
+Use the `typeParameter` instruction to add type parameters to your class declaration.
+
+The following Objectos Code:
+
+[,java]
+----
+import objectos.code.JavaTemplate;
+
+public class ClassDeclarationTypeParam01 extends JavaTemplate {
+  @Override
+  protected final void definition() {
+    classDeclaration(
+      name("Generic"),
+      typeParameter("E")
+    );
+  }
+}
+----
+
+Generates the following Java class declaration:
+
+[,java]
+----
+class Generic<E> {}
+----
+
+== Multiple type parameters
+
+Invoke the `typeParameter` instruction as many times as the number of type parameters required.
+
+The following Objectos Code:
+
+[,java]
+----
+import objectos.code.JavaTemplate;
+
+public class ClassDeclarationTypeParam02 extends JavaTemplate {
+  @Override
+  protected final void definition() {
+    classDeclaration(
+      name("Generic"),
+      typeParameter("E1"),
+      typeParameter("E2"),
+      typeParameter("E3")
+    );
+  }
+}
+----
+
+Generates:
+
+[,java]
+----
+class Generic<E1, E2, E3> {}
+----
+
+== Bounded type parameter
+
+You can specify bounds to your type parameter.
+
+The following Objectos Code:
+
+[,java]
+----
+import objectos.code.ClassTypeName;
+import objectos.code.JavaTemplate;
+import objectos.code.ParameterizedTypeName;
+import objectos.code.TypeVariableName;
+
+public class ClassDeclarationTypeParam03 extends JavaTemplate {
+  static final ParameterizedTypeName ITER_E = ParameterizedTypeName.of(
+    ClassTypeName.of(Iterable.class),
+    TypeVariableName.of("E")
+  );
+
+  @Override
+  protected final void definition() {
+    autoImports();
+
+    classDeclaration(
+      name("Generic"),
+      typeParameter("E"),
+      typeParameter("ITER", ITER_E)
+    );
+  }
+}
+----
+
+Generates:
+
+[,java]
+----
+class Generic<E, ITER extends Iterable<E>> {}
+----
+
+The type parameter may also contain multiple bounds.
+
+The following Objectos Code:
+
+[,java]
+----
+import java.io.Serializable;
+import objectos.code.ClassTypeName;
+import objectos.code.JavaTemplate;
+
+public class ClassDeclarationTypeParam04 extends JavaTemplate {
+  static final ClassTypeName ITERABLE = ClassTypeName.of(Iterable.class);
+
+  static final ClassTypeName SERIALIZABLE = ClassTypeName.of(Serializable.class);
+
+  @Override
+  protected final void definition() {
+    autoImports();
+
+    classDeclaration(
+      name("Generic"),
+      typeParameter("T", ITERABLE, SERIALIZABLE)
+    );
+  }
+}
+----
+
+Generates:
+
+[,java]
+----
+import java.io.Serializable;
+
+class Generic<T extends Iterable & Serializable> {}
+----
+
+== Generating type parameters dynamically
+
+Use the `include` instruction to add type parameters to a class declaration programmatically.
+
+Consider the following Objectos Code template:
+
+[,java]
+----
+import objectos.code.JavaTemplate;
+
+public class ClassDeclarationTypeParam05 extends JavaTemplate {
+  int count = 1;
+
+  @Override
+  protected final void definition() {
+    classDeclaration(
+      name("Generic"), include(this::typeParameters)
+    );
+  }
+
+  private void typeParameters() {
+    for (int i = 1; i <= count; i++) {
+      typeParameter("E" + i);
+    }
+  }
+}
+----
+
+It uses an `include` instruction to add type parameters based on the `count` instance variable.
+
+Using template above in the program:
+
+[,java]
+----
+var tmpl = new ClassDeclarationTypeParam05();
+
+tmpl.count = 3;
+
+System.out.println(tmpl);
+
+tmpl.count = 5;
+
+System.out.println(tmpl);
+----
+
+Prints:
+
+[,java]
+----
+class Generic<E1, E2, E3> {}
+
+class Generic<E1, E2, E3, E4, E5> {}
+----
