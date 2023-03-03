@@ -53,7 +53,7 @@ public final class Docs extends DocsInjector {
 
   public static final String OVERVIEW = "docs/0.4/intro/overview";
 
-  public static final String LATEST = "0.4.3.1";
+  public static final String LATEST = "0.4.4";
 
   private final AsciiDoc asciiDoc = AsciiDoc.create();
 
