@@ -15,8 +15,8 @@
  */
 package objectos.ssg;
 
-import br.com.objectos.html.spi.type.UlValue;
 import java.util.List;
+import objectos.html.tmpl.UlValue;
 import objectos.util.GrowableList;
 
 /**

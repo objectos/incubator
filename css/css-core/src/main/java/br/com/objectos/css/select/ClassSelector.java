@@ -15,9 +15,9 @@
  */
 package br.com.objectos.css.select;
 
-import br.com.objectos.html.spi.type.AnyElementValue;
 import objectos.html.spi.Marker;
 import objectos.html.spi.Renderer;
+import objectos.html.tmpl.AnyElementValue;
 
 public class ClassSelector extends SimpleSelector implements AnyElementValue {
 

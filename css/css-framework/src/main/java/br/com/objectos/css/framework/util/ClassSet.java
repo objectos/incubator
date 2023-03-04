@@ -41,9 +41,9 @@
 package br.com.objectos.css.framework.util;
 
 import br.com.objectos.css.select.ClassSelector;
-import br.com.objectos.html.spi.type.AnyElementValue;
 import objectos.html.spi.Marker;
 import objectos.html.spi.Renderer;
+import objectos.html.tmpl.AnyElementValue;
 import objectos.lang.Equals;
 import objectos.util.UnmodifiableSet;
 

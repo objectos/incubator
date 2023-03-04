@@ -15,7 +15,7 @@
  */
 package br.com.objectos.www.objectos;
 
-import br.com.objectos.html.spi.type.UlValue;
+import objectos.html.tmpl.UlValue;
 import objectos.lang.Check;
 import objectos.ssg.SiteFragment;
 import objectos.util.UnmodifiableList;

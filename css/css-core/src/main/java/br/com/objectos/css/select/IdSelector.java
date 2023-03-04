@@ -15,10 +15,10 @@
  */
 package br.com.objectos.css.select;
 
-import br.com.objectos.html.spi.type.AnyElementValue;
 import java.util.Objects;
 import objectos.html.spi.Marker;
 import objectos.html.spi.Renderer;
+import objectos.html.tmpl.AnyElementValue;
 
 public class IdSelector extends SimpleSelector implements AnyElementValue {
 
