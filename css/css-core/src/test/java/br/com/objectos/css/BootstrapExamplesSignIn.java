@@ -18,7 +18,7 @@ package br.com.objectos.css;
 import br.com.objectos.css.select.SelectorFactory;
 import br.com.objectos.css.sheet.AbstractStyleSheet;
 import br.com.objectos.css.type.Color;
-import br.com.objectos.html.tmpl.AbstractTemplate;
+import objectos.html.AbstractTemplate;
 
 class BootstrapExamplesSignIn extends AbstractTemplate {
 
@@ -31,44 +31,44 @@ class BootstrapExamplesSignIn extends AbstractTemplate {
   @Override
   protected final void definition() {
     html(lang("en"),
-        f(this::headFrag),
-        f(this::bodyFrag)
+      f(this::headFrag),
+      f(this::bodyFrag)
     );
   }
 
   private void bodyFrag() {
     body(_class("text-center"),
-        _form
+      _form
     );
   }
 
   private void headFrag() {
     head(
-        meta(charset("utf-8")),
-        meta(name("viewport"), content("width=device-width, initial-scale=1, shrink-to-fit=no")),
-        title(
-            t("Signin Template · Bootstrap")
-        ),
-        link(rel("canonical"), href("https://getbootstrap.com/docs/4.3/examples/sign-in/")),
-        /*<!-- Bootstrap core CSS -->*/
-        link(
-            href("https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"),
-            rel("stylesheet"),
-            /*integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"*/
-            crossorigin("anonymous")
-        ),
-        style(
-            t("@media (min-width: 768px) {\n" +
-                "  .bd-placeholder-img-lg {\n" +
-                "    font-size: 3.5rem;\n" +
-                "  }\n" +
-                "}")
-        ),
-        /*<!-- Custom styles for this template -->*/
-        // link(href("signin.css"), rel("stylesheet"))
-        style(
-            t(new ThisStyleSheet().toString())
-        )
+      meta(charset("utf-8")),
+      meta(name("viewport"), content("width=device-width, initial-scale=1, shrink-to-fit=no")),
+      title(
+        t("Signin Template · Bootstrap")
+      ),
+      link(rel("canonical"), href("https://getbootstrap.com/docs/4.3/examples/sign-in/")),
+      /*<!-- Bootstrap core CSS -->*/
+      link(
+        href("https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"),
+        rel("stylesheet"),
+        /*integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"*/
+        crossorigin("anonymous")
+      ),
+      style(
+        t("@media (min-width: 768px) {\n" +
+            "  .bd-placeholder-img-lg {\n" +
+            "    font-size: 3.5rem;\n" +
+            "  }\n" +
+            "}")
+      ),
+      /*<!-- Custom styles for this template -->*/
+      // link(href("signin.css"), rel("stylesheet"))
+      style(
+        t(new ThisStyleSheet().toString())
+      )
     );
   }
 
@@ -76,66 +76,66 @@ class BootstrapExamplesSignIn extends AbstractTemplate {
     @Override
     protected final void definition() {
       style(
-          html, or(),
-          body,
+        html, or(),
+        body,
 
-          height(pct(100))
+        height(pct(100))
       );
 
       style(
-          body,
-          // display(flex)
-          // alignItems()
-          paddingTop(px(40)),
-          paddingBottom(px(40)),
-          backgroundColor(Color.hex("#f5f5f5"))
+        body,
+        // display(flex)
+        // alignItems()
+        paddingTop(px(40)),
+        paddingBottom(px(40)),
+        backgroundColor(Color.hex("#f5f5f5"))
       );
 
       style(
-          _form.className,
+        _form.className,
 
-          width(pct(100)),
-          maxWidth(px(330)),
-          padding(px(15)),
-          margin(auto)
+        width(pct(100)),
+        maxWidth(px(330)),
+        padding(px(15)),
+        margin(auto)
       );
 
       style(
-          _form.className, sp(), cn("checkbox"),
+        _form.className, sp(), cn("checkbox"),
 
-          fontWeight(400)
+        fontWeight(400)
       );
 
       style(
-          _form.className, sp(), cn("form-control"),
+        _form.className, sp(), cn("form-control"),
 
-          position(relative),
-          boxSizing(borderBox),
-          height(auto),
-          padding(px(10)),
-          fontSize(px(16))
+        position(relative),
+        boxSizing(borderBox),
+        height(auto),
+        padding(px(10)),
+        fontSize(px(16))
       );
 
       style(
-          _form.className, sp(), cn("form-control"), FOCUS,
+        _form.className, sp(), cn("form-control"), FOCUS,
 
-          zIndex(2)
+        zIndex(2)
       );
 
       style(
-          _form.className, sp(),
-          input, SelectorFactory.attr("type", SelectorFactory.eq("email")),
+        _form.className, sp(),
+        input, SelectorFactory.attr("type", SelectorFactory.eq("email")),
 
-          marginBottom(px(-1))// ,
+        marginBottom(px(-1))// ,
       // borderBottomRightRadius(zero()),
       // borderBottomLeftRadius(zero()),
       );
 
       style(
-          _form.className, sp(),
-          input, SelectorFactory.attr("type", SelectorFactory.eq("password")),
+        _form.className, sp(),
+        input, SelectorFactory.attr("type", SelectorFactory.eq("password")),
 
-          marginBottom(px(10))// ,
+        marginBottom(px(10))// ,
       // borderTopLeftRadius(zero()),
       // borderTopRightRadius(zero()),
       );

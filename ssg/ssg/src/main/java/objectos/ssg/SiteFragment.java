@@ -15,7 +15,7 @@
  */
 package objectos.ssg;
 
-import br.com.objectos.html.tmpl.AbstractFragment;
+import objectos.html.AbstractFragment;
 import objectos.html.tmpl.StandardAttributeName.Href;
 import objectos.lang.Check;
 import objectos.ssg.Site.Context;

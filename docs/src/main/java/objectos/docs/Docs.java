@@ -19,7 +19,6 @@ import static java.lang.System.out;
 
 import br.com.objectos.css.sheet.StyleSheet;
 import br.com.objectos.css.sheet.StyleSheetWriter;
-import br.com.objectos.html.tmpl.AbstractFragment;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -32,6 +31,7 @@ import java.util.function.Predicate;
 import java.util.stream.Stream;
 import objectos.asciidoc.AsciiDoc;
 import objectos.asciidoc.Document;
+import objectos.html.AbstractFragment;
 import objectos.lang.Check;
 import objectos.shared.HtmlWriter;
 import objectos.shared.StyleClassSet;

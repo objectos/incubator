@@ -15,7 +15,7 @@
  */
 package objectos.docs;
 
-import br.com.objectos.html.tmpl.AbstractFragment;
+import objectos.html.AbstractFragment;
 
 final class LeftBar {
 

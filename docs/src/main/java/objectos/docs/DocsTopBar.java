@@ -20,7 +20,7 @@ import br.com.objectos.css.framework.sizing.Height;
 import br.com.objectos.css.framework.sizing.MaxWidth;
 import br.com.objectos.css.framework.spacing.MarginX;
 import br.com.objectos.css.framework.spacing.PaddingY;
-import br.com.objectos.html.tmpl.AbstractFragment;
+import objectos.html.AbstractFragment;
 
 final class DocsTopBar extends AbstractFragment implements Docs.TopBar {
 

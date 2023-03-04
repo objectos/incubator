@@ -15,7 +15,7 @@
  */
 package objectos.ssg.it;
 
-import br.com.objectos.html.tmpl.AbstractTemplate;
+import objectos.html.AbstractTemplate;
 import objectos.ssg.Markdown;
 
 /**

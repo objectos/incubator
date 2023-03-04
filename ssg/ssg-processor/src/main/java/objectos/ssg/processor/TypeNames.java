@@ -22,7 +22,7 @@ import br.com.objectos.code.java.type.NamedClass;
 public class TypeNames {
 
   public static final NamedClass AbstractFragment = t(
-    br.com.objectos.html.tmpl.AbstractFragment.class
+    objectos.html.AbstractFragment.class
   );
 
   public static final NamedClass ImageType = t(

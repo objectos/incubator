@@ -24,7 +24,7 @@ import br.com.objectos.css.framework.spacing.MarginX;
 import br.com.objectos.css.framework.spacing.PaddingY;
 import br.com.objectos.css.framework.typography.FontSize;
 import br.com.objectos.css.framework.typography.TextAlign;
-import br.com.objectos.html.tmpl.AbstractFragment;
+import objectos.html.AbstractFragment;
 
 final class DocsBottomBar extends AbstractFragment implements Docs.BottomBar {
 

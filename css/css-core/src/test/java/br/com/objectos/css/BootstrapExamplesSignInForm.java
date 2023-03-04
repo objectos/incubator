@@ -16,7 +16,7 @@
 package br.com.objectos.css;
 
 import br.com.objectos.css.select.ClassSelector;
-import br.com.objectos.html.tmpl.AbstractTemplate;
+import objectos.html.AbstractTemplate;
 
 class BootstrapExamplesSignInForm extends AbstractTemplate {
 
@@ -25,48 +25,48 @@ class BootstrapExamplesSignInForm extends AbstractTemplate {
   @Override
   protected final void definition() {
     form(className,
-        img(_class("mb-4"),
-            src("https://getbootstrap.com/docs/4.3/assets/brand/bootstrap-solid.svg"),
-            alt(""),
-            width("72"), height("72")),
-        h1(_class("h3 mb-3 font-weight-normal"),
-            t("Please sign in")
-        ),
-        label(forAttr("inputEmail"), _class("sr-only"),
-            t("Email address")
-        ),
-        input(
-            type("email"),
-            id("inputEmail"),
-            _class("form-control"),
-            placeholder("Email address"),
-            required(),
-            autofocus()
-        ),
+      img(_class("mb-4"),
+        src("https://getbootstrap.com/docs/4.3/assets/brand/bootstrap-solid.svg"),
+        alt(""),
+        width("72"), height("72")),
+      h1(_class("h3 mb-3 font-weight-normal"),
+        t("Please sign in")
+      ),
+      label(forAttr("inputEmail"), _class("sr-only"),
+        t("Email address")
+      ),
+      input(
+        type("email"),
+        id("inputEmail"),
+        _class("form-control"),
+        placeholder("Email address"),
+        required(),
+        autofocus()
+      ),
+      label(
+        forAttr("inputPassword"),
+        _class("sr-only"),
+        t("Password")
+      ),
+      input(
+        type("password"),
+        id("inputPassword"),
+        _class("form-control"),
+        placeholder("Password"),
+        required()
+      ),
+      div(_class("checkbox mb-3"),
         label(
-            forAttr("inputPassword"),
-            _class("sr-only"),
-            t("Password")
-        ),
-        input(
-            type("password"),
-            id("inputPassword"),
-            _class("form-control"),
-            placeholder("Password"),
-            required()
-        ),
-        div(_class("checkbox mb-3"),
-            label(
-                input(type("checkbox"), value("remember-me")),
-                t(" Remember me")
-            )
-        ),
-        button(_class("btn btn-lg btn-primary btn-block"), type("submit"),
-            t("Sign in")
-        ),
-        p(_class("mt-5 mb-3 text-muted"),
-            t("&copy; 2017-2019")
+          input(type("checkbox"), value("remember-me")),
+          t(" Remember me")
         )
+      ),
+      button(_class("btn btn-lg btn-primary btn-block"), type("submit"),
+        t("Sign in")
+      ),
+      p(_class("mt-5 mb-3 text-muted"),
+        t("&copy; 2017-2019")
+      )
     );
   }
 

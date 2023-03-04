@@ -55,11 +55,11 @@ public class HtmlWriter extends SimpleTemplateWriter {
     if (element instanceof StandardElementName name) {
       return switch (name) {
         case HTML, HEAD, TITLE, META, LINK, STYLE, SCRIPT, BODY,
-            DIV, HEADER, NAV, MAIN, ARTICLE, SECTION, FOOTER,
-            H1, H2, H3, H4, H5, H6,
-            P, PRE,
-            UL, OL, LI,
-            BLOCKQUOTE -> true;
+             DIV, HEADER, NAV, MAIN, ARTICLE, SECTION, FOOTER,
+             H1, H2, H3, H4, H5, H6,
+             P, PRE,
+             UL, OL, LI,
+             BLOCKQUOTE -> true;
 
         default -> false;
       };

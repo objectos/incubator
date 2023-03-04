@@ -15,9 +15,9 @@
  */
 package objectos.shared;
 
-import br.com.objectos.html.tmpl.SimpleCompiledTemplateVisitor;
 import java.util.Set;
 import java.util.function.Predicate;
+import objectos.html.SimpleCompiledTemplateVisitor;
 import objectos.html.tmpl.AttributeName;
 import objectos.html.tmpl.StandardAttributeName;
 import objectos.util.GrowableSet;

@@ -21,7 +21,7 @@ import br.com.objectos.css.keyword.Keywords;
 import br.com.objectos.css.select.ClassSelector;
 import br.com.objectos.css.sheet.AbstractStyleSheet;
 import br.com.objectos.css.type.Color;
-import br.com.objectos.html.tmpl.AbstractTemplate;
+import objectos.html.AbstractTemplate;
 
 public class FrameworkTypes {
 

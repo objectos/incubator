@@ -15,9 +15,9 @@
  */
 package objectos.docs;
 
-import br.com.objectos.html.tmpl.AbstractFragment;
 import objectos.asciidoc.Document;
 import objectos.docs.Docs.TopBar;
+import objectos.html.AbstractFragment;
 
 abstract class DocsInjector {
 
