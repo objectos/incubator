@@ -394,7 +394,6 @@
 		<module>docs</module>
 		<module>fs</module>
 		<module>git</module>
-		<module>html</module>
 		<module>http</module>
 		<module>latest</module>
 		<module>logger</module>
