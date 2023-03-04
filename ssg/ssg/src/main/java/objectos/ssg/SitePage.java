@@ -17,7 +17,7 @@ package objectos.ssg;
 
 import br.com.objectos.http.media.TextType;
 import java.io.IOException;
-import objectos.html.AbstractTemplate;
+import objectos.html.HtmlTemplate;
 import objectos.html.tmpl.ElementName;
 import objectos.html.tmpl.StandardAttributeName.Href;
 import objectos.html.tmpl.StandardAttributeName.Src;
@@ -25,7 +25,7 @@ import objectos.lang.Check;
 import objectos.ssg.Site.Context;
 import objectos.util.UnmodifiableList;
 
-public abstract class SitePage extends AbstractTemplate
+public abstract class SitePage extends HtmlTemplate
     implements
     SiteComponent,
     SitePath,

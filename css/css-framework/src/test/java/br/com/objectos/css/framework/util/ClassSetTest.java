@@ -10,7 +10,7 @@ package br.com.objectos.css.framework.util;
 import static br.com.objectos.css.select.SelectorFactory.dot;
 import static org.testng.Assert.assertEquals;
 
-import objectos.html.AbstractTemplate;
+import objectos.html.HtmlTemplate;
 import org.testng.annotations.Test;
 
 public class ClassSetTest {
@@ -36,7 +36,7 @@ public class ClassSetTest {
   }
 
   private String div(ClassSet set) {
-    return new AbstractTemplate() {
+    return new HtmlTemplate() {
       @Override
       protected final void definition() {
         div(set);

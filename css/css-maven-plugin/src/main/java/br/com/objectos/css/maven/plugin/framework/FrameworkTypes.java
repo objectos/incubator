@@ -21,12 +21,12 @@ import br.com.objectos.css.keyword.Keywords;
 import br.com.objectos.css.select.ClassSelector;
 import br.com.objectos.css.sheet.AbstractStyleSheet;
 import br.com.objectos.css.type.Color;
-import objectos.html.AbstractTemplate;
+import objectos.html.HtmlTemplate;
 
 public class FrameworkTypes {
 
   public static final NamedClass _AbstractStyleSheet = NamedClass.of(AbstractStyleSheet.class);
-  public static final NamedClass _AbstractTemplate = NamedClass.of(AbstractTemplate.class);
+  public static final NamedClass _AbstractTemplate = NamedClass.of(HtmlTemplate.class);
   public static final NamedClass _ClassSelector = NamedClass.of(ClassSelector.class);
   public static final NamedClass _Color = NamedClass.of(Color.class);
   public static final NamedClass _Css = NamedClass.of(Css.class);

@@ -37,11 +37,11 @@ import br.com.objectos.css.framework.typography.FontSize;
 import br.com.objectos.css.framework.typography.FontWeight;
 import br.com.objectos.css.framework.typography.TextColor;
 import br.com.objectos.css.framework.typography.TextTransform;
-import objectos.html.AbstractFragment;
+import objectos.html.HtmlFragment;
 import objectos.html.tmpl.AValue;
 import objectos.html.tmpl.ElementName;
 
-abstract class LeftBarFragment extends AbstractFragment {
+abstract class LeftBarFragment extends HtmlFragment {
 
   private final LeftBar injector;
 

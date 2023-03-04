@@ -31,7 +31,7 @@ import java.util.function.Predicate;
 import java.util.stream.Stream;
 import objectos.asciidoc.AsciiDoc;
 import objectos.asciidoc.Document;
-import objectos.html.AbstractFragment;
+import objectos.html.HtmlFragment;
 import objectos.lang.Check;
 import objectos.shared.HtmlWriter;
 import objectos.shared.StyleClassSet;
@@ -40,13 +40,13 @@ import objectos.util.GrowableMap;
 public final class Docs extends DocsInjector {
 
   public interface BottomBar {
-    AbstractFragment toFragment();
+    HtmlFragment toFragment();
   }
 
   public interface TopBar {
     String javaScript();
 
-    AbstractFragment toFragment();
+    HtmlFragment toFragment();
   }
 
   public static final String INDEX = "docs/0.4/index";
@@ -85,7 +85,7 @@ public final class Docs extends DocsInjector {
 
   private String currentKey;
 
-  private AbstractFragment currentLeftBar;
+  private HtmlFragment currentLeftBar;
 
   private DocumentRecord currentRecord;
 
@@ -187,7 +187,7 @@ public final class Docs extends DocsInjector {
   }
 
   @Override
-  final AbstractFragment $bottomBar() { return bottomBar.toFragment(); }
+  final HtmlFragment $bottomBar() { return bottomBar.toFragment(); }
 
   @Override
   final Document $document() { return currentRecord.document(); }
@@ -239,7 +239,7 @@ public final class Docs extends DocsInjector {
   final boolean $isNext() { return currentKey.startsWith("next/"); }
 
   @Override
-  final AbstractFragment $leftBar() { return currentLeftBar; }
+  final HtmlFragment $leftBar() { return currentLeftBar; }
 
   @Override
   final DocumentRecord $record(String key) {

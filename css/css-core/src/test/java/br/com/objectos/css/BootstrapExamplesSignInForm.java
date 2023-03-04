@@ -16,9 +16,9 @@
 package br.com.objectos.css;
 
 import br.com.objectos.css.select.ClassSelector;
-import objectos.html.AbstractTemplate;
+import objectos.html.HtmlTemplate;
 
-class BootstrapExamplesSignInForm extends AbstractTemplate {
+class BootstrapExamplesSignInForm extends HtmlTemplate {
 
   final ClassSelector className = Css.cn("form-signin");
 

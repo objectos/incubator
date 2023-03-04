@@ -15,7 +15,7 @@
  */
 package objectos.ssg.it;
 
-import objectos.html.AbstractTemplate;
+import objectos.html.HtmlTemplate;
 import objectos.ssg.Markdown;
 
 /**
@@ -24,7 +24,7 @@ import objectos.ssg.Markdown;
  * a paragraph
  */
 @Markdown
-abstract class Index extends AbstractTemplate {
+abstract class Index extends HtmlTemplate {
 
   Index() {
     System.setProperty("objectos.be.it.tc01", "Hello!");

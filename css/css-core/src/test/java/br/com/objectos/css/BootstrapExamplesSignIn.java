@@ -18,9 +18,9 @@ package br.com.objectos.css;
 import br.com.objectos.css.select.SelectorFactory;
 import br.com.objectos.css.sheet.AbstractStyleSheet;
 import br.com.objectos.css.type.Color;
-import objectos.html.AbstractTemplate;
+import objectos.html.HtmlTemplate;
 
-class BootstrapExamplesSignIn extends AbstractTemplate {
+class BootstrapExamplesSignIn extends HtmlTemplate {
 
   private final BootstrapExamplesSignInForm _form;
 

@@ -24,12 +24,12 @@ import br.com.objectos.css.framework.spacing.MarginX;
 import br.com.objectos.css.framework.spacing.PaddingY;
 import br.com.objectos.css.framework.typography.FontSize;
 import br.com.objectos.css.framework.typography.TextAlign;
-import objectos.html.AbstractFragment;
+import objectos.html.HtmlFragment;
 
-final class DocsBottomBar extends AbstractFragment implements Docs.BottomBar {
+final class DocsBottomBar extends HtmlFragment implements Docs.BottomBar {
 
   @Override
-  public final AbstractFragment toFragment() { return this; }
+  public final HtmlFragment toFragment() { return this; }
 
   @Override
   protected final void definition() {

@@ -15,7 +15,7 @@
  */
 package objectos.docs;
 
-import objectos.html.AbstractFragment;
+import objectos.html.HtmlFragment;
 
 final class LeftBarV0004 extends LeftBarFragment {
 
@@ -169,7 +169,7 @@ final class LeftBarV0004 extends LeftBarFragment {
     objectosUtil = new ObjectosUtil(injector);
   }
 
-  public final AbstractFragment get(String key) {
+  public final HtmlFragment get(String key) {
     int slash = key.indexOf('/', OFFSET);
 
     if (slash < 0) {

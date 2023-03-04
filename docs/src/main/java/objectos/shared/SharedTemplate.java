@@ -24,13 +24,13 @@ import java.util.Arrays;
 import objectos.asciidoc.AsciiDoc;
 import objectos.asciidoc.DocumentAttributes;
 import objectos.asciidoc.LinkText;
-import objectos.html.AbstractTemplate;
+import objectos.html.HtmlTemplate;
 import objectos.html.tmpl.StandardElementName;
 import objectos.html.tmpl.Value;
 import objectos.util.IntArrays;
 import objectos.util.ObjectArrays;
 
-public abstract class SharedTemplate extends AbstractTemplate implements AsciiDoc.Processor {
+public abstract class SharedTemplate extends HtmlTemplate implements AsciiDoc.Processor {
 
   public static final IdSelector BODY = Css.randomHash(3);
 
