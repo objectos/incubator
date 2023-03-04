@@ -17,8 +17,8 @@ package objectos.docs;
 
 import br.com.objectos.css.framework.flexbox.FlexDirection;
 import br.com.objectos.css.framework.layout.Display;
-import br.com.objectos.html.element.StandardElementName;
 import objectos.asciidoc.InlineMacroAttributes;
+import objectos.html.tmpl.StandardElementName;
 import objectos.shared.SharedTemplate;
 
 abstract class DocsTemplate extends SharedTemplate {

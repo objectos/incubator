@@ -37,9 +37,9 @@ import br.com.objectos.css.framework.typography.FontSize;
 import br.com.objectos.css.framework.typography.FontWeight;
 import br.com.objectos.css.framework.typography.TextColor;
 import br.com.objectos.css.framework.typography.TextTransform;
-import br.com.objectos.html.element.ElementName;
 import br.com.objectos.html.tmpl.AbstractFragment;
 import objectos.html.tmpl.AValue;
+import objectos.html.tmpl.ElementName;
 
 abstract class LeftBarFragment extends AbstractFragment {
 

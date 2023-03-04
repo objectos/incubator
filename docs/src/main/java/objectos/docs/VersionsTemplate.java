@@ -37,7 +37,7 @@ import br.com.objectos.css.framework.typography.LetterSpacing;
 import br.com.objectos.css.framework.typography.TextAlign;
 import br.com.objectos.css.framework.typography.TextColor;
 import br.com.objectos.css.select.ClassSelector;
-import br.com.objectos.html.element.StandardElementName;
+import objectos.html.tmpl.StandardElementName;
 
 final class VersionsTemplate extends DocsTemplate {
 

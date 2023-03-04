@@ -15,9 +15,9 @@
  */
 package objectos.shared;
 
-import br.com.objectos.html.element.ElementName;
-import br.com.objectos.html.element.StandardElementName;
 import br.com.objectos.html.writer.SimpleTemplateWriter;
+import objectos.html.tmpl.ElementName;
+import objectos.html.tmpl.StandardElementName;
 
 public class HtmlWriter extends SimpleTemplateWriter {
 

@@ -16,7 +16,7 @@
 package br.com.objectos.css.boot;
 
 import br.com.objectos.css.boot.spec.CssSpec;
-import br.com.objectos.html.element.StandardElementName;
+import objectos.html.tmpl.StandardElementName;
 
 class SelectorsModule extends CssSpec {
 

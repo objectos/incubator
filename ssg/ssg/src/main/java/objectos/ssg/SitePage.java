@@ -15,10 +15,10 @@
  */
 package objectos.ssg;
 
-import br.com.objectos.html.element.ElementName;
 import br.com.objectos.html.tmpl.AbstractTemplate;
 import br.com.objectos.http.media.TextType;
 import java.io.IOException;
+import objectos.html.tmpl.ElementName;
 import objectos.html.tmpl.StandardAttributeName.Href;
 import objectos.html.tmpl.StandardAttributeName.Src;
 import objectos.lang.Check;
