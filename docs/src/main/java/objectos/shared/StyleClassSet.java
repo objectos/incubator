@@ -15,11 +15,11 @@
  */
 package objectos.shared;
 
-import br.com.objectos.html.attribute.AttributeName;
-import br.com.objectos.html.attribute.StandardAttributeName;
 import br.com.objectos.html.tmpl.SimpleCompiledTemplateVisitor;
 import java.util.Set;
 import java.util.function.Predicate;
+import objectos.html.tmpl.AttributeName;
+import objectos.html.tmpl.StandardAttributeName;
 import objectos.util.GrowableSet;
 import objectos.util.UnmodifiableList;
 
