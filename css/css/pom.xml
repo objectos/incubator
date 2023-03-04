@@ -87,7 +87,7 @@
 		
 		<dependency>
 			<groupId>br.com.objectos</groupId>
-			<artifactId>html-spi</artifactId>
+			<artifactId>objectos-html-spi</artifactId>
 		</dependency>
 	</dependencies>
 

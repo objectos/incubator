@@ -113,7 +113,7 @@
 		
 		<dependency>
 			<groupId>br.com.objectos</groupId>
-			<artifactId>html</artifactId>
+			<artifactId>objectos-html</artifactId>
 		</dependency>
 		
 		<dependency>
