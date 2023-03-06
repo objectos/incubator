@@ -15,16 +15,15 @@
  */
 package objectos.docs;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.net.URISyntaxException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.FileVisitResult;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
-import org.jsoup.Jsoup;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -33,8 +32,6 @@ import org.testng.annotations.Test;
 public class DocsTest {
 
   private Docs docs;
-
-  private String[] reps;
 
   private Path source;
 
@@ -86,28 +83,9 @@ public class DocsTest {
     target = Files.createTempDirectory("docs-migration-test-");
 
     docs = new Docs(source, target, new DocsTopBar(), new DocsBottomBar());
-
-    reps = new String[] {
-        //        "jyf", SyntaxCss._PRE.className(),
-        //        "njs", XmlCss._TEXT.className(),
-        //        "jrq", XmlCss._SYMBOL.className(),
-        //        "cyc", XmlCss._TAG_NAME.className(),
-        //
-        //        "igz", JavaCss._IDENTIFIER.className(),
-        //        "tu9", JavaCss._WS.className(),
-        //        "nhu", JavaCss._TOKEN.className(),
-        //        "iec", JavaCss._KEYWORD.className(),
-        //        "qbr", JavaCss._DIGITS.className(),
-        //        "uc6", JavaCss._STRING.className(),
-        //        "wjs", JavaCss._COMMENT.className(),
-        //        "juq", JavaCss._ANNOTATION.className(),
-
-        "eag", VersionsTemplate.TITLE.className(),
-        "vls", VersionsTemplate.DATE.className()
-    };
   }
 
-  @Test(enabled = false)
+  @Test
   public void execute() throws IOException {
     docs.execute();
 
@@ -134,46 +112,17 @@ public class DocsTest {
 
     var expectedHtml = validate0Html(expected);
 
-    validate0Test(path, generatedHtml, expectedHtml, reps);
+    validate0Test(path, generatedHtml, expectedHtml);
   }
 
   private String validate0Html(Path path) throws IOException {
-    File file = path.toFile();
-
-    var soup = Jsoup.parse(file, "UTF-8", "");
-
-    var article = soup.selectFirst("article");
-
-    if (article == null) {
-      var body = soup.body();
-
-      Assert.fail(
-        """
-
-        key=%s
-        ----
-        %s
-        ----
-        """.formatted(path, body.toString())
-      );
-    }
-
-    return article.toString();
+    return Files.readString(path, StandardCharsets.UTF_8);
   }
 
   private void validate0Test(
       Path key,
-      String actual, String expected, String... replacements)
+      String actual, String expected)
       throws IOException {
-    var rep = 0;
-
-    while (rep < replacements.length) {
-      expected = expected.replace(
-        replacements[rep++],
-        replacements[rep++]
-      );
-    }
-
     if (!actual.equals(expected)) {
       int len = Math.min(actual.length(), expected.length());
 

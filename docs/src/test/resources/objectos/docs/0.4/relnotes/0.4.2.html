@@ -1,0 +1,627 @@
+<!doctype html><html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="shortcut icon" type="vnd.microsoft.icon" href="/favicon.ico">
+<title>Objectos 0.4.2 release notes</title>
+<style>*, ::before, ::after {
+  box-sizing: border-box;
+  border-width: 0;
+  border-style: solid;
+  border-color: currentcolor;
+}
+
+html {
+  line-height: 1.5;
+  -webkit-text-size-adjust: 100%;
+  -moz-tab-size: 4;
+  tab-size: 4;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+body {
+  margin: 0;
+  line-height: inherit;
+}
+
+hr {
+  height: 0;
+  color: inherit;
+  border-top-width: 1px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+b, strong {
+  font-weight: bolder;
+}
+
+code, kbd, samp, pre {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 1em;
+}
+
+small {
+  font-size: 80%;
+}
+
+sub, sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+sup {
+  top: -0.5em;
+}
+
+table {
+  text-indent: 0;
+  border-color: inherit;
+  border-collapse: collapse;
+}
+
+button, input, optgroup, select, textarea {
+  font-family: inherit;
+  font-size: 100%;
+  font-weight: inherit;
+  line-height: inherit;
+  color: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+button, select {
+  text-transform: none;
+}
+
+button, [type="button"], [type="reset"], [type="submit"] {
+  -webkit-appearance: button;
+  background-color: transparent;
+  background-image: none;
+}
+
+:-moz-focusring {
+  outline: auto;
+}
+
+:-moz-ui-invalid {
+  box-shadow: none;
+}
+
+progress {
+  vertical-align: baseline;
+}
+
+::-webkit-inner-spin-button, ::-webkit-outer-spin-button {
+  height: auto;
+}
+
+[type="search"] {
+  -webkit-appearance: textfield;
+  outline-offset: -2px;
+}
+
+::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+::-webkit-file-upload-button {
+  -webkit-appearance: button;
+  font: inherit;
+}
+
+summary {
+  display: list-item;
+}
+
+blockquote, dl, dd, h1, h2, h3, h4, h5, h6, hr, figure, p, pre {
+  margin: 0;
+}
+
+fieldset {
+  margin: 0;
+  padding: 0;
+}
+
+legend {
+  padding: 0;
+}
+
+ol, ul, menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+textarea {
+  resize: vertical;
+}
+
+input::placeholder, textarea::placeholder {
+  opacity: 1;
+  color: #9ca3af;
+}
+
+button, [role="button"] {
+  cursor: pointer;
+}
+
+:disabled {
+  cursor: default;
+}
+
+img, svg {
+  display: block;
+  vertical-align: middle;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.izskd {
+  background-color: #000000;
+}
+
+.sf2mm {
+  background-color: #ffffff;
+}
+
+.lif2y {
+  background-color: #f3f4f6;
+}
+
+.eacom {
+  background-color: #9ca3af;
+}
+
+.o5u8v:hover {
+  background-color: #f3f4f6;
+}
+
+.q5ycw:hover {
+  background-color: #6b7280;
+}.hwh2q {
+  border-color: #e2e8f0;
+}
+
+.djvue {
+  border-color: #94a3b8;
+}@media screen and (min-width: 1024px) {
+  .xvy8h {
+    border-color: #e2e8f0;
+  }
+}.a8htw {
+  border-top-width: 1px;
+}@media screen and (min-width: 1024px) {
+  .mzn2j {
+    border-right-width: 1px;
+  }
+}.xsztn {
+  border-bottom-width: 1px;
+}.qilyp {
+  border-radius: 0.25em;
+}.zy8gk {
+  opacity: 0.5;
+}.okacc {
+  align-items: stretch;
+}
+
+.lsggd {
+  align-items: center;
+}.eimkn {
+  flex: none;
+}@media screen and (min-width: 1024px) {
+  .clzou {
+    flex: none;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .zogo1 {
+    flex: none;
+  }
+}.rtybo {
+  flex-direction: row-reverse;
+}
+
+.t1xv3 {
+  flex-direction: column;
+}.cw7zn {
+  flex-grow: 1;
+}.iejvy {
+  justify-content: space-between;
+}.kfqmj:hover {
+  cursor: pointer;
+}.h31vd {
+  display: none;
+}
+
+.ybt4q {
+  display: block;
+}
+
+.qaog0 {
+  display: inline-block;
+}
+
+.pmk7c {
+  display: flex;
+}@media screen and (min-width: 1024px) {
+  .bvq5z {
+    display: none;
+  }
+
+  .doxkn {
+    display: block;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .makpr {
+    display: block;
+  }
+}.nxxrt {
+  top: 0;
+}
+
+.szyjl {
+  top: 1rem;
+}.olvt3 {
+  left: 0.75rem;
+}.qjnuv {
+  overflow-y: auto;
+}.bs62o {
+  position: fixed;
+}
+
+.bto48 {
+  position: absolute;
+}@media screen and (min-width: 1024px) {
+  .rmg53 {
+    position: static;
+  }
+}.u6ifi {
+  z-index: 10;
+}
+
+.sbjnm {
+  z-index: 20;
+}.vm0ea {
+  height: 1.5rem;
+}
+
+.u9zta {
+  height: 3rem;
+}
+
+.jydzx {
+  height: 4rem;
+}
+
+.zskce {
+  height: 100vh;
+}@media screen and (min-width: 1024px) {
+  .lqgab {
+    height: auto;
+  }
+}.qckiu {
+  min-height: 100%;
+}.fwd0b {
+  width: 1.5rem;
+}
+
+.sk9p1 {
+  width: 3rem;
+}
+
+.ydvqb {
+  width: 18rem;
+}
+
+.mkdoc {
+  width: 100vw;
+}@media screen and (min-width: 1024px) {
+  .me6f7 {
+    width: 14rem;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .qie83 {
+    width: 16rem;
+  }
+}.ui8di {
+  max-width: 100%;
+}
+
+.txul7 {
+  max-width: 1440px;
+}.qdmcq {
+  min-width: 0;
+}.fmem9 {
+  margin-right: auto;
+  margin-left: auto;
+}.cfjom {
+  margin-top: 0.75rem;
+  margin-bottom: 0.75rem;
+}.m7pj8 {
+  margin-top: 2.5rem;
+}.jtvtm {
+  margin-bottom: 0.25rem;
+}
+
+.pke8d {
+  margin-bottom: 1rem;
+}
+
+.w6eil {
+  margin-bottom: 2.5rem;
+}.wghuk {
+  padding: 0.25rem;
+}
+
+.sl77i {
+  padding: 0.5rem;
+}.npscq {
+  padding-right: 0.25rem;
+  padding-left: 0.25rem;
+}
+
+.pwilx {
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+}
+
+.lajw0 {
+  padding-right: 0.75rem;
+  padding-left: 0.75rem;
+}
+
+.lmig3 {
+  padding-right: 1rem;
+  padding-left: 1rem;
+}.dsaaf {
+  padding-top: 0.125rem;
+  padding-bottom: 0.125rem;
+}
+
+.o9wbz {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+
+.ko67l {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.p31xk {
+  padding-top: 8rem;
+  padding-bottom: 8rem;
+}.nmhwt {
+  padding-top: 1.5rem;
+}@media screen and (min-width: 1280px) {
+  .pnrxf {
+    padding-top: 2rem;
+  }
+}@media screen and (min-width: 1024px) {
+  .xrg6f {
+    padding-right: 0.5rem;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .ufwgh {
+    padding-right: 2.5rem;
+  }
+}.dtq6y {
+  padding-bottom: 0.25rem;
+}
+
+.oijr7 {
+  padding-bottom: 2rem;
+}
+
+.m02hi {
+  padding-bottom: 6rem;
+}.ufq7n {
+  padding-left: 2rem;
+}@media screen and (min-width: 1024px) {
+  .e9p1u {
+    padding-left: 0.5rem;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .l33bw {
+    padding-left: 2.5rem;
+  }
+}.iioe4 {
+  font-size: 0.75rem;
+}
+
+.d2pap {
+  font-size: 0.875rem;
+}
+
+.n1vj7 {
+  font-size: 1.5rem;
+}
+
+.ihqgu {
+  font-size: 1.875rem;
+}.akkj0 {
+  font-weight: 400;
+}
+
+.trsfd {
+  font-weight: 600;
+}.xm4ft {
+  letter-spacing: -0.025rem;
+}.izjmk {
+  list-style-type: disc;
+}.zrpty {
+  text-align: center;
+}.o3ugz {
+  color: #000000;
+}
+
+.uhxxi {
+  color: #ffffff;
+}
+
+.yi8ir {
+  color: #292524;
+}
+
+.xxnzs {
+  color: #2563eb;
+}
+
+.s8ioy:hover {
+  color: #1e3a8a;
+}.po004 {
+  text-decoration: underline;
+}.tnxuq {
+  text-transform: uppercase;
+}@media screen and (min-width: 1280px) {
+  .w7m {
+    width: 17.5rem;
+  }
+}</style>
+<script>(function() {
+  function onClick(id, listener) {
+    const el = document.getElementById(id);
+
+    el.addEventListener("click", listener);
+  }
+
+  function setStyle(id, propName, value) {
+    const el = document.getElementById(id);
+
+    el.style[propName] = value;
+  }
+
+  function menuCloseClicked(event) {
+    setStyle("vvt", "display", null);
+    setStyle("pzv", "overflow", null);
+    setStyle("vyj", "display", null);
+    setStyle("g7p", "display", null);
+    setStyle("po5", "display", null);
+  }
+
+  function menuOpenClicked(event) {
+    setStyle("vvt", "display", "block");
+    setStyle("pzv", "overflow", "hidden");
+    setStyle("vyj", "display", "block");
+    setStyle("g7p", "display", "none");
+    setStyle("po5", "display", "block");
+  }
+
+  function domLoaded() {
+    onClick("vvt", menuCloseClicked);
+    onClick("vyj", menuCloseClicked);
+    onClick("g7p", menuOpenClicked);
+  }
+
+  window.addEventListener('DOMContentLoaded', domLoaded);
+})();
+</script>
+</head>
+<body id="pzv" class="pmk7c t1xv3">
+<header class="eimkn jydzx ko67l">
+<nav class="fmem9 txul7">&nbsp;</nav>
+</header>
+<div>
+<div id="vvt" class="izskd h31vd zy8gk bs62o nxxrt zskce mkdoc u6ifi"></div>
+<span id="g7p" class="kfqmj qaog0 bvq5z wghuk bto48 olvt3 szyjl"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" class="qaog0 vm0ea fwd0b"><path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"></path></svg></span></div>
+<div class="hwh2q a8htw cw7zn">
+<div class="okacc pmk7c fmem9 txul7 qckiu">
+<nav id="po5" class="sf2mm h31vd zskce qjnuv bs62o nxxrt ydvqb sbjnm doxkn lqgab rmg53 xvy8h mzn2j clzou d2pap akkj0 m02hi e9p1u xrg6f yi8ir me6f7 w7m">
+<div class="lsggd hwh2q xsztn pmk7c bvq5z rtybo jydzx"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" id="vyj" class="kfqmj ybt4q sl77i u9zta sk9p1"><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"></path></svg></div>
+<div class="lsggd pmk7c iejvy jtvtm lajw0 nmhwt">
+<div>Version 0.4.4</div>
+<a href="/versions.html" class="eacom q5ycw iioe4 pwilx o9wbz qilyp uhxxi">Change</a></div>
+<a href="/0.4/api/index.html" class="o5u8v pmk7c lsggd iejvy pke8d lajw0 o9wbz"><span>Javadocs</span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"></path><path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"></path></svg></a>
+<ul>
+<li><a href="/0.4/index.html" class="o5u8v lajw0 o9wbz ybt4q">Home</a></li>
+<li>
+<h2 class="trsfd dtq6y nmhwt lajw0 o3ugz tnxuq">Libraries</h2>
+<ul>
+<li><a href="/0.4/objectos-code/index.html" class="o5u8v lajw0 o9wbz ybt4q">Objectos Code</a></li>
+<li><a href="/0.4/objectos-lang/index.html" class="o5u8v lajw0 o9wbz ybt4q">Objectos Lang</a></li>
+<li><a href="/0.4/objectos-util/index.html" class="o5u8v lajw0 o9wbz ybt4q">Objectos Util</a></li>
+</ul>
+</li>
+<li>
+<h2 class="trsfd dtq6y nmhwt lajw0 o3ugz tnxuq">Project</h2>
+<ul>
+<li><a href="/0.4/intro/overview.html" class="o5u8v lajw0 o9wbz ybt4q">What is Objectos?</a></li>
+<li><a href="/0.4/intro/install.html" class="o5u8v lajw0 o9wbz ybt4q">Installation</a></li>
+<li><a href="/0.4/relnotes/index.html" class="o5u8v lajw0 o9wbz ybt4q">Release notes</a></li>
+</ul>
+</li>
+</ul>
+</nav>
+<main class="cw7zn qdmcq m02hi lmig3 nmhwt pnrxf l33bw">
+<article>
+<header class="djvue xsztn w6eil oijr7">
+<h1 class="ihqgu xm4ft">Objectos 0.4.2 release notes</h1>
+</header>
+<div class="rtybo pmk7c ui8di">
+<div class="h31vd makpr zogo1 qie83">&nbsp;</div>
+<div class="cw7zn qdmcq ufwgh">
+<p class="cfjom"><em>February 17, 2023</em></p>
+<p class="cfjom">Welcome to Objectos 0.4.2.
+This is a minor release which focuses solely on Objectos Code.</p>
+<h2 class="n1vj7 m7pj8">New Features</h2>
+<ul class="izjmk ufq7n">
+<li class="cfjom">Add the <code class="lif2y d2pap npscq dsaaf">_else()</code> instruction to the <code class="lif2y d2pap npscq dsaaf">if</code> statement <a href="https://github.com/objectos/objectos/issues/191" class="xxnzs s8ioy po004">#191</a></li>
+<li class="cfjom">Express the <code class="lif2y d2pap npscq dsaaf">x.y</code> name with the <code class="lif2y d2pap npscq dsaaf">n(&quot;x&quot;).n(&quot;y&quot;)</code> syntax <a href="https://github.com/objectos/objectos/issues/193" class="xxnzs s8ioy po004">#193</a></li>
+<li class="cfjom">Express the <code class="lif2y d2pap npscq dsaaf">StandardCharsets.UTF_8</code> name with the <code class="lif2y d2pap npscq dsaaf">t(StandardCharsets.class).n(&quot;UTF_8&quot;)</code> syntax <a href="https://github.com/objectos/objectos/issues/194" class="xxnzs s8ioy po004">#194</a></li>
+<li class="cfjom">Express primary.identifier field access expression with the <code class="lif2y d2pap npscq dsaaf">v(&quot;method&quot;).n(&quot;foo&quot;)</code> syntax <a href="https://github.com/objectos/objectos/issues/195" class="xxnzs s8ioy po004">#195</a></li>
+<li class="cfjom">Express chained methods with the <code class="lif2y d2pap npscq dsaaf">v(&quot;a&quot;).v(&quot;b&quot;)</code> syntax. <a href="https://github.com/objectos/objectos/issues/196" class="xxnzs s8ioy po004">#196</a></li>
+<li class="cfjom">Express <code class="lif2y d2pap npscq dsaaf">a[x][y]</code> with the <code class="lif2y d2pap npscq dsaaf">n(&quot;a&quot;).dim(n(&quot;x&quot;)).dim(n(&quot;y&quot;))</code> syntax <a href="https://github.com/objectos/objectos/issues/198" class="xxnzs s8ioy po004">#198</a></li>
+<li class="cfjom">New method declaration: <code class="lif2y d2pap npscq dsaaf">method()</code> invoked with no args <a href="https://github.com/objectos/objectos/issues/199" class="xxnzs s8ioy po004">#199</a></li>
+<li class="cfjom">New method declaration: syntax to set the method name <a href="https://github.com/objectos/objectos/issues/200" class="xxnzs s8ioy po004">#200</a></li>
+<li class="cfjom">New method declaration: syntax to add modifiers <a href="https://github.com/objectos/objectos/issues/201" class="xxnzs s8ioy po004">#201</a></li>
+<li class="cfjom">Annotation: the <code class="lif2y d2pap npscq dsaaf">annotation(Override.class)</code> syntax <a href="https://github.com/objectos/objectos/issues/202" class="xxnzs s8ioy po004">#202</a></li>
+<li class="cfjom">Method declaration: the <code class="lif2y d2pap npscq dsaaf">returnType(String.class)</code> instruction <a href="https://github.com/objectos/objectos/issues/203" class="xxnzs s8ioy po004">#203</a></li>
+<li class="cfjom">Formal parameters: the shorthand <code class="lif2y d2pap npscq dsaaf">parameter</code> instruction <a href="https://github.com/objectos/objectos/issues/204" class="xxnzs s8ioy po004">#204</a></li>
+<li class="cfjom">Method declaration: the <code class="lif2y d2pap npscq dsaaf">returnType(JavaTemplate.Type)</code> instruction <a href="https://github.com/objectos/objectos/issues/205" class="xxnzs s8ioy po004">#205</a></li>
+<li class="cfjom">Method declaration: the shorthand <code class="lif2y d2pap npscq dsaaf">method</code> instruction <a href="https://github.com/objectos/objectos/issues/206" class="xxnzs s8ioy po004">#206</a></li>
+</ul>
+<h2 class="n1vj7 m7pj8">Documentation</h2>
+<ul class="izjmk ufq7n">
+<li class="cfjom">Docs / Objectos Code / Java Template <a href="https://github.com/objectos/objectos/issues/208" class="xxnzs s8ioy po004">#208</a></li>
+</ul>
+</div>
+</div>
+</article>
+</main>
+</div>
+</div>
+<footer class="hwh2q a8htw eimkn jydzx ko67l">
+<nav class="fmem9 txul7">
+<p class="d2pap p31xk zrpty">&copy; 2010-2023 Objectos Software LTDA. All rights reserved.</p>
+</nav>
+</footer>
+</body>
+</html>

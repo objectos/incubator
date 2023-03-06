@@ -17,6 +17,7 @@ package objectos.docs;
 
 import static java.lang.System.out;
 
+import br.com.objectos.css.Css;
 import br.com.objectos.css.sheet.StyleSheet;
 import br.com.objectos.css.sheet.StyleSheetWriter;
 import java.io.IOException;
@@ -47,6 +48,12 @@ public final class Docs extends DocsInjector {
     String javaScript();
 
     HtmlFragment toFragment();
+  }
+
+  public static final long SEED = 84321674516L;
+
+  static {
+    Css.randomSeed(SEED);
   }
 
   public static final String INDEX = "docs/0.4/index";
@@ -144,16 +151,6 @@ public final class Docs extends DocsInjector {
     site.parseArgs(args);
 
     site.execute();
-  }
-
-  private void parseArgs(String[] args) {
-    if (args.length == 3) {
-      leftBar.skip();
-
-      var a = args[2];
-
-      sourceFilter = (path) -> path.endsWith(a);
-    }
   }
 
   private static Path main0ParseDirectory(String name, String pathName) throws IOException {
@@ -343,6 +340,16 @@ public final class Docs extends DocsInjector {
       var html = htmlWriter.toString();
 
       _write(writePath, html);
+    }
+  }
+
+  private void parseArgs(String[] args) {
+    if (args.length == 3) {
+      leftBar.skip();
+
+      var a = args[2];
+
+      sourceFilter = (path) -> path.endsWith(a);
     }
   }
 

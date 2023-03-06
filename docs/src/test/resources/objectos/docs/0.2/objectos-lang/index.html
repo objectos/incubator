@@ -1,17 +1,656 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta http-equiv="x-ua-compatible" content="ie=edge"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico"><style>*{box-sizing:border-box;margin:0;padding:0}a{color:inherit;text-decoration:inherit}body{margin:0 auto;min-height:100%}code,pre{font-family:ui-monospace,"Liberation Mono","Cascadia Mono","Segoe UI Mono",Menlo,Monaco,Consolas,monospace}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}html{color:black;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Liberation Sans",sans-serif;font-size:16px;line-height:1.5;min-height:100%}table{width:100%}ul,ol{list-style-type:none}article{color:#212529}article blockquote{font-style:italic;padding-left:2.5rem}article h1{font-size:1.875rem;font-weight:600;letter-spacing:-0.5px;line-height:1.3;margin-bottom:1rem}article h1+p{margin-top:1.75rem}article h2{font-size:1.5rem;font-weight:600;margin-bottom:1rem;margin-top:3.5rem}article h3{border-bottom:1px solid #dee2e6;font-size:1.25rem;font-weight:500;letter-spacing:-0.25px;margin-bottom:1rem;margin-top:2rem}article p{margin:1rem 0}article a{color:#1971c2}article a:hover{text-decoration:underline}article p code,article ol code,article ul code{font-size:.875rem;font-weight:500;line-height:.875rem}article pre>code{font-size:.875rem;font-weight:500}article ol{list-style:decimal;padding-left:2.5rem}article ul{list-style:disc;padding-left:2.5rem}article li{margin:.75rem 0}#aho{padding:2rem 0}#aho>ol{align-items:center;display:flex;font-size:.875rem}#aho>ol li{align-items:center;display:flex}#aho>ol a{display:block}#aho>ol svg{display:block}body{max-width:768px;padding:1rem}@media screen and (min-width:768px){body{padding:1.5rem}}#mgc{border-top:1px solid #dee2e6;display:flex;margin-top:5rem;padding:.5rem 0 1rem}#mgc a{align-items:center;color:#1971c2;display:flex}#mgc a:hover span{text-decoration:underline}#mgc>div{flex-grow:1}#mgc svg{display:block}#qpz{text-align:right}#qpz svg{margin-left:.5rem}#gcl{text-align:left}#gcl svg{margin-right:.5rem}.bhi{flex-grow:1;font-weight:500}.bhi>div{font-size:.875rem}.bhi>span{display:none}@media screen and (min-width:768px){#mgc{padding:2.5rem 0 5rem}#mgc svg{margin-top:1.25rem}.bhi>span{display:inline}}.jyf{background-color:#f8f9fa;border:1px solid #e9ecef;border-radius:.5rem;overflow-x:auto;padding:1.5rem}.juq{color:#c2255c}.wjs{color:#9c36b5}.qbr{color:#f03e3e}.iec{color:#4263eb}.uc6{color:#2b8a3e}.jrq,.cyc{color:#4263eb}</style></head><body><nav id="aho"><ol><li><a href="/0.2/index.html">Home</a></li><li><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" height="16" width="16"><path fill="none" d="M0 0h24v24H0z"></path><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg><a href="/0.2/objectos-lang/index.html">Objectos Lang</a></li></ol></nav><main><article><h1>Objectos Lang</h1>
-<p>Objectos Lang provides:</p>
+<!doctype html><html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="shortcut icon" type="vnd.microsoft.icon" href="/favicon.ico">
+<title>Objectos Lang</title>
+<style>*, ::before, ::after {
+  box-sizing: border-box;
+  border-width: 0;
+  border-style: solid;
+  border-color: currentcolor;
+}
+
+html {
+  line-height: 1.5;
+  -webkit-text-size-adjust: 100%;
+  -moz-tab-size: 4;
+  tab-size: 4;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+body {
+  margin: 0;
+  line-height: inherit;
+}
+
+hr {
+  height: 0;
+  color: inherit;
+  border-top-width: 1px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+b, strong {
+  font-weight: bolder;
+}
+
+code, kbd, samp, pre {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 1em;
+}
+
+small {
+  font-size: 80%;
+}
+
+sub, sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+sup {
+  top: -0.5em;
+}
+
+table {
+  text-indent: 0;
+  border-color: inherit;
+  border-collapse: collapse;
+}
+
+button, input, optgroup, select, textarea {
+  font-family: inherit;
+  font-size: 100%;
+  font-weight: inherit;
+  line-height: inherit;
+  color: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+button, select {
+  text-transform: none;
+}
+
+button, [type="button"], [type="reset"], [type="submit"] {
+  -webkit-appearance: button;
+  background-color: transparent;
+  background-image: none;
+}
+
+:-moz-focusring {
+  outline: auto;
+}
+
+:-moz-ui-invalid {
+  box-shadow: none;
+}
+
+progress {
+  vertical-align: baseline;
+}
+
+::-webkit-inner-spin-button, ::-webkit-outer-spin-button {
+  height: auto;
+}
+
+[type="search"] {
+  -webkit-appearance: textfield;
+  outline-offset: -2px;
+}
+
+::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+::-webkit-file-upload-button {
+  -webkit-appearance: button;
+  font: inherit;
+}
+
+summary {
+  display: list-item;
+}
+
+blockquote, dl, dd, h1, h2, h3, h4, h5, h6, hr, figure, p, pre {
+  margin: 0;
+}
+
+fieldset {
+  margin: 0;
+  padding: 0;
+}
+
+legend {
+  padding: 0;
+}
+
+ol, ul, menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+textarea {
+  resize: vertical;
+}
+
+input::placeholder, textarea::placeholder {
+  opacity: 1;
+  color: #9ca3af;
+}
+
+button, [role="button"] {
+  cursor: pointer;
+}
+
+:disabled {
+  cursor: default;
+}
+
+img, svg {
+  display: block;
+  vertical-align: middle;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.izskd {
+  background-color: #000000;
+}
+
+.sf2mm {
+  background-color: #ffffff;
+}
+
+.nntmi {
+  background-color: #e2e8f0;
+}
+
+.lif2y {
+  background-color: #f3f4f6;
+}
+
+.eacom {
+  background-color: #9ca3af;
+}
+
+.tgf79 {
+  background-color: #fee2e2;
+}
+
+.o5u8v:hover {
+  background-color: #f3f4f6;
+}
+
+.q5ycw:hover {
+  background-color: #6b7280;
+}.hwh2q {
+  border-color: #e2e8f0;
+}
+
+.djvue {
+  border-color: #94a3b8;
+}@media screen and (min-width: 1024px) {
+  .xvy8h {
+    border-color: #e2e8f0;
+  }
+}.a8htw {
+  border-top-width: 1px;
+}@media screen and (min-width: 1024px) {
+  .mzn2j {
+    border-right-width: 1px;
+  }
+}.xsztn {
+  border-bottom-width: 1px;
+}.qilyp {
+  border-radius: 0.25em;
+}.zy8gk {
+  opacity: 0.5;
+}.okacc {
+  align-items: stretch;
+}
+
+.lsggd {
+  align-items: center;
+}.eimkn {
+  flex: none;
+}@media screen and (min-width: 1024px) {
+  .clzou {
+    flex: none;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .zogo1 {
+    flex: none;
+  }
+}.rtybo {
+  flex-direction: row-reverse;
+}
+
+.t1xv3 {
+  flex-direction: column;
+}.cw7zn {
+  flex-grow: 1;
+}.iejvy {
+  justify-content: space-between;
+}.kfqmj:hover {
+  cursor: pointer;
+}.h31vd {
+  display: none;
+}
+
+.ybt4q {
+  display: block;
+}
+
+.qaog0 {
+  display: inline-block;
+}
+
+.pmk7c {
+  display: flex;
+}@media screen and (min-width: 1024px) {
+  .bvq5z {
+    display: none;
+  }
+
+  .doxkn {
+    display: block;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .makpr {
+    display: block;
+  }
+}.nxxrt {
+  top: 0;
+}
+
+.szyjl {
+  top: 1rem;
+}.olvt3 {
+  left: 0.75rem;
+}.mxg6b {
+  overflow-x: auto;
+}.qjnuv {
+  overflow-y: auto;
+}.bs62o {
+  position: fixed;
+}
+
+.bto48 {
+  position: absolute;
+}@media screen and (min-width: 1024px) {
+  .rmg53 {
+    position: static;
+  }
+}.u6ifi {
+  z-index: 10;
+}
+
+.sbjnm {
+  z-index: 20;
+}.vm0ea {
+  height: 1.5rem;
+}
+
+.u9zta {
+  height: 3rem;
+}
+
+.jydzx {
+  height: 4rem;
+}
+
+.zskce {
+  height: 100vh;
+}@media screen and (min-width: 1024px) {
+  .lqgab {
+    height: auto;
+  }
+}.qckiu {
+  min-height: 100%;
+}.fwd0b {
+  width: 1.5rem;
+}
+
+.sk9p1 {
+  width: 3rem;
+}
+
+.ydvqb {
+  width: 18rem;
+}
+
+.mkdoc {
+  width: 100vw;
+}@media screen and (min-width: 1024px) {
+  .me6f7 {
+    width: 14rem;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .qie83 {
+    width: 16rem;
+  }
+}.ui8di {
+  max-width: 100%;
+}
+
+.txul7 {
+  max-width: 1440px;
+}.qdmcq {
+  min-width: 0;
+}.fmem9 {
+  margin-right: auto;
+  margin-left: auto;
+}.cfjom {
+  margin-top: 0.75rem;
+  margin-bottom: 0.75rem;
+}.m7pj8 {
+  margin-top: 2.5rem;
+}.jtvtm {
+  margin-bottom: 0.25rem;
+}
+
+.pke8d {
+  margin-bottom: 1rem;
+}
+
+.w6eil {
+  margin-bottom: 2.5rem;
+}.wghuk {
+  padding: 0.25rem;
+}
+
+.sl77i {
+  padding: 0.5rem;
+}
+
+.fzalj {
+  padding: 0.75rem;
+}.npscq {
+  padding-right: 0.25rem;
+  padding-left: 0.25rem;
+}
+
+.pwilx {
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+}
+
+.lajw0 {
+  padding-right: 0.75rem;
+  padding-left: 0.75rem;
+}
+
+.lmig3 {
+  padding-right: 1rem;
+  padding-left: 1rem;
+}.dsaaf {
+  padding-top: 0.125rem;
+  padding-bottom: 0.125rem;
+}
+
+.o9wbz {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+
+.ko67l {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.p31xk {
+  padding-top: 8rem;
+  padding-bottom: 8rem;
+}.nmhwt {
+  padding-top: 1.5rem;
+}@media screen and (min-width: 1280px) {
+  .pnrxf {
+    padding-top: 2rem;
+  }
+}@media screen and (min-width: 1024px) {
+  .xrg6f {
+    padding-right: 0.5rem;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .ufwgh {
+    padding-right: 2.5rem;
+  }
+}.dtq6y {
+  padding-bottom: 0.25rem;
+}
+
+.oijr7 {
+  padding-bottom: 2rem;
+}
+
+.m02hi {
+  padding-bottom: 6rem;
+}.uc9pt {
+  padding-left: 1.5rem;
+}
+
+.ufq7n {
+  padding-left: 2rem;
+}@media screen and (min-width: 1024px) {
+  .e9p1u {
+    padding-left: 0.5rem;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .l33bw {
+    padding-left: 2.5rem;
+  }
+}.iioe4 {
+  font-size: 0.75rem;
+}
+
+.d2pap {
+  font-size: 0.875rem;
+}
+
+.n1vj7 {
+  font-size: 1.5rem;
+}
+
+.ihqgu {
+  font-size: 1.875rem;
+}.akkj0 {
+  font-weight: 400;
+}
+
+.trsfd {
+  font-weight: 600;
+}.xm4ft {
+  letter-spacing: -0.025rem;
+}.izjmk {
+  list-style-type: disc;
+}.zrpty {
+  text-align: center;
+}.o3ugz {
+  color: #000000;
+}
+
+.uhxxi {
+  color: #ffffff;
+}
+
+.yi8ir {
+  color: #292524;
+}
+
+.xxnzs {
+  color: #2563eb;
+}
+
+.s8ioy:hover {
+  color: #1e3a8a;
+}.po004 {
+  text-decoration: underline;
+}.tnxuq {
+  text-transform: uppercase;
+}@media screen and (min-width: 1280px) {
+  .w7m {
+    width: 17.5rem;
+  }
+}</style>
+<script>(function() {
+  function onClick(id, listener) {
+    const el = document.getElementById(id);
+
+    el.addEventListener("click", listener);
+  }
+
+  function setStyle(id, propName, value) {
+    const el = document.getElementById(id);
+
+    el.style[propName] = value;
+  }
+
+  function menuCloseClicked(event) {
+    setStyle("vvt", "display", null);
+    setStyle("pzv", "overflow", null);
+    setStyle("vyj", "display", null);
+    setStyle("g7p", "display", null);
+    setStyle("po5", "display", null);
+  }
+
+  function menuOpenClicked(event) {
+    setStyle("vvt", "display", "block");
+    setStyle("pzv", "overflow", "hidden");
+    setStyle("vyj", "display", "block");
+    setStyle("g7p", "display", "none");
+    setStyle("po5", "display", "block");
+  }
+
+  function domLoaded() {
+    onClick("vvt", menuCloseClicked);
+    onClick("vyj", menuCloseClicked);
+    onClick("g7p", menuOpenClicked);
+  }
+
+  window.addEventListener('DOMContentLoaded', domLoaded);
+})();
+</script>
+</head>
+<body id="pzv" class="pmk7c t1xv3">
+<header class="eimkn jydzx ko67l">
+<nav class="fmem9 txul7">&nbsp;</nav>
+</header>
+<div class="tgf79 hwh2q a8htw ko67l">
+<div class="d2pap fmem9 txul7 lmig3 zrpty">
+<p>You are reading the documentation of an old and unsupported version of Objectos.</p>
+</div>
+</div>
+<div>
+<div id="vvt" class="izskd h31vd zy8gk bs62o nxxrt zskce mkdoc u6ifi"></div>
+<span id="g7p" class="kfqmj qaog0 bvq5z wghuk bto48 olvt3 szyjl"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" class="qaog0 vm0ea fwd0b"><path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"></path></svg></span></div>
+<div class="hwh2q a8htw cw7zn">
+<div class="okacc pmk7c fmem9 txul7 qckiu">
+<nav id="po5" class="sf2mm h31vd zskce qjnuv bs62o nxxrt ydvqb sbjnm doxkn lqgab rmg53 xvy8h mzn2j clzou d2pap akkj0 m02hi e9p1u xrg6f yi8ir me6f7 w7m">
+<div class="lsggd hwh2q xsztn pmk7c bvq5z rtybo jydzx"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" id="vyj" class="kfqmj ybt4q sl77i u9zta sk9p1"><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"></path></svg></div>
+<div class="lsggd pmk7c iejvy jtvtm lajw0 nmhwt">
+<div>Version 0.2.0</div>
+<a href="/versions.html" class="eacom q5ycw iioe4 pwilx o9wbz qilyp uhxxi">Change</a></div>
+<a href="/0.2/api/index.html" class="o5u8v pmk7c lsggd iejvy pke8d lajw0 o9wbz"><span>Javadocs</span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"></path><path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"></path></svg></a>
 <ul>
-<li>utilities for instances whose type is from the <code>java.lang</code> package; and</li>
-<li>a type-safe note sink API.</li>
+<li><a href="/0.2/index.html" class="o5u8v lajw0 o9wbz ybt4q">Home</a></li>
+<li>
+<h2 class="trsfd dtq6y nmhwt lajw0 o3ugz tnxuq">Introduction</h2>
+<ul>
+<li><a href="/0.2/intro/overview.html" class="o5u8v lajw0 o9wbz ybt4q">What is Objectos?</a></li>
+<li><a href="/0.2/intro/install.html" class="o5u8v lajw0 o9wbz ybt4q">Installation</a></li>
 </ul>
-<p>Objectos itself is built on top of Objectos Lang.</p>
-<h2>Installation</h2>
-<p>To use Objectos Lang in your project add the following to your POM:</p>
-<pre class="jyf"><code><span class="njs"></span><span class="jrq">&lt;</span><span class="cyc">dependencies</span><span class="jrq">&gt;</span><span class="njs">
-    </span><span class="jrq">&lt;</span><span class="cyc">dependency</span><span class="jrq">&gt;</span><span class="njs">
-        </span><span class="jrq">&lt;</span><span class="cyc">groupId</span><span class="jrq">&gt;</span><span class="njs">br.com.objectos</span><span class="jrq">&lt;/</span><span class="cyc">groupId</span><span class="jrq">&gt;</span><span class="njs">
-        </span><span class="jrq">&lt;</span><span class="cyc">artifactId</span><span class="jrq">&gt;</span><span class="njs">objectos-lang</span><span class="jrq">&lt;/</span><span class="cyc">artifactId</span><span class="jrq">&gt;</span><span class="njs">
-    </span><span class="jrq">&lt;/</span><span class="cyc">dependency</span><span class="jrq">&gt;</span><span class="njs">
-</span><span class="jrq">&lt;/</span><span class="cyc">dependencies</span><span class="jrq">&gt;</span></code></pre>
-<p>This assumes you are using the <a href="/0.2/intro/install.html">Objectos BOM POM</a>.</p>
-</article></main><nav id="mgc"><div id="gcl"><a href="/0.2/intro/install.html"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" height="16" width="16"><path fill="none" d="M0 0h24v24H0z"></path><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"></path></svg><div class="bhi"><div>Previous</div><span>Installation</span></div></a></div><div id="qpz"><a href="/0.2/objectos-lang/Check.html"><div class="bhi"><div>Next</div><span>The Check class</span></div><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" height="16" width="16"><path fill="none" d="M0 0h24v24H0z"></path><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"></path></svg></a></div></nav></body></html>
+</li>
+<li>
+<h2 class="trsfd dtq6y nmhwt lajw0 o3ugz tnxuq">Objectos Lang</h2>
+<ul>
+<li><a href="/0.2/objectos-lang/index.html" class="nntmi o3ugz lajw0 o9wbz ybt4q">Overview</a></li>
+<li><a href="/0.2/objectos-lang/Check.html" class="o5u8v lajw0 o9wbz ybt4q">The <code>Check</code> class</a></li>
+<li><a href="/0.2/objectos-lang/Equals.html" class="o5u8v lajw0 o9wbz ybt4q">The <code>Equals</code> class</a></li>
+<li><a href="/0.2/objectos-lang/HashCode.html" class="o5u8v lajw0 o9wbz ybt4q">The <code>HashCode</code> class</a></li>
+<li><a href="/0.2/objectos-lang/ToString.html" class="o5u8v lajw0 o9wbz ybt4q">The <code>ToString</code> facility</a></li>
+<li><a href="/0.2/objectos-lang/note-sink-api/index.html" class="o5u8v lajw0 o9wbz ybt4q">The note sink API</a>
+<ul>
+<li><a href="/0.2/objectos-lang/note-sink-api/creating-notes.html" class="o5u8v uc9pt lajw0 o9wbz ybt4q">Creating notes</a></li>
+<li><a href="/0.2/objectos-lang/note-sink-api/the-note-sink-interface.html" class="o5u8v uc9pt lajw0 o9wbz ybt4q">Using the <code>NoteSink</code> interface</a></li>
+<li><a href="/0.2/objectos-lang/note-sink-api/the-no-op-note-sink.html" class="o5u8v uc9pt lajw0 o9wbz ybt4q">The <code>NoOpNoteSink</code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<h2 class="trsfd dtq6y nmhwt lajw0 o3ugz tnxuq">Release Notes</h2>
+<ul>
+<li><a href="/0.2/relnotes/0.2.0.html" class="o5u8v lajw0 o9wbz ybt4q">Objectos 0.2.0</a></li>
+<li><a href="/0.2/relnotes/0.1.0.html" class="o5u8v lajw0 o9wbz ybt4q">Objectos 0.1.0</a></li>
+</ul>
+</li>
+</ul>
+</nav>
+<main class="cw7zn qdmcq m02hi lmig3 nmhwt pnrxf l33bw">
+<article>
+<header class="djvue xsztn w6eil oijr7">
+<h1 class="ihqgu xm4ft">Objectos Lang</h1>
+</header>
+<div class="rtybo pmk7c ui8di">
+<div class="h31vd makpr zogo1 qie83">&nbsp;</div>
+<div class="cw7zn qdmcq ufwgh">
+<p class="cfjom">Objectos Lang provides:</p>
+<ul class="izjmk ufq7n">
+<li class="cfjom">utilities for instances whose type is from the <code class="lif2y d2pap npscq dsaaf">java.lang</code> package; and</li>
+<li class="cfjom">a type-safe note sink API.</li>
+</ul>
+<p class="cfjom">Objectos itself is built on top of Objectos Lang.</p>
+<h2 class="n1vj7 m7pj8">Installation</h2>
+<p class="cfjom">To use Objectos Lang in your project add the following to your POM:</p>
+<pre class="lif2y d2pap mxg6b cfjom fzalj"><code><span class="xvs"></span><span class="xxnzs">&lt;</span><span class="xxnzs">dependencies</span><span class="xxnzs">&gt;</span><span class="xvs">
+    </span><span class="xxnzs">&lt;</span><span class="xxnzs">dependency</span><span class="xxnzs">&gt;</span><span class="xvs">
+        </span><span class="xxnzs">&lt;</span><span class="xxnzs">groupId</span><span class="xxnzs">&gt;</span><span class="xvs">br.com.objectos</span><span class="xxnzs">&lt;/</span><span class="xxnzs">groupId</span><span class="xxnzs">&gt;</span><span class="xvs">
+        </span><span class="xxnzs">&lt;</span><span class="xxnzs">artifactId</span><span class="xxnzs">&gt;</span><span class="xvs">objectos-lang</span><span class="xxnzs">&lt;/</span><span class="xxnzs">artifactId</span><span class="xxnzs">&gt;</span><span class="xvs">
+    </span><span class="xxnzs">&lt;/</span><span class="xxnzs">dependency</span><span class="xxnzs">&gt;</span><span class="xvs">
+</span><span class="xxnzs">&lt;/</span><span class="xxnzs">dependencies</span><span class="xxnzs">&gt;</span></code></pre>
+<p class="cfjom">This assumes you are using the <a href="/0.2/intro/install.html" class="xxnzs s8ioy po004">Objectos BOM POM</a>.</p>
+</div>
+</div>
+</article>
+</main>
+</div>
+</div>
+<footer class="hwh2q a8htw eimkn jydzx ko67l">
+<nav class="fmem9 txul7">
+<p class="d2pap p31xk zrpty">&copy; 2010-2023 Objectos Software LTDA. All rights reserved.</p>
+</nav>
+</footer>
+</body>
+</html>
