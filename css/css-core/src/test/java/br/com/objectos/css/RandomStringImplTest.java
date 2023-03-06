@@ -15,23 +15,23 @@
  */
 package br.com.objectos.css;
 
-import java.util.Random;
-import objectos.lang.RandomString;
+import static org.testng.Assert.assertEquals;
 
-final class RandomStringImpl {
+import org.testng.annotations.Test;
 
-  private static final Random RANDOM = new Random();
+public class RandomStringImplTest {
 
-  private static final RandomString INSTANCE = new RandomString(RANDOM);
+  @Test(description = """
+  Verifies setSeed generates the same sequence of pseudo random every time.
+  """)
+  public void setSeed() {
+    long seed = 1233456789L;
 
-  private RandomStringImpl() {}
+    RandomStringImpl.setSeed(seed);
 
-  public static String next(int length) {
-    return INSTANCE.nextString(length);
-  }
-
-  public static void setSeed(long seed) {
-    RANDOM.setSeed(seed);
+    assertEquals(RandomStringImpl.next(3), "Ds2");
+    assertEquals(RandomStringImpl.next(4), "yIny");
+    assertEquals(RandomStringImpl.next(5), "0kdzu");
   }
 
 }
