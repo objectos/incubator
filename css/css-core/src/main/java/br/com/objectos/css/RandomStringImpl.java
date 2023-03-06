@@ -26,12 +26,12 @@ final class RandomStringImpl {
 
   private RandomStringImpl() {}
 
-  public static String next(int length) {
-    return INSTANCE.nextString(length);
+  public static void randomSeed(long seed) {
+    RANDOM.setSeed(seed);
   }
 
-  public static void setSeed(long seed) {
-    RANDOM.setSeed(seed);
+  static String next(int length) {
+    return INSTANCE.nextString(length);
   }
 
 }

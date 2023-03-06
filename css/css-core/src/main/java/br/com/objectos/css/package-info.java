@@ -19,6 +19,7 @@
         ColorFactory.class,
         RandomClassSelectorGenerator.class,
         RandomIdSelectorGenerator.class,
+        RandomStringImpl.class,
 
         // select
         br.com.objectos.css.select.SelectorFactory.class,

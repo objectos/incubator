@@ -27,7 +27,7 @@ public class RandomStringImplTest {
   public void setSeed() {
     long seed = 1233456789L;
 
-    RandomStringImpl.setSeed(seed);
+    RandomStringImpl.randomSeed(seed);
 
     assertEquals(RandomStringImpl.next(3), "Ds2");
     assertEquals(RandomStringImpl.next(4), "yIny");
