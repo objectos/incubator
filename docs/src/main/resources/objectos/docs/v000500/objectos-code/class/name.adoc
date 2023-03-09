@@ -76,6 +76,60 @@ In other words, the following are ignored:
 * the package name; and
 * any enclosing type name.
 
+== Multiple names
+
+When multiple names are specified the class declaration will be generated with the one that was specified last.
+
+The following Objectos Code:
+
+[,java]
+----
+import objectos.code.JavaTemplate;
+
+public class ClassDeclarationName06 extends JavaTemplate {
+  @Override
+  protected final void definition() {
+    classDeclaration(
+      name("First"),
+      name("Second"),
+      name("Third")
+    );
+  }
+}
+----
+
+Generates:
+
+[,java]
+----
+class Third {}
+----
+
+== Unnamed class
+
+If you don't specify a name for your class declaration it will be generated with the `Unnamed` name.
+
+The following Objectos Code:
+
+[,java]
+----
+import objectos.code.JavaTemplate;
+
+public class ClassDeclarationName05 extends JavaTemplate {
+  @Override
+  protected final void definition() {
+    classDeclaration();
+  }
+}
+----
+
+Generates:
+
+[,java]
+----
+class Unnamed {}
+----
+
 == Invalid names
 
 The `name(String)` instruction will reject names that contain invalid characters for a Java identifier.
@@ -146,57 +200,3 @@ class return {}
 
 Note that `return`, even though it contains valid characters for an identifier, is not a valid identifier;
 `return` is a reserved keyword.
-
-== Unnamed class
-
-If you don't specify a name for your class declaration it will be generated with the `Unnamed` name.
-
-The following Objectos Code:
-
-[,java]
-----
-import objectos.code.JavaTemplate;
-
-public class ClassDeclarationName05 extends JavaTemplate {
-  @Override
-  protected final void definition() {
-    classDeclaration();
-  }
-}
-----
-
-Generates:
-
-[,java]
-----
-class Unnamed {}
-----
-
-== Multiple names
-
-When multiple names are specified the class declaration will be generated with the one that was specified last.
-
-The following Objectos Code:
-
-[,java]
-----
-import objectos.code.JavaTemplate;
-
-public class ClassDeclarationName06 extends JavaTemplate {
-  @Override
-  protected final void definition() {
-    classDeclaration(
-      name("First"),
-      name("Second"),
-      name("Third")
-    );
-  }
-}
-----
-
-Generates:
-
-[,java]
-----
-class Third {}
-----

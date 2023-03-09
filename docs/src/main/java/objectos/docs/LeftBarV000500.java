@@ -63,6 +63,15 @@ final class LeftBarV000500 extends LeftBarFragment {
         ),
 
         li(
+          h2v0("Field Declarations"),
+
+          ul(
+            li(a0("v000500/objectos-code/field/index")),
+            li(a0("v000500/objectos-code/field/name"))
+          )
+        ),
+
+        li(
           h2v0("Method Declarations"),
 
           ul(

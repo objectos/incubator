@@ -369,8 +369,6 @@ public final class Docs extends DocsInjector {
 
       var a = args[2];
 
-      System.out.println("sourceFilter=" + a);
-
       sourceFilter = (path) -> path.endsWith(a);
     }
   }
