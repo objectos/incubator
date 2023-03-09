@@ -29,4 +29,6 @@ final class XmlStyles {
 
   private XmlStyles() {}
 
+  public static void init() {}
+
 }

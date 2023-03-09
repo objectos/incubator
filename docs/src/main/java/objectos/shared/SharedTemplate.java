@@ -44,6 +44,10 @@ public abstract class SharedTemplate extends HtmlTemplate implements AsciiDoc.Pr
 
   private int valueStackIndex = -1;
 
+  public static String init() {
+    return BODY.toString();
+  }
+
   @Override
   public final void boldEnd() {
     tagEnd(StandardElementName.STRONG);

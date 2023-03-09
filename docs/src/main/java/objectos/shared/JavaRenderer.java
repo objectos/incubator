@@ -62,6 +62,10 @@ public final class JavaRenderer extends LanguageRenderer {
 
   private final StringBuilder stringBuilder = new StringBuilder();
 
+  public static void init() {
+    JavaStyles.init();
+  }
+
   @Override
   public final void renderImpl(String literal) {
     this.java = literal;

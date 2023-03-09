@@ -24,7 +24,10 @@ final class DocsCss extends AbstractStyleSheet {
 
   static final ClassSelector XL_WIDTH_70 = Css.randomDot(3);
 
-  private final Framework framework = new Framework();
+  private static final Framework framework = new Framework();
+
+  public static void init() {
+  }
 
   @Override
   protected final void definition() {

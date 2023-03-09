@@ -35,7 +35,10 @@ import objectos.asciidoc.Document;
 import objectos.html.HtmlFragment;
 import objectos.lang.Check;
 import objectos.shared.HtmlWriter;
+import objectos.shared.JavaRenderer;
+import objectos.shared.SharedTemplate;
 import objectos.shared.StyleClassSet;
+import objectos.shared.XmlRenderer;
 import objectos.util.GrowableMap;
 
 public final class Docs extends DocsInjector {
@@ -54,6 +57,13 @@ public final class Docs extends DocsInjector {
 
   static {
     Css.randomSeed(SEED);
+
+    SharedTemplate.init();
+    ArticleTemplate.initArticleTemplate();
+    VersionsTemplate.initVersionsTemplate();
+    DocsCss.init();
+    XmlRenderer.init();
+    JavaRenderer.init();
   }
 
   public static final String INDEX = "docs/0.5.0/index";

@@ -93,6 +93,9 @@ final class ArticleTemplate extends DocsTemplate implements LanguageRenderer.Out
 
   ArticleTemplate(DocsInjector injector) { super(injector); }
 
+  public static void initArticleTemplate() {
+  }
+
   @Override
   public final void documentEnd() {
     if (containerStarted) {

@@ -33,6 +33,10 @@ public final class XmlRenderer extends LanguageRenderer {
 
   private final StringBuilder stringBuilder = new StringBuilder();
 
+  public static void init() {
+    XmlStyles.init();
+  }
+
   @Override
   public final void renderImpl(String literal) {
     length = literal.length();

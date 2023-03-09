@@ -39,4 +39,6 @@ final class JavaStyles {
 
   private JavaStyles() {}
 
+  public static void init() {}
+
 }

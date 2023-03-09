@@ -49,6 +49,8 @@ final class VersionsTemplate extends DocsTemplate {
     super(injector);
   }
 
+  public static void initVersionsTemplate() {}
+
   @Override
   public final void headingStart(int level) {
     switch (level) {
