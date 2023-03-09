@@ -20,7 +20,7 @@ import objectos.code.ClassTypeName;
 import objectos.code.JavaTemplate;
 import objectos.code.ParameterizedTypeName;
 
-public class FieldDeclarationName01 extends JavaTemplate {
+public class FieldName01 extends JavaTemplate {
   static final ClassTypeName STRING
       = ClassTypeName.of(String.class);
 
@@ -31,7 +31,7 @@ public class FieldDeclarationName01 extends JavaTemplate {
       );
 
   public static void main(String[] args) {
-    System.out.println(new FieldDeclarationName01());
+    System.out.println(new FieldName01());
   }
 
   @Override

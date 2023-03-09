@@ -17,17 +17,23 @@ package objectos.docs.code.field;
 
 import objectos.code.JavaTemplate;
 
-public class FieldDeclarationName05 extends JavaTemplate {
+public class FieldMods01 extends JavaTemplate {
   public static void main(String[] args) {
-    System.out.println(new FieldDeclarationName05());
+    System.out.println(new FieldMods01());
   }
 
   @Override
   protected final void definition() {
     classDeclaration(
-      name("Caveat"),
+      name("Modifiers"),
 
-      field(INT, name("break"))
+      field(
+        PUBLIC, STATIC, FINAL, INT, name("a")
+      ),
+
+      field(
+        PROTECTED, BOOLEAN, name("b")
+      )
     );
   }
 }

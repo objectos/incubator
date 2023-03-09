@@ -17,24 +17,19 @@ package objectos.docs.code.field;
 
 import objectos.code.JavaTemplate;
 
-public class FieldDeclarationName02 extends JavaTemplate {
+public class FieldName03 extends JavaTemplate {
   public static void main(String[] args) {
-    System.out.println(new FieldDeclarationName02());
+    System.out.println(new FieldName03());
   }
 
   @Override
   protected final void definition() {
     classDeclaration(
-      name("MultipleNames"),
+      name("Unnamed"),
 
-      field(
-        INT, name("a"), name("b"), name("c")
-      ),
+      field(INT),
 
-      field(
-        BOOLEAN, name("d"), name("e"), name("f")
-      )
+      field(DOUBLE)
     );
   }
-
 }

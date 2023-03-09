@@ -67,7 +67,8 @@ final class LeftBarV000500 extends LeftBarFragment {
 
           ul(
             li(a0("v000500/objectos-code/field/index")),
-            li(a0("v000500/objectos-code/field/name"))
+            li(a0("v000500/objectos-code/field/name")),
+            li(a0("v000500/objectos-code/field/modifiers"))
           )
         ),
 

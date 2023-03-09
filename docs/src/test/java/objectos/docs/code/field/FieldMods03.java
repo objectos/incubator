@@ -15,19 +15,34 @@
  */
 package objectos.docs.code.field;
 
+import java.util.concurrent.ThreadLocalRandom;
 import objectos.code.JavaTemplate;
 
-public class FieldDeclarationName04 extends JavaTemplate {
+public class FieldMods03 extends JavaTemplate {
   public static void main(String[] args) {
-    System.out.println(new FieldDeclarationName04());
+    System.out.println(new FieldMods03());
   }
 
   @Override
   protected final void definition() {
     classDeclaration(
-      name("InvalidNames"),
+      name("Programatically"),
 
-      field(INT, name("foo.bar"))
+      field(
+        include(this::modifiers), INT, name("a"), i(1234)
+      )
     );
+  }
+
+  private void modifiers() {
+    if (shouldBePublic()) {
+      code(PUBLIC);
+    }
+
+    code(STATIC, FINAL);
+  }
+
+  private boolean shouldBePublic() {
+    return ThreadLocalRandom.current().nextBoolean();
   }
 }

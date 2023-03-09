@@ -17,19 +17,19 @@ package objectos.docs.code.field;
 
 import objectos.code.JavaTemplate;
 
-public class FieldDeclarationName03 extends JavaTemplate {
+public class FieldMods02 extends JavaTemplate {
   public static void main(String[] args) {
-    System.out.println(new FieldDeclarationName03());
+    System.out.println(new FieldMods02());
   }
 
   @Override
   protected final void definition() {
     classDeclaration(
-      name("Unnamed"),
+      name("Duplicates"),
 
-      field(INT),
-
-      field(DOUBLE)
+      field(
+        PUBLIC, PUBLIC, STATIC, STATIC, INT, name("a")
+      )
     );
   }
 }
