@@ -25,7 +25,6 @@ import java.nio.file.Path;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -39,7 +38,7 @@ public class DocsTest {
 
   private Path reshtm;
 
-  @AfterClass(alwaysRun = true)
+  //@AfterClass(alwaysRun = true)
   public void _afterClass() throws IOException {
     if (target != null) {
       Files.walkFileTree(target, new SimpleFileVisitor<Path>() {

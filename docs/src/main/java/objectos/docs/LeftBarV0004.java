@@ -20,7 +20,9 @@ import objectos.html.HtmlFragment;
 final class LeftBarV0004 extends LeftBarFragment {
 
   private static class ObjectosCode extends LeftBarFragment {
-    public ObjectosCode(LeftBar injector) { super(injector); }
+    public ObjectosCode(LeftBar injector) {
+      super(injector);
+    }
 
     @Override
     final void definitionImpl() {

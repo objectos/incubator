@@ -45,7 +45,9 @@ abstract class LeftBarFragment extends HtmlFragment {
 
   private final LeftBar injector;
 
-  public LeftBarFragment(LeftBar injector) { this.injector = injector; }
+  public LeftBarFragment(LeftBar injector) {
+    this.injector = injector;
+  }
 
   protected final void definition() {
     var version = injector.$version();

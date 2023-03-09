@@ -20,8 +20,11 @@ import objectos.util.UnmodifiableList;
 
 enum Version {
 
+  V0_5_0(name("0.5.0"), slug("0.5.0"), directory("v000500"),
+      releaseDate(2023, 3, 10), Status.LATEST),
+
   V0_4_X(name("0.4.4"), slug("0.4"), directory("v0004"),
-      releaseDate(2023, 3, 3), Status.LATEST),
+      releaseDate(2023, 3, 3), Status.UNSUPPORTED),
 
   //  V0_4_1(name("0.4.1"), slug("0.4.1"), directory("v000401"),
   //      releaseDate(2023, 2, 10), Status.UNSUPPORTED),
@@ -64,6 +67,7 @@ enum Version {
 
   public static Version parse(String key) {
     return switch (key) {
+      case "v000500" -> V0_5_0;
       case "v0004" -> V0_4_X;
       case "v0003" -> V0_3_0;
       case "v0002" -> V0_2_0;

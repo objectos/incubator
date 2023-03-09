@@ -19,6 +19,8 @@ import objectos.html.HtmlFragment;
 
 final class LeftBar {
 
+  private final LeftBarV000500 v000500 = new LeftBarV000500(this);
+
   private final LeftBarV0004 v0004 = new LeftBarV0004(this);
 
   private final HtmlFragment v0003 = new LeftBarV0003(this);
@@ -31,13 +33,17 @@ final class LeftBar {
 
   private boolean skip;
 
-  public LeftBar(DocsInjector injector) { this.injector = injector; }
+  public LeftBar(DocsInjector injector) {
+    this.injector = injector;
+  }
 
   public final HtmlFragment get(String key, Version version) {
     if (skip) {
       return NoOpLeftBar.INSTANCE;
     } else {
       return switch (version) {
+        case V0_5_0 -> v000500.get(key);
+
         case V0_4_X -> v0004.get(key);
 
         case V0_3_0 -> v0003;
@@ -49,13 +55,21 @@ final class LeftBar {
     }
   }
 
-  final String $elink(String target) { return injector.$elink(target); }
+  final String $elink(String target) {
+    return injector.$elink(target);
+  }
 
-  final boolean $isCurrentKey(String key) { return injector.$isCurrentKey(key); }
+  final boolean $isCurrentKey(String key) {
+    return injector.$isCurrentKey(key);
+  }
 
-  final DocumentRecord $record(String key) { return injector.$record(key); }
+  final DocumentRecord $record(String key) {
+    return injector.$record(key);
+  }
 
-  final Version $version() { return injector.$version(); }
+  final Version $version() {
+    return injector.$version();
+  }
 
   public final void skip() {
     skip = true;

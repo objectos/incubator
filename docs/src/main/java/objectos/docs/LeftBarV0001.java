@@ -17,7 +17,9 @@ package objectos.docs;
 
 final class LeftBarV0001 extends LeftBarFragment {
 
-  public LeftBarV0001(LeftBar injector) { super(injector); }
+  public LeftBarV0001(LeftBar injector) {
+    super(injector);
+  }
 
   @Override
   final void definitionImpl() {

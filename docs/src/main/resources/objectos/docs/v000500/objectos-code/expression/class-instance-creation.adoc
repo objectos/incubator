@@ -1,0 +1,43 @@
+= Class instance creation
+
+Assuming the following type names are defined:
+
+[,java]
+----
+static final ParameterizedTypeName HASHMAP = ParameterizedTypeName.of(
+  ClassTypeName.of(HashMap.class),
+  ClassTypeName.of(Integer.class),
+  ClassTypeName.of(String.class)
+);
+
+static final ClassTypeName SB = ClassTypeName.of(StringBuilder.class);
+
+static final ClassTypeName UIOE = ClassTypeName.of(UncheckedIOException.class);
+----
+
+Then the following shows how to generate Java class instance class creation expressions using Objectos Code: 
+
+[,java]
+----
+// for each of the two statement groups:
+// - the first one shows the Objectos Code
+// - the second one shows the generated Java code
+
+// class creation
+p(NEW, SB);
+new StringBuilder();
+
+// class creation + argument
+p(NEW, SB, argument(s("Initial value")));
+new StringBuilder("Initial value");
+
+// class creation + arguments
+p(NEW, UIOE,
+  argument(s("Failed to open %s"), v("formatted"), argument(n("file"))),
+  argument(n("cause")));
+new UncheckedIOException("Failed to open %s".formatted(file), cause);
+
+// class creation + parameterized type
+p(NEW, HASHMAP);
+new HashMap<Integer, String>();
+----

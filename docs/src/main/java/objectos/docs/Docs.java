@@ -18,10 +18,10 @@ package objectos.docs;
 import static java.lang.System.out;
 
 import br.com.objectos.css.Css;
-import br.com.objectos.css.sheet.StyleSheet;
 import br.com.objectos.css.sheet.StyleSheetWriter;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
@@ -56,11 +56,11 @@ public final class Docs extends DocsInjector {
     Css.randomSeed(SEED);
   }
 
-  public static final String INDEX = "docs/0.4/index";
+  public static final String INDEX = "docs/0.5.0/index";
 
-  public static final String OVERVIEW = "docs/0.4/intro/overview";
+  public static final String OVERVIEW = "docs/0.5.0/intro/overview";
 
-  public static final String LATEST = "0.4.4";
+  public static final String LATEST = "0.5.0";
 
   private final AsciiDoc asciiDoc = AsciiDoc.create();
 
@@ -69,8 +69,6 @@ public final class Docs extends DocsInjector {
   private final Map<String, DocumentRecord> documents = new GrowableMap<>();
 
   private final DocumentTitleProcessor documentTitleProcessor = new DocumentTitleProcessor();
-
-  private final HtmlWriter htmlWriter = new HtmlWriter();
 
   private final LeftBar leftBar = new LeftBar(this);
 
@@ -82,12 +80,6 @@ public final class Docs extends DocsInjector {
 
   private final TopBar topBar;
 
-  private final StyleClassSet styleClassSet = new StyleClassSet();
-
-  private final StyleSheet styleSheet = new DocsCss();
-
-  private final StyleSheetWriter styleSheetWriter = StyleSheetWriter.ofPretty();
-
   private String baseHref = "";
 
   private String currentKey;
@@ -97,6 +89,8 @@ public final class Docs extends DocsInjector {
   private DocumentRecord currentRecord;
 
   private Version currentVersion;
+
+  private boolean development;
 
   private IOException rethrow;
 
@@ -213,13 +207,17 @@ public final class Docs extends DocsInjector {
   final String $href(String key) {
     var record = documents.get(key);
 
-    if (record == null) {
-      throw new NoSuchElementException(key);
+    if (record != null) {
+      var location = record.location();
+
+      return location.href();
     }
 
-    var location = record.location();
+    if (development) {
+      return "";
+    }
 
-    return location.href();
+    throw new NoSuchElementException(key);
   }
 
   @Override
@@ -301,7 +299,27 @@ public final class Docs extends DocsInjector {
     );
   }
 
+  private void catchIO(IOException e) {
+    if (rethrow == null) {
+      rethrow = e;
+    } else {
+      rethrow.addSuppressed(e);
+    }
+  }
+
   private void generate() throws IOException {
+    var htmlWriter = new HtmlWriter();
+
+    var styleClassSet = new StyleClassSet();
+
+    var styleSheet = new DocsCss();
+
+    var styleSheetWriter = StyleSheetWriter.ofPretty();
+
+    var versions = new Versions(this);
+
+    versions.init();
+
     for (var entry : documents.entrySet()) {
       currentKey = entry.getKey();
 
@@ -345,9 +363,13 @@ public final class Docs extends DocsInjector {
 
   private void parseArgs(String[] args) {
     if (args.length == 3) {
-      leftBar.skip();
+      development = true;
+
+      //leftBar.skip();
 
       var a = args[2];
+
+      System.out.println("sourceFilter=" + a);
 
       sourceFilter = (path) -> path.endsWith(a);
     }
@@ -356,10 +378,14 @@ public final class Docs extends DocsInjector {
   private void scan() throws IOException {
     rethrow = null;
 
-    try (Stream<Path> walk = Files.walk(source)) {
-      walk.filter(sourceFilter)
-          .filter(Files::isRegularFile)
-          .forEach(this::scan);
+    try (DirectoryStream<Path> entries = Files.newDirectoryStream(source)) {
+      for (var entry : entries) {
+        if (Files.isDirectory(entry)) {
+          scanDirectory(entry);
+        } else {
+          scanFile(entry);
+        }
+      }
     }
 
     if (rethrow != null) {
@@ -367,19 +393,28 @@ public final class Docs extends DocsInjector {
     }
   }
 
-  private void scan(Path file) {
-    try {
-      scan0(file);
+  private void scanDirectory(Path directory) {
+    Path path = source.relativize(directory);
+
+    if (!sourceFilter.test(path)) {
+      return;
+    }
+
+    try (Stream<Path> walk = Files.walk(directory)) {
+      walk.filter(Files::isRegularFile)
+          .forEach(file -> {
+            try {
+              scanFile(file);
+            } catch (IOException e) {
+              catchIO(e);
+            }
+          });
     } catch (IOException e) {
-      if (rethrow == null) {
-        rethrow = e;
-      } else {
-        rethrow.addSuppressed(e);
-      }
+      catchIO(e);
     }
   }
 
-  private void scan0(Path file) throws IOException {
+  private void scanFile(Path file) throws IOException {
     var fileName = file.getFileName().toString();
 
     int lastDot = fileName.lastIndexOf('.');
@@ -387,13 +422,13 @@ public final class Docs extends DocsInjector {
     var extension = fileName.substring(lastDot);
 
     switch (extension) {
-      case ".adoc" -> scan0AsciiDoc(file);
+      case ".adoc" -> scanFileAsciiDoc(file);
 
       default -> throw new UnsupportedOperationException("Implement me :: extension=" + extension);
     }
   }
 
-  private void scan0AsciiDoc(Path file) throws IOException {
+  private void scanFileAsciiDoc(Path file) throws IOException {
     var key = _key(file, 5);
 
     var source = Files.readString(file, StandardCharsets.UTF_8);

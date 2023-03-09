@@ -1,0 +1,32 @@
+= Objectos HTML
+:toc-title: Overview
+
+_This API is experimental and might change substantially between releases_
+
+Objectos HTML is a library for generating HTML using pure Java.
+
+It introduces the concept of a "pure Java template";
+it feels similar to a traditional text-based template except it is a regular Java class.
+
+== Alpha quality
+
+Please note that Objectos HTML is a work in progress and this release is marked as alpha quality.
+
+Additionally, this documentation is also a work in progress.
+In other words, it does not cover all of the implemented features yet.
+
+== Installation
+
+To use Objectos Code in your project add the following to your POM:
+
+[,xml]
+----
+<dependencies>
+    <dependency>
+        <groupId>br.com.objectos</groupId>
+        <artifactId>objectos-html</artifactId>
+    </dependency>
+</dependencies>
+----
+
+This assumes you are using the ilink:intro/install[Objectos BOM POM].
