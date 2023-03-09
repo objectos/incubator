@@ -6,38 +6,16 @@ You can specify the name as a string value, like so:
 
 [,java]
 ----
-import java.util.List;
-import objectos.code.ClassTypeName;
 import objectos.code.JavaTemplate;
-import objectos.code.ParameterizedTypeName;
 
-public class FieldDeclarationName01 extends JavaTemplate {
-  static final ClassTypeName STRING
-      = ClassTypeName.of(String.class);
-
-  static final ParameterizedTypeName LIST
-      = ParameterizedTypeName.of(
-        ClassTypeName.of(List.class),
-        STRING
-      );
-
+public class FieldName01 extends JavaTemplate {
   @Override
   protected final void definition() {
-    autoImports();
-
     classDeclaration(
       name("FieldName"),
 
       field(
-        INT, name("a")
-      ),
-
-      field(
-        STRING, name("b")
-      ),
-
-      field(
-        LIST, name("c")
+        INT, name("myFieldName")
       )
     );
   }
@@ -48,16 +26,9 @@ The code above generates:
 
 [,java]
 ----
-import java.util.List;
-
 class FieldName {
-  int a;
-
-  String b;
-
-  List<String> c;
+  int myFieldName;
 }
-
 ----
 
 == Multiple names
@@ -70,7 +41,7 @@ The following Objectos Code:
 ----
 import objectos.code.JavaTemplate;
 
-public class FieldDeclarationName02 extends JavaTemplate {
+public class FieldName02 extends JavaTemplate {
   @Override
   protected final void definition() {
     classDeclaration(
@@ -109,7 +80,7 @@ The following Objectos Code:
 ----
 import objectos.code.JavaTemplate;
 
-public class FieldDeclarationName03 extends JavaTemplate {
+public class FieldName03 extends JavaTemplate {
   @Override
   protected final void definition() {
     classDeclaration(
@@ -144,7 +115,7 @@ The following Objectos Code:
 ----
 import objectos.code.JavaTemplate;
 
-public class FieldDeclarationName04 extends JavaTemplate {
+public class FieldName04 extends JavaTemplate {
   @Override
   protected final void definition() {
     classDeclaration(
@@ -166,7 +137,7 @@ It must not contain a '.' character.
 	at objectos.code.internal.JavaModel.checkName(JavaModel.java:187)
 	at objectos.code.internal.JavaModel.checkIdentifier(JavaModel.java:27)
 	at objectos.code.JavaTemplate.name(JavaTemplate.java:2371)
-	at objectos.docs.code.field.FieldDeclarationName04.definition(FieldDeclarationName04.java:20)
+	at objectos.docs.code.field.FieldName04.definition(FieldName04.java:20)
 	(...)
 ----
 
@@ -181,7 +152,7 @@ In other words, the following Objectos Code executes normally:
 ----
 import objectos.code.JavaTemplate;
 
-public class FieldDeclarationName05 extends JavaTemplate {
+public class FieldName05 extends JavaTemplate {
   @Override
   protected final void definition() {
     classDeclaration(

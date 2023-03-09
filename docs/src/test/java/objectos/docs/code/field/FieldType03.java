@@ -17,18 +17,18 @@ package objectos.docs.code.field;
 
 import objectos.code.JavaTemplate;
 
-public class FieldName01 extends JavaTemplate {
+public class FieldType03 extends JavaTemplate {
   public static void main(String[] args) {
-    System.out.println(new FieldName01());
+    System.out.println(new FieldType03());
   }
 
   @Override
   protected final void definition() {
     classDeclaration(
-      name("FieldName"),
+      name("NoType"),
 
       field(
-        INT, name("myFieldName")
+        name("missingType")
       )
     );
   }

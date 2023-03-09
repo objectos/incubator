@@ -15,20 +15,26 @@
  */
 package objectos.docs.code.field;
 
+import objectos.code.ClassTypeName;
 import objectos.code.JavaTemplate;
 
-public class FieldName01 extends JavaTemplate {
+public class FieldType02 extends JavaTemplate {
+  static final ClassTypeName STRING
+      = ClassTypeName.of(String.class);
+
   public static void main(String[] args) {
-    System.out.println(new FieldName01());
+    System.out.println(new FieldType02());
   }
 
   @Override
   protected final void definition() {
+    autoImports();
+
     classDeclaration(
-      name("FieldName"),
+      name("MultipleTypes"),
 
       field(
-        INT, name("myFieldName")
+        INT, STRING, name("example")
       )
     );
   }
