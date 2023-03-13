@@ -18,6 +18,8 @@ package objectos.shared;
 import br.com.objectos.css.Css;
 import br.com.objectos.css.framework.typography.TextColor;
 import br.com.objectos.css.select.ClassSelector;
+import java.util.IdentityHashMap;
+import java.util.Map;
 
 final class XmlStyles {
 
@@ -27,8 +29,31 @@ final class XmlStyles {
 
   public static final ClassSelector _SYMBOL = TextColor.blue600;
 
+  public static final ClassSelector _ATTR_NAME = TextColor.pink600;
+
+  public static final ClassSelector _ATTR_VALUE = TextColor.green700;
+
+  private static Map<ClassSelector, String> NAMES;
+
   private XmlStyles() {}
 
   public static void init() {}
+
+  public static String toName(ClassSelector clazz) {
+    initNames();
+
+    return NAMES.getOrDefault(clazz, "null");
+  }
+
+  private static void initNames() {
+    if (NAMES == null) {
+      NAMES = new IdentityHashMap<>();
+      NAMES.put(_TEXT, "text");
+      NAMES.put(_TAG_NAME, "tag");
+      NAMES.put(_SYMBOL, "tag");
+      NAMES.put(_ATTR_NAME, "attr-name");
+      NAMES.put(_ATTR_VALUE, "attr-value");
+    }
+  }
 
 }

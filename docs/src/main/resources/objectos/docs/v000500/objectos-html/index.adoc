@@ -50,6 +50,7 @@ public class Example extends HtmlTemplate {
 
 Can be used to generate the a HTML file equivalent to:
 
+[,html]
 ----
 <!doctype html>
 <html lang="en">

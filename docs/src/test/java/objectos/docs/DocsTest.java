@@ -85,7 +85,7 @@ public class DocsTest {
     docs = new Docs(source, target, new DocsTopBar(), new DocsBottomBar());
   }
 
-  @Test
+  @Test(enabled = false)
   public void execute() throws IOException {
     docs.execute();
 

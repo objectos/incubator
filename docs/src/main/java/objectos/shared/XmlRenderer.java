@@ -23,6 +23,14 @@ public final class XmlRenderer extends LanguageRenderer {
 
   private static final byte _TAG_SYMBOL = 2;
 
+  private static final byte _MAYBE_ATTR = 3;
+
+  private static final byte _ATTR_NAME = 4;
+
+  private static final byte _MAYBE_ATTR_VALUE = 5;
+
+  private static final byte _ATTR_VALUE = 6;
+
   private char c;
 
   private int i;
@@ -39,6 +47,8 @@ public final class XmlRenderer extends LanguageRenderer {
 
   @Override
   public final void renderImpl(String literal) {
+    literal = literal.trim();
+
     length = literal.length();
 
     state = _ELEMENT_CONTENT;
@@ -58,16 +68,72 @@ public final class XmlRenderer extends LanguageRenderer {
         return executeTagName();
       case _TAG_SYMBOL:
         return executeTagSymbol();
+      case _MAYBE_ATTR:
+        return executeMaybeAttr();
+      case _ATTR_NAME:
+        return executeAttrName();
+      case _MAYBE_ATTR_VALUE:
+        return executeMaybeAttrValue();
+      case _ATTR_VALUE:
+        return executeAttrValue();
       default:
         throw new UnsupportedOperationException("Implement me: state=" + state);
     }
+  }
+
+  private byte executeAttrValue() {
+    if (c == '"') {
+      stringBuilder.append(c);
+
+      var value = makeString();
+
+      span(XmlStyles._ATTR_VALUE, value);
+
+      return _MAYBE_ATTR;
+    }
+
+    stringBuilder.append(c);
+
+    return state;
+  }
+
+  private byte executeAttrName() {
+    if (c == '=') {
+      var name = makeString();
+
+      span(XmlStyles._ATTR_NAME, name);
+
+      span(XmlStyles._SYMBOL, c);
+
+      return _MAYBE_ATTR_VALUE;
+    }
+
+    if (c == '>') {
+      var name = makeString();
+
+      span(XmlStyles._ATTR_NAME, name);
+
+      span(XmlStyles._SYMBOL, c);
+
+      return _ELEMENT_CONTENT;
+    }
+
+    if (Character.isWhitespace(c)) {
+      throw new UnsupportedOperationException("Implement me :: " + stringBuilder);
+    }
+
+    stringBuilder.append(c);
+
+    return state;
   }
 
   private byte executeElementContent() {
     if (c == '<') {
       var t = makeString();
 
-      span(XmlStyles._TEXT, t);
+      if (!t.isEmpty()) {
+        span(XmlStyles._TEXT, t);
+      }
 
       stringBuilder.append(c);
 
@@ -77,6 +143,44 @@ public final class XmlRenderer extends LanguageRenderer {
     stringBuilder.append(c);
 
     return state;
+  }
+
+  private byte executeMaybeAttr() {
+    if (Character.isLetter(c)) {
+      var t = makeString();
+
+      span(XmlStyles._TEXT, t);
+
+      stringBuilder.append(c);
+
+      return _ATTR_NAME;
+    }
+
+    if (c == '>') {
+      span(XmlStyles._SYMBOL, c);
+
+      return _ELEMENT_CONTENT;
+    }
+
+    stringBuilder.append(c);
+
+    return state;
+  }
+
+  private byte executeMaybeAttrValue() {
+    if (c == '"') {
+      var t = makeString();
+
+      if (!t.isEmpty()) {
+        span(XmlStyles._TEXT, t);
+      }
+
+      stringBuilder.append(c);
+
+      return _ATTR_VALUE;
+    }
+
+    throw new UnsupportedOperationException("Implement me");
   }
 
   private byte executeTagName() {
@@ -91,8 +195,13 @@ public final class XmlRenderer extends LanguageRenderer {
     }
 
     if (Character.isWhitespace(c)) {
-      // maybe attributes
-      throw new UnsupportedOperationException("Implement me");
+      var tagName = makeString();
+
+      span(XmlStyles._TAG_NAME, tagName);
+
+      stringBuilder.append(c);
+
+      return _MAYBE_ATTR;
     }
 
     stringBuilder.append(c);

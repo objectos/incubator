@@ -300,7 +300,7 @@ final class ArticleTemplate extends DocsTemplate implements LanguageRenderer.Out
 
       case "java" -> javaRenderer;
 
-      case "xml" -> xmlRenderer;
+      case "html", "xml" -> xmlRenderer;
 
       default -> throw new UnsupportedOperationException("Implement me :: lang=" + language);
     };
