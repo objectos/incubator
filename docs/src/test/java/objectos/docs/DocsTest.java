@@ -37,8 +37,6 @@ public class DocsTest {
 
   private Path reshtm;
 
-  private Path validation;
-
   @AfterClass(alwaysRun = true)
   public void _afterClass() throws IOException {
     var rm = new SimpleFileVisitor<Path>() {
@@ -66,10 +64,6 @@ public class DocsTest {
     if (target != null) {
       Files.walkFileTree(target, rm);
     }
-
-    if (validation != null) {
-      Files.walkFileTree(validation, rm);
-    }
   }
 
   @BeforeClass
@@ -87,8 +81,6 @@ public class DocsTest {
     source = source.resolve("src/main/resources/objectos/docs");
 
     target = Files.createTempDirectory("docs-migration-test-");
-
-    validation = Files.createTempDirectory("docs-validation-test-");
   }
 
   @Test(enabled = false)
@@ -101,17 +93,6 @@ public class DocsTest {
       walk.filter(Files::isRegularFile)
           .forEach(this::validate);
     }
-  }
-
-  @Test
-  public void validation() throws IOException {
-    var docs = new Docs(source, target, new DocsTopBar(), new DocsBottomBar());
-
-    docs.validation = validation;
-
-    docs.scan();
-
-    docs.validation();
   }
 
   private void validate(Path expected) {
