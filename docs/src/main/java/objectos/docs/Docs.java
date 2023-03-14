@@ -259,7 +259,13 @@ public final class Docs extends DocsInjector {
 
   @Override
   final String $pathName() {
-    return currentKey + ".html";
+    var version = Version.parseCurrentKey(currentKey);
+
+    if (version != null) {
+      return version.pathName(currentKey);
+    } else {
+      return "/" + currentKey + ".html";
+    }
   }
 
   @Override

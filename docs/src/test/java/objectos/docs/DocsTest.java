@@ -103,7 +103,7 @@ public class DocsTest {
     }
   }
 
-  @Test(enabled = false)
+  @Test
   public void validation() throws IOException {
     var docs = new Docs(source, target, new DocsTopBar(), new DocsBottomBar());
 

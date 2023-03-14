@@ -102,6 +102,18 @@ enum Version {
     return directory + "/" + value;
   }
 
+  final String pathName(String key) {
+    var index = key.indexOf('/');
+
+    if (index > 0) {
+      var path = key.substring(index, key.length());
+
+      return "/" + slug + path + ".html";
+    } else {
+      return "/" + key + ".html";
+    }
+  }
+
   final String releaseDateString() {
     return releaseDate == null
         ? "unreleased"
