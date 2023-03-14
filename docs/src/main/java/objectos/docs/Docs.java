@@ -181,7 +181,7 @@ public final class Docs extends DocsInjector {
   public final void execute() throws IOException {
     scan();
 
-    validation();
+    generate();
   }
 
   public final void production() {
@@ -407,7 +407,7 @@ public final class Docs extends DocsInjector {
     return currentVersion.directory + "/" + target;
   }
 
-  private void validation() throws IOException {
+  private void generate() throws IOException {
     var htmlSink = new HtmlSink();
 
     var styleClassSet = new StyleClassSet();
