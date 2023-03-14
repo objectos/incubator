@@ -33,6 +33,7 @@ import java.util.stream.Stream;
 import objectos.asciidoc.AsciiDoc;
 import objectos.asciidoc.Document;
 import objectos.html.HtmlFragment;
+import objectos.html.HtmlSink;
 import objectos.lang.Check;
 import objectos.shared.HtmlWriter;
 import objectos.shared.JavaRenderer;
@@ -106,6 +107,8 @@ public final class Docs extends DocsInjector {
 
   private Predicate<Path> sourceFilter = (path) -> true;
 
+  Path validation;
+
   Docs(Path source, Path target, TopBar topBar, BottomBar bottomBar) {
     this.source = source;
 
@@ -122,7 +125,8 @@ public final class Docs extends DocsInjector {
     );
   }
 
-  public static Docs create(Path source, Path target, TopBar topBar, BottomBar bottomBar) {
+  public static Docs create(
+      Path source, Path target, TopBar topBar, BottomBar bottomBar) {
     Check.notNull(source, "source == null");
     Check.notNull(target, "target == null");
     Check.notNull(topBar, "topBar == null");
@@ -132,8 +136,9 @@ public final class Docs extends DocsInjector {
   }
 
   public static void main(String[] args) throws IOException {
-    if (args.length < 2 || args.length > 3) {
-      out.println("Invocation: java objectos.docs.DocsSite source-path target-path [key]");
+    if (args.length < 3 || args.length > 4) {
+      out.println(
+        "Invocation: java objectos.docs.DocsSite source-path target-path validation-path [key]");
 
       return;
     }
@@ -149,6 +154,8 @@ public final class Docs extends DocsInjector {
 
       new DocsBottomBar()
     );
+
+    site.validation = main0ParseDirectory("validation", args[2]);
 
     site.development();
 
@@ -181,6 +188,10 @@ public final class Docs extends DocsInjector {
     scan();
 
     generate();
+
+    if (validation != null) {
+      validation();
+    }
   }
 
   public final void production() {
@@ -247,6 +258,11 @@ public final class Docs extends DocsInjector {
   final HtmlFragment $leftBar() { return currentLeftBar; }
 
   @Override
+  final String $pathName() {
+    return currentKey + ".html";
+  }
+
+  @Override
   final DocumentRecord $record(String key) {
     var record = documents.get(key);
 
@@ -265,6 +281,62 @@ public final class Docs extends DocsInjector {
 
   @Override
   final Version $version() { return currentVersion; }
+
+  final void scan() throws IOException {
+    rethrow = null;
+
+    try (DirectoryStream<Path> entries = Files.newDirectoryStream(source)) {
+      for (var entry : entries) {
+        if (Files.isDirectory(entry)) {
+          scanDirectory(entry);
+        } else {
+          scanFile(entry);
+        }
+      }
+    }
+
+    if (rethrow != null) {
+      throw rethrow;
+    }
+  }
+
+  final void validation() throws IOException {
+    var htmlSink = new HtmlSink();
+
+    var styleClassSet = new StyleClassSet();
+
+    var styleSheet = new DocsCss();
+
+    var styleSheetWriter = StyleSheetWriter.ofPretty();
+
+    for (var entry : documents.entrySet()) {
+      currentKey = entry.getKey();
+
+      currentRecord = entry.getValue();
+
+      currentVersion = Version.parseCurrentKey(currentKey);
+
+      if (currentVersion != null) {
+        currentLeftBar = leftBar.get(currentKey, currentVersion);
+      } else {
+        currentLeftBar = null;
+      }
+
+      var templateName = currentRecord.templateName();
+
+      var template = _template(templateName);
+
+      template.rawStyle(null);
+
+      htmlSink.toVisitor(template, styleClassSet);
+
+      styleSheetWriter.filterClassSelectorsByName(styleClassSet);
+
+      template.rawStyle(styleSheetWriter.toString(styleSheet));
+
+      htmlSink.toDirectory(template, validation);
+    }
+  }
 
   private String _key(Path file, int fileExtLength) {
     var path = source.relativize(file);
@@ -372,32 +444,14 @@ public final class Docs extends DocsInjector {
   }
 
   private void parseArgs(String[] args) {
-    if (args.length == 3) {
+    if (args.length == 4) {
       development = true;
 
       //leftBar.skip();
 
-      var a = args[2];
+      var a = args[3];
 
       sourceFilter = (path) -> path.endsWith(a);
-    }
-  }
-
-  private void scan() throws IOException {
-    rethrow = null;
-
-    try (DirectoryStream<Path> entries = Files.newDirectoryStream(source)) {
-      for (var entry : entries) {
-        if (Files.isDirectory(entry)) {
-          scanDirectory(entry);
-        } else {
-          scanFile(entry);
-        }
-      }
-    }
-
-    if (rethrow != null) {
-      throw rethrow;
     }
   }
 

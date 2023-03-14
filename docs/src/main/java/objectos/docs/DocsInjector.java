@@ -39,6 +39,8 @@ abstract class DocsInjector {
 
   abstract HtmlFragment $leftBar();
 
+  abstract String $pathName();
+
   abstract DocumentRecord $record(String key);
 
   abstract DocumentTitle $title();

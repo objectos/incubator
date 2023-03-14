@@ -31,38 +31,44 @@ import org.testng.annotations.Test;
 
 public class DocsTest {
 
-  private Docs docs;
-
   private Path source;
 
   private Path target;
 
   private Path reshtm;
 
+  private Path validation;
+
   @AfterClass(alwaysRun = true)
   public void _afterClass() throws IOException {
-    if (target != null) {
-      Files.walkFileTree(target, new SimpleFileVisitor<Path>() {
-        @Override
-        public final FileVisitResult postVisitDirectory(
-            Path dir, IOException e) throws IOException {
-          if (e == null) {
-            Files.delete(dir);
-
-            return FileVisitResult.CONTINUE;
-          } else {
-            throw e;
-          }
-        }
-
-        @Override
-        public final FileVisitResult visitFile(
-            Path file, BasicFileAttributes attrs) throws IOException {
-          Files.delete(file);
+    var rm = new SimpleFileVisitor<Path>() {
+      @Override
+      public final FileVisitResult postVisitDirectory(
+          Path dir, IOException e) throws IOException {
+        if (e == null) {
+          Files.delete(dir);
 
           return FileVisitResult.CONTINUE;
+        } else {
+          throw e;
         }
-      });
+      }
+
+      @Override
+      public final FileVisitResult visitFile(
+          Path file, BasicFileAttributes attrs) throws IOException {
+        Files.delete(file);
+
+        return FileVisitResult.CONTINUE;
+      }
+    };
+
+    if (target != null) {
+      Files.walkFileTree(target, rm);
+    }
+
+    if (validation != null) {
+      Files.walkFileTree(validation, rm);
     }
   }
 
@@ -82,17 +88,30 @@ public class DocsTest {
 
     target = Files.createTempDirectory("docs-migration-test-");
 
-    docs = new Docs(source, target, new DocsTopBar(), new DocsBottomBar());
+    validation = Files.createTempDirectory("docs-validation-test-");
   }
 
   @Test(enabled = false)
   public void execute() throws IOException {
+    var docs = new Docs(source, target, new DocsTopBar(), new DocsBottomBar());
+
     docs.execute();
 
     try (var walk = Files.walk(reshtm)) {
       walk.filter(Files::isRegularFile)
           .forEach(this::validate);
     }
+  }
+
+  @Test(enabled = false)
+  public void validation() throws IOException {
+    var docs = new Docs(source, target, new DocsTopBar(), new DocsBottomBar());
+
+    docs.validation = validation;
+
+    docs.scan();
+
+    docs.validation();
   }
 
   private void validate(Path expected) {

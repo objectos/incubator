@@ -17,26 +17,80 @@ package objectos.shared;
 
 import java.util.Set;
 import java.util.function.Predicate;
+import objectos.html.HtmlTemplate.Visitor;
 import objectos.html.SimpleCompiledTemplateVisitor;
 import objectos.html.tmpl.AttributeName;
 import objectos.html.tmpl.StandardAttributeName;
+import objectos.html.tmpl.StandardElementName;
 import objectos.util.GrowableSet;
 import objectos.util.UnmodifiableList;
 
 public final class StyleClassSet
     extends SimpleCompiledTemplateVisitor
-    implements Predicate<String> {
+    implements Predicate<String>, Visitor {
+
+  private boolean collect;
 
   private final Set<String> names = new GrowableSet<>();
+
+  @Override
+  public final void attributeEnd() {
+    collect = false;
+  }
+
+  @Override
+  public final void attributeStart(AttributeName name) {
+    if (name == StandardAttributeName.CLASS) {
+      collect = true;
+    }
+  }
+
+  @Override
+  public final void attributeValue(String value) {
+    if (collect) {
+      names.add(value);
+    }
+  }
 
   public final void clear() {
     names.clear();
   }
 
   @Override
+  public final void doctype() {}
+
+  @Override
+  public final void documentEnd() {}
+
+  @Override
+  public final void documentStart() {
+    collect = false;
+
+    names.clear();
+  }
+
+  @Override
+  public final void endTag(StandardElementName name) {}
+
+  @Override
+  public final void raw(String value) {}
+
+  @Override
+  public final void selfClosingEnd() {}
+
+  @Override
+  public final void startTag(StandardElementName name) {}
+
+  @Override
+  public final void startTagEnd(StandardElementName name) {}
+
+  @Override
   public final boolean test(String t) {
     return names.contains(t);
   }
+
+  @Override
+  public final void text(String value) {}
 
   @Override
   public final void visitAttribute(AttributeName name, String value) {
