@@ -82,19 +82,25 @@ public class ClassSet implements AnyElementValue {
 
   @Override
   public final void mark(Marker marker) {
-    if (!values.isEmpty()) {
-      for (var value : values) {
-        value.mark(marker);
-      }
+    if (values.isEmpty()) {
+      return;
+    }
+
+    for (var value : values) {
+      value.mark(marker);
     }
   }
 
   @Override
   public final void render(Renderer renderer) {
-    if (!values.isEmpty()) {
-      for (var value : values) {
-        value.render(renderer);
-      }
+    if (values.isEmpty()) {
+      renderer.addNoOp();
+
+      return;
+    }
+
+    for (var value : values) {
+      value.render(renderer);
     }
   }
 
