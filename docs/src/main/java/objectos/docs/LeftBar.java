@@ -15,7 +15,7 @@
  */
 package objectos.docs;
 
-import objectos.html.HtmlFragment;
+import objectos.html.HtmlTemplate;
 
 final class LeftBar {
 
@@ -23,11 +23,11 @@ final class LeftBar {
 
   private final LeftBarV0004 v0004 = new LeftBarV0004(this);
 
-  private final HtmlFragment v0003 = new LeftBarV0003(this);
+  private final HtmlTemplate v0003 = new LeftBarV0003(this);
 
-  private final HtmlFragment v0002 = new LeftBarV0002(this);
+  private final HtmlTemplate v0002 = new LeftBarV0002(this);
 
-  private final HtmlFragment v0001 = new LeftBarV0001(this);
+  private final HtmlTemplate v0001 = new LeftBarV0001(this);
 
   private final DocsInjector injector;
 
@@ -37,7 +37,7 @@ final class LeftBar {
     this.injector = injector;
   }
 
-  public final HtmlFragment get(String key, Version version) {
+  public final HtmlTemplate get(String key, Version version) {
     if (skip) {
       return NoOpLeftBar.INSTANCE;
     } else {
@@ -75,7 +75,7 @@ final class LeftBar {
     skip = true;
   }
 
-  private static class NoOpLeftBar extends HtmlFragment {
+  private static class NoOpLeftBar extends HtmlTemplate {
     static final NoOpLeftBar INSTANCE = new NoOpLeftBar();
 
     @Override

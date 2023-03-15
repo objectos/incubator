@@ -31,8 +31,8 @@ import java.util.function.Predicate;
 import java.util.stream.Stream;
 import objectos.asciidoc.AsciiDoc;
 import objectos.asciidoc.Document;
-import objectos.html.HtmlFragment;
 import objectos.html.HtmlSink;
+import objectos.html.HtmlTemplate;
 import objectos.lang.Check;
 import objectos.shared.JavaRenderer;
 import objectos.shared.SharedTemplate;
@@ -43,13 +43,13 @@ import objectos.util.GrowableMap;
 public final class Docs extends DocsInjector {
 
   public interface BottomBar {
-    HtmlFragment toFragment();
+    HtmlTemplate toFragment();
   }
 
   public interface TopBar {
     String javaScript();
 
-    HtmlFragment toFragment();
+    HtmlTemplate toFragment();
   }
 
   public static final long SEED = 84321674516L;
@@ -93,7 +93,7 @@ public final class Docs extends DocsInjector {
 
   private String currentKey;
 
-  private HtmlFragment currentLeftBar;
+  private HtmlTemplate currentLeftBar;
 
   private DocumentRecord currentRecord;
 
@@ -189,7 +189,7 @@ public final class Docs extends DocsInjector {
   }
 
   @Override
-  final HtmlFragment $bottomBar() { return bottomBar.toFragment(); }
+  final HtmlTemplate $bottomBar() { return bottomBar.toFragment(); }
 
   @Override
   final Document $document() { return currentRecord.document(); }
@@ -245,7 +245,7 @@ public final class Docs extends DocsInjector {
   final boolean $isNext() { return currentKey.startsWith("next/"); }
 
   @Override
-  final HtmlFragment $leftBar() { return currentLeftBar; }
+  final HtmlTemplate $leftBar() { return currentLeftBar; }
 
   @Override
   final String $pathName() {

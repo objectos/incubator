@@ -510,7 +510,7 @@ final class ArticleTemplate extends DocsTemplate implements LanguageRenderer.Out
           Width.lg.v56,
           DocsCss.XL_WIDTH_70,
 
-          f(injector.$leftBar())
+          injector.$leftBar()
         ),
 
         main(

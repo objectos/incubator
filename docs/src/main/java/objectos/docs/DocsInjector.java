@@ -17,11 +17,11 @@ package objectos.docs;
 
 import objectos.asciidoc.Document;
 import objectos.docs.Docs.TopBar;
-import objectos.html.HtmlFragment;
+import objectos.html.HtmlTemplate;
 
 abstract class DocsInjector {
 
-  abstract HtmlFragment $bottomBar();
+  abstract HtmlTemplate $bottomBar();
 
   abstract Document $document();
 
@@ -37,7 +37,7 @@ abstract class DocsInjector {
 
   abstract boolean $isNext();
 
-  abstract HtmlFragment $leftBar();
+  abstract HtmlTemplate $leftBar();
 
   abstract String $pathName();
 

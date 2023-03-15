@@ -42,7 +42,7 @@ final class Index extends SitePage implements NavbarPage {
         link(CssDirectory.STYLES)
       ),
       body(
-        f(navbar),
+        navbar,
         ul(
           li(a(href(Index.class)))
         )

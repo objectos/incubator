@@ -33,7 +33,7 @@ final class TestCase07 extends Site {
         toc = getObject(Toc.class);
 
         html(
-          f(toc)
+          toc
         );
       }
     });

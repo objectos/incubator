@@ -32,7 +32,7 @@ final class TestCase06 extends Site {
     protected final void definition() {
       html(
         body(
-          f(getObject(Top.class))
+          getObject(Top.class)
         )
       );
     }

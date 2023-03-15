@@ -15,13 +15,13 @@
  */
 package objectos.ssg;
 
-import objectos.html.HtmlFragment;
+import objectos.html.HtmlTemplate;
 import objectos.html.tmpl.StandardAttributeName.Href;
 import objectos.lang.Check;
 import objectos.ssg.Site.Context;
 import objectos.util.UnmodifiableList;
 
-public abstract class SiteFragment extends HtmlFragment
+public abstract class SiteFragment extends HtmlTemplate
     implements
     SiteComponent,
     SiteResourceHolder {

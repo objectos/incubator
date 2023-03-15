@@ -81,11 +81,11 @@ abstract class DocsTemplate extends SharedTemplate {
         Display.flex,
         FlexDirection.column,
 
-        f(topBar.toFragment()),
+        topBar.toFragment(),
 
         f(this::main0),
 
-        f(injector.$bottomBar())
+        injector.$bottomBar()
       )
     );
   }

@@ -20,15 +20,15 @@ import br.com.objectos.css.framework.sizing.Height;
 import br.com.objectos.css.framework.sizing.MaxWidth;
 import br.com.objectos.css.framework.spacing.MarginX;
 import br.com.objectos.css.framework.spacing.PaddingY;
-import objectos.html.HtmlFragment;
+import objectos.html.HtmlTemplate;
 
-final class DocsTopBar extends HtmlFragment implements Docs.TopBar {
+final class DocsTopBar extends HtmlTemplate implements Docs.TopBar {
 
   @Override
   public final String javaScript() { return ""; }
 
   @Override
-  public final HtmlFragment toFragment() { return this; }
+  public final HtmlTemplate toFragment() { return this; }
 
   @Override
   protected final void definition() {
