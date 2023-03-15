@@ -18,16 +18,12 @@ package objectos.shared;
 import java.util.Set;
 import java.util.function.Predicate;
 import objectos.html.HtmlTemplate.Visitor;
-import objectos.html.SimpleCompiledTemplateVisitor;
 import objectos.html.tmpl.AttributeName;
 import objectos.html.tmpl.StandardAttributeName;
 import objectos.html.tmpl.StandardElementName;
 import objectos.util.GrowableSet;
-import objectos.util.UnmodifiableList;
 
-public final class StyleClassSet
-    extends SimpleCompiledTemplateVisitor
-    implements Predicate<String>, Visitor {
+public final class StyleClassSet implements Predicate<String>, Visitor {
 
   private boolean collect;
 
@@ -91,26 +87,5 @@ public final class StyleClassSet
 
   @Override
   public final void text(String value) {}
-
-  @Override
-  public final void visitAttribute(AttributeName name, String value) {
-    if (name == StandardAttributeName.CLASS) {
-      names.add(value);
-    }
-  }
-
-  @Override
-  public final void visitAttribute(AttributeName name, UnmodifiableList<String> values) {
-    if (name == StandardAttributeName.CLASS) {
-      names.addAll(values);
-    }
-  }
-
-  @Override
-  public final void visitAttribute(String name, String value) {
-    if (name.equals("class")) {
-      names.add(value);
-    }
-  }
 
 }

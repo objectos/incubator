@@ -41,7 +41,7 @@ public class ClassSetTest {
       protected final void definition() {
         div(set);
       }
-    }.printMinified();
+    }.minified();
   }
 
 }

@@ -62,7 +62,7 @@ public abstract class SitePage extends HtmlTemplate
     writeStart();
 
     String contents;
-    contents = printMinified();
+    contents = minified();
 
     writer.writeString(path, TextType.HTML, contents);
 
