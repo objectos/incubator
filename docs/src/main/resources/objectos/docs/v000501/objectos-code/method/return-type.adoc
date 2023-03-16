@@ -1,0 +1,190 @@
+= Method return type
+
+Use a `TypeName` instance to define the return type of the generated method declaration.
+
+The following Objectos Code:
+
+[,java]
+----
+import java.util.List;
+import objectos.code.ArrayTypeName;
+import objectos.code.ClassTypeName;
+import objectos.code.JavaTemplate;
+import objectos.code.ParameterizedTypeName;
+import objectos.code.TypeVariableName;
+
+public class MethodReturnType01 extends JavaTemplate {
+  static final ClassTypeName STRING
+      = ClassTypeName.of(String.class);
+
+  static final ParameterizedTypeName LIST
+      = ParameterizedTypeName.of(
+        ClassTypeName.of(List.class),
+        STRING
+      );
+
+  static final TypeVariableName E
+      = TypeVariableName.of("E");
+
+  static final ArrayTypeName OBJECT_ARRAY
+      = ArrayTypeName.of(Object[].class);
+
+  @Override
+  protected final void definition() {
+    autoImports();
+
+    classDeclaration(
+      name("MethodReturnType"),
+
+      method(
+        VOID, name("noResult")
+      ),
+
+      method(
+        INT, name("primitive")
+      ),
+
+      method(
+        STRING, name("classOrInterface")
+      ),
+
+      method(
+        LIST, name("parameterized")
+      ),
+
+      method(
+        E, name("typeVariable")
+      ),
+
+      method(
+        OBJECT_ARRAY, name("array")
+      )
+    );
+  }
+}
+----
+
+Generates the following Java code:
+
+[,java]
+----
+import java.util.List;
+
+class MethodReturnType {
+  void noResult() {}
+
+  int primitive() {}
+
+  String classOrInterface() {}
+
+  List<String> parameterized() {}
+
+  E typeVariable() {}
+
+  Object[] array() {}
+}
+----
+
+== Multiple types
+
+When you specify multiple types in the same method declaration it is generated with the type that was specified last.
+
+The following Objectos Code:
+
+[,java]
+----
+import objectos.code.ClassTypeName;
+import objectos.code.JavaTemplate;
+
+public class MethodReturnType02 extends JavaTemplate {
+  static final ClassTypeName STRING
+      = ClassTypeName.of(String.class);
+
+  @Override
+  protected final void definition() {
+    autoImports();
+
+    classDeclaration(
+      name("MultipleTypes"),
+
+      method(
+        INT, STRING, name("example")
+      )
+    );
+  }
+}
+----
+
+Generates:
+
+[,java]
+----
+class MultipleTypes {
+  String example() {}
+}
+----
+
+== No type specified
+
+If you do not specify a type, the method declaration is generated with the `void` keyword.
+
+The following Objectos Code:
+
+[,java]
+----
+import objectos.code.JavaTemplate;
+
+public class MethodReturnType03 extends JavaTemplate {
+  @Override
+  protected final void definition() {
+    classDeclaration(
+      name("NoType"),
+
+      method(
+        name("noResult")
+      )
+    );
+  }
+}
+----
+
+Generates:
+
+[,java]
+----
+class NoType {
+  void noResult() {}
+}
+----
+
+Alternatively you can explicitly specify that the method has no return type by using the `VOID` constant.
+
+The following Objectos Code is equivalent to the previous one.
+In other words, it generates the same method declaration:
+
+[,java]
+----
+import objectos.code.JavaTemplate;
+
+public class MethodReturnType04 extends JavaTemplate {
+  @Override
+  protected final void definition() {
+    classDeclaration(
+      name("NoType"),
+
+      method(
+        VOID, name("noResult")
+      )
+    );
+  }
+}
+----
+
+It generates:
+
+[,java]
+----
+class NoType {
+  void noResult() {}
+}
+----

@@ -80,7 +80,8 @@ final class LeftBarV000501 extends LeftBarFragment {
 
           ul(
             li(a0("v000501/objectos-code/method/index")),
-            li(a0("v000501/objectos-code/method/name"))
+            li(a0("v000501/objectos-code/method/name")),
+            li(a0("v000501/objectos-code/method/return-type"))
           )
         ),
 
