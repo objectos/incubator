@@ -31,7 +31,7 @@ public class FieldInit04 extends JavaTemplate {
     autoImports();
 
     classDeclaration(
-      name("ComplexExpressions"),
+      name("MultiPart"),
 
       field(
         FOO, name("foo"), FOO, v("builder"), NL,

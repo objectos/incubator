@@ -1,0 +1,51 @@
+= Field Declarations
+:toc-title: Overview
+
+Objectos Code provides the `field` instruction for adding a field declaration to a class or interface declaration.
+
+The following Objectos Code: 
+
+[,java]
+----
+import objectos.code.ClassTypeName;
+import objectos.code.JavaTemplate;
+
+public class FieldDeclaration extends JavaTemplate {
+  static final ClassTypeName STRING
+      = ClassTypeName.of(String.class);
+
+  @Override
+  protected final void definition() {
+    autoImports();
+
+    classDeclaration(
+      name("Fields"),
+
+      field(
+        PRIVATE, DOUBLE, name("a")
+      ),
+
+      field(
+        FINAL, STRING, name("b"), s("Objectos Code!")
+      ),
+
+      field(
+        PRIVATE, INT, name("c"), i(123), name("d"), name("e"), i(456)
+      )
+    );
+  }
+}
+----
+
+Generates the following Java code:
+
+[,java]
+----
+class Fields {
+  private double a;
+
+  final String b = "Objectos Code!";
+
+  private int c = 123, d, e = 456;
+}
+----
