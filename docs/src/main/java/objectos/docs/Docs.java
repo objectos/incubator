@@ -18,29 +18,18 @@ package objectos.docs;
 import static java.lang.System.out;
 
 import br.com.objectos.css.Css;
-import br.com.objectos.css.sheet.StyleSheetWriter;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.DirectoryStream;
-import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Map;
-import java.util.NoSuchElementException;
-import java.util.Objects;
-import java.util.function.Predicate;
-import java.util.stream.Stream;
-import objectos.asciidoc.AsciiDoc;
-import objectos.asciidoc.Document;
-import objectos.html.HtmlSink;
+import objectos.docs.internal.ArticleTemplate;
+import objectos.docs.internal.DocsCss;
+import objectos.docs.internal.Step2Generate;
+import objectos.docs.internal.VersionsTemplate;
 import objectos.html.HtmlTemplate;
-import objectos.lang.Check;
 import objectos.shared.JavaRenderer;
 import objectos.shared.SharedTemplate;
-import objectos.shared.StyleClassSet;
 import objectos.shared.XmlRenderer;
-import objectos.util.GrowableMap;
 
-public final class Docs extends DocsInjector {
+public final class Docs extends Step2Generate {
 
   public interface BottomBar {
     HtmlTemplate toFragment();
@@ -71,378 +60,28 @@ public final class Docs extends DocsInjector {
 
   public static final String LATEST = "0.5.0";
 
-  private final AsciiDoc asciiDoc = AsciiDoc.create();
-
-  private final BottomBar bottomBar;
-
-  private final Map<String, DocumentRecord> documents = new GrowableMap<>();
-
-  private final DocumentTitleProcessor documentTitleProcessor = new DocumentTitleProcessor();
-
-  private final LeftBar leftBar = new LeftBar(this);
-
-  private final Path source;
-
-  private final Path target;
-
-  private final Map<String, DocsTemplate> templates;
-
-  private final TopBar topBar;
-
-  private String baseHref = "";
-
-  private String currentKey;
-
-  private HtmlTemplate currentLeftBar;
-
-  private DocumentRecord currentRecord;
-
-  private Version currentVersion;
-
-  private boolean development;
-
-  private IOException rethrow;
-
-  private Predicate<Path> sourceFilter = (path) -> true;
-
-  Docs(Path source, Path target, TopBar topBar, BottomBar bottomBar) {
-    this.source = source;
-
-    this.target = target;
-
-    this.topBar = topBar;
-
-    this.bottomBar = bottomBar;
-
-    templates = _templates(
-      new ArticleTemplate(this),
-
-      new VersionsTemplate(this)
-    );
-  }
-
-  public static Docs create(
-      Path source, Path target, TopBar topBar, BottomBar bottomBar) {
-    Check.notNull(source, "source == null");
-    Check.notNull(target, "target == null");
-    Check.notNull(topBar, "topBar == null");
-    Check.notNull(bottomBar, "bottomBar == null");
-
-    return new Docs(source, target, topBar, bottomBar);
-  }
+  public Docs() {}
 
   public static void main(String[] args) throws IOException {
-    if (args.length < 2 || args.length > 3) {
-      out.println(
-        "Invocation: java objectos.docs.DocsSite source-path target-path [key]");
-
-      return;
-    }
-
     out.println("Running...");
 
-    var site = new Docs(
-      main0ParseDirectory("source", args[0]),
+    var docs = new Docs();
 
-      main0ParseDirectory("target", args[1]),
+    docs.parseArgs(args);
 
-      new DocsTopBar(),
+    docs.executeScan();
 
-      new DocsBottomBar()
-    );
-
-    site.development();
-
-    site.parseArgs(args);
-
-    site.execute();
+    docs.executeGenerate();
   }
 
-  private static Path main0ParseDirectory(String name, String pathName) throws IOException {
-    var path = Path.of(pathName);
+  public final void execute(Path sourceDirectory, Path targetDirectory) throws IOException {
+    sourceDirectory(sourceDirectory);
 
-    path = path.toAbsolutePath();
+    targetDirectory(targetDirectory);
 
-    if (!Files.exists(path)) {
-      Files.createDirectory(path);
-    }
+    executeScan();
 
-    Check.argument(Files.isDirectory(path), path, " is not a directory");
-
-    out.println("Resolved " + name + " path: " + path);
-
-    return path;
-  }
-
-  public final void development() {
-    baseHref = target.toString();
-  }
-
-  public final void execute() throws IOException {
-    scan();
-
-    generate();
-  }
-
-  public final void production() {
-    baseHref = "/docs";
-  }
-
-  @Override
-  final HtmlTemplate $bottomBar() { return bottomBar.toFragment(); }
-
-  @Override
-  final Document $document() { return currentRecord.document(); }
-
-  @Override
-  final String $elink(String target) {
-    var first = target.indexOf('/');
-
-    var versionKey = target.substring(0, first);
-
-    var version = Version.parse(versionKey);
-
-    var key = target.substring(first + 1);
-
-    return baseHref + "/" + version.slug + "/" + key + ".html";
-  }
-
-  @Override
-  final String $href() {
-    var location = currentRecord.location();
-
-    return location.href();
-  }
-
-  @Override
-  final String $href(String key) {
-    var record = documents.get(key);
-
-    if (record != null) {
-      var location = record.location();
-
-      return location.href();
-    }
-
-    if (development) {
-      return "";
-    }
-
-    throw new NoSuchElementException(key);
-  }
-
-  @Override
-  final String $ilink(String target) {
-    var key = toKey(target);
-
-    return $href(key);
-  }
-
-  @Override
-  final boolean $isCurrentKey(String key) { return Objects.equals(currentKey, key); }
-
-  @Override
-  final boolean $isNext() { return currentKey.startsWith("next/"); }
-
-  @Override
-  final HtmlTemplate $leftBar() { return currentLeftBar; }
-
-  @Override
-  final String $pathName() {
-    var version = Version.parseCurrentKey(currentKey);
-
-    if (version != null) {
-      return version.pathName(currentKey);
-    } else {
-      return "/" + currentKey + ".html";
-    }
-  }
-
-  @Override
-  final DocumentRecord $record(String key) {
-    var record = documents.get(key);
-
-    if (record == null) {
-      throw new NoSuchElementException(key);
-    }
-
-    return record;
-  }
-
-  @Override
-  final DocumentTitle $title() { return currentRecord.title(); }
-
-  @Override
-  final TopBar $topBar() { return topBar; }
-
-  @Override
-  final Version $version() { return currentVersion; }
-
-  private String _key(Path file, int fileExtLength) {
-    var path = source.relativize(file);
-
-    var key = path.toString();
-
-    return key.substring(0, key.length() - fileExtLength);
-  }
-
-  private DocsTemplate _template(String templateName) {
-    var tmpl = templates.get(templateName);
-
-    if (tmpl == null) {
-      throw new NoSuchElementException(templateName);
-    }
-
-    return tmpl;
-  }
-
-  private Map<String, DocsTemplate> _templates(DocsTemplate... templates) {
-    var map = new GrowableMap<String, DocsTemplate>();
-
-    for (var template : templates) {
-      var clazz = template.getClass();
-
-      var key = clazz.getSimpleName();
-
-      map.put(key, template);
-    }
-
-    return map.toUnmodifiableMap();
-  }
-
-  private void catchIO(IOException e) {
-    if (rethrow == null) {
-      rethrow = e;
-    } else {
-      rethrow.addSuppressed(e);
-    }
-  }
-
-  private void parseArgs(String[] args) {
-    if (args.length == 3) {
-      development = true;
-
-      //leftBar.skip();
-
-      var a = args[2];
-
-      sourceFilter = (path) -> path.endsWith(a);
-    }
-  }
-
-  private void scan() throws IOException {
-    rethrow = null;
-
-    try (DirectoryStream<Path> entries = Files.newDirectoryStream(source)) {
-      for (var entry : entries) {
-        if (Files.isDirectory(entry)) {
-          scanDirectory(entry);
-        } else {
-          scanFile(entry);
-        }
-      }
-    }
-
-    if (rethrow != null) {
-      throw rethrow;
-    }
-  }
-
-  private void scanDirectory(Path directory) {
-    Path path = source.relativize(directory);
-
-    if (!sourceFilter.test(path)) {
-      return;
-    }
-
-    try (Stream<Path> walk = Files.walk(directory)) {
-      walk.filter(Files::isRegularFile)
-          .forEach(file -> {
-            try {
-              scanFile(file);
-            } catch (IOException e) {
-              catchIO(e);
-            }
-          });
-    } catch (IOException e) {
-      catchIO(e);
-    }
-  }
-
-  private void scanFile(Path file) throws IOException {
-    var fileName = file.getFileName().toString();
-
-    int lastDot = fileName.lastIndexOf('.');
-
-    var extension = fileName.substring(lastDot);
-
-    switch (extension) {
-      case ".adoc" -> scanFileAsciiDoc(file);
-
-      default -> throw new UnsupportedOperationException("Implement me :: extension=" + extension);
-    }
-  }
-
-  private void scanFileAsciiDoc(Path file) throws IOException {
-    var key = _key(file, 5);
-
-    var source = Files.readString(file, StandardCharsets.UTF_8);
-
-    var document = asciiDoc.parse(source);
-
-    document.process(documentTitleProcessor);
-
-    var documentLocation = DocumentLocation.of(baseHref, key);
-
-    var documentTitle = documentTitleProcessor.create();
-
-    var value = new DocumentRecord(document, documentLocation, documentTitle);
-
-    documents.put(key, value);
-  }
-
-  private String toKey(String target) {
-    Check.state(currentVersion != null, "currentVersion is not set");
-
-    return currentVersion.directory + "/" + target;
-  }
-
-  private void generate() throws IOException {
-    var htmlSink = new HtmlSink();
-
-    var styleClassSet = new StyleClassSet();
-
-    var styleSheet = new DocsCss();
-
-    var styleSheetWriter = StyleSheetWriter.ofPretty();
-
-    for (var entry : documents.entrySet()) {
-      currentKey = entry.getKey();
-
-      currentRecord = entry.getValue();
-
-      currentVersion = Version.parseCurrentKey(currentKey);
-
-      if (currentVersion != null) {
-        currentLeftBar = leftBar.get(currentKey, currentVersion);
-      } else {
-        currentLeftBar = null;
-      }
-
-      var templateName = currentRecord.templateName();
-
-      var template = _template(templateName);
-
-      template.rawStyle(null);
-
-      htmlSink.toVisitor(template, styleClassSet);
-
-      styleSheetWriter.filterClassSelectorsByName(styleClassSet);
-
-      template.rawStyle(styleSheetWriter.toString(styleSheet));
-
-      htmlSink.toDirectory(template, target);
-    }
+    executeGenerate();
   }
 
 }

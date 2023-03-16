@@ -13,21 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package objectos.docs;
+package objectos.docs.internal;
 
-import java.net.URISyntaxException;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
+import java.nio.file.Path;
+import objectos.asciidoc.Document;
 
-public class DocsTest extends AbstractDocsTest {
+record DocumentRecord(Document document,
+                      DocumentLocation location,
+                      DocumentTitle title) {
 
-  @BeforeClass
-  public void _beforeClass() throws URISyntaxException {
-    setRoot();
+  public final String templateName() {
+    return document.getAttribute("template", "ArticleTemplate");
   }
 
-  @Test(enabled = false)
-  public void testCase01() {
+  public final Path resolvePath(Path target) {
+    return location.resolvePath(target);
   }
 
 }

@@ -13,21 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package objectos.docs;
+package objectos.docs.internal;
 
-import java.net.URISyntaxException;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
+enum Status {
 
-public class DocsTest extends AbstractDocsTest {
+  DEVELOPMENT,
 
-  @BeforeClass
-  public void _beforeClass() throws URISyntaxException {
-    setRoot();
-  }
+  LATEST,
 
-  @Test(enabled = false)
-  public void testCase01() {
-  }
+  UNSUPPORTED;
 
 }

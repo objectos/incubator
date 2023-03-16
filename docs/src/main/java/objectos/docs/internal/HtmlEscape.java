@@ -13,21 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package objectos.docs;
+package objectos.docs.internal;
 
-import java.net.URISyntaxException;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
+final class HtmlEscape {
 
-public class DocsTest extends AbstractDocsTest {
+  private HtmlEscape() {}
 
-  @BeforeClass
-  public void _beforeClass() throws URISyntaxException {
-    setRoot();
-  }
+  public static void to(String s, StringBuilder out) {
+    for (int i = 0, len = s.length(); i < len; i++) {
+      var c = s.charAt(i);
 
-  @Test(enabled = false)
-  public void testCase01() {
+      switch (c) {
+        case '"' -> out.append("&quot;");
+        case '&' -> out.append("&amp;");
+        case '<' -> out.append("&lt;");
+        case '>' -> out.append("&gt;");
+        case '\u00A9' -> out.append("&copy;");
+        default -> out.append(c);
+      }
+    }
   }
 
 }

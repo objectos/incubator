@@ -13,21 +13,35 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package objectos.docs;
+package objectos.docs.internal;
 
-import java.net.URISyntaxException;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
+import br.com.objectos.css.Css;
+import br.com.objectos.css.framework.Framework;
+import br.com.objectos.css.select.ClassSelector;
+import br.com.objectos.css.sheet.AbstractStyleSheet;
 
-public class DocsTest extends AbstractDocsTest {
+public final class DocsCss extends AbstractStyleSheet {
 
-  @BeforeClass
-  public void _beforeClass() throws URISyntaxException {
-    setRoot();
+  static final ClassSelector XL_WIDTH_70 = Css.randomDot(3);
+
+  private static final Framework framework = new Framework();
+
+  public static void init() {
   }
 
-  @Test(enabled = false)
-  public void testCase01() {
+  @Override
+  protected final void definition() {
+    install(framework);
+
+    media(
+      screen, minWidth(px(1280)),
+
+      style(
+        XL_WIDTH_70,
+
+        width(rem(17.5))
+      )
+    );
   }
 
 }

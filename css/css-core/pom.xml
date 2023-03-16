@@ -178,11 +178,6 @@
 
 		<dependency>
 			<groupId>br.com.objectos</groupId>
-			<artifactId>objectos-html</artifactId>
-			<optional>true</optional>
-		</dependency>
-		<dependency>
-			<groupId>br.com.objectos</groupId>
 			<artifactId>objectos-html-spi</artifactId>
 		</dependency>
 
