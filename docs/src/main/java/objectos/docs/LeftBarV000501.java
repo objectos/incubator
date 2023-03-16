@@ -79,7 +79,8 @@ final class LeftBarV000501 extends LeftBarFragment {
           h2v0("Method Declarations"),
 
           ul(
-            li(a0("v000501/objectos-code/method/index"))
+            li(a0("v000501/objectos-code/method/index")),
+            li(a0("v000501/objectos-code/method/name"))
           )
         ),
 

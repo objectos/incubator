@@ -10,13 +10,15 @@ The following Objectos Code:
 import objectos.code.ClassTypeName;
 import objectos.code.JavaTemplate;
 
-public class ToString extends JavaTemplate {
+public class MethodDeclaration extends JavaTemplate {
   static final ClassTypeName STRING = ClassTypeName.of(String.class);
-  
+
   @Override
   protected final void definition() {
+    autoImports();
+
     classDeclaration(
-      name("ToString"),
+      name("MethodDeclaration"),
 
       method(
         annotation(Override.class),
@@ -32,9 +34,9 @@ Generates the following Java code:
 
 [,java]
 ----
-class ToString {
-  @java.lang.Override
-  public final java.lang.String toString() {
+class MethodDeclaration {
+  @Override
+  public final String toString() {
     return "Objectos Code";
   }
 }
