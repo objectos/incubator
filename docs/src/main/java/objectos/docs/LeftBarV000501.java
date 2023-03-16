@@ -70,6 +70,7 @@ final class LeftBarV000501 extends LeftBarFragment {
             li(a0("v000501/objectos-code/field/type")),
             li(a0("v000501/objectos-code/field/name")),
             li(a0("v000501/objectos-code/field/modifiers")),
+            li(a0("v000501/objectos-code/field/annotations")),
             li(a0("v000501/objectos-code/field/initializer"))
           )
         ),
