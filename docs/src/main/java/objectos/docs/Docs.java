@@ -54,11 +54,11 @@ public final class Docs extends Step2Generate {
     JavaRenderer.init();
   }
 
-  public static final String INDEX = "docs/0.5.0/index";
+  public static final String INDEX = "docs/0.5.1/index";
 
-  public static final String OVERVIEW = "docs/0.5.0/intro/overview";
+  public static final String OVERVIEW = "docs/0.5.1/intro/overview";
 
-  public static final String LATEST = "0.5.0";
+  public static final String LATEST = "0.5.1";
 
   public Docs() {}
 

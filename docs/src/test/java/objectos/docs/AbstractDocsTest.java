@@ -58,7 +58,7 @@ public abstract class AbstractDocsTest {
     if (root == null) {
       var markerClass = AbstractDocsTest.class;
 
-      var markerUrl = markerClass.getResource("versions.adoc");
+      var markerUrl = markerClass.getResource("main-marker");
 
       var marker = Path.of(markerUrl.toURI());
 
