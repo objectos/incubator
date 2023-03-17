@@ -19,7 +19,6 @@ import static java.lang.System.out;
 
 import br.com.objectos.css.Css;
 import java.io.IOException;
-import java.nio.file.Path;
 import objectos.docs.internal.ArticleTemplate;
 import objectos.docs.internal.DocsCss;
 import objectos.docs.internal.Step2Generate;
@@ -74,11 +73,7 @@ public final class Docs extends Step2Generate {
     docs.executeGenerate();
   }
 
-  public final void execute(Path sourceDirectory, Path targetDirectory) throws IOException {
-    sourceDirectory(sourceDirectory);
-
-    targetDirectory(targetDirectory);
-
+  public final void execute() throws IOException {
     executeScan();
 
     executeGenerate();
