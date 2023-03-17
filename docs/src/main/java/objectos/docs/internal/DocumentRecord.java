@@ -15,7 +15,6 @@
  */
 package objectos.docs.internal;
 
-import java.nio.file.Path;
 import objectos.asciidoc.Document;
 
 record DocumentRecord(Document document,
@@ -24,10 +23,6 @@ record DocumentRecord(Document document,
 
   public final String templateName() {
     return document.getAttribute("template", "ArticleTemplate");
-  }
-
-  public final Path resolvePath(Path target) {
-    return location.resolvePath(target);
   }
 
 }
