@@ -101,7 +101,7 @@ abstract class DocsTemplate extends SharedTemplate {
     title(title.plain());
 
     if (rawStyle != null) {
-      style(raw(rawStyle));
+      style(rawStyle);
     }
 
     var topBar = injector.$topBar();
@@ -109,9 +109,7 @@ abstract class DocsTemplate extends SharedTemplate {
     var topBarJs = topBar.javaScript();
 
     if (!topBarJs.isBlank()) {
-      script(
-        raw(topBarJs)
-      );
+      script(topBarJs);
     }
   }
 

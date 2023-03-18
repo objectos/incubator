@@ -329,7 +329,7 @@ public final class ArticleTemplate extends DocsTemplate implements LanguageRende
   final void head0() {
     super.head0();
 
-    script(raw("""
+    script("""
     (function() {
       function onClick(id, listener) {
         const el = document.getElementById(id);
@@ -372,7 +372,7 @@ public final class ArticleTemplate extends DocsTemplate implements LanguageRende
         .replace("{body}", BODY.id())
         .replace("{menuClose}", CLICK_CLOSE.id())
         .replace("{menuOpen}", CLICK_OPEN.id())
-        .replace("{leftPanel}", NAV.id())));
+        .replace("{leftPanel}", NAV.id()));
   }
 
   @Override
