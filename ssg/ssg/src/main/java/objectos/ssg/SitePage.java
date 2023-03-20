@@ -17,6 +17,7 @@ package objectos.ssg;
 
 import br.com.objectos.http.media.TextType;
 import java.io.IOException;
+import objectos.html.HtmlSink;
 import objectos.html.HtmlTemplate;
 import objectos.html.tmpl.ElementName;
 import objectos.html.tmpl.StandardAttributeName.Href;
@@ -61,8 +62,13 @@ public abstract class SitePage extends HtmlTemplate
   public final void writeTo(SiteWriter writer) throws IOException {
     writeStart();
 
-    String contents;
-    contents = minified();
+    var sink = new HtmlSink();
+
+    var out = new StringBuilder();
+
+    sink.toStringBuilder(this, out);
+
+    var contents = out.toString();
 
     writer.writeString(path, TextType.HTML, contents);
 

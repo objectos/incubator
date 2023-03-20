@@ -43,9 +43,10 @@ public class SiteTest {
       TextType.HTML,
 
       """
-      <html>\
-      <body>TestCase00:index</body>\
-      </html>"""
+      <html>
+      <body>TestCase00:index</body>
+      </html>
+      """
     );
   }
 
@@ -67,11 +68,12 @@ public class SiteTest {
       TextType.HTML,
 
       """
-      <html>\
-      <head>\
-      <link href="/styles.css" rel="stylesheet">\
-      </head>\
-      </html>"""
+      <html>
+      <head>
+      <link href="/styles.css" rel="stylesheet">
+      </head>
+      </html>
+      """
     );
 
     w.testString(
@@ -112,9 +114,9 @@ public class SiteTest {
       TextType.HTML,
 
       """
-      <html>\
-      <img src="/5x2.jpg">\
-      </html>"""
+      <html><img src="/5x2.jpg">
+      </html>
+      """
     );
   }
 
@@ -136,10 +138,13 @@ public class SiteTest {
       TextType.HTML,
 
       """
-      <html>\
-      <head><link href="/sub/styles.css" rel="stylesheet"></head>\
-      <body>TestCase03:index</body>\
-      </html>"""
+      <html>
+      <head>
+      <link href="/sub/styles.css" rel="stylesheet">
+      </head>
+      <body>TestCase03:index</body>
+      </html>
+      """
     );
 
     w.testString(
@@ -181,11 +186,8 @@ public class SiteTest {
       TextType.HTML,
 
       """
-      <html>\
-      <a href="/sub/5x2.jpg">ico</a>\
-      <a href="/sub/foo.jpg">jpg</a>\
-      <a href="/sub/foo.txt">txt</a>\
-      </html>"""
+      <html><a href="/sub/5x2.jpg">ico</a><a href="/sub/foo.jpg">jpg</a><a href="/sub/foo.txt">txt</a></html>
+      """
     );
   }
 
@@ -206,9 +208,10 @@ public class SiteTest {
       TextType.HTML,
 
       """
-      <html>\
-      <body>TestCase05:index</body>\
-      </html>"""
+      <html>
+      <body>TestCase05:index</body>
+      </html>
+      """
     );
   }
 
@@ -229,13 +232,12 @@ public class SiteTest {
       TextType.HTML,
 
       """
-      <html>\
-      <body>\
-      <header>\
-      <a href="/index.html">Objectos</a>\
-      </header>\
-      </body>\
-      </html>"""
+      <html>
+      <body>
+      <header><a href="/index.html">Objectos</a></header>
+      </body>
+      </html>
+      """
     );
   }
 
@@ -250,17 +252,18 @@ public class SiteTest {
       TextType.HTML,
 
       """
-      <html>\
-      <ul>\
-      <li>0:/page1.html</li>\
-      <li>0:/page2.html</li>\
-      <li>1:/l1/page1.html</li>\
-      <li>1:/l1/page2.html</li>\
-      <li>2:/l1/l2/page1.html</li>\
-      <li>1:/l1/page3.html</li>\
-      <li>0:/page3.html</li>\
-      </ul>\
-      </html>"""
+      <html>
+      <ul>
+      <li>0:/page1.html</li>
+      <li>0:/page2.html</li>
+      <li>1:/l1/page1.html</li>
+      <li>1:/l1/page2.html</li>
+      <li>2:/l1/l2/page1.html</li>
+      <li>1:/l1/page3.html</li>
+      <li>0:/page3.html</li>
+      </ul>
+      </html>
+      """
     );
   }
 
@@ -281,9 +284,10 @@ public class SiteTest {
       TextType.HTML,
 
       """
-      <html>\
-      <body>TestCase08:index</body>\
-      </html>"""
+      <html>
+      <body>TestCase08:index</body>
+      </html>
+      """
     );
   }
 
@@ -307,18 +311,20 @@ public class SiteTest {
       TextType.HTML,
 
       """
-      <html>\
-      <body>TestCase09:index</body>\
-      </html>"""
+      <html>
+      <body>TestCase09:index</body>
+      </html>
+      """
     );
 
     assertEquals(
       tc.result,
 
       """
-      <html>\
-      <body>TestCase09:index</body>\
-      </html>"""
+      <html>
+      <body>TestCase09:index</body>
+      </html>
+      """
     );
   }
 
@@ -343,9 +349,10 @@ public class SiteTest {
       TextType.HTML,
 
       """
-      <html>\
-      <body>TestCase10:1</body>\
-      </html>"""
+      <html>
+      <body>TestCase10:1</body>
+      </html>
+      """
     );
 
     w.testString(
@@ -354,9 +361,10 @@ public class SiteTest {
       TextType.HTML,
 
       """
-      <html>\
-      <body>TestCase10:2</body>\
-      </html>"""
+      <html>
+      <body>TestCase10:2</body>
+      </html>
+      """
     );
   }
 

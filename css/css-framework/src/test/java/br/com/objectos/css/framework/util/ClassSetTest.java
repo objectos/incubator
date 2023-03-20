@@ -19,19 +19,27 @@ public class ClassSetTest {
   public void ofTest() {
     assertEquals(
       div(ClassSet.of()),
-      "<div></div>"
+      """
+      <div></div>
+      """
     );
     assertEquals(
       div(ClassSet.of(dot("a"))),
-      "<div class=\"a\"></div>"
+      """
+      <div class="a"></div>
+      """
     );
     assertEquals(
       div(ClassSet.of(dot("a"), dot("b"))),
-      "<div class=\"a b\"></div>"
+      """
+      <div class="a b"></div>
+      """
     );
     assertEquals(
       div(ClassSet.of(dot("a"), dot("b"), dot("c"))),
-      "<div class=\"a b c\"></div>"
+      """
+      <div class="a b c"></div>
+      """
     );
   }
 
@@ -41,7 +49,7 @@ public class ClassSetTest {
       protected final void definition() {
         div(set);
       }
-    }.minified();
+    }.toString();
   }
 
 }
