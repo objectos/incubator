@@ -62,20 +62,21 @@ public class ServeMojoWriterTest {
 
       assertEquals(
         testing.readResponse("/index.html"),
-        String.join("",
-          "<html>",
-          "<head>",
-          "<link href=\"/css/styles.css\" rel=\"stylesheet\">",
-          "</head>",
-          "<body>",
-          "<nav>",
-          "<ul>",
-          "</ul>",
-          "</nav>",
-          "<ul><li><a href=\"/index.html\"></a></li></ul>",
-          "</body>",
-          "</html>"
-        )
+        """
+        <html>
+        <head>
+        <link href="/css/styles.css" rel="stylesheet">
+        </head>
+        <body>
+        <nav>
+        <ul></ul>
+        </nav>
+        <ul>
+        <li><a href="/index.html"></a></li>
+        </ul>
+        </body>
+        </html>
+        """
       );
 
       assertEquals(
@@ -85,7 +86,8 @@ public class ServeMojoWriterTest {
 
       assertEquals(
         testing.readResponse("/v1/bar.html"),
-        "<html><body>bar!</body></html>"
+        """
+        <html><body>bar!</body></html>"""
       );
     } finally {
       server.stop();

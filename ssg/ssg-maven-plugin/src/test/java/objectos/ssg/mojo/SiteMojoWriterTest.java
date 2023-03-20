@@ -41,20 +41,21 @@ public class SiteMojoWriterTest extends AbstractSiteProdTest {
 
     assertEquals(
       Read.string(target.getRegularFile("index.html"), Charsets.utf8()),
-      String.join("",
-        "<html>",
-        "<head>",
-        "<link href=\"/css/styles.css\" rel=\"stylesheet\">",
-        "</head>",
-        "<body>",
-        "<nav>",
-        "<ul>",
-        "</ul>",
-        "</nav>",
-        "<ul><li><a href=\"/index.html\"></a></li></ul>",
-        "</body>",
-        "</html>"
-      )
+      """
+      <html>
+      <head>
+      <link href="/css/styles.css" rel="stylesheet">
+      </head>
+      <body>
+      <nav>
+      <ul></ul>
+      </nav>
+      <ul>
+      <li><a href="/index.html"></a></li>
+      </ul>
+      </body>
+      </html>
+      """
     );
 
     Directory css;
