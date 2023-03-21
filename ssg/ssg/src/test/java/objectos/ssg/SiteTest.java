@@ -114,8 +114,7 @@ public class SiteTest {
       TextType.HTML,
 
       """
-      <html><img src="/5x2.jpg">
-      </html>
+      <html><img src="/5x2.jpg"></html>
       """
     );
   }
