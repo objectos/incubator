@@ -178,7 +178,7 @@
 
 		<dependency>
 			<groupId>br.com.objectos</groupId>
-			<artifactId>objectos-html-spi</artifactId>
+			<artifactId>objectos-html</artifactId>
 		</dependency>
 
 		<dependency>
