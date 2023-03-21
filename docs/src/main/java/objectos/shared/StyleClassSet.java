@@ -77,9 +77,6 @@ public final class StyleClassSet implements Predicate<String>, Visitor {
   public final void raw(String value) {}
 
   @Override
-  public final void selfClosingEnd() {}
-
-  @Override
   public final void startTag(StandardElementName name) {}
 
   @Override
