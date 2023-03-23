@@ -83,7 +83,8 @@ final class LeftBarV000502 extends LeftBarFragment {
             li(a0("v000502/objectos-code/method/name")),
             li(a0("v000502/objectos-code/method/return-type")),
             li(a0("v000502/objectos-code/method/modifiers")),
-            li(a0("v000502/objectos-code/method/annotations"))
+            li(a0("v000502/objectos-code/method/annotations")),
+            li(a0("v000502/objectos-code/method/parameters"))
           )
         ),
 
