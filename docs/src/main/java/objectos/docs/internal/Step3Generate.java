@@ -29,7 +29,7 @@ import objectos.lang.Check;
 import objectos.shared.StyleClassSet;
 import objectos.util.GrowableMap;
 
-public class Step2Generate extends Step1Scan {
+public class Step3Generate extends Step2Scan {
 
   private final LeftBar leftBar;
 
@@ -47,7 +47,7 @@ public class Step2Generate extends Step1Scan {
 
   private TopBar topBar = new DocsTopBar();
 
-  public Step2Generate() {
+  public Step3Generate() {
     var injector = new ThisInjector();
 
     leftBar = new LeftBar(injector);

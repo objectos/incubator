@@ -24,6 +24,8 @@ class Step0Config {
 
   String baseHref;
 
+  boolean mainOnly;
+
   boolean production;
 
   final List<Path> sourceDirectories = new GrowableList<>();
@@ -49,7 +51,7 @@ class Step0Config {
 
     var targetPathName = args[1];
 
-    var mainOnly = false;
+    mainOnly = false;
 
     if (length > 2) {
       for (int i = 2; i < length;) {
@@ -68,7 +70,7 @@ class Step0Config {
       }
     }
 
-    sourcePath(sourcePathName, mainOnly);
+    sourcePath(sourcePathName);
 
     targetDirectory(targetPathName);
   }
@@ -80,7 +82,9 @@ class Step0Config {
   }
 
   public final void sourceDirectory(Path path) {
-    sourcePath(path, false);
+    mainOnly = false;
+
+    sourcePath(path);
   }
 
   public final void targetDirectory(Path path) {
@@ -109,7 +113,7 @@ class Step0Config {
     );
   }
 
-  private void sourcePath(Path sourcePath, boolean mainOnly) {
+  private void sourcePath(Path sourcePath) {
     if (!Files.isDirectory(sourcePath)) {
       throw new IllegalArgumentException(
         """
@@ -127,10 +131,10 @@ class Step0Config {
     sourcePathAdd(sourcePath, "archive");
   }
 
-  private void sourcePath(String sourcePathName, boolean mainOnly) {
+  private void sourcePath(String sourcePathName) {
     var sourcePath = Path.of(sourcePathName).toAbsolutePath();
 
-    sourcePath(sourcePath, mainOnly);
+    sourcePath(sourcePath);
   }
 
   private void sourcePathAdd(Path sourcePath, String name) {

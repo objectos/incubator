@@ -21,14 +21,14 @@ import br.com.objectos.css.Css;
 import java.io.IOException;
 import objectos.docs.internal.ArticleTemplate;
 import objectos.docs.internal.DocsCss;
-import objectos.docs.internal.Step2Generate;
+import objectos.docs.internal.Step3Generate;
 import objectos.docs.internal.VersionsTemplate;
 import objectos.html.HtmlTemplate;
 import objectos.shared.JavaRenderer;
 import objectos.shared.SharedTemplate;
 import objectos.shared.XmlRenderer;
 
-public final class Docs extends Step2Generate {
+public final class Docs extends Step3Generate {
 
   public interface BottomBar {
     HtmlTemplate toFragment();
@@ -68,12 +68,12 @@ public final class Docs extends Step2Generate {
 
     docs.parseArgs(args);
 
-    docs.executeScan();
-
-    docs.executeGenerate();
+    docs.execute();
   }
 
   public final void execute() throws IOException {
+    executeVersions();
+
     executeScan();
 
     executeGenerate();

@@ -23,18 +23,15 @@ import static objectos.docs.internal.Version2.releaseDate;
 import static objectos.docs.internal.Version2.section;
 import static objectos.docs.internal.Version2.status;
 
+import java.util.Map;
 import objectos.docs.internal.Version2.VersionOption;
+import objectos.util.GrowableMap;
 
-final class Versions {
+class Step1Versions extends Step0Config {
 
-  @SuppressWarnings("unused")
-  private final DocsInjector injector;
+  final Map<String, Version2> versions = new GrowableMap<>();
 
-  public Versions(DocsInjector injector) {
-    this.injector = injector;
-  }
-
-  public final void init() {
+  public final void executeVersions() {
     version(
       name("0.5.2"),
       releaseDate(2023, 3, 24),
@@ -198,6 +195,10 @@ final class Versions {
   }
 
   private void archive() {
+    if (mainOnly) {
+      return;
+    }
+
     release20220516();
     release20220613();
     release20221010();
@@ -785,7 +786,9 @@ final class Versions {
   }
 
   private void version(VersionOption... options) {
-    throw new UnsupportedOperationException("Implement me");
+    var version = Version2.create(options);
+
+    versions.put(version.directory, version);
   }
 
 }
