@@ -1,0 +1,45 @@
+= Objectos 0.4.4 release notes
+:toc-title: Objectos 0.4.4
+
+_March 03, 2023_
+
+Welcome to Objectos 0.4.4.
+This is a minor release which focuses solely on Objectos Code.
+
+== New Features
+
+* New syntax for constructor declaration issue:227[]
+* New syntax for field declaration issue:228[]
+* New syntax for class declaration issue:230[]
+* New syntax for interface declaration issue:231[]
+* New syntax for enum declaration issue:232[]
+* Add `annotation(ClassTypeName)` issue:233[]
+* New syntax for package declaration issue:234[]
+* Allow naming a type declaration using a `ClassTypeName` issue:237[]
+* Allow creating nested names with `ClassTypeName.of(ClassTypeName, "Inner")` method issue:238[]
+* Add `IF, condition(expression)` issue:245[]
+* Allow `typeParameter` in `classDeclaration` issue:249[]
+
+== Enhancements
+
+* Make `TypeName` hierarchy top-level issue:235[]
+* Add the 'last one wins' strategy to `classDeclaration` + `extendsClause` issue:250[]
+* Disallow `extendsClause(A,B,C)` with `classDeclaration` issue:251[]
+
+== Bug fixes
+
+* Constructor generated without body but declared with one issue:239[]
+* JavaTemplate emits a new line at the top with autoImports() and no pkg declaration issue:246[]
+
+== Documentation
+
+* Docs / Objectos Code / Class Decl issue:247[]
+
+== Work
+
+* Move Indentation, Keyword, Symbol, etc to the internal pkg issue:236[]
+* Remove declaration(IncludeTarget) methods issue:240[]
+* Remove modifiers and returnType instructions issue:241[]
+* Formal parameter: parameter(INT, name("a")) issue:242[]
+* Enum constant: enumConstant(name("A")) issue:243[]
+* Remove consume and let code behave like it issue:248[]

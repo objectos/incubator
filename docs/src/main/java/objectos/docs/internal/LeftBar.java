@@ -19,6 +19,8 @@ import objectos.html.HtmlTemplate;
 
 final class LeftBar {
 
+  private final LeftBarV000502 v000502 = new LeftBarV000502(this);
+
   private final LeftBarV000501 v000501 = new LeftBarV000501(this);
 
   private final LeftBarV000500 v000500 = new LeftBarV000500(this);
@@ -44,6 +46,8 @@ final class LeftBar {
       return NoOpLeftBar.INSTANCE;
     } else {
       return switch (version) {
+        case V0_5_2 -> v000502.get(key);
+
         case V0_5_1 -> v000501.get(key);
 
         case V0_5_0 -> v000500.get(key);

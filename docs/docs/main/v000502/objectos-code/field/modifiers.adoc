@@ -1,0 +1,146 @@
+= Field modifiers
+
+Use the provided modifier constants to include _field modifiers_ to your field declaration.
+
+The following Objectos Code:
+
+[,java]
+----
+import objectos.code.JavaTemplate;
+
+public class FieldMods01 extends JavaTemplate {
+  @Override
+  protected final void definition() {
+    classDeclaration(
+      name("Modifiers"),
+
+      field(
+        PUBLIC, STATIC, FINAL, INT, name("a")
+      ),
+
+      field(
+        PROTECTED, BOOLEAN, name("b")
+      )
+    );
+  }
+}
+----
+
+Generates:
+
+[,java]
+----
+class Modifiers {
+  public static final int a;
+
+  protected boolean b;
+}
+----
+
+== Duplicates
+
+All of the specified modifiers are included in the generated output.
+In other words, the `field` instruction does not filter out duplicate modifiers.
+
+The following Objectos Code:
+
+[,java]
+----
+import objectos.code.JavaTemplate;
+
+public class FieldMods02 extends JavaTemplate {
+  @Override
+  protected final void definition() {
+    classDeclaration(
+      name("Duplicates"),
+
+      field(
+        PUBLIC, PUBLIC, STATIC, STATIC, INT, name("a")
+      )
+    );
+  }
+}
+----
+
+Generates the following Java class declaration:
+
+[,java]
+----
+class Duplicates {
+  public public static static int a;
+}
+----
+
+== Including modifiers programatically
+
+Use the `include` instruction if you need to generate a different set of modifiers based on a condition.
+
+In the following Objectos Code:
+
+[,java]
+----
+import java.util.concurrent.ThreadLocalRandom;
+import objectos.code.JavaTemplate;
+
+public class FieldMods03 extends JavaTemplate {
+  @Override
+  protected final void definition() {
+    classDeclaration(
+      name("Programatically"),
+
+      field(
+        include(this::modifiers), INT, name("a"), i(1234)
+      )
+    );
+  }
+
+  private void modifiers() {
+    if (shouldBePublic()) {
+      code(PUBLIC);
+    }
+
+    code(STATIC, FINAL);
+  }
+
+  private boolean shouldBePublic() {
+    return ThreadLocalRandom.current().nextBoolean();
+  }
+}
+----
+
+Notice the `include` instruction in the `field` instruction:
+
+[,java]
+----
+field(
+  include(this::modifiers), INT, name("a"), i(1234)
+)
+----
+
+The field modifiers are defined in the private `modifiers` method:
+
+[,java]
+----
+private void modifiers() {
+  if (shouldBePublic()) {
+    code(PUBLIC);
+  }
+
+  code(STATIC, FINAL);
+}
+----
+
+So, depending on the value returned by the `shouldBePublic` method, the following are generated:
+
+[,java]
+----
+// shouldBePublic() returns true
+class Programatically {
+  public static final int a = 1234;
+}
+
+// shouldBePublic() returns false
+class Programatically {
+  static final int a = 1234;
+}
+----
