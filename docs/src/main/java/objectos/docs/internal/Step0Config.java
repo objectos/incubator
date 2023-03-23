@@ -111,9 +111,11 @@ class Step0Config {
 
   private void sourcePath(Path sourcePath, boolean mainOnly) {
     if (!Files.isDirectory(sourcePath)) {
-      throw new IllegalArgumentException("""
-    Invalid <source-path>: %s is not a directory
-    """.formatted(sourcePath));
+      throw new IllegalArgumentException(
+        """
+        Invalid <source-path>: %s is not a directory
+        """.formatted(sourcePath)
+      );
     }
 
     sourcePathAdd(sourcePath, "main");

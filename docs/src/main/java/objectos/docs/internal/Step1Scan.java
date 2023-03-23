@@ -24,7 +24,7 @@ import java.util.stream.Stream;
 import objectos.asciidoc.AsciiDoc;
 import objectos.util.GrowableMap;
 
-class Step1Scan extends Step0Config {
+abstract class Step1Scan extends Step0Config {
 
   final GrowableMap<String, DocumentRecord> documents = new GrowableMap<>();
 

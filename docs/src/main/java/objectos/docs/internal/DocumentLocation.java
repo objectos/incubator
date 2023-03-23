@@ -15,8 +15,6 @@
  */
 package objectos.docs.internal;
 
-import java.nio.file.Path;
-
 record DocumentLocation(String writePath, String href) {
 
   public static DocumentLocation of(String baseHref, String key) {
@@ -39,10 +37,6 @@ record DocumentLocation(String writePath, String href) {
     return new DocumentLocation(
       writePath, baseHref + "/" + writePath
     );
-  }
-
-  public final Path resolvePath(Path target) {
-    return target.resolve(writePath);
   }
 
 }
