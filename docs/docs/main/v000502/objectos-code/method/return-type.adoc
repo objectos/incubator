@@ -85,7 +85,7 @@ class MethodReturnType {
 }
 ----
 
-== Multiple types
+== Multiple types specified
 
 When you specify multiple types in the same method declaration it is generated with the type that was specified last.
 

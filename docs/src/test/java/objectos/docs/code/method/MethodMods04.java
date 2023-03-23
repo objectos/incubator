@@ -15,26 +15,34 @@
  */
 package objectos.docs.code.method;
 
+import java.util.concurrent.ThreadLocalRandom;
 import objectos.code.JavaTemplate;
 
-public class MethodMods03 extends JavaTemplate {
+public class MethodMods04 extends JavaTemplate {
   public static void main(String[] args) {
-    System.out.println(new MethodMods03());
+    System.out.println(new MethodMods04());
   }
 
   @Override
   protected final void definition() {
     classDeclaration(
-      name("AbstractMethod"),
+      name("Programatically"),
 
       method(
-        PUBLIC, ABSTRACT, INT, name("a")
-      ),
-
-      method(
-        PUBLIC, ABSTRACT, INT, name("b"),
-        p(RETURN, i(123))
+        include(this::modifiers), INT, name("a")
       )
     );
+  }
+
+  private void modifiers() {
+    code(PUBLIC);
+
+    if (shouldBeFinal()) {
+      code(FINAL);
+    }
+  }
+
+  private boolean shouldBeFinal() {
+    return ThreadLocalRandom.current().nextBoolean();
   }
 }

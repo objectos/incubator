@@ -15,25 +15,33 @@
  */
 package objectos.docs.code.method;
 
+import objectos.code.ClassTypeName;
 import objectos.code.JavaTemplate;
 
-public class MethodMods03 extends JavaTemplate {
+public class MethodAnnotations02 extends JavaTemplate {
+  static final ClassTypeName ANNO_A
+      = ClassTypeName.of("com.example.annotations", "AnnotationA");
+  static final ClassTypeName ANNO_B
+      = ClassTypeName.of("com.example.annotations", "AnnotationB");
+  static final ClassTypeName ANNO_C
+      = ClassTypeName.of("com.example.annotations", "AnnotationC");
+
   public static void main(String[] args) {
-    System.out.println(new MethodMods03());
+    System.out.println(new MethodAnnotations02());
   }
 
   @Override
   protected final void definition() {
+    autoImports();
+
     classDeclaration(
-      name("AbstractMethod"),
+      name("MethodAnnotations"),
 
       method(
-        PUBLIC, ABSTRACT, INT, name("a")
-      ),
-
-      method(
-        PUBLIC, ABSTRACT, INT, name("b"),
-        p(RETURN, i(123))
+        annotation(ANNO_A),
+        annotation(ANNO_B),
+        annotation(ANNO_C),
+        PUBLIC, ABSTRACT, VOID, name("multipleAnnotations")
       )
     );
   }

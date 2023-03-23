@@ -37,7 +37,7 @@ class Modifiers {
 }
 ----
 
-== Duplicates
+== Specifying the same modifier multiple times
 
 All of the specified modifiers are included in the generated output.
 In other words, the `method` instruction does not filter out duplicate modifiers.
@@ -71,6 +71,51 @@ class Duplicates {
 }
 ----
 
+== Abstact methods
+
+Add the `ABSTRACT` constant to generate an abstract method.
+
+If the `ABSTRACT` constant is specified then no body is generated for the method.
+In other words, if statements are specified then they are all ignored.
+
+The following Objectos Code:
+
+[,java]
+----
+import objectos.code.JavaTemplate;
+
+public class MethodMods03 extends JavaTemplate {
+  @Override
+  protected final void definition() {
+    classDeclaration(
+      name("AbstractMethod"),
+
+      method(
+        PUBLIC, ABSTRACT, INT, name("a")
+      ),
+
+      method(
+        PUBLIC, ABSTRACT, INT, name("b"),
+        p(RETURN, i(123))
+      )
+    );
+  }
+}
+----
+   
+Generates:
+
+[,java]
+----
+class AbstractMethod {
+  public abstract int a();
+
+  public abstract int b();
+}
+----
+
+Notice how the `return` statement was ignored in the second method declaration.
+
 == Including modifiers programatically
 
 Use the `include` instruction if you need to generate a different set of modifiers based on a condition.
@@ -82,7 +127,7 @@ In the following Objectos Code:
 import java.util.concurrent.ThreadLocalRandom;
 import objectos.code.JavaTemplate;
 
-public class MethodMods03 extends JavaTemplate {
+public class MethodMods04 extends JavaTemplate {
   public static void main(String[] args) {
     System.out.println(new MethodMods03());
   }

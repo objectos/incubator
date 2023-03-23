@@ -15,24 +15,27 @@
  */
 package objectos.docs.code.method;
 
+import objectos.code.ClassTypeName;
 import objectos.code.JavaTemplate;
 
-public class MethodMods03 extends JavaTemplate {
+public class MethodAnnotations01 extends JavaTemplate {
+  static final ClassTypeName MY_ANNO
+      = ClassTypeName.of("com.example.annotations", "MyAnnotation");
+
   public static void main(String[] args) {
-    System.out.println(new MethodMods03());
+    System.out.println(new MethodAnnotations01());
   }
 
   @Override
   protected final void definition() {
+    autoImports();
+
     classDeclaration(
-      name("AbstractMethod"),
+      name("MethodAnnotations"),
 
       method(
-        PUBLIC, ABSTRACT, INT, name("a")
-      ),
-
-      method(
-        PUBLIC, ABSTRACT, INT, name("b"),
+        annotation(MY_ANNO),
+        PUBLIC, INT, name("annotatedMethod"),
         p(RETURN, i(123))
       )
     );
