@@ -79,6 +79,13 @@ public class Version2 {
     }
   }
 
+  private record DirectoryOption(String value) implements VersionOption {
+    @Override
+    public void accept(Builder builder) {
+      builder.directory = value;
+    }
+  }
+
   final String name;
 
   final String directory;
@@ -109,6 +116,10 @@ public class Version2 {
     }
 
     return builder.build();
+  }
+
+  public static VersionOption directory(String name) {
+    return new DirectoryOption(name);
   }
 
   public static NavigationOption link(String iref) {
