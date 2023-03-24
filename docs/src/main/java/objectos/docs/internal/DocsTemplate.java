@@ -68,9 +68,7 @@ abstract class DocsTemplate extends SharedTemplate {
 
   @Override
   protected final void definition() {
-    var pathName = injector.$pathName();
-
-    pathName(pathName);
+    pathName(key);
 
     var topBar = injector.$topBar();
 

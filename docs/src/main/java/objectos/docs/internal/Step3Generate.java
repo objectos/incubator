@@ -19,7 +19,6 @@ import br.com.objectos.css.sheet.StyleSheetWriter;
 import java.io.IOException;
 import java.util.Map;
 import java.util.NoSuchElementException;
-import java.util.Objects;
 import objectos.asciidoc.Document;
 import objectos.docs.Docs.BottomBar;
 import objectos.docs.Docs.TopBar;
@@ -171,17 +170,6 @@ public class Step3Generate extends Step2Scan {
     }
 
     @Override
-    final boolean $isCurrentKey(String key) { return Objects.equals(currentKey, key); }
-
-    @Override
-    final boolean $isNext() { return currentKey.startsWith("next/"); }
-
-    @Override
-    final String $pathName() {
-      return currentKey;
-    }
-
-    @Override
     final DocumentRecord $record(String key) {
       var record = documents.get(key);
 
@@ -197,9 +185,6 @@ public class Step3Generate extends Step2Scan {
 
     @Override
     final TopBar $topBar() { return topBar; }
-
-    @Override
-    final Version $version() { return currentVersion; }
 
     @Override
     final Iterable<Version> $versions() { return versions.values(); }
