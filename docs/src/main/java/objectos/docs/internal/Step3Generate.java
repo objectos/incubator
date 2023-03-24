@@ -25,21 +25,16 @@ import objectos.docs.Docs.BottomBar;
 import objectos.docs.Docs.TopBar;
 import objectos.html.HtmlSink;
 import objectos.html.HtmlTemplate;
-import objectos.lang.Check;
 import objectos.shared.StyleClassSet;
 import objectos.util.GrowableMap;
 
 public class Step3Generate extends Step2Scan {
-
-  private final LeftBar leftBar;
 
   private final Map<String, DocsTemplate> templates;
 
   private BottomBar bottomBar = new DocsBottomBar();
 
   private String currentKey;
-
-  private HtmlTemplate currentLeftBar;
 
   private DocumentRecord currentRecord;
 
@@ -49,8 +44,6 @@ public class Step3Generate extends Step2Scan {
 
   public Step3Generate() {
     var injector = new ThisInjector();
-
-    leftBar = new LeftBar(injector);
 
     templates = _templates(
       new ArticleTemplate(injector),
@@ -83,17 +76,15 @@ public class Step3Generate extends Step2Scan {
 
       currentRecord = entry.getValue();
 
-      currentVersion = Version.parseCurrentKey(currentKey);
-
-      if (currentVersion != null) {
-        currentLeftBar = leftBar.get(currentKey, currentVersion);
-      } else {
-        currentLeftBar = null;
-      }
+      currentVersion = currentRecord.version();
 
       var templateName = currentRecord.templateName();
 
       var template = _template(templateName);
+
+      template.key = currentKey;
+
+      template.version = currentVersion;
 
       template.rawStyle(null);
 
@@ -131,12 +122,6 @@ public class Step3Generate extends Step2Scan {
     return map.toUnmodifiableMap();
   }
 
-  private String toKey(String target) {
-    Check.state(currentVersion != null, "currentVersion is not set");
-
-    return currentVersion.directory + "/" + target;
-  }
-
   private class ThisInjector extends DocsInjector {
     @Override
     final HtmlTemplate $bottomBar() { return bottomBar.toFragment(); }
@@ -146,46 +131,43 @@ public class Step3Generate extends Step2Scan {
 
     @Override
     final String $elink(String target) {
-      var first = target.indexOf('/');
+      char first = target.charAt(0);
 
-      var versionKey = target.substring(0, first);
+      if (first != '/') {
+        var index = target.indexOf('/');
 
-      var version = Version.parse(versionKey);
+        if (index == -1) {
+          throw new UnsupportedOperationException("Implement me");
+        }
 
-      var key = target.substring(first + 1);
+        var key = target.substring(0, index);
 
-      return baseHref + "/" + version.slug + "/" + key + ".html";
-    }
+        var prefix = switch (key) {
+          case "v000502" -> "/0.5.2";
+          case "v000501" -> "/0.5.1";
+          case "v000500" -> "/0.5.0";
+          case "v0004" -> "/0.4";
+          case "v0003" -> "/0.3";
+          case "v0002" -> "/0.2";
+          case "v0001" -> "/0.1";
+          default -> throw new UnsupportedOperationException("Implement me :: key=" + key);
+        };
 
-    @Override
-    final String $href() {
-      var location = currentRecord.location();
-
-      return location.href();
-    }
-
-    @Override
-    final String $href(String key) {
-      var record = documents.get(key);
-
-      if (record != null) {
-        var location = record.location();
-
-        return location.href();
+        return prefix + target.substring(index) + ".html";
+      } else {
+        throw new UnsupportedOperationException("Implement me");
       }
-
-      if (!production) {
-        return "";
-      }
-
-      throw new NoSuchElementException(key);
     }
 
     @Override
     final String $ilink(String target) {
-      var key = toKey(target);
+      char first = target.charAt(0);
 
-      return $href(key);
+      if (first != '/') {
+        return "/" + currentVersion.directory + "/" + target + ".html";
+      } else {
+        throw new UnsupportedOperationException("Implement me");
+      }
     }
 
     @Override
@@ -195,17 +177,8 @@ public class Step3Generate extends Step2Scan {
     final boolean $isNext() { return currentKey.startsWith("next/"); }
 
     @Override
-    final HtmlTemplate $leftBar() { return currentLeftBar; }
-
-    @Override
     final String $pathName() {
-      var version = Version.parseCurrentKey(currentKey);
-
-      if (version != null) {
-        return version.pathName(currentKey);
-      } else {
-        return "/" + currentKey + ".html";
-      }
+      return currentKey;
     }
 
     @Override
@@ -227,6 +200,9 @@ public class Step3Generate extends Step2Scan {
 
     @Override
     final Version $version() { return currentVersion; }
+
+    @Override
+    final Iterable<Version> $versions() { return versions.values(); }
   }
 
 }

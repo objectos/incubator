@@ -127,7 +127,9 @@ public final class VersionsTemplate extends DocsTemplate {
   }
 
   private void v0x() {
-    for (var version : Version.VALUES) {
+    var versions = injector.$versions();
+
+    for (var version : versions) {
       a(
         BackgroundColor.hover.gray100,
         Border.v1,
@@ -140,7 +142,7 @@ public final class VersionsTemplate extends DocsTemplate {
         Padding.lg.v08,
         Rounded.medium,
 
-        href(injector.$href(version.key("index"))),
+        pathTo("/" + version.directory + "/index.html"),
 
         div(
           Display.flex,

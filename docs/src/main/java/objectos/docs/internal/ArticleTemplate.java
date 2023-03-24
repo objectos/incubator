@@ -21,11 +21,13 @@ import br.com.objectos.css.framework.border.BorderBottom;
 import br.com.objectos.css.framework.border.BorderColor;
 import br.com.objectos.css.framework.border.BorderRight;
 import br.com.objectos.css.framework.border.BorderTop;
+import br.com.objectos.css.framework.border.Rounded;
 import br.com.objectos.css.framework.effects.Opacity;
 import br.com.objectos.css.framework.flexbox.AlignItems;
 import br.com.objectos.css.framework.flexbox.Flex;
 import br.com.objectos.css.framework.flexbox.FlexDirection;
 import br.com.objectos.css.framework.flexbox.FlexGrow;
+import br.com.objectos.css.framework.flexbox.JustifyContent;
 import br.com.objectos.css.framework.interactivity.Cursor;
 import br.com.objectos.css.framework.layout.Display;
 import br.com.objectos.css.framework.layout.Left;
@@ -56,9 +58,17 @@ import br.com.objectos.css.framework.typography.LetterSpacing;
 import br.com.objectos.css.framework.typography.ListStyleType;
 import br.com.objectos.css.framework.typography.TextAlign;
 import br.com.objectos.css.framework.typography.TextColor;
+import br.com.objectos.css.framework.typography.TextTransform;
 import br.com.objectos.css.select.ClassSelector;
 import br.com.objectos.css.select.IdSelector;
 import objectos.asciidoc.DocumentAttributes;
+import objectos.docs.internal.Navigation.Element;
+import objectos.docs.internal.Navigation.Link;
+import objectos.docs.internal.Navigation.LinkList;
+import objectos.docs.internal.Navigation.LinkTitle;
+import objectos.docs.internal.Navigation.Section;
+import objectos.html.tmpl.AValue;
+import objectos.html.tmpl.ElementName;
 import objectos.html.tmpl.StandardElementName;
 import objectos.shared.DefaultRenderer;
 import objectos.shared.JavaRenderer;
@@ -90,6 +100,8 @@ public final class ArticleTemplate extends DocsTemplate implements LanguageRende
   private boolean containerStarted;
 
   private boolean heading;
+
+  private Navigation navigation;
 
   ArticleTemplate(DocsInjector injector) { super(injector); }
 
@@ -377,8 +389,6 @@ public final class ArticleTemplate extends DocsTemplate implements LanguageRende
 
   @Override
   final void main0() {
-    var version = injector.$version();
-
     if (version.status == Status.DEVELOPMENT) {
       div(
         BackgroundColor.orange100,
@@ -510,7 +520,7 @@ public final class ArticleTemplate extends DocsTemplate implements LanguageRende
           Width.lg.v56,
           DocsCss.XL_WIDTH_70,
 
-          injector.$leftBar()
+          f(this::leftBar)
         ),
 
         main(
@@ -528,6 +538,178 @@ public final class ArticleTemplate extends DocsTemplate implements LanguageRende
           )
         )
       )
+    );
+  }
+
+  private void leftBar() {
+    div(
+      AlignItems.center,
+      BorderColor.slate200,
+      BorderBottom.v1,
+      Display.flex,
+      Display.lg.hidden,
+      FlexDirection.rowReverse,
+      Height.v16,
+
+      svg(
+        ArticleTemplate.CLICK_CLOSE,
+
+        Cursor.hover.pointer,
+        Display.block,
+        Padding.v02,
+        Height.v12,
+        Width.v12,
+
+        xmlns("http://www.w3.org/2000/svg"),
+        width("16"),
+        height("16"),
+        fill("currentColor"),
+        viewBox("0 0 16 16"),
+        path(
+          d("M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z")
+        )
+      )
+    );
+
+    div(
+      AlignItems.center,
+      Display.flex,
+      JustifyContent.between,
+      MarginBottom.v01,
+      PaddingX.v03,
+      PaddingTop.v06,
+
+      div("Version " + version.name),
+
+      a(
+        BackgroundColor.gray400,
+        BackgroundColor.hover.gray500,
+        FontSize.xSmall,
+        PaddingX.v02,
+        PaddingY.v01,
+        Rounded.standard,
+        TextColor.white,
+
+        pathTo("/versions.html"), t("Change")
+      )
+    );
+
+    a(
+      BackgroundColor.hover.gray100,
+      Display.flex,
+      AlignItems.center,
+      JustifyContent.between,
+      MarginBottom.v04,
+      PaddingX.v03,
+      PaddingY.v01,
+
+      pathTo("/" + version.directory + "/api/index.html"),
+
+      span(
+        t("Javadocs")
+      ),
+
+      svg(
+        xmlns("http://www.w3.org/2000/svg"),
+        width("16"),
+        height("16"),
+        fill("currentColor"),
+        viewBox("0 0 16 16"),
+
+        path(fillRule("evenodd"),
+          d("M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z")),
+        path(fillRule("evenodd"),
+          d("M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"))
+      )
+    );
+
+    navigation = version.getNavigation(key);
+
+    ul(f(this::leftBar0));
+  }
+
+  private void leftBar0() {
+    for (var element : navigation.elements) {
+      leftBar1(element);
+    }
+  }
+
+  private void leftBar1(Element element) {
+    if (element instanceof Link link) {
+      li(
+        leftBarLink(link.iref(), null, noop())
+      );
+    } else if (element instanceof LinkList linkList) {
+      li(
+        leftBarLink(linkList.iref(), null, noop()),
+
+        f(() -> {
+          for (var child : linkList.elements()) {
+            leftBar2(child);
+          }
+        })
+      );
+    } else if (element instanceof LinkTitle linkTitle) {
+      li(
+        leftBarLink(linkTitle.iref(), linkTitle.title(), noop())
+      );
+    } else if (element instanceof Section section) {
+      li(
+        leftBarHeading2(section.name()),
+
+        f(() -> {
+          for (var child : section.elements()) {
+            leftBar1(child);
+          }
+        })
+      );
+    }
+  }
+
+  private void leftBar2(Element element) {
+    if (element instanceof Link link) {
+      li(
+        leftBarLink(link.iref(), null, PaddingLeft.v06)
+      );
+    } else {
+      throw new UnsupportedOperationException("Implement me");
+    }
+  }
+
+  private ElementName leftBarHeading2(String text) {
+    return h2(
+      FontWeight.semibold,
+      PaddingBottom.v01,
+      PaddingTop.v06,
+      PaddingX.v03,
+      TextColor.black,
+      TextTransform.uppercase,
+
+      t(text)
+    );
+  }
+
+  private ElementName leftBarLink(String iref, String text, AValue level) {
+    var href = version.leftBarLink(iref);
+
+    if (text == null) {
+      var record = injector.$record(href);
+
+      text = record.title().toc();
+    }
+
+    var selected = key.equals(href);
+
+    var bg = selected ? BackgroundColor.slate200 : BackgroundColor.hover.gray100;
+    var fc = selected ? TextColor.black : noop();
+
+    return a(
+      bg, fc, level,
+      PaddingX.v03,
+      PaddingY.v01,
+      Display.block,
+
+      pathTo(href), raw(text)
     );
   }
 

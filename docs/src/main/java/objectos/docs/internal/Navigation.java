@@ -45,13 +45,13 @@ public class Navigation {
     }
   }
 
-  private record Link(String iref) implements NavigationOption {}
+  record Link(String iref) implements NavigationOption {}
 
-  private record LinkTitle(String iref, String title) implements NavigationOption {}
+  record LinkTitle(String iref, String title) implements NavigationOption {}
 
-  private record LinkList(String iref, List<Element> elements) implements NavigationOption {}
+  record LinkList(String iref, List<Element> elements) implements NavigationOption {}
 
-  private record Section(String name, List<Element> elements) implements NavigationOption {}
+  record Section(String name, List<Element> elements) implements NavigationOption {}
 
   final String name;
 

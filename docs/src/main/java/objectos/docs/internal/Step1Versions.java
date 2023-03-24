@@ -15,21 +15,21 @@
  */
 package objectos.docs.internal;
 
-import static objectos.docs.internal.Version2.directory;
-import static objectos.docs.internal.Version2.link;
-import static objectos.docs.internal.Version2.name;
-import static objectos.docs.internal.Version2.navigation;
-import static objectos.docs.internal.Version2.releaseDate;
-import static objectos.docs.internal.Version2.section;
-import static objectos.docs.internal.Version2.status;
+import static objectos.docs.internal.Version.directory;
+import static objectos.docs.internal.Version.link;
+import static objectos.docs.internal.Version.name;
+import static objectos.docs.internal.Version.navigation;
+import static objectos.docs.internal.Version.releaseDate;
+import static objectos.docs.internal.Version.section;
+import static objectos.docs.internal.Version.status;
 
+import java.util.LinkedHashMap;
 import java.util.Map;
-import objectos.docs.internal.Version2.VersionOption;
-import objectos.util.GrowableMap;
+import objectos.docs.internal.Version.VersionOption;
 
 class Step1Versions extends Step0Config {
 
-  final Map<String, Version2> versions = new GrowableMap<>();
+  final Map<String, Version> versions = new LinkedHashMap<>();
 
   public final void executeVersions() {
     version(
@@ -199,12 +199,12 @@ class Step1Versions extends Step0Config {
       return;
     }
 
-    release20220516();
-    release20220613();
-    release20221010();
-    release20230303();
-    release20230310();
     release20230317();
+    release20230310();
+    release20230303();
+    release20221010();
+    release20220613();
+    release20220516();
   }
 
   private void release20220516() {
@@ -786,7 +786,7 @@ class Step1Versions extends Step0Config {
   }
 
   private void version(VersionOption... options) {
-    var version = Version2.create(options);
+    var version = Version.create(options);
 
     versions.put(version.directory, version);
   }

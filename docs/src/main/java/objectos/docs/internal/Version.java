@@ -16,42 +16,79 @@
 package objectos.docs.internal;
 
 import java.time.LocalDate;
-import objectos.util.UnmodifiableList;
+import objectos.docs.internal.Navigation.NavigationOption;
+import objectos.util.GrowableMap;
+import objectos.util.UnmodifiableMap;
 
-enum Version {
+public class Version {
 
-  V0_5_2(name("0.5.2"), slug("0.5.2"), directory("v000502"),
-      releaseDate(2023, 3, 24), Status.LATEST),
+  sealed interface VersionOption {
+    void accept(Builder builder);
+  }
 
-  V0_5_1(name("0.5.1"), slug("0.5.1"), directory("v000501"),
-      releaseDate(2023, 3, 17), Status.UNSUPPORTED),
+  private static class Builder {
 
-  V0_5_0(name("0.5.0"), slug("0.5.0"), directory("v000500"),
-      releaseDate(2023, 3, 10), Status.UNSUPPORTED),
+    String name;
 
-  V0_4_X(name("0.4.4"), slug("0.4"), directory("v0004"),
-      releaseDate(2023, 3, 3), Status.UNSUPPORTED),
+    String directory;
 
-  //  V0_4_1(name("0.4.1"), slug("0.4.1"), directory("v000401"),
-  //      releaseDate(2023, 2, 10), Status.UNSUPPORTED),
+    LocalDate releaseDate;
 
-  //  V0_4_0(name("0.4.0"), slug("0.4.0"), directory("v000400"),
-  //      releaseDate(2023, 2, 5), Status.UNSUPPORTED),
+    Status status;
 
-  V0_3_0(name("0.3.0"), slug("0.3"), directory("v0003"),
-      releaseDate(2022, 10, 10), Status.UNSUPPORTED),
+    GrowableMap<String, Navigation> navigationMap = new GrowableMap<>();
 
-  V0_2_0(name("0.2.0"), slug("0.2"), directory("v0002"),
-      releaseDate(2022, 6, 13), Status.UNSUPPORTED),
+    public final Version build() {
+      if (directory == null) {
+        directory = name;
+      }
 
-  V0_1_0(name("0.1.0"), slug("0.1"), directory("v0001"),
-      releaseDate(2022, 5, 16), Status.UNSUPPORTED);
+      return new Version(
+        name, directory, releaseDate, status,
+        navigationMap.toUnmodifiableMap()
+      );
+    }
 
-  static final UnmodifiableList<Version> VALUES = UnmodifiableList.copyOf(values());
+  }
+
+  private record NameOption(String value) implements VersionOption {
+    @Override
+    public void accept(Builder builder) {
+      builder.name = value;
+    }
+  }
+
+  private record ReleaseDateOption(LocalDate value) implements VersionOption {
+    @Override
+    public void accept(Builder builder) {
+      builder.releaseDate = value;
+    }
+  }
+
+  private record StatusOption(Status value) implements VersionOption {
+    @Override
+    public void accept(Builder builder) {
+      builder.status = value;
+    }
+  }
+
+  private record NavigationValue(Navigation value) implements VersionOption {
+    @Override
+    public void accept(Builder builder) {
+      var name = value.name;
+
+      builder.navigationMap.put(name, value);
+    }
+  }
+
+  private record DirectoryOption(String value) implements VersionOption {
+    @Override
+    public void accept(Builder builder) {
+      builder.directory = value;
+    }
+  }
 
   final String name;
-
-  final String slug;
 
   final String directory;
 
@@ -59,67 +96,101 @@ enum Version {
 
   final Status status;
 
-  private Version(String name,
-                  String slug,
-                  String directory,
-                  LocalDate releaseDate,
-                  Status status) {
+  final UnmodifiableMap<String, Navigation> navigationMap;
+
+  Version(String name,
+          String directory,
+          LocalDate releaseDate,
+          Status status,
+          UnmodifiableMap<String, Navigation> navigationMap) {
     this.name = name;
-    this.slug = slug;
     this.directory = directory;
     this.releaseDate = releaseDate;
     this.status = status;
+    this.navigationMap = navigationMap;
   }
 
-  public static Version parse(String key) {
-    return switch (key) {
-      case "v000502" -> V0_5_2;
-      case "v000501" -> V0_5_1;
-      case "v000500" -> V0_5_0;
-      case "v0004" -> V0_4_X;
-      case "v0003" -> V0_3_0;
-      case "v0002" -> V0_2_0;
-      case "v0001" -> V0_1_0;
-      default -> throw new UnsupportedOperationException("Implement me :: key=" + key);
-    };
-  }
+  public static Version create(VersionOption... options) {
+    var builder = new Builder();
 
-  public static Version parseCurrentKey(String key) {
-    var index = key.indexOf('/');
-
-    if (index > 0) {
-      var prefix = key.substring(0, index);
-
-      return parse(prefix);
-    } else {
-      return null;
+    for (var option : options) {
+      option.accept(builder);
     }
+
+    return builder.build();
   }
 
-  private static String directory(String s) { return s; }
-
-  private static String name(String s) { return s; }
-
-  private static LocalDate releaseDate(int year, int month, int day) {
-    return LocalDate.of(year, month, day);
+  public static VersionOption directory(String name) {
+    return new DirectoryOption(name);
   }
 
-  private static String slug(String s) { return s; }
-
-  final String key(String value) {
-    return directory + "/" + value;
+  public static NavigationOption link(String iref) {
+    return Navigation.link(iref);
   }
 
-  final String pathName(String key) {
-    var index = key.indexOf('/');
+  public static NavigationOption link(String iref, NavigationOption... options) {
+    return Navigation.link(iref, options);
+  }
 
-    if (index > 0) {
-      var path = key.substring(index, key.length());
+  public static NavigationOption link(String iref, String title) {
+    return Navigation.link(iref, title);
+  }
 
-      return "/" + slug + path + ".html";
-    } else {
-      return "/" + key + ".html";
+  public static VersionOption name(String string) {
+    return new NameOption(string);
+  }
+
+  public static VersionOption navigation(NavigationOption... options) {
+    return new NavigationValue(
+      Navigation.create("default", options)
+    );
+  }
+
+  public static VersionOption navigation(String name, NavigationOption... options) {
+    return new NavigationValue(
+      Navigation.create(name, options)
+    );
+  }
+
+  public static VersionOption releaseDate(int year, int month, int day) {
+    return new ReleaseDateOption(
+      LocalDate.of(year, month, day)
+    );
+  }
+
+  public static NavigationOption section(String name, NavigationOption... options) {
+    return Navigation.section(name, options);
+  }
+
+  public static VersionOption status(Status value) {
+    return new StatusOption(value);
+  }
+
+  public final Navigation getNavigation(String key) {
+    var navigation = navigationMap.get("default");
+
+    if (navigationMap.size() > 1) {
+      int offset = directory.length() + 2;
+
+      int slash = key.indexOf('/', offset);
+
+      if (slash > 0) {
+        var name = key.substring(offset, slash);
+
+        navigation = navigationMap.getOrDefault(name, navigation);
+      }
     }
+
+    return navigation;
+  }
+
+  public final String leftBarLink(String iref) {
+    return "/" + directory + iref + ".html";
+  }
+
+  @Override
+  public final String toString() {
+    return "Version[" + name + "]";
   }
 
   final String releaseDateString() {

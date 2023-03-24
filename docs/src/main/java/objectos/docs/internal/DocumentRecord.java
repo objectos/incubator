@@ -17,8 +17,8 @@ package objectos.docs.internal;
 
 import objectos.asciidoc.Document;
 
-record DocumentRecord(Document document,
-                      DocumentLocation location,
+record DocumentRecord(Version version,
+                      Document document,
                       DocumentTitle title) {
 
   public final String templateName() {

@@ -211,6 +211,16 @@ public abstract class SharedTemplate extends HtmlTemplate implements AsciiDoc.Pr
     valueList[valueListIndex++] = v2;
   }
 
+  protected void linkPathTo(String href) {
+    addValue0(
+      LINK_COLOR,
+      TextColor.hover.blue900,
+      TextDecoration.underline,
+
+      pathTo(href)
+    );
+  }
+
   protected void linkValues(String href) {
     addValue0(
       LINK_COLOR,

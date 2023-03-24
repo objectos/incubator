@@ -27,6 +27,10 @@ abstract class DocsTemplate extends SharedTemplate {
 
   private String rawStyle;
 
+  String key;
+
+  Version version;
+
   DocsTemplate(DocsInjector injector) { this.injector = injector; }
 
   @Override
@@ -37,7 +41,7 @@ abstract class DocsTemplate extends SharedTemplate {
         var href = injector.$elink(target);
 
         tagStart();
-        linkValues(href);
+        linkPathTo(href);
         attributes.render("1");
         tagEnd(StandardElementName.A);
       }
@@ -46,7 +50,7 @@ abstract class DocsTemplate extends SharedTemplate {
         var href = injector.$ilink(target);
 
         tagStart();
-        linkValues(href);
+        linkPathTo(href);
         attributes.render("1");
         tagEnd(StandardElementName.A);
       }

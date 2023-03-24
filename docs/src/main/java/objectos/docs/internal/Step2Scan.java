@@ -17,7 +17,6 @@ package objectos.docs.internal;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.stream.Stream;
@@ -57,33 +56,13 @@ abstract class Step2Scan extends Step1Versions {
   private void scan() throws IOException {
     rethrow = null;
 
-    try (DirectoryStream<Path> entries = Files.newDirectoryStream(source)) {
-      for (var entry : entries) {
-        if (Files.isDirectory(entry)) {
-          scanDirectory(entry);
-        } else {
-          scanFile(entry);
-        }
-      }
+    try (Stream<Path> walk = Files.walk(source)) {
+      walk.filter(Files::isRegularFile)
+          .forEach(this::scanFileUnchecked);
     }
 
     if (rethrow != null) {
       throw rethrow;
-    }
-  }
-
-  private void scanDirectory(Path directory) {
-    try (Stream<Path> walk = Files.walk(directory)) {
-      walk.filter(Files::isRegularFile)
-          .forEach(file -> {
-            try {
-              scanFile(file);
-            } catch (IOException e) {
-              catchIO(e);
-            }
-          });
-    } catch (IOException e) {
-      catchIO(e);
     }
   }
 
@@ -94,23 +73,21 @@ abstract class Step2Scan extends Step1Versions {
 
     var extension = fileName.substring(lastDot);
 
-    switch (extension) {
-      case ".adoc" -> scanFileAsciiDoc(file);
-
-      default -> throw new UnsupportedOperationException("Implement me :: extension=" + extension);
+    if (!extension.equals(".adoc")) {
+      throw new UnsupportedOperationException(
+        "Implement me :: extension=" + extension
+      );
     }
-  }
 
-  private String _key(Path file, int fileExtLength) {
-    var path = source.relativize(file);
-
-    var key = path.toString();
-
-    return key.substring(0, key.length() - fileExtLength);
+    scanFileAsciiDoc(file);
   }
 
   private void scanFileAsciiDoc(Path file) throws IOException {
-    var key = _key(file, 5);
+    var relativePath = source.relativize(file);
+
+    var version = relativePathToVersion(relativePath);
+
+    var key = relativePathToKey(relativePath);
 
     var source = Files.readString(file, StandardCharsets.UTF_8);
 
@@ -118,13 +95,39 @@ abstract class Step2Scan extends Step1Versions {
 
     document.process(documentTitleProcessor);
 
-    var documentLocation = DocumentLocation.of(baseHref, key);
-
     var documentTitle = documentTitleProcessor.create();
 
-    var value = new DocumentRecord(document, documentLocation, documentTitle);
+    var value = new DocumentRecord(version, document, documentTitle);
 
     documents.put(key, value);
+  }
+
+  private String relativePathToKey(Path relativePath) {
+    var key = relativePath.toString();
+
+    return "/" + key.substring(0, key.length() - 5) + ".html";
+  }
+
+  private Version relativePathToVersion(Path relativePath) {
+    int nameCount = relativePath.getNameCount();
+
+    if (nameCount > 1) {
+      var versionPath = relativePath.getName(0);
+
+      var versionName = versionPath.toString();
+
+      return versions.get(versionName);
+    } else {
+      return null;
+    }
+  }
+
+  private void scanFileUnchecked(Path file) {
+    try {
+      scanFile(file);
+    } catch (IOException e) {
+      catchIO(e);
+    }
   }
 
 }

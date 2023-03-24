@@ -27,17 +27,11 @@ public abstract class DocsInjector {
 
   abstract String $elink(String target);
 
-  abstract String $href();
-
-  abstract String $href(String key);
-
   abstract String $ilink(String target);
 
   abstract boolean $isCurrentKey(String key);
 
   abstract boolean $isNext();
-
-  abstract HtmlTemplate $leftBar();
 
   abstract String $pathName();
 
@@ -48,5 +42,7 @@ public abstract class DocsInjector {
   abstract TopBar $topBar();
 
   abstract Version $version();
+
+  abstract Iterable<Version> $versions();
 
 }
