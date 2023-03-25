@@ -17,40 +17,40 @@ package objectos.shared;
 
 import java.util.Set;
 import java.util.function.Predicate;
-import objectos.html.HtmlTemplate.Visitor;
-import objectos.html.tmpl.AttributeName;
+import objectos.html.pseudom.DocumentProcessor;
+import objectos.html.pseudom.HtmlAttribute;
+import objectos.html.pseudom.HtmlDocument;
+import objectos.html.pseudom.HtmlElement;
 import objectos.html.tmpl.StandardAttributeName;
-import objectos.html.tmpl.StandardElementName;
 import objectos.util.GrowableSet;
 
-public final class StyleClassSet implements Predicate<String>, Visitor {
-
-  private boolean collect;
+public final class StyleClassSet implements DocumentProcessor, Predicate<String> {
 
   private final Set<String> names = new GrowableSet<>();
 
   @Override
-  public final void attribute(AttributeName name) {
-    if (name == StandardAttributeName.CLASS) {
-      collect = true;
+  public final void process(HtmlDocument document) {
+    names.clear();
+
+    for (var node : document.nodes()) {
+      if (node instanceof HtmlElement element) {
+        processElement(element);
+      }
     }
   }
 
-  @Override
-  public final void attributeFirstValue(String value) {
-    if (collect) {
+  private void processElement(HtmlElement element) {
+    for (var attribute : element.attributes()) {
+      if (attribute.hasName(StandardAttributeName.CLASS)) {
+        processClassAttribute(attribute);
+      }
+    }
+  }
+
+  private void processClassAttribute(HtmlAttribute attribute) {
+    for (var value : attribute.values()) {
       names.add(value);
     }
-  }
-
-  @Override
-  public final void attributeNextValue(String value) {
-    attributeFirstValue(value);
-  }
-
-  @Override
-  public final void attributeValueEnd() {
-    collect = false;
   }
 
   public final void clear() {
@@ -58,36 +58,8 @@ public final class StyleClassSet implements Predicate<String>, Visitor {
   }
 
   @Override
-  public final void doctype() {}
-
-  @Override
-  public final void documentEnd() {}
-
-  @Override
-  public final void documentStart() {
-    collect = false;
-
-    names.clear();
-  }
-
-  @Override
-  public final void endTag(StandardElementName name) {}
-
-  @Override
-  public final void raw(String value) {}
-
-  @Override
-  public final void startTag(StandardElementName name) {}
-
-  @Override
-  public final void startTagEnd(StandardElementName name) {}
-
-  @Override
   public final boolean test(String t) {
     return names.contains(t);
   }
-
-  @Override
-  public final void text(String value) {}
 
 }

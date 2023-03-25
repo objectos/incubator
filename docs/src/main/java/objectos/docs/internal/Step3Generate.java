@@ -87,7 +87,7 @@ public class Step3Generate extends Step2Scan {
 
       template.rawStyle(null);
 
-      htmlSink.toVisitor(template, styleClassSet);
+      htmlSink.toProcessor(template, styleClassSet);
 
       styleSheetWriter.filterClassSelectorsByName(styleClassSet);
 
