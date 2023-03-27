@@ -21,6 +21,7 @@ import objectos.html.pseudom.DocumentProcessor;
 import objectos.html.pseudom.HtmlAttribute;
 import objectos.html.pseudom.HtmlDocument;
 import objectos.html.pseudom.HtmlElement;
+import objectos.html.pseudom.HtmlNode;
 import objectos.html.tmpl.StandardAttributeName;
 import objectos.util.GrowableSet;
 
@@ -28,14 +29,27 @@ public final class StyleClassSet implements DocumentProcessor, Predicate<String>
 
   private final Set<String> names = new GrowableSet<>();
 
+  public final void clear() {
+    names.clear();
+  }
+
   @Override
   public final void process(HtmlDocument document) {
     names.clear();
 
     for (var node : document.nodes()) {
-      if (node instanceof HtmlElement element) {
-        processElement(element);
-      }
+      processNode(node);
+    }
+  }
+
+  @Override
+  public final boolean test(String t) {
+    return names.contains(t);
+  }
+
+  private void processClassAttribute(HtmlAttribute attribute) {
+    for (var value : attribute.values()) {
+      names.add(value);
     }
   }
 
@@ -45,21 +59,16 @@ public final class StyleClassSet implements DocumentProcessor, Predicate<String>
         processClassAttribute(attribute);
       }
     }
-  }
 
-  private void processClassAttribute(HtmlAttribute attribute) {
-    for (var value : attribute.values()) {
-      names.add(value);
+    for (var node : element.nodes()) {
+      processNode(node);
     }
   }
 
-  public final void clear() {
-    names.clear();
-  }
-
-  @Override
-  public final boolean test(String t) {
-    return names.contains(t);
+  private void processNode(HtmlNode node) {
+    if (node instanceof HtmlElement element) {
+      processElement(element);
+    }
   }
 
 }
