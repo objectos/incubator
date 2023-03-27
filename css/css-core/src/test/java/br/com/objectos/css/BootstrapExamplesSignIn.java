@@ -37,7 +37,7 @@ class BootstrapExamplesSignIn extends HtmlTemplate {
   }
 
   private void bodyFrag() {
-    body(_class("text-center"),
+    body(className("text-center"),
       _form
     );
   }

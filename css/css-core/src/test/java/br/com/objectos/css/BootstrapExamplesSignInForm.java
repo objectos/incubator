@@ -25,46 +25,46 @@ class BootstrapExamplesSignInForm extends HtmlTemplate {
   @Override
   protected final void definition() {
     form(className,
-      img(_class("mb-4"),
+      img(className("mb-4"),
         src("https://getbootstrap.com/docs/4.3/assets/brand/bootstrap-solid.svg"),
         alt(""),
         width("72"), height("72")),
-      h1(_class("h3 mb-3 font-weight-normal"),
+      h1(className("h3 mb-3 font-weight-normal"),
         t("Please sign in")
       ),
-      label(forAttr("inputEmail"), _class("sr-only"),
+      label(forAttr("inputEmail"), className("sr-only"),
         t("Email address")
       ),
       input(
         type("email"),
         id("inputEmail"),
-        _class("form-control"),
+        className("form-control"),
         placeholder("Email address"),
         required(),
         autofocus()
       ),
       label(
         forAttr("inputPassword"),
-        _class("sr-only"),
+        className("sr-only"),
         t("Password")
       ),
       input(
         type("password"),
         id("inputPassword"),
-        _class("form-control"),
+        className("form-control"),
         placeholder("Password"),
         required()
       ),
-      div(_class("checkbox mb-3"),
+      div(className("checkbox mb-3"),
         label(
           input(type("checkbox"), value("remember-me")),
           t(" Remember me")
         )
       ),
-      button(_class("btn btn-lg btn-primary btn-block"), type("submit"),
+      button(className("btn btn-lg btn-primary btn-block"), type("submit"),
         t("Sign in")
       ),
-      p(_class("mt-5 mb-3 text-muted"),
+      p(className("mt-5 mb-3 text-muted"),
         t("&copy; 2017-2019")
       )
     );
