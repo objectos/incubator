@@ -15,7 +15,7 @@
  */
 package br.com.objectos.www.objectos;
 
-import objectos.html.tmpl.UlValue;
+import objectos.html.tmpl.UnorderedListValue;
 import objectos.lang.Check;
 import objectos.ssg.SiteFragment;
 import objectos.util.UnmodifiableList;
@@ -37,9 +37,9 @@ public class Navbar extends SiteFragment {
     this.pages = Check.notNull(pages, "pages == null");
   }
 
-  private UlValue[] items() {
-    UlValue[] lis;
-    lis = new UlValue[pages.size()];
+  private UnorderedListValue[] items() {
+    UnorderedListValue[] lis;
+    lis = new UnorderedListValue[pages.size()];
 
     for (int i = 0; i < lis.length; i++) {
       NavbarPage page;

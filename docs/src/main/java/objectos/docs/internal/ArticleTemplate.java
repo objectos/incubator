@@ -67,7 +67,7 @@ import objectos.docs.internal.Navigation.Link;
 import objectos.docs.internal.Navigation.LinkList;
 import objectos.docs.internal.Navigation.LinkTitle;
 import objectos.docs.internal.Navigation.Section;
-import objectos.html.tmpl.AValue;
+import objectos.html.tmpl.AnchorValue;
 import objectos.html.tmpl.ElementName;
 import objectos.html.tmpl.StandardElementName;
 import objectos.shared.DefaultRenderer;
@@ -689,7 +689,7 @@ public final class ArticleTemplate extends DocsTemplate implements LanguageRende
     );
   }
 
-  private ElementName leftBarLink(String iref, String text, AValue level) {
+  private ElementName leftBarLink(String iref, String text, AnchorValue level) {
     var href = version.leftBarLink(iref);
 
     if (text == null) {

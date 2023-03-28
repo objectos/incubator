@@ -16,7 +16,7 @@
 package objectos.ssg;
 
 import java.util.List;
-import objectos.html.tmpl.UlValue;
+import objectos.html.tmpl.UnorderedListValue;
 import objectos.util.GrowableList;
 
 /**
@@ -88,8 +88,8 @@ final class TestCase07 extends Site {
       int size;
       size = items.size();
 
-      UlValue[] li;
-      li = new UlValue[size];
+      UnorderedListValue[] li;
+      li = new UnorderedListValue[size];
 
       for (int i = 0; i < size; i++) {
         String item;
