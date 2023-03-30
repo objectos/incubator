@@ -1,0 +1,223 @@
+= Method type parameters
+
+Use the `typeParameter` instruction to include type parameters to your method declaration.
+
+The following Objectos Code:
+
+[,java]
+----
+import java.io.Closeable;
+import java.io.Serializable;
+import objectos.code.ClassTypeName;
+import objectos.code.JavaTemplate;
+
+public class MethodTypeParam01 extends JavaTemplate {
+  static final ClassTypeName CLOSEABLE
+      = ClassTypeName.of(Closeable.class);
+
+  static final ClassTypeName SERIALIZABLE
+      = ClassTypeName.of(Serializable.class);
+
+  @Override
+  protected final void definition() {
+    autoImports();
+
+    classDeclaration(
+      name("TypeParameters"),
+
+      method(
+        ABSTRACT,
+        typeParameter("E"),
+        name("single")
+      ),
+
+      method(
+        ABSTRACT,
+        typeParameter("T1"), typeParameter("T2"),
+        name("multiple")
+      ),
+
+      method(
+        ABSTRACT,
+        typeParameter("X", CLOSEABLE, SERIALIZABLE),
+        name("bounds")
+      )
+    );
+  }
+}
+----
+
+Generates:
+
+[,java]
+----
+import java.io.Closeable;
+import java.io.Serializable;
+
+class TypeParameters {
+  abstract <E> void single();
+
+  abstract <T1, T2> void multiple();
+
+  abstract <X extends Closeable & Serializable> void bounds();
+}
+----
+
+== The type parameter name
+
+As a minimum you must specify the type parameter name.
+
+The following Objectos Code:
+
+[,java]
+----
+import objectos.code.JavaTemplate;
+
+public class MethodTypeParam02 extends JavaTemplate {
+  @Override
+  protected final void definition() {
+    classDeclaration(
+      name("TypeParameterName"),
+
+      method(
+        ABSTRACT,
+        typeParameter("NAME"),
+        INT, name("single")
+      )
+    );
+  }
+}
+----
+
+Generates:
+
+[,java]
+----
+class TypeParameterName {
+  abstract <NAME> int single();
+}
+----
+
+== Bounded type parameter
+
+Use a `TypeName` object to include the bound of a type parameter.
+
+The following Objectos Code:
+
+[,java]
+----
+import java.util.Iterator;
+import objectos.code.ClassTypeName;
+import objectos.code.JavaTemplate;
+import objectos.code.ParameterizedTypeName;
+import objectos.code.TypeVariableName;
+
+public class MethodTypeParam03 extends JavaTemplate {
+  static final ClassTypeName CHARSEQ
+      = ClassTypeName.of(CharSequence.class);
+
+  static final ClassTypeName ITERATOR
+      = ClassTypeName.of(Iterator.class);
+
+  static final TypeVariableName E
+      = TypeVariableName.of("E");
+
+  static final ParameterizedTypeName ITERATOR_E
+      = ParameterizedTypeName.of(ITERATOR, E);
+
+  @Override
+  protected final void definition() {
+    autoImports();
+
+    classDeclaration(
+      name("TypeParameterBounds"),
+
+      method(
+        ABSTRACT,
+        typeParameter("E", CHARSEQ),
+        name("ex01")
+      ),
+
+      method(
+        ABSTRACT,
+        typeParameter("ITER", ITERATOR_E),
+        typeParameter("E"),
+        name("ex02")
+      ),
+
+      method(
+        ABSTRACT,
+        typeParameter("T", E),
+        typeParameter("E"),
+        name("ex03")
+      )
+    );
+  }
+}
+----
+
+Generates:
+
+[,java]
+----
+import java.util.Iterator;
+
+class TypeParameterBounds {
+  abstract <E extends CharSequence> void ex01();
+
+  abstract <ITER extends Iterator<E>, E> void ex02();
+
+  abstract <T extends E, E> void ex03();
+}
+----
+
+Note how the `extends` keyword is automatically added.
+
+== Type parameter with multiple bounds
+
+Use multiple `TypeName` objects to add multiple bounds to the same type parameter.
+
+The following Objectos Code:
+
+[,java]
+----
+import objectos.code.ClassTypeName;
+import objectos.code.JavaTemplate;
+
+public class MethodTypeParam04 extends JavaTemplate {
+  static final ClassTypeName A
+      = ClassTypeName.of("com.example", "IfaceA");
+  static final ClassTypeName B
+      = ClassTypeName.of("com.example", "IfaceB");
+  static final ClassTypeName C
+      = ClassTypeName.of("com.example", "IfaceC");
+
+  @Override
+  protected final void definition() {
+    autoImports();
+
+    classDeclaration(
+      name("MultipleBounds"),
+
+      method(
+        ABSTRACT,
+        typeParameter("T", A, B, C),
+        name("multipleBounds")
+      )
+    );
+  }
+}
+----
+
+Generates:
+
+[,java]
+----
+import com.example.IfaceA;
+import com.example.IfaceB;
+import com.example.IfaceC;
+
+class MultipleBounds {
+  abstract <T extends IfaceA & IfaceB & IfaceC> void multipleBounds();
+}
+----

@@ -1,0 +1,3 @@
+= Method throws
+
+Declaring thrown exceptions is not implemented yet.
