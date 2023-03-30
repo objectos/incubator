@@ -1,0 +1,185 @@
+= Class annotations
+
+Use the `annotation` instruction to include _annotations_ to your class declaration.
+
+The following Objectos Code:
+
+[,java]
+----
+import objectos.code.ClassTypeName;
+import objectos.code.JavaTemplate;
+
+public class ClassAnnotations01 extends JavaTemplate {
+  static final ClassTypeName MY_ANNO
+      = ClassTypeName.of("com.example.annotations", "MyAnnotation");
+
+  @Override
+  protected final void definition() {
+    autoImports();
+
+    classDeclaration(
+      annotation(MY_ANNO),
+      name("ClassAnnotations")
+    );
+  }
+}
+----
+
+Generates:
+
+[,java]
+----
+import com.example.annotations.MyAnnotation;
+
+@MyAnnotation
+class ClassAnnotations {}
+----
+
+== Multiple annotations
+
+Use multiple `annotation` instructions to add multiple annotations to your class declaration. 
+
+The following Objectos Code:
+
+[,java]
+----
+import objectos.code.ClassTypeName;
+import objectos.code.JavaTemplate;
+
+public class ClassAnnotations02 extends JavaTemplate {
+  static final ClassTypeName ANNO_A
+      = ClassTypeName.of("com.example.annotations", "AnnotationA");
+  static final ClassTypeName ANNO_B
+      = ClassTypeName.of("com.example.annotations", "AnnotationB");
+  static final ClassTypeName ANNO_C
+      = ClassTypeName.of("com.example.annotations", "AnnotationC");
+
+  @Override
+  protected final void definition() {
+    autoImports();
+
+    classDeclaration(
+      annotation(ANNO_A),
+      annotation(ANNO_B),
+      annotation(ANNO_C),
+      name("ClassAnnotations")
+    );
+  }
+}
+----
+
+Generates the following Java class declaration:
+
+[,java]
+----
+import com.example.annotations.AnnotationA;
+import com.example.annotations.AnnotationB;
+import com.example.annotations.AnnotationC;
+
+@AnnotationA
+@AnnotationB
+@AnnotationC
+class ClassAnnotations {}
+----
+
+== Including annotations programatically
+
+Use the `include` instruction if you need to generate a different set of annotations based on a condition.
+
+In the following Objectos Code:
+
+[,java]
+----
+import java.util.concurrent.ThreadLocalRandom;
+import objectos.code.ClassTypeName;
+import objectos.code.JavaTemplate;
+
+public class ClassAnnotations03 extends JavaTemplate {
+  static final ClassTypeName ANNO_A
+      = ClassTypeName.of("com.example.annotations", "AnnotationA");
+  static final ClassTypeName ANNO_B
+      = ClassTypeName.of("com.example.annotations", "AnnotationB");
+  static final ClassTypeName ANNO_C
+      = ClassTypeName.of("com.example.annotations", "AnnotationC");
+
+  @Override
+  protected final void definition() {
+    autoImports();
+
+    classDeclaration(
+      include(this::annotations),
+      name("ClassAnnotations")
+    );
+  }
+
+  private void annotations() {
+    annotation(ANNO_A);
+
+    if (shouldHaveAnnoB()) {
+      annotation(ANNO_B);
+    }
+
+    annotation(ANNO_C);
+  }
+
+  private boolean shouldHaveAnnoB() {
+    return ThreadLocalRandom.current().nextBoolean();
+  }
+}
+----
+
+Notice the `include` instruction in the `classDeclaration` instruction:
+
+[,java]
+----
+classDeclaration(
+  include(this::annotations),
+  name("ClassAnnotations")
+);
+----
+
+The annotations are defined in the private `annotations` method:
+
+[,java]
+----
+private void annotations() {
+  annotation(ANNO_A);
+
+  if (shouldHaveAnnoB()) {
+    annotation(ANNO_B);
+  }
+
+  annotation(ANNO_C);
+}
+----
+
+So, depending on the value returned by the `shouldHaveAnnoB` method, the following are generated:
+
+[,java]
+----
+// shouldHaveAnnoB() returns true
+import com.example.annotations.AnnotationA;
+import com.example.annotations.AnnotationB;
+import com.example.annotations.AnnotationC;
+
+@AnnotationA
+@AnnotationB
+@AnnotationC
+class ClassAnnotations {}
+
+// shouldHaveAnnoB() returns false
+import com.example.annotations.AnnotationA;
+import com.example.annotations.AnnotationC;
+
+@AnnotationA
+@AnnotationC
+class ClassAnnotations {}
+----
+
+== Type annotations
+
+Annotating the type use are not supported at the moment.
+In the other words, Objectos Code does not support annotating:
+
+* the direct superclass; nor
+* the direct superinterfaces.
