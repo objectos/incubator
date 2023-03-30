@@ -13,30 +13,34 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package objectos.docs.code.declaration;
+package objectos.docs.code.class_;
 
+import java.util.List;
 import objectos.code.ClassTypeName;
 import objectos.code.JavaTemplate;
 
-public class ClassDeclarationName02 extends JavaTemplate {
-  static final ClassTypeName EXAMPLE
-      = ClassTypeName.of("com.example.docs", "Example");
-
-  static final ClassTypeName INNER
-      = ClassTypeName.of("com.example.nested", "Outer", "Inner");
+public class ClassDeclarationImplements06 extends JavaTemplate {
+  final List<String> simpleNames = List.of("A", "B", "C");
 
   public static void main(String[] args) {
-    System.out.println(new ClassDeclarationName02());
+    System.out.println(new ClassDeclarationImplements06());
   }
 
   @Override
   protected final void definition() {
-    classDeclaration(
-      name(EXAMPLE)
-    );
+    autoImports();
 
     classDeclaration(
-      name(INNER)
+      name("Programmatically"),
+      include(this::superinterfaces)
     );
+  }
+
+  private void superinterfaces() {
+    for (var simpleName : simpleNames) {
+      implementsClause(
+        ClassTypeName.of("com.example", simpleName)
+      );
+    }
   }
 }

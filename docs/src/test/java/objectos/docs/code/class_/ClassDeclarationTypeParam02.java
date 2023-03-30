@@ -13,35 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package objectos.docs.code.declaration;
+package objectos.docs.code.class_;
 
 import objectos.code.JavaTemplate;
 
-public class ClassDeclarationTypeParam05 extends JavaTemplate {
+public class ClassDeclarationTypeParam02 extends JavaTemplate {
   public static void main(String[] args) {
-    var tmpl = new ClassDeclarationTypeParam05();
-
-    tmpl.count = 3;
-
-    System.out.println(tmpl);
-
-    tmpl.count = 5;
-
-    System.out.println(tmpl);
+    System.out.println(new ClassDeclarationTypeParam02());
   }
-
-  int count = 1;
 
   @Override
   protected final void definition() {
     classDeclaration(
-      name("Generic"), include(this::typeParameters)
+      name("Generic"),
+      typeParameter("E1"),
+      typeParameter("E2"),
+      typeParameter("E3")
     );
-  }
-
-  private void typeParameters() {
-    for (int i = 1; i <= count; i++) {
-      typeParameter("E" + i);
-    }
   }
 }

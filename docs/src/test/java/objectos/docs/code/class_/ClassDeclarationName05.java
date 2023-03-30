@@ -13,32 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package objectos.docs.code.declaration;
+package objectos.docs.code.class_;
 
-import java.util.AbstractList;
-import objectos.code.ClassTypeName;
 import objectos.code.JavaTemplate;
-import objectos.code.ParameterizedTypeName;
-import objectos.code.TypeVariableName;
 
-public class ClassDeclarationExtends02 extends JavaTemplate {
-  static final ParameterizedTypeName ABSTRACT_LIST = ParameterizedTypeName.of(
-    ClassTypeName.of(AbstractList.class),
-    TypeVariableName.of("E")
-  );
-
+public class ClassDeclarationName05 extends JavaTemplate {
   public static void main(String[] args) {
-    System.out.println(new ClassDeclarationExtends02());
+    System.out.println(new ClassDeclarationName05());
   }
 
   @Override
   protected final void definition() {
-    autoImports();
-
-    classDeclaration(
-      name("MyList"),
-      typeParameter("E"),
-      extendsClause(ABSTRACT_LIST)
-    );
+    classDeclaration();
   }
 }

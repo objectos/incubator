@@ -13,19 +13,35 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package objectos.docs.code.declaration;
+package objectos.docs.code.class_;
 
+import java.util.Map;
+import objectos.code.ClassTypeName;
 import objectos.code.JavaTemplate;
+import objectos.code.ParameterizedTypeName;
+import objectos.code.TypeVariableName;
 
-public class ClassDeclarationMods02 extends JavaTemplate {
+public class ClassDeclarationImplements05 extends JavaTemplate {
+  static final ParameterizedTypeName MAP_K_V
+      = ParameterizedTypeName.of(
+        ClassTypeName.of(Map.class),
+        TypeVariableName.of("K"),
+        TypeVariableName.of("V")
+      );
+
   public static void main(String[] args) {
-    System.out.println(new ClassDeclarationMods02());
+    System.out.println(new ClassDeclarationImplements05());
   }
 
   @Override
   protected final void definition() {
+    autoImports();
+
     classDeclaration(
-      PUBLIC, PUBLIC, FINAL, FINAL, name("Duplicates")
+      name("MyMap"),
+      typeParameter("K"),
+      typeParameter("V"),
+      implementsClause(MAP_K_V)
     );
   }
 }

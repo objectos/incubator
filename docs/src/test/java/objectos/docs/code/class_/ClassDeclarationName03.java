@@ -13,23 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package objectos.docs.code.declaration;
+package objectos.docs.code.class_;
 
 import objectos.code.JavaTemplate;
 
-public class ClassDeclarationMods01 extends JavaTemplate {
+public class ClassDeclarationName03 extends JavaTemplate {
   public static void main(String[] args) {
-    System.out.println(new ClassDeclarationMods01());
+    System.out.println(new ClassDeclarationName03());
   }
 
   @Override
   protected final void definition() {
+    // invalid name: throws IllegalArgumentException
     classDeclaration(
-      PUBLIC, ABSTRACT, name("Modifiers"),
-
-      classDeclaration(
-        PRIVATE, STATIC, name("StaticInner")
-      )
+      name("My-Class")
     );
   }
 }

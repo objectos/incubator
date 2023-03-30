@@ -13,26 +13,35 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package objectos.docs.code.declaration;
+package objectos.docs.code.class_;
 
-import java.io.InputStream;
-import objectos.code.ClassTypeName;
 import objectos.code.JavaTemplate;
 
-public class ClassDeclarationExtends01 extends JavaTemplate {
-  static final ClassTypeName INPUT_STREAM
-      = ClassTypeName.of(InputStream.class);
-
+public class ClassDeclarationTypeParam05 extends JavaTemplate {
   public static void main(String[] args) {
-    System.out.println(new ClassDeclarationExtends01());
+    var tmpl = new ClassDeclarationTypeParam05();
+
+    tmpl.count = 3;
+
+    System.out.println(tmpl);
+
+    tmpl.count = 5;
+
+    System.out.println(tmpl);
   }
+
+  int count = 1;
 
   @Override
   protected final void definition() {
-    autoImports();
-
     classDeclaration(
-      name("MyInputStream"), extendsClause(INPUT_STREAM)
+      name("Generic"), include(this::typeParameters)
     );
+  }
+
+  private void typeParameters() {
+    for (int i = 1; i <= count; i++) {
+      typeParameter("E" + i);
+    }
   }
 }

@@ -13,32 +13,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package objectos.docs.code.declaration;
+package objectos.docs.code.class_;
 
-import java.util.concurrent.ThreadLocalRandom;
+import objectos.code.ClassTypeName;
 import objectos.code.JavaTemplate;
+import objectos.code.ParameterizedTypeName;
+import objectos.code.TypeVariableName;
 
-public class ClassDeclarationMods03 extends JavaTemplate {
+public class ClassDeclarationTypeParam03 extends JavaTemplate {
   public static void main(String[] args) {
-    System.out.println(new ClassDeclarationMods03());
+    System.out.println(new ClassDeclarationTypeParam03());
   }
+
+  static final ParameterizedTypeName ITER_E = ParameterizedTypeName.of(
+    ClassTypeName.of(Iterable.class),
+    TypeVariableName.of("E")
+  );
 
   @Override
   protected final void definition() {
+    autoImports();
+
     classDeclaration(
-      include(this::modifiers), name("Condition")
+      name("Generic"),
+      typeParameter("E"),
+      typeParameter("ITER", ITER_E)
     );
-  }
-
-  private void modifiers() {
-    if (shouldBeAbstract()) {
-      code(PUBLIC, ABSTRACT);
-    } else {
-      code(PUBLIC);
-    }
-  }
-
-  private boolean shouldBeAbstract() {
-    return ThreadLocalRandom.current().nextBoolean();
   }
 }

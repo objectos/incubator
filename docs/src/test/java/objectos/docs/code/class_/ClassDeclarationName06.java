@@ -13,22 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package objectos.docs.code.declaration;
+package objectos.docs.code.class_;
 
 import objectos.code.JavaTemplate;
 
-public class ClassDeclarationTypeParam02 extends JavaTemplate {
+public class ClassDeclarationName06 extends JavaTemplate {
   public static void main(String[] args) {
-    System.out.println(new ClassDeclarationTypeParam02());
+    System.out.println(new ClassDeclarationName06());
   }
 
   @Override
   protected final void definition() {
     classDeclaration(
-      name("Generic"),
-      typeParameter("E1"),
-      typeParameter("E2"),
-      typeParameter("E3")
+      name("First"),
+      name("Second"),
+      name("Third")
     );
   }
 }

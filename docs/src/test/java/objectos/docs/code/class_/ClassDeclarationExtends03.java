@@ -13,21 +13,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package objectos.docs.code.declaration;
+package objectos.docs.code.class_;
 
+import objectos.code.ClassTypeName;
 import objectos.code.JavaTemplate;
 
-public class ClassDeclarationName06 extends JavaTemplate {
+public class ClassDeclarationExtends03 extends JavaTemplate {
+  static final ClassTypeName A = ClassTypeName.of("com.example", "A");
+  static final ClassTypeName B = ClassTypeName.of("com.example", "B");
+  static final ClassTypeName C = ClassTypeName.of("com.example", "C");
+
   public static void main(String[] args) {
-    System.out.println(new ClassDeclarationName06());
+    System.out.println(new ClassDeclarationExtends03());
   }
 
   @Override
   protected final void definition() {
+    autoImports();
+
     classDeclaration(
-      name("First"),
-      name("Second"),
-      name("Third")
+      name("Multiple"),
+      extendsClause(A),
+      extendsClause(B),
+      extendsClause(C)
     );
   }
 }

@@ -13,26 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package objectos.docs.code.declaration;
+package objectos.docs.code.class_;
 
-import objectos.code.ClassTypeName;
 import objectos.code.JavaTemplate;
 
-public class ClassDeclarationImplements01 extends JavaTemplate {
-  static final ClassTypeName AUTO_CLOSEABLE
-      = ClassTypeName.of(AutoCloseable.class);
-
+public class ClassDeclarationName01 extends JavaTemplate {
   public static void main(String[] args) {
-    System.out.println(new ClassDeclarationImplements01());
+    System.out.println(new ClassDeclarationName01());
   }
 
   @Override
   protected final void definition() {
-    autoImports();
+    classDeclaration(
+      name("MyClass")
+    );
 
     classDeclaration(
-      name("Implements"),
-      implementsClause(AUTO_CLOSEABLE)
+      name("AnotherClass")
     );
   }
 }

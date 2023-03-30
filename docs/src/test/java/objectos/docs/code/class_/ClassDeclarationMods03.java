@@ -13,29 +13,32 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package objectos.docs.code.declaration;
+package objectos.docs.code.class_;
 
-import objectos.code.ClassTypeName;
+import java.util.concurrent.ThreadLocalRandom;
 import objectos.code.JavaTemplate;
 
-public class ClassDeclarationExtends03 extends JavaTemplate {
-  static final ClassTypeName A = ClassTypeName.of("com.example", "A");
-  static final ClassTypeName B = ClassTypeName.of("com.example", "B");
-  static final ClassTypeName C = ClassTypeName.of("com.example", "C");
-
+public class ClassDeclarationMods03 extends JavaTemplate {
   public static void main(String[] args) {
-    System.out.println(new ClassDeclarationExtends03());
+    System.out.println(new ClassDeclarationMods03());
   }
 
   @Override
   protected final void definition() {
-    autoImports();
-
     classDeclaration(
-      name("Multiple"),
-      extendsClause(A),
-      extendsClause(B),
-      extendsClause(C)
+      include(this::modifiers), name("Condition")
     );
+  }
+
+  private void modifiers() {
+    if (shouldBeAbstract()) {
+      code(PUBLIC, ABSTRACT);
+    } else {
+      code(PUBLIC);
+    }
+  }
+
+  private boolean shouldBeAbstract() {
+    return ThreadLocalRandom.current().nextBoolean();
   }
 }

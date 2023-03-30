@@ -152,6 +152,59 @@ import com.example.B;
 class Implements implements A, A, B, B {}
 ----
 
+== Multiple superinterfaces: new lines
+
+At times the generated class might implement a large number of interfaces.
+In cases like this, it might be useful to separate the superinterfaces using new lines.
+
+Use the `NL` constant to add new line before or after each declared superinterface.
+
+The following Objectos Code:
+
+[,java]
+----
+import objectos.code.ClassTypeName;
+import objectos.code.JavaTemplate;
+
+public class ClassDeclarationImplements07 extends JavaTemplate {
+  static final ClassTypeName IFACE_A
+      = ClassTypeName.of("com.example", "InterfaceA");
+  static final ClassTypeName IFACE_B
+      = ClassTypeName.of("com.example", "InterfaceB");
+  static final ClassTypeName IFACE_C
+      = ClassTypeName.of("com.example", "InterfaceC");
+  static final ClassTypeName IFACE_D
+      = ClassTypeName.of("com.example", "InterfaceD");
+
+  @Override
+  protected final void definition() {
+    autoImports();
+
+    classDeclaration(
+      name("Implements"),
+      implementsClause(NL, IFACE_A, NL),
+      implementsClause(IFACE_B, IFACE_C),
+      implementsClause(NL, IFACE_D)
+    );
+  }
+}
+----
+
+Generates:
+
+[,java]
+----
+import com.example.InterfaceA;
+import com.example.InterfaceB;
+import com.example.InterfaceC;
+import com.example.InterfaceD;
+
+class Implements implements
+    InterfaceA
+    InterfaceB, InterfaceC,
+    InterfaceD {}
+----
+
 == Generic superinterfaces
 
 The `implementsClause` instruction also allows to define generic superinterfaces.

@@ -13,17 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package objectos.docs.code.declaration;
+package objectos.docs.code.class_;
 
-import java.util.List;
 import objectos.code.ClassTypeName;
 import objectos.code.JavaTemplate;
 
-public class ClassDeclarationImplements06 extends JavaTemplate {
-  final List<String> simpleNames = List.of("A", "B", "C");
+public class ClassDeclarationImplements03 extends JavaTemplate {
+  static final ClassTypeName A
+      = ClassTypeName.of("com.example", "A");
+  static final ClassTypeName B
+      = ClassTypeName.of("com.example", "B");
+  static final ClassTypeName C
+      = ClassTypeName.of("com.example", "C");
+  static final ClassTypeName D
+      = ClassTypeName.of("com.example", "D");
 
   public static void main(String[] args) {
-    System.out.println(new ClassDeclarationImplements06());
+    System.out.println(new ClassDeclarationImplements03());
   }
 
   @Override
@@ -31,16 +37,10 @@ public class ClassDeclarationImplements06 extends JavaTemplate {
     autoImports();
 
     classDeclaration(
-      name("Programmatically"),
-      include(this::superinterfaces)
+      name("Implements"),
+      implementsClause(A),
+      implementsClause(B, C),
+      implementsClause(D)
     );
-  }
-
-  private void superinterfaces() {
-    for (var simpleName : simpleNames) {
-      implementsClause(
-        ClassTypeName.of("com.example", simpleName)
-      );
-    }
   }
 }

@@ -13,20 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package objectos.docs.code.declaration;
+package objectos.docs.code.class_;
 
+import java.io.InputStream;
+import objectos.code.ClassTypeName;
 import objectos.code.JavaTemplate;
 
-public class ClassDeclarationName03 extends JavaTemplate {
+public class ClassDeclarationExtends01 extends JavaTemplate {
+  static final ClassTypeName INPUT_STREAM
+      = ClassTypeName.of(InputStream.class);
+
   public static void main(String[] args) {
-    System.out.println(new ClassDeclarationName03());
+    System.out.println(new ClassDeclarationExtends01());
   }
 
   @Override
   protected final void definition() {
-    // invalid name: throws IllegalArgumentException
+    autoImports();
+
     classDeclaration(
-      name("My-Class")
+      name("MyInputStream"), extendsClause(INPUT_STREAM)
     );
   }
 }

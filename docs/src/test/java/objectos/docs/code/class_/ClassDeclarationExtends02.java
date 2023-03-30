@@ -13,19 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package objectos.docs.code.declaration;
+package objectos.docs.code.class_;
 
-import java.io.Serializable;
+import java.util.AbstractList;
 import objectos.code.ClassTypeName;
 import objectos.code.JavaTemplate;
+import objectos.code.ParameterizedTypeName;
+import objectos.code.TypeVariableName;
 
-public class ClassDeclarationTypeParam04 extends JavaTemplate {
-  static final ClassTypeName ITERABLE = ClassTypeName.of(Iterable.class);
-
-  static final ClassTypeName SERIALIZABLE = ClassTypeName.of(Serializable.class);
+public class ClassDeclarationExtends02 extends JavaTemplate {
+  static final ParameterizedTypeName ABSTRACT_LIST = ParameterizedTypeName.of(
+    ClassTypeName.of(AbstractList.class),
+    TypeVariableName.of("E")
+  );
 
   public static void main(String[] args) {
-    System.out.println(new ClassDeclarationTypeParam04());
+    System.out.println(new ClassDeclarationExtends02());
   }
 
   @Override
@@ -33,8 +36,9 @@ public class ClassDeclarationTypeParam04 extends JavaTemplate {
     autoImports();
 
     classDeclaration(
-      name("Generic"),
-      typeParameter("T", ITERABLE, SERIALIZABLE)
+      name("MyList"),
+      typeParameter("E"),
+      extendsClause(ABSTRACT_LIST)
     );
   }
 }
