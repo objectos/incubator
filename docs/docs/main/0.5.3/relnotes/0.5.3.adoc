@@ -16,7 +16,7 @@ Welcome to Objectos 0.5.3.
 == Enhancements
 
 * add proper escaping to attribute values issue:306[]
-* Remove the _class instruction from GeneratedAbstractTemplate issue:307[]
+* Remove the class instruction from GeneratedAbstractTemplate issue:307[]
 * Do not require ABSTRACT for method declaration in interfaces. issue:314[]
 
 == Bugs fixes
