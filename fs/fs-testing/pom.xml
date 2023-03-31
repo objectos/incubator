@@ -23,7 +23,7 @@
 	<parent>
 		<groupId>br.com.objectos</groupId>
 		<artifactId>fs-parent</artifactId>
-		<version>0.5.3-SNAPSHOT</version>
+		<version>0.5.4-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 

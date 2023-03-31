@@ -23,14 +23,14 @@
 	<parent>
 		<groupId>br.com.objectos</groupId>
 		<artifactId>objectos</artifactId>
-		<version>0.5.3-SNAPSHOT</version>
+		<version>0.5.4-SNAPSHOT</version>
 		<relativePath>../br.com.objectos.objectos/pom.xml</relativePath>
 	</parent>
 
 	<groupId>br.com.objectos</groupId>
 	<artifactId>incubator</artifactId>
 	<packaging>pom</packaging>
-	<version>0.5.3-SNAPSHOT</version>
+	<version>0.5.4-SNAPSHOT</version>
 
 	<name>${project.groupId}:${project.artifactId}</name>
 
