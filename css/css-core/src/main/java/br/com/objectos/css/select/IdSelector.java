@@ -16,13 +16,9 @@
 package br.com.objectos.css.select;
 
 import java.util.Objects;
-import objectos.html.spi.Marker;
-import objectos.html.spi.Renderer;
-import objectos.html.tmpl.AnyElementValue;
 import objectos.html.tmpl.Instruction.ExternalAttribute;
 
-public class IdSelector extends SimpleSelector
-    implements AnyElementValue, ExternalAttribute.Id {
+public class IdSelector extends SimpleSelector implements ExternalAttribute.Id {
 
   private final String id;
 
@@ -53,19 +49,9 @@ public class IdSelector extends SimpleSelector
   }
 
   @Override
-  public final void mark(Marker marker) {
-    marker.markAttribute();
-  }
-
-  @Override
   public final boolean matches(Selectable element) {
     String attributeValue = element.attributeValue("id");
     return Objects.equals(attributeValue, id);
-  }
-
-  @Override
-  public final void render(Renderer renderer) {
-    renderer.addAttribute("id", id);
   }
 
   @Override

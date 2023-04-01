@@ -16,7 +16,7 @@
 package objectos.ssg;
 
 import objectos.html.HtmlTemplate;
-import objectos.html.tmpl.StandardAttributeName.Href;
+import objectos.html.tmpl.Instruction;
 import objectos.lang.Check;
 import objectos.ssg.Site.Context;
 import objectos.util.UnmodifiableList;
@@ -55,14 +55,14 @@ public abstract class SiteFragment extends HtmlTemplate
     return context.getObjectsByType(type);
   }
 
-  protected final Href href(Class<? extends SitePath> key) {
+  protected final Instruction.HrefAttribute href(Class<? extends SitePath> key) {
     SitePath sitePath;
     sitePath = getObject(key);
 
     return href(sitePath);
   }
 
-  protected final Href href(SitePath sitePath) {
+  protected final Instruction.HrefAttribute href(SitePath sitePath) {
     String value;
     value = sitePath.path();
 

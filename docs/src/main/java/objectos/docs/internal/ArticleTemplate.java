@@ -67,8 +67,6 @@ import objectos.docs.internal.Navigation.Link;
 import objectos.docs.internal.Navigation.LinkList;
 import objectos.docs.internal.Navigation.LinkTitle;
 import objectos.docs.internal.Navigation.Section;
-import objectos.html.tmpl.AnchorValue;
-import objectos.html.tmpl.ElementName;
 import objectos.html.tmpl.StandardElementName;
 import objectos.shared.DefaultRenderer;
 import objectos.shared.JavaRenderer;
@@ -676,7 +674,7 @@ public final class ArticleTemplate extends DocsTemplate implements LanguageRende
     }
   }
 
-  private ElementName leftBarHeading2(String text) {
+  private ElementContents leftBarHeading2(String text) {
     return h2(
       FontWeight.semibold,
       PaddingBottom.v01,
@@ -689,7 +687,7 @@ public final class ArticleTemplate extends DocsTemplate implements LanguageRende
     );
   }
 
-  private ElementName leftBarLink(String iref, String text, AnchorValue level) {
+  private ElementContents leftBarLink(String iref, String text, AnchorInstruction level) {
     var href = version.leftBarLink(iref);
 
     if (text == null) {

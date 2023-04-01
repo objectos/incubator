@@ -25,8 +25,8 @@ import objectos.asciidoc.AsciiDoc;
 import objectos.asciidoc.DocumentAttributes;
 import objectos.asciidoc.LinkText;
 import objectos.html.HtmlTemplate;
+import objectos.html.tmpl.Instruction;
 import objectos.html.tmpl.StandardElementName;
-import objectos.html.tmpl.Value;
 import objectos.util.IntArrays;
 import objectos.util.ObjectArrays;
 
@@ -36,7 +36,7 @@ public abstract class SharedTemplate extends HtmlTemplate implements AsciiDoc.Pr
 
   public static final ClassSelector LINK_COLOR = TextColor.blue600;
 
-  private Value[] valueList = new Value[32];
+  private Instruction[] valueList = new Instruction[32];
 
   private int valueListIndex = 0;
 
@@ -189,13 +189,13 @@ public abstract class SharedTemplate extends HtmlTemplate implements AsciiDoc.Pr
     tagStart();
   }
 
-  protected final void addValue0(Value value) {
+  protected final void addValue0(Instruction value) {
     valueList = ObjectArrays.growIfNecessary(valueList, valueListIndex);
 
     valueList[valueListIndex++] = value;
   }
 
-  protected final void addValue0(Value... values) {
+  protected final void addValue0(Instruction... values) {
     valueList = ObjectArrays.growIfNecessary(valueList, valueListIndex + values.length - 1);
 
     for (var value : values) {
@@ -203,7 +203,7 @@ public abstract class SharedTemplate extends HtmlTemplate implements AsciiDoc.Pr
     }
   }
 
-  protected final void addValue0(Value v0, Value v1, Value v2) {
+  protected final void addValue0(Instruction v0, Instruction v1, Instruction v2) {
     valueList = ObjectArrays.growIfNecessary(valueList, valueListIndex + 2);
 
     valueList[valueListIndex++] = v0;
@@ -231,12 +231,13 @@ public abstract class SharedTemplate extends HtmlTemplate implements AsciiDoc.Pr
     );
   }
 
+  @SuppressWarnings("deprecation")
   protected final void tagEnd(StandardElementName name) {
     var values = popValues();
 
-    var value = addStandardElement(name, values);
+    element(name, values);
 
-    addValue0(value);
+    addValue0(elementContents());
   }
 
   protected final void tagStart() {
@@ -247,7 +248,7 @@ public abstract class SharedTemplate extends HtmlTemplate implements AsciiDoc.Pr
     valueStack[valueStackIndex] = valueListIndex;
   }
 
-  private Value[] popValues() {
+  private Instruction[] popValues() {
     var start = valueStack[valueStackIndex--];
 
     var values = Arrays.copyOfRange(valueList, start, valueListIndex);

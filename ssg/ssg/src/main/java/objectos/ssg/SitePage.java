@@ -19,9 +19,7 @@ import br.com.objectos.http.media.TextType;
 import java.io.IOException;
 import objectos.html.HtmlSink;
 import objectos.html.HtmlTemplate;
-import objectos.html.tmpl.ElementName;
-import objectos.html.tmpl.StandardAttributeName.Href;
-import objectos.html.tmpl.StandardAttributeName.Src;
+import objectos.html.tmpl.Instruction;
 import objectos.lang.Check;
 import objectos.ssg.Site.Context;
 import objectos.util.UnmodifiableList;
@@ -86,25 +84,25 @@ public abstract class SitePage extends HtmlTemplate
     return context.getObjectsByType(type);
   }
 
-  protected final Href href(Class<? extends SitePath> key) {
+  protected final Instruction.HrefAttribute href(Class<? extends SitePath> key) {
     SitePath sitePath;
     sitePath = getObject(key);
 
     return href(sitePath);
   }
 
-  protected final Href href(SitePath sitePath) {
+  protected final Instruction.HrefAttribute href(SitePath sitePath) {
     String path;
     path = sitePath.path();
 
     return href(path);
   }
 
-  protected final ElementName link(Class<? extends SiteStyleSheet> key) {
+  protected final Instruction.ElementContents link(Class<? extends SiteStyleSheet> key) {
     return link(href(key), rel("stylesheet"));
   }
 
-  protected final Src src(SitePath path) {
+  protected final Instruction.SrcAttribute src(SitePath path) {
     return src(path.path());
   }
 

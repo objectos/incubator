@@ -15,13 +15,9 @@
  */
 package br.com.objectos.css.select;
 
-import objectos.html.spi.Marker;
-import objectos.html.spi.Renderer;
-import objectos.html.tmpl.AnyElementValue;
 import objectos.html.tmpl.Instruction.ExternalAttribute;
 
-public class ClassSelector extends SimpleSelector
-    implements AnyElementValue, ExternalAttribute.StyleClass {
+public class ClassSelector extends SimpleSelector implements ExternalAttribute.StyleClass {
 
   private final String className;
 
@@ -52,18 +48,8 @@ public class ClassSelector extends SimpleSelector
   }
 
   @Override
-  public final void mark(Marker marker) {
-    marker.markAttribute();
-  }
-
-  @Override
   public final boolean matches(Selectable element) {
     return element.hasAttributeValue("class", className);
-  }
-
-  @Override
-  public final void render(Renderer renderer) {
-    renderer.addAttribute("class", className);
   }
 
   @Override

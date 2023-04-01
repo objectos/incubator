@@ -43,14 +43,11 @@ package br.com.objectos.css.framework.util;
 import br.com.objectos.css.select.ClassSelector;
 import java.util.Set;
 import java.util.stream.Collectors;
-import objectos.html.spi.Marker;
-import objectos.html.spi.Renderer;
-import objectos.html.tmpl.AnyElementValue;
 import objectos.html.tmpl.Instruction.ExternalAttribute;
 import objectos.lang.Equals;
 import objectos.util.UnmodifiableSet;
 
-public class ClassSet implements AnyElementValue, ExternalAttribute.StyleClassSet {
+public class ClassSet implements ExternalAttribute.StyleClassSet {
 
   private static final ClassSet EMPTY = new ClassSet(
     UnmodifiableSet.of()
@@ -81,30 +78,6 @@ public class ClassSet implements AnyElementValue, ExternalAttribute.StyleClassSe
   @Override
   public final int hashCode() {
     return values.hashCode();
-  }
-
-  @Override
-  public final void mark(Marker marker) {
-    if (values.isEmpty()) {
-      return;
-    }
-
-    for (var value : values) {
-      value.mark(marker);
-    }
-  }
-
-  @Override
-  public final void render(Renderer renderer) {
-    if (values.isEmpty()) {
-      renderer.addNoOp();
-
-      return;
-    }
-
-    for (var value : values) {
-      value.render(renderer);
-    }
   }
 
   @Override
