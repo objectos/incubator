@@ -41,10 +41,10 @@
 package br.com.objectos.css.framework.util;
 
 import br.com.objectos.css.select.ClassSelector;
-import java.util.Set;
-import java.util.stream.Collectors;
+import java.util.Iterator;
 import objectos.html.tmpl.Instruction.ExternalAttribute;
 import objectos.lang.Equals;
+import objectos.util.GrowableSet;
 import objectos.util.UnmodifiableSet;
 
 public class ClassSet implements ExternalAttribute.StyleClassSet {
@@ -53,9 +53,9 @@ public class ClassSet implements ExternalAttribute.StyleClassSet {
     UnmodifiableSet.of()
   );
 
-  private final UnmodifiableSet<ClassSelector> values;
+  private final UnmodifiableSet<String> values;
 
-  private ClassSet(UnmodifiableSet<ClassSelector> values) {
+  private ClassSet(UnmodifiableSet<String> values) {
     this.values = values;
   }
 
@@ -63,9 +63,17 @@ public class ClassSet implements ExternalAttribute.StyleClassSet {
     return switch (values.length) {
       case 0 -> EMPTY;
 
-      default -> new ClassSet(
-        UnmodifiableSet.copyOf(values)
-      );
+      default -> {
+        var set = new GrowableSet<String>();
+
+        for (var value : values) {
+          set.add(value.className());
+        }
+
+        yield new ClassSet(
+          set.toUnmodifiableSet()
+        );
+      }
     };
   }
 
@@ -81,10 +89,8 @@ public class ClassSet implements ExternalAttribute.StyleClassSet {
   }
 
   @Override
-  public final Set<String> value() {
-    return values.stream()
-        .map(ClassSelector::className)
-        .collect(Collectors.toUnmodifiableSet());
+  public final Iterator<String> value() {
+    return values.iterator();
   }
 
 }
