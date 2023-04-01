@@ -19,8 +19,10 @@ import java.util.Objects;
 import objectos.html.spi.Marker;
 import objectos.html.spi.Renderer;
 import objectos.html.tmpl.AnyElementValue;
+import objectos.html.tmpl.Instruction.ExternalAttribute;
 
-public class IdSelector extends SimpleSelector implements AnyElementValue {
+public class IdSelector extends SimpleSelector
+    implements AnyElementValue, ExternalAttribute.Id {
 
   private final String id;
 
@@ -69,6 +71,11 @@ public class IdSelector extends SimpleSelector implements AnyElementValue {
   @Override
   public final String toString() {
     return "#" + id;
+  }
+
+  @Override
+  public final String value() {
+    return id;
   }
 
 }

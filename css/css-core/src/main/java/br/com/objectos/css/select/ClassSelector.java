@@ -18,8 +18,10 @@ package br.com.objectos.css.select;
 import objectos.html.spi.Marker;
 import objectos.html.spi.Renderer;
 import objectos.html.tmpl.AnyElementValue;
+import objectos.html.tmpl.Instruction.ExternalAttribute;
 
-public class ClassSelector extends SimpleSelector implements AnyElementValue {
+public class ClassSelector extends SimpleSelector
+    implements AnyElementValue, ExternalAttribute.StyleClass {
 
   private final String className;
 
@@ -67,6 +69,11 @@ public class ClassSelector extends SimpleSelector implements AnyElementValue {
   @Override
   public final String toString() {
     return "." + className;
+  }
+
+  @Override
+  public final String value() {
+    return className;
   }
 
 }

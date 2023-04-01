@@ -41,13 +41,16 @@
 package br.com.objectos.css.framework.util;
 
 import br.com.objectos.css.select.ClassSelector;
+import java.util.Set;
+import java.util.stream.Collectors;
 import objectos.html.spi.Marker;
 import objectos.html.spi.Renderer;
 import objectos.html.tmpl.AnyElementValue;
+import objectos.html.tmpl.Instruction.ExternalAttribute;
 import objectos.lang.Equals;
 import objectos.util.UnmodifiableSet;
 
-public class ClassSet implements AnyElementValue {
+public class ClassSet implements AnyElementValue, ExternalAttribute.StyleClassSet {
 
   private static final ClassSet EMPTY = new ClassSet(
     UnmodifiableSet.of()
@@ -102,6 +105,13 @@ public class ClassSet implements AnyElementValue {
     for (var value : values) {
       value.render(renderer);
     }
+  }
+
+  @Override
+  public final Set<String> value() {
+    return values.stream()
+        .map(ClassSelector::className)
+        .collect(Collectors.toUnmodifiableSet());
   }
 
 }
