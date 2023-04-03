@@ -17,63 +17,46 @@ package objectos.docs.internal;
 
 import br.com.objectos.css.sheet.StyleSheetWriter;
 import java.io.IOException;
-import java.util.Map;
 import java.util.NoSuchElementException;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.Executors;
 import objectos.asciidoc.Document;
 import objectos.docs.Docs.BottomBar;
 import objectos.docs.Docs.TopBar;
 import objectos.html.HtmlSink;
 import objectos.html.HtmlTemplate;
 import objectos.shared.StyleClassSet;
-import objectos.util.GrowableMap;
 
 public class Step3Generate extends Step2Scan {
 
-  private final Map<String, DocsTemplate> templates;
+  private class ThisInjector extends DocsInjector {
+    private final HtmlSink htmlSink = new HtmlSink();
 
-  private BottomBar bottomBar = new DocsBottomBar();
+    private final StyleClassSet styleClassSet = new StyleClassSet();
 
-  private String currentKey;
+    private final DocsCss styleSheet = new DocsCss();
 
-  private DocumentRecord currentRecord;
+    private final StyleSheetWriter styleSheetWriter = StyleSheetWriter.ofPretty();
 
-  private Version currentVersion;
+    private final ArticleTemplate articleTemplate = new ArticleTemplate(this);
 
-  private TopBar topBar = new DocsTopBar();
+    private final VersionsTemplate versionsTemplate = new VersionsTemplate(this);
 
-  public Step3Generate() {
-    var injector = new ThisInjector();
+    private final BottomBar bottomBar = new DocsBottomBar();
 
-    templates = _templates(
-      new ArticleTemplate(injector),
+    private final TopBar topBar = new DocsTopBar();
 
-      new VersionsTemplate(injector)
-    );
-  }
+    private String currentKey;
 
-  public final void bottomBar(BottomBar bottomBar) {
-    this.bottomBar = bottomBar;
-  }
+    private DocumentRecord currentRecord;
 
-  public final void topBar(TopBar topBar) {
-    this.topBar = topBar;
-  }
+    private Version currentVersion;
 
-  public final void executeGenerate() throws IOException {
-    System.out.println("Resource target path: " + targetDirectory);
+    public final void generate(String key, DocumentRecord record) throws IOException {
+      currentKey = key;
 
-    var htmlSink = new HtmlSink();
-
-    var styleClassSet = new StyleClassSet();
-
-    var styleSheet = new DocsCss();
-
-    var styleSheetWriter = StyleSheetWriter.ofPretty();
-
-    for (var entry : documents.entrySet()) {
-      currentKey = entry.getKey();
-
-      currentRecord = entry.getValue();
+      currentRecord = record;
 
       currentVersion = currentRecord.version();
 
@@ -95,38 +78,16 @@ public class Step3Generate extends Step2Scan {
 
       htmlSink.toDirectory(template, targetDirectory);
     }
-  }
-
-  private DocsTemplate _template(String templateName) {
-    var tmpl = templates.get(templateName);
-
-    if (tmpl == null) {
-      throw new NoSuchElementException(templateName);
-    }
-
-    return tmpl;
-  }
-
-  private Map<String, DocsTemplate> _templates(DocsTemplate... templates) {
-    var map = new GrowableMap<String, DocsTemplate>();
-
-    for (var template : templates) {
-      var clazz = template.getClass();
-
-      var key = clazz.getSimpleName();
-
-      map.put(key, template);
-    }
-
-    return map.toUnmodifiableMap();
-  }
-
-  private class ThisInjector extends DocsInjector {
-    @Override
-    final HtmlTemplate $bottomBar() { return bottomBar.toFragment(); }
 
     @Override
-    final Document $document() { return currentRecord.document(); }
+    final HtmlTemplate $bottomBar() {
+      return bottomBar.toFragment();
+    }
+
+    @Override
+    final Document $document() {
+      return currentRecord.document();
+    }
 
     @Override
     final String $elink(String target) {
@@ -181,13 +142,115 @@ public class Step3Generate extends Step2Scan {
     }
 
     @Override
-    final DocumentTitle $title() { return currentRecord.title(); }
+    final DocumentTitle $title() {
+      return currentRecord.title();
+    }
 
     @Override
-    final TopBar $topBar() { return topBar; }
+    final TopBar $topBar() {
+      return topBar;
+    }
 
     @Override
-    final Iterable<Version> $versions() { return versions.values(); }
+    final Iterable<Version> $versions() {
+      return versions.values();
+    }
+
+    private DocsTemplate _template(String templateName) {
+      return switch (templateName) {
+        case "ArticleTemplate" -> articleTemplate;
+
+        case "VersionsTemplate" -> versionsTemplate;
+
+        default -> throw new NoSuchElementException(templateName);
+      };
+    }
+  }
+
+  private class Task implements Runnable {
+    private final String key;
+    private final DocumentRecord record;
+
+    public Task(String key, DocumentRecord record) {
+      this.key = key;
+      this.record = record;
+    }
+
+    @Override
+    public final void run() {
+      ThisInjector injector;
+
+      try {
+        injector = injectors.take();
+      } catch (InterruptedException e) {
+        if (rethrow != null) {
+          rethrow.addSuppressed(e);
+        } else {
+          rethrow = new IOException(e);
+        }
+
+        return;
+      }
+
+      try {
+        injector.generate(key, record);
+      } catch (IOException e) {
+        if (rethrow != null) {
+          rethrow.addSuppressed(e);
+        } else {
+          rethrow = e;
+        }
+      } finally {
+        injectors.add(injector);
+      }
+    }
+  }
+
+  private final int capacity;
+
+  private final BlockingQueue<ThisInjector> injectors;
+
+  private IOException rethrow;
+
+  public Step3Generate() {
+    capacity = Runtime.getRuntime().availableProcessors();
+
+    injectors = new ArrayBlockingQueue<>(capacity);
+
+    for (int i = 0; i < capacity; i++) {
+      injectors.add(new ThisInjector());
+    }
+  }
+
+  public final void bottomBar(BottomBar bottomBar) {
+    throw new UnsupportedOperationException();
+  }
+
+  public final void executeGenerate() throws IOException {
+    long startTime = System.currentTimeMillis();
+
+    System.out.println("Resource target path: " + targetDirectory);
+
+    try (var executor = Executors.newFixedThreadPool(capacity)) {
+      for (var entry : documents.entrySet()) {
+        var key = entry.getKey();
+        var value = entry.getValue();
+        var task = new Task(key, value);
+        executor.submit(task);
+      }
+    }
+
+    long totalTime = System.currentTimeMillis() - startTime;
+
+    System.out.println("Step 3: " + totalTime + " ms");
+
+    if (rethrow != null) {
+      throw rethrow;
+    }
+  }
+
+  public final void topBar(TopBar topBar) {
+    throw new UnsupportedOperationException();
   }
 
 }

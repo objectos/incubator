@@ -36,6 +36,8 @@ abstract class Step2Scan extends Step1Versions {
   private Path source;
 
   public final void executeScan() throws IOException {
+    long startTime = System.currentTimeMillis();
+
     for (var sourcePath : sourceDirectories) {
       System.out.println("Resource source path: " + sourcePath);
 
@@ -43,6 +45,10 @@ abstract class Step2Scan extends Step1Versions {
 
       scan();
     }
+
+    long totalTime = System.currentTimeMillis() - startTime;
+
+    System.out.println("Step2: " + totalTime + " ms");
   }
 
   private void catchIO(IOException e) {
@@ -85,9 +91,9 @@ abstract class Step2Scan extends Step1Versions {
   private void scanFileAsciiDoc(Path file) throws IOException {
     var relativePath = source.relativize(file);
 
-    var version = relativePathToVersion(relativePath);
-
     var key = relativePathToKey(relativePath);
+
+    var version = relativePathToVersion(relativePath);
 
     var source = Files.readString(file, StandardCharsets.UTF_8);
 
@@ -97,7 +103,7 @@ abstract class Step2Scan extends Step1Versions {
 
     var documentTitle = documentTitleProcessor.create();
 
-    var value = new DocumentRecord(version, document, documentTitle);
+    var value = new DocumentRecord(key, version, document, documentTitle);
 
     documents.put(key, value);
   }

@@ -17,7 +17,8 @@ package objectos.docs.internal;
 
 import objectos.asciidoc.Document;
 
-record DocumentRecord(Version version,
+record DocumentRecord(String key,
+                      Version version,
                       Document document,
                       DocumentTitle title) {
 

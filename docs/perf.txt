@@ -1,0 +1,65 @@
+## Before
+
+Step2: 180 ms
+Step3: 14777 ms
+real	0m15,309s
+user	0m24,398s
+sys	0m0,486s
+
+Step2: 181 ms
+Step3: 16401 ms
+real	0m16,932s
+user	0m26,025s
+sys	0m0,434s
+
+Step2: 183 ms
+Step3: 15042 ms
+real	0m15,577s
+user	0m24,931s
+sys	0m0,415s
+
+Step2: 184 ms
+Step3: 14762 ms
+real	0m15,299s
+user	0m25,950s
+sys	0m0,432s
+
+Step2: 183 ms
+Step3: 14846 ms
+real	0m15,384s
+user	0m24,733s
+sys	0m0,478s
+
+## After Step 
+Injector: capacity * 2
+Fixed thread: capacity
+
+Step2: 176 ms
+Step3: 7844 ms
+real	0m8,414s
+user	0m31,689s
+sys	0m0,499s
+
+Step2: 181 ms
+Step3: 7061 ms
+real	0m7,611s
+user	0m28,417s
+sys	0m0,501s
+
+Step2: 178 ms
+Step3: 7400 ms
+real	0m7,947s
+user	0m29,721s
+sys	0m0,540s
+
+Step2: 179 ms
+Step3: 7264 ms
+real	0m7,811s
+user	0m29,293s
+sys	0m0,507s
+
+Step2: 182 ms
+Step3: 6916 ms
+real	0m7,467s
+user	0m27,660s
+sys	0m0,530s
