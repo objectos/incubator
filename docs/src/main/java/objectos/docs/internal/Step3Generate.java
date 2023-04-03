@@ -21,6 +21,7 @@ import java.util.NoSuchElementException;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Executors;
+import java.util.function.Supplier;
 import objectos.asciidoc.Document;
 import objectos.docs.Docs.BottomBar;
 import objectos.docs.Docs.TopBar;
@@ -29,6 +30,45 @@ import objectos.html.HtmlTemplate;
 import objectos.shared.StyleClassSet;
 
 public class Step3Generate extends Step2Scan {
+
+  private class Task implements Runnable {
+    private final String key;
+    private final DocumentRecord record;
+
+    public Task(String key, DocumentRecord record) {
+      this.key = key;
+      this.record = record;
+    }
+
+    @Override
+    public final void run() {
+      ThisInjector injector;
+
+      try {
+        injector = injectors.take();
+      } catch (InterruptedException e) {
+        if (rethrow != null) {
+          rethrow.addSuppressed(e);
+        } else {
+          rethrow = new IOException(e);
+        }
+
+        return;
+      }
+
+      try {
+        injector.generate(key, record);
+      } catch (IOException e) {
+        if (rethrow != null) {
+          rethrow.addSuppressed(e);
+        } else {
+          rethrow = e;
+        }
+      } finally {
+        injectors.add(injector);
+      }
+    }
+  }
 
   private class ThisInjector extends DocsInjector {
     private final HtmlSink htmlSink = new HtmlSink();
@@ -43,9 +83,9 @@ public class Step3Generate extends Step2Scan {
 
     private final VersionsTemplate versionsTemplate = new VersionsTemplate(this);
 
-    private final BottomBar bottomBar = new DocsBottomBar();
+    private final BottomBar bottomBar = bottomBarFactory.get();
 
-    private final TopBar topBar = new DocsTopBar();
+    private final TopBar topBar = topBarFactory.get();
 
     private String currentKey;
 
@@ -167,50 +207,15 @@ public class Step3Generate extends Step2Scan {
     }
   }
 
-  private class Task implements Runnable {
-    private final String key;
-    private final DocumentRecord record;
-
-    public Task(String key, DocumentRecord record) {
-      this.key = key;
-      this.record = record;
-    }
-
-    @Override
-    public final void run() {
-      ThisInjector injector;
-
-      try {
-        injector = injectors.take();
-      } catch (InterruptedException e) {
-        if (rethrow != null) {
-          rethrow.addSuppressed(e);
-        } else {
-          rethrow = new IOException(e);
-        }
-
-        return;
-      }
-
-      try {
-        injector.generate(key, record);
-      } catch (IOException e) {
-        if (rethrow != null) {
-          rethrow.addSuppressed(e);
-        } else {
-          rethrow = e;
-        }
-      } finally {
-        injectors.add(injector);
-      }
-    }
-  }
-
   private final int capacity;
 
   private final BlockingQueue<ThisInjector> injectors;
 
+  private Supplier<BottomBar> bottomBarFactory = DocsBottomBar::new;
+
   private IOException rethrow;
+
+  private Supplier<TopBar> topBarFactory = DocsTopBar::new;
 
   public Step3Generate() {
     capacity = Runtime.getRuntime().availableProcessors();
@@ -222,8 +227,8 @@ public class Step3Generate extends Step2Scan {
     }
   }
 
-  public final void bottomBar(BottomBar bottomBar) {
-    throw new UnsupportedOperationException();
+  public final void bottomBar(Supplier<BottomBar> bottomBarFactory) {
+    this.bottomBarFactory = bottomBarFactory;
   }
 
   public final void executeGenerate() throws IOException {
@@ -249,8 +254,8 @@ public class Step3Generate extends Step2Scan {
     }
   }
 
-  public final void topBar(TopBar topBar) {
-    throw new UnsupportedOperationException();
+  public final void topBar(Supplier<TopBar> topBarFactory) {
+    this.topBarFactory = topBarFactory;
   }
 
 }
