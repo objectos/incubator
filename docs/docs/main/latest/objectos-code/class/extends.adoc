@@ -1,0 +1,115 @@
+= Class direct superclass
+
+Use the `extendsClause` instruction to specify the direct superclass in your class declaration.
+
+The following Objectos Code:
+
+[,java]
+----
+import java.io.InputStream;
+import objectos.code.ClassTypeName;
+import objectos.code.JavaTemplate;
+
+public class ClassDeclarationExtends01 extends JavaTemplate {
+  static final ClassTypeName INPUT_STREAM
+      = ClassTypeName.of(InputStream.class);
+
+  @Override
+  protected final void definition() {
+    autoImports();
+
+    classDeclaration(
+      name("MyInputStream"), extendsClause(INPUT_STREAM)
+    );
+  }
+}
+----
+
+Generates the following Java class declaration:
+
+[,java]
+----
+import java.io.InputStream;
+
+class MyInputStream extends InputStream {}
+----
+
+== Generic superclass
+
+The `extendsClause` instruction also allows to define a generic superclass.
+Use a `ParameterizedTypeName` like so:
+
+[,java]
+----
+import java.util.AbstractList;
+import objectos.code.ClassTypeName;
+import objectos.code.JavaTemplate;
+import objectos.code.ParameterizedTypeName;
+import objectos.code.TypeVariableName;
+
+public class ClassDeclarationExtends02 extends JavaTemplate {
+  static final ParameterizedTypeName ABSTRACT_LIST = ParameterizedTypeName.of(
+    ClassTypeName.of(AbstractList.class),
+    TypeVariableName.of("E")
+  );
+
+  @Override
+  protected final void definition() {
+    autoImports();
+
+    classDeclaration(
+      name("MyList"),
+      typeParameter("E"),
+      extendsClause(ABSTRACT_LIST)
+    );
+  }
+}
+----
+
+The Objectos Code template above generates:
+
+[,java]
+----
+import java.util.AbstractList;
+
+class MyList<E> extends AbstractList<E> {}
+----
+
+== Multiple `extendsClause` instructions
+
+If you specify multiple `extendsClause` instructions only the last one will be considered.
+
+The following Objectos Code:
+
+[,java]
+----
+import objectos.code.ClassTypeName;
+import objectos.code.JavaTemplate;
+
+public class ClassDeclarationExtends03 extends JavaTemplate {
+  static final ClassTypeName A = ClassTypeName.of("com.example", "A");
+  static final ClassTypeName B = ClassTypeName.of("com.example", "B");
+  static final ClassTypeName C = ClassTypeName.of("com.example", "C");
+
+  @Override
+  protected final void definition() {
+    autoImports();
+
+    classDeclaration(
+      name("Multiple"),
+      extendsClause(A),
+      extendsClause(B),
+      extendsClause(C)
+    );
+  }
+}
+----
+
+Generates:
+
+[,java]
+----
+import com.example.C;
+
+class Multiple extends C {}
+----

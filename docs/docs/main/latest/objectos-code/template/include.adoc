@@ -1,0 +1,257 @@
+= The `include` instruction
+
+The `JavaTemplate` class provides a template system for generating Java files.
+
+As the `JavaTemplate` is a regular Java class you can use Java constructs in your template.
+For example, you can use Java `for` loops and `if` statements in your template.
+
+In other words, instead of writing something like the following:
+
+----
+{{#fields}}
+private static final {{type}} {{name}};
+{{/fields}}
+----
+
+You write a plain Java `for` loop:
+
+[,java]
+----
+for (var field : fields) {
+  field(
+    PRIVATE, STATIC, FINAL, field.type, name(field.name)
+  );
+}
+----
+
+To achieve this, the `JavaTemplate` provides the `include` instruction.
+
+== Generating code based on the elements of a collection
+
+You should use the `include` instruction when you need to generate a number of constructs based on the elements of a collection.
+
+As an example, consider the following `JavaTemplate`:
+
+[,java]
+----
+import java.util.Set;
+import java.util.TreeSet;
+import objectos.code.ClassTypeName;
+import objectos.code.JavaTemplate;
+
+public class TagTemplate extends JavaTemplate {
+  private static final ClassTypeName STRING = ClassTypeName.of(String.class);
+  
+  private final Set<String> tagNames = new TreeSet<>();
+
+  public final void add(String name) {
+    tagNames.add(name);
+  }
+
+  @Override
+  protected final void definition() {
+    packageDeclaration("com.example");
+
+    autoImports();
+
+    enumDeclaration(
+      PUBLIC, name("Tag"),
+
+      include(this::constants),
+
+      field(
+        PRIVATE, FINAL, STRING, name("name")
+      ),
+
+      constructor(
+        PRIVATE,
+        parameter(STRING, name("name")),
+
+        p(THIS, n("name"), IS, n("name"))
+      )
+    );
+  }
+
+  private void constants() {
+    for (var tagName : tagNames) {
+      var fieldName = tagName.toUpperCase();
+
+      enumConstant(
+        name(fieldName),
+        argument(s(tagName))
+      );
+    }
+  }
+}
+----
+
+It generates a Java `enum` class named `Tag`.
+The enum constants are generated based on the values of the `tagNames` collection.
+
+Note the `include` instruction in the enum declaration:
+
+[,java]
+----
+enumDeclaration(
+  PUBLIC, name("Tag"),
+
+  include(this::constants),
+  ...
+);
+----
+
+The included partial is a reference to the `constants` method:
+
+[,java]
+----
+private void constants() {
+  for (var tagName : tagNames) {
+    var fieldName = tagName.toUpperCase();
+
+    enumConstant(
+      name(fieldName),
+      argument(s(tagName))
+    );
+  }
+}
+----
+
+The `constants` method iterates over the elements of the `tagNames` set.
+For each element in the set it generates an enum constant.
+
+The following illustrate a use of our `TagTemplate` class: 
+
+[,java]
+----
+var tmpl = new TagTemplate();
+
+tmpl.add("div");
+tmpl.add("a");
+tmpl.add("ul");
+tmpl.add("li");
+tmpl.add("table");
+
+System.out.println(tmpl);
+----
+
+When executed, it prints:
+
+[,java]
+----
+public enum Tag {
+  A("a"),
+
+  DIV("div"),
+
+  LI("li"),
+
+  TABLE("table"),
+
+  UL("ul");
+
+  private final String name;
+
+  private Tag(String name) {
+    this.name = name;
+  }
+}
+----
+
+So the enum constants were generated based on the values of a collection.
+
+== Conditionally generating a construct
+
+You should use the `include` instruction when you need to conditionally generate a construct.
+
+Consider the following template:
+
+[,java]
+----
+import objectos.code.JavaTemplate;
+
+public class Condition extends JavaTemplate {
+  boolean generate;
+
+  @Override
+  protected final void definition() {
+    classDeclaration(
+      name("Condition"),
+
+      method(
+        ABSTRACT, VOID, name("foo"),
+
+        include(this::parameters)
+      )
+    );
+  }
+
+  private void parameters() {
+    parameter(INT, name("always"));
+
+    if (generate) {
+      parameter(INT, name("maybe"));
+    }
+  }
+}
+----
+
+It generates a class named `Condition` containing a single abstract method named `foo`.
+
+The `foo` method declaration contains an `include` instruction:
+
+[,java]
+----
+method(
+  ABSTRACT, VOID, name("foo"),
+
+  include(this::parameters)
+)
+----
+
+The `include` delegates the method's formal parameters declaration to the `parameters` private method:
+
+[,java]
+----
+private void parameters() {
+  parameter(INT, name("always"));
+
+  if (generate) {
+    parameter(INT, name("maybe"));
+  }
+}
+----
+
+The `parameters` method may generate one or two `int` parameters:
+
+* the `always` parameter is always generated; and
+* the `maybe` parameter is generated depending on the value of the `generate` instance variable.
+
+The following illustrates the conditional generation of the `maybe` parameter:
+
+[,java]
+----
+var tmpl = new Condition();
+
+tmpl.generate = false;
+
+System.out.println(tmpl);
+
+tmpl.generate = true;
+
+System.out.println(tmpl);
+----
+
+Which prints:
+
+[,java]
+----
+class Condition {
+  abstract void foo(int always);
+}
+
+class Condition {
+  abstract void foo(int always, int maybe);
+}
+----
+
+So you can use the `include` instruction to conditionally generate a Java construct.

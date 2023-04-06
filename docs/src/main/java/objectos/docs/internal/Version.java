@@ -69,6 +69,10 @@ public class Version {
     @Override
     public void accept(Builder builder) {
       builder.status = value;
+
+      if (value == Status.LATEST) {
+        builder.directory = "latest";
+      }
     }
   }
 

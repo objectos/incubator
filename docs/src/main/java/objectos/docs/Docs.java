@@ -53,11 +53,11 @@ public final class Docs extends Step3Generate {
     JavaRenderer.init();
   }
 
-  public static final String INDEX = "docs/0.5.3/index";
+  public static final String INDEX = "docs/latest/index";
 
-  public static final String OVERVIEW = "docs/0.5.3/intro/overview";
+  public static final String OVERVIEW = "docs/latest/intro/overview";
 
-  public static final String LATEST = "0.5.3";
+  public static final String LATEST = "0.6.0";
 
   public Docs() {}
 
