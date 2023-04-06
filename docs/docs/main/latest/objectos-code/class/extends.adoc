@@ -1,6 +1,6 @@
 = Class direct superclass
 
-Use the `extendsClause` instruction to specify the direct superclass in your class declaration.
+Use the `extendsClause` instruction to specify the direct superclass of your class declaration.
 
 The following Objectos Code:
 

@@ -1,6 +1,6 @@
 = Class direct superinterfaces
 
-Use the `implementsClause` instruction to specify the direct superclass in your class declaration.
+Use the `implementsClause` instruction to specify the direct superinterfaces of your class declaration.
 
 The following Objectos Code:
 
@@ -34,7 +34,7 @@ class Implements implements AutoCloseable {}
 
 == Multiple superinterfaces
 
-You can specify multiple interfaces in a single `implementsClause` instructions.
+You can specify multiple interfaces in a single `implementsClause` instruction.
 
 The following Objectos Code:
 
@@ -112,7 +112,7 @@ public class ClassDeclarationImplements03 extends JavaTemplate {
 
 == Multiple superinterfaces: duplicates
 
-All of the interface names specified in `implementsCause` instructions are included in the generated output.
+All of the interface names specified in the `implementsCause` instruction are included in the generated output.
 In other words, the instruction does not filter out duplicates.
 
 The following Objectos Code:

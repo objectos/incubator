@@ -120,7 +120,8 @@ class Step1Versions extends Step0Config {
           link("/objectos-code/class/annotations"),
           link("/objectos-code/class/type-parameters"),
           link("/objectos-code/class/extends"),
-          link("/objectos-code/class/implements")
+          link("/objectos-code/class/implements"),
+          link("/objectos-code/class/permits")
         ),
 
         section(
