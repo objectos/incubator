@@ -151,6 +151,12 @@ class Step1Versions extends Step0Config {
         ),
 
         section(
+          "Constructor Declarations",
+
+          link("/objectos-code/constructor/index")
+        ),
+
+        section(
           "Statements",
 
           link("/objectos-code/statement/index"),
