@@ -83,9 +83,9 @@ public class Step3Generate extends Step2Scan {
 
     private final VersionsTemplate versionsTemplate = new VersionsTemplate(this);
 
-    private final BottomBar bottomBar = bottomBarFactory.get();
+    private BottomBar bottomBar;
 
-    private final TopBar topBar = topBarFactory.get();
+    private TopBar topBar;
 
     private String currentKey;
 
@@ -121,6 +121,9 @@ public class Step3Generate extends Step2Scan {
 
     @Override
     final HtmlTemplate $bottomBar() {
+      if (bottomBar == null) {
+        bottomBar = bottomBarFactory.get();
+      }
       return bottomBar.toFragment();
     }
 
@@ -188,6 +191,9 @@ public class Step3Generate extends Step2Scan {
 
     @Override
     final TopBar $topBar() {
+      if (topBar == null) {
+        topBar = topBarFactory.get();
+      }
       return topBar;
     }
 
