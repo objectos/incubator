@@ -1,0 +1,15 @@
+= Recommended usage
+
+TODO
+
+== Instances are meant to be reused (in a single-threaded environment) 
+
+TODO
+
+== Each template should hold all the data
+
+TODO
+
+== Where to go from here?
+
+TODO

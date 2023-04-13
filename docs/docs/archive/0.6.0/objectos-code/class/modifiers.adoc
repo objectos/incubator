@@ -1,0 +1,126 @@
+= Class modifiers
+
+Use the provided modifier constants to include _class modifiers_ to your class declaration.
+
+The following Objectos Code:
+
+[,java]
+----
+import objectos.code.JavaTemplate;
+
+public class ClassDeclarationMods01 extends JavaTemplate {
+  @Override
+  protected final void definition() {
+    classDeclaration(
+      PUBLIC, ABSTRACT, name("Modifiers"),
+
+      classDeclaration(
+        PRIVATE, STATIC, name("StaticInner")
+      )
+    );
+  }
+}
+----
+
+Generates:
+
+[,java]
+----
+public abstract class Modifiers {
+  private static class StaticInner {}
+}
+----
+
+== Duplicates
+
+All of the specified modifiers are included in the generated output.
+In other words, the `classDeclaration` instruction does not filter out duplicate modifiers.
+
+The following Objectos Code:
+
+[,java]
+----
+import objectos.code.JavaTemplate;
+
+public class ClassDeclarationMods02 extends JavaTemplate {
+  @Override
+  protected final void definition() {
+    classDeclaration(
+      PUBLIC, PUBLIC, FINAL, FINAL, name("Duplicates")
+    );
+  }
+}
+----
+
+Generates the following Java class declaration:
+
+[,java]
+----
+public public final final class Duplicates {}
+----
+
+== Including modifiers programatically
+
+Use the `include` instruction if you need to generate a different set of modifiers based on a condition.
+
+In the following Objectos Code:
+
+[,java]
+----
+import java.util.concurrent.ThreadLocalRandom;
+import objectos.code.JavaTemplate;
+
+public class ClassDeclarationMods03 extends JavaTemplate {
+  @Override
+  protected final void definition() {
+    classDeclaration(
+      include(this::modifiers), name("Condition")
+    );
+  }
+
+  private void modifiers() {
+    if (shouldBeAbstract()) {
+      code(PUBLIC, ABSTRACT);
+    } else {
+      code(PUBLIC);
+    }
+  }
+
+  private boolean shouldBeAbstract() {
+    return ThreadLocalRandom.current().nextBoolean();
+  }
+}
+----
+
+Notice the `include` instruction in the `classDeclaration` instruction:
+
+[,java]
+----
+classDeclaration(
+  include(this::modifiers), name("Condition")
+);
+----
+
+The class modifiers are defined in the private `modifiers` method:
+
+[,java]
+----
+private void modifiers() {
+  if (shouldBeAbstract()) {
+    code(PUBLIC, ABSTRACT);
+  } else {
+    code(PUBLIC);
+  }
+}
+----
+
+So, depending on the value returned by the `shouldBeAbstract` method, the following are generated:
+
+[,java]
+----
+// shouldBeAbstract() returns true
+public abstract class Condition {}
+
+// shouldBeAbstract() returns false
+public class Condition {}
+----

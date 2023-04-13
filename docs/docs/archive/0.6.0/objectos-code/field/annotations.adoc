@@ -1,0 +1,201 @@
+= Field annotations
+
+Use the `annotation` instruction to include _annotations_ to your field declaration.
+
+The following Objectos Code:
+
+[,java]
+----
+import objectos.code.ClassTypeName;
+import objectos.code.JavaTemplate;
+
+public class FieldAnnotations01 extends JavaTemplate {
+  static final ClassTypeName MY_ANNO
+      = ClassTypeName.of("com.example.annotations", "MyAnnotation");
+
+  @Override
+  protected final void definition() {
+    autoImports();
+
+    classDeclaration(
+      name("FieldAnnotations"),
+
+      field(
+        annotation(MY_ANNO),
+        PUBLIC, INT, name("a")
+      )
+    );
+  }
+}
+----
+
+Generates:
+
+[,java]
+----
+import com.example.annotations.MyAnnotation;
+
+class FieldAnnotations {
+  @MyAnnotation
+  public int a;
+}
+----
+
+== Multiple annotations
+
+Use multiple `annotation` instructions to add multiple annotations to your field declaration. 
+
+The following Objectos Code:
+
+[,java]
+----
+import objectos.code.ClassTypeName;
+import objectos.code.JavaTemplate;
+
+public class FieldAnnotations02 extends JavaTemplate {
+  static final ClassTypeName ANNO_A
+      = ClassTypeName.of("com.example.annotations", "AnnotationA");
+  static final ClassTypeName ANNO_B
+      = ClassTypeName.of("com.example.annotations", "AnnotationB");
+  static final ClassTypeName ANNO_C
+      = ClassTypeName.of("com.example.annotations", "AnnotationC");
+
+  @Override
+  protected final void definition() {
+    autoImports();
+
+    classDeclaration(
+      name("FieldAnnotations"),
+
+      field(
+        annotation(ANNO_A),
+        annotation(ANNO_B),
+        annotation(ANNO_C),
+        PUBLIC, INT, name("multiple")
+      )
+    );
+  }
+}
+----
+
+Generates the following Java class declaration:
+
+[,java]
+----
+import com.example.annotations.AnnotationA;
+import com.example.annotations.AnnotationB;
+import com.example.annotations.AnnotationC;
+
+class FieldAnnotations {
+  @AnnotationA
+  @AnnotationB
+  @AnnotationC
+  public int multiple;
+}
+----
+
+== Including annotations programatically
+
+Use the `include` instruction if you need to generate a different set of annotations based on a condition.
+
+In the following Objectos Code:
+
+[,java]
+----
+import java.util.concurrent.ThreadLocalRandom;
+import objectos.code.ClassTypeName;
+import objectos.code.JavaTemplate;
+
+public class FieldAnnotations03 extends JavaTemplate {
+  static final ClassTypeName ANNO_A
+      = ClassTypeName.of("com.example.annotations", "AnnotationA");
+  static final ClassTypeName ANNO_B
+      = ClassTypeName.of("com.example.annotations", "AnnotationB");
+  static final ClassTypeName ANNO_C
+      = ClassTypeName.of("com.example.annotations", "AnnotationC");
+
+  @Override
+  protected final void definition() {
+    autoImports();
+
+    classDeclaration(
+      name("FieldAnnotations"),
+
+      field(
+        include(this::annotations),
+        PUBLIC, INT, name("programmatically")
+      )
+    );
+  }
+
+  private void annotations() {
+    annotation(ANNO_A);
+
+    if (shouldHaveAnnoB()) {
+      annotation(ANNO_B);
+    }
+
+    annotation(ANNO_C);
+  }
+
+  private boolean shouldHaveAnnoB() {
+    return ThreadLocalRandom.current().nextBoolean();
+  }
+}
+----
+
+Notice the `include` instruction in the `field` instruction:
+
+[,java]
+----
+field(
+  include(this::annotations),
+  PUBLIC, INT, name("programmatically")
+)
+----
+
+The annotations are defined in the private `annotations` method:
+
+[,java]
+----
+private void annotations() {
+  annotation(ANNO_A);
+
+  if (shouldHaveAnnoB()) {
+    annotation(ANNO_B);
+  }
+
+  annotation(ANNO_C);
+}
+----
+
+So, depending on the value returned by the `shouldHaveAnnoB` method, the following are generated:
+
+[,java]
+----
+// shouldHaveAnnoB() returns true
+import com.example.annotations.AnnotationA;
+import com.example.annotations.AnnotationB;
+import com.example.annotations.AnnotationC;
+
+class FieldAnnotations {
+  @AnnotationA
+  @AnnotationB
+  @AnnotationC
+  public int programmatically;
+}
+
+// shouldHaveAnnoB() returns false
+import com.example.annotations.AnnotationA;
+import com.example.annotations.AnnotationC;
+
+class FieldAnnotations {
+  @AnnotationA
+  @AnnotationC
+  public int programmatically;
+}
+----
+
+== Type annotations
+
+Annotating the field type is currently not supported.

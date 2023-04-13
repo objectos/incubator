@@ -13,36 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package objectos.docs.code.method;
+package objectos.docs.code.constructor;
 
-import java.util.concurrent.ThreadLocalRandom;
 import objectos.code.JavaTemplate;
 
-public class MethodMods04 extends JavaTemplate {
+public class ConstructorMods02 extends JavaTemplate {
   public static void main(String[] args) {
-    System.out.println(new MethodMods04());
+    System.out.println(new ConstructorMods02());
   }
 
   @Override
   protected final void definition() {
     classDeclaration(
-      name("Programmatically"),
+      name("LastOneWins"),
 
-      method(
-        include(this::modifiers), INT, name("a")
+      constructor(
+        PUBLIC, PROTECTED, PRIVATE
       )
     );
-  }
-
-  private void modifiers() {
-    code(PUBLIC);
-
-    if (shouldBeFinal()) {
-      code(FINAL);
-    }
-  }
-
-  private boolean shouldBeFinal() {
-    return ThreadLocalRandom.current().nextBoolean();
   }
 }

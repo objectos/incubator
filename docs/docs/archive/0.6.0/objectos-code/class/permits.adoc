@@ -1,0 +1,206 @@
+= Class permitted direct subclasses
+
+Use the `permitsClause` instruction to specify the permitted direct subclasses of your class declaration.
+
+The following Objectos Code:
+
+[,java]
+----
+import objectos.code.ClassTypeName;
+import objectos.code.JavaTemplate;
+
+public class ClassDeclarationPermits01 extends JavaTemplate {
+  static final ClassTypeName SUBCLASS
+      = ClassTypeName.of("com.example", "Subclass");
+
+  @Override
+  protected final void definition() {
+    autoImports();
+
+    classDeclaration(
+      name("Example"),
+      permitsClause(SUBCLASS)
+    );
+  }
+}
+----
+
+Generates the following Java class declaration:
+
+[,java]
+----
+import com.example.Subclass;
+
+class Example permits Subclass {}
+----
+
+== Multiple permitted subclasses
+
+You can specify multiple permitted subclasses in a single `permitsClause` instruction.
+
+The following Objectos Code:
+
+[,java]
+----
+import objectos.code.ClassTypeName;
+import objectos.code.JavaTemplate;
+
+public class ClassDeclarationPermits02 extends JavaTemplate {
+  static final ClassTypeName A
+      = ClassTypeName.of("com.example", "A");
+  static final ClassTypeName B
+      = ClassTypeName.of("com.example", "B");
+  static final ClassTypeName C
+      = ClassTypeName.of("com.example", "C");
+  static final ClassTypeName D
+      = ClassTypeName.of("com.example", "D");
+
+  @Override
+  protected final void definition() {
+    autoImports();
+
+    classDeclaration(
+      name("PermitsMany"),
+      permitsClause(A, B, C, D)
+    );
+  }
+}
+----
+
+Generates:
+
+[,java]
+----
+import com.example.A;
+import com.example.B;
+import com.example.C;
+import com.example.D;
+
+class PermitsMany permits A, B, C, D {}
+----
+
+Alternatively, you can use multiple `permitsClause` instructions.
+
+The following Objectos Code will produce the same output:
+
+[,java]
+----
+import objectos.code.ClassTypeName;
+import objectos.code.JavaTemplate;
+
+public class ClassDeclarationPermits03 extends JavaTemplate {
+  static final ClassTypeName A
+      = ClassTypeName.of("com.example", "A");
+  static final ClassTypeName B
+      = ClassTypeName.of("com.example", "B");
+  static final ClassTypeName C
+      = ClassTypeName.of("com.example", "C");
+  static final ClassTypeName D
+      = ClassTypeName.of("com.example", "D");
+
+  @Override
+  protected final void definition() {
+    autoImports();
+
+    classDeclaration(
+      name("PermitsMany"),
+      permitsClause(A),
+      permitsClause(B, C),
+      permitsClause(D)
+    );
+  }
+}
+----
+
+== Multiple permitted subclasses: duplicates
+
+All of the type names specified in the `permitsCause` instruction are included in the generated output.
+In other words, the instruction does not filter out duplicates.
+
+The following Objectos Code:
+
+[,java]
+----
+import objectos.code.ClassTypeName;
+import objectos.code.JavaTemplate;
+
+public class ClassDeclarationPermits04 extends JavaTemplate {
+  static final ClassTypeName A
+      = ClassTypeName.of("com.example", "A");
+  static final ClassTypeName B
+      = ClassTypeName.of("com.example", "B");
+
+  @Override
+  protected final void definition() {
+    autoImports();
+
+    classDeclaration(
+      name("PermitsDuplicates"),
+      permitsClause(A),
+      permitsClause(A),
+      permitsClause(B, B)
+    );
+  }
+}
+----
+
+Generates:
+
+[,java]
+----
+import com.example.A;
+import com.example.B;
+
+class PermitsDuplicates permits A, A, B, B {}
+----
+
+== Including permitted subclasses programmatically
+
+Use the `include` instruction to add permitted subclasses to a class declaration programmatically.
+
+Consider the following Objectos Code template:
+
+[,java]
+----
+import java.util.List;
+import objectos.code.ClassTypeName;
+import objectos.code.JavaTemplate;
+
+public class ClassDeclarationPermits05 extends JavaTemplate {
+  final List<String> simpleNames = List.of("SubA", "SubB", "SubC");
+
+  @Override
+  protected final void definition() {
+    autoImports();
+
+    classDeclaration(
+      name("Programmatically"),
+      include(this::subclasses)
+    );
+  }
+
+  private void subclasses() {
+    for (var simpleName : simpleNames) {
+      permitsClause(
+        ClassTypeName.of("com.example", simpleName)
+      );
+    }
+  }
+}
+----
+
+It uses an `include` instruction to add the `subclasses` partial template.
+
+The `subclasses` method, our partial template, iterates over the `simpleNames` instance variable.
+For each simple name from the list, it adds an `permitsClause` instruction.
+
+The template generates: 
+
+[,java]
+----
+import com.example.SubA;
+import com.example.SubB;
+import com.example.SubC;
+
+class Programmatically permits SubA, SubB, SubC {}
+----
