@@ -1,6 +1,6 @@
-= Method annotations
+= Constructor annotations
 
-Use the `annotation` instruction to include _annotations_ to your method declaration.
+Use the `annotation` instruction to include _annotations_ to your constructor declaration.
 
 The following Objectos Code:
 
@@ -9,7 +9,7 @@ The following Objectos Code:
 import objectos.code.ClassTypeName;
 import objectos.code.JavaTemplate;
 
-public class MethodAnnotations01 extends JavaTemplate {
+public class ConstructorAnnotations01 extends JavaTemplate {
   static final ClassTypeName MY_ANNO
       = ClassTypeName.of("com.example.annotations", "MyAnnotation");
 
@@ -18,12 +18,11 @@ public class MethodAnnotations01 extends JavaTemplate {
     autoImports();
 
     classDeclaration(
-      name("MethodAnnotations"),
+      name("ConstructorAnnotations"),
 
-      method(
+      constructor(
         annotation(MY_ANNO),
-        PUBLIC, INT, name("annotatedMethod"),
-        p(RETURN, i(123))
+        PUBLIC
       )
     );
   }
@@ -36,17 +35,15 @@ Generates:
 ----
 import com.example.annotations.MyAnnotation;
 
-class MethodAnnotations {
+class ConstructorAnnotations {
   @MyAnnotation
-  public int annotatedMethod() {
-    return 123;
-  }
+  public ConstructorAnnotations() {}
 }
 ----
 
 == Multiple annotations
 
-Use multiple `annotation` instructions to add multiple annotations to your method declaration. 
+Use multiple `annotation` instructions to add multiple annotations to your constructor declaration. 
 
 The following Objectos Code:
 
@@ -55,7 +52,7 @@ The following Objectos Code:
 import objectos.code.ClassTypeName;
 import objectos.code.JavaTemplate;
 
-public class MethodAnnotations02 extends JavaTemplate {
+public class ConstructorAnnotations02 extends JavaTemplate {
   static final ClassTypeName ANNO_A
       = ClassTypeName.of("com.example.annotations", "AnnotationA");
   static final ClassTypeName ANNO_B
@@ -68,13 +65,13 @@ public class MethodAnnotations02 extends JavaTemplate {
     autoImports();
 
     classDeclaration(
-      name("MethodAnnotations"),
+      name("ConstructorAnnotations"),
 
-      method(
+      constructor(
         annotation(ANNO_A),
         annotation(ANNO_B),
         annotation(ANNO_C),
-        PUBLIC, ABSTRACT, VOID, name("multipleAnnotations")
+        PUBLIC
       )
     );
   }
@@ -89,11 +86,11 @@ import com.example.annotations.AnnotationA;
 import com.example.annotations.AnnotationB;
 import com.example.annotations.AnnotationC;
 
-class MethodAnnotations {
+class ConstructorAnnotations {
   @AnnotationA
   @AnnotationB
   @AnnotationC
-  public abstract void multipleAnnotations();
+  public ConstructorAnnotations() {}
 }
 ----
 
@@ -109,7 +106,7 @@ import java.util.concurrent.ThreadLocalRandom;
 import objectos.code.ClassTypeName;
 import objectos.code.JavaTemplate;
 
-public class MethodAnnotations03 extends JavaTemplate {
+public class ConstructorAnnotations03 extends JavaTemplate {
   static final ClassTypeName ANNO_A
       = ClassTypeName.of("com.example.annotations", "AnnotationA");
   static final ClassTypeName ANNO_B
@@ -122,11 +119,11 @@ public class MethodAnnotations03 extends JavaTemplate {
     autoImports();
 
     classDeclaration(
-      name("MethodAnnotations"),
+      name("ConstructorAnnotations"),
 
-      method(
+      constructor(
         include(this::annotations),
-        PUBLIC, ABSTRACT, VOID, name("programmatically")
+        PUBLIC, parameter(INT, name("value"))
       )
     );
   }
@@ -147,13 +144,13 @@ public class MethodAnnotations03 extends JavaTemplate {
 }
 ----
 
-Notice the `include` instruction in the `method` instruction:
+Notice the `include` instruction in the `constructor` instruction:
 
 [,java]
 ----
-method(
+constructor(
   include(this::annotations),
-  PUBLIC, ABSTRACT, VOID, name("programmatically")
+  PUBLIC, parameter(INT, name("value"))
 )
 ----
 
@@ -181,24 +178,20 @@ import com.example.annotations.AnnotationA;
 import com.example.annotations.AnnotationB;
 import com.example.annotations.AnnotationC;
 
-class MethodAnnotations {
+class ConstructorAnnotations {
   @AnnotationA
   @AnnotationB
   @AnnotationC
-  public abstract void programmatically();
+  public ConstructorAnnotations(int value) {}
 }
 
 // shouldHaveAnnoB() returns false
 import com.example.annotations.AnnotationA;
 import com.example.annotations.AnnotationC;
 
-class MethodAnnotations {
+class ConstructorAnnotations {
   @AnnotationA
   @AnnotationC
-  public abstract void programmatically();
+  public ConstructorAnnotations(int value) {}
 }
 ----
-
-== Type annotations
-
-Annotating the return type is currently not supported.
