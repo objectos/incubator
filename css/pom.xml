@@ -16,7 +16,9 @@
     limitations under the License.
 
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
 
@@ -26,19 +28,19 @@
 		<version>0.6.1-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
-	
+
 	<artifactId>css-parent</artifactId>
 	<packaging>pom</packaging>
 
 	<name>${project.groupId}:${project.artifactId}</name>
 
 	<description>
-	A library for generating CSS using pure Java.
+		A library for generating CSS using pure Java.
 	</description>
 
 	<inceptionYear>2015</inceptionYear>
 
-	<properties>	
+	<properties>
 		<org.jsoup.version>1.13.1</org.jsoup.version>
 	</properties>
 
@@ -62,6 +64,12 @@
 				<version>${project.version}</version>
 				<type>pom</type>
 				<scope>import</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>br.com.objectos</groupId>
+				<artifactId>objectos-code</artifactId>
+				<version>0.6.0</version>
 			</dependency>
 
 			<dependency>
