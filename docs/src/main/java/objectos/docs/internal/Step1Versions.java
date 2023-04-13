@@ -1245,7 +1245,8 @@ class Step1Versions extends Step0Config {
 
           link("/objectos-code/constructor/index"),
           link("/objectos-code/constructor/modifiers"),
-          link("/objectos-code/constructor/annotations")
+          link("/objectos-code/constructor/annotations"),
+          link("/objectos-code/constructor/parameters")
         ),
 
         section(
