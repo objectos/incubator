@@ -3,9 +3,10 @@
 Objectos is a suite of open-source Java libraries. It is currently under construction and
 still does very little.
 
-In the 0.5.x release series it provides:
+In the 0.6.x release series it provides:
 
 * an API for generating HTML files and source code;
+* an API for processing AsciiDoc documents;
 * an API for generating Java source code;
 * a set of utilities for objects whose type is from the `java.lang` package;
 * a note sink API; and
