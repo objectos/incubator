@@ -42,6 +42,23 @@ public class JavaRendererTest implements LanguageRenderer.Output {
     );
   }
 
+  @Test(enabled = false)
+  public void testCase02() {
+    renderer.render(this, "char c = 'a';");
+    assertEquals(
+      out,
+      """
+      <span mikkk>char</span>\
+      <span hsf> </span>\
+      <span xzx>c</span>\
+      <span hsf> </span>\
+      <span xzx>=</span>\
+      <span xzx> </span>\
+      <span xzx>'a'</span>\
+      <span wdm>;</span>"""
+    );
+  }
+
   @Override
   public final void languageSpan(ClassSelector clazz, String contents) {
     out.append("<span ");

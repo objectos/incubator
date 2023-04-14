@@ -50,6 +50,8 @@ public final class JavaRenderer extends LanguageRenderer {
 
   private static final byte _WS = 11;
 
+  private static final byte _CHAR_LITERAL = 12;
+
   private int index;
 
   private String java;
@@ -91,6 +93,8 @@ public final class JavaRenderer extends LanguageRenderer {
     switch (state) {
       case _ANNOTATION:
         return executeAnnotation();
+      case _CHAR_LITERAL:
+        return executeCharLiteral();
       case _COMMENT:
         return executeComment();
       case _COMMENT_BLOCK:
@@ -114,6 +118,35 @@ public final class JavaRenderer extends LanguageRenderer {
       default:
         throw new UnsupportedOperationException("Implement me: state=" + state);
     }
+  }
+
+  private byte executeCharLiteral() {
+    boolean found = false;
+
+    while (hasNext()) {
+      char c;
+      c = next();
+
+      stringBuilder.append(c);
+
+      if (c == '\'') {
+        found = true;
+
+        break;
+      }
+    }
+
+    String lit;
+    lit = makeString();
+
+    if (!found) {
+      throw new UnsupportedOperationException(
+        "Implement me: char literal missing closing quote: " + lit);
+    }
+
+    span(JavaStyles._DIGITS, lit);
+
+    return _START;
   }
 
   private byte executeAnnotation() {
@@ -294,6 +327,10 @@ public final class JavaRenderer extends LanguageRenderer {
       return _INT_LITERAL;
     }
 
+    else if (c == '\'') {
+      return _CHAR_LITERAL;
+    }
+
     throw new UnsupportedOperationException("Implement me: c=" + c);
   }
 
@@ -302,7 +339,7 @@ public final class JavaRenderer extends LanguageRenderer {
 
     char previous = '\0';
 
-    outer: while (hasNext()) {
+    while (hasNext()) {
       char c;
       c = next();
 
@@ -311,7 +348,7 @@ public final class JavaRenderer extends LanguageRenderer {
       if (c == '"' && previous != '\\') {
         found = true;
 
-        break outer;
+        break;
       }
 
       previous = c;
@@ -338,7 +375,7 @@ public final class JavaRenderer extends LanguageRenderer {
 
     boolean found = false;
 
-    outer: while (hasNext()) {
+    while (hasNext()) {
       char c;
       c = next();
 
@@ -352,7 +389,7 @@ public final class JavaRenderer extends LanguageRenderer {
             && stringBuilder.charAt(last--) == '"') {
           found = true;
 
-          break outer;
+          break;
         }
       }
     }
