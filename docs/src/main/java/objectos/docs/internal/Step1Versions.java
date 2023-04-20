@@ -1412,7 +1412,8 @@ class Step1Versions extends Step0Config {
         section(
           "Interface Declarations",
 
-          link("/objectos-code/interface/index")
+          link("/objectos-code/interface/index"),
+          link("/objectos-code/interface/name")
         ),
 
         section(
