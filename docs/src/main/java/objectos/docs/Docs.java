@@ -57,7 +57,7 @@ public final class Docs extends Step3Generate {
 
   public static final String OVERVIEW = "docs/latest/intro/overview";
 
-  public static final String LATEST = "0.6.1";
+  public static final String LATEST = "0.6.2";
 
   public Docs() {}
 

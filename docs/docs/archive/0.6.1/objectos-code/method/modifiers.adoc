@@ -1,0 +1,191 @@
+= Method modifiers
+
+Use the provided modifier constants to add modifiers to your method declaration.
+
+The following Objectos Code:
+
+[,java]
+----
+import objectos.code.JavaTemplate;
+
+public class MethodMods01 extends JavaTemplate {
+  @Override
+  protected final void definition() {
+    classDeclaration(
+      name("Modifiers"),
+
+      method(
+        PUBLIC, STATIC, INT, name("a")
+      ),
+
+      method(
+        PROTECTED, BOOLEAN, name("b")
+      )
+    );
+  }
+}
+----
+
+Generates:
+
+[,java]
+----
+class Modifiers {
+  public static int a() {}
+
+  protected boolean b() {}
+}
+----
+
+== Specifying the same modifier multiple times
+
+All of the specified modifiers are included in the generated output.
+In other words, the `method` instruction does not filter out duplicate modifiers.
+
+The following Objectos Code:
+
+[,java]
+----
+import objectos.code.JavaTemplate;
+
+public class MethodMods02 extends JavaTemplate {
+  @Override
+  protected final void definition() {
+    classDeclaration(
+      name("Duplicates"),
+
+      method(
+        PUBLIC, PUBLIC, FINAL, FINAL, INT, name("a")
+      )
+    );
+  }
+}
+----
+
+Generates the following Java class declaration:
+
+[,java]
+----
+class Duplicates {
+  public public final final int a() {}
+}
+----
+
+== Abstact methods
+
+Add the `ABSTRACT` constant to generate an abstract method.
+
+If the `ABSTRACT` constant is specified then no body is generated for the method.
+In other words, if statements are specified then they are all ignored.
+
+The following Objectos Code:
+
+[,java]
+----
+import objectos.code.JavaTemplate;
+
+public class MethodMods03 extends JavaTemplate {
+  @Override
+  protected final void definition() {
+    classDeclaration(
+      name("AbstractMethod"),
+
+      method(
+        PUBLIC, ABSTRACT, INT, name("a")
+      ),
+
+      method(
+        PUBLIC, ABSTRACT, INT, name("b"),
+        p(RETURN, i(123))
+      )
+    );
+  }
+}
+----
+   
+Generates:
+
+[,java]
+----
+class AbstractMethod {
+  public abstract int a();
+
+  public abstract int b();
+}
+----
+
+Notice how the `return` statement was ignored in the second method declaration.
+
+== Including modifiers programmatically
+
+Use the `include` instruction if you need to generate a different set of modifiers based on a condition.
+
+In the following Objectos Code:
+
+[,java]
+----
+import java.util.concurrent.ThreadLocalRandom;
+import objectos.code.JavaTemplate;
+
+public class MethodMods04 extends JavaTemplate {
+  @Override
+  protected final void definition() {
+    classDeclaration(
+      name("Programmatically"),
+
+      method(
+        include(this::modifiers), INT, name("a")
+      )
+    );
+  }
+
+  private void modifiers() {
+    code(PUBLIC);
+
+    if (shouldBeFinal()) {
+      code(FINAL);
+    }
+  }
+
+  private boolean shouldBeFinal() {
+    return ThreadLocalRandom.current().nextBoolean();
+  }
+}
+----
+
+Notice the `include` instruction in the `method` instruction:
+
+[,java]
+----
+method(
+  include(this::modifiers), INT, name("a")
+)
+----
+
+The method modifiers are defined in the private `modifiers` method:
+
+[,java]
+----
+private void modifiers() {
+  code(PUBLIC);
+
+  if (shouldBeFinal()) {
+    code(FINAL);
+  }
+}
+----
+
+So, depending on the value returned by the `shouldBeFinal` method, the following are generated:
+
+[,java]
+----
+// shouldBeFinal() returns true
+class Programmatically {
+  public final int a() {}
+}
+
+// shouldBeFinal() returns false
+class Programmatically {
+  public int a() {}
+}
+----

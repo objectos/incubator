@@ -1,0 +1,32 @@
+= Objectos 0.5.2 release notes
+:toc-title: Objectos 0.5.2
+
+_March 24, 2023_
+
+Welcome to Objectos 0.5.2.
+This release continues the API improvements on Objectos HTML.
+It also continues the documentation efforts on Objectos Code.
+
+== New features
+
+* Allow the `final` modifier in formal parameters issue:298[]
+
+== Enhancements
+
+* Allow for 'stateless' writers issue:290[]
+* script(String) and style(String) should imply raw text issue:292[]
+* Remove Marker & Renderer issue:293[]
+* Merge objectos-html-spi module into objectos-html issue:294[]
+* Write doctype in UPPERCASE as described in the spec issue:295[]
+* Figure out a better name than `_class` (class property) issue:302[]
+
+== Work
+
+* Use standard formatting (pretty-print) in HtmlTemplateTest issue:291[]
+* DocumentProcessor: pseudo-DOM for HtmlTemplate processing (First iteration) issue:296[]
+* Use pathName and pathTo in Docs issue:300[]
+* Have `Version` contain the 'left-bar' declaration issue:301[]
+
+== Documentation
+
+* Add documentation for Objectos Code's Method declarations (iter. 2) issue:297[]

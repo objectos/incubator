@@ -1,0 +1,29 @@
+= Objectos 0.4.1 release notes
+:toc-title: Objectos 0.4.1
+
+_February 10, 2023_
+
+Welcome to Objectos 0.4.1.
+This is a minor release which focuses solely on Objectos Code.
+
+== New features
+
+* The if statement TC01: IfThenStatement issue:162[]
+* Method declaration: allow include as parameter element issue:178[]
+* Field declaration: init with a qualified method invocation (static) issue:180[]
+* Field declaration: include in array init + nl issue:181[]
+* Objectos Code: Equality Operators issue:183[]
+* Objectos Code: The throw statement issue:184[]
+* Primary Expressions TC02: null literal issue:185[]
+* Class Instance Creation Expressions TC03: new(parameterized type) issue:186[]
+* Class declarations TC10: allow nested interface declarations issue:187[]
+
+== Bug fixes
+
+* Method Invocation Expression: comma at incorrect location issue:177[]
+* Include: ArrayIndexOutOfBounds when included template adds no instructions issue:179[]
+* JavaSink: file name should be first public top-level type. issue:182[]
+
+== Documentation
+
+* Docs / Objectos Code / Assignment Operator issue:189[]

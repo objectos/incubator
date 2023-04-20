@@ -1,0 +1,46 @@
+= Objectos 0.1.0 release notes
+:toc-title: Objectos 0.1.0
+
+_May 16, 2022_
+
+Welcome to Objectos 0.1.0! This is the first public release of the
+Objectos suite of Java libraries.
+
+== JDK compatibility
+
+Objectos 0.1.0 requires JDK 17 or later.
+
+== What's new in Objectos 0.1.0
+
+These are the new features included in this version.
+
+=== Objectos BOM POM
+
+Objectos provides a Bill of Materials (BOM) POM. A BOM POM can help managing the versions
+of the Objectos dependencies in a project.
+
+We *highly recommend* the use of the Objectos BOM POM.
+
+=== Objectos Logging
+
+elink:v0001/logging/index[Objectos Logging] provides a logging API for Java applications.
+You log events and not string messages. Events can have type arguments so that log
+method invocations are type-safe. A hypothetical service that only logs "hello world!"
+could be written as:
+
+[,java]
+----
+import objectos.logging.*;
+
+public class Service {
+  static final Event1<String> SAY_HELLO = Event1.info();
+
+  private final Logger logger;
+
+  Service(Logger logger) { this.logger = logger; }
+
+  public void sayHelloWorld() {
+    logger.log(SAY_HELLO, "world!");
+  }
+}
+----

@@ -1,0 +1,178 @@
+= Method name
+
+Use the `name` instruction to define the name of the generated field declaration.
+
+You can specify the name as a string value, like so:
+
+[,java]
+----
+import objectos.code.JavaTemplate;
+
+public class MethodName01 extends JavaTemplate {
+  @Override
+  protected final void definition() {
+    classDeclaration(
+      name("MethodName"),
+
+      method(
+        VOID, name("myMethod")
+      )
+    );
+  }
+}
+----
+
+The code above generates:
+
+[,java]
+----
+class MethodName {
+  void myMethod() {}
+}
+----
+
+== Multiple `name` instructions
+
+When multiple `name` instructions are used in the same `method` instruction then "the last one wins".
+In other words, the method declaration is generated with the last specified `name` instruction.
+
+The following Objectos Code:
+
+[,java]
+----
+import objectos.code.JavaTemplate;
+
+public class MethodName02 extends JavaTemplate {
+  @Override
+  protected final void definition() {
+    classDeclaration(
+      name("MultipleNames"),
+
+      method(
+        VOID, name("a"), name("b"), name("c")
+      ),
+
+      method(
+        VOID, name("d"), name("e"), name("f")
+      )
+    );
+  }
+}
+----
+
+Generates:
+
+[,java]
+----
+class MultipleNames {
+  void c() {}
+
+  void f() {}
+}
+----
+
+== No `name` instruction specified
+
+If you don't specify a name for your method declaration it will be generated with the `unnamed` name.
+
+The following Objectos Code:
+
+[,java]
+----
+import objectos.code.JavaTemplate;
+
+public class MethodName03 extends JavaTemplate {
+  @Override
+  protected final void definition() {
+    classDeclaration(
+      name("Unnamed"),
+
+      method(VOID),
+
+      method(INT)
+    );
+  }
+}
+----
+
+Generates:
+
+[,java]
+----
+class Unnamed {
+  void unnamed() {}
+
+  int unnamed() {}
+}
+----
+
+== Invalid names
+
+The `name(String)` instruction will reject names that contain invalid characters for a Java identifier.
+
+The following Objectos Code:
+
+[,java]
+----
+import objectos.code.JavaTemplate;
+
+public class MethodName04 extends JavaTemplate {
+  @Override
+  protected final void definition() {
+    classDeclaration(
+      name("InvalidNames"),
+
+      method(VOID, name("invalid.name"))
+    );
+  }
+}
+----
+
+Fails with the following exception:
+
+----
+Exception in thread "main" java.lang.IllegalArgumentException: The string invalid.name is an invalid identifier:
+
+It must not contain a '.' character.
+
+	at objectos.code.internal.JavaModel.checkName(JavaModel.java:187)
+	at objectos.code.internal.JavaModel.checkIdentifier(JavaModel.java:27)
+	at objectos.code.JavaTemplate.name(JavaTemplate.java:2372)
+	at objectos.docs.code.method.MethodName04.definition(MethodName04.java:30)
+	(...)
+----
+
+== Invalid names: caveat
+
+Please note that the `name(String)` instruction will only check for invalid characters in identifiers.
+It does not check if a string containing only valid identifier characters makes up a valid identifier.
+
+In other words, the following Objectos Code executes normally:
+
+[,java]
+----
+import objectos.code.JavaTemplate;
+
+public class MethodName05 extends JavaTemplate {
+  @Override
+  protected final void definition() {
+    classDeclaration(
+      name("Caveat"),
+
+      method(VOID, name("import"))
+    );
+  }
+}
+----
+
+It generates the following Java code:
+
+[,java]
+----
+class Caveat {
+  void import() {}
+}
+----
+
+Note that `import`, even though does not contain invalid characters for an identifier, is not a valid Java identifier:
+`import` is a reserved keyword.

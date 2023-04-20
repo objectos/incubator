@@ -1,0 +1,156 @@
+= Field type
+
+Use a `TypeName` instance to define the type of the generated field declaration.
+
+The following Objectos Code:
+
+[,java]
+----
+import java.util.List;
+import objectos.code.ArrayTypeName;
+import objectos.code.ClassTypeName;
+import objectos.code.JavaTemplate;
+import objectos.code.ParameterizedTypeName;
+import objectos.code.TypeVariableName;
+
+public class FieldType01 extends JavaTemplate {
+  static final ClassTypeName STRING
+      = ClassTypeName.of(String.class);
+
+  static final ParameterizedTypeName LIST
+      = ParameterizedTypeName.of(
+        ClassTypeName.of(List.class),
+        STRING
+      );
+
+  static final TypeVariableName E
+      = TypeVariableName.of("E");
+
+  static final ArrayTypeName OBJECT_ARRAY
+      = ArrayTypeName.of(Object[].class);
+
+  @Override
+  protected final void definition() {
+    autoImports();
+
+    classDeclaration(
+      name("FieldType"),
+
+      field(
+        INT, name("primitive")
+      ),
+
+      field(
+        STRING, name("classOrInterface")
+      ),
+
+      field(
+        LIST, name("parameterized")
+      ),
+
+      field(
+        E, name("typeVariable")
+      ),
+
+      field(
+        OBJECT_ARRAY, name("array")
+      )
+    );
+  }
+}
+----
+
+Generates the following Java code:
+
+[,java]
+----
+import java.util.List;
+
+class FieldType {
+  int primitive;
+
+  String classOrInterface;
+
+  List<String> parameterized;
+
+  E typeVariable;
+
+  Object[] array;
+}
+----
+
+== Multiple types
+
+When you specify multiple types in the same field declaration it is generated with the type that was specified last.
+
+The following Objectos Code:
+
+[,java]
+----
+import objectos.code.ClassTypeName;
+import objectos.code.JavaTemplate;
+
+public class FieldType02 extends JavaTemplate {
+  static final ClassTypeName STRING
+      = ClassTypeName.of(String.class);
+
+  @Override
+  protected final void definition() {
+    autoImports();
+
+    classDeclaration(
+      name("MultipleTypes"),
+
+      field(
+        INT, STRING, name("example")
+      )
+    );
+  }
+}
+----
+
+Generates:
+
+[,java]
+----
+class MultipleTypes {
+  String example;
+}
+----
+
+== No type specified
+
+Please note that a type _must be_ specified.
+If you do not specify a type, Objectos Code will generate an invalid field declaration.
+
+The following Objectos Code:
+
+[,java]
+----
+import objectos.code.JavaTemplate;
+
+public class FieldType03 extends JavaTemplate {
+  @Override
+  protected final void definition() {
+    classDeclaration(
+      name("NoType"),
+
+      field(
+        name("missingType")
+      )
+    );
+  }
+}
+----
+
+Generates:
+
+[,java]
+----
+class NoType {
+  void missingType;
+}
+----
+
+Objectos Code is a template engine;
+the generated Java code must be validated by a Java compiler.

@@ -1,0 +1,61 @@
+= Interface Declarations
+:toc-title: Overview
+
+Use the `interfaceDeclaration` instruction to generate Java interface declarations using Objectos Code.
+
+The following Objectos Code:
+
+[,java]
+----
+import objectos.code.ClassTypeName;
+import objectos.code.JavaTemplate;
+import objectos.code.TypeVariableName;
+
+public class InterfaceDeclaration extends JavaTemplate {
+  static final ClassTypeName EXAMPLE
+      = ClassTypeName.of("com.example.annotations", "Example");
+
+  static final ClassTypeName STRING
+      = ClassTypeName.of(String.class);
+
+  @Override
+  protected final void definition() {
+    packageDeclaration("com.example");
+
+    autoImports();
+
+    interfaceDeclaration(
+      annotation(
+        EXAMPLE,
+        annotationValue(s("An 'interfaceDeclaration' example."))
+      ),
+      PUBLIC, name("Value"),
+      typeParameter("T"),
+
+      field(
+        INT, name("CONSTANT"), i(123)
+      ),
+
+      method(
+        TypeVariableName.of("T"), name("get")
+      )
+    );
+  }
+}
+----
+
+Generates the following Java interface declaration:
+
+[,java]
+----
+package com.example;
+
+import com.example.annotations.Example;
+
+@Example("An 'interfaceDeclaration' example.")
+public interface Value<T> {
+  int CONSTANT = 123;
+
+  T get();
+}
+----

@@ -1,0 +1,198 @@
+= The `autoImports` instruction
+
+By default the `JavaTemplate` class will write the fully qualified name of any declared type it encounters.
+Alternatively, it can automatically generate any required import declaration instead.
+
+The `autoImports` instruction is used to enable the automatic generation of import declarations. 
+
+== Enabling automatic import generation
+
+The following template generates a class containing two fields: 
+
+[,java]
+----
+import java.nio.file.Path;
+import java.time.LocalDate;
+import objectos.code.ClassTypeName;
+import objectos.code.JavaTemplate;
+
+public class AutoImportsOn extends JavaTemplate {
+  static final ClassTypeName LOCAL_DATE = ClassTypeName.of(LocalDate.class);
+
+  static final ClassTypeName PATH = ClassTypeName.of(Path.class);
+
+  static final ClassTypeName STRING = ClassTypeName.of(String.class);
+
+  @Override
+  protected final void definition() {
+    packageDeclaration("com.example");
+
+    autoImports();
+
+    classDeclaration(
+      PUBLIC, name("AutoImports"),
+
+      field(
+        LOCAL_DATE, name("a")
+      ),
+
+      field(
+        PATH, name("b")
+      ),
+
+      field(
+        STRING, name("c")
+      )
+    );
+  }
+}
+----
+
+Notice that the `autoImports` instruction is enabled.
+It generates the following Java code:
+
+[,java]
+----
+package com.example;
+
+import java.nio.file.Path;
+import java.time.LocalDate;
+
+public class AutoImports {
+  LocalDate a;
+
+  Path b;
+
+  String c;
+}
+----
+
+So, by declaring the `autoImports` instructions, import declarations were generated for the types:
+
+- `java.nio.file.Path`; and
+- `java.time.localDate`.
+
+The `String` type belongs to the `java.lang` package.
+The latter is implicitly imported by all Java compilation units.
+For this reason an import declaration for the former is not generated.
+
+Next, let's look at the output when the `autoImports` instruction is not declared. 
+
+== Generation without `autoImports`
+
+Let's omit the `autoImports` instruction from our previous example:
+
+[,java]
+----
+@Override
+protected final void definition() {
+  packageDeclaration("com.example");
+
+  classDeclaration(
+    PUBLIC, name("AutoImports"),
+
+    field(
+      LOCAL_DATE, name("a")
+    ),
+
+    field(
+      PATH, name("b")
+    ),
+
+    field(
+      STRING, name("c")
+    )
+  );
+}
+----
+
+In this case, it generates the following Java code:
+
+[,java]
+----
+package com.example;
+
+public class AutoImports {
+  java.time.LocalDate a;
+
+  java.nio.file.Path b;
+
+  java.lang.String c;
+}
+----
+
+Notice how _all_ types are declared in their fully qualified names.
+All of them, including the ones from the `java.lang` package.
+
+== Name conflicts
+
+Suppose two distinct types having the same simple name. 
+For example, consider the following `List` types:
+
+* `java.awt.List`; and
+* `java.util.List`.
+
+A single compilation unit containing import declarations for both types might lead to a name conflict;
+the simple name `List` becomes ambiguous.
+ 
+The `JavaTemplate` class handles cases likes this in the following way:
+
+* the first type it encounters is imported; and
+* any subsequent type is declared in its fully qualified name.
+
+To illustrate consider the following example:
+
+[,java]
+----
+import objectos.code.ClassTypeName;
+import objectos.code.JavaTemplate;
+
+public class AutoImportsConflict extends JavaTemplate {
+  private static final ClassTypeName LIST_A = ClassTypeName.of(java.awt.List.class);
+
+  private static final ClassTypeName LIST_B = ClassTypeName.of(java.util.List.class);
+
+  private static final ClassTypeName LIST_C = ClassTypeName.of("com.example", "List");
+
+  @Override
+  protected final void definition() {
+    packageDeclaration("com.example");
+
+    autoImports();
+
+    classDeclaration(
+      PUBLIC, name("AutoImports"),
+
+      field(LIST_A, name("a")),
+
+      field(LIST_B, name("b")),
+
+      field(LIST_C, name("c"))
+    );
+  }
+}
+----
+
+It declares three `List` fields.
+The three `List` types are distinct.
+One of them is from the same package of the compilation unit.
+
+The code above generates the following:
+
+[,java]
+----
+package com.example;
+
+import java.awt.List;
+
+public class AutoImports {
+  List a;
+
+  java.util.List b;
+
+  com.example.List c;
+}
+----
+
+So the first `List` encountered is imported.
+The remaining ones are declared in their fully qualified name. 
