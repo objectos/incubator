@@ -21,11 +21,11 @@ import br.com.objectos.css.framework.border.Border;
 import br.com.objectos.css.framework.border.BorderColor;
 import br.com.objectos.css.framework.border.BorderTop;
 import br.com.objectos.css.framework.border.Rounded;
+import br.com.objectos.css.framework.flexbox.FlexWrap;
 import br.com.objectos.css.framework.flexbox.JustifyContent;
 import br.com.objectos.css.framework.layout.Display;
 import br.com.objectos.css.framework.sizing.MaxWidth;
 import br.com.objectos.css.framework.spacing.MarginBottom;
-import br.com.objectos.css.framework.spacing.MarginLeft;
 import br.com.objectos.css.framework.spacing.MarginRight;
 import br.com.objectos.css.framework.spacing.MarginTop;
 import br.com.objectos.css.framework.spacing.MarginX;
@@ -118,6 +118,7 @@ public final class VersionsTemplate extends DocsTemplate {
 
         div(
           Display.lg.flex,
+          FlexWrap.lg.wrap,
           MarginTop.v10,
 
           f(this::v0x)
@@ -135,8 +136,7 @@ public final class VersionsTemplate extends DocsTemplate {
         Border.v1,
         BorderColor.gray300,
         Display.block,
-        MarginLeft.lg.v04,
-        MarginLeft.firstChild.v0,
+        MarginRight.lg.v04,
         MarginTop.v04,
         Padding.v03,
         Padding.lg.v08,
