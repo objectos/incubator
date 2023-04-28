@@ -1,0 +1,182 @@
+= Assignment Operator
+
+Here is a quick overview of the assignment operator in Objectos Code:
+
+[,java]
+----
+// Objectos Code
+method(
+  name("overview"),
+
+  p(n("a"), IS, n("b")),
+  p(n("x"), IS, n("y"), IS, n("z")),
+  p(n("barArray"), dim(i(0)), IS, NEW, BAR),
+  p(v("m"), n("foo"), IS, v("n")),
+  p(v("foo"), arg(n("i"), IS, n("j")))
+)
+
+// Generated code
+void overview() {
+  a = b;
+  x = y = z;
+  barArray[0] = new com.example.Bar();
+  m().foo = n();
+  foo(i = j);
+}
+----
+
+Next we will discuss each operator individually.
+
+== Simple assignment operator
+
+In Objectos Code, the `IS` constant represents the simple assignment operator `=`.
+
+You use it between the left-hand side (LHS) and the right-hand side (RHS) of the https://docs.oracle.com/javase/specs/jls/se19/html/jls-15.html#jls-15.26.1[expression].
+
+Next we will look at the different examples of both the LHS and RHS.
+
+=== LHS is a expression name
+
+The following example assigns the value of the variable `value` to the variable `x`: 
+
+[,java]
+----
+p(n("x"), IS, n("value"));
+
+x = value;
+----
+
+If variable `x` is the field of the type of a variable `foo` our LHS becomes:
+
+[,java]
+----
+p(n("foo"), n("y"), IS, n("value"));
+
+foo.y = value;
+----
+
+To assign the static field of a type you would also use an expression name.
+The syntax is different though:
+
+[,java]
+----
+p(classType("com.example", "MyType"), n("field"), IS, n("value"));
+
+com.example.MyType.field = value;
+----
+
+The syntax is different so that Objectos Code can automatically generate an import declaration if requested.
+The output would be something along the lines:
+
+[,java]
+----
+import com.example.MyType;
+
+MyType.field = value;
+----
+
+Let's look at field access expressions next.
+
+=== LHS is a field access expression
+
+You might want to assign a value to the field of a reference that is provided by a primary expression.
+
+An useful example is when using the `_this()` instruction, like so:
+
+[,java]
+----
+p(THIS, n("x"), IS, n("x"));
+p(THIS, n("y"), IS, n("y"));
+
+this.x = x;
+this.y = y;
+----
+
+In the following example the reference is returned by a method invocation:
+
+[,java]
+----
+p(v("point"), n("x"), IS, n("valueX"));
+p(v("point"), n("y"), IS, n("valueY"));
+
+point().x = valueX;
+point().y = valueY;
+----
+
+The primary expression can also start with an expression name:
+
+[,java]
+----
+p(n("a"), v("b"), n("x"), IS, n("value")); 
+
+n.b().x = value;
+----
+
+Let's look at array access expressions next.
+
+=== LHS is an array access expression
+
+In Objectos Code, to assign values to the components of an array reference you write the following:
+
+[,java]
+----
+p(n("elements"), dim(i(0)), IS, n("e0"));
+p(n("elements"), dim(i(1)), IS, n("e1"));
+p(n("elements"), dim(i(2)), IS, n("e2"));
+
+elements[0] = e0;
+elements[1] = e1;
+elements[2] = e2;
+----
+
+It also works with multidimensional arrays:
+
+[,java]
+----
+p(n("multi"), dim(n("x")), dim(n("y")), IS, n("value"));
+
+mulit[x][y] = value;
+----
+
+The array reference might be given by a method invocation expression:
+
+[,java]
+----
+p(v("arrayRef"), dim(v("index")), IS, n("value"));
+
+arrayRef()[index()] = value;
+----
+
+Next, let's look at the right-hand side of the expression.
+
+=== Other RHS examples
+
+An assignment expression can be the RHS of another assignment expression:
+
+[,java]
+----
+p(n("a"), IS, n("b"), IS, n("c"));
+p(n("name"), IS, v("foo"), n("name"), IS, n("value"));
+
+a = b = c;
+name = foo().name = value;
+----
+
+More generally, any expression can be at the RHS:
+
+[,java]
+----
+p(n("index"), IS, i(123));
+p(n("name"), IS, s("Some Name"));
+p(n("foo"), IS, NEW, classType("com.example", "Foo"));
+
+index = 123;
+name = "Some Name";
+foo = new com.example.Foo();
+----
+
+We will look at the compound assignment operators at the next section.
+
+== Compound assignment operators
+
+The compound assignment operators are not supported at the moment.

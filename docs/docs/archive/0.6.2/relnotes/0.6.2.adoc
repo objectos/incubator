@@ -1,0 +1,17 @@
+= Objectos 0.6.2 release notes
+:toc-title: Objectos 0.6.2
+
+_April 21, 2023_
+
+Welcome to Objectos 0.6.2.
+This release continues the API improvements on Objectos AsciiDoc.
+It also continues the documentation efforts on Objectos Code.
+
+== Work
+
+* AsciiDoc: SectionTest (iter. 2) issue:347[]
+* AsciiDoc: UnorderedListTest (iter. 1) issue:348[]
+
+== Documentation
+
+* Add documentation for Objectos Code's Interface declarations (iter. 1) issue:349[]

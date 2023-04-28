@@ -1,0 +1,29 @@
+= Objectos AsciiDoc
+:toc-title: Overview
+
+_This API is experimental and might change substantially between releases_
+
+Objectos AsciiDoc is an https://docs.asciidoctor.org/asciidoc/latest[AsciiDoc] processor implemented in the Java programming language.
+
+== Alpha quality
+
+Please note that Objectos AsciiDoc is a work in progress and this is an alpha release.
+
+Additionally, this documentation is also a work in progress.
+In other words, it does not cover all of the implemented features yet.
+
+== Installation
+
+To use Objectos AsciiDoc in your project add the following to your POM:
+
+[,xml]
+----
+<dependencies>
+    <dependency>
+        <groupId>br.com.objectos</groupId>
+        <artifactId>objectos-asciidoc</artifactId>
+    </dependency>
+</dependencies>
+----
+
+This assumes you are using the ilink:intro/install[Objectos BOM POM].

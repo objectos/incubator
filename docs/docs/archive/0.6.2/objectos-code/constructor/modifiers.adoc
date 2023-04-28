@@ -1,0 +1,154 @@
+= Constructor modifiers
+
+Use the provided modifier constants to add modifiers to your method declaration.
+
+The following Objectos Code:
+
+[,java]
+----
+import objectos.code.JavaTemplate;
+
+public class ConstructorMods01 extends JavaTemplate {
+  public static void main(String[] args) {
+    System.out.println(new ConstructorMods01());
+  }
+
+  @Override
+  protected final void definition() {
+    classDeclaration(
+      name("WithPublic"),
+
+      constructor(
+        PUBLIC
+      )
+    );
+
+    classDeclaration(
+      name("WithPrivate"),
+
+      constructor(
+        PRIVATE
+      )
+    );
+  }
+}
+----
+
+Generates:
+
+[,java]
+----
+class WithPublic {
+  public WithPublic() {}
+}
+
+class WithPrivate {
+  private WithPrivate() {}
+}
+----
+
+== If multiple modifiers are specified
+
+When multiple modifiers are specified in the same `constructor` instruction then "the last one wins".
+In other words, the constructor declaration is generated with the last specified modifier.
+
+The following Objectos Code:
+
+[,java]
+----
+import objectos.code.JavaTemplate;
+
+public class ConstructorMods02 extends JavaTemplate {
+  @Override
+  protected final void definition() {
+    classDeclaration(
+      name("LastOneWins"),
+
+      constructor(
+        PUBLIC, PROTECTED, PRIVATE
+      )
+    );
+  }
+}
+----
+
+Generates the following Java class declaration:
+
+[,java]
+----
+class LastOneWins {
+  private LastOneWins() {}
+}
+----
+
+Please note that you should avoid specifying multiple modifiers to the same `constructor` instruction.
+
+== Specifying the modifier programmatically
+
+Use the `include` instruction if you need to set the modifier based on a condition.
+
+In the following Objectos Code:
+
+[,java]
+----
+import java.util.concurrent.ThreadLocalRandom;
+import objectos.code.JavaTemplate;
+
+public class ConstructorMods03 extends JavaTemplate {
+  @Override
+  protected final void definition() {
+    classDeclaration(
+      name("Programmatically"),
+
+      constructor(
+        include(this::modifiers)
+      )
+    );
+  }
+
+  private void modifiers() {
+    if (shouldBePublic()) {
+      code(PUBLIC);
+    }
+  }
+
+  private boolean shouldBePublic() {
+    return ThreadLocalRandom.current().nextBoolean();
+  }
+}
+----
+
+Notice the `include` instruction in the `constructor` instruction:
+
+[,java]
+----
+constructor(
+  include(this::modifiers)
+)
+----
+
+The constructor modifier is defined in the private `modifiers` method:
+
+[,java]
+----
+private void modifiers() {
+  if (shouldBePublic()) {
+    code(PUBLIC);
+  }
+}
+----
+
+So, depending on the value returned by the `shouldBePublic` method, the following are generated:
+
+[,java]
+----
+// shouldBePublic() returns true
+class Programmatically {
+  public Programmatically() {}
+}
+
+// shouldBePublic() returns false
+class Programmatically {
+  Programmatically() {}
+}
+----

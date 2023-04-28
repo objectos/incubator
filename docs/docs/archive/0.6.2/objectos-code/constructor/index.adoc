@@ -1,0 +1,58 @@
+= Constructor Declarations
+:toc-title: Overview
+
+Use the `constructor` instruction to add a constructor declaration to a class.
+
+The following Objectos Code: 
+
+[,java]
+----
+import objectos.code.JavaTemplate;
+import objectos.code.TypeVariableName;
+
+public class Box extends JavaTemplate {
+  static final TypeVariableName T
+      = TypeVariableName.of("T");
+
+  @Override
+  protected final void definition() {
+    autoImports();
+
+    classDeclaration(
+      PUBLIC, name("Box"), typeParameter("T"),
+
+      field(PRIVATE, FINAL, T, name("value")),
+
+      constructor(
+        PUBLIC,
+        parameter(T, name("value")),
+
+        p(THIS, n("value"), IS, n("value"))
+      ),
+
+      method(
+        PUBLIC, T, name("get"),
+
+        p(RETURN, n("value"))
+      )
+    );
+  }
+}
+----
+
+Generates the following Java code:
+
+[,java]
+----
+public class Box<T> {
+  private final T value;
+
+  public Box(T value) {
+    this.value = value;
+  }
+
+  public T get() {
+    return value;
+  }
+}
+----
