@@ -1,0 +1,60 @@
+= Objectos 0.4.0 release notes
+:toc-title: Objectos 0.4.0
+
+_February 5, 2023_
+
+Welcome to Objectos 0.4.0, the latest release of the Objectos suite of Java libraries.
+
+== JDK compatibility
+
+Objectos 0.4.0 requires JDK 17 or later.
+
+== What's new in Objectos 0.4.0
+
+Objectos 0.4.0 introduces ilink:objectos-code/index[Objectos Code], a library for generating Java source code.
+
+The following Objectos Code template:
+
+[,java]
+----
+public class BoxObjectosCodeExample extends JavaTemplate {
+  @Override
+  protected final void definition() {
+    // @formatter:off
+    _package("com.example");
+
+    _public(); _class("Box"); body(
+      _private(), _final(), _int(), id("value"),
+
+      _public(), constructor(_int(), id("value")), block(
+        _this(), n("value"), gets(), n("value")
+      ),
+
+      _public(), _final(), _int(), method("get"), block(
+        _return(), n("value")
+      )
+    );
+  }
+}
+----
+
+Can generate the following Java class:
+
+[,java]
+----
+package com.example;
+
+public class Box {
+  private final int value;
+  
+  public Box(int value) {
+    this.value = value;
+  }
+  
+  public final int get() {
+    return value;
+  }
+}
+----
+
+Learn more about Objectos Code ilink:objectos-code/index[here].

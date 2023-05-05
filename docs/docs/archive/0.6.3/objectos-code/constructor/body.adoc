@@ -1,0 +1,211 @@
+= Constructor body
+
+Use the `p` instruction to add statements to your constructor declaration.
+
+The following Objectos Code:
+
+[,java]
+----
+import objectos.code.ClassTypeName;
+import objectos.code.JavaTemplate;
+
+public class ConstructorBody01 extends JavaTemplate {
+  static final ClassTypeName OBJECT
+      = ClassTypeName.of(Object.class);
+  static final ClassTypeName IAE
+      = ClassTypeName.of(IllegalArgumentException.class);
+
+  @Override
+  protected final void definition() {
+    autoImports();
+
+    classDeclaration(
+      name("ConstructorBodyExample"),
+
+      field(PRIVATE, FINAL, OBJECT, name("value")),
+
+      constructor(
+        PUBLIC,
+        parameter(OBJECT, name("value")),
+
+        p(IF, condition(n("value"), EQ, NULL), block(
+          p(THROW, NEW, IAE, argument(s("value is null")))
+        )),
+
+        p(THIS, n("value"), IS, n("value"))
+      ),
+
+      method(
+        PUBLIC, OBJECT, name("get"),
+
+        p(RETURN, n("value"))
+      )
+    );
+  }
+}
+----
+
+Generates:
+
+[,java]
+----
+class ConstructorBodyExample {
+  private final Object value;
+
+  public ConstructorBodyExample(Object value) {
+    if (value == null) {
+      throw new IllegalArgumentException("value is null");
+    }
+    this.value = value;
+  }
+
+  public Object get() {
+    return value;
+  }
+}
+----
+
+== The `p` instruction
+
+Please refer to the ilink:objectos-code/statement/index[statements] section of the documentation to learn more about:
+
+* the `p` instruction; and
+* how to express the different Java statements in Objectos Code.
+
+== Explicit constructor invocations
+
+Use the `SUPER` constant along with the `p` instruction to generate a `super` constructor invocation.
+
+The following Objectos Code:
+
+[,java]
+----
+import objectos.code.ClassTypeName;
+import objectos.code.JavaTemplate;
+
+public class ConstructorBody02 extends JavaTemplate {
+  static final ClassTypeName EXCEPTION
+      = ClassTypeName.of(Exception.class);
+  static final ClassTypeName STRING
+      = ClassTypeName.of(String.class);
+  static final ClassTypeName THROWABLE
+      = ClassTypeName.of(Throwable.class);
+
+  @Override
+  protected final void definition() {
+    autoImports();
+
+    classDeclaration(
+      name("SuperInvocation"),
+      extendsClause(EXCEPTION),
+
+      constructor(
+        PUBLIC,
+        p(SUPER)
+      ),
+
+      constructor(
+        PUBLIC,
+        parameter(STRING, name("message")),
+        p(SUPER, argument(n("message")))
+      ),
+
+      constructor(
+        PUBLIC,
+        parameter(STRING, name("message")),
+        parameter(THROWABLE, name("cause")),
+        p(SUPER, argument(n("message")), argument(n("cause")))
+      )
+    );
+  }
+}
+----
+
+Generates:
+
+[,java]
+----
+class SuperInvocation extends Exception {
+  public SuperInvocation() {
+    super();
+  }
+
+  public SuperInvocation(String message) {
+    super(message);
+  }
+
+  public SuperInvocation(String message, Throwable cause) {
+    super(message, cause);
+  }
+}
+----
+
+Generating `this` constructor invocations is currently not supported. 
+
+== Adding statements programmatically
+
+Use the `include` instruction if you need to programmatically add statements to the body of your constructor declaration.
+
+In the following Objectos Code:
+
+[,java]
+----
+import objectos.code.JavaTemplate;
+
+public class ConstructorBody03 extends JavaTemplate {
+  @Override
+  protected final void definition() {
+    autoImports();
+
+    classDeclaration(
+      name("Programmatically"),
+
+      constructor(
+        PUBLIC,
+
+        include(this::body)
+      )
+    );
+  }
+
+  private void body() {
+    int count = 3;
+
+    for (int i = 0; i < count; i++) {
+      var name = "value" + i;
+      parameter(INT, name(name));
+      p(THIS, n(name), IS, n(name));
+    }
+  }
+}
+----
+
+Notice the `include` instruction in the `constructor` instruction.
+
+The statements (and parameters) are defined in the `body` private method:
+
+[,java]
+----
+private void body() {
+  int count = 3;
+
+  for (int i = 0; i < count; i++) {
+    var name = "value" + i;
+    parameter(INT, name(name));
+    p(THIS, n(name), IS, n(name));
+  }
+}
+----
+
+The Objectos Code template generates:
+
+[,java]
+----
+class Programmatically {
+  public Programmatically(int value0, int value1, int value2) {
+    this.value0 = value0;
+    this.value1 = value1;
+    this.value2 = value2;
+  }
+}
+----

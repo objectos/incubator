@@ -1,0 +1,202 @@
+= Class name
+
+Use the `name` instruction to define the name of the generated class declaration.
+
+You can specify the name as a string value, like so:
+
+[,java]
+----
+import objectos.code.JavaTemplate;
+
+public class ClassDeclarationName01 extends JavaTemplate {
+  @Override
+  protected final void definition() {
+    classDeclaration(
+      name("MyClass")
+    );
+
+    classDeclaration(
+      name("AnotherClass")
+    );
+  }
+}
+----
+
+The code above generates:
+
+[,java]
+----
+class MyClass {}
+
+class AnotherClass {}
+----
+
+You can also specify the name using a `ClassTypeName` instance.
+
+The following Objectos Code:
+
+[,java]
+----
+import objectos.code.ClassTypeName;
+import objectos.code.JavaTemplate;
+
+public class ClassDeclarationName02 extends JavaTemplate {
+  static final ClassTypeName EXAMPLE
+      = ClassTypeName.of("com.example.docs", "Example");
+
+  static final ClassTypeName INNER
+      = ClassTypeName.of("com.example.nested", "Outer", "Inner");
+
+  @Override
+  protected final void definition() {
+    classDeclaration(
+      name(EXAMPLE)
+    );
+
+    classDeclaration(
+      name(INNER)
+    );
+  }
+}
+----
+
+Generates:
+
+[,java]
+----
+class Example {}
+
+class Inner {}
+----
+
+A `ClassTypeName` represents a fully qualified name;
+the `name` instruction uses the _rightmost_ simple name of the specified `ClassTypeName`.
+In other words, the following are ignored:
+
+* the package name; and
+* any enclosing type name.
+
+== Multiple names
+
+When multiple names are specified the class declaration will be generated with the one that was specified last.
+
+The following Objectos Code:
+
+[,java]
+----
+import objectos.code.JavaTemplate;
+
+public class ClassDeclarationName06 extends JavaTemplate {
+  @Override
+  protected final void definition() {
+    classDeclaration(
+      name("First"),
+      name("Second"),
+      name("Third")
+    );
+  }
+}
+----
+
+Generates:
+
+[,java]
+----
+class Third {}
+----
+
+== Unnamed class
+
+If you don't specify a name for your class declaration it will be generated with the `Unnamed` name.
+
+The following Objectos Code:
+
+[,java]
+----
+import objectos.code.JavaTemplate;
+
+public class ClassDeclarationName05 extends JavaTemplate {
+  @Override
+  protected final void definition() {
+    classDeclaration();
+  }
+}
+----
+
+Generates:
+
+[,java]
+----
+class Unnamed {}
+----
+
+== Invalid names
+
+The `name(String)` instruction will reject names that contain invalid characters for a Java identifier.
+
+The following Objectos Code:
+
+[,java]
+----
+import objectos.code.JavaTemplate;
+
+public class ClassDeclarationName03 extends JavaTemplate {
+  public static void main(String[] args) {
+    System.out.println(new ClassDeclarationName03());
+  }
+
+  @Override
+  protected final void definition() {
+    // invalid name: throws IllegalArgumentException
+    classDeclaration(
+      name("My-Class")
+    );
+  }
+}
+----
+
+Fails with the following exception:
+
+----
+Exception in thread "main" java.lang.IllegalArgumentException: The string My-Class is an invalid identifier:
+
+Character '-' is an invalid java identifier part.
+
+	at objectos.code.internal.JavaModel.checkName(JavaModel.java:120)
+	at objectos.code.internal.JavaModel.checkIdentifier(JavaModel.java:27)
+	at objectos.code.JavaTemplate.name(JavaTemplate.java:2147)
+	at objectos.docs.code.declaration.ClassDeclarationName03.definition(ClassDeclarationName03.java:29)
+	(...)
+----
+
+== Invalid names: caveat
+
+Please note that the `name(String)` instruction will only check for invalid characters in identifiers.
+It does not check if a string containing only valid identifier characters makes up a valid identifier.
+
+In other words, the following Objectos Code executes normally:
+
+[,java]
+----
+import objectos.code.JavaTemplate;
+
+public class ClassDeclarationName04 extends JavaTemplate {
+  @Override
+  protected final void definition() {
+    // executes normally
+    classDeclaration(
+      name("return")
+    );
+  }
+}
+----
+
+It generates the following Java code:
+
+[,java]
+----
+class return {}
+----
+
+Note that `return`, even though it contains valid characters for an identifier, is not a valid identifier;
+`return` is a reserved keyword.

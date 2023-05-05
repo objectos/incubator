@@ -1,0 +1,413 @@
+= Method formal parameters
+
+Use the `parameter` instruction to include formal parameters to your method declaration.
+
+The following Objectos Code:
+
+[,java]
+----
+import objectos.code.ClassTypeName;
+import objectos.code.JavaTemplate;
+
+public class MethodParams01 extends JavaTemplate {
+  static final ClassTypeName STRING
+      = ClassTypeName.of(String.class);
+
+  @Override
+  protected final void definition() {
+    autoImports();
+
+    classDeclaration(
+      name("FormalParameters"),
+
+      method(
+        ABSTRACT, name("single"),
+        parameter(INT, name("a"))
+      ),
+
+      method(
+        ABSTRACT, name("multiple"),
+        parameter(STRING, name("first")),
+        parameter(INT, name("second"))
+      )
+    );
+  }
+}
+----
+
+Generates:
+
+[,java]
+----
+class FormalParameters {
+  abstract void single(int a);
+
+  abstract void multiple(String first, int second);
+}
+----
+
+== The parameter type and name
+
+As a minimum you must specify:
+
+* the parameter type; and
+* the parameter name.
+
+Use a `TypeName` object to represent the first.
+Use the `name` instruction to represent the second.
+
+The following Objectos Code:
+
+[,java]
+----
+import java.util.List;
+import objectos.code.ArrayTypeName;
+import objectos.code.ClassTypeName;
+import objectos.code.JavaTemplate;
+import objectos.code.ParameterizedTypeName;
+import objectos.code.TypeVariableName;
+
+public class MethodParams02 extends JavaTemplate {
+  static final ClassTypeName STRING
+      = ClassTypeName.of(String.class);
+
+  static final ParameterizedTypeName LIST
+      = ParameterizedTypeName.of(
+        ClassTypeName.of(List.class),
+        STRING
+      );
+
+  static final TypeVariableName E
+      = TypeVariableName.of("E");
+
+  static final ArrayTypeName OBJECT_ARRAY
+      = ArrayTypeName.of(Object[].class);
+
+  @Override
+  protected final void definition() {
+    autoImports();
+
+    classDeclaration(
+      name("TypeAndName"),
+
+      method(
+        ABSTRACT, name("ex01"),
+        parameter(INT, name("primitive")),
+        parameter(STRING, name("classOrInterface"))
+      ),
+
+      method(
+        ABSTRACT, name("ex02"),
+        parameter(LIST, name("parameterized"))
+      ),
+
+      method(
+        ABSTRACT, name("ex03"),
+        parameter(E, name("typeVariable")),
+        parameter(OBJECT_ARRAY, name("array"))
+      )
+    );
+  }
+}
+----
+
+Generates:
+
+[,java]
+----
+import java.util.List;
+
+class TypeAndName {
+  abstract void ex01(int primitive, String classOrInterface);
+
+  abstract void ex02(List<String> parameterized);
+
+  abstract void ex03(E typeVariable, Object[] array);
+}
+----
+
+== Multiple distinct types or names
+
+You _should not_ specify more than one type or more than one name in the same `parameter` instruction.
+
+If you do, code generation occurs normally with "the last one wins" rule.
+In other words, the parameter will be generated having:
+
+* the last specified type; and
+* the last specified name.
+
+The following Objectos Code:
+
+[,java]
+----
+import objectos.code.ClassTypeName;
+import objectos.code.JavaTemplate;
+
+public class MethodParams03 extends JavaTemplate {
+  static final ClassTypeName STRING
+      = ClassTypeName.of(String.class);
+
+  public static void main(String[] args) {
+    System.out.println(new MethodParams03());
+  }
+
+  @Override
+  protected final void definition() {
+    autoImports();
+
+    classDeclaration(
+      name("MultipleValues"),
+
+      method(
+        ABSTRACT, name("ex01"),
+        parameter(STRING, INT, name("a"), name("b"), name("c"))
+      ),
+
+      method(
+        ABSTRACT, name("ex02"),
+        parameter(INT, STRING, name("c"), name("b"), name("a"))
+      )
+    );
+  }
+}
+----
+
+Generates:
+
+[,java]
+----
+class MultipleValues {
+  abstract void ex01(int c);
+
+  abstract void ex02(String a);
+}
+----
+
+== No type or no name specified
+
+You _must_ specify both the parameter type and the parameter name.
+
+If you do not specify one or both of them then code generation completes normally:
+
+* the `void` keyword is used in place of the parameter type; and
+* the parameter is generated with the `unnamed` name.
+
+The following Objectos Code:
+
+[,java]
+----
+import objectos.code.JavaTemplate;
+
+public class MethodParams04 extends JavaTemplate {
+  @Override
+  protected final void definition() {
+    classDeclaration(
+      name("NoValues"),
+
+      method(
+        ABSTRACT, name("ex01"),
+        parameter()
+      )
+    );
+  }
+}
+----
+
+Generates:
+
+[,java]
+----
+class NoValues {
+  abstract void ex01(void unnamed);
+}
+----
+
+== Variable arity parameter (varargs)
+
+Use the `ELLIPSIS` constant to generate a varargs parameter.
+
+The following Objectos Code:
+
+[,java]
+----
+import java.util.List;
+import objectos.code.ArrayTypeName;
+import objectos.code.ClassTypeName;
+import objectos.code.JavaTemplate;
+import objectos.code.ParameterizedTypeName;
+
+public class MethodParams05 extends JavaTemplate {
+  static final ClassTypeName STRING
+      = ClassTypeName.of(String.class);
+
+  static final ParameterizedTypeName LIST
+      = ParameterizedTypeName.of(
+        ClassTypeName.of(List.class),
+        STRING
+      );
+
+  static final ArrayTypeName OBJECT_ARRAY
+      = ArrayTypeName.of(Object[].class);
+
+  @Override
+  protected final void definition() {
+    autoImports();
+
+    classDeclaration(
+      name("Varargs"),
+
+      method(
+        ABSTRACT, name("ex01"),
+        parameter(INT, ELLIPSIS, name("values"))
+      ),
+
+      method(
+        ABSTRACT, name("ex02"),
+        parameter(LIST, ELLIPSIS, name("lists"))
+      ),
+
+      method(
+        ABSTRACT, name("ex03"),
+        parameter(OBJECT_ARRAY, ELLIPSIS, name("arrays"))
+      )
+    );
+  }
+}
+----
+
+Generates:
+
+[,java]
+----
+import java.util.List;
+
+class Varargs {
+  abstract void ex01(int... values);
+
+  abstract void ex02(List<String>... lists);
+
+  abstract void ex03(Object[]... arrays);
+}
+----
+
+Please note that Objectos Code, by design, does not validate the generated code.
+In other words, it does not verify if the `ELLIPSIS` constant is used correctly or not.
+
+The following Objectos Code:
+
+[,java]
+----
+import objectos.code.JavaTemplate;
+
+public class MethodParams05Caveat extends JavaTemplate {
+  @Override
+  protected final void definition() {
+    classDeclaration(
+      name("VarargsCaveat"),
+
+      method(
+        ABSTRACT, name("ex01"),
+        parameter(INT, ELLIPSIS, name("dont")),
+        parameter(INT, name("doThis"))
+      ),
+
+      method(
+        ABSTRACT, name("ex02"),
+        parameter(INT, ELLIPSIS, name("dont")),
+        parameter(INT, ELLIPSIS, name("doThis"))
+      )
+    );
+  }
+}
+----
+
+Executes normally.
+It generates the following invalid Java code:
+
+[,java]
+----
+class VarargsCaveat {
+  abstract void ex01(int... dont, int doThis);
+
+  abstract void ex02(int... dont, int... doThis);
+}
+----
+
+== The `final` modifier
+
+Use the `FINAL` constant to add the `final` modifier to your parameter declaration.
+
+The following Objectos Code:
+
+[,java]
+----
+import objectos.code.ClassTypeName;
+import objectos.code.JavaTemplate;
+
+public class MethodParams06 extends JavaTemplate {
+  static final ClassTypeName STRING
+      = ClassTypeName.of(String.class);
+
+  @Override
+  protected final void definition() {
+    autoImports();
+
+    classDeclaration(
+      name("FinalParameters"),
+
+      method(
+        ABSTRACT, name("example"),
+        parameter(FINAL, INT, name("a")),
+        parameter(FINAL, STRING, name("b"))
+      )
+    );
+  }
+}
+----
+
+Generates:
+
+[,java]
+----
+class FinalParameters {
+  abstract void example(final int a, final String b);
+}
+----
+
+Please note that Objectos Code, by design, does not validate the generated code.
+In other words, it does not verify if the `FINAL` constant is used correctly or not.
+
+The following Objectos Code:
+
+[,java]
+----
+import objectos.code.JavaTemplate;
+
+public class MethodParams06Caveat extends JavaTemplate {
+  @Override
+  protected final void definition() {
+    classDeclaration(
+      name("FinalCaveat"),
+
+      method(
+        ABSTRACT, name("example"),
+        parameter(FINAL, FINAL, INT, name("a"))
+      )
+    );
+  }
+}
+----
+
+Executes normally.
+It generates the following invalid Java code:
+
+[,java]
+----
+class FinalCaveat {
+  abstract void example(final final int a);
+}
+----
+
+== Formal parameter annotations
+
+Annotating a parameter is not supported at this moment.

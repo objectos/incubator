@@ -1,0 +1,38 @@
+= Objectos 0.5.1 release notes
+:toc-title: Objectos 0.5.1
+
+_March 17, 2023_
+
+Welcome to Objectos 0.5.1.
+This release continues the API improvements on Objectos HTML.
+It also continues the documentation efforts on Objectos Code.
+
+== New features
+
+* The HtmlTemplate `pathName` instruction issue:271[]
+* Have `HtmlSink.toDirectory(template, Path)` use `pathName` to generate html file issue:272[]
+* Allow visiting a template using `HtmlSink.toVisitor(template, visitor)` issue:274[]
+* Add a pretty-print writer to HtmlSink issue:275[]
+* Support attributeOrElement in root of included lambda issue:278[]
+* Support the `noop()` instruction issue:279[]
+* The HtmlTemplate `pathTo` attribute instruction issue:280[]
+* Allow annotations in field declarations issue:287[]
+
+== Enhancements
+
+* Allow HtmlSink to be configurable with the minified option issue:273[]
+* HtmlTemplate.Visitor should use StandardAttributeName/ElementName issue:276[]
+
+== Work
+
+* Refactor HtmlTemplate 0.5.1 issue:270[]
+* Migrate Docs to new HTML renderer issue:277[]
+* Migrate WWW to the new HTML renderer issue:281[]
+* Remove CompiledTemplate issue:282[]
+* Remove HtmlFragment issue:283[]
+* HtmlTemplate should use `dsl()` to access dsl instance issue:284[]
+
+== Documentation
+
+* Docs/Objectos Code/Field decl issue:286[]
+* Docs/Objectos Code/Method decl (iter 1) issue:288[]

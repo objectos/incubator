@@ -1,0 +1,334 @@
+= Field initializer
+
+Use expression instructions immediately after the `name` instruction in order to generate a field declaration initializer.
+
+The following Objectos Code:
+
+[,java]
+----
+import objectos.code.ClassTypeName;
+import objectos.code.JavaTemplate;
+
+public class FieldInit01 extends JavaTemplate {
+  static final ClassTypeName STRING
+      = ClassTypeName.of(String.class);
+
+  static final ClassTypeName THREAD
+      = ClassTypeName.of(Thread.class);
+
+  @Override
+  protected final void definition() {
+    autoImports();
+
+    classDeclaration(
+      name("FieldInit"),
+
+      field(
+        INT, name("a"), i(123)
+      ),
+
+      field(
+        STRING, name("b"), THREAD, v("currentThread"), v("getName")
+      )
+    );
+  }
+}
+----
+
+Generates:
+
+[,java]
+----
+class FieldInit {
+  int a = 123;
+
+  String b = Thread.currentThread().getName();
+}
+----
+
+Notice that both the:
+
+* `=` equals sign character; and
+* `;` semicolon character.
+
+Are added automatically.
+
+== Multiple declarators: initializing all of them
+
+The following Objectos Code illustrates how to initialize all of the field declarators specified in a single `field` declaration:
+
+[,java]
+----
+import objectos.code.ClassTypeName;
+import objectos.code.JavaTemplate;
+
+public class FieldInit02 extends JavaTemplate {
+  static final ClassTypeName STRING
+      = ClassTypeName.of(String.class);
+
+  @Override
+  protected final void definition() {
+    autoImports();
+
+    classDeclaration(
+      name("InitMany"),
+
+      field(
+        INT, name("a"), i(123), name("b"), i(456), name("c"), i(789)
+      ),
+
+      field(
+        STRING, name("d"), s("abc"), name("e"), v("valueOf"), argument(s("e"))
+      )
+    );
+  }
+}
+----
+
+Notice how expression instructions are added immediately after each `name` instruction.
+The Objectos Code above generates:
+
+[,java]
+----
+class InitMany {
+  int a = 123, b = 456, c = 789;
+
+  String d = "abc", e = valueOf("e");
+}
+----
+
+== Multiple declarators: initializing a subset
+
+You are not required to initialize all of the declarators specified in a single `field` declaration.
+In other words, you can leave some (or all of them) uninitialized.
+
+The following Objectos Code:
+
+
+[,java]
+----
+import objectos.code.ClassTypeName;
+import objectos.code.JavaTemplate;
+
+public class FieldInit03 extends JavaTemplate {
+  static final ClassTypeName STRING
+      = ClassTypeName.of(String.class);
+
+  @Override
+  protected final void definition() {
+    autoImports();
+
+    classDeclaration(
+      name("InitSome"),
+
+      field(
+        INT, name("a"), i(123), name("b"), name("c"), i(456), name("d")
+      ),
+
+      field(
+        STRING, name("e"), name("f"), s("Hi!"), name("g")
+      )
+    );
+  }
+}
+----
+
+Generates:
+
+[,java]
+----
+class InitSome {
+  int a = 123, b, c = 456, d;
+
+  String e, f = "Hi!", g;
+}
+----
+
+== Multi-part expressions
+
+All expresion parts declared:
+
+* after a `name` instruction; and
+* before the subsequent `name` instruction or the end of the `field` instruction.
+
+Are considered to be part of the _same_, _single_ expression.
+In other words the initializer may be made of multiple expression parts.
+
+The following Objectos Code:
+
+[,java]
+----
+import objectos.code.ClassTypeName;
+import objectos.code.JavaTemplate;
+
+public class FieldInit04 extends JavaTemplate {
+  static final ClassTypeName FOO
+      = ClassTypeName.of("com.example", "Foo");
+
+  @Override
+  protected final void definition() {
+    autoImports();
+
+    classDeclaration(
+      name("MultiPart"),
+
+      field(
+        FOO, name("foo"), FOO, v("builder"), NL,
+        v("name"), argument(s("Some name")), NL,
+        v("value"), argument(i(1234)), NL,
+        v("build")
+      )
+    );
+  }
+}
+----
+
+Generates:
+
+[,java]
+----
+import com.example.Foo;
+
+class MultiPart {
+  Foo foo = Foo.builder()
+      .name("Some name")
+      .value(1234)
+      .build();
+}
+----
+
+== Array initializer
+
+Fields can also be initialized with an array initializer.
+
+The `arrayInitializer` instruction indicates that an array initializer is about to begin.
+Each subsequent `value` instruction represents a single value in the array literal. 
+
+The following Objectos Code:
+
+[,java]
+----
+import objectos.code.ArrayTypeName;
+import objectos.code.JavaTemplate;
+
+public class FieldInit05 extends JavaTemplate {
+  static final ArrayTypeName STRING_ARRAY
+      = ArrayTypeName.of(String[].class);
+
+  @Override
+  protected final void definition() {
+    autoImports();
+
+    classDeclaration(
+      name("ArrayInit"),
+
+      field(
+        STRING_ARRAY, name("a"), arrayInitializer(),
+        value(s("A")), value(s("B")), value(s("C"))
+      )
+    );
+  }
+}
+----
+
+Generates:
+
+[,java]
+----
+class ArrayInit {
+  String[] a = {"A", "B", "C"};
+}
+----
+
+== Defining the initializer programmatically
+
+Use the `include` instruction if you need to specify the initializer expression programmatically.
+
+The following Objectos Code:
+
+[,java]
+----
+import java.util.List;
+import objectos.code.ArrayTypeName;
+import objectos.code.ClassTypeName;
+import objectos.code.JavaTemplate;
+
+public class FieldInit06 extends JavaTemplate {
+  static final ClassTypeName FOO
+      = ClassTypeName.of("com.example", "Foo");
+
+  static final ArrayTypeName FOO_ARRAY
+      = ArrayTypeName.of(FOO);
+
+  @Override
+  protected final void definition() {
+    autoImports();
+
+    classDeclaration(
+      name("Include"),
+
+      field(
+        FOO_ARRAY, name("a"), include(this::init)
+      )
+    );
+  }
+
+  private void init() {
+    var values = List.of("A", "B", "C", "D");
+
+    arrayInitializer();
+
+    code(NL);
+
+    for (var value : values) {
+      value(FOO, n(value));
+
+      code(NL);
+    }
+  }
+}
+----
+
+Notice the `include` instruction in the `field` instruction:
+
+[,java]
+----
+field(
+  FOO_ARRAY, name("a"), include(this::init)
+)
+----
+
+The initializer expression is defined in the `init` private method:
+
+[,java]
+----
+private void init() {
+  var values = List.of("A", "B", "C", "D");
+
+  arrayInitializer();
+
+  code(NL);
+
+  for (var value : values) {
+    value(FOO, n(value));
+
+    code(NL);
+  }
+}
+----
+
+The Objectos Code above generates:
+
+[,java]
+----
+import com.example.Foo;
+
+class Include {
+  Foo[] a = {
+    Foo.A,
+    Foo.B,
+    Foo.C,
+    Foo.D
+  };
+}
+----
