@@ -1,0 +1,16 @@
+= Objectos 0.6.4 release notes
+:toc-title: Objectos 0.6.4
+
+_May 05, 2023_
+
+Welcome to Objectos 0.6.4.
+This release continues the API improvements on Objectos AsciiDoc.
+
+== Work
+
+* AsciiDoc: UrlMacroTest (iter. 2) issue:355[]
+* AsciiDoc: ParagraphTest (iter. 2) issue:356[]
+* AsciiDoc: ConstrainedMonospaceTest (iter. 1) issue:357[]
+* AsciiDoc: UnorderedListTest (iter. 3) issue:358[]
+* AsciiDoc: SectionTest (iter. 4) issue:359[]
+* AsciiDoc: ListingBlockTest (iter. 1) issue:360[]

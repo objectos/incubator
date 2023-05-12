@@ -1,0 +1,121 @@
+= Statements
+:toc-title: Overview
+
+Objectos Code provides the `p` instruction for adding statements to a constructor or method body.
+
+The following Objectos Code method declaration: 
+
+[,java]
+----
+method(
+  annotation(Override.class),
+  PUBLIC, FINAL, STRING, name("toString"),
+  p(RETURN, s("Objectos Code"))
+)
+----
+
+Generates the following Java method declaration:
+
+[,java]
+----
+@java.lang.Override
+public final java.lang.String toString() {
+  return "Objectos Code";
+}
+----
+
+Notice how the `p` instruction was used to generate a Java `return` statement.
+
+== The `p` instruction
+
+To use the `p` instruction you supply statement parts to it.  
+
+The following Objectos Code statement:
+
+[,java]
+----
+static final ClassTypeName SB = ClassTypeName.of(StringBuilder.class);
+
+p(VAR, id("sb"), NEW, SB);
+----
+
+Generates the following Java statement:
+
+[,java]
+----
+var sb = new java.lang.StringBuilder();
+----
+
+It generated a local variable declaration statement.
+
+=== A `p` instruction for each Java statement
+
+A single `p` instruction should be used for each Java statement that needs to be generated.
+
+So, let's add a second statement to our previous example.
+You need a second `p` instruction to do so:
+
+[,java]
+----
+p(VAR, id("sb"), NEW, SB);
+p(n("sb"), v("append"), arg(s("Objectos Code")));
+----
+
+Which generates:
+
+[,java]
+----
+var sb = new java.lang.StringBuilder();
+sb.append("Objectos Code");
+----
+
+Let's add a third and final statement:
+
+[,java]
+----
+p(VAR, name("sb"), NEW, SB);
+p(n("sb"), v("append"), arg(s("Objectos Code")));
+p(RETURN, n("sb"), v("toString"));
+----
+
+And the result is:
+
+[,java]
+----
+var sb = new java.lang.StringBuilder();
+sb.append("Objectos Code");
+return sb.toString();
+----
+
+Next, let's learn about a `p` instruction caveat.
+
+=== It is a template not a compiler
+
+The `p` instruction will not allow you to write the following:
+
+[,java]
+----
+// does not compile
+p(RETURN, PUBLIC, s("abc"))
+----
+
+The code above does not compile as the `PUBLIC` constant is not a valid argument to the `p` method.
+
+However, it will allow you to write the following:
+
+[,java]
+----
+// do not do this
+p(VAR, RETURN, s("abc"));
+----
+
+Which generates the following invalid Java code:
+
+[,java]
+----
+// invalid Java code
+var return "abc";
+----
+
+The `p` instruction offers you a canvas where you can quickly add pieces to it.
+While it will do some validation, via the Java compiller, it will not validate the generated Java code for you.

@@ -1,0 +1,160 @@
+= Method body
+
+Use the `p` instruction to add statements to your method declaration.
+
+The following Objectos Code:
+
+[,java]
+----
+import objectos.code.ClassTypeName;
+import objectos.code.JavaTemplate;
+
+public class MethodBody01 extends JavaTemplate {
+  static final ClassTypeName OBJECT
+      = ClassTypeName.of(Object.class);
+  static final ClassTypeName IAE
+      = ClassTypeName.of(IllegalArgumentException.class);
+
+  @Override
+  protected final void definition() {
+    autoImports();
+
+    classDeclaration(
+      name("MethodBodyExample"),
+
+      field(OBJECT, name("value")),
+
+      method(
+        PUBLIC, VOID, name("set"),
+        parameter(OBJECT, name("value")),
+
+        p(IF, condition(n("value"), EQ, NULL), block(
+          p(THROW, NEW, IAE, argument(s("value is null")))
+        )),
+
+        p(THIS, n("value"), IS, n("value"))
+      ),
+
+      method(
+        PUBLIC, OBJECT, name("get"),
+
+        p(RETURN, n("value"))
+      )
+    );
+  }
+}
+----
+
+Generates:
+
+[,java]
+----
+class MethodBodyExample {
+  Object value;
+
+  public void set(Object value) {
+    if (value == null) {
+      throw new IllegalArgumentException("value is null");
+    }
+    this.value = value;
+  }
+
+  public Object get() {
+    return value;
+  }
+}
+----
+
+== The `p` instruction
+
+Please refer to the ilink:objectos-code/statement/index[statements] section of the documentation to learn more about:
+
+* the `p` instruction; and
+* how to express the different Java statements in Objectos Code.
+
+== Adding statements programmatically
+
+Use the `include` instruction if you need to programmatically add statements to the body of your method declaration.
+
+In the following Objectos Code:
+
+[,java]
+----
+import java.util.ArrayList;
+import java.util.List;
+import objectos.code.ClassTypeName;
+import objectos.code.JavaTemplate;
+import objectos.code.ParameterizedTypeName;
+
+public class MethodBody02 extends JavaTemplate {
+  static final ClassTypeName ARRAY_LIST
+      = ClassTypeName.of(ArrayList.class);
+  static final ClassTypeName LIST
+      = ClassTypeName.of(List.class);
+  static final ClassTypeName STRING
+      = ClassTypeName.of(String.class);
+  static final ParameterizedTypeName LIST_STRING
+      = ParameterizedTypeName.of(LIST, STRING);
+
+  @Override
+  protected final void definition() {
+    autoImports();
+
+    classDeclaration(
+      name("Programmatically"),
+
+      method(
+        PUBLIC, LIST_STRING, name("example"),
+
+        p(VAR, name("list"), NEW, ARRAY_LIST),
+
+        include(this::elements),
+
+        p(RETURN, LIST, v("copyOf"), argument(n("list")))
+      )
+    );
+  }
+
+  private void elements() {
+    var elements = List.of("A", "B", "C", "D");
+
+    for (var element : elements) {
+      p(n("list"), v("add"), argument(s(element)));
+    }
+  }
+}
+----
+
+Notice the `include` instruction in the `method` instruction.
+
+The statements are defined in the `elements` private method:
+
+[,java]
+----
+private void elements() {
+  var elements = List.of("A", "B", "C", "D");
+
+  for (var element : elements) {
+    p(n("list"), v("add"), argument(s(element)));
+  }
+}
+----
+
+The Objectos Code template generates:
+
+[,java]
+----
+import java.util.ArrayList;
+import java.util.List;
+
+class Programmatically {
+  public List<String> example() {
+    var list = new ArrayList();
+    list.add("A");
+    list.add("B");
+    list.add("C");
+    list.add("D");
+    return List.copyOf(list);
+  }
+}
+----

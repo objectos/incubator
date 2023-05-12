@@ -1,0 +1,547 @@
+= Objectos Code Tutorial
+:toc-title: Tutorial
+
+This tutorial will give you an introduction on how to generate Java source code using Objectos Code.
+
+== An empty class
+
+Let's start by generating a class named `Tutorial` that has an empty body.
+In other words, we want to generate the following:
+
+[,java]
+----
+class Tutorial {}
+----
+
+To use Objectos Code you have to:
+
+- extend the `JavaTemplate` class; and
+- provide the implementation of the `definition` method.
+
+In the body of latter, you use the provided _instructions_ to define the Java file you will generate.
+Like so:
+
+[,java]
+----
+import objectos.code.JavaTemplate;
+
+public class Tutorial extends JavaTemplate {
+  @Override
+  protected final void definition() {
+    classDeclaration(
+      name("Tutorial")
+    );
+  }
+}
+----
+
+We want to generate the Java code of a class declaration.
+So, in the `definition` method of our template, we use the `classDeclaration` _instruction_.
+And to define the name of the generated class declaration, `Tutorial` in our case, we used the `name` instruction.  
+
+Right.
+Let's move to the next step.
+
+== The package declaration
+
+Let's add a package declaration to our generated Java source file.
+We want our class to be in the `com.example` package, like so:
+
+[,java]
+----
+package com.example;
+
+class Tutorial {}
+----
+
+In our template, we use the `packageDeclaration` instruction:
+
+[,java]
+----
+import objectos.code.JavaTemplate;
+
+public class Tutorial extends JavaTemplate {
+  @Override
+  protected final void definition() {
+    packageDeclaration("com.example");
+
+    classDeclaration(
+      name("Tutorial")
+    );
+  }
+}
+----
+
+The name of the package, `com.example` in our example, is passed as an argument to the `packageDeclaration` instruction.
+
+== The class modifiers
+
+Let's add modifiers to our class.
+
+We want the generated class to be the following:
+
+[,java]
+----
+package com.example;
+
+public final class Tutorial {}
+----
+
+Our class is now both `public` and `final`.
+So we need to add the same "keywords" to our template: 
+
+[,java]
+----
+import objectos.code.JavaTemplate;
+
+public class Tutorial extends JavaTemplate {
+  @Override
+  protected final void definition() {
+    packageDeclaration("com.example");
+
+    classDeclaration(
+      PUBLIC, FINAL, name("Tutorial")
+    );
+  }
+}
+----
+
+So the `PUBLIC` constant adds the `public` modifier.
+Similarly, the `FINAL` constant adds the `final` modifier.
+Both constants are defined in the superclass of our template, namely the `JavaTemplate` class. 
+
+== Annotations
+
+Let's annotate our class with a hypothetical `Subject` annotation:
+
+[,java]
+----
+package com.example;
+
+import com.example.annotations.Subject;
+
+@Subject("Objectos Code")
+public final class Tutorial {}
+----
+
+The annotation is declared at a different package than our class.
+Therefore, we also need to add an import declaration.
+
+So we modify our Objectos Code template.
+Like so:
+
+[,java]
+----
+import objectos.code.ClassTypeName;
+import objectos.code.JavaTemplate;
+
+public class Tutorial extends JavaTemplate {
+  private static final ClassTypeName SUBJECT
+      = ClassTypeName.of("com.example.annotations", "Subject");
+
+  @Override
+  protected final void definition() {
+    packageDeclaration("com.example");
+
+    autoImports();
+
+    classDeclaration(
+      annotation(
+        SUBJECT,
+        annotationValue(s("Objectos Code"))
+      ),
+      PUBLIC, FINAL, name("Tutorial")
+    );
+  }
+}
+----
+
+The `autoImports` instruction automatically adds any required import declaration.
+Please note that it *must* be declared after the package declaration and before the first top level declaration.
+
+The `annotation` instruction adds an annotation to our class declaration:
+
+* the name of the annotation type `SUBJECT` was defined as a static field.
+It is of type `ClassTypeName`;
+* the `s` instruction declares the `"Objectos Code"` string literal; and
+* the `annotationValue` instruction declares the single element of the annotation.
+
+== A field
+
+Let's now add a single field to our class.
+It should look like the following:
+
+[,java]
+----
+package com.example;
+
+import com.example.annotations.Subject;
+
+@Subject("Objectos Code")
+public final class Tutorial {
+  private final int value;
+}
+----
+
+As it is, this Java code would not compile.
+
+Don't worry, we will add a constructor as our next step.
+
+But, for now, we want to focus on adding the `int` field.
+So we modify our template to the following:
+
+[,java]
+----
+import objectos.code.ClassTypeName;
+import objectos.code.JavaTemplate;
+
+public class Tutorial extends JavaTemplate {
+  private static final ClassTypeName SUBJECT
+      = ClassTypeName.of("com.example.annotations", "Subject");
+
+  @Override
+  protected final void definition() {
+    packageDeclaration("com.example");
+
+    autoImports();
+
+    classDeclaration(
+      annotation(
+        SUBJECT,
+        annotationValue(s("Objectos Code"))
+      ),
+      PUBLIC, FINAL, name("Tutorial"),
+
+      field(
+        PRIVATE, FINAL, INT, name("value")
+      )
+    );
+  }
+}
+----
+
+So we use the `field` instruction to generate our field declaration:
+
+[,java]
+----
+field(
+  PRIVATE, FINAL, INT, name("value")
+)
+----
+
+Where:
+
+- the modifiers are given by the `PRIVATE` and `FINAL` constants;
+- the type is given by the `INT` constant; and
+- the name is given by the `name("value")` instruction.
+
+== A constructor
+
+Let's add a constructor next.
+We want the generated Java code to be the following:
+
+[,java]
+----
+package com.example;
+
+import com.example.annotations.Subject;
+
+@Subject("Objectos Code")
+public final class Tutorial {
+  private final int value;
+  
+  public Tutorial(int value) {
+    this.value = value;
+  }
+}
+----
+
+Let's modify our `JavaTemplate` so it generates the constructor:
+
+[,java]
+----
+import objectos.code.ClassTypeName;
+import objectos.code.JavaTemplate;
+
+public class Tutorial06 extends JavaTemplate {
+  private static final ClassTypeName SUBJECT
+      = ClassTypeName.of("com.example.annotations", "Subject");
+
+  @Override
+  protected final void definition() {
+    packageDeclaration("com.example");
+
+    autoImports();
+
+    classDeclaration(
+      annotation(
+        SUBJECT,
+        annotationValue(s("Objectos Code"))
+      ),
+      PUBLIC, FINAL, name("Tutorial"),
+
+      field(
+        PRIVATE, FINAL, INT, name("value")
+      ),
+
+      constructor(
+        PUBLIC,
+        parameter(INT, name("value")),
+
+        p(THIS, n("value"), IS, n("value"))
+      )
+    );
+  }
+}
+----
+
+We used the `constructor` instruction to generate our constructor declaration:
+
+[,java]
+----
+constructor(
+  PUBLIC,
+  parameter(INT, name("value")),
+
+  p(THIS, n("value"), IS, n("value"))
+)
+----
+
+Let's see how this works.
+First, let's take a look at the constructor declarator:
+
+* the modifier is given by the `PUBLIC` constant; and
+* the `parameter` instruction generates the `int value` formal parameter.
+
+Now, let's look at the constructor body:
+
+* the `p` instruction is used to generate a Java statement; and
+* any `p` instruction defined in the `constructor` instruction will contribute to the generated constructor's body.
+
+Finally, let's look at the `p` instruction:
+
+* it declares a single  assignment expression statement;
+* notice that the expression name `n("value")` will automatically chain to the keyword `THIS`.
+In other words, it will form the field access expression `this.value`;
+* the `IS` constant represents the simple assignment operator, i.e. the `=` (equals sign) operator;
+* the second expression name `n("value")` forms the right-hand side of the assignment; and
+* the semicolon will be automatically added.
+
+== A method
+
+Next, let's add a method that reads our field value.
+The Java code we want to generate becomes the following:
+
+[,java]
+----
+package com.example;
+
+import com.example.annotations.Subject;
+
+@Subject("Objectos Code")
+public final class Tutorial {
+  private final int value;
+  
+  public Tutorial(int value) {
+    this.value = value;
+  }
+  
+  public int get() {
+    return value;
+  }
+}
+----
+
+And so we update our template to the following:
+
+[,java]
+----
+import objectos.code.ClassTypeName;
+import objectos.code.JavaTemplate;
+
+public class Tutorial07 extends JavaTemplate {
+  private static final ClassTypeName SUBJECT
+      = ClassTypeName.of("com.example.annotations", "Subject");
+
+  public static void main(String[] args) {
+    System.out.println(new Tutorial07());
+  }
+
+  @Override
+  protected final void definition() {
+    packageDeclaration("com.example");
+
+    autoImports();
+
+    classDeclaration(
+      annotation(
+        SUBJECT,
+        annotationValue(s("Objectos Code"))
+      ),
+      PUBLIC, FINAL, name("Tutorial"),
+
+      field(
+        PRIVATE, FINAL, INT, name("value")
+      ),
+
+      constructor(
+        PUBLIC,
+        parameter(INT, name("value")),
+
+        p(THIS, n("value"), IS, n("value"))
+      ),
+
+      method(
+        PUBLIC, INT, name("get"),
+
+        p(RETURN, n("value"))
+      )
+    );
+  }
+}
+----
+
+Let's focus at the `method` instruction used to generate the method declaration:
+
+[,java]
+----
+method(
+  PUBLIC, INT, name("get"),
+
+  p(RETURN, n("value"))
+)
+----
+
+Where:
+
+* the modifier is given by `PUBLIC`;
+* the return type, by `INT`; and
+* the `name("get")` instruction defines the method's name.
+
+And the method's body:
+
+* the `p` instruction is used to generate a Java statement; and
+* any `p` instruction defined in the `method` instruction will contribute to the generated method's body.
+
+Finally, let's look at the `p` instruction:
+
+* it declares a single `return` statement which starts with `RETURN`;
+* it returns the expression name `n("value")`.
+Notice that, unlike the `THIS` keyword, the expression name will not chain to the `RETURN` keyword.
+As `return.value` would not be valid Java code.
+
+== The `include` instruction
+
+Suppose now we need to generate a number of constant values in our class.
+But we will only know the exact number number of constants at runtime.
+
+In other words, we want our class to have `static final` fields like the following:
+
+[,java]
+----
+package com.example;
+
+import com.example.annotations.Subject;
+
+@Subject("Objectos Code")
+public final class Tutorial {
+  public static final int ONE = 1;
+  
+  public static final int TWO = 2;
+  
+  public static final int THREE = 3;
+
+  private final int value;
+  
+  public Tutorial(int value) {
+    this.value = value;
+  }
+  
+  public int get() {
+    return value;
+  }
+}
+----
+
+But the exact number of fields will only be known at runtime.
+For simplicity, we will generate three constants but the idea remains basically the same.
+
+In this case we will use the `include` directive and a method reference.
+Like so:
+
+[,java]
+----
+import java.util.LinkedHashMap;
+import objectos.code.ClassTypeName;
+import objectos.code.JavaTemplate;
+
+public class Tutorial08 extends JavaTemplate {
+  private static final ClassTypeName SUBJECT
+      = ClassTypeName.of("com.example.annotations", "Subject");
+
+  @Override
+  protected final void definition() {
+    packageDeclaration("com.example");
+
+    autoImports();
+
+    classDeclaration(
+      annotation(
+        SUBJECT,
+        annotationValue(s("Objectos Code"))
+      ),
+      PUBLIC, FINAL, name("Tutorial"),
+
+      include(this::constants),
+
+      field(
+        PRIVATE, FINAL, INT, name("value")
+      ),
+
+      constructor(
+        PUBLIC,
+        parameter(INT, name("value")),
+
+        p(THIS, n("value"), IS, n("value"))
+      ),
+
+      method(
+        PUBLIC, INT, name("get"),
+
+        p(RETURN, n("value"))
+      )
+    );
+  }
+
+  private void constants() {
+    var constants = new LinkedHashMap<String, Integer>();
+
+    constants.put("ONE", 1);
+    constants.put("TWO", 2);
+    constants.put("THREE", 3);
+
+    for (var entry : constants.entrySet()) {
+      var name = entry.getKey();
+      var value = entry.getValue();
+
+      field(
+        PUBLIC, STATIC, FINAL, INT, name(name), i(value.intValue())
+      );
+    }
+  }
+}
+----
+
+Notice the `include` method invocation at the beginning of the body of our class.
+The argument is a method reference.
+It references the private `constants` method.
+
+The `constants` method iterates over the entries of a `Map` instance.
+Using the key and the value of each entry, it declares the field:
+
+* using the `field` instruction;
+* the field modifiers are given by `PUBLIC`, `STATIC` and `FINAL`;
+* the field type, by `INT`;
+* the field name, by `name(name)`; and
+* the field is initialized with the `int` literal expression: `i(value.intValue())`.
+The `Integer::intValue` is explicitly called just to indicate that the `i` method accepts an `int` value.
