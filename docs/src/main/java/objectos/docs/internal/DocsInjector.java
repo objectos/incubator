@@ -25,6 +25,8 @@ public abstract class DocsInjector {
 
   abstract Document $document();
 
+  abstract objectos.asciidoc.pseudom.Document $document2();
+
   abstract String $elink(String target);
 
   abstract String $ilink(String target);

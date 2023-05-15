@@ -17,11 +17,18 @@ package objectos.docs.internal;
 
 import br.com.objectos.css.sheet.StyleSheetWriter;
 import java.io.IOException;
+import java.io.UncheckedIOException;
+import java.nio.file.Files;
+import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.Callable;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
+import objectos.asciidoc.AsciiDoc2;
 import objectos.asciidoc.Document;
 import objectos.docs.Docs.BottomBar;
 import objectos.docs.Docs.TopBar;
@@ -31,7 +38,7 @@ import objectos.shared.StyleClassSet;
 
 public class Step3Generate extends Step2Scan {
 
-  private class Task implements Runnable {
+  private class Task implements Callable<Throwable> {
     private final String key;
     private final DocumentRecord record;
 
@@ -41,36 +48,32 @@ public class Step3Generate extends Step2Scan {
     }
 
     @Override
-    public final void run() {
+    public final Throwable call() {
       ThisInjector injector;
 
       try {
         injector = injectors.take();
       } catch (InterruptedException e) {
-        if (rethrow != null) {
-          rethrow.addSuppressed(e);
-        } else {
-          rethrow = new IOException(e);
-        }
-
-        return;
+        return e;
       }
+
+      Throwable result = null;
 
       try {
         injector.generate(key, record);
-      } catch (IOException e) {
-        if (rethrow != null) {
-          rethrow.addSuppressed(e);
-        } else {
-          rethrow = e;
-        }
+      } catch (Throwable e) {
+        result = e;
       } finally {
         injectors.add(injector);
       }
+
+      return result;
     }
   }
 
   private class ThisInjector extends DocsInjector {
+    private final AsciiDoc2 asciiDoc = new AsciiDoc2();
+
     private final HtmlSink htmlSink = new HtmlSink();
 
     private final StyleClassSet styleClassSet = new StyleClassSet();
@@ -81,7 +84,11 @@ public class Step3Generate extends Step2Scan {
 
     private final ArticleTemplate articleTemplate = new ArticleTemplate(this);
 
+    private final ArticleTemplate2 articleTemplate2 = new ArticleTemplate2(this);
+
     private final VersionsTemplate versionsTemplate = new VersionsTemplate(this);
+
+    private final VersionsTemplate2 versionsTemplate2 = new VersionsTemplate2(this);
 
     private BottomBar bottomBar;
 
@@ -117,6 +124,10 @@ public class Step3Generate extends Step2Scan {
       template.rawStyle(styleSheetWriter.toString(styleSheet));
 
       htmlSink.toDirectory(template, targetDirectory);
+
+      if (validationDirectory != null) {
+        generate2(key, record);
+      }
     }
 
     @Override
@@ -124,12 +135,26 @@ public class Step3Generate extends Step2Scan {
       if (bottomBar == null) {
         bottomBar = bottomBarFactory.get();
       }
+
       return bottomBar.toFragment();
     }
 
     @Override
     final Document $document() {
       return currentRecord.document();
+    }
+
+    @Override
+    objectos.asciidoc.pseudom.Document $document2() {
+      try {
+        var path = currentRecord.path();
+
+        var source = Files.readString(path);
+
+        return asciiDoc.open(source);
+      } catch (IOException e) {
+        throw new UncheckedIOException(e);
+      }
     }
 
     @Override
@@ -211,6 +236,42 @@ public class Step3Generate extends Step2Scan {
         default -> throw new NoSuchElementException(templateName);
       };
     }
+
+    private DocsTemplate2 _template2(String templateName) {
+      return switch (templateName) {
+        case "ArticleTemplate" -> articleTemplate2;
+
+        case "VersionsTemplate" -> versionsTemplate2;
+
+        default -> throw new NoSuchElementException(templateName);
+      };
+    }
+
+    private void generate2(String key, DocumentRecord record) throws IOException {
+      currentKey = key;
+
+      currentRecord = record;
+
+      currentVersion = currentRecord.version();
+
+      var templateName = currentRecord.templateName();
+
+      var template = _template2(templateName);
+
+      template.key = currentKey;
+
+      template.version = currentVersion;
+
+      template.rawStyle(null);
+
+      htmlSink.toProcessor(template, styleClassSet);
+
+      styleSheetWriter.filterClassSelectorsByName(styleClassSet);
+
+      template.rawStyle(styleSheetWriter.toString(styleSheet));
+
+      htmlSink.toDirectory(template, validationDirectory);
+    }
   }
 
   private final int capacity;
@@ -218,8 +279,6 @@ public class Step3Generate extends Step2Scan {
   private final BlockingQueue<ThisInjector> injectors;
 
   private Supplier<BottomBar> bottomBarFactory = DocsBottomBar::new;
-
-  private IOException rethrow;
 
   private Supplier<TopBar> topBarFactory = DocsTopBar::new;
 
@@ -240,14 +299,21 @@ public class Step3Generate extends Step2Scan {
   public final void executeGenerate() throws IOException {
     long startTime = System.currentTimeMillis();
 
-    System.out.println("Resource target path: " + targetDirectory);
+    System.out.println("Target path: " + targetDirectory);
+
+    if (validationDirectory != null) {
+      System.out.println("Validation path: " + validationDirectory);
+    }
+
+    var futures = new ArrayList<Future<Throwable>>();
 
     try (var executor = Executors.newFixedThreadPool(capacity)) {
       for (var entry : documents.entrySet()) {
         var key = entry.getKey();
         var value = entry.getValue();
         var task = new Task(key, value);
-        executor.submit(task);
+        var future = executor.submit(task);
+        futures.add(future);
       }
     }
 
@@ -255,9 +321,22 @@ public class Step3Generate extends Step2Scan {
 
     System.out.println("Step 3: " + totalTime + " ms");
 
-    if (rethrow != null) {
-      throw rethrow;
+    var results = futures.stream()
+        .map(Future::resultNow)
+        .filter(o -> o != null)
+        .collect(Collectors.toList());
+
+    if (results.isEmpty()) {
+      return;
     }
+
+    var error = new IOException("Did not complete...");
+
+    for (var result : results) {
+      error.addSuppressed(result);
+    }
+
+    throw error;
   }
 
   public final void topBar(Supplier<TopBar> topBarFactory) {

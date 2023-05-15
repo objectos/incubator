@@ -31,7 +31,6 @@ import br.com.objectos.css.framework.flexbox.JustifyContent;
 import br.com.objectos.css.framework.interactivity.Cursor;
 import br.com.objectos.css.framework.layout.Display;
 import br.com.objectos.css.framework.layout.Left;
-import br.com.objectos.css.framework.layout.OverflowX;
 import br.com.objectos.css.framework.layout.OverflowY;
 import br.com.objectos.css.framework.layout.Position;
 import br.com.objectos.css.framework.layout.Top;
@@ -42,7 +41,6 @@ import br.com.objectos.css.framework.sizing.MinHeight;
 import br.com.objectos.css.framework.sizing.MinWidth;
 import br.com.objectos.css.framework.sizing.Width;
 import br.com.objectos.css.framework.spacing.MarginBottom;
-import br.com.objectos.css.framework.spacing.MarginTop;
 import br.com.objectos.css.framework.spacing.MarginX;
 import br.com.objectos.css.framework.spacing.MarginY;
 import br.com.objectos.css.framework.spacing.Padding;
@@ -54,286 +52,45 @@ import br.com.objectos.css.framework.spacing.PaddingX;
 import br.com.objectos.css.framework.spacing.PaddingY;
 import br.com.objectos.css.framework.typography.FontSize;
 import br.com.objectos.css.framework.typography.FontWeight;
-import br.com.objectos.css.framework.typography.LetterSpacing;
-import br.com.objectos.css.framework.typography.ListStyleType;
 import br.com.objectos.css.framework.typography.TextAlign;
 import br.com.objectos.css.framework.typography.TextColor;
 import br.com.objectos.css.framework.typography.TextTransform;
 import br.com.objectos.css.select.ClassSelector;
 import br.com.objectos.css.select.IdSelector;
-import objectos.asciidoc.DocumentAttributes;
 import objectos.docs.internal.Navigation.Element;
 import objectos.docs.internal.Navigation.Link;
 import objectos.docs.internal.Navigation.LinkList;
 import objectos.docs.internal.Navigation.LinkTitle;
 import objectos.docs.internal.Navigation.Section;
-import objectos.html.tmpl.StandardElementName;
-import objectos.shared.DefaultRenderer;
-import objectos.shared.JavaRenderer;
 import objectos.shared.LanguageRenderer;
-import objectos.shared.XmlRenderer;
 
-public final class ArticleTemplate extends DocsTemplate implements LanguageRenderer.Output {
+public final class ArticleTemplate2 extends DocsTemplate2 implements LanguageRenderer.Output {
 
-  static final IdSelector BACKDROP = Css.randomHash(3);
+  private static final IdSelector BACKDROP = Css.randomHash(3);
 
   static final IdSelector CLICK_CLOSE = Css.randomHash(3);
 
-  static final IdSelector CLICK_OPEN = Css.randomHash(3);
+  private static final IdSelector CLICK_OPEN = Css.randomHash(3);
 
-  static final IdSelector NAV = Css.randomHash(3);
+  private static final IdSelector NAV = Css.randomHash(3);
 
-  static final ClassSelector MY_DEFAULT = MarginY.v03;
-
-  private final LanguageRenderer defaultRenderer = new DefaultRenderer();
-
-  private final LanguageRenderer javaRenderer = new JavaRenderer();
-
-  private final LanguageRenderer xmlRenderer = new XmlRenderer();
-
-  private LanguageRenderer languageRenderer;
-
-  private final StringBuilder source = new StringBuilder();
-
-  private boolean containerStarted;
-
-  private boolean heading;
+  @SuppressWarnings("unused")
+  private static final ClassSelector MY_DEFAULT = MarginY.v03;
 
   private Navigation navigation;
 
-  ArticleTemplate(DocsInjector injector) { super(injector); }
+  ArticleTemplate2(DocsInjector injector) {
+    super(injector);
+  }
 
   public static void initArticleTemplate() {
   }
 
   @Override
-  public final void documentEnd() {
-    if (containerStarted) {
-      tagEnd(StandardElementName.DIV); // contents
-
-      tagEnd(StandardElementName.DIV); // container
-    }
-  }
+  public void languageSpan(ClassSelector clazz, String contents) {}
 
   @Override
-  public final void documentStart(DocumentAttributes attributes) {
-    super.documentStart(attributes);
-
-    containerStarted = false;
-  }
-
-  @Override
-  public final void headingEnd(int level) {
-    switch (level) {
-      case 1 -> {
-        tagEnd(StandardElementName.H1);
-
-        tagEnd(StandardElementName.HEADER);
-
-        containerStarted = true;
-
-        // container
-
-        tagStart();
-
-        addValue0(
-          FlexDirection.rowReverse,
-          Display.flex,
-          MaxWidth.full
-        );
-
-        // TOC
-
-        tagStart();
-
-        addValue0(
-          Display.hidden,
-          Display.xl.block,
-          Flex.xl.none,
-          Width.xl.v64
-        );
-
-        addValue0(raw("&nbsp;"));
-
-        tagEnd(StandardElementName.DIV);
-
-        // contents
-
-        tagStart();
-
-        addValue0(
-          FlexGrow.one,
-          MinWidth.v0,
-          PaddingRight.xl.v10
-        );
-      }
-
-      default -> super.headingEnd(level);
-    }
-
-    heading = false;
-  }
-
-  @Override
-  public final void headingStart(int level) {
-    heading = true;
-
-    switch (level) {
-      case 1 -> {
-        tagStart(); // <header>
-
-        addValue0(
-          BorderColor.slate400,
-          BorderBottom.v1,
-          MarginBottom.v10,
-          PaddingBottom.v08
-        );
-
-        tagStart(); // <h1>
-
-        addValue0(
-          FontSize.xLarge3,
-          LetterSpacing.tight
-        );
-      }
-
-      case 2 -> {
-        tagStart(); // <h2>
-
-        addValue0(
-          FontSize.xLarge2,
-          MarginTop.v10
-        );
-      }
-
-      case 3 -> {
-        tagStart(); // <h3>
-
-        addValue0(
-          BorderBottom.v1,
-          BorderColor.slate300,
-          FontSize.large,
-          MarginTop.v06,
-          MY_DEFAULT
-        );
-      }
-
-      default -> super.headingStart(level);
-    }
-  }
-
-  @Override
-  public final void languageSpan(ClassSelector clazz, String contents) {
-    addValue0(span(clazz, t(contents)));
-  }
-
-  @Override
-  public final void languageText(String text) {
-    addValue0(t(text));
-  }
-
-  @Override
-  public final void lineFeed() {
-    if (languageRenderer != null) {
-      source.append('\n');
-    }
-  }
-
-  @Override
-  public final void listingBlockEnd() {
-    sourceCodeBlockEnd();
-  }
-
-  @Override
-  public final void listingBlockStart() {
-    sourceCodeBlockStart("default");
-  }
-
-  @Override
-  public final void listItemStart() {
-    super.listItemStart();
-
-    addValue0(
-      MY_DEFAULT
-    );
-  }
-
-  @Override
-  public final void monospaceStart() {
-    super.monospaceStart();
-
-    if (!heading) {
-      addValue0(
-        BackgroundColor.gray100,
-        FontSize.small,
-        PaddingX.v01,
-        PaddingY.v00_5
-      );
-    }
-  }
-
-  @Override
-  public final void paragraphStart() {
-    super.paragraphStart();
-
-    addValue0(
-      MY_DEFAULT
-    );
-  }
-
-  @Override
-  public final void sourceCodeBlockEnd() {
-    var literal = source.toString();
-
-    tagStart();
-    addValue0(
-      BackgroundColor.gray100,
-      FontSize.small,
-      OverflowX.auto,
-      MY_DEFAULT,
-      Padding.v03
-    );
-    tagStart();
-    languageRenderer.render(this, literal);
-    tagEnd(StandardElementName.CODE);
-    tagEnd(StandardElementName.PRE);
-
-    languageRenderer = null;
-  }
-
-  @Override
-  public final void sourceCodeBlockStart(String language) {
-    source.setLength(0);
-
-    languageRenderer = switch (language) {
-      case "default", "shell" -> defaultRenderer;
-
-      case "java" -> javaRenderer;
-
-      case "html", "xml" -> xmlRenderer;
-
-      default -> throw new UnsupportedOperationException("Implement me :: lang=" + language);
-    };
-  }
-
-  @Override
-  public final void text(String s) {
-    if (languageRenderer != null) {
-      source.append(s);
-    } else {
-      super.text(s);
-    }
-  }
-
-  @Override
-  public final void unorderedListStart() {
-    super.unorderedListStart();
-
-    addValue0(
-      ListStyleType.disc,
-      PaddingLeft.v08
-    );
-  }
+  public void languageText(String text) {}
 
   @Override
   final void head0() {
@@ -550,7 +307,7 @@ public final class ArticleTemplate extends DocsTemplate implements LanguageRende
       Height.v16,
 
       svg(
-        ArticleTemplate.CLICK_CLOSE,
+        ArticleTemplate2.CLICK_CLOSE,
 
         Cursor.hover.pointer,
         Display.block,

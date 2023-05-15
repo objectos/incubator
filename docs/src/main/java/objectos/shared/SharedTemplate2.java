@@ -13,19 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package objectos.docs.internal;
+package objectos.shared;
 
-import java.nio.file.Path;
-import objectos.asciidoc.Document;
+import br.com.objectos.css.select.ClassSelector;
+import br.com.objectos.css.select.IdSelector;
+import objectos.html.HtmlTemplate;
 
-record DocumentRecord(Path path,
-                      String key,
-                      Version version,
-                      Document document,
-                      DocumentTitle title) {
+public abstract class SharedTemplate2 extends HtmlTemplate {
 
-  public final String templateName() {
-    return document.getAttribute("template", "ArticleTemplate");
+  public static final IdSelector BODY = SharedTemplate.BODY;
+
+  public static final ClassSelector LINK_COLOR = SharedTemplate.LINK_COLOR;
+
+  public static String init() {
+    return BODY.toString();
   }
 
 }

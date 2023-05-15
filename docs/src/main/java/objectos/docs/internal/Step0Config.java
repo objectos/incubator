@@ -32,10 +32,14 @@ class Step0Config {
 
   Path targetDirectory;
 
+  Path validationDirectory;
+
   public final void clearConfig() {
     sourceDirectories.clear();
 
     targetDirectory = null;
+
+    validationDirectory = null;
   }
 
   public final void parseArgs(String... args) {
@@ -53,6 +57,8 @@ class Step0Config {
 
     mainOnly = false;
 
+    String validationPathName = null;
+
     if (length > 2) {
       for (int i = 2; i < length;) {
         var arg = args[i++];
@@ -60,12 +66,7 @@ class Step0Config {
         switch (arg) {
           case "--main" -> mainOnly = true;
 
-          default -> {
-            throw new IllegalArgumentException("""
-            Invalid option: %s
-            """.formatted(arg)
-            );
-          }
+          default -> validationPathName = arg;
         }
       }
     }
@@ -73,6 +74,8 @@ class Step0Config {
     sourcePath(sourcePathName);
 
     targetDirectory(targetPathName);
+
+    validationDirectory(validationPathName);
   }
 
   public final void production() {
@@ -91,10 +94,24 @@ class Step0Config {
     if (Files.exists(path) && !Files.isDirectory(path)) {
       throw new IllegalArgumentException("""
       Invalid <target-path>: %s is not a directory
-      """.formatted(path));
+      """.formatted(path)
+      );
     }
 
     targetDirectory = path;
+
+    development();
+  }
+
+  public final void validationDirectory(Path path) {
+    if (Files.exists(path) && !Files.isDirectory(path)) {
+      throw new IllegalArgumentException("""
+      Invalid <validation-path>: %s is not a directory
+      """.formatted(path)
+      );
+    }
+
+    validationDirectory = path;
 
     development();
   }
@@ -147,6 +164,16 @@ class Step0Config {
     var maybe = Path.of(targetPathName).toAbsolutePath();
 
     targetDirectory(maybe);
+  }
+
+  private void validationDirectory(String validationPathName) {
+    if (validationPathName == null) {
+      return;
+    }
+
+    var path = Path.of(validationPathName).toAbsolutePath();
+
+    validationDirectory(path);
   }
 
 }
