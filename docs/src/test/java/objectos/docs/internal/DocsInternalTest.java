@@ -59,7 +59,7 @@ public class DocsInternalTest extends AbstractDocsTest {
     rmdir(resultDir);
   }
 
-  @Test(enabled = false, description = """
+  @Test(description = """
   Generation test of archive/0.6.4
   """)
   public void testCase01() throws IOException {

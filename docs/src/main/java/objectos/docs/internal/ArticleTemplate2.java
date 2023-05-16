@@ -59,7 +59,10 @@ import br.com.objectos.css.framework.typography.TextDecoration;
 import br.com.objectos.css.framework.typography.TextTransform;
 import br.com.objectos.css.select.ClassSelector;
 import br.com.objectos.css.select.IdSelector;
+import java.io.IOException;
+import java.io.UncheckedIOException;
 import objectos.asciidoc.pseudom.Node;
+import objectos.asciidoc.pseudom.Node.ContainerNode;
 import objectos.asciidoc.pseudom.Node.Emphasis;
 import objectos.asciidoc.pseudom.Node.Header;
 import objectos.asciidoc.pseudom.Node.InlineMacro;
@@ -301,11 +304,42 @@ public final class ArticleTemplate2 extends DocsTemplate2 implements LanguageRen
           PaddingLeft.xl.v10,
 
           article(
-            f(this::renderDocument)
+            f(this::render)
           )
         )
       )
     );
+  }
+
+  private void container(ContainerNode container) {
+    for (var node : container.nodes()) {
+      node(node);
+    }
+  }
+
+  private void inlineMacro(InlineMacro macro) {
+    var name = macro.name();
+
+    switch (name) {
+      case "ilink" -> {
+        var target = macro.target();
+
+        var href = injector.$ilink(target);
+
+        a(
+          LINK_COLOR,
+          TextColor.hover.blue900,
+          TextDecoration.underline,
+
+          pathTo(href),
+          f(() -> container(macro))
+        );
+      }
+
+      default -> throw new UnsupportedOperationException(
+        "Implement me :: name=" + name
+      );
+    }
   }
 
   private void leftBar() {
@@ -395,116 +429,6 @@ public final class ArticleTemplate2 extends DocsTemplate2 implements LanguageRen
     ul(f(this::leftBar0));
   }
 
-  final void node(Node node) {
-    if (node instanceof Emphasis emphasis) {
-      em(f(() -> container(emphasis)));
-    } else if (node instanceof Header header) {
-      container(header);
-    } else if (node instanceof InlineMacro macro) {
-      inlineMacro(macro);
-    } else if (node instanceof ListItem item) {
-      li(
-        MY_DEFAULT,
-
-        f(() -> container(item))
-      );
-    } else if (node instanceof Monospaced monospaced) {
-      code(
-        BackgroundColor.gray100,
-        FontSize.small,
-        PaddingX.v01,
-        PaddingY.v00_5,
-
-        f(() -> container(monospaced))
-      );
-    } else if (node instanceof Paragraph paragraph) {
-      p(
-        MY_DEFAULT,
-
-        f(() -> container(paragraph))
-      );
-    } else if (node instanceof objectos.asciidoc.pseudom.Node.Section section) {
-      container(section);
-    } else if (node instanceof Strong strong) {
-      strong(f(() -> container(strong)));
-    } else if (node instanceof Text text) {
-      t(text.value());
-    } else if (node instanceof Title title) {
-      int level = title.level();
-
-      switch (level) {
-        case 0 -> header(
-          BorderColor.slate400,
-          BorderBottom.v1,
-          MarginBottom.v10,
-          PaddingBottom.v08,
-
-          h1(
-            FontSize.xLarge3,
-            LetterSpacing.tight,
-
-            f(() -> container(title))
-          )
-        );
-
-        case 1 -> h2(
-          FontSize.xLarge2,
-          MarginTop.v10,
-
-          f(() -> container(title))
-        );
-
-        case 2 -> h3(
-          BorderBottom.v1,
-          BorderColor.slate300,
-          FontSize.large,
-          MarginTop.v06,
-          MY_DEFAULT,
-
-          f(() -> container(title))
-        );
-
-        default -> throw new UnsupportedOperationException("level=" + level);
-      }
-    } else if (node instanceof UnorderedList list) {
-      ul(
-        ListStyleType.disc,
-        PaddingLeft.v08,
-
-        f(() -> container(list))
-      );
-    } else {
-      throw new UnsupportedOperationException(
-        "Implement me :: type=" + node.getClass().getSimpleName()
-      );
-    }
-  }
-
-  private void inlineMacro(InlineMacro macro) {
-    var name = macro.name();
-
-    switch (name) {
-      case "ilink" -> {
-        var target = macro.target();
-
-        var href = injector.$ilink(target);
-
-        a(
-          LINK_COLOR,
-          TextColor.hover.blue900,
-          TextDecoration.underline,
-
-          pathTo(href),
-          f(() -> container(macro))
-        );
-      }
-
-      default -> throw new UnsupportedOperationException(
-        "Implement me :: name=" + name
-      );
-    }
-  }
-
   private void leftBar0() {
     for (var element : navigation.elements) {
       leftBar1(element);
@@ -588,6 +512,138 @@ public final class ArticleTemplate2 extends DocsTemplate2 implements LanguageRen
 
       pathTo(href), raw(text)
     );
+  }
+
+  private void render() {
+    try (var document = injector.$document2()) {
+      var nodes = document.nodes();
+
+      var iter = nodes.iterator();
+
+      if (!iter.hasNext()) {
+        return;
+      }
+
+      var first = iter.next();
+
+      if (first instanceof Header header) {
+        header(
+          BorderColor.slate400,
+          BorderBottom.v1,
+          MarginBottom.v10,
+          PaddingBottom.v08,
+
+          f(() -> container(header))
+        );
+      } else {
+        node(first);
+      }
+
+      div(
+        FlexDirection.rowReverse,
+        Display.flex,
+        MaxWidth.full,
+
+        div(
+          Display.hidden,
+          Display.xl.block,
+          Flex.xl.none,
+          Width.xl.v64,
+
+          raw("&nbsp;")
+        ),
+
+        div(
+          FlexGrow.one,
+          MinWidth.v0,
+          PaddingRight.xl.v10,
+
+          f(() -> {
+            while (iter.hasNext()) {
+              node(iter.next());
+            }
+          })
+        )
+      );
+    } catch (IOException e) {
+      throw new UncheckedIOException(e);
+    }
+  }
+
+  private void node(Node node) {
+    if (node instanceof Emphasis emphasis) {
+      em(f(() -> container(emphasis)));
+    } else if (node instanceof InlineMacro macro) {
+      inlineMacro(macro);
+    } else if (node instanceof ListItem item) {
+      li(
+        MY_DEFAULT,
+
+        f(() -> container(item))
+      );
+    } else if (node instanceof Monospaced monospaced) {
+      code(
+        BackgroundColor.gray100,
+        FontSize.small,
+        PaddingX.v01,
+        PaddingY.v00_5,
+
+        f(() -> container(monospaced))
+      );
+    } else if (node instanceof Paragraph paragraph) {
+      p(
+        MY_DEFAULT,
+
+        f(() -> container(paragraph))
+      );
+    } else if (node instanceof objectos.asciidoc.pseudom.Node.Section section) {
+      container(section);
+    } else if (node instanceof Strong strong) {
+      strong(f(() -> container(strong)));
+    } else if (node instanceof Text text) {
+      t(text.value());
+    } else if (node instanceof Title title) {
+      int level = title.level();
+
+      switch (level) {
+        case 0 -> h1(
+          FontSize.xLarge3,
+          LetterSpacing.tight,
+
+          f(() -> container(title))
+        );
+
+        case 1 -> h2(
+          FontSize.xLarge2,
+          MarginTop.v10,
+
+          f(() -> container(title))
+        );
+
+        case 2 -> h3(
+          BorderBottom.v1,
+          BorderColor.slate300,
+          FontSize.large,
+          MarginTop.v06,
+          MY_DEFAULT,
+
+          f(() -> container(title))
+        );
+
+        default -> throw new UnsupportedOperationException("level=" + level);
+      }
+    } else if (node instanceof UnorderedList list) {
+      ul(
+        ListStyleType.disc,
+        PaddingLeft.v08,
+
+        f(() -> container(list))
+      );
+    } else {
+      throw new UnsupportedOperationException(
+        "Implement me :: type=" + node.getClass().getSimpleName()
+      );
+    }
   }
 
 }

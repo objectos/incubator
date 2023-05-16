@@ -17,11 +17,6 @@ package objectos.docs.internal;
 
 import br.com.objectos.css.framework.flexbox.FlexDirection;
 import br.com.objectos.css.framework.layout.Display;
-import java.io.IOException;
-import java.io.UncheckedIOException;
-import objectos.asciidoc.pseudom.Node;
-import objectos.asciidoc.pseudom.Node.ContainerNode;
-import objectos.asciidoc.pseudom.Node.Monospaced;
 import objectos.shared.SharedTemplate2;
 
 abstract class DocsTemplate2 extends SharedTemplate2 {
@@ -35,12 +30,6 @@ abstract class DocsTemplate2 extends SharedTemplate2 {
   Version version;
 
   DocsTemplate2(DocsInjector injector) { this.injector = injector; }
-
-  protected final void container(ContainerNode container) {
-    for (var node : container.nodes()) {
-      node(node);
-    }
-  }
 
   @Override
   protected final void definition() {
@@ -93,24 +82,8 @@ abstract class DocsTemplate2 extends SharedTemplate2 {
 
   abstract void main0();
 
-  void monospaced(Monospaced monospaced) {
-    code(f(() -> container(monospaced)));
-  }
-
   final void rawStyle(String rawStyle) {
     this.rawStyle = rawStyle;
   }
-
-  final void renderDocument() {
-    try (var document = injector.$document2()) {
-      for (var node : document.nodes()) {
-        node(node);
-      }
-    } catch (IOException e) {
-      throw new UncheckedIOException(e);
-    }
-  }
-
-  abstract void node(Node node);
 
 }
