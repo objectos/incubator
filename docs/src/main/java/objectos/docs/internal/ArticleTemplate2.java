@@ -30,6 +30,7 @@ import br.com.objectos.css.framework.flexbox.JustifyContent;
 import br.com.objectos.css.framework.interactivity.Cursor;
 import br.com.objectos.css.framework.layout.Display;
 import br.com.objectos.css.framework.layout.Left;
+import br.com.objectos.css.framework.layout.OverflowX;
 import br.com.objectos.css.framework.layout.OverflowY;
 import br.com.objectos.css.framework.layout.Position;
 import br.com.objectos.css.framework.layout.Top;
@@ -67,6 +68,7 @@ import objectos.asciidoc.pseudom.Node.Emphasis;
 import objectos.asciidoc.pseudom.Node.Header;
 import objectos.asciidoc.pseudom.Node.InlineMacro;
 import objectos.asciidoc.pseudom.Node.ListItem;
+import objectos.asciidoc.pseudom.Node.ListingBlock;
 import objectos.asciidoc.pseudom.Node.Monospaced;
 import objectos.asciidoc.pseudom.Node.Paragraph;
 import objectos.asciidoc.pseudom.Node.Strong;
@@ -78,7 +80,10 @@ import objectos.docs.internal.Navigation.Link;
 import objectos.docs.internal.Navigation.LinkList;
 import objectos.docs.internal.Navigation.LinkTitle;
 import objectos.docs.internal.Navigation.Section;
+import objectos.shared.DefaultRenderer;
+import objectos.shared.JavaRenderer;
 import objectos.shared.LanguageRenderer;
+import objectos.shared.XmlRenderer;
 
 public final class ArticleTemplate2 extends DocsTemplate2 implements LanguageRenderer.Output {
 
@@ -92,7 +97,15 @@ public final class ArticleTemplate2 extends DocsTemplate2 implements LanguageRen
 
   private static final ClassSelector MY_DEFAULT = ArticleTemplate.MY_DEFAULT;
 
+  private final LanguageRenderer defaultRenderer = new DefaultRenderer();
+
+  private final LanguageRenderer javaRenderer = new JavaRenderer();
+
+  private final LanguageRenderer xmlRenderer = new XmlRenderer();
+
   private Navigation navigation;
+
+  private final StringBuilder source = new StringBuilder();
 
   ArticleTemplate2(DocsInjector injector) {
     super(injector);
@@ -102,10 +115,14 @@ public final class ArticleTemplate2 extends DocsTemplate2 implements LanguageRen
   }
 
   @Override
-  public void languageSpan(ClassSelector clazz, String contents) {}
+  public final void languageSpan(ClassSelector clazz, String contents) {
+    span(clazz, t(contents));
+  }
 
   @Override
-  public void languageText(String text) {}
+  public final void languageText(String text) {
+    t(text);
+  }
 
   @Override
   final void head0() {
@@ -311,37 +328,6 @@ public final class ArticleTemplate2 extends DocsTemplate2 implements LanguageRen
     );
   }
 
-  private void container(ContainerNode container) {
-    for (var node : container.nodes()) {
-      node(node);
-    }
-  }
-
-  private void inlineMacro(InlineMacro macro) {
-    var name = macro.name();
-
-    switch (name) {
-      case "ilink" -> {
-        var target = macro.target();
-
-        var href = injector.$ilink(target);
-
-        a(
-          LINK_COLOR,
-          TextColor.hover.blue900,
-          TextDecoration.underline,
-
-          pathTo(href),
-          f(() -> container(macro))
-        );
-      }
-
-      default -> throw new UnsupportedOperationException(
-        "Implement me :: name=" + name
-      );
-    }
-  }
-
   private void leftBar() {
     div(
       AlignItems.center,
@@ -533,10 +519,10 @@ public final class ArticleTemplate2 extends DocsTemplate2 implements LanguageRen
           MarginBottom.v10,
           PaddingBottom.v08,
 
-          f(() -> container(header))
+          f(() -> renderContainer(header))
         );
       } else {
-        node(first);
+        renderNode(first);
       }
 
       div(
@@ -560,7 +546,7 @@ public final class ArticleTemplate2 extends DocsTemplate2 implements LanguageRen
 
           f(() -> {
             while (iter.hasNext()) {
-              node(iter.next());
+              renderNode(iter.next());
             }
           })
         )
@@ -570,16 +556,110 @@ public final class ArticleTemplate2 extends DocsTemplate2 implements LanguageRen
     }
   }
 
-  private void node(Node node) {
+  private void renderContainer(ContainerNode container) {
+    for (var node : container.nodes()) {
+      renderNode(node);
+    }
+  }
+
+  private void renderInlineMacro(InlineMacro macro) {
+    var name = macro.name();
+
+    switch (name) {
+      case "https" -> {
+        var target = macro.target();
+
+        a(
+          LINK_COLOR,
+          TextColor.hover.blue900,
+          TextDecoration.underline,
+
+          href(target),
+          f(() -> renderContainer(macro))
+        );
+      }
+
+      case "ilink" -> {
+        var target = macro.target();
+
+        var href = injector.$ilink(target);
+
+        a(
+          LINK_COLOR,
+          TextColor.hover.blue900,
+          TextDecoration.underline,
+
+          pathTo(href),
+          f(() -> renderContainer(macro))
+        );
+      }
+
+      default -> throw new UnsupportedOperationException(
+        "Implement me :: name=" + name
+      );
+    }
+  }
+
+  private void renderListingBlock(ListingBlock block) {
+    pre(
+      BackgroundColor.gray100,
+      FontSize.small,
+      OverflowX.auto,
+      MY_DEFAULT,
+      Padding.v03,
+
+      code(f(() -> renderListingBlockCode(block)))
+    );
+  }
+
+  private void renderListingBlockCode(ListingBlock block) {
+    var attributes = block.attributes();
+
+    var style = attributes.getNamed("style", "null");
+
+    var language = "default";
+
+    if (style.equals("source")) {
+      language = attributes.getNamed("language");
+    }
+
+    source.setLength(0);
+
+    for (var node : block.nodes()) {
+      if (node instanceof Text text) {
+        source.append(text.value());
+      } else {
+        throw new UnsupportedOperationException(
+          "Implement me :: node=" + node.getClass().getSimpleName()
+        );
+      }
+    }
+
+    var languageRenderer = switch (language) {
+      case "default", "shell" -> defaultRenderer;
+
+      case "java" -> javaRenderer;
+
+      case "html", "xml" -> xmlRenderer;
+
+      default -> throw new UnsupportedOperationException("Implement me :: lang=" + language);
+    };
+
+    languageRenderer.render(this, source.toString());
+  }
+
+  private void renderNode(Node node) {
     if (node instanceof Emphasis emphasis) {
-      em(f(() -> container(emphasis)));
+      em(f(() -> renderContainer(emphasis)));
     } else if (node instanceof InlineMacro macro) {
-      inlineMacro(macro);
+      renderInlineMacro(macro);
+    } else if (node instanceof ListingBlock block) {
+      renderListingBlock(block);
     } else if (node instanceof ListItem item) {
       li(
         MY_DEFAULT,
 
-        f(() -> container(item))
+        f(() -> renderContainer(item))
       );
     } else if (node instanceof Monospaced monospaced) {
       code(
@@ -588,18 +668,18 @@ public final class ArticleTemplate2 extends DocsTemplate2 implements LanguageRen
         PaddingX.v01,
         PaddingY.v00_5,
 
-        f(() -> container(monospaced))
+        f(() -> renderContainer(monospaced))
       );
     } else if (node instanceof Paragraph paragraph) {
       p(
         MY_DEFAULT,
 
-        f(() -> container(paragraph))
+        f(() -> renderContainer(paragraph))
       );
     } else if (node instanceof objectos.asciidoc.pseudom.Node.Section section) {
-      container(section);
+      renderContainer(section);
     } else if (node instanceof Strong strong) {
-      strong(f(() -> container(strong)));
+      strong(f(() -> renderContainer(strong)));
     } else if (node instanceof Text text) {
       t(text.value());
     } else if (node instanceof Title title) {
@@ -610,14 +690,14 @@ public final class ArticleTemplate2 extends DocsTemplate2 implements LanguageRen
           FontSize.xLarge3,
           LetterSpacing.tight,
 
-          f(() -> container(title))
+          f(() -> renderContainer(title))
         );
 
         case 1 -> h2(
           FontSize.xLarge2,
           MarginTop.v10,
 
-          f(() -> container(title))
+          f(() -> renderContainer(title))
         );
 
         case 2 -> h3(
@@ -627,7 +707,7 @@ public final class ArticleTemplate2 extends DocsTemplate2 implements LanguageRen
           MarginTop.v06,
           MY_DEFAULT,
 
-          f(() -> container(title))
+          f(() -> renderContainer(title))
         );
 
         default -> throw new UnsupportedOperationException("level=" + level);
@@ -637,7 +717,7 @@ public final class ArticleTemplate2 extends DocsTemplate2 implements LanguageRen
         ListStyleType.disc,
         PaddingLeft.v08,
 
-        f(() -> container(list))
+        f(() -> renderContainer(list))
       );
     } else {
       throw new UnsupportedOperationException(
