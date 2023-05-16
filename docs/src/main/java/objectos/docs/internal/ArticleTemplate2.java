@@ -15,7 +15,6 @@
  */
 package objectos.docs.internal;
 
-import br.com.objectos.css.Css;
 import br.com.objectos.css.framework.background.BackgroundColor;
 import br.com.objectos.css.framework.border.BorderBottom;
 import br.com.objectos.css.framework.border.BorderColor;
@@ -41,8 +40,8 @@ import br.com.objectos.css.framework.sizing.MinHeight;
 import br.com.objectos.css.framework.sizing.MinWidth;
 import br.com.objectos.css.framework.sizing.Width;
 import br.com.objectos.css.framework.spacing.MarginBottom;
+import br.com.objectos.css.framework.spacing.MarginTop;
 import br.com.objectos.css.framework.spacing.MarginX;
-import br.com.objectos.css.framework.spacing.MarginY;
 import br.com.objectos.css.framework.spacing.Padding;
 import br.com.objectos.css.framework.spacing.PaddingBottom;
 import br.com.objectos.css.framework.spacing.PaddingLeft;
@@ -52,11 +51,25 @@ import br.com.objectos.css.framework.spacing.PaddingX;
 import br.com.objectos.css.framework.spacing.PaddingY;
 import br.com.objectos.css.framework.typography.FontSize;
 import br.com.objectos.css.framework.typography.FontWeight;
+import br.com.objectos.css.framework.typography.LetterSpacing;
+import br.com.objectos.css.framework.typography.ListStyleType;
 import br.com.objectos.css.framework.typography.TextAlign;
 import br.com.objectos.css.framework.typography.TextColor;
+import br.com.objectos.css.framework.typography.TextDecoration;
 import br.com.objectos.css.framework.typography.TextTransform;
 import br.com.objectos.css.select.ClassSelector;
 import br.com.objectos.css.select.IdSelector;
+import objectos.asciidoc.pseudom.Node;
+import objectos.asciidoc.pseudom.Node.Emphasis;
+import objectos.asciidoc.pseudom.Node.Header;
+import objectos.asciidoc.pseudom.Node.InlineMacro;
+import objectos.asciidoc.pseudom.Node.ListItem;
+import objectos.asciidoc.pseudom.Node.Monospaced;
+import objectos.asciidoc.pseudom.Node.Paragraph;
+import objectos.asciidoc.pseudom.Node.Strong;
+import objectos.asciidoc.pseudom.Node.Text;
+import objectos.asciidoc.pseudom.Node.Title;
+import objectos.asciidoc.pseudom.Node.UnorderedList;
 import objectos.docs.internal.Navigation.Element;
 import objectos.docs.internal.Navigation.Link;
 import objectos.docs.internal.Navigation.LinkList;
@@ -66,16 +79,15 @@ import objectos.shared.LanguageRenderer;
 
 public final class ArticleTemplate2 extends DocsTemplate2 implements LanguageRenderer.Output {
 
-  private static final IdSelector BACKDROP = Css.randomHash(3);
+  private static final IdSelector BACKDROP = ArticleTemplate.BACKDROP;
 
-  static final IdSelector CLICK_CLOSE = Css.randomHash(3);
+  static final IdSelector CLICK_CLOSE = ArticleTemplate.CLICK_CLOSE;
 
-  private static final IdSelector CLICK_OPEN = Css.randomHash(3);
+  private static final IdSelector CLICK_OPEN = ArticleTemplate.CLICK_OPEN;
 
-  private static final IdSelector NAV = Css.randomHash(3);
+  private static final IdSelector NAV = ArticleTemplate.NAV;
 
-  @SuppressWarnings("unused")
-  private static final ClassSelector MY_DEFAULT = MarginY.v03;
+  private static final ClassSelector MY_DEFAULT = ArticleTemplate.MY_DEFAULT;
 
   private Navigation navigation;
 
@@ -381,6 +393,116 @@ public final class ArticleTemplate2 extends DocsTemplate2 implements LanguageRen
     navigation = version.getNavigation(key);
 
     ul(f(this::leftBar0));
+  }
+
+  final void node(Node node) {
+    if (node instanceof Emphasis emphasis) {
+      em(f(() -> container(emphasis)));
+    } else if (node instanceof Header header) {
+      container(header);
+    } else if (node instanceof InlineMacro macro) {
+      inlineMacro(macro);
+    } else if (node instanceof ListItem item) {
+      li(
+        MY_DEFAULT,
+
+        f(() -> container(item))
+      );
+    } else if (node instanceof Monospaced monospaced) {
+      code(
+        BackgroundColor.gray100,
+        FontSize.small,
+        PaddingX.v01,
+        PaddingY.v00_5,
+
+        f(() -> container(monospaced))
+      );
+    } else if (node instanceof Paragraph paragraph) {
+      p(
+        MY_DEFAULT,
+
+        f(() -> container(paragraph))
+      );
+    } else if (node instanceof objectos.asciidoc.pseudom.Node.Section section) {
+      container(section);
+    } else if (node instanceof Strong strong) {
+      strong(f(() -> container(strong)));
+    } else if (node instanceof Text text) {
+      t(text.value());
+    } else if (node instanceof Title title) {
+      int level = title.level();
+
+      switch (level) {
+        case 0 -> header(
+          BorderColor.slate400,
+          BorderBottom.v1,
+          MarginBottom.v10,
+          PaddingBottom.v08,
+
+          h1(
+            FontSize.xLarge3,
+            LetterSpacing.tight,
+
+            f(() -> container(title))
+          )
+        );
+
+        case 1 -> h2(
+          FontSize.xLarge2,
+          MarginTop.v10,
+
+          f(() -> container(title))
+        );
+
+        case 2 -> h3(
+          BorderBottom.v1,
+          BorderColor.slate300,
+          FontSize.large,
+          MarginTop.v06,
+          MY_DEFAULT,
+
+          f(() -> container(title))
+        );
+
+        default -> throw new UnsupportedOperationException("level=" + level);
+      }
+    } else if (node instanceof UnorderedList list) {
+      ul(
+        ListStyleType.disc,
+        PaddingLeft.v08,
+
+        f(() -> container(list))
+      );
+    } else {
+      throw new UnsupportedOperationException(
+        "Implement me :: type=" + node.getClass().getSimpleName()
+      );
+    }
+  }
+
+  private void inlineMacro(InlineMacro macro) {
+    var name = macro.name();
+
+    switch (name) {
+      case "ilink" -> {
+        var target = macro.target();
+
+        var href = injector.$ilink(target);
+
+        a(
+          LINK_COLOR,
+          TextColor.hover.blue900,
+          TextDecoration.underline,
+
+          pathTo(href),
+          f(() -> container(macro))
+        );
+      }
+
+      default -> throw new UnsupportedOperationException(
+        "Implement me :: name=" + name
+      );
+    }
   }
 
   private void leftBar0() {

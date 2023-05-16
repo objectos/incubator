@@ -203,7 +203,17 @@ public class Step3Generate extends Step2Scan {
       var record = documents.get(key);
 
       if (record == null) {
-        throw new NoSuchElementException(key);
+        if (production) {
+          throw new NoSuchElementException(key);
+        } else {
+          record = new DocumentRecord(
+            null,
+            key,
+            null,
+            null,
+            DocumentTitle.EMPTY
+          );
+        }
       }
 
       return record;

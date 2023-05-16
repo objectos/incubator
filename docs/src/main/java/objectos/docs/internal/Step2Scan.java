@@ -35,6 +35,10 @@ abstract class Step2Scan extends Step1Versions {
 
   private Path source;
 
+  public final void clearScan() {
+    documents.clear();
+  }
+
   public final void executeScan() throws IOException {
     long startTime = System.currentTimeMillis();
 
@@ -51,6 +55,10 @@ abstract class Step2Scan extends Step1Versions {
     System.out.println("Step2: " + totalTime + " ms");
   }
 
+  boolean acceptRegularFile(Path file) {
+    return true;
+  }
+
   private void catchIO(IOException e) {
     if (rethrow == null) {
       rethrow = e;
@@ -59,11 +67,32 @@ abstract class Step2Scan extends Step1Versions {
     }
   }
 
+  private String relativePathToKey(Path relativePath) {
+    var key = relativePath.toString();
+
+    return "/" + key.substring(0, key.length() - 5) + ".html";
+  }
+
+  private Version relativePathToVersion(Path relativePath) {
+    int nameCount = relativePath.getNameCount();
+
+    if (nameCount > 1) {
+      var versionPath = relativePath.getName(0);
+
+      var versionName = versionPath.toString();
+
+      return versions.get(versionName);
+    } else {
+      return null;
+    }
+  }
+
   private void scan() throws IOException {
     rethrow = null;
 
     try (Stream<Path> walk = Files.walk(source)) {
       walk.filter(Files::isRegularFile)
+          .filter(this::acceptRegularFile)
           .forEach(this::scanFileUnchecked);
     }
 
@@ -106,26 +135,6 @@ abstract class Step2Scan extends Step1Versions {
     var value = new DocumentRecord(file, key, version, document, documentTitle);
 
     documents.put(key, value);
-  }
-
-  private String relativePathToKey(Path relativePath) {
-    var key = relativePath.toString();
-
-    return "/" + key.substring(0, key.length() - 5) + ".html";
-  }
-
-  private Version relativePathToVersion(Path relativePath) {
-    int nameCount = relativePath.getNameCount();
-
-    if (nameCount > 1) {
-      var versionPath = relativePath.getName(0);
-
-      var versionName = versionPath.toString();
-
-      return versions.get(versionName);
-    } else {
-      return null;
-    }
   }
 
   private void scanFileUnchecked(Path file) {

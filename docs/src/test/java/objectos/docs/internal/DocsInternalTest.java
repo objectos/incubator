@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package objectos.docs;
+package objectos.docs.internal;
 
 import com.github.difflib.DiffUtils;
 import com.github.difflib.UnifiedDiffUtils;
@@ -24,52 +24,89 @@ import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Set;
+import objectos.docs.AbstractDocsTest;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-public class DocsTest extends AbstractDocsTest {
+public class DocsInternalTest extends AbstractDocsTest {
+
+  private DocsInternal docs;
+
+  private Path resultDir;
+
+  private Path sourcedir;
 
   @BeforeClass
-  public void _beforeClass() throws URISyntaxException {
+  public void _beforeClass() throws IOException, URISyntaxException {
     setRoot();
+
+    docs = new DocsInternal();
+
+    sourcedir = root.resolve("docs");
+
+    docs.sourceDirectory(sourcedir);
+
+    docs.executeVersions();
+
+    resultDir = createTempDirectory();
+  }
+
+  @AfterClass
+  public void _afterClass() throws IOException {
+    rmdir(resultDir);
   }
 
   @Test(enabled = false, description = """
   Generation test of archive/0.6.4
   """)
   public void testCase01() throws IOException {
-    Path result = null;
+    test(
+      resultDir.resolve("tc01"),
+      "archive/0.6.4/index.adoc"
+    );
+  }
 
-    try {
-      var source = root.resolve("docs");
+  private void test(Path basedir, String... files) throws IOException {
+    docs.clearScan();
 
-      result = createTempDirectory();
+    var refdir = basedir.resolve("ref");
 
-      var target = result.resolve("target");
+    var valdir = basedir.resolve("val");
 
-      var validation = result.resolve("validation");
+    var fileNames = Set.of(files);
 
-      Docs.main(new String[] {
-          source.toString(),
-          target.toString(),
-          validation.toString(),
-          "--main"
-      });
+    docs.fileFilter = (path) -> {
+      var relative = sourcedir.relativize(path);
 
-      try (var walk = Files.walk(target)) {
-        walk.filter(Files::isRegularFile)
-            .forEach(file -> {
-              try {
-                validate(target, validation, file);
-              } catch (IOException e) {
-                throw new UncheckedIOException(e);
-              }
-            });
-      }
-    } finally {
-      //rmdir(target);
-      //rmdir(validation);
+      return fileNames.contains(relative.toString());
+    };
+
+    docs.targetDirectory(refdir);
+
+    docs.validationDirectory(valdir);
+
+    docs.executeScan();
+
+    docs.executeGenerate();
+
+    validate(refdir, valdir);
+  }
+
+  private void validate(Path targetDirectory, Path validationDirectory) {
+    try (var walk = Files.walk(targetDirectory)) {
+      walk.filter(Files::isRegularFile)
+          .forEach(file -> {
+            try {
+              validate(targetDirectory, validationDirectory, file);
+            } catch (IOException e) {
+              throw new UncheckedIOException(e);
+            }
+          });
+    } catch (IOException e1) {
+      throw new UncheckedIOException(e1);
     }
   }
 

@@ -21,12 +21,7 @@ import java.io.IOException;
 import java.io.UncheckedIOException;
 import objectos.asciidoc.pseudom.Node;
 import objectos.asciidoc.pseudom.Node.ContainerNode;
-import objectos.asciidoc.pseudom.Node.Emphasis;
-import objectos.asciidoc.pseudom.Node.Header;
 import objectos.asciidoc.pseudom.Node.Monospaced;
-import objectos.asciidoc.pseudom.Node.Strong;
-import objectos.asciidoc.pseudom.Node.Text;
-import objectos.asciidoc.pseudom.Node.Title;
 import objectos.shared.SharedTemplate2;
 
 abstract class DocsTemplate2 extends SharedTemplate2 {
@@ -40,6 +35,12 @@ abstract class DocsTemplate2 extends SharedTemplate2 {
   Version version;
 
   DocsTemplate2(DocsInjector injector) { this.injector = injector; }
+
+  protected final void container(ContainerNode container) {
+    for (var node : container.nodes()) {
+      node(node);
+    }
+  }
 
   @Override
   protected final void definition() {
@@ -92,6 +93,10 @@ abstract class DocsTemplate2 extends SharedTemplate2 {
 
   abstract void main0();
 
+  void monospaced(Monospaced monospaced) {
+    code(f(() -> container(monospaced)));
+  }
+
   final void rawStyle(String rawStyle) {
     this.rawStyle = rawStyle;
   }
@@ -106,42 +111,6 @@ abstract class DocsTemplate2 extends SharedTemplate2 {
     }
   }
 
-  private void node(Node node) {
-    if (node instanceof Emphasis emphasis) {
-      em(f(() -> container(emphasis)));
-    } else if (node instanceof Header header) {
-      container(header);
-    } else if (node instanceof Monospaced monospaced) {
-      code(f(() -> container(monospaced)));
-    } else if (node instanceof Strong strong) {
-      strong(f(() -> container(strong)));
-    } else if (node instanceof Text text) {
-      t(text.value());
-    } else if (node instanceof Title title) {
-      int level = title.level();
-
-      switch (level) {
-        case 0 -> h1(f(() -> container(title)));
-
-        case 1 -> h2(f(() -> container(title)));
-
-        case 2 -> h3(f(() -> container(title)));
-
-        default -> throw new UnsupportedOperationException(
-          "Implement me :: level=" + level
-        );
-      }
-    } else {
-      throw new UnsupportedOperationException(
-        "Implement me :: type=" + node.getClass().getSimpleName()
-      );
-    }
-  }
-
-  private void container(ContainerNode container) {
-    for (var node : container.nodes()) {
-      node(node);
-    }
-  }
+  abstract void node(Node node);
 
 }

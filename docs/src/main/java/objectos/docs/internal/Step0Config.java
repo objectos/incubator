@@ -57,8 +57,6 @@ class Step0Config {
 
     mainOnly = false;
 
-    String validationPathName = null;
-
     if (length > 2) {
       for (int i = 2; i < length;) {
         var arg = args[i++];
@@ -66,7 +64,12 @@ class Step0Config {
         switch (arg) {
           case "--main" -> mainOnly = true;
 
-          default -> validationPathName = arg;
+          default -> {
+            throw new IllegalArgumentException("""
+            Invalid option: %s
+            """.formatted(arg)
+            );
+          }
         }
       }
     }
@@ -74,8 +77,6 @@ class Step0Config {
     sourcePath(sourcePathName);
 
     targetDirectory(targetPathName);
-
-    validationDirectory(validationPathName);
   }
 
   public final void production() {
@@ -164,16 +165,6 @@ class Step0Config {
     var maybe = Path.of(targetPathName).toAbsolutePath();
 
     targetDirectory(maybe);
-  }
-
-  private void validationDirectory(String validationPathName) {
-    if (validationPathName == null) {
-      return;
-    }
-
-    var path = Path.of(validationPathName).toAbsolutePath();
-
-    validationDirectory(path);
   }
 
 }

@@ -35,6 +35,7 @@ import br.com.objectos.css.framework.typography.FontSize;
 import br.com.objectos.css.framework.typography.LetterSpacing;
 import br.com.objectos.css.framework.typography.TextAlign;
 import br.com.objectos.css.select.ClassSelector;
+import objectos.asciidoc.pseudom.Node;
 
 public final class VersionsTemplate2 extends DocsTemplate2 {
 
@@ -134,5 +135,8 @@ public final class VersionsTemplate2 extends DocsTemplate2 {
       );
     }
   }
+
+  @Override
+  final void node(Node node) {}
 
 }

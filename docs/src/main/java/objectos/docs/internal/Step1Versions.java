@@ -37,6 +37,10 @@ class Step1Versions extends Step0Config {
     archive();
   }
 
+  void acceptVersion(Version version) {
+    versions.put(version.directory, version);
+  }
+
   private void archive() {
     if (mainOnly) {
       return;
@@ -2138,10 +2142,11 @@ class Step1Versions extends Step0Config {
       )
     );
   }
+
   private void version(VersionOption... options) {
     var version = Version.create(options);
 
-    versions.put(version.directory, version);
+    acceptVersion(version);
   }
 
 }
