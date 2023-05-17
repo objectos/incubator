@@ -66,7 +66,8 @@ public class DocsInternalTest extends AbstractDocsTest {
     test(
       resultDir.resolve("tc01"),
       "archive/0.6.4/index.adoc",
-      "archive/0.6.4/objectos-asciidoc/index.adoc"
+      "archive/0.6.4/objectos-asciidoc/index.adoc",
+      "archive/0.6.4/objectos-code/tutorial.adoc"
     );
   }
 

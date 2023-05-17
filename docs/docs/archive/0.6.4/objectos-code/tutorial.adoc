@@ -37,7 +37,7 @@ public class Tutorial extends JavaTemplate {
 
 We want to generate the Java code of a class declaration.
 So, in the `definition` method of our template, we use the `classDeclaration` _instruction_.
-And to define the name of the generated class declaration, `Tutorial` in our case, we used the `name` instruction.  
+And to define the name of the generated class declaration, `Tutorial` in our case, we used the `name` instruction.
 
 Right.
 Let's move to the next step.
@@ -88,7 +88,7 @@ public final class Tutorial {}
 ----
 
 Our class is now both `public` and `final`.
-So we need to add the same "keywords" to our template: 
+So we need to add the same "keywords" to our template:
 
 [,java]
 ----
@@ -108,7 +108,7 @@ public class Tutorial extends JavaTemplate {
 
 So the `PUBLIC` constant adds the `public` modifier.
 Similarly, the `FINAL` constant adds the `final` modifier.
-Both constants are defined in the superclass of our template, namely the `JavaTemplate` class. 
+Both constants are defined in the superclass of our template, namely the `JavaTemplate` class.
 
 == Annotations
 
@@ -249,7 +249,7 @@ import com.example.annotations.Subject;
 @Subject("Objectos Code")
 public final class Tutorial {
   private final int value;
-  
+
   public Tutorial(int value) {
     this.value = value;
   }
@@ -341,11 +341,11 @@ import com.example.annotations.Subject;
 @Subject("Objectos Code")
 public final class Tutorial {
   private final int value;
-  
+
   public Tutorial(int value) {
     this.value = value;
   }
-  
+
   public int get() {
     return value;
   }
@@ -446,17 +446,17 @@ import com.example.annotations.Subject;
 @Subject("Objectos Code")
 public final class Tutorial {
   public static final int ONE = 1;
-  
+
   public static final int TWO = 2;
-  
+
   public static final int THREE = 3;
 
   private final int value;
-  
+
   public Tutorial(int value) {
     this.value = value;
   }
-  
+
   public int get() {
     return value;
   }

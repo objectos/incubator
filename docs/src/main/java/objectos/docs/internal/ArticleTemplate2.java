@@ -72,6 +72,7 @@ import objectos.asciidoc.pseudom.Node.ListingBlock;
 import objectos.asciidoc.pseudom.Node.Monospaced;
 import objectos.asciidoc.pseudom.Node.Paragraph;
 import objectos.asciidoc.pseudom.Node.Strong;
+import objectos.asciidoc.pseudom.Node.Symbol;
 import objectos.asciidoc.pseudom.Node.Text;
 import objectos.asciidoc.pseudom.Node.Title;
 import objectos.asciidoc.pseudom.Node.UnorderedList;
@@ -102,6 +103,8 @@ public final class ArticleTemplate2 extends DocsTemplate2 implements LanguageRen
   private final LanguageRenderer javaRenderer = new JavaRenderer();
 
   private final LanguageRenderer xmlRenderer = new XmlRenderer();
+
+  private boolean heading;
 
   private Navigation navigation;
 
@@ -662,14 +665,20 @@ public final class ArticleTemplate2 extends DocsTemplate2 implements LanguageRen
         f(() -> renderContainer(item))
       );
     } else if (node instanceof Monospaced monospaced) {
-      code(
-        BackgroundColor.gray100,
-        FontSize.small,
-        PaddingX.v01,
-        PaddingY.v00_5,
+      if (heading) {
+        code(
+          f(() -> renderContainer(monospaced))
+        );
+      } else {
+        code(
+          BackgroundColor.gray100,
+          FontSize.small,
+          PaddingX.v01,
+          PaddingY.v00_5,
 
-        f(() -> renderContainer(monospaced))
-      );
+          f(() -> renderContainer(monospaced))
+        );
+      }
     } else if (node instanceof Paragraph paragraph) {
       p(
         MY_DEFAULT,
@@ -680,9 +689,15 @@ public final class ArticleTemplate2 extends DocsTemplate2 implements LanguageRen
       renderContainer(section);
     } else if (node instanceof Strong strong) {
       strong(f(() -> renderContainer(strong)));
+    } else if (node instanceof Symbol symbol) {
+      switch (symbol) {
+        case RIGHT_SINGLE_QUOTATION_MARK -> raw("’");
+      }
     } else if (node instanceof Text text) {
       t(text.value());
     } else if (node instanceof Title title) {
+      heading = true;
+
       int level = title.level();
 
       switch (level) {
@@ -712,6 +727,8 @@ public final class ArticleTemplate2 extends DocsTemplate2 implements LanguageRen
 
         default -> throw new UnsupportedOperationException("level=" + level);
       }
+
+      heading = false;
     } else if (node instanceof UnorderedList list) {
       ul(
         ListStyleType.disc,
