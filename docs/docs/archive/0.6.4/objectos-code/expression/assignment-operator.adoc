@@ -37,7 +37,7 @@ Next we will look at the different examples of both the LHS and RHS.
 
 === LHS is a expression name
 
-The following example assigns the value of the variable `value` to the variable `x`: 
+The following example assigns the value of the variable `value` to the variable `x`:
 
 [,java]
 ----

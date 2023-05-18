@@ -3,7 +3,7 @@
 
 Use the `constructor` instruction to add a constructor declaration to a class.
 
-The following Objectos Code: 
+The following Objectos Code:
 
 [,java]
 ----

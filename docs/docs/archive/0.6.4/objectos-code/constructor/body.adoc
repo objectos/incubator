@@ -140,7 +140,7 @@ class SuperInvocation extends Exception {
 }
 ----
 
-Generating `this` constructor invocations is currently not supported. 
+Generating `this` constructor invocations is currently not supported.
 
 == Adding statements programmatically
 

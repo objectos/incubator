@@ -43,7 +43,7 @@ class ConstructorAnnotations {
 
 == Multiple annotations
 
-Use multiple `annotation` instructions to add multiple annotations to your constructor declaration. 
+Use multiple `annotation` instructions to add multiple annotations to your constructor declaration.
 
 The following Objectos Code:
 

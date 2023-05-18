@@ -15,7 +15,7 @@ static final ClassTypeName SB = ClassTypeName.of(StringBuilder.class);
 static final ClassTypeName UIOE = ClassTypeName.of(UncheckedIOException.class);
 ----
 
-Then the following shows how to generate Java class instance class creation expressions using Objectos Code: 
+Then the following shows how to generate Java class instance class creation expressions using Objectos Code:
 
 [,java]
 ----

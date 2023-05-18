@@ -107,6 +107,14 @@ public class DocsInternalTest extends AbstractDocsTest {
       "archive/0.6.4/objectos-code/class/name.adoc",
       "archive/0.6.4/objectos-code/class/permits.adoc",
       "archive/0.6.4/objectos-code/class/type-parameters.adoc",
+      "archive/0.6.4/objectos-code/constructor/annotations.adoc",
+      "archive/0.6.4/objectos-code/constructor/body.adoc",
+      "archive/0.6.4/objectos-code/constructor/index.adoc",
+      "archive/0.6.4/objectos-code/constructor/modifiers.adoc",
+      "archive/0.6.4/objectos-code/constructor/parameters.adoc",
+      "archive/0.6.4/objectos-code/constructor/throws.adoc",
+      "archive/0.6.4/objectos-code/expression/assignment-operator.adoc",
+      "archive/0.6.4/objectos-code/expression/class-instance-creation.adoc",
       "archive/0.6.4/objectos-code/index.adoc",
       "archive/0.6.4/objectos-code/tutorial.adoc"
     );
