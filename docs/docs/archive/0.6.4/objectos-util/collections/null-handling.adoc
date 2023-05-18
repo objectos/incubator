@@ -26,7 +26,7 @@ java.lang.NullPointerException: e == null
 Notice the exception's message: `e == null`.
 Depending on your use-case, this message from the `NullPointerException` might be cryptic.
 
-The `GrowableCollection` interface provides methods that allows you to specify a different message to the thrown `NullPointerException`. 
+The `GrowableCollection` interface provides methods that allows you to specify a different message to the thrown `NullPointerException`.
 
 == The `addWithNullMessage` method
 
@@ -45,7 +45,7 @@ public class OrderBuilder {
   public final void add(Item item) {
     items.addWithNullMessage(item, "item == null");
   }
-  
+
   ...
 }
 ----
@@ -70,7 +70,7 @@ java.lang.NullPointerException: item == null
 == The `addWithNullMessage` method variant
 
 The `GrowableCollection` offers a `addWithNullMessage(String, int, String)` variant.
-It is meant to be used when adding a sequenced container such as an array, a `List` or an `Iterator`:  
+It is meant to be used when adding a sequenced container such as an array, a `List` or an `Iterator`:
 
 [,java]
 ----

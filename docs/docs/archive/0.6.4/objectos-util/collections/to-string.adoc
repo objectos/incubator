@@ -45,7 +45,7 @@ GrowableList [
 
 The Objectos Util `java.util.Map` implementations also produce a _human-readable_ `toString` output.
 
-For example, consider the following that maps Brazilian states to a few of their cities: 
+For example, consider the following that maps Brazilian states to a few of their cities:
 
 [,java]
 ----

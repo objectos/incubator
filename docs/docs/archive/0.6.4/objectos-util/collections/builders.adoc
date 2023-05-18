@@ -23,7 +23,7 @@ builder.add("-pl");
 builder.add(":objectos-util");
 builder.add("verify");
 
-UnmodifiableList<String> command = builder.toUnmodifiableList(); 
+UnmodifiableList<String> command = builder.toUnmodifiableList();
 ----
 
 Note the invocation of the `toUnmodifiableList` method.
@@ -41,7 +41,7 @@ The methods are:
 - `GrowableMap::toUnmodifiableMap` returns an `UnmodifiableMap`
 - `GrowableSequencedMap::toUnmodifiableMap` returns an `UnmodifiableSequencedMap`
 
-We have already seen an `UnmodifiableList` example. 
+We have already seen an `UnmodifiableList` example.
 
 == A more complete example
 
@@ -55,7 +55,7 @@ public record Post(String title,
                    Set<String> tags) {}
 ----
 
-When creating a builder for it one possible solution is:  
+When creating a builder for it one possible solution is:
 
 [,java]
 ----

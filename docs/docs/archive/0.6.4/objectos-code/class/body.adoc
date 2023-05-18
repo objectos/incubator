@@ -55,7 +55,7 @@ class Example {
 You can add to your nested type declaration any instruction that is allowed to the top level declaration.
 In other words, you can add modifiers, fields, methods, etc. to your nested type declaration.
 
-The following Objectos Code: 
+The following Objectos Code:
 
 [,java]
 ----

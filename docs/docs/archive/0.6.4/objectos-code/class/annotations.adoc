@@ -37,7 +37,7 @@ class ClassAnnotations {}
 
 == Multiple annotations
 
-Use multiple `annotation` instructions to add multiple annotations to your class declaration. 
+Use multiple `annotation` instructions to add multiple annotations to your class declaration.
 
 The following Objectos Code:
 

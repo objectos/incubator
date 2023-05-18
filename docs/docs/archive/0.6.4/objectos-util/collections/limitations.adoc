@@ -4,7 +4,7 @@ The Collections API provided by Objectos Util is not a _general purpose_ one.
 Instead, Objectos Util provides a _special purpose_ Collections API.
 The primary goal of Objectos Util is to provide a Collections API to the Objectos libraries themselves.
 
-As such, and depending on your requirements, some, if not all, of its characteristics may be perceived as limitations. 
+As such, and depending on your requirements, some, if not all, of its characteristics may be perceived as limitations.
 
 In this article we will give a summary of the characteristics you should be aware of _before_ using Objectos Util in your projects.
 

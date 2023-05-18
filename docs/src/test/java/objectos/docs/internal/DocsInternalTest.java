@@ -65,16 +65,50 @@ public class DocsInternalTest extends AbstractDocsTest {
   public void testCase01() throws IOException {
     test(
       resultDir.resolve("tc01"),
-      "archive/0.6.4/index.adoc",
+      "archive/0.6.4/intro/index.adoc",
+      "archive/0.6.4/intro/install.adoc",
+      "archive/0.6.4/intro/overview.adoc",
       "archive/0.6.4/objectos-asciidoc/index.adoc",
-      "archive/0.6.4/objectos-code/index.adoc",
-      "archive/0.6.4/objectos-code/tutorial.adoc",
       "archive/0.6.4/objectos-html/index.adoc",
+      "archive/0.6.4/objectos-lang/note-sink-api/creating-notes.adoc",
+      "archive/0.6.4/objectos-lang/note-sink-api/index.adoc",
+      "archive/0.6.4/objectos-lang/note-sink-api/the-no-op-note-sink.adoc",
+      "archive/0.6.4/objectos-lang/note-sink-api/the-no-op-note-interface.adoc",
       "archive/0.6.4/objectos-lang/Check.adoc",
       "archive/0.6.4/objectos-lang/Equals.adoc",
       "archive/0.6.4/objectos-lang/HashCode.adoc",
       "archive/0.6.4/objectos-lang/index.adoc",
-      "archive/0.6.4/objectos-lang/ToString.adoc"
+      "archive/0.6.4/objectos-lang/ToString.adoc",
+      "archive/0.6.4/objectos-util/collections/builders.adoc",
+      "archive/0.6.4/objectos-util/collections/index.adoc",
+      "archive/0.6.4/objectos-util/collections/join-method.adoc",
+      "archive/0.6.4/objectos-util/collections/limitations.adoc",
+      "archive/0.6.4/objectos-util/collections/null-handling.adoc",
+      "archive/0.6.4/objectos-util/collections/of.adoc",
+      "archive/0.6.4/objectos-util/collections/to-string.adoc",
+      "archive/0.6.4/objectos-util/array-utilities.adoc",
+      "archive/0.6.4/objectos-util/index.adoc",
+      "archive/0.6.4/index.adoc"
+    );
+  }
+
+  @Test(description = """
+  Generation test of archive/0.6.4/objectos-code
+  """)
+  public void testCase02() throws IOException {
+    test(
+      resultDir.resolve("tc02"),
+      "archive/0.6.4/objectos-code/class/annotations.adoc",
+      "archive/0.6.4/objectos-code/class/body.adoc",
+      "archive/0.6.4/objectos-code/class/extends.adoc",
+      "archive/0.6.4/objectos-code/class/implements.adoc",
+      "archive/0.6.4/objectos-code/class/index.adoc",
+      "archive/0.6.4/objectos-code/class/modifiers.adoc",
+      "archive/0.6.4/objectos-code/class/name.adoc",
+      "archive/0.6.4/objectos-code/class/permits.adoc",
+      "archive/0.6.4/objectos-code/class/type-parameters.adoc",
+      "archive/0.6.4/objectos-code/index.adoc",
+      "archive/0.6.4/objectos-code/tutorial.adoc"
     );
   }
 

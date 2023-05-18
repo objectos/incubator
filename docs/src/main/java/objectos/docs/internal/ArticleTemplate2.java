@@ -582,6 +582,21 @@ public final class ArticleTemplate2 extends DocsTemplate2 implements LanguageRen
         );
       }
 
+      case "elink" -> {
+        var target = macro.target();
+
+        var href = injector.$elink(target);
+
+        a(
+          LINK_COLOR,
+          TextColor.hover.blue900,
+          TextDecoration.underline,
+
+          pathTo(href),
+          f(() -> renderContainer(macro))
+        );
+      }
+
       case "ilink" -> {
         var target = macro.target();
 

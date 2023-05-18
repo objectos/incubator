@@ -62,7 +62,7 @@ public class Step3Generate extends Step2Scan {
       try {
         injector.generate(key, record);
       } catch (Throwable e) {
-        result = e;
+        result = new Exception(key, e);
       } finally {
         injectors.add(injector);
       }

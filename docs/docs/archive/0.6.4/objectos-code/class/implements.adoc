@@ -289,7 +289,7 @@ It uses an `include` instruction to add the `superinterfaces` partial template.
 The `superinterfaces` method, our partial template, iterates over the `simpleNames` instance variable.
 For each simple name from the list, it adds an `implementsClause` instruction.
 
-The template generates: 
+The template generates:
 
 [,java]
 ----

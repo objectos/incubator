@@ -99,7 +99,7 @@ assertEquals(
 ----
 
 The `typeArguments` list contains the simple names of two Java types.
-The `join` method is used to create a parameterized `Map` type declaration. 
+The `join` method is used to create a parameterized `Map` type declaration.
 
 == All methods uses the _iteration order_
 
