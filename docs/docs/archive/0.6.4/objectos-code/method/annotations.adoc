@@ -46,7 +46,7 @@ class MethodAnnotations {
 
 == Multiple annotations
 
-Use multiple `annotation` instructions to add multiple annotations to your method declaration. 
+Use multiple `annotation` instructions to add multiple annotations to your method declaration.
 
 The following Objectos Code:
 

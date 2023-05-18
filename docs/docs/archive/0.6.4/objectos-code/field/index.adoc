@@ -3,7 +3,7 @@
 
 Objectos Code provides the `field` instruction for adding a field declaration to a class or interface declaration.
 
-The following Objectos Code: 
+The following Objectos Code:
 
 [,java]
 ----

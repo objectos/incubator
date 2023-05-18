@@ -202,7 +202,7 @@ class MultiPart {
 Fields can also be initialized with an array initializer.
 
 The `arrayInitializer` instruction indicates that an array initializer is about to begin.
-Each subsequent `value` instruction represents a single value in the array literal. 
+Each subsequent `value` instruction represents a single value in the array literal.
 
 The following Objectos Code:
 
