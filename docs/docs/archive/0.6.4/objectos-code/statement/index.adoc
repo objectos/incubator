@@ -3,7 +3,7 @@
 
 Objectos Code provides the `p` instruction for adding statements to a constructor or method body.
 
-The following Objectos Code method declaration: 
+The following Objectos Code method declaration:
 
 [,java]
 ----
@@ -28,7 +28,7 @@ Notice how the `p` instruction was used to generate a Java `return` statement.
 
 == The `p` instruction
 
-To use the `p` instruction you supply statement parts to it.  
+To use the `p` instruction you supply statement parts to it.
 
 The following Objectos Code statement:
 

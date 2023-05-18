@@ -137,6 +137,22 @@ public class DocsInternalTest extends AbstractDocsTest {
     );
   }
 
+  @Test(description = """
+  Generation test of archive/0.6.4/objectos-code more...
+  """)
+  public void testCase03() throws IOException {
+    test(
+      resultDir.resolve("tc03"),
+      "archive/0.6.4/objectos-code/statement/if.adoc",
+      "archive/0.6.4/objectos-code/statement/index.adoc",
+      "archive/0.6.4/objectos-code/statement/return.adoc",
+      "archive/0.6.4/objectos-code/template/auto-imports.adoc",
+      "archive/0.6.4/objectos-code/template/include.adoc",
+      "archive/0.6.4/objectos-code/template/index.adoc",
+      "archive/0.6.4/objectos-code/template/recommended-usage.adoc"
+    );
+  }
+
   private void test(Path basedir, String... files) throws IOException {
     docs.clearScan();
 

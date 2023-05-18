@@ -42,7 +42,7 @@ p(IF, arg(n("values"), v("isEmpty")), block(
   p(RETURN)
 ));
 ----
- 
+
 Can be used to generate the following Java code:
  
 [,java]

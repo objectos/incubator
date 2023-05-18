@@ -3,11 +3,11 @@
 By default the `JavaTemplate` class will write the fully qualified name of any declared type it encounters.
 Alternatively, it can automatically generate any required import declaration instead.
 
-The `autoImports` instruction is used to enable the automatic generation of import declarations. 
+The `autoImports` instruction is used to enable the automatic generation of import declarations.
 
 == Enabling automatic import generation
 
-The following template generates a class containing two fields: 
+The following template generates a class containing two fields:
 
 [,java]
 ----
@@ -76,7 +76,7 @@ The `String` type belongs to the `java.lang` package.
 The latter is implicitly imported by all Java compilation units.
 For this reason an import declaration for the former is not generated.
 
-Next, let's look at the output when the `autoImports` instruction is not declared. 
+Next, let's look at the output when the `autoImports` instruction is not declared.
 
 == Generation without `autoImports`
 
@@ -195,4 +195,4 @@ public class AutoImports {
 ----
 
 So the first `List` encountered is imported.
-The remaining ones are declared in their fully qualified name. 
+The remaining ones are declared in their fully qualified name.

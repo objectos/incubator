@@ -28,7 +28,7 @@ if (isType(value)) {
 }
 ----
 
-Please read the provided programmer's guide for more information on how to generate Java `if` statements using Objectos Code. 
+Please read the provided programmer's guide for more information on how to generate Java `if` statements using Objectos Code.
 
 == Programmer's Guide
 
@@ -73,7 +73,7 @@ Notice that:
 
 === The `if-then-else` statement
 
-You can generate a Java `if` statement having an `else` clause: 
+You can generate a Java `if` statement having an `else` clause:
 
 [,java]
 ----

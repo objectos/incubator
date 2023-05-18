@@ -41,7 +41,7 @@ import objectos.code.JavaTemplate;
 
 public class TagTemplate extends JavaTemplate {
   private static final ClassTypeName STRING = ClassTypeName.of(String.class);
-  
+
   private final Set<String> tagNames = new TreeSet<>();
 
   public final void add(String name) {
@@ -119,7 +119,7 @@ private void constants() {
 The `constants` method iterates over the elements of the `tagNames` set.
 For each element in the set it generates an enum constant.
 
-The following illustrate a use of our `TagTemplate` class: 
+The following illustrate a use of our `TagTemplate` class:
 
 [,java]
 ----
