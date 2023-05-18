@@ -294,7 +294,7 @@ public final class ArticleTemplate extends DocsTemplate implements LanguageRende
       Padding.v03
     );
     tagStart();
-    languageRenderer.render(this, literal);
+    languageRenderer.render(this, literal.trim());
     tagEnd(StandardElementName.CODE);
     tagEnd(StandardElementName.PRE);
 

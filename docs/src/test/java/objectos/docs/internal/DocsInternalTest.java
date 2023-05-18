@@ -67,7 +67,14 @@ public class DocsInternalTest extends AbstractDocsTest {
       resultDir.resolve("tc01"),
       "archive/0.6.4/index.adoc",
       "archive/0.6.4/objectos-asciidoc/index.adoc",
-      "archive/0.6.4/objectos-code/tutorial.adoc"
+      "archive/0.6.4/objectos-code/index.adoc",
+      "archive/0.6.4/objectos-code/tutorial.adoc",
+      "archive/0.6.4/objectos-html/index.adoc",
+      "archive/0.6.4/objectos-lang/Check.adoc",
+      "archive/0.6.4/objectos-lang/Equals.adoc",
+      "archive/0.6.4/objectos-lang/HashCode.adoc",
+      "archive/0.6.4/objectos-lang/index.adoc",
+      "archive/0.6.4/objectos-lang/ToString.adoc"
     );
   }
 
@@ -123,8 +130,8 @@ public class DocsInternalTest extends AbstractDocsTest {
 
     Patch<String> diff = DiffUtils.diff(refLines, valLines);
 
-    List<String> unifiedDiff = UnifiedDiffUtils.generateUnifiedDiff("original-file.txt",
-      "new-file.txt", refLines, diff, 0);
+    List<String> unifiedDiff = UnifiedDiffUtils.generateUnifiedDiff(
+      relativize.toString(), "new-file.txt", refLines, diff, 0);
 
     if (unifiedDiff.size() > 0) {
       unifiedDiff.forEach(System.out::println);

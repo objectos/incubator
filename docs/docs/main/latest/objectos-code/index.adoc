@@ -38,7 +38,6 @@ public class Example extends JavaTemplate {
     );
   }
 }
-
 ----
 
 Can be used to generate the following Java code:
