@@ -1,0 +1,95 @@
+= Class Declarations
+:toc-title: Overview
+
+Use the `classDeclaration` instruction to generate Java class declarations using Objectos Code.
+
+The following Objectos Code:
+
+[,java]
+----
+import objectos.code.ClassTypeName;
+import objectos.code.JavaTemplate;
+
+public class ClassDeclaration extends JavaTemplate {
+  static final ClassTypeName EXAMPLE
+      = ClassTypeName.of("com.example.annotations", "Example");
+
+  static final ClassTypeName OBJECT
+      = ClassTypeName.of(Object.class);
+
+  static final ClassTypeName STRING
+      = ClassTypeName.of(String.class);
+
+  @Override
+  protected final void definition() {
+    packageDeclaration("com.example");
+
+    autoImports();
+
+    classDeclaration(
+      annotation(
+        EXAMPLE,
+        annotationValue(s("A 'classDeclaration' kitchen-sink example."))
+      ),
+      PUBLIC, FINAL, name("KitchenSink"),
+
+      field(
+        PRIVATE, FINAL, OBJECT, name("value")
+      ),
+
+      constructor(
+        PUBLIC,
+        parameter(OBJECT, name("value")),
+
+        p(THIS, n("value"), IS, n("value"))
+      ),
+
+      method(
+        PUBLIC, FINAL, OBJECT, name("get"),
+        p(RETURN, n("value"))
+      ),
+
+      method(
+        annotation(Override.class),
+        PUBLIC, FINAL, STRING, name("toString"),
+        p(IF, condition(n("value"), EQ, NULL), block(
+          p(RETURN, s("null"))
+        ), ELSE, block(
+          p(RETURN, n("value"), v("toString"))
+        ))
+      )
+    );
+  }
+}
+----
+
+Generates the following Java class declaration:
+
+[,java]
+----
+package com.example;
+
+import com.examples.annotation.Example;
+
+@Example("A 'classDeclaration' kitchen-sink example.")
+public final class KitchenSink {
+  private final Object value;
+
+  public KitchenSink(Object value) {
+    this.value = value;
+  }
+
+  public final Object get() {
+    return value;
+  }
+
+  @Override
+  public final String toString() {
+    if (value == null) {
+      return "null";
+    } else {
+      return value.toString();
+    }
+  }
+}
+----

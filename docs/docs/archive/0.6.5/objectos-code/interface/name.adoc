@@ -1,0 +1,198 @@
+= Interface name
+
+Use the `name` instruction to define the name of the generated interface declaration.
+
+You can specify the name as a string value, like so:
+
+[,java]
+----
+import objectos.code.JavaTemplate;
+
+public class InterfaceDeclarationName01 extends JavaTemplate {
+  @Override
+  protected final void definition() {
+    interfaceDeclaration(
+      name("First")
+    );
+
+    interfaceDeclaration(
+      name("Second")
+    );
+  }
+}
+----
+
+The code above generates:
+
+[,java]
+----
+interface First {}
+
+interface Second {}
+----
+
+You can also specify the name using a `ClassTypeName` instance.
+
+The following Objectos Code:
+
+[,java]
+----
+import objectos.code.ClassTypeName;
+import objectos.code.JavaTemplate;
+
+public class InterfaceDeclarationName02 extends JavaTemplate {
+  static final ClassTypeName EXAMPLE
+      = ClassTypeName.of("com.example.docs", "Example");
+  static final ClassTypeName NESTED
+      = ClassTypeName.of("com.example.docs", "Enclosing", "Nested");
+
+  @Override
+  protected final void definition() {
+    interfaceDeclaration(
+      name(EXAMPLE)
+    );
+
+    interfaceDeclaration(
+      name(NESTED)
+    );
+  }
+}
+----
+
+Generates:
+
+[,java]
+----
+interface Example {}
+
+interface Nested {}
+----
+
+A `ClassTypeName` represents a fully qualified name;
+the `name` instruction uses the _rightmost_ simple name of the specified `ClassTypeName`.
+In other words, the following are ignored:
+
+* the package name; and
+* any enclosing type name.
+
+== Multiple `name` instructions
+
+You _should not_ specify more than one name to the same `interfaceDeclaration` instruction.
+
+If you do code generation occurs normally with the "last one wins" rule.
+In other words, the interface declaration will be generated with the name that was specified last.
+
+The following Objectos Code:
+
+[,java]
+----
+import objectos.code.JavaTemplate;
+
+public class InterfaceDeclarationName06 extends JavaTemplate {
+  @Override
+  protected final void definition() {
+    interfaceDeclaration(
+      name("First"),
+      name("Second"),
+      name("Third")
+    );
+  }
+}
+----
+
+Generates:
+
+[,java]
+----
+interface Third {}
+----
+
+== Unnamed class
+
+If you don't specify a name for your interface declaration it will be generated with the `Unnamed` name.
+
+The following Objectos Code:
+
+[,java]
+----
+import objectos.code.JavaTemplate;
+
+public class InterfaceDeclarationName05 extends JavaTemplate {
+  @Override
+  protected final void definition() {
+    interfaceDeclaration();
+  }
+}
+----
+
+Generates:
+
+[,java]
+----
+interface Unnamed {}
+----
+
+== Invalid names
+
+The `name(String)` instruction will reject names that contain invalid characters for a Java identifier.
+
+The following Objectos Code:
+
+[,java]
+----
+import objectos.code.JavaTemplate;
+
+public class InterfaceDeclarationName03 extends JavaTemplate {
+  @Override
+  protected final void definition() {
+    // invalid name: throws IllegalArgumentException
+    interfaceDeclaration(
+      name("My-Interface")
+    );
+  }
+}
+----
+
+Fails with the following exception:
+
+----
+Exception in thread "main" java.lang.IllegalArgumentException: The string My-Interface is an invalid identifier:
+
+Character '-' is an invalid java identifier part.
+
+	at objectos.code.internal.JavaModel.checkName(JavaModel.java:120)
+	at objectos.code.internal.JavaModel.checkIdentifier(JavaModel.java:27)
+	at objectos.code.JavaTemplate.name(JavaTemplate.java:2187)
+	(...)
+----
+
+== Invalid names: caveat
+
+Please note that the `name(String)` instruction will only check for invalid characters in identifiers.
+It does not check if a string containing only valid identifier characters makes up a valid identifier.
+
+In other words, the following Objectos Code executes normally:
+
+[,java]
+----
+import objectos.code.JavaTemplate;
+
+public class InterfaceDeclarationName04 extends JavaTemplate {
+  @Override
+  protected final void definition() {
+    // executes normally
+    interfaceDeclaration(
+      name("break")
+    );
+  }
+}
+----
+
+It generates the following Java code:
+
+[,java]
+----
+interface break {}
+----
+
+The name `break` is invalid; it is a reserved keyword.

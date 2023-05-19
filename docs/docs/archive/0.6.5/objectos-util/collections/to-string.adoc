@@ -1,0 +1,95 @@
+= The `toString` output
+
+All of the Objectos Util provided collections implements the ilink:objectos-lang/ToString[`ToStringObject.Formattable`] interface.
+
+In doing so their `toString` method provides _human-readable_ string representations.
+It is intended to help when:
+
+- reading unit tests assertion errors;
+- doing ad-hoc debugging sessions, i.e., using `System.out.println` statements or log statements; or
+- doing debugging sessions using an actual debugger. 
+
+== A `Collection` example
+
+Consider the following Java record:
+
+[,java]
+----
+public record City(String name) {}
+----
+
+The following Java program:
+
+[,java]
+----
+var cities = new GrowableList<City>();
+
+cities.add(new City("São Paulo"));
+cities.add(new City("Piracicaba"));
+cities.add(new City("São José dos Campos"));
+
+System.out.println(cities);
+----
+
+Generates the output:
+
+----
+GrowableList [
+  0 = City[name=São Paulo]
+  1 = City[name=Piracicaba]
+  2 = City[name=São José dos Campos]
+]
+----
+
+== A `Map` example
+
+The Objectos Util `java.util.Map` implementations also produce a _human-readable_ `toString` output.
+
+For example, consider the following that maps Brazilian states to a few of their cities: 
+
+[,java]
+----
+var states = new GrowableMap<State, List<City>>();
+
+var cities = new GrowableList<City>();
+
+cities.add(new City("São Paulo"));
+cities.add(new City("Piracicaba"));
+cities.add(new City("São José dos Campos"));
+
+states.put(new State("SP"), cities.toUnmodifiableList());
+
+cities.clear();
+
+cities.add(new City("Belém"));
+cities.add(new City("Santarém"));
+cities.add(new City("Tomé-Açu"));
+
+states.put(new State("PA"), cities.toUnmodifiableList());
+
+System.out.println(states);
+----
+
+It produces the following output:
+
+----
+GrowableMap [
+  State[abbr=SP] = UnmodifiableList [
+    0 = City[name=São Paulo]
+    1 = City[name=Piracicaba]
+    2 = City[name=São José dos Campos]
+  ]
+  State[abbr=PA] = UnmodifiableList [
+    0 = City[name=Belém]
+    1 = City[name=Santarém]
+    2 = City[name=Tomé-Açu]
+  ]
+]
+----
+
+Note that `State` is a Java record:
+
+[,java]
+----
+public record State(String abbr) {}
+----

@@ -1,0 +1,80 @@
+= Objectos Code
+:toc-title: Overview
+
+_This API is experimental and might change substantially between releases_
+
+Objectos Code is a library for generating Java source code.
+
+It introduces the concept of a "pure Java template";
+it feels similar to a traditional text-based template except it is a regular Java class.
+
+The following Objectos Code template:
+
+[,java]
+----
+import objectos.code.ClassTypeName;
+import objectos.code.JavaTemplate;
+
+public class Example extends JavaTemplate {
+  private static final ClassTypeName STRING = ClassTypeName.of(String.class);
+
+  private static final ClassTypeName SYSTEM = ClassTypeName.of(System.class);
+
+  @Override
+  protected void definition() {
+    packageDeclaration("com.example");
+
+    autoImports();
+
+    classDeclaration(
+      PUBLIC, name("HelloWorld"),
+
+      method(
+        PUBLIC, STATIC, VOID, name("main"),
+        parameter(STRING, ELLIPSIS, name("args")),
+
+        p(SYSTEM, n("out"), v("println"), argument(s("Hello, Objectos Code!")))
+      )
+    );
+  }
+}
+----
+
+Can be used to generate the following Java code:
+
+[,java]
+----
+package com.example;
+
+public class HelloWorld {
+  public static void main(String... args) {
+    System.out.println("Hello, Objectos Code!");
+  }
+}
+----
+
+== Alpha quality
+
+Please note that Objectos Code is a work in progress and this release is marked as alpha quality.
+
+Apart from not being stable yet, it doesn't support a large number of Java statements and expressions.
+For example, most of the control flow statements, like the `for`, `while` and `try` statements, are not supported yet.
+
+Additionally, this documentation is also a work in progress.
+In other words, it does not cover all of the implemented features yet.
+
+== Installation
+
+To use Objectos Code in your project add the following to your POM:
+
+[,xml]
+----
+<dependencies>
+    <dependency>
+        <groupId>br.com.objectos</groupId>
+        <artifactId>objectos-code</artifactId>
+    </dependency>
+</dependencies>
+----
+
+This assumes you are using the ilink:intro/install[Objectos BOM POM].

@@ -1,0 +1,13 @@
+= Objectos 0.6.3 release notes
+:toc-title: Objectos 0.6.3
+
+_April 28, 2023_
+
+Welcome to Objectos 0.6.3.
+This release continues the API improvements on Objectos AsciiDoc.
+
+== Work
+
+* AsciiDoc: UnorderedListTest (iter. 2) issue:351[]
+* AsciiDoc: SectionTest (iter. 3) issue:352[]
+* AsciiDoc: UrlMacroTest (iter. 1) issue:353[]

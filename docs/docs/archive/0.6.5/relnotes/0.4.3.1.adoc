@@ -1,0 +1,37 @@
+= Objectos 0.4.3.1 release notes
+:toc-title: Objectos 0.4.3.1
+
+_February 24, 2023_
+
+Welcome to Objectos 0.4.3.1.
+This is a minor release which focuses solely on Objectos Code.
+
+== New Features
+
+* Add the p statement instruction issue:192[]
+* Method declaration: the typeParameter instruction issue:209[]
+* New method declaration: abstract vs empty method issue:211[]
+* The v instruction: method invocation issue:212[]
+* Class instance creation expression: use TypeName issue:213[]
+* The VAR keyword issue:215[]
+* The IS simple assignment operator issue:216[]
+* The NE/EQ equality operators issue:217[]
+* The IF and ELSE keywords issue:218[]
+
+== Enhancements
+
+* Method declaration: relax order requirement issue:210[]
+* use single dimension array to store include information issue:214[]
+
+== Bug fixes
+
+* Expected return sb.toString() got returnsb.toString() issue:220[]
+* Expected a new line before statement immediately after a block issue:223[]
+
+== Documentation
+
+* Docs / Objectos Code / Statement issue:221[]
+* Docs / Objectos Code / Statement / If issue:222[]
+* Docs / Objectos Code / Statement / Return issue:224[]
+* Docs / Objectos Code / Expression / Class Instance Creation issue:225[]
+* Update Docs / Objectos Code / Expression / Assignment issue:226[]

@@ -1,0 +1,29 @@
+= Objectos Util
+:toc-title: Overview
+
+Objectos Util is a Java library that provides:
+
+* a special-purpose collections API; and
+* utility classes for operating on arrays of primitive values and arrays of object references.
+
+The primary goal of Objectos Util is to provide a collections API for the Objectos libraries themselves.
+
+You are welcome to use Objectos Util in your projects.
+Bear in mind though that implementations are special-purpose.
+In other words, _this is not a general-purpose collections library_.
+
+== Installation
+
+To use Objectos Util in your project add the following to your POM:
+
+[,xml]
+----
+<dependencies>
+    <dependency>
+        <groupId>br.com.objectos</groupId>
+        <artifactId>objectos-util</artifactId>
+    </dependency>
+</dependencies>
+----
+
+This assumes you are using the ilink:intro/install[Objectos BOM POM].

@@ -1,0 +1,94 @@
+= Objectos HTML
+:toc-title: Overview
+
+_This API is experimental and might change substantially between releases_
+
+Objectos HTML is a library for generating HTML using pure Java.
+
+It introduces the concept of a "pure Java template";
+it feels similar to a traditional text-based template except it is a regular Java class.
+
+The following Objectos HTML:
+
+[,java]
+----
+import java.util.List;
+import objectos.html.HtmlTemplate;
+
+public class Example extends HtmlTemplate {
+  @Override
+  protected final void definition() {
+    doctype();
+    html(
+      lang("en"),
+      head(
+        meta(charset("utf-8")),
+        title("Objectos HTML example")
+      ),
+      body(
+        h1("Objectos Libraries"),
+        ul(
+          f(this::items)
+        )
+      )
+    );
+  }
+
+  private void items() {
+    var names = List.of(
+        "Objectos HTML", 
+        "Objectos Code", 
+        "Objectos Lang", 
+        "Objectos Util");
+
+    for (var name : names) {
+      li(name);
+    }
+  }
+}
+----
+
+Can be used to generate the a HTML file equivalent to:
+
+[,html]
+----
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Objectos HTML example</title>
+</head>
+<body>
+<h1>Objectos Libraries</h1>
+<ul>
+<li>Objectos HTML</li>
+<li>Objectos Code</li>
+<li>Objectos Lang</li>
+<li>Objectos Util</li>
+</ul>
+</body>
+</html>
+----
+
+== Alpha quality
+
+Please note that Objectos HTML is a work in progress and this release is marked as alpha quality.
+
+Additionally, this documentation is also a work in progress.
+In other words, it does not cover all of the implemented features yet.
+
+== Installation
+
+To use Objectos HTML in your project add the following to your POM:
+
+[,xml]
+----
+<dependencies>
+    <dependency>
+        <groupId>br.com.objectos</groupId>
+        <artifactId>objectos-html</artifactId>
+    </dependency>
+</dependencies>
+----
+
+This assumes you are using the ilink:intro/install[Objectos BOM POM].

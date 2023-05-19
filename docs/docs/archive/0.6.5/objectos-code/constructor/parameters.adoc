@@ -1,0 +1,394 @@
+= Constructor formal parameters
+
+Use the `parameter` instruction to include formal parameters to your constructor declaration.
+
+The following Objectos Code:
+
+[,java]
+----
+import objectos.code.ClassTypeName;
+import objectos.code.JavaTemplate;
+
+public class ConstructorParams01 extends JavaTemplate {
+  static final ClassTypeName STRING
+      = ClassTypeName.of(String.class);
+
+  @Override
+  protected final void definition() {
+    autoImports();
+
+    classDeclaration(
+      name("FormalParameters"),
+
+      constructor(
+        parameter(INT, name("a"))
+      ),
+
+      constructor(
+        parameter(STRING, name("first")),
+        parameter(INT, name("second"))
+      )
+    );
+  }
+}
+----
+
+Generates:
+
+[,java]
+----
+class FormalParameters {
+  FormalParameters(int a) {}
+
+  FormalParameters(String first, int second) {}
+}
+----
+
+== The parameter type and name
+
+As a minimum you must specify:
+
+* the parameter type; and
+* the parameter name.
+
+Use a `TypeName` object to represent the first.
+Use the `name` instruction to represent the second.
+
+The following Objectos Code:
+
+[,java]
+----
+import java.util.List;
+import objectos.code.ArrayTypeName;
+import objectos.code.ClassTypeName;
+import objectos.code.JavaTemplate;
+import objectos.code.ParameterizedTypeName;
+import objectos.code.TypeVariableName;
+
+public class ConstructorParams02 extends JavaTemplate {
+  static final ClassTypeName STRING
+      = ClassTypeName.of(String.class);
+
+  static final ParameterizedTypeName LIST
+      = ParameterizedTypeName.of(
+        ClassTypeName.of(List.class),
+        STRING
+      );
+
+  static final TypeVariableName E
+      = TypeVariableName.of("E");
+
+  static final ArrayTypeName OBJECT_ARRAY
+      = ArrayTypeName.of(Object[].class);
+
+  @Override
+  protected final void definition() {
+    autoImports();
+
+    classDeclaration(
+      name("TypeAndName"),
+
+      constructor(
+        parameter(INT, name("primitive")),
+        parameter(STRING, name("classOrInterface"))
+      ),
+
+      constructor(
+        parameter(LIST, name("parameterized"))
+      ),
+
+      constructor(
+        parameter(E, name("typeVariable")),
+        parameter(OBJECT_ARRAY, name("array"))
+      )
+    );
+  }
+}
+----
+
+Generates:
+
+[,java]
+----
+import java.util.List;
+
+class TypeAndName {
+  TypeAndName(int primitive, String classOrInterface) {}
+
+  TypeAndName(List<String> parameterized) {}
+
+  TypeAndName(E typeVariable, Object[] array) {}
+}
+----
+
+== Multiple distinct types or names
+
+You _should not_ specify more than one type or more than one name in the same `parameter` instruction.
+
+If you do, code generation occurs normally with "the last one wins" rule.
+In other words, the parameter will be generated having:
+
+* the last specified type; and
+* the last specified name.
+
+The following Objectos Code:
+
+[,java]
+----
+import objectos.code.ClassTypeName;
+import objectos.code.JavaTemplate;
+
+public class ConstructorParams03 extends JavaTemplate {
+  static final ClassTypeName STRING
+      = ClassTypeName.of(String.class);
+
+  @Override
+  protected final void definition() {
+    autoImports();
+
+    classDeclaration(
+      name("MultipleValues"),
+
+      constructor(
+        parameter(STRING, INT, name("a"), name("b"), name("c"))
+      ),
+
+      constructor(
+        parameter(INT, STRING, name("c"), name("b"), name("a"))
+      )
+    );
+  }
+}
+----
+
+Generates:
+
+[,java]
+----
+class MultipleValues {
+  MultipleValues(int c) {}
+
+  MultipleValues(String a) {}
+}
+----
+
+== No type or no name specified
+
+You _must_ specify both the parameter type and the parameter name.
+
+If you do not specify one or both of them then code generation completes normally:
+
+* the `void` keyword is used in place of the parameter type; and
+* the parameter is generated with the `unnamed` name.
+
+The following Objectos Code:
+
+[,java]
+----
+import objectos.code.JavaTemplate;
+
+public class ConstructorParams04 extends JavaTemplate {
+  @Override
+  protected final void definition() {
+    classDeclaration(
+      name("NoValues"),
+
+      constructor(
+        parameter()
+      )
+    );
+  }
+}
+----
+
+Generates:
+
+[,java]
+----
+class NoValues {
+  NoValues(void unnamed) {}
+}
+----
+
+== Variable arity parameter (varargs)
+
+Use the `ELLIPSIS` constant to generate a varargs parameter.
+
+The following Objectos Code:
+
+[,java]
+----
+import java.util.List;
+import objectos.code.ArrayTypeName;
+import objectos.code.ClassTypeName;
+import objectos.code.JavaTemplate;
+import objectos.code.ParameterizedTypeName;
+
+public class ConstructorParams05 extends JavaTemplate {
+  static final ClassTypeName STRING
+      = ClassTypeName.of(String.class);
+
+  static final ParameterizedTypeName LIST
+      = ParameterizedTypeName.of(
+        ClassTypeName.of(List.class),
+        STRING
+      );
+
+  static final ArrayTypeName OBJECT_ARRAY
+      = ArrayTypeName.of(Object[].class);
+
+  @Override
+  protected final void definition() {
+    autoImports();
+
+    classDeclaration(
+      name("Varargs"),
+
+      constructor(
+        parameter(INT, ELLIPSIS, name("values"))
+      ),
+
+      constructor(
+        parameter(LIST, ELLIPSIS, name("lists"))
+      ),
+
+      constructor(
+        parameter(OBJECT_ARRAY, ELLIPSIS, name("arrays"))
+      )
+    );
+  }
+}
+----
+
+Generates:
+
+[,java]
+----
+import java.util.List;
+
+class Varargs {
+  Varargs(int... values) {}
+
+  Varargs(List<String>... lists) {}
+
+  Varargs(Object[]... arrays) {}
+}
+----
+
+Please note that Objectos Code, by design, does not validate the generated code.
+In other words, it does not verify if the `ELLIPSIS` constant is used correctly or not.
+
+The following Objectos Code:
+
+[,java]
+----
+import objectos.code.JavaTemplate;
+
+public class ConstructorParams05Caveat extends JavaTemplate {
+  @Override
+  protected final void definition() {
+    classDeclaration(
+      name("VarargsCaveat"),
+
+      constructor(
+        parameter(INT, ELLIPSIS, name("dont")),
+        parameter(INT, name("doThis"))
+      ),
+
+      constructor(
+        parameter(INT, ELLIPSIS, name("dont")),
+        parameter(INT, ELLIPSIS, name("doThis"))
+      )
+    );
+  }
+}
+----
+
+Executes normally.
+It generates the following invalid Java code:
+
+[,java]
+----
+class VarargsCaveat {
+  VarargsCaveat(int... dont, int doThis) {}
+
+  VarargsCaveat(int... dont, int... doThis) {}
+}
+----
+
+== The `final` modifier
+
+Use the `FINAL` constant to add the `final` modifier to your parameter declaration.
+
+The following Objectos Code:
+
+[,java]
+----
+import objectos.code.ClassTypeName;
+import objectos.code.JavaTemplate;
+
+public class ConstructorParams06 extends JavaTemplate {
+  static final ClassTypeName STRING
+      = ClassTypeName.of(String.class);
+
+  @Override
+  protected final void definition() {
+    autoImports();
+
+    classDeclaration(
+      name("FinalParameters"),
+
+      constructor(
+        parameter(FINAL, INT, name("a")),
+        parameter(FINAL, STRING, name("b"))
+      )
+    );
+  }
+}
+----
+
+Generates:
+
+[,java]
+----
+class FinalParameters {
+  FinalParameters(final int a, final String b) {}
+}
+----
+
+Please note that Objectos Code, by design, does not validate the generated code.
+In other words, it does not verify if the `FINAL` constant is used correctly or not.
+
+The following Objectos Code:
+
+[,java]
+----
+import objectos.code.JavaTemplate;
+
+public class ConstructorParams06Caveat extends JavaTemplate {
+  @Override
+  protected final void definition() {
+    classDeclaration(
+      name("FinalCaveat"),
+
+      constructor(
+        parameter(FINAL, FINAL, INT, name("a"))
+      )
+    );
+  }
+}
+----
+
+Executes normally.
+It generates the following invalid Java code:
+
+[,java]
+----
+class FinalCaveat {
+  FinalCaveat(final final int a) {}
+}
+----
+
+== Formal parameter annotations
+
+Annotating a parameter is not supported at this moment.

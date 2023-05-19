@@ -1,0 +1,39 @@
+= Objectos 0.5.3 release notes
+:toc-title: Objectos 0.5.3
+
+_March 31, 2023_
+
+Welcome to Objectos 0.5.3.
+
+== New features
+
+* The `sealed` and `non-sealed` modifiers issue:310[]
+* The `permits` clause issue:311[]
+* Allow new lines in `implements` clause issue:312[]
+* Allow declaring type parameters in interface declarations issue:313[]
+* Allow new lines in the `extends` clause (of interfaces) issue:315[]
+
+== Enhancements
+
+* add proper escaping to attribute values issue:306[]
+* Remove the class instruction from GeneratedAbstractTemplate issue:307[]
+* Do not require ABSTRACT for method declaration in interfaces. issue:314[]
+
+== Bugs fixes
+
+* named entities should be escaped in html text. issue:320[]
+* Only HtmlSink methods should be public issue:321[]
+
+== Work
+
+* DocumentProcessor: pseudo-DOM for HtmlTemplate processing (Second iteration) issue:303[]
+* Remove HtmlEscape issue:304[]
+* TemplateDsl should be internal issue:305[]
+* Generate the `Instruction` sealed interface hierarchy issue:308[]
+* Generate AbstractHtmlTemplate (alternate of GeneratedAbstractTemplate) issue:316[]
+* Handle ambiguous names in GeneratedHtmltemplate issue:317[]
+
+== Documentation
+
+* Add documentation for Objectos Code's Method declarations (iter. 3) issue:318[]
+* Add documentation for Objectos Code's Class declarations (iter. 2) issue:319[]
