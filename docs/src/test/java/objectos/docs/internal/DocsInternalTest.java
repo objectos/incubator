@@ -180,6 +180,16 @@ public class DocsInternalTest extends AbstractDocsTest {
     );
   }
 
+  @Test(description = """
+  Generation test of main/versions.adoc...
+  """)
+  public void testCase05() throws IOException {
+    test(
+      resultDir.resolve("tc05"),
+      "main/versions.adoc"
+    );
+  }
+
   private void test(Path basedir, String... files) throws IOException {
     docs.clearScan();
 
