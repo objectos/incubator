@@ -612,6 +612,19 @@ public final class ArticleTemplate2 extends DocsTemplate2 implements LanguageRen
         );
       }
 
+      case "issue" -> {
+        var target = macro.target();
+
+        a(
+          LINK_COLOR,
+          TextColor.hover.blue900,
+          TextDecoration.underline,
+
+          href("https://github.com/objectos/objectos/issues/" + target),
+          t("#" + target)
+        );
+      }
+
       default -> throw new UnsupportedOperationException(
         "Implement me :: name=" + name
       );

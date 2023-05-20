@@ -153,6 +153,33 @@ public class DocsInternalTest extends AbstractDocsTest {
     );
   }
 
+  @Test(description = """
+  Generation test of archive/0.6.4/relnotes more...
+  """)
+  public void testCase04() throws IOException {
+    test(
+      resultDir.resolve("tc04"),
+      "archive/0.6.4/relnotes/0.1.0.adoc",
+      "archive/0.6.4/relnotes/0.2.0.adoc",
+      "archive/0.6.4/relnotes/0.3.0.adoc",
+      "archive/0.6.4/relnotes/0.4.0.adoc",
+      "archive/0.6.4/relnotes/0.4.1.adoc",
+      "archive/0.6.4/relnotes/0.4.2.adoc",
+      "archive/0.6.4/relnotes/0.4.3.1.adoc",
+      "archive/0.6.4/relnotes/0.4.4.adoc",
+      "archive/0.6.4/relnotes/0.5.0.adoc",
+      "archive/0.6.4/relnotes/0.5.1.adoc",
+      "archive/0.6.4/relnotes/0.5.2.adoc",
+      "archive/0.6.4/relnotes/0.5.3.adoc",
+      "archive/0.6.4/relnotes/0.6.0.adoc",
+      "archive/0.6.4/relnotes/0.6.1.adoc",
+      "archive/0.6.4/relnotes/0.6.2.adoc",
+      "archive/0.6.4/relnotes/0.6.3.adoc",
+      "archive/0.6.4/relnotes/0.6.4.adoc",
+      "archive/0.6.4/relnotes/index.adoc"
+    );
+  }
+
   private void test(Path basedir, String... files) throws IOException {
     docs.clearScan();
 

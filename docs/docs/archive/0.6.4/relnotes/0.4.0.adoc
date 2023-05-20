@@ -46,11 +46,11 @@ package com.example;
 
 public class Box {
   private final int value;
-  
+
   public Box(int value) {
     this.value = value;
   }
-  
+
   public final int get() {
     return value;
   }
