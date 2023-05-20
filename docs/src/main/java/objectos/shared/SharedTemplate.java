@@ -21,7 +21,6 @@ import br.com.objectos.css.framework.typography.TextDecoration;
 import br.com.objectos.css.select.ClassSelector;
 import br.com.objectos.css.select.IdSelector;
 import java.util.Arrays;
-import objectos.asciidoc.AsciiDoc;
 import objectos.asciidoc.DocumentAttributes;
 import objectos.asciidoc.LinkText;
 import objectos.html.HtmlTemplate;
@@ -30,7 +29,7 @@ import objectos.html.tmpl.StandardElementName;
 import objectos.util.IntArrays;
 import objectos.util.ObjectArrays;
 
-public abstract class SharedTemplate extends HtmlTemplate implements AsciiDoc.Processor {
+public abstract class SharedTemplate extends HtmlTemplate {
 
   public static final IdSelector BODY = Css.randomHash(3);
 
@@ -48,28 +47,23 @@ public abstract class SharedTemplate extends HtmlTemplate implements AsciiDoc.Pr
     return BODY.toString();
   }
 
-  @Override
   public final void boldEnd() {
     tagEnd(StandardElementName.STRONG);
   }
 
-  @Override
   public final void boldStart() {
     tagStart();
   }
 
-  @Override
   public void documentEnd() {
   }
 
-  @Override
   public void documentStart(DocumentAttributes attributes) {
     valueListIndex = 0;
 
     valueStackIndex = -1;
   }
 
-  @Override
   public void headingEnd(int level) {
     var tagName = switch (level) {
       case 1 -> StandardElementName.H1;
@@ -91,25 +85,20 @@ public abstract class SharedTemplate extends HtmlTemplate implements AsciiDoc.Pr
     tagEnd(tagName);
   }
 
-  @Override
   public void headingStart(int level) {
     tagStart();
   }
 
-  @Override
   public final void italicEnd() {
     tagEnd(StandardElementName.EM);
   }
 
-  @Override
   public final void italicStart() {
     tagStart();
   }
 
-  @Override
   public void lineFeed() {}
 
-  @Override
   public final void link(String href, LinkText text) {
     tagStart();
     linkValues(href);
@@ -117,74 +106,56 @@ public abstract class SharedTemplate extends HtmlTemplate implements AsciiDoc.Pr
     tagEnd(StandardElementName.A);
   }
 
-  @Override
   public void listingBlockEnd() {}
 
-  @Override
   public void listingBlockStart() {}
 
-  @Override
   public final void listItemEnd() {
     tagEnd(StandardElementName.LI);
   }
 
-  @Override
   public void listItemStart() {
     tagStart();
   }
 
-  @Override
   public final void monospaceEnd() {
     tagEnd(StandardElementName.CODE);
   }
 
-  @Override
   public void monospaceStart() {
     tagStart();
   }
 
-  @Override
   public final void paragraphEnd() {
     tagEnd(StandardElementName.P);
   }
 
-  @Override
   public void paragraphStart() {
     tagStart();
   }
 
-  @Override
   public void preambleEnd() {}
 
-  @Override
   public void preambleStart() {}
 
-  @Override
   public final void sectionEnd() {}
 
-  @Override
   public final void sectionStart(int level) {}
 
-  @Override
   public final void sectionStart(int level, String style) {}
 
-  @Override
   public void sourceCodeBlockEnd() {}
 
-  @Override
   public void sourceCodeBlockStart(String language) {}
 
-  @Override
   public void text(String s) {
     addValue0(t(s));
   }
 
-  @Override
   public final void unorderedListEnd() {
     tagEnd(StandardElementName.UL);
   }
 
-  @Override
   public void unorderedListStart() {
     tagStart();
   }

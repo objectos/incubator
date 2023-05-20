@@ -63,3 +63,68 @@ Step3: 6916 ms
 real	0m7,467s
 user	0m27,660s
 sys	0m0,530s
+
+## AsciiDoc v1
+
+Step2: 306 ms
+Step 3: 14366 ms
+real	0m15,084s
+user	0m57,365s
+sys	0m0,734s
+
+Step2: 306 ms
+Step 3: 13823 ms
+real	0m14,534s
+user	0m55,022s
+sys	0m0,645s
+
+Step2: 319 ms
+Step 3: 14509 ms
+real	0m15,232s
+user	0m57,705s
+sys	0m0,693s
+
+Step2: 310 ms
+Step 3: 14260 ms
+real	0m14,977s
+user	0m57,284s
+sys	0m0,767s
+
+Step2: 306 ms
+Step 3: 14389 ms
+real	0m15,100s
+user	0m57,692s
+sys	0m0,685s
+
+
+## AsciiDoc v2
+
+Step2: 304 ms
+Step 3: 14142 ms
+real	0m14,859s
+user	0m56,635s
+sys	0m0,748s
+
+Step2: 303 ms
+Step 3: 14090 ms
+real	0m14,800s
+user	0m56,496s
+sys	0m0,703s
+
+Step2: 305 ms
+Step 3: 14298 ms
+real	0m15,008s
+user	0m56,819s
+sys	0m0,739s
+
+Step2: 312 ms
+Step 3: 14641 ms
+real	0m15,365s
+user	0m58,138s
+sys	0m0,725s
+
+Step2: 306 ms
+Step 3: 14183 ms
+real	0m14,897s
+user	0m56,690s
+sys	0m0,826s

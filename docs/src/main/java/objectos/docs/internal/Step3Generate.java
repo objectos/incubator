@@ -82,11 +82,7 @@ public class Step3Generate extends Step2Scan {
 
     private final StyleSheetWriter styleSheetWriter = StyleSheetWriter.ofPretty();
 
-    private final ArticleTemplate articleTemplate = new ArticleTemplate(this);
-
     private final ArticleTemplate2 articleTemplate2 = new ArticleTemplate2(this);
-
-    private final VersionsTemplate versionsTemplate = new VersionsTemplate(this);
 
     private final VersionsTemplate2 versionsTemplate2 = new VersionsTemplate2(this);
 
@@ -101,33 +97,7 @@ public class Step3Generate extends Step2Scan {
     private Version currentVersion;
 
     public final void generate(String key, DocumentRecord record) throws IOException {
-      currentKey = key;
-
-      currentRecord = record;
-
-      currentVersion = currentRecord.version();
-
-      var templateName = currentRecord.templateName();
-
-      var template = _template(templateName);
-
-      template.key = currentKey;
-
-      template.version = currentVersion;
-
-      template.rawStyle(null);
-
-      htmlSink.toProcessor(template, styleClassSet);
-
-      styleSheetWriter.filterClassSelectorsByName(styleClassSet);
-
-      template.rawStyle(styleSheetWriter.toString(styleSheet));
-
-      htmlSink.toDirectory(template, targetDirectory);
-
-      if (validationDirectory != null) {
-        generate2(key, record);
-      }
+      generate2(key, record);
     }
 
     @Override
@@ -237,16 +207,6 @@ public class Step3Generate extends Step2Scan {
       return versions.values();
     }
 
-    private DocsTemplate _template(String templateName) {
-      return switch (templateName) {
-        case "ArticleTemplate" -> articleTemplate;
-
-        case "VersionsTemplate" -> versionsTemplate;
-
-        default -> throw new NoSuchElementException(templateName);
-      };
-    }
-
     private DocsTemplate2 _template2(String templateName) {
       return switch (templateName) {
         case "ArticleTemplate" -> articleTemplate2;
@@ -280,7 +240,7 @@ public class Step3Generate extends Step2Scan {
 
       template.rawStyle(styleSheetWriter.toString(styleSheet));
 
-      htmlSink.toDirectory(template, validationDirectory);
+      htmlSink.toDirectory(template, targetDirectory);
     }
   }
 
@@ -310,10 +270,6 @@ public class Step3Generate extends Step2Scan {
     long startTime = System.currentTimeMillis();
 
     System.out.println("Target path: " + targetDirectory);
-
-    if (validationDirectory != null) {
-      System.out.println("Validation path: " + validationDirectory);
-    }
 
     var futures = new ArrayList<Future<Throwable>>();
 

@@ -15,6 +15,7 @@
  */
 package objectos.docs.internal;
 
+import br.com.objectos.css.Css;
 import br.com.objectos.css.framework.background.BackgroundColor;
 import br.com.objectos.css.framework.border.BorderBottom;
 import br.com.objectos.css.framework.border.BorderColor;
@@ -43,6 +44,7 @@ import br.com.objectos.css.framework.sizing.Width;
 import br.com.objectos.css.framework.spacing.MarginBottom;
 import br.com.objectos.css.framework.spacing.MarginTop;
 import br.com.objectos.css.framework.spacing.MarginX;
+import br.com.objectos.css.framework.spacing.MarginY;
 import br.com.objectos.css.framework.spacing.Padding;
 import br.com.objectos.css.framework.spacing.PaddingBottom;
 import br.com.objectos.css.framework.spacing.PaddingLeft;
@@ -88,15 +90,15 @@ import objectos.shared.XmlRenderer;
 
 public final class ArticleTemplate2 extends DocsTemplate2 implements LanguageRenderer.Output {
 
-  private static final IdSelector BACKDROP = ArticleTemplate.BACKDROP;
+  static final IdSelector BACKDROP = Css.randomHash(3);
 
-  static final IdSelector CLICK_CLOSE = ArticleTemplate.CLICK_CLOSE;
+  static final IdSelector CLICK_CLOSE = Css.randomHash(3);
 
-  private static final IdSelector CLICK_OPEN = ArticleTemplate.CLICK_OPEN;
+  static final IdSelector CLICK_OPEN = Css.randomHash(3);
 
-  private static final IdSelector NAV = ArticleTemplate.NAV;
+  static final IdSelector NAV = Css.randomHash(3);
 
-  private static final ClassSelector MY_DEFAULT = ArticleTemplate.MY_DEFAULT;
+  static final ClassSelector MY_DEFAULT = MarginY.v03;
 
   private final LanguageRenderer defaultRenderer = new DefaultRenderer();
 
