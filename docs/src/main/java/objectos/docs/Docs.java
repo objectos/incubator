@@ -19,10 +19,10 @@ import static java.lang.System.out;
 
 import br.com.objectos.css.Css;
 import java.io.IOException;
-import objectos.docs.internal.ArticleTemplate2;
+import objectos.docs.internal.ArticleTemplate;
 import objectos.docs.internal.DocsCss;
 import objectos.docs.internal.Step3Generate;
-import objectos.docs.internal.VersionsTemplate2;
+import objectos.docs.internal.VersionsTemplate;
 import objectos.html.HtmlTemplate;
 import objectos.shared.JavaRenderer;
 import objectos.shared.SharedTemplate;
@@ -46,8 +46,8 @@ public final class Docs extends Step3Generate {
     Css.randomSeed(SEED);
 
     SharedTemplate.init();
-    ArticleTemplate2.initArticleTemplate();
-    VersionsTemplate2.initVersionsTemplate();
+    ArticleTemplate.initArticleTemplate();
+    VersionsTemplate.initVersionsTemplate();
     DocsCss.init();
     XmlRenderer.init();
     JavaRenderer.init();

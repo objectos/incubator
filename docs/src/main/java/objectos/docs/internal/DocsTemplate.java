@@ -17,9 +17,11 @@ package objectos.docs.internal;
 
 import br.com.objectos.css.framework.flexbox.FlexDirection;
 import br.com.objectos.css.framework.layout.Display;
-import objectos.shared.SharedTemplate2;
+import objectos.asciidoc.InlineMacroAttributes;
+import objectos.html.tmpl.StandardElementName;
+import objectos.shared.SharedTemplate;
 
-abstract class DocsTemplate2 extends SharedTemplate2 {
+abstract class DocsTemplate extends SharedTemplate {
 
   final DocsInjector injector;
 
@@ -29,7 +31,40 @@ abstract class DocsTemplate2 extends SharedTemplate2 {
 
   Version version;
 
-  DocsTemplate2(DocsInjector injector) { this.injector = injector; }
+  DocsTemplate(DocsInjector injector) { this.injector = injector; }
+
+  @Override
+  public void inlineMacro(
+      String name, String target, InlineMacroAttributes attributes) {
+    switch (name) {
+      case "elink" -> {
+        var href = injector.$elink(target);
+
+        tagStart();
+        linkPathTo(href);
+        attributes.render("1");
+        tagEnd(StandardElementName.A);
+      }
+
+      case "ilink" -> {
+        var href = injector.$ilink(target);
+
+        tagStart();
+        linkPathTo(href);
+        attributes.render("1");
+        tagEnd(StandardElementName.A);
+      }
+
+      case "issue" -> {
+        tagStart();
+        linkValues("https://github.com/objectos/objectos/issues/" + target);
+        text("#" + target);
+        tagEnd(StandardElementName.A);
+      }
+
+      default -> throw new UnsupportedOperationException("Implement me :: name=" + name);
+    }
+  }
 
   @Override
   protected final void definition() {
@@ -63,9 +98,9 @@ abstract class DocsTemplate2 extends SharedTemplate2 {
     meta(name("viewport"), content("width=device-width, initial-scale=1, shrink-to-fit=no"));
     link(rel("shortcut icon"), type("vnd.microsoft.icon"), href("/favicon.ico"));
 
-    var record = injector.$record();
+    var title = injector.$title();
 
-    title(record.pageTitle());
+    title(title.plain());
 
     if (rawStyle != null) {
       style(rawStyle);
@@ -84,6 +119,12 @@ abstract class DocsTemplate2 extends SharedTemplate2 {
 
   final void rawStyle(String rawStyle) {
     this.rawStyle = rawStyle;
+  }
+
+  final void renderDocument() {
+    var document = injector.$document();
+
+    document.process(this);
   }
 
 }

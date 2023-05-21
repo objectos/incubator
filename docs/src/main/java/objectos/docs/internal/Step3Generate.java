@@ -17,8 +17,6 @@ package objectos.docs.internal;
 
 import br.com.objectos.css.sheet.StyleSheetWriter;
 import java.io.IOException;
-import java.io.UncheckedIOException;
-import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.concurrent.ArrayBlockingQueue;
@@ -82,7 +80,11 @@ public class Step3Generate extends Step2Scan {
 
     private final StyleSheetWriter styleSheetWriter = StyleSheetWriter.ofPretty();
 
+    private final ArticleTemplate articleTemplate = new ArticleTemplate(this);
+
     private final ArticleTemplate2 articleTemplate2 = new ArticleTemplate2(this);
+
+    private final VersionsTemplate versionsTemplate = new VersionsTemplate(this);
 
     private final VersionsTemplate2 versionsTemplate2 = new VersionsTemplate2(this);
 
@@ -97,7 +99,33 @@ public class Step3Generate extends Step2Scan {
     private Version currentVersion;
 
     public final void generate(String key, DocumentRecord record) throws IOException {
-      generate2(key, record);
+      currentKey = key;
+
+      currentRecord = record;
+
+      currentVersion = currentRecord.version();
+
+      var templateName = currentRecord.oldTemplateName();
+
+      var template = _template(templateName);
+
+      template.key = currentKey;
+
+      template.version = currentVersion;
+
+      template.rawStyle(null);
+
+      htmlSink.toProcessor(template, styleClassSet);
+
+      styleSheetWriter.filterClassSelectorsByName(styleClassSet);
+
+      template.rawStyle(styleSheetWriter.toString(styleSheet));
+
+      htmlSink.toDirectory(template, targetDirectory);
+
+      if (validationDirectory != null) {
+        generate2(key, record);
+      }
     }
 
     @Override
@@ -116,15 +144,9 @@ public class Step3Generate extends Step2Scan {
 
     @Override
     objectos.asciidoc.pseudom.Document $document2() {
-      try {
-        var path = currentRecord.path();
+      var source = currentRecord.source();
 
-        var source = Files.readString(path);
-
-        return asciiDoc.open(source);
-      } catch (IOException e) {
-        throw new UncheckedIOException(e);
-      }
+      return asciiDoc.open(source);
     }
 
     @Override
@@ -169,6 +191,11 @@ public class Step3Generate extends Step2Scan {
     }
 
     @Override
+    final DocumentRecord $record() {
+      return currentRecord;
+    }
+
+    @Override
     final DocumentRecord $record(String key) {
       var record = documents.get(key);
 
@@ -177,11 +204,13 @@ public class Step3Generate extends Step2Scan {
           throw new NoSuchElementException(key);
         } else {
           record = new DocumentRecord(
-            null,
             key,
             null,
             null,
-            DocumentTitle.EMPTY
+            null,
+            DocumentTitle.EMPTY,
+            null,
+            null
           );
         }
       }
@@ -207,6 +236,16 @@ public class Step3Generate extends Step2Scan {
       return versions.values();
     }
 
+    private DocsTemplate _template(String templateName) {
+      return switch (templateName) {
+        case "ArticleTemplate" -> articleTemplate;
+
+        case "VersionsTemplate" -> versionsTemplate;
+
+        default -> throw new NoSuchElementException(templateName);
+      };
+    }
+
     private DocsTemplate2 _template2(String templateName) {
       return switch (templateName) {
         case "ArticleTemplate" -> articleTemplate2;
@@ -224,7 +263,7 @@ public class Step3Generate extends Step2Scan {
 
       currentVersion = currentRecord.version();
 
-      var templateName = currentRecord.templateName();
+      var templateName = currentRecord.oldTemplateName();
 
       var template = _template2(templateName);
 
@@ -240,7 +279,7 @@ public class Step3Generate extends Step2Scan {
 
       template.rawStyle(styleSheetWriter.toString(styleSheet));
 
-      htmlSink.toDirectory(template, targetDirectory);
+      htmlSink.toDirectory(template, validationDirectory);
     }
   }
 
@@ -270,6 +309,10 @@ public class Step3Generate extends Step2Scan {
     long startTime = System.currentTimeMillis();
 
     System.out.println("Target path: " + targetDirectory);
+
+    if (validationDirectory != null) {
+      System.out.println("Validation path: " + validationDirectory);
+    }
 
     var futures = new ArrayList<Future<Throwable>>();
 

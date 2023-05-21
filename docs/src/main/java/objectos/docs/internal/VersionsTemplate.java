@@ -15,6 +15,7 @@
  */
 package objectos.docs.internal;
 
+import br.com.objectos.css.Css;
 import br.com.objectos.css.framework.background.BackgroundColor;
 import br.com.objectos.css.framework.border.Border;
 import br.com.objectos.css.framework.border.BorderColor;
@@ -36,26 +37,54 @@ import br.com.objectos.css.framework.typography.LetterSpacing;
 import br.com.objectos.css.framework.typography.TextAlign;
 import br.com.objectos.css.framework.typography.TextColor;
 import br.com.objectos.css.select.ClassSelector;
-import java.io.IOException;
-import java.io.UncheckedIOException;
-import objectos.asciidoc.pseudom.Node;
-import objectos.asciidoc.pseudom.Node.ContainerNode;
-import objectos.asciidoc.pseudom.Node.Header;
-import objectos.asciidoc.pseudom.Node.Paragraph;
-import objectos.asciidoc.pseudom.Node.Text;
-import objectos.asciidoc.pseudom.Node.Title;
+import objectos.html.tmpl.StandardElementName;
 
-public final class VersionsTemplate2 extends DocsTemplate2 {
+public final class VersionsTemplate extends DocsTemplate {
 
-  static final ClassSelector DATE = VersionsTemplate.DATE;
+  static final ClassSelector DATE = Css.randomDot(3);
 
-  static final ClassSelector TITLE = VersionsTemplate.TITLE;
+  static final ClassSelector TITLE = Css.randomDot(3);
 
-  VersionsTemplate2(DocsInjector injector) {
+  VersionsTemplate(DocsInjector injector) {
     super(injector);
   }
 
   public static void initVersionsTemplate() {}
+
+  @Override
+  public final void headingStart(int level) {
+    switch (level) {
+      case 1 -> {
+        tagStart(); // <h1>
+
+        addValue0(
+          FontSize.xLarge4,
+          FontSize.md.xLarge5,
+          LetterSpacing.tight,
+          MarginTop.v14
+        );
+      }
+
+      default -> super.headingStart(level);
+    }
+  }
+
+  @Override
+  public void preambleEnd() {
+    tagEnd(StandardElementName.DIV);
+  }
+
+  @Override
+  public void preambleStart() {
+    tagStart(); // <div>
+
+    addValue0(
+      FontSize.xLarge,
+      MarginBottom.v10,
+      MarginTop.v02,
+      TextColor.gray800
+    );
+  }
 
   @Override
   final void main0() {
@@ -70,7 +99,7 @@ public final class VersionsTemplate2 extends DocsTemplate2 {
         MarginX.auto,
         MaxWidth.screenXl,
 
-        f(this::render)
+        f(this::renderDocument)
       ),
 
       section(
@@ -96,74 +125,6 @@ public final class VersionsTemplate2 extends DocsTemplate2 {
         )
       )
     );
-  }
-
-  private void render() {
-    try (var document = injector.$document2()) {
-      var nodes = document.nodes();
-
-      var iter = nodes.iterator();
-
-      if (!iter.hasNext()) {
-        return;
-      }
-
-      var first = iter.next();
-
-      if (first instanceof Header header) {
-        renderContainer(header);
-      } else {
-        renderNode(first);
-      }
-
-      div(
-        FontSize.xLarge,
-        MarginBottom.v10,
-        MarginTop.v02,
-        TextColor.gray800,
-
-        f(() -> {
-          while (iter.hasNext()) {
-            renderNode(iter.next());
-          }
-        })
-      );
-    } catch (IOException e) {
-      throw new UncheckedIOException(e);
-    }
-  }
-
-  private void renderContainer(ContainerNode container) {
-    for (var node : container.nodes()) {
-      renderNode(node);
-    }
-  }
-
-  private void renderNode(Node node) {
-    if (node instanceof Paragraph paragraph) {
-      p(f(() -> renderContainer(paragraph)));
-    } else if (node instanceof Text text) {
-      t(text.value());
-    } else if (node instanceof Title title) {
-      int level = title.level();
-
-      switch (level) {
-        case 0 -> h1(
-          FontSize.xLarge4,
-          FontSize.md.xLarge5,
-          LetterSpacing.tight,
-          MarginTop.v14,
-
-          f(() -> renderContainer(title))
-        );
-
-        default -> throw new UnsupportedOperationException("level=" + level);
-      }
-    } else {
-      throw new UnsupportedOperationException(
-        "Implement me :: type=" + node.getClass().getSimpleName()
-      );
-    }
   }
 
   private void v0x() {

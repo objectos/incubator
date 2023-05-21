@@ -15,6 +15,7 @@
  */
 package objectos.docs.internal;
 
+import br.com.objectos.css.Css;
 import br.com.objectos.css.framework.background.BackgroundColor;
 import br.com.objectos.css.framework.border.BorderBottom;
 import br.com.objectos.css.framework.border.BorderColor;
@@ -43,6 +44,7 @@ import br.com.objectos.css.framework.sizing.Width;
 import br.com.objectos.css.framework.spacing.MarginBottom;
 import br.com.objectos.css.framework.spacing.MarginTop;
 import br.com.objectos.css.framework.spacing.MarginX;
+import br.com.objectos.css.framework.spacing.MarginY;
 import br.com.objectos.css.framework.spacing.Padding;
 import br.com.objectos.css.framework.spacing.PaddingBottom;
 import br.com.objectos.css.framework.spacing.PaddingLeft;
@@ -56,47 +58,32 @@ import br.com.objectos.css.framework.typography.LetterSpacing;
 import br.com.objectos.css.framework.typography.ListStyleType;
 import br.com.objectos.css.framework.typography.TextAlign;
 import br.com.objectos.css.framework.typography.TextColor;
-import br.com.objectos.css.framework.typography.TextDecoration;
 import br.com.objectos.css.framework.typography.TextTransform;
 import br.com.objectos.css.select.ClassSelector;
 import br.com.objectos.css.select.IdSelector;
-import java.io.IOException;
-import java.io.UncheckedIOException;
-import objectos.asciidoc.pseudom.Node;
-import objectos.asciidoc.pseudom.Node.ContainerNode;
-import objectos.asciidoc.pseudom.Node.Emphasis;
-import objectos.asciidoc.pseudom.Node.Header;
-import objectos.asciidoc.pseudom.Node.InlineMacro;
-import objectos.asciidoc.pseudom.Node.ListItem;
-import objectos.asciidoc.pseudom.Node.ListingBlock;
-import objectos.asciidoc.pseudom.Node.Monospaced;
-import objectos.asciidoc.pseudom.Node.Paragraph;
-import objectos.asciidoc.pseudom.Node.Strong;
-import objectos.asciidoc.pseudom.Node.Symbol;
-import objectos.asciidoc.pseudom.Node.Text;
-import objectos.asciidoc.pseudom.Node.Title;
-import objectos.asciidoc.pseudom.Node.UnorderedList;
+import objectos.asciidoc.DocumentAttributes;
 import objectos.docs.internal.Navigation.Element;
 import objectos.docs.internal.Navigation.Link;
 import objectos.docs.internal.Navigation.LinkList;
 import objectos.docs.internal.Navigation.LinkTitle;
 import objectos.docs.internal.Navigation.Section;
+import objectos.html.tmpl.StandardElementName;
 import objectos.shared.DefaultRenderer;
 import objectos.shared.JavaRenderer;
 import objectos.shared.LanguageRenderer;
 import objectos.shared.XmlRenderer;
 
-public final class ArticleTemplate2 extends DocsTemplate2 implements LanguageRenderer.Output {
+public final class ArticleTemplate extends DocsTemplate implements LanguageRenderer.Output {
 
-  private static final IdSelector BACKDROP = ArticleTemplate.BACKDROP;
+  static final IdSelector BACKDROP = Css.randomHash(3);
 
-  static final IdSelector CLICK_CLOSE = ArticleTemplate.CLICK_CLOSE;
+  static final IdSelector CLICK_CLOSE = Css.randomHash(3);
 
-  private static final IdSelector CLICK_OPEN = ArticleTemplate.CLICK_OPEN;
+  static final IdSelector CLICK_OPEN = Css.randomHash(3);
 
-  private static final IdSelector NAV = ArticleTemplate.NAV;
+  static final IdSelector NAV = Css.randomHash(3);
 
-  private static final ClassSelector MY_DEFAULT = ArticleTemplate.MY_DEFAULT;
+  static final ClassSelector MY_DEFAULT = MarginY.v03;
 
   private final LanguageRenderer defaultRenderer = new DefaultRenderer();
 
@@ -104,27 +91,248 @@ public final class ArticleTemplate2 extends DocsTemplate2 implements LanguageRen
 
   private final LanguageRenderer xmlRenderer = new XmlRenderer();
 
+  private LanguageRenderer languageRenderer;
+
+  private final StringBuilder source = new StringBuilder();
+
+  private boolean containerStarted;
+
   private boolean heading;
 
   private Navigation navigation;
 
-  private final StringBuilder source = new StringBuilder();
-
-  ArticleTemplate2(DocsInjector injector) {
-    super(injector);
-  }
+  ArticleTemplate(DocsInjector injector) { super(injector); }
 
   public static void initArticleTemplate() {
   }
 
   @Override
+  public final void documentEnd() {
+    if (containerStarted) {
+      tagEnd(StandardElementName.DIV); // contents
+
+      tagEnd(StandardElementName.DIV); // container
+    }
+  }
+
+  @Override
+  public final void documentStart(DocumentAttributes attributes) {
+    super.documentStart(attributes);
+
+    containerStarted = false;
+  }
+
+  @Override
+  public final void headingEnd(int level) {
+    switch (level) {
+      case 1 -> {
+        tagEnd(StandardElementName.H1);
+
+        tagEnd(StandardElementName.HEADER);
+
+        containerStarted = true;
+
+        // container
+
+        tagStart();
+
+        addValue0(
+          FlexDirection.rowReverse,
+          Display.flex,
+          MaxWidth.full
+        );
+
+        // TOC
+
+        tagStart();
+
+        addValue0(
+          Display.hidden,
+          Display.xl.block,
+          Flex.xl.none,
+          Width.xl.v64
+        );
+
+        addValue0(raw("&nbsp;"));
+
+        tagEnd(StandardElementName.DIV);
+
+        // contents
+
+        tagStart();
+
+        addValue0(
+          FlexGrow.one,
+          MinWidth.v0,
+          PaddingRight.xl.v10
+        );
+      }
+
+      default -> super.headingEnd(level);
+    }
+
+    heading = false;
+  }
+
+  @Override
+  public final void headingStart(int level) {
+    heading = true;
+
+    switch (level) {
+      case 1 -> {
+        tagStart(); // <header>
+
+        addValue0(
+          BorderColor.slate400,
+          BorderBottom.v1,
+          MarginBottom.v10,
+          PaddingBottom.v08
+        );
+
+        tagStart(); // <h1>
+
+        addValue0(
+          FontSize.xLarge3,
+          LetterSpacing.tight
+        );
+      }
+
+      case 2 -> {
+        tagStart(); // <h2>
+
+        addValue0(
+          FontSize.xLarge2,
+          MarginTop.v10
+        );
+      }
+
+      case 3 -> {
+        tagStart(); // <h3>
+
+        addValue0(
+          BorderBottom.v1,
+          BorderColor.slate300,
+          FontSize.large,
+          MarginTop.v06,
+          MY_DEFAULT
+        );
+      }
+
+      default -> super.headingStart(level);
+    }
+  }
+
+  @Override
   public final void languageSpan(ClassSelector clazz, String contents) {
-    span(clazz, t(contents));
+    addValue0(span(clazz, t(contents)));
   }
 
   @Override
   public final void languageText(String text) {
-    t(text);
+    addValue0(t(text));
+  }
+
+  @Override
+  public final void lineFeed() {
+    if (languageRenderer != null) {
+      source.append('\n');
+    }
+  }
+
+  @Override
+  public final void listingBlockEnd() {
+    sourceCodeBlockEnd();
+  }
+
+  @Override
+  public final void listingBlockStart() {
+    sourceCodeBlockStart("default");
+  }
+
+  @Override
+  public final void listItemStart() {
+    super.listItemStart();
+
+    addValue0(
+      MY_DEFAULT
+    );
+  }
+
+  @Override
+  public final void monospaceStart() {
+    super.monospaceStart();
+
+    if (!heading) {
+      addValue0(
+        BackgroundColor.gray100,
+        FontSize.small,
+        PaddingX.v01,
+        PaddingY.v00_5
+      );
+    }
+  }
+
+  @Override
+  public final void paragraphStart() {
+    super.paragraphStart();
+
+    addValue0(
+      MY_DEFAULT
+    );
+  }
+
+  @Override
+  public final void sourceCodeBlockEnd() {
+    var literal = source.toString();
+
+    tagStart();
+    addValue0(
+      BackgroundColor.gray100,
+      FontSize.small,
+      OverflowX.auto,
+      MY_DEFAULT,
+      Padding.v03
+    );
+    tagStart();
+    languageRenderer.render(this, literal.trim());
+    tagEnd(StandardElementName.CODE);
+    tagEnd(StandardElementName.PRE);
+
+    languageRenderer = null;
+  }
+
+  @Override
+  public final void sourceCodeBlockStart(String language) {
+    source.setLength(0);
+
+    languageRenderer = switch (language) {
+      case "default", "shell" -> defaultRenderer;
+
+      case "java" -> javaRenderer;
+
+      case "html", "xml" -> xmlRenderer;
+
+      default -> throw new UnsupportedOperationException("Implement me :: lang=" + language);
+    };
+  }
+
+  @Override
+  public final void text(String s) {
+    if (languageRenderer != null) {
+      source.append(s);
+    } else {
+      super.text(s);
+    }
+  }
+
+  @Override
+  public final void unorderedListStart() {
+    super.unorderedListStart();
+
+    addValue0(
+      ListStyleType.disc,
+      PaddingLeft.v08
+    );
   }
 
   @Override
@@ -324,7 +532,7 @@ public final class ArticleTemplate2 extends DocsTemplate2 implements LanguageRen
           PaddingLeft.xl.v10,
 
           article(
-            f(this::render)
+            f(this::renderDocument)
           )
         )
       )
@@ -342,7 +550,7 @@ public final class ArticleTemplate2 extends DocsTemplate2 implements LanguageRen
       Height.v16,
 
       svg(
-        ArticleTemplate2.CLICK_CLOSE,
+        ArticleTemplate.CLICK_CLOSE,
 
         Cursor.hover.pointer,
         Display.block,
@@ -501,274 +709,6 @@ public final class ArticleTemplate2 extends DocsTemplate2 implements LanguageRen
 
       pathTo(href), raw(text)
     );
-  }
-
-  private void render() {
-    try (var document = injector.$document2()) {
-      var nodes = document.nodes();
-
-      var iter = nodes.iterator();
-
-      if (!iter.hasNext()) {
-        return;
-      }
-
-      var first = iter.next();
-
-      if (first instanceof Header header) {
-        header(
-          BorderColor.slate400,
-          BorderBottom.v1,
-          MarginBottom.v10,
-          PaddingBottom.v08,
-
-          f(() -> renderContainer(header))
-        );
-      } else {
-        renderNode(first);
-      }
-
-      div(
-        FlexDirection.rowReverse,
-        Display.flex,
-        MaxWidth.full,
-
-        div(
-          Display.hidden,
-          Display.xl.block,
-          Flex.xl.none,
-          Width.xl.v64,
-
-          raw("&nbsp;")
-        ),
-
-        div(
-          FlexGrow.one,
-          MinWidth.v0,
-          PaddingRight.xl.v10,
-
-          f(() -> {
-            while (iter.hasNext()) {
-              renderNode(iter.next());
-            }
-          })
-        )
-      );
-    } catch (IOException e) {
-      throw new UncheckedIOException(e);
-    }
-  }
-
-  private void renderContainer(ContainerNode container) {
-    for (var node : container.nodes()) {
-      renderNode(node);
-    }
-  }
-
-  private void renderInlineMacro(InlineMacro macro) {
-    var name = macro.name();
-
-    switch (name) {
-      case "https" -> {
-        var target = macro.target();
-
-        a(
-          LINK_COLOR,
-          TextColor.hover.blue900,
-          TextDecoration.underline,
-
-          href(target),
-          f(() -> renderContainer(macro))
-        );
-      }
-
-      case "elink" -> {
-        var target = macro.target();
-
-        var href = injector.$elink(target);
-
-        a(
-          LINK_COLOR,
-          TextColor.hover.blue900,
-          TextDecoration.underline,
-
-          pathTo(href),
-          f(() -> renderContainer(macro))
-        );
-      }
-
-      case "ilink" -> {
-        var target = macro.target();
-
-        var href = injector.$ilink(target);
-
-        a(
-          LINK_COLOR,
-          TextColor.hover.blue900,
-          TextDecoration.underline,
-
-          pathTo(href),
-          f(() -> renderContainer(macro))
-        );
-      }
-
-      case "issue" -> {
-        var target = macro.target();
-
-        a(
-          LINK_COLOR,
-          TextColor.hover.blue900,
-          TextDecoration.underline,
-
-          href("https://github.com/objectos/objectos/issues/" + target),
-          t("#" + target)
-        );
-      }
-
-      default -> throw new UnsupportedOperationException(
-        "Implement me :: name=" + name
-      );
-    }
-  }
-
-  private void renderListingBlock(ListingBlock block) {
-    pre(
-      BackgroundColor.gray100,
-      FontSize.small,
-      OverflowX.auto,
-      MY_DEFAULT,
-      Padding.v03,
-
-      code(f(() -> renderListingBlockCode(block)))
-    );
-  }
-
-  private void renderListingBlockCode(ListingBlock block) {
-    var attributes = block.attributes();
-
-    var style = attributes.getNamed("style", "null");
-
-    var language = "default";
-
-    if (style.equals("source")) {
-      language = attributes.getNamed("language");
-    }
-
-    source.setLength(0);
-
-    for (var node : block.nodes()) {
-      if (node instanceof Text text) {
-        source.append(text.value());
-      } else {
-        throw new UnsupportedOperationException(
-          "Implement me :: node=" + node.getClass().getSimpleName()
-        );
-      }
-    }
-
-    var languageRenderer = switch (language) {
-      case "default", "shell" -> defaultRenderer;
-
-      case "java" -> javaRenderer;
-
-      case "html", "xml" -> xmlRenderer;
-
-      default -> throw new UnsupportedOperationException("Implement me :: lang=" + language);
-    };
-
-    languageRenderer.render(this, source.toString());
-  }
-
-  private void renderNode(Node node) {
-    if (node instanceof Emphasis emphasis) {
-      em(f(() -> renderContainer(emphasis)));
-    } else if (node instanceof InlineMacro macro) {
-      renderInlineMacro(macro);
-    } else if (node instanceof ListingBlock block) {
-      renderListingBlock(block);
-    } else if (node instanceof ListItem item) {
-      li(
-        MY_DEFAULT,
-
-        f(() -> renderContainer(item))
-      );
-    } else if (node instanceof Monospaced monospaced) {
-      if (heading) {
-        code(
-          f(() -> renderContainer(monospaced))
-        );
-      } else {
-        code(
-          BackgroundColor.gray100,
-          FontSize.small,
-          PaddingX.v01,
-          PaddingY.v00_5,
-
-          f(() -> renderContainer(monospaced))
-        );
-      }
-    } else if (node instanceof Paragraph paragraph) {
-      p(
-        MY_DEFAULT,
-
-        f(() -> renderContainer(paragraph))
-      );
-    } else if (node instanceof objectos.asciidoc.pseudom.Node.Section section) {
-      renderContainer(section);
-    } else if (node instanceof Strong strong) {
-      strong(f(() -> renderContainer(strong)));
-    } else if (node instanceof Symbol symbol) {
-      switch (symbol) {
-        case RIGHT_SINGLE_QUOTATION_MARK -> raw("’");
-      }
-    } else if (node instanceof Text text) {
-      t(text.value());
-    } else if (node instanceof Title title) {
-      heading = true;
-
-      int level = title.level();
-
-      switch (level) {
-        case 0 -> h1(
-          FontSize.xLarge3,
-          LetterSpacing.tight,
-
-          f(() -> renderContainer(title))
-        );
-
-        case 1 -> h2(
-          FontSize.xLarge2,
-          MarginTop.v10,
-
-          f(() -> renderContainer(title))
-        );
-
-        case 2 -> h3(
-          BorderBottom.v1,
-          BorderColor.slate300,
-          FontSize.large,
-          MarginTop.v06,
-          MY_DEFAULT,
-
-          f(() -> renderContainer(title))
-        );
-
-        default -> throw new UnsupportedOperationException("level=" + level);
-      }
-
-      heading = false;
-    } else if (node instanceof UnorderedList list) {
-      ul(
-        ListStyleType.disc,
-        PaddingLeft.v08,
-
-        f(() -> renderContainer(list))
-      );
-    } else {
-      throw new UnsupportedOperationException(
-        "Implement me :: type=" + node.getClass().getSimpleName()
-      );
-    }
   }
 
 }

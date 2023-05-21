@@ -31,6 +31,8 @@ public abstract class DocsInjector {
 
   abstract String $ilink(String target);
 
+  abstract DocumentRecord $record();
+
   abstract DocumentRecord $record(String key);
 
   abstract DocumentTitle $title();

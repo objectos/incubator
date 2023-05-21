@@ -132,7 +132,7 @@ abstract class Step2Scan extends Step1Versions {
 
     var documentTitle = documentTitleProcessor.create();
 
-    var value = new DocumentRecord(file, key, version, document, documentTitle);
+    var value = new DocumentRecord(key, version, source, document, documentTitle, null, null);
 
     documents.put(key, value);
   }

@@ -15,16 +15,17 @@
  */
 package objectos.docs.internal;
 
-import java.nio.file.Path;
 import objectos.asciidoc.Document;
 
-record DocumentRecord(Path path,
-                      String key,
+record DocumentRecord(String key,
                       Version version,
+                      String source,
                       Document document,
-                      DocumentTitle title) {
+                      DocumentTitle title,
+                      String pageTitle,
+                      String templateName) {
 
-  public final String templateName() {
+  public final String oldTemplateName() {
     return document.getAttribute("template", "ArticleTemplate");
   }
 
