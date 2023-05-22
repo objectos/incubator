@@ -84,6 +84,10 @@
 			<groupId>br.com.objectos</groupId>
 			<artifactId>css-core</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>br.com.objectos</groupId>
+			<artifactId>css-formal</artifactId>
+		</dependency>
 
 		<dependency>
 			<groupId>br.com.objectos</groupId>
