@@ -264,7 +264,7 @@ public class Step3Generate extends Step2Scan {
 
       currentVersion = currentRecord.version();
 
-      var templateName = currentRecord.oldTemplateName();
+      var templateName = currentRecord.templateName();
 
       var template = _template2(templateName);
 

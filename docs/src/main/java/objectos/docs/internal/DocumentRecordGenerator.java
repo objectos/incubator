@@ -18,7 +18,6 @@ package objectos.docs.internal;
 import java.io.IOException;
 import objectos.asciidoc.AsciiDoc;
 import objectos.asciidoc.AsciiDoc2;
-import objectos.asciidoc.pseudom.Document;
 import objectos.asciidoc.pseudom.Node.ContainerNode;
 import objectos.asciidoc.pseudom.Node.Monospaced;
 import objectos.asciidoc.pseudom.Node.Text;
@@ -54,13 +53,29 @@ final class DocumentRecordGenerator {
     titlePlain.setLength(0);
 
     outer: try (var document = asciiDoc2.open(source)) {
-      var title = findTitle(document);
+      var nodes = document.nodes();
 
-      if (title == null) {
+      var iter = nodes.iterator();
+
+      if (!iter.hasNext()) {
+        break outer;
+      }
+
+      var first = iter.next();
+
+      if (!(first instanceof Title title)) {
         break outer;
       }
 
       consumeTitle(title);
+
+      if (!iter.hasNext()) {
+        break outer;
+      }
+
+      iter.next();
+
+      templateName = document.getNamed("template", "ArticleTemplate");
     }
 
     return new DocumentRecord(
@@ -94,24 +109,6 @@ final class DocumentRecordGenerator {
           "Implement me :: type = " + node.getClass().getSimpleName()
         );
       }
-    }
-  }
-
-  private Title findTitle(Document document) {
-    var nodes = document.nodes();
-
-    var iter = nodes.iterator();
-
-    if (!iter.hasNext()) {
-      return null;
-    }
-
-    var first = iter.next();
-
-    if (first instanceof Title title) {
-      return title;
-    } else {
-      return null;
     }
   }
 
