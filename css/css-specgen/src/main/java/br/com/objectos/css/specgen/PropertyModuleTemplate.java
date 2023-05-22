@@ -15,17 +15,23 @@
  */
 package br.com.objectos.css.specgen;
 
-import br.com.objectos.code.annotations.Generated;
-import br.com.objectos.code.java.JavaNames;
+import br.com.objectos.css.specgen.util.JavaNames;
 import java.util.List;
 import java.util.Set;
 import javax.lang.model.SourceVersion;
+import objectos.code.ClassTypeName;
 import objectos.code.JavaTemplate;
 
 class PropertyModuleTemplate extends JavaTemplate {
 
   private static final String BOOT = "br.com.objectos.css.boot";
   private static final String SPEC = "br.com.objectos.css.boot.spec";
+
+  private static final ClassTypeName ABSTRACT_PROPERTY_MODULE
+      = ClassTypeName.of(BOOT, "AbstractPropertyModule");
+
+  private static final ClassTypeName SOURCE
+      = ClassTypeName.of(SPEC, "Source");
 
   private final String globalSig = "globalSig";
 
@@ -35,15 +41,17 @@ class PropertyModuleTemplate extends JavaTemplate {
 
   @Override
   protected final void definition() {
-    // @formatter:off
-    _package(BOOT);
+    packageDeclaration(BOOT);
 
     autoImports();
 
-    at(t(Generated.class), s(SpecgenBoot.class.getCanonicalName()));
-    _final(); _class(simpleName()); _extends(); t(BOOT, "AbstractPropertyModule"); body(
-      at(t(Override.class)),
-      _final(), _void(), method("propertyDefinition"), block(
+    classDeclaration(
+      FINAL, name(simpleName()), extendsClause(ABSTRACT_PROPERTY_MODULE),
+
+      method(
+        annotation(Override.class),
+        FINAL, VOID, name("propertyDefinition"),
+
         include(this::def0keywords),
 
         include(this::def1MainProperty),
@@ -51,7 +59,6 @@ class PropertyModuleTemplate extends JavaTemplate {
         include(this::def2GroupProperties)
       )
     );
-    // @formatter:on
   }
 
   final void set(Property property, List<Property> group) {
@@ -68,31 +75,22 @@ class PropertyModuleTemplate extends JavaTemplate {
         id = id + "Kw";
       }
 
-      // @formatter:off
-      _var(); id(id); invoke("keyword", s(keyword)); end();
-      // @formatter:on
+      p(VAR, name(id), v("keyword"), argument(s(keyword)));
     }
   }
 
   private void def1MainProperty() {
-    invoke(
-      "property", nl(),
+    p(
+      v("property"), NL,
 
-      s(property.name()), end(), nl(),
+      argument(s(property.name())), NL,
 
-      nl(),
+      NL,
 
-      invoke(
-        "formal",
-        include(() -> formalArgs(property))
-      ), end(), nl(),
+      argument(v("formal"), include(this::formalArgs)), NL,
 
-      nl(),
-
-      n(globalSig), nl()
+      argument(n(globalSig), NL)
     );
-
-    end();
   }
 
   private void def2GroupProperties() {
@@ -102,56 +100,49 @@ class PropertyModuleTemplate extends JavaTemplate {
 
     var first = group.get(0);
 
-    invoke(
-      "property", nl(),
+    p(
+      v("property"), NL,
 
-      invoke("names", include(this::namesArgs)), end(), nl(),
+      argument(v("names"), include(this::namesArgs)), NL,
 
-      nl(),
+      NL,
 
-      invoke(
-        "formal",
-        include(() -> formalArgs(first))
-      ), end(), nl(),
+      argument(v("formal"), include(() -> formalArgs(first))), NL,
 
-      nl(),
-
-      n(globalSig), nl()
+      argument(n(globalSig), NL)
     );
+  }
 
-    end();
+  private void formalArgs() {
+    formalArgs(property);
   }
 
   private void formalArgs(Property property) {
-    nl();
+    code(NL);
 
-    // @formatter:off
-    t(SPEC, "Source"); n("MDN");
-    // @formatter:on
-    nl();
+    argument(SOURCE, n("MDN"));
 
-    s(property.formal());
-    nl();
+    code(NL);
+
+    argument(s(property.formal()), NL);
 
     var valueTypes = property.valueTypes();
 
     if (!valueTypes.isEmpty()) {
-      nl();
+      code(NL);
 
       var valueType = valueTypes.get(0);
 
-      s(valueType.join());
-
-      nl();
+      argument(s(valueType.join()), NL);
 
       for (int i = 1, size = valueTypes.size(); i < size; i++) {
         valueType = valueTypes.get(0);
 
-        s(valueType.join());
-
-        nl();
+        argument(s(valueType.join()), NL);
       }
     }
+
+    code(NL);
   }
 
   private Set<String> keywords() {
@@ -172,7 +163,7 @@ class PropertyModuleTemplate extends JavaTemplate {
     for (int i = 0, size = group.size(); i < size; i++) {
       var prop = group.get(i);
 
-      s(prop.name());
+      argument(s(prop.name()));
     }
   }
 

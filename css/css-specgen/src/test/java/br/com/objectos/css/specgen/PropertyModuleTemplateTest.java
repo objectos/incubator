@@ -44,10 +44,8 @@ public class PropertyModuleTemplateTest {
       """
       package br.com.objectos.css.boot;
 
-      import br.com.objectos.code.annotations.Generated;
       import br.com.objectos.css.boot.spec.Source;
 
-      @Generated("br.com.objectos.css.specgen.SpecgenBoot")
       final class ClearPropertyModule extends AbstractPropertyModule {
         @Override
         final void propertyDefinition() {
@@ -85,10 +83,8 @@ public class PropertyModuleTemplateTest {
       """
       package br.com.objectos.css.boot;
 
-      import br.com.objectos.code.annotations.Generated;
       import br.com.objectos.css.boot.spec.Source;
 
-      @Generated("br.com.objectos.css.specgen.SpecgenBoot")
       final class MarginPropertyModule extends AbstractPropertyModule {
         @Override
         final void propertyDefinition() {
