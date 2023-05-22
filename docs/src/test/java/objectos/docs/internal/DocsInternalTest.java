@@ -88,16 +88,8 @@ public class DocsInternalTest extends AbstractDocsTest {
       "archive/0.6.4/objectos-util/collections/to-string.adoc",
       "archive/0.6.4/objectos-util/array-utilities.adoc",
       "archive/0.6.4/objectos-util/index.adoc",
-      "archive/0.6.4/index.adoc"
-    );
-  }
+      "archive/0.6.4/index.adoc",
 
-  @Test(description = """
-  Generation test of archive/0.6.4/objectos-code
-  """)
-  public void testCase02() throws IOException {
-    test(
-      resultDir.resolve("tc02"),
       "archive/0.6.4/objectos-code/class/annotations.adoc",
       "archive/0.6.4/objectos-code/class/body.adoc",
       "archive/0.6.4/objectos-code/class/extends.adoc",
@@ -133,32 +125,16 @@ public class DocsInternalTest extends AbstractDocsTest {
       "archive/0.6.4/objectos-code/method/throws.adoc",
       "archive/0.6.4/objectos-code/method/type-parameters.adoc",
       "archive/0.6.4/objectos-code/index.adoc",
-      "archive/0.6.4/objectos-code/tutorial.adoc"
-    );
-  }
+      "archive/0.6.4/objectos-code/tutorial.adoc",
 
-  @Test(description = """
-  Generation test of archive/0.6.4/objectos-code more...
-  """)
-  public void testCase03() throws IOException {
-    test(
-      resultDir.resolve("tc03"),
       "archive/0.6.4/objectos-code/statement/if.adoc",
       "archive/0.6.4/objectos-code/statement/index.adoc",
       "archive/0.6.4/objectos-code/statement/return.adoc",
       "archive/0.6.4/objectos-code/template/auto-imports.adoc",
       "archive/0.6.4/objectos-code/template/include.adoc",
       "archive/0.6.4/objectos-code/template/index.adoc",
-      "archive/0.6.4/objectos-code/template/recommended-usage.adoc"
-    );
-  }
+      "archive/0.6.4/objectos-code/template/recommended-usage.adoc",
 
-  @Test(description = """
-  Generation test of archive/0.6.4/relnotes more...
-  """)
-  public void testCase04() throws IOException {
-    test(
-      resultDir.resolve("tc04"),
       "archive/0.6.4/relnotes/0.1.0.adoc",
       "archive/0.6.4/relnotes/0.2.0.adoc",
       "archive/0.6.4/relnotes/0.3.0.adoc",
@@ -176,16 +152,8 @@ public class DocsInternalTest extends AbstractDocsTest {
       "archive/0.6.4/relnotes/0.6.2.adoc",
       "archive/0.6.4/relnotes/0.6.3.adoc",
       "archive/0.6.4/relnotes/0.6.4.adoc",
-      "archive/0.6.4/relnotes/index.adoc"
-    );
-  }
+      "archive/0.6.4/relnotes/index.adoc",
 
-  @Test(description = """
-  Generation test of main/versions.adoc...
-  """)
-  public void testCase05() throws IOException {
-    test(
-      resultDir.resolve("tc05"),
       "main/versions.adoc"
     );
   }
@@ -245,7 +213,9 @@ public class DocsInternalTest extends AbstractDocsTest {
     List<String> unifiedDiff = UnifiedDiffUtils.generateUnifiedDiff(
       relativize.toString(), "new-file.txt", refLines, diff, 0);
 
-    if (unifiedDiff.size() > 0) {
+    if (unifiedDiff.size() > 0)
+
+    {
       unifiedDiff.forEach(System.out::println);
 
       Assert.fail(relativize.toString());

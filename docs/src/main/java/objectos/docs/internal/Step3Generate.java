@@ -209,7 +209,7 @@ public class Step3Generate extends Step2Scan {
             null,
             null,
             DocumentTitle.EMPTY,
-            null,
+            "",
             null,
             null
           );

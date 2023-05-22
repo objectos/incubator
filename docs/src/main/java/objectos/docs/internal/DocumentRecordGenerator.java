@@ -33,7 +33,9 @@ final class DocumentRecordGenerator {
 
   private String templateName;
 
-  private final StringBuilder titleHtml = new StringBuilder();
+  private String titleHtml;
+
+  private final StringBuilder titleHtmlBuilder = new StringBuilder();
 
   private final StringBuilder titlePlain = new StringBuilder();
 
@@ -48,7 +50,7 @@ final class DocumentRecordGenerator {
 
     templateName = "ArticleTemplate";
 
-    titleHtml.setLength(0);
+    titleHtmlBuilder.setLength(0);
 
     titlePlain.setLength(0);
 
@@ -76,6 +78,8 @@ final class DocumentRecordGenerator {
       iter.next();
 
       templateName = document.getNamed("template", "ArticleTemplate");
+
+      titleHtml = document.getNamed("toc-title", titleHtmlBuilder.toString());
     }
 
     return new DocumentRecord(
@@ -84,7 +88,7 @@ final class DocumentRecordGenerator {
       source,
       oldDocument,
       oldDocumentTitle,
-      titleHtml.toString(),
+      titleHtml,
       titlePlain.toString(),
       templateName
     );
@@ -93,15 +97,15 @@ final class DocumentRecordGenerator {
   private void consumeTitle(ContainerNode container) {
     for (var node : container.nodes()) {
       if (node instanceof Monospaced monospaced) {
-        titleHtml.append("<code>");
+        titleHtmlBuilder.append("<code>");
 
         consumeTitle(monospaced);
 
-        titleHtml.append("</code>");
+        titleHtmlBuilder.append("</code>");
       } else if (node instanceof Text text) {
         var value = text.value();
 
-        titleHtml.append(value);
+        titleHtmlBuilder.append(value);
 
         titlePlain.append(value);
       } else {

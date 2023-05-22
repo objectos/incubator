@@ -484,7 +484,7 @@ public final class ArticleTemplate2 extends DocsTemplate2 implements LanguageRen
     if (text == null) {
       var record = injector.$record(href);
 
-      text = record.title().toc();
+      text = record.titleHtml();
     }
 
     var selected = key.equals(href);
