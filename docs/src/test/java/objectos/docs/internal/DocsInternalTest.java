@@ -59,7 +59,7 @@ public class DocsInternalTest extends AbstractDocsTest {
     rmdir(resultDir);
   }
 
-  @Test(enabled = false, description = """
+  @Test(description = """
   Generation test of archive/0.6.4
   """)
   public void testCase01() throws IOException {
@@ -92,7 +92,7 @@ public class DocsInternalTest extends AbstractDocsTest {
     );
   }
 
-  @Test(enabled = false, description = """
+  @Test(description = """
   Generation test of archive/0.6.4/objectos-code
   """)
   public void testCase02() throws IOException {
@@ -137,7 +137,7 @@ public class DocsInternalTest extends AbstractDocsTest {
     );
   }
 
-  @Test(enabled = false, description = """
+  @Test(description = """
   Generation test of archive/0.6.4/objectos-code more...
   """)
   public void testCase03() throws IOException {
@@ -153,7 +153,7 @@ public class DocsInternalTest extends AbstractDocsTest {
     );
   }
 
-  @Test(enabled = false, description = """
+  @Test(description = """
   Generation test of archive/0.6.4/relnotes more...
   """)
   public void testCase04() throws IOException {
@@ -180,7 +180,7 @@ public class DocsInternalTest extends AbstractDocsTest {
     );
   }
 
-  @Test(enabled = false, description = """
+  @Test(description = """
   Generation test of main/versions.adoc...
   """)
   public void testCase05() throws IOException {

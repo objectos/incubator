@@ -22,7 +22,8 @@ record DocumentRecord(String key,
                       String source,
                       Document document,
                       DocumentTitle title,
-                      String pageTitle,
+                      String titleHtml,
+                      String titlePlain,
                       String templateName) {
 
   public final String oldTemplateName() {

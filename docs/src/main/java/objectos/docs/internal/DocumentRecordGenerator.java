@@ -19,10 +19,11 @@ import java.io.IOException;
 import objectos.asciidoc.AsciiDoc;
 import objectos.asciidoc.AsciiDoc2;
 import objectos.asciidoc.pseudom.Document;
-import objectos.asciidoc.pseudom.Node.Header;
+import objectos.asciidoc.pseudom.Node.ContainerNode;
+import objectos.asciidoc.pseudom.Node.Monospaced;
+import objectos.asciidoc.pseudom.Node.Text;
 import objectos.asciidoc.pseudom.Node.Title;
 
-@SuppressWarnings("unused")
 final class DocumentRecordGenerator {
 
   private final AsciiDoc asciiDoc = AsciiDoc.create();
@@ -31,7 +32,11 @@ final class DocumentRecordGenerator {
 
   private final DocumentTitleProcessor documentTitleProcessor = new DocumentTitleProcessor();
 
-  private final StringBuilder pageTitle = new StringBuilder();
+  private String templateName;
+
+  private final StringBuilder titleHtml = new StringBuilder();
+
+  private final StringBuilder titlePlain = new StringBuilder();
 
   public final DocumentRecord generate(
       String key, Version version, String source)
@@ -42,31 +47,20 @@ final class DocumentRecordGenerator {
 
     var oldDocumentTitle = documentTitleProcessor.create();
 
-    String templateName = "ArticleTemplate";
+    templateName = "ArticleTemplate";
+
+    titleHtml.setLength(0);
+
+    titlePlain.setLength(0);
 
     outer: try (var document = asciiDoc2.open(source)) {
       var title = findTitle(document);
-      var nodes = document.nodes();
 
-      var iter = nodes.iterator();
-
-      if (!iter.hasNext()) {
+      if (title == null) {
         break outer;
       }
 
-      var first = iter.next();
-
-      if (!(first instanceof Header header)) {
-        break outer;
-      }
-
-      nodes = header.nodes();
-
-      iter = nodes.iterator();
-
-      if (!iter.hasNext()) {
-
-      }
+      consumeTitle(title);
     }
 
     return new DocumentRecord(
@@ -75,9 +69,32 @@ final class DocumentRecordGenerator {
       source,
       oldDocument,
       oldDocumentTitle,
-      pageTitle.toString(),
+      titleHtml.toString(),
+      titlePlain.toString(),
       templateName
     );
+  }
+
+  private void consumeTitle(ContainerNode container) {
+    for (var node : container.nodes()) {
+      if (node instanceof Monospaced monospaced) {
+        titleHtml.append("<code>");
+
+        consumeTitle(monospaced);
+
+        titleHtml.append("</code>");
+      } else if (node instanceof Text text) {
+        var value = text.value();
+
+        titleHtml.append(value);
+
+        titlePlain.append(value);
+      } else {
+        throw new UnsupportedOperationException(
+          "Implement me :: type = " + node.getClass().getSimpleName()
+        );
+      }
+    }
   }
 
   private Title findTitle(Document document) {
@@ -91,17 +108,11 @@ final class DocumentRecordGenerator {
 
     var first = iter.next();
 
-    if (!(first instanceof Header header)) {
+    if (first instanceof Title title) {
+      return title;
+    } else {
       return null;
     }
-
-    for (var node : header.nodes()) {
-
-    }
-
-    return null;
   }
-
-  private Title findTitle0(Header header) { return null; }
 
 }

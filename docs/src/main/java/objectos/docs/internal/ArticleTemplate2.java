@@ -65,7 +65,6 @@ import java.io.UncheckedIOException;
 import objectos.asciidoc.pseudom.Node;
 import objectos.asciidoc.pseudom.Node.ContainerNode;
 import objectos.asciidoc.pseudom.Node.Emphasis;
-import objectos.asciidoc.pseudom.Node.Header;
 import objectos.asciidoc.pseudom.Node.InlineMacro;
 import objectos.asciidoc.pseudom.Node.ListItem;
 import objectos.asciidoc.pseudom.Node.ListingBlock;
@@ -515,14 +514,14 @@ public final class ArticleTemplate2 extends DocsTemplate2 implements LanguageRen
 
       var first = iter.next();
 
-      if (first instanceof Header header) {
+      if (first instanceof Title title) {
         header(
           BorderColor.slate400,
           BorderBottom.v1,
           MarginBottom.v10,
           PaddingBottom.v08,
 
-          f(() -> renderContainer(header))
+          f(() -> renderNode(title))
         );
       } else {
         renderNode(first);

@@ -15,6 +15,6 @@
  */
 package objectos.docs.internal;
 
-record DocumentTitle(String html, String plain, String toc) {
-  static final DocumentTitle EMPTY = new DocumentTitle("", "", "");
+record DocumentTitle(String plain, String toc) {
+  static final DocumentTitle EMPTY = new DocumentTitle("", "");
 }

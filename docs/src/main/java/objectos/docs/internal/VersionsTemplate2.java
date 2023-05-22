@@ -40,7 +40,6 @@ import java.io.IOException;
 import java.io.UncheckedIOException;
 import objectos.asciidoc.pseudom.Node;
 import objectos.asciidoc.pseudom.Node.ContainerNode;
-import objectos.asciidoc.pseudom.Node.Header;
 import objectos.asciidoc.pseudom.Node.Paragraph;
 import objectos.asciidoc.pseudom.Node.Text;
 import objectos.asciidoc.pseudom.Node.Title;
@@ -110,11 +109,7 @@ public final class VersionsTemplate2 extends DocsTemplate2 {
 
       var first = iter.next();
 
-      if (first instanceof Header header) {
-        renderContainer(header);
-      } else {
-        renderNode(first);
-      }
+      renderNode(first);
 
       div(
         FontSize.xLarge,

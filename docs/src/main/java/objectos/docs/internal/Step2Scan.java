@@ -20,16 +20,13 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.stream.Stream;
-import objectos.asciidoc.AsciiDoc;
 import objectos.util.GrowableMap;
 
 abstract class Step2Scan extends Step1Versions {
 
   final GrowableMap<String, DocumentRecord> documents = new GrowableMap<>();
 
-  private final AsciiDoc asciiDoc = AsciiDoc.create();
-
-  private final DocumentTitleProcessor documentTitleProcessor = new DocumentTitleProcessor();
+  private final DocumentRecordGenerator documentRecordGenerator = new DocumentRecordGenerator();
 
   private IOException rethrow;
 
@@ -126,13 +123,7 @@ abstract class Step2Scan extends Step1Versions {
 
     var source = Files.readString(file, StandardCharsets.UTF_8);
 
-    var document = asciiDoc.parse(source);
-
-    document.process(documentTitleProcessor);
-
-    var documentTitle = documentTitleProcessor.create();
-
-    var value = new DocumentRecord(key, version, source, document, documentTitle, null, null);
+    var value = documentRecordGenerator.generate(key, version, source);
 
     documents.put(key, value);
   }

@@ -88,7 +88,6 @@ final class DocumentTitleProcessor extends SimpleAsciiDocProcessor {
     var altTitle = html.toString();
 
     return new DocumentTitle(
-      html.toString(),
       plain.toString(),
       attributes.getOrDefault("toc-title", altTitle)
     );

@@ -65,7 +65,7 @@ abstract class DocsTemplate2 extends SharedTemplate2 {
 
     var record = injector.$record();
 
-    title(record.pageTitle());
+    title(record.titlePlain());
 
     if (rawStyle != null) {
       style(rawStyle);
