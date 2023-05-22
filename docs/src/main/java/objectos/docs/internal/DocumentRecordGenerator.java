@@ -16,7 +16,6 @@
 package objectos.docs.internal;
 
 import java.io.IOException;
-import objectos.asciidoc.AsciiDoc;
 import objectos.asciidoc.AsciiDoc2;
 import objectos.asciidoc.pseudom.Node.ContainerNode;
 import objectos.asciidoc.pseudom.Node.Monospaced;
@@ -25,11 +24,7 @@ import objectos.asciidoc.pseudom.Node.Title;
 
 final class DocumentRecordGenerator {
 
-  private final AsciiDoc asciiDoc = AsciiDoc.create();
-
   private final AsciiDoc2 asciiDoc2 = new AsciiDoc2();
-
-  private final DocumentTitleProcessor documentTitleProcessor = new DocumentTitleProcessor();
 
   private String templateName;
 
@@ -42,12 +37,6 @@ final class DocumentRecordGenerator {
   public final DocumentRecord generate(
       String key, Version version, String source)
       throws IOException {
-    var oldDocument = asciiDoc.parse(source);
-
-    oldDocument.process(documentTitleProcessor);
-
-    var oldDocumentTitle = documentTitleProcessor.create();
-
     templateName = "ArticleTemplate";
 
     titleHtmlBuilder.setLength(0);
@@ -86,8 +75,6 @@ final class DocumentRecordGenerator {
       key,
       version,
       source,
-      oldDocument,
-      oldDocumentTitle,
       titleHtml,
       titlePlain.toString(),
       templateName

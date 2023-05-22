@@ -15,19 +15,9 @@
  */
 package objectos.docs.internal;
 
-import objectos.asciidoc.Document;
-
 record DocumentRecord(String key,
                       Version version,
                       String source,
-                      Document document,
-                      DocumentTitle title,
                       String titleHtml,
                       String titlePlain,
-                      String templateName) {
-
-  public final String oldTemplateName() {
-    return document.getAttribute("template", "ArticleTemplate");
-  }
-
-}
+                      String templateName) {}

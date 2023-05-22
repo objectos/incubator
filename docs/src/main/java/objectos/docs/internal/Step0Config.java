@@ -32,14 +32,10 @@ class Step0Config {
 
   Path targetDirectory;
 
-  Path validationDirectory;
-
   public final void clearConfig() {
     sourceDirectories.clear();
 
     targetDirectory = null;
-
-    validationDirectory = null;
   }
 
   public final void parseArgs(String... args) {
@@ -100,19 +96,6 @@ class Step0Config {
     }
 
     targetDirectory = path;
-
-    development();
-  }
-
-  public final void validationDirectory(Path path) {
-    if (Files.exists(path) && !Files.isDirectory(path)) {
-      throw new IllegalArgumentException("""
-      Invalid <validation-path>: %s is not a directory
-      """.formatted(path)
-      );
-    }
-
-    validationDirectory = path;
 
     development();
   }

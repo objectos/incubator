@@ -15,6 +15,7 @@
  */
 package objectos.docs.internal;
 
+import br.com.objectos.css.Css;
 import br.com.objectos.css.framework.background.BackgroundColor;
 import br.com.objectos.css.framework.border.Border;
 import br.com.objectos.css.framework.border.BorderColor;
@@ -46,9 +47,9 @@ import objectos.asciidoc.pseudom.Node.Title;
 
 public final class VersionsTemplate2 extends DocsTemplate2 {
 
-  static final ClassSelector DATE = VersionsTemplate.DATE;
+  static final ClassSelector DATE = Css.randomDot(3);
 
-  static final ClassSelector TITLE = VersionsTemplate.TITLE;
+  static final ClassSelector TITLE = Css.randomDot(3);
 
   VersionsTemplate2(DocsInjector injector) {
     super(injector);

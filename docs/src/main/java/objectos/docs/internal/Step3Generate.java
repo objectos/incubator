@@ -27,7 +27,6 @@ import java.util.concurrent.Future;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import objectos.asciidoc.AsciiDoc2;
-import objectos.asciidoc.Document;
 import objectos.docs.Docs.BottomBar;
 import objectos.docs.Docs.TopBar;
 import objectos.html.HtmlSink;
@@ -80,11 +79,7 @@ public class Step3Generate extends Step2Scan {
 
     private final StyleSheetWriter styleSheetWriter = StyleSheetWriter.ofPretty();
 
-    private final ArticleTemplate articleTemplate = new ArticleTemplate(this);
-
     private final ArticleTemplate2 articleTemplate2 = new ArticleTemplate2(this);
-
-    private final VersionsTemplate versionsTemplate = new VersionsTemplate(this);
 
     private final VersionsTemplate2 versionsTemplate2 = new VersionsTemplate2(this);
 
@@ -99,33 +94,7 @@ public class Step3Generate extends Step2Scan {
     private Version currentVersion;
 
     public final void generate(String key, DocumentRecord record) throws IOException {
-      currentKey = key;
-
-      currentRecord = record;
-
-      currentVersion = currentRecord.version();
-
-      var templateName = currentRecord.oldTemplateName();
-
-      var template = _template(templateName);
-
-      template.key = currentKey;
-
-      template.version = currentVersion;
-
-      template.rawStyle(null);
-
-      htmlSink.toProcessor(template, styleClassSet);
-
-      styleSheetWriter.filterClassSelectorsByName(styleClassSet);
-
-      template.rawStyle(styleSheetWriter.toString(styleSheet));
-
-      htmlSink.toDirectory(template, targetDirectory);
-
-      if (validationDirectory != null) {
-        generate2(key, record);
-      }
+      generate2(key, record);
     }
 
     @Override
@@ -135,11 +104,6 @@ public class Step3Generate extends Step2Scan {
       }
 
       return bottomBar.toFragment();
-    }
-
-    @Override
-    final Document $document() {
-      return currentRecord.document();
     }
 
     @Override
@@ -207,8 +171,6 @@ public class Step3Generate extends Step2Scan {
             key,
             null,
             null,
-            null,
-            DocumentTitle.EMPTY,
             "",
             null,
             null
@@ -217,11 +179,6 @@ public class Step3Generate extends Step2Scan {
       }
 
       return record;
-    }
-
-    @Override
-    final DocumentTitle $title() {
-      return currentRecord.title();
     }
 
     @Override
@@ -235,16 +192,6 @@ public class Step3Generate extends Step2Scan {
     @Override
     final Iterable<Version> $versions() {
       return versions.values();
-    }
-
-    private DocsTemplate _template(String templateName) {
-      return switch (templateName) {
-        case "ArticleTemplate" -> articleTemplate;
-
-        case "VersionsTemplate" -> versionsTemplate;
-
-        default -> throw new NoSuchElementException(templateName);
-      };
     }
 
     private DocsTemplate2 _template2(String templateName) {
@@ -280,7 +227,7 @@ public class Step3Generate extends Step2Scan {
 
       template.rawStyle(styleSheetWriter.toString(styleSheet));
 
-      htmlSink.toDirectory(template, validationDirectory);
+      htmlSink.toDirectory(template, targetDirectory);
     }
   }
 
@@ -310,10 +257,6 @@ public class Step3Generate extends Step2Scan {
     long startTime = System.currentTimeMillis();
 
     System.out.println("Target path: " + targetDirectory);
-
-    if (validationDirectory != null) {
-      System.out.println("Validation path: " + validationDirectory);
-    }
 
     var futures = new ArrayList<Future<Throwable>>();
 

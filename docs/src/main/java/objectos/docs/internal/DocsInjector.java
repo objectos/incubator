@@ -15,7 +15,7 @@
  */
 package objectos.docs.internal;
 
-import objectos.asciidoc.Document;
+import objectos.asciidoc.pseudom.Document;
 import objectos.docs.Docs.TopBar;
 import objectos.html.HtmlTemplate;
 
@@ -23,9 +23,7 @@ public abstract class DocsInjector {
 
   abstract HtmlTemplate $bottomBar();
 
-  abstract Document $document();
-
-  abstract objectos.asciidoc.pseudom.Document $document2();
+  abstract Document $document2();
 
   abstract String $elink(String target);
 
@@ -34,8 +32,6 @@ public abstract class DocsInjector {
   abstract DocumentRecord $record();
 
   abstract DocumentRecord $record(String key);
-
-  abstract DocumentTitle $title();
 
   abstract TopBar $topBar();
 
