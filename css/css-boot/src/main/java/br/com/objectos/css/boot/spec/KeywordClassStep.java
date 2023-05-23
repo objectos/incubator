@@ -15,7 +15,11 @@
  */
 package br.com.objectos.css.boot.spec;
 
+import objectos.code.ClassTypeName;
+
 final class KeywordClassStep extends ThisTemplate {
+
+  private static final ClassTypeName STD_KEYWORD = ClassTypeName.of(keyword, "StandardKeyword");
 
   private int code;
 
@@ -34,23 +38,27 @@ final class KeywordClassStep extends ThisTemplate {
 
   @Override
   protected final void definition() {
-    _package(keyword);
+    var self = ClassTypeName.of(keyword, keywordName.simpleName);
+
+    packageDeclaration(keyword);
 
     autoImports();
 
-    generatedAnnotation();
-    _public();
-    _final();
-    _class(keywordName.simpleName);
-    _extends();
-    t(keyword, "StandardKeyword");
-    superInterfaces();
-    body(
-      _static(), _final(), t(keyword, keywordName.simpleName),
-      id("INSTANCE"), _new(t(keyword, keywordName.simpleName)),
+    classDeclaration(
+      PUBLIC, FINAL, name(self),
+      extendsClause(STD_KEYWORD),
+      include(this::superInterfaces),
 
-      _private(), constructor(), block(
-        _super(i(code++), s(keywordName.fieldName), s(keywordName.name))
+      field(STATIC, FINAL, self, name("INSTANCE"), NEW, self),
+
+      constructor(
+        PRIVATE,
+
+        p(SUPER,
+          argument(i(code++)),
+          argument(s(keywordName.fieldName)),
+          argument(s(keywordName.name))
+        )
       )
     );
   }
@@ -58,14 +66,10 @@ final class KeywordClassStep extends ThisTemplate {
   private void superInterfaces() {
     var names = keywordName.interfaceSet;
 
-    if (names.isEmpty()) {
-      return;
-    }
-
-    _implements();
-
     for (var name : names) {
-      t(type, name);
+      var typeName = ClassTypeName.of(type, name);
+
+      implementsClause(typeName);
     }
   }
 

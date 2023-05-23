@@ -17,9 +17,12 @@ package br.com.objectos.css.boot.spec;
 
 import br.com.objectos.code.annotations.Generated;
 import br.com.objectos.css.boot.CssBoot;
+import objectos.code.ClassTypeName;
 import objectos.code.JavaTemplate;
 
 abstract class ThisTemplate extends JavaTemplate implements Step {
+
+  static final ClassTypeName STRING = ClassTypeName.of(String.class);
 
   static final String css = "br.com.objectos.css";
 
@@ -80,6 +83,7 @@ abstract class ThisTemplate extends JavaTemplate implements Step {
   @Override
   public void execute() {}
 
+  @Override
   protected void definition() {}
 
   final void writeSelf() {

@@ -18,8 +18,16 @@ package br.com.objectos.css.boot.spec;
 import java.util.Locale;
 import java.util.Set;
 import java.util.TreeSet;
+import objectos.code.ArrayTypeName;
+import objectos.code.ClassTypeName;
 
 final class AngleUnitStep extends ThisTemplate {
+
+  private static final ClassTypeName ANGLE_UNIT = ClassTypeName.of(type, "AngleUnit");
+
+  private static final ArrayTypeName ANGLE_UNIT_DIM = ArrayTypeName.of(ANGLE_UNIT);
+
+  private static final ClassTypeName LOCALE = ClassTypeName.of(Locale.class);
 
   private final Set<String> simpleNames = new TreeSet<>();
 
@@ -39,60 +47,55 @@ final class AngleUnitStep extends ThisTemplate {
 
   @Override
   protected final void definition() {
-    _package(type);
+    packageDeclaration(type);
 
     autoImports();
 
-    generatedAnnotation();
-    _public();
-    _enum("AngleUnit");
-    body(
+    enumDeclaration(
+      PUBLIC, name(ANGLE_UNIT),
+
       include(this::constants),
 
-      _private(), _static(), _final(),
-      t(t(type, "AngleUnit"), dim()),
-      id("ARRAY"), t(type, "AngleUnit"), invoke("values"),
+      field(PRIVATE, STATIC, FINAL, ANGLE_UNIT_DIM, name("ARRAY"), ANGLE_UNIT, v("values")),
 
-      _private(), _final(),
-      t(String.class), id("name"),
+      field(PRIVATE, FINAL, STRING, name("name")),
 
-      _private(), constructor(), block(
-        _this(), n("name"), gets(), invoke("name"), invoke("toLowerCase", t(Locale.class), n("US"))
+      constructor(
+        PRIVATE,
+
+        p(THIS, n("name"), IS, v("name"), v("toLowerCase"), argument(LOCALE, n("US")))
       ),
 
-      _public(), _static(),
-      t(type, "AngleUnit"),
-      method("getByCode", _int(), id("code")),
-      block(
-        _return(), n("ARRAY"), dim(n("code"))
+      method(
+        PUBLIC, STATIC, ANGLE_UNIT, name("getByCode"),
+        parameter(INT, name("code")),
+
+        p(RETURN, n("ARRAY"), dim(n("code")))
       ),
 
-      _public(), _static(),
-      _int(),
-      method("size"),
-      block(
-        _return(), n("ARRAY"), n("length")
+      method(
+        PUBLIC, STATIC, INT, name("size"),
+
+        p(RETURN, n("ARRAY"), n("length"))
       ),
 
-      _public(), _final(),
-      _int(),
-      method("getCode"),
-      block(
-        _return(), invoke("ordinal")
+      method(
+        PUBLIC, FINAL, INT, name("getCode"),
+
+        p(RETURN, v("ordinal"))
       ),
 
-      _public(), _final(),
-      t(String.class),
-      method("getName"),
-      block(
-        _return(), n("name")
+      method(
+        PUBLIC, FINAL, STRING, name("getName"),
+
+        p(RETURN, n("name"))
       )
     );
   }
 
   private void constants() {
     for (var unit : simpleNames) {
-      enumConstant(unit);
+      enumConstant(name(unit));
     }
   }
 

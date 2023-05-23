@@ -15,6 +15,8 @@
  */
 package br.com.objectos.css.boot.spec;
 
+import objectos.code.ClassTypeName;
+
 final class FunctionInterfaceStep extends ThisTemplate {
 
   private FunctionName functionName;
@@ -32,27 +34,21 @@ final class FunctionInterfaceStep extends ThisTemplate {
 
   @Override
   protected final void definition() {
-    _package(function);
+    packageDeclaration(function);
 
     autoImports();
 
-    _public();
-    _interface(functionName.singleDeclarationSimpleName());
-    superInterfaces();
-    body();
+    interfaceDeclaration(
+      PUBLIC, name(functionName.singleDeclarationSimpleName()),
+      include(this::superInterfaces)
+    );
   }
 
   private void superInterfaces() {
-    var interfaceSet = functionName.interfaceSet;
+    for (var simpleName : functionName.interfaceSet) {
+      var typeName = ClassTypeName.of(type, simpleName);
 
-    if (interfaceSet.isEmpty()) {
-      return;
-    }
-
-    _extends();
-
-    for (var name : interfaceSet) {
-      t(type, name);
+      extendsClause(typeName);
     }
   }
 

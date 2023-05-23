@@ -52,10 +52,8 @@ public class KeywordClassStepTest extends AbstractCssBootSpecTest {
       """
       package br.com.objectos.css.keyword;
 
-      import br.com.objectos.code.annotations.Generated;
       import br.com.objectos.css.type.TopValue;
 
-      @Generated("br.com.objectos.css.boot.CssBoot")
       public final class AutoKeyword extends StandardKeyword implements TopValue {
         static final AutoKeyword INSTANCE = new AutoKeyword();
 
@@ -72,9 +70,6 @@ public class KeywordClassStepTest extends AbstractCssBootSpecTest {
       """
       package br.com.objectos.css.keyword;
 
-      import br.com.objectos.code.annotations.Generated;
-
-      @Generated("br.com.objectos.css.boot.CssBoot")
       public final class DoubleKeyword extends StandardKeyword {
         static final DoubleKeyword INSTANCE = new DoubleKeyword();
 
