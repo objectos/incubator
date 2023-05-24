@@ -15,7 +15,11 @@
  */
 package br.com.objectos.css.boot.spec;
 
+import objectos.code.ClassTypeName;
+
 final class PseudoClassSelectorsGen extends AbstractSelectorStep {
+
+  private static final ClassTypeName IMPL_NAME = ClassTypeName.of(select, "PseudoClassSelector");
 
   public PseudoClassSelectorsGen(StepAdapter adapter) {
     super(adapter);
@@ -32,8 +36,8 @@ final class PseudoClassSelectorsGen extends AbstractSelectorStep {
   }
 
   @Override
-  final String getImplName() {
-    return "PseudoClassSelector";
+  final ClassTypeName getImplName() {
+    return IMPL_NAME;
   }
 
 }

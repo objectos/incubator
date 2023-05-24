@@ -15,7 +15,11 @@
  */
 package br.com.objectos.css.boot.spec;
 
+import objectos.code.ClassTypeName;
+
 final class TypeSelectorsGen extends AbstractSelectorStep {
+
+  private static final ClassTypeName IMPL_NAME = ClassTypeName.of(select, "TypeSelector");
 
   public TypeSelectorsGen(StepAdapter adapter) {
     super(adapter);
@@ -32,8 +36,8 @@ final class TypeSelectorsGen extends AbstractSelectorStep {
   }
 
   @Override
-  final String getImplName() {
-    return "TypeSelector";
+  final ClassTypeName getImplName() {
+    return IMPL_NAME;
   }
 
 }

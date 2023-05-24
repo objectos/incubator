@@ -43,12 +43,10 @@ public class TypeSelectorsGenTest extends AbstractCssBootSpecTest {
       """
       package br.com.objectos.css.select;
 
-      import br.com.objectos.code.annotations.Generated;
       import br.com.objectos.code.annotations.Ignore;
       import objectos.util.GrowableMap;
       import objectos.util.UnmodifiableMap;
 
-      @Generated("br.com.objectos.css.boot.CssBoot")
       public final class TypeSelectors {
         public static final TypeSelector a = new TypeSelector(0, "a");
 

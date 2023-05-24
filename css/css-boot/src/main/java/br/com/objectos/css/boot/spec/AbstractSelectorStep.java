@@ -18,9 +18,10 @@ package br.com.objectos.css.boot.spec;
 import br.com.objectos.code.annotations.Ignore;
 import br.com.objectos.css.boot.util.JavaNames;
 import java.util.List;
+import objectos.code.ArrayTypeName;
+import objectos.code.ClassTypeName;
+import objectos.code.ParameterizedTypeName;
 import objectos.util.GrowableList;
-import objectos.util.GrowableMap;
-import objectos.util.UnmodifiableMap;
 
 abstract class AbstractSelectorStep extends ThisTemplate {
 
@@ -39,59 +40,49 @@ abstract class AbstractSelectorStep extends ThisTemplate {
 
   @Override
   protected final void definition() {
-    _package(select);
+    var implName = getImplName();
+
+    var implArray = ArrayTypeName.of(implName);
+
+    var unmodMap = ParameterizedTypeName.of(UNMODIFIABLE_MAP, STRING, implName);
+
+    packageDeclaration(select);
 
     autoImports();
 
-    generatedAnnotation();
-    _public();
-    _final();
-    _class(getGeneratedName());
-    body(
+    classDeclaration(
+      PUBLIC, FINAL, name(getGeneratedName()),
+
       include(this::fields),
 
-      _private(), _static(), _final(),
-      t(t(select, getImplName()), dim()),
-      id("ARRAY"), ainit(include(this::constantNames)),
+      field(
+        PRIVATE, STATIC, FINAL, implArray, name("ARRAY"),
+        arrayInitializer(), include(this::constantNames)
+      ),
 
-      _private(), _static(), _final(),
-      t(t(UnmodifiableMap.class), t(String.class), t(select, getImplName())),
-      id("MAP"), invoke("buildMap"),
+      field(PRIVATE, STATIC, FINAL, unmodMap, name("MAP"), v("buildMap")),
 
-      _private(),
-      constructor(),
-      block(),
+      constructor(PRIVATE),
 
-      at(t(Ignore.class)),
-      _public(), _static(),
-      t(select, getImplName()),
       method(
-        "getByCode",
-        _int(), id("code")
-      ),
-      block(
-        _return(), n("ARRAY"), dim(n("code"))
+        annotation(Ignore.class),
+        PUBLIC, STATIC, implName, name("getByCode"),
+        parameter(INT, name("code")),
+        p(RETURN, n("ARRAY"), dim(n("code")))
       ),
 
-      at(t(Ignore.class)),
-      _public(), _static(),
-      t(select, getImplName()),
       method(
-        "getByName",
-        t(String.class), id("name")
-      ),
-      block(
-        _return(), n("MAP"), invoke("get", n("name"))
+        annotation(Ignore.class),
+        PUBLIC, STATIC, implName, name("getByName"),
+        parameter(STRING, name("name")),
+        p(RETURN, n("MAP"), v("get"), argument(n("name")))
       ),
 
-      _private(), _static(),
-      t(t(UnmodifiableMap.class), t(String.class), t(select, getImplName())),
-      method("buildMap"),
-      block(
-        _var(), id("m"), _new(t(t(GrowableMap.class), t(String.class), t(select, getImplName()))),
-        end(),
+      method(
+        PRIVATE, STATIC, unmodMap, name("buildMap"),
+        p(VAR, name("m"), NEW, ParameterizedTypeName.of(GROWABLE_MAP, STRING, implName)),
         include(this::mapStatements),
-        _return(), n("m"), invoke("toUnmodifiableMap")
+        p(RETURN, n("m"), v("toUnmodifiableMap"))
       )
     );
   }
@@ -104,7 +95,7 @@ abstract class AbstractSelectorStep extends ThisTemplate {
 
   abstract String getGeneratedName();
 
-  abstract String getImplName();
+  abstract ClassTypeName getImplName();
 
   final String toFieldName(String simpleName) {
     String fieldName;
@@ -114,34 +105,30 @@ abstract class AbstractSelectorStep extends ThisTemplate {
   }
 
   private void constantNames() {
-    nl();
+    code(NL);
 
     for (var element : elementList) {
-      n(element.fieldName);
-      end();
-
-      nl();
+      value(n(element.fieldName), NL);
     }
   }
 
   private void fields() {
+    var implTypeName = getImplName();
+
     int code = 0;
 
     for (var element : elementList) {
-      _public();
-      _static();
-      _final();
-      t(select, getImplName());
-      id(element.fieldName);
-      _new(t(select, getImplName()), i(code++), s(element.name));
+      field(
+        PUBLIC, STATIC, FINAL, implTypeName,
+        name(element.fieldName),
+        NEW, implTypeName, argument(i(code++)), argument(s(element.name))
+      );
     }
   }
 
   private void mapStatements() {
     for (var element : elementList) {
-      n("m");
-      invoke("put", s(element.name), end(), n(element.fieldName));
-      end();
+      p(n("m"), v("put"), argument(s(element.name)), argument(n(element.fieldName)));
     }
   }
 

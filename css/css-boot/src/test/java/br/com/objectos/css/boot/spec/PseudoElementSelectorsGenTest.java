@@ -45,12 +45,10 @@ public class PseudoElementSelectorsGenTest extends AbstractCssBootSpecTest {
       """
       package br.com.objectos.css.select;
 
-      import br.com.objectos.code.annotations.Generated;
       import br.com.objectos.code.annotations.Ignore;
       import objectos.util.GrowableMap;
       import objectos.util.UnmodifiableMap;
 
-      @Generated("br.com.objectos.css.boot.CssBoot")
       public final class PseudoElementSelectors {
         public static final PseudoElementSelector AFTER = new PseudoElementSelector(0, "after");
 
