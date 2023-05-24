@@ -17,10 +17,17 @@ package br.com.objectos.css.boot.spec;
 
 import java.util.Map;
 import java.util.TreeMap;
-import objectos.util.GrowableMap;
-import objectos.util.UnmodifiableMap;
+import objectos.code.ArrayTypeName;
+import objectos.code.ClassTypeName;
+import objectos.code.ParameterizedTypeName;
 
 final class StandardFunctionNameStep extends ThisTemplate {
+
+  private static final ClassTypeName FUNCTION_NAME = ClassTypeName.of(function, "FunctionName");
+
+  private static final ClassTypeName STD_FN = ClassTypeName.of(function, "StandardFunctionName");
+
+  private static final ArrayTypeName STD_FN_DIM = ArrayTypeName.of(STD_FN);
 
   private final Map<String, FunctionName> nameMap = new TreeMap<>();
 
@@ -42,102 +49,93 @@ final class StandardFunctionNameStep extends ThisTemplate {
 
   @Override
   protected final void definition() {
-    _package(function);
+    var unmodMap = ParameterizedTypeName.of(UNMODIFIABLE_MAP, STRING, STD_FN);
+
+    packageDeclaration(function);
 
     autoImports();
 
-    generatedAnnotation();
+    enumDeclaration(
+      PUBLIC, name(STD_FN), implementsClause(FUNCTION_NAME),
 
-    _public();
-    _enum("StandardFunctionName");
-    _implements();
-    t(function, "FunctionName");
-    body(
       include(this::enumConstants),
 
-      _private(), _static(), _final(),
-      t(t(function, "StandardFunctionName"), dim()),
-      id("ARRAY"), t(function, "StandardFunctionName"), invoke("values"),
-
-      _private(), _static(), _final(),
-      t(t(UnmodifiableMap.class), t(String.class), t(function, "StandardFunctionName")),
-      id("MAP"), invoke("buildMap"),
-
-      _private(), _final(),
-      t(String.class),
-      id("javaName"),
-
-      _private(), _final(),
-      t(String.class),
-      id("name"),
-
-      _private(), constructor(
-        t(String.class), id("javaName"),
-        t(String.class), id("name")
-      ), block(
-        _this(), n("javaName"), gets(), n("javaName"),
-        _this(), n("name"), gets(), n("name")
+      field(
+        PRIVATE, STATIC, FINAL, STD_FN_DIM, name("ARRAY"),
+        STD_FN, v("values")
       ),
 
-      _public(), _static(),
-      t(function, "StandardFunctionName"),
-      method("getByCode", _int(), id("code")),
-      block(
-        _return(), n("ARRAY"), dim(n("code"))
+      field(PRIVATE, STATIC, FINAL, unmodMap, name("MAP"), v("buildMap")),
+
+      field(PRIVATE, FINAL, STRING, name("javaName")),
+
+      field(PRIVATE, FINAL, STRING, name("name")),
+
+      constructor(
+        PRIVATE,
+        parameter(STRING, name("javaName")),
+        parameter(STRING, name("name")),
+
+        p(THIS, n("javaName"), IS, n("javaName")),
+        p(THIS, n("name"), IS, n("name"))
       ),
 
-      _public(), _static(),
-      t(function, "StandardFunctionName"),
-      method("getByName", t(String.class), id("name")),
-      block(
-        _return(), n("MAP"), invoke("get", n("name"))
+      method(
+        PUBLIC, STATIC, STD_FN, name("getByCode"),
+        parameter(INT, name("code")),
+        p(RETURN, n("ARRAY"), dim(n("code")))
       ),
 
-      _private(), _static(),
-      t(t(UnmodifiableMap.class), t(String.class), t(function, "StandardFunctionName")),
-      method("buildMap"),
-      block(
-        _var(), id("m"),
-        _new(t(t(GrowableMap.class), t(String.class), t(function, "StandardFunctionName"))), end(),
+      method(
+        PUBLIC, STATIC, STD_FN, name("getByName"),
+        parameter(STRING, name("name")),
+        p(RETURN, n("MAP"), v("get"), argument(n("name")))
+      ),
+
+      method(
+        PRIVATE, STATIC, unmodMap, name("buildMap"),
+        p(VAR, name("m"), NEW, ParameterizedTypeName.of(GROWABLE_MAP, STRING, STD_FN)),
         include(this::mapStatements),
-        _return(), n("m"), invoke("toUnmodifiableMap")
+        p(RETURN, n("m"), v("toUnmodifiableMap"))
       ),
 
-      _public(), _static(), _int(), method("size"),
-      block(
-        _return(), n("ARRAY"), n("length")
+      method(
+        PUBLIC, STATIC, INT, name("size"),
+        p(RETURN, n("ARRAY"), n("length"))
       ),
 
-      at(t(Override.class)),
-      _public(), _final(), _int(), method("getCode"),
-      block(
-        _return(), invoke("ordinal")
+      method(
+        annotation(Override.class),
+        PUBLIC, FINAL, INT, name("getCode"),
+        p(RETURN, v("ordinal"))
       ),
 
-      _public(), _final(), t(String.class), method("getJavaName"),
-      block(
-        _return(), n("javaName")
+      method(
+        PUBLIC, FINAL, STRING, name("getJavaName"),
+        p(RETURN, n("javaName"))
       ),
 
-      at(t(Override.class)),
-      _public(), _final(), t(String.class), method("getName"),
-      block(
-        _return(), n("name")
+      method(
+        annotation(Override.class),
+        PUBLIC, FINAL, STRING, name("getName"),
+        p(RETURN, n("name"))
       )
     );
   }
 
   private void enumConstants() {
     for (var name : nameMap.values()) {
-      enumConstant(name.enumName(), s(name.methodName()), s(name.getName()));
+      enumConstant(
+        name(name.enumName()),
+        argument(s(name.methodName())),
+        argument(s(name.getName()))
+      );
     }
   }
 
   private void mapStatements() {
     for (var name : nameMap.values()) {
-      n("m");
-      invoke("put", s(name.getName()), end(), n(name.enumName()));
-      end();
+      p(n("m"), v("put"), argument(s(name.getName())), argument(n(name.enumName())));
     }
   }
 
