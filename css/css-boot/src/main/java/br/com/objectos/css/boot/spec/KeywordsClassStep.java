@@ -16,11 +16,16 @@
 package br.com.objectos.css.boot.spec;
 
 import java.util.List;
+import objectos.code.ArrayTypeName;
+import objectos.code.ClassTypeName;
+import objectos.code.ParameterizedTypeName;
 import objectos.util.GrowableList;
-import objectos.util.GrowableMap;
-import objectos.util.UnmodifiableMap;
 
 final class KeywordsClassStep extends ThisTemplate {
+
+  private static final ClassTypeName STD_KW = ClassTypeName.of(keyword, "StandardKeyword");
+
+  private static final ArrayTypeName STD_KW_DIM = ArrayTypeName.of(STD_KW);
 
   private final List<KeywordName> keywordList = new GrowableList<>();
 
@@ -40,92 +45,78 @@ final class KeywordsClassStep extends ThisTemplate {
 
   @Override
   protected final void definition() {
-    _package(keyword);
+    var unmodMap = ParameterizedTypeName.of(UNMODIFIABLE_MAP, STRING, STD_KW);
+
+    packageDeclaration(keyword);
 
     autoImports();
 
-    generatedAnnotation();
-    _public();
-    _final();
-    _class("Keywords");
-    body(
+    classDeclaration(
+      PUBLIC, FINAL, name("Keywords"),
+
       include(this::keywords),
 
-      _private(), _static(), _final(),
-      t(t(keyword, "StandardKeyword"), dim()),
-      id("ARRAY"), ainit(include(this::constants)),
-
-      _private(), _static(), _final(),
-      t(t(UnmodifiableMap.class), t(String.class), t(keyword, "StandardKeyword")),
-      id("MAP"), invoke("buildMap"),
-
-      _private(), constructor(), block(),
-
-      _public(), _static(),
-      t(keyword, "StandardKeyword"),
-      method("getByCode", _int(), id("code")),
-      block(
-        _return(), n("ARRAY"), dim(n("code"))
+      field(
+        PRIVATE, STATIC, FINAL, STD_KW_DIM, name("ARRAY"),
+        arrayInitializer(), include(this::constants)
       ),
 
-      _public(), _static(),
-      t(keyword, "StandardKeyword"),
-      method("getByName", t(String.class), id("name")),
-      block(
-        _var(), id("k"), n("MAP"), invoke("get", n("name")),
-        _if(n("k"), equalTo(), _null()), block(
-          _throw(), _new(t(IllegalArgumentException.class), n("name"))
-        ),
-        _return(), n("k")
+      field(PRIVATE, STATIC, FINAL, unmodMap, name("MAP"), v("buildMap")),
+
+      constructor(PRIVATE),
+
+      method(
+        PUBLIC, STATIC, STD_KW, name("getByCode"),
+        parameter(INT, name("code")),
+        p(RETURN, n("ARRAY"), dim(n("code")))
       ),
 
-      _public(), _static(),
-      _boolean(),
-      method("isKeyword", t(String.class), id("name")), block(
-        _return(), n("MAP"), invoke("containsKey", n("name"))
+      method(
+        PUBLIC, STATIC, STD_KW, name("getByName"),
+        parameter(STRING, name("name")),
+        p(VAR, name("k"), n("MAP"), v("get"), argument(n("name"))),
+        p(IF, condition(n("k"), EQ, NULL), block(
+          p(THROW, NEW, IAE, argument(n("name")))
+        )),
+        p(RETURN, n("k"))
       ),
 
-      _private(), _static(),
-      t(t(UnmodifiableMap.class), t(String.class), t(keyword, "StandardKeyword")),
-      method("buildMap"), block(
-        _var(), id("m"),
-        _new(t(t(GrowableMap.class), t(String.class), t(keyword, "StandardKeyword"))), end(),
+      method(
+        PUBLIC, STATIC, BOOLEAN, name("isKeyword"),
+        parameter(STRING, name("name")),
+        p(RETURN, n("MAP"), v("containsKey"), argument(n("name")))
+      ),
+
+      method(
+        PRIVATE, STATIC, unmodMap, name("buildMap"),
+        p(VAR, name("m"), NEW, ParameterizedTypeName.of(GROWABLE_MAP, STRING, STD_KW)),
         include(this::mapStatements),
-        _return(), n("m"), invoke("toUnmodifiableMap")
+        p(RETURN, n("m"), v("toUnmodifiableMap"))
       )
     );
   }
 
   private void mapStatements() {
     for (var kw : keywordList) {
-      n("m");
-
-      invoke("put", s(kw.name), end(), n(kw.fieldName));
-
-      end();
+      p(n("m"), v("put"), argument(s(kw.name)), argument(n(kw.fieldName)));
     }
   }
 
   private void constants() {
-    nl();
+    code(NL);
 
     for (var kw : keywordList) {
-      n(kw.fieldName);
-      end();
-
-      nl();
+      code(value(n(kw.fieldName)), NL);
     }
   }
 
   private void keywords() {
     for (var kw : keywordList) {
-      _public();
-      _static();
-      _final();
-      t(keyword, kw.simpleName);
-      id(kw.fieldName);
-      t(keyword, kw.simpleName);
-      n("INSTANCE");
+      var typeName = ClassTypeName.of(keyword, kw.simpleName);
+
+      field(
+        PUBLIC, STATIC, FINAL, typeName, name(kw.fieldName), typeName, n("INSTANCE")
+      );
     }
   }
 
