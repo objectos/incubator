@@ -42,10 +42,8 @@ public class LengthUnitStepTest extends AbstractCssBootSpecTest {
       """
       package br.com.objectos.css.type;
 
-      import br.com.objectos.code.annotations.Generated;
       import java.util.Locale;
 
-      @Generated("br.com.objectos.css.boot.CssBoot")
       public enum LengthUnit {
         EM,
 

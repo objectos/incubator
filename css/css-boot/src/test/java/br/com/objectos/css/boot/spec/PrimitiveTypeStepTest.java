@@ -49,9 +49,6 @@ public class PrimitiveTypeStepTest extends AbstractCssBootSpecTest {
       """
       package br.com.objectos.css.type;
 
-      import br.com.objectos.code.annotations.Generated;
-
-      @Generated("br.com.objectos.css.boot.CssBoot")
       public interface LengthType extends BottomValue, Value {}
       """
     );
@@ -62,9 +59,6 @@ public class PrimitiveTypeStepTest extends AbstractCssBootSpecTest {
       """
       package br.com.objectos.css.type;
 
-      import br.com.objectos.code.annotations.Generated;
-
-      @Generated("br.com.objectos.css.boot.CssBoot")
       public interface PercentageType extends BottomValue, Value {}
       """
     );

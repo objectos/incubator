@@ -15,6 +15,8 @@
  */
 package br.com.objectos.css.boot.spec;
 
+import objectos.code.ClassTypeName;
+
 final class ValueTypeIfaceStep extends ThisTemplate {
 
   ValueType valueType;
@@ -32,21 +34,21 @@ final class ValueTypeIfaceStep extends ThisTemplate {
 
   @Override
   protected final void definition() {
-    _package(type);
+    packageDeclaration(type);
 
     autoImports();
 
-    generatedAnnotation();
-    _public();
-    _interface(valueType.simpleName);
-    _extends();
-    superInterfaces();
-    body();
+    interfaceDeclaration(
+      PUBLIC, name(valueType.simpleName),
+      include(this::superInterfaces)
+    );
   }
 
   private void superInterfaces() {
     for (var name : valueType.interfaceNames()) {
-      t(type, name);
+      var typeName = ClassTypeName.of(type, name);
+
+      extendsClause(typeName);
     }
   }
 

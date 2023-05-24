@@ -15,6 +15,8 @@
  */
 package br.com.objectos.css.boot.spec;
 
+import objectos.code.ClassTypeName;
+
 final class PrimitiveTypeStep extends ThisTemplate {
 
   PrimitiveType primitiveType;
@@ -32,21 +34,21 @@ final class PrimitiveTypeStep extends ThisTemplate {
 
   @Override
   protected final void definition() {
-    _package(type);
+    packageDeclaration(type);
 
     autoImports();
 
-    generatedAnnotation();
-    _public();
-    _interface(primitiveType.typeSimpleName());
-    _extends();
-    superInterfaces();
-    body();
+    interfaceDeclaration(
+      PUBLIC, name(primitiveType.typeSimpleName()),
+      include(this::superInterfaces)
+    );
   }
 
   private void superInterfaces() {
     for (var name : primitiveType.interfaceNames()) {
-      t(type, name);
+      var typeName = ClassTypeName.of(type, name);
+
+      extendsClause(typeName);
     }
   }
 

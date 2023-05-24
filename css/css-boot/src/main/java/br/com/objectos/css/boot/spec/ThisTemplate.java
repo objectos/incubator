@@ -17,6 +17,7 @@ package br.com.objectos.css.boot.spec;
 
 import br.com.objectos.code.annotations.Generated;
 import br.com.objectos.css.boot.CssBoot;
+import java.util.Locale;
 import objectos.code.ClassTypeName;
 import objectos.code.JavaTemplate;
 import objectos.util.GrowableMap;
@@ -27,6 +28,8 @@ abstract class ThisTemplate extends JavaTemplate implements Step {
   static final ClassTypeName GROWABLE_MAP = ClassTypeName.of(GrowableMap.class);
 
   static final ClassTypeName IAE = ClassTypeName.of(IllegalArgumentException.class);
+
+  static final ClassTypeName LOCALE = ClassTypeName.of(Locale.class);
 
   static final ClassTypeName STRING = ClassTypeName.of(String.class);
 

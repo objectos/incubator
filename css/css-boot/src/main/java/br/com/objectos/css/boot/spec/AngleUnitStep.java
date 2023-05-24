@@ -15,7 +15,6 @@
  */
 package br.com.objectos.css.boot.spec;
 
-import java.util.Locale;
 import java.util.Set;
 import java.util.TreeSet;
 import objectos.code.ArrayTypeName;
@@ -26,8 +25,6 @@ final class AngleUnitStep extends ThisTemplate {
   private static final ClassTypeName ANGLE_UNIT = ClassTypeName.of(type, "AngleUnit");
 
   private static final ArrayTypeName ANGLE_UNIT_DIM = ArrayTypeName.of(ANGLE_UNIT);
-
-  private static final ClassTypeName LOCALE = ClassTypeName.of(Locale.class);
 
   private final Set<String> simpleNames = new TreeSet<>();
 
