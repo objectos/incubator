@@ -17,10 +17,15 @@ package br.com.objectos.css.boot.spec;
 
 import java.util.Set;
 import java.util.TreeSet;
-import objectos.util.GrowableMap;
-import objectos.util.UnmodifiableMap;
+import objectos.code.ArrayTypeName;
+import objectos.code.ClassTypeName;
+import objectos.code.ParameterizedTypeName;
 
 final class GeneratedColorStep extends ThisTemplate {
+
+  private static final ClassTypeName COLOR_NAME = ClassTypeName.of(type, "ColorName");
+
+  private static final ArrayTypeName COLOR_NAME_DIM = ArrayTypeName.of(COLOR_NAME);
 
   private final Set<ColorName> colorNames = new TreeSet<>();
 
@@ -42,57 +47,53 @@ final class GeneratedColorStep extends ThisTemplate {
 
   @Override
   protected final void definition() {
-    _package(type);
+    var unmodMap = ParameterizedTypeName.of(UNMODIFIABLE_MAP, STRING, COLOR_NAME);
+
+    packageDeclaration(type);
 
     autoImports();
 
-    generatedAnnotation();
-    _abstract();
-    _class("GeneratedColor");
-    body(
+    classDeclaration(
+      ABSTRACT, name("GeneratedColor"),
+
       include(this::colorFields),
 
-      _private(), _static(), _final(),
-      t(t(type, "ColorName"), dim()),
-      id("ARRAY"), ainit(include(this::constantNames)),
-
-      _private(), _static(), _final(),
-      t(t(UnmodifiableMap.class), t(String.class), t(type, "ColorName")),
-      id("MAP"), invoke("buildMap"),
-
-      _public(), _static(),
-      t(type, "ColorName"),
-      method("getByCode", _int(), id("code")),
-      block(
-        _return(), n("ARRAY"), dim(n("code"))
+      field(
+        PRIVATE, STATIC, FINAL, COLOR_NAME_DIM, name("ARRAY"),
+        arrayInitializer(), include(this::constantNames)
       ),
 
-      _public(), _static(),
-      t(type, "ColorName"),
-      method("getByName", t(String.class), id("name")),
-      block(
-        _var(), id("c"), n("MAP"), invoke("get", n("name")),
-        _if(n("c"), equalTo(), _null()), block(
-          _throw(), _new(t(IllegalArgumentException.class), n("name"))
-        ),
-        _return(), n("c")
+      field(
+        PRIVATE, STATIC, FINAL, unmodMap, name("MAP"), v("buildMap")
       ),
 
-      _public(), _static(),
-      _boolean(),
-      method("isColor", t(String.class), id("name")),
-      block(
-        _return(), n("MAP"), invoke("containsKey", n("name"))
+      method(
+        PUBLIC, STATIC, COLOR_NAME, name("getByCode"),
+        parameter(INT, name("code")),
+        p(RETURN, n("ARRAY"), dim(n("code")))
       ),
 
-      _private(), _static(),
-      t(t(UnmodifiableMap.class), t(String.class), t(type, "ColorName")),
-      method("buildMap"),
-      block(
-        _var(), id("m"), _new(t(t(GrowableMap.class), t(String.class), t(type, "ColorName"))),
-        end(),
+      method(
+        PUBLIC, STATIC, COLOR_NAME, name("getByName"),
+        parameter(STRING, name("name")),
+        p(VAR, name("c"), n("MAP"), v("get"), argument(n("name"))),
+        p(IF, condition(n("c"), EQ, NULL), block(
+          p(THROW, NEW, IAE, argument(n("name")))
+        )),
+        p(RETURN, n("c"))
+      ),
+
+      method(
+        PUBLIC, STATIC, BOOLEAN, name("isColor"),
+        parameter(STRING, name("name")),
+        p(RETURN, n("MAP"), v("containsKey"), argument(n("name")))
+      ),
+
+      method(
+        PRIVATE, STATIC, unmodMap, name("buildMap"),
+        p(VAR, name("m"), NEW, ParameterizedTypeName.of(GROWABLE_MAP, STRING, COLOR_NAME)),
         include(this::mapStatements),
-        _return(), n("m"), invoke("toUnmodifiableMap")
+        p(RETURN, n("m"), v("toUnmodifiableMap"))
       )
     );
   }
@@ -101,29 +102,25 @@ final class GeneratedColorStep extends ThisTemplate {
     int code = 0;
 
     for (var color : colorNames) {
-      _public();
-      _static();
-      _final();
-      t(type, "ColorName");
-      id(color.identifier);
-      _new(t(type, "ColorName"), i(code++), s(color.name));
+      field(
+        PUBLIC, STATIC, FINAL, COLOR_NAME,
+        name(color.identifier),
+        NEW, COLOR_NAME, argument(i(code++)), argument(s(color.name))
+      );
     }
   }
 
   private void constantNames() {
-    nl();
+    code(NL);
 
     for (var color : colorNames) {
-      n(color.name);
-      end();
-
-      nl();
+      code(value(n(color.name)), NL);
     }
   }
 
   private void mapStatements() {
     for (var color : colorNames) {
-      code(n("m"), invoke("put", s(color.name), end(), n(color.identifier)), end());
+      p(n("m"), v("put"), argument(s(color.name)), argument(n(color.identifier)));
     }
   }
 

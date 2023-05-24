@@ -19,10 +19,18 @@ import br.com.objectos.code.annotations.Generated;
 import br.com.objectos.css.boot.CssBoot;
 import objectos.code.ClassTypeName;
 import objectos.code.JavaTemplate;
+import objectos.util.GrowableMap;
+import objectos.util.UnmodifiableMap;
 
 abstract class ThisTemplate extends JavaTemplate implements Step {
 
+  static final ClassTypeName GROWABLE_MAP = ClassTypeName.of(GrowableMap.class);
+
+  static final ClassTypeName IAE = ClassTypeName.of(IllegalArgumentException.class);
+
   static final ClassTypeName STRING = ClassTypeName.of(String.class);
+
+  static final ClassTypeName UNMODIFIABLE_MAP = ClassTypeName.of(UnmodifiableMap.class);
 
   static final String css = "br.com.objectos.css";
 
