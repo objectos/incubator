@@ -60,10 +60,7 @@ final class StandardFunctionNameStep extends ThisTemplate {
 
       include(this::enumConstants),
 
-      field(
-        PRIVATE, STATIC, FINAL, STD_FN_DIM, name("ARRAY"),
-        STD_FN, v("values")
-      ),
+      field(PRIVATE, STATIC, FINAL, STD_FN_DIM, name("ARRAY"), STD_FN, v("values")),
 
       field(PRIVATE, STATIC, FINAL, unmodMap, name("MAP"), v("buildMap")),
 

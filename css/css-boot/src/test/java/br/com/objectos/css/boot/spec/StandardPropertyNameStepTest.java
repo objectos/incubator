@@ -55,11 +55,9 @@ public class StandardPropertyNameStepTest extends AbstractCssBootSpecTest {
       """
       package br.com.objectos.css.property;
 
-      import br.com.objectos.code.annotations.Generated;
       import objectos.util.GrowableMap;
       import objectos.util.UnmodifiableMap;
 
-      @Generated("br.com.objectos.css.boot.CssBoot")
       public enum StandardPropertyName implements PropertyName {
         CLEAR("clear", "clear"),
 

@@ -17,10 +17,17 @@ package br.com.objectos.css.boot.spec;
 
 import java.util.Map;
 import java.util.TreeMap;
-import objectos.util.GrowableMap;
-import objectos.util.UnmodifiableMap;
+import objectos.code.ArrayTypeName;
+import objectos.code.ClassTypeName;
+import objectos.code.ParameterizedTypeName;
 
 final class StandardPropertyNameStep extends ThisTemplate {
+
+  private static final ClassTypeName PN = ClassTypeName.of(property, "PropertyName");
+
+  private static final ClassTypeName STD_PN = ClassTypeName.of(property, "StandardPropertyName");
+
+  private static final ArrayTypeName STD_PN_DIM = ArrayTypeName.of(STD_PN);
 
   private final Map<String, Property> propertyMap = new TreeMap<>();
 
@@ -42,90 +49,73 @@ final class StandardPropertyNameStep extends ThisTemplate {
 
   @Override
   protected final void definition() {
-    _package(property);
+    var unmodMap = ParameterizedTypeName.of(UNMODIFIABLE_MAP, STRING, STD_PN);
+
+    packageDeclaration(property);
 
     autoImports();
 
-    generatedAnnotation();
-    _public();
-    _enum("StandardPropertyName");
-    _implements();
-    t(property, "PropertyName");
-    body(
+    enumDeclaration(
+      PUBLIC, name(STD_PN), implementsClause(PN),
+
       include(this::constants),
 
-      _private(), _static(), _final(),
-      t(t(property, "StandardPropertyName"), dim()),
-      id("ARRAY"), t(property, "StandardPropertyName"), invoke("values"),
+      field(PRIVATE, STATIC, FINAL, STD_PN_DIM, name("ARRAY"), STD_PN, v("values")),
 
-      _private(), _static(), _final(),
-      t(t(UnmodifiableMap.class), t(String.class), t(property, "StandardPropertyName")),
-      id("MAP"), invoke("buildMap"),
+      field(PRIVATE, STATIC, FINAL, unmodMap, name("MAP"), v("buildMap")),
 
-      _private(), _final(),
-      t(String.class), id("javaName"),
+      field(PRIVATE, FINAL, STRING, name("javaName")),
 
-      _private(), _final(),
-      t(String.class), id("name"),
+      field(PRIVATE, FINAL, STRING, name("name")),
 
-      _private(), constructor(
-        t(String.class), id("javaName"),
-        t(String.class), id("name")
-      ), block(
-        _this(), n("javaName"), gets(), n("javaName"),
-        _this(), n("name"), gets(), n("name")
+      constructor(
+        PRIVATE,
+        parameter(STRING, name("javaName")),
+        parameter(STRING, name("name")),
+
+        p(THIS, n("javaName"), IS, n("javaName")),
+        p(THIS, n("name"), IS, n("name"))
       ),
 
-      _public(), _static(),
-      t(property, "StandardPropertyName"),
       method(
-        "getByCode",
-        _int(), id("code")
-      ),
-      block(
-        _return(), n("ARRAY"), dim(n("code"))
+        PUBLIC, STATIC, STD_PN, name("getByCode"),
+        parameter(INT, name("code")),
+        p(RETURN, n("ARRAY"), dim(n("code")))
       ),
 
-      _public(), _static(),
-      t(property, "StandardPropertyName"),
       method(
-        "getByName",
-        t(String.class), id("name")
-      ),
-      block(
-        _return(), n("MAP"), invoke("get", n("name"))
+        PUBLIC, STATIC, STD_PN, name("getByName"),
+        parameter(STRING, name("name")),
+        p(RETURN, n("MAP"), v("get"), argument(n("name")))
       ),
 
-      _private(), _static(),
-      t(t(UnmodifiableMap.class), t(String.class), t(property, "StandardPropertyName")),
-      method("buildMap"),
-      block(
-        _var(), id("m"),
-        _new(t(t(GrowableMap.class), t(String.class), t(property, "StandardPropertyName"))), end(),
+      method(
+        PRIVATE, STATIC, unmodMap, name("buildMap"),
+        p(VAR, name("m"), NEW, ParameterizedTypeName.of(GROWABLE_MAP, STRING, STD_PN)),
         include(this::mapStatements),
-        _return(), n("m"), invoke("toUnmodifiableMap")
+        p(RETURN, n("m"), v("toUnmodifiableMap"))
       ),
 
-      _public(), _static(), _int(), method("size"),
-      block(
-        _return(), n("ARRAY"), n("length")
+      method(
+        PUBLIC, STATIC, INT, name("size"),
+        p(RETURN, n("ARRAY"), n("length"))
       ),
 
-      at(t(Override.class)),
-      _public(), _final(), _int(), method("getCode"),
-      block(
-        _return(), invoke("ordinal")
+      method(
+        annotation(Override.class),
+        PUBLIC, FINAL, INT, name("getCode"),
+        p(RETURN, v("ordinal"))
       ),
 
-      _public(), _final(), t(String.class), method("getJavaName"),
-      block(
-        _return(), n("javaName")
+      method(
+        PUBLIC, FINAL, STRING, name("getJavaName"),
+        p(RETURN, n("javaName"))
       ),
 
-      at(t(Override.class)),
-      _public(), _final(), t(String.class), method("getName"),
-      block(
-        _return(), n("name")
+      method(
+        annotation(Override.class),
+        PUBLIC, FINAL, STRING, name("getName"),
+        p(RETURN, n("name"))
       )
     );
   }
@@ -136,7 +126,7 @@ final class StandardPropertyNameStep extends ThisTemplate {
 
       var methodName = property.methodName();
 
-      enumConstant(enumName, s(methodName), s(property.name));
+      enumConstant(name(enumName), argument(s(methodName)), argument(s(property.name)));
     }
   }
 
@@ -144,9 +134,7 @@ final class StandardPropertyNameStep extends ThisTemplate {
     for (var property : propertyMap.values()) {
       var enumName = property.enumName();
 
-      n("m");
-      invoke("put", s(property.name), end(), n(enumName));
-      end();
+      p(n("m"), v("put"), argument(s(property.name)), argument(n(enumName)));
     }
   }
 
