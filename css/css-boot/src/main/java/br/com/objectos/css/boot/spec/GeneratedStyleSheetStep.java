@@ -26,10 +26,20 @@ import br.com.objectos.css.boot.spec.MethodSignature.Signature5;
 import br.com.objectos.css.boot.spec.MethodSignature.Signature6;
 import br.com.objectos.css.boot.util.JavaNames;
 import java.util.List;
-import objectos.code.tmpl.ArgsPart;
+import objectos.code.ClassTypeName;
+import objectos.code.tmpl.ConstructorDeclarationInstruction;
+import objectos.code.tmpl.TypeName;
 import objectos.util.GrowableList;
 
 final class GeneratedStyleSheetStep extends ThisTemplate {
+
+  private static final ClassTypeName CSS = ClassTypeName.of(css, "Css");
+
+  private static final ClassTypeName STD_FN = ClassTypeName.of(
+    ThisTemplate.function, "StandardFunctionName");
+
+  private static final ClassTypeName STD_PN = ClassTypeName.of(
+    ThisTemplate.property, "StandardPropertyName");
 
   private final class ThisAbstract1 extends ThisSignature {
     private final Abstract1 signature;
@@ -41,12 +51,13 @@ final class GeneratedStyleSheetStep extends ThisTemplate {
 
     @Override
     final void execute() {
-      _protected();
-      _abstract();
-      t(sheet, "GeneratedStyleSheet", property.singleDeclarationSimpleName());
+      var returnType = ClassTypeName.of(
+        sheet, "GeneratedStyleSheet", property.singleDeclarationSimpleName()
+      );
+
       method(
-        property.methodName(),
-        t(signature.type), id(signature.name)
+        PROTECTED, ABSTRACT, returnType, name(property.methodName()),
+        parameter(t(signature.type), name(signature.name))
       );
     }
   }
@@ -58,19 +69,21 @@ final class GeneratedStyleSheetStep extends ThisTemplate {
 
     @Override
     final void execute() {
-      _protected();
-      _final();
-      t(sheet, "GeneratedStyleSheet", property.multiDeclarationSimpleName());
-      method(
-        property.methodName(),
-        t(sheet, "GeneratedStyleSheet", property.singleDeclarationSimpleName()), ellipsis(),
-        id("declarations")
+      var returnType = ClassTypeName.of(
+        sheet, "GeneratedStyleSheet", property.multiDeclarationSimpleName()
       );
-      block(
-        _return(), invoke(
-          property.addMethodName(),
-          funcOrProp(), n(property.enumName()), end(),
-          n("declarations")
+
+      var paramType = ClassTypeName.of(
+        sheet, "GeneratedStyleSheet", property.singleDeclarationSimpleName()
+      );
+
+      method(
+        PROTECTED, FINAL, returnType, name(property.methodName()),
+        parameter(paramType, ELLIPSIS, name("declarations")),
+        p(
+          RETURN, v(property.addMethodName()),
+          argument(funcOrProp(), n(property.enumName())),
+          argument(n("declarations"))
         )
       );
     }
@@ -84,19 +97,21 @@ final class GeneratedStyleSheetStep extends ThisTemplate {
 
     void execute() {}
 
-    final ArgsPart funcOrProp() {
+    final ClassTypeName funcOrProp() {
       if (property instanceof FunctionName) {
-        return t(ThisTemplate.function, "StandardFunctionName");
+        return STD_FN;
       } else {
-        return t(ThisTemplate.property, "StandardPropertyName");
+        return STD_PN;
       }
     }
 
-    final ArgsPart funcOrPropSingle() {
+    final ClassTypeName funcOrPropSingle() {
       if (property instanceof FunctionName) {
-        return t(ThisTemplate.function, property.singleDeclarationSimpleName());
+        return ClassTypeName.of(
+          ThisTemplate.function, property.singleDeclarationSimpleName());
       } else {
-        return t(sheet, "GeneratedStyleSheet", property.singleDeclarationSimpleName());
+        return ClassTypeName.of(
+          sheet, "GeneratedStyleSheet", property.singleDeclarationSimpleName());
       }
     }
   }
@@ -111,18 +126,13 @@ final class GeneratedStyleSheetStep extends ThisTemplate {
 
     @Override
     final void execute() {
-      _protected();
-      _final();
-      funcOrPropSingle();
       method(
-        property.methodName(),
-        t(signature.type), id(signature.name)
-      );
-      block(
-        _return(), invoke(
-          property.addMethodName(),
-          funcOrProp(), n(property.enumName()), end(),
-          n(signature.name), end()
+        PROTECTED, FINAL, funcOrPropSingle(), name(property.methodName()),
+        parameter(t(signature.type), name(signature.name)),
+        p(
+          RETURN, v(property.addMethodName()),
+          argument(funcOrProp(), n(property.enumName())),
+          argument(n(signature.name))
         )
       );
     }
@@ -138,20 +148,15 @@ final class GeneratedStyleSheetStep extends ThisTemplate {
 
     @Override
     final void execute() {
-      _protected();
-      _final();
-      funcOrPropSingle();
       method(
-        property.methodName(),
-        t(signature.type0), id(signature.name0),
-        t(signature.type1), id(signature.name1)
-      );
-      block(
-        _return(), invoke(
-          property.addMethodName(),
-          funcOrProp(), n(property.enumName()), end(),
-          n(signature.name0), end(),
-          n(signature.name1), end()
+        PROTECTED, FINAL, funcOrPropSingle(), name(property.methodName()),
+        parameter(t(signature.type0), name(signature.name0)),
+        parameter(t(signature.type1), name(signature.name1)),
+        p(
+          RETURN, v(property.addMethodName()),
+          argument(funcOrProp(), n(property.enumName())),
+          argument(n(signature.name0)),
+          argument(n(signature.name1))
         )
       );
     }
@@ -167,22 +172,17 @@ final class GeneratedStyleSheetStep extends ThisTemplate {
 
     @Override
     final void execute() {
-      _protected();
-      _final();
-      funcOrPropSingle();
       method(
-        property.methodName(),
-        t(signature.type0), id(signature.name0),
-        t(signature.type1), id(signature.name1),
-        t(signature.type2), id(signature.name2)
-      );
-      block(
-        _return(), invoke(
-          property.addMethodName(),
-          funcOrProp(), n(property.enumName()), end(),
-          n(signature.name0), end(),
-          n(signature.name1), end(),
-          n(signature.name2), end()
+        PROTECTED, FINAL, funcOrPropSingle(), name(property.methodName()),
+        parameter(t(signature.type0), name(signature.name0)),
+        parameter(t(signature.type1), name(signature.name1)),
+        parameter(t(signature.type2), name(signature.name2)),
+        p(
+          RETURN, v(property.addMethodName()),
+          argument(funcOrProp(), n(property.enumName())),
+          argument(n(signature.name0)),
+          argument(n(signature.name1)),
+          argument(n(signature.name2))
         )
       );
     }
@@ -198,24 +198,19 @@ final class GeneratedStyleSheetStep extends ThisTemplate {
 
     @Override
     final void execute() {
-      _protected();
-      _final();
-      funcOrPropSingle();
       method(
-        property.methodName(),
-        t(signature.type0), id(signature.name0),
-        t(signature.type1), id(signature.name1),
-        t(signature.type2), id(signature.name2),
-        t(signature.type3), id(signature.name3)
-      );
-      block(
-        _return(), invoke(
-          property.addMethodName(),
-          funcOrProp(), n(property.enumName()), end(),
-          n(signature.name0), end(),
-          n(signature.name1), end(),
-          n(signature.name2), end(),
-          n(signature.name3), end()
+        PROTECTED, FINAL, funcOrPropSingle(), name(property.methodName()),
+        parameter(t(signature.type0), name(signature.name0)),
+        parameter(t(signature.type1), name(signature.name1)),
+        parameter(t(signature.type2), name(signature.name2)),
+        parameter(t(signature.type3), name(signature.name3)),
+        p(
+          RETURN, v(property.addMethodName()),
+          argument(funcOrProp(), n(property.enumName())),
+          argument(n(signature.name0)),
+          argument(n(signature.name1)),
+          argument(n(signature.name2)),
+          argument(n(signature.name3))
         )
       );
     }
@@ -231,26 +226,21 @@ final class GeneratedStyleSheetStep extends ThisTemplate {
 
     @Override
     final void execute() {
-      _protected();
-      _final();
-      funcOrPropSingle();
       method(
-        property.methodName(),
-        t(signature.type0), id(signature.name0),
-        t(signature.type1), id(signature.name1),
-        t(signature.type2), id(signature.name2),
-        t(signature.type3), id(signature.name3),
-        t(signature.type4), id(signature.name4)
-      );
-      block(
-        _return(), invoke(
-          property.addMethodName(),
-          funcOrProp(), n(property.enumName()), end(),
-          n(signature.name0), end(),
-          n(signature.name1), end(),
-          n(signature.name2), end(),
-          n(signature.name3), end(),
-          n(signature.name4), end()
+        PROTECTED, FINAL, funcOrPropSingle(), name(property.methodName()),
+        parameter(t(signature.type0), name(signature.name0)),
+        parameter(t(signature.type1), name(signature.name1)),
+        parameter(t(signature.type2), name(signature.name2)),
+        parameter(t(signature.type3), name(signature.name3)),
+        parameter(t(signature.type4), name(signature.name4)),
+        p(
+          RETURN, v(property.addMethodName()),
+          argument(funcOrProp(), n(property.enumName())),
+          argument(n(signature.name0)),
+          argument(n(signature.name1)),
+          argument(n(signature.name2)),
+          argument(n(signature.name3)),
+          argument(n(signature.name4))
         )
       );
     }
@@ -266,56 +256,47 @@ final class GeneratedStyleSheetStep extends ThisTemplate {
 
     @Override
     final void execute() {
-      _protected();
-      _final();
-      funcOrPropSingle();
       method(
-        property.methodName(),
-        t(signature.type0), id(signature.name0),
-        t(signature.type1), id(signature.name1),
-        t(signature.type2), id(signature.name2),
-        t(signature.type3), id(signature.name3),
-        t(signature.type4), id(signature.name4),
-        t(signature.type5), id(signature.name5)
-      );
-      block(
-        _return(), invoke(
-          property.addMethodName(),
-          funcOrProp(), n(property.enumName()), end(),
-          n(signature.name0), end(),
-          n(signature.name1), end(),
-          n(signature.name2), end(),
-          n(signature.name3), end(),
-          n(signature.name4), end(),
-          n(signature.name5), end()
+        PROTECTED, FINAL, funcOrPropSingle(), name(property.methodName()),
+        parameter(t(signature.type0), name(signature.name0)),
+        parameter(t(signature.type1), name(signature.name1)),
+        parameter(t(signature.type2), name(signature.name2)),
+        parameter(t(signature.type3), name(signature.name3)),
+        parameter(t(signature.type4), name(signature.name4)),
+        parameter(t(signature.type5), name(signature.name5)),
+        p(
+          RETURN, v(property.addMethodName()),
+          argument(funcOrProp(), n(property.enumName())),
+          argument(n(signature.name0)),
+          argument(n(signature.name1)),
+          argument(n(signature.name2)),
+          argument(n(signature.name3)),
+          argument(n(signature.name4)),
+          argument(n(signature.name5))
         )
       );
     }
   }
 
   private final class ThisSigZero extends ThisSignature {
+    private static final ClassTypeName ZERO = ClassTypeName.of(type, "Zero");
+
     public ThisSigZero(FunctionOrProperty property, SigZero signature) {
       super(property);
     }
 
     @Override
     final void execute() {
-      _protected();
-      _final();
-      funcOrPropSingle();
       method(
-        property.methodName(),
-        t(type, "Zero"), id("zero")
-      );
-      block(
-        _return(), invoke(
-          property.addMethodName(),
-          funcOrProp(), n(property.enumName()), end(),
-          i(0)
+        PROTECTED, FINAL, funcOrPropSingle(), name(property.methodName()),
+        parameter(ZERO, name("zero")),
+        p(
+          RETURN, v(property.addMethodName()),
+          argument(funcOrProp(), n(property.enumName())),
+          argument(i(0))
         )
       );
     }
-
   }
 
   private final List<String> angleUnitList = new GrowableList<>();
@@ -445,17 +426,25 @@ final class GeneratedStyleSheetStep extends ThisTemplate {
 
   @Override
   protected final void definition() {
-    _package(sheet);
+    var anyDeclaration = ClassTypeName.of(sheet, "GeneratedStyleSheet", "AnyDeclaration");
+    var anyFunction = ClassTypeName.of(sheet, "GeneratedStyleSheet", "AnyFunction");
+    var multiDeclarationElem = ClassTypeName.of(sheet, "MultiDeclarationElement");
+    var valueType = ClassTypeName.of(type, "Value");
+    var angleType = ClassTypeName.of(type, "AngleType");
+    var angleUnit = ClassTypeName.of(type, "AngleUnit");
+    var lengthType = ClassTypeName.of(type, "LengthType");
+    var lengthUnit = ClassTypeName.of(type, "LengthUnit");
+
+    packageDeclaration(sheet);
 
     autoImports();
 
-    generatedAnnotation();
-    _abstract();
-    _class("GeneratedStyleSheet");
-    body(
+    classDeclaration(
+      ABSTRACT, name("GeneratedStyleSheet"),
+
       include(this::fields),
 
-      constructor(), block(),
+      constructor(new ConstructorDeclarationInstruction[] {}),
 
       include(this::angleMethods),
 
@@ -463,139 +452,109 @@ final class GeneratedStyleSheetStep extends ThisTemplate {
 
       include(this::propertyMethods),
 
-      _abstract(),
-      t(sheet, "GeneratedStyleSheet", "AnyDeclaration"),
       method(
-        "addDeclaration",
-        t(property, "StandardPropertyName"), id("name"),
-        _int(), id("value")
+        ABSTRACT, anyDeclaration, name("addDeclaration"),
+        parameter(STD_PN, name("name")),
+        parameter(INT, name("value"))
       ),
 
-      _abstract(),
-      t(sheet, "GeneratedStyleSheet", "AnyDeclaration"),
       method(
-        "addDeclaration",
-        t(property, "StandardPropertyName"), id("name"),
-        _double(), id("value")
+        ABSTRACT, anyDeclaration, name("addDeclaration"),
+        parameter(STD_PN, name("name")),
+        parameter(DOUBLE, name("value"))
       ),
 
-      _abstract(),
-      t(sheet, "GeneratedStyleSheet", "AnyDeclaration"),
       method(
-        "addDeclaration",
-        t(property, "StandardPropertyName"), id("name"),
-        t(sheet, "MultiDeclarationElement"), ellipsis(), id("elements")
+        ABSTRACT, anyDeclaration, name("addDeclaration"),
+        parameter(STD_PN, name("name")),
+        parameter(multiDeclarationElem, ELLIPSIS, name("elements"))
       ),
 
-      _abstract(),
-      t(sheet, "GeneratedStyleSheet", "AnyDeclaration"),
       method(
-        "addDeclaration",
-        t(property, "StandardPropertyName"), id("name"),
-        t(String.class), id("value")
+        ABSTRACT, anyDeclaration, name("addDeclaration"),
+        parameter(STD_PN, name("name")),
+        parameter(STRING, name("value"))
       ),
 
-      _abstract(),
-      t(sheet, "GeneratedStyleSheet", "AnyDeclaration"),
       method(
-        "addDeclaration",
-        t(property, "StandardPropertyName"), id("name"),
-        t(type, "Value"), id("v1")
+        ABSTRACT, anyDeclaration, name("addDeclaration"),
+        parameter(STD_PN, name("name")),
+        parameter(valueType, name("v1"))
       ),
 
-      _abstract(),
-      t(sheet, "GeneratedStyleSheet", "AnyDeclaration"),
       method(
-        "addDeclaration",
-        t(property, "StandardPropertyName"), id("name"),
-        t(type, "Value"), id("v1"),
-        t(type, "Value"), id("v2")
+        ABSTRACT, anyDeclaration, name("addDeclaration"),
+        parameter(STD_PN, name("name")),
+        parameter(valueType, name("v1")),
+        parameter(valueType, name("v2"))
       ),
 
-      _abstract(),
-      t(sheet, "GeneratedStyleSheet", "AnyDeclaration"),
       method(
-        "addDeclaration",
-        t(property, "StandardPropertyName"), id("name"),
-        t(type, "Value"), id("v1"),
-        t(type, "Value"), id("v2"),
-        t(type, "Value"), id("v3")
+        ABSTRACT, anyDeclaration, name("addDeclaration"),
+        parameter(STD_PN, name("name")),
+        parameter(valueType, name("v1")),
+        parameter(valueType, name("v2")),
+        parameter(valueType, name("v3"))
       ),
 
-      _abstract(),
-      t(sheet, "GeneratedStyleSheet", "AnyDeclaration"),
       method(
-        "addDeclaration",
-        t(property, "StandardPropertyName"), id("name"),
-        t(type, "Value"), id("v1"),
-        t(type, "Value"), id("v2"),
-        t(type, "Value"), id("v3"),
-        t(type, "Value"), id("v4")
+        ABSTRACT, anyDeclaration, name("addDeclaration"),
+        parameter(STD_PN, name("name")),
+        parameter(valueType, name("v1")),
+        parameter(valueType, name("v2")),
+        parameter(valueType, name("v3")),
+        parameter(valueType, name("v4"))
       ),
 
-      _abstract(),
-      t(sheet, "GeneratedStyleSheet", "AnyDeclaration"),
       method(
-        "addDeclaration",
-        t(property, "StandardPropertyName"), id("name"),
-        t(type, "Value"), id("v1"),
-        t(type, "Value"), id("v2"),
-        t(type, "Value"), id("v3"),
-        t(type, "Value"), id("v4"),
-        t(type, "Value"), id("v5")
+        ABSTRACT, anyDeclaration, name("addDeclaration"),
+        parameter(STD_PN, name("name")),
+        parameter(valueType, name("v1")),
+        parameter(valueType, name("v2")),
+        parameter(valueType, name("v3")),
+        parameter(valueType, name("v4")),
+        parameter(valueType, name("v5"))
       ),
 
-      _abstract(),
-      t(sheet, "GeneratedStyleSheet", "AnyDeclaration"),
       method(
-        "addDeclaration",
-        t(property, "StandardPropertyName"), id("name"),
-        t(type, "Value"), id("v1"),
-        t(type, "Value"), id("v2"),
-        t(type, "Value"), id("v3"),
-        t(type, "Value"), id("v4"),
-        t(type, "Value"), id("v5"),
-        t(type, "Value"), id("v6")
+        ABSTRACT, anyDeclaration, name("addDeclaration"),
+        parameter(STD_PN, name("name")),
+        parameter(valueType, name("v1")),
+        parameter(valueType, name("v2")),
+        parameter(valueType, name("v3")),
+        parameter(valueType, name("v4")),
+        parameter(valueType, name("v5")),
+        parameter(valueType, name("v6"))
       ),
 
-      _abstract(),
-      t(sheet, "GeneratedStyleSheet", "AnyFunction"),
       method(
-        "addFunction",
-        t(function, "StandardFunctionName"), id("name"),
-        t(type, "Value"), id("v1")
+        ABSTRACT, anyFunction, name("addFunction"),
+        parameter(STD_FN, name("name")),
+        parameter(valueType, name("v1"))
       ),
 
-      _abstract(),
-      t(type, "AngleType"),
       method(
-        "getAngle",
-        t(type, "AngleUnit"), id("unit"),
-        _double(), id("value")
+        ABSTRACT, angleType, name("getAngle"),
+        parameter(angleUnit, name("unit")),
+        parameter(DOUBLE, name("value"))
       ),
 
-      _abstract(),
-      t(type, "AngleType"),
       method(
-        "getAngle",
-        t(type, "AngleUnit"), id("unit"),
-        _int(), id("value")
+        ABSTRACT, angleType, name("getAngle"),
+        parameter(angleUnit, name("unit")),
+        parameter(INT, name("value"))
       ),
 
-      _abstract(),
-      t(type, "LengthType"),
       method(
-        "getLength",
-        t(type, "LengthUnit"), id("unit"),
-        _double(), id("value")
+        ABSTRACT, lengthType, name("getLength"),
+        parameter(lengthUnit, name("unit")),
+        parameter(DOUBLE, name("value"))
       ),
 
-      _abstract(),
-      t(type, "LengthType"),
       method(
-        "getLength",
-        t(type, "LengthUnit"), id("unit"),
-        _int(), id("value")
+        ABSTRACT, lengthType, name("getLength"),
+        parameter(lengthUnit, name("unit")),
+        parameter(INT, name("value"))
       ),
 
       include(this::propertyInterfaces)
@@ -603,143 +562,143 @@ final class GeneratedStyleSheetStep extends ThisTemplate {
   }
 
   private void propertyInterfaces() {
+    var declaration = ClassTypeName.of(sheet, "Declaration");
+
+    var multiDeclaration = ClassTypeName.of(sheet, "MultiDeclarationElement");
+
     for (var property : propertyList) {
       PropertyKind kind = property.kind;
 
       switch (kind) {
         case HASH -> {
-          _protected();
-          _interface(property.multiDeclarationSimpleName());
-          _extends();
-          t(sheet, "Declaration");
-          body();
+          interfaceDeclaration(
+            PROTECTED, name(property.multiDeclarationSimpleName()),
+            extendsClause(declaration)
+          );
 
-          _protected();
-          _interface(property.singleDeclarationSimpleName());
-          _extends();
-          t(sheet, "MultiDeclarationElement");
-          body();
+          interfaceDeclaration(
+            PROTECTED, name(property.singleDeclarationSimpleName()),
+            extendsClause(multiDeclaration)
+          );
         }
 
         case STANDARD -> {
-          _protected();
-          _interface(property.singleDeclarationSimpleName());
-          _extends();
-          t(sheet, "Declaration");
-          body();
+          interfaceDeclaration(
+            PROTECTED, name(property.singleDeclarationSimpleName()),
+            extendsClause(declaration)
+          );
         }
       }
     }
 
-    _interface("AnyDeclaration");
-    _extends();
-    for (var simplName : anyDeclarationList) {
-      t(sheet, "GeneratedStyleSheet", simplName);
-    }
-    body();
+    interfaceDeclaration(
+      name("AnyDeclaration"),
+      include(() -> {
+        for (var simplName : anyDeclarationList) {
+          extendsClause(ClassTypeName.of(sheet, "GeneratedStyleSheet", simplName));
+        }
+      })
+    );
 
-    _interface("AnyFunction");
-    _extends();
-    for (var simplName : anyFunctionList) {
-      t(function, simplName);
-    }
-    body();
+    interfaceDeclaration(
+      name("AnyFunction"),
+      include(() -> {
+        for (var simplName : anyFunctionList) {
+          extendsClause(ClassTypeName.of(function, simplName));
+        }
+      })
+    );
   }
 
   private void angleMethods() {
+    var angleType = ClassTypeName.of(type, "AngleType");
+    var angleUnit = ClassTypeName.of(type, "AngleUnit");
+
     for (var unit : angleUnitList) {
       var enumSimpleName = unit.toUpperCase();
 
-      _protected();
-      _final();
-      t(type, "AngleType");
-      method(unit, _double(), id("value"));
-      block(
-        _return(), invoke("getAngle", t(type, "AngleUnit"), n(enumSimpleName), end(), n("value"))
+      method(
+        PROTECTED, FINAL, angleType, name(unit),
+        parameter(DOUBLE, name("value")),
+        p(RETURN, v("getAngle"), argument(angleUnit, n(enumSimpleName)), argument(n("value")))
       );
 
-      _protected();
-      _final();
-      t(type, "AngleType");
-      method(unit, _int(), id("value"));
-      block(
-        _return(), invoke("getAngle", t(type, "AngleUnit"), n(enumSimpleName), end(), n("value"))
+      method(
+        PROTECTED, FINAL, angleType, name(unit),
+        parameter(INT, name("value")),
+        p(RETURN, v("getAngle"), argument(angleUnit, n(enumSimpleName)), argument(n("value")))
       );
     }
   }
 
   private void fields() {
+    var typeName = ClassTypeName.of(select, "TypeSelector");
+
     for (var elementName : elementList) {
-      _protected();
-      _static();
-      _final();
-      t(select, "TypeSelector");
-      id(elementName);
-      t(css, "Css");
-      n(elementName);
+      field(
+        PROTECTED, STATIC, FINAL, typeName, name(elementName),
+        CSS, n(elementName)
+      );
     }
+
+    typeName = ClassTypeName.of(select, "PseudoClassSelector");
 
     for (var name : pseudoClassList) {
-      _protected();
-      _static();
-      _final();
-      t(select, "PseudoClassSelector");
-      id(name);
-      t(css, "Css");
-      n(name);
+      field(
+        PROTECTED, STATIC, FINAL, typeName, name(name),
+        CSS, n(name)
+      );
     }
+
+    typeName = ClassTypeName.of(select, "PseudoElementSelector");
 
     for (var name : pseudoElementList) {
-      _protected();
-      _static();
-      _final();
-      t(select, "PseudoElementSelector");
-      id(name);
-      t(css, "Css");
-      n(name);
+      field(
+        PROTECTED, STATIC, FINAL, typeName, name(name),
+        CSS, n(name)
+      );
     }
 
+    typeName = ClassTypeName.of(type, "Color");
+
     for (var name : colorList) {
-      _protected();
-      _static();
-      _final();
-      t(type, "Color");
-      id(name);
-      t(type, "Color");
-      n(name);
+      field(
+        PROTECTED, STATIC, FINAL, typeName, name(name),
+        typeName, n(name)
+      );
     }
+
+    typeName = ClassTypeName.of(keyword, "Keywords");
 
     for (var kw : keywordList) {
       var id = kw.fieldName;
 
-      _protected();
-      _static();
-      _final();
-      t(keyword, kw.simpleName);
-      id(id);
-      t(keyword, "Keywords");
-      n(id);
+      var thisName = ClassTypeName.of(keyword, kw.simpleName);
+
+      field(
+        PROTECTED, STATIC, FINAL, thisName, name(id),
+        typeName, n(id)
+      );
     }
   }
 
   private void lengthMethods() {
+    var lengthType = ClassTypeName.of(type, "LengthType");
+    var lengthUnit = ClassTypeName.of(type, "LengthUnit");
+
     for (var unit : lengthUnitList) {
       var enumSimpleName = unit.toUpperCase();
 
-      _protected();
-      _final();
-      t(type, "LengthType");
-      method(unit, _double(), id("value"));
-      block(
-        _return(), invoke("getLength", t(type, "LengthUnit"), n(enumSimpleName), end(), n("value"))
+      method(
+        PROTECTED, FINAL, lengthType, name(unit),
+        parameter(DOUBLE, name("value")),
+        p(RETURN, v("getLength"), argument(lengthUnit, n(enumSimpleName)), argument(n("value")))
       );
 
-      _protected();
-      _final();
-      t(type, "LengthType");
-      method(unit, _int(), id("value"));
-      block(
-        _return(), invoke("getLength", t(type, "LengthUnit"), n(enumSimpleName), end(), n("value"))
+      method(
+        PROTECTED, FINAL, lengthType, name(unit),
+        parameter(INT, name("value")),
+        p(RETURN, v("getLength"), argument(lengthUnit, n(enumSimpleName)), argument(n("value")))
       );
     }
   }
@@ -750,20 +709,20 @@ final class GeneratedStyleSheetStep extends ThisTemplate {
     }
   }
 
-  private objectos.code.tmpl.ParameterElement t(ParameterType type) {
+  private TypeName t(ParameterType type) {
     if (type instanceof JavaType t) {
       return switch (t) {
-        case DOUBLE -> _double();
-        case INT -> _int();
-        case STRING -> t(String.class);
+        case DOUBLE -> DOUBLE;
+        case INT -> INT;
+        case STRING -> STRING;
       };
     } else if (type instanceof KeywordName name) {
-      return t(keyword, name.simpleName);
+      return ClassTypeName.of(keyword, name.simpleName);
     } else if (type instanceof PrimitiveType t) {
       var kind = t.kind;
-      return t(ThisTemplate.type, kind.typeSimpleName());
+      return ClassTypeName.of(ThisTemplate.type, kind.typeSimpleName());
     } else if (type instanceof ValueType t) {
-      return t(ThisTemplate.type, t.simpleName);
+      return ClassTypeName.of(ThisTemplate.type, t.simpleName);
     } else {
       throw new UnsupportedOperationException("Implement me :: " + type.getClass());
     }

@@ -104,7 +104,6 @@ public class GeneratedStyleSheetStepTest extends AbstractCssBootSpecTest {
       """
       package br.com.objectos.css.sheet;
 
-      import br.com.objectos.code.annotations.Generated;
       import br.com.objectos.css.Css;
       import br.com.objectos.css.function.RotateFunction;
       import br.com.objectos.css.function.StandardFunctionName;
@@ -125,7 +124,6 @@ public class GeneratedStyleSheetStepTest extends AbstractCssBootSpecTest {
       import br.com.objectos.css.type.TransformValue;
       import br.com.objectos.css.type.Value;
 
-      @Generated("br.com.objectos.css.boot.CssBoot")
       abstract class GeneratedStyleSheet {
         protected static final TypeSelector a = Css.a;
 

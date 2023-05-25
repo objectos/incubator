@@ -15,8 +15,6 @@
  */
 package br.com.objectos.css.boot.spec;
 
-import br.com.objectos.code.annotations.Generated;
-import br.com.objectos.css.boot.CssBoot;
 import java.util.Locale;
 import objectos.code.ClassTypeName;
 import objectos.code.JavaTemplate;
@@ -99,10 +97,6 @@ abstract class ThisTemplate extends JavaTemplate implements Step {
 
   final void writeSelf() {
     adapter.write(this);
-  }
-
-  final void generatedAnnotation() {
-    at(t(Generated.class), s(CssBoot.class.getCanonicalName()));
   }
 
 }
