@@ -99,12 +99,12 @@
 	<dependencies>
 		<dependency>
 			<groupId>br.com.objectos</groupId>
-			<artifactId>css-specgen</artifactId>
+			<artifactId>objectos-code</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>br.com.objectos</groupId>
-			<artifactId>objectos-code</artifactId>
+			<artifactId>objectos-specgen</artifactId>
+			<version>${project.version}</version>
 		</dependency>
 		
 		<dependency>
