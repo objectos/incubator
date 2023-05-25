@@ -105,7 +105,8 @@ public final class Css {
 
   public static final PseudoClassSelector PAST = PseudoClassSelectors.PAST;
 
-  public static final PseudoClassSelector PLACEHOLDER_SHOWN = PseudoClassSelectors.PLACEHOLDER_SHOWN;
+  public static final PseudoClassSelector PLACEHOLDER_SHOWN
+      = PseudoClassSelectors.PLACEHOLDER_SHOWN;
 
   public static final PseudoClassSelector READ_ONLY = PseudoClassSelectors.READ_ONLY;
 
@@ -155,15 +156,20 @@ public final class Css {
 
   public static final PseudoElementSelector SPELLING_ERROR = PseudoElementSelectors.SPELLING_ERROR;
 
-  public static final PseudoElementSelector _MOZ_FOCUS_INNER = PseudoElementSelectors._MOZ_FOCUS_INNER;
+  public static final PseudoElementSelector _MOZ_FOCUS_INNER
+      = PseudoElementSelectors._MOZ_FOCUS_INNER;
 
-  public static final PseudoElementSelector _WEBKIT_INNER_SPIN_BUTTON = PseudoElementSelectors._WEBKIT_INNER_SPIN_BUTTON;
+  public static final PseudoElementSelector _WEBKIT_INNER_SPIN_BUTTON
+      = PseudoElementSelectors._WEBKIT_INNER_SPIN_BUTTON;
 
-  public static final PseudoElementSelector _WEBKIT_OUTER_SPIN_BUTTON = PseudoElementSelectors._WEBKIT_OUTER_SPIN_BUTTON;
+  public static final PseudoElementSelector _WEBKIT_OUTER_SPIN_BUTTON
+      = PseudoElementSelectors._WEBKIT_OUTER_SPIN_BUTTON;
 
-  public static final PseudoElementSelector _WEBKIT_SEARCH_DECORATION = PseudoElementSelectors._WEBKIT_SEARCH_DECORATION;
+  public static final PseudoElementSelector _WEBKIT_SEARCH_DECORATION
+      = PseudoElementSelectors._WEBKIT_SEARCH_DECORATION;
 
-  public static final PseudoElementSelector _WEBKIT_FILE_UPLOAD_BUTTON = PseudoElementSelectors._WEBKIT_FILE_UPLOAD_BUTTON;
+  public static final PseudoElementSelector _WEBKIT_FILE_UPLOAD_BUTTON
+      = PseudoElementSelectors._WEBKIT_FILE_UPLOAD_BUTTON;
 
   public static final TypeSelector a = TypeSelectors.a;
 
@@ -413,27 +419,35 @@ public final class Css {
     return SelectorFactory.sel(e1, e2, e3);
   }
 
-  public static Selector sel(SelectorElement e1, SelectorElement e2, SelectorElement e3, SelectorElement e4) {
+  public static Selector sel(SelectorElement e1, SelectorElement e2, SelectorElement e3,
+      SelectorElement e4) {
     return SelectorFactory.sel(e1, e2, e3, e4);
   }
 
-  public static Selector sel(SelectorElement e1, SelectorElement e2, SelectorElement e3, SelectorElement e4, SelectorElement e5) {
+  public static Selector sel(SelectorElement e1, SelectorElement e2, SelectorElement e3,
+      SelectorElement e4, SelectorElement e5) {
     return SelectorFactory.sel(e1, e2, e3, e4, e5);
   }
 
-  public static Selector sel(SelectorElement e1, SelectorElement e2, SelectorElement e3, SelectorElement e4, SelectorElement e5, SelectorElement e6) {
+  public static Selector sel(SelectorElement e1, SelectorElement e2, SelectorElement e3,
+      SelectorElement e4, SelectorElement e5, SelectorElement e6) {
     return SelectorFactory.sel(e1, e2, e3, e4, e5, e6);
   }
 
-  public static Selector sel(SelectorElement e1, SelectorElement e2, SelectorElement e3, SelectorElement e4, SelectorElement e5, SelectorElement e6, SelectorElement e7) {
+  public static Selector sel(SelectorElement e1, SelectorElement e2, SelectorElement e3,
+      SelectorElement e4, SelectorElement e5, SelectorElement e6, SelectorElement e7) {
     return SelectorFactory.sel(e1, e2, e3, e4, e5, e6, e7);
   }
 
-  public static Selector sel(SelectorElement e1, SelectorElement e2, SelectorElement e3, SelectorElement e4, SelectorElement e5, SelectorElement e6, SelectorElement e7, SelectorElement e8) {
+  public static Selector sel(SelectorElement e1, SelectorElement e2, SelectorElement e3,
+      SelectorElement e4, SelectorElement e5, SelectorElement e6, SelectorElement e7,
+      SelectorElement e8) {
     return SelectorFactory.sel(e1, e2, e3, e4, e5, e6, e7, e8);
   }
 
-  public static Selector sel(SelectorElement e1, SelectorElement e2, SelectorElement e3, SelectorElement e4, SelectorElement e5, SelectorElement e6, SelectorElement e7, SelectorElement e8, SelectorElement e9) {
+  public static Selector sel(SelectorElement e1, SelectorElement e2, SelectorElement e3,
+      SelectorElement e4, SelectorElement e5, SelectorElement e6, SelectorElement e7,
+      SelectorElement e8, SelectorElement e9) {
     return SelectorFactory.sel(e1, e2, e3, e4, e5, e6, e7, e8, e9);
   }
 

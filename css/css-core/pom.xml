@@ -73,17 +73,6 @@
 
 	<build>
 		<plugins>
-			<!-- force specgen dependency in all profiles -->
-			<plugin>
-				<artifactId>maven-clean-plugin</artifactId>
-				<dependencies>
-					<dependency>
-						<groupId>br.com.objectos</groupId>
-						<artifactId>css-specgen</artifactId>
-						<version>${project.version}</version>
-					</dependency>
-				</dependencies>
-			</plugin>
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>exec-maven-plugin</artifactId>
@@ -98,7 +87,7 @@
 							<arguments>
 								<argument>-classpath</argument>
 								<classpath />
-								<argument>br.com.objectos.css.boot.CssBoot</argument>
+								<argument>objectos.selfgen.css.CssBoot</argument>
 								<argument>${project.basedir}/src/boot/java</argument>
 							</arguments>
 						</configuration>
@@ -159,7 +148,8 @@
 
 		<dependency>
 			<groupId>br.com.objectos</groupId>
-			<artifactId>code-boot</artifactId>
+			<artifactId>objectos-selfgen</artifactId>
+			<version>${project.version}</version>
 		</dependency>
 
 		<dependency>

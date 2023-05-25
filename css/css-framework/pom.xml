@@ -212,6 +212,10 @@ SOFTWARE.
 			<groupId>br.com.objectos</groupId>
 			<artifactId>css-core</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>br.com.objectos</groupId>
+			<artifactId>code-annotations</artifactId>
+		</dependency>
 
 		<dependency>
 			<groupId>br.com.objectos</groupId>

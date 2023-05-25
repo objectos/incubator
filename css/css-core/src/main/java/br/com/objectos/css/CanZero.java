@@ -15,11 +15,8 @@
  */
 package br.com.objectos.css;
 
-import br.com.objectos.code.annotations.Ignore;
-
 public interface CanZero {
 
-  @Ignore
   static boolean isZeroEquals(CanZero zero, Object obj) {
     return zero.isZero() && obj instanceof CanZero && ((CanZero) obj).isZero();
   }
