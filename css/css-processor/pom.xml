@@ -95,10 +95,6 @@
 		</dependency>
 		<dependency>
 			<groupId>br.com.objectos</groupId>
-			<artifactId>code-annotations</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>br.com.objectos</groupId>
 			<artifactId>code-testng</artifactId>
 		</dependency>
 

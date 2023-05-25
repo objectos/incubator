@@ -15,12 +15,7 @@
  */
 package br.com.objectos.css.processor;
 
-import static br.com.objectos.code.java.Java.annotation;
-import static br.com.objectos.code.java.Java.l;
-
-import br.com.objectos.code.annotations.Generated;
 import br.com.objectos.code.annotations.Services;
-import br.com.objectos.code.java.declaration.AnnotationCode;
 import br.com.objectos.code.java.declaration.PackageName;
 import br.com.objectos.code.java.io.JavaFile;
 import br.com.objectos.code.java.type.NamedClass;
@@ -41,10 +36,6 @@ import objectos.util.UnmodifiableSet;
 
 @Services(Processor.class)
 public class CssCompilerProcessor extends AbstractProcessingRoundProcessor {
-
-  static final AnnotationCode GENERATED = annotation(
-    Generated.class, l(CssCompilerProcessor.class.getCanonicalName())
-  );
 
   private Supplier<Filer> filerSupplier;
 

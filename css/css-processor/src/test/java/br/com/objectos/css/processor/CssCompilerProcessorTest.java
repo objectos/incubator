@@ -45,10 +45,8 @@ public class CssCompilerProcessorTest {
 
       "package code.css.compiler;",
       "",
-      "import br.com.objectos.code.annotations.Generated;",
       "import br.com.objectos.css.sheet.AbstractStyleSheet;",
       "",
-      "@Generated(\"br.com.objectos.css.processor.CssCompilerProcessor\")",
       "public class Sheet extends AbstractStyleSheet {",
       "",
       "  @Override",

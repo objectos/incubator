@@ -18,13 +18,9 @@ package br.com.objectos.css.processor;
 import static br.com.objectos.code.java.Java._class;
 import static br.com.objectos.code.java.Java._extends;
 import static br.com.objectos.code.java.Java._public;
-import static br.com.objectos.code.java.Java.annotation;
 import static br.com.objectos.code.java.Java.javaFile;
-import static br.com.objectos.code.java.Java.l;
 import static br.com.objectos.code.java.Java.t;
 
-import br.com.objectos.code.annotations.Generated;
-import br.com.objectos.code.java.declaration.AnnotationCode;
 import br.com.objectos.code.java.declaration.ClassCode;
 import br.com.objectos.code.java.declaration.ExtendsOne;
 import br.com.objectos.code.java.io.JavaFile;
@@ -38,21 +34,15 @@ import objectos.lang.Check;
 
 public class ToJavaFile {
 
-  private final AnnotationCode generated;
-
-  private ToJavaFile(AnnotationCode generated) {
-    this.generated = generated;
-  }
+  private ToJavaFile() {}
 
   public static ToJavaFile generatedBy(Class<?> generator) {
     Check.notNull(generator, "generator == null");
-    return new ToJavaFile(
-        annotation(Generated.class, l(generator.getCanonicalName()))
-    );
+    return new ToJavaFile();
   }
 
   public final JavaFile generate(CssFile file) throws IOException {
-    return file.generate(generated);
+    return file.generate();
   }
 
   public static abstract class CssFile {
@@ -65,18 +55,17 @@ public class ToJavaFile {
 
     protected abstract InputStream openStream() throws IOException;
 
-    final JavaFile generate(AnnotationCode generated) throws IOException {
+    final JavaFile generate() throws IOException {
       return javaFile(
-          className().getPackage(),
-          generateClassCode(generated)
+        className().getPackage(),
+        generateClassCode()
       );
     }
 
-    private ClassCode generateClassCode(AnnotationCode generated) throws IOException {
+    private ClassCode generateClassCode() throws IOException {
       return _class(
-          generated,
-          _public(), className(), EXTENDS,
-          DefinitionMethod.of(parseStyleSheet())
+        _public(), className(), EXTENDS,
+        DefinitionMethod.of(parseStyleSheet())
       );
     }
 
