@@ -15,7 +15,6 @@
  */
 package br.com.objectos.css.boot.spec;
 
-import br.com.objectos.code.annotations.Ignore;
 import br.com.objectos.css.boot.util.JavaNames;
 import java.util.List;
 import objectos.code.ArrayTypeName;
@@ -65,14 +64,12 @@ abstract class AbstractSelectorStep extends ThisTemplate {
       constructor(PRIVATE),
 
       method(
-        annotation(Ignore.class),
         PUBLIC, STATIC, implName, name("getByCode"),
         parameter(INT, name("code")),
         p(RETURN, n("ARRAY"), dim(n("code")))
       ),
 
       method(
-        annotation(Ignore.class),
         PUBLIC, STATIC, implName, name("getByName"),
         parameter(STRING, name("name")),
         p(RETURN, n("MAP"), v("get"), argument(n("name")))

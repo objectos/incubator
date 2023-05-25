@@ -15,11 +15,9 @@
  */
 package br.com.objectos.css.boot;
 
-import br.com.objectos.code.annotations.Generated;
 import br.com.objectos.css.boot.spec.KeywordName;
 import br.com.objectos.css.boot.spec.Source;
 
-@Generated("br.com.objectos.css.specgen.SpecgenBoot")
 @DoNotOverwrite
 final class ClearPropertyModule extends AbstractPropertyModule {
 
@@ -33,16 +31,16 @@ final class ClearPropertyModule extends AbstractPropertyModule {
     KeywordName right = keyword("right");
 
     property(
-        "clear",
+      "clear",
 
-        formal(
-            "none | left | right | both | inline-start | inline-end",
-            Source.MDN
-        ),
+      formal(
+        "none | left | right | both | inline-start | inline-end",
+        Source.MDN
+      ),
 
-        globalSig,
+      globalSig,
 
-        sig(t("ClearValue", none, left, right, both, inlineStart, inlineEnd), "value")
+      sig(t("ClearValue", none, left, right, both, inlineStart, inlineEnd), "value")
     );
   }
 

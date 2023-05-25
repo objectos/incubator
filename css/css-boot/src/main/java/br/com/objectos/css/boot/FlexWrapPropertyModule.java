@@ -15,11 +15,9 @@
  */
 package br.com.objectos.css.boot;
 
-import br.com.objectos.code.annotations.Generated;
 import br.com.objectos.css.boot.spec.KeywordName;
 import br.com.objectos.css.boot.spec.Source;
 
-@Generated("br.com.objectos.css.specgen.SpecgenBoot")
 @DoNotOverwrite
 final class FlexWrapPropertyModule extends AbstractPropertyModule {
 
@@ -35,16 +33,16 @@ final class FlexWrapPropertyModule extends AbstractPropertyModule {
     wrapReverse = keyword("wrap-reverse");
 
     property(
-        "flex-wrap",
+      "flex-wrap",
 
-        formal(
-            Source.MDN,
-            "nowrap | wrap | wrap-reverse"
-        ),
+      formal(
+        Source.MDN,
+        "nowrap | wrap | wrap-reverse"
+      ),
 
-        globalSig,
+      globalSig,
 
-        sig(t("FlexWrapValue", nowrap, wrap, wrapReverse), "value")
+      sig(t("FlexWrapValue", nowrap, wrap, wrapReverse), "value")
     );
   }
 

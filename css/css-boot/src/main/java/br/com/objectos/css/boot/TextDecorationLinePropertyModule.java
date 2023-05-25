@@ -15,12 +15,10 @@
  */
 package br.com.objectos.css.boot;
 
-import br.com.objectos.code.annotations.Generated;
 import br.com.objectos.css.boot.spec.KeywordName;
 import br.com.objectos.css.boot.spec.Source;
 import br.com.objectos.css.boot.spec.ValueType;
 
-@Generated("br.com.objectos.css.specgen.SpecgenBoot")
 @DoNotOverwrite
 final class TextDecorationLinePropertyModule extends AbstractPropertyModule {
 
@@ -38,18 +36,18 @@ final class TextDecorationLinePropertyModule extends AbstractPropertyModule {
     ValueType value = t("TextDecorationLineValue", none, kind, spellingError, grammarError);
 
     property(
-        "text-decoration-line",
+      "text-decoration-line",
 
-        formal(
-            Source.MDN,
-            "none | [ underline || overline || line-through || blink ] | spelling-error | grammar-error"
-        ),
+      formal(
+        Source.MDN,
+        "none | [ underline || overline || line-through || blink ] | spelling-error | grammar-error"
+      ),
 
-        globalSig,
+      globalSig,
 
-        sig(value, "value"),
-        sig(kind, "value1", kind, "value2"),
-        sig(kind, "value1", kind, "value2", kind, "value3")
+      sig(value, "value"),
+      sig(kind, "value1", kind, "value2"),
+      sig(kind, "value1", kind, "value2", kind, "value3")
     );
   }
 

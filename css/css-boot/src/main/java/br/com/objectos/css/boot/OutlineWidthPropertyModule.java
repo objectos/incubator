@@ -15,11 +15,9 @@
  */
 package br.com.objectos.css.boot;
 
-import br.com.objectos.code.annotations.Generated;
 import br.com.objectos.css.boot.spec.KeywordName;
 import br.com.objectos.css.boot.spec.Source;
 
-@Generated("br.com.objectos.css.specgen.SpecgenBoot")
 @DoNotOverwrite
 final class OutlineWidthPropertyModule extends AbstractPropertyModule {
 
@@ -30,18 +28,18 @@ final class OutlineWidthPropertyModule extends AbstractPropertyModule {
     KeywordName thin = keyword("thin");
 
     property(
-        "outline-width",
+      "outline-width",
 
-        formal(
-            Source.MDN,
-            "<line-width>",
+      formal(
+        Source.MDN,
+        "<line-width>",
 
-            "<line-width> = <length> | thin | medium | thick"
-        ),
+        "<line-width> = <length> | thin | medium | thick"
+      ),
 
-        globalSig,
+      globalSig,
 
-        sig(t("OutlineWidthValue", length, thin, medium, thick), "width")
+      sig(t("OutlineWidthValue", length, thin, medium, thick), "width")
     );
   }
 

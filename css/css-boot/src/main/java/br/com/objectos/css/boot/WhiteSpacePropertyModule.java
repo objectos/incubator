@@ -15,11 +15,9 @@
  */
 package br.com.objectos.css.boot;
 
-import br.com.objectos.code.annotations.Generated;
 import br.com.objectos.css.boot.spec.KeywordName;
 import br.com.objectos.css.boot.spec.Source;
 
-@Generated("br.com.objectos.css.specgen.SpecgenBoot")
 @DoNotOverwrite
 final class WhiteSpacePropertyModule extends AbstractPropertyModule {
 
@@ -33,16 +31,16 @@ final class WhiteSpacePropertyModule extends AbstractPropertyModule {
     KeywordName preWrap = keyword("pre-wrap");
 
     property(
-        "white-space",
+      "white-space",
 
-        formal(
-            Source.MDN,
-            "normal | pre | nowrap | pre-wrap | pre-line | break-spaces"
-        ),
+      formal(
+        Source.MDN,
+        "normal | pre | nowrap | pre-wrap | pre-line | break-spaces"
+      ),
 
-        globalSig,
+      globalSig,
 
-        sig(t("WhiteSpaceValue", normal, pre, nowrap, preWrap, preLine, breakSpaces), "value")
+      sig(t("WhiteSpaceValue", normal, pre, nowrap, preWrap, preLine, breakSpaces), "value")
     );
   }
 

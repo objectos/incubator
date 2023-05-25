@@ -13,20 +13,5 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-@br.com.objectos.code.annotations.GenerateStaticFactoryAggregate(
-    simpleName = "Css",
-    factories = {
-        ColorFactory.class,
-        RandomClassSelectorGenerator.class,
-        RandomIdSelectorGenerator.class,
-        RandomStringImpl.class,
-
-        // select
-        br.com.objectos.css.select.SelectorFactory.class,
-        br.com.objectos.css.select.PseudoClassSelectors.class,
-        br.com.objectos.css.select.PseudoElementSelectors.class,
-        br.com.objectos.css.select.TypeSelectors.class
-    }
-)
 @Spec
 package br.com.objectos.css;

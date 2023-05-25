@@ -15,12 +15,10 @@
  */
 package br.com.objectos.css.boot;
 
-import br.com.objectos.code.annotations.Generated;
 import br.com.objectos.css.boot.spec.KeywordName;
 import br.com.objectos.css.boot.spec.Source;
 import br.com.objectos.css.boot.spec.ValueType;
 
-@Generated("br.com.objectos.css.specgen.SpecgenBoot")
 @DoNotOverwrite
 final class JustifyItemsPropertyModule extends AbstractAlignOrJustifyPropertyModule {
 
@@ -29,33 +27,33 @@ final class JustifyItemsPropertyModule extends AbstractAlignOrJustifyPropertyMod
     KeywordName legacy = keyword("legacy");
 
     ValueType justifyItems = t(
-        "JustifyItemsValue",
-        normal, stretch, baseline, selfPositionOrLeftOrRight, legacy
+      "JustifyItemsValue",
+      normal, stretch, baseline, selfPositionOrLeftOrRight, legacy
     );
 
     ValueType justifyLegacy = t(
-        "JustifyLegacyValue",
-        left, right, center
+      "JustifyLegacyValue",
+      left, right, center
     );
 
     property(
-        "justify-items",
+      "justify-items",
 
-        formal(
-            Source.MDN,
-            "normal | stretch | <baseline-position> | <overflow-position>? [ <self-position> | left | right ] | legacy | legacy && [ left | right | center ]",
+      formal(
+        Source.MDN,
+        "normal | stretch | <baseline-position> | <overflow-position>? [ <self-position> | left | right ] | legacy | legacy && [ left | right | center ]",
 
-            "<baseline-position> = [ first | last ]? baseline",
-            "<overflow-position> = unsafe | safe",
-            "<self-position> = center | start | end | self-start | self-end | flex-start | flex-end"
-        ),
+        "<baseline-position> = [ first | last ]? baseline",
+        "<overflow-position> = unsafe | safe",
+        "<self-position> = center | start | end | self-start | self-end | flex-start | flex-end"
+      ),
 
-        globalSig,
+      globalSig,
 
-        sig(justifyItems, "value"),
-        sig(baselinePosition, "firstOrLast", baseline, "baseline"),
-        sig(overflowPosition, "safeOrUnsafe", selfPosition, "position"),
-        sig(legacy, "legacy", justifyLegacy, "value")
+      sig(justifyItems, "value"),
+      sig(baselinePosition, "firstOrLast", baseline, "baseline"),
+      sig(overflowPosition, "safeOrUnsafe", selfPosition, "position"),
+      sig(legacy, "legacy", justifyLegacy, "value")
     );
   }
 

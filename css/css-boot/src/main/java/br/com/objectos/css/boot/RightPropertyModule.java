@@ -15,11 +15,9 @@
  */
 package br.com.objectos.css.boot;
 
-import br.com.objectos.code.annotations.Generated;
 import br.com.objectos.css.boot.spec.KeywordName;
 import br.com.objectos.css.boot.spec.Source;
 
-@Generated("br.com.objectos.css.specgen.SpecgenBoot")
 @DoNotOverwrite
 final class RightPropertyModule extends AbstractPropertyModule {
 
@@ -27,16 +25,16 @@ final class RightPropertyModule extends AbstractPropertyModule {
   final void propertyDefinition() {
     KeywordName auto = keyword("auto");
     property(
-        "right",
+      "right",
 
-        formal(
-            Source.MDN,
-            "<length> | <percentage> | auto"
-        ),
+      formal(
+        Source.MDN,
+        "<length> | <percentage> | auto"
+      ),
 
-        globalSig,
-        
-        sig(t("RightValue", length, percentage, auto), "value")
+      globalSig,
+
+      sig(t("RightValue", length, percentage, auto), "value")
     );
   }
 

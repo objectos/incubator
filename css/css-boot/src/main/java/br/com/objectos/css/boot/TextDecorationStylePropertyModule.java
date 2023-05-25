@@ -15,11 +15,9 @@
  */
 package br.com.objectos.css.boot;
 
-import br.com.objectos.code.annotations.Generated;
 import br.com.objectos.css.boot.spec.KeywordName;
 import br.com.objectos.css.boot.spec.Source;
 
-@Generated("br.com.objectos.css.specgen.SpecgenBoot")
 @DoNotOverwrite
 final class TextDecorationStylePropertyModule extends AbstractPropertyModule {
 
@@ -32,16 +30,16 @@ final class TextDecorationStylePropertyModule extends AbstractPropertyModule {
     KeywordName wavy = keyword("wavy");
 
     property(
-        "text-decoration-style",
+      "text-decoration-style",
 
-        formal(
-            Source.MDN,
-            "solid | double | dotted | dashed | wavy"
-        ),
+      formal(
+        Source.MDN,
+        "solid | double | dotted | dashed | wavy"
+      ),
 
-        globalSig,
+      globalSig,
 
-        sig(t("TextDecorationStyleValue", dashed, dotted, doubleKw, solid, wavy), "style")
+      sig(t("TextDecorationStyleValue", dashed, dotted, doubleKw, solid, wavy), "style")
     );
   }
 

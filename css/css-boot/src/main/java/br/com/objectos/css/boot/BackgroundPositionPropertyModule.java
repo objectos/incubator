@@ -15,12 +15,10 @@
  */
 package br.com.objectos.css.boot;
 
-import br.com.objectos.code.annotations.Generated;
 import br.com.objectos.css.boot.spec.KeywordName;
 import br.com.objectos.css.boot.spec.Source;
 import br.com.objectos.css.boot.spec.ValueType;
 
-@Generated("br.com.objectos.css.specgen.SpecgenBoot")
 @DoNotOverwrite
 final class BackgroundPositionPropertyModule extends AbstractPropertyModule {
 
@@ -33,29 +31,29 @@ final class BackgroundPositionPropertyModule extends AbstractPropertyModule {
     KeywordName top = keyword("top");
 
     ValueType bgPosition = t(
-        "BackgroundPositionValue",
-        center,
-        top, left, bottom, right,
-        length, percentage
+      "BackgroundPositionValue",
+      center,
+      top, left, bottom, right,
+      length, percentage
     );
 
     property(
-        "background-position",
+      "background-position",
 
-        formal(
-            Source.MDN,
-            "<bg-position>#",
+      formal(
+        Source.MDN,
+        "<bg-position>#",
 
-            "<bg-position> = [ [ left | center | right | top | bottom | <length-percentage> ] | [ left | center | right | <length-percentage> ] [ top | center | bottom | <length-percentage> ] | [ center | [ left | right ] <length-percentage>? ] && [ center | [ top | bottom ] <length-percentage>? ] ]",
-            "<length-percentage> = <length> | <percentage>"
-        ),
+        "<bg-position> = [ [ left | center | right | top | bottom | <length-percentage> ] | [ left | center | right | <length-percentage> ] [ top | center | bottom | <length-percentage> ] | [ center | [ left | right ] <length-percentage>? ] && [ center | [ top | bottom ] <length-percentage>? ] ]",
+        "<length-percentage> = <length> | <percentage>"
+      ),
 
-        globalSig,
+      globalSig,
 
-        sig(bgPosition, "value"),
-        sig(bgPosition, "value1", bgPosition, "value2"),
-        sig(bgPosition, "value1", bgPosition, "value2", bgPosition, "value3"),
-        sig(bgPosition, "value1", bgPosition, "value2", bgPosition, "value3", bgPosition, "value4")
+      sig(bgPosition, "value"),
+      sig(bgPosition, "value1", bgPosition, "value2"),
+      sig(bgPosition, "value1", bgPosition, "value2", bgPosition, "value3"),
+      sig(bgPosition, "value1", bgPosition, "value2", bgPosition, "value3", bgPosition, "value4")
     );
   }
 

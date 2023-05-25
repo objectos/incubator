@@ -15,11 +15,9 @@
  */
 package br.com.objectos.css.boot;
 
-import br.com.objectos.code.annotations.Generated;
 import br.com.objectos.css.boot.spec.KeywordName;
 import br.com.objectos.css.boot.spec.Source;
 
-@Generated("br.com.objectos.css.specgen.SpecgenBoot")
 @DoNotOverwrite
 final class TextSizeAdjustPropertyModule extends AbstractPropertyModule {
 
@@ -29,16 +27,16 @@ final class TextSizeAdjustPropertyModule extends AbstractPropertyModule {
     KeywordName none = keyword("none");
 
     property(
-        names("text-size-adjust", "-webkit-text-size-adjust"),
+      names("text-size-adjust", "-webkit-text-size-adjust"),
 
-        formal(
-            Source.MDN,
-            "none | auto | <percentage>"
-        ),
+      formal(
+        Source.MDN,
+        "none | auto | <percentage>"
+      ),
 
-        globalSig,
+      globalSig,
 
-        sig(t("TextSizeAdjustValue", auto, none, percentage), "value")
+      sig(t("TextSizeAdjustValue", auto, none, percentage), "value")
     );
   }
 

@@ -15,12 +15,10 @@
  */
 package br.com.objectos.css.boot;
 
-import br.com.objectos.code.annotations.Generated;
 import br.com.objectos.css.boot.spec.KeywordName;
 import br.com.objectos.css.boot.spec.Source;
 import br.com.objectos.css.boot.spec.ValueType;
 
-@Generated("br.com.objectos.css.specgen.SpecgenBoot")
 @DoNotOverwrite
 final class BorderWidthPropertyModule extends AbstractPropertyModule {
 
@@ -31,41 +29,41 @@ final class BorderWidthPropertyModule extends AbstractPropertyModule {
     KeywordName thin = keyword("thin");
 
     ValueType borderWidth = t(
-        "LineWidthValue",
-        thin, medium, thick, length
+      "LineWidthValue",
+      thin, medium, thick, length
     );
 
     property(
-        "border-width",
+      "border-width",
 
-        formal(
-            Source.MDN,
-            "<line-width>{1,4}",
+      formal(
+        Source.MDN,
+        "<line-width>{1,4}",
 
-            "<line-width> = <length> | thin | medium | thick"
-        ),
+        "<line-width> = <length> | thin | medium | thick"
+      ),
 
-        globalSig,
+      globalSig,
 
-        sigXY1(borderWidth),
-        sigXY2(borderWidth),
-        sigXY3(borderWidth),
-        sigXY4(borderWidth)
+      sigXY1(borderWidth),
+      sigXY2(borderWidth),
+      sigXY3(borderWidth),
+      sigXY4(borderWidth)
     );
 
     property(
-        names("border-top-width", "border-right-width", "border-bottom-width", "border-left-width"),
+      names("border-top-width", "border-right-width", "border-bottom-width", "border-left-width"),
 
-        formal(
-            Source.MDN,
-            "<line-width>",
+      formal(
+        Source.MDN,
+        "<line-width>",
 
-            "<line-width> = <length> | thin | medium | thick"
-        ),
+        "<line-width> = <length> | thin | medium | thick"
+      ),
 
-        globalSig,
+      globalSig,
 
-        sig(borderWidth, "width")
+      sig(borderWidth, "width")
     );
   }
 

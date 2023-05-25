@@ -15,11 +15,9 @@
  */
 package br.com.objectos.css.boot;
 
-import br.com.objectos.code.annotations.Generated;
 import br.com.objectos.css.boot.spec.KeywordName;
 import br.com.objectos.css.boot.spec.Source;
 
-@Generated("br.com.objectos.css.specgen.SpecgenBoot")
 @DoNotOverwrite
 final class LetterSpacingPropertyModule extends AbstractPropertyModule {
 
@@ -29,16 +27,16 @@ final class LetterSpacingPropertyModule extends AbstractPropertyModule {
     normal = keyword("normal");
 
     property(
-        "letter-spacing",
+      "letter-spacing",
 
-        formal(
-            Source.MDN,
-            "normal | <length>"
-        ),
+      formal(
+        Source.MDN,
+        "normal | <length>"
+      ),
 
-        globalSig,
+      globalSig,
 
-        sig(t("LineHeightValue", normal, length), "value")
+      sig(t("LineHeightValue", normal, length), "value")
     );
   }
 

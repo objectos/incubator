@@ -15,11 +15,9 @@
  */
 package br.com.objectos.css.boot;
 
-import br.com.objectos.code.annotations.Generated;
 import br.com.objectos.css.boot.spec.KeywordName;
 import br.com.objectos.css.boot.spec.Source;
 
-@Generated("br.com.objectos.css.specgen.SpecgenBoot")
 @DoNotOverwrite
 final class BackgroundAttachmentPropertyModule extends AbstractPropertyModule {
 
@@ -30,18 +28,18 @@ final class BackgroundAttachmentPropertyModule extends AbstractPropertyModule {
     KeywordName scroll = keyword("scroll");
 
     property(
-        "background-attachment",
+      "background-attachment",
 
-        formal(
-            Source.MDN,
-            "<attachment># ",
+      formal(
+        Source.MDN,
+        "<attachment># ",
 
-            "<attachment> = scroll | fixed | local"
-        ),
+        "<attachment> = scroll | fixed | local"
+      ),
 
-        globalSig,
+      globalSig,
 
-        sig(t("BackgroundAttachmentValue", scroll, fixed, local), "value")
+      sig(t("BackgroundAttachmentValue", scroll, fixed, local), "value")
     );
   }
 

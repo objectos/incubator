@@ -15,67 +15,65 @@
  */
 package br.com.objectos.css.boot;
 
-import br.com.objectos.code.annotations.Generated;
 import br.com.objectos.css.boot.spec.Source;
 import br.com.objectos.css.boot.spec.ValueType;
 
-@Generated("br.com.objectos.css.specgen.SpecgenBoot")
 @DoNotOverwrite
 final class CursorPropertyModule extends AbstractPropertyModule {
 
   @Override
   final void propertyDefinition() {
     ValueType cursor = t(
-        "CursorValue",
-        keyword("alias"),
-        keyword("all-scroll"),
-        keyword("auto"),
-        keyword("cell"),
-        keyword("col-resize"),
-        keyword("context-menu"),
-        keyword("copy"),
-        keyword("crosshair"),
-        keyword("default"),
-        keyword("e-resize"),
-        keyword("ew-resize"),
-        keyword("grab"),
-        keyword("grabbing"),
-        keyword("help"),
-        keyword("move"),
-        keyword("n-resize"),
-        keyword("ne-resize"),
-        keyword("nesw-resize"),
-        keyword("no-drop"),
-        keyword("none"),
-        keyword("not-allowed"),
-        keyword("ns-resize"),
-        keyword("nw-resize"),
-        keyword("nwse-resize"),
-        keyword("pointer"),
-        keyword("progress"),
-        keyword("row-resize"),
-        keyword("s-resize"),
-        keyword("se-resize"),
-        keyword("sw-resize"),
-        keyword("text"),
-        keyword("vertical-text"),
-        keyword("w-resize"),
-        keyword("wait"),
-        keyword("zoom-in"),
-        keyword("zoom-out")
+      "CursorValue",
+      keyword("alias"),
+      keyword("all-scroll"),
+      keyword("auto"),
+      keyword("cell"),
+      keyword("col-resize"),
+      keyword("context-menu"),
+      keyword("copy"),
+      keyword("crosshair"),
+      keyword("default"),
+      keyword("e-resize"),
+      keyword("ew-resize"),
+      keyword("grab"),
+      keyword("grabbing"),
+      keyword("help"),
+      keyword("move"),
+      keyword("n-resize"),
+      keyword("ne-resize"),
+      keyword("nesw-resize"),
+      keyword("no-drop"),
+      keyword("none"),
+      keyword("not-allowed"),
+      keyword("ns-resize"),
+      keyword("nw-resize"),
+      keyword("nwse-resize"),
+      keyword("pointer"),
+      keyword("progress"),
+      keyword("row-resize"),
+      keyword("s-resize"),
+      keyword("se-resize"),
+      keyword("sw-resize"),
+      keyword("text"),
+      keyword("vertical-text"),
+      keyword("w-resize"),
+      keyword("wait"),
+      keyword("zoom-in"),
+      keyword("zoom-out")
     );
 
     property(
-        "cursor",
+      "cursor",
 
-        formal(
-            Source.MDN,
-            "[ [ <url> [ <x> <y> ]? , ]* [ auto | default | none | context-menu | help | pointer | progress | wait | cell | crosshair | text | vertical-text | alias | copy | move | no-drop | not-allowed | e-resize | n-resize | ne-resize | nw-resize | s-resize | se-resize | sw-resize | w-resize | ew-resize | ns-resize | nesw-resize | nwse-resize | col-resize | row-resize | all-scroll | zoom-in | zoom-out | grab | grabbing ] ] "
-        ),
+      formal(
+        Source.MDN,
+        "[ [ <url> [ <x> <y> ]? , ]* [ auto | default | none | context-menu | help | pointer | progress | wait | cell | crosshair | text | vertical-text | alias | copy | move | no-drop | not-allowed | e-resize | n-resize | ne-resize | nw-resize | s-resize | se-resize | sw-resize | w-resize | ew-resize | ns-resize | nesw-resize | nwse-resize | col-resize | row-resize | all-scroll | zoom-in | zoom-out | grab | grabbing ] ] "
+      ),
 
-        globalSig,
+      globalSig,
 
-        sig(cursor, "value")
+      sig(cursor, "value")
     );
   }
 

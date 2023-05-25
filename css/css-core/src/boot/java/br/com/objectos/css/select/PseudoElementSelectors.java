@@ -1,11 +1,8 @@
 package br.com.objectos.css.select;
 
-import br.com.objectos.code.annotations.Generated;
-import br.com.objectos.code.annotations.Ignore;
 import objectos.util.GrowableMap;
 import objectos.util.UnmodifiableMap;
 
-@Generated("br.com.objectos.css.boot.CssBoot")
 public final class PseudoElementSelectors {
   public static final PseudoElementSelector AFTER = new PseudoElementSelector(0, "after");
 
@@ -62,12 +59,10 @@ public final class PseudoElementSelectors {
 
   private PseudoElementSelectors() {}
 
-  @Ignore
   public static PseudoElementSelector getByCode(int code) {
     return ARRAY[code];
   }
 
-  @Ignore
   public static PseudoElementSelector getByName(String name) {
     return MAP.get(name);
   }

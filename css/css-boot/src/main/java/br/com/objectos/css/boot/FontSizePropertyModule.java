@@ -15,12 +15,10 @@
  */
 package br.com.objectos.css.boot;
 
-import br.com.objectos.code.annotations.Generated;
 import br.com.objectos.css.boot.spec.KeywordName;
 import br.com.objectos.css.boot.spec.Source;
 import br.com.objectos.css.boot.spec.ValueType;
 
-@Generated("br.com.objectos.css.specgen.SpecgenBoot")
 @DoNotOverwrite
 final class FontSizePropertyModule extends AbstractPropertyModule {
 
@@ -38,27 +36,27 @@ final class FontSizePropertyModule extends AbstractPropertyModule {
     KeywordName xxxLarge = keyword("xxx-large");
 
     ValueType fontSize = t(
-        "FontSizeValue",
-        xxSmall, xSmall, small, medium, large, xLarge, xxLarge, xxxLarge,
-        larger, smaller,
-        length, percentage
+      "FontSizeValue",
+      xxSmall, xSmall, small, medium, large, xLarge, xxLarge, xxxLarge,
+      larger, smaller,
+      length, percentage
     );
 
     property(
-        "font-size",
+      "font-size",
 
-        formal(
-            Source.MDN,
-            "<absolute-size> | <relative-size> | <length-percentage>",
+      formal(
+        Source.MDN,
+        "<absolute-size> | <relative-size> | <length-percentage>",
 
-            "<absolute-size> = xx-small | x-small | small | medium | large | x-large | xx-large | xxx-large",
-            "<relative-size> = larger | smaller",
-            "<length-percentage> = <length> | <percentage>"
-        ),
+        "<absolute-size> = xx-small | x-small | small | medium | large | x-large | xx-large | xxx-large",
+        "<relative-size> = larger | smaller",
+        "<length-percentage> = <length> | <percentage>"
+      ),
 
-        globalSig,
+      globalSig,
 
-        sig(fontSize, "size")
+      sig(fontSize, "size")
     );
   }
 

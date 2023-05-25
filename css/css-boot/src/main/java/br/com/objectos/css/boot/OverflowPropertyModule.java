@@ -15,12 +15,10 @@
  */
 package br.com.objectos.css.boot;
 
-import br.com.objectos.code.annotations.Generated;
 import br.com.objectos.css.boot.spec.KeywordName;
 import br.com.objectos.css.boot.spec.Source;
 import br.com.objectos.css.boot.spec.ValueType;
 
-@Generated("br.com.objectos.css.specgen.SpecgenBoot")
 @DoNotOverwrite
 final class OverflowPropertyModule extends AbstractPropertyModule {
 
@@ -35,30 +33,30 @@ final class OverflowPropertyModule extends AbstractPropertyModule {
     ValueType overflow = t("OverflowValue", auto, clip, hidden, scroll, visible);
 
     property(
-        "overflow",
+      "overflow",
 
-        formal(
-            Source.MDN,
-            "[ visible | hidden | clip | scroll | auto ]{1,2}"
-        ),
+      formal(
+        Source.MDN,
+        "[ visible | hidden | clip | scroll | auto ]{1,2}"
+      ),
 
-        globalSig,
+      globalSig,
 
-        sig(overflow, "xy"),
-        sig(overflow, "x", overflow, "y")
+      sig(overflow, "xy"),
+      sig(overflow, "x", overflow, "y")
     );
 
     property(
-        names("overflow-block", "overflow-inline", "overflow-x", "overflow-y"),
+      names("overflow-block", "overflow-inline", "overflow-x", "overflow-y"),
 
-        formal(
-            Source.MDN,
-            "visible | hidden | clip | scroll | auto"
-        ),
+      formal(
+        Source.MDN,
+        "visible | hidden | clip | scroll | auto"
+      ),
 
-        globalSig,
+      globalSig,
 
-        sig(overflow, "value")
+      sig(overflow, "value")
     );
   }
 

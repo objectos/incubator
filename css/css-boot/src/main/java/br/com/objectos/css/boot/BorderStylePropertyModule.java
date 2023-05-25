@@ -15,12 +15,10 @@
  */
 package br.com.objectos.css.boot;
 
-import br.com.objectos.code.annotations.Generated;
 import br.com.objectos.css.boot.spec.KeywordName;
 import br.com.objectos.css.boot.spec.Source;
 import br.com.objectos.css.boot.spec.ValueType;
 
-@Generated("br.com.objectos.css.specgen.SpecgenBoot")
 @DoNotOverwrite
 final class BorderStylePropertyModule extends AbstractPropertyModule {
 
@@ -38,41 +36,41 @@ final class BorderStylePropertyModule extends AbstractPropertyModule {
     KeywordName solid = keyword("solid");
 
     ValueType lineStyle = t(
-        "LineStyleValue",
-        none, hidden, dotted, dashed, solid, doubleKw, groove, ridge, inset, outset
+      "LineStyleValue",
+      none, hidden, dotted, dashed, solid, doubleKw, groove, ridge, inset, outset
     );
 
     property(
-        "border-style",
+      "border-style",
 
-        formal(
-            Source.MDN,
-            "<line-style>{1,4}",
+      formal(
+        Source.MDN,
+        "<line-style>{1,4}",
 
-            "<line-style> = none | hidden | dotted | dashed | solid | double | groove | ridge | inset | outset"
-        ),
+        "<line-style> = none | hidden | dotted | dashed | solid | double | groove | ridge | inset | outset"
+      ),
 
-        globalSig,
+      globalSig,
 
-        sigXY1(lineStyle),
-        sigXY2(lineStyle),
-        sigXY3(lineStyle),
-        sigXY4(lineStyle)
+      sigXY1(lineStyle),
+      sigXY2(lineStyle),
+      sigXY3(lineStyle),
+      sigXY4(lineStyle)
     );
 
     property(
-        names("border-top-style", "border-right-style", "border-bottom-style", "border-left-style"),
+      names("border-top-style", "border-right-style", "border-bottom-style", "border-left-style"),
 
-        formal(
-            Source.MDN,
-            "<line-style>",
+      formal(
+        Source.MDN,
+        "<line-style>",
 
-            "<line-style> = none | hidden | dotted | dashed | solid | double | groove | ridge | inset | outset"
-        ),
+        "<line-style> = none | hidden | dotted | dashed | solid | double | groove | ridge | inset | outset"
+      ),
 
-        globalSig,
+      globalSig,
 
-        sig(lineStyle, "style")
+      sig(lineStyle, "style")
     );
   }
 

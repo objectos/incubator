@@ -15,11 +15,9 @@
  */
 package br.com.objectos.css.boot;
 
-import br.com.objectos.code.annotations.Generated;
 import br.com.objectos.css.boot.spec.Source;
 import br.com.objectos.css.boot.spec.ValueType;
 
-@Generated("br.com.objectos.css.specgen.SpecgenBoot")
 @DoNotOverwrite
 final class FlexFlowPropertyModule extends AbstractPropertyModule {
 
@@ -27,21 +25,21 @@ final class FlexFlowPropertyModule extends AbstractPropertyModule {
   final void propertyDefinition() {
     ValueType flexFlowValue;
     flexFlowValue = t(
-        "FlexFlowValue",
-        t("FlexDirectionValue"), t("FlexWrapValue"), color
+      "FlexFlowValue",
+      t("FlexDirectionValue"), t("FlexWrapValue"), color
     );
 
     property(
-        "flex-flow",
+      "flex-flow",
 
-        formal(
-            Source.MDN,
-            "<\'flex-direction\'> || <\'flex-wrap\'>"
-        ),
+      formal(
+        Source.MDN,
+        "<\'flex-direction\'> || <\'flex-wrap\'>"
+      ),
 
-        globalSig,
+      globalSig,
 
-        sig(flexFlowValue, "value")
+      sig(flexFlowValue, "value")
     );
   }
 

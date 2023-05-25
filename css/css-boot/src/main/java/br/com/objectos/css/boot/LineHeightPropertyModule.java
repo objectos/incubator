@@ -15,32 +15,30 @@
  */
 package br.com.objectos.css.boot;
 
-import br.com.objectos.code.annotations.Generated;
 import br.com.objectos.css.boot.spec.JavaType;
 import br.com.objectos.css.boot.spec.KeywordName;
 import br.com.objectos.css.boot.spec.Source;
 
-@Generated("br.com.objectos.css.specgen.SpecgenBoot")
 @DoNotOverwrite
 final class LineHeightPropertyModule extends AbstractPropertyModule {
 
   @Override
   final void propertyDefinition() {
     KeywordName normal = keyword("normal");
-    
+
     property(
-        "line-height",
+      "line-height",
 
-        formal(
-            Source.MDN,
-            "normal | <number> | <length> | <percentage>"
-        ),
+      formal(
+        Source.MDN,
+        "normal | <number> | <length> | <percentage>"
+      ),
 
-        globalSig,
-        
-        sig(t("LineHeightValue", normal, length, percentage), "value"),
-        sig(JavaType.INT, "value"),
-        sig(JavaType.DOUBLE, "value")
+      globalSig,
+
+      sig(t("LineHeightValue", normal, length, percentage), "value"),
+      sig(JavaType.INT, "value"),
+      sig(JavaType.DOUBLE, "value")
     );
   }
 

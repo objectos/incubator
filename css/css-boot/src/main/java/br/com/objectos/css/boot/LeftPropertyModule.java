@@ -15,29 +15,27 @@
  */
 package br.com.objectos.css.boot;
 
-import br.com.objectos.code.annotations.Generated;
 import br.com.objectos.css.boot.spec.KeywordName;
 import br.com.objectos.css.boot.spec.Source;
 
-@Generated("br.com.objectos.css.specgen.SpecgenBoot")
 @DoNotOverwrite
 final class LeftPropertyModule extends AbstractPropertyModule {
 
   @Override
   final void propertyDefinition() {
     KeywordName auto = keyword("auto");
-    
+
     property(
-        "left",
+      "left",
 
-        formal(
-            Source.MDN,
-            "<length> | <percentage> | auto"
-        ),
+      formal(
+        Source.MDN,
+        "<length> | <percentage> | auto"
+      ),
 
-        globalSig,
-        
-        sig(t("LeftValue", length, percentage, auto), "value")
+      globalSig,
+
+      sig(t("LeftValue", length, percentage, auto), "value")
     );
   }
 

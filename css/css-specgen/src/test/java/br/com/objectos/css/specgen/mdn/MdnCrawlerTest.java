@@ -17,17 +17,47 @@ package br.com.objectos.css.specgen.mdn;
 
 import static org.testng.Assert.assertEquals;
 
-import br.com.objectos.css.specgen.AbstractCssSpecgenHttpServerTest;
 import br.com.objectos.css.specgen.Property;
 import br.com.objectos.css.specgen.Spec;
+import com.sun.net.httpserver.HttpExchange;
+import com.sun.net.httpserver.HttpHandler;
+import com.sun.net.httpserver.HttpServer;
+import java.io.IOException;
+import java.net.InetAddress;
+import java.net.InetSocketAddress;
+import java.nio.charset.StandardCharsets;
+import java.util.List;
 import objectos.util.UnmodifiableList;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-public class MdnCrawlerTest extends AbstractCssSpecgenHttpServerTest {
+public class MdnCrawlerTest {
+
+  private HttpServer httpServer;
+
+  @BeforeClass
+  public void _beforeClass() throws IOException {
+    byte[] ipBytes = {127, 0, 0, 1};
+    var ip = InetAddress.getByAddress(ipBytes);
+    int port = 9986;
+    var socket = new InetSocketAddress(ip, port);
+
+    httpServer = HttpServer.create(socket, 0);
+    httpServer.createContext("/", new ThisHandler());
+    httpServer.start();
+  }
+
+  @AfterClass(alwaysRun = true)
+  public void tearDown() {
+    if (httpServer != null) {
+      httpServer.stop(0);
+    }
+  }
 
   @Test
   public void crawl() {
-    Spec spec = new MdnCrawler(httpTesting.httpLocalhost("/html/MDN")).crawl();
+    Spec spec = new MdnCrawler("http://127.0.0.1:9986").crawl();
 
     UnmodifiableList<Property> props = spec.properties();
     assertEquals(props.size(), 2);
@@ -37,6 +67,35 @@ public class MdnCrawlerTest extends AbstractCssSpecgenHttpServerTest {
 
     Property p1 = props.get(1);
     assertEquals(p1.name(), "bottom");
+  }
+
+  private static class ThisHandler implements HttpHandler {
+    @Override
+    public void handle(HttpExchange exchange) throws IOException {
+      var method = exchange.getRequestMethod();
+
+      if (!method.equals("GET")) {
+        return;
+      }
+
+      var uri = exchange.getRequestURI();
+
+      var path = uri.getPath();
+
+      var html = Resource.readString("html/MDN" + path);
+
+      var response = html.getBytes(StandardCharsets.UTF_8);
+
+      var header = exchange.getResponseHeaders();
+
+      header.put("Content-Type", List.of("text/html; charset=utf-8"));
+
+      exchange.sendResponseHeaders(200, response.length);
+
+      try (var out = exchange.getResponseBody()) {
+        out.write(response);
+      }
+    }
   }
 
 }

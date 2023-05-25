@@ -1,6 +1,5 @@
 package br.com.objectos.css.sheet;
 
-import br.com.objectos.code.annotations.Generated;
 import br.com.objectos.css.Css;
 import br.com.objectos.css.function.RotateFunction;
 import br.com.objectos.css.function.RotateXFunction;
@@ -391,7 +390,6 @@ import br.com.objectos.css.type.WhiteSpaceValue;
 import br.com.objectos.css.type.ZIndexValue;
 import br.com.objectos.css.type.Zero;
 
-@Generated("br.com.objectos.css.boot.CssBoot")
 abstract class GeneratedStyleSheet {
   protected static final TypeSelector a = Css.a;
 

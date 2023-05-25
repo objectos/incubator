@@ -15,11 +15,9 @@
  */
 package br.com.objectos.css.boot;
 
-import br.com.objectos.code.annotations.Generated;
 import br.com.objectos.css.boot.spec.KeywordName;
 import br.com.objectos.css.boot.spec.Source;
 
-@Generated("br.com.objectos.css.specgen.SpecgenBoot")
 @DoNotOverwrite
 final class FlexDirectionPropertyModule extends AbstractPropertyModule {
 
@@ -38,16 +36,16 @@ final class FlexDirectionPropertyModule extends AbstractPropertyModule {
     rowReverse = keyword("row-reverse");
 
     property(
-        "flex-direction",
+      "flex-direction",
 
-        formal(
-            Source.MDN,
-            "row | row-reverse | column | column-reverse"
-        ),
+      formal(
+        Source.MDN,
+        "row | row-reverse | column | column-reverse"
+      ),
 
-        globalSig,
+      globalSig,
 
-        sig(t("FlexDirectionValue", row, rowReverse, column, columnReverse), "value")
+      sig(t("FlexDirectionValue", row, rowReverse, column, columnReverse), "value")
     );
   }
 

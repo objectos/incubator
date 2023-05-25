@@ -15,11 +15,9 @@
  */
 package br.com.objectos.css.boot;
 
-import br.com.objectos.code.annotations.Generated;
 import br.com.objectos.css.boot.spec.KeywordName;
 import br.com.objectos.css.boot.spec.Source;
 
-@Generated("br.com.objectos.css.specgen.SpecgenBoot")
 @DoNotOverwrite
 final class BackgroundOriginPropertyModule extends AbstractPropertyModule {
 
@@ -30,18 +28,18 @@ final class BackgroundOriginPropertyModule extends AbstractPropertyModule {
     KeywordName paddingBox = keyword("padding-box");
 
     property(
-        "background-origin",
+      "background-origin",
 
-        formal(
-            Source.MDN,
-            "<box>#",
+      formal(
+        Source.MDN,
+        "<box>#",
 
-            "<box> = border-box | padding-box | content-box"
-        ),
+        "<box> = border-box | padding-box | content-box"
+      ),
 
-        globalSig,
+      globalSig,
 
-        sig(t("BoxValue", borderBox, paddingBox, contentBox), "value")
+      sig(t("BoxValue", borderBox, paddingBox, contentBox), "value")
     );
   }
 

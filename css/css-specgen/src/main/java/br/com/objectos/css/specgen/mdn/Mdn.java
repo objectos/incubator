@@ -15,21 +15,22 @@
  */
 package br.com.objectos.css.specgen.mdn;
 
-import br.com.objectos.core.io.Charsets;
-import br.com.objectos.core.io.Read;
-import br.com.objectos.core.io.Resource;
 import br.com.objectos.css.specgen.Property;
 import br.com.objectos.css.specgen.Spec;
-import br.com.objectos.css.specgen.ValueType;
 import br.com.objectos.css.specgen.Spec.Builder;
+import br.com.objectos.css.specgen.ValueType;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
-import objectos.util.UnmodifiableList;
+import java.util.List;
 import objectos.util.GrowableList;
+import objectos.util.UnmodifiableList;
 
 public class Mdn {
 
@@ -44,17 +45,43 @@ public class Mdn {
   public static Spec load() throws IOException {
     Builder b = Spec.builder();
 
-    Resource properties = Resource.getResource("mdn-properties.txt");
+    var lines = readAllLines("mdn-properties.txt");
 
-    UnmodifiableList<String> lines = Read.lines(properties, Charsets.utf8());
-
-    for (String propertyLine : lines) {
-      if (isNotEmpty(propertyLine)) {
-        b.addProperty(loadProperty(propertyLine));
+    for (var line : lines) {
+      if (isNotEmpty(line)) {
+        b.addProperty(loadProperty(line));
       }
     }
 
     return b.build();
+  }
+
+  private static List<String> readAllLines(String resourceName) throws IOException {
+    var currentThread = Thread.currentThread();
+
+    var classLoader = currentThread.getContextClassLoader();
+
+    var url = classLoader.getResource(resourceName);
+
+    if (url == null) {
+      throw new IllegalArgumentException(
+        "Resource %s was not found".formatted(resourceName)
+      );
+    }
+
+    var list = new GrowableList<String>();
+
+    try (var in = url.openStream();
+        var inr = new InputStreamReader(in, StandardCharsets.UTF_8);
+        var reader = new BufferedReader(inr)) {
+      String line = null;
+
+      while ((line = reader.readLine()) != null) {
+        list.add(line);
+      }
+    }
+
+    return list.toUnmodifiableList();
   }
 
   public static void main(String[] args) {
@@ -81,18 +108,16 @@ public class Mdn {
     String[] parts = line.split(":");
     String propertyName = parts[0];
     return new Property(
-        propertyName,
-        parts[1],
-        loadValueTypes(propertyName)
+      propertyName,
+      parts[1],
+      loadValueTypes(propertyName)
     );
   }
 
   private static UnmodifiableList<ValueType> loadValueTypes(String property) throws IOException {
     GrowableList<ValueType> types = new GrowableList<>();
 
-    Resource resource = Resource.getResource("mdn/" + property);
-
-    UnmodifiableList<String> lines = Read.lines(resource, Charsets.utf8());
+    var lines = readAllLines("mdn/" + property);
 
     for (String line : lines) {
       if (isNotEmpty(line)) {
@@ -117,8 +142,8 @@ public class Mdn {
     Path mdnPropertiesPath = resourcesPath.resolve("mdn-properties.txt");
 
     try (BufferedWriter mdnPropertiesWriter = Files.newBufferedWriter(
-        mdnPropertiesPath,
-        StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING)) {
+      mdnPropertiesPath,
+      StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING)) {
       for (Property property : spec.properties()) {
         mdnPropertiesWriter.write(property.write());
         mdnPropertiesWriter.newLine();
@@ -131,8 +156,8 @@ public class Mdn {
   private void writeProperty(Path mdnPath, Property property) throws IOException {
     Path propertyPath = mdnPath.resolve(property.name());
     try (BufferedWriter writer = Files.newBufferedWriter(
-        propertyPath,
-        StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING)) {
+      propertyPath,
+      StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING)) {
       for (ValueType type : property.valueTypes()) {
         writer.write(type.write());
         writer.newLine();

@@ -15,28 +15,26 @@
  */
 package br.com.objectos.css.boot;
 
-import br.com.objectos.code.annotations.Generated;
 import br.com.objectos.css.boot.spec.JavaType;
 import br.com.objectos.css.boot.spec.Source;
 
-@Generated("br.com.objectos.css.specgen.SpecgenBoot")
 @DoNotOverwrite
 final class FlexShrinkPropertyModule extends AbstractPropertyModule {
 
   @Override
   final void propertyDefinition() {
     property(
-        "flex-shrink",
+      "flex-shrink",
 
-        formal(
-            Source.MDN,
-            "<number>"
-        ),
+      formal(
+        Source.MDN,
+        "<number>"
+      ),
 
-        globalSig,
+      globalSig,
 
-        sig(JavaType.DOUBLE, "value"),
-        sig(JavaType.INT, "value")
+      sig(JavaType.DOUBLE, "value"),
+      sig(JavaType.INT, "value")
     );
   }
 

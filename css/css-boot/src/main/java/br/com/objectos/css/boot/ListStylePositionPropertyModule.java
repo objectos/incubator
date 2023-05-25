@@ -15,11 +15,9 @@
  */
 package br.com.objectos.css.boot;
 
-import br.com.objectos.code.annotations.Generated;
 import br.com.objectos.css.boot.spec.KeywordName;
 import br.com.objectos.css.boot.spec.Source;
 
-@Generated("br.com.objectos.css.specgen.SpecgenBoot")
 @DoNotOverwrite
 final class ListStylePositionPropertyModule extends AbstractPropertyModule {
 
@@ -29,16 +27,16 @@ final class ListStylePositionPropertyModule extends AbstractPropertyModule {
     KeywordName outside = keyword("outside");
 
     property(
-        "list-style-position",
+      "list-style-position",
 
-        formal(
-            Source.MDN,
-            "inside | outside"
-        ),
+      formal(
+        Source.MDN,
+        "inside | outside"
+      ),
 
-        globalSig,
+      globalSig,
 
-        sig(t("ListStylePositionValue", inside, outside), "value")
+      sig(t("ListStylePositionValue", inside, outside), "value")
     );
   }
 

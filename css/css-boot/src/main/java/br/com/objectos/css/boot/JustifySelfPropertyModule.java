@@ -15,38 +15,36 @@
  */
 package br.com.objectos.css.boot;
 
-import br.com.objectos.code.annotations.Generated;
 import br.com.objectos.css.boot.spec.Source;
 import br.com.objectos.css.boot.spec.ValueType;
 
-@Generated("br.com.objectos.css.specgen.SpecgenBoot")
 @DoNotOverwrite
 final class JustifySelfPropertyModule extends AbstractAlignOrJustifyPropertyModule {
 
   @Override
   final void propertyDefinitionImpl() {
     ValueType justifySelf = t(
-        "JustifySelfValue",
-        auto, normal, stretch, baseline, selfPositionOrLeftOrRight
+      "JustifySelfValue",
+      auto, normal, stretch, baseline, selfPositionOrLeftOrRight
     );
 
     property(
-        "justify-self",
+      "justify-self",
 
-        formal(
-            Source.MDN,
-            "auto | normal | stretch | <baseline-position> | <overflow-position>? [ <self-position> | left | right ]",
+      formal(
+        Source.MDN,
+        "auto | normal | stretch | <baseline-position> | <overflow-position>? [ <self-position> | left | right ]",
 
-            "<baseline-position> = [ first | last ]? baseline",
-            "<overflow-position> = unsafe | safe",
-            "<self-position> = center | start | end | self-start | self-end | flex-start | flex-end"
-        ),
+        "<baseline-position> = [ first | last ]? baseline",
+        "<overflow-position> = unsafe | safe",
+        "<self-position> = center | start | end | self-start | self-end | flex-start | flex-end"
+      ),
 
-        globalSig,
+      globalSig,
 
-        sig(justifySelf, "value"),
-        sig(baselinePosition, "firstOrLast", baseline, "baseline"),
-        sig(overflowPosition, "safeOrUnsafe", selfPositionOrLeftOrRight, "position")
+      sig(justifySelf, "value"),
+      sig(baselinePosition, "firstOrLast", baseline, "baseline"),
+      sig(overflowPosition, "safeOrUnsafe", selfPositionOrLeftOrRight, "position")
     );
   }
 

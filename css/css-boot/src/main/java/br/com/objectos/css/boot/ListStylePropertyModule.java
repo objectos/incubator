@@ -15,36 +15,34 @@
  */
 package br.com.objectos.css.boot;
 
-import br.com.objectos.code.annotations.Generated;
 import br.com.objectos.css.boot.spec.Source;
 import br.com.objectos.css.boot.spec.ValueType;
 
-@Generated("br.com.objectos.css.specgen.SpecgenBoot")
 @DoNotOverwrite
 final class ListStylePropertyModule extends AbstractPropertyModule {
 
   @Override
   final void propertyDefinition() {
     ValueType shorthand = t(
-        "ListStyleValue",
-        t("ListStyleTypeValue"),
-        t("ListStylePositionValue"),
-        t("ListStyleImageValue")
+      "ListStyleValue",
+      t("ListStyleTypeValue"),
+      t("ListStylePositionValue"),
+      t("ListStyleImageValue")
     );
 
     property(
-        "list-style",
+      "list-style",
 
-        formal(
-            Source.MDN,
-            "<\'list-style-type\'> || <\'list-style-position\'> || <\'list-style-image\'>"
-        ),
+      formal(
+        Source.MDN,
+        "<\'list-style-type\'> || <\'list-style-position\'> || <\'list-style-image\'>"
+      ),
 
-        globalSig,
+      globalSig,
 
-        sig(shorthand, "value"),
-        sig(shorthand, "value1", shorthand, "value2"),
-        sig(shorthand, "value1", shorthand, "value2", shorthand, "value3")
+      sig(shorthand, "value"),
+      sig(shorthand, "value1", shorthand, "value2"),
+      sig(shorthand, "value1", shorthand, "value2", shorthand, "value3")
     );
   }
 

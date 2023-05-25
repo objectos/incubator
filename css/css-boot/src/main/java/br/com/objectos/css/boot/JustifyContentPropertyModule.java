@@ -15,42 +15,40 @@
  */
 package br.com.objectos.css.boot;
 
-import br.com.objectos.code.annotations.Generated;
 import br.com.objectos.css.boot.spec.Source;
 import br.com.objectos.css.boot.spec.ValueType;
 
-@Generated("br.com.objectos.css.specgen.SpecgenBoot")
 @DoNotOverwrite
 final class JustifyContentPropertyModule extends AbstractAlignOrJustifyPropertyModule {
 
   @Override
   final void propertyDefinitionImpl() {
     ValueType contentPositionOrLeftOrRight = t(
-        "ContentPositionOrLeftOrRight",
-        contentPosition, left, right
+      "ContentPositionOrLeftOrRight",
+      contentPosition, left, right
     );
 
     ValueType justifyContent = t(
-        "JustifyContentValue",
-        normal, contentDistribution, contentPositionOrLeftOrRight
+      "JustifyContentValue",
+      normal, contentDistribution, contentPositionOrLeftOrRight
     );
 
     property(
-        "justify-content",
+      "justify-content",
 
-        formal(
-            Source.MDN,
-            "normal | <content-distribution> | <overflow-position>? [ <content-position> | left | right ]",
+      formal(
+        Source.MDN,
+        "normal | <content-distribution> | <overflow-position>? [ <content-position> | left | right ]",
 
-            "<content-distribution> = space-between | space-around | space-evenly | stretch",
-            "<overflow-position> = unsafe | safe",
-            "<content-position> = center | start | end | flex-start | flex-end"
-        ),
+        "<content-distribution> = space-between | space-around | space-evenly | stretch",
+        "<overflow-position> = unsafe | safe",
+        "<content-position> = center | start | end | flex-start | flex-end"
+      ),
 
-        globalSig,
+      globalSig,
 
-        sig(justifyContent, "value"),
-        sig(overflowPosition, "safeOrUnsafe", contentPositionOrLeftOrRight, "position")
+      sig(justifyContent, "value"),
+      sig(overflowPosition, "safeOrUnsafe", contentPositionOrLeftOrRight, "position")
     );
   }
 

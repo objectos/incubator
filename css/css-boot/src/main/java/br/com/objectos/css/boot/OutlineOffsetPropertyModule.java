@@ -15,26 +15,24 @@
  */
 package br.com.objectos.css.boot;
 
-import br.com.objectos.code.annotations.Generated;
 import br.com.objectos.css.boot.spec.Source;
 
-@Generated("br.com.objectos.css.specgen.SpecgenBoot")
 @DoNotOverwrite
 final class OutlineOffsetPropertyModule extends AbstractPropertyModule {
 
   @Override
   final void propertyDefinition() {
     property(
-        "outline-offset",
+      "outline-offset",
 
-        formal(
-            Source.MDN,
-            "<length>"
-        ),
+      formal(
+        Source.MDN,
+        "<length>"
+      ),
 
-        globalSig,
+      globalSig,
 
-        sig(length, "offset")
+      sig(length, "offset")
     );
   }
 

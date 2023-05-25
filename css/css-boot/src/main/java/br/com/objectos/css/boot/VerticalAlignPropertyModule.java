@@ -15,12 +15,10 @@
  */
 package br.com.objectos.css.boot;
 
-import br.com.objectos.code.annotations.Generated;
 import br.com.objectos.css.boot.spec.KeywordName;
 import br.com.objectos.css.boot.spec.Source;
 import br.com.objectos.css.boot.spec.ValueType;
 
-@Generated("br.com.objectos.css.specgen.SpecgenBoot")
 @DoNotOverwrite
 final class VerticalAlignPropertyModule extends AbstractPropertyModule {
 
@@ -36,20 +34,20 @@ final class VerticalAlignPropertyModule extends AbstractPropertyModule {
     KeywordName top = keyword("top");
 
     ValueType verticalAlign = t("VerticalAlignValue",
-        baseline, sub, superKw, textTop, textBottom, middle, top, bottom, percentage, length
+      baseline, sub, superKw, textTop, textBottom, middle, top, bottom, percentage, length
     );
 
     property(
-        "vertical-align",
+      "vertical-align",
 
-        formal(
-            Source.MDN,
-            "baseline | sub | super | text-top | text-bottom | middle | top | bottom | <percentage> | <length>"
-        ),
+      formal(
+        Source.MDN,
+        "baseline | sub | super | text-top | text-bottom | middle | top | bottom | <percentage> | <length>"
+      ),
 
-        globalSig,
+      globalSig,
 
-        sig(verticalAlign, "value")
+      sig(verticalAlign, "value")
     );
   }
 

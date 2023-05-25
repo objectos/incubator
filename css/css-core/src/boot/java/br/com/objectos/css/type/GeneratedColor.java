@@ -1,10 +1,8 @@
 package br.com.objectos.css.type;
 
-import br.com.objectos.code.annotations.Generated;
 import objectos.util.GrowableMap;
 import objectos.util.UnmodifiableMap;
 
-@Generated("br.com.objectos.css.boot.CssBoot")
 abstract class GeneratedColor {
   public static final ColorName ActiveBorder = new ColorName(0, "ActiveBorder");
 

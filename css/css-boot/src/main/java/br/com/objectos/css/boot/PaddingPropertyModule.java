@@ -15,11 +15,9 @@
  */
 package br.com.objectos.css.boot;
 
-import br.com.objectos.code.annotations.Generated;
 import br.com.objectos.css.boot.spec.Source;
 import br.com.objectos.css.boot.spec.ValueType;
 
-@Generated("br.com.objectos.css.specgen.SpecgenBoot")
 @DoNotOverwrite
 final class PaddingPropertyModule extends AbstractPropertyModule {
 
@@ -28,32 +26,32 @@ final class PaddingPropertyModule extends AbstractPropertyModule {
     ValueType lengthOrPercentage = t("LengthOrPercentageValue", length, percentage);
 
     property(
-        "padding",
+      "padding",
 
-        formal(
-            Source.MDN,
-            "[ <length> | <percentage> ]{1,4}"
-        ),
+      formal(
+        Source.MDN,
+        "[ <length> | <percentage> ]{1,4}"
+      ),
 
-        globalSig,
+      globalSig,
 
-        sigXY1(lengthOrPercentage),
-        sigXY2(lengthOrPercentage),
-        sigXY3(lengthOrPercentage),
-        sigXY4(lengthOrPercentage)
+      sigXY1(lengthOrPercentage),
+      sigXY2(lengthOrPercentage),
+      sigXY3(lengthOrPercentage),
+      sigXY4(lengthOrPercentage)
     );
 
     property(
-        names("padding-top", "padding-right", "padding-bottom", "padding-left"),
+      names("padding-top", "padding-right", "padding-bottom", "padding-left"),
 
-        formal(
-            Source.MDN,
-            "<length> | <percentage>"
-        ),
+      formal(
+        Source.MDN,
+        "<length> | <percentage>"
+      ),
 
-        globalSig,
+      globalSig,
 
-        sig(lengthOrPercentage, "value")
+      sig(lengthOrPercentage, "value")
     );
   }
 

@@ -1,6 +1,5 @@
 package br.com.objectos.css.keyword;
 
-import br.com.objectos.code.annotations.Generated;
 import br.com.objectos.css.type.AlignSelfValue;
 import br.com.objectos.css.type.AppearanceValue;
 import br.com.objectos.css.type.BackgroundSizeArity2Value;
@@ -20,7 +19,6 @@ import br.com.objectos.css.type.TextSizeAdjustValue;
 import br.com.objectos.css.type.TopValue;
 import br.com.objectos.css.type.ZIndexValue;
 
-@Generated("br.com.objectos.css.boot.CssBoot")
 public final class AutoKeyword extends StandardKeyword implements AlignSelfValue, AppearanceValue, BackgroundSizeArity2Value, BottomValue, CursorValue, FlexArity1Value, HeightOrWidthValue, JustifySelfValue, LeftValue, MarginWidthValue, MaxHeightOrWidthValue, OutlineStyleValue, OverflowValue, RightValue, TextDecorationThicknessValue, TextSizeAdjustValue, TopValue, ZIndexValue {
   static final AutoKeyword INSTANCE = new AutoKeyword();
 

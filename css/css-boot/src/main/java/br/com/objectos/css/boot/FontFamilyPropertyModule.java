@@ -15,13 +15,11 @@
  */
 package br.com.objectos.css.boot;
 
-import br.com.objectos.code.annotations.Generated;
 import br.com.objectos.css.boot.spec.JavaType;
 import br.com.objectos.css.boot.spec.KeywordName;
 import br.com.objectos.css.boot.spec.Source;
 import br.com.objectos.css.boot.spec.ValueType;
 
-@Generated("br.com.objectos.css.specgen.SpecgenBoot")
 @DoNotOverwrite
 final class FontFamilyPropertyModule extends AbstractPropertyModule {
 
@@ -34,29 +32,29 @@ final class FontFamilyPropertyModule extends AbstractPropertyModule {
     KeywordName serif = keyword("serif");
 
     ValueType fontFamily = t(
-        "FontFamilyValue",
-        serif, sansSerif, cursive, fantasy, monospace,
-        string
+      "FontFamilyValue",
+      serif, sansSerif, cursive, fantasy, monospace,
+      string
     );
 
     propertyHash(
-        "font-family",
+      "font-family",
 
-        formal(
-            Source.MDN,
-            "[ <family-name> | <generic-family> ]#",
+      formal(
+        Source.MDN,
+        "[ <family-name> | <generic-family> ]#",
 
-            "<family-name> = <string> | <custom-ident>+",
-            "<generic-family> = serif | sans-serif | cursive | fantasy | monospace"
-        ),
+        "<family-name> = <string> | <custom-ident>+",
+        "<generic-family> = serif | sans-serif | cursive | fantasy | monospace"
+      ),
 
-        globalSig,
+      globalSig,
 
-        sig(fontFamily, "family"),
+      sig(fontFamily, "family"),
 
-        sig(JavaType.STRING, "family"),
+      sig(JavaType.STRING, "family"),
 
-        sigHash()
+      sigHash()
     );
   }
 

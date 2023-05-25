@@ -15,11 +15,9 @@
  */
 package br.com.objectos.css.boot;
 
-import br.com.objectos.code.annotations.Generated;
 import br.com.objectos.css.boot.spec.KeywordName;
 import br.com.objectos.css.boot.spec.Source;
 
-@Generated("br.com.objectos.css.specgen.SpecgenBoot")
 @DoNotOverwrite
 final class TextAlignPropertyModule extends AbstractPropertyModule {
 
@@ -34,16 +32,16 @@ final class TextAlignPropertyModule extends AbstractPropertyModule {
     KeywordName start = keyword("start");
 
     property(
-        "text-align",
+      "text-align",
 
-        formal(
-            Source.MDN,
-            "start | end | left | right | center | justify | match-parent"
-        ),
+      formal(
+        Source.MDN,
+        "start | end | left | right | center | justify | match-parent"
+      ),
 
-        globalSig,
+      globalSig,
 
-        sig(t("TextAlignValue", start, end, left, right, center, justify, matchParent), "value")
+      sig(t("TextAlignValue", start, end, left, right, center, justify, matchParent), "value")
     );
   }
 

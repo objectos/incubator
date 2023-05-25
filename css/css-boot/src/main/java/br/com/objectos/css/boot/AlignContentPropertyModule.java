@@ -15,39 +15,37 @@
  */
 package br.com.objectos.css.boot;
 
-import br.com.objectos.code.annotations.Generated;
 import br.com.objectos.css.boot.spec.Source;
 import br.com.objectos.css.boot.spec.ValueType;
 
-@Generated("br.com.objectos.css.specgen.SpecgenBoot")
 @DoNotOverwrite
 final class AlignContentPropertyModule extends AbstractAlignOrJustifyPropertyModule {
 
   @Override
   final void propertyDefinitionImpl() {
     ValueType alignContent = t(
-        "AlignContentValue",
-        normal, baseline, contentDistribution, contentPosition
+      "AlignContentValue",
+      normal, baseline, contentDistribution, contentPosition
     );
 
     property(
-        "align-content",
+      "align-content",
 
-        formal(
-            Source.MDN,
-            "normal | <baseline-position> | <content-distribution> | <overflow-position>? <content-position>",
+      formal(
+        Source.MDN,
+        "normal | <baseline-position> | <content-distribution> | <overflow-position>? <content-position>",
 
-            "<baseline-position> = [ first | last ]? baseline",
-            "<content-distribution> = space-between | space-around | space-evenly | stretch",
-            "<overflow-position> = unsafe | safe",
-            "<content-position> = center | start | end | flex-start | flex-end"
-        ),
+        "<baseline-position> = [ first | last ]? baseline",
+        "<content-distribution> = space-between | space-around | space-evenly | stretch",
+        "<overflow-position> = unsafe | safe",
+        "<content-position> = center | start | end | flex-start | flex-end"
+      ),
 
-        globalSig,
+      globalSig,
 
-        sig(alignContent, "value"),
-        sig(baselinePosition, "firstOrLast", baseline, "baseline"),
-        sig(overflowPosition, "safeOrUnsafe", contentPosition, "position")
+      sig(alignContent, "value"),
+      sig(baselinePosition, "firstOrLast", baseline, "baseline"),
+      sig(overflowPosition, "safeOrUnsafe", contentPosition, "position")
     );
   }
 

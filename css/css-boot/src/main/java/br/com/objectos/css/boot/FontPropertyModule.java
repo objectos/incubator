@@ -15,12 +15,10 @@
  */
 package br.com.objectos.css.boot;
 
-import br.com.objectos.code.annotations.Generated;
 import br.com.objectos.css.boot.spec.KeywordName;
 import br.com.objectos.css.boot.spec.Source;
 import br.com.objectos.css.boot.spec.ValueType;
 
-@Generated("br.com.objectos.css.specgen.SpecgenBoot")
 @DoNotOverwrite
 final class FontPropertyModule extends AbstractPropertyModule {
 
@@ -36,29 +34,29 @@ final class FontPropertyModule extends AbstractPropertyModule {
     KeywordName statusBar = keyword("status-bar");
 
     ValueType systemFont = t(
-        "SystemFontValue",
-        caption, icon, menu, messageBox, smallCaption, statusBar
+      "SystemFontValue",
+      caption, icon, menu, messageBox, smallCaption, statusBar
     );
 
     ValueType fontVariantCss21 = t(
-        "FontVariantCss21Value",
-        normal, smallCaps
+      "FontVariantCss21Value",
+      normal, smallCaps
     );
 
     property(
-        "font",
+      "font",
 
-        formal(
-            Source.MDN,
-            "[ [ <\'font-style\'> || <font-variant-css21> || <\'font-weight\'> || <\'font-stretch\'> ]? <\'font-size\'> [ / <\'line-height\'> ]? <\'font-family\'> ] | caption | icon | menu | message-box | small-caption | status-bar",
+      formal(
+        Source.MDN,
+        "[ [ <\'font-style\'> || <font-variant-css21> || <\'font-weight\'> || <\'font-stretch\'> ]? <\'font-size\'> [ / <\'line-height\'> ]? <\'font-family\'> ] | caption | icon | menu | message-box | small-caption | status-bar",
 
-            "<font-variant-css21> = [ normal | small-caps ]"
-        ),
+        "<font-variant-css21> = [ normal | small-caps ]"
+      ),
 
-        globalSig,
+      globalSig,
 
-        sig(systemFont, "value"),
-        sig(fontVariantCss21, "value")
+      sig(systemFont, "value"),
+      sig(fontVariantCss21, "value")
     );
   }
 

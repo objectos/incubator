@@ -1,6 +1,5 @@
 package br.com.objectos.css.keyword;
 
-import br.com.objectos.code.annotations.Generated;
 import br.com.objectos.css.type.AlignContentValue;
 import br.com.objectos.css.type.AlignItemsValue;
 import br.com.objectos.css.type.AlignSelfValue;
@@ -14,7 +13,6 @@ import br.com.objectos.css.type.JustifySelfValue;
 import br.com.objectos.css.type.LineHeightValue;
 import br.com.objectos.css.type.WhiteSpaceValue;
 
-@Generated("br.com.objectos.css.boot.CssBoot")
 public final class NormalKeyword extends StandardKeyword implements AlignContentValue, AlignItemsValue, AlignSelfValue, ContentValue, FontStyleValue, FontVariantCss21Value, FontWeightValue, JustifyContentValue, JustifyItemsValue, JustifySelfValue, LineHeightValue, WhiteSpaceValue {
   static final NormalKeyword INSTANCE = new NormalKeyword();
 

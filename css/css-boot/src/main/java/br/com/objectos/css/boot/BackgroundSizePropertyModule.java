@@ -15,12 +15,10 @@
  */
 package br.com.objectos.css.boot;
 
-import br.com.objectos.code.annotations.Generated;
 import br.com.objectos.css.boot.spec.KeywordName;
 import br.com.objectos.css.boot.spec.Source;
 import br.com.objectos.css.boot.spec.ValueType;
 
-@Generated("br.com.objectos.css.specgen.SpecgenBoot")
 @DoNotOverwrite
 final class BackgroundSizePropertyModule extends AbstractPropertyModule {
 
@@ -35,20 +33,20 @@ final class BackgroundSizePropertyModule extends AbstractPropertyModule {
     ValueType arity1 = t("BackgroundSizeArity1Value", arity2, cover, contain);
 
     property(
-        "background-size",
+      "background-size",
 
-        formal(
-            Source.MDN,
-            "<bg-size># ",
+      formal(
+        Source.MDN,
+        "<bg-size># ",
 
-            "<bg-size> = [ <length-percentage> | auto ]{1,2} | cover | contain",
-            "<length-percentage> = <length> | <percentage>"
-        ),
+        "<bg-size> = [ <length-percentage> | auto ]{1,2} | cover | contain",
+        "<length-percentage> = <length> | <percentage>"
+      ),
 
-        globalSig,
+      globalSig,
 
-        sig(arity1, "value"),
-        sig(arity2, "value1", arity2, "value2")
+      sig(arity1, "value"),
+      sig(arity2, "value1", arity2, "value2")
     );
   }
 

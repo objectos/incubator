@@ -15,13 +15,11 @@
  */
 package br.com.objectos.css.boot;
 
-import br.com.objectos.code.annotations.Generated;
 import br.com.objectos.css.boot.spec.JavaType;
 import br.com.objectos.css.boot.spec.KeywordName;
 import br.com.objectos.css.boot.spec.Source;
 import br.com.objectos.css.boot.spec.ValueType;
 
-@Generated("br.com.objectos.css.specgen.SpecgenBoot")
 @DoNotOverwrite
 final class FlexPropertyModule extends AbstractPropertyModule {
 
@@ -33,24 +31,24 @@ final class FlexPropertyModule extends AbstractPropertyModule {
     ValueType width = heightOrWidthValue;
 
     property(
-        "flex",
+      "flex",
 
-        formal(
-            Source.MDN,
-            "none | [ <\'flex-grow\'> <\'flex-shrink\'>? || <\'flex-basis\'> ]"
-        ),
+      formal(
+        Source.MDN,
+        "none | [ <\'flex-grow\'> <\'flex-shrink\'>? || <\'flex-basis\'> ]"
+      ),
 
-        globalSig,
+      globalSig,
 
-        sig(t("FlexArity1Value", auto, none), "value"),
-        sig(JavaType.DOUBLE, "grow"),
-        sig(JavaType.INT, "grow"),
+      sig(t("FlexArity1Value", auto, none), "value"),
+      sig(JavaType.DOUBLE, "grow"),
+      sig(JavaType.INT, "grow"),
 
-        sig(numberValue, "grow", numberValue, "shrink"),
+      sig(numberValue, "grow", numberValue, "shrink"),
 
-        sig(numberValue, "grow", width, "basis"),
+      sig(numberValue, "grow", width, "basis"),
 
-        sig(numberValue, "grow", numberValue, "shrink", width, "basis")
+      sig(numberValue, "grow", numberValue, "shrink", width, "basis")
     );
   }
 

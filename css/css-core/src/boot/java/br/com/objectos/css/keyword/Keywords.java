@@ -1,10 +1,8 @@
 package br.com.objectos.css.keyword;
 
-import br.com.objectos.code.annotations.Generated;
 import objectos.util.GrowableMap;
 import objectos.util.UnmodifiableMap;
 
-@Generated("br.com.objectos.css.boot.CssBoot")
 public final class Keywords {
   public static final MozArabicIndicKeyword mozArabicIndic = MozArabicIndicKeyword.INSTANCE;
 

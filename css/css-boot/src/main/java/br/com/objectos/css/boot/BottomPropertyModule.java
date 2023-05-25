@@ -15,11 +15,9 @@
  */
 package br.com.objectos.css.boot;
 
-import br.com.objectos.code.annotations.Generated;
 import br.com.objectos.css.boot.spec.KeywordName;
 import br.com.objectos.css.boot.spec.Source;
 
-@Generated("br.com.objectos.css.specgen.SpecgenBoot")
 @DoNotOverwrite
 final class BottomPropertyModule extends AbstractPropertyModule {
 
@@ -28,16 +26,16 @@ final class BottomPropertyModule extends AbstractPropertyModule {
     KeywordName auto = keyword("auto");
 
     property(
-        "bottom",
+      "bottom",
 
-        formal(
-            Source.MDN,
-            "<length> | <percentage> | auto"
-        ),
+      formal(
+        Source.MDN,
+        "<length> | <percentage> | auto"
+      ),
 
-        globalSig,
+      globalSig,
 
-        sig(t("BottomValue", length, percentage, auto), "value")
+      sig(t("BottomValue", length, percentage, auto), "value")
     );
   }
 

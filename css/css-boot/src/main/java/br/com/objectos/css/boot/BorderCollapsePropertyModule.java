@@ -15,11 +15,9 @@
  */
 package br.com.objectos.css.boot;
 
-import br.com.objectos.code.annotations.Generated;
 import br.com.objectos.css.boot.spec.KeywordName;
 import br.com.objectos.css.boot.spec.Source;
 
-@Generated("br.com.objectos.css.specgen.SpecgenBoot")
 @DoNotOverwrite
 final class BorderCollapsePropertyModule extends AbstractPropertyModule {
 
@@ -29,16 +27,16 @@ final class BorderCollapsePropertyModule extends AbstractPropertyModule {
     KeywordName separate = keyword("separate");
 
     property(
-        "border-collapse",
+      "border-collapse",
 
-        formal(
-            Source.MDN,
-            "collapse | separate"
-        ),
+      formal(
+        Source.MDN,
+        "collapse | separate"
+      ),
 
-        globalSig,
+      globalSig,
 
-        sig(t("BorderCollapseValue", collapse, separate), "value")
+      sig(t("BorderCollapseValue", collapse, separate), "value")
     );
   }
 

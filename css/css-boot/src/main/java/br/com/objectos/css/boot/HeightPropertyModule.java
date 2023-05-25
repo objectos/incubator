@@ -15,28 +15,26 @@
  */
 package br.com.objectos.css.boot;
 
-import br.com.objectos.code.annotations.Generated;
 import br.com.objectos.css.boot.spec.Source;
 
-@Generated("br.com.objectos.css.specgen.SpecgenBoot")
 @DoNotOverwrite
 final class HeightPropertyModule extends AbstractPropertyModule {
 
   @Override
   final void propertyDefinition() {
     property(
-        names("height", "width"),
+      names("height", "width"),
 
-        formal(
-            Source.MDN,
-            "auto | <length> | <percentage> | min-content | max-content | fit-content(<length-percentage>)",
+      formal(
+        Source.MDN,
+        "auto | <length> | <percentage> | min-content | max-content | fit-content(<length-percentage>)",
 
-            "<length-percentage> = <length> | <percentage>"
-        ),
+        "<length-percentage> = <length> | <percentage>"
+      ),
 
-        globalSig,
+      globalSig,
 
-        sig(heightOrWidthValue, "value")
+      sig(heightOrWidthValue, "value")
     );
   }
 

@@ -15,11 +15,9 @@
  */
 package br.com.objectos.css.boot;
 
-import br.com.objectos.code.annotations.Generated;
 import br.com.objectos.css.boot.spec.KeywordName;
 import br.com.objectos.css.boot.spec.Source;
 
-@Generated("br.com.objectos.css.specgen.SpecgenBoot")
 @DoNotOverwrite
 final class OutlineStylePropertyModule extends AbstractPropertyModule {
 
@@ -28,16 +26,16 @@ final class OutlineStylePropertyModule extends AbstractPropertyModule {
     KeywordName auto = keyword("auto");
 
     property(
-        "outline-style",
+      "outline-style",
 
-        formal(
-            Source.MDN,
-            "auto | <\'border-style\'>"
-        ),
+      formal(
+        Source.MDN,
+        "auto | <\'border-style\'>"
+      ),
 
-        globalSig,
+      globalSig,
 
-        sig(t("OutlineStyleValue", auto, t("LineStyleValue")), "value")
+      sig(t("OutlineStyleValue", auto, t("LineStyleValue")), "value")
     );
   }
 

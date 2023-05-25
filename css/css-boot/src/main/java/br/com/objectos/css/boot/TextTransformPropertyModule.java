@@ -15,12 +15,10 @@
  */
 package br.com.objectos.css.boot;
 
-import br.com.objectos.code.annotations.Generated;
 import br.com.objectos.css.boot.spec.KeywordName;
 import br.com.objectos.css.boot.spec.Source;
 import br.com.objectos.css.boot.spec.ValueType;
 
-@Generated("br.com.objectos.css.specgen.SpecgenBoot")
 @DoNotOverwrite
 final class TextTransformPropertyModule extends AbstractPropertyModule {
 
@@ -34,21 +32,21 @@ final class TextTransformPropertyModule extends AbstractPropertyModule {
     KeywordName uppercase = keyword("uppercase");
 
     ValueType textTransform = t(
-        "TextTransformValue",
-        none, capitalize, uppercase, lowercase, fullWidth, fullSizeKana
+      "TextTransformValue",
+      none, capitalize, uppercase, lowercase, fullWidth, fullSizeKana
     );
 
     property(
-        "text-transform",
+      "text-transform",
 
-        formal(
-            Source.MDN,
-            "none | capitalize | uppercase | lowercase | full-width | full-size-kana"
-        ),
+      formal(
+        Source.MDN,
+        "none | capitalize | uppercase | lowercase | full-width | full-size-kana"
+      ),
 
-        globalSig,
+      globalSig,
 
-        sig(textTransform, "value")
+      sig(textTransform, "value")
     );
   }
 

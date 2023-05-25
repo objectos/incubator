@@ -15,11 +15,9 @@
  */
 package br.com.objectos.css.boot;
 
-import br.com.objectos.code.annotations.Generated;
 import br.com.objectos.css.boot.spec.KeywordName;
 import br.com.objectos.css.boot.spec.Source;
 
-@Generated("br.com.objectos.css.specgen.SpecgenBoot")
 @DoNotOverwrite
 final class AppearancePropertyModule extends AbstractPropertyModule {
 
@@ -44,28 +42,28 @@ final class AppearancePropertyModule extends AbstractPropertyModule {
     KeywordName textfield = keyword("textfield");
 
     property(
-        names("appearance", "-moz-appearance", "-webkit-appearance"),
+      names("appearance", "-moz-appearance", "-webkit-appearance"),
 
-        formal(
-            Source.MDN,
-            "none | auto | button | textfield | <compat>",
+      formal(
+        Source.MDN,
+        "none | auto | button | textfield | <compat>",
 
-            "<compat> = searchfield | textarea | push-button | button-bevel | slider-horizontal | checkbox | radio | square-button | menulist | menulist-button | listbox | meter | progress-bar"
+        "<compat> = searchfield | textarea | push-button | button-bevel | slider-horizontal | checkbox | radio | square-button | menulist | menulist-button | listbox | meter | progress-bar"
+      ),
+
+      globalSig,
+
+      sig(
+        t(
+          "AppearanceValue",
+          none, auto, button, textfield,
+
+          searchfield, textarea, pushButton, buttonBevel, sliderHorizontal,
+          checkbox, radio, squareButton, menulist,
+          menulistButton, listbox, meter, progressBar
         ),
-
-        globalSig,
-
-        sig(
-            t(
-                "AppearanceValue",
-                none, auto, button, textfield,
-
-                searchfield, textarea, pushButton, buttonBevel, sliderHorizontal,
-                checkbox, radio, squareButton, menulist,
-                menulistButton, listbox, meter, progressBar
-            ),
-            "value"
-        )
+        "value"
+      )
     );
   }
 

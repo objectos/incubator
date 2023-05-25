@@ -15,11 +15,9 @@
  */
 package br.com.objectos.css.boot;
 
-import br.com.objectos.code.annotations.Generated;
 import br.com.objectos.css.boot.spec.KeywordName;
 import br.com.objectos.css.boot.spec.Source;
 
-@Generated("br.com.objectos.css.specgen.SpecgenBoot")
 @DoNotOverwrite
 final class PositionPropertyModule extends AbstractPropertyModule {
 
@@ -32,16 +30,16 @@ final class PositionPropertyModule extends AbstractPropertyModule {
     KeywordName sticky = keyword("sticky");
 
     property(
-        "position",
+      "position",
 
-        formal(
-            Source.MDN,
-            "static | relative | absolute | sticky | fixed"
-        ),
+      formal(
+        Source.MDN,
+        "static | relative | absolute | sticky | fixed"
+      ),
 
-        globalSig,
+      globalSig,
 
-        sig(t("PositionValue", staticKw, relative, absolute, sticky, fixed), "value")
+      sig(t("PositionValue", staticKw, relative, absolute, sticky, fixed), "value")
     );
   }
 

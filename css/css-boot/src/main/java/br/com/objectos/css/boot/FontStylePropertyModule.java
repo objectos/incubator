@@ -15,11 +15,9 @@
  */
 package br.com.objectos.css.boot;
 
-import br.com.objectos.code.annotations.Generated;
 import br.com.objectos.css.boot.spec.KeywordName;
 import br.com.objectos.css.boot.spec.Source;
 
-@Generated("br.com.objectos.css.specgen.SpecgenBoot")
 @DoNotOverwrite
 final class FontStylePropertyModule extends AbstractPropertyModule {
 
@@ -30,16 +28,16 @@ final class FontStylePropertyModule extends AbstractPropertyModule {
     KeywordName oblique = keyword("oblique");
 
     property(
-        "font-style",
+      "font-style",
 
-        formal(
-            Source.MDN,
-            "normal | italic | oblique <angle>?"
-        ),
+      formal(
+        Source.MDN,
+        "normal | italic | oblique <angle>?"
+      ),
 
-        globalSig,
+      globalSig,
 
-        sig(t("FontStyleValue", italic, normal, oblique), "value")
+      sig(t("FontStyleValue", italic, normal, oblique), "value")
     );
   }
 

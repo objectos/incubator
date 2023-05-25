@@ -17,9 +17,6 @@ package br.com.objectos.css.specgen.mdn;
 
 import static org.testng.Assert.assertEquals;
 
-import br.com.objectos.core.io.Charsets;
-import br.com.objectos.core.io.Read;
-import br.com.objectos.core.io.Resource;
 import br.com.objectos.css.specgen.Property;
 import br.com.objectos.css.specgen.ValueType;
 import java.io.IOException;
@@ -43,11 +40,11 @@ public class PropertyPageTest {
 
     ValueType vt0 = vt.get(0);
     assertEquals(
-        vt0,
-        new ValueType(
-            "<bg-layer>",
-            "<bg-image> || <bg-position> [ / <bg-size> ]? || <repeat-style> || <attachment> || <box> || <box>"
-        )
+      vt0,
+      new ValueType(
+        "<bg-layer>",
+        "<bg-image> || <bg-position> [ / <bg-size> ]? || <repeat-style> || <attachment> || <box> || <box>"
+      )
     );
   }
 
@@ -57,19 +54,17 @@ public class PropertyPageTest {
     Property p = page.build();
 
     assertEquals(
-        p,
-        new Property(
-            "bottom",
-            "<length> | <percentage> | auto",
-            UnmodifiableList.of()
-        )
+      p,
+      new Property(
+        "bottom",
+        "<length> | <percentage> | auto",
+        UnmodifiableList.of()
+      )
     );
   }
 
   private PropertyPage propertyPage(String resourceName) throws IOException {
-    Resource resource = Resource.getResource(resourceName);
-
-    String html = Read.string(resource, Charsets.utf8());
+    String html = Resource.readString(resourceName);
 
     Document document = Jsoup.parse(html);
 

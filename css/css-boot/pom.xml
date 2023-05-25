@@ -106,10 +106,6 @@
 			<groupId>br.com.objectos</groupId>
 			<artifactId>objectos-code</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>br.com.objectos</groupId>
-			<artifactId>code-annotations</artifactId>
-		</dependency>
 		
 		<dependency>
 			<groupId>br.com.objectos</groupId>

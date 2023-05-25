@@ -15,72 +15,70 @@
  */
 package br.com.objectos.css.boot;
 
-import br.com.objectos.code.annotations.Generated;
 import br.com.objectos.css.boot.spec.Source;
 import br.com.objectos.css.boot.spec.ValueType;
 
-@Generated("br.com.objectos.css.specgen.SpecgenBoot")
 @DoNotOverwrite
 final class BorderRadiusPropertyModule extends AbstractPropertyModule {
 
   @Override
   final void propertyDefinition() {
     ValueType borderRadius = t(
-        "BorderRadiusValue",
-        length, percentage
+      "BorderRadiusValue",
+      length, percentage
     );
 
     property(
-        "border-radius",
+      "border-radius",
 
-        formal(
-            Source.MDN,
-            "<length-percentage>{1,4} [ / <length-percentage>{1,4} ]?",
+      formal(
+        Source.MDN,
+        "<length-percentage>{1,4} [ / <length-percentage>{1,4} ]?",
 
-            "<length-percentage> = <length> | <percentage>"
-        ),
+        "<length-percentage> = <length> | <percentage>"
+      ),
 
-        globalSig,
+      globalSig,
 
-        sig(
-            borderRadius, "all"
-        ),
-        sig(
-            borderRadius, "topLeftBottomRight",
-            borderRadius, "topRightBottomLeft"
-        ),
-        sig(
-            borderRadius, "topLeft",
-            borderRadius, "topRightBottomLeft",
-            borderRadius, "bottomRight"
-        ),
-        sig(
-            borderRadius, "topLeft",
-            borderRadius, "topRight",
-            borderRadius, "bottomRight",
-            borderRadius, "bottomLeft"
-        )
+      sig(
+        borderRadius, "all"
+      ),
+      sig(
+        borderRadius, "topLeftBottomRight",
+        borderRadius, "topRightBottomLeft"
+      ),
+      sig(
+        borderRadius, "topLeft",
+        borderRadius, "topRightBottomLeft",
+        borderRadius, "bottomRight"
+      ),
+      sig(
+        borderRadius, "topLeft",
+        borderRadius, "topRight",
+        borderRadius, "bottomRight",
+        borderRadius, "bottomLeft"
+      )
     );
 
     property(
-        names(
-            "border-top-left-radius",
-            "border-top-right-radius",
-            "border-bottom-right-radius",
-            "border-bottom-left-radius"
-        ),
+      names(
+        "border-top-left-radius",
+        "border-top-right-radius",
+        "border-bottom-right-radius",
+        "border-bottom-left-radius"
+      ),
 
-        formal(
-            Source.MDN,
-            "<length-percentage>{1,4} [ / <length-percentage>{1,4} ]?",
+      formal(
+        Source.MDN,
+        "<length-percentage>{1,4} [ / <length-percentage>{1,4} ]?",
 
-            "<length-percentage> = <length> | <percentage>"
-        ),
+        "<length-percentage> = <length> | <percentage>"
+      ),
 
-        globalSig,
+      globalSig,
 
-        sig(borderRadius, "value"),
-        sig(borderRadius, "horizontal", borderRadius, "vertical")
+      sig(borderRadius, "value"),
+      sig(borderRadius, "horizontal", borderRadius, "vertical")
     );
   }
 

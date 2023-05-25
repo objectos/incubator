@@ -15,32 +15,30 @@
  */
 package br.com.objectos.css.boot;
 
-import br.com.objectos.code.annotations.Generated;
 import br.com.objectos.css.boot.spec.Source;
 
-@Generated("br.com.objectos.css.specgen.SpecgenBoot")
 @DoNotOverwrite
 final class AlignItemsPropertyModule extends AbstractAlignOrJustifyPropertyModule {
 
   @Override
   final void propertyDefinitionImpl() {
     property(
-        "align-items",
+      "align-items",
 
-        formal(
-            Source.MDN,
-            "normal | stretch | <baseline-position> | [ <overflow-position>? <self-position> ] ",
+      formal(
+        Source.MDN,
+        "normal | stretch | <baseline-position> | [ <overflow-position>? <self-position> ] ",
 
-            "<baseline-position> = [ first | last ]? baseline",
-            "<overflow-position> = unsafe | safe",
-            "<self-position> = center | start | end | self-start | self-end | flex-start | flex-end"
-        ),
+        "<baseline-position> = [ first | last ]? baseline",
+        "<overflow-position> = unsafe | safe",
+        "<self-position> = center | start | end | self-start | self-end | flex-start | flex-end"
+      ),
 
-        globalSig,
+      globalSig,
 
-        sig(t("AlignItemsValue", normal, stretch, baseline, selfPosition), "value"),
-        sig(baselinePosition, "firstOrLast", baseline, "baseline"),
-        sig(overflowPosition, "safeOrUnsafe", selfPosition, "position")
+      sig(t("AlignItemsValue", normal, stretch, baseline, selfPosition), "value"),
+      sig(baselinePosition, "firstOrLast", baseline, "baseline"),
+      sig(overflowPosition, "safeOrUnsafe", selfPosition, "position")
     );
   }
 

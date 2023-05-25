@@ -15,11 +15,9 @@
  */
 package br.com.objectos.css.boot;
 
-import br.com.objectos.code.annotations.Generated;
 import br.com.objectos.css.boot.spec.Source;
 import br.com.objectos.css.boot.spec.ValueType;
 
-@Generated("br.com.objectos.css.specgen.SpecgenBoot")
 @DoNotOverwrite
 final class TextDecorationPropertyModule extends AbstractPropertyModule {
 
@@ -30,24 +28,24 @@ final class TextDecorationPropertyModule extends AbstractPropertyModule {
     ValueType style = t("TextDecorationStyleValue");
 
     ValueType shorthand = t(
-        "TextDecorationValue",
-        line, style, color, thickness
+      "TextDecorationValue",
+      line, style, color, thickness
     );
 
     property(
-        "text-decoration",
+      "text-decoration",
 
-        formal(
-            Source.MDN,
-            "<\'text-decoration-line\'> || <\'text-decoration-style\'> || <\'text-decoration-color\'> || <\'text-decoration-thickness\'>"
-        ),
+      formal(
+        Source.MDN,
+        "<\'text-decoration-line\'> || <\'text-decoration-style\'> || <\'text-decoration-color\'> || <\'text-decoration-thickness\'>"
+      ),
 
-        globalSig,
+      globalSig,
 
-        sig(shorthand, "value"),
-        sig(shorthand, "value1", shorthand, "value2"),
-        sig(shorthand, "value1", shorthand, "value2", shorthand, "value3"),
-        sig(shorthand, "value1", shorthand, "value2", shorthand, "value3", shorthand, "value4")
+      sig(shorthand, "value"),
+      sig(shorthand, "value1", shorthand, "value2"),
+      sig(shorthand, "value1", shorthand, "value2", shorthand, "value3"),
+      sig(shorthand, "value1", shorthand, "value2", shorthand, "value3", shorthand, "value4")
     );
   }
 

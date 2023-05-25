@@ -43,7 +43,6 @@ public class TypeSelectorsGenTest extends AbstractCssBootSpecTest {
       """
       package br.com.objectos.css.select;
 
-      import br.com.objectos.code.annotations.Ignore;
       import objectos.util.GrowableMap;
       import objectos.util.UnmodifiableMap;
 
@@ -61,12 +60,10 @@ public class TypeSelectorsGenTest extends AbstractCssBootSpecTest {
 
         private TypeSelectors() {}
 
-        @Ignore
         public static TypeSelector getByCode(int code) {
           return ARRAY[code];
         }
 
-        @Ignore
         public static TypeSelector getByName(String name) {
           return MAP.get(name);
         }

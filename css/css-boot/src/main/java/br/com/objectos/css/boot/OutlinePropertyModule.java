@@ -15,34 +15,32 @@
  */
 package br.com.objectos.css.boot;
 
-import br.com.objectos.code.annotations.Generated;
 import br.com.objectos.css.boot.spec.Source;
 import br.com.objectos.css.boot.spec.ValueType;
 
-@Generated("br.com.objectos.css.specgen.SpecgenBoot")
 @DoNotOverwrite
 final class OutlinePropertyModule extends AbstractPropertyModule {
 
   @Override
   final void propertyDefinition() {
     ValueType shorthand = t(
-        "OutlineValue",
-        t("OutlineColorValue"), t("OutlineStyleValue"), t("OutlineWidthValue")
+      "OutlineValue",
+      t("OutlineColorValue"), t("OutlineStyleValue"), t("OutlineWidthValue")
     );
 
     property(
-        "outline",
+      "outline",
 
-        formal(
-            Source.MDN,
-            "[ <\'outline-color\'> || <\'outline-style\'> || <\'outline-width\'> ]"
-        ),
+      formal(
+        Source.MDN,
+        "[ <\'outline-color\'> || <\'outline-style\'> || <\'outline-width\'> ]"
+      ),
 
-        globalSig,
+      globalSig,
 
-        sig(shorthand, "value"),
-        sig(shorthand, "value1", shorthand, "value2"),
-        sig(shorthand, "value1", shorthand, "value2", shorthand, "value3")
+      sig(shorthand, "value"),
+      sig(shorthand, "value1", shorthand, "value2"),
+      sig(shorthand, "value1", shorthand, "value2", shorthand, "value3")
     );
   }
 

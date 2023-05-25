@@ -15,12 +15,10 @@
  */
 package br.com.objectos.css.boot;
 
-import br.com.objectos.code.annotations.Generated;
 import br.com.objectos.css.boot.spec.KeywordName;
 import br.com.objectos.css.boot.spec.Source;
 import br.com.objectos.css.boot.spec.ValueType;
 
-@Generated("br.com.objectos.css.specgen.SpecgenBoot")
 @DoNotOverwrite
 final class MarginPropertyModule extends AbstractPropertyModule {
 
@@ -29,37 +27,37 @@ final class MarginPropertyModule extends AbstractPropertyModule {
     KeywordName auto = keyword("auto");
 
     ValueType marginWidth = t(
-        "MarginWidthValue",
-        length, percentage, auto
+      "MarginWidthValue",
+      length, percentage, auto
     );
 
     property(
-        "margin",
+      "margin",
 
-        formal(
-            Source.MDN,
-            "[ <length> | <percentage> | auto ]{1,4}"
-        ),
+      formal(
+        Source.MDN,
+        "[ <length> | <percentage> | auto ]{1,4}"
+      ),
 
-        globalSig,
+      globalSig,
 
-        sigXY1(marginWidth),
-        sigXY2(marginWidth),
-        sigXY3(marginWidth),
-        sigXY4(marginWidth)
+      sigXY1(marginWidth),
+      sigXY2(marginWidth),
+      sigXY3(marginWidth),
+      sigXY4(marginWidth)
     );
 
     property(
-        names("margin-top", "margin-right", "margin-bottom", "margin-left"),
+      names("margin-top", "margin-right", "margin-bottom", "margin-left"),
 
-        formal(
-            Source.MDN,
-            "<length> | <percentage> | auto"
-        ),
+      formal(
+        Source.MDN,
+        "<length> | <percentage> | auto"
+      ),
 
-        globalSig,
+      globalSig,
 
-        sig(marginWidth, "value")
+      sig(marginWidth, "value")
     );
   }
 

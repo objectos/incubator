@@ -15,12 +15,10 @@
  */
 package br.com.objectos.css.boot;
 
-import br.com.objectos.code.annotations.Generated;
 import br.com.objectos.css.boot.spec.JavaType;
 import br.com.objectos.css.boot.spec.KeywordName;
 import br.com.objectos.css.boot.spec.Source;
 
-@Generated("br.com.objectos.css.specgen.SpecgenBoot")
 @DoNotOverwrite
 final class FontWeightPropertyModule extends AbstractPropertyModule {
 
@@ -31,19 +29,19 @@ final class FontWeightPropertyModule extends AbstractPropertyModule {
     KeywordName lighter = keyword("lighter");
     KeywordName normal = keyword("normal");
     property(
-        "font-weight",
+      "font-weight",
 
-        formal(
-            Source.MDN,
-            "<font-weight-absolute> | bolder | lighter ",
+      formal(
+        Source.MDN,
+        "<font-weight-absolute> | bolder | lighter ",
 
-            "<font-weight-absolute> = normal | bold | <number>"
-        ),
+        "<font-weight-absolute> = normal | bold | <number>"
+      ),
 
-        globalSig,
+      globalSig,
 
-        sig(t("FontWeightValue", normal, bold, bolder, lighter, integer), "value"),
-        sig(JavaType.INT, "value")
+      sig(t("FontWeightValue", normal, bold, bolder, lighter, integer), "value"),
+      sig(JavaType.INT, "value")
     );
   }
 

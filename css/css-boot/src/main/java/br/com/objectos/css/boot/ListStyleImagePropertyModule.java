@@ -15,11 +15,9 @@
  */
 package br.com.objectos.css.boot;
 
-import br.com.objectos.code.annotations.Generated;
 import br.com.objectos.css.boot.spec.KeywordName;
 import br.com.objectos.css.boot.spec.Source;
 
-@Generated("br.com.objectos.css.specgen.SpecgenBoot")
 @DoNotOverwrite
 final class ListStyleImagePropertyModule extends AbstractPropertyModule {
 
@@ -28,16 +26,16 @@ final class ListStyleImagePropertyModule extends AbstractPropertyModule {
     KeywordName none = keyword("none");
 
     property(
-        "list-style-image",
+      "list-style-image",
 
-        formal(
-            Source.MDN,
-            "<url> | none"
-        ),
+      formal(
+        Source.MDN,
+        "<url> | none"
+      ),
 
-        globalSig,
+      globalSig,
 
-        sig(t("ListStyleImageValue", uri, none), "value")
+      sig(t("ListStyleImageValue", uri, none), "value")
     );
   }
 

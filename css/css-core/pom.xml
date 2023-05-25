@@ -159,11 +159,6 @@
 
 		<dependency>
 			<groupId>br.com.objectos</groupId>
-			<artifactId>code</artifactId>
-			<optional>true</optional>
-		</dependency>
-		<dependency>
-			<groupId>br.com.objectos</groupId>
 			<artifactId>code-boot</artifactId>
 		</dependency>
 

@@ -15,12 +15,10 @@
  */
 package br.com.objectos.css.boot;
 
-import br.com.objectos.code.annotations.Generated;
 import br.com.objectos.css.boot.spec.JavaType;
 import br.com.objectos.css.boot.spec.KeywordName;
 import br.com.objectos.css.boot.spec.Source;
 
-@Generated("br.com.objectos.css.specgen.SpecgenBoot")
 @DoNotOverwrite
 final class ZIndexPropertyModule extends AbstractPropertyModule {
 
@@ -29,17 +27,17 @@ final class ZIndexPropertyModule extends AbstractPropertyModule {
     KeywordName auto = keyword("auto");
 
     property(
-        "z-index",
+      "z-index",
 
-        formal(
-            Source.MDN,
-            "auto | <integer>"
-        ),
+      formal(
+        Source.MDN,
+        "auto | <integer>"
+      ),
 
-        globalSig,
+      globalSig,
 
-        sig(t("ZIndexValue", auto, integer), "value"),
-        sig(JavaType.INT, "value")
+      sig(t("ZIndexValue", auto, integer), "value"),
+      sig(JavaType.INT, "value")
     );
   }
 

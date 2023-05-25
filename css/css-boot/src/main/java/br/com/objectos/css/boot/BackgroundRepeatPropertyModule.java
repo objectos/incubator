@@ -15,12 +15,10 @@
  */
 package br.com.objectos.css.boot;
 
-import br.com.objectos.code.annotations.Generated;
 import br.com.objectos.css.boot.spec.KeywordName;
 import br.com.objectos.css.boot.spec.Source;
 import br.com.objectos.css.boot.spec.ValueType;
 
-@Generated("br.com.objectos.css.specgen.SpecgenBoot")
 @DoNotOverwrite
 final class BackgroundRepeatPropertyModule extends AbstractPropertyModule {
 
@@ -34,30 +32,30 @@ final class BackgroundRepeatPropertyModule extends AbstractPropertyModule {
     KeywordName space = keyword("space");
 
     ValueType arity2 = t(
-        "BackgroundRepeatArity2Value",
-        repeat, space, round, noRepeat
+      "BackgroundRepeatArity2Value",
+      repeat, space, round, noRepeat
     );
 
     ValueType arity1 = t(
-        "BackgroundRepeatArity1Value",
-        repeatX, repeatY,
-        arity2
+      "BackgroundRepeatArity1Value",
+      repeatX, repeatY,
+      arity2
     );
 
     property(
-        "background-repeat",
+      "background-repeat",
 
-        formal(
-            Source.MDN,
-            "<repeat-style># ",
+      formal(
+        Source.MDN,
+        "<repeat-style># ",
 
-            "<repeat-style> = repeat-x | repeat-y | [ repeat | space | round | no-repeat ]{1,2}"
-        ),
+        "<repeat-style> = repeat-x | repeat-y | [ repeat | space | round | no-repeat ]{1,2}"
+      ),
 
-        globalSig,
+      globalSig,
 
-        sig(arity1, "value"),
-        sig(arity2, "value1", arity2, "value2")
+      sig(arity1, "value"),
+      sig(arity2, "value1", arity2, "value2")
     );
   }
 

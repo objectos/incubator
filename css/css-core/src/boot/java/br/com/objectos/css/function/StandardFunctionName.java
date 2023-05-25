@@ -1,10 +1,8 @@
 package br.com.objectos.css.function;
 
-import br.com.objectos.code.annotations.Generated;
 import objectos.util.GrowableMap;
 import objectos.util.UnmodifiableMap;
 
-@Generated("br.com.objectos.css.boot.CssBoot")
 public enum StandardFunctionName implements FunctionName {
   ROTATE("rotate", "rotate"),
 

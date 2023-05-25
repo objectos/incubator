@@ -15,26 +15,24 @@
  */
 package br.com.objectos.css.boot;
 
-import br.com.objectos.code.annotations.Generated;
 import br.com.objectos.css.boot.spec.Source;
 
-@Generated("br.com.objectos.css.specgen.SpecgenBoot")
 @DoNotOverwrite
 final class BackgroundColorPropertyModule extends AbstractPropertyModule {
 
   @Override
   final void propertyDefinition() {
     property(
-        "background-color",
+      "background-color",
 
-        formal(
-            "<color>",
-            Source.MDN
-        ),
+      formal(
+        "<color>",
+        Source.MDN
+      ),
 
-        globalSig,
+      globalSig,
 
-        sig(color, "color")
+      sig(color, "color")
     );
   }
 

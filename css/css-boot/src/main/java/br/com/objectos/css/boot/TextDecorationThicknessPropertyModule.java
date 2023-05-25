@@ -15,11 +15,9 @@
  */
 package br.com.objectos.css.boot;
 
-import br.com.objectos.code.annotations.Generated;
 import br.com.objectos.css.boot.spec.KeywordName;
 import br.com.objectos.css.boot.spec.Source;
 
-@Generated("br.com.objectos.css.specgen.SpecgenBoot")
 @DoNotOverwrite
 final class TextDecorationThicknessPropertyModule extends AbstractPropertyModule {
 
@@ -28,16 +26,16 @@ final class TextDecorationThicknessPropertyModule extends AbstractPropertyModule
     KeywordName auto = keyword("auto");
     KeywordName fromFont = keyword("from-font");
     property(
-        "text-decoration-thickness",
+      "text-decoration-thickness",
 
-        formal(
-            Source.MDN,
-            "auto | from-font | <length> | <percentage>"
-        ),
+      formal(
+        Source.MDN,
+        "auto | from-font | <length> | <percentage>"
+      ),
 
-        globalSig,
+      globalSig,
 
-        sig(t("TextDecorationThicknessValue", auto, fromFont, length, percentage), "value")
+      sig(t("TextDecorationThicknessValue", auto, fromFont, length, percentage), "value")
     );
   }
 

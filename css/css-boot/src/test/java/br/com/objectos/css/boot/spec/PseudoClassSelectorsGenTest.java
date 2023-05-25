@@ -45,7 +45,6 @@ public class PseudoClassSelectorsGenTest extends AbstractCssBootSpecTest {
       """
       package br.com.objectos.css.select;
 
-      import br.com.objectos.code.annotations.Ignore;
       import objectos.util.GrowableMap;
       import objectos.util.UnmodifiableMap;
 
@@ -63,12 +62,10 @@ public class PseudoClassSelectorsGenTest extends AbstractCssBootSpecTest {
 
         private PseudoClassSelectors() {}
 
-        @Ignore
         public static PseudoClassSelector getByCode(int code) {
           return ARRAY[code];
         }
 
-        @Ignore
         public static PseudoClassSelector getByName(String name) {
           return MAP.get(name);
         }

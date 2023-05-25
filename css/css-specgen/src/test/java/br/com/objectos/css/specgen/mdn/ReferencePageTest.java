@@ -18,9 +18,6 @@ package br.com.objectos.css.specgen.mdn;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
-import br.com.objectos.core.io.Charsets;
-import br.com.objectos.core.io.Read;
-import br.com.objectos.core.io.Resource;
 import java.io.IOException;
 import objectos.util.GrowableSet;
 import org.jsoup.Jsoup;
@@ -38,9 +35,7 @@ public class ReferencePageTest {
       + "(4) <types>"
       + "(5) length units")
   public void properties() throws IOException {
-    Resource resource = Resource.getResource("html/MDN/Reference");
-
-    String html = Read.string(resource, Charsets.utf8());
+    String html = Resource.readString("html/MDN/Reference");
 
     Document document = Jsoup.parse(html);
     ReferencePage page = BaseUrlFake.LOCALHOST.getReferencePage(document);

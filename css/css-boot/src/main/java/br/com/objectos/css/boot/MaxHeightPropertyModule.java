@@ -15,12 +15,10 @@
  */
 package br.com.objectos.css.boot;
 
-import br.com.objectos.code.annotations.Generated;
 import br.com.objectos.css.boot.spec.KeywordName;
 import br.com.objectos.css.boot.spec.Source;
 import br.com.objectos.css.boot.spec.ValueType;
 
-@Generated("br.com.objectos.css.specgen.SpecgenBoot")
 @DoNotOverwrite
 final class MaxHeightPropertyModule extends AbstractPropertyModule {
 
@@ -32,27 +30,27 @@ final class MaxHeightPropertyModule extends AbstractPropertyModule {
     KeywordName minContent = keyword("min-content");
 
     ValueType maxValue = t(
-        "MaxHeightOrWidthValue",
-        auto, none, percentage, minContent, maxContent
+      "MaxHeightOrWidthValue",
+      auto, none, percentage, minContent, maxContent
     );
 
     property(
-        names("max-height", "max-width", "min-height", "min-width"),
+      names("max-height", "max-width", "min-height", "min-width"),
 
-        formal(
-            Source.MANUAL_ENTRY,
-            "auto | none | <length> | <percentage> | min-content | max-content | fit-content(<length-percentage>)",
+      formal(
+        Source.MANUAL_ENTRY,
+        "auto | none | <length> | <percentage> | min-content | max-content | fit-content(<length-percentage>)",
 
-            "<length-percentage> = <length> | <percentage>"
-        ),
+        "<length-percentage> = <length> | <percentage>"
+      ),
 
-        globalSig,
+      globalSig,
 
-        sig(maxValue, "value"),
+      sig(maxValue, "value"),
 
-        sigAbstract(length, "length"),
+      sigAbstract(length, "length"),
 
-        sigZero()
+      sigZero()
     );
   }
 

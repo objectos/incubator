@@ -15,11 +15,9 @@
  */
 package br.com.objectos.css.boot;
 
-import br.com.objectos.code.annotations.Generated;
 import br.com.objectos.css.boot.spec.KeywordName;
 import br.com.objectos.css.boot.spec.Source;
 
-@Generated("br.com.objectos.css.specgen.SpecgenBoot")
 @DoNotOverwrite
 final class ResizePropertyModule extends AbstractPropertyModule {
 
@@ -33,16 +31,16 @@ final class ResizePropertyModule extends AbstractPropertyModule {
     KeywordName vertical = keyword("vertical");
 
     property(
-        "resize",
+      "resize",
 
-        formal(
-            Source.MDN,
-            "none | both | horizontal | vertical | block | inline"
-        ),
+      formal(
+        Source.MDN,
+        "none | both | horizontal | vertical | block | inline"
+      ),
 
-        globalSig,
+      globalSig,
 
-        sig(t("ResizeValue", block, both, horizontal, inline, none, vertical), "value")
+      sig(t("ResizeValue", block, both, horizontal, inline, none, vertical), "value")
     );
   }
 

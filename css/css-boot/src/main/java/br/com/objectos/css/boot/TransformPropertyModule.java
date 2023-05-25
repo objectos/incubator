@@ -15,12 +15,10 @@
  */
 package br.com.objectos.css.boot;
 
-import br.com.objectos.code.annotations.Generated;
 import br.com.objectos.css.boot.spec.KeywordName;
 import br.com.objectos.css.boot.spec.Source;
 import br.com.objectos.css.boot.spec.ValueType;
 
-@Generated("br.com.objectos.css.specgen.SpecgenBoot")
 @DoNotOverwrite
 final class TransformPropertyModule extends AbstractPropertyModule {
 
@@ -31,50 +29,50 @@ final class TransformPropertyModule extends AbstractPropertyModule {
 
     ValueType transformValue;
     transformValue = t(
-        "TransformValue",
-        none,
-        function("rotate", sig(angle, "angle")),
-        function("rotateX", sig(angle, "angle")),
-        function("rotateY", sig(angle, "angle")),
-        function("rotateZ", sig(angle, "angle"))
+      "TransformValue",
+      none,
+      function("rotate", sig(angle, "angle")),
+      function("rotateX", sig(angle, "angle")),
+      function("rotateY", sig(angle, "angle")),
+      function("rotateZ", sig(angle, "angle"))
     );
 
     property(
-        "transform",
+      "transform",
 
-        formal(
-            Source.MDN,
-            "none | <transform-list>",
+      formal(
+        Source.MDN,
+        "none | <transform-list>",
 
-            "<transform-list> = <transform-function>+",
-            "<transform-function> = <matrix()> | <translate()> | <translateX()> | <translateY()> | <scale()> | <scaleX()> | <scaleY()> | <rotate()> | <skew()> | <skewX()> | <skewY()> | <matrix3d()> | <translate3d()> | <translateZ()> | <scale3d()> | <scaleZ()> | <rotate3d()> | <rotateX()> | <rotateY()> | <rotateZ()> | <perspective()>",
-            "<matrix()> = matrix( <number>#{6} )",
-            "<translate()> = translate( <length-percentage> , <length-percentage>? )",
-            "<translateX()> = translateX( <length-percentage> )",
-            "<translateY()> = translateY( <length-percentage> )",
-            "<scale()> = scale( <number> , <number>? )",
-            "<scaleX()> = scaleX( <number> )",
-            "<scaleY()> = scaleY( <number> )",
-            "<rotate()> = rotate( [ <angle> | <zero> ] )",
-            "<skew()> = skew( [ <angle> | <zero> ] , [ <angle> | <zero> ]? )",
-            "<skewX()> = skewX( [ <angle> | <zero> ] )",
-            "<skewY()> = skewY( [ <angle> | <zero> ] )",
-            "<matrix3d()> = matrix3d( <number>#{16} )",
-            "<translate3d()> = translate3d( <length-percentage> , <length-percentage> , <length> )",
-            "<translateZ()> = translateZ( <length> )",
-            "<scale3d()> = scale3d( <number> , <number> , <number> )",
-            "<scaleZ()> = scaleZ( <number> )",
-            "<rotate3d()> = rotate3d( <number> , <number> , <number> , [ <angle> | <zero> ] )",
-            "<rotateX()> = rotateX( [ <angle> | <zero> ] )",
-            "<rotateY()> = rotateY( [ <angle> | <zero> ] )",
-            "<rotateZ()> = rotateZ( [ <angle> | <zero> ] )",
-            "<perspective()> = perspective( <length> )",
-            "<length-percentage> = <length> | <percentage>"
-        ),
+        "<transform-list> = <transform-function>+",
+        "<transform-function> = <matrix()> | <translate()> | <translateX()> | <translateY()> | <scale()> | <scaleX()> | <scaleY()> | <rotate()> | <skew()> | <skewX()> | <skewY()> | <matrix3d()> | <translate3d()> | <translateZ()> | <scale3d()> | <scaleZ()> | <rotate3d()> | <rotateX()> | <rotateY()> | <rotateZ()> | <perspective()>",
+        "<matrix()> = matrix( <number>#{6} )",
+        "<translate()> = translate( <length-percentage> , <length-percentage>? )",
+        "<translateX()> = translateX( <length-percentage> )",
+        "<translateY()> = translateY( <length-percentage> )",
+        "<scale()> = scale( <number> , <number>? )",
+        "<scaleX()> = scaleX( <number> )",
+        "<scaleY()> = scaleY( <number> )",
+        "<rotate()> = rotate( [ <angle> | <zero> ] )",
+        "<skew()> = skew( [ <angle> | <zero> ] , [ <angle> | <zero> ]? )",
+        "<skewX()> = skewX( [ <angle> | <zero> ] )",
+        "<skewY()> = skewY( [ <angle> | <zero> ] )",
+        "<matrix3d()> = matrix3d( <number>#{16} )",
+        "<translate3d()> = translate3d( <length-percentage> , <length-percentage> , <length> )",
+        "<translateZ()> = translateZ( <length> )",
+        "<scale3d()> = scale3d( <number> , <number> , <number> )",
+        "<scaleZ()> = scaleZ( <number> )",
+        "<rotate3d()> = rotate3d( <number> , <number> , <number> , [ <angle> | <zero> ] )",
+        "<rotateX()> = rotateX( [ <angle> | <zero> ] )",
+        "<rotateY()> = rotateY( [ <angle> | <zero> ] )",
+        "<rotateZ()> = rotateZ( [ <angle> | <zero> ] )",
+        "<perspective()> = perspective( <length> )",
+        "<length-percentage> = <length> | <percentage>"
+      ),
 
-        globalSig,
+      globalSig,
 
-        sig(transformValue, "value")
+      sig(transformValue, "value")
     );
   }
 
