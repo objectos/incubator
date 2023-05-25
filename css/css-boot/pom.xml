@@ -50,7 +50,7 @@
 							<arguments>
 								<argument>-classpath</argument>
 								<classpath/>
-								<argument>br.com.objectos.css.specgen.SpecgenBoot</argument>
+								<argument>objectos.specgen.CssBoot</argument>
 								<argument>${project.basedir}/src/main/java</argument>
 							</arguments>
 						</configuration>
