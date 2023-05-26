@@ -143,11 +143,6 @@
 	<dependencies>
 		<dependency>
 			<groupId>br.com.objectos</groupId>
-			<artifactId>css-boot</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>br.com.objectos</groupId>
 			<artifactId>objectos-selfgen</artifactId>
 			<version>${project.version}</version>
 		</dependency>
