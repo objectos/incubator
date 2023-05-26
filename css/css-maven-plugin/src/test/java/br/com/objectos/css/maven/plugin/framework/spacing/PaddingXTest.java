@@ -17,11 +17,11 @@ package br.com.objectos.css.maven.plugin.framework.spacing;
 
 import static org.testng.Assert.assertEquals;
 
-import br.com.objectos.css.config.framework.AbstractConfiguration;
-import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkGroup;
-import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkNamedValueSet;
 import br.com.objectos.css.maven.plugin.framework.AbstractCssMavenPluginFrameworkTest;
-import br.com.objectos.css.type.Zero;
+import objectos.css.config.framework.AbstractConfiguration;
+import objectos.css.config.framework.ConfigurationDsl.FrameworkGroup;
+import objectos.css.config.framework.ConfigurationDsl.FrameworkNamedValueSet;
+import objectos.css.type.Zero;
 import org.testng.annotations.Test;
 
 public class PaddingXTest extends AbstractCssMavenPluginFrameworkTest {

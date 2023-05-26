@@ -15,7 +15,6 @@
  */
 package objectos.docs.internal;
 
-import br.com.objectos.css.sheet.StyleSheetWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
@@ -27,6 +26,7 @@ import java.util.concurrent.Future;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import objectos.asciidoc.AsciiDoc2;
+import objectos.css.sheet.StyleSheetWriter;
 import objectos.docs.Docs.BottomBar;
 import objectos.docs.Docs.TopBar;
 import objectos.html.HtmlSink;

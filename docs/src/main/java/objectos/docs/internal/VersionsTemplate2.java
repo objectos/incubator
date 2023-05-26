@@ -15,7 +15,6 @@
  */
 package objectos.docs.internal;
 
-import br.com.objectos.css.Css;
 import br.com.objectos.css.framework.background.BackgroundColor;
 import br.com.objectos.css.framework.border.Border;
 import br.com.objectos.css.framework.border.BorderColor;
@@ -36,7 +35,6 @@ import br.com.objectos.css.framework.typography.FontSize;
 import br.com.objectos.css.framework.typography.LetterSpacing;
 import br.com.objectos.css.framework.typography.TextAlign;
 import br.com.objectos.css.framework.typography.TextColor;
-import br.com.objectos.css.select.ClassSelector;
 import java.io.IOException;
 import java.io.UncheckedIOException;
 import objectos.asciidoc.pseudom.Node;
@@ -44,6 +42,8 @@ import objectos.asciidoc.pseudom.Node.ContainerNode;
 import objectos.asciidoc.pseudom.Node.Paragraph;
 import objectos.asciidoc.pseudom.Node.Text;
 import objectos.asciidoc.pseudom.Node.Title;
+import objectos.css.Css;
+import objectos.css.select.ClassSelector;
 
 public final class VersionsTemplate2 extends DocsTemplate2 {
 

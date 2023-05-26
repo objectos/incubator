@@ -15,7 +15,6 @@
  */
 package objectos.docs.internal;
 
-import br.com.objectos.css.Css;
 import br.com.objectos.css.framework.background.BackgroundColor;
 import br.com.objectos.css.framework.border.BorderBottom;
 import br.com.objectos.css.framework.border.BorderColor;
@@ -60,8 +59,6 @@ import br.com.objectos.css.framework.typography.TextAlign;
 import br.com.objectos.css.framework.typography.TextColor;
 import br.com.objectos.css.framework.typography.TextDecoration;
 import br.com.objectos.css.framework.typography.TextTransform;
-import br.com.objectos.css.select.ClassSelector;
-import br.com.objectos.css.select.IdSelector;
 import java.io.IOException;
 import java.io.UncheckedIOException;
 import objectos.asciidoc.pseudom.Node;
@@ -77,6 +74,9 @@ import objectos.asciidoc.pseudom.Node.Symbol;
 import objectos.asciidoc.pseudom.Node.Text;
 import objectos.asciidoc.pseudom.Node.Title;
 import objectos.asciidoc.pseudom.Node.UnorderedList;
+import objectos.css.Css;
+import objectos.css.select.ClassSelector;
+import objectos.css.select.IdSelector;
 import objectos.docs.internal.Navigation.Element;
 import objectos.docs.internal.Navigation.Link;
 import objectos.docs.internal.Navigation.LinkList;

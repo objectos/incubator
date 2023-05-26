@@ -15,8 +15,8 @@
  */
 package br.com.objectos.css.maven.plugin.framework;
 
-import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkAtMedia;
-import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkAtMediaSet;
+import objectos.css.config.framework.ConfigurationDsl.FrameworkAtMedia;
+import objectos.css.config.framework.ConfigurationDsl.FrameworkAtMediaSet;
 import objectos.util.UnmodifiableList;
 
 class AtMediaSet extends AbstractFrameworkObject implements FrameworkAtMediaSet {

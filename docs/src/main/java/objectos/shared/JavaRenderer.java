@@ -15,9 +15,9 @@
  */
 package objectos.shared;
 
-import br.com.objectos.css.select.ClassSelector;
 import java.util.Set;
 import javax.lang.model.SourceVersion;
+import objectos.css.select.ClassSelector;
 
 public final class JavaRenderer extends LanguageRenderer {
 

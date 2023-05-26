@@ -41,10 +41,10 @@
 package br.com.objectos.css.framework.border;
 
 import br.com.objectos.code.annotations.Generated;
-import br.com.objectos.css.Css;
-import br.com.objectos.css.select.ClassSelector;
-import br.com.objectos.css.sheet.AbstractStyleSheet;
-import br.com.objectos.css.type.Color;
+import objectos.css.Css;
+import objectos.css.select.ClassSelector;
+import objectos.css.sheet.AbstractStyleSheet;
+import objectos.css.type.Color;
 
 @Generated("br.com.objectos.css.maven.plugin.framework.FrameworkMojo")
 public final class BorderColorX extends AbstractStyleSheet {

@@ -15,11 +15,11 @@
  */
 package objectos.shared;
 
-import br.com.objectos.css.Css;
 import br.com.objectos.css.framework.typography.TextColor;
-import br.com.objectos.css.select.ClassSelector;
 import java.util.IdentityHashMap;
 import java.util.Map;
+import objectos.css.Css;
+import objectos.css.select.ClassSelector;
 
 final class XmlStyles {
 

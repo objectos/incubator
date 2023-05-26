@@ -21,10 +21,10 @@ import br.com.objectos.code.java.JavaNames;
 import br.com.objectos.code.java.expression.Argument;
 import br.com.objectos.code.java.expression.Identifier;
 import br.com.objectos.code.java.expression.MethodInvocation;
-import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkNamedValue;
-import br.com.objectos.css.type.Value;
 import java.util.Objects;
 import javax.lang.model.SourceVersion;
+import objectos.css.config.framework.ConfigurationDsl.FrameworkNamedValue;
+import objectos.css.type.Value;
 
 abstract class NamedValue extends AbstractFrameworkObject implements FrameworkNamedValue {
 

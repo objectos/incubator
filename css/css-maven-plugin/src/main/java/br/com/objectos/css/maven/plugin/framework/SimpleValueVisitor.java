@@ -15,14 +15,14 @@
  */
 package br.com.objectos.css.maven.plugin.framework;
 
-import br.com.objectos.css.keyword.StandardKeyword;
-import br.com.objectos.css.type.AngleUnit;
-import br.com.objectos.css.type.ColorKind;
-import br.com.objectos.css.type.ColorName;
-import br.com.objectos.css.type.Creator;
-import br.com.objectos.css.type.LengthUnit;
-import br.com.objectos.css.type.Marker;
-import br.com.objectos.css.type.Value;
+import objectos.css.keyword.StandardKeyword;
+import objectos.css.type.AngleUnit;
+import objectos.css.type.ColorKind;
+import objectos.css.type.ColorName;
+import objectos.css.type.Creator;
+import objectos.css.type.LengthUnit;
+import objectos.css.type.Marker;
+import objectos.css.type.Value;
 import objectos.lang.Check;
 
 class SimpleValueVisitor<E> implements Creator, Marker {

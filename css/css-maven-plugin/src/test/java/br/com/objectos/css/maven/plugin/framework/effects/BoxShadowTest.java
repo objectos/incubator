@@ -17,10 +17,10 @@ package br.com.objectos.css.maven.plugin.framework.effects;
 
 import static org.testng.Assert.assertEquals;
 
-import br.com.objectos.css.config.framework.AbstractConfiguration;
-import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkGroup;
-import br.com.objectos.css.keyword.Keywords;
 import br.com.objectos.css.maven.plugin.framework.AbstractCssMavenPluginFrameworkTest;
+import objectos.css.config.framework.AbstractConfiguration;
+import objectos.css.config.framework.ConfigurationDsl.FrameworkGroup;
+import objectos.css.keyword.Keywords;
 import org.testng.annotations.Test;
 
 public class BoxShadowTest extends AbstractCssMavenPluginFrameworkTest {

@@ -15,7 +15,7 @@
  */
 package br.com.objectos.css.maven.plugin.framework;
 
-import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkMethodSet;
+import objectos.css.config.framework.ConfigurationDsl.FrameworkMethodSet;
 import objectos.util.UnmodifiableList;
 
 class MethodSet extends AbstractFrameworkObject implements FrameworkMethodSet {

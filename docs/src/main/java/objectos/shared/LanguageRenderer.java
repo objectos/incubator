@@ -15,7 +15,7 @@
  */
 package objectos.shared;
 
-import br.com.objectos.css.select.ClassSelector;
+import objectos.css.select.ClassSelector;
 
 public abstract class LanguageRenderer {
 

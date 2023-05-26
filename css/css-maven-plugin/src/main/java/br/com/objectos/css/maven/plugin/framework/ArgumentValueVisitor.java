@@ -19,9 +19,9 @@ import static br.com.objectos.code.java.Java.invoke;
 import static br.com.objectos.code.java.Java.l;
 
 import br.com.objectos.code.java.expression.Argument;
-import br.com.objectos.css.keyword.StandardKeyword;
-import br.com.objectos.css.type.ColorName;
-import br.com.objectos.css.type.LengthUnit;
+import objectos.css.keyword.StandardKeyword;
+import objectos.css.type.ColorName;
+import objectos.css.type.LengthUnit;
 
 class ArgumentValueVisitor extends SimpleValueVisitor<Argument> {
 

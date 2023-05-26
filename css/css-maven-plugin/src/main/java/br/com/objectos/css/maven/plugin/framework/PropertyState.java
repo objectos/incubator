@@ -20,7 +20,7 @@ import br.com.objectos.code.java.declaration.InterfaceCode;
 import br.com.objectos.code.java.declaration.MethodCode;
 import br.com.objectos.code.java.declaration.Modifiers;
 import br.com.objectos.code.java.expression.Identifier;
-import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkPropertyState;
+import objectos.css.config.framework.ConfigurationDsl.FrameworkPropertyState;
 import objectos.util.UnmodifiableList;
 
 final class PropertyState {

@@ -15,7 +15,7 @@
  */
 package br.com.objectos.css.maven.plugin.framework;
 
-import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkSimpleName;
+import objectos.css.config.framework.ConfigurationDsl.FrameworkSimpleName;
 
 class SimpleName extends AbstractFrameworkObject implements FrameworkSimpleName {
 

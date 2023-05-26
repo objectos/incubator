@@ -25,8 +25,8 @@ import br.com.objectos.code.java.expression.Argument;
 import br.com.objectos.code.java.expression.ArgumentsElement;
 import br.com.objectos.code.java.expression.ExpressionName;
 import br.com.objectos.code.java.expression.MethodInvocation;
-import br.com.objectos.css.sheet.AbstractStyleSheet;
-import br.com.objectos.css.sheet.MediaType;
+import objectos.css.sheet.AbstractStyleSheet;
+import objectos.css.sheet.MediaType;
 import objectos.util.GrowableList;
 import objectos.util.UnmodifiableList;
 

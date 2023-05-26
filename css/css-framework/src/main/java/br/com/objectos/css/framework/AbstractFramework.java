@@ -126,7 +126,7 @@ import br.com.objectos.css.framework.typography.TextColor;
 import br.com.objectos.css.framework.typography.TextDecoration;
 import br.com.objectos.css.framework.typography.TextTransform;
 import br.com.objectos.css.framework.typography.VerticalAlign;
-import br.com.objectos.css.sheet.AbstractStyleSheet;
+import objectos.css.sheet.AbstractStyleSheet;
 
 @Generated("br.com.objectos.css.maven.plugin.framework.FrameworkMojo")
 abstract class AbstractFramework extends AbstractStyleSheet {

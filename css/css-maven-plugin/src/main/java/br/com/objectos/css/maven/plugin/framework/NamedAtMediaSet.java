@@ -15,9 +15,9 @@
  */
 package br.com.objectos.css.maven.plugin.framework;
 
-import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkAtMediaSet;
-import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkNamedValue;
-import br.com.objectos.css.type.Value;
+import objectos.css.config.framework.ConfigurationDsl.FrameworkAtMediaSet;
+import objectos.css.config.framework.ConfigurationDsl.FrameworkNamedValue;
+import objectos.css.type.Value;
 
 class NamedAtMediaSet extends AbstractFrameworkObject implements FrameworkNamedValue {
 

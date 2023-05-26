@@ -9,7 +9,7 @@ package br.com.objectos.css.framework;
 
 import static org.testng.Assert.assertEquals;
 
-import br.com.objectos.css.sheet.StyleSheet;
+import objectos.css.sheet.StyleSheet;
 
 public abstract class AbstractCssFrameworkTest {
 

@@ -20,11 +20,11 @@ import static br.com.objectos.code.java.Java.l;
 
 import br.com.objectos.code.java.expression.Argument;
 import br.com.objectos.code.java.expression.MethodInvocation;
-import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkAtMediaDeclaration;
 import br.com.objectos.css.maven.plugin.framework.PropertyAtMedia.Invocation;
-import br.com.objectos.css.property.StandardPropertyName;
-import br.com.objectos.css.type.LengthUnit;
-import br.com.objectos.css.type.Value;
+import objectos.css.config.framework.ConfigurationDsl.FrameworkAtMediaDeclaration;
+import objectos.css.property.StandardPropertyName;
+import objectos.css.type.LengthUnit;
+import objectos.css.type.Value;
 
 final class AtMediaDeclaration
     extends AbstractFrameworkObject implements FrameworkAtMediaDeclaration {

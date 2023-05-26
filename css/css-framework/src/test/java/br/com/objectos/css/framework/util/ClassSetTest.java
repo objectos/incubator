@@ -7,7 +7,7 @@
  */
 package br.com.objectos.css.framework.util;
 
-import static br.com.objectos.css.select.SelectorFactory.dot;
+import static objectos.css.select.SelectorFactory.dot;
 import static org.testng.Assert.assertEquals;
 
 import objectos.html.HtmlTemplate;

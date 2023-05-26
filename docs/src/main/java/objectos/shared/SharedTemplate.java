@@ -15,14 +15,14 @@
  */
 package objectos.shared;
 
-import br.com.objectos.css.Css;
 import br.com.objectos.css.framework.typography.TextColor;
 import br.com.objectos.css.framework.typography.TextDecoration;
-import br.com.objectos.css.select.ClassSelector;
-import br.com.objectos.css.select.IdSelector;
 import java.util.Arrays;
 import objectos.asciidoc.DocumentAttributes;
 import objectos.asciidoc.LinkText;
+import objectos.css.Css;
+import objectos.css.select.ClassSelector;
+import objectos.css.select.IdSelector;
 import objectos.html.HtmlTemplate;
 import objectos.html.tmpl.Instruction;
 import objectos.html.tmpl.StandardElementName;

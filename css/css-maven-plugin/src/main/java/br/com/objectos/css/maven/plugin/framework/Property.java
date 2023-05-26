@@ -17,8 +17,8 @@ package br.com.objectos.css.maven.plugin.framework;
 
 import br.com.objectos.code.java.declaration.PackageName;
 import br.com.objectos.code.java.type.NamedClass;
-import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkGroup;
-import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkPropertyState;
+import objectos.css.config.framework.ConfigurationDsl.FrameworkGroup;
+import objectos.css.config.framework.ConfigurationDsl.FrameworkPropertyState;
 import objectos.util.GrowableList;
 import objectos.util.UnmodifiableList;
 

@@ -19,7 +19,7 @@ import static br.com.objectos.code.java.Java.invoke;
 
 import br.com.objectos.code.java.expression.Argument;
 import br.com.objectos.code.java.expression.MethodInvocation;
-import br.com.objectos.css.type.Value;
+import objectos.css.type.Value;
 import objectos.util.GrowableList;
 import objectos.util.UnmodifiableList;
 

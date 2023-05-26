@@ -15,8 +15,8 @@
  */
 package br.com.objectos.css.maven.plugin.framework;
 
-import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkObject;
 import br.com.objectos.css.maven.plugin.framework.PropertyAtMedia.Invocation;
+import objectos.css.config.framework.ConfigurationDsl.FrameworkObject;
 
 abstract class AbstractFrameworkObject implements FrameworkObject {
 

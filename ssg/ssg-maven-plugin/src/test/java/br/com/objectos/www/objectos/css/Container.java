@@ -15,8 +15,8 @@
  */
 package br.com.objectos.www.objectos.css;
 
-import br.com.objectos.css.Css;
-import br.com.objectos.css.select.ClassSelector;
+import objectos.css.Css;
+import objectos.css.select.ClassSelector;
 import objectos.ssg.SiteStyleSheet;
 
 final class Container extends SiteStyleSheet {

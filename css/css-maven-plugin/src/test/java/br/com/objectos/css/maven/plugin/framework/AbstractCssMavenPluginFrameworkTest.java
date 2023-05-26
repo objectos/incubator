@@ -18,7 +18,7 @@ package br.com.objectos.css.maven.plugin.framework;
 import static org.testng.Assert.assertEquals;
 
 import br.com.objectos.code.java.io.JavaFile;
-import br.com.objectos.css.config.framework.Configuration;
+import objectos.css.config.framework.Configuration;
 import objectos.util.GrowableMap;
 import objectos.util.UnmodifiableMap;
 import org.testng.Assert;

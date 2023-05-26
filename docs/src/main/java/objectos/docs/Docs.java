@@ -17,8 +17,8 @@ package objectos.docs;
 
 import static java.lang.System.out;
 
-import br.com.objectos.css.Css;
 import java.io.IOException;
+import objectos.css.Css;
 import objectos.docs.internal.ArticleTemplate2;
 import objectos.docs.internal.DocsCss;
 import objectos.docs.internal.Step3Generate;

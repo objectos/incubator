@@ -5,9 +5,9 @@
  */
 package br.com.objectos.css.framework.background;
 
-import br.com.objectos.css.sheet.StyleSheet;
-import br.com.objectos.css.sheet.StyleSheetWriter;
 import java.util.Set;
+import objectos.css.sheet.StyleSheet;
+import objectos.css.sheet.StyleSheetWriter;
 import org.testng.annotations.Test;
 
 public class BackgroundColorTest {

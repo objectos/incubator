@@ -40,8 +40,8 @@
  */
 package br.com.objectos.css.framework.util;
 
-import br.com.objectos.css.select.ClassSelector;
 import java.util.Iterator;
+import objectos.css.select.ClassSelector;
 import objectos.html.tmpl.Instruction.ExternalAttribute;
 import objectos.lang.Equals;
 import objectos.util.GrowableSet;

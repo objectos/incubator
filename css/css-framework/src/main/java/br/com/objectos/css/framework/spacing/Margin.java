@@ -41,10 +41,10 @@
 package br.com.objectos.css.framework.spacing;
 
 import br.com.objectos.code.annotations.Generated;
-import br.com.objectos.css.Css;
-import br.com.objectos.css.keyword.Keywords;
-import br.com.objectos.css.select.ClassSelector;
-import br.com.objectos.css.sheet.AbstractStyleSheet;
+import objectos.css.Css;
+import objectos.css.keyword.Keywords;
+import objectos.css.select.ClassSelector;
+import objectos.css.sheet.AbstractStyleSheet;
 
 @Generated("br.com.objectos.css.maven.plugin.framework.FrameworkMojo")
 public final class Margin extends AbstractStyleSheet {

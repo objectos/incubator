@@ -15,8 +15,8 @@
  */
 package objectos.shared;
 
-import br.com.objectos.css.select.ClassSelector;
-import br.com.objectos.css.select.IdSelector;
+import objectos.css.select.ClassSelector;
+import objectos.css.select.IdSelector;
 import objectos.html.HtmlTemplate;
 
 public abstract class SharedTemplate2 extends HtmlTemplate {

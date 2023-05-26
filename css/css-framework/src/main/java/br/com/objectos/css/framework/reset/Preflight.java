@@ -43,7 +43,7 @@
  */
 package br.com.objectos.css.framework.reset;
 
-import br.com.objectos.css.sheet.AbstractStyleSheet;
+import objectos.css.sheet.AbstractStyleSheet;
 
 public class Preflight extends AbstractStyleSheet {
 

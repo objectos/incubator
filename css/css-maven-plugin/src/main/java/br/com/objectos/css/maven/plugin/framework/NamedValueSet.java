@@ -15,8 +15,8 @@
  */
 package br.com.objectos.css.maven.plugin.framework;
 
-import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkNamedValue;
-import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkNamedValueSet;
+import objectos.css.config.framework.ConfigurationDsl.FrameworkNamedValue;
+import objectos.css.config.framework.ConfigurationDsl.FrameworkNamedValueSet;
 import objectos.util.UnmodifiableList;
 
 class NamedValueSet extends AbstractFrameworkObject implements FrameworkNamedValueSet {

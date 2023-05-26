@@ -17,7 +17,7 @@ package objectos.shared;
 
 import static org.testng.Assert.assertEquals;
 
-import br.com.objectos.css.select.ClassSelector;
+import objectos.css.select.ClassSelector;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 

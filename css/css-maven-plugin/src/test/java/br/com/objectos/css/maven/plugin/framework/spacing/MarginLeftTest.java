@@ -15,15 +15,15 @@
  */
 package br.com.objectos.css.maven.plugin.framework.spacing;
 
-import static br.com.objectos.css.property.StandardPropertyName.MIN_WIDTH;
-import static br.com.objectos.css.sheet.MediaType.SCREEN;
+import static objectos.css.property.StandardPropertyName.MIN_WIDTH;
+import static objectos.css.sheet.MediaType.SCREEN;
 import static org.testng.Assert.assertEquals;
 
-import br.com.objectos.css.config.framework.AbstractConfiguration;
-import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkGroup;
-import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkPropertyState;
 import br.com.objectos.css.maven.plugin.framework.AbstractCssMavenPluginFrameworkTest;
-import br.com.objectos.css.type.Zero;
+import objectos.css.config.framework.AbstractConfiguration;
+import objectos.css.config.framework.ConfigurationDsl.FrameworkGroup;
+import objectos.css.config.framework.ConfigurationDsl.FrameworkPropertyState;
+import objectos.css.type.Zero;
 import org.testng.annotations.Test;
 
 public class MarginLeftTest extends AbstractCssMavenPluginFrameworkTest {
