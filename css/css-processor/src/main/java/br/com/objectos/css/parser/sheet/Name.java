@@ -17,8 +17,8 @@ package br.com.objectos.css.parser.sheet;
 
 import java.util.Iterator;
 import java.util.List;
-import objectos.util.UnmodifiableList;
 import objectos.util.GrowableList;
+import objectos.util.UnmodifiableList;
 
 class Name {
 

@@ -16,8 +16,8 @@
 package br.com.objectos.css.processor;
 
 import br.com.objectos.code.java.expression.MethodInvocation;
-import br.com.objectos.css.Css;
-import br.com.objectos.css.property.StandardPropertyName;
+import objectos.css.Css;
+import objectos.css.property.StandardPropertyName;
 import org.testng.annotations.Test;
 
 public class StyleMethodInvocationTest {
@@ -30,10 +30,10 @@ public class StyleMethodInvocationTest {
     style.addSimpleSelector(Css.a);
 
     test(
-        style,
-        "style(",
-        "    a",
-        ")"
+      style,
+      "style(",
+      "    a",
+      ")"
     );
   }
 
@@ -53,15 +53,15 @@ public class StyleMethodInvocationTest {
     style.addPropertyName(StandardPropertyName.MARGIN_LEFT);
 
     test(
-        style,
-        "style(",
-        "    a,",
-        "",
-        "    marginTop(px(1)),",
-        "    marginRight(em(1.2)),",
-        "    marginBottom(pct(10)),",
-        "    marginLeft(rem(-2))",
-        ")"
+      style,
+      "style(",
+      "    a,",
+      "",
+      "    marginTop(px(1)),",
+      "    marginRight(em(1.2)),",
+      "    marginBottom(pct(10)),",
+      "    marginLeft(rem(-2))",
+      ")"
     );
   }
 
@@ -77,12 +77,12 @@ public class StyleMethodInvocationTest {
     style.addValue(0);
 
     test(
-        style,
-        "style(",
-        "    a,",
-        "",
-        "    margin(zero())",
-        ")"
+      style,
+      "style(",
+      "    a,",
+      "",
+      "    margin(zero())",
+      ")"
     );
   }
 

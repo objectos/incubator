@@ -16,8 +16,8 @@
 package br.com.objectos.css.processor;
 
 import br.com.objectos.code.java.declaration.MethodCode;
-import br.com.objectos.css.sheet.AbstractStyleSheet;
-import br.com.objectos.css.sheet.StyleSheet;
+import objectos.css.sheet.AbstractStyleSheet;
+import objectos.css.sheet.StyleSheet;
 import org.testng.annotations.Test;
 
 public class DefinitionMethodTest {
@@ -25,81 +25,81 @@ public class DefinitionMethodTest {
   @Test
   public void rgb() {
     test(
-        new AbstractStyleSheet() {
-          @Override
-          protected void definition() {
-            style(
-                cn("rgb"),
+      new AbstractStyleSheet() {
+        @Override
+        protected void definition() {
+          style(
+            cn("rgb"),
 
-                color(rgb(0, 1, 2)),
-                color(rgb(0, 100.1, 255)),
-                color(rgb(0, 127, 255, 0.5)),
-                color(rgb(0.1, 0.2, 0.3, 0.4)),
-                color(rgba(0, 127, 255, 0.5)),
-                color(rgba(0.1, 0.2, 0.3, 0.4))
-            );
-          }
-        },
-        "@java.lang.Override",
-        "protected final void definition() {",
-        "  style(",
-        "      cn(\"rgb\"),",
-        "",
-        "      color(rgb(0, 1, 2)),",
-        "      color(rgb(0.0, 100.1, 255.0)),",
-        "      color(rgb(0, 127, 255, 0.5)),",
-        "      color(rgb(0.1, 0.2, 0.3, 0.4)),",
-        "      color(rgba(0, 127, 255, 0.5)),",
-        "      color(rgba(0.1, 0.2, 0.3, 0.4))",
-        "  );",
-        "}"
+            color(rgb(0, 1, 2)),
+            color(rgb(0, 100.1, 255)),
+            color(rgb(0, 127, 255, 0.5)),
+            color(rgb(0.1, 0.2, 0.3, 0.4)),
+            color(rgba(0, 127, 255, 0.5)),
+            color(rgba(0.1, 0.2, 0.3, 0.4))
+          );
+        }
+      },
+      "@java.lang.Override",
+      "protected final void definition() {",
+      "  style(",
+      "      cn(\"rgb\"),",
+      "",
+      "      color(rgb(0, 1, 2)),",
+      "      color(rgb(0.0, 100.1, 255.0)),",
+      "      color(rgb(0, 127, 255, 0.5)),",
+      "      color(rgb(0.1, 0.2, 0.3, 0.4)),",
+      "      color(rgba(0, 127, 255, 0.5)),",
+      "      color(rgba(0.1, 0.2, 0.3, 0.4))",
+      "  );",
+      "}"
     );
   }
 
   @Test
   public void selector() {
     test(
-        new AbstractStyleSheet() {
-          @Override
-          protected void definition() {
-            style(html);
+      new AbstractStyleSheet() {
+        @Override
+        protected void definition() {
+          style(html);
 
-            style(id("a"), cn("dot"));
-          }
-        },
-        "@java.lang.Override",
-        "protected final void definition() {",
-        "  style(",
-        "      html",
-        "  );",
-        "  style(",
-        "      id(\"a\"), cn(\"dot\")",
-        "  );",
-        "}"
+          style(id("a"), cn("dot"));
+        }
+      },
+      "@java.lang.Override",
+      "protected final void definition() {",
+      "  style(",
+      "      html",
+      "  );",
+      "  style(",
+      "      id(\"a\"), cn(\"dot\")",
+      "  );",
+      "}"
     );
   }
 
   @Test
   public void zeroValue() {
     test(
-        new AbstractStyleSheet() {
-          @Override
-          protected void definition() {
-            style(
-                body,
+      new AbstractStyleSheet() {
+        @Override
+        protected void definition() {
+          style(
+            body,
 
-                margin(zero())
-            );
-          }
-        },
-        "@java.lang.Override",
-        "protected final void definition() {",
-        "  style(",
-        "      body,",
-        "",
-        "      margin(zero())",
-        "  );",
-        "}"
+            margin(zero())
+          );
+        }
+      },
+      "@java.lang.Override",
+      "protected final void definition() {",
+      "  style(",
+      "      body,",
+      "",
+      "      margin(zero())",
+      "  );",
+      "}"
     );
   }
 

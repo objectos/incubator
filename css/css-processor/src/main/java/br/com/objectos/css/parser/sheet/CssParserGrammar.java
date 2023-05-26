@@ -15,12 +15,12 @@
  */
 package br.com.objectos.css.parser.sheet;
 
-import br.com.objectos.css.parser.IsNonTerminal;
-import br.com.objectos.css.parser.IsTerminal;
-import br.com.objectos.css.select.Selector;
-import br.com.objectos.css.sheet.StyleSheet;
 import br.com.objectos.parser.grammar.AbstractParserGrammar;
 import java.util.List;
+import objectos.css.parser.IsNonTerminal;
+import objectos.css.parser.IsTerminal;
+import objectos.css.select.Selector;
+import objectos.css.sheet.StyleSheet;
 
 class CssParserGrammar extends AbstractParserGrammar<IsNonTerminal, IsTerminal> {
 

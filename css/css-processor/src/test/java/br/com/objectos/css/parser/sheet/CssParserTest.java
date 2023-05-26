@@ -17,9 +17,9 @@ package br.com.objectos.css.parser.sheet;
 
 import static org.testng.Assert.assertEquals;
 
-import br.com.objectos.css.sheet.AbstractStyleSheet;
-import br.com.objectos.css.sheet.StyleSheet;
-import br.com.objectos.css.sheet.StyleSheetWriter;
+import objectos.css.sheet.AbstractStyleSheet;
+import objectos.css.sheet.StyleSheet;
+import objectos.css.sheet.StyleSheetWriter;
 import org.testng.annotations.Test;
 
 public class CssParserTest {

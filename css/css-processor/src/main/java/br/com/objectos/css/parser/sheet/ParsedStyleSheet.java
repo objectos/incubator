@@ -15,9 +15,9 @@
  */
 package br.com.objectos.css.parser.sheet;
 
-import br.com.objectos.css.sheet.StyleEngine;
-import br.com.objectos.css.sheet.StyleSheet;
 import java.util.List;
+import objectos.css.sheet.StyleEngine;
+import objectos.css.sheet.StyleSheet;
 
 class ParsedStyleSheet implements StyleSheet {
 

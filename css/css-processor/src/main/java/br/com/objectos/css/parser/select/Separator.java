@@ -15,7 +15,7 @@
  */
 package br.com.objectos.css.parser.select;
 
-import br.com.objectos.css.parser.IsTerminal;
+import objectos.css.parser.IsTerminal;
 
 enum Separator implements IsTerminal {
 

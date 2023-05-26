@@ -15,7 +15,7 @@
  */
 package br.com.objectos.css.parser.sheet;
 
-import br.com.objectos.css.type.PercentageType;
+import objectos.css.type.PercentageType;
 
 abstract class Percentage extends ThisValue implements PercentageType {
 

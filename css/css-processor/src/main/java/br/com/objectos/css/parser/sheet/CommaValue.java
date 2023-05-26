@@ -15,7 +15,7 @@
  */
 package br.com.objectos.css.parser.sheet;
 
-import br.com.objectos.css.parser.IsNonTerminal;
+import objectos.css.parser.IsNonTerminal;
 
 class CommaValue implements IsNonTerminal {
 

@@ -15,9 +15,9 @@
  */
 package br.com.objectos.css.parser.select;
 
-import br.com.objectos.css.parser.IsTerminal;
-import br.com.objectos.css.select.PseudoElementSelector;
-import br.com.objectos.css.select.PseudoElementSelectors;
+import objectos.css.parser.IsTerminal;
+import objectos.css.select.PseudoElementSelector;
+import objectos.css.select.PseudoElementSelectors;
 
 class PseudoElementToken implements IsTerminal {
 

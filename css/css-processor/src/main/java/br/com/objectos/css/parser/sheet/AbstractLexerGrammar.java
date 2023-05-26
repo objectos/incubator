@@ -15,9 +15,9 @@
  */
 package br.com.objectos.css.parser.sheet;
 
-import br.com.objectos.css.parser.IsTerminal;
 import br.com.objectos.lexer.charexp.CharExpression;
 import br.com.objectos.lexer.grammar.AbstractSimpleLexerGrammar;
+import objectos.css.parser.IsTerminal;
 
 abstract class AbstractLexerGrammar extends AbstractSimpleLexerGrammar<IsTerminal> {
 

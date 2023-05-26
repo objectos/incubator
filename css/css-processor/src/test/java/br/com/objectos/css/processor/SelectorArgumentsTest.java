@@ -15,15 +15,15 @@
  */
 package br.com.objectos.css.processor;
 
-import static br.com.objectos.css.Css.attr;
-import static br.com.objectos.css.Css.cn;
-import static br.com.objectos.css.Css.eq;
-import static br.com.objectos.css.Css.id;
+import static objectos.css.Css.attr;
+import static objectos.css.Css.cn;
+import static objectos.css.Css.eq;
+import static objectos.css.Css.id;
 import static org.testng.Assert.assertEquals;
 
 import br.com.objectos.code.java.expression.Argument;
-import br.com.objectos.css.Css;
-import br.com.objectos.css.select.SimpleSelector;
+import objectos.css.Css;
+import objectos.css.select.SimpleSelector;
 import org.testng.annotations.Test;
 
 public class SelectorArgumentsTest {

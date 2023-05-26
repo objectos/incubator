@@ -15,8 +15,8 @@
  */
 package br.com.objectos.css.parser.select;
 
-import br.com.objectos.css.parser.IsNonTerminal;
-import br.com.objectos.css.select.Selector;
+import objectos.css.parser.IsNonTerminal;
+import objectos.css.select.Selector;
 
 class Goal implements IsNonTerminal {
 

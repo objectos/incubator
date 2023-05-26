@@ -15,9 +15,9 @@
  */
 package br.com.objectos.css.parser.sheet;
 
-import br.com.objectos.css.parser.IsTerminal;
 import br.com.objectos.lexer.Lexer;
 import br.com.objectos.lexer.impl.ah.AdHocLexer;
+import objectos.css.parser.IsTerminal;
 
 class CssLexer {
 

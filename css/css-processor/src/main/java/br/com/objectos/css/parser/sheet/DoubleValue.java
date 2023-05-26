@@ -15,10 +15,10 @@
  */
 package br.com.objectos.css.parser.sheet;
 
-import br.com.objectos.css.type.Creator;
-import br.com.objectos.css.type.DoubleType;
-import br.com.objectos.css.type.LengthUnit;
-import br.com.objectos.css.type.Marker;
+import objectos.css.type.Creator;
+import objectos.css.type.DoubleType;
+import objectos.css.type.LengthUnit;
+import objectos.css.type.Marker;
 
 class DoubleValue extends ThisValue implements DoubleType {
 

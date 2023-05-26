@@ -15,15 +15,15 @@
  */
 package br.com.objectos.css.parser.sheet;
 
-import br.com.objectos.css.keyword.Keywords;
-import br.com.objectos.css.keyword.StandardKeyword;
 import br.com.objectos.css.parser.select.SelectorParser;
-import br.com.objectos.css.property.StandardPropertyName;
-import br.com.objectos.css.select.Selector;
-import br.com.objectos.css.type.Color;
-import br.com.objectos.css.type.ColorName;
-import br.com.objectos.css.type.Creator;
-import br.com.objectos.css.type.Marker;
+import objectos.css.keyword.Keywords;
+import objectos.css.keyword.StandardKeyword;
+import objectos.css.property.StandardPropertyName;
+import objectos.css.select.Selector;
+import objectos.css.type.Color;
+import objectos.css.type.ColorName;
+import objectos.css.type.Creator;
+import objectos.css.type.Marker;
 import objectos.lang.Check;
 
 class Identifier extends ThisValue {

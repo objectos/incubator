@@ -22,7 +22,6 @@ import br.com.objectos.code.java.type.NamedClass;
 import br.com.objectos.code.model.element.ProcessingPackage;
 import br.com.objectos.code.processing.AbstractProcessingRoundProcessor;
 import br.com.objectos.code.processing.ProcessingRound;
-import br.com.objectos.css.CssCompiler;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Set;
@@ -32,6 +31,7 @@ import javax.annotation.processing.ProcessingEnvironment;
 import javax.annotation.processing.Processor;
 import javax.tools.FileObject;
 import javax.tools.StandardLocation;
+import objectos.css.CssCompiler;
 import objectos.util.UnmodifiableSet;
 
 @Services(Processor.class)

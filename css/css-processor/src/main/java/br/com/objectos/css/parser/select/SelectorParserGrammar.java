@@ -15,31 +15,31 @@
  */
 package br.com.objectos.css.parser.select;
 
-import br.com.objectos.css.parser.IsNonTerminal;
-import br.com.objectos.css.parser.IsTerminal;
-import br.com.objectos.css.select.AdjacentSiblingSelector;
-import br.com.objectos.css.select.AttributeSelector;
-import br.com.objectos.css.select.AttributeValueOperator;
-import br.com.objectos.css.select.AttributeValueSelector;
-import br.com.objectos.css.select.ChildSelector;
-import br.com.objectos.css.select.ClassSelector;
-import br.com.objectos.css.select.Combinator;
-import br.com.objectos.css.select.ComplexSelectorHead;
-import br.com.objectos.css.select.ComplexSelectorTail;
-import br.com.objectos.css.select.CompoundSelector;
-import br.com.objectos.css.select.DescendantSelector;
-import br.com.objectos.css.select.GeneralSiblingSelector;
-import br.com.objectos.css.select.IdSelector;
-import br.com.objectos.css.select.PseudoClassSelector;
-import br.com.objectos.css.select.PseudoElementSelector;
-import br.com.objectos.css.select.Selector;
-import br.com.objectos.css.select.SelectorList;
-import br.com.objectos.css.select.SelectorListHead;
-import br.com.objectos.css.select.SelectorListTail;
-import br.com.objectos.css.select.SimpleSelector;
-import br.com.objectos.css.select.TypeSelector;
-import br.com.objectos.css.select.UniversalSelector;
 import br.com.objectos.parser.grammar.AbstractParserGrammar;
+import objectos.css.parser.IsNonTerminal;
+import objectos.css.parser.IsTerminal;
+import objectos.css.select.AdjacentSiblingSelector;
+import objectos.css.select.AttributeSelector;
+import objectos.css.select.AttributeValueOperator;
+import objectos.css.select.AttributeValueSelector;
+import objectos.css.select.ChildSelector;
+import objectos.css.select.ClassSelector;
+import objectos.css.select.Combinator;
+import objectos.css.select.ComplexSelectorHead;
+import objectos.css.select.ComplexSelectorTail;
+import objectos.css.select.CompoundSelector;
+import objectos.css.select.DescendantSelector;
+import objectos.css.select.GeneralSiblingSelector;
+import objectos.css.select.IdSelector;
+import objectos.css.select.PseudoClassSelector;
+import objectos.css.select.PseudoElementSelector;
+import objectos.css.select.Selector;
+import objectos.css.select.SelectorList;
+import objectos.css.select.SelectorListHead;
+import objectos.css.select.SelectorListTail;
+import objectos.css.select.SimpleSelector;
+import objectos.css.select.TypeSelector;
+import objectos.css.select.UniversalSelector;
 
 class SelectorParserGrammar extends AbstractParserGrammar<IsNonTerminal, IsTerminal> {
 

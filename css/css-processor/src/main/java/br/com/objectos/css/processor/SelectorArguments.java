@@ -21,16 +21,16 @@ import static br.com.objectos.code.java.Java.l;
 
 import br.com.objectos.code.java.JavaNames;
 import br.com.objectos.code.java.expression.Argument;
-import br.com.objectos.css.select.AttributeSelector;
-import br.com.objectos.css.select.AttributeValueOperator;
-import br.com.objectos.css.select.AttributeValueSelector;
-import br.com.objectos.css.select.ClassSelector;
-import br.com.objectos.css.select.IdSelector;
-import br.com.objectos.css.select.PseudoClassSelector;
-import br.com.objectos.css.select.PseudoElementSelector;
-import br.com.objectos.css.select.SimpleSelector;
-import br.com.objectos.css.select.SimpleSelectorVisitor;
-import br.com.objectos.css.select.TypeSelector;
+import objectos.css.select.AttributeSelector;
+import objectos.css.select.AttributeValueOperator;
+import objectos.css.select.AttributeValueSelector;
+import objectos.css.select.ClassSelector;
+import objectos.css.select.IdSelector;
+import objectos.css.select.PseudoClassSelector;
+import objectos.css.select.PseudoElementSelector;
+import objectos.css.select.SimpleSelector;
+import objectos.css.select.SimpleSelectorVisitor;
+import objectos.css.select.TypeSelector;
 
 class SelectorArguments implements SimpleSelectorVisitor<Argument, Void> {
 

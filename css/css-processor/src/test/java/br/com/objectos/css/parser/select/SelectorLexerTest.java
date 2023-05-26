@@ -19,10 +19,10 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
-import br.com.objectos.css.parser.IsTerminal;
-import br.com.objectos.css.select.AttributeValueOperator;
-import br.com.objectos.css.select.Combinator;
 import br.com.objectos.lexer.Analyzer;
+import objectos.css.parser.IsTerminal;
+import objectos.css.select.AttributeValueOperator;
+import objectos.css.select.Combinator;
 import org.testng.annotations.Test;
 
 public class SelectorLexerTest {
@@ -42,38 +42,38 @@ public class SelectorLexerTest {
   @Test
   public void attribute_valueUnquoted() {
     test("[foo=bar]",
-        SelectorToken.ATTR_OPEN,
-        IdentToken.of("foo"), AttributeValueOperator.EQUALS, IdentToken.of("bar"),
-        SelectorToken.ATTR_CLOSE);
+      SelectorToken.ATTR_OPEN,
+      IdentToken.of("foo"), AttributeValueOperator.EQUALS, IdentToken.of("bar"),
+      SelectorToken.ATTR_CLOSE);
   }
 
   @Test
   public void attribute_valueQuoted() {
     test("[foo='bar']",
-        SelectorToken.ATTR_OPEN,
-        IdentToken.of("foo"), AttributeValueOperator.EQUALS, new SingleQuotedString("bar"),
-        SelectorToken.ATTR_CLOSE);
+      SelectorToken.ATTR_OPEN,
+      IdentToken.of("foo"), AttributeValueOperator.EQUALS, new SingleQuotedString("bar"),
+      SelectorToken.ATTR_CLOSE);
   }
 
   @Test
   public void pseudoClass() {
     test(":hover",
-        PseudoClassToken.of("hover"));
+      PseudoClassToken.of("hover"));
     test(":first-of-type",
-        PseudoClassToken.of("first-of-type"));
+      PseudoClassToken.of("first-of-type"));
   }
 
   @Test
   public void pseudoElement() {
     test("::after",
-        PseudoElementToken.of("after"));
+      PseudoElementToken.of("after"));
   }
 
   @Test
   public void subclassSequence() {
     test("#div0.active",
-        SelectorToken.HASH, IdentToken.of("div0"),
-        SelectorToken.DOT, IdentToken.of("active"));
+      SelectorToken.HASH, IdentToken.of("div0"),
+      SelectorToken.DOT, IdentToken.of("active"));
   }
 
   @Test
@@ -89,18 +89,18 @@ public class SelectorLexerTest {
   @Test
   public void complexSelector_descendant() {
     test("div#div0 p",
-        IdentToken.of("div"),
-        SelectorToken.HASH, IdentToken.of("div0"),
-        Combinator.DESCENDANT,
-        IdentToken.of("p"));
+      IdentToken.of("div"),
+      SelectorToken.HASH, IdentToken.of("div0"),
+      Combinator.DESCENDANT,
+      IdentToken.of("p"));
   }
-  
+
   @Test
   public void list() {
     test("b,\nstrong",
-        IdentToken.of("b"),
-        Separator.COMMA,
-        IdentToken.of("strong"));
+      IdentToken.of("b"),
+      Separator.COMMA,
+      IdentToken.of("strong"));
   }
 
   private void test(String string, IsTerminal... expected) {

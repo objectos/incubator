@@ -15,14 +15,14 @@
  */
 package br.com.objectos.css.parser.sheet;
 
-import br.com.objectos.css.parser.IsNonTerminal;
-import br.com.objectos.css.property.StandardPropertyName;
-import br.com.objectos.css.sheet.MultiDeclarationElement;
-import br.com.objectos.css.sheet.StyleEngine;
 import java.util.Arrays;
 import java.util.List;
+import objectos.css.parser.IsNonTerminal;
+import objectos.css.property.StandardPropertyName;
+import objectos.css.sheet.MultiDeclarationElement;
+import objectos.css.sheet.StyleEngine;
 
-abstract class Declaration implements IsNonTerminal, br.com.objectos.css.sheet.Declaration {
+abstract class Declaration implements IsNonTerminal, objectos.css.sheet.Declaration {
 
   private enum ThisMultiDeclarationElement implements MultiDeclarationElement {
     INSTANCE;

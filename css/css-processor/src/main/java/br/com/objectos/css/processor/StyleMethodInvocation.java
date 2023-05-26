@@ -22,14 +22,14 @@ import static br.com.objectos.code.java.Java.nl;
 import br.com.objectos.code.java.expression.Argument;
 import br.com.objectos.code.java.expression.ArgumentsElement;
 import br.com.objectos.code.java.expression.MethodInvocation;
-import br.com.objectos.css.keyword.StandardKeyword;
-import br.com.objectos.css.property.StandardPropertyName;
-import br.com.objectos.css.select.AttributeValueOperator;
-import br.com.objectos.css.select.Combinator;
-import br.com.objectos.css.select.SimpleSelector;
-import br.com.objectos.css.select.UniversalSelector;
-import br.com.objectos.css.type.ColorName;
-import br.com.objectos.css.type.LengthUnit;
+import objectos.css.keyword.StandardKeyword;
+import objectos.css.property.StandardPropertyName;
+import objectos.css.select.AttributeValueOperator;
+import objectos.css.select.Combinator;
+import objectos.css.select.SimpleSelector;
+import objectos.css.select.UniversalSelector;
+import objectos.css.type.ColorName;
+import objectos.css.type.LengthUnit;
 import objectos.util.GrowableList;
 
 class StyleMethodInvocation {

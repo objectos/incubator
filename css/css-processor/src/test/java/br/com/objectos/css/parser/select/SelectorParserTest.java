@@ -15,35 +15,35 @@
  */
 package br.com.objectos.css.parser.select;
 
-import static br.com.objectos.css.Css.ACTIVE;
-import static br.com.objectos.css.Css.AFTER;
-import static br.com.objectos.css.Css.BEFORE;
-import static br.com.objectos.css.Css.EMPTY;
-import static br.com.objectos.css.Css.HOVER;
-import static br.com.objectos.css.Css.VISITED;
-import static br.com.objectos.css.Css.cn;
-import static br.com.objectos.css.Css.id;
-import static br.com.objectos.css.Css.or;
 import static br.com.objectos.css.parser.select.SelectorParser.parse;
-import static br.com.objectos.css.select.Combinator.ADJACENT_SIBLING;
-import static br.com.objectos.css.select.Combinator.CHILD;
-import static br.com.objectos.css.select.Combinator.DESCENDANT;
-import static br.com.objectos.css.select.Combinator.GENERAL_SIBLING;
-import static br.com.objectos.css.select.SelectorFactory.attr;
-import static br.com.objectos.css.select.SelectorFactory.contains;
-import static br.com.objectos.css.select.SelectorFactory.endsWith;
-import static br.com.objectos.css.select.SelectorFactory.eq;
-import static br.com.objectos.css.select.SelectorFactory.lang;
-import static br.com.objectos.css.select.SelectorFactory.sel;
-import static br.com.objectos.css.select.SelectorFactory.startsWith;
-import static br.com.objectos.css.select.SelectorFactory.wsList;
+import static objectos.css.Css.ACTIVE;
+import static objectos.css.Css.AFTER;
+import static objectos.css.Css.BEFORE;
+import static objectos.css.Css.EMPTY;
+import static objectos.css.Css.HOVER;
+import static objectos.css.Css.VISITED;
+import static objectos.css.Css.cn;
+import static objectos.css.Css.id;
+import static objectos.css.Css.or;
+import static objectos.css.select.Combinator.ADJACENT_SIBLING;
+import static objectos.css.select.Combinator.CHILD;
+import static objectos.css.select.Combinator.DESCENDANT;
+import static objectos.css.select.Combinator.GENERAL_SIBLING;
+import static objectos.css.select.SelectorFactory.attr;
+import static objectos.css.select.SelectorFactory.contains;
+import static objectos.css.select.SelectorFactory.endsWith;
+import static objectos.css.select.SelectorFactory.eq;
+import static objectos.css.select.SelectorFactory.lang;
+import static objectos.css.select.SelectorFactory.sel;
+import static objectos.css.select.SelectorFactory.startsWith;
+import static objectos.css.select.SelectorFactory.wsList;
 import static org.testng.Assert.assertEquals;
 
-import br.com.objectos.css.Css;
-import br.com.objectos.css.select.ClassSelector;
-import br.com.objectos.css.select.TypeSelector;
-import br.com.objectos.css.select.TypeSelectors;
-import br.com.objectos.css.select.UniversalSelector;
+import objectos.css.Css;
+import objectos.css.select.ClassSelector;
+import objectos.css.select.TypeSelector;
+import objectos.css.select.TypeSelectors;
+import objectos.css.select.UniversalSelector;
 import org.testng.annotations.Test;
 
 public class SelectorParserTest {
@@ -96,44 +96,44 @@ public class SelectorParserTest {
   @Test
   public void complexSelector_descendant() {
     assertEquals(
-        parse("div p"),
-        sel(tag("div"), DESCENDANT, tag("p"))
+      parse("div p"),
+      sel(tag("div"), DESCENDANT, tag("p"))
     );
     assertEquals(
-        parse("div#div0 p"),
-        sel(tag("div"), id("div0"), DESCENDANT, tag("p"))
+      parse("div#div0 p"),
+      sel(tag("div"), id("div0"), DESCENDANT, tag("p"))
     );
     assertEquals(
-        parse("div#div0 p.active"),
-        sel(tag("div"), id("div0"), DESCENDANT, tag("p"), cn("active"))
+      parse("div#div0 p.active"),
+      sel(tag("div"), id("div0"), DESCENDANT, tag("p"), cn("active"))
     );
     assertEquals(
-        parse("#div0 .active"),
-        sel(id("div0"), DESCENDANT, className("active"))
+      parse("#div0 .active"),
+      sel(id("div0"), DESCENDANT, className("active"))
     );
     assertEquals(
-        parse("#div0 p.active"),
-        sel(id("div0"), DESCENDANT, tag("p"), cn("active"))
+      parse("#div0 p.active"),
+      sel(id("div0"), DESCENDANT, tag("p"), cn("active"))
     );
     assertEquals(
-        parse("#div0 #x.active"),
-        sel(id("div0"), DESCENDANT, id("x"), cn("active"))
+      parse("#div0 #x.active"),
+      sel(id("div0"), DESCENDANT, id("x"), cn("active"))
     );
   }
 
   @Test
   public void complexSelector_descendant_recursive() {
     assertEquals(
-        parse("div p a"),
-        sel(tag("div"), DESCENDANT, tag("p"), DESCENDANT, tag("a"))
+      parse("div p a"),
+      sel(tag("div"), DESCENDANT, tag("p"), DESCENDANT, tag("a"))
     );
     assertEquals(
-        parse("div#div0 p a"),
-        sel(tag("div"), id("div0"), DESCENDANT, tag("p"), DESCENDANT, tag("a"))
+      parse("div#div0 p a"),
+      sel(tag("div"), id("div0"), DESCENDANT, tag("p"), DESCENDANT, tag("a"))
     );
     assertEquals(
-        parse("div#div0 p.active a"),
-        sel(tag("div"), id("div0"), DESCENDANT, tag("p"), cn("active"), DESCENDANT, tag("a"))
+      parse("div#div0 p.active a"),
+      sel(tag("div"), id("div0"), DESCENDANT, tag("p"), cn("active"), DESCENDANT, tag("a"))
     );
   }
 
@@ -162,17 +162,17 @@ public class SelectorParserTest {
   public void compoundSelector_attributeValue() {
     assertEquals(parse("a#foo[x=y]"), sel(tag("a"), id("foo"), attr("x", eq("y"))));
     assertEquals(
-        parse("a#id.foo[x=y]"),
-        sel(tag("a"), id("id"), cn("foo"), attr("x", eq("y")))
+      parse("a#id.foo[x=y]"),
+      sel(tag("a"), id("id"), cn("foo"), attr("x", eq("y")))
     );
     assertEquals(parse("a.foo[x=y]"), sel(tag("a"), cn("foo"), attr("x", eq("y"))));
     assertEquals(parse("a[foo][x=y]"), sel(tag("a"), attr("foo"), attr("x", eq("y"))));
     assertEquals(
-        parse("a[foo^=bar][x=y]"),
-        sel(tag("a"), attr("foo", startsWith("bar")), attr("x", eq("y")))
+      parse("a[foo^=bar][x=y]"),
+      sel(tag("a"), attr("foo", startsWith("bar")), attr("x", eq("y")))
     );
     assertEquals(parse("a#id[foo^=bar][x=y]"),
-        sel(tag("a"), id("id"), attr("foo", startsWith("bar")), attr("x", eq("y")))
+      sel(tag("a"), id("id"), attr("foo", startsWith("bar")), attr("x", eq("y")))
     );
   }
 
@@ -251,7 +251,7 @@ public class SelectorParserTest {
   public void universalSelector() {
     assertEquals(parse("*"), UniversalSelector.getInstance());
     assertEquals(parse("*,::before"),
-        sel(UniversalSelector.getInstance(), or(), BEFORE)
+      sel(UniversalSelector.getInstance(), or(), BEFORE)
     );
   }
 

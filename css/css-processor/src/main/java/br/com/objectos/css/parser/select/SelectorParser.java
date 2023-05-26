@@ -15,13 +15,13 @@
  */
 package br.com.objectos.css.parser.select;
 
-import br.com.objectos.css.parser.IsNonTerminal;
-import br.com.objectos.css.parser.IsTerminal;
-import br.com.objectos.css.select.Selector;
 import br.com.objectos.lexer.Analyzer;
 import br.com.objectos.lexer.UncheckedAnalyzer;
 import br.com.objectos.parser.Parser;
 import br.com.objectos.parser.impl.rd.RecursiveDescentParser;
+import objectos.css.parser.IsNonTerminal;
+import objectos.css.parser.IsTerminal;
+import objectos.css.select.Selector;
 
 public class SelectorParser {
 

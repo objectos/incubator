@@ -15,8 +15,8 @@
  */
 package br.com.objectos.css.parser.sheet;
 
-import br.com.objectos.css.parser.IsTerminal;
-import br.com.objectos.css.type.LengthUnit;
+import objectos.css.parser.IsTerminal;
+import objectos.css.type.LengthUnit;
 
 enum LengthToken implements IsTerminal {
 

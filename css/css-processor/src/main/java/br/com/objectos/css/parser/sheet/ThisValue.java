@@ -15,9 +15,9 @@
  */
 package br.com.objectos.css.parser.sheet;
 
-import br.com.objectos.css.parser.IsNonTerminal;
-import br.com.objectos.css.parser.IsTerminal;
-import br.com.objectos.css.type.Value;
+import objectos.css.parser.IsNonTerminal;
+import objectos.css.parser.IsTerminal;
+import objectos.css.type.Value;
 
 abstract class ThisValue implements IsNonTerminal, IsTerminal, Value {
 

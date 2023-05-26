@@ -15,9 +15,9 @@
  */
 package br.com.objectos.css.parser.sheet;
 
-import br.com.objectos.css.parser.IsTerminal;
 import br.com.objectos.css.parser.select.SelectorParser;
-import br.com.objectos.css.select.Selector;
+import objectos.css.parser.IsTerminal;
+import objectos.css.select.Selector;
 
 class SelectorToken implements IsTerminal {
 

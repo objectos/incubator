@@ -15,10 +15,10 @@
  */
 package br.com.objectos.css.parser.sheet;
 
-import br.com.objectos.css.type.Creator;
-import br.com.objectos.css.type.IntType;
-import br.com.objectos.css.type.LengthUnit;
-import br.com.objectos.css.type.Marker;
+import objectos.css.type.Creator;
+import objectos.css.type.IntType;
+import objectos.css.type.LengthUnit;
+import objectos.css.type.Marker;
 
 final class IntValue extends ThisValue implements IntType {
 

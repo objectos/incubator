@@ -15,15 +15,15 @@
  */
 package br.com.objectos.css.parser.select;
 
-import br.com.objectos.css.Css;
-import br.com.objectos.css.select.AttributeSelector;
-import br.com.objectos.css.select.AttributeValueOperator;
-import br.com.objectos.css.select.AttributeValueSelector;
-import br.com.objectos.css.select.ClassSelector;
-import br.com.objectos.css.select.IdSelector;
-import br.com.objectos.css.select.SelectorFactory;
-import br.com.objectos.css.select.TypeSelector;
-import br.com.objectos.css.select.TypeSelectors;
+import objectos.css.Css;
+import objectos.css.select.AttributeSelector;
+import objectos.css.select.AttributeValueOperator;
+import objectos.css.select.AttributeValueSelector;
+import objectos.css.select.ClassSelector;
+import objectos.css.select.IdSelector;
+import objectos.css.select.SelectorFactory;
+import objectos.css.select.TypeSelector;
+import objectos.css.select.TypeSelectors;
 import objectos.lang.ToString;
 
 class IdentToken implements HasStringValue, ToString.Formattable {

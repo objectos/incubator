@@ -15,8 +15,8 @@
  */
 package br.com.objectos.css.parser.sheet;
 
-import br.com.objectos.css.type.LengthType;
-import br.com.objectos.css.type.LengthUnit;
+import objectos.css.type.LengthType;
+import objectos.css.type.LengthUnit;
 
 public abstract class Length extends ThisValue implements LengthType {
 

@@ -15,10 +15,10 @@
  */
 package br.com.objectos.css.parser.sheet;
 
-import br.com.objectos.css.type.ColorKind;
-import br.com.objectos.css.type.ColorType;
-import br.com.objectos.css.type.Creator;
-import br.com.objectos.css.type.Marker;
+import objectos.css.type.ColorKind;
+import objectos.css.type.ColorType;
+import objectos.css.type.Creator;
+import objectos.css.type.Marker;
 
 final class ColorValue extends ThisValue implements ColorType {
 

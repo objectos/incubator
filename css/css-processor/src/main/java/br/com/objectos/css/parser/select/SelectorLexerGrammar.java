@@ -15,11 +15,11 @@
  */
 package br.com.objectos.css.parser.select;
 
-import br.com.objectos.css.parser.IsTerminal;
-import br.com.objectos.css.select.AttributeValueOperator;
-import br.com.objectos.css.select.Combinator;
 import br.com.objectos.lexer.charexp.CharExpression;
 import br.com.objectos.lexer.grammar.AbstractLexerGrammar;
+import objectos.css.parser.IsTerminal;
+import objectos.css.select.AttributeValueOperator;
+import objectos.css.select.Combinator;
 
 class SelectorLexerGrammar extends AbstractLexerGrammar<IsTerminal, Brick> {
 
@@ -28,11 +28,11 @@ class SelectorLexerGrammar extends AbstractLexerGrammar<IsTerminal, Brick> {
   @Override
   protected final void definition() {
     CharExpression identStart = CharExpression.or(
-        CharExpression.isLetter(),
-        CharExpression.is('_'));
+      CharExpression.isLetter(),
+      CharExpression.is('_'));
     CharExpression identMore = CharExpression.or(
-        CharExpression.isLetterOrDigit(),
-        CharExpression.is('-', '_'));
+      CharExpression.isLetterOrDigit(),
+      CharExpression.is('-', '_'));
 
     defineToken(IdentToken.class)
         .addChar(identStart)
@@ -44,8 +44,8 @@ class SelectorLexerGrammar extends AbstractLexerGrammar<IsTerminal, Brick> {
         .andCreateWith(SelectorToken::value);
 
     CharExpression pseudoStart = CharExpression.or(
-        CharExpression.isLetter(),
-        CharExpression.is('-', '_'));
+      CharExpression.isLetter(),
+      CharExpression.is('-', '_'));
 
     defineToken(PseudoClassToken.class)
         .addChar(':')

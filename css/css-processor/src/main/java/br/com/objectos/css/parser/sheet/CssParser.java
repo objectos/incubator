@@ -15,9 +15,6 @@
  */
 package br.com.objectos.css.parser.sheet;
 
-import br.com.objectos.css.parser.IsNonTerminal;
-import br.com.objectos.css.parser.IsTerminal;
-import br.com.objectos.css.sheet.StyleSheet;
 import br.com.objectos.lexer.Analyzer;
 import br.com.objectos.lexer.UncheckedAnalyzer;
 import br.com.objectos.parser.Parser;
@@ -25,11 +22,14 @@ import br.com.objectos.parser.impl.rd.RecursiveDescentParser;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UncheckedIOException;
+import objectos.css.parser.IsNonTerminal;
+import objectos.css.parser.IsTerminal;
+import objectos.css.sheet.StyleSheet;
 
 public class CssParser {
 
   private static final Parser<IsNonTerminal, IsTerminal> INSTANCE = new RecursiveDescentParser<>(
-      CssParserGrammar.INSTANCE);
+    CssParserGrammar.INSTANCE);
 
   private CssParser() {}
 
