@@ -19,7 +19,7 @@ import static org.testng.Assert.assertEquals;
 
 import org.testng.annotations.Test;
 
-public class SelectorParserTest extends AbstractCssCoreTest {
+public class SelectorParserTest {
 
   @Test
   public void parse() {
@@ -53,6 +53,14 @@ public class SelectorParserTest extends AbstractCssCoreTest {
 
   private SelectorParser parser(String value) {
     return new SelectorParser(value);
+  }
+
+  private ListSelector list(Selector first, Selector second) {
+    return new ListSelector(first, second);
+  }
+
+  private SimpleSelector selector(String value) {
+    return new SimpleSelector(value);
   }
 
 }

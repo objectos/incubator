@@ -21,26 +21,27 @@ import static org.testng.Assert.assertEquals;
 
 import org.testng.annotations.Test;
 
-public class SelectorTest extends AbstractCssCoreTest {
+public class SelectorTest {
 
   @Test
   public void nest() {
     assertEquals(selector(".parent")
         .nest(SimpleNestable.of(PARENT, DESCENDANT, new Ident(".child"))),
-        selector(".parent .child"));
+      selector(".parent .child"));
   }
 
   @Test
   public void nest_parent_selector() {
     assertEquals(selector(".parent")
-        .nest(SimpleNestable.of(PARENT, new Ident(".child"))), selector(".parent.child"));
+        .nest(SimpleNestable.of(PARENT, new Ident(".child"))),
+      selector(".parent.child"));
   }
 
   @Test
   public void nest_parent_is_list() {
     assertEquals(list(selector("#a"), selector("#b"))
         .nest(SimpleNestable.of(PARENT, DESCENDANT, new Ident(".c"))),
-        list(selector("#a .c"), selector("#b .c")));
+      list(selector("#a .c"), selector("#b .c")));
   }
 
   @Test
@@ -48,7 +49,7 @@ public class SelectorTest extends AbstractCssCoreTest {
     SimpleNestable b = SimpleNestable.of(PARENT, DESCENDANT, new Ident(".b"));
     SimpleNestable c = SimpleNestable.of(PARENT, DESCENDANT, new Ident(".c"));
     assertEquals(selector("#a").nest(ListNestable.of(b, c)),
-        list(selector("#a .b"), selector("#a .c")));
+      list(selector("#a .b"), selector("#a .c")));
   }
 
   @Test
@@ -56,7 +57,7 @@ public class SelectorTest extends AbstractCssCoreTest {
     SimpleNestable b = SimpleNestable.of(PARENT, new Ident("::after"));
     SimpleNestable c = SimpleNestable.of(PARENT, new Ident("::before"));
     assertEquals(selector("#a").nest(ListNestable.of(b, c)),
-        list(selector("#a::after"), selector("#a::before")));
+      list(selector("#a::after"), selector("#a::before")));
   }
 
   @Test
@@ -70,9 +71,9 @@ public class SelectorTest extends AbstractCssCoreTest {
     SimpleNestable after = SimpleNestable.of(PARENT, new Ident("::after"));
     SimpleNestable before = SimpleNestable.of(PARENT, new Ident("::before"));
     assertEquals(
-        list(selector("#a"), selector("#b")).nest(ListNestable.of(after, before)),
-        list(list(selector("#a::after"), selector("#b::after")),
-            list(selector("#a::before"), selector("#b::before")))
+      list(selector("#a"), selector("#b")).nest(ListNestable.of(after, before)),
+      list(list(selector("#a::after"), selector("#b::after")),
+        list(selector("#a::before"), selector("#b::before")))
     );
   }
 
@@ -80,7 +81,15 @@ public class SelectorTest extends AbstractCssCoreTest {
   public void nest_child_is_combinator() {
     assertEquals(selector(".parent")
         .nest(SimpleNestable.of(PARENT, Combinator.CHILD, new Ident(".child"))),
-        selector(".parent > .child"));
+      selector(".parent > .child"));
+  }
+
+  private ListSelector list(Selector first, Selector second) {
+    return new ListSelector(first, second);
+  }
+
+  private SimpleSelector selector(String value) {
+    return new SimpleSelector(value);
   }
 
 }

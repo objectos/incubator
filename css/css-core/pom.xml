@@ -149,11 +149,6 @@
 
 		<dependency>
 			<groupId>br.com.objectos</groupId>
-			<artifactId>fs-testing</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>br.com.objectos</groupId>
 			<artifactId>objectos-html</artifactId>
 		</dependency>
 
