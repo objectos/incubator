@@ -45,8 +45,6 @@
 	</properties>
 
 	<modules>
-		<module>css</module>
-		<module>css-core</module>
 		<module>css-formal</module>
 		<module>css-framework</module>
 		<module>css-framework-spec</module>

@@ -36,16 +36,15 @@
 	<dependencies>
 		<dependency>
 			<groupId>br.com.objectos</groupId>
-			<artifactId>objectos-util</artifactId>
+			<artifactId>objectos-css</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>br.com.objectos</groupId>
-			<artifactId>css</artifactId>
-		</dependency>
-
 		<dependency>
 			<groupId>br.com.objectos</groupId>
 			<artifactId>objectos-html</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>br.com.objectos</groupId>
+			<artifactId>objectos-util</artifactId>
 		</dependency>
 
 		<dependency>

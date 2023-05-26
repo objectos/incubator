@@ -43,10 +43,8 @@
  */
 package br.com.objectos.css.framework.reset;
 
-import br.com.objectos.code.annotations.Generated;
 import br.com.objectos.css.sheet.AbstractStyleSheet;
 
-@Generated("br.com.objectos.css.maven.plugin.transpiler.ToJavaMojo")
 public class Preflight extends AbstractStyleSheet {
 
   @Override

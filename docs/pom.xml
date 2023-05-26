@@ -102,11 +102,16 @@
 		</dependency>
 		<dependency>
 			<groupId>br.com.objectos</groupId>
-			<artifactId>css</artifactId>
+			<artifactId>objectos-css</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>br.com.objectos</groupId>
 			<artifactId>objectos-html</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>br.com.objectos</groupId>
+			<artifactId>css-framework</artifactId>
 		</dependency>
 
 		<dependency>

@@ -82,7 +82,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>br.com.objectos</groupId>
-			<artifactId>css-core</artifactId>
+			<artifactId>objectos-css</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>br.com.objectos</groupId>
