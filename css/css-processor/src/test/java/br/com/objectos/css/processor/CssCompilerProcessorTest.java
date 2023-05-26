@@ -31,7 +31,7 @@ public class CssCompilerProcessorTest {
     compilation = javac(
       processor(new CssCompilerProcessor(ResourcesFiler::getInstance)),
       compilationUnit(
-        "@br.com.objectos.css.CssCompiler({",
+        "@objectos.css.CssCompiler({",
         "    \"Sheet\"",
         "})",
         "package code.css.compiler;"
@@ -45,7 +45,7 @@ public class CssCompilerProcessorTest {
 
       "package code.css.compiler;",
       "",
-      "import br.com.objectos.css.sheet.AbstractStyleSheet;",
+      "import objectos.css.sheet.AbstractStyleSheet;",
       "",
       "public class Sheet extends AbstractStyleSheet {",
       "",

@@ -76,7 +76,7 @@ public class FrameworkTest extends AbstractCssMavenPluginFrameworkTest {
       "import br.com.objectos.code.annotations.Generated;",
       "import br.com.objectos.css.framework.background.BackgroundColor;",
       "import br.com.objectos.css.framework.sizing.Height;",
-      "import br.com.objectos.css.sheet.AbstractStyleSheet;",
+      "import objectos.css.sheet.AbstractStyleSheet;",
       "",
       "@Generated(\"br.com.objectos.css.maven.plugin.framework.FrameworkMojo\")",
       "abstract class AbstractFramework extends AbstractStyleSheet {",
