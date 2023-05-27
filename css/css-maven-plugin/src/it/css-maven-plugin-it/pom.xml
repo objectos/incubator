@@ -56,7 +56,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>@project.groupId@</groupId>
-			<artifactId>css-core</artifactId>
+			<artifactId>objectos-css</artifactId>
 			<version>@project.version@</version>
 		</dependency>
 	</dependencies>
