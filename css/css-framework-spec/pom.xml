@@ -111,8 +111,9 @@ SOFTWARE.
 
 	<dependencies>
 		<dependency>
-			<groupId>br.com.objectos</groupId>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>objectos-css</artifactId>
+			<version>${project.version}</version>
 		</dependency>
 	</dependencies>
 

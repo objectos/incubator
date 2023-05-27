@@ -39,13 +39,13 @@
  */
 package br.com.objectos.css.framework.spec;
 
-import static br.com.objectos.css.property.StandardPropertyName.MIN_WIDTH;
-import static br.com.objectos.css.sheet.MediaType.SCREEN;
+import static objectos.css.property.StandardPropertyName.MIN_WIDTH;
+import static objectos.css.sheet.MediaType.SCREEN;
 
-import br.com.objectos.css.config.framework.AbstractConfiguration;
-import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkNamedValueSet;
-import br.com.objectos.css.type.Color;
-import br.com.objectos.css.type.Zero;
+import objectos.css.config.framework.AbstractConfiguration;
+import objectos.css.config.framework.ConfigurationDsl.FrameworkNamedValueSet;
+import objectos.css.type.Color;
+import objectos.css.type.Zero;
 
 public class FrameworkConfiguration extends AbstractConfiguration {
 

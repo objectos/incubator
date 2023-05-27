@@ -39,11 +39,11 @@
  */
 package br.com.objectos.css.framework.spec;
 
-import br.com.objectos.css.config.framework.AbstractConfiguration;
-import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkAtMediaSet;
-import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkGroup;
-import br.com.objectos.css.keyword.Keywords;
-import br.com.objectos.css.type.Value;
+import objectos.css.config.framework.AbstractConfiguration;
+import objectos.css.config.framework.ConfigurationDsl.FrameworkAtMediaSet;
+import objectos.css.config.framework.ConfigurationDsl.FrameworkGroup;
+import objectos.css.keyword.Keywords;
+import objectos.css.type.Value;
 
 final class Flex extends AbstractConfiguration {
 

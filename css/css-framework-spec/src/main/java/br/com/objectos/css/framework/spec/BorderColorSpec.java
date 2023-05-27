@@ -39,11 +39,11 @@
  */
 package br.com.objectos.css.framework.spec;
 
-import br.com.objectos.css.config.framework.AbstractConfiguration;
-import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkAtMediaSet;
-import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkGroup;
-import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkNamedValueSet;
-import br.com.objectos.css.config.framework.ConfigurationDsl.FrameworkPropertyState;
+import objectos.css.config.framework.AbstractConfiguration;
+import objectos.css.config.framework.ConfigurationDsl.FrameworkAtMediaSet;
+import objectos.css.config.framework.ConfigurationDsl.FrameworkGroup;
+import objectos.css.config.framework.ConfigurationDsl.FrameworkNamedValueSet;
+import objectos.css.config.framework.ConfigurationDsl.FrameworkPropertyState;
 
 final class BorderColorSpec extends AbstractConfiguration {
 
