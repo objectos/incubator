@@ -18,7 +18,6 @@ package br.com.objectos.http;
 import br.com.objectos.concurrent.CpuTask;
 import br.com.objectos.concurrent.IoTask;
 import br.com.objectos.concurrent.IoWorker;
-import br.com.objectos.core.io.Charsets;
 import br.com.objectos.http.Header.ContentTypeVisitor;
 import br.com.objectos.http.media.ApplicationType;
 import br.com.objectos.http.media.ImageType;
@@ -30,11 +29,12 @@ import java.nio.channels.ReadableByteChannel;
 import java.nio.charset.Charset;
 import java.nio.charset.CharsetDecoder;
 import java.nio.charset.CoderResult;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 import objectos.lang.Check;
-import objectos.util.UnmodifiableList;
 import objectos.util.GrowableList;
+import objectos.util.UnmodifiableList;
 
 abstract class AbstractHttpParser<H extends Header> implements CpuTask, IoTask {
 
@@ -662,7 +662,7 @@ abstract class AbstractHttpParser<H extends Header> implements CpuTask, IoTask {
 
     charIndex = 0;
 
-    setDecoder(Charsets.isoLatin1());
+    setDecoder(StandardCharsets.ISO_8859_1);
 
     decodeAction = Action.PARSE;
 
@@ -778,7 +778,7 @@ abstract class AbstractHttpParser<H extends Header> implements CpuTask, IoTask {
         case JSON:
           bodyAction = Action.BODY_TEXT;
 
-          bodyCharset = Charsets.utf8();
+          bodyCharset = StandardCharsets.UTF_8;
           break;
         default:
           throw new UnsupportedOperationException("Implement me @ " + type);

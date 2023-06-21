@@ -18,7 +18,6 @@ package br.com.objectos.http;
 import br.com.objectos.concurrent.CpuTask;
 import br.com.objectos.concurrent.IoTask;
 import br.com.objectos.concurrent.IoWorker;
-import br.com.objectos.core.io.Charsets;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
@@ -28,6 +27,7 @@ import java.nio.charset.Charset;
 import java.nio.charset.CharsetDecoder;
 import java.nio.charset.CharsetEncoder;
 import java.nio.charset.CoderResult;
+import java.nio.charset.StandardCharsets;
 import java.text.DateFormat;
 import java.util.Arrays;
 import java.util.Date;
@@ -144,7 +144,7 @@ final class HttpEngine implements CpuTask, IoTask, HttpResponseHandle {
     charBuffer = CharBuffer.allocate(bufferSize);
 
     Charset charset;
-    charset = Charsets.isoLatin1();
+    charset = StandardCharsets.ISO_8859_1;
 
     decoder = charset.newDecoder();
 

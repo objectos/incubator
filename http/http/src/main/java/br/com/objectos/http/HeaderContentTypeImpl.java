@@ -15,7 +15,6 @@
  */
 package br.com.objectos.http;
 
-import br.com.objectos.core.io.Charsets;
 import br.com.objectos.http.media.ApplicationType;
 import br.com.objectos.http.media.ImageType;
 import br.com.objectos.http.media.MediaType;
@@ -23,6 +22,7 @@ import br.com.objectos.http.media.MediaTypeVisitor;
 import br.com.objectos.http.media.TextType;
 import br.com.objectos.http.media.TopLevel;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 import objectos.lang.Check;
@@ -54,8 +54,8 @@ final class HeaderContentTypeImpl
     Map<String, Charset> map;
     map = new HashMap<>();
 
-    map.put("utf8", Charsets.utf8());
-    map.put("utf-8", Charsets.utf8());
+    map.put("utf8", StandardCharsets.UTF_8);
+    map.put("utf-8", StandardCharsets.UTF_8);
 
     return map;
   }
