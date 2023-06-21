@@ -15,7 +15,6 @@
  */
 package br.com.objectos.http;
 
-import br.com.objectos.core.net.SocketAddresses;
 import java.io.IOException;
 import java.net.SocketAddress;
 import java.nio.channels.SelectionKey;
@@ -54,8 +53,9 @@ final class SelectorThread extends Thread {
   public static SelectorThread create(
       SelectorThreadAdapter adapter, SocketAddress address)
       throws IOException {
-    ServerSocketChannel channel;
-    channel = SocketAddresses.openServerSocketChannel(address);
+    var channel = ServerSocketChannel.open();
+
+    channel.bind(address);
 
     channel.configureBlocking(false);
 

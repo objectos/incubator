@@ -19,7 +19,6 @@ module br.com.objectos.http.replay {
   requires transitive br.com.objectos.core.io;
   requires transitive br.com.objectos.http;
 
-  requires br.com.objectos.core.net;
   requires objectos.lang;
   requires objectos.util;
 }

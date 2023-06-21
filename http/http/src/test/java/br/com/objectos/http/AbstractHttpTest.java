@@ -20,7 +20,6 @@ import br.com.objectos.concurrent.FixedCpuArray;
 import br.com.objectos.concurrent.SingleThreadIoWorker;
 import br.com.objectos.core.io.Charsets;
 import br.com.objectos.core.io.Copy;
-import br.com.objectos.core.net.InetAddresses;
 import br.com.objectos.core.service.Services;
 import br.com.objectos.fs.Directory;
 import br.com.objectos.fs.testing.TestInf;
@@ -111,8 +110,7 @@ public abstract class AbstractHttpTest {
   }
 
   protected static InetSocketAddress nextLoopbackSocketAddress() {
-    InetAddress loopback;
-    loopback = InetAddresses.getLoopbackAddress();
+    var loopback = InetAddress.getLoopbackAddress();
 
     int port;
     port = portGenerator.getAndIncrement();

@@ -19,7 +19,6 @@ import br.com.objectos.concurrent.Concurrent;
 import br.com.objectos.concurrent.DirectIoWorker;
 import br.com.objectos.concurrent.IoWorker;
 import br.com.objectos.core.io.Charsets;
-import br.com.objectos.core.net.InetAddresses;
 import br.com.objectos.http.Body;
 import br.com.objectos.http.Body.Text;
 import br.com.objectos.http.Header;
@@ -45,8 +44,8 @@ import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
 import java.util.HashMap;
 import java.util.Map;
-import objectos.util.UnmodifiableList;
 import objectos.util.GrowableList;
+import objectos.util.UnmodifiableList;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
@@ -97,7 +96,7 @@ public abstract class AbstractReplayTest {
     serverSocketChannel = ServerSocketChannel.open();
 
     InetAddress loopback;
-    loopback = InetAddresses.getLoopbackAddress();
+    loopback = InetAddress.getLoopbackAddress();
 
     socketAddress = new InetSocketAddress(loopback, 7124);
 
