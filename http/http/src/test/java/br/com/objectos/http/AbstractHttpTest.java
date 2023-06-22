@@ -15,10 +15,6 @@
  */
 package br.com.objectos.http;
 
-import br.com.objectos.concurrent.DirectIoWorker;
-import br.com.objectos.concurrent.FixedCpuArray;
-import br.com.objectos.concurrent.SingleThreadIoWorker;
-import br.com.objectos.core.service.Services;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.net.InetAddress;
@@ -32,8 +28,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.testng.annotations.BeforeSuite;
 
 public abstract class AbstractHttpTest {
-
-  protected static HttpEngine engine;
 
   protected static HttpTestingLogger logger;
 
@@ -56,55 +50,22 @@ public abstract class AbstractHttpTest {
 
     stringDeduplicator = new HashMapStringDeduplicator();
 
-    HttpEngineBuilder engineBuilder;
-    engineBuilder = new HttpEngineBuilder(
-      DirectIoWorker.get(),
-
-      provider.create(),
-
-      stringDeduplicator
-    );
-
-    engineBuilder.setBufferSize(64);
-
     logger = new HttpTestingLogger();
-
-    engineBuilder.setLogger(logger);
-
-    engine = engineBuilder.build();
 
     InetSocketAddress address;
     address = nextLoopbackSocketAddress();
 
-    FixedCpuArray cpuArray;
-    cpuArray = new FixedCpuArray(10, 50, logger);
-
-    SingleThreadIoWorker ioWorker;
-    ioWorker = new SingleThreadIoWorker(logger);
-
     service = HttpService.create(
       address,
-
-      cpuArray,
-
-      ioWorker,
 
       provider,
 
       HttpService.bufferSize(64),
 
-      HttpService.enginesPerWorker(2),
-
       HttpService.logger(logger)
     );
 
-    Services.start(
-      cpuArray,
-
-      ioWorker,
-
-      service
-    );
+    service.startService();
   }
 
   protected static InetSocketAddress nextLoopbackSocketAddress() {

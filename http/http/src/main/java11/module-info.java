@@ -17,8 +17,6 @@ module br.com.objectos.http {
   exports br.com.objectos.http;
   exports br.com.objectos.http.media;
 
-  requires transitive br.com.objectos.concurrent;
-
-  requires objectos.lang;
+  requires transitive objectos.lang;
   requires objectos.util;
 }

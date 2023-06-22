@@ -17,7 +17,6 @@ package br.com.objectos.http;
 
 import static org.testng.Assert.assertEquals;
 
-import br.com.objectos.concurrent.Concurrent;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.nio.channels.ReadableByteChannel;
@@ -126,7 +125,7 @@ public class RequestParserTest {
 
     parser.setInput(channel);
 
-    Concurrent.exhaust(parser);
+    exhaust(parser);
 
     Request result;
 
@@ -142,6 +141,12 @@ public class RequestParserTest {
     result.acceptRequestVisitor(visitor);
 
     return visitor.toString();
+  }
+
+  private void exhaust(RequestParser parser) {
+    while (parser.isActive()) {
+      parser.executeOne();
+    }
   }
 
   private class ThisVisitor extends SimpleRequestVisitor {

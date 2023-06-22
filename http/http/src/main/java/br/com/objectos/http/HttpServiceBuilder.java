@@ -15,12 +15,9 @@
  */
 package br.com.objectos.http;
 
-import br.com.objectos.concurrent.CpuArray;
-import br.com.objectos.concurrent.CpuWorker;
-import br.com.objectos.concurrent.IoWorker;
 import java.net.SocketAddress;
-import objectos.lang.NoteSink;
 import objectos.lang.NoOpNoteSink;
+import objectos.lang.NoteSink;
 
 final class HttpServiceBuilder {
 
@@ -28,53 +25,23 @@ final class HttpServiceBuilder {
 
   private int bufferSize = Http.DEFAULT_BUFFER_SIZE;
 
-  private final CpuArray cpuArray;
-
-  private int enginesPerWorker = 1;
-
-  private final IoWorker ioWorker;
-
   private NoteSink logger = NoOpNoteSink.getInstance();
 
   private final HttpProcessorProvider processorProvider;
 
   HttpServiceBuilder(SocketAddress address,
-                     CpuArray cpuArray,
-                     IoWorker ioWorker,
                      HttpProcessorProvider processorProvider) {
     this.address = address;
-
-    this.cpuArray = cpuArray;
-
-    this.ioWorker = ioWorker;
 
     this.processorProvider = processorProvider;
   }
 
   public final HttpService build() {
-    int arraySize;
-    arraySize = cpuArray.size();
-
-    HttpWorker[] workers;
-    workers = new HttpWorker[arraySize];
-
-    for (int i = 0; i < arraySize; i++) {
-      CpuWorker cpuWorker;
-      cpuWorker = cpuArray.get(i);
-
-      workers[i] = HttpWorker.create(
-        bufferSize, cpuWorker, ioWorker, logger, enginesPerWorker, processorProvider);
-    }
-
-    return new HttpService(address, workers);
+    return new HttpService(address, bufferSize, logger, processorProvider);
   }
 
   final void setBufferSize(int size) {
     this.bufferSize = size;
-  }
-
-  final void setEnginesPerWorker(int value) {
-    enginesPerWorker = value;
   }
 
   final void setLogger(NoteSink logger) {

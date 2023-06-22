@@ -15,7 +15,6 @@
  */
 package br.com.objectos.http;
 
-import br.com.objectos.concurrent.CpuTask;
 import br.com.objectos.http.Header.ContentTypeVisitor;
 import br.com.objectos.http.media.ApplicationType;
 import br.com.objectos.http.media.ImageType;
@@ -34,7 +33,7 @@ import objectos.lang.Check;
 import objectos.util.GrowableList;
 import objectos.util.UnmodifiableList;
 
-abstract class AbstractHttpParser<H extends Header> implements CpuTask {
+abstract class AbstractHttpParser<H extends Header> {
 
   private static final char[] HTTP_MAJORS = new char[] {'1', '2', '3'};
 
@@ -120,14 +119,12 @@ abstract class AbstractHttpParser<H extends Header> implements CpuTask {
     }
   }
 
-  @Override
   public final void executeOne() {
     action = execute0();
   }
 
   public abstract Object getResult() throws ProtocolException;
 
-  @Override
   public final boolean isActive() {
     switch (action) {
       case END:

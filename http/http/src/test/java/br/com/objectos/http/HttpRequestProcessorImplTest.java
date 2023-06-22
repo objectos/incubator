@@ -17,9 +17,6 @@ package br.com.objectos.http;
 
 import static org.testng.Assert.assertEquals;
 
-import br.com.objectos.concurrent.CpuTask;
-import br.com.objectos.concurrent.DirectIoWorker;
-import br.com.objectos.concurrent.IoWorker;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -69,7 +66,7 @@ public class HttpRequestProcessorImplTest {
       Version.V1_1
     );
 
-    CpuTask rt;
+    ResponseTask rt;
     rt = impl.responseTask();
 
     assertEquals(rt.isActive(), true);
@@ -183,8 +180,6 @@ public class HttpRequestProcessorImplTest {
 
     private final DateFormat dateFormat;
 
-    private final DirectIoWorker ioWorker;
-
     private final ByteArrayOutputStream outputStream;
 
     private final StringBuilder stringBuilder;
@@ -195,8 +190,6 @@ public class HttpRequestProcessorImplTest {
       charBuffer = CharBuffer.allocate(bufferSize);
 
       dateFormat = Http.createDateFormat();
-
-      ioWorker = DirectIoWorker.get();
 
       outputStream = new ByteArrayOutputStream();
 
@@ -237,11 +230,6 @@ public class HttpRequestProcessorImplTest {
     @Override
     public final CharsetEncoder getEncoder(Charset charset) {
       return charset.newEncoder();
-    }
-
-    @Override
-    public final IoWorker getIoWorker() {
-      return ioWorker;
     }
 
     @Override

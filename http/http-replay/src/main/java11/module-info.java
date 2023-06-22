@@ -17,6 +17,7 @@ module br.com.objectos.http.replay {
   exports br.com.objectos.http.replay;
 
   requires transitive br.com.objectos.core.io;
+  requires transitive br.com.objectos.concurrent;
   requires transitive br.com.objectos.http;
 
   requires objectos.lang;

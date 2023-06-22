@@ -15,9 +15,6 @@
  */
 package br.com.objectos.http;
 
-import br.com.objectos.concurrent.CpuTask;
-import br.com.objectos.concurrent.IoTask;
-import br.com.objectos.concurrent.IoWorker;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
@@ -32,11 +29,7 @@ import java.nio.file.StandardOpenOption;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.Date;
 
-final class HttpRequestProcessorImpl
-    implements
-    CpuTask,
-    IoTask,
-    HttpProcessor {
+final class HttpRequestProcessorImpl implements HttpProcessor, ResponseTask {
 
   static final byte _BODY = 1;
 
@@ -94,8 +87,6 @@ final class HttpRequestProcessorImpl
 
   private volatile boolean ioRunning;
 
-  private IoWorker ioWorker;
-
   private long lastModifiedMillis;
 
   private final Path siteDirectory;
@@ -104,7 +95,6 @@ final class HttpRequestProcessorImpl
     this.siteDirectory = siteDirectory;
   }
 
-  @Override
   public final void executeIo() {
     try {
       executeIo(ioTask);
@@ -147,7 +137,7 @@ final class HttpRequestProcessorImpl
   }
 
   @Override
-  public final CpuTask responseTask() {
+  public final ResponseTask responseTask() {
     byteBuffer = handle.getByteBuffer();
 
     channel = handle.getChannel();
@@ -155,8 +145,6 @@ final class HttpRequestProcessorImpl
     charBuffer = handle.getCharBuffer();
 
     encoder = handle.getEncoder(StandardCharsets.ISO_8859_1);
-
-    ioWorker = handle.getIoWorker();
 
     state = toIo(IO_RESOLVE, _RESPONSE_HEADERS);
 
@@ -266,8 +254,6 @@ final class HttpRequestProcessorImpl
     ioRunning = false;
 
     ioTask = 0;
-
-    ioWorker = null;
 
     lastModifiedMillis = 0;
 
@@ -433,7 +419,7 @@ final class HttpRequestProcessorImpl
 
     ioRunning = true;
 
-    ioWorker.submit(this);
+    executeIo();
 
     return _WAIT_IO;
   }

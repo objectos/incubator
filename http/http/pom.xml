@@ -36,7 +36,11 @@
 	<dependencies>
 		<dependency>
 			<groupId>br.com.objectos</groupId>
-			<artifactId>concurrent</artifactId>
+			<artifactId>objectos-lang</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>br.com.objectos</groupId>
+			<artifactId>objectos-util</artifactId>
 		</dependency>
 	
 		<dependency>

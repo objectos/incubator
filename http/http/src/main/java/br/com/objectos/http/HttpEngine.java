@@ -15,8 +15,6 @@
  */
 package br.com.objectos.http;
 
-import br.com.objectos.concurrent.CpuTask;
-import br.com.objectos.concurrent.IoWorker;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
@@ -36,7 +34,7 @@ import objectos.lang.NoteSink;
 /**
  * @since 4
  */
-final class HttpEngine implements CpuTask, HttpResponseHandle {
+final class HttpEngine implements HttpResponseHandle, Runnable {
 
   static final byte _BODY = 1;
 
@@ -116,8 +114,6 @@ final class HttpEngine implements CpuTask, HttpResponseHandle {
 
   private boolean ioRunning;
 
-  private final IoWorker ioWorker;
-
   @SuppressWarnings("unused")
   private final NoteSink logger;
 
@@ -125,7 +121,7 @@ final class HttpEngine implements CpuTask, HttpResponseHandle {
 
   private final HttpProcessor processor;
 
-  private CpuTask responseTask;
+  private ResponseTask responseTask;
 
   private final StringBuilder stringBuilder;
 
@@ -134,7 +130,6 @@ final class HttpEngine implements CpuTask, HttpResponseHandle {
   private Version version;
 
   HttpEngine(int bufferSize,
-             IoWorker ioWorker,
              NoteSink logger,
              HttpProcessor processor,
              StringDeduplicator stringDeduplicator) {
@@ -148,8 +143,6 @@ final class HttpEngine implements CpuTask, HttpResponseHandle {
     decoder = charset.newDecoder();
 
     encoder = charset.newEncoder();
-
-    this.ioWorker = ioWorker;
 
     this.logger = logger;
 
@@ -170,7 +163,6 @@ final class HttpEngine implements CpuTask, HttpResponseHandle {
     }
   }
 
-  @Override
   public final void executeOne() {
     try {
       state = execute(state);
@@ -219,20 +211,21 @@ final class HttpEngine implements CpuTask, HttpResponseHandle {
   }
 
   @Override
-  public final IoWorker getIoWorker() {
-    return ioWorker;
-  }
-
-  @Override
   public final StringBuilder getStringBuilder() {
     stringBuilder.setLength(0);
 
     return stringBuilder;
   }
 
-  @Override
   public final boolean isActive() {
     return state != _STOP;
+  }
+
+  @Override
+  public final void run() {
+    while (isActive()) {
+      executeOne();
+    }
   }
 
   public final void setInput(SocketChannel channel) {

@@ -15,32 +15,34 @@
  */
 package br.com.objectos.http;
 
-import br.com.objectos.concurrent.CpuArray;
-import br.com.objectos.concurrent.IoWorker;
-import br.com.objectos.core.service.AbstractService;
 import java.net.SocketAddress;
 import java.nio.channels.SocketChannel;
-import java.util.Random;
 import objectos.lang.Check;
 import objectos.lang.NoteSink;
 
 /**
  * @since 4
  */
-public final class HttpService extends AbstractService {
+public final class HttpService {
 
   private final SocketAddress address;
 
-  private final Random random = new Random();
+  private final int bufferSize;
+
+  private final NoteSink logger;
+
+  private final HttpProcessorProvider processorProvider;
 
   private SelectorThread thread;
 
-  private final HttpWorker[] workers;
-
-  HttpService(SocketAddress address, HttpWorker[] workers) {
+  HttpService(SocketAddress address,
+              int bufferSize,
+              NoteSink logger,
+              HttpProcessorProvider processorProvider) {
     this.address = address;
-
-    this.workers = workers;
+    this.bufferSize = bufferSize;
+    this.logger = logger;
+    this.processorProvider = processorProvider;
   }
 
   public static Option bufferSize(final int size) {
@@ -55,16 +57,13 @@ public final class HttpService extends AbstractService {
   }
 
   public static HttpService create(
-      SocketAddress address, CpuArray cpuArray, IoWorker ioWorker,
-      HttpProcessorProvider processorProvider, Option... options) {
+      SocketAddress address, HttpProcessorProvider processorProvider, Option... options) {
     Check.notNull(address, "address == null");
-    Check.notNull(cpuArray, "cpuArray == null");
-    Check.notNull(ioWorker, "ioWorker == null");
     Check.notNull(processorProvider, "processorProvider == null");
     Check.notNull(options, "options == null");
 
     HttpServiceBuilder builder;
-    builder = new HttpServiceBuilder(address, cpuArray, ioWorker, processorProvider);
+    builder = new HttpServiceBuilder(address, processorProvider);
 
     Option o;
 
@@ -79,17 +78,6 @@ public final class HttpService extends AbstractService {
     return builder.build();
   }
 
-  public static Option enginesPerWorker(final int value) {
-    Check.argument(value > 0, "engines/worker minimum value is 1 engine/worker");
-
-    return new Option() {
-      @Override
-      final void acceptBuilder(HttpServiceBuilder builder) {
-        builder.setEnginesPerWorker(value);
-      }
-    };
-  }
-
   public static Option logger(NoteSink logger) {
     Check.notNull(logger, "logger == null");
 
@@ -101,7 +89,6 @@ public final class HttpService extends AbstractService {
     };
   }
 
-  @Override
   public final void startService() throws Exception {
     ThisSelectorThreadAdapter adapter;
     adapter = new ThisSelectorThreadAdapter();
@@ -111,7 +98,6 @@ public final class HttpService extends AbstractService {
     thread.start();
   }
 
-  @Override
   public final void stopService() throws Exception {
     thread.interrupt();
   }
@@ -131,18 +117,21 @@ public final class HttpService extends AbstractService {
 
     @Override
     public final void acceptSocketChannel(SocketChannel socketChannel) {
-      int index;
-      index = random.nextInt(workers.length);
+      HttpProcessor processor;
+      processor = processorProvider.create();
 
-      HttpWorker w;
-      w = workers[index];
+      StringDeduplicator stringDeduplicator;
+      stringDeduplicator = new HashMapStringDeduplicator();
 
-      boolean accepted;
-      accepted = w.offerSocketChannel(socketChannel);
+      HttpEngine engine;
+      engine = new HttpEngine(bufferSize, logger, processor, stringDeduplicator);
 
-      if (!accepted) {
-        throw new UnsupportedOperationException("Implement me");
-      }
+      engine.setInput(socketChannel);
+
+      Thread t;
+      t = new Thread(engine);
+
+      t.start();
     }
 
   }

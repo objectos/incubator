@@ -15,8 +15,6 @@
  */
 package br.com.objectos.http;
 
-import br.com.objectos.concurrent.CpuTask;
-
 /**
  * @since 4
  */
@@ -28,6 +26,6 @@ public interface HttpProcessor {
 
   void requestStart(HttpResponseHandle handle);
 
-  CpuTask responseTask();
+  ResponseTask responseTask();
 
 }

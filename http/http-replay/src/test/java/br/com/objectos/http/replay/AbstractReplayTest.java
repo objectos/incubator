@@ -15,7 +15,6 @@
  */
 package br.com.objectos.http.replay;
 
-import br.com.objectos.concurrent.Concurrent;
 import br.com.objectos.concurrent.DirectIoWorker;
 import br.com.objectos.concurrent.IoWorker;
 import br.com.objectos.core.io.Charsets;
@@ -153,7 +152,9 @@ public abstract class AbstractReplayTest {
 
     requestParser.setInput(socketChannel);
 
-    Concurrent.exhaust(requestParser);
+    while (requestParser.isActive()) {
+      requestParser.executeOne();
+    }
 
     parsedRequest = requestParser.getResult();
 

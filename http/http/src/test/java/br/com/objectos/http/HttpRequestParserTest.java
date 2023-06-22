@@ -19,9 +19,6 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 
-import br.com.objectos.concurrent.Concurrent;
-import br.com.objectos.concurrent.CpuTask;
-import br.com.objectos.concurrent.DirectIoWorker;
 import java.util.HashMap;
 import java.util.Map;
 import objectos.util.UnmodifiableList;
@@ -55,8 +52,6 @@ public class HttpRequestParserTest extends AbstractHttpTest implements HttpProce
 
     parser = new HttpEngine(
       64,
-
-      DirectIoWorker.get(),
 
       logger,
 
@@ -103,7 +98,7 @@ public class HttpRequestParserTest extends AbstractHttpTest implements HttpProce
   }
 
   @Override
-  public final CpuTask responseTask() {
+  public final ResponseTask responseTask() {
     return new ExecuteOneTask();
   }
 
@@ -255,7 +250,7 @@ public class HttpRequestParserTest extends AbstractHttpTest implements HttpProce
 
     assertEquals(parser.state, HttpEngine._WAIT_IO);
 
-    Concurrent.exhaust(parser);
+    exhaust(parser);
 
     if (parser.error != null) {
       throw parser.error;
@@ -264,6 +259,12 @@ public class HttpRequestParserTest extends AbstractHttpTest implements HttpProce
     assertNotNull(handle);
 
     assertTrue(executed);
+  }
+
+  private void exhaust(HttpEngine engine) {
+    while (engine.isActive()) {
+      engine.executeOne();
+    }
   }
 
   private String crlf(String... strings) {
@@ -281,7 +282,7 @@ public class HttpRequestParserTest extends AbstractHttpTest implements HttpProce
     }
   }
 
-  private class ExecuteOneTask implements CpuTask {
+  private class ExecuteOneTask implements ResponseTask {
 
     @Override
     public final void executeOne() {

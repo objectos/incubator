@@ -15,30 +15,10 @@
  */
 package br.com.objectos.http;
 
-import java.nio.ByteBuffer;
-import java.nio.CharBuffer;
-import java.nio.channels.WritableByteChannel;
-import java.nio.charset.Charset;
-import java.nio.charset.CharsetEncoder;
-import java.util.Date;
+public interface ResponseTask {
 
-/**
- * @since 4
- */
-public interface HttpResponseHandle {
+  void executeOne();
 
-  String formatDate(Date date);
-
-  String formatDate(long millis);
-
-  ByteBuffer getByteBuffer();
-
-  WritableByteChannel getChannel();
-
-  CharBuffer getCharBuffer();
-
-  CharsetEncoder getEncoder(Charset charset);
-
-  StringBuilder getStringBuilder();
+  boolean isActive();
 
 }
