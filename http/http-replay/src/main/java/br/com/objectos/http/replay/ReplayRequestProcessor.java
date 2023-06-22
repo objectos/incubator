@@ -15,16 +15,16 @@
  */
 package br.com.objectos.http.replay;
 
-import br.com.objectos.http.Body;
-import br.com.objectos.http.Body.Ignored;
-import br.com.objectos.http.Body.Text;
-import br.com.objectos.http.Http;
-import br.com.objectos.http.Method;
-import br.com.objectos.http.RequestHeader;
-import br.com.objectos.http.SimpleRequestVisitor;
-import br.com.objectos.http.Version;
 import java.nio.CharBuffer;
 import java.util.NoSuchElementException;
+import objectos.http.Body;
+import objectos.http.Http;
+import objectos.http.Method;
+import objectos.http.RequestHeader;
+import objectos.http.SimpleRequestVisitor;
+import objectos.http.Version;
+import objectos.http.Body.Ignored;
+import objectos.http.Body.Text;
 
 public class ReplayRequestProcessor extends SimpleRequestVisitor {
 

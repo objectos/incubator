@@ -15,10 +15,10 @@
  */
 package br.com.objectos.http.replay;
 
-import br.com.objectos.http.Body;
-import br.com.objectos.http.Method;
-import br.com.objectos.http.RequestHeader;
-import br.com.objectos.http.Version;
+import objectos.http.Body;
+import objectos.http.Method;
+import objectos.http.RequestHeader;
+import objectos.http.Version;
 
 public interface ReplayRequestWriter {
 

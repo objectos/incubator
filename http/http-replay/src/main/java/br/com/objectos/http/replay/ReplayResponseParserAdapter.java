@@ -15,7 +15,7 @@
  */
 package br.com.objectos.http.replay;
 
-import br.com.objectos.http.Header;
+import objectos.http.Header;
 
 public interface ReplayResponseParserAdapter {
 
