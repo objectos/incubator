@@ -36,7 +36,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>br.com.objectos</groupId>
-			<artifactId>http</artifactId>
+			<artifactId>objectos-http</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>br.com.objectos</groupId>

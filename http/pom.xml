@@ -39,7 +39,6 @@
 	<inceptionYear>2015</inceptionYear>
 
 	<modules>
-		<module>http</module>
 		<module>http-replay</module>
 		<module>http-server</module>
 		<module>http-server-jetty</module>
