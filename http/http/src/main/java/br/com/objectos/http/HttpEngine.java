@@ -16,7 +16,6 @@
 package br.com.objectos.http;
 
 import br.com.objectos.concurrent.CpuTask;
-import br.com.objectos.concurrent.IoTask;
 import br.com.objectos.concurrent.IoWorker;
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -37,7 +36,7 @@ import objectos.lang.NoteSink;
 /**
  * @since 4
  */
-final class HttpEngine implements CpuTask, IoTask, HttpResponseHandle {
+final class HttpEngine implements CpuTask, HttpResponseHandle {
 
   static final byte _BODY = 1;
 
@@ -161,7 +160,6 @@ final class HttpEngine implements CpuTask, IoTask, HttpResponseHandle {
     this.stringDeduplicator = stringDeduplicator;
   }
 
-  @Override
   public final void executeIo() {
     try {
       executeIo(ioTask);
@@ -742,7 +740,7 @@ final class HttpEngine implements CpuTask, IoTask, HttpResponseHandle {
 
     ioRunning = true;
 
-    ioWorker.submit(this);
+    executeIo();
 
     return _WAIT_IO;
   }
