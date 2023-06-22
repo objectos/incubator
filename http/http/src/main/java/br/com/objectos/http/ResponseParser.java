@@ -15,7 +15,6 @@
  */
 package br.com.objectos.http;
 
-import br.com.objectos.concurrent.IoWorker;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 
@@ -27,8 +26,8 @@ public final class ResponseParser extends AbstractHttpParser<ResponseHeader> {
 
   private Status resultStatus;
 
-  public ResponseParser(ByteBuffer byteBuffer, CharBuffer charBuffer, IoWorker ioWorker) {
-    super(byteBuffer, charBuffer, ioWorker);
+  public ResponseParser(ByteBuffer byteBuffer, CharBuffer charBuffer) {
+    super(byteBuffer, charBuffer);
   }
 
   @Override
@@ -146,11 +145,11 @@ public final class ResponseParser extends AbstractHttpParser<ResponseHeader> {
   @Override
   final Action executeResult() {
     result = new Response(
-        buildBody(),
-        buildHeaders(),
-        resultReasonPhrase.toString(),
-        resultStatus,
-        resultVersion
+      buildBody(),
+      buildHeaders(),
+      resultReasonPhrase.toString(),
+      resultStatus,
+      resultVersion
     );
 
     return Action.END;

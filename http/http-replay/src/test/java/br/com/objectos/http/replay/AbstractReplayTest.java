@@ -89,7 +89,7 @@ public abstract class AbstractReplayTest {
     IoWorker ioWorker;
     ioWorker = DirectIoWorker.get();
 
-    requestParser = Http.createRequestParser(byteBuffer, charBuffer, ioWorker);
+    requestParser = Http.createRequestParser(byteBuffer, charBuffer);
 
     requestVisitor = new ThisRequestVisitor();
 

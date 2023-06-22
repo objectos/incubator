@@ -142,7 +142,7 @@ final class ByteSourceJob implements BodyVisitor, IoTask, Runnable {
 
     charBuffer = CharBuffer.allocate(bufferSize);
 
-    httpResponseParser = new ResponseParser(byteBuffer, charBuffer, ioWorker);
+    httpResponseParser = new ResponseParser(byteBuffer, charBuffer);
 
     this.ioWorker = ioWorker;
 
@@ -150,7 +150,7 @@ final class ByteSourceJob implements BodyVisitor, IoTask, Runnable {
 
     replayRequestChannel = new ReplayRequestChannel(bufferSize);
 
-    replayRequestParser = Http.createRequestParser(byteBuffer, charBuffer, ioWorker);
+    replayRequestParser = Http.createRequestParser(byteBuffer, charBuffer);
 
     replayResponseParser = new ReplayResponseParser(adapter, byteBuffer, charBuffer, ioWorker);
   }

@@ -18,8 +18,6 @@ package br.com.objectos.http;
 import static org.testng.Assert.assertEquals;
 
 import br.com.objectos.concurrent.Concurrent;
-import br.com.objectos.concurrent.DirectIoWorker;
-import br.com.objectos.concurrent.IoWorker;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.nio.channels.ReadableByteChannel;
@@ -41,10 +39,7 @@ public class RequestParserTest {
     CharBuffer charBuffer;
     charBuffer = CharBuffer.allocate(bufferSize);
 
-    IoWorker ioWorker;
-    ioWorker = DirectIoWorker.get();
-
-    parser = RequestParser.create(byteBuffer, charBuffer, ioWorker);
+    parser = RequestParser.create(byteBuffer, charBuffer);
   }
 
   @Test(description = ""

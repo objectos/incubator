@@ -15,7 +15,6 @@
  */
 package br.com.objectos.http;
 
-import br.com.objectos.concurrent.IoWorker;
 import br.com.objectos.http.Header.ContentType;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
@@ -56,9 +55,8 @@ public final class Http {
     return new HeaderContentTypeImpl();
   }
 
-  public static RequestParser createRequestParser(
-      ByteBuffer byteBuffer, CharBuffer charBuffer, IoWorker ioWorker) {
-    return RequestParser.create(byteBuffer, charBuffer, ioWorker);
+  public static RequestParser createRequestParser(ByteBuffer byteBuffer, CharBuffer charBuffer) {
+    return RequestParser.create(byteBuffer, charBuffer);
   }
 
   public static boolean isTokenChar(char c) {

@@ -15,7 +15,6 @@
  */
 package br.com.objectos.http;
 
-import br.com.objectos.concurrent.IoWorker;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.util.Arrays;
@@ -30,18 +29,15 @@ public final class RequestParser extends AbstractHttpParser<RequestHeader> {
   private final StringBuilder resultRequestTarget = new StringBuilder();
 
   private RequestParser(ByteBuffer byteBuffer,
-                        CharBuffer charBuffer,
-                        IoWorker ioWorker) {
-    super(byteBuffer, charBuffer, ioWorker);
+                        CharBuffer charBuffer) {
+    super(byteBuffer, charBuffer);
   }
 
-  public static RequestParser create(
-      ByteBuffer byteBuffer, CharBuffer charBuffer, IoWorker ioWorker) {
+  public static RequestParser create(ByteBuffer byteBuffer, CharBuffer charBuffer) {
     Check.notNull(byteBuffer, "byteBuffer == null");
     Check.notNull(charBuffer, "charBuffer == null");
-    Check.notNull(ioWorker, "ioWorker == null");
 
-    return new RequestParser(byteBuffer, charBuffer, ioWorker);
+    return new RequestParser(byteBuffer, charBuffer);
   }
 
   @Override
@@ -142,11 +138,11 @@ public final class RequestParser extends AbstractHttpParser<RequestHeader> {
   @Override
   final Action executeResult() {
     result = new Request(
-        buildBody(),
-        buildHeaders(),
-        resultMethod,
-        resultRequestTarget.toString(),
-        resultVersion
+      buildBody(),
+      buildHeaders(),
+      resultMethod,
+      resultRequestTarget.toString(),
+      resultVersion
     );
 
     return Action.END;

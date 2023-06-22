@@ -16,8 +16,6 @@
 package br.com.objectos.http;
 
 import br.com.objectos.concurrent.CpuTask;
-import br.com.objectos.concurrent.IoTask;
-import br.com.objectos.concurrent.IoWorker;
 import br.com.objectos.http.Header.ContentTypeVisitor;
 import br.com.objectos.http.media.ApplicationType;
 import br.com.objectos.http.media.ImageType;
@@ -36,7 +34,7 @@ import objectos.lang.Check;
 import objectos.util.GrowableList;
 import objectos.util.UnmodifiableList;
 
-abstract class AbstractHttpParser<H extends Header> implements CpuTask, IoTask {
+abstract class AbstractHttpParser<H extends Header> implements CpuTask {
 
   private static final char[] HTTP_MAJORS = new char[] {'1', '2', '3'};
 
@@ -84,8 +82,6 @@ abstract class AbstractHttpParser<H extends Header> implements CpuTask, IoTask {
 
   private ReadableByteChannel input;
 
-  private final IoWorker ioExecutor;
-
   private volatile boolean ioRunning;
 
   private long ioStartTime;
@@ -105,14 +101,11 @@ abstract class AbstractHttpParser<H extends Header> implements CpuTask, IoTask {
   private final long timeout = 1 * 1000;
 
   public AbstractHttpParser(ByteBuffer byteBuffer,
-                            CharBuffer charBuffer,
-                            IoWorker executor) {
+                            CharBuffer charBuffer) {
     this.byteBuffer = byteBuffer;
     this.charBuffer = charBuffer;
-    this.ioExecutor = executor;
   }
 
-  @Override
   public final void executeIo() {
     try {
       if (byteBuffer.position() != 0) {
@@ -442,8 +435,6 @@ abstract class AbstractHttpParser<H extends Header> implements CpuTask, IoTask {
   }
 
   private Action executeIoTimeout() {
-    ioExecutor.cancelOrInterrupt(this);
-
     return toError(Status.INTERNAL_SERVER_ERROR, "I/O timeout");
   }
 
@@ -707,7 +698,7 @@ abstract class AbstractHttpParser<H extends Header> implements CpuTask, IoTask {
 
     ioRunning = true;
 
-    ioExecutor.submit(this);
+    executeIo();
 
     return Action.IO_WAIT;
   }
