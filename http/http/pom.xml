@@ -40,11 +40,6 @@
 		</dependency>
 	
 		<dependency>
-			<groupId>br.com.objectos</groupId>
-			<artifactId>fs-testing</artifactId>
-		</dependency>
-
-		<dependency>
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
 			<scope>test</scope>

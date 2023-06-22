@@ -17,8 +17,8 @@ package br.com.objectos.http;
 
 import static org.testng.Assert.assertEquals;
 
-import br.com.objectos.core.io.Charsets;
 import br.com.objectos.http.media.TextType;
+import java.nio.charset.StandardCharsets;
 import org.testng.annotations.Test;
 
 public class HeaderContentTypeImplTest {
@@ -40,7 +40,7 @@ public class HeaderContentTypeImplTest {
 
     assertEquals(result.getMediaType(), TextType.HTML);
 
-    assertEquals(result.getCharset(), Charsets.utf8());
+    assertEquals(result.getCharset(), StandardCharsets.UTF_8);
   }
 
   @Test(description = "media type + quoted charset")
@@ -50,7 +50,7 @@ public class HeaderContentTypeImplTest {
 
     assertEquals(result.getMediaType(), TextType.HTML);
 
-    assertEquals(result.getCharset(), Charsets.utf8());
+    assertEquals(result.getCharset(), StandardCharsets.UTF_8);
   }
 
   private HeaderContentTypeImpl parse(String source) {

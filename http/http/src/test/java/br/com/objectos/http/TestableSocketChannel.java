@@ -15,13 +15,13 @@
  */
 package br.com.objectos.http;
 
-import br.com.objectos.core.io.Charsets;
 import java.io.IOException;
 import java.net.Socket;
 import java.net.SocketAddress;
 import java.net.SocketOption;
 import java.nio.ByteBuffer;
 import java.nio.channels.SocketChannel;
+import java.nio.charset.StandardCharsets;
 import java.util.Set;
 import objectos.util.UnmodifiableList;
 
@@ -114,7 +114,7 @@ final class TestableSocketChannel extends SocketChannel {
     String text;
     text = request.join(Http.CRLF);
 
-    requestBytes = text.getBytes(Charsets.utf8());
+    requestBytes = text.getBytes(StandardCharsets.UTF_8);
 
     requestIndex = 0;
   }

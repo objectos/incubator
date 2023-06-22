@@ -18,11 +18,6 @@ package br.com.objectos.http;
 import br.com.objectos.concurrent.CpuTask;
 import br.com.objectos.concurrent.IoTask;
 import br.com.objectos.concurrent.IoWorker;
-import br.com.objectos.core.io.Charsets;
-import br.com.objectos.fs.Directory;
-import br.com.objectos.fs.PathNameVisitor;
-import br.com.objectos.fs.RegularFile;
-import br.com.objectos.fs.ResolvedPath;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
@@ -30,14 +25,18 @@ import java.nio.channels.FileChannel;
 import java.nio.channels.WritableByteChannel;
 import java.nio.charset.CharsetEncoder;
 import java.nio.charset.CoderResult;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.util.Date;
 
 final class HttpRequestProcessorImpl
     implements
     CpuTask,
     IoTask,
-    HttpProcessor,
-    PathNameVisitor<Void, HttpRequestProcessorImpl> {
+    HttpProcessor {
 
   static final byte _BODY = 1;
 
@@ -65,7 +64,7 @@ final class HttpRequestProcessorImpl
 
   long contentLength;
 
-  RegularFile file;
+  Path file;
 
   FileChannel fileChannel;
 
@@ -99,9 +98,9 @@ final class HttpRequestProcessorImpl
 
   private long lastModifiedMillis;
 
-  private final Directory siteDirectory;
+  private final Path siteDirectory;
 
-  HttpRequestProcessorImpl(Directory siteDirectory) {
+  HttpRequestProcessorImpl(Path siteDirectory) {
     this.siteDirectory = siteDirectory;
   }
 
@@ -155,7 +154,7 @@ final class HttpRequestProcessorImpl
 
     charBuffer = handle.getCharBuffer();
 
-    encoder = handle.getEncoder(Charsets.isoLatin1());
+    encoder = handle.getEncoder(StandardCharsets.ISO_8859_1);
 
     ioWorker = handle.getIoWorker();
 
@@ -164,30 +163,6 @@ final class HttpRequestProcessorImpl
     stringBuilder = handle.getStringBuilder();
 
     return this;
-  }
-
-  @Override
-  public final Void visitDirectory(
-      Directory directory, HttpRequestProcessorImpl p) throws IOException {
-    return null;
-  }
-
-  @Override
-  public final Void visitNotFound(
-      ResolvedPath notFound, HttpRequestProcessorImpl p) throws IOException {
-    return null;
-  }
-
-  @Override
-  public final Void visitRegularFile(
-      RegularFile file, HttpRequestProcessorImpl p) throws IOException {
-    this.file = file;
-
-    contentLength = file.size();
-
-    lastModifiedMillis = file.getLastModifiedMillis();
-
-    return null;
   }
 
   private byte execute(byte state) {
@@ -391,10 +366,21 @@ final class HttpRequestProcessorImpl
   }
 
   private void ioResolve() throws IOException {
-    ResolvedPath maybe;
+    Path maybe;
     maybe = siteDirectory.resolve("index.html");
 
-    maybe.acceptPathNameVisitor(this, this);
+    BasicFileAttributes attributes;
+    attributes = Files.readAttributes(maybe, BasicFileAttributes.class);
+
+    if (!attributes.isRegularFile()) {
+      return;
+    }
+
+    file = maybe;
+
+    contentLength = attributes.size();
+
+    lastModifiedMillis = attributes.lastModifiedTime().toMillis();
   }
 
   private void ioWrite() throws IOException {
@@ -403,7 +389,7 @@ final class HttpRequestProcessorImpl
 
   private void ioWriteFile() throws IOException {
     if (fileChannel == null) {
-      fileChannel = file.openReadChannel();
+      fileChannel = FileChannel.open(file, StandardOpenOption.READ);
     }
 
     long count;

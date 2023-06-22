@@ -18,11 +18,7 @@ package br.com.objectos.http;
 import br.com.objectos.concurrent.DirectIoWorker;
 import br.com.objectos.concurrent.FixedCpuArray;
 import br.com.objectos.concurrent.SingleThreadIoWorker;
-import br.com.objectos.core.io.Charsets;
-import br.com.objectos.core.io.Copy;
 import br.com.objectos.core.service.Services;
-import br.com.objectos.fs.Directory;
-import br.com.objectos.fs.testing.TestInf;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.net.InetAddress;
@@ -30,6 +26,8 @@ import java.net.InetSocketAddress;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Path;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.testng.annotations.BeforeSuite;
 
@@ -47,11 +45,11 @@ public abstract class AbstractHttpTest {
 
   @BeforeSuite
   public static void beforeSuiteGitService() throws Exception {
-    Directory testInf;
+    Path testInf;
     testInf = TestInf.get();
 
-    Directory siteDirectory;
-    siteDirectory = testInf.getDirectory("site");
+    Path siteDirectory;
+    siteDirectory = testInf.resolve("site");
 
     HttpRequestProcessorProvider provider;
     provider = new HttpRequestProcessorProvider(siteDirectory);
@@ -133,12 +131,12 @@ public abstract class AbstractHttpTest {
 
   protected final String readString(URLConnection c) throws IOException {
     try (var in = c.getInputStream(); var out = new ByteArrayOutputStream()) {
-      Copy.streams(in, out, new byte[1024]);
+      in.transferTo(out);
 
       byte[] bytes;
       bytes = out.toByteArray();
 
-      return new String(bytes, Charsets.utf8());
+      return new String(bytes, StandardCharsets.UTF_8);
     }
   }
 

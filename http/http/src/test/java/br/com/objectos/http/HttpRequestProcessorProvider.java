@@ -15,13 +15,13 @@
  */
 package br.com.objectos.http;
 
-import br.com.objectos.fs.Directory;
+import java.nio.file.Path;
 
 final class HttpRequestProcessorProvider implements HttpProcessorProvider {
 
-  private final Directory siteDirectory;
+  private final Path siteDirectory;
 
-  HttpRequestProcessorProvider(Directory siteDirectory) {
+  HttpRequestProcessorProvider(Path siteDirectory) {
     this.siteDirectory = siteDirectory;
   }
 

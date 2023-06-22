@@ -20,18 +20,18 @@ import static org.testng.Assert.assertEquals;
 import br.com.objectos.concurrent.CpuTask;
 import br.com.objectos.concurrent.DirectIoWorker;
 import br.com.objectos.concurrent.IoWorker;
-import br.com.objectos.core.io.Charsets;
-import br.com.objectos.fs.Directory;
-import br.com.objectos.fs.RegularFile;
-import br.com.objectos.fs.testing.TestInf;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.nio.channels.Channels;
 import java.nio.channels.WritableByteChannel;
 import java.nio.charset.Charset;
 import java.nio.charset.CharsetEncoder;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.text.DateFormat;
 import java.util.Date;
 import org.testng.annotations.BeforeClass;
@@ -43,16 +43,16 @@ public class HttpRequestProcessorImplTest {
 
   private HttpRequestProcessorImpl impl;
 
-  private Directory siteDirectory;
+  private Path siteDirectory;
 
   @BeforeClass
-  public void _beforeClass() throws IOException {
+  public void _beforeClass() throws IOException, URISyntaxException {
     handle = new ThisHttpResponseHandle(64);
 
-    Directory testInf;
+    Path testInf;
     testInf = TestInf.get();
 
-    siteDirectory = testInf.getDirectory("site");
+    siteDirectory = testInf.resolve("site");
 
     impl = new HttpRequestProcessorImpl(siteDirectory);
   }
@@ -62,11 +62,11 @@ public class HttpRequestProcessorImplTest {
     impl.requestStart(handle);
 
     impl.requestLine(
-        Method.GET,
+      Method.GET,
 
-        RequestTargetImpl.ofString("/"),
+      RequestTargetImpl.ofString("/"),
 
-        Version.V1_1
+      Version.V1_1
     );
 
     CpuTask rt;
@@ -80,10 +80,13 @@ public class HttpRequestProcessorImplTest {
 
     rt.executeOne();
 
-    RegularFile idx;
-    idx = siteDirectory.getRegularFile("index.html");
+    Path idx;
+    idx = siteDirectory.resolve("index.html");
 
-    assertEquals(impl.contentLength, idx.size());
+    long idxSize;
+    idxSize = Files.size(idx);
+
+    assertEquals(impl.contentLength, idxSize);
 
     assertEquals(impl.file, idx);
 
@@ -101,7 +104,7 @@ public class HttpRequestProcessorImplTest {
     assertEquals(parts[1], "Server: Objectos HTTP");
     assertEquals(parts[2].startsWith("Date: "), true);
     assertEquals(parts[3], "Content-Type: text/html; charset=utf8");
-    assertEquals(parts[4], "Content-Length: " + Long.toString(idx.size()));
+    assertEquals(parts[4], "Content-Length: " + Long.toString(idxSize));
     assertEquals(parts[5].startsWith("Last-Modified: "), true);
 
     assertEquals(impl.state, HttpRequestProcessorImpl._WAIT_IO);
@@ -164,7 +167,7 @@ public class HttpRequestProcessorImplTest {
     assertEquals(parts[1], "Server: Objectos HTTP");
     assertEquals(parts[2].startsWith("Date: "), true);
     assertEquals(parts[3], "Content-Type: text/html; charset=utf8");
-    assertEquals(parts[4], "Content-Length: " + Long.toString(idx.size()));
+    assertEquals(parts[4], "Content-Length: " + Long.toString(idxSize));
     assertEquals(parts[5].startsWith("Last-Modified: "), true);
     assertEquals(parts[6], "");
     assertEquals(parts[7], "<!doctype html><title>/index.html</title>");
@@ -253,7 +256,7 @@ public class HttpRequestProcessorImplTest {
       byte[] byteArray;
       byteArray = outputStream.toByteArray();
 
-      return new String(byteArray, Charsets.utf8());
+      return new String(byteArray, StandardCharsets.UTF_8);
     }
 
   }
