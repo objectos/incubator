@@ -31,10 +31,12 @@ enum JdtSourceVersion {
   RELEASE_11("11"),
 
   RELEASE_15("15"),
-  
+
   RELEASE_16("16"),
-  
-  RELEASE_17("17");
+
+  RELEASE_17("17"),
+
+  RELEASE_20("20");
 
   private final String version;
 
