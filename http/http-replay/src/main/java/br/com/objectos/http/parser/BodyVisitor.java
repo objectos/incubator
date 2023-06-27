@@ -13,14 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package br.com.objectos.http.replay;
+package br.com.objectos.http.parser;
 
-import br.com.objectos.http.parser.Header;
+public interface BodyVisitor {
 
-public interface ReplayResponseParserAdapter {
+  void visitBody(Body.Ignored ignored);
 
-  void expectRedirect(String location);
-
-  void expectTextResponse(Header.ContentType contentType, String body);
+  void visitBody(Body.Text text);
 
 }

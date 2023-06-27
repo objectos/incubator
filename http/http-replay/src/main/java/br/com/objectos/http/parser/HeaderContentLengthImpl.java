@@ -13,14 +13,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package br.com.objectos.http.replay;
+package br.com.objectos.http.parser;
 
-import br.com.objectos.http.parser.Header;
+final class HeaderContentLengthImpl extends AbstractIntHeader<Header.ContentLength>
+    implements Header.ContentLength {
 
-public interface ReplayResponseParserAdapter {
+  @Override
+  public final void acceptRequestVisitor(RequestVisitor visitor) {
+    visitor.visitRequestHeader(this);
+  }
 
-  void expectRedirect(String location);
+  @Override
+  public final void acceptResponseVisitor(ResponseVisitor visitor) {
+    visitor.visitResponseHeader(this);
+  }
 
-  void expectTextResponse(Header.ContentType contentType, String body);
+  @Override
+  public final String getHeaderName() {
+    return "Content-Length";
+  }
+
+  @Override
+  public final int getLength() {
+    return value;
+  }
 
 }

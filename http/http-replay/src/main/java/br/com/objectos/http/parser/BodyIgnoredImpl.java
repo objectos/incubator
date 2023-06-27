@@ -13,14 +13,32 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package br.com.objectos.http.replay;
+package br.com.objectos.http.parser;
 
-import br.com.objectos.http.parser.Header;
+final class BodyIgnoredImpl implements Body.Ignored {
 
-public interface ReplayResponseParserAdapter {
+  public static final BodyIgnoredImpl INSTANCE = new BodyIgnoredImpl();
 
-  void expectRedirect(String location);
+  private BodyIgnoredImpl() {}
 
-  void expectTextResponse(Header.ContentType contentType, String body);
+  @Override
+  public final void acceptBodyVisitor(BodyVisitor visitor) {
+    visitor.visitBody(this);
+  }
+
+  @Override
+  public final void acceptRequestVisitor(RequestVisitor visitor) {
+    visitor.visitRequestBody(this);
+  }
+
+  @Override
+  public final void acceptResponseVisitor(ResponseVisitor visitor) {
+    visitor.visitResponseBody(this);
+  }
+
+  @Override
+  public final String toString() {
+    return "";
+  }
 
 }

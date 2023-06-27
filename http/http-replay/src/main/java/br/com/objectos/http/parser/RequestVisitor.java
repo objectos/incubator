@@ -13,14 +13,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package br.com.objectos.http.replay;
+package br.com.objectos.http.parser;
 
-import br.com.objectos.http.parser.Header;
+import objectos.http.Method;
+import objectos.http.Version;
 
-public interface ReplayResponseParserAdapter {
+public interface RequestVisitor {
 
-  void expectRedirect(String location);
+  void visitRequestBody(Body.Ignored ignored);
 
-  void expectTextResponse(Header.ContentType contentType, String body);
+  void visitRequestBody(Body.Text text);
+
+  void visitRequestHeader(Header.Accept accept);
+
+  void visitRequestHeader(Header.ContentLength contentLength);
+
+  void visitRequestHeader(Header.ContentType contentType);
+
+  void visitRequestHeader(Header.Cookie cookie);
+
+  void visitRequestHeader(Header.Host host);
+
+  void visitRequestHeader(Header.Unknown unknown);
+
+  void visitRequestLine(Method method, String target, Version version);
 
 }

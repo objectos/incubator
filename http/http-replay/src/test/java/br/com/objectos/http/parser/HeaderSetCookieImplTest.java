@@ -13,14 +13,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package br.com.objectos.http.replay;
+package br.com.objectos.http.parser;
 
-import br.com.objectos.http.parser.Header;
+import static org.testng.Assert.assertEquals;
 
-public interface ReplayResponseParserAdapter {
+import org.testng.annotations.Test;
 
-  void expectRedirect(String location);
+public class HeaderSetCookieImplTest {
 
-  void expectTextResponse(Header.ContentType contentType, String body);
+  @Test(description = "cookie-pair only")
+  public void testCase01() {
+    HeaderSetCookieImpl result;
+    result = parse("foo=bar\r\n");
+
+    assertEquals(result.getCookieName(), "foo");
+
+    assertEquals(result.getCookieValue(), "bar");
+  }
+
+  private HeaderSetCookieImpl parse(String source) {
+    HeaderSetCookieImpl setCookie;
+    setCookie = new HeaderSetCookieImpl();
+
+    return HeaderTesting.parse(setCookie, source);
+  }
 
 }

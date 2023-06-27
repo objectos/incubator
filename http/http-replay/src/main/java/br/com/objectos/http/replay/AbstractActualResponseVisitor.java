@@ -15,8 +15,8 @@
  */
 package br.com.objectos.http.replay;
 
-import objectos.http.ResponseHeader;
-import objectos.http.SimpleResponseVisitor;
+import br.com.objectos.http.parser.ResponseHeader;
+import br.com.objectos.http.parser.SimpleResponseVisitor;
 import objectos.http.Status;
 import objectos.http.Version;
 

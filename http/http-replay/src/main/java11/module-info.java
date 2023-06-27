@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 module br.com.objectos.http.replay {
+  exports br.com.objectos.http.parser;
   exports br.com.objectos.http.replay;
 
   requires transitive br.com.objectos.core.io;

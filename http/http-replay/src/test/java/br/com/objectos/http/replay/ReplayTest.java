@@ -20,9 +20,9 @@ import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertNull;
 
 import br.com.objectos.core.io.Resource;
+import br.com.objectos.http.parser.ProtocolException;
 import java.io.IOException;
 import objectos.http.Method;
-import objectos.http.ProtocolException;
 import objectos.http.Version;
 import objectos.util.UnmodifiableList;
 import org.testng.annotations.AfterMethod;

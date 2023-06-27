@@ -19,6 +19,16 @@ import br.com.objectos.concurrent.IoTask;
 import br.com.objectos.concurrent.IoWorker;
 import br.com.objectos.core.io.Charsets;
 import br.com.objectos.core.io.InputStreamSource;
+import br.com.objectos.http.parser.Body;
+import br.com.objectos.http.parser.BodyVisitor;
+import br.com.objectos.http.parser.ProtocolException;
+import br.com.objectos.http.parser.Request;
+import br.com.objectos.http.parser.RequestHeader;
+import br.com.objectos.http.parser.RequestParser;
+import br.com.objectos.http.parser.Response;
+import br.com.objectos.http.parser.ResponseParser;
+import br.com.objectos.http.parser.Body.Ignored;
+import br.com.objectos.http.parser.Body.Text;
 import java.io.Closeable;
 import java.io.IOException;
 import java.io.InputStream;
@@ -35,19 +45,9 @@ import java.util.Map;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
-import objectos.http.Body;
-import objectos.http.BodyVisitor;
 import objectos.http.Http;
 import objectos.http.Method;
-import objectos.http.ProtocolException;
-import objectos.http.Request;
-import objectos.http.RequestHeader;
-import objectos.http.RequestParser;
-import objectos.http.Response;
-import objectos.http.ResponseParser;
 import objectos.http.Version;
-import objectos.http.Body.Ignored;
-import objectos.http.Body.Text;
 
 final class ByteSourceJob implements BodyVisitor, IoTask, Runnable {
 
@@ -150,7 +150,7 @@ final class ByteSourceJob implements BodyVisitor, IoTask, Runnable {
 
     replayRequestChannel = new ReplayRequestChannel(bufferSize);
 
-    replayRequestParser = Http.createRequestParser(byteBuffer, charBuffer);
+    replayRequestParser = RequestParser.create(byteBuffer, charBuffer);
 
     replayResponseParser = new ReplayResponseParser(adapter, byteBuffer, charBuffer, ioWorker);
   }

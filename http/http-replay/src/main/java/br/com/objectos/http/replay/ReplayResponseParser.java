@@ -18,6 +18,9 @@ package br.com.objectos.http.replay;
 import br.com.objectos.concurrent.IoTask;
 import br.com.objectos.concurrent.IoWorker;
 import br.com.objectos.core.io.Charsets;
+import br.com.objectos.http.parser.Header.ContentType;
+import br.com.objectos.http.parser.Header.ContentTypeVisitor;
+import br.com.objectos.http.parser.HeaderParser;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
@@ -27,10 +30,6 @@ import java.nio.charset.CoderResult;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.zip.GZIPInputStream;
-import objectos.http.HeaderParser;
-import objectos.http.Http;
-import objectos.http.Header.ContentType;
-import objectos.http.Header.ContentTypeVisitor;
 import objectos.http.media.ApplicationType;
 import objectos.http.media.ImageType;
 import objectos.http.media.TextType;
@@ -251,7 +250,7 @@ final class ReplayResponseParser implements IoTask {
     }
 
     HeaderParser<ContentType> parser;
-    parser = Http.createContentTypeParser();
+    parser = HeaderParser.createContentTypeParser();
 
     while (parser.shouldConsume()) {
       char c;

@@ -13,14 +13,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package br.com.objectos.http.replay;
+package br.com.objectos.http.parser;
 
-import br.com.objectos.http.parser.Header;
+import java.nio.charset.Charset;
 
-public interface ReplayResponseParserAdapter {
+/**
+ * The body of a HTTP request or response.
+ */
+public interface Body {
 
-  void expectRedirect(String location);
+  void acceptBodyVisitor(BodyVisitor visitor);
 
-  void expectTextResponse(Header.ContentType contentType, String body);
+  void acceptRequestVisitor(RequestVisitor visitor);
+
+  void acceptResponseVisitor(ResponseVisitor visitor);
+
+  interface Ignored extends Body {}
+
+  interface Text extends Body {
+
+    Charset getCharset();
+
+    String getContents();
+
+  }
 
 }

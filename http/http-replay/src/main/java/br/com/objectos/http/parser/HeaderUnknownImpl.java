@@ -13,14 +13,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package br.com.objectos.http.replay;
+package br.com.objectos.http.parser;
 
-import br.com.objectos.http.parser.Header;
+final class HeaderUnknownImpl
+    extends AbstractStringHeader<Header.Unknown> implements Header.Unknown {
 
-public interface ReplayResponseParserAdapter {
+  private final String name;
 
-  void expectRedirect(String location);
+  public HeaderUnknownImpl(String name) {
+    this.name = name;
+  }
 
-  void expectTextResponse(Header.ContentType contentType, String body);
+  @Override
+  public final void acceptRequestVisitor(RequestVisitor visitor) {
+    visitor.visitRequestHeader(this);
+  }
+
+  @Override
+  public final void acceptResponseVisitor(ResponseVisitor visitor) {
+    visitor.visitResponseHeader(this);
+  }
+
+  @Override
+  public final String getHeaderName() {
+    return name;
+  }
 
 }
