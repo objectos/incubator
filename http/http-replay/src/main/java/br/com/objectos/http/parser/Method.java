@@ -13,19 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package br.com.objectos.http.replay;
+package br.com.objectos.http.parser;
 
-import br.com.objectos.http.parser.Body;
-import br.com.objectos.http.parser.Method;
-import br.com.objectos.http.parser.RequestHeader;
-import br.com.objectos.http.parser.Version;
+import java.nio.charset.StandardCharsets;
 
-public interface ReplayRequestWriter {
+public enum Method {
 
-  void writeBody(Body body);
+  GET,
 
-  void writeHeader(RequestHeader header);
+  POST;
 
-  void writeRequestLine(Method method, String target, Version version);
+  public final byte[] bytes = name().getBytes(StandardCharsets.UTF_8);
+
+  public final char[] parseSuffix = name().substring(1).toCharArray();
 
 }

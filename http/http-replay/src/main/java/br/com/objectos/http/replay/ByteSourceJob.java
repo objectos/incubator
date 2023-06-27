@@ -20,15 +20,18 @@ import br.com.objectos.concurrent.IoWorker;
 import br.com.objectos.core.io.Charsets;
 import br.com.objectos.core.io.InputStreamSource;
 import br.com.objectos.http.parser.Body;
+import br.com.objectos.http.parser.Body.Ignored;
+import br.com.objectos.http.parser.Body.Text;
 import br.com.objectos.http.parser.BodyVisitor;
+import br.com.objectos.http.parser.Http;
+import br.com.objectos.http.parser.Method;
 import br.com.objectos.http.parser.ProtocolException;
 import br.com.objectos.http.parser.Request;
 import br.com.objectos.http.parser.RequestHeader;
 import br.com.objectos.http.parser.RequestParser;
 import br.com.objectos.http.parser.Response;
 import br.com.objectos.http.parser.ResponseParser;
-import br.com.objectos.http.parser.Body.Ignored;
-import br.com.objectos.http.parser.Body.Text;
+import br.com.objectos.http.parser.Version;
 import java.io.Closeable;
 import java.io.IOException;
 import java.io.InputStream;
@@ -45,9 +48,6 @@ import java.util.Map;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
-import objectos.http.Http;
-import objectos.http.Method;
-import objectos.http.Version;
 
 final class ByteSourceJob implements BodyVisitor, IoTask, Runnable {
 

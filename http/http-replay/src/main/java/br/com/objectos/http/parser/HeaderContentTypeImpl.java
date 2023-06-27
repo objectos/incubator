@@ -19,7 +19,6 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
-import objectos.http.Http;
 import objectos.http.media.ApplicationType;
 import objectos.http.media.ImageType;
 import objectos.http.media.MediaType;

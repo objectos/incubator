@@ -15,8 +15,6 @@
  */
 package br.com.objectos.http.parser;
 
-import objectos.http.Http;
-
 abstract class AbstractIntHeader<T extends Header> extends AbstractHeader<T> {
 
   private int multiplier = 1;

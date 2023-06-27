@@ -18,7 +18,6 @@ package br.com.objectos.http.parser;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.ReadableByteChannel;
-import objectos.http.Http;
 import objectos.util.UnmodifiableList;
 
 public final class ByteArrayReadableByteChannel implements ReadableByteChannel {

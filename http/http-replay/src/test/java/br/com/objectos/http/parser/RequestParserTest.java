@@ -21,8 +21,6 @@ import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.nio.channels.ReadableByteChannel;
 import objectos.http.HttpException;
-import objectos.http.Method;
-import objectos.http.Version;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 

@@ -15,8 +15,6 @@
  */
 package br.com.objectos.http.parser;
 
-import objectos.http.Method;
-import objectos.http.Version;
 import objectos.lang.Check;
 import objectos.util.UnmodifiableList;
 

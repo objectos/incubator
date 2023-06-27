@@ -17,8 +17,8 @@ package br.com.objectos.http.replay;
 
 import br.com.objectos.http.parser.ResponseHeader;
 import br.com.objectos.http.parser.SimpleResponseVisitor;
+import br.com.objectos.http.parser.Version;
 import objectos.http.Status;
-import objectos.http.Version;
 
 public abstract class AbstractActualResponseVisitor extends SimpleResponseVisitor {
 

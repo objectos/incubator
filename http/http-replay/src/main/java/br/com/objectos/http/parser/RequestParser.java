@@ -18,7 +18,6 @@ package br.com.objectos.http.parser;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.util.Arrays;
-import objectos.http.Method;
 import objectos.lang.Check;
 
 public final class RequestParser extends AbstractHttpParser<RequestHeader> {

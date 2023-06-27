@@ -15,9 +15,6 @@
  */
 package br.com.objectos.http.parser;
 
-import objectos.http.Method;
-import objectos.http.Version;
-
 public interface RequestVisitor {
 
   void visitRequestBody(Body.Ignored ignored);

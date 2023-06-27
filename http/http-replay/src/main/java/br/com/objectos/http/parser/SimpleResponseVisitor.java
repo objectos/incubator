@@ -18,7 +18,6 @@ package br.com.objectos.http.parser;
 import br.com.objectos.http.parser.Header.ContentLength;
 import br.com.objectos.http.parser.Header.SetCookie;
 import objectos.http.Status;
-import objectos.http.Version;
 
 public class SimpleResponseVisitor implements ResponseVisitor {
 

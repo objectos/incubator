@@ -16,7 +16,6 @@
 package br.com.objectos.http.parser;
 
 import objectos.http.Status;
-import objectos.http.Version;
 import objectos.lang.Check;
 import objectos.util.UnmodifiableList;
 

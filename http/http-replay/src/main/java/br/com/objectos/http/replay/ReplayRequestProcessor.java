@@ -16,15 +16,15 @@
 package br.com.objectos.http.replay;
 
 import br.com.objectos.http.parser.Body;
-import br.com.objectos.http.parser.RequestHeader;
-import br.com.objectos.http.parser.SimpleRequestVisitor;
 import br.com.objectos.http.parser.Body.Ignored;
 import br.com.objectos.http.parser.Body.Text;
+import br.com.objectos.http.parser.Http;
+import br.com.objectos.http.parser.Method;
+import br.com.objectos.http.parser.RequestHeader;
+import br.com.objectos.http.parser.SimpleRequestVisitor;
+import br.com.objectos.http.parser.Version;
 import java.nio.CharBuffer;
 import java.util.NoSuchElementException;
-import objectos.http.Http;
-import objectos.http.Method;
-import objectos.http.Version;
 
 public class ReplayRequestProcessor extends SimpleRequestVisitor {
 
