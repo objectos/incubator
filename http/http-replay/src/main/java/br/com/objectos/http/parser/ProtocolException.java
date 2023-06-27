@@ -15,7 +15,6 @@
  */
 package br.com.objectos.http.parser;
 
-import objectos.http.HttpException;
 import objectos.http.Status;
 
 public final class ProtocolException extends HttpException {

@@ -20,7 +20,6 @@ import static org.testng.Assert.assertEquals;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.nio.channels.ReadableByteChannel;
-import objectos.http.HttpException;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
