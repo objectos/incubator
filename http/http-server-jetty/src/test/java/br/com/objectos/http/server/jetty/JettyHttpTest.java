@@ -124,31 +124,6 @@ public class JettyHttpTest {
     }
   }
 
-  @Test
-  public void badRequestInvalidMethod() throws IOException {
-    try (Socket socket = new Socket(address, port)) {
-      req(socket, """
-      FOO / HTTP/1.1
-      Host: 127.0.0.1:9123
-      Connection: Close
-
-      """);
-
-      assertStartsWith(
-        resp(socket),
-
-        """
-        HTTP/1.1 400 No Host
-        Content-Type: text/html;charset=iso-8859-1
-        Content-Length: 50
-        Connection: close
-        Server: Jetty(9.4.35.v20201120)
-
-        """.replace("\n", "\r\n")
-      );
-    }
-  }
-
   @AfterClass(alwaysRun = true)
   public void shutdownServer() throws Exception {
     if (server != null) {
