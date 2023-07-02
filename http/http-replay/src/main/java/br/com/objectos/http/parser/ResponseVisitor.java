@@ -15,8 +15,6 @@
  */
 package br.com.objectos.http.parser;
 
-import objectos.http.Status;
-
 public interface ResponseVisitor {
 
   void visitResponseBody(Body.Ignored ignored);

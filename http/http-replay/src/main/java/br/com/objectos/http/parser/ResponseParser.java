@@ -17,7 +17,6 @@ package br.com.objectos.http.parser;
 
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
-import objectos.http.Status;
 
 public final class ResponseParser extends AbstractHttpParser<ResponseHeader> {
 

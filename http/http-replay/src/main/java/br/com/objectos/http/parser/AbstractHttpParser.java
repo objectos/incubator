@@ -26,7 +26,6 @@ import java.nio.charset.CoderResult;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
-import objectos.http.Status;
 import objectos.http.media.ApplicationType;
 import objectos.http.media.ImageType;
 import objectos.http.media.TextType;

@@ -15,8 +15,6 @@
  */
 package br.com.objectos.http.parser;
 
-import objectos.http.Status;
-
 public final class ProtocolException extends HttpException {
 
   private static final long serialVersionUID = 1L;
