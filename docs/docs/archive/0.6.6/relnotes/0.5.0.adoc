@@ -1,0 +1,38 @@
+= Objectos 0.5.0 release notes
+:toc-title: Objectos 0.5.0
+
+_March 10, 2023_
+
+Welcome to Objectos 0.5.0.
+This release introduces Objectos HTML
+
+== New Features
+
+* Introduce objectos-html issue:254[]
+
+== Enhancements
+
+* Field declarations without names should be named 'unnamed' by default issue:266[]
+* Field declarations without type should be void by default issue:268[]
+
+== Bug fixes
+
+* No new line after import statement issue:267[]
+* `v("foo"), NL` renders `foo(NL)` instead of `foo()NL` issue:269[]
+
+== Documentation
+
+* Docs/Objectos Code/Field decl issue:265[]
+
+== Work
+
+* move html-spi to objectos-html-spi issue:252[]
+* move html-boot to objectos-selfgen issue:253[]
+* remove deprecated JavaTemplate methods issue:255[]
+* Normalize objectos-html package names issue:257[]
+* Docs: re-enable migration-test issue:258[]
+* WWW: add migration-test issue:259[]
+* Refactor HtmlTemplate TC00 issue:260[]
+* Refactor HtmlTemplate TC01 issue:261[]
+* Refactor HtmlTemplate TC02 issue:262[]
+* Refactor HtmlTemplate 0.5.0 issue:263[]

@@ -1,0 +1,22 @@
+= Objectos 0.6.6 release notes
+:toc-title: Objectos 0.6.6
+
+_May 19, 2023_
+
+Welcome to Objectos 0.6.6.
+This release continues the API improvements on Objectos AsciiDoc.
+
+== New features
+
+* HTML: allow text in lambda issue:376[]
+* HTML: allow raw in lambda issue:377[]
+
+== Enhancements
+
+* AsciiDoc: introduce a common super interface to elements having nodes issue:374[]
+* AsciiDoc: remove appendTo in favor of a text() method issue:375[]
+
+== Work
+
+* AsciiDoc: AttributeListTest issue:372[]
+* Docs: use AsciiDoc2 (iter. 1) issue:373[]

@@ -1,0 +1,44 @@
+= The `JavaTemplate` class
+:toc-title: Introduction
+
+You declare the source code to be generated in a `JavaTemplate` class.
+A `JavaTemplate` instance represents a Java compilation unit.
+
+You use it by extending it and implementing the `definition` method.
+Use the provided _embedeed domain-specific language_ in the latter to declare the contents of the Java file you want to generate:
+
+[,java]
+----
+import objectos.code.JavaTemplate;
+
+public class MyTemplate extends JavaTemplate {
+  @Override
+  protected final void definition() {
+    packageDeclaration("com.example");
+
+    autoImports();
+
+    classDeclaration(
+      PUBLIC, name("Empty")
+    );
+  }
+} 
+----
+
+Which can be used to generate the following Java code:
+
+[,java]
+----
+package com.example;
+
+public class Empty {}
+----
+
+Let's discuss some of its features.
+
+== Features
+
+The `JavaTemplate` class provides the programmer with two features:
+
+- import declarations are automatically generated; and
+- allow for control flow via the `include` instruction.

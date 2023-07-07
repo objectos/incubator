@@ -1,0 +1,3 @@
+= Constructor throws
+
+Declaring thrown exceptions is not supported at this moment.

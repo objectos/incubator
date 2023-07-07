@@ -6,6 +6,10 @@ improvements made and fixes included. If a version
 includes backwards-incompatible changes we will describe them
 in the release notes.
 
+== 0.7.x releases
+
+* ilink:relnotes/0.7.0[Objectos 0.7.0 release notes]
+
 == 0.6.x releases
 
 * ilink:relnotes/0.6.6[Objectos 0.6.6 release notes]

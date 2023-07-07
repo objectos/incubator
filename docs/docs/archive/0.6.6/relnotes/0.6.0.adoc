@@ -1,0 +1,31 @@
+= Objectos 0.6.0 release notes
+:toc-title: Objectos 0.6.0
+
+_April 7, 2023_
+
+Welcome to Objectos 0.6.0.
+This release introduces Objectos AsciiDoc
+
+== New features
+
+* Objectos AsciiDoc (initial import) issue:325[]
+* Allow nested interfaces in enums (& vice-versa) issue:330[]
+
+== Enhancements
+
+* Parallelize Docs generation (if possible) issue:324[]
+
+== Bugs fixes
+
+
+== Work
+
+* Migrate to GeneratedHtmlTemplate issue:323[]
+* bump objectos-asciidoc test deps issue:326[]
+* AsciiDoc pseudom: DocumentTitleTest issue:327[]
+
+== Documentation
+
+* Add Objectos AsciiDoc documentation homepage issue:328[]
+* Add documentation for Objectos Code's class declarations (iter. 3) issue:329[]
+* Add documentation for Objectos Code's constructor declarations (iter. 1) issue:331[]

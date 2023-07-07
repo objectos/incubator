@@ -1,0 +1,20 @@
+= Objectos 0.6.5 release notes
+:toc-title: Objectos 0.6.5
+
+_May 12, 2023_
+
+Welcome to Objectos 0.6.5.
+This release continues the API improvements on Objectos AsciiDoc.
+
+== Work
+
+* tc05: ends with "---- " (i.e., trailing space) issue:99[]
+* tc07: section has title only (no 'body') issue:100[]
+* AsciiDoc: ListingBlockTest (iter. 2) issue:362[]
+* AsciiDoc: SourceCodeBlockTest (iter. 1) issue:363[]
+* AsciiDoc: InlineMacroTest (iter. 1) issue:364[]
+* AsciiDoc: PreambleTest (iter. 1) issue:365[]
+* AsciiDoc: ConstrainedItalicTest (iter. 1) issue:366[]
+* AsciiDoc: ConstrainedBoldTest (iter. 1) issue:367[]
+* AsciiDoc: DocumentAttributeTest issue:368[]
+* AsciiDoc: LexerTest issue:369[]

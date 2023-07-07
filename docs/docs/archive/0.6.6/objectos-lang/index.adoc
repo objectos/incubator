@@ -1,0 +1,25 @@
+= Objectos Lang
+:toc-title: Overview
+
+Objectos Lang is a Java library that provides:
+
+* utilities for instances whose type is from the `java.lang` package; and
+* a type-safe note sink API.
+
+Objectos itself is built on top of Objectos Lang.
+
+== Installation
+
+To use Objectos Lang in your project add the following to your POM:
+
+[,xml]
+----
+<dependencies>
+    <dependency>
+        <groupId>br.com.objectos</groupId>
+        <artifactId>objectos-lang</artifactId>
+    </dependency>
+</dependencies>
+----
+
+This assumes you are using the ilink:intro/install[Objectos BOM POM].

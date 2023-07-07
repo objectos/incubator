@@ -1,0 +1,171 @@
+= Class body
+
+The body of a class declaration may contain members, initializers and constructors.
+
+To learn how to add fields and methods to your class declaration, please refer to their specific sections:
+
+* ilink:objectos-code/field/index[fields]
+* ilink:objectos-code/method/index[methods]
+
+Other constructs:
+
+* constructors
+
+== Nested type declarations
+
+You can add a nested class or interface declaration to your top level class declaration.
+
+The following Objectos Code:
+
+[,java]
+----
+import objectos.code.JavaTemplate;
+
+public class ClassDeclarationNested01 extends JavaTemplate {
+  @Override
+  protected final void definition() {
+    classDeclaration(
+      name("Example"),
+
+      classDeclaration(name("A")),
+
+      enumDeclaration(name("B")),
+
+      interfaceDeclaration(name("C"))
+    );
+  }
+}
+----
+
+Generates:
+
+[,java]
+----
+class Example {
+  class A {}
+
+  enum B {}
+
+  interface C {}
+}
+----
+
+=== A more complete example
+
+You can add to your nested type declaration any instruction that is allowed to the top level declaration.
+In other words, you can add modifiers, fields, methods, etc. to your nested type declaration.
+
+The following Objectos Code: 
+
+[,java]
+----
+import java.util.Locale;
+import objectos.code.ClassTypeName;
+import objectos.code.JavaTemplate;
+
+public class ClassDeclarationNested02 extends JavaTemplate {
+  static final ClassTypeName LOCALE
+      = ClassTypeName.of(Locale.class);
+
+  static final ClassTypeName STRING
+      = ClassTypeName.of(String.class);
+
+  @Override
+  protected final void definition() {
+    autoImports();
+
+    classDeclaration(
+      name("Example"),
+
+      enumDeclaration(
+        PRIVATE, name("Modifier"),
+
+        enumConstant(name("PUBLIC")),
+
+        enumConstant(name("PRIVATE")),
+
+        enumConstant(name("STATIC")),
+
+        method(
+          annotation(Override.class),
+          PUBLIC, STRING, name("toString"),
+          p(RETURN, v("name"), v("toLowerCase"), argument(LOCALE, n("US")))
+        )
+      )
+    );
+  }
+}
+----
+
+Generates:
+
+[,java]
+----
+import java.util.Locale;
+
+class Example {
+  private enum Modifier {
+    PUBLIC,
+
+    PRIVATE,
+
+    STATIC;
+
+    @Override
+    public String toString() {
+      return name().toLowerCase(Locale.US);
+    }
+  }
+}
+----
+
+=== Nested types inside nested types
+
+Nested types can also declare other nested types.
+
+The following Objectos Code:
+
+[,java]
+----
+import objectos.code.JavaTemplate;
+
+public class ClassDeclarationNested03 extends JavaTemplate {
+  @Override
+  protected final void definition() {
+    autoImports();
+
+    classDeclaration(
+      name("Example"),
+
+      classDeclaration(
+        name("A"),
+
+        enumDeclaration(
+          name("B"),
+
+          interfaceDeclaration(
+            name("C")
+          )
+        )
+      )
+    );
+  }
+}
+----
+
+Generates:
+
+[,java]
+----
+class Example {
+  class A {
+    enum B {
+      interface C {}
+    }
+  }
+}
+----
+
+== Instance and static initializers
+
+Objectos Code does not support adding initializers at the moment.
