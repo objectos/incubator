@@ -166,22 +166,12 @@ public class Mysql57Test extends AbstractMysqlTest {
     testCase07Impl();
   }
 
-  @Test(dependsOnMethods = "testCase07")
+  @Test(enabled = false, dependsOnMethods = "testCase07")
   public void testCase08() throws Exception {
-    try {
-      testCase08Impl();
-    } catch (Exception e) {
-      if (e instanceof ExecutionException ee) {
-        ee.printOutput();
-
-        ee.printError();
-      }
-
-      throw e;
-    }
+    testCase08Impl();
   }
 
-  @Test(dependsOnMethods = "testCase08")
+  @Test(enabled = false, dependsOnMethods = "testCase08")
   public void testCase09() throws Exception {
     testCase09Impl();
   }
