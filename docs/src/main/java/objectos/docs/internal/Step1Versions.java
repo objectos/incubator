@@ -2149,7 +2149,7 @@ class Step1Versions extends Step0Config {
     version(
       name("0.6.6"),
       releaseDate(2023, 5, 19),
-      status(Status.LATEST),
+      status(Status.UNSUPPORTED),
 
       navigation(
         link("/index"),
